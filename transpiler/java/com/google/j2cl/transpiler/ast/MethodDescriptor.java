@@ -121,6 +121,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     SYNTHETIC_LAMBDA_ADAPTOR_CONSTRUCTOR("<synthetic: lambda_adaptor_ctor>"),
     SYNTHETIC_CLASS_LITERAL_GETTER,
     SYNTHETIC_STRING_LITERAL_GETTER,
+    SYNTHETIC_SYSTEM_PROPERTY_GETTER_OPTIONAL,
+    SYNTHETIC_SYSTEM_PROPERTY_GETTER_REQUIRED,
     SYNTHETIC_INSTANCE_OF_SUPPORT_METHOD,
     GENERALIZING_BRIDGE, // Bridges a more general signature to a more specific one.
     SPECIALIZING_BRIDGE, // Bridges a more specific signature to a more general one.
@@ -159,6 +161,11 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         case ABSTRACT_STUB:
           return "m_";
           // Getters and setters need to be mangled as fields.
+        case SYNTHETIC_SYSTEM_PROPERTY_GETTER_REQUIRED:
+        case SYNTHETIC_SYSTEM_PROPERTY_GETTER_OPTIONAL:
+          // Synthetic property getters use the name of the property as the name of the method hence
+          // they don't start with "$" and the prefix needs to be added here.
+          return "$";
         case SYNTHETIC_PROPERTY_SETTER:
         case SYNTHETIC_PROPERTY_GETTER:
           return FieldOrigin.SOURCE.getPrefix();
@@ -178,10 +185,26 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         case SYNTHETIC_CLASS_INITIALIZER:
         case SYNTHETIC_CLASS_LITERAL_GETTER:
         case SYNTHETIC_STRING_LITERAL_GETTER:
+        case SYNTHETIC_SYSTEM_PROPERTY_GETTER_OPTIONAL:
+        case SYNTHETIC_SYSTEM_PROPERTY_GETTER_REQUIRED:
           return true;
         default:
           return false;
       }
+    }
+
+    public boolean isSystemGetPropertyGetter() {
+      switch (this) {
+        case SYNTHETIC_SYSTEM_PROPERTY_GETTER_OPTIONAL:
+        case SYNTHETIC_SYSTEM_PROPERTY_GETTER_REQUIRED:
+          return true;
+        default:
+          return false;
+      }
+    }
+
+    public boolean isRequiredSystemGetPropertyGetter() {
+      return this == SYNTHETIC_SYSTEM_PROPERTY_GETTER_REQUIRED;
     }
   }
 

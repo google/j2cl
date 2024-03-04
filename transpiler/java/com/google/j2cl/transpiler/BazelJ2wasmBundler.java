@@ -18,7 +18,6 @@ package com.google.j2cl.transpiler;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
-import static com.google.common.collect.ImmutableSet.toImmutableSet;
 import static com.google.j2cl.common.StringUtils.unescapeWtf16;
 import static java.lang.String.format;
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -48,6 +47,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.backend.wasm.JsImportsGenerator;
 import com.google.j2cl.transpiler.backend.wasm.SharedSnippet;
 import com.google.j2cl.transpiler.backend.wasm.Summary;
+import com.google.j2cl.transpiler.backend.wasm.SystemPropertyInfo;
 import com.google.j2cl.transpiler.backend.wasm.TypeInfo;
 import com.google.j2cl.transpiler.backend.wasm.WasmConstructsGenerator;
 import com.google.j2cl.transpiler.backend.wasm.WasmGeneratorStage;
@@ -132,11 +132,20 @@ final class BazelJ2wasmBundler extends BazelWorker {
     new JdtEnvironment(
         new JdtParser(classPathEntries, problems), TypeDescriptors.getWellKnownTypeNames());
 
-    var referencedPropertyKeys =
-        getSummaries().flatMap(s -> s.getPropertyKeysList().stream()).collect(toImmutableSet());
+    var referencedSystemProperties =
+        getSummaries()
+            .flatMap(s -> s.getSystemPropertiesList().stream())
+            .collect(
+                toImmutableMap(
+                    SystemPropertyInfo::getPropertyKey,
+                    Function.identity(),
+                    // Properties might be referenced in many times, only some requiring a value;
+                    // keep properties that are required.
+                    (p1, p2) -> p1.getIsRequired() ? p1 : p2))
+            .values();
 
     // Synthesize globals and methods for string literals.
-    synthesizeStringLiteralGetters(referencedPropertyKeys);
+    synthesizeStringLiteralGetters(referencedSystemProperties, problems);
 
     var generatorStage = new WasmGeneratorStage(library, problems);
 
@@ -183,7 +192,8 @@ final class BazelJ2wasmBundler extends BazelWorker {
         .collect(toImmutableMap(SharedSnippet::getKey, SharedSnippet::getSnippet, (i1, i2) -> i1));
   }
 
-  private void synthesizeStringLiteralGetters(Set<String> referencedPropertyKeys) {
+  private void synthesizeStringLiteralGetters(
+      Collection<SystemPropertyInfo> referencedSystemProperties, Problems problems) {
 
     var stringLiteralHolder =
         new com.google.j2cl.transpiler.ast.Type(
@@ -214,11 +224,17 @@ final class BazelJ2wasmBundler extends BazelWorker {
 
     // Synthesize the getters and forwarding methods for the string literals that are values of
     // system properties.
-    referencedPropertyKeys.forEach(
-        pk -> {
-          var value = defines.get(pk);
-          MethodDescriptor systemGetPropertyGetter = AstUtils.getSystemGetPropertyGetter(pk);
+    referencedSystemProperties.forEach(
+        p -> {
+          var propertyKey = p.getPropertyKey();
+          var value = defines.get(propertyKey);
+          boolean isRequired = p.getIsRequired();
+          MethodDescriptor systemGetPropertyGetter =
+              AstUtils.getSystemGetPropertyGetter(propertyKey, isRequired);
           if (value == null) {
+            if (isRequired) {
+              problems.error("No value found for required property %s", propertyKey);
+            }
             // Synthesize a getter that returns null.
             synthesizeAbsentPropertyMethod(systemGetPropertyGetter);
           } else {
@@ -226,7 +242,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
                 stringLiteralHolder,
                 stringLiteralGetterCreator,
                 systemGetPropertyGetter.getEnclosingTypeDescriptor().getQualifiedSourceName(),
-                systemGetPropertyGetter.getName(),
+                systemGetPropertyGetter.getOrigin().getPrefix() + systemGetPropertyGetter.getName(),
                 value);
           }
         });

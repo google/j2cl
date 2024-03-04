@@ -10,7 +10,7 @@ message Summary {
   repeated TypeInfo types = 2;
   repeated int32 interfaces = 3;
   repeated StringLiteralInfo string_literals = 4;
-  repeated string property_keys = 5;
+  repeated SystemPropertyInfo system_properties = 5;
   repeated SharedSnippet type_snippets = 6;
   repeated SharedSnippet global_snippets = 7;
   repeated SharedSnippet wasm_import_snippets = 8;
@@ -31,6 +31,10 @@ message StringLiteralInfo {
   string method_name = 3;
 }
 
+message SystemPropertyInfo {
+  string property_key = 1;
+  bool is_required = 2;
+}
 message SharedSnippet {
   string key = 1;
   string snippet = 2;

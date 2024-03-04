@@ -139,6 +139,7 @@ import com.google.j2cl.transpiler.passes.NormalizeSuperMemberReferences;
 import com.google.j2cl.transpiler.passes.NormalizeSwitchStatements;
 import com.google.j2cl.transpiler.passes.NormalizeSwitchStatementsJ2kt;
 import com.google.j2cl.transpiler.passes.NormalizeSynchronizedMethods;
+import com.google.j2cl.transpiler.passes.NormalizeSystemGetPropertyCalls;
 import com.google.j2cl.transpiler.passes.NormalizeTryWithResources;
 import com.google.j2cl.transpiler.passes.NormalizeVarargInvocationsJ2kt;
 import com.google.j2cl.transpiler.passes.NormalizeVarargParametersJ2kt;
@@ -405,6 +406,8 @@ public enum Backend {
           MoveNestedClassesToTop::new,
           AddBridgeMethods::new,
           AddEnumImplicitMethods::new,
+          NormalizeSystemGetPropertyCalls::new,
+          () -> new ImplementSystemGetProperty(options.getDefinesForWasm()),
           NormalizeTryWithResources::new,
           NormalizeCatchClauses::new,
           () -> new NormalizeEnumClasses(/* useMakeEnumNameIndirection= */ false),
@@ -554,6 +557,7 @@ public enum Backend {
           MoveNestedClassesToTop::new,
           AddBridgeMethods::new,
           AddEnumImplicitMethods::new,
+          NormalizeSystemGetPropertyCalls::new,
           NormalizeTryWithResources::new,
           NormalizeCatchClauses::new,
           () -> new NormalizeEnumClasses(/* useMakeEnumNameIndirection= */ false),

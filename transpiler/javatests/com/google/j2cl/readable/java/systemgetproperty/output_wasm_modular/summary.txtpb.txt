@@ -33,7 +33,14 @@
     "enclosingTypeName": "systemgetproperty.Main",
     "methodName": "$getString_|systemgetpro...|"
   }],
-  "propertyKeys": ["jre.bar", "jre.classMetadata", "unset.property"],
+  "systemProperties": [{
+    "propertyKey": "jre.bar"
+  }, {
+    "propertyKey": "jre.classMetadata",
+    "isRequired": true
+  }, {
+    "propertyKey": "unset.property"
+  }],
   "typeSnippets": [{
     "key": "$function.$getClassImpl__java_lang_Class",
     "snippet": "\n(type $function.$getClassImpl__java_lang_Class (func (param (ref $java.lang.Object)) (result (ref null $java.lang.Class))))"

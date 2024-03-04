@@ -16,31 +16,28 @@
 package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.j2cl.common.StringUtils.escapeAsWtf16;
-import static com.google.j2cl.transpiler.ast.AstUtils.getSystemGetPropertyGetter;
-import static com.google.j2cl.transpiler.ast.AstUtils.isSystemGetPropertyCall;
 import static java.util.function.Predicate.not;
 
+import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
-import com.google.j2cl.transpiler.ast.ConditionalExpression;
+import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.MethodCall;
-import com.google.j2cl.transpiler.ast.Node;
+import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.StringLiteralGettersCreator;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
-import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.protobuf.util.JsonFormat;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import javax.annotation.Nullable;
@@ -131,41 +128,31 @@ public final class SummaryBuilder {
   }
 
   private void summarizeSystemGetPropertyCalls(Library library) {
-    Set<String> referencedProperties = new LinkedHashSet<>();
+    Set<String> allProperties = new LinkedHashSet<>();
+    Set<String> requiredProperties = new LinkedHashSet<>();
     library.accept(
-        /* processor= */ new AbstractRewriter() {
+        new AbstractVisitor() {
           @Override
-          public Node rewriteMethodCall(MethodCall methodCall) {
-            if (!isSystemGetPropertyCall(methodCall)) {
-              return methodCall;
+          public void exitMethodCall(MethodCall methodCall) {
+            MethodDescriptor target = methodCall.getTarget();
+            String name = target.getName();
+            if (target.getOrigin().isSystemGetPropertyGetter()) {
+              allProperties.add(name);
             }
-
-            List<Expression> arguments = methodCall.getArguments();
-
-            // JsInteropRestrictionChecker enforces the first parameter is a StringLiteral.
-            String propertyKey = ((StringLiteral) arguments.get(0)).getValue();
-            referencedProperties.add(propertyKey);
-            boolean isRequired = arguments.size() != 2;
-
-            MethodCall propertyGetterCall =
-                MethodCall.Builder.from(getSystemGetPropertyGetter(propertyKey))
-                    .setSourcePosition(methodCall.getSourcePosition())
-                    .build();
-
-            if (isRequired) {
-              return propertyGetterCall;
+            if (target.getOrigin().isRequiredSystemGetPropertyGetter()) {
+              requiredProperties.add(name);
             }
-
-            Expression defaultValue = arguments.get(1);
-            return ConditionalExpression.newBuilder()
-                .setTypeDescriptor(TypeDescriptors.get().javaLangString)
-                .setConditionExpression(propertyGetterCall.clone().infixEqualsNull())
-                .setFalseExpression(propertyGetterCall)
-                .setTrueExpression(defaultValue)
-                .build();
           }
         });
-    summary.addAllPropertyKeys(referencedProperties);
+    summary.addAllSystemProperties(
+        allProperties.stream()
+            .map(
+                pk ->
+                    SystemPropertyInfo.newBuilder()
+                        .setPropertyKey(pk)
+                        .setIsRequired(requiredProperties.contains(pk))
+                        .build())
+            .collect(ImmutableList.toImmutableList()));
   }
 
   private void summarizeStringLiterals(Library library) {

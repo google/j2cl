@@ -1110,13 +1110,17 @@ public final class AstUtils {
   }
 
   /** Return the static field that will hold the value for a system property. */
-  public static MethodDescriptor getSystemGetPropertyGetter(String systemPropertyString) {
+  public static MethodDescriptor getSystemGetPropertyGetter(
+      String systemPropertyString, boolean requiredProperty) {
     return MethodDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(getSystemPropertyHolder().toUnparameterizedTypeDescriptor())
         // TODO(rluble): Sanitize the system property string.
-        .setName("$" + systemPropertyString)
+        .setName(systemPropertyString)
         .setReturnTypeDescriptor(TypeDescriptors.get().javaLangString)
-        .setOrigin(MethodOrigin.SYNTHETIC_STRING_LITERAL_GETTER)
+        .setOrigin(
+            requiredProperty
+                ? MethodOrigin.SYNTHETIC_SYSTEM_PROPERTY_GETTER_REQUIRED
+                : MethodOrigin.SYNTHETIC_SYSTEM_PROPERTY_GETTER_OPTIONAL)
         .setStatic(true)
         .setSynthetic(true)
         .setVisibility(Visibility.PRIVATE)

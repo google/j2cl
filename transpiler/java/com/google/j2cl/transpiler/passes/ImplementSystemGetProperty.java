@@ -15,17 +15,15 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import static com.google.common.base.Preconditions.checkState;
-
+import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
-import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
-import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.HasSourcePosition;
 import com.google.j2cl.transpiler.ast.MethodCall;
-import com.google.j2cl.transpiler.ast.MultiExpression;
+import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.StringLiteral;
-import java.util.List;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import java.util.Map;
 
 /** Rewrite System.getProperty() calls based on values passed to the transpiler */
@@ -42,33 +40,28 @@ public class ImplementSystemGetProperty extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Node rewriteMethodCall(MethodCall methodCall) {
-            if (!AstUtils.isSystemGetPropertyCall(methodCall)) {
+            MethodDescriptor target = methodCall.getTarget();
+
+            if (!target.getOrigin().isSystemGetPropertyGetter()) {
               return methodCall;
             }
 
-            List<Expression> arguments = methodCall.getArguments();
-
             // JsInteropRestrictionChecker enforces the first parameter is a StringLiteral.
-            String propertyKey = ((StringLiteral) arguments.get(0)).getValue();
+            String propertyKey = target.getName();
             String value = properties.get(propertyKey);
-            Expression defaultValue = arguments.size() == 2 ? arguments.get(1) : null;
 
-            checkState(
-                value != null || defaultValue != null,
-                "No value found for property %s",
-                propertyKey);
-
-            MultiExpression.Builder expressionBuilder = MultiExpression.newBuilder();
-            if (value == null || (defaultValue != null && defaultValue.hasSideEffects())) {
-              // Default value expression can have side effect and needs to be evaluated if present.
-              expressionBuilder.addExpressions(defaultValue);
+            if (value == null) {
+              if (target.getOrigin().isRequiredSystemGetPropertyGetter()) {
+                SourcePosition sourcePosition =
+                    (((HasSourcePosition) getParent(HasSourcePosition.class::isInstance)))
+                        .getSourcePosition();
+                getProblems()
+                    .error(sourcePosition, "No value found for required property %s", propertyKey);
+              }
+              return TypeDescriptors.get().javaLangString.getNullValue();
             }
 
-            if (value != null) {
-              expressionBuilder.addExpressions(new StringLiteral(value));
-            }
-
-            return expressionBuilder.build();
+            return new StringLiteral(value);
           }
         });
   }
