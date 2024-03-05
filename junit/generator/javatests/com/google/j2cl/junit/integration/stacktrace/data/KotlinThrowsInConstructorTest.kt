@@ -17,27 +17,22 @@ package com.google.j2cl.junit.integration.stacktrace.data
 
 import kotlin.test.Test
 
-/** Simple throwing test case */
-class KotlinAnonymousClassesStacktraceTest : StacktraceTestBase() {
+/** Tests stacktraces for throwing in a constructor */
+class KotlinThrowsInConstructorTest : StacktraceTestBase() {
+  class InnerClass {
+    constructor() {
+      throw RuntimeException("__the_message__!")
+    }
+
+    constructor(param: Any) : this()
+  }
 
   @Test
   fun test() {
-    val first =
-      object : Runnable {
-        override fun run() {
-          if (true) {
-            throw RuntimeException("__the_message__!")
-          }
-        }
-      }
+    constructsInner()
+  }
 
-    val r =
-      object : Runnable {
-        override fun run() {
-          first.run()
-        }
-      }
-
-    r.run()
+  private fun constructsInner() {
+    val unused = InnerClass(Any())
   }
 }

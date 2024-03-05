@@ -1,0 +1,10 @@
+# The column values for compiled mode are incorrect since there is a bug in jscompiler
+# that makes it produce incorrect source maps, see b/63400239
+# This is why compiled and uncompiled in J2CL have different traces
+Exception: __the_message__!
+    at Error(junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data/throwing_js_class.js:31:15)
+	at method3(junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data/throwing_js_class.js:27:10)
+	at method2(junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data/throwing_js_class.js:23:10)
+	at method1(junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data/throwing_js_class.js:19:10)
+	at com.google.j2cl.junit.integration.stacktrace.data.KotlinNativeStacktraceTest.test(KotlinNativeStacktraceTest.kt:30)
+    __OPTIONAL__ # Testing infra on J2CL

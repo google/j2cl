@@ -15,29 +15,14 @@
  */
 package com.google.j2cl.junit.integration.stacktrace.data
 
+import com.google.j2cl.junit.integration.stacktrace.data.package1.DuplicateFileName
 import kotlin.test.Test
 
-/** Simple throwing test case */
-class KotlinAnonymousClassesStacktraceTest : StacktraceTestBase() {
+/** Test stack trace containing different files with the same name. */
+class KotlinDuplicateFileNameStacktraceTest : StacktraceTestBase() {
 
   @Test
   fun test() {
-    val first =
-      object : Runnable {
-        override fun run() {
-          if (true) {
-            throw RuntimeException("__the_message__!")
-          }
-        }
-      }
-
-    val r =
-      object : Runnable {
-        override fun run() {
-          first.run()
-        }
-      }
-
-    r.run()
+    DuplicateFileName.callFileWithDuplicateName()
   }
 }

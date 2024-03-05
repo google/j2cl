@@ -17,27 +17,18 @@ package com.google.j2cl.junit.integration.stacktrace.data
 
 import kotlin.test.Test
 
-/** Simple throwing test case */
-class KotlinAnonymousClassesStacktraceTest : StacktraceTestBase() {
+class KotlinExceptionWithCauseStacktraceTest : StacktraceTestBase() {
 
   @Test
   fun test() {
-    val first =
-      object : Runnable {
-        override fun run() {
-          if (true) {
-            throw RuntimeException("__the_message__!")
-          }
-        }
-      }
+    try {
+      method()
+    } catch (e: RuntimeException) {
+      throw RuntimeException("__the_message__!", e)
+    }
+  }
 
-    val r =
-      object : Runnable {
-        override fun run() {
-          first.run()
-        }
-      }
-
-    r.run()
+  fun method() {
+    throw RuntimeException(NullPointerException("root cause\nOn two lines"))
   }
 }

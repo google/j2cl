@@ -15,29 +15,17 @@
  */
 package com.google.j2cl.junit.integration.stacktrace.data
 
+import jsinterop.annotations.JsMethod
 import kotlin.test.Test
 
-/** Simple throwing test case */
-class KotlinAnonymousClassesStacktraceTest : StacktraceTestBase() {
-
+/** Integration test for stacktraces out of native methods. */
+class KotlinThrowsInNativeJs : StacktraceTestBase() {
   @Test
   fun test() {
-    val first =
-      object : Runnable {
-        override fun run() {
-          if (true) {
-            throw RuntimeException("__the_message__!")
-          }
-        }
-      }
+    throwsInNative()
+  }
 
-    val r =
-      object : Runnable {
-        override fun run() {
-          first.run()
-        }
-      }
-
-    r.run()
+  companion object {
+    @JsMethod @JvmStatic external fun throwsInNative()
   }
 }

@@ -25,7 +25,7 @@ import org.junit.runners.Parameterized;
 
 /** Integration test for stack trace deobfuscation */
 @RunWith(Parameterized.class)
-public class KotlinStacktraceIntegrationTest extends IntegrationTestBase {
+public class KotlinStacktraceIntegration1Test extends IntegrationTestBase {
 
   @Before
   public void assumeNonJ2wasm() {
@@ -34,37 +34,67 @@ public class KotlinStacktraceIntegrationTest extends IntegrationTestBase {
   }
 
   @Test
-  public void testAnonymousClasses() throws Exception {
+  public void testKotlinAnonymousClasses() throws Exception {
     runStacktraceTest("KotlinAnonymousClassesStacktraceTest");
   }
 
   @Test
-  public void testSimpleThrowingMethod() throws Exception {
+  public void testKotlinSimpleThrowingMethod() throws Exception {
     runStacktraceTest("SimpleKotlinThrowingStacktraceTest");
   }
 
   @Test
-  public void testCustomException() throws Exception {
+  public void testKotlinCustomException() throws Exception {
     runStacktraceTest("KotlinCustomExceptionStacktraceTest");
   }
 
   @Test
-  public void testFillInStackTrace() throws Exception {
+  public void testKotlinJsExceptionNonJsConstructor() throws Exception {
+    runStacktraceTest("KotlinJsExceptionNonJsConstructorStacktraceTest");
+  }
+
+  @Test
+  public void testKotlinFillInStackTrace() throws Exception {
     runStacktraceTest("KotlinFillInStacktraceTest");
   }
 
   @Test
-  public void testJsException() throws Exception {
+  public void testKotlinJsException() throws Exception {
     runStacktraceTest("KotlinJsExceptionStacktraceTest");
   }
 
   @Test
-  public void testLambda() throws Exception {
+  public void testKotlinLambda() throws Exception {
     runStacktraceTest("KotlinLambdaStacktraceTest");
   }
 
   @Test
-  public void testRecursive() throws Exception {
+  public void testKotlinRecursive() throws Exception {
     runStacktraceTest("KotlinRecursiveStacktraceTest");
+  }
+
+  @Test
+  public void testKotlinThrowsInInstanceInitializer() throws Exception {
+    runStacktraceTest("KotlinThrowsInInstanceInitializer");
+  }
+
+  @Test
+  public void testKotlinThrowsInConstructor() throws Exception {
+    runStacktraceTest("KotlinThrowsInConstructorTest");
+  }
+
+  @Test
+  public void testKotlinThrowsInClassInitializer() throws Exception {
+    runStacktraceTest("KotlinThrowsInClassInitializer");
+  }
+
+  @Test
+  public void testKotlinThrowsInJsConstructor() throws Exception {
+    runStacktraceTest("KotlinThrowsInJsConstructorTest");
+  }
+
+  @Test
+  public void testKotlinThrowsInBridgeMethod() throws Exception {
+    runStacktraceTest("KotlinThrowsInBridgeMethod");
   }
 }

@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.junit.integration.stacktrace.data
 
+import jsinterop.annotations.JsIgnore
 import jsinterop.annotations.JsType
 import kotlin.test.Test
 
@@ -28,5 +29,8 @@ class KotlinJsExceptionNonJsConstructorStacktraceTest : StacktraceTestBase() {
     throw MyJsException("__the_message__!")
   }
 
-  @JsType class MyJsException(msg: String, cause: Throwable? = null) : RuntimeException(msg, cause)
+  @JsType
+  class MyJsException(msg: String, cause: Throwable? = null) : RuntimeException(msg, cause) {
+    @JsIgnore constructor(msg: String) : this(msg, null)
+  }
 }

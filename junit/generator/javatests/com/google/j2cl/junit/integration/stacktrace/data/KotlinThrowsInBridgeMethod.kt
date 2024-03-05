@@ -17,27 +17,21 @@ package com.google.j2cl.junit.integration.stacktrace.data
 
 import kotlin.test.Test
 
-/** Simple throwing test case */
-class KotlinAnonymousClassesStacktraceTest : StacktraceTestBase() {
+/** Integration test for throwing in a bridge method */
+class KotlinThrowsInBridgeMethod : StacktraceTestBase() {
+  open class AbstractList<T> {
+    open fun add(t: T) {}
+  }
+
+  class MyList : AbstractList<String>() {
+    override fun add(e: String) {
+      throw RuntimeException("__the_message__!")
+    }
+  }
 
   @Test
   fun test() {
-    val first =
-      object : Runnable {
-        override fun run() {
-          if (true) {
-            throw RuntimeException("__the_message__!")
-          }
-        }
-      }
-
-    val r =
-      object : Runnable {
-        override fun run() {
-          first.run()
-        }
-      }
-
-    r.run()
+    val list: AbstractList<String> = MyList()
+    list.add("asdf") // calls through the bridge
   }
 }

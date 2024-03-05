@@ -1,0 +1,17 @@
+java.lang.RuntimeException: __the_message__!
+	 at com.google.j2cl.junit.integration.stacktrace.data.KotlinExceptionWithCauseStacktraceTest.test(KotlinExceptionWithCauseStacktraceTest.kt:27)
+  __OPTIONAL__
+Caused by: Error: java.lang.RuntimeException: java.lang.NullPointerException: root cause
+On two lines
+  at java.lang.RuntimeException.<synthetic: ctor_create>(RuntimeException.java:36)
+	 at com.google.j2cl.junit.integration.stacktrace.data.KotlinExceptionWithCauseStacktraceTest.method(KotlinExceptionWithCauseStacktraceTest.kt:32)
+	 at com.google.j2cl.junit.integration.stacktrace.data.KotlinExceptionWithCauseStacktraceTest.test(KotlinExceptionWithCauseStacktraceTest.kt:25)
+  __OPTIONAL__ # Testing infra on J2CL
+Caused by: TypeError: java.lang.NullPointerException: root cause
+On two lines
+	 at java.lang.NullPointerException.<synthetic: ctor_create>(NullPointerException.java:28)
+	 at com.google.j2cl.junit.integration.stacktrace.data.KotlinExceptionWithCauseStacktraceTest.method(KotlinExceptionWithCauseStacktraceTest.kt:32)
+	 __OPTIONAL__ # Difference between compiled and uncompiled mode: The frame above is duplicated in compiled mode.
+	 at com.google.j2cl.junit.integration.stacktrace.data.KotlinExceptionWithCauseStacktraceTest.test(KotlinExceptionWithCauseStacktraceTest.kt:25)
+  __OPTIONAL__ # Testing infra on J2CL
+

@@ -15,20 +15,43 @@
  */
 package com.google.j2cl.junit.integration.stacktrace.data
 
+import jsinterop.annotations.JsFunction
 import kotlin.test.Test
 
-/** Simple recursive test case */
-class KotlinRecursiveStacktraceTest : StacktraceTestBase() {
-  @Test
-  fun test() {
-    recurse(4)
+/** Integration test for throwing in a JsFunction */
+class KotlinThrowsInJsFunction : StacktraceTestBase() {
+  @JsFunction
+  fun interface MyFunction {
+    fun run()
   }
 
-  fun recurse(count: Int) {
-    if (count > 1) {
-      recurse(count - 1)
-    } else {
+  @Test
+  fun test() {
+    executesFunction(this::methodRefJsFunction)
+  }
+
+  private fun methodRefJsFunction() {
+    executesFunction {
+      // Lambda JsFunction
+      executesFunction(
+        // Anonymous JsFunction
+        object : MyFunction {
+          override fun run() {
+            // Concrete JsFunction
+            executesFunction(MyFunctionImpl())
+          }
+        }
+      )
+    }
+  }
+
+  private class MyFunctionImpl : MyFunction {
+    override fun run() {
       throw RuntimeException("__the_message__!")
     }
+  }
+
+  fun executesFunction(myFunction: MyFunction) {
+    myFunction.run()
   }
 }

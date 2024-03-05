@@ -15,29 +15,25 @@
  */
 package com.google.j2cl.junit.integration.stacktrace.data
 
+import jsinterop.annotations.JsProperty
 import kotlin.test.Test
+import org.junit.Assert.assertNotNull
 
-/** Simple throwing test case */
-class KotlinAnonymousClassesStacktraceTest : StacktraceTestBase() {
-
+/** Integration test for throwing in a JsPropery */
+class KotlinThrowsInJsProperty : StacktraceTestBase() {
   @Test
   fun test() {
-    val first =
-      object : Runnable {
-        override fun run() {
-          if (true) {
-            throw RuntimeException("__the_message__!")
-          }
-        }
-      }
+    assertNotNull(getSomeProperty())
+  }
 
-    val r =
-      object : Runnable {
-        override fun run() {
-          first.run()
-        }
-      }
+  @JsProperty
+  private fun getSomeProperty(): String {
+    setSomeOtherProperty("x")
+    return ""
+  }
 
-    r.run()
+  @JsProperty
+  private fun setSomeOtherProperty(unused: String) {
+    throw RuntimeException("__the_message__!")
   }
 }

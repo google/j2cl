@@ -15,29 +15,18 @@
  */
 package com.google.j2cl.junit.integration.stacktrace.data
 
+import jsinterop.annotations.JsType
 import kotlin.test.Test
 
-/** Simple throwing test case */
-class KotlinAnonymousClassesStacktraceTest : StacktraceTestBase() {
+/** Stack trace integration test that calls into native code. */
+class KotlinNativeStacktraceTest : StacktraceTestBase() {
+  @JsType(isNative = true, namespace = "nativeStacktraceTest")
+  private class ThrowingJsClass {
+    external fun throwEventually()
+  }
 
   @Test
   fun test() {
-    val first =
-      object : Runnable {
-        override fun run() {
-          if (true) {
-            throw RuntimeException("__the_message__!")
-          }
-        }
-      }
-
-    val r =
-      object : Runnable {
-        override fun run() {
-          first.run()
-        }
-      }
-
-    r.run()
+    ThrowingJsClass().throwEventually()
   }
 }

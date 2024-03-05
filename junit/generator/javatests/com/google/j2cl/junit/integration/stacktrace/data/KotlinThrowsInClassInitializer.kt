@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 Google Inc.
+ * Copyright 2017 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,31 +13,27 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 package com.google.j2cl.junit.integration.stacktrace.data
 
 import kotlin.test.Test
 
-/** Simple throwing test case */
-class KotlinAnonymousClassesStacktraceTest : StacktraceTestBase() {
+/** Tests stacktraces for throwing class initializer */
+class KotlinThrowsInClassInitializer : StacktraceTestBase() {
+  @Suppress("ClassShouldBeObject")
+  class Inner {
+    companion object {
+      @JvmStatic internal val throwsInConstructor: Inner = Inner.willThrow()
+
+      @JvmStatic
+      private fun willThrow(): Inner {
+        throw RuntimeException("__the_message__!")
+      }
+    }
+  }
 
   @Test
   fun test() {
-    val first =
-      object : Runnable {
-        override fun run() {
-          if (true) {
-            throw RuntimeException("__the_message__!")
-          }
-        }
-      }
-
-    val r =
-      object : Runnable {
-        override fun run() {
-          first.run()
-        }
-      }
-
-    r.run()
+    val o = Inner.throwsInConstructor
   }
 }
