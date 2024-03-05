@@ -406,8 +406,6 @@ public enum Backend {
           MoveNestedClassesToTop::new,
           AddBridgeMethods::new,
           AddEnumImplicitMethods::new,
-          NormalizeSystemGetPropertyCalls::new,
-          () -> new ImplementSystemGetProperty(options.getDefinesForWasm()),
           NormalizeTryWithResources::new,
           NormalizeCatchClauses::new,
           () -> new NormalizeEnumClasses(/* useMakeEnumNameIndirection= */ false),
