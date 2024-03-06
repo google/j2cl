@@ -627,8 +627,6 @@ public enum Backend {
           InsertExceptionConversionsWasm::new,
           InsertExternConversionsWasm::new,
 
-          // TODO(b/283154656): Fork the instantiation code for the modular pipeline.
-          // NormalizeInstantiationThroughFactoryMethods::new,
           RemoveCustomIsInstanceMethods::new,
           RemoveNoopStatements::new,
 
