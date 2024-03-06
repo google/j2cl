@@ -19,12 +19,14 @@ goog.module("%MODULE_NAME%.j2wasm");
  *
  * @param {string|!Promise<!Response>} urlOrResponse
  * @return {!Promise<!WebAssembly.Instance>}
+ * @suppress {checkTypes} Externs is missing options parameter (phase 2) and also overloads for
+ *   WebAssembly.instantiate.
  */
 async function instantiateStreaming(urlOrResponse) {
     const response =
         typeof urlOrResponse == "string" ? fetch(urlOrResponse) : urlOrResponse;
-    const {instance} = await WebAssembly.instantiateStreaming(response, getImports());
-    return instance;
+    const module = await WebAssembly.compileStreaming(response, { builtins: ["js-string"] });
+    return WebAssembly.instantiate(module, prepareImports(module));
 }
 
 /**
@@ -38,9 +40,25 @@ async function instantiateStreaming(urlOrResponse) {
  *
  * @param {!BufferSource} moduleObject
  * @return {!WebAssembly.Instance}
+ * @suppress {checkTypes} Externs is missing options parameter (phase 2)
  */
 function instantiateBlocking(moduleObject) {
-    return new WebAssembly.Instance(new WebAssembly.Module(moduleObject), getImports());
+    const module = new WebAssembly.Module(moduleObject, { builtins: ["js-string"] });
+    return new WebAssembly.Instance(module, prepareImports(module));
+}
+
+/**
+ * @param {!WebAssembly.Module} module
+ * @return {!Object<string, *>}
+ */
+function prepareImports(module) {
+    const imports = getImports();
+    const stringConsts = WebAssembly.Module.customSections(module, "string.consts")[0];
+    if (stringConsts) {
+      const decodedConsts = new TextDecoder().decode(stringConsts);
+      imports["string.const"] = JSON.parse(decodedConsts);
+    }
+    return imports;
 }
 
 exports = {instantiateStreaming, instantiateBlocking};
@@ -422,6 +440,8 @@ def j2wasm_application(name, defines = dict(), **kwargs):
 
     transpiler_args = kwargs.pop("internal_transpiler_args", [])
 
+    use_stringref_spec = kwargs.pop("use_stringref_spec", True)
+
     _j2wasm_application(
         name = name,
         binaryen_args = [
@@ -483,7 +503,7 @@ def j2wasm_application(name, defines = dict(), **kwargs):
             "--optimize-j2cl",
 
             # Re-inline string.const globals and follow up clean-ups
-            "--propagate-globals-globally",
+            "--propagate-globals-globally" if use_stringref_spec else "--string-lowering",
             "--remove-unused-module-elements",
             "--reorder-globals",
 
@@ -497,11 +517,14 @@ def j2wasm_application(name, defines = dict(), **kwargs):
     _j2wasm_application(
         name = name + "_dev",
         binaryen_args = [
-            "--debuginfo",
-            "--intrinsic-lowering",
-            # Remove the intrinsic import declarations which are not removed by lowering itself.
-            "--remove-unused-module-elements",
-        ],
+                            "--debuginfo",
+                            "--intrinsic-lowering",
+                        ] +
+                        ([] if use_stringref_spec else ["--string-lowering"]) +
+                        [
+                            # Remove the intrinsic import declarations which are not removed by lowering itself.
+                            "--remove-unused-module-elements",
+                        ],
         transpiler_args = transpiler_args,
         defines = ["%s=%s" % (k, v) for (k, v) in dev_defines.items()],
         **kwargs

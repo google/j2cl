@@ -134,7 +134,7 @@ public final class JsImportsGenerator {
    */
   private static void emitJsImports(SourceBuilder builder, Map<String, String> methodImports) {
     builder.newLine();
-    builder.append("/** @return {!Object<string, !Object<string, !*>>} Wasm import object */");
+    builder.append("/** @return {!Object<string, *>} Wasm import object */");
     builder.newLine();
     builder.append("function getImports() ");
     builder.openBrace();
