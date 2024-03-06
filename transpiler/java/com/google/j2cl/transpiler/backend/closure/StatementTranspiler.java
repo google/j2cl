@@ -206,16 +206,7 @@ public class StatementTranspiler {
             labelStatement.getSourcePosition(),
             () -> {
               builder.append(labelStatement.getLabel().getName() + ": ");
-
-              Statement innerStatement = labelStatement.getStatement();
-              // TODO(b/174246745): Remove block braces once the underlying jscompiler bug is fixed.
-              if (innerStatement instanceof LabeledStatement) {
-                builder.openBrace();
-              }
-              render(innerStatement);
-              if (innerStatement instanceof LabeledStatement) {
-                builder.closeBrace();
-              }
+              render(labelStatement.getStatement());
             });
         return false;
       }
