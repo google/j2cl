@@ -119,7 +119,7 @@ def j2cl_application(
         "jre.checks.checkLevel": jre_checks_check_level,
     }
     define_dev.update(closure_defines)
-    define_dev_content = "var CLOSURE_DEFINES = %s;" % struct(**define_dev).to_json()
+    define_dev_content = "var CLOSURE_DEFINES = %s;" % json.encode(struct(**define_dev))
 
     index_html = """
 <head><script>
