@@ -35,6 +35,23 @@ public class IntStreamTest extends EmulTestBase {
         new int[] {0, 1, 2, 3, 4},
         IntStream.iterate(0, i -> i + 1).takeWhile(i -> i < 5).toArray()
     );
+    assertEquals(0, IntStream.empty()
+            .takeWhile(n -> n < 4)
+            .count());
+    assertEquals(0, IntStream.of(5, 6, 7)
+            .takeWhile(n -> n < 5)
+            .count());
+    assertEquals(new int[] {1, 2, 3}, IntStream.of(1, 2, 3)
+            .takeWhile(n -> n < 4)
+            .toArray());
+
+    int[] first = IntStream.of(1, 2, 3, 4)
+            .takeWhile(n -> n < 3)
+            .toArray();
+    int[] second = IntStream.of(first)
+            .takeWhile(n -> n < 3)
+            .toArray();
+    assertEquals(first, second);
   }
 
   public void testDropWhile() {

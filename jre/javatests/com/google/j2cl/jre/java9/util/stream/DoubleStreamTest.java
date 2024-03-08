@@ -26,15 +26,31 @@ public class DoubleStreamTest extends EmulTestBase {
 
   public void testTakeWhile() {
     assertEquals(
-        new double[] {1, 2},
-        DoubleStream.of(1, 2, 3, 4, 5).takeWhile(i -> i < 3).toArray()
+        new double[] {1.1, 2.2},
+        DoubleStream.of(1.1, 2.2, 3.3, 4.4, 5.5).takeWhile(i -> i < 3).toArray()
     );
-    assertEquals(0, DoubleStream.of(1, 2, 3, 4, 5).takeWhile(i -> i > 2).count());
-
+    assertEquals(0, DoubleStream.of(1.1, 2.2, 3.3, 4.4, 5.5).takeWhile(i -> i > 2).count());
     assertEquals(
-        new double[] {0, 1, 2, 3, 4},
+        new double[] {0, 1.0, 2.0, 3.0, 4.0},
         DoubleStream.iterate(0, i -> i + 1).takeWhile(i -> i < 5).toArray()
     );
+    assertEquals(0, DoubleStream.empty()
+            .takeWhile(n -> n < 4)
+            .count());
+    assertEquals(0, DoubleStream.of(5.0, 6.0, 7.0)
+            .takeWhile(n -> n < 5)
+            .count());
+    assertEquals(new double[] {1.0, 2.0, 3.0}, DoubleStream.of(1.0, 2.0, 3.0)
+            .takeWhile(n -> n < 4)
+            .toArray());
+
+    double[] first = DoubleStream.of(1.0, 2.0, 3.0, 4.0)
+            .takeWhile(n -> n < 3)
+            .toArray();
+    double[] second = DoubleStream.of(first)
+            .takeWhile(n -> n < 3)
+            .toArray();
+    assertEquals(first, second);
   }
 
   public void testDropWhile() {

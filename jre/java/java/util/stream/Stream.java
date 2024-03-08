@@ -193,6 +193,14 @@ public interface Stream<T> extends BaseStream<T, Stream<T>> {
     return Arrays.stream(values);
   }
 
+  static <T> Stream<T> ofNullable(T t) {
+    if (t == null) {
+      return empty();
+    } else {
+      return of(t);
+    }
+  }
+
   boolean allMatch(Predicate<? super T> predicate);
 
   boolean anyMatch(Predicate<? super T> predicate);

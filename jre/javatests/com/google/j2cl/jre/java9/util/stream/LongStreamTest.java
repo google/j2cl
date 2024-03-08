@@ -35,6 +35,23 @@ public class LongStreamTest extends EmulTestBase {
         new long[] {0, 1, 2, 3, 4},
         LongStream.iterate(0, i -> i + 1).takeWhile(i -> i < 5).toArray()
     );
+    assertEquals(0, LongStream.empty()
+            .takeWhile(n -> n < 4L)
+            .count());
+    assertEquals(0, LongStream.of(5L, 6L, 7L)
+            .takeWhile(n -> n < 5L)
+            .count());
+    assertEquals(new long[] {1L, 2L, 3L}, LongStream.of(1L, 2L, 3L)
+            .takeWhile(n -> n < 4L)
+            .toArray());
+
+    long[] first = LongStream.of(1L, 2L, 3L, 4L)
+            .takeWhile(n -> n < 3L)
+            .toArray();
+    long[] second = LongStream.of(first)
+            .takeWhile(n -> n < 3L)
+            .toArray();
+    assertEquals(first, second);
   }
 
   public void testDropWhile() {
