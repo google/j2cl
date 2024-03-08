@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
@@ -1099,7 +1100,8 @@ public abstract class TypeDeclaration
 
       checkState(
           typeDeclaration.getTypeParameterDescriptors().stream()
-              .noneMatch(TypeVariable::isNullable));
+              .map(TypeVariable::getNullabilityAnnotation)
+              .allMatch(Predicate.isEqual(NullabilityAnnotation.NONE)));
 
       return interner.intern(typeDeclaration);
     }

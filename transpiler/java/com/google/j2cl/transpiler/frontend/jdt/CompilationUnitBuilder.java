@@ -401,12 +401,16 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
               getCurrentType().getDeclaration().isNullMarked());
 
       Expression castExpression = convert(expression.getExpression());
+
+      if (!castExpression.canBeNull()) {
+        castTypeDescriptor = castTypeDescriptor.toNonNullable();
+      } else if (castExpression.getTypeDescriptor().isNullable()) {
+        castTypeDescriptor = castTypeDescriptor.toNullable();
+      }
+
       return CastExpression.newBuilder()
           .setExpression(castExpression)
-          .setCastTypeDescriptor(
-              // TODO(b/236987392): review the inference when the modeling of type variables
-              // includes the third state.
-              castTypeDescriptor.toNullable(castExpression.getTypeDescriptor().isNullable()))
+          .setCastTypeDescriptor(castTypeDescriptor)
           .build();
     }
 
@@ -579,8 +583,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       Expression falseExpression = convert(conditionalExpression.getElseExpression());
       return ConditionalExpression.newBuilder()
           .setTypeDescriptor(
-              trueExpression.getTypeDescriptor().isNullable()
-                      || falseExpression.getTypeDescriptor().isNullable()
+              trueExpression.getTypeDescriptor().canBeNull()
+                      || falseExpression.getTypeDescriptor().canBeNull()
                   ? conditionalTypeDescriptor.toNullable()
                   : conditionalTypeDescriptor)
           .setConditionExpression(condition)

@@ -7393,6 +7393,8 @@
   (call $$clinit__void_<once>_@nullability.defaultnotnullable.DefaultNotNullable )
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:379:4
   (local.set $localString (local.get $string))
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:380:4
+  (call_ref $function.m_accept__java_lang_Object__void (ref.as_non_null (local.get $c))(local.get $localString)(struct.get $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable $m_accept__java_lang_Object__void (ref.null $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable)))
  )
 )
 
@@ -7400,14 +7402,14 @@
 (func $m_testGenericWildcardNullabilityCast__nullability_defaultnotnullable_DefaultNotNullable_Consumer__java_lang_Object__void@nullability.defaultnotnullable.DefaultNotNullable
  (param $c (ref null $java.lang.Object))
  (param $element (ref null $java.lang.Object))
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:384:18
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:383:18
  (local $localElement (ref null $java.lang.Object))
  (block
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:384:87
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:383:87
   (call $$clinit__void_<once>_@nullability.defaultnotnullable.DefaultNotNullable )
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:385:4
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:384:4
   (local.set $localElement (local.get $element))
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:386:4
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:385:4
   (call_ref $function.m_accept__java_lang_Object__void (ref.as_non_null (local.get $c))(local.get $localElement)(struct.get $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable $m_accept__java_lang_Object__void (ref.null $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable)))
  )
 )
@@ -7415,12 +7417,12 @@
 ;;; void DefaultNotNullable.testParametrizedArrayNullabilityCast(String[] array)
 (func $m_testParametrizedArrayNullabilityCast__arrayOf_java_lang_String__void@nullability.defaultnotnullable.DefaultNotNullable
  (param $array (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:389:14
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:388:14
  (local $localArray (ref null $javaemul.internal.WasmArray.OfObject))
  (block
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:389:67
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:388:67
   (call $$clinit__void_<once>_@nullability.defaultnotnullable.DefaultNotNullable )
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:391:4
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:390:4
   (local.set $localArray (local.get $array))
  )
 )
@@ -7428,51 +7430,51 @@
 ;;; void DefaultNotNullable.testGenericArrayNullabilityCast(T[] array)
 (func $m_testGenericArrayNullabilityCast__arrayOf_java_lang_Object__void@nullability.defaultnotnullable.DefaultNotNullable
  (param $array (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:394:18
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:393:18
  (local $localArray (ref null $javaemul.internal.WasmArray.OfObject))
  (block
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:394:61
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:393:61
   (call $$clinit__void_<once>_@nullability.defaultnotnullable.DefaultNotNullable )
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:395:4
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:394:4
   (local.set $localArray (local.get $array))
  )
 )
 
 ;;; void DefaultNotNullable.testLocalNullability()
 (func $m_testLocalNullability__void@nullability.defaultnotnullable.DefaultNotNullable
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:398:14
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:397:14
  (local $stringConsumer (ref null $java.lang.Object))
  (local $nullableStringConsumer (ref null $java.lang.Object))
  (local $nonNullStringConsumer (ref null $java.lang.Object))
  (local $b i32)
  (block
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:398:37
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:397:37
   (call $$clinit__void_<once>_@nullability.defaultnotnullable.DefaultNotNullable )
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:399:4
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:398:4
   (local.set $stringConsumer (ref.null $java.lang.Object))
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:400:4
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:399:4
   (local.set $nullableStringConsumer (ref.null $java.lang.Object))
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:401:4
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:400:4
   (local.set $nonNullStringConsumer (ref.null $java.lang.Object))
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:403:4
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:402:4
   (local.set $b (i32.const 0))
  )
 )
 
 ;;; void DefaultNotNullable.testCodeFragments()
 (func $m_testCodeFragments__void@nullability.defaultnotnullable.DefaultNotNullable
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:406:14
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:405:14
  (local $b i32)
  (local $c (ref null $java.lang.Object))
  (local $s (ref null $javaemul.internal.WasmArray.OfObject))
  (block
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:406:34
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:405:34
   (call $$clinit__void_<once>_@nullability.defaultnotnullable.DefaultNotNullable )
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:408:4
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:407:4
   (local.set $b (i32.const 1))
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:409:4
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:408:4
   (local.set $c (if (result (ref null $java.lang.Object)) (local.get $b) (then (ref.null $java.lang.Object)) (else (ref.null $java.lang.Object))))
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:412:4
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:411:4
   (local.set $s (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (call $$getString_|1|__java_lang_String_<once>_@nullability.defaultnotnullable.DefaultNotNullable )(call $$getString_|2|__java_lang_String_<once>_@nullability.defaultnotnullable.DefaultNotNullable ))))
  )
 )

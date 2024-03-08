@@ -24,6 +24,7 @@ import com.google.j2cl.transpiler.ast.FieldDescriptor
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.Literal
 import com.google.j2cl.transpiler.ast.MethodDescriptor
+import com.google.j2cl.transpiler.ast.NullabilityAnnotation
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDeclaration.SourceLanguage.JAVA
@@ -353,9 +354,6 @@ class KotlinEnvironment(
         when {
           irType.isTypeParameter() -> {
             val typeParameter = irType.classifierOrNull!!.owner as IrTypeParameter
-            // We follow what we do in JDT and only mark a type variable as nullable if the type is
-            // explicitly nullable in Kotlin code.
-            // TODO(b/236987392): Revisit when nullability tri-state is added to TypeVariable.
             getTypeVariable(typeParameter, !typeParameter.isFromJava() && irType.isMarkedNullable())
           }
           irType.isArrayType() -> getArrayTypeDescriptor(irType)
@@ -395,7 +393,9 @@ class KotlinEnvironment(
       .setName(irTypeParameter.name.asString())
       .setUniqueKey(irTypeParameter.uniqueKey)
       .setUpperBoundTypeDescriptorSupplier(upperBoundFactory)
-      .setNullable(isNullable)
+      .setNullabilityAnnotation(
+        if (isNullable) NullabilityAnnotation.NULLABLE else NullabilityAnnotation.NONE
+      )
       .build()
   }
 

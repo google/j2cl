@@ -162,7 +162,7 @@ internal data class TypeDescriptorRenderer(
           )
         } else {
           join(
-              nameRenderer.nameSource(typeVariable.toNullable()),
+              nameRenderer.nameSource(typeVariable.toDeclaration()),
               nullableSuffixSource(typeVariable),
             )
             .letIf(typeVariable.hasAmpersandAny) {
@@ -183,8 +183,8 @@ internal data class TypeDescriptorRenderer(
     Source.emptyUnless(typeDescriptor.isNullable) { NULLABLE_OPERATOR }
 
   private fun withSeen(typeVariable: TypeVariable): TypeDescriptorRenderer =
-    copy(seenTypeVariables = seenTypeVariables + typeVariable.toNonNullable())
+    copy(seenTypeVariables = seenTypeVariables + typeVariable.toDeclaration())
 
   private fun didSee(typeVariable: TypeVariable): Boolean =
-    seenTypeVariables.contains(typeVariable.toNonNullable())
+    seenTypeVariables.contains(typeVariable.toDeclaration())
 }

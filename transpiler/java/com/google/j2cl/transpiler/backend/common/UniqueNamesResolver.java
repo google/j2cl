@@ -29,6 +29,7 @@ import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.NameDeclaration;
+import com.google.j2cl.transpiler.ast.NullabilityAnnotation;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeVariable;
 import java.util.HashMap;
@@ -55,15 +56,12 @@ public final class UniqueNamesResolver {
 
     // Collect type variables defined at the type level, and exclude their unique names from the
     // name pool to be used by local variables, parameters and type variables defined in methods.
-    for (TypeVariable typeVariable : type.getDeclaration().getTypeParameterDescriptors()) {
-      checkState(!typeVariable.isNullable());
-      String uniqueName = computeUniqueName(typeVariable, Predicates.not(forbiddenNames::contains));
+    for (TypeVariable typeParameter : type.getDeclaration().getTypeParameterDescriptors()) {
+      checkState(typeParameter.getNullabilityAnnotation() == NullabilityAnnotation.NONE);
+      String uniqueName =
+          computeUniqueName(typeParameter, Predicates.not(forbiddenNames::contains));
       forbiddenNames.add(uniqueName);
-      // TODO(b/236987392): Redesign type variables to be able to reflect better nullability
-      // information, and remove the hack of registering the two versions that currently exist.
-      // Register both versions of the type variable since they will share the same name.
-      uniqueNameByVariable.put(typeVariable, uniqueName);
-      uniqueNameByVariable.put(typeVariable.toNullable(), uniqueName);
+      uniqueNameByVariable.put(typeParameter, uniqueName);
     }
 
     // Create aliases for local variables, parameters and type variables defined in methods;
@@ -87,15 +85,12 @@ public final class UniqueNamesResolver {
           }
 
           private void registerUniqueNames(MethodDescriptor methodDescriptor) {
-            for (TypeVariable typeVariable : methodDescriptor.getTypeParameterTypeDescriptors()) {
-              if (typeVariable.isWildcardOrCapture()) {
+            for (TypeVariable typeParameter : methodDescriptor.getTypeParameterTypeDescriptors()) {
+              if (typeParameter.isWildcardOrCapture()) {
                 continue;
               }
-              String name = registerUniqueName(methodDescriptor, typeVariable.toNullable());
-              // TODO(b/236987392): Redesign type variables to be able to reflect better nullability
-              // information, and remove the hack of registering the two vesions that currently
-              // exist.
-              uniqueNameByVariable.put(typeVariable.toNonNullable(), name);
+              String name = registerUniqueName(methodDescriptor, typeParameter);
+              uniqueNameByVariable.put(typeParameter, name);
             }
           }
 

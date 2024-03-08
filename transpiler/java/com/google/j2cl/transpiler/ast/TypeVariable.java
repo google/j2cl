@@ -61,34 +61,72 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
   public abstract TypeDescriptor getLowerBoundTypeDescriptor();
 
   @Override
-  public abstract boolean isNullable();
-
-  @Nullable
-  public abstract KtVariance getKtVariance();
-
-  public abstract boolean isAnnotatedNonNullable();
-
-  @Override
-  public TypeVariable toNullable() {
-    if (isNullable()) {
-      return this;
-    }
-    return TypeVariable.Builder.from(this).setNullable(true).setAnnotatedNonNullable(false).build();
-  }
-
-  @Override
-  public TypeVariable toNonNullable() {
-    if (!isNullable()) {
-      return this;
-    }
-    return TypeVariable.Builder.from(this).setNullable(false).build();
+  public boolean isNullable() {
+    return isAnnotatedNullable();
   }
 
   @Override
   public boolean canBeNull() {
     // TODO(b/244319605): Review semantics of nullability for lower bounded type variables.
-    return !isAnnotatedNonNullable() && (isNullable() || getUpperBoundTypeDescriptor().canBeNull());
+    return !isAnnotatedNonNullable()
+        && (isAnnotatedNullable() || getUpperBoundTypeDescriptor().canBeNull());
   }
+
+  public abstract NullabilityAnnotation getNullabilityAnnotation();
+
+  public boolean isAnnotatedNonNullable() {
+    return getNullabilityAnnotation() == NullabilityAnnotation.NOT_NULLABLE;
+  }
+
+  public boolean isAnnotatedNullable() {
+    return getNullabilityAnnotation() == NullabilityAnnotation.NULLABLE;
+  }
+
+  @Override
+  @Memoized
+  public TypeVariable toNullable() {
+    if (isAnnotatedNullable()) {
+      return this;
+    }
+    return TypeVariable.Builder.from(this)
+        .setNullabilityAnnotation(NullabilityAnnotation.NULLABLE)
+        .build();
+  }
+
+  @Override
+  @Memoized
+  public TypeVariable toNonNullable() {
+    if (!canBeNull()) {
+      // If the type variable does not have a nullable bound then it does not (and should not) need
+      // to be annotated with `NOT_NULLABLE`, since it can only be instantiated by non nullable
+      // types.
+      return this;
+    }
+    return TypeVariable.Builder.from(this)
+        .setNullabilityAnnotation(NullabilityAnnotation.NOT_NULLABLE)
+        .build();
+  }
+
+  /** Returns the type variable without any nullability annotation. */
+  @Memoized
+  public TypeVariable withoutNullabilityAnnotations() {
+    if (getNullabilityAnnotation() == NullabilityAnnotation.NONE) {
+      return this;
+    }
+    return TypeVariable.Builder.from(this)
+        .setNullabilityAnnotation(NullabilityAnnotation.NONE)
+        .build();
+  }
+
+  /** Returns the declaration version of the type variable. */
+  public TypeVariable toDeclaration() {
+    // For now we use the same class to represent type variable declarations and references. The
+    // declaration of a type variable is the version without any nullability annotation.
+    return withoutNullabilityAnnotations();
+  }
+
+  @Nullable
+  public abstract KtVariance getKtVariance();
 
   @Override
   public boolean isAssignableTo(TypeDescriptor that) {
@@ -163,7 +201,7 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
   @Override
   public Set<TypeVariable> getAllTypeVariables() {
     if (!isWildcardOrCapture()) {
-      return ImmutableSet.of(toNonNullable());
+      return ImmutableSet.of(toDeclaration());
     }
     return ImmutableSet.of();
   }
@@ -196,16 +234,22 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
       return this;
     }
 
-    TypeVariable canonicalTypeVariable = toNonNullable();
+    TypeVariable declaration = toDeclaration();
 
     TypeDescriptor specializedTypeVariable =
-        replacementTypeArgumentByTypeVariable.apply(canonicalTypeVariable);
+        replacementTypeArgumentByTypeVariable.apply(declaration);
 
-    if (canonicalTypeVariable != specializedTypeVariable) {
-      // In our current model if the type variable that is specialized is not isNullable it means
-      // that it does not have a @Nullable annotation, so we leave the specialized result alone,
-      // since it might be nullable and needs to stay the same.
-      return isNullable() ? specializedTypeVariable.toNullable() : specializedTypeVariable;
+    if (declaration != specializedTypeVariable) {
+      // The variable has been specialized, apply the nullability annotation if the type variable
+      // reference was annotated.
+      switch (getNullabilityAnnotation()) {
+        case NULLABLE:
+          return specializedTypeVariable.toNullable();
+        case NOT_NULLABLE:
+          return specializedTypeVariable.toNonNullable();
+        default:
+          return specializedTypeVariable;
+      }
     }
     return this;
   }
@@ -223,9 +267,18 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
 
   @Override
   public String getUniqueId() {
-    String prefix = isNullable() ? "?" : "!";
-    String nonNullableAnnotationSuffix = isAnnotatedNonNullable() ? "&Any" : "";
-    return prefix + getUniqueKey() + nonNullableAnnotationSuffix;
+    String prefix;
+    switch (getNullabilityAnnotation()) {
+      case NOT_NULLABLE:
+        prefix = "!";
+        break;
+      case NULLABLE:
+        prefix = "?";
+        break;
+      default:
+        prefix = "";
+    }
+    return prefix + getUniqueKey();
   }
 
   public final boolean hasRecursiveDefinition() {
@@ -238,8 +291,7 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
     return new AutoValue_TypeVariable.Builder()
         .setWildcard(false)
         .setCapture(false)
-        .setNullable(false)
-        .setAnnotatedNonNullable(false);
+        .setNullabilityAnnotation(NullabilityAnnotation.NONE);
   }
 
   /** Creates a wildcard type variable with a specific upper bound. */
@@ -259,7 +311,7 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
     String lowerBoundKey = lowerBound == null ? "" : "<??_v_>" + lowerBound.getUniqueId();
     return TypeVariable.newBuilder()
         .setWildcard(true)
-        .setNullable(false)
+        .setNullabilityAnnotation(NullabilityAnnotation.NONE)
         .setUpperBoundTypeDescriptorSupplier(() -> upperBound)
         .setLowerBoundTypeDescriptor(lowerBound)
         // Create an unique key that does not conflict with the keys used for other types nor for
@@ -338,11 +390,9 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
 
     public abstract Builder setLowerBoundTypeDescriptor(@Nullable TypeDescriptor typeDescriptor);
 
-    public abstract Builder setNullable(boolean isNullable);
-
     public abstract Builder setKtVariance(@Nullable KtVariance ktVariance);
 
-    public abstract Builder setAnnotatedNonNullable(boolean hasNonNullAnnotation);
+    public abstract Builder setNullabilityAnnotation(NullabilityAnnotation nullabilityAnnotation);
 
     private static final ThreadLocalInterner<TypeVariable> interner = new ThreadLocalInterner<>();
 

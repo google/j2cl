@@ -68,6 +68,11 @@ public final class InsertNotNullAssertions extends NormalizationPass {
                     : expression;
               }
 
+              // Insert null assertions if necessary on places where the construct requires them.
+              // TODO(b/253062274): Revisit when the bug is fixed. The method above should be enough
+              // to emit most of these assertions. But in the current state the inferred types do
+              // not take into consideration the nullability of the original type variable
+              // in the inference.
               @Override
               public Expression rewriteNonNullTypeConversionContext(
                   TypeDescriptor inferredTypeDescriptor,
@@ -77,11 +82,6 @@ public final class InsertNotNullAssertions extends NormalizationPass {
               }
             }));
 
-    // Insert null assertions if necessary on places where the construct requires them.
-    // TODO(b/236987392): Revisit when the bug is fixed. The context rewriter based traversal above
-    // should be enough to emit most of these assertions. But in the current state whether a
-    // construct requires a non-nullable expression is expressed by a non-nullable type which for
-    // type variables is not accurate.
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override

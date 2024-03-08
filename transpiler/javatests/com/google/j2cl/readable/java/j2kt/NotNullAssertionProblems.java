@@ -40,4 +40,12 @@ public class NotNullAssertionProblems {
   public static @Nullable String nullableString() {
     return null;
   }
+
+  static class C<V extends @Nullable Object> {
+    V defaultValue = (V) null;
+
+    V f() {
+      return true ? defaultValue : defaultValue;
+    }
+  }
 }

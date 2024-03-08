@@ -303,6 +303,7 @@ open class DefaultNotNullable {
   @JvmStatic
   internal fun testParametrizedWildcardNullabilityCast_pp_nullability_defaultnotnullable(c: DefaultNotNullable.Consumer<in String>, string: String) {
    val localString: String? = string
+   c.accept(localString as String)
   }
 
   @JvmStatic

@@ -34,8 +34,8 @@ public class ConditionalExpression extends Expression {
       Expression trueExpression,
       Expression falseExpression) {
     this.typeDescriptor =
-        (!trueExpression.getTypeDescriptor().isNullable()
-                && !falseExpression.getTypeDescriptor().isNullable())
+        (!trueExpression.getTypeDescriptor().canBeNull()
+                && !falseExpression.getTypeDescriptor().canBeNull())
             ? typeDescriptor.toNonNullable()
             : checkNotNull(typeDescriptor);
     this.conditionExpression = checkNotNull(conditionExpression);

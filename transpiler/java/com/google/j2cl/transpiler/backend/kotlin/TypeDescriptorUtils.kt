@@ -139,13 +139,18 @@ internal fun TypeDescriptor.makeNonNull(): TypeDescriptor =
       is DeclaredTypeDescriptor -> toNonNullable()
       is TypeVariable ->
         if (!isWildcardOrCapture) {
+          // TODO(b/328541289): Here it should be just `toNonNullable()`, in fact the handing below
+          // for wildcards and captures should also be done by `toNonNullable()`. The only
+          // kotlin output specific piece is the handling of `*`.
           if (hasNullableBounds) {
             // Convert to {@code T & Any}
             IntersectionTypeDescriptor.newBuilder()
-              .setIntersectionTypeDescriptors(listOf(toNonNullable(), anyTypeDescriptor))
+              .setIntersectionTypeDescriptors(
+                listOf(withoutNullabilityAnnotations(), anyTypeDescriptor)
+              )
               .build()
           } else {
-            toNonNullable()
+            withoutNullabilityAnnotations()
           }
         } else if (upperBoundTypeDescriptor.isImplicitUpperBound) {
           // Ignore type variables which will be rendered as star (unbounded wildcard).

@@ -377,8 +377,7 @@ public class DefaultNotNullable {
   static void testParametrizedWildcardNullabilityCast(Consumer<? super String> c, String string) {
     // Nullability information in local variables is absent, so cast is necessary in Kotlin.
     String localString = string;
-    // TODO(b/236987392): This line does not compile in Kotlin. Uncomment when fixed.
-    // c.accept(localString);
+    c.accept(localString);
   }
 
   static <T> void testGenericWildcardNullabilityCast(Consumer<? super T> c, T element) {

@@ -172,7 +172,7 @@ class ClosureTypesGenerator {
       return UNKNOWN;
     }
 
-    return new ClosureNamedType(environment.getUniqueNameForVariable(typeVariable));
+    return new ClosureNamedType(environment.getUniqueNameForVariable(typeVariable.toDeclaration()));
   }
 
   /** Returns the Closure type for an array type descriptor. */

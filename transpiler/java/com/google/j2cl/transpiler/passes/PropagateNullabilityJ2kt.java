@@ -86,7 +86,7 @@ public class PropagateNullabilityJ2kt extends NormalizationPass {
 
   private static TypeDescriptor propagateReturnTypeNullability(
       TypeDescriptor from, TypeDescriptor to) {
-    if (!from.isNullable()) {
+    if (!from.canBeNull()) {
       // Only turn returns non-null from nullable but not the other way around.
       // That allows to keep the specialization in the overriding method and satisfies the
       // the covariant return rule.
@@ -99,7 +99,19 @@ public class PropagateNullabilityJ2kt extends NormalizationPass {
   private static TypeDescriptor propagateParameterNullability(
       TypeDescriptor from, TypeDescriptor to) {
     // Parameter nullability must match.
-    return to.toNullable(from.isNullable());
+    if (from.isTypeVariable() && to.isTypeVariable()) {
+      TypeVariable fromTypeVariable = (TypeVariable) from;
+      TypeVariable toTypeVariable = (TypeVariable) to;
+
+      return fromTypeVariable.getNullabilityAnnotation()
+              == toTypeVariable.getNullabilityAnnotation()
+          ? to
+          : TypeVariable.Builder.from(toTypeVariable)
+              .setNullabilityAnnotation(fromTypeVariable.getNullabilityAnnotation())
+              .build();
+    } else {
+      return to.toNullable(from.isNullable());
+    }
   }
 
   private static void updateParametersFromDescriptor(Method method) {
@@ -116,7 +128,7 @@ public class PropagateNullabilityJ2kt extends NormalizationPass {
       TypeDescriptor td = parametrization.get(typeVariable);
       if (td != null) {
         parameter = td;
-        if (!typeVariable.canBeNull()) {
+        if (!typeVariable.canBeNull() && !(parameter instanceof TypeVariable)) {
           parameter = parameter.toNonNullable();
         }
       }

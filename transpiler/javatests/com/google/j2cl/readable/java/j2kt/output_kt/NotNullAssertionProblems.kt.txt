@@ -25,6 +25,7 @@ import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
@@ -66,6 +67,15 @@ open class NotNullAssertionProblems {
   @ObjCName("nullableString")
   fun nullableString(): String? {
    return null
+  }
+ }
+
+ open class C<V> internal constructor() {
+  @JvmField
+  internal var defaultValue_pp_j2kt: V = (null as V?) as V
+
+  internal open fun f_pp_j2kt(): V {
+   return (if (true) this.defaultValue_pp_j2kt else this.defaultValue_pp_j2kt) as V
   }
  }
 }

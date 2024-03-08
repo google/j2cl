@@ -42,6 +42,7 @@ import com.google.j2cl.transpiler.ast.KtInfo;
 import com.google.j2cl.transpiler.ast.Literal;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
+import com.google.j2cl.transpiler.ast.NullabilityAnnotation;
 import com.google.j2cl.transpiler.ast.PostfixOperator;
 import com.google.j2cl.transpiler.ast.PrefixOperator;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
@@ -361,9 +362,7 @@ public class JdtEnvironment {
         () -> getUpperBoundTypeDescriptor(typeBinding, inNullMarkedScope);
 
     String uniqueKey = typeBinding.getKey();
-    if ((typeBinding.isWildcardType() || typeBinding.isCapture())
-        && typeBinding.getBound() != null) {
-      // TODO(b/236987392): Remove the hack once the modeling of type variables is fixed.
+    if (typeBinding.isWildcardType() && typeBinding.getBound() != null) {
       // HACK: Use the toString representation of the type but trim it to the first new line. After
       // the newline there is information that is unrelated to the identity of the wildcard that
       // changes throughout the compile. This is a very hacky way to preserve the identity of the
@@ -391,11 +390,7 @@ public class JdtEnvironment {
         .setUniqueKey(uniqueKey)
         .setName(typeBinding.getName())
         .setKtVariance(KtInteropUtils.getKtVariance(typeBinding.getTypeAnnotations()))
-        // Wildcards (and captures) are never explicitly nullable, they depend on their bounds.
-        // Only mark a type variable as nullable if it has an explicit nullable annotation.
-        // TODO(b/236987392): Revisit when nullability tri-state is added to TypeVariable.
-        .setNullable(nullabilityAnnotation == NullabilityAnnotation.NULLABLE)
-        .setAnnotatedNonNullable(nullabilityAnnotation == NullabilityAnnotation.NON_NULLABLE)
+        .setNullabilityAnnotation(nullabilityAnnotation)
         .build();
   }
 
@@ -476,17 +471,11 @@ public class JdtEnvironment {
     switch (getNullabilityAnnotation(typeBinding, elementAnnotations)) {
       case NULLABLE:
         return true;
-      case NON_NULLABLE:
+      case NOT_NULLABLE:
         return false;
       default:
         return !inNullMarkedScope;
     }
-  }
-
-  private enum NullabilityAnnotation {
-    NULLABLE,
-    NON_NULLABLE,
-    NO_ANNOTATION
   }
 
   /** Return whether a type is annotated for nullablility and which type of annotation it has. */
@@ -503,7 +492,7 @@ public class JdtEnvironment {
       String annotationName = annotation.getAnnotationType().getQualifiedName();
 
       if (Nullability.isNonNullAnnotation(annotationName)) {
-        return NullabilityAnnotation.NON_NULLABLE;
+        return NullabilityAnnotation.NOT_NULLABLE;
       }
 
       if (Nullability.isNullableAnnotation(annotationName)) {
@@ -511,7 +500,7 @@ public class JdtEnvironment {
       }
     }
 
-    return NullabilityAnnotation.NO_ANNOTATION;
+    return NullabilityAnnotation.NONE;
   }
 
 
@@ -856,7 +845,7 @@ public class JdtEnvironment {
                     createTypeDescriptorWithNullability(
                         t, t.getTypeAnnotations(), inNullMarkedScope))
             .transform(TypeVariable.class::cast)
-            .transform(TypeVariable::toNonNullable);
+            .transform(TypeVariable::toDeclaration);
 
     ImmutableList<TypeDescriptor> typeArgumentTypeDescriptors =
         convertTypeArguments(methodBinding.getTypeArguments(), inNullMarkedScope);
@@ -1217,7 +1206,7 @@ public class JdtEnvironment {
                 getTypeArgumentTypeDescriptors(
                         typeBinding, /* inNullMarkedScope= */ isNullMarked, TypeVariable.class)
                     .stream()
-                    .map(TypeVariable::toNonNullable)
+                    .map(TypeVariable::toDeclaration)
                     .collect(toImmutableList()))
             .setVisibility(getVisibility(typeBinding))
             .setDeclaredMethodDescriptorsFactory(

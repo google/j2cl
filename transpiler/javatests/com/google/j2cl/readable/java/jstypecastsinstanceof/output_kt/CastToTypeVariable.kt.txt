@@ -42,6 +42,6 @@ open class CastToTypeVariable<T: CastToTypeVariable<T>?> {
  ): T {
   val o: Any? = Any()
   val a: Array<T>? = o as Array<T>?
-  return this as T
+  return this as (T & Any)
  }
 }
