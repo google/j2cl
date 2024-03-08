@@ -473,7 +473,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
                 // Consider the outer instance type to be nullable to be make the type consistent
                 // across all places where it is used (backing field and constructor parameters).
                 .toNullable())
-        .setSynthetic(true)
         .setFinal(true)
         .setSynthetic(true)
         .setOrigin(FieldOrigin.SYNTHETIC_OUTER_FIELD)
@@ -920,6 +919,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         .setOriginalJsInfo(bridgeMethodDescriptor.getJsInfo())
         .setEnclosingTypeDescriptor(this)
         .setDeclarationDescriptor(null)
+        .setTypeArgumentTypeDescriptors(ImmutableList.of())
         .makeBridge(origin, bridgeMethodDescriptor, targetMethodDescriptor)
         .setFinal(isFinal)
         .build();

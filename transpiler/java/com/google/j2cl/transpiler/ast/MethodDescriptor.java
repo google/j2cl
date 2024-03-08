@@ -1115,12 +1115,17 @@ public abstract class MethodDescriptor extends MemberDescriptor {
                     typeDescriptor.specializeTypeVariables(replacingTypeDescriptorByTypeVariable))
             .collect(toImmutableList());
 
+    // Specializing a declaration means specializing the type parameters; whereas specializing a
+    // usage site, means specializing the type variables that might appear in the current
+    // type arguments.
     ImmutableList<TypeDescriptor> specializedTypeArgumentDescriptors =
-        getTypeArgumentTypeDescriptors().stream()
-            .map(
-                typeDescriptor ->
-                    typeDescriptor.specializeTypeVariables(replacingTypeDescriptorByTypeVariable))
-            .collect(toImmutableList());
+        (isDeclaration() ? getTypeParameterTypeDescriptors() : getTypeArgumentTypeDescriptors())
+            .stream()
+                .map(
+                    typeDescriptor ->
+                        typeDescriptor.specializeTypeVariables(
+                            replacingTypeDescriptorByTypeVariable))
+                .collect(toImmutableList());
 
     return MethodDescriptor.Builder.from(this)
         .setDeclarationDescriptor(getDeclarationDescriptor())
@@ -1234,6 +1239,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
           // Clear properties that might have been carried over when creating this
           // descriptor from an existing one.
           .setDeclarationDescriptor(null)
+          .setTypeArgumentTypeDescriptors(ImmutableList.of())
           .setDefaultMethod(false)
           .setAbstract(false)
           .setNative(false)

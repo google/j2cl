@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import com.google.common.collect.ImmutableList;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
@@ -97,6 +98,7 @@ public class AddJavaLangObjectForwardingMethods extends NormalizationPass {
         MethodDescriptor.Builder.from(targetMethod)
             .setEnclosingTypeDescriptor(type.getTypeDescriptor())
             .setDeclarationDescriptor(null)
+            .setTypeArgumentTypeDescriptors(ImmutableList.of())
             .setNative(false)
             .build();
     return AstUtils.createForwardingMethod(

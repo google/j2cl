@@ -166,6 +166,7 @@ public final class LambdaImplementorTypeDescriptors {
         .setNative(false)
         // This is the declaration.
         .setDeclarationDescriptor(null)
+        .setTypeArgumentTypeDescriptors(ImmutableList.of())
         .setEnclosingTypeDescriptor(implementorTypeDescriptor)
         .setSynthetic(false)
         .setAbstract(false)

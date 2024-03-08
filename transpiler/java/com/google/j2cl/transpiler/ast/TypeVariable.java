@@ -163,7 +163,7 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
   @Override
   public Set<TypeVariable> getAllTypeVariables() {
     if (!isWildcardOrCapture()) {
-      return ImmutableSet.of(this.toNonNullable());
+      return ImmutableSet.of(toNonNullable());
     }
     return ImmutableSet.of();
   }
@@ -179,24 +179,35 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
 
       seen = new ImmutableSet.Builder<TypeVariable>().addAll(seen).add(this).build();
 
-      TypeDescriptor upperBoundTypeDescriptor = getUpperBoundTypeDescriptor();
-      TypeDescriptor lowerBoundTypeDescriptor = getLowerBoundTypeDescriptor();
+      TypeDescriptor specializedUpperBoundTypeDescriptor =
+          getUpperBoundTypeDescriptor()
+              .specializeTypeVariables(replacementTypeArgumentByTypeVariable, seen);
+      TypeDescriptor specializedLowerBoundTypeDescriptor =
+          getLowerBoundTypeDescriptor() == null
+              ? null
+              : getLowerBoundTypeDescriptor()
+                  .specializeTypeVariables(replacementTypeArgumentByTypeVariable, seen);
 
-      return createWildcardWithUpperAndLowerBound(
-          upperBoundTypeDescriptor.specializeTypeVariables(
-              replacementTypeArgumentByTypeVariable, seen),
-          lowerBoundTypeDescriptor != null
-              ? lowerBoundTypeDescriptor.specializeTypeVariables(
-                  replacementTypeArgumentByTypeVariable, seen)
-              : null);
+      if (specializedUpperBoundTypeDescriptor != getUpperBoundTypeDescriptor()
+          || specializedLowerBoundTypeDescriptor != getLowerBoundTypeDescriptor()) {
+        return createWildcardWithUpperAndLowerBound(
+            specializedUpperBoundTypeDescriptor, specializedLowerBoundTypeDescriptor);
+      }
+      return this;
     }
 
+    TypeVariable canonicalTypeVariable = toNonNullable();
+
     TypeDescriptor specializedTypeVariable =
-        replacementTypeArgumentByTypeVariable.apply(toNonNullable());
-    // In our current model if the type variable that is specialized is not isNullable it means that
-    // it does not have a @Nullable annotation, so we leave the specialized result alone, since
-    // it might be nullable and needs to stay the same.
-    return isNullable() ? specializedTypeVariable.toNullable() : specializedTypeVariable;
+        replacementTypeArgumentByTypeVariable.apply(canonicalTypeVariable);
+
+    if (canonicalTypeVariable != specializedTypeVariable) {
+      // In our current model if the type variable that is specialized is not isNullable it means
+      // that it does not have a @Nullable annotation, so we leave the specialized result alone,
+      // since it might be nullable and needs to stay the same.
+      return isNullable() ? specializedTypeVariable.toNullable() : specializedTypeVariable;
+    }
+    return this;
   }
 
   @Override
