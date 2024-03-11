@@ -10,7 +10,7 @@ def j2wasm_test(
         data = [],
         tags = [],
         optimize = False,
-        use_legacy_wasm_spec = True,
+        use_legacy_wasm_spec = False,
         **kwargs):
     """Macro for running a JUnit test cross compiled as a web test.
 
