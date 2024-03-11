@@ -30,7 +30,7 @@ public class LinkedHashMapTest extends TestMap {
   // should be a method-level class, however to avoid serialization warning made
   // static instead.
 
-  @J2ktIncompatible // LinkedHashMap is final in J2kt; LRU unsupported
+  @J2ktIncompatible // removeEldestEntry unsupported
   static class TestRemoveEldestMap<K, V> extends LinkedHashMap<K, V> {
 
     public K expectedKey;
@@ -175,7 +175,6 @@ public class LinkedHashMapTest extends TestMap {
    * Test method for 'java.util.LinkedHashMap.clone()'
    */
   @SuppressWarnings("unchecked")
-  @J2ktIncompatible // b/317230935
   public void testClone() {
     LinkedHashMap<String, String> srcMap = new LinkedHashMap<String, String>();
     checkEmptyLinkedHashMapAssumptions(srcMap);
