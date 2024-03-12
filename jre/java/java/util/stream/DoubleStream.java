@@ -154,22 +154,22 @@ public interface DoubleStream extends BaseStream<Double, DoubleStream> {
     Spliterator.OfDouble spliterator =
         new Spliterators.AbstractDoubleSpliterator(
             Long.MAX_VALUE, Spliterator.IMMUTABLE | Spliterator.ORDERED) {
-          private boolean first = true;
           private double next = seed;
-          private boolean terminated = false;
+          private boolean isFirst = true;
+          private boolean isTerminated = false;
 
           @Override
           public boolean tryAdvance(DoubleConsumer action) {
-            if (terminated) {
+            if (isTerminated) {
               return false;
             }
-            if (!first) {
+            if (!isFirst) {
               next = f.applyAsDouble(next);
             }
-            first = false;
+            isFirst = false;
 
             if (!hasNext.test(next)) {
-              terminated = true;
+              isTerminated = true;
               return false;
             }
             action.accept(next);

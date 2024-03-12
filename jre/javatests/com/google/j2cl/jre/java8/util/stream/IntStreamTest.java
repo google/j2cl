@@ -131,6 +131,25 @@ public class IntStreamTest extends EmulTestBase {
     assertEquals(array.length - 1, calledCount[0]);
     // Sanity check the values returned
     assertEquals(new int[] {0, 1, 2, 3, 4}, array);
+    // Check that base case works
+    assertEquals(new int[] {1, 2, 3, 4}, IntStream.iterate(1, x -> x < 5, x -> x + 1)
+            .toArray());
+    // Check that negative to positive works
+    assertEquals(new int[] {-2, -1, 0, 1, 2}, IntStream.iterate(-2, x -> x <= 2, x -> x + 1)
+            .toArray());
+    // Check that predicate always false (does not include the initial element if the predicate is false)
+    assertEquals(new int[0], IntStream.iterate(1, x -> false, x -> x + 1).toArray());
+    // Check non incrementing sequence with limit 0
+    assertEquals(new int[0], IntStream.iterate(1, x -> x < 5, x -> x)
+            .limit(0)
+            .toArray());
+    // Check decreasing sequence
+    assertEquals(new int[] {8, 4, 2, 1}, IntStream.iterate(8, x -> x > 0, x -> x / 2)
+            .toArray());
+    // Test with zero increment sequence
+    assertEquals(new int[] {1, 1, 1, 1}, IntStream.iterate(1, x -> x < 5, x -> x)
+            .limit(4)
+            .toArray());
   }
 
   public void testGenerate() {

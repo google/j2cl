@@ -132,6 +132,25 @@ public class DoubleStreamTest extends EmulTestBase {
     assertEquals(array.length - 1, calledCount[0]);
     // Sanity check the values returned
     assertEquals(new double[] {0, 1, 2, 3, 4}, array);
+    // Check that base case works
+    assertEquals(new double[] {1.0, 2.0, 3.0, 4.0}, DoubleStream.iterate(1.0, x -> x < 5, x -> x + 1)
+            .toArray());
+    // Check that negative to positive works
+    assertEquals(new double[] {-2.0, -0.5, 1.0}, DoubleStream.iterate(-2.0, x -> x <= 2, x -> x + 1.5)
+            .toArray());
+    // Check that predicate always false (does not include the initial element if the predicate is false)
+    assertEquals(new double[0], DoubleStream.iterate(1.0, x -> false, x -> x + 1).toArray());
+    // Check non incrementing sequence with limit 0
+    assertEquals(new double[0], DoubleStream.iterate(1.0, x -> x < 5, x -> x)
+            .limit(0)
+            .toArray());
+    // Check decreasing sequence
+    assertEquals(new double[] {1.0, 0.5, 0.25, 0.125}, DoubleStream.iterate(1.0, x -> x > 0.1, x -> x / 2)
+            .toArray());
+    // Test with zero increment sequence
+    assertEquals(new double[] {1.0, 1.0, 1.0, 1.0}, DoubleStream.iterate(1.0, x -> x < 5, x -> x)
+            .limit(4)
+            .toArray());
   }
 
   public void testGenerate() {

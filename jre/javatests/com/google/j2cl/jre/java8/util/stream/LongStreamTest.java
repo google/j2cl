@@ -130,6 +130,25 @@ public class LongStreamTest extends EmulTestBase {
     assertEquals(array.length - 1, calledCount[0]);
     // Sanity check the values returned
     assertEquals(new long[] {0, 1, 2, 3, 4}, array);
+    // Check that base case works
+    assertEquals(new long[] {1, 2, 3, 4}, LongStream.iterate(1, x -> x < 5, x -> x + 1)
+            .toArray());
+    // Check that negative to positive works
+    assertEquals(new long[] {-2, -1, 0, 1, 2}, LongStream.iterate(-2, x -> x <= 2, x -> x + 1)
+            .toArray());
+    // Check that predicate always false (does not include the initial element if the predicate is false)
+    assertEquals(new long[0], LongStream.iterate(1, x -> false, x -> x + 1).toArray());
+    // Check non incrementing sequence with limit 0
+    assertEquals(new long[0], LongStream.iterate(1, x -> x < 5, x -> x)
+            .limit(0)
+            .toArray());
+    // Check decreasing sequence
+    assertEquals(new long[] {8, 4, 2, 1}, LongStream.iterate(8, x -> x > 0, x -> x / 2)
+            .toArray());
+    // Test with zero increment sequence
+    assertEquals(new long[] {1, 1, 1, 1}, LongStream.iterate(1, x -> x < 5, x -> x)
+            .limit(4)
+            .toArray());
   }
 
   public void testGenerate() {
