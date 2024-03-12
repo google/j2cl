@@ -70,11 +70,6 @@ alias(
 )
 
 alias(
-    name = "binaryen-legacy",
-    actual = "@com_google_binaryen//:wasm-opt-legacy",
-)
-
-alias(
     name = "binaryen",
     actual = "@com_google_binaryen//:wasm-opt",
 )

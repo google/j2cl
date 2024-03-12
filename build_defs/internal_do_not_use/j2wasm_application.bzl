@@ -225,9 +225,8 @@ def _impl_j2wasm_application(ctx):
         args.add(input)
         inputs.append(input)
 
-        binaryen = "_binaryen_legacy" if ctx.attr.use_legacy_wasm_spec else "_binaryen"
         ctx.actions.run(
-            executable = getattr(ctx.executable, binaryen),
+            executable = ctx.executable._binaryen,
             arguments = [args],
             inputs = inputs,
             outputs = outputs,
@@ -370,13 +369,6 @@ _J2WASM_APP_ATTRS = {
         executable = True,
         default = Label(
             "//build_defs/internal_do_not_use:binaryen",
-        ),
-    ),
-    "_binaryen_legacy": attr.label(
-        cfg = "exec",
-        executable = True,
-        default = Label(
-            "//build_defs/internal_do_not_use:binaryen-legacy",
         ),
     ),
     "_bundler": attr.label(

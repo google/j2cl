@@ -71,19 +71,6 @@ cc_library(
     ]),
 )
 
-cc_library(
-    name = "binaryen_lib-legacy",
-    srcs = BINARYEN_LIB_SRCS,
-    hdrs = BINARYEN_LIB_HDRS,
-    copts = BINARYEN_COPTS,
-    defines = ["USE_LEGACY_GC_ENCODINGS"] + BINARYEN_LIB_DEFINES,
-    includes = ["src"],
-    textual_hdrs = glob([
-        "src/**/*.inc",
-        "src/**/*.def",
-    ]),
-)
-
 cc_binary(
     name = "wasm-opt",
     srcs = [
@@ -106,30 +93,6 @@ cc_binary(
     linkopts = BINARYEN_LINKOPTS,
     includes = ["src/tools"],
     deps = [":binaryen_lib"],
-)
-
-cc_binary(
-    name = "wasm-opt-legacy",
-    srcs = [
-        "src/tools/execution-results.h",
-        "src/tools/fuzzing.h",
-        "src/tools/fuzzing/fuzzing.cpp",
-        "src/tools/fuzzing/heap-types.cpp",
-        "src/tools/fuzzing/heap-types.h",
-        "src/tools/fuzzing/parameters.h",
-        "src/tools/fuzzing/random.cpp",
-        "src/tools/fuzzing/random.h",
-        "src/tools/js-wrapper.h",
-        "src/tools/optimization-options.h",
-        "src/tools/spec-wrapper.h",
-        "src/tools/tool-options.h",
-        "src/tools/wasm-opt.cpp",
-        "src/tools/wasm2c-wrapper.h",
-    ],
-    copts = BINARYEN_COPTS,
-    linkopts = BINARYEN_LINKOPTS,
-    includes = ["src/tools"],
-    deps = [":binaryen_lib-legacy"],
 )
 
 py_binary(
