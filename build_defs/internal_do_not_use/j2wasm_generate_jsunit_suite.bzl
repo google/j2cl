@@ -36,7 +36,6 @@ def j2wasm_generate_jsunit_suite(
         deps,
         tags = [],
         optimize = False,
-        use_legacy_wasm_spec = True,
         defines = {},
         exec_properties = {}):
     """Macro for cross compiling a JUnit Suite to .wasm file.
@@ -101,7 +100,6 @@ def j2wasm_generate_jsunit_suite(
         testonly = 1,
         tags = tags + ["manual", "notap"],
         exec_properties = exec_properties,
-        use_legacy_wasm_spec = use_legacy_wasm_spec,
     )
 
     # Re-expose the target as "_dep" for test infra to depend on.
