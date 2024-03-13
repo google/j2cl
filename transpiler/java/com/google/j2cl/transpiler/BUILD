@@ -100,7 +100,7 @@ java_library(
 
 JVM_FLAGS = [
     "-XX:+TieredCompilation",
-    "-Xss2M",
+    "-Xss3M",
     # Disable bytecode verification to save from class-loading time.
     "-Xverify:none",
     "-Dj2cl.deterministicTimestamps=true",
@@ -110,7 +110,7 @@ JVM_FLAGS = [
 # When modular compilation for Wasm is enabled, this can be removed in favor
 # of using the same flags as non-wasm transpilation.
 JVM_FLAGS_FOR_LARGE_HEAP = [
-    "-Xss2M",
+    "-Xss3M",
     # Disable bytecode verification to save from class-loading time.
     "-Xverify:none",
     "-Dj2cl.deterministicTimestamps=true",
