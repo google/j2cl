@@ -25,7 +25,7 @@ goog.module("%MODULE_NAME%.j2wasm");
 async function instantiateStreaming(urlOrResponse) {
     const response =
         typeof urlOrResponse == "string" ? fetch(urlOrResponse) : urlOrResponse;
-    const module = await WebAssembly.compileStreaming(response, { builtins: ["js-string"] });
+    const module = await WebAssembly.compileStreaming(response, { "builtins": ["js-string"] });
     return WebAssembly.instantiate(module, prepareImports(module));
 }
 
@@ -43,7 +43,7 @@ async function instantiateStreaming(urlOrResponse) {
  * @suppress {checkTypes} Externs is missing options parameter (phase 2)
  */
 function instantiateBlocking(moduleObject) {
-    const module = new WebAssembly.Module(moduleObject, { builtins: ["js-string"] });
+    const module = new WebAssembly.Module(moduleObject, { "builtins": ["js-string"] });
     return new WebAssembly.Instance(module, prepareImports(module));
 }
 
