@@ -15,9 +15,11 @@
  */
 package com.google.j2cl.transpiler.ast;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
+import javax.annotation.Nullable;
 
 /** Common logic for loop construct statement. */
 @Visitable
@@ -27,6 +29,7 @@ public abstract class LoopStatement extends Statement {
     super(sourcePosition);
   }
 
+  @Nullable
   public abstract Expression getConditionExpression();
 
   public abstract Statement getBody();
@@ -46,20 +49,24 @@ public abstract class LoopStatement extends Statement {
       return loopStatement.toBuilder();
     }
 
+    @CanIgnoreReturnValue
     public final T setConditionExpression(Expression conditionExpression) {
       this.conditionExpression = conditionExpression;
       return getThis();
     }
 
+    @CanIgnoreReturnValue
     public T setBody(Statement body) {
       this.body = body;
       return getThis();
     }
 
+    @CanIgnoreReturnValue
     public T setBodyStatements(Statement... statements) {
       return setBody(Block.newBuilder().setStatements(statements).build());
     }
 
+    @CanIgnoreReturnValue
     public final T setSourcePosition(SourcePosition sourcePosition) {
       this.sourcePosition = sourcePosition;
       return getThis();
