@@ -126,9 +126,55 @@ public class StreamTest extends EmulTestBase {
   }
 
   public void testIterate() {
+    assertEquals(new Integer[] {0, 1, 2, 3, 4}, Stream.iterate(0, i -> i + 1).limit(5).toArray());
     assertEquals(
         new Integer[] {10, 11, 12, 13, 14},
         Stream.iterate(0, i -> i + 1).skip(10).limit(5).toArray(Integer[]::new));
+
+    // Check that the function is called the correct number of times
+    int[] calledCount = {0};
+    Integer[] array =
+        Stream.iterate(
+                0,
+                val -> {
+                  calledCount[0]++;
+                  return val + 1;
+                })
+            .limit(5)
+            .toArray(Integer[]::new);
+    // Verify that the function was called for each value after the seed
+    assertEquals(array.length - 1, calledCount[0]);
+    // Sanity check the values returned
+    assertEquals(new Integer[] {0, 1, 2, 3, 4}, array);
+  }
+
+  public void testIterate_predicate() {
+    // Check that base case works
+    assertEquals(
+        new Integer[] {1, 2, 3, 4},
+        Stream.iterate(1, x -> x < 5, x -> x + 1).toArray(Integer[]::new));
+
+    // Check that negative to positive works
+    assertEquals(
+        new Integer[] {-2, -1, 0, 1, 2},
+        Stream.iterate(-2, x -> x <= 2, x -> x + 1).toArray(Integer[]::new));
+
+    // Check the initial element is not included if the predicate is x -> false
+    assertEquals(new Integer[0], Stream.iterate(1, x -> false, x -> x + 1).toArray());
+
+    // Check non incrementing sequence with limit 0
+    assertEquals(
+        new Integer[0], Stream.iterate(1, x -> x < 5, x -> x).limit(0).toArray(Integer[]::new));
+
+    // Check decreasing sequence
+    assertEquals(
+        new Integer[] {8, 4, 2, 1},
+        Stream.iterate(8, x -> x > 0, x -> x / 2).toArray(Integer[]::new));
+
+    // Test with zero increment sequence
+    assertEquals(
+        new Integer[] {1, 1, 1, 1},
+        Stream.iterate(1, x -> x < 5, x -> x).limit(4).toArray(Integer[]::new));
   }
 
   public void testGenerate() {

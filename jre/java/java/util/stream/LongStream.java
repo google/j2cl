@@ -150,15 +150,32 @@ public interface LongStream extends BaseStream<Long, LongStream> {
   }
 
   static LongStream iterate(long seed, LongUnaryOperator f) {
-    AbstractLongSpliterator spliterator =
+    return iterate(seed, ignore -> true, f);
+  }
+
+  static LongStream iterate(long seed, LongPredicate hasNext, LongUnaryOperator f) {
+    Spliterator.OfLong spliterator =
         new Spliterators.AbstractLongSpliterator(
             Long.MAX_VALUE, Spliterator.IMMUTABLE | Spliterator.ORDERED) {
           private long next = seed;
+          private boolean isFirst = true;
+          private boolean isTerminated = false;
 
           @Override
           public boolean tryAdvance(LongConsumer action) {
+            if (isTerminated) {
+              return false;
+            }
+            if (!isFirst) {
+              next = f.applyAsLong(next);
+            }
+            isFirst = false;
+
+            if (!hasNext.test(next)) {
+              isTerminated = true;
+              return false;
+            }
             action.accept(next);
-            next = f.applyAsLong(next);
             return true;
           }
         };

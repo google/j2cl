@@ -111,9 +111,48 @@ public class LongStreamTest extends EmulTestBase {
   }
 
   public void testIterate() {
+    assertEquals(new long[] {0, 1, 2, 3, 4}, LongStream.iterate(0, i -> i + 1).limit(5).toArray());
     assertEquals(
         new long[] {10L, 11L, 12L, 13L, 14L},
         LongStream.iterate(0L, l -> l + 1L).skip(10).limit(5).toArray());
+
+    // Check that the function is called the correct number of times
+    int[] calledCount = {0};
+    long[] array =
+        LongStream.iterate(
+                0,
+                val -> {
+                  calledCount[0]++;
+                  return val + 1;
+                })
+            .limit(5)
+            .toArray();
+    // Verify that the function was called for each value after the seed
+    assertEquals(array.length - 1, calledCount[0]);
+    // Sanity check the values returned
+    assertEquals(new long[] {0, 1, 2, 3, 4}, array);
+  }
+
+  public void testIterate_predicate() {
+    // Check that base case works
+    assertEquals(new long[] {1, 2, 3, 4}, LongStream.iterate(1, x -> x < 5, x -> x + 1).toArray());
+
+    // Check that negative to positive works
+    assertEquals(
+        new long[] {-2, -1, 0, 1, 2}, LongStream.iterate(-2, x -> x <= 2, x -> x + 1).toArray());
+
+    // Check the initial element is not included if the predicate is x -> false
+    assertEquals(new long[0], LongStream.iterate(1, x -> false, x -> x + 1).toArray());
+
+    // Check non incrementing sequence with limit 0
+    assertEquals(new long[0], LongStream.iterate(1, x -> x < 5, x -> x).limit(0).toArray());
+
+    // Check decreasing sequence
+    assertEquals(new long[] {8, 4, 2, 1}, LongStream.iterate(8, x -> x > 0, x -> x / 2).toArray());
+
+    // Test with zero increment sequence
+    assertEquals(
+        new long[] {1, 1, 1, 1}, LongStream.iterate(1, x -> x < 5, x -> x).limit(4).toArray());
   }
 
   public void testGenerate() {

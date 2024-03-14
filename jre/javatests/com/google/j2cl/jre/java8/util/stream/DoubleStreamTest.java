@@ -114,8 +114,54 @@ public class DoubleStreamTest extends EmulTestBase {
 
   public void testIterate() {
     assertEquals(
+        new double[] {0, 1, 2, 3, 4}, DoubleStream.iterate(0, i -> i + 1).limit(5).toArray());
+    assertEquals(
         new double[] {10d, 11d, 12d, 13d, 14d},
         DoubleStream.iterate(0d, l -> l + 1d).skip(10).limit(5).toArray());
+
+    // Check that the function is called the correct number of times
+    int[] calledCount = {0};
+    double[] array =
+        DoubleStream.iterate(
+                0,
+                val -> {
+                  calledCount[0]++;
+                  return val + 1;
+                })
+            .limit(5)
+            .toArray();
+    // Verify that the function was called for each value after the seed
+    assertEquals(array.length - 1, calledCount[0]);
+    // Sanity check the values returned
+    assertEquals(new double[] {0, 1, 2, 3, 4}, array);
+  }
+
+  public void testIterate_predicate() {
+    // Check that base case works
+    assertEquals(
+        new double[] {1.0, 2.0, 3.0, 4.0},
+        DoubleStream.iterate(1.0, x -> x < 5, x -> x + 1).toArray());
+
+    // Check that negative to positive works
+    assertEquals(
+        new double[] {-2.0, -0.5, 1.0},
+        DoubleStream.iterate(-2.0, x -> x <= 2, x -> x + 1.5).toArray());
+
+    // Check the initial element is not included if the predicate is x -> false
+    assertEquals(new double[0], DoubleStream.iterate(1.0, x -> false, x -> x + 1).toArray());
+
+    // Check non incrementing sequence with limit 0
+    assertEquals(new double[0], DoubleStream.iterate(1.0, x -> x < 5, x -> x).limit(0).toArray());
+
+    // Check decreasing sequence
+    assertEquals(
+        new double[] {1.0, 0.5, 0.25, 0.125},
+        DoubleStream.iterate(1.0, x -> x > 0.1, x -> x / 2).toArray());
+
+    // Test with zero increment sequence
+    assertEquals(
+        new double[] {1.0, 1.0, 1.0, 1.0},
+        DoubleStream.iterate(1.0, x -> x < 5, x -> x).limit(4).toArray());
   }
 
   public void testGenerate() {

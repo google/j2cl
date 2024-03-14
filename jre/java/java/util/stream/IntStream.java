@@ -150,20 +150,35 @@ public interface IntStream extends BaseStream<Integer, IntStream> {
   }
 
   static IntStream iterate(int seed, IntUnaryOperator f) {
+    return iterate(seed, ignore -> true, f);
+  }
 
-    AbstractIntSpliterator spliterator =
+  static IntStream iterate(int seed, IntPredicate hasNext, IntUnaryOperator f) {
+    Spliterator.OfInt spliterator =
         new Spliterators.AbstractIntSpliterator(
             Long.MAX_VALUE, Spliterator.IMMUTABLE | Spliterator.ORDERED) {
           private int next = seed;
+          private boolean isFirst = true;
+          private boolean isTerminated = false;
 
           @Override
           public boolean tryAdvance(IntConsumer action) {
+            if (isTerminated) {
+              return false;
+            }
+            if (!isFirst) {
+              next = f.applyAsInt(next);
+            }
+            isFirst = false;
+
+            if (!hasNext.test(next)) {
+              isTerminated = true;
+              return false;
+            }
             action.accept(next);
-            next = f.applyAsInt(next);
             return true;
           }
         };
-
     return StreamSupport.intStream(spliterator, false);
   }
 

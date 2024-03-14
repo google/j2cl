@@ -151,15 +151,32 @@ public interface Stream<T> extends BaseStream<T, Stream<T>> {
   }
 
   static <T> Stream<T> iterate(T seed, UnaryOperator<T> f) {
+    return iterate(seed, ignore -> true, f);
+  }
+
+  static <T> Stream<T> iterate(T seed, Predicate<? super T> hasNext, UnaryOperator<T> f) {
     AbstractSpliterator<T> spliterator =
         new Spliterators.AbstractSpliterator<T>(
             Long.MAX_VALUE, Spliterator.IMMUTABLE | Spliterator.ORDERED) {
           private T next = seed;
+          private boolean isFirst = true;
+          private boolean isTerminated = false;
 
           @Override
           public boolean tryAdvance(Consumer<? super T> action) {
+            if (isTerminated) {
+              return false;
+            }
+            if (!isFirst) {
+              next = f.apply(next);
+            }
+            isFirst = false;
+
+            if (!hasNext.test(next)) {
+              isTerminated = true;
+              return false;
+            }
             action.accept(next);
-            next = f.apply(next);
             return true;
           }
         };
