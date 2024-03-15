@@ -104,5 +104,11 @@ public class Main {
     assertTrue("\uD801\t".charAt(1) == 0x9);
     assertTrue("\uD801\t".codePointAt(0) == 0xd801);
     assertTrue("\uD801\t".codePointAt(1) == 0x9);
+
+    // Test concatenation involving malformed UTF-16.
+    String faihu = "\uD800\uDF46";
+    String fai = "\uD800";
+    String hu = "\uDF46";
+    assertTrue(faihu.equals(fai + hu));
   }
 }
