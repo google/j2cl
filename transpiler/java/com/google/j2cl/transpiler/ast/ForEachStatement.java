@@ -16,18 +16,15 @@
 package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.collect.ImmutableList;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
-import javax.annotation.Nullable;
 
 /** For each Statement. */
 @Visitable
-public class ForEachStatement extends LoopStatement {
+public class ForEachStatement extends Statement {
   @Visitable Variable loopVariable;
   @Visitable Expression iterableExpression;
   @Visitable Statement body;
@@ -51,13 +48,6 @@ public class ForEachStatement extends LoopStatement {
     return iterableExpression;
   }
 
-  @Override
-  @Nullable
-  public Expression getConditionExpression() {
-    return null;
-  }
-
-  @Override
   public Statement getBody() {
     return body;
   }
@@ -84,50 +74,49 @@ public class ForEachStatement extends LoopStatement {
     return Visitor_ForEachStatement.visit(processor, this);
   }
 
-  @Override
-  Builder toBuilder() {
-    return new Builder(this);
-  }
-
   public static Builder newBuilder() {
     return new Builder();
   }
 
   /** Builder for ForEachStatement. */
-  public static class Builder extends LoopStatement.Builder<Builder, ForEachStatement> {
+  public static class Builder {
     private Variable loopVariable;
     private Expression iterableExpression;
+    private Statement body;
+    private SourcePosition sourcePosition;
 
     public static Builder from(ForEachStatement forEachStatement) {
-      return new Builder(forEachStatement);
+      return newBuilder()
+          .setLoopVariable(forEachStatement.getLoopVariable())
+          .setIterableExpression(forEachStatement.getIterableExpression())
+          .setBody(forEachStatement.getBody())
+          .setSourcePosition(forEachStatement.getSourcePosition());
     }
 
     private Builder() {}
 
-    private Builder(ForEachStatement forEachStatement) {
-      super(forEachStatement);
-      setLoopVariable(forEachStatement.getLoopVariable());
-      setIterableExpression(forEachStatement.getIterableExpression());
-    }
-
-    @CanIgnoreReturnValue
     public Builder setLoopVariable(Variable loopVariable) {
       this.loopVariable = loopVariable;
       return this;
     }
 
-    @CanIgnoreReturnValue
     public Builder setIterableExpression(Expression iterableExpression) {
       this.iterableExpression = iterableExpression;
       return this;
     }
 
-    @Override
-    protected ForEachStatement doCreateInvocation(
-        Expression conditionExpression, Statement body, SourcePosition sourcePosition) {
-      checkState(conditionExpression == null);
+    public Builder setBody(Statement body) {
+      this.body = body;
+      return this;
+    }
+
+    public Builder setSourcePosition(SourcePosition sourcePosition) {
+      this.sourcePosition = sourcePosition;
+      return this;
+    }
+
+    public ForEachStatement build() {
       return new ForEachStatement(sourcePosition, loopVariable, iterableExpression, body);
     }
   }
-
 }

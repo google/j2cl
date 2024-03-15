@@ -153,7 +153,7 @@ internal data class StatementRenderer(
       DO_KEYWORD,
       statementSource(doWhileStatement.body),
       WHILE_KEYWORD,
-      inParentheses(expressionSource(doWhileStatement.conditionExpression!!)),
+      inParentheses(expressionSource(doWhileStatement.conditionExpression)),
     )
 
   private fun expressionStatementSource(expressionStatement: ExpressionStatement): Source =
@@ -265,7 +265,7 @@ internal data class StatementRenderer(
   private fun whileStatementSource(whileStatement: WhileStatement): Source =
     spaceSeparated(
       WHILE_KEYWORD,
-      inParentheses(expressionSource(whileStatement.conditionExpression!!)),
+      inParentheses(expressionSource(whileStatement.conditionExpression)),
       statementSource(whileStatement.body),
     )
 

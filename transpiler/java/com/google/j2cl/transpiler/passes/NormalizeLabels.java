@@ -19,6 +19,7 @@ import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.BreakStatement;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.ContinueStatement;
+import com.google.j2cl.transpiler.ast.ForEachStatement;
 import com.google.j2cl.transpiler.ast.Label;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.LoopStatement;
@@ -51,6 +52,14 @@ public class NormalizeLabels extends NormalizationPass {
           }
 
           @Override
+          public boolean shouldProcessForEachStatement(ForEachStatement forEachStatement) {
+            Label enclosingLabel = getEnclosingLabel("FOR_EACH");
+            enclosingBreakLabels.push(enclosingLabel);
+            enclosingContinueLabels.push(enclosingLabel);
+            return true;
+          }
+
+          @Override
           public boolean shouldProcessSwitchStatement(SwitchStatement switchStatement) {
             // Note that Switch statements are never targets of continue statements.
             enclosingBreakLabels.push(getEnclosingLabel("SWITCH"));
@@ -67,6 +76,12 @@ public class NormalizeLabels extends NormalizationPass {
           public Statement rewriteLoopStatement(LoopStatement loopStatement) {
             enclosingContinueLabels.pop();
             return ensureLabeled(loopStatement);
+          }
+
+          @Override
+          public Node rewriteForEachStatement(ForEachStatement forEachStatement) {
+            enclosingContinueLabels.pop();
+            return ensureLabeled(forEachStatement);
           }
 
           @Override

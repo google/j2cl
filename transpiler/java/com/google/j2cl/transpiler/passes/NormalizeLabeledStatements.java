@@ -20,6 +20,7 @@ import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.BooleanLiteral;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DoWhileStatement;
+import com.google.j2cl.transpiler.ast.ForEachStatement;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.LoopStatement;
 import com.google.j2cl.transpiler.ast.Node;
@@ -34,7 +35,7 @@ public class NormalizeLabeledStatements extends NormalizationPass {
           @Override
           public Node rewriteLabeledStatement(LabeledStatement labeledStatement) {
             Statement statement = labeledStatement.getStatement();
-            return statement instanceof LoopStatement
+            return statement instanceof LoopStatement || statement instanceof ForEachStatement
                 ? labeledStatement
                 : LabeledStatement.Builder.from(labeledStatement)
                     .setStatement(
