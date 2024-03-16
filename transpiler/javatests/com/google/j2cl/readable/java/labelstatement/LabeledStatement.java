@@ -63,5 +63,20 @@ public class LabeledStatement {
     }
   }
 
+  public void nestedScopes() {
+    // Test a lexically nested labeled statement that are do not conflict since they are in
+    // different scopes.
+    LABEL:
+    do {
+      new Object() {
+        void m() {
+          // TODO(b/329892945) : Uncomment when bug is fixed.
+          // LABEL:
+          // do {} while (false);
+        }
+      };
+    } while (false);
+  }
+
   private void foo() {}
 }

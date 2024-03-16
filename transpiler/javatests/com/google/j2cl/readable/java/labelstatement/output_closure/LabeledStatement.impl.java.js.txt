@@ -3,6 +3,8 @@ goog.module('labelstatement.LabeledStatement$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $1 = goog.forwardDeclare('labelstatement.LabeledStatement.$1$impl');
+
 class LabeledStatement extends j_l_Object {
  /** @protected @nodts */
  constructor() {
@@ -55,6 +57,12 @@ class LabeledStatement extends j_l_Object {
   }
  }
  /** @nodts */
+ m_nestedScopes__void() {
+  LABEL: do {
+   $1.$create__labelstatement_LabeledStatement(this);
+  } while (false);
+ }
+ /** @nodts */
  m_foo__void_$p_labelstatement_LabeledStatement() {}
  /** @nodts */
  static $clinit() {
@@ -68,7 +76,9 @@ class LabeledStatement extends j_l_Object {
  }
  
  /** @nodts */
- static $loadModules() {}
+ static $loadModules() {
+  $1 = goog.module.get('labelstatement.LabeledStatement.$1$impl');
+ }
 }
 $Util.$setClassMetadata(LabeledStatement, 'labelstatement.LabeledStatement');
 

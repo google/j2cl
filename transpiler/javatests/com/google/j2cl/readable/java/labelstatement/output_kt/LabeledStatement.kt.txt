@@ -19,6 +19,7 @@
 package labelstatement
 
 import javaemul.lang.*
+import kotlin.Any
 import kotlin.OptIn
 import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
@@ -78,6 +79,13 @@ open class LabeledStatement {
     }
    } while (false)
   } while (false)
+ }
+
+ @ObjCName("nestedScopes")
+ open fun nestedScopes() {
+  object : Any() {
+   internal fun m_pp_labelstatement() {}
+  }
  }
 
  internal fun foo_private_2() {}

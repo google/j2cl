@@ -14,8 +14,27 @@
   (field $m_block__void (ref $function.m_block__void))
   (field $m_ifStatement__void (ref $function.m_ifStatement__void))
   (field $m_loopStatements__void (ref $function.m_loopStatements__void))
+  (field $m_nestedScopes__void (ref $function.m_nestedScopes__void))
   (field $m_simpleStatement__void (ref $function.m_simpleStatement__void))
   (field $m_switchStatement__void (ref $function.m_switchStatement__void))
+  ))
+ )
+
+ ;;; Code for labelstatement.LabeledStatement.1 [type definition]
+ (type $labelstatement.LabeledStatement.1 (sub $java.lang.Object (struct
+  (field $vtable (ref $labelstatement.LabeledStatement.1.vtable))
+  (field $itable (ref $itable))
+  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+  (field $$outer_this@labelstatement.LabeledStatement.1 (mut (ref null $labelstatement.LabeledStatement)))
+  ))
+ )
+ (type $labelstatement.LabeledStatement.1.vtable (sub $java.lang.Object.vtable (struct
+  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_m__void_$pp_labelstatement (ref $function.m_m__void_$pp_labelstatement))
   ))
  )
 
@@ -30,8 +49,21 @@
   (ref.func $m_block__void@labelstatement.LabeledStatement)
   (ref.func $m_ifStatement__void@labelstatement.LabeledStatement)
   (ref.func $m_loopStatements__void@labelstatement.LabeledStatement)
+  (ref.func $m_nestedScopes__void@labelstatement.LabeledStatement)
   (ref.func $m_simpleStatement__void@labelstatement.LabeledStatement)
   (ref.func $m_switchStatement__void@labelstatement.LabeledStatement)
+ )
+)
+
+;;; Code for labelstatement.LabeledStatement.1 [vtable.init]
+(global $labelstatement.LabeledStatement.1.vtable (ref $labelstatement.LabeledStatement.1.vtable)
+ (struct.new $labelstatement.LabeledStatement.1.vtable
+  (ref.func $$getClassImpl__java_lang_Class@labelstatement.LabeledStatement.1)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_m__void_$pp_labelstatement@labelstatement.LabeledStatement.1)
  )
 )
 
@@ -43,6 +75,17 @@
  (ref.null $java.lang.Class)
 )
 (global $$string_|labelstateme...|@labelstatement.LabeledStatement (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
+
+;;; Code for labelstatement.LabeledStatement.1 [static fields]
+(global $$class-initialized@labelstatement.LabeledStatement.1 (mut i32)
+ (i32.const 0)
+)
+(global $$class@labelstatement.LabeledStatement.1 (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$string_|labelstateme...|@labelstatement.LabeledStatement.1 (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
 
@@ -209,10 +252,33 @@
 )
 (elem declare func $m_switchStatement__void@labelstatement.LabeledStatement)
 
+;;; void LabeledStatement.nestedScopes()
+(func $m_nestedScopes__void@labelstatement.LabeledStatement
+ (type $function.m_nestedScopes__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ labelstatement/LabeledStatement.java:66:14
+ (local $this (ref null $labelstatement.LabeledStatement))
+ (local.set $this (ref.cast (ref $labelstatement.LabeledStatement) (local.get $this.untyped)))
+ (block
+  ;;@ labelstatement/LabeledStatement.java:69:4
+  (block $LABEL.BREAK
+   (loop
+    (block $LABEL.CONTINUE
+     (block
+      ;;@ labelstatement/LabeledStatement.java:71:6
+      (drop (call $$create__labelstatement_LabeledStatement@labelstatement.LabeledStatement.1 (local.get $this)))
+     )
+    )
+   )
+  )
+ )
+)
+(elem declare func $m_nestedScopes__void@labelstatement.LabeledStatement)
+
 ;;; void LabeledStatement.foo()
 (func $m_foo__void_$p_labelstatement_LabeledStatement@labelstatement.LabeledStatement
  (param $this (ref null $labelstatement.LabeledStatement))
- ;;@ labelstatement/LabeledStatement.java:66:15
+ ;;@ labelstatement/LabeledStatement.java:81:15
  (block
  )
 )
@@ -273,5 +339,109 @@
   )
   (global.set $$string_|labelstateme...|@labelstatement.LabeledStatement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "labelstatement.LabeledStatement")))
   (return (global.get $$string_|labelstateme...|@labelstatement.LabeledStatement))
+ )
+)
+
+;;; Code for labelstatement.LabeledStatement.1 [methods]
+
+;;; <anonymous> extends Object <anonymous> extends Object.$create(LabeledStatement $outer_this)
+(func $$create__labelstatement_LabeledStatement@labelstatement.LabeledStatement.1
+ (param $$outer_this (ref null $labelstatement.LabeledStatement))
+ (result (ref null $labelstatement.LabeledStatement.1))
+ ;;@ labelstatement/LabeledStatement.java:71:19
+ (local $$instance (ref null $labelstatement.LabeledStatement.1))
+ (block
+  ;;@ labelstatement/LabeledStatement.java:71:19
+  (call $$clinit__void_<once>_@labelstatement.LabeledStatement.1 )
+  ;;@ labelstatement/LabeledStatement.java:71:19
+  (local.set $$instance (struct.new $labelstatement.LabeledStatement.1 (ref.as_non_null (global.get $labelstatement.LabeledStatement.1.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $labelstatement.LabeledStatement)))
+  ;;@ labelstatement/LabeledStatement.java:71:19
+  (call $$ctor__labelstatement_LabeledStatement__void_$p_labelstatement_LabeledStatement_1@labelstatement.LabeledStatement.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  ;;@ labelstatement/LabeledStatement.java:71:19
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> extends Object.$ctor(LabeledStatement $outer_this)
+(func $$ctor__labelstatement_LabeledStatement__void_$p_labelstatement_LabeledStatement_1@labelstatement.LabeledStatement.1
+ (param $this (ref null $labelstatement.LabeledStatement.1))
+ (param $$outer_this (ref null $labelstatement.LabeledStatement))
+ ;;@ labelstatement/LabeledStatement.java:71:19
+ (block
+  ;;@ labelstatement/LabeledStatement.java:71:19
+  (struct.set $labelstatement.LabeledStatement.1 $$outer_this@labelstatement.LabeledStatement.1 (local.get $this) (local.get $$outer_this))
+  ;;@ labelstatement/LabeledStatement.java:71:19
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void <anonymous> extends Object.m()
+(func $m_m__void_$pp_labelstatement@labelstatement.LabeledStatement.1
+ (type $function.m_m__void_$pp_labelstatement)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ labelstatement/LabeledStatement.java:72:13
+ (local $this (ref null $labelstatement.LabeledStatement.1))
+ (local.set $this (ref.cast (ref $labelstatement.LabeledStatement.1) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_m__void_$pp_labelstatement@labelstatement.LabeledStatement.1)
+
+;;; void <anonymous> extends Object.$clinit()
+(func $$clinit__void_<once>_@labelstatement.LabeledStatement.1
+ ;;@ labelstatement/LabeledStatement.java:71:19
+ (block
+  ;;@ labelstatement/LabeledStatement.java:71:19
+  (if (global.get $$class-initialized@labelstatement.LabeledStatement.1)
+   (then
+    ;;@ labelstatement/LabeledStatement.java:71:19
+    (return )
+   )
+  )
+  ;;@ labelstatement/LabeledStatement.java:71:19
+  (global.set $$class-initialized@labelstatement.LabeledStatement.1 (i32.const 1))
+  ;;@ labelstatement/LabeledStatement.java:71:19
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> <anonymous> extends Object.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@labelstatement.LabeledStatement.1
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@labelstatement.LabeledStatement.1)))
+   (then
+    (return (global.get $$class@labelstatement.LabeledStatement.1))
+   )
+  )
+  (global.set $$class@labelstatement.LabeledStatement.1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|labelstateme...|__java_lang_String_<once>_@labelstatement.LabeledStatement.1 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@labelstatement.LabeledStatement.1))
+ )
+)
+
+;;; Class<?> <anonymous> extends Object.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@labelstatement.LabeledStatement.1
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $labelstatement.LabeledStatement.1))
+ (local.set $this (ref.cast (ref $labelstatement.LabeledStatement.1) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@labelstatement.LabeledStatement.1 ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@labelstatement.LabeledStatement.1)
+
+;;; String <anonymous> extends Object.$getString_|labelstateme...|()
+(func $$getString_|labelstateme...|__java_lang_String_<once>_@labelstatement.LabeledStatement.1
+ (result (ref null $java.lang.String))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$string_|labelstateme...|@labelstatement.LabeledStatement.1)))
+   (then
+    (return (global.get $$string_|labelstateme...|@labelstatement.LabeledStatement.1))
+   )
+  )
+  (global.set $$string_|labelstateme...|@labelstatement.LabeledStatement.1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "labelstatement.LabeledStatement$1")))
+  (return (global.get $$string_|labelstateme...|@labelstatement.LabeledStatement.1))
  )
 )
