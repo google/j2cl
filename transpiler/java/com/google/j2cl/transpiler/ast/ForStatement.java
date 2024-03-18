@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
@@ -108,20 +109,24 @@ public class ForStatement extends LoopStatement {
       setUpdates(forStatement.getUpdates());
     }
 
+    @CanIgnoreReturnValue
     public Builder setInitializers(List<Expression> initializers) {
       this.initializers = new ArrayList<>(initializers);
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder setInitializers(Expression... initializers) {
       return setInitializers(Arrays.asList(initializers));
     }
 
+    @CanIgnoreReturnValue
     public Builder setUpdates(List<Expression> updates) {
       this.updates = new ArrayList<>(updates);
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder setUpdates(Expression... updates) {
       return setUpdates(Arrays.asList(updates));
     }
@@ -131,6 +136,5 @@ public class ForStatement extends LoopStatement {
         Expression conditionExpression, Statement body, SourcePosition sourcePosition) {
       return new ForStatement(sourcePosition, conditionExpression, body, initializers, updates);
     }
-
   }
 }
