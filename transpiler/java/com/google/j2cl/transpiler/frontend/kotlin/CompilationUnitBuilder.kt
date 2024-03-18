@@ -190,7 +190,7 @@ class CompilationUnitBuilder(
 ) : AbstractCompilationUnitBuilder() {
   private val variableBySymbol: MutableMap<IrValueSymbol, Variable> = mutableMapOf()
   private lateinit var currentIrFile: IrFile
-  private val labelsInScope: MutableMap<String, Label> = mutableMapOf()
+  private val labelsInScope: MutableMap<String, ArrayDeque<Label>> = mutableMapOf()
 
   fun convert(irModuleFragment: IrModuleFragment): List<CompilationUnit> =
     irModuleFragment.files.map(::convertFile)
@@ -425,11 +425,9 @@ class CompilationUnitBuilder(
 
     if (label != null) {
       // Labeled loop. Add the label to scope before creating the loop statement.
-      require(labelsInScope.put(label.getName(), label) == null) {
-        "Duplicate label ${label.getName()}"
-      }
+      labelsInScope.computeIfAbsent(label.name) { ArrayDeque() }.addFirst(label)
       val loopStatement = createLoopStatement()
-      labelsInScope.remove(label.getName())
+      labelsInScope[label.name]!!.removeFirst()
 
       return LabeledStatement.newBuilder()
         .setSourcePosition(getSourcePosition(irLoop))
@@ -518,13 +516,17 @@ class CompilationUnitBuilder(
   private fun convertBreakStatement(irBreak: IrBreak): Statement =
     BreakStatement.newBuilder()
       .setSourcePosition(getSourcePosition(irBreak))
-      .setLabelReference(irBreak.resolveLabel()?.let { labelsInScope[it]!!.createReference() })
+      .setLabelReference(
+        irBreak.resolveLabel()?.let { labelsInScope[it]!!.first().createReference() }
+      )
       .build()
 
   private fun convertContinueStatement(irContinue: IrContinue): Statement =
     ContinueStatement.newBuilder()
       .setSourcePosition(getSourcePosition(irContinue))
-      .setLabelReference(irContinue.resolveLabel()?.let { labelsInScope[it]!!.createReference() })
+      .setLabelReference(
+        irContinue.resolveLabel()?.let { labelsInScope[it]!!.first().createReference() }
+      )
       .build()
 
   private fun convertSwitchCase(irSwitch: IrSwitch) =

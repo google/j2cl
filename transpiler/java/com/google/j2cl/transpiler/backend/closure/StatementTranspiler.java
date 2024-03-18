@@ -73,7 +73,10 @@ public class StatementTranspiler {
             () -> {
               builder.append("break");
               if (breakStatement.getLabelReference() != null) {
-                builder.append(" " + breakStatement.getLabelReference().getTarget().getName());
+                builder.append(
+                    " "
+                        + environment.getUniqueNameForVariable(
+                            breakStatement.getLabelReference().getTarget()));
               }
               builder.append(";");
             });
@@ -93,7 +96,10 @@ public class StatementTranspiler {
             () -> {
               builder.append("continue");
               if (continueStatement.getLabelReference() != null) {
-                builder.append(" " + continueStatement.getLabelReference().getTarget().getName());
+                builder.append(
+                    " "
+                        + environment.getUniqueNameForVariable(
+                            continueStatement.getLabelReference().getTarget()));
               }
               builder.append(";");
             });
@@ -205,7 +211,8 @@ public class StatementTranspiler {
         builder.emitWithMapping(
             labelStatement.getSourcePosition(),
             () -> {
-              builder.append(labelStatement.getLabel().getName() + ": ");
+              builder.append(
+                  environment.getUniqueNameForVariable(labelStatement.getLabel()) + ": ");
               render(labelStatement.getStatement());
             });
         return false;
