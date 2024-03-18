@@ -93,7 +93,9 @@ import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.WhileStatement;
 import com.google.j2cl.transpiler.frontend.common.AbstractCompilationUnitBuilder;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -135,7 +137,12 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   private class ASTConverter {
     private org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit;
     private final Map<IVariableBinding, Variable> variableByJdtBinding = new HashMap<>();
-    private final Map<String, Label> labelsInScope = new HashMap<>();
+
+    // Keeps track of labels that are currently in scope. Even though labels cannot have the
+    // same name if they are nested in the same method body, labels with the same name could
+    // be lexically nested by being in different methods bodies, e.g. from local or anonymous
+    // classes or lambdas.
+    private final Map<String, Deque<Label>> labelsInScope = new HashMap<>();
 
     private CompilationUnit convert(
         String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
@@ -685,14 +692,14 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     private LabeledStatement convert(org.eclipse.jdt.core.dom.LabeledStatement statement) {
       Label label = Label.newBuilder().setName(statement.getLabel().getIdentifier()).build();
-      checkState(labelsInScope.put(label.getName(), label) == null);
+      labelsInScope.computeIfAbsent(label.getName(), n -> new ArrayDeque<>()).push(label);
       LabeledStatement labeledStatement =
           LabeledStatement.newBuilder()
               .setSourcePosition(getSourcePosition(statement))
               .setLabel(label)
               .setStatement(convert(statement.getBody()))
               .build();
-      labelsInScope.remove(label.getName());
+      labelsInScope.get(label.getName()).pop();
       return labeledStatement;
     }
 
@@ -712,7 +719,9 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     @Nullable
     private LabelReference getLabelReferenceOrNull(SimpleName label) {
-      return label == null ? null : labelsInScope.get(label.getIdentifier()).createReference();
+      return label == null
+          ? null
+          : labelsInScope.get(label.getIdentifier()).peek().createReference();
     }
 
     private ForStatement convert(org.eclipse.jdt.core.dom.ForStatement statement) {

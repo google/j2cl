@@ -70,9 +70,8 @@ public class LabeledStatement {
     do {
       new Object() {
         void m() {
-          // TODO(b/329892945) : Uncomment when bug is fixed.
-          // LABEL:
-          // do {} while (false);
+          LABEL:
+          do {} while (false);
         }
       };
     } while (false);
