@@ -27,7 +27,7 @@ public class LabeledStatement {
     LABEL:
     foo();
 
-    // TODO(b/202500423): Enable when the jscompiler bug is fixed.
+    // TODO(b/330169941): Enable when the bug is fixed.
     // LABEL: break LABEL
 
     do {
