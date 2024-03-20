@@ -18,21 +18,13 @@ package com.google.j2cl.transpiler.ast;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
-import javax.annotation.Nullable;
 
 /** Continue Statement. */
 @Visitable
-public class ContinueStatement extends Statement {
-
-  @Nullable @Visitable LabelReference labelReference;
+public class ContinueStatement extends BreakOrContinueStatement {
 
   private ContinueStatement(SourcePosition sourcePosition, LabelReference labelReference) {
-    super(sourcePosition);
-    this.labelReference = labelReference;
-  }
-
-  public LabelReference getLabelReference() {
-    return labelReference;
+    super(sourcePosition, labelReference);
   }
 
   @Override
@@ -45,31 +37,39 @@ public class ContinueStatement extends Statement {
     return Visitor_ContinueStatement.visit(processor, this);
   }
 
+  @Override
+  public Builder toBuilder() {
+    return Builder.from(this);
+  }
+
   public static Builder newBuilder() {
     return new Builder();
   }
 
   /** Builder for ContinueStatement. */
-  public static class Builder {
+  public static class Builder extends BreakOrContinueStatement.Builder<ContinueStatement, Builder> {
     private LabelReference labelReference;
     private SourcePosition sourcePosition;
 
-    public static Builder from(ContinueStatement continueStatement) {
+    public static Builder from(BreakOrContinueStatement continueStatement) {
       return newBuilder()
           .setSourcePosition(continueStatement.getSourcePosition())
           .setLabelReference(continueStatement.getLabelReference());
     }
 
+    @Override
     public Builder setSourcePosition(SourcePosition sourcePosition) {
       this.sourcePosition = sourcePosition;
       return this;
     }
 
+    @Override
     public Builder setLabelReference(LabelReference labelReference) {
       this.labelReference = labelReference;
       return this;
     }
 
+    @Override
     public ContinueStatement build() {
       return new ContinueStatement(sourcePosition, labelReference);
     }

@@ -23,10 +23,10 @@ import com.google.common.collect.Iterables;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.Block;
+import com.google.j2cl.transpiler.ast.BreakOrContinueStatement;
 import com.google.j2cl.transpiler.ast.BreakStatement;
 import com.google.j2cl.transpiler.ast.CatchClause;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
-import com.google.j2cl.transpiler.ast.ContinueStatement;
 import com.google.j2cl.transpiler.ast.IfStatement;
 import com.google.j2cl.transpiler.ast.Label;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
@@ -293,21 +293,13 @@ public class ImplementFinallyViaControlFlow extends NormalizationPass {
             }
 
             @Override
-            public Statement rewriteContinueStatement(ContinueStatement continueStatement) {
-              Label targetLabel = continueStatement.getLabelReference().getTarget();
+            public Statement rewriteBreakOrContinueStatement(
+                BreakOrContinueStatement breakOrContinueStatement) {
+              Label targetLabel = breakOrContinueStatement.getLabelReference().getTarget();
               if (!isLabelEnclosingTry.test(targetLabel)) {
-                return continueStatement;
+                return breakOrContinueStatement;
               }
-              return rewriteExit(continueStatement);
-            }
-
-            @Override
-            public Statement rewriteBreakStatement(BreakStatement breakStatement) {
-              Label targetLabel = breakStatement.getLabelReference().getTarget();
-              if (!isLabelEnclosingTry.test(targetLabel)) {
-                return breakStatement;
-              }
-              return rewriteExit(breakStatement);
+              return rewriteExit(breakOrContinueStatement);
             }
           });
 

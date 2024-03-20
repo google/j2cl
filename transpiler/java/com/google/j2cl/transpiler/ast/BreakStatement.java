@@ -18,21 +18,12 @@ package com.google.j2cl.transpiler.ast;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
-import javax.annotation.Nullable;
 
 /** Break Statement. */
 @Visitable
-public class BreakStatement extends Statement {
-
-  @Nullable @Visitable LabelReference labelReference;
-
+public class BreakStatement extends BreakOrContinueStatement {
   private BreakStatement(SourcePosition sourcePosition, LabelReference labelReference) {
-    super(sourcePosition);
-    this.labelReference = labelReference;
-  }
-
-  public LabelReference getLabelReference() {
-    return labelReference;
+    super(sourcePosition, labelReference);
   }
 
   @Override
@@ -45,31 +36,40 @@ public class BreakStatement extends Statement {
     return Visitor_BreakStatement.visit(processor, this);
   }
 
+  @Override
+  public Builder toBuilder() {
+    return Builder.from(this);
+  }
+
   public static Builder newBuilder() {
     return new Builder();
   }
 
   /** Builder for BreakStatement. */
-  public static class Builder {
+  public static class Builder
+      extends BreakOrContinueStatement.Builder<BreakStatement, BreakStatement.Builder> {
     private LabelReference labelReference;
     private SourcePosition sourcePosition;
 
-    public static Builder from(BreakStatement breakStatement) {
+    public static Builder from(BreakOrContinueStatement breakStatement) {
       return newBuilder()
           .setSourcePosition(breakStatement.getSourcePosition())
           .setLabelReference(breakStatement.getLabelReference());
     }
 
+    @Override
     public Builder setSourcePosition(SourcePosition sourcePosition) {
       this.sourcePosition = sourcePosition;
       return this;
     }
 
+    @Override
     public Builder setLabelReference(LabelReference labelReference) {
       this.labelReference = labelReference;
       return this;
     }
 
+    @Override
     public BreakStatement build() {
       return new BreakStatement(sourcePosition, labelReference);
     }

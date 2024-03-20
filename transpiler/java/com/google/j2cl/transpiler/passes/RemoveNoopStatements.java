@@ -15,11 +15,14 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import com.google.j2cl.transpiler.ast.AbstractVisitor;
+import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.Block;
+import com.google.j2cl.transpiler.ast.BreakOrContinueStatement;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SwitchCase;
+import javax.annotation.Nullable;
 
 /**
  * Removes statements that have no effect.
@@ -30,27 +33,41 @@ import com.google.j2cl.transpiler.ast.SwitchCase;
 public class RemoveNoopStatements extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    // In general, list of statements always appear enclosed in a block, such is the case of the
-    // statements in the body of loops, the body of a try statement, etc.
-    // However there is an exception to this rule; SwitchCase. SwitchCase is the only other node in
-    // the AST that contains a list of statements. That list of statements can not be modeled as a
-    // Block due to the scoping of variables; since a variable declared in a switch case is in scope
-    // in the rest of the cases.
-    // All the other constructs that might look as if they have lists of statements (i.e the init
-    // and update part of the 'for' loop, the resource declarations in the 'try' statement) are
-    // not statements hence cannot contain empty statements.
-    // Also empty blocks can only be removed when they are in a list of statements, not when they
-    // are the only statement as in "if (...) {}".
     compilationUnit.accept(
-        new AbstractVisitor() {
+        new AbstractRewriter() {
           @Override
-          public void exitBlock(Block block) {
-            block.getStatements().removeIf(Statement::isNoop);
+          @Nullable
+          public Statement rewriteStatement(Statement statement) {
+            if (!statement.isNoop()) {
+              return statement;
+            }
+
+            // Remove the statement if possible otherwise replace with a canonical form.
+            return isRemovableFromParent() ? null : Statement.createNoopStatement();
           }
 
+          private boolean isRemovableFromParent() {
+            // Statements can only be removed if they are part of a list in the parent
+            return getParent() instanceof Block || getParent() instanceof SwitchCase;
+          }
+
+          // TODO(b/330169941): The removal of trivially useless labels is necessary due to this.
           @Override
-          public void exitSwitchCase(SwitchCase switchCase) {
-            switchCase.getStatements().removeIf(Statement::isNoop);
+          public Statement rewriteLabeledStatement(LabeledStatement labeledStatement) {
+            return rewriteStatement(removeLabelIfPossible(labeledStatement));
+          }
+
+          private Statement removeLabelIfPossible(LabeledStatement labeledStatement) {
+            Statement innerStatement = labeledStatement.getStatement();
+            if (innerStatement instanceof BreakOrContinueStatement) {
+              // Remove the label in code like `L1: break L2` since that chokes jscompiler.
+              BreakOrContinueStatement breakOrContinueStatement =
+                  (BreakOrContinueStatement) innerStatement;
+              if (!breakOrContinueStatement.targetsLabel(labeledStatement.getLabel())) {
+                return breakOrContinueStatement;
+              }
+            }
+            return labeledStatement;
           }
         });
   }

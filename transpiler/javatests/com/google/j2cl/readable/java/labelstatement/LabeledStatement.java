@@ -27,8 +27,15 @@ public class LabeledStatement {
     LABEL:
     foo();
 
-    // TODO(b/330169941): Enable when the bug is fixed.
-    // LABEL: break LABEL
+    // Test that none of these trip jscompiler (b/330169941).
+    LABEL:
+    break LABEL;
+    LABEL:
+    LABEL2:
+    break LABEL;
+    LABEL2:
+    LABEL:
+    break LABEL;
 
     do {
       LABEL:

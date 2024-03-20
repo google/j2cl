@@ -15,7 +15,9 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.BreakOrContinueStatement;
 import com.google.j2cl.transpiler.ast.BreakStatement;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.ContinueStatement;
@@ -37,23 +39,25 @@ public class NormalizeLabels extends NormalizationPass {
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    Deque<Label> enclosingContinueLabels = new ArrayDeque<>();
-    Deque<Label> enclosingBreakLabels = new ArrayDeque<>();
+    ImmutableMap<Class<?>, Deque<Label>> enclosingLabelsByType =
+        ImmutableMap.of(
+            BreakStatement.class, new ArrayDeque<>(),
+            ContinueStatement.class, new ArrayDeque<>());
 
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
           public boolean shouldProcessLoopStatement(LoopStatement loopStatement) {
             Label enclosingLabel = getEnclosingLabel("LOOP");
-            enclosingBreakLabels.push(enclosingLabel);
-            enclosingContinueLabels.push(enclosingLabel);
+            enclosingLabelsByType.get(BreakStatement.class).push(enclosingLabel);
+            enclosingLabelsByType.get(ContinueStatement.class).push(enclosingLabel);
             return true;
           }
 
           @Override
           public boolean shouldProcessSwitchStatement(SwitchStatement switchStatement) {
             // Note that Switch statements are never targets of continue statements.
-            enclosingBreakLabels.push(getEnclosingLabel("SWITCH"));
+            enclosingLabelsByType.get(BreakStatement.class).push(getEnclosingLabel("SWITCH"));
             return true;
           }
 
@@ -65,7 +69,7 @@ public class NormalizeLabels extends NormalizationPass {
 
           @Override
           public Statement rewriteLoopStatement(LoopStatement loopStatement) {
-            enclosingContinueLabels.pop();
+            enclosingLabelsByType.get(ContinueStatement.class).pop();
             return ensureLabeled(loopStatement);
           }
 
@@ -75,7 +79,7 @@ public class NormalizeLabels extends NormalizationPass {
           }
 
           private Statement ensureLabeled(Statement statement) {
-            Label breakLabel = enclosingBreakLabels.pop();
+            Label breakLabel = enclosingLabelsByType.get(BreakStatement.class).pop();
             if (getParent() instanceof LabeledStatement) {
               return statement;
             }
@@ -85,24 +89,18 @@ public class NormalizeLabels extends NormalizationPass {
           }
 
           @Override
-          public Node rewriteContinueStatement(ContinueStatement continueStatement) {
-            if (continueStatement.getLabelReference() != null) {
-              return continueStatement;
+          public Node rewriteBreakOrContinueStatement(
+              BreakOrContinueStatement breakOrContinueStatement) {
+            if (breakOrContinueStatement.getLabelReference() != null) {
+              return breakOrContinueStatement;
             }
 
-            return ContinueStatement.newBuilder()
-                .setLabelReference(enclosingContinueLabels.peek().createReference())
-                .setSourcePosition(continueStatement.getSourcePosition())
-                .build();
-          }
-
-          @Override
-          public Node rewriteBreakStatement(BreakStatement breakStatement) {
-            if (breakStatement.getLabelReference() != null) {
-              return breakStatement;
-            }
-            return BreakStatement.Builder.from(breakStatement)
-                .setLabelReference(enclosingBreakLabels.peek().createReference())
+            return breakOrContinueStatement.toBuilder()
+                .setLabelReference(
+                    enclosingLabelsByType
+                        .get(breakOrContinueStatement.getClass())
+                        .peek()
+                        .createReference())
                 .build();
           }
         });

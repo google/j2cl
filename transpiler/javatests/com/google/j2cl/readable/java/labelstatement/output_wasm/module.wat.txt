@@ -155,23 +155,20 @@
    ;;@ labelstatement/LabeledStatement.java:28:4
    (call $m_foo__void_$p_labelstatement_LabeledStatement@labelstatement.LabeledStatement (ref.as_non_null (local.get $this)))
   )
-  ;;@ labelstatement/LabeledStatement.java:33:4
+  ;;@ labelstatement/LabeledStatement.java:40:4
   (block $LOOP.BREAK
    (loop
     (block $LOOP.CONTINUE
      (block
-      ;;@ labelstatement/LabeledStatement.java:34:6
-      (block $LABEL_1.BREAK
-       ;;@ labelstatement/LabeledStatement.java:35:6
-       (br $LOOP.CONTINUE)
-      )
+      ;;@ labelstatement/LabeledStatement.java:42:6
+      (br $LOOP.CONTINUE)
      )
     )
    )
   )
-  ;;@ labelstatement/LabeledStatement.java:38:4
-  (block $LABEL_2.BREAK
-   ;;@ labelstatement/LabeledStatement.java:39:4
+  ;;@ labelstatement/LabeledStatement.java:45:4
+  (block $LABEL_1.BREAK
+   ;;@ labelstatement/LabeledStatement.java:46:4
    (return )
   )
  )
@@ -182,14 +179,14 @@
 (func $m_block__void@labelstatement.LabeledStatement
  (type $function.m_block__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ labelstatement/LabeledStatement.java:42:14
+ ;;@ labelstatement/LabeledStatement.java:49:14
  (local $this (ref null $labelstatement.LabeledStatement))
  (local.set $this (ref.cast (ref $labelstatement.LabeledStatement) (local.get $this.untyped)))
  (block
-  ;;@ labelstatement/LabeledStatement.java:43:4
+  ;;@ labelstatement/LabeledStatement.java:50:4
   (block $LABEL.BREAK
    (block
-    ;;@ labelstatement/LabeledStatement.java:45:6
+    ;;@ labelstatement/LabeledStatement.java:52:6
     (br $LABEL.BREAK)
    )
   )
@@ -201,17 +198,17 @@
 (func $m_ifStatement__void@labelstatement.LabeledStatement
  (type $function.m_ifStatement__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ labelstatement/LabeledStatement.java:49:14
+ ;;@ labelstatement/LabeledStatement.java:56:14
  (local $this (ref null $labelstatement.LabeledStatement))
  (local.set $this (ref.cast (ref $labelstatement.LabeledStatement) (local.get $this.untyped)))
  (block
-  ;;@ labelstatement/LabeledStatement.java:50:4
+  ;;@ labelstatement/LabeledStatement.java:57:4
   (block $LABEL.BREAK
-   ;;@ labelstatement/LabeledStatement.java:51:4
+   ;;@ labelstatement/LabeledStatement.java:58:4
    (if (i32.const 1)
     (then
      (block
-      ;;@ labelstatement/LabeledStatement.java:52:6
+      ;;@ labelstatement/LabeledStatement.java:59:6
       (br $LABEL.BREAK)
      )
     )
@@ -225,23 +222,23 @@
 (func $m_switchStatement__void@labelstatement.LabeledStatement
  (type $function.m_switchStatement__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ labelstatement/LabeledStatement.java:56:14
+ ;;@ labelstatement/LabeledStatement.java:63:14
  (local $this (ref null $labelstatement.LabeledStatement))
  (local.set $this (ref.cast (ref $labelstatement.LabeledStatement) (local.get $this.untyped)))
  (block
-  ;;@ labelstatement/LabeledStatement.java:57:4
+  ;;@ labelstatement/LabeledStatement.java:64:4
   (block $LABEL.BREAK
-   ;;@ labelstatement/LabeledStatement.java:58:4
+   ;;@ labelstatement/LabeledStatement.java:65:4
    (block
     (block ;; evaluate expression and jump
      (br_table 0 1 (i32.const 0))
     )
     ;; case 0:
-    ;;@ labelstatement/LabeledStatement.java:60:8
+    ;;@ labelstatement/LabeledStatement.java:67:8
     (if (i32.const 1)
      (then
       (block
-       ;;@ labelstatement/LabeledStatement.java:61:10
+       ;;@ labelstatement/LabeledStatement.java:68:10
        (br $LABEL.BREAK)
       )
      )
@@ -256,16 +253,16 @@
 (func $m_nestedScopes__void@labelstatement.LabeledStatement
  (type $function.m_nestedScopes__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ labelstatement/LabeledStatement.java:66:14
+ ;;@ labelstatement/LabeledStatement.java:73:14
  (local $this (ref null $labelstatement.LabeledStatement))
  (local.set $this (ref.cast (ref $labelstatement.LabeledStatement) (local.get $this.untyped)))
  (block
-  ;;@ labelstatement/LabeledStatement.java:69:4
+  ;;@ labelstatement/LabeledStatement.java:76:4
   (block $LABEL.BREAK
    (loop
     (block $LABEL.CONTINUE
      (block
-      ;;@ labelstatement/LabeledStatement.java:71:6
+      ;;@ labelstatement/LabeledStatement.java:78:6
       (drop (call $$create__labelstatement_LabeledStatement@labelstatement.LabeledStatement.1 (local.get $this)))
      )
     )
@@ -278,7 +275,7 @@
 ;;; void LabeledStatement.foo()
 (func $m_foo__void_$p_labelstatement_LabeledStatement@labelstatement.LabeledStatement
  (param $this (ref null $labelstatement.LabeledStatement))
- ;;@ labelstatement/LabeledStatement.java:80:15
+ ;;@ labelstatement/LabeledStatement.java:87:15
  (block
  )
 )
@@ -348,16 +345,16 @@
 (func $$create__labelstatement_LabeledStatement@labelstatement.LabeledStatement.1
  (param $$outer_this (ref null $labelstatement.LabeledStatement))
  (result (ref null $labelstatement.LabeledStatement.1))
- ;;@ labelstatement/LabeledStatement.java:71:19
+ ;;@ labelstatement/LabeledStatement.java:78:19
  (local $$instance (ref null $labelstatement.LabeledStatement.1))
  (block
-  ;;@ labelstatement/LabeledStatement.java:71:19
+  ;;@ labelstatement/LabeledStatement.java:78:19
   (call $$clinit__void_<once>_@labelstatement.LabeledStatement.1 )
-  ;;@ labelstatement/LabeledStatement.java:71:19
+  ;;@ labelstatement/LabeledStatement.java:78:19
   (local.set $$instance (struct.new $labelstatement.LabeledStatement.1 (ref.as_non_null (global.get $labelstatement.LabeledStatement.1.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $labelstatement.LabeledStatement)))
-  ;;@ labelstatement/LabeledStatement.java:71:19
+  ;;@ labelstatement/LabeledStatement.java:78:19
   (call $$ctor__labelstatement_LabeledStatement__void_$p_labelstatement_LabeledStatement_1@labelstatement.LabeledStatement.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;;@ labelstatement/LabeledStatement.java:71:19
+  ;;@ labelstatement/LabeledStatement.java:78:19
   (return (local.get $$instance))
  )
 )
@@ -366,11 +363,11 @@
 (func $$ctor__labelstatement_LabeledStatement__void_$p_labelstatement_LabeledStatement_1@labelstatement.LabeledStatement.1
  (param $this (ref null $labelstatement.LabeledStatement.1))
  (param $$outer_this (ref null $labelstatement.LabeledStatement))
- ;;@ labelstatement/LabeledStatement.java:71:19
+ ;;@ labelstatement/LabeledStatement.java:78:19
  (block
-  ;;@ labelstatement/LabeledStatement.java:71:19
+  ;;@ labelstatement/LabeledStatement.java:78:19
   (struct.set $labelstatement.LabeledStatement.1 $$outer_this@labelstatement.LabeledStatement.1 (local.get $this) (local.get $$outer_this))
-  ;;@ labelstatement/LabeledStatement.java:71:19
+  ;;@ labelstatement/LabeledStatement.java:78:19
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -379,11 +376,11 @@
 (func $m_m__void_$pp_labelstatement@labelstatement.LabeledStatement.1
  (type $function.m_m__void_$pp_labelstatement)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ labelstatement/LabeledStatement.java:72:13
+ ;;@ labelstatement/LabeledStatement.java:79:13
  (local $this (ref null $labelstatement.LabeledStatement.1))
  (local.set $this (ref.cast (ref $labelstatement.LabeledStatement.1) (local.get $this.untyped)))
  (block
-  ;;@ labelstatement/LabeledStatement.java:73:10
+  ;;@ labelstatement/LabeledStatement.java:80:10
   (block $LABEL.BREAK
    (loop
     (block $LABEL.CONTINUE
@@ -398,18 +395,18 @@
 
 ;;; void <anonymous> extends Object.$clinit()
 (func $$clinit__void_<once>_@labelstatement.LabeledStatement.1
- ;;@ labelstatement/LabeledStatement.java:71:19
+ ;;@ labelstatement/LabeledStatement.java:78:19
  (block
-  ;;@ labelstatement/LabeledStatement.java:71:19
+  ;;@ labelstatement/LabeledStatement.java:78:19
   (if (global.get $$class-initialized@labelstatement.LabeledStatement.1)
    (then
-    ;;@ labelstatement/LabeledStatement.java:71:19
+    ;;@ labelstatement/LabeledStatement.java:78:19
     (return )
    )
   )
-  ;;@ labelstatement/LabeledStatement.java:71:19
+  ;;@ labelstatement/LabeledStatement.java:78:19
   (global.set $$class-initialized@labelstatement.LabeledStatement.1 (i32.const 1))
-  ;;@ labelstatement/LabeledStatement.java:71:19
+  ;;@ labelstatement/LabeledStatement.java:78:19
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

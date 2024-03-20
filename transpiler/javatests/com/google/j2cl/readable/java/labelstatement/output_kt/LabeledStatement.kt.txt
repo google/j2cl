@@ -37,6 +37,15 @@ open class LabeledStatement {
  @ObjCName("simpleStatement")
  open fun simpleStatement() {
   this.foo_private_2()
+  LABEL@ do {
+   break@LABEL
+  } while (false)
+  LABEL_1@ do {
+   break@LABEL_1
+  } while (false)
+  LABEL_2@ do {
+   break@LABEL_2
+  } while (false)
   LOOP@ do {
    continue@LOOP
   } while (false)
