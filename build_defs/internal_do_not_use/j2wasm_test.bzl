@@ -10,6 +10,7 @@ def j2wasm_test(
         data = [],
         tags = [],
         optimize = False,
+        use_stringref_spec = True,
         **kwargs):
     """Macro for running a JUnit test cross compiled as a web test.
 
@@ -26,5 +27,6 @@ def j2wasm_test(
         optimize_wasm = optimize,
         default_browser = Label("//build_defs/internal_do_not_use/browser:chrome-wasm-linux"),
         tags = tags + ["j2wasm"],
+        use_wasm_stringref_spec = use_stringref_spec,
         **kwargs
     )
