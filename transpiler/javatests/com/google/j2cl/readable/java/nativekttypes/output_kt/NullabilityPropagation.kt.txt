@@ -19,6 +19,7 @@
 package nativekttypes
 
 import javaemul.lang.*
+import jsinterop.annotations.JsOptional
 import kotlin.Any
 import kotlin.OptIn
 import kotlin.String
@@ -98,6 +99,11 @@ class NullabilityPropagation {
   fun nonNullStringDoubleOverride(
    @ObjCName("withNSString") s: String
   ): String
+
+  @ObjCName("jsOptionalParameter")
+  fun jsOptionalParameter(
+   @ObjCName("withNSString") @JsOptional s: String?
+  ): String
  }
 
  fun interface Interface {
@@ -162,6 +168,10 @@ class NullabilityPropagation {
 
   override fun nonNullStringDoubleOverride(s: String): String {
    return s
+  }
+
+  override fun jsOptionalParameter(s: String?): String {
+   return s!!
   }
  }
 
