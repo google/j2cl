@@ -63,7 +63,7 @@ j2cl_application(
     name = "jsapp",
     entry_points = ["entry"],
     extra_dev_resources = [
-        ":app.wasm",
+        ":app_dev.wasm",  # Development output that is not optimized.
     ],
     deps = [":hellojs"],
 )
