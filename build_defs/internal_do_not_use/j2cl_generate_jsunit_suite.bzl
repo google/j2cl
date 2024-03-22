@@ -59,7 +59,11 @@ def j2cl_generate_jsunit_suite(name, test_class, deps, tags = []):
             Label("//build_defs/internal_do_not_use:closure_testcase"),
         ],
         testonly = 1,
-        javacopts = ["-AtestPlatform=CLOSURE"],
+        javacopts = [
+            "-AtestPlatform=CLOSURE",
+            # Disable error prone checks since this is a generated code.
+            "-Xep:PackageLocation:OFF",
+        ],
         tags = tags,
         generate_build_test = False,
     )
