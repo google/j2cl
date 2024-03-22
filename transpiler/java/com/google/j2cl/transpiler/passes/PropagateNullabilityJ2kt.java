@@ -22,6 +22,7 @@ import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeVariable;
@@ -74,12 +75,12 @@ public class PropagateNullabilityJ2kt extends NormalizationPass {
             propagateReturnTypeNullability(
                 specialize(parametrization, from.getReturnTypeDescriptor()),
                 to.getReturnTypeDescriptor()))
-        .setParameterTypeDescriptors(
+        .setParameterDescriptors(
             Streams.zip(
                     from.getParameterTypeDescriptors().stream(),
-                    to.getParameterTypeDescriptors().stream(),
-                    (fromTd, toTd) ->
-                        propagateParameterNullability(specialize(parametrization, fromTd), toTd))
+                    to.getParameterDescriptors().stream(),
+                    (fromTd, toPd) ->
+                        propagateParameterNullability(specialize(parametrization, fromTd), toPd))
                 .collect(toImmutableList()))
         .build();
   }
@@ -96,8 +97,9 @@ public class PropagateNullabilityJ2kt extends NormalizationPass {
     return to;
   }
 
-  private static TypeDescriptor propagateParameterNullability(
-      TypeDescriptor from, TypeDescriptor to) {
+  private static ParameterDescriptor propagateParameterNullability(
+      TypeDescriptor from, ParameterDescriptor toParameter) {
+    TypeDescriptor to = toParameter.getTypeDescriptor();
     // Parameter nullability must match.
     if (from.isTypeVariable() && to.isTypeVariable()) {
       TypeVariable fromTypeVariable = (TypeVariable) from;
@@ -105,12 +107,15 @@ public class PropagateNullabilityJ2kt extends NormalizationPass {
 
       return fromTypeVariable.getNullabilityAnnotation()
               == toTypeVariable.getNullabilityAnnotation()
-          ? to
-          : TypeVariable.Builder.from(toTypeVariable)
-              .setNullabilityAnnotation(fromTypeVariable.getNullabilityAnnotation())
+          ? toParameter
+          : toParameter.toBuilder()
+              .setTypeDescriptor(
+                  TypeVariable.Builder.from(toTypeVariable)
+                      .setNullabilityAnnotation(fromTypeVariable.getNullabilityAnnotation())
+                      .build())
               .build();
     } else {
-      return to.toNullable(from.isNullable());
+      return toParameter.toBuilder().setTypeDescriptor(to.toNullable(from.isNullable())).build();
     }
   }
 
