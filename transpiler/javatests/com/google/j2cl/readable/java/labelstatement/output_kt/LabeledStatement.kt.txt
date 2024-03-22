@@ -92,9 +92,13 @@ open class LabeledStatement {
 
  @ObjCName("nestedScopes")
  open fun nestedScopes() {
-  object : Any() {
-   internal fun m_pp_labelstatement() {}
-  }
+  do {
+   object : Any() {
+    internal fun m_pp_labelstatement() {
+     do {} while (false)
+    }
+   }
+  } while (false)
  }
 
  internal fun foo_private_2() {}

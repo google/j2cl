@@ -162,7 +162,6 @@ import com.google.j2cl.transpiler.passes.RemoveUnneededCasts;
 import com.google.j2cl.transpiler.passes.RemoveUnneededJsDocCasts;
 import com.google.j2cl.transpiler.passes.RemoveUnneededNotNullChecks;
 import com.google.j2cl.transpiler.passes.RemoveUnreachableCode;
-import com.google.j2cl.transpiler.passes.RemoveUnusedLabeledStatements;
 import com.google.j2cl.transpiler.passes.RemoveWasmAnnotatedMethodBodies;
 import com.google.j2cl.transpiler.passes.ResolveCaptures;
 import com.google.j2cl.transpiler.passes.ResolveImplicitInstanceQualifiers;
@@ -723,7 +722,6 @@ public enum Backend {
 
           // Needs to run after NormalizeNonFinalVariablesJ2kt.
           InsertExplicitArrayCoercionCasts::new,
-          RemoveUnusedLabeledStatements::new,
           NormalizeMultiExpressions::new,
           RemoveNestedBlocks::new,
           RemoveNoopStatements::new,
