@@ -21,6 +21,15 @@ public class LabeledStatement {
     for (; ; ) {
       break LABEL;
     }
+
+    WHILE:
+    while (true) {
+      SWITCH:
+      switch (0) {
+        case 0:
+          continue WHILE;
+      }
+    }
   }
 
   public void simpleStatement() {

@@ -32,6 +32,14 @@ open class LabeledStatement {
   LABEL@ while (true) {
    break@LABEL
   }
+  WHILE@ while (true) {
+   when (0) {
+    0 -> {
+     continue@WHILE
+    }
+    else -> {}
+   }
+  }
  }
 
  @ObjCName("simpleStatement")

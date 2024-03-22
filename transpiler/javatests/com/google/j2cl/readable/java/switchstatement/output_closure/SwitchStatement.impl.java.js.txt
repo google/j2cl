@@ -142,8 +142,8 @@ class SwitchStatement extends j_l_Object {
  m_testLabelInSwitchCase__int__void_$p_switchstatement_SwitchStatement(/** number */ i) {
   switch (i) {
    case 1: 
-    LABEL: do {
-     break LABEL;
+    do {
+     break;
     } while (true);
   }
  }
@@ -160,29 +160,29 @@ class SwitchStatement extends j_l_Object {
  }
  /** @nodts */
  m_testNonFallThroughBreakOuterCase__int__void_$p_switchstatement_SwitchStatement(/** number */ i) {
-  OUTER_LABEL: do {
+  {
    switch (i) {
     case 1: 
      this.m_foo__int__void_$p_switchstatement_SwitchStatement(1);
-     break OUTER_LABEL;
+     break;
     default: 
      this.m_foo__int__void_$p_switchstatement_SwitchStatement(2);
      break;
    }
-  } while (false);
+  }
  }
  /** @nodts */
  m_testNonFallThroughContinueCase__int__void_$p_switchstatement_SwitchStatement(/** number */ i) {
-  do {
+  {
    switch (i) {
     case 3: 
      this.m_foo__int__void_$p_switchstatement_SwitchStatement(1);
-     continue;
+     break;
     default: 
      this.m_foo__int__void_$p_switchstatement_SwitchStatement(2);
      break;
    }
-  } while (false);
+  }
  }
  /** @nodts */
  m_testNonFallThroughReturnCase__int__void_$p_switchstatement_SwitchStatement(/** number */ i) {
@@ -266,9 +266,6 @@ class SwitchStatement extends j_l_Object {
   switch (i) {
    case 1: 
     this.m_foo__int__void_$p_switchstatement_SwitchStatement(1);
-    INNER_LABEL: do {
-     break INNER_LABEL;
-    } while (false);
    default: 
     this.m_foo__int__void_$p_switchstatement_SwitchStatement(2);
     break;
@@ -279,9 +276,6 @@ class SwitchStatement extends j_l_Object {
   switch (i) {
    case 1: 
     this.m_foo__int__void_$p_switchstatement_SwitchStatement(1);
-    INNER_LABEL: do {
-     continue INNER_LABEL;
-    } while (false);
    default: 
     this.m_foo__int__void_$p_switchstatement_SwitchStatement(2);
     break;

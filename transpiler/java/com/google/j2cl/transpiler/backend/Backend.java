@@ -158,6 +158,7 @@ import com.google.j2cl.transpiler.passes.RemoveCustomIsInstanceMethods;
 import com.google.j2cl.transpiler.passes.RemoveNativeTypes;
 import com.google.j2cl.transpiler.passes.RemoveNestedBlocks;
 import com.google.j2cl.transpiler.passes.RemoveNoopStatements;
+import com.google.j2cl.transpiler.passes.RemoveUnnecessaryLabels;
 import com.google.j2cl.transpiler.passes.RemoveUnneededCasts;
 import com.google.j2cl.transpiler.passes.RemoveUnneededJsDocCasts;
 import com.google.j2cl.transpiler.passes.RemoveUnneededNotNullChecks;
@@ -334,6 +335,8 @@ public enum Backend {
           NormalizeJsAwaitMethodInvocations::new,
           RemoveUnneededNotNullChecks::new,
           ImplementNotNullOperator::new,
+          NormalizeLabels::new,
+          RemoveUnnecessaryLabels::new,
           RemoveUnreachableCode::new,
           RemoveNoopStatements::new,
 
