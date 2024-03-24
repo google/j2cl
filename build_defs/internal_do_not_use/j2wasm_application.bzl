@@ -431,7 +431,7 @@ def j2wasm_application(name, defines = dict(), **kwargs):
 
     transpiler_args = kwargs.pop("internal_transpiler_args", [])
 
-    use_stringref_spec = kwargs.pop("use_stringref_spec", True)
+    use_stringref_spec = kwargs.pop("use_stringref_spec", False)
 
     _j2wasm_application(
         name = name,
