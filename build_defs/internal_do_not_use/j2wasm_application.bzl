@@ -15,17 +15,34 @@ goog.module("%MODULE_NAME%.j2wasm");
 %IMPORTS%
 
 /**
- * Instantiates the web assembly module.
+ * Instantiates the web assembly module. This is the recommended way to load & instantate
+ * Wasm module.
  *
  * @param {string|!Promise<!Response>} urlOrResponse
  * @return {!Promise<!WebAssembly.Instance>}
- * @suppress {checkTypes} Externs is missing options parameter (phase 2) and also overloads for
- *   WebAssembly.instantiate.
  */
 async function instantiateStreaming(urlOrResponse) {
+    const module = await compileStreaming(urlOrResponse);
+    return instantiate(module);
+}
+
+/**
+ * @param {string|!Promise<!Response>} urlOrResponse
+ * @return {!Promise<!WebAssembly.Module>}
+ * @suppress {checkTypes} Externs is missing options parameter (phase 2)
+ */
+async function compileStreaming(urlOrResponse) {
     const response =
         typeof urlOrResponse == "string" ? fetch(urlOrResponse) : urlOrResponse;
-    const module = await WebAssembly.compileStreaming(response, { "builtins": ["js-string"] });
+    return WebAssembly.compileStreaming(response, { "builtins": ["js-string"] });
+}
+
+/**
+ * @param {!WebAssembly.Module} module
+ * @return {!Promise<!WebAssembly.Instance>}
+ * @suppress {checkTypes} Externs is missing overloads for WebAssembly.instantiate.
+ */
+async function instantiate(module) {
     return WebAssembly.instantiate(module, prepareImports(module));
 }
 
@@ -61,7 +78,7 @@ function prepareImports(module) {
     return imports;
 }
 
-exports = {instantiateStreaming, instantiateBlocking};
+exports = {compileStreaming, instantiate, instantiateStreaming, instantiateBlocking};
 """
 
 def _impl_j2wasm_application(ctx):
