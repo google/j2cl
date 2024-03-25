@@ -206,7 +206,8 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setBackend(this.backend)
         .setWasmEntryPointStrings(ImmutableList.copyOf(this.wasmEntryPoints))
         .setDefinesForWasm(ImmutableMap.copyOf(definesForWasm))
-        .setWasmEnableNonNativeJsEnum(wasmEnableNonNativeJsEnum)
+        // TODO(b/325056024): jsenums are not yet supported in the modular pipeline
+        .setWasmEnableNonNativeJsEnum(wasmEnableNonNativeJsEnum && backend != Backend.WASM_MODULAR)
         .setNullMarkedSupported(this.enableJSpecifySupport)
         .setKotlincOptions(ImmutableList.copyOf(kotlincOptions))
         .setForbiddenAnnotations(ImmutableList.copyOf(forbiddenAnnotations))
