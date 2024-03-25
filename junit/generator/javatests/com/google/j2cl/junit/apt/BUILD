@@ -20,7 +20,7 @@ java_library(
         "//third_party:auto_service",
         "//third_party:compile_testing",
         "//third_party:guava",
-        "//third_party:gwt-jsinterop-annotations",
+        "//third_party:jsinterop-annotations",
         "//third_party:jsr305_annotations",
         "//third_party:junit",
         "//third_party:mockito",

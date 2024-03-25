@@ -66,7 +66,7 @@ j2cl_test_integration_test_data(
     extra_defs = ["--inline_functions=false"],
     deps = [
         ":base",
-        "//third_party:gwt-jsinterop-annotations",
+        "//third_party:jsinterop-annotations",
     ],
 )
 
@@ -75,7 +75,7 @@ j2cl_test_integration_test_data(
     extra_defs = ["--inline_functions=false"],
     deps = [
         ":base",
-        "//third_party:gwt-jsinterop-annotations",
+        "//third_party:jsinterop-annotations",
     ],
 )
 
@@ -84,7 +84,7 @@ j2cl_test_integration_test_data(
     extra_defs = ["--inline_functions=false"],
     deps = [
         ":base",
-        "//third_party:gwt-jsinterop-annotations",
+        "//third_party:jsinterop-annotations",
     ],
 )
 
@@ -93,7 +93,7 @@ j2cl_test_integration_test_data(
     extra_defs = ["--inline_functions=false"],
     deps = [
         ":base",
-        "//third_party:gwt-jsinterop-annotations",
+        "//third_party:jsinterop-annotations",
     ],
 )
 
@@ -205,7 +205,7 @@ j2cl_test_integration_test_data(
     extra_defs = ["--inline_functions=false"],
     deps = [
         ":base",
-        "//third_party:gwt-jsinterop-annotations",
+        "//third_party:jsinterop-annotations",
     ],
 )
 
@@ -214,7 +214,7 @@ j2cl_test_integration_test_data(
     extra_defs = ["--inline_functions=false"],
     deps = [
         ":base",
-        "//third_party:gwt-jsinterop-annotations",
+        "//third_party:jsinterop-annotations",
     ],
 )
 
@@ -224,7 +224,7 @@ j2cl_test_integration_test_data(
     native_srcs = ["ThrowsInNativeJs.native.js"],
     deps = [
         ":base",
-        "//third_party:gwt-jsinterop-annotations",
+        "//third_party:jsinterop-annotations",
     ],
 )
 
@@ -234,7 +234,7 @@ j2cl_test_integration_test_data(
     native_srcs = ["KotlinThrowsInNativeJs.native.js"],
     deps = [
         ":base",
-        "//third_party:gwt-jsinterop-annotations",
+        "//third_party:jsinterop-annotations",
     ],
 )
 
@@ -243,7 +243,7 @@ j2cl_test_integration_test_data(
     extra_defs = ["--inline_functions=false"],
     deps = [
         ":base",
-        "//third_party:gwt-jsinterop-annotations",
+        "//third_party:jsinterop-annotations",
     ],
 )
 
@@ -252,7 +252,7 @@ j2cl_test_integration_test_data(
     extra_defs = ["--inline_functions=false"],
     deps = [
         ":base",
-        "//third_party:gwt-jsinterop-annotations",
+        "//third_party:jsinterop-annotations",
     ],
 )
 
@@ -261,7 +261,7 @@ j2cl_test_integration_test_data(
     extra_defs = ["--inline_functions=false"],
     deps = [
         ":base",
-        "//third_party:gwt-jsinterop-annotations",
+        "//third_party:jsinterop-annotations",
     ],
 )
 
@@ -270,7 +270,7 @@ j2cl_test_integration_test_data(
     extra_defs = ["--inline_functions=false"],
     deps = [
         ":base",
-        "//third_party:gwt-jsinterop-annotations",
+        "//third_party:jsinterop-annotations",
     ],
 )
 
@@ -305,7 +305,7 @@ j2cl_test_integration_test_data(
     native_deps = [":stacktrace"],
     deps = [
         ":base",
-        "//third_party:gwt-jsinterop-annotations",
+        "//third_party:jsinterop-annotations",
     ],
 )
 
@@ -315,7 +315,7 @@ j2cl_test_integration_test_data(
     native_deps = [":stacktrace"],
     deps = [
         ":base",
-        "//third_party:gwt-jsinterop-annotations",
+        "//third_party:jsinterop-annotations",
     ],
 )
 

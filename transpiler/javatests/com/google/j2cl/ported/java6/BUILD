@@ -16,7 +16,7 @@ j2cl_library(
         "-XepDisableAllChecks",
     ],
     deps = [
-        "//third_party:gwt-jsinterop-annotations-j2cl",
+        "//third_party:jsinterop-annotations-j2cl",
         "//third_party:junit-j2cl",
         "//third_party:truth-j2cl",
     ],

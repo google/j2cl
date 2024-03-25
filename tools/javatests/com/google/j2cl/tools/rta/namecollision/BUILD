@@ -11,7 +11,7 @@ j2cl_library(
     srcs = [
         "NameCollision.java",
     ],
-    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
+    deps = ["//third_party:jsinterop-annotations-j2cl"],
 )
 
 rta_test(

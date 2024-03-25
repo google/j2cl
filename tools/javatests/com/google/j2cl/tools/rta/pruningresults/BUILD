@@ -16,7 +16,7 @@ j2cl_library(
         "Foo.java",
         "UnusedType.java",
     ],
-    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
+    deps = ["//third_party:jsinterop-annotations-j2cl"],
 )
 
 j2cl_rta(

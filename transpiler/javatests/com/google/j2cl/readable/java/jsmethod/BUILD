@@ -13,5 +13,5 @@ readable_example(
     # Native JsMethod does not make sense for j2kt-native.
     build_kt_native_readables = False,
     generate_wasm_readables = False,
-    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
+    deps = ["//third_party:jsinterop-annotations-j2cl"],
 )

@@ -14,7 +14,7 @@ package(
 j2kt_jvm_library(
     name = "readable-j2kt-jvm",
     srcs = glob(["*.java"]),
-    deps = ["//third_party:gwt-jsinterop-annotations-j2kt-jvm"],
+    deps = ["//third_party:jsinterop-annotations-j2kt-jvm"],
 )
 
 closure_js_library(
@@ -32,6 +32,6 @@ readable_example(
     generate_wasm_readables = False,
     deps = [
         ":externs",
-        "//third_party:gwt-jsinterop-annotations-j2cl",
+        "//third_party:jsinterop-annotations-j2cl",
     ],
 )

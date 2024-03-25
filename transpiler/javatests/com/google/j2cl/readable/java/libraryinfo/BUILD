@@ -14,6 +14,6 @@ readable_example(
     generate_kt_readables = False,
     generate_library_info = True,
     deps = [
-        "//third_party:gwt-jsinterop-annotations-j2cl",
+        "//third_party:jsinterop-annotations-j2cl",
     ],
 )

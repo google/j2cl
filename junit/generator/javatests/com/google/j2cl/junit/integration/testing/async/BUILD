@@ -16,11 +16,11 @@ java_and_j2cl_library(
     name = "timer",
     srcs = ["Timer.java"],
     super_srcs = ["super/Timer.java"],
-    deps = ["//third_party:gwt-jsinterop-annotations"],
+    deps = ["//third_party:jsinterop-annotations"],
 )
 
 java_and_j2cl_library(
     name = "thenable",
     srcs = ["Thenable.java"],
-    deps = ["//third_party:gwt-jsinterop-annotations"],
+    deps = ["//third_party:jsinterop-annotations"],
 )

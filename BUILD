@@ -29,12 +29,12 @@ closure_js_library(
 
 alias(
     name = "jsinterop-annotations",
-    actual = "//third_party:gwt-jsinterop-annotations",
+    actual = "//third_party:jsinterop-annotations",
 )
 
 j2cl_alias(
     name = "jsinterop-annotations-j2cl",
-    actual = "//third_party:gwt-jsinterop-annotations-j2cl",
+    actual = "//third_party:jsinterop-annotations-j2cl",
 )
 
 # JUnit library emulation

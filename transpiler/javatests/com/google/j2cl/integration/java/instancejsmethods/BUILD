@@ -24,7 +24,7 @@ j2cl_library(
     srcs = ["Parent.java"],
     deps = [
         ":SuperParent-j2cl",
-        "//third_party:gwt-jsinterop-annotations-j2cl",
+        "//third_party:jsinterop-annotations-j2cl",
     ],
 )
 
@@ -34,7 +34,7 @@ j2cl_library(
     deps = [
         ":MyInterface-j2cl",
         ":Parent-j2cl",
-        "//third_party:gwt-jsinterop-annotations-j2cl",
+        "//third_party:jsinterop-annotations-j2cl",
     ],
 )
 

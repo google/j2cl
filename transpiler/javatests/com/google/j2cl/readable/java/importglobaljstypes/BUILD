@@ -16,6 +16,6 @@ readable_example(
     generate_wasm_modular = True,
     deps = [
         "//jre/java:javaemul_internal_annotations-j2cl",
-        "//third_party:gwt-jsinterop-annotations-j2cl",
+        "//third_party:jsinterop-annotations-j2cl",
     ],
 )

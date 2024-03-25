@@ -15,7 +15,7 @@ readable_example(
     generate_wasm_readables = False,
     deps = [
         "//jre/java:javaemul_internal_annotations-j2cl",
-        "//third_party:gwt-jsinterop-annotations-j2cl",
+        "//third_party:jsinterop-annotations-j2cl",
         "//third_party:jspecify_annotations-j2cl",
     ],
 )

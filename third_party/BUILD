@@ -179,17 +179,17 @@ alias(
 )
 
 alias(
-    name = "gwt-jsinterop-annotations",
+    name = "jsinterop-annotations",
     actual = "@com_google_jsinterop_annotations-j2cl//:jsinterop-annotations",
 )
 
 j2cl_alias(
-    name = "gwt-jsinterop-annotations-j2cl",
+    name = "jsinterop-annotations-j2cl",
     actual = "@com_google_jsinterop_annotations-j2cl//:jsinterop-annotations-j2cl",
 )
 
 alias(
-    name = "gwt-jsinterop-annotations-j2cl_jar",
+    name = "jsinterop-annotations-j2cl_jar",
     actual = "@com_google_jsinterop_annotations-j2cl//java/jsinterop/annotations:annotations-j2cl_jar",
     visibility = ["//jre/java:__pkg__"],
 )

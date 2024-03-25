@@ -148,7 +148,7 @@ j2wasm_library(
     ],
     deps = [
         ":javaemul_internal_annotations-j2wasm",
-        "//third_party:gwt-jsinterop-annotations-j2wasm",
+        "//third_party:jsinterop-annotations-j2wasm",
     ],
 )
 
@@ -172,7 +172,7 @@ j2cl_library(
         ":jre_externs",
         "//third_party:closure_math_long",
         "//third_party:closure_reflect",
-        "//third_party:gwt-jsinterop-annotations-j2cl",
+        "//third_party:jsinterop-annotations-j2cl",
     ],
 )
 
@@ -185,7 +185,7 @@ java_library(
     visibility = ["//transpiler/javatests/com/google/j2cl/transpiler:__pkg__"],
     deps = [
         ":javaemul_internal_annotations",
-        "//third_party:gwt-jsinterop-annotations-j2cl_jar",
+        "//third_party:jsinterop-annotations-j2cl_jar",
     ],
 )
 
@@ -196,7 +196,7 @@ java_library(
     visibility = ["//transpiler/javatests/com/google/j2cl/transpiler:__pkg__"],
     deps = [
         ":javaemul_internal_annotations",
-        "//third_party:gwt-jsinterop-annotations-j2cl_jar",
+        "//third_party:jsinterop-annotations-j2cl_jar",
     ],
 )
 

@@ -15,5 +15,5 @@ readable_example(
     # TODO(b/311430445): enable j2kt-jvm build if `Parent<T extends Parent<?>>` is transpiled to
     # something valid in Kotlin.
     build_kt_readables = False,
-    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
+    deps = ["//third_party:jsinterop-annotations-j2cl"],
 )

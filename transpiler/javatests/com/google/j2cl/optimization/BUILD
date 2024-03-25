@@ -24,7 +24,7 @@ j2cl_test(
         "-XepDisableAllChecks",
     ],
     deps = [
-        "//third_party:gwt-jsinterop-annotations-j2cl",
+        "//third_party:jsinterop-annotations-j2cl",
         "//third_party:junit-j2cl",
     ],
 )

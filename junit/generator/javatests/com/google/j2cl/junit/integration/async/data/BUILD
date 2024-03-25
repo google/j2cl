@@ -92,17 +92,17 @@ j2cl_test_integration_test_data(
 
 j2cl_test_integration_test_data(
     name = "TestReturnTypeNotStructuralPromiseThenParameterCount",
-    deps = ASYNC_TEST_DEPS + ["//third_party:gwt-jsinterop-annotations"],
+    deps = ASYNC_TEST_DEPS + ["//third_party:jsinterop-annotations"],
 )
 
 j2cl_test_integration_test_data(
     name = "TestReturnTypeNotStructuralPromiseThenParameterNotJsType",
-    deps = ASYNC_TEST_DEPS + ["//third_party:gwt-jsinterop-annotations"],
+    deps = ASYNC_TEST_DEPS + ["//third_party:jsinterop-annotations"],
 )
 
 j2cl_test_integration_test_data(
     name = "TestReturnTypeNotStructuralPromiseThenNameRedefined",
-    deps = ASYNC_TEST_DEPS + ["//third_party:gwt-jsinterop-annotations"],
+    deps = ASYNC_TEST_DEPS + ["//third_party:jsinterop-annotations"],
 )
 
 j2cl_test_integration_test_data(

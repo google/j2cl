@@ -13,5 +13,5 @@ readable_example(
         "*.java",
         "*.native.js",
     ]),
-    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
+    deps = ["//third_party:jsinterop-annotations-j2cl"],
 )

@@ -14,7 +14,7 @@ j2cl_library(
     ],
     javacopts = [
     ],
-    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
+    deps = ["//third_party:jsinterop-annotations-j2cl"],
 )
 
 rta_test(

@@ -34,7 +34,7 @@ java_library(
         "//third_party:auto_value",
         "//third_party:escapevelocity",
         "//third_party:guava",
-        "//third_party:gwt-jsinterop-annotations",
+        "//third_party:jsinterop-annotations",
         "//third_party:jsr305_annotations",
         "//third_party:junit",
     ],

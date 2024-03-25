@@ -13,7 +13,7 @@ package(
 j2kt_jvm_library(
     name = "readable-j2kt-jvm",
     srcs = glob(["*.java"]),
-    deps = ["//third_party:gwt-jsinterop-annotations-j2kt-jvm"],
+    deps = ["//third_party:jsinterop-annotations-j2kt-jvm"],
 )
 
 readable_example(
@@ -25,5 +25,5 @@ readable_example(
     build_kt_native_readables = False,
     generate_wasm_imports = True,
     generate_wasm_modular = True,
-    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
+    deps = ["//third_party:jsinterop-annotations-j2cl"],
 )

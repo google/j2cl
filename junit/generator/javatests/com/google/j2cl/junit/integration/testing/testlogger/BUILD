@@ -27,7 +27,7 @@ j2wasm_library(
     srcs = glob(["super/*.java"]),
     deps = [
         "//third_party:closure_testcase",
-        "//third_party:gwt-jsinterop-annotations-j2wasm",
+        "//third_party:jsinterop-annotations-j2wasm",
     ],
 )
 
@@ -36,6 +36,6 @@ j2cl_library(
     srcs = glob(["super/*.java"]),
     deps = [
         "//third_party:closure_testcase",
-        "//third_party:gwt-jsinterop-annotations-j2cl",
+        "//third_party:jsinterop-annotations-j2cl",
     ],
 )

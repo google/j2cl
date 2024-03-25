@@ -42,7 +42,7 @@ j2cl_library(
     ],
     deps = [
         "//jre/java:javaemul_internal_annotations-j2cl",
-        "//third_party:gwt-jsinterop-annotations-j2cl",
+        "//third_party:jsinterop-annotations-j2cl",
         "//third_party:junit-j2cl",
     ],
 )
@@ -82,7 +82,7 @@ java_test(
     test_class = "com.google.j2cl.jre.AllTests",
     deps = [
         "//jre/java:javaemul_internal_annotations",
-        "//third_party:gwt-jsinterop-annotations",
+        "//third_party:jsinterop-annotations",
         "//third_party:junit",
     ],
 )
@@ -156,7 +156,7 @@ j2cl_library(
     srcs = JS_ONLY_SRCS,
     generate_build_test = False,
     deps = [
-        "//third_party:gwt-jsinterop-annotations-j2cl",
+        "//third_party:jsinterop-annotations-j2cl",
         "//third_party:junit-j2cl",
     ],
 )

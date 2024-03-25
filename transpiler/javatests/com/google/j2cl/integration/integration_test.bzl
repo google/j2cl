@@ -69,7 +69,7 @@ def integration_test(
         generate_build_test = False,
         deps = [
             ":%s-j2cl" % name,
-            "//third_party:gwt-jsinterop-annotations-j2cl",
+            "//third_party:jsinterop-annotations-j2cl",
         ],
         javacopts = JAVAC_FLAGS,
         tags = tags,
@@ -118,7 +118,7 @@ def integration_test(
 def integration_library(name, srcs = [], deps = [], exports = [], enable_nullability = False, **kwargs):
     default_deps = [
         "//jre/java:javaemul_internal_annotations",
-        "//third_party:gwt-jsinterop-annotations",
+        "//third_party:jsinterop-annotations",
         "//transpiler/javatests/com/google/j2cl/integration/testing:testing",
     ]
 

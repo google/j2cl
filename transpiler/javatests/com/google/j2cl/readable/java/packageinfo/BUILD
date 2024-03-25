@@ -12,7 +12,7 @@ package(
 j2cl_library(
     name = "thirdpartylib",
     srcs = glob(["thirdpartylib/*.java"]),
-    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
+    deps = ["//third_party:jsinterop-annotations-j2cl"],
 )
 
 readable_example(
@@ -22,6 +22,6 @@ readable_example(
     ]),
     deps = [
         ":thirdpartylib",
-        "//third_party:gwt-jsinterop-annotations-j2cl",
+        "//third_party:jsinterop-annotations-j2cl",
     ],
 )

@@ -15,5 +15,5 @@ readable_example(
     ]),
     # TODO(b/202515129): Allow dependencies on native code (like js & iOS) in J2KT
     generate_kt_readables = False,
-    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
+    deps = ["//third_party:jsinterop-annotations-j2cl"],
 )

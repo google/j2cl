@@ -19,7 +19,7 @@ j2cl_library(
     ]),
     generate_j2kt_jvm_library = False,
     generate_j2kt_native_library = False,
-    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
+    deps = ["//third_party:jsinterop-annotations-j2cl"],
 )
 
 integration_test(
