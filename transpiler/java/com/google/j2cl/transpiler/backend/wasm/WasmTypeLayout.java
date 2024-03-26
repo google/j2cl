@@ -156,9 +156,9 @@ abstract class WasmTypeLayout {
           getWasmSupertypeLayout().getAllPolymorphicMethodsByMangledName());
     }
     DeclaredTypeDescriptor typeDescriptor = getTypeDescriptor();
-    for (MethodDescriptor methodDescriptor : typeDescriptor.getPolymorphicMethods()) {
-      instanceMethodsByMangledName.put(methodDescriptor.getMangledName(), methodDescriptor);
-    }
+    typeDescriptor.getPolymorphicMethods().stream()
+        .sorted(Comparator.comparing(MethodDescriptor::getMangledName))
+        .forEach(md -> instanceMethodsByMangledName.put(md.getMangledName(), md));
     // Patch entry for $getClassImpl, since it is explicitly overridden in every class but does not
     // appear as overridden at the right target when calling getPolymorphicMethods().
     if (!typeDescriptor.isInterface()) {

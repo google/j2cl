@@ -48,6 +48,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /** Generates all the syntactic .wat constructs for wasm. */
 public class WasmConstructsGenerator {
@@ -277,8 +278,7 @@ public class WasmConstructsGenerator {
     // interface vtables and slot assignments.
     renderVtableStruct(
         type,
-        type.getDeclaration().getDeclaredMethodDescriptors().stream()
-            .filter(MethodDescriptor::isPolymorphic)
+        getSortedDeclaredPolymorphicMethodStream(type.getDeclaration())
             .collect(Collectors.toList()));
   }
 
@@ -688,11 +688,17 @@ public class WasmConstructsGenerator {
   private void initializeInterfaceVtable(
       WasmTypeLayout wasmTypeLayout, TypeDeclaration interfaceDeclaration) {
     ImmutableList<MethodDescriptor> interfaceMethodImplementations =
-        interfaceDeclaration.getDeclaredMethodDescriptors().stream()
-            .filter(MethodDescriptor::isPolymorphic)
+        getSortedDeclaredPolymorphicMethodStream(interfaceDeclaration)
             .map(wasmTypeLayout::getImplementationMethod)
             .collect(toImmutableList());
     emitVtableInitialization(interfaceDeclaration, interfaceMethodImplementations);
+  }
+
+  private static Stream<MethodDescriptor> getSortedDeclaredPolymorphicMethodStream(
+      TypeDeclaration typeDeclaration) {
+    return typeDeclaration.getDeclaredMethodDescriptors().stream()
+        .filter(MethodDescriptor::isPolymorphic)
+        .sorted(Comparator.comparing(MethodDescriptor::getMangledName));
   }
 
   /**
