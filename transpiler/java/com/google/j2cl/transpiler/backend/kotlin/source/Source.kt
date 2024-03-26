@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin.source
 
+import com.google.j2cl.common.SourcePosition
+import com.google.j2cl.transpiler.ast.MemberDescriptor
 import com.google.j2cl.transpiler.backend.common.SourceBuilder
 
 /** Composable piece of source code. */
@@ -55,6 +57,21 @@ private constructor(
    * returns this (empty) source.
    */
   inline fun ifNotEmpty(fn: (Source) -> Source) = if (isEmpty()) this else fn(this)
+
+  /** Returns source with additional source position information. */
+  fun withMapping(sourcePosition: SourcePosition): Source = withMapping { emitter ->
+    emitWithMapping(sourcePosition, emitter)
+  }
+
+  /** Returns source with additional source position information for the given member. */
+  fun withMapping(memberDescriptor: MemberDescriptor): Source = withMapping { emmiter ->
+    emitWithMemberMapping(memberDescriptor, emmiter)
+  }
+
+  private fun withMapping(emitFn: SourceBuilder.(() -> Unit) -> Unit): Source =
+    nonEmptyAppendFn?.let { appendFn ->
+      Source { sourceBuilder -> emitFn(sourceBuilder) { appendFn(sourceBuilder) } }
+    } ?: Source(null)
 
   companion object {
     val EMPTY = Source(null)

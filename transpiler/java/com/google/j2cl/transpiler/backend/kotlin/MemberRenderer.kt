@@ -108,8 +108,8 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
 
   private fun memberSource(member: JavaMember): Source =
     when (member) {
-      is Method -> methodSource(member)
-      is Field -> fieldSource(member)
+      is Method -> methodSource(member).withMapping(member.descriptor)
+      is Field -> fieldSource(member).withMapping(member.descriptor)
       is InitializerBlock -> initializerBlockSource(member)
       else -> throw InternalCompilerError("Unhandled ${member::class}")
     }

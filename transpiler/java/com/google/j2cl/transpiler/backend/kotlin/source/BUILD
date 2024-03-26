@@ -13,6 +13,8 @@ kt_jvm_library(
     name = "source",
     srcs = glob(["*.kt"]),
     deps = [
+        "//transpiler/java/com/google/j2cl/common",
+        "//transpiler/java/com/google/j2cl/transpiler/ast",
         "//transpiler/java/com/google/j2cl/transpiler/backend/common",
     ],
 )

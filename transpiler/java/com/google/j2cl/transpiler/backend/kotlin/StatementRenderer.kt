@@ -126,7 +126,7 @@ internal data class StatementRenderer(
       is ThrowStatement -> throwStatementSource(statement)
       is TryStatement -> tryStatementSource(statement)
       else -> throw InternalCompilerError("Unexpected ${statement::class.java.simpleName}")
-    }
+    }.withMapping(statement.sourcePosition)
 
   private fun assertStatementSource(assertStatement: AssertStatement): Source =
     spaceSeparated(

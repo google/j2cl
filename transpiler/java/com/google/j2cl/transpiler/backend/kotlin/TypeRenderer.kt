@@ -54,30 +54,32 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
 
   /** Returns source for the given type. */
   fun typeSource(type: Type): Source =
-    type.declaration.let { typeDeclaration ->
-      if (typeDeclaration.isKtNative) {
-        nativeTypeSource(typeDeclaration)
-      } else {
-        newLineSeparated(
-          objCNameRenderer.objCAnnotationSource(typeDeclaration),
-          jsInteropAnnotationRenderer.jsInteropAnnotationsSource(typeDeclaration),
-          spaceSeparated(
-            inheritanceModifierSource(typeDeclaration),
-            classModifiersSource(typeDeclaration),
-            kindModifiersSource(typeDeclaration),
-            colonSeparated(
-              spaceSeparated(
-                typeDeclarationSource(typeDeclaration),
-                ktPrimaryConstructorSource(type),
+    type.declaration
+      .let { typeDeclaration ->
+        if (typeDeclaration.isKtNative) {
+          nativeTypeSource(typeDeclaration)
+        } else {
+          newLineSeparated(
+            objCNameRenderer.objCAnnotationSource(typeDeclaration),
+            jsInteropAnnotationRenderer.jsInteropAnnotationsSource(typeDeclaration),
+            spaceSeparated(
+              inheritanceModifierSource(typeDeclaration),
+              classModifiersSource(typeDeclaration),
+              kindModifiersSource(typeDeclaration),
+              colonSeparated(
+                spaceSeparated(
+                  typeDeclarationSource(typeDeclaration),
+                  ktPrimaryConstructorSource(type),
+                ),
+                superTypesSource(type),
               ),
-              superTypesSource(type),
+              nameRenderer.whereClauseSource(typeDeclaration.typeParameterDescriptors),
+              typeBodySource(type),
             ),
-            nameRenderer.whereClauseSource(typeDeclaration.typeParameterDescriptors),
-            typeBodySource(type),
-          ),
-        )
+          )
+        }
       }
-    }
+      .withMapping(type.sourcePosition)
 
   /** Returns source with body of the given type. */
   fun typeBodySource(type: Type): Source =
