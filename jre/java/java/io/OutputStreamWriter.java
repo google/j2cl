@@ -30,6 +30,8 @@ public class OutputStreamWriter extends Writer {
 
   private final Charset charset;
 
+  private final char[] surrogateBuffer = new char[2];
+
   public OutputStreamWriter(OutputStream out, String charsetName) {
     this(out, Charset.forName(charsetName));
   }
@@ -41,6 +43,9 @@ public class OutputStreamWriter extends Writer {
 
   @Override
   public void close() throws IOException {
+    if (surrogateBuffer[0] != 0) {
+      out.write('?');
+    }
     out.close();
   }
 
@@ -56,7 +61,25 @@ public class OutputStreamWriter extends Writer {
   @Override
   public void write(char[] buffer, int offset, int count) throws IOException {
     IOUtils.checkOffsetAndCount(buffer, offset, count);
-    byte[] byteBuffer = ((EmulatedCharset) charset).getBytes(buffer, offset, count);
-    out.write(byteBuffer, 0, byteBuffer.length);
+
+    if (count == 0) {
+      return;
+    }
+
+    // If we have a pending high surrogate, insert it in front of a copy of the buffer
+    if (surrogateBuffer[0] != 0) {
+      surrogateBuffer[1] = buffer[offset++];
+      count--;
+      out.write(((EmulatedCharset) charset).getBytes(surrogateBuffer, 0, 2));
+      surrogateBuffer[0] = 0;
+    }
+
+    // If our data ends in a high surrogate, the low surrogate is missing and we need to remove
+    // it from the current conversion.
+    if (count > 0 && Character.isHighSurrogate(buffer[count - 1])) {
+      surrogateBuffer[0] = buffer[--count];
+    }
+    byte[] bytes = ((EmulatedCharset) charset).getBytes(buffer, offset, count);
+    out.write(bytes, 0, bytes.length);
   }
 }
