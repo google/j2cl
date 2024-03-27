@@ -72,13 +72,13 @@
   ))
  )
  (type $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.itable (sub $itable (struct
- (field $slot0 (ref $intersectiontype.Serial.vtable))
- (field $slot1 (ref $intersectiontype.Cmp.vtable))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
+  (field (ref $intersectiontype.Serial.vtable))
+  (field (ref $intersectiontype.Cmp.vtable))
+  (field (ref null struct))
+  (field (ref null struct))
+  (field (ref null struct))
+  (field (ref null struct))
+  (field (ref null struct))
  )))
 
  ;;; Code for intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 [type definition]
@@ -98,13 +98,13 @@
   ))
  )
  (type $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.itable (sub $itable (struct
- (field $slot0 (ref $intersectiontype.Serial.vtable))
- (field $slot1 (ref $intersectiontype.Cmp2.vtable))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
+  (field (ref $intersectiontype.Serial.vtable))
+  (field (ref $intersectiontype.Cmp2.vtable))
+  (field (ref null struct))
+  (field (ref null struct))
+  (field (ref null struct))
+  (field (ref null struct))
+  (field (ref null struct))
  )))
 
  ;;; Code for intersectiontype.IntersectionTypeTest.MapEntry [type definition]
@@ -964,13 +964,13 @@
    ;;@ intersectiontype/IntersectionTypeTest.java:115:4
    (local.set $$qualifier (local.get $t))
    ;;@ intersectiontype/IntersectionTypeTest.java:115:4
-   (drop (call_ref $function.m_cmp__int (ref.as_non_null (local.get $$qualifier))(struct.get $intersectiontype.Cmp.vtable $m_cmp__int (ref.cast (ref $intersectiontype.Cmp.vtable) (struct.get $itable $slot1 (struct.get $java.lang.Object $itable (local.get $$qualifier)))))))
+   (drop (call_ref $function.m_cmp__int (ref.as_non_null (local.get $$qualifier))(struct.get $intersectiontype.Cmp.vtable $m_cmp__int (ref.cast (ref $intersectiontype.Cmp.vtable) (struct.get $itable 1 (struct.get $java.lang.Object $itable (local.get $$qualifier)))))))
   )
   (block
    ;;@ intersectiontype/IntersectionTypeTest.java:116:4
    (local.set $$qualifier_1 (ref.cast (ref null $intersectiontype.IntersectionTypeTest.SomeConcreteType) (ref.null $java.lang.Object)))
    ;;@ intersectiontype/IntersectionTypeTest.java:116:4
-   (drop (call_ref $function.m_cmp__int (ref.as_non_null (local.get $$qualifier_1))(struct.get $intersectiontype.Cmp.vtable $m_cmp__int (ref.cast (ref $intersectiontype.Cmp.vtable) (struct.get $itable $slot1 (struct.get $java.lang.Object $itable (local.get $$qualifier_1)))))))
+   (drop (call_ref $function.m_cmp__int (ref.as_non_null (local.get $$qualifier_1))(struct.get $intersectiontype.Cmp.vtable $m_cmp__int (ref.cast (ref $intersectiontype.Cmp.vtable) (struct.get $itable 1 (struct.get $java.lang.Object $itable (local.get $$qualifier_1)))))))
   )
  )
 )

@@ -260,9 +260,9 @@ final class ExpressionTranspiler {
           sourceBuilder.append(")");
         } else {
           DeclaredTypeDescriptor targetTypeDescriptor = (DeclaredTypeDescriptor) testTypeDescriptor;
-          String interfaceSlotFieldName =
-              environment.getInterfaceSlotFieldName(targetTypeDescriptor.getTypeDeclaration());
-          if (interfaceSlotFieldName == null) {
+          String interfaceIndexFieldName =
+              environment.getInterfaceIndexFieldName(targetTypeDescriptor.getTypeDeclaration());
+          if (interfaceIndexFieldName == null) {
             // The interface does not have implementors, hence instanceof is false.
             sourceBuilder.append("(i32.const 0)");
             return false;
@@ -278,13 +278,14 @@ final class ExpressionTranspiler {
           sourceBuilder.append("(else ");
           sourceBuilder.indent();
           sourceBuilder.newLine();
-          // Check whether the itable slot assigned to the interface actually contains the
-          // interface vtable, since the slots are reused.
+          // Check whether the itable index assigned to the interface actually contains the
+          // interface vtable, since the indices are reused.
           sourceBuilder.append(
               format(
                   "(ref.test (ref %s) (struct.get $itable %s "
                       + "(struct.get $java.lang.Object $itable ",
-                  environment.getWasmVtableTypeName(targetTypeDescriptor), interfaceSlotFieldName));
+                  environment.getWasmVtableTypeName(targetTypeDescriptor),
+                  interfaceIndexFieldName));
           render(instanceOfExpression.getExpression());
           sourceBuilder.append(" )))");
           sourceBuilder.unindent();
@@ -456,7 +457,7 @@ final class ExpressionTranspiler {
             format(
                 "(struct.get %s %s ",
                 environment.getWasmVtableTypeName(enclosingTypeDescriptor),
-                environment.getVtableSlot(target)));
+                environment.getVtableFieldName(target)));
 
         // Retrieve the corresponding vtable.
         if (target.isClassDynamicDispatch()) {
@@ -471,9 +472,9 @@ final class ExpressionTranspiler {
           // For an interface dynamic dispatch the vtable resides in a field of the $itable struct
           // object passed as the qualifier.
 
-          String itableSlotFieldName =
-              environment.getInterfaceSlotFieldName(enclosingTypeDescriptor.getTypeDeclaration());
-          if (itableSlotFieldName == null) {
+          String interfaceIndexFieldName =
+              environment.getInterfaceIndexFieldName(enclosingTypeDescriptor.getTypeDeclaration());
+          if (interfaceIndexFieldName == null) {
             // The interface is not implemented by any class, skip the itable lookup and emit
             // null instead.
             sourceBuilder.append(
@@ -490,7 +491,7 @@ final class ExpressionTranspiler {
                 String.format(
                     "(ref.cast (ref %s) (struct.get $itable %s (struct.get %s $itable ",
                     environment.getWasmVtableTypeName(enclosingTypeDescriptor),
-                    itableSlotFieldName,
+                    interfaceIndexFieldName,
                     environment.getWasmTypeName(enclosingTypeDescriptor)));
             render(methodCall.getQualifier());
             sourceBuilder.append(")))");

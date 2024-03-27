@@ -78,13 +78,13 @@
   ))
  )
  (type $instancejsmethods.Child.itable (sub $itable (struct
- (field $slot0 (ref $instancejsmethods.MyInterface.vtable))
- (field $slot1 (ref null struct))
- (field $slot2 (ref null struct))
- (field $slot3 (ref null struct))
- (field $slot4 (ref null struct))
- (field $slot5 (ref null struct))
- (field $slot6 (ref null struct))
+  (field (ref $instancejsmethods.MyInterface.vtable))
+  (field (ref null struct))
+  (field (ref null struct))
+  (field (ref null struct))
+  (field (ref null struct))
+  (field (ref null struct))
+  (field (ref null struct))
  )))
 
 ;;; Code for instancejsmethods.SuperParent [vtable.init]
@@ -454,7 +454,7 @@
   ;;@ instancejsmethods/Main.java:130:4
   (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $cc))(i32.const 1)(struct.get $instancejsmethods.Parent.vtable $m_foo__int__int (struct.get $instancejsmethods.Parent $vtable(local.get $cc)))))
   ;;@ instancejsmethods/Main.java:131:4
-  (drop (call_ref $function.m_intfFoo__int (ref.as_non_null (local.get $intf))(struct.get $instancejsmethods.MyInterface.vtable $m_intfFoo__int (ref.cast (ref $instancejsmethods.MyInterface.vtable) (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $intf)))))))
+  (drop (call_ref $function.m_intfFoo__int (ref.as_non_null (local.get $intf))(struct.get $instancejsmethods.MyInterface.vtable $m_intfFoo__int (ref.cast (ref $instancejsmethods.MyInterface.vtable) (struct.get $itable 0 (struct.get $java.lang.Object $itable (local.get $intf)))))))
  )
 )
 (elem declare func $m_testCallBySuperParent__void@instancejsmethods.Main)

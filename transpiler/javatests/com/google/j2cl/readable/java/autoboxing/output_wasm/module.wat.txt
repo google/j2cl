@@ -674,15 +674,15 @@
   ;;@ autoboxing/AutoBoxing.java:124:4
   (local.set $sum (f64.const 0.0))
   ;;@ autoboxing/AutoBoxing.java:125:4
-  (local.set $$iterator (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $boxedDoubles))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast (ref $java.lang.Iterable.vtable) (struct.get $itable $slot2 (struct.get $java.lang.Object $itable (local.get $boxedDoubles)))))))
+  (local.set $$iterator (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $boxedDoubles))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast (ref $java.lang.Iterable.vtable) (struct.get $itable 2 (struct.get $java.lang.Object $itable (local.get $boxedDoubles)))))))
   (block $LOOP.BREAK
    (loop
-    (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast (ref $java.util.Iterator.vtable) (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $$iterator))))))))
+    (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast (ref $java.util.Iterator.vtable) (struct.get $itable 0 (struct.get $java.lang.Object $itable (local.get $$iterator))))))))
     (block $LOOP.CONTINUE
      (block
       ;;@ autoboxing/AutoBoxing.java:125:4
       (local.set $d (block (result f64)
-       (local.set $$qualifier (ref.cast (ref null $java.lang.Double) (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (ref $java.util.Iterator.vtable) (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $$iterator))))))))
+       (local.set $$qualifier (ref.cast (ref null $java.lang.Double) (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (ref $java.util.Iterator.vtable) (struct.get $itable 0 (struct.get $java.lang.Object $itable (local.get $$iterator))))))))
        (call_ref $function.m_doubleValue__double (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Double.vtable $m_doubleValue__double (struct.get $java.lang.Double $vtable(local.get $$qualifier))))
       ))
       (block

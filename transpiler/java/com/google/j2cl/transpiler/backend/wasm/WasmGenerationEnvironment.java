@@ -242,7 +242,7 @@ public class WasmGenerationEnvironment {
   }
 
   /** Returns the name of the field in the vtable that corresponds to {@code methodDescriptor}. */
-  public String getVtableSlot(MethodDescriptor methodDescriptor) {
+  public String getVtableFieldName(MethodDescriptor methodDescriptor) {
     return "$" + methodDescriptor.getMangledName();
   }
 
@@ -325,32 +325,35 @@ public class WasmGenerationEnvironment {
         .collect(toImmutableMap(this::getFunctionTypeName, Function.identity(), (a, b) -> a));
   }
 
-  private final Map<TypeDeclaration, Integer> slotByInterfaceTypeDeclaration = new HashMap<>();
+  private final Map<TypeDeclaration, Integer> itableIndexByInterfaceTypeDeclaration =
+      new HashMap<>();
 
   @Nullable
-  public String getInterfaceSlotFieldName(TypeDeclaration typeDeclaration) {
+  public String getInterfaceIndexFieldName(TypeDeclaration typeDeclaration) {
     if (isModular) {
       return getTypeSignature(typeDeclaration.toUnparameterizedTypeDescriptor());
     }
 
-    Integer slot = getInterfaceSlot(typeDeclaration);
-    if (slot == null) {
-      // Interfaces with no implementors will not have a slot assigned.
+    Integer index = getItableIndexForInterface(typeDeclaration);
+    if (index == null) {
+      // Interfaces with no implementors will not have an index in the itable; alternatively
+      // they could have any index.
       return null;
     }
 
-    return getInterfaceSlotFieldName(slot);
+    // In monolithic we directly use the index with no identifier.
+    return getInterfaceIndexFieldName(index);
   }
 
-  public String getInterfaceSlotFieldName(int slot) {
-    return format("$slot%d", slot);
+  public String getInterfaceIndexFieldName(int slot) {
+    return format("%d", slot);
   }
 
-  Integer getInterfaceSlot(TypeDeclaration typeDeclaration) {
+  Integer getItableIndexForInterface(TypeDeclaration typeDeclaration) {
     if (isModular) {
       throw new UnsupportedOperationException();
     }
-    return slotByInterfaceTypeDeclaration.get(typeDeclaration);
+    return itableIndexByInterfaceTypeDeclaration.get(typeDeclaration);
   }
 
   /** The data index for the array literals that can be emitted as data. */
@@ -383,13 +386,13 @@ public class WasmGenerationEnvironment {
     return dataNameByLiteral.get(arrayLiteral);
   }
 
-  private int numberOfInterfaceSlots = -1;
+  private int itableSize = -1;
 
-  int getNumberOfInterfaceSlots() {
+  int getItableSize() {
     if (isModular) {
       throw new UnsupportedOperationException();
     }
-    return numberOfInterfaceSlots;
+    return itableSize;
   }
 
   private final JsImportsGenerator.Imports jsImports;
@@ -514,7 +517,7 @@ public class WasmGenerationEnvironment {
             comparingInt((TypeDeclaration td) -> concreteTypesByInterface.get(td).size())
                 .reversed())
         .forEach(i -> assignFirstNonConflictingSlot(i, concreteTypesByInterface, classesBySlot));
-    numberOfInterfaceSlots = classesBySlot.keySet().size();
+    itableSize = classesBySlot.keySet().size();
   }
 
   /** Assigns the lowest non conflicting slot to {@code interfaceToAssign}. */
@@ -525,7 +528,7 @@ public class WasmGenerationEnvironment {
     int slot =
         getFirstNonConflictingSlot(
             interfaceToAssign, concreteTypesBySlot, concreteTypesByInterface);
-    slotByInterfaceTypeDeclaration.put(interfaceToAssign, slot);
+    itableIndexByInterfaceTypeDeclaration.put(interfaceToAssign, slot);
     // Add all the concrete implementors for that interface to the assigned slot, to mark
     // that slot as already used in all those types.
     concreteTypesBySlot.putAll(slot, concreteTypesByInterface.get(interfaceToAssign));
