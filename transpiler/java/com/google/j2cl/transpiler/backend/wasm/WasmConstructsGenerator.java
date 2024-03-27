@@ -47,14 +47,13 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /** Generates all the syntactic .wat constructs for wasm. */
 public class WasmConstructsGenerator {
 
   private final SourceBuilder builder;
-  private WasmGenerationEnvironment environment;
+  private final WasmGenerationEnvironment environment;
 
   public WasmConstructsGenerator(WasmGenerationEnvironment environment, SourceBuilder builder) {
     this.environment = environment;
@@ -279,8 +278,7 @@ public class WasmConstructsGenerator {
     // interface vtables and index assignments.
     renderVtableStruct(
         type,
-        getSortedDeclaredPolymorphicMethodStream(type.getDeclaration())
-            .collect(Collectors.toList()));
+        getSortedDeclaredPolymorphicMethodStream(type.getDeclaration()).collect(toImmutableList()));
   }
 
   private void renderVtableStruct(Type type, Collection<MethodDescriptor> methods) {
