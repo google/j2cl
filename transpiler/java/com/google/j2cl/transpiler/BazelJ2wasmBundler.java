@@ -420,8 +420,8 @@ final class BazelJ2wasmBundler extends BazelWorker {
         for (var i : interfaces) {
           sb.append(
               format(
-                  "  (field %s (ref %s))\n",
-                  i.name, implementsInterface(i) ? i.name + ".vtable" : "null struct"));
+                  "  (field (ref %s))\n",
+                  implementsInterface(i) ? i.name + ".vtable" : "null struct"));
         }
         sb.append(")))\n");
         return sb.toString();
