@@ -302,11 +302,12 @@ public class WasmConstructsGenerator {
   }
 
   private void emitStaticFieldGlobals(Type type) {
-    if (AstUtils.isNonNativeJsEnum(type.getTypeDescriptor())) {
+    var fields = type.getStaticFields();
+    if (AstUtils.isNonNativeJsEnum(type.getTypeDescriptor()) || fields.isEmpty()) {
       return;
     }
     emitBeginCodeComment(type, "static fields");
-    for (Field field : type.getStaticFields()) {
+    for (Field field : fields) {
       builder.newLine();
       builder.append("(global " + environment.getFieldName(field));
 
