@@ -506,8 +506,8 @@ public class WasmGenerationEnvironment {
         .filter(Predicates.not(Type::isInterface))
         .forEach(
             t ->
-                t.getDeclaration()
-                    .getAllSuperInterfaces()
+                t.getDeclaration().getAllSuperTypesIncludingSelf().stream()
+                    .filter(TypeDeclaration::isInterface)
                     .forEach(i -> concreteTypesByInterface.put(i, t.getDeclaration())));
 
     // Traverse and assign interfaces by most implemented to least implemented so that widely

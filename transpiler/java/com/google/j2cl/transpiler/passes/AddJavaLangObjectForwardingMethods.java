@@ -22,6 +22,7 @@ import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.Type;
+import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -54,7 +55,8 @@ public class AddJavaLangObjectForwardingMethods extends NormalizationPass {
 
     Map<String, MethodDescriptor> requiredJavaLangObjectMethods =
         type.getDeclaration().getInterfaceTypeDescriptors().stream()
-            .flatMap(t -> t.getTypeDeclaration().getAllSuperInterfaces().stream())
+            .flatMap(t -> t.getTypeDeclaration().getAllSuperTypesIncludingSelf().stream())
+            .filter(TypeDeclaration::isInterface)
             // TODO(b/317299672): Remove JsType special casing since should preserve all of them for
             // migration purposes.
             .filter(t -> PRESERVE_EQUALS_FOR_JSTYPE_INTERFACE && t.isJsType())

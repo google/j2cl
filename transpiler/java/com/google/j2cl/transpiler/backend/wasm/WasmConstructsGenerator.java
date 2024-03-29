@@ -45,7 +45,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -581,8 +580,8 @@ public class WasmConstructsGenerator {
     builder.newLine();
     builder.append(")");
 
-    typeDeclaration
-        .getAllSuperInterfaces()
+    typeDeclaration.getAllSuperTypesIncludingSelf().stream()
+        .filter(TypeDeclaration::isInterface)
         .forEach(
             i -> {
               builder.newLine();
@@ -646,7 +645,10 @@ public class WasmConstructsGenerator {
   }
 
   private TypeDeclaration[] getInterfacesByItableIndex(TypeDeclaration typeDeclaration) {
-    Set<TypeDeclaration> superInterfaces = typeDeclaration.getAllSuperInterfaces();
+    ImmutableList<TypeDeclaration> superInterfaces =
+        typeDeclaration.getAllSuperTypesIncludingSelf().stream()
+            .filter(TypeDeclaration::isInterface)
+            .collect(toImmutableList());
 
     // Compute the itable for this type.
     int numSlots = environment.getItableSize();

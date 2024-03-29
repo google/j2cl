@@ -110,7 +110,8 @@ public final class SummaryBuilder {
       typeHierarchyInfoBuilder.setExtendsType(getTypeId(superTypeDescriptor));
     }
 
-    type.getDeclaration().getAllSuperInterfaces().stream()
+    type.getDeclaration().getAllSuperTypesIncludingSelf().stream()
+        .filter(TypeDeclaration::isInterface)
         .filter(not(TypeDeclaration::isNative))
         .forEach(
             t ->
