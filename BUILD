@@ -1,9 +1,10 @@
+load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
+load("@rules_license//rules:license.bzl", "license")
+load("//build_defs:rules.bzl", "j2cl_alias")
+
 # Description:
 #  Public targets available externally. Also see build_defs/rules.bzl for the provided rules.
 load("@bazel_skylib//rules:common_settings.bzl", "bool_flag", "string_flag")
-load("//build_defs:rules.bzl", "j2cl_alias")
-load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
-load("@rules_license//rules:license.bzl", "license")
 
 package(
     default_applicable_licenses = [":j2cl_license"],

@@ -1,5 +1,5 @@
-load("//build_defs:rules.bzl", "j2cl_library")
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
+load("//build_defs:rules.bzl", "j2cl_library")
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],

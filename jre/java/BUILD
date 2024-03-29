@@ -2,8 +2,8 @@
 #   j2cl/jre: JRE subset for transpilation.
 #
 
-load("//build_defs:rules.bzl", "j2cl_import", "j2cl_library", "j2wasm_library")
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
+load("//build_defs:rules.bzl", "j2cl_import", "j2cl_library", "j2wasm_library")
 load(":j2cl_java_toolchain.bzl", "j2cl_java_toolchain")
 load(":package_sources.bzl", "package_sources")
 

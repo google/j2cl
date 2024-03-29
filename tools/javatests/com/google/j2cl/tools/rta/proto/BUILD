@@ -1,8 +1,8 @@
+load("//third_party/java/j2cl_proto:j2cl_proto_library.bzl", "j2cl_proto_library")
 load(
     "//tools/javatests/com/google/j2cl/tools/rta:rta_test.bzl",
     "rta_test",
 )
-load("//third_party/java/j2cl_proto:j2cl_proto_library.bzl", "j2cl_proto_library")
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],
