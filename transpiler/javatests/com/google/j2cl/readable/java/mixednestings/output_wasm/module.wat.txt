@@ -859,7 +859,7 @@
   ;;@ mixednestings/MixedNestings.java:47:24
   (local.set $iii (call $$create__mixednestings_MixedNestings_A_1B_1@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 (struct.get $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 $$outer_this@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 (local.get $this))))
   ;;@ mixednestings/MixedNestings.java:59:24
-  (return (call_ref $function.m_fun__int__int (ref.as_non_null (local.get $iii))(i32.const 200)(struct.get $mixednestings.MyInterface.vtable $m_fun__int__int (ref.cast (ref $mixednestings.MyInterface.vtable) (struct.get $itable 0 (struct.get $java.lang.Object $itable (local.get $iii)))))))
+  (return (call_ref $function.m_fun__int__int (ref.as_non_null (local.get $iii))(i32.const 200)(struct.get $mixednestings.MyInterface.vtable $m_fun__int__int (ref.cast (ref $mixednestings.MyInterface.vtable) (call $get.itable.0 (local.get $iii))))))
  )
 )
 (elem declare func $m_fun__int__int@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2)
@@ -970,7 +970,7 @@
   ;;@ mixednestings/MixedNestings.java:42:18
   (local.set $ii (call $$create__mixednestings_MixedNestings_A_1B_1@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 (local.get $this)))
   ;;@ mixednestings/MixedNestings.java:61:18
-  (return (call_ref $function.m_fun__int__int (ref.as_non_null (local.get $ii))(i32.const 300)(struct.get $mixednestings.MyInterface.vtable $m_fun__int__int (ref.cast (ref $mixednestings.MyInterface.vtable) (struct.get $itable 0 (struct.get $java.lang.Object $itable (local.get $ii)))))))
+  (return (call_ref $function.m_fun__int__int (ref.as_non_null (local.get $ii))(i32.const 300)(struct.get $mixednestings.MyInterface.vtable $m_fun__int__int (ref.cast (ref $mixednestings.MyInterface.vtable) (call $get.itable.0 (local.get $ii))))))
  )
 )
 (elem declare func $m_fun__int__int@mixednestings.MixedNestings.A.1B.1)
@@ -1092,7 +1092,7 @@
   ;;@ mixednestings/MixedNestings.java:37:10
   (local.set $i (call $$create__mixednestings_MixedNestings_A_1B@mixednestings.MixedNestings.A.1B.1 (local.get $this)))
   ;;@ mixednestings/MixedNestings.java:64:10
-  (return (call_ref $function.m_fun__int__int (ref.as_non_null (local.get $i))(i32.const 400)(struct.get $mixednestings.MyInterface.vtable $m_fun__int__int (ref.cast (ref $mixednestings.MyInterface.vtable) (struct.get $itable 0 (struct.get $java.lang.Object $itable (local.get $i)))))))
+  (return (call_ref $function.m_fun__int__int (ref.as_non_null (local.get $i))(i32.const 400)(struct.get $mixednestings.MyInterface.vtable $m_fun__int__int (ref.cast (ref $mixednestings.MyInterface.vtable) (call $get.itable.0 (local.get $i))))))
  )
 )
 (elem declare func $m_b__int@mixednestings.MixedNestings.A.1B)

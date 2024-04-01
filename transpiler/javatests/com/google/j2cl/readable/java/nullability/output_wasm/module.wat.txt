@@ -7346,7 +7346,7 @@
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:358:79
   (call $$clinit__void_<once>_@nullability.defaultnotnullable.DefaultNotNullable )
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:359:4
-  (drop (call_ref $function.m_add__java_lang_Object__boolean (ref.as_non_null (local.get $l))(local.get $t)(struct.get $java.util.Collection.vtable $m_add__java_lang_Object__boolean (ref.cast (ref $java.util.Collection.vtable) (struct.get $itable 1 (struct.get $java.lang.Object $itable (local.get $l)))))))
+  (drop (call_ref $function.m_add__java_lang_Object__boolean (ref.as_non_null (local.get $l))(local.get $t)(struct.get $java.util.Collection.vtable $m_add__java_lang_Object__boolean (ref.cast (ref $java.util.Collection.vtable) (call $get.itable.1 (local.get $l))))))
  )
 )
 
@@ -11012,7 +11012,7 @@
   (local.set $b (if (result i32) (ref.is_null (ref.null $java.lang.Object))
    (then (i32.const 0))
    (else 
-    (ref.test (ref $nullability.explicitnotnullable.ExplicitNotNullable.Consumer.vtable) (struct.get $itable 0 (struct.get $java.lang.Object $itable (ref.null $java.lang.Object) )))
+    (ref.test (ref $nullability.explicitnotnullable.ExplicitNotNullable.Consumer.vtable) (call $get.itable.0 (ref.null $java.lang.Object) ))
    )
   ))
  )
@@ -11031,7 +11031,7 @@
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:425:4
   (local.set $localString (local.get $string))
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:430:4
-  (return (ref.cast (ref null $java.lang.String) (call_ref $function.m_apply__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $f))(local.get $localString)(struct.get $nullability.explicitnotnullable.ExplicitNotNullable.Function.vtable $m_apply__java_lang_Object__java_lang_Object (ref.cast (ref $nullability.explicitnotnullable.ExplicitNotNullable.Function.vtable) (struct.get $itable 0 (struct.get $java.lang.Object $itable (local.get $f))))))))
+  (return (ref.cast (ref null $java.lang.String) (call_ref $function.m_apply__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $f))(local.get $localString)(struct.get $nullability.explicitnotnullable.ExplicitNotNullable.Function.vtable $m_apply__java_lang_Object__java_lang_Object (ref.cast (ref $nullability.explicitnotnullable.ExplicitNotNullable.Function.vtable) (call $get.itable.0 (local.get $f)))))))
  )
 )
 

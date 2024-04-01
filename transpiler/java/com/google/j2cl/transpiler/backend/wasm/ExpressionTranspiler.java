@@ -282,12 +282,11 @@ final class ExpressionTranspiler {
           // interface vtable, since the indices are reused.
           sourceBuilder.append(
               format(
-                  "(ref.test (ref %s) (struct.get $itable %s "
-                      + "(struct.get $java.lang.Object $itable ",
+                  "(ref.test (ref %s) (call %s ",
                   environment.getWasmVtableTypeName(targetTypeDescriptor),
-                  interfaceIndexFieldName));
+                  environment.getWasmItableInterfaceGetter(interfaceIndexFieldName)));
           render(instanceOfExpression.getExpression());
-          sourceBuilder.append(" )))");
+          sourceBuilder.append(" ))");
           sourceBuilder.unindent();
           sourceBuilder.newLine();
           sourceBuilder.append(")");
@@ -489,12 +488,11 @@ final class ExpressionTranspiler {
             // correct interface vtable in the `itable` slot.
             sourceBuilder.append(
                 String.format(
-                    "(ref.cast (ref %s) (struct.get $itable %s (struct.get %s $itable ",
+                    "(ref.cast (ref %s) (call %s ",
                     environment.getWasmVtableTypeName(enclosingTypeDescriptor),
-                    interfaceIndexFieldName,
-                    environment.getWasmTypeName(enclosingTypeDescriptor)));
+                    environment.getWasmItableInterfaceGetter(interfaceIndexFieldName)));
             render(methodCall.getQualifier());
-            sourceBuilder.append(")))");
+            sourceBuilder.append("))");
           }
         }
 

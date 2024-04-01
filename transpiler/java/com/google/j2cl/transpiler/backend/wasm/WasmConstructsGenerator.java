@@ -20,6 +20,7 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.lang.String.format;
 import static java.util.Arrays.stream;
 
+import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.StringUtils;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
@@ -696,6 +697,34 @@ public class WasmConstructsGenerator {
             .map(wasmTypeLayout::getImplementationMethod)
             .collect(toImmutableList());
     emitVtableInitialization(interfaceDeclaration, interfaceMethodImplementations);
+  }
+
+  public void emitItableInterfaceGetters(Library library) {
+    library
+        .streamTypes()
+        .filter(Type::isInterface)
+        .map(Type::getDeclaration)
+        .map(environment::getInterfaceIndexFieldName)
+        .filter(Predicates.notNull())
+        .distinct()
+        .forEach(this::emitItableInterfaceGetter);
+  }
+
+  public void emitItableInterfaceGetter(String fieldName) {
+    builder.newLine();
+    builder.append(
+        format(
+            "(func %s (param $object (ref null $java.lang.Object)) (result (ref null struct)) ",
+            environment.getWasmItableInterfaceGetter(fieldName)));
+    builder.indent();
+    builder.newLine();
+    builder.append(
+        format(
+            "(struct.get $itable %s (struct.get $java.lang.Object $itable (local.get $object)))",
+            fieldName));
+    builder.unindent();
+    builder.newLine();
+    builder.append(")");
   }
 
   private static Stream<MethodDescriptor> getSortedDeclaredPolymorphicMethodStream(

@@ -208,6 +208,7 @@ public class WasmGeneratorStage {
     // Last, emit all methods at the very end so that the synthetic code generated above does
     // not inherit an incorrect source position.
     generator.emitForEachType(library, generator::renderTypeMethods, "methods");
+    generator.emitItableInterfaceGetters(library);
 
     builder.newLine();
     builder.append(")");

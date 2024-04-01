@@ -44,12 +44,14 @@ import com.google.j2cl.transpiler.ast.StringLiteralGettersCreator;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import com.google.j2cl.transpiler.backend.wasm.JsImportsGenerator;
 import com.google.j2cl.transpiler.backend.wasm.SharedSnippet;
 import com.google.j2cl.transpiler.backend.wasm.Summary;
 import com.google.j2cl.transpiler.backend.wasm.SystemPropertyInfo;
 import com.google.j2cl.transpiler.backend.wasm.TypeInfo;
 import com.google.j2cl.transpiler.backend.wasm.WasmConstructsGenerator;
+import com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment;
 import com.google.j2cl.transpiler.backend.wasm.WasmGeneratorStage;
 import com.google.j2cl.transpiler.frontend.jdt.JdtEnvironment;
 import com.google.j2cl.transpiler.frontend.jdt.JdtParser;
@@ -174,6 +176,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
                 Stream.of(generatorStage.emitToString(WasmConstructsGenerator::emitExceptionTag)),
                 getModuleParts("functions"),
                 literalGetterMethods,
+                Stream.of(typeGraph.getItableInterfaceGetters(generatorStage.getEnvironment())),
                 Stream.of(")"))
             .collect(toImmutableList());
 
@@ -392,6 +395,14 @@ final class BazelJ2wasmBundler extends BazelWorker {
       }
       sb.append("))\n");
       return sb.toString();
+    }
+
+    public String getItableInterfaceGetters(WasmGenerationEnvironment environment) {
+      SourceBuilder sourceBuilder = new SourceBuilder();
+      WasmConstructsGenerator constructsGenerator =
+          new WasmConstructsGenerator(environment, sourceBuilder);
+      interfaces.forEach(i -> constructsGenerator.emitItableInterfaceGetter(i.name));
+      return sourceBuilder.build();
     }
 
     private class Type {
