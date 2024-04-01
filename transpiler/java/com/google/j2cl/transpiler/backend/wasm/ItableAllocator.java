@@ -42,7 +42,7 @@ import java.util.function.Function;
  * presented in the paper are for performing "instanceof" checks, they generalize to interface
  * dispatch.
  */
-class ItableAllocator<T> {
+public class ItableAllocator<T> {
   private final SetMultimap<T, T> classesByInterface = LinkedHashMultimap.create();
   private final List<Set<T>> classesByFieldindex = new ArrayList<>();
 

@@ -25,6 +25,8 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Streams;
 import com.google.common.io.Files;
 import com.google.j2cl.common.Problems;
@@ -45,6 +47,7 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
+import com.google.j2cl.transpiler.backend.wasm.ItableAllocator;
 import com.google.j2cl.transpiler.backend.wasm.JsImportsGenerator;
 import com.google.j2cl.transpiler.backend.wasm.SharedSnippet;
 import com.google.j2cl.transpiler.backend.wasm.Summary;
@@ -340,9 +343,23 @@ final class BazelJ2wasmBundler extends BazelWorker {
     private final List<TypeGraph.Type> interfaces = new ArrayList<>();
     private final Map<String, TypeGraph.Type> typesByName = new LinkedHashMap<>();
 
+    private final ItableAllocator<String> itableAllocator;
+
     private TypeGraph(Stream<Summary> summaries) {
       // Collect all types from all summaries.
       summaries.forEachOrdered(this::addToTypeGraph);
+      this.itableAllocator = createItableAllocator();
+    }
+
+    private ItableAllocator<String> createItableAllocator() {
+      SetMultimap<String, String> implementedInterfaceNamesByTypeName = LinkedHashMultimap.create();
+      classes.forEach(
+          c ->
+              c.getImplementedInterfaces()
+                  .forEach(i -> implementedInterfaceNamesByTypeName.put(c.getName(), i.getName())));
+      return new ItableAllocator<>(
+          classes.stream().map(Type::getName).collect(toImmutableList()),
+          implementedInterfaceNamesByTypeName::get);
     }
 
     private void addToTypeGraph(Summary summary) {
@@ -379,8 +396,8 @@ final class BazelJ2wasmBundler extends BazelWorker {
       StringBuilder sb = new StringBuilder();
       sb.append("(type $itable (sub (struct\n");
       // In the unoptimized itables each interface has its own slot.
-      for (TypeGraph.Type i : interfaces) {
-        sb.append(format("  (field %s (ref null struct))\n", i.name));
+      for (int i = 0; i < itableAllocator.getItableSize(); i++) {
+        sb.append("  (field (ref null struct))\n");
       }
       sb.append(")))\n");
       return sb.toString();
@@ -389,8 +406,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
     public String getEmptyItableStructDeclaration() {
       StringBuilder sb = new StringBuilder();
       sb.append("(global $itable.empty (ref $itable) (struct.new $itable \n");
-
-      for (TypeGraph.Type unused : interfaces) {
+      for (int i = 0; i < itableAllocator.getItableSize(); i++) {
         sb.append("(ref.null struct)\n");
       }
       sb.append("))\n");
@@ -401,7 +417,14 @@ final class BazelJ2wasmBundler extends BazelWorker {
       SourceBuilder sourceBuilder = new SourceBuilder();
       WasmConstructsGenerator constructsGenerator =
           new WasmConstructsGenerator(environment, sourceBuilder);
-      interfaces.forEach(i -> constructsGenerator.emitItableInterfaceGetter(i.name));
+      interfaces.forEach(
+          i -> {
+            int itableFieldIndex = itableAllocator.getItableFieldIndex(i.name);
+            String itableFieldIndexString =
+                itableFieldIndex == -1 ? null : String.valueOf(itableFieldIndex);
+            constructsGenerator.emitItableInterfaceGetter(
+                environment.getWasmItableInterfaceGetter(i.name), itableFieldIndexString);
+          });
       return sourceBuilder.build();
     }
 
@@ -420,6 +443,14 @@ final class BazelJ2wasmBundler extends BazelWorker {
         this(name, false);
       }
 
+      public String getName() {
+        return name;
+      }
+
+      public Set<Type> getImplementedInterfaces() {
+        return implementedInterfaces;
+      }
+
       /** Emits the itable struct type for a class. */
       public String getItableStructDeclaration() {
         StringBuilder sb = new StringBuilder();
@@ -428,11 +459,17 @@ final class BazelJ2wasmBundler extends BazelWorker {
                 "(type %s.itable (sub %s (struct \n",
                 name, superType != null ? superType.name + ".itable" : "$itable"));
 
-        for (var i : interfaces) {
+        String[] itableFieldTypes = new String[itableAllocator.getItableSize()];
+
+        implementedInterfaces.forEach(
+            i ->
+                itableFieldTypes[itableAllocator.getItableFieldIndex(i.name)] = i.name + ".vtable");
+
+        for (String fieldDefinition : itableFieldTypes) {
           sb.append(
               format(
                   "  (field (ref %s))\n",
-                  implementsInterface(i) ? i.name + ".vtable" : "null struct"));
+                  fieldDefinition != null ? fieldDefinition : "null struct"));
         }
         sb.append(")))\n");
         return sb.toString();
@@ -448,19 +485,17 @@ final class BazelJ2wasmBundler extends BazelWorker {
         sb.append(
             format("(global %s.itable (ref %s.itable) (struct.new %s.itable \n", name, name, name));
 
-        for (Type ifce : interfaces) {
-          if (implementsInterface(ifce)) {
-            sb.append(format("(global.get %s.vtable@%s)\n", ifce.name, name));
-          } else {
-            sb.append("(ref.null struct)\n");
-          }
+        String[] itableFieldInitializer = new String[itableAllocator.getItableSize()];
+        implementedInterfaces.forEach(
+            i ->
+                itableFieldInitializer[itableAllocator.getItableFieldIndex(i.name)] =
+                    format("(global.get %s.vtable@%s)\n", i.name, this.name));
+
+        for (String fieldInitializer : itableFieldInitializer) {
+          sb.append(fieldInitializer == null ? "(ref.null struct)\n" : fieldInitializer);
         }
         sb.append("))\n");
         return sb.toString();
-      }
-
-      private boolean implementsInterface(Type type) {
-        return implementedInterfaces.contains(type);
       }
     }
   }

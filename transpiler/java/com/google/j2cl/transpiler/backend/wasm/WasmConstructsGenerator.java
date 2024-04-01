@@ -710,18 +710,28 @@ public class WasmConstructsGenerator {
         .forEach(this::emitItableInterfaceGetter);
   }
 
-  public void emitItableInterfaceGetter(String fieldName) {
+  private void emitItableInterfaceGetter(String fieldName) {
+    emitItableInterfaceGetter(environment.getWasmItableInterfaceGetter(fieldName), fieldName);
+  }
+
+  public void emitItableInterfaceGetter(String methodName, String fieldName) {
     builder.newLine();
     builder.append(
         format(
             "(func %s (param $object (ref null $java.lang.Object)) (result (ref null struct)) ",
-            environment.getWasmItableInterfaceGetter(fieldName)));
+            methodName));
     builder.indent();
     builder.newLine();
-    builder.append(
-        format(
-            "(struct.get $itable %s (struct.get $java.lang.Object $itable (local.get $object)))",
-            fieldName));
+    if (fieldName == null) {
+      // There is no need to assign a field to interfaces that are not implemented by any class. In
+      // that case just return null to comply with the semantics of casts and instanceofs.
+      builder.append("(ref.null struct)");
+    } else {
+      builder.append(
+          format(
+              "(struct.get $itable %s (struct.get $java.lang.Object $itable (local.get $object)))",
+              fieldName));
+    }
     builder.unindent();
     builder.newLine();
     builder.append(")");
