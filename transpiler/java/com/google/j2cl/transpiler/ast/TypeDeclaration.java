@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.common.collect.ImmutableSet.toImmutableSet;
 import static java.util.stream.Collectors.joining;
 
 import com.google.auto.value.AutoValue;
@@ -388,9 +389,8 @@ public abstract class TypeDeclaration
     return !getTypeParameterDescriptors().isEmpty();
   }
 
-  @Memoized
   public boolean implementsInterfaces() {
-    return getAllSuperTypesIncludingSelf().stream().anyMatch(TypeDeclaration::isInterface);
+    return !getAllSuperInterfaces().isEmpty();
   }
 
   @Memoized
@@ -732,6 +732,14 @@ public abstract class TypeDeclaration
                 allSupertypesIncludingSelf.addAll(
                     t.getTypeDeclaration().getAllSuperTypesIncludingSelf()));
     return allSupertypesIncludingSelf;
+  }
+
+  @Memoized
+  public Set<TypeDeclaration> getAllSuperInterfaces() {
+    return getAllSuperTypesIncludingSelf().stream()
+        .filter(Predicate.not(Predicate.isEqual(this)))
+        .filter(TypeDeclaration::isInterface)
+        .collect(toImmutableSet());
   }
 
   /**
