@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.backend.wasm;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static java.lang.String.format;
 import static java.util.Comparator.comparingInt;
@@ -26,9 +27,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multiset;
-import com.google.common.collect.SetMultimap;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.AstUtils;
@@ -48,7 +47,6 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.backend.common.UniqueNamesResolver;
 import com.google.j2cl.transpiler.backend.wasm.JsImportsGenerator.Imports;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -325,35 +323,20 @@ public class WasmGenerationEnvironment {
         .collect(toImmutableMap(this::getFunctionTypeName, Function.identity(), (a, b) -> a));
   }
 
-  private final Map<TypeDeclaration, Integer> itableIndexByInterfaceTypeDeclaration =
-      new HashMap<>();
-
   @Nullable
   public String getInterfaceIndexFieldName(TypeDeclaration typeDeclaration) {
     if (isModular) {
       return getTypeSignature(typeDeclaration.toUnparameterizedTypeDescriptor());
     }
 
-    Integer index = getItableIndexForInterface(typeDeclaration);
-    if (index == null) {
-      // Interfaces with no implementors will not have an index in the itable; alternatively
-      // they could have any index.
+    int index = getItableIndexForInterface(typeDeclaration);
+    if (index == -1) {
+      // Interfaces with no implementors will not have an index in the itable.
       return null;
     }
 
     // In monolithic we directly use the index with no identifier.
-    return getInterfaceIndexFieldName(index);
-  }
-
-  public String getInterfaceIndexFieldName(int slot) {
-    return format("%d", slot);
-  }
-
-  Integer getItableIndexForInterface(TypeDeclaration typeDeclaration) {
-    if (isModular) {
-      throw new UnsupportedOperationException();
-    }
-    return itableIndexByInterfaceTypeDeclaration.get(typeDeclaration);
+    return String.valueOf(index);
   }
 
   /** The data index for the array literals that can be emitted as data. */
@@ -386,16 +369,16 @@ public class WasmGenerationEnvironment {
     return dataNameByLiteral.get(arrayLiteral);
   }
 
-  private int itableSize = -1;
+  int getItableIndexForInterface(TypeDeclaration typeDeclaration) {
+    return itableAllocator.getItableFieldIndex(typeDeclaration);
+  }
 
   int getItableSize() {
     if (isModular) {
       throw new UnsupportedOperationException();
     }
-    return itableSize;
+    return itableAllocator.getItableSize();
   }
-
-  private final JsImportsGenerator.Imports jsImports;
 
   public JsImportsGenerator.Imports getJsImports() {
     return jsImports;
@@ -405,8 +388,14 @@ public class WasmGenerationEnvironment {
     return jsImports.getMethodImports().get(methodDescriptor);
   }
 
-  private boolean isModular;
-  private Library library;
+  private final boolean isModular;
+  private final Library library;
+  private final JsImportsGenerator.Imports jsImports;
+  private final ItableAllocator<TypeDeclaration> itableAllocator;
+
+  WasmGenerationEnvironment(Library library, Imports jsImports) {
+    this(library, jsImports, /* isModular= */ false);
+  }
 
   WasmGenerationEnvironment(Library library, Imports jsImports, boolean isModular) {
     this.isModular = isModular;
@@ -442,15 +431,23 @@ public class WasmGenerationEnvironment {
               checkState(previous == null);
             });
 
-    if (!isModular) {
-      assignInterfaceSlots(library);
-    }
+    this.itableAllocator = createItableAllocator(library);
 
     this.jsImports = jsImports;
   }
 
-  WasmGenerationEnvironment(Library library, Imports jsImports) {
-    this(library, jsImports, /* isModular= */ false);
+  private ItableAllocator<TypeDeclaration> createItableAllocator(Library library) {
+    if (isModular) {
+      // Itable allocation happens in the bundler for modular compilation.
+      return null;
+    }
+    return new ItableAllocator<>(
+        library
+            .streamTypes()
+            .filter(Predicates.not(Type::isInterface))
+            .map(Type::getDeclaration)
+            .collect(toImmutableList()),
+        TypeDeclaration::getAllSuperInterfaces);
   }
 
   /** Returns a wasm layout creating it from a type declaration if it wasn't created before. */
@@ -475,81 +472,5 @@ public class WasmGenerationEnvironment {
       return typeLayout;
     }
     return wasmTypeLayoutByTypeDeclaration.get(typeDeclaration);
-  }
-
-  /**
-   * Assigns a slot number (i.e. an index in the itable array) for each interface in the itable.
-   *
-   * <p>Each interfaces implemented in the same class will have a different slots, but across
-   * different parts of the hierarchy slots can be reused. This algorithm heuristically minimizes
-   * the size of the itable by trying to assign slots in order of most implemented interfaces. Each
-   * slot in the itable will have the interface vtable for the class and can be used for both
-   * dynamic interface dispatch and interface "instanceof" checks.
-   *
-   * <p>This is a baseline implementation of "packed encoding" based on the algorithm described in
-   * section 4.3 of "Efficient type inclusion tests" by Vitek et al (OOPSLA 97). Although the ideas
-   * presented in the paper are for performing "instanceof" checks, they generalize to interface
-   * dispatch.
-   */
-  private void assignInterfaceSlots(Library library) {
-    SetMultimap<TypeDeclaration, TypeDeclaration> concreteTypesByInterface =
-        LinkedHashMultimap.create();
-    SetMultimap<Integer, TypeDeclaration> classesBySlot = LinkedHashMultimap.create();
-
-    // Traverse all classes collecting the interfaces they implement. Actual vtable
-    // instances are only required for concrete classes, because they provide the references to the
-    // methods that will be invoked on a specific instance.
-    // Since all dynamic dispatch is performed by obtaining the vtables from an instance, if there
-    // are no instances for a type, there is no need for instances of vtables it.
-    library
-        .streamTypes()
-        .filter(Predicates.not(Type::isInterface))
-        .forEach(
-            t ->
-                t.getDeclaration()
-                    .getAllSuperInterfaces()
-                    .forEach(i -> concreteTypesByInterface.put(i, t.getDeclaration())));
-
-    // Traverse and assign interfaces by most implemented to least implemented so that widely
-    // implemented interfaces get lower slot numbers.
-    concreteTypesByInterface.keySet().stream()
-        .sorted(
-            comparingInt((TypeDeclaration td) -> concreteTypesByInterface.get(td).size())
-                .reversed())
-        .forEach(i -> assignFirstNonConflictingSlot(i, concreteTypesByInterface, classesBySlot));
-    itableSize = classesBySlot.keySet().size();
-  }
-
-  /** Assigns the lowest non conflicting slot to {@code interfaceToAssign}. */
-  private void assignFirstNonConflictingSlot(
-      TypeDeclaration interfaceToAssign,
-      SetMultimap<TypeDeclaration, TypeDeclaration> concreteTypesByInterface,
-      SetMultimap<Integer, TypeDeclaration> concreteTypesBySlot) {
-    int slot =
-        getFirstNonConflictingSlot(
-            interfaceToAssign, concreteTypesBySlot, concreteTypesByInterface);
-    itableIndexByInterfaceTypeDeclaration.put(interfaceToAssign, slot);
-    // Add all the concrete implementors for that interface to the assigned slot, to mark
-    // that slot as already used in all those types.
-    concreteTypesBySlot.putAll(slot, concreteTypesByInterface.get(interfaceToAssign));
-  }
-
-  /** Finds the lowest non-conflicting slot for {@code interface}. */
-  private int getFirstNonConflictingSlot(
-      TypeDeclaration interfaceToAssign,
-      SetMultimap<Integer, TypeDeclaration> concreteTypesBySlot,
-      SetMultimap<TypeDeclaration, TypeDeclaration> concreteTypesByInterface) {
-    // Assign slots by finding the first non conflicting open slot. Interfaces that are
-    // implemented by the same concrete class must have unique slots but interfaces whose
-    // implementers are disjoint can share the same slot.
-    int numberOfSlots = concreteTypesBySlot.keySet().size();
-    for (int slot = 0; slot < numberOfSlots; slot++) {
-      if (Collections.disjoint(
-          concreteTypesBySlot.get(slot), concreteTypesByInterface.get(interfaceToAssign))) {
-        return slot;
-      }
-    }
-    // Couldn't find an existing slot that is not conflicting, return a new slot.
-    return numberOfSlots;
   }
 }
