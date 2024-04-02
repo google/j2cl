@@ -2,6 +2,10 @@ syntax = "proto3";
 
 package rta_test;
 
+import "java/com/google/protobuf/contrib/immutablejs/options.proto";
+
+option (.protobuf.contrib.immutablejs
+            .replace_all_immutable_js_types_with_apps_jspb) = false;
 option java_multiple_files = true;
 
 message Bar {}

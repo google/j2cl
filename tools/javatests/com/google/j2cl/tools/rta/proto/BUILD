@@ -12,12 +12,18 @@ package(
 proto_library(
     name = "foo",
     srcs = ["foo.proto"],
+    deps = [
+        "//java/com/google/protobuf/contrib/immutablejs:options_proto",
+    ],
 )
 
 proto_library(
     name = "bar",
     srcs = ["bar.proto"],
-    deps = [":foo"],
+    deps = [
+        ":foo",
+        "//java/com/google/protobuf/contrib/immutablejs:options_proto",
+    ],
 )
 
 j2cl_proto_library(
