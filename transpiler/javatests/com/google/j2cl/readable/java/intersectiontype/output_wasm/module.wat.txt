@@ -778,10 +778,10 @@
    ;;@ intersectiontype/IntersectionTypeTest.java:39:4
    (local.set $$qualifier (local.get $object))
    ;;@ intersectiontype/IntersectionTypeTest.java:39:4
-   (call_ref $function.m_set__int__void (ref.as_non_null (local.get $$qualifier))(i32.const 1)(struct.get $intersectiontype.Setable.vtable $m_set__int__void (ref.null $intersectiontype.Setable.vtable)))
+   (call_ref $function.m_set__int__void (ref.as_non_null (local.get $$qualifier))(i32.const 1)(struct.get $intersectiontype.Setable.vtable $m_set__int__void (ref.cast (ref $intersectiontype.Setable.vtable) (call $get.itable.$intersectiontype.Setable (local.get $$qualifier)))))
   )
   ;;@ intersectiontype/IntersectionTypeTest.java:40:4
-  (drop (call_ref $function.m_get__java_lang_Object (ref.as_non_null (local.get $object))(struct.get $intersectiontype.Getable.vtable $m_get__java_lang_Object (ref.null $intersectiontype.Getable.vtable))))
+  (drop (call_ref $function.m_get__java_lang_Object (ref.as_non_null (local.get $object))(struct.get $intersectiontype.Getable.vtable $m_get__java_lang_Object (ref.cast (ref $intersectiontype.Getable.vtable) (call $get.itable.$intersectiontype.Getable (local.get $object))))))
  )
 )
 
@@ -964,13 +964,13 @@
    ;;@ intersectiontype/IntersectionTypeTest.java:115:4
    (local.set $$qualifier (local.get $t))
    ;;@ intersectiontype/IntersectionTypeTest.java:115:4
-   (drop (call_ref $function.m_cmp__int (ref.as_non_null (local.get $$qualifier))(struct.get $intersectiontype.Cmp.vtable $m_cmp__int (ref.cast (ref $intersectiontype.Cmp.vtable) (call $get.itable.1 (local.get $$qualifier))))))
+   (drop (call_ref $function.m_cmp__int (ref.as_non_null (local.get $$qualifier))(struct.get $intersectiontype.Cmp.vtable $m_cmp__int (ref.cast (ref $intersectiontype.Cmp.vtable) (call $get.itable.$intersectiontype.Cmp (local.get $$qualifier))))))
   )
   (block
    ;;@ intersectiontype/IntersectionTypeTest.java:116:4
    (local.set $$qualifier_1 (ref.cast (ref null $intersectiontype.IntersectionTypeTest.SomeConcreteType) (ref.null $java.lang.Object)))
    ;;@ intersectiontype/IntersectionTypeTest.java:116:4
-   (drop (call_ref $function.m_cmp__int (ref.as_non_null (local.get $$qualifier_1))(struct.get $intersectiontype.Cmp.vtable $m_cmp__int (ref.cast (ref $intersectiontype.Cmp.vtable) (call $get.itable.1 (local.get $$qualifier_1))))))
+   (drop (call_ref $function.m_cmp__int (ref.as_non_null (local.get $$qualifier_1))(struct.get $intersectiontype.Cmp.vtable $m_cmp__int (ref.cast (ref $intersectiontype.Cmp.vtable) (call $get.itable.$intersectiontype.Cmp (local.get $$qualifier_1))))))
   )
  )
 )

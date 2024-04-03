@@ -199,7 +199,7 @@
   (local.set $b (if (result i32) (ref.is_null (local.get $o))
    (then (i32.const 0))
    (else 
-    (ref.test (ref $java.io.Serializable.vtable) (call $get.itable.0 (local.get $o) ))
+    (ref.test (ref $java.io.Serializable.vtable) (call $get.itable.$java.io.Serializable (local.get $o) ))
    )
   ))
   ;;@ instanceofexpression/InstanceofExpressions.java:34:4
@@ -208,7 +208,7 @@
    (if (result i32) (ref.is_null (local.get $$expression))
     (then (i32.const 0))
     (else 
-     (ref.test (ref $java.io.Serializable.vtable) (call $get.itable.0 (local.get $$expression) ))
+     (ref.test (ref $java.io.Serializable.vtable) (call $get.itable.$java.io.Serializable (local.get $$expression) ))
     )
    )
   ))

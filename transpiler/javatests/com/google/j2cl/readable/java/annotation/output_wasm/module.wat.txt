@@ -336,7 +336,7 @@
   ;;@ annotation/Main.java:33:6
   (local.set $foo (ref.null $java.lang.Object))
   ;;@ annotation/Main.java:34:6
-  (drop (call_ref $function.m_bar__int (ref.as_non_null (local.get $foo))(struct.get $annotation.Main.Foo.vtable $m_bar__int (ref.null $annotation.Main.Foo.vtable))))
+  (drop (call_ref $function.m_bar__int (ref.as_non_null (local.get $foo))(struct.get $annotation.Main.Foo.vtable $m_bar__int (ref.cast (ref $annotation.Main.Foo.vtable) (call $get.itable.$annotation.Main.Foo (local.get $foo))))))
   ;;@ annotation/Main.java:35:6
   (return (i32.const 123))
  )

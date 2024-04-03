@@ -260,13 +260,6 @@ final class ExpressionTranspiler {
           sourceBuilder.append(")");
         } else {
           DeclaredTypeDescriptor targetTypeDescriptor = (DeclaredTypeDescriptor) testTypeDescriptor;
-          String interfaceIndexFieldName =
-              environment.getInterfaceIndexFieldName(targetTypeDescriptor.getTypeDeclaration());
-          if (interfaceIndexFieldName == null) {
-            // The interface does not have implementors, hence instanceof is false.
-            sourceBuilder.append("(i32.const 0)");
-            return false;
-          }
           sourceBuilder.append("(if (result i32) (ref.is_null ");
           render(instanceOfExpression.getExpression());
           sourceBuilder.append(")");
@@ -278,13 +271,14 @@ final class ExpressionTranspiler {
           sourceBuilder.append("(else ");
           sourceBuilder.indent();
           sourceBuilder.newLine();
-          // Check whether the itable index assigned to the interface actually contains the
-          // interface vtable, since the indices are reused.
+          // Retrieve the interface vtable and use non-nullable `ref.test` so that it returns false
+          // if the vtable is null or is not of the expected interface.
           sourceBuilder.append(
               format(
                   "(ref.test (ref %s) (call %s ",
                   environment.getWasmVtableTypeName(targetTypeDescriptor),
-                  environment.getWasmItableInterfaceGetter(interfaceIndexFieldName)));
+                  environment.getWasmItableInterfaceGetter(
+                      targetTypeDescriptor.getTypeDeclaration())));
           render(instanceOfExpression.getExpression());
           sourceBuilder.append(" ))");
           sourceBuilder.unindent();
@@ -468,32 +462,21 @@ final class ExpressionTranspiler {
           render(methodCall.getQualifier());
           sourceBuilder.append(")");
         } else {
-          // For an interface dynamic dispatch the vtable resides in a field of the $itable struct
+          // For an interface dynamic dispatch the vtable is accessed through the $itable field in
           // object passed as the qualifier.
 
-          String interfaceIndexFieldName =
-              environment.getInterfaceIndexFieldName(enclosingTypeDescriptor.getTypeDeclaration());
-          if (interfaceIndexFieldName == null) {
-            // The interface is not implemented by any class, skip the itable lookup and emit
-            // null instead.
-            sourceBuilder.append(
-                String.format(
-                    "(ref.null %s)", environment.getWasmVtableTypeName(enclosingTypeDescriptor)));
-          } else {
-            // Retrieve the interface vtable from the corresponding slot field in the $itable
-            // and cast it to the appropriate type.
-            // Use non-nullable `ref.cast` to retrieve the interface vtable. If the
-            // receiver was `null` then the NPE will be thrown when retrieving the `$itable` field.
-            // Otherwise if the receiver is not null, then at this point we expect that the
-            // correct interface vtable in the `itable` slot.
-            sourceBuilder.append(
-                String.format(
-                    "(ref.cast (ref %s) (call %s ",
-                    environment.getWasmVtableTypeName(enclosingTypeDescriptor),
-                    environment.getWasmItableInterfaceGetter(interfaceIndexFieldName)));
-            render(methodCall.getQualifier());
-            sourceBuilder.append("))");
-          }
+          // Retrieve the interface vtable from the $itable field and cast it to the expected type.
+          // Use a non-nullable `ref.cast` to access the interface vtable, because if the interface
+          // is not implemented by the object the result might either be `null` or a vtable
+          // for a different interface that was coalesced to save storage.
+          sourceBuilder.append(
+              String.format(
+                  "(ref.cast (ref %s) (call %s ",
+                  environment.getWasmVtableTypeName(enclosingTypeDescriptor),
+                  environment.getWasmItableInterfaceGetter(
+                      enclosingTypeDescriptor.getTypeDeclaration())));
+          render(methodCall.getQualifier());
+          sourceBuilder.append("))");
         }
 
         sourceBuilder.append("))");

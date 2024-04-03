@@ -358,7 +358,7 @@
  (local.set $this (ref.cast (ref $devirtualizedcalls.CharSequenceCalls) (local.get $this.untyped)))
  (block
   ;;@ devirtualizedcalls/CharSequenceCalls.java:20:4
-  (drop (call_ref $function.m_charAt__int__char (ref.as_non_null (local.get $cs))(i32.const 0)(struct.get $java.lang.CharSequence.vtable $m_charAt__int__char (ref.cast (ref $java.lang.CharSequence.vtable) (call $get.itable.2 (local.get $cs))))))
+  (drop (call_ref $function.m_charAt__int__char (ref.as_non_null (local.get $cs))(i32.const 0)(struct.get $java.lang.CharSequence.vtable $m_charAt__int__char (ref.cast (ref $java.lang.CharSequence.vtable) (call $get.itable.$java.lang.CharSequence (local.get $cs))))))
  )
 )
 (elem declare func $m_test__java_lang_CharSequence__void@devirtualizedcalls.CharSequenceCalls)

@@ -7346,7 +7346,7 @@
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:358:79
   (call $$clinit__void_<once>_@nullability.defaultnotnullable.DefaultNotNullable )
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:359:4
-  (drop (call_ref $function.m_add__java_lang_Object__boolean (ref.as_non_null (local.get $l))(local.get $t)(struct.get $java.util.Collection.vtable $m_add__java_lang_Object__boolean (ref.cast (ref $java.util.Collection.vtable) (call $get.itable.1 (local.get $l))))))
+  (drop (call_ref $function.m_add__java_lang_Object__boolean (ref.as_non_null (local.get $l))(local.get $t)(struct.get $java.util.Collection.vtable $m_add__java_lang_Object__boolean (ref.cast (ref $java.util.Collection.vtable) (call $get.itable.$java.util.Collection (local.get $l))))))
  )
 )
 
@@ -7362,7 +7362,7 @@
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:368:4
   (local.set $localString (local.get $string))
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:369:4
-  (call_ref $function.m_accept__java_lang_Object__void (ref.as_non_null (local.get $c))(local.get $localString)(struct.get $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable $m_accept__java_lang_Object__void (ref.null $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable)))
+  (call_ref $function.m_accept__java_lang_Object__void (ref.as_non_null (local.get $c))(local.get $localString)(struct.get $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable $m_accept__java_lang_Object__void (ref.cast (ref $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable) (call $get.itable.$nullability.defaultnotnullable.DefaultNotNullable.Consumer (local.get $c)))))
  )
 )
 
@@ -7378,7 +7378,7 @@
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:373:4
   (local.set $localElement (local.get $element))
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:374:4
-  (call_ref $function.m_accept__java_lang_Object__void (ref.as_non_null (local.get $c))(local.get $localElement)(struct.get $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable $m_accept__java_lang_Object__void (ref.null $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable)))
+  (call_ref $function.m_accept__java_lang_Object__void (ref.as_non_null (local.get $c))(local.get $localElement)(struct.get $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable $m_accept__java_lang_Object__void (ref.cast (ref $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable) (call $get.itable.$nullability.defaultnotnullable.DefaultNotNullable.Consumer (local.get $c)))))
  )
 )
 
@@ -7394,7 +7394,7 @@
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:379:4
   (local.set $localString (local.get $string))
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:380:4
-  (call_ref $function.m_accept__java_lang_Object__void (ref.as_non_null (local.get $c))(local.get $localString)(struct.get $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable $m_accept__java_lang_Object__void (ref.null $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable)))
+  (call_ref $function.m_accept__java_lang_Object__void (ref.as_non_null (local.get $c))(local.get $localString)(struct.get $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable $m_accept__java_lang_Object__void (ref.cast (ref $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable) (call $get.itable.$nullability.defaultnotnullable.DefaultNotNullable.Consumer (local.get $c)))))
  )
 )
 
@@ -7410,7 +7410,7 @@
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:384:4
   (local.set $localElement (local.get $element))
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:385:4
-  (call_ref $function.m_accept__java_lang_Object__void (ref.as_non_null (local.get $c))(local.get $localElement)(struct.get $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable $m_accept__java_lang_Object__void (ref.null $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable)))
+  (call_ref $function.m_accept__java_lang_Object__void (ref.as_non_null (local.get $c))(local.get $localElement)(struct.get $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable $m_accept__java_lang_Object__void (ref.cast (ref $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable) (call $get.itable.$nullability.defaultnotnullable.DefaultNotNullable.Consumer (local.get $c)))))
  )
 )
 
@@ -7457,7 +7457,12 @@
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:400:4
   (local.set $nonNullStringConsumer (ref.null $java.lang.Object))
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:402:4
-  (local.set $b (i32.const 0))
+  (local.set $b (if (result i32) (ref.is_null (ref.null $java.lang.Object))
+   (then (i32.const 0))
+   (else 
+    (ref.test (ref $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable) (call $get.itable.$nullability.defaultnotnullable.DefaultNotNullable.Consumer (ref.null $java.lang.Object) ))
+   )
+  ))
  )
 )
 
@@ -9222,7 +9227,12 @@
   ;;@ nullability/defaultnullable/DefaultNullable.java:338:4
   (local.set $nonNullStringConsumer (ref.null $java.lang.Object))
   ;;@ nullability/defaultnullable/DefaultNullable.java:340:4
-  (local.set $b (i32.const 0))
+  (local.set $b (if (result i32) (ref.is_null (ref.null $java.lang.Object))
+   (then (i32.const 0))
+   (else 
+    (ref.test (ref $nullability.defaultnullable.DefaultNullable.Consumer.vtable) (call $get.itable.$nullability.defaultnullable.DefaultNullable.Consumer (ref.null $java.lang.Object) ))
+   )
+  ))
  )
 )
 
@@ -11012,7 +11022,7 @@
   (local.set $b (if (result i32) (ref.is_null (ref.null $java.lang.Object))
    (then (i32.const 0))
    (else 
-    (ref.test (ref $nullability.explicitnotnullable.ExplicitNotNullable.Consumer.vtable) (call $get.itable.0 (ref.null $java.lang.Object) ))
+    (ref.test (ref $nullability.explicitnotnullable.ExplicitNotNullable.Consumer.vtable) (call $get.itable.$nullability.explicitnotnullable.ExplicitNotNullable.Consumer (ref.null $java.lang.Object) ))
    )
   ))
  )
@@ -11031,7 +11041,7 @@
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:425:4
   (local.set $localString (local.get $string))
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:430:4
-  (return (ref.cast (ref null $java.lang.String) (call_ref $function.m_apply__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $f))(local.get $localString)(struct.get $nullability.explicitnotnullable.ExplicitNotNullable.Function.vtable $m_apply__java_lang_Object__java_lang_Object (ref.cast (ref $nullability.explicitnotnullable.ExplicitNotNullable.Function.vtable) (call $get.itable.0 (local.get $f)))))))
+  (return (ref.cast (ref null $java.lang.String) (call_ref $function.m_apply__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $f))(local.get $localString)(struct.get $nullability.explicitnotnullable.ExplicitNotNullable.Function.vtable $m_apply__java_lang_Object__java_lang_Object (ref.cast (ref $nullability.explicitnotnullable.ExplicitNotNullable.Function.vtable) (call $get.itable.$nullability.explicitnotnullable.ExplicitNotNullable.Function (local.get $f)))))))
  )
 )
 

@@ -458,11 +458,11 @@
   ;;@ interfacejsbridge/Main.java:23:4
   (local.set $d (call $$create__@interfacejsbridge.InterfaceImpl ))
   ;;@ interfacejsbridge/Main.java:24:4
-  (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $a))(i32.const 1)(struct.get $interfacejsbridge.MyJsInterface.vtable $m_foo__int__int (ref.cast (ref $interfacejsbridge.MyJsInterface.vtable) (call $get.itable.1 (local.get $a))))))
+  (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $a))(i32.const 1)(struct.get $interfacejsbridge.MyJsInterface.vtable $m_foo__int__int (ref.cast (ref $interfacejsbridge.MyJsInterface.vtable) (call $get.itable.$interfacejsbridge.MyJsInterface (local.get $a))))))
   ;;@ interfacejsbridge/Main.java:25:4
-  (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $b))(i32.const 1)(struct.get $interfacejsbridge.MyInterface.vtable $m_foo__int__int (ref.cast (ref $interfacejsbridge.MyInterface.vtable) (call $get.itable.2 (local.get $b))))))
+  (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $b))(i32.const 1)(struct.get $interfacejsbridge.MyInterface.vtable $m_foo__int__int (ref.cast (ref $interfacejsbridge.MyInterface.vtable) (call $get.itable.$interfacejsbridge.MyInterface (local.get $b))))))
   ;;@ interfacejsbridge/Main.java:26:4
-  (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $c))(i32.const 1)(struct.get $interfacejsbridge.SubInterface.vtable $m_foo__int__int (ref.cast (ref $interfacejsbridge.SubInterface.vtable) (call $get.itable.0 (local.get $c))))))
+  (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $c))(i32.const 1)(struct.get $interfacejsbridge.SubInterface.vtable $m_foo__int__int (ref.cast (ref $interfacejsbridge.SubInterface.vtable) (call $get.itable.$interfacejsbridge.SubInterface (local.get $c))))))
   ;;@ interfacejsbridge/Main.java:27:4
   (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $d))(i32.const 1)(struct.get $interfacejsbridge.InterfaceImpl.vtable $m_foo__int__int (struct.get $interfacejsbridge.InterfaceImpl $vtable(local.get $d)))))
  )

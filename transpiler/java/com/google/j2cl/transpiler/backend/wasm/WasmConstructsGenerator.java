@@ -20,7 +20,6 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.lang.String.format;
 import static java.util.Arrays.stream;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.StringUtils;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
@@ -704,14 +703,14 @@ public class WasmConstructsGenerator {
         .streamTypes()
         .filter(Type::isInterface)
         .map(Type::getDeclaration)
-        .map(environment::getInterfaceIndexFieldName)
-        .filter(Predicates.notNull())
-        .distinct()
         .forEach(this::emitItableInterfaceGetter);
   }
 
-  private void emitItableInterfaceGetter(String fieldName) {
-    emitItableInterfaceGetter(environment.getWasmItableInterfaceGetter(fieldName), fieldName);
+  private void emitItableInterfaceGetter(TypeDeclaration typeDeclaration) {
+    int fieldIndex = environment.getItableIndexForInterface(typeDeclaration);
+    emitItableInterfaceGetter(
+        environment.getWasmItableInterfaceGetter(typeDeclaration),
+        fieldIndex == -1 ? null : String.valueOf(fieldIndex));
   }
 
   public void emitItableInterfaceGetter(String methodName, String fieldName) {

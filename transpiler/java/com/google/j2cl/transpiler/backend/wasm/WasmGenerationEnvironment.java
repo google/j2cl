@@ -175,6 +175,10 @@ public class WasmGenerationEnvironment {
     return getTypeSignature(typeDescriptor);
   }
 
+  public String getTypeSignature(TypeDeclaration typeDeclaration) {
+    return getTypeSignature(typeDeclaration.toUnparameterizedTypeDescriptor());
+  }
+
   public String getTypeSignature(TypeDescriptor typeDescriptor) {
     if (typeDescriptor.isPrimitive()) {
       return "$" + typeDescriptor.getReadableDescription();
@@ -219,7 +223,12 @@ public class WasmGenerationEnvironment {
       return "$itable";
     }
 
-    return getTypeSignature(typeDeclaration.toUnparameterizedTypeDescriptor()) + ".itable";
+    return getTypeSignature(typeDeclaration) + ".itable";
+  }
+
+  /** Returns the name of the itable interface getter. */
+  public String getWasmItableInterfaceGetter(TypeDeclaration typeDeclaration) {
+    return getWasmItableInterfaceGetter(getTypeSignature(typeDeclaration));
   }
 
   /** Returns the name of the itable interface getter. */
@@ -326,22 +335,6 @@ public class WasmGenerationEnvironment {
         .map(Method::getDescriptor)
         .filter(MethodDescriptor::isPolymorphic)
         .collect(toImmutableMap(this::getFunctionTypeName, Function.identity(), (a, b) -> a));
-  }
-
-  @Nullable
-  public String getInterfaceIndexFieldName(TypeDeclaration typeDeclaration) {
-    if (isModular) {
-      return getTypeSignature(typeDeclaration.toUnparameterizedTypeDescriptor());
-    }
-
-    int index = getItableIndexForInterface(typeDeclaration);
-    if (index == -1) {
-      // Interfaces with no implementors will not have an index in the itable.
-      return null;
-    }
-
-    // In monolithic we directly use the index with no identifier.
-    return String.valueOf(index);
   }
 
   /** The data index for the array literals that can be emitted as data. */
