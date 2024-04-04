@@ -5058,7 +5058,7 @@
  (result (ref null $java.lang.String))
  ;;@ autovalue/$AutoValue_AutoValueWithExtensions.java:20:24
  (local $$qualifier (ref null $java.lang.String))
- (local $$stringBuilder (ref null $java.lang.StringBuilder))
+ (local $$qualifier_1 (ref null $java.lang.String))
  (block
   ;;@ autovalue/$AutoValue_AutoValueWithExtensions.java:21:4
   (if (ref.is_null (local.get $value))
@@ -5073,10 +5073,8 @@
   (return (block (result (ref null $java.lang.String))
    (local.set $$qualifier (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $value))(struct.get $java.lang.Object.vtable $m_toString__java_lang_String (struct.get $java.lang.Object $vtable(local.get $value)))))
    (call_ref $function.m_replace__java_lang_CharSequence__java_lang_CharSequence__java_lang_String (ref.as_non_null (local.get $$qualifier))(call $$getString_|_|_1__java_lang_String_<once>_@autovalue.$AutoValue_AutoValueWithExtensions )(block (result (ref null $java.lang.String))
-    (local.set $$stringBuilder (call $$create__@java.lang.StringBuilder ))
-    (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$getString_|_|_1__java_lang_String_<once>_@autovalue.$AutoValue_AutoValueWithExtensions )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-    (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $$indent__int__java_lang_String@autovalue.$AutoValue_AutoValueWithExtensions (local.get $indentLevel))(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-    (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))
+    (local.set $$qualifier_1 (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $$getString_|_|_1__java_lang_String_<once>_@autovalue.$AutoValue_AutoValueWithExtensions )))
+    (call_ref $function.m_concat__java_lang_String__java_lang_String (ref.as_non_null (local.get $$qualifier_1))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $$indent__int__java_lang_String@autovalue.$AutoValue_AutoValueWithExtensions (local.get $indentLevel)))(struct.get $java.lang.String.vtable $m_concat__java_lang_String__java_lang_String (struct.get $java.lang.String $vtable(local.get $$qualifier_1))))
    )(struct.get $java.lang.String.vtable $m_replace__java_lang_CharSequence__java_lang_CharSequence__java_lang_String (struct.get $java.lang.String $vtable(local.get $$qualifier))))
   ))
  )

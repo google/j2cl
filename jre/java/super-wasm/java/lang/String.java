@@ -337,7 +337,7 @@ public final class String implements Comparable<String>, CharSequence, Serializa
   }
 
   public String concat(String str) {
-    return this + checkNotNull(str);
+    return new String(nativeConcat(value, str.value));
   }
 
   public boolean contains(CharSequence s) {
@@ -816,4 +816,7 @@ public final class String implements Comparable<String>, CharSequence, Serializa
 
   @Wasm("string.eq")
   private static native boolean nativeEq(NativeString a, NativeString b);
+
+  @Wasm("string.concat")
+  private static native NativeString nativeConcat(NativeString a, NativeString b);
 }

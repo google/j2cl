@@ -308,7 +308,7 @@
  (local $$index_3 i32)
  (local $booleans (ref null $javaemul.internal.WasmArray.OfBoolean))
  (local $strings (ref null $javaemul.internal.WasmArray.OfObject))
- (local $$stringBuilder (ref null $java.lang.StringBuilder))
+ (local $$qualifier (ref null $java.lang.String))
  (local $shorts (ref null $javaemul.internal.WasmArray.OfShort))
  (local $b i32)
  (local $$array_4 (ref null $javaemul.internal.WasmArray.OfShort))
@@ -402,10 +402,8 @@
   (local.set $strings (ref.null $javaemul.internal.WasmArray.OfObject))
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:118:4
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $strings)) (i32.const 0) (block (result (ref null $java.lang.String))
-   (local.set $$stringBuilder (call $$create__@java.lang.StringBuilder ))
-   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(ref.cast (ref null $java.lang.String) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $strings)) (i32.const 0)))(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref $function.m_append__java_lang_Object__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(ref.null $java.lang.Object)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_Object__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))
+   (local.set $$qualifier (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (ref.cast (ref null $java.lang.String) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $strings)) (i32.const 0)))))
+   (call_ref $function.m_concat__java_lang_String__java_lang_String (ref.as_non_null (local.get $$qualifier))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (ref.null $java.lang.Object))(struct.get $java.lang.String.vtable $m_concat__java_lang_String__java_lang_String (struct.get $java.lang.String $vtable(local.get $$qualifier))))
   ))
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:120:4
   (local.set $shorts (ref.null $javaemul.internal.WasmArray.OfShort))

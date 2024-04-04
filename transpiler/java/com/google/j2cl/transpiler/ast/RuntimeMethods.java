@@ -155,6 +155,17 @@ public final class RuntimeMethods {
         .build();
   }
 
+  /** Create a call to String.concat method. */
+  public static MethodCall createStringConcatMethodCall(Expression qualifier, Expression argument) {
+    return MethodCall.Builder.from(
+            TypeDescriptors.get()
+                .javaLangString
+                .getMethodDescriptor("concat", TypeDescriptors.get().javaLangString))
+        .setQualifier(qualifier)
+        .setArguments(argument)
+        .build();
+  }
+
   public static MethodCall createStringFromJsStringMethodCall(Expression expression) {
     // Use the imprecise getMethodDescriptorByName to avoid having NativeString as a
     // known type descriptor.

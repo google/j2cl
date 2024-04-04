@@ -69,11 +69,18 @@ public class ImplementStringConcatenation extends NormalizationPass {
 
             ImmutableList<Expression> operands = collectConcatOperands(binaryExpression);
 
-            // Create String.valueOf call for the simple case.
+            // Create String.valueOf and String.concat call for the simple cases.
             if (operands.size() == 1) {
               return RuntimeMethods.createStringValueOfMethodCall(operands.get(0));
             }
 
+            if (operands.size() == 2) {
+              return RuntimeMethods.createStringConcatMethodCall(
+                  RuntimeMethods.createStringValueOfMethodCall(operands.get(0)),
+                  RuntimeMethods.createStringValueOfMethodCall(operands.get(1)));
+            }
+
+            // Use StringBuilder when concatenating more than 2 strings.
             MultiExpression.Builder multiExpressionBuilder = MultiExpression.newBuilder();
 
             // $stringBuilder = new StringBuilder()
