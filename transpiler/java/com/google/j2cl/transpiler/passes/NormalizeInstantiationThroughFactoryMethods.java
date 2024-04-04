@@ -243,7 +243,16 @@ public class NormalizeInstantiationThroughFactoryMethods extends NormalizationPa
 
   private static Expression createThrowableInit(Expression newInstanceRef) {
     return RuntimeMethods.createThrowableInitMethodCall(
-        newInstanceRef,
-        RuntimeMethods.createExceptionsMethodCall("createJsError", newInstanceRef.clone()));
+        newInstanceRef, newInstanceOfError(newInstanceRef.clone()));
+  }
+
+  /** Emits {@code Exceptions.createJsError(instance.toString())} */
+  private static Expression newInstanceOfError(Expression thisRef) {
+    return RuntimeMethods.createExceptionsMethodCall(
+        "createJsError",
+        MethodCall.Builder.from(
+                TypeDescriptors.get().javaLangObject.getMethodDescriptorByName("toString"))
+            .setQualifier(thisRef)
+            .build());
   }
 }

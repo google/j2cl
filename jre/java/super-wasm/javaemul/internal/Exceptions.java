@@ -15,7 +15,9 @@
  */
 package javaemul.internal;
 
+import javaemul.internal.ThrowableUtils.JsObject;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 @JsType(namespace = "vmbootstrap")
@@ -42,36 +44,18 @@ class Exceptions {
     return currentException;
   }
 
-  static class JsErrorWrapper {
-    final WasmExtern error;
+  @JsMethod(name = "Error", namespace = JsPackage.GLOBAL)
+  public static native JsObject createJsError(String errorMessage);
 
-    JsErrorWrapper(WasmExtern error) {
-      this.error = error;
-    }
-
-    public String toString() {
-      return toString(error);
-    }
-
-    @JsMethod(name = "toString", namespace = "j2wasm.ExceptionUtils")
-    private static native String toString(WasmExtern error);
+  public static Throwable toJava(JsObject e) {
+    return Throwable.of(e);
   }
 
-  public static JsErrorWrapper createJsError(Throwable t) {
-    return new JsErrorWrapper(createError(t.toString()));
+  public static JsObject toJs(Throwable t) {
+    return t.getBackingJsObject();
   }
 
-  @JsMethod(name = "create", namespace = "j2wasm.ExceptionUtils")
-  private static native WasmExtern createError(String errorMessage);
-
-  public static Throwable toJava(WasmExtern e) {
-    return Throwable.of(new JsErrorWrapper(e));
-  }
-
-  public static WasmExtern toJs(Throwable t) {
-    return ((JsErrorWrapper) t.getBackingJsObject()).error;
-  }
-
+  // TODO(goktug): Remove this method and super-source when we can throw directly from Wasm.
   @JsMethod(name = "throwException", namespace = "j2wasm.ExceptionUtils")
-  public static native void throwJsError(WasmExtern e);
+  public static native void throwJsError(JsObject object);
 }

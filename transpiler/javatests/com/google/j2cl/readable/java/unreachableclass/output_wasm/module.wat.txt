@@ -203,7 +203,7 @@
    (local.set $__$jsexc (pop externref))
    (block
     ;;@ unreachableclass/Main.java:21:33
-    (local.set $__$exc (call $m_toJava__javaemul_internal_WasmExtern__java_lang_Throwable@javaemul.internal.Exceptions (local.get $__$jsexc)))
+    (local.set $__$exc (call $m_toJava__javaemul_internal_ThrowableUtils_JsObject__java_lang_Throwable@javaemul.internal.Exceptions (local.get $__$jsexc)))
     ;;@ unreachableclass/Main.java:21:33
     (if (ref.test (ref $java.lang.RuntimeException) (local.get $__$exc))
      (then
@@ -222,7 +222,7 @@
      )(else
       (block
        ;;@ unreachableclass/Main.java:21:33
-       (call $m_throwJsError__javaemul_internal_WasmExtern__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_WasmExtern@javaemul.internal.Exceptions (local.get $__$exc)))
+       (call $m_throwJsError__javaemul_internal_ThrowableUtils_JsObject__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (local.get $__$exc)))
        (unreachable)
       )
      )

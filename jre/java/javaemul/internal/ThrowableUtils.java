@@ -23,6 +23,12 @@ import jsinterop.annotations.JsType;
 /** Backend-specific utils for Throwable. */
 public final class ThrowableUtils {
 
+  /** JavaScript top type. */
+  @JsType(isNative = true, name = "*", namespace = JsPackage.GLOBAL)
+  public interface JsObject {
+    String toString();
+  }
+
   /** Gets the Java {@link Throwable} of the specified js {@code Error}. */
   public static Throwable getJavaThrowable(Object e) {
     return ((HasJavaThrowable) e).getJavaThrowable();
@@ -30,22 +36,30 @@ public final class ThrowableUtils {
 
   /** Sets the Java {@link Throwable} of the specified js {@code Error}. */
   @JsMethod
-  public static native void setJavaThrowable(Object error, Throwable javaThrowable);
+  public static native void setJavaThrowable(JsObject error, Throwable javaThrowable);
+
+  public static boolean isError(JsObject error) {
+    return error instanceof NativeError;
+  }
 
   /** JavaScript {@code Error}. */
   @JsType(isNative = true, name = "Error", namespace = JsPackage.GLOBAL)
-  public static class NativeError {
+  public static class NativeError implements JsObject {
     @JsProperty(name = "captureStackTrace")
     public static boolean hasCaptureStackTraceProperty;
 
-    public static native void captureStackTrace(Object error);
+    public static native void captureStackTrace(NativeError error);
 
     public String stack;
   }
 
+  public static boolean isTypeError(JsObject error) {
+    return error instanceof NativeTypeError;
+  }
+
   /** JavaScript {@code TypeError}. */
   @JsType(isNative = true, name = "TypeError", namespace = JsPackage.GLOBAL)
-  public static class NativeTypeError {}
+  public static class NativeTypeError implements JsObject {}
 
   @SuppressWarnings("unusable-by-js")
   @JsType(isNative = true, name = "?", namespace = JsPackage.GLOBAL)

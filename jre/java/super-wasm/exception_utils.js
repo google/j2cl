@@ -14,23 +14,6 @@
 
 goog.module('j2wasm.ExceptionUtils');
 
-
-/**
- * @param {string} param
- * @return {!Error}.
- */
-function create(param) {
-  return new Error(param);
-}
-
-/**
- * @param {!Error} e
- * @return {string}
- */
-function toString(e) {
-  return "" + e;
-}
-
 /**
  * @param {!Error} e
  */
@@ -64,8 +47,6 @@ function getJavaThrowable(error) {
 }
 
 exports = {
-  create,
-  toString,
   throwException,
   setJavaThrowable,
   getJavaThrowable,
