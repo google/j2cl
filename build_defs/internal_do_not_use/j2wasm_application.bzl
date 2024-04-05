@@ -166,6 +166,9 @@ def _impl_j2wasm_application(ctx):
         bundler_args.add("-jsimports", ctx.outputs.jsimports)
         ctx.actions.run(
             progress_message = "Bundling modules for Wasm %s" % ctx.label,
+            # Note that all_modules also contains some files that are not
+            # actually needed by the bundler, e.g. namemaps; that increases
+            # the total size of the inputs to the bundler.
             inputs = all_modules + jre_jars,
             outputs = [ctx.outputs.wat, ctx.outputs.jsimports],
             executable = ctx.executable._bundler,
@@ -175,11 +178,14 @@ def _impl_j2wasm_application(ctx):
             mnemonic = "J2wasm",
         )
 
-        # TODO(b/324326274): Replace the dummy action with the generation of the name mapping.
         ctx.actions.run_shell(
-            inputs = [],
+            inputs = all_modules,
             outputs = [transpile_out],
-            command = "mkdir -p %s && touch %s/namemap" % (transpile_out.path, transpile_out.path),
+            command = "mkdir -p %s && cat %s > %s/namemap" % (
+                transpile_out.path,
+                " ".join([m.path + "/namemap" for m in all_modules]),
+                transpile_out.path,
+            ),
             mnemonic = "J2wasm",
         )
 

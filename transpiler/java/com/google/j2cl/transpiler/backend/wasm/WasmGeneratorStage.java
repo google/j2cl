@@ -139,6 +139,7 @@ public class WasmGeneratorStage {
 
     emitToFile("data.wat", generator -> generator.emitDataSegments(library));
 
+    emitNameMappingFile(library, output);
     generateJsImportsFile();
   }
 
@@ -213,13 +214,17 @@ public class WasmGeneratorStage {
     builder.newLine();
     builder.append(")");
     output.write("module.wat", builder.buildToList());
-    output.write("namemap", emitNameMapping(library));
+    emitNameMappingFile(library, output);
   }
 
   public static void generateWasmExportMethods(
       List<Method> methods, Output output, Problems problems) {
-    new WasmGeneratorStage(output, /* libraryInfoOutputPath= */ null, problems)
-        .generateWasmExportMethods(methods);
+    WasmGeneratorStage wasmGeneratorStage =
+        new WasmGeneratorStage(output, /* libraryInfoOutputPath= */ null, problems);
+    wasmGeneratorStage.generateWasmExportMethods(methods);
+
+    // Emit the name map for the generated methods.
+    wasmGeneratorStage.emitNameMappingFile(methods, output);
   }
 
   private void generateWasmExportMethods(List<Method> methods) {
@@ -290,24 +295,36 @@ public class WasmGeneratorStage {
     JsImportsGenerator.generateOutputs(output, environment.getJsImports());
   }
 
-  private String emitNameMapping(Library library) {
-    SourceBuilder builder = new SourceBuilder();
+  /** Emits a symbol to name mapping file for all methods in the library. */
+  private void emitNameMappingFile(Library library, Output output) {
+    List<Method> methods = new ArrayList<>();
+
     library.accept(
         new AbstractVisitor() {
           @Override
           public void exitMethod(Method method) {
-            MethodDescriptor methodDescriptor = method.getDescriptor();
-            String methodImplementationName =
-                environment.getMethodImplementationName(methodDescriptor);
-            checkState(methodImplementationName.startsWith("$"));
-            builder.append(
-                String.format(
-                    "%s:%s",
-                    methodImplementationName.substring(1),
-                    methodDescriptor.getQualifiedBinaryName()));
-            builder.newLine();
+            methods.add(method);
           }
         });
-    return builder.build();
+
+    emitNameMappingFile(methods, output);
+  }
+
+  /** Emits a symbol to name mapping file for the supplied methods. */
+  private void emitNameMappingFile(List<Method> methods, Output output) {
+    SourceBuilder builder = new SourceBuilder();
+    methods.forEach(m -> emitMethodMapping(m, builder));
+    output.write("namemap", builder.build());
+  }
+
+  private void emitMethodMapping(Method method, SourceBuilder builder) {
+    MethodDescriptor methodDescriptor = method.getDescriptor();
+    String methodImplementationName = environment.getMethodImplementationName(methodDescriptor);
+    checkState(methodImplementationName.startsWith("$"));
+    builder.append(
+        String.format(
+            "%s:%s",
+            methodImplementationName.substring(1), methodDescriptor.getQualifiedBinaryName()));
+    builder.newLine();
   }
 }
