@@ -1,5 +1,6 @@
 """Helper for j2cl junit integration tests."""
 
+load("@rules_java//java:defs.bzl", "java_library", "java_test")
 load("//build_defs:rules.bzl", "j2cl_library", "j2cl_test", "j2kt_jvm_test", "j2kt_native_test", "j2wasm_test")
 load("//build_defs/internal_do_not_use:j2cl_util.bzl", "get_java_package")
 load("@io_bazel_rules_kotlin//kotlin:kotlin.bzl", "kt_jvm_library")
@@ -33,8 +34,7 @@ def j2cl_test_integration_test(name, test_data, test_data_java_only = [], deps =
     shard_count = len(test_data_all)
     if shard_count > 50:
         fail("Attempted to run %d test cases, which exceeds max shards of 50. Manually split test %s into fewer tests" % (shard_count, name))
-
-    native.java_test(
+    java_test(
         name = name,
         srcs = [name + ".java"],
         data = test_data_all + extra_data,
@@ -181,7 +181,7 @@ def j2cl_test_integration_test_data(
             runtime_deps = [":%s-lib-j2kt-native" % name],
             extra_defs = extra_defs,
         )
-    native.java_test(
+    java_test(
         name = name,
         tags = tags,
         runtime_deps = [":%s-lib" % name],
@@ -209,8 +209,7 @@ def java_and_j2cl_library(
     deps = deps + _DEFAULT_JAVA_DEPS
     j2cl_deps = [dep + "-j2cl" for dep in deps]
     j2cl_srcs = super_srcs or srcs
-
-    native.java_library(
+    java_library(
         name = name,
         srcs = srcs,
         deps = deps,

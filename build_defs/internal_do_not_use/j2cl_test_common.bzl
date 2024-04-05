@@ -61,6 +61,7 @@ rather than on jsunit runner with browsers. For j2kt_jvm_test j2cl_library/j2cl_
 will be replaced with j2kt_jvm_library/j2kt_jvm_test counterparts.
 """
 
+load("@rules_java//java:defs.bzl", "java_test")
 load(":j2cl_generate_jsunit_suite.bzl", "j2cl_generate_jsunit_suite")
 load(":j2cl_js_common.bzl", "J2CL_TEST_DEFS", "j2cl_web_test")
 load(":j2cl_library.bzl", "j2cl_library")

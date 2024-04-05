@@ -1,5 +1,6 @@
 """Test macro for j2cl_rta"""
 
+load("@rules_java//java:defs.bzl", "java_test")
 load("//build_defs:rules.bzl", "j2cl_rta")
 
 def rta_test(
@@ -29,8 +30,7 @@ def rta_test(
         legacy_keep_jstype_interfaces_do_not_use = keep_jstype_interfaces,
         generate_unused_methods_for_testing_do_not_use = True,
     )
-
-    native.java_test(
+    java_test(
         name = name,
         test_class = "com.google.j2cl.tools.rta.GoldenFileTester",
         runtime_deps = [
