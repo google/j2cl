@@ -496,6 +496,8 @@ def j2wasm_application(name, defines = dict(), **kwargs):
             "--unsubtyping",
             "-O3",
             "--optimize-j2cl",
+            "-O3",
+            "--optimize-j2cl",
 
             # Stage 3
             _STAGE_SEPARATOR,
