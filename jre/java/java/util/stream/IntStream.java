@@ -251,39 +251,6 @@ public interface IntStream extends BaseStream<Integer, IntStream> {
 
   IntStream distinct();
 
-  default IntStream dropWhile(IntPredicate predicate) {
-    Spliterator.OfInt prev = spliterator();
-    Spliterator.OfInt spliterator =
-        new Spliterators.AbstractIntSpliterator(prev.estimateSize(),
-                prev.characteristics() & ~(Spliterator.SIZED | Spliterator.SUBSIZED)) {
-          private boolean drop = true;
-          private boolean found;
-
-          @Override
-          public boolean tryAdvance(IntConsumer action) {
-            found = false;
-            if (drop) {
-              // drop items until we find one that matches
-              while (drop && prev.tryAdvance((int item) -> {
-                if (!predicate.test(item)) {
-                  drop = false;
-                  found = true;
-                  action.accept(item);
-                }
-              })) {
-                // do nothing, work is done in tryAdvance
-              }
-              // only return true if we accepted at least one item
-              return found;
-            } else {
-              // accept one item, return result
-              return prev.tryAdvance(action);
-            }
-          }
-        };
-    return StreamSupport.intStream(spliterator, false);
-  }
-
   IntStream filter(IntPredicate predicate);
 
   OptionalInt findAny();
@@ -338,6 +305,38 @@ public interface IntStream extends BaseStream<Integer, IntStream> {
 
   IntSummaryStatistics summaryStatistics();
 
+  default IntStream dropWhile(IntPredicate predicate) {
+    Spliterator.OfInt prev = spliterator();
+    Spliterator.OfInt spliterator =
+        new Spliterators.AbstractIntSpliterator(prev.estimateSize(),
+                prev.characteristics() & ~(Spliterator.SIZED | Spliterator.SUBSIZED)) {
+          private boolean dropping = true;
+          private boolean found;
+
+          @Override
+          public boolean tryAdvance(IntConsumer action) {
+            if (!dropping) {
+              // accept one item, return result
+              return prev.tryAdvance(action);
+            }  
+            found = false;
+            // drop items until we find one that matches
+            while (dropping && prev.tryAdvance((int item) -> {
+              if (!predicate.test(item)) {
+                dropping = false;
+                found = true;
+                action.accept(item);
+              }
+            })) {
+              // do nothing, work is done in tryAdvance
+            }
+            // only return true if we accepted at least one item
+            return found;
+          }
+        };
+    return StreamSupport.intStream(spliterator, false);
+  }
+
   default IntStream takeWhile(IntPredicate predicate) {
     Spliterator.OfInt original = spliterator();
     Spliterator.OfInt spliterator =
@@ -348,11 +347,11 @@ public interface IntStream extends BaseStream<Integer, IntStream> {
 
           @Override
           public boolean tryAdvance(IntConsumer action) {
-            found = false;
             if (!take) {
               // already failed the check
               return false;
             }
+            found = false;
             original.tryAdvance((int item) -> {
               if (predicate.test(item)) {
                 found = true;
