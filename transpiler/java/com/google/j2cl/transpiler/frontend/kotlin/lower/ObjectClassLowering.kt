@@ -16,6 +16,7 @@ import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
 import org.jetbrains.kotlin.ir.IrStatement
 import org.jetbrains.kotlin.ir.builders.irCall
 import org.jetbrains.kotlin.ir.builders.irExprBody
+import org.jetbrains.kotlin.ir.builders.irGetField
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrDeclaration
 import org.jetbrains.kotlin.ir.declarations.IrDeclarationContainer
@@ -54,45 +55,29 @@ internal class ObjectClassLowering(val context: JvmBackendContext) :
     if (!irClass.isObject) return
 
     val publicInstanceField = context.cachedDeclarations.getFieldForObjectInstance(irClass)
-    // MODIFIED BY GOOGLE
-    // For interfaces, Kotlin/JVM generates a private static field containing the unique instance of
-    // the companion on the companion itself and a public static field on the interface exposing the
-    // companion private field. This is not needed for J2CL and removing this construct will help
-    // our optimization of companions.
-    // Original code:
-    // val privateInstanceField =
-    //     context.cachedDeclarations.getPrivateFieldForObjectInstance(irClass)
-    //
-    // val constructor =
-    //   irClass.constructors.find { it.isPrimary }
-    //     ?: throw AssertionError("Object should have a primary constructor: ${irClass.name}")
-    //
-    // if (privateInstanceField != publicInstanceField) {
-    //   with(context.createIrBuilder(privateInstanceField.symbol)) {
-    //     privateInstanceField.initializer = irExprBody(irCall(constructor.symbol))
-    //   }
-    //   with(context.createIrBuilder(publicInstanceField.symbol)) {
-    //     publicInstanceField.initializer = irExprBody(irCall(constructor.symbol))
-    //   }
-    //   pendingTransformations.add {
-    //     (privateInstanceField.parent as IrDeclarationContainer)
-    //       .declarations
-    //       .add(0, privateInstanceField)
-    //   }
-    // } else {
-    //   with(context.createIrBuilder(publicInstanceField.symbol)) {
-    //     publicInstanceField.initializer = irExprBody(irCall(constructor.symbol))
-    //   }
-    // }
+    val privateInstanceField = context.cachedDeclarations.getPrivateFieldForObjectInstance(irClass)
 
     val constructor =
       irClass.constructors.find { it.isPrimary }
         ?: throw AssertionError("Object should have a primary constructor: ${irClass.name}")
 
-    with(context.createIrBuilder(publicInstanceField.symbol)) {
-      publicInstanceField.initializer = irExprBody(irCall(constructor.symbol))
+    if (privateInstanceField != publicInstanceField) {
+      with(context.createIrBuilder(privateInstanceField.symbol)) {
+        privateInstanceField.initializer = irExprBody(irCall(constructor.symbol))
+      }
+      with(context.createIrBuilder(publicInstanceField.symbol)) {
+        publicInstanceField.initializer = irExprBody(irGetField(null, privateInstanceField))
+      }
+      pendingTransformations.add {
+        (privateInstanceField.parent as IrDeclarationContainer)
+          .declarations
+          .add(0, privateInstanceField)
+      }
+    } else {
+      with(context.createIrBuilder(publicInstanceField.symbol)) {
+        publicInstanceField.initializer = irExprBody(irCall(constructor.symbol))
+      }
     }
-    // END OF MODIFICATIONS
 
     // Mark object instance field as deprecated if the object visibility is private or protected,
     // and ProperVisibilityForCompanionObjectInstanceField language feature is not enabled.
@@ -107,7 +92,7 @@ internal class ObjectClassLowering(val context: JvmBackendContext) :
         publicInstanceField.annotations =
           filterOutAnnotations(
             DeprecationResolver.JAVA_DEPRECATED,
-            publicInstanceField.annotations,
+            publicInstanceField.annotations
           ) + irCall(irSymbols.javaLangDeprecatedConstructorWithDeprecatedFlag)
       }
     }
