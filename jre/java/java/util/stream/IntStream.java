@@ -305,5 +305,73 @@ public interface IntStream extends BaseStream<Integer, IntStream> {
 
   IntSummaryStatistics summaryStatistics();
 
+  default IntStream dropWhile(IntPredicate predicate) {
+    Spliterator.OfInt prev = spliterator();
+    Spliterator.OfInt spliterator =
+        new Spliterators.AbstractIntSpliterator(
+            prev.estimateSize(),
+            prev.characteristics() & ~(Spliterator.SIZED | Spliterator.SUBSIZED)) {
+          private boolean dropping = true;
+          private boolean found;
+
+          @Override
+          public boolean tryAdvance(IntConsumer action) {
+            if (!dropping) {
+              // Predicate matched, stop dropping items.
+              return prev.tryAdvance(action);
+            }
+
+            found = false;
+            // Drop items until we find one that matches predicate.
+            while (dropping
+                && prev.tryAdvance(
+                    (int item) -> {
+                      if (!predicate.test(item)) {
+                        dropping = false;
+                        found = true;
+                        action.accept(item);
+                      }
+                    })) {
+              // Do nothing, work is done in tryAdvance
+            }
+            // Only return true if we accepted at least one item
+            return found;
+          }
+        };
+    return StreamSupport.intStream(spliterator, false);
+  }
+
+  default IntStream takeWhile(IntPredicate predicate) {
+    Spliterator.OfInt original = spliterator();
+    Spliterator.OfInt spliterator =
+        new Spliterators.AbstractIntSpliterator(
+            original.estimateSize(),
+            original.characteristics() & ~(Spliterator.SIZED | Spliterator.SUBSIZED)) {
+          private boolean taking = true;
+          private boolean found;
+
+          @Override
+          public boolean tryAdvance(IntConsumer action) {
+            if (!taking) {
+              // Already failed the predicate.
+              return false;
+            }
+
+            found = false;
+            original.tryAdvance(
+                (int item) -> {
+                  if (predicate.test(item)) {
+                    found = true;
+                    action.accept(item);
+                  } else {
+                    taking = false;
+                  }
+                });
+            return found;
+          }
+        };
+    return StreamSupport.intStream(spliterator, false);
+  }
+
   int[] toArray();
 }

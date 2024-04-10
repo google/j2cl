@@ -303,5 +303,73 @@ public interface LongStream extends BaseStream<Long, LongStream> {
 
   LongSummaryStatistics summaryStatistics();
 
+  default LongStream dropWhile(LongPredicate predicate) {
+    Spliterator.OfLong prev = spliterator();
+    Spliterator.OfLong spliterator =
+        new Spliterators.AbstractLongSpliterator(
+            prev.estimateSize(),
+            prev.characteristics() & ~(Spliterator.SIZED | Spliterator.SUBSIZED)) {
+          private boolean dropping = true;
+          private boolean found;
+
+          @Override
+          public boolean tryAdvance(LongConsumer action) {
+            if (!dropping) {
+              // Predicate matched, stop dropping items.
+              return prev.tryAdvance(action);
+            }
+
+            found = false;
+            // Drop items until we find one that matches predicate.
+            while (dropping
+                && prev.tryAdvance(
+                    (long item) -> {
+                      if (!predicate.test(item)) {
+                        dropping = false;
+                        found = true;
+                        action.accept(item);
+                      }
+                    })) {
+              // Do nothing, work is done in tryAdvance
+            }
+            // Only return true if we accepted at least one item
+            return found;
+          }
+        };
+    return StreamSupport.longStream(spliterator, false);
+  }
+
+  default LongStream takeWhile(LongPredicate predicate) {
+    Spliterator.OfLong original = spliterator();
+    Spliterator.OfLong spliterator =
+        new Spliterators.AbstractLongSpliterator(
+            original.estimateSize(),
+            original.characteristics() & ~(Spliterator.SIZED | Spliterator.SUBSIZED)) {
+          private boolean taking = true;
+          private boolean found;
+
+          @Override
+          public boolean tryAdvance(LongConsumer action) {
+            if (!taking) {
+              // Already failed the predicate.
+              return false;
+            }
+
+            found = false;
+            original.tryAdvance(
+                (long item) -> {
+                  if (predicate.test(item)) {
+                    found = true;
+                    action.accept(item);
+                  } else {
+                    taking = false;
+                  }
+                });
+            return found;
+          }
+        };
+    return StreamSupport.longStream(spliterator, false);
+  }
+
   long[] toArray();
 }
