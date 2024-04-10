@@ -89,42 +89,42 @@ java_test(
 
 j2cl_multi_test(
     name = "BigDecimal",
-    shard_count = 5,
+    shard_count = 2,
     test_class = "com.google.j2cl.jre.BigDecimalSuite",
     deps = [":emul_tests_lib"],
 )
 
 j2cl_multi_test(
     name = "BigInteger",
-    shard_count = 8,
+    shard_count = 2,
     test_class = "com.google.j2cl.jre.BigIntegerSuite",
     deps = [":emul_tests_lib"],
 )
 
 j2cl_multi_test(
     name = "Collections",
-    shard_count = 16,
+    shard_count = 4,
     test_class = "com.google.j2cl.jre.CollectionsSuite",
     deps = [":emul_tests_lib"],
 )
 
 j2cl_multi_test(
     name = "Concurrent",
-    shard_count = 5,
+    shard_count = 4,
     test_class = "com.google.j2cl.jre.ConcurrentSuite",
     deps = [":emul_tests_lib"],
 )
 
 j2cl_multi_test(
     name = "Emul",
-    shard_count = 8,
+    shard_count = 4,
     test_class = "com.google.j2cl.jre.EmulSuite",
     deps = [":emul_tests_lib"],
 )
 
 j2cl_multi_test(
     name = "EmulJava8",
-    shard_count = 8,
+    shard_count = 4,
     test_class = "com.google.j2cl.jre.EmulJava8Suite",
     deps = [":emul_tests_lib"],
 )
@@ -132,14 +132,14 @@ j2cl_multi_test(
 j2cl_multi_test(
     name = "EmulJava9",
     enable_kt_native = False,
-    shard_count = 8,
+    shard_count = 2,
     test_class = "com.google.j2cl.jre.EmulJava9Suite",
     deps = [":emul_tests_lib"],
 )
 
 j2cl_multi_test(
     name = "Lang",
-    shard_count = 8,
+    shard_count = 4,
     test_class = "com.google.j2cl.jre.LangSuite",
     deps = [":emul_tests_lib"],
 )
@@ -175,7 +175,7 @@ j2cl_test(
     browsers = ["//testing/web/browsers:chrome-linux"],
     generate_build_test = False,
     jvm_flags = ["-Djsrunner.net.transpileMode=always"],
-    shard_count = 5,
+    shard_count = 4,
     test_class = "com.google.j2cl.jre.ConcurrentSuite",
     runtime_deps = [
         ":emul_tests_lib",
