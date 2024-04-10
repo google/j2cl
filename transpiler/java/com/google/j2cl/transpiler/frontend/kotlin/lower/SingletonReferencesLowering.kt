@@ -30,19 +30,12 @@ internal class SingletonReferencesLowering(val context: JvmBackendContext) :
 
   override fun visitGetObjectValue(expression: IrGetObjectValue): IrExpression {
     val instanceField =
-      if (allScopes.any { it.irElement == expression.symbol.owner })
-        context.cachedDeclarations.getPrivateFieldForObjectInstance(
-          expression.symbol.owner
-        ) // Constructor or static method.
-      else
-        context.cachedDeclarations.getFieldForObjectInstance(
-          expression.symbol.owner
-        ) // Not in object scope at all.
+      context.cachedDeclarations.getFieldForObjectInstance(expression.symbol.owner)
     return IrGetFieldImpl(
       expression.startOffset,
       expression.endOffset,
       instanceField.symbol,
-      expression.type
+      expression.type,
     )
   }
 }
