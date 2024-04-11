@@ -32,6 +32,9 @@
 (global $K@compiletimeconstant.CompileTimeConstant (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
+(global $classLiteral@compiletimeconstant.CompileTimeConstant (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $$class-initialized@compiletimeconstant.CompileTimeConstant (mut i32)
  (i32.const 0)
 )
@@ -107,7 +110,7 @@
   ;;@ compiletimeconstant/CompileTimeConstant.java:64:4
   (local.set $n (call $$getString_|ThisIsALongS...|_2__java_lang_String_<once>_@compiletimeconstant.CompileTimeConstant ))
   ;;@ compiletimeconstant/CompileTimeConstant.java:65:4
-  (local.set $c (call $$getClassMetadata__java_lang_Class_<once>_@compiletimeconstant.CompileTimeConstant ))
+  (local.set $c (global.get $classLiteral@compiletimeconstant.CompileTimeConstant))
  )
 )
 
@@ -130,6 +133,8 @@
   (global.set $OBJ@compiletimeconstant.CompileTimeConstant (ref.null $java.lang.Object))
   ;;@ compiletimeconstant/CompileTimeConstant.java:29:2
   (global.set $K@compiletimeconstant.CompileTimeConstant (ref.null $java.lang.String))
+  ;;@ compiletimeconstant/CompileTimeConstant.java:45:2
+  (global.set $classLiteral@compiletimeconstant.CompileTimeConstant (call $$getClassMetadata__java_lang_Class_<once>_@compiletimeconstant.CompileTimeConstant ))
  )
 )
 

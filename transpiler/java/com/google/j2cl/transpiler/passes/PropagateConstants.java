@@ -27,7 +27,6 @@ import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Literal;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.StringLiteral;
-import com.google.j2cl.transpiler.ast.TypeLiteral;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Nullable;
@@ -113,8 +112,7 @@ public class PropagateConstants extends LibraryNormalizationPass {
         // ensures removal of clinits in some of the JRE classes.
         || (field.getDescriptor().isFinal()
             && field.isStatic()
-            && (field.getInitializer() instanceof TypeLiteral
-                || field.getInitializer() instanceof StringLiteral));
+            && (field.getInitializer() instanceof StringLiteral));
   }
 
   protected boolean shouldPropagateConstant(FieldDescriptor fieldDescriptor) {
