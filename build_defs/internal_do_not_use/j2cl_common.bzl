@@ -323,7 +323,7 @@ def _j2cl_transpile(
         arguments = [args],
         env = dict(LANG = "en_US.UTF-8"),
         execution_requirements = {"supports-workers": "1"},
-        mnemonic = "J2cl",
+        mnemonic = "J2cl" if backend == "CLOSURE" else "J2wasm",
     )
 
 DEFAULT_J2CL_JAVAC_OPTS = [
