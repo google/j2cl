@@ -22,6 +22,8 @@ import static java.util.stream.Collectors.averagingInt;
 import static java.util.stream.Collectors.averagingLong;
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.filtering;
+import static java.util.stream.Collectors.flatMapping;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.mapping;
@@ -42,6 +44,7 @@ import com.google.j2cl.jre.java.util.EmulTestBase;
 import java.util.AbstractMap.SimpleImmutableEntry;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.DoubleSummaryStatistics;
@@ -552,7 +555,7 @@ public class CollectorsTest extends EmulTestBase {
    * This method attempts to apply a collector to items as a stream might do, so that we can simply
    * verify the output. Taken from the Collector class's javadoc.
    */
-  public static <
+  private static <
           T extends @Nullable Object, A extends @Nullable Object, R extends @Nullable Object>
       void applyItems(
           R expected, Collector<T, A, R> collector, T t1, T t2, BiPredicate<R, R> equals) {
@@ -567,7 +570,7 @@ public class CollectorsTest extends EmulTestBase {
    * This method attempts to apply a collector to items as a stream might do, so that we can simply
    * verify the output. Taken from the Collector class's javadoc.
    */
-  public static <
+  private static <
           T extends @Nullable Object, A extends @Nullable Object, R extends @Nullable Object>
       void applyItems(R expected, Collector<T, A, R> collector, T t1, T t2) {
     applyItems(expected, collector, t1, t2, Object::equals);
@@ -670,6 +673,54 @@ public class CollectorsTest extends EmulTestBase {
   private static <T extends @Nullable Object, U extends @Nullable Object> void assertTrue(
       BiPredicate<T, U> predicate, T expected, U actual) {
     assertTrue("expected= " + expected + ", actual=" + actual, predicate.test(expected, actual));
+  }
+
+  public void testFlatMapping() {
+    // since applyItems tests the same inputs multiple times, we need fresh stream instances as they can't be reused
+    Collector<Collection<String>, ?, List<String>> flatMapping = flatMapping(Collection::stream,
+        toList());
+    applyItems(Arrays.asList("a", "b"), flatMapping, Collections.singletonList("a"),
+        Collections.singletonList("b"));
+    applyItems(Arrays.asList("c", "d"), flatMapping, Collections.emptyList(), Arrays.asList("c", "d"));
+        
+    Collector<Collection<String>, ?, List<String>> flatMappingToNull = flatMapping(items -> {
+        if (items.size() % 2 == 0) {
+          // Return null instead of empty to test behavior around null
+          return null;
+        }
+        return items.stream();
+    }, toList());
+    applyItems(Arrays.asList("a"), flatMappingToNull, Arrays.asList("a"), Arrays.asList("b", "c"));
+
+    Collector<Collection<String>, ?, List<String>> flatMappingToNullWithEmptyList = flatMapping(items -> {
+        if (items.size() == 0) {
+            // Return null instead of empty to test behavior around null
+            return null;
+        }
+        return items.stream();
+    }, toList());
+    applyItems(Arrays.asList("a", "b", "c"), flatMappingToNullWithEmptyList, Collections.emptyList(), Arrays.asList("a", "b", "c"));
+
+
+    Stream<Integer> stream = Arrays.asList(1, 2, 3).stream();
+    stream.collect(flatMapping(x -> Stream.of(x, x), toList()));
+
+    IllegalStateException thrown = null;
+    try {
+      stream.anyMatch(x -> x > 0);
+    } catch (IllegalStateException e) {
+      thrown = e;
+    }
+
+    assertNotNull(thrown);
+    assertEquals("Stream already terminated, can't be modified or used", thrown.getMessage());
+  }
+        
+  public void testFiltering() {
+    Collector<String, ?, List<String>> filtering = filtering(s -> s.equals("a"), toList());
+    applyItems(Collections.singletonList("a"), filtering, "a", "b");
+    applyItems(Collections.emptyList(), filtering, "c", "d");
+    applyItems(Arrays.asList("a", "a"), filtering, "a", "a");
   }
 
 }
