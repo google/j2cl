@@ -580,6 +580,16 @@ public final class InternalPreconditions {
     }
   }
 
+  /** Checks that array copy bounds are correct. */
+  public static void checkCriticalArrayCopyIndicies(
+      Object src, int srcOfs, Object dest, int destOfs, int len) {
+    int srclen = ArrayHelper.getLength(src);
+    int destlen = ArrayHelper.getLength(dest);
+    if (srcOfs < 0 || destOfs < 0 || len < 0 || srcOfs + len > srclen || destOfs + len > destlen) {
+      throw new IndexOutOfBoundsException();
+    }
+  }
+
   /**
    * Checks that string bounds are correct.
    *

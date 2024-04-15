@@ -16,6 +16,7 @@
 package java.lang;
 
 import static javaemul.internal.InternalPreconditions.checkArrayType;
+import static javaemul.internal.InternalPreconditions.checkCriticalArrayCopyIndicies;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 import static javaemul.internal.InternalPreconditions.isTypeChecked;
 
@@ -53,7 +54,7 @@ public final class System {
 
     // Fast path for no type checking. Also hides rest of the checking specific code from compilers.
     if (!isTypeChecked()) {
-      checkArrayCopyIndicies(src, srcOfs, dest, destOfs, len);
+      checkCriticalArrayCopyIndicies(src, srcOfs, dest, destOfs, len);
       ArrayHelper.copy(src, srcOfs, dest, destOfs, len);
       return;
     }
@@ -74,7 +75,7 @@ public final class System {
     }
     checkArrayType(arrayTypeMatch, "Array types don't match");
 
-    checkArrayCopyIndicies(src, srcOfs, dest, destOfs, len);
+    checkCriticalArrayCopyIndicies(src, srcOfs, dest, destOfs, len);
 
     /*
      * If the arrays are not references or if they are exactly the same type, we
@@ -100,15 +101,6 @@ public final class System {
       }
     } else {
       ArrayHelper.copy(src, srcOfs, dest, destOfs, len);
-    }
-  }
-
-  private static void checkArrayCopyIndicies(
-      Object src, int srcOfs, Object dest, int destOfs, int len) {
-    int srclen = ArrayHelper.getLength(src);
-    int destlen = ArrayHelper.getLength(dest);
-    if (srcOfs < 0 || destOfs < 0 || len < 0 || srcOfs + len > srclen || destOfs + len > destlen) {
-      throw new IndexOutOfBoundsException();
     }
   }
 
