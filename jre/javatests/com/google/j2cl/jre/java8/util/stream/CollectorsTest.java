@@ -702,18 +702,10 @@ public class CollectorsTest extends EmulTestBase {
     applyItems(Arrays.asList("a", "b", "c"), flatMappingToNullWithEmptyList, Collections.emptyList(), Arrays.asList("a", "b", "c"));
 
 
-    Stream<Integer> stream = Arrays.asList(1, 2, 3).stream();
-    stream.collect(flatMapping(x -> Stream.of(x, x), toList()));
-
-    IllegalStateException thrown = null;
-    try {
-      stream.anyMatch(x -> x > 0);
-    } catch (IllegalStateException e) {
-      thrown = e;
-    }
-
-    assertNotNull(thrown);
-    assertEquals("Stream already terminated, can't be modified or used", thrown.getMessage());
+    int[] calledCount = {0};
+    Stream<String> mapped = Stream.of("x").onClose(() -> calledCount[0]++);
+    Stream.of(1).collect(flatMapping(x -> mapped, toList()));
+    assertEquals(1, calledCount[0]);
   }
         
   public void testFiltering() {
