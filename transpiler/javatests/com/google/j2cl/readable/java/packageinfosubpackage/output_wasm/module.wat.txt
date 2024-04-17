@@ -44,6 +44,19 @@
   ))
  )
 
+;;; Code for packageinfosubpackage.Foo.NativeBar.$Overlay [imports]
+
+;;; Code for packageinfosubpackage.Foo [imports]
+
+;;; Code for packageinfosubpackage.Foo.NativeBar [imports]
+
+;;; NativeBar()
+(func $m_<init>__@packageinfosubpackage.Foo.NativeBar (import "imports" "packageinfosubpackage.subpackage.Bar.constructor") 
+ (result (ref null extern))
+)
+
+;;; Code for packageinfosubpackage.subpackage.Bar [imports]
+
 ;;; Code for packageinfosubpackage.Foo [vtable.init]
 (global $packageinfosubpackage.Foo.vtable (ref $packageinfosubpackage.Foo.vtable)
  (struct.new $packageinfosubpackage.Foo.vtable
@@ -266,11 +279,6 @@
 )
 
 ;;; Code for packageinfosubpackage.Foo.NativeBar [methods]
-
-;;; NativeBar()
-(func $m_<init>__@packageinfosubpackage.Foo.NativeBar (import "imports" "packageinfosubpackage.subpackage.Bar.constructor") 
- (result (ref null extern))
-)
 
 ;;; Code for packageinfosubpackage.subpackage.Bar [methods]
 

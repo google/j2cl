@@ -48,6 +48,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 /** Generates all the syntactic .wat constructs for wasm. */
@@ -336,18 +337,32 @@ public class WasmConstructsGenerator {
     emitEndCodeComment(type, "static fields");
   }
 
+  void renderImportedMethods(Type type) {
+    if (AstUtils.isNonNativeJsEnum(type.getTypeDescriptor())) {
+      return;
+    }
+    type.getMethods().stream().filter(environment::isJsImport).forEach(this::renderMethod);
+  }
+
   void renderTypeMethods(Type type) {
     if (AstUtils.isNonNativeJsEnum(type.getTypeDescriptor())) {
       return;
     }
     type.getMethods().stream()
-        .filter(method -> !method.isAbstract() || method.isNative())
-        .filter(m -> m.getDescriptor().getWasmInfo() == null)
+        .filter(Predicate.not(environment::isJsImport))
         .forEach(this::renderMethod);
   }
 
+
   public void renderMethod(Method method) {
     MethodDescriptor methodDescriptor = method.getDescriptor();
+    if (methodDescriptor.isAbstract() && !methodDescriptor.isNative()
+        || methodDescriptor.getWasmInfo() != null) {
+      // Abstract methods don't generate any code, except if they are native; neither do methods
+      // that have @Wasm annotation.
+      return;
+    }
+
     // TODO(b/264676817): Consider refactoring to have MethodDescriptor.isNative return true for
     // native constructors, or exposing isNativeConstructor from MethodDescriptor.
     boolean isNativeConstructor =

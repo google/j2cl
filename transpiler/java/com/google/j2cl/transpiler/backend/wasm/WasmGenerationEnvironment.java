@@ -386,6 +386,11 @@ public class WasmGenerationEnvironment {
     return jsImports.getMethodImports().get(methodDescriptor);
   }
 
+  public boolean isJsImport(Method method) {
+    MethodDescriptor methodDescriptor = method.getDescriptor();
+    return jsImports.getMethodImports().get(methodDescriptor) != null;
+  }
+
   private final boolean isModular;
   private final Library library;
   private final JsImportsGenerator.Imports jsImports;

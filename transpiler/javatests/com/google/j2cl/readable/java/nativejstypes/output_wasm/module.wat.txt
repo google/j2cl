@@ -157,6 +157,287 @@
 
  ;;; Code for nativejstypes.TopLevel.Nested [type definition]
 
+;;; Code for nativejstypes.Bar.$Overlay [imports]
+
+;;; Code for nativejstypes.BarInnerWithDotInName.$Overlay [imports]
+
+;;; Code for nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay [imports]
+
+;;; Code for nativejstypes.Bar.Inner.$Overlay [imports]
+
+;;; Code for nativejstypes.Foo.$Overlay [imports]
+
+;;; Code for nativejstypes.Headers.$Overlay [imports]
+
+;;; Code for nativejstypes.Nullability.$Overlay [imports]
+
+;;; Code for nativejstypes.NullabilityNullMarked.$Overlay [imports]
+
+;;; Code for nativejstypes.TopLevel.$Overlay [imports]
+
+;;; Code for nativejstypes.TopLevelNestedReference.$Overlay [imports]
+
+;;; Code for nativejstypes.TopLevel.Nested.$Overlay [imports]
+
+;;; Code for nativejstypes.Bar [imports]
+
+;;; Bar(int x, int y)
+(func $m_<init>__int__int@nativejstypes.Bar (import "imports" "nativejstypes.Bar.constructor$2") 
+ (param $x i32)
+ (param $y i32)
+ (result (ref null extern))
+)
+
+;;; int Bar.product()
+(func $m_product__int@nativejstypes.Bar (import "imports" "nativejstypes.Bar.product") 
+ (param $this (ref null extern))
+ (result i32)
+)
+
+;;; int Bar.getStatic()
+(func $m_getStatic__int@nativejstypes.Bar (import "imports" "nativejstypes.Bar.getStatic") 
+ (result i32)
+)
+
+;;; int Bar.x()
+(func $f_x__int@nativejstypes.Bar (import "imports" "get nativejstypes.Bar.x") 
+ (param $this (ref null extern))
+ (result i32)
+)
+
+;;; void Bar.x(int value)
+(func $f_x__int__void@nativejstypes.Bar (import "imports" "set nativejstypes.Bar.x") 
+ (param $this (ref null extern))
+ (param $value i32)
+)
+
+;;; int Bar.y()
+(func $f_y__int@nativejstypes.Bar (import "imports" "get nativejstypes.Bar.y") 
+ (param $this (ref null extern))
+ (result i32)
+)
+
+;;; void Bar.y(int value)
+(func $f_y__int__void@nativejstypes.Bar (import "imports" "set nativejstypes.Bar.y") 
+ (param $this (ref null extern))
+ (param $value i32)
+)
+
+;;; int Bar.f()
+(func $f_f__int@nativejstypes.Bar (import "imports" "get nativejstypes.Bar.f") 
+ (result i32)
+)
+
+;;; void Bar.f(int value)
+(func $f_f__int__void@nativejstypes.Bar (import "imports" "set nativejstypes.Bar.f") 
+ (param $value i32)
+)
+
+;;; Code for nativejstypes.BarInnerWithDotInName [imports]
+
+;;; BarInnerWithDotInName(int n)
+(func $m_<init>__int@nativejstypes.BarInnerWithDotInName (import "imports" "nativejstypes.Bar.Inner.constructor$1") 
+ (param $n i32)
+ (result (ref null extern))
+)
+
+;;; int BarInnerWithDotInName.square()
+(func $m_square__int@nativejstypes.BarInnerWithDotInName (import "imports" "nativejstypes.Bar.Inner.square") 
+ (param $this (ref null extern))
+ (result i32)
+)
+
+;;; int BarInnerWithDotInName.getInnerStatic()
+(func $m_getInnerStatic__int@nativejstypes.BarInnerWithDotInName (import "imports" "nativejstypes.Bar.Inner.getInnerStatic") 
+ (result i32)
+)
+
+;;; Code for nativejstypes.BarInnerWithDotInNameAndHasNamespace [imports]
+
+;;; BarInnerWithDotInNameAndHasNamespace(int n)
+(func $m_<init>__int@nativejstypes.BarInnerWithDotInNameAndHasNamespace (import "imports" "nativejstypes.Bar.Inner.constructor$1") 
+ (param $n i32)
+ (result (ref null extern))
+)
+
+;;; int BarInnerWithDotInNameAndHasNamespace.square()
+(func $m_square__int@nativejstypes.BarInnerWithDotInNameAndHasNamespace (import "imports" "nativejstypes.Bar.Inner.square") 
+ (param $this (ref null extern))
+ (result i32)
+)
+
+;;; int BarInnerWithDotInNameAndHasNamespace.getInnerStatic()
+(func $m_getInnerStatic__int@nativejstypes.BarInnerWithDotInNameAndHasNamespace (import "imports" "nativejstypes.Bar.Inner.getInnerStatic") 
+ (result i32)
+)
+
+;;; Code for nativejstypes.Bar.Inner [imports]
+
+;;; Inner(int n)
+(func $m_<init>__int@nativejstypes.Bar.Inner (import "imports" "nativejstypes.Bar.Inner.constructor$1") 
+ (param $n i32)
+ (result (ref null extern))
+)
+
+;;; int Inner.square()
+(func $m_square__int@nativejstypes.Bar.Inner (import "imports" "nativejstypes.Bar.Inner.square") 
+ (param $this (ref null extern))
+ (result i32)
+)
+
+;;; int Inner.getInnerStatic()
+(func $m_getInnerStatic__int@nativejstypes.Bar.Inner (import "imports" "nativejstypes.Bar.Inner.getInnerStatic") 
+ (result i32)
+)
+
+;;; Code for nativejstypes.Foo [imports]
+
+;;; Foo()
+(func $m_<init>__@nativejstypes.Foo (import "imports" "com.acme.MyFoo.constructor") 
+ (result (ref null extern))
+)
+
+;;; int Foo.sum()
+(func $m_sum__int@nativejstypes.Foo (import "imports" "com.acme.MyFoo.sum") 
+ (param $this (ref null extern))
+ (result i32)
+)
+
+;;; int Foo.x()
+(func $f_x__int@nativejstypes.Foo (import "imports" "get com.acme.MyFoo.x") 
+ (param $this (ref null extern))
+ (result i32)
+)
+
+;;; void Foo.x(int value)
+(func $f_x__int__void@nativejstypes.Foo (import "imports" "set com.acme.MyFoo.x") 
+ (param $this (ref null extern))
+ (param $value i32)
+)
+
+;;; int Foo.y()
+(func $f_y__int@nativejstypes.Foo (import "imports" "get com.acme.MyFoo.y") 
+ (param $this (ref null extern))
+ (result i32)
+)
+
+;;; void Foo.y(int value)
+(func $f_y__int__void@nativejstypes.Foo (import "imports" "set com.acme.MyFoo.y") 
+ (param $this (ref null extern))
+ (param $value i32)
+)
+
+;;; Code for nativejstypes.Headers [imports]
+
+;;; Headers()
+(func $m_<init>__@nativejstypes.Headers (import "imports" "Headers.constructor") 
+ (result (ref null extern))
+)
+
+;;; void Headers.append(NativeString name, NativeString value)
+(func $m_append__java_lang_String_NativeString__java_lang_String_NativeString__void@nativejstypes.Headers (import "imports" "Headers.append$2") 
+ (param $this (ref null extern))
+ (param $name (ref null string))
+ (param $value (ref null string))
+)
+
+;;; NativeString Headers.get(NativeString name)
+(func $m_get__java_lang_String_NativeString__java_lang_String_NativeString@nativejstypes.Headers (import "imports" "Headers.get$1") 
+ (param $this (ref null extern))
+ (param $name (ref null string))
+ (result (ref null string))
+)
+
+;;; Code for nativejstypes.Main [imports]
+
+;;; Code for nativejstypes.Nullability [imports]
+
+;;; Nullability()
+(func $m_<init>__@nativejstypes.Nullability (import "imports" "nativejstypes.Nullability.constructor") 
+ (result (ref null extern))
+)
+
+;;; void Nullability.acceptsNull(NativeString arg)
+(func $m_acceptsNull__java_lang_String_NativeString__void@nativejstypes.Nullability (import "imports" "nativejstypes.Nullability.acceptsNull$1") 
+ (param $this (ref null extern))
+ (param $arg (ref null string))
+)
+
+;;; void Nullability.doesNotAcceptNull(NativeString arg)
+(func $m_doesNotAcceptNull__java_lang_String_NativeString__void@nativejstypes.Nullability (import "imports" "nativejstypes.Nullability.doesNotAcceptNull$1") 
+ (param $this (ref null extern))
+ (param $arg (ref null string))
+)
+
+;;; Code for nativejstypes.NullabilityNullMarked [imports]
+
+;;; NullabilityNullMarked()
+(func $m_<init>__@nativejstypes.NullabilityNullMarked (import "imports" "nativejstypes.Nullability.constructor") 
+ (result (ref null extern))
+)
+
+;;; void NullabilityNullMarked.acceptsNull(NativeString arg)
+(func $m_acceptsNull__java_lang_String_NativeString__void@nativejstypes.NullabilityNullMarked (import "imports" "nativejstypes.Nullability.acceptsNull$1") 
+ (param $this (ref null extern))
+ (param $arg (ref null string))
+)
+
+;;; void NullabilityNullMarked.doesNotAcceptNull(NativeString arg)
+(func $m_doesNotAcceptNull__java_lang_String_NativeString__void@nativejstypes.NullabilityNullMarked (import "imports" "nativejstypes.Nullability.doesNotAcceptNull$1") 
+ (param $this (ref null extern))
+ (param $arg (ref null string))
+)
+
+;;; Code for nativejstypes.TopLevel [imports]
+
+;;; int TopLevel.x()
+(func $f_x__int@nativejstypes.TopLevel (import "imports" "get toplevel.x") 
+ (result i32)
+)
+
+;;; void TopLevel.x(int value)
+(func $f_x__int__void@nativejstypes.TopLevel (import "imports" "set toplevel.x") 
+ (param $value i32)
+)
+
+;;; Code for nativejstypes.TopLevelNestedReference [imports]
+
+;;; TopLevelNestedReference()
+(func $m_<init>__@nativejstypes.TopLevelNestedReference (import "imports" "toplevel.Nested.constructor") 
+ (result (ref null extern))
+)
+
+;;; int TopLevelNestedReference.x()
+(func $f_x__int@nativejstypes.TopLevelNestedReference (import "imports" "get toplevel.Nested.x") 
+ (param $this (ref null extern))
+ (result i32)
+)
+
+;;; void TopLevelNestedReference.x(int value)
+(func $f_x__int__void@nativejstypes.TopLevelNestedReference (import "imports" "set toplevel.Nested.x") 
+ (param $this (ref null extern))
+ (param $value i32)
+)
+
+;;; Code for nativejstypes.TopLevel.Nested [imports]
+
+;;; Nested()
+(func $m_<init>__@nativejstypes.TopLevel.Nested (import "imports" "toplevel.Nested.constructor") 
+ (result (ref null extern))
+)
+
+;;; int Nested.x()
+(func $f_x__int@nativejstypes.TopLevel.Nested (import "imports" "get toplevel.Nested.x") 
+ (param $this (ref null extern))
+ (result i32)
+)
+
+;;; void Nested.x(int value)
+(func $f_x__int__void@nativejstypes.TopLevel.Nested (import "imports" "set toplevel.Nested.x") 
+ (param $this (ref null extern))
+ (param $value i32)
+)
+
 ;;; Code for nativejstypes.Bar.$Overlay [vtable.init]
 (global $nativejstypes.Bar.$Overlay.vtable (ref $nativejstypes.Bar.$Overlay.vtable)
  (struct.new $nativejstypes.Bar.$Overlay.vtable
@@ -1034,172 +1315,15 @@
 
 ;;; Code for nativejstypes.Bar [methods]
 
-;;; Bar(int x, int y)
-(func $m_<init>__int__int@nativejstypes.Bar (import "imports" "nativejstypes.Bar.constructor$2") 
- (param $x i32)
- (param $y i32)
- (result (ref null extern))
-)
-
-;;; int Bar.product()
-(func $m_product__int@nativejstypes.Bar (import "imports" "nativejstypes.Bar.product") 
- (param $this (ref null extern))
- (result i32)
-)
-
-;;; int Bar.getStatic()
-(func $m_getStatic__int@nativejstypes.Bar (import "imports" "nativejstypes.Bar.getStatic") 
- (result i32)
-)
-
-;;; int Bar.x()
-(func $f_x__int@nativejstypes.Bar (import "imports" "get nativejstypes.Bar.x") 
- (param $this (ref null extern))
- (result i32)
-)
-
-;;; void Bar.x(int value)
-(func $f_x__int__void@nativejstypes.Bar (import "imports" "set nativejstypes.Bar.x") 
- (param $this (ref null extern))
- (param $value i32)
-)
-
-;;; int Bar.y()
-(func $f_y__int@nativejstypes.Bar (import "imports" "get nativejstypes.Bar.y") 
- (param $this (ref null extern))
- (result i32)
-)
-
-;;; void Bar.y(int value)
-(func $f_y__int__void@nativejstypes.Bar (import "imports" "set nativejstypes.Bar.y") 
- (param $this (ref null extern))
- (param $value i32)
-)
-
-;;; int Bar.f()
-(func $f_f__int@nativejstypes.Bar (import "imports" "get nativejstypes.Bar.f") 
- (result i32)
-)
-
-;;; void Bar.f(int value)
-(func $f_f__int__void@nativejstypes.Bar (import "imports" "set nativejstypes.Bar.f") 
- (param $value i32)
-)
-
 ;;; Code for nativejstypes.BarInnerWithDotInName [methods]
-
-;;; BarInnerWithDotInName(int n)
-(func $m_<init>__int@nativejstypes.BarInnerWithDotInName (import "imports" "nativejstypes.Bar.Inner.constructor$1") 
- (param $n i32)
- (result (ref null extern))
-)
-
-;;; int BarInnerWithDotInName.square()
-(func $m_square__int@nativejstypes.BarInnerWithDotInName (import "imports" "nativejstypes.Bar.Inner.square") 
- (param $this (ref null extern))
- (result i32)
-)
-
-;;; int BarInnerWithDotInName.getInnerStatic()
-(func $m_getInnerStatic__int@nativejstypes.BarInnerWithDotInName (import "imports" "nativejstypes.Bar.Inner.getInnerStatic") 
- (result i32)
-)
 
 ;;; Code for nativejstypes.BarInnerWithDotInNameAndHasNamespace [methods]
 
-;;; BarInnerWithDotInNameAndHasNamespace(int n)
-(func $m_<init>__int@nativejstypes.BarInnerWithDotInNameAndHasNamespace (import "imports" "nativejstypes.Bar.Inner.constructor$1") 
- (param $n i32)
- (result (ref null extern))
-)
-
-;;; int BarInnerWithDotInNameAndHasNamespace.square()
-(func $m_square__int@nativejstypes.BarInnerWithDotInNameAndHasNamespace (import "imports" "nativejstypes.Bar.Inner.square") 
- (param $this (ref null extern))
- (result i32)
-)
-
-;;; int BarInnerWithDotInNameAndHasNamespace.getInnerStatic()
-(func $m_getInnerStatic__int@nativejstypes.BarInnerWithDotInNameAndHasNamespace (import "imports" "nativejstypes.Bar.Inner.getInnerStatic") 
- (result i32)
-)
-
 ;;; Code for nativejstypes.Bar.Inner [methods]
-
-;;; Inner(int n)
-(func $m_<init>__int@nativejstypes.Bar.Inner (import "imports" "nativejstypes.Bar.Inner.constructor$1") 
- (param $n i32)
- (result (ref null extern))
-)
-
-;;; int Inner.square()
-(func $m_square__int@nativejstypes.Bar.Inner (import "imports" "nativejstypes.Bar.Inner.square") 
- (param $this (ref null extern))
- (result i32)
-)
-
-;;; int Inner.getInnerStatic()
-(func $m_getInnerStatic__int@nativejstypes.Bar.Inner (import "imports" "nativejstypes.Bar.Inner.getInnerStatic") 
- (result i32)
-)
 
 ;;; Code for nativejstypes.Foo [methods]
 
-;;; Foo()
-(func $m_<init>__@nativejstypes.Foo (import "imports" "com.acme.MyFoo.constructor") 
- (result (ref null extern))
-)
-
-;;; int Foo.sum()
-(func $m_sum__int@nativejstypes.Foo (import "imports" "com.acme.MyFoo.sum") 
- (param $this (ref null extern))
- (result i32)
-)
-
-;;; int Foo.x()
-(func $f_x__int@nativejstypes.Foo (import "imports" "get com.acme.MyFoo.x") 
- (param $this (ref null extern))
- (result i32)
-)
-
-;;; void Foo.x(int value)
-(func $f_x__int__void@nativejstypes.Foo (import "imports" "set com.acme.MyFoo.x") 
- (param $this (ref null extern))
- (param $value i32)
-)
-
-;;; int Foo.y()
-(func $f_y__int@nativejstypes.Foo (import "imports" "get com.acme.MyFoo.y") 
- (param $this (ref null extern))
- (result i32)
-)
-
-;;; void Foo.y(int value)
-(func $f_y__int__void@nativejstypes.Foo (import "imports" "set com.acme.MyFoo.y") 
- (param $this (ref null extern))
- (param $value i32)
-)
-
 ;;; Code for nativejstypes.Headers [methods]
-
-;;; Headers()
-(func $m_<init>__@nativejstypes.Headers (import "imports" "Headers.constructor") 
- (result (ref null extern))
-)
-
-;;; void Headers.append(NativeString name, NativeString value)
-(func $m_append__java_lang_String_NativeString__java_lang_String_NativeString__void@nativejstypes.Headers (import "imports" "Headers.append$2") 
- (param $this (ref null extern))
- (param $name (ref null string))
- (param $value (ref null string))
-)
-
-;;; NativeString Headers.get(NativeString name)
-(func $m_get__java_lang_String_NativeString__java_lang_String_NativeString@nativejstypes.Headers (import "imports" "Headers.get$1") 
- (param $this (ref null extern))
- (param $name (ref null string))
- (result (ref null string))
-)
 
 ;;; Code for nativejstypes.Main [methods]
 
@@ -1458,88 +1582,10 @@
 
 ;;; Code for nativejstypes.Nullability [methods]
 
-;;; Nullability()
-(func $m_<init>__@nativejstypes.Nullability (import "imports" "nativejstypes.Nullability.constructor") 
- (result (ref null extern))
-)
-
-;;; void Nullability.acceptsNull(NativeString arg)
-(func $m_acceptsNull__java_lang_String_NativeString__void@nativejstypes.Nullability (import "imports" "nativejstypes.Nullability.acceptsNull$1") 
- (param $this (ref null extern))
- (param $arg (ref null string))
-)
-
-;;; void Nullability.doesNotAcceptNull(NativeString arg)
-(func $m_doesNotAcceptNull__java_lang_String_NativeString__void@nativejstypes.Nullability (import "imports" "nativejstypes.Nullability.doesNotAcceptNull$1") 
- (param $this (ref null extern))
- (param $arg (ref null string))
-)
-
 ;;; Code for nativejstypes.NullabilityNullMarked [methods]
-
-;;; NullabilityNullMarked()
-(func $m_<init>__@nativejstypes.NullabilityNullMarked (import "imports" "nativejstypes.Nullability.constructor") 
- (result (ref null extern))
-)
-
-;;; void NullabilityNullMarked.acceptsNull(NativeString arg)
-(func $m_acceptsNull__java_lang_String_NativeString__void@nativejstypes.NullabilityNullMarked (import "imports" "nativejstypes.Nullability.acceptsNull$1") 
- (param $this (ref null extern))
- (param $arg (ref null string))
-)
-
-;;; void NullabilityNullMarked.doesNotAcceptNull(NativeString arg)
-(func $m_doesNotAcceptNull__java_lang_String_NativeString__void@nativejstypes.NullabilityNullMarked (import "imports" "nativejstypes.Nullability.doesNotAcceptNull$1") 
- (param $this (ref null extern))
- (param $arg (ref null string))
-)
 
 ;;; Code for nativejstypes.TopLevel [methods]
 
-;;; int TopLevel.x()
-(func $f_x__int@nativejstypes.TopLevel (import "imports" "get toplevel.x") 
- (result i32)
-)
-
-;;; void TopLevel.x(int value)
-(func $f_x__int__void@nativejstypes.TopLevel (import "imports" "set toplevel.x") 
- (param $value i32)
-)
-
 ;;; Code for nativejstypes.TopLevelNestedReference [methods]
 
-;;; TopLevelNestedReference()
-(func $m_<init>__@nativejstypes.TopLevelNestedReference (import "imports" "toplevel.Nested.constructor") 
- (result (ref null extern))
-)
-
-;;; int TopLevelNestedReference.x()
-(func $f_x__int@nativejstypes.TopLevelNestedReference (import "imports" "get toplevel.Nested.x") 
- (param $this (ref null extern))
- (result i32)
-)
-
-;;; void TopLevelNestedReference.x(int value)
-(func $f_x__int__void@nativejstypes.TopLevelNestedReference (import "imports" "set toplevel.Nested.x") 
- (param $this (ref null extern))
- (param $value i32)
-)
-
 ;;; Code for nativejstypes.TopLevel.Nested [methods]
-
-;;; Nested()
-(func $m_<init>__@nativejstypes.TopLevel.Nested (import "imports" "toplevel.Nested.constructor") 
- (result (ref null extern))
-)
-
-;;; int Nested.x()
-(func $f_x__int@nativejstypes.TopLevel.Nested (import "imports" "get toplevel.Nested.x") 
- (param $this (ref null extern))
- (result i32)
-)
-
-;;; void Nested.x(int value)
-(func $f_x__int__void@nativejstypes.TopLevel.Nested (import "imports" "set toplevel.Nested.x") 
- (param $this (ref null extern))
- (param $value i32)
-)

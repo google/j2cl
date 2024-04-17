@@ -127,6 +127,11 @@ public class WasmGeneratorStage {
                 library, generator::renderModularTypeStructs, "type definition"));
 
     emitToFile(
+        "imports.wat",
+        generator ->
+            generator.emitForEachType(library, generator::renderImportedMethods, "imports"));
+
+    emitToFile(
         "functions.wat",
         generator -> generator.emitForEachType(library, generator::renderTypeMethods, "methods"));
 
@@ -195,6 +200,9 @@ public class WasmGeneratorStage {
     // Emit all types at the beginning of the module.
     generator.emitLibraryRecGroup(library, usedNativeArrayTypes);
 
+    // Emit imports.
+    generator.emitImportsForBinaryenIntrinsics();
+    generator.emitForEachType(library, generator::renderImportedMethods, "imports");
     generator.emitExceptionTag();
 
     // Emit all the globals, e.g. vtable instances, etc.
@@ -203,8 +211,6 @@ public class WasmGeneratorStage {
     generator.emitEmptyArraySingletons(usedNativeArrayTypes);
     generator.emitGlobals(library);
 
-    // Emit intrinsics imports
-    generator.emitImportsForBinaryenIntrinsics();
 
     // Last, emit all methods at the very end so that the synthetic code generated above does
     // not inherit an incorrect source position.

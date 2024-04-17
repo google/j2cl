@@ -17,6 +17,24 @@
   ))
  )
 
+;;; Code for equalsandhashcodeininterface.BothInInterface [imports]
+
+;;; Code for equalsandhashcodeininterface.NeitherInInterface [imports]
+
+;;; Code for equalsandhashcodeininterface.ViaJsMethodInInterface [imports]
+
+;;; void ViaJsMethodInInterface.notEquals()
+(func $m_notEquals__void@equalsandhashcodeininterface.ViaJsMethodInInterface (import "imports" "?.equals") 
+ (param $this (ref null extern))
+)
+
+;;; void ViaJsMethodInInterface.notHashCode()
+(func $m_notHashCode__void@equalsandhashcodeininterface.ViaJsMethodInInterface (import "imports" "?.hashCode") 
+ (param $this (ref null extern))
+)
+
+;;; Code for equalsandhashcodeininterface.ViaJsMethodInInterface.$Overlay [imports]
+
 ;;; Code for equalsandhashcodeininterface.BothInInterface [static fields]
 (global $$class-initialized@equalsandhashcodeininterface.BothInInterface (mut i32)
  (i32.const 0)
@@ -143,16 +161,6 @@
 )
 
 ;;; Code for equalsandhashcodeininterface.ViaJsMethodInInterface [methods]
-
-;;; void ViaJsMethodInInterface.notEquals()
-(func $m_notEquals__void@equalsandhashcodeininterface.ViaJsMethodInInterface (import "imports" "?.equals") 
- (param $this (ref null extern))
-)
-
-;;; void ViaJsMethodInInterface.notHashCode()
-(func $m_notHashCode__void@equalsandhashcodeininterface.ViaJsMethodInInterface (import "imports" "?.hashCode") 
- (param $this (ref null extern))
-)
 
 ;;; Code for equalsandhashcodeininterface.ViaJsMethodInInterface.$Overlay [methods]
 
