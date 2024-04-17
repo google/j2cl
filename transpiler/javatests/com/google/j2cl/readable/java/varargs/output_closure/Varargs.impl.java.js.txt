@@ -6,6 +6,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Serializable = goog.forwardDeclare('java.io.Serializable$impl');
 let Cloneable = goog.forwardDeclare('java.lang.Cloneable$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let FunctionalInterface = goog.forwardDeclare('varargs.Varargs.FunctionalInterface$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
@@ -64,6 +65,11 @@ class Varargs extends j_l_Object {
   Varargs.$clinit();
   Varargs.m_fun__arrayOf_java_lang_Number__void(/**@type {!Array<E>}*/ ($Arrays.$stampType([a, b], Number)));
  }
+ /** @nodts @template T @return {T} */
+ static m_passthrough__java_lang_Object__java_lang_Object(/** T */ o) {
+  Varargs.$clinit();
+  return o;
+ }
  /** @nodts */
  m_main__void() {
   let v = Varargs.$create__();
@@ -72,6 +78,7 @@ class Varargs extends j_l_Object {
   v.m_test__int__arrayOf_java_lang_Object__void(1, [j_l_Object.$create__()]);
   v.m_test__int__arrayOf_java_lang_Object__void(1, []);
   v.m_test__int__arrayOf_java_lang_Object__void(1, /**@type {!Array<Array<*>>}*/ ($Arrays.$stampType([], j_l_Object, 2)));
+  v.m_test__int__arrayOf_java_lang_Object__void(1, /**@type {Array<*>}*/ ($Arrays.$castTo(Varargs.m_passthrough__java_lang_Object__java_lang_Object(/**@type {!Array<?string>}*/ ($Arrays.$stampType(['a'], j_l_String))), j_l_Object, 1)));
   v.m_test__int__arrayOf_java_lang_Object__void(1, null);
   v.m_testCloneable__arrayOf_java_lang_Cloneable__void(/**@type {!Array<Array<*>>}*/ ($Arrays.$stampType([], j_l_Object, 2)));
   v.m_testSerializable__arrayOf_java_io_Serializable__void(/**@type {!Array<Array<*>>}*/ ($Arrays.$stampType([], j_l_Object, 2)));
@@ -93,6 +100,7 @@ class Varargs extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   Number = goog.module.get('java.lang.Number$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
   FunctionalInterface = goog.module.get('varargs.Varargs.FunctionalInterface$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $$int = goog.module.get('vmbootstrap.primitives.$int$impl');

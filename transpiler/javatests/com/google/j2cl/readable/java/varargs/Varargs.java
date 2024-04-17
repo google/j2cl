@@ -48,6 +48,10 @@ public class Varargs {
     fun(a, b);
   }
 
+  public static <T> T passthrough(T o) {
+    return o;
+  }
+
   public void main() {
     Varargs v = new Varargs();
     v.test(1);
@@ -55,6 +59,7 @@ public class Varargs {
     v.test(1, new Object[] {new Object()});
     v.test(1, new Object[] {});
     v.test(1, new Object[][] {});
+    v.test(1, passthrough(new String[] {"a"}));
     v.test(1, null);
     v.testCloneable(new Object[][] {});
     v.testSerializable(new Object[][] {});
