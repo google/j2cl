@@ -140,6 +140,8 @@ def _impl_j2wasm_application(ctx):
         # Create a module for exports.
         exports_module_output = ctx.actions.declare_directory(ctx.label.name + ".exports")
         exporter_args = ctx.actions.args()
+        exporter_args.use_param_file("@%s", use_always = True)
+        exporter_args.set_param_file_format("multiline")
         exporter_args.add_joined("-classpath", _get_all_classjars(deps).to_list(), join_with = ctx.configuration.host_path_separator)
         exporter_args.add("-output", exports_module_output.path)
         exporter_args.add_all(ctx.attr.entry_points, before_each = "-entryPointPattern")
@@ -159,6 +161,8 @@ def _impl_j2wasm_application(ctx):
 
         # Bundle the module outputs.
         bundler_args = ctx.actions.args()
+        bundler_args.use_param_file("@%s", use_always = True)
+        bundler_args.set_param_file_format("multiline")
         bundler_args.add_all(all_modules, expand_directories = False)
         bundler_args.add_joined("-classpath", jre_jars, join_with = ctx.configuration.host_path_separator)
         bundler_args.add_all(ctx.attr.defines, before_each = "-define")
