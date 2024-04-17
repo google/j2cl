@@ -51,7 +51,9 @@ public class StringLiteralGettersCreator {
 
     if (synthesizeMethod) {
       type.synthesizeLazilyInitializedField(
-          "$string_" + snippet, synthesizeStringCreation(stringLiteral), getLiteralMethod);
+          "$string_" + snippet,
+          RuntimeMethods.createStringFromJsStringMethodCall(stringLiteral),
+          getLiteralMethod);
     }
 
     literalMethodByString.put(value, getLiteralMethod);
@@ -86,26 +88,5 @@ public class StringLiteralGettersCreator {
     } else {
       return String.format("|%s|", prefix);
     }
-  }
-
-  /**
-   * Converts the StringLiteral into a call to the runtime to initialize create a String from a char
-   * array.
-   */
-  private static Expression synthesizeStringCreation(StringLiteral stringLiteral) {
-    ArrayTypeDescriptor charArrayDescriptor =
-        ArrayTypeDescriptor.newBuilder().setComponentTypeDescriptor(PrimitiveTypes.CHAR).build();
-    MethodDescriptor fromInternalArray =
-        TypeDescriptors.get()
-            .javaLangString
-            .getMethodDescriptor("fromInternalArray", charArrayDescriptor);
-    if (fromInternalArray != null) {
-      // TODO(b/272381112): Remove after non-stringref experiment.
-      // This is the non-stringref j.l.String.
-      return MethodCall.Builder.from(fromInternalArray)
-          .setArguments(new ArrayLiteral(charArrayDescriptor, stringLiteral.toCharLiterals()))
-          .build();
-    }
-    return RuntimeMethods.createStringFromJsStringMethodCall(stringLiteral);
   }
 }

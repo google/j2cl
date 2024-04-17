@@ -21,7 +21,7 @@ import jsinterop.annotations.JsPackage;
 final class RealToString {
 
   private static final boolean JAVA_TOSTRING =
-      !String.STRINGREF_ENABLED || getProperty("jre.strictFpToString").equals("ENABLED");
+      getProperty("jre.strictFpToString").equals("ENABLED");
 
   private RealToString() {}
 
