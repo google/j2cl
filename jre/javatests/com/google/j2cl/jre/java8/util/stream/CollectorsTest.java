@@ -22,6 +22,8 @@ import static java.util.stream.Collectors.averagingInt;
 import static java.util.stream.Collectors.averagingLong;
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.filtering;
+import static java.util.stream.Collectors.flatMapping;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.mapping;
@@ -42,6 +44,7 @@ import com.google.j2cl.jre.java.util.EmulTestBase;
 import java.util.AbstractMap.SimpleImmutableEntry;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.DoubleSummaryStatistics;
@@ -233,6 +236,42 @@ public class CollectorsTest extends EmulTestBase {
     );
     assertZeroItemsCollectedAs(Collections.emptyList(), numberMapping);
     assertSingleItemCollectedAs(Collections.singletonList("#10"), numberMapping, 10);
+  }
+
+  public void testFlatMapping() {
+    // Since applyItems tests the same inputs multiple times, we need fresh stream instances as they
+    // can't be reused
+    Collector<Collection<String>, ?, List<String>> flatMapping =
+        flatMapping(Collection::stream, toList());
+    applyItems(
+        Arrays.asList("a", "b"),
+        flatMapping,
+        Collections.singletonList("a"),
+        Collections.singletonList("b"));
+    applyItems(
+        Arrays.asList("c", "d"), flatMapping, Collections.emptyList(), Arrays.asList("c", "d"));
+
+    // Ensure null is treated like an empty stream.
+    Function<Collection<String>, @Nullable Stream<String>> mapEmptyToNull =
+        items -> items.isEmpty() ? null : items.stream();
+    applyItems(
+        Arrays.asList("a", "b", "c"),
+        flatMapping(mapEmptyToNull, toList()),
+        Collections.emptyList(),
+        Arrays.asList("a", "b", "c"));
+
+    // Ensure mapped streams are closed.
+    int[] calledCount = {0};
+    Stream<String> mapped = Stream.of("x").onClose(() -> calledCount[0]++);
+    var ignored = Stream.of(1).collect(flatMapping(x -> mapped, toList()));
+    assertEquals(1, calledCount[0]);
+  }
+
+  public void testFiltering() {
+    Collector<String, ?, List<String>> filtering = filtering(s -> s.equals("a"), toList());
+    applyItems(Collections.singletonList("a"), filtering, "a", "b");
+    applyItems(Collections.emptyList(), filtering, "c", "d");
+    applyItems(Arrays.asList("a", "a"), filtering, "a", "a");
   }
 
   public void testMaxBy() {
@@ -671,5 +710,4 @@ public class CollectorsTest extends EmulTestBase {
       BiPredicate<T, U> predicate, T expected, U actual) {
     assertTrue("expected= " + expected + ", actual=" + actual, predicate.test(expected, actual));
   }
-
 }
