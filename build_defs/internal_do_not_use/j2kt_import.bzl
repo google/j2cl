@@ -7,6 +7,7 @@ Should only be used for importing annotation byte code, otherwise may result
 in hard to debug errors!
 """
 
+load("@rules_java//java:defs.bzl", "JavaInfo")
 load(":provider.bzl", "J2ktInfo")
 
 def create_J2ktInfo_for_java_import(java_info):

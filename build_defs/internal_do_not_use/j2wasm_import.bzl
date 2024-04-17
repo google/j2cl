@@ -7,6 +7,7 @@ Should only be used for importing annotation byte code, otherwise may result
 in hard to debug errors!
 """
 
+load("@rules_java//java:defs.bzl", "JavaInfo")
 load(":j2cl_js_common.bzl", "J2CL_JS_TOOLCHAIN_ATTRS", "j2cl_js_provider")
 load(":provider.bzl", "J2wasmInfo")
 

@@ -4,9 +4,10 @@ Takes Java source, translates it into Wasm.
 This is an experimental tool and should not be used.
 """
 
+load("@rules_java//java:defs.bzl", "JavaInfo", "java_common")
+load("//build_defs/internal_do_not_use:provider.bzl", "J2wasmInfo")
 load(":j2cl_js_common.bzl", "JS_PROVIDER_NAME")
 load(":j2wasm_common.bzl", "J2WASM_TOOLCHAIN_ATTRS", "j2wasm_common")
-load("//build_defs/internal_do_not_use:provider.bzl", "J2wasmInfo")
 
 J2WASM_LIB_ATTRS = {
     "srcs": attr.label_list(allow_files = [".java", ".srcjar", ".jar", ".js"]),

@@ -1,5 +1,7 @@
 """Helpers to create a JDK system module."""
 
+load("@rules_java//java:defs.bzl", "java_common")
+
 def _jdk_system(ctx):
     bootclasspath = ctx.file.bootclasspath
     system = ctx.actions.declare_directory("%s" % ctx.label.name)

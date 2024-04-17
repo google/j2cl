@@ -1,5 +1,6 @@
 """J2CL library rules."""
 
+load("@rules_java//java:defs.bzl", "JavaInfo", "java_common")
 load(":j2cl_common.bzl", "J2CL_TOOLCHAIN_ATTRS", "j2cl_common", "split_srcs")
 load(":j2cl_js_common.bzl", "J2CL_JS_ATTRS", "JS_PROVIDER_NAME", "j2cl_js_provider")
 load(":j2kt_common.bzl", "j2kt_common")
