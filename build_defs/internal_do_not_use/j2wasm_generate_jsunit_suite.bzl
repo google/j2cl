@@ -38,7 +38,7 @@ def j2wasm_generate_jsunit_suite(
         optimize = False,
         defines = {},
         exec_properties = {},
-        use_stringref_spec = True):
+        use_stringref_spec = False):
     """Macro for cross compiling a JUnit Suite to .wasm file.
 
     Args:
