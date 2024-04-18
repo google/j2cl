@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.Lists;
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.visitor.Visitable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -68,20 +69,24 @@ public abstract class Invocation extends MemberReference {
       return invocation.createBuilder();
     }
 
+    @CanIgnoreReturnValue
     public final T setArguments(Expression... arguments) {
       return setArguments(Arrays.asList(arguments));
     }
 
+    @CanIgnoreReturnValue
     public final T setArguments(List<Expression> arguments) {
       this.arguments.clear();
       this.arguments.addAll(arguments);
       return getThis();
     }
 
+    @CanIgnoreReturnValue
     public final T addArgumentsAndUpdateDescriptor(int index, Expression... argumentExpressions) {
       return addArgumentsAndUpdateDescriptor(index, Arrays.asList(argumentExpressions));
     }
 
+    @CanIgnoreReturnValue
     public final T addArgumentsAndUpdateDescriptor(
         int index, Collection<Expression> argumentExpressions) {
       if (argumentExpressions.isEmpty()) {
@@ -101,6 +106,7 @@ public abstract class Invocation extends MemberReference {
                               .collect(toImmutableList()))));
     }
 
+    @CanIgnoreReturnValue
     public final T addArgumentAndUpdateDescriptor(
         int index, Expression argumentExpression, TypeDescriptor parameterTypeDescriptor) {
       arguments.add(index, argumentExpression);
@@ -112,10 +118,12 @@ public abstract class Invocation extends MemberReference {
                   builder -> builder.addParameterTypeDescriptors(index, parameterTypeDescriptor)));
     }
 
+    @CanIgnoreReturnValue
     public final T replaceVarargsArgument(Expression... replacementArguments) {
       return replaceVarargsArgument(Arrays.asList(replacementArguments));
     }
 
+    @CanIgnoreReturnValue
     public final T replaceVarargsArgument(List<Expression> replacementArguments) {
       checkState(getTarget().isVarargs());
       int lastArgumentPosition = arguments.size() - 1;

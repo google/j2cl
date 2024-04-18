@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.visitor.Visitable;
 import javax.annotation.Nullable;
 
@@ -59,16 +60,19 @@ public abstract class MemberReference extends Expression {
       return memberReference.createBuilder();
     }
 
+    @CanIgnoreReturnValue
     public final T setQualifier(Expression qualifier) {
       this.qualifier = qualifier;
       return getThis();
     }
 
+    @CanIgnoreReturnValue
     public final T setTarget(D target) {
       this.target = target;
       return getThis();
     }
 
+    @CanIgnoreReturnValue
     public T setDefaultInstanceQualifier() {
       if (target.isInstanceMember()) {
         qualifier = new ThisReference(target.getEnclosingTypeDescriptor());
