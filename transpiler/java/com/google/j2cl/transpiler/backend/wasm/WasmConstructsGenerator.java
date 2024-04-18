@@ -338,16 +338,10 @@ public class WasmConstructsGenerator {
   }
 
   void renderImportedMethods(Type type) {
-    if (AstUtils.isNonNativeJsEnum(type.getTypeDescriptor())) {
-      return;
-    }
     type.getMethods().stream().filter(environment::isJsImport).forEach(this::renderMethod);
   }
 
   void renderTypeMethods(Type type) {
-    if (AstUtils.isNonNativeJsEnum(type.getTypeDescriptor())) {
-      return;
-    }
     type.getMethods().stream()
         .filter(Predicate.not(environment::isJsImport))
         .forEach(this::renderMethod);
@@ -356,7 +350,7 @@ public class WasmConstructsGenerator {
 
   public void renderMethod(Method method) {
     MethodDescriptor methodDescriptor = method.getDescriptor();
-    if (methodDescriptor.isAbstract() && !methodDescriptor.isNative()
+    if ((methodDescriptor.isAbstract() && !methodDescriptor.isNative())
         || methodDescriptor.getWasmInfo() != null) {
       // Abstract methods don't generate any code, except if they are native; neither do methods
       // that have @Wasm annotation.
@@ -851,6 +845,7 @@ public class WasmConstructsGenerator {
   void emitForEachType(Library library, Consumer<Type> emitter, String comment) {
     library
         .streamTypes()
+        .filter(t -> !AstUtils.isNonNativeJsEnum(t.getTypeDescriptor()))
         // Emit the types supertypes first.
         .sorted(Comparator.comparing(t -> t.getDeclaration().getClassHierarchyDepth()))
         .forEach(
