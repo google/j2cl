@@ -180,7 +180,7 @@
     (call $m_throwJsError__javaemul_internal_ThrowableUtils_JsObject__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $$create__@java.lang.ClassCastException )))
     (unreachable)
    )
-  ) (catch $exception.event (block
+  ) (catch $exception.event
    (local.set $__$jsexc (pop externref))
    (block
     ;;@ trycatch/TryCatch.java:23:58
@@ -216,7 +216,7 @@
      )
     )
    )
-  )))
+  ))
  )
 )
 (elem declare func $m_testMultiCatch__void@trycatch.TryCatch)
@@ -239,11 +239,11 @@
     (call $m_throwJsError__javaemul_internal_ThrowableUtils_JsObject__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $$create__@java.lang.ClassCastException )))
     (unreachable)
    )
-  ) (catch $exception.event (block
+  ) (catch $exception.event
    (local.set $__$jsexc (pop externref))
    (block
    )
-  )))
+  ))
   ;;@ trycatch/TryCatch.java:37:4
   (try (do
    (block
@@ -251,7 +251,7 @@
     (call $m_throwJsError__javaemul_internal_ThrowableUtils_JsObject__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $$create__@java.lang.ClassCastException )))
     (unreachable)
    )
-  ) (catch $exception.event (block
+  ) (catch $exception.event
    (local.set $__$jsexc_1 (pop externref))
    (block
     ;;@ trycatch/TryCatch.java:39:26
@@ -267,7 +267,7 @@
      )
     )
    )
-  )))
+  ))
  )
 )
 (elem declare func $m_testEmptyThrowableCatch__void@trycatch.TryCatch)
@@ -290,7 +290,7 @@
     (call $m_throwJsError__javaemul_internal_ThrowableUtils_JsObject__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $$create__@java.lang.ClassCastException )))
     (unreachable)
    )
-  ) (catch $exception.event (block
+  ) (catch $exception.event
    (local.set $__$jsexc (pop externref))
    (block
     ;;@ trycatch/TryCatch.java:49:26
@@ -303,7 +303,7 @@
      (unreachable)
     )
    )
-  )))
+  ))
  )
 )
 (elem declare func $m_testEmptyThrowableRethrow__void@trycatch.TryCatch)
@@ -340,7 +340,7 @@
        )
       )
      )
-    ) (catch $exception.event (block
+    ) (catch $exception.event
      (local.set $__$jsexc (pop externref))
      (block
       (local.set $t (call $m_toJava__javaemul_internal_ThrowableUtils_JsObject__java_lang_Throwable@javaemul.internal.Exceptions (local.get $__$jsexc)))
@@ -351,7 +351,7 @@
       ;;@ trycatch/TryCatch.java:55:4
       (br $FINALLY.0.BREAK)
      )
-    )))
+    ))
    )
    ;;@ trycatch/TryCatch.java:55:4
    (if (i32.eqz (ref.is_null (local.get $savedThrown.0)))
@@ -414,7 +414,7 @@
           (call $m_throwJsError__javaemul_internal_ThrowableUtils_JsObject__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $$create__@java.lang.Exception )))
           (unreachable)
          )
-        ) (catch $exception.event (block
+        ) (catch $exception.event
          (local.set $__$jsexc (pop externref))
          (block
           ;;@ trycatch/TryCatch.java:67:4
@@ -429,9 +429,9 @@
            (unreachable)
           )
          )
-        )))
+        ))
        )
-      ) (catch $exception.event (block
+      ) (catch $exception.event
        (local.set $__$jsexc_1 (pop externref))
        (block
         (local.set $t (call $m_toJava__javaemul_internal_ThrowableUtils_JsObject__java_lang_Throwable@javaemul.internal.Exceptions (local.get $__$jsexc_1)))
@@ -442,7 +442,7 @@
         ;;@ trycatch/TryCatch.java:67:4
         (br $FINALLY.0.BREAK)
        )
-      )))
+      ))
      )
      (block
       ;;@ trycatch/TryCatch.java:67:4
@@ -468,7 +468,7 @@
      )
     )
    )
-  ) (catch $exception.event (block
+  ) (catch $exception.event
    (local.set $__$jsexc_2 (pop externref))
    (block
     ;;@ trycatch/TryCatch.java:70:26
@@ -487,7 +487,7 @@
      )
     )
    )
-  )))
+  ))
  )
 )
 (elem declare func $m_testTryWithResource__void@trycatch.TryCatch)
@@ -546,7 +546,7 @@
           (call $m_throwJsError__javaemul_internal_ThrowableUtils_JsObject__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $$create__@java.lang.Exception )))
           (unreachable)
          )
-        ) (catch $exception.event (block
+        ) (catch $exception.event
          (local.set $__$jsexc (pop externref))
          (block
           ;;@ trycatch/TryCatch.java:78:4
@@ -561,9 +561,9 @@
            (unreachable)
           )
          )
-        )))
+        ))
        )
-      ) (catch $exception.event (block
+      ) (catch $exception.event
        (local.set $__$jsexc_1 (pop externref))
        (block
         (local.set $t (call $m_toJava__javaemul_internal_ThrowableUtils_JsObject__java_lang_Throwable@javaemul.internal.Exceptions (local.get $__$jsexc_1)))
@@ -574,7 +574,7 @@
         ;;@ trycatch/TryCatch.java:78:4
         (br $FINALLY.0.BREAK)
        )
-      )))
+      ))
      )
      (block
       ;;@ trycatch/TryCatch.java:78:4
@@ -600,7 +600,7 @@
      )
     )
    )
-  ) (catch $exception.event (block
+  ) (catch $exception.event
    (local.set $__$jsexc_2 (pop externref))
    (block
     ;;@ trycatch/TryCatch.java:80:26
@@ -619,7 +619,7 @@
      )
     )
    )
-  )))
+  ))
  )
 )
 (elem declare func $m_testTryWithResourceJava9__void@trycatch.TryCatch)
@@ -667,7 +667,7 @@
           (call $m_throwJsError__javaemul_internal_ThrowableUtils_JsObject__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $$create__@java.lang.Exception )))
           (unreachable)
          )
-        ) (catch $exception.event (block
+        ) (catch $exception.event
          (local.set $__$jsexc (pop externref))
          (block
           ;;@ trycatch/TryCatch.java:88:4
@@ -682,9 +682,9 @@
            (unreachable)
           )
          )
-        )))
+        ))
        )
-      ) (catch $exception.event (block
+      ) (catch $exception.event
        (local.set $__$jsexc_1 (pop externref))
        (block
         (local.set $t (call $m_toJava__javaemul_internal_ThrowableUtils_JsObject__java_lang_Throwable@javaemul.internal.Exceptions (local.get $__$jsexc_1)))
@@ -695,7 +695,7 @@
         ;;@ trycatch/TryCatch.java:88:4
         (br $FINALLY.0.BREAK)
        )
-      )))
+      ))
      )
      (block
       ;;@ trycatch/TryCatch.java:88:4
@@ -719,7 +719,7 @@
      )
     )
    )
-  ) (catch $exception.event (block
+  ) (catch $exception.event
    (local.set $__$jsexc_2 (pop externref))
    (block
     ;;@ trycatch/TryCatch.java:90:26
@@ -738,7 +738,7 @@
      )
     )
    )
-  )))
+  ))
  )
 )
 (elem declare func $m_testTryWithResouceOnStaticField__void@trycatch.TryCatch)
@@ -763,7 +763,7 @@
     (call $m_throwJsError__javaemul_internal_ThrowableUtils_JsObject__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $$create__@java.lang.Exception )))
     (unreachable)
    )
-  ) (catch $exception.event (block
+  ) (catch $exception.event
    (local.set $__$jsexc (pop externref))
    (block
     ;;@ trycatch/TryCatch.java:98:27
@@ -781,7 +781,7 @@
          (call $m_throwJsError__javaemul_internal_ThrowableUtils_JsObject__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $$create__@java.lang.Exception )))
          (unreachable)
         )
-       ) (catch $exception.event (block
+       ) (catch $exception.event
         (local.set $__$jsexc_1 (pop externref))
         (block
          ;;@ trycatch/TryCatch.java:101:29
@@ -800,7 +800,7 @@
           )
          )
         )
-       )))
+       ))
       )
      )(else
       (block
@@ -811,7 +811,7 @@
      )
     )
    )
-  )))
+  ))
  )
 )
 (elem declare func $m_testNestedTryCatch__void@trycatch.TryCatch)

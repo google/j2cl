@@ -415,7 +415,7 @@ final class StatementTranspiler {
           render(tryStatement.getBody());
           builder.unindent();
           builder.newLine();
-          builder.append(") (catch $exception.event (block");
+          builder.append(") (catch $exception.event");
           builder.indent();
           builder.newLine();
           builder.append(
@@ -425,7 +425,7 @@ final class StatementTranspiler {
           render(catchClause.getBody());
           builder.unindent();
           builder.newLine();
-          builder.append(")))");
+          builder.append("))");
         } else {
           render(tryStatement.getBody());
         }
