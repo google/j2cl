@@ -18,6 +18,7 @@ package compiletimeconstant;
 public class CompileTimeConstant<T> {
   public static final Object OBJ = null;
 
+  public static final int DEFAULT = 0;
   public static final int A = 10;
   public static final int B = 20;
   public static final int C = A * B;

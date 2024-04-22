@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @compatibility_alias CompiletimeconstantCompileTimeConstantCompanion J2ktCompiletimeconstantCompileTimeConstantCompanion;
 
+#define CompiletimeconstantCompileTimeConstant_DEFAULT 0
+
 #define CompiletimeconstantCompileTimeConstant_A 10
 
 #define CompiletimeconstantCompileTimeConstant_B 20
@@ -36,6 +38,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_INLINE id _Nullable CompiletimeconstantCompileTimeConstant_get_OBJ(void) {
  return J2ktCompiletimeconstantCompileTimeConstantCompanion.shared.OBJ_;
+}
+
+NS_INLINE jint CompiletimeconstantCompileTimeConstant_get_DEFAULT(void) {
+ return J2ktCompiletimeconstantCompileTimeConstantCompanion.shared.DEFAULT_;
 }
 
 NS_INLINE jint CompiletimeconstantCompileTimeConstant_get_A(void) {
