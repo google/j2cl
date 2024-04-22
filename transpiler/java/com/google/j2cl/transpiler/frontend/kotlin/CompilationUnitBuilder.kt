@@ -292,10 +292,8 @@ class CompilationUnitBuilder(
   private fun convertField(irField: IrField): Field {
     val declaredFieldDescriptor = environment.getDeclaredFieldDescriptor(irField)
     val initializer: Expression? =
-      if (declaredFieldDescriptor.isCompileTimeConstant && irField.initializer == null) {
-        // In Kotlin, const val initialized to their default value does not have initializer. In
-        // that case use the default value of the field type as initializer.
-        declaredFieldDescriptor.typeDescriptor.defaultValue
+      if (declaredFieldDescriptor.isCompileTimeConstant) {
+        declaredFieldDescriptor.constantValue
       } else {
         irField.initializer?.let { convertExpression(it.expression) }
       }
