@@ -289,13 +289,23 @@ class CompilationUnitBuilder(
     return members
   }
 
-  private fun convertField(irField: IrField) =
-    Field.Builder.from(environment.getDeclaredFieldDescriptor(irField))
+  private fun convertField(irField: IrField): Field {
+    val declaredFieldDescriptor = environment.getDeclaredFieldDescriptor(irField)
+    val initializer: Expression? =
+      if (declaredFieldDescriptor.isCompileTimeConstant && irField.initializer == null) {
+        // In Kotlin, const val initialized to their default value does not have initializer. In
+        // that case use the default value of the field type as initializer.
+        declaredFieldDescriptor.typeDescriptor.defaultValue
+      } else {
+        irField.initializer?.let { convertExpression(it.expression) }
+      }
+    return Field.Builder.from(declaredFieldDescriptor)
       .setSourcePosition(getSourcePosition(irField))
       // TODO(b/214508991): use source position of the name.
       .setNameSourcePosition(getSourcePosition(irField))
-      .setInitializer(irField.initializer?.let { convertExpression(it.expression) })
+      .setInitializer(initializer)
       .build()
+  }
 
   private fun convertFunction(irFunction: IrFunction): Method {
     val parameters = irFunction.getParameters().map(this::createVariable)

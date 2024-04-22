@@ -49,7 +49,7 @@ public class PrimitiveTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public Expression getDefaultValue() {
+  public Literal getDefaultValue() {
     checkState(!TypeDescriptors.isPrimitiveVoid(this));
     if (TypeDescriptors.isPrimitiveBoolean(this)) {
       return BooleanLiteral.get(false);

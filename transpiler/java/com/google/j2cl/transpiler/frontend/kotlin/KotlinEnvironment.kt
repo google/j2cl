@@ -623,16 +623,24 @@ class KotlinEnvironment(
   fun getDeclaredFieldDescriptor(irField: IrField): FieldDescriptor {
     val resolvedSymbol = builtinsResolver.resolveFieldSymbol(irField.symbol)
     if (resolvedSymbol != irField.symbol) return getDeclaredFieldDescriptor(resolvedSymbol.owner)
-    val irConst = irField.constantValue()
+    val fieldTypeDescriptor = getTypeDescriptor(irField.type)
+
+    var constantValue =
+      irField.constantValue()?.value?.let { Literal.fromValue(it, fieldTypeDescriptor) }
+    if (constantValue == null && irField.correspondingPropertySymbol?.owner?.isConst == true) {
+      // In Kotlin, const val initialized to their default value does not have initializer and
+      // `irField.constantValue()` returns null. In that case use the default value of the field
+      // type.
+      constantValue = fieldTypeDescriptor.defaultValue
+    }
+
     return FieldDescriptor.newBuilder()
       .setEnclosingTypeDescriptor(getEnclosingTypeDescriptor(irField))
       .setName(irField.name.asString())
-      .setTypeDescriptor(getTypeDescriptor(irField.type))
+      .setTypeDescriptor(fieldTypeDescriptor)
       .setVisibility(irField.j2clVisibility)
-      .setCompileTimeConstant(irConst != null)
-      .setConstantValue(
-        irConst?.value?.let { Literal.fromValue(it, getTypeDescriptor(irField.type)) }
-      )
+      .setCompileTimeConstant(constantValue != null)
+      .setConstantValue(constantValue)
       // Kotlin has stricter requirements for val properties than exists for Java final fields; thus
       // we allow val properties to be native JS members, but we pretend like it's non-final in the
       // J2CL AST to not fail JsInterop restriction checks later on. Weaken the final semantics here

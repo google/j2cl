@@ -159,12 +159,12 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
   }
 
   /** Returns the value for uninitialized expression of this type. */
-  public Expression getDefaultValue() {
+  public Literal getDefaultValue() {
     return getNullValue();
   }
 
   /** Returns a null literal value with this specific type. */
-  public Expression getNullValue() {
+  public Literal getNullValue() {
     checkState(!isPrimitive());
     return NullLiteral.get(this);
   }
