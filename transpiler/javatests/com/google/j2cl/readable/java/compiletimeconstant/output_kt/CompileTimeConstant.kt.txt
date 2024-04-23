@@ -19,7 +19,6 @@
 package compiletimeconstant
 
 import javaemul.lang.*
-import java.lang.Class
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Byte
@@ -32,7 +31,6 @@ import kotlin.String
 import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
-import kotlin.jvm.javaObjectType
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktCompiletimeconstantCompileTimeConstant", exact = true)
@@ -79,7 +77,6 @@ open class CompileTimeConstant<T> {
   val l: String? = CompileTimeConstant.L
   val m: String? = CompileTimeConstant.M
   val n: String? = CompileTimeConstant.N
-  val c: Class<*>? = CompileTimeConstant.classLiteral
  }
 
  @ObjCName("J2ktCompiletimeconstantCompileTimeConstantCompanion", exact = true)
@@ -145,9 +142,5 @@ open class CompileTimeConstant<T> {
 
   @ObjCName("MIN_SHORT_WITH_CAST_")
   const val MIN_SHORT_WITH_CAST: Short = (-32768).toShort()
-
-  @JvmField
-  @ObjCName("classLiteral_")
-  val classLiteral: Class<*>? = CompileTimeConstant::class.javaObjectType
  }
 }
