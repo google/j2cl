@@ -46,14 +46,10 @@ import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntFunction;
 import java.util.function.ToLongFunction;
 
-/**
- * Main implementation of Stream, wrapping a single spliterator and an optional parent stream.
- */
+/** Main implementation of Stream, wrapping a single spliterator and an optional parent stream. */
 final class StreamImpl<T> extends TerminatableStream<StreamImpl<T>> implements Stream<T> {
 
-  /**
-   * Represents an empty stream, doing nothing for all methods.
-   */
+  /** Represents an empty stream, doing nothing for all methods. */
   static class Empty<T> extends TerminatableStream<Empty<T>> implements Stream<T> {
 
     public Empty(TerminatableStream<?> previous) {
@@ -461,7 +457,7 @@ final class StreamImpl<T> extends TerminatableStream<StreamImpl<T>> implements S
     @Override
     public boolean tryAdvance(Consumer<? super T> action) {
       while (skip > 0) {
-        if (!original.tryAdvance(ignore -> { })) {
+        if (!original.tryAdvance(ignore -> {})) {
           return false;
         }
         skip--;
@@ -506,9 +502,7 @@ final class StreamImpl<T> extends TerminatableStream<StreamImpl<T>> implements S
     }
   }
 
-  /**
-   * Value holder for various stream operations.
-   */
+  /** Value holder for various stream operations. */
   private static final class ValueConsumer<T> implements Consumer<T> {
     T value;
 
@@ -541,7 +535,7 @@ final class StreamImpl<T> extends TerminatableStream<StreamImpl<T>> implements S
   public long count() {
     terminate();
     long count = 0;
-    while (spliterator.tryAdvance(a -> { })) {
+    while (spliterator.tryAdvance(a -> {})) {
       count++;
     }
     return count;
@@ -611,7 +605,7 @@ final class StreamImpl<T> extends TerminatableStream<StreamImpl<T>> implements S
     return findFirst();
   }
 
-  private static final Consumer<Object> NULL_CONSUMER = value -> { };
+  private static final Consumer<Object> NULL_CONSUMER = value -> {};
 
   @Override
   public boolean anyMatch(Predicate<? super T> predicate) {
@@ -666,6 +660,7 @@ final class StreamImpl<T> extends TerminatableStream<StreamImpl<T>> implements S
         });
     return consumer.value;
   }
+
   // end terminal
 
   // intermediate

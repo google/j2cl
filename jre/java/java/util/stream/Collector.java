@@ -24,21 +24,25 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
- * See <a
- * href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collector.html">the
+ * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collector.html">the
  * official Java API doc</a> for details.
+ *
  * @param <T> the type of data to be collected
  * @param <A> the type of accumulator used to track results
  * @param <R> the final output data type
  */
-public interface Collector<T,A,R> {
+public interface Collector<T, A, R> {
 
   /**
    * See <a
    * href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collector.Characteristics.html">
    * the official Java API doc</a> for details.
    */
-  enum Characteristics { CONCURRENT, IDENTITY_FINISH, UNORDERED }
+  enum Characteristics {
+    CONCURRENT,
+    IDENTITY_FINISH,
+    UNORDERED
+  }
 
   static <T, A, R> Collector<T, A, R> of(
       Supplier<A> supplier,
@@ -69,11 +73,11 @@ public interface Collector<T,A,R> {
 
   Supplier<A> supplier();
 
-  BiConsumer<A,T> accumulator();
+  BiConsumer<A, T> accumulator();
 
   Set<Characteristics> characteristics();
 
   BinaryOperator<A> combiner();
 
-  Function<A,R> finisher();
+  Function<A, R> finisher();
 }

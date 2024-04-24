@@ -47,9 +47,7 @@ import javaemul.internal.PrimitiveLists;
  */
 final class DoubleStreamImpl extends TerminatableStream<DoubleStreamImpl> implements DoubleStream {
 
-  /**
-   * Represents an empty stream, doing nothing for all methods.
-   */
+  /** Represents an empty stream, doing nothing for all methods. */
   static class Empty extends TerminatableStream<Empty> implements DoubleStream {
     public Empty(TerminatableStream<?> previous) {
       super(previous);
@@ -268,9 +266,7 @@ final class DoubleStreamImpl extends TerminatableStream<DoubleStreamImpl> implem
     }
   }
 
-  /**
-   * Double to Int map spliterator.
-   */
+  /** Double to Int map spliterator. */
   private static final class MapToIntSpliterator extends Spliterators.AbstractIntSpliterator {
     private final DoubleToIntFunction map;
     private final Spliterator.OfDouble original;
@@ -314,9 +310,7 @@ final class DoubleStreamImpl extends TerminatableStream<DoubleStreamImpl> implem
     }
   }
 
-  /**
-   * Double to Long map spliterator.
-   */
+  /** Double to Long map spliterator. */
   private static final class MapToLongSpliterator extends Spliterators.AbstractLongSpliterator {
     private final DoubleToLongFunction map;
     private final Spliterator.OfDouble original;
@@ -336,9 +330,7 @@ final class DoubleStreamImpl extends TerminatableStream<DoubleStreamImpl> implem
     }
   }
 
-  /**
-   * Double to Double map spliterator.
-   */
+  /** Double to Double map spliterator. */
   private static final class MapToDoubleSpliterator extends Spliterators.AbstractDoubleSpliterator {
     private final DoubleUnaryOperator map;
     private final Spliterator.OfDouble original;
@@ -358,9 +350,7 @@ final class DoubleStreamImpl extends TerminatableStream<DoubleStreamImpl> implem
     }
   }
 
-  /**
-   * Double filter spliterator.
-   */
+  /** Double filter spliterator. */
   private static final class FilterSpliterator extends Spliterators.AbstractDoubleSpliterator {
     private final DoublePredicate filter;
     private final Spliterator.OfDouble original;
@@ -399,9 +389,7 @@ final class DoubleStreamImpl extends TerminatableStream<DoubleStreamImpl> implem
     }
   }
 
-  /**
-   * Double skip spliterator.
-   */
+  /** Double skip spliterator. */
   private static final class SkipSpliterator extends Spliterators.AbstractDoubleSpliterator {
     private long skip;
     private final Spliterator.OfDouble original;
@@ -424,7 +412,7 @@ final class DoubleStreamImpl extends TerminatableStream<DoubleStreamImpl> implem
     @Override
     public boolean tryAdvance(DoubleConsumer action) {
       while (skip > 0) {
-        if (!original.tryAdvance((double ignore) -> { })) {
+        if (!original.tryAdvance((double ignore) -> {})) {
           return false;
         }
         skip--;
@@ -433,9 +421,7 @@ final class DoubleStreamImpl extends TerminatableStream<DoubleStreamImpl> implem
     }
   }
 
-  /**
-   * Double limit spliterator.
-   */
+  /** Double limit spliterator. */
   private static final class LimitSpliterator extends Spliterators.AbstractDoubleSpliterator {
     private final long limit;
     private final Spliterator.OfDouble original;
@@ -468,9 +454,7 @@ final class DoubleStreamImpl extends TerminatableStream<DoubleStreamImpl> implem
     }
   }
 
-  /**
-   * Value holder for various stream operations.
-   */
+  /** Value holder for various stream operations. */
   private static class ValueConsumer implements DoubleConsumer {
     double value;
 
@@ -566,7 +550,7 @@ final class DoubleStreamImpl extends TerminatableStream<DoubleStreamImpl> implem
   public long count() {
     terminate();
     long count = 0;
-    while (spliterator.tryAdvance((double value) -> { })) {
+    while (spliterator.tryAdvance((double value) -> {})) {
       count++;
     }
     return count;

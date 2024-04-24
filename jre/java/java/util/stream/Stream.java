@@ -39,8 +39,8 @@ import java.util.function.ToLongFunction;
 import java.util.function.UnaryOperator;
 
 /**
- * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html">
- * the official Java API doc</a> for details.
+ * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html">the official
+ * Java API doc</a> for details.
  *
  * @param <T> the type of data being streamed
  */

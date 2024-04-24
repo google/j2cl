@@ -37,8 +37,8 @@ import java.util.function.Supplier;
 import javaemul.internal.PrimitiveLists;
 
 /**
- * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/DoubleStream.html">
- * the official Java API doc</a> for details.
+ * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/DoubleStream.html">the
+ * official Java API doc</a> for details.
  */
 public interface DoubleStream extends BaseStream<Double, DoubleStream> {
 

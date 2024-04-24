@@ -48,9 +48,7 @@ import javaemul.internal.PrimitiveLists;
  */
 final class IntStreamImpl extends TerminatableStream<IntStreamImpl> implements IntStream {
 
-  /**
-   * Represents an empty stream, doing nothing for all methods.
-   */
+  /** Represents an empty stream, doing nothing for all methods. */
   static class Empty extends TerminatableStream<Empty> implements IntStream {
     public Empty(TerminatableStream<?> previous) {
       super(previous);
@@ -281,9 +279,7 @@ final class IntStreamImpl extends TerminatableStream<IntStreamImpl> implements I
     }
   }
 
-  /**
-   * Int to Int map spliterator.
-   */
+  /** Int to Int map spliterator. */
   private static final class MapToIntSpliterator extends Spliterators.AbstractIntSpliterator {
     private final IntUnaryOperator map;
     private final Spliterator.OfInt original;
@@ -327,9 +323,7 @@ final class IntStreamImpl extends TerminatableStream<IntStreamImpl> implements I
     }
   }
 
-  /**
-   * Int to Long map spliterator.
-   */
+  /** Int to Long map spliterator. */
   private static final class MapToLongSpliterator extends Spliterators.AbstractLongSpliterator {
     private final IntToLongFunction map;
     private final Spliterator.OfInt original;
@@ -349,9 +343,7 @@ final class IntStreamImpl extends TerminatableStream<IntStreamImpl> implements I
     }
   }
 
-  /**
-   * Int to Double map spliterator.
-   */
+  /** Int to Double map spliterator. */
   private static final class MapToDoubleSpliterator extends Spliterators.AbstractDoubleSpliterator {
     private final IntToDoubleFunction map;
     private final Spliterator.OfInt original;
@@ -371,9 +363,7 @@ final class IntStreamImpl extends TerminatableStream<IntStreamImpl> implements I
     }
   }
 
-  /**
-   * Int filter spliterator.
-   */
+  /** Int filter spliterator. */
   private static final class FilterSpliterator extends Spliterators.AbstractIntSpliterator {
     private final IntPredicate filter;
     private final Spliterator.OfInt original;
@@ -412,9 +402,7 @@ final class IntStreamImpl extends TerminatableStream<IntStreamImpl> implements I
     }
   }
 
-  /**
-   * Int skip spliterator.
-   */
+  /** Int skip spliterator. */
   private static final class SkipSpliterator extends Spliterators.AbstractIntSpliterator {
     private long skip;
     private final Spliterator.OfInt original;
@@ -437,7 +425,7 @@ final class IntStreamImpl extends TerminatableStream<IntStreamImpl> implements I
     @Override
     public boolean tryAdvance(IntConsumer action) {
       while (skip > 0) {
-        if (!original.tryAdvance((int ignore) -> { })) {
+        if (!original.tryAdvance((int ignore) -> {})) {
           return false;
         }
         skip--;
@@ -446,9 +434,7 @@ final class IntStreamImpl extends TerminatableStream<IntStreamImpl> implements I
     }
   }
 
-  /**
-   * Int limit spliterator.
-   */
+  /** Int limit spliterator. */
   private static final class LimitSpliterator extends Spliterators.AbstractIntSpliterator {
     private final long limit;
     private final Spliterator.OfInt original;
@@ -480,9 +466,7 @@ final class IntStreamImpl extends TerminatableStream<IntStreamImpl> implements I
     }
   }
 
-  /**
-   * Value holder for various stream operations.
-   */
+  /** Value holder for various stream operations. */
   private static final class ValueConsumer implements IntConsumer {
     int value;
 
@@ -563,7 +547,7 @@ final class IntStreamImpl extends TerminatableStream<IntStreamImpl> implements I
   public long count() {
     terminate();
     long count = 0;
-    while (spliterator.tryAdvance((int value) -> { })) {
+    while (spliterator.tryAdvance((int value) -> {})) {
       count++;
     }
     return count;
@@ -641,6 +625,7 @@ final class IntStreamImpl extends TerminatableStream<IntStreamImpl> implements I
   public void forEach(IntConsumer action) {
     forEachOrdered(action);
   }
+
   // end terminals
 
   // intermediates

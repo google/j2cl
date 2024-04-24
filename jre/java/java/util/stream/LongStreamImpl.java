@@ -48,9 +48,7 @@ import javaemul.internal.PrimitiveLists;
  */
 final class LongStreamImpl extends TerminatableStream<LongStreamImpl> implements LongStream {
 
-  /**
-   * Represents an empty stream, doing nothing for all methods.
-   */
+  /** Represents an empty stream, doing nothing for all methods. */
   static class Empty extends TerminatableStream<Empty> implements LongStream {
     public Empty(TerminatableStream<?> previous) {
       super(previous);
@@ -273,9 +271,7 @@ final class LongStreamImpl extends TerminatableStream<LongStreamImpl> implements
     }
   }
 
-  /**
-   * Long to Int map spliterator.
-   */
+  /** Long to Int map spliterator. */
   private static final class MapToIntSpliterator extends Spliterators.AbstractIntSpliterator {
     private final LongToIntFunction map;
     private final Spliterator.OfLong original;
@@ -319,9 +315,7 @@ final class LongStreamImpl extends TerminatableStream<LongStreamImpl> implements
     }
   }
 
-  /**
-   * Long to Long map spliterator.
-   */
+  /** Long to Long map spliterator. */
   private static final class MapToLongSpliterator extends Spliterators.AbstractLongSpliterator {
     private final LongUnaryOperator map;
     private final Spliterator.OfLong original;
@@ -341,9 +335,7 @@ final class LongStreamImpl extends TerminatableStream<LongStreamImpl> implements
     }
   }
 
-  /**
-   * Long to Double map Spliterator.
-   */
+  /** Long to Double map Spliterator. */
   private static final class MapToDoubleSpliterator extends Spliterators.AbstractDoubleSpliterator {
     private final LongToDoubleFunction map;
     private final Spliterator.OfLong original;
@@ -363,9 +355,7 @@ final class LongStreamImpl extends TerminatableStream<LongStreamImpl> implements
     }
   }
 
-  /**
-   * Long filter spliterator.
-   */
+  /** Long filter spliterator. */
   private static final class FilterSpliterator extends Spliterators.AbstractLongSpliterator {
     private final LongPredicate filter;
     private final Spliterator.OfLong original;
@@ -404,9 +394,7 @@ final class LongStreamImpl extends TerminatableStream<LongStreamImpl> implements
     }
   }
 
-  /**
-   * Long skip spliterator.
-   */
+  /** Long skip spliterator. */
   private static final class SkipSpliterator extends Spliterators.AbstractLongSpliterator {
     private long skip;
     private final Spliterator.OfLong original;
@@ -429,7 +417,7 @@ final class LongStreamImpl extends TerminatableStream<LongStreamImpl> implements
     @Override
     public boolean tryAdvance(LongConsumer action) {
       while (skip > 0) {
-        if (!original.tryAdvance((long ignore) -> { })) {
+        if (!original.tryAdvance((long ignore) -> {})) {
           return false;
         }
         skip--;
@@ -438,9 +426,7 @@ final class LongStreamImpl extends TerminatableStream<LongStreamImpl> implements
     }
   }
 
-  /**
-   * Long limit spliterator.
-   */
+  /** Long limit spliterator. */
   private static final class LimitSpliterator extends Spliterators.AbstractLongSpliterator {
     private final long limit;
     private final Spliterator.OfLong original;
@@ -472,9 +458,7 @@ final class LongStreamImpl extends TerminatableStream<LongStreamImpl> implements
     }
   }
 
-  /**
-   * Value holder for various stream operations.
-   */
+  /** Value holder for various stream operations. */
   private static final class ValueConsumer implements LongConsumer {
     long value;
 
@@ -570,7 +554,7 @@ final class LongStreamImpl extends TerminatableStream<LongStreamImpl> implements
   public long count() {
     terminate();
     long count = 0;
-    while (spliterator.tryAdvance((long value) -> { })) {
+    while (spliterator.tryAdvance((long value) -> {})) {
       count++;
     }
     return count;
@@ -634,6 +618,7 @@ final class LongStreamImpl extends TerminatableStream<LongStreamImpl> implements
     terminate();
     return spliterator;
   }
+
   // end terminals
 
   // intermediates

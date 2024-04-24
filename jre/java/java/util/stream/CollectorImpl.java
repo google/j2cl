@@ -22,9 +22,7 @@ import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-/**
- * Simple internal implementation of a collector, holding each of the functions in a field.
- */
+/** Simple internal implementation of a collector, holding each of the functions in a field. */
 final class CollectorImpl<T, A, R> implements Collector<T, A, R> {
   private final Supplier<A> supplier;
   private final BiConsumer<A, T> accumulator;
