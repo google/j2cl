@@ -236,6 +236,18 @@ public final class String implements Comparable<String>, CharSequence, Serializa
     this.value = createImpl(bytes, charset);
   }
 
+  public String(char[] x) {
+    this.value = nativeFromCharCodeArray(x, 0, x.length);
+  }
+
+  public String(char[] x, int offset, int count) {
+    this.value = createImpl(x, offset, count);
+  }
+
+  public String(int[] codePoints, int offset, int count) {
+    this.value = createImpl(codePoints, offset, count);
+  }
+
   private static NativeString createImpl(byte[] bytes, Charset charset) {
     return createImpl(bytes, 0, bytes.length, charset);
   }
@@ -245,23 +257,19 @@ public final class String implements Comparable<String>, CharSequence, Serializa
     return String.valueOf(((EmulatedCharset) charset).decodeString(bytes, ofs, len)).value;
   }
 
-  public String(char[] x) {
-    this.value = nativeFromCharCodeArray(x, 0, x.length);
-  }
-
-  public String(char[] x, int offset, int count) {
+  private static NativeString createImpl(char[] x, int offset, int count) {
     int end = offset + count;
     checkStringBounds(offset, end, x.length);
-    this.value = nativeFromCharCodeArray(x, offset, end);
+    return nativeFromCharCodeArray(x, offset, end);
   }
 
-  public String(int[] codePoints, int offset, int count) {
+  private static NativeString createImpl(int[] codePoints, int offset, int count) {
     char[] chars = new char[count * 2];
     int charIdx = 0;
     while (count-- > 0) {
       charIdx += Character.toChars(codePoints[offset++], chars, charIdx);
     }
-    this.value = String.valueOf(chars, 0, charIdx).value;
+    return String.valueOf(chars, 0, charIdx).value;
   }
 
   public String(String other) {

@@ -237,15 +237,6 @@ public final class String implements Comparable<String>, CharSequence,
     this.value = createImpl(bytes, charset);
   }
 
-  private static String createImpl(byte[] bytes, Charset charset) {
-    return createImpl(bytes, 0, bytes.length, charset);
-  }
-
-  private static String createImpl(byte[] bytes, int ofs, int len, Charset charset) {
-    checkPositionIndexes(ofs, ofs + len, bytes.length);
-    return String.valueOf(((EmulatedCharset) charset).decodeString(bytes, ofs, len));
-  }
-
   public String(char value[]) {
     this.value = String.valueOf(value);
   }
@@ -255,12 +246,25 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public String(int[] codePoints, int offset, int count) {
+    this.value = createImpl(codePoints, offset, count);
+  }
+
+  private static String createImpl(byte[] bytes, Charset charset) {
+    return createImpl(bytes, 0, bytes.length, charset);
+  }
+
+  private static String createImpl(byte[] bytes, int ofs, int len, Charset charset) {
+    checkPositionIndexes(ofs, ofs + len, bytes.length);
+    return String.valueOf(((EmulatedCharset) charset).decodeString(bytes, ofs, len));
+  }
+
+  private static String createImpl(int[] codePoints, int offset, int count) {
     char[] chars = new char[count * 2];
     int charIdx = 0;
     while (count-- > 0) {
       charIdx += Character.toChars(codePoints[offset++], chars, charIdx);
     }
-    this.value = String.valueOf(chars, 0, charIdx);
+    return String.valueOf(chars, 0, charIdx);
   }
 
   public String(String other) {
