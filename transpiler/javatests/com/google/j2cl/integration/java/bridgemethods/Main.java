@@ -23,7 +23,7 @@ import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 /** Tests for bridge methods with accidental overriding. */
 public class Main {
 
-  public static void main(String[] args) {
+  public static void main(String... args) {
     testSimpleBridges();
     testBridgeForwardsToSpecializedMethod();
     testBridgeSpecializesSuperclassMethod();

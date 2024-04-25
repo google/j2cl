@@ -21,7 +21,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
  * Test shadowed field.
  */
 public class Main {
-  public static void main(String[] args) {
+  public static void main(String... args) {
     Child instance = new Child();
 
     // Value starts uninitialized.

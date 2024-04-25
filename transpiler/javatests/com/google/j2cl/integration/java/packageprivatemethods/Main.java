@@ -35,7 +35,7 @@ import packageprivatemethods.b.P4;
 import packageprivatemethods.package1.Caller;
 
 public class Main {
-  public static void main(String[] args) {
+  public static void main(String... args) {
     testSimple();
     testCrossPackageOverrides_independentOverrideChains();
     testCrossPackageOverrides_gradualPublicOverrides();

@@ -48,7 +48,7 @@ public class Main<T> {
     assertTrue((new B(outer).t == outer));
   }
 
-  public static void main(String[] args) {
+  public static void main(String... args) {
     Main<String> m = new Main<>();
     // invokes local classes' creation with different types of outer parameters.
     m.fun(new Object());

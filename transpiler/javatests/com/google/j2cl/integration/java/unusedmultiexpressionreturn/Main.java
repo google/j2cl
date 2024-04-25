@@ -24,7 +24,7 @@ public class Main {
   @SuppressWarnings("unused")
   private static int field = 100;
 
-  public static void main(String[] args) {
+  public static void main(String... args) {
     @SuppressWarnings("unused")
     int variable = 100;
     int[] arrayVariable = new int[] {100};

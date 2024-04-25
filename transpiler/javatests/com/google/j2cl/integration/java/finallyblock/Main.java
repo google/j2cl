@@ -24,7 +24,7 @@ import java.util.List;
 
 /** Tests finally blocks. */
 public class Main {
-  public static void main(String[] args) {
+  public static void main(String... args) {
     testFinally_basic();
     testFinally_basic_inConstructor();
     testFinally_basic_inFieldInitializer();

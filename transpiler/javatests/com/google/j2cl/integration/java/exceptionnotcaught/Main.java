@@ -23,7 +23,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 public class Main {
   public static int value = 1;
 
-  public static void main(String[] args) {
+  public static void main(String... args) {
     try {
       uncaughtException();
       value = 2; // exception should be thrown, this statement should not be executed.

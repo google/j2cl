@@ -22,7 +22,7 @@ import static com.google.j2cl.integration.testing.Asserts.fail;
  * This class tests the special functions of enum: .values() and .valueOf()
  */
 public class Main {
-  public static void main(String[] args) {
+  public static void main(String... args) {
     testValues();
     testValueOf();
     testValueOf_exceptions();

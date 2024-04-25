@@ -17,7 +17,7 @@ package allsimplebridges;
 
 public class Main {
 
-  public static void main(String[] args) {
+  public static void main(String... args) {
     /**
      * Test examples are different combinations properties toggling in a 3 class hierarchy (child
      * class, parent class, interface).

@@ -22,7 +22,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 /** Test basic binary operations. This test does not aim to test primitive overflow and Coercion. */
 @SuppressWarnings({"NarrowingCompoundAssignment", "ReferenceEquality", "ConstantOverflow"})
 public class Main {
-  public static void main(String[] args) {
+  public static void main(String... args) {
     testArithmetic();
     testFloatingPointRemainder();
     testOverflow();

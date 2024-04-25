@@ -20,7 +20,7 @@ import static com.google.j2cl.integration.testing.Asserts.fail;
 /** Simple cast test for measuring the size cost of having casts enabled. */
 public class Main {
   @SuppressWarnings("unused")
-  public static void main(String[] args) {
+  public static void main(String... args) {
     Object object = new Main();
 
     // This is fine.

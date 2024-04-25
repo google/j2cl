@@ -50,7 +50,7 @@ public class Main {
     }
   }
 
-  public static void main(String[] args) {
+  public static void main(String... args) {
     assertTrue(Foo.FOO.ordinal() == 0);
     assertTrue(Foo.FOO.name().equals("FOO"));
 

@@ -36,7 +36,7 @@ class InterfaceGenericImpl<T> implements GenericInterface<T> {
 }
 
 public class Main {
-  public static void main(String[] args) {
+  public static void main(String... args) {
     InterfaceImpl i = new InterfaceImpl();
     Object o = i.foo(i);
     assertTrue(o == i);

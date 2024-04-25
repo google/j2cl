@@ -25,7 +25,7 @@ interface AnonymousInterface {
 }
 
 public class Main {
-  public static void main(String[] args) {
+  public static void main(String... args) {
     AnonymousInterface intf1 =
         new AnonymousInterface() {
           @Override

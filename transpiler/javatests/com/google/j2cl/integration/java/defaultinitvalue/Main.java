@@ -28,7 +28,7 @@ public class Main {
   public static boolean staticBoolean;
   public static Object staticObject;
 
-  public static void main(String[] args) {
+  public static void main(String... args) {
     Main m = new Main();
     assertTrue(m.instanceInt == 0);
     assertTrue(!m.instanceBoolean);

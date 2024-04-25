@@ -18,7 +18,7 @@ package numberdevirtualcalls;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 public class Main {
-  public static void main(String[] args) {
+  public static void main(String... args) {
     Number b = new Byte((byte) 1);
     assertTrue((b.byteValue() == 1));
     assertTrue((b.doubleValue() == 1.0));

@@ -22,7 +22,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointe
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 public class Main {
-  public static void main(String[] args) {
+  public static void main(String... args) {
     testSuperMethodReferences();
     testConstructorReferences();
     testInstanceMethodReferences();

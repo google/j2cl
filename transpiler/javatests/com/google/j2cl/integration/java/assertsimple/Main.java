@@ -23,7 +23,7 @@ import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 /** Test method body, assert statement, and binary expression with number literals work fine. */
 @SuppressWarnings("ComplexBooleanConstant") // literal boolean expressions
 public class Main {
-  public static void main(String[] args) {
+  public static void main(String... args) {
     testAssert_succeeds();
     testAssert_fails_differentMessageExpressionTypes();
     // TODO(b/202076599): Remove conditional once bug is fixed.

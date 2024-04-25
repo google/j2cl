@@ -30,7 +30,7 @@ public class Main {
   @JsMethod
   private static native void createFooJsChild();
 
-  public static void main(String[] args) {
+  public static void main(String... args) {
     try {
       createFoo();
       assertTrue("should fail in uncompiled mode", "true".equals(System.getProperty("COMPILED")));

@@ -24,7 +24,7 @@ public class Main {
   public int a = 1;
   public int b = a * 2;
 
-  public static void main(String[] args) {
+  public static void main(String... args) {
     Main m = new Main();
     assertTrue(m.a == 1);
     assertTrue(m.b == 2);

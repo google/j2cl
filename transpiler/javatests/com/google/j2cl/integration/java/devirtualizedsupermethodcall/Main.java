@@ -21,7 +21,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
  * Test non-constructor super method calls.
  */
 public class Main {
-  public static void main(String[] args) {
+  public static void main(String... args) {
     FooCallsSuperObjectMethods fooCallsSuperObjectMethods = new FooCallsSuperObjectMethods();
 
     assertTrue(fooCallsSuperObjectMethods.equals(fooCallsSuperObjectMethods));

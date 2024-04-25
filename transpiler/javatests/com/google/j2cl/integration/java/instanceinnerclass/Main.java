@@ -320,7 +320,7 @@ public class Main {
     }
   }
 
-  public static void main(String[] args) {
+  public static void main(String... args) {
     Main m = new Main(2);
     assertTrue(m.new A().fun() == 12);
     assertTrue(m.new A().enclosingInstance == m);

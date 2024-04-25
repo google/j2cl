@@ -18,7 +18,7 @@ package exports;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 public class Main {
-  public static void main(String[] args) {
+  public static void main(String... args) {
     // Will fail if the library that provides Foo is not available.
     Object foo = new Foo();
     assertTrue(foo instanceof Foo);

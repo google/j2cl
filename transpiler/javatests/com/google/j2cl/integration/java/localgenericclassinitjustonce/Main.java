@@ -42,7 +42,7 @@ public class Main {
     }
   }
 
-  public static void main(String[] args) {
+  public static void main(String... args) {
     P1<?> p1 = new P1<Object>();
     P1<?>.P2<?> p2 = p1.new P2<Object>();
     assertTrue((1 == p2.value));

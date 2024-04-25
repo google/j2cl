@@ -20,7 +20,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 
 public class Main {
-  public static void main(String[] args) {
+  public static void main(String... args) {
     testBaseIntersectionCast();
     testIntersectionCastWithLambdaExpr();
     testIntersectionCastPolymorphism();

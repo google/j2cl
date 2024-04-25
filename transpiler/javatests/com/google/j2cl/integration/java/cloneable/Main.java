@@ -16,7 +16,7 @@
 package cloneable;
 
 public class Main {
-  public static void main(String[] args) {}
+  public static void main(String... args) {}
 
   public static class WithoutCloneable {
     // Object.clone() is missing in J2CL JRE.

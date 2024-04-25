@@ -21,7 +21,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
  * Test super call of non default constructor.
  */
 public class Main {
-  public static void main(String[] args) {
+  public static void main(String... args) {
     Child child = new Child(10);
     assertTrue(child.valueInChild == 10);
     assertTrue(child.valueInParent == 10);

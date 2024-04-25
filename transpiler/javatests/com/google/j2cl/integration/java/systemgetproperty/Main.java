@@ -21,7 +21,7 @@ public class Main {
 
   private static int counter = 0;
 
-  public static void main(String[] args) {
+  public static void main(String... args) {
     assertTrue(System.getProperty("jre.classMetadata").equals("SIMPLE"));
     assertTrue(System.getProperty("jre.bar", "bar").equals("bar"));
 

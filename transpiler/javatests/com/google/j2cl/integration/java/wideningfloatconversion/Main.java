@@ -20,7 +20,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import com.google.j2cl.integration.testing.TestUtils;
 
 public class Main {
-  public static void main(String[] args) {
+  public static void main(String... args) {
     testAssignment();
     testCast();
   }

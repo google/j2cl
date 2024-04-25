@@ -29,7 +29,7 @@ public class Main {
     return 3;
   }
 
-  public static void main(String[] args) {
+  public static void main(String... args) {
     assertTrue(Inner.caller() == 3);
   }
 }

@@ -58,7 +58,7 @@ public class Main {
   private static float fieldFloatFromLong = 456L;
   private static double fieldDoubleFromLong = 456L;
 
-  public static void main(String[] args) {
+  public static void main(String... args) {
     testAssignment();
     testBinaryNumericPromotion();
     testCast();

@@ -18,7 +18,7 @@ package innerclassinheritance;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 public class Main {
-  public static void main(String[] args) {
+  public static void main(String... args) {
     innerclassinheritance.p1.A a =
         new innerclassinheritance.p1.A();
     innerclassinheritance.p1.A aa =

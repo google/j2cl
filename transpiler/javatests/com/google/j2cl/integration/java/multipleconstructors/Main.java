@@ -39,7 +39,7 @@ public class Main {
     this.flag = flag;
   }
 
-  public static void main(String[] args) {
+  public static void main(String... args) {
     Main m1 = new Main(1);
     assertTrue(m1.id == 1);
     assertTrue(!m1.flag);

@@ -41,7 +41,7 @@ import jsinterop.annotations.JsMethod;
 })
 public class Main {
 
-  public static void main(String[] args) {
+  public static void main(String... args) {
     testBox_byParameter();
     testBox_numberAsDouble();
     testBox_byAssignment();

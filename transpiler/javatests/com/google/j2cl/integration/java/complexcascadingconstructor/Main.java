@@ -34,7 +34,7 @@ public class Main {
     this(a, a * 2);
   }
 
-  public static void main(String[] args) {
+  public static void main(String... args) {
     Main m = new Main(10);
     assertTrue(m.a == 12);
     assertTrue(m.b == 23);

@@ -21,7 +21,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 public class Main {
   private static int counter = 0;
 
-  public static void main(String[] args) {
+  public static void main(String... args) {
     // Since the assert is removed, following should not fail.
     assert counter++ < 0;
 

@@ -55,7 +55,7 @@ class NumberChild extends Number {
 }
 
 public class Main {
-  public static void main(String[] args) {
+  public static void main(String... args) {
     Number nc = new NumberChild(2147483647.6, 2.6);
     assertTrue((nc.byteValue() == -1));
     assertTrue((nc.doubleValue() == 2.1474836502E9));

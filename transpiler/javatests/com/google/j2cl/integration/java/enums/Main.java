@@ -21,7 +21,7 @@ import java.util.function.Function;
 
 /** Contains test for enums that cannot be optimized according to go/j2cl-enums-optimization. */
 public class Main {
-  public static void main(String[] args) {
+  public static void main(String... args) {
     testOrdinal();
     testName();
     testInstanceMethod();

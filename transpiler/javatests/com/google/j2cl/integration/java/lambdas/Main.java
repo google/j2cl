@@ -22,7 +22,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import java.io.Serializable;
 
 public class Main {
-  public static void main(String[] args) {
+  public static void main(String... args) {
     Captures captures = new Captures();
     captures.testLambdaNoCapture();
     captures.testInstanceofLambda();
