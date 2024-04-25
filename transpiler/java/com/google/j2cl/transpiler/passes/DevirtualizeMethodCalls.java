@@ -97,7 +97,8 @@ public class DevirtualizeMethodCalls extends NormalizationPass {
             // up calling back onto the version of the method on the prototype (aka the wrong one).
             // Also as an optimization we do not perform devirtualization on 'this' method calls as
             // the trampoline is not necessary.
-            if (methodCall.getQualifier() instanceof ThisOrSuperReference) {
+            if (methodCall.getQualifier() instanceof ThisOrSuperReference
+                || methodCall.isStaticDispatch()) {
               return methodCall;
             }
 
