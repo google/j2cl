@@ -18,7 +18,6 @@
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
 import org.jetbrains.kotlin.backend.common.BodyLoweringPass
-import org.jetbrains.kotlin.backend.common.CommonBackendContext
 import org.jetbrains.kotlin.backend.common.CompilationException
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
 import org.jetbrains.kotlin.backend.common.extensions.IrGenerationExtension
@@ -62,41 +61,53 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.StandardClassIds
 
-internal typealias LoweringPassFactory = (JvmBackendContext) -> FileLoweringPass
+internal typealias J2clLoweringPassFactory = (J2clBackendContext) -> FileLoweringPass
+
+internal typealias LoweringPassFactory = () -> FileLoweringPass
+
+private fun LoweringPassFactory.adapt(): J2clLoweringPassFactory = { _: J2clBackendContext ->
+  invoke()
+}
+
+internal typealias JvmLoweringPassFactory = (JvmBackendContext) -> FileLoweringPass
+
+private fun JvmLoweringPassFactory.adapt(): J2clLoweringPassFactory = { ctx: J2clBackendContext ->
+  invoke(ctx.jvmBackendContext)
+}
 
 /** The list of lowering passes to run in execution order. */
-private val loweringPassFactories: List<LoweringPassFactory> =
+private val loweringPassFactories: List<J2clLoweringPassFactory> =
   listOf(
     // Remove expect declarations, the actuals will be used instead.
-    ::ExpectDeclarationsRemoveLowering,
+    ::ExpectDeclarationsRemoveLowering.adapt(),
     // Remove assignments to definedExternally.
-    ::DefinedExternallyLowering,
+    ::DefinedExternallyLowering.adapt(),
     // Remove typealias declarations from the IR.
-    { StripTypeAliasDeclarationsLowering() },
+    ::StripTypeAliasDeclarationsLowering.adapt(),
     // Put file level function and property declaration into a class.
-    ::FileClassLowering,
+    ::FileClassLowering.adapt(),
     // Make JvmStatic functions in non-companion objects static and replace all call sites in the
     // module.
-    ::JvmStaticInObjectLowering,
+    ::JvmStaticInObjectLowering.adapt(),
     // Invent names for local classes and anonymous objects. Later passes may require all classes
     // to have a name for computing function signature.
-    { jvmBackendContext -> JvmInventNamesForLocalClasses(jvmBackendContext) },
+    { j2clBackendContext -> JvmInventNamesForLocalClasses(j2clBackendContext.jvmBackendContext) },
     // Rewrites `Array(size) { index -> value }` using type-specific initializer lambdas.
-    ::ArrayConstructorLowering,
+    ::ArrayConstructorLowering.adapt(),
     // Create nullable backing fields and insert nullability checks for lateinit properties and
     // variables.
-    ::JvmLateinitLowering,
+    ::JvmLateinitLowering.adapt(),
     // Patch calls to `throwUninitializedPropertyAccessException()` to match our definition of this
     // function.
-    ::PatchThrowUninitializedPropertyExceptionCalls,
+    ::PatchThrowUninitializedPropertyExceptionCalls.adapt(),
     // Extract anonymous classes from inline lambdas.
-    ::LocalClassesInInlineLambdasLowering,
+    ::LocalClassesInInlineLambdasLowering.adapt(),
     // Resolve captures for anonymous class defined in inline functions.
-    ::LocalClassesInInlineFunctionsLowering,
+    ::LocalClassesInInlineFunctionsLowering.adapt(),
     // Move the anonymous classes from inline functions into the nearest declaration container.
-    asPostfixLowering(::LocalClassesExtractionFromInlineFunctionsLowering),
+    asPostfixLowering(::LocalClassesExtractionFromInlineFunctionsLowering).adapt(),
     // Create public bridge for private top level function called from inline functions.
-    ::SyntheticAccessorLowering,
+    ::SyntheticAccessorLowering.adapt(),
     // Replace reference to inline function with reified parameter with reference to a synthetic
     // non-inline function where types parameters have been substituted so there is no reference to
     // inline functions anymore.
@@ -104,57 +115,58 @@ private val loweringPassFactories: List<LoweringPassFactory> =
     // inline fun <reified T> castTo(param: Any): T  = param as T
     // reference like `::castTo<String>` is replaced with `::castTo$wrap` where
     // fun castTo$wrap(param: Any) String = castTo<String>(param)
-    ::WrapInlineDeclarationsWithReifiedTypeParametersLowering,
+    ::WrapInlineDeclarationsWithReifiedTypeParametersLowering.adapt(),
     // Perform function inlining.
-    { jvmBackendContext -> FunctionInlining(jvmBackendContext) },
+    { j2clBackendContext -> FunctionInlining(j2clBackendContext.jvmBackendContext) },
     // Remove inline functions with reified type parameters as these functions cannot be called from
     // Java
-    { RemoveInlineDeclarationsWithReifiedTypeParametersLowering() },
+    ::RemoveInlineDeclarationsWithReifiedTypeParametersLowering.adapt(),
     // Remove functions that contain unsigned varargs in the signature as a temporary workaround for
     // b/242573966.
     // TODO(b/242573966): Remove this when we can handle unsigned vararg types.
-    { RemoveFunctionsWithUnsignedVarargsLowering() },
+    ::RemoveFunctionsWithUnsignedVarargsLowering.adapt(),
     // Inline function bodies are inlined in a IrReturnableBlock that can contain a return
     // statement. Lower IrReturnableBlocks as labelled blocks, introduce a temporary variable for
     // keeping the returned value and lower return statements inside the block to break statement.
-    ::ReturnableBlockLowering,
+    ::ReturnableBlockLowering.adapt(),
     // Optimize for loops on arrays and integer like progressions.
-    { jvmBackend -> ForLoopsLowering(J2clBackendContext(jvmBackend)) },
+
+    { j2clBackendContext -> ForLoopsLowering(j2clBackendContext) },
     // Replace null varargs with empty array calls.
-    ::EmptyVarargLowering,
+    ::EmptyVarargLowering.adapt(),
     // Replace constant property accessors with a direct reference to the constant value.
-    ::ConstLowering,
+    ::ConstLowering.adapt(),
     // Lowers unsigned const values to be instantiations of their boxed value types.
-    { UnsignedConstLowering() },
+    ::UnsignedConstLowering.adapt(),
     // Move and/or copy companion object fields to static fields of companion's owner.
     ::MoveOrCopyCompanionObjectFieldsLowering,
     // Inline property accessors where the field can be referenced directly
     // (ex. private properties).
-    ::JvmPropertiesLowering,
+    ::JvmPropertiesLowering.adapt(),
     // Make IrGetField/IrSetField to objects' fields point to the static versions
     ::RemapObjectFieldAccesses,
     // Extract local functions and move them up to the closest enclosing type. Rewrite local
     // function calls accordingly.
-    ::LocalFunctionLowering,
-    ::JvmLocalClassPopupLowering,
+    ::LocalFunctionLowering.adapt(),
+    ::JvmLocalClassPopupLowering.adapt(),
     // Adds stub methods to the implementations of the read-only collection types to properly
     // implement the Java collection APIs.
-    ::CollectionStubMethodLowering,
+    ::CollectionStubMethodLowering.adapt(),
     // Add static field to hold singleton object instance.
-    ::ObjectClassLowering,
+    ::ObjectClassLowering.adapt(),
     // Copies static fields from companion objects onto the enclosing interface if a const property
     // is present.
-    ::CopyInterfaceCompanionFieldsLowering,
+    // ::CopyInterfaceCompanionFieldsLowering.adapt(),
     // Drops field initializers when they initialize the field to it's default value.
-    { RemoveFieldInitializerToDefault() },
+    ::RemoveFieldInitializerToDefault.adapt(),
     // Move code from object init blocks and static field initializers to a new <clinit> function.
-    ::StaticInitializersLowering,
+    ::StaticInitializersLowering.adapt(),
     // Lower field/block initializers into the primary kotlin constructor.
     // TODO(b/233909092): Only lower classes that contain primary ctors to avoid duplicating
     // code in secondary ctors.
-    ::InitializersLowering,
-    { jvmBackendContext ->
-      InitializersCleanupLowering(jvmBackendContext) {
+    ::InitializersLowering.adapt(),
+    { j2clBackendContext ->
+      InitializersCleanupLowering(j2clBackendContext.jvmBackendContext) {
         // Only remove initializers that are non-constants and non-static.
         // Modified from: org.jetbrains.kotlin.backend.jvm.JvmLower.kt
         it.constantValue() == null &&
@@ -162,49 +174,52 @@ private val loweringPassFactories: List<LoweringPassFactory> =
       }
     },
     // Synthesize static proxy functions for JvmStatic functions in companion objects.
-    ::JvmStaticInCompanionLowering,
+    ::JvmStaticInCompanionLowering.adapt(),
     // Generate synthetic stubs for functions with default parameter values
-    ::JvmDefaultArgumentStubGenerator,
+    ::JvmDefaultArgumentStubGenerator.adapt(),
     // Transform calls with default arguments into calls to stubs
-    ::JvmDefaultParameterInjector,
+    ::JvmDefaultParameterInjector.adapt(),
     // Replace default values arguments with stubs
-    { jvmBackendContext ->
-      DefaultParameterCleaner(jvmBackendContext, replaceDefaultValuesWithStubs = true)
+    { j2clBackendContext ->
+      DefaultParameterCleaner(
+        j2clBackendContext.jvmBackendContext,
+        replaceDefaultValuesWithStubs = true,
+      )
     },
-    ::BridgeLowering,
+    ::BridgeLowering.adapt(),
     // Transforms some cast/instanceof operations.
-    ::TypeOperatorLowering,
+    ::TypeOperatorLowering.adapt(),
     // Rewrites numeric conversion calls (toInt(), toShort(), etc) to be simple casts instead.
-    ::NumericConversionLowering,
+    ::NumericConversionLowering.adapt(),
     // Lowers calls to functions that return unit into a block of the call and a unit object ref.
-    ::KotlinUnitValueLowering,
+    ::KotlinUnitValueLowering.adapt(),
     // Replaces IrExpressionBody with IrBlockBody returning the expression.
-    ::ExpressionBodyTransformer,
+    ::ExpressionBodyTransformer.adapt(),
     // Place calls that return `Nothing` calls into a synthetic block of `{ foo(); Unit }`.
-    ::KotlinNothingValueCallsLowering,
+    ::KotlinNothingValueCallsLowering.adapt(),
     // Mange the names of functions that are shadowing those in super types.
-    { MangleWellKnownShadowingFunctionsLowering() },
+    ::MangleWellKnownShadowingFunctionsLowering.adapt(),
     // Removes enum super constructor calls and cleans up effectively empty constructors.
-    ::EnumClassConstructorLowering,
+    ::EnumClassConstructorLowering.adapt(),
 
     // BLOCK DECOMPOSITION
     // Transforms statement-like-expression nodes into pure-statement. This should be the last
     // major modification to the AST before it's cleaned up.
-    asPostfixLowering(::BlockDecomposerLowering),
+    asPostfixLowering(::BlockDecomposerLowering).adapt(),
 
     // CLEANUP PHASE
     // This is the last set of passes to touchup the AST into a form that the CompilationUnitBuilder
     // is going to expect. Lowerings should have very limited scope.
 
     // Replace singleton object references with static field references.
-    ::SingletonReferencesLowering,
+    ::SingletonReferencesLowering.adapt(),
     // Reconstruct `for-loop` node for iterations over array and non-overflowing ranges.
-    { CreateForLoopLowering() },
+    ::CreateForLoopLowering.adapt(),
     // Convert some `when` statements to a `switch` java-like statement.
-    ::CreateSwitchLowering,
+    ::CreateSwitchLowering.adapt(),
     // Cleanup the unreachable code that exist after the statement-like-expression
     // transformation to make the IrTree valid.
-    { CleanupLowering() }
+    ::CleanupLowering.adapt(),
   )
 
 class LoweringPasses(
@@ -218,12 +233,13 @@ class LoweringPasses(
 
     jvmBackendContext =
       createJvmBackendContext(state, compilerConfiguration, moduleFragment, pluginContext)
+    val j2clBackendContext = J2clBackendContext(jvmBackendContext)
 
     // TODO(b/264284345): remove this pass when the bug is fixed.
     // Detect deserialized orphaned IR nodes due to b/264284345 and assign them a parent.
     FixOrphanNode(pluginContext).apply { moduleFragment.files.forEach(this::lower) }
 
-    loweringPassFactories.forEach { moduleFragment.lower(jvmBackendContext, it) }
+    loweringPassFactories.forEach { moduleFragment.lower(j2clBackendContext, it) }
 
     // Generate facade classes for JvmMultifileClass parts.
     GenerateMultifileFacadesLowering(jvmBackendContext).lower(moduleFragment)
@@ -243,19 +259,20 @@ private class PostfixLoweringAdapter(private val lowering: BodyLoweringPass) : F
 
 /** Lowers each file in a module, instantiating a new lowering for each file. */
 private fun IrModuleFragment.lower(
-  context: JvmBackendContext,
-  loweringFactory: LoweringPassFactory,
-) =
-  files.forEach {
+  context: J2clBackendContext,
+  loweringFactory: J2clLoweringPassFactory,
+) {
+  for (f in files) {
     try {
-      loweringFactory(context).lower(it)
+      loweringFactory(context).lower(f)
     } catch (e: CompilationException) {
-      e.file = it
+      e.file = f
       throw e
     } catch (e: Throwable) {
-      throw e.wrapWithCompilationException("Internal error in file lowering", it, null)
+      throw e.wrapWithCompilationException("Internal error in file lowering", f, null)
     }
   }
+}
 
 private fun createJvmBackendContext(
   state: GenerationState,
@@ -275,12 +292,6 @@ private fun createJvmBackendContext(
     irProviders = emptyList<IrProvider>(),
     irPluginContext = null,
   )
-
-class J2clBackendContext(jvmBackendContext: JvmBackendContext) :
-  CommonBackendContext by jvmBackendContext {
-  override val preferJavaLikeCounterLoop: Boolean
-    get() = false
-}
 
 /**
  * Preload symbols that are well-known to lowering passes that may not have been referenced by the

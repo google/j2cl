@@ -7,7 +7,6 @@ package com.google.j2cl.transpiler.frontend.kotlin.lower
 
 import org.jetbrains.kotlin.backend.common.ClassLoweringPass
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
-import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
 import org.jetbrains.kotlin.backend.jvm.ir.createJvmIrBuilder
 import org.jetbrains.kotlin.backend.jvm.ir.replaceThisByStaticReference
 import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
@@ -32,7 +31,8 @@ import org.jetbrains.kotlin.resolve.deprecation.DeprecationResolver
  */
 // MODIFIED BY GOOGLE
 // Removed compiler phase definition and increased visibility of the lowering class itself.
-internal class MoveOrCopyCompanionObjectFieldsLowering(val context: JvmBackendContext) :
+// Use our backend context wrapping the JvmBackendContext.
+internal class MoveOrCopyCompanionObjectFieldsLowering(val context: J2clBackendContext) :
   // END OF MODIFICATIONS
   ClassLoweringPass {
   override fun lower(irClass: IrClass) {
@@ -96,7 +96,7 @@ internal class MoveOrCopyCompanionObjectFieldsLowering(val context: JvmBackendCo
 
   private fun makeAnonymousInitializerStatic(
     oldInitializer: IrAnonymousInitializer,
-    newParent: IrClass
+    newParent: IrClass,
   ): IrAnonymousInitializer =
     with(oldInitializer) {
       val oldParent = parentAsClass
@@ -107,7 +107,7 @@ internal class MoveOrCopyCompanionObjectFieldsLowering(val context: JvmBackendCo
         replaceThisByStaticReference(
           context.cachedDeclarations.fieldsForObjectInstances,
           oldParent,
-          oldParent.thisReceiver!!
+          oldParent.thisReceiver!!,
         )
       }
     }
@@ -147,7 +147,8 @@ internal class MoveOrCopyCompanionObjectFieldsLowering(val context: JvmBackendCo
  */
 // MODIFIED BY GOOGLE
 // Removed compiler phase definition and increased visibility of the lowering class itself.
-internal class RemapObjectFieldAccesses(val context: JvmBackendContext) :
+// Use our backend context wrapping the JvmBackendContext.
+internal class RemapObjectFieldAccesses(val context: J2clBackendContext) :
   FileLoweringPass, IrElementTransformerVoid() {
   // END OF MODIFICATIONS
   override fun lower(irFile: IrFile) = irFile.transformChildrenVoid()
@@ -177,7 +178,7 @@ internal class RemapObjectFieldAccesses(val context: JvmBackendContext) :
           type,
           receiver = null,
           origin,
-          superQualifierSymbol
+          superQualifierSymbol,
         )
       }
     } ?: super.visitGetField(expression)
@@ -194,7 +195,7 @@ internal class RemapObjectFieldAccesses(val context: JvmBackendContext) :
           newValue,
           type,
           origin,
-          superQualifierSymbol
+          superQualifierSymbol,
         )
       }
     } ?: super.visitSetField(expression)
