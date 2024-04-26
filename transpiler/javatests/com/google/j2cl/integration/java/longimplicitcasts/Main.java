@@ -24,32 +24,25 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
   "NarrowingCompoundAssignment"
 })
 public class Main {
-  // Initialized with not-a-long.
-  public long fieldLong = 100;
+  private static class LongHolder {
+    // Initialized with not-a-long.
+    public long fieldLong = 100;
 
-  public void compareLong(long leftValue, long rightValue) {
-    assertTrue(leftValue == rightValue);
+    public LongHolder() {}
+
+    public LongHolder(long newFieldLong) {
+      this.fieldLong = newFieldLong;
+    }
   }
 
-  public Main() {}
-
-  public Main(long newFieldLong) {
-    this.fieldLong = newFieldLong;
-  }
-
-  private static class SubMain extends Main {
-    private SubMain(int newFieldInt) {
+  private static class SubLongHolder extends LongHolder {
+    private SubLongHolder(int newFieldInt) {
       super(newFieldInt); // To show that coercions occur even in super() params.
     }
   }
 
   public static void main(String... args) {
-    Main main = new Main();
-    main.main();
-  }
-
-  public void main() {
-    assertTrue(fieldLong == 100L);
+    assertTrue(new LongHolder().fieldLong == 100L);
 
     byte fbyte = 11;
     char fchar = 12;
@@ -183,22 +176,22 @@ public class Main {
     // Implicit casts to long when passing into a long parameter slot.
     {
       compareLong(fbyte, (long) fbyte);
-      assertTrue(new Main(fbyte).fieldLong == (long) fbyte);
+      assertTrue(new LongHolder(fbyte).fieldLong == (long) fbyte);
       compareLong(fchar, (long) fchar);
-      assertTrue(new Main(fchar).fieldLong == (long) fchar);
+      assertTrue(new LongHolder(fchar).fieldLong == (long) fchar);
       compareLong(fshort, (long) fshort);
-      assertTrue(new Main(fshort).fieldLong == (long) fshort);
+      assertTrue(new LongHolder(fshort).fieldLong == (long) fshort);
       compareLong(fint, (long) fint);
-      assertTrue(new Main(fint).fieldLong == (long) fint);
+      assertTrue(new LongHolder(fint).fieldLong == (long) fint);
       compareLong(flong, (long) flong);
-      assertTrue(new Main(flong).fieldLong == (long) flong);
+      assertTrue(new LongHolder(flong).fieldLong == (long) flong);
       // compareLong(ffloat, (long)ffloat); // illegal
-      // assertTrue(new Main(ffloat).fieldLong == (long) ffloat); // illegal
+      // assertTrue(new Container(ffloat).fieldLong == (long) ffloat); // illegal
       // compareLong(fdouble, (long)fdouble); // illegal
-      // assertTrue(new Main(fdouble).fieldLong == (long) fdouble); // illegal
+      // assertTrue(new Container(fdouble).fieldLong == (long) fdouble); // illegal
 
       // To show that coercions occur even in super() params.
-      assertTrue(new SubMain(fint).fieldLong == (long) fint);
+      assertTrue(new SubLongHolder(fint).fieldLong == (long) fint);
     }
 
     {
@@ -227,5 +220,9 @@ public class Main {
       longArray[i++] += 3;
       assertTrue(i == 1);
     }
+  }
+
+  public static void compareLong(long leftValue, long rightValue) {
+    assertTrue(leftValue == rightValue);
   }
 }
