@@ -122,12 +122,7 @@ internal object KotlinSource {
 
   fun literal(it: Int): Source = source("$it")
 
-  fun literal(it: Long): Source =
-    when (it) {
-      // Long.MIN_VALUE can not be represented as a literal in Kotlin.
-      Long.MIN_VALUE -> inParentheses(infix(literal(Long.MAX_VALUE), PLUS_OPERATOR, literal(1L)))
-      else -> source("${it}L")
-    }
+  fun literal(it: Long): Source = source("${it}L")
 
   fun literal(it: Float): Source =
     if (it.isNaN()) inParentheses(infix(literal(0f), DIVIDE_OPERATOR, literal(0f)))

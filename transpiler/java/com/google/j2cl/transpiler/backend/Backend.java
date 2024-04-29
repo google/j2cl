@@ -126,6 +126,7 @@ import com.google.j2cl.transpiler.passes.NormalizeLambdaExpressionsJ2kt;
 import com.google.j2cl.transpiler.passes.NormalizeLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeLongs;
 import com.google.j2cl.transpiler.passes.NormalizeMethodParametersJ2kt;
+import com.google.j2cl.transpiler.passes.NormalizeMinValueIntegralLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeMultiExpressions;
 import com.google.j2cl.transpiler.passes.NormalizeNativePropertyAccesses;
 import com.google.j2cl.transpiler.passes.NormalizeNullLiterals;
@@ -678,6 +679,7 @@ public enum Backend {
           VerifyReferenceScoping::new,
 
           // Normalizations
+          NormalizeMinValueIntegralLiterals::new,
           CreateImplicitConstructors::new,
           InsertExplicitSuperCalls::new,
           NormalizeLambdaExpressionsJ2kt::new,

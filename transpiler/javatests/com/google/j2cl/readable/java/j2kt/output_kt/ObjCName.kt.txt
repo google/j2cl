@@ -187,7 +187,7 @@ open class ObjCName {
   const val INT: Int = 123
 
   @kotlin.native.ObjCName("INT_MIN_VALUE_")
-  const val INT_MIN_VALUE: Int = -2147483648
+  const val INT_MIN_VALUE: Int = -2147483647 - 1
 
   @kotlin.native.ObjCName("INT_MAX_VALUE_")
   const val INT_MAX_VALUE: Int = 2147483647
@@ -196,7 +196,7 @@ open class ObjCName {
   const val LONG: Long = 123L
 
   @kotlin.native.ObjCName("LONG_MIN_VALUE_")
-  const val LONG_MIN_VALUE: Long = (9223372036854775807L + 1L)
+  const val LONG_MIN_VALUE: Long = -9223372036854775807L - 1L
 
   @kotlin.native.ObjCName("LONG_MAX_VALUE_")
   const val LONG_MAX_VALUE: Long = 9223372036854775807L
