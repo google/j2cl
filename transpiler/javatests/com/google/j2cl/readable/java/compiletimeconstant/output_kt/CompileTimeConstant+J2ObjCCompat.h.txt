@@ -32,6 +32,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 #define CompiletimeconstantCompileTimeConstant_MIN_SHORT -32768
 
+#define CompiletimeconstantCompileTimeConstant_MIN_INT ((jint) 0x80000000)
+
+#define CompiletimeconstantCompileTimeConstant_MIN_LONG ((jlong) 0x8000000000000000LL)
+
 #define CompiletimeconstantCompileTimeConstant_MIN_BYTE_WITH_CAST -128
 
 #define CompiletimeconstantCompileTimeConstant_MIN_SHORT_WITH_CAST -32768
@@ -106,6 +110,14 @@ NS_INLINE jbyte CompiletimeconstantCompileTimeConstant_get_MIN_BYTE(void) {
 
 NS_INLINE jshort CompiletimeconstantCompileTimeConstant_get_MIN_SHORT(void) {
  return J2ktCompiletimeconstantCompileTimeConstantCompanion.shared.MIN_SHORT_;
+}
+
+NS_INLINE jint CompiletimeconstantCompileTimeConstant_get_MIN_INT(void) {
+ return J2ktCompiletimeconstantCompileTimeConstantCompanion.shared.MIN_INT_;
+}
+
+NS_INLINE jlong CompiletimeconstantCompileTimeConstant_get_MIN_LONG(void) {
+ return J2ktCompiletimeconstantCompileTimeConstantCompanion.shared.MIN_LONG_;
 }
 
 NS_INLINE jbyte CompiletimeconstantCompileTimeConstant_get_MIN_BYTE_WITH_CAST(void) {

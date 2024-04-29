@@ -29,6 +29,10 @@ public class Main {
     return "signature int";
   }
 
+  public String foo(long a) {
+    return "signature long";
+  }
+
   public String foo(double a) {
     return "signature double";
   }
@@ -91,5 +95,16 @@ public class Main {
     assertTrue(m.foo(objectParent).equals("signature object"));
     assertTrue(m.foo(child, parent).equals("signature parent parent"));
     assertTrue(m.foo(objectChild, objectParent).equals("signature object object"));
+
+    assertTrue(m.foo(0x80000000).equals("signature int"));
+    assertTrue(m.foo(-0x80000000).equals("signature int"));
+    assertTrue(m.foo(-(0x80000000)).equals("signature int"));
+    assertTrue(m.foo(0x80000000 - 1).equals("signature int"));
+    assertTrue(m.foo(0x7fffffff + 1).equals("signature int"));
+    assertTrue(m.foo(0x7fffffff * 2).equals("signature int"));
+    assertTrue(m.foo(0x7fffffff << 2).equals("signature int"));
+
+    assertTrue(m.foo(0x80000000 - 1 + 1).equals("signature int"));
+    assertTrue(m.foo(2147483648L - 1 + 1).equals("signature long"));
   }
 }
