@@ -15,8 +15,10 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import com.google.common.collect.Lists;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
+import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.NewArray;
@@ -70,6 +72,19 @@ public class NormalizeArrayLiterals extends NormalizationPass {
             }
 
             ArrayLiteral arrayLiteral = (ArrayLiteral) newArray.getInitializer();
+            ArrayTypeDescriptor arrayTypeDescriptor = arrayLiteral.getTypeDescriptor();
+            if (arrayLiteral.getValueExpressions().isEmpty()
+                && !arrayTypeDescriptor.isUntypedArray()) {
+              // Replace the empty literal with the explicit new Component[0].
+              List<Expression> dimensions = Lists.newArrayList(NumberLiteral.fromInt(0));
+              AstUtils.addNullPadding(dimensions, arrayTypeDescriptor.getDimensions());
+              return NewArray.newBuilder()
+                  .setTypeDescriptor(newArray.getTypeDescriptor())
+                  .setDimensionExpressions(dimensions)
+                  .setInitializer(null)
+                  .build();
+            }
+
             if (arrayLiteral.getValueExpressions().size() != 1) {
               // we only support the case where the spread operation is the only element of the
               // array initializer.
