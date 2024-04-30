@@ -132,17 +132,13 @@ public class WasmGeneratorStage {
             generator.emitForEachType(library, generator::renderImportedMethods, "imports"));
 
     emitToFile(
-        "functions.wat",
-        generator -> generator.emitForEachType(library, generator::renderTypeMethods, "methods"));
-
-    emitToFile(
-        "globals.wat",
+        "contents.wat",
         generator -> {
+          generator.emitDataSegments(library);
           generator.emitGlobals(library);
           generator.emitClassDispatchTables(library, /* emitItableInitialization= */ false);
+          generator.emitForEachType(library, generator::renderTypeMethods, "methods");
         });
-
-    emitToFile("data.wat", generator -> generator.emitDataSegments(library));
 
     emitNameMappingFile(library, output);
     generateJsImportsFile();
@@ -261,7 +257,7 @@ public class WasmGeneratorStage {
     WasmConstructsGenerator generator = new WasmConstructsGenerator(environment, builder);
 
     methods.forEach(generator::renderMethod);
-    output.write("functions.wat", builder.buildToList());
+    output.write("contents.wat", builder.buildToList());
   }
 
   private List<ArrayTypeDescriptor> collectUsedNativeArrayTypes(Library library) {
