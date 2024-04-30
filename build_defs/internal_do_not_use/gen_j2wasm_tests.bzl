@@ -62,12 +62,15 @@ def gen_j2wasm_tests(
             tags = tags,
         )
 
+    test_targets = []
     for test_file in test_files:
         test_name = test_file[:-len(".java")]
         test_type = test_name.replace("/", ".")
         test_class = java_package + "." + test_type
+        test_target_name = test_name + test_suffix
+        test_targets.append(":" + test_target_name)
         j2wasm_test(
-            name = test_name + test_suffix,
+            name = test_target_name,
             deps = test_deps,
             srcs = [test_file],
             test_class = test_class,
@@ -75,3 +78,8 @@ def gen_j2wasm_tests(
             tags = ["gen_j2wasm_tests"] + tags,
             **kwargs
         )
+
+    native.test_suite(
+        name = name,
+        tests = test_targets,
+    )
