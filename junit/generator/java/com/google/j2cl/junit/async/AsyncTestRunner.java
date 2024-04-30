@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
 import org.junit.After;
 import org.junit.Before;
@@ -37,6 +38,7 @@ import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.MultipleFailureException;
 import org.junit.runners.model.Statement;
+import org.junit.runners.model.TestTimedOutException;
 
 /**
  * A test runner that allows for asynchronous test using LitenableFuture or a structural Promise.
@@ -91,9 +93,14 @@ public class AsyncTestRunner extends BlockJUnit4ClassRunner {
 
     @Override
     public void evaluate() throws Throwable {
+      long timeout = getTimeout(method);
       ListenableFuture<?> future = (ListenableFuture) method.invokeExplosively(test);
       try {
-        future.get(getTimeout(method), MILLISECONDS);
+        future.get(timeout, MILLISECONDS);
+      } catch (TimeoutException e) {
+        TestTimedOutException timedOutException = new TestTimedOutException(timeout, MILLISECONDS);
+        timedOutException.setStackTrace(e.getStackTrace());
+        throw timedOutException;
       } catch (ExecutionException e) {
         throw e.getCause();
       }
@@ -114,10 +121,15 @@ public class AsyncTestRunner extends BlockJUnit4ClassRunner {
 
     @Override
     public void evaluate() throws Throwable {
+      long timeout = getTimeout(method);
       Object promiseLike = method.invokeExplosively(test);
       registerCallbacks(promiseLike);
       try {
-        future.get(getTimeout(method), MILLISECONDS);
+        future.get(timeout, MILLISECONDS);
+      } catch (TimeoutException e) {
+        TestTimedOutException timedOutException = new TestTimedOutException(timeout, MILLISECONDS);
+        timedOutException.setStackTrace(e.getStackTrace());
+        throw timedOutException;
       } catch (ExecutionException e) {
         throw e.getCause();
       }
@@ -186,6 +198,16 @@ public class AsyncTestRunner extends BlockJUnit4ClassRunner {
       return new ListenableFutureStatement(method, test);
     }
     return new PromiseStatement(method, test);
+  }
+
+  @Override
+  protected Statement withPotentialTimeout(FrameworkMethod method, Object test, Statement next) {
+    if (method.getReturnType() == Void.TYPE) {
+      return super.withPotentialTimeout(method, test, next);
+    }
+    // Both ListenableFutureStatement and PromiseStatement wrap the future/promiselike test methods
+    // in a `Future.get(timeout)`, so we don't need to enforce the timeout here.
+    return next;
   }
 
   @Override
