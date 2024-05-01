@@ -73,15 +73,12 @@ def gen_j2cl_tests(
             experimental_enable_jspecify_support_do_not_enable_without_jspecify_static_checking_or_you_might_cause_an_outage = 1,
         )
 
-    test_targets = []
     for test_file in test_files:
         test_name = test_file[:-len(".java")]
         test_type = test_name.replace("/", ".")
         test_class = java_package + "." + test_type
-        test_target_name = test_name + test_suffix
-        test_targets.append(":" + test_target_name)
         j2cl_test(
-            name = test_target_name,
+            name = test_name + test_suffix,
             deps = test_deps,
             srcs = [test_file],
             test_class = test_class,
@@ -91,8 +88,3 @@ def gen_j2cl_tests(
             generate_build_test = generate_build_test,
             **kwargs
         )
-
-    native.test_suite(
-        name = name,
-        tests = test_targets,
-    )
