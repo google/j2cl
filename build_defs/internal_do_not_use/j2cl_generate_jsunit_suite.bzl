@@ -53,7 +53,6 @@ def j2cl_generate_jsunit_suite(name, test_class, deps, tags = []):
         name = name + "_lib",
         srcs = [test_input],
         deps = deps + [
-            Label("//:jsinterop-annotations-j2cl"),
             Label("//build_defs/internal_do_not_use:internal_junit_annotations"),
             Label("//build_defs/internal_do_not_use:internal_junit_runtime"),
             Label("//build_defs/internal_do_not_use:closure_testcase"),

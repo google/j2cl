@@ -122,6 +122,7 @@ j2cl_library(
     name = "internal_junit_runtime",
     testonly = 1,
     exports = [
+        "//:jsinterop-annotations-j2cl",
         "//junit/generator/java/com/google/j2cl/junit/runtime:jsunit_helpers-j2cl",
         "//junit/generator/java/com/google/j2cl/junit/runtime:testcase_violator-j2cl",
     ],
