@@ -18,7 +18,7 @@ goog.module("%MODULE_NAME%.j2wasm");
  * Instantiates the web assembly module. This is the recommended way to load & instantate
  * Wasm module.
  *
- * @param {string|!Promise<!Response>} urlOrResponse
+ * @param {string|!Response|!Promise<!Response>} urlOrResponse
  * @return {!Promise<!WebAssembly.Instance>}
  */
 async function instantiateStreaming(urlOrResponse) {
@@ -27,7 +27,7 @@ async function instantiateStreaming(urlOrResponse) {
 }
 
 /**
- * @param {string|!Promise<!Response>} urlOrResponse
+ * @param {string|!Response|!Promise<!Response>} urlOrResponse
  * @return {!Promise<!WebAssembly.Module>}
  * @suppress {checkTypes} Externs is missing options parameter (phase 2)
  */
