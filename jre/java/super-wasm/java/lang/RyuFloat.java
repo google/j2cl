@@ -78,24 +78,24 @@ final class RyuFloat {
     }
   }
 
-  public static String floatToString(AbstractStringBuilder sb, float value) {
+  public static String floatToString(float value) {
     // Step 1: Decode the floating point number, and unify normalized and subnormal cases.
     // First, handle all the trivial cases.
     if (Float.isNaN(value)) {
-      return resultOrSideEffect(sb, "NaN");
+      return "NaN";
     }
     if (value == Float.POSITIVE_INFINITY) {
-      return resultOrSideEffect(sb, "Infinity");
+      return "Infinity";
     }
     if (value == Float.NEGATIVE_INFINITY) {
-      return resultOrSideEffect(sb, "-Infinity");
+      return "-Infinity";
     }
     int bits = Float.floatToIntBits(value);
     if (bits == 0) {
-      return resultOrSideEffect(sb, "0.0");
+      return "0.0";
     }
     if (bits == 0x80000000) {
-      return resultOrSideEffect(sb, "-0.0");
+      return "-0.0";
     }
 
     // Otherwise extract the mantissa and exponent bits and run the full algorithm.
@@ -294,11 +294,7 @@ final class RyuFloat {
         index += olength + 1;
       }
     }
-    if (sb == null) {
-      return new String(result, 0, index);
-    }
-    sb.append0(result, 0, index);
-    return null;
+    return new String(result, 0, index);
   }
 
   private static int pow5bits(int e) {
@@ -355,13 +351,5 @@ final class RyuFloat {
       factor /= 10;
     }
     return length;
-  }
-
-  private static String resultOrSideEffect(AbstractStringBuilder sb, String s) {
-    if (sb != null) {
-      sb.append0(s);
-      return null;
-    }
-    return s;
   }
 }

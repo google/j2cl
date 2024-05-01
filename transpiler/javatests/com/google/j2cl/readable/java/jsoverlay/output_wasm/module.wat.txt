@@ -548,7 +548,6 @@
  (local $n (ref null extern))
  (local $a i32)
  (local $b (ref null $java.lang.String))
- (local $$qualifier (ref null $java.lang.String))
  (local $this (ref null $jsoverlay.Main))
  (local.set $this (ref.cast (ref $jsoverlay.Main) (local.get $this.untyped)))
  (block
@@ -577,13 +576,10 @@
   ;;@ jsoverlay/Main.java:114:4
   (drop (call $m_baz__$devirt__jsoverlay_Main_NativeJsTypeWithOverlay__int@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay (local.get $n)))
   ;;@ jsoverlay/Main.java:116:4
-  (local.set $b (block (result (ref null $java.lang.String))
-   (local.set $$qualifier (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $$getString_|10|__java_lang_String_<once>_@jsoverlay.Main )))
-   (call_ref $function.m_concat__java_lang_String__java_lang_String (ref.as_non_null (local.get $$qualifier))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (block (result (ref null $java.lang.Object))
-    (call $$clinit__void_<once>_@jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay )
-    (global.get $staticField@jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay)
-   ))(struct.get $java.lang.String.vtable $m_concat__java_lang_String__java_lang_String (struct.get $java.lang.String $vtable(local.get $$qualifier))))
-  ))
+  (local.set $b (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $$getString_|10|__java_lang_String_<once>_@jsoverlay.Main )(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (block (result (ref null $java.lang.Object))
+   (call $$clinit__void_<once>_@jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay )
+   (global.get $staticField@jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay)
+  ))))
  )
 )
 (elem declare func $m_test__void@jsoverlay.Main)

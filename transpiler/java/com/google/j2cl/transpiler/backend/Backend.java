@@ -433,6 +433,7 @@ public enum Backend {
           PropagateConstants::new,
           StaticallyEvaluateStringConcatenation::new,
           StaticallyEvaluateStringComparison::new,
+          () -> new InsertStringConversions(/* skipPrimitivesAndNonNullableString= */ false),
           ImplementStringConcatenation::new,
           // Must run after NormalizeSwitchStatements, ImplementStringConcatenation.
           InsertJsEnumBoxingAndUnboxingConversions::new,
@@ -580,6 +581,7 @@ public enum Backend {
           PropagateCompileTimeConstants::new,
           StaticallyEvaluateStringConcatenation::new,
           StaticallyEvaluateStringComparison::new,
+          () -> new InsertStringConversions(/* skipPrimitivesAndNonNullableString= */ false),
           ImplementStringConcatenation::new,
           // Must run after NormalizeSwitchStatements, ImplementStringConcatenation.
           InsertJsEnumBoxingAndUnboxingConversions::new,
@@ -629,7 +631,6 @@ public enum Backend {
           InsertExceptionConversions::new,
           InsertExceptionConversionsWasm::new,
           InsertExternConversionsWasm::new,
-
           RemoveCustomIsInstanceMethods::new,
           RemoveNoopStatements::new,
 

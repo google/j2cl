@@ -184,37 +184,17 @@ final class IntegralToString {
   }
 
   /** Equivalent to Long.toString(l). */
-  public static String longToString(long l) {
-    return convertLong(null, l);
-  }
-  /** Equivalent to sb.append(Long.toString(l)). */
-  public static void appendLong(AbstractStringBuilder sb, long l) {
-    convertLong(sb, l);
-  }
-  /**
-   * Returns the string representation of n and leaves sb alone if sb is null. Returns null and
-   * appends the string representation of n to sb if sb is non-null.
-   */
-  private static String convertLong(AbstractStringBuilder sb, long n) {
+  public static String longToString(long n) {
     int i = (int) n;
     if (i == n) {
-      if (sb == null) {
-        return intToString(i);
-      }
-      appendInt(sb, i);
-      return null;
+      return intToString(i);
     }
     boolean negative = (n < 0);
     if (negative) {
       n = -n;
       if (n < 0) {
         // If -n is still negative, n is Long.MIN_VALUE
-        String quickResult = "-9223372036854775808";
-        if (sb != null) {
-          sb.append0(quickResult);
-          return null;
-        }
-        return quickResult;
+        return "-9223372036854775808";
       }
     }
     int bufLen = 20; // Maximum number of chars in result
@@ -260,12 +240,7 @@ final class IntegralToString {
     if (negative) {
       buf[--cursor] = '-';
     }
-    if (sb != null) {
-      sb.append0(buf, cursor, bufLen - cursor);
-      return null;
-    } else {
-      return new String(buf, cursor, bufLen - cursor);
-    }
+    return new String(buf, cursor, bufLen - cursor);
   }
   /**
    * Inserts the unsigned decimal integer represented by n into the specified character array

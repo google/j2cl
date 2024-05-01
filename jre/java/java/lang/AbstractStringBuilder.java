@@ -25,6 +25,7 @@ import static javaemul.internal.InternalPreconditions.checkStringElementIndex;
  */
 abstract class AbstractStringBuilder implements CharSequence, Appendable {
 
+  // TODO(b/258835054): Consider using NativeString directly.
   String string;
 
   AbstractStringBuilder(String string) {
@@ -108,6 +109,14 @@ abstract class AbstractStringBuilder implements CharSequence, Appendable {
   @Override
   public String toString() {
     return string;
+  }
+
+  void append0(char[] x, int start, int len) {
+    string += String.valueOf(x, start, len);
+  }
+
+  void append0(String x) {
+    string += x;
   }
 
   void appendCodePoint0(int x) {

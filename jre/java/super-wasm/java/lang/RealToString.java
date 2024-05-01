@@ -27,35 +27,20 @@ final class RealToString {
 
   public static String doubleToString(double d) {
     if (JAVA_TOSTRING) {
-      return RyuDouble.doubleToString(null, d);
+      return RyuDouble.doubleToString(d);
     }
     return fromNumber(d);
   }
 
-  public static void appendDouble(AbstractStringBuilder sb, double d) {
-    if (JAVA_TOSTRING) {
-      var unused = RyuDouble.doubleToString(sb, d);
-      return;
-    }
-    sb.append0(fromNumber(d));
-  }
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Number.prototype.toString.call")
   private static native String fromNumber(double d);
 
   public static String floatToString(float f) {
     if (JAVA_TOSTRING) {
-      return RyuFloat.floatToString(null, f);
+      return RyuFloat.floatToString(f);
     }
     return fromNumber(f);
-  }
-
-  public static void appendFloat(AbstractStringBuilder sb, float f) {
-    if (JAVA_TOSTRING) {
-      var unused = RyuFloat.floatToString(sb, f);
-      return;
-    }
-    sb.append0(fromNumber(f));
   }
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Number.prototype.toString.call")

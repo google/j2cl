@@ -29,6 +29,17 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors;
  * with the string type in a string conversion context.
  */
 public class InsertStringConversions extends NormalizationPass {
+
+  private final boolean skipPrimitivesAndNonNullableString;
+
+  public InsertStringConversions() {
+    this(true);
+  }
+
+  public InsertStringConversions(boolean skipPrimitivesAndNonNullableString) {
+    this.skipPrimitivesAndNonNullableString = skipPrimitivesAndNonNullableString;
+  }
+
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(new ConversionContextVisitor(getContextRewriter()));
@@ -38,19 +49,16 @@ public class InsertStringConversions extends NormalizationPass {
     return new ConversionContextVisitor.ContextRewriter() {
       @Override
       public Expression rewriteStringContext(Expression expression) {
-        TypeDescriptor typeDescriptor = expression.getTypeDescriptor();
         if (isNonNullString(expression)) {
           return expression;
         }
-
-        // Normally Java would call String.valueOf on a primitive but there is no need in J2CL
-        // because JS converts primitives to String in the presence of a + operator.
-        // We make an exception for Char which is represented as a JS number and hence needs to
-        // be explicitly converted.
-        // NOTE: Primitive longs are not represented as primitives in JS but are implemented as
-        // instances of a class where we can rely on toString().
-        if (TypeDescriptors.isNonVoidPrimitiveType(typeDescriptor)
-            && !TypeDescriptors.isPrimitiveChar(typeDescriptor)) {
+        if (skipPrimitivesAndNonNullableString && isNonCharPrimitive(expression)) {
+          // Normally Java would call String.valueOf on a primitive but there is no need in JS
+          // output because JS converts primitives to String in the presence of a + operator.
+          // We make an exception for Char which is represented as a JS number and hence needs to
+          // be explicitly converted.
+          // NOTE: Primitive longs are not represented as primitives in JS but are implemented as
+          // instances of a class where we can rely on toString().
           return expression;
         }
 
@@ -73,5 +81,11 @@ public class InsertStringConversions extends NormalizationPass {
     }
     BinaryExpression binaryExpression = (BinaryExpression) expression;
     return AstUtils.matchesStringContext(binaryExpression);
+  }
+
+  private static boolean isNonCharPrimitive(Expression expression) {
+    TypeDescriptor typeDescriptor = expression.getTypeDescriptor();
+    return TypeDescriptors.isNonVoidPrimitiveType(typeDescriptor)
+        && !TypeDescriptors.isPrimitiveChar(typeDescriptor);
   }
 }

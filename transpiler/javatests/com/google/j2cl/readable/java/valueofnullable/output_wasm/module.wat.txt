@@ -79,17 +79,13 @@
 (func $$init__void_$p_valueofnullable_ValueOfNullable@valueofnullable.ValueOfNullable
  (param $this (ref null $valueofnullable.ValueOfNullable))
  ;;@ valueofnullable/ValueOfNullable.java:18:13
- (local $$qualifier (ref null $java.lang.String))
  (block
   ;;@ valueofnullable/ValueOfNullable.java:19:2
   (struct.set $valueofnullable.ValueOfNullable $nullableString@valueofnullable.ValueOfNullable (local.get $this) (call $$getString_|b|__java_lang_String_<once>_@valueofnullable.ValueOfNullable ))
   ;;@ valueofnullable/ValueOfNullable.java:20:2
   (struct.set $valueofnullable.ValueOfNullable $someChar@valueofnullable.ValueOfNullable (local.get $this) (i32.const 97))
   ;;@ valueofnullable/ValueOfNullable.java:21:2
-  (struct.set $valueofnullable.ValueOfNullable $result@valueofnullable.ValueOfNullable (local.get $this) (block (result (ref null $java.lang.String))
-   (local.set $$qualifier (call $m_valueOf__char__java_lang_String@java.lang.String (struct.get_u $valueofnullable.ValueOfNullable $someChar@valueofnullable.ValueOfNullable (local.get $this))))
-   (call_ref $function.m_concat__java_lang_String__java_lang_String (ref.as_non_null (local.get $$qualifier))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (struct.get $valueofnullable.ValueOfNullable $nullableString@valueofnullable.ValueOfNullable (local.get $this)))(struct.get $java.lang.String.vtable $m_concat__java_lang_String__java_lang_String (struct.get $java.lang.String $vtable(local.get $$qualifier))))
-  ))
+  (struct.set $valueofnullable.ValueOfNullable $result@valueofnullable.ValueOfNullable (local.get $this) (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__char__java_lang_String@java.lang.String (struct.get_u $valueofnullable.ValueOfNullable $someChar@valueofnullable.ValueOfNullable (local.get $this)))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (struct.get $valueofnullable.ValueOfNullable $nullableString@valueofnullable.ValueOfNullable (local.get $this)))))
  )
 )
 

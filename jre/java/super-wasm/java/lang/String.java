@@ -431,8 +431,7 @@ public final class String implements Comparable<String>, CharSequence, Serializa
     getChars0(srcBegin, srcEnd, dst, dstBegin);
   }
 
-  // Visible to provide fast path for internal uses.
-  void getChars0(int srcBegin, int srcEnd, char[] dst, int dstBegin) {
+  private void getChars0(int srcBegin, int srcEnd, char[] dst, int dstBegin) {
     int unused = nativeGetChars(nativeSubstr(asStringView(value), srcBegin, srcEnd), dst, dstBegin);
   }
 
@@ -731,6 +730,11 @@ public final class String implements Comparable<String>, CharSequence, Serializa
       end--;
     }
     return start > 0 || end < length ? substring(start, end) : this;
+  }
+
+  // TODO(b/335375385): Replace with the concat instance method.
+  static String concat(String str1, String str2) {
+    return new String(nativeConcat(str1.value, str2.value));
   }
 
   static String fromJsString(NativeString o) {

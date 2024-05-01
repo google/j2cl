@@ -76,24 +76,24 @@ final class RyuDouble {
     }
   }
 
-  public static String doubleToString(AbstractStringBuilder sb, double value) {
+  public static String doubleToString(double value) {
     // Step 1: Decode the floating point number, and unify normalized and subnormal cases.
     // First, handle all the trivial cases.
     if (Double.isNaN(value)) {
-      return resultOrSideEffect(sb, "NaN");
+      return "NaN";
     }
     if (value == Double.POSITIVE_INFINITY) {
-      return resultOrSideEffect(sb, "Infinity");
+      return "Infinity";
     }
     if (value == Double.NEGATIVE_INFINITY) {
-      return resultOrSideEffect(sb, "-Infinity");
+      return "-Infinity";
     }
     long bits = Double.doubleToLongBits(value);
     if (bits == 0) {
-      return resultOrSideEffect(sb, "0.0");
+      return "0.0";
     }
     if (bits == 0x8000000000000000L) {
-      return resultOrSideEffect(sb, "-0.0");
+      return "-0.0";
     }
 
     // Otherwise extract the mantissa and exponent bits and run the full algorithm.
@@ -312,11 +312,7 @@ final class RyuDouble {
         index += olength + 1;
       }
     }
-    if (sb == null) {
-      return new String(result, 0, index);
-    }
-    sb.append0(result, 0, index);
-    return null;
+    return new String(result, 0, index);
   }
 
   private static int pow5bits(int e) {
@@ -463,13 +459,5 @@ final class RyuDouble {
                 >>> 21)
             + (bits13 << 10))
         >>> actualShift;
-  }
-
-  private static String resultOrSideEffect(AbstractStringBuilder sb, String s) {
-    if (sb != null) {
-      sb.append0(s);
-      return null;
-    }
-    return s;
   }
 }

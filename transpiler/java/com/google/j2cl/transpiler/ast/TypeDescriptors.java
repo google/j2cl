@@ -78,9 +78,6 @@ public class TypeDescriptors {
   public DeclaredTypeDescriptor javaLangRunnable;
   public DeclaredTypeDescriptor javaLangString;
 
-  @QualifiedBinaryName("java.lang.StringBuilder")
-  public DeclaredTypeDescriptor javaLangStringBuilder;
-
   public DeclaredTypeDescriptor javaLangThrowable;
 
   public DeclaredTypeDescriptor javaUtilArrays;

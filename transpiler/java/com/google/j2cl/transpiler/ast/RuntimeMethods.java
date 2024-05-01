@@ -156,13 +156,15 @@ public final class RuntimeMethods {
   }
 
   /** Create a call to String.concat method. */
-  public static MethodCall createStringConcatMethodCall(Expression qualifier, Expression argument) {
+  public static MethodCall createStringConcatMethodCall(Expression left, Expression right) {
     return MethodCall.Builder.from(
             TypeDescriptors.get()
                 .javaLangString
-                .getMethodDescriptor("concat", TypeDescriptors.get().javaLangString))
-        .setQualifier(qualifier)
-        .setArguments(argument)
+                .getMethodDescriptor(
+                    "concat",
+                    TypeDescriptors.get().javaLangString,
+                    TypeDescriptors.get().javaLangString))
+        .setArguments(left, right)
         .build();
   }
 

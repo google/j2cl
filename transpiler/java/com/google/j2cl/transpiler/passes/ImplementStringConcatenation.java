@@ -15,40 +15,15 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import com.google.common.collect.ImmutableList;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
-import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.MethodCall;
-import com.google.j2cl.transpiler.ast.MultiExpression;
-import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.StringLiteral;
-import com.google.j2cl.transpiler.ast.TypeDescriptor;
-import com.google.j2cl.transpiler.ast.TypeDescriptors;
-import com.google.j2cl.transpiler.ast.Variable;
-import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 
-/**
- * Rewrite String concatenation using a {@see StringBuilder}
- *
- * <p>
- *
- * <pre>
- *   {@code "foo" + a + "bar"}
- *   is rewritten as
- *   {@code
- *   $string_builder = new StringBuilder();
- *   $string_builder.append("foo");
- *   $string_builder.append(a);
- *   $string_builder.append("bar);
- *   $string_builder.toString();
- *   }
- * </pre>
- */
+/** Rewrite String concatenation to {@code String.concat}. */
 public class ImplementStringConcatenation extends NormalizationPass {
 
   @Override
@@ -60,103 +35,24 @@ public class ImplementStringConcatenation extends NormalizationPass {
             if (!binaryExpression.isStringConcatenation()) {
               return binaryExpression;
             }
-            if (isInStringConcatenationChain()) {
-              // When we have a chain of String concatenation: "Foo" + a + "Bar", we rewrite the
-              // entire chain when we exit the top-most BinaryOperation of the chain in order to use
-              // use StringBuilder instance.
-              return binaryExpression;
+
+            Expression left = binaryExpression.getLeftOperand();
+            Expression right = binaryExpression.getRightOperand();
+
+            // Skip empty string on concat; esp. happens with common patterns like ("" + x).
+            if (isEmptyString(left)) {
+              return right;
+            }
+            if (isEmptyString(right)) {
+              return left;
             }
 
-            ImmutableList<Expression> operands = collectConcatOperands(binaryExpression);
-
-            // Create String.valueOf and String.concat call for the simple cases.
-            if (operands.size() == 1) {
-              return RuntimeMethods.createStringValueOfMethodCall(operands.get(0));
-            }
-
-            if (operands.size() == 2) {
-              return RuntimeMethods.createStringConcatMethodCall(
-                  RuntimeMethods.createStringValueOfMethodCall(operands.get(0)),
-                  RuntimeMethods.createStringValueOfMethodCall(operands.get(1)));
-            }
-
-            // Use StringBuilder when concatenating more than 2 strings.
-            MultiExpression.Builder multiExpressionBuilder = MultiExpression.newBuilder();
-
-            // $stringBuilder = new StringBuilder()
-            Variable stringBuilder =
-                Variable.newBuilder()
-                    .setFinal(true)
-                    .setName("$stringBuilder")
-                    .setTypeDescriptor(TypeDescriptors.get().javaLangStringBuilder)
-                    .build();
-
-            multiExpressionBuilder.addExpressions(
-                VariableDeclarationExpression.newBuilder()
-                    .addVariableDeclaration(
-                        stringBuilder,
-                        NewInstance.Builder.from(
-                                TypeDescriptors.get()
-                                    .javaLangStringBuilder
-                                    .getDefaultConstructorMethodDescriptor())
-                            .build())
-                    .build());
-
-            // Add  $stringBuilder.append() calls
-            for (Expression operand : operands) {
-              multiExpressionBuilder.addExpressions(
-                  MethodCall.Builder.from(
-                          TypeDescriptors.get()
-                              .javaLangStringBuilder
-                              .getMethodDescriptor(
-                                  "append",
-                                  getAppendParameterTypeDescriptor(operand.getTypeDescriptor())))
-                      .setQualifier(stringBuilder.createReference())
-                      .setArguments(operand)
-                      .build());
-            }
-
-            // $stringBuilder.toString()
-            multiExpressionBuilder.addExpressions(
-                MethodCall.Builder.from(
-                        TypeDescriptors.get().javaLangStringBuilder.getMethodDescriptor("toString"))
-                    .setQualifier(stringBuilder.createReference())
-                    .build());
-
-            return multiExpressionBuilder.build();
-          }
-
-          private boolean isInStringConcatenationChain() {
-            return getParent() instanceof BinaryExpression
-                && ((BinaryExpression) getParent()).getOperator() == BinaryOperator.PLUS;
+            return RuntimeMethods.createStringConcatMethodCall(left, right);
           }
         });
   }
 
-  private static TypeDescriptor getAppendParameterTypeDescriptor(TypeDescriptor typeDescriptor) {
-    // There is an append() overload for String and every primitives.
-    if (typeDescriptor.isPrimitive() || TypeDescriptors.isJavaLangString(typeDescriptor)) {
-      return typeDescriptor;
-    }
-
-    return TypeDescriptors.get().javaLangObject;
-  }
-
-  private static ImmutableList<Expression> collectConcatOperands(Expression expression) {
-    if (expression instanceof BinaryExpression
-        && ((BinaryExpression) expression).isStringConcatenation()) {
-      BinaryExpression binaryExpression = (BinaryExpression) expression;
-      return ImmutableList.<Expression>builder()
-          .addAll(collectConcatOperands(binaryExpression.getLeftOperand()))
-          .addAll(collectConcatOperands(binaryExpression.getRightOperand()))
-          .build();
-    }
-
-    if (expression instanceof StringLiteral && ((StringLiteral) expression).getValue().isEmpty()) {
-      // Skip empty string on concat; esp. happens with common patterns like ("" + x).
-      return ImmutableList.of();
-    }
-
-    return ImmutableList.of(expression);
+  private static boolean isEmptyString(Expression expression) {
+    return expression instanceof StringLiteral && ((StringLiteral) expression).getValue().isEmpty();
   }
 }
