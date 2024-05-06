@@ -19,6 +19,7 @@
 package jsvarargs
 
 import javaemul.lang.*
+import java.lang.Integer
 import jsinterop.annotations.JsConstructor
 import jsinterop.annotations.JsFunction
 import jsinterop.annotations.JsMethod
@@ -85,9 +86,9 @@ open class Main {
  @ObjCName("testStaticMethodFirst")
  open fun testStaticMethodFirst() {
   Main.f2(1, 2)
-  Main.generics<Int?>(Int.valueOf(1), Int.valueOf(2))
+  Main.generics<Int?>(Integer.valueOf(1), Integer.valueOf(2))
   Main.f2(1, 2)
-  Main.generics<Int?>(Int.valueOf(1), Int.valueOf(2))
+  Main.generics<Int?>(Integer.valueOf(1), Integer.valueOf(2))
   Main.f2()
   Main.generics<Any?>()
   Main.f2()
@@ -96,12 +97,12 @@ open class Main {
   Main.f2(*intArrayOf(1, 2)!!)
   Main.f2(*intArrayOf(1, 2)!!)
   Main.generics<IntArray?>(intArrayOf(1, 2))
-  Main.generics<Int?>(*arrayOf<Int?>(Int.valueOf(1), Int.valueOf(2))!!)
+  Main.generics<Int?>(*arrayOf<Int?>(Integer.valueOf(1), Integer.valueOf(2))!!)
   Main.f2(*intArrayOf()!!)
   Main.f2(*intArrayOf()!!)
   Main.generics<IntArray?>(intArrayOf())
   val ints: IntArray? = intArrayOf(1, 2)
-  val integers: Array<Int?>? = arrayOf<Int?>(Int.valueOf(1), Int.valueOf(2))
+  val integers: Array<Int?>? = arrayOf<Int?>(Integer.valueOf(1), Integer.valueOf(2))
   Main.f2(*ints!!)
   Main.f2(*ints!!)
   Main.generics<Int?>(*integers!!)

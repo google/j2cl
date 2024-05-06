@@ -19,6 +19,8 @@
 package arithmeticexpressions
 
 import javaemul.lang.*
+import java.lang.Integer
+import java.lang.Long
 import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
@@ -29,7 +31,6 @@ import kotlin.Double
 import kotlin.Float
 import kotlin.Int
 import kotlin.IntArray
-import kotlin.Long
 import kotlin.LongArray
 import kotlin.OptIn
 import kotlin.Short
@@ -102,7 +103,7 @@ open class ArithmeticExpressions {
   a = a.shl(1L.toInt())
   a = (a.toLong() + 1L).toInt()
   a = (a.toLong() / 1L).toInt()
-  a = (a.toDouble() + Double.MAX_VALUE).toInt()
+  a = (a.toDouble() + java.lang.Double.MAX_VALUE).toInt()
   k = k.or(true)
   var s: Short = 10.toShort()
   k = run {
@@ -113,14 +114,14 @@ open class ArithmeticExpressions {
   q = 3.ushr(2)
   val x: Byte = ((a.toShort().toInt() + b.toShort().toByte().toInt()) * c.toByte().toShort().toInt()).toByte()
   val y: Char = 'y'
-  val z: Long? = Long.valueOf(121L)
+  val z: kotlin.Long? = Long.valueOf(121L)
   k = y.code.toLong() == z!!.toLong()
  }
 
  @JvmField
  @ObjCName("bar_")
- var bar: Long = run {
-  val ___value: Long = ArithmeticExpressions.foo
+ var bar: kotlin.Long = run {
+  val ___value: kotlin.Long = ArithmeticExpressions.foo
   ArithmeticExpressions.foo = ArithmeticExpressions.foo + 1L
   ___value
  }
@@ -179,7 +180,7 @@ open class ArithmeticExpressions {
   val ___index_6: Int = 0
   val ___array_7: LongArray? = ___array_6
   val ___index_7: Int = ___index_6
-  val ___value_5: Long = ___array_6!![___index_6] + 1L
+  val ___value_5: kotlin.Long = ___array_6!![___index_6] + 1L
   ___array_7!![___index_7] = ___value_5
   val booleans: BooleanArray? = null
   booleans!![0] = booleans!![0].or(true)
@@ -197,44 +198,44 @@ open class ArithmeticExpressions {
 
  @ObjCName("testCompoundBoxedTypes")
  open fun testCompoundBoxedTypes() {
-  var c: Int? = Int.valueOf(1000)
-  var d: Int? = Int.valueOf(10000)
-  d = Int.valueOf(d!!.toInt() + c!!.toInt())
+  var c: Int? = Integer.valueOf(1000)
+  var d: Int? = Integer.valueOf(10000)
+  d = Integer.valueOf(d!!.toInt() + c!!.toInt())
   var i: Int = 43
-  d = Int.valueOf(d!!.toInt() + i)
-  d = Int.valueOf(d!!.toInt().shl(i))
+  d = Integer.valueOf(d!!.toInt() + i)
+  d = Integer.valueOf(d!!.toInt().shl(i))
   i = i + c!!.toInt()
   var e: Int? = run {
-   c = Int.valueOf(c!!.toInt() + 1)
+   c = Integer.valueOf(c!!.toInt() + 1)
    c
   }
   e = run {
-   c = Int.valueOf(c!!.toInt() + 1)
+   c = Integer.valueOf(c!!.toInt() + 1)
    c
   }
-  var e2: Double? = Double.valueOf(100.0)
-  e2 = Double.valueOf(e2!!.toDouble() + 1.0)
+  var e2: Double? = java.lang.Double.valueOf(100.0)
+  e2 = java.lang.Double.valueOf(e2!!.toDouble() + 1.0)
   var f: Int? = run {
    val ___value: Int? = c
-   c = Int.valueOf(c!!.toInt() + 1)
+   c = Integer.valueOf(c!!.toInt() + 1)
    ___value
   }
   f = run {
    val ___value_1: Int? = c
-   c = Int.valueOf(c!!.toInt() + 1)
+   c = Integer.valueOf(c!!.toInt() + 1)
    ___value_1
   }
-  var b: Byte? = Byte.valueOf(0.toByte())
-  b = Byte.valueOf((b!!.toByte().toInt() + 1.toByte().toInt()).toByte())
+  var b: Byte? = java.lang.Byte.valueOf(0.toByte())
+  b = java.lang.Byte.valueOf((b!!.toByte().toInt() + 1.toByte().toInt()).toByte())
   var ch: Char? = Char.valueOf('c')
   ch = Char.valueOf((ch!!.toChar().code + '\u0001'.code).toChar())
   run {
-   f = Int.valueOf(f!!.toInt() + 1)
+   f = Integer.valueOf(f!!.toInt() + 1)
    f
   }!!.toInt()
   run {
    val ___value_2: Int? = f
-   f = Int.valueOf(f!!.toInt() - 1)
+   f = Integer.valueOf(f!!.toInt() - 1)
    ___value_2
   }!!.toInt()
   open class Ref<T> internal constructor() {
@@ -242,18 +243,18 @@ open class ArithmeticExpressions {
    internal var field_pp_arithmeticexpressions: T? = null
   }
   val ref: Ref<Byte?>? = null
-  ref!!.field_pp_arithmeticexpressions = Byte.valueOf((ref!!.field_pp_arithmeticexpressions!!.toByte().toInt() + 1.toByte().toInt()).toByte())
+  ref!!.field_pp_arithmeticexpressions = java.lang.Byte.valueOf((ref!!.field_pp_arithmeticexpressions!!.toByte().toInt() + 1.toByte().toInt()).toByte())
   val n: Int = 1 + ref!!.field_pp_arithmeticexpressions!!.toByte().toInt()
  }
 
  @JvmField
- internal var intField_pp_arithmeticexpressions: Long = 0L
+ internal var intField_pp_arithmeticexpressions: kotlin.Long = 0L
 
  @ObjCName("testExtendedOperands")
  open fun testExtendedOperands() {
-  var boxedInteger: Int? = Int.valueOf(3)
+  var boxedInteger: Int? = Integer.valueOf(3)
   var i: Int = 0
-  var l: Long = 0L
+  var l: kotlin.Long = 0L
   var d: Double = 0.0
   l = (2 - boxedInteger!!.toInt()).toLong() - 2L
   l = 2.or(boxedInteger!!.toInt()).toLong().or(2L)
@@ -267,7 +268,7 @@ open class ArithmeticExpressions {
    l
   }.toDouble()
   l = run {
-   boxedInteger = Int.valueOf(run {
+   boxedInteger = Integer.valueOf(run {
     i = 20
     i
    })
@@ -281,12 +282,12 @@ open class ArithmeticExpressions {
  open fun testEffectivelyFinalVariableInAssignmentExpression(
   @ObjCName("withBoolean") condition: Boolean
  ) {
-  var effectivelyFinal: Long = 0L
+  var effectivelyFinal: kotlin.Long = 0L
   if (condition && run {
    effectivelyFinal = this.bar
    effectivelyFinal
   } != 0.toLong()) {
-   val unused: Long = effectivelyFinal
+   val unused: kotlin.Long = effectivelyFinal
   }
  }
 
@@ -300,12 +301,12 @@ open class ArithmeticExpressions {
 
   @JvmField
   @ObjCName("one_")
-  var one: Long = 1L
+  var one: kotlin.Long = 1L
 
   @JvmField
   @ObjCName("foo_")
-  var foo: Long = run {
-   val ___value: Long = ArithmeticExpressions.one
+  var foo: kotlin.Long = run {
+   val ___value: kotlin.Long = ArithmeticExpressions.one
    ArithmeticExpressions.one = ArithmeticExpressions.one + 1L
    ___value
   }
@@ -324,7 +325,7 @@ open class ArithmeticExpressions {
   internal fun testSideEffect_private_2() {
    val ___qualifier: ArithmeticExpressions? = ArithmeticExpressions.getWithSideEffect_private_2()
    val ___qualifier_1: ArithmeticExpressions? = ___qualifier
-   val ___value: Long = ___qualifier!!.intField_pp_arithmeticexpressions + 5.toLong()
+   val ___value: kotlin.Long = ___qualifier!!.intField_pp_arithmeticexpressions + 5.toLong()
    ___qualifier_1!!.intField_pp_arithmeticexpressions = ___value
   }
 
@@ -334,12 +335,12 @@ open class ArithmeticExpressions {
   }
 
   @JvmField
-  internal var counter_private_2: Long = 0L
+  internal var counter_private_2: kotlin.Long = 0L
 
   @JvmStatic
-  internal fun incrementCounter_private_2(): Long {
+  internal fun incrementCounter_private_2(): kotlin.Long {
    return run {
-    val ___value: Long = ArithmeticExpressions.counter_private_2 + 1L
+    val ___value: kotlin.Long = ArithmeticExpressions.counter_private_2 + 1L
     ArithmeticExpressions.counter_private_2 = ___value
     ___value
    }

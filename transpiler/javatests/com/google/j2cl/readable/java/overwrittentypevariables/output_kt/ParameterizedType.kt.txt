@@ -19,6 +19,7 @@
 package overwrittentypevariables
 
 import javaemul.lang.*
+import java.lang.Integer
 import kotlin.Int
 import kotlin.OptIn
 import kotlin.String
@@ -33,6 +34,6 @@ fun interface ParameterizedType<F, T>: overwrittentypevariables.otherpkg.Paramet
 
 open class ParameterizedTypeImpl internal constructor(): ParameterizedType<String?, Int?> {
  override fun accept(value: String?): Int? {
-  return Int.valueOf(1)
+  return Integer.valueOf(1)
  }
 }

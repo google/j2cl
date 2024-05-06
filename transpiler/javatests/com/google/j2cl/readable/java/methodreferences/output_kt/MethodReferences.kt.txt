@@ -40,7 +40,7 @@ import kotlin.run
 open class MethodReferences<T> {
  @ObjCName("isA")
  open fun isA(): Boolean? {
-  return Boolean.valueOf(true)
+  return java.lang.Boolean.valueOf(true)
  }
 
  internal open fun self_pp_methodreferences(): Any? {
@@ -48,7 +48,7 @@ open class MethodReferences<T> {
  }
 
  internal open fun sameAs_pp_methodreferences(n: Number?): Boolean? {
-  return Boolean.valueOf(false)
+  return java.lang.Boolean.valueOf(false)
  }
 
  internal open fun main_pp_methodreferences() {

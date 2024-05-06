@@ -19,6 +19,8 @@
 package lambdas
 
 import javaemul.lang.*
+import java.lang.Integer
+import java.lang.Long
 import java.lang.RuntimeException
 import java.lang.Void
 import javaemul.lang.JavaIterable
@@ -31,7 +33,6 @@ import kotlin.Double
 import kotlin.Enum
 import kotlin.Error
 import kotlin.Int
-import kotlin.Long
 import kotlin.Number
 import kotlin.OptIn
 import kotlin.String
@@ -171,7 +172,7 @@ open class Lambdas {
    throw RuntimeException()
   })
   this.callWithBiFunction_pp_lambdas<Any?>(Lambdas.BiFunction<Any?, String?, Double?> { x_1: Any?, y_1: String? ->
-   return@BiFunction Double.valueOf(3.0)
+   return@BiFunction java.lang.Double.valueOf(3.0)
   })
   val f: Lambdas.Function<in T, *>? = Lambdas.Function { item: T ->
    return@Function Long.valueOf(1L)
@@ -266,7 +267,7 @@ open class Lambdas {
     f1_1!!.apply(null)
    }
    val stringJsSupplier: Lambdas.JsSupplier<Int?>? = Lambdas.JsSupplier<Int?> {
-    return@JsSupplier Int.valueOf(1)
+    return@JsSupplier Integer.valueOf(1)
    }
    stringJsSupplier!!.get()
    val equals: Lambdas.Equals<Any?>? = stringJsSupplier as Lambdas.Equals<Any?>?

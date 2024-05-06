@@ -158,7 +158,7 @@ open class CastPrimitives {
 
  @ObjCName("testUnboxAndWiden")
  open fun testUnboxAndWiden() {
-  val boxedByte: Byte? = Byte.valueOf(0.toByte())
+  val boxedByte: Byte? = java.lang.Byte.valueOf(0.toByte())
   val s: Short = boxedByte!!.toByte().toShort()
   val i: Int = boxedByte!!.toByte().toInt()
   val l: Long = boxedByte!!.toByte().toLong()

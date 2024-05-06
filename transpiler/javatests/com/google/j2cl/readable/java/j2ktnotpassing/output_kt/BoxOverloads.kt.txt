@@ -46,7 +46,7 @@ open class BoxOverloads {
   @ObjCName("testBoxedOverload")
   fun testBoxedOverload() {
    BoxOverloads.boxedOverload(1.25)
-   BoxOverloads.boxedOverload(Double.valueOf(1.25))
+   BoxOverloads.boxedOverload(java.lang.Double.valueOf(1.25))
    BoxOverloads.boxedOverload(Double(1.25))
    BoxOverloads.boxedOverload(1.toDouble())
   }
@@ -57,7 +57,7 @@ open class BoxOverloads {
    @ObjCName("withJ2ktnotpassingBoxOverloads_Generic") generic: BoxOverloads.Generic<Double>
   ) {
    generic.overload(1.25)
-   generic.overload(Double.valueOf(1.25))
+   generic.overload(java.lang.Double.valueOf(1.25))
    generic.overload(1.toDouble())
   }
  }

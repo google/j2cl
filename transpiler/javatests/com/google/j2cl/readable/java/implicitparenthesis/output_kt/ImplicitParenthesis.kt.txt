@@ -19,6 +19,7 @@
 package implicitparenthesis
 
 import javaemul.lang.*
+import java.lang.Integer
 import kotlin.Boolean
 import kotlin.Int
 import kotlin.OptIn
@@ -50,14 +51,14 @@ open class ImplicitParenthesis {
    primitiveInt = 5
    boxedInt = Int(10)
    primitiveInt = run {
-    boxedInt = Int.valueOf(boxedInt!!.toInt() + primitiveInt)
+    boxedInt = Integer.valueOf(boxedInt!!.toInt() + primitiveInt)
     boxedInt
    }!!.toInt()
    assert(primitiveInt == 15)
    primitiveInt = 5
    boxedInt = Int(10)
    primitiveInt = run {
-    boxedInt = Int.valueOf(primitiveInt)
+    boxedInt = Integer.valueOf(primitiveInt)
     boxedInt
    }!!.toInt()
    assert(primitiveInt == 5)
@@ -65,14 +66,14 @@ open class ImplicitParenthesis {
    boxedInt = Int(10)
    primitiveInt = run {
     val ___value: Int? = boxedInt
-    boxedInt = Int.valueOf(boxedInt!!.toInt() + 1)
+    boxedInt = Integer.valueOf(boxedInt!!.toInt() + 1)
     ___value
    }!!.toInt()
    assert(primitiveInt == 10)
    primitiveInt = 5
    boxedInt = Int(10)
    primitiveInt = run {
-    boxedInt = Int.valueOf(boxedInt!!.toInt() + 1)
+    boxedInt = Integer.valueOf(boxedInt!!.toInt() + 1)
     boxedInt
    }!!.toInt()
    assert(primitiveInt == 11)
@@ -89,8 +90,8 @@ open class ImplicitParenthesis {
    assert(primitiveInt == 5)
    primitiveInt = 5
    boxedInt = Int(10)
-   boxedBoolean = Boolean.valueOf(true)
-   boxedBoolean = Boolean.valueOf(boxedInt!!.toInt() == primitiveInt)
+   boxedBoolean = java.lang.Boolean.valueOf(true)
+   boxedBoolean = java.lang.Boolean.valueOf(boxedInt!!.toInt() == primitiveInt)
    assert(boxedBoolean!!.booleanValue() == false)
   }
 
