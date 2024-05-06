@@ -19,6 +19,7 @@
 package autoboxing
 
 import javaemul.lang.*
+import java.lang.Character
 import java.lang.Integer
 import java.lang.Void
 import jsinterop.annotations.JsMethod
@@ -97,7 +98,7 @@ open class AutoBoxing {
  open fun box(
   @ObjCName("withChar") c: Char
  ): Char? {
-  return Char.valueOf(c)
+  return Character.valueOf(c)
  }
 
  @ObjCName("unbox")
@@ -240,7 +241,7 @@ open class AutoBoxing {
   var boxI: Int? = Integer.valueOf(i)
   var boxL: Long? = java.lang.Long.valueOf(l)
   var boxS: Short? = java.lang.Short.valueOf(s)
-  var boxC: Char? = Char.valueOf(c)
+  var boxC: Char? = Character.valueOf(c)
   boxBool = java.lang.Boolean.valueOf(true)
   boxD = java.lang.Double.valueOf(2.2)
   boxB = java.lang.Byte.valueOf(1.toByte())
@@ -248,8 +249,8 @@ open class AutoBoxing {
   boxI = Integer.valueOf(1)
   boxL = java.lang.Long.valueOf(2L)
   boxS = java.lang.Short.valueOf(1.toShort())
-  boxC = Char.valueOf('\u0001')
-  boxC = Char.valueOf('a')
+  boxC = Character.valueOf('\u0001')
+  boxC = Character.valueOf('a')
   bool = this.unbox(java.lang.Boolean.valueOf(bool) as Boolean?)
   d = this.unbox(java.lang.Double.valueOf(d) as Double?)
   b = this.unbox(java.lang.Byte.valueOf(b) as Byte?)
@@ -257,7 +258,7 @@ open class AutoBoxing {
   i = this.unbox(Integer.valueOf(i) as Int?)
   l = this.unbox(java.lang.Long.valueOf(l) as Long?)
   s = this.unbox(java.lang.Short.valueOf(s) as Short?)
-  c = this.unbox(Char.valueOf(c) as Char?)
+  c = this.unbox(Character.valueOf(c) as Char?)
   var unusedDouble: Double = this.takesObjectAndReturnsPrimitiveDouble(4)
   unusedDouble = this.sumWithoutBoxing(1, 2.2, 1.toByte(), 1.toShort(), 2.2.toFloat())
   unusedDouble = this.sumWithoutBoxingJsVarargs(1, 2.2, 1.toByte(), 1.toShort(), 2.2.toFloat())
@@ -266,7 +267,7 @@ open class AutoBoxing {
   o = java.lang.Double.valueOf(2.2)
   o = java.lang.Float.valueOf(1.1f)
   o = Integer.valueOf(1)
-  o = Char.valueOf('a')
+  o = Character.valueOf('a')
   boxBool = java.lang.Boolean.valueOf(boxBool!!.booleanValue() && boxBool!!.booleanValue())
   boxD = java.lang.Double.valueOf(boxD!!.toDouble() + boxD!!.toDouble())
   boxI = Integer.valueOf(boxI!!.toInt() / boxI!!.toInt())

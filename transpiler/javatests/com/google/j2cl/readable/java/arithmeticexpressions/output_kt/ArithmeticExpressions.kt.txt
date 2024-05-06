@@ -19,6 +19,7 @@
 package arithmeticexpressions
 
 import javaemul.lang.*
+import java.lang.Character
 import java.lang.Integer
 import java.lang.Long
 import kotlin.Any
@@ -59,7 +60,7 @@ open class ArithmeticExpressions {
   i = 9223372036854775807L.toInt()
   f = 9223372036854775807L.toFloat()
   d = 9223372036854775807L.toDouble()
-  val o: Any? = Char.valueOf(c)
+  val o: Any? = Character.valueOf(c)
   s = (o as Char).code.toShort()
  }
 
@@ -227,8 +228,8 @@ open class ArithmeticExpressions {
   }
   var b: Byte? = java.lang.Byte.valueOf(0.toByte())
   b = java.lang.Byte.valueOf((b!!.toByte().toInt() + 1.toByte().toInt()).toByte())
-  var ch: Char? = Char.valueOf('c')
-  ch = Char.valueOf((ch!!.toChar().code + '\u0001'.code).toChar())
+  var ch: Char? = Character.valueOf('c')
+  ch = Character.valueOf((ch!!.toChar().code + '\u0001'.code).toChar())
   run {
    f = Integer.valueOf(f!!.toInt() + 1)
    f
