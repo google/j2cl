@@ -288,9 +288,13 @@ public class CharacterTest extends TestCase {
     char[] chars = Character.toChars(0x10346);
     assertEquals(0xD800, chars[0]);
     assertEquals(0xDF46, chars[1]);
+    assertEquals(0xD800, Character.highSurrogate(0x10346));
+    assertEquals(0xDF46, Character.lowSurrogate(0x10346));
     assertEquals(2, Character.toChars(67328, chars, 0));
     assertEquals(0xD801, chars[0]);
     assertEquals(0xDF00, chars[1]);
+    assertEquals(0xD801, Character.highSurrogate(67328));
+    assertEquals(0xDF00, Character.lowSurrogate(67328));
     assertEquals(1, Character.toChars(65, chars, 0));
     assertEquals('A', chars[0]);
     assertTrue(Character.isSupplementaryCodePoint(0x10346));
@@ -299,6 +303,9 @@ public class CharacterTest extends TestCase {
     assertTrue(Character.isValidCodePoint(65));
     assertFalse(Character.isValidCodePoint(0x1FFFFFFF));
     assertEquals(0x10346, Character.toCodePoint('\uD800', '\uDF46'));
+    assertEquals(
+        0x10346,
+        Character.toCodePoint(Character.highSurrogate(0x10346), Character.lowSurrogate(0x10346)));
   }
 
   public void testLetter() {

@@ -406,8 +406,7 @@ public final class Character implements Comparable<Character>, Serializable {
 
     if (codePoint >= MIN_SUPPLEMENTARY_CODE_POINT) {
       return new char[] {
-          getHighSurrogate(codePoint),
-          getLowSurrogate(codePoint),
+        highSurrogate(codePoint), lowSurrogate(codePoint),
       };
     } else {
       return new char[] {
@@ -420,8 +419,8 @@ public final class Character implements Comparable<Character>, Serializable {
     checkArgument(isValidCodePoint(codePoint));
 
     if (codePoint >= MIN_SUPPLEMENTARY_CODE_POINT) {
-      dst[dstIndex++] = getHighSurrogate(codePoint);
-      dst[dstIndex] = getLowSurrogate(codePoint);
+      dst[dstIndex++] = highSurrogate(codePoint);
+      dst[dstIndex] = lowSurrogate(codePoint);
       return 2;
     } else {
       dst[dstIndex] = (char) codePoint;
@@ -500,27 +499,25 @@ public final class Character implements Comparable<Character>, Serializable {
   }
 
   /**
-   * Computes the high surrogate character of the UTF16 representation of a
-   * non-BMP code point. See {@link getLowSurrogate}.
+   * Computes the high surrogate character of the UTF16 representation of a non-BMP code point. See
+   * {@link lowSurrogate}.
    *
-   * @param codePoint requested codePoint, required to be >=
-   *          MIN_SUPPLEMENTARY_CODE_POINT
+   * @param codePoint requested codePoint, required to be >= MIN_SUPPLEMENTARY_CODE_POINT
    * @return high surrogate character
    */
-  static char getHighSurrogate(int codePoint) {
+  public static char highSurrogate(int codePoint) {
     return (char) (MIN_HIGH_SURROGATE
         + (((codePoint - MIN_SUPPLEMENTARY_CODE_POINT) >> 10) & 1023));
   }
 
   /**
-   * Computes the low surrogate character of the UTF16 representation of a
-   * non-BMP code point. See {@link getHighSurrogate}.
+   * Computes the low surrogate character of the UTF16 representation of a non-BMP code point. See
+   * {@link highSurrogate}.
    *
-   * @param codePoint requested codePoint, required to be >=
-   *          MIN_SUPPLEMENTARY_CODE_POINT
+   * @param codePoint requested codePoint, required to be >= MIN_SUPPLEMENTARY_CODE_POINT
    * @return low surrogate character
    */
-  static char getLowSurrogate(int codePoint) {
+  public static char lowSurrogate(int codePoint) {
     return (char) (MIN_LOW_SURROGATE + ((codePoint - MIN_SUPPLEMENTARY_CODE_POINT) & 1023));
   }
 
