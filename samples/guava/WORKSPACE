@@ -13,20 +13,6 @@ load_j2cl_repo_deps()
 load("@com_google_j2cl//build_defs:workspace.bzl", "setup_j2cl_workspace")
 setup_j2cl_workspace()
 
-http_archive(
-    name = "com_google_elemental2",
-    strip_prefix = "elemental2-master",
-    url = "https://github.com/google/elemental2/archive/master.zip",
-)
-
-load("@com_google_elemental2//build_defs:repository.bzl", "load_elemental2_repo_deps")
-
-load_elemental2_repo_deps()
-
-load("@com_google_elemental2//build_defs:workspace.bzl", "setup_elemental2_workspace")
-
-setup_elemental2_workspace()
-
 _MAVEN_CENTRAL_URLS = ["https://repo1.maven.org/maven2/"]
 
 
@@ -70,7 +56,6 @@ j2cl_maven_import_external(
     server_urls = _MAVEN_CENTRAL_URLS,
     deps = [
         "@com_google_code_findbugs_jsr305-j2cl",
-        "@com_google_elemental2//:elemental2-promise-j2cl",
         "@com_google_errorprone_error_prone_annotations-j2cl",
         "@com_google_j2cl//:jsinterop-annotations-j2cl",
         "@com_google_j2objc_annotations-j2cl",
