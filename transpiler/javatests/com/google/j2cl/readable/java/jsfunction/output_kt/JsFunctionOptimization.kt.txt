@@ -45,7 +45,7 @@ open class JsFunctionOptimization {
         val r1: Int = r
         val var1: Int = `var`
         val x1: String? = x
-        return java.lang.String.valueOf(r) + s + x + `var` + object : JsFunctionOptimization.F {
+        return String.valueOf(r) + s + x + `var` + object : JsFunctionOptimization.F {
          override fun m(s: String?): String? {
           return "" + s + r1 + x1 + var1
          }
@@ -57,7 +57,7 @@ open class JsFunctionOptimization {
         val r1: Int = r
         val var1: Int = `var`
         val x1: String? = x
-        return java.lang.String.valueOf(r) + s + x + `var` + object : Any() {
+        return String.valueOf(r) + s + x + `var` + object : Any() {
          fun sayHey(): String? {
           return "Hey"
          }
