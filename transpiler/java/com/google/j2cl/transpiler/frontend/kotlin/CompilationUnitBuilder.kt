@@ -88,6 +88,7 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.getTypeSubstitutionMap
 import com.google.j2cl.transpiler.frontend.kotlin.ir.hasVoidReturn
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isAdaptedFunctionReference
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isClinit
+import com.google.j2cl.transpiler.frontend.kotlin.ir.isSuperCall
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isSynthetic
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isUnitInstanceReference
 import com.google.j2cl.transpiler.frontend.kotlin.ir.javaName
@@ -1112,14 +1113,17 @@ class CompilationUnitBuilder(
       }
     }
 
+    val qualifier = convertQualifier(functionAccess)
+    val isStaticDispatch = qualifier !is SuperReference && functionAccess.isSuperCall
     return MethodCall.Builder.from(
         adjustEnumConstructorDescriptor(
           environment.getMethodDescriptor(callee, typeSubstitutionMap),
           functionAccess,
         )
       )
-      .setQualifier(convertQualifier(functionAccess))
+      .setQualifier(qualifier)
       .setArguments(convertExpressions(functionAccess.getArguments()))
+      .setStaticDispatch(isStaticDispatch)
       .setSourcePosition(getSourcePosition(functionAccess))
       .build()
   }

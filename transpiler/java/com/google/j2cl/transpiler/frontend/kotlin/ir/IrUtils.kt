@@ -223,6 +223,9 @@ fun IrFunctionAccessExpression.getArguments(): List<IrExpression> = buildList {
   }
 }
 
+val IrFunctionAccessExpression.isSuperCall
+  get() = (this as? IrCall)?.superQualifierSymbol != null
+
 fun IrFunction.getParameters(): List<IrValueParameter> =
   when (this) {
     is IrSimpleFunction ->
