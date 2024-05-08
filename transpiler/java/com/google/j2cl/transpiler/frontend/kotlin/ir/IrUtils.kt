@@ -201,9 +201,6 @@ private val IrDeclarationContainer.gettersAndSetters: List<IrFunction>
 val IrField?.isJvmField: Boolean
   get() = this != null && hasAnnotation(JvmAbi.JVM_FIELD_ANNOTATION_FQ_NAME)
 
-val IrDeclarationContainer.fields: List<IrField>
-  get() = declarations.filterIsInstance<IrField>().filter { it.isReal }.toList()
-
 val IrClass.enumEntries: List<IrEnumEntry>
   get() = declarations.filterIsInstance<IrEnumEntry>()
 

@@ -36,7 +36,6 @@ import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.Visibility
 import com.google.j2cl.transpiler.frontend.jdt.PackageAnnotationsResolver
 import com.google.j2cl.transpiler.frontend.kotlin.ir.enumEntries
-import com.google.j2cl.transpiler.frontend.kotlin.ir.fields
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getAllTypeParameters
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getJsEnumInfo
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getJsInfo
@@ -115,6 +114,7 @@ import org.jetbrains.kotlin.ir.util.isFromJava
 import org.jetbrains.kotlin.ir.util.isInterface
 import org.jetbrains.kotlin.ir.util.isKFunction
 import org.jetbrains.kotlin.ir.util.isLocal
+import org.jetbrains.kotlin.ir.util.isReal
 import org.jetbrains.kotlin.ir.util.isStatic
 import org.jetbrains.kotlin.ir.util.isTopLevel
 import org.jetbrains.kotlin.ir.util.isTypeParameter
@@ -132,9 +132,9 @@ import org.jetbrains.kotlin.types.Variance
 class KotlinEnvironment(
   private val pluginContext: IrPluginContext,
   private val packageAnnotationsResolver: PackageAnnotationsResolver,
-  private val jvmbackendContext: JvmBackendContext,
+  private val jvmBackendContext: JvmBackendContext,
 ) {
-  private val builtinsResolver = BuiltinsResolver(pluginContext, jvmbackendContext)
+  private val builtinsResolver = BuiltinsResolver(pluginContext, jvmBackendContext)
   private val typeDescriptorByIrType: MutableMap<IrType, TypeDescriptor> = HashMap()
   private val primitiveTypeDescriptorsByIrType: Map<IrType, TypeDescriptor> =
     mapOf(
@@ -257,7 +257,7 @@ class KotlinEnvironment(
       .setDeclaredFieldDescriptorsFactory { _ ->
         ImmutableList.copyOf(
           irClass.enumEntries.map(::getDeclaredFieldDescriptor) +
-            irClass.fields.map(::getDeclaredFieldDescriptor).toList()
+            irClass.getDeclaredFields().map(::getDeclaredFieldDescriptor).toList()
         )
       }
       .setSuperTypeDescriptorFactory { _ ->
@@ -448,7 +448,7 @@ class KotlinEnvironment(
       .setDeclaredFieldDescriptorsFactory { _ ->
         ImmutableList.copyOf(
           classDeclaration.enumEntries.map(::getDeclaredFieldDescriptor) +
-            classDeclaration.fields.map { getFieldDescriptor(it, emptyMap()) }
+            classDeclaration.getDeclaredFields().map { getFieldDescriptor(it, emptyMap()) }
         )
       }
       .setSuperTypeDescriptorFactory { _ ->
@@ -572,7 +572,7 @@ class KotlinEnvironment(
 
     return MethodDescriptor.newBuilder()
       .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
-      .setName(irFunction.javaName(jvmbackendContext))
+      .setName(irFunction.javaName(jvmBackendContext))
       .setParameterDescriptors(parameterDescriptors.build())
       .setReturnTypeDescriptor(
         if (irFunction.hasVoidReturn) {
@@ -802,6 +802,21 @@ class KotlinEnvironment(
       annotations,
       abbreviation,
     )
+  }
+
+  fun IrClass.getDeclaredFields(): Set<IrField> {
+    var fields = declarations.filterIsInstance<IrField>().filter { it.isReal }.toSet()
+
+    val companion = declarations.filterIsInstance<IrClass>().firstOrNull(IrClass::isCompanion)
+    if (companion != null) {
+      // When the IrClass is built from bytecode, kotlinc emits the field containing the unique
+      // instance the companion of the class because it's an implementation detail of the Kotlin/JVM
+      // backend. We will fix the glitch here in order to have a consistent model on the J2CL side.
+      // TODO(b/335000000): Remove this if we store Kotlin metadata in our type model.
+      fields += jvmBackendContext.cachedDeclarations.getFieldForObjectInstance(companion)
+    }
+
+    return fields
   }
 }
 
