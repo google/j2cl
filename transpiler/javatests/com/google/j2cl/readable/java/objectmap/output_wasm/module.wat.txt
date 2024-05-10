@@ -1,15 +1,15 @@
- ;;; Code for objectmap.ObjectMap.$Overlay [type definition]
- (type $objectmap.ObjectMap.$Overlay (sub (struct
-  (field $vtable (ref $objectmap.ObjectMap.$Overlay.vtable))
-  (field $itable (ref $itable))
-  ))
- )
- (type $objectmap.ObjectMap.$Overlay.vtable (sub (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  ))
- )
+;;; Code for objectmap.ObjectMap.$Overlay [type definition]
+(type $objectmap.ObjectMap.$Overlay (sub (struct
+ (field $vtable (ref $objectmap.ObjectMap.$Overlay.vtable))
+ (field $itable (ref $itable))
+ ))
+)
+(type $objectmap.ObjectMap.$Overlay.vtable (sub (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ ))
+)
 
- ;;; Code for objectmap.ObjectMap [type definition]
+;;; Code for objectmap.ObjectMap [type definition]
 
 ;;; Code for objectmap.ObjectMap.$Overlay [imports]
 
@@ -20,13 +20,6 @@
  (result (ref null extern))
 )
 
-;;; Code for objectmap.ObjectMap.$Overlay [vtable.init]
-(global $objectmap.ObjectMap.$Overlay.vtable (ref $objectmap.ObjectMap.$Overlay.vtable)
- (struct.new $objectmap.ObjectMap.$Overlay.vtable
-  (ref.func $$getClassImpl__java_lang_Class@objectmap.ObjectMap.$Overlay)
- )
-)
-
 ;;; Code for objectmap.ObjectMap.$Overlay [static fields]
 (global $$class-initialized@objectmap.ObjectMap.$Overlay (mut i32)
  (i32.const 0)
@@ -34,8 +27,12 @@
 (global $$class@objectmap.ObjectMap.$Overlay (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $$string_|objectmap.Ob...|@objectmap.ObjectMap.$Overlay (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
+
+;;; Code for objectmap.ObjectMap.$Overlay [vtable.init]
+(global $objectmap.ObjectMap.$Overlay.vtable (ref $objectmap.ObjectMap.$Overlay.vtable)
+ (struct.new $objectmap.ObjectMap.$Overlay.vtable
+  (ref.func $$getClassImpl__java_lang_Class@objectmap.ObjectMap.$Overlay)
+ )
 )
 
 ;;; Code for objectmap.ObjectMap.$Overlay [methods]
@@ -106,19 +103,5 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@objectmap.ObjectMap.$Overlay)
-
-;;; String $Overlay.$getString_|objectmap.Ob...|()
-(func $$getString_|objectmap.Ob...|__java_lang_String_<once>_@objectmap.ObjectMap.$Overlay
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|objectmap.Ob...|@objectmap.ObjectMap.$Overlay)))
-   (then
-    (return (global.get $$string_|objectmap.Ob...|@objectmap.ObjectMap.$Overlay))
-   )
-  )
-  (global.set $$string_|objectmap.Ob...|@objectmap.ObjectMap.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "objectmap.ObjectMap$$Overlay")))
-  (return (global.get $$string_|objectmap.Ob...|@objectmap.ObjectMap.$Overlay))
- )
-)
 
 ;;; Code for objectmap.ObjectMap [methods]

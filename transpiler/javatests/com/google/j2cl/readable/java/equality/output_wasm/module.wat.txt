@@ -1,21 +1,29 @@
- ;;; Code for equality.Equality [type definition]
- (type $equality.Equality (sub $java.lang.Object (struct
-  (field $vtable (ref $equality.Equality.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $equality.Equality.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_test__void (ref $function.m_test__void))
-  ))
- )
+;;; Code for equality.Equality [type definition]
+(type $equality.Equality (sub $java.lang.Object (struct
+ (field $vtable (ref $equality.Equality.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $equality.Equality.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_test__void (ref $function.m_test__void))
+ ))
+)
 
 ;;; Code for equality.Equality [imports]
+
+;;; Code for equality.Equality [static fields]
+(global $$class-initialized@equality.Equality (mut i32)
+ (i32.const 0)
+)
+(global $$class@equality.Equality (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for equality.Equality [vtable.init]
 (global $equality.Equality.vtable (ref $equality.Equality.vtable)
@@ -27,17 +35,6 @@
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_test__void@equality.Equality)
  )
-)
-
-;;; Code for equality.Equality [static fields]
-(global $$class-initialized@equality.Equality (mut i32)
- (i32.const 0)
-)
-(global $$class@equality.Equality (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|equality.Equ...|@equality.Equality (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for equality.Equality [methods]
@@ -159,17 +156,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@equality.Equality)
-
-;;; String Equality.$getString_|equality.Equ...|()
-(func $$getString_|equality.Equ...|__java_lang_String_<once>_@equality.Equality
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|equality.Equ...|@equality.Equality)))
-   (then
-    (return (global.get $$string_|equality.Equ...|@equality.Equality))
-   )
-  )
-  (global.set $$string_|equality.Equ...|@equality.Equality (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "equality.Equality")))
-  (return (global.get $$string_|equality.Equ...|@equality.Equality))
- )
-)

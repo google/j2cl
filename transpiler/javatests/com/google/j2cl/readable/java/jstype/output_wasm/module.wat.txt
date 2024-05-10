@@ -1,40 +1,40 @@
- ;;; Code for jstype.SomeJsType.Star [type definition]
+;;; Code for jstype.SomeJsType.Star [type definition]
 
- ;;; Code for jstype.SomeJsType.Wildcard [type definition]
+;;; Code for jstype.SomeJsType.Wildcard [type definition]
 
- ;;; Code for jstype.SomeJsType.Star.$Overlay [type definition]
- (type $jstype.SomeJsType.Star.$Overlay.vtable (sub (struct
-  ))
- )
+;;; Code for jstype.SomeJsType.Star.$Overlay [type definition]
+(type $jstype.SomeJsType.Star.$Overlay.vtable (sub (struct
+ ))
+)
 
- ;;; Code for jstype.SomeJsType.Wildcard.$Overlay [type definition]
- (type $jstype.SomeJsType.Wildcard.$Overlay.vtable (sub (struct
-  ))
- )
+;;; Code for jstype.SomeJsType.Wildcard.$Overlay [type definition]
+(type $jstype.SomeJsType.Wildcard.$Overlay.vtable (sub (struct
+ ))
+)
 
- ;;; Code for jstype.SomeJsType [type definition]
- (type $jstype.SomeJsType (sub $java.lang.Object (struct
-  (field $vtable (ref $jstype.SomeJsType.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $packageField@jstype.SomeJsType (mut i32))
-  (field $privateField@jstype.SomeJsType (mut i32))
-  (field $protectedField@jstype.SomeJsType (mut i32))
-  (field $publicField@jstype.SomeJsType (mut i32))
-  ))
- )
- (type $jstype.SomeJsType.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_packageMethod__void_$pp_jstype (ref $function.m_packageMethod__void_$pp_jstype))
-  (field $m_protectedMethod__void (ref $function.m_protectedMethod__void))
-  (field $m_publicMethod__void (ref $function.m_publicMethod__void))
-  (field $m_useFieldsAndMethods__void (ref $function.m_useFieldsAndMethods__void))
-  ))
- )
+;;; Code for jstype.SomeJsType [type definition]
+(type $jstype.SomeJsType (sub $java.lang.Object (struct
+ (field $vtable (ref $jstype.SomeJsType.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $packageField@jstype.SomeJsType (mut i32))
+ (field $privateField@jstype.SomeJsType (mut i32))
+ (field $protectedField@jstype.SomeJsType (mut i32))
+ (field $publicField@jstype.SomeJsType (mut i32))
+ ))
+)
+(type $jstype.SomeJsType.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_packageMethod__void_$pp_jstype (ref $function.m_packageMethod__void_$pp_jstype))
+ (field $m_protectedMethod__void (ref $function.m_protectedMethod__void))
+ (field $m_publicMethod__void (ref $function.m_publicMethod__void))
+ (field $m_useFieldsAndMethods__void (ref $function.m_useFieldsAndMethods__void))
+ ))
+)
 
 ;;; Code for jstype.SomeJsType.Star [imports]
 
@@ -45,6 +45,30 @@
 ;;; Code for jstype.SomeJsType.Wildcard.$Overlay [imports]
 
 ;;; Code for jstype.SomeJsType [imports]
+
+;;; Code for jstype.SomeJsType [static fields]
+(global $$class-initialized@jstype.SomeJsType (mut i32)
+ (i32.const 0)
+)
+(global $$class@jstype.SomeJsType (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for jstype.SomeJsType.Star.$Overlay [static fields]
+(global $$class-initialized@jstype.SomeJsType.Star.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@jstype.SomeJsType.Star.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for jstype.SomeJsType.Wildcard.$Overlay [static fields]
+(global $$class-initialized@jstype.SomeJsType.Wildcard.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@jstype.SomeJsType.Wildcard.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for jstype.SomeJsType [vtable.init]
 (global $jstype.SomeJsType.vtable (ref $jstype.SomeJsType.vtable)
@@ -59,39 +83,6 @@
   (ref.func $m_publicMethod__void@jstype.SomeJsType)
   (ref.func $m_useFieldsAndMethods__void@jstype.SomeJsType)
  )
-)
-
-;;; Code for jstype.SomeJsType [static fields]
-(global $$class-initialized@jstype.SomeJsType (mut i32)
- (i32.const 0)
-)
-(global $$class@jstype.SomeJsType (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|jstype.SomeJ...|@jstype.SomeJsType (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for jstype.SomeJsType.Star.$Overlay [static fields]
-(global $$class-initialized@jstype.SomeJsType.Star.$Overlay (mut i32)
- (i32.const 0)
-)
-(global $$class@jstype.SomeJsType.Star.$Overlay (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|jstype.SomeJ...|@jstype.SomeJsType.Star.$Overlay (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for jstype.SomeJsType.Wildcard.$Overlay [static fields]
-(global $$class-initialized@jstype.SomeJsType.Wildcard.$Overlay (mut i32)
- (i32.const 0)
-)
-(global $$class@jstype.SomeJsType.Wildcard.$Overlay (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|jstype.SomeJ...|@jstype.SomeJsType.Wildcard.$Overlay (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for jstype.SomeJsType.Star [methods]
@@ -130,20 +121,6 @@
  )
 )
 
-;;; String $Overlay.$getString_|jstype.SomeJ...|()
-(func $$getString_|jstype.SomeJ...|__java_lang_String_<once>_@jstype.SomeJsType.Star.$Overlay
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|jstype.SomeJ...|@jstype.SomeJsType.Star.$Overlay)))
-   (then
-    (return (global.get $$string_|jstype.SomeJ...|@jstype.SomeJsType.Star.$Overlay))
-   )
-  )
-  (global.set $$string_|jstype.SomeJ...|@jstype.SomeJsType.Star.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jstype.SomeJsType$Star$$Overlay")))
-  (return (global.get $$string_|jstype.SomeJ...|@jstype.SomeJsType.Star.$Overlay))
- )
-)
-
 ;;; Code for jstype.SomeJsType.Wildcard.$Overlay [methods]
 
 ;;; void $Overlay.$clinit()
@@ -173,20 +150,6 @@
   )
   (global.set $$class@jstype.SomeJsType.Wildcard.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jstype.SomeJ...|__java_lang_String_<once>_@jstype.SomeJsType.Wildcard.$Overlay )))
   (return (global.get $$class@jstype.SomeJsType.Wildcard.$Overlay))
- )
-)
-
-;;; String $Overlay.$getString_|jstype.SomeJ...|()
-(func $$getString_|jstype.SomeJ...|__java_lang_String_<once>_@jstype.SomeJsType.Wildcard.$Overlay
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|jstype.SomeJ...|@jstype.SomeJsType.Wildcard.$Overlay)))
-   (then
-    (return (global.get $$string_|jstype.SomeJ...|@jstype.SomeJsType.Wildcard.$Overlay))
-   )
-  )
-  (global.set $$string_|jstype.SomeJ...|@jstype.SomeJsType.Wildcard.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jstype.SomeJsType$Wildcard$$Overlay")))
-  (return (global.get $$string_|jstype.SomeJ...|@jstype.SomeJsType.Wildcard.$Overlay))
  )
 )
 
@@ -330,17 +293,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jstype.SomeJsType)
-
-;;; String SomeJsType.$getString_|jstype.SomeJ...|()
-(func $$getString_|jstype.SomeJ...|__java_lang_String_<once>_@jstype.SomeJsType
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|jstype.SomeJ...|@jstype.SomeJsType)))
-   (then
-    (return (global.get $$string_|jstype.SomeJ...|@jstype.SomeJsType))
-   )
-  )
-  (global.set $$string_|jstype.SomeJ...|@jstype.SomeJsType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jstype.SomeJsType")))
-  (return (global.get $$string_|jstype.SomeJ...|@jstype.SomeJsType))
- )
-)

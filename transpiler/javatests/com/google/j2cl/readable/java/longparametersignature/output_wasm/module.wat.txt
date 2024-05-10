@@ -1,21 +1,29 @@
- ;;; Code for longparametersignature.LongParameterSignature [type definition]
- (type $longparametersignature.LongParameterSignature (sub $java.lang.Object (struct
-  (field $vtable (ref $longparametersignature.LongParameterSignature.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $longparametersignature.LongParameterSignature.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_main__long__void (ref $function.m_main__long__void))
-  ))
- )
+;;; Code for longparametersignature.LongParameterSignature [type definition]
+(type $longparametersignature.LongParameterSignature (sub $java.lang.Object (struct
+ (field $vtable (ref $longparametersignature.LongParameterSignature.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $longparametersignature.LongParameterSignature.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_main__long__void (ref $function.m_main__long__void))
+ ))
+)
 
 ;;; Code for longparametersignature.LongParameterSignature [imports]
+
+;;; Code for longparametersignature.LongParameterSignature [static fields]
+(global $$class-initialized@longparametersignature.LongParameterSignature (mut i32)
+ (i32.const 0)
+)
+(global $$class@longparametersignature.LongParameterSignature (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for longparametersignature.LongParameterSignature [vtable.init]
 (global $longparametersignature.LongParameterSignature.vtable (ref $longparametersignature.LongParameterSignature.vtable)
@@ -27,17 +35,6 @@
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_main__long__void@longparametersignature.LongParameterSignature)
  )
-)
-
-;;; Code for longparametersignature.LongParameterSignature [static fields]
-(global $$class-initialized@longparametersignature.LongParameterSignature (mut i32)
- (i32.const 0)
-)
-(global $$class@longparametersignature.LongParameterSignature (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|longparamete...|@longparametersignature.LongParameterSignature (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for longparametersignature.LongParameterSignature [methods]
@@ -126,17 +123,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@longparametersignature.LongParameterSignature)
-
-;;; String LongParameterSignature.$getString_|longparamete...|()
-(func $$getString_|longparamete...|__java_lang_String_<once>_@longparametersignature.LongParameterSignature
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|longparamete...|@longparametersignature.LongParameterSignature)))
-   (then
-    (return (global.get $$string_|longparamete...|@longparametersignature.LongParameterSignature))
-   )
-  )
-  (global.set $$string_|longparamete...|@longparametersignature.LongParameterSignature (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "longparametersignature.LongParameterSignature")))
-  (return (global.get $$string_|longparamete...|@longparametersignature.LongParameterSignature))
- )
-)

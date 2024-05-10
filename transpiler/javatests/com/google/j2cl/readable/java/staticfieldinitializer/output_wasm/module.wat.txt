@@ -1,31 +1,20 @@
- ;;; Code for staticfieldinitializer.StaticFieldInitializer [type definition]
- (type $staticfieldinitializer.StaticFieldInitializer (sub $java.lang.Object (struct
-  (field $vtable (ref $staticfieldinitializer.StaticFieldInitializer.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $staticfieldinitializer.StaticFieldInitializer.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  ))
- )
+;;; Code for staticfieldinitializer.StaticFieldInitializer [type definition]
+(type $staticfieldinitializer.StaticFieldInitializer (sub $java.lang.Object (struct
+ (field $vtable (ref $staticfieldinitializer.StaticFieldInitializer.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $staticfieldinitializer.StaticFieldInitializer.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 
 ;;; Code for staticfieldinitializer.StaticFieldInitializer [imports]
-
-;;; Code for staticfieldinitializer.StaticFieldInitializer [vtable.init]
-(global $staticfieldinitializer.StaticFieldInitializer.vtable (ref $staticfieldinitializer.StaticFieldInitializer.vtable)
- (struct.new $staticfieldinitializer.StaticFieldInitializer.vtable
-  (ref.func $$getClassImpl__java_lang_Class@staticfieldinitializer.StaticFieldInitializer)
-  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
-  (ref.func $m_hashCode__int@java.lang.Object)
-  (ref.func $m_toString__java_lang_String@java.lang.Object)
- )
-)
 
 ;;; Code for staticfieldinitializer.StaticFieldInitializer [static fields]
 (global $a@staticfieldinitializer.StaticFieldInitializer (mut i32)
@@ -40,8 +29,16 @@
 (global $$class@staticfieldinitializer.StaticFieldInitializer (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $$string_|staticfieldi...|@staticfieldinitializer.StaticFieldInitializer (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
+
+;;; Code for staticfieldinitializer.StaticFieldInitializer [vtable.init]
+(global $staticfieldinitializer.StaticFieldInitializer.vtable (ref $staticfieldinitializer.StaticFieldInitializer.vtable)
+ (struct.new $staticfieldinitializer.StaticFieldInitializer.vtable
+  (ref.func $$getClassImpl__java_lang_Class@staticfieldinitializer.StaticFieldInitializer)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
 )
 
 ;;; Code for staticfieldinitializer.StaticFieldInitializer [methods]
@@ -121,17 +118,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@staticfieldinitializer.StaticFieldInitializer)
-
-;;; String StaticFieldInitializer.$getString_|staticfieldi...|()
-(func $$getString_|staticfieldi...|__java_lang_String_<once>_@staticfieldinitializer.StaticFieldInitializer
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|staticfieldi...|@staticfieldinitializer.StaticFieldInitializer)))
-   (then
-    (return (global.get $$string_|staticfieldi...|@staticfieldinitializer.StaticFieldInitializer))
-   )
-  )
-  (global.set $$string_|staticfieldi...|@staticfieldinitializer.StaticFieldInitializer (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "staticfieldinitializer.StaticFieldInitializer")))
-  (return (global.get $$string_|staticfieldi...|@staticfieldinitializer.StaticFieldInitializer))
- )
-)

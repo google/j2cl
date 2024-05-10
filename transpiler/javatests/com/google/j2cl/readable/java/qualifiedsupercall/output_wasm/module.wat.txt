@@ -1,60 +1,84 @@
- ;;; Code for qualifiedsupercall.Parent [type definition]
- (type $qualifiedsupercall.Parent (sub $java.lang.Object (struct
-  (field $vtable (ref $qualifiedsupercall.Parent.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $qualifiedsupercall.Parent.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_fun__void (ref $function.m_fun__void))
-  ))
- )
+;;; Code for qualifiedsupercall.Parent [type definition]
+(type $qualifiedsupercall.Parent (sub $java.lang.Object (struct
+ (field $vtable (ref $qualifiedsupercall.Parent.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $qualifiedsupercall.Parent.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_fun__void (ref $function.m_fun__void))
+ ))
+)
 
- ;;; Code for qualifiedsupercall.QualifiedSuperCall.InnerClass [type definition]
- (type $qualifiedsupercall.QualifiedSuperCall.InnerClass (sub $java.lang.Object (struct
-  (field $vtable (ref $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $$outer_this@qualifiedsupercall.QualifiedSuperCall.InnerClass (mut (ref null $qualifiedsupercall.QualifiedSuperCall)))
-  ))
- )
- (type $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_test__void (ref $function.m_test__void))
-  ))
- )
+;;; Code for qualifiedsupercall.QualifiedSuperCall.InnerClass [type definition]
+(type $qualifiedsupercall.QualifiedSuperCall.InnerClass (sub $java.lang.Object (struct
+ (field $vtable (ref $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@qualifiedsupercall.QualifiedSuperCall.InnerClass (mut (ref null $qualifiedsupercall.QualifiedSuperCall)))
+ ))
+)
+(type $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_test__void (ref $function.m_test__void))
+ ))
+)
 
- ;;; Code for qualifiedsupercall.QualifiedSuperCall [type definition]
- (type $qualifiedsupercall.QualifiedSuperCall (sub $qualifiedsupercall.Parent (struct
-  (field $vtable (ref $qualifiedsupercall.QualifiedSuperCall.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $qualifiedsupercall.QualifiedSuperCall.vtable (sub $qualifiedsupercall.Parent.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_fun__void (ref $function.m_fun__void))
-  ))
- )
+;;; Code for qualifiedsupercall.QualifiedSuperCall [type definition]
+(type $qualifiedsupercall.QualifiedSuperCall (sub $qualifiedsupercall.Parent (struct
+ (field $vtable (ref $qualifiedsupercall.QualifiedSuperCall.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $qualifiedsupercall.QualifiedSuperCall.vtable (sub $qualifiedsupercall.Parent.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_fun__void (ref $function.m_fun__void))
+ ))
+)
 
 ;;; Code for qualifiedsupercall.Parent [imports]
 
 ;;; Code for qualifiedsupercall.QualifiedSuperCall.InnerClass [imports]
 
 ;;; Code for qualifiedsupercall.QualifiedSuperCall [imports]
+
+;;; Code for qualifiedsupercall.Parent [static fields]
+(global $$class-initialized@qualifiedsupercall.Parent (mut i32)
+ (i32.const 0)
+)
+(global $$class@qualifiedsupercall.Parent (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for qualifiedsupercall.QualifiedSuperCall [static fields]
+(global $$class-initialized@qualifiedsupercall.QualifiedSuperCall (mut i32)
+ (i32.const 0)
+)
+(global $$class@qualifiedsupercall.QualifiedSuperCall (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for qualifiedsupercall.QualifiedSuperCall.InnerClass [static fields]
+(global $$class-initialized@qualifiedsupercall.QualifiedSuperCall.InnerClass (mut i32)
+ (i32.const 0)
+)
+(global $$class@qualifiedsupercall.QualifiedSuperCall.InnerClass (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for qualifiedsupercall.Parent [vtable.init]
 (global $qualifiedsupercall.Parent.vtable (ref $qualifiedsupercall.Parent.vtable)
@@ -90,39 +114,6 @@
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_test__void@qualifiedsupercall.QualifiedSuperCall.InnerClass)
  )
-)
-
-;;; Code for qualifiedsupercall.Parent [static fields]
-(global $$class-initialized@qualifiedsupercall.Parent (mut i32)
- (i32.const 0)
-)
-(global $$class@qualifiedsupercall.Parent (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|qualifiedsup...|@qualifiedsupercall.Parent (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for qualifiedsupercall.QualifiedSuperCall [static fields]
-(global $$class-initialized@qualifiedsupercall.QualifiedSuperCall (mut i32)
- (i32.const 0)
-)
-(global $$class@qualifiedsupercall.QualifiedSuperCall (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|qualifiedsup...|@qualifiedsupercall.QualifiedSuperCall (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for qualifiedsupercall.QualifiedSuperCall.InnerClass [static fields]
-(global $$class-initialized@qualifiedsupercall.QualifiedSuperCall.InnerClass (mut i32)
- (i32.const 0)
-)
-(global $$class@qualifiedsupercall.QualifiedSuperCall.InnerClass (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|qualifiedsup...|@qualifiedsupercall.QualifiedSuperCall.InnerClass (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for qualifiedsupercall.Parent [methods]
@@ -210,20 +201,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@qualifiedsupercall.Parent)
-
-;;; String Parent.$getString_|qualifiedsup...|()
-(func $$getString_|qualifiedsup...|__java_lang_String_<once>_@qualifiedsupercall.Parent
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|qualifiedsup...|@qualifiedsupercall.Parent)))
-   (then
-    (return (global.get $$string_|qualifiedsup...|@qualifiedsupercall.Parent))
-   )
-  )
-  (global.set $$string_|qualifiedsup...|@qualifiedsupercall.Parent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "qualifiedsupercall.Parent")))
-  (return (global.get $$string_|qualifiedsup...|@qualifiedsupercall.Parent))
- )
-)
 
 ;;; Code for qualifiedsupercall.QualifiedSuperCall.InnerClass [methods]
 
@@ -317,20 +294,6 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@qualifiedsupercall.QualifiedSuperCall.InnerClass)
 
-;;; String InnerClass.$getString_|qualifiedsup...|()
-(func $$getString_|qualifiedsup...|__java_lang_String_<once>_@qualifiedsupercall.QualifiedSuperCall.InnerClass
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|qualifiedsup...|@qualifiedsupercall.QualifiedSuperCall.InnerClass)))
-   (then
-    (return (global.get $$string_|qualifiedsup...|@qualifiedsupercall.QualifiedSuperCall.InnerClass))
-   )
-  )
-  (global.set $$string_|qualifiedsup...|@qualifiedsupercall.QualifiedSuperCall.InnerClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "qualifiedsupercall.QualifiedSuperCall$InnerClass")))
-  (return (global.get $$string_|qualifiedsup...|@qualifiedsupercall.QualifiedSuperCall.InnerClass))
- )
-)
-
 ;;; Code for qualifiedsupercall.QualifiedSuperCall [methods]
 
 ;;; QualifiedSuperCall QualifiedSuperCall.$create()
@@ -404,17 +367,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@qualifiedsupercall.QualifiedSuperCall)
-
-;;; String QualifiedSuperCall.$getString_|qualifiedsup...|()
-(func $$getString_|qualifiedsup...|__java_lang_String_<once>_@qualifiedsupercall.QualifiedSuperCall
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|qualifiedsup...|@qualifiedsupercall.QualifiedSuperCall)))
-   (then
-    (return (global.get $$string_|qualifiedsup...|@qualifiedsupercall.QualifiedSuperCall))
-   )
-  )
-  (global.set $$string_|qualifiedsup...|@qualifiedsupercall.QualifiedSuperCall (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "qualifiedsupercall.QualifiedSuperCall")))
-  (return (global.get $$string_|qualifiedsup...|@qualifiedsupercall.QualifiedSuperCall))
- )
-)

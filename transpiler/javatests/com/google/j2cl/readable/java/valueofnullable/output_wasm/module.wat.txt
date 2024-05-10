@@ -1,23 +1,31 @@
- ;;; Code for valueofnullable.ValueOfNullable [type definition]
- (type $valueofnullable.ValueOfNullable (sub $java.lang.Object (struct
-  (field $vtable (ref $valueofnullable.ValueOfNullable.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $nullableString@valueofnullable.ValueOfNullable (mut (ref null $java.lang.String)))
-  (field $result@valueofnullable.ValueOfNullable (mut (ref null $java.lang.String)))
-  (field $someChar@valueofnullable.ValueOfNullable (mut i16))
-  ))
- )
- (type $valueofnullable.ValueOfNullable.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  ))
- )
+;;; Code for valueofnullable.ValueOfNullable [type definition]
+(type $valueofnullable.ValueOfNullable (sub $java.lang.Object (struct
+ (field $vtable (ref $valueofnullable.ValueOfNullable.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $nullableString@valueofnullable.ValueOfNullable (mut (ref null $java.lang.String)))
+ (field $result@valueofnullable.ValueOfNullable (mut (ref null $java.lang.String)))
+ (field $someChar@valueofnullable.ValueOfNullable (mut i16))
+ ))
+)
+(type $valueofnullable.ValueOfNullable.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 
 ;;; Code for valueofnullable.ValueOfNullable [imports]
+
+;;; Code for valueofnullable.ValueOfNullable [static fields]
+(global $$class-initialized@valueofnullable.ValueOfNullable (mut i32)
+ (i32.const 0)
+)
+(global $$class@valueofnullable.ValueOfNullable (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for valueofnullable.ValueOfNullable [vtable.init]
 (global $valueofnullable.ValueOfNullable.vtable (ref $valueofnullable.ValueOfNullable.vtable)
@@ -28,20 +36,6 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
-)
-
-;;; Code for valueofnullable.ValueOfNullable [static fields]
-(global $$class-initialized@valueofnullable.ValueOfNullable (mut i32)
- (i32.const 0)
-)
-(global $$class@valueofnullable.ValueOfNullable (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|b|@valueofnullable.ValueOfNullable (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-(global $$string_|valueofnulla...|@valueofnullable.ValueOfNullable (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for valueofnullable.ValueOfNullable [methods]
@@ -133,31 +127,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@valueofnullable.ValueOfNullable)
-
-;;; String ValueOfNullable.$getString_|b|()
-(func $$getString_|b|__java_lang_String_<once>_@valueofnullable.ValueOfNullable
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|b|@valueofnullable.ValueOfNullable)))
-   (then
-    (return (global.get $$string_|b|@valueofnullable.ValueOfNullable))
-   )
-  )
-  (global.set $$string_|b|@valueofnullable.ValueOfNullable (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "b")))
-  (return (global.get $$string_|b|@valueofnullable.ValueOfNullable))
- )
-)
-
-;;; String ValueOfNullable.$getString_|valueofnulla...|()
-(func $$getString_|valueofnulla...|__java_lang_String_<once>_@valueofnullable.ValueOfNullable
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|valueofnulla...|@valueofnullable.ValueOfNullable)))
-   (then
-    (return (global.get $$string_|valueofnulla...|@valueofnullable.ValueOfNullable))
-   )
-  )
-  (global.set $$string_|valueofnulla...|@valueofnullable.ValueOfNullable (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "valueofnullable.ValueOfNullable")))
-  (return (global.get $$string_|valueofnulla...|@valueofnullable.ValueOfNullable))
- )
-)

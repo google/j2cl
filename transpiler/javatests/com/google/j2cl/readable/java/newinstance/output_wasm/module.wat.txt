@@ -1,20 +1,28 @@
- ;;; Code for newinstance.NewInstanceExpr [type definition]
- (type $newinstance.NewInstanceExpr (sub $java.lang.Object (struct
-  (field $vtable (ref $newinstance.NewInstanceExpr.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $newinstance.NewInstanceExpr.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  ))
- )
+;;; Code for newinstance.NewInstanceExpr [type definition]
+(type $newinstance.NewInstanceExpr (sub $java.lang.Object (struct
+ (field $vtable (ref $newinstance.NewInstanceExpr.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $newinstance.NewInstanceExpr.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 
 ;;; Code for newinstance.NewInstanceExpr [imports]
+
+;;; Code for newinstance.NewInstanceExpr [static fields]
+(global $$class-initialized@newinstance.NewInstanceExpr (mut i32)
+ (i32.const 0)
+)
+(global $$class@newinstance.NewInstanceExpr (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for newinstance.NewInstanceExpr [vtable.init]
 (global $newinstance.NewInstanceExpr.vtable (ref $newinstance.NewInstanceExpr.vtable)
@@ -25,17 +33,6 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
-)
-
-;;; Code for newinstance.NewInstanceExpr [static fields]
-(global $$class-initialized@newinstance.NewInstanceExpr (mut i32)
- (i32.const 0)
-)
-(global $$class@newinstance.NewInstanceExpr (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|newinstance....|@newinstance.NewInstanceExpr (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for newinstance.NewInstanceExpr [methods]
@@ -134,17 +131,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@newinstance.NewInstanceExpr)
-
-;;; String NewInstanceExpr.$getString_|newinstance....|()
-(func $$getString_|newinstance....|__java_lang_String_<once>_@newinstance.NewInstanceExpr
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|newinstance....|@newinstance.NewInstanceExpr)))
-   (then
-    (return (global.get $$string_|newinstance....|@newinstance.NewInstanceExpr))
-   )
-  )
-  (global.set $$string_|newinstance....|@newinstance.NewInstanceExpr (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "newinstance.NewInstanceExpr")))
-  (return (global.get $$string_|newinstance....|@newinstance.NewInstanceExpr))
- )
-)

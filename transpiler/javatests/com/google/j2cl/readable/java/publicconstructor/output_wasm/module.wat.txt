@@ -1,20 +1,28 @@
- ;;; Code for publicconstructor.PublicConstructor [type definition]
- (type $publicconstructor.PublicConstructor (sub $java.lang.Object (struct
-  (field $vtable (ref $publicconstructor.PublicConstructor.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $publicconstructor.PublicConstructor.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  ))
- )
+;;; Code for publicconstructor.PublicConstructor [type definition]
+(type $publicconstructor.PublicConstructor (sub $java.lang.Object (struct
+ (field $vtable (ref $publicconstructor.PublicConstructor.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $publicconstructor.PublicConstructor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 
 ;;; Code for publicconstructor.PublicConstructor [imports]
+
+;;; Code for publicconstructor.PublicConstructor [static fields]
+(global $$class-initialized@publicconstructor.PublicConstructor (mut i32)
+ (i32.const 0)
+)
+(global $$class@publicconstructor.PublicConstructor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for publicconstructor.PublicConstructor [vtable.init]
 (global $publicconstructor.PublicConstructor.vtable (ref $publicconstructor.PublicConstructor.vtable)
@@ -25,17 +33,6 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
-)
-
-;;; Code for publicconstructor.PublicConstructor [static fields]
-(global $$class-initialized@publicconstructor.PublicConstructor (mut i32)
- (i32.const 0)
-)
-(global $$class@publicconstructor.PublicConstructor (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|publicconstr...|@publicconstructor.PublicConstructor (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for publicconstructor.PublicConstructor [methods]
@@ -111,17 +108,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@publicconstructor.PublicConstructor)
-
-;;; String PublicConstructor.$getString_|publicconstr...|()
-(func $$getString_|publicconstr...|__java_lang_String_<once>_@publicconstructor.PublicConstructor
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|publicconstr...|@publicconstructor.PublicConstructor)))
-   (then
-    (return (global.get $$string_|publicconstr...|@publicconstructor.PublicConstructor))
-   )
-  )
-  (global.set $$string_|publicconstr...|@publicconstructor.PublicConstructor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "publicconstructor.PublicConstructor")))
-  (return (global.get $$string_|publicconstr...|@publicconstructor.PublicConstructor))
- )
-)

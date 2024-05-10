@@ -1,38 +1,54 @@
- ;;; Code for srcjar.Foo [type definition]
- (type $srcjar.Foo (sub $java.lang.Object (struct
-  (field $vtable (ref $srcjar.Foo.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $srcjar.Foo.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  ))
- )
+;;; Code for srcjar.Foo [type definition]
+(type $srcjar.Foo (sub $java.lang.Object (struct
+ (field $vtable (ref $srcjar.Foo.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $srcjar.Foo.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 
- ;;; Code for srcjar.Srcjar [type definition]
- (type $srcjar.Srcjar (sub $java.lang.Object (struct
-  (field $vtable (ref $srcjar.Srcjar.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $srcjar.Srcjar.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  ))
- )
+;;; Code for srcjar.Srcjar [type definition]
+(type $srcjar.Srcjar (sub $java.lang.Object (struct
+ (field $vtable (ref $srcjar.Srcjar.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $srcjar.Srcjar.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 
 ;;; Code for srcjar.Foo [imports]
 
 ;;; Code for srcjar.Srcjar [imports]
+
+;;; Code for srcjar.Foo [static fields]
+(global $$class-initialized@srcjar.Foo (mut i32)
+ (i32.const 0)
+)
+(global $$class@srcjar.Foo (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for srcjar.Srcjar [static fields]
+(global $$class-initialized@srcjar.Srcjar (mut i32)
+ (i32.const 0)
+)
+(global $$class@srcjar.Srcjar (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for srcjar.Foo [vtable.init]
 (global $srcjar.Foo.vtable (ref $srcjar.Foo.vtable)
@@ -54,28 +70,6 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
-)
-
-;;; Code for srcjar.Foo [static fields]
-(global $$class-initialized@srcjar.Foo (mut i32)
- (i32.const 0)
-)
-(global $$class@srcjar.Foo (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|srcjar.Foo|@srcjar.Foo (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for srcjar.Srcjar [static fields]
-(global $$class-initialized@srcjar.Srcjar (mut i32)
- (i32.const 0)
-)
-(global $$class@srcjar.Srcjar (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|srcjar.Srcjar|@srcjar.Srcjar (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for srcjar.Foo [methods]
@@ -151,20 +145,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@srcjar.Foo)
-
-;;; String Foo.$getString_|srcjar.Foo|()
-(func $$getString_|srcjar.Foo|__java_lang_String_<once>_@srcjar.Foo
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|srcjar.Foo|@srcjar.Foo)))
-   (then
-    (return (global.get $$string_|srcjar.Foo|@srcjar.Foo))
-   )
-  )
-  (global.set $$string_|srcjar.Foo|@srcjar.Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "srcjar.Foo")))
-  (return (global.get $$string_|srcjar.Foo|@srcjar.Foo))
- )
-)
 
 ;;; Code for srcjar.Srcjar [methods]
 
@@ -251,17 +231,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@srcjar.Srcjar)
-
-;;; String Srcjar.$getString_|srcjar.Srcjar|()
-(func $$getString_|srcjar.Srcjar|__java_lang_String_<once>_@srcjar.Srcjar
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|srcjar.Srcjar|@srcjar.Srcjar)))
-   (then
-    (return (global.get $$string_|srcjar.Srcjar|@srcjar.Srcjar))
-   )
-  )
-  (global.set $$string_|srcjar.Srcjar|@srcjar.Srcjar (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "srcjar.Srcjar")))
-  (return (global.get $$string_|srcjar.Srcjar|@srcjar.Srcjar))
- )
-)

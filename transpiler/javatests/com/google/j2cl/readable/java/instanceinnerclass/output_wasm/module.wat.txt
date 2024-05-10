@@ -1,45 +1,61 @@
- ;;; Code for instanceinnerclass.InstanceInnerClass [type definition]
- (type $instanceinnerclass.InstanceInnerClass (sub $java.lang.Object (struct
-  (field $vtable (ref $instanceinnerclass.InstanceInnerClass.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $instanceField@instanceinnerclass.InstanceInnerClass (mut i32))
-  ))
- )
- (type $instanceinnerclass.InstanceInnerClass.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_funOuter__void (ref $function.m_funOuter__void))
-  (field $m_test__void (ref $function.m_test__void))
-  ))
- )
+;;; Code for instanceinnerclass.InstanceInnerClass [type definition]
+(type $instanceinnerclass.InstanceInnerClass (sub $java.lang.Object (struct
+ (field $vtable (ref $instanceinnerclass.InstanceInnerClass.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $instanceField@instanceinnerclass.InstanceInnerClass (mut i32))
+ ))
+)
+(type $instanceinnerclass.InstanceInnerClass.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_funOuter__void (ref $function.m_funOuter__void))
+ (field $m_test__void (ref $function.m_test__void))
+ ))
+)
 
- ;;; Code for instanceinnerclass.InstanceInnerClass.InnerClass [type definition]
- (type $instanceinnerclass.InstanceInnerClass.InnerClass (sub $java.lang.Object (struct
-  (field $vtable (ref $instanceinnerclass.InstanceInnerClass.InnerClass.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $$outer_this@instanceinnerclass.InstanceInnerClass.InnerClass (mut (ref null $instanceinnerclass.InstanceInnerClass)))
-  (field $enclosingInstance@instanceinnerclass.InstanceInnerClass.InnerClass (mut (ref null $instanceinnerclass.InstanceInnerClass)))
-  (field $field@instanceinnerclass.InstanceInnerClass.InnerClass (mut i32))
-  ))
- )
- (type $instanceinnerclass.InstanceInnerClass.InnerClass.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_funInner__void (ref $function.m_funInner__void))
-  ))
- )
+;;; Code for instanceinnerclass.InstanceInnerClass.InnerClass [type definition]
+(type $instanceinnerclass.InstanceInnerClass.InnerClass (sub $java.lang.Object (struct
+ (field $vtable (ref $instanceinnerclass.InstanceInnerClass.InnerClass.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@instanceinnerclass.InstanceInnerClass.InnerClass (mut (ref null $instanceinnerclass.InstanceInnerClass)))
+ (field $enclosingInstance@instanceinnerclass.InstanceInnerClass.InnerClass (mut (ref null $instanceinnerclass.InstanceInnerClass)))
+ (field $field@instanceinnerclass.InstanceInnerClass.InnerClass (mut i32))
+ ))
+)
+(type $instanceinnerclass.InstanceInnerClass.InnerClass.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_funInner__void (ref $function.m_funInner__void))
+ ))
+)
 
 ;;; Code for instanceinnerclass.InstanceInnerClass [imports]
 
 ;;; Code for instanceinnerclass.InstanceInnerClass.InnerClass [imports]
+
+;;; Code for instanceinnerclass.InstanceInnerClass [static fields]
+(global $$class-initialized@instanceinnerclass.InstanceInnerClass (mut i32)
+ (i32.const 0)
+)
+(global $$class@instanceinnerclass.InstanceInnerClass (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for instanceinnerclass.InstanceInnerClass.InnerClass [static fields]
+(global $$class-initialized@instanceinnerclass.InstanceInnerClass.InnerClass (mut i32)
+ (i32.const 0)
+)
+(global $$class@instanceinnerclass.InstanceInnerClass.InnerClass (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for instanceinnerclass.InstanceInnerClass [vtable.init]
 (global $instanceinnerclass.InstanceInnerClass.vtable (ref $instanceinnerclass.InstanceInnerClass.vtable)
@@ -64,28 +80,6 @@
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_funInner__void@instanceinnerclass.InstanceInnerClass.InnerClass)
  )
-)
-
-;;; Code for instanceinnerclass.InstanceInnerClass [static fields]
-(global $$class-initialized@instanceinnerclass.InstanceInnerClass (mut i32)
- (i32.const 0)
-)
-(global $$class@instanceinnerclass.InstanceInnerClass (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|instanceinne...|@instanceinnerclass.InstanceInnerClass (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for instanceinnerclass.InstanceInnerClass.InnerClass [static fields]
-(global $$class-initialized@instanceinnerclass.InstanceInnerClass.InnerClass (mut i32)
- (i32.const 0)
-)
-(global $$class@instanceinnerclass.InstanceInnerClass.InnerClass (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|instanceinne...|@instanceinnerclass.InstanceInnerClass.InnerClass (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for instanceinnerclass.InstanceInnerClass [methods]
@@ -198,20 +192,6 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@instanceinnerclass.InstanceInnerClass)
 
-;;; String InstanceInnerClass.$getString_|instanceinne...|()
-(func $$getString_|instanceinne...|__java_lang_String_<once>_@instanceinnerclass.InstanceInnerClass
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|instanceinne...|@instanceinnerclass.InstanceInnerClass)))
-   (then
-    (return (global.get $$string_|instanceinne...|@instanceinnerclass.InstanceInnerClass))
-   )
-  )
-  (global.set $$string_|instanceinne...|@instanceinnerclass.InstanceInnerClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instanceinnerclass.InstanceInnerClass")))
-  (return (global.get $$string_|instanceinne...|@instanceinnerclass.InstanceInnerClass))
- )
-)
-
 ;;; Code for instanceinnerclass.InstanceInnerClass.InnerClass [methods]
 
 ;;; InnerClass InnerClass.$create(InstanceInnerClass $outer_this)
@@ -319,17 +299,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@instanceinnerclass.InstanceInnerClass.InnerClass)
-
-;;; String InnerClass.$getString_|instanceinne...|()
-(func $$getString_|instanceinne...|__java_lang_String_<once>_@instanceinnerclass.InstanceInnerClass.InnerClass
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|instanceinne...|@instanceinnerclass.InstanceInnerClass.InnerClass)))
-   (then
-    (return (global.get $$string_|instanceinne...|@instanceinnerclass.InstanceInnerClass.InnerClass))
-   )
-  )
-  (global.set $$string_|instanceinne...|@instanceinnerclass.InstanceInnerClass.InnerClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instanceinnerclass.InstanceInnerClass$InnerClass")))
-  (return (global.get $$string_|instanceinne...|@instanceinnerclass.InstanceInnerClass.InnerClass))
- )
-)

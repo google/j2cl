@@ -1,31 +1,20 @@
- ;;; Code for staticinitializers.StaticInitializers [type definition]
- (type $staticinitializers.StaticInitializers (sub $java.lang.Object (struct
-  (field $vtable (ref $staticinitializers.StaticInitializers.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $staticinitializers.StaticInitializers.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  ))
- )
+;;; Code for staticinitializers.StaticInitializers [type definition]
+(type $staticinitializers.StaticInitializers (sub $java.lang.Object (struct
+ (field $vtable (ref $staticinitializers.StaticInitializers.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $staticinitializers.StaticInitializers.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 
 ;;; Code for staticinitializers.StaticInitializers [imports]
-
-;;; Code for staticinitializers.StaticInitializers [vtable.init]
-(global $staticinitializers.StaticInitializers.vtable (ref $staticinitializers.StaticInitializers.vtable)
- (struct.new $staticinitializers.StaticInitializers.vtable
-  (ref.func $$getClassImpl__java_lang_Class@staticinitializers.StaticInitializers)
-  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
-  (ref.func $m_hashCode__int@java.lang.Object)
-  (ref.func $m_toString__java_lang_String@java.lang.Object)
- )
-)
 
 ;;; Code for staticinitializers.StaticInitializers [static fields]
 (global $a@staticinitializers.StaticInitializers (mut i32)
@@ -43,8 +32,16 @@
 (global $$class@staticinitializers.StaticInitializers (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $$string_|staticinitia...|@staticinitializers.StaticInitializers (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
+
+;;; Code for staticinitializers.StaticInitializers [vtable.init]
+(global $staticinitializers.StaticInitializers.vtable (ref $staticinitializers.StaticInitializers.vtable)
+ (struct.new $staticinitializers.StaticInitializers.vtable
+  (ref.func $$getClassImpl__java_lang_Class@staticinitializers.StaticInitializers)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
 )
 
 ;;; Code for staticinitializers.StaticInitializers [methods]
@@ -134,17 +131,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@staticinitializers.StaticInitializers)
-
-;;; String StaticInitializers.$getString_|staticinitia...|()
-(func $$getString_|staticinitia...|__java_lang_String_<once>_@staticinitializers.StaticInitializers
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|staticinitia...|@staticinitializers.StaticInitializers)))
-   (then
-    (return (global.get $$string_|staticinitia...|@staticinitializers.StaticInitializers))
-   )
-  )
-  (global.set $$string_|staticinitia...|@staticinitializers.StaticInitializers (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "staticinitializers.StaticInitializers")))
-  (return (global.get $$string_|staticinitia...|@staticinitializers.StaticInitializers))
- )
-)

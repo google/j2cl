@@ -1,37 +1,44 @@
- ;;; Code for functiontype.Function [type definition]
- (type $functiontype.Function.vtable (sub (struct
-  ))
- )
+;;; Code for functiontype.Function [type definition]
+(type $functiontype.Function.vtable (sub (struct
+ ))
+)
 
- ;;; Code for functiontype.FunctionImpl [type definition]
- (type $functiontype.FunctionImpl (sub $java.lang.Object (struct
-  (field $vtable (ref $functiontype.FunctionImpl.vtable))
-  (field $itable (ref $functiontype.FunctionImpl.itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $functiontype.FunctionImpl.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_test__functiontype_Function__void (ref $function.m_test__functiontype_Function__void))
-  ))
- )
- (type $functiontype.FunctionImpl.itable (sub $itable (struct
-  (field (ref $functiontype.Function.vtable))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
- )))
+;;; Code for functiontype.FunctionImpl [type definition]
+(type $functiontype.FunctionImpl (sub $java.lang.Object (struct
+ (field $vtable (ref $functiontype.FunctionImpl.vtable))
+ (field $itable (ref $functiontype.FunctionImpl.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $functiontype.FunctionImpl.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_test__functiontype_Function__void (ref $function.m_test__functiontype_Function__void))
+ ))
+)
 
 ;;; Code for functiontype.Function [imports]
 
 ;;; Code for functiontype.FunctionImpl [imports]
+
+;;; Code for functiontype.Function [static fields]
+(global $$class-initialized@functiontype.Function (mut i32)
+ (i32.const 0)
+)
+(global $$class@functiontype.Function (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for functiontype.FunctionImpl [static fields]
+(global $$class-initialized@functiontype.FunctionImpl (mut i32)
+ (i32.const 0)
+)
+(global $$class@functiontype.FunctionImpl (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for functiontype.FunctionImpl [vtable.init]
 (global $functiontype.FunctionImpl.vtable (ref $functiontype.FunctionImpl.vtable)
@@ -47,41 +54,6 @@
 (global $functiontype.Function.vtable@$functiontype.FunctionImpl (ref $functiontype.Function.vtable)
  (struct.new $functiontype.Function.vtable
  )
-)
-
-;;; Code for functiontype.FunctionImpl [itable.init]
-(global $functiontype.FunctionImpl.itable (ref $functiontype.FunctionImpl.itable)
- (struct.new $functiontype.FunctionImpl.itable
-   (global.get $functiontype.Function.vtable@$functiontype.FunctionImpl)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
- )
-)
-
-;;; Code for functiontype.Function [static fields]
-(global $$class-initialized@functiontype.Function (mut i32)
- (i32.const 0)
-)
-(global $$class@functiontype.Function (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|functiontype...|@functiontype.Function (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for functiontype.FunctionImpl [static fields]
-(global $$class-initialized@functiontype.FunctionImpl (mut i32)
- (i32.const 0)
-)
-(global $$class@functiontype.FunctionImpl (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|functiontype...|@functiontype.FunctionImpl (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for functiontype.Function [methods]
@@ -113,20 +85,6 @@
   )
   (global.set $$class@functiontype.Function (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|functiontype...|__java_lang_String_<once>_@functiontype.Function )))
   (return (global.get $$class@functiontype.Function))
- )
-)
-
-;;; String Function.$getString_|functiontype...|()
-(func $$getString_|functiontype...|__java_lang_String_<once>_@functiontype.Function
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|functiontype...|@functiontype.Function)))
-   (then
-    (return (global.get $$string_|functiontype...|@functiontype.Function))
-   )
-  )
-  (global.set $$string_|functiontype...|@functiontype.Function (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "functiontype.Function")))
-  (return (global.get $$string_|functiontype...|@functiontype.Function))
  )
 )
 
@@ -216,17 +174,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@functiontype.FunctionImpl)
-
-;;; String FunctionImpl.$getString_|functiontype...|()
-(func $$getString_|functiontype...|__java_lang_String_<once>_@functiontype.FunctionImpl
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|functiontype...|@functiontype.FunctionImpl)))
-   (then
-    (return (global.get $$string_|functiontype...|@functiontype.FunctionImpl))
-   )
-  )
-  (global.set $$string_|functiontype...|@functiontype.FunctionImpl (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "functiontype.FunctionImpl")))
-  (return (global.get $$string_|functiontype...|@functiontype.FunctionImpl))
- )
-)

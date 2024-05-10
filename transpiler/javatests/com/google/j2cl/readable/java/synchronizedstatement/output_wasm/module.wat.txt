@@ -1,27 +1,35 @@
- ;;; Code for synchronizedstatement.SynchronizedStatement [type definition]
- (type $synchronizedstatement.SynchronizedStatement (sub $java.lang.Object (struct
-  (field $vtable (ref $synchronizedstatement.SynchronizedStatement.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $a@synchronizedstatement.SynchronizedStatement (mut i32))
-  (field $b@synchronizedstatement.SynchronizedStatement (mut i32))
-  ))
- )
- (type $synchronizedstatement.SynchronizedStatement.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_main__void (ref $function.m_main__void))
-  (field $m_testBreakAndContinue__void (ref $function.m_testBreakAndContinue__void))
-  (field $m_testIfStatementWithNonVoidBodyWithoutElse__void (ref $function.m_testIfStatementWithNonVoidBodyWithoutElse__void))
-  (field $m_testInitialization__int (ref $function.m_testInitialization__int))
-  (field $m_testReturn__int (ref $function.m_testReturn__int))
-  ))
- )
+;;; Code for synchronizedstatement.SynchronizedStatement [type definition]
+(type $synchronizedstatement.SynchronizedStatement (sub $java.lang.Object (struct
+ (field $vtable (ref $synchronizedstatement.SynchronizedStatement.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $a@synchronizedstatement.SynchronizedStatement (mut i32))
+ (field $b@synchronizedstatement.SynchronizedStatement (mut i32))
+ ))
+)
+(type $synchronizedstatement.SynchronizedStatement.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_main__void (ref $function.m_main__void))
+ (field $m_testBreakAndContinue__void (ref $function.m_testBreakAndContinue__void))
+ (field $m_testIfStatementWithNonVoidBodyWithoutElse__void (ref $function.m_testIfStatementWithNonVoidBodyWithoutElse__void))
+ (field $m_testInitialization__int (ref $function.m_testInitialization__int))
+ (field $m_testReturn__int (ref $function.m_testReturn__int))
+ ))
+)
 
 ;;; Code for synchronizedstatement.SynchronizedStatement [imports]
+
+;;; Code for synchronizedstatement.SynchronizedStatement [static fields]
+(global $$class-initialized@synchronizedstatement.SynchronizedStatement (mut i32)
+ (i32.const 0)
+)
+(global $$class@synchronizedstatement.SynchronizedStatement (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for synchronizedstatement.SynchronizedStatement [vtable.init]
 (global $synchronizedstatement.SynchronizedStatement.vtable (ref $synchronizedstatement.SynchronizedStatement.vtable)
@@ -37,17 +45,6 @@
   (ref.func $m_testInitialization__int@synchronizedstatement.SynchronizedStatement)
   (ref.func $m_testReturn__int@synchronizedstatement.SynchronizedStatement)
  )
-)
-
-;;; Code for synchronizedstatement.SynchronizedStatement [static fields]
-(global $$class-initialized@synchronizedstatement.SynchronizedStatement (mut i32)
- (i32.const 0)
-)
-(global $$class@synchronizedstatement.SynchronizedStatement (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|synchronized...|@synchronizedstatement.SynchronizedStatement (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for synchronizedstatement.SynchronizedStatement [methods]
@@ -295,17 +292,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@synchronizedstatement.SynchronizedStatement)
-
-;;; String SynchronizedStatement.$getString_|synchronized...|()
-(func $$getString_|synchronized...|__java_lang_String_<once>_@synchronizedstatement.SynchronizedStatement
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|synchronized...|@synchronizedstatement.SynchronizedStatement)))
-   (then
-    (return (global.get $$string_|synchronized...|@synchronizedstatement.SynchronizedStatement))
-   )
-  )
-  (global.set $$string_|synchronized...|@synchronizedstatement.SynchronizedStatement (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "synchronizedstatement.SynchronizedStatement")))
-  (return (global.get $$string_|synchronized...|@synchronizedstatement.SynchronizedStatement))
- )
-)

@@ -1,21 +1,29 @@
- ;;; Code for implicitparenthesis.ImplicitParenthesis [type definition]
- (type $implicitparenthesis.ImplicitParenthesis (sub $java.lang.Object (struct
-  (field $vtable (ref $implicitparenthesis.ImplicitParenthesis.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $implicitparenthesis.ImplicitParenthesis.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_test__void (ref $function.m_test__void))
-  ))
- )
+;;; Code for implicitparenthesis.ImplicitParenthesis [type definition]
+(type $implicitparenthesis.ImplicitParenthesis (sub $java.lang.Object (struct
+ (field $vtable (ref $implicitparenthesis.ImplicitParenthesis.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $implicitparenthesis.ImplicitParenthesis.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_test__void (ref $function.m_test__void))
+ ))
+)
 
 ;;; Code for implicitparenthesis.ImplicitParenthesis [imports]
+
+;;; Code for implicitparenthesis.ImplicitParenthesis [static fields]
+(global $$class-initialized@implicitparenthesis.ImplicitParenthesis (mut i32)
+ (i32.const 0)
+)
+(global $$class@implicitparenthesis.ImplicitParenthesis (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for implicitparenthesis.ImplicitParenthesis [vtable.init]
 (global $implicitparenthesis.ImplicitParenthesis.vtable (ref $implicitparenthesis.ImplicitParenthesis.vtable)
@@ -27,17 +35,6 @@
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_test__void@implicitparenthesis.ImplicitParenthesis)
  )
-)
-
-;;; Code for implicitparenthesis.ImplicitParenthesis [static fields]
-(global $$class-initialized@implicitparenthesis.ImplicitParenthesis (mut i32)
- (i32.const 0)
-)
-(global $$class@implicitparenthesis.ImplicitParenthesis (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|implicitpare...|@implicitparenthesis.ImplicitParenthesis (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for implicitparenthesis.ImplicitParenthesis [methods]
@@ -308,17 +305,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@implicitparenthesis.ImplicitParenthesis)
-
-;;; String ImplicitParenthesis.$getString_|implicitpare...|()
-(func $$getString_|implicitpare...|__java_lang_String_<once>_@implicitparenthesis.ImplicitParenthesis
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|implicitpare...|@implicitparenthesis.ImplicitParenthesis)))
-   (then
-    (return (global.get $$string_|implicitpare...|@implicitparenthesis.ImplicitParenthesis))
-   )
-  )
-  (global.set $$string_|implicitpare...|@implicitparenthesis.ImplicitParenthesis (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "implicitparenthesis.ImplicitParenthesis")))
-  (return (global.get $$string_|implicitpare...|@implicitparenthesis.ImplicitParenthesis))
- )
-)

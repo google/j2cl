@@ -1,43 +1,59 @@
- ;;; Code for localclasswithconstructor.LocalClassWithConstructor [type definition]
- (type $localclasswithconstructor.LocalClassWithConstructor (sub $java.lang.Object (struct
-  (field $vtable (ref $localclasswithconstructor.LocalClassWithConstructor.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $localclasswithconstructor.LocalClassWithConstructor.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_test__int__void (ref $function.m_test__int__void))
-  ))
- )
+;;; Code for localclasswithconstructor.LocalClassWithConstructor [type definition]
+(type $localclasswithconstructor.LocalClassWithConstructor (sub $java.lang.Object (struct
+ (field $vtable (ref $localclasswithconstructor.LocalClassWithConstructor.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $localclasswithconstructor.LocalClassWithConstructor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_test__int__void (ref $function.m_test__int__void))
+ ))
+)
 
- ;;; Code for localclasswithconstructor.LocalClassWithConstructor.1LocalClass [type definition]
- (type $localclasswithconstructor.LocalClassWithConstructor.1LocalClass (sub $java.lang.Object (struct
-  (field $vtable (ref $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $$captured_localVar@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (mut i32))
-  (field $$captured_p@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (mut i32))
-  (field $$outer_this@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (mut (ref null $localclasswithconstructor.LocalClassWithConstructor)))
-  (field $field@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (mut i32))
-  ))
- )
- (type $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  ))
- )
+;;; Code for localclasswithconstructor.LocalClassWithConstructor.1LocalClass [type definition]
+(type $localclasswithconstructor.LocalClassWithConstructor.1LocalClass (sub $java.lang.Object (struct
+ (field $vtable (ref $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$captured_localVar@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (mut i32))
+ (field $$captured_p@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (mut i32))
+ (field $$outer_this@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (mut (ref null $localclasswithconstructor.LocalClassWithConstructor)))
+ (field $field@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (mut i32))
+ ))
+)
+(type $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 
 ;;; Code for localclasswithconstructor.LocalClassWithConstructor [imports]
 
 ;;; Code for localclasswithconstructor.LocalClassWithConstructor.1LocalClass [imports]
+
+;;; Code for localclasswithconstructor.LocalClassWithConstructor [static fields]
+(global $$class-initialized@localclasswithconstructor.LocalClassWithConstructor (mut i32)
+ (i32.const 0)
+)
+(global $$class@localclasswithconstructor.LocalClassWithConstructor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for localclasswithconstructor.LocalClassWithConstructor.1LocalClass [static fields]
+(global $$class-initialized@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (mut i32)
+ (i32.const 0)
+)
+(global $$class@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for localclasswithconstructor.LocalClassWithConstructor [vtable.init]
 (global $localclasswithconstructor.LocalClassWithConstructor.vtable (ref $localclasswithconstructor.LocalClassWithConstructor.vtable)
@@ -60,28 +76,6 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
-)
-
-;;; Code for localclasswithconstructor.LocalClassWithConstructor [static fields]
-(global $$class-initialized@localclasswithconstructor.LocalClassWithConstructor (mut i32)
- (i32.const 0)
-)
-(global $$class@localclasswithconstructor.LocalClassWithConstructor (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|localclasswi...|@localclasswithconstructor.LocalClassWithConstructor (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for localclasswithconstructor.LocalClassWithConstructor.1LocalClass [static fields]
-(global $$class-initialized@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (mut i32)
- (i32.const 0)
-)
-(global $$class@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|localclasswi...|@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for localclasswithconstructor.LocalClassWithConstructor [methods]
@@ -175,20 +169,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor)
-
-;;; String LocalClassWithConstructor.$getString_|localclasswi...|()
-(func $$getString_|localclasswi...|__java_lang_String_<once>_@localclasswithconstructor.LocalClassWithConstructor
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|localclasswi...|@localclasswithconstructor.LocalClassWithConstructor)))
-   (then
-    (return (global.get $$string_|localclasswi...|@localclasswithconstructor.LocalClassWithConstructor))
-   )
-  )
-  (global.set $$string_|localclasswi...|@localclasswithconstructor.LocalClassWithConstructor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "localclasswithconstructor.LocalClassWithConstructor")))
-  (return (global.get $$string_|localclasswi...|@localclasswithconstructor.LocalClassWithConstructor))
- )
-)
 
 ;;; Code for localclasswithconstructor.LocalClassWithConstructor.1LocalClass [methods]
 
@@ -318,17 +298,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor.1LocalClass)
-
-;;; String LocalClass.$getString_|localclasswi...|()
-(func $$getString_|localclasswi...|__java_lang_String_<once>_@localclasswithconstructor.LocalClassWithConstructor.1LocalClass
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|localclasswi...|@localclasswithconstructor.LocalClassWithConstructor.1LocalClass)))
-   (then
-    (return (global.get $$string_|localclasswi...|@localclasswithconstructor.LocalClassWithConstructor.1LocalClass))
-   )
-  )
-  (global.set $$string_|localclasswi...|@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "localclasswithconstructor.LocalClassWithConstructor$1LocalClass")))
-  (return (global.get $$string_|localclasswi...|@localclasswithconstructor.LocalClassWithConstructor.1LocalClass))
- )
-)

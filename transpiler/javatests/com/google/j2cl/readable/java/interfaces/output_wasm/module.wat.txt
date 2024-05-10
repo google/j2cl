@@ -1,90 +1,72 @@
- ;;; Code for interfaces.Main.Interface [type definition]
- (type $interfaces.Main.Interface.vtable (sub (struct
-  (field $m_defaultMethod__java_lang_Object__void (ref $function.m_defaultMethod__java_lang_Object__void))
-  (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
-  ))
- )
+;;; Code for interfaces.Main.Interface [type definition]
+(type $interfaces.Main.Interface.vtable (sub (struct
+ (field $m_defaultMethod__java_lang_Object__void (ref $function.m_defaultMethod__java_lang_Object__void))
+ (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
+ ))
+)
 
- ;;; Code for interfaces.Main.SubInterface [type definition]
- (type $interfaces.Main.SubInterface.vtable (sub (struct
-  (field $m_defaultMethod__java_lang_String__void (ref $function.m_defaultMethod__java_lang_String__void))
-  ))
- )
+;;; Code for interfaces.Main.SubInterface [type definition]
+(type $interfaces.Main.SubInterface.vtable (sub (struct
+ (field $m_defaultMethod__java_lang_String__void (ref $function.m_defaultMethod__java_lang_String__void))
+ ))
+)
 
- ;;; Code for interfaces.Main [type definition]
- (type $interfaces.Main (sub $java.lang.Object (struct
-  (field $vtable (ref $interfaces.Main.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $interfaces.Main.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_testInterfaceMembers__void_$pp_interfaces (ref $function.m_testInterfaceMembers__void_$pp_interfaces))
-  ))
- )
+;;; Code for interfaces.Main [type definition]
+(type $interfaces.Main (sub $java.lang.Object (struct
+ (field $vtable (ref $interfaces.Main.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $interfaces.Main.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_testInterfaceMembers__void_$pp_interfaces (ref $function.m_testInterfaceMembers__void_$pp_interfaces))
+ ))
+)
 
- ;;; Code for interfaces.Main.Implementor [type definition]
- (type $interfaces.Main.Implementor (sub $java.lang.Object (struct
-  (field $vtable (ref $interfaces.Main.Implementor.vtable))
-  (field $itable (ref $interfaces.Main.Implementor.itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $$outer_this@interfaces.Main.Implementor (mut (ref null $interfaces.Main)))
-  ))
- )
- (type $interfaces.Main.Implementor.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_defaultMethod__java_lang_Object__void (ref $function.m_defaultMethod__java_lang_Object__void))
-  (field $m_defaultMethod__java_lang_String__void (ref $function.m_defaultMethod__java_lang_String__void))
-  (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
-  ))
- )
- (type $interfaces.Main.Implementor.itable (sub $itable (struct
-  (field (ref $interfaces.Main.SubInterface.vtable))
-  (field (ref $interfaces.Main.Interface.vtable))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
- )))
+;;; Code for interfaces.Main.Implementor [type definition]
+(type $interfaces.Main.Implementor (sub $java.lang.Object (struct
+ (field $vtable (ref $interfaces.Main.Implementor.vtable))
+ (field $itable (ref $interfaces.Main.Implementor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@interfaces.Main.Implementor (mut (ref null $interfaces.Main)))
+ ))
+)
+(type $interfaces.Main.Implementor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_defaultMethod__java_lang_Object__void (ref $function.m_defaultMethod__java_lang_Object__void))
+ (field $m_defaultMethod__java_lang_String__void (ref $function.m_defaultMethod__java_lang_String__void))
+ (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
+ ))
+)
 
- ;;; Code for interfaces.Main.AbstractImplementor [type definition]
- (type $interfaces.Main.AbstractImplementor (sub $java.lang.Object (struct
-  (field $vtable (ref $interfaces.Main.AbstractImplementor.vtable))
-  (field $itable (ref $interfaces.Main.AbstractImplementor.itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $$outer_this@interfaces.Main.AbstractImplementor (mut (ref null $interfaces.Main)))
-  ))
- )
- (type $interfaces.Main.AbstractImplementor.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_defaultMethod__java_lang_Object__void (ref $function.m_defaultMethod__java_lang_Object__void))
-  (field $m_defaultMethod__java_lang_String__void (ref $function.m_defaultMethod__java_lang_String__void))
-  (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
-  ))
- )
- (type $interfaces.Main.AbstractImplementor.itable (sub $itable (struct
-  (field (ref $interfaces.Main.SubInterface.vtable))
-  (field (ref $interfaces.Main.Interface.vtable))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
- )))
+;;; Code for interfaces.Main.AbstractImplementor [type definition]
+(type $interfaces.Main.AbstractImplementor (sub $java.lang.Object (struct
+ (field $vtable (ref $interfaces.Main.AbstractImplementor.vtable))
+ (field $itable (ref $interfaces.Main.AbstractImplementor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@interfaces.Main.AbstractImplementor (mut (ref null $interfaces.Main)))
+ ))
+)
+(type $interfaces.Main.AbstractImplementor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_defaultMethod__java_lang_Object__void (ref $function.m_defaultMethod__java_lang_Object__void))
+ (field $m_defaultMethod__java_lang_String__void (ref $function.m_defaultMethod__java_lang_String__void))
+ (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
+ ))
+)
 
 ;;; Code for interfaces.Main.Interface [imports]
 
@@ -95,6 +77,46 @@
 ;;; Code for interfaces.Main.Implementor [imports]
 
 ;;; Code for interfaces.Main.AbstractImplementor [imports]
+
+;;; Code for interfaces.Main [static fields]
+(global $$class-initialized@interfaces.Main (mut i32)
+ (i32.const 0)
+)
+(global $$class@interfaces.Main (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for interfaces.Main.Interface [static fields]
+(global $$class-initialized@interfaces.Main.Interface (mut i32)
+ (i32.const 0)
+)
+(global $$class@interfaces.Main.Interface (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for interfaces.Main.SubInterface [static fields]
+(global $$class-initialized@interfaces.Main.SubInterface (mut i32)
+ (i32.const 0)
+)
+(global $$class@interfaces.Main.SubInterface (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for interfaces.Main.Implementor [static fields]
+(global $$class-initialized@interfaces.Main.Implementor (mut i32)
+ (i32.const 0)
+)
+(global $$class@interfaces.Main.Implementor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for interfaces.Main.AbstractImplementor [static fields]
+(global $$class-initialized@interfaces.Main.AbstractImplementor (mut i32)
+ (i32.const 0)
+)
+(global $$class@interfaces.Main.AbstractImplementor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for interfaces.Main [vtable.init]
 (global $interfaces.Main.vtable (ref $interfaces.Main.vtable)
@@ -131,74 +153,6 @@
   (ref.func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Implementor)
   (ref.func $m_interfaceMethod__void@interfaces.Main.Implementor)
  )
-)
-
-;;; Code for interfaces.Main.Implementor [itable.init]
-(global $interfaces.Main.Implementor.itable (ref $interfaces.Main.Implementor.itable)
- (struct.new $interfaces.Main.Implementor.itable
-   (global.get $interfaces.Main.SubInterface.vtable@$interfaces.Main.Implementor)
-   (global.get $interfaces.Main.Interface.vtable@$interfaces.Main.Implementor)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
- )
-)
-
-;;; Code for interfaces.Main [static fields]
-(global $$class-initialized@interfaces.Main (mut i32)
- (i32.const 0)
-)
-(global $$class@interfaces.Main (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|interfaces.Main|@interfaces.Main (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for interfaces.Main.Interface [static fields]
-(global $$class-initialized@interfaces.Main.Interface (mut i32)
- (i32.const 0)
-)
-(global $$class@interfaces.Main.Interface (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|interfaces.M...|@interfaces.Main.Interface (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for interfaces.Main.SubInterface [static fields]
-(global $$class-initialized@interfaces.Main.SubInterface (mut i32)
- (i32.const 0)
-)
-(global $$class@interfaces.Main.SubInterface (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|interfaces.M...|@interfaces.Main.SubInterface (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for interfaces.Main.Implementor [static fields]
-(global $$class-initialized@interfaces.Main.Implementor (mut i32)
- (i32.const 0)
-)
-(global $$class@interfaces.Main.Implementor (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|interfaces.M...|@interfaces.Main.Implementor (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for interfaces.Main.AbstractImplementor [static fields]
-(global $$class-initialized@interfaces.Main.AbstractImplementor (mut i32)
- (i32.const 0)
-)
-(global $$class@interfaces.Main.AbstractImplementor (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|interfaces.M...|@interfaces.Main.AbstractImplementor (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for interfaces.Main.Interface [methods]
@@ -263,20 +217,6 @@
  )
 )
 
-;;; String Interface.$getString_|interfaces.M...|()
-(func $$getString_|interfaces.M...|__java_lang_String_<once>_@interfaces.Main.Interface
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|interfaces.M...|@interfaces.Main.Interface)))
-   (then
-    (return (global.get $$string_|interfaces.M...|@interfaces.Main.Interface))
-   )
-  )
-  (global.set $$string_|interfaces.M...|@interfaces.Main.Interface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfaces.Main$Interface")))
-  (return (global.get $$string_|interfaces.M...|@interfaces.Main.Interface))
- )
-)
-
 ;;; Code for interfaces.Main.SubInterface [methods]
 
 ;;; void SubInterface.defaultMethod(String s)
@@ -320,20 +260,6 @@
   )
   (global.set $$class@interfaces.Main.SubInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|interfaces.M...|__java_lang_String_<once>_@interfaces.Main.SubInterface )))
   (return (global.get $$class@interfaces.Main.SubInterface))
- )
-)
-
-;;; String SubInterface.$getString_|interfaces.M...|()
-(func $$getString_|interfaces.M...|__java_lang_String_<once>_@interfaces.Main.SubInterface
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|interfaces.M...|@interfaces.Main.SubInterface)))
-   (then
-    (return (global.get $$string_|interfaces.M...|@interfaces.Main.SubInterface))
-   )
-  )
-  (global.set $$string_|interfaces.M...|@interfaces.Main.SubInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfaces.Main$SubInterface")))
-  (return (global.get $$string_|interfaces.M...|@interfaces.Main.SubInterface))
  )
 )
 
@@ -437,20 +363,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@interfaces.Main)
-
-;;; String Main.$getString_|interfaces.Main|()
-(func $$getString_|interfaces.Main|__java_lang_String_<once>_@interfaces.Main
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|interfaces.Main|@interfaces.Main)))
-   (then
-    (return (global.get $$string_|interfaces.Main|@interfaces.Main))
-   )
-  )
-  (global.set $$string_|interfaces.Main|@interfaces.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfaces.Main")))
-  (return (global.get $$string_|interfaces.Main|@interfaces.Main))
- )
-)
 
 ;;; Code for interfaces.Main.Implementor [methods]
 
@@ -576,20 +488,6 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@interfaces.Main.Implementor)
 
-;;; String Implementor.$getString_|interfaces.M...|()
-(func $$getString_|interfaces.M...|__java_lang_String_<once>_@interfaces.Main.Implementor
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|interfaces.M...|@interfaces.Main.Implementor)))
-   (then
-    (return (global.get $$string_|interfaces.M...|@interfaces.Main.Implementor))
-   )
-  )
-  (global.set $$string_|interfaces.M...|@interfaces.Main.Implementor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfaces.Main$Implementor")))
-  (return (global.get $$string_|interfaces.M...|@interfaces.Main.Implementor))
- )
-)
-
 ;;; Code for interfaces.Main.AbstractImplementor [methods]
 
 ;;; void AbstractImplementor.$ctor(Main $outer_this)
@@ -666,19 +564,5 @@
   )
   (global.set $$class@interfaces.Main.AbstractImplementor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|interfaces.M...|__java_lang_String_<once>_@interfaces.Main.AbstractImplementor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@interfaces.Main.AbstractImplementor))
- )
-)
-
-;;; String AbstractImplementor.$getString_|interfaces.M...|()
-(func $$getString_|interfaces.M...|__java_lang_String_<once>_@interfaces.Main.AbstractImplementor
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|interfaces.M...|@interfaces.Main.AbstractImplementor)))
-   (then
-    (return (global.get $$string_|interfaces.M...|@interfaces.Main.AbstractImplementor))
-   )
-  )
-  (global.set $$string_|interfaces.M...|@interfaces.Main.AbstractImplementor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfaces.Main$AbstractImplementor")))
-  (return (global.get $$string_|interfaces.M...|@interfaces.Main.AbstractImplementor))
  )
 )

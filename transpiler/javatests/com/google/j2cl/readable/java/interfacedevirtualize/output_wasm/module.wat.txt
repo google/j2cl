@@ -1,28 +1,36 @@
- ;;; Code for interfacedevirtualize.InterfaceDevirtualize [type definition]
- (type $interfacedevirtualize.InterfaceDevirtualize (sub $java.lang.Object (struct
-  (field $vtable (ref $interfacedevirtualize.InterfaceDevirtualize.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $interfacedevirtualize.InterfaceDevirtualize.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_compare0__java_lang_Comparable__java_lang_Object__int (ref $function.m_compare0__java_lang_Comparable__java_lang_Object__int))
-  (field $m_compare1__java_lang_Comparable__java_lang_Object__int (ref $function.m_compare1__java_lang_Comparable__java_lang_Object__int))
-  (field $m_compare2__java_lang_Comparable__java_lang_Boolean__int (ref $function.m_compare2__java_lang_Comparable__java_lang_Boolean__int))
-  (field $m_compare2__java_lang_Comparable__java_lang_Double__int (ref $function.m_compare2__java_lang_Comparable__java_lang_Double__int))
-  (field $m_compare2__java_lang_Comparable__java_lang_Integer__int (ref $function.m_compare2__java_lang_Comparable__java_lang_Integer__int))
-  (field $m_compare3__java_lang_Boolean__java_lang_Boolean__int (ref $function.m_compare3__java_lang_Boolean__java_lang_Boolean__int))
-  (field $m_compare3__java_lang_Double__java_lang_Double__int (ref $function.m_compare3__java_lang_Double__java_lang_Double__int))
-  (field $m_compare3__java_lang_Integer__java_lang_Integer__int (ref $function.m_compare3__java_lang_Integer__java_lang_Integer__int))
-  ))
- )
+;;; Code for interfacedevirtualize.InterfaceDevirtualize [type definition]
+(type $interfacedevirtualize.InterfaceDevirtualize (sub $java.lang.Object (struct
+ (field $vtable (ref $interfacedevirtualize.InterfaceDevirtualize.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $interfacedevirtualize.InterfaceDevirtualize.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_compare0__java_lang_Comparable__java_lang_Object__int (ref $function.m_compare0__java_lang_Comparable__java_lang_Object__int))
+ (field $m_compare1__java_lang_Comparable__java_lang_Object__int (ref $function.m_compare1__java_lang_Comparable__java_lang_Object__int))
+ (field $m_compare2__java_lang_Comparable__java_lang_Boolean__int (ref $function.m_compare2__java_lang_Comparable__java_lang_Boolean__int))
+ (field $m_compare2__java_lang_Comparable__java_lang_Double__int (ref $function.m_compare2__java_lang_Comparable__java_lang_Double__int))
+ (field $m_compare2__java_lang_Comparable__java_lang_Integer__int (ref $function.m_compare2__java_lang_Comparable__java_lang_Integer__int))
+ (field $m_compare3__java_lang_Boolean__java_lang_Boolean__int (ref $function.m_compare3__java_lang_Boolean__java_lang_Boolean__int))
+ (field $m_compare3__java_lang_Double__java_lang_Double__int (ref $function.m_compare3__java_lang_Double__java_lang_Double__int))
+ (field $m_compare3__java_lang_Integer__java_lang_Integer__int (ref $function.m_compare3__java_lang_Integer__java_lang_Integer__int))
+ ))
+)
 
 ;;; Code for interfacedevirtualize.InterfaceDevirtualize [imports]
+
+;;; Code for interfacedevirtualize.InterfaceDevirtualize [static fields]
+(global $$class-initialized@interfacedevirtualize.InterfaceDevirtualize (mut i32)
+ (i32.const 0)
+)
+(global $$class@interfacedevirtualize.InterfaceDevirtualize (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for interfacedevirtualize.InterfaceDevirtualize [vtable.init]
 (global $interfacedevirtualize.InterfaceDevirtualize.vtable (ref $interfacedevirtualize.InterfaceDevirtualize.vtable)
@@ -41,17 +49,6 @@
   (ref.func $m_compare3__java_lang_Double__java_lang_Double__int@interfacedevirtualize.InterfaceDevirtualize)
   (ref.func $m_compare3__java_lang_Integer__java_lang_Integer__int@interfacedevirtualize.InterfaceDevirtualize)
  )
-)
-
-;;; Code for interfacedevirtualize.InterfaceDevirtualize [static fields]
-(global $$class-initialized@interfacedevirtualize.InterfaceDevirtualize (mut i32)
- (i32.const 0)
-)
-(global $$class@interfacedevirtualize.InterfaceDevirtualize (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|interfacedev...|@interfacedevirtualize.InterfaceDevirtualize (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for interfacedevirtualize.InterfaceDevirtualize [methods]
@@ -263,17 +260,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@interfacedevirtualize.InterfaceDevirtualize)
-
-;;; String InterfaceDevirtualize.$getString_|interfacedev...|()
-(func $$getString_|interfacedev...|__java_lang_String_<once>_@interfacedevirtualize.InterfaceDevirtualize
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|interfacedev...|@interfacedevirtualize.InterfaceDevirtualize)))
-   (then
-    (return (global.get $$string_|interfacedev...|@interfacedevirtualize.InterfaceDevirtualize))
-   )
-  )
-  (global.set $$string_|interfacedev...|@interfacedevirtualize.InterfaceDevirtualize (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "interfacedevirtualize.InterfaceDevirtualize")))
-  (return (global.get $$string_|interfacedev...|@interfacedevirtualize.InterfaceDevirtualize))
- )
-)

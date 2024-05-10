@@ -1,21 +1,29 @@
- ;;; Code for simpleliterals.SimpleLiterals [type definition]
- (type $simpleliterals.SimpleLiterals (sub $java.lang.Object (struct
-  (field $vtable (ref $simpleliterals.SimpleLiterals.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $simpleliterals.SimpleLiterals.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_main__void (ref $function.m_main__void))
-  ))
- )
+;;; Code for simpleliterals.SimpleLiterals [type definition]
+(type $simpleliterals.SimpleLiterals (sub $java.lang.Object (struct
+ (field $vtable (ref $simpleliterals.SimpleLiterals.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $simpleliterals.SimpleLiterals.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_main__void (ref $function.m_main__void))
+ ))
+)
 
 ;;; Code for simpleliterals.SimpleLiterals [imports]
+
+;;; Code for simpleliterals.SimpleLiterals [static fields]
+(global $$class-initialized@simpleliterals.SimpleLiterals (mut i32)
+ (i32.const 0)
+)
+(global $$class@simpleliterals.SimpleLiterals (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for simpleliterals.SimpleLiterals [vtable.init]
 (global $simpleliterals.SimpleLiterals.vtable (ref $simpleliterals.SimpleLiterals.vtable)
@@ -27,20 +35,6 @@
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_main__void@simpleliterals.SimpleLiterals)
  )
-)
-
-;;; Code for simpleliterals.SimpleLiterals [static fields]
-(global $$class-initialized@simpleliterals.SimpleLiterals (mut i32)
- (i32.const 0)
-)
-(global $$class@simpleliterals.SimpleLiterals (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|foo|@simpleliterals.SimpleLiterals (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-(global $$string_|simplelitera...|@simpleliterals.SimpleLiterals (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for simpleliterals.SimpleLiterals [methods]
@@ -206,31 +200,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@simpleliterals.SimpleLiterals)
-
-;;; String SimpleLiterals.$getString_|foo|()
-(func $$getString_|foo|__java_lang_String_<once>_@simpleliterals.SimpleLiterals
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|foo|@simpleliterals.SimpleLiterals)))
-   (then
-    (return (global.get $$string_|foo|@simpleliterals.SimpleLiterals))
-   )
-  )
-  (global.set $$string_|foo|@simpleliterals.SimpleLiterals (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "foo")))
-  (return (global.get $$string_|foo|@simpleliterals.SimpleLiterals))
- )
-)
-
-;;; String SimpleLiterals.$getString_|simplelitera...|()
-(func $$getString_|simplelitera...|__java_lang_String_<once>_@simpleliterals.SimpleLiterals
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|simplelitera...|@simpleliterals.SimpleLiterals)))
-   (then
-    (return (global.get $$string_|simplelitera...|@simpleliterals.SimpleLiterals))
-   )
-  )
-  (global.set $$string_|simplelitera...|@simpleliterals.SimpleLiterals (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "simpleliterals.SimpleLiterals")))
-  (return (global.get $$string_|simplelitera...|@simpleliterals.SimpleLiterals))
- )
-)

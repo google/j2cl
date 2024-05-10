@@ -1,32 +1,32 @@
- ;;; Code for nestednativetype.NativeArray.$Overlay [type definition]
- (type $nestednativetype.NativeArray.$Overlay (sub (struct
-  (field $vtable (ref $nestednativetype.NativeArray.$Overlay.vtable))
-  (field $itable (ref $itable))
-  ))
- )
- (type $nestednativetype.NativeArray.$Overlay.vtable (sub (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  ))
- )
+;;; Code for nestednativetype.NativeArray.$Overlay [type definition]
+(type $nestednativetype.NativeArray.$Overlay (sub (struct
+ (field $vtable (ref $nestednativetype.NativeArray.$Overlay.vtable))
+ (field $itable (ref $itable))
+ ))
+)
+(type $nestednativetype.NativeArray.$Overlay.vtable (sub (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ ))
+)
 
- ;;; Code for nestednativetype.NativeArray [type definition]
+;;; Code for nestednativetype.NativeArray [type definition]
 
- ;;; Code for nestednativetype.NativeArray.1 [type definition]
- (type $nestednativetype.NativeArray.1 (sub $java.lang.Object (struct
-  (field $vtable (ref $nestednativetype.NativeArray.1.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $$outer_this@nestednativetype.NativeArray.1 (mut (ref null extern)))
-  ))
- )
- (type $nestednativetype.NativeArray.1.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  ))
- )
+;;; Code for nestednativetype.NativeArray.1 [type definition]
+(type $nestednativetype.NativeArray.1 (sub $java.lang.Object (struct
+ (field $vtable (ref $nestednativetype.NativeArray.1.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@nestednativetype.NativeArray.1 (mut (ref null extern)))
+ ))
+)
+(type $nestednativetype.NativeArray.1.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 
 ;;; Code for nestednativetype.NativeArray.$Overlay [imports]
 
@@ -38,6 +38,22 @@
 )
 
 ;;; Code for nestednativetype.NativeArray.1 [imports]
+
+;;; Code for nestednativetype.NativeArray.1 [static fields]
+(global $$class-initialized@nestednativetype.NativeArray.1 (mut i32)
+ (i32.const 0)
+)
+(global $$class@nestednativetype.NativeArray.1 (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for nestednativetype.NativeArray.$Overlay [static fields]
+(global $$class-initialized@nestednativetype.NativeArray.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@nestednativetype.NativeArray.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for nestednativetype.NativeArray.1 [vtable.init]
 (global $nestednativetype.NativeArray.1.vtable (ref $nestednativetype.NativeArray.1.vtable)
@@ -55,28 +71,6 @@
  (struct.new $nestednativetype.NativeArray.$Overlay.vtable
   (ref.func $$getClassImpl__java_lang_Class@nestednativetype.NativeArray.$Overlay)
  )
-)
-
-;;; Code for nestednativetype.NativeArray.1 [static fields]
-(global $$class-initialized@nestednativetype.NativeArray.1 (mut i32)
- (i32.const 0)
-)
-(global $$class@nestednativetype.NativeArray.1 (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|nestednative...|@nestednativetype.NativeArray.1 (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for nestednativetype.NativeArray.$Overlay [static fields]
-(global $$class-initialized@nestednativetype.NativeArray.$Overlay (mut i32)
- (i32.const 0)
-)
-(global $$class@nestednativetype.NativeArray.$Overlay (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|nestednative...|@nestednativetype.NativeArray.$Overlay (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for nestednativetype.NativeArray.$Overlay [methods]
@@ -136,20 +130,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nestednativetype.NativeArray.$Overlay)
-
-;;; String $Overlay.$getString_|nestednative...|()
-(func $$getString_|nestednative...|__java_lang_String_<once>_@nestednativetype.NativeArray.$Overlay
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|nestednative...|@nestednativetype.NativeArray.$Overlay)))
-   (then
-    (return (global.get $$string_|nestednative...|@nestednativetype.NativeArray.$Overlay))
-   )
-  )
-  (global.set $$string_|nestednative...|@nestednativetype.NativeArray.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nestednativetype.NativeArray$$Overlay")))
-  (return (global.get $$string_|nestednative...|@nestednativetype.NativeArray.$Overlay))
- )
-)
 
 ;;; Code for nestednativetype.NativeArray [methods]
 
@@ -230,17 +210,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nestednativetype.NativeArray.1)
-
-;;; String <anonymous> extends Object.$getString_|nestednative...|()
-(func $$getString_|nestednative...|__java_lang_String_<once>_@nestednativetype.NativeArray.1
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|nestednative...|@nestednativetype.NativeArray.1)))
-   (then
-    (return (global.get $$string_|nestednative...|@nestednativetype.NativeArray.1))
-   )
-  )
-  (global.set $$string_|nestednative...|@nestednativetype.NativeArray.1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "nestednativetype.NativeArray$1")))
-  (return (global.get $$string_|nestednative...|@nestednativetype.NativeArray.1))
- )
-)

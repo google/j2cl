@@ -1,20 +1,34 @@
- ;;; Code for systemgetproperty.Main [type definition]
- (type $systemgetproperty.Main (sub $java.lang.Object (struct
-  (field $vtable (ref $systemgetproperty.Main.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $systemgetproperty.Main.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  ))
- )
+;;; Code for systemgetproperty.Main [type definition]
+(type $systemgetproperty.Main (sub $java.lang.Object (struct
+ (field $vtable (ref $systemgetproperty.Main.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $systemgetproperty.Main.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 
 ;;; Code for systemgetproperty.Main [imports]
+
+;;; Code for systemgetproperty.Main [static fields]
+(global $property@systemgetproperty.Main (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
+(global $propertyWithDefault@systemgetproperty.Main (mut (ref null $java.lang.String))
+ (ref.null $java.lang.String)
+)
+(global $$class-initialized@systemgetproperty.Main (mut i32)
+ (i32.const 0)
+)
+(global $$class@systemgetproperty.Main (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for systemgetproperty.Main [vtable.init]
 (global $systemgetproperty.Main.vtable (ref $systemgetproperty.Main.vtable)
@@ -25,29 +39,6 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
-)
-
-;;; Code for systemgetproperty.Main [static fields]
-(global $$class-initialized@systemgetproperty.Main (mut i32)
- (i32.const 0)
-)
-(global $$class@systemgetproperty.Main (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|STRIPPED|@systemgetproperty.Main (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-(global $$string_|SIMPLE|@systemgetproperty.Main (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-(global $$string_|foo|@systemgetproperty.Main (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-(global $$string_|Foo|@systemgetproperty.Main (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-(global $$string_|systemgetpro...|@systemgetproperty.Main (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for systemgetproperty.Main [methods]
@@ -85,39 +76,54 @@
  ;;@ systemgetproperty/Main.java:24:21
  (local $x i32)
  (local $$qualifier (ref null $java.lang.String))
+ (local $$propertyValue (ref null $java.lang.String))
+ (local $$defaultValue (ref null $java.lang.String))
  (local $$qualifier_1 (ref null $java.lang.String))
+ (local $$propertyValue_1 (ref null $java.lang.String))
+ (local $$defaultValue_1 (ref null $java.lang.String))
  (local $$qualifier_2 (ref null $java.lang.String))
+ (local $$propertyValue_2 (ref null $java.lang.String))
+ (local $$defaultValue_2 (ref null $java.lang.String))
  (block
   ;;@ systemgetproperty/Main.java:24:41
   (call $$clinit__void_<once>_@systemgetproperty.Main )
   ;;@ systemgetproperty/Main.java:25:4
   
   ;;@ systemgetproperty/Main.java:26:4
-  (local.set $x (i32.const 0))
+  (local.set $x (ref.eq (global.get $property@systemgetproperty.Main) (call $$getString_|SIMPLE|__java_lang_String_<once>_@systemgetproperty.Main )))
   ;;@ systemgetproperty/Main.java:27:4
-  (local.set $x (i32.const 0))
+  (local.set $x (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (global.get $property@systemgetproperty.Main))(call $$getString_|SIMPLE|__java_lang_String_<once>_@systemgetproperty.Main )(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(global.get $property@systemgetproperty.Main)))))
   ;;@ systemgetproperty/Main.java:28:4
-  (local.set $x (block (result i32)
-   (local.set $$qualifier (call $$getString_|STRIPPED|__java_lang_String_<once>_@systemgetproperty.Main ))
-   (call_ref $function.m_equalsIgnoreCase__java_lang_String__boolean (ref.as_non_null (local.get $$qualifier))(call $$getString_|SIMPLE|__java_lang_String_<once>_@systemgetproperty.Main )(struct.get $java.lang.String.vtable $m_equalsIgnoreCase__java_lang_String__boolean (struct.get $java.lang.String $vtable(local.get $$qualifier))))
-  ))
+  (local.set $x (call_ref $function.m_equalsIgnoreCase__java_lang_String__boolean (ref.as_non_null (global.get $property@systemgetproperty.Main))(call $$getString_|SIMPLE|__java_lang_String_<once>_@systemgetproperty.Main )(struct.get $java.lang.String.vtable $m_equalsIgnoreCase__java_lang_String__boolean (struct.get $java.lang.String $vtable(global.get $property@systemgetproperty.Main)))))
   ;;@ systemgetproperty/Main.java:29:4
-  (local.set $x (i32.const 0))
+  (local.set $x (ref.eq (global.get $property@systemgetproperty.Main) (call $$getString_|NOTSIMPLE|__java_lang_String_<once>_@systemgetproperty.Main )))
   ;;@ systemgetproperty/Main.java:31:4
-  (local.set $x (i32.const 0))
+  (local.set $x (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (global.get $propertyWithDefault@systemgetproperty.Main))(call $$getString_|SIMPLE|__java_lang_String_<once>_@systemgetproperty.Main )(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(global.get $propertyWithDefault@systemgetproperty.Main)))))
   ;;@ systemgetproperty/Main.java:32:4
-  (local.set $x (i32.const 1))
+  (local.set $x (block (result i32)
+   (local.set $$qualifier (block (result (ref null $java.lang.String))
+    (local.set $$propertyValue (call $$jre.bar__java_lang_String_<once>_@javaemul.internal.SystemPropertyPool ))
+    (local.set $$defaultValue (call $$getString_|bar|__java_lang_String_<once>_@systemgetproperty.Main ))
+    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$propertyValue)) (then (local.get $$defaultValue)) (else (local.get $$propertyValue)))
+   ))
+   (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $$qualifier))(call $$getString_|bar|__java_lang_String_<once>_@systemgetproperty.Main )(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(local.get $$qualifier))))
+  ))
   ;;@ systemgetproperty/Main.java:33:4
   (local.set $x (block (result i32)
    (local.set $$qualifier_1 (block (result (ref null $java.lang.String))
-    (drop (call $m_mightHaveSideEffects__java_lang_String@systemgetproperty.Main ))
-    (call $$getString_|STRIPPED|__java_lang_String_<once>_@systemgetproperty.Main )
+    (local.set $$propertyValue_1 (call $$jre.classMetadata__java_lang_String_<once>_@javaemul.internal.SystemPropertyPool ))
+    (local.set $$defaultValue_1 (call $m_mightHaveSideEffects__java_lang_String@systemgetproperty.Main ))
+    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$propertyValue_1)) (then (local.get $$defaultValue_1)) (else (local.get $$propertyValue_1)))
    ))
    (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $$qualifier_1))(call $$getString_|SIMPLE|__java_lang_String_<once>_@systemgetproperty.Main )(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(local.get $$qualifier_1))))
   ))
   ;;@ systemgetproperty/Main.java:34:4
   (local.set $x (block (result i32)
-   (local.set $$qualifier_2 (call $m_mightHaveSideEffects__java_lang_String@systemgetproperty.Main ))
+   (local.set $$qualifier_2 (block (result (ref null $java.lang.String))
+    (local.set $$propertyValue_2 (call $$unset.property__java_lang_String_<once>_@javaemul.internal.SystemPropertyPool ))
+    (local.set $$defaultValue_2 (call $m_mightHaveSideEffects__java_lang_String@systemgetproperty.Main ))
+    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$propertyValue_2)) (then (local.get $$defaultValue_2)) (else (local.get $$propertyValue_2)))
+   ))
    (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $$qualifier_2))(call $$getString_|foo|__java_lang_String_<once>_@systemgetproperty.Main )(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(local.get $$qualifier_2))))
   ))
  )
@@ -136,6 +142,8 @@
 ;;; void Main.$clinit()
 (func $$clinit__void_<once>_@systemgetproperty.Main
  ;;@ systemgetproperty/Main.java:18:13
+ (local $$propertyValue (ref null $java.lang.String))
+ (local $$defaultValue (ref null $java.lang.String))
  (block
   ;;@ systemgetproperty/Main.java:18:13
   (if (global.get $$class-initialized@systemgetproperty.Main)
@@ -148,6 +156,14 @@
   (global.set $$class-initialized@systemgetproperty.Main (i32.const 1))
   ;;@ systemgetproperty/Main.java:18:13
   (call $$clinit__void_<once>_@java.lang.Object )
+  ;;@ systemgetproperty/Main.java:20:2
+  (global.set $property@systemgetproperty.Main (call $$jre.classMetadata__java_lang_String_<once>_@javaemul.internal.SystemPropertyPool ))
+  ;;@ systemgetproperty/Main.java:21:2
+  (global.set $propertyWithDefault@systemgetproperty.Main (block (result (ref null $java.lang.String))
+   (local.set $$propertyValue (call $$jre.classMetadata__java_lang_String_<once>_@javaemul.internal.SystemPropertyPool ))
+   (local.set $$defaultValue (call $$getString_|default|__java_lang_String_<once>_@systemgetproperty.Main ))
+   (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$propertyValue)) (then (local.get $$defaultValue)) (else (local.get $$propertyValue)))
+  ))
  )
 )
 
@@ -177,73 +193,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@systemgetproperty.Main)
-
-;;; String Main.$getString_|STRIPPED|()
-(func $$getString_|STRIPPED|__java_lang_String_<once>_@systemgetproperty.Main
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|STRIPPED|@systemgetproperty.Main)))
-   (then
-    (return (global.get $$string_|STRIPPED|@systemgetproperty.Main))
-   )
-  )
-  (global.set $$string_|STRIPPED|@systemgetproperty.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "STRIPPED")))
-  (return (global.get $$string_|STRIPPED|@systemgetproperty.Main))
- )
-)
-
-;;; String Main.$getString_|SIMPLE|()
-(func $$getString_|SIMPLE|__java_lang_String_<once>_@systemgetproperty.Main
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|SIMPLE|@systemgetproperty.Main)))
-   (then
-    (return (global.get $$string_|SIMPLE|@systemgetproperty.Main))
-   )
-  )
-  (global.set $$string_|SIMPLE|@systemgetproperty.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "SIMPLE")))
-  (return (global.get $$string_|SIMPLE|@systemgetproperty.Main))
- )
-)
-
-;;; String Main.$getString_|foo|()
-(func $$getString_|foo|__java_lang_String_<once>_@systemgetproperty.Main
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|foo|@systemgetproperty.Main)))
-   (then
-    (return (global.get $$string_|foo|@systemgetproperty.Main))
-   )
-  )
-  (global.set $$string_|foo|@systemgetproperty.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "foo")))
-  (return (global.get $$string_|foo|@systemgetproperty.Main))
- )
-)
-
-;;; String Main.$getString_|Foo|()
-(func $$getString_|Foo|__java_lang_String_<once>_@systemgetproperty.Main
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|Foo|@systemgetproperty.Main)))
-   (then
-    (return (global.get $$string_|Foo|@systemgetproperty.Main))
-   )
-  )
-  (global.set $$string_|Foo|@systemgetproperty.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "Foo")))
-  (return (global.get $$string_|Foo|@systemgetproperty.Main))
- )
-)
-
-;;; String Main.$getString_|systemgetpro...|()
-(func $$getString_|systemgetpro...|__java_lang_String_<once>_@systemgetproperty.Main
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|systemgetpro...|@systemgetproperty.Main)))
-   (then
-    (return (global.get $$string_|systemgetpro...|@systemgetproperty.Main))
-   )
-  )
-  (global.set $$string_|systemgetpro...|@systemgetproperty.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "systemgetproperty.Main")))
-  (return (global.get $$string_|systemgetpro...|@systemgetproperty.Main))
- )
-)

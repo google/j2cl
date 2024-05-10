@@ -1,22 +1,30 @@
- ;;; Code for cascadingconstructor.CascadingConstructor [type definition]
- (type $cascadingconstructor.CascadingConstructor (sub $java.lang.Object (struct
-  (field $vtable (ref $cascadingconstructor.CascadingConstructor.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $a@cascadingconstructor.CascadingConstructor (mut i32))
-  (field $b@cascadingconstructor.CascadingConstructor (mut i32))
-  ))
- )
- (type $cascadingconstructor.CascadingConstructor.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  ))
- )
+;;; Code for cascadingconstructor.CascadingConstructor [type definition]
+(type $cascadingconstructor.CascadingConstructor (sub $java.lang.Object (struct
+ (field $vtable (ref $cascadingconstructor.CascadingConstructor.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $a@cascadingconstructor.CascadingConstructor (mut i32))
+ (field $b@cascadingconstructor.CascadingConstructor (mut i32))
+ ))
+)
+(type $cascadingconstructor.CascadingConstructor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 
 ;;; Code for cascadingconstructor.CascadingConstructor [imports]
+
+;;; Code for cascadingconstructor.CascadingConstructor [static fields]
+(global $$class-initialized@cascadingconstructor.CascadingConstructor (mut i32)
+ (i32.const 0)
+)
+(global $$class@cascadingconstructor.CascadingConstructor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for cascadingconstructor.CascadingConstructor [vtable.init]
 (global $cascadingconstructor.CascadingConstructor.vtable (ref $cascadingconstructor.CascadingConstructor.vtable)
@@ -27,17 +35,6 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
-)
-
-;;; Code for cascadingconstructor.CascadingConstructor [static fields]
-(global $$class-initialized@cascadingconstructor.CascadingConstructor (mut i32)
- (i32.const 0)
-)
-(global $$class@cascadingconstructor.CascadingConstructor (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|cascadingcon...|@cascadingconstructor.CascadingConstructor (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for cascadingconstructor.CascadingConstructor [methods]
@@ -148,17 +145,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@cascadingconstructor.CascadingConstructor)
-
-;;; String CascadingConstructor.$getString_|cascadingcon...|()
-(func $$getString_|cascadingcon...|__java_lang_String_<once>_@cascadingconstructor.CascadingConstructor
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|cascadingcon...|@cascadingconstructor.CascadingConstructor)))
-   (then
-    (return (global.get $$string_|cascadingcon...|@cascadingconstructor.CascadingConstructor))
-   )
-  )
-  (global.set $$string_|cascadingcon...|@cascadingconstructor.CascadingConstructor (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "cascadingconstructor.CascadingConstructor")))
-  (return (global.get $$string_|cascadingcon...|@cascadingconstructor.CascadingConstructor))
- )
-)

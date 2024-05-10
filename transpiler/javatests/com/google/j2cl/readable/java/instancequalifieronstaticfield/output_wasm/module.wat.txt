@@ -1,31 +1,20 @@
- ;;; Code for instancequalifieronstaticfield.InstanceQualifiers [type definition]
- (type $instancequalifieronstaticfield.InstanceQualifiers (sub $java.lang.Object (struct
-  (field $vtable (ref $instancequalifieronstaticfield.InstanceQualifiers.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $instancequalifieronstaticfield.InstanceQualifiers.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  ))
- )
+;;; Code for instancequalifieronstaticfield.InstanceQualifiers [type definition]
+(type $instancequalifieronstaticfield.InstanceQualifiers (sub $java.lang.Object (struct
+ (field $vtable (ref $instancequalifieronstaticfield.InstanceQualifiers.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $instancequalifieronstaticfield.InstanceQualifiers.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 
 ;;; Code for instancequalifieronstaticfield.InstanceQualifiers [imports]
-
-;;; Code for instancequalifieronstaticfield.InstanceQualifiers [vtable.init]
-(global $instancequalifieronstaticfield.InstanceQualifiers.vtable (ref $instancequalifieronstaticfield.InstanceQualifiers.vtable)
- (struct.new $instancequalifieronstaticfield.InstanceQualifiers.vtable
-  (ref.func $$getClassImpl__java_lang_Class@instancequalifieronstaticfield.InstanceQualifiers)
-  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
-  (ref.func $m_hashCode__int@java.lang.Object)
-  (ref.func $m_toString__java_lang_String@java.lang.Object)
- )
-)
 
 ;;; Code for instancequalifieronstaticfield.InstanceQualifiers [static fields]
 (global $staticField@instancequalifieronstaticfield.InstanceQualifiers (mut i32)
@@ -40,8 +29,16 @@
 (global $$class@instancequalifieronstaticfield.InstanceQualifiers (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $$string_|instancequal...|@instancequalifieronstaticfield.InstanceQualifiers (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
+
+;;; Code for instancequalifieronstaticfield.InstanceQualifiers [vtable.init]
+(global $instancequalifieronstaticfield.InstanceQualifiers.vtable (ref $instancequalifieronstaticfield.InstanceQualifiers.vtable)
+ (struct.new $instancequalifieronstaticfield.InstanceQualifiers.vtable
+  (ref.func $$getClassImpl__java_lang_Class@instancequalifieronstaticfield.InstanceQualifiers)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
 )
 
 ;;; Code for instancequalifieronstaticfield.InstanceQualifiers [methods]
@@ -240,17 +237,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@instancequalifieronstaticfield.InstanceQualifiers)
-
-;;; String InstanceQualifiers.$getString_|instancequal...|()
-(func $$getString_|instancequal...|__java_lang_String_<once>_@instancequalifieronstaticfield.InstanceQualifiers
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|instancequal...|@instancequalifieronstaticfield.InstanceQualifiers)))
-   (then
-    (return (global.get $$string_|instancequal...|@instancequalifieronstaticfield.InstanceQualifiers))
-   )
-  )
-  (global.set $$string_|instancequal...|@instancequalifieronstaticfield.InstanceQualifiers (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instancequalifieronstaticfield.InstanceQualifiers")))
-  (return (global.get $$string_|instancequal...|@instancequalifieronstaticfield.InstanceQualifiers))
- )
-)

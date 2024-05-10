@@ -42,7 +42,7 @@ def readable_example(
         generate_readable_source_maps = False,
         generate_wasm_readables = True,
         generate_wasm_imports = False,
-        generate_wasm_modular = False,
+        use_modular_pipeline = True,
         wasm_entry_points = [],
         generate_kt_readables = True,
         generate_kt_web_readables = False,
@@ -103,7 +103,8 @@ def readable_example(
             name = "readable_wasm",
             deps = [":readable-j2wasm"],
             entry_points = wasm_entry_points,
-            internal_transpiler_args = ["-experimentalWasmEnableNonNativeJsEnum"],
+            internal_transpiler_args = ["-experimentalWasmEnableNonNativeJsEnum"] if not use_modular_pipeline else [],
+            use_modular_pipeline = use_modular_pipeline,
         )
 
         _readable_diff_test(
@@ -112,14 +113,6 @@ def readable_example(
             dir_out = "output_wasm",
             tags = ["j2wasm"],
         )
-
-        if generate_wasm_modular:
-            _readable_diff_test(
-                name = "readable_wasm_modular_golden",
-                target = ":readable-j2wasm.modular",
-                dir_out = "output_wasm_modular",
-                tags = ["j2wasm"],
-            )
 
         if generate_wasm_imports:
             _readable_diff_test(

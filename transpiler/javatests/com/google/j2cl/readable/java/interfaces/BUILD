@@ -10,5 +10,4 @@ package(
 
 readable_example(
     srcs = glob(["*.java"]),
-    generate_wasm_modular = True,
 )

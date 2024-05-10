@@ -1,38 +1,54 @@
- ;;; Code for aptgeneratordep.Dummy [type definition]
- (type $aptgeneratordep.Dummy (sub $java.lang.Object (struct
-  (field $vtable (ref $aptgeneratordep.Dummy.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $aptgeneratordep.Dummy.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  ))
- )
+;;; Code for aptgeneratordep.Dummy [type definition]
+(type $aptgeneratordep.Dummy (sub $java.lang.Object (struct
+ (field $vtable (ref $aptgeneratordep.Dummy.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $aptgeneratordep.Dummy.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 
- ;;; Code for aptgeneratordep.Foo [type definition]
- (type $aptgeneratordep.Foo (sub $java.lang.Object (struct
-  (field $vtable (ref $aptgeneratordep.Foo.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $aptgeneratordep.Foo.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  ))
- )
+;;; Code for aptgeneratordep.Foo [type definition]
+(type $aptgeneratordep.Foo (sub $java.lang.Object (struct
+ (field $vtable (ref $aptgeneratordep.Foo.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $aptgeneratordep.Foo.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 
 ;;; Code for aptgeneratordep.Dummy [imports]
 
 ;;; Code for aptgeneratordep.Foo [imports]
+
+;;; Code for aptgeneratordep.Dummy [static fields]
+(global $$class-initialized@aptgeneratordep.Dummy (mut i32)
+ (i32.const 0)
+)
+(global $$class@aptgeneratordep.Dummy (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for aptgeneratordep.Foo [static fields]
+(global $$class-initialized@aptgeneratordep.Foo (mut i32)
+ (i32.const 0)
+)
+(global $$class@aptgeneratordep.Foo (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for aptgeneratordep.Dummy [vtable.init]
 (global $aptgeneratordep.Dummy.vtable (ref $aptgeneratordep.Dummy.vtable)
@@ -54,28 +70,6 @@
   (ref.func $m_hashCode__int@aptgeneratordep.Foo)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
-)
-
-;;; Code for aptgeneratordep.Dummy [static fields]
-(global $$class-initialized@aptgeneratordep.Dummy (mut i32)
- (i32.const 0)
-)
-(global $$class@aptgeneratordep.Dummy (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|aptgenerator...|@aptgeneratordep.Dummy (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for aptgeneratordep.Foo [static fields]
-(global $$class-initialized@aptgeneratordep.Foo (mut i32)
- (i32.const 0)
-)
-(global $$class@aptgeneratordep.Foo (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|aptgenerator...|@aptgeneratordep.Foo (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for aptgeneratordep.Dummy [methods]
@@ -151,20 +145,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@aptgeneratordep.Dummy)
-
-;;; String Dummy.$getString_|aptgenerator...|()
-(func $$getString_|aptgenerator...|__java_lang_String_<once>_@aptgeneratordep.Dummy
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|aptgenerator...|@aptgeneratordep.Dummy)))
-   (then
-    (return (global.get $$string_|aptgenerator...|@aptgeneratordep.Dummy))
-   )
-  )
-  (global.set $$string_|aptgenerator...|@aptgeneratordep.Dummy (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "aptgeneratordep.Dummy")))
-  (return (global.get $$string_|aptgenerator...|@aptgeneratordep.Dummy))
- )
-)
 
 ;;; Code for aptgeneratordep.Foo [methods]
 
@@ -258,17 +238,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@aptgeneratordep.Foo)
-
-;;; String Foo.$getString_|aptgenerator...|()
-(func $$getString_|aptgenerator...|__java_lang_String_<once>_@aptgeneratordep.Foo
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|aptgenerator...|@aptgeneratordep.Foo)))
-   (then
-    (return (global.get $$string_|aptgenerator...|@aptgeneratordep.Foo))
-   )
-  )
-  (global.set $$string_|aptgenerator...|@aptgeneratordep.Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "aptgeneratordep.Foo")))
-  (return (global.get $$string_|aptgenerator...|@aptgeneratordep.Foo))
- )
-)

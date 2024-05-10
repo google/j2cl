@@ -1,20 +1,28 @@
- ;;; Code for inferreturn.InferReturn [type definition]
- (type $inferreturn.InferReturn (sub $java.lang.Object (struct
-  (field $vtable (ref $inferreturn.InferReturn.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $inferreturn.InferReturn.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  ))
- )
+;;; Code for inferreturn.InferReturn [type definition]
+(type $inferreturn.InferReturn (sub $java.lang.Object (struct
+ (field $vtable (ref $inferreturn.InferReturn.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $inferreturn.InferReturn.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 
 ;;; Code for inferreturn.InferReturn [imports]
+
+;;; Code for inferreturn.InferReturn [static fields]
+(global $$class-initialized@inferreturn.InferReturn (mut i32)
+ (i32.const 0)
+)
+(global $$class@inferreturn.InferReturn (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for inferreturn.InferReturn [vtable.init]
 (global $inferreturn.InferReturn.vtable (ref $inferreturn.InferReturn.vtable)
@@ -25,20 +33,6 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
-)
-
-;;; Code for inferreturn.InferReturn [static fields]
-(global $$class-initialized@inferreturn.InferReturn (mut i32)
- (i32.const 0)
-)
-(global $$class@inferreturn.InferReturn (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|foo|@inferreturn.InferReturn (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-(global $$string_|inferreturn....|@inferreturn.InferReturn (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for inferreturn.InferReturn [methods]
@@ -277,31 +271,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@inferreturn.InferReturn)
-
-;;; String InferReturn.$getString_|foo|()
-(func $$getString_|foo|__java_lang_String_<once>_@inferreturn.InferReturn
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|foo|@inferreturn.InferReturn)))
-   (then
-    (return (global.get $$string_|foo|@inferreturn.InferReturn))
-   )
-  )
-  (global.set $$string_|foo|@inferreturn.InferReturn (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "foo")))
-  (return (global.get $$string_|foo|@inferreturn.InferReturn))
- )
-)
-
-;;; String InferReturn.$getString_|inferreturn....|()
-(func $$getString_|inferreturn....|__java_lang_String_<once>_@inferreturn.InferReturn
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|inferreturn....|@inferreturn.InferReturn)))
-   (then
-    (return (global.get $$string_|inferreturn....|@inferreturn.InferReturn))
-   )
-  )
-  (global.set $$string_|inferreturn....|@inferreturn.InferReturn (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "inferreturn.InferReturn")))
-  (return (global.get $$string_|inferreturn....|@inferreturn.InferReturn))
- )
-)

@@ -1,20 +1,28 @@
- ;;; Code for staticblocklocalvar.StaticBlockLocalVar [type definition]
- (type $staticblocklocalvar.StaticBlockLocalVar (sub $java.lang.Object (struct
-  (field $vtable (ref $staticblocklocalvar.StaticBlockLocalVar.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $staticblocklocalvar.StaticBlockLocalVar.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  ))
- )
+;;; Code for staticblocklocalvar.StaticBlockLocalVar [type definition]
+(type $staticblocklocalvar.StaticBlockLocalVar (sub $java.lang.Object (struct
+ (field $vtable (ref $staticblocklocalvar.StaticBlockLocalVar.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $staticblocklocalvar.StaticBlockLocalVar.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 
 ;;; Code for staticblocklocalvar.StaticBlockLocalVar [imports]
+
+;;; Code for staticblocklocalvar.StaticBlockLocalVar [static fields]
+(global $$class-initialized@staticblocklocalvar.StaticBlockLocalVar (mut i32)
+ (i32.const 0)
+)
+(global $$class@staticblocklocalvar.StaticBlockLocalVar (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for staticblocklocalvar.StaticBlockLocalVar [vtable.init]
 (global $staticblocklocalvar.StaticBlockLocalVar.vtable (ref $staticblocklocalvar.StaticBlockLocalVar.vtable)
@@ -25,17 +33,6 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
-)
-
-;;; Code for staticblocklocalvar.StaticBlockLocalVar [static fields]
-(global $$class-initialized@staticblocklocalvar.StaticBlockLocalVar (mut i32)
- (i32.const 0)
-)
-(global $$class@staticblocklocalvar.StaticBlockLocalVar (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|staticblockl...|@staticblocklocalvar.StaticBlockLocalVar (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for staticblocklocalvar.StaticBlockLocalVar [methods]
@@ -116,17 +113,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@staticblocklocalvar.StaticBlockLocalVar)
-
-;;; String StaticBlockLocalVar.$getString_|staticblockl...|()
-(func $$getString_|staticblockl...|__java_lang_String_<once>_@staticblocklocalvar.StaticBlockLocalVar
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|staticblockl...|@staticblocklocalvar.StaticBlockLocalVar)))
-   (then
-    (return (global.get $$string_|staticblockl...|@staticblocklocalvar.StaticBlockLocalVar))
-   )
-  )
-  (global.set $$string_|staticblockl...|@staticblocklocalvar.StaticBlockLocalVar (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "staticblocklocalvar.StaticBlockLocalVar")))
-  (return (global.get $$string_|staticblockl...|@staticblocklocalvar.StaticBlockLocalVar))
- )
-)

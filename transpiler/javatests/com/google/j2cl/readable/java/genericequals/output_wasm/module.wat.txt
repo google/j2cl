@@ -1,23 +1,31 @@
- ;;; Code for genericequals.GenericEquals [type definition]
- (type $genericequals.GenericEquals (sub $java.lang.Object (struct
-  (field $vtable (ref $genericequals.GenericEquals.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $value2@genericequals.GenericEquals (mut (ref null $genericequals.GenericEquals)))
-  (field $value@genericequals.GenericEquals (mut (ref null $java.lang.Object)))
-  ))
- )
- (type $genericequals.GenericEquals.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_foo__genericequals_GenericEquals__java_lang_Object (ref $function.m_foo__genericequals_GenericEquals__java_lang_Object))
-  ))
- )
+;;; Code for genericequals.GenericEquals [type definition]
+(type $genericequals.GenericEquals (sub $java.lang.Object (struct
+ (field $vtable (ref $genericequals.GenericEquals.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $value2@genericequals.GenericEquals (mut (ref null $genericequals.GenericEquals)))
+ (field $value@genericequals.GenericEquals (mut (ref null $java.lang.Object)))
+ ))
+)
+(type $genericequals.GenericEquals.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_foo__genericequals_GenericEquals__java_lang_Object (ref $function.m_foo__genericequals_GenericEquals__java_lang_Object))
+ ))
+)
 
 ;;; Code for genericequals.GenericEquals [imports]
+
+;;; Code for genericequals.GenericEquals [static fields]
+(global $$class-initialized@genericequals.GenericEquals (mut i32)
+ (i32.const 0)
+)
+(global $$class@genericequals.GenericEquals (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for genericequals.GenericEquals [vtable.init]
 (global $genericequals.GenericEquals.vtable (ref $genericequals.GenericEquals.vtable)
@@ -29,17 +37,6 @@
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_foo__genericequals_GenericEquals__java_lang_Object@genericequals.GenericEquals)
  )
-)
-
-;;; Code for genericequals.GenericEquals [static fields]
-(global $$class-initialized@genericequals.GenericEquals (mut i32)
- (i32.const 0)
-)
-(global $$class@genericequals.GenericEquals (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|genericequal...|@genericequals.GenericEquals (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for genericequals.GenericEquals [methods]
@@ -174,17 +171,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@genericequals.GenericEquals)
-
-;;; String GenericEquals.$getString_|genericequal...|()
-(func $$getString_|genericequal...|__java_lang_String_<once>_@genericequals.GenericEquals
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|genericequal...|@genericequals.GenericEquals)))
-   (then
-    (return (global.get $$string_|genericequal...|@genericequals.GenericEquals))
-   )
-  )
-  (global.set $$string_|genericequal...|@genericequals.GenericEquals (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "genericequals.GenericEquals")))
-  (return (global.get $$string_|genericequal...|@genericequals.GenericEquals))
- )
-)

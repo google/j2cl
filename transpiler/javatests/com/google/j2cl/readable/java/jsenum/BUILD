@@ -13,5 +13,7 @@ readable_example(
         "*.java",
         "*.native.js",
     ]),
+    # TODO(b/325056024): Enable when jsenum is supported in the modular pipeline.
+    use_modular_pipeline = False,
     deps = ["//third_party:jsinterop-annotations-j2cl"],
 )

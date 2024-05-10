@@ -1,15 +1,15 @@
- ;;; Code for jsmemberinnativetype.MyNativeType.$Overlay [type definition]
- (type $jsmemberinnativetype.MyNativeType.$Overlay (sub (struct
-  (field $vtable (ref $jsmemberinnativetype.MyNativeType.$Overlay.vtable))
-  (field $itable (ref $itable))
-  ))
- )
- (type $jsmemberinnativetype.MyNativeType.$Overlay.vtable (sub (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  ))
- )
+;;; Code for jsmemberinnativetype.MyNativeType.$Overlay [type definition]
+(type $jsmemberinnativetype.MyNativeType.$Overlay (sub (struct
+ (field $vtable (ref $jsmemberinnativetype.MyNativeType.$Overlay.vtable))
+ (field $itable (ref $itable))
+ ))
+)
+(type $jsmemberinnativetype.MyNativeType.$Overlay.vtable (sub (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ ))
+)
 
- ;;; Code for jsmemberinnativetype.MyNativeType [type definition]
+;;; Code for jsmemberinnativetype.MyNativeType [type definition]
 
 ;;; Code for jsmemberinnativetype.MyNativeType.$Overlay [imports]
 
@@ -120,13 +120,6 @@
  (param $value i32)
 )
 
-;;; Code for jsmemberinnativetype.MyNativeType.$Overlay [vtable.init]
-(global $jsmemberinnativetype.MyNativeType.$Overlay.vtable (ref $jsmemberinnativetype.MyNativeType.$Overlay.vtable)
- (struct.new $jsmemberinnativetype.MyNativeType.$Overlay.vtable
-  (ref.func $$getClassImpl__java_lang_Class@jsmemberinnativetype.MyNativeType.$Overlay)
- )
-)
-
 ;;; Code for jsmemberinnativetype.MyNativeType.$Overlay [static fields]
 (global $$class-initialized@jsmemberinnativetype.MyNativeType.$Overlay (mut i32)
  (i32.const 0)
@@ -134,8 +127,12 @@
 (global $$class@jsmemberinnativetype.MyNativeType.$Overlay (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $$string_|jsmemberinna...|@jsmemberinnativetype.MyNativeType.$Overlay (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
+
+;;; Code for jsmemberinnativetype.MyNativeType.$Overlay [vtable.init]
+(global $jsmemberinnativetype.MyNativeType.$Overlay.vtable (ref $jsmemberinnativetype.MyNativeType.$Overlay.vtable)
+ (struct.new $jsmemberinnativetype.MyNativeType.$Overlay.vtable
+  (ref.func $$getClassImpl__java_lang_Class@jsmemberinnativetype.MyNativeType.$Overlay)
+ )
 )
 
 ;;; Code for jsmemberinnativetype.MyNativeType.$Overlay [methods]
@@ -210,19 +207,5 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsmemberinnativetype.MyNativeType.$Overlay)
-
-;;; String $Overlay.$getString_|jsmemberinna...|()
-(func $$getString_|jsmemberinna...|__java_lang_String_<once>_@jsmemberinnativetype.MyNativeType.$Overlay
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|jsmemberinna...|@jsmemberinnativetype.MyNativeType.$Overlay)))
-   (then
-    (return (global.get $$string_|jsmemberinna...|@jsmemberinnativetype.MyNativeType.$Overlay))
-   )
-  )
-  (global.set $$string_|jsmemberinna...|@jsmemberinnativetype.MyNativeType.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsmemberinnativetype.MyNativeType$$Overlay")))
-  (return (global.get $$string_|jsmemberinna...|@jsmemberinnativetype.MyNativeType.$Overlay))
- )
-)
 
 ;;; Code for jsmemberinnativetype.MyNativeType [methods]

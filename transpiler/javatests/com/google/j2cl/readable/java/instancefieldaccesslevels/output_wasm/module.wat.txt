@@ -1,24 +1,32 @@
- ;;; Code for instancefieldaccesslevels.InstanceFieldAccessLevels [type definition]
- (type $instancefieldaccesslevels.InstanceFieldAccessLevels (sub $java.lang.Object (struct
-  (field $vtable (ref $instancefieldaccesslevels.InstanceFieldAccessLevels.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $a@instancefieldaccesslevels.InstanceFieldAccessLevels (mut i32))
-  (field $b@instancefieldaccesslevels.InstanceFieldAccessLevels (mut i8))
-  (field $c@instancefieldaccesslevels.InstanceFieldAccessLevels (mut (ref null $java.lang.Object)))
-  (field $d@instancefieldaccesslevels.InstanceFieldAccessLevels (mut i32))
-  ))
- )
- (type $instancefieldaccesslevels.InstanceFieldAccessLevels.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  ))
- )
+;;; Code for instancefieldaccesslevels.InstanceFieldAccessLevels [type definition]
+(type $instancefieldaccesslevels.InstanceFieldAccessLevels (sub $java.lang.Object (struct
+ (field $vtable (ref $instancefieldaccesslevels.InstanceFieldAccessLevels.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $a@instancefieldaccesslevels.InstanceFieldAccessLevels (mut i32))
+ (field $b@instancefieldaccesslevels.InstanceFieldAccessLevels (mut i8))
+ (field $c@instancefieldaccesslevels.InstanceFieldAccessLevels (mut (ref null $java.lang.Object)))
+ (field $d@instancefieldaccesslevels.InstanceFieldAccessLevels (mut i32))
+ ))
+)
+(type $instancefieldaccesslevels.InstanceFieldAccessLevels.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 
 ;;; Code for instancefieldaccesslevels.InstanceFieldAccessLevels [imports]
+
+;;; Code for instancefieldaccesslevels.InstanceFieldAccessLevels [static fields]
+(global $$class-initialized@instancefieldaccesslevels.InstanceFieldAccessLevels (mut i32)
+ (i32.const 0)
+)
+(global $$class@instancefieldaccesslevels.InstanceFieldAccessLevels (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for instancefieldaccesslevels.InstanceFieldAccessLevels [vtable.init]
 (global $instancefieldaccesslevels.InstanceFieldAccessLevels.vtable (ref $instancefieldaccesslevels.InstanceFieldAccessLevels.vtable)
@@ -29,17 +37,6 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
-)
-
-;;; Code for instancefieldaccesslevels.InstanceFieldAccessLevels [static fields]
-(global $$class-initialized@instancefieldaccesslevels.InstanceFieldAccessLevels (mut i32)
- (i32.const 0)
-)
-(global $$class@instancefieldaccesslevels.InstanceFieldAccessLevels (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|instancefiel...|@instancefieldaccesslevels.InstanceFieldAccessLevels (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for instancefieldaccesslevels.InstanceFieldAccessLevels [methods]
@@ -115,17 +112,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@instancefieldaccesslevels.InstanceFieldAccessLevels)
-
-;;; String InstanceFieldAccessLevels.$getString_|instancefiel...|()
-(func $$getString_|instancefiel...|__java_lang_String_<once>_@instancefieldaccesslevels.InstanceFieldAccessLevels
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|instancefiel...|@instancefieldaccesslevels.InstanceFieldAccessLevels)))
-   (then
-    (return (global.get $$string_|instancefiel...|@instancefieldaccesslevels.InstanceFieldAccessLevels))
-   )
-  )
-  (global.set $$string_|instancefiel...|@instancefieldaccesslevels.InstanceFieldAccessLevels (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "instancefieldaccesslevels.InstanceFieldAccessLevels")))
-  (return (global.get $$string_|instancefiel...|@instancefieldaccesslevels.InstanceFieldAccessLevels))
- )
-)

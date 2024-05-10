@@ -1,20 +1,28 @@
- ;;; Code for boundedtypevariable.BoundedTypeVariable [type definition]
- (type $boundedtypevariable.BoundedTypeVariable (sub $java.lang.Object (struct
-  (field $vtable (ref $boundedtypevariable.BoundedTypeVariable.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $boundedtypevariable.BoundedTypeVariable.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  ))
- )
+;;; Code for boundedtypevariable.BoundedTypeVariable [type definition]
+(type $boundedtypevariable.BoundedTypeVariable (sub $java.lang.Object (struct
+ (field $vtable (ref $boundedtypevariable.BoundedTypeVariable.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $boundedtypevariable.BoundedTypeVariable.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 
 ;;; Code for boundedtypevariable.BoundedTypeVariable [imports]
+
+;;; Code for boundedtypevariable.BoundedTypeVariable [static fields]
+(global $$class-initialized@boundedtypevariable.BoundedTypeVariable (mut i32)
+ (i32.const 0)
+)
+(global $$class@boundedtypevariable.BoundedTypeVariable (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for boundedtypevariable.BoundedTypeVariable [vtable.init]
 (global $boundedtypevariable.BoundedTypeVariable.vtable (ref $boundedtypevariable.BoundedTypeVariable.vtable)
@@ -25,17 +33,6 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
-)
-
-;;; Code for boundedtypevariable.BoundedTypeVariable [static fields]
-(global $$class-initialized@boundedtypevariable.BoundedTypeVariable (mut i32)
- (i32.const 0)
-)
-(global $$class@boundedtypevariable.BoundedTypeVariable (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|boundedtypev...|@boundedtypevariable.BoundedTypeVariable (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for boundedtypevariable.BoundedTypeVariable [methods]
@@ -111,17 +108,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@boundedtypevariable.BoundedTypeVariable)
-
-;;; String BoundedTypeVariable.$getString_|boundedtypev...|()
-(func $$getString_|boundedtypev...|__java_lang_String_<once>_@boundedtypevariable.BoundedTypeVariable
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|boundedtypev...|@boundedtypevariable.BoundedTypeVariable)))
-   (then
-    (return (global.get $$string_|boundedtypev...|@boundedtypevariable.BoundedTypeVariable))
-   )
-  )
-  (global.set $$string_|boundedtypev...|@boundedtypevariable.BoundedTypeVariable (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "boundedtypevariable.BoundedTypeVariable")))
-  (return (global.get $$string_|boundedtypev...|@boundedtypevariable.BoundedTypeVariable))
- )
-)

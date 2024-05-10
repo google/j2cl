@@ -1,21 +1,29 @@
- ;;; Code for characterliteral.CharacterLiteral [type definition]
- (type $characterliteral.CharacterLiteral (sub $java.lang.Object (struct
-  (field $vtable (ref $characterliteral.CharacterLiteral.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $characterliteral.CharacterLiteral.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_main__void (ref $function.m_main__void))
-  ))
- )
+;;; Code for characterliteral.CharacterLiteral [type definition]
+(type $characterliteral.CharacterLiteral (sub $java.lang.Object (struct
+ (field $vtable (ref $characterliteral.CharacterLiteral.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $characterliteral.CharacterLiteral.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_main__void (ref $function.m_main__void))
+ ))
+)
 
 ;;; Code for characterliteral.CharacterLiteral [imports]
+
+;;; Code for characterliteral.CharacterLiteral [static fields]
+(global $$class-initialized@characterliteral.CharacterLiteral (mut i32)
+ (i32.const 0)
+)
+(global $$class@characterliteral.CharacterLiteral (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for characterliteral.CharacterLiteral [vtable.init]
 (global $characterliteral.CharacterLiteral.vtable (ref $characterliteral.CharacterLiteral.vtable)
@@ -27,17 +35,6 @@
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_main__void@characterliteral.CharacterLiteral)
  )
-)
-
-;;; Code for characterliteral.CharacterLiteral [static fields]
-(global $$class-initialized@characterliteral.CharacterLiteral (mut i32)
- (i32.const 0)
-)
-(global $$class@characterliteral.CharacterLiteral (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|characterlit...|@characterliteral.CharacterLiteral (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for characterliteral.CharacterLiteral [methods]
@@ -370,17 +367,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@characterliteral.CharacterLiteral)
-
-;;; String CharacterLiteral.$getString_|characterlit...|()
-(func $$getString_|characterlit...|__java_lang_String_<once>_@characterliteral.CharacterLiteral
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|characterlit...|@characterliteral.CharacterLiteral)))
-   (then
-    (return (global.get $$string_|characterlit...|@characterliteral.CharacterLiteral))
-   )
-  )
-  (global.set $$string_|characterlit...|@characterliteral.CharacterLiteral (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "characterliteral.CharacterLiteral")))
-  (return (global.get $$string_|characterlit...|@characterliteral.CharacterLiteral))
- )
-)

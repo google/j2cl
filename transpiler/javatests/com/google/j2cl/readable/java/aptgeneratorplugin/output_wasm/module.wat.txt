@@ -1,38 +1,54 @@
- ;;; Code for aptgeneratorplugin.Dummy [type definition]
- (type $aptgeneratorplugin.Dummy (sub $java.lang.Object (struct
-  (field $vtable (ref $aptgeneratorplugin.Dummy.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $aptgeneratorplugin.Dummy.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  ))
- )
+;;; Code for aptgeneratorplugin.Dummy [type definition]
+(type $aptgeneratorplugin.Dummy (sub $java.lang.Object (struct
+ (field $vtable (ref $aptgeneratorplugin.Dummy.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $aptgeneratorplugin.Dummy.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 
- ;;; Code for aptgeneratorplugin.Foo [type definition]
- (type $aptgeneratorplugin.Foo (sub $java.lang.Object (struct
-  (field $vtable (ref $aptgeneratorplugin.Foo.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $aptgeneratorplugin.Foo.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  ))
- )
+;;; Code for aptgeneratorplugin.Foo [type definition]
+(type $aptgeneratorplugin.Foo (sub $java.lang.Object (struct
+ (field $vtable (ref $aptgeneratorplugin.Foo.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $aptgeneratorplugin.Foo.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 
 ;;; Code for aptgeneratorplugin.Dummy [imports]
 
 ;;; Code for aptgeneratorplugin.Foo [imports]
+
+;;; Code for aptgeneratorplugin.Dummy [static fields]
+(global $$class-initialized@aptgeneratorplugin.Dummy (mut i32)
+ (i32.const 0)
+)
+(global $$class@aptgeneratorplugin.Dummy (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for aptgeneratorplugin.Foo [static fields]
+(global $$class-initialized@aptgeneratorplugin.Foo (mut i32)
+ (i32.const 0)
+)
+(global $$class@aptgeneratorplugin.Foo (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for aptgeneratorplugin.Dummy [vtable.init]
 (global $aptgeneratorplugin.Dummy.vtable (ref $aptgeneratorplugin.Dummy.vtable)
@@ -54,28 +70,6 @@
   (ref.func $m_hashCode__int@aptgeneratorplugin.Foo)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
-)
-
-;;; Code for aptgeneratorplugin.Dummy [static fields]
-(global $$class-initialized@aptgeneratorplugin.Dummy (mut i32)
- (i32.const 0)
-)
-(global $$class@aptgeneratorplugin.Dummy (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|aptgenerator...|@aptgeneratorplugin.Dummy (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for aptgeneratorplugin.Foo [static fields]
-(global $$class-initialized@aptgeneratorplugin.Foo (mut i32)
- (i32.const 0)
-)
-(global $$class@aptgeneratorplugin.Foo (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|aptgenerator...|@aptgeneratorplugin.Foo (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for aptgeneratorplugin.Dummy [methods]
@@ -151,20 +145,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@aptgeneratorplugin.Dummy)
-
-;;; String Dummy.$getString_|aptgenerator...|()
-(func $$getString_|aptgenerator...|__java_lang_String_<once>_@aptgeneratorplugin.Dummy
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|aptgenerator...|@aptgeneratorplugin.Dummy)))
-   (then
-    (return (global.get $$string_|aptgenerator...|@aptgeneratorplugin.Dummy))
-   )
-  )
-  (global.set $$string_|aptgenerator...|@aptgeneratorplugin.Dummy (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "aptgeneratorplugin.Dummy")))
-  (return (global.get $$string_|aptgenerator...|@aptgeneratorplugin.Dummy))
- )
-)
 
 ;;; Code for aptgeneratorplugin.Foo [methods]
 
@@ -258,17 +238,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@aptgeneratorplugin.Foo)
-
-;;; String Foo.$getString_|aptgenerator...|()
-(func $$getString_|aptgenerator...|__java_lang_String_<once>_@aptgeneratorplugin.Foo
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|aptgenerator...|@aptgeneratorplugin.Foo)))
-   (then
-    (return (global.get $$string_|aptgenerator...|@aptgeneratorplugin.Foo))
-   )
-  )
-  (global.set $$string_|aptgenerator...|@aptgeneratorplugin.Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "aptgeneratorplugin.Foo")))
-  (return (global.get $$string_|aptgenerator...|@aptgeneratorplugin.Foo))
- )
-)

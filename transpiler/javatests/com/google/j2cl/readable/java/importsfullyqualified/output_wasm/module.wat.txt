@@ -1,29 +1,28 @@
- ;;; Code for importsfullyqualified.ImportsFullyQualified [type definition]
- (type $importsfullyqualified.ImportsFullyQualified (sub $java.lang.Object (struct
-  (field $vtable (ref $importsfullyqualified.ImportsFullyQualified.vtable))
-  (field $itable (ref $importsfullyqualified.ImportsFullyQualified.itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $importsfullyqualified.ImportsFullyQualified.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  ))
- )
- (type $importsfullyqualified.ImportsFullyQualified.itable (sub $itable (struct
-  (field (ref $java.io.Serializable.vtable))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
- )))
+;;; Code for importsfullyqualified.ImportsFullyQualified [type definition]
+(type $importsfullyqualified.ImportsFullyQualified (sub $java.lang.Object (struct
+ (field $vtable (ref $importsfullyqualified.ImportsFullyQualified.vtable))
+ (field $itable (ref $importsfullyqualified.ImportsFullyQualified.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $importsfullyqualified.ImportsFullyQualified.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 
 ;;; Code for importsfullyqualified.ImportsFullyQualified [imports]
+
+;;; Code for importsfullyqualified.ImportsFullyQualified [static fields]
+(global $$class-initialized@importsfullyqualified.ImportsFullyQualified (mut i32)
+ (i32.const 0)
+)
+(global $$class@importsfullyqualified.ImportsFullyQualified (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for importsfullyqualified.ImportsFullyQualified [vtable.init]
 (global $importsfullyqualified.ImportsFullyQualified.vtable (ref $importsfullyqualified.ImportsFullyQualified.vtable)
@@ -38,30 +37,6 @@
 (global $java.io.Serializable.vtable@$importsfullyqualified.ImportsFullyQualified (ref $java.io.Serializable.vtable)
  (struct.new $java.io.Serializable.vtable
  )
-)
-
-;;; Code for importsfullyqualified.ImportsFullyQualified [itable.init]
-(global $importsfullyqualified.ImportsFullyQualified.itable (ref $importsfullyqualified.ImportsFullyQualified.itable)
- (struct.new $importsfullyqualified.ImportsFullyQualified.itable
-   (global.get $java.io.Serializable.vtable@$importsfullyqualified.ImportsFullyQualified)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
- )
-)
-
-;;; Code for importsfullyqualified.ImportsFullyQualified [static fields]
-(global $$class-initialized@importsfullyqualified.ImportsFullyQualified (mut i32)
- (i32.const 0)
-)
-(global $$class@importsfullyqualified.ImportsFullyQualified (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|importsfully...|@importsfullyqualified.ImportsFullyQualified (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for importsfullyqualified.ImportsFullyQualified [methods]
@@ -137,17 +112,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@importsfullyqualified.ImportsFullyQualified)
-
-;;; String ImportsFullyQualified.$getString_|importsfully...|()
-(func $$getString_|importsfully...|__java_lang_String_<once>_@importsfullyqualified.ImportsFullyQualified
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|importsfully...|@importsfullyqualified.ImportsFullyQualified)))
-   (then
-    (return (global.get $$string_|importsfully...|@importsfullyqualified.ImportsFullyQualified))
-   )
-  )
-  (global.set $$string_|importsfully...|@importsfullyqualified.ImportsFullyQualified (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "importsfullyqualified.ImportsFullyQualified")))
-  (return (global.get $$string_|importsfully...|@importsfullyqualified.ImportsFullyQualified))
- )
-)

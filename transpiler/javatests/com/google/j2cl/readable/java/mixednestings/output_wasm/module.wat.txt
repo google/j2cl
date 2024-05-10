@@ -1,172 +1,136 @@
- ;;; Code for mixednestings.MyInterface [type definition]
- (type $mixednestings.MyInterface.vtable (sub (struct
-  (field $m_fun__int__int (ref $function.m_fun__int__int))
-  ))
- )
+;;; Code for mixednestings.MyInterface [type definition]
+(type $mixednestings.MyInterface.vtable (sub (struct
+ (field $m_fun__int__int (ref $function.m_fun__int__int))
+ ))
+)
 
- ;;; Code for mixednestings.MixedNestings [type definition]
- (type $mixednestings.MixedNestings (sub $java.lang.Object (struct
-  (field $vtable (ref $mixednestings.MixedNestings.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $mixednestings.MixedNestings.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_mm__void (ref $function.m_mm__void))
-  (field $m_test__void (ref $function.m_test__void))
-  ))
- )
+;;; Code for mixednestings.MixedNestings [type definition]
+(type $mixednestings.MixedNestings (sub $java.lang.Object (struct
+ (field $vtable (ref $mixednestings.MixedNestings.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $mixednestings.MixedNestings.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_mm__void (ref $function.m_mm__void))
+ (field $m_test__void (ref $function.m_test__void))
+ ))
+)
 
- ;;; Code for mixednestings.MixedNestings.A.1B.1.1 [type definition]
- (type $mixednestings.MixedNestings.A.1B.1.1 (sub $java.lang.Object (struct
-  (field $vtable (ref $mixednestings.MixedNestings.A.1B.1.1.vtable))
-  (field $itable (ref $mixednestings.MixedNestings.A.1B.1.1.itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $$outer_this@mixednestings.MixedNestings.A.1B.1.1 (mut (ref null $mixednestings.MixedNestings.A.1B.1)))
-  ))
- )
- (type $mixednestings.MixedNestings.A.1B.1.1.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_fun__int__int (ref $function.m_fun__int__int))
-  ))
- )
- (type $mixednestings.MixedNestings.A.1B.1.1.itable (sub $itable (struct
-  (field (ref $mixednestings.MyInterface.vtable))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
- )))
+;;; Code for mixednestings.MixedNestings.A.1B.1.1 [type definition]
+(type $mixednestings.MixedNestings.A.1B.1.1 (sub $java.lang.Object (struct
+ (field $vtable (ref $mixednestings.MixedNestings.A.1B.1.1.vtable))
+ (field $itable (ref $mixednestings.MixedNestings.A.1B.1.1.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@mixednestings.MixedNestings.A.1B.1.1 (mut (ref null $mixednestings.MixedNestings.A.1B.1)))
+ ))
+)
+(type $mixednestings.MixedNestings.A.1B.1.1.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_fun__int__int (ref $function.m_fun__int__int))
+ ))
+)
 
- ;;; Code for mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 [type definition]
- (type $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 (sub $java.lang.Object (struct
-  (field $vtable (ref $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1.vtable))
-  (field $itable (ref $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1.itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $$outer_this@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 (mut (ref null $mixednestings.MixedNestings.A.1B.1)))
-  ))
- )
- (type $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_fun__int__int (ref $function.m_fun__int__int))
-  ))
- )
- (type $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1.itable (sub $itable (struct
-  (field (ref $mixednestings.MyInterface.vtable))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
- )))
+;;; Code for mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 [type definition]
+(type $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 (sub $java.lang.Object (struct
+ (field $vtable (ref $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1.vtable))
+ (field $itable (ref $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 (mut (ref null $mixednestings.MixedNestings.A.1B.1)))
+ ))
+)
+(type $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_fun__int__int (ref $function.m_fun__int__int))
+ ))
+)
 
- ;;; Code for mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 [type definition]
- (type $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 (sub $java.lang.Object (struct
-  (field $vtable (ref $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2.vtable))
-  (field $itable (ref $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2.itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $$outer_this@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 (mut (ref null $mixednestings.MixedNestings.A.1B.1)))
-  ))
- )
- (type $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_fun__int__int (ref $function.m_fun__int__int))
-  ))
- )
- (type $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2.itable (sub $itable (struct
-  (field (ref $mixednestings.MyInterface.vtable))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
- )))
+;;; Code for mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 [type definition]
+(type $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 (sub $java.lang.Object (struct
+ (field $vtable (ref $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2.vtable))
+ (field $itable (ref $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 (mut (ref null $mixednestings.MixedNestings.A.1B.1)))
+ ))
+)
+(type $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_fun__int__int (ref $function.m_fun__int__int))
+ ))
+)
 
- ;;; Code for mixednestings.MixedNestings.A.1B.1 [type definition]
- (type $mixednestings.MixedNestings.A.1B.1 (sub $java.lang.Object (struct
-  (field $vtable (ref $mixednestings.MixedNestings.A.1B.1.vtable))
-  (field $itable (ref $mixednestings.MixedNestings.A.1B.1.itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $$outer_this@mixednestings.MixedNestings.A.1B.1 (mut (ref null $mixednestings.MixedNestings.A.1B)))
-  ))
- )
- (type $mixednestings.MixedNestings.A.1B.1.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_fun__int__int (ref $function.m_fun__int__int))
-  ))
- )
- (type $mixednestings.MixedNestings.A.1B.1.itable (sub $itable (struct
-  (field (ref $mixednestings.MyInterface.vtable))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
- )))
+;;; Code for mixednestings.MixedNestings.A.1B.1 [type definition]
+(type $mixednestings.MixedNestings.A.1B.1 (sub $java.lang.Object (struct
+ (field $vtable (ref $mixednestings.MixedNestings.A.1B.1.vtable))
+ (field $itable (ref $mixednestings.MixedNestings.A.1B.1.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@mixednestings.MixedNestings.A.1B.1 (mut (ref null $mixednestings.MixedNestings.A.1B)))
+ ))
+)
+(type $mixednestings.MixedNestings.A.1B.1.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_fun__int__int (ref $function.m_fun__int__int))
+ ))
+)
 
- ;;; Code for mixednestings.MixedNestings.A.1B [type definition]
- (type $mixednestings.MixedNestings.A.1B (sub $java.lang.Object (struct
-  (field $vtable (ref $mixednestings.MixedNestings.A.1B.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $$outer_this@mixednestings.MixedNestings.A.1B (mut (ref null $mixednestings.MixedNestings.A)))
-  ))
- )
- (type $mixednestings.MixedNestings.A.1B.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_b__int (ref $function.m_b__int))
-  (field $m_bb__void (ref $function.m_bb__void))
-  ))
- )
+;;; Code for mixednestings.MixedNestings.A.1B [type definition]
+(type $mixednestings.MixedNestings.A.1B (sub $java.lang.Object (struct
+ (field $vtable (ref $mixednestings.MixedNestings.A.1B.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@mixednestings.MixedNestings.A.1B (mut (ref null $mixednestings.MixedNestings.A)))
+ ))
+)
+(type $mixednestings.MixedNestings.A.1B.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_b__int (ref $function.m_b__int))
+ (field $m_bb__void (ref $function.m_bb__void))
+ ))
+)
 
- ;;; Code for mixednestings.MixedNestings.A [type definition]
- (type $mixednestings.MixedNestings.A (sub $java.lang.Object (struct
-  (field $vtable (ref $mixednestings.MixedNestings.A.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $$outer_this@mixednestings.MixedNestings.A (mut (ref null $mixednestings.MixedNestings)))
-  ))
- )
- (type $mixednestings.MixedNestings.A.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_a__void (ref $function.m_a__void))
-  (field $m_aa__void (ref $function.m_aa__void))
-  ))
- )
+;;; Code for mixednestings.MixedNestings.A [type definition]
+(type $mixednestings.MixedNestings.A (sub $java.lang.Object (struct
+ (field $vtable (ref $mixednestings.MixedNestings.A.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@mixednestings.MixedNestings.A (mut (ref null $mixednestings.MixedNestings)))
+ ))
+)
+(type $mixednestings.MixedNestings.A.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_a__void (ref $function.m_a__void))
+ (field $m_aa__void (ref $function.m_aa__void))
+ ))
+)
 
 ;;; Code for mixednestings.MyInterface [imports]
 
@@ -183,6 +147,70 @@
 ;;; Code for mixednestings.MixedNestings.A.1B [imports]
 
 ;;; Code for mixednestings.MixedNestings.A [imports]
+
+;;; Code for mixednestings.MyInterface [static fields]
+(global $$class-initialized@mixednestings.MyInterface (mut i32)
+ (i32.const 0)
+)
+(global $$class@mixednestings.MyInterface (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for mixednestings.MixedNestings [static fields]
+(global $$class-initialized@mixednestings.MixedNestings (mut i32)
+ (i32.const 0)
+)
+(global $$class@mixednestings.MixedNestings (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for mixednestings.MixedNestings.A.1B.1.1 [static fields]
+(global $$class-initialized@mixednestings.MixedNestings.A.1B.1.1 (mut i32)
+ (i32.const 0)
+)
+(global $$class@mixednestings.MixedNestings.A.1B.1.1 (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 [static fields]
+(global $$class-initialized@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 (mut i32)
+ (i32.const 0)
+)
+(global $$class@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 [static fields]
+(global $$class-initialized@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 (mut i32)
+ (i32.const 0)
+)
+(global $$class@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for mixednestings.MixedNestings.A.1B.1 [static fields]
+(global $$class-initialized@mixednestings.MixedNestings.A.1B.1 (mut i32)
+ (i32.const 0)
+)
+(global $$class@mixednestings.MixedNestings.A.1B.1 (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for mixednestings.MixedNestings.A.1B [static fields]
+(global $$class-initialized@mixednestings.MixedNestings.A.1B (mut i32)
+ (i32.const 0)
+)
+(global $$class@mixednestings.MixedNestings.A.1B (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for mixednestings.MixedNestings.A [static fields]
+(global $$class-initialized@mixednestings.MixedNestings.A (mut i32)
+ (i32.const 0)
+)
+(global $$class@mixednestings.MixedNestings.A (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for mixednestings.MixedNestings [vtable.init]
 (global $mixednestings.MixedNestings.vtable (ref $mixednestings.MixedNestings.vtable)
@@ -214,19 +242,6 @@
  )
 )
 
-;;; Code for mixednestings.MixedNestings.A.1B.1.1 [itable.init]
-(global $mixednestings.MixedNestings.A.1B.1.1.itable (ref $mixednestings.MixedNestings.A.1B.1.1.itable)
- (struct.new $mixednestings.MixedNestings.A.1B.1.1.itable
-   (global.get $mixednestings.MyInterface.vtable@$mixednestings.MixedNestings.A.1B.1.1)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
- )
-)
-
 ;;; Code for mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 [vtable.init]
 (global $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1.vtable (ref $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1.vtable)
  (struct.new $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1.vtable
@@ -241,19 +256,6 @@
 (global $mixednestings.MyInterface.vtable@$mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 (ref $mixednestings.MyInterface.vtable)
  (struct.new $mixednestings.MyInterface.vtable
   (ref.func $m_fun__int__int@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1)
- )
-)
-
-;;; Code for mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 [itable.init]
-(global $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1.itable (ref $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1.itable)
- (struct.new $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1.itable
-   (global.get $mixednestings.MyInterface.vtable@$mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
  )
 )
 
@@ -274,19 +276,6 @@
  )
 )
 
-;;; Code for mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 [itable.init]
-(global $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2.itable (ref $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2.itable)
- (struct.new $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2.itable
-   (global.get $mixednestings.MyInterface.vtable@$mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
- )
-)
-
 ;;; Code for mixednestings.MixedNestings.A.1B.1 [vtable.init]
 (global $mixednestings.MixedNestings.A.1B.1.vtable (ref $mixednestings.MixedNestings.A.1B.1.vtable)
  (struct.new $mixednestings.MixedNestings.A.1B.1.vtable
@@ -301,19 +290,6 @@
 (global $mixednestings.MyInterface.vtable@$mixednestings.MixedNestings.A.1B.1 (ref $mixednestings.MyInterface.vtable)
  (struct.new $mixednestings.MyInterface.vtable
   (ref.func $m_fun__int__int@mixednestings.MixedNestings.A.1B.1)
- )
-)
-
-;;; Code for mixednestings.MixedNestings.A.1B.1 [itable.init]
-(global $mixednestings.MixedNestings.A.1B.1.itable (ref $mixednestings.MixedNestings.A.1B.1.itable)
- (struct.new $mixednestings.MixedNestings.A.1B.1.itable
-   (global.get $mixednestings.MyInterface.vtable@$mixednestings.MixedNestings.A.1B.1)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
  )
 )
 
@@ -341,94 +317,6 @@
   (ref.func $m_a__void@mixednestings.MixedNestings.A)
   (ref.func $m_aa__void@mixednestings.MixedNestings.A)
  )
-)
-
-;;; Code for mixednestings.MyInterface [static fields]
-(global $$class-initialized@mixednestings.MyInterface (mut i32)
- (i32.const 0)
-)
-(global $$class@mixednestings.MyInterface (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|mixednesting...|@mixednestings.MyInterface (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for mixednestings.MixedNestings [static fields]
-(global $$class-initialized@mixednestings.MixedNestings (mut i32)
- (i32.const 0)
-)
-(global $$class@mixednestings.MixedNestings (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|mixednesting...|@mixednestings.MixedNestings (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for mixednestings.MixedNestings.A.1B.1.1 [static fields]
-(global $$class-initialized@mixednestings.MixedNestings.A.1B.1.1 (mut i32)
- (i32.const 0)
-)
-(global $$class@mixednestings.MixedNestings.A.1B.1.1 (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.1 (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 [static fields]
-(global $$class-initialized@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 (mut i32)
- (i32.const 0)
-)
-(global $$class@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 [static fields]
-(global $$class-initialized@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 (mut i32)
- (i32.const 0)
-)
-(global $$class@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for mixednestings.MixedNestings.A.1B.1 [static fields]
-(global $$class-initialized@mixednestings.MixedNestings.A.1B.1 (mut i32)
- (i32.const 0)
-)
-(global $$class@mixednestings.MixedNestings.A.1B.1 (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1 (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for mixednestings.MixedNestings.A.1B [static fields]
-(global $$class-initialized@mixednestings.MixedNestings.A.1B (mut i32)
- (i32.const 0)
-)
-(global $$class@mixednestings.MixedNestings.A.1B (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for mixednestings.MixedNestings.A [static fields]
-(global $$class-initialized@mixednestings.MixedNestings.A (mut i32)
- (i32.const 0)
-)
-(global $$class@mixednestings.MixedNestings.A (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|mixednesting...|@mixednestings.MixedNestings.A (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for mixednestings.MyInterface [methods]
@@ -460,20 +348,6 @@
   )
   (global.set $$class@mixednestings.MyInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|mixednesting...|__java_lang_String_<once>_@mixednestings.MyInterface )))
   (return (global.get $$class@mixednestings.MyInterface))
- )
-)
-
-;;; String MyInterface.$getString_|mixednesting...|()
-(func $$getString_|mixednesting...|__java_lang_String_<once>_@mixednestings.MyInterface
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|mixednesting...|@mixednestings.MyInterface)))
-   (then
-    (return (global.get $$string_|mixednesting...|@mixednestings.MyInterface))
-   )
-  )
-  (global.set $$string_|mixednesting...|@mixednestings.MyInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "mixednestings.MyInterface")))
-  (return (global.get $$string_|mixednesting...|@mixednestings.MyInterface))
  )
 )
 
@@ -582,20 +456,6 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@mixednestings.MixedNestings)
 
-;;; String MixedNestings.$getString_|mixednesting...|()
-(func $$getString_|mixednesting...|__java_lang_String_<once>_@mixednestings.MixedNestings
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|mixednesting...|@mixednestings.MixedNestings)))
-   (then
-    (return (global.get $$string_|mixednesting...|@mixednestings.MixedNestings))
-   )
-  )
-  (global.set $$string_|mixednesting...|@mixednestings.MixedNestings (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "mixednestings.MixedNestings")))
-  (return (global.get $$string_|mixednesting...|@mixednestings.MixedNestings))
- )
-)
-
 ;;; Code for mixednestings.MixedNestings.A.1B.1.1 [methods]
 
 ;;; <anonymous> implements MyInterface <anonymous> implements MyInterface.$create(<anonymous> implements MyInterface $outer_this)
@@ -689,20 +549,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@mixednestings.MixedNestings.A.1B.1.1)
-
-;;; String <anonymous> implements MyInterface.$getString_|mixednesting...|()
-(func $$getString_|mixednesting...|__java_lang_String_<once>_@mixednestings.MixedNestings.A.1B.1.1
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.1)))
-   (then
-    (return (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.1))
-   )
-  )
-  (global.set $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "mixednestings.MixedNestings$A$1B$1$1")))
-  (return (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.1))
- )
-)
 
 ;;; Code for mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 [methods]
 
@@ -808,20 +654,6 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1)
 
-;;; String <anonymous> implements MyInterface.$getString_|mixednesting...|()
-(func $$getString_|mixednesting...|__java_lang_String_<once>_@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1)))
-   (then
-    (return (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1))
-   )
-  )
-  (global.set $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "mixednestings.MixedNestings$A$1B$1$$LambdaImplementor$1")))
-  (return (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1))
- )
-)
-
 ;;; Code for mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 [methods]
 
 ;;; <anonymous> implements MyInterface <anonymous> implements MyInterface.$create(<anonymous> implements MyInterface $outer_this)
@@ -925,20 +757,6 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2)
 
-;;; String <anonymous> implements MyInterface.$getString_|mixednesting...|()
-(func $$getString_|mixednesting...|__java_lang_String_<once>_@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2)))
-   (then
-    (return (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2))
-   )
-  )
-  (global.set $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "mixednestings.MixedNestings$A$1B$1$$LambdaImplementor$2")))
-  (return (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2))
- )
-)
-
 ;;; Code for mixednestings.MixedNestings.A.1B.1 [methods]
 
 ;;; <anonymous> implements MyInterface <anonymous> implements MyInterface.$create(B $outer_this)
@@ -1035,20 +853,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@mixednestings.MixedNestings.A.1B.1)
-
-;;; String <anonymous> implements MyInterface.$getString_|mixednesting...|()
-(func $$getString_|mixednesting...|__java_lang_String_<once>_@mixednestings.MixedNestings.A.1B.1
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1)))
-   (then
-    (return (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1))
-   )
-  )
-  (global.set $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "mixednestings.MixedNestings$A$1B$1")))
-  (return (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B.1))
- )
-)
 
 ;;; Code for mixednestings.MixedNestings.A.1B [methods]
 
@@ -1158,20 +962,6 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@mixednestings.MixedNestings.A.1B)
 
-;;; String B.$getString_|mixednesting...|()
-(func $$getString_|mixednesting...|__java_lang_String_<once>_@mixednestings.MixedNestings.A.1B
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B)))
-   (then
-    (return (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B))
-   )
-  )
-  (global.set $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "mixednestings.MixedNestings$A$1B")))
-  (return (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A.1B))
- )
-)
-
 ;;; Code for mixednestings.MixedNestings.A [methods]
 
 ;;; A A.$create(MixedNestings $outer_this)
@@ -1280,17 +1070,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@mixednestings.MixedNestings.A)
-
-;;; String A.$getString_|mixednesting...|()
-(func $$getString_|mixednesting...|__java_lang_String_<once>_@mixednestings.MixedNestings.A
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A)))
-   (then
-    (return (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A))
-   )
-  )
-  (global.set $$string_|mixednesting...|@mixednestings.MixedNestings.A (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "mixednestings.MixedNestings$A")))
-  (return (global.get $$string_|mixednesting...|@mixednestings.MixedNestings.A))
- )
-)

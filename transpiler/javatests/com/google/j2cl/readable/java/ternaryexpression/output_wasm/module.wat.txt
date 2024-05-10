@@ -1,21 +1,29 @@
- ;;; Code for ternaryexpression.TernaryExpression [type definition]
- (type $ternaryexpression.TernaryExpression (sub $java.lang.Object (struct
-  (field $vtable (ref $ternaryexpression.TernaryExpression.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $ternaryexpression.TernaryExpression.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_test__void (ref $function.m_test__void))
-  ))
- )
+;;; Code for ternaryexpression.TernaryExpression [type definition]
+(type $ternaryexpression.TernaryExpression (sub $java.lang.Object (struct
+ (field $vtable (ref $ternaryexpression.TernaryExpression.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $ternaryexpression.TernaryExpression.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_test__void (ref $function.m_test__void))
+ ))
+)
 
 ;;; Code for ternaryexpression.TernaryExpression [imports]
+
+;;; Code for ternaryexpression.TernaryExpression [static fields]
+(global $$class-initialized@ternaryexpression.TernaryExpression (mut i32)
+ (i32.const 0)
+)
+(global $$class@ternaryexpression.TernaryExpression (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for ternaryexpression.TernaryExpression [vtable.init]
 (global $ternaryexpression.TernaryExpression.vtable (ref $ternaryexpression.TernaryExpression.vtable)
@@ -27,17 +35,6 @@
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_test__void@ternaryexpression.TernaryExpression)
  )
-)
-
-;;; Code for ternaryexpression.TernaryExpression [static fields]
-(global $$class-initialized@ternaryexpression.TernaryExpression (mut i32)
- (i32.const 0)
-)
-(global $$class@ternaryexpression.TernaryExpression (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|ternaryexpre...|@ternaryexpression.TernaryExpression (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for ternaryexpression.TernaryExpression [methods]
@@ -141,17 +138,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@ternaryexpression.TernaryExpression)
-
-;;; String TernaryExpression.$getString_|ternaryexpre...|()
-(func $$getString_|ternaryexpre...|__java_lang_String_<once>_@ternaryexpression.TernaryExpression
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|ternaryexpre...|@ternaryexpression.TernaryExpression)))
-   (then
-    (return (global.get $$string_|ternaryexpre...|@ternaryexpression.TernaryExpression))
-   )
-  )
-  (global.set $$string_|ternaryexpre...|@ternaryexpression.TernaryExpression (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "ternaryexpression.TernaryExpression")))
-  (return (global.get $$string_|ternaryexpre...|@ternaryexpression.TernaryExpression))
- )
-)

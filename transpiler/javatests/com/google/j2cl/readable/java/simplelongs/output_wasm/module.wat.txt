@@ -1,25 +1,33 @@
- ;;; Code for simplelongs.SimpleLongs [type definition]
- (type $simplelongs.SimpleLongs (sub $java.lang.Object (struct
-  (field $vtable (ref $simplelongs.SimpleLongs.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $foo@simplelongs.SimpleLongs (mut i64))
-  (field $sideEffect@simplelongs.SimpleLongs (mut i32))
-  ))
- )
- (type $simplelongs.SimpleLongs.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_getBar__long (ref $function.m_getBar__long))
-  (field $m_getWithSideEffect__simplelongs_SimpleLongs (ref $function.m_getWithSideEffect__simplelongs_SimpleLongs))
-  (field $m_main__void (ref $function.m_main__void))
-  ))
- )
+;;; Code for simplelongs.SimpleLongs [type definition]
+(type $simplelongs.SimpleLongs (sub $java.lang.Object (struct
+ (field $vtable (ref $simplelongs.SimpleLongs.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $foo@simplelongs.SimpleLongs (mut i64))
+ (field $sideEffect@simplelongs.SimpleLongs (mut i32))
+ ))
+)
+(type $simplelongs.SimpleLongs.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getBar__long (ref $function.m_getBar__long))
+ (field $m_getWithSideEffect__simplelongs_SimpleLongs (ref $function.m_getWithSideEffect__simplelongs_SimpleLongs))
+ (field $m_main__void (ref $function.m_main__void))
+ ))
+)
 
 ;;; Code for simplelongs.SimpleLongs [imports]
+
+;;; Code for simplelongs.SimpleLongs [static fields]
+(global $$class-initialized@simplelongs.SimpleLongs (mut i32)
+ (i32.const 0)
+)
+(global $$class@simplelongs.SimpleLongs (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for simplelongs.SimpleLongs [vtable.init]
 (global $simplelongs.SimpleLongs.vtable (ref $simplelongs.SimpleLongs.vtable)
@@ -33,17 +41,6 @@
   (ref.func $m_getWithSideEffect__simplelongs_SimpleLongs@simplelongs.SimpleLongs)
   (ref.func $m_main__void@simplelongs.SimpleLongs)
  )
-)
-
-;;; Code for simplelongs.SimpleLongs [static fields]
-(global $$class-initialized@simplelongs.SimpleLongs (mut i32)
- (i32.const 0)
-)
-(global $$class@simplelongs.SimpleLongs (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|simplelongs....|@simplelongs.SimpleLongs (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for simplelongs.SimpleLongs [methods]
@@ -251,17 +248,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@simplelongs.SimpleLongs)
-
-;;; String SimpleLongs.$getString_|simplelongs....|()
-(func $$getString_|simplelongs....|__java_lang_String_<once>_@simplelongs.SimpleLongs
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|simplelongs....|@simplelongs.SimpleLongs)))
-   (then
-    (return (global.get $$string_|simplelongs....|@simplelongs.SimpleLongs))
-   )
-  )
-  (global.set $$string_|simplelongs....|@simplelongs.SimpleLongs (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "simplelongs.SimpleLongs")))
-  (return (global.get $$string_|simplelongs....|@simplelongs.SimpleLongs))
- )
-)

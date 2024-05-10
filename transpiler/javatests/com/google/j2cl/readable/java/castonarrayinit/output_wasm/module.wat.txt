@@ -1,38 +1,54 @@
- ;;; Code for castonarrayinit.CastOnArrayInit [type definition]
- (type $castonarrayinit.CastOnArrayInit (sub $java.lang.Object (struct
-  (field $vtable (ref $castonarrayinit.CastOnArrayInit.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $castonarrayinit.CastOnArrayInit.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  ))
- )
+;;; Code for castonarrayinit.CastOnArrayInit [type definition]
+(type $castonarrayinit.CastOnArrayInit (sub $java.lang.Object (struct
+ (field $vtable (ref $castonarrayinit.CastOnArrayInit.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $castonarrayinit.CastOnArrayInit.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 
- ;;; Code for castonarrayinit.CastOnArrayInit.Foo [type definition]
- (type $castonarrayinit.CastOnArrayInit.Foo (sub $java.lang.Object (struct
-  (field $vtable (ref $castonarrayinit.CastOnArrayInit.Foo.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $castonarrayinit.CastOnArrayInit.Foo.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  ))
- )
+;;; Code for castonarrayinit.CastOnArrayInit.Foo [type definition]
+(type $castonarrayinit.CastOnArrayInit.Foo (sub $java.lang.Object (struct
+ (field $vtable (ref $castonarrayinit.CastOnArrayInit.Foo.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $castonarrayinit.CastOnArrayInit.Foo.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 
 ;;; Code for castonarrayinit.CastOnArrayInit [imports]
 
 ;;; Code for castonarrayinit.CastOnArrayInit.Foo [imports]
+
+;;; Code for castonarrayinit.CastOnArrayInit [static fields]
+(global $$class-initialized@castonarrayinit.CastOnArrayInit (mut i32)
+ (i32.const 0)
+)
+(global $$class@castonarrayinit.CastOnArrayInit (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for castonarrayinit.CastOnArrayInit.Foo [static fields]
+(global $$class-initialized@castonarrayinit.CastOnArrayInit.Foo (mut i32)
+ (i32.const 0)
+)
+(global $$class@castonarrayinit.CastOnArrayInit.Foo (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for castonarrayinit.CastOnArrayInit [vtable.init]
 (global $castonarrayinit.CastOnArrayInit.vtable (ref $castonarrayinit.CastOnArrayInit.vtable)
@@ -54,28 +70,6 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
-)
-
-;;; Code for castonarrayinit.CastOnArrayInit [static fields]
-(global $$class-initialized@castonarrayinit.CastOnArrayInit (mut i32)
- (i32.const 0)
-)
-(global $$class@castonarrayinit.CastOnArrayInit (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|castonarrayi...|@castonarrayinit.CastOnArrayInit (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for castonarrayinit.CastOnArrayInit.Foo [static fields]
-(global $$class-initialized@castonarrayinit.CastOnArrayInit.Foo (mut i32)
- (i32.const 0)
-)
-(global $$class@castonarrayinit.CastOnArrayInit.Foo (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|castonarrayi...|@castonarrayinit.CastOnArrayInit.Foo (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for castonarrayinit.CastOnArrayInit [methods]
@@ -189,20 +183,6 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@castonarrayinit.CastOnArrayInit)
 
-;;; String CastOnArrayInit.$getString_|castonarrayi...|()
-(func $$getString_|castonarrayi...|__java_lang_String_<once>_@castonarrayinit.CastOnArrayInit
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|castonarrayi...|@castonarrayinit.CastOnArrayInit)))
-   (then
-    (return (global.get $$string_|castonarrayi...|@castonarrayinit.CastOnArrayInit))
-   )
-  )
-  (global.set $$string_|castonarrayi...|@castonarrayinit.CastOnArrayInit (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "castonarrayinit.CastOnArrayInit")))
-  (return (global.get $$string_|castonarrayi...|@castonarrayinit.CastOnArrayInit))
- )
-)
-
 ;;; Code for castonarrayinit.CastOnArrayInit.Foo [methods]
 
 ;;; Foo<T> Foo.$create()
@@ -276,17 +256,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@castonarrayinit.CastOnArrayInit.Foo)
-
-;;; String Foo.$getString_|castonarrayi...|()
-(func $$getString_|castonarrayi...|__java_lang_String_<once>_@castonarrayinit.CastOnArrayInit.Foo
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|castonarrayi...|@castonarrayinit.CastOnArrayInit.Foo)))
-   (then
-    (return (global.get $$string_|castonarrayi...|@castonarrayinit.CastOnArrayInit.Foo))
-   )
-  )
-  (global.set $$string_|castonarrayi...|@castonarrayinit.CastOnArrayInit.Foo (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "castonarrayinit.CastOnArrayInit$Foo")))
-  (return (global.get $$string_|castonarrayi...|@castonarrayinit.CastOnArrayInit.Foo))
- )
-)

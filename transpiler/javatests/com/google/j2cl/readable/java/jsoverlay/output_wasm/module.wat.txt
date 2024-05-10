@@ -1,73 +1,64 @@
- ;;; Code for jsoverlay.Main.NativeJsTypeInterfaceWithOverlay [type definition]
+;;; Code for jsoverlay.Main.NativeJsTypeInterfaceWithOverlay [type definition]
 
- ;;; Code for jsoverlay.Main.Intf [type definition]
- (type $jsoverlay.Main.Intf.vtable (sub (struct
-  (field $m_run__void (ref $function.m_run__void))
-  ))
- )
+;;; Code for jsoverlay.Main.Intf [type definition]
+(type $jsoverlay.Main.Intf.vtable (sub (struct
+ (field $m_run__void (ref $function.m_run__void))
+ ))
+)
 
- ;;; Code for jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay [type definition]
- (type $jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay.vtable (sub (struct
-  ))
- )
+;;; Code for jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay [type definition]
+(type $jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay.vtable (sub (struct
+ ))
+)
 
- ;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay [type definition]
- (type $jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay (sub (struct
-  (field $vtable (ref $jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay.vtable))
-  (field $itable (ref $itable))
-  ))
- )
- (type $jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay.vtable (sub (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  ))
- )
+;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay [type definition]
+(type $jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay (sub (struct
+ (field $vtable (ref $jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay.vtable))
+ (field $itable (ref $itable))
+ ))
+)
+(type $jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay.vtable (sub (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ ))
+)
 
- ;;; Code for jsoverlay.Main [type definition]
- (type $jsoverlay.Main (sub $java.lang.Object (struct
-  (field $vtable (ref $jsoverlay.Main.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $jsoverlay.Main.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_testOverlayInterface__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay__void (ref $function.m_testOverlayInterface__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay__void))
-  (field $m_test__void (ref $function.m_test__void))
-  ))
- )
+;;; Code for jsoverlay.Main [type definition]
+(type $jsoverlay.Main (sub $java.lang.Object (struct
+ (field $vtable (ref $jsoverlay.Main.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $jsoverlay.Main.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_testOverlayInterface__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay__void (ref $function.m_testOverlayInterface__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay__void))
+ (field $m_test__void (ref $function.m_test__void))
+ ))
+)
 
- ;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay.1 [type definition]
- (type $jsoverlay.Main.NativeJsTypeWithOverlay.1 (sub $java.lang.Object (struct
-  (field $vtable (ref $jsoverlay.Main.NativeJsTypeWithOverlay.1.vtable))
-  (field $itable (ref $jsoverlay.Main.NativeJsTypeWithOverlay.1.itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $$outer_this@jsoverlay.Main.NativeJsTypeWithOverlay.1 (mut (ref null extern)))
-  ))
- )
- (type $jsoverlay.Main.NativeJsTypeWithOverlay.1.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_run__void (ref $function.m_run__void))
-  ))
- )
- (type $jsoverlay.Main.NativeJsTypeWithOverlay.1.itable (sub $itable (struct
-  (field (ref $jsoverlay.Main.Intf.vtable))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
- )))
+;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay.1 [type definition]
+(type $jsoverlay.Main.NativeJsTypeWithOverlay.1 (sub $java.lang.Object (struct
+ (field $vtable (ref $jsoverlay.Main.NativeJsTypeWithOverlay.1.vtable))
+ (field $itable (ref $jsoverlay.Main.NativeJsTypeWithOverlay.1.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@jsoverlay.Main.NativeJsTypeWithOverlay.1 (mut (ref null extern)))
+ ))
+)
+(type $jsoverlay.Main.NativeJsTypeWithOverlay.1.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_run__void (ref $function.m_run__void))
+ ))
+)
 
- ;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay [type definition]
+;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay [type definition]
 
 ;;; Code for jsoverlay.Main.NativeJsTypeInterfaceWithOverlay [imports]
 
@@ -114,6 +105,52 @@
  (param $value i32)
 )
 
+;;; Code for jsoverlay.Main [static fields]
+(global $$class-initialized@jsoverlay.Main (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsoverlay.Main (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay.1 [static fields]
+(global $$class-initialized@jsoverlay.Main.NativeJsTypeWithOverlay.1 (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsoverlay.Main.NativeJsTypeWithOverlay.1 (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for jsoverlay.Main.Intf [static fields]
+(global $$class-initialized@jsoverlay.Main.Intf (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsoverlay.Main.Intf (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay [static fields]
+(global $staticField@jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay (mut (ref null $java.lang.Object))
+ (ref.null $java.lang.Object)
+)
+(global $$class-initialized@jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay [static fields]
+(global $staticField@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay (mut (ref null $java.lang.Object))
+ (ref.null $java.lang.Object)
+)
+(global $$class-initialized@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
 ;;; Code for jsoverlay.Main [vtable.init]
 (global $jsoverlay.Main.vtable (ref $jsoverlay.Main.vtable)
  (struct.new $jsoverlay.Main.vtable
@@ -144,88 +181,11 @@
  )
 )
 
-;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay.1 [itable.init]
-(global $jsoverlay.Main.NativeJsTypeWithOverlay.1.itable (ref $jsoverlay.Main.NativeJsTypeWithOverlay.1.itable)
- (struct.new $jsoverlay.Main.NativeJsTypeWithOverlay.1.itable
-   (global.get $jsoverlay.Main.Intf.vtable@$jsoverlay.Main.NativeJsTypeWithOverlay.1)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
- )
-)
-
 ;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay [vtable.init]
 (global $jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay.vtable (ref $jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay.vtable)
  (struct.new $jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay.vtable
   (ref.func $$getClassImpl__java_lang_Class@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay)
  )
-)
-
-;;; Code for jsoverlay.Main [static fields]
-(global $$class-initialized@jsoverlay.Main (mut i32)
- (i32.const 0)
-)
-(global $$class@jsoverlay.Main (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|10|@jsoverlay.Main (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-(global $$string_|jsoverlay.Main|@jsoverlay.Main (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay.1 [static fields]
-(global $$class-initialized@jsoverlay.Main.NativeJsTypeWithOverlay.1 (mut i32)
- (i32.const 0)
-)
-(global $$class@jsoverlay.Main.NativeJsTypeWithOverlay.1 (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|jsoverlay.Ma...|@jsoverlay.Main.NativeJsTypeWithOverlay.1 (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for jsoverlay.Main.Intf [static fields]
-(global $$class-initialized@jsoverlay.Main.Intf (mut i32)
- (i32.const 0)
-)
-(global $$class@jsoverlay.Main.Intf (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|jsoverlay.Ma...|@jsoverlay.Main.Intf (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay [static fields]
-(global $staticField@jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay (mut (ref null $java.lang.Object))
- (ref.null $java.lang.Object)
-)
-(global $$class-initialized@jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay (mut i32)
- (i32.const 0)
-)
-(global $$class@jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|jsoverlay.Ma...|@jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay [static fields]
-(global $staticField@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay (mut (ref null $java.lang.Object))
- (ref.null $java.lang.Object)
-)
-(global $$class-initialized@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay (mut i32)
- (i32.const 0)
-)
-(global $$class@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|jsoverlay.Ma...|@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for jsoverlay.Main.NativeJsTypeInterfaceWithOverlay [methods]
@@ -259,20 +219,6 @@
   )
   (global.set $$class@jsoverlay.Main.Intf (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jsoverlay.Ma...|__java_lang_String_<once>_@jsoverlay.Main.Intf )))
   (return (global.get $$class@jsoverlay.Main.Intf))
- )
-)
-
-;;; String Intf.$getString_|jsoverlay.Ma...|()
-(func $$getString_|jsoverlay.Ma...|__java_lang_String_<once>_@jsoverlay.Main.Intf
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|jsoverlay.Ma...|@jsoverlay.Main.Intf)))
-   (then
-    (return (global.get $$string_|jsoverlay.Ma...|@jsoverlay.Main.Intf))
-   )
-  )
-  (global.set $$string_|jsoverlay.Ma...|@jsoverlay.Main.Intf (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsoverlay.Main$Intf")))
-  (return (global.get $$string_|jsoverlay.Ma...|@jsoverlay.Main.Intf))
  )
 )
 
@@ -320,20 +266,6 @@
   )
   (global.set $$class@jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jsoverlay.Ma...|__java_lang_String_<once>_@jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay )))
   (return (global.get $$class@jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay))
- )
-)
-
-;;; String $Overlay.$getString_|jsoverlay.Ma...|()
-(func $$getString_|jsoverlay.Ma...|__java_lang_String_<once>_@jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|jsoverlay.Ma...|@jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay)))
-   (then
-    (return (global.get $$string_|jsoverlay.Ma...|@jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay))
-   )
-  )
-  (global.set $$string_|jsoverlay.Ma...|@jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsoverlay.Main$NativeJsTypeInterfaceWithOverlay$$Overlay")))
-  (return (global.get $$string_|jsoverlay.Ma...|@jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay))
  )
 )
 
@@ -497,20 +429,6 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay)
 
-;;; String $Overlay.$getString_|jsoverlay.Ma...|()
-(func $$getString_|jsoverlay.Ma...|__java_lang_String_<once>_@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|jsoverlay.Ma...|@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay)))
-   (then
-    (return (global.get $$string_|jsoverlay.Ma...|@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay))
-   )
-  )
-  (global.set $$string_|jsoverlay.Ma...|@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsoverlay.Main$NativeJsTypeWithOverlay$$Overlay")))
-  (return (global.get $$string_|jsoverlay.Ma...|@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay))
- )
-)
-
 ;;; Code for jsoverlay.Main [methods]
 
 ;;; Main Main.$create()
@@ -646,34 +564,6 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsoverlay.Main)
 
-;;; String Main.$getString_|10|()
-(func $$getString_|10|__java_lang_String_<once>_@jsoverlay.Main
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|10|@jsoverlay.Main)))
-   (then
-    (return (global.get $$string_|10|@jsoverlay.Main))
-   )
-  )
-  (global.set $$string_|10|@jsoverlay.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "10")))
-  (return (global.get $$string_|10|@jsoverlay.Main))
- )
-)
-
-;;; String Main.$getString_|jsoverlay.Main|()
-(func $$getString_|jsoverlay.Main|__java_lang_String_<once>_@jsoverlay.Main
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|jsoverlay.Main|@jsoverlay.Main)))
-   (then
-    (return (global.get $$string_|jsoverlay.Main|@jsoverlay.Main))
-   )
-  )
-  (global.set $$string_|jsoverlay.Main|@jsoverlay.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsoverlay.Main")))
-  (return (global.get $$string_|jsoverlay.Main|@jsoverlay.Main))
- )
-)
-
 ;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay.1 [methods]
 
 ;;; <anonymous> implements Intf <anonymous> implements Intf.$create(NativeJsTypeWithOverlay $outer_this)
@@ -763,19 +653,5 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsoverlay.Main.NativeJsTypeWithOverlay.1)
-
-;;; String <anonymous> implements Intf.$getString_|jsoverlay.Ma...|()
-(func $$getString_|jsoverlay.Ma...|__java_lang_String_<once>_@jsoverlay.Main.NativeJsTypeWithOverlay.1
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|jsoverlay.Ma...|@jsoverlay.Main.NativeJsTypeWithOverlay.1)))
-   (then
-    (return (global.get $$string_|jsoverlay.Ma...|@jsoverlay.Main.NativeJsTypeWithOverlay.1))
-   )
-  )
-  (global.set $$string_|jsoverlay.Ma...|@jsoverlay.Main.NativeJsTypeWithOverlay.1 (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsoverlay.Main$NativeJsTypeWithOverlay$1")))
-  (return (global.get $$string_|jsoverlay.Ma...|@jsoverlay.Main.NativeJsTypeWithOverlay.1))
- )
-)
 
 ;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay [methods]

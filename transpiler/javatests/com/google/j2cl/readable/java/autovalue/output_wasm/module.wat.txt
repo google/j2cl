@@ -1,764 +1,728 @@
- ;;; Code for autovalue.AutoValueJsType [type definition]
- (type $autovalue.AutoValueJsType (sub $java.lang.Object (struct
-  (field $vtable (ref $autovalue.AutoValueJsType.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $autovalue.AutoValueJsType.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_getField__int (ref $function.m_getField__int))
-  (field $m_getWithJsMethod__int_$pp_autovalue (ref $function.m_getWithJsMethod__int_$pp_autovalue))
-  ))
- )
+;;; Code for autovalue.AutoValueJsType [type definition]
+(type $autovalue.AutoValueJsType (sub $java.lang.Object (struct
+ (field $vtable (ref $autovalue.AutoValueJsType.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $autovalue.AutoValueJsType.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getField__int (ref $function.m_getField__int))
+ (field $m_getWithJsMethod__int_$pp_autovalue (ref $function.m_getWithJsMethod__int_$pp_autovalue))
+ ))
+)
 
- ;;; Code for autovalue.AutoValueWithBuilder [type definition]
- (type $autovalue.AutoValueWithBuilder (sub $java.lang.Object (struct
-  (field $vtable (ref $autovalue.AutoValueWithBuilder.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $autovalue.AutoValueWithBuilder.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
-  (field $m_getNullableField__java_lang_Double (ref $function.m_getNullableField__java_lang_Double))
-  (field $m_toBuilder__autovalue_AutoValueWithBuilder_Builder (ref $function.m_toBuilder__autovalue_AutoValueWithBuilder_Builder))
-  ))
- )
+;;; Code for autovalue.AutoValueWithBuilder [type definition]
+(type $autovalue.AutoValueWithBuilder (sub $java.lang.Object (struct
+ (field $vtable (ref $autovalue.AutoValueWithBuilder.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $autovalue.AutoValueWithBuilder.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
+ (field $m_getNullableField__java_lang_Double (ref $function.m_getNullableField__java_lang_Double))
+ (field $m_toBuilder__autovalue_AutoValueWithBuilder_Builder (ref $function.m_toBuilder__autovalue_AutoValueWithBuilder_Builder))
+ ))
+)
 
- ;;; Code for autovalue.AutoValueWithBuilder.Builder [type definition]
- (type $autovalue.AutoValueWithBuilder.Builder (sub $java.lang.Object (struct
-  (field $vtable (ref $autovalue.AutoValueWithBuilder.Builder.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $autovalue.AutoValueWithBuilder.Builder.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_build__autovalue_AutoValueWithBuilder (ref $function.m_build__autovalue_AutoValueWithBuilder))
-  (field $m_setBooleanField__boolean__autovalue_AutoValueWithBuilder_Builder (ref $function.m_setBooleanField__boolean__autovalue_AutoValueWithBuilder_Builder))
-  (field $m_setNullableField__java_lang_Double__autovalue_AutoValueWithBuilder_Builder (ref $function.m_setNullableField__java_lang_Double__autovalue_AutoValueWithBuilder_Builder))
-  ))
- )
+;;; Code for autovalue.AutoValueWithBuilder.Builder [type definition]
+(type $autovalue.AutoValueWithBuilder.Builder (sub $java.lang.Object (struct
+ (field $vtable (ref $autovalue.AutoValueWithBuilder.Builder.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $autovalue.AutoValueWithBuilder.Builder.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_build__autovalue_AutoValueWithBuilder (ref $function.m_build__autovalue_AutoValueWithBuilder))
+ (field $m_setBooleanField__boolean__autovalue_AutoValueWithBuilder_Builder (ref $function.m_setBooleanField__boolean__autovalue_AutoValueWithBuilder_Builder))
+ (field $m_setNullableField__java_lang_Double__autovalue_AutoValueWithBuilder_Builder (ref $function.m_setNullableField__java_lang_Double__autovalue_AutoValueWithBuilder_Builder))
+ ))
+)
 
- ;;; Code for autovalue.AutoValueWithExtensions [type definition]
- (type $autovalue.AutoValueWithExtensions (sub $java.lang.Object (struct
-  (field $vtable (ref $autovalue.AutoValueWithExtensions.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $autovalue.AutoValueWithExtensions.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_getIntField__int (ref $function.m_getIntField__int))
-  (field $m_getMemoizedNative__int_$pp_autovalue (ref $function.m_getMemoizedNative__int_$pp_autovalue))
-  (field $m_getStringField__java_lang_String (ref $function.m_getStringField__java_lang_String))
-  (field $m_toPrettyString__java_lang_String_$pp_autovalue (ref $function.m_toPrettyString__java_lang_String_$pp_autovalue))
-  ))
- )
+;;; Code for autovalue.AutoValueWithExtensions [type definition]
+(type $autovalue.AutoValueWithExtensions (sub $java.lang.Object (struct
+ (field $vtable (ref $autovalue.AutoValueWithExtensions.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $autovalue.AutoValueWithExtensions.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getIntField__int (ref $function.m_getIntField__int))
+ (field $m_getMemoizedNative__int_$pp_autovalue (ref $function.m_getMemoizedNative__int_$pp_autovalue))
+ (field $m_getStringField__java_lang_String (ref $function.m_getStringField__java_lang_String))
+ (field $m_toPrettyString__java_lang_String_$pp_autovalue (ref $function.m_toPrettyString__java_lang_String_$pp_autovalue))
+ ))
+)
 
- ;;; Code for autovalue.Parent [type definition]
- (type $autovalue.Parent (sub $java.lang.Object (struct
-  (field $vtable (ref $autovalue.Parent.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $userField1@autovalue.Parent (mut i32))
-  ))
- )
- (type $autovalue.Parent.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  ))
- )
+;;; Code for autovalue.Parent [type definition]
+(type $autovalue.Parent (sub $java.lang.Object (struct
+ (field $vtable (ref $autovalue.Parent.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $userField1@autovalue.Parent (mut i32))
+ ))
+)
+(type $autovalue.Parent.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 
- ;;; Code for autovalue.AutoValueWithGenerics [type definition]
- (type $autovalue.AutoValueWithGenerics (sub $java.lang.Object (struct
-  (field $vtable (ref $autovalue.AutoValueWithGenerics.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $autovalue.AutoValueWithGenerics.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
-  ))
- )
+;;; Code for autovalue.AutoValueWithGenerics [type definition]
+(type $autovalue.AutoValueWithGenerics (sub $java.lang.Object (struct
+ (field $vtable (ref $autovalue.AutoValueWithGenerics.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $autovalue.AutoValueWithGenerics.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
+ ))
+)
 
- ;;; Code for autovalue.BaseClass [type definition]
- (type $autovalue.BaseClass (sub $java.lang.Object (struct
-  (field $vtable (ref $autovalue.BaseClass.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $autovalue.BaseClass.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_getBaseField__int (ref $function.m_getBaseField__int))
-  ))
- )
+;;; Code for autovalue.BaseClass [type definition]
+(type $autovalue.BaseClass (sub $java.lang.Object (struct
+ (field $vtable (ref $autovalue.BaseClass.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $autovalue.BaseClass.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getBaseField__int (ref $function.m_getBaseField__int))
+ ))
+)
 
- ;;; Code for autovalue.DefaultConstructorAutoValue [type definition]
- (type $autovalue.DefaultConstructorAutoValue (sub $java.lang.Object (struct
-  (field $vtable (ref $autovalue.DefaultConstructorAutoValue.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $autovalue.DefaultConstructorAutoValue.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
-  ))
- )
+;;; Code for autovalue.DefaultConstructorAutoValue [type definition]
+(type $autovalue.DefaultConstructorAutoValue (sub $java.lang.Object (struct
+ (field $vtable (ref $autovalue.DefaultConstructorAutoValue.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $autovalue.DefaultConstructorAutoValue.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
+ ))
+)
 
- ;;; Code for autovalue.DefaultConstructorAutoValue.Builder [type definition]
- (type $autovalue.DefaultConstructorAutoValue.Builder (sub $java.lang.Object (struct
-  (field $vtable (ref $autovalue.DefaultConstructorAutoValue.Builder.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $autovalue.DefaultConstructorAutoValue.Builder.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_build__autovalue_DefaultConstructorAutoValue (ref $function.m_build__autovalue_DefaultConstructorAutoValue))
-  (field $m_setBooleanField__boolean__autovalue_DefaultConstructorAutoValue_Builder_$pp_autovalue (ref $function.m_setBooleanField__boolean__autovalue_DefaultConstructorAutoValue_Builder_$pp_autovalue))
-  ))
- )
+;;; Code for autovalue.DefaultConstructorAutoValue.Builder [type definition]
+(type $autovalue.DefaultConstructorAutoValue.Builder (sub $java.lang.Object (struct
+ (field $vtable (ref $autovalue.DefaultConstructorAutoValue.Builder.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $autovalue.DefaultConstructorAutoValue.Builder.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_build__autovalue_DefaultConstructorAutoValue (ref $function.m_build__autovalue_DefaultConstructorAutoValue))
+ (field $m_setBooleanField__boolean__autovalue_DefaultConstructorAutoValue_Builder_$pp_autovalue (ref $function.m_setBooleanField__boolean__autovalue_DefaultConstructorAutoValue_Builder_$pp_autovalue))
+ ))
+)
 
- ;;; Code for autovalue.DefaultNonEmptyConstructorAutoValue [type definition]
- (type $autovalue.DefaultNonEmptyConstructorAutoValue (sub $java.lang.Object (struct
-  (field $vtable (ref $autovalue.DefaultNonEmptyConstructorAutoValue.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $field@autovalue.DefaultNonEmptyConstructorAutoValue (mut i32))
-  ))
- )
- (type $autovalue.DefaultNonEmptyConstructorAutoValue.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
-  ))
- )
+;;; Code for autovalue.DefaultNonEmptyConstructorAutoValue [type definition]
+(type $autovalue.DefaultNonEmptyConstructorAutoValue (sub $java.lang.Object (struct
+ (field $vtable (ref $autovalue.DefaultNonEmptyConstructorAutoValue.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $field@autovalue.DefaultNonEmptyConstructorAutoValue (mut i32))
+ ))
+)
+(type $autovalue.DefaultNonEmptyConstructorAutoValue.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
+ ))
+)
 
- ;;; Code for autovalue.DefaultNonEmptyConstructorAutoValue.Builder [type definition]
- (type $autovalue.DefaultNonEmptyConstructorAutoValue.Builder (sub $java.lang.Object (struct
-  (field $vtable (ref $autovalue.DefaultNonEmptyConstructorAutoValue.Builder.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $field@autovalue.DefaultNonEmptyConstructorAutoValue.Builder (mut i32))
-  ))
- )
- (type $autovalue.DefaultNonEmptyConstructorAutoValue.Builder.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_build__autovalue_DefaultNonEmptyConstructorAutoValue (ref $function.m_build__autovalue_DefaultNonEmptyConstructorAutoValue))
-  (field $m_setBooleanField__boolean__autovalue_DefaultNonEmptyConstructorAutoValue_Builder (ref $function.m_setBooleanField__boolean__autovalue_DefaultNonEmptyConstructorAutoValue_Builder))
-  ))
- )
+;;; Code for autovalue.DefaultNonEmptyConstructorAutoValue.Builder [type definition]
+(type $autovalue.DefaultNonEmptyConstructorAutoValue.Builder (sub $java.lang.Object (struct
+ (field $vtable (ref $autovalue.DefaultNonEmptyConstructorAutoValue.Builder.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $field@autovalue.DefaultNonEmptyConstructorAutoValue.Builder (mut i32))
+ ))
+)
+(type $autovalue.DefaultNonEmptyConstructorAutoValue.Builder.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_build__autovalue_DefaultNonEmptyConstructorAutoValue (ref $function.m_build__autovalue_DefaultNonEmptyConstructorAutoValue))
+ (field $m_setBooleanField__boolean__autovalue_DefaultNonEmptyConstructorAutoValue_Builder (ref $function.m_setBooleanField__boolean__autovalue_DefaultNonEmptyConstructorAutoValue_Builder))
+ ))
+)
 
- ;;; Code for autovalue.EmptyAutoValue [type definition]
- (type $autovalue.EmptyAutoValue (sub $java.lang.Object (struct
-  (field $vtable (ref $autovalue.EmptyAutoValue.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $autovalue.EmptyAutoValue.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  ))
- )
+;;; Code for autovalue.EmptyAutoValue [type definition]
+(type $autovalue.EmptyAutoValue (sub $java.lang.Object (struct
+ (field $vtable (ref $autovalue.EmptyAutoValue.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $autovalue.EmptyAutoValue.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 
- ;;; Code for autovalue.EmptyAutoValue.Builder [type definition]
- (type $autovalue.EmptyAutoValue.Builder (sub $java.lang.Object (struct
-  (field $vtable (ref $autovalue.EmptyAutoValue.Builder.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $autovalue.EmptyAutoValue.Builder.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_build__autovalue_EmptyAutoValue (ref $function.m_build__autovalue_EmptyAutoValue))
-  ))
- )
+;;; Code for autovalue.EmptyAutoValue.Builder [type definition]
+(type $autovalue.EmptyAutoValue.Builder (sub $java.lang.Object (struct
+ (field $vtable (ref $autovalue.EmptyAutoValue.Builder.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $autovalue.EmptyAutoValue.Builder.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_build__autovalue_EmptyAutoValue (ref $function.m_build__autovalue_EmptyAutoValue))
+ ))
+)
 
- ;;; Code for autovalue.SimpleAutoValue [type definition]
- (type $autovalue.SimpleAutoValue (sub $java.lang.Object (struct
-  (field $vtable (ref $autovalue.SimpleAutoValue.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $field1@autovalue.SimpleAutoValue (mut (ref null $autovalue.AutoValue_SimpleAutoValue)))
-  (field $field2@autovalue.SimpleAutoValue (mut (ref null $autovalue.AutoValue_SimpleAutoValue)))
-  (field $intField@autovalue.SimpleAutoValue (mut i32))
-  ))
- )
- (type $autovalue.SimpleAutoValue.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_getArrayField__arrayOf_int (ref $function.m_getArrayField__arrayOf_int))
-  (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
-  (field $m_getDoubleField__java_lang_Double (ref $function.m_getDoubleField__java_lang_Double))
-  (field $m_getIntField__int (ref $function.m_getIntField__int))
-  (field $m_getNullableField__java_lang_Double (ref $function.m_getNullableField__java_lang_Double))
-  (field $m_getStringField__java_lang_String (ref $function.m_getStringField__java_lang_String))
-  ))
- )
+;;; Code for autovalue.SimpleAutoValue [type definition]
+(type $autovalue.SimpleAutoValue (sub $java.lang.Object (struct
+ (field $vtable (ref $autovalue.SimpleAutoValue.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $field1@autovalue.SimpleAutoValue (mut (ref null $autovalue.AutoValue_SimpleAutoValue)))
+ (field $field2@autovalue.SimpleAutoValue (mut (ref null $autovalue.AutoValue_SimpleAutoValue)))
+ (field $intField@autovalue.SimpleAutoValue (mut i32))
+ ))
+)
+(type $autovalue.SimpleAutoValue.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getArrayField__arrayOf_int (ref $function.m_getArrayField__arrayOf_int))
+ (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
+ (field $m_getDoubleField__java_lang_Double (ref $function.m_getDoubleField__java_lang_Double))
+ (field $m_getIntField__int (ref $function.m_getIntField__int))
+ (field $m_getNullableField__java_lang_Double (ref $function.m_getNullableField__java_lang_Double))
+ (field $m_getStringField__java_lang_String (ref $function.m_getStringField__java_lang_String))
+ ))
+)
 
- ;;; Code for autovalue.$$AutoValue_AutoValueWithExtensions [type definition]
- (type $autovalue.$$AutoValue_AutoValueWithExtensions (sub $autovalue.AutoValueWithExtensions (struct
-  (field $vtable (ref $autovalue.$$AutoValue_AutoValueWithExtensions.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $intField@autovalue.$$AutoValue_AutoValueWithExtensions (mut i32))
-  (field $stringField@autovalue.$$AutoValue_AutoValueWithExtensions (mut (ref null $java.lang.String)))
-  ))
- )
- (type $autovalue.$$AutoValue_AutoValueWithExtensions.vtable (sub $autovalue.AutoValueWithExtensions.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_getIntField__int (ref $function.m_getIntField__int))
-  (field $m_getMemoizedNative__int_$pp_autovalue (ref $function.m_getMemoizedNative__int_$pp_autovalue))
-  (field $m_getStringField__java_lang_String (ref $function.m_getStringField__java_lang_String))
-  (field $m_toPrettyString__java_lang_String_$pp_autovalue (ref $function.m_toPrettyString__java_lang_String_$pp_autovalue))
-  ))
- )
+;;; Code for autovalue.$$AutoValue_AutoValueWithExtensions [type definition]
+(type $autovalue.$$AutoValue_AutoValueWithExtensions (sub $autovalue.AutoValueWithExtensions (struct
+ (field $vtable (ref $autovalue.$$AutoValue_AutoValueWithExtensions.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $intField@autovalue.$$AutoValue_AutoValueWithExtensions (mut i32))
+ (field $stringField@autovalue.$$AutoValue_AutoValueWithExtensions (mut (ref null $java.lang.String)))
+ ))
+)
+(type $autovalue.$$AutoValue_AutoValueWithExtensions.vtable (sub $autovalue.AutoValueWithExtensions.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getIntField__int (ref $function.m_getIntField__int))
+ (field $m_getMemoizedNative__int_$pp_autovalue (ref $function.m_getMemoizedNative__int_$pp_autovalue))
+ (field $m_getStringField__java_lang_String (ref $function.m_getStringField__java_lang_String))
+ (field $m_toPrettyString__java_lang_String_$pp_autovalue (ref $function.m_toPrettyString__java_lang_String_$pp_autovalue))
+ ))
+)
 
- ;;; Code for autovalue.AutoValue_AutoValueJsType [type definition]
- (type $autovalue.AutoValue_AutoValueJsType (sub $autovalue.AutoValueJsType (struct
-  (field $vtable (ref $autovalue.AutoValue_AutoValueJsType.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $field@autovalue.AutoValue_AutoValueJsType (mut i32))
-  (field $withJsMethod@autovalue.AutoValue_AutoValueJsType (mut i32))
-  ))
- )
- (type $autovalue.AutoValue_AutoValueJsType.vtable (sub $autovalue.AutoValueJsType.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_getField__int (ref $function.m_getField__int))
-  (field $m_getWithJsMethod__int_$pp_autovalue (ref $function.m_getWithJsMethod__int_$pp_autovalue))
-  ))
- )
+;;; Code for autovalue.AutoValue_AutoValueJsType [type definition]
+(type $autovalue.AutoValue_AutoValueJsType (sub $autovalue.AutoValueJsType (struct
+ (field $vtable (ref $autovalue.AutoValue_AutoValueJsType.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $field@autovalue.AutoValue_AutoValueJsType (mut i32))
+ (field $withJsMethod@autovalue.AutoValue_AutoValueJsType (mut i32))
+ ))
+)
+(type $autovalue.AutoValue_AutoValueJsType.vtable (sub $autovalue.AutoValueJsType.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getField__int (ref $function.m_getField__int))
+ (field $m_getWithJsMethod__int_$pp_autovalue (ref $function.m_getWithJsMethod__int_$pp_autovalue))
+ ))
+)
 
- ;;; Code for autovalue.AutoValue_AutoValueWithBuilder [type definition]
- (type $autovalue.AutoValue_AutoValueWithBuilder (sub $autovalue.AutoValueWithBuilder (struct
-  (field $vtable (ref $autovalue.AutoValue_AutoValueWithBuilder.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $booleanField@autovalue.AutoValue_AutoValueWithBuilder (mut i8))
-  (field $nullableField@autovalue.AutoValue_AutoValueWithBuilder (mut (ref null $java.lang.Double)))
-  ))
- )
- (type $autovalue.AutoValue_AutoValueWithBuilder.vtable (sub $autovalue.AutoValueWithBuilder.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
-  (field $m_getNullableField__java_lang_Double (ref $function.m_getNullableField__java_lang_Double))
-  (field $m_toBuilder__autovalue_AutoValueWithBuilder_Builder (ref $function.m_toBuilder__autovalue_AutoValueWithBuilder_Builder))
-  ))
- )
+;;; Code for autovalue.AutoValue_AutoValueWithBuilder [type definition]
+(type $autovalue.AutoValue_AutoValueWithBuilder (sub $autovalue.AutoValueWithBuilder (struct
+ (field $vtable (ref $autovalue.AutoValue_AutoValueWithBuilder.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $booleanField@autovalue.AutoValue_AutoValueWithBuilder (mut i8))
+ (field $nullableField@autovalue.AutoValue_AutoValueWithBuilder (mut (ref null $java.lang.Double)))
+ ))
+)
+(type $autovalue.AutoValue_AutoValueWithBuilder.vtable (sub $autovalue.AutoValueWithBuilder.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
+ (field $m_getNullableField__java_lang_Double (ref $function.m_getNullableField__java_lang_Double))
+ (field $m_toBuilder__autovalue_AutoValueWithBuilder_Builder (ref $function.m_toBuilder__autovalue_AutoValueWithBuilder_Builder))
+ ))
+)
 
- ;;; Code for autovalue.AutoValue_AutoValueWithBuilder.Builder [type definition]
- (type $autovalue.AutoValue_AutoValueWithBuilder.Builder (sub $autovalue.AutoValueWithBuilder.Builder (struct
-  (field $vtable (ref $autovalue.AutoValue_AutoValueWithBuilder.Builder.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $booleanField@autovalue.AutoValue_AutoValueWithBuilder.Builder (mut i8))
-  (field $nullableField@autovalue.AutoValue_AutoValueWithBuilder.Builder (mut (ref null $java.lang.Double)))
-  (field $set$0@autovalue.AutoValue_AutoValueWithBuilder.Builder (mut i8))
-  ))
- )
- (type $autovalue.AutoValue_AutoValueWithBuilder.Builder.vtable (sub $autovalue.AutoValueWithBuilder.Builder.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_build__autovalue_AutoValueWithBuilder (ref $function.m_build__autovalue_AutoValueWithBuilder))
-  (field $m_setBooleanField__boolean__autovalue_AutoValueWithBuilder_Builder (ref $function.m_setBooleanField__boolean__autovalue_AutoValueWithBuilder_Builder))
-  (field $m_setNullableField__java_lang_Double__autovalue_AutoValueWithBuilder_Builder (ref $function.m_setNullableField__java_lang_Double__autovalue_AutoValueWithBuilder_Builder))
-  ))
- )
+;;; Code for autovalue.AutoValue_AutoValueWithBuilder.Builder [type definition]
+(type $autovalue.AutoValue_AutoValueWithBuilder.Builder (sub $autovalue.AutoValueWithBuilder.Builder (struct
+ (field $vtable (ref $autovalue.AutoValue_AutoValueWithBuilder.Builder.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $booleanField@autovalue.AutoValue_AutoValueWithBuilder.Builder (mut i8))
+ (field $nullableField@autovalue.AutoValue_AutoValueWithBuilder.Builder (mut (ref null $java.lang.Double)))
+ (field $set$0@autovalue.AutoValue_AutoValueWithBuilder.Builder (mut i8))
+ ))
+)
+(type $autovalue.AutoValue_AutoValueWithBuilder.Builder.vtable (sub $autovalue.AutoValueWithBuilder.Builder.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_build__autovalue_AutoValueWithBuilder (ref $function.m_build__autovalue_AutoValueWithBuilder))
+ (field $m_setBooleanField__boolean__autovalue_AutoValueWithBuilder_Builder (ref $function.m_setBooleanField__boolean__autovalue_AutoValueWithBuilder_Builder))
+ (field $m_setNullableField__java_lang_Double__autovalue_AutoValueWithBuilder_Builder (ref $function.m_setNullableField__java_lang_Double__autovalue_AutoValueWithBuilder_Builder))
+ ))
+)
 
- ;;; Code for autovalue.AutoValue_AutoValueWithGenerics [type definition]
- (type $autovalue.AutoValue_AutoValueWithGenerics (sub $autovalue.AutoValueWithGenerics (struct
-  (field $vtable (ref $autovalue.AutoValue_AutoValueWithGenerics.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $booleanField@autovalue.AutoValue_AutoValueWithGenerics (mut i8))
-  ))
- )
- (type $autovalue.AutoValue_AutoValueWithGenerics.vtable (sub $autovalue.AutoValueWithGenerics.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
-  ))
- )
+;;; Code for autovalue.AutoValue_AutoValueWithGenerics [type definition]
+(type $autovalue.AutoValue_AutoValueWithGenerics (sub $autovalue.AutoValueWithGenerics (struct
+ (field $vtable (ref $autovalue.AutoValue_AutoValueWithGenerics.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $booleanField@autovalue.AutoValue_AutoValueWithGenerics (mut i8))
+ ))
+)
+(type $autovalue.AutoValue_AutoValueWithGenerics.vtable (sub $autovalue.AutoValueWithGenerics.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
+ ))
+)
 
- ;;; Code for autovalue.AutoValue_DefaultConstructorAutoValue [type definition]
- (type $autovalue.AutoValue_DefaultConstructorAutoValue (sub $autovalue.DefaultConstructorAutoValue (struct
-  (field $vtable (ref $autovalue.AutoValue_DefaultConstructorAutoValue.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $booleanField@autovalue.AutoValue_DefaultConstructorAutoValue (mut i8))
-  ))
- )
- (type $autovalue.AutoValue_DefaultConstructorAutoValue.vtable (sub $autovalue.DefaultConstructorAutoValue.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
-  ))
- )
+;;; Code for autovalue.AutoValue_DefaultConstructorAutoValue [type definition]
+(type $autovalue.AutoValue_DefaultConstructorAutoValue (sub $autovalue.DefaultConstructorAutoValue (struct
+ (field $vtable (ref $autovalue.AutoValue_DefaultConstructorAutoValue.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $booleanField@autovalue.AutoValue_DefaultConstructorAutoValue (mut i8))
+ ))
+)
+(type $autovalue.AutoValue_DefaultConstructorAutoValue.vtable (sub $autovalue.DefaultConstructorAutoValue.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
+ ))
+)
 
- ;;; Code for autovalue.AutoValue_DefaultConstructorAutoValue.Builder [type definition]
- (type $autovalue.AutoValue_DefaultConstructorAutoValue.Builder (sub $autovalue.DefaultConstructorAutoValue.Builder (struct
-  (field $vtable (ref $autovalue.AutoValue_DefaultConstructorAutoValue.Builder.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $booleanField@autovalue.AutoValue_DefaultConstructorAutoValue.Builder (mut i8))
-  (field $set$0@autovalue.AutoValue_DefaultConstructorAutoValue.Builder (mut i8))
-  ))
- )
- (type $autovalue.AutoValue_DefaultConstructorAutoValue.Builder.vtable (sub $autovalue.DefaultConstructorAutoValue.Builder.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_build__autovalue_DefaultConstructorAutoValue (ref $function.m_build__autovalue_DefaultConstructorAutoValue))
-  (field $m_setBooleanField__boolean__autovalue_DefaultConstructorAutoValue_Builder_$pp_autovalue (ref $function.m_setBooleanField__boolean__autovalue_DefaultConstructorAutoValue_Builder_$pp_autovalue))
-  ))
- )
+;;; Code for autovalue.AutoValue_DefaultConstructorAutoValue.Builder [type definition]
+(type $autovalue.AutoValue_DefaultConstructorAutoValue.Builder (sub $autovalue.DefaultConstructorAutoValue.Builder (struct
+ (field $vtable (ref $autovalue.AutoValue_DefaultConstructorAutoValue.Builder.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $booleanField@autovalue.AutoValue_DefaultConstructorAutoValue.Builder (mut i8))
+ (field $set$0@autovalue.AutoValue_DefaultConstructorAutoValue.Builder (mut i8))
+ ))
+)
+(type $autovalue.AutoValue_DefaultConstructorAutoValue.Builder.vtable (sub $autovalue.DefaultConstructorAutoValue.Builder.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_build__autovalue_DefaultConstructorAutoValue (ref $function.m_build__autovalue_DefaultConstructorAutoValue))
+ (field $m_setBooleanField__boolean__autovalue_DefaultConstructorAutoValue_Builder_$pp_autovalue (ref $function.m_setBooleanField__boolean__autovalue_DefaultConstructorAutoValue_Builder_$pp_autovalue))
+ ))
+)
 
- ;;; Code for autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue [type definition]
- (type $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue (sub $autovalue.DefaultNonEmptyConstructorAutoValue (struct
-  (field $vtable (ref $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $field@autovalue.DefaultNonEmptyConstructorAutoValue (mut i32))
-  (field $booleanField@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue (mut i8))
-  ))
- )
- (type $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.vtable (sub $autovalue.DefaultNonEmptyConstructorAutoValue.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
-  ))
- )
+;;; Code for autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue [type definition]
+(type $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue (sub $autovalue.DefaultNonEmptyConstructorAutoValue (struct
+ (field $vtable (ref $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $field@autovalue.DefaultNonEmptyConstructorAutoValue (mut i32))
+ (field $booleanField@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue (mut i8))
+ ))
+)
+(type $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.vtable (sub $autovalue.DefaultNonEmptyConstructorAutoValue.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
+ ))
+)
 
- ;;; Code for autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder [type definition]
- (type $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder (sub $autovalue.DefaultNonEmptyConstructorAutoValue.Builder (struct
-  (field $vtable (ref $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $field@autovalue.DefaultNonEmptyConstructorAutoValue.Builder (mut i32))
-  (field $booleanField@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder (mut i8))
-  (field $set$0@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder (mut i8))
-  ))
- )
- (type $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder.vtable (sub $autovalue.DefaultNonEmptyConstructorAutoValue.Builder.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_build__autovalue_DefaultNonEmptyConstructorAutoValue (ref $function.m_build__autovalue_DefaultNonEmptyConstructorAutoValue))
-  (field $m_setBooleanField__boolean__autovalue_DefaultNonEmptyConstructorAutoValue_Builder (ref $function.m_setBooleanField__boolean__autovalue_DefaultNonEmptyConstructorAutoValue_Builder))
-  ))
- )
+;;; Code for autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder [type definition]
+(type $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder (sub $autovalue.DefaultNonEmptyConstructorAutoValue.Builder (struct
+ (field $vtable (ref $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $field@autovalue.DefaultNonEmptyConstructorAutoValue.Builder (mut i32))
+ (field $booleanField@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder (mut i8))
+ (field $set$0@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder (mut i8))
+ ))
+)
+(type $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder.vtable (sub $autovalue.DefaultNonEmptyConstructorAutoValue.Builder.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_build__autovalue_DefaultNonEmptyConstructorAutoValue (ref $function.m_build__autovalue_DefaultNonEmptyConstructorAutoValue))
+ (field $m_setBooleanField__boolean__autovalue_DefaultNonEmptyConstructorAutoValue_Builder (ref $function.m_setBooleanField__boolean__autovalue_DefaultNonEmptyConstructorAutoValue_Builder))
+ ))
+)
 
- ;;; Code for autovalue.AutoValue_EmptyAutoValue [type definition]
- (type $autovalue.AutoValue_EmptyAutoValue (sub $autovalue.EmptyAutoValue (struct
-  (field $vtable (ref $autovalue.AutoValue_EmptyAutoValue.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $autovalue.AutoValue_EmptyAutoValue.vtable (sub $autovalue.EmptyAutoValue.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  ))
- )
+;;; Code for autovalue.AutoValue_EmptyAutoValue [type definition]
+(type $autovalue.AutoValue_EmptyAutoValue (sub $autovalue.EmptyAutoValue (struct
+ (field $vtable (ref $autovalue.AutoValue_EmptyAutoValue.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $autovalue.AutoValue_EmptyAutoValue.vtable (sub $autovalue.EmptyAutoValue.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 
- ;;; Code for autovalue.AutoValue_EmptyAutoValue.Builder [type definition]
- (type $autovalue.AutoValue_EmptyAutoValue.Builder (sub $autovalue.EmptyAutoValue.Builder (struct
-  (field $vtable (ref $autovalue.AutoValue_EmptyAutoValue.Builder.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $autovalue.AutoValue_EmptyAutoValue.Builder.vtable (sub $autovalue.EmptyAutoValue.Builder.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_build__autovalue_EmptyAutoValue (ref $function.m_build__autovalue_EmptyAutoValue))
-  ))
- )
+;;; Code for autovalue.AutoValue_EmptyAutoValue.Builder [type definition]
+(type $autovalue.AutoValue_EmptyAutoValue.Builder (sub $autovalue.EmptyAutoValue.Builder (struct
+ (field $vtable (ref $autovalue.AutoValue_EmptyAutoValue.Builder.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $autovalue.AutoValue_EmptyAutoValue.Builder.vtable (sub $autovalue.EmptyAutoValue.Builder.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_build__autovalue_EmptyAutoValue (ref $function.m_build__autovalue_EmptyAutoValue))
+ ))
+)
 
- ;;; Code for autovalue.AutoValue_SimpleAutoValue [type definition]
- (type $autovalue.AutoValue_SimpleAutoValue (sub $autovalue.SimpleAutoValue (struct
-  (field $vtable (ref $autovalue.AutoValue_SimpleAutoValue.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $field1@autovalue.SimpleAutoValue (mut (ref null $autovalue.AutoValue_SimpleAutoValue)))
-  (field $field2@autovalue.SimpleAutoValue (mut (ref null $autovalue.AutoValue_SimpleAutoValue)))
-  (field $intField@autovalue.SimpleAutoValue (mut i32))
-  (field $arrayField@autovalue.AutoValue_SimpleAutoValue (mut (ref null $javaemul.internal.WasmArray.OfInt)))
-  (field $booleanField@autovalue.AutoValue_SimpleAutoValue (mut i8))
-  (field $doubleField@autovalue.AutoValue_SimpleAutoValue (mut (ref null $java.lang.Double)))
-  (field $intField@autovalue.AutoValue_SimpleAutoValue (mut i32))
-  (field $nullableField@autovalue.AutoValue_SimpleAutoValue (mut (ref null $java.lang.Double)))
-  (field $stringField@autovalue.AutoValue_SimpleAutoValue (mut (ref null $java.lang.String)))
-  ))
- )
- (type $autovalue.AutoValue_SimpleAutoValue.vtable (sub $autovalue.SimpleAutoValue.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_getArrayField__arrayOf_int (ref $function.m_getArrayField__arrayOf_int))
-  (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
-  (field $m_getDoubleField__java_lang_Double (ref $function.m_getDoubleField__java_lang_Double))
-  (field $m_getIntField__int (ref $function.m_getIntField__int))
-  (field $m_getNullableField__java_lang_Double (ref $function.m_getNullableField__java_lang_Double))
-  (field $m_getStringField__java_lang_String (ref $function.m_getStringField__java_lang_String))
-  ))
- )
+;;; Code for autovalue.AutoValue_SimpleAutoValue [type definition]
+(type $autovalue.AutoValue_SimpleAutoValue (sub $autovalue.SimpleAutoValue (struct
+ (field $vtable (ref $autovalue.AutoValue_SimpleAutoValue.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $field1@autovalue.SimpleAutoValue (mut (ref null $autovalue.AutoValue_SimpleAutoValue)))
+ (field $field2@autovalue.SimpleAutoValue (mut (ref null $autovalue.AutoValue_SimpleAutoValue)))
+ (field $intField@autovalue.SimpleAutoValue (mut i32))
+ (field $arrayField@autovalue.AutoValue_SimpleAutoValue (mut (ref null $javaemul.internal.WasmArray.OfInt)))
+ (field $booleanField@autovalue.AutoValue_SimpleAutoValue (mut i8))
+ (field $doubleField@autovalue.AutoValue_SimpleAutoValue (mut (ref null $java.lang.Double)))
+ (field $intField@autovalue.AutoValue_SimpleAutoValue (mut i32))
+ (field $nullableField@autovalue.AutoValue_SimpleAutoValue (mut (ref null $java.lang.Double)))
+ (field $stringField@autovalue.AutoValue_SimpleAutoValue (mut (ref null $java.lang.String)))
+ ))
+)
+(type $autovalue.AutoValue_SimpleAutoValue.vtable (sub $autovalue.SimpleAutoValue.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getArrayField__arrayOf_int (ref $function.m_getArrayField__arrayOf_int))
+ (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
+ (field $m_getDoubleField__java_lang_Double (ref $function.m_getDoubleField__java_lang_Double))
+ (field $m_getIntField__int (ref $function.m_getIntField__int))
+ (field $m_getNullableField__java_lang_Double (ref $function.m_getNullableField__java_lang_Double))
+ (field $m_getStringField__java_lang_String (ref $function.m_getStringField__java_lang_String))
+ ))
+)
 
- ;;; Code for autovalue.AutoValueWithFields [type definition]
- (type $autovalue.AutoValueWithFields (sub $autovalue.Parent (struct
-  (field $vtable (ref $autovalue.AutoValueWithFields.vtable))
-  (field $itable (ref $autovalue.AutoValueWithFields.itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $userField1@autovalue.Parent (mut i32))
-  (field $userField2@autovalue.AutoValueWithFields (mut i32))
-  ))
- )
- (type $autovalue.AutoValueWithFields.vtable (sub $autovalue.Parent.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_getIntField__int (ref $function.m_getIntField__int))
-  (field $m_getMemoizedNative__int_$pp_autovalue (ref $function.m_getMemoizedNative__int_$pp_autovalue))
-  ))
- )
- (type $autovalue.AutoValueWithFields.itable (sub $itable (struct
-  (field (ref $java.io.Serializable.vtable))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
- )))
+;;; Code for autovalue.AutoValueWithFields [type definition]
+(type $autovalue.AutoValueWithFields (sub $autovalue.Parent (struct
+ (field $vtable (ref $autovalue.AutoValueWithFields.vtable))
+ (field $itable (ref $autovalue.AutoValueWithFields.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $userField1@autovalue.Parent (mut i32))
+ (field $userField2@autovalue.AutoValueWithFields (mut i32))
+ ))
+)
+(type $autovalue.AutoValueWithFields.vtable (sub $autovalue.Parent.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getIntField__int (ref $function.m_getIntField__int))
+ (field $m_getMemoizedNative__int_$pp_autovalue (ref $function.m_getMemoizedNative__int_$pp_autovalue))
+ ))
+)
 
- ;;; Code for autovalue.AutoValueWithOverrides [type definition]
- (type $autovalue.AutoValueWithOverrides (sub $autovalue.BaseClass (struct
-  (field $vtable (ref $autovalue.AutoValueWithOverrides.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $autovalue.AutoValueWithOverrides.vtable (sub $autovalue.BaseClass.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_getBaseField__int (ref $function.m_getBaseField__int))
-  (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
-  ))
- )
+;;; Code for autovalue.AutoValueWithOverrides [type definition]
+(type $autovalue.AutoValueWithOverrides (sub $autovalue.BaseClass (struct
+ (field $vtable (ref $autovalue.AutoValueWithOverrides.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $autovalue.AutoValueWithOverrides.vtable (sub $autovalue.BaseClass.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getBaseField__int (ref $function.m_getBaseField__int))
+ (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
+ ))
+)
 
- ;;; Code for autovalue.ExtendingAutoValue [type definition]
- (type $autovalue.ExtendingAutoValue (sub $autovalue.BaseClass (struct
-  (field $vtable (ref $autovalue.ExtendingAutoValue.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $autovalue.ExtendingAutoValue.vtable (sub $autovalue.BaseClass.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_getBaseField__int (ref $function.m_getBaseField__int))
-  (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
-  (field $m_getStringField__java_lang_String (ref $function.m_getStringField__java_lang_String))
-  ))
- )
+;;; Code for autovalue.ExtendingAutoValue [type definition]
+(type $autovalue.ExtendingAutoValue (sub $autovalue.BaseClass (struct
+ (field $vtable (ref $autovalue.ExtendingAutoValue.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $autovalue.ExtendingAutoValue.vtable (sub $autovalue.BaseClass.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getBaseField__int (ref $function.m_getBaseField__int))
+ (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
+ (field $m_getStringField__java_lang_String (ref $function.m_getStringField__java_lang_String))
+ ))
+)
 
- ;;; Code for autovalue.SimpleAutoValue.GenericType [type definition]
- (type $autovalue.SimpleAutoValue.GenericType (sub $java.util.AbstractCollection (struct
-  (field $vtable (ref $autovalue.SimpleAutoValue.GenericType.vtable))
-  (field $itable (ref $autovalue.SimpleAutoValue.GenericType.itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $autovalue.SimpleAutoValue.GenericType.vtable (sub $java.util.AbstractCollection.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_addAll__java_util_Collection__boolean (ref $function.m_addAll__java_util_Collection__boolean))
-  (field $m_add__java_lang_Object__boolean (ref $function.m_add__java_lang_Object__boolean))
-  (field $m_clear__void (ref $function.m_clear__void))
-  (field $m_containsAll__java_util_Collection__boolean (ref $function.m_containsAll__java_util_Collection__boolean))
-  (field $m_contains__java_lang_Object__boolean (ref $function.m_contains__java_lang_Object__boolean))
-  (field $m_forEach__java_util_function_Consumer__void (ref $function.m_forEach__java_util_function_Consumer__void))
-  (field $m_isEmpty__boolean (ref $function.m_isEmpty__boolean))
-  (field $m_iterator__java_util_Iterator (ref $function.m_iterator__java_util_Iterator))
-  (field $m_parallelStream__java_util_stream_Stream (ref $function.m_parallelStream__java_util_stream_Stream))
-  (field $m_removeAll__java_util_Collection__boolean (ref $function.m_removeAll__java_util_Collection__boolean))
-  (field $m_removeIf__java_util_function_Predicate__boolean (ref $function.m_removeIf__java_util_function_Predicate__boolean))
-  (field $m_remove__java_lang_Object__boolean (ref $function.m_remove__java_lang_Object__boolean))
-  (field $m_retainAll__java_util_Collection__boolean (ref $function.m_retainAll__java_util_Collection__boolean))
-  (field $m_size__int (ref $function.m_size__int))
-  (field $m_spliterator__java_util_Spliterator (ref $function.m_spliterator__java_util_Spliterator))
-  (field $m_stream__java_util_stream_Stream (ref $function.m_stream__java_util_stream_Stream))
-  (field $m_toArray__arrayOf_java_lang_Object (ref $function.m_toArray__arrayOf_java_lang_Object))
-  (field $m_toArray__arrayOf_java_lang_Object__arrayOf_java_lang_Object (ref $function.m_toArray__arrayOf_java_lang_Object__arrayOf_java_lang_Object))
-  (field $m_foo__java_util_List__java_util_List__autovalue_AutoValue_SimpleAutoValue_$pp_autovalue (ref $function.m_foo__java_util_List__java_util_List__autovalue_AutoValue_SimpleAutoValue_$pp_autovalue))
-  ))
- )
- (type $autovalue.SimpleAutoValue.GenericType.itable (sub $java.util.AbstractCollection.itable (struct
-  (field (ref null struct))
-  (field (ref $java.util.Collection.vtable))
-  (field (ref $java.lang.Iterable.vtable))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
- )))
+;;; Code for autovalue.SimpleAutoValue.GenericType [type definition]
+(type $autovalue.SimpleAutoValue.GenericType (sub $java.util.AbstractCollection (struct
+ (field $vtable (ref $autovalue.SimpleAutoValue.GenericType.vtable))
+ (field $itable (ref $autovalue.SimpleAutoValue.GenericType.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $autovalue.SimpleAutoValue.GenericType.vtable (sub $java.util.AbstractCollection.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_addAll__java_util_Collection__boolean (ref $function.m_addAll__java_util_Collection__boolean))
+ (field $m_add__java_lang_Object__boolean (ref $function.m_add__java_lang_Object__boolean))
+ (field $m_clear__void (ref $function.m_clear__void))
+ (field $m_containsAll__java_util_Collection__boolean (ref $function.m_containsAll__java_util_Collection__boolean))
+ (field $m_contains__java_lang_Object__boolean (ref $function.m_contains__java_lang_Object__boolean))
+ (field $m_forEach__java_util_function_Consumer__void (ref $function.m_forEach__java_util_function_Consumer__void))
+ (field $m_isEmpty__boolean (ref $function.m_isEmpty__boolean))
+ (field $m_iterator__java_util_Iterator (ref $function.m_iterator__java_util_Iterator))
+ (field $m_parallelStream__java_util_stream_Stream (ref $function.m_parallelStream__java_util_stream_Stream))
+ (field $m_removeAll__java_util_Collection__boolean (ref $function.m_removeAll__java_util_Collection__boolean))
+ (field $m_removeIf__java_util_function_Predicate__boolean (ref $function.m_removeIf__java_util_function_Predicate__boolean))
+ (field $m_remove__java_lang_Object__boolean (ref $function.m_remove__java_lang_Object__boolean))
+ (field $m_retainAll__java_util_Collection__boolean (ref $function.m_retainAll__java_util_Collection__boolean))
+ (field $m_size__int (ref $function.m_size__int))
+ (field $m_spliterator__java_util_Spliterator (ref $function.m_spliterator__java_util_Spliterator))
+ (field $m_stream__java_util_stream_Stream (ref $function.m_stream__java_util_stream_Stream))
+ (field $m_toArray__arrayOf_java_lang_Object (ref $function.m_toArray__arrayOf_java_lang_Object))
+ (field $m_toArray__arrayOf_java_lang_Object__arrayOf_java_lang_Object (ref $function.m_toArray__arrayOf_java_lang_Object__arrayOf_java_lang_Object))
+ (field $m_foo__java_util_List__java_util_List__autovalue_AutoValue_SimpleAutoValue_$pp_autovalue (ref $function.m_foo__java_util_List__java_util_List__autovalue_AutoValue_SimpleAutoValue_$pp_autovalue))
+ ))
+)
 
- ;;; Code for autovalue.$AutoValue_AutoValueWithExtensions [type definition]
- (type $autovalue.$AutoValue_AutoValueWithExtensions (sub $autovalue.$$AutoValue_AutoValueWithExtensions (struct
-  (field $vtable (ref $autovalue.$AutoValue_AutoValueWithExtensions.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $intField@autovalue.$$AutoValue_AutoValueWithExtensions (mut i32))
-  (field $stringField@autovalue.$$AutoValue_AutoValueWithExtensions (mut (ref null $java.lang.String)))
-  ))
- )
- (type $autovalue.$AutoValue_AutoValueWithExtensions.vtable (sub $autovalue.$$AutoValue_AutoValueWithExtensions.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_getIntField__int (ref $function.m_getIntField__int))
-  (field $m_getMemoizedNative__int_$pp_autovalue (ref $function.m_getMemoizedNative__int_$pp_autovalue))
-  (field $m_getStringField__java_lang_String (ref $function.m_getStringField__java_lang_String))
-  (field $m_toPrettyString__java_lang_String_$pp_autovalue (ref $function.m_toPrettyString__java_lang_String_$pp_autovalue))
-  ))
- )
+;;; Code for autovalue.$AutoValue_AutoValueWithExtensions [type definition]
+(type $autovalue.$AutoValue_AutoValueWithExtensions (sub $autovalue.$$AutoValue_AutoValueWithExtensions (struct
+ (field $vtable (ref $autovalue.$AutoValue_AutoValueWithExtensions.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $intField@autovalue.$$AutoValue_AutoValueWithExtensions (mut i32))
+ (field $stringField@autovalue.$$AutoValue_AutoValueWithExtensions (mut (ref null $java.lang.String)))
+ ))
+)
+(type $autovalue.$AutoValue_AutoValueWithExtensions.vtable (sub $autovalue.$$AutoValue_AutoValueWithExtensions.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getIntField__int (ref $function.m_getIntField__int))
+ (field $m_getMemoizedNative__int_$pp_autovalue (ref $function.m_getMemoizedNative__int_$pp_autovalue))
+ (field $m_getStringField__java_lang_String (ref $function.m_getStringField__java_lang_String))
+ (field $m_toPrettyString__java_lang_String_$pp_autovalue (ref $function.m_toPrettyString__java_lang_String_$pp_autovalue))
+ ))
+)
 
- ;;; Code for autovalue.$AutoValue_AutoValueWithFields [type definition]
- (type $autovalue.$AutoValue_AutoValueWithFields (sub $autovalue.AutoValueWithFields (struct
-  (field $vtable (ref $autovalue.$AutoValue_AutoValueWithFields.vtable))
-  (field $itable (ref $autovalue.$AutoValue_AutoValueWithFields.itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $userField1@autovalue.Parent (mut i32))
-  (field $userField2@autovalue.AutoValueWithFields (mut i32))
-  (field $intField@autovalue.$AutoValue_AutoValueWithFields (mut i32))
-  ))
- )
- (type $autovalue.$AutoValue_AutoValueWithFields.vtable (sub $autovalue.AutoValueWithFields.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_getIntField__int (ref $function.m_getIntField__int))
-  (field $m_getMemoizedNative__int_$pp_autovalue (ref $function.m_getMemoizedNative__int_$pp_autovalue))
-  ))
- )
- (type $autovalue.$AutoValue_AutoValueWithFields.itable (sub $autovalue.AutoValueWithFields.itable (struct
-  (field (ref $java.io.Serializable.vtable))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
- )))
+;;; Code for autovalue.$AutoValue_AutoValueWithFields [type definition]
+(type $autovalue.$AutoValue_AutoValueWithFields (sub $autovalue.AutoValueWithFields (struct
+ (field $vtable (ref $autovalue.$AutoValue_AutoValueWithFields.vtable))
+ (field $itable (ref $autovalue.$AutoValue_AutoValueWithFields.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $userField1@autovalue.Parent (mut i32))
+ (field $userField2@autovalue.AutoValueWithFields (mut i32))
+ (field $intField@autovalue.$AutoValue_AutoValueWithFields (mut i32))
+ ))
+)
+(type $autovalue.$AutoValue_AutoValueWithFields.vtable (sub $autovalue.AutoValueWithFields.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getIntField__int (ref $function.m_getIntField__int))
+ (field $m_getMemoizedNative__int_$pp_autovalue (ref $function.m_getMemoizedNative__int_$pp_autovalue))
+ ))
+)
 
- ;;; Code for autovalue.AutoValue_AutoValueWithOverrides [type definition]
- (type $autovalue.AutoValue_AutoValueWithOverrides (sub $autovalue.AutoValueWithOverrides (struct
-  (field $vtable (ref $autovalue.AutoValue_AutoValueWithOverrides.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $baseField@autovalue.AutoValue_AutoValueWithOverrides (mut i32))
-  (field $booleanField@autovalue.AutoValue_AutoValueWithOverrides (mut i8))
-  ))
- )
- (type $autovalue.AutoValue_AutoValueWithOverrides.vtable (sub $autovalue.AutoValueWithOverrides.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_getBaseField__int (ref $function.m_getBaseField__int))
-  (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
-  ))
- )
+;;; Code for autovalue.AutoValue_AutoValueWithOverrides [type definition]
+(type $autovalue.AutoValue_AutoValueWithOverrides (sub $autovalue.AutoValueWithOverrides (struct
+ (field $vtable (ref $autovalue.AutoValue_AutoValueWithOverrides.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $baseField@autovalue.AutoValue_AutoValueWithOverrides (mut i32))
+ (field $booleanField@autovalue.AutoValue_AutoValueWithOverrides (mut i8))
+ ))
+)
+(type $autovalue.AutoValue_AutoValueWithOverrides.vtable (sub $autovalue.AutoValueWithOverrides.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getBaseField__int (ref $function.m_getBaseField__int))
+ (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
+ ))
+)
 
- ;;; Code for autovalue.AutoValue_ExtendingAutoValue [type definition]
- (type $autovalue.AutoValue_ExtendingAutoValue (sub $autovalue.ExtendingAutoValue (struct
-  (field $vtable (ref $autovalue.AutoValue_ExtendingAutoValue.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $baseField@autovalue.AutoValue_ExtendingAutoValue (mut i32))
-  (field $booleanField@autovalue.AutoValue_ExtendingAutoValue (mut i8))
-  (field $stringField@autovalue.AutoValue_ExtendingAutoValue (mut (ref null $java.lang.String)))
-  ))
- )
- (type $autovalue.AutoValue_ExtendingAutoValue.vtable (sub $autovalue.ExtendingAutoValue.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_getBaseField__int (ref $function.m_getBaseField__int))
-  (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
-  (field $m_getStringField__java_lang_String (ref $function.m_getStringField__java_lang_String))
-  ))
- )
+;;; Code for autovalue.AutoValue_ExtendingAutoValue [type definition]
+(type $autovalue.AutoValue_ExtendingAutoValue (sub $autovalue.ExtendingAutoValue (struct
+ (field $vtable (ref $autovalue.AutoValue_ExtendingAutoValue.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $baseField@autovalue.AutoValue_ExtendingAutoValue (mut i32))
+ (field $booleanField@autovalue.AutoValue_ExtendingAutoValue (mut i8))
+ (field $stringField@autovalue.AutoValue_ExtendingAutoValue (mut (ref null $java.lang.String)))
+ ))
+)
+(type $autovalue.AutoValue_ExtendingAutoValue.vtable (sub $autovalue.ExtendingAutoValue.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getBaseField__int (ref $function.m_getBaseField__int))
+ (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
+ (field $m_getStringField__java_lang_String (ref $function.m_getStringField__java_lang_String))
+ ))
+)
 
- ;;; Code for autovalue.AutoValue_AutoValueWithExtensions [type definition]
- (type $autovalue.AutoValue_AutoValueWithExtensions (sub $autovalue.$AutoValue_AutoValueWithExtensions (struct
-  (field $vtable (ref $autovalue.AutoValue_AutoValueWithExtensions.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $intField@autovalue.$$AutoValue_AutoValueWithExtensions (mut i32))
-  (field $stringField@autovalue.$$AutoValue_AutoValueWithExtensions (mut (ref null $java.lang.String)))
-  (field $getMemoizedNative$Memoized@autovalue.AutoValue_AutoValueWithExtensions (mut i8))
-  (field $getMemoizedNative@autovalue.AutoValue_AutoValueWithExtensions (mut i32))
-  ))
- )
- (type $autovalue.AutoValue_AutoValueWithExtensions.vtable (sub $autovalue.$AutoValue_AutoValueWithExtensions.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_getIntField__int (ref $function.m_getIntField__int))
-  (field $m_getMemoizedNative__int_$pp_autovalue (ref $function.m_getMemoizedNative__int_$pp_autovalue))
-  (field $m_getStringField__java_lang_String (ref $function.m_getStringField__java_lang_String))
-  (field $m_toPrettyString__java_lang_String_$pp_autovalue (ref $function.m_toPrettyString__java_lang_String_$pp_autovalue))
-  ))
- )
+;;; Code for autovalue.AutoValue_AutoValueWithExtensions [type definition]
+(type $autovalue.AutoValue_AutoValueWithExtensions (sub $autovalue.$AutoValue_AutoValueWithExtensions (struct
+ (field $vtable (ref $autovalue.AutoValue_AutoValueWithExtensions.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $intField@autovalue.$$AutoValue_AutoValueWithExtensions (mut i32))
+ (field $stringField@autovalue.$$AutoValue_AutoValueWithExtensions (mut (ref null $java.lang.String)))
+ (field $getMemoizedNative$Memoized@autovalue.AutoValue_AutoValueWithExtensions (mut i8))
+ (field $getMemoizedNative@autovalue.AutoValue_AutoValueWithExtensions (mut i32))
+ ))
+)
+(type $autovalue.AutoValue_AutoValueWithExtensions.vtable (sub $autovalue.$AutoValue_AutoValueWithExtensions.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getIntField__int (ref $function.m_getIntField__int))
+ (field $m_getMemoizedNative__int_$pp_autovalue (ref $function.m_getMemoizedNative__int_$pp_autovalue))
+ (field $m_getStringField__java_lang_String (ref $function.m_getStringField__java_lang_String))
+ (field $m_toPrettyString__java_lang_String_$pp_autovalue (ref $function.m_toPrettyString__java_lang_String_$pp_autovalue))
+ ))
+)
 
- ;;; Code for autovalue.AutoValue_AutoValueWithFields [type definition]
- (type $autovalue.AutoValue_AutoValueWithFields (sub $autovalue.$AutoValue_AutoValueWithFields (struct
-  (field $vtable (ref $autovalue.AutoValue_AutoValueWithFields.vtable))
-  (field $itable (ref $autovalue.AutoValue_AutoValueWithFields.itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $userField1@autovalue.Parent (mut i32))
-  (field $userField2@autovalue.AutoValueWithFields (mut i32))
-  (field $intField@autovalue.$AutoValue_AutoValueWithFields (mut i32))
-  (field $getMemoizedNative$Memoized@autovalue.AutoValue_AutoValueWithFields (mut i8))
-  (field $getMemoizedNative@autovalue.AutoValue_AutoValueWithFields (mut i32))
-  ))
- )
- (type $autovalue.AutoValue_AutoValueWithFields.vtable (sub $autovalue.$AutoValue_AutoValueWithFields.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_getIntField__int (ref $function.m_getIntField__int))
-  (field $m_getMemoizedNative__int_$pp_autovalue (ref $function.m_getMemoizedNative__int_$pp_autovalue))
-  ))
- )
- (type $autovalue.AutoValue_AutoValueWithFields.itable (sub $autovalue.$AutoValue_AutoValueWithFields.itable (struct
-  (field (ref $java.io.Serializable.vtable))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
-  (field (ref null struct))
- )))
+;;; Code for autovalue.AutoValue_AutoValueWithFields [type definition]
+(type $autovalue.AutoValue_AutoValueWithFields (sub $autovalue.$AutoValue_AutoValueWithFields (struct
+ (field $vtable (ref $autovalue.AutoValue_AutoValueWithFields.vtable))
+ (field $itable (ref $autovalue.AutoValue_AutoValueWithFields.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $userField1@autovalue.Parent (mut i32))
+ (field $userField2@autovalue.AutoValueWithFields (mut i32))
+ (field $intField@autovalue.$AutoValue_AutoValueWithFields (mut i32))
+ (field $getMemoizedNative$Memoized@autovalue.AutoValue_AutoValueWithFields (mut i8))
+ (field $getMemoizedNative@autovalue.AutoValue_AutoValueWithFields (mut i32))
+ ))
+)
+(type $autovalue.AutoValue_AutoValueWithFields.vtable (sub $autovalue.$AutoValue_AutoValueWithFields.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getIntField__int (ref $function.m_getIntField__int))
+ (field $m_getMemoizedNative__int_$pp_autovalue (ref $function.m_getMemoizedNative__int_$pp_autovalue))
+ ))
+)
 
 ;;; Code for autovalue.AutoValueJsType [imports]
 
@@ -832,6 +796,294 @@
 
 ;;; Code for autovalue.AutoValue_AutoValueWithFields [imports]
 
+;;; Code for autovalue.$$AutoValue_AutoValueWithExtensions [static fields]
+(global $$class-initialized@autovalue.$$AutoValue_AutoValueWithExtensions (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.$$AutoValue_AutoValueWithExtensions (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.$AutoValue_AutoValueWithExtensions [static fields]
+(global $$class-initialized@autovalue.$AutoValue_AutoValueWithExtensions (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.$AutoValue_AutoValueWithExtensions (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.$AutoValue_AutoValueWithFields [static fields]
+(global $$class-initialized@autovalue.$AutoValue_AutoValueWithFields (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.$AutoValue_AutoValueWithFields (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.AutoValue_AutoValueJsType [static fields]
+(global $$class-initialized@autovalue.AutoValue_AutoValueJsType (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.AutoValue_AutoValueJsType (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.AutoValue_AutoValueWithBuilder [static fields]
+(global $$class-initialized@autovalue.AutoValue_AutoValueWithBuilder (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.AutoValue_AutoValueWithBuilder (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.AutoValue_AutoValueWithBuilder.Builder [static fields]
+(global $$class-initialized@autovalue.AutoValue_AutoValueWithBuilder.Builder (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.AutoValue_AutoValueWithBuilder.Builder (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.AutoValue_AutoValueWithExtensions [static fields]
+(global $$class-initialized@autovalue.AutoValue_AutoValueWithExtensions (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.AutoValue_AutoValueWithExtensions (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.AutoValue_AutoValueWithFields [static fields]
+(global $$class-initialized@autovalue.AutoValue_AutoValueWithFields (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.AutoValue_AutoValueWithFields (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.AutoValue_AutoValueWithGenerics [static fields]
+(global $$class-initialized@autovalue.AutoValue_AutoValueWithGenerics (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.AutoValue_AutoValueWithGenerics (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.AutoValue_AutoValueWithOverrides [static fields]
+(global $$class-initialized@autovalue.AutoValue_AutoValueWithOverrides (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.AutoValue_AutoValueWithOverrides (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.AutoValue_DefaultConstructorAutoValue [static fields]
+(global $$class-initialized@autovalue.AutoValue_DefaultConstructorAutoValue (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.AutoValue_DefaultConstructorAutoValue (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.AutoValue_DefaultConstructorAutoValue.Builder [static fields]
+(global $$class-initialized@autovalue.AutoValue_DefaultConstructorAutoValue.Builder (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.AutoValue_DefaultConstructorAutoValue.Builder (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue [static fields]
+(global $$class-initialized@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder [static fields]
+(global $$class-initialized@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.AutoValue_EmptyAutoValue [static fields]
+(global $$class-initialized@autovalue.AutoValue_EmptyAutoValue (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.AutoValue_EmptyAutoValue (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.AutoValue_EmptyAutoValue.Builder [static fields]
+(global $$class-initialized@autovalue.AutoValue_EmptyAutoValue.Builder (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.AutoValue_EmptyAutoValue.Builder (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.AutoValue_ExtendingAutoValue [static fields]
+(global $$class-initialized@autovalue.AutoValue_ExtendingAutoValue (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.AutoValue_ExtendingAutoValue (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.AutoValue_SimpleAutoValue [static fields]
+(global $$class-initialized@autovalue.AutoValue_SimpleAutoValue (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.AutoValue_SimpleAutoValue (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.AutoValueJsType [static fields]
+(global $$class-initialized@autovalue.AutoValueJsType (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.AutoValueJsType (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.AutoValueWithBuilder [static fields]
+(global $$class-initialized@autovalue.AutoValueWithBuilder (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.AutoValueWithBuilder (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.AutoValueWithBuilder.Builder [static fields]
+(global $$class-initialized@autovalue.AutoValueWithBuilder.Builder (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.AutoValueWithBuilder.Builder (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.AutoValueWithExtensions [static fields]
+(global $$class-initialized@autovalue.AutoValueWithExtensions (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.AutoValueWithExtensions (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.AutoValueWithFields [static fields]
+(global $$class-initialized@autovalue.AutoValueWithFields (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.AutoValueWithFields (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.Parent [static fields]
+(global $$class-initialized@autovalue.Parent (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.Parent (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.AutoValueWithGenerics [static fields]
+(global $$class-initialized@autovalue.AutoValueWithGenerics (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.AutoValueWithGenerics (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.AutoValueWithOverrides [static fields]
+(global $$class-initialized@autovalue.AutoValueWithOverrides (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.AutoValueWithOverrides (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.BaseClass [static fields]
+(global $$class-initialized@autovalue.BaseClass (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.BaseClass (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.DefaultConstructorAutoValue [static fields]
+(global $$class-initialized@autovalue.DefaultConstructorAutoValue (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.DefaultConstructorAutoValue (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.DefaultConstructorAutoValue.Builder [static fields]
+(global $$class-initialized@autovalue.DefaultConstructorAutoValue.Builder (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.DefaultConstructorAutoValue.Builder (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.DefaultNonEmptyConstructorAutoValue [static fields]
+(global $$class-initialized@autovalue.DefaultNonEmptyConstructorAutoValue (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.DefaultNonEmptyConstructorAutoValue (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.DefaultNonEmptyConstructorAutoValue.Builder [static fields]
+(global $$class-initialized@autovalue.DefaultNonEmptyConstructorAutoValue.Builder (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.DefaultNonEmptyConstructorAutoValue.Builder (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.EmptyAutoValue [static fields]
+(global $$class-initialized@autovalue.EmptyAutoValue (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.EmptyAutoValue (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.EmptyAutoValue.Builder [static fields]
+(global $$class-initialized@autovalue.EmptyAutoValue.Builder (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.EmptyAutoValue.Builder (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.ExtendingAutoValue [static fields]
+(global $$class-initialized@autovalue.ExtendingAutoValue (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.ExtendingAutoValue (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.SimpleAutoValue [static fields]
+(global $$class-initialized@autovalue.SimpleAutoValue (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.SimpleAutoValue (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.SimpleAutoValue.GenericType [static fields]
+(global $$class-initialized@autovalue.SimpleAutoValue.GenericType (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.SimpleAutoValue.GenericType (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
 ;;; Code for autovalue.AutoValue_AutoValueJsType [vtable.init]
 (global $autovalue.AutoValue_AutoValueJsType.vtable (ref $autovalue.AutoValue_AutoValueJsType.vtable)
  (struct.new $autovalue.AutoValue_AutoValueJsType.vtable
@@ -902,19 +1154,6 @@
 )
 (global $java.io.Serializable.vtable@$autovalue.AutoValue_AutoValueWithFields (ref $java.io.Serializable.vtable)
  (struct.new $java.io.Serializable.vtable
- )
-)
-
-;;; Code for autovalue.AutoValue_AutoValueWithFields [itable.init]
-(global $autovalue.AutoValue_AutoValueWithFields.itable (ref $autovalue.AutoValue_AutoValueWithFields.itable)
- (struct.new $autovalue.AutoValue_AutoValueWithFields.itable
-   (global.get $java.io.Serializable.vtable@$autovalue.AutoValue_AutoValueWithFields)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
-   (ref.null struct)
  )
 )
 
@@ -1058,438 +1297,6 @@
  )
 )
 
-;;; Code for autovalue.$$AutoValue_AutoValueWithExtensions [static fields]
-(global $$class-initialized@autovalue.$$AutoValue_AutoValueWithExtensions (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.$$AutoValue_AutoValueWithExtensions (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|_|@autovalue.$$AutoValue_AutoValueWithExtensions (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-(global $$string_|__|@autovalue.$$AutoValue_AutoValueWithExtensions (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-(global $$string_|_|_1@autovalue.$$AutoValue_AutoValueWithExtensions (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-(global $$string_|autovalue.__...|@autovalue.$$AutoValue_AutoValueWithExtensions (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.$AutoValue_AutoValueWithExtensions [static fields]
-(global $$class-initialized@autovalue.$AutoValue_AutoValueWithExtensions (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.$AutoValue_AutoValueWithExtensions (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|AutoValueWit...|@autovalue.$AutoValue_AutoValueWithExtensions (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-(global $$string_|_|@autovalue.$AutoValue_AutoValueWithExtensions (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-(global $$string_|_|_1@autovalue.$AutoValue_AutoValueWithExtensions (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-(global $$string_|__stringFiel...|@autovalue.$AutoValue_AutoValueWithExtensions (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-(global $$string_|null|@autovalue.$AutoValue_AutoValueWithExtensions (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-(global $$string_|__|@autovalue.$AutoValue_AutoValueWithExtensions (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-(global $$string_|autovalue._A...|@autovalue.$AutoValue_AutoValueWithExtensions (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.$AutoValue_AutoValueWithFields [static fields]
-(global $$class-initialized@autovalue.$AutoValue_AutoValueWithFields (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.$AutoValue_AutoValueWithFields (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|autovalue._A...|@autovalue.$AutoValue_AutoValueWithFields (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.AutoValue_AutoValueJsType [static fields]
-(global $$class-initialized@autovalue.AutoValue_AutoValueJsType (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.AutoValue_AutoValueJsType (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueJsType (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.AutoValue_AutoValueWithBuilder [static fields]
-(global $$class-initialized@autovalue.AutoValue_AutoValueWithBuilder (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.AutoValue_AutoValueWithBuilder (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithBuilder (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.AutoValue_AutoValueWithBuilder.Builder [static fields]
-(global $$class-initialized@autovalue.AutoValue_AutoValueWithBuilder.Builder (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.AutoValue_AutoValueWithBuilder.Builder (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithBuilder.Builder (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.AutoValue_AutoValueWithExtensions [static fields]
-(global $$class-initialized@autovalue.AutoValue_AutoValueWithExtensions (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.AutoValue_AutoValueWithExtensions (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithExtensions (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.AutoValue_AutoValueWithFields [static fields]
-(global $$class-initialized@autovalue.AutoValue_AutoValueWithFields (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.AutoValue_AutoValueWithFields (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithFields (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.AutoValue_AutoValueWithGenerics [static fields]
-(global $$class-initialized@autovalue.AutoValue_AutoValueWithGenerics (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.AutoValue_AutoValueWithGenerics (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithGenerics (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.AutoValue_AutoValueWithOverrides [static fields]
-(global $$class-initialized@autovalue.AutoValue_AutoValueWithOverrides (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.AutoValue_AutoValueWithOverrides (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithOverrides (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.AutoValue_DefaultConstructorAutoValue [static fields]
-(global $$class-initialized@autovalue.AutoValue_DefaultConstructorAutoValue (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.AutoValue_DefaultConstructorAutoValue (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultConstructorAutoValue (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.AutoValue_DefaultConstructorAutoValue.Builder [static fields]
-(global $$class-initialized@autovalue.AutoValue_DefaultConstructorAutoValue.Builder (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.AutoValue_DefaultConstructorAutoValue.Builder (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultConstructorAutoValue.Builder (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue [static fields]
-(global $$class-initialized@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder [static fields]
-(global $$class-initialized@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.AutoValue_EmptyAutoValue [static fields]
-(global $$class-initialized@autovalue.AutoValue_EmptyAutoValue (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.AutoValue_EmptyAutoValue (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|__|@autovalue.AutoValue_EmptyAutoValue (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-(global $$string_|autovalue.Au...|@autovalue.AutoValue_EmptyAutoValue (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.AutoValue_EmptyAutoValue.Builder [static fields]
-(global $$class-initialized@autovalue.AutoValue_EmptyAutoValue.Builder (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.AutoValue_EmptyAutoValue.Builder (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|autovalue.Au...|@autovalue.AutoValue_EmptyAutoValue.Builder (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.AutoValue_ExtendingAutoValue [static fields]
-(global $$class-initialized@autovalue.AutoValue_ExtendingAutoValue (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.AutoValue_ExtendingAutoValue (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|autovalue.Au...|@autovalue.AutoValue_ExtendingAutoValue (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.AutoValue_SimpleAutoValue [static fields]
-(global $$class-initialized@autovalue.AutoValue_SimpleAutoValue (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.AutoValue_SimpleAutoValue (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|autovalue.Au...|@autovalue.AutoValue_SimpleAutoValue (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.AutoValueJsType [static fields]
-(global $$class-initialized@autovalue.AutoValueJsType (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.AutoValueJsType (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|autovalue.Au...|@autovalue.AutoValueJsType (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.AutoValueWithBuilder [static fields]
-(global $$class-initialized@autovalue.AutoValueWithBuilder (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.AutoValueWithBuilder (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|autovalue.Au...|@autovalue.AutoValueWithBuilder (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.AutoValueWithBuilder.Builder [static fields]
-(global $$class-initialized@autovalue.AutoValueWithBuilder.Builder (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.AutoValueWithBuilder.Builder (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|autovalue.Au...|@autovalue.AutoValueWithBuilder.Builder (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.AutoValueWithExtensions [static fields]
-(global $$class-initialized@autovalue.AutoValueWithExtensions (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.AutoValueWithExtensions (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|text|@autovalue.AutoValueWithExtensions (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-(global $$string_|autovalue.Au...|@autovalue.AutoValueWithExtensions (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.AutoValueWithFields [static fields]
-(global $$class-initialized@autovalue.AutoValueWithFields (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.AutoValueWithFields (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|autovalue.Au...|@autovalue.AutoValueWithFields (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.Parent [static fields]
-(global $$class-initialized@autovalue.Parent (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.Parent (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|autovalue.Pa...|@autovalue.Parent (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.AutoValueWithGenerics [static fields]
-(global $$class-initialized@autovalue.AutoValueWithGenerics (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.AutoValueWithGenerics (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|autovalue.Au...|@autovalue.AutoValueWithGenerics (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.AutoValueWithOverrides [static fields]
-(global $$class-initialized@autovalue.AutoValueWithOverrides (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.AutoValueWithOverrides (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|x|@autovalue.AutoValueWithOverrides (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-(global $$string_|autovalue.Au...|@autovalue.AutoValueWithOverrides (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.BaseClass [static fields]
-(global $$class-initialized@autovalue.BaseClass (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.BaseClass (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|autovalue.Ba...|@autovalue.BaseClass (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.DefaultConstructorAutoValue [static fields]
-(global $$class-initialized@autovalue.DefaultConstructorAutoValue (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.DefaultConstructorAutoValue (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|autovalue.De...|@autovalue.DefaultConstructorAutoValue (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.DefaultConstructorAutoValue.Builder [static fields]
-(global $$class-initialized@autovalue.DefaultConstructorAutoValue.Builder (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.DefaultConstructorAutoValue.Builder (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|autovalue.De...|@autovalue.DefaultConstructorAutoValue.Builder (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.DefaultNonEmptyConstructorAutoValue [static fields]
-(global $$class-initialized@autovalue.DefaultNonEmptyConstructorAutoValue (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.DefaultNonEmptyConstructorAutoValue (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|autovalue.De...|@autovalue.DefaultNonEmptyConstructorAutoValue (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.DefaultNonEmptyConstructorAutoValue.Builder [static fields]
-(global $$class-initialized@autovalue.DefaultNonEmptyConstructorAutoValue.Builder (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.DefaultNonEmptyConstructorAutoValue.Builder (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|autovalue.De...|@autovalue.DefaultNonEmptyConstructorAutoValue.Builder (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.EmptyAutoValue [static fields]
-(global $$class-initialized@autovalue.EmptyAutoValue (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.EmptyAutoValue (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|autovalue.Em...|@autovalue.EmptyAutoValue (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.EmptyAutoValue.Builder [static fields]
-(global $$class-initialized@autovalue.EmptyAutoValue.Builder (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.EmptyAutoValue.Builder (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|autovalue.Em...|@autovalue.EmptyAutoValue.Builder (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.ExtendingAutoValue [static fields]
-(global $$class-initialized@autovalue.ExtendingAutoValue (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.ExtendingAutoValue (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|autovalue.Ex...|@autovalue.ExtendingAutoValue (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.SimpleAutoValue [static fields]
-(global $$class-initialized@autovalue.SimpleAutoValue (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.SimpleAutoValue (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|autovalue.Si...|@autovalue.SimpleAutoValue (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for autovalue.SimpleAutoValue.GenericType [static fields]
-(global $$class-initialized@autovalue.SimpleAutoValue.GenericType (mut i32)
- (i32.const 0)
-)
-(global $$class@autovalue.SimpleAutoValue.GenericType (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|autovalue.Si...|@autovalue.SimpleAutoValue.GenericType (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
 ;;; Code for autovalue.AutoValueJsType [methods]
 
 ;;; void AutoValueJsType.$ctor()
@@ -1531,20 +1338,6 @@
   )
   (global.set $$class@autovalue.AutoValueJsType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValueJsType )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@autovalue.AutoValueJsType))
- )
-)
-
-;;; String AutoValueJsType.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValueJsType
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValueJsType)))
-   (then
-    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValueJsType))
-   )
-  )
-  (global.set $$string_|autovalue.Au...|@autovalue.AutoValueJsType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValueJsType")))
-  (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValueJsType))
  )
 )
 
@@ -1612,20 +1405,6 @@
  )
 )
 
-;;; String AutoValueWithBuilder.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValueWithBuilder
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithBuilder)))
-   (then
-    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithBuilder))
-   )
-  )
-  (global.set $$string_|autovalue.Au...|@autovalue.AutoValueWithBuilder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValueWithBuilder")))
-  (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithBuilder))
- )
-)
-
 ;;; Code for autovalue.AutoValueWithBuilder.Builder [methods]
 
 ;;; void Builder.$ctor()
@@ -1667,20 +1446,6 @@
   )
   (global.set $$class@autovalue.AutoValueWithBuilder.Builder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValueWithBuilder.Builder )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@autovalue.AutoValueWithBuilder.Builder))
- )
-)
-
-;;; String Builder.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValueWithBuilder.Builder
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithBuilder.Builder)))
-   (then
-    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithBuilder.Builder))
-   )
-  )
-  (global.set $$string_|autovalue.Au...|@autovalue.AutoValueWithBuilder.Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValueWithBuilder$Builder")))
-  (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithBuilder.Builder))
  )
 )
 
@@ -1752,34 +1517,6 @@
   )
   (global.set $$class@autovalue.AutoValueWithExtensions (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValueWithExtensions )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@autovalue.AutoValueWithExtensions))
- )
-)
-
-;;; String AutoValueWithExtensions.$getString_|text|()
-(func $$getString_|text|__java_lang_String_<once>_@autovalue.AutoValueWithExtensions
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|text|@autovalue.AutoValueWithExtensions)))
-   (then
-    (return (global.get $$string_|text|@autovalue.AutoValueWithExtensions))
-   )
-  )
-  (global.set $$string_|text|@autovalue.AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "text")))
-  (return (global.get $$string_|text|@autovalue.AutoValueWithExtensions))
- )
-)
-
-;;; String AutoValueWithExtensions.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValueWithExtensions
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithExtensions)))
-   (then
-    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithExtensions))
-   )
-  )
-  (global.set $$string_|autovalue.Au...|@autovalue.AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValueWithExtensions")))
-  (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithExtensions))
  )
 )
 
@@ -1857,20 +1594,6 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.Parent)
 
-;;; String Parent.$getString_|autovalue.Pa...|()
-(func $$getString_|autovalue.Pa...|__java_lang_String_<once>_@autovalue.Parent
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Pa...|@autovalue.Parent)))
-   (then
-    (return (global.get $$string_|autovalue.Pa...|@autovalue.Parent))
-   )
-  )
-  (global.set $$string_|autovalue.Pa...|@autovalue.Parent (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.Parent")))
-  (return (global.get $$string_|autovalue.Pa...|@autovalue.Parent))
- )
-)
-
 ;;; Code for autovalue.AutoValueWithGenerics [methods]
 
 ;;; void AutoValueWithGenerics.$ctor()
@@ -1927,20 +1650,6 @@
  )
 )
 
-;;; String AutoValueWithGenerics.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValueWithGenerics
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithGenerics)))
-   (then
-    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithGenerics))
-   )
-  )
-  (global.set $$string_|autovalue.Au...|@autovalue.AutoValueWithGenerics (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValueWithGenerics")))
-  (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithGenerics))
- )
-)
-
 ;;; Code for autovalue.BaseClass [methods]
 
 ;;; void BaseClass.$ctor()
@@ -1982,20 +1691,6 @@
   )
   (global.set $$class@autovalue.BaseClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Ba...|__java_lang_String_<once>_@autovalue.BaseClass )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@autovalue.BaseClass))
- )
-)
-
-;;; String BaseClass.$getString_|autovalue.Ba...|()
-(func $$getString_|autovalue.Ba...|__java_lang_String_<once>_@autovalue.BaseClass
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Ba...|@autovalue.BaseClass)))
-   (then
-    (return (global.get $$string_|autovalue.Ba...|@autovalue.BaseClass))
-   )
-  )
-  (global.set $$string_|autovalue.Ba...|@autovalue.BaseClass (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.BaseClass")))
-  (return (global.get $$string_|autovalue.Ba...|@autovalue.BaseClass))
  )
 )
 
@@ -2063,20 +1758,6 @@
  )
 )
 
-;;; String DefaultConstructorAutoValue.$getString_|autovalue.De...|()
-(func $$getString_|autovalue.De...|__java_lang_String_<once>_@autovalue.DefaultConstructorAutoValue
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.De...|@autovalue.DefaultConstructorAutoValue)))
-   (then
-    (return (global.get $$string_|autovalue.De...|@autovalue.DefaultConstructorAutoValue))
-   )
-  )
-  (global.set $$string_|autovalue.De...|@autovalue.DefaultConstructorAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.DefaultConstructorAutoValue")))
-  (return (global.get $$string_|autovalue.De...|@autovalue.DefaultConstructorAutoValue))
- )
-)
-
 ;;; Code for autovalue.DefaultConstructorAutoValue.Builder [methods]
 
 ;;; void Builder.$ctor()
@@ -2118,20 +1799,6 @@
   )
   (global.set $$class@autovalue.DefaultConstructorAutoValue.Builder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.De...|__java_lang_String_<once>_@autovalue.DefaultConstructorAutoValue.Builder )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@autovalue.DefaultConstructorAutoValue.Builder))
- )
-)
-
-;;; String Builder.$getString_|autovalue.De...|()
-(func $$getString_|autovalue.De...|__java_lang_String_<once>_@autovalue.DefaultConstructorAutoValue.Builder
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.De...|@autovalue.DefaultConstructorAutoValue.Builder)))
-   (then
-    (return (global.get $$string_|autovalue.De...|@autovalue.DefaultConstructorAutoValue.Builder))
-   )
-  )
-  (global.set $$string_|autovalue.De...|@autovalue.DefaultConstructorAutoValue.Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.DefaultConstructorAutoValue$Builder")))
-  (return (global.get $$string_|autovalue.De...|@autovalue.DefaultConstructorAutoValue.Builder))
  )
 )
 
@@ -2201,20 +1868,6 @@
  )
 )
 
-;;; String DefaultNonEmptyConstructorAutoValue.$getString_|autovalue.De...|()
-(func $$getString_|autovalue.De...|__java_lang_String_<once>_@autovalue.DefaultNonEmptyConstructorAutoValue
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.De...|@autovalue.DefaultNonEmptyConstructorAutoValue)))
-   (then
-    (return (global.get $$string_|autovalue.De...|@autovalue.DefaultNonEmptyConstructorAutoValue))
-   )
-  )
-  (global.set $$string_|autovalue.De...|@autovalue.DefaultNonEmptyConstructorAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.DefaultNonEmptyConstructorAutoValue")))
-  (return (global.get $$string_|autovalue.De...|@autovalue.DefaultNonEmptyConstructorAutoValue))
- )
-)
-
 ;;; Code for autovalue.DefaultNonEmptyConstructorAutoValue.Builder [methods]
 
 ;;; void Builder.$ctor()
@@ -2258,20 +1911,6 @@
   )
   (global.set $$class@autovalue.DefaultNonEmptyConstructorAutoValue.Builder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.De...|__java_lang_String_<once>_@autovalue.DefaultNonEmptyConstructorAutoValue.Builder )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@autovalue.DefaultNonEmptyConstructorAutoValue.Builder))
- )
-)
-
-;;; String Builder.$getString_|autovalue.De...|()
-(func $$getString_|autovalue.De...|__java_lang_String_<once>_@autovalue.DefaultNonEmptyConstructorAutoValue.Builder
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.De...|@autovalue.DefaultNonEmptyConstructorAutoValue.Builder)))
-   (then
-    (return (global.get $$string_|autovalue.De...|@autovalue.DefaultNonEmptyConstructorAutoValue.Builder))
-   )
-  )
-  (global.set $$string_|autovalue.De...|@autovalue.DefaultNonEmptyConstructorAutoValue.Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.DefaultNonEmptyConstructorAutoValue$Builder")))
-  (return (global.get $$string_|autovalue.De...|@autovalue.DefaultNonEmptyConstructorAutoValue.Builder))
  )
 )
 
@@ -2319,20 +1958,6 @@
  )
 )
 
-;;; String EmptyAutoValue.$getString_|autovalue.Em...|()
-(func $$getString_|autovalue.Em...|__java_lang_String_<once>_@autovalue.EmptyAutoValue
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Em...|@autovalue.EmptyAutoValue)))
-   (then
-    (return (global.get $$string_|autovalue.Em...|@autovalue.EmptyAutoValue))
-   )
-  )
-  (global.set $$string_|autovalue.Em...|@autovalue.EmptyAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.EmptyAutoValue")))
-  (return (global.get $$string_|autovalue.Em...|@autovalue.EmptyAutoValue))
- )
-)
-
 ;;; Code for autovalue.EmptyAutoValue.Builder [methods]
 
 ;;; void Builder.$ctor()
@@ -2374,20 +1999,6 @@
   )
   (global.set $$class@autovalue.EmptyAutoValue.Builder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Em...|__java_lang_String_<once>_@autovalue.EmptyAutoValue.Builder )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@autovalue.EmptyAutoValue.Builder))
- )
-)
-
-;;; String Builder.$getString_|autovalue.Em...|()
-(func $$getString_|autovalue.Em...|__java_lang_String_<once>_@autovalue.EmptyAutoValue.Builder
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Em...|@autovalue.EmptyAutoValue.Builder)))
-   (then
-    (return (global.get $$string_|autovalue.Em...|@autovalue.EmptyAutoValue.Builder))
-   )
-  )
-  (global.set $$string_|autovalue.Em...|@autovalue.EmptyAutoValue.Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.EmptyAutoValue$Builder")))
-  (return (global.get $$string_|autovalue.Em...|@autovalue.EmptyAutoValue.Builder))
  )
 )
 
@@ -2457,20 +2068,6 @@
   )
   (global.set $$class@autovalue.SimpleAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Si...|__java_lang_String_<once>_@autovalue.SimpleAutoValue )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@autovalue.SimpleAutoValue))
- )
-)
-
-;;; String SimpleAutoValue.$getString_|autovalue.Si...|()
-(func $$getString_|autovalue.Si...|__java_lang_String_<once>_@autovalue.SimpleAutoValue
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Si...|@autovalue.SimpleAutoValue)))
-   (then
-    (return (global.get $$string_|autovalue.Si...|@autovalue.SimpleAutoValue))
-   )
-  )
-  (global.set $$string_|autovalue.Si...|@autovalue.SimpleAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.SimpleAutoValue")))
-  (return (global.get $$string_|autovalue.Si...|@autovalue.SimpleAutoValue))
  )
 )
 
@@ -2631,62 +2228,6 @@
   )
   (global.set $$class@autovalue.$$AutoValue_AutoValueWithExtensions (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.__...|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(call $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValueWithExtensions )))
   (return (global.get $$class@autovalue.$$AutoValue_AutoValueWithExtensions))
- )
-)
-
-;;; String $$AutoValue_AutoValueWithExtensions.$getString_|_|()
-(func $$getString_|_|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|_|@autovalue.$$AutoValue_AutoValueWithExtensions)))
-   (then
-    (return (global.get $$string_|_|@autovalue.$$AutoValue_AutoValueWithExtensions))
-   )
-  )
-  (global.set $$string_|_|@autovalue.$$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "{")))
-  (return (global.get $$string_|_|@autovalue.$$AutoValue_AutoValueWithExtensions))
- )
-)
-
-;;; String $$AutoValue_AutoValueWithExtensions.$getString_|__|()
-(func $$getString_|__|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|__|@autovalue.$$AutoValue_AutoValueWithExtensions)))
-   (then
-    (return (global.get $$string_|__|@autovalue.$$AutoValue_AutoValueWithExtensions))
-   )
-  )
-  (global.set $$string_|__|@autovalue.$$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const ", ")))
-  (return (global.get $$string_|__|@autovalue.$$AutoValue_AutoValueWithExtensions))
- )
-)
-
-;;; String $$AutoValue_AutoValueWithExtensions.$getString_|_|_1()
-(func $$getString_|_|_1__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|_|_1@autovalue.$$AutoValue_AutoValueWithExtensions)))
-   (then
-    (return (global.get $$string_|_|_1@autovalue.$$AutoValue_AutoValueWithExtensions))
-   )
-  )
-  (global.set $$string_|_|_1@autovalue.$$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "}")))
-  (return (global.get $$string_|_|_1@autovalue.$$AutoValue_AutoValueWithExtensions))
- )
-)
-
-;;; String $$AutoValue_AutoValueWithExtensions.$getString_|autovalue.__...|()
-(func $$getString_|autovalue.__...|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.__...|@autovalue.$$AutoValue_AutoValueWithExtensions)))
-   (then
-    (return (global.get $$string_|autovalue.__...|@autovalue.$$AutoValue_AutoValueWithExtensions))
-   )
-  )
-  (global.set $$string_|autovalue.__...|@autovalue.$$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.$$AutoValue_AutoValueWithExtensions")))
-  (return (global.get $$string_|autovalue.__...|@autovalue.$$AutoValue_AutoValueWithExtensions))
  )
 )
 
@@ -2879,20 +2420,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_AutoValueJsType)
-
-;;; String AutoValue_AutoValueJsType.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_AutoValueJsType
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueJsType)))
-   (then
-    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueJsType))
-   )
-  )
-  (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueJsType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_AutoValueJsType")))
-  (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueJsType))
- )
-)
 
 ;;; Code for autovalue.AutoValue_AutoValueWithBuilder [methods]
 
@@ -3099,20 +2626,6 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_AutoValueWithBuilder)
 
-;;; String AutoValue_AutoValueWithBuilder.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_AutoValueWithBuilder
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithBuilder)))
-   (then
-    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithBuilder))
-   )
-  )
-  (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithBuilder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_AutoValueWithBuilder")))
-  (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithBuilder))
- )
-)
-
 ;;; Code for autovalue.AutoValue_AutoValueWithBuilder.Builder [methods]
 
 ;;; Builder Builder.$create()
@@ -3285,20 +2798,6 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_AutoValueWithBuilder.Builder)
 
-;;; String Builder.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_AutoValueWithBuilder.Builder
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithBuilder.Builder)))
-   (then
-    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithBuilder.Builder))
-   )
-  )
-  (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithBuilder.Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_AutoValueWithBuilder$Builder")))
-  (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithBuilder.Builder))
- )
-)
-
 ;;; Code for autovalue.AutoValue_AutoValueWithGenerics [methods]
 
 ;;; AutoValue_AutoValueWithGenerics<T> AutoValue_AutoValueWithGenerics.$create(boolean booleanField)
@@ -3465,20 +2964,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_AutoValueWithGenerics)
-
-;;; String AutoValue_AutoValueWithGenerics.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_AutoValueWithGenerics
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithGenerics)))
-   (then
-    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithGenerics))
-   )
-  )
-  (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithGenerics (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_AutoValueWithGenerics")))
-  (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithGenerics))
- )
-)
 
 ;;; Code for autovalue.AutoValue_DefaultConstructorAutoValue [methods]
 
@@ -3647,20 +3132,6 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_DefaultConstructorAutoValue)
 
-;;; String AutoValue_DefaultConstructorAutoValue.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_DefaultConstructorAutoValue
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultConstructorAutoValue)))
-   (then
-    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultConstructorAutoValue))
-   )
-  )
-  (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultConstructorAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_DefaultConstructorAutoValue")))
-  (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultConstructorAutoValue))
- )
-)
-
 ;;; Code for autovalue.AutoValue_DefaultConstructorAutoValue.Builder [methods]
 
 ;;; Builder Builder.$create()
@@ -3779,20 +3250,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_DefaultConstructorAutoValue.Builder)
-
-;;; String Builder.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_DefaultConstructorAutoValue.Builder
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultConstructorAutoValue.Builder)))
-   (then
-    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultConstructorAutoValue.Builder))
-   )
-  )
-  (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultConstructorAutoValue.Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_DefaultConstructorAutoValue$Builder")))
-  (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultConstructorAutoValue.Builder))
- )
-)
 
 ;;; Code for autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue [methods]
 
@@ -3961,20 +3418,6 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue)
 
-;;; String AutoValue_DefaultNonEmptyConstructorAutoValue.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue)))
-   (then
-    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue))
-   )
-  )
-  (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue")))
-  (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue))
- )
-)
-
 ;;; Code for autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder [methods]
 
 ;;; Builder Builder.$create()
@@ -4093,20 +3536,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder)
-
-;;; String Builder.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder)))
-   (then
-    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder))
-   )
-  )
-  (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue$Builder")))
-  (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder))
- )
-)
 
 ;;; Code for autovalue.AutoValue_EmptyAutoValue [methods]
 
@@ -4249,34 +3678,6 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_EmptyAutoValue)
 
-;;; String AutoValue_EmptyAutoValue.$getString_|__|()
-(func $$getString_|__|__java_lang_String_<once>_@autovalue.AutoValue_EmptyAutoValue
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|__|@autovalue.AutoValue_EmptyAutoValue)))
-   (then
-    (return (global.get $$string_|__|@autovalue.AutoValue_EmptyAutoValue))
-   )
-  )
-  (global.set $$string_|__|@autovalue.AutoValue_EmptyAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "{}")))
-  (return (global.get $$string_|__|@autovalue.AutoValue_EmptyAutoValue))
- )
-)
-
-;;; String AutoValue_EmptyAutoValue.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_EmptyAutoValue
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_EmptyAutoValue)))
-   (then
-    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_EmptyAutoValue))
-   )
-  )
-  (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_EmptyAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_EmptyAutoValue")))
-  (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_EmptyAutoValue))
- )
-)
-
 ;;; Code for autovalue.AutoValue_EmptyAutoValue.Builder [methods]
 
 ;;; Builder Builder.$create()
@@ -4365,20 +3766,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_EmptyAutoValue.Builder)
-
-;;; String Builder.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_EmptyAutoValue.Builder
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_EmptyAutoValue.Builder)))
-   (then
-    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_EmptyAutoValue.Builder))
-   )
-  )
-  (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_EmptyAutoValue.Builder (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_EmptyAutoValue$Builder")))
-  (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_EmptyAutoValue.Builder))
- )
-)
 
 ;;; Code for autovalue.AutoValue_SimpleAutoValue [methods]
 
@@ -4668,20 +4055,6 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_SimpleAutoValue)
 
-;;; String AutoValue_SimpleAutoValue.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_SimpleAutoValue
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_SimpleAutoValue)))
-   (then
-    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_SimpleAutoValue))
-   )
-  )
-  (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_SimpleAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_SimpleAutoValue")))
-  (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_SimpleAutoValue))
- )
-)
-
 ;;; Code for autovalue.AutoValueWithFields [methods]
 
 ;;; void AutoValueWithFields.$ctor()
@@ -4738,20 +4111,6 @@
   )
   (global.set $$class@autovalue.AutoValueWithFields (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValueWithFields )(call $$getClassMetadata__java_lang_Class_<once>_@autovalue.Parent )))
   (return (global.get $$class@autovalue.AutoValueWithFields))
- )
-)
-
-;;; String AutoValueWithFields.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValueWithFields
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithFields)))
-   (then
-    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithFields))
-   )
-  )
-  (global.set $$string_|autovalue.Au...|@autovalue.AutoValueWithFields (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValueWithFields")))
-  (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithFields))
  )
 )
 
@@ -4845,34 +4204,6 @@
  )
 )
 
-;;; String AutoValueWithOverrides.$getString_|x|()
-(func $$getString_|x|__java_lang_String_<once>_@autovalue.AutoValueWithOverrides
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|x|@autovalue.AutoValueWithOverrides)))
-   (then
-    (return (global.get $$string_|x|@autovalue.AutoValueWithOverrides))
-   )
-  )
-  (global.set $$string_|x|@autovalue.AutoValueWithOverrides (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "x")))
-  (return (global.get $$string_|x|@autovalue.AutoValueWithOverrides))
- )
-)
-
-;;; String AutoValueWithOverrides.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValueWithOverrides
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithOverrides)))
-   (then
-    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithOverrides))
-   )
-  )
-  (global.set $$string_|autovalue.Au...|@autovalue.AutoValueWithOverrides (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValueWithOverrides")))
-  (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValueWithOverrides))
- )
-)
-
 ;;; Code for autovalue.ExtendingAutoValue [methods]
 
 ;;; void ExtendingAutoValue.$ctor()
@@ -4914,20 +4245,6 @@
   )
   (global.set $$class@autovalue.ExtendingAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Ex...|__java_lang_String_<once>_@autovalue.ExtendingAutoValue )(call $$getClassMetadata__java_lang_Class_<once>_@autovalue.BaseClass )))
   (return (global.get $$class@autovalue.ExtendingAutoValue))
- )
-)
-
-;;; String ExtendingAutoValue.$getString_|autovalue.Ex...|()
-(func $$getString_|autovalue.Ex...|__java_lang_String_<once>_@autovalue.ExtendingAutoValue
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Ex...|@autovalue.ExtendingAutoValue)))
-   (then
-    (return (global.get $$string_|autovalue.Ex...|@autovalue.ExtendingAutoValue))
-   )
-  )
-  (global.set $$string_|autovalue.Ex...|@autovalue.ExtendingAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.ExtendingAutoValue")))
-  (return (global.get $$string_|autovalue.Ex...|@autovalue.ExtendingAutoValue))
  )
 )
 
@@ -4999,20 +4316,6 @@
   )
   (global.set $$class@autovalue.SimpleAutoValue.GenericType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Si...|__java_lang_String_<once>_@autovalue.SimpleAutoValue.GenericType )(call $$getClassMetadata__java_lang_Class_<once>_@java.util.AbstractCollection )))
   (return (global.get $$class@autovalue.SimpleAutoValue.GenericType))
- )
-)
-
-;;; String GenericType.$getString_|autovalue.Si...|()
-(func $$getString_|autovalue.Si...|__java_lang_String_<once>_@autovalue.SimpleAutoValue.GenericType
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Si...|@autovalue.SimpleAutoValue.GenericType)))
-   (then
-    (return (global.get $$string_|autovalue.Si...|@autovalue.SimpleAutoValue.GenericType))
-   )
-  )
-  (global.set $$string_|autovalue.Si...|@autovalue.SimpleAutoValue.GenericType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.SimpleAutoValue$GenericType")))
-  (return (global.get $$string_|autovalue.Si...|@autovalue.SimpleAutoValue.GenericType))
  )
 )
 
@@ -5129,104 +4432,6 @@
   )
   (global.set $$class@autovalue.$AutoValue_AutoValueWithExtensions (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue._A...|__java_lang_String_<once>_@autovalue.$AutoValue_AutoValueWithExtensions )(call $$getClassMetadata__java_lang_Class_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )))
   (return (global.get $$class@autovalue.$AutoValue_AutoValueWithExtensions))
- )
-)
-
-;;; String $AutoValue_AutoValueWithExtensions.$getString_|AutoValueWit...|()
-(func $$getString_|AutoValueWit...|__java_lang_String_<once>_@autovalue.$AutoValue_AutoValueWithExtensions
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|AutoValueWit...|@autovalue.$AutoValue_AutoValueWithExtensions)))
-   (then
-    (return (global.get $$string_|AutoValueWit...|@autovalue.$AutoValue_AutoValueWithExtensions))
-   )
-  )
-  (global.set $$string_|AutoValueWit...|@autovalue.$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "AutoValueWithExtensions {\n  intField = ")))
-  (return (global.get $$string_|AutoValueWit...|@autovalue.$AutoValue_AutoValueWithExtensions))
- )
-)
-
-;;; String $AutoValue_AutoValueWithExtensions.$getString_|_|()
-(func $$getString_|_|__java_lang_String_<once>_@autovalue.$AutoValue_AutoValueWithExtensions
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|_|@autovalue.$AutoValue_AutoValueWithExtensions)))
-   (then
-    (return (global.get $$string_|_|@autovalue.$AutoValue_AutoValueWithExtensions))
-   )
-  )
-  (global.set $$string_|_|@autovalue.$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const ",")))
-  (return (global.get $$string_|_|@autovalue.$AutoValue_AutoValueWithExtensions))
- )
-)
-
-;;; String $AutoValue_AutoValueWithExtensions.$getString_|_|_1()
-(func $$getString_|_|_1__java_lang_String_<once>_@autovalue.$AutoValue_AutoValueWithExtensions
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|_|_1@autovalue.$AutoValue_AutoValueWithExtensions)))
-   (then
-    (return (global.get $$string_|_|_1@autovalue.$AutoValue_AutoValueWithExtensions))
-   )
-  )
-  (global.set $$string_|_|_1@autovalue.$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "\n")))
-  (return (global.get $$string_|_|_1@autovalue.$AutoValue_AutoValueWithExtensions))
- )
-)
-
-;;; String $AutoValue_AutoValueWithExtensions.$getString_|__stringFiel...|()
-(func $$getString_|__stringFiel...|__java_lang_String_<once>_@autovalue.$AutoValue_AutoValueWithExtensions
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|__stringFiel...|@autovalue.$AutoValue_AutoValueWithExtensions)))
-   (then
-    (return (global.get $$string_|__stringFiel...|@autovalue.$AutoValue_AutoValueWithExtensions))
-   )
-  )
-  (global.set $$string_|__stringFiel...|@autovalue.$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "  stringField = ")))
-  (return (global.get $$string_|__stringFiel...|@autovalue.$AutoValue_AutoValueWithExtensions))
- )
-)
-
-;;; String $AutoValue_AutoValueWithExtensions.$getString_|null|()
-(func $$getString_|null|__java_lang_String_<once>_@autovalue.$AutoValue_AutoValueWithExtensions
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|null|@autovalue.$AutoValue_AutoValueWithExtensions)))
-   (then
-    (return (global.get $$string_|null|@autovalue.$AutoValue_AutoValueWithExtensions))
-   )
-  )
-  (global.set $$string_|null|@autovalue.$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "null")))
-  (return (global.get $$string_|null|@autovalue.$AutoValue_AutoValueWithExtensions))
- )
-)
-
-;;; String $AutoValue_AutoValueWithExtensions.$getString_|__|()
-(func $$getString_|__|__java_lang_String_<once>_@autovalue.$AutoValue_AutoValueWithExtensions
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|__|@autovalue.$AutoValue_AutoValueWithExtensions)))
-   (then
-    (return (global.get $$string_|__|@autovalue.$AutoValue_AutoValueWithExtensions))
-   )
-  )
-  (global.set $$string_|__|@autovalue.$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "  ")))
-  (return (global.get $$string_|__|@autovalue.$AutoValue_AutoValueWithExtensions))
- )
-)
-
-;;; String $AutoValue_AutoValueWithExtensions.$getString_|autovalue._A...|()
-(func $$getString_|autovalue._A...|__java_lang_String_<once>_@autovalue.$AutoValue_AutoValueWithExtensions
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue._A...|@autovalue.$AutoValue_AutoValueWithExtensions)))
-   (then
-    (return (global.get $$string_|autovalue._A...|@autovalue.$AutoValue_AutoValueWithExtensions))
-   )
-  )
-  (global.set $$string_|autovalue._A...|@autovalue.$AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.$AutoValue_AutoValueWithExtensions")))
-  (return (global.get $$string_|autovalue._A...|@autovalue.$AutoValue_AutoValueWithExtensions))
  )
 )
 
@@ -5366,20 +4571,6 @@
  )
 )
 
-;;; String $AutoValue_AutoValueWithFields.$getString_|autovalue._A...|()
-(func $$getString_|autovalue._A...|__java_lang_String_<once>_@autovalue.$AutoValue_AutoValueWithFields
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue._A...|@autovalue.$AutoValue_AutoValueWithFields)))
-   (then
-    (return (global.get $$string_|autovalue._A...|@autovalue.$AutoValue_AutoValueWithFields))
-   )
-  )
-  (global.set $$string_|autovalue._A...|@autovalue.$AutoValue_AutoValueWithFields (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.$AutoValue_AutoValueWithFields")))
-  (return (global.get $$string_|autovalue._A...|@autovalue.$AutoValue_AutoValueWithFields))
- )
-)
-
 ;;; Code for autovalue.AutoValue_AutoValueWithOverrides [methods]
 
 ;;; AutoValue_AutoValueWithOverrides AutoValue_AutoValueWithOverrides.$create(int baseField, boolean booleanField)
@@ -5491,20 +4682,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_AutoValueWithOverrides)
-
-;;; String AutoValue_AutoValueWithOverrides.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_AutoValueWithOverrides
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithOverrides)))
-   (then
-    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithOverrides))
-   )
-  )
-  (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithOverrides (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_AutoValueWithOverrides")))
-  (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithOverrides))
- )
-)
 
 ;;; Code for autovalue.AutoValue_ExtendingAutoValue [methods]
 
@@ -5721,20 +4898,6 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_ExtendingAutoValue)
 
-;;; String AutoValue_ExtendingAutoValue.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_ExtendingAutoValue
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_ExtendingAutoValue)))
-   (then
-    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_ExtendingAutoValue))
-   )
-  )
-  (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_ExtendingAutoValue (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_ExtendingAutoValue")))
-  (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_ExtendingAutoValue))
- )
-)
-
 ;;; Code for autovalue.AutoValue_AutoValueWithExtensions [methods]
 
 ;;; AutoValue_AutoValueWithExtensions AutoValue_AutoValueWithExtensions.$create(int intField, String stringField)
@@ -5851,20 +5014,6 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_AutoValueWithExtensions)
 
-;;; String AutoValue_AutoValueWithExtensions.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_AutoValueWithExtensions
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithExtensions)))
-   (then
-    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithExtensions))
-   )
-  )
-  (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithExtensions (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_AutoValueWithExtensions")))
-  (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithExtensions))
- )
-)
-
 ;;; Code for autovalue.AutoValue_AutoValueWithFields [methods]
 
 ;;; AutoValue_AutoValueWithFields AutoValue_AutoValueWithFields.$create(int intField)
@@ -5978,17 +5127,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_AutoValueWithFields)
-
-;;; String AutoValue_AutoValueWithFields.$getString_|autovalue.Au...|()
-(func $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_AutoValueWithFields
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithFields)))
-   (then
-    (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithFields))
-   )
-  )
-  (global.set $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithFields (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "autovalue.AutoValue_AutoValueWithFields")))
-  (return (global.get $$string_|autovalue.Au...|@autovalue.AutoValue_AutoValueWithFields))
- )
-)

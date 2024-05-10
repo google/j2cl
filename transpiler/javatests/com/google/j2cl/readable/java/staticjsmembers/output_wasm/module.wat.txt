@@ -1,45 +1,45 @@
- ;;; Code for staticjsmembers.StaticJsMembers.Native.$Overlay [type definition]
- (type $staticjsmembers.StaticJsMembers.Native.$Overlay (sub (struct
-  (field $vtable (ref $staticjsmembers.StaticJsMembers.Native.$Overlay.vtable))
-  (field $itable (ref $itable))
-  ))
- )
- (type $staticjsmembers.StaticJsMembers.Native.$Overlay.vtable (sub (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  ))
- )
+;;; Code for staticjsmembers.StaticJsMembers.Native.$Overlay [type definition]
+(type $staticjsmembers.StaticJsMembers.Native.$Overlay (sub (struct
+ (field $vtable (ref $staticjsmembers.StaticJsMembers.Native.$Overlay.vtable))
+ (field $itable (ref $itable))
+ ))
+)
+(type $staticjsmembers.StaticJsMembers.Native.$Overlay.vtable (sub (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ ))
+)
 
- ;;; Code for staticjsmembers.StaticJsMembers.Extern.$Overlay [type definition]
- (type $staticjsmembers.StaticJsMembers.Extern.$Overlay (sub (struct
-  (field $vtable (ref $staticjsmembers.StaticJsMembers.Extern.$Overlay.vtable))
-  (field $itable (ref $itable))
-  ))
- )
- (type $staticjsmembers.StaticJsMembers.Extern.$Overlay.vtable (sub (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  ))
- )
+;;; Code for staticjsmembers.StaticJsMembers.Extern.$Overlay [type definition]
+(type $staticjsmembers.StaticJsMembers.Extern.$Overlay (sub (struct
+ (field $vtable (ref $staticjsmembers.StaticJsMembers.Extern.$Overlay.vtable))
+ (field $itable (ref $itable))
+ ))
+)
+(type $staticjsmembers.StaticJsMembers.Extern.$Overlay.vtable (sub (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ ))
+)
 
- ;;; Code for staticjsmembers.StaticJsMembers [type definition]
- (type $staticjsmembers.StaticJsMembers (sub $java.lang.Object (struct
-  (field $vtable (ref $staticjsmembers.StaticJsMembers.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $staticjsmembers.StaticJsMembers.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_test__void (ref $function.m_test__void))
-  ))
- )
+;;; Code for staticjsmembers.StaticJsMembers [type definition]
+(type $staticjsmembers.StaticJsMembers (sub $java.lang.Object (struct
+ (field $vtable (ref $staticjsmembers.StaticJsMembers.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $staticjsmembers.StaticJsMembers.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_test__void (ref $function.m_test__void))
+ ))
+)
 
- ;;; Code for staticjsmembers.StaticJsMembers.Native [type definition]
+;;; Code for staticjsmembers.StaticJsMembers.Native [type definition]
 
- ;;; Code for staticjsmembers.StaticJsMembers.Extern [type definition]
+;;; Code for staticjsmembers.StaticJsMembers.Extern [type definition]
 
 ;;; Code for staticjsmembers.StaticJsMembers.Native.$Overlay [imports]
 
@@ -144,6 +144,36 @@
  (result (ref null extern))
 )
 
+;;; Code for staticjsmembers.StaticJsMembers [static fields]
+(global $field1@staticjsmembers.StaticJsMembers (mut i32)
+ (i32.const 0)
+)
+(global $field2@staticjsmembers.StaticJsMembers (mut i32)
+ (i32.const 0)
+)
+(global $$class-initialized@staticjsmembers.StaticJsMembers (mut i32)
+ (i32.const 0)
+)
+(global $$class@staticjsmembers.StaticJsMembers (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for staticjsmembers.StaticJsMembers.Native.$Overlay [static fields]
+(global $$class-initialized@staticjsmembers.StaticJsMembers.Native.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@staticjsmembers.StaticJsMembers.Native.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for staticjsmembers.StaticJsMembers.Extern.$Overlay [static fields]
+(global $$class-initialized@staticjsmembers.StaticJsMembers.Extern.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@staticjsmembers.StaticJsMembers.Extern.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
 ;;; Code for staticjsmembers.StaticJsMembers [vtable.init]
 (global $staticjsmembers.StaticJsMembers.vtable (ref $staticjsmembers.StaticJsMembers.vtable)
  (struct.new $staticjsmembers.StaticJsMembers.vtable
@@ -168,45 +198,6 @@
  (struct.new $staticjsmembers.StaticJsMembers.Extern.$Overlay.vtable
   (ref.func $$getClassImpl__java_lang_Class@staticjsmembers.StaticJsMembers.Extern.$Overlay)
  )
-)
-
-;;; Code for staticjsmembers.StaticJsMembers [static fields]
-(global $field1@staticjsmembers.StaticJsMembers (mut i32)
- (i32.const 0)
-)
-(global $field2@staticjsmembers.StaticJsMembers (mut i32)
- (i32.const 0)
-)
-(global $$class-initialized@staticjsmembers.StaticJsMembers (mut i32)
- (i32.const 0)
-)
-(global $$class@staticjsmembers.StaticJsMembers (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|staticjsmemb...|@staticjsmembers.StaticJsMembers (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for staticjsmembers.StaticJsMembers.Native.$Overlay [static fields]
-(global $$class-initialized@staticjsmembers.StaticJsMembers.Native.$Overlay (mut i32)
- (i32.const 0)
-)
-(global $$class@staticjsmembers.StaticJsMembers.Native.$Overlay (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|staticjsmemb...|@staticjsmembers.StaticJsMembers.Native.$Overlay (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-
-;;; Code for staticjsmembers.StaticJsMembers.Extern.$Overlay [static fields]
-(global $$class-initialized@staticjsmembers.StaticJsMembers.Extern.$Overlay (mut i32)
- (i32.const 0)
-)
-(global $$class@staticjsmembers.StaticJsMembers.Extern.$Overlay (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|staticjsmemb...|@staticjsmembers.StaticJsMembers.Extern.$Overlay (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for staticjsmembers.StaticJsMembers.Native.$Overlay [methods]
@@ -254,20 +245,6 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@staticjsmembers.StaticJsMembers.Native.$Overlay)
 
-;;; String $Overlay.$getString_|staticjsmemb...|()
-(func $$getString_|staticjsmemb...|__java_lang_String_<once>_@staticjsmembers.StaticJsMembers.Native.$Overlay
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|staticjsmemb...|@staticjsmembers.StaticJsMembers.Native.$Overlay)))
-   (then
-    (return (global.get $$string_|staticjsmemb...|@staticjsmembers.StaticJsMembers.Native.$Overlay))
-   )
-  )
-  (global.set $$string_|staticjsmemb...|@staticjsmembers.StaticJsMembers.Native.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "staticjsmembers.StaticJsMembers$Native$$Overlay")))
-  (return (global.get $$string_|staticjsmemb...|@staticjsmembers.StaticJsMembers.Native.$Overlay))
- )
-)
-
 ;;; Code for staticjsmembers.StaticJsMembers.Extern.$Overlay [methods]
 
 ;;; void $Overlay.$clinit()
@@ -312,20 +289,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@staticjsmembers.StaticJsMembers.Extern.$Overlay)
-
-;;; String $Overlay.$getString_|staticjsmemb...|()
-(func $$getString_|staticjsmemb...|__java_lang_String_<once>_@staticjsmembers.StaticJsMembers.Extern.$Overlay
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|staticjsmemb...|@staticjsmembers.StaticJsMembers.Extern.$Overlay)))
-   (then
-    (return (global.get $$string_|staticjsmemb...|@staticjsmembers.StaticJsMembers.Extern.$Overlay))
-   )
-  )
-  (global.set $$string_|staticjsmemb...|@staticjsmembers.StaticJsMembers.Extern.$Overlay (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "staticjsmembers.StaticJsMembers$Extern$$Overlay")))
-  (return (global.get $$string_|staticjsmemb...|@staticjsmembers.StaticJsMembers.Extern.$Overlay))
- )
-)
 
 ;;; Code for staticjsmembers.StaticJsMembers [methods]
 
@@ -501,20 +464,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@staticjsmembers.StaticJsMembers)
-
-;;; String StaticJsMembers.$getString_|staticjsmemb...|()
-(func $$getString_|staticjsmemb...|__java_lang_String_<once>_@staticjsmembers.StaticJsMembers
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|staticjsmemb...|@staticjsmembers.StaticJsMembers)))
-   (then
-    (return (global.get $$string_|staticjsmemb...|@staticjsmembers.StaticJsMembers))
-   )
-  )
-  (global.set $$string_|staticjsmemb...|@staticjsmembers.StaticJsMembers (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "staticjsmembers.StaticJsMembers")))
-  (return (global.get $$string_|staticjsmemb...|@staticjsmembers.StaticJsMembers))
- )
-)
 
 ;;; Code for staticjsmembers.StaticJsMembers.Native [methods]
 

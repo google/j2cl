@@ -1,39 +1,25 @@
- ;;; Code for synchronizedmethod.SynchronizedMethod [type definition]
- (type $synchronizedmethod.SynchronizedMethod (sub $java.lang.Object (struct
-  (field $vtable (ref $synchronizedmethod.SynchronizedMethod.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $a@synchronizedmethod.SynchronizedMethod (mut i32))
-  (field $b@synchronizedmethod.SynchronizedMethod (mut i32))
-  ))
- )
- (type $synchronizedmethod.SynchronizedMethod.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_testIfStatementWithNonVoidBodyWithoutElse__boolean__boolean__void (ref $function.m_testIfStatementWithNonVoidBodyWithoutElse__boolean__boolean__void))
-  (field $m_testNonStatic__void (ref $function.m_testNonStatic__void))
-  (field $m_testReturn__boolean__int (ref $function.m_testReturn__boolean__int))
-  ))
- )
+;;; Code for synchronizedmethod.SynchronizedMethod [type definition]
+(type $synchronizedmethod.SynchronizedMethod (sub $java.lang.Object (struct
+ (field $vtable (ref $synchronizedmethod.SynchronizedMethod.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $a@synchronizedmethod.SynchronizedMethod (mut i32))
+ (field $b@synchronizedmethod.SynchronizedMethod (mut i32))
+ ))
+)
+(type $synchronizedmethod.SynchronizedMethod.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_testIfStatementWithNonVoidBodyWithoutElse__boolean__boolean__void (ref $function.m_testIfStatementWithNonVoidBodyWithoutElse__boolean__boolean__void))
+ (field $m_testNonStatic__void (ref $function.m_testNonStatic__void))
+ (field $m_testReturn__boolean__int (ref $function.m_testReturn__boolean__int))
+ ))
+)
 
 ;;; Code for synchronizedmethod.SynchronizedMethod [imports]
-
-;;; Code for synchronizedmethod.SynchronizedMethod [vtable.init]
-(global $synchronizedmethod.SynchronizedMethod.vtable (ref $synchronizedmethod.SynchronizedMethod.vtable)
- (struct.new $synchronizedmethod.SynchronizedMethod.vtable
-  (ref.func $$getClassImpl__java_lang_Class@synchronizedmethod.SynchronizedMethod)
-  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
-  (ref.func $m_hashCode__int@java.lang.Object)
-  (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_testIfStatementWithNonVoidBodyWithoutElse__boolean__boolean__void@synchronizedmethod.SynchronizedMethod)
-  (ref.func $m_testNonStatic__void@synchronizedmethod.SynchronizedMethod)
-  (ref.func $m_testReturn__boolean__int@synchronizedmethod.SynchronizedMethod)
- )
-)
 
 ;;; Code for synchronizedmethod.SynchronizedMethod [static fields]
 (global $sa@synchronizedmethod.SynchronizedMethod (mut i32)
@@ -48,14 +34,19 @@
 (global $$class@synchronizedmethod.SynchronizedMethod (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $$string_|foo|@synchronizedmethod.SynchronizedMethod (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-(global $$string_|bar|@synchronizedmethod.SynchronizedMethod (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-(global $$string_|synchronized...|@synchronizedmethod.SynchronizedMethod (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
+
+;;; Code for synchronizedmethod.SynchronizedMethod [vtable.init]
+(global $synchronizedmethod.SynchronizedMethod.vtable (ref $synchronizedmethod.SynchronizedMethod.vtable)
+ (struct.new $synchronizedmethod.SynchronizedMethod.vtable
+  (ref.func $$getClassImpl__java_lang_Class@synchronizedmethod.SynchronizedMethod)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_testIfStatementWithNonVoidBodyWithoutElse__boolean__boolean__void@synchronizedmethod.SynchronizedMethod)
+  (ref.func $m_testNonStatic__void@synchronizedmethod.SynchronizedMethod)
+  (ref.func $m_testReturn__boolean__int@synchronizedmethod.SynchronizedMethod)
+ )
 )
 
 ;;; Code for synchronizedmethod.SynchronizedMethod [methods]
@@ -240,45 +231,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@synchronizedmethod.SynchronizedMethod)
-
-;;; String SynchronizedMethod.$getString_|foo|()
-(func $$getString_|foo|__java_lang_String_<once>_@synchronizedmethod.SynchronizedMethod
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|foo|@synchronizedmethod.SynchronizedMethod)))
-   (then
-    (return (global.get $$string_|foo|@synchronizedmethod.SynchronizedMethod))
-   )
-  )
-  (global.set $$string_|foo|@synchronizedmethod.SynchronizedMethod (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "foo")))
-  (return (global.get $$string_|foo|@synchronizedmethod.SynchronizedMethod))
- )
-)
-
-;;; String SynchronizedMethod.$getString_|bar|()
-(func $$getString_|bar|__java_lang_String_<once>_@synchronizedmethod.SynchronizedMethod
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|bar|@synchronizedmethod.SynchronizedMethod)))
-   (then
-    (return (global.get $$string_|bar|@synchronizedmethod.SynchronizedMethod))
-   )
-  )
-  (global.set $$string_|bar|@synchronizedmethod.SynchronizedMethod (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "bar")))
-  (return (global.get $$string_|bar|@synchronizedmethod.SynchronizedMethod))
- )
-)
-
-;;; String SynchronizedMethod.$getString_|synchronized...|()
-(func $$getString_|synchronized...|__java_lang_String_<once>_@synchronizedmethod.SynchronizedMethod
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|synchronized...|@synchronizedmethod.SynchronizedMethod)))
-   (then
-    (return (global.get $$string_|synchronized...|@synchronizedmethod.SynchronizedMethod))
-   )
-  )
-  (global.set $$string_|synchronized...|@synchronizedmethod.SynchronizedMethod (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "synchronizedmethod.SynchronizedMethod")))
-  (return (global.get $$string_|synchronized...|@synchronizedmethod.SynchronizedMethod))
- )
-)

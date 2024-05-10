@@ -1,8 +1,8 @@
- ;;; Code for simplegenericinterface.SimpleGenericInterface [type definition]
- (type $simplegenericinterface.SimpleGenericInterface.vtable (sub (struct
-  (field $m_fun__java_lang_Object__java_lang_Object (ref $function.m_fun__java_lang_Object__java_lang_Object))
-  ))
- )
+;;; Code for simplegenericinterface.SimpleGenericInterface [type definition]
+(type $simplegenericinterface.SimpleGenericInterface.vtable (sub (struct
+ (field $m_fun__java_lang_Object__java_lang_Object (ref $function.m_fun__java_lang_Object__java_lang_Object))
+ ))
+)
 
 ;;; Code for simplegenericinterface.SimpleGenericInterface [imports]
 
@@ -12,9 +12,6 @@
 )
 (global $$class@simplegenericinterface.SimpleGenericInterface (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
-)
-(global $$string_|simplegeneri...|@simplegenericinterface.SimpleGenericInterface (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for simplegenericinterface.SimpleGenericInterface [methods]
@@ -46,19 +43,5 @@
   )
   (global.set $$class@simplegenericinterface.SimpleGenericInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|simplegeneri...|__java_lang_String_<once>_@simplegenericinterface.SimpleGenericInterface )))
   (return (global.get $$class@simplegenericinterface.SimpleGenericInterface))
- )
-)
-
-;;; String SimpleGenericInterface.$getString_|simplegeneri...|()
-(func $$getString_|simplegeneri...|__java_lang_String_<once>_@simplegenericinterface.SimpleGenericInterface
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|simplegeneri...|@simplegenericinterface.SimpleGenericInterface)))
-   (then
-    (return (global.get $$string_|simplegeneri...|@simplegenericinterface.SimpleGenericInterface))
-   )
-  )
-  (global.set $$string_|simplegeneri...|@simplegenericinterface.SimpleGenericInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "simplegenericinterface.SimpleGenericInterface")))
-  (return (global.get $$string_|simplegeneri...|@simplegenericinterface.SimpleGenericInterface))
  )
 )

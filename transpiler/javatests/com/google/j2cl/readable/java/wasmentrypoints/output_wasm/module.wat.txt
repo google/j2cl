@@ -1,20 +1,28 @@
- ;;; Code for wasmentrypoints.WasmEntryPoints [type definition]
- (type $wasmentrypoints.WasmEntryPoints (sub $java.lang.Object (struct
-  (field $vtable (ref $wasmentrypoints.WasmEntryPoints.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  ))
- )
- (type $wasmentrypoints.WasmEntryPoints.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  ))
- )
+;;; Code for wasmentrypoints.WasmEntryPoints [type definition]
+(type $wasmentrypoints.WasmEntryPoints (sub $java.lang.Object (struct
+ (field $vtable (ref $wasmentrypoints.WasmEntryPoints.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $wasmentrypoints.WasmEntryPoints.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 
 ;;; Code for wasmentrypoints.WasmEntryPoints [imports]
+
+;;; Code for wasmentrypoints.WasmEntryPoints [static fields]
+(global $$class-initialized@wasmentrypoints.WasmEntryPoints (mut i32)
+ (i32.const 0)
+)
+(global $$class@wasmentrypoints.WasmEntryPoints (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for wasmentrypoints.WasmEntryPoints [vtable.init]
 (global $wasmentrypoints.WasmEntryPoints.vtable (ref $wasmentrypoints.WasmEntryPoints.vtable)
@@ -25,17 +33,6 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
-)
-
-;;; Code for wasmentrypoints.WasmEntryPoints [static fields]
-(global $$class-initialized@wasmentrypoints.WasmEntryPoints (mut i32)
- (i32.const 0)
-)
-(global $$class@wasmentrypoints.WasmEntryPoints (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|wasmentrypoi...|@wasmentrypoints.WasmEntryPoints (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for wasmentrypoints.WasmEntryPoints [methods]
@@ -105,7 +102,7 @@
   ;;@ wasmentrypoints/WasmEntryPoints.java:26:62
   (call $$clinit__void_<once>_@wasmentrypoints.WasmEntryPoints )
   ;;@ wasmentrypoints/WasmEntryPoints.java:27:4
-  (return (call $$getString_||__java_lang_String_<once>_@java.lang.StackTraceElement ))
+  (return (call $$getString_||__java_lang_String_<once>_@wasmentrypoints.WasmEntryPoints ))
  )
 )
 
@@ -153,57 +150,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@wasmentrypoints.WasmEntryPoints)
-
-;;; String WasmEntryPoints.$getString_|wasmentrypoi...|()
-(func $$getString_|wasmentrypoi...|__java_lang_String_<once>_@wasmentrypoints.WasmEntryPoints
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|wasmentrypoi...|@wasmentrypoints.WasmEntryPoints)))
-   (then
-    (return (global.get $$string_|wasmentrypoi...|@wasmentrypoints.WasmEntryPoints))
-   )
-  )
-  (global.set $$string_|wasmentrypoi...|@wasmentrypoints.WasmEntryPoints (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "wasmentrypoints.WasmEntryPoints")))
-  (return (global.get $$string_|wasmentrypoi...|@wasmentrypoints.WasmEntryPoints))
- )
-)
-
-;;; void WasmEntryPoints.singleMatchedEntryPoint__$export()
-(func $m_singleMatchedEntryPoint__$export__void@wasmentrypoints.WasmEntryPoints (export "singleMatchedEntryPoint")
- ;;@ wasmentrypoints/WasmEntryPoints.java:20:21
- (block
-  ;;@ wasmentrypoints/WasmEntryPoints.java:20:21
-  (call $m_singleMatchedEntryPoint__void@wasmentrypoints.WasmEntryPoints )
- )
-)
-
-;;; void WasmEntryPoints.matchedEntryPointPattern1__$export(int arg0)
-(func $m_matchedEntryPointPattern1__$export__int__void@wasmentrypoints.WasmEntryPoints (export "matchedEntryPointPattern1")
- (param $arg0 i32)
- ;;@ wasmentrypoints/WasmEntryPoints.java:22:21
- (block
-  ;;@ wasmentrypoints/WasmEntryPoints.java:22:21
-  (call $m_matchedEntryPointPattern1__int__void@wasmentrypoints.WasmEntryPoints (local.get $arg0))
- )
-)
-
-;;; void WasmEntryPoints.matchedEntryPointPattern2__$export(float arg0)
-(func $m_matchedEntryPointPattern2__$export__float__void@wasmentrypoints.WasmEntryPoints (export "matchedEntryPointPattern2")
- (param $arg0 f32)
- ;;@ wasmentrypoints/WasmEntryPoints.java:24:21
- (block
-  ;;@ wasmentrypoints/WasmEntryPoints.java:24:21
-  (call $m_matchedEntryPointPattern2__float__void@wasmentrypoints.WasmEntryPoints (local.get $arg0))
- )
-)
-
-;;; NativeString WasmEntryPoints.stringConversionEntryPoint__$export(NativeString arg0)
-(func $m_stringConversionEntryPoint__$export__java_lang_String_NativeString__java_lang_String_NativeString@wasmentrypoints.WasmEntryPoints (export "stringConversionEntryPoint")
- (param $arg0 (ref null string))
- (result (ref null string))
- ;;@ wasmentrypoints/WasmEntryPoints.java:26:23
- (block
-  ;;@ wasmentrypoints/WasmEntryPoints.java:26:23
-  (return (call $m_toJsString__java_lang_String__java_lang_String_NativeString@java.lang.String (call $m_stringConversionEntryPoint__java_lang_String__java_lang_String@wasmentrypoints.WasmEntryPoints (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $arg0)))))
- )
-)

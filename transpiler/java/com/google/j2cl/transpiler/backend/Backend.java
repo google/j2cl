@@ -635,6 +635,7 @@ public enum Backend {
           InsertExternConversionsWasm::new,
           RemoveCustomIsInstanceMethods::new,
           RemoveNoopStatements::new,
+          UpgradeInterfaceDispatch::new,
 
           // Passes that transform the AST to match the requirements of the Wasm instruction set.
           // Make null literals to have the type required by their use.

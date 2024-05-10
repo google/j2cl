@@ -1,27 +1,35 @@
- ;;; Code for jsnullable.Main [type definition]
- (type $jsnullable.Main (sub $java.lang.Object (struct
-  (field $vtable (ref $jsnullable.Main.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $f10@jsnullable.Main (mut (ref null $javaemul.internal.WasmArray.OfObject)))
-  (field $f1@jsnullable.Main (mut (ref null $java.lang.String)))
-  (field $f2@jsnullable.Main (mut (ref null $java.lang.String)))
-  (field $f4@jsnullable.Main (mut (ref null $java.lang.Object)))
-  (field $f5@jsnullable.Main (mut (ref null $java.lang.Object)))
-  (field $f6@jsnullable.Main (mut (ref null $java.lang.Object)))
-  (field $f9@jsnullable.Main (mut (ref null $javaemul.internal.WasmArray.OfObject)))
-  ))
- )
- (type $jsnullable.Main.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  ))
- )
+;;; Code for jsnullable.Main [type definition]
+(type $jsnullable.Main (sub $java.lang.Object (struct
+ (field $vtable (ref $jsnullable.Main.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f10@jsnullable.Main (mut (ref null $javaemul.internal.WasmArray.OfObject)))
+ (field $f1@jsnullable.Main (mut (ref null $java.lang.String)))
+ (field $f2@jsnullable.Main (mut (ref null $java.lang.String)))
+ (field $f4@jsnullable.Main (mut (ref null $java.lang.Object)))
+ (field $f5@jsnullable.Main (mut (ref null $java.lang.Object)))
+ (field $f6@jsnullable.Main (mut (ref null $java.lang.Object)))
+ (field $f9@jsnullable.Main (mut (ref null $javaemul.internal.WasmArray.OfObject)))
+ ))
+)
+(type $jsnullable.Main.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 
 ;;; Code for jsnullable.Main [imports]
+
+;;; Code for jsnullable.Main [static fields]
+(global $$class-initialized@jsnullable.Main (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsnullable.Main (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for jsnullable.Main [vtable.init]
 (global $jsnullable.Main.vtable (ref $jsnullable.Main.vtable)
@@ -32,20 +40,6 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
-)
-
-;;; Code for jsnullable.Main [static fields]
-(global $$class-initialized@jsnullable.Main (mut i32)
- (i32.const 0)
-)
-(global $$class@jsnullable.Main (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|Hello|@jsnullable.Main (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
-)
-(global $$string_|jsnullable.Main|@jsnullable.Main (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for jsnullable.Main [methods]
@@ -155,31 +149,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsnullable.Main)
-
-;;; String Main.$getString_|Hello|()
-(func $$getString_|Hello|__java_lang_String_<once>_@jsnullable.Main
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|Hello|@jsnullable.Main)))
-   (then
-    (return (global.get $$string_|Hello|@jsnullable.Main))
-   )
-  )
-  (global.set $$string_|Hello|@jsnullable.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "Hello")))
-  (return (global.get $$string_|Hello|@jsnullable.Main))
- )
-)
-
-;;; String Main.$getString_|jsnullable.Main|()
-(func $$getString_|jsnullable.Main|__java_lang_String_<once>_@jsnullable.Main
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|jsnullable.Main|@jsnullable.Main)))
-   (then
-    (return (global.get $$string_|jsnullable.Main|@jsnullable.Main))
-   )
-  )
-  (global.set $$string_|jsnullable.Main|@jsnullable.Main (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsnullable.Main")))
-  (return (global.get $$string_|jsnullable.Main|@jsnullable.Main))
- )
-)

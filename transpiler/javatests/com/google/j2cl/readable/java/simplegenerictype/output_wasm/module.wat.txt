@@ -1,23 +1,31 @@
- ;;; Code for simplegenerictype.SimpleGenericType [type definition]
- (type $simplegenerictype.SimpleGenericType (sub $java.lang.Object (struct
-  (field $vtable (ref $simplegenerictype.SimpleGenericType.vtable))
-  (field $itable (ref $itable))
-  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
-  (field $first@simplegenerictype.SimpleGenericType (mut (ref null $java.lang.Object)))
-  (field $second@simplegenerictype.SimpleGenericType (mut (ref null $java.lang.Object)))
-  ))
- )
- (type $simplegenerictype.SimpleGenericType.vtable (sub $java.lang.Object.vtable (struct
-  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
-  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
-  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  (field $m_hashCode__int (ref $function.m_hashCode__int))
-  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
-  (field $m_test__void (ref $function.m_test__void))
-  ))
- )
+;;; Code for simplegenerictype.SimpleGenericType [type definition]
+(type $simplegenerictype.SimpleGenericType (sub $java.lang.Object (struct
+ (field $vtable (ref $simplegenerictype.SimpleGenericType.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $first@simplegenerictype.SimpleGenericType (mut (ref null $java.lang.Object)))
+ (field $second@simplegenerictype.SimpleGenericType (mut (ref null $java.lang.Object)))
+ ))
+)
+(type $simplegenerictype.SimpleGenericType.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_test__void (ref $function.m_test__void))
+ ))
+)
 
 ;;; Code for simplegenerictype.SimpleGenericType [imports]
+
+;;; Code for simplegenerictype.SimpleGenericType [static fields]
+(global $$class-initialized@simplegenerictype.SimpleGenericType (mut i32)
+ (i32.const 0)
+)
+(global $$class@simplegenerictype.SimpleGenericType (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 
 ;;; Code for simplegenerictype.SimpleGenericType [vtable.init]
 (global $simplegenerictype.SimpleGenericType.vtable (ref $simplegenerictype.SimpleGenericType.vtable)
@@ -29,17 +37,6 @@
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_test__void@simplegenerictype.SimpleGenericType)
  )
-)
-
-;;; Code for simplegenerictype.SimpleGenericType [static fields]
-(global $$class-initialized@simplegenerictype.SimpleGenericType (mut i32)
- (i32.const 0)
-)
-(global $$class@simplegenerictype.SimpleGenericType (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-(global $$string_|simplegeneri...|@simplegenerictype.SimpleGenericType (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for simplegenerictype.SimpleGenericType [methods]
@@ -150,17 +147,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@simplegenerictype.SimpleGenericType)
-
-;;; String SimpleGenericType.$getString_|simplegeneri...|()
-(func $$getString_|simplegeneri...|__java_lang_String_<once>_@simplegenerictype.SimpleGenericType
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|simplegeneri...|@simplegenerictype.SimpleGenericType)))
-   (then
-    (return (global.get $$string_|simplegeneri...|@simplegenerictype.SimpleGenericType))
-   )
-  )
-  (global.set $$string_|simplegeneri...|@simplegenerictype.SimpleGenericType (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "simplegenerictype.SimpleGenericType")))
-  (return (global.get $$string_|simplegeneri...|@simplegenerictype.SimpleGenericType))
- )
-)

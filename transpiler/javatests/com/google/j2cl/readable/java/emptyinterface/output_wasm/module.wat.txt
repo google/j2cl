@@ -1,7 +1,7 @@
- ;;; Code for emptyinterface.EmptyInterface [type definition]
- (type $emptyinterface.EmptyInterface.vtable (sub (struct
-  ))
- )
+;;; Code for emptyinterface.EmptyInterface [type definition]
+(type $emptyinterface.EmptyInterface.vtable (sub (struct
+ ))
+)
 
 ;;; Code for emptyinterface.EmptyInterface [imports]
 
@@ -11,9 +11,6 @@
 )
 (global $$class@emptyinterface.EmptyInterface (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
-)
-(global $$string_|emptyinterfa...|@emptyinterface.EmptyInterface (mut (ref null $java.lang.String))
- (ref.null $java.lang.String)
 )
 
 ;;; Code for emptyinterface.EmptyInterface [methods]
@@ -45,19 +42,5 @@
   )
   (global.set $$class@emptyinterface.EmptyInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|emptyinterfa...|__java_lang_String_<once>_@emptyinterface.EmptyInterface )))
   (return (global.get $$class@emptyinterface.EmptyInterface))
- )
-)
-
-;;; String EmptyInterface.$getString_|emptyinterfa...|()
-(func $$getString_|emptyinterfa...|__java_lang_String_<once>_@emptyinterface.EmptyInterface
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|emptyinterfa...|@emptyinterface.EmptyInterface)))
-   (then
-    (return (global.get $$string_|emptyinterfa...|@emptyinterface.EmptyInterface))
-   )
-  )
-  (global.set $$string_|emptyinterfa...|@emptyinterface.EmptyInterface (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "emptyinterface.EmptyInterface")))
-  (return (global.get $$string_|emptyinterfa...|@emptyinterface.EmptyInterface))
  )
 )
