@@ -38,6 +38,7 @@ import com.google.j2cl.transpiler.ast.DoWhileStatement
 import com.google.j2cl.transpiler.ast.Expression
 import com.google.j2cl.transpiler.ast.Field
 import com.google.j2cl.transpiler.ast.FieldAccess
+import com.google.j2cl.transpiler.ast.ForEachStatement
 import com.google.j2cl.transpiler.ast.ForStatement
 import com.google.j2cl.transpiler.ast.FunctionExpression
 import com.google.j2cl.transpiler.ast.IfStatement
@@ -95,6 +96,7 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.javaName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.resolveLabel
 import com.google.j2cl.transpiler.frontend.kotlin.ir.toSourcePosition
 import com.google.j2cl.transpiler.frontend.kotlin.ir.typeSubstitutionMap
+import com.google.j2cl.transpiler.frontend.kotlin.lower.IrForInLoop
 import com.google.j2cl.transpiler.frontend.kotlin.lower.IrForLoop
 import com.google.j2cl.transpiler.frontend.kotlin.lower.IrSwitch
 import com.google.j2cl.transpiler.frontend.kotlin.lower.IrSwitchBreak
@@ -426,6 +428,7 @@ class CompilationUnitBuilder(
         is IrWhileLoop -> convertWhileLoop(irLoop)
         is IrDoWhileLoop -> convertDoWhileLoop(irLoop)
         is IrForLoop -> convertForLoop(irLoop)
+        is IrForInLoop -> convertForInLoop(irLoop)
         else ->
           throw IllegalStateException("IrLoop type not recognized ${irLoop::class.simpleName}")
       }
@@ -472,6 +475,20 @@ class CompilationUnitBuilder(
       .setUpdates(convertExpressions(irForLoop.updates))
       .setBody(convertStatement(checkNotNull(irForLoop.body) { "Body cannot not be null." }))
       .setSourcePosition(getSourcePosition(irForLoop))
+      .build()
+
+  private fun convertForInLoop(irForInLoop: IrForInLoop): Statement =
+    ForEachStatement.newBuilder()
+      .setLoopVariable(createVariable(irForInLoop.variable))
+      .setIterableExpression(
+        convertExpression(irForInLoop.condition).also {
+          check(it.typeDescriptor.isAssignableTo(TypeDescriptors.get().javaLangIterable)) {
+            "ForEach must loop over an iterable expression"
+          }
+        }
+      )
+      .setBody(convertStatement(checkNotNull(irForInLoop.body) { "Body cannot not be null." }))
+      .setSourcePosition(getSourcePosition(irForInLoop))
       .build()
 
   private fun convertReturnStatement(irReturn: IrReturn): Statement {

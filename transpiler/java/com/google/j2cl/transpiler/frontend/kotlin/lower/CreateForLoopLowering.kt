@@ -19,6 +19,7 @@ import org.jetbrains.kotlin.backend.common.BodyLoweringPass
 import org.jetbrains.kotlin.backend.common.IrElementTransformerVoidWithContext
 import org.jetbrains.kotlin.ir.declarations.IrDeclaration
 import org.jetbrains.kotlin.ir.declarations.IrDeclarationOrigin
+import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.declarations.IrVariable
 import org.jetbrains.kotlin.ir.expressions.IrBlock
 import org.jetbrains.kotlin.ir.expressions.IrBody
@@ -35,6 +36,8 @@ import org.jetbrains.kotlin.ir.expressions.IrStatementOrigin
 import org.jetbrains.kotlin.ir.expressions.IrWhen
 import org.jetbrains.kotlin.ir.expressions.IrWhileLoop
 import org.jetbrains.kotlin.ir.expressions.impl.IrCompositeImpl
+import org.jetbrains.kotlin.ir.util.getSimpleFunction
+import org.jetbrains.kotlin.ir.util.overrides
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 
@@ -96,6 +99,23 @@ import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
  *     }
  *   }
  * ```
+ * 3. Iteration over iterable types (e.g. `for(v in someList)`):
+ * ```
+ * val iterator = iterable.iterator()
+ * while (iterator.hasNext()) {
+ *   val v = iterator.next()
+ *   {
+ *     // loop body
+ *   }
+ * }
+ * ```
+ *
+ * will be transformed to:
+ * ```
+ * for (v in iterable) {
+ *   // loop body
+ * }
+ * ```
  *
  * A note about overflowing ranges: A range is considered as overflowing when you cannot determine
  * at compile time that the end of the range is less than max value of the range type.
@@ -110,10 +130,10 @@ import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
  * This pass is doing its best effort to recreate the `for` loop and is deliberately lenient. It
  * will skip unexpected IR structure.
  */
-internal class CreateForLoopLowering : BodyLoweringPass {
+internal class CreateForLoopLowering(private val context: J2clBackendContext) : BodyLoweringPass {
   override fun lower(irBody: IrBody, container: IrDeclaration) {
     val oldLoopToNewLoop = mutableMapOf<IrLoop, IrLoop>()
-    val transformer = LoopTransformer(oldLoopToNewLoop)
+    val transformer = LoopTransformer(context, oldLoopToNewLoop)
     irBody.transformChildrenVoid(transformer)
 
     // Update references in break/continue.
@@ -128,15 +148,21 @@ internal class CreateForLoopLowering : BodyLoweringPass {
   }
 }
 
-private class LoopTransformer(val oldLoopToNewLoop: MutableMap<IrLoop, IrLoop>) :
-  IrElementTransformerVoidWithContext() {
+private class LoopTransformer(
+  private val context: J2clBackendContext,
+  val oldLoopToNewLoop: MutableMap<IrLoop, IrLoop>,
+) : IrElementTransformerVoidWithContext() {
+
+  private val iterableIteratorFunction: IrSimpleFunction by lazy {
+    context.ir.symbols.iterable.getSimpleFunction("iterator")!!.owner
+  }
 
   override fun visitBlock(expression: IrBlock): IrExpression {
     // The psi2ir transformer wraps all `for` loop into an `IrBlock` with origin `FOR_LOOP`.
     // After this check, we are sure that we are manipulating `while` and `do while` loop that has
     // been created by the Kotlin compiler to represent a for loop. We can make assumption on them
     // because we will never match a `while` or `do while` loop written by the user.
-    if (expression.origin != IrStatementOrigin.FOR_LOOP) {
+    if (expression.origin != IrStatementOrigin.FOR_LOOP || expression.statements.size < 2) {
       return super.visitBlock(expression)
     }
 
@@ -146,26 +172,80 @@ private class LoopTransformer(val oldLoopToNewLoop: MutableMap<IrLoop, IrLoop>) 
     val condition = extractCondition(expression) ?: return super.visitBlock(expression)
     val innerLoopBody =
       extractAndSplitInnerLoopBody(expression) ?: return super.visitBlock(expression)
-
     val oldLoop = getInnerLoop(expression)
+
     val newLoop =
-      IrForLoop.from(oldLoop).apply {
-        this.condition = condition
-        this.initializers = initializers
-        updates = mutableListOf(innerLoopBody.inductionVariableUpdate)
+      if (isForEachLoop(initializers)) {
+        createForInLoop(expression, initializers, condition, innerLoopBody, oldLoop)
+          ?: return super.visitBlock(expression)
+      } else {
+        val inductionVariableUpdate =
+          innerLoopBody.inductionVariableUpdate ?: return super.visitBlock(expression)
+        IrForLoop.from(oldLoop).apply {
+          this.condition = condition
+          this.initializers = initializers
+          updates = mutableListOf(inductionVariableUpdate)
+          body =
+            IrCompositeImpl(
+              innerLoopBody.originalLoopBody.startOffset,
+              innerLoopBody.originalLoopBody.endOffset,
+              innerLoopBody.originalLoopBody.type,
+              innerLoopBody.originalLoopBody.origin,
+              innerLoopBody.loopVariablesDefinitions + innerLoopBody.originalLoopBody.statements,
+            )
+        }
+      }
+
+    // Update mapping from old to new loop, so we can later update references in break/continue.
+    oldLoopToNewLoop[oldLoop] = newLoop
+
+    return visitLoop(newLoop)
+  }
+
+  private fun isForEachLoop(initializers: List<IrVariable>) =
+    initializers.singleOrNull()?.origin == IrDeclarationOrigin.FOR_LOOP_ITERATOR
+
+  private fun createForInLoop(
+    originalExpression: IrBlock,
+    initializers: MutableList<IrVariable>,
+    condition: IrExpression?,
+    innerLoopBody: InnerLoopBody,
+    oldLoop: IrLoop,
+  ): IrForInLoop? {
+    // We should not have an induction variable update, and the condition should be a hasNext()
+    // call on the iterator.
+    if (
+      innerLoopBody.inductionVariableUpdate != null ||
+        (condition as? IrCall)?.origin != IrStatementOrigin.FOR_LOOP_HAS_NEXT
+    ) {
+      return null
+    }
+
+    val iterableExpression = extractIterableExpression(initializers[0].initializer) ?: return null
+
+    // Pop off the first variable definition. This should be the loop variable. Any other
+    // variable definitions would be from destructuring the loop variable, which can be moved
+    // into the loop body.
+    val loopVariable = innerLoopBody.loopVariablesDefinitions.removeFirstOrNull() ?: return null
+
+    return IrForInLoop(
+        startOffset = originalExpression.startOffset,
+        endOffset = originalExpression.endOffset,
+        type = originalExpression.type,
+        variable = loopVariable,
+        condition = iterableExpression,
+      )
+      .apply {
         body =
           IrCompositeImpl(
             innerLoopBody.originalLoopBody.startOffset,
             innerLoopBody.originalLoopBody.endOffset,
             innerLoopBody.originalLoopBody.type,
             innerLoopBody.originalLoopBody.origin,
-            innerLoopBody.loopVariablesDefinitions + innerLoopBody.originalLoopBody.statements
+            innerLoopBody.loopVariablesDefinitions + innerLoopBody.originalLoopBody.statements,
           )
+        label = oldLoop.label
       }
-    // Update mapping from old to new loop, so we can later update references in break/continue.
-    oldLoopToNewLoop[oldLoop] = newLoop
-
-    return visitLoop(newLoop)
   }
 
   private fun extractInitializers(enclosingBlock: IrBlock): MutableList<IrVariable>? {
@@ -178,12 +258,16 @@ private class LoopTransformer(val oldLoopToNewLoop: MutableMap<IrLoop, IrLoop>) 
     val initializers = mutableListOf<IrVariable>()
     // all block statements but the last one should be temporary variable definitions.
     for (i in 0 until blockStatements.size - 1) {
-      val s = blockStatements[i]
-      if (s !is IrVariable || s.origin != IrDeclarationOrigin.IR_TEMPORARY_VARIABLE) {
+      val variable =
+        (blockStatements[i] as? IrVariable)?.takeIf {
+          it.origin == IrDeclarationOrigin.IR_TEMPORARY_VARIABLE ||
+            it.origin == IrDeclarationOrigin.FOR_LOOP_ITERATOR
+        }
+      if (variable == null) {
         // unexpected statement
         return null
       }
-      initializers += s
+      initializers += variable
     }
 
     return initializers
@@ -241,10 +325,18 @@ private class LoopTransformer(val oldLoopToNewLoop: MutableMap<IrLoop, IrLoop>) 
     return true
   }
 
+  private fun extractIterableExpression(expression: IrExpression?): IrExpression? =
+    // Extract the iterable type based on the qualifier of the iterator() call. We also need to
+    // check that it actually implements the Iterable type as Kotlin allows for..in loops over any
+    // type that merely looks like an iterable, even if only via extension functions.
+    (expression as? IrCall)
+      ?.takeIf { it.symbol.owner.overrides(iterableIteratorFunction) }
+      ?.dispatchReceiver
+
   private data class InnerLoopBody(
     val loopVariablesDefinitions: MutableList<IrVariable>,
-    val inductionVariableUpdate: IrSetValue,
-    val originalLoopBody: IrContainerExpression
+    val inductionVariableUpdate: IrSetValue?,
+    val originalLoopBody: IrContainerExpression,
   )
 
   private fun extractAndSplitInnerLoopBody(enclosingBlock: IrBlock): InnerLoopBody? {
@@ -264,7 +356,7 @@ private class LoopTransformer(val oldLoopToNewLoop: MutableMap<IrLoop, IrLoop>) 
     // such optimization in the future.
     val statements = innerLoopBody.statements
 
-    if (statements.size < 3) {
+    if (statements.size < 2) {
       return null
     }
 
@@ -283,10 +375,6 @@ private class LoopTransformer(val oldLoopToNewLoop: MutableMap<IrLoop, IrLoop>) 
         }
         else -> return null // unexpected statement
       }
-    }
-
-    if (inductionVariableUpdate == null) {
-      return null
     }
 
     val originalLoopBody = statements.last() as? IrContainerExpression ?: return null
