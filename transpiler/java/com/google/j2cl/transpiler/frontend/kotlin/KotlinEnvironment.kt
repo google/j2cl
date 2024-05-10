@@ -485,6 +485,14 @@ class KotlinEnvironment(
       resolvedFunctionDeclaration =
         (functionDeclaration as IrSimpleFunction).resolveFakeOverride(allowAbstract = true)!!
 
+      // Remap type parameters from the fake override function to the resolved function.
+      cumulativeTypeArgumentsByTypeParameter =
+        resolveTypeParametersForFunction(
+          cumulativeTypeArgumentsByTypeParameter,
+          functionDeclaration,
+          resolvedFunctionDeclaration,
+        )
+
       // Since the resolved target has lost all parameterization, compute all the type variable
       // assignments up the hierarchy.
       cumulativeTypeArgumentsByTypeParameter =
@@ -506,6 +514,22 @@ class KotlinEnvironment(
     return MethodDescriptor.Builder.from(methodDescriptor)
       .setDeclarationDescriptor(declarationMethodDescriptor)
       .build()
+  }
+
+  private fun resolveTypeParametersForFunction(
+    originalTypeMapping: Map<IrTypeParameterSymbol, IrTypeArgument>,
+    originalFunction: IrFunction,
+    resolvedFunction: IrFunction,
+  ): Map<IrTypeParameterSymbol, IrTypeArgument> {
+    val resolvedMethodTypeParamsByIndex = resolvedFunction.typeParameters.associateBy { it.index }
+    val originalToResolvedTypeParameters =
+      originalFunction.typeParameters.associateWith { resolvedMethodTypeParamsByIndex[it.index]!! }
+
+    return originalTypeMapping.toMutableMap().apply {
+      for ((originalTypeParam, resolvedTypeParam) in originalToResolvedTypeParameters) {
+        put(resolvedTypeParam.symbol, this[originalTypeParam.symbol]!!)
+      }
+    }
   }
 
   /**
