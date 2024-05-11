@@ -17,6 +17,7 @@ package javaemul.internal;
 
 import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
@@ -60,7 +61,10 @@ public final class ThrowableUtils {
   public static class NativeError implements JsObject {
     public static boolean hasCaptureStackTraceProperty;
 
-    public static native void captureStackTrace(NativeError error);
+    @JsOverlay
+    public static void captureStackTrace(NativeError error) {
+      // No op to avoid importing the function which breaks Firefox.
+    }
 
     public String stack;
   }
