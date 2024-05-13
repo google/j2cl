@@ -2343,15 +2343,11 @@
  (param $arg0 (ref null $methodreferences.MethodReferences))
  (result i32)
  ;;@ methodreferences/MethodReferences.java:95:53
- (local $$qualifier (ref null $java.lang.Boolean))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$7))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$7) (local.get $this.untyped)))
  (block
   ;;@ methodreferences/MethodReferences.java:95:53
-  (return (block (result i32)
-   (local.set $$qualifier (call_ref $function.m_isA__java_lang_Boolean (ref.as_non_null (local.get $arg0))(struct.get $methodreferences.MethodReferences.vtable $m_isA__java_lang_Boolean (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0)))))
-   (call_ref $function.m_booleanValue__boolean (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $$qualifier))))
-  ))
+  (return (call $m_booleanValue__boolean@java.lang.Boolean (ref.as_non_null (call_ref $function.m_isA__java_lang_Boolean (ref.as_non_null (local.get $arg0))(struct.get $methodreferences.MethodReferences.vtable $m_isA__java_lang_Boolean (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0)))))))
  )
 )
 (elem declare func $m_apply__methodreferences_MethodReferences__boolean@methodreferences.MethodReferences.$LambdaImplementor$7)
@@ -2853,7 +2849,7 @@
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$12) (local.get $this.untyped)))
  (block
   ;;@ methodreferences/MethodReferences.java:105:47
-  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (call_ref $function.m_intValue__int (ref.as_non_null (local.get $arg0))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $arg0))))))
+  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $arg0)))))
  )
 )
 (elem declare func $m_apply__java_lang_Integer__arrayOf_java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$12)
@@ -3443,7 +3439,7 @@
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$18) (local.get $this.untyped)))
  (block
   ;;@ methodreferences/MethodReferences.java:116:60
-  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (call_ref $function.m_intValue__int (ref.as_non_null (local.get $arg0))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $arg0))))))
+  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $arg0)))))
  )
 )
 (elem declare func $m_apply__java_lang_Integer__arrayOf_java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$18)
