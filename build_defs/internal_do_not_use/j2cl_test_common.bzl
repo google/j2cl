@@ -171,7 +171,6 @@ def j2cl_test_common(
         compile = 0,
         platform = "CLOSURE",
         optimize_wasm = False,
-        use_wasm_stringref_spec = True,
         wasm_defs = {},
         browsers = None,
         extra_defs = [],
@@ -257,7 +256,6 @@ def j2cl_test_common(
             optimize = optimize_wasm,
             defines = wasm_defs,
             exec_properties = kwargs.get("exec_properties") or {},
-            use_stringref_spec = use_wasm_stringref_spec,
         )
 
         deps = [
