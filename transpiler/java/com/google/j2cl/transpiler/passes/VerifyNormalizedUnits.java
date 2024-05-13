@@ -30,6 +30,7 @@ import com.google.j2cl.transpiler.ast.ForEachStatement;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.InitializerBlock;
 import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
+import com.google.j2cl.transpiler.ast.JsForInStatement;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.LoopStatement;
 import com.google.j2cl.transpiler.ast.Member;
@@ -248,8 +249,26 @@ public class VerifyNormalizedUnits extends NormalizationPass {
           }
 
           @Override
-          public void exitForEachStatement(ForEachStatement continueStatement) {
+          public void exitForEachStatement(ForEachStatement forEachStatement) {
             throw new IllegalStateException();
+          }
+
+          @Override
+          public void exitJsForInStatement(JsForInStatement jsForInStatement) {
+            if (verifyForWasm) {
+              // These statements should have been entirely desugared for WASM.
+              throw new IllegalStateException();
+            }
+            // In JS all objects can be iterated over in a for-in loop, however, this will simply
+            // return the enumerable properties of the object. We should just make sure that it's a
+            // reasonable type to iterate over, and that the iteration variable is always a String.
+            checkState(!jsForInStatement.getIterableExpression().getTypeDescriptor().isPrimitive());
+            checkState(
+                jsForInStatement
+                    .getLoopVariable()
+                    .getTypeDescriptor()
+                    .isSameBaseType(TypeDescriptors.get().javaLangString),
+                "JsForInStatement must use a String variable for iteration.");
           }
 
           @Override

@@ -560,6 +560,26 @@ public final class RuntimeMethods {
         .build();
   }
 
+  public static Expression createNumberCall(Expression stringExpression) {
+    return MethodCall.Builder.from(
+            MethodDescriptor.newBuilder()
+                .setOriginalJsInfo(
+                    JsInfo.newBuilder()
+                        .setJsMemberType(JsMemberType.METHOD)
+                        .setJsName("Number")
+                        .setJsNamespace(JsUtils.JS_PACKAGE_GLOBAL)
+                        .build())
+                .setName("Number")
+                .setStatic(true)
+                .setNative(true)
+                .setEnclosingTypeDescriptor(TypeDescriptors.get().nativeObject)
+                .setParameterTypeDescriptors(TypeDescriptors.get().javaLangString)
+                .setReturnTypeDescriptor(PrimitiveTypes.DOUBLE)
+                .build())
+        .setArguments(stringExpression)
+        .build();
+  }
+
   public static MethodCall createObjectsEqualsMethodCall(
       Expression firstArgument, Expression secondArgument) {
     MethodDescriptor equalsMethodDescriptor =

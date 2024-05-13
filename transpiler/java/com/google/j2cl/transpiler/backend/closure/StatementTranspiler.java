@@ -28,6 +28,7 @@ import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.FieldDeclarationStatement;
 import com.google.j2cl.transpiler.ast.ForStatement;
 import com.google.j2cl.transpiler.ast.IfStatement;
+import com.google.j2cl.transpiler.ast.JsForInStatement;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
@@ -37,6 +38,7 @@ import com.google.j2cl.transpiler.ast.SwitchStatement;
 import com.google.j2cl.transpiler.ast.SynchronizedStatement;
 import com.google.j2cl.transpiler.ast.ThrowStatement;
 import com.google.j2cl.transpiler.ast.TryStatement;
+import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.WhileStatement;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.util.ArrayList;
@@ -144,6 +146,24 @@ public class StatementTranspiler {
               renderSeparated(", ", forStatement.getUpdates());
               builder.append(") ");
               render(forStatement.getBody());
+            });
+        return false;
+      }
+
+      @Override
+      public boolean enterJsForInStatement(JsForInStatement jsForInStatement) {
+        builder.emitWithMapping(
+            jsForInStatement.getSourcePosition(),
+            () -> {
+              builder.append("for(");
+              renderExpression(
+                  VariableDeclarationExpression.newBuilder()
+                      .addVariableDeclarations(jsForInStatement.getLoopVariable())
+                      .build());
+              builder.append(" in ");
+              renderExpression(jsForInStatement.getIterableExpression());
+              builder.append(") ");
+              render(jsForInStatement.getBody());
             });
         return false;
       }

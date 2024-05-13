@@ -48,6 +48,7 @@ import com.google.j2cl.transpiler.ast.Invocation;
 import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
 import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.JsDocExpression;
+import com.google.j2cl.transpiler.ast.JsForInStatement;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.Literal;
 import com.google.j2cl.transpiler.ast.LocalClassDeclarationStatement;
@@ -496,6 +497,22 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     }
 
     return ForEachStatement.Builder.from(forEachStatement)
+        .setIterableExpression(iterableExpression)
+        .build();
+  }
+
+  @Override
+  public JsForInStatement rewriteJsForInStatement(JsForInStatement forInStatement) {
+    Expression expression = forInStatement.getIterableExpression();
+    Expression iterableExpression =
+        contextRewriter.rewriteNonNullTypeConversionContext(
+            expression.getTypeDescriptor(), expression.getDeclaredTypeDescriptor(), expression);
+
+    if (iterableExpression == forInStatement.getIterableExpression()) {
+      return forInStatement;
+    }
+
+    return JsForInStatement.Builder.from(forInStatement)
         .setIterableExpression(iterableExpression)
         .build();
   }

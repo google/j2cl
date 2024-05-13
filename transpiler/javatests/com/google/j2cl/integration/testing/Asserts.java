@@ -62,6 +62,23 @@ public class Asserts extends AssertsBase {
     }
   }
 
+  public static void assertEquals(int[] expected, int[] actual) {
+    assertEquals(
+        getFailureMessage(expected, actual, "should have the same length as"),
+        expected.length,
+        actual.length);
+
+    for (int i = 0; i < expected.length; i++) {
+      assertEquals(
+          "Mismatch at array element ["
+              + i
+              + "]:"
+              + getEqualsDefaultFailureMessage(expected, actual),
+          expected[i],
+          actual[i]);
+    }
+  }
+
   public static void assertEquals(byte[] expected, byte[] actual) {
     assertEquals(
         getFailureMessage(expected, actual, "should have the same length as"),

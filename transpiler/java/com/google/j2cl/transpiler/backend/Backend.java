@@ -151,6 +151,7 @@ import com.google.j2cl.transpiler.passes.OptimizeEnums;
 import com.google.j2cl.transpiler.passes.OptimizeImplicitConstructors;
 import com.google.j2cl.transpiler.passes.OptimizeImplicitSuperCalls;
 import com.google.j2cl.transpiler.passes.OptimizeKotlinCompanions;
+import com.google.j2cl.transpiler.passes.OptimizeXplatForEach;
 import com.google.j2cl.transpiler.passes.PropagateCompileTimeConstants;
 import com.google.j2cl.transpiler.passes.PropagateConstants;
 import com.google.j2cl.transpiler.passes.PropagateJsEnumConstants;
