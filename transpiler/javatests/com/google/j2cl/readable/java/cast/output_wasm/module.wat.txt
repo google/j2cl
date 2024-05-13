@@ -1689,34 +1689,66 @@
  ;;@ cast/CastPrimitives.java:85:14
  (local $o (ref null $java.lang.Object))
  (local $bool i32)
+ (local $$qualifier (ref null $java.lang.Boolean))
  (local $b i32)
+ (local $$qualifier_1 (ref null $java.lang.Byte))
  (local $c i32)
+ (local $$qualifier_2 (ref null $java.lang.Character))
  (local $s i32)
+ (local $$qualifier_3 (ref null $java.lang.Short))
  (local $i i32)
+ (local $$qualifier_4 (ref null $java.lang.Integer))
  (local $l i64)
+ (local $$qualifier_5 (ref null $java.lang.Long))
  (local $f f32)
+ (local $$qualifier_6 (ref null $java.lang.Float))
  (local $d f64)
+ (local $$qualifier_7 (ref null $java.lang.Double))
  (local $this (ref null $cast.CastPrimitives))
  (local.set $this (ref.cast (ref $cast.CastPrimitives) (local.get $this.untyped)))
  (block
   ;;@ cast/CastPrimitives.java:86:4
   (local.set $o (call $$create__@java.lang.Object ))
   ;;@ cast/CastPrimitives.java:87:4
-  (local.set $bool (call $m_booleanValue__boolean@java.lang.Boolean (ref.as_non_null (ref.cast (ref null $java.lang.Boolean) (local.get $o)))))
+  (local.set $bool (block (result i32)
+   (local.set $$qualifier (ref.cast (ref null $java.lang.Boolean) (local.get $o)))
+   (call_ref $function.m_booleanValue__boolean (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $$qualifier))))
+  ))
   ;;@ cast/CastPrimitives.java:88:4
-  (local.set $b (call $m_byteValue__byte@java.lang.Byte (ref.as_non_null (ref.cast (ref null $java.lang.Byte) (local.get $o)))))
+  (local.set $b (block (result i32)
+   (local.set $$qualifier_1 (ref.cast (ref null $java.lang.Byte) (local.get $o)))
+   (call_ref $function.m_byteValue__byte (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.Byte.vtable $m_byteValue__byte (struct.get $java.lang.Byte $vtable(local.get $$qualifier_1))))
+  ))
   ;;@ cast/CastPrimitives.java:89:4
-  (local.set $c (call $m_charValue__char@java.lang.Character (ref.as_non_null (ref.cast (ref null $java.lang.Character) (local.get $o)))))
+  (local.set $c (block (result i32)
+   (local.set $$qualifier_2 (ref.cast (ref null $java.lang.Character) (local.get $o)))
+   (call_ref $function.m_charValue__char (ref.as_non_null (local.get $$qualifier_2))(struct.get $java.lang.Character.vtable $m_charValue__char (struct.get $java.lang.Character $vtable(local.get $$qualifier_2))))
+  ))
   ;;@ cast/CastPrimitives.java:90:4
-  (local.set $s (call $m_shortValue__short@java.lang.Short (ref.as_non_null (ref.cast (ref null $java.lang.Short) (local.get $o)))))
+  (local.set $s (block (result i32)
+   (local.set $$qualifier_3 (ref.cast (ref null $java.lang.Short) (local.get $o)))
+   (call_ref $function.m_shortValue__short (ref.as_non_null (local.get $$qualifier_3))(struct.get $java.lang.Short.vtable $m_shortValue__short (struct.get $java.lang.Short $vtable(local.get $$qualifier_3))))
+  ))
   ;;@ cast/CastPrimitives.java:91:4
-  (local.set $i (call $m_intValue__int@java.lang.Integer (ref.as_non_null (ref.cast (ref null $java.lang.Integer) (local.get $o)))))
+  (local.set $i (block (result i32)
+   (local.set $$qualifier_4 (ref.cast (ref null $java.lang.Integer) (local.get $o)))
+   (call_ref $function.m_intValue__int (ref.as_non_null (local.get $$qualifier_4))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_4))))
+  ))
   ;;@ cast/CastPrimitives.java:92:4
-  (local.set $l (call $m_longValue__long@java.lang.Long (ref.as_non_null (ref.cast (ref null $java.lang.Long) (local.get $o)))))
+  (local.set $l (block (result i64)
+   (local.set $$qualifier_5 (ref.cast (ref null $java.lang.Long) (local.get $o)))
+   (call_ref $function.m_longValue__long (ref.as_non_null (local.get $$qualifier_5))(struct.get $java.lang.Long.vtable $m_longValue__long (struct.get $java.lang.Long $vtable(local.get $$qualifier_5))))
+  ))
   ;;@ cast/CastPrimitives.java:93:4
-  (local.set $f (call $m_floatValue__float@java.lang.Float (ref.as_non_null (ref.cast (ref null $java.lang.Float) (local.get $o)))))
+  (local.set $f (block (result f32)
+   (local.set $$qualifier_6 (ref.cast (ref null $java.lang.Float) (local.get $o)))
+   (call_ref $function.m_floatValue__float (ref.as_non_null (local.get $$qualifier_6))(struct.get $java.lang.Float.vtable $m_floatValue__float (struct.get $java.lang.Float $vtable(local.get $$qualifier_6))))
+  ))
   ;;@ cast/CastPrimitives.java:94:4
-  (local.set $d (call $m_doubleValue__double@java.lang.Double (ref.as_non_null (ref.cast (ref null $java.lang.Double) (local.get $o)))))
+  (local.set $d (block (result f64)
+   (local.set $$qualifier_7 (ref.cast (ref null $java.lang.Double) (local.get $o)))
+   (call_ref $function.m_doubleValue__double (ref.as_non_null (local.get $$qualifier_7))(struct.get $java.lang.Double.vtable $m_doubleValue__double (struct.get $java.lang.Double $vtable(local.get $$qualifier_7))))
+  ))
  )
 )
 (elem declare func $m_testReferenceToPrimitive__void@cast.CastPrimitives)
@@ -1841,15 +1873,15 @@
   ;;@ cast/CastPrimitives.java:148:4
   (local.set $boxedByte (call $m_valueOf__byte__java_lang_Byte@java.lang.Byte (i32.const 0)))
   ;;@ cast/CastPrimitives.java:151:4
-  (local.set $s (call $m_byteValue__byte@java.lang.Byte (ref.as_non_null (local.get $boxedByte))))
+  (local.set $s (call_ref $function.m_byteValue__byte (ref.as_non_null (local.get $boxedByte))(struct.get $java.lang.Byte.vtable $m_byteValue__byte (struct.get $java.lang.Byte $vtable(local.get $boxedByte)))))
   ;;@ cast/CastPrimitives.java:152:4
-  (local.set $i (call $m_byteValue__byte@java.lang.Byte (ref.as_non_null (local.get $boxedByte))))
+  (local.set $i (call_ref $function.m_byteValue__byte (ref.as_non_null (local.get $boxedByte))(struct.get $java.lang.Byte.vtable $m_byteValue__byte (struct.get $java.lang.Byte $vtable(local.get $boxedByte)))))
   ;;@ cast/CastPrimitives.java:153:4
-  (local.set $l (i64.extend_i32_s (call $m_byteValue__byte@java.lang.Byte (ref.as_non_null (local.get $boxedByte)))))
+  (local.set $l (i64.extend_i32_s (call_ref $function.m_byteValue__byte (ref.as_non_null (local.get $boxedByte))(struct.get $java.lang.Byte.vtable $m_byteValue__byte (struct.get $java.lang.Byte $vtable(local.get $boxedByte))))))
   ;;@ cast/CastPrimitives.java:154:4
-  (local.set $f (f32.convert_i32_s (call $m_byteValue__byte@java.lang.Byte (ref.as_non_null (local.get $boxedByte)))))
+  (local.set $f (f32.convert_i32_s (call_ref $function.m_byteValue__byte (ref.as_non_null (local.get $boxedByte))(struct.get $java.lang.Byte.vtable $m_byteValue__byte (struct.get $java.lang.Byte $vtable(local.get $boxedByte))))))
   ;;@ cast/CastPrimitives.java:155:4
-  (local.set $d (f64.convert_i32_s (call $m_byteValue__byte@java.lang.Byte (ref.as_non_null (local.get $boxedByte)))))
+  (local.set $d (f64.convert_i32_s (call_ref $function.m_byteValue__byte (ref.as_non_null (local.get $boxedByte))(struct.get $java.lang.Byte.vtable $m_byteValue__byte (struct.get $java.lang.Byte $vtable(local.get $boxedByte))))))
  )
 )
 (elem declare func $m_testUnboxAndWiden__void@cast.CastPrimitives)

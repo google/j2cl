@@ -143,6 +143,7 @@
  ;;@ switchstatement/SwitchStatement.java:25:14
  (local $$expression (ref null $java.lang.Object))
  (local $$expression_1 i32)
+ (local $$qualifier (ref null $switchstatement.Numbers))
  (local $this (ref null $switchstatement.SwitchStatement))
  (local.set $this (ref.cast (ref $switchstatement.SwitchStatement) (local.get $this.untyped)))
  (block
@@ -156,8 +157,8 @@
      (block
       (block
        (block ;; evaluate expression and jump
-        (br_if 0 (call $m_equals__java_lang_Object__boolean@java.lang.String (ref.as_non_null (call $$getString_|one|__java_lang_String_<once>_@switchstatement.SwitchStatement ))(local.get $$expression)))
-        (br_if 1 (call $m_equals__java_lang_Object__boolean@java.lang.String (ref.as_non_null (call $$getString_|two|__java_lang_String_<once>_@switchstatement.SwitchStatement ))(local.get $$expression)))
+        (br_if 0 (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (call $$getString_|one|__java_lang_String_<once>_@switchstatement.SwitchStatement ))(local.get $$expression)(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(call $$getString_|one|__java_lang_String_<once>_@switchstatement.SwitchStatement )))))
+        (br_if 1 (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (call $$getString_|two|__java_lang_String_<once>_@switchstatement.SwitchStatement ))(local.get $$expression)(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(call $$getString_|two|__java_lang_String_<once>_@switchstatement.SwitchStatement )))))
         (br 2)
        )
        ;; case switchstatement.SwitchStatement.$getString_|one|():
@@ -219,10 +220,13 @@
   (block $SWITCH_3.BREAK
    (block
     ;;@ switchstatement/SwitchStatement.java:55:4
-    (local.set $$expression_1 (call $m_ordinal__int@java.lang.Enum (ref.as_non_null (block (result (ref null $switchstatement.Numbers))
-     (call $$clinit__void_<once>_@switchstatement.Numbers )
-     (global.get $ONE@switchstatement.Numbers)
-    ))))
+    (local.set $$expression_1 (block (result i32)
+     (local.set $$qualifier (block (result (ref null $switchstatement.Numbers))
+      (call $$clinit__void_<once>_@switchstatement.Numbers )
+      (global.get $ONE@switchstatement.Numbers)
+     ))
+     (call_ref $function.m_ordinal__int (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $$qualifier))))
+    ))
     ;;@ switchstatement/SwitchStatement.java:55:4
     (block
      (block
@@ -1188,7 +1192,7 @@
   (block $SWITCH.BREAK
    (block
     ;;@ switchstatement/SwitchStatement.java:412:4
-    (local.set $$expression (call $m_ordinal__int@java.lang.Enum (ref.as_non_null (local.get $numbers))))
+    (local.set $$expression (call_ref $function.m_ordinal__int (ref.as_non_null (local.get $numbers))(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $numbers)))))
     ;;@ switchstatement/SwitchStatement.java:412:4
     (block
      (block
@@ -1221,7 +1225,7 @@
   (block $SWITCH.BREAK
    (block
     ;;@ switchstatement/SwitchStatement.java:422:4
-    (local.set $$expression (call $m_ordinal__int@java.lang.Enum (ref.as_non_null (local.get $numbers))))
+    (local.set $$expression (call_ref $function.m_ordinal__int (ref.as_non_null (local.get $numbers))(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $numbers)))))
     ;;@ switchstatement/SwitchStatement.java:422:4
     (block
      (block

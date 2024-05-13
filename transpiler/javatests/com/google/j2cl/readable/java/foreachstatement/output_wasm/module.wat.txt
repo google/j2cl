@@ -417,6 +417,7 @@
  (local $anotherIterable (ref null $foreachstatement.ForEachStatement.IterableReturningTypeVariable))
  (local $$iterator_1 (ref null $java.lang.Object))
  (local $s_1 i32)
+ (local $$qualifier_1 (ref null $java.lang.Integer))
  (block
   ;;@ foreachstatement/ForEachStatement.java:60:4
   (local.set $iterable (ref.null $java.lang.Object))
@@ -447,7 +448,10 @@
     (block $LOOP_1.CONTINUE
      (block
       ;;@ foreachstatement/ForEachStatement.java:64:4
-      (local.set $s_1 (call $m_intValue__int@java.lang.Integer (ref.as_non_null (ref.cast (ref null $java.lang.Integer) (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator_1))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator_1)))))))))
+      (local.set $s_1 (block (result i32)
+       (local.set $$qualifier_1 (ref.cast (ref null $java.lang.Integer) (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator_1))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator_1)))))))
+       (call_ref $function.m_intValue__int (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_1))))
+      ))
      )
     )
     (br 0)

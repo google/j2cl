@@ -52,9 +52,7 @@ public class MethodCall extends Invocation {
   public boolean isPolymorphic() {
     return getTarget().isPolymorphic()
         && !isStaticDispatch
-        && !(qualifier instanceof SuperReference)
-        && !getTarget().isFinal()
-        && !getTarget().getEnclosingTypeDescriptor().isFinal();
+        && !(qualifier instanceof SuperReference);
   }
 
   @Override

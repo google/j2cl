@@ -1925,6 +1925,8 @@
  (local $$expression_2 (ref null $javaemul.internal.Enums.BoxedIntegerEnum))
  (local $stringJsEnum (ref null $java.lang.String))
  (local $$expression_3 (ref null $java.lang.String))
+ (local $$qualifier (ref null $jsenum.Main.NativeStringEnum))
+ (local $$qualifier_1 (ref null $jsenum.Main.NativeStringEnum))
  (local $supplier (ref null $java.lang.Object))
  (local $consummer (ref null $java.lang.Object))
  (block
@@ -2014,7 +2016,7 @@
     (block
      (block
       (block ;; evaluate expression and jump
-       (br_if 0 (call $m_equals__java_lang_Object__boolean@java.lang.String (ref.as_non_null (call $$getString_|ONE|__java_lang_String_<once>_@jsenum.Main ))(local.get $$expression_3)))
+       (br_if 0 (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (call $$getString_|ONE|__java_lang_String_<once>_@jsenum.Main ))(local.get $$expression_3)(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(call $$getString_|ONE|__java_lang_String_<once>_@jsenum.Main )))))
        (br 1)
       )
       ;; case jsenum.Main.$getString_|ONE|():
@@ -2025,22 +2027,30 @@
     )
    )
   )
-  ;;@ jsenum/Main.java:136:4
-  (drop (call $m_compareTo__java_lang_Enum__int@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.NativeStringEnum))
-   (call $$clinit__void_<once>_@jsenum.Main.NativeStringEnum )
-   (global.get $ONE@jsenum.Main.NativeStringEnum)
-  ))(block (result (ref null $jsenum.Main.NativeStringEnum))
-   (call $$clinit__void_<once>_@jsenum.Main.NativeStringEnum )
-   (global.get $THREE@jsenum.Main.NativeStringEnum)
-  )))
-  ;;@ jsenum/Main.java:137:4
-  (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.NativeStringEnum))
-   (call $$clinit__void_<once>_@jsenum.Main.NativeStringEnum )
-   (global.get $ONE@jsenum.Main.NativeStringEnum)
-  ))(block (result (ref null $jsenum.Main.NativeStringEnum))
-   (call $$clinit__void_<once>_@jsenum.Main.NativeStringEnum )
-   (global.get $THREE@jsenum.Main.NativeStringEnum)
-  )))
+  (block
+   ;;@ jsenum/Main.java:136:4
+   (local.set $$qualifier (block (result (ref null $jsenum.Main.NativeStringEnum))
+    (call $$clinit__void_<once>_@jsenum.Main.NativeStringEnum )
+    (global.get $ONE@jsenum.Main.NativeStringEnum)
+   ))
+   ;;@ jsenum/Main.java:136:4
+   (drop (call_ref $function.m_compareTo__java_lang_Enum__int (ref.as_non_null (local.get $$qualifier))(block (result (ref null $jsenum.Main.NativeStringEnum))
+    (call $$clinit__void_<once>_@jsenum.Main.NativeStringEnum )
+    (global.get $THREE@jsenum.Main.NativeStringEnum)
+   )(struct.get $java.lang.Enum.vtable $m_compareTo__java_lang_Enum__int (struct.get $java.lang.Enum $vtable(local.get $$qualifier)))))
+  )
+  (block
+   ;;@ jsenum/Main.java:137:4
+   (local.set $$qualifier_1 (block (result (ref null $jsenum.Main.NativeStringEnum))
+    (call $$clinit__void_<once>_@jsenum.Main.NativeStringEnum )
+    (global.get $ONE@jsenum.Main.NativeStringEnum)
+   ))
+   ;;@ jsenum/Main.java:137:4
+   (drop (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $$qualifier_1))(block (result (ref null $jsenum.Main.NativeStringEnum))
+    (call $$clinit__void_<once>_@jsenum.Main.NativeStringEnum )
+    (global.get $THREE@jsenum.Main.NativeStringEnum)
+   )(struct.get $java.lang.Enum.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Enum $vtable(local.get $$qualifier_1)))))
+  )
   ;;@ jsenum/Main.java:139:4
   (local.set $supplier (call $$create__@jsenum.Main.$LambdaImplementor$1 ))
   ;;@ jsenum/Main.java:140:4
@@ -2060,7 +2070,13 @@
  (local $jsEnum i32)
  (local $nullJsEnum i32)
  (local $o (ref null $java.lang.Object))
- (local $$qualifier (ref null $javaemul.internal.Enums.BoxedComparableIntegerEnum))
+ (local $$qualifier (ref null $javaemul.internal.Enums.BoxedStringEnum))
+ (local $$qualifier_1 (ref null $javaemul.internal.Enums.BoxedStringEnum))
+ (local $$qualifier_2 (ref null $javaemul.internal.Enums.BoxedComparableIntegerEnum))
+ (local $$qualifier_3 (ref null $javaemul.internal.Enums.BoxedComparableIntegerEnum))
+ (local $$qualifier_4 (ref null $javaemul.internal.Enums.BoxedComparableIntegerEnum))
+ (local $$qualifier_5 (ref null $javaemul.internal.Enums.BoxedStringEnum))
+ (local $$qualifier_6 (ref null $javaemul.internal.Enums.BoxedComparableIntegerEnum))
  (block
   ;;@ jsenum/Main.java:147:4
   (local.set $stringJsEnum (call $$getString_|ONE|__java_lang_String_<once>_@jsenum.Main ))
@@ -2078,19 +2094,27 @@
   (drop (call $m_equalsString__java_lang_String__java_lang_String__boolean@javaemul.internal.Enums (ref.cast (ref null $java.lang.String) (call $$getString_|ONE|__java_lang_String_<once>_@jsenum.Main ))(ref.cast (ref null $java.lang.String) (local.get $stringJsEnum))))
   ;;@ jsenum/Main.java:155:4
   (drop (call $m_equalsString__java_lang_String__java_lang_String__boolean@javaemul.internal.Enums (ref.cast (ref null $java.lang.String) (call $$getString_|ONE|__java_lang_String_<once>_@jsenum.Main ))(ref.cast (ref null $java.lang.String) (local.get $nullStringJsEnum))))
-  ;;@ jsenum/Main.java:156:4
-  (drop (call $m_equals__java_lang_Object__boolean@java.lang.Object (ref.as_non_null (call $m_boxString__java_lang_String__java_lang_Class__javaemul_internal_Enums_BoxedStringEnum@javaemul.internal.Enums (call $$getString_|ONE|__java_lang_String_<once>_@jsenum.Main )(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.StringJsEnum.$Overlay )))(ref.null $java.lang.Object)))
-  ;;@ jsenum/Main.java:157:4
-  (drop (call $m_equals__java_lang_Object__boolean@java.lang.Object (ref.as_non_null (call $m_boxString__java_lang_String__java_lang_Class__javaemul_internal_Enums_BoxedStringEnum@javaemul.internal.Enums (call $$getString_|ONE|__java_lang_String_<once>_@jsenum.Main )(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.StringJsEnum.$Overlay )))(local.get $o)))
+  (block
+   ;;@ jsenum/Main.java:156:4
+   (local.set $$qualifier (call $m_boxString__java_lang_String__java_lang_Class__javaemul_internal_Enums_BoxedStringEnum@javaemul.internal.Enums (call $$getString_|ONE|__java_lang_String_<once>_@jsenum.Main )(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.StringJsEnum.$Overlay )))
+   ;;@ jsenum/Main.java:156:4
+   (drop (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $$qualifier))(ref.null $java.lang.Object)(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(local.get $$qualifier)))))
+  )
+  (block
+   ;;@ jsenum/Main.java:157:4
+   (local.set $$qualifier_1 (call $m_boxString__java_lang_String__java_lang_Class__javaemul_internal_Enums_BoxedStringEnum@javaemul.internal.Enums (call $$getString_|ONE|__java_lang_String_<once>_@jsenum.Main )(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.StringJsEnum.$Overlay )))
+   ;;@ jsenum/Main.java:157:4
+   (drop (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $$qualifier_1))(local.get $o)(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(local.get $$qualifier_1)))))
+  )
   ;;@ jsenum/Main.java:158:4
   (drop (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $o))(call $m_boxString__java_lang_String__java_lang_Class__javaemul_internal_Enums_BoxedStringEnum@javaemul.internal.Enums (call $$getString_|THREE|__java_lang_String_<once>_@jsenum.Main )(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.StringJsEnum.$Overlay ))(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(local.get $o)))))
   ;;@ jsenum/Main.java:160:4
   (drop (call $m_compareToInteger__int__int__int@javaemul.internal.Enums (i32.const 1)(i32.const 0)))
   (block
    ;;@ jsenum/Main.java:161:4
-   (local.set $$qualifier (call $m_boxComparableInteger__int__java_lang_Class__javaemul_internal_Enums_BoxedComparableIntegerEnum@javaemul.internal.Enums (i32.const 1)(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.ComparableJsEnum.$Overlay )))
+   (local.set $$qualifier_2 (call $m_boxComparableInteger__int__java_lang_Class__javaemul_internal_Enums_BoxedComparableIntegerEnum@javaemul.internal.Enums (i32.const 1)(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.ComparableJsEnum.$Overlay )))
    ;;@ jsenum/Main.java:161:4
-   (drop (call_ref $function.m_compareTo__java_lang_Object__int (ref.as_non_null (local.get $$qualifier))(ref.null $java.lang.Object)(struct.get $javaemul.internal.Enums.BoxedComparableIntegerEnum.vtable $m_compareTo__java_lang_Object__int (struct.get $javaemul.internal.Enums.BoxedComparableIntegerEnum $vtable(local.get $$qualifier)))))
+   (drop (call_ref $function.m_compareTo__java_lang_Object__int (ref.as_non_null (local.get $$qualifier_2))(ref.null $java.lang.Object)(struct.get $javaemul.internal.Enums.BoxedComparableIntegerEnum.vtable $m_compareTo__java_lang_Object__int (struct.get $javaemul.internal.Enums.BoxedComparableIntegerEnum $vtable(local.get $$qualifier_2)))))
   )
   ;;@ jsenum/Main.java:162:4
   (drop (call $m_equalsInteger__int__int__boolean@javaemul.internal.Enums (i32.const 1)(i32.const 0)))
@@ -2098,18 +2122,34 @@
   (drop (call $m_equalsInteger__int__int__boolean@javaemul.internal.Enums (i32.const 1)(local.get $jsEnum)))
   ;;@ jsenum/Main.java:164:4
   (drop (call $m_equalsInteger__int__int__boolean@javaemul.internal.Enums (i32.const 1)(local.get $nullJsEnum)))
-  ;;@ jsenum/Main.java:165:4
-  (drop (call $m_equals__java_lang_Object__boolean@java.lang.Object (ref.as_non_null (call $m_boxComparableInteger__int__java_lang_Class__javaemul_internal_Enums_BoxedComparableIntegerEnum@javaemul.internal.Enums (i32.const 1)(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.ComparableJsEnum.$Overlay )))(ref.null $java.lang.Object)))
-  ;;@ jsenum/Main.java:166:4
-  (drop (call $m_equals__java_lang_Object__boolean@java.lang.Object (ref.as_non_null (call $m_boxComparableInteger__int__java_lang_Class__javaemul_internal_Enums_BoxedComparableIntegerEnum@javaemul.internal.Enums (i32.const 1)(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.ComparableJsEnum.$Overlay )))(local.get $o)))
+  (block
+   ;;@ jsenum/Main.java:165:4
+   (local.set $$qualifier_3 (call $m_boxComparableInteger__int__java_lang_Class__javaemul_internal_Enums_BoxedComparableIntegerEnum@javaemul.internal.Enums (i32.const 1)(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.ComparableJsEnum.$Overlay )))
+   ;;@ jsenum/Main.java:165:4
+   (drop (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $$qualifier_3))(ref.null $java.lang.Object)(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(local.get $$qualifier_3)))))
+  )
+  (block
+   ;;@ jsenum/Main.java:166:4
+   (local.set $$qualifier_4 (call $m_boxComparableInteger__int__java_lang_Class__javaemul_internal_Enums_BoxedComparableIntegerEnum@javaemul.internal.Enums (i32.const 1)(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.ComparableJsEnum.$Overlay )))
+   ;;@ jsenum/Main.java:166:4
+   (drop (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $$qualifier_4))(local.get $o)(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(local.get $$qualifier_4)))))
+  )
   ;;@ jsenum/Main.java:167:4
   (drop (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $o))(call $m_boxComparableInteger__int__java_lang_Class__javaemul_internal_Enums_BoxedComparableIntegerEnum@javaemul.internal.Enums (i32.const 0)(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.ComparableJsEnum.$Overlay ))(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(local.get $o)))))
-  ;;@ jsenum/Main.java:169:4
-  (drop (call $m_equals__java_lang_Object__boolean@java.lang.Object (ref.as_non_null (call $m_boxString__java_lang_String__java_lang_Class__javaemul_internal_Enums_BoxedStringEnum@javaemul.internal.Enums (call $$getString_|ONE|__java_lang_String_<once>_@jsenum.Main )(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.StringJsEnum.$Overlay )))(call $m_boxComparableInteger__int__java_lang_Class__javaemul_internal_Enums_BoxedComparableIntegerEnum@javaemul.internal.Enums (local.get $jsEnum)(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.ComparableJsEnum.$Overlay ))))
+  (block
+   ;;@ jsenum/Main.java:169:4
+   (local.set $$qualifier_5 (call $m_boxString__java_lang_String__java_lang_Class__javaemul_internal_Enums_BoxedStringEnum@javaemul.internal.Enums (call $$getString_|ONE|__java_lang_String_<once>_@jsenum.Main )(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.StringJsEnum.$Overlay )))
+   ;;@ jsenum/Main.java:169:4
+   (drop (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $$qualifier_5))(call $m_boxComparableInteger__int__java_lang_Class__javaemul_internal_Enums_BoxedComparableIntegerEnum@javaemul.internal.Enums (local.get $jsEnum)(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.ComparableJsEnum.$Overlay ))(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(local.get $$qualifier_5)))))
+  )
   ;;@ jsenum/Main.java:171:4
   (drop (call $m_equalsInteger__int__int__boolean@javaemul.internal.Enums (call $m_unboxInteger__java_lang_Object__java_lang_Class__int@javaemul.internal.Enums (call $m_boxingPassthrough__java_lang_Object__java_lang_Object@jsenum.Main (call $m_boxComparableInteger__int__java_lang_Class__javaemul_internal_Enums_BoxedComparableIntegerEnum@javaemul.internal.Enums (i32.const 1)(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.ComparableJsEnum.$Overlay )))(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.ComparableJsEnum.$Overlay ))(call $m_unboxInteger__java_lang_Object__java_lang_Class__int@javaemul.internal.Enums (call $m_boxingPassthrough__java_lang_Object__java_lang_Object@jsenum.Main (call $m_boxComparableInteger__int__java_lang_Class__javaemul_internal_Enums_BoxedComparableIntegerEnum@javaemul.internal.Enums (i32.const 1)(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.ComparableJsEnum.$Overlay )))(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.ComparableJsEnum.$Overlay ))))
-  ;;@ jsenum/Main.java:172:4
-  (drop (call $m_equals__java_lang_Object__boolean@java.lang.Object (ref.as_non_null (call $m_boxComparableInteger__int__java_lang_Class__javaemul_internal_Enums_BoxedComparableIntegerEnum@javaemul.internal.Enums (call $m_unboxInteger__java_lang_Object__java_lang_Class__int@javaemul.internal.Enums (call $m_boxingPassthrough__java_lang_Object__java_lang_Object@jsenum.Main (call $m_boxComparableInteger__int__java_lang_Class__javaemul_internal_Enums_BoxedComparableIntegerEnum@javaemul.internal.Enums (i32.const 1)(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.ComparableJsEnum.$Overlay )))(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.ComparableJsEnum.$Overlay ))(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.ComparableJsEnum.$Overlay )))(call $m_boxString__java_lang_String__java_lang_Class__javaemul_internal_Enums_BoxedStringEnum@javaemul.internal.Enums (call $m_unboxString__java_lang_Object__java_lang_Class__java_lang_String@javaemul.internal.Enums (call $m_boxingPassthrough__java_lang_Object__java_lang_Object@jsenum.Main (call $m_boxString__java_lang_String__java_lang_Class__javaemul_internal_Enums_BoxedStringEnum@javaemul.internal.Enums (call $$getString_|ONE|__java_lang_String_<once>_@jsenum.Main )(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.StringJsEnum.$Overlay )))(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.StringJsEnum.$Overlay ))(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.StringJsEnum.$Overlay ))))
+  (block
+   ;;@ jsenum/Main.java:172:4
+   (local.set $$qualifier_6 (call $m_boxComparableInteger__int__java_lang_Class__javaemul_internal_Enums_BoxedComparableIntegerEnum@javaemul.internal.Enums (call $m_unboxInteger__java_lang_Object__java_lang_Class__int@javaemul.internal.Enums (call $m_boxingPassthrough__java_lang_Object__java_lang_Object@jsenum.Main (call $m_boxComparableInteger__int__java_lang_Class__javaemul_internal_Enums_BoxedComparableIntegerEnum@javaemul.internal.Enums (i32.const 1)(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.ComparableJsEnum.$Overlay )))(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.ComparableJsEnum.$Overlay ))(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.ComparableJsEnum.$Overlay )))
+   ;;@ jsenum/Main.java:172:4
+   (drop (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $$qualifier_6))(call $m_boxString__java_lang_String__java_lang_Class__javaemul_internal_Enums_BoxedStringEnum@javaemul.internal.Enums (call $m_unboxString__java_lang_Object__java_lang_Class__java_lang_String@javaemul.internal.Enums (call $m_boxingPassthrough__java_lang_Object__java_lang_Object@jsenum.Main (call $m_boxString__java_lang_String__java_lang_Class__javaemul_internal_Enums_BoxedStringEnum@javaemul.internal.Enums (call $$getString_|ONE|__java_lang_String_<once>_@jsenum.Main )(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.StringJsEnum.$Overlay )))(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.StringJsEnum.$Overlay ))(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.StringJsEnum.$Overlay ))(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(local.get $$qualifier_6)))))
+  )
  )
 )
 

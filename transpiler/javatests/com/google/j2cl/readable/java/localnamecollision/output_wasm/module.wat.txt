@@ -415,11 +415,16 @@
  (type $function.m_main__void)
  (param $this.untyped (ref $java.lang.Object))
  ;;@ localnamecollision/Class.java:19:14
+ (local $$qualifier (ref null $localnamecollision.Class))
  (local $this (ref null $localnamecollision.Class))
  (local.set $this (ref.cast (ref $localnamecollision.Class) (local.get $this.untyped)))
  (block
-  ;;@ localnamecollision/Class.java:20:4
-  (drop (call $m_getClass__java_lang_Class@java.lang.Object (ref.as_non_null (call $$create_$private__@localnamecollision.Class ))))
+  (block
+   ;;@ localnamecollision/Class.java:20:4
+   (local.set $$qualifier (call $$create_$private__@localnamecollision.Class ))
+   ;;@ localnamecollision/Class.java:20:4
+   (drop (call_ref $function.m_getClass__java_lang_Class (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Object.vtable $m_getClass__java_lang_Class (struct.get $java.lang.Object $vtable(local.get $$qualifier)))))
+  )
  )
 )
 (elem declare func $m_main__void@localnamecollision.Class)

@@ -621,7 +621,7 @@
  (local.set $this (ref.cast (ref $overwrittentypevariables.HashFunctions.2) (local.get $this.untyped)))
  (block
   ;;@ overwrittentypevariables/HashFunctions.java:38:8
-  (return (call $m_valueOf__int__java_lang_String@java.lang.String (call $m_ordinal__int@java.lang.Enum (ref.as_non_null (local.get $input)))))
+  (return (call $m_valueOf__int__java_lang_String@java.lang.String (call_ref $function.m_ordinal__int (ref.as_non_null (local.get $input))(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $input))))))
  )
 )
 (elem declare func $m_apply__java_lang_Enum__java_lang_String@overwrittentypevariables.HashFunctions.2)
