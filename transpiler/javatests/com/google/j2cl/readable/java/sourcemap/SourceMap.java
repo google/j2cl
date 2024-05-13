@@ -108,6 +108,10 @@ abstract class SourceMap<T extends Number> implements Comparator<T> {
     Supplier<Integer> f2 = new ArrayList()::size;
   }
 
+  private void testLocalClass() {
+    class LocalClass {}
+  }
+
   enum Enum1 {
     VALUE1(),
     VALUE2(),
