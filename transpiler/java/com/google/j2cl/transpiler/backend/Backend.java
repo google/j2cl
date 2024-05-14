@@ -210,6 +210,8 @@ public enum Backend {
           ConvertMethodReferencesToLambdas::new,
           ErasePackagedJsEnumVarargs::new,
           ResolveImplicitInstanceQualifiers::new,
+          // Must be run before NormalizeForEachStatement.
+          OptimizeXplatForEach::new,
           () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ true),
           RestoreVariableScoping::new,
           NormalizeSuperMemberReferences::new,
