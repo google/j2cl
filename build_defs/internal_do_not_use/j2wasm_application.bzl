@@ -455,8 +455,6 @@ def j2wasm_application(name, defines = dict(), **kwargs):
 
     transpiler_args = kwargs.pop("internal_transpiler_args", [])
 
-    use_stringref_spec = kwargs.pop("use_stringref_spec", False)
-
     _j2wasm_application(
         name = name,
         binaryen_args = [
@@ -519,8 +517,8 @@ def j2wasm_application(name, defines = dict(), **kwargs):
             "-O3",
             "--optimize-j2cl",
 
-            # Re-inline string.const globals and follow up clean-ups
-            "--propagate-globals-globally" if use_stringref_spec else "--string-lowering",
+            # Final clean-ups.
+            "--string-lowering",
             "--remove-unused-module-elements",
             "--reorder-globals",
 
@@ -534,14 +532,12 @@ def j2wasm_application(name, defines = dict(), **kwargs):
     _j2wasm_application(
         name = name + "_dev",
         binaryen_args = [
-                            "--debuginfo",
-                            "--intrinsic-lowering",
-                        ] +
-                        ([] if use_stringref_spec else ["--string-lowering"]) +
-                        [
-                            # Remove the intrinsic import declarations which are not removed by lowering itself.
-                            "--remove-unused-module-elements",
-                        ],
+            "--debuginfo",
+            "--intrinsic-lowering",
+            "--string-lowering",
+            # Remove the intrinsic import declarations which are not removed by lowering itself.
+            "--remove-unused-module-elements",
+        ],
         transpiler_args = transpiler_args,
         defines = ["%s=%s" % (k, v) for (k, v) in dev_defines.items()],
         **kwargs
