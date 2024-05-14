@@ -16,14 +16,30 @@ class Enum1 extends Enum {
  constructor() {
   super();
  }
+ //Factory method corresponding to constructor 'Enum1(String, int)'.
  /** @nodts @return {!Enum1} */
  static $create__java_lang_String__int(/** ?string */ $name, /** number */ $ordinal) {
   let $instance = new Enum1();
   $instance.$ctor__sourcemap_SourceMap_Enum1__java_lang_String__int__void($name, $ordinal);
   return $instance;
  }
+ //Initialization from constructor 'Enum1(String, int)'.
  /** @nodts */
  $ctor__sourcemap_SourceMap_Enum1__java_lang_String__int__void(/** ?string */ $name, /** number */ $ordinal) {
+  this.f_name__java_lang_Enum_ = $name;
+  this.f_ordinal__java_lang_Enum_ = $ordinal;
+  this.$ctor__java_lang_Enum__java_lang_String__int__void($name, $ordinal);
+ }
+ //Factory method corresponding to constructor 'Enum1(String, int, int)'.
+ /** @nodts @return {!Enum1} */
+ static $create__java_lang_String__int__int(/** ?string */ $name, /** number */ $ordinal, /** number */ i) {
+  let $instance = new Enum1();
+  $instance.$ctor__sourcemap_SourceMap_Enum1__java_lang_String__int__int__void($name, $ordinal, i);
+  return $instance;
+ }
+ //Initialization from constructor 'Enum1(String, int, int)'.
+ /** @nodts */
+ $ctor__sourcemap_SourceMap_Enum1__java_lang_String__int__int__void(/** ?string */ $name, /** number */ $ordinal, /** number */ i) {
   this.f_name__java_lang_Enum_ = $name;
   this.f_ordinal__java_lang_Enum_ = $ordinal;
   this.$ctor__java_lang_Enum__java_lang_String__int__void($name, $ordinal);
@@ -70,7 +86,7 @@ Enum1.f_VALUE1__sourcemap_SourceMap_Enum1 = /**@pureOrBreakMyCode*/ Enum1.$creat
 /**@const {!Enum1} @nodts*/
 Enum1.f_VALUE2__sourcemap_SourceMap_Enum1 = /**@pureOrBreakMyCode*/ Enum1.$create__java_lang_String__int($Util.$makeEnumName('VALUE2'), Enum1.$ordinal_VALUE2__sourcemap_SourceMap_Enum1);
 /**@const {!Enum1} @nodts*/
-Enum1.f_VALUE3__sourcemap_SourceMap_Enum1 = /**@pureOrBreakMyCode*/ Enum1.$create__java_lang_String__int($Util.$makeEnumName('VALUE3'), Enum1.$ordinal_VALUE3__sourcemap_SourceMap_Enum1);
+Enum1.f_VALUE3__sourcemap_SourceMap_Enum1 = /**@pureOrBreakMyCode*/ Enum1.$create__java_lang_String__int__int($Util.$makeEnumName('VALUE3'), Enum1.$ordinal_VALUE3__sourcemap_SourceMap_Enum1, 1);
 /**@type {Map<?string, !Enum1>} @nodts*/
 Enum1.f_namesToValuesMap__sourcemap_SourceMap_Enum1_;
 $Util.$setClassMetadataForEnum(Enum1, 'sourcemap.SourceMap$Enum1');

@@ -113,8 +113,12 @@ abstract class SourceMap<T extends Number> implements Comparator<T> {
   }
 
   enum Enum1 {
-    VALUE1(),
+    VALUE1,
     VALUE2(),
-    VALUE3();
+    VALUE3(1);
+
+    Enum1() {}
+
+    Enum1(int i) {}
   }
 }
