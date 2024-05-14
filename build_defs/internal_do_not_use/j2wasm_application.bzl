@@ -4,7 +4,7 @@ Takes Java source, translates it into Wasm.
 This is an experimental tool and should not be used.
 """
 
-load(":j2cl_js_common.bzl", "J2CL_JS_TOOLCHAIN_ATTRS", "create_wasm_js_lib_struct", "j2cl_js_provider")
+load(":j2cl_js_common.bzl", "J2CL_JS_TOOLCHAIN_ATTRS", "j2cl_js_provider")
 load(":provider.bzl", "J2wasmInfo")
 
 # Template for the generated JS imports file.
@@ -306,23 +306,20 @@ def _impl_j2wasm_application(ctx):
         deps = [d[J2wasmInfo]._private_.js_info for d in deps],
     )
 
-    return create_wasm_js_lib_struct(
-        js_info = js_info,
-        extra_providers =
-            [
-                DefaultInfo(
-                    files = depset([
-                        ctx.outputs.wat,
-                        ctx.outputs.wasm,
-                        ctx.outputs.srcmap,
-                        ctx.outputs.jsimports,
-                        ctx.outputs.symbolmap,
-                    ]),
-                    data_runfiles = ctx.runfiles(files = runfiles),
-                ),
-                OutputGroupInfo(_validation = _trigger_javac_build(ctx.attr.deps)),
-            ],
-    )
+    return [
+        js_info,
+        DefaultInfo(
+            files = depset([
+                ctx.outputs.wat,
+                ctx.outputs.wasm,
+                ctx.outputs.srcmap,
+                ctx.outputs.jsimports,
+                ctx.outputs.symbolmap,
+            ]),
+            data_runfiles = ctx.runfiles(files = runfiles),
+        ),
+        OutputGroupInfo(_validation = _trigger_javac_build(ctx.attr.deps)),
+    ]
 
 def _get_transitive_srcs(deps):
     return depset(transitive = [d[J2wasmInfo]._private_.transitive_srcs for d in deps])

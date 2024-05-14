@@ -3,7 +3,7 @@
 load("@rules_java//java:defs.bzl", "java_common")
 
 load("@bazel_skylib//rules:common_settings.bzl", "BuildSettingInfo")
-load(":j2cl_js_common.bzl", "J2CL_JS_TOOLCHAIN_ATTRS", "create_js_lib_struct", "j2cl_js_provider")
+load(":j2cl_js_common.bzl", "J2CL_JS_TOOLCHAIN_ATTRS", "j2cl_js_provider")
 load(":provider.bzl", "J2clInfo")
 
 def _get_jsinfo_provider(j2cl_info):
@@ -328,6 +328,9 @@ def _j2cl_transpile(
         mnemonic = "J2cl" if backend == "CLOSURE" else "J2wasm",
     )
 
+def _create_js_lib_struct(j2cl_info, extra_providers = []):
+    return [j2cl_info, j2cl_info._private_.js_info] + extra_providers
+
 DEFAULT_J2CL_JAVAC_OPTS = [
     # Avoid log site injection which introduces calls to unsupported APIs.
     "-XDinjectLogSites=false",
@@ -384,7 +387,7 @@ J2CL_TOOLCHAIN_ATTRS.update(J2CL_JS_TOOLCHAIN_ATTRS)
 
 j2cl_common = struct(
     compile = _compile,
-    create_js_lib_struct = create_js_lib_struct,
+    create_js_lib_struct = _create_js_lib_struct,
     get_jsinfo_provider = _get_jsinfo_provider,
     java_compile = _java_compile,
 )
