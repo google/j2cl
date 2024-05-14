@@ -101,7 +101,7 @@ def _j2cl_or_js_providers_of(deps):
     return [_j2cl_or_js_provider_of(d) for d in deps]
 
 def _j2cl_or_js_provider_of(dep):
-    return dep[J2clInfo] if J2clInfo in dep else dep
+    return dep[J2clInfo] if J2clInfo in dep else dep[JS_PROVIDER_NAME]
 
 def _javaplugin_providers_of(deps):
     plugin_provider = getattr(java_common, "JavaPluginInfo") if hasattr(java_common, "JavaPluginInfo") else JavaInfo

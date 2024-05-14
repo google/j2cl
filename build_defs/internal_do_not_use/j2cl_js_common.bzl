@@ -26,8 +26,7 @@ def j2cl_js_provider(ctx, srcs = [], deps = [], exports = [], artifact_suffix = 
         "JSC_UNKNOWN_EXPR_TYPE",
     ]
     suppresses = default_j2cl_suppresses + getattr(ctx.attr, "js_suppress", [])
-    deps = [d[ClosureJsLibraryInfo] if type(d) == "Target" else d for d in deps]
-    exports = [e[ClosureJsLibraryInfo] if type(e) == "Target" else e for e in exports]
+
     return create_closure_js_library(
         ctx,
         srcs,
