@@ -888,6 +888,14 @@ public abstract class TypeDeclaration
     return descriptor == null ? null : function.apply(descriptor);
   }
 
+  // TODO(b/340930928): This is a temporary hack since JsFunction is not supported in Wasm.
+  private static final ThreadLocal<Boolean> ignoreJsFunctionAnnotations =
+      ThreadLocal.withInitial(() -> false);
+
+  public static void setIgnoreJsFunctionAnnotations() {
+    ignoreJsFunctionAnnotations.set(true);
+  }
+
   // TODO(b/181615162): This is a temporary hack to be able to reuse bridging logic in Closure
   // and Wasm.
   private static final ThreadLocal<IgnoreJsEnumsType> ignoreJsEnumAnnotations =
@@ -1038,6 +1046,8 @@ public abstract class TypeDeclaration
 
     abstract Optional<JsEnumInfo> getJsEnumInfo();
 
+    abstract boolean isJsFunctionInterface();
+
     abstract boolean isNative();
 
     abstract Kind getKind();
@@ -1050,6 +1060,10 @@ public abstract class TypeDeclaration
     abstract TypeDeclaration autoBuild();
 
     public TypeDeclaration build() {
+      if (isJsFunctionInterface() && ignoreJsFunctionAnnotations.get()) {
+        setJsFunctionInterface(false);
+      }
+
       if (getKind() == Kind.ENUM && getJsEnumInfo().isPresent()) {
         // Users can write code that marks a class or an interface as JsEnum that will be rejected
         // by JsInteropRestrictionsChecker; skip JsEnum processing here in that case.

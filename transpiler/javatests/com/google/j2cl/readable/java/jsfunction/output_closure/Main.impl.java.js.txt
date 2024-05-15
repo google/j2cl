@@ -42,8 +42,11 @@ class Main extends j_l_Object {
   this.$ctor__java_lang_Object__void();
   this.$init__void_$p_jsfunction_Main();
  }
- // /** @return {?function(number):number} */
- // native static createNativeFunction() 
+ /** @return {?function(number):number} */
+ static createNativeFunction() {
+  Main.$clinit();
+  return null;
+ }
  /** @nodts @return {number} */
  static m_callFn__jsfunction_Main_JsFunctionInterface__int__int(/** ?function(number):number */ fn, /** number */ a) {
   Main.$clinit();
@@ -232,8 +235,11 @@ class Main extends j_l_Object {
   doubleDoubleJsBiFunction(1.1, 1.1);
   Main.callOnFunction(DoubleDoubleJsBiFunction.$create__());
  }
- // /** @return {number} */
- // native static callOnFunction(/** ?function(?number, ?number):?number */ f) 
+ /** @return {number} */
+ static callOnFunction(/** ?function(?number, ?number):?number */ f) {
+  Main.$clinit();
+  return 0;
+ }
  /** @nodts */
  static m_testCast__void() {
   Main.$clinit();

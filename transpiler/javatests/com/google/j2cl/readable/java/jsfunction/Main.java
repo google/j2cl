@@ -68,7 +68,9 @@ public class Main {
   }
 
   @JsMethod
-  public static native JsFunctionInterface createNativeFunction();
+  public static JsFunctionInterface createNativeFunction() {
+    return null;
+  }
 
   public static int callFn(JsFunctionInterface fn, int a) {
     return fn.foo(a);
@@ -340,7 +342,10 @@ public class Main {
   }
 
   @JsMethod
-  public static native double callOnFunction(JsBiFunction<Double, Double> f);
+  public static double callOnFunction(JsBiFunction<Double, Double> f) {
+    return 0;
+  }
+  ;
 
   public static void testCast() {
     Object o = new TIntegerJsBiFunction<String>();
@@ -361,14 +366,15 @@ public class Main {
   }
 
   @JsType(isNative = true, name = "Array", namespace = JsPackage.GLOBAL)
-  interface TestJsFunctionInJsOverlayCapturingOuter {
+  static class TestJsFunctionInJsOverlayCapturingOuter {
 
     @JsOverlay
-    default void test() {
+    final void test() {
       sort(a -> TestJsFunctionInJsOverlayCapturingOuter.this == null ? 0 : 1);
     }
 
-    void sort(JsFunctionInterface func);
+    @JsOverlay
+    final void sort(JsFunctionInterface func) {}
   }
 
   private static final class RecursiveParametricJsFunctionImplementation<

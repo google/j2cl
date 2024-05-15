@@ -184,7 +184,9 @@ open class Main {
   @JvmStatic
   @ObjCName("createNativeFunction")
   @JsMethod
-  external fun createNativeFunction(): Main.JsFunctionInterface?
+  fun createNativeFunction(): Main.JsFunctionInterface? {
+   return null
+  }
 
   @JvmStatic
   @ObjCName("callFn")
@@ -279,9 +281,11 @@ open class Main {
   @JvmStatic
   @ObjCName("callOnFunction")
   @JsMethod
-  external fun callOnFunction(
+  fun callOnFunction(
    @ObjCName("withJsfunctionMain_JsBiFunction") f: Main.JsBiFunction<Double?, Double?>?
-  ): Double
+  ): Double {
+   return 0.0
+  }
 
   @JvmStatic
   @ObjCName("testCast")
@@ -482,19 +486,16 @@ open class Main {
  }
 
  @JsType(name = "Array", namespace = JsPackage.GLOBAL, isNative = true)
- fun interface TestJsFunctionInJsOverlayCapturingOuter {
-  @ObjCName("test")
+ open class TestJsFunctionInJsOverlayCapturingOuter internal constructor() {
   @JsOverlay
-  fun test() {
-   this@TestJsFunctionInJsOverlayCapturingOuter.sort(Main.JsFunctionInterface { a: Int ->
+  internal fun test_pp_jsfunction() {
+   this.sort_pp_jsfunction(Main.JsFunctionInterface { a: Int ->
     return@JsFunctionInterface if (this@TestJsFunctionInJsOverlayCapturingOuter == null) 0 else 1
    })
   }
 
-  @ObjCName("sort")
-  fun sort(
-   @ObjCName("withJsfunctionMain_JsFunctionInterface") func: Main.JsFunctionInterface?
-  )
+  @JsOverlay
+  internal fun sort_pp_jsfunction(func: Main.JsFunctionInterface?) {}
  }
 
  class RecursiveParametricJsFunctionImplementation<T: Main.ParametricJsFunction<T>?> internal constructor(): Main.ParametricJsFunction<T> {
