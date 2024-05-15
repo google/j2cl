@@ -549,12 +549,9 @@
 (func $m_main__arrayOf_java_lang_String__void@multipleabstractparents.MultipleAbstractParents
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ multipleabstractparents/MultipleAbstractParents.java:59:21
- (local $$qualifier (ref null $java.lang.String))
- (local $$qualifier_1 (ref null $multipleabstractparents.MultipleAbstractParents.ArrayList))
- (local $$qualifier_2 (ref null $java.lang.String))
- (local $$qualifier_3 (ref null $multipleabstractparents.MultipleAbstractParents.StringList))
- (local $$qualifier_4 (ref null $java.lang.String))
- (local $$qualifier_5 (ref null $java.lang.Object))
+ (local $$qualifier (ref null $multipleabstractparents.MultipleAbstractParents.ArrayList))
+ (local $$qualifier_1 (ref null $multipleabstractparents.MultipleAbstractParents.StringList))
+ (local $$qualifier_2 (ref null $java.lang.Object))
  (block
   ;;@ multipleabstractparents/MultipleAbstractParents.java:59:42
   (call $$clinit__void_<once>_@multipleabstractparents.MultipleAbstractParents )
@@ -562,39 +559,30 @@
   (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
    (then
     ;;@ multipleabstractparents/MultipleAbstractParents.java:60:4
-    (call $$assert__boolean__void@javaemul.internal.Asserts (block (result i32)
-     (local.set $$qualifier (block (result (ref null $java.lang.String))
-      (local.set $$qualifier_1 (call $$create__@multipleabstractparents.MultipleAbstractParents.ArrayList ))
-      (call_ref $function.m_getFoo__java_lang_Object__java_lang_String (ref.as_non_null (local.get $$qualifier_1))(ref.null $java.lang.String)(struct.get $multipleabstractparents.MultipleAbstractParents.AbstractCollection.vtable $m_getFoo__java_lang_Object__java_lang_String (struct.get $multipleabstractparents.MultipleAbstractParents.AbstractCollection $vtable(local.get $$qualifier_1))))
-     ))
-     (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $$qualifier))(call $$getString_|AbstractColl...|__java_lang_String_<once>_@multipleabstractparents.MultipleAbstractParents )(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(local.get $$qualifier))))
-    ))
+    (call $$assert__boolean__void@javaemul.internal.Asserts (call $m_equals__java_lang_Object__boolean@java.lang.String (ref.as_non_null (block (result (ref null $java.lang.String))
+     (local.set $$qualifier (call $$create__@multipleabstractparents.MultipleAbstractParents.ArrayList ))
+     (call_ref $function.m_getFoo__java_lang_Object__java_lang_String (ref.as_non_null (local.get $$qualifier))(ref.null $java.lang.String)(struct.get $multipleabstractparents.MultipleAbstractParents.AbstractCollection.vtable $m_getFoo__java_lang_Object__java_lang_String (struct.get $multipleabstractparents.MultipleAbstractParents.AbstractCollection $vtable(local.get $$qualifier))))
+    ))(call $$getString_|AbstractColl...|__java_lang_String_<once>_@multipleabstractparents.MultipleAbstractParents )))
    )
   )
   ;;@ multipleabstractparents/MultipleAbstractParents.java:61:4
   (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
    (then
     ;;@ multipleabstractparents/MultipleAbstractParents.java:61:4
-    (call $$assert__boolean__void@javaemul.internal.Asserts (block (result i32)
-     (local.set $$qualifier_2 (block (result (ref null $java.lang.String))
-      (local.set $$qualifier_3 (call $$create__@multipleabstractparents.MultipleAbstractParents.StringList ))
-      (call_ref $function.m_getFoo__java_lang_Object__java_lang_String (ref.as_non_null (local.get $$qualifier_3))(ref.null $java.lang.String)(struct.get $multipleabstractparents.MultipleAbstractParents.AbstractCollection.vtable $m_getFoo__java_lang_Object__java_lang_String (struct.get $multipleabstractparents.MultipleAbstractParents.AbstractCollection $vtable(local.get $$qualifier_3))))
-     ))
-     (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $$qualifier_2))(call $$getString_|AbstractColl...|__java_lang_String_<once>_@multipleabstractparents.MultipleAbstractParents )(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(local.get $$qualifier_2))))
-    ))
+    (call $$assert__boolean__void@javaemul.internal.Asserts (call $m_equals__java_lang_Object__boolean@java.lang.String (ref.as_non_null (block (result (ref null $java.lang.String))
+     (local.set $$qualifier_1 (call $$create__@multipleabstractparents.MultipleAbstractParents.StringList ))
+     (call_ref $function.m_getFoo__java_lang_Object__java_lang_String (ref.as_non_null (local.get $$qualifier_1))(ref.null $java.lang.String)(struct.get $multipleabstractparents.MultipleAbstractParents.AbstractCollection.vtable $m_getFoo__java_lang_Object__java_lang_String (struct.get $multipleabstractparents.MultipleAbstractParents.AbstractCollection $vtable(local.get $$qualifier_1))))
+    ))(call $$getString_|AbstractColl...|__java_lang_String_<once>_@multipleabstractparents.MultipleAbstractParents )))
    )
   )
   ;;@ multipleabstractparents/MultipleAbstractParents.java:62:4
   (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
    (then
     ;;@ multipleabstractparents/MultipleAbstractParents.java:62:4
-    (call $$assert__boolean__void@javaemul.internal.Asserts (block (result i32)
-     (local.set $$qualifier_4 (block (result (ref null $java.lang.String))
-      (local.set $$qualifier_5 (call $$create__@multipleabstractparents.MultipleAbstractParents.StringList ))
-      (call_ref $function.m_getFoo__java_lang_String__java_lang_String (ref.as_non_null (local.get $$qualifier_5))(ref.null $java.lang.String)(struct.get $multipleabstractparents.MultipleAbstractParents.IStringList.vtable $m_getFoo__java_lang_String__java_lang_String (ref.cast (ref $multipleabstractparents.MultipleAbstractParents.IStringList.vtable) (call $get.itable.$multipleabstractparents.MultipleAbstractParents.IStringList (local.get $$qualifier_5)))))
-     ))
-     (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $$qualifier_4))(call $$getString_|AbstractColl...|__java_lang_String_<once>_@multipleabstractparents.MultipleAbstractParents )(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(local.get $$qualifier_4))))
-    ))
+    (call $$assert__boolean__void@javaemul.internal.Asserts (call $m_equals__java_lang_Object__boolean@java.lang.String (ref.as_non_null (block (result (ref null $java.lang.String))
+     (local.set $$qualifier_2 (call $$create__@multipleabstractparents.MultipleAbstractParents.StringList ))
+     (call_ref $function.m_getFoo__java_lang_String__java_lang_String (ref.as_non_null (local.get $$qualifier_2))(ref.null $java.lang.String)(struct.get $multipleabstractparents.MultipleAbstractParents.IStringList.vtable $m_getFoo__java_lang_String__java_lang_String (ref.cast (ref $multipleabstractparents.MultipleAbstractParents.IStringList.vtable) (call $get.itable.$multipleabstractparents.MultipleAbstractParents.IStringList (local.get $$qualifier_2)))))
+    ))(call $$getString_|AbstractColl...|__java_lang_String_<once>_@multipleabstractparents.MultipleAbstractParents )))
    )
   )
  )

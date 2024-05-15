@@ -422,8 +422,6 @@
  (local $booleans (ref null $javaemul.internal.WasmArray.OfObject))
  (local $booleans2d (ref null $javaemul.internal.WasmArray.OfObject))
  (local $b i32)
- (local $$qualifier (ref null $java.lang.Boolean))
- (local $$qualifier_1 (ref null $java.lang.Boolean))
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (ref $array.Arrays) (local.get $this.untyped)))
  (block
@@ -440,15 +438,9 @@
   ;;@ array/Arrays.java:125:4
   (local.set $booleans2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $m_newWithLiteral__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@array.Arrays-14 (i32.const 0) (i32.const 2)))(i32.const -1)))
   ;;@ array/Arrays.java:128:4
-  (local.set $b (block (result i32)
-   (local.set $$qualifier (ref.cast (ref null $java.lang.Boolean) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $booleans)) (i32.const 0))))
-   (call_ref $function.m_booleanValue__boolean (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $$qualifier))))
-  ))
+  (local.set $b (call $m_booleanValue__boolean@java.lang.Boolean (ref.as_non_null (ref.cast (ref null $java.lang.Boolean) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $booleans)) (i32.const 0))))))
   ;;@ array/Arrays.java:129:4
-  (local.set $b (block (result i32)
-   (local.set $$qualifier_1 (ref.cast (ref null $java.lang.Boolean) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $booleans2d)) (i32.const 0)))) (i32.const 1))))
-   (call_ref $function.m_booleanValue__boolean (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $$qualifier_1))))
-  ))
+  (local.set $b (call $m_booleanValue__boolean@java.lang.Boolean (ref.as_non_null (ref.cast (ref null $java.lang.Boolean) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $booleans2d)) (i32.const 0)))) (i32.const 1))))))
   ;;@ array/Arrays.java:132:4
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $booleans)) (i32.const 0) (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.const 1)))
   ;;@ array/Arrays.java:133:4

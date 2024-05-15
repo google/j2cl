@@ -87,12 +87,7 @@
  ;;@ implicitparenthesis/ImplicitParenthesis.java:28:22
  (local $primitiveInt i32)
  (local $boxedInt (ref null $java.lang.Integer))
- (local $$qualifier (ref null $java.lang.Integer))
- (local $$qualifier_1 (ref null $java.lang.Integer))
- (local $$qualifier_2 (ref null $java.lang.Integer))
- (local $$qualifier_3 (ref null $java.lang.Integer))
  (local $$value (ref null $java.lang.Integer))
- (local $$qualifier_4 (ref null $java.lang.Integer))
  (block
   ;;@ implicitparenthesis/ImplicitParenthesis.java:29:4
   
@@ -104,10 +99,7 @@
    ;;@ implicitparenthesis/ImplicitParenthesis.java:35:6
    (local.set $boxedInt (call $$create__int@java.lang.Integer (i32.const 10)))
    ;;@ implicitparenthesis/ImplicitParenthesis.java:36:6
-   (local.set $primitiveInt (block (result i32)
-    (local.set $$qualifier (if (result (ref null $java.lang.Integer)) (i32.eq (local.get $primitiveInt) (i32.const 5)) (then (call $$create__int@java.lang.Integer (i32.const 15))) (else (call $$create__int@java.lang.Integer (i32.const 30)))))
-    (call_ref $function.m_intValue__int (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier))))
-   ))
+   (local.set $primitiveInt (call $m_intValue__int@java.lang.Integer (ref.as_non_null (if (result (ref null $java.lang.Integer)) (i32.eq (local.get $primitiveInt) (i32.const 5)) (then (call $$create__int@java.lang.Integer (i32.const 15))) (else (call $$create__int@java.lang.Integer (i32.const 30)))))))
    ;;@ implicitparenthesis/ImplicitParenthesis.java:37:6
    (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
     (then
@@ -122,13 +114,10 @@
    ;;@ implicitparenthesis/ImplicitParenthesis.java:43:6
    (local.set $boxedInt (call $$create__int@java.lang.Integer (i32.const 10)))
    ;;@ implicitparenthesis/ImplicitParenthesis.java:44:6
-   (local.set $primitiveInt (block (result i32)
-    (local.set $$qualifier_1 (block (result (ref null $java.lang.Integer))
-     (local.set $boxedInt (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (call_ref $function.m_intValue__int (ref.as_non_null (local.get $boxedInt))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxedInt)))) (local.get $primitiveInt))))
-     (local.get $boxedInt)
-    ))
-    (call_ref $function.m_intValue__int (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_1))))
-   ))
+   (local.set $primitiveInt (call $m_intValue__int@java.lang.Integer (ref.as_non_null (block (result (ref null $java.lang.Integer))
+    (local.set $boxedInt (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $boxedInt))) (local.get $primitiveInt))))
+    (local.get $boxedInt)
+   ))))
    ;;@ implicitparenthesis/ImplicitParenthesis.java:45:6
    (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
     (then
@@ -143,13 +132,10 @@
    ;;@ implicitparenthesis/ImplicitParenthesis.java:51:6
    (local.set $boxedInt (call $$create__int@java.lang.Integer (i32.const 10)))
    ;;@ implicitparenthesis/ImplicitParenthesis.java:52:6
-   (local.set $primitiveInt (block (result i32)
-    (local.set $$qualifier_2 (block (result (ref null $java.lang.Integer))
-     (local.set $boxedInt (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (local.get $primitiveInt)))
-     (local.get $boxedInt)
-    ))
-    (call_ref $function.m_intValue__int (ref.as_non_null (local.get $$qualifier_2))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_2))))
-   ))
+   (local.set $primitiveInt (call $m_intValue__int@java.lang.Integer (ref.as_non_null (block (result (ref null $java.lang.Integer))
+    (local.set $boxedInt (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (local.get $primitiveInt)))
+    (local.get $boxedInt)
+   ))))
    ;;@ implicitparenthesis/ImplicitParenthesis.java:53:6
    (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
     (then
@@ -164,14 +150,11 @@
    ;;@ implicitparenthesis/ImplicitParenthesis.java:59:6
    (local.set $boxedInt (call $$create__int@java.lang.Integer (i32.const 10)))
    ;;@ implicitparenthesis/ImplicitParenthesis.java:60:6
-   (local.set $primitiveInt (block (result i32)
-    (local.set $$qualifier_3 (block (result (ref null $java.lang.Integer))
-     (local.set $$value (local.get $boxedInt))
-     (local.set $boxedInt (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (call_ref $function.m_intValue__int (ref.as_non_null (local.get $boxedInt))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxedInt)))) (i32.const 1))))
-     (local.get $$value)
-    ))
-    (call_ref $function.m_intValue__int (ref.as_non_null (local.get $$qualifier_3))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_3))))
-   ))
+   (local.set $primitiveInt (call $m_intValue__int@java.lang.Integer (ref.as_non_null (block (result (ref null $java.lang.Integer))
+    (local.set $$value (local.get $boxedInt))
+    (local.set $boxedInt (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $boxedInt))) (i32.const 1))))
+    (local.get $$value)
+   ))))
    ;;@ implicitparenthesis/ImplicitParenthesis.java:61:6
    (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
     (then
@@ -186,13 +169,10 @@
    ;;@ implicitparenthesis/ImplicitParenthesis.java:67:6
    (local.set $boxedInt (call $$create__int@java.lang.Integer (i32.const 10)))
    ;;@ implicitparenthesis/ImplicitParenthesis.java:68:6
-   (local.set $primitiveInt (block (result i32)
-    (local.set $$qualifier_4 (block (result (ref null $java.lang.Integer))
-     (local.set $boxedInt (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (call_ref $function.m_intValue__int (ref.as_non_null (local.get $boxedInt))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxedInt)))) (i32.const 1))))
-     (local.get $boxedInt)
-    ))
-    (call_ref $function.m_intValue__int (ref.as_non_null (local.get $$qualifier_4))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_4))))
-   ))
+   (local.set $primitiveInt (call $m_intValue__int@java.lang.Integer (ref.as_non_null (block (result (ref null $java.lang.Integer))
+    (local.set $boxedInt (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $boxedInt))) (i32.const 1))))
+    (local.get $boxedInt)
+   ))))
    ;;@ implicitparenthesis/ImplicitParenthesis.java:69:6
    (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
     (then
@@ -223,7 +203,7 @@
    ;;@ implicitparenthesis/ImplicitParenthesis.java:83:6
    (local.set $boxedInt (call $$create__int@java.lang.Integer (i32.const 10)))
    ;;@ implicitparenthesis/ImplicitParenthesis.java:84:6
-   (local.set $primitiveInt (i32.sub (call_ref $function.m_intValue__int (ref.as_non_null (local.get $boxedInt))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxedInt)))) (local.get $primitiveInt)))
+   (local.set $primitiveInt (i32.sub (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $boxedInt))) (local.get $primitiveInt)))
    ;;@ implicitparenthesis/ImplicitParenthesis.java:85:6
    (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
     (then
@@ -240,12 +220,12 @@
    ;;@ implicitparenthesis/ImplicitParenthesis.java:93:6
    (local.set $boxedBoolean (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.const 1)))
    ;;@ implicitparenthesis/ImplicitParenthesis.java:94:6
-   (local.set $boxedBoolean (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.eq (call_ref $function.m_intValue__int (ref.as_non_null (local.get $boxedInt))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxedInt)))) (local.get $primitiveInt))))
+   (local.set $boxedBoolean (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.eq (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $boxedInt))) (local.get $primitiveInt))))
    ;;@ implicitparenthesis/ImplicitParenthesis.java:95:6
    (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
     (then
      ;;@ implicitparenthesis/ImplicitParenthesis.java:95:6
-     (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (call_ref $function.m_booleanValue__boolean (ref.as_non_null (local.get $boxedBoolean))(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $boxedBoolean)))) (i32.const 0)))
+     (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (call $m_booleanValue__boolean@java.lang.Boolean (ref.as_non_null (local.get $boxedBoolean))) (i32.const 0)))
     )
    )
   )

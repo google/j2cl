@@ -146,6 +146,10 @@ public class Main {
     }
   }
 
+  abstract static class AbstractCollectionWithDefaults<T> implements Collection<T> {}
+
+  static final class FinalCollection<T> extends AbstractCollectionWithDefaults<T> {}
+
   private static void testDefaultMethods() {
     assertTrue(new ACollection<Object>().add(null) == COLLECTION_ADD);
     assertTrue(new AConcreteList<Object>().add(null) == ABSTRACT_COLLECTION_ADD);
@@ -156,6 +160,7 @@ public class Main {
     assertTrue(new YetAnotherStringList().add(null) == LIST_ADD);
     assertTrue(new AnotherStringList().add(null) == ANOTHER_STRING_LIST_ADD);
     assertTrue(new AnotherCollection<Object>().add(null) == ANOTHER_LIST_INTERFACE_ADD);
+    assertTrue(new FinalCollection<Object>().add(null) == COLLECTION_ADD);
   }
 
   private static void testStaticMethods() {

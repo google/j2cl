@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.common.collect.MoreCollectors.onlyElement;
+
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
@@ -54,7 +56,7 @@ public final class UpgradeInterfaceDispatch extends NormalizationPass {
 
             DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
             MethodDescriptor newMethodDescriptor =
-                createNewTargetMethodDescriptor(declaredTypeDescriptor, methodCall.getTarget());
+                findTargetMethodDescriptor(declaredTypeDescriptor, methodCall.getTarget());
 
             return MethodCall.Builder.from(methodCall).setTarget(newMethodDescriptor).build();
           }
@@ -62,14 +64,24 @@ public final class UpgradeInterfaceDispatch extends NormalizationPass {
   }
 
   /** Creates a MethodDescriptor to target a polymorphic method on a particular class. */
-  private static MethodDescriptor createNewTargetMethodDescriptor(
+  private static MethodDescriptor findTargetMethodDescriptor(
       DeclaredTypeDescriptor typeDescriptor, MethodDescriptor descriptor) {
-    return MethodDescriptor.Builder.from(descriptor.getDeclarationDescriptor())
-        .setDeclarationDescriptor(null)
-        .setTypeArgumentTypeDescriptors(ImmutableList.of())
-        .setDefaultMethod(false)
-        .setAbstract(typeDescriptor.getTypeDeclaration().isAbstract())
-        .setEnclosingTypeDescriptor(typeDescriptor.toNullable())
-        .build();
+    MethodDescriptor targetMethod =
+        typeDescriptor.getPolymorphicMethods().stream()
+            .filter(m -> m.getMangledName().equals(descriptor.getMangledName()))
+            .collect(onlyElement());
+    if (targetMethod.getEnclosingTypeDescriptor().isInterface()) {
+      // If the new target method is an interface method, this means the qualifier is an abstract
+      // class that does not implement the method. In this case, synthesize a method descriptor
+      // which will become a vtable dispatch.
+      return MethodDescriptor.Builder.from(descriptor.getDeclarationDescriptor())
+          .setDeclarationDescriptor(null)
+          .setTypeArgumentTypeDescriptors(ImmutableList.of())
+          .setDefaultMethod(false)
+          .setAbstract(typeDescriptor.getTypeDeclaration().isAbstract())
+          .setEnclosingTypeDescriptor(typeDescriptor.toNullable())
+          .build();
+    }
+    return targetMethod;
   }
 }
