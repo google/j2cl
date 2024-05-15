@@ -18,6 +18,7 @@ package com.google.j2cl.jre;
 import com.google.j2cl.jre.java.lang.JsExceptionTest;
 import com.google.j2cl.jre.java.lang.JsStringTest;
 import com.google.j2cl.jre.java.lang.JsThrowableTest;
+import com.google.j2cl.jre.java.util.JsCollectionTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -28,5 +29,6 @@ import org.junit.runners.Suite.SuiteClasses;
   JsExceptionTest.class,
   JsThrowableTest.class,
   JsStringTest.class,
+  JsCollectionTest.class,
 })
 public class JsSuite {}

@@ -21,7 +21,10 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 import javaemul.internal.CollectionHelper;
+import javaemul.internal.JsUtils;
+import javaemul.internal.annotations.UncheckedCast;
 import jsinterop.annotations.JsIgnore;
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
 
 /**
@@ -88,6 +91,7 @@ public interface Collection<E> extends Iterable<E> {
     return StreamSupport.stream(spliterator(), false);
   }
 
+  @JsIgnore
   default Object[] toArray() {
     return CollectionHelper.toArray(this);
   }
@@ -95,5 +99,11 @@ public interface Collection<E> extends Iterable<E> {
   @JsIgnore
   default <T> T[] toArray(T[] a) {
     return CollectionHelper.toArray(this, a);
+  }
+
+  @UncheckedCast
+  @JsMethod(name = "toArray")
+  default E[] _private_jsToArray__() {
+    return JsUtils.uncheckedCast(toArray());
   }
 }
