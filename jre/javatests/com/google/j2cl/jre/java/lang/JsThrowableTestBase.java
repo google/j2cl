@@ -77,7 +77,7 @@ public abstract class JsThrowableTestBase extends TestCase {
   }
 
   /** A JavaScript object backing a Throwable. */
-  @JsType(isNative = true, name = "*", namespace = JsPackage.GLOBAL)
+  @JsType(isNative = true, name = "?", namespace = JsPackage.GLOBAL)
   interface BackingJsObject {
     @JsProperty
     Object getCause();

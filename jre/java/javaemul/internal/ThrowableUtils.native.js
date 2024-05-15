@@ -14,6 +14,14 @@
 
 
 /**
+ * Declare a fake property so that it exists in a class. This is to avoid
+ * jscompiler errors about that the property that does not exit; the property is
+ * accessed on objects of unknown type.
+ * @type {!Array<!Object>}
+ */
+ThrowableUtils.prototype.suppressed;
+
+/**
  * @param {*} error
  * @param {!Throwable} throwable
  * @public

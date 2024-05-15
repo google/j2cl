@@ -29,7 +29,6 @@ j2cl_library(
     srcs = SRCS,
     # Safe here as this is for tests only and there are no downstream users.
     experimental_enable_jspecify_support_do_not_enable_without_jspecify_static_checking_or_you_might_cause_an_outage = True,
-    generate_build_test = False,
     javacopts = [
         "-Xep:DoNotCall:OFF",
         "-Xep:CheckReturnValue:OFF",
@@ -154,7 +153,6 @@ j2cl_library(
     name = "js_tests_lib",
     testonly = 1,
     srcs = JS_ONLY_SRCS,
-    generate_build_test = False,
     deps = [
         "//third_party:jsinterop-annotations-j2cl",
         "//third_party:junit-j2cl",
