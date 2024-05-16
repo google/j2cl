@@ -70,7 +70,6 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.DECREMENT_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.DIVIDE_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.ELSE_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.EQUAL_OPERATOR
-import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.GET_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.GREATER_EQUAL_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.GREATER_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.IF_KEYWORD
@@ -379,32 +378,8 @@ internal data class ExpressionRenderer(
   private fun methodInvocationSource(expression: MethodCall): Source =
     expression.target.let { methodDescriptor ->
       when {
-        methodDescriptor.isProtoExtensionGetter() ->
-          when (methodDescriptor.parameterDescriptors.size) {
-            // getExtension(extension) call.
-            1 ->
-              join(
-                nameRenderer.extensionMemberQualifiedNameSource("com.google.protobuf.kotlin.get"),
-                invocationSource(expression),
-              )
-            // getExtension(extension, index) call.
-            2 ->
-              dotSeparated(
-                join(
-                  nameRenderer.extensionMemberQualifiedNameSource("com.google.protobuf.kotlin.get"),
-                  inParentheses(expressionSource(expression.arguments[0])),
-                ),
-                join(GET_KEYWORD, inParentheses(expressionSource(expression.arguments[1]))),
-              )
-            else -> error("illegal proto extension getter")
-          }
         methodDescriptor.isProtobufGetter() ->
           identifierSource(computeProtobufPropertyName(expression.target.name!!))
-        methodDescriptor.isProtoExtensionChecker() ->
-          join(
-            nameRenderer.extensionMemberQualifiedNameSource("com.google.protobuf.kotlin.contains"),
-            invocationSource(expression),
-          )
         else ->
           join(
             identifierSource(expression.target.ktMangledName),
