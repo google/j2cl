@@ -78,7 +78,7 @@ class SourceMap extends j_l_Object {
   return value;
  }
  /** @nodts */
- m_testLambda__int__void_$p_sourcemap_SourceMap(/** number */ n) {
+ m_testLambdaAndMethodReference__int__void_$p_sourcemap_SourceMap(/** number */ n) {
   let /** !ArrayList */ $$q;
   let f = j_u_function_Function.$adapt((i) =>{
    let i_1 = /**@type {Integer}*/ ($Casts.$to(i, Integer));
@@ -87,6 +87,13 @@ class SourceMap extends j_l_Object {
   let f2 = ($$q = /**@type {!ArrayList}*/ (ArrayList.$create__()), Supplier.$adapt(() =>{
    return Integer.m_valueOf__int__java_lang_Integer($$q.size());
   }));
+  let f3 = Supplier.$adapt(() =>{
+   return Integer.m_valueOf__int__java_lang_Integer(this.m_simpleMethod__int_$p_sourcemap_SourceMap());
+  });
+ }
+ /** @nodts @return {number} */
+ m_simpleMethod__int_$p_sourcemap_SourceMap() {
+  return 1;
  }
  /** @nodts */
  m_testLocalClass__void_$p_sourcemap_SourceMap() {}

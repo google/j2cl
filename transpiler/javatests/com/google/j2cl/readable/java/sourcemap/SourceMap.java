@@ -103,9 +103,14 @@ abstract class SourceMap<T extends Number> implements Comparator<T> {
     return value;
   }
 
-  private void testLambda(int n) {
+  private void testLambdaAndMethodReference(int n) {
     Function<Integer, Integer> f = i -> i + 1;
     Supplier<Integer> f2 = new ArrayList()::size;
+    Supplier<Integer> f3 = this::simpleMethod;
+  }
+
+  private int simpleMethod() {
+    return 1;
   }
 
   private void testLocalClass() {
