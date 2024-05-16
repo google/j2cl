@@ -25,6 +25,7 @@ import javaemul.internal.JsUtils;
 import javaemul.internal.annotations.UncheckedCast;
 import jsinterop.annotations.JsIgnore;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsNonNull;
 import jsinterop.annotations.JsType;
 
 /**
@@ -103,7 +104,7 @@ public interface Collection<E> extends Iterable<E> {
 
   @UncheckedCast
   @JsMethod(name = "toArray")
-  default E[] _private_jsToArray__() {
+  default E @JsNonNull [] _private_jsToArray__() {
     return JsUtils.uncheckedCast(toArray());
   }
 }
