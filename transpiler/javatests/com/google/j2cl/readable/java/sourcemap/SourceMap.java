@@ -115,6 +115,7 @@ abstract class SourceMap<T extends Number> implements Comparator<T> {
 
   private void testLocalClass() {
     class LocalClass {}
+    new LocalClass();
   }
 
   enum Enum1 {
