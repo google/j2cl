@@ -1196,10 +1196,8 @@ public class JsInteropRestrictionsChecker {
       return;
     }
     if (member.isMethod()) {
-      if (!memberDescriptor.getEnclosingTypeDescriptor().getTypeDeclaration().isFinal()
-          && !memberDescriptor.isFinal()
+      if (!isEffectivelyFinal(memberDescriptor)
           && !memberDescriptor.isStatic()
-          && !memberDescriptor.getVisibility().isPrivate()
           && !memberDescriptor.isDefaultMethod()) {
         problems.error(
             member.getSourcePosition(),
@@ -1217,6 +1215,19 @@ public class JsInteropRestrictionsChecker {
     }
 
     checkImplementableStatically(member, "JsOverlay");
+  }
+
+  // Do not move this one to MemberDescriptor since getMemberTypeDeclarations is not correct for
+  // enums with subtypes from the dependencies.
+  boolean isEffectivelyFinal(MemberDescriptor memberDescriptor) {
+    TypeDeclaration enclosingTypeDeclaration =
+        memberDescriptor.getEnclosingTypeDescriptor().getTypeDeclaration();
+    return memberDescriptor.isFinal()
+        || memberDescriptor.getVisibility().isPrivate()
+        || enclosingTypeDeclaration.isFinal()
+        // TODO(b/341721484) : Remove this once the bug is fixed.
+        || (enclosingTypeDeclaration.isEnum()
+            && enclosingTypeDeclaration.getMemberTypeDeclarations().isEmpty());
   }
 
   private boolean checkNativeJsType(Type type) {

@@ -1209,7 +1209,10 @@ class JavaEnvironment {
     // Compute these first since they're reused in other calculations.
     String packageName = getPackageOf(typeElement).getQualifiedName().toString();
     boolean isAbstract = isAbstract(typeElement) && !isInterface(typeElement);
-    boolean isFinal = isFinal(typeElement);
+    Kind kind = getKindFromTypeBinding(typeElement);
+    // TODO(b/341721484): Even though enums can not have the final modifier, turbine make them final
+    // in the header jars.
+    boolean isFinal = isFinal(typeElement) && kind != Kind.ENUM;
 
     Supplier<ImmutableList<MethodDescriptor>> declaredMethods =
         () -> {
@@ -1257,7 +1260,7 @@ class JavaEnvironment {
         .setUnparameterizedTypeDescriptorFactory(
             () -> createDeclaredTypeDescriptor(typeElement.asType()))
         .setHasAbstractModifier(isAbstract)
-        .setKind(getKindFromTypeBinding(typeElement))
+        .setKind(kind)
         .setAnnotation(isAnnotation(typeElement))
         .setCapturingEnclosingInstance(capturesEnclosingInstance((ClassSymbol) typeElement))
         .setFinal(isFinal)

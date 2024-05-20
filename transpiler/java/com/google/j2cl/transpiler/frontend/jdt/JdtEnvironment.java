@@ -1153,7 +1153,10 @@ public class JdtEnvironment {
     String packageName =
         typeBinding.getPackage() == null ? null : typeBinding.getPackage().getName();
     boolean isAbstract = isAbstract(typeBinding);
-    boolean isFinal = isFinal(typeBinding);
+    Kind kind = getKindFromTypeBinding(typeBinding);
+    // TODO(b/341721484): Even though enums can not have the final modifier, turbine make them final
+    // in the header jars.
+    boolean isFinal = isFinal(typeBinding) && kind != Kind.ENUM;
 
     boolean isNullMarked = isNullMarked(typeBinding);
     IBinding declaringMemberBinding = getDeclaringMethodOrFieldBinding(typeBinding);
@@ -1177,7 +1180,7 @@ public class JdtEnvironment {
             .setUnparameterizedTypeDescriptorFactory(
                 () -> createDeclaredTypeDescriptor(typeBinding, isNullMarked))
             .setHasAbstractModifier(isAbstract)
-            .setKind(getKindFromTypeBinding(typeBinding))
+            .setKind(kind)
             .setAnnotation(typeBinding.isAnnotation())
             .setCapturingEnclosingInstance(capturesEnclosingInstance(typeBinding))
             .setFinal(isFinal)

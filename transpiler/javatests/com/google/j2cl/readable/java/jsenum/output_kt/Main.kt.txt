@@ -204,7 +204,7 @@ open class Main {
   TWO;
 
   @ObjCName("getValue")
-  fun getValue(): Int {
+  open fun getValue(): Int {
    return this.ordinal
   }
  }
@@ -219,7 +219,7 @@ open class Main {
   internal var value: Int = 0
 
   @ObjCName("getValue")
-  fun getValue(): Int {
+  open fun getValue(): Int {
    return this.value
   }
 
@@ -237,7 +237,7 @@ open class Main {
   internal var value: String? = null
 
   @ObjCName("getValue")
-  fun getValue(): String? {
+  open fun getValue(): String? {
    return this.value
   }
 
@@ -255,7 +255,7 @@ open class Main {
   internal var value: String
 
   @ObjCName("getValue")
-  fun getValue(): String? {
+  open fun getValue(): String? {
    return this.value
   }
 
@@ -301,7 +301,7 @@ open class Main {
   TWO;
 
   @ObjCName("getValue")
-  fun getValue(): Int {
+  open fun getValue(): Int {
    return this.ordinal
   }
  }
