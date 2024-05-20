@@ -52,56 +52,27 @@ public final class System {
     checkNotNull(src, "src");
     checkNotNull(dest, "dest");
 
-    // Fast path for no type checking. Also hides rest of the checking specific code from compilers.
-    if (!isTypeChecked()) {
-      checkCriticalArrayCopyIndicies(src, srcOfs, dest, destOfs, len);
-      ArrayHelper.copy(src, srcOfs, dest, destOfs, len);
-      return;
-    }
+    // Hides the checking specific code from compilers.
+    if (isTypeChecked()) {
+      Class<?> srcType = src.getClass();
+      Class<?> destType = dest.getClass();
+      checkArrayType(srcType.isArray(), "srcType is not an array");
+      checkArrayType(destType.isArray(), "destType is not an array");
 
-    Class<?> srcType = src.getClass();
-    Class<?> destType = dest.getClass();
-    checkArrayType(srcType.isArray(), "srcType is not an array");
-    checkArrayType(destType.isArray(), "destType is not an array");
-
-    boolean isObjectArray = src instanceof Object[];
-    boolean arrayTypeMatch;
-    if (isObjectArray) {
-      // Destination also should be Object[]
-      arrayTypeMatch = dest instanceof Object[];
-    } else {
-      // Source is primitive; ensure that components are exactly match;
-      arrayTypeMatch = srcType.getComponentType() == destType.getComponentType();
+      boolean isObjectArray = src instanceof Object[];
+      boolean arrayTypeMatch;
+      if (isObjectArray) {
+        // Destination also should be Object[]
+        arrayTypeMatch = dest instanceof Object[];
+      } else {
+        // Source is primitive; ensure that components are exactly match;
+        arrayTypeMatch = srcType.getComponentType() == destType.getComponentType();
+      }
+      checkArrayType(arrayTypeMatch, "Array types don't match");
     }
-    checkArrayType(arrayTypeMatch, "Array types don't match");
 
     checkCriticalArrayCopyIndicies(src, srcOfs, dest, destOfs, len);
-
-    /*
-     * If the arrays are not references or if they are exactly the same type, we
-     * can copy them in native code for speed. Otherwise, we have to copy them
-     * in Java so we get appropriate errors.
-     */
-    if (isObjectArray && !srcType.equals(destType)) {
-      // copy in Java to make sure we get ArrayStoreExceptions if the values
-      // aren't compatible
-      Object[] srcArray = (Object[]) src;
-      Object[] destArray = (Object[]) dest;
-      if (src == dest && srcOfs < destOfs) {
-        // TODO(jat): how does backward copies handle failures in the middle?
-        // copy backwards to avoid destructive copies
-        srcOfs += len;
-        for (int destEnd = destOfs + len; destEnd-- > destOfs; ) {
-          destArray[destEnd] = srcArray[--srcOfs];
-        }
-      } else {
-        for (int destEnd = destOfs + len; destOfs < destEnd; ) {
-          destArray[destOfs++] = srcArray[srcOfs++];
-        }
-      }
-    } else {
-      ArrayHelper.copy(src, srcOfs, dest, destOfs, len);
-    }
+    ArrayHelper.copy(src, srcOfs, dest, destOfs, len);
   }
 
   public static long currentTimeMillis() {
