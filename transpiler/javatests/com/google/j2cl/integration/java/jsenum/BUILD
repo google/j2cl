@@ -38,5 +38,5 @@ integration_test(
     enable_jvm_test = False,
     enable_kt = False,
     # TODO(b/325056024): jsenums are not yet supported in the modular pipeline
-    enable_wasm_modular = False,
+    use_modular_pipeline = False,
 )
