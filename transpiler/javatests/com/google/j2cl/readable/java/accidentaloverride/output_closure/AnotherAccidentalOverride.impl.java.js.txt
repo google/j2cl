@@ -29,8 +29,18 @@ class AnotherAccidentalOverride extends Parent {
  }
  //Bridge method.
  /** @final @override @nodts */
+ m_bar__java_lang_Object__void(/** AssertionError */ arg0) {
+  this.m_bar__java_lang_Error__void(/**@type {AssertionError}*/ ($Casts.$to(arg0, AssertionError)));
+ }
+ //Bridge method.
+ /** @final @override @nodts */
  m_foo__java_lang_Object__void(/** AssertionError */ arg0) {
   this.m_foo__java_lang_Error__void(/**@type {AssertionError}*/ ($Casts.$to(arg0, AssertionError)));
+ }
+ //Specialized bridge method.
+ /** @nodts */
+ m_bar__java_lang_AssertionError__void(/** AssertionError */ arg0) {
+  super.m_bar__java_lang_Error__void(arg0);
  }
  //Specialized bridge method.
  /** @nodts */

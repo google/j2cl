@@ -2,8 +2,6 @@ goog.module('accidentaloverride.SuperInterface$impl');
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $LambdaAdaptor = goog.forwardDeclare('accidentaloverride.SuperInterface.$LambdaAdaptor$impl');
-
 /**
  * @interface
  * @template T
@@ -11,11 +9,8 @@ let $LambdaAdaptor = goog.forwardDeclare('accidentaloverride.SuperInterface.$Lam
 class SuperInterface {
  /** @abstract @nodts */
  m_foo__java_lang_Object__void(/** T */ t) {}
- /** @nodts @template T @return {SuperInterface<T>} */
- static $adapt(/** ?function(T):void */ fn) {
-  SuperInterface.$clinit();
-  return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
- }
+ /** @abstract @nodts */
+ m_bar__java_lang_Object__void(/** T */ e) {}
  /** @nodts */
  static $clinit() {
   SuperInterface.$clinit = () =>{};
@@ -31,9 +26,7 @@ class SuperInterface {
  }
  
  /** @nodts */
- static $loadModules() {
-  $LambdaAdaptor = goog.module.get('accidentaloverride.SuperInterface.$LambdaAdaptor$impl');
- }
+ static $loadModules() {}
 }
 SuperInterface.$markImplementor(/**@type {Function}*/ (SuperInterface));
 $Util.$setClassMetadataForInterface(SuperInterface, 'accidentaloverride.SuperInterface');

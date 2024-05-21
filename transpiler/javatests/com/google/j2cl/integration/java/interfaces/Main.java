@@ -39,6 +39,7 @@ public class Main {
     testDefaultMethods_packagePrivate();
     testStaticMethods();
     testPrivateMethods();
+    testAccidentalOverrides();
     testCallWithDifferentNullMarking();
   }
 
@@ -198,6 +199,23 @@ public class Main {
   private static void testPrivateMethods() {
     assertTrue(InterfaceWithPrivateMethods.callPrivateStaticMethod() == 2);
     assertTrue(mReturns1.defaultMethod() == 1);
+  }
+
+  private abstract static class AbstractClassWithFinalMethod {
+    public final int run() {
+      return 2;
+    }
+  }
+
+  private static class ChildClassWithFinalMethod extends AbstractClassWithFinalMethod
+      implements SomeInterface {}
+
+  private static void testAccidentalOverrides() {
+    ChildClassWithFinalMethod c = new ChildClassWithFinalMethod();
+    AbstractClassWithFinalMethod a = c;
+    assertTrue(run(c) == 2);
+    assertTrue(c.run() == 2);
+    assertTrue(a.run() == 2);
   }
 
   interface InterfaceWithDefaultMethod {

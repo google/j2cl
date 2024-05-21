@@ -18,10 +18,15 @@ package accidentaloverride;
 class Parent<T extends Error> {
   @SuppressWarnings("unused")
   public void foo(T e) {}
+
+  @SuppressWarnings("unused")
+  public final void bar(T e) {}
 }
 
 interface SuperInterface<T> {
   void foo(T t);
+
+  void bar(T e);
 }
 
 /**

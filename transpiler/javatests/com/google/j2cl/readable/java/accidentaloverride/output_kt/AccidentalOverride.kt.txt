@@ -31,12 +31,22 @@ open class Parent<T: Error?> internal constructor() {
  open fun foo(
   @ObjCName("withJavaLangError") e: T
  ) {}
+
+ @ObjCName("bar")
+ fun bar(
+  @ObjCName("withJavaLangError") e: T
+ ) {}
 }
 
-fun interface SuperInterface<T> {
+interface SuperInterface<T> {
  @ObjCName("foo")
  fun foo(
   @ObjCName("withId") t: T
+ )
+
+ @ObjCName("bar")
+ fun bar(
+  @ObjCName("withId") e: T
  )
 }
 
