@@ -16,6 +16,7 @@
 package javaemul.internal;
 
 import static javaemul.internal.InternalPreconditions.checkCriticalArrayBounds;
+import static javaemul.internal.InternalPreconditions.checkCriticalArrayCopyIndices;
 
 import java.util.Comparator;
 import javaemul.internal.annotations.DoNotAutobox;
@@ -116,6 +117,9 @@ public final class ArrayHelper {
   }
 
   private static void copy(Object[] src, int srcOfs, Object[] dest, int destOfs, int len) {
+    // Critical check since we may cause infinite loop below otherwise.
+    checkCriticalArrayCopyIndices(src, srcOfs, dest, destOfs, len);
+
     if (len == 0) {
       return;
     }

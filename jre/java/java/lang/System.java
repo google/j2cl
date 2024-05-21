@@ -16,7 +16,6 @@
 package java.lang;
 
 import static javaemul.internal.InternalPreconditions.checkArrayType;
-import static javaemul.internal.InternalPreconditions.checkCriticalArrayCopyIndicies;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 import static javaemul.internal.InternalPreconditions.isTypeChecked;
 
@@ -71,7 +70,6 @@ public final class System {
       checkArrayType(arrayTypeMatch, "Array types don't match");
     }
 
-    checkCriticalArrayCopyIndicies(src, srcOfs, dest, destOfs, len);
     ArrayHelper.copy(src, srcOfs, dest, destOfs, len);
   }
 

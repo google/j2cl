@@ -15,6 +15,7 @@
  */
 package javaemul.internal;
 
+import static javaemul.internal.InternalPreconditions.checkArrayCopyIndices;
 import static javaemul.internal.InternalPreconditions.checkCriticalArrayBounds;
 
 import java.util.Comparator;
@@ -170,6 +171,7 @@ public final class ArrayHelper {
   private static native void nativeFill(Object[] array, int offset, Object value, int size);
 
   public static void copy(Object array, int srcOfs, Object dest, int destOfs, int len) {
+    checkArrayCopyIndices(array, srcOfs, dest, destOfs, len);
     asWasmArray(dest).copyFrom(destOfs, asWasmArray(array), srcOfs, len);
   }
 

@@ -580,8 +580,21 @@ public final class InternalPreconditions {
     }
   }
 
+  public static void checkArrayCopyIndices(
+      Object src, int srcOfs, Object dest, int destOfs, int len) {
+    if (IS_BOUNDS_CHECKED) {
+      checkCriticalArrayCopyIndices(src, srcOfs, dest, destOfs, len);
+    } else if (IS_ASSERTED) {
+      try {
+        checkCriticalArrayCopyIndices(src, srcOfs, dest, destOfs, len);
+      } catch (Exception e) {
+        throw new AssertionError(e);
+      }
+    }
+  }
+
   /** Checks that array copy bounds are correct. */
-  public static void checkCriticalArrayCopyIndicies(
+  public static void checkCriticalArrayCopyIndices(
       Object src, int srcOfs, Object dest, int destOfs, int len) {
     int srclen = ArrayHelper.getLength(src);
     int destlen = ArrayHelper.getLength(dest);
