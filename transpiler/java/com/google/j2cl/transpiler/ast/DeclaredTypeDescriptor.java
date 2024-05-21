@@ -918,7 +918,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         .setTypeParameterTypeDescriptors(targetMethodDescriptor.getTypeParameterTypeDescriptors())
         .setOriginalJsInfo(bridgeMethodDescriptor.getJsInfo())
         .setEnclosingTypeDescriptor(this)
-        .setDeclarationDescriptor(null)
         .setTypeArgumentTypeDescriptors(ImmutableList.of())
         .makeBridge(origin, bridgeMethodDescriptor, targetMethodDescriptor)
         .setFinal(isFinal)

@@ -1,6 +1,7 @@
 ;;; Code for genericinterfaceabstractimpl.MyInterface [type definition]
 (type $genericinterfaceabstractimpl.MyInterface.vtable (sub (struct
  (field $m_fun__java_lang_Object__java_lang_Object (ref $function.m_fun__java_lang_Object__java_lang_Object))
+ (field $m_g__java_lang_Object__void (ref $function.m_g__java_lang_Object__void))
  ))
 )
 
@@ -18,6 +19,7 @@
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_fun__java_lang_Object__java_lang_Object (ref $function.m_fun__java_lang_Object__java_lang_Object))
+ (field $m_g__java_lang_Object__void (ref $function.m_g__java_lang_Object__void))
  ))
 )
 
@@ -78,27 +80,27 @@
 ;;; void AbstractImpl.$ctor()
 (func $$ctor__void_$p_genericinterfaceabstractimpl_AbstractImpl@genericinterfaceabstractimpl.AbstractImpl
  (param $this (ref null $genericinterfaceabstractimpl.AbstractImpl))
- ;;@ genericinterfaceabstractimpl/AbstractImpl.java:22:22
+ ;;@ genericinterfaceabstractimpl/AbstractImpl.java:24:22
  (block
-  ;;@ genericinterfaceabstractimpl/AbstractImpl.java:22:22
+  ;;@ genericinterfaceabstractimpl/AbstractImpl.java:24:22
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void AbstractImpl.$clinit()
 (func $$clinit__void_<once>_@genericinterfaceabstractimpl.AbstractImpl
- ;;@ genericinterfaceabstractimpl/AbstractImpl.java:22:22
+ ;;@ genericinterfaceabstractimpl/AbstractImpl.java:24:22
  (block
-  ;;@ genericinterfaceabstractimpl/AbstractImpl.java:22:22
+  ;;@ genericinterfaceabstractimpl/AbstractImpl.java:24:22
   (if (global.get $$class-initialized@genericinterfaceabstractimpl.AbstractImpl)
    (then
-    ;;@ genericinterfaceabstractimpl/AbstractImpl.java:22:22
+    ;;@ genericinterfaceabstractimpl/AbstractImpl.java:24:22
     (return )
    )
   )
-  ;;@ genericinterfaceabstractimpl/AbstractImpl.java:22:22
+  ;;@ genericinterfaceabstractimpl/AbstractImpl.java:24:22
   (global.set $$class-initialized@genericinterfaceabstractimpl.AbstractImpl (i32.const 1))
-  ;;@ genericinterfaceabstractimpl/AbstractImpl.java:22:22
+  ;;@ genericinterfaceabstractimpl/AbstractImpl.java:24:22
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

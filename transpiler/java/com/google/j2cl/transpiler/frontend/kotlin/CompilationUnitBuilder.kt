@@ -1162,7 +1162,7 @@ class CompilationUnitBuilder(
 
     return MethodDescriptor.Builder.from(methodDescriptor)
       .setParameterDescriptors(listOf())
-      .setDeclarationDescriptor(null)
+      .makeDeclaration()
       .build()
   }
 

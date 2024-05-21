@@ -2,8 +2,6 @@ goog.module('genericinterfaceabstractimpl.MyInterface$impl');
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $LambdaAdaptor = goog.forwardDeclare('genericinterfaceabstractimpl.MyInterface.$LambdaAdaptor$impl');
-
 /**
  * @interface
  * @template T
@@ -11,11 +9,8 @@ let $LambdaAdaptor = goog.forwardDeclare('genericinterfaceabstractimpl.MyInterfa
 class MyInterface {
  /** @abstract @nodts @return {T} */
  m_fun__java_lang_Object__java_lang_Object(/** T */ t) {}
- /** @nodts @template T @return {MyInterface<T>} */
- static $adapt(/** ?function(T):T */ fn) {
-  MyInterface.$clinit();
-  return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
- }
+ /** @abstract @nodts @template T_1 */
+ m_g__java_lang_Object__void(/** T_1 */ t) {}
  /** @nodts */
  static $clinit() {
   MyInterface.$clinit = () =>{};
@@ -31,9 +26,7 @@ class MyInterface {
  }
  
  /** @nodts */
- static $loadModules() {
-  $LambdaAdaptor = goog.module.get('genericinterfaceabstractimpl.MyInterface.$LambdaAdaptor$impl');
- }
+ static $loadModules() {}
 }
 MyInterface.$markImplementor(/**@type {Function}*/ (MyInterface));
 $Util.$setClassMetadataForInterface(MyInterface, 'genericinterfaceabstractimpl.MyInterface');

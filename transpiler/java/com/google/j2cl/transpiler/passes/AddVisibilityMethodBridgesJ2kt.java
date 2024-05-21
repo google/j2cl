@@ -62,8 +62,7 @@ public class AddVisibilityMethodBridgesJ2kt extends NormalizationPass {
     return Method.newBuilder()
         .setMethodDescriptor(
             MethodDescriptor.Builder.from(originMethod)
-                .setDeclarationDescriptor(null)
-                .setTypeArgumentTypeDescriptors(ImmutableList.of())
+                .makeDeclaration()
                 .setEnclosingTypeDescriptor(type.getTypeDescriptor())
                 .setNative(false)
                 .setAbstract(false)

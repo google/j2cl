@@ -17,6 +17,8 @@ package genericinterfaceabstractimpl;
 
 interface MyInterface<T> {
   T fun(T t);
+
+  <T> void g(T t);
 }
 
 public abstract class AbstractImpl implements MyInterface<Integer> {}

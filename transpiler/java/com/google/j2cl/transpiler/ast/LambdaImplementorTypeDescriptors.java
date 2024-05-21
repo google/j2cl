@@ -164,9 +164,8 @@ public final class LambdaImplementorTypeDescriptors {
         functionalInterfaceTypeDescriptor.getSingleAbstractMethodDescriptor();
     return MethodDescriptor.Builder.from(functionalInterfaceMethodDescriptor)
         .setNative(false)
+        .makeDeclaration()
         // This is the declaration.
-        .setDeclarationDescriptor(null)
-        .setTypeArgumentTypeDescriptors(ImmutableList.of())
         .setEnclosingTypeDescriptor(implementorTypeDescriptor)
         .setSynthetic(false)
         .setAbstract(false)

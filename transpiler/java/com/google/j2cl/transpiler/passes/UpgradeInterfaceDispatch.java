@@ -17,7 +17,6 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.collect.MoreCollectors.onlyElement;
 
-import com.google.common.collect.ImmutableList;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.MethodCall;
@@ -75,8 +74,7 @@ public final class UpgradeInterfaceDispatch extends NormalizationPass {
       // class that does not implement the method. In this case, synthesize a method descriptor
       // which will become a vtable dispatch.
       return MethodDescriptor.Builder.from(descriptor.getDeclarationDescriptor())
-          .setDeclarationDescriptor(null)
-          .setTypeArgumentTypeDescriptors(ImmutableList.of())
+          .makeDeclaration()
           .setDefaultMethod(false)
           .setAbstract(typeDescriptor.getTypeDeclaration().isAbstract())
           .setEnclosingTypeDescriptor(typeDescriptor.toNullable())

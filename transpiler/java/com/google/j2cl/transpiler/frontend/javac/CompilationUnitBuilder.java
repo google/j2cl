@@ -1009,7 +1009,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       methodDescriptor =
           MethodDescriptor.Builder.from(methodDescriptor)
               .setParameterDescriptors(ImmutableList.of())
-              .setDeclarationDescriptor(null)
+              .makeDeclaration()
               .build();
     }
 

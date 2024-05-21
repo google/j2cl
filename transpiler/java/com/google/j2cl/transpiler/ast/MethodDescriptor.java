@@ -1219,9 +1219,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
           .setOrigin(MethodOrigin.ABSTRACT_STUB)
           .setBridgeTarget(null)
           .setSynthetic(true)
+          .makeDeclaration()
           // Clear properties that might have been carried over when creating this
           // descriptor from an existing one.
-          .setDeclarationDescriptor(null)
           .setDefaultMethod(false)
           .setAbstract(true)
           .setNative(false)
@@ -1235,15 +1235,18 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return setBridgeOrigin(originDescriptor)
           .setOrigin(methodOrigin)
           .setBridgeTarget(targetDescriptor)
+          .makeDeclaration()
           .setSynthetic(true)
           // Clear properties that might have been carried over when creating this
           // descriptor from an existing one.
-          .setDeclarationDescriptor(null)
-          .setTypeArgumentTypeDescriptors(ImmutableList.of())
           .setDefaultMethod(false)
           .setAbstract(false)
           .setNative(false)
           .setUncheckedCast(false);
+    }
+
+    public Builder makeDeclaration() {
+      return setDeclarationDescriptor(null).setTypeArgumentTypeDescriptors(ImmutableList.of());
     }
 
     /** Internal use only. Use {@link #makeBridge}. */
