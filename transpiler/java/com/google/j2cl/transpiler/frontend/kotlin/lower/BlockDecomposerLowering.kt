@@ -538,14 +538,7 @@ class BlockDecomposerTransformer(
           results.memoryOptimizedMap { (cond, res, orig) ->
             when {
               isElseBranch(orig) -> IrElseBranchImpl(orig.startOffset, orig.endOffset, cond, res)
-              // MODIFIED BY GOOGLE.
-              // Remove `else /* comment */ ->` pattern that confuses go/wald and produces an
-              // incorrect 'header' file during the Kotlin compilation.
-              // TODO(b/308970907): Reintroduce the original code once the bug is fixed.
-              // Original code:
-              // else /* IrBranch */ -> IrBranchImpl(orig.startOffset, orig.endOffset, cond, res)
-              else -> IrBranchImpl(orig.startOffset, orig.endOffset, cond, res)
-            // END OF MODIFICATIONS.
+              else /* IrBranch */ -> IrBranchImpl(orig.startOffset, orig.endOffset, cond, res)
             }
           }
         return expression.run { IrWhenImpl(startOffset, endOffset, type, origin, branches) }
@@ -953,15 +946,8 @@ class BlockDecomposerTransformer(
             when {
               isElseBranch(branch) ->
                 IrElseBranchImpl(branch.startOffset, branch.endOffset, condition, newResult)
-              // MODIFIED BY GOOGLE.
-              // Remove `else /* comment */ ->` pattern that confuses go/wald and produces an
-              // incorrect 'header' file during the Kotlin compilation.
-              // TODO(b/308970907): Reintroduce the original code once the bug is fixed.
-              // Original code:
-              // else /* IrBranch  */ ->
-              //   IrBranchImpl(branch.startOffset, branch.endOffset, condition, newResult)
-              else -> IrBranchImpl(branch.startOffset, branch.endOffset, condition, newResult)
-            // END OF MODIFICATIONS.
+              else /* IrBranch  */ ->
+                IrBranchImpl(branch.startOffset, branch.endOffset, condition, newResult)
             }
           }
 
@@ -980,15 +966,8 @@ class BlockDecomposerTransformer(
             when {
               isElseBranch(branch) ->
                 IrElseBranchImpl(branch.startOffset, branch.endOffset, condition, result)
-              // MODIFIED BY GOOGLE.
-              // Remove `else /* comment */ ->` pattern that confuses go/wald and produces an
-              // incorrect 'header' file during the Kotlin compilation.
-              // TODO(b/308970907): Reintroduce the original code once the bug is fixed.
-              // Original code:
-              // else /* IrBranch  */ ->
-              //  IrBranchImpl(branch.startOffset, branch.endOffset, condition, result)
-              else -> IrBranchImpl(branch.startOffset, branch.endOffset, condition, result)
-            // END OF MODIFICATIONS.
+              else /* IrBranch  */ ->
+                IrBranchImpl(branch.startOffset, branch.endOffset, condition, result)
             }
           }
 
