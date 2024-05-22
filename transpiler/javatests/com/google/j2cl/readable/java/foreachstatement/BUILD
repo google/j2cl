@@ -10,5 +10,8 @@ package(
 
 readable_example(
     srcs = glob(["*.java"]),
+    # TODO(b/342159812): Re-enable build tests when kotlin code is valid.
+    build_kt_native_readables = False,
+    build_kt_readables = False,
     deps = ["//third_party:jsinterop-annotations-j2cl"],
 )

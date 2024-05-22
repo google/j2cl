@@ -49,18 +49,26 @@ public class ForEachStatement {
     }
   }
 
-  static class IterableReturningTypeVariable<T extends @JsNonNull Iterator<Integer>>
+  static class IterableReturningTypeVariable<U, T extends @JsNonNull Iterator<Integer>>
       implements Iterable<Integer> {
     public T iterator() {
       return null;
     }
   }
 
-  private <T extends Object & Iterable<String>, U extends T> void testTypeVariable() {
+  private <T extends Object & Iterable<String>, U extends T, V extends Object & Iterable<Integer>>
+      void testTypeVariable() {
     U iterable = null;
     for (String s : iterable) {}
 
-    IterableReturningTypeVariable<?> anotherIterable = null;
+    IterableReturningTypeVariable<?, ?> anotherIterable = null;
     for (int s : anotherIterable) {}
+
+    // This is an auto-unboxing via an intersection iterable type.
+    V integerIterable = null;
+    for (int i : integerIterable) {}
+
+    // This is an auto-unboxing and widening via an intersection iterable type.
+    for (long i : integerIterable) {}
   }
 }

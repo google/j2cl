@@ -23,6 +23,7 @@ import javaemul.lang.JavaIterable
 import kotlin.Any
 import kotlin.Exception
 import kotlin.Int
+import kotlin.Long
 import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
@@ -65,14 +66,21 @@ open class ForEachStatement {
   }
  }
 
- internal fun <T: MutableIterable<String?>?, U: T> testTypeVariable_private_2() {
+ internal fun <T: MutableIterable<String?>?, U: T, V: MutableIterable<Int?>?> testTypeVariable_private_2() {
   val iterable: U? = null
   for (s in iterable!!) {
    val s_1: String? = s
   }
-  val anotherIterable: ForEachStatement.IterableReturningTypeVariable<*>? = null
+  val anotherIterable: ForEachStatement.IterableReturningTypeVariable<*, *>? = null
   for (s_2 in anotherIterable!!) {
    val s_3: Int = s_2!!
+  }
+  val integerIterable: V? = null
+  for (i in integerIterable!!) {
+   val i_1: Int = i!!
+  }
+  for (i_2 in integerIterable!!) {
+   val i_3: Long = i_2!!
   }
  }
 
@@ -88,7 +96,7 @@ open class ForEachStatement {
   }
  }
 
- open class IterableReturningTypeVariable<T: MutableIterator<Int?>> internal constructor(): JavaIterable<Int?> {
+ open class IterableReturningTypeVariable<U, T: MutableIterator<Int?>> internal constructor(): JavaIterable<Int?> {
   override fun iterator(): T {
    return null!!
   }

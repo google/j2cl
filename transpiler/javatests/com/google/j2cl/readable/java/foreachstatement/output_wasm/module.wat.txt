@@ -409,7 +409,7 @@
 ;;; void ForEachStatement.testTypeVariable()
 (func $m_testTypeVariable__void_$p_foreachstatement_ForEachStatement@foreachstatement.ForEachStatement
  (param $this (ref null $foreachstatement.ForEachStatement))
- ;;@ foreachstatement/ForEachStatement.java:59:66
+ ;;@ foreachstatement/ForEachStatement.java:60:11
  (local $iterable (ref null $java.lang.Object))
  (local $$iterator (ref null $java.lang.Object))
  (local $$qualifier (ref null $java.lang.Object))
@@ -417,10 +417,17 @@
  (local $anotherIterable (ref null $foreachstatement.ForEachStatement.IterableReturningTypeVariable))
  (local $$iterator_1 (ref null $java.lang.Object))
  (local $s_1 i32)
+ (local $integerIterable (ref null $java.lang.Object))
+ (local $$iterator_2 (ref null $java.lang.Object))
+ (local $$qualifier_1 (ref null $java.lang.Object))
+ (local $i i32)
+ (local $$iterator_3 (ref null $java.lang.Object))
+ (local $$qualifier_2 (ref null $java.lang.Object))
+ (local $i_1 i64)
  (block
-  ;;@ foreachstatement/ForEachStatement.java:60:4
-  (local.set $iterable (ref.null $java.lang.Object))
   ;;@ foreachstatement/ForEachStatement.java:61:4
+  (local.set $iterable (ref.null $java.lang.Object))
+  ;;@ foreachstatement/ForEachStatement.java:62:4
   (local.set $$iterator (block (result (ref null $java.lang.Object))
    (local.set $$qualifier (local.get $iterable))
    (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast (ref $java.lang.Iterable.vtable) (call $get.itable.$java.lang.Iterable (local.get $$qualifier)))))
@@ -430,24 +437,60 @@
     (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator)))))))
     (block $LOOP.CONTINUE
      (block
-      ;;@ foreachstatement/ForEachStatement.java:61:4
+      ;;@ foreachstatement/ForEachStatement.java:62:4
       (local.set $s (ref.cast (ref null $java.lang.String) (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator)))))))
      )
     )
     (br 0)
    )
   )
-  ;;@ foreachstatement/ForEachStatement.java:63:4
-  (local.set $anotherIterable (ref.null $foreachstatement.ForEachStatement.IterableReturningTypeVariable))
   ;;@ foreachstatement/ForEachStatement.java:64:4
+  (local.set $anotherIterable (ref.null $foreachstatement.ForEachStatement.IterableReturningTypeVariable))
+  ;;@ foreachstatement/ForEachStatement.java:65:4
   (local.set $$iterator_1 (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $anotherIterable))(struct.get $foreachstatement.ForEachStatement.IterableReturningTypeVariable.vtable $m_iterator__java_util_Iterator (struct.get $foreachstatement.ForEachStatement.IterableReturningTypeVariable $vtable(local.get $anotherIterable)))))
   (block $LOOP_1.BREAK
    (loop
     (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator_1))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator_1)))))))
     (block $LOOP_1.CONTINUE
      (block
-      ;;@ foreachstatement/ForEachStatement.java:64:4
+      ;;@ foreachstatement/ForEachStatement.java:65:4
       (local.set $s_1 (call $m_intValue__int@java.lang.Integer (ref.as_non_null (ref.cast (ref null $java.lang.Integer) (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator_1))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator_1)))))))))
+     )
+    )
+    (br 0)
+   )
+  )
+  ;;@ foreachstatement/ForEachStatement.java:68:4
+  (local.set $integerIterable (ref.null $java.lang.Object))
+  ;;@ foreachstatement/ForEachStatement.java:69:4
+  (local.set $$iterator_2 (block (result (ref null $java.lang.Object))
+   (local.set $$qualifier_1 (local.get $integerIterable))
+   (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast (ref $java.lang.Iterable.vtable) (call $get.itable.$java.lang.Iterable (local.get $$qualifier_1)))))
+  ))
+  (block $LOOP_2.BREAK
+   (loop
+    (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator_2))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator_2)))))))
+    (block $LOOP_2.CONTINUE
+     (block
+      ;;@ foreachstatement/ForEachStatement.java:69:4
+      (local.set $i (call $m_intValue__int@java.lang.Integer (ref.as_non_null (ref.cast (ref null $java.lang.Integer) (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator_2))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator_2)))))))))
+     )
+    )
+    (br 0)
+   )
+  )
+  ;;@ foreachstatement/ForEachStatement.java:72:4
+  (local.set $$iterator_3 (block (result (ref null $java.lang.Object))
+   (local.set $$qualifier_2 (local.get $integerIterable))
+   (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $$qualifier_2))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast (ref $java.lang.Iterable.vtable) (call $get.itable.$java.lang.Iterable (local.get $$qualifier_2)))))
+  ))
+  (block $LOOP_3.BREAK
+   (loop
+    (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator_3))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator_3)))))))
+    (block $LOOP_3.CONTINUE
+     (block
+      ;;@ foreachstatement/ForEachStatement.java:72:4
+      (local.set $i_1 (call $m_longValue__long@java.lang.Long (ref.as_non_null (ref.cast (ref null $java.lang.Long) (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator_3))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator_3)))))))))
      )
     )
     (br 0)
@@ -503,7 +546,7 @@
 
 ;;; Code for foreachstatement.ForEachStatement.IterableReturningTypeVariable [methods]
 
-;;; IterableReturningTypeVariable<T> IterableReturningTypeVariable.$create()
+;;; IterableReturningTypeVariable<U, T> IterableReturningTypeVariable.$create()
 (func $$create__@foreachstatement.ForEachStatement.IterableReturningTypeVariable
  (result (ref null $foreachstatement.ForEachStatement.IterableReturningTypeVariable))
  ;;@ foreachstatement/ForEachStatement.java:52:15
