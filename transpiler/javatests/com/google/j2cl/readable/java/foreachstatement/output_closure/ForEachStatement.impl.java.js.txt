@@ -5,10 +5,14 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Exception1 = goog.forwardDeclare('foreachstatement.ForEachStatement.Exception1$impl');
 let Exception2 = goog.forwardDeclare('foreachstatement.ForEachStatement.Exception2$impl');
+let Exception3 = goog.forwardDeclare('foreachstatement.ForEachStatement.Exception3$impl');
+let Exception4 = goog.forwardDeclare('foreachstatement.ForEachStatement.Exception4$impl');
+let Character = goog.forwardDeclare('java.lang.Character$impl');
 let Exception = goog.forwardDeclare('java.lang.Exception$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Iterable = goog.forwardDeclare('java.lang.Iterable$impl');
 let Long = goog.forwardDeclare('java.lang.Long$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
 let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
@@ -55,11 +59,29 @@ class ForEachStatement extends j_l_Object {
    let __$exc = $Exceptions.toJava(__$jsexc);
    if (Exception1.$isInstance(__$exc) || Exception2.$isInstance(__$exc)) {
     let e = /**@type {(Exception1|Exception2)}*/ (__$exc);
-    for (let $iterator = /**@type {Iterable<*>}*/ ($Casts.$to(e, Iterable)).m_iterator__java_util_Iterator(); $iterator.m_hasNext__boolean(); ) {
-     let o = $iterator.m_next__java_lang_Object();
+    for (let $iterator = /**@type {Iterable<(Number|number)>}*/ ($Casts.$to(e, Iterable)).m_iterator__java_util_Iterator(); $iterator.m_hasNext__boolean(); ) {
+     let o = /**@type {(Number|number)}*/ ($Casts.$to($iterator.m_next__java_lang_Object(), Number));
+    }
+   } else if (Exception3.$isInstance(__$exc) || Exception4.$isInstance(__$exc)) {
+    let e_1 = /**@type {(Exception3|Exception4)}*/ (__$exc);
+    for (let $iterator_1 = /**@type {Iterable<*>}*/ ($Casts.$to(e_1, Iterable)).m_iterator__java_util_Iterator(); $iterator_1.m_hasNext__boolean(); ) {
+     let o_1 = $iterator_1.m_next__java_lang_Object();
     }
    } else {
     throw $Exceptions.toJs(__$exc);
+   }
+  }
+  try {
+   throw $Exceptions.toJs(Exception.$create__());
+  } catch (__$jsexc_1) {
+   let __$exc_1 = $Exceptions.toJava(__$jsexc_1);
+   if (Exception2.$isInstance(__$exc_1) || Exception3.$isInstance(__$exc_1)) {
+    let e_2 = /**@type {(Exception2|Exception3)}*/ (__$exc_1);
+    for (let $iterator_2 = /**@type {Iterable<!Long>}*/ ($Casts.$to(e_2, Iterable)).m_iterator__java_util_Iterator(); $iterator_2.m_hasNext__boolean(); ) {
+     let o_2 = /**@type {!Long}*/ ($Casts.$to($iterator_2.m_next__java_lang_Object(), Long)).m_longValue__long();
+    }
+   } else {
+    throw $Exceptions.toJs(__$exc_1);
    }
   }
  }
@@ -80,6 +102,10 @@ class ForEachStatement extends j_l_Object {
   for (let $iterator_3 = /**@type {Iterable<!Long>}*/ ($Casts.$to(integerIterable, Iterable)).m_iterator__java_util_Iterator(); $iterator_3.m_hasNext__boolean(); ) {
    let i_1 = /**@type {!Long}*/ ($Casts.$to($iterator_3.m_next__java_lang_Object(), Long)).m_longValue__long();
   }
+  let charIterable = null;
+  for (let $iterator_4 = charIterable.m_iterator__java_util_Iterator(); $iterator_4.m_hasNext__boolean(); ) {
+   let c = /**@type {Character}*/ ($Casts.$to($iterator_4.m_next__java_lang_Object(), Character)).m_charValue__char();
+  }
  }
  /** @nodts */
  static $clinit() {
@@ -96,10 +122,14 @@ class ForEachStatement extends j_l_Object {
  static $loadModules() {
   Exception1 = goog.module.get('foreachstatement.ForEachStatement.Exception1$impl');
   Exception2 = goog.module.get('foreachstatement.ForEachStatement.Exception2$impl');
+  Exception3 = goog.module.get('foreachstatement.ForEachStatement.Exception3$impl');
+  Exception4 = goog.module.get('foreachstatement.ForEachStatement.Exception4$impl');
+  Character = goog.module.get('java.lang.Character$impl');
   Exception = goog.module.get('java.lang.Exception$impl');
   Integer = goog.module.get('java.lang.Integer$impl');
   Iterable = goog.module.get('java.lang.Iterable$impl');
   Long = goog.module.get('java.lang.Long$impl');
+  Number = goog.module.get('java.lang.Number$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
   Throwable = goog.module.get('java.lang.Throwable$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');

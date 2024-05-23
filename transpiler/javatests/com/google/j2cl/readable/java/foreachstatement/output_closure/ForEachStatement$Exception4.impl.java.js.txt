@@ -1,66 +1,65 @@
-goog.module('foreachstatement.ForEachStatement.Exception2$impl');
+goog.module('foreachstatement.ForEachStatement.Exception4$impl');
 
 const Exception = goog.require('java.lang.Exception$impl');
 const Iterable = goog.require('java.lang.Iterable$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
 let Spliterator = goog.forwardDeclare('java.util.Spliterator$impl');
 let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
 
 /**
- * @implements {Iterable<Integer>}
+ * @implements {Iterable}
  */
-class Exception2 extends Exception {
+class Exception4 extends Exception {
  /** @protected @nodts */
  constructor() {
   super();
  }
- /** @nodts @return {!Exception2} */
+ /** @nodts @return {!Exception4} */
  static $create__() {
-  Exception2.$clinit();
-  let $instance = new Exception2();
-  $instance.$ctor__foreachstatement_ForEachStatement_Exception2__void();
+  Exception4.$clinit();
+  let $instance = new Exception4();
+  $instance.$ctor__foreachstatement_ForEachStatement_Exception4__void();
   $instance.m_privateInitError__javaemul_internal_ThrowableUtils_JsObject__void_$pp_java_lang(new Error($instance));
   return $instance;
  }
  /** @nodts */
- $ctor__foreachstatement_ForEachStatement_Exception2__void() {
+ $ctor__foreachstatement_ForEachStatement_Exception4__void() {
   this.$ctor__java_lang_Exception__void();
  }
- /** @override @nodts @return {Iterator<Integer>} */
+ /** @override @nodts @return {Iterator} */
  m_iterator__java_util_Iterator() {
   return null;
  }
  //Default method forwarding stub.
  /** @override @nodts */
- m_forEach__java_util_function_Consumer__void(/** Consumer<?> */ arg0) {
+ m_forEach__java_util_function_Consumer__void(/** Consumer */ arg0) {
   Iterable.m_forEach__$default__java_lang_Iterable__java_util_function_Consumer__void(this, arg0);
  }
  //Default method forwarding stub.
- /** @override @nodts @return {Spliterator<Integer>} */
+ /** @override @nodts @return {Spliterator} */
  m_spliterator__java_util_Spliterator() {
-  return /**@type {Spliterator<Integer>}*/ (Iterable.m_spliterator__$default__java_lang_Iterable__java_util_Spliterator(this));
+  return /**@type {Spliterator}*/ (Iterable.m_spliterator__$default__java_lang_Iterable__java_util_Spliterator(this));
  }
  /** @nodts */
  static $clinit() {
-  Exception2.$clinit = () =>{};
-  Exception2.$loadModules();
+  Exception4.$clinit = () =>{};
+  Exception4.$loadModules();
   Exception.$clinit();
   Iterable.$clinit();
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
-  return instance instanceof Exception2;
+  return instance instanceof Exception4;
  }
  
  /** @nodts */
  static $loadModules() {}
 }
-Iterable.$markImplementor(Exception2);
-$Util.$setClassMetadata(Exception2, 'foreachstatement.ForEachStatement$Exception2');
+Iterable.$markImplementor(Exception4);
+$Util.$setClassMetadata(Exception4, 'foreachstatement.ForEachStatement$Exception4');
 
-exports = Exception2;
+exports = Exception4;
 
-//# sourceMappingURL=ForEachStatement$Exception2.js.map
+//# sourceMappingURL=ForEachStatement$Exception4.js.map

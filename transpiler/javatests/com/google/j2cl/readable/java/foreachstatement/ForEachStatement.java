@@ -29,14 +29,26 @@ public class ForEachStatement {
     }
   }
 
-  static class Exception1 extends Exception implements Iterable<String> {
-    public Iterator<String> iterator() {
+  static class Exception1 extends Exception implements Iterable<Number> {
+    public Iterator<Number> iterator() {
       return null;
     }
   }
 
-  static class Exception2 extends Exception implements Iterable<Object> {
-    public Iterator<Object> iterator() {
+  static class Exception2 extends Exception implements Iterable<Integer> {
+    public Iterator<Integer> iterator() {
+      return null;
+    }
+  }
+
+  static class Exception3 extends Exception implements Iterable<Integer> {
+    public Iterator<Integer> iterator() {
+      return null;
+    }
+  }
+
+  static class Exception4 extends Exception implements Iterable {
+    public Iterator iterator() {
       return null;
     }
   }
@@ -45,7 +57,16 @@ public class ForEachStatement {
     try {
       throw new Exception();
     } catch (Exception1 | Exception2 e) {
+      for (Number o : e) {}
+    } catch (Exception3 | Exception4 e) {
+      // raw types
       for (Object o : e) {}
+    }
+    try {
+      throw new Exception();
+    } catch (Exception2 | Exception3 e) {
+      // unboxing and widening
+      for (long o : e) {}
     }
   }
 
@@ -70,5 +91,8 @@ public class ForEachStatement {
 
     // This is an auto-unboxing and widening via an intersection iterable type.
     for (long i : integerIterable) {}
+
+    Iterable<Character> charIterable = null;
+    for (int c : charIterable) {}
   }
 }

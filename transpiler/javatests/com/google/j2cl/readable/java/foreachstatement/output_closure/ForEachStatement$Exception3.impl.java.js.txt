@@ -1,4 +1,4 @@
-goog.module('foreachstatement.ForEachStatement.Exception2$impl');
+goog.module('foreachstatement.ForEachStatement.Exception3$impl');
 
 const Exception = goog.require('java.lang.Exception$impl');
 const Iterable = goog.require('java.lang.Iterable$impl');
@@ -12,21 +12,21 @@ let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
 /**
  * @implements {Iterable<Integer>}
  */
-class Exception2 extends Exception {
+class Exception3 extends Exception {
  /** @protected @nodts */
  constructor() {
   super();
  }
- /** @nodts @return {!Exception2} */
+ /** @nodts @return {!Exception3} */
  static $create__() {
-  Exception2.$clinit();
-  let $instance = new Exception2();
-  $instance.$ctor__foreachstatement_ForEachStatement_Exception2__void();
+  Exception3.$clinit();
+  let $instance = new Exception3();
+  $instance.$ctor__foreachstatement_ForEachStatement_Exception3__void();
   $instance.m_privateInitError__javaemul_internal_ThrowableUtils_JsObject__void_$pp_java_lang(new Error($instance));
   return $instance;
  }
  /** @nodts */
- $ctor__foreachstatement_ForEachStatement_Exception2__void() {
+ $ctor__foreachstatement_ForEachStatement_Exception3__void() {
   this.$ctor__java_lang_Exception__void();
  }
  /** @override @nodts @return {Iterator<Integer>} */
@@ -45,22 +45,22 @@ class Exception2 extends Exception {
  }
  /** @nodts */
  static $clinit() {
-  Exception2.$clinit = () =>{};
-  Exception2.$loadModules();
+  Exception3.$clinit = () =>{};
+  Exception3.$loadModules();
   Exception.$clinit();
   Iterable.$clinit();
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
-  return instance instanceof Exception2;
+  return instance instanceof Exception3;
  }
  
  /** @nodts */
  static $loadModules() {}
 }
-Iterable.$markImplementor(Exception2);
-$Util.$setClassMetadata(Exception2, 'foreachstatement.ForEachStatement$Exception2');
+Iterable.$markImplementor(Exception3);
+$Util.$setClassMetadata(Exception3, 'foreachstatement.ForEachStatement$Exception3');
 
-exports = Exception2;
+exports = Exception3;
 
-//# sourceMappingURL=ForEachStatement$Exception2.js.map
+//# sourceMappingURL=ForEachStatement$Exception3.js.map

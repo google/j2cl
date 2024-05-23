@@ -21,9 +21,11 @@ package foreachstatement
 import javaemul.lang.*
 import javaemul.lang.JavaIterable
 import kotlin.Any
+import kotlin.Char
 import kotlin.Exception
 import kotlin.Int
 import kotlin.Long
+import kotlin.Number
 import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
@@ -57,11 +59,30 @@ open class ForEachStatement {
    throw java.lang.Exception()
   } catch (e: ForEachStatement.Exception1) {
    for (o in e!!) {
-    val o_1: Any? = o
+    val o_1: Number? = o
    }
   } catch (e: ForEachStatement.Exception2) {
    for (o in e!!) {
-    val o_1: Any? = o
+    val o_1: Number? = o
+   }
+  } catch (e_1: ForEachStatement.Exception3) {
+   for (o_2 in e_1!!) {
+    val o_3: Any? = o_2
+   }
+  } catch (e_1: ForEachStatement.Exception4) {
+   for (o_2 in e_1!!) {
+    val o_3: Any? = o_2
+   }
+  }
+  try {
+   throw java.lang.Exception()
+  } catch (e_2: ForEachStatement.Exception2) {
+   for (o_4 in e_2!!) {
+    val o_5: Long = o_4!!
+   }
+  } catch (e_2: ForEachStatement.Exception3) {
+   for (o_4 in e_2!!) {
+    val o_5: Long = o_4!!
    }
   }
  }
@@ -82,17 +103,33 @@ open class ForEachStatement {
   for (i_2 in integerIterable!!) {
    val i_3: Long = i_2!!
   }
+  val charIterable: MutableIterable<Char?>? = null
+  for (c in charIterable!!) {
+   val c_1: Int = c!!
+  }
  }
 
- open class Exception1 internal constructor(): java.lang.Exception(), JavaIterable<String?> {
-  override fun iterator(): MutableIterator<String?> {
+ open class Exception1 internal constructor(): java.lang.Exception(), JavaIterable<Number?> {
+  override fun iterator(): MutableIterator<Number?> {
    return null!!
   }
  }
 
- open class Exception2 internal constructor(): java.lang.Exception(), JavaIterable<Any?> {
-  override fun iterator(): MutableIterator<Any?> {
+ open class Exception2 internal constructor(): java.lang.Exception(), JavaIterable<Int?> {
+  override fun iterator(): MutableIterator<Int?> {
    return null!!
+  }
+ }
+
+ open class Exception3 internal constructor(): java.lang.Exception(), JavaIterable<Int?> {
+  override fun iterator(): MutableIterator<Int?> {
+   return null!!
+  }
+ }
+
+ open class Exception4 internal constructor(): java.lang.Exception(), JavaIterable<Any?> {
+  override fun iterator(): MutableIterator<Any?> {
+   return null!! as MutableIterator<Any?>
   }
  }
 
