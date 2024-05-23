@@ -174,7 +174,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
                 Stream.of(generatorStage.emitToString(WasmConstructsGenerator::emitExceptionTag)),
                 getModuleParts("contents"),
                 streamDedupedValues(Summary::getGlobalSnippetsList),
-                Stream.of(typeGraph.getEmptyItableStructDeclaration()),
+                Stream.of(typeGraph.getEmptyItableDeclaration()),
                 typeGraph.getClasses().stream().map(TypeGraph.Type::getItableInitialization),
                 Stream.of(literalGlobals),
                 literalGetterMethods,
@@ -402,9 +402,11 @@ final class BazelJ2wasmBundler extends BazelWorker {
       return sb.toString();
     }
 
-    public String getEmptyItableStructDeclaration() {
+    public static final String EMPTY_ITABLE_NAME = "$itable.empty";
+
+    public String getEmptyItableDeclaration() {
       StringBuilder sb = new StringBuilder();
-      sb.append("(global $itable.empty (ref $itable) (struct.new $itable \n");
+      sb.append(format("(global %s (ref $itable) (struct.new $itable \n", EMPTY_ITABLE_NAME));
       for (int i = 0; i < itableAllocator.getItableSize(); i++) {
         sb.append("(ref.null struct)\n");
       }
@@ -450,13 +452,22 @@ final class BazelJ2wasmBundler extends BazelWorker {
         return implementedInterfaces;
       }
 
+      public String getItableTypeName() {
+        if (implementedInterfaces.isEmpty()) {
+          return "$itable";
+        }
+        return format("%s.itable", name);
+      }
+
       /** Emits the itable struct type for a class. */
       public String getItableStructDeclaration() {
+        if (implementedInterfaces.isEmpty()) {
+          return "";
+        }
+
+        String superItableTypeName = superType == null ? "$itable" : superType.getItableTypeName();
         StringBuilder sb = new StringBuilder();
-        sb.append(
-            format(
-                "(type %s.itable (sub %s (struct \n",
-                name, superType != null ? superType.name + ".itable" : "$itable"));
+        sb.append(format("(type %s.itable (sub %s (struct \n", name, superItableTypeName));
 
         String[] itableFieldTypes = new String[itableAllocator.getItableSize()];
 
@@ -481,19 +492,24 @@ final class BazelJ2wasmBundler extends BazelWorker {
         }
 
         StringBuilder sb = new StringBuilder();
-        sb.append(
-            format("(global %s.itable (ref %s.itable) (struct.new %s.itable \n", name, name, name));
+        sb.append(format("(global %s.itable (ref %s) ", name, getItableTypeName()));
+        if (implementedInterfaces.isEmpty()) {
+          sb.append(format("(global.get %s)", EMPTY_ITABLE_NAME));
+        } else {
+          sb.append(format("(struct.new %s \n", getItableTypeName()));
 
-        String[] itableFieldInitializer = new String[itableAllocator.getItableSize()];
-        implementedInterfaces.forEach(
-            i ->
-                itableFieldInitializer[itableAllocator.getItableFieldIndex(i.name)] =
-                    format("(global.get %s.vtable@%s)\n", i.name, this.name));
+          String[] itableFieldInitializer = new String[itableAllocator.getItableSize()];
+          implementedInterfaces.forEach(
+              i ->
+                  itableFieldInitializer[itableAllocator.getItableFieldIndex(i.name)] =
+                      format("(global.get %s.vtable@%s)\n", i.name, this.name));
 
-        for (String fieldInitializer : itableFieldInitializer) {
-          sb.append(fieldInitializer == null ? "(ref.null struct)\n" : fieldInitializer);
+          for (String fieldInitializer : itableFieldInitializer) {
+            sb.append(fieldInitializer == null ? "(ref.null struct)\n" : fieldInitializer);
+          }
+          sb.append(")");
         }
-        sb.append("))\n");
+        sb.append(")\n");
         return sb.toString();
       }
     }
