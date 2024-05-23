@@ -282,8 +282,11 @@ private val TypeDeclaration.isCollection: Boolean
   get() =
     toUnparameterizedTypeDescriptor().run { collectionTypeDescriptors.any { isAssignableTo(it) } }
 
+private val TypeDeclaration.isProtobufMessageOrBuilder: Boolean
+  get() = toUnparameterizedTypeDescriptor().isProtobufMessageOrBuilder()
+
 private val TypeDeclaration.shouldRender: Boolean
-  get() = visibility.isPublic && existsInObjC && !isCollection
+  get() = visibility.isPublic && existsInObjC && !isCollection && !isProtobufMessageOrBuilder
 
 private val TypeDeclaration.existsInObjC: Boolean
   get() = !isKtNative || mappedObjCNameRenderer != null

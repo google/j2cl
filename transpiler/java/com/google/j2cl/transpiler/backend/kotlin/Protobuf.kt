@@ -67,5 +67,5 @@ private fun DeclaredTypeDescriptor.isProtobufMessage(): Boolean {
     name == "com.google.protobuf.GeneratedMessageLite.ExtendableMessage"
 }
 
-private fun DeclaredTypeDescriptor.isProtobufMessageOrBuilder() =
+internal fun DeclaredTypeDescriptor.isProtobufMessageOrBuilder() =
   isProtobufMessage() || isProtobufBuilder()
