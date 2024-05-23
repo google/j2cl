@@ -157,6 +157,7 @@ abstract class WasmTypeLayout {
     }
     DeclaredTypeDescriptor typeDescriptor = getTypeDescriptor();
     typeDescriptor.getPolymorphicMethods().stream()
+        .filter(this::needsVtableEntry)
         .sorted(Comparator.comparing(MethodDescriptor::getMangledName))
         .forEach(md -> instanceMethodsByMangledName.put(md.getMangledName(), md));
     // Patch entry for $getClassImpl, since it is explicitly overridden in every class but does not
@@ -167,6 +168,22 @@ abstract class WasmTypeLayout {
           getClassMethodDescriptor.getMangledName(), getClassMethodDescriptor);
     }
     return instanceMethodsByMangledName;
+  }
+
+  private boolean needsVtableEntry(MethodDescriptor methodDescriptor) {
+    return !(methodDescriptor.getEnclosingTypeDescriptor().isFinal() || methodDescriptor.isFinal())
+        // TODO(b/342007699): Consider a separate method instead of
+        // getJsOverriddenMethodDescriptors.
+        || !methodDescriptor.getJsOverriddenMethodDescriptors().isEmpty()
+        || isAccidentalInterfaceOverride(methodDescriptor);
+  }
+
+  private boolean isAccidentalInterfaceOverride(MethodDescriptor methodDescriptor) {
+    return getTypeDescriptor().getInterfaceTypeDescriptors().stream()
+        .flatMap(i -> i.getPolymorphicMethods().stream())
+        // Skip the methods interfaces inherit from java.lang.Object.
+        .filter(m -> m.getEnclosingTypeDescriptor().isInterface())
+        .anyMatch(m -> m.getMangledName().equals(methodDescriptor.getMangledName()));
   }
 
   private static MethodDescriptor getGetClassMethodDescriptor(
