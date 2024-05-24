@@ -665,6 +665,7 @@ class CompilationUnitBuilder(
       irCall.isKClassJavaObjectTypePropertyReference ->
         convertKClassJavaPropertyReference(irCall, wrapPrimitives = true)
       irCall.isRangeToCall -> convertRangeToCall(irCall)
+      irCall.isRangeUntilCall -> convertRangeUntilCall(irCall)
       irCall.isBinaryOperation -> convertBinaryOperation(irCall)
       irCall.isPrefixOperation -> convertPrefixOperation(irCall)
       irCall.isEqualsOperator -> convertEqualsOperator(irCall)
@@ -860,6 +861,25 @@ class CompilationUnitBuilder(
           convertExpression(checkNotNull(irCall.getValueArgument(0))),
         )
       )
+      .build()
+  }
+
+  private fun convertRangeUntilCall(irCall: IrCall): Expression {
+    require(irCall.valueArgumentsCount == 1) { "invalid number of arguments" }
+    val qualifier = checkNotNull(convertQualifier(irCall))
+    val valueArgumentExpression = convertExpression(checkNotNull(irCall.getValueArgument(0)))
+    val methodDescriptor =
+      environment.getWellKnowMethodDescriptor(
+        "kotlin.ranges.until",
+        // We need to pass the dispatch receiver as the first argument because it's an extension
+        // function.
+        qualifier.typeDescriptor,
+        valueArgumentExpression.typeDescriptor,
+      )
+
+    return MethodCall.Builder.from(methodDescriptor)
+      .setArguments(qualifier, valueArgumentExpression)
+      .setSourcePosition(getSourcePosition(irCall))
       .build()
   }
 
@@ -1671,6 +1691,9 @@ class CompilationUnitBuilder(
 
   private val IrCall.isRangeToCall: Boolean
     get() = intrinsicMethods.isRangeTo(this)
+
+  private val IrCall.isRangeUntilCall: Boolean
+    get() = intrinsicMethods.isRangeUntil(this)
 
   private val IrCall.isEqualsOperator: Boolean
     get() = intrinsicMethods.isEqualsOperator(this)

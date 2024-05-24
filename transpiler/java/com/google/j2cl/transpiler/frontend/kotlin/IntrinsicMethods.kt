@@ -148,6 +148,9 @@ class IntrinsicMethods(val irBuiltIns: IrBuiltIns) {
 
   fun isRangeTo(irCall: IrCall): Boolean = irCall.symbol.toKey() in rangeToCallByIntrinsicSymbolKey
 
+  fun isRangeUntil(irCall: IrCall): Boolean =
+    irCall.symbol.toKey() in rangeUntilCallByIntrinsicSymbolKey
+
   private val prefixOperatorByIntrinsicSymbolKey =
     (mapPrefixOperation("not", PrefixOperator.COMPLEMENT) +
         mapPrefixOperation("inc", PrefixOperator.INCREMENT) +
@@ -173,12 +176,12 @@ class IntrinsicMethods(val irBuiltIns: IrBuiltIns) {
         mapComparisonBinaryOperation(irBuiltIns.lessFunByOperandType, BinaryOperator.LESS) +
         mapComparisonBinaryOperation(
           irBuiltIns.lessOrEqualFunByOperandType,
-          BinaryOperator.LESS_EQUALS
+          BinaryOperator.LESS_EQUALS,
         ) +
         mapComparisonBinaryOperation(irBuiltIns.greaterFunByOperandType, BinaryOperator.GREATER) +
         mapComparisonBinaryOperation(
           irBuiltIns.greaterOrEqualFunByOperandType,
-          BinaryOperator.GREATER_EQUALS
+          BinaryOperator.GREATER_EQUALS,
         ) +
         listOf(
           irBuiltIns.extensionStringPlus.toKey() to BinaryOperator.PLUS,
@@ -200,7 +203,7 @@ class IntrinsicMethods(val irBuiltIns: IrBuiltIns) {
         irBuiltIns.byteClass,
         irBuiltIns.shortClass,
         irBuiltIns.intClass,
-        irBuiltIns.longClass
+        irBuiltIns.longClass,
       )
     if (binaryOperator.isBitwiseOperator) {
       applicableClasses.add(irBuiltIns.booleanClass)
@@ -234,7 +237,7 @@ class IntrinsicMethods(val irBuiltIns: IrBuiltIns) {
         irBuiltIns.intClass,
         irBuiltIns.longClass,
         irBuiltIns.floatClass,
-        irBuiltIns.doubleClass
+        irBuiltIns.doubleClass,
       )
 
     // The method we want to map is defined on each class of {@code applicableClasses}, hence
@@ -254,8 +257,15 @@ class IntrinsicMethods(val irBuiltIns: IrBuiltIns) {
   ) = intrinsicComparisonFunctionByPrimitiveClass.map { it.value.toKey() to binaryOperator }
 
   private val rangeToCallByIntrinsicSymbolKey =
+    buildRangeOperatorCallByIntrinsicSymbolKey("rangeTo")
+  private val rangeUntilCallByIntrinsicSymbolKey =
+    buildRangeOperatorCallByIntrinsicSymbolKey("rangeUntil")
+
+  private fun buildRangeOperatorCallByIntrinsicSymbolKey(methodName: String) =
     buildSet() {
-      addAll(mapRangeToCall(listOf(irBuiltIns.charClass), listOf(irBuiltIns.charClass)))
+      addAll(
+        mapRangeOperatorCall(listOf(irBuiltIns.charClass), listOf(irBuiltIns.charClass), methodName)
+      )
 
       val numericRangeToTypes =
         listOf(
@@ -264,16 +274,17 @@ class IntrinsicMethods(val irBuiltIns: IrBuiltIns) {
           irBuiltIns.intClass,
           irBuiltIns.longClass,
         )
-      addAll(mapRangeToCall(numericRangeToTypes, numericRangeToTypes))
+      addAll(mapRangeOperatorCall(numericRangeToTypes, numericRangeToTypes, methodName))
     }
 
   /** Creates a mapping between the specified types for the `rangeTo` call. */
-  private fun mapRangeToCall(
+  private fun mapRangeOperatorCall(
     leftSide: List<IrClassifierSymbol>,
-    rightSide: List<IrClassifierSymbol>
+    rightSide: List<IrClassifierSymbol>,
+    methodName: String,
   ): List<Key> =
     leftSide.flatMap { left ->
-      rightSide.map { right -> Key(left.nonNullFqn, "rangeTo", listOf(right.nonNullFqn)) }
+      rightSide.map { right -> Key(left.nonNullFqn, methodName, listOf(right.nonNullFqn)) }
     }
 
   private data class Key(
