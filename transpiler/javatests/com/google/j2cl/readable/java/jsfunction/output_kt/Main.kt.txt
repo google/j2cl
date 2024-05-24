@@ -97,7 +97,7 @@ open class Main {
   val f: Main.JsFunctionVarargs? = Main.JsFunctionVarargs { i: Int, numbers: IntArray? ->
    var sum: Int = i
    for (number in numbers!!) {
-    val number_1: Int = number!!
+    val number_1: Int = number
     sum = sum + number_1
    }
    return@JsFunctionVarargs sum
@@ -110,7 +110,7 @@ open class Main {
    override fun m(i: Int, vararg numbers: Int): Int {
     var sum: Int = i
     for (number in numbers!!) {
-     val number_1: Int = number!!
+     val number_1: Int = number
      sum = sum + number_1
     }
     return sum

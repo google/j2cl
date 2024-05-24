@@ -166,6 +166,19 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
+  @Nullable
+  public MethodDescriptor getMethodDescriptor(String methodName, TypeDescriptor... parameters) {
+    for (TypeDescriptor typeDescriptor : getIntersectionTypeDescriptors()) {
+      MethodDescriptor methodDescriptor =
+          typeDescriptor.getMethodDescriptor(methodName, parameters);
+      if (methodDescriptor != null) {
+        return methodDescriptor;
+      }
+    }
+    return null;
+  }
+
+  @Override
   TypeDescriptor replaceInternalTypeDescriptors(TypeReplacer fn, ImmutableSet<TypeVariable> seen) {
     ImmutableList<TypeDescriptor> intersections = getIntersectionTypeDescriptors();
     ImmutableList<TypeDescriptor> newIntersections =

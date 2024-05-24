@@ -20,6 +20,7 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.collect.ImmutableSet;
 import java.util.function.Function;
+import javax.annotation.Nullable;
 
 /** A primitive type. */
 public class PrimitiveTypeDescriptor extends TypeDescriptor {
@@ -170,6 +171,13 @@ public class PrimitiveTypeDescriptor extends TypeDescriptor {
   @Override
   public boolean canBeReferencedExternally() {
     return true;
+  }
+
+  @Override
+  @Nullable
+  public MethodDescriptor getMethodDescriptor(String methodName, TypeDescriptor... parameters) {
+    throw new UnsupportedOperationException(
+        "getMethodDescriptor is unsupported in primitive types.");
   }
 
   @Override

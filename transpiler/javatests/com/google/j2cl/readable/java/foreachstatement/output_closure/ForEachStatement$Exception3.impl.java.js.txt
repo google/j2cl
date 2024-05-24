@@ -10,7 +10,7 @@ let Spliterator = goog.forwardDeclare('java.util.Spliterator$impl');
 let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
 
 /**
- * @implements {Iterable<Integer>}
+ * @implements {Iterable<!Integer>}
  */
 class Exception3 extends Exception {
  /** @protected @nodts */
@@ -29,7 +29,7 @@ class Exception3 extends Exception {
  $ctor__foreachstatement_ForEachStatement_Exception3__void() {
   this.$ctor__java_lang_Exception__void();
  }
- /** @override @nodts @return {Iterator<Integer>} */
+ /** @override @nodts @return {Iterator<!Integer>} */
  m_iterator__java_util_Iterator() {
   return null;
  }
@@ -39,9 +39,9 @@ class Exception3 extends Exception {
   Iterable.m_forEach__$default__java_lang_Iterable__java_util_function_Consumer__void(this, arg0);
  }
  //Default method forwarding stub.
- /** @override @nodts @return {Spliterator<Integer>} */
+ /** @override @nodts @return {Spliterator<!Integer>} */
  m_spliterator__java_util_Spliterator() {
-  return /**@type {Spliterator<Integer>}*/ (Iterable.m_spliterator__$default__java_lang_Iterable__java_util_Spliterator(this));
+  return /**@type {Spliterator<!Integer>}*/ (Iterable.m_spliterator__$default__java_lang_Iterable__java_util_Spliterator(this));
  }
  /** @nodts */
  static $clinit() {

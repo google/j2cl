@@ -15,14 +15,12 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import com.google.common.collect.ImmutableMap;
+
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayAccess;
 import com.google.j2cl.transpiler.ast.ArrayLength;
-import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
-import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.ForEachStatement;
@@ -35,7 +33,6 @@ import com.google.j2cl.transpiler.ast.PostfixOperator;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
-import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 
@@ -180,29 +177,20 @@ public class NormalizeForEachStatement extends NormalizationPass {
   private ForStatement convertForEachIterable(ForEachStatement forEachStatement) {
     Variable loopVariable = forEachStatement.getLoopVariable();
 
-    Expression iterableExpression =
-        maybeAddCast(
-            forEachStatement.getIterableExpression(),
-            TypeDescriptors.get().javaLangIterable,
-            loopVariable.getTypeDescriptor());
+    Expression iterableExpression = forEachStatement.getIterableExpression();
 
     MethodDescriptor iteratorMethod =
-        ((DeclaredTypeDescriptor) iterableExpression.getTypeDescriptor())
-            .getMethodDescriptor("iterator");
+        iterableExpression.getTypeDescriptor().getMethodDescriptor("iterator");
 
     Expression iteratorExpression =
-        maybeAddCast(
-            MethodCall.Builder.from(iteratorMethod).setQualifier(iterableExpression).build(),
-            TypeDescriptors.get().javaUtilIterator,
-            loopVariable.getTypeDescriptor());
-    DeclaredTypeDescriptor iteratorType =
-        (DeclaredTypeDescriptor) iteratorExpression.getTypeDescriptor();
+        MethodCall.Builder.from(iteratorMethod).setQualifier(iterableExpression).build();
+    TypeDescriptor iteratorType = iteratorMethod.getReturnTypeDescriptor();
 
     // Iterator<T> $iterator = (exp).iterator();
     Variable iteratorVariable =
         Variable.newBuilder()
             .setName("$iterator")
-            .setTypeDescriptor(iteratorMethod.getReturnTypeDescriptor())
+            .setTypeDescriptor(iteratorType)
             .setFinal(true)
             .build();
 
@@ -235,35 +223,6 @@ public class NormalizeForEachStatement extends NormalizationPass {
         .setConditionExpression(condition)
         .setBodyStatements(forVariableDeclarationStatement, forEachStatement.getBody())
         .setSourcePosition(forEachStatement.getSourcePosition())
-        .build();
-  }
-
-  /**
-   * Add a cast to expression to ensure the type of the expression is a DeclaredTypeDescriptor (i.e.
-   * a class, interface or enum), to allow for method lookup.
-   *
-   * <p>This is to workaround the fact that method lookup is only implemented by
-   * DeclaredTypeDescriptors. So if the iterable expression is typed as a TypeVariable,
-   * IntersectionTypeDescriptor or UnionTypeDescriptor, the cast will allow for method lookup.
-   */
-  private Expression maybeAddCast(
-      Expression iterableExpression,
-      DeclaredTypeDescriptor castToType,
-      TypeDescriptor loopVariableType) {
-    if (iterableExpression.getTypeDescriptor() instanceof DeclaredTypeDescriptor) {
-      return iterableExpression;
-    }
-
-    // If the loop variable types is a primitive, the iterable element type must be its boxed type.
-    TypeDescriptor iterableElementType =
-        loopVariableType.isPrimitive() ? loopVariableType.toBoxedType() : loopVariableType;
-    return CastExpression.newBuilder()
-        .setCastTypeDescriptor(
-            castToType.specializeTypeVariables(
-                ImmutableMap.of(
-                    castToType.getTypeDeclaration().getTypeParameterDescriptors().get(0),
-                    iterableElementType)))
-        .setExpression(iterableExpression)
         .build();
   }
 }

@@ -25,7 +25,6 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
-import kotlin.run
 
 @ObjCName("J2ktJ2ktGenericMethodReferences", exact = true)
 open class GenericMethodReferences {
@@ -46,12 +45,9 @@ open class GenericMethodReferences {
     return this@GenericMethodReferences.instanceGenericMethod_pp_j2kt<T>(arg0)
    }
   })
-  this.accept_pp_j2kt(run {
-   val ______q: GenericMethodReferences? = instance
-   object : InterfaceWithGenericMethod {
-    override fun <T> apply(arg0: T): T {
-     return ______q!!.instanceGenericMethod_pp_j2kt<T>(arg0)
-    }
+  this.accept_pp_j2kt(object : InterfaceWithGenericMethod {
+   override fun <T> apply(arg0: T): T {
+    return instance!!.instanceGenericMethod_pp_j2kt<T>(arg0)
    }
   })
  }

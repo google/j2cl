@@ -537,6 +537,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
    * there is a method with that signature.
    */
   @Nullable
+  @Override
   public MethodDescriptor getMethodDescriptor(String methodName, TypeDescriptor... parameters) {
     String targetSignature = MethodDescriptor.buildMethodSignature(methodName, parameters);
     return getMethodDescriptors().stream()

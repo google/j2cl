@@ -1011,6 +1011,18 @@ public final class AstUtils {
         .build();
   }
 
+  /** Returns the type of the iterable element for a type might appear in a foreach statement. */
+  public static TypeDescriptor getIterableElement(TypeDescriptor typeDescriptor) {
+    if (typeDescriptor.isArray()) {
+      return ((ArrayTypeDescriptor) typeDescriptor).getComponentTypeDescriptor();
+    }
+
+    TypeDescriptor iteratorTypeDescriptor =
+        typeDescriptor.getMethodDescriptor("iterator").getReturnTypeDescriptor();
+
+    return iteratorTypeDescriptor.getMethodDescriptor("next").getReturnTypeDescriptor();
+  }
+
   private static MethodDescriptor.Builder createMethodDescriptorBuilderFrom(
       FieldDescriptor fieldDescriptor) {
     return MethodDescriptor.newBuilder()

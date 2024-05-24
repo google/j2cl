@@ -11,7 +11,6 @@ let Character = goog.forwardDeclare('java.lang.Character$impl');
 let Exception = goog.forwardDeclare('java.lang.Exception$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Iterable = goog.forwardDeclare('java.lang.Iterable$impl');
-let Long = goog.forwardDeclare('java.lang.Long$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
@@ -19,6 +18,7 @@ let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 
 class ForEachStatement extends j_l_Object {
  /** @protected @nodts */
@@ -77,8 +77,8 @@ class ForEachStatement extends j_l_Object {
    let __$exc_1 = $Exceptions.toJava(__$jsexc_1);
    if (Exception2.$isInstance(__$exc_1) || Exception3.$isInstance(__$exc_1)) {
     let e_2 = /**@type {(Exception2|Exception3)}*/ (__$exc_1);
-    for (let $iterator_2 = /**@type {Iterable<!Long>}*/ ($Casts.$to(e_2, Iterable)).m_iterator__java_util_Iterator(); $iterator_2.m_hasNext__boolean(); ) {
-     let o_2 = /**@type {!Long}*/ ($Casts.$to($iterator_2.m_next__java_lang_Object(), Long)).m_longValue__long();
+    for (let $iterator_2 = /**@type {Iterable<Integer>}*/ ($Casts.$to(e_2, Iterable)).m_iterator__java_util_Iterator(); $iterator_2.m_hasNext__boolean(); ) {
+     let o_2 = $Primitives.widenIntToLong(/**@type {Integer}*/ ($Casts.$to($iterator_2.m_next__java_lang_Object(), Integer)).m_intValue__int());
     }
    } else {
     throw $Exceptions.toJs(__$exc_1);
@@ -88,23 +88,52 @@ class ForEachStatement extends j_l_Object {
  /** @nodts @template T, U, V */
  m_testTypeVariable__void_$p_foreachstatement_ForEachStatement() {
   let iterable = null;
-  for (let $iterator = /**@type {Iterable<?string>}*/ ($Casts.$to(iterable, Iterable)).m_iterator__java_util_Iterator(); $iterator.m_hasNext__boolean(); ) {
+  for (let $iterator = /**@type {!Iterable<?string>}*/ ($Casts.$to(iterable, Iterable)).m_iterator__java_util_Iterator(); $iterator.m_hasNext__boolean(); ) {
    let s = /**@type {?string}*/ ($Casts.$to($iterator.m_next__java_lang_Object(), j_l_String));
   }
   let anotherIterable = null;
-  for (let $iterator_1 = /**@type {Iterator<!Integer>}*/ (anotherIterable.m_iterator__java_util_Iterator()); /**@type {!Iterator<!Integer>}*/ ($iterator_1).m_hasNext__boolean(); ) {
-   let s_1 = /**@type {!Integer}*/ ($Casts.$to(/**@type {!Iterator<!Integer>}*/ ($iterator_1).m_next__java_lang_Object(), Integer)).m_intValue__int();
+  for (let $iterator_1 = anotherIterable.m_iterator__java_util_Iterator(); /**@type {!Iterator<Integer>}*/ ($iterator_1).m_hasNext__boolean(); ) {
+   let s_1 = /**@type {Integer}*/ ($Casts.$to(/**@type {!Iterator<Integer>}*/ ($iterator_1).m_next__java_lang_Object(), Integer)).m_intValue__int();
   }
   let integerIterable = null;
-  for (let $iterator_2 = /**@type {Iterable<!Integer>}*/ ($Casts.$to(integerIterable, Iterable)).m_iterator__java_util_Iterator(); $iterator_2.m_hasNext__boolean(); ) {
-   let i = /**@type {!Integer}*/ ($Casts.$to($iterator_2.m_next__java_lang_Object(), Integer)).m_intValue__int();
+  for (let $iterator_2 = /**@type {!Iterable<Integer>}*/ ($Casts.$to(integerIterable, Iterable)).m_iterator__java_util_Iterator(); $iterator_2.m_hasNext__boolean(); ) {
+   let i = /**@type {Integer}*/ ($Casts.$to($iterator_2.m_next__java_lang_Object(), Integer)).m_intValue__int();
   }
-  for (let $iterator_3 = /**@type {Iterable<!Long>}*/ ($Casts.$to(integerIterable, Iterable)).m_iterator__java_util_Iterator(); $iterator_3.m_hasNext__boolean(); ) {
-   let i_1 = /**@type {!Long}*/ ($Casts.$to($iterator_3.m_next__java_lang_Object(), Long)).m_longValue__long();
+  for (let $iterator_3 = /**@type {!Iterable<Integer>}*/ ($Casts.$to(integerIterable, Iterable)).m_iterator__java_util_Iterator(); $iterator_3.m_hasNext__boolean(); ) {
+   let i_1 = $Primitives.widenIntToLong(/**@type {Integer}*/ ($Casts.$to($iterator_3.m_next__java_lang_Object(), Integer)).m_intValue__int());
   }
   let charIterable = null;
   for (let $iterator_4 = charIterable.m_iterator__java_util_Iterator(); $iterator_4.m_hasNext__boolean(); ) {
    let c = /**@type {Character}*/ ($Casts.$to($iterator_4.m_next__java_lang_Object(), Character)).m_charValue__char();
+  }
+ }
+ /** @nodts */
+ m_testSideEffects__void_$p_foreachstatement_ForEachStatement() {
+  let iterable = null;
+  let primitiveArray = null;
+  for (let $iterator = iterable.m_iterator__java_util_Iterator(); $iterator.m_hasNext__boolean(); ) {
+   let i = /**@type {Integer}*/ ($Casts.$to($iterator.m_next__java_lang_Object(), Integer));
+   {
+    i = Integer.m_valueOf__int__java_lang_Integer(4);
+   }
+  }
+  for (let $iterator_1 = iterable.m_iterator__java_util_Iterator(); $iterator_1.m_hasNext__boolean(); ) {
+   let i_1 = /**@type {Integer}*/ ($Casts.$to($iterator_1.m_next__java_lang_Object(), Integer)).m_intValue__int();
+   {
+    i_1 = i_1 + 4 | 0;
+   }
+  }
+  for (let $array = primitiveArray, $index = 0; $index < $array.length; $index++) {
+   let i_2 = $array[$index];
+   {
+    i_2 = i_2 + 4 | 0;
+   }
+  }
+  for (let $array_1 = primitiveArray, $index_1 = 0; $index_1 < $array_1.length; $index_1++) {
+   let i_3 = $array_1[$index_1];
+   {
+    i_3 = i_3 + 1 | 0;
+   }
   }
  }
  /** @nodts */
@@ -128,13 +157,13 @@ class ForEachStatement extends j_l_Object {
   Exception = goog.module.get('java.lang.Exception$impl');
   Integer = goog.module.get('java.lang.Integer$impl');
   Iterable = goog.module.get('java.lang.Iterable$impl');
-  Long = goog.module.get('java.lang.Long$impl');
   Number = goog.module.get('java.lang.Number$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
   Throwable = goog.module.get('java.lang.Throwable$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
   $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+  $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
  }
 }
 $Util.$setClassMetadata(ForEachStatement, 'foreachstatement.ForEachStatement');

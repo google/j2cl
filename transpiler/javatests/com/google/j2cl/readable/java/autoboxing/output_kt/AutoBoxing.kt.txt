@@ -192,8 +192,7 @@ open class AutoBoxing {
   val numbers_1: Array<Any?>? = numbers as Array<Any?>?
   var sum: Double = 0.0
   for (number in numbers_1!!) {
-   val number_1: Any? = number
-   sum = sum + (number_1 as Double?)!!.toDouble()
+   sum = sum + (number as Double?)!!.toDouble()
   }
   return sum
  }
@@ -206,8 +205,7 @@ open class AutoBoxing {
   val numbers_1: Array<Any?>? = numbers as Array<Any?>?
   var sum: Double = 0.0
   for (number in numbers_1!!) {
-   val number_1: Any? = number
-   sum = sum + (number_1 as Double?)!!.toDouble()
+   sum = sum + (number as Double?)!!.toDouble()
   }
   return sum
  }
@@ -218,7 +216,7 @@ open class AutoBoxing {
  ): Double {
   var sum: Double = 0.0
   for (d in boxedDoubles!!) {
-   val d_1: Double = d!!
+   val d_1: Double = d!!.toDouble()
    sum = sum + d_1
   }
   return sum

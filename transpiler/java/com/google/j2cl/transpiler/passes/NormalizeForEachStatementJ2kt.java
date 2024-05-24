@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.j2cl.transpiler.ast.AstUtils.getIterableElement;
+
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.Block;
@@ -25,11 +27,10 @@ import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
-import com.google.j2cl.transpiler.ast.VariableReference;
 
 /**
  * Normalize for-each statement in Kotlin by extracting loop variable declaration outside the
- * statement, allowing insertion of casts and non-null assertions when necessary.
+ * statement, allowing insertion of casts and non-null assertions, when necessary.
  */
 public class NormalizeForEachStatementJ2kt extends NormalizationPass {
   @Override
@@ -40,15 +41,23 @@ public class NormalizeForEachStatementJ2kt extends NormalizationPass {
           public Node rewriteForEachStatement(ForEachStatement forEachStatement) {
             TypeDescriptor iterableExpressionTypeDescriptor =
                 forEachStatement.getIterableExpression().getTypeDescriptor();
+            TypeDescriptor elementTypeDescriptor =
+                getIterableElement(iterableExpressionTypeDescriptor);
             Variable loopVariable = forEachStatement.getLoopVariable();
             TypeDescriptor loopVariableTypeDescriptor = loopVariable.getTypeDescriptor();
-            if (iterableExpressionTypeDescriptor.equals(loopVariableTypeDescriptor)) {
+            if (loopVariable.isFinal() && loopVariableTypeDescriptor.canBeNull()) {
+              // The variable is not modified by the body of the loop and since it is nullable, it
+              // won't need unboxing/coersions as it cant be a primitive, nor it would need
+              // nullability assertions since it is nullable.
               return forEachStatement;
             }
 
+            // Create the loop variable with a type corresponding to the element type of the
+            // iterator but make it nullable since the nullability of the return type cannot
+            // be trusted since it is obtained from a method call.
             Variable newLoopVariable =
                 Variable.Builder.from(loopVariable)
-                    .setTypeDescriptor(iterableExpressionTypeDescriptor)
+                    .setTypeDescriptor(elementTypeDescriptor.toNullable())
                     .build();
             Statement body = forEachStatement.getBody();
             return ForEachStatement.Builder.from(forEachStatement)
@@ -58,7 +67,7 @@ public class NormalizeForEachStatementJ2kt extends NormalizationPass {
                         .addStatement(
                             VariableDeclarationExpression.newBuilder()
                                 .addVariableDeclaration(
-                                    loopVariable, new VariableReference(newLoopVariable))
+                                    loopVariable, newLoopVariable.createReference())
                                 .build()
                                 .makeStatement(body.getSourcePosition()))
                         .addStatements(AstUtils.getBodyStatements(body))
@@ -67,4 +76,5 @@ public class NormalizeForEachStatementJ2kt extends NormalizationPass {
           }
         });
   }
+
 }

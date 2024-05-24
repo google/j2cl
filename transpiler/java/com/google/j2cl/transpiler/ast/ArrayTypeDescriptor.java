@@ -117,6 +117,12 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
+  @Nullable
+  public MethodDescriptor getMethodDescriptor(String methodName, TypeDescriptor... parameters) {
+    return TypeDescriptors.get().javaLangObject.getMethodDescriptor(methodName, parameters);
+  }
+
+  @Override
   public boolean isArray() {
     return true;
   }

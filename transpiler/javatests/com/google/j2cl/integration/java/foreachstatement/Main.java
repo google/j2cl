@@ -19,6 +19,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Iterator;
 
 /**
@@ -31,25 +32,31 @@ public class Main {
     testForEachArray_boxed();
     testForEachArray_unboxed();
     testForEachIterable();
-    testForEachIterable_intersectionTypes();
     testForEachIterable_typeVariable();
+    testForEachIterable_intersection();
+    testForEachIterable_union();
+    testForEachIterable_widening();
   }
 
   static class MyIterable implements Iterable<Integer>, Serializable {
     class MyIterator implements Iterator<Integer> {
       private int i = 5;
 
+      @Override
       public boolean hasNext() {
         return i >= 1;
       }
 
+      @Override
       public Integer next() {
-        return new Integer(i--);
+        return i--;
       }
 
+      @Override
       public void remove() {}
     }
 
+    @Override
     public Iterator<Integer> iterator() {
       return new MyIterator();
     }
@@ -65,7 +72,7 @@ public class Main {
       lastSeenInt = i;
     }
 
-    assertTrue("LastSeen:<" + lastSeenInt + "> should be zero", lastSeenInt == 1);
+    assertTrue("LastSeen:<" + lastSeenInt + "> should be one", lastSeenInt == 1);
   }
 
   private static void testForEachArray_nested() {
@@ -88,34 +95,35 @@ public class Main {
     }
   }
 
+  private static void testForEachArray_boxed() {
+    String concatName = "";
+    for (Integer i : new int[] {1, 2, 3}) {
+      concatName += i.getClass().getSimpleName();
+    }
+    assertEquals("IntegerIntegerInteger", concatName);
+  }
+
+  private static void testForEachArray_unboxed() {
+    int sum = 0;
+    for (int i : new Integer[] {1, 2, 3}) {
+      sum += i;
+    }
+    assertEquals(6, sum);
+  }
+
   private static int value(int i, int j) {
     return i * 10 + j;
   }
 
   private static void testForEachIterable() {
-    Integer lastSeenInteger = new Integer(-1);
+    Integer lastSeenInteger = -1;
     int j = 5;
     for (Integer s : new MyIterable()) {
       assertTrue("Seen:<" + s + "> Expected:<" + j + ">", s.intValue() == j);
       j--;
       lastSeenInteger = s;
     }
-    assertTrue(
-        "LastSeen:<" + lastSeenInteger + "> should be zero", lastSeenInteger.intValue() == 1);
-  }
-
-  private static <T extends MyIterable & Serializable, S extends T>
-      void testForEachIterable_intersectionTypes() {
-    S iterable = (S) new MyIterable();
-    Integer lastSeenInteger = new Integer(-1);
-    int j = 5;
-    for (Integer s : iterable) {
-      assertTrue("Seen:<" + s + "> Expected:<" + j + ">", s.intValue() == j);
-      j--;
-      lastSeenInteger = s;
-    }
-    assertTrue(
-        "LastSeen:<" + lastSeenInteger + "> should be zero", lastSeenInteger.intValue() == 1);
+    assertTrue("LastSeen:<" + lastSeenInteger + "> should be one", lastSeenInteger.intValue() == 1);
   }
 
   private static <T, C extends Iterable<T>> void testForEachIterable_typeVariable() {
@@ -149,19 +157,95 @@ public class Main {
     assertEquals("123", onetwothree);
   }
 
-  private static void testForEachArray_boxed() {
-    String concatName = "";
-    for (Integer i : new int[] {1, 2, 3}) {
-      concatName += i.getClass().getSimpleName();
+  private static <T extends MyIterable & Serializable, S extends T>
+      void testForEachIterable_intersection() {
+    S iterable = (S) new MyIterable();
+    Integer lastSeenInteger = -1;
+    int j = 5;
+    for (Integer i : iterable) {
+      assertTrue("Seen:<" + i + "> Expected:<" + j + ">", i.intValue() == j);
+      j--;
+      lastSeenInteger = i;
     }
-    assertEquals("IntegerIntegerInteger", concatName);
+    assertTrue("LastSeen:<" + lastSeenInteger + "> should be one", lastSeenInteger.intValue() == 1);
   }
 
-  private static void testForEachArray_unboxed() {
-    int sum = 0;
-    for (int i : new Integer[] {1, 2, 3}) {
-      sum += i;
+  static class Exception1 extends Exception implements Iterable<Number> {
+    Number[] numbers = {1, 2, 3};
+
+    @Override
+    public Iterator<Number> iterator() {
+      return Arrays.asList(numbers).iterator();
     }
-    assertEquals(6, sum);
+  }
+
+  static class Exception2 extends Exception implements Iterable<Integer> {
+    Integer[] numbers = {4, 5, 6};
+
+    @Override
+    public Iterator<Integer> iterator() {
+      return Arrays.asList(numbers).iterator();
+    }
+  }
+
+  static class Exception3 extends Exception implements Iterable<Integer> {
+    Integer[] numbers = {7, 8, 9};
+
+    @Override
+    public Iterator<Integer> iterator() {
+      return Arrays.asList(numbers).iterator();
+    }
+  }
+
+  private static void testForEachIterable_union() {
+    try {
+      if (true) {
+        throw new Exception1();
+      } else {
+        throw new Exception2();
+      }
+    } catch (Exception1 | Exception2 e) {
+      int start = 1;
+      // No common iterable element, but it can be assumed to be assignable to Number.
+      for (Number n : e) {
+        assertTrue(n.intValue() == start++);
+      }
+    }
+
+    try {
+      if (true) {
+        throw new Exception2();
+      } else {
+        throw new Exception3();
+      }
+    } catch (Exception2 | Exception3 e) {
+      int start = 4;
+      // Common iterable element that is assignable to int.
+      for (int n : e) {
+        assertTrue(n == start++);
+      }
+    }
+  }
+
+  private static <T extends MyIterable, S extends T> void testForEachIterable_widening() {
+    double lastSeenDouble = -1;
+    int j = 5;
+    for (double d : new MyIterable()) {
+      assertTrue("Seen:<" + d + "> Expected:<" + j + ">", d == j);
+      j--;
+      lastSeenDouble = d;
+    }
+    assertTrue("LastSeen:<" + lastSeenDouble + "> should be one", lastSeenDouble == 1);
+
+    // Repro for b/342207724.
+    S iterable = (S) new MyIterable();
+    long lastSeenLong = -1;
+    j = 5;
+    for (long l : iterable) {
+      assertTrue("Seen:<" + l + "> Expected:<" + j + ">", l == j);
+      j--;
+      lastSeenLong = l;
+    }
+    assertTrue("LastSeen:<" + lastSeenLong + "> should be one", lastSeenLong == 1);
   }
 }

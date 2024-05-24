@@ -365,6 +365,10 @@ public class TypeDescriptors {
     return typeDescriptor.isSameBaseType(get().javaLangEnum);
   }
 
+  public static boolean isJavaLangIterable(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.isSameBaseType(get().javaLangIterable);
+  }
+
   public static boolean isJavaLangThrowable(TypeDescriptor typeDescriptor) {
     return typeDescriptor.isSameBaseType(get().javaLangThrowable);
   }

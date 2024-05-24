@@ -17,6 +17,7 @@ package foreachstatement;
 
 import java.util.Iterator;
 import jsinterop.annotations.JsNonNull;
+import org.jspecify.nullness.Nullable;
 
 public class ForEachStatement {
   public void test(Iterable<Throwable> iterable) {
@@ -35,14 +36,14 @@ public class ForEachStatement {
     }
   }
 
-  static class Exception2 extends Exception implements Iterable<Integer> {
-    public Iterator<Integer> iterator() {
+  static class Exception2 extends Exception implements Iterable<@Nullable Integer> {
+    public Iterator<@Nullable Integer> iterator() {
       return null;
     }
   }
 
-  static class Exception3 extends Exception implements Iterable<Integer> {
-    public Iterator<Integer> iterator() {
+  static class Exception3 extends Exception implements Iterable<@JsNonNull Integer> {
+    public Iterator<@JsNonNull Integer> iterator() {
       return null;
     }
   }
@@ -57,6 +58,7 @@ public class ForEachStatement {
     try {
       throw new Exception();
     } catch (Exception1 | Exception2 e) {
+      // No common element type.
       for (Number o : e) {}
     } catch (Exception3 | Exception4 e) {
       // raw types
@@ -94,5 +96,29 @@ public class ForEachStatement {
 
     Iterable<Character> charIterable = null;
     for (int c : charIterable) {}
+  }
+
+  private void testSideEffects() {
+    Iterable<Integer> iterable = null;
+    int[] primitiveArray = null;
+    for (Integer i : iterable) {
+      // Modify the iteration variable general case.
+      i = 4;
+    }
+
+    for (int i : iterable) {
+      // Modify the iteration variable when there is a conversion.
+      i += 4;
+    }
+
+    for (int i : primitiveArray) {
+      // Modify the iteration variable primitive value;
+      i += 4;
+    }
+
+    for (int i : primitiveArray) {
+      // Modify the iteration variable unary operation;
+      i++;
+    }
   }
 }

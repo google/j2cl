@@ -146,6 +146,11 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
     return null;
   }
 
+  /** Returns the method descriptor by name and parameter types. */
+  @Nullable
+  public abstract MethodDescriptor getMethodDescriptor(
+      String methodName, TypeDescriptor... parameters);
+
   /** Returns the corresponding primitive type if the {@code setTypeDescriptor} is a boxed type. */
   public PrimitiveTypeDescriptor toUnboxedType() {
     return (PrimitiveTypeDescriptor) this;

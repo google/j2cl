@@ -125,6 +125,12 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
     return withoutNullabilityAnnotations();
   }
 
+  @Override
+  @Nullable
+  public MethodDescriptor getMethodDescriptor(String methodName, TypeDescriptor... parameters) {
+    return getUpperBoundTypeDescriptor().getMethodDescriptor(methodName, parameters);
+  }
+
   @Nullable
   public abstract KtVariance getKtVariance();
 

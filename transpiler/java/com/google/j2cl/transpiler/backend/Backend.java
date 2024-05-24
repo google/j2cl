@@ -105,6 +105,7 @@ import com.google.j2cl.transpiler.passes.NormalizeEnumClasses;
 import com.google.j2cl.transpiler.passes.NormalizeEquality;
 import com.google.j2cl.transpiler.passes.NormalizeFieldInitialization;
 import com.google.j2cl.transpiler.passes.NormalizeFieldInitializationJ2kt;
+import com.google.j2cl.transpiler.passes.NormalizeForEachIterable;
 import com.google.j2cl.transpiler.passes.NormalizeForEachStatement;
 import com.google.j2cl.transpiler.passes.NormalizeForEachStatementJ2kt;
 import com.google.j2cl.transpiler.passes.NormalizeForStatements;
@@ -212,6 +213,8 @@ public enum Backend {
           ResolveImplicitInstanceQualifiers::new,
           // Must be run before NormalizeForEachStatement.
           OptimizeXplatForEach::new,
+          NormalizeForEachIterable::new,
+          // Must run after NormalizeForEachIterable.
           () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ true),
           RestoreVariableScoping::new,
           NormalizeSuperMemberReferences::new,
@@ -380,6 +383,8 @@ public enum Backend {
           ConvertMethodReferencesToLambdas::new,
           ErasePackagedJsEnumVarargs::new,
           ResolveImplicitInstanceQualifiers::new,
+          NormalizeForEachIterable::new,
+          // Must run after NormalizeForEachIterable.
           () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ false),
           NormalizeSuperMemberReferences::new,
           RemoveWasmAnnotatedMethodBodies::new);
@@ -530,6 +535,8 @@ public enum Backend {
           ConvertMethodReferencesToLambdas::new,
           ErasePackagedJsEnumVarargs::new,
           ResolveImplicitInstanceQualifiers::new,
+          NormalizeForEachIterable::new,
+          // Must run after NormalizeForEachIterable.
           () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ false),
           NormalizeSuperMemberReferences::new,
           RemoveWasmAnnotatedMethodBodies::new);
@@ -669,7 +676,9 @@ public enum Backend {
     @Override
     public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
       return ImmutableList.of(
-          ConvertMethodReferencesToLambdas::new, ResolveImplicitInstanceQualifiers::new);
+          MakeVariablesFinal::new,
+          ConvertMethodReferencesToLambdas::new,
+          ResolveImplicitInstanceQualifiers::new);
     }
 
     @Override
@@ -697,6 +706,9 @@ public enum Backend {
           PropagateNullabilityJ2kt::new,
           NormalizeInterfaces::new,
           NormalizeTryWithResources::new,
+          NormalizeForEachIterable::new,
+          // Must run after NormalizeForEachIterable and benefits from running
+          // after MakeVariablesFinal.
           NormalizeForEachStatementJ2kt::new,
           NormalizeStaticMemberQualifiers::new,
           () -> new MoveVariableDeclarationsToEnclosingBlock(/* fromSwitchStatementsOnly= */ true),

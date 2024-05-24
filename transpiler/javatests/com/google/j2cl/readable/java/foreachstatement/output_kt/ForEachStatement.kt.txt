@@ -19,11 +19,13 @@
 package foreachstatement
 
 import javaemul.lang.*
+import java.lang.Integer
 import javaemul.lang.JavaIterable
 import kotlin.Any
 import kotlin.Char
 import kotlin.Exception
 import kotlin.Int
+import kotlin.IntArray
 import kotlin.Long
 import kotlin.Number
 import kotlin.OptIn
@@ -44,12 +46,10 @@ open class ForEachStatement {
   @ObjCName("withJavaLangIterable") iterable: MutableIterable<Throwable?>?
  ) {
   for (t in iterable!!) {
-   val t_1: Throwable? = t
-   t_1!!.toString()
+   t!!.toString()
   }
-  for (t_2 in arrayOfNulls<Throwable>(10)) {
-   val t_3: Throwable? = t_2
-   t_3!!.toString()
+  for (t_1 in arrayOfNulls<Throwable>(10)) {
+   t_1!!.toString()
   }
  }
 
@@ -58,54 +58,65 @@ open class ForEachStatement {
   try {
    throw java.lang.Exception()
   } catch (e: ForEachStatement.Exception1) {
-   for (o in e!!) {
-    val o_1: Number? = o
-   }
+   for (o in (e as MutableIterable<Number?>?)!!) {}
   } catch (e: ForEachStatement.Exception2) {
-   for (o in e!!) {
-    val o_1: Number? = o
-   }
+   for (o in (e as MutableIterable<Number?>?)!!) {}
   } catch (e_1: ForEachStatement.Exception3) {
-   for (o_2 in e_1!!) {
-    val o_3: Any? = o_2
-   }
+   for (o_1 in (e_1 as MutableIterable<Any?>?)!!) {}
   } catch (e_1: ForEachStatement.Exception4) {
-   for (o_2 in e_1!!) {
-    val o_3: Any? = o_2
-   }
+   for (o_1 in (e_1 as MutableIterable<Any?>?)!!) {}
   }
   try {
    throw java.lang.Exception()
   } catch (e_2: ForEachStatement.Exception2) {
-   for (o_4 in e_2!!) {
-    val o_5: Long = o_4!!
+   for (o_2 in (e_2 as MutableIterable<Int?>?)!!) {
+    val o_3: Long = o_2!!.toInt().toLong()
    }
   } catch (e_2: ForEachStatement.Exception3) {
-   for (o_4 in e_2!!) {
-    val o_5: Long = o_4!!
+   for (o_2 in (e_2 as MutableIterable<Int?>?)!!) {
+    val o_3: Long = o_2!!.toInt().toLong()
    }
   }
  }
 
  internal fun <T: MutableIterable<String?>?, U: T, V: MutableIterable<Int?>?> testTypeVariable_private_2() {
   val iterable: U? = null
-  for (s in iterable!!) {
-   val s_1: String? = s
-  }
+  for (s in iterable!!) {}
   val anotherIterable: ForEachStatement.IterableReturningTypeVariable<*, *>? = null
-  for (s_2 in anotherIterable!!) {
-   val s_3: Int = s_2!!
+  for (s_1 in anotherIterable!!) {
+   val s_2: Int = s_1!!.toInt()
   }
   val integerIterable: V? = null
   for (i in integerIterable!!) {
-   val i_1: Int = i!!
+   val i_1: Int = i!!.toInt()
   }
   for (i_2 in integerIterable!!) {
-   val i_3: Long = i_2!!
+   val i_3: Long = i_2!!.toInt().toLong()
   }
   val charIterable: MutableIterable<Char?>? = null
   for (c in charIterable!!) {
-   val c_1: Int = c!!
+   val c_1: Int = c!!.toChar().code
+  }
+ }
+
+ internal fun testSideEffects_private_2() {
+  val iterable: MutableIterable<Int?>? = null
+  val primitiveArray: IntArray? = null
+  for (i in iterable!!) {
+   var i_1: Int? = i
+   i_1 = Integer.valueOf(4)
+  }
+  for (i_2 in iterable!!) {
+   var i_3: Int = i_2!!.toInt()
+   i_3 = i_3 + 4
+  }
+  for (i_4 in primitiveArray!!) {
+   var i_5: Int = i_4
+   i_5 = i_5 + 4
+  }
+  for (i_6 in primitiveArray!!) {
+   var i_7: Int = i_6
+   i_7 = i_7 + 1
   }
  }
 
@@ -121,8 +132,8 @@ open class ForEachStatement {
   }
  }
 
- open class Exception3 internal constructor(): java.lang.Exception(), JavaIterable<Int?> {
-  override fun iterator(): MutableIterator<Int?> {
+ open class Exception3 internal constructor(): java.lang.Exception(), JavaIterable<Int> {
+  override fun iterator(): MutableIterator<Int> {
    return null!!
   }
  }
