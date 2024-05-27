@@ -591,6 +591,76 @@ public class CollectorsTest extends EmulTestBase {
     assertSingleItemCollectedAs(Collections.singleton("a"), c, "a");
   }
 
+  public void testToUnmodifiableList() {
+    applyItems(List.of("a", "b"), toUnmodifiableList(), "a", "b");
+    assertUnmodifiableCollection(applyItemsWithSplitting(toUnmodifiableList(), "a", "b"), "a", "z");
+    try {
+      Stream.of("a").map(ignore -> null).collect(toUnmodifiableList());
+      fail("Expected NPE");
+    } catch (NullPointerException ignore) {
+      // expected
+    }
+  }
+
+  public void testToUnmodifiableMap() {
+    // verify simple cases copy all values and results are unmodifiable
+    applyItems(Map.of("a", 0, "b", 1), toUnmodifiableMap(Function.identity(),
+        k -> k.charAt(0) - 'a'), "a", "b");
+    Map<String, Integer> tested = applyItemsWithSplitting(toUnmodifiableMap(Function.identity(),
+        k -> k.charAt(0) - 'a'), "a", "b");
+    assertUnmodifiableMap(tested, "a", 0, "z", 100);
+
+    // verify merge works with only one key (but this is just passing through to the toMap func
+    // anyway...)
+    applyItems(Map.of("a", 2), toUnmodifiableMap(Function.identity(), ignore -> 1, Integer::sum),
+        "a", "a");
+
+    // verify nulls blow up for both keys and values
+    try {
+      Stream.of("a").collect(toUnmodifiableMap(obj -> null, Function.identity()));
+      fail("Expected NPE");
+    } catch (NullPointerException ignore) {
+      // expected
+    }
+    try {
+      Stream.of("a").collect(toUnmodifiableMap(Function.identity(), obj -> null));
+      fail("Expected NPE");
+    } catch (Exception ignore) {
+      // expected
+    }
+  }
+
+  private <K, V> void assertUnmodifiableMap(Map<K, V> a, K existingKey, V existingValue, K newKey,
+      V newValue) {
+    assertUnmodifiableCollection(a.keySet(), existingKey, newKey);
+    assertUnmodifiableCollection(a.values(), existingValue, newValue);
+
+    try {
+      a.put(newKey, newValue);
+      fail();
+    } catch (Exception ignore) {
+      // expected
+    }
+    try {
+      a.remove(existingKey);
+      fail();
+    } catch (Exception ignore) {
+      // expected
+    }
+  }
+
+  public void testToUnmodifiableSet() {
+    applyItems(Set.of("a", "b"), toUnmodifiableSet(), "a", "b");
+    assertUnmodifiableCollection(applyItemsWithSplitting(toUnmodifiableList(), "a", "b"), "a", "z");
+    // verify nulls fail
+    try {
+      Stream.of("a").map(ignore -> null).collect(toUnmodifiableSet());
+      fail("Expected NPE");
+    } catch (NullPointerException ignore) {
+      // expected
+    }
+  }
+
   /**
    * This method attempts to apply a collector to items as a stream might do, so that we can simply
    * verify the output. Taken from the Collector class's javadoc.
@@ -715,16 +785,16 @@ public class CollectorsTest extends EmulTestBase {
     assertTrue("expected= " + expected + ", actual=" + actual, predicate.test(expected, actual));
   }
 
-  private static <T> boolean unmodifiableCollection(Collection<T> c, T existingSample, T newSample) {
+  private static <T> void assertUnmodifiableCollection(Collection<T> c, T existingSample, T newSample) {
     try {
       c.remove(existingSample);
-      return false;
+      fail();
     } catch (UnsupportedOperationException ignore) {
       // expected
     }
     try {
       c.add(newSample);
-      return false;
+      fail();
     } catch (UnsupportedOperationException ignore) {
       // expected
     }
@@ -732,112 +802,10 @@ public class CollectorsTest extends EmulTestBase {
     itr.next();
     try {
       itr.remove();
-      return false;
+      fail();
     } catch (UnsupportedOperationException e) {
       // expected
     }
-    return true;
   }
 
-  public void testToUnmodifiableList() {
-    applyItems(List.of("a", "b"), toUnmodifiableList(), "a", "b", (expected, actual) -> {
-      if (!expected.equals(actual)) {
-        return false;
-      }
-
-      if (!unmodifiableCollection(actual, "a", "z")) {
-        return false;
-      }
-
-      return true;
-    });
-
-    // verify nulls fail
-    try {
-      Stream.of("a").map(ignore -> null).collect(toUnmodifiableList());
-      fail("Expected NPE");
-    } catch (NullPointerException ignore) {
-      // expected
-    }
-  }
-
-  public void testToUnmodifiableMap() {
-    // verify simple cases copy all values and results are unmodifiable
-    applyItems(Map.of("a", 0, "b", 1), toUnmodifiableMap(Function.identity(),
-        k -> k.charAt(0) - 'a'), "a", "b", (expected, actual) -> {
-      if (!expected.equals(actual)) {
-        return false;
-      }
-
-      if (!unmodifiableMap(actual, "a", 0, "z", 100)) {
-        return false;
-      }
-
-      return true;
-    });
-
-    // verify merge works with only one key (but this is just passing through to the toMap func
-    // anyway...)
-    applyItems(Map.of("a", 2), toUnmodifiableMap(Function.identity(), ignore -> 1, Integer::sum),
-        "a", "a");
-
-    // verify nulls blow up for both keys and values
-    try {
-      Stream.of("a").collect(toUnmodifiableMap(obj -> null, Function.identity()));
-      fail("Expected NPE");
-    } catch (NullPointerException ignore) {
-      // expected
-    }
-    try {
-      Stream.of("a").collect(toUnmodifiableMap(Function.identity(), obj -> null));
-      fail("Expected NPE");
-    } catch (Exception ignore) {
-      // expected
-    }
-  }
-
-  private <K, V> boolean unmodifiableMap(Map<K, V> a, K existingKey, V existingValue, K newKey,
-      V newValue) {
-    if (!unmodifiableCollection(a.keySet(), existingKey, newKey)) {
-      return false;
-    }
-    if (!unmodifiableCollection(a.values(), existingValue, newValue)) {
-      return false;
-    }
-
-    try {
-      a.put(newKey, newValue);
-      return false;
-    } catch (Exception ignore) {
-      // expected
-    }
-    try {
-      a.remove(existingKey);
-      return false;
-    } catch (Exception ignore) {
-      // expected
-    }
-
-    return true;
-  }
-
-  public void testToUnmodifiableSet() {
-    applyItems(Set.of("a", "b"), toUnmodifiableSet(), "a", "b", (expected, actual) -> {
-      if (!expected.equals(actual)) {
-        return false;
-      }
-      if (!unmodifiableCollection(actual, "a", "z")) {
-        return false;
-      }
-      return true;
-    });
-
-    // verify nulls fail
-    try {
-      Stream.of("a").map(ignore -> null).collect(toUnmodifiableSet());
-      fail("Expected NPE");
-    } catch (NullPointerException ignore) {
-      // expected
-    }
-  }
 }

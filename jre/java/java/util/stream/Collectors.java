@@ -368,7 +368,7 @@ public final class Collectors {
       Function<? super T, ? extends K> keyMapper,
       Function<? super T, ? extends U> valueMapper) {
     return collectingAndThen(
-            toMap(disallowNulls(keyMapper), disallowNulls(valueMapper)),
+            toMap(keyMapper.andThen(Objects::requireNonNull), valueMapper.andThen(Objects::requireNonNull)),
             Collections::unmodifiableMap
     );
   }
@@ -378,13 +378,9 @@ public final class Collectors {
       Function<? super T, ? extends U> valueMapper,
       BinaryOperator<U> mergeFunction) {
     return collectingAndThen(
-            toMap(disallowNulls(keyMapper), disallowNulls(valueMapper), mergeFunction),
+            toMap(keyMapper.andThen(Objects::requireNonNull), valueMapper.andThen(Objects::requireNonNull), mergeFunction),
             Collections::unmodifiableMap
     );
-  }
-
-  private static <T, R> Function<T, R> disallowNulls(Function<T, R> func) {
-    return func.andThen(Objects::requireNonNull);
   }
 
   public static <T, K, U, M extends Map<K, U>> Collector<T, ?, M> toMap(
