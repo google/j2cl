@@ -630,25 +630,6 @@ public class CollectorsTest extends EmulTestBase {
     }
   }
 
-  private <K, V> void assertUnmodifiableMap(Map<K, V> a, K existingKey, V existingValue, K newKey,
-      V newValue) {
-    assertUnmodifiableCollection(a.keySet(), existingKey, newKey);
-    assertUnmodifiableCollection(a.values(), existingValue, newValue);
-
-    try {
-      a.put(newKey, newValue);
-      fail();
-    } catch (Exception ignore) {
-      // expected
-    }
-    try {
-      a.remove(existingKey);
-      fail();
-    } catch (Exception ignore) {
-      // expected
-    }
-  }
-
   public void testToUnmodifiableSet() {
     applyItems(Set.of("a", "b"), toUnmodifiableSet(), "a", "b");
     assertUnmodifiableCollection(applyItemsWithSplitting(toUnmodifiableList(), "a", "b"), "a", "z");
@@ -806,6 +787,25 @@ public class CollectorsTest extends EmulTestBase {
     } catch (UnsupportedOperationException e) {
       // expected
     }
+  }
+
+    private <K, V> void assertUnmodifiableMap(Map<K, V> a, K existingKey, V existingValue, K newKey,
+      V newValue) {
+      assertUnmodifiableCollection(a.keySet(), existingKey, newKey);
+      assertUnmodifiableCollection(a.values(), existingValue, newValue);
+
+      try {
+        a.put(newKey, newValue);
+        fail();
+      } catch (Exception ignore) {
+        // expected
+      }
+      try {
+        a.remove(existingKey);
+        fail();
+      } catch (Exception ignore) {
+        // expected
+      }
   }
 
 }
