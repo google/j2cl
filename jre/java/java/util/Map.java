@@ -23,6 +23,7 @@ import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import jsinterop.annotations.JsIgnore;
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsNonNull;
 import jsinterop.annotations.JsType;
 
@@ -179,13 +180,16 @@ public interface Map<K, V> {
     @Override
     boolean equals(Object o);
 
+    @JsMethod
     K getKey();
 
+    @JsMethod
     V getValue();
 
     @Override
     int hashCode();
 
+    @JsMethod
     V setValue(V value);
 
     static <K extends Comparable<? super K>, V> Comparator<Map.Entry<K,V>> comparingByKey() {
@@ -259,7 +263,6 @@ public interface Map<K, V> {
 
   boolean containsValue(Object value);
 
-  @JsIgnore
   Set<Entry<K, V>> entrySet();
 
   @JsIgnore
