@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
+import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsEnum
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
 import org.jetbrains.kotlin.ir.IrElement
@@ -54,8 +55,10 @@ internal class EnumClassConstructorLowering(private val context: JvmBackendConte
 
     if (declaration.isEnumClass) {
       declaration.constructors.forEach(this::cleanupSuperEnumConstructorCall)
-      // Remove any now empty constructors.
-      declaration.declarations.removeIf { it is IrConstructor && it.isEffectivelyEmpty() }
+      // Remove the now empty implicit constructors from JsEnum.
+      if (declaration.isJsEnum) {
+        declaration.declarations.removeIf { it is IrConstructor && it.isEffectivelyEmpty() }
+      }
     }
   }
 
@@ -72,7 +75,7 @@ internal class EnumClassConstructorLowering(private val context: JvmBackendConte
       context.irFactory.createBlockBody(
         body.startOffset,
         body.endOffset,
-        body.statements.slice(1 ..< body.statements.size)
+        body.statements.slice(1..<body.statements.size),
       )
   }
 

@@ -133,7 +133,7 @@ val IrClass.isJsType: Boolean
 private val IrFunction.isJsAsync: Boolean
   get() = findJsinteropAnnotation(JS_ASYNC_ANNOTATION_FQ_NAME) != null
 
-private val IrClass.isJsEnum: Boolean
+val IrClass.isJsEnum: Boolean
   get() = findJsinteropAnnotation(JS_ENUM_ANNOTATION_FQ_NAME) != null
 
 val IrDeclaration.isJsIgnore: Boolean
