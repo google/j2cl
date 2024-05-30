@@ -479,9 +479,8 @@ def j2wasm_application(name, defines = dict(), **kwargs):
             # Optimization flags (affecting passes in general) included at the beginning of stage.
             # Avoid inlining once functions to preserve their shape.
             "--no-inline=*_<once>_*",
-            # TODO: might get more contraversal.
             "--partial-inlining-ifs=4",
-            "-fimfs=50",
+            "-fimfs=25",
             # Specific list of passes:
             "--gufa",
             "--unsubtyping",
@@ -504,7 +503,6 @@ def j2wasm_application(name, defines = dict(), **kwargs):
             # Only allow partial inlining since they only executed once.
             "--no-full-inline=*_<once>_*",
             "--partial-inlining-ifs=4",
-            "-fimfs=50",
             "--intrinsic-lowering",
             "--gufa",
             "--unsubtyping",
