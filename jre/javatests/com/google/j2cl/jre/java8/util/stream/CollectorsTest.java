@@ -39,8 +39,12 @@ import static java.util.stream.Collectors.summingLong;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.toUnmodifiableList;
+import static java.util.stream.Collectors.toUnmodifiableMap;
+import static java.util.stream.Collectors.toUnmodifiableSet;
 
 import com.google.j2cl.jre.java.util.EmulTestBase;
+import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.AbstractMap.SimpleImmutableEntry;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,6 +55,7 @@ import java.util.DoubleSummaryStatistics;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.IntSummaryStatistics;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.LongSummaryStatistics;
@@ -587,6 +592,67 @@ public class CollectorsTest extends EmulTestBase {
     assertSingleItemCollectedAs(Collections.singleton("a"), c, "a");
   }
 
+  @J2ktIncompatible // Not emulated in J2KT
+  public void testToUnmodifiableList() {
+    applyItems(List.of("a", "b"), toUnmodifiableList(), "a", "b");
+    assertUnmodifiableCollection(applyItemsWithSplitting(toUnmodifiableList(), "a", "b"), "a", "z");
+    try {
+      Stream.of("a").map(ignore -> null).collect(toUnmodifiableList());
+      fail("Expected NPE");
+    } catch (NullPointerException expected) {
+      // expected
+    }
+  }
+
+  @J2ktIncompatible // Not emulated in J2KT
+  public void testToUnmodifiableMap() {
+    // verify simple cases copy all values and results are unmodifiable
+    applyItems(
+        Map.of("a", 0, "b", 1),
+        toUnmodifiableMap(Function.identity(), k -> k.charAt(0) - 'a'),
+        "a",
+        "b");
+    Map<String, Integer> tested =
+        applyItemsWithSplitting(
+            toUnmodifiableMap(Function.identity(), k -> k.charAt(0) - 'a'), "a", "b");
+    assertUnmodifiableMap(tested, "a", 0, "z", 100);
+
+    // verify merge works with only one key (but this is just passing through to the toMap func
+    // anyway...)
+    applyItems(
+        Map.of("a", 2),
+        toUnmodifiableMap(Function.identity(), ignore -> 1, Integer::sum),
+        "a",
+        "a");
+
+    // verify nulls blow up for both keys and values
+    try {
+      Stream.of("a").collect(toUnmodifiableMap(obj -> null, Function.identity()));
+      fail("Expected NPE");
+    } catch (NullPointerException expected) {
+      // expected
+    }
+    try {
+      Stream.of("a").collect(toUnmodifiableMap(Function.identity(), obj -> null));
+      fail("Expected NPE");
+    } catch (NullPointerException expected) {
+      // expected
+    }
+  }
+
+  @J2ktIncompatible // Not emulated in J2KT
+  public void testToUnmodifiableSet() { // Not emulated in J2KT
+    applyItems(Set.of("a", "b"), toUnmodifiableSet(), "a", "b");
+    assertUnmodifiableCollection(applyItemsWithSplitting(toUnmodifiableList(), "a", "b"), "a", "z");
+    // verify nulls fail
+    try {
+      Stream.of("a").map(ignore -> null).collect(toUnmodifiableSet());
+      fail("Expected NPE");
+    } catch (NullPointerException expected) {
+      // expected
+    }
+  }
+
   /**
    * This method attempts to apply a collector to items as a stream might do, so that we can simply
    * verify the output. Taken from the Collector class's javadoc.
@@ -709,5 +775,48 @@ public class CollectorsTest extends EmulTestBase {
   private static <T extends @Nullable Object, U extends @Nullable Object> void assertTrue(
       BiPredicate<T, U> predicate, T expected, U actual) {
     assertTrue("expected= " + expected + ", actual=" + actual, predicate.test(expected, actual));
+  }
+
+  private static <T> void assertUnmodifiableCollection(
+      Collection<T> c, T existingSample, T newSample) {
+    try {
+      c.remove(existingSample);
+      fail();
+    } catch (UnsupportedOperationException exoected) {
+      // expected
+    }
+    try {
+      c.add(newSample);
+      fail();
+    } catch (UnsupportedOperationException exoected) {
+      // expected
+    }
+    Iterator<T> itr = c.iterator();
+    itr.next();
+    try {
+      itr.remove();
+      fail();
+    } catch (UnsupportedOperationException exoected) {
+      // expected
+    }
+  }
+
+  private <K, V> void assertUnmodifiableMap(
+      Map<K, V> a, K existingKey, V existingValue, K newKey, V newValue) {
+    assertUnmodifiableCollection(a.keySet(), existingKey, newKey);
+    assertUnmodifiableCollection(a.values(), existingValue, newValue);
+
+    try {
+      a.put(newKey, newValue);
+      fail();
+    } catch (UnsupportedOperationException exoected) {
+      // expected
+    }
+    try {
+      a.remove(existingKey);
+      fail();
+    } catch (UnsupportedOperationException exoected) {
+      // expected
+    }
   }
 }
