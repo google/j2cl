@@ -40,7 +40,13 @@ def _impl_j2cl_library(ctx):
         srcs = ctx.files.srcs
         kt_common_srcs = ctx.files.kt_common_srcs
 
-    extra_javacopts = ["-Adagger.fastInit=enabled"]
+    extra_javacopts = [
+        # Dagger fast-init is more code size optimal for web, so enable it by default.
+        "-Adagger.fastInit=enabled",
+        # Disable ThreadSafe checker since we don't support multi-threading and can cause annoyance
+        # to users with AutoFactory (http://yaqs/9094400422428278784#a1n2).
+        "-Xep:ThreadSafe:OFF",
+    ]
     if ctx.attr.optimize_autovalue:
         extra_javacopts.append("-Acom.google.auto.value.OmitIdentifiers")
 
