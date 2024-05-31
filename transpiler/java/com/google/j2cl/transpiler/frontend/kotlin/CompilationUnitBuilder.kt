@@ -84,7 +84,9 @@ import com.google.j2cl.transpiler.frontend.common.AbstractCompilationUnitBuilder
 import com.google.j2cl.transpiler.frontend.kotlin.ir.findFunctionByName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getArguments
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getFunctionExpression
+import com.google.j2cl.transpiler.frontend.kotlin.ir.getNameSourcePosition
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getParameters
+import com.google.j2cl.transpiler.frontend.kotlin.ir.getSourcePosition
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getTypeSubstitutionMap
 import com.google.j2cl.transpiler.frontend.kotlin.ir.hasVoidReturn
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isAdaptedFunctionReference
@@ -94,7 +96,6 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.isSynthetic
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isUnitInstanceReference
 import com.google.j2cl.transpiler.frontend.kotlin.ir.javaName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.resolveLabel
-import com.google.j2cl.transpiler.frontend.kotlin.ir.toSourcePosition
 import com.google.j2cl.transpiler.frontend.kotlin.ir.typeSubstitutionMap
 import com.google.j2cl.transpiler.frontend.kotlin.lower.IrForInLoop
 import com.google.j2cl.transpiler.frontend.kotlin.lower.IrForLoop
@@ -219,7 +220,7 @@ class CompilationUnitBuilder(
   }
 
   private fun convertClass(irClass: IrClass): Type {
-    val type = Type(getSourcePosition(irClass), environment.getDeclarationForType(irClass))
+    val type = Type(getNameSourcePosition(irClass), environment.getDeclarationForType(irClass))
     processEnclosedBy(type) {
       // Skip synthetic declarations. Kotlinc adds synthetic declarations like (fake) override
       // members
@@ -278,7 +279,7 @@ class CompilationUnitBuilder(
 
     return Field.Builder.from(environment.getDeclaredFieldDescriptor(irEnumEntry))
       .setSourcePosition(getSourcePosition(irEnumEntry))
-      .setNameSourcePosition(getSourcePosition(irEnumEntry))
+      .setNameSourcePosition(getNameSourcePosition(irEnumEntry))
       .setInitializer(initializer)
       .build()
   }
@@ -302,8 +303,7 @@ class CompilationUnitBuilder(
       }
     return Field.Builder.from(declaredFieldDescriptor)
       .setSourcePosition(getSourcePosition(irField))
-      // TODO(b/214508991): use source position of the name.
-      .setNameSourcePosition(getSourcePosition(irField))
+      .setNameSourcePosition(getNameSourcePosition(irField))
       .setInitializer(initializer)
       .build()
   }
@@ -320,7 +320,7 @@ class CompilationUnitBuilder(
       }
     return Method.newBuilder()
       .setMethodDescriptor(methodDescriptor)
-      .setSourcePosition(getSourcePosition(irFunction))
+      .setSourcePosition(getNameSourcePosition(irFunction))
       .setParameters(parameters)
       .setBodySourcePosition(body.sourcePosition)
       .addStatements(body.statements)
@@ -1115,7 +1115,6 @@ class CompilationUnitBuilder(
         )
       )
       .setQualifier(convertQualifier(fieldAccess))
-      .setSourcePosition(getSourcePosition(fieldAccess))
       .build()
 
   private fun convertFunctionAccessExpression(
@@ -1632,23 +1631,19 @@ class CompilationUnitBuilder(
         .setTypeDescriptor(environment.getTypeDescriptor(irValueDeclaration.type))
         .setParameter(irValueDeclaration is IrValueParameter)
         .setFinal(irValueDeclaration is IrVariable && !irValueDeclaration.isVar)
-        .setSourcePosition(getSourcePosition(irValueDeclaration))
+        .setSourcePosition(
+          getNameSourcePosition(irValueDeclaration, irValueDeclaration.name.toString())
+        )
         .build()
     variableBySymbol[irValueDeclaration.symbol] = variable
     return variable
   }
 
-  private fun getSourcePosition(element: IrElement): SourcePosition =
-    // TODO(b/267492636): Using the current file can be incorrect here as inlined nodes will have
-    //   positions relative to their original source files.
-    when {
-      element.startOffset > element.endOffset -> SourcePosition.NONE
-      currentIrFile.fileEntry is MultifileFacadeFileEntry -> SourcePosition.NONE
-      else ->
-        currentIrFile.fileEntry
-          .getSourceRangeInfo(element.startOffset, element.endOffset)
-          .toSourcePosition()
-    }
+  private fun getNameSourcePosition(irElement: IrElement, name: String? = null): SourcePosition =
+    irElement.getNameSourcePosition(currentIrFile, name)
+
+  private fun getSourcePosition(irElement: IrElement): SourcePosition =
+    irElement.getSourcePosition(currentIrFile)
 
   private val IrCall.isBinaryOperation: Boolean
     get() = intrinsicMethods.isBinaryOperation(this)

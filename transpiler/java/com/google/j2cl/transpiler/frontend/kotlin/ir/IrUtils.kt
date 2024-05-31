@@ -18,7 +18,6 @@
 package com.google.j2cl.transpiler.frontend.kotlin.ir
 
 import com.google.common.base.CaseFormat
-import com.google.j2cl.common.FilePosition
 import com.google.j2cl.common.SourcePosition
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind
 import com.google.j2cl.transpiler.ast.Visibility
@@ -39,8 +38,8 @@ import org.jetbrains.kotlin.descriptors.Modality
 import org.jetbrains.kotlin.descriptors.SourceFile
 import org.jetbrains.kotlin.descriptors.Visibilities
 import org.jetbrains.kotlin.descriptors.java.JavaVisibilities
+import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.ObsoleteDescriptorBasedAPI
-import org.jetbrains.kotlin.ir.SourceRangeInfo
 import org.jetbrains.kotlin.ir.backend.js.ir.JsIrBuilder
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrConstructor
@@ -51,6 +50,7 @@ import org.jetbrains.kotlin.ir.declarations.IrDeclarationWithName
 import org.jetbrains.kotlin.ir.declarations.IrDeclarationWithVisibility
 import org.jetbrains.kotlin.ir.declarations.IrEnumEntry
 import org.jetbrains.kotlin.ir.declarations.IrField
+import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.ir.declarations.IrFunction
 import org.jetbrains.kotlin.ir.declarations.IrOverridableMember
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
@@ -58,6 +58,7 @@ import org.jetbrains.kotlin.ir.declarations.IrTypeParameter
 import org.jetbrains.kotlin.ir.declarations.IrTypeParametersContainer
 import org.jetbrains.kotlin.ir.declarations.IrValueDeclaration
 import org.jetbrains.kotlin.ir.declarations.IrValueParameter
+import org.jetbrains.kotlin.ir.declarations.IrVariable
 import org.jetbrains.kotlin.ir.expressions.IrBreakContinue
 import org.jetbrains.kotlin.ir.expressions.IrCall
 import org.jetbrains.kotlin.ir.expressions.IrConst
@@ -69,7 +70,10 @@ import org.jetbrains.kotlin.ir.expressions.IrFunctionAccessExpression
 import org.jetbrains.kotlin.ir.expressions.IrFunctionExpression
 import org.jetbrains.kotlin.ir.expressions.IrFunctionReference
 import org.jetbrains.kotlin.ir.expressions.IrGetField
+import org.jetbrains.kotlin.ir.expressions.IrLoop
 import org.jetbrains.kotlin.ir.expressions.IrMemberAccessExpression
+import org.jetbrains.kotlin.ir.expressions.IrSetField
+import org.jetbrains.kotlin.ir.expressions.IrSetValue
 import org.jetbrains.kotlin.ir.expressions.IrStatementOrigin
 import org.jetbrains.kotlin.ir.expressions.IrTypeOperatorCall
 import org.jetbrains.kotlin.ir.symbols.IrClassifierSymbol
@@ -80,6 +84,7 @@ import org.jetbrains.kotlin.ir.types.IrStarProjection
 import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.ir.types.IrTypeArgument
 import org.jetbrains.kotlin.ir.types.IrTypeProjection
+import org.jetbrains.kotlin.ir.types.classOrFail
 import org.jetbrains.kotlin.ir.types.classOrNull
 import org.jetbrains.kotlin.ir.types.defaultType
 import org.jetbrains.kotlin.ir.types.extractTypeParameters
@@ -129,31 +134,6 @@ fun IrTypeOperatorCall.getFunctionExpression(): IrFunctionExpression =
       else -> throw IllegalStateException("Unsupported arguments type")
     }
   }
-
-fun SourceRangeInfo.toSourcePosition(): SourcePosition {
-  // The node is not part of the original code source.
-  if (startOffset < 0 || endOffset < 0 || filePath.isEmpty()) {
-    return SourcePosition.NONE
-  }
-
-  return SourcePosition.newBuilder()
-    .setFilePath(filePath)
-    .setStartFilePosition(
-      FilePosition.newBuilder()
-        .setLine(startLineNumber)
-        .setColumn(startColumnNumber)
-        .setByteOffset(startOffset)
-        .build()
-    )
-    .setEndFilePosition(
-      FilePosition.newBuilder()
-        .setLine(endLineNumber)
-        .setColumn(endColumnNumber)
-        .setByteOffset(endOffset)
-        .build()
-    )
-    .build()
-}
 
 val IrClass.j2clKind: Kind
   get() =
@@ -655,3 +635,52 @@ fun IrClass.isStubbedPrimitiveIteratorClass(): Boolean {
 
 internal val IrDeclaration.isCompanionMember: Boolean
   get() = (parent as? IrClass)?.isCompanion == true
+
+fun IrElement.getNameSourcePosition(irFile: IrFile, name: String? = null): SourcePosition =
+  getNamedPsiElement(irFile)?.getSourcePosition(irFile, name) ?: SourcePosition.NONE
+
+fun IrElement.getSourcePosition(irFile: IrFile): SourcePosition {
+  var sourceElementIr = this
+
+  if (this is IrField && origin == IrDeclarationOrigin.FIELD_FOR_OBJECT_INSTANCE) {
+    // For companion instance fields, we map this field to the corresponding object because its
+    // corresponding ir element does not exist in its original source.
+    sourceElementIr = type.classOrFail.owner
+  }
+
+  return sourceElementIr.getPsiElement(irFile)?.getSourcePosition(irFile) ?: SourcePosition.NONE
+}
+
+val IrElement.isTemporaryVariable: Boolean
+  get() = this is IrVariable && origin == IrDeclarationOrigin.IR_TEMPORARY_VARIABLE
+
+val IrElement.isPrefixExpression: Boolean
+  get() =
+    this is IrSetValue &&
+      (origin == IrStatementOrigin.PREFIX_INCR || origin == IrStatementOrigin.PREFIX_DECR)
+
+val IrElement.isPostfixExpression: Boolean
+  get() =
+    this is IrSetValue &&
+      (origin == IrStatementOrigin.POSTFIX_INCR || origin == IrStatementOrigin.POSTFIX_DECR)
+
+val IrElement.isAugmentedAssignement: Boolean
+  get() =
+    this is IrSetValue &&
+      (origin == IrStatementOrigin.PLUSEQ ||
+        origin == IrStatementOrigin.MINUSEQ ||
+        origin == IrStatementOrigin.MULTEQ ||
+        origin == IrStatementOrigin.DIVEQ ||
+        origin == IrStatementOrigin.PERCEQ)
+
+val IrElement.isVariableDeclaration: Boolean
+  get() = this is IrVariable && origin == IrDeclarationOrigin.DEFINED
+
+val IrElement.isFieldDeclaration: Boolean
+  get() = this is IrSetField && origin == IrStatementOrigin.INITIALIZE_FIELD
+
+val IrElement.isFieldAssignment: Boolean
+  get() = this is IrSetField && !isFieldDeclaration
+
+val IrElement.isLabeledExpression: Boolean
+  get() = this is IrLoop && label != null

@@ -255,10 +255,6 @@ def _golden_output_impl(ctx):
         if not input.path.endswith(".kt-all"):
             excluded_extensions.append("kt")
 
-        # TODO(b/217479735): Remove after fixing sourcemapping
-        if "/kotlin/" in input.path or ctx.attr.target.label.name.endswith("j2kt-web"):
-            excluded_extensions.append("mappings")
-
         exclusion_filter = " -o ".join(["-name *.%s" % ext for ext in excluded_extensions])
 
         ctx.actions.run_shell(
