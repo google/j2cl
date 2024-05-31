@@ -24,6 +24,7 @@ import kotlin.Any
 import kotlin.Array
 import kotlin.Cloneable
 import kotlin.Int
+import kotlin.Long
 import kotlin.Number
 import kotlin.OptIn
 import kotlin.String
@@ -80,6 +81,30 @@ open class Varargs {
   @ObjCName("withVarargsVarargs_FunctionalInterface") functionalInterface: Varargs.FunctionalInterface?
  ) {}
 
+ @ObjCName("testOverloaded")
+ open fun testOverloaded(
+  @ObjCName("withId") o: Any?
+ ) {}
+
+ @ObjCName("testOverloaded")
+ open fun testOverloaded(
+  @ObjCName("withNSString") o: String?,
+  vararg @ObjCName("withNSObjectArray") rest: Any?
+ ) {
+  val rest_1: Array<Any?>? = rest as Array<Any?>?
+ }
+
+ @ObjCName("testOverloaded")
+ open fun testOverloaded(
+  @ObjCName("withLong") l: Long
+ ) {}
+
+ @ObjCName("testOverloaded")
+ open fun testOverloaded(
+  @ObjCName("withLong") l: Long,
+  vararg @ObjCName("withLongArray") rest: Long
+ ) {}
+
  @ObjCName("main")
  open fun main() {
   val v: Varargs? = Varargs()
@@ -96,6 +121,14 @@ open class Varargs {
    val it_1: Array<String?>? = it as Array<String?>?
    this.args_private_2 = it_1 as Array<Any?>?
   })
+  v!!.testOverloaded("foo")
+  v!!.testOverloaded("foo", "bar")
+  v!!.testOverloaded("foo" as Any)
+  v!!.testOverloaded(1.toLong())
+  v!!.testOverloaded(java.lang.Long.valueOf(1L) as Any?)
+  v!!.testOverloaded(1L)
+  v!!.testOverloaded(1L, 2L, 3L)
+  v!!.testOverloaded(1.toLong(), 2L, 3L)
  }
 
  @ObjCName("J2ktVarargsVarargsCompanion", exact = true)

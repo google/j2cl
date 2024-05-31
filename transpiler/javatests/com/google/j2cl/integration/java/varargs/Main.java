@@ -38,6 +38,7 @@ public class Main {
     testVarargs_implicitSuperConstructorCall_genericTypes();
     testVarargs_implicitSuperConstructorCall_visibility();
     testVarargs_genericVarargsParameter();
+    testVarargs_overloaded();
   }
 
   private static void testVarargs_constructor() {
@@ -295,5 +296,34 @@ public class Main {
       }
     }
     return result;
+  }
+
+  private static String overloaded(Object o) {
+    return "overloaded(Object)";
+  }
+
+  private static String overloaded(String o, Object... rest) {
+    return "overloaded(String, Object...)";
+  }
+
+  private static String overloaded(long l) {
+    return "overloaded(long)";
+  }
+
+  private static String overloaded(long l, long... rest) {
+    return "overloaded(long, long...)";
+  }
+
+  // TODO(b/343280534): Enable when J2KT corrects the overload resolution.
+  @KtDisabled
+  private static void testVarargs_overloaded() {
+    assertEquals("overloaded(Object)", overloaded("foo"));
+    assertEquals("overloaded(Object)", overloaded((Object) "foo"));
+    assertEquals("overloaded(String, Object...)", overloaded("foo", "bar"));
+    assertEquals("overloaded(long)", overloaded(1));
+    assertEquals("overloaded(Object)", overloaded(Long.valueOf(1L)));
+    assertEquals("overloaded(long)", overloaded(1L));
+    assertEquals("overloaded(long, long...)", overloaded(1L, 2, 3L));
+    assertEquals("overloaded(long, long...)", overloaded(1, 2, 3L));
   }
 }
