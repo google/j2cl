@@ -15,7 +15,7 @@
  */
 package javaemul.internal;
 
-import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -35,7 +35,7 @@ public class NativeRegExp {
   public native boolean test(String value);
 
   /** Contract of the instance returned by {@code RegExp.prototype.exec}. */
-  @JsType(isNative = true, name = "Array", namespace = JsPackage.GLOBAL)
+  @JsType(isNative = true, name = "RegExpResult", namespace = JsPackage.GLOBAL)
   public interface Match {
     @JsProperty
     int getIndex();
@@ -43,9 +43,7 @@ public class NativeRegExp {
     @JsProperty
     int getLength();
 
-    @JsOverlay
-    default String getAt(int index) {
-      return JsUtils.<String[]>uncheckedCast(this)[index];
-    }
+    @JsMethod(name = "at")
+    String getAt(int index);
   }
 }
