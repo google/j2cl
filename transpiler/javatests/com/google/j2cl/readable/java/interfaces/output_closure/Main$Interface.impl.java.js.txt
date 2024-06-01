@@ -17,6 +17,8 @@ class Interface {
  static m_staticInterfaceMethod__void() {
   Interface.$clinit();
  }
+ /** @abstract @return {?string} */
+ toString() {}
  /** @nodts @template T @return {Interface<T>} */
  static $adapt(/** ?function():void */ fn) {
   Interface.$clinit();

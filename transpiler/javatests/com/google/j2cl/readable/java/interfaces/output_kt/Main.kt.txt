@@ -34,6 +34,11 @@ open class Main {
   val i: Main.Interface<String?>? = Implementor()
   i!!.interfaceMethod()
   i!!.defaultMethod(null)
+  i!!.toString()
+  val impl: Main.Implementor? = Implementor()
+  impl!!.defaultMethod(null)
+  val enumImpl: Main.EnumImplementor? = Main.EnumImplementor.ONE
+  enumImpl!!.defaultMethod(null)
   Main.Interface.staticInterfaceMethod()
   val x: Int = run {
    Implementor()
@@ -76,4 +81,10 @@ open class Main {
  }
 
  abstract inner class AbstractImplementor internal constructor(): Main.SubInterface {}
+
+ enum class EnumImplementor: Main.SubInterface {
+  ONE;
+
+  override fun interfaceMethod() {}
+ }
 }

@@ -27,10 +27,21 @@ interface Serial {}
 
 interface Cmp {
   int cmp();
+
+  default int defaultM() {
+    return 1;
+  }
 }
 
 interface Cmp2<T> {
   int cmp(int a);
+}
+
+class CmpImpl implements Cmp {
+  @Override
+  public int cmp() {
+    return 1;
+  }
 }
 
 @SuppressWarnings({"TypeParameterUnusedInFormals", "unused"})
@@ -107,6 +118,11 @@ public class IntersectionTypeTest<U> {
     set((A & EmptyA) o);
     set(m());
     Getable<?> g = n();
+  }
+
+  public void testDefaultMethodCall(Object o) {
+    ((EmptyA & Cmp) o).defaultM();
+    ((CmpImpl & EmptyA) o).defaultM();
   }
 
   private static class SomeConcreteType {}

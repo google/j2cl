@@ -5,6 +5,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Cmp = goog.forwardDeclare('intersectiontype.Cmp$impl');
 let Cmp2 = goog.forwardDeclare('intersectiontype.Cmp2$impl');
+let CmpImpl = goog.forwardDeclare('intersectiontype.CmpImpl$impl');
 let Getable = goog.forwardDeclare('intersectiontype.Getable$impl');
 let $LambdaAdaptor$1 = goog.forwardDeclare('intersectiontype.IntersectionTypeTest.$LambdaAdaptor$1$impl');
 let $LambdaAdaptor$2 = goog.forwardDeclare('intersectiontype.IntersectionTypeTest.$LambdaAdaptor$2$impl');
@@ -106,6 +107,11 @@ class IntersectionTypeTest extends j_l_Object {
   IntersectionTypeTest.m_set__intersectiontype_IntersectionTypeTest_A__void(IntersectionTypeTest.m_m__intersectiontype_IntersectionTypeTest_A());
   let g = /**@type {Getable<A>}*/ (IntersectionTypeTest.m_n__intersectiontype_Getable());
  }
+ /** @nodts */
+ m_testDefaultMethodCall__java_lang_Object__void(/** * */ o) {
+  /**@type {Cmp}*/ ($Casts.$to($Casts.$to(o, Cmp), EmptyA)).m_defaultM__int();
+  /**@type {CmpImpl}*/ ($Casts.$to($Casts.$to(o, CmpImpl), EmptyA)).m_defaultM__int();
+ }
  /** @nodts @template T */
  static m_callOnIntersetionTypes__intersectiontype_IntersectionTypeTest_SomeConcreteType__void(/** T */ t) {
   /**@type {!Cmp}*/ ($Casts.$to(t, Cmp)).m_cmp__int();
@@ -125,6 +131,7 @@ class IntersectionTypeTest extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   Cmp = goog.module.get('intersectiontype.Cmp$impl');
+  CmpImpl = goog.module.get('intersectiontype.CmpImpl$impl');
   Getable = goog.module.get('intersectiontype.Getable$impl');
   $LambdaAdaptor$1 = goog.module.get('intersectiontype.IntersectionTypeTest.$LambdaAdaptor$1$impl');
   $LambdaAdaptor$2 = goog.module.get('intersectiontype.IntersectionTypeTest.$LambdaAdaptor$2$impl');

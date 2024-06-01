@@ -2,6 +2,7 @@
 (type $interfaces.Main.Interface.vtable (sub (struct
  (field $m_defaultMethod__java_lang_Object__void (ref $function.m_defaultMethod__java_lang_Object__void))
  (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
 
@@ -65,6 +66,28 @@
  ))
 )
 
+;;; Code for interfaces.Main.EnumImplementor [type definition]
+(type $interfaces.Main.EnumImplementor (sub $java.lang.Enum (struct
+ (field $vtable (ref $interfaces.Main.EnumImplementor.vtable))
+ (field $itable (ref $interfaces.Main.EnumImplementor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $name@java.lang.Enum (mut (ref null $java.lang.String)))
+ (field $ordinal@java.lang.Enum (mut i32))
+ ))
+)
+(type $interfaces.Main.EnumImplementor.vtable (sub $java.lang.Enum.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_compareTo__java_lang_Object__int (ref $function.m_compareTo__java_lang_Object__int))
+ (field $m_getDeclaringClass__java_lang_Class (ref $function.m_getDeclaringClass__java_lang_Class))
+ (field $m_defaultMethod__java_lang_Object__void (ref $function.m_defaultMethod__java_lang_Object__void))
+ (field $m_defaultMethod__java_lang_String__void (ref $function.m_defaultMethod__java_lang_String__void))
+ (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
+ ))
+)
+
 ;;; Code for interfaces.Main.Interface [imports]
 
 ;;; Code for interfaces.Main.SubInterface [imports]
@@ -74,6 +97,8 @@
 ;;; Code for interfaces.Main.Implementor [imports]
 
 ;;; Code for interfaces.Main.AbstractImplementor [imports]
+
+;;; Code for interfaces.Main.EnumImplementor [imports]
 
 ;;; Code for interfaces.Main [static fields]
 (global $$class-initialized@interfaces.Main (mut i32)
@@ -115,6 +140,20 @@
  (ref.null $java.lang.Class)
 )
 
+;;; Code for interfaces.Main.EnumImplementor [static fields]
+(global $ONE@interfaces.Main.EnumImplementor (mut (ref null $interfaces.Main.EnumImplementor))
+ (ref.null $interfaces.Main.EnumImplementor)
+)
+(global $namesToValuesMap@interfaces.Main.EnumImplementor (mut (ref null $java.lang.Object))
+ (ref.null $java.lang.Object)
+)
+(global $$class-initialized@interfaces.Main.EnumImplementor (mut i32)
+ (i32.const 0)
+)
+(global $$class@interfaces.Main.EnumImplementor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
 ;;; Code for interfaces.Main [vtable.init]
 (global $interfaces.Main.vtable (ref $interfaces.Main.vtable)
  (struct.new $interfaces.Main.vtable
@@ -147,6 +186,43 @@
  (struct.new $interfaces.Main.Interface.vtable
   (ref.func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Implementor)
   (ref.func $m_interfaceMethod__void@interfaces.Main.Implementor)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+
+;;; Code for interfaces.Main.EnumImplementor [vtable.init]
+(global $interfaces.Main.EnumImplementor.vtable (ref $interfaces.Main.EnumImplementor.vtable)
+ (struct.new $interfaces.Main.EnumImplementor.vtable
+  (ref.func $$getClassImpl__java_lang_Class@interfaces.Main.EnumImplementor)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Enum)
+  (ref.func $m_hashCode__int@java.lang.Enum)
+  (ref.func $m_toString__java_lang_String@java.lang.Enum)
+  (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
+  (ref.func $m_getDeclaringClass__java_lang_Class@java.lang.Enum)
+  (ref.func $m_defaultMethod__java_lang_Object__void@interfaces.Main.EnumImplementor)
+  (ref.func $m_defaultMethod__java_lang_String__void@interfaces.Main.EnumImplementor)
+  (ref.func $m_interfaceMethod__void@interfaces.Main.EnumImplementor)
+ )
+)
+(global $interfaces.Main.SubInterface.vtable@$interfaces.Main.EnumImplementor (ref $interfaces.Main.SubInterface.vtable)
+ (struct.new $interfaces.Main.SubInterface.vtable
+  (ref.func $m_defaultMethod__java_lang_String__void@interfaces.Main.EnumImplementor)
+ )
+)
+(global $interfaces.Main.Interface.vtable@$interfaces.Main.EnumImplementor (ref $interfaces.Main.Interface.vtable)
+ (struct.new $interfaces.Main.Interface.vtable
+  (ref.func $m_defaultMethod__java_lang_Object__void@interfaces.Main.EnumImplementor)
+  (ref.func $m_interfaceMethod__void@interfaces.Main.EnumImplementor)
+  (ref.func $m_toString__java_lang_String@java.lang.Enum)
+ )
+)
+(global $java.lang.Comparable.vtable@$interfaces.Main.EnumImplementor (ref $java.lang.Comparable.vtable)
+ (struct.new $java.lang.Comparable.vtable
+  (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
+ )
+)
+(global $java.io.Serializable.vtable@$interfaces.Main.EnumImplementor (ref $java.io.Serializable.vtable)
+ (struct.new $java.io.Serializable.vtable
  )
 )
 
@@ -218,9 +294,9 @@
 (func $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface
  (param $this (ref null $java.lang.Object))
  (param $s (ref null $java.lang.String))
- ;;@ interfaces/Main.java:36:17
+ ;;@ interfaces/Main.java:39:17
  (block
-  ;;@ interfaces/Main.java:37:6
+  ;;@ interfaces/Main.java:40:6
   (call $m_defaultMethod__java_lang_Object__void@interfaces.Main.Interface (ref.as_non_null (local.get $this))(local.get $s))
  )
 )
@@ -228,18 +304,18 @@
 
 ;;; void SubInterface.$clinit()
 (func $$clinit__void_<once>_@interfaces.Main.SubInterface
- ;;@ interfaces/Main.java:35:12
+ ;;@ interfaces/Main.java:38:12
  (block
-  ;;@ interfaces/Main.java:35:12
+  ;;@ interfaces/Main.java:38:12
   (if (global.get $$class-initialized@interfaces.Main.SubInterface)
    (then
-    ;;@ interfaces/Main.java:35:12
+    ;;@ interfaces/Main.java:38:12
     (return )
    )
   )
-  ;;@ interfaces/Main.java:35:12
+  ;;@ interfaces/Main.java:38:12
   (global.set $$class-initialized@interfaces.Main.SubInterface (i32.const 1))
-  ;;@ interfaces/Main.java:35:12
+  ;;@ interfaces/Main.java:38:12
   (call $$clinit__void_<once>_@interfaces.Main.Interface )
  )
 )
@@ -291,21 +367,36 @@
 (func $m_testInterfaceMembers__void_$pp_interfaces@interfaces.Main
  (type $function.m_testInterfaceMembers__void_$pp_interfaces)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ interfaces/Main.java:49:7
+ ;;@ interfaces/Main.java:59:7
  (local $i (ref null $java.lang.Object))
+ (local $impl (ref null $interfaces.Main.Implementor))
+ (local $enumImpl (ref null $interfaces.Main.EnumImplementor))
  (local $x i32)
  (local $this (ref null $interfaces.Main))
  (local.set $this (ref.cast (ref $interfaces.Main) (local.get $this.untyped)))
  (block
-  ;;@ interfaces/Main.java:50:4
+  ;;@ interfaces/Main.java:60:4
   (local.set $i (call $$create__interfaces_Main@interfaces.Main.Implementor (local.get $this)))
-  ;;@ interfaces/Main.java:51:4
+  ;;@ interfaces/Main.java:61:4
   (call_ref $function.m_interfaceMethod__void (ref.as_non_null (local.get $i))(struct.get $interfaces.Main.Interface.vtable $m_interfaceMethod__void (ref.cast (ref $interfaces.Main.Interface.vtable) (call $get.itable.$interfaces.Main.Interface (local.get $i)))))
-  ;;@ interfaces/Main.java:52:4
+  ;;@ interfaces/Main.java:62:4
   (call_ref $function.m_defaultMethod__java_lang_Object__void (ref.as_non_null (local.get $i))(ref.null $java.lang.String)(struct.get $interfaces.Main.Interface.vtable $m_defaultMethod__java_lang_Object__void (ref.cast (ref $interfaces.Main.Interface.vtable) (call $get.itable.$interfaces.Main.Interface (local.get $i)))))
-  ;;@ interfaces/Main.java:53:4
+  ;;@ interfaces/Main.java:63:4
+  (drop (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $i))(struct.get $interfaces.Main.Interface.vtable $m_toString__java_lang_String (ref.cast (ref $interfaces.Main.Interface.vtable) (call $get.itable.$interfaces.Main.Interface (local.get $i))))))
+  ;;@ interfaces/Main.java:65:4
+  (local.set $impl (call $$create__interfaces_Main@interfaces.Main.Implementor (local.get $this)))
+  ;;@ interfaces/Main.java:66:4
+  (call_ref $function.m_defaultMethod__java_lang_String__void (ref.as_non_null (local.get $impl))(ref.null $java.lang.String)(struct.get $interfaces.Main.Implementor.vtable $m_defaultMethod__java_lang_String__void (struct.get $interfaces.Main.Implementor $vtable(local.get $impl))))
+  ;;@ interfaces/Main.java:68:4
+  (local.set $enumImpl (block (result (ref null $interfaces.Main.EnumImplementor))
+   (call $$clinit__void_<once>_@interfaces.Main.EnumImplementor )
+   (global.get $ONE@interfaces.Main.EnumImplementor)
+  ))
+  ;;@ interfaces/Main.java:69:4
+  (call_ref $function.m_defaultMethod__java_lang_String__void (ref.as_non_null (local.get $enumImpl))(ref.null $java.lang.String)(struct.get $interfaces.Main.SubInterface.vtable $m_defaultMethod__java_lang_String__void (ref.cast (ref $interfaces.Main.SubInterface.vtable) (call $get.itable.$interfaces.Main.SubInterface (local.get $enumImpl)))))
+  ;;@ interfaces/Main.java:71:4
   (call $m_staticInterfaceMethod__void@interfaces.Main.Interface )
-  ;;@ interfaces/Main.java:54:4
+  ;;@ interfaces/Main.java:72:4
   (local.set $x (i32.add (block (result i32)
    (drop (call $$create__interfaces_Main@interfaces.Main.Implementor (local.get $this)))
    (i32.const 1)
@@ -365,16 +456,16 @@
 (func $$create__interfaces_Main@interfaces.Main.Implementor
  (param $$outer_this (ref null $interfaces.Main))
  (result (ref null $interfaces.Main.Implementor))
- ;;@ interfaces/Main.java:41:8
+ ;;@ interfaces/Main.java:44:8
  (local $$instance (ref null $interfaces.Main.Implementor))
  (block
-  ;;@ interfaces/Main.java:41:8
+  ;;@ interfaces/Main.java:44:8
   (call $$clinit__void_<once>_@interfaces.Main.Implementor )
-  ;;@ interfaces/Main.java:41:8
+  ;;@ interfaces/Main.java:44:8
   (local.set $$instance (struct.new $interfaces.Main.Implementor (ref.as_non_null (global.get $interfaces.Main.Implementor.vtable)) (ref.as_non_null (global.get $interfaces.Main.Implementor.itable)) (i32.const 0) (ref.null $interfaces.Main)))
-  ;;@ interfaces/Main.java:41:8
+  ;;@ interfaces/Main.java:44:8
   (call $$ctor__interfaces_Main__void_$p_interfaces_Main_Implementor@interfaces.Main.Implementor (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;;@ interfaces/Main.java:41:8
+  ;;@ interfaces/Main.java:44:8
   (return (local.get $$instance))
  )
 )
@@ -383,11 +474,11 @@
 (func $$ctor__interfaces_Main__void_$p_interfaces_Main_Implementor@interfaces.Main.Implementor
  (param $this (ref null $interfaces.Main.Implementor))
  (param $$outer_this (ref null $interfaces.Main))
- ;;@ interfaces/Main.java:41:8
+ ;;@ interfaces/Main.java:44:8
  (block
-  ;;@ interfaces/Main.java:41:8
+  ;;@ interfaces/Main.java:44:8
   (struct.set $interfaces.Main.Implementor $$outer_this@interfaces.Main.Implementor (local.get $this) (local.get $$outer_this))
-  ;;@ interfaces/Main.java:41:8
+  ;;@ interfaces/Main.java:44:8
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -396,7 +487,7 @@
 (func $m_interfaceMethod__void@interfaces.Main.Implementor
  (type $function.m_interfaceMethod__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ interfaces/Main.java:43:16
+ ;;@ interfaces/Main.java:46:16
  (local $this (ref null $interfaces.Main.Implementor))
  (local.set $this (ref.cast (ref $interfaces.Main.Implementor) (local.get $this.untyped)))
  (block
@@ -409,11 +500,11 @@
  (type $function.m_defaultMethod__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
- ;;@ interfaces/Main.java:41:8
+ ;;@ interfaces/Main.java:44:8
  (local $this (ref null $interfaces.Main.Implementor))
  (local.set $this (ref.cast (ref $interfaces.Main.Implementor) (local.get $this.untyped)))
  (block
-  ;;@ interfaces/Main.java:41:8
+  ;;@ interfaces/Main.java:44:8
   (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0)))
  )
 )
@@ -424,11 +515,11 @@
  (type $function.m_defaultMethod__java_lang_String__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.String))
- ;;@ interfaces/Main.java:41:8
+ ;;@ interfaces/Main.java:44:8
  (local $this (ref null $interfaces.Main.Implementor))
  (local.set $this (ref.cast (ref $interfaces.Main.Implementor) (local.get $this.untyped)))
  (block
-  ;;@ interfaces/Main.java:41:8
+  ;;@ interfaces/Main.java:44:8
   (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(local.get $arg0))
  )
 )
@@ -436,22 +527,22 @@
 
 ;;; void Implementor.$clinit()
 (func $$clinit__void_<once>_@interfaces.Main.Implementor
- ;;@ interfaces/Main.java:41:8
+ ;;@ interfaces/Main.java:44:8
  (block
-  ;;@ interfaces/Main.java:41:8
+  ;;@ interfaces/Main.java:44:8
   (if (global.get $$class-initialized@interfaces.Main.Implementor)
    (then
-    ;;@ interfaces/Main.java:41:8
+    ;;@ interfaces/Main.java:44:8
     (return )
    )
   )
-  ;;@ interfaces/Main.java:41:8
+  ;;@ interfaces/Main.java:44:8
   (global.set $$class-initialized@interfaces.Main.Implementor (i32.const 1))
-  ;;@ interfaces/Main.java:41:8
+  ;;@ interfaces/Main.java:44:8
   (call $$clinit__void_<once>_@java.lang.Object )
-  ;;@ interfaces/Main.java:41:8
+  ;;@ interfaces/Main.java:44:8
   (call $$clinit__void_<once>_@interfaces.Main.SubInterface )
-  ;;@ interfaces/Main.java:41:8
+  ;;@ interfaces/Main.java:44:8
   (call $$clinit__void_<once>_@interfaces.Main.Interface )
  )
 )
@@ -489,11 +580,11 @@
 (func $$ctor__interfaces_Main__void_$p_interfaces_Main_AbstractImplementor@interfaces.Main.AbstractImplementor
  (param $this (ref null $interfaces.Main.AbstractImplementor))
  (param $$outer_this (ref null $interfaces.Main))
- ;;@ interfaces/Main.java:47:17
+ ;;@ interfaces/Main.java:50:17
  (block
-  ;;@ interfaces/Main.java:47:17
+  ;;@ interfaces/Main.java:50:17
   (struct.set $interfaces.Main.AbstractImplementor $$outer_this@interfaces.Main.AbstractImplementor (local.get $this) (local.get $$outer_this))
-  ;;@ interfaces/Main.java:47:17
+  ;;@ interfaces/Main.java:50:17
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -503,11 +594,11 @@
  (type $function.m_defaultMethod__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
- ;;@ interfaces/Main.java:47:17
+ ;;@ interfaces/Main.java:50:17
  (local $this (ref null $interfaces.Main.AbstractImplementor))
  (local.set $this (ref.cast (ref $interfaces.Main.AbstractImplementor) (local.get $this.untyped)))
  (block
-  ;;@ interfaces/Main.java:47:17
+  ;;@ interfaces/Main.java:50:17
   (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0)))
  )
 )
@@ -518,11 +609,11 @@
  (type $function.m_defaultMethod__java_lang_String__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.String))
- ;;@ interfaces/Main.java:47:17
+ ;;@ interfaces/Main.java:50:17
  (local $this (ref null $interfaces.Main.AbstractImplementor))
  (local.set $this (ref.cast (ref $interfaces.Main.AbstractImplementor) (local.get $this.untyped)))
  (block
-  ;;@ interfaces/Main.java:47:17
+  ;;@ interfaces/Main.java:50:17
   (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(local.get $arg0))
  )
 )
@@ -530,20 +621,20 @@
 
 ;;; void AbstractImplementor.$clinit()
 (func $$clinit__void_<once>_@interfaces.Main.AbstractImplementor
- ;;@ interfaces/Main.java:47:17
+ ;;@ interfaces/Main.java:50:17
  (block
-  ;;@ interfaces/Main.java:47:17
+  ;;@ interfaces/Main.java:50:17
   (if (global.get $$class-initialized@interfaces.Main.AbstractImplementor)
    (then
-    ;;@ interfaces/Main.java:47:17
+    ;;@ interfaces/Main.java:50:17
     (return )
    )
   )
-  ;;@ interfaces/Main.java:47:17
+  ;;@ interfaces/Main.java:50:17
   (global.set $$class-initialized@interfaces.Main.AbstractImplementor (i32.const 1))
-  ;;@ interfaces/Main.java:47:17
+  ;;@ interfaces/Main.java:50:17
   (call $$clinit__void_<once>_@java.lang.Object )
-  ;;@ interfaces/Main.java:47:17
+  ;;@ interfaces/Main.java:50:17
   (call $$clinit__void_<once>_@interfaces.Main.SubInterface )
  )
 )
@@ -561,3 +652,173 @@
   (return (global.get $$class@interfaces.Main.AbstractImplementor))
  )
 )
+
+;;; Code for interfaces.Main.EnumImplementor [methods]
+
+;;; EnumImplementor EnumImplementor.$create(String $name, int $ordinal)
+(func $$create__java_lang_String__int@interfaces.Main.EnumImplementor
+ (param $$name (ref null $java.lang.String))
+ (param $$ordinal i32)
+ (result (ref null $interfaces.Main.EnumImplementor))
+ ;;@ interfaces/Main.java:52:7
+ (local $$instance (ref null $interfaces.Main.EnumImplementor))
+ (block
+  ;;@ interfaces/Main.java:52:7
+  (local.set $$instance (struct.new $interfaces.Main.EnumImplementor (ref.as_non_null (global.get $interfaces.Main.EnumImplementor.vtable)) (ref.as_non_null (global.get $interfaces.Main.EnumImplementor.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
+  ;;@ interfaces/Main.java:52:7
+  (call $$ctor__java_lang_String__int__void_$p_interfaces_Main_EnumImplementor@interfaces.Main.EnumImplementor (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
+  ;;@ interfaces/Main.java:52:7
+  (return (local.get $$instance))
+ )
+)
+
+;;; void EnumImplementor.$ctor(String $name, int $ordinal)
+(func $$ctor__java_lang_String__int__void_$p_interfaces_Main_EnumImplementor@interfaces.Main.EnumImplementor
+ (param $this (ref null $interfaces.Main.EnumImplementor))
+ (param $$name (ref null $java.lang.String))
+ (param $$ordinal i32)
+ ;;@ interfaces/Main.java:52:7
+ (block
+  ;;@ interfaces/Main.java:52:7
+  (struct.set $java.lang.Enum $name@java.lang.Enum (local.get $this) (local.get $$name))
+  ;;@ interfaces/Main.java:52:7
+  (struct.set $java.lang.Enum $ordinal@java.lang.Enum (local.get $this) (local.get $$ordinal))
+  ;;@ interfaces/Main.java:52:7
+  (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
+ )
+)
+
+;;; void EnumImplementor.interfaceMethod()
+(func $m_interfaceMethod__void@interfaces.Main.EnumImplementor
+ (type $function.m_interfaceMethod__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ interfaces/Main.java:56:16
+ (local $this (ref null $interfaces.Main.EnumImplementor))
+ (local.set $this (ref.cast (ref $interfaces.Main.EnumImplementor) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_interfaceMethod__void@interfaces.Main.EnumImplementor)
+
+;;; void EnumImplementor.defaultMethod(T arg0)
+(func $m_defaultMethod__java_lang_Object__void@interfaces.Main.EnumImplementor
+ (type $function.m_defaultMethod__java_lang_Object__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ ;;@ interfaces/Main.java:52:7
+ (local $this (ref null $interfaces.Main.EnumImplementor))
+ (local.set $this (ref.cast (ref $interfaces.Main.EnumImplementor) (local.get $this.untyped)))
+ (block
+  ;;@ interfaces/Main.java:52:7
+  (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0)))
+ )
+)
+(elem declare func $m_defaultMethod__java_lang_Object__void@interfaces.Main.EnumImplementor)
+
+;;; void EnumImplementor.defaultMethod(String arg0)
+(func $m_defaultMethod__java_lang_String__void@interfaces.Main.EnumImplementor
+ (type $function.m_defaultMethod__java_lang_String__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.String))
+ ;;@ interfaces/Main.java:52:7
+ (local $this (ref null $interfaces.Main.EnumImplementor))
+ (local.set $this (ref.cast (ref $interfaces.Main.EnumImplementor) (local.get $this.untyped)))
+ (block
+  ;;@ interfaces/Main.java:52:7
+  (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(local.get $arg0))
+ )
+)
+(elem declare func $m_defaultMethod__java_lang_String__void@interfaces.Main.EnumImplementor)
+
+;;; EnumImplementor EnumImplementor.valueOf(String name)
+(func $m_valueOf__java_lang_String__interfaces_Main_EnumImplementor@interfaces.Main.EnumImplementor
+ (param $name (ref null $java.lang.String))
+ (result (ref null $interfaces.Main.EnumImplementor))
+ ;;@ interfaces/Main.java:52:7
+ (block
+  ;;@ interfaces/Main.java:52:7
+  (call $$clinit__void_<once>_@interfaces.Main.EnumImplementor )
+  ;;@ interfaces/Main.java:52:7
+  (if (ref.is_null (global.get $namesToValuesMap@interfaces.Main.EnumImplementor))
+   (then
+    (block
+     ;;@ interfaces/Main.java:52:7
+     (global.set $namesToValuesMap@interfaces.Main.EnumImplementor (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values_$private__arrayOf_interfaces_Main_EnumImplementor@interfaces.Main.EnumImplementor )))
+    )
+   )
+  )
+  ;;@ interfaces/Main.java:52:7
+  (return (ref.cast (ref null $interfaces.Main.EnumImplementor) (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $namesToValuesMap@interfaces.Main.EnumImplementor))))
+ )
+)
+
+;;; EnumImplementor[] EnumImplementor.values()
+(func $m_values__arrayOf_interfaces_Main_EnumImplementor@interfaces.Main.EnumImplementor
+ (result (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ interfaces/Main.java:52:7
+ (block
+  ;;@ interfaces/Main.java:52:7
+  (call $$clinit__void_<once>_@interfaces.Main.EnumImplementor )
+  ;;@ interfaces/Main.java:52:7
+  (return (call $m_values_$private__arrayOf_interfaces_Main_EnumImplementor@interfaces.Main.EnumImplementor ))
+ )
+)
+
+;;; EnumImplementor[] EnumImplementor.values_$private()
+(func $m_values_$private__arrayOf_interfaces_Main_EnumImplementor@interfaces.Main.EnumImplementor
+ (result (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ interfaces/Main.java:52:7
+ (block
+  ;;@ interfaces/Main.java:52:7
+  (return (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (global.get $ONE@interfaces.Main.EnumImplementor))))
+ )
+)
+
+;;; void EnumImplementor.$clinit()
+(func $$clinit__void_<once>_@interfaces.Main.EnumImplementor
+ ;;@ interfaces/Main.java:52:7
+ (block
+  ;;@ interfaces/Main.java:52:7
+  (if (global.get $$class-initialized@interfaces.Main.EnumImplementor)
+   (then
+    ;;@ interfaces/Main.java:52:7
+    (return )
+   )
+  )
+  ;;@ interfaces/Main.java:52:7
+  (global.set $$class-initialized@interfaces.Main.EnumImplementor (i32.const 1))
+  ;;@ interfaces/Main.java:52:7
+  (call $$clinit__void_<once>_@java.lang.Enum )
+  ;;@ interfaces/Main.java:52:7
+  (call $$clinit__void_<once>_@interfaces.Main.SubInterface )
+  ;;@ interfaces/Main.java:53:4
+  (global.set $ONE@interfaces.Main.EnumImplementor (call $$create__java_lang_String__int@interfaces.Main.EnumImplementor (call $$getString_|ONE|__java_lang_String_<once>_@interfaces.Main.EnumImplementor )(i32.const 0)))
+ )
+)
+
+;;; Class<T> EnumImplementor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@interfaces.Main.EnumImplementor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@interfaces.Main.EnumImplementor)))
+   (then
+    (return (global.get $$class@interfaces.Main.EnumImplementor))
+   )
+  )
+  (global.set $$class@interfaces.Main.EnumImplementor (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|interfaces.M...|__java_lang_String_<once>_@interfaces.Main.EnumImplementor )))
+  (return (global.get $$class@interfaces.Main.EnumImplementor))
+ )
+)
+
+;;; Class<?> EnumImplementor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@interfaces.Main.EnumImplementor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $interfaces.Main.EnumImplementor))
+ (local.set $this (ref.cast (ref $interfaces.Main.EnumImplementor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@interfaces.Main.EnumImplementor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@interfaces.Main.EnumImplementor)

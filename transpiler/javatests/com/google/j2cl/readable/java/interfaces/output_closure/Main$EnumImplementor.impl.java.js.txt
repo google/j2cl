@@ -1,0 +1,95 @@
+goog.module('interfaces.Main.EnumImplementor$impl');
+
+const SubInterface = goog.require('interfaces.Main.SubInterface$impl');
+const Enum = goog.require('java.lang.Enum$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
+
+/**
+ * @extends {Enum<EnumImplementor>}
+ * @implements {SubInterface}
+ */
+class EnumImplementor extends Enum {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!EnumImplementor} */
+ static $create__java_lang_String__int(/** ?string */ $name, /** number */ $ordinal) {
+  let $instance = new EnumImplementor();
+  $instance.$ctor__interfaces_Main_EnumImplementor__java_lang_String__int__void($name, $ordinal);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__interfaces_Main_EnumImplementor__java_lang_String__int__void(/** ?string */ $name, /** number */ $ordinal) {
+  this.f_name__java_lang_Enum_ = $name;
+  this.f_ordinal__java_lang_Enum_ = $ordinal;
+  this.$ctor__java_lang_Enum__java_lang_String__int__void($name, $ordinal);
+ }
+ /** @override @nodts */
+ m_interfaceMethod__void() {
+  EnumImplementor.$clinit();
+ }
+ //Bridge method.
+ /** @final @override @nodts */
+ m_defaultMethod__java_lang_Object__void(/** ?string */ arg0) {
+  EnumImplementor.$clinit();
+  SubInterface.m_defaultMethod__$default__interfaces_Main_SubInterface__java_lang_String__void(this, /**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
+ }
+ //Default method forwarding stub.
+ /** @override @nodts */
+ m_defaultMethod__java_lang_String__void(/** ?string */ arg0) {
+  EnumImplementor.$clinit();
+  SubInterface.m_defaultMethod__$default__interfaces_Main_SubInterface__java_lang_String__void(this, arg0);
+ }
+ /** @nodts @return {!EnumImplementor} */
+ static m_valueOf__java_lang_String__interfaces_Main_EnumImplementor(/** string */ name) {
+  EnumImplementor.$clinit();
+  if ($Equality.$same(EnumImplementor.f_namesToValuesMap__interfaces_Main_EnumImplementor_, null)) {
+   EnumImplementor.f_namesToValuesMap__interfaces_Main_EnumImplementor_ = /**@type {Map<?string, !EnumImplementor>}*/ ($Enums.createMapFromValues(EnumImplementor.m_values__arrayOf_interfaces_Main_EnumImplementor()));
+  }
+  return /**@type {EnumImplementor}*/ ($Enums.getValueFromNameAndMap(name, EnumImplementor.f_namesToValuesMap__interfaces_Main_EnumImplementor_));
+ }
+ /** @nodts @return {!Array<!EnumImplementor>} */
+ static m_values__arrayOf_interfaces_Main_EnumImplementor() {
+  EnumImplementor.$clinit();
+  return /**@type {!Array<EnumImplementor>}*/ ($Arrays.$stampType([EnumImplementor.f_ONE__interfaces_Main_EnumImplementor], EnumImplementor));
+ }
+ /** @nodts */
+ static $clinit() {
+  EnumImplementor.$clinit = () =>{};
+  EnumImplementor.$loadModules();
+  Enum.$clinit();
+  SubInterface.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof EnumImplementor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  $Enums = goog.module.get('vmbootstrap.Enums$impl');
+ }
+}
+/**@const {number} @nodts*/
+EnumImplementor.$ordinal_ONE__interfaces_Main_EnumImplementor = 0;
+/**@const {!EnumImplementor} @nodts*/
+EnumImplementor.f_ONE__interfaces_Main_EnumImplementor = /**@pureOrBreakMyCode*/ EnumImplementor.$create__java_lang_String__int($Util.$makeEnumName('ONE'), EnumImplementor.$ordinal_ONE__interfaces_Main_EnumImplementor);
+/**@type {Map<?string, !EnumImplementor>} @nodts*/
+EnumImplementor.f_namesToValuesMap__interfaces_Main_EnumImplementor_;
+SubInterface.$markImplementor(EnumImplementor);
+$Util.$setClassMetadataForEnum(EnumImplementor, 'interfaces.Main$EnumImplementor');
+
+exports = EnumImplementor;
+
+//# sourceMappingURL=Main$EnumImplementor.js.map

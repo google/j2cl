@@ -10,10 +10,17 @@ let $LambdaAdaptor = goog.forwardDeclare('intersectiontype.Cmp.$LambdaAdaptor$im
 class Cmp {
  /** @abstract @nodts @return {number} */
  m_cmp__int() {}
+ /** @abstract @nodts @return {number} */
+ m_defaultM__int() {}
  /** @nodts @return {Cmp} */
  static $adapt(/** ?function():number */ fn) {
   Cmp.$clinit();
   return new $LambdaAdaptor(fn);
+ }
+ /** @nodts @return {number} */
+ static m_defaultM__$default__intersectiontype_Cmp__int(/** !Cmp */ $thisArg) {
+  Cmp.$clinit();
+  return 1;
  }
  /** @nodts */
  static $clinit() {

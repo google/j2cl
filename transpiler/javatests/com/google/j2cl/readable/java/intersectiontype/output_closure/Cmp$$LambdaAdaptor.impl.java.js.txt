@@ -26,11 +26,17 @@ class $LambdaAdaptor extends j_l_Object {
   let /** ?function():number */ $function;
   return ($function = this.f_fn__intersectiontype_Cmp_$LambdaAdaptor, $function());
  }
+ //Default method forwarding stub.
+ /** @override @nodts @return {number} */
+ m_defaultM__int() {
+  return Cmp.m_defaultM__$default__intersectiontype_Cmp__int(this);
+ }
  /** @nodts */
  static $clinit() {
   $LambdaAdaptor.$clinit = () =>{};
   $LambdaAdaptor.$loadModules();
   j_l_Object.$clinit();
+  Cmp.$clinit();
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {

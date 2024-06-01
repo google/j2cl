@@ -30,6 +30,9 @@ public class Main {
     private void privateMethod(T t) {}
 
     static void staticInterfaceMethod() {}
+
+    @Override
+    String toString();
   }
 
   interface SubInterface extends Interface<String> {
@@ -46,10 +49,25 @@ public class Main {
 
   abstract class AbstractImplementor implements SubInterface {}
 
+  enum EnumImplementor implements SubInterface {
+    ONE;
+
+    @Override
+    public void interfaceMethod() {}
+  }
+
   void testInterfaceMembers() {
     Interface<String> i = new Implementor();
     i.interfaceMethod();
     i.defaultMethod(null);
+    i.toString();
+
+    Implementor impl = new Implementor();
+    impl.defaultMethod(null);
+
+    EnumImplementor enumImpl = EnumImplementor.ONE;
+    enumImpl.defaultMethod(null);
+
     Interface.staticInterfaceMethod();
     int x = (new Implementor()).a + Interface.b;
   }

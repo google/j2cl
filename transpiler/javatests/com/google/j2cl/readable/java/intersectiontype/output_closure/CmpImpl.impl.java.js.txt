@@ -1,0 +1,55 @@
+goog.module('intersectiontype.CmpImpl$impl');
+
+const Cmp = goog.require('intersectiontype.Cmp$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @implements {Cmp}
+ */
+class CmpImpl extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!CmpImpl} */
+ static $create__() {
+  CmpImpl.$clinit();
+  let $instance = new CmpImpl();
+  $instance.$ctor__intersectiontype_CmpImpl__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__intersectiontype_CmpImpl__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override @nodts @return {number} */
+ m_cmp__int() {
+  return 1;
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @return {number} */
+ m_defaultM__int() {
+  return Cmp.m_defaultM__$default__intersectiontype_Cmp__int(this);
+ }
+ /** @nodts */
+ static $clinit() {
+  CmpImpl.$clinit = () =>{};
+  CmpImpl.$loadModules();
+  j_l_Object.$clinit();
+  Cmp.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof CmpImpl;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Cmp.$markImplementor(CmpImpl);
+$Util.$setClassMetadata(CmpImpl, 'intersectiontype.CmpImpl');
+
+exports = CmpImpl;
+
+//# sourceMappingURL=CmpImpl.js.map
