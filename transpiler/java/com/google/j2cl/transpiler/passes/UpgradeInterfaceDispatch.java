@@ -23,6 +23,8 @@ import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import javax.annotation.Nullable;
 
 /**
  * Upgrades the dispatch if the instance is not an interface type. This may happen if the type at
@@ -37,29 +39,50 @@ public final class UpgradeInterfaceDispatch extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public MethodCall rewriteMethodCall(MethodCall methodCall) {
-            if (!methodCall.isPolymorphic() || methodCall.getTarget().isClassDynamicDispatch()) {
+            if (!methodCall.isPolymorphic()
+                || methodCall.getTarget().isClassDynamicDispatch()
+                || methodCall.getTarget().isNative()) {
               // This is not an interface dispatch.
               return methodCall;
             }
 
-            TypeDescriptor typeDescriptor = methodCall.getQualifier().getTypeDescriptor();
-
-            if (typeDescriptor.isTypeVariable()) {
-              typeDescriptor = typeDescriptor.toRawTypeDescriptor();
-            }
-
-            if (!typeDescriptor.isClass()) {
-              // If we haven't inferred a class type, then we cannot upgrade the call.
+            DeclaredTypeDescriptor qualifierTypeDescriptor =
+                findConcreteQualifierTypeDescriptor(methodCall);
+            if (qualifierTypeDescriptor == null) {
+              // Couldn't find a concrete type to upgrade the method call.
               return methodCall;
             }
 
-            DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
             MethodDescriptor newMethodDescriptor =
-                findTargetMethodDescriptor(declaredTypeDescriptor, methodCall.getTarget());
+                findTargetMethodDescriptor(qualifierTypeDescriptor, methodCall.getTarget());
 
             return MethodCall.Builder.from(methodCall).setTarget(newMethodDescriptor).build();
           }
         });
+  }
+
+  @Nullable
+  private static DeclaredTypeDescriptor findConcreteQualifierTypeDescriptor(MethodCall methodCall) {
+    TypeDescriptor qualifierTypeDescriptor = methodCall.getQualifier().getTypeDescriptor();
+    if (!(qualifierTypeDescriptor instanceof DeclaredTypeDescriptor)) {
+      // In the case of type variables and intersection types.
+      // `toRawTypeDescriptor` here returns a DeclaredTypeDescriptor. At this point, arrays have
+      // been converted to WasmArray types, and primitives never qualify for dynamic dispatch.
+      qualifierTypeDescriptor = qualifierTypeDescriptor.toRawTypeDescriptor();
+    }
+
+    if (qualifierTypeDescriptor.isInterface()) {
+      if (!methodCall.getTarget().isOrOverridesJavaLangObjectMethod()) {
+        // If the qualifier is an interface and the method is not java.lang.Object method, this is
+        // an interface dispatch and cannot be upgraded.
+        return null;
+      }
+      // Use java.lang.Object since the target is a java.lang.Object override and
+      // all interfaces types extend java.lang.Object.
+      return TypeDescriptors.get().javaLangObject;
+    }
+
+    return (DeclaredTypeDescriptor) qualifierTypeDescriptor;
   }
 
   /** Creates a MethodDescriptor to target a polymorphic method on a particular class. */
