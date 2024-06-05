@@ -152,7 +152,7 @@ internal data class TypeDescriptorRenderer(
               } else {
                 typeVariable.upperBoundTypeDescriptor.let { upperBound ->
                   if (upperBound.isImplicitUpperBound) {
-                    source("*")
+                    STAR_OPERATOR
                   } else {
                     spaceSeparated(OUT_KEYWORD, child.source(upperBound))
                   }
