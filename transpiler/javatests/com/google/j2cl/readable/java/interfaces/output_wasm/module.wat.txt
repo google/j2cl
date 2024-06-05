@@ -326,6 +326,7 @@
  (local $impl (ref null $interfaces.Main.Implementor))
  (local $enumImpl (ref null $interfaces.Main.EnumImplementor))
  (local $x i32)
+ (local $si (ref null $java.lang.Object))
  (local $this (ref null $interfaces.Main))
  (local.set $this (ref.cast (ref $interfaces.Main) (local.get $this.untyped)))
  (block
@@ -355,6 +356,12 @@
    (drop (call $$create__interfaces_Main@interfaces.Main.Implementor (local.get $this)))
    (i32.const 1)
   ) (i32.const 2)))
+  ;;@ interfaces/Main.java:74:4
+  (local.set $si (call $$create__interfaces_Main@interfaces.Main.Implementor (local.get $this)))
+  ;;@ interfaces/Main.java:75:4
+  (call_ref $function.m_interfaceMethod__void (ref.as_non_null (local.get $si))(struct.get $interfaces.Main.Interface.vtable $m_interfaceMethod__void (ref.cast (ref $interfaces.Main.Interface.vtable) (call $get.itable.$interfaces.Main.Interface (local.get $si)))))
+  ;;@ interfaces/Main.java:76:4
+  (call_ref $function.m_defaultMethod__java_lang_String__void (ref.as_non_null (local.get $si))(ref.null $java.lang.String)(struct.get $interfaces.Main.SubInterface.vtable $m_defaultMethod__java_lang_String__void (ref.cast (ref $interfaces.Main.SubInterface.vtable) (call $get.itable.$interfaces.Main.SubInterface (local.get $si)))))
  )
 )
 (elem declare func $m_testInterfaceMembers__void_$pp_interfaces@interfaces.Main)

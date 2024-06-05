@@ -70,5 +70,9 @@ public class Main {
 
     Interface.staticInterfaceMethod();
     int x = (new Implementor()).a + Interface.b;
+
+    SubInterface si = new Implementor();
+    si.interfaceMethod();
+    si.defaultMethod(null);
   }
 }

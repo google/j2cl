@@ -44,6 +44,9 @@ open class Main {
    Implementor()
    Main.Interface.a
   } + Main.Interface.b
+  val si: Main.SubInterface? = Implementor()
+  si!!.interfaceMethod()
+  si!!.defaultMethod(null)
  }
 
  fun interface Interface<T> {
