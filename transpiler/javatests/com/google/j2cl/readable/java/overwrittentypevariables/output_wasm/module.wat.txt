@@ -4,20 +4,14 @@
  ))
 )
 
-;;; Code for overwrittentypevariables.HashFunction [type definition]
-(type $overwrittentypevariables.HashFunction.vtable (sub (struct
- ))
-)
-
-;;; Code for overwrittentypevariables.ParameterizedType [type definition]
-(type $overwrittentypevariables.ParameterizedType.vtable (sub (struct
- (field $m_accept__java_lang_Object__java_lang_Object (ref $function.m_accept__java_lang_Object__java_lang_Object))
- ))
-)
-
 ;;; Code for overwrittentypevariables.otherpkg.ParameterizedType [type definition]
 (type $overwrittentypevariables.otherpkg.ParameterizedType.vtable (sub (struct
  (field $m_accept__java_lang_Object__java_lang_Object (ref $function.m_accept__java_lang_Object__java_lang_Object))
+ ))
+)
+
+;;; Code for overwrittentypevariables.HashFunction [type definition]
+(type $overwrittentypevariables.HashFunction.vtable (sub (struct
  ))
 )
 
@@ -33,6 +27,12 @@
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+
+;;; Code for overwrittentypevariables.ParameterizedType [type definition]
+(type $overwrittentypevariables.ParameterizedType.vtable (sub (struct
+ (field $m_accept__java_lang_Object__java_lang_Object (ref $function.m_accept__java_lang_Object__java_lang_Object))
  ))
 )
 
@@ -89,13 +89,13 @@
 
 ;;; Code for overwrittentypevariables.MyFunction [imports]
 
-;;; Code for overwrittentypevariables.HashFunction [imports]
-
-;;; Code for overwrittentypevariables.ParameterizedType [imports]
-
 ;;; Code for overwrittentypevariables.otherpkg.ParameterizedType [imports]
 
+;;; Code for overwrittentypevariables.HashFunction [imports]
+
 ;;; Code for overwrittentypevariables.HashFunctions [imports]
+
+;;; Code for overwrittentypevariables.ParameterizedType [imports]
 
 ;;; Code for overwrittentypevariables.HashFunctions.1 [imports]
 
@@ -273,70 +273,6 @@
  )
 )
 
-;;; Code for overwrittentypevariables.HashFunction [methods]
-
-;;; void HashFunction.$clinit()
-(func $$clinit__void_<once>_@overwrittentypevariables.HashFunction
- ;;@ overwrittentypevariables/HashFunctions.java:22:10
- (block
-  ;;@ overwrittentypevariables/HashFunctions.java:22:10
-  (if (global.get $$class-initialized@overwrittentypevariables.HashFunction)
-   (then
-    ;;@ overwrittentypevariables/HashFunctions.java:22:10
-    (return )
-   )
-  )
-  ;;@ overwrittentypevariables/HashFunctions.java:22:10
-  (global.set $$class-initialized@overwrittentypevariables.HashFunction (i32.const 1))
- )
-)
-
-;;; Class<T> HashFunction.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@overwrittentypevariables.HashFunction
- (result (ref null $java.lang.Class))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$class@overwrittentypevariables.HashFunction)))
-   (then
-    (return (global.get $$class@overwrittentypevariables.HashFunction))
-   )
-  )
-  (global.set $$class@overwrittentypevariables.HashFunction (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|overwrittent...|__java_lang_String_<once>_@overwrittentypevariables.HashFunction )))
-  (return (global.get $$class@overwrittentypevariables.HashFunction))
- )
-)
-
-;;; Code for overwrittentypevariables.ParameterizedType [methods]
-
-;;; void ParameterizedType.$clinit()
-(func $$clinit__void_<once>_@overwrittentypevariables.ParameterizedType
- ;;@ overwrittentypevariables/ParameterizedType.java:22:17
- (block
-  ;;@ overwrittentypevariables/ParameterizedType.java:22:17
-  (if (global.get $$class-initialized@overwrittentypevariables.ParameterizedType)
-   (then
-    ;;@ overwrittentypevariables/ParameterizedType.java:22:17
-    (return )
-   )
-  )
-  ;;@ overwrittentypevariables/ParameterizedType.java:22:17
-  (global.set $$class-initialized@overwrittentypevariables.ParameterizedType (i32.const 1))
- )
-)
-
-;;; Class<T> ParameterizedType.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@overwrittentypevariables.ParameterizedType
- (result (ref null $java.lang.Class))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$class@overwrittentypevariables.ParameterizedType)))
-   (then
-    (return (global.get $$class@overwrittentypevariables.ParameterizedType))
-   )
-  )
-  (global.set $$class@overwrittentypevariables.ParameterizedType (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|overwrittent...|__java_lang_String_<once>_@overwrittentypevariables.ParameterizedType )))
-  (return (global.get $$class@overwrittentypevariables.ParameterizedType))
- )
-)
-
 ;;; Code for overwrittentypevariables.otherpkg.ParameterizedType [methods]
 
 ;;; void ParameterizedType.$clinit()
@@ -366,6 +302,38 @@
   )
   (global.set $$class@overwrittentypevariables.otherpkg.ParameterizedType (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|overwrittent...|__java_lang_String_<once>_@overwrittentypevariables.otherpkg.ParameterizedType )))
   (return (global.get $$class@overwrittentypevariables.otherpkg.ParameterizedType))
+ )
+)
+
+;;; Code for overwrittentypevariables.HashFunction [methods]
+
+;;; void HashFunction.$clinit()
+(func $$clinit__void_<once>_@overwrittentypevariables.HashFunction
+ ;;@ overwrittentypevariables/HashFunctions.java:22:10
+ (block
+  ;;@ overwrittentypevariables/HashFunctions.java:22:10
+  (if (global.get $$class-initialized@overwrittentypevariables.HashFunction)
+   (then
+    ;;@ overwrittentypevariables/HashFunctions.java:22:10
+    (return )
+   )
+  )
+  ;;@ overwrittentypevariables/HashFunctions.java:22:10
+  (global.set $$class-initialized@overwrittentypevariables.HashFunction (i32.const 1))
+ )
+)
+
+;;; Class<T> HashFunction.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@overwrittentypevariables.HashFunction
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@overwrittentypevariables.HashFunction)))
+   (then
+    (return (global.get $$class@overwrittentypevariables.HashFunction))
+   )
+  )
+  (global.set $$class@overwrittentypevariables.HashFunction (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|overwrittent...|__java_lang_String_<once>_@overwrittentypevariables.HashFunction )))
+  (return (global.get $$class@overwrittentypevariables.HashFunction))
  )
 )
 
@@ -466,6 +434,38 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@overwrittentypevariables.HashFunctions)
+
+;;; Code for overwrittentypevariables.ParameterizedType [methods]
+
+;;; void ParameterizedType.$clinit()
+(func $$clinit__void_<once>_@overwrittentypevariables.ParameterizedType
+ ;;@ overwrittentypevariables/ParameterizedType.java:22:17
+ (block
+  ;;@ overwrittentypevariables/ParameterizedType.java:22:17
+  (if (global.get $$class-initialized@overwrittentypevariables.ParameterizedType)
+   (then
+    ;;@ overwrittentypevariables/ParameterizedType.java:22:17
+    (return )
+   )
+  )
+  ;;@ overwrittentypevariables/ParameterizedType.java:22:17
+  (global.set $$class-initialized@overwrittentypevariables.ParameterizedType (i32.const 1))
+ )
+)
+
+;;; Class<T> ParameterizedType.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@overwrittentypevariables.ParameterizedType
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@overwrittentypevariables.ParameterizedType)))
+   (then
+    (return (global.get $$class@overwrittentypevariables.ParameterizedType))
+   )
+  )
+  (global.set $$class@overwrittentypevariables.ParameterizedType (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|overwrittent...|__java_lang_String_<once>_@overwrittentypevariables.ParameterizedType )))
+  (return (global.get $$class@overwrittentypevariables.ParameterizedType))
+ )
+)
 
 ;;; Code for overwrittentypevariables.HashFunctions.1 [methods]
 

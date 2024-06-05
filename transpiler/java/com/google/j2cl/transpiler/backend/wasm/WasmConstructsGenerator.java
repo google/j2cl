@@ -847,7 +847,7 @@ public class WasmConstructsGenerator {
         .streamTypes()
         .filter(t -> !AstUtils.isNonNativeJsEnum(t.getTypeDescriptor()))
         // Emit the types supertypes first.
-        .sorted(Comparator.comparing(t -> t.getDeclaration().getClassHierarchyDepth()))
+        .sorted(Comparator.comparing(t -> t.getDeclaration().getTypeHierarchyDepth()))
         .forEach(
             type -> {
               emitBeginCodeComment(type, comment);

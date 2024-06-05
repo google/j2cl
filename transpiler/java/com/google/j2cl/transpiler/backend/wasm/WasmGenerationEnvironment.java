@@ -420,7 +420,7 @@ public class WasmGenerationEnvironment {
         .filter(Predicates.not(Type::isInterface))
         // Traverse superclasses before subclasses to ensure that the layout for the superclass
         // is already available to build the layout for the subclass.
-        .sorted(comparingInt(t -> t.getDeclaration().getClassHierarchyDepth()))
+        .sorted(comparingInt(t -> t.getDeclaration().getTypeHierarchyDepth()))
         .forEach(
             t -> {
               TypeDeclaration typeDeclaration = t.getDeclaration();

@@ -1,14 +1,3 @@
-;;; Code for annotation.Main.Foo [type definition]
-(type $annotation.Main.Foo.vtable (sub (struct
- (field $m_bar__int (ref $function.m_bar__int))
- ))
-)
-
-;;; Code for annotation.Main.Zoo [type definition]
-(type $annotation.Main.Zoo.vtable (sub (struct
- ))
-)
-
 ;;; Code for annotation.Main [type definition]
 (type $annotation.Main (sub $java.lang.Object (struct
  (field $vtable (ref $annotation.Main.vtable))
@@ -21,6 +10,17 @@
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+
+;;; Code for annotation.Main.Foo [type definition]
+(type $annotation.Main.Foo.vtable (sub (struct
+ (field $m_bar__int (ref $function.m_bar__int))
+ ))
+)
+
+;;; Code for annotation.Main.Zoo [type definition]
+(type $annotation.Main.Zoo.vtable (sub (struct
  ))
 )
 
@@ -41,11 +41,11 @@
  ))
 )
 
+;;; Code for annotation.Main [imports]
+
 ;;; Code for annotation.Main.Foo [imports]
 
 ;;; Code for annotation.Main.Zoo [imports]
-
-;;; Code for annotation.Main [imports]
 
 ;;; Code for annotation.Main.Bar [imports]
 
@@ -99,70 +99,6 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_baz__int_$pp_annotation@annotation.Main.Bar)
- )
-)
-
-;;; Code for annotation.Main.Foo [methods]
-
-;;; void Foo.$clinit()
-(func $$clinit__void_<once>_@annotation.Main.Foo
- ;;@ annotation/Main.java:19:13
- (block
-  ;;@ annotation/Main.java:19:13
-  (if (global.get $$class-initialized@annotation.Main.Foo)
-   (then
-    ;;@ annotation/Main.java:19:13
-    (return )
-   )
-  )
-  ;;@ annotation/Main.java:19:13
-  (global.set $$class-initialized@annotation.Main.Foo (i32.const 1))
- )
-)
-
-;;; Class<T> Foo.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@annotation.Main.Foo
- (result (ref null $java.lang.Class))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$class@annotation.Main.Foo)))
-   (then
-    (return (global.get $$class@annotation.Main.Foo))
-   )
-  )
-  (global.set $$class@annotation.Main.Foo (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|annotation.M...|__java_lang_String_<once>_@annotation.Main.Foo )))
-  (return (global.get $$class@annotation.Main.Foo))
- )
-)
-
-;;; Code for annotation.Main.Zoo [methods]
-
-;;; void Zoo.$clinit()
-(func $$clinit__void_<once>_@annotation.Main.Zoo
- ;;@ annotation/Main.java:28:13
- (block
-  ;;@ annotation/Main.java:28:13
-  (if (global.get $$class-initialized@annotation.Main.Zoo)
-   (then
-    ;;@ annotation/Main.java:28:13
-    (return )
-   )
-  )
-  ;;@ annotation/Main.java:28:13
-  (global.set $$class-initialized@annotation.Main.Zoo (i32.const 1))
- )
-)
-
-;;; Class<T> Zoo.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@annotation.Main.Zoo
- (result (ref null $java.lang.Class))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$class@annotation.Main.Zoo)))
-   (then
-    (return (global.get $$class@annotation.Main.Zoo))
-   )
-  )
-  (global.set $$class@annotation.Main.Zoo (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|annotation.M...|__java_lang_String_<once>_@annotation.Main.Zoo )))
-  (return (global.get $$class@annotation.Main.Zoo))
  )
 )
 
@@ -239,6 +175,70 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@annotation.Main)
+
+;;; Code for annotation.Main.Foo [methods]
+
+;;; void Foo.$clinit()
+(func $$clinit__void_<once>_@annotation.Main.Foo
+ ;;@ annotation/Main.java:19:13
+ (block
+  ;;@ annotation/Main.java:19:13
+  (if (global.get $$class-initialized@annotation.Main.Foo)
+   (then
+    ;;@ annotation/Main.java:19:13
+    (return )
+   )
+  )
+  ;;@ annotation/Main.java:19:13
+  (global.set $$class-initialized@annotation.Main.Foo (i32.const 1))
+ )
+)
+
+;;; Class<T> Foo.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@annotation.Main.Foo
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@annotation.Main.Foo)))
+   (then
+    (return (global.get $$class@annotation.Main.Foo))
+   )
+  )
+  (global.set $$class@annotation.Main.Foo (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|annotation.M...|__java_lang_String_<once>_@annotation.Main.Foo )))
+  (return (global.get $$class@annotation.Main.Foo))
+ )
+)
+
+;;; Code for annotation.Main.Zoo [methods]
+
+;;; void Zoo.$clinit()
+(func $$clinit__void_<once>_@annotation.Main.Zoo
+ ;;@ annotation/Main.java:28:13
+ (block
+  ;;@ annotation/Main.java:28:13
+  (if (global.get $$class-initialized@annotation.Main.Zoo)
+   (then
+    ;;@ annotation/Main.java:28:13
+    (return )
+   )
+  )
+  ;;@ annotation/Main.java:28:13
+  (global.set $$class-initialized@annotation.Main.Zoo (i32.const 1))
+ )
+)
+
+;;; Class<T> Zoo.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@annotation.Main.Zoo
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@annotation.Main.Zoo)))
+   (then
+    (return (global.get $$class@annotation.Main.Zoo))
+   )
+  )
+  (global.set $$class@annotation.Main.Zoo (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|annotation.M...|__java_lang_String_<once>_@annotation.Main.Zoo )))
+  (return (global.get $$class@annotation.Main.Zoo))
+ )
+)
 
 ;;; Code for annotation.Main.Bar [methods]
 

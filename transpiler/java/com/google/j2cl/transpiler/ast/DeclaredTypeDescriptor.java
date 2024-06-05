@@ -872,7 +872,8 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     TypeDeclaration candidateDeclaration =
         candidateMethod.getEnclosingTypeDescriptor().getTypeDeclaration();
     TypeDeclaration currentDeclaration = method.getEnclosingTypeDescriptor().getTypeDeclaration();
-    return candidateDeclaration.getMaxInterfaceDepth() >= currentDeclaration.getMaxInterfaceDepth();
+    return candidateDeclaration.getTypeHierarchyDepth()
+        >= currentDeclaration.getTypeHierarchyDepth();
   }
 
   /** Returns true if the method needs a specializing bridge. */

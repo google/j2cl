@@ -9,22 +9,6 @@
  ))
 )
 
-;;; Code for unimplementedbridgemethod.Bar [type definition]
-(type $unimplementedbridgemethod.Bar (sub $java.lang.Object (struct
- (field $vtable (ref $unimplementedbridgemethod.Bar.vtable))
- (field $itable (ref $unimplementedbridgemethod.Bar.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
-(type $unimplementedbridgemethod.Bar.vtable (sub $java.lang.Object.vtable (struct
- (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_foo__java_lang_Object__int (ref $function.m_foo__java_lang_Object__int))
- ))
-)
-
 ;;; Code for unimplementedbridgemethod.Foo [type definition]
 (type $unimplementedbridgemethod.Foo (sub $java.lang.Object (struct
  (field $vtable (ref $unimplementedbridgemethod.Foo.vtable))
@@ -41,13 +25,29 @@
  ))
 )
 
+;;; Code for unimplementedbridgemethod.Bar [type definition]
+(type $unimplementedbridgemethod.Bar (sub $java.lang.Object (struct
+ (field $vtable (ref $unimplementedbridgemethod.Bar.vtable))
+ (field $itable (ref $unimplementedbridgemethod.Bar.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $unimplementedbridgemethod.Bar.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_foo__java_lang_Object__int (ref $function.m_foo__java_lang_Object__int))
+ ))
+)
+
 ;;; Code for unimplementedbridgemethod.I [imports]
 
 ;;; Code for unimplementedbridgemethod.J [imports]
 
-;;; Code for unimplementedbridgemethod.Bar [imports]
-
 ;;; Code for unimplementedbridgemethod.Foo [imports]
+
+;;; Code for unimplementedbridgemethod.Bar [imports]
 
 ;;; Code for unimplementedbridgemethod.I [static fields]
 (global $$class-initialized@unimplementedbridgemethod.I (mut i32)
@@ -157,50 +157,6 @@
  )
 )
 
-;;; Code for unimplementedbridgemethod.Bar [methods]
-
-;;; void Bar.$ctor()
-(func $$ctor__void_$p_unimplementedbridgemethod_Bar@unimplementedbridgemethod.Bar
- (param $this (ref null $unimplementedbridgemethod.Bar))
- ;;@ unimplementedbridgemethod/Foo.java:33:15
- (block
-  ;;@ unimplementedbridgemethod/Foo.java:33:15
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
- )
-)
-
-;;; void Bar.$clinit()
-(func $$clinit__void_<once>_@unimplementedbridgemethod.Bar
- ;;@ unimplementedbridgemethod/Foo.java:33:15
- (block
-  ;;@ unimplementedbridgemethod/Foo.java:33:15
-  (if (global.get $$class-initialized@unimplementedbridgemethod.Bar)
-   (then
-    ;;@ unimplementedbridgemethod/Foo.java:33:15
-    (return )
-   )
-  )
-  ;;@ unimplementedbridgemethod/Foo.java:33:15
-  (global.set $$class-initialized@unimplementedbridgemethod.Bar (i32.const 1))
-  ;;@ unimplementedbridgemethod/Foo.java:33:15
-  (call $$clinit__void_<once>_@java.lang.Object )
- )
-)
-
-;;; Class<T> Bar.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@unimplementedbridgemethod.Bar
- (result (ref null $java.lang.Class))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$class@unimplementedbridgemethod.Bar)))
-   (then
-    (return (global.get $$class@unimplementedbridgemethod.Bar))
-   )
-  )
-  (global.set $$class@unimplementedbridgemethod.Bar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|unimplemente...|__java_lang_String_<once>_@unimplementedbridgemethod.Bar )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
-  (return (global.get $$class@unimplementedbridgemethod.Bar))
- )
-)
-
 ;;; Code for unimplementedbridgemethod.Foo [methods]
 
 ;;; void Foo.$ctor()
@@ -242,5 +198,49 @@
   )
   (global.set $$class@unimplementedbridgemethod.Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|unimplemente...|__java_lang_String_<once>_@unimplementedbridgemethod.Foo )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@unimplementedbridgemethod.Foo))
+ )
+)
+
+;;; Code for unimplementedbridgemethod.Bar [methods]
+
+;;; void Bar.$ctor()
+(func $$ctor__void_$p_unimplementedbridgemethod_Bar@unimplementedbridgemethod.Bar
+ (param $this (ref null $unimplementedbridgemethod.Bar))
+ ;;@ unimplementedbridgemethod/Foo.java:33:15
+ (block
+  ;;@ unimplementedbridgemethod/Foo.java:33:15
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Bar.$clinit()
+(func $$clinit__void_<once>_@unimplementedbridgemethod.Bar
+ ;;@ unimplementedbridgemethod/Foo.java:33:15
+ (block
+  ;;@ unimplementedbridgemethod/Foo.java:33:15
+  (if (global.get $$class-initialized@unimplementedbridgemethod.Bar)
+   (then
+    ;;@ unimplementedbridgemethod/Foo.java:33:15
+    (return )
+   )
+  )
+  ;;@ unimplementedbridgemethod/Foo.java:33:15
+  (global.set $$class-initialized@unimplementedbridgemethod.Bar (i32.const 1))
+  ;;@ unimplementedbridgemethod/Foo.java:33:15
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> Bar.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@unimplementedbridgemethod.Bar
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@unimplementedbridgemethod.Bar)))
+   (then
+    (return (global.get $$class@unimplementedbridgemethod.Bar))
+   )
+  )
+  (global.set $$class@unimplementedbridgemethod.Bar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|unimplemente...|__java_lang_String_<once>_@unimplementedbridgemethod.Bar )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@unimplementedbridgemethod.Bar))
  )
 )

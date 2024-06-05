@@ -10,12 +10,6 @@
  ))
 )
 
-;;; Code for functionalinterface.FunctionalInterfaces.Specialized [type definition]
-(type $functionalinterface.FunctionalInterfaces.Specialized.vtable (sub (struct
- (field $m_apply__java_lang_String__java_lang_String (ref $function.m_apply__java_lang_String__java_lang_String))
- ))
-)
-
 ;;; Code for functionalinterface.FunctionalInterfaces.WithDefaultMethod [type definition]
 (type $functionalinterface.FunctionalInterfaces.WithDefaultMethod.vtable (sub (struct
  (field $m_apply__java_lang_String__java_lang_String (ref $function.m_apply__java_lang_String__java_lang_String))
@@ -59,11 +53,15 @@
  ))
 )
 
+;;; Code for functionalinterface.FunctionalInterfaces.Specialized [type definition]
+(type $functionalinterface.FunctionalInterfaces.Specialized.vtable (sub (struct
+ (field $m_apply__java_lang_String__java_lang_String (ref $function.m_apply__java_lang_String__java_lang_String))
+ ))
+)
+
 ;;; Code for functionalinterface.FunctionalInterfaces.NonParametrized [imports]
 
 ;;; Code for functionalinterface.FunctionalInterfaces.Parametrized [imports]
-
-;;; Code for functionalinterface.FunctionalInterfaces.Specialized [imports]
 
 ;;; Code for functionalinterface.FunctionalInterfaces.WithDefaultMethod [imports]
 
@@ -74,6 +72,8 @@
 ;;; Code for functionalinterface.FunctionalInterfaces.WithKtProperty [imports]
 
 ;;; Code for functionalinterface.FunctionalInterfaces [imports]
+
+;;; Code for functionalinterface.FunctionalInterfaces.Specialized [imports]
 
 ;;; Code for functionalinterface.FunctionalInterfaces [static fields]
 (global $$class-initialized@functionalinterface.FunctionalInterfaces (mut i32)
@@ -210,38 +210,6 @@
   )
   (global.set $$class@functionalinterface.FunctionalInterfaces.Parametrized (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|functionalin...|__java_lang_String_<once>_@functionalinterface.FunctionalInterfaces.Parametrized )))
   (return (global.get $$class@functionalinterface.FunctionalInterfaces.Parametrized))
- )
-)
-
-;;; Code for functionalinterface.FunctionalInterfaces.Specialized [methods]
-
-;;; void Specialized.$clinit()
-(func $$clinit__void_<once>_@functionalinterface.FunctionalInterfaces.Specialized
- ;;@ functionalinterface/FunctionalInterfaces.java:29:19
- (block
-  ;;@ functionalinterface/FunctionalInterfaces.java:29:19
-  (if (global.get $$class-initialized@functionalinterface.FunctionalInterfaces.Specialized)
-   (then
-    ;;@ functionalinterface/FunctionalInterfaces.java:29:19
-    (return )
-   )
-  )
-  ;;@ functionalinterface/FunctionalInterfaces.java:29:19
-  (global.set $$class-initialized@functionalinterface.FunctionalInterfaces.Specialized (i32.const 1))
- )
-)
-
-;;; Class<T> Specialized.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@functionalinterface.FunctionalInterfaces.Specialized
- (result (ref null $java.lang.Class))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$class@functionalinterface.FunctionalInterfaces.Specialized)))
-   (then
-    (return (global.get $$class@functionalinterface.FunctionalInterfaces.Specialized))
-   )
-  )
-  (global.set $$class@functionalinterface.FunctionalInterfaces.Specialized (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|functionalin...|__java_lang_String_<once>_@functionalinterface.FunctionalInterfaces.Specialized )))
-  (return (global.get $$class@functionalinterface.FunctionalInterfaces.Specialized))
  )
 )
 
@@ -459,3 +427,35 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@functionalinterface.FunctionalInterfaces)
+
+;;; Code for functionalinterface.FunctionalInterfaces.Specialized [methods]
+
+;;; void Specialized.$clinit()
+(func $$clinit__void_<once>_@functionalinterface.FunctionalInterfaces.Specialized
+ ;;@ functionalinterface/FunctionalInterfaces.java:29:19
+ (block
+  ;;@ functionalinterface/FunctionalInterfaces.java:29:19
+  (if (global.get $$class-initialized@functionalinterface.FunctionalInterfaces.Specialized)
+   (then
+    ;;@ functionalinterface/FunctionalInterfaces.java:29:19
+    (return )
+   )
+  )
+  ;;@ functionalinterface/FunctionalInterfaces.java:29:19
+  (global.set $$class-initialized@functionalinterface.FunctionalInterfaces.Specialized (i32.const 1))
+ )
+)
+
+;;; Class<T> Specialized.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@functionalinterface.FunctionalInterfaces.Specialized
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@functionalinterface.FunctionalInterfaces.Specialized)))
+   (then
+    (return (global.get $$class@functionalinterface.FunctionalInterfaces.Specialized))
+   )
+  )
+  (global.set $$class@functionalinterface.FunctionalInterfaces.Specialized (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|functionalin...|__java_lang_String_<once>_@functionalinterface.FunctionalInterfaces.Specialized )))
+  (return (global.get $$class@functionalinterface.FunctionalInterfaces.Specialized))
+ )
+)

@@ -10,12 +10,6 @@
  ))
 )
 
-;;; Code for multipleabstractparents.MultipleAbstractParents.IStringList [type definition]
-(type $multipleabstractparents.MultipleAbstractParents.IStringList.vtable (sub (struct
- (field $m_getFoo__java_lang_String__java_lang_String (ref $function.m_getFoo__java_lang_String__java_lang_String))
- ))
-)
-
 ;;; Code for multipleabstractparents.MultipleAbstractParents [type definition]
 (type $multipleabstractparents.MultipleAbstractParents (sub $java.lang.Object (struct
  (field $vtable (ref $multipleabstractparents.MultipleAbstractParents.vtable))
@@ -76,6 +70,12 @@
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_getFoo__java_lang_Object__java_lang_String (ref $function.m_getFoo__java_lang_Object__java_lang_String))
+ ))
+)
+
+;;; Code for multipleabstractparents.MultipleAbstractParents.IStringList [type definition]
+(type $multipleabstractparents.MultipleAbstractParents.IStringList.vtable (sub (struct
+ (field $m_getFoo__java_lang_String__java_lang_String (ref $function.m_getFoo__java_lang_String__java_lang_String))
  ))
 )
 
@@ -199,8 +199,6 @@
 
 ;;; Code for multipleabstractparents.MultipleAbstractParents.Collection [imports]
 
-;;; Code for multipleabstractparents.MultipleAbstractParents.IStringList [imports]
-
 ;;; Code for multipleabstractparents.MultipleAbstractParents [imports]
 
 ;;; Code for multipleabstractparents.MultipleAbstractParents.AbstractListCollection [imports]
@@ -208,6 +206,8 @@
 ;;; Code for multipleabstractparents.MultipleAbstractParents.AbstractCollection [imports]
 
 ;;; Code for multipleabstractparents.MultipleAbstractParents.AbstractList2 [imports]
+
+;;; Code for multipleabstractparents.MultipleAbstractParents.IStringList [imports]
 
 ;;; Code for multipleabstractparents.MultipleAbstractParents.AbstractList [imports]
 
@@ -466,38 +466,6 @@
   )
   (global.set $$class@multipleabstractparents.MultipleAbstractParents.Collection (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|multipleabst...|__java_lang_String_<once>_@multipleabstractparents.MultipleAbstractParents.Collection )))
   (return (global.get $$class@multipleabstractparents.MultipleAbstractParents.Collection))
- )
-)
-
-;;; Code for multipleabstractparents.MultipleAbstractParents.IStringList [methods]
-
-;;; void IStringList.$clinit()
-(func $$clinit__void_<once>_@multipleabstractparents.MultipleAbstractParents.IStringList
- ;;@ multipleabstractparents/MultipleAbstractParents.java:42:19
- (block
-  ;;@ multipleabstractparents/MultipleAbstractParents.java:42:19
-  (if (global.get $$class-initialized@multipleabstractparents.MultipleAbstractParents.IStringList)
-   (then
-    ;;@ multipleabstractparents/MultipleAbstractParents.java:42:19
-    (return )
-   )
-  )
-  ;;@ multipleabstractparents/MultipleAbstractParents.java:42:19
-  (global.set $$class-initialized@multipleabstractparents.MultipleAbstractParents.IStringList (i32.const 1))
- )
-)
-
-;;; Class<T> IStringList.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@multipleabstractparents.MultipleAbstractParents.IStringList
- (result (ref null $java.lang.Class))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$class@multipleabstractparents.MultipleAbstractParents.IStringList)))
-   (then
-    (return (global.get $$class@multipleabstractparents.MultipleAbstractParents.IStringList))
-   )
-  )
-  (global.set $$class@multipleabstractparents.MultipleAbstractParents.IStringList (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|multipleabst...|__java_lang_String_<once>_@multipleabstractparents.MultipleAbstractParents.IStringList )))
-  (return (global.get $$class@multipleabstractparents.MultipleAbstractParents.IStringList))
  )
 )
 
@@ -763,6 +731,38 @@
   )
   (global.set $$class@multipleabstractparents.MultipleAbstractParents.AbstractList2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|multipleabst...|__java_lang_String_<once>_@multipleabstractparents.MultipleAbstractParents.AbstractList2 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@multipleabstractparents.MultipleAbstractParents.AbstractList2))
+ )
+)
+
+;;; Code for multipleabstractparents.MultipleAbstractParents.IStringList [methods]
+
+;;; void IStringList.$clinit()
+(func $$clinit__void_<once>_@multipleabstractparents.MultipleAbstractParents.IStringList
+ ;;@ multipleabstractparents/MultipleAbstractParents.java:42:19
+ (block
+  ;;@ multipleabstractparents/MultipleAbstractParents.java:42:19
+  (if (global.get $$class-initialized@multipleabstractparents.MultipleAbstractParents.IStringList)
+   (then
+    ;;@ multipleabstractparents/MultipleAbstractParents.java:42:19
+    (return )
+   )
+  )
+  ;;@ multipleabstractparents/MultipleAbstractParents.java:42:19
+  (global.set $$class-initialized@multipleabstractparents.MultipleAbstractParents.IStringList (i32.const 1))
+ )
+)
+
+;;; Class<T> IStringList.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@multipleabstractparents.MultipleAbstractParents.IStringList
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@multipleabstractparents.MultipleAbstractParents.IStringList)))
+   (then
+    (return (global.get $$class@multipleabstractparents.MultipleAbstractParents.IStringList))
+   )
+  )
+  (global.set $$class@multipleabstractparents.MultipleAbstractParents.IStringList (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|multipleabst...|__java_lang_String_<once>_@multipleabstractparents.MultipleAbstractParents.IStringList )))
+  (return (global.get $$class@multipleabstractparents.MultipleAbstractParents.IStringList))
  )
 )
 

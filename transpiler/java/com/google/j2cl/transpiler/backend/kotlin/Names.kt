@@ -87,7 +87,7 @@ private val FieldDescriptor.hasConflictingKtProperty: Boolean
 
 /** A suffix for private members in this type declaration. */
 private val TypeDeclaration.privateMemberSuffix: String
-  get() = if (isInterface) mangledName else "$classHierarchyDepth"
+  get() = if (isInterface) mangledName else "$typeHierarchyDepth"
 
 /** Original qualified name of this type declaration. */
 private val TypeDeclaration.originalQualifiedName: String

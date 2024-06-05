@@ -16,13 +16,6 @@
   ))
  )
 
- ;;; Code for jsenum.Main.ComparableJsEnumSupplierConsumer [type definition]
- (type $jsenum.Main.ComparableJsEnumSupplierConsumer.vtable (sub (struct
-  (field $m_accept__jsenum_Main_ComparableJsEnum__void (ref $function.m_accept__jsenum_Main_ComparableJsEnum__void))
-  (field $m_get__jsenum_Main_ComparableJsEnum (ref $function.m_get__jsenum_Main_ComparableJsEnum))
-  ))
- )
-
  ;;; Code for jsenum.Main.ComparableJsEnum.$Overlay [type definition]
  (type $jsenum.Main.ComparableJsEnum.$Overlay (sub (struct
   (field $vtable (ref $jsenum.Main.ComparableJsEnum.$Overlay.vtable))
@@ -318,6 +311,13 @@
   (field (ref null struct))
  )))
 
+ ;;; Code for jsenum.Main.ComparableJsEnumSupplierConsumer [type definition]
+ (type $jsenum.Main.ComparableJsEnumSupplierConsumer.vtable (sub (struct
+  (field $m_accept__jsenum_Main_ComparableJsEnum__void (ref $function.m_accept__jsenum_Main_ComparableJsEnum__void))
+  (field $m_get__jsenum_Main_ComparableJsEnum (ref $function.m_get__jsenum_Main_ComparableJsEnum))
+  ))
+ )
+
  ;;; Code for jsenum.Main.BaseVarargs [type definition]
  (type $jsenum.Main.BaseVarargs (sub $java.lang.Object (struct
   (field $vtable (ref $jsenum.Main.BaseVarargs.vtable))
@@ -453,8 +453,6 @@
 
 ;;; Code for jsenum.Main.JsFunctionSuppiler [imports]
 
-;;; Code for jsenum.Main.ComparableJsEnumSupplierConsumer [imports]
-
 ;;; Code for jsenum.Main.ComparableJsEnum.$Overlay [imports]
 
 ;;; Code for jsenum.Main.IntJsEnum.$Overlay [imports]
@@ -486,6 +484,8 @@
 ;;; Code for jsenum.Main.Foo [imports]
 
 ;;; Code for jsenum.Main.SupplierConsumerImpl [imports]
+
+;;; Code for jsenum.Main.ComparableJsEnumSupplierConsumer [imports]
 
 ;;; Code for jsenum.Main.BaseVarargs [imports]
 
@@ -1376,52 +1376,6 @@
   )
   (global.set $$string_|jsenum.Main_...|@jsenum.Main.JsFunctionSuppiler (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsenum.Main$JsFunctionSuppiler")))
   (return (global.get $$string_|jsenum.Main_...|@jsenum.Main.JsFunctionSuppiler))
- )
-)
-
-;;; Code for jsenum.Main.ComparableJsEnumSupplierConsumer [methods]
-
-;;; void ComparableJsEnumSupplierConsumer.$clinit()
-(func $$clinit__void_<once>_@jsenum.Main.ComparableJsEnumSupplierConsumer
- ;;@ jsenum/Main.java:259:12
- (block
-  ;;@ jsenum/Main.java:259:12
-  (if (global.get $$class-initialized@jsenum.Main.ComparableJsEnumSupplierConsumer)
-   (then
-    ;;@ jsenum/Main.java:259:12
-    (return )
-   )
-  )
-  ;;@ jsenum/Main.java:259:12
-  (global.set $$class-initialized@jsenum.Main.ComparableJsEnumSupplierConsumer (i32.const 1))
- )
-)
-
-;;; Class<T> ComparableJsEnumSupplierConsumer.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.ComparableJsEnumSupplierConsumer
- (result (ref null $java.lang.Class))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$class@jsenum.Main.ComparableJsEnumSupplierConsumer)))
-   (then
-    (return (global.get $$class@jsenum.Main.ComparableJsEnumSupplierConsumer))
-   )
-  )
-  (global.set $$class@jsenum.Main.ComparableJsEnumSupplierConsumer (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jsenum.Main_...|__java_lang_String_<once>_@jsenum.Main.ComparableJsEnumSupplierConsumer )))
-  (return (global.get $$class@jsenum.Main.ComparableJsEnumSupplierConsumer))
- )
-)
-
-;;; String ComparableJsEnumSupplierConsumer.$getString_|jsenum.Main_...|()
-(func $$getString_|jsenum.Main_...|__java_lang_String_<once>_@jsenum.Main.ComparableJsEnumSupplierConsumer
- (result (ref null $java.lang.String))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$string_|jsenum.Main_...|@jsenum.Main.ComparableJsEnumSupplierConsumer)))
-   (then
-    (return (global.get $$string_|jsenum.Main_...|@jsenum.Main.ComparableJsEnumSupplierConsumer))
-   )
-  )
-  (global.set $$string_|jsenum.Main_...|@jsenum.Main.ComparableJsEnumSupplierConsumer (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsenum.Main$ComparableJsEnumSupplierConsumer")))
-  (return (global.get $$string_|jsenum.Main_...|@jsenum.Main.ComparableJsEnumSupplierConsumer))
  )
 )
 
@@ -3333,6 +3287,52 @@
   )
   (global.set $$string_|jsenum.Main_...|@jsenum.Main.SupplierConsumerImpl (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsenum.Main$SupplierConsumerImpl")))
   (return (global.get $$string_|jsenum.Main_...|@jsenum.Main.SupplierConsumerImpl))
+ )
+)
+
+;;; Code for jsenum.Main.ComparableJsEnumSupplierConsumer [methods]
+
+;;; void ComparableJsEnumSupplierConsumer.$clinit()
+(func $$clinit__void_<once>_@jsenum.Main.ComparableJsEnumSupplierConsumer
+ ;;@ jsenum/Main.java:259:12
+ (block
+  ;;@ jsenum/Main.java:259:12
+  (if (global.get $$class-initialized@jsenum.Main.ComparableJsEnumSupplierConsumer)
+   (then
+    ;;@ jsenum/Main.java:259:12
+    (return )
+   )
+  )
+  ;;@ jsenum/Main.java:259:12
+  (global.set $$class-initialized@jsenum.Main.ComparableJsEnumSupplierConsumer (i32.const 1))
+ )
+)
+
+;;; Class<T> ComparableJsEnumSupplierConsumer.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.ComparableJsEnumSupplierConsumer
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jsenum.Main.ComparableJsEnumSupplierConsumer)))
+   (then
+    (return (global.get $$class@jsenum.Main.ComparableJsEnumSupplierConsumer))
+   )
+  )
+  (global.set $$class@jsenum.Main.ComparableJsEnumSupplierConsumer (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jsenum.Main_...|__java_lang_String_<once>_@jsenum.Main.ComparableJsEnumSupplierConsumer )))
+  (return (global.get $$class@jsenum.Main.ComparableJsEnumSupplierConsumer))
+ )
+)
+
+;;; String ComparableJsEnumSupplierConsumer.$getString_|jsenum.Main_...|()
+(func $$getString_|jsenum.Main_...|__java_lang_String_<once>_@jsenum.Main.ComparableJsEnumSupplierConsumer
+ (result (ref null $java.lang.String))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$string_|jsenum.Main_...|@jsenum.Main.ComparableJsEnumSupplierConsumer)))
+   (then
+    (return (global.get $$string_|jsenum.Main_...|@jsenum.Main.ComparableJsEnumSupplierConsumer))
+   )
+  )
+  (global.set $$string_|jsenum.Main_...|@jsenum.Main.ComparableJsEnumSupplierConsumer (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (string.const "jsenum.Main$ComparableJsEnumSupplierConsumer")))
+  (return (global.get $$string_|jsenum.Main_...|@jsenum.Main.ComparableJsEnumSupplierConsumer))
  )
 )
 

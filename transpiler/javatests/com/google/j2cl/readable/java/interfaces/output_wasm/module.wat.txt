@@ -6,12 +6,6 @@
  ))
 )
 
-;;; Code for interfaces.Main.SubInterface [type definition]
-(type $interfaces.Main.SubInterface.vtable (sub (struct
- (field $m_defaultMethod__java_lang_String__void (ref $function.m_defaultMethod__java_lang_String__void))
- ))
-)
-
 ;;; Code for interfaces.Main [type definition]
 (type $interfaces.Main (sub $java.lang.Object (struct
  (field $vtable (ref $interfaces.Main.vtable))
@@ -25,6 +19,12 @@
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_testInterfaceMembers__void_$pp_interfaces (ref $function.m_testInterfaceMembers__void_$pp_interfaces))
+ ))
+)
+
+;;; Code for interfaces.Main.SubInterface [type definition]
+(type $interfaces.Main.SubInterface.vtable (sub (struct
+ (field $m_defaultMethod__java_lang_String__void (ref $function.m_defaultMethod__java_lang_String__void))
  ))
 )
 
@@ -90,9 +90,9 @@
 
 ;;; Code for interfaces.Main.Interface [imports]
 
-;;; Code for interfaces.Main.SubInterface [imports]
-
 ;;; Code for interfaces.Main [imports]
+
+;;; Code for interfaces.Main.SubInterface [imports]
 
 ;;; Code for interfaces.Main.Implementor [imports]
 
@@ -288,52 +288,6 @@
  )
 )
 
-;;; Code for interfaces.Main.SubInterface [methods]
-
-;;; void SubInterface.defaultMethod(String s)
-(func $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface
- (param $this (ref null $java.lang.Object))
- (param $s (ref null $java.lang.String))
- ;;@ interfaces/Main.java:39:17
- (block
-  ;;@ interfaces/Main.java:40:6
-  (call $m_defaultMethod__java_lang_Object__void@interfaces.Main.Interface (ref.as_non_null (local.get $this))(local.get $s))
- )
-)
-(elem declare func $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface)
-
-;;; void SubInterface.$clinit()
-(func $$clinit__void_<once>_@interfaces.Main.SubInterface
- ;;@ interfaces/Main.java:38:12
- (block
-  ;;@ interfaces/Main.java:38:12
-  (if (global.get $$class-initialized@interfaces.Main.SubInterface)
-   (then
-    ;;@ interfaces/Main.java:38:12
-    (return )
-   )
-  )
-  ;;@ interfaces/Main.java:38:12
-  (global.set $$class-initialized@interfaces.Main.SubInterface (i32.const 1))
-  ;;@ interfaces/Main.java:38:12
-  (call $$clinit__void_<once>_@interfaces.Main.Interface )
- )
-)
-
-;;; Class<T> SubInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@interfaces.Main.SubInterface
- (result (ref null $java.lang.Class))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$class@interfaces.Main.SubInterface)))
-   (then
-    (return (global.get $$class@interfaces.Main.SubInterface))
-   )
-  )
-  (global.set $$class@interfaces.Main.SubInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|interfaces.M...|__java_lang_String_<once>_@interfaces.Main.SubInterface )))
-  (return (global.get $$class@interfaces.Main.SubInterface))
- )
-)
-
 ;;; Code for interfaces.Main [methods]
 
 ;;; Main Main.$create()
@@ -449,6 +403,52 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@interfaces.Main)
+
+;;; Code for interfaces.Main.SubInterface [methods]
+
+;;; void SubInterface.defaultMethod(String s)
+(func $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface
+ (param $this (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.String))
+ ;;@ interfaces/Main.java:39:17
+ (block
+  ;;@ interfaces/Main.java:40:6
+  (call $m_defaultMethod__java_lang_Object__void@interfaces.Main.Interface (ref.as_non_null (local.get $this))(local.get $s))
+ )
+)
+(elem declare func $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface)
+
+;;; void SubInterface.$clinit()
+(func $$clinit__void_<once>_@interfaces.Main.SubInterface
+ ;;@ interfaces/Main.java:38:12
+ (block
+  ;;@ interfaces/Main.java:38:12
+  (if (global.get $$class-initialized@interfaces.Main.SubInterface)
+   (then
+    ;;@ interfaces/Main.java:38:12
+    (return )
+   )
+  )
+  ;;@ interfaces/Main.java:38:12
+  (global.set $$class-initialized@interfaces.Main.SubInterface (i32.const 1))
+  ;;@ interfaces/Main.java:38:12
+  (call $$clinit__void_<once>_@interfaces.Main.Interface )
+ )
+)
+
+;;; Class<T> SubInterface.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@interfaces.Main.SubInterface
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@interfaces.Main.SubInterface)))
+   (then
+    (return (global.get $$class@interfaces.Main.SubInterface))
+   )
+  )
+  (global.set $$class@interfaces.Main.SubInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|interfaces.M...|__java_lang_String_<once>_@interfaces.Main.SubInterface )))
+  (return (global.get $$class@interfaces.Main.SubInterface))
+ )
+)
 
 ;;; Code for interfaces.Main.Implementor [methods]
 

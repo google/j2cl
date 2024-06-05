@@ -22,11 +22,6 @@
  ))
 )
 
-;;; Code for supermethodcall.I3 [type definition]
-(type $supermethodcall.I3.vtable (sub (struct
- ))
-)
-
 ;;; Code for supermethodcall.GrandParent [type definition]
 (type $supermethodcall.GrandParent (sub $java.lang.Object (struct
  (field $vtable (ref $supermethodcall.GrandParent.vtable))
@@ -44,6 +39,11 @@
  (field $m_grandParentSimplest__void (ref $function.m_grandParentSimplest__void))
  (field $m_grandParentWithChangingReturn__java_lang_Object (ref $function.m_grandParentWithChangingReturn__java_lang_Object))
  (field $m_grandParentWithParams__int__void (ref $function.m_grandParentWithParams__int__void))
+ ))
+)
+
+;;; Code for supermethodcall.I3 [type definition]
+(type $supermethodcall.I3.vtable (sub (struct
  ))
 )
 
@@ -151,9 +151,9 @@
 
 ;;; Code for supermethodcall.I2 [imports]
 
-;;; Code for supermethodcall.I3 [imports]
-
 ;;; Code for supermethodcall.GrandParent [imports]
+
+;;; Code for supermethodcall.I3 [imports]
 
 ;;; Code for supermethodcall.Super [imports]
 
@@ -512,40 +512,6 @@
  )
 )
 
-;;; Code for supermethodcall.I3 [methods]
-
-;;; void I3.$clinit()
-(func $$clinit__void_<once>_@supermethodcall.I3
- ;;@ supermethodcall/Child.java:106:10
- (block
-  ;;@ supermethodcall/Child.java:106:10
-  (if (global.get $$class-initialized@supermethodcall.I3)
-   (then
-    ;;@ supermethodcall/Child.java:106:10
-    (return )
-   )
-  )
-  ;;@ supermethodcall/Child.java:106:10
-  (global.set $$class-initialized@supermethodcall.I3 (i32.const 1))
-  ;;@ supermethodcall/Child.java:106:10
-  (call $$clinit__void_<once>_@supermethodcall.I1 )
- )
-)
-
-;;; Class<T> I3.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@supermethodcall.I3
- (result (ref null $java.lang.Class))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$class@supermethodcall.I3)))
-   (then
-    (return (global.get $$class@supermethodcall.I3))
-   )
-  )
-  (global.set $$class@supermethodcall.I3 (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|supermethodc...|__java_lang_String_<once>_@supermethodcall.I3 )))
-  (return (global.get $$class@supermethodcall.I3))
- )
-)
-
 ;;; Code for supermethodcall.GrandParent [methods]
 
 ;;; GrandParent GrandParent.$create()
@@ -683,6 +649,40 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@supermethodcall.GrandParent)
+
+;;; Code for supermethodcall.I3 [methods]
+
+;;; void I3.$clinit()
+(func $$clinit__void_<once>_@supermethodcall.I3
+ ;;@ supermethodcall/Child.java:106:10
+ (block
+  ;;@ supermethodcall/Child.java:106:10
+  (if (global.get $$class-initialized@supermethodcall.I3)
+   (then
+    ;;@ supermethodcall/Child.java:106:10
+    (return )
+   )
+  )
+  ;;@ supermethodcall/Child.java:106:10
+  (global.set $$class-initialized@supermethodcall.I3 (i32.const 1))
+  ;;@ supermethodcall/Child.java:106:10
+  (call $$clinit__void_<once>_@supermethodcall.I1 )
+ )
+)
+
+;;; Class<T> I3.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@supermethodcall.I3
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@supermethodcall.I3)))
+   (then
+    (return (global.get $$class@supermethodcall.I3))
+   )
+  )
+  (global.set $$class@supermethodcall.I3 (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|supermethodc...|__java_lang_String_<once>_@supermethodcall.I3 )))
+  (return (global.get $$class@supermethodcall.I3))
+ )
+)
 
 ;;; Code for supermethodcall.Super [methods]
 

@@ -23,6 +23,7 @@ import static java.util.stream.Collectors.joining;
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.base.Joiner;
+import com.google.common.base.Predicates;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -403,15 +404,6 @@ public abstract class TypeDeclaration
     return superType.isNative() || superType.extendsNativeClass();
   }
 
-  /** Returns the depths of this type in the class hierarchy tree. */
-  @Memoized
-  public int getClassHierarchyDepth() {
-    if (getSuperTypeDeclaration() == null) {
-      return 1;
-    }
-    return getSuperTypeDeclaration().getClassHierarchyDepth() + 1;
-  }
-
   public boolean hasJsConstructor() {
     return !getJsConstructorMethodDescriptors().isEmpty();
   }
@@ -567,12 +559,15 @@ public abstract class TypeDeclaration
     return getInterfaceTypeDescriptorsFactory().get(this);
   }
 
-  /** Returns the height of the largest inheritance chain of any interface implemented here. */
+  /**
+   * Returns the depth of this type in the type hierarchy tree, including classes and interfaces.
+   */
   @Memoized
-  public int getMaxInterfaceDepth() {
+  public int getTypeHierarchyDepth() {
     return 1
-        + getInterfaceTypeDescriptors().stream()
-            .mapToInt(i -> i.getTypeDeclaration().getMaxInterfaceDepth())
+        + Stream.concat(Stream.of(getSuperTypeDescriptor()), getInterfaceTypeDescriptors().stream())
+            .filter(Predicates.notNull())
+            .mapToInt(i -> i.getTypeDeclaration().getTypeHierarchyDepth())
             .max()
             .orElse(0);
   }

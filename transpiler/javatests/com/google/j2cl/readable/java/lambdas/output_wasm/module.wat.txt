@@ -52,12 +52,6 @@
  ))
 )
 
-;;; Code for lambdas.Lambdas.JsSupplier [type definition]
-(type $lambdas.Lambdas.JsSupplier.vtable (sub (struct
- (field $m_get__java_lang_Number (ref $function.m_get__java_lang_Number))
- ))
-)
-
 ;;; Code for lambdas.Lambdas.JustADefaultT [type definition]
 (type $lambdas.Lambdas.JustADefaultT.vtable (sub (struct
  (field $m_method__java_lang_Object__void (ref $function.m_method__java_lang_Object__void))
@@ -705,6 +699,12 @@
  ))
 )
 
+;;; Code for lambdas.Lambdas.JsSupplier [type definition]
+(type $lambdas.Lambdas.JsSupplier.vtable (sub (struct
+ (field $m_get__java_lang_Number (ref $function.m_get__java_lang_Number))
+ ))
+)
+
 ;;; Code for lambdas.Lambdas.Outer.$LambdaImplementor$30 [type definition]
 (type $lambdas.Lambdas.Outer.$LambdaImplementor$30 (sub $java.lang.Object (struct
  (field $vtable (ref $lambdas.Lambdas.Outer.$LambdaImplementor$30.vtable))
@@ -867,8 +867,6 @@
 
 ;;; Code for lambdas.Lambdas.Equals [imports]
 
-;;; Code for lambdas.Lambdas.JsSupplier [imports]
-
 ;;; Code for lambdas.Lambdas.JustADefaultT [imports]
 
 ;;; Code for lambdas.Lambdas.JustADefaultS [imports]
@@ -950,6 +948,8 @@
 ;;; Code for lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$29 [imports]
 
 ;;; Code for lambdas.Lambdas.IdentityFunction [imports]
+
+;;; Code for lambdas.Lambdas.JsSupplier [imports]
 
 ;;; Code for lambdas.Lambdas.Outer.$LambdaImplementor$30 [imports]
 
@@ -2443,40 +2443,6 @@
   )
   (global.set $$class@lambdas.Lambdas.Equals (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Equals )))
   (return (global.get $$class@lambdas.Lambdas.Equals))
- )
-)
-
-;;; Code for lambdas.Lambdas.JsSupplier [methods]
-
-;;; void JsSupplier.$clinit()
-(func $$clinit__void_<once>_@lambdas.Lambdas.JsSupplier
- ;;@ lambdas/Lambdas.java:268:12
- (block
-  ;;@ lambdas/Lambdas.java:268:12
-  (if (global.get $$class-initialized@lambdas.Lambdas.JsSupplier)
-   (then
-    ;;@ lambdas/Lambdas.java:268:12
-    (return )
-   )
-  )
-  ;;@ lambdas/Lambdas.java:268:12
-  (global.set $$class-initialized@lambdas.Lambdas.JsSupplier (i32.const 1))
-  ;;@ lambdas/Lambdas.java:268:12
-  (call $$clinit__void_<once>_@lambdas.Lambdas.Equals )
- )
-)
-
-;;; Class<T> JsSupplier.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.JsSupplier
- (result (ref null $java.lang.Class))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.JsSupplier)))
-   (then
-    (return (global.get $$class@lambdas.Lambdas.JsSupplier))
-   )
-  )
-  (global.set $$class@lambdas.Lambdas.JsSupplier (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.JsSupplier )))
-  (return (global.get $$class@lambdas.Lambdas.JsSupplier))
  )
 )
 
@@ -6663,6 +6629,40 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.IdentityFunction)
+
+;;; Code for lambdas.Lambdas.JsSupplier [methods]
+
+;;; void JsSupplier.$clinit()
+(func $$clinit__void_<once>_@lambdas.Lambdas.JsSupplier
+ ;;@ lambdas/Lambdas.java:268:12
+ (block
+  ;;@ lambdas/Lambdas.java:268:12
+  (if (global.get $$class-initialized@lambdas.Lambdas.JsSupplier)
+   (then
+    ;;@ lambdas/Lambdas.java:268:12
+    (return )
+   )
+  )
+  ;;@ lambdas/Lambdas.java:268:12
+  (global.set $$class-initialized@lambdas.Lambdas.JsSupplier (i32.const 1))
+  ;;@ lambdas/Lambdas.java:268:12
+  (call $$clinit__void_<once>_@lambdas.Lambdas.Equals )
+ )
+)
+
+;;; Class<T> JsSupplier.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.JsSupplier
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.JsSupplier)))
+   (then
+    (return (global.get $$class@lambdas.Lambdas.JsSupplier))
+   )
+  )
+  (global.set $$class@lambdas.Lambdas.JsSupplier (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.JsSupplier )))
+  (return (global.get $$class@lambdas.Lambdas.JsSupplier))
+ )
+)
 
 ;;; Code for lambdas.Lambdas.Outer.$LambdaImplementor$30 [methods]
 

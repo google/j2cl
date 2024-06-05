@@ -82,7 +82,7 @@ public final class SummaryBuilder {
   private void summaryTypeHierarchy(Library library) {
     library
         .streamTypes()
-        .sorted(Comparator.comparing(t -> t.getDeclaration().getClassHierarchyDepth()))
+        .sorted(Comparator.comparing(t -> t.getDeclaration().getTypeHierarchyDepth()))
         .forEach(this::addType);
   }
 
