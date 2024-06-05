@@ -27,7 +27,7 @@ import kotlin.native.ObjCName
 
 @ObjCName("J2ktJ2ktnotpassingExplicitNotNullable", exact = true)
 open class ExplicitNotNullable {
- internal open fun testDependentWildcards_pp_j2ktnotpassing(x: ExplicitNotNullable.DependentTypeParameters<*, *>): ExplicitNotNullable.DependentTypeParameters<*, *> {
+ internal open fun testDependentWildcards_pp_j2ktnotpassing(x: ExplicitNotNullable.DependentTypeParameters<out Any, *>): ExplicitNotNullable.DependentTypeParameters<out Any, *> {
   return (x as ExplicitNotNullable.DependentTypeParameters<Any, E?>).getThis_pp_j2ktnotpassing()
  }
 
