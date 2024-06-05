@@ -833,7 +833,16 @@ class BlockDecomposerTransformer(
     }
 
     override fun visitContainerExpression(expression: IrContainerExpression): IrExpression {
-
+      // MODIFIED BY GOOGLE
+      // Object expression are the equivalent of anonymous classes declaration in Java. They are
+      // represented as IrBlock expressions containing the class declaration and constructor call.
+      // Typically, this pass would move the class declaration up and replace the block with just
+      // the constructor call. However, to simplify J2CL AST creation and preserve information for
+      // accurately creating `NewInstance` nodes, we skip this decomposition.
+      if (expression.origin == IrStatementOrigin.OBJECT_LITERAL) {
+        return expression
+      }
+      // END OF MODIFICATIONS
       expression.run {
         if (statements.isEmpty())
           return IrCompositeImpl(startOffset, endOffset, type, origin, listOf(unitValue))

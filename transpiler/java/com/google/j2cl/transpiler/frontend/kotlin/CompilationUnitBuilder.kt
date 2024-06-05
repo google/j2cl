@@ -151,6 +151,7 @@ import org.jetbrains.kotlin.ir.expressions.IrReturn
 import org.jetbrains.kotlin.ir.expressions.IrSetField
 import org.jetbrains.kotlin.ir.expressions.IrSetValue
 import org.jetbrains.kotlin.ir.expressions.IrSpreadElement
+import org.jetbrains.kotlin.ir.expressions.IrStatementOrigin
 import org.jetbrains.kotlin.ir.expressions.IrStringConcatenation
 import org.jetbrains.kotlin.ir.expressions.IrThrow
 import org.jetbrains.kotlin.ir.expressions.IrTry
@@ -585,7 +586,7 @@ class CompilationUnitBuilder(
 
   private fun convertExpression(irExpression: IrExpression): Expression =
     when (irExpression) {
-      is IrBlock -> throw IllegalStateException("IrBlock expression should have been normalized")
+      is IrBlock -> convertBlockExpression(irExpression)
       is IrStringConcatenation -> convertStringConcatenation(irExpression)
       is IrWhen -> convertWhenExpression(irExpression)
       is IrCall -> convertCall(irExpression)
@@ -607,6 +608,34 @@ class CompilationUnitBuilder(
       is IrGetClass -> convertGetClass(irExpression)
       else -> throw IllegalStateException("Unhandled IrExpression:\n${irExpression.dump()}")
     }
+
+  private fun convertBlockExpression(irBlock: IrBlock) =
+    if (irBlock.origin == IrStatementOrigin.OBJECT_LITERAL) {
+      convertObjectExpression(irBlock)
+    } else {
+      throw IllegalStateException(
+        "Only IrBlocks corresponding to object literals should be present after lowering."
+      )
+    }
+
+  private fun convertObjectExpression(irBlock: IrBlock): Expression {
+    check(irBlock.origin == IrStatementOrigin.OBJECT_LITERAL)
+    // When the object expression is inside an inline function, the class has been moved from the
+    // inline functions to the nearest declaration container (for avoiding redefining the anonymous
+    // class at each call site) and the block contains only the ctor call.
+    if (irBlock.statements.size == 1) {
+      return convertConstructorCall(
+        checkNotNull(irBlock.statements[0] as? IrFunctionAccessExpression)
+      )
+    }
+
+    // In all other cases, the block expression contains the class declaration and the call to the
+    // ctor of this class.
+    check(irBlock.statements.size == 2) { "Invalid number of statements." }
+    val anonymousClass = checkNotNull(irBlock.statements[0] as? IrClass)
+    val ctorCall = checkNotNull(irBlock.statements[1] as? IrFunctionAccessExpression)
+    return convertConstructorCall(ctorCall, anonymousClass)
+  }
 
   private fun convertStringConcatenation(irExpression: IrStringConcatenation) =
     // String concatenation is left associative.
