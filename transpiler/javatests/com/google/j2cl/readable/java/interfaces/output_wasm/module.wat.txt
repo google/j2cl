@@ -7,18 +7,18 @@
 )
 
 ;;; Code for interfaces.Main [type definition]
-(type $interfaces.Main (sub $java.lang.Object (struct
- (field $vtable (ref $interfaces.Main.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 (type $interfaces.Main.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_testInterfaceMembers__void_$pp_interfaces (ref $function.m_testInterfaceMembers__void_$pp_interfaces))
+ ))
+)
+(type $interfaces.Main (sub $java.lang.Object (struct
+ (field $vtable (ref $interfaces.Main.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
 
@@ -29,13 +29,6 @@
 )
 
 ;;; Code for interfaces.Main.Implementor [type definition]
-(type $interfaces.Main.Implementor (sub $java.lang.Object (struct
- (field $vtable (ref $interfaces.Main.Implementor.vtable))
- (field $itable (ref $interfaces.Main.Implementor.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@interfaces.Main.Implementor (mut (ref null $interfaces.Main)))
- ))
-)
 (type $interfaces.Main.Implementor.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -46,15 +39,15 @@
  (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
  ))
 )
-
-;;; Code for interfaces.Main.AbstractImplementor [type definition]
-(type $interfaces.Main.AbstractImplementor (sub $java.lang.Object (struct
- (field $vtable (ref $interfaces.Main.AbstractImplementor.vtable))
- (field $itable (ref $interfaces.Main.AbstractImplementor.itable))
+(type $interfaces.Main.Implementor (sub $java.lang.Object (struct
+ (field $vtable (ref $interfaces.Main.Implementor.vtable))
+ (field $itable (ref $interfaces.Main.Implementor.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@interfaces.Main.AbstractImplementor (mut (ref null $interfaces.Main)))
+ (field $$outer_this@interfaces.Main.Implementor (mut (ref null $interfaces.Main)))
  ))
 )
+
+;;; Code for interfaces.Main.AbstractImplementor [type definition]
 (type $interfaces.Main.AbstractImplementor.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -65,16 +58,15 @@
  (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
  ))
 )
-
-;;; Code for interfaces.Main.EnumImplementor [type definition]
-(type $interfaces.Main.EnumImplementor (sub $java.lang.Enum (struct
- (field $vtable (ref $interfaces.Main.EnumImplementor.vtable))
- (field $itable (ref $interfaces.Main.EnumImplementor.itable))
+(type $interfaces.Main.AbstractImplementor (sub $java.lang.Object (struct
+ (field $vtable (ref $interfaces.Main.AbstractImplementor.vtable))
+ (field $itable (ref $interfaces.Main.AbstractImplementor.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $name@java.lang.Enum (mut (ref null $java.lang.String)))
- (field $ordinal@java.lang.Enum (mut i32))
+ (field $$outer_this@interfaces.Main.AbstractImplementor (mut (ref null $interfaces.Main)))
  ))
 )
+
+;;; Code for interfaces.Main.EnumImplementor [type definition]
 (type $interfaces.Main.EnumImplementor.vtable (sub $java.lang.Enum.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -85,6 +77,14 @@
  (field $m_defaultMethod__java_lang_Object__void (ref $function.m_defaultMethod__java_lang_Object__void))
  (field $m_defaultMethod__java_lang_String__void (ref $function.m_defaultMethod__java_lang_String__void))
  (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
+ ))
+)
+(type $interfaces.Main.EnumImplementor (sub $java.lang.Enum (struct
+ (field $vtable (ref $interfaces.Main.EnumImplementor.vtable))
+ (field $itable (ref $interfaces.Main.EnumImplementor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $name@java.lang.Enum (mut (ref null $java.lang.String)))
+ (field $ordinal@java.lang.Enum (mut i32))
  ))
 )
 

@@ -1,10 +1,4 @@
 ;;; Code for jsinnerclass.Main [type definition]
-(type $jsinnerclass.Main (sub $java.lang.Object (struct
- (field $vtable (ref $jsinnerclass.Main.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 (type $jsinnerclass.Main.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -12,16 +6,14 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
-
-;;; Code for jsinnerclass.Main.Outer.Inner [type definition]
-(type $jsinnerclass.Main.Outer.Inner (sub $java.lang.Object (struct
- (field $vtable (ref $jsinnerclass.Main.Outer.Inner.vtable))
+(type $jsinnerclass.Main (sub $java.lang.Object (struct
+ (field $vtable (ref $jsinnerclass.Main.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@jsinnerclass.Main.Outer.Inner (mut (ref null $jsinnerclass.Main.Outer)))
- (field $b@jsinnerclass.Main.Outer.Inner (mut i32))
  ))
 )
+
+;;; Code for jsinnerclass.Main.Outer.Inner [type definition]
 (type $jsinnerclass.Main.Outer.Inner.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -30,21 +22,29 @@
  (field $m_getB__int (ref $function.m_getB__int))
  ))
 )
-
-;;; Code for jsinnerclass.Main.Outer [type definition]
-(type $jsinnerclass.Main.Outer (sub $java.lang.Object (struct
- (field $vtable (ref $jsinnerclass.Main.Outer.vtable))
+(type $jsinnerclass.Main.Outer.Inner (sub $java.lang.Object (struct
+ (field $vtable (ref $jsinnerclass.Main.Outer.Inner.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $a@jsinnerclass.Main.Outer (mut i32))
+ (field $$outer_this@jsinnerclass.Main.Outer.Inner (mut (ref null $jsinnerclass.Main.Outer)))
+ (field $b@jsinnerclass.Main.Outer.Inner (mut i32))
  ))
 )
+
+;;; Code for jsinnerclass.Main.Outer [type definition]
 (type $jsinnerclass.Main.Outer.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_method__int (ref $function.m_method__int))
+ ))
+)
+(type $jsinnerclass.Main.Outer (sub $java.lang.Object (struct
+ (field $vtable (ref $jsinnerclass.Main.Outer.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $a@jsinnerclass.Main.Outer (mut i32))
  ))
 )
 

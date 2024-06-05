@@ -1,21 +1,15 @@
 ;;; Code for collisions.Blah.$Overlay [type definition]
+(type $collisions.Blah.$Overlay.vtable (sub (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ ))
+)
 (type $collisions.Blah.$Overlay (sub (struct
  (field $vtable (ref $collisions.Blah.$Overlay.vtable))
  (field $itable (ref $itable))
  ))
 )
-(type $collisions.Blah.$Overlay.vtable (sub (struct
- (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- ))
-)
 
 ;;; Code for collisions.goog [type definition]
-(type $collisions.goog (sub $java.lang.Object (struct
- (field $vtable (ref $collisions.goog.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 (type $collisions.goog.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -23,16 +17,16 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
-
-;;; Code for collisions.Blah [type definition]
-
-;;; Code for collisions.KtBlah [type definition]
-(type $collisions.KtBlah (sub $java.lang.Object (struct
- (field $vtable (ref $collisions.KtBlah.vtable))
+(type $collisions.goog (sub $java.lang.Object (struct
+ (field $vtable (ref $collisions.goog.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for collisions.Blah [type definition]
+
+;;; Code for collisions.KtBlah [type definition]
 (type $collisions.KtBlah.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -40,14 +34,14 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
-
-;;; Code for collisions.foo [type definition]
-(type $collisions.foo (sub $java.lang.Object (struct
- (field $vtable (ref $collisions.foo.vtable))
+(type $collisions.KtBlah (sub $java.lang.Object (struct
+ (field $vtable (ref $collisions.KtBlah.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for collisions.foo [type definition]
 (type $collisions.foo.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -55,14 +49,14 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
-
-;;; Code for collisions.bar [type definition]
-(type $collisions.bar (sub $java.lang.Object (struct
- (field $vtable (ref $collisions.bar.vtable))
+(type $collisions.foo (sub $java.lang.Object (struct
+ (field $vtable (ref $collisions.foo.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for collisions.bar [type definition]
 (type $collisions.bar.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -70,14 +64,14 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
-
-;;; Code for collisions.Other [type definition]
-(type $collisions.Other (sub $java.lang.Object (struct
- (field $vtable (ref $collisions.Other.vtable))
+(type $collisions.bar (sub $java.lang.Object (struct
+ (field $vtable (ref $collisions.bar.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for collisions.Other [type definition]
 (type $collisions.Other.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -86,14 +80,14 @@
  (field $m_m__java_lang_Object_$pp_collisions (ref $function.m_m__java_lang_Object_$pp_collisions))
  ))
 )
-
-;;; Code for collisions.T [type definition]
-(type $collisions.T (sub $java.lang.Object (struct
- (field $vtable (ref $collisions.T.vtable))
+(type $collisions.Other (sub $java.lang.Object (struct
+ (field $vtable (ref $collisions.Other.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for collisions.T [type definition]
 (type $collisions.T.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -101,6 +95,12 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_m__java_lang_Number_$pp_collisions (ref $function.m_m__java_lang_Number_$pp_collisions))
  (field $m_n__java_lang_Number_$pp_collisions (ref $function.m_n__java_lang_Number_$pp_collisions))
+ ))
+)
+(type $collisions.T (sub $java.lang.Object (struct
+ (field $vtable (ref $collisions.T.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
 

@@ -1,10 +1,4 @@
 ;;; Code for trycatch.TryCatch [type definition]
-(type $trycatch.TryCatch (sub $java.lang.Object (struct
- (field $vtable (ref $trycatch.TryCatch.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 (type $trycatch.TryCatch.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -23,20 +17,26 @@
  (field $m_testTryWithResource__void (ref $function.m_testTryWithResource__void))
  ))
 )
-
-;;; Code for trycatch.TryCatch.ClosableThing [type definition]
-(type $trycatch.TryCatch.ClosableThing (sub $java.lang.Object (struct
- (field $vtable (ref $trycatch.TryCatch.ClosableThing.vtable))
- (field $itable (ref $trycatch.TryCatch.ClosableThing.itable))
+(type $trycatch.TryCatch (sub $java.lang.Object (struct
+ (field $vtable (ref $trycatch.TryCatch.vtable))
+ (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for trycatch.TryCatch.ClosableThing [type definition]
 (type $trycatch.TryCatch.ClosableThing.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_close__void (ref $function.m_close__void))
+ ))
+)
+(type $trycatch.TryCatch.ClosableThing (sub $java.lang.Object (struct
+ (field $vtable (ref $trycatch.TryCatch.ClosableThing.vtable))
+ (field $itable (ref $trycatch.TryCatch.ClosableThing.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
 

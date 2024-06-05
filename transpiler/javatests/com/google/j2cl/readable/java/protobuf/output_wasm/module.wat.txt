@@ -1,10 +1,4 @@
 ;;; Code for protobuf.Protobuf [type definition]
-(type $protobuf.Protobuf (sub $java.lang.Object (struct
- (field $vtable (ref $protobuf.Protobuf.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 (type $protobuf.Protobuf.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -13,15 +7,14 @@
  (field $m_test__void (ref $function.m_test__void))
  ))
 )
-
-;;; Code for protobuf.MyMessage [type definition]
-(type $protobuf.MyMessage (sub $com.google.protobuf.GeneratedMessage (struct
- (field $vtable (ref $protobuf.MyMessage.vtable))
+(type $protobuf.Protobuf (sub $java.lang.Object (struct
+ (field $vtable (ref $protobuf.Protobuf.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $testField@protobuf.MyMessage (mut i32))
  ))
 )
+
+;;; Code for protobuf.MyMessage [type definition]
 (type $protobuf.MyMessage.vtable (sub $com.google.protobuf.GeneratedMessage.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -30,15 +23,15 @@
  (field $m_getTestField__int (ref $function.m_getTestField__int))
  ))
 )
-
-;;; Code for protobuf.MyMessage.Builder [type definition]
-(type $protobuf.MyMessage.Builder (sub $com.google.protobuf.GeneratedMessage.Builder (struct
- (field $vtable (ref $protobuf.MyMessage.Builder.vtable))
+(type $protobuf.MyMessage (sub $com.google.protobuf.GeneratedMessage (struct
+ (field $vtable (ref $protobuf.MyMessage.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $testField@protobuf.MyMessage.Builder (mut i32))
+ (field $testField@protobuf.MyMessage (mut i32))
  ))
 )
+
+;;; Code for protobuf.MyMessage.Builder [type definition]
 (type $protobuf.MyMessage.Builder.vtable (sub $com.google.protobuf.GeneratedMessage.Builder.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -47,6 +40,13 @@
  (field $m_build__protobuf_MyMessage (ref $function.m_build__protobuf_MyMessage))
  (field $m_getTestField__int (ref $function.m_getTestField__int))
  (field $m_setTestField__int__protobuf_MyMessage_Builder (ref $function.m_setTestField__int__protobuf_MyMessage_Builder))
+ ))
+)
+(type $protobuf.MyMessage.Builder (sub $com.google.protobuf.GeneratedMessage.Builder (struct
+ (field $vtable (ref $protobuf.MyMessage.Builder.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $testField@protobuf.MyMessage.Builder (mut i32))
  ))
 )
 

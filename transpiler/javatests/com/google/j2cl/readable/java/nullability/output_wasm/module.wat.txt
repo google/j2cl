@@ -107,6 +107,17 @@
 )
 
 ;;; Code for nullability.Nullability [type definition]
+(type $nullability.Nullability.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_m1__java_lang_String__java_util_List__java_lang_String__java_lang_String (ref $function.m_m1__java_lang_String__java_util_List__java_lang_String__java_lang_String))
+ (field $m_m2__java_lang_String__java_util_List__java_lang_String (ref $function.m_m2__java_lang_String__java_util_List__java_lang_String))
+ (field $m_m3__java_lang_String__arrayOf_java_lang_String__java_lang_String (ref $function.m_m3__java_lang_String__arrayOf_java_lang_String__java_lang_String))
+ (field $m_m4__nullability_Nullability_MyFunction__void (ref $function.m_m4__nullability_Nullability_MyFunction__void))
+ ))
+)
 (type $nullability.Nullability (sub $java.lang.Object (struct
  (field $vtable (ref $nullability.Nullability.vtable))
  (field $itable (ref $itable))
@@ -126,25 +137,8 @@
  (field $f9@nullability.Nullability (mut (ref null $javaemul.internal.WasmArray.OfObject)))
  ))
 )
-(type $nullability.Nullability.vtable (sub $java.lang.Object.vtable (struct
- (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_m1__java_lang_String__java_util_List__java_lang_String__java_lang_String (ref $function.m_m1__java_lang_String__java_util_List__java_lang_String__java_lang_String))
- (field $m_m2__java_lang_String__java_util_List__java_lang_String (ref $function.m_m2__java_lang_String__java_util_List__java_lang_String))
- (field $m_m3__java_lang_String__arrayOf_java_lang_String__java_lang_String (ref $function.m_m3__java_lang_String__arrayOf_java_lang_String__java_lang_String))
- (field $m_m4__nullability_Nullability_MyFunction__void (ref $function.m_m4__nullability_Nullability_MyFunction__void))
- ))
-)
 
 ;;; Code for nullability.Nullability.Foo [type definition]
-(type $nullability.Nullability.Foo (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.Nullability.Foo.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 (type $nullability.Nullability.Foo.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -154,14 +148,14 @@
  (field $m_baz__java_lang_Object_$pp_nullability (ref $function.m_baz__java_lang_Object_$pp_nullability))
  ))
 )
-
-;;; Code for nullability.Nullability.StringComparator [type definition]
-(type $nullability.Nullability.StringComparator (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.Nullability.StringComparator.vtable))
- (field $itable (ref $nullability.Nullability.StringComparator.itable))
+(type $nullability.Nullability.Foo (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.Nullability.Foo.vtable))
+ (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for nullability.Nullability.StringComparator [type definition]
 (type $nullability.Nullability.StringComparator.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -178,14 +172,14 @@
  (field $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator (ref $function.m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator))
  ))
 )
-
-;;; Code for nullability.Nullability.NullableStringComparator [type definition]
-(type $nullability.Nullability.NullableStringComparator (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.Nullability.NullableStringComparator.vtable))
- (field $itable (ref $nullability.Nullability.NullableStringComparator.itable))
+(type $nullability.Nullability.StringComparator (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.Nullability.StringComparator.vtable))
+ (field $itable (ref $nullability.Nullability.StringComparator.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for nullability.Nullability.NullableStringComparator [type definition]
 (type $nullability.Nullability.NullableStringComparator.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -202,14 +196,14 @@
  (field $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator (ref $function.m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator))
  ))
 )
-
-;;; Code for nullability.Nullability.NullableTemplatedReturnOverride [type definition]
-(type $nullability.Nullability.NullableTemplatedReturnOverride (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.Nullability.NullableTemplatedReturnOverride.vtable))
- (field $itable (ref $nullability.Nullability.NullableTemplatedReturnOverride.itable))
+(type $nullability.Nullability.NullableStringComparator (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.Nullability.NullableStringComparator.vtable))
+ (field $itable (ref $nullability.Nullability.NullableStringComparator.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for nullability.Nullability.NullableTemplatedReturnOverride [type definition]
 (type $nullability.Nullability.NullableTemplatedReturnOverride.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -219,14 +213,14 @@
  (field $m_foo__java_lang_String (ref $function.m_foo__java_lang_String))
  ))
 )
-
-;;; Code for nullability.Nullability.ParameterizedDefaultNullability [type definition]
-(type $nullability.Nullability.ParameterizedDefaultNullability (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.Nullability.ParameterizedDefaultNullability.vtable))
- (field $itable (ref $itable))
+(type $nullability.Nullability.NullableTemplatedReturnOverride (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.Nullability.NullableTemplatedReturnOverride.vtable))
+ (field $itable (ref $nullability.Nullability.NullableTemplatedReturnOverride.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for nullability.Nullability.ParameterizedDefaultNullability [type definition]
 (type $nullability.Nullability.ParameterizedDefaultNullability.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -237,14 +231,14 @@
  (field $m_getNullable__java_lang_Object_$pp_nullability (ref $function.m_getNullable__java_lang_Object_$pp_nullability))
  ))
 )
-
-;;; Code for nullability.Nullability.ParameterizedNullable [type definition]
-(type $nullability.Nullability.ParameterizedNullable (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.Nullability.ParameterizedNullable.vtable))
+(type $nullability.Nullability.ParameterizedDefaultNullability (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.Nullability.ParameterizedDefaultNullability.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for nullability.Nullability.ParameterizedNullable [type definition]
 (type $nullability.Nullability.ParameterizedNullable.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -255,14 +249,14 @@
  (field $m_getNullable__java_lang_Object_$pp_nullability (ref $function.m_getNullable__java_lang_Object_$pp_nullability))
  ))
 )
-
-;;; Code for nullability.Nullability.ParameterizedNonNullable [type definition]
-(type $nullability.Nullability.ParameterizedNonNullable (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.Nullability.ParameterizedNonNullable.vtable))
+(type $nullability.Nullability.ParameterizedNullable (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.Nullability.ParameterizedNullable.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for nullability.Nullability.ParameterizedNonNullable [type definition]
 (type $nullability.Nullability.ParameterizedNonNullable.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -273,14 +267,14 @@
  (field $m_getNullable__java_lang_Object_$pp_nullability (ref $function.m_getNullable__java_lang_Object_$pp_nullability))
  ))
 )
-
-;;; Code for nullability.Nullability.NonNullableInsideNullable [type definition]
-(type $nullability.Nullability.NonNullableInsideNullable (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.Nullability.NonNullableInsideNullable.vtable))
+(type $nullability.Nullability.ParameterizedNonNullable (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.Nullability.ParameterizedNonNullable.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for nullability.Nullability.NonNullableInsideNullable [type definition]
 (type $nullability.Nullability.NonNullableInsideNullable.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -289,14 +283,14 @@
  (field $m_nonNullableTest__nullability_Nullability_ParameterizedNonNullable__void_$pp_nullability (ref $function.m_nonNullableTest__nullability_Nullability_ParameterizedNonNullable__void_$pp_nullability))
  ))
 )
-
-;;; Code for nullability.Nullability.Recursive [type definition]
-(type $nullability.Nullability.Recursive (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.Nullability.Recursive.vtable))
+(type $nullability.Nullability.NonNullableInsideNullable (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.Nullability.NonNullableInsideNullable.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for nullability.Nullability.Recursive [type definition]
 (type $nullability.Nullability.Recursive.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -304,14 +298,14 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
-
-;;; Code for nullability.Nullability.RecursiveNullable [type definition]
-(type $nullability.Nullability.RecursiveNullable (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.Nullability.RecursiveNullable.vtable))
+(type $nullability.Nullability.Recursive (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.Nullability.Recursive.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for nullability.Nullability.RecursiveNullable [type definition]
 (type $nullability.Nullability.RecursiveNullable.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -319,14 +313,14 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
-
-;;; Code for nullability.Nullability.RecursiveParam [type definition]
-(type $nullability.Nullability.RecursiveParam (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.Nullability.RecursiveParam.vtable))
+(type $nullability.Nullability.RecursiveNullable (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.Nullability.RecursiveNullable.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for nullability.Nullability.RecursiveParam [type definition]
 (type $nullability.Nullability.RecursiveParam.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -334,14 +328,14 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
-
-;;; Code for nullability.Nullability.RecursiveNullableParam [type definition]
-(type $nullability.Nullability.RecursiveNullableParam (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.Nullability.RecursiveNullableParam.vtable))
+(type $nullability.Nullability.RecursiveParam (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.Nullability.RecursiveParam.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for nullability.Nullability.RecursiveNullableParam [type definition]
 (type $nullability.Nullability.RecursiveNullableParam.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -349,8 +343,28 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
+(type $nullability.Nullability.RecursiveNullableParam (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.Nullability.RecursiveNullableParam.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable [type definition]
+(type $nullability.defaultnotnullable.DefaultNotNullable.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_casts__void (ref $function.m_casts__void))
+ (field $m_m1__java_lang_String__java_util_List__java_lang_String (ref $function.m_m1__java_lang_String__java_util_List__java_lang_String))
+ (field $m_m2__java_lang_String__java_util_List__java_lang_String (ref $function.m_m2__java_lang_String__java_util_List__java_lang_String))
+ (field $m_m3__arrayOf_java_lang_String__void (ref $function.m_m3__arrayOf_java_lang_String__void))
+ (field $m_m4__java_lang_String__java_lang_String__java_lang_String (ref $function.m_m4__java_lang_String__java_lang_String__java_lang_String))
+ (field $m_methodWithNonNullableBound__void_$pp_nullability_defaultnotnullable (ref $function.m_methodWithNonNullableBound__void_$pp_nullability_defaultnotnullable))
+ (field $m_methodWithNullableBound__void_$pp_nullability_defaultnotnullable (ref $function.m_methodWithNullableBound__void_$pp_nullability_defaultnotnullable))
+ ))
+)
 (type $nullability.defaultnotnullable.DefaultNotNullable (sub $java.lang.Object (struct
  (field $vtable (ref $nullability.defaultnotnullable.DefaultNotNullable.vtable))
  (field $itable (ref $itable))
@@ -371,29 +385,8 @@
  (field $f9@nullability.defaultnotnullable.DefaultNotNullable (mut (ref null $javaemul.internal.WasmArray.OfObject)))
  ))
 )
-(type $nullability.defaultnotnullable.DefaultNotNullable.vtable (sub $java.lang.Object.vtable (struct
- (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_casts__void (ref $function.m_casts__void))
- (field $m_m1__java_lang_String__java_util_List__java_lang_String (ref $function.m_m1__java_lang_String__java_util_List__java_lang_String))
- (field $m_m2__java_lang_String__java_util_List__java_lang_String (ref $function.m_m2__java_lang_String__java_util_List__java_lang_String))
- (field $m_m3__arrayOf_java_lang_String__void (ref $function.m_m3__arrayOf_java_lang_String__void))
- (field $m_m4__java_lang_String__java_lang_String__java_lang_String (ref $function.m_m4__java_lang_String__java_lang_String__java_lang_String))
- (field $m_methodWithNonNullableBound__void_$pp_nullability_defaultnotnullable (ref $function.m_methodWithNonNullableBound__void_$pp_nullability_defaultnotnullable))
- (field $m_methodWithNullableBound__void_$pp_nullability_defaultnotnullable (ref $function.m_methodWithNullableBound__void_$pp_nullability_defaultnotnullable))
- ))
-)
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface [type definition]
-(type $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.vtable))
- (field $itable (ref $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface (mut (ref null $nullability.defaultnotnullable.DefaultNotNullable)))
- ))
-)
 (type $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -403,6 +396,13 @@
  (field $m_add__java_lang_String__java_lang_String (ref $function.m_add__java_lang_String__java_lang_String))
  (field $m_nullableAdd__java_lang_Object__java_lang_Object (ref $function.m_nullableAdd__java_lang_Object__java_lang_Object))
  (field $m_nullableAdd__java_lang_String__java_lang_String (ref $function.m_nullableAdd__java_lang_String__java_lang_String))
+ ))
+)
+(type $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.vtable))
+ (field $itable (ref $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface (mut (ref null $nullability.defaultnotnullable.DefaultNotNullable)))
  ))
 )
 
@@ -427,15 +427,6 @@
 )
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability [type definition]
-(type $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $defaultNullability@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
- (field $nonNullable@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
- (field $nullable@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
- ))
-)
 (type $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -450,17 +441,17 @@
  (field $m_setNullable__java_lang_Object__void_$pp_nullability_defaultnotnullable (ref $function.m_setNullable__java_lang_Object__void_$pp_nullability_defaultnotnullable))
  ))
 )
-
-;;; Code for nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable [type definition]
-(type $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable.vtable))
+(type $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $defaultNullability@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable (mut (ref null $java.lang.Object)))
- (field $nonNullable@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable (mut (ref null $java.lang.Object)))
- (field $nullable@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable (mut (ref null $java.lang.Object)))
+ (field $defaultNullability@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
+ (field $nonNullable@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
+ (field $nullable@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
  ))
 )
+
+;;; Code for nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable [type definition]
 (type $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -474,17 +465,17 @@
  (field $m_setNullable__java_lang_Object__void_$pp_nullability_defaultnotnullable (ref $function.m_setNullable__java_lang_Object__void_$pp_nullability_defaultnotnullable))
  ))
 )
-
-;;; Code for nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable [type definition]
-(type $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable.vtable))
+(type $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $defaultNullability@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable (mut (ref null $java.lang.Object)))
- (field $nonNullable@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable (mut (ref null $java.lang.Object)))
- (field $nullable@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable (mut (ref null $java.lang.Object)))
+ (field $defaultNullability@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable (mut (ref null $java.lang.Object)))
+ (field $nonNullable@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable (mut (ref null $java.lang.Object)))
+ (field $nullable@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable (mut (ref null $java.lang.Object)))
  ))
 )
+
+;;; Code for nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable [type definition]
 (type $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -498,14 +489,17 @@
  (field $m_setNullable__java_lang_Object__void_$pp_nullability_defaultnotnullable (ref $function.m_setNullable__java_lang_Object__void_$pp_nullability_defaultnotnullable))
  ))
 )
-
-;;; Code for nullability.defaultnotnullable.TypeArgumentsInference [type definition]
-(type $nullability.defaultnotnullable.TypeArgumentsInference (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.defaultnotnullable.TypeArgumentsInference.vtable))
+(type $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $defaultNullability@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable (mut (ref null $java.lang.Object)))
+ (field $nonNullable@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable (mut (ref null $java.lang.Object)))
+ (field $nullable@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable (mut (ref null $java.lang.Object)))
  ))
 )
+
+;;; Code for nullability.defaultnotnullable.TypeArgumentsInference [type definition]
 (type $nullability.defaultnotnullable.TypeArgumentsInference.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -513,14 +507,14 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
-
-;;; Code for nullability.defaultnotnullable.TypeArgumentsInference.Pair [type definition]
-(type $nullability.defaultnotnullable.TypeArgumentsInference.Pair (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.defaultnotnullable.TypeArgumentsInference.Pair.vtable))
+(type $nullability.defaultnotnullable.TypeArgumentsInference (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.defaultnotnullable.TypeArgumentsInference.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for nullability.defaultnotnullable.TypeArgumentsInference.Pair [type definition]
 (type $nullability.defaultnotnullable.TypeArgumentsInference.Pair.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -528,8 +522,27 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
+(type $nullability.defaultnotnullable.TypeArgumentsInference.Pair (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.defaultnotnullable.TypeArgumentsInference.Pair.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 
 ;;; Code for nullability.defaultnullable.DefaultNullable [type definition]
+(type $nullability.defaultnullable.DefaultNullable.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_casts__void (ref $function.m_casts__void))
+ (field $m_m1__java_lang_String__java_util_List__java_lang_String (ref $function.m_m1__java_lang_String__java_util_List__java_lang_String))
+ (field $m_m2__java_lang_String__java_util_List__java_lang_String (ref $function.m_m2__java_lang_String__java_util_List__java_lang_String))
+ (field $m_m3__arrayOf_java_lang_String__void (ref $function.m_m3__arrayOf_java_lang_String__void))
+ (field $m_methodWithNonNullableBound__void_$pp_nullability_defaultnullable (ref $function.m_methodWithNonNullableBound__void_$pp_nullability_defaultnullable))
+ (field $m_methodWithNullableBound__void_$pp_nullability_defaultnullable (ref $function.m_methodWithNullableBound__void_$pp_nullability_defaultnullable))
+ ))
+)
 (type $nullability.defaultnullable.DefaultNullable (sub $java.lang.Object (struct
  (field $vtable (ref $nullability.defaultnullable.DefaultNullable.vtable))
  (field $itable (ref $itable))
@@ -550,27 +563,8 @@
  (field $f9@nullability.defaultnullable.DefaultNullable (mut (ref null $javaemul.internal.WasmArray.OfObject)))
  ))
 )
-(type $nullability.defaultnullable.DefaultNullable.vtable (sub $java.lang.Object.vtable (struct
- (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_casts__void (ref $function.m_casts__void))
- (field $m_m1__java_lang_String__java_util_List__java_lang_String (ref $function.m_m1__java_lang_String__java_util_List__java_lang_String))
- (field $m_m2__java_lang_String__java_util_List__java_lang_String (ref $function.m_m2__java_lang_String__java_util_List__java_lang_String))
- (field $m_m3__arrayOf_java_lang_String__void (ref $function.m_m3__arrayOf_java_lang_String__void))
- (field $m_methodWithNonNullableBound__void_$pp_nullability_defaultnullable (ref $function.m_methodWithNonNullableBound__void_$pp_nullability_defaultnullable))
- (field $m_methodWithNullableBound__void_$pp_nullability_defaultnullable (ref $function.m_methodWithNullableBound__void_$pp_nullability_defaultnullable))
- ))
-)
 
 ;;; Code for nullability.defaultnullable.DefaultNullable.$LambdaImplementor$1 [type definition]
-(type $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$1 (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$1.vtable))
- (field $itable (ref $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$1.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 (type $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$1.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -580,14 +574,14 @@
  (field $m_accept__java_lang_String__void (ref $function.m_accept__java_lang_String__void))
  ))
 )
-
-;;; Code for nullability.defaultnullable.DefaultNullable.$LambdaImplementor$2 [type definition]
-(type $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$2 (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$2.vtable))
- (field $itable (ref $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$2.itable))
+(type $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$1 (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$1.vtable))
+ (field $itable (ref $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$1.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for nullability.defaultnullable.DefaultNullable.$LambdaImplementor$2 [type definition]
 (type $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$2.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -597,14 +591,14 @@
  (field $m_get__java_lang_String (ref $function.m_get__java_lang_String))
  ))
 )
-
-;;; Code for nullability.defaultnullable.DefaultNullable.$LambdaImplementor$3 [type definition]
-(type $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$3 (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$3.vtable))
- (field $itable (ref $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$3.itable))
+(type $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$2 (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$2.vtable))
+ (field $itable (ref $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$2.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for nullability.defaultnullable.DefaultNullable.$LambdaImplementor$3 [type definition]
 (type $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$3.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -612,6 +606,12 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_accept__int__arrayOf_java_lang_String (ref $function.m_accept__int__arrayOf_java_lang_String))
  (field $m_accept__int__java_lang_Object (ref $function.m_accept__int__java_lang_Object))
+ ))
+)
+(type $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$3 (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$3.vtable))
+ (field $itable (ref $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$3.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
 
@@ -636,15 +636,6 @@
 )
 
 ;;; Code for nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability [type definition]
-(type $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $defaultNullability@nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
- (field $nonNullable@nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
- (field $nullable@nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
- ))
-)
 (type $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -658,17 +649,17 @@
  (field $m_setNullable__java_lang_Object__void_$pp_nullability_defaultnullable (ref $function.m_setNullable__java_lang_Object__void_$pp_nullability_defaultnullable))
  ))
 )
-
-;;; Code for nullability.defaultnullable.DefaultNullable.ParameterizedNullable [type definition]
-(type $nullability.defaultnullable.DefaultNullable.ParameterizedNullable (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.defaultnullable.DefaultNullable.ParameterizedNullable.vtable))
+(type $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $defaultNullability@nullability.defaultnullable.DefaultNullable.ParameterizedNullable (mut (ref null $java.lang.Object)))
- (field $nonNullable@nullability.defaultnullable.DefaultNullable.ParameterizedNullable (mut (ref null $java.lang.Object)))
- (field $nullable@nullability.defaultnullable.DefaultNullable.ParameterizedNullable (mut (ref null $java.lang.Object)))
+ (field $defaultNullability@nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
+ (field $nonNullable@nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
+ (field $nullable@nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
  ))
 )
+
+;;; Code for nullability.defaultnullable.DefaultNullable.ParameterizedNullable [type definition]
 (type $nullability.defaultnullable.DefaultNullable.ParameterizedNullable.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -682,17 +673,17 @@
  (field $m_setNullable__java_lang_Object__void_$pp_nullability_defaultnullable (ref $function.m_setNullable__java_lang_Object__void_$pp_nullability_defaultnullable))
  ))
 )
-
-;;; Code for nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable [type definition]
-(type $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.vtable))
+(type $nullability.defaultnullable.DefaultNullable.ParameterizedNullable (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.defaultnullable.DefaultNullable.ParameterizedNullable.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $defaultNullability@nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable (mut (ref null $java.lang.Object)))
- (field $nonNullable@nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable (mut (ref null $java.lang.Object)))
- (field $nullable@nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable (mut (ref null $java.lang.Object)))
+ (field $defaultNullability@nullability.defaultnullable.DefaultNullable.ParameterizedNullable (mut (ref null $java.lang.Object)))
+ (field $nonNullable@nullability.defaultnullable.DefaultNullable.ParameterizedNullable (mut (ref null $java.lang.Object)))
+ (field $nullable@nullability.defaultnullable.DefaultNullable.ParameterizedNullable (mut (ref null $java.lang.Object)))
  ))
 )
+
+;;; Code for nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable [type definition]
 (type $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -706,8 +697,32 @@
  (field $m_setNullable__java_lang_Object__void_$pp_nullability_defaultnullable (ref $function.m_setNullable__java_lang_Object__void_$pp_nullability_defaultnullable))
  ))
 )
+(type $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $defaultNullability@nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable (mut (ref null $java.lang.Object)))
+ (field $nonNullable@nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable (mut (ref null $java.lang.Object)))
+ (field $nullable@nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable (mut (ref null $java.lang.Object)))
+ ))
+)
 
 ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable [type definition]
+(type $nullability.explicitnotnullable.ExplicitNotNullable.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_casts__void (ref $function.m_casts__void))
+ (field $m_m1__java_lang_String__java_util_List__java_lang_String (ref $function.m_m1__java_lang_String__java_util_List__java_lang_String))
+ (field $m_m2__java_lang_String__java_util_List__java_lang_String (ref $function.m_m2__java_lang_String__java_util_List__java_lang_String))
+ (field $m_m3__arrayOf_java_lang_String__void (ref $function.m_m3__arrayOf_java_lang_String__void))
+ (field $m_methodWithNonNullableBound__void_$pp_nullability_explicitnotnullable (ref $function.m_methodWithNonNullableBound__void_$pp_nullability_explicitnotnullable))
+ (field $m_methodWithNullableBound__void_$pp_nullability_explicitnotnullable (ref $function.m_methodWithNullableBound__void_$pp_nullability_explicitnotnullable))
+ (field $m_testDependentWildcards__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters_$pp_nullability_explicitnotnullable (ref $function.m_testDependentWildcards__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters_$pp_nullability_explicitnotnullable))
+ (field $m_unboundedWildCard__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__void_$pp_nullability_explicitnotnullable (ref $function.m_unboundedWildCard__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__void_$pp_nullability_explicitnotnullable))
+ ))
+)
 (type $nullability.explicitnotnullable.ExplicitNotNullable (sub $java.lang.Object (struct
  (field $vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.vtable))
  (field $itable (ref $itable))
@@ -747,29 +762,8 @@
  (field $nonNullableCollection@nullability.explicitnotnullable.ExplicitNotNullable (mut (ref null $java.lang.Object)))
  ))
 )
-(type $nullability.explicitnotnullable.ExplicitNotNullable.vtable (sub $java.lang.Object.vtable (struct
- (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_casts__void (ref $function.m_casts__void))
- (field $m_m1__java_lang_String__java_util_List__java_lang_String (ref $function.m_m1__java_lang_String__java_util_List__java_lang_String))
- (field $m_m2__java_lang_String__java_util_List__java_lang_String (ref $function.m_m2__java_lang_String__java_util_List__java_lang_String))
- (field $m_m3__arrayOf_java_lang_String__void (ref $function.m_m3__arrayOf_java_lang_String__void))
- (field $m_methodWithNonNullableBound__void_$pp_nullability_explicitnotnullable (ref $function.m_methodWithNonNullableBound__void_$pp_nullability_explicitnotnullable))
- (field $m_methodWithNullableBound__void_$pp_nullability_explicitnotnullable (ref $function.m_methodWithNullableBound__void_$pp_nullability_explicitnotnullable))
- (field $m_testDependentWildcards__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters_$pp_nullability_explicitnotnullable (ref $function.m_testDependentWildcards__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters_$pp_nullability_explicitnotnullable))
- (field $m_unboundedWildCard__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__void_$pp_nullability_explicitnotnullable (ref $function.m_unboundedWildCard__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__void_$pp_nullability_explicitnotnullable))
- ))
-)
 
 ;;; Code for nullability.explicitnotnullable.DefaultNullable [type definition]
-(type $nullability.explicitnotnullable.DefaultNullable (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.explicitnotnullable.DefaultNullable.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 (type $nullability.explicitnotnullable.DefaultNullable.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -777,14 +771,14 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
-
-;;; Code for nullability.explicitnotnullable.OuterClass [type definition]
-(type $nullability.explicitnotnullable.OuterClass (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.explicitnotnullable.OuterClass.vtable))
+(type $nullability.explicitnotnullable.DefaultNullable (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.explicitnotnullable.DefaultNullable.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for nullability.explicitnotnullable.OuterClass [type definition]
 (type $nullability.explicitnotnullable.OuterClass.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -792,14 +786,14 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
-
-;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$1 [type definition]
-(type $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$1 (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$1.vtable))
- (field $itable (ref $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$1.itable))
+(type $nullability.explicitnotnullable.OuterClass (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.explicitnotnullable.OuterClass.vtable))
+ (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$1 [type definition]
 (type $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$1.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -809,14 +803,14 @@
  (field $m_accept__java_lang_String__void (ref $function.m_accept__java_lang_String__void))
  ))
 )
-
-;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$2 [type definition]
-(type $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$2 (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$2.vtable))
- (field $itable (ref $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$2.itable))
+(type $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$1 (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$1.vtable))
+ (field $itable (ref $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$1.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$2 [type definition]
 (type $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$2.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -826,14 +820,14 @@
  (field $m_accept__java_lang_String__void (ref $function.m_accept__java_lang_String__void))
  ))
 )
-
-;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$3 [type definition]
-(type $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$3 (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$3.vtable))
- (field $itable (ref $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$3.itable))
+(type $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$2 (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$2.vtable))
+ (field $itable (ref $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$2.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$3 [type definition]
 (type $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$3.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -843,14 +837,14 @@
  (field $m_accept__java_lang_String__void (ref $function.m_accept__java_lang_String__void))
  ))
 )
-
-;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$4 [type definition]
-(type $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$4 (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$4.vtable))
- (field $itable (ref $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$4.itable))
+(type $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$3 (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$3.vtable))
+ (field $itable (ref $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$3.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$4 [type definition]
 (type $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$4.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -859,14 +853,14 @@
  (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
  ))
 )
-
-;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$5 [type definition]
-(type $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$5 (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$5.vtable))
- (field $itable (ref $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$5.itable))
+(type $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$4 (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$4.vtable))
+ (field $itable (ref $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$4.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$5 [type definition]
 (type $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$5.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -876,15 +870,14 @@
  (field $m_accept__int__java_lang_Object (ref $function.m_accept__int__java_lang_Object))
  ))
 )
-
-;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.1 [type definition]
-(type $nullability.explicitnotnullable.ExplicitNotNullable.1 (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.1.vtable))
- (field $itable (ref $nullability.explicitnotnullable.ExplicitNotNullable.1.itable))
+(type $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$5 (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$5.vtable))
+ (field $itable (ref $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$5.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@nullability.explicitnotnullable.ExplicitNotNullable.1 (mut (ref null $nullability.explicitnotnullable.ExplicitNotNullable)))
  ))
 )
+
+;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.1 [type definition]
 (type $nullability.explicitnotnullable.ExplicitNotNullable.1.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -892,6 +885,13 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
  (field $m_apply__java_lang_String__java_lang_String (ref $function.m_apply__java_lang_String__java_lang_String))
+ ))
+)
+(type $nullability.explicitnotnullable.ExplicitNotNullable.1 (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.1.vtable))
+ (field $itable (ref $nullability.explicitnotnullable.ExplicitNotNullable.1.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@nullability.explicitnotnullable.ExplicitNotNullable.1 (mut (ref null $nullability.explicitnotnullable.ExplicitNotNullable)))
  ))
 )
 
@@ -916,15 +916,6 @@
 )
 
 ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability [type definition]
-(type $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $defaultNullability@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
- (field $nonNullable@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
- (field $nullable@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
- ))
-)
 (type $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -938,17 +929,17 @@
  (field $m_setNullable__java_lang_Object__void_$pp_nullability_explicitnotnullable (ref $function.m_setNullable__java_lang_Object__void_$pp_nullability_explicitnotnullable))
  ))
 )
-
-;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable [type definition]
-(type $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable.vtable))
+(type $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $defaultNullability@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable (mut (ref null $java.lang.Object)))
- (field $nonNullable@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable (mut (ref null $java.lang.Object)))
- (field $nullable@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable (mut (ref null $java.lang.Object)))
+ (field $defaultNullability@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
+ (field $nonNullable@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
+ (field $nullable@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
  ))
 )
+
+;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable [type definition]
 (type $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -962,17 +953,17 @@
  (field $m_setNullable__java_lang_Object__void_$pp_nullability_explicitnotnullable (ref $function.m_setNullable__java_lang_Object__void_$pp_nullability_explicitnotnullable))
  ))
 )
-
-;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable [type definition]
-(type $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable.vtable))
+(type $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $defaultNullability@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable (mut (ref null $java.lang.Object)))
- (field $nonNullable@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable (mut (ref null $java.lang.Object)))
- (field $nullable@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable (mut (ref null $java.lang.Object)))
+ (field $defaultNullability@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable (mut (ref null $java.lang.Object)))
+ (field $nonNullable@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable (mut (ref null $java.lang.Object)))
+ (field $nullable@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable (mut (ref null $java.lang.Object)))
  ))
 )
+
+;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable [type definition]
 (type $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -986,14 +977,17 @@
  (field $m_setNullable__java_lang_Object__void_$pp_nullability_explicitnotnullable (ref $function.m_setNullable__java_lang_Object__void_$pp_nullability_explicitnotnullable))
  ))
 )
-
-;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters [type definition]
-(type $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters.vtable))
+(type $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $defaultNullability@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable (mut (ref null $java.lang.Object)))
+ (field $nonNullable@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable (mut (ref null $java.lang.Object)))
+ (field $nullable@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable (mut (ref null $java.lang.Object)))
  ))
 )
+
+;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters [type definition]
 (type $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -1002,15 +996,14 @@
  (field $m_getThis__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters_$pp_nullability_explicitnotnullable (ref $function.m_getThis__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters_$pp_nullability_explicitnotnullable))
  ))
 )
-
-;;; Code for nullability.explicitnotnullable.OuterClass.InnerClass [type definition]
-(type $nullability.explicitnotnullable.OuterClass.InnerClass (sub $java.lang.Object (struct
- (field $vtable (ref $nullability.explicitnotnullable.OuterClass.InnerClass.vtable))
+(type $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@nullability.explicitnotnullable.OuterClass.InnerClass (mut (ref null $nullability.explicitnotnullable.OuterClass)))
  ))
 )
+
+;;; Code for nullability.explicitnotnullable.OuterClass.InnerClass [type definition]
 (type $nullability.explicitnotnullable.OuterClass.InnerClass.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -1018,14 +1011,15 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
-
-;;; Code for nullability.Nullability.RecursiveChild [type definition]
-(type $nullability.Nullability.RecursiveChild (sub $nullability.Nullability.Recursive (struct
- (field $vtable (ref $nullability.Nullability.RecursiveChild.vtable))
- (field $itable (ref $nullability.Nullability.RecursiveChild.itable))
+(type $nullability.explicitnotnullable.OuterClass.InnerClass (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.explicitnotnullable.OuterClass.InnerClass.vtable))
+ (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@nullability.explicitnotnullable.OuterClass.InnerClass (mut (ref null $nullability.explicitnotnullable.OuterClass)))
  ))
 )
+
+;;; Code for nullability.Nullability.RecursiveChild [type definition]
 (type $nullability.Nullability.RecursiveChild.vtable (sub $nullability.Nullability.Recursive.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -1033,14 +1027,14 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
-
-;;; Code for nullability.Nullability.RecursiveNullableChild [type definition]
-(type $nullability.Nullability.RecursiveNullableChild (sub $nullability.Nullability.RecursiveNullable (struct
- (field $vtable (ref $nullability.Nullability.RecursiveNullableChild.vtable))
- (field $itable (ref $nullability.Nullability.RecursiveNullableChild.itable))
+(type $nullability.Nullability.RecursiveChild (sub $nullability.Nullability.Recursive (struct
+ (field $vtable (ref $nullability.Nullability.RecursiveChild.vtable))
+ (field $itable (ref $nullability.Nullability.RecursiveChild.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for nullability.Nullability.RecursiveNullableChild [type definition]
 (type $nullability.Nullability.RecursiveNullableChild.vtable (sub $nullability.Nullability.RecursiveNullable.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -1048,8 +1042,21 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
+(type $nullability.Nullability.RecursiveNullableChild (sub $nullability.Nullability.RecursiveNullable (struct
+ (field $vtable (ref $nullability.Nullability.RecursiveNullableChild.vtable))
+ (field $itable (ref $nullability.Nullability.RecursiveNullableChild.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 
 ;;; Code for nullability.explicitnotnullable.OuterClass.1 [type definition]
+(type $nullability.explicitnotnullable.OuterClass.1.vtable (sub $nullability.explicitnotnullable.OuterClass.InnerClass.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 (type $nullability.explicitnotnullable.OuterClass.1 (sub $nullability.explicitnotnullable.OuterClass.InnerClass (struct
  (field $vtable (ref $nullability.explicitnotnullable.OuterClass.1.vtable))
  (field $itable (ref $itable))
@@ -1058,28 +1065,21 @@
  (field $$outer_this@nullability.explicitnotnullable.OuterClass.1 (mut (ref null $nullability.explicitnotnullable.OuterClass)))
  ))
 )
-(type $nullability.explicitnotnullable.OuterClass.1.vtable (sub $nullability.explicitnotnullable.OuterClass.InnerClass.vtable (struct
+
+;;; Code for nullability.explicitnotnullable.OuterClass.2 [type definition]
+(type $nullability.explicitnotnullable.OuterClass.2.vtable (sub $nullability.explicitnotnullable.OuterClass.InnerClass.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
-
-;;; Code for nullability.explicitnotnullable.OuterClass.2 [type definition]
 (type $nullability.explicitnotnullable.OuterClass.2 (sub $nullability.explicitnotnullable.OuterClass.InnerClass (struct
  (field $vtable (ref $nullability.explicitnotnullable.OuterClass.2.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $$outer_this@nullability.explicitnotnullable.OuterClass.InnerClass (mut (ref null $nullability.explicitnotnullable.OuterClass)))
  (field $$outer_this@nullability.explicitnotnullable.OuterClass.2 (mut (ref null $nullability.explicitnotnullable.OuterClass)))
- ))
-)
-(type $nullability.explicitnotnullable.OuterClass.2.vtable (sub $nullability.explicitnotnullable.OuterClass.InnerClass.vtable (struct
- (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
 

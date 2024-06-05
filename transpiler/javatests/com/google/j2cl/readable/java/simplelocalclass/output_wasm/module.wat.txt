@@ -1,10 +1,4 @@
 ;;; Code for simplelocalclass.SimpleLocalClass [type definition]
-(type $simplelocalclass.SimpleLocalClass (sub $java.lang.Object (struct
- (field $vtable (ref $simplelocalclass.SimpleLocalClass.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 (type $simplelocalclass.SimpleLocalClass.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -15,8 +9,22 @@
  (field $m_test__int__void (ref $function.m_test__int__void))
  ))
 )
+(type $simplelocalclass.SimpleLocalClass (sub $java.lang.Object (struct
+ (field $vtable (ref $simplelocalclass.SimpleLocalClass.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 
 ;;; Code for simplelocalclass.SimpleLocalClass.1InnerClass [type definition]
+(type $simplelocalclass.SimpleLocalClass.1InnerClass.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_fun__int (ref $function.m_fun__int))
+ ))
+)
 (type $simplelocalclass.SimpleLocalClass.1InnerClass (sub $java.lang.Object (struct
  (field $vtable (ref $simplelocalclass.SimpleLocalClass.1InnerClass.vtable))
  (field $itable (ref $itable))
@@ -26,23 +34,8 @@
  (field $$outer_this@simplelocalclass.SimpleLocalClass.1InnerClass (mut (ref null $simplelocalclass.SimpleLocalClass)))
  ))
 )
-(type $simplelocalclass.SimpleLocalClass.1InnerClass.vtable (sub $java.lang.Object.vtable (struct
- (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_fun__int (ref $function.m_fun__int))
- ))
-)
 
 ;;; Code for simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures [type definition]
-(type $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (sub $java.lang.Object (struct
- (field $vtable (ref $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (mut (ref null $simplelocalclass.SimpleLocalClass)))
- ))
-)
 (type $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -50,8 +43,22 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
+(type $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (sub $java.lang.Object (struct
+ (field $vtable (ref $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (mut (ref null $simplelocalclass.SimpleLocalClass)))
+ ))
+)
 
 ;;; Code for simplelocalclass.SimpleLocalClass.2InnerClass [type definition]
+(type $simplelocalclass.SimpleLocalClass.2InnerClass.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 (type $simplelocalclass.SimpleLocalClass.2InnerClass (sub $java.lang.Object (struct
  (field $vtable (ref $simplelocalclass.SimpleLocalClass.2InnerClass.vtable))
  (field $itable (ref $itable))
@@ -61,22 +68,8 @@
  (field $field@simplelocalclass.SimpleLocalClass.2InnerClass (mut i32))
  ))
 )
-(type $simplelocalclass.SimpleLocalClass.2InnerClass.vtable (sub $java.lang.Object.vtable (struct
- (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- ))
-)
 
 ;;; Code for simplelocalclass.SimpleLocalClass.1Abc$InnerClass [type definition]
-(type $simplelocalclass.SimpleLocalClass.1Abc$InnerClass (sub $java.lang.Object (struct
- (field $vtable (ref $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@simplelocalclass.SimpleLocalClass.1Abc$InnerClass (mut (ref null $simplelocalclass.SimpleLocalClass)))
- ))
-)
 (type $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -84,20 +77,27 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
-
-;;; Code for simplelocalclass.SimpleLocalClass.1Klm$InnerClass [type definition]
-(type $simplelocalclass.SimpleLocalClass.1Klm$InnerClass (sub $java.lang.Object (struct
- (field $vtable (ref $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.vtable))
+(type $simplelocalclass.SimpleLocalClass.1Abc$InnerClass (sub $java.lang.Object (struct
+ (field $vtable (ref $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@simplelocalclass.SimpleLocalClass.1Klm$InnerClass (mut (ref null $simplelocalclass.SimpleLocalClass)))
+ (field $$outer_this@simplelocalclass.SimpleLocalClass.1Abc$InnerClass (mut (ref null $simplelocalclass.SimpleLocalClass)))
  ))
 )
+
+;;; Code for simplelocalclass.SimpleLocalClass.1Klm$InnerClass [type definition]
 (type $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+(type $simplelocalclass.SimpleLocalClass.1Klm$InnerClass (sub $java.lang.Object (struct
+ (field $vtable (ref $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@simplelocalclass.SimpleLocalClass.1Klm$InnerClass (mut (ref null $simplelocalclass.SimpleLocalClass)))
  ))
 )
 

@@ -1,12 +1,4 @@
 ;;; Code for synchronizedmethod.SynchronizedMethod [type definition]
-(type $synchronizedmethod.SynchronizedMethod (sub $java.lang.Object (struct
- (field $vtable (ref $synchronizedmethod.SynchronizedMethod.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $a@synchronizedmethod.SynchronizedMethod (mut i32))
- (field $b@synchronizedmethod.SynchronizedMethod (mut i32))
- ))
-)
 (type $synchronizedmethod.SynchronizedMethod.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -15,6 +7,14 @@
  (field $m_testIfStatementWithNonVoidBodyWithoutElse__boolean__boolean__void (ref $function.m_testIfStatementWithNonVoidBodyWithoutElse__boolean__boolean__void))
  (field $m_testNonStatic__void (ref $function.m_testNonStatic__void))
  (field $m_testReturn__boolean__int (ref $function.m_testReturn__boolean__int))
+ ))
+)
+(type $synchronizedmethod.SynchronizedMethod (sub $java.lang.Object (struct
+ (field $vtable (ref $synchronizedmethod.SynchronizedMethod.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $a@synchronizedmethod.SynchronizedMethod (mut i32))
+ (field $b@synchronizedmethod.SynchronizedMethod (mut i32))
  ))
 )
 

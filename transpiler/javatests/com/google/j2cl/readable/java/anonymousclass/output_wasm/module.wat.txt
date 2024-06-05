@@ -4,12 +4,6 @@
 )
 
 ;;; Code for anonymousclass.SomeClass [type definition]
-(type $anonymousclass.SomeClass (sub $java.lang.Object (struct
- (field $vtable (ref $anonymousclass.SomeClass.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 (type $anonymousclass.SomeClass.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -18,14 +12,14 @@
  (field $m_foo__java_lang_String (ref $function.m_foo__java_lang_String))
  ))
 )
-
-;;; Code for anonymousclass.SomeClassWithStaticMembers [type definition]
-(type $anonymousclass.SomeClassWithStaticMembers (sub $java.lang.Object (struct
- (field $vtable (ref $anonymousclass.SomeClassWithStaticMembers.vtable))
+(type $anonymousclass.SomeClass (sub $java.lang.Object (struct
+ (field $vtable (ref $anonymousclass.SomeClass.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for anonymousclass.SomeClassWithStaticMembers [type definition]
 (type $anonymousclass.SomeClassWithStaticMembers.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -34,16 +28,14 @@
  (field $m_foo__java_lang_String (ref $function.m_foo__java_lang_String))
  ))
 )
-
-;;; Code for anonymousclass.AnonymousClass [type definition]
-(type $anonymousclass.AnonymousClass (sub $java.lang.Object (struct
- (field $vtable (ref $anonymousclass.AnonymousClass.vtable))
+(type $anonymousclass.SomeClassWithStaticMembers (sub $java.lang.Object (struct
+ (field $vtable (ref $anonymousclass.SomeClassWithStaticMembers.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $i@anonymousclass.AnonymousClass (mut i32))
- (field $o@anonymousclass.AnonymousClass (mut (ref null $java.lang.Object)))
  ))
 )
+
+;;; Code for anonymousclass.AnonymousClass [type definition]
 (type $anonymousclass.AnonymousClass.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -52,14 +44,16 @@
  (field $m_main__void (ref $function.m_main__void))
  ))
 )
-
-;;; Code for anonymousclass.JsConstructorClass [type definition]
-(type $anonymousclass.JsConstructorClass (sub $java.lang.Object (struct
- (field $vtable (ref $anonymousclass.JsConstructorClass.vtable))
+(type $anonymousclass.AnonymousClass (sub $java.lang.Object (struct
+ (field $vtable (ref $anonymousclass.AnonymousClass.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $i@anonymousclass.AnonymousClass (mut i32))
+ (field $o@anonymousclass.AnonymousClass (mut (ref null $java.lang.Object)))
  ))
 )
+
+;;; Code for anonymousclass.JsConstructorClass [type definition]
 (type $anonymousclass.JsConstructorClass.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -67,15 +61,14 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
-
-;;; Code for anonymousclass.JsConstructorClass.1 [type definition]
-(type $anonymousclass.JsConstructorClass.1 (sub $java.lang.Object (struct
- (field $vtable (ref $anonymousclass.JsConstructorClass.1.vtable))
+(type $anonymousclass.JsConstructorClass (sub $java.lang.Object (struct
+ (field $vtable (ref $anonymousclass.JsConstructorClass.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@anonymousclass.JsConstructorClass.1 (mut (ref null $anonymousclass.JsConstructorClass)))
  ))
 )
+
+;;; Code for anonymousclass.JsConstructorClass.1 [type definition]
 (type $anonymousclass.JsConstructorClass.1.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -83,15 +76,15 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
-
-;;; Code for anonymousclass.JsConstructorSubclass.1 [type definition]
-(type $anonymousclass.JsConstructorSubclass.1 (sub $java.lang.Object (struct
- (field $vtable (ref $anonymousclass.JsConstructorSubclass.1.vtable))
+(type $anonymousclass.JsConstructorClass.1 (sub $java.lang.Object (struct
+ (field $vtable (ref $anonymousclass.JsConstructorClass.1.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@anonymousclass.JsConstructorSubclass.1 (mut (ref null $anonymousclass.JsConstructorSubclass)))
+ (field $$outer_this@anonymousclass.JsConstructorClass.1 (mut (ref null $anonymousclass.JsConstructorClass)))
  ))
 )
+
+;;; Code for anonymousclass.JsConstructorSubclass.1 [type definition]
 (type $anonymousclass.JsConstructorSubclass.1.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -99,14 +92,15 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
-
-;;; Code for anonymousclass.JsConstructorSubclass [type definition]
-(type $anonymousclass.JsConstructorSubclass (sub $anonymousclass.JsConstructorClass (struct
- (field $vtable (ref $anonymousclass.JsConstructorSubclass.vtable))
+(type $anonymousclass.JsConstructorSubclass.1 (sub $java.lang.Object (struct
+ (field $vtable (ref $anonymousclass.JsConstructorSubclass.1.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@anonymousclass.JsConstructorSubclass.1 (mut (ref null $anonymousclass.JsConstructorSubclass)))
  ))
 )
+
+;;; Code for anonymousclass.JsConstructorSubclass [type definition]
 (type $anonymousclass.JsConstructorSubclass.vtable (sub $anonymousclass.JsConstructorClass.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -114,8 +108,22 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
+(type $anonymousclass.JsConstructorSubclass (sub $anonymousclass.JsConstructorClass (struct
+ (field $vtable (ref $anonymousclass.JsConstructorSubclass.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 
 ;;; Code for anonymousclass.AnonymousClass.1 [type definition]
+(type $anonymousclass.AnonymousClass.1.vtable (sub $anonymousclass.SomeClass.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_foo__java_lang_String (ref $function.m_foo__java_lang_String))
+ ))
+)
 (type $anonymousclass.AnonymousClass.1 (sub $anonymousclass.SomeClass (struct
  (field $vtable (ref $anonymousclass.AnonymousClass.1.vtable))
  (field $itable (ref $itable))
@@ -126,7 +134,9 @@
  (field $outer@anonymousclass.AnonymousClass.1 (mut (ref null $java.lang.Object)))
  ))
 )
-(type $anonymousclass.AnonymousClass.1.vtable (sub $anonymousclass.SomeClass.vtable (struct
+
+;;; Code for anonymousclass.AnonymousClass.2 [type definition]
+(type $anonymousclass.AnonymousClass.2.vtable (sub $anonymousclass.SomeClass.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
@@ -134,8 +144,6 @@
  (field $m_foo__java_lang_String (ref $function.m_foo__java_lang_String))
  ))
 )
-
-;;; Code for anonymousclass.AnonymousClass.2 [type definition]
 (type $anonymousclass.AnonymousClass.2 (sub $anonymousclass.SomeClass (struct
  (field $vtable (ref $anonymousclass.AnonymousClass.2.vtable))
  (field $itable (ref $itable))
@@ -145,7 +153,9 @@
  (field $outer@anonymousclass.AnonymousClass.2 (mut (ref null $java.lang.Object)))
  ))
 )
-(type $anonymousclass.AnonymousClass.2.vtable (sub $anonymousclass.SomeClass.vtable (struct
+
+;;; Code for anonymousclass.AnonymousClass.3 [type definition]
+(type $anonymousclass.AnonymousClass.3.vtable (sub $anonymousclass.SomeClassWithStaticMembers.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
@@ -153,8 +163,6 @@
  (field $m_foo__java_lang_String (ref $function.m_foo__java_lang_String))
  ))
 )
-
-;;; Code for anonymousclass.AnonymousClass.3 [type definition]
 (type $anonymousclass.AnonymousClass.3 (sub $anonymousclass.SomeClassWithStaticMembers (struct
  (field $vtable (ref $anonymousclass.AnonymousClass.3.vtable))
  (field $itable (ref $itable))
@@ -164,28 +172,20 @@
  (field $outer@anonymousclass.AnonymousClass.3 (mut (ref null $java.lang.Object)))
  ))
 )
-(type $anonymousclass.AnonymousClass.3.vtable (sub $anonymousclass.SomeClassWithStaticMembers.vtable (struct
- (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_foo__java_lang_String (ref $function.m_foo__java_lang_String))
- ))
-)
 
 ;;; Code for anonymousclass.SomeInterface.1 [type definition]
-(type $anonymousclass.SomeInterface.1 (sub $anonymousclass.SomeClass (struct
- (field $vtable (ref $anonymousclass.SomeInterface.1.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 (type $anonymousclass.SomeInterface.1.vtable (sub $anonymousclass.SomeClass.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_foo__java_lang_String (ref $function.m_foo__java_lang_String))
+ ))
+)
+(type $anonymousclass.SomeInterface.1 (sub $anonymousclass.SomeClass (struct
+ (field $vtable (ref $anonymousclass.SomeInterface.1.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
 

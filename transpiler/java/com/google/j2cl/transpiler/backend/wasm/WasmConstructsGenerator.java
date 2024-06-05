@@ -246,8 +246,8 @@ public class WasmConstructsGenerator {
       // Interfaces at runtime are treated as java.lang.Object.
       renderInterfaceVtableStruct(type);
     } else {
-      renderTypeStruct(type);
       renderClassVtableStruct(type);
+      renderTypeStruct(type);
       if (!isModular) {
         renderClassItableStruct(type);
       }

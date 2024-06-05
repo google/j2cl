@@ -1,10 +1,4 @@
 ;;; Code for instanceofexpression.InstanceofExpressions [type definition]
-(type $instanceofexpression.InstanceofExpressions (sub $java.lang.Object (struct
- (field $vtable (ref $instanceofexpression.InstanceofExpressions.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 (type $instanceofexpression.InstanceofExpressions.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -17,20 +11,26 @@
  (field $m_testPrecedence__void (ref $function.m_testPrecedence__void))
  ))
 )
-
-;;; Code for instanceofexpression.InstanceofExpressions.1 [type definition]
-(type $instanceofexpression.InstanceofExpressions.1 (sub $java.lang.Object (struct
- (field $vtable (ref $instanceofexpression.InstanceofExpressions.1.vtable))
- (field $itable (ref $instanceofexpression.InstanceofExpressions.1.itable))
+(type $instanceofexpression.InstanceofExpressions (sub $java.lang.Object (struct
+ (field $vtable (ref $instanceofexpression.InstanceofExpressions.vtable))
+ (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@instanceofexpression.InstanceofExpressions.1 (mut (ref null $instanceofexpression.InstanceofExpressions)))
  ))
 )
+
+;;; Code for instanceofexpression.InstanceofExpressions.1 [type definition]
 (type $instanceofexpression.InstanceofExpressions.1.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+(type $instanceofexpression.InstanceofExpressions.1 (sub $java.lang.Object (struct
+ (field $vtable (ref $instanceofexpression.InstanceofExpressions.1.vtable))
+ (field $itable (ref $instanceofexpression.InstanceofExpressions.1.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@instanceofexpression.InstanceofExpressions.1 (mut (ref null $instanceofexpression.InstanceofExpressions)))
  ))
 )
 

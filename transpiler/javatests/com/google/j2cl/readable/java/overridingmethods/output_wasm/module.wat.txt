@@ -5,12 +5,6 @@
 )
 
 ;;; Code for overridingmethods.Parent [type definition]
-(type $overridingmethods.Parent (sub $java.lang.Object (struct
- (field $vtable (ref $overridingmethods.Parent.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 (type $overridingmethods.Parent.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -20,14 +14,14 @@
  (field $m_nonFinal__void (ref $function.m_nonFinal__void))
  ))
 )
-
-;;; Code for overridingmethods.Child [type definition]
-(type $overridingmethods.Child (sub $overridingmethods.Parent (struct
- (field $vtable (ref $overridingmethods.Child.vtable))
- (field $itable (ref $overridingmethods.Child.itable))
+(type $overridingmethods.Parent (sub $java.lang.Object (struct
+ (field $vtable (ref $overridingmethods.Parent.vtable))
+ (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for overridingmethods.Child [type definition]
 (type $overridingmethods.Child.vtable (sub $overridingmethods.Parent.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -38,14 +32,14 @@
  (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
  ))
 )
-
-;;; Code for overridingmethods.FinalChild [type definition]
-(type $overridingmethods.FinalChild (sub $overridingmethods.Parent (struct
- (field $vtable (ref $overridingmethods.FinalChild.vtable))
- (field $itable (ref $overridingmethods.FinalChild.itable))
+(type $overridingmethods.Child (sub $overridingmethods.Parent (struct
+ (field $vtable (ref $overridingmethods.Child.vtable))
+ (field $itable (ref $overridingmethods.Child.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for overridingmethods.FinalChild [type definition]
 (type $overridingmethods.FinalChild.vtable (sub $overridingmethods.Parent.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -54,6 +48,12 @@
  (field $m_finalInChild__void (ref $function.m_finalInChild__void))
  (field $m_nonFinal__void (ref $function.m_nonFinal__void))
  (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
+ ))
+)
+(type $overridingmethods.FinalChild (sub $overridingmethods.Parent (struct
+ (field $vtable (ref $overridingmethods.FinalChild.vtable))
+ (field $itable (ref $overridingmethods.FinalChild.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
 

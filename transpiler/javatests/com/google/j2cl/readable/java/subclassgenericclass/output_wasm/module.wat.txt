@@ -1,10 +1,4 @@
 ;;; Code for subclassgenericclass.GenericClass [type definition]
-(type $subclassgenericclass.GenericClass (sub $java.lang.Object (struct
- (field $vtable (ref $subclassgenericclass.GenericClass.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 (type $subclassgenericclass.GenericClass.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -12,14 +6,14 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
-
-;;; Code for subclassgenericclass.GenericSubclassGenericClass [type definition]
-(type $subclassgenericclass.GenericSubclassGenericClass (sub $subclassgenericclass.GenericClass (struct
- (field $vtable (ref $subclassgenericclass.GenericSubclassGenericClass.vtable))
+(type $subclassgenericclass.GenericClass (sub $java.lang.Object (struct
+ (field $vtable (ref $subclassgenericclass.GenericClass.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for subclassgenericclass.GenericSubclassGenericClass [type definition]
 (type $subclassgenericclass.GenericSubclassGenericClass.vtable (sub $subclassgenericclass.GenericClass.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -27,19 +21,25 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
-
-;;; Code for subclassgenericclass.SubclassGenericClass [type definition]
-(type $subclassgenericclass.SubclassGenericClass (sub $subclassgenericclass.GenericClass (struct
- (field $vtable (ref $subclassgenericclass.SubclassGenericClass.vtable))
+(type $subclassgenericclass.GenericSubclassGenericClass (sub $subclassgenericclass.GenericClass (struct
+ (field $vtable (ref $subclassgenericclass.GenericSubclassGenericClass.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for subclassgenericclass.SubclassGenericClass [type definition]
 (type $subclassgenericclass.SubclassGenericClass.vtable (sub $subclassgenericclass.GenericClass.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+(type $subclassgenericclass.SubclassGenericClass (sub $subclassgenericclass.GenericClass (struct
+ (field $vtable (ref $subclassgenericclass.SubclassGenericClass.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
 

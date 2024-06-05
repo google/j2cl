@@ -1,10 +1,4 @@
 ;;; Code for localclassinheritance.LocalClassInheritance [type definition]
-(type $localclassinheritance.LocalClassInheritance (sub $java.lang.Object (struct
- (field $vtable (ref $localclassinheritance.LocalClassInheritance.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 (type $localclassinheritance.LocalClassInheritance.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -13,16 +7,14 @@
  (field $m_test__void (ref $function.m_test__void))
  ))
 )
-
-;;; Code for localclassinheritance.LocalClassInheritance.1Parent [type definition]
-(type $localclassinheritance.LocalClassInheritance.1Parent (sub $java.lang.Object (struct
- (field $vtable (ref $localclassinheritance.LocalClassInheritance.1Parent.vtable))
+(type $localclassinheritance.LocalClassInheritance (sub $java.lang.Object (struct
+ (field $vtable (ref $localclassinheritance.LocalClassInheritance.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$captured_f@localclassinheritance.LocalClassInheritance.1Parent (mut i32))
- (field $$outer_this@localclassinheritance.LocalClassInheritance.1Parent (mut (ref null $localclassinheritance.LocalClassInheritance)))
  ))
 )
+
+;;; Code for localclassinheritance.LocalClassInheritance.1Parent [type definition]
 (type $localclassinheritance.LocalClassInheritance.1Parent.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -31,8 +23,24 @@
  (field $m_n__void (ref $function.m_n__void))
  ))
 )
+(type $localclassinheritance.LocalClassInheritance.1Parent (sub $java.lang.Object (struct
+ (field $vtable (ref $localclassinheritance.LocalClassInheritance.1Parent.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$captured_f@localclassinheritance.LocalClassInheritance.1Parent (mut i32))
+ (field $$outer_this@localclassinheritance.LocalClassInheritance.1Parent (mut (ref null $localclassinheritance.LocalClassInheritance)))
+ ))
+)
 
 ;;; Code for localclassinheritance.LocalClassInheritance.1Child [type definition]
+(type $localclassinheritance.LocalClassInheritance.1Child.vtable (sub $localclassinheritance.LocalClassInheritance.1Parent.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_n__void (ref $function.m_n__void))
+ ))
+)
 (type $localclassinheritance.LocalClassInheritance.1Child (sub $localclassinheritance.LocalClassInheritance.1Parent (struct
  (field $vtable (ref $localclassinheritance.LocalClassInheritance.1Child.vtable))
  (field $itable (ref $itable))
@@ -41,14 +49,6 @@
  (field $$outer_this@localclassinheritance.LocalClassInheritance.1Parent (mut (ref null $localclassinheritance.LocalClassInheritance)))
  (field $$captured_f@localclassinheritance.LocalClassInheritance.1Child (mut i32))
  (field $$outer_this@localclassinheritance.LocalClassInheritance.1Child (mut (ref null $localclassinheritance.LocalClassInheritance)))
- ))
-)
-(type $localclassinheritance.LocalClassInheritance.1Child.vtable (sub $localclassinheritance.LocalClassInheritance.1Parent.vtable (struct
- (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_n__void (ref $function.m_n__void))
  ))
 )
 

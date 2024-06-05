@@ -5,12 +5,6 @@
 )
 
 ;;; Code for packageprivatemethods.package1.SuperParent [type definition]
-(type $packageprivatemethods.package1.SuperParent (sub $java.lang.Object (struct
- (field $vtable (ref $packageprivatemethods.package1.SuperParent.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 (type $packageprivatemethods.package1.SuperParent.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -22,14 +16,14 @@
  (field $m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1 (ref $function.m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1))
  ))
 )
-
-;;; Code for packageprivatemethods.package1.Parent [type definition]
-(type $packageprivatemethods.package1.Parent (sub $packageprivatemethods.package1.SuperParent (struct
- (field $vtable (ref $packageprivatemethods.package1.Parent.vtable))
+(type $packageprivatemethods.package1.SuperParent (sub $java.lang.Object (struct
+ (field $vtable (ref $packageprivatemethods.package1.SuperParent.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for packageprivatemethods.package1.Parent [type definition]
 (type $packageprivatemethods.package1.Parent.vtable (sub $packageprivatemethods.package1.SuperParent.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -42,14 +36,14 @@
  (field $m_exposedAbstractInParent__int__int__int__int (ref $function.m_exposedAbstractInParent__int__int__int__int))
  ))
 )
-
-;;; Code for packageprivatemethods.package1.Child [type definition]
-(type $packageprivatemethods.package1.Child (sub $packageprivatemethods.package1.Parent (struct
- (field $vtable (ref $packageprivatemethods.package1.Child.vtable))
- (field $itable (ref $packageprivatemethods.package1.Child.itable))
+(type $packageprivatemethods.package1.Parent (sub $packageprivatemethods.package1.SuperParent (struct
+ (field $vtable (ref $packageprivatemethods.package1.Parent.vtable))
+ (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for packageprivatemethods.package1.Child [type definition]
 (type $packageprivatemethods.package1.Child.vtable (sub $packageprivatemethods.package1.Parent.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -65,14 +59,14 @@
  (field $m_overrideInParentExposedInChild__int__int (ref $function.m_overrideInParentExposedInChild__int__int))
  ))
 )
-
-;;; Code for packageprivatemethods.package2.SubParent [type definition]
-(type $packageprivatemethods.package2.SubParent (sub $packageprivatemethods.package1.Parent (struct
- (field $vtable (ref $packageprivatemethods.package2.SubParent.vtable))
- (field $itable (ref $itable))
+(type $packageprivatemethods.package1.Child (sub $packageprivatemethods.package1.Parent (struct
+ (field $vtable (ref $packageprivatemethods.package1.Child.vtable))
+ (field $itable (ref $packageprivatemethods.package1.Child.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for packageprivatemethods.package2.SubParent [type definition]
 (type $packageprivatemethods.package2.SubParent.vtable (sub $packageprivatemethods.package1.Parent.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -86,14 +80,14 @@
  (field $m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package2 (ref $function.m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package2))
  ))
 )
-
-;;; Code for packageprivatemethods.package2.SubChild [type definition]
-(type $packageprivatemethods.package2.SubChild (sub $packageprivatemethods.package1.Child (struct
- (field $vtable (ref $packageprivatemethods.package2.SubChild.vtable))
- (field $itable (ref $packageprivatemethods.package2.SubChild.itable))
+(type $packageprivatemethods.package2.SubParent (sub $packageprivatemethods.package1.Parent (struct
+ (field $vtable (ref $packageprivatemethods.package2.SubParent.vtable))
+ (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for packageprivatemethods.package2.SubChild [type definition]
 (type $packageprivatemethods.package2.SubChild.vtable (sub $packageprivatemethods.package1.Child.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -107,6 +101,12 @@
  (field $m_exposedInChildWithInterface__int__int__int (ref $function.m_exposedInChildWithInterface__int__int__int))
  (field $m_exposedInChild__int__int__int (ref $function.m_exposedInChild__int__int__int))
  (field $m_overrideInParentExposedInChild__int__int (ref $function.m_overrideInParentExposedInChild__int__int))
+ ))
+)
+(type $packageprivatemethods.package2.SubChild (sub $packageprivatemethods.package1.Child (struct
+ (field $vtable (ref $packageprivatemethods.package2.SubChild.vtable))
+ (field $itable (ref $packageprivatemethods.package2.SubChild.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
 

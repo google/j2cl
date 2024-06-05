@@ -1,4 +1,11 @@
 ;;; Code for valueofnullable.ValueOfNullable [type definition]
+(type $valueofnullable.ValueOfNullable.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 (type $valueofnullable.ValueOfNullable (sub $java.lang.Object (struct
  (field $vtable (ref $valueofnullable.ValueOfNullable.vtable))
  (field $itable (ref $itable))
@@ -6,13 +13,6 @@
  (field $nullableString@valueofnullable.ValueOfNullable (mut (ref null $java.lang.String)))
  (field $result@valueofnullable.ValueOfNullable (mut (ref null $java.lang.String)))
  (field $someChar@valueofnullable.ValueOfNullable (mut i16))
- ))
-)
-(type $valueofnullable.ValueOfNullable.vtable (sub $java.lang.Object.vtable (struct
- (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
 

@@ -1,10 +1,4 @@
 ;;; Code for boundedtypesupercall.Main [type definition]
-(type $boundedtypesupercall.Main (sub $java.lang.Object (struct
- (field $vtable (ref $boundedtypesupercall.Main.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 (type $boundedtypesupercall.Main.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -12,14 +6,14 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
-
-;;; Code for boundedtypesupercall.Main.Foo [type definition]
-(type $boundedtypesupercall.Main.Foo (sub $java.lang.Object (struct
- (field $vtable (ref $boundedtypesupercall.Main.Foo.vtable))
+(type $boundedtypesupercall.Main (sub $java.lang.Object (struct
+ (field $vtable (ref $boundedtypesupercall.Main.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for boundedtypesupercall.Main.Foo [type definition]
 (type $boundedtypesupercall.Main.Foo.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -28,14 +22,14 @@
  (field $m_foo__void (ref $function.m_foo__void))
  ))
 )
-
-;;; Code for boundedtypesupercall.Main.Bar [type definition]
-(type $boundedtypesupercall.Main.Bar (sub $java.lang.Object (struct
- (field $vtable (ref $boundedtypesupercall.Main.Bar.vtable))
+(type $boundedtypesupercall.Main.Foo (sub $java.lang.Object (struct
+ (field $vtable (ref $boundedtypesupercall.Main.Foo.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for boundedtypesupercall.Main.Bar [type definition]
 (type $boundedtypesupercall.Main.Bar.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -45,21 +39,27 @@
  (field $m_getSomething__java_lang_Comparable (ref $function.m_getSomething__java_lang_Comparable))
  ))
 )
-
-;;; Code for boundedtypesupercall.Main.Bar.1 [type definition]
-(type $boundedtypesupercall.Main.Bar.1 (sub $boundedtypesupercall.Main.Foo (struct
- (field $vtable (ref $boundedtypesupercall.Main.Bar.1.vtable))
+(type $boundedtypesupercall.Main.Bar (sub $java.lang.Object (struct
+ (field $vtable (ref $boundedtypesupercall.Main.Bar.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@boundedtypesupercall.Main.Bar.1 (mut (ref null $boundedtypesupercall.Main.Bar)))
  ))
 )
+
+;;; Code for boundedtypesupercall.Main.Bar.1 [type definition]
 (type $boundedtypesupercall.Main.Bar.1.vtable (sub $boundedtypesupercall.Main.Foo.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_foo__void (ref $function.m_foo__void))
+ ))
+)
+(type $boundedtypesupercall.Main.Bar.1 (sub $boundedtypesupercall.Main.Foo (struct
+ (field $vtable (ref $boundedtypesupercall.Main.Bar.1.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@boundedtypesupercall.Main.Bar.1 (mut (ref null $boundedtypesupercall.Main.Bar)))
  ))
 )
 

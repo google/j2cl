@@ -5,12 +5,6 @@
 )
 
 ;;; Code for simplebridgemethods.Superclass [type definition]
-(type $simplebridgemethods.Superclass (sub $java.lang.Object (struct
- (field $vtable (ref $simplebridgemethods.Superclass.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 (type $simplebridgemethods.Superclass.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -19,14 +13,14 @@
  (field $m_m1__java_lang_Error__void (ref $function.m_m1__java_lang_Error__void))
  ))
 )
-
-;;; Code for simplebridgemethods.Task [type definition]
-(type $simplebridgemethods.Task (sub $java.lang.Object (struct
- (field $vtable (ref $simplebridgemethods.Task.vtable))
- (field $itable (ref $simplebridgemethods.Task.itable))
+(type $simplebridgemethods.Superclass (sub $java.lang.Object (struct
+ (field $vtable (ref $simplebridgemethods.Superclass.vtable))
+ (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for simplebridgemethods.Task [type definition]
 (type $simplebridgemethods.Task.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -35,14 +29,14 @@
  (field $m_call__java_lang_Object__void (ref $function.m_call__java_lang_Object__void))
  ))
 )
-
-;;; Code for simplebridgemethods.AnotherTask [type definition]
-(type $simplebridgemethods.AnotherTask (sub $java.lang.Object (struct
- (field $vtable (ref $simplebridgemethods.AnotherTask.vtable))
- (field $itable (ref $simplebridgemethods.AnotherTask.itable))
+(type $simplebridgemethods.Task (sub $java.lang.Object (struct
+ (field $vtable (ref $simplebridgemethods.Task.vtable))
+ (field $itable (ref $simplebridgemethods.Task.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for simplebridgemethods.AnotherTask [type definition]
 (type $simplebridgemethods.AnotherTask.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -52,14 +46,14 @@
  (field $m_call__simplebridgemethods_Superclass__void (ref $function.m_call__simplebridgemethods_Superclass__void))
  ))
 )
-
-;;; Code for simplebridgemethods.SimpleBridgeMethods [type definition]
-(type $simplebridgemethods.SimpleBridgeMethods (sub $java.lang.Object (struct
- (field $vtable (ref $simplebridgemethods.SimpleBridgeMethods.vtable))
- (field $itable (ref $itable))
+(type $simplebridgemethods.AnotherTask (sub $java.lang.Object (struct
+ (field $vtable (ref $simplebridgemethods.AnotherTask.vtable))
+ (field $itable (ref $simplebridgemethods.AnotherTask.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for simplebridgemethods.SimpleBridgeMethods [type definition]
 (type $simplebridgemethods.SimpleBridgeMethods.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -67,14 +61,14 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
-
-;;; Code for simplebridgemethods.Subclass [type definition]
-(type $simplebridgemethods.Subclass (sub $simplebridgemethods.Superclass (struct
- (field $vtable (ref $simplebridgemethods.Subclass.vtable))
+(type $simplebridgemethods.SimpleBridgeMethods (sub $java.lang.Object (struct
+ (field $vtable (ref $simplebridgemethods.SimpleBridgeMethods.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for simplebridgemethods.Subclass [type definition]
 (type $simplebridgemethods.Subclass.vtable (sub $simplebridgemethods.Superclass.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -84,20 +78,26 @@
  (field $m_m1__java_lang_AssertionError__void (ref $function.m_m1__java_lang_AssertionError__void))
  ))
 )
-
-;;; Code for simplebridgemethods.AnotherSubclass [type definition]
-(type $simplebridgemethods.AnotherSubclass (sub $simplebridgemethods.Superclass (struct
- (field $vtable (ref $simplebridgemethods.AnotherSubclass.vtable))
+(type $simplebridgemethods.Subclass (sub $simplebridgemethods.Superclass (struct
+ (field $vtable (ref $simplebridgemethods.Subclass.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
+
+;;; Code for simplebridgemethods.AnotherSubclass [type definition]
 (type $simplebridgemethods.AnotherSubclass.vtable (sub $simplebridgemethods.Superclass.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_m1__java_lang_Error__void (ref $function.m_m1__java_lang_Error__void))
+ ))
+)
+(type $simplebridgemethods.AnotherSubclass (sub $simplebridgemethods.Superclass (struct
+ (field $vtable (ref $simplebridgemethods.AnotherSubclass.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
 
