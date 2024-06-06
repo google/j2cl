@@ -21,7 +21,7 @@
  */
 package org.jbox2d.common
 
-expect open class PlatformMathUtils {
+expect open class PlatformMathUtils() {
   companion object {
     fun fastPow(a: Float, b: Float): Float
   }
