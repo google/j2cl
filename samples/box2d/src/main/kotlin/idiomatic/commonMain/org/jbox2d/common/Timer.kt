@@ -26,7 +26,7 @@ package org.jbox2d.common
  *
  * @author Daniel
  */
-expect class Timer {
+expect class Timer() {
   fun reset()
 
   val milliseconds: Float
