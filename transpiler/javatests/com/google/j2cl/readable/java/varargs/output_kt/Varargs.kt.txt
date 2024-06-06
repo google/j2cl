@@ -121,7 +121,7 @@ open class Varargs {
    val it_1: Array<String?>? = it as Array<String?>?
    this.args_private_2 = it_1 as Array<Any?>?
   })
-  v!!.testOverloaded("foo")
+  v!!.testOverloaded("foo" as Any?)
   v!!.testOverloaded("foo", "bar")
   v!!.testOverloaded("foo" as Any)
   v!!.testOverloaded(1.toLong())

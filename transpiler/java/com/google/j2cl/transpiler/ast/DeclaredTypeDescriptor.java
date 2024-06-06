@@ -948,7 +948,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         // which would be the right one that is consistent with the overridden method.
         parameterDescriptors.add(fromBridge);
       } else if (fromTarget.getTypeDescriptor() != fromBridgeDeclaration.getTypeDescriptor()
-          && AstUtils.isNonNativeJsEnum(fromTarget.getTypeDescriptor())) {
+          && AstUtils.needsJsEnumBoxingBridges(fromTarget.getTypeDescriptor())) {
         // Type was specialized to a non-native JsEnum, use the boxed type in the bridge
         // parameter.
         parameterDescriptors.add(
@@ -990,7 +990,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
       // Kotlin bridges to method that specializes the return to primitive.
       return bridgeReturnTypeDescriptor;
     }
-    if (AstUtils.isNonNativeJsEnum(targetReturnTypeDescriptor)
+    if (AstUtils.needsJsEnumBoxingBridges(targetReturnTypeDescriptor)
         && bridgeMethodDescriptor.getDeclarationDescriptor().getReturnTypeDescriptor()
             != targetReturnTypeDescriptor) {
       // Return type descriptor specialized to non native enum, expose it with the proper boxed

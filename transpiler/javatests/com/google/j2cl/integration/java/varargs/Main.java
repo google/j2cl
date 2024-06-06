@@ -306,6 +306,14 @@ public class Main {
     return "overloaded(String, Object...)";
   }
 
+  private static String overloadedEqualNumParams(Object x, Object y) {
+    return "overloadedEqualNumParams(Object, Object)";
+  }
+
+  private static String overloadedEqualNumParams(String x, Object... y) {
+    return "overloadedEqualNumParams(String, Object...)";
+  }
+
   private static String overloaded(long l) {
     return "overloaded(long)";
   }
@@ -314,12 +322,27 @@ public class Main {
     return "overloaded(long, long...)";
   }
 
-  // TODO(b/343280534): Enable when J2KT corrects the overload resolution.
-  @KtDisabled
   private static void testVarargs_overloaded() {
     assertEquals("overloaded(Object)", overloaded("foo"));
     assertEquals("overloaded(Object)", overloaded((Object) "foo"));
     assertEquals("overloaded(String, Object...)", overloaded("foo", "bar"));
+    assertEquals(
+        "overloadedEqualNumParams(Object, Object)", overloadedEqualNumParams("foo", "bar"));
+    assertEquals(
+        "overloadedEqualNumParams(Object, Object)",
+        overloadedEqualNumParams((Object) "foo", "bar"));
+    assertEquals(
+        "overloadedEqualNumParams(String, Object...)",
+        overloadedEqualNumParams("foo", new String[] {"bar"}));
+    assertEquals(
+        "overloadedEqualNumParams(String, Object...)",
+        overloadedEqualNumParams("foo", new Object[] {"bar", "buzz"}));
+    assertEquals(
+        "overloadedEqualNumParams(Object, Object)",
+        overloadedEqualNumParams((Object) "foo", new String[] {"bar"}));
+    assertEquals(
+        "overloadedEqualNumParams(String, Object...)",
+        overloadedEqualNumParams("foo", "bar", "buzz"));
     assertEquals("overloaded(long)", overloaded(1));
     assertEquals("overloaded(Object)", overloaded(Long.valueOf(1L)));
     assertEquals("overloaded(long)", overloaded(1L));

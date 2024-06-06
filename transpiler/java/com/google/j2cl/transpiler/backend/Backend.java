@@ -23,6 +23,7 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinGeneratorStage;
 import com.google.j2cl.transpiler.backend.wasm.WasmGeneratorStage;
 import com.google.j2cl.transpiler.passes.AddAbstractMethodStubs;
 import com.google.j2cl.transpiler.passes.AddBridgeMethods;
+import com.google.j2cl.transpiler.passes.AddDisambiguatingOverloadResolutionCastsJ2kt;
 import com.google.j2cl.transpiler.passes.AddDisambiguatingSuperMethodForwardingStubs;
 import com.google.j2cl.transpiler.passes.AddEntryPointBridgesWasm;
 import com.google.j2cl.transpiler.passes.AddEnumImplicitMethods;
@@ -701,6 +702,7 @@ public enum Backend {
           NormalizeLambdaExpressionsJ2kt::new,
           AddJavaLangObjectForwardingMethods::new,
           AddDisambiguatingSuperMethodForwardingStubs::new,
+          AddDisambiguatingOverloadResolutionCastsJ2kt::new,
           AddVisibilityMethodBridgesJ2kt::new,
           NormalizeSynchronizedMethods::new,
           PropagateNullabilityJ2kt::new,
