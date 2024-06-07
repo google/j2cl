@@ -352,8 +352,14 @@ public interface Map<K, V> {
   // Note: Explicit equals override helps an experimental JSpecify nullness checker.
   boolean equals(Object o);
 
+  @SuppressWarnings({"rawtypes","unchecked"})
   static <K,V> Map<K,V> copyOf(Map<? extends K,? extends V> map) {
-    return map.entrySet().stream().collect(Collectors.toUnmodifiableMap(Entry::getKey,
-        Entry::getValue));
+    Object[] entries = new Object[map.size() * 2];
+    int a = 0;
+    for (Entry<? extends K,? extends V> entry : map.entrySet()) {
+      entries[a++] = entry.getKey();
+      entries[a++] = entry.getValue();
+    }
+    return Collections.internalMapOf(entries);
   }
 }

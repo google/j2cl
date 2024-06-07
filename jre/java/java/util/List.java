@@ -168,6 +168,6 @@ public interface List<E> extends Collection<E> {
   @JsNonNull List<E> subList(int fromIndex, int toIndex);
 
   static <E> List<E> copyOf(Collection<? extends E> coll) {
-    return coll.stream().collect(Collectors.toUnmodifiableList());
+    return Collections.internalListOf((E[]) coll.toArray());
   }
 }

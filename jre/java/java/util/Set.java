@@ -20,6 +20,7 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import java.util.stream.Collectors;
 
+import javaemul.internal.ArrayHelper;
 import jsinterop.annotations.JsIgnore;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
@@ -113,6 +114,6 @@ public interface Set<E> extends Collection<E> {
   }
 
   static <E> Set<E> copyOf(Collection<? extends E> coll) {
-    return coll.stream().collect(Collectors.toUnmodifiableSet());
+    return Collections.internalSetOf((E[]) new HashSet<>(coll).toArray());
   }
 }
