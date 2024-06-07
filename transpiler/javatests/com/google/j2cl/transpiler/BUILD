@@ -134,7 +134,12 @@ java_test(
     data = [
         ":jre_bundle_deploy.jar",
         ":jre_bundle_deploy-src.jar",
+        ":ktstdlib_bundle_deploy.jar",
         ":libjre_native.jar",
+        "//samples/box2d/src/main/kotlin/idiomatic:libbox2d_kt_library-j2cl-src.jar",
+    ],
+    runtime_deps = [
+        "//transpiler/java/com/google/j2cl/transpiler/frontend/kotlin",
     ],
     deps = [
         ":TranspilerTester",

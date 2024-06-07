@@ -60,6 +60,21 @@ public class TranspilerTester {
         .setClassPathArg("transpiler/javatests/com/google/j2cl/transpiler/jre_bundle_deploy.jar");
   }
 
+  /** Creates a new transpiler tester initialized with Kotlin defaults. */
+  public static TranspilerTester newTesterWithKotlinDefaults() {
+    return newTester()
+        .addArgs("-frontend", "KOTLIN")
+        .addArgs("-kotlincOptions", "-Xmulti-platform")
+        // J2CL Koltin frontend is based on Koltin/JVM compiler that requires that deps and the
+        // current compilation use the same JVM target in order to inline bytecode. Even we don't
+        // use the bytecode inliner, kotlinc fails in the early stage if we do not specify the right
+        // JVM target.
+        // Note: For Bazel compilation, this is provided through toolchain defaults.
+        .addArgs("-kotlincOptions", "-jvm-target=11")
+        .setClassPathArg(
+            "transpiler/javatests/com/google/j2cl/transpiler/ktstdlib_bundle_deploy.jar");
+  }
+
   /** Creates a new transpiler tester initialized with WASM defaults. */
   public static TranspilerTester newTesterWithDefaultsWasm() {
     return newTester()

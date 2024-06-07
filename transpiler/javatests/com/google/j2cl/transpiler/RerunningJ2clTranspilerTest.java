@@ -14,6 +14,7 @@
 package com.google.j2cl.transpiler;
 
 import static com.google.j2cl.transpiler.TranspilerTester.newTesterWithDefaults;
+import static com.google.j2cl.transpiler.TranspilerTester.newTesterWithKotlinDefaults;
 
 import com.google.j2cl.transpiler.TranspilerTester.TranspileResult;
 import junit.framework.TestCase;
@@ -30,6 +31,23 @@ public class RerunningJ2clTranspilerTest extends TestCase {
         .setNativeSourcePathArg("transpiler/javatests/com/google/j2cl/transpiler/libjre_native.jar")
         .addSourcePathArg(
             "transpiler/javatests/com/google/j2cl/transpiler/jre_bundle_deploy-src.jar")
+        .assertTranspileSucceeds()
+        .assertNoWarnings();
+  }
+
+  public void testCompileKotlinStdLibTwice() throws Exception {
+    // Unlike for the java frontend test that use the JRE, we are not using Kotlin stdlib for
+    // replicating the test for the Koltin frontend. Compiling stdlib is challenging due to the
+    // complexity of stdlib compilation(special flags, builtins, etc.) and could require temporary
+    // additional flag when we migrate  to new Kotlinc version.
+    // We decided to use box2d instead that is complex enough for the purpose of this test.
+    compileKotlinBox2D().assertOutputFilesAreSame(compileKotlinBox2D());
+  }
+
+  private static TranspileResult compileKotlinBox2D() throws Exception {
+    return newTesterWithKotlinDefaults()
+        .addSourcePathArg(
+            "samples/box2d/src/main/kotlin/idiomatic/libbox2d_kt_library-j2cl-src.jar")
         .assertTranspileSucceeds()
         .assertNoWarnings();
   }
