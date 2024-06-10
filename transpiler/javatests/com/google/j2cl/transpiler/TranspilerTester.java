@@ -76,7 +76,7 @@ public class TranspilerTester {
   }
 
   /** Creates a new transpiler tester initialized with WASM defaults. */
-  public static TranspilerTester newTesterWithDefaultsWasm() {
+  public static TranspilerTester newTesterWithWasmDefaults() {
     return newTester()
         .addArgs("-backend", "WASM")
         .setClassPathArg(

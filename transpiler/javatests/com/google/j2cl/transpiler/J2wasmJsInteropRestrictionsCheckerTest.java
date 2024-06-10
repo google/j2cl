@@ -13,7 +13,7 @@
  */
 package com.google.j2cl.transpiler;
 
-import static com.google.j2cl.transpiler.TranspilerTester.newTesterWithDefaultsWasm;
+import static com.google.j2cl.transpiler.TranspilerTester.newTesterWithWasmDefaults;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.transpiler.TranspilerTester.TranspileResult;
@@ -269,13 +269,13 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
 
   @CanIgnoreReturnValue
   private TranspileResult assertTranspileSucceeds(String compilationUnitName, String... code) {
-    return newTesterWithDefaultsWasm()
+    return newTesterWithWasmDefaults()
         .addCompilationUnit(compilationUnitName, code)
         .assertTranspileSucceeds();
   }
 
   private TranspileResult assertTranspileFails(String compilationUnitName, String... code) {
-    return newTesterWithDefaultsWasm()
+    return newTesterWithWasmDefaults()
         .addCompilationUnit(compilationUnitName, code)
         .assertTranspileFails();
   }
