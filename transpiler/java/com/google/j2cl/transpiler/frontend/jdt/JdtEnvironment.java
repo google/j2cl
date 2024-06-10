@@ -414,16 +414,7 @@ public class JdtEnvironment {
   private TypeDescriptor getUpperBoundTypeDescriptor(
       ITypeBinding typeBinding, boolean inNullMarkedScope) {
     if (typeBinding.isWildcardType()) {
-      // Distinguish between "? extends Object" and "?" to apply the right nullability to the bound.
-      // This is fragile, but the observation is that in these cases .getBound() is null and
-      // there is only one type bound in .getTypeBounds() and that is j.l.Object.
-      // For a wildcard .getBound() might be null in scenarios where there is a bound, and in
-      // those cases .getTypeBounds() returns the actual bound.
-      boolean isUnbounded =
-          typeBinding.getBound() == null
-              && typeBinding.getTypeBounds().length == 1
-              && typeBinding.getTypeBounds()[0].getQualifiedName().equals("java.lang.Object");
-      if (isUnbounded) {
+      if (isUnbounded(typeBinding)) {
         return TypeDescriptors.get().javaLangObject;
       }
 
@@ -452,6 +443,33 @@ public class JdtEnvironment {
           bounds[0], bounds[0].getTypeAnnotations(), inNullMarkedScope);
     }
     return createIntersectionType(typeBinding, inNullMarkedScope);
+  }
+
+  /**
+   * Tries to distinguish between "? extends Object" and "?" to apply the right nullability to the
+   * bound.
+   */
+  private boolean isUnbounded(ITypeBinding typeBinding) {
+    ITypeBinding bound = typeBinding.getBound();
+
+    if (bound != null) {
+      return false;
+    }
+
+    // For a wildcard .getBound() might be null in scenarios where there is a bound, and in
+    // those cases .getTypeBounds() returns the actual bound.
+    ITypeBinding[] typeBounds = typeBinding.getTypeBounds();
+    if (typeBounds == null || typeBounds.length == 0) {
+      return true;
+    }
+
+    if (typeBounds.length == 1 && typeBounds[0].getQualifiedName().equals("java.lang.Object")) {
+      // This is fragile, but the observation is that in these cases .getBound() is null and
+      // there is only one type bound in .getTypeBounds() and that is j.l.Object.
+      return true;
+    }
+
+    return false;
   }
 
   private static TypeDescriptor withNullability(TypeDescriptor typeDescriptor, boolean nullable) {
