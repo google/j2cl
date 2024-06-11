@@ -51,7 +51,8 @@ public final class Double extends Number implements Comparable<Double> {
     return doubleToRawLongBits(value);
   }
 
-  public static long doubleToRawLongBits(double value) {
+  // This method is kept private since it returns canonical NaN in Firefox.
+  private static long doubleToRawLongBits(double value) {
     return Platform.doubleToRawLongBits(value);
   }
 
