@@ -10,6 +10,7 @@ package com.google.j2cl.transpiler.frontend.kotlin.lower
 import com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_CONSTRUCTOR_ANNOTATION_NAME
 import com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_METHOD_ANNOTATION_NAME
 import com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_PROPERTY_ANNOTATION_NAME
+import com.google.j2cl.transpiler.frontend.kotlin.ir.copyAnnotationsWhen
 import org.jetbrains.kotlin.backend.common.lower.DefaultArgumentStubGenerator
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
 import org.jetbrains.kotlin.backend.jvm.JvmLoweredDeclarationOrigin
@@ -18,7 +19,6 @@ import org.jetbrains.kotlin.backend.jvm.ir.getJvmVisibilityOfDefaultArgumentStub
 import org.jetbrains.kotlin.ir.declarations.IrConstructor
 import org.jetbrains.kotlin.ir.declarations.IrFunction
 import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
-import org.jetbrains.kotlin.ir.util.copyAnnotationsWhen
 import org.jetbrains.kotlin.ir.util.isAnnotation
 import org.jetbrains.kotlin.name.FqName
 
@@ -33,7 +33,7 @@ class JvmDefaultArgumentStubGenerator(context: JvmBackendContext) :
     context = context,
     factory = JvmDefaultArgumentFunctionFactory(context),
     skipInlineMethods = false,
-    skipExternalMethods = false
+    skipExternalMethods = false,
   ) {
   override fun defaultArgumentStubVisibility(function: IrFunction) =
     function.getJvmVisibilityOfDefaultArgumentStub()

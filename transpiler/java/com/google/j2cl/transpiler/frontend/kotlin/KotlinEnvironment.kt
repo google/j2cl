@@ -122,7 +122,7 @@ import org.jetbrains.kotlin.ir.util.isVararg
 import org.jetbrains.kotlin.ir.util.kotlinFqName
 import org.jetbrains.kotlin.ir.util.packageFqName
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
-import org.jetbrains.kotlin.ir.util.resolveFakeOverride
+import org.jetbrains.kotlin.ir.util.resolveFakeOverrideMaybeAbstractOrFail
 import org.jetbrains.kotlin.ir.util.superTypes
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.FqNameUnsafe
@@ -483,7 +483,7 @@ class KotlinEnvironment(
     if (functionDeclaration.isFakeOverride) {
       // Resolve the target when it is a synthetic bridge inserted by the frontend.
       resolvedFunctionDeclaration =
-        (functionDeclaration as IrSimpleFunction).resolveFakeOverride(allowAbstract = true)!!
+        (functionDeclaration as IrSimpleFunction).resolveFakeOverrideMaybeAbstractOrFail()
 
       // Remap type parameters from the fake override function to the resolved function.
       cumulativeTypeArgumentsByTypeParameter =
@@ -549,12 +549,7 @@ class KotlinEnvironment(
     for (superType in irTypes) {
       // Apply the current parameterization so that it gets propagated when taking the super types.
       val parameterizedSuperType =
-        IrTypeSubstitutor(
-            cumulativeTypeArgumentsByTypeParameter.keys.toList(),
-            cumulativeTypeArgumentsByTypeParameter.values.toList(),
-            pluginContext.irBuiltIns,
-          )
-          .substitute(superType)
+        IrTypeSubstitutor(cumulativeTypeArgumentsByTypeParameter).substitute(superType)
       cumulativeTypeArgumentsByTypeParameter += parameterizedSuperType.typeSubstitutionMap
       cumulativeTypeArgumentsByTypeParameter =
         propagateSubstitutions(

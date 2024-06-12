@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
+import org.jetbrains.kotlin.ir.declarations.IrAttributeContainer
 import org.jetbrains.kotlin.ir.declarations.IrVariable
 import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.expressions.IrLoop
@@ -29,11 +30,15 @@ class IrForLoop(
   override val startOffset: Int,
   override val endOffset: Int,
   override var type: IrType,
-  override var origin: IrStatementOrigin?
+  override var origin: IrStatementOrigin?,
 ) : IrLoop() {
   override lateinit var condition: IrExpression
+  override var body: IrExpression? = null
   lateinit var initializers: MutableList<IrVariable>
   lateinit var updates: MutableList<IrExpression>
+  override var label: String? = null
+  override var attributeOwnerId: IrAttributeContainer = this
+  override var originalBeforeInline: IrAttributeContainer? = null
 
   override fun <R, D> accept(visitor: IrElementVisitor<R, D>, data: D): R =
     visitor.visitLoop(this, data)

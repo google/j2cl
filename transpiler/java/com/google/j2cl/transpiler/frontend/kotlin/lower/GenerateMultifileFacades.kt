@@ -18,7 +18,6 @@ package com.google.j2cl.transpiler.frontend.kotlin.lower
 
 import org.jetbrains.kotlin.backend.common.ClassLoweringPass
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
-import org.jetbrains.kotlin.backend.common.lower
 import org.jetbrains.kotlin.backend.common.lower.createIrBuilder
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
 import org.jetbrains.kotlin.backend.jvm.JvmLoweredDeclarationOrigin
@@ -48,8 +47,8 @@ import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 import org.jetbrains.kotlin.load.java.JavaDescriptorVisibilities
-import org.jetbrains.kotlin.name.JvmNames
-import org.jetbrains.kotlin.name.JvmNames.JVM_SYNTHETIC_ANNOTATION_FQ_NAME
+import org.jetbrains.kotlin.name.JvmStandardClassIds
+import org.jetbrains.kotlin.name.JvmStandardClassIds.JVM_SYNTHETIC_ANNOTATION_FQ_NAME
 import org.jetbrains.kotlin.resolve.jvm.diagnostics.JvmBackendErrors
 
 /**
@@ -95,7 +94,7 @@ private fun generateMultifileFacades(
   module: IrModuleFragment,
   context: JvmBackendContext,
   shouldGeneratePartHierarchy: Boolean,
-  functionDelegates: MutableMap<IrSimpleFunction, IrSimpleFunction>
+  functionDelegates: MutableMap<IrSimpleFunction, IrSimpleFunction>,
 ): List<IrFile> =
   context.multifileFacadesToAdd.map { (jvmClassName, unsortedPartClasses) ->
     val partClasses = unsortedPartClasses.sortedBy(IrClass::name)
@@ -114,7 +113,7 @@ private fun generateMultifileFacades(
       IrFileImpl(
         fileEntry,
         EmptyPackageFragmentDescriptor(module.descriptor, kotlinPackageFqName),
-        module
+        module,
       )
 
     context.log {
@@ -165,7 +164,7 @@ private fun generateMultifileFacades(
               // non-@JvmSynthetic part.
               val annotation =
                 partFile.annotations.singleOrNull {
-                  it.isAnnotationWithEqualFqName(JvmNames.JVM_MULTIFILE_CLASS)
+                  it.isAnnotationWithEqualFqName(JvmStandardClassIds.JVM_MULTIFILE_CLASS)
                 }
               context.ktDiagnosticReporter
                 .at(annotation ?: partFile, partFile)
@@ -204,7 +203,7 @@ private fun generateMultifileFacades(
             context,
             facadeClass,
             correspondingProperties,
-            shouldGeneratePartHierarchy
+            shouldGeneratePartHierarchy,
           )
         if (newMember != null) {
           functionDelegates[member] = newMember
@@ -222,7 +221,7 @@ private fun generateMultifileFacades(
 // The multifile facade should inherit from that part class.
 private fun modifyMultifilePartsForHierarchy(
   context: JvmBackendContext,
-  parts: List<IrClass>
+  parts: List<IrClass>,
 ): IrClass {
   val superClasses = listOf(context.irBuiltIns.anyClass.owner) + parts.subList(0, parts.size - 1)
 
@@ -248,7 +247,7 @@ private fun modifyMultifilePartsForHierarchy(
 private fun moveFieldsOfConstProperties(
   partClass: IrClass,
   facadeClass: IrClass,
-  correspondingProperties: CorrespondingPropertyCache
+  correspondingProperties: CorrespondingPropertyCache,
 ) {
   partClass.declarations.transformFlat { member ->
     if (member is IrField && member.shouldMoveToFacade()) {
@@ -273,7 +272,7 @@ private fun IrSimpleFunction.createMultifileDelegateIfNeeded(
   context: JvmBackendContext,
   facadeClass: IrClass,
   correspondingProperties: CorrespondingPropertyCache,
-  shouldGeneratePartHierarchy: Boolean
+  shouldGeneratePartHierarchy: Boolean,
 ): IrSimpleFunction? {
   val target = this
 
@@ -283,7 +282,7 @@ private fun IrSimpleFunction.createMultifileDelegateIfNeeded(
   if (
     DescriptorVisibilities.isPrivate(originalVisibility) ||
       name == StaticInitializersLowering.clinitName ||
-      origin == JvmLoweredDeclarationOrigin.SYNTHETIC_ACCESSOR ||
+      origin == IrDeclarationOrigin.SYNTHETIC_ACCESSOR ||
       origin == JvmLoweredDeclarationOrigin.INLINE_LAMBDA ||
       origin == IrDeclarationOrigin.LOCAL_FUNCTION_FOR_LAMBDA ||
       origin == IrDeclarationOrigin.PROPERTY_DELEGATE ||
@@ -318,7 +317,7 @@ private fun IrSimpleFunction.createMultifileDelegateIfNeeded(
   function.returnType =
     target.returnType.substitute(
       target.typeParameters,
-      function.typeParameters.map { it.defaultType }
+      function.typeParameters.map { it.defaultType },
     )
   function.parent = facadeClass
 
@@ -351,7 +350,7 @@ private fun IrSimpleFunction.createMultifileDelegateIfNeeded(
 
 private class CorrespondingPropertyCache(
   private val context: JvmBackendContext,
-  private val facadeClass: IrClass
+  private val facadeClass: IrClass,
 ) {
   private var cache: MutableMap<IrProperty, IrProperty>? = null
 
@@ -396,7 +395,7 @@ private class UpdateFunctionCallSites(
 
 private class UpdateConstantFacadePropertyReferences(
   private val context: JvmBackendContext,
-  private val shouldGeneratePartHierarchy: Boolean
+  private val shouldGeneratePartHierarchy: Boolean,
 ) : ClassLoweringPass {
   override fun lower(irClass: IrClass) {
     val facadeClass = getReplacementFacadeClassOrNull(irClass) ?: return
@@ -413,7 +412,7 @@ private class UpdateConstantFacadePropertyReferences(
             expression.endOffset,
             facadeClass.defaultType,
             facadeClass.symbol,
-            facadeClass.defaultType
+            facadeClass.defaultType,
           )
       }
     )

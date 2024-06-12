@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2021 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
  */
 
@@ -12,6 +12,9 @@ import org.jetbrains.kotlin.backend.common.ScopeWithIr
 import org.jetbrains.kotlin.backend.common.ir.Symbols
 import org.jetbrains.kotlin.backend.common.ir.isPure
 import org.jetbrains.kotlin.backend.common.lower.InnerClassesSupport
+import org.jetbrains.kotlin.backend.common.lower.LoweredStatementOrigins.INLINED_FUNCTION_ARGUMENTS
+import org.jetbrains.kotlin.backend.common.lower.LoweredStatementOrigins.INLINED_FUNCTION_DEFAULT_ARGUMENTS
+import org.jetbrains.kotlin.backend.common.lower.LoweredStatementOrigins.INLINED_FUNCTION_REFERENCE
 import org.jetbrains.kotlin.backend.common.lower.at
 import org.jetbrains.kotlin.backend.common.lower.createIrBuilder
 import org.jetbrains.kotlin.builtins.PrimitiveType
@@ -28,7 +31,6 @@ import org.jetbrains.kotlin.ir.declarations.*
 import org.jetbrains.kotlin.ir.expressions.*
 import org.jetbrains.kotlin.ir.expressions.impl.*
 import org.jetbrains.kotlin.ir.symbols.IrFunctionSymbol
-import org.jetbrains.kotlin.ir.symbols.IrSymbol
 import org.jetbrains.kotlin.ir.symbols.IrValueSymbol
 import org.jetbrains.kotlin.ir.symbols.impl.IrReturnableBlockSymbolImpl
 import org.jetbrains.kotlin.ir.types.*
@@ -44,79 +46,68 @@ import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
 // function in the jvm stdlib. The call to these functions are directly handled in the
 // CompilationUnitBuilder
 //
-// Copied and modified from org.jetbrains.kotlin.backend.common.lower.inline.FunctionInlining
+// Copied and modified from org.jetbrains.kotlin.ir.inline.FunctionInlining
 
-fun IrValueParameter.isInlineParameter(type: IrType = this.type) =
-  index >= 0 && !isNoinline && !type.isNullable() && (type.isFunction() || type.isSuspendFunction())
+abstract class InlineFunctionResolver {
+  open val allowExternalInlining: Boolean
+    get() = false
 
-fun IrExpression.isAdaptedFunctionReference() =
-  this is IrBlock && this.origin == IrStatementOrigin.ADAPTED_FUNCTION_REFERENCE
+  private val IrFunction.needsInlining
+    get() = this.isInline && (allowExternalInlining || !this.isExternal)
 
-interface InlineFunctionResolver {
-  fun getFunctionDeclaration(symbol: IrFunctionSymbol): IrFunction
+  open fun getFunctionDeclaration(symbol: IrFunctionSymbol): IrFunction? {
+    if (shouldExcludeFunctionFromInlining(symbol)) return null
 
-  fun getFunctionSymbol(irFunction: IrFunction): IrFunctionSymbol
+    val owner = symbol.owner
+    return (owner as? IrSimpleFunction)?.resolveFakeOverride() ?: owner
+  }
 
-  fun shouldExcludeFunctionFromInlining(symbol: IrFunctionSymbol): Boolean {
-    return Symbols.isLateinitIsInitializedPropertyGetter(symbol) ||
+  protected open fun shouldExcludeFunctionFromInlining(symbol: IrFunctionSymbol): Boolean {
+    return !symbol.owner.needsInlining ||
+      Symbols.isLateinitIsInitializedPropertyGetter(symbol) ||
       Symbols.isTypeOfIntrinsic(symbol)
+  }
+
+  companion object {
+    val TRIVIAL = object : InlineFunctionResolver() {}
   }
 }
 
-fun IrFunction.isTopLevelInPackage(name: String, packageName: String): Boolean {
-  if (name != this.name.asString()) return false
+open class InlineFunctionResolverReplacingCoroutineIntrinsics(
+  open val context: CommonBackendContext
+) : InlineFunctionResolver() {
+  override fun getFunctionDeclaration(symbol: IrFunctionSymbol): IrFunction? {
 
-  val containingDeclaration = parent as? IrPackageFragment ?: return false
-  val packageFqName = containingDeclaration.packageFqName.asString()
-  return packageName == packageFqName
-}
-
-fun IrFunction.isBuiltInSuspendCoroutineUninterceptedOrReturn(): Boolean =
-  isTopLevelInPackage(
-    "suspendCoroutineUninterceptedOrReturn",
-    StandardNames.COROUTINES_INTRINSICS_PACKAGE_FQ_NAME.asString()
-  )
-
-open class DefaultInlineFunctionResolver(open val context: CommonBackendContext) :
-  InlineFunctionResolver {
-  override fun getFunctionDeclaration(symbol: IrFunctionSymbol): IrFunction {
     // MODIFIED BY GOOGLE
     // Remove the support of kotlin coroutines. The reason is that the JvmSymbols from the
     // JvmContext does not implement the symbols for handling coroutine.
     // Note that the special handling for coroutines in DefaultInlineFunctionResolver are mentioned
     // as being hacky and those hacks will be removed when the coroutines intrinsics are fixed.
     // Original code:
-    // val function = symbol.owner
+    //  val function = super.getFunctionDeclaration(symbol) ?: return null
     // // TODO: Remove these hacks when coroutine intrinsics are fixed.
-    // return when {
-    //   function.isBuiltInSuspendCoroutineUninterceptedOrReturn() ->
-    //     context.ir.symbols.suspendCoroutineUninterceptedOrReturn.owner
-    //   symbol == context.ir.symbols.coroutineContextGetter ->
-    //     context.ir.symbols.coroutineGetContext.owner
-    //   else -> (symbol.owner as? IrSimpleFunction)?.resolveFakeOverride() ?: symbol.owner
-    // }
+    //     return when {
+    //       function.isBuiltInSuspendCoroutineUninterceptedOrReturn() ->
+    //         context.ir.symbols.suspendCoroutineUninterceptedOrReturn.owner
+    //       symbol == context.ir.symbols.coroutineContextGetter ->
+    //         context.ir.symbols.coroutineGetContext.owner
+    //       else -> function
+    //     }
     return (symbol.owner as? IrSimpleFunction)?.resolveFakeOverride() ?: symbol.owner
     // END OF MODIFICATIONS
-  }
 
-  override fun getFunctionSymbol(irFunction: IrFunction): IrFunctionSymbol {
-    return irFunction.symbol
   }
 }
 
 class FunctionInlining(
   val context: CommonBackendContext,
-  private val inlineFunctionResolver: InlineFunctionResolver =
-    DefaultInlineFunctionResolver(context),
+  private val inlineFunctionResolver: InlineFunctionResolver = InlineFunctionResolver.TRIVIAL,
   private val innerClassesSupport: InnerClassesSupport? = null,
   private val insertAdditionalImplicitCasts: Boolean = false,
-  private val alwaysCreateTemporaryVariablesForArguments: Boolean = false,
   private val regenerateInlinedAnonymousObjects: Boolean = false,
-  private val inlineArgumentsWithTheirOriginalTypeAndOffset: Boolean = false,
-  private val allowExternalInlining: Boolean = false,
-  private val useTypeParameterUpperBound: Boolean = false
 ) : IrElementTransformerVoidWithContext(), BodyLoweringPass {
   private var containerScope: ScopeWithIr? = null
+  private val elementsWithLocationToPatch = hashSetOf<IrGetValue>()
 
   override fun lower(irBody: IrBody, container: IrDeclaration) {
     // TODO container: IrSymbolDeclaration
@@ -131,23 +122,17 @@ class FunctionInlining(
 
   override fun visitFunctionAccess(expression: IrFunctionAccessExpression): IrExpression {
     expression.transformChildrenVoid(this)
-    val callee =
+    val calleeSymbol =
       when (expression) {
-        is IrCall -> expression.symbol.owner
-        is IrConstructorCall -> expression.symbol.owner
+        is IrCall -> expression.symbol
+        is IrConstructorCall -> expression.symbol
         else -> return expression
       }
-    if (
-      !callee.needsInlining ||
-        inlineFunctionResolver.shouldExcludeFunctionFromInlining(callee.symbol)
-    )
-      return expression
-
     // MODIFIED BY GOOGLE
     // arrayOf functions are inline intrinsic functions in the jvm stdlib and should not be inlined.
     // The calls to these functions are directly handled by our CompilationUnitBuilder.
     // TODO(b/256856926): Remove this code when arrayOf() functions are no longer inlineable.
-    if (callee.isArrayOf()) {
+    if (calleeSymbol.owner.isArrayOf()) {
       return expression
     }
     // END OF MODIFICATIONS
@@ -156,12 +141,13 @@ class FunctionInlining(
     // String?.plus() functions are inline intrinsic functions in the stdlib and should not be
     // inlined. The calls to these functions are directly handled by our CompilationUnitBuilder.
     // TODO(b/256856926): Remove this code when String?.plus() function is no longer inlineable.
-    if (context.irBuiltIns.extensionStringPlus == callee.symbol) {
+    if (context.irBuiltIns.extensionStringPlus == calleeSymbol.owner.symbol) {
       return expression
     }
     // END OF MODIFICATIONS
-    val actualCallee = inlineFunctionResolver.getFunctionDeclaration(callee.symbol)
-    if (actualCallee.body == null) {
+
+    val actualCallee = inlineFunctionResolver.getFunctionDeclaration(calleeSymbol)
+    if (actualCallee?.body == null) {
       return expression
     }
 
@@ -197,15 +183,12 @@ class FunctionInlining(
     return this
   }
 
-  private val IrFunction.needsInlining
-    get() = this.isInline && (allowExternalInlining || !this.isExternal)
-
   private inner class Inliner(
     val callSite: IrFunctionAccessExpression,
     val callee: IrFunction,
     val currentScope: ScopeWithIr,
     val parent: IrDeclarationParent?,
-    val context: CommonBackendContext
+    val context: CommonBackendContext,
   ) {
 
     val copyIrElement = run {
@@ -215,13 +198,22 @@ class FunctionInlining(
         (0 until callSite.typeArgumentsCount).associate {
           typeParameters[it].symbol to callSite.getTypeArgument(it)
         }
-      DeepCopyIrTreeWithSymbolsForInliner(typeArguments, parent)
+      DeepCopyIrTreeWithSymbolsForInliner(
+        typeArguments,
+        parent,
+        // MODIFIED BY GOOGLE
+        // Unlike other platforms, we still need to carry over type parameter when we perform the
+        // inlining of function with non-reified type parameter.
+        NonReifiedTypeParameterRemappingMode.SUBSTITUTE,
+        // original code:
+        //  NonReifiedTypeParameterRemappingMode.ERASE,
+        // END OF MODIFICATIONS
+      )
     }
 
     val substituteMap = mutableMapOf<IrValueParameter, IrExpression>()
 
-    fun inline() =
-      inlineFunction(callSite, callee, inlineFunctionResolver.getFunctionSymbol(callee).owner, true)
+    fun inline() = inlineFunction(callSite, callee, callee.originalFunction, true)
 
     private fun <E : IrElement> E.copy(): E {
       @Suppress("UNCHECKED_CAST") return copyIrElement.copy(this) as E
@@ -231,7 +223,7 @@ class FunctionInlining(
       callSite: IrFunctionAccessExpression,
       callee: IrFunction,
       originalInlinedElement: IrElement,
-      performRecursiveInline: Boolean
+      performRecursiveInline: Boolean,
     ): IrReturnableBlock {
       val copiedCallee =
         callee.copy().apply {
@@ -270,7 +262,7 @@ class FunctionInlining(
           inlineCall = callSite,
           inlinedElement = originalInlinedElement,
           origin = null,
-          statements = evaluationStatements + newStatements
+          statements = evaluationStatements + newStatements,
         )
 
       // Note: here we wrap `IrInlinedFunctionBlock` inside `IrReturnableBlock` because such way it
@@ -316,8 +308,8 @@ class FunctionInlining(
         ) // Default argument can contain subjects for substitution.
 
         val ret =
-          if (argument is IrGetValueWithoutLocation)
-            argument.withLocation(newExpression.startOffset, newExpression.endOffset)
+          if (argument is IrGetValue && argument in elementsWithLocationToPatch)
+            argument.copyWithOffsets(newExpression.startOffset, newExpression.endOffset)
           else argument.copy()
 
         return ret.doImplicitCastIfNeededTo(newExpression.type)
@@ -329,7 +321,7 @@ class FunctionInlining(
           return IrCompositeImpl(
             expression.startOffset,
             expression.endOffset,
-            context.irBuiltIns.unitType
+            context.irBuiltIns.unitType,
           )
         }
 
@@ -359,7 +351,7 @@ class FunctionInlining(
 
       fun inlineFunctionExpression(
         irCall: IrCall,
-        irFunctionExpression: IrFunctionExpression
+        irFunctionExpression: IrFunctionExpression,
       ): IrExpression {
         // Inline the lambda. Lambda parameters will be substituted with lambda arguments.
         val newExpression =
@@ -370,22 +362,22 @@ class FunctionInlining(
 
       private fun inlineField(
         invokeCall: IrCall,
-        propertyReference: IrPropertyReference
+        propertyReference: IrPropertyReference,
       ): IrExpression {
         return wrapInStubFunction(invokeCall, invokeCall, propertyReference)
       }
 
       private fun inlinePropertyReference(
         expression: IrCall,
-        propertyReference: IrPropertyReference
+        propertyReference: IrPropertyReference,
       ): IrExpression {
         val getterCall =
           IrCallImpl.fromSymbolOwner(
             expression.startOffset,
             expression.endOffset,
-            expression.type,
+            propertyReference.getter!!.owner.returnType,
             propertyReference.getter!!,
-            origin = INLINED_FUNCTION_REFERENCE
+            origin = INLINED_FUNCTION_REFERENCE,
           )
 
         fun tryToGetArg(i: Int): IrExpression? {
@@ -396,15 +388,18 @@ class FunctionInlining(
         val receiverFromField =
           propertyReference.dispatchReceiver ?: propertyReference.extensionReceiver
         getterCall.dispatchReceiver =
-          getterCall.symbol.owner.dispatchReceiverParameter?.let {
-            receiverFromField ?: tryToGetArg(0)
+          getterCall.symbol.owner.dispatchReceiverParameter?.let { dispatchReceiverParam ->
+            val dispatchReceiverArgument = receiverFromField ?: tryToGetArg(0)
+            dispatchReceiverArgument?.doImplicitCastIfNeededTo(dispatchReceiverParam.type)
           }
         getterCall.extensionReceiver =
-          getterCall.symbol.owner.extensionReceiverParameter?.let {
-            when (getterCall.symbol.owner.dispatchReceiverParameter) {
-              null -> receiverFromField ?: tryToGetArg(0)
-              else -> tryToGetArg(if (receiverFromField != null) 0 else 1)
-            }
+          getterCall.symbol.owner.extensionReceiverParameter?.let { extensionReceiverParam ->
+            val extensionReceiverArgument =
+              when (getterCall.symbol.owner.dispatchReceiverParameter) {
+                null -> receiverFromField ?: tryToGetArg(0)
+                else -> tryToGetArg(if (receiverFromField != null) 0 else 1)
+              }
+            extensionReceiverArgument?.doImplicitCastIfNeededTo(extensionReceiverParam.type)
           }
 
         return wrapInStubFunction(super.visitExpression(getterCall), expression, propertyReference)
@@ -413,7 +408,7 @@ class FunctionInlining(
       private fun wrapInStubFunction(
         inlinedCall: IrExpression,
         invokeCall: IrFunctionAccessExpression,
-        reference: IrCallableReference<*>
+        reference: IrCallableReference<*>,
       ): IrReturnableBlock {
         // Note: This function is not exist in tree. It is appeared only in `IrInlinedFunctionBlock`
         // as intermediate callee.
@@ -440,7 +435,7 @@ class FunctionInlining(
                         UNDEFINED_OFFSET,
                         field.symbol,
                         field.type,
-                        fieldReceiver
+                        fieldReceiver,
                       )
                     } else {
                       IrReturnImpl(
@@ -448,7 +443,7 @@ class FunctionInlining(
                         UNDEFINED_OFFSET,
                         context.irBuiltIns.nothingType,
                         symbol,
-                        inlinedCall
+                        inlinedCall,
                       )
                     }
                   statements += statement
@@ -473,7 +468,7 @@ class FunctionInlining(
           irCall.endOffset,
           inlinedFunctionReference.type,
           origin = null,
-          statements = listOf(irFunction, inlinedFunctionReference)
+          statements = listOf(irFunction, inlinedFunctionReference),
         )
       }
 
@@ -486,16 +481,14 @@ class FunctionInlining(
         return inlineFunctionReference(
           irCall,
           irFunctionReference,
-          if (inlinedFunction.needsInlining)
-            inlineFunctionResolver.getFunctionDeclaration(inlinedFunction.symbol)
-          else inlinedFunction
+          inlineFunctionResolver.getFunctionDeclaration(inlinedFunction.symbol) ?: inlinedFunction,
         )
       }
 
       fun inlineFunctionReference(
         irCall: IrCall,
         irFunctionReference: IrFunctionReference,
-        inlinedFunction: IrFunction
+        inlinedFunction: IrFunction,
       ): IrExpression {
         irFunctionReference.transformChildrenVoid(this)
 
@@ -528,27 +521,23 @@ class FunctionInlining(
             is IrConstructor -> {
               val classTypeParametersCount = inlinedFunction.parentAsClass.typeParameters.size
               IrConstructorCallImpl.fromSymbolOwner(
-                if (inlineArgumentsWithTheirOriginalTypeAndOffset) irFunctionReference.startOffset
-                else irCall.startOffset,
-                if (inlineArgumentsWithTheirOriginalTypeAndOffset) irFunctionReference.endOffset
-                else irCall.endOffset,
+                irFunctionReference.startOffset,
+                irFunctionReference.endOffset,
                 functionReferenceReturnType,
                 inlinedFunction.symbol,
                 classTypeParametersCount,
-                INLINED_FUNCTION_REFERENCE
+                INLINED_FUNCTION_REFERENCE,
               )
             }
             is IrSimpleFunction ->
               IrCallImpl(
-                if (inlineArgumentsWithTheirOriginalTypeAndOffset) irFunctionReference.startOffset
-                else irCall.startOffset,
-                if (inlineArgumentsWithTheirOriginalTypeAndOffset) irFunctionReference.endOffset
-                else irCall.endOffset,
+                irFunctionReference.startOffset,
+                irFunctionReference.endOffset,
                 functionReferenceReturnType,
                 inlinedFunction.symbol,
                 inlinedFunction.typeParameters.size,
                 inlinedFunction.valueParameters.size,
-                INLINED_FUNCTION_REFERENCE
+                INLINED_FUNCTION_REFERENCE,
               )
             else -> error("Unknown function kind : ${inlinedFunction.render()}")
           }.apply {
@@ -556,8 +545,8 @@ class FunctionInlining(
               val argument =
                 if (parameter !in unboundArgsSet) {
                   val arg = boundFunctionParametersMap[parameter]!!
-                  if (arg is IrGetValueWithoutLocation)
-                    arg.withLocation(irCall.startOffset, irCall.endOffset)
+                  if (arg is IrGetValue && arg in elementsWithLocationToPatch)
+                    arg.copyWithOffsets(irCall.startOffset, irCall.endOffset)
                   else arg.copy()
                 } else {
                   if (unboundIndex == valueParameters.size && parameter.defaultValue != null)
@@ -581,7 +570,7 @@ class FunctionInlining(
                       irCall.endOffset,
                       parameter.type,
                       parameter.varargElementType!!,
-                      elements
+                      elements,
                     )
                   }
                 }
@@ -601,7 +590,7 @@ class FunctionInlining(
                     parameter.index,
                     argument.doImplicitCastIfNeededTo(
                       inlinedFunction.valueParameters[parameter.index].type
-                    )
+                    ),
                   )
               }
             }
@@ -610,16 +599,18 @@ class FunctionInlining(
             }
             for (index in 0 until irFunctionReference.typeArgumentsCount) putTypeArgument(
               index,
-              irFunctionReference.getTypeArgument(index)
+              irFunctionReference.getTypeArgument(index),
             )
           }
 
-        return if (inlinedFunction.needsInlining && inlinedFunction.body != null) {
+        return if (
+            inlineFunctionResolver.getFunctionDeclaration(inlinedFunction.symbol)?.body != null
+          ) {
             inlineFunction(
               immediateCall,
               inlinedFunction,
               irFunctionReference,
-              performRecursiveInline = true
+              performRecursiveInline = true,
             )
           } else {
             val transformedExpression =
@@ -666,7 +657,7 @@ class FunctionInlining(
     private inner class ParameterToArgument(
       val parameter: IrValueParameter,
       val argumentExpression: IrExpression,
-      val isDefaultArg: Boolean = false
+      val isDefaultArg: Boolean = false,
     ) {
       val isInlinableLambdaArgument: Boolean
         // must take "original" parameter because it can have generic type and so considered as no
@@ -714,8 +705,8 @@ class FunctionInlining(
                 UNDEFINED_OFFSET,
                 innerClassesSupport.getOuterThisField(parameterClassDeclaration).symbol,
                 outerClassThis.type,
-                IrGetValueImpl(UNDEFINED_OFFSET, UNDEFINED_OFFSET, currentThisSymbol)
-              )
+                IrGetValueImpl(UNDEFINED_OFFSET, UNDEFINED_OFFSET, currentThisSymbol),
+              ),
           )
 
         allParametersReplacements.add(parameterToArgument)
@@ -730,7 +721,7 @@ class FunctionInlining(
     // callee might be a copied version of callsite.symbol.owner
     private fun buildParameterToArgument(
       callSite: IrFunctionAccessExpression,
-      callee: IrFunction
+      callee: IrFunction,
     ): List<ParameterToArgument> {
 
       val parameterToArgument = mutableListOf<ParameterToArgument>()
@@ -739,7 +730,7 @@ class FunctionInlining(
         parameterToArgument +=
           ParameterToArgument(
               parameter = callee.dispatchReceiverParameter!!,
-              argumentExpression = callSite.dispatchReceiver!!
+              argumentExpression = callSite.dispatchReceiver!!,
             )
             .andAllOuterClasses()
 
@@ -758,7 +749,7 @@ class FunctionInlining(
               } else {
                 // Special case: lambda with receiver is called as usual lambda:
                 valueArguments.removeAt(0)!!
-              }
+              },
           )
       } else if (callSite.extensionReceiver != null) {
         // Special case: usual lambda is called as lambda with receiver:
@@ -781,7 +772,7 @@ class FunctionInlining(
               ParameterToArgument(
                 parameter = parameter,
                 argumentExpression = parameter.defaultValue!!.expression,
-                isDefaultArg = true
+                isDefaultArg = true,
               )
           }
           parameter.varargElementType != null -> {
@@ -790,7 +781,7 @@ class FunctionInlining(
                 startOffset = callSite.startOffset,
                 endOffset = callSite.endOffset,
                 type = parameter.type,
-                varargElementType = parameter.varargElementType!!
+                varargElementType = parameter.varargElementType!!,
               )
             parameterToArgument +=
               ParameterToArgument(parameter = parameter, argumentExpression = emptyArray)
@@ -826,26 +817,27 @@ class FunctionInlining(
         val irExpression = it.argumentExpression.transform(substitutor, data = null)
         val newArgument =
           if (it.isImmutableVariableLoad) {
-            IrGetValueWithoutLocation((irExpression as IrGetValue).symbol)
+            irGetValueWithoutLocation((irExpression as IrGetValue).symbol)
           } else {
             val newVariable =
               currentScope.scope.createTemporaryVariable(
                 startOffset = if (it.isDefaultArg) irExpression.startOffset else UNDEFINED_OFFSET,
                 endOffset = if (it.isDefaultArg) irExpression.startOffset else UNDEFINED_OFFSET,
                 irExpression = irExpression,
-                irType =
-                  if (inlineArgumentsWithTheirOriginalTypeAndOffset) it.parameter.getOriginalType()
-                  else irExpression.type,
+                // If original type of parameter is T, then `it.parameter.type` is T after
+                // substitution or erasure,
+                // depending on whether T reified or not.
+                irType = it.parameter.type,
                 nameHint =
                   callee.symbol.owner.name.asStringStripSpecialMarkers() +
                     "_" +
                     it.parameter.name.asStringStripSpecialMarkers(),
-                isMutable = false
+                isMutable = false,
               )
 
             evaluationStatements.add(newVariable)
 
-            IrGetValueWithoutLocation(newVariable.symbol)
+            irGetValueWithoutLocation(newVariable.symbol)
           }
         when (it.parameter) {
           referenced.dispatchReceiverParameter -> reference.dispatchReceiver = newArgument
@@ -867,10 +859,10 @@ class FunctionInlining(
           endOffset = UNDEFINED_OFFSET,
           irExpression = irExpression,
           nameHint = callee.symbol.owner.name.asStringStripSpecialMarkers() + "_this",
-          isMutable = false
+          isMutable = false,
         )
 
-      val newArgument = IrGetValueWithoutLocation(newVariable.symbol)
+      val newArgument = irGetValueWithoutLocation(newVariable.symbol)
       when {
         reference.dispatchReceiver != null -> reference.dispatchReceiver = newArgument
         reference.extensionReceiver != null -> reference.extensionReceiver = newArgument
@@ -885,67 +877,6 @@ class FunctionInlining(
       return original.allParameters.singleOrNull {
         it.name == this.name && it.startOffset == this.startOffset
       } ?: this
-    }
-
-    // In short this is needed for `kt44429` test. We need to get original generic type to trick
-    // type system on JVM backend.
-    // Probably this it is relevant only for numeric types in JVM.
-    private fun IrValueParameter.getOriginalType(): IrType {
-      if (this.parent !is IrFunction) return type
-      val copy =
-        this.parent
-          as IrFunction // contains substituted type parameters with corresponding type arguments
-      val original = copy.originalFunction // contains original unsubstituted type parameters
-
-      // Note 1: the following method will replace super types fow the owner type parameter. So in
-      // every other IrSimpleType that
-      // refers this type parameter we will see substituted values. This should not be a problem
-      // because earlier we replace all type
-      // parameters with corresponding type arguments.
-      // Note 2: this substitution can be dropped if we will learn how to copy IR function and leave
-      // its type parameters as they are.
-      // But this sounds a little complicated.
-      fun IrType.substituteSuperTypes(): IrType {
-        val typeClassifier = this.classifierOrNull?.owner as? IrTypeParameter ?: return this
-        typeClassifier.superTypes =
-          original.typeParameters[typeClassifier.index].superTypes.map {
-            val superTypeClassifier =
-              it.classifierOrNull?.owner as? IrTypeParameter ?: return@map it
-            copy.typeParameters[superTypeClassifier.index].defaultType.substituteSuperTypes()
-          }
-        return this
-      }
-
-      fun IrValueParameter?.getTypeIfFromTypeParameter(): IrType? {
-        val typeClassifier = this?.type?.classifierOrNull?.owner as? IrTypeParameter ?: return null
-        if (typeClassifier.parent != this.parent) return null
-
-        // We take type parameter from copied callee and not from original because we need an actual
-        // copy. Without this copy,
-        // in case of recursive call, we can get a situation there the same type parameter will be
-        // mapped on different type arguments.
-        // (see compiler/testData/codegen/boxInline/complex/use.kt test file)
-        val newTypeParameter =
-          copy.typeParameters[typeClassifier.index].defaultType.substituteSuperTypes()
-        return if (useTypeParameterUpperBound) typeClassifier.firstRealUpperBound()
-        else newTypeParameter
-      }
-
-      return when (this) {
-        copy.dispatchReceiverParameter ->
-          original.dispatchReceiverParameter?.getTypeIfFromTypeParameter()
-            ?: copy.dispatchReceiverParameter!!.type
-        copy.extensionReceiverParameter ->
-          original.extensionReceiverParameter?.getTypeIfFromTypeParameter()
-            ?: copy.extensionReceiverParameter!!.type
-        else ->
-          copy.valueParameters
-            .first { it == this }
-            .let { valueParameter ->
-              original.valueParameters.getOrNull(valueParameter.index)?.getTypeIfFromTypeParameter()
-                ?: valueParameter.type
-            }
-      }
     }
 
     private fun IrTypeParameter?.firstRealUpperBound(): IrType {
@@ -967,7 +898,7 @@ class FunctionInlining(
 
     private fun evaluateArguments(
       callSite: IrFunctionAccessExpression,
-      callee: IrFunction
+      callee: IrFunction,
     ): List<IrStatement> {
       val arguments = buildParameterToArgument(callSite, callee)
       val evaluationStatements = mutableListOf<IrVariable>()
@@ -1000,22 +931,28 @@ class FunctionInlining(
 
         // Arguments may reference the previous ones - substitute them.
         val variableInitializer = argument.argumentExpression.transform(substitutor, data = null)
-        val shouldCreateTemporaryVariable =
-          (alwaysCreateTemporaryVariablesForArguments && !parameter.isInlineParameter()) ||
-            argument.shouldBeSubstitutedViaTemporaryVariable()
+        // MODIFIED BY GOOGLE
+        // Skip creation of temporary variables for arguments that are not inline parameters.
+        // This avoids generating unused temporary variables, which JSC might not always inline,
+        // leading to unnecessary code size increase.
+        val shouldCreateTemporaryVariable = argument.shouldBeSubstitutedViaTemporaryVariable()
+        // original code:
+        //   val shouldCreateTemporaryVariable = !parameter.isInlineParameter() ||
+        // argument.shouldBeSubstitutedViaTemporaryVariable()
+        // END OF MODIFICATIONS
 
         if (shouldCreateTemporaryVariable) {
           val newVariable =
             createTemporaryVariable(parameter, variableInitializer, argument.isDefaultArg, callee)
           if (argument.isDefaultArg) evaluationStatementsFromDefault.add(newVariable)
           else evaluationStatements.add(newVariable)
-          substituteMap[parameter] = IrGetValueWithoutLocation(newVariable.symbol)
+          substituteMap[parameter] = irGetValueWithoutLocation(newVariable.symbol)
           return@forEach
         }
 
         substituteMap[parameter] =
           if (variableInitializer is IrGetValue) {
-            IrGetValueWithoutLocation(variableInitializer.symbol)
+            irGetValueWithoutLocation(variableInitializer.symbol)
           } else {
             variableInitializer
           }
@@ -1032,7 +969,7 @@ class FunctionInlining(
           UNDEFINED_OFFSET,
           context.irBuiltIns.unitType,
           INLINED_FUNCTION_ARGUMENTS,
-          statements = evaluationStatements
+          statements = evaluationStatements,
         )
 
       val blockForNewStatementsFromDefault =
@@ -1041,12 +978,12 @@ class FunctionInlining(
           UNDEFINED_OFFSET,
           context.irBuiltIns.unitType,
           INLINED_FUNCTION_DEFAULT_ARGUMENTS,
-          statements = evaluationStatementsFromDefault
+          statements = evaluationStatementsFromDefault,
         )
 
       return listOfNotNull(
         blockForNewStatements.takeIf { evaluationStatements.isNotEmpty() },
-        blockForNewStatementsFromDefault.takeIf { evaluationStatementsFromDefault.isNotEmpty() }
+        blockForNewStatementsFromDefault.takeIf { evaluationStatementsFromDefault.isNotEmpty() },
       )
     }
 
@@ -1058,7 +995,7 @@ class FunctionInlining(
       parameter: IrValueParameter,
       variableInitializer: IrExpression,
       isDefaultArg: Boolean,
-      callee: IrFunction
+      callee: IrFunction,
     ): IrVariable {
       val variable =
         currentScope.scope.createTemporaryVariable(
@@ -1066,9 +1003,10 @@ class FunctionInlining(
             IrBlockImpl(
                 if (isDefaultArg) variableInitializer.startOffset else UNDEFINED_OFFSET,
                 if (isDefaultArg) variableInitializer.endOffset else UNDEFINED_OFFSET,
-                if (inlineArgumentsWithTheirOriginalTypeAndOffset) parameter.getOriginalType()
-                else variableInitializer.type,
-                InlinerExpressionLocationHint((currentScope.irElement as IrSymbolOwner).symbol)
+                // If original type of parameter is T, then `parameter.type` is T after substitution
+                // or erasure,
+                // depending on whether T reified or not.
+                parameter.type,
               )
               .apply { statements.add(variableInitializer) },
           nameHint = callee.symbol.owner.name.asStringStripSpecialMarkers(),
@@ -1078,57 +1016,23 @@ class FunctionInlining(
               IrDeclarationOrigin.IR_TEMPORARY_VARIABLE_FOR_INLINED_EXTENSION_RECEIVER
             } else {
               IrDeclarationOrigin.IR_TEMPORARY_VARIABLE_FOR_INLINED_PARAMETER
-            }
+            },
         )
 
-      if (alwaysCreateTemporaryVariablesForArguments) {
-        variable.name = Name.identifier(parameter.name.asStringStripSpecialMarkers())
-      }
+      variable.name = Name.identifier(parameter.name.asStringStripSpecialMarkers())
 
       return variable
     }
   }
 
-  private class IrGetValueWithoutLocation(
-    override var symbol: IrValueSymbol,
-    override var origin: IrStatementOrigin? = null
-  ) : IrGetValue() {
-    override val startOffset: Int
-      get() = UNDEFINED_OFFSET
-
-    override val endOffset: Int
-      get() = UNDEFINED_OFFSET
-
-    override var type: IrType
-      get() = symbol.owner.type
-      set(value) {
-        symbol.owner.type = value
-      }
-
-    override fun <R, D> accept(visitor: IrElementVisitor<R, D>, data: D) =
-      visitor.visitGetValue(this, data)
-
-    fun withLocation(startOffset: Int, endOffset: Int) =
-      IrGetValueImpl(startOffset, endOffset, type, symbol, origin)
+  private fun irGetValueWithoutLocation(
+    symbol: IrValueSymbol,
+    origin: IrStatementOrigin? = null,
+  ): IrGetValue {
+    return IrGetValueImpl(UNDEFINED_OFFSET, UNDEFINED_OFFSET, symbol, origin).also {
+      elementsWithLocationToPatch += it
+    }
   }
-}
-
-object INLINED_FUNCTION_REFERENCE : IrStatementOriginImpl("INLINED_FUNCTION_REFERENCE")
-
-object INLINED_FUNCTION_ARGUMENTS : IrStatementOriginImpl("INLINED_FUNCTION_ARGUMENTS")
-
-object INLINED_FUNCTION_DEFAULT_ARGUMENTS :
-  IrStatementOriginImpl("INLINED_FUNCTION_DEFAULT_ARGUMENTS")
-
-class InlinerExpressionLocationHint(val inlineAtSymbol: IrSymbol) : IrStatementOrigin {
-  override fun toString(): String =
-    "(${this.javaClass.simpleName} : $functionNameOrDefaultToString @${functionFileOrNull?.fileEntry?.name})"
-
-  private val functionFileOrNull: IrFile?
-    get() = (inlineAtSymbol as? IrFunction)?.file
-
-  private val functionNameOrDefaultToString: String
-    get() = (inlineAtSymbol as? IrFunction)?.name?.asString() ?: inlineAtSymbol.toString()
 }
 
 // MODIFIED BY GOOGLE
@@ -1156,4 +1060,11 @@ private fun IrFunction.isArrayOf(): Boolean {
     valueParameters.size == 1 &&
     valueParameters[0].isVararg
 }
+
 // END OF MODIFICATIONS
+
+enum class NonReifiedTypeParameterRemappingMode {
+  LEAVE_AS_IS,
+  SUBSTITUTE,
+  ERASE,
+}

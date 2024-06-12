@@ -21,8 +21,8 @@ import com.google.j2cl.common.FilePosition
 import com.google.j2cl.common.SourcePosition
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiNameIdentifierOwner
-import org.jetbrains.kotlin.backend.common.psi.PsiSourceManager.findPsiElement
 import org.jetbrains.kotlin.ir.IrElement
+import org.jetbrains.kotlin.ir.PsiSourceManager.findPsiElement
 import org.jetbrains.kotlin.ir.SourceRangeInfo
 import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.psi.KtBinaryExpression

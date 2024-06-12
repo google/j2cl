@@ -264,7 +264,10 @@ internal class TypeOperatorLowering(private val backendContext: JvmBackendContex
     if (backendContext.config.noSourceCodeInNotNullAssertionExceptions) {
       return when (val argument = typeOperatorCall.argument) {
         is IrCall -> "${argument.symbol.owner.name.asString()}(...)"
-        is IrGetField -> argument.symbol.owner.name.asString()
+        is IrGetField -> {
+          val field = argument.symbol.owner
+          field.name.asString().takeUnless { field.origin.isSynthetic }
+        }
         else -> null
       }
     }

@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
+import org.jetbrains.kotlin.ir.declarations.IrAttributeContainer
 import org.jetbrains.kotlin.ir.declarations.IrVariable
 import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.expressions.IrLoop
@@ -32,6 +33,10 @@ class IrForInLoop(
   override var condition: IrExpression,
 ) : IrLoop() {
   override var origin: IrStatementOrigin? = IrStatementOrigin.FOR_LOOP
+  override var body: IrExpression? = null
+  override var attributeOwnerId: IrAttributeContainer = this
+  override var originalBeforeInline: IrAttributeContainer? = null
+  override var label: String? = null
 
   override fun <R, D> accept(visitor: IrElementVisitor<R, D>, data: D): R =
     visitor.visitLoop(this, data)

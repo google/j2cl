@@ -29,7 +29,6 @@ import org.jetbrains.kotlin.ir.expressions.impl.IrGetValueImpl
 import org.jetbrains.kotlin.ir.expressions.impl.IrReturnImpl
 import org.jetbrains.kotlin.ir.symbols.impl.IrSimpleFunctionSymbolImpl
 import org.jetbrains.kotlin.ir.types.defaultType
-import org.jetbrains.kotlin.ir.types.impl.IrUninitializedType
 import org.jetbrains.kotlin.ir.util.DeepCopyIrTreeWithSymbols
 import org.jetbrains.kotlin.ir.util.DeepCopySymbolRemapper
 import org.jetbrains.kotlin.ir.util.SimpleTypeRemapper
@@ -132,7 +131,7 @@ class SyntheticAccessorLowering(private val context: CommonBackendContext) : Bod
               visibility = DescriptorVisibilities.INTERNAL,
               isInline = declaration.isInline,
               isExpect = declaration.isExpect,
-              returnType = IrUninitializedType,
+              returnType = null,
               modality = declaration.modality,
               symbol = symbolRemapper.getDeclaredFunction(declaration.symbol),
               isTailrec = declaration.isTailrec,
@@ -179,7 +178,7 @@ class SyntheticAccessorLowering(private val context: CommonBackendContext) : Bod
         newFunction.returnType,
         symbol,
         typeParameters.size,
-        valueParameters.size
+        valueParameters.size,
       )
 
     newFunction.typeParameters.forEachIndexed { i, tp -> irCall.putTypeArgument(i, tp.defaultType) }
@@ -199,7 +198,7 @@ class SyntheticAccessorLowering(private val context: CommonBackendContext) : Bod
         endOffset,
         context.irBuiltIns.nothingType,
         newFunction.symbol,
-        irCall
+        irCall,
       )
 
     newFunction.body = context.irFactory.createBlockBody(startOffset, endOffset, listOf(irReturn))
@@ -224,7 +223,7 @@ class SyntheticAccessorLowering(private val context: CommonBackendContext) : Bod
               newFunction.symbol,
               typeArgumentsCount,
               valueArgumentsCount,
-              origin
+              origin,
             )
           }
 
@@ -255,7 +254,7 @@ class SyntheticAccessorLowering(private val context: CommonBackendContext) : Bod
               type,
               newFunction.symbol,
               typeArgumentsCount,
-              valueArgumentsCount
+              valueArgumentsCount,
             )
           }
 

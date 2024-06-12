@@ -23,11 +23,12 @@ import org.jetbrains.kotlin.utils.memoryOptimizedMap
 /**
  * Helper class for copying a part of the IR tree.
  *
- * Based on org.jetbrains.kotlin.backend.common.lower.inline.DeepCopyIrTreeWithSymbolsForInliner.kt
+ * Based on org.jetbrains.kotlin.ir.inline.DeepCopyIrTreeWithSymbolsForInliner.kt
  */
 internal class DeepCopyIrTreeWithSymbolsForInliner(
   val typeArguments: Map<IrTypeParameterSymbol, IrType?>?,
-  val parent: IrDeclarationParent?
+  val parent: IrDeclarationParent?,
+  defaultNonReifiedTypeParameterRemappingMode: NonReifiedTypeParameterRemappingMode,
 ) {
 
   fun copy(irElement: IrElement): IrElement {
@@ -46,7 +47,8 @@ internal class DeepCopyIrTreeWithSymbolsForInliner(
 
   private inner class InlinerTypeRemapper(
     val symbolRemapper: SymbolRemapper,
-    val typeArguments: Map<IrTypeParameterSymbol, IrType?>?
+    val typeArguments: Map<IrTypeParameterSymbol, IrType?>?,
+    val defaultNonReifiedTypeParameterRemappingMode: NonReifiedTypeParameterRemappingMode,
   ) : TypeRemapper {
 
     override fun enterScope(irTypeParametersContainer: IrTypeParametersContainer) {}
@@ -55,34 +57,44 @@ internal class DeepCopyIrTreeWithSymbolsForInliner(
 
     private fun remapTypeArguments(
       arguments: List<IrTypeArgument>,
-      erasedParameters: MutableSet<IrTypeParameterSymbol>?
+      erasedParameters: MutableSet<IrTypeParameterSymbol>?,
+      leaveNonReifiedAsIs: Boolean,
     ) =
       arguments.memoryOptimizedMap { argument ->
         (argument as? IrTypeProjection)?.let { proj ->
-          remapTypeAndOptionallyErase(proj.type, erasedParameters)?.let { newType ->
+          remapType(proj.type, erasedParameters, leaveNonReifiedAsIs)?.let { newType ->
             makeTypeProjection(newType, proj.variance)
-          }
-            ?: IrStarProjectionImpl
-        }
-          ?: argument
+          } ?: IrStarProjectionImpl
+        } ?: argument
       }
 
-    override fun remapType(type: IrType) = remapTypeAndOptionallyErase(type, erase = false)
+    override fun remapType(type: IrType) =
+      remapType(type, defaultNonReifiedTypeParameterRemappingMode)
 
-    fun remapTypeAndOptionallyErase(type: IrType, erase: Boolean): IrType {
-      val erasedParams = if (erase) mutableSetOf<IrTypeParameterSymbol>() else null
-      return remapTypeAndOptionallyErase(type, erasedParams)
+    fun remapType(type: IrType, mode: NonReifiedTypeParameterRemappingMode): IrType {
+      val erasedParams =
+        if (mode == NonReifiedTypeParameterRemappingMode.ERASE)
+          mutableSetOf<IrTypeParameterSymbol>()
+        else null
+      return remapType(type, erasedParams, mode == NonReifiedTypeParameterRemappingMode.LEAVE_AS_IS)
         ?: error("Cannot substitute type ${type.render()}")
     }
 
-    private fun remapTypeAndOptionallyErase(
+    private fun remapType(
       type: IrType,
-      erasedParameters: MutableSet<IrTypeParameterSymbol>?
+      erasedParameters: MutableSet<IrTypeParameterSymbol>?,
+      leaveNonReifiedAsIs: Boolean,
     ): IrType? {
       if (type !is IrSimpleType) return type
 
       val classifier = type.classifier
       val substitutedType = typeArguments?.get(classifier)
+
+      if (
+        leaveNonReifiedAsIs && classifier is IrTypeParameterSymbol && !classifier.owner.isReified
+      ) {
+        return type
+      }
 
       // Erase non-reified type parameter if asked to.
       if (
@@ -105,7 +117,7 @@ internal class DeepCopyIrTreeWithSymbolsForInliner(
 
         // TODO: Think about how to reduce complexity from k^N to N^k
         val erasedUpperBound =
-          remapTypeAndOptionallyErase(upperBound, erasedParameters)
+          remapType(upperBound, erasedParameters, leaveNonReifiedAsIs)
             ?: error("Cannot erase upperbound ${upperBound.render()}")
 
         erasedParameters.remove(classifier)
@@ -142,7 +154,7 @@ internal class DeepCopyIrTreeWithSymbolsForInliner(
         this.classifier = symbolRemapper.getReferencedClassifier(classifier)
         // MODIFIED BY GOOGLE
         // Reference argumentsToRemap instead of type.arguments to honor the modification above.
-        arguments = remapTypeArguments(argumentsToRemap, erasedParameters)
+        arguments = remapTypeArguments(argumentsToRemap, erasedParameters, leaveNonReifiedAsIs)
         // END OF MODIFICATIONS
         annotations =
           type.annotations.memoryOptimizedMap { it.transform(copier, null) as IrConstructorCall }
@@ -180,25 +192,74 @@ internal class DeepCopyIrTreeWithSymbolsForInliner(
   //   semantically correct for non-reified types. We should revisit this behavior.
   //
   // Original Code:
-  // private val typeRemapper = InlinerTypeRemapper(symbolRemapper, typeArguments)
+  // private val typeRemapper =
+  //   InlinerTypeRemapper(symbolRemapper, typeArguments,
+  // defaultNonReifiedTypeParameterRemappingMode)
   // private val copier =
   //   object : DeepCopyIrTreeWithSymbols(symbolRemapper, typeRemapper) {
-  //     private fun IrType.remapTypeAndErase() =
-  //       typeRemapper.remapTypeAndOptionallyErase(this, erase = true)
 
-  //     override fun visitTypeOperator(expression: IrTypeOperatorCall) =
-  //       IrTypeOperatorCallImpl(
+  //     private fun IrType.leaveNonReifiedAsIs() =
+  //       typeRemapper.remapType(this, NonReifiedTypeParameterRemappingMode.LEAVE_AS_IS)
+
+  //     private fun IrType.substituteAll() =
+  //       typeRemapper.remapType(this, NonReifiedTypeParameterRemappingMode.SUBSTITUTE)
+
+  //     private fun IrType.erase() =
+  //       typeRemapper.remapType(this, NonReifiedTypeParameterRemappingMode.ERASE)
+
+  //     override fun visitClass(declaration: IrClass): IrClass {
+  //       // Substitute type argument to make Class::genericSuperclass work as expected (see
+  //       // kt52417.kt)
+  //       // Substitution to the super types does not lead to reification and therefore is safe
+  //       return super.visitClass(declaration).apply {
+  //         superTypes = declaration.superTypes.memoryOptimizedMap { it.substituteAll() }
+  //       }
+  //     }
+
+  //     override fun visitCall(expression: IrCall): IrCall {
+  //       if (!Symbols.isTypeOfIntrinsic(expression.symbol)) return super.visitCall(expression)
+  //       // We should neither erase nor substitute non-reified type parameters in the `typeOf`
+  // call
+  //       // so that reflection is able
+  //       // to create a proper KTypeParameter for it. See KT-60175, KT-30279.
+  //       return IrCallImpl(
   //           expression.startOffset,
   //           expression.endOffset,
-  //           expression.type.remapTypeAndErase(),
-  //           expression.operator,
-  //           expression.typeOperand.remapTypeAndErase(),
-  //           expression.argument.transform()
+  //           expression.type,
+  //           expression.symbol,
+  //           expression.typeArgumentsCount,
+  //           expression.valueArgumentsCount,
+  //           expression.origin,
+  //           expression.superQualifierSymbol,
   //         )
+  //         .apply {
+  //           for (i in 0 until typeArgumentsCount) {
+  //             putTypeArgument(i, expression.getTypeArgument(i)?.leaveNonReifiedAsIs())
+  //           }
+  //         }
   //         .copyAttributes(expression)
-  //   }
+  //     }
+
+  //   override fun visitTypeOperator(expression: IrTypeOperatorCall) =
+  //     IrTypeOperatorCallImpl(
+  //         expression.startOffset,
+  //         expression.endOffset,
+  //         expression.type.erase(),
+  //         expression.operator,
+  //         expression.typeOperand.erase(),
+  //         expression.argument.transform(),
+  //       )
+  //       .copyAttributes(expression)
+  // }
   private val copier =
-    DeepCopyIrTreeWithSymbols(symbolRemapper, InlinerTypeRemapper(symbolRemapper, typeArguments))
+    DeepCopyIrTreeWithSymbols(
+      symbolRemapper,
+      InlinerTypeRemapper(
+        symbolRemapper,
+        typeArguments,
+        defaultNonReifiedTypeParameterRemappingMode,
+      ),
+    )
   // END OF MODIFICATIONS
 
 }

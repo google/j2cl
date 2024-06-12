@@ -17,7 +17,6 @@
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
 import java.io.File
-import kotlin.math.max
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
 import org.jetbrains.kotlin.codegen.AsmUtil
@@ -33,7 +32,6 @@ import org.jetbrains.kotlin.fileClasses.JvmSimpleFileClassInfo
 import org.jetbrains.kotlin.ir.PsiIrFileEntry
 import org.jetbrains.kotlin.ir.UNDEFINED_OFFSET
 import org.jetbrains.kotlin.ir.declarations.*
-import org.jetbrains.kotlin.ir.declarations.impl.IrClassImpl
 import org.jetbrains.kotlin.ir.expressions.IrConst
 import org.jetbrains.kotlin.ir.expressions.IrConstKind
 import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
@@ -43,9 +41,9 @@ import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.load.java.JavaDescriptorVisibilities
 import org.jetbrains.kotlin.load.kotlin.PackagePartClassUtils
 import org.jetbrains.kotlin.name.FqName
-import org.jetbrains.kotlin.name.JvmNames.JVM_MULTIFILE_CLASS_SHORT
-import org.jetbrains.kotlin.name.JvmNames.JVM_NAME_SHORT
-import org.jetbrains.kotlin.name.JvmNames.JVM_PACKAGE_NAME_SHORT
+import org.jetbrains.kotlin.name.JvmStandardClassIds.JVM_MULTIFILE_CLASS_SHORT
+import org.jetbrains.kotlin.name.JvmStandardClassIds.JVM_NAME_SHORT
+import org.jetbrains.kotlin.name.JvmStandardClassIds.JVM_PACKAGE_NAME_SHORT
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.resolve.inline.INLINE_ONLY_ANNOTATION_FQ_NAME
@@ -92,7 +90,7 @@ internal class FileClassLowering(val context: JvmBackendContext) : FileLoweringP
     val isMultifilePart = fileClassInfo.withJvmMultifileClass
 
     val onlyPrivateDeclarationsAndFeatureIsEnabled =
-      context.state.languageVersionSettings.supportsFeature(
+      context.config.languageVersionSettings.supportsFeature(
         LanguageFeature.PackagePrivateFileClassesWithAllPrivateMembers
       ) &&
         fileClassMembers.all {
@@ -105,22 +103,23 @@ internal class FileClassLowering(val context: JvmBackendContext) : FileLoweringP
     val fileClassOrigin =
       if (
         !isMultifilePart ||
-          context.state.languageVersionSettings.getFlag(JvmAnalysisFlags.inheritMultifileParts)
+          context.config.languageVersionSettings.getFlag(JvmAnalysisFlags.inheritMultifileParts)
       )
         IrDeclarationOrigin.FILE_CLASS
       else IrDeclarationOrigin.SYNTHETIC_FILE_CLASS
-    return IrClassImpl(
-        0,
-        max(fileEntry.maxOffset - 1, UNDEFINED_OFFSET),
-        fileClassOrigin,
-        symbol = IrClassSymbolImpl(),
+    return context.irFactory
+      .createClass(
+        startOffset = if (fileEntry.maxOffset == UNDEFINED_OFFSET) UNDEFINED_OFFSET else 0,
+        endOffset = fileEntry.maxOffset,
+        origin = fileClassOrigin,
         name = fileClassInfo.fileClassFqName.shortName(),
-        kind = ClassKind.CLASS,
         visibility =
           if (isMultifilePart || onlyPrivateDeclarationsAndFeatureIsEnabled)
             JavaDescriptorVisibilities.PACKAGE_VISIBILITY
           else DescriptorVisibilities.PUBLIC,
-        modality = Modality.FINAL
+        symbol = IrClassSymbolImpl(),
+        kind = ClassKind.CLASS,
+        modality = Modality.FINAL,
       )
       .apply {
         superTypes = listOf(context.irBuiltIns.anyType)
@@ -154,7 +153,7 @@ internal class FileClassLowering(val context: JvmBackendContext) : FileLoweringP
         context.state.factory.packagePartRegistry.addPart(
           irFile.packageFqName,
           partClassType.internalName,
-          facadeClassType?.internalName
+          facadeClassType?.internalName,
         )
 
         if (fileClassInfo.fileClassFqName != fqNameWhenAvailable) {
@@ -191,7 +190,7 @@ fun getFileClassInfoFromIrFile(file: IrFile, fileName: String): JvmFileClassInfo
               packageFqName.child(
                 Name.identifier(JvmFileClassUtil.manglePartName(simpleName, fileName))
               ),
-            facadeClassFqName = facadeClassFqName
+            facadeClassFqName = facadeClassFqName,
           )
         else -> JvmSimpleFileClassInfo(facadeClassFqName, true)
       }
@@ -199,7 +198,7 @@ fun getFileClassInfoFromIrFile(file: IrFile, fileName: String): JvmFileClassInfo
     else ->
       JvmSimpleFileClassInfo(
         PackagePartClassUtils.getPackagePartFqName(packageFqName, fileName),
-        false
+        false,
       )
   }
 }
@@ -222,7 +221,7 @@ private fun parseJvmNameOnFileNoResolve(file: IrFile): ParsedJvmFileClassAnnotat
 
 private fun findAnnotationEntryOnFileNoResolve(
   file: IrFile,
-  shortName: String
+  shortName: String,
 ): IrConstructorCall? =
   file.annotations.firstOrNull { it.type.classFqName?.shortName()?.asString() == shortName }
 
@@ -239,5 +238,5 @@ private fun getLiteralStringFromAnnotation(annotationCall: IrConstructorCall): S
 internal class ParsedJvmFileClassAnnotations(
   val jvmName: String?,
   val jvmPackageName: FqName?,
-  val isMultifileClass: Boolean
+  val isMultifileClass: Boolean,
 )

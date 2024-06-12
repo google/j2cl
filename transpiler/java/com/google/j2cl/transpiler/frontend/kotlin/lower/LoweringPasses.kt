@@ -32,8 +32,10 @@ import org.jetbrains.kotlin.backend.common.lower.WrapInlineDeclarationsWithReifi
 import org.jetbrains.kotlin.backend.common.lower.inline.LocalClassesInInlineFunctionsLowering
 import org.jetbrains.kotlin.backend.common.lower.inline.LocalClassesInInlineLambdasLowering
 import org.jetbrains.kotlin.backend.common.lower.loops.ForLoopsLowering
+import org.jetbrains.kotlin.backend.common.phaser.CompilerPhase
 import org.jetbrains.kotlin.backend.common.phaser.PhaseConfig
-import org.jetbrains.kotlin.backend.common.phaser.unitSink
+import org.jetbrains.kotlin.backend.common.phaser.PhaseConfigurationService
+import org.jetbrains.kotlin.backend.common.phaser.PhaserState
 import org.jetbrains.kotlin.backend.common.wrapWithCompilationException
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
 import org.jetbrains.kotlin.backend.jvm.JvmBackendExtension
@@ -247,7 +249,7 @@ private fun IrModuleFragment.lower(
     try {
       loweringFactory(context).lower(f)
     } catch (e: CompilationException) {
-      e.file = f
+      e.initializeFileDetails(f)
       throw e
     } catch (e: Throwable) {
       throw e.wrapWithCompilationException("Internal error in file lowering", f, null)
@@ -265,7 +267,16 @@ private fun createJvmBackendContext(
     state,
     moduleFragment.irBuiltins,
     pluginContext.symbolTable as SymbolTable,
-    PhaseConfig(unitSink<JvmBackendContext, Unit>()),
+    PhaseConfig(
+      object : CompilerPhase<JvmBackendContext, Unit, Unit> {
+        override fun invoke(
+          phaseConfig: PhaseConfigurationService,
+          phaserState: PhaserState<Unit>,
+          context: JvmBackendContext,
+          input: Unit,
+        ) {}
+      }
+    ),
     JvmGeneratorExtensionsImpl(compilerConfiguration),
     JvmBackendExtension.Default,
     irSerializer = null,
