@@ -158,20 +158,19 @@ def _diff(original, modified, filter_noise):
         modified.get_formatted_file(),
     ])
 
-  if filter_noise and not is_wasm:
+  if filter_noise:
     print("  Reducing noise.")
-    # Replace the numeric part of the variable id generation from JsCompiler to
-    # reduce noise in the final diff.
+    # Replace the numeric part of the variable id generation from JsCompiler
+    # or binaryen to reduce noise in the final diff.
     # The patterns we want to match are:
-    #   $jscomp$1234
-    #   $jscomp$inline_1234
-    #   JSC$1234
+    #   $jscomp$1234, $jscomp$inline_1234, JSC$1234,
+    #   type $1234, call_ref $1234, ref $1234
     # The numeric part of these patterns will be replaced by the character '#'
     repo_util.run_cmd([
         "sed",
         "-i",
         "-E",
-        r"s/(\$jscomp\$(inline_)?|JSC\$)[0-9]+/\1#/g",
+        r"s/(\$jscomp\$(inline_)?|JSC\$|((type|call_ref|ref)\ \$))[0-9]+/\1#/g",
         original.get_formatted_file(),
         modified.get_formatted_file(),
     ])
