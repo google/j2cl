@@ -44,15 +44,12 @@ public class ${testClass.jsUnitAdapterClassName()} {
   #end
   #methodExecutions(${testClass.afterMethods()} )
 
-    } catch (Throwable e) {
-        // Ensures that the test instance is always reset to null so that if the
-        // next test fails to construct the instance in the setUp, the instance
-        // will be null and that will prevent the tearDown from running.
-        // J2wasm doesn't support finally so we use a catch and retrow the exception.
-        actualTest = null;
-        throw e;
+    } finally {
+      // Ensures that the test instance is always reset to null so that if the
+      // next test fails to construct the instance in the setUp, the instance
+      // will be null and that will prevent the tearDown from running.
+      actualTest = null;
     }
-    actualTest = null;
   }
 
 #foreach($testMethod in ${testClass.testMethods()})
