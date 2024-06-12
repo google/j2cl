@@ -191,6 +191,10 @@ public class TypeDescriptors {
   public DeclaredTypeDescriptor kotlinJvmInternalMutableKProperty1Impl;
 
   @Nullable
+  @QualifiedBinaryName("kotlin.jvm.internal.LocalVariableKPropertyImpl")
+  public DeclaredTypeDescriptor kotlinJvmInternalLocalVariableKPropertyImpl;
+
+  @Nullable
   @QualifiedBinaryName("kotlin.jvm.internal.ReflectionFactory")
   public DeclaredTypeDescriptor kotlinJvmInternalReflectionFactory;
 

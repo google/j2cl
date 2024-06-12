@@ -124,6 +124,7 @@ import org.jetbrains.kotlin.ir.expressions.IrBody
 import org.jetbrains.kotlin.ir.expressions.IrBranch
 import org.jetbrains.kotlin.ir.expressions.IrBreak
 import org.jetbrains.kotlin.ir.expressions.IrCall
+import org.jetbrains.kotlin.ir.expressions.IrCallableReference
 import org.jetbrains.kotlin.ir.expressions.IrCatch
 import org.jetbrains.kotlin.ir.expressions.IrClassReference
 import org.jetbrains.kotlin.ir.expressions.IrConst
@@ -144,6 +145,7 @@ import org.jetbrains.kotlin.ir.expressions.IrGetEnumValue
 import org.jetbrains.kotlin.ir.expressions.IrGetField
 import org.jetbrains.kotlin.ir.expressions.IrGetValue
 import org.jetbrains.kotlin.ir.expressions.IrInstanceInitializerCall
+import org.jetbrains.kotlin.ir.expressions.IrLocalDelegatedPropertyReference
 import org.jetbrains.kotlin.ir.expressions.IrLoop
 import org.jetbrains.kotlin.ir.expressions.IrMemberAccessExpression
 import org.jetbrains.kotlin.ir.expressions.IrPropertyReference
@@ -604,6 +606,7 @@ class CompilationUnitBuilder(
       is IrFunctionReference -> convertFunctionReference(irExpression)
       is IrFunctionExpression -> convertFunctionExpression(irExpression)
       is IrPropertyReference -> convertPropertyReference(irExpression)
+      is IrLocalDelegatedPropertyReference -> convertLocalDelegatedPropertyReference(irExpression)
       is IrClassReference -> convertClassReference(irExpression)
       is IrGetClass -> convertGetClass(irExpression)
       else -> throw IllegalStateException("Unhandled IrExpression:\n${irExpression.dump()}")
@@ -1375,7 +1378,7 @@ class CompilationUnitBuilder(
 
   private fun createAccessorReference(
     functionalTypeDescriptor: DeclaredTypeDescriptor,
-    irPropertyReference: IrPropertyReference,
+    irPropertyReference: IrCallableReference<*>,
     propertyReferenceQualifier: Expression?,
     accessorFunctionSymbol: IrFunctionSymbol?,
   ): Expression {
@@ -1595,6 +1598,26 @@ class CompilationUnitBuilder(
     )
 
     return MultiExpression.newBuilder().addExpressions(expressions).build()
+  }
+
+  private fun convertLocalDelegatedPropertyReference(
+    irExpression: IrLocalDelegatedPropertyReference
+  ): Expression {
+    val variableReferenceType = irExpression.type as IrSimpleType
+    val localVariableKPropertyDescriptor =
+      TypeDescriptors.get().kotlinJvmInternalLocalVariableKPropertyImpl!!
+    val j2clSubstitutionMap =
+      variableReferenceType.arguments
+        .mapIndexed { index, typeArgument ->
+          localVariableKPropertyDescriptor.typeDeclaration.typeParameterDescriptors[index] to
+            environment.getReferenceTypeDescriptorForTypeArgument(typeArgument)
+        }
+        .toMap()
+    val kMutablePropertyCtor =
+      localVariableKPropertyDescriptor.singleConstructor.specializeTypeVariables(
+        j2clSubstitutionMap
+      )
+    return NewInstance.newBuilder().setTarget(kMutablePropertyCtor).build()
   }
 
   private fun convertQualifier(fieldAccess: IrFieldAccessExpression): Expression? =
