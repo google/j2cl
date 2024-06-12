@@ -384,7 +384,7 @@ _J2WASM_APP_ATTRS = {
         cfg = "exec",
         executable = True,
         default = Label(
-            "//build_defs/internal_do_not_use:BazelJ2clBuilderForLargeHeap",
+            "//build_defs/internal_do_not_use:BazelJ2clBuilder",
         ),
     ),
     "_binaryen": attr.label(
