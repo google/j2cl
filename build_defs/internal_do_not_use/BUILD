@@ -109,6 +109,8 @@ j2wasm_library(
     name = "internal_junit_runtime-j2wasm",
     testonly = 1,
     exports = [
+        "//junit/generator/java/com/google/j2cl/junit/runtime:internal_assumption_violated_exception-j2wasm",
+        "//junit/generator/java/com/google/j2cl/junit/runtime:jsunit_helpers-j2wasm",
         "//junit/generator/java/com/google/j2cl/junit/runtime:testcase_violator-j2wasm",
     ],
 )
@@ -118,6 +120,7 @@ j2cl_library(
     testonly = 1,
     exports = [
         "//:jsinterop-annotations-j2cl",
+        "//junit/generator/java/com/google/j2cl/junit/runtime:internal_assumption_violated_exception-j2cl",
         "//junit/generator/java/com/google/j2cl/junit/runtime:jsunit_helpers-j2cl",
         "//junit/generator/java/com/google/j2cl/junit/runtime:testcase_violator-j2cl",
     ],

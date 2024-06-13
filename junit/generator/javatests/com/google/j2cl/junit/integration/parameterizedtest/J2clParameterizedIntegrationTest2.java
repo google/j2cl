@@ -183,4 +183,26 @@ public class J2clParameterizedIntegrationTest2 extends IntegrationTestBase {
     List<String> logLines = runTest(testClassName);
     assertThat(logLines).matches(testResult);
   }
+
+  @Test
+  public void testAssumptionBeforeParamTest() throws Exception {
+    String testClassName = "AssumptionBeforeParamTest";
+    var testResultBuilder = newTestResultBuilder().testClassName(testClassName);
+    // On the JVM, short-circuiting in @BeforeParam causes the entire test to pass, but it will list
+    // zero run.
+    if (!testMode.isJvm()) {
+      testResultBuilder
+          .addTestSkip("testGroup0_testShouldNotRun[0]")
+          .addTestSkip("testGroup1_testShouldNotRun[1]");
+    }
+    TestResult testResult =
+        testResultBuilder
+            .testClassName(testClassName)
+            .addJavaLogLineSequence("beforeParam", "afterParam")
+            .addJavaLogLineSequence("beforeParam", "afterParam")
+            .build();
+
+    List<String> logLines = runTest(testClassName);
+    assertThat(logLines).matches(testResult);
+  }
 }

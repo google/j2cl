@@ -15,6 +15,9 @@
  */
 package com.google.j2cl.junit.runtime;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsAsync;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
@@ -28,9 +31,11 @@ public final class JsUnitHelpers {
   public interface IThenable<T> {}
 
   @JsMethod(namespace = JsPackage.GLOBAL)
+  @Wasm("nop") // Cannot be used in WASM.
   public static native void await(IThenable<?> thenable);
 
   @JsAsync
+  @Wasm("nop") // Cannot be used in WASM.
   public static IThenable<?> withTimeout(Object thenable, double timeout) {
     if (thenable == null) {
       throw new IllegalStateException("Test returned null as its promise");
@@ -39,11 +44,22 @@ public final class JsUnitHelpers {
     return ((IThenable<?>) thenable);
   }
 
+  public static void handleAssumptionFailure(InternalAssumptionViolatedException e) {
+    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    e.printStackTrace(new PrintStream(outputStream));
+    GoogTestCase.getActiveTestCase()
+        .saveMessage("Skipping test case due to assumption failure: " + outputStream);
+    // JSUnit doesn't have an API for skipping tests, so just rethrow the exception.
+    throw new UnsupportedOperationException("Assumptions are unsupported in JSUnit", e);
+  }
+
   @JsType(isNative = true, name = "TestCase", namespace = "goog.testing")
   private static class GoogTestCase {
     public static native GoogTestCase getActiveTestCase();
 
     public double promiseTimeout;
+
+    public native void saveMessage(String message);
   }
 
   private JsUnitHelpers() {}

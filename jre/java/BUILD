@@ -58,6 +58,7 @@ j2cl_import(
     visibility = [
         "//benchmarking/java:__subpackages__",
         "//jre/javatests:__subpackages__",
+        "//junit/generator/java/com/google/j2cl/junit/runtime:__pkg__",
         "@com_google_j2cl_proto//java/com/google/protobuf/contrib/j2cl/runtime:__pkg__",
         "@com_google_jsinterop_base//:__subpackages__",
         "//transpiler/javatests:__subpackages__",

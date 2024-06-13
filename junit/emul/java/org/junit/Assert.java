@@ -1018,7 +1018,7 @@ public class Assert {
         throw new AssertionError(notThrownMessage);
     }
 
-    private static String buildPrefix(String message) {
+  static String buildPrefix(String message) {
         return message != null && !message.isEmpty() ? message + ": " : "";
     }
 }

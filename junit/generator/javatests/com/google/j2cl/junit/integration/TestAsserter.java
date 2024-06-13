@@ -65,7 +65,8 @@ public class TestAsserter {
     int fails = testResult.fails().size();
     int errors = testResult.errors().size();
     int succeeds = testResult.succeeds().size();
-    int testCount = fails + errors + succeeds;
+    int skips = testResult.skips().size();
+    int testCount = fails + errors + succeeds + skips;
     if (testMode.isWeb()) {
       // Like JUnit4, J2CL always counts errors as failures, the log will show "Failures" instead
       // of "Errors".
@@ -73,8 +74,9 @@ public class TestAsserter {
       errors = 0;
       // TODO(b/32608089): jsunit_test does not report number of tests correctly
       testCount = 1;
-      // Since total number of tests cannot be asserted; ensure nummber of succeeds is correct.
+      // Since total number of tests cannot be asserted; ensure number of succeeds/skips is correct.
       assertThat(consoleLogs.stream().filter(x -> x.contains(": PASSED"))).hasSize(succeeds);
+      assertThat(consoleLogs.stream().filter(x -> x.contains(": SKIPPED"))).hasSize(skips);
     } else if (testMode.isJ2kt()) {
       // J2KT JVM tests run with JUnit 4 which counts errors as failures, the log will shows
       // "Failures" instead of "Errors".
@@ -97,6 +99,7 @@ public class TestAsserter {
 
   private void assertTestResults() {
     testResult.succeeds().forEach(this::assertTestMethodSucceeded);
+    testResult.skips().forEach(this::assertTestMethodSkipped);
     testResult.fails().entries().forEach(this::assertTestMethodFailed);
     testResult.errors().entrySet().forEach(this::assertTestMethodFailed);
   }
@@ -162,6 +165,16 @@ public class TestAsserter {
 
     if (testMode.isWeb()) {
       assertLogsContains("%s : PASSED", method);
+    } else {
+      assertLogsNotContains(getJunitTestFailureMsg(method));
+    }
+  }
+
+  private void assertTestMethodSkipped(String method) {
+    method = getTestMethodName(method);
+
+    if (testMode.isWeb()) {
+      assertLogsContains("%s : SKIPPED", method);
     } else {
       assertLogsNotContains(getJunitTestFailureMsg(method));
     }

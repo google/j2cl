@@ -29,6 +29,7 @@ j2cl_test_integration_test(
 j2cl_test_integration_test(
     name = "J2clParameterizedIntegrationTest2",
     test_data = [
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:AssumptionBeforeParamTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:BeforeAndAfterParamTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:BeforeAndAfterParamWithFailingTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:ChildTest",

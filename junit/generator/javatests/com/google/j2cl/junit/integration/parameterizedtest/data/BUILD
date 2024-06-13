@@ -77,3 +77,7 @@ j2cl_test_integration_test_data(
 j2cl_test_integration_test_data(
     name = "IntegerToIntTest",
 )
+
+j2cl_test_integration_test_data(
+    name = "AssumptionBeforeParamTest",
+)

@@ -11,11 +11,19 @@ actualTest.${testMethod.javaMethodName()}();
  */
 package ${testClass.jsUnitPackageName()};
 
+import static com.google.j2cl.junit.runtime.JsUnitHelpers.handleAssumptionFailure;
+
+import com.google.j2cl.junit.runtime.InternalAssumptionViolatedException;
+
 public class ${testClass.jsUnitAdapterClassName()} {
   private static ${testClass.qualifiedName()} actualTest;
 
   public static void setUpPageIn${testClass.simpleName()}() throws Throwable {
-#methodExecutions( $testClass.beforeClassMethods() )
+    try {
+      #methodExecutions( $testClass.beforeClassMethods() )
+    } catch (InternalAssumptionViolatedException e) {
+      handleAssumptionFailure(e);
+    }
   }
 
   public static void tearDownPageIn${testClass.simpleName()}() throws Throwable {
@@ -24,11 +32,14 @@ public class ${testClass.jsUnitAdapterClassName()} {
 
   public static void setUpIn${testClass.simpleName()}() throws Throwable {
     actualTest = new ${testClass.qualifiedName()}();
-  #if($testClass.isJUnit3())
-    junit.framework.TestCaseViolator.callSetUp(actualTest);
-  #end
-  #methodExecutions(${testClass.beforeMethods()})
-
+    try {
+      #if($testClass.isJUnit3())
+      junit.framework.TestCaseViolator.callSetUp(actualTest);
+      #end
+      #methodExecutions(${testClass.beforeMethods()})
+    } catch (InternalAssumptionViolatedException e) {
+      handleAssumptionFailure(e);
+    }
   }
 
   public static void tearDownIn${testClass.simpleName()}() throws Throwable {
@@ -55,16 +66,17 @@ public class ${testClass.jsUnitAdapterClassName()} {
 #foreach($testMethod in ${testClass.testMethods()})
   public static void ${testMethod.jsTestMethodName()}In${testClass.simpleName()}() throws Throwable {
 
-#if ($testMethod.expectedExceptionQualifiedName())
     try {
-#end
-    #methodExecution( $testMethod )
+      #methodExecution( $testMethod )
+    } catch (InternalAssumptionViolatedException e) {
+      handleAssumptionFailure(e);
 #if ($testMethod.expectedExceptionQualifiedName())
     } catch (${testMethod.expectedExceptionQualifiedName()} e) {
       return;
     }
-
     throw new Exception("expected exception was not thrown");
+#else
+    }
 #end
   }
 #end

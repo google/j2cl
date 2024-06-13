@@ -19,11 +19,14 @@ import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
 @AutoValue
 public abstract class TestResult {
 
   abstract ImmutableList<String> succeeds();
+
+  abstract ImmutableList<String> skips();
 
   abstract ImmutableMultimap<String, String> fails();
 
@@ -50,6 +53,8 @@ public abstract class TestResult {
 
     abstract ImmutableList.Builder<String> succeedsBuilder();
 
+    abstract ImmutableList.Builder<String> skipsBuilder();
+
     abstract ImmutableMultimap.Builder<String, String> failsBuilder();
 
     abstract ImmutableMap.Builder<String, String> errorsBuilder();
@@ -68,6 +73,12 @@ public abstract class TestResult {
 
     public Builder addTestSuccess(String testName) {
       succeedsBuilder().add(testName);
+      return this;
+    }
+
+    @CanIgnoreReturnValue
+    public Builder addTestSkip(String testName) {
+      skipsBuilder().add(testName);
       return this;
     }
 

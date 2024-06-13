@@ -17,6 +17,9 @@ j2cl_library(
         "-Xep:DoNotCall:OFF",
     ],
     visibility = ["//:__pkg__"],
+    deps = [
+        "//junit/generator/java/com/google/j2cl/junit/runtime:internal_assumption_violated_exception-j2cl",
+    ],
 )
 
 # For J2kt JVM test, we delegate back to the official JUnit because we cannot have both
@@ -40,4 +43,7 @@ j2kt_native_library(
         "-Xep:DoNotCall:OFF",
     ],
     visibility = ["//:__pkg__"],
+    deps = [
+        "//junit/generator/java/com/google/j2cl/junit/runtime:internal_assumption_violated_exception-j2kt-native",
+    ],
 )

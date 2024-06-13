@@ -17,8 +17,10 @@ actualTest.${testMethod.javaMethodName()}();
 package ${testClass.jsUnitPackageName()};
 
 import static com.google.j2cl.junit.runtime.JsUnitHelpers.await;
+import static com.google.j2cl.junit.runtime.JsUnitHelpers.handleAssumptionFailure;
 import static com.google.j2cl.junit.runtime.JsUnitHelpers.withTimeout;
 
+import com.google.j2cl.junit.runtime.InternalAssumptionViolatedException;
 import com.google.j2cl.junit.runtime.JsUnitHelpers.IThenable;
 import jsinterop.annotations.JsAsync;
 import jsinterop.annotations.JsMethod;
@@ -85,7 +87,11 @@ public class ${testClass.jsUnitAdapterClassName()} {
 #end
 
   public void setUpPage() throws Throwable {
-#methodExecutions( $testClass.beforeClassMethods() )
+    try {
+      #methodExecutions( $testClass.beforeClassMethods() )
+    } catch (InternalAssumptionViolatedException e) {
+      handleAssumptionFailure(e);
+    }
   }
 
   public void tearDownPage() throws Throwable {
@@ -93,7 +99,11 @@ public class ${testClass.jsUnitAdapterClassName()} {
   }
 
   public void beforeParam() throws Throwable {
-#methodExecutions( $testClass.beforeParamMethods() )
+    try {
+      #methodExecutions( $testClass.beforeParamMethods() )
+    } catch (InternalAssumptionViolatedException e) {
+      handleAssumptionFailure(e);
+    }
   }
 
   public void afterParam() throws Throwable {
@@ -105,25 +115,27 @@ public class ${testClass.jsUnitAdapterClassName()} {
 #end
   public IThenable<?> setUp() throws Throwable {
 
-  actualTest = new ${testClass.qualifiedName()}(
-  #set($maxIndex = ${testClass.testConstructor().numberOfParameters()} - 1)
-  #if($maxIndex >= 0) ## Range [0..-1] still goes into the loop
-  #foreach($number in [0..$maxIndex])
-    getParam($number, currentParameterValueIndex)#if ($foreach.hasNext),#else#end
-  #end
-  #end);
+    actualTest = new ${testClass.qualifiedName()}(
+    #set($maxIndex = ${testClass.testConstructor().numberOfParameters()} - 1)
+    #if($maxIndex >= 0) ## Range [0..-1] still goes into the loop
+    #foreach($number in [0..$maxIndex])
+      getParam($number, currentParameterValueIndex)#if ($foreach.hasNext),#else#end
+    #end
+    #end);
 
 
-  #foreach($testField in ${testClass.parameterizedFields()})
-  actualTest.${testField.fieldName()} = getParam(${testField.index()}, currentParameterValueIndex);
-  #end
+    #foreach($testField in ${testClass.parameterizedFields()})
+    actualTest.${testField.fieldName()} = getParam(${testField.index()}, currentParameterValueIndex);
+    #end
 
-  #if($testClass.isJUnit3())
-  junit.framework.TestCaseViolator.callSetUp(actualTest);
-  #end
-
-  #methodExecutions( $testClass.beforeMethods() )
-
+    try {
+      #if($testClass.isJUnit3())
+      junit.framework.TestCaseViolator.callSetUp(actualTest);
+      #end
+      #methodExecutions( $testClass.beforeMethods() )
+    } catch (InternalAssumptionViolatedException e) {
+      handleAssumptionFailure(e);
+    }
     return null;
   }
 
@@ -157,16 +169,17 @@ public class ${testClass.jsUnitAdapterClassName()} {
   @JsAsync
 #end
   public IThenable<?> ${testMethod.jsTestMethodName()}() throws Throwable {
-#if ($testMethod.expectedExceptionQualifiedName())
     try {
-#end
-    #methodExecution( $testMethod )
+      #methodExecution( $testMethod )
+    } catch (InternalAssumptionViolatedException e) {
+      handleAssumptionFailure(e);
 #if ($testMethod.expectedExceptionQualifiedName())
     } catch (${testMethod.expectedExceptionQualifiedName()} e) {
       return null;
     }
     throw new Exception("expected exception was not thrown");
 #else
+    }
     return null;
 #end
   }

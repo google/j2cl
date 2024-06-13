@@ -11,6 +11,33 @@ package(
 )
 
 j2cl_test_integration_test_data(
+    name = "AssumptionTest",
+    platforms = [
+        "CLOSURE",
+        "WASM",
+        "J2KT",
+    ],
+)
+
+j2cl_test_integration_test_data(
+    name = "AssumptionBeforeTest",
+    platforms = [
+        "CLOSURE",
+        "WASM",
+        "J2KT",
+    ],
+)
+
+j2cl_test_integration_test_data(
+    name = "AssumptionBeforeClassTest",
+    platforms = [
+        "CLOSURE",
+        "WASM",
+        "J2KT",
+    ],
+)
+
+j2cl_test_integration_test_data(
     name = "BeforeAndAfterTest",
     platforms = [
         "CLOSURE",
