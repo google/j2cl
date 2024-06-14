@@ -379,6 +379,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
             methodDescriptor.getEnclosingTypeDescriptor().getMarkImplementorMethodDescriptor())) {
       jsDocBuilder.append(" @nodts");
     }
+    if (methodDescriptor.isSideEffectFree()) {
+      jsDocBuilder.append(" @nosideeffects");
+    }
 
     // TODO(b/280315375): Remove the kotlin special case due to disagreement between how we the
     //  classes in the type model vs their implementation.
