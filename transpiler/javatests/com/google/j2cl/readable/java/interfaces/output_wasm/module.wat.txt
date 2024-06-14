@@ -2,7 +2,6 @@
 (type $interfaces.Main.Interface.vtable (sub (struct
  (field $m_defaultMethod__java_lang_Object__void (ref $function.m_defaultMethod__java_lang_Object__void))
  (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
 
@@ -24,7 +23,9 @@
 
 ;;; Code for interfaces.Main.SubInterface [type definition]
 (type $interfaces.Main.SubInterface.vtable (sub (struct
+ (field $m_defaultMethod__java_lang_Object__void (ref $function.m_defaultMethod__java_lang_Object__void))
  (field $m_defaultMethod__java_lang_String__void (ref $function.m_defaultMethod__java_lang_String__void))
+ (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
  ))
 )
 
@@ -179,14 +180,15 @@
 )
 (global $interfaces.Main.SubInterface.vtable@$interfaces.Main.Implementor (ref $interfaces.Main.SubInterface.vtable)
  (struct.new $interfaces.Main.SubInterface.vtable
+  (ref.func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Implementor)
   (ref.func $m_defaultMethod__java_lang_String__void@interfaces.Main.Implementor)
+  (ref.func $m_interfaceMethod__void@interfaces.Main.Implementor)
  )
 )
 (global $interfaces.Main.Interface.vtable@$interfaces.Main.Implementor (ref $interfaces.Main.Interface.vtable)
  (struct.new $interfaces.Main.Interface.vtable
   (ref.func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Implementor)
   (ref.func $m_interfaceMethod__void@interfaces.Main.Implementor)
-  (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
 )
 
@@ -206,14 +208,15 @@
 )
 (global $interfaces.Main.SubInterface.vtable@$interfaces.Main.EnumImplementor (ref $interfaces.Main.SubInterface.vtable)
  (struct.new $interfaces.Main.SubInterface.vtable
+  (ref.func $m_defaultMethod__java_lang_Object__void@interfaces.Main.EnumImplementor)
   (ref.func $m_defaultMethod__java_lang_String__void@interfaces.Main.EnumImplementor)
+  (ref.func $m_interfaceMethod__void@interfaces.Main.EnumImplementor)
  )
 )
 (global $interfaces.Main.Interface.vtable@$interfaces.Main.EnumImplementor (ref $interfaces.Main.Interface.vtable)
  (struct.new $interfaces.Main.Interface.vtable
   (ref.func $m_defaultMethod__java_lang_Object__void@interfaces.Main.EnumImplementor)
   (ref.func $m_interfaceMethod__void@interfaces.Main.EnumImplementor)
-  (ref.func $m_toString__java_lang_String@java.lang.Enum)
  )
 )
 (global $java.lang.Comparable.vtable@$interfaces.Main.EnumImplementor (ref $java.lang.Comparable.vtable)
@@ -359,7 +362,7 @@
   ;;@ interfaces/Main.java:74:4
   (local.set $si (call $$create__interfaces_Main@interfaces.Main.Implementor (local.get $this)))
   ;;@ interfaces/Main.java:75:4
-  (call_ref $function.m_interfaceMethod__void (ref.as_non_null (local.get $si))(struct.get $interfaces.Main.Interface.vtable $m_interfaceMethod__void (ref.cast (ref $interfaces.Main.Interface.vtable) (call $get.itable.$interfaces.Main.Interface (local.get $si)))))
+  (call_ref $function.m_interfaceMethod__void (ref.as_non_null (local.get $si))(struct.get $interfaces.Main.SubInterface.vtable $m_interfaceMethod__void (ref.cast (ref $interfaces.Main.SubInterface.vtable) (call $get.itable.$interfaces.Main.SubInterface (local.get $si)))))
   ;;@ interfaces/Main.java:76:4
   (call_ref $function.m_defaultMethod__java_lang_String__void (ref.as_non_null (local.get $si))(ref.null $java.lang.String)(struct.get $interfaces.Main.SubInterface.vtable $m_defaultMethod__java_lang_String__void (ref.cast (ref $interfaces.Main.SubInterface.vtable) (call $get.itable.$interfaces.Main.SubInterface (local.get $si)))))
  )

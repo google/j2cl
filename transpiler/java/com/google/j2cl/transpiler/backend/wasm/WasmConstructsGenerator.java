@@ -49,7 +49,6 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 /** Generates all the syntactic .wat constructs for wasm. */
 public class WasmConstructsGenerator {
@@ -242,11 +241,9 @@ public class WasmConstructsGenerator {
         || AstUtils.isNonNativeJsEnum(type.getTypeDescriptor())) {
       return;
     }
-    if (type.isInterface()) {
-      // Interfaces at runtime are treated as java.lang.Object.
-      renderInterfaceVtableStruct(type);
-    } else {
-      renderClassVtableStruct(type);
+
+    renderTypeVtableStruct(type);
+    if (!type.isInterface()) {
       renderTypeStruct(type);
       if (!isModular) {
         renderClassItableStruct(type);
@@ -262,25 +259,15 @@ public class WasmConstructsGenerator {
     emitItableType(typeDeclaration, getInterfacesByItableIndex(typeDeclaration));
   }
 
-  /** Renders the struct for the vtable of a class. */
-  private void renderClassVtableStruct(Type type) {
+  /**
+   * Renders the struct for the vtable of a class or interface.
+   *
+   * <p>Vtables for interfaces include all methods from their superinterfaces. Calls to interface
+   * methods will point to the subinterface, if possible.
+   */
+  private void renderTypeVtableStruct(Type type) {
     WasmTypeLayout wasmTypeLayout = environment.getWasmTypeLayout(type.getDeclaration());
     renderVtableStruct(type, wasmTypeLayout.getAllPolymorphicMethods());
-  }
-
-  /**
-   * Renders the struct for the vtable of an interface.
-   *
-   * <p>There is a vtable for each interface, and it consists of fields only for the methods
-   * declared in that interface (not including methods declared in their supers). Calls to interface
-   * methods will always point to an interface that declared them.
-   */
-  private void renderInterfaceVtableStruct(Type type) {
-    // TODO(b/186472671): centralize all concepts related to layout in WasmTypeLayout, including
-    // interface vtables and index assignments.
-    renderVtableStruct(
-        type,
-        getSortedDeclaredPolymorphicMethodStream(type.getDeclaration()).collect(toImmutableList()));
   }
 
   private void renderVtableStruct(Type type, Collection<MethodDescriptor> methods) {
@@ -700,8 +687,9 @@ public class WasmConstructsGenerator {
 
   private void initializeInterfaceVtable(
       WasmTypeLayout wasmTypeLayout, TypeDeclaration interfaceDeclaration) {
+    WasmTypeLayout interfaceTypeLayout = environment.getWasmTypeLayout(interfaceDeclaration);
     ImmutableList<MethodDescriptor> interfaceMethodImplementations =
-        getSortedDeclaredPolymorphicMethodStream(interfaceDeclaration)
+        interfaceTypeLayout.getAllPolymorphicMethodsByMangledName().values().stream()
             .map(wasmTypeLayout::getImplementationMethod)
             .collect(toImmutableList());
     emitVtableInitialization(interfaceDeclaration, interfaceMethodImplementations);
@@ -743,13 +731,6 @@ public class WasmConstructsGenerator {
     builder.unindent();
     builder.newLine();
     builder.append(")");
-  }
-
-  private static Stream<MethodDescriptor> getSortedDeclaredPolymorphicMethodStream(
-      TypeDeclaration typeDeclaration) {
-    return typeDeclaration.getDeclaredMethodDescriptors().stream()
-        .filter(MethodDescriptor::isPolymorphic)
-        .sorted(Comparator.comparing(MethodDescriptor::getMangledName));
   }
 
   /**

@@ -44,6 +44,7 @@
 
 ;;; Code for supermethodcall.I3 [type definition]
 (type $supermethodcall.I3.vtable (sub (struct
+ (field $m_m__void (ref $function.m_m__void))
  ))
 )
 
@@ -349,6 +350,7 @@
 )
 (global $supermethodcall.I3.vtable@$supermethodcall.Sub (ref $supermethodcall.I3.vtable)
  (struct.new $supermethodcall.I3.vtable
+  (ref.func $m_m__void@supermethodcall.Sub)
  )
 )
 (global $supermethodcall.I1.vtable@$supermethodcall.Sub (ref $supermethodcall.I1.vtable)

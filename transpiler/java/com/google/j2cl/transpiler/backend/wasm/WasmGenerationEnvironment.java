@@ -28,6 +28,7 @@ import com.google.common.collect.HashMultiset;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Multiset;
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.AstUtils;
@@ -412,18 +413,19 @@ public class WasmGenerationEnvironment {
                 nameByDeclaration.putAll(
                     UniqueNamesResolver.computeUniqueNames(ImmutableSet.of(), t)));
 
-    // Create a representation for Java classes that is useful to lay out the structs and
+    // Create a representation for Java types that is useful to lay out the structs and
     // vtables needed in the wasm output.
     wasmTypeLayoutByTypeDeclaration = new LinkedHashMap<>();
     library
         .streamTypes()
-        .filter(Predicates.not(Type::isInterface))
         // Traverse superclasses before subclasses to ensure that the layout for the superclass
         // is already available to build the layout for the subclass.
         .sorted(comparingInt(t -> t.getDeclaration().getTypeHierarchyDepth()))
         .forEach(
             t -> {
               TypeDeclaration typeDeclaration = t.getDeclaration();
+              // Force creation of layouts for all superinterfaces.
+              typeDeclaration.getAllSuperInterfaces().forEach(this::getOrCreateWasmTypeLayout);
               WasmTypeLayout superWasmLayout =
                   getOrCreateWasmTypeLayout(typeDeclaration.getSuperTypeDeclaration());
               var previous =
@@ -455,6 +457,7 @@ public class WasmGenerationEnvironment {
 
   /** Returns a wasm layout creating it from a type declaration if it wasn't created before. */
   @Nullable
+  @CanIgnoreReturnValue
   private WasmTypeLayout getOrCreateWasmTypeLayout(TypeDeclaration typeDeclaration) {
     if (typeDeclaration == null) {
       return null;

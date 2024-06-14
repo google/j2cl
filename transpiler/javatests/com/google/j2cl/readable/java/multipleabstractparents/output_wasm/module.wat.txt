@@ -75,6 +75,7 @@
 
 ;;; Code for multipleabstractparents.MultipleAbstractParents.IStringList [type definition]
 (type $multipleabstractparents.MultipleAbstractParents.IStringList.vtable (sub (struct
+ (field $m_getFoo__java_lang_Object__java_lang_String (ref $function.m_getFoo__java_lang_Object__java_lang_String))
  (field $m_getFoo__java_lang_String__java_lang_String (ref $function.m_getFoo__java_lang_String__java_lang_String))
  ))
 )
@@ -374,6 +375,7 @@
 )
 (global $multipleabstractparents.MultipleAbstractParents.IStringList.vtable@$multipleabstractparents.MultipleAbstractParents.StringList (ref $multipleabstractparents.MultipleAbstractParents.IStringList.vtable)
  (struct.new $multipleabstractparents.MultipleAbstractParents.IStringList.vtable
+  (ref.func $m_getFoo__java_lang_Object__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractCollection)
   (ref.func $m_getFoo__java_lang_String__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractStringList)
  )
 )
@@ -396,6 +398,7 @@
 )
 (global $multipleabstractparents.MultipleAbstractParents.IStringList.vtable@$multipleabstractparents.MultipleAbstractParents.StringListChild (ref $multipleabstractparents.MultipleAbstractParents.IStringList.vtable)
  (struct.new $multipleabstractparents.MultipleAbstractParents.IStringList.vtable
+  (ref.func $m_getFoo__java_lang_Object__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractCollection)
   (ref.func $m_getFoo__java_lang_String__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractStringList)
  )
 )

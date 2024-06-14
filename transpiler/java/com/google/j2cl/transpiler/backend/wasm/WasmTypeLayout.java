@@ -171,6 +171,12 @@ abstract class WasmTypeLayout {
   }
 
   private boolean needsVtableEntry(MethodDescriptor methodDescriptor) {
+    if (getTypeDescriptor().isInterface() && methodDescriptor.isOrOverridesJavaLangObjectMethod()) {
+      // `j.l.Object` methods and their overrides are never dispatched through interfaces.
+      // Hence they should not be included in any interface vtable (even if the interface
+      // redeclares them).
+      return false;
+    }
     return !(methodDescriptor.getEnclosingTypeDescriptor().isFinal() || methodDescriptor.isFinal())
         // TODO(b/342007699): Consider a separate method instead of
         // getJsOverriddenMethodDescriptors.
