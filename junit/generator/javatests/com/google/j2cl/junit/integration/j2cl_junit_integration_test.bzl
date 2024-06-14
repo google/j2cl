@@ -17,19 +17,20 @@ def j2cl_test_integration_test(name, test_data, test_data_java_only = [], deps =
         platforms: The platform on which tests run.
         tags: Tags to be passed to the underlying test target.
     """
-    test_data_java = test_data + test_data_java_only
-    test_data_j2cl = [d + "-j2cl" for d in test_data]
-    test_data_j2cl_compiled = [d + "-j2cl_compiled" for d in test_data]
-    test_data_j2kt = [d + "-j2kt-jvm" for d in test_data]
-    test_data_j2wasm = [d + "-j2wasm" for d in test_data]
-    test_data_j2wasm_optimized = [d + "-j2wasm_optimized" for d in test_data]
 
-    test_data_all = test_data_java + test_data_j2cl + test_data_j2cl_compiled
-    if "WASM" in platforms:
-        test_data_all = test_data_all + test_data_j2wasm + test_data_j2wasm_optimized
+    # We always runs the tests against Java.
+    test_data_all = test_data + test_data_java_only
+
+    if "CLOSURE" in platforms:
+        test_data_all += [d + "-j2cl" for d in test_data]
+        test_data_all += [d + "-j2cl_compiled" for d in test_data]
 
     if "J2KT" in platforms:
-        test_data_all = test_data_all + test_data_j2kt
+        test_data_all += [d + "-j2kt-jvm" for d in test_data]
+
+    if "WASM" in platforms:
+        test_data_all += [d + "-j2wasm" for d in test_data]
+        test_data_all += [d + "-j2wasm_optimized" for d in test_data]
 
     shard_count = len(test_data_all)
     if shard_count > 50:

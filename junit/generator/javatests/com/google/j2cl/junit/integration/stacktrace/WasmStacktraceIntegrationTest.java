@@ -29,7 +29,7 @@ public class WasmStacktraceIntegrationTest extends IntegrationTestBase {
 
   @Before
   public void assumeJ2wasm() {
-    assumeTrue(testMode.isWeb() || testMode.isJvm());
+    assumeTrue(testMode.isJ2wasm() || testMode.isJvm());
   }
 
   @Test
