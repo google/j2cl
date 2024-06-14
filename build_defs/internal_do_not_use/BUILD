@@ -94,6 +94,7 @@ j2kt_native_library(
     testonly = 1,
     exports = [
         "//junit/generator/java/com/google/j2cl/junit/runtime:testcase_violator-j2kt-native",
+        "//third_party:junit-j2kt-native",
     ],
 )
 
@@ -102,6 +103,7 @@ j2kt_jvm_library(
     testonly = 1,
     exports = [
         "//junit/generator/java/com/google/j2cl/junit/runtime:testcase_violator-j2kt-jvm",
+        "//third_party:junit-j2kt-jvm",
     ],
 )
 

@@ -237,4 +237,55 @@ public class J2ktJUnit4IntegrationTest extends IntegrationTestBase {
 
     assertThat(logLines).matches(testResult);
   }
+
+  @Test
+  public void testAssumption() throws Exception {
+    String testName = "AssumptionTest";
+    TestResult testResult =
+        newTestResultBuilder()
+            .testClassName(testName)
+            .addTestSkip("testAssumptionFails")
+            .addJavaLogLineSequence("setUp", "before assumption fails", "tearDown")
+            .addBlackListedWord("should_not_be_in_log")
+            .addTestSuccess("testAssumptionPasses")
+            .addJavaLogLineSequence("setUp", "after assumption passes", "tearDown")
+            .build();
+
+    List<String> logLines = runTest(testName);
+    assertThat(logLines).matches(testResult);
+  }
+
+  @Test
+  public void testAssumptionBefore() throws Exception {
+    String testName = "AssumptionBeforeTest";
+    TestResult testResult =
+        newTestResultBuilder()
+            .testClassName(testName)
+            .addTestSkip("testShouldNotRun")
+            .addJavaLogLineSequence("setUp", "tearDown")
+            .addBlackListedWord("should_not_be_in_log")
+            .build();
+
+    List<String> logLines = runTest(testName);
+    assertThat(logLines).matches(testResult);
+  }
+
+  @Test
+  public void testAssumptionBeforeClass() throws Exception {
+    String testName = "AssumptionBeforeClassTest";
+    var testResultBuilder = newTestResultBuilder().testClassName(testName);
+    // On the JVM, short-circuiting in @BeforeClass causes the entire test to pass, but it will list
+    // zero run.
+    if (!testMode.isJvm()) {
+      testResultBuilder.addTestSkip("testShouldNotRun");
+    }
+    TestResult testResult =
+        testResultBuilder
+            .addBlackListedWord("should_not_be_in_log")
+            .addJavaLogLineSequence("beforeClass ran", "afterClass")
+            .build();
+
+    List<String> logLines = runTest(testName);
+    assertThat(logLines).matches(testResult);
+  }
 }

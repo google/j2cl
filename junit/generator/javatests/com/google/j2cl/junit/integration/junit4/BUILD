@@ -65,6 +65,9 @@ j2cl_test_integration_test(
     name = "J2ktJUnit4IntegrationTest",
     platforms = ["J2KT"],
     test_data = [
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:AssumptionBeforeClassTest",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:AssumptionBeforeTest",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:AssumptionTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:BeforeAndAfterTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:ExpectedExceptionTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:IgnoreTest",
