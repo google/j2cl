@@ -19,6 +19,7 @@ import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptor
+import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.backend.kotlin.common.runIf
 
@@ -85,5 +86,6 @@ private val TypeArgument.needsFixForUnboundWildcard
     typeDescriptor is TypeVariable &&
       typeDescriptor.isWildcardOrCapture &&
       typeDescriptor.lowerBoundTypeDescriptor == null &&
+      !isJavaLangObject(typeDescriptor.upperBoundTypeDescriptor) &&
       typeDescriptor.upperBoundTypeDescriptor.toNonNullable() ==
         declarationTypeVariable.upperBoundTypeDescriptor.toNonNullable()

@@ -181,9 +181,9 @@ open class ExplicitNotNullable {
  internal var collection_pp_nullability_explicitnotnullable: ExplicitNotNullable.Consumer<*>? = null
 
  @JvmField
- internal var nonNullableCollection_pp_nullability_explicitnotnullable: ExplicitNotNullable.Consumer<*>? = null
+ internal var nonNullableCollection_pp_nullability_explicitnotnullable: ExplicitNotNullable.Consumer<out Any>? = null
 
- internal open fun unboundedWildCard_pp_nullability_explicitnotnullable(c: ExplicitNotNullable.Consumer<*>, nc: ExplicitNotNullable.Consumer<*>) {
+ internal open fun unboundedWildCard_pp_nullability_explicitnotnullable(c: ExplicitNotNullable.Consumer<*>, nc: ExplicitNotNullable.Consumer<out Any>) {
   this.collection_pp_nullability_explicitnotnullable = c
   this.nonNullableCollection_pp_nullability_explicitnotnullable = nc
  }
@@ -301,13 +301,13 @@ open class ExplicitNotNullable {
   internal fun testListOfWildcard_pp_nullability_explicitnotnullable(l: MutableList<*>) {}
 
   @JvmStatic
-  internal fun testListOfWildcardExtendsDefaultNullabilityObject_pp_nullability_explicitnotnullable(l: MutableList<*>) {}
+  internal fun testListOfWildcardExtendsDefaultNullabilityObject_pp_nullability_explicitnotnullable(l: MutableList<out Any>) {}
 
   @JvmStatic
   internal fun testListOfWildcardExtendsNullableObject_pp_nullability_explicitnotnullable(l: MutableList<*>) {}
 
   @JvmStatic
-  internal fun testListOfWildcardExtendsNonNullObject_pp_nullability_explicitnotnullable(l: MutableList<*>) {}
+  internal fun testListOfWildcardExtendsNonNullObject_pp_nullability_explicitnotnullable(l: MutableList<out Any>) {}
 
   @JvmStatic
   internal fun testListOfWildcardExtendsDefaultNullabilityString_pp_nullability_explicitnotnullable(l: MutableList<out String>) {}
