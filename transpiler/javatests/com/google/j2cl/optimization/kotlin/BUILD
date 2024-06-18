@@ -1,7 +1,7 @@
 # Description:
-#   j2cl tests verifying important optimizations
+#   j2cl optimization tests for Kotlin frontend.
 
-load("//build_defs:rules.bzl", "j2cl_library", "j2cl_test")
+load("//build_defs:rules.bzl", "j2cl_test")
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],
@@ -10,10 +10,7 @@ package(
 
 j2cl_test(
     name = "OptimizationTestSuite",
-    srcs = glob(
-        ["*.java"],
-        exclude = ["OptimizationTestUtil.java"],
-    ),
+    srcs = glob(["*.kt"]),
     compile = 1,
     compiler = "//javascript/tools/jscompiler:head",
     extra_defs = [
@@ -27,20 +24,8 @@ j2cl_test(
         "-XepDisableAllChecks",
     ],
     deps = [
-        ":OptimizationTestUtil",
         "//third_party:jsinterop-annotations-j2cl",
         "//third_party:junit-j2cl",
-    ],
-)
-
-j2cl_library(
-    name = "OptimizationTestUtil",
-    testonly = 1,
-    srcs = ["OptimizationTestUtil.java"],
-    visibility = [
-        "//transpiler/javatests/com/google/j2cl/optimization:__subpackages__",
-    ],
-    deps = [
-        "//third_party:junit-j2cl",
+        "//transpiler/javatests/com/google/j2cl/optimization:OptimizationTestUtil",
     ],
 )
