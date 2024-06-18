@@ -18,6 +18,8 @@ package com.google.j2cl.jre.java9.util;
 import static org.junit.Assert.assertThrows;
 
 import com.google.j2cl.jre.java.util.EmulTestBase;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -95,6 +97,34 @@ public class ListTest extends EmulTestBase {
         () -> List.of("a", "b", "c", "d", "e", "f", "g", "h", "i", null));
     assertThrowsNullPointerException(
         () -> List.of("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", null));
+  }
+
+  public void testCopyOf() {
+    assertIsImmutableListOf(List.copyOf(List.of("a", "b")), "a", "b");
+    assertIsImmutableListOf(List.copyOf(Arrays.asList("a", "b")), "a", "b");
+
+    ArrayList<String> arrayList = new ArrayList<>();
+    arrayList.add("a");
+    arrayList.add("b");
+    List<String> copy = List.copyOf(arrayList);
+    assertIsImmutableListOf(copy, "a", "b");
+
+    // verify that mutating the original doesn't affect the copy
+    arrayList.add("c");
+    assertEquals(2, copy.size());
+    assertFalse(copy.contains("c"));
+
+    arrayList.remove(0);
+    assertEquals(2, copy.size());
+    assertTrue(copy.contains("a"));
+
+    // ensure that null values in the collection result in a NPE
+    try {
+      List.copyOf(Arrays.asList("a", null));
+      fail("Expected NullPointerException passing copy a collection with a null value");
+    } catch (NullPointerException ignore) {
+      // expected
+    }
   }
 
   private static void assertIsImmutableListOf(List<String> list, String... contents) {

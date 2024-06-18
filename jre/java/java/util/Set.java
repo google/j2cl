@@ -15,6 +15,7 @@
  */
 package java.util;
 
+
 import jsinterop.annotations.JsIgnore;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
@@ -91,14 +92,18 @@ public interface Set<E> extends Collection<E> {
   static <E> Set<E> of(E... elements) {
     // This is not marked as JS method for symmetry with List.of and avoid extra cloning at
     // call sites when an array is passed. A different method provided as Set.of to JS below.
-    return Collections.internalSetOf(elements);
+    return Collections.internalSetOf(elements, /* allowDuplicates= */ false);
   }
 
   /** Set.of API that is friendly to use from JavaScript. */
   @JsMethod(name = "of")
   static <E> Set<E> jsOf(E... elements) {
     // Note that this method is also used internal "of(E e)" etc, to take advantage of JS varargs.
-    return Collections.internalSetOf(elements);
+    return Collections.internalSetOf(elements, /* allowDuplicates= */ false);
+  }
+
+  static <E> Set<E> copyOf(Collection<? extends E> coll) {
+    return Collections.internalSetOf((E[]) coll.toArray(), /* allowDuplicates= */ true);
   }
 
   @JsIgnore

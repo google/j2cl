@@ -15,7 +15,6 @@
  */
 package java.util;
 
-import static javaemul.internal.InternalPreconditions.checkArgument;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import java.io.Serializable;
@@ -159,18 +158,12 @@ public interface Map<K, V> {
 
   @JsIgnore
   static <K, V> Map<K, V> ofEntries(Entry<? extends K, ? extends V>... entries) {
-    if (entries.length == 0) {
-      return Collections.emptyMap();
-    }
+    return Collections.internalMapFromEntries(Arrays.asList(entries));
+  }
 
-    Map<K, V> map = new HashMap<>();
-    for (Entry<? extends K, ? extends V> entry : entries) {
-      checkNotNull(entry);
-      V old = map.put(checkNotNull(entry.getKey()), checkNotNull(entry.getValue()));
-      checkArgument(old == null, "Duplicate element");
-    }
-
-    return Collections.unmodifiableMap(map);
+  @JsIgnore
+  static <A, B> Map<A, B> copyOf(Map<? extends A, ? extends B> map) {
+    return Collections.internalMapFromEntries(map.entrySet());
   }
 
   /**

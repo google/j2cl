@@ -19,6 +19,7 @@ import static org.junit.Assert.assertThrows;
 
 import com.google.j2cl.jre.java.util.EmulTestBase;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -107,6 +108,37 @@ public class SetTest extends EmulTestBase {
     assertThrows(
         IllegalArgumentException.class,
         () -> Set.of("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "a"));
+  }
+
+  public void testCopyOf() {
+    assertIsImmutableSetOf(Set.copyOf(Set.of("a", "b")), "a", "b");
+    assertIsImmutableSetOf(Set.copyOf(Arrays.asList("a", "b")), "a", "b");
+
+    HashSet<String> hashSet = new HashSet<>();
+    hashSet.add("a");
+    hashSet.add("b");
+    Set<String> copy = Set.copyOf(hashSet);
+    assertIsImmutableSetOf(copy, "a", "b");
+
+    // verify that mutating the original has no effect on the copy
+    hashSet.add("c");
+    assertEquals(2, copy.size());
+    assertFalse(copy.contains("c"));
+
+    hashSet.remove("a");
+    assertEquals(2, copy.size());
+    assertTrue(copy.contains("a"));
+
+    // ensure that null value result in a NPE
+    try {
+      Set.copyOf(Arrays.asList("a", null));
+      fail("Expected NullPointerException from null item in collection passed to copyOf");
+    } catch (NullPointerException ignored) {
+      // expected
+    }
+
+    // ensure that duplicate values are ignored.
+    assertIsImmutableSetOf(Set.copyOf(Arrays.asList("a", "a")), "a");
   }
 
   private static void assertIsImmutableSetOf(Set<String> set, String... contents) {

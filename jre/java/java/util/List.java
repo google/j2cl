@@ -110,6 +110,10 @@ public interface List<E> extends Collection<E> {
     return Collections.internalListOf(elements);
   }
 
+  static <E> List<E> copyOf(Collection<? extends E> coll) {
+    return Collections.internalListOf((E[]) coll.toArray());
+  }
+
   @JsMethod(name = "addAtIndex")
   void add(int index, E element);
 

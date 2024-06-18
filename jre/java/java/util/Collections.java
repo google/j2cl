@@ -21,6 +21,7 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 import static javaemul.internal.InternalPreconditions.isApiChecked;
 
 import java.io.Serializable;
+import java.util.Map.Entry;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 import jsinterop.annotations.JsMethod;
@@ -1366,7 +1367,7 @@ public class Collections {
         elements.length == 0 ? emptyList() : Arrays.asList(elements));
   }
 
-  static <E> Set<E> internalSetOf(E[] elements) {
+  static <E> Set<E> internalSetOf(E[] elements, boolean allowDuplicates) {
     if (elements.length == 0) {
       return Collections.unmodifiableSet(emptySet());
     }
@@ -1374,7 +1375,9 @@ public class Collections {
     Set<E> set = new HashSet<>();
     for (int i = 0; i < elements.length; i++) {
       boolean added = set.add(checkNotNull(elements[i]));
-      checkArgument(added, "Duplicate element");
+      if (!allowDuplicates) {
+        checkArgument(added, "Duplicate element");
+      }
     }
     return Collections.unmodifiableSet(set);
   }
@@ -1389,6 +1392,21 @@ public class Collections {
     Map<K, V> map = new HashMap<>();
     for (int i = 0; i < elements.length; i = i + 2) {
       V old = map.put((K) checkNotNull(elements[i]), (V) checkNotNull(elements[i + 1]));
+      checkArgument(old == null, "Duplicate element");
+    }
+    return Collections.unmodifiableMap(map);
+  }
+
+  static <K, V> Map<K, V> internalMapFromEntries(
+      Collection<? extends Entry<? extends K, ? extends V>> entries) {
+    if (entries.isEmpty()) {
+      return Collections.unmodifiableMap(emptyMap());
+    }
+
+    Map<K, V> map = new HashMap<>();
+    for (Entry<? extends K, ? extends V> entry : entries) {
+      checkNotNull(entry);
+      V old = map.put(checkNotNull(entry.getKey()), checkNotNull(entry.getValue()));
       checkArgument(old == null, "Duplicate element");
     }
     return Collections.unmodifiableMap(map);
