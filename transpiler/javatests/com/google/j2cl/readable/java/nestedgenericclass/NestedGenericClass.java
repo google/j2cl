@@ -15,7 +15,7 @@
  */
 package nestedgenericclass;
 
-import org.jspecify.nullness.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class NestedGenericClass<T> {
   // nested generic classes with shadowing type parameters.

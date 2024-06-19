@@ -14,5 +14,5 @@
  * the License.
  */
 
-@org.jspecify.nullness.NullMarked
+@org.jspecify.annotations.NullMarked
 package com.google.j2cl.jre.java8.util;

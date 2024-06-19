@@ -17,7 +17,7 @@
 package com.google.j2cl.jre.java.lang;
 
 import junit.framework.TestCase;
-import org.jspecify.nullness.NullMarked;
+import org.jspecify.annotations.NullMarked;
 
 /** Tests for JRE emulation of java.lang.Math. */
 @NullMarked

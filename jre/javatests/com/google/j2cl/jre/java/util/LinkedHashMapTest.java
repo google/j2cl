@@ -23,7 +23,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import org.jspecify.nullness.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /** Tests <code>LinkedHashMap</code>. */
 public class LinkedHashMapTest extends TestMap {

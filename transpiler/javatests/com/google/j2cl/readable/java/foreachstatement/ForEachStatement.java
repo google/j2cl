@@ -17,7 +17,7 @@ package foreachstatement;
 
 import java.util.Iterator;
 import jsinterop.annotations.JsNonNull;
-import org.jspecify.nullness.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class ForEachStatement {
   public void test(Iterable<Throwable> iterable) {

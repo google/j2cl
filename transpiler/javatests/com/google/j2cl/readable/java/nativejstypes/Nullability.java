@@ -17,8 +17,8 @@ package nativejstypes;
 
 import javax.annotation.Nonnull;
 import jsinterop.annotations.JsType;
-import org.jspecify.nullness.NullMarked;
-import org.jspecify.nullness.Nullable;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /** Native JsType with differing parameter nullability. */
 @JsType(isNative = true)

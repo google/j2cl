@@ -20,7 +20,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import org.jspecify.nullness.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /** Tests for java.util.Map implementing classes Java 8 API emulation. */
 abstract class AbstractJava8MapTest extends EmulTestBase {

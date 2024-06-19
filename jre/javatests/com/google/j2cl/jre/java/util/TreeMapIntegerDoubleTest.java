@@ -15,8 +15,8 @@
  */
 package com.google.j2cl.jre.java.util;
 
-import org.jspecify.nullness.NullMarked;
-import org.jspecify.nullness.Nullable;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /** Tests <code>TreeMap</code> with a <code>Comparator</code>. */
 @NullMarked

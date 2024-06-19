@@ -18,7 +18,7 @@ package j2kt;
 import static org.junit.Assert.assertEquals;
 
 import junit.framework.TestCase;
-import org.jspecify.nullness.NullMarked;
+import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 public final class LateInitTest2 extends TestCase {

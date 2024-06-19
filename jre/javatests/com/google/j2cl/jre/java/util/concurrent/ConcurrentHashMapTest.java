@@ -18,7 +18,7 @@ import java.util.Enumeration;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import org.jspecify.nullness.NullMarked;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * Tests for {@link java.util.concurrent.ConcurrentHashMap}. It's adopted from tests from {@code

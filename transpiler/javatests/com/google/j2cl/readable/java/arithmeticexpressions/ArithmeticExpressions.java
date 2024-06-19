@@ -15,7 +15,7 @@
  */
 package arithmeticexpressions;
 
-import org.jspecify.nullness.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class ArithmeticExpressions {
   private static final float FLOAT_CONSTANT = 1.1f;

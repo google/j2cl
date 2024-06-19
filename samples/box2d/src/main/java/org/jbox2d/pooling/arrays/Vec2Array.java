@@ -25,7 +25,7 @@ package org.jbox2d.pooling.arrays;
 
 import java.util.HashMap;
 import org.jbox2d.common.Vec2;
-import org.jspecify.nullness.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * not thread safe Vec2[] pool

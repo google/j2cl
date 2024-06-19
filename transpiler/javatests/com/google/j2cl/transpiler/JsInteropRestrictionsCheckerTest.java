@@ -2523,11 +2523,11 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsOptionalSucceeds() {
     newTesterWithDefaults()
-        .addCompilationUnit("org.jspecify.nullness.Nullable", "public @interface Nullable {}")
+        .addCompilationUnit("org.jspecify.annotations.Nullable", "public @interface Nullable {}")
         .addCompilationUnit(
             "test.Buggy",
             "import jsinterop.annotations.*;",
-            "import org.jspecify.nullness.*;",
+            "import org.jspecify.annotations.*;",
             "public class Buggy<T> {",
             "  @JsConstructor public Buggy(@JsOptional Object a) {}",
             "  @JsMethod public void foo(int a, Object b, @JsOptional String c) {}",
@@ -2559,11 +2559,11 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsOptionalNotJsOptionalOverrideFails() {
     newTesterWithDefaults()
-        .addCompilationUnit("org.jspecify.nullness.Nullable", "public @interface Nullable {}")
+        .addCompilationUnit("org.jspecify.annotations.Nullable", "public @interface Nullable {}")
         .addCompilationUnit(
             "test.Buggy",
             "import jsinterop.annotations.*;",
-            "import org.jspecify.nullness.*;",
+            "import org.jspecify.annotations.*;",
             "interface Interface {",
             "  @JsMethod void foo(@JsOptional Object o);",
             "  @JsMethod Object bar(@JsOptional Object o);",
@@ -2656,12 +2656,13 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
     newTesterWithDefaults()
         .addArgs(
             "-experimentalenablejspecifysupportdonotenablewithoutjspecifystaticcheckingoryoumightcauseanoutage")
-        .addCompilationUnit("org.jspecify.nullness.NullMarked", "public @interface NullMarked {}")
-        .addCompilationUnit("org.jspecify.nullness.Nullable", "public @interface Nullable {}")
+        .addCompilationUnit(
+            "org.jspecify.annotations.NullMarked", "public @interface NullMarked {}")
+        .addCompilationUnit("org.jspecify.annotations.Nullable", "public @interface Nullable {}")
         .addCompilationUnit(
             "test.Buggy",
             "import jsinterop.annotations.*;",
-            "import org.jspecify.nullness.*;",
+            "import org.jspecify.annotations.*;",
             "@NullMarked",
             "public class Buggy {",
             "   @JsMethod public <T extends @Nullable Object> void bar(@JsOptional @Nullable T a,"
@@ -3680,9 +3681,10 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
   public void testNullMarkedFails() {
     newTesterWithDefaults()
         // Define the annotation here since we don't have it as a dependency.
-        .addCompilationUnit("org.jspecify.nullness.NullMarked", "public @interface NullMarked {}")
         .addCompilationUnit(
-            "test.Buggy", "@org.jspecify.nullness.NullMarked", "class NullMarkedType {", "}")
+            "org.jspecify.annotations.NullMarked", "public @interface NullMarked {}")
+        .addCompilationUnit(
+            "test.Buggy", "@org.jspecify.annotations.NullMarked", "class NullMarkedType {", "}")
         .assertTranspileFails()
         .assertErrorsWithoutSourcePosition(
             "@NullMarked annotation is not supported without enabling static analysis.");

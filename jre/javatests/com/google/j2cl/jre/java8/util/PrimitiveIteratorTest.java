@@ -25,7 +25,7 @@ import java.util.function.DoubleConsumer;
 import java.util.function.IntConsumer;
 import java.util.function.LongConsumer;
 import junit.framework.TestCase;
-import org.jspecify.nullness.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /** Tests for PrimitiveIterator JRE emulation. */
 public class PrimitiveIteratorTest extends TestCase {

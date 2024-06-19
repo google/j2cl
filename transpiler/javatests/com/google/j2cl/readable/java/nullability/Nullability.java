@@ -23,7 +23,7 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsNonNull;
-import org.jspecify.nullness.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class Nullability {
   @Nonnull private String f1 = "Hello";

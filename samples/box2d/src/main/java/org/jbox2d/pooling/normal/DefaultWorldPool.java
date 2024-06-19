@@ -47,7 +47,7 @@ import org.jbox2d.dynamics.contacts.PolygonAndCircleContact;
 import org.jbox2d.dynamics.contacts.PolygonContact;
 import org.jbox2d.pooling.IDynamicStack;
 import org.jbox2d.pooling.IWorldPool;
-import org.jspecify.nullness.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Provides object pooling for all objects used in the engine. Objects retrieved from here should

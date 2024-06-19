@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.Set;
 import javaemul.internal.annotations.KtIn;
 import javaemul.internal.annotations.KtOut;
-import org.jspecify.nullness.NullMarked;
+import org.jspecify.annotations.NullMarked;
 
 interface FnWithoutVariance<I, O> {}
 

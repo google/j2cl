@@ -20,7 +20,7 @@ import static com.google.j2cl.jre.testing.TestUtils.isWasm;
 import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.Arrays;
 import junit.framework.TestCase;
-import org.jspecify.nullness.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /** Tests java.lang.System. */
 public class SystemTest extends TestCase {

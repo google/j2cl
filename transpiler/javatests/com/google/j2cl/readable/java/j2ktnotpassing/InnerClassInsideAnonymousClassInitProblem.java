@@ -16,7 +16,7 @@
 package j2ktnotpassing;
 
 import javaemul.internal.annotations.KtProperty;
-import org.jspecify.nullness.NullMarked;
+import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 public class InnerClassInsideAnonymousClassInitProblem {

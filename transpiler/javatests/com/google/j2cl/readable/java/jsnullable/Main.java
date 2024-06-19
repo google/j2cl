@@ -18,7 +18,7 @@ package jsnullable;
 import java.util.ArrayList;
 import java.util.List;
 import jsinterop.annotations.JsNullable;
-import org.jspecify.nullness.NullMarked;
+import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 public class Main {

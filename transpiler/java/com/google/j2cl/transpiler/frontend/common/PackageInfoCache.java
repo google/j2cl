@@ -37,7 +37,7 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Nullable;
 import jsinterop.annotations.JsPackage;
-import org.jspecify.nullness.NullMarked;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * A cache for information on package-info files that are needed for transpilation, like JsInterop

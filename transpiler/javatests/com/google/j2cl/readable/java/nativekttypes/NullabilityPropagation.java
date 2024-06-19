@@ -17,8 +17,8 @@ package nativekttypes;
 
 import jsinterop.annotations.JsNonNull;
 import jsinterop.annotations.JsOptional;
-import org.jspecify.nullness.NullMarked;
-import org.jspecify.nullness.Nullable;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 public final class NullabilityPropagation {
   @NullMarked

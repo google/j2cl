@@ -17,7 +17,7 @@ package j2kt;
 
 import static org.junit.Assert.assertEquals;
 
-import org.jspecify.nullness.NullMarked;
+import org.jspecify.annotations.NullMarked;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

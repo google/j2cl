@@ -21,7 +21,7 @@ import javax.annotation.Nonnull;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsNonNull;
 import jsinterop.annotations.JsOptional;
-import org.jspecify.nullness.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class DefaultNotNullable {
   private String f1 = "Hello";

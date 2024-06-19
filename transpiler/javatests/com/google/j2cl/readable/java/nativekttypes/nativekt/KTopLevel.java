@@ -17,7 +17,7 @@ package nativekttypes.nativekt;
 
 import javaemul.internal.annotations.KtName;
 import javaemul.internal.annotations.KtProperty;
-import org.jspecify.nullness.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class KTopLevel<O> {
   public static class KNested<N> {
