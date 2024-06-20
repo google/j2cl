@@ -19,11 +19,14 @@ import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.common.ThreadLocalInterner;
+import com.google.j2cl.common.visitor.Processor;
+import com.google.j2cl.common.visitor.Visitable;
 import java.util.Set;
 import java.util.function.Function;
 import javax.annotation.Nullable;
 
 /** An array type. */
+@Visitable
 @AutoValue
 public abstract class ArrayTypeDescriptor extends TypeDescriptor {
 
@@ -247,6 +250,11 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
   @Override
   boolean hasReferenceTo(TypeVariable typeVariable, ImmutableSet<TypeVariable> seen) {
     return getComponentTypeDescriptor().hasReferenceTo(typeVariable, seen);
+  }
+
+  @Override
+  TypeDescriptor acceptInternal(Processor processor) {
+    return Visitor_ArrayTypeDescriptor.visit(processor, this);
   }
 
   abstract Builder toBuilder();

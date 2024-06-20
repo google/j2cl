@@ -24,6 +24,8 @@ import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.common.ThreadLocalInterner;
+import com.google.j2cl.common.visitor.Processor;
+import com.google.j2cl.common.visitor.Visitable;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -35,6 +37,7 @@ import javax.annotation.Nullable;
  * <p>Intersection types in Java arise from intersection casts like {@code (A&B&C)} and type
  * variable upper bounds like {@code <T extends A&B>}
  */
+@Visitable
 @AutoValue
 public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
 
@@ -223,6 +226,11 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
   boolean hasReferenceTo(TypeVariable typeVariable, ImmutableSet<TypeVariable> seen) {
     return getIntersectionTypeDescriptors().stream()
         .anyMatch(it -> it.hasReferenceTo(typeVariable, seen));
+  }
+
+  @Override
+  TypeDescriptor acceptInternal(Processor processor) {
+    return Visitor_IntersectionTypeDescriptor.visit(processor, this);
   }
 
   public static Builder newBuilder() {

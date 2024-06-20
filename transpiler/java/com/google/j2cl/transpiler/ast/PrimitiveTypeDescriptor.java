@@ -19,10 +19,13 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.collect.ImmutableSet;
+import com.google.j2cl.common.visitor.Processor;
+import com.google.j2cl.common.visitor.Visitable;
 import java.util.function.Function;
 import javax.annotation.Nullable;
 
 /** A primitive type. */
+@Visitable
 public class PrimitiveTypeDescriptor extends TypeDescriptor {
   private final String name;
   private final String signature;
@@ -226,5 +229,10 @@ public class PrimitiveTypeDescriptor extends TypeDescriptor {
     this.boxedClassName = boxedClassName;
     this.precisionOrder = precisionOrder;
     this.width = width;
+  }
+
+  @Override
+  TypeDescriptor acceptInternal(Processor processor) {
+    return Visitor_PrimitiveTypeDescriptor.visit(processor, this);
   }
 }

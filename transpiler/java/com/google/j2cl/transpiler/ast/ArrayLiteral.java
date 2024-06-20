@@ -29,7 +29,7 @@ import java.util.List;
  */
 @Visitable
 public class ArrayLiteral extends Expression {
-  private final ArrayTypeDescriptor typeDescriptor;
+  @Visitable ArrayTypeDescriptor typeDescriptor;
   @Visitable List<Expression> valueExpressions = new ArrayList<>();
 
   public ArrayLiteral(ArrayTypeDescriptor typeDescriptor, Expression... valueExpressions) {

@@ -25,7 +25,7 @@ import javax.annotation.Nullable;
 @Visitable
 public abstract class MemberReference extends Expression {
   @Visitable @Nullable Expression qualifier;
-  private final MemberDescriptor target;
+  @Visitable MemberDescriptor target;
 
   MemberReference(Expression qualifier, MemberDescriptor target) {
     this.qualifier = qualifier;

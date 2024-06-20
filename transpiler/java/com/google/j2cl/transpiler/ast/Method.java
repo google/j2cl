@@ -36,7 +36,7 @@ import javax.annotation.Nullable;
 /** Method declaration. */
 @Visitable
 public class Method extends Member implements MethodLike {
-  private final MethodDescriptor methodDescriptor;
+  @Visitable MethodDescriptor methodDescriptor;
   @Visitable List<Variable> parameters = new ArrayList<>();
   @Visitable Block body;
   private final String jsDocDescription;

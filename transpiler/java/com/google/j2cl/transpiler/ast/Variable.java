@@ -26,7 +26,7 @@ import com.google.j2cl.common.visitor.Visitable;
 @Visitable
 public class Variable extends NameDeclaration
     implements Cloneable<Variable>, HasUnusableByJsSuppression {
-  private TypeDescriptor typeDescriptor;
+  @Visitable TypeDescriptor typeDescriptor;
   private boolean isFinal;
   private boolean isParameter;
   private final SourcePosition sourcePosition;

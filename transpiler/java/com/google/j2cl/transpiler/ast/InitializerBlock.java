@@ -26,7 +26,7 @@ import com.google.j2cl.common.visitor.Visitable;
 @Visitable
 public class InitializerBlock extends Member {
   @Visitable Block block;
-  private final MethodDescriptor methodDescriptor;
+  @Visitable MethodDescriptor methodDescriptor;
 
   private InitializerBlock(
       SourcePosition sourcePosition,

@@ -28,6 +28,8 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Streams;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.ThreadLocalInterner;
+import com.google.j2cl.common.visitor.Processor;
+import com.google.j2cl.common.visitor.Visitable;
 import com.google.j2cl.transpiler.ast.FieldDescriptor.FieldOrigin;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.SourceLanguage;
 import java.util.ArrayList;
@@ -45,6 +47,7 @@ import java.util.stream.Stream;
 import javax.annotation.Nullable;
 
 /** A reference to a method. */
+@Visitable
 @AutoValue
 public abstract class MethodDescriptor extends MemberDescriptor {
   /** A method parameter descriptor */
@@ -1192,6 +1195,11 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         sb.append(" synthetic");
     }
     return sb.toString();
+  }
+
+  @Override
+  MemberDescriptor acceptInternal(Processor processor) {
+    return Visitor_MethodDescriptor.visit(processor, this);
   }
 
   /** A Builder for MethodDescriptors. */

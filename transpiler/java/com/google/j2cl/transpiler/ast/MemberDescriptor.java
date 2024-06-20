@@ -19,12 +19,15 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.common.InternalCompilerError;
+import com.google.j2cl.common.visitor.Processor;
+import com.google.j2cl.common.visitor.Visitable;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
 import java.util.Map;
 import java.util.function.Function;
 import javax.annotation.Nullable;
 
 /** Abstract base class for member descriptors. */
+@Visitable
 public abstract class MemberDescriptor
     implements HasJsNameInfo, HasReadableDescription, HasUnusableByJsSuppression {
 
@@ -326,4 +329,8 @@ public abstract class MemberDescriptor
 
   public abstract MemberDescriptor specializeTypeVariables(
       Function<TypeVariable, ? extends TypeDescriptor> replacingTypeDescriptorByTypeVariable);
+
+  MemberDescriptor acceptInternal(Processor processor) {
+    return Visitor_MemberDescriptor.visit(processor, this);
+  }
 }

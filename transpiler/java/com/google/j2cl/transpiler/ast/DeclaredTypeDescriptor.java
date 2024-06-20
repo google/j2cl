@@ -30,6 +30,8 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Streams;
 import com.google.j2cl.common.ThreadLocalInterner;
+import com.google.j2cl.common.visitor.Processor;
+import com.google.j2cl.common.visitor.Visitable;
 import com.google.j2cl.transpiler.ast.FieldDescriptor.FieldOrigin;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
@@ -53,6 +55,7 @@ import javax.annotation.Nullable;
  * <p>Some properties are lazily calculated since type relationships are a graph (not a tree) and
  * this class is a value type. Those properties are set through {@code DescriptorFactory}.
  */
+@Visitable
 @AutoValue
 public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     implements HasUnusableByJsSuppression {
@@ -1243,6 +1246,11 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   boolean hasReferenceTo(TypeVariable typeVariable, ImmutableSet<TypeVariable> seen) {
     return getTypeArgumentDescriptors().stream()
         .anyMatch(it -> it.hasReferenceTo(typeVariable, seen));
+  }
+
+  @Override
+  TypeDescriptor acceptInternal(Processor processor) {
+    return Visitor_DeclaredTypeDescriptor.visit(processor, this);
   }
 
   abstract Builder toBuilder();

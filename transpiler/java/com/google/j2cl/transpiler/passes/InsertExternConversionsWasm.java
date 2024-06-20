@@ -40,7 +40,7 @@ public class InsertExternConversionsWasm extends NormalizationPass {
           @Override
           public Method rewriteMethod(Method method) {
             MethodDescriptor descriptor = method.getDescriptor();
-            MethodDescriptor newDescriptor = rewriteMethodDescriptor(descriptor);
+            MethodDescriptor newDescriptor = createExportedMethodDescriptor(descriptor);
             if (descriptor != newDescriptor) {
               method
                   .getParameters()
@@ -76,14 +76,14 @@ public class InsertExternConversionsWasm extends NormalizationPass {
                                 ? RuntimeMethods.createJsStringFromStringMethodCall(arg)
                                 : arg)
                     .collect(toImmutableList()))
-            .setTarget(rewriteMethodDescriptor(methodDescriptor))
+            .setTarget(createExportedMethodDescriptor(methodDescriptor))
             .build();
     return TypeDescriptors.isJavaLangString(methodDescriptor.getReturnTypeDescriptor())
         ? RuntimeMethods.createStringFromJsStringMethodCall(newInvocation)
         : newInvocation;
   }
 
-  private static MethodDescriptor rewriteMethodDescriptor(MethodDescriptor descriptor) {
+  private static MethodDescriptor createExportedMethodDescriptor(MethodDescriptor descriptor) {
     if (!isJavaScriptMethod(descriptor)) {
       return descriptor;
     }

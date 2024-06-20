@@ -22,6 +22,8 @@ import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.ThreadLocalInterner;
+import com.google.j2cl.common.visitor.Processor;
+import com.google.j2cl.common.visitor.Visitable;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -29,6 +31,7 @@ import java.util.function.Function;
 import javax.annotation.Nullable;
 
 /** A (by signature) reference to a field. */
+@Visitable
 @AutoValue
 public abstract class FieldDescriptor extends MemberDescriptor {
 
@@ -243,6 +246,11 @@ public abstract class FieldDescriptor extends MemberDescriptor {
   @Override
   public String getReadableDescription() {
     return String.format("%s.%s", getEnclosingTypeDescriptor().getReadableDescription(), getName());
+  }
+
+  @Override
+  MemberDescriptor acceptInternal(Processor processor) {
+    return Visitor_FieldDescriptor.visit(processor, this);
   }
 
   /** A Builder for FieldDescriptors. */

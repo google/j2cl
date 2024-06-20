@@ -27,7 +27,7 @@ import com.google.j2cl.transpiler.ast.Expression.Precedence;
 @Visitable
 public class InstanceOfExpression extends Expression implements HasSourcePosition {
   @Visitable Expression expression;
-  private final TypeDescriptor testTypeDescriptor;
+  @Visitable TypeDescriptor testTypeDescriptor;
   private final SourcePosition sourcePosition;
 
   private InstanceOfExpression(

@@ -26,7 +26,7 @@ import com.google.j2cl.common.visitor.Visitable;
 @Visitable
 public class FieldDeclarationStatement extends Statement {
   @Visitable Expression expression;
-  private final FieldDescriptor fieldDescriptor;
+  @Visitable FieldDescriptor fieldDescriptor;
   private final boolean isPublic;
   private final boolean isConst;
   private final boolean isDeprecated;

@@ -32,14 +32,11 @@ import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
-import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
-import com.google.j2cl.transpiler.ast.InstanceOfExpression;
-import com.google.j2cl.transpiler.ast.Invocation;
 import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
 import com.google.j2cl.transpiler.ast.JsInfo;
 import com.google.j2cl.transpiler.ast.Library;
@@ -50,15 +47,12 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.StringLiteral;
-import com.google.j2cl.transpiler.ast.SuperReference;
-import com.google.j2cl.transpiler.ast.ThisOrSuperReference;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptor.TypeReplacer;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
-import com.google.j2cl.transpiler.ast.Variable;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -267,82 +261,18 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
           }
 
           @Override
-          public InstanceOfExpression rewriteInstanceOfExpression(InstanceOfExpression expr) {
-            TypeDescriptor descriptor = expr.getTestTypeDescriptor();
-            TypeDescriptor newDescriptor = replaceTypeDescriptors(descriptor, fn);
-            if (descriptor != newDescriptor) {
-              return InstanceOfExpression.Builder.from(expr)
-                  .setTestTypeDescriptor(newDescriptor)
-                  .build();
-            }
-            return expr;
+          public TypeDescriptor rewriteTypeDescriptor(TypeDescriptor typeDescriptor) {
+            return replaceTypeDescriptors(typeDescriptor, fn);
           }
 
           @Override
-          public CastExpression rewriteCastExpression(CastExpression expr) {
-            TypeDescriptor descriptor = expr.getCastTypeDescriptor();
-            TypeDescriptor newDescriptor = replaceTypeDescriptors(descriptor, fn);
-            if (descriptor != newDescriptor) {
-              return CastExpression.Builder.from(expr).setCastTypeDescriptor(newDescriptor).build();
-            }
-            return expr;
+          public TypeDeclaration rewriteTypeDeclaration(TypeDeclaration typeDeclaration) {
+            return replaceTypeDescriptors(typeDeclaration.toUnparameterizedTypeDescriptor(), fn)
+                .getTypeDeclaration();
           }
 
           @Override
-          public Field rewriteField(Field field) {
-            FieldDescriptor descriptor = field.getDescriptor();
-            FieldDescriptor newDescriptor = rewriteFieldDescriptor(descriptor);
-            if (descriptor != newDescriptor) {
-              field = Field.Builder.from(field).setDescriptor(newDescriptor).build();
-            }
-            return field;
-          }
-
-          @Override
-          public Method rewriteMethod(Method method) {
-            MethodDescriptor descriptor = method.getDescriptor();
-            MethodDescriptor newDescriptor = rewriteMethodDescriptor(descriptor);
-            if (descriptor != newDescriptor) {
-              method = Method.Builder.from(method).setMethodDescriptor(newDescriptor).build();
-            }
-            return method;
-          }
-
-          @Override
-          public Invocation rewriteInvocation(Invocation expr) {
-            MethodDescriptor descriptor = expr.getTarget();
-            MethodDescriptor newDescriptor = rewriteMethodDescriptor(descriptor);
-            if (descriptor != newDescriptor) {
-              return Invocation.Builder.from(expr).setTarget(newDescriptor).build();
-            }
-            return expr;
-          }
-
-          @Override
-          public Variable rewriteVariable(Variable variable) {
-            TypeDescriptor descriptor = variable.getTypeDescriptor();
-            TypeDescriptor newDescriptor = replaceTypeDescriptors(descriptor, fn);
-            if (descriptor != newDescriptor) {
-              // Don't replace the variable object since the references in the code point to it
-              // that would need to be changed; just set the variable to its new type.
-              variable.setTypeDescriptor(newDescriptor);
-            }
-            return variable;
-          }
-
-          @Override
-          public Expression rewriteThisOrSuperReference(ThisOrSuperReference receiverReference) {
-            DeclaredTypeDescriptor descriptor = receiverReference.getTypeDescriptor();
-            DeclaredTypeDescriptor newDescriptor = replaceTypeDescriptors(descriptor, fn);
-            if (descriptor != newDescriptor) {
-              return receiverReference instanceof ThisReference
-                  ? new ThisReference(newDescriptor)
-                  : new SuperReference(newDescriptor);
-            }
-            return receiverReference;
-          }
-
-          private MethodDescriptor rewriteMethodDescriptor(MethodDescriptor descriptor) {
+          public MethodDescriptor rewriteMethodDescriptor(MethodDescriptor descriptor) {
             return descriptor.transform(
                 builder -> {
                   DeclaredTypeDescriptor newEnclosingTypeDescriptor =
@@ -363,7 +293,8 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
                 });
           }
 
-          private FieldDescriptor rewriteFieldDescriptor(FieldDescriptor descriptor) {
+          @Override
+          public FieldDescriptor rewriteFieldDescriptor(FieldDescriptor descriptor) {
             // Note that we are not re-writing enclosing type to preserve the mangling to avoid
             // potential name collisions.
             // TODO(b/193926520): Add getManglingDescriptor concept similar to MethodDescriptor so

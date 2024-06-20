@@ -54,7 +54,7 @@ public class NormalizeStaticNativeMemberReferences extends NormalizationPass {
             }
 
             checkArgument(fieldAccess.getQualifier() == null);
-            return FieldAccess.Builder.from(rewriteFieldDescriptor(fieldDescriptor)).build();
+            return FieldAccess.Builder.from(createExternFieldDescriptor(fieldDescriptor)).build();
           }
 
           @Override
@@ -65,14 +65,14 @@ public class NormalizeStaticNativeMemberReferences extends NormalizationPass {
             }
 
             checkArgument(methodCall.getQualifier() == null);
-            return MethodCall.Builder.from(rewriteMethodDescriptor(methodDescriptor))
+            return MethodCall.Builder.from(createExternMethodDescriptor(methodDescriptor))
                 .setArguments(methodCall.getArguments())
                 .build();
           }
         });
   }
 
-  private static FieldDescriptor rewriteFieldDescriptor(FieldDescriptor fieldDescriptor) {
+  private static FieldDescriptor createExternFieldDescriptor(FieldDescriptor fieldDescriptor) {
     // A.abs -> Math.abs.
     return fieldDescriptor.transform(
         builder ->
@@ -80,7 +80,7 @@ public class NormalizeStaticNativeMemberReferences extends NormalizationPass {
                 AstUtils.getNamespaceAsTypeDescriptor(fieldDescriptor)));
   }
 
-  private static MethodDescriptor rewriteMethodDescriptor(MethodDescriptor methodDescriptor) {
+  private static MethodDescriptor createExternMethodDescriptor(MethodDescriptor methodDescriptor) {
     // A.abs() -> Math.abs().
     return methodDescriptor.transform(
         builder ->

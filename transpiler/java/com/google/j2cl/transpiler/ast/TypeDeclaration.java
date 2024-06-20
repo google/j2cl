@@ -30,6 +30,8 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Streams;
 import com.google.j2cl.common.ThreadLocalInterner;
+import com.google.j2cl.common.visitor.Processor;
+import com.google.j2cl.common.visitor.Visitable;
 import com.google.j2cl.transpiler.ast.TypeDescriptors.BootstrapType;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -53,6 +55,7 @@ import javax.annotation.Nullable;
  * <p>Since these are all declaration-site references, when there are type variables they are always
  * thought of as type parameters.
  */
+@Visitable
 @AutoValue
 public abstract class TypeDeclaration
     implements HasJsNameInfo, HasReadableDescription, HasUnusableByJsSuppression {
@@ -908,6 +911,10 @@ public abstract class TypeDeclaration
     NONE,
     NATIVE_ONLY,
     ALL
+  }
+
+  TypeDeclaration acceptInternal(Processor processor) {
+    return Visitor_TypeDeclaration.visit(processor, this);
   }
 
   /** Builder for a TypeDeclaration. */

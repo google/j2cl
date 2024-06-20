@@ -24,7 +24,7 @@ import com.google.j2cl.common.visitor.Visitable;
 @Visitable
 public class JsDocCastExpression extends Expression {
   @Visitable Expression expression;
-  private final TypeDescriptor castType;
+  @Visitable TypeDescriptor castType;
 
   private JsDocCastExpression(Expression expression, TypeDescriptor castType) {
     this.expression = checkNotNull(expression);

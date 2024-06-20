@@ -24,7 +24,7 @@ import com.google.j2cl.common.visitor.Visitable;
 @Visitable
 public class AwaitExpression extends Expression {
   @Visitable Expression expression;
-  private final TypeDescriptor typeDescriptor;
+  @Visitable TypeDescriptor typeDescriptor;
 
   private AwaitExpression(Expression expression, TypeDescriptor typeDescriptor) {
     this.expression = checkNotNull(expression);

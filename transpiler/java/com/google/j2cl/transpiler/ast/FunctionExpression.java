@@ -34,7 +34,7 @@ public class FunctionExpression extends Expression implements MethodLike {
   // The parameter declarations need to be traversed before the body.
   @Visitable final List<Variable> parameters;
   @Visitable Block body;
-  private final TypeDescriptor typeDescriptor;
+  @Visitable TypeDescriptor typeDescriptor;
   private final SourcePosition sourcePosition;
   private final boolean isJsAsync;
 

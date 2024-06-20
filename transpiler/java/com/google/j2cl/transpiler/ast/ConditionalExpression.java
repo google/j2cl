@@ -23,7 +23,7 @@ import com.google.j2cl.common.visitor.Visitable;
 /** Ternary conditional expression. */
 @Visitable
 public class ConditionalExpression extends Expression {
-  private final TypeDescriptor typeDescriptor;
+  @Visitable TypeDescriptor typeDescriptor;
   @Visitable Expression conditionExpression;
   @Visitable Expression trueExpression;
   @Visitable Expression falseExpression;

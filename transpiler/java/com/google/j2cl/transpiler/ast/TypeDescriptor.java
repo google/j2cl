@@ -20,6 +20,8 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.google.j2cl.common.visitor.Processor;
+import com.google.j2cl.common.visitor.Visitable;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -27,6 +29,7 @@ import java.util.function.Function;
 import javax.annotation.Nullable;
 
 /** A usage-site reference to a type. */
+@Visitable
 public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasReadableDescription {
 
   public boolean isJsType() {
@@ -361,4 +364,8 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
    * Returns true if the definition of this type variable as a reference to {@code typeVariable}.
    */
   abstract boolean hasReferenceTo(TypeVariable typeVariable, ImmutableSet<TypeVariable> seen);
+
+  TypeDescriptor acceptInternal(Processor processor) {
+    return Visitor_TypeDescriptor.visit(processor, this);
+  }
 }
