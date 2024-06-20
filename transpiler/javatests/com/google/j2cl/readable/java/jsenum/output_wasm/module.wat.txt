@@ -2012,7 +2012,7 @@
    ;;@ jsenum/Main.java:161:4
    (local.set $$qualifier (call $m_boxComparableInteger__int__java_lang_Class__javaemul_internal_Enums_BoxedComparableIntegerEnum@javaemul.internal.Enums (i32.const 1)(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.ComparableJsEnum.$Overlay )))
    ;;@ jsenum/Main.java:161:4
-   (drop (call $m_compareTo__java_lang_Object__int@javaemul.internal.Enums.BoxedComparableIntegerEnum (ref.as_non_null (local.get $$qualifier))(ref.null $javaemul.internal.Enums.BoxedComparableIntegerEnum)))
+   (drop (call_ref $function.m_compareTo__java_lang_Object__int (ref.as_non_null (local.get $$qualifier))(ref.null $java.lang.Object)(struct.get $javaemul.internal.Enums.BoxedComparableIntegerEnum.vtable $m_compareTo__java_lang_Object__int (struct.get $javaemul.internal.Enums.BoxedComparableIntegerEnum $vtable(local.get $$qualifier)))))
   )
   ;;@ jsenum/Main.java:162:4
   (drop (call $m_equalsInteger__int__int__boolean@javaemul.internal.Enums (i32.const 1)(i32.const 0)))
@@ -3626,7 +3626,7 @@
  (local.set $this (ref.cast (ref $jsenum.Main.ComparableJsEnumSupplierConsumerImpl) (local.get $this.untyped)))
  (block
   ;;@ jsenum/Main.java:267:15
-  (return (call $m_unboxInteger__java_lang_Object__java_lang_Class__int@javaemul.internal.Enums (call_ref $function.m_get__java_lang_Object (ref.as_non_null (local.get $this))(struct.get $jsenum.Main.SupplierConsumerImpl.vtable $m_get__java_lang_Object (struct.get $jsenum.Main.SupplierConsumerImpl $vtable(local.get $this))))(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.ComparableJsEnum.$Overlay )))
+  (return (call $m_unboxInteger__java_lang_Object__java_lang_Class__int@javaemul.internal.Enums (call_ref $function.m_get__java_lang_Object (ref.as_non_null (local.get $this))(struct.get $jsenum.Main.ComparableJsEnumSupplierConsumerImpl.vtable $m_get__java_lang_Object (struct.get $jsenum.Main.ComparableJsEnumSupplierConsumerImpl $vtable(local.get $this))))(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.ComparableJsEnum.$Overlay )))
  )
 )
 (elem declare func $m_get__jsenum_Main_ComparableJsEnum@jsenum.Main.ComparableJsEnumSupplierConsumerImpl)

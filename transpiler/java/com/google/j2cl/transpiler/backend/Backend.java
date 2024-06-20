@@ -180,7 +180,6 @@ import com.google.j2cl.transpiler.passes.RewriteShortcutOperators;
 import com.google.j2cl.transpiler.passes.RewriteUnaryExpressions;
 import com.google.j2cl.transpiler.passes.StaticallyEvaluateStringComparison;
 import com.google.j2cl.transpiler.passes.StaticallyEvaluateStringConcatenation;
-import com.google.j2cl.transpiler.passes.UpgradeInterfaceDispatch;
 import com.google.j2cl.transpiler.passes.VerifyNormalizedUnits;
 import com.google.j2cl.transpiler.passes.VerifyParamAndArgCounts;
 import com.google.j2cl.transpiler.passes.VerifyReferenceScoping;
@@ -498,7 +497,6 @@ public enum Backend {
           InsertExternConversionsWasm::new,
           RemoveCustomIsInstanceMethods::new,
           RemoveNoopStatements::new,
-          UpgradeInterfaceDispatch::new,
 
           // Passes that transform the AST to match the requirements of the Wasm instruction set.
           // Make null literals to have the type required by their use.
@@ -646,7 +644,6 @@ public enum Backend {
           InsertExternConversionsWasm::new,
           RemoveCustomIsInstanceMethods::new,
           RemoveNoopStatements::new,
-          UpgradeInterfaceDispatch::new,
 
           // Passes that transform the AST to match the requirements of the Wasm instruction set.
           // Make null literals to have the type required by their use.

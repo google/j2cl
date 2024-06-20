@@ -512,10 +512,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return isInstanceMember() && !getVisibility().isPrivate();
   }
 
-  public boolean isClassDynamicDispatch() {
-    return isPolymorphic() && !getEnclosingTypeDescriptor().isInterface();
-  }
-
   @Override
   public boolean isMethod() {
     return true;

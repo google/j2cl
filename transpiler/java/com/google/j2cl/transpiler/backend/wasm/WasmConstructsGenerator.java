@@ -379,13 +379,7 @@ public class WasmConstructsGenerator {
     // Emit parameters
     builder.indent();
     // Add the implicit "this" parameter to instance methods and constructors.
-    // Note that constructors and private methods can declare the parameter type to be the
-    // enclosing type because they are not overridden but normal instance methods have to
-    // declare the parameter more generically as java.lang.Object, since all the overrides need
-    // to have matching signatures.
-    if (methodDescriptor.isClassDynamicDispatch()
-        && !methodDescriptor.isNative()
-        && !methodDescriptor.isJsOverlay()) {
+    if (isReceiverCastNeeded(methodDescriptor)) {
       builder.newLine();
       builder.append(format("(type %s)", environment.getFunctionTypeName(methodDescriptor)));
       builder.newLine();
@@ -442,7 +436,7 @@ public class WasmConstructsGenerator {
     }
     // Introduce the actual $this variable for polymorphic methods and cast the parameter to
     // the right type.
-    if (methodDescriptor.isClassDynamicDispatch() && !methodDescriptor.isJsOverlay()) {
+    if (isReceiverCastNeeded(methodDescriptor)) {
       builder.newLine();
       builder.append(format("(local $this %s)", environment.getWasmType(enclosingTypeDescriptor)));
       builder.newLine();
@@ -467,6 +461,23 @@ public class WasmConstructsGenerator {
               "(elem declare func %s)",
               environment.getMethodImplementationName(method.getDescriptor())));
     }
+  }
+
+  /**
+   * Returns true if the method declares its receiver as `Object` and needs to cast it to the
+   * appropriate type.
+   *
+   * <p>Note that constructors and private methods, that are also passed a receiver, can use the
+   * enclosing type directly as they are are not overriding a supertype method and don't need to
+   * match the signature.
+   */
+  private static boolean isReceiverCastNeeded(MethodDescriptor methodDescriptor) {
+    return methodDescriptor.isPolymorphic()
+        // Native, overlays and default methods (declared in the interface) only end up being called
+        // via a static dispatch, hence they can use the more specific receiver type.
+        && !methodDescriptor.isNative()
+        && !methodDescriptor.isJsOverlay()
+        && !methodDescriptor.isDefaultMethod();
   }
 
   private static List<Variable> collectLocals(Method method) {

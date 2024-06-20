@@ -444,29 +444,42 @@ final class ExpressionTranspiler {
         // Pass the rest of the parameters.
         methodCall.getArguments().forEach(this::render);
 
-        // Retrieve the method reference from the appropriate vtable to provide it to call_ref.
-        // Retrieve the corresponding vtable.
-        if (target.isClassDynamicDispatch()) {
+        Expression qualifier = methodCall.getQualifier();
+        TypeDescriptor qualifierTypeDescriptor =
+            methodCall.getQualifier().getTypeDescriptor().toRawTypeDescriptor();
+
+        boolean isClassDispatch =
+            !qualifierTypeDescriptor.isInterface() || target.isOrOverridesJavaLangObjectMethod();
+
+        if (isClassDispatch) {
           // For a class dynamic dispatch the vtable resides in the $vtable field of object passed
-          // as the qualifier.
-          DeclaredTypeDescriptor enclosingTypeDescriptor = target.getEnclosingTypeDescriptor();
+          // as the qualifier. Use type of the qualifier to determine the vtable type.
+          DeclaredTypeDescriptor vtableTypeDescriptor =
+              qualifierTypeDescriptor.isClass() || qualifierTypeDescriptor.isEnum()
+                  ? (DeclaredTypeDescriptor) qualifierTypeDescriptor
+                  // Use java.lang.Object as the vtable type for interfaces and arrays. Note that
+                  // this is only the case when dispatching java.lang.Object methods.
+                  : TypeDescriptors.get().javaLangObject;
+
+          // Retrieve the corresponding class vtable.
           sourceBuilder.append(
               format(
                   "(struct.get %s %s (struct.get %s $vtable",
-                  environment.getWasmVtableTypeName(enclosingTypeDescriptor),
+                  environment.getWasmVtableTypeName(vtableTypeDescriptor),
                   environment.getVtableFieldName(target),
-                  environment.getWasmTypeName(enclosingTypeDescriptor)));
-          render(methodCall.getQualifier());
+                  environment.getWasmTypeName(vtableTypeDescriptor)));
+          render(qualifier);
           sourceBuilder.append("))");
         } else {
+          checkState(qualifierTypeDescriptor.isInterface());
+          DeclaredTypeDescriptor vtableTypeDescriptor =
+              (DeclaredTypeDescriptor) qualifierTypeDescriptor;
+
           // For an interface dynamic dispatch the vtable is accessed through the $itable field in
           // object passed as the qualifier.
           // The method call qualifier type is used to retrieve the vtable. If the method call
           // target is in a superinterface, it is still included in the subinterface vtable.
-          DeclaredTypeDescriptor qualifierTypeDescriptor =
-              (DeclaredTypeDescriptor)
-                  methodCall.getQualifier().getTypeDescriptor().toRawTypeDescriptor();
-          String vtableTypeName = environment.getWasmVtableTypeName(qualifierTypeDescriptor);
+          String vtableTypeName = environment.getWasmVtableTypeName(vtableTypeDescriptor);
 
           // Retrieve the interface vtable from the $itable field and cast it to the expected type.
           // Use a non-nullable `ref.cast` to access the interface vtable, because if the interface
@@ -479,8 +492,8 @@ final class ExpressionTranspiler {
                   environment.getVtableFieldName(target),
                   vtableTypeName,
                   environment.getWasmItableInterfaceGetter(
-                      qualifierTypeDescriptor.getTypeDeclaration())));
-          render(methodCall.getQualifier());
+                      vtableTypeDescriptor.getTypeDeclaration())));
+          render(qualifier);
           sourceBuilder.append(")))");
         }
 
