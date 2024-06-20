@@ -27,13 +27,13 @@ import org.jetbrains.kotlin.ir.SourceRangeInfo
 import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.psi.KtBinaryExpression
 import org.jetbrains.kotlin.psi.KtClass
+import org.jetbrains.kotlin.psi.KtConstructor
 import org.jetbrains.kotlin.psi.KtEnumEntry
 import org.jetbrains.kotlin.psi.KtLabeledExpression
 import org.jetbrains.kotlin.psi.KtObjectDeclaration
 import org.jetbrains.kotlin.psi.KtPostfixExpression
 import org.jetbrains.kotlin.psi.KtPrefixExpression
 import org.jetbrains.kotlin.psi.KtProperty
-import org.jetbrains.kotlin.psi.KtSecondaryConstructor
 import org.jetbrains.kotlin.psi.KtVariableDeclaration
 import org.jetbrains.kotlin.psi.psiUtil.endOffset
 import org.jetbrains.kotlin.psi.psiUtil.startOffset
@@ -41,7 +41,7 @@ import org.jetbrains.kotlin.psi.psiUtil.startOffset
 fun IrElement.getNamedPsiElement(irFile: IrFile): PsiElement? {
   val psiElement = getPsiElement(irFile) ?: return null
   return when {
-    psiElement is KtSecondaryConstructor -> psiElement.getConstructorKeyword()
+    psiElement is KtConstructor<*> -> psiElement.getConstructorKeyword() ?: psiElement
     psiElement is PsiNameIdentifierOwner -> psiElement.nameIdentifier ?: psiElement
     else -> psiElement
   }
