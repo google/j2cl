@@ -27,8 +27,8 @@ public class Main {
     a.bar(1);
     b.bar(1);
     c.bar(1);
-    a.fun(1);
-    b.fun(1);
-    d.fun(1);
+    a.f(1);
+    b.f(1);
+    d.f(1);
   }
 }

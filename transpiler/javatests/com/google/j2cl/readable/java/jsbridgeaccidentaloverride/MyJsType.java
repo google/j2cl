@@ -18,7 +18,7 @@ package jsbridgeaccidentaloverride;
 import jsinterop.annotations.JsType;
 
 interface OtherInterface {
-  int fun(int a);
+  int f(int a);
 }
 
 @JsType
@@ -45,7 +45,7 @@ public class MyJsType implements OtherInterface {
    * should not be a bridge method in SubJsType.
    */
   @Override
-  public int fun(int a) {
+  public int f(int a) {
     return a - 1;
   }
 }

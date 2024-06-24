@@ -27,8 +27,8 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
 fun interface OtherInterface {
- @ObjCName("fun")
- fun `fun`(
+ @ObjCName("f")
+ fun f(
   @ObjCName("withInt") a: Int
  ): Int
 }
@@ -52,7 +52,7 @@ open class MyJsType: OtherInterface {
   return a + 1
  }
 
- override fun `fun`(a: Int): Int {
+ override fun f(a: Int): Int {
   return a - 1
  }
 }
