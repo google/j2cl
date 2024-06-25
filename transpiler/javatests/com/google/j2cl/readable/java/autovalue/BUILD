@@ -8,6 +8,7 @@ package(
     licenses = ["notice"],
 )
 
+# TODO(b/317166154): Port this test to Kotlin when AutoValue is supported.
 readable_example(
     srcs = glob(["*.java"]),
     # TODO(b/202513859): Add support for experimental_optimize_autovalue in J2KT.
