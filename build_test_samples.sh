@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -e
+set -ex
 
 # Build and test Hello World sample in its own workspace
 (cd samples/helloworld && bazel test ...)

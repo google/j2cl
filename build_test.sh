@@ -14,7 +14,7 @@
 # limitations under the License.
 
 # Script that can be used by CI server for testing j2cl builds.
-set -e
+set -ex
 
 bazel build :all {jre,transpiler,tools,junit/generator,junit/emul}/java/...
 
