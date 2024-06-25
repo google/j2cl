@@ -72,6 +72,7 @@ jobs:
         run: |
           echo "build --repository_cache=~/bazel-repository-cache" >> ~/.bazelrc
           echo "build --disk_cache=~/bazel-action-cache" >> ~/.bazelrc
+          echo "build -c opt" >> ~/.bazelrc
           echo "build --verbose_failures" >> ~/.bazelrc
           bazel info
       - name: Run tests
