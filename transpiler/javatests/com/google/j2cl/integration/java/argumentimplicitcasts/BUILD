@@ -1,3 +1,4 @@
+# Java test only: Kotlin does not support implicit conversions.
 load(
     "//transpiler/javatests/com/google/j2cl/integration:integration_test.bzl",
     "integration_test",
