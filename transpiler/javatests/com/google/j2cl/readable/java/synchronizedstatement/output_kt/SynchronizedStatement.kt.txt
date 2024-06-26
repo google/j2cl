@@ -19,6 +19,7 @@
 package synchronizedstatement
 
 import javaemul.lang.*
+import javaemul.lang.J2ktMonitor
 import kotlin.Int
 import kotlin.OptIn
 import kotlin.Suppress
@@ -39,7 +40,7 @@ open class SynchronizedStatement {
 
  @ObjCName("main")
  open fun main() {
-  synchronized<Unit>(this) {
+  synchronized<Unit>(this.impliedJ2ktMonitor) {
    this.a_private_2 = this.a_private_2 + 1
    this.b_private_2 = this.b_private_2 - 1
   }
@@ -47,7 +48,7 @@ open class SynchronizedStatement {
 
  @ObjCName("testReturn")
  open fun testReturn(): Int {
-  synchronized<Unit>(this) {
+  synchronized<Unit>(this.impliedJ2ktMonitor) {
    if (this.a_private_2 < 10) {
     return run {
      val ___value: Int = this.a_private_2
@@ -69,7 +70,7 @@ open class SynchronizedStatement {
  @ObjCName("testInitialization")
  open fun testInitialization(): Int {
   var a: Int = 0
-  synchronized<Unit>(this) {
+  synchronized<Unit>(this.impliedJ2ktMonitor) {
    a = 0
   }
   return a
@@ -77,7 +78,7 @@ open class SynchronizedStatement {
 
  @ObjCName("testIfStatementWithNonVoidBodyWithoutElse")
  open fun testIfStatementWithNonVoidBodyWithoutElse() {
-  synchronized<Unit>(this) {
+  synchronized<Unit>(this.impliedJ2ktMonitor) {
    if (this.a_private_2 < 10) {
     this.intMethod_private_2()
    } else if (this.b_private_2 < 10) {
@@ -89,4 +90,8 @@ open class SynchronizedStatement {
  internal fun intMethod_private_2(): Int {
   return 0
  }
+
+ @JvmField
+ @ObjCName("impliedJ2ktMonitor_")
+ val impliedJ2ktMonitor: J2ktMonitor = J2ktMonitor()
 }

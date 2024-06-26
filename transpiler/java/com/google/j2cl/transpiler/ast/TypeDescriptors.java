@@ -198,6 +198,14 @@ public class TypeDescriptors {
   @QualifiedBinaryName("kotlin.jvm.internal.ReflectionFactory")
   public DeclaredTypeDescriptor kotlinJvmInternalReflectionFactory;
 
+  @Nullable
+  @QualifiedBinaryName("javaemul.lang.J2ktMonitor")
+  public DeclaredTypeDescriptor javaemulLangJ2ktMonitor;
+
+  @Nullable
+  @QualifiedBinaryName("com.google.common.base.J2ktCompatibleMonitor")
+  public DeclaredTypeDescriptor comGoogleCommonBaseJ2ktCompatibleMonitor;
+
   /**
    * Global window reference that is the enclosing class of native global methods and properties.
    */

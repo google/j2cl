@@ -34,5 +34,8 @@ public class Main {
     return new X();
   }
 
-  static class X {}
+  static class X {
+    // Make sure the class gets an implied monitor.
+    synchronized void foo() {}
+  }
 }

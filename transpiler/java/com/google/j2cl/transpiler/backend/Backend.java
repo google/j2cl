@@ -141,7 +141,7 @@ import com.google.j2cl.transpiler.passes.NormalizeStaticNativeMemberReferences;
 import com.google.j2cl.transpiler.passes.NormalizeSuperMemberReferences;
 import com.google.j2cl.transpiler.passes.NormalizeSwitchStatements;
 import com.google.j2cl.transpiler.passes.NormalizeSwitchStatementsJ2kt;
-import com.google.j2cl.transpiler.passes.NormalizeSynchronizedMethods;
+import com.google.j2cl.transpiler.passes.NormalizeSynchronizedConstructs;
 import com.google.j2cl.transpiler.passes.NormalizeSystemGetPropertyCalls;
 import com.google.j2cl.transpiler.passes.NormalizeTryWithResources;
 import com.google.j2cl.transpiler.passes.NormalizeVarargInvocationsJ2kt;
@@ -701,7 +701,7 @@ public enum Backend {
           AddDisambiguatingSuperMethodForwardingStubs::new,
           AddDisambiguatingOverloadResolutionCastsJ2kt::new,
           AddVisibilityMethodBridgesJ2kt::new,
-          NormalizeSynchronizedMethods::new,
+          NormalizeSynchronizedConstructs::new,
           PropagateNullabilityJ2kt::new,
           NormalizeInterfaces::new,
           NormalizeTryWithResources::new,

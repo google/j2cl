@@ -19,6 +19,7 @@
 package synchronizedmethod
 
 import javaemul.lang.*
+import javaemul.lang.J2ktMonitor
 import kotlin.Boolean
 import kotlin.Int
 import kotlin.OptIn
@@ -43,7 +44,7 @@ open class SynchronizedMethod {
 
  @ObjCName("testNonStatic")
  open fun testNonStatic() {
-  synchronized<Unit>(this) {
+  synchronized<Unit>(this.impliedJ2ktMonitor) {
    this.a_private_2 = this.a_private_2 + 1
    this.b_private_2 = this.b_private_2 - 1
   }
@@ -53,7 +54,7 @@ open class SynchronizedMethod {
  open fun testReturn(
   @ObjCName("withBoolean") bool: Boolean
  ): Int {
-  synchronized<Unit>(this) {
+  synchronized<Unit>(this.impliedJ2ktMonitor) {
    if (bool) {
     return run {
      val ___value: Int = this.a_private_2
@@ -74,7 +75,7 @@ open class SynchronizedMethod {
   @ObjCName("withBoolean") b1: Boolean,
   @ObjCName("withBoolean") b2: Boolean
  ) {
-  synchronized<Unit>(this) {
+  synchronized<Unit>(this.impliedJ2ktMonitor) {
    if (b1) {
     this.apply_private_2("foo")
    } else if (b2) {
@@ -86,6 +87,10 @@ open class SynchronizedMethod {
  internal fun apply_private_2(string: String?): String? {
   return string
  }
+
+ @JvmField
+ @ObjCName("impliedJ2ktMonitor_")
+ val impliedJ2ktMonitor: J2ktMonitor = J2ktMonitor()
 
  @ObjCName("J2ktSynchronizedmethodSynchronizedMethodCompanion", exact = true)
  companion object {
