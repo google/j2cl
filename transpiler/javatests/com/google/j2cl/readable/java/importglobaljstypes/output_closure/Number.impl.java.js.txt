@@ -28,9 +28,12 @@ class importglobaljstypes_Number extends j_l_Object {
   return Number.isInteger(x);
  }
  /** @nodts @return {?string} */
- static m_fromCharCode__arrayOf_int__java_lang_String(/** Array<number> */ array) {
-  importglobaljstypes_Number.$clinit();
-  return /**@type {?string}*/ ($Casts.$to(String.fromCharCode.apply(null, array), j_l_String));
+ static m_getStringAt__int__java_lang_String(/** number */ index) {
+  return /**@type {?string}*/ ($Casts.$to(/**@type {Array<?string>}*/ (Array()).at(index), j_l_String));
+ }
+ /** @nodts @return {number} */
+ static m_getArrayLength__importglobaljstypes_Number_NativeArray__int(/** Array<?> */ array) {
+  return array.length;
  }
  /** @nodts @return {Object} */
  m_testJsDocForLiteralType__importglobaljstypes_Number_MyLiteralType__importglobaljstypes_Number_MyLiteralType(/** Object */ a) {

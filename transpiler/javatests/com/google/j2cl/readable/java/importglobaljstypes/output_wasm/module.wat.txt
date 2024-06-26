@@ -9,12 +9,12 @@
  ))
 )
 
-;;; Code for importglobaljstypes.Number.NativeFunction [type definition]
+;;; Code for importglobaljstypes.Number.NativeArray [type definition]
 
 ;;; Code for importglobaljstypes.Number.MyLiteralType [type definition]
 
-;;; Code for importglobaljstypes.Number.NativeFunction.$Overlay [type definition]
-(type $importglobaljstypes.Number.NativeFunction.$Overlay.vtable (sub (struct
+;;; Code for importglobaljstypes.Number.NativeArray.$Overlay [type definition]
+(type $importglobaljstypes.Number.NativeArray.$Overlay.vtable (sub (struct
  ))
 )
 
@@ -87,11 +87,17 @@
 
 ;;; Code for importglobaljstypes.Date.NativeDate.$Overlay [imports]
 
-;;; Code for importglobaljstypes.Number.NativeFunction [imports]
+;;; Code for importglobaljstypes.Number.NativeArray [imports]
+
+;;; int NativeArray.getLength()
+(func $m_getLength__int@importglobaljstypes.Number.NativeArray (import "imports" "get Array.length") 
+ (param $this (ref null extern))
+ (result i32)
+)
 
 ;;; Code for importglobaljstypes.Number.MyLiteralType [imports]
 
-;;; Code for importglobaljstypes.Number.NativeFunction.$Overlay [imports]
+;;; Code for importglobaljstypes.Number.NativeArray.$Overlay [imports]
 
 ;;; Code for importglobaljstypes.Number.MyLiteralType.$Overlay [imports]
 
@@ -119,10 +125,15 @@
 
 ;;; Code for importglobaljstypes.Number [imports]
 
-;;; boolean Number.fun(double x)
-(func $m_fun__double__boolean@importglobaljstypes.Number (import "imports" "Number.isInteger") 
+;;; boolean Number.f(double x)
+(func $m_f__double__boolean@importglobaljstypes.Number (import "imports" "Number.isInteger") 
  (param $x f64)
  (result i32)
+)
+
+;;; NativeArray<T> Number.createArray()
+(func $m_createArray__importglobaljstypes_Number_NativeArray@importglobaljstypes.Number (import "imports" "Array") 
+ (result (ref null extern))
 )
 
 ;;; Code for importglobaljstypes.RegExp [imports]
@@ -172,11 +183,11 @@
  (ref.null $java.lang.Class)
 )
 
-;;; Code for importglobaljstypes.Number.NativeFunction.$Overlay [static fields]
-(global $$class-initialized@importglobaljstypes.Number.NativeFunction.$Overlay (mut i32)
+;;; Code for importglobaljstypes.Number.NativeArray.$Overlay [static fields]
+(global $$class-initialized@importglobaljstypes.Number.NativeArray.$Overlay (mut i32)
  (i32.const 0)
 )
-(global $$class@importglobaljstypes.Number.NativeFunction.$Overlay (mut (ref null $java.lang.Class))
+(global $$class@importglobaljstypes.Number.NativeArray.$Overlay (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -295,39 +306,39 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@importglobaljstypes.Date.NativeDate.$Overlay)
 
-;;; Code for importglobaljstypes.Number.NativeFunction [methods]
+;;; Code for importglobaljstypes.Number.NativeArray [methods]
 
 ;;; Code for importglobaljstypes.Number.MyLiteralType [methods]
 
-;;; Code for importglobaljstypes.Number.NativeFunction.$Overlay [methods]
+;;; Code for importglobaljstypes.Number.NativeArray.$Overlay [methods]
 
 ;;; void $Overlay.$clinit()
-(func $$clinit__void_<once>_@importglobaljstypes.Number.NativeFunction.$Overlay
- ;;@ importglobaljstypes/Number.java:41:20
+(func $$clinit__void_<once>_@importglobaljstypes.Number.NativeArray.$Overlay
+ ;;@ importglobaljstypes/Number.java:39:20
  (block
-  ;;@ importglobaljstypes/Number.java:41:20
-  (if (global.get $$class-initialized@importglobaljstypes.Number.NativeFunction.$Overlay)
+  ;;@ importglobaljstypes/Number.java:39:20
+  (if (global.get $$class-initialized@importglobaljstypes.Number.NativeArray.$Overlay)
    (then
-    ;;@ importglobaljstypes/Number.java:41:20
+    ;;@ importglobaljstypes/Number.java:39:20
     (return )
    )
   )
-  ;;@ importglobaljstypes/Number.java:41:20
-  (global.set $$class-initialized@importglobaljstypes.Number.NativeFunction.$Overlay (i32.const 1))
+  ;;@ importglobaljstypes/Number.java:39:20
+  (global.set $$class-initialized@importglobaljstypes.Number.NativeArray.$Overlay (i32.const 1))
  )
 )
 
 ;;; Class<T> $Overlay.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@importglobaljstypes.Number.NativeFunction.$Overlay
+(func $$getClassMetadata__java_lang_Class_<once>_@importglobaljstypes.Number.NativeArray.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (i32.eqz (ref.is_null (global.get $$class@importglobaljstypes.Number.NativeFunction.$Overlay)))
+  (if (i32.eqz (ref.is_null (global.get $$class@importglobaljstypes.Number.NativeArray.$Overlay)))
    (then
-    (return (global.get $$class@importglobaljstypes.Number.NativeFunction.$Overlay))
+    (return (global.get $$class@importglobaljstypes.Number.NativeArray.$Overlay))
    )
   )
-  (global.set $$class@importglobaljstypes.Number.NativeFunction.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|importglobal...|__java_lang_String_<once>_@importglobaljstypes.Number.NativeFunction.$Overlay )))
-  (return (global.get $$class@importglobaljstypes.Number.NativeFunction.$Overlay))
+  (global.set $$class@importglobaljstypes.Number.NativeArray.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|importglobal...|__java_lang_String_<once>_@importglobaljstypes.Number.NativeArray.$Overlay )))
+  (return (global.get $$class@importglobaljstypes.Number.NativeArray.$Overlay))
  )
 )
 
@@ -335,16 +346,16 @@
 
 ;;; void $Overlay.$clinit()
 (func $$clinit__void_<once>_@importglobaljstypes.Number.MyLiteralType.$Overlay
- ;;@ importglobaljstypes/Number.java:61:26
+ ;;@ importglobaljstypes/Number.java:63:26
  (block
-  ;;@ importglobaljstypes/Number.java:61:26
+  ;;@ importglobaljstypes/Number.java:63:26
   (if (global.get $$class-initialized@importglobaljstypes.Number.MyLiteralType.$Overlay)
    (then
-    ;;@ importglobaljstypes/Number.java:61:26
+    ;;@ importglobaljstypes/Number.java:63:26
     (return )
    )
   )
-  ;;@ importglobaljstypes/Number.java:61:26
+  ;;@ importglobaljstypes/Number.java:63:26
   (global.set $$class-initialized@importglobaljstypes.Number.MyLiteralType.$Overlay (i32.const 1))
  )
 )
@@ -551,7 +562,18 @@
   ;;@ importglobaljstypes/Number.java:33:39
   (call $$clinit__void_<once>_@importglobaljstypes.Number )
   ;;@ importglobaljstypes/Number.java:34:4
-  (return (call $m_fun__double__boolean@importglobaljstypes.Number (local.get $x)))
+  (return (call $m_f__double__boolean@importglobaljstypes.Number (local.get $x)))
+ )
+)
+
+;;; int Number.getArrayLength(NativeArray<?> array)
+(func $m_getArrayLength__importglobaljstypes_Number_NativeArray__int@importglobaljstypes.Number
+ (param $array (ref null extern))
+ (result i32)
+ ;;@ importglobaljstypes/Number.java:58:21
+ (block
+  ;;@ importglobaljstypes/Number.java:59:4
+  (return (call $m_getLength__int@importglobaljstypes.Number.NativeArray (ref.as_non_null (local.get $array))))
  )
 )
 
@@ -561,11 +583,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $a (ref null extern))
  (result (ref null extern))
- ;;@ importglobaljstypes/Number.java:63:23
+ ;;@ importglobaljstypes/Number.java:65:23
  (local $this (ref null $importglobaljstypes.Number))
  (local.set $this (ref.cast (ref $importglobaljstypes.Number) (local.get $this.untyped)))
  (block
-  ;;@ importglobaljstypes/Number.java:64:4
+  ;;@ importglobaljstypes/Number.java:66:4
   (return (local.get $a))
  )
 )

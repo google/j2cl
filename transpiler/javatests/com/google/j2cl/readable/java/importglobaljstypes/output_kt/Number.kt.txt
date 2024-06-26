@@ -26,7 +26,7 @@ import jsinterop.annotations.JsType
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
-import kotlin.IntArray
+import kotlin.Int
 import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
@@ -46,9 +46,9 @@ open class Number {
  @ObjCName("J2ktImportglobaljstypesNumberCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("fun")
+  @ObjCName("f")
   @JsMethod(name = "Number.isInteger", namespace = JsPackage.GLOBAL)
-  external fun `fun`(
+  external fun f(
    @ObjCName("withDouble") x: Double
   ): Boolean
 
@@ -57,28 +57,33 @@ open class Number {
   fun test(
    @ObjCName("withDouble") x: Double
   ): Boolean {
-   return Number.`fun`(x)
+   return Number.f(x)
   }
 
   @JvmStatic
-  @JsProperty(name = "String.fromCharCode", namespace = JsPackage.GLOBAL)
-  internal external fun getFromCharCodeFunction_private_2(): Number.NativeFunction<String?>?
+  @JsMethod(name = "Array", namespace = JsPackage.GLOBAL)
+  internal external fun <T> createArray_private_2(): Number.NativeArray<T>?
 
   @JvmStatic
-  @ObjCName("fromCharCode")
-  fun fromCharCode(
-   @ObjCName("withIntArray") array: IntArray?
-  ): String? {
-   return Number.getFromCharCodeFunction_private_2()!!.apply(null, array)
+  internal fun getStringAt_private_2(index: Int): String? {
+   return Number.createArray_private_2<String?>()!!.at(index)
+  }
+
+  @JvmStatic
+  internal fun getArrayLength_private_2(array: Number.NativeArray<*>?): Int {
+   return (array as Number.NativeArray<Any?>?)!!.getLength()
   }
  }
 
- @JsType(name = "Function", namespace = JsPackage.GLOBAL, isNative = true)
- fun interface NativeFunction<T> {
-  @ObjCName("apply")
-  fun apply(
-   @ObjCName("withId") thisContext: Any?,
-   @ObjCName("withIntArray") argsArray: IntArray?
+ @JsType(name = "Array", namespace = JsPackage.GLOBAL, isNative = true)
+ interface NativeArray<T> {
+  @ObjCName("getLength")
+  @JsProperty
+  fun getLength(): Int
+
+  @ObjCName("at")
+  fun at(
+   @ObjCName("withInt") index: Int
   ): T
  }
 

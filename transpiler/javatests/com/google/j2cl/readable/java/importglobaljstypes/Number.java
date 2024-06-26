@@ -28,33 +28,35 @@ import jsinterop.annotations.JsType;
 public class Number {
   // import native js "Number" in a java class "Number".
   @JsMethod(name = "Number.isInteger", namespace = GLOBAL)
-  public static native boolean fun(double x);
+  public static native boolean f(double x);
 
   public static boolean test(double x) {
-    return Number.fun(x);
+    return Number.f(x);
   }
 
-  /**
-   * Tests for generic native type.
-   */
-  @JsType(isNative = true, namespace = GLOBAL, name = "Function")
-  private interface NativeFunction<T> {
+  /** Tests for generic native type. */
+  @JsType(isNative = true, namespace = GLOBAL, name = "Array")
+  private interface NativeArray<T> {
     // TODO(b/193532287): Enable when arrays are supported in wasm jsinterop. Upon enabling,
     // `thisContext` will also need to be made a wasm extern, because wasm does not support
     // accepting a non-native type in a native method.
+    @JsProperty
+    int getLength();
+
     @Wasm("nop")
-    T apply(Object thisContext, int[] argsArray);
+    T at(int index);
   }
 
-  @JsProperty(name = "String.fromCharCode", namespace = GLOBAL)
-  // TODO(b/193532287): Enable when arrays are supported in wasm jsinterop.
-  @Wasm("nop")
-  private static native NativeFunction<String> getFromCharCodeFunction();
+  @JsMethod(name = "Array", namespace = GLOBAL)
+  private static native <T> NativeArray<T> createArray();
 
-  // TODO(b/193532287): Enable when arrays are supported in wasm jsinterop.
   @Wasm("nop")
-  public static String fromCharCode(int[] array) {
-    return getFromCharCodeFunction().apply(null, array);
+  private static String getStringAt(int index) {
+    return Number.<String>createArray().at(index);
+  }
+
+  private static int getArrayLength(NativeArray<?> array) {
+    return array.getLength();
   }
 
   @JsType(isNative = true, namespace = GLOBAL, name = "Object")

@@ -10,6 +10,7 @@ function getImports() {
   'WebAssembly': WebAssembly,
   'imports': {
    '?.toString': (/** ? */ $instance, ) => $instance.toString(),
+   'Array': Array,
    'Date.UTC': Date.UTC,
    'Date.constructor': () => new Date(),
    'Date.constructor$1': (/** number */ milliseconds, ) => new Date(milliseconds, ),
@@ -75,6 +76,7 @@ function getImports() {
    'RegExp.test$1': (/** !RegExp */ $instance, /** string */ value, ) => $instance.test(value, ),
    'RegExp.toString': (/** !RegExp */ $instance, ) => $instance.toString(),
    'RegExpResult.at$1': (/** !RegExpResult */ $instance, /** number */ index, ) => $instance.at(index, ),
+   'get Array.length': (/** !Array<T> */ $instance, ) => $instance.length,
    'get Error.hasCaptureStackTraceProperty': () => Error.hasCaptureStackTraceProperty,
    'get Error.stack': (/** !Error */ $instance, ) => $instance.stack,
    'get RegExpResult.index': (/** !RegExpResult */ $instance, ) => $instance.index,
