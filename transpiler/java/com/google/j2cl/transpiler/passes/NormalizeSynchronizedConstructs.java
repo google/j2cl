@@ -78,8 +78,8 @@ public final class NormalizeSynchronizedConstructs extends NormalizationPass {
                 type.getTypeDescriptor().getSuperTypeDescriptor();
             // Insert the implied monitor for classes that are direct subclasses of Object.
             if (type.getTypeDescriptor().isClass()
-                && superTypeDescriptor != null // Not Object
-                && superTypeDescriptor.getSuperTypeDescriptor() == null // Direct subcl. of Object
+                && superTypeDescriptor != null
+                && TypeDescriptors.isJavaLangObject(superTypeDescriptor)
                 && type.getMethods().stream().anyMatch(it -> it.getDescriptor().isSynchronized())) {
               type.getMembers()
                   .add(
