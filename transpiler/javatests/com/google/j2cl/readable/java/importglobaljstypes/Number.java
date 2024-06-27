@@ -37,20 +37,17 @@ public class Number {
   /** Tests for generic native type. */
   @JsType(isNative = true, namespace = GLOBAL, name = "Array")
   private interface NativeArray<T> {
-    // TODO(b/193532287): Enable when arrays are supported in wasm jsinterop. Upon enabling,
-    // `thisContext` will also need to be made a wasm extern, because wasm does not support
-    // accepting a non-native type in a native method.
     @JsProperty
     int getLength();
 
-    @Wasm("nop")
+    @Wasm("nop") // j2wasm doesn't support generic return types on native methods.
     T at(int index);
   }
 
   @JsMethod(name = "Array", namespace = GLOBAL)
   private static native <T> NativeArray<T> createArray();
 
-  @Wasm("nop")
+  @Wasm("nop") // NativeArray#at is marked as nop.
   private static String getStringAt(int index) {
     return Number.<String>createArray().at(index);
   }
