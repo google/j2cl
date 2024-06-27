@@ -40,6 +40,7 @@ import java.util.stream.LongStream;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 import javaemul.internal.ArrayHelper;
+import javaemul.internal.ArrayIterator;
 
 /**
  * Utility methods related to native arrays. See <a
@@ -108,6 +109,11 @@ public class Arrays {
     @Override
     public Object[] toArray() {
       return toArray(new Object[array.length]);
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+      return new ArrayIterator<E>(array);
     }
 
     /*
