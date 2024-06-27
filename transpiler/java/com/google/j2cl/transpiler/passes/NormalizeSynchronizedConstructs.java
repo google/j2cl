@@ -77,8 +77,7 @@ public final class NormalizeSynchronizedConstructs extends NormalizationPass {
             DeclaredTypeDescriptor superTypeDescriptor =
                 type.getTypeDescriptor().getSuperTypeDescriptor();
             // Insert the implied monitor for classes that are direct subclasses of Object.
-            if (j2ktMonitor != null
-                && type.getTypeDescriptor().isClass()
+            if (type.getTypeDescriptor().isClass()
                 && superTypeDescriptor != null // Not Object
                 && superTypeDescriptor.getSuperTypeDescriptor() == null // Direct subcl. of Object
                 && type.getMethods().stream().anyMatch(it -> it.getDescriptor().isSynchronized())) {
