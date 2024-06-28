@@ -255,7 +255,6 @@ def j2cl_test_common(
             tags = tags,
             optimize = optimize_wasm,
             defines = wasm_defs,
-            exec_properties = kwargs.get("exec_properties") or {},
         )
 
         deps = [
