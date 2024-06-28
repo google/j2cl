@@ -688,6 +688,9 @@ val IrElement.isFieldAssignment: Boolean
 val IrElement.isLabeledExpression: Boolean
   get() = this is IrLoop && label != null
 
+val IrElement.isPrimaryConstructor: Boolean
+  get() = this is IrConstructor && this.isPrimary
+
 fun IrAnnotationContainer.copyAnnotationsWhen(
   filter: IrConstructorCall.() -> Boolean
 ): List<IrConstructorCall> {

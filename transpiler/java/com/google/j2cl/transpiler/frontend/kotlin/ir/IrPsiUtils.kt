@@ -31,6 +31,7 @@ import org.jetbrains.kotlin.psi.KtConstructor
 import org.jetbrains.kotlin.psi.KtEnumEntry
 import org.jetbrains.kotlin.psi.KtLabeledExpression
 import org.jetbrains.kotlin.psi.KtObjectDeclaration
+import org.jetbrains.kotlin.psi.KtParameterList
 import org.jetbrains.kotlin.psi.KtPostfixExpression
 import org.jetbrains.kotlin.psi.KtPrefixExpression
 import org.jetbrains.kotlin.psi.KtProperty
@@ -58,6 +59,9 @@ fun IrElement.getPsiElement(irFile: IrFile): PsiElement? {
       isVariableDeclaration -> findPsiElement(this, irFile, KtVariableDeclaration::class)
       isFieldDeclaration -> findPsiElement(this, irFile, KtProperty::class)
       isLabeledExpression -> findPsiElement(this, irFile, KtLabeledExpression::class)
+      // Map primary constructor defined without the constructor keyword to the class name.
+      isPrimaryConstructor && findPsiElement(this, irFile) is KtParameterList ->
+        findPsiElement(this, irFile, KtClass::class)
       else -> findPsiElement(this, irFile)
     } ?: return null
 
