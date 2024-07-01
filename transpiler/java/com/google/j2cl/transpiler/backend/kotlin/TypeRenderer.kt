@@ -73,7 +73,9 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
                 ),
                 superTypesSource(type),
               ),
-              nameRenderer.whereClauseSource(typeDeclaration.typeParameterDescriptors),
+              nameRenderer.whereClauseSource(
+                typeDeclaration.directlyDeclaredTypeParameterDescriptors
+              ),
               typeBodySource(type),
             ),
           )

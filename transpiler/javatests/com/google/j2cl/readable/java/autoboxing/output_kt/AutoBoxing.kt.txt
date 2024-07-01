@@ -519,7 +519,7 @@ open class AutoBoxing {
     n = java.lang.Long.valueOf(n!!.toLong() + 1L) as T?
     n
    }
-   open class Local<T> internal constructor() where T: Long?, T: Comparable<Long>?, T: Long?, T: Comparable<Long>? {
+   open class Local<T> internal constructor() where T: Long?, T: Comparable<Long>? {
     internal open fun toLong_pp_autoboxing(l: T): Long {
      assert(l!!.equals(java.lang.Long.valueOf(11L) as Any?))
      return l!!.toLong()
