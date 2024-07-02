@@ -17,10 +17,8 @@
  */
 goog.module('nativebootstrap.Util$impl');
 
-
-const Reflect = goog.require('goog.reflect');
-const jre = goog.require('jre');
 const Constructor = goog.require('javaemul.internal.Constructor');
+const jre = goog.require('jre');
 
 
 /**
@@ -161,16 +159,12 @@ class Util {
    * @param {Constructor} ctor
    * @return {string}
    * @private
+   * @nosideeffects
    */
   static $getGeneratedClassName_(ctor) {
-    return Reflect.cache(ctor.prototype, '$$generatedClassName', function() {
-      // valueOf hack makes JsCompiler think that this is side effect free.
-      return 'Class$obf_' + {
-        valueOf() {
-          return ++Util.$nextUniqId_;
-        }
-      };
-    });
+    const propName = '$$generatedClassName';
+    return ctor.prototype[propName] ||
+        (ctor.prototype[propName] = 'Class$obf_' + ++Util.$nextUniqId_);
   }
 
   /**
