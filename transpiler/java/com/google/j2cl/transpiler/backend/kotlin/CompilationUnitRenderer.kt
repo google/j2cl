@@ -86,7 +86,6 @@ internal data class CompilationUnitRenderer(val nameRenderer: NameRenderer) {
         listOf(
             "ALWAYS_NULL",
             "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
-            "REPEATED_BOUND",
             "SENSELESS_COMPARISON",
             "UNCHECKED_CAST",
             "UNNECESSARY_LATEINIT",
