@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Google Inc.
+ * Copyright 2024 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -17,25 +17,24 @@ package javaemul.internal;
 
 import javaemul.internal.annotations.DoNotAutobox;
 import javaemul.internal.annotations.UncheckedCast;
+import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 
-/** Provides an interface for simple JavaScript idioms that can not be expressed in Java. */
+/**
+ * Stubs JsUtils for Wasm. These methods used via custom $isInstance methods that are dropped in
+ * Wasm but still referenced from source.
+ */
 public final class JsUtils {
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "typeof")
+  @Wasm("nop") // Unused in Wasm.
   public static native String typeOf(Object obj);
 
   @JsMethod
-  public static native boolean isUndefined(Object value);
-
-  @JsMethod
   @UncheckedCast
+  @Wasm("nop") // Unused in Wasm.
   public static native <T> T uncheckedCast(@DoNotAutobox Object o);
-
-  @JsMethod
-  @UncheckedCast
-  public static native <T> T getProperty(Object map, String key);
 
   private JsUtils() {}
 }
