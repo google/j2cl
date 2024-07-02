@@ -170,7 +170,7 @@ public final class NormalizeSynchronizedConstructs extends NormalizationPass {
             TypeDescriptor type = statement.getExpression().getTypeDescriptor();
             return !type.isSameBaseType(
                         TypeDescriptors.get().comGoogleCommonBaseJ2ktCompatibleMonitor)
-                    && !type.isSameBaseType(TypeDescriptors.get().javaemulLangJ2ktMonitor)
+                    && !type.isAssignableTo(TypeDescriptors.get().javaemulLangJ2ktMonitor)
                     && !type.isSameBaseType(TypeDescriptors.get().javaLangClass)
                 ? SynchronizedStatement.Builder.from(statement)
                     .setExpression(
