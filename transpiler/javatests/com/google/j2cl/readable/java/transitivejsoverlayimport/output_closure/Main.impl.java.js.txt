@@ -4,6 +4,8 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Immediate_$Overlay = goog.forwardDeclare('transitivejsoverlayimport.Immediate.$Overlay$impl');
+let NonNativeLower = goog.forwardDeclare('transitivejsoverlayimport.NonNativeLower$impl');
+let NonNativeUpper = goog.forwardDeclare('transitivejsoverlayimport.NonNativeUpper$impl');
 let $Overlay = goog.forwardDeclare('transitivejsoverlayimport.Transitive.$Overlay$impl');
 
 class Main extends j_l_Object {
@@ -23,34 +25,26 @@ class Main extends j_l_Object {
   this.$ctor__java_lang_Object__void();
  }
  /** @nodts */
- static m_main__arrayOf_java_lang_String__void(/** Array<?string> */ args) {
+ static m_main__void() {
   Main.$clinit();
-  {
-   let transitive = null;
-   $Overlay.m_doTransitiveInstanceMethod__$devirt__transitivejsoverlayimport_Transitive__java_lang_String__void(transitive, 'arg1');
-   transitive.jsProperty;
-  }
-  {
-   let immediate = null;
-   $Overlay.m_doTransitiveInstanceMethod__$devirt__transitivejsoverlayimport_Transitive__java_lang_String__void(immediate, 'arg1');
-   immediate.jsProperty;
-   Immediate_$Overlay.m_doImmediateInstanceMethod__$devirt__transitivejsoverlayimport_Immediate__void(immediate);
-  }
-  {
-   let nonNativeUpper = null;
-   $Overlay.m_doTransitiveInstanceMethod__$devirt__transitivejsoverlayimport_Transitive__java_lang_String__void(nonNativeUpper, 'arg1');
-   nonNativeUpper.jsProperty;
-   Immediate_$Overlay.m_doImmediateInstanceMethod__$devirt__transitivejsoverlayimport_Immediate__void(nonNativeUpper);
-   nonNativeUpper.m_doNonNativeUpperInstanceMethod__void_$pp_transitivejsoverlayimport();
-  }
-  {
-   let nonNativeLower = null;
-   $Overlay.m_doTransitiveInstanceMethod__$devirt__transitivejsoverlayimport_Transitive__java_lang_String__void(nonNativeLower, 'arg1');
-   nonNativeLower.jsProperty;
-   Immediate_$Overlay.m_doImmediateInstanceMethod__$devirt__transitivejsoverlayimport_Immediate__void(nonNativeLower);
-   nonNativeLower.m_doNonNativeUpperInstanceMethod__void_$pp_transitivejsoverlayimport();
-   nonNativeLower.m_doNonNativeLowerInstanceMethod__void_$pp_transitivejsoverlayimport();
-  }
+  let transitive = new Object();
+  $Overlay.m_doTransitiveInstanceMethod__$devirt__transitivejsoverlayimport_Transitive__java_lang_String__void(transitive, 'arg1');
+  transitive.constructor;
+  let immediate = new Object();
+  $Overlay.m_doTransitiveInstanceMethod__$devirt__transitivejsoverlayimport_Transitive__java_lang_String__void(immediate, 'arg1');
+  immediate.constructor;
+  Immediate_$Overlay.m_doImmediateInstanceMethod__$devirt__transitivejsoverlayimport_Immediate__void(immediate);
+  let nonNativeUpper = new NonNativeUpper();
+  $Overlay.m_doTransitiveInstanceMethod__$devirt__transitivejsoverlayimport_Transitive__java_lang_String__void(nonNativeUpper, 'arg1');
+  nonNativeUpper.constructor;
+  Immediate_$Overlay.m_doImmediateInstanceMethod__$devirt__transitivejsoverlayimport_Immediate__void(nonNativeUpper);
+  nonNativeUpper.m_doNonNativeUpperInstanceMethod__void_$pp_transitivejsoverlayimport();
+  let nonNativeLower = new NonNativeLower();
+  $Overlay.m_doTransitiveInstanceMethod__$devirt__transitivejsoverlayimport_Transitive__java_lang_String__void(nonNativeLower, 'arg1');
+  nonNativeLower.constructor;
+  Immediate_$Overlay.m_doImmediateInstanceMethod__$devirt__transitivejsoverlayimport_Immediate__void(nonNativeLower);
+  nonNativeLower.m_doNonNativeUpperInstanceMethod__void_$pp_transitivejsoverlayimport();
+  nonNativeLower.m_doNonNativeLowerInstanceMethod__void_$pp_transitivejsoverlayimport();
  }
  /** @nodts */
  static $clinit() {
@@ -66,6 +60,8 @@ class Main extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   Immediate_$Overlay = goog.module.get('transitivejsoverlayimport.Immediate.$Overlay$impl');
+  NonNativeLower = goog.module.get('transitivejsoverlayimport.NonNativeLower$impl');
+  NonNativeUpper = goog.module.get('transitivejsoverlayimport.NonNativeUpper$impl');
   $Overlay = goog.module.get('transitivejsoverlayimport.Transitive.$Overlay$impl');
  }
 }

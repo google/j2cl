@@ -23,8 +23,7 @@ import jsinterop.annotations.JsOverlay
 import jsinterop.annotations.JsPackage
 import jsinterop.annotations.JsProperty
 import jsinterop.annotations.JsType
-import kotlin.Array
-import kotlin.Int
+import kotlin.Any
 import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
@@ -54,8 +53,8 @@ open class NonNativeLower: NonNativeUpper {
 
 @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
 open class Transitive internal constructor() {
- @JsProperty(name = "jsProperty")
- internal external fun getJsProperty_pp_transitivejsoverlayimport(): Int
+ @JsProperty(name = "constructor")
+ internal external fun getJsProperty_pp_transitivejsoverlayimport(): Any?
 
  @JsOverlay
  internal fun doTransitiveInstanceMethod_pp_transitivejsoverlayimport(arg1: String?) {}
@@ -67,23 +66,20 @@ open class Main {
  companion object {
   @JvmStatic
   @ObjCName("main")
-  fun main(
-   vararg @ObjCName("withNSStringArray") args: String?
-  ) {
-   val args_1: Array<String?>? = args as Array<String?>?
-   val transitive: Transitive? = null
+  fun main() {
+   val transitive: Transitive? = Transitive()
    transitive!!.doTransitiveInstanceMethod_pp_transitivejsoverlayimport("arg1")
    transitive!!.getJsProperty_pp_transitivejsoverlayimport()
-   val immediate: Immediate? = null
+   val immediate: Immediate? = Immediate()
    immediate!!.doTransitiveInstanceMethod_pp_transitivejsoverlayimport("arg1")
    immediate!!.getJsProperty_pp_transitivejsoverlayimport()
    immediate!!.doImmediateInstanceMethod_pp_transitivejsoverlayimport()
-   val nonNativeUpper: NonNativeUpper? = null
+   val nonNativeUpper: NonNativeUpper? = NonNativeUpper()
    nonNativeUpper!!.doTransitiveInstanceMethod_pp_transitivejsoverlayimport("arg1")
    nonNativeUpper!!.getJsProperty_pp_transitivejsoverlayimport()
    nonNativeUpper!!.doImmediateInstanceMethod_pp_transitivejsoverlayimport()
    nonNativeUpper!!.doNonNativeUpperInstanceMethod_pp_transitivejsoverlayimport()
-   val nonNativeLower: NonNativeLower? = null
+   val nonNativeLower: NonNativeLower? = NonNativeLower()
    nonNativeLower!!.doTransitiveInstanceMethod_pp_transitivejsoverlayimport("arg1")
    nonNativeLower!!.getJsProperty_pp_transitivejsoverlayimport()
    nonNativeLower!!.doImmediateInstanceMethod_pp_transitivejsoverlayimport()
