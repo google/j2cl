@@ -886,6 +886,14 @@ class BlockDecomposerTransformer(
     //   tmp
     // ]
     override fun visitTry(aTry: IrTry): IrExpression {
+      // MODIFIED BY GOOGLE.
+      // Do not create a temporary variable if the try has a Unit result type. We can instead just
+      // create a composite that executes the try and then returns Unit. This avoids type mismatches
+      // where the try and catch results don't have compatible types.
+      if (aTry.type == unitType) {
+        return aTry.asExpression(unitValue)
+      }
+      // END OF MODIFICATIONS
       val irVar = makeTempVar(aTry.type)
 
       val newTryResult = wrap(aTry.tryResult, irVar)
