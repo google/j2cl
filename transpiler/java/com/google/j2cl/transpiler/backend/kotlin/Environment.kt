@@ -37,9 +37,12 @@ internal data class Environment(
     mutableMapOf(),
   private val importedOptInQualifiedNamesMutableSet: MutableSet<String> = mutableSetOf(),
 ) {
-  /** Returns identifier for the given named node. */
+  /**
+   * Returns identifier for the given named node. Use "_MISSING" prefix for missing names, to help
+   * debugging.
+   */
   fun identifier(hasName: HasName): String =
-    nameToIdentifierMap[hasName] ?: error("No such identifier: $hasName")
+    nameToIdentifierMap[hasName] ?: "${hasName.name}_MISSING"
 
   /** Returns whether the given identifier is used. */
   fun containsIdentifier(identifier: String): Boolean = identifierSet.contains(identifier)
