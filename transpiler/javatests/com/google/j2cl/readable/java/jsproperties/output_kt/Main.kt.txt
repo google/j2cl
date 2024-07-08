@@ -73,6 +73,10 @@ open class Bar internal constructor() {
  @JvmField
  internal var f_private_2: Int = 0
 
+ @JvmField
+ @JsProperty(name = "privateField")
+ internal var privateField_private_2: Int = - 1
+
  @ObjCName("getA")
  @JsProperty
  open fun getA(): Int {

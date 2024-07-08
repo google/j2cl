@@ -9,6 +9,8 @@ class Bar extends j_l_Object {
   super();
   /**@type {number} @nodts*/
   this.f_f__jsproperties_Bar_ = 0;
+  /**@type {number}*/
+  this.privateField = 0;
  }
  /** @nodts @return {!Bar} */
  static $create__() {
@@ -20,6 +22,7 @@ class Bar extends j_l_Object {
  /** @nodts */
  $ctor__jsproperties_Bar__void() {
   this.$ctor__java_lang_Object__void();
+  this.$init__void_$p_jsproperties_Bar();
  }
  /** @return {number} */
  get a() {
@@ -36,6 +39,10 @@ class Bar extends j_l_Object {
  
  set abc(/** number */ x) {
   this.f_f__jsproperties_Bar_ = x + 4 | 0;
+ }
+ /** @private @nodts */
+ $init__void_$p_jsproperties_Bar() {
+  this.privateField = - 1 | 0;
  }
  /** @nodts */
  static $clinit() {

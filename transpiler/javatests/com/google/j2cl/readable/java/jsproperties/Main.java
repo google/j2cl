@@ -47,6 +47,8 @@ class Foo {
 class Bar {
   private int f;
 
+  @JsProperty private int privateField = -1;
+
   @JsProperty
   public int getA() {
     return f + 1;
