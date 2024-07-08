@@ -47,6 +47,7 @@ import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
 import org.jetbrains.kotlin.ir.types.getClass
 import org.jetbrains.kotlin.ir.types.isUnit
 import org.jetbrains.kotlin.ir.util.getAnnotation
+import org.jetbrains.kotlin.ir.util.isFromJava
 import org.jetbrains.kotlin.ir.util.isGetter
 import org.jetbrains.kotlin.ir.util.isSetter
 import org.jetbrains.kotlin.ir.util.isStatic
@@ -90,16 +91,32 @@ private fun IrDeclaration.findJsinteropAnnotation(name: FqName): IrConstructorCa
   return when {
     // look on the property if this is a property getter or setter
     this is IrSimpleFunction -> correspondingPropertySymbol?.owner?.getAnnotation(name)
-    this is IrField &&
-      (isJvmField ||
-        isCompanionConstantBackingField ||
-        origin == IrDeclarationOrigin.IR_EXTERNAL_JAVA_DECLARATION_STUB) ->
-      // look on the property if this is a backing field, but only if it's a JvmField or constant.
-      // No other fields participate in JsInterop.
-      correspondingPropertySymbol?.owner?.getAnnotation(name)
+    this is IrField && canBeJsProperty -> correspondingPropertySymbol?.owner?.getAnnotation(name)
     else -> null
   }
 }
+
+/**
+ * Whether this field can have `@JsProperty` applied to it.
+ *
+ * `@JsProperty` is attached to Kotlin properties which in turn consist of a backing field and
+ * accessor functions. We can only apply `@JsProperty` to one or the other, but not both. Generally
+ * backing fields in Kotlin are never referenced by user code (except in the accessor functions
+ * themselves), so `@JsProperty` should be applied to the accessors which are actually referenced.
+ *
+ * However, there are situations where the backing field should honor the `@JsProperty` annotation:
+ * 1. Properties annotated with `@JvmField` as Java-usages will be using the field member.
+ * 2. Fields that we see originating from Java
+ * 3. The backing field of the companion object const properties
+ * 4. Private properties with no explicit accessors. Kotlin will not generate code for these
+ *    accessors and instead use the backing field directly.
+ */
+private val IrField.canBeJsProperty: Boolean
+  get() =
+    isJvmField ||
+      isFromJava() ||
+      isCompanionConstantBackingField ||
+      correspondingPropertySymbol?.owner?.hasAccessors == false
 
 private val IrConstructorCall.jsAnnotationInfo: JsAnnotationInfo
   get() =

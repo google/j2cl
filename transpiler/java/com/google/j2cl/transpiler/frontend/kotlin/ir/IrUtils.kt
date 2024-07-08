@@ -34,6 +34,7 @@ import org.jetbrains.kotlin.backend.jvm.ir.getSingleAbstractMethod
 import org.jetbrains.kotlin.backend.jvm.lower.StaticInitializersLowering
 import org.jetbrains.kotlin.descriptors.CallableMemberDescriptor
 import org.jetbrains.kotlin.descriptors.ClassKind
+import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
 import org.jetbrains.kotlin.descriptors.Modality
 import org.jetbrains.kotlin.descriptors.SourceFile
 import org.jetbrains.kotlin.descriptors.Visibilities
@@ -55,6 +56,7 @@ import org.jetbrains.kotlin.ir.declarations.IrField
 import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.ir.declarations.IrFunction
 import org.jetbrains.kotlin.ir.declarations.IrOverridableMember
+import org.jetbrains.kotlin.ir.declarations.IrProperty
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.declarations.IrTypeParameter
 import org.jetbrains.kotlin.ir.declarations.IrTypeParametersContainer
@@ -698,3 +700,16 @@ fun IrAnnotationContainer.copyAnnotationsWhen(
     if (it.filter()) it.deepCopyWithSymbols(this as? IrDeclarationParent) else null
   }
 }
+
+val IrProperty.hasAccessors: Boolean
+  get() = visibility != DescriptorVisibilities.PRIVATE || hasDefinedAccessors
+
+private val IrProperty.hasDefinedAccessors: Boolean
+  get() =
+    (getter != null && !getter!!.isDefaultPropertyAccessor) ||
+      (setter != null && !setter!!.isDefaultPropertyAccessor)
+
+private val IrFunction.isDefaultPropertyAccessor: Boolean
+  get() =
+    origin == IrDeclarationOrigin.DEFAULT_PROPERTY_ACCESSOR &&
+      (this is IrSimpleFunction && correspondingPropertySymbol != null)
