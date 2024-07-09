@@ -73,4 +73,8 @@ public class SynchronizedStatement {
   private int intMethod() {
     return 0;
   }
+
+  public static class ExtendsSynchronized extends SynchronizedStatement {
+    synchronized void foo() {}
+  }
 }

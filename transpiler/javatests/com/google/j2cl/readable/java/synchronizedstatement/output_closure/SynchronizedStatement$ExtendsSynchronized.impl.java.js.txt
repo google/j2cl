@@ -1,0 +1,42 @@
+goog.module('synchronizedstatement.SynchronizedStatement.ExtendsSynchronized$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const SynchronizedStatement = goog.require('synchronizedstatement.SynchronizedStatement$impl');
+
+class ExtendsSynchronized extends SynchronizedStatement {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!ExtendsSynchronized} */
+ static $create__() {
+  ExtendsSynchronized.$clinit();
+  let $instance = new ExtendsSynchronized();
+  $instance.$ctor__synchronizedstatement_SynchronizedStatement_ExtendsSynchronized__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__synchronizedstatement_SynchronizedStatement_ExtendsSynchronized__void() {
+  this.$ctor__synchronizedstatement_SynchronizedStatement__void();
+ }
+ /** @nodts */
+ m_foo__void_$pp_synchronizedstatement() {}
+ /** @nodts */
+ static $clinit() {
+  ExtendsSynchronized.$clinit = () =>{};
+  ExtendsSynchronized.$loadModules();
+  SynchronizedStatement.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ExtendsSynchronized;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(ExtendsSynchronized, 'synchronizedstatement.SynchronizedStatement$ExtendsSynchronized');
+
+exports = ExtendsSynchronized;
+
+//# sourceMappingURL=SynchronizedStatement$ExtendsSynchronized.js.map

@@ -93,4 +93,11 @@ open class SynchronizedStatement {
  @JvmField
  @ObjCName("impliedJ2ktMonitor_")
  val impliedJ2ktMonitor: J2ktMonitor = J2ktMonitor()
+
+ @ObjCName("J2ktSynchronizedstatementSynchronizedStatement_ExtendsSynchronized", exact = true)
+ open class ExtendsSynchronized: SynchronizedStatement() {
+  internal open fun foo_pp_synchronizedstatement() {
+   synchronized<Unit>(this.impliedJ2ktMonitor) {}
+  }
+ }
 }

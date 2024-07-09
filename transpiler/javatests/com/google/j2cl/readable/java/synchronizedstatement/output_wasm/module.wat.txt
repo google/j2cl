@@ -20,13 +20,46 @@
  ))
 )
 
+;;; Code for synchronizedstatement.SynchronizedStatement.ExtendsSynchronized [type definition]
+(type $synchronizedstatement.SynchronizedStatement.ExtendsSynchronized.vtable (sub $synchronizedstatement.SynchronizedStatement.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_main__void (ref $function.m_main__void))
+ (field $m_testBreakAndContinue__void (ref $function.m_testBreakAndContinue__void))
+ (field $m_testIfStatementWithNonVoidBodyWithoutElse__void (ref $function.m_testIfStatementWithNonVoidBodyWithoutElse__void))
+ (field $m_testInitialization__int (ref $function.m_testInitialization__int))
+ (field $m_testReturn__int (ref $function.m_testReturn__int))
+ (field $m_foo__void_$pp_synchronizedstatement (ref $function.m_foo__void_$pp_synchronizedstatement))
+ ))
+)
+(type $synchronizedstatement.SynchronizedStatement.ExtendsSynchronized (sub $synchronizedstatement.SynchronizedStatement (struct
+ (field $vtable (ref $synchronizedstatement.SynchronizedStatement.ExtendsSynchronized.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $a@synchronizedstatement.SynchronizedStatement (mut i32))
+ (field $b@synchronizedstatement.SynchronizedStatement (mut i32))
+ ))
+)
+
 ;;; Code for synchronizedstatement.SynchronizedStatement [imports]
+
+;;; Code for synchronizedstatement.SynchronizedStatement.ExtendsSynchronized [imports]
 
 ;;; Code for synchronizedstatement.SynchronizedStatement [static fields]
 (global $$class-initialized@synchronizedstatement.SynchronizedStatement (mut i32)
  (i32.const 0)
 )
 (global $$class@synchronizedstatement.SynchronizedStatement (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for synchronizedstatement.SynchronizedStatement.ExtendsSynchronized [static fields]
+(global $$class-initialized@synchronizedstatement.SynchronizedStatement.ExtendsSynchronized (mut i32)
+ (i32.const 0)
+)
+(global $$class@synchronizedstatement.SynchronizedStatement.ExtendsSynchronized (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -42,6 +75,22 @@
   (ref.func $m_testIfStatementWithNonVoidBodyWithoutElse__void@synchronizedstatement.SynchronizedStatement)
   (ref.func $m_testInitialization__int@synchronizedstatement.SynchronizedStatement)
   (ref.func $m_testReturn__int@synchronizedstatement.SynchronizedStatement)
+ )
+)
+
+;;; Code for synchronizedstatement.SynchronizedStatement.ExtendsSynchronized [vtable.init]
+(global $synchronizedstatement.SynchronizedStatement.ExtendsSynchronized.vtable (ref $synchronizedstatement.SynchronizedStatement.ExtendsSynchronized.vtable)
+ (struct.new $synchronizedstatement.SynchronizedStatement.ExtendsSynchronized.vtable
+  (ref.func $$getClassImpl__java_lang_Class@synchronizedstatement.SynchronizedStatement.ExtendsSynchronized)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_main__void@synchronizedstatement.SynchronizedStatement)
+  (ref.func $m_testBreakAndContinue__void@synchronizedstatement.SynchronizedStatement)
+  (ref.func $m_testIfStatementWithNonVoidBodyWithoutElse__void@synchronizedstatement.SynchronizedStatement)
+  (ref.func $m_testInitialization__int@synchronizedstatement.SynchronizedStatement)
+  (ref.func $m_testReturn__int@synchronizedstatement.SynchronizedStatement)
+  (ref.func $m_foo__void_$pp_synchronizedstatement@synchronizedstatement.SynchronizedStatement.ExtendsSynchronized)
  )
 )
 
@@ -290,3 +339,89 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@synchronizedstatement.SynchronizedStatement)
+
+;;; Code for synchronizedstatement.SynchronizedStatement.ExtendsSynchronized [methods]
+
+;;; ExtendsSynchronized ExtendsSynchronized.$create()
+(func $$create__@synchronizedstatement.SynchronizedStatement.ExtendsSynchronized
+ (result (ref null $synchronizedstatement.SynchronizedStatement.ExtendsSynchronized))
+ ;;@ synchronizedstatement/SynchronizedStatement.java:77:22
+ (local $$instance (ref null $synchronizedstatement.SynchronizedStatement.ExtendsSynchronized))
+ (block
+  ;;@ synchronizedstatement/SynchronizedStatement.java:77:22
+  (call $$clinit__void_<once>_@synchronizedstatement.SynchronizedStatement.ExtendsSynchronized )
+  ;;@ synchronizedstatement/SynchronizedStatement.java:77:22
+  (local.set $$instance (struct.new $synchronizedstatement.SynchronizedStatement.ExtendsSynchronized (ref.as_non_null (global.get $synchronizedstatement.SynchronizedStatement.ExtendsSynchronized.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (i32.const 0)))
+  ;;@ synchronizedstatement/SynchronizedStatement.java:77:22
+  (call $$ctor__void_$p_synchronizedstatement_SynchronizedStatement_ExtendsSynchronized@synchronizedstatement.SynchronizedStatement.ExtendsSynchronized (ref.as_non_null (local.get $$instance)))
+  ;;@ synchronizedstatement/SynchronizedStatement.java:77:22
+  (return (local.get $$instance))
+ )
+)
+
+;;; void ExtendsSynchronized.$ctor()
+(func $$ctor__void_$p_synchronizedstatement_SynchronizedStatement_ExtendsSynchronized@synchronizedstatement.SynchronizedStatement.ExtendsSynchronized
+ (param $this (ref null $synchronizedstatement.SynchronizedStatement.ExtendsSynchronized))
+ ;;@ synchronizedstatement/SynchronizedStatement.java:77:22
+ (block
+  ;;@ synchronizedstatement/SynchronizedStatement.java:77:22
+  (call $$ctor__void_$p_synchronizedstatement_SynchronizedStatement@synchronizedstatement.SynchronizedStatement (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void ExtendsSynchronized.foo()
+(func $m_foo__void_$pp_synchronizedstatement@synchronizedstatement.SynchronizedStatement.ExtendsSynchronized
+ (type $function.m_foo__void_$pp_synchronizedstatement)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ synchronizedstatement/SynchronizedStatement.java:78:22
+ (local $this (ref null $synchronizedstatement.SynchronizedStatement.ExtendsSynchronized))
+ (local.set $this (ref.cast (ref $synchronizedstatement.SynchronizedStatement.ExtendsSynchronized) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_foo__void_$pp_synchronizedstatement@synchronizedstatement.SynchronizedStatement.ExtendsSynchronized)
+
+;;; void ExtendsSynchronized.$clinit()
+(func $$clinit__void_<once>_@synchronizedstatement.SynchronizedStatement.ExtendsSynchronized
+ ;;@ synchronizedstatement/SynchronizedStatement.java:77:22
+ (block
+  ;;@ synchronizedstatement/SynchronizedStatement.java:77:22
+  (if (global.get $$class-initialized@synchronizedstatement.SynchronizedStatement.ExtendsSynchronized)
+   (then
+    ;;@ synchronizedstatement/SynchronizedStatement.java:77:22
+    (return )
+   )
+  )
+  ;;@ synchronizedstatement/SynchronizedStatement.java:77:22
+  (global.set $$class-initialized@synchronizedstatement.SynchronizedStatement.ExtendsSynchronized (i32.const 1))
+  ;;@ synchronizedstatement/SynchronizedStatement.java:77:22
+  (call $$clinit__void_<once>_@synchronizedstatement.SynchronizedStatement )
+ )
+)
+
+;;; Class<T> ExtendsSynchronized.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@synchronizedstatement.SynchronizedStatement.ExtendsSynchronized
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@synchronizedstatement.SynchronizedStatement.ExtendsSynchronized)))
+   (then
+    (return (global.get $$class@synchronizedstatement.SynchronizedStatement.ExtendsSynchronized))
+   )
+  )
+  (global.set $$class@synchronizedstatement.SynchronizedStatement.ExtendsSynchronized (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|synchronized...|__java_lang_String_<once>_@synchronizedstatement.SynchronizedStatement.ExtendsSynchronized )(call $$getClassMetadata__java_lang_Class_<once>_@synchronizedstatement.SynchronizedStatement )))
+  (return (global.get $$class@synchronizedstatement.SynchronizedStatement.ExtendsSynchronized))
+ )
+)
+
+;;; Class<?> ExtendsSynchronized.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@synchronizedstatement.SynchronizedStatement.ExtendsSynchronized
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $synchronizedstatement.SynchronizedStatement.ExtendsSynchronized))
+ (local.set $this (ref.cast (ref $synchronizedstatement.SynchronizedStatement.ExtendsSynchronized) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@synchronizedstatement.SynchronizedStatement.ExtendsSynchronized ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@synchronizedstatement.SynchronizedStatement.ExtendsSynchronized)
