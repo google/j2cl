@@ -15,6 +15,9 @@
  */
 package javaemul.internal;
 
+import javaemul.internal.annotations.HasNoSideEffects;
+import javaemul.internal.annotations.UncheckedCast;
+import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -34,6 +37,28 @@ public class Constructor {
   private static Constructor globalObjectCtor;
 
   private Object prototype;
+
+  /** A function that supplies a value. */
+  @JsFunction
+  public interface Supplier<T> {
+    T get();
+  }
+
+  @HasNoSideEffects
+  @UncheckedCast
+  @JsOverlay
+  public final <T> T cache(String key, Supplier<T> supplier) {
+    if (hasOwnProperty(this.prototype, key)) {
+      return JsUtils.getProperty(this.prototype, key);
+    } else {
+      T t = supplier.get();
+      JsUtils.setProperty(this.prototype, key, t);
+      return t;
+    }
+  }
+
+  @JsMethod(name = "Object.prototype.hasOwnProperty.call", namespace = JsPackage.GLOBAL)
+  private static native boolean hasOwnProperty(Object obj, String name);
 
   @JsOverlay
   public final Constructor getSuperConstructor() {

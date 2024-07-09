@@ -16,8 +16,11 @@ package java.lang;
 import java.io.Serializable;
 import java.lang.reflect.Type;
 import javaemul.internal.Constructor;
+import javaemul.internal.JsUtils;
+import javaemul.internal.annotations.HasNoSideEffects;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsOptional;
 
 /**
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html">the official Java API
@@ -30,6 +33,17 @@ public final class Class<T> implements Type, Serializable {
    * count in the case of an array. This method is used by transpiler to implement the class
    * literals.
    */
+  @JsMethod
+  @HasNoSideEffects
+  private static Class<?> $get(Object obj, @JsOptional Double opt_dimensionCount) {
+    // TODO(b/79389970): Change the argument to Constructor.
+    Constructor ctor = JsUtils.uncheckedCast(obj);
+    int dimensionCount = JsUtils.coerceToInt(opt_dimensionCount);
+    return ctor.cache("$$class/" + dimensionCount, () -> new Class(ctor, dimensionCount));
+  }
+
+  // Native overloads provided so passing dimensionCount is not required from Java call-sites.
+
   @JsMethod
   public static native Class<?> $get(Constructor ctor, int dimensionCount);
 

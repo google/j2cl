@@ -34,8 +34,15 @@ public final class JsUtils {
   public static native <T> T uncheckedCast(@DoNotAutobox Object o);
 
   @JsMethod
+  public static native int coerceToInt(Double o);
+
+  @JsMethod
   @UncheckedCast
   public static native <T> T getProperty(Object map, String key);
+
+  @JsMethod
+  @UncheckedCast
+  public static native void setProperty(Object map, String key, Object value);
 
   private JsUtils() {}
 }

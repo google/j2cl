@@ -23,8 +23,6 @@ import java.io.Serializable;
 import javaemul.internal.annotations.DoNotAutobox;
 import javaemul.internal.annotations.UncheckedCast;
 import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsFunction;
-import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -68,7 +66,7 @@ class Enums {
       return null;
     }
     checkArgument(!(value instanceof BoxedLightEnum));
-    return cache(ctor, "$$enumValues/" + value, () -> new BoxedLightEnum<T>(value, ctor));
+    return ctor.cache("$$enumValues/" + value, () -> new BoxedLightEnum<T>(value, ctor));
   }
 
   private static class BoxedLightEnum<T> implements Serializable {
@@ -94,7 +92,7 @@ class Enums {
       return null;
     }
     checkArgument(!(value instanceof BoxedLightEnum));
-    return cache(ctor, "$$enumValues/" + value, () -> new BoxedComparableLightEnum<T>(value, ctor));
+    return ctor.cache("$$enumValues/" + value, () -> new BoxedComparableLightEnum<T>(value, ctor));
   }
 
   private static class BoxedComparableLightEnum<T> extends BoxedLightEnum<T>
@@ -141,12 +139,4 @@ class Enums {
     // are numbers it is safe to compare them as Doubles.
     return ((Double) instance).compareTo((Double) other);
   }
-
-  @JsFunction
-  private interface Supplier<T> {
-    T get();
-  }
-
-  @JsMethod(namespace = "goog.reflect")
-  private static native <T> T cache(Constructor constructor, String key, Supplier<T> supplier);
 }
