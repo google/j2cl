@@ -39,10 +39,19 @@ import com.google.j2cl.transpiler.ast.TypeLiteral;
  * fields.
  */
 public final class NormalizeSynchronizedConstructs extends NormalizationPass {
+  private static final boolean SKIP_IMPLIED_LOCK_TRANSFORMATION =
+      "true"
+          .equals(
+              System.getProperty(
+                  "com.google.j2cl.transpiler.backend.kotlin.skipImpliedLockTransformation"));
 
   /** Perform normalization of synchronized constructs as described in the class javadoc. */
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
+    if (SKIP_IMPLIED_LOCK_TRANSFORMATION) {
+      normalizeSynchronizedMethods(compilationUnit);
+      return;
+    }
     insertImpliedMonitorFields(compilationUnit);
     normalizeSynchronizedMethods(compilationUnit);
     normalizeSynchronizedStatements(compilationUnit);

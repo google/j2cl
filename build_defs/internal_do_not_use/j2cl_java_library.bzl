@@ -22,9 +22,11 @@ def _impl_j2cl_library(ctx):
             output_jar = ctx.actions.declare_file(ctx.label.name + "_j2kt_web_jvm.jar"),
             javac_opts = ctx.attr.javacopts,
             strip_annotation = "GwtIncompatible",
-            # TODO(b/322906767): Remove when the bug is fixed.
             custom_args = [
+                # TODO(b/322906767): Remove when the bug is fixed.
                 "--jvm_flag=-Dcom.google.j2cl.transpiler.backend.kotlin.preserveEqualsForJsTypeInterface=true",
+                # TODO(b/351928899): Remove when the bug is fixed.
+                "--jvm_flag=-Dcom.google.j2cl.transpiler.backend.kotlin.skipImpliedLockTransformation=true",
             ],
         )
 
