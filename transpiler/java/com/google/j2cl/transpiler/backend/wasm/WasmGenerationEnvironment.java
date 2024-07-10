@@ -48,6 +48,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.backend.common.UniqueNamesResolver;
 import com.google.j2cl.transpiler.backend.wasm.JsImportsGenerator.Imports;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -427,7 +428,7 @@ public class WasmGenerationEnvironment {
               // Force creation of layouts for all superinterfaces.
               typeDeclaration.getAllSuperInterfaces().forEach(this::getOrCreateWasmTypeLayout);
               WasmTypeLayout superWasmLayout =
-                  getOrCreateWasmTypeLayout(typeDeclaration.getSuperTypeDeclaration());
+                  getOrCreateWasmTypeLayout(getTypeLayoutSuperTypeDeclaration(typeDeclaration));
               var previous =
                   wasmTypeLayoutByTypeDeclaration.put(
                       typeDeclaration, WasmTypeLayout.createFromType(t, superWasmLayout));
@@ -468,7 +469,7 @@ public class WasmGenerationEnvironment {
       // accomplished by calling recursively "getOrCreateWasmTypeLayout" rather than assuming it
       // was already created and would be returned by "getWasmTypeLayout'.
       WasmTypeLayout superTypeLayout =
-          getOrCreateWasmTypeLayout(typeDeclaration.getSuperTypeDeclaration());
+          getOrCreateWasmTypeLayout(getTypeLayoutSuperTypeDeclaration(typeDeclaration));
       WasmTypeLayout typeLayout =
           WasmTypeLayout.createFromTypeDeclaration(typeDeclaration, superTypeLayout);
       // If the supertype layout was not created by the type it is requested here,
@@ -478,5 +479,22 @@ public class WasmGenerationEnvironment {
       return typeLayout;
     }
     return wasmTypeLayoutByTypeDeclaration.get(typeDeclaration);
+  }
+
+  @Nullable
+  private static TypeDeclaration getTypeLayoutSuperTypeDeclaration(
+      TypeDeclaration typeDeclaration) {
+    if (typeDeclaration.isInterface()) {
+      // For interfaces, choose a suitable "superinterface". Java interfaces can inherit multiple
+      // parent interfaces, which cannot be fully expressed in Wasm.
+      // Here, we choose the immediate superinterface with the most methods as a heuristic to
+      // minimize the number of conversions needed when calling superinterface methods.
+      return typeDeclaration.getInterfaceTypeDescriptors().stream()
+          .max(Comparator.comparingInt(i -> i.getPolymorphicMethods().size()))
+          .map(DeclaredTypeDescriptor::getTypeDeclaration)
+          .orElse(null);
+    }
+
+    return typeDeclaration.getSuperTypeDeclaration();
   }
 }

@@ -312,10 +312,10 @@
  )))
 
  ;;; Code for jsenum.Main.ComparableJsEnumSupplierConsumer [type definition]
- (type $jsenum.Main.ComparableJsEnumSupplierConsumer.vtable (sub (struct
+ (type $jsenum.Main.ComparableJsEnumSupplierConsumer.vtable (sub $jsenum.Main.Supplier.vtable (struct
+  (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
   (field $m_accept__java_lang_Object__void (ref $function.m_accept__java_lang_Object__void))
   (field $m_accept__jsenum_Main_ComparableJsEnum__void (ref $function.m_accept__jsenum_Main_ComparableJsEnum__void))
-  (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
   (field $m_get__jsenum_Main_ComparableJsEnum (ref $function.m_get__jsenum_Main_ComparableJsEnum))
   ))
  )
@@ -796,9 +796,9 @@
 )
 (global $jsenum.Main.ComparableJsEnumSupplierConsumer.vtable@$jsenum.Main.ComparableJsEnumSupplierConsumerImpl (ref $jsenum.Main.ComparableJsEnumSupplierConsumer.vtable)
  (struct.new $jsenum.Main.ComparableJsEnumSupplierConsumer.vtable
+  (ref.func $m_get__java_lang_Object@jsenum.Main.SupplierConsumerImpl)
   (ref.func $m_accept__java_lang_Object__void@jsenum.Main.SupplierConsumerImpl)
   (ref.func $m_accept__jsenum_Main_ComparableJsEnum__void@jsenum.Main.ComparableJsEnumSupplierConsumerImpl)
-  (ref.func $m_get__java_lang_Object@jsenum.Main.SupplierConsumerImpl)
   (ref.func $m_get__jsenum_Main_ComparableJsEnum@jsenum.Main.ComparableJsEnumSupplierConsumerImpl)
  )
 )
@@ -841,9 +841,9 @@
 )
 (global $jsenum.Main.ComparableJsEnumSupplierConsumer.vtable@$jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides (ref $jsenum.Main.ComparableJsEnumSupplierConsumer.vtable)
  (struct.new $jsenum.Main.ComparableJsEnumSupplierConsumer.vtable
+  (ref.func $m_get__java_lang_Object@jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides)
   (ref.func $m_accept__java_lang_Object__void@jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides)
   (ref.func $m_accept__jsenum_Main_ComparableJsEnum__void@jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides)
-  (ref.func $m_get__java_lang_Object@jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides)
   (ref.func $m_get__jsenum_Main_ComparableJsEnum@jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides)
  )
 )

@@ -773,11 +773,13 @@ public class WasmConstructsGenerator {
   /** Emits a Wasm struct using nominal inheritance. */
   private void emitWasmStruct(
       Type type, Function<DeclaredTypeDescriptor, String> structNamer, Runnable fieldsRenderer) {
-    boolean hasSuperType = type.getSuperTypeDescriptor() != null;
+    WasmTypeLayout wasmType = environment.getWasmTypeLayout(type.getDeclaration());
+    boolean hasSuperType = wasmType.getWasmSupertypeLayout() != null;
     builder.newLine();
     builder.append(String.format("(type %s (sub ", structNamer.apply(type.getTypeDescriptor())));
     if (hasSuperType) {
-      builder.append(format("%s ", structNamer.apply(type.getSuperTypeDescriptor())));
+      builder.append(
+          format("%s ", structNamer.apply(wasmType.getWasmSupertypeLayout().getTypeDescriptor())));
     }
     builder.append("(struct");
     builder.indent();
