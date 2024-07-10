@@ -279,7 +279,8 @@ public interface Map<K, V> {
   Set<K> keySet();
 
   @JsIgnore
-  default V merge(K key, V value, BiFunction<? super V, ? super V, ? extends V> remappingFunction) {
+  default V merge(
+      K key, @JsNonNull V value, BiFunction<? super V, ? super V, ? extends V> remappingFunction) {
     checkNotNull(remappingFunction);
     checkNotNull(value);
 
