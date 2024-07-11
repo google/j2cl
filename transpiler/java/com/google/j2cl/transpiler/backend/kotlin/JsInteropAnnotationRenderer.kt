@@ -38,6 +38,9 @@ import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
  */
 internal data class JsInteropAnnotationRenderer(val nameRenderer: NameRenderer) {
 
+  private val environment: Environment
+    get() = nameRenderer.environment
+
   fun jsInteropAnnotationsSource(typeDeclaration: TypeDeclaration): Source =
     jsFunctionAnnotationSource(typeDeclaration)
       .ifEmpty { jsTypeAnnotationSource(typeDeclaration) }
@@ -112,14 +115,14 @@ internal data class JsInteropAnnotationRenderer(val nameRenderer: NameRenderer) 
         it.originalJsInfo.hasJsMemberAnnotation ||
           // If the name is mangled but it overrides a member (which means that one was already
           // mangled) then the annotation is already emitted in the overridden member.
-          (it.isKtNameMangled && !it.isKtOverride)
+          (environment.isKtNameMangled(it) && !it.isKtOverride)
       }
       ?.let {
         val nameParameterValue =
           it.originalJsInfo.jsName
             // if there is no name specified in the original annotation but the name is mangled in
             // Kotlin, use the simpleJsName otherwise do not emit any name.
-            ?: if (it.isKtNameMangled) it.simpleJsName else null
+            ?: if (environment.isKtNameMangled(it)) it.simpleJsName else null
 
         annotation(
           nameRenderer.topLevelQualifiedNameSource(annotationQualifiedName),
@@ -190,6 +193,17 @@ internal data class JsInteropAnnotationRenderer(val nameRenderer: NameRenderer) 
       identifierSource("GLOBAL"),
     )
 
+  private val MemberDescriptor.hasJsIgnoreAnnotation
+    get() =
+      // We need to reverse-engineer here because JsInfo does not carry over the information
+      // about JsIgnore annotation.
+      // TODO(b/266614719): Rely on annotation presence instead when JsInterop annotations are
+      // part  of the J2CL ast.
+      enclosingTypeDescriptor.isJsType &&
+        !enclosingTypeDescriptor.isNative &&
+        environment.ktVisibility(this) == KtVisibility.PUBLIC &&
+        originalJsInfo.jsMemberType == JsMemberType.NONE
+
   companion object {
     private fun nameParameterSource(typeDeclaration: TypeDeclaration): Source =
       typeDeclaration
@@ -212,19 +226,5 @@ internal data class JsInteropAnnotationRenderer(val nameRenderer: NameRenderer) 
 
     private val MethodDescriptor.hasJsConstructorAnnotation
       get() = originalJsInfo.hasJsMemberAnnotation && isJsConstructor
-
-    private val MemberDescriptor.hasJsIgnoreAnnotation
-      get() =
-        // We need to reverse-engineering  here because JsInfo does not carry over the information
-        // about JsIgnore annotation.
-        // TODO(b/266614719): Rely on annotation presence instead when JsInterop annotations are
-        // part  of the J2CL ast.
-        enclosingTypeDescriptor.isJsType &&
-          !enclosingTypeDescriptor.isNative &&
-          ktVisibility == KtVisibility.PUBLIC &&
-          originalJsInfo.jsMemberType == JsMemberType.NONE
-
-    private val MemberDescriptor.isKtNameMangled: Boolean
-      get() = name != ktMangledName
   }
 }

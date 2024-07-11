@@ -48,13 +48,13 @@ open class Main {
  @ObjCName("J2ktExternsMainCompanion", exact = true)
  companion object {
   @JvmStatic
-  internal fun testFooOverlay_private_2(fooOverlay: Main.FooOverlay?): Boolean {
+  private fun testFooOverlay(fooOverlay: Main.FooOverlay?): Boolean {
    return fooOverlay!!.getFoo()!!.equals("Hello")
   }
 
   @JvmStatic
-  @JsMethod(name = "useDirectlyAsFoo")
-  internal external fun useDirectlyAsFoo_private_2(fooOverlay: Any?)
+  @JsMethod
+  private external fun useDirectlyAsFoo(fooOverlay: Any?)
 
   @JvmStatic
   @ObjCName("main")
@@ -62,8 +62,8 @@ open class Main {
    vararg @ObjCName("withNSStringArray") args: String?
   ) {
    val args_1: Array<String?>? = args as Array<String?>?
-   Main.testFooOverlay_private_2((Main.FooImpl() as Any) as Main.FooOverlay)
-   Main.useDirectlyAsFoo_private_2(Main.FooImpl())
+   Main.testFooOverlay((Main.FooImpl() as Any) as Main.FooOverlay)
+   Main.useDirectlyAsFoo(Main.FooImpl())
   }
  }
 

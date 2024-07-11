@@ -71,7 +71,7 @@ open class Casts {
   val bar: Any? = null as Array<Array<Any?>?>?
  }
 
- internal fun functionForInstanceofTest_private_2() {}
+ private fun functionForInstanceofTest() {}
 
  @ObjCName("testCastObjectAfterInstanceOf")
  open fun testCastObjectAfterInstanceOf() {
@@ -96,7 +96,7 @@ open class Casts {
   }
   if (o is Casts) {
    val cAvoidsCastsTo_3: Casts? = o as Casts?
-   this.functionForInstanceofTest_private_2()
+   this.functionForInstanceofTest()
    val cNotAvoidCastsTo_2: Casts? = o as Casts?
   }
  }
@@ -119,7 +119,7 @@ open class Casts {
   }
   if (foo!!.field is Casts) {
    val cAvoidsCastsTo_2: Casts? = foo!!.field as Casts?
-   this.functionForInstanceofTest_private_2()
+   this.functionForInstanceofTest()
    val cNotAvoidCastsTo_2: Casts? = foo!!.field as Casts?
   }
  }

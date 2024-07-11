@@ -33,40 +33,29 @@ import kotlin.Suppress
 import kotlin.arrayOf
 import kotlin.collections.MutableList
 import kotlin.experimental.ExperimentalObjCName
-import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktJsnonnullMain", exact = true)
 open class Main {
- @JvmField
- internal var f1_private_2: String = "Hello"
+ private var f1: String = "Hello"
 
- @JvmField
- internal var f2_private_2: String? = null
+ private var f2: String? = null
 
- @JvmField
- internal var f4_private_2: MutableList<String> = ArrayList<String>()
+ private var f4: MutableList<String> = ArrayList<String>()
 
- @JvmField
- internal var f5_private_2: MutableList<String>? = ArrayList<String>()
+ private var f5: MutableList<String>? = ArrayList<String>()
 
- @JvmField
- internal var f6_private_2: MutableList<String?> = ArrayList<String>() as MutableList<String?>
+ private var f6: MutableList<String?> = ArrayList<String>() as MutableList<String?>
 
- @JvmField
- internal var f7_private_2: MutableList<String?>? = null
+ private var f7: MutableList<String?>? = null
 
- @JvmField
- internal var f8_private_2: Array<String> = arrayOf<String>()
+ private var f8: Array<String> = arrayOf<String>()
 
- @JvmField
- internal var f9_private_2: Array<String?> = arrayOf<String?>()
+ private var f9: Array<String?> = arrayOf<String?>()
 
- @JvmField
- internal var f10_private_2: Array<String>? = arrayOf<String>()
+ private var f10: Array<String>? = arrayOf<String>()
 
- @JvmField
- internal var f12_private_2: MutableList<String?>? = ArrayList<String>() as MutableList<String?>?
+ private var f12: MutableList<String?>? = ArrayList<String>() as MutableList<String?>?
 
  @JsConstructor
  constructor(

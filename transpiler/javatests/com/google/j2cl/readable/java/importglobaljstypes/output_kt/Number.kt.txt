@@ -61,15 +61,15 @@ open class Number {
 
   @JvmStatic
   @JsMethod(name = "Array", namespace = JsPackage.GLOBAL)
-  internal external fun <T> createArray_private_2(): Number.NativeArray<T>?
+  private external fun <T> createArray(): Number.NativeArray<T>?
 
   @JvmStatic
-  internal fun getStringAt_private_2(index: Int): String? {
-   return Number.createArray_private_2<String?>()!!.at(index)
+  private fun getStringAt(index: Int): String? {
+   return Number.createArray<String?>()!!.at(index)
   }
 
   @JvmStatic
-  internal fun getArrayLength_private_2(array: Number.NativeArray<*>?): Int {
+  private fun getArrayLength(array: Number.NativeArray<*>?): Int {
    return (array as Number.NativeArray<Any?>?)!!.getLength()
   }
  }

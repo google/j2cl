@@ -22,20 +22,17 @@ import kotlin.Int
 import kotlin.OptIn
 import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
-import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktCascadingconstructorCascadingConstructor", exact = true)
 open class CascadingConstructor {
- @JvmField
- internal var a_private_2: Int = 0
+ private var a: Int = 0
 
- @JvmField
- internal var b_private_2: Int = 0
+ private var b: Int = 0
 
- internal constructor(a: Int, b: Int) {
-  this.a_private_2 = a
-  this.b_private_2 = b
+ private constructor(a: Int, b: Int) {
+  this.a = a
+  this.b = b
  }
 
  constructor(

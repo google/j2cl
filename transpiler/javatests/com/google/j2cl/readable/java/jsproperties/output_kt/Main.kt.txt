@@ -26,20 +26,18 @@ import kotlin.Int
 import kotlin.OptIn
 import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
-import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
 open class Foo internal constructor() {
  companion object {
-  @JvmField
-  internal var f_private_2: Int = 0
+  private var f: Int = 0
 
   @JvmStatic
   @ObjCName("getA")
   @JsProperty
   fun getA(): Int {
-   return Foo.f_private_2 + 1
+   return Foo.f + 1
   }
 
   @JvmStatic
@@ -48,14 +46,14 @@ open class Foo internal constructor() {
   fun setA(
    @ObjCName("withInt") x: Int
   ) {
-   Foo.f_private_2 = x + 2
+   Foo.f = x + 2
   }
 
   @JvmStatic
   @ObjCName("getB")
   @JsProperty(name = "abc")
   fun getB(): Int {
-   return Foo.f_private_2 + 3
+   return Foo.f + 3
   }
 
   @JvmStatic
@@ -64,23 +62,21 @@ open class Foo internal constructor() {
   fun setB(
    @ObjCName("withInt") x: Int
   ) {
-   Foo.f_private_2 = x + 4
+   Foo.f = x + 4
   }
  }
 }
 
 open class Bar internal constructor() {
- @JvmField
- internal var f_private_2: Int = 0
+ private var f: Int = 0
 
- @JvmField
- @JsProperty(name = "privateField")
- internal var privateField_private_2: Int = - 1
+ @JsProperty
+ private var privateField: Int = - 1
 
  @ObjCName("getA")
  @JsProperty
  open fun getA(): Int {
-  return this.f_private_2 + 1
+  return this.f + 1
  }
 
  @ObjCName("setA")
@@ -88,13 +84,13 @@ open class Bar internal constructor() {
  open fun setA(
   @ObjCName("withInt") x: Int
  ) {
-  this.f_private_2 = x + 2
+  this.f = x + 2
  }
 
  @ObjCName("getB")
  @JsProperty(name = "abc")
  open fun getB(): Int {
-  return this.f_private_2 + 3
+  return this.f + 3
  }
 
  @ObjCName("setB")
@@ -102,7 +98,7 @@ open class Bar internal constructor() {
  open fun setB(
   @ObjCName("withInt") x: Int
  ) {
-  this.f_private_2 = x + 4
+  this.f = x + 4
  }
 }
 

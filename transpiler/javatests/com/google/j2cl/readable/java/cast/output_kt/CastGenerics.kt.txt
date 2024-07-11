@@ -62,7 +62,7 @@ open class CastGenerics<T, E: Number?> {
  @ObjCName("outerGenericMethod")
  open fun <TT: Enum<*>> outerGenericMethod() {
   open class Nested<SS> internal constructor() {
-   internal fun nestedGenericMethod_private_2(o: Any?) {
+   private fun nestedGenericMethod(o: Any?) {
     val t: TT? = o as TT?
    }
   }
@@ -172,15 +172,14 @@ open class CastGenerics<T, E: Number?> {
  }
 
  open class NullMarkedContainer<T: Any> {
-  @JvmField
-  internal var value_private_2: T
+  private var value: T
 
   internal constructor(value: T) {
-   this.value_private_2 = value
+   this.value = value
   }
 
   internal open fun get_pp_cast(): T {
-   return this.value_private_2
+   return this.value
   }
  }
 

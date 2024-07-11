@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
-import com.google.j2cl.transpiler.ast.AstUtils
 import com.google.j2cl.transpiler.ast.CompilationUnit
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.FieldDescriptor
@@ -26,7 +25,6 @@ import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptor
-import com.google.j2cl.transpiler.ast.Visibility
 
 /** Map entry from simple name to qualified name. */
 internal val TypeDeclaration.nameMapEntry: Pair<String, String>
@@ -61,32 +59,22 @@ internal val CompilationUnit.localTypeNames: Map<String, String>
       .map { it.ktSimpleName to it.ktQualifiedName }
       .let { mapOf(*it.toTypedArray()) }
 
-/** Kotlin mangled name for this member descriptor. */
-internal val MemberDescriptor.ktMangledName: String
-  get() = if (AstUtils.isJsEnumCustomValueField(this)) name!! else ktName + ktNameSuffix
-
-/** Kotlin name suffix for this member descriptor. */
-private val MemberDescriptor.ktNameSuffix: String
-  get() =
-    when (visibility!!) {
-      Visibility.PUBLIC -> ktPropertyNameSuffix
-      Visibility.PROTECTED -> ktPropertyNameSuffix
-      Visibility.PACKAGE_PRIVATE ->
-        "_pp_${enclosingTypeDescriptor.typeDeclaration.packageName?.replace('.', '_') ?: ""}"
-      Visibility.PRIVATE ->
-        "_private_${enclosingTypeDescriptor.typeDeclaration.privateMemberSuffix}"
-    }
-
 /** Kotlin property name suffix for this member descriptor. */
-private val MemberDescriptor.ktPropertyNameSuffix: String
+internal val MemberDescriptor.ktPropertyNameSuffix: String
   get() = if (this is FieldDescriptor && hasConflictingKtProperty) "_ktPropertyConflict" else ""
+
+internal val MemberDescriptor.ktPackageProtectedNameSuffix: String
+  get() = enclosingTypeDescriptor.typeDeclaration.packageName?.replace('.', '_') ?: ""
+
+internal val MemberDescriptor.ktPrivateNameSuffix: String
+  get() = enclosingTypeDescriptor.typeDeclaration.privateMemberSuffix
 
 /** Whether this field descriptor has property with conflicting name in Kotlin. */
 private val FieldDescriptor.hasConflictingKtProperty: Boolean
   get() = enclosingTypeDescriptor.polymorphicMethods.any { it.isKtProperty && it.ktName == ktName }
 
 /** A suffix for private members in this type declaration. */
-private val TypeDeclaration.privateMemberSuffix: String
+internal val TypeDeclaration.privateMemberSuffix: String
   get() = if (isInterface) mangledName else "$typeHierarchyDepth"
 
 /** Original qualified name of this type declaration. */

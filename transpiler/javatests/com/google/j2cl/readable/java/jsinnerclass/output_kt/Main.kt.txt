@@ -56,16 +56,15 @@ open class Main {
   @ObjCName("J2ktJsinnerclassMain_Outer_Inner", exact = true)
   @JsType(namespace = "com.google.test")
   open inner class Inner constructor() {
-   @JvmField
-   internal var b_private_2: Int = 0
+   private var b: Int = 0
 
    init {
-    this.b_private_2 = this@Outer.a_pp_jsinnerclass + 1
+    this.b = this@Outer.a_pp_jsinnerclass + 1
    }
 
    @ObjCName("getB")
    open fun getB(): Int {
-    return this.b_private_2
+    return this.b
    }
   }
  }

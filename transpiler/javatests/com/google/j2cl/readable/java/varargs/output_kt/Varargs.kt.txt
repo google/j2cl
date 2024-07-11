@@ -30,14 +30,12 @@ import kotlin.String
 import kotlin.Suppress
 import kotlin.arrayOf
 import kotlin.experimental.ExperimentalObjCName
-import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktVarargsVarargs", exact = true)
 open class Varargs {
- @JvmField
- internal var args_private_2: Array<Any?>? = null
+ private var args: Array<Any?>? = null
 
  constructor(
   vararg @ObjCName("IntArray") args: Int
@@ -72,7 +70,7 @@ open class Varargs {
   vararg @ObjCName("withNSObjectArray") args: Any?
  ) {
   val args_1: Array<Any?>? = args as Array<Any?>?
-  this.args_private_2 = args_1 as Array<Any?>?
+  this.args = args_1 as Array<Any?>?
  }
 
  @ObjCName("testLambda")
@@ -118,7 +116,7 @@ open class Varargs {
   v!!.testSerializable(*(arrayOf<Array<Any?>?>() as Array<Serializable?>?)!!)
   v!!.testLambda(Varargs.FunctionalInterface { it: Array<out String?>? ->
    val it_1: Array<String?>? = it as Array<String?>?
-   this.args_private_2 = it_1 as Array<Any?>?
+   this.args = it_1 as Array<Any?>?
   })
   v!!.testOverloaded("foo" as Any?)
   v!!.testOverloaded("foo", "bar")

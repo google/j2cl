@@ -147,6 +147,9 @@ internal data class ExpressionRenderer(
   private val memberRenderer: MemberRenderer
     get() = MemberRenderer(nameRenderer, enclosingType)
 
+  private val environment: Environment
+    get() = nameRenderer.environment
+
   fun expressionSource(expression: Expression): Source =
     when (expression) {
       is ArrayAccess -> arrayAccessSource(expression)
@@ -233,7 +236,7 @@ internal data class ExpressionRenderer(
           leftOperand.target.isStatic &&
           leftOperand.target.isFinal
       ) {
-        identifierSource(leftOperand.target.ktMangledName)
+        identifierSource(environment.ktMangledName(leftOperand.target))
       } else {
         leftSubExpressionSource(expression.precedence, leftOperand)
       }
@@ -288,7 +291,10 @@ internal data class ExpressionRenderer(
     expressionSource(expressionWithComment.expression)
 
   private fun fieldAccessSource(fieldAccess: FieldAccess): Source =
-    dotSeparated(qualifierSource(fieldAccess), identifierSource(fieldAccess.target.ktMangledName))
+    dotSeparated(
+      qualifierSource(fieldAccess),
+      identifierSource(environment.ktMangledName(fieldAccess.target)),
+    )
 
   private fun functionExpressionSource(functionExpression: FunctionExpression): Source =
     functionExpressionLambdaSource(functionExpression)
@@ -382,7 +388,7 @@ internal data class ExpressionRenderer(
           identifierSource(computeProtobufPropertyName(expression.target.name!!))
         else ->
           join(
-            identifierSource(expression.target.ktMangledName),
+            identifierSource(environment.ktMangledName(expression.target)),
             expression
               .takeIf { !it.target.isKtProperty }
               ?.let {

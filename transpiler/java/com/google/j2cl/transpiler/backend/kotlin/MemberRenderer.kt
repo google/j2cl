@@ -46,8 +46,6 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.VAR_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotation
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.initializer
 import com.google.j2cl.transpiler.backend.kotlin.MemberDescriptorRenderer.Companion.enumValueDeclarationNameSource
-import com.google.j2cl.transpiler.backend.kotlin.MemberDescriptorRenderer.Companion.methodModifiersSource
-import com.google.j2cl.transpiler.backend.kotlin.MemberDescriptorRenderer.Companion.visibilityModifierSource
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionObject
 import com.google.j2cl.transpiler.backend.kotlin.ast.Member
 import com.google.j2cl.transpiler.backend.kotlin.ast.Visibility as KtVisibility
@@ -70,6 +68,9 @@ import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
  * @property enclosingType enclosing type
  */
 internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosingType: Type) {
+  private val environment: Environment
+    get() = nameRenderer.environment
+
   /** Returns renderer for enclosed types. */
   private val typeRenderer: TypeRenderer
     get() = TypeRenderer(nameRenderer)
@@ -147,7 +148,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
       !jvmFieldsAreIllegal &&
         !isConst &&
         !field.isKtLateInit &&
-        fieldDescriptor.ktVisibility != KtVisibility.PRIVATE
+        environment.ktVisibility(fieldDescriptor) != KtVisibility.PRIVATE
     val initializer = field.initializer
 
     return newLineSeparated(
@@ -155,12 +156,12 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
       objCNameRenderer.objCAnnotationSource(fieldDescriptor),
       jsInteropAnnotationRenderer.jsInteropAnnotationsSource(fieldDescriptor),
       spaceSeparated(
-        field.descriptor.visibilityModifierSource,
+        memberDescriptorRenderer.visibilityModifierSource(field.descriptor),
         Source.emptyUnless(isConst) { CONST_KEYWORD },
         Source.emptyUnless(field.isKtLateInit) { LATEINIT_KEYWORD },
         if (isFinal) VAL_KEYWORD else VAR_KEYWORD,
         colonSeparated(
-          identifierSource(fieldDescriptor.ktMangledName),
+          identifierSource(environment.ktMangledName(fieldDescriptor)),
           nameRenderer.typeDescriptorSource(typeDescriptor),
         ),
         initializer(
@@ -196,7 +197,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
         Source.emptyUnless(methodDescriptor.isStatic) { jvmStaticAnnotationSource() },
         annotationsSource(methodDescriptor, methodObjCNames),
         spaceSeparated(
-          methodDescriptor.methodModifiersSource,
+          memberDescriptorRenderer.methodModifiersSource(methodDescriptor),
           colonSeparated(
             join(
               memberDescriptorRenderer.methodKindAndNameSource(methodDescriptor),

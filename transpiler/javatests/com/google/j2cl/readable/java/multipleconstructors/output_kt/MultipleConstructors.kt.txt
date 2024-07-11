@@ -23,36 +23,33 @@ import kotlin.Int
 import kotlin.OptIn
 import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
-import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktMultipleconstructorsMultipleConstructors", exact = true)
 open class MultipleConstructors {
- @JvmField
- internal var id_private_2: Int = 0
+ private var id: Int = 0
 
- @JvmField
- internal var flag_private_2: Boolean = false
+ private var flag: Boolean = false
 
  constructor(
   @ObjCName("Int") id: Int
  ) {
-  this.id_private_2 = id
-  this.flag_private_2 = id == 0
+  this.id = id
+  this.flag = id == 0
  }
 
  constructor(
   @ObjCName("Boolean") flag: Boolean
  ) {
-  this.id_private_2 = - 1
-  this.flag_private_2 = flag
+  this.id = - 1
+  this.flag = flag
  }
 
  constructor(
   @ObjCName("Int") id: Int,
   @ObjCName("withBoolean") flag: Boolean
  ) {
-  this.id_private_2 = id
-  this.flag_private_2 = flag
+  this.id = id
+  this.flag = flag
  }
 }

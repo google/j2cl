@@ -25,7 +25,6 @@ import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
-import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
@@ -33,11 +32,9 @@ import kotlin.native.ObjCName
 open class Main {
  @ObjCName("J2ktSystemgetpropertyMainCompanion", exact = true)
  companion object {
-  @JvmField
-  internal val property_private_2: String? = System.getProperty("jre.classMetadata")
+  private val property: String? = System.getProperty("jre.classMetadata")
 
-  @JvmField
-  internal val propertyWithDefault_private_2: String? = System.getProperty("jre.classMetadata", "default")
+  private val propertyWithDefault: String? = System.getProperty("jre.classMetadata", "default")
 
   @JvmStatic
   @ObjCName("main")
@@ -45,18 +42,18 @@ open class Main {
    @ObjCName("withNSStringArray") args: Array<String?>?
   ) {
    var x: Boolean = false
-   x = Main.property_private_2 === "SIMPLE"
-   x = Main.property_private_2!!.equals("SIMPLE")
-   x = Main.property_private_2!!.equalsIgnoreCase("SIMPLE")
-   x = Main.property_private_2 === "NOTSIMPLE"
-   x = Main.propertyWithDefault_private_2!!.equals("SIMPLE")
+   x = Main.property === "SIMPLE"
+   x = Main.property!!.equals("SIMPLE")
+   x = Main.property!!.equalsIgnoreCase("SIMPLE")
+   x = Main.property === "NOTSIMPLE"
+   x = Main.propertyWithDefault!!.equals("SIMPLE")
    x = System.getProperty("jre.bar", "bar")!!.equals("bar")
-   x = System.getProperty("jre.classMetadata", Main.mightHaveSideEffects_private_2())!!.equals("SIMPLE")
-   x = System.getProperty("unset.property", Main.mightHaveSideEffects_private_2())!!.equals("foo")
+   x = System.getProperty("jre.classMetadata", Main.mightHaveSideEffects())!!.equals("SIMPLE")
+   x = System.getProperty("unset.property", Main.mightHaveSideEffects())!!.equals("foo")
   }
 
   @JvmStatic
-  internal fun mightHaveSideEffects_private_2(): String? {
+  private fun mightHaveSideEffects(): String? {
    return "Foo"
   }
  }

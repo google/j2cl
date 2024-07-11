@@ -33,14 +33,14 @@ import kotlin.run
 open class ImplicitParenthesis {
  @ObjCName("test")
  open fun test() {
-  ImplicitParenthesis.examples_private_2()
-  ImplicitParenthesis.nonExamples_private_2()
+  ImplicitParenthesis.examples()
+  ImplicitParenthesis.nonExamples()
  }
 
  @ObjCName("J2ktImplicitparenthesisImplicitParenthesisCompanion", exact = true)
  companion object {
   @JvmStatic
-  internal fun examples_private_2() {
+  private fun examples() {
    var primitiveInt: Int = 0
    var boxedInt: Int? = null
    primitiveInt = 5
@@ -79,7 +79,7 @@ open class ImplicitParenthesis {
   }
 
   @JvmStatic
-  internal fun nonExamples_private_2() {
+  private fun nonExamples() {
    var primitiveInt: Int = 0
    var boxedInt: Int? = null
    var boxedBoolean: Boolean? = null
@@ -95,7 +95,7 @@ open class ImplicitParenthesis {
   }
 
   @JvmStatic
-  internal fun parenthesisRemoval_private_2() {
+  private fun parenthesisRemoval() {
    Int(1 + 2)
   }
  }

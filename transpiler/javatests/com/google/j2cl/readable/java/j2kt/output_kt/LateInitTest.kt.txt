@@ -27,15 +27,15 @@ import org.junit.Assert
 
 @ObjCName("J2ktJ2ktLateInitTest", exact = true)
 class LateInitTest {
- internal lateinit var uninitialized_private_2: String
+ private lateinit var uninitialized: String
 
  @ObjCName("setup")
  fun setup() {
-  this.uninitialized_private_2 = "I have been initialized"
+  this.uninitialized = "I have been initialized"
  }
 
  @ObjCName("behaviorBeingTested_expectedResult")
  fun behaviorBeingTested_expectedResult() {
-  Assert.assertEquals(this.uninitialized_private_2, "I have been initialized")
+  Assert.assertEquals(this.uninitialized, "I have been initialized")
  }
 }

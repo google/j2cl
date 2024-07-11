@@ -176,7 +176,7 @@ open class ArithmeticExpressions {
   longs!![0] = longs!![0] + 1.toLong()
   longs!![0] = longs!![0] - 1L
   longs!![0] = longs!![0] - 1L
-  val ___array_6: LongArray? = ArithmeticExpressions.getLongArray_private_2()
+  val ___array_6: LongArray? = ArithmeticExpressions.getLongArray()
   val ___index_6: Int = 0
   val ___array_7: LongArray? = ___array_6
   val ___index_7: Int = ___index_6
@@ -293,11 +293,11 @@ open class ArithmeticExpressions {
 
  @ObjCName("J2ktArithmeticexpressionsArithmeticExpressionsCompanion", exact = true)
  companion object {
-  internal const val FLOAT_CONSTANT_private_2: Float = 1.1f
+  private const val FLOAT_CONSTANT: Float = 1.1f
 
-  internal const val DOUBLE_CONSTANT_private_2: Double = 1.100000023841858
+  private const val DOUBLE_CONSTANT: Double = 1.100000023841858
 
-  internal const val DOUBLE_CONSTANT_WITH_ARITHMETIC_private_2: Double = 2.200000047683716
+  private const val DOUBLE_CONSTANT_WITH_ARITHMETIC: Double = 2.200000047683716
 
   @JvmField
   @ObjCName("one_")
@@ -312,36 +312,35 @@ open class ArithmeticExpressions {
   }
 
   @JvmStatic
-  internal fun getLongArray_private_2(): LongArray? {
+  private fun getLongArray(): LongArray? {
    return null
   }
 
   @JvmStatic
-  internal fun getInteger_private_2(): Int? {
+  private fun getInteger(): Int? {
    return null
   }
 
   @JvmStatic
-  internal fun testSideEffect_private_2() {
-   val ___qualifier: ArithmeticExpressions? = ArithmeticExpressions.getWithSideEffect_private_2()
+  private fun testSideEffect() {
+   val ___qualifier: ArithmeticExpressions? = ArithmeticExpressions.getWithSideEffect()
    val ___qualifier_1: ArithmeticExpressions? = ___qualifier
    val ___value: kotlin.Long = ___qualifier!!.intField_pp_arithmeticexpressions + 5.toLong()
    ___qualifier_1!!.intField_pp_arithmeticexpressions = ___value
   }
 
   @JvmStatic
-  internal fun getWithSideEffect_private_2(): ArithmeticExpressions? {
+  private fun getWithSideEffect(): ArithmeticExpressions? {
    return null
   }
 
-  @JvmField
-  internal var counter_private_2: kotlin.Long = 0L
+  private var counter: kotlin.Long = 0L
 
   @JvmStatic
-  internal fun incrementCounter_private_2(): kotlin.Long {
+  private fun incrementCounter(): kotlin.Long {
    return run {
-    val ___value: kotlin.Long = ArithmeticExpressions.counter_private_2 + 1L
-    ArithmeticExpressions.counter_private_2 = ___value
+    val ___value: kotlin.Long = ArithmeticExpressions.counter + 1L
+    ArithmeticExpressions.counter = ___value
     ___value
    }
   }

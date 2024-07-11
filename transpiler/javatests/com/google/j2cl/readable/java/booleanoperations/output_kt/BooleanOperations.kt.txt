@@ -49,14 +49,14 @@ open class BooleanOperations {
   r = r.xor(rs)
   r = r.and(rs)
   r = r.or(rs)
-  BooleanOperations.acceptBoolean_private_2(ls == rs)
-  BooleanOperations.acceptBoolean_private_2(ls != rs)
-  BooleanOperations.acceptBoolean_private_2(ls.xor(rs))
-  BooleanOperations.acceptBoolean_private_2(ls.and(rs))
-  BooleanOperations.acceptBoolean_private_2(ls.or(rs))
-  BooleanOperations.acceptBoolean_private_2(ls && rs)
-  BooleanOperations.acceptBoolean_private_2(ls || rs)
-  BooleanOperations.acceptBoolean_private_2(run {
+  BooleanOperations.acceptBoolean(ls == rs)
+  BooleanOperations.acceptBoolean(ls != rs)
+  BooleanOperations.acceptBoolean(ls.xor(rs))
+  BooleanOperations.acceptBoolean(ls.and(rs))
+  BooleanOperations.acceptBoolean(ls.or(rs))
+  BooleanOperations.acceptBoolean(ls && rs)
+  BooleanOperations.acceptBoolean(ls || rs)
+  BooleanOperations.acceptBoolean(run {
    ls = rs
    ls
   })
@@ -115,6 +115,6 @@ open class BooleanOperations {
  @ObjCName("J2ktBooleanoperationsBooleanOperationsCompanion", exact = true)
  companion object {
   @JvmStatic
-  internal fun acceptBoolean_private_2(b: Boolean) {}
+  private fun acceptBoolean(b: Boolean) {}
  }
 }

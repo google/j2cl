@@ -43,7 +43,7 @@ open class LabeledStatement {
 
  @ObjCName("simpleStatement")
  open fun simpleStatement() {
-  this.foo_private_2()
+  this.foo()
   LABEL@ do {
    break@LABEL
   } while (false)
@@ -108,5 +108,5 @@ open class LabeledStatement {
   } while (false)
  }
 
- internal fun foo_private_2() {}
+ private fun foo() {}
 }

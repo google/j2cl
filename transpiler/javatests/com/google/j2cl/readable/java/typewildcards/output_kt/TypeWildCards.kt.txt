@@ -113,7 +113,7 @@ open class TypeWildCards {
  open fun testInferredGenericIntersection() {
   val elements: List<TypeWildCards.Element?>? = null
   val otherElements: List<TypeWildCards.SubOtherElement?>? = null
-  val integers: List<Int?>? = TypeWildCards.transform_private_2(TypeWildCards.concat_private_2(elements, otherElements), Function { a ->
+  val integers: List<Int?>? = TypeWildCards.transform(TypeWildCards.concat(elements, otherElements), Function { a ->
    a!!.getKey()
    return@Function a!!.get()
   })
@@ -121,7 +121,7 @@ open class TypeWildCards {
 
  @ObjCName("testRecursiveGeneric")
  open fun testRecursiveGeneric() {
-  TypeWildCards.takesRecursiveGeneric_private_2(Foo())
+  TypeWildCards.takesRecursiveGeneric(Foo())
  }
 
  @ObjCName("J2ktTypewildcardsTypeWildCardsCompanion", exact = true)
@@ -146,17 +146,17 @@ open class TypeWildCards {
   }
 
   @JvmStatic
-  internal fun <F, V> transform_private_2(from: List<F>?, function: Function<in F, out V>?): List<V>? {
+  private fun <F, V> transform(from: List<F>?, function: Function<in F, out V>?): List<V>? {
    return null
   }
 
   @JvmStatic
-  internal fun <E> concat_private_2(a: List<out E>?, b: List<out E>?): List<E>? {
+  private fun <E> concat(a: List<out E>?, b: List<out E>?): List<E>? {
    return null
   }
 
   @JvmStatic
-  internal fun takesRecursiveGeneric_private_2(foo: GenericType<TypeWildCards.Foo?>?) {}
+  private fun takesRecursiveGeneric(foo: GenericType<TypeWildCards.Foo?>?) {}
 
   @JvmStatic
   @ObjCName("testInferredIntersectionWithTypeVariable")

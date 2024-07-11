@@ -31,34 +31,32 @@ import kotlin.synchronized
 
 @ObjCName("J2ktSynchronizedstatementSynchronizedStatement", exact = true)
 open class SynchronizedStatement {
- @JvmField
- internal var a_private_2: Int = 0
+ private var a: Int = 0
 
- @JvmField
- internal var b_private_2: Int = 0
+ private var b: Int = 0
 
  @ObjCName("main")
  open fun main() {
   synchronized<Unit>(this.impliedJ2ktMonitor) {
-   this.a_private_2 = this.a_private_2 + 1
-   this.b_private_2 = this.b_private_2 - 1
+   this.a = this.a + 1
+   this.b = this.b - 1
   }
  }
 
  @ObjCName("testReturn")
  open fun testReturn(): Int {
   synchronized<Unit>(this.impliedJ2ktMonitor) {
-   if (this.a_private_2 < 10) {
+   if (this.a < 10) {
     return run {
-     val ___value: Int = this.a_private_2
-     this.a_private_2 = this.a_private_2 + 1
+     val ___value: Int = this.a
+     this.a = this.a + 1
      ___value
     }
    }
   }
   return run {
-   val ___value_1: Int = this.b_private_2
-   this.b_private_2 = this.b_private_2 - 1
+   val ___value_1: Int = this.b
+   this.b = this.b - 1
    ___value_1
   }
  }
@@ -78,15 +76,15 @@ open class SynchronizedStatement {
  @ObjCName("testIfStatementWithNonVoidBodyWithoutElse")
  open fun testIfStatementWithNonVoidBodyWithoutElse() {
   synchronized<Unit>(this.impliedJ2ktMonitor) {
-   if (this.a_private_2 < 10) {
-    this.intMethod_private_2()
-   } else if (this.b_private_2 < 10) {
-    this.intMethod_private_2()
+   if (this.a < 10) {
+    this.intMethod()
+   } else if (this.b < 10) {
+    this.intMethod()
    }
   }
  }
 
- internal fun intMethod_private_2(): Int {
+ private fun intMethod(): Int {
   return 0
  }
 

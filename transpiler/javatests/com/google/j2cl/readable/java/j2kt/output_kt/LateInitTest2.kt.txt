@@ -27,14 +27,14 @@ import kotlin.native.ObjCName
 
 @ObjCName("J2ktJ2ktLateInitTest2", exact = true)
 class LateInitTest2: TestCase() {
- internal lateinit var uninitialized_private_4: String
+ private lateinit var uninitialized: String
 
  override fun setUp() {
-  this.uninitialized_private_4 = "I have been initialized"
+  this.uninitialized = "I have been initialized"
  }
 
  @ObjCName("testLateInit2")
  fun testLateInit2() {
-  TestCase.assertEquals(this.uninitialized_private_4, "I have been initialized")
+  TestCase.assertEquals(this.uninitialized, "I have been initialized")
  }
 }

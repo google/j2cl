@@ -68,7 +68,7 @@ open class Main {
   }, n)
   object : Main.JsFunctionInterface {
    override fun foo(a: Int): Int {
-    this@Main.instanceMethod_private_2()
+    this@Main.instanceMethod()
     return 0
    }
   }.foo(3)
@@ -78,13 +78,13 @@ open class Main {
  open fun testJsFunctionThis() {
   object : Main.JsFunctionInterface {
    override fun foo(a: Int): Int {
-    this@Main.instanceMethod_private_2()
+    this@Main.instanceMethod()
     return 0
    }
   }.foo(3)
  }
 
- internal fun instanceMethod_private_2() {}
+ private fun instanceMethod() {}
 
  @ObjCName("testJsFunctionErasureCasts")
  open fun testJsFunctionErasureCasts() {
@@ -203,12 +203,12 @@ open class Main {
   ) {}
 
   @JvmStatic
-  @JsProperty(name = "parametricJsFunction")
-  internal fun setParametricJsFunction_private_2(fn: Main.ParametricJsFunction<Any?>?) {}
+  @JsProperty
+  private fun setParametricJsFunction(fn: Main.ParametricJsFunction<Any?>?) {}
 
   @JvmStatic
-  @JsProperty(name = "parametricJsFunction")
-  internal fun getParametricJsFunction_private_2(): Main.ParametricJsFunction<Any?>? {
+  @JsProperty
+  private fun getParametricJsFunction(): Main.ParametricJsFunction<Any?>? {
    return null
   }
 

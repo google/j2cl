@@ -35,17 +35,15 @@ import kotlin.synchronized
 
 @ObjCName("J2ktSynchronizedmethodSynchronizedMethod", exact = true)
 open class SynchronizedMethod {
- @JvmField
- internal var a_private_2: Int = 0
+ private var a: Int = 0
 
- @JvmField
- internal var b_private_2: Int = 0
+ private var b: Int = 0
 
  @ObjCName("testNonStatic")
  open fun testNonStatic() {
   synchronized<Unit>(this.impliedJ2ktMonitor) {
-   this.a_private_2 = this.a_private_2 + 1
-   this.b_private_2 = this.b_private_2 - 1
+   this.a = this.a + 1
+   this.b = this.b - 1
   }
  }
 
@@ -56,14 +54,14 @@ open class SynchronizedMethod {
   synchronized<Unit>(this.impliedJ2ktMonitor) {
    if (bool) {
     return run {
-     val ___value: Int = this.a_private_2
-     this.a_private_2 = this.a_private_2 + 1
+     val ___value: Int = this.a
+     this.a = this.a + 1
      ___value
     }
    }
    return run {
-    val ___value_1: Int = this.b_private_2
-    this.b_private_2 = this.b_private_2 - 1
+    val ___value_1: Int = this.b
+    this.b = this.b - 1
     ___value_1
    }
   }
@@ -76,14 +74,14 @@ open class SynchronizedMethod {
  ) {
   synchronized<Unit>(this.impliedJ2ktMonitor) {
    if (b1) {
-    this.apply_private_2("foo")
+    this.apply("foo")
    } else if (b2) {
-    this.apply_private_2("bar")
+    this.apply("bar")
    }
   }
  }
 
- internal fun apply_private_2(string: String?): String? {
+ private fun apply(string: String?): String? {
   return string
  }
 
@@ -93,18 +91,16 @@ open class SynchronizedMethod {
 
  @ObjCName("J2ktSynchronizedmethodSynchronizedMethodCompanion", exact = true)
  companion object {
-  @JvmField
-  internal var sa_private_2: Int = 0
+  private var sa: Int = 0
 
-  @JvmField
-  internal var sb_private_2: Int = 0
+  private var sb: Int = 0
 
   @JvmStatic
   @ObjCName("testStatic")
   fun testStatic() {
    synchronized<Unit>(SynchronizedMethod::class.javaObjectType) {
-    SynchronizedMethod.sa_private_2 = SynchronizedMethod.sa_private_2 + 1
-    SynchronizedMethod.sb_private_2 = SynchronizedMethod.sb_private_2 - 1
+    SynchronizedMethod.sa = SynchronizedMethod.sa + 1
+    SynchronizedMethod.sb = SynchronizedMethod.sb - 1
    }
   }
  }

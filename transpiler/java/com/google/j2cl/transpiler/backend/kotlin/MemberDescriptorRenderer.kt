@@ -34,6 +34,9 @@ import java.lang.Boolean.getBoolean
  * @param nameRenderer underlying name renderer
  */
 internal data class MemberDescriptorRenderer(val nameRenderer: NameRenderer) {
+  private val environment: Environment
+    get() = nameRenderer.environment
+
   fun methodKindAndNameSource(methodDescriptor: MethodDescriptor): Source =
     if (methodDescriptor.isConstructor) {
       CONSTRUCTOR_KEYWORD
@@ -41,7 +44,7 @@ internal data class MemberDescriptorRenderer(val nameRenderer: NameRenderer) {
       spaceSeparated(
         if (methodDescriptor.isKtProperty) KotlinSource.VAL_KEYWORD else KotlinSource.FUN_KEYWORD,
         nameRenderer.typeParametersSource(methodDescriptor.typeParameterTypeDescriptors),
-        identifierSource(methodDescriptor.ktMangledName),
+        identifierSource(environment.ktMangledName(methodDescriptor)),
       )
     }
 
@@ -81,26 +84,29 @@ internal data class MemberDescriptorRenderer(val nameRenderer: NameRenderer) {
       }
       .orEmpty()
 
+  fun methodModifiersSource(methodDescriptor: MethodDescriptor): Source =
+    spaceSeparated(
+      visibilityModifierSource(methodDescriptor),
+      Source.emptyUnless(!methodDescriptor.enclosingTypeDescriptor.typeDeclaration.isInterface) {
+        spaceSeparated(
+          Source.emptyUnless(methodDescriptor.isNative) { KotlinSource.EXTERNAL_KEYWORD },
+          methodDescriptor.inheritanceModifierSource,
+        )
+      },
+      Source.emptyUnless(methodDescriptor.isKtOverride) { KotlinSource.OVERRIDE_KEYWORD },
+    )
+
+  fun visibilityModifierSource(memberDescriptor: MemberDescriptor): Source =
+    environment
+      .ktVisibility(memberDescriptor)
+      .takeUnless { it == environment.inferredKtVisibility(memberDescriptor) }
+      ?.source
+      .orEmpty()
+
   companion object {
     // TODO(b/316324154): Remove when no longer necessary
     val SHOULD_RENDER_NATIVE_THROWS: Boolean =
       !getBoolean("com.google.j2cl.transpiler.backend.kotlin.isNativeThrowsDisabled")
-
-    val MethodDescriptor.methodModifiersSource: Source
-      get() =
-        spaceSeparated(
-          visibilityModifierSource,
-          Source.emptyUnless(!enclosingTypeDescriptor.typeDeclaration.isInterface) {
-            spaceSeparated(
-              Source.emptyUnless(isNative) { KotlinSource.EXTERNAL_KEYWORD },
-              inheritanceModifierSource,
-            )
-          },
-          Source.emptyUnless(isKtOverride) { KotlinSource.OVERRIDE_KEYWORD },
-        )
-
-    val MemberDescriptor.visibilityModifierSource: Source
-      get() = ktVisibility.takeUnless { it == inferredKtVisibility }?.source.orEmpty()
 
     val MethodDescriptor.inheritanceModifierSource
       get() =

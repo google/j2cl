@@ -114,15 +114,13 @@ open class InnerClassInitOrder {
   assert(this.number == 1156)
  }
 
- @JvmField
- internal val outer_private_2: InnerClassInitOrder.Outer? = InnerClassInitOrder.Outer(1)
+ private val outer: InnerClassInitOrder.Outer? = InnerClassInitOrder.Outer(1)
 
- @JvmField
- internal val outerIsSuper_private_2: InnerClassInitOrder.Outer.OuterIsSuper? = this.outer_private_2!!.OuterIsSuper(2)
+ private val outerIsSuper: InnerClassInitOrder.Outer.OuterIsSuper? = this.outer!!.OuterIsSuper(2)
 
  @ObjCName("testOuterIsNotSuper")
  open fun testOuterIsNotSuper() {
-  val x: InnerClassInitOrder.Outer.OuterIsNotSuper? = this.outerIsSuper_private_2!!.OuterIsNotSuper()
+  val x: InnerClassInitOrder.Outer.OuterIsNotSuper? = this.outerIsSuper!!.OuterIsNotSuper()
   assert(2 == x!!.getValue())
  }
 
@@ -146,19 +144,19 @@ open class InnerClassInitOrder {
 
  @ObjCName("testSuperDispatch")
  open fun testSuperDispatch() {
-  assert(1 == this.outerIsSuper_private_2!!.checkDispatchFromSub1())
-  assert(1 == this.outerIsSuper_private_2!!.checkDispatchFromSub2())
+  assert(1 == this.outerIsSuper!!.checkDispatchFromSub1())
+  assert(1 == this.outerIsSuper!!.checkDispatchFromSub2())
  }
 
  @ObjCName("testUnqualifiedAlloc")
  open fun testUnqualifiedAlloc() {
-  val x: InnerClassInitOrder.Outer.OuterIsNotSuper? = this.outerIsSuper_private_2!!.unqualifiedAlloc()
+  val x: InnerClassInitOrder.Outer.OuterIsNotSuper? = this.outerIsSuper!!.unqualifiedAlloc()
   assert(2 == x!!.getValue())
  }
 
  @ObjCName("testUnqualifiedSuperCall")
  open fun testUnqualifiedSuperCall() {
-  val x: InnerClassInitOrder.Outer.TestUnqualifiedSuperCall? = this.outerIsSuper_private_2!!.TestUnqualifiedSuperCall()
+  val x: InnerClassInitOrder.Outer.TestUnqualifiedSuperCall? = this.outerIsSuper!!.TestUnqualifiedSuperCall()
   assert(2 == x!!.getValue())
  }
 

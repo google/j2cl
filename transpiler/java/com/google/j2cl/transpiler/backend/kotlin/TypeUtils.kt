@@ -66,4 +66,6 @@ internal val Type.jvmFieldsAreIllegal
 
 internal val Type.needExplicitPrimaryConstructor: Boolean
   get() =
-    isClass && !hasConstructors && declaration.visibility.memberKtVisibility != Visibility.PUBLIC
+    isClass &&
+      !hasConstructors &&
+      declaration.visibility.defaultMemberKtVisibility != Visibility.PUBLIC

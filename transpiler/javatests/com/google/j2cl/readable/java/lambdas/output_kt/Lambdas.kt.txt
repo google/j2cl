@@ -244,16 +244,15 @@ open class Lambdas {
    }
   }
 
-  @JvmField
-  internal var identityFunction_private_2: Lambdas.IdentityFunction? = null
+  private var identityFunction: Lambdas.IdentityFunction? = null
 
   @JvmStatic
   @ObjCName("identity")
   fun <E> identity(): Lambdas.GenericJsFunction<E, E>? {
-   if (Lambdas.identityFunction_private_2 == null) {
-    Lambdas.identityFunction_private_2 = Lambdas.IdentityFunction()
+   if (Lambdas.identityFunction == null) {
+    Lambdas.identityFunction = Lambdas.IdentityFunction()
    }
-   return Lambdas.identityFunction_private_2 as Lambdas.GenericJsFunction<E, E>?
+   return Lambdas.identityFunction as Lambdas.GenericJsFunction<E, E>?
   }
 
   @JvmStatic

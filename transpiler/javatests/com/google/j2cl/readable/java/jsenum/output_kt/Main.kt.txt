@@ -86,10 +86,10 @@ open class Main {
    val consummer: Main.Consumer<Main.ComparableJsEnum?>? = Main.Consumer<Main.ComparableJsEnum?> { e: Main.ComparableJsEnum? ->
     e!!.ordinal
    }
-   Main.acceptsJsFunctionSupplier_private_2(Main.JsFunctionSuppiler<Main.ComparableJsEnum?> {
+   Main.acceptsJsFunctionSupplier(Main.JsFunctionSuppiler<Main.ComparableJsEnum?> {
     return@JsFunctionSuppiler Main.ComparableJsEnum.ONE
    })
-   Main.acceptsSupplierOfSupplier_private_2(Main.Supplier<Main.Supplier<Main.ComparableJsEnum?>?> {
+   Main.acceptsSupplierOfSupplier(Main.Supplier<Main.Supplier<Main.ComparableJsEnum?>?> {
     return@Supplier Main.Supplier<Main.ComparableJsEnum?> {
      return@Supplier Main.ComparableJsEnum.ONE
     }
@@ -97,7 +97,7 @@ open class Main {
   }
 
   @JvmStatic
-  internal fun testJsEnumAutoboxingSpecialMethods_private_2() {
+  private fun testJsEnumAutoboxingSpecialMethods() {
    val stringJsEnum: Main.StringJsEnum? = Main.StringJsEnum.ONE
    val nullStringJsEnum: Main.StringJsEnum? = null
    val jsEnum: Main.ComparableJsEnum? = Main.ComparableJsEnum.ONE
@@ -118,49 +118,49 @@ open class Main {
    Main.ComparableJsEnum.ONE.equals(o)
    o!!.equals(Main.ComparableJsEnum.ZERO)
    Main.StringJsEnum.ONE.equals(jsEnum)
-   Main.boxingPassthrough_private_2<Main.ComparableJsEnum?>(Main.ComparableJsEnum.ONE)!!.equals(Main.boxingPassthrough_private_2<Main.ComparableJsEnum?>(Main.ComparableJsEnum.ONE))
-   Main.boxingPassthrough_private_2<Main.ComparableJsEnum?>(Main.ComparableJsEnum.ONE)!!.equals(Main.boxingPassthrough_private_2<Main.StringJsEnum?>(Main.StringJsEnum.ONE))
+   Main.boxingPassthrough<Main.ComparableJsEnum?>(Main.ComparableJsEnum.ONE)!!.equals(Main.boxingPassthrough<Main.ComparableJsEnum?>(Main.ComparableJsEnum.ONE))
+   Main.boxingPassthrough<Main.ComparableJsEnum?>(Main.ComparableJsEnum.ONE)!!.equals(Main.boxingPassthrough<Main.StringJsEnum?>(Main.StringJsEnum.ONE))
   }
 
   @JvmStatic
-  internal fun acceptsJsFunctionSupplier_private_2(supplier: Main.JsFunctionSuppiler<Main.ComparableJsEnum?>?) {}
+  private fun acceptsJsFunctionSupplier(supplier: Main.JsFunctionSuppiler<Main.ComparableJsEnum?>?) {}
 
   @JvmStatic
-  internal fun acceptsSupplierOfSupplier_private_2(supplier: Main.Supplier<Main.Supplier<Main.ComparableJsEnum?>?>?) {}
+  private fun acceptsSupplierOfSupplier(supplier: Main.Supplier<Main.Supplier<Main.ComparableJsEnum?>?>?) {}
 
   @JvmStatic
-  internal fun testReturnsAndParameters_private_2() {
-   val returnedValue: Main.ComparableJsEnum? = Main.returnsJsEnum_private_2()
-   val returnedNullValue: Main.ComparableJsEnum? = Main.returnsNullJsEnum_private_2()
-   Main.takesJsEnum_private_2(Main.ComparableJsEnum.ONE)
+  private fun testReturnsAndParameters() {
+   val returnedValue: Main.ComparableJsEnum? = Main.returnsJsEnum()
+   val returnedNullValue: Main.ComparableJsEnum? = Main.returnsNullJsEnum()
+   Main.takesJsEnum(Main.ComparableJsEnum.ONE)
   }
 
   @JvmStatic
-  internal fun returnsJsEnum_private_2(): Main.ComparableJsEnum? {
+  private fun returnsJsEnum(): Main.ComparableJsEnum? {
    return Main.ComparableJsEnum.ONE
   }
 
   @JvmStatic
-  internal fun returnsNullJsEnum_private_2(): Main.ComparableJsEnum? {
+  private fun returnsNullJsEnum(): Main.ComparableJsEnum? {
    return null
   }
 
   @JvmStatic
-  internal fun takesJsEnum_private_2(value: Main.ComparableJsEnum?) {}
+  private fun takesJsEnum(value: Main.ComparableJsEnum?) {}
 
   @JvmStatic
-  internal fun testBoxUnboxWithTypeInference_private_2() {
+  private fun testBoxUnboxWithTypeInference() {
    val templatedField: Main.TemplatedField<Main.ComparableJsEnum?>? = Main.TemplatedField<Main.ComparableJsEnum?>(Main.ComparableJsEnum.ONE)
    var unboxed: Main.ComparableJsEnum? = templatedField!!.getValue_pp_jsenum()
    unboxed = templatedField!!.value_pp_jsenum
    templatedField!!.value_pp_jsenum = Main.ComparableJsEnum.ONE
    Arrays.asList<Main.ComparableJsEnum>(Main.ComparableJsEnum.ONE)
    templatedField!!.getValue_pp_jsenum()!!.ordinal
-   val b: Boolean = Main.ComparableJsEnum.ONE === Main.boxingPassthrough_private_2<Main.ComparableJsEnum?>(Main.ComparableJsEnum.ONE)
+   val b: Boolean = Main.ComparableJsEnum.ONE === Main.boxingPassthrough<Main.ComparableJsEnum?>(Main.ComparableJsEnum.ONE)
   }
 
   @JvmStatic
-  internal fun <T> boxingPassthrough_private_2(t: T): T {
+  private fun <T> boxingPassthrough(t: T): T {
    return t
   }
 
@@ -170,16 +170,16 @@ open class Main {
   }
 
   @JvmStatic
-  internal fun <T> varargsConsumer_private_2(vararg args: T): T {
+  private fun <T> varargsConsumer(vararg args: T): T {
    val args_1: Array<T>? = args as Array<T>?
    return args_1!![0]
   }
 
   @JvmStatic
-  internal fun testVarargs_private_2() {
-   Main.varargsConsumer_private_2<Main.SomeJsEnum?>(Main.SomeJsEnum.A, Main.SomeJsEnum.A)
+  private fun testVarargs() {
+   Main.varargsConsumer<Main.SomeJsEnum?>(Main.SomeJsEnum.A, Main.SomeJsEnum.A)
    val consumer: Main.Consumer<Main.SomeJsEnum?>? = Main.Consumer<Main.SomeJsEnum?> { arg0: Main.SomeJsEnum? ->
-    Main.varargsConsumer_private_2<Main.SomeJsEnum?>(arg0)
+    Main.varargsConsumer<Main.SomeJsEnum?>(arg0)
    }
   }
  }
@@ -214,8 +214,7 @@ open class Main {
   TWENTY(20),
   ELEVEN(11);
 
-  @JvmField
-  internal var value: Int = 0
+  private var value: Int = 0
 
   @ObjCName("getValue")
   open fun getValue(): Int {
@@ -232,8 +231,7 @@ open class Main {
   ONE("ONE"),
   THREE("THREE");
 
-  @JvmField
-  internal var value: String? = null
+  private var value: String? = null
 
   @ObjCName("getValue")
   open fun getValue(): String? {
@@ -250,8 +248,7 @@ open class Main {
   ONE("ONE"),
   THREE("THREE");
 
-  @JvmField
-  internal var value: String
+  private var value: String
 
   @ObjCName("getValue")
   open fun getValue(): String? {

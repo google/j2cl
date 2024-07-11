@@ -113,7 +113,7 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
         // Implicit constructors needs to follow the visiblity transpilation rules for members that
         // are different than the visibility transpilation rules for the class.
         spaceSeparated(
-          type.declaration.visibility.memberKtVisibility.source,
+          type.declaration.visibility.defaultMemberKtVisibility.source,
           join(KotlinSource.CONSTRUCTOR_KEYWORD, inParentheses(Source.EMPTY)),
         )
       else -> Source.EMPTY

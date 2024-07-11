@@ -77,10 +77,10 @@ open class IntersectionTypeTest<U> {
 
  @ObjCName("testMethodCall")
  open fun testMethodCall() {
-  val o: Any? = IntersectionTypeTest.m_private_2()
-  IntersectionTypeTest.set_private_2((o).let { it as IntersectionTypeTest.A?; it as IntersectionTypeTest.EmptyA?; it })
-  IntersectionTypeTest.set_private_2(IntersectionTypeTest.m_private_2())
-  val g: Getable<*>? = IntersectionTypeTest.n_private_2() as Getable<*>?
+  val o: Any? = IntersectionTypeTest.m()
+  IntersectionTypeTest.set((o).let { it as IntersectionTypeTest.A?; it as IntersectionTypeTest.EmptyA?; it })
+  IntersectionTypeTest.set(IntersectionTypeTest.m())
+  val g: Getable<*>? = IntersectionTypeTest.n() as Getable<*>?
  }
 
  @ObjCName("testDefaultMethodCall")
@@ -156,25 +156,25 @@ open class IntersectionTypeTest<U> {
   }
 
   @JvmStatic
-  internal fun <T> get_private_2(t: T): T {
+  private fun <T> get(t: T): T {
    return t
   }
 
   @JvmStatic
-  internal fun <T> m_private_2(): T where T: IntersectionTypeTest.A?, T: IntersectionTypeTest.EmptyA? {
-   return (IntersectionTypeTest.get_private_2<Any?>(Any()) as T?) as T
+  private fun <T> m(): T where T: IntersectionTypeTest.A?, T: IntersectionTypeTest.EmptyA? {
+   return (IntersectionTypeTest.get<Any?>(Any()) as T?) as T
   }
 
   @JvmStatic
-  internal fun <T> n_private_2(): Getable<T>? where T: IntersectionTypeTest.A?, T: IntersectionTypeTest.EmptyA? {
+  private fun <T> n(): Getable<T>? where T: IntersectionTypeTest.A?, T: IntersectionTypeTest.EmptyA? {
    return null
   }
 
   @JvmStatic
-  internal fun <T> set_private_2(t: T) where T: IntersectionTypeTest.A?, T: IntersectionTypeTest.EmptyA? {}
+  private fun <T> set(t: T) where T: IntersectionTypeTest.A?, T: IntersectionTypeTest.EmptyA? {}
 
   @JvmStatic
-  internal fun <T> callOnIntersetionTypes_private_2(t: T) where T: IntersectionTypeTest.SomeConcreteType?, T: Cmp? {
+  private fun <T> callOnIntersetionTypes(t: T) where T: IntersectionTypeTest.SomeConcreteType?, T: Cmp? {
    t!!.cmp()
    ((null).let { it as IntersectionTypeTest.SomeConcreteType?; it as Cmp?; it })!!.cmp()
   }

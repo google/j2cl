@@ -28,7 +28,6 @@ import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
-import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
@@ -162,11 +161,10 @@ open class Main {
  }
 
  open inner class O internal constructor(): Main.N() {
-  @JvmField
-  internal var b_private_3: Main.B? = null
+  private var b: Main.B? = null
 
   override fun getB(): Main.B? {
-   return this.b_private_3
+   return this.b
   }
  }
 

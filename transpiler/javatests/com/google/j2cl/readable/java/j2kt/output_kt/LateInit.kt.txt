@@ -24,7 +24,6 @@ import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
-import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktJ2ktLateInit", exact = true)
@@ -32,36 +31,32 @@ open class LateInit<T: Any> {
  @ObjCName("publicField_")
  lateinit var publicField: String
 
- internal lateinit var privateField_private_2: String
+ private lateinit var privateField: String
 
- @JvmField
- internal var initializedField_private_2: String = "initialized"
+ private var initializedField: String = "initialized"
 
- @JvmField
- internal var nullableField_private_2: String? = null
+ private var nullableField: String? = null
 
- @JvmField
- internal val finalField_private_2: String = "final"
+ private val finalField: String = "final"
 
- @JvmField
- internal var primitiveField_private_2: Int = 0
+ private var primitiveField: Int = 0
 
- internal lateinit var genericField_private_2: T
+ private lateinit var genericField: T
 
  constructor(
   @ObjCName("Id") genericValue: T
  ) {
-  this.init_private_2(genericValue)
+  this.init(genericValue)
  }
 
- internal fun init_private_2(genericValue: T) {
+ private fun init(genericValue: T) {
   this.publicField = "public"
-  this.privateField_private_2 = "private"
-  this.genericField_private_2 = genericValue
+  this.privateField = "private"
+  this.genericField = genericValue
  }
 
  @ObjCName("test")
  open fun test(): Int {
-  return this.publicField.length + this.privateField_private_2.length + this.initializedField_private_2.length + this.nullableField_private_2!!.length + this.finalField_private_2.length + this.primitiveField_private_2 + this.genericField_private_2.hashCode()
+  return this.publicField.length + this.privateField.length + this.initializedField.length + this.nullableField!!.length + this.finalField.length + this.primitiveField + this.genericField.hashCode()
  }
 }

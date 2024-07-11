@@ -174,14 +174,14 @@ open class CastPrimitives {
   val l: Long = 9223372036854775807L
   val f: Float = 3.4028235E38f
   val d: Double = 1.7976931348623157E308
-  CastPrimitives.getShort_private_2(b.toShort())
-  CastPrimitives.getInt_private_2(b.toInt())
-  CastPrimitives.getLong_private_2(b.toLong())
-  CastPrimitives.getFloat_private_2(b.toFloat())
-  CastPrimitives.getDouble_private_2(b.toDouble())
-  CastPrimitives.getFloat_private_2(l.toFloat())
-  CastPrimitives.getDouble_private_2(l.toDouble())
-  CastPrimitives.getDouble_private_2(f.toDouble())
+  CastPrimitives.getShort(b.toShort())
+  CastPrimitives.getInt(b.toInt())
+  CastPrimitives.getLong(b.toLong())
+  CastPrimitives.getFloat(b.toFloat())
+  CastPrimitives.getDouble(b.toDouble())
+  CastPrimitives.getFloat(l.toFloat())
+  CastPrimitives.getDouble(l.toDouble())
+  CastPrimitives.getDouble(f.toDouble())
   CastPrimitives.IntValueHolder(b.toInt())
   CastPrimitives.IntValueHolder(c.code)
   CastPrimitives.IntValueHolder(s.toInt())
@@ -237,27 +237,27 @@ open class CastPrimitives {
  @ObjCName("J2ktCastCastPrimitivesCompanion", exact = true)
  companion object {
   @JvmStatic
-  internal fun getShort_private_2(value: Short): Short {
+  private fun getShort(value: Short): Short {
    return value
   }
 
   @JvmStatic
-  internal fun getInt_private_2(value: Int): Int {
+  private fun getInt(value: Int): Int {
    return value
   }
 
   @JvmStatic
-  internal fun getLong_private_2(value: Long): Long {
+  private fun getLong(value: Long): Long {
    return value
   }
 
   @JvmStatic
-  internal fun getFloat_private_2(value: Float): Float {
+  private fun getFloat(value: Float): Float {
    return value
   }
 
   @JvmStatic
-  internal fun getDouble_private_2(value: Double): Double {
+  private fun getDouble(value: Double): Double {
    return value
   }
  }

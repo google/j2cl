@@ -31,7 +31,7 @@ import kotlin.native.ObjCName
 open class StaticFieldAccessLevels {
  @ObjCName("test")
  open fun test(): Int {
-  return if (StaticFieldAccessLevels.b_private_2) StaticFieldAccessLevels.a else StaticFieldAccessLevels.d_pp_staticfieldaccesslevels
+  return if (StaticFieldAccessLevels.b) StaticFieldAccessLevels.a else StaticFieldAccessLevels.d_pp_staticfieldaccesslevels
  }
 
  @ObjCName("J2ktStaticfieldaccesslevelsStaticFieldAccessLevelsCompanion", exact = true)
@@ -40,8 +40,7 @@ open class StaticFieldAccessLevels {
   @ObjCName("a_")
   var a: Int = 0
 
-  @JvmField
-  internal var b_private_2: Boolean = false
+  private var b: Boolean = false
 
   @JvmField
   @ObjCName("c_")
