@@ -24,20 +24,19 @@ import kotlin.OptIn
 import kotlin.Suppress
 import kotlin.Unit
 import kotlin.experimental.ExperimentalObjCName
-import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 import kotlin.run
 import kotlin.synchronized
 
 @ObjCName("J2ktSynchronizedstatementSynchronizedStatement", exact = true)
-open class SynchronizedStatement {
+open class SynchronizedStatement: J2ktMonitor() {
  private var a: Int = 0
 
  private var b: Int = 0
 
  @ObjCName("main")
  open fun main() {
-  synchronized<Unit>(this.impliedJ2ktMonitor) {
+  synchronized<Unit>(this) {
    this.a = this.a + 1
    this.b = this.b - 1
   }
@@ -45,7 +44,7 @@ open class SynchronizedStatement {
 
  @ObjCName("testReturn")
  open fun testReturn(): Int {
-  synchronized<Unit>(this.impliedJ2ktMonitor) {
+  synchronized<Unit>(this) {
    if (this.a < 10) {
     return run {
      val ___value: Int = this.a
@@ -67,7 +66,7 @@ open class SynchronizedStatement {
  @ObjCName("testInitialization")
  open fun testInitialization(): Int {
   var a: Int = 0
-  synchronized<Unit>(this.impliedJ2ktMonitor) {
+  synchronized<Unit>(this) {
    a = 0
   }
   return a
@@ -75,7 +74,7 @@ open class SynchronizedStatement {
 
  @ObjCName("testIfStatementWithNonVoidBodyWithoutElse")
  open fun testIfStatementWithNonVoidBodyWithoutElse() {
-  synchronized<Unit>(this.impliedJ2ktMonitor) {
+  synchronized<Unit>(this) {
    if (this.a < 10) {
     this.intMethod()
    } else if (this.b < 10) {
@@ -88,14 +87,10 @@ open class SynchronizedStatement {
   return 0
  }
 
- @JvmField
- @ObjCName("impliedJ2ktMonitor_")
- val impliedJ2ktMonitor: J2ktMonitor = J2ktMonitor()
-
  @ObjCName("J2ktSynchronizedstatementSynchronizedStatement_ExtendsSynchronized", exact = true)
  open class ExtendsSynchronized: SynchronizedStatement() {
   internal open fun foo_pp_synchronizedstatement() {
-   synchronized<Unit>(this.impliedJ2ktMonitor) {}
+   synchronized<Unit>(this) {}
   }
  }
 }

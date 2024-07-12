@@ -18,25 +18,18 @@ package com.google.j2cl.transpiler.passes;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
-import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
-import com.google.j2cl.transpiler.ast.Field;
-import com.google.j2cl.transpiler.ast.FieldAccess;
-import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
-import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.SynchronizedStatement;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.Type;
-import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.TypeLiteral;
 
 /**
- * Normalizes synchronized constructs by inserting implied lock fields for direct subclasses of
- * Object with synchronized methods, and rewriting synchronized methods and blocks to use these
- * fields.
+ * Normalizes synchronized constructs by inserting a monitor superclass for direct subclasses of
+ * Object with synchronized methods, and rewriting synchronized methods to synchronized blocks.
  */
 public final class NormalizeSynchronizedConstructs extends NormalizationPass {
   private static final boolean SKIP_IMPLIED_LOCK_TRANSFORMATION =
@@ -52,13 +45,13 @@ public final class NormalizeSynchronizedConstructs extends NormalizationPass {
       normalizeSynchronizedMethods(compilationUnit);
       return;
     }
-    insertImpliedMonitorFields(compilationUnit);
+    insertJ2ktMonitorSuperclass(compilationUnit);
     normalizeSynchronizedMethods(compilationUnit);
-    normalizeSynchronizedStatements(compilationUnit);
   }
 
   /**
-   *
+   * Insert J2ktMonitor as super class for classes with synchronized instance methods. This enables
+   * them to be used in Kotlin synhronized blocks.
    *
    * <pre>
    * class A {
@@ -69,36 +62,25 @@ public final class NormalizeSynchronizedConstructs extends NormalizationPass {
    * <p>is rewritten to:
    *
    * <pre>
-   * class A {
-   *   final J2ktMonitor impliedJ2ktMonitor = new J2ktMonitor();
+   * class A extends J2ktMonitor {
    *   synchronized void foo() {}
    * }
    * </pre>
    */
-  private void insertImpliedMonitorFields(CompilationUnit compilationUnit) {
-    // First, insert the implied monitor for classes that are direct subclasses of Object.
+  private void insertJ2ktMonitorSuperclass(CompilationUnit compilationUnit) {
     compilationUnit.accept(
         new AbstractRewriter() {
-
           @Override
           public Node rewriteType(Type type) {
-            DeclaredTypeDescriptor j2ktMonitor = TypeDescriptors.get().javaemulLangJ2ktMonitor;
-            DeclaredTypeDescriptor superTypeDescriptor =
-                type.getTypeDescriptor().getSuperTypeDescriptor();
-            // Insert the implied monitor for classes that are direct subclasses of Object.
-            if (type.getTypeDescriptor().isClass()
-                && superTypeDescriptor != null
-                && TypeDescriptors.isJavaLangObject(superTypeDescriptor)
-                && type.getMethods().stream().anyMatch(it -> it.getDescriptor().isSynchronized())) {
-              type.getMembers()
-                  .add(
-                      Field.Builder.from(createImpliedLockFieldDescriptor(type.getTypeDescriptor()))
-                          .setInitializer(
-                              NewInstance.newBuilder()
-                                  .setTarget(j2ktMonitor.getSingleConstructor())
-                                  .build())
-                          .setSourcePosition(SourcePosition.NONE)
-                          .build());
+            // We can only insert monitor as a super class to the direct subclasses of j.l.Object.
+            if (!type.getTypeDescriptor().isClass()
+                || type.getSuperTypeDescriptor() == null
+                || !TypeDescriptors.isJavaLangObject(type.getSuperTypeDescriptor())) {
+              return type;
+            }
+
+            if (type.getMethods().stream().anyMatch(it -> it.getDescriptor().isSynchronized())) {
+              type.setSuperTypeDescriptor(TypeDescriptors.get().javaemulLangJ2ktMonitor);
             }
             return type;
           }
@@ -150,62 +132,6 @@ public final class NormalizeSynchronizedConstructs extends NormalizationPass {
                 .build();
           }
         });
-  }
-
-  /**
-   * Rewrite the monitor expression for synchronized blocks to ".impliedJ2ktMonitor" if it's not
-   * already a J2kt(compatible) monitor and not a class.
-   *
-   * <pre>
-   * synchronized (obj) {
-   *   ...
-   * }
-   * </pre>
-   *
-   * <p>is rewritten to:
-   *
-   * <pre>
-   * synchronized (obj.impliedJ2ktMonitor) {
-   *   ...
-   * }
-   * </pre>
-   */
-  private void normalizeSynchronizedStatements(CompilationUnit compilationUnit) {
-
-    compilationUnit.accept(
-        new AbstractRewriter() {
-          @Override
-          public Node rewriteSynchronizedStatement(SynchronizedStatement statement) {
-            TypeDescriptor type = statement.getExpression().getTypeDescriptor();
-            return !type.isSameBaseType(
-                        TypeDescriptors.get().comGoogleCommonBaseJ2ktCompatibleMonitor)
-                    && !type.isAssignableTo(TypeDescriptors.get().javaemulLangJ2ktMonitor)
-                    && !type.isSameBaseType(TypeDescriptors.get().javaLangClass)
-                ? SynchronizedStatement.Builder.from(statement)
-                    .setExpression(
-                        FieldAccess.Builder.from(
-                                createImpliedLockFieldDescriptor(
-                                    getCurrentType().getTypeDescriptor()))
-                            .setQualifier(statement.getExpression())
-                            .build())
-                    .build()
-                : statement;
-          }
-        });
-  }
-
-  /** Creates a field descriptor for the "impliedJ2kMonitor" typed "java.emul.lang.J2ktMonitor" */
-  private static FieldDescriptor createImpliedLockFieldDescriptor(
-      DeclaredTypeDescriptor enclosingTypeDescriptor) {
-    // Note that this can't be private as synchronization on the containing object from anywhere
-    // will be transformed to use this field.
-    return FieldDescriptor.newBuilder()
-        .setName("impliedJ2ktMonitor")
-        .setFinal(true)
-        .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
-        .setSynthetic(true)
-        .setTypeDescriptor(TypeDescriptors.get().javaemulLangJ2ktMonitor.toNonNullable())
-        .build();
   }
 }
 

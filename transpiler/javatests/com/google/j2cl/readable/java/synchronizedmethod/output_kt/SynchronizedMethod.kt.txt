@@ -26,7 +26,6 @@ import kotlin.String
 import kotlin.Suppress
 import kotlin.Unit
 import kotlin.experimental.ExperimentalObjCName
-import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.javaObjectType
 import kotlin.native.ObjCName
@@ -34,14 +33,14 @@ import kotlin.run
 import kotlin.synchronized
 
 @ObjCName("J2ktSynchronizedmethodSynchronizedMethod", exact = true)
-open class SynchronizedMethod {
+open class SynchronizedMethod: J2ktMonitor() {
  private var a: Int = 0
 
  private var b: Int = 0
 
  @ObjCName("testNonStatic")
  open fun testNonStatic() {
-  synchronized<Unit>(this.impliedJ2ktMonitor) {
+  synchronized<Unit>(this) {
    this.a = this.a + 1
    this.b = this.b - 1
   }
@@ -51,7 +50,7 @@ open class SynchronizedMethod {
  open fun testReturn(
   @ObjCName("withBoolean") bool: Boolean
  ): Int {
-  synchronized<Unit>(this.impliedJ2ktMonitor) {
+  synchronized<Unit>(this) {
    if (bool) {
     return run {
      val ___value: Int = this.a
@@ -72,7 +71,7 @@ open class SynchronizedMethod {
   @ObjCName("withBoolean") b1: Boolean,
   @ObjCName("withBoolean") b2: Boolean
  ) {
-  synchronized<Unit>(this.impliedJ2ktMonitor) {
+  synchronized<Unit>(this) {
    if (b1) {
     this.apply("foo")
    } else if (b2) {
@@ -84,10 +83,6 @@ open class SynchronizedMethod {
  private fun apply(string: String?): String? {
   return string
  }
-
- @JvmField
- @ObjCName("impliedJ2ktMonitor_")
- val impliedJ2ktMonitor: J2ktMonitor = J2ktMonitor()
 
  @ObjCName("J2ktSynchronizedmethodSynchronizedMethodCompanion", exact = true)
  companion object {
