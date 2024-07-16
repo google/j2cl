@@ -67,14 +67,14 @@
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
  (result (ref null $jstypeenum.Color))
- ;;@ jstypeenum/Color.java:21:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypeenum/readable-j2wasm.js/jstypeenum/Color.java:21:12
  (local $$instance (ref null $jstypeenum.Color))
  (block
-  ;;@ jstypeenum/Color.java:21:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypeenum/readable-j2wasm.js/jstypeenum/Color.java:21:12
   (local.set $$instance (struct.new $jstypeenum.Color (ref.as_non_null (global.get $jstypeenum.Color.vtable)) (ref.as_non_null (global.get $jstypeenum.Color.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
-  ;;@ jstypeenum/Color.java:21:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypeenum/readable-j2wasm.js/jstypeenum/Color.java:21:12
   (call $$ctor__java_lang_String__int__void_$p_jstypeenum_Color@jstypeenum.Color (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
-  ;;@ jstypeenum/Color.java:21:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypeenum/readable-j2wasm.js/jstypeenum/Color.java:21:12
   (return (local.get $$instance))
  )
 )
@@ -84,13 +84,13 @@
  (param $this (ref null $jstypeenum.Color))
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
- ;;@ jstypeenum/Color.java:21:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypeenum/readable-j2wasm.js/jstypeenum/Color.java:21:12
  (block
-  ;;@ jstypeenum/Color.java:21:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypeenum/readable-j2wasm.js/jstypeenum/Color.java:21:12
   (struct.set $java.lang.Enum $name@java.lang.Enum (local.get $this) (local.get $$name))
-  ;;@ jstypeenum/Color.java:21:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypeenum/readable-j2wasm.js/jstypeenum/Color.java:21:12
   (struct.set $java.lang.Enum $ordinal@java.lang.Enum (local.get $this) (local.get $$ordinal))
-  ;;@ jstypeenum/Color.java:21:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypeenum/readable-j2wasm.js/jstypeenum/Color.java:21:12
   (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
  )
 )
@@ -99,20 +99,20 @@
 (func $m_valueOf__java_lang_String__jstypeenum_Color@jstypeenum.Color
  (param $name (ref null $java.lang.String))
  (result (ref null $jstypeenum.Color))
- ;;@ jstypeenum/Color.java:21:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypeenum/readable-j2wasm.js/jstypeenum/Color.java:21:12
  (block
-  ;;@ jstypeenum/Color.java:21:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypeenum/readable-j2wasm.js/jstypeenum/Color.java:21:12
   (call $$clinit__void_<once>_@jstypeenum.Color )
-  ;;@ jstypeenum/Color.java:21:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypeenum/readable-j2wasm.js/jstypeenum/Color.java:21:12
   (if (ref.is_null (global.get $namesToValuesMap@jstypeenum.Color))
    (then
     (block
-     ;;@ jstypeenum/Color.java:21:12
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypeenum/readable-j2wasm.js/jstypeenum/Color.java:21:12
      (global.set $namesToValuesMap@jstypeenum.Color (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values_$private__arrayOf_jstypeenum_Color@jstypeenum.Color )))
     )
    )
   )
-  ;;@ jstypeenum/Color.java:21:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypeenum/readable-j2wasm.js/jstypeenum/Color.java:21:12
   (return (ref.cast (ref null $jstypeenum.Color) (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $namesToValuesMap@jstypeenum.Color))))
  )
 )
@@ -120,11 +120,11 @@
 ;;; Color[] Color.values()
 (func $m_values__arrayOf_jstypeenum_Color@jstypeenum.Color
  (result (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ jstypeenum/Color.java:21:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypeenum/readable-j2wasm.js/jstypeenum/Color.java:21:12
  (block
-  ;;@ jstypeenum/Color.java:21:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypeenum/readable-j2wasm.js/jstypeenum/Color.java:21:12
   (call $$clinit__void_<once>_@jstypeenum.Color )
-  ;;@ jstypeenum/Color.java:21:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypeenum/readable-j2wasm.js/jstypeenum/Color.java:21:12
   (return (call $m_values_$private__arrayOf_jstypeenum_Color@jstypeenum.Color ))
  )
 )
@@ -132,33 +132,33 @@
 ;;; Color[] Color.values_$private()
 (func $m_values_$private__arrayOf_jstypeenum_Color@jstypeenum.Color
  (result (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ jstypeenum/Color.java:21:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypeenum/readable-j2wasm.js/jstypeenum/Color.java:21:12
  (block
-  ;;@ jstypeenum/Color.java:21:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypeenum/readable-j2wasm.js/jstypeenum/Color.java:21:12
   (return (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 3 (global.get $RED@jstypeenum.Color)(global.get $GREEN@jstypeenum.Color)(global.get $BLUE@jstypeenum.Color))))
  )
 )
 
 ;;; void Color.$clinit()
 (func $$clinit__void_<once>_@jstypeenum.Color
- ;;@ jstypeenum/Color.java:21:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypeenum/readable-j2wasm.js/jstypeenum/Color.java:21:12
  (block
-  ;;@ jstypeenum/Color.java:21:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypeenum/readable-j2wasm.js/jstypeenum/Color.java:21:12
   (if (global.get $$class-initialized@jstypeenum.Color)
    (then
-    ;;@ jstypeenum/Color.java:21:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypeenum/readable-j2wasm.js/jstypeenum/Color.java:21:12
     (return )
    )
   )
-  ;;@ jstypeenum/Color.java:21:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypeenum/readable-j2wasm.js/jstypeenum/Color.java:21:12
   (global.set $$class-initialized@jstypeenum.Color (i32.const 1))
-  ;;@ jstypeenum/Color.java:21:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypeenum/readable-j2wasm.js/jstypeenum/Color.java:21:12
   (call $$clinit__void_<once>_@java.lang.Enum )
-  ;;@ jstypeenum/Color.java:22:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypeenum/readable-j2wasm.js/jstypeenum/Color.java:22:2
   (global.set $RED@jstypeenum.Color (call $$create__java_lang_String__int@jstypeenum.Color (call $$getString_|RED|__java_lang_String_<once>_@jstypeenum.Color )(i32.const 0)))
-  ;;@ jstypeenum/Color.java:23:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypeenum/readable-j2wasm.js/jstypeenum/Color.java:23:2
   (global.set $GREEN@jstypeenum.Color (call $$create__java_lang_String__int@jstypeenum.Color (call $$getString_|GREEN|__java_lang_String_<once>_@jstypeenum.Color )(i32.const 1)))
-  ;;@ jstypeenum/Color.java:24:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypeenum/readable-j2wasm.js/jstypeenum/Color.java:24:2
   (global.set $BLUE@jstypeenum.Color (call $$create__java_lang_String__int@jstypeenum.Color (call $$getString_|BLUE|__java_lang_String_<once>_@jstypeenum.Color )(i32.const 2)))
  )
 )

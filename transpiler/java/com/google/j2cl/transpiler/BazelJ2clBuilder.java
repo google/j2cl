@@ -85,6 +85,9 @@ final class BazelJ2clBuilder extends BazelWorker {
   @Option(name = "-readablesourcemaps", hidden = true)
   boolean readableSourceMaps = false;
 
+  @Option(name = "-sourceMappingPathPrefix", hidden = true)
+  String sourceMappingPathPrefix = "";
+
   @Option(name = "-generatekytheindexingmetadata", hidden = true)
   boolean generateKytheIndexingMetadata = false;
 
@@ -200,6 +203,7 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setLibraryInfoOutput(this.libraryInfoOutput)
         .setEmitReadableLibraryInfo(readableLibraryInfo)
         .setEmitReadableSourceMap(this.readableSourceMaps)
+        .setSourceMappingPathPrefix(this.sourceMappingPathPrefix)
         .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)
         .setOptimizeAutoValue(this.optimizeAutoValue)
         .setFrontend(allKotlinSources.isEmpty() ? javaFrontend : Frontend.KOTLIN)

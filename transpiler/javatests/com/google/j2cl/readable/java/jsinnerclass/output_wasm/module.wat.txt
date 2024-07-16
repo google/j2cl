@@ -115,16 +115,16 @@
 ;;; Main Main.$create()
 (func $$create__@jsinnerclass.Main
  (result (ref null $jsinnerclass.Main))
- ;;@ jsinnerclass/Main.java:20:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:20:13
  (local $$instance (ref null $jsinnerclass.Main))
  (block
-  ;;@ jsinnerclass/Main.java:20:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:20:13
   (call $$clinit__void_<once>_@jsinnerclass.Main )
-  ;;@ jsinnerclass/Main.java:20:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:20:13
   (local.set $$instance (struct.new $jsinnerclass.Main (ref.as_non_null (global.get $jsinnerclass.Main.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ jsinnerclass/Main.java:20:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:20:13
   (call $$ctor__void_$p_jsinnerclass_Main@jsinnerclass.Main (ref.as_non_null (local.get $$instance)))
-  ;;@ jsinnerclass/Main.java:20:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:20:13
   (return (local.get $$instance))
  )
 )
@@ -132,9 +132,9 @@
 ;;; void Main.$ctor()
 (func $$ctor__void_$p_jsinnerclass_Main@jsinnerclass.Main
  (param $this (ref null $jsinnerclass.Main))
- ;;@ jsinnerclass/Main.java:20:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:20:13
  (block
-  ;;@ jsinnerclass/Main.java:20:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:20:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -142,15 +142,15 @@
 ;;; void Main.main(String... args)
 (func $m_main__arrayOf_java_lang_String__void@jsinnerclass.Main
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ jsinnerclass/Main.java:42:21
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:42:21
  (local $$qualifier (ref null $jsinnerclass.Main.Outer))
  (block
-  ;;@ jsinnerclass/Main.java:42:42
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:42:42
   (call $$clinit__void_<once>_@jsinnerclass.Main )
-  ;;@ jsinnerclass/Main.java:43:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:43:4
   (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
    (then
-    ;;@ jsinnerclass/Main.java:43:4
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:43:4
     (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (block (result i32)
      (local.set $$qualifier (call $$create__@jsinnerclass.Main.Outer ))
      (call_ref $function.m_method__int (ref.as_non_null (local.get $$qualifier))(struct.get $jsinnerclass.Main.Outer.vtable $m_method__int (struct.get $jsinnerclass.Main.Outer $vtable(local.get $$qualifier))))
@@ -162,18 +162,18 @@
 
 ;;; void Main.$clinit()
 (func $$clinit__void_<once>_@jsinnerclass.Main
- ;;@ jsinnerclass/Main.java:20:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:20:13
  (block
-  ;;@ jsinnerclass/Main.java:20:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:20:13
   (if (global.get $$class-initialized@jsinnerclass.Main)
    (then
-    ;;@ jsinnerclass/Main.java:20:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:20:13
     (return )
    )
   )
-  ;;@ jsinnerclass/Main.java:20:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:20:13
   (global.set $$class-initialized@jsinnerclass.Main (i32.const 1))
-  ;;@ jsinnerclass/Main.java:20:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:20:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -211,16 +211,16 @@
 (func $$create__jsinnerclass_Main_Outer@jsinnerclass.Main.Outer.Inner
  (param $$outer_this (ref null $jsinnerclass.Main.Outer))
  (result (ref null $jsinnerclass.Main.Outer.Inner))
- ;;@ jsinnerclass/Main.java:28:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:28:13
  (local $$instance (ref null $jsinnerclass.Main.Outer.Inner))
  (block
-  ;;@ jsinnerclass/Main.java:28:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:28:13
   (call $$clinit__void_<once>_@jsinnerclass.Main.Outer.Inner )
-  ;;@ jsinnerclass/Main.java:28:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:28:13
   (local.set $$instance (struct.new $jsinnerclass.Main.Outer.Inner (ref.as_non_null (global.get $jsinnerclass.Main.Outer.Inner.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $jsinnerclass.Main.Outer) (i32.const 0)))
-  ;;@ jsinnerclass/Main.java:28:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:28:13
   (call $$ctor__jsinnerclass_Main_Outer__void_$p_jsinnerclass_Main_Outer_Inner@jsinnerclass.Main.Outer.Inner (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;;@ jsinnerclass/Main.java:28:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:28:13
   (return (local.get $$instance))
  )
 )
@@ -229,13 +229,13 @@
 (func $$ctor__jsinnerclass_Main_Outer__void_$p_jsinnerclass_Main_Outer_Inner@jsinnerclass.Main.Outer.Inner
  (param $this (ref null $jsinnerclass.Main.Outer.Inner))
  (param $$outer_this (ref null $jsinnerclass.Main.Outer))
- ;;@ jsinnerclass/Main.java:28:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:28:13
  (block
-  ;;@ jsinnerclass/Main.java:25:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:25:17
   (struct.set $jsinnerclass.Main.Outer.Inner $$outer_this@jsinnerclass.Main.Outer.Inner (local.get $this) (local.get $$outer_this))
-  ;;@ jsinnerclass/Main.java:28:21
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:28:21
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;;@ jsinnerclass/Main.java:29:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:29:8
   (struct.set $jsinnerclass.Main.Outer.Inner $b@jsinnerclass.Main.Outer.Inner (local.get $this) (i32.add (struct.get $jsinnerclass.Main.Outer $a@jsinnerclass.Main.Outer (local.get $$outer_this)) (i32.const 1)))
  )
 )
@@ -245,11 +245,11 @@
  (type $function.m_getB__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ jsinnerclass/Main.java:32:17
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:32:17
  (local $this (ref null $jsinnerclass.Main.Outer.Inner))
  (local.set $this (ref.cast (ref $jsinnerclass.Main.Outer.Inner) (local.get $this.untyped)))
  (block
-  ;;@ jsinnerclass/Main.java:33:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:33:8
   (return (struct.get $jsinnerclass.Main.Outer.Inner $b@jsinnerclass.Main.Outer.Inner (local.get $this)))
  )
 )
@@ -257,18 +257,18 @@
 
 ;;; void Inner.$clinit()
 (func $$clinit__void_<once>_@jsinnerclass.Main.Outer.Inner
- ;;@ jsinnerclass/Main.java:25:17
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:25:17
  (block
-  ;;@ jsinnerclass/Main.java:25:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:25:17
   (if (global.get $$class-initialized@jsinnerclass.Main.Outer.Inner)
    (then
-    ;;@ jsinnerclass/Main.java:25:17
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:25:17
     (return )
    )
   )
-  ;;@ jsinnerclass/Main.java:25:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:25:17
   (global.set $$class-initialized@jsinnerclass.Main.Outer.Inner (i32.const 1))
-  ;;@ jsinnerclass/Main.java:25:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:25:17
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -305,16 +305,16 @@
 ;;; Outer Outer.$create()
 (func $$create__@jsinnerclass.Main.Outer
  (result (ref null $jsinnerclass.Main.Outer))
- ;;@ jsinnerclass/Main.java:21:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:21:15
  (local $$instance (ref null $jsinnerclass.Main.Outer))
  (block
-  ;;@ jsinnerclass/Main.java:21:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:21:15
   (call $$clinit__void_<once>_@jsinnerclass.Main.Outer )
-  ;;@ jsinnerclass/Main.java:21:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:21:15
   (local.set $$instance (struct.new $jsinnerclass.Main.Outer (ref.as_non_null (global.get $jsinnerclass.Main.Outer.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
-  ;;@ jsinnerclass/Main.java:21:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:21:15
   (call $$ctor__void_$p_jsinnerclass_Main_Outer@jsinnerclass.Main.Outer (ref.as_non_null (local.get $$instance)))
-  ;;@ jsinnerclass/Main.java:21:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:21:15
   (return (local.get $$instance))
  )
 )
@@ -322,11 +322,11 @@
 ;;; void Outer.$ctor()
 (func $$ctor__void_$p_jsinnerclass_Main_Outer@jsinnerclass.Main.Outer
  (param $this (ref null $jsinnerclass.Main.Outer))
- ;;@ jsinnerclass/Main.java:21:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:21:15
  (block
-  ;;@ jsinnerclass/Main.java:21:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:21:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;;@ jsinnerclass/Main.java:21:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:21:15
   (call $$init__void_$p_jsinnerclass_Main_Outer@jsinnerclass.Main.Outer (ref.as_non_null (local.get $this)))
  )
 )
@@ -336,12 +336,12 @@
  (type $function.m_method__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ jsinnerclass/Main.java:37:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:37:15
  (local $$qualifier (ref null $jsinnerclass.Main.Outer.Inner))
  (local $this (ref null $jsinnerclass.Main.Outer))
  (local.set $this (ref.cast (ref $jsinnerclass.Main.Outer) (local.get $this.untyped)))
  (block
-  ;;@ jsinnerclass/Main.java:38:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:38:6
   (return (i32.add (block (result i32)
    (local.set $$qualifier (call $$create__jsinnerclass_Main_Outer@jsinnerclass.Main.Outer.Inner (local.get $this)))
    (call_ref $function.m_getB__int (ref.as_non_null (local.get $$qualifier))(struct.get $jsinnerclass.Main.Outer.Inner.vtable $m_getB__int (struct.get $jsinnerclass.Main.Outer.Inner $vtable(local.get $$qualifier))))
@@ -353,27 +353,27 @@
 ;;; void Outer.$init()
 (func $$init__void_$p_jsinnerclass_Main_Outer@jsinnerclass.Main.Outer
  (param $this (ref null $jsinnerclass.Main.Outer))
- ;;@ jsinnerclass/Main.java:21:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:21:15
  (block
-  ;;@ jsinnerclass/Main.java:22:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:22:4
   (struct.set $jsinnerclass.Main.Outer $a@jsinnerclass.Main.Outer (local.get $this) (i32.const 2))
  )
 )
 
 ;;; void Outer.$clinit()
 (func $$clinit__void_<once>_@jsinnerclass.Main.Outer
- ;;@ jsinnerclass/Main.java:21:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:21:15
  (block
-  ;;@ jsinnerclass/Main.java:21:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:21:15
   (if (global.get $$class-initialized@jsinnerclass.Main.Outer)
    (then
-    ;;@ jsinnerclass/Main.java:21:15
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:21:15
     (return )
    )
   )
-  ;;@ jsinnerclass/Main.java:21:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:21:15
   (global.set $$class-initialized@jsinnerclass.Main.Outer (i32.const 1))
-  ;;@ jsinnerclass/Main.java:21:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:21:15
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

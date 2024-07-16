@@ -75,6 +75,8 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
 
     public abstract Builder setEmitReadableSourceMap(boolean b);
 
+    public abstract Builder setSourceMappingPathPrefix(String value);
+
     public abstract Builder setGenerateKytheIndexingMetadata(boolean b);
 
     public abstract Builder setOptimizeAutoValue(boolean b);

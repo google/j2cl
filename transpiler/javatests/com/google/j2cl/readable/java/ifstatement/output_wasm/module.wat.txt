@@ -40,16 +40,16 @@
 ;;; IfStatement IfStatement.$create()
 (func $$create__@ifstatement.IfStatement
  (result (ref null $ifstatement.IfStatement))
- ;;@ ifstatement/IfStatement.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/ifstatement/readable-j2wasm.js/ifstatement/IfStatement.java:18:13
  (local $$instance (ref null $ifstatement.IfStatement))
  (block
-  ;;@ ifstatement/IfStatement.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ifstatement/readable-j2wasm.js/ifstatement/IfStatement.java:18:13
   (call $$clinit__void_<once>_@ifstatement.IfStatement )
-  ;;@ ifstatement/IfStatement.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ifstatement/readable-j2wasm.js/ifstatement/IfStatement.java:18:13
   (local.set $$instance (struct.new $ifstatement.IfStatement (ref.as_non_null (global.get $ifstatement.IfStatement.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ ifstatement/IfStatement.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ifstatement/readable-j2wasm.js/ifstatement/IfStatement.java:18:13
   (call $$ctor__void_$p_ifstatement_IfStatement@ifstatement.IfStatement (ref.as_non_null (local.get $$instance)))
-  ;;@ ifstatement/IfStatement.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ifstatement/readable-j2wasm.js/ifstatement/IfStatement.java:18:13
   (return (local.get $$instance))
  )
 )
@@ -57,9 +57,9 @@
 ;;; void IfStatement.$ctor()
 (func $$ctor__void_$p_ifstatement_IfStatement@ifstatement.IfStatement
  (param $this (ref null $ifstatement.IfStatement))
- ;;@ ifstatement/IfStatement.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/ifstatement/readable-j2wasm.js/ifstatement/IfStatement.java:18:13
  (block
-  ;;@ ifstatement/IfStatement.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ifstatement/readable-j2wasm.js/ifstatement/IfStatement.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -68,49 +68,49 @@
 (func $m_test__void@ifstatement.IfStatement
  (type $function.m_test__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ ifstatement/IfStatement.java:19:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/ifstatement/readable-j2wasm.js/ifstatement/IfStatement.java:19:14
  (local $a i32)
  (local $b i32)
  (local $number i32)
  (local $this (ref null $ifstatement.IfStatement))
  (local.set $this (ref.cast (ref $ifstatement.IfStatement) (local.get $this.untyped)))
  (block
-  ;;@ ifstatement/IfStatement.java:20:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ifstatement/readable-j2wasm.js/ifstatement/IfStatement.java:20:4
   (local.set $a (i32.const 1))
   (local.set $b (i32.const 1))
-  ;;@ ifstatement/IfStatement.java:21:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ifstatement/readable-j2wasm.js/ifstatement/IfStatement.java:21:4
   (local.set $number (i32.const 1))
-  ;;@ ifstatement/IfStatement.java:22:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ifstatement/readable-j2wasm.js/ifstatement/IfStatement.java:22:4
   (if (local.get $a)
    (then
     (block
-     ;;@ ifstatement/IfStatement.java:23:6
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/ifstatement/readable-j2wasm.js/ifstatement/IfStatement.java:23:6
      (local.set $number (i32.const 2))
     )
    )(else
-    ;;@ ifstatement/IfStatement.java:24:11
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/ifstatement/readable-j2wasm.js/ifstatement/IfStatement.java:24:11
     (if (local.get $b)
      (then
       (block
-       ;;@ ifstatement/IfStatement.java:25:6
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/ifstatement/readable-j2wasm.js/ifstatement/IfStatement.java:25:6
        (local.set $number (i32.const 3))
       )
      )(else
       (block
-       ;;@ ifstatement/IfStatement.java:27:6
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/ifstatement/readable-j2wasm.js/ifstatement/IfStatement.java:27:6
        (local.set $number (i32.const 4))
       )
      )
     )
    )
   )
-  ;;@ ifstatement/IfStatement.java:30:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ifstatement/readable-j2wasm.js/ifstatement/IfStatement.java:30:4
   (if (local.get $a)
    (then
-    ;;@ ifstatement/IfStatement.java:30:11
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/ifstatement/readable-j2wasm.js/ifstatement/IfStatement.java:30:11
     (local.set $number (i32.const 5))
    )(else
-    ;;@ ifstatement/IfStatement.java:31:9
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/ifstatement/readable-j2wasm.js/ifstatement/IfStatement.java:31:9
     (local.set $number (i32.const 6))
    )
   )
@@ -120,18 +120,18 @@
 
 ;;; void IfStatement.$clinit()
 (func $$clinit__void_<once>_@ifstatement.IfStatement
- ;;@ ifstatement/IfStatement.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/ifstatement/readable-j2wasm.js/ifstatement/IfStatement.java:18:13
  (block
-  ;;@ ifstatement/IfStatement.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ifstatement/readable-j2wasm.js/ifstatement/IfStatement.java:18:13
   (if (global.get $$class-initialized@ifstatement.IfStatement)
    (then
-    ;;@ ifstatement/IfStatement.java:18:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/ifstatement/readable-j2wasm.js/ifstatement/IfStatement.java:18:13
     (return )
    )
   )
-  ;;@ ifstatement/IfStatement.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ifstatement/readable-j2wasm.js/ifstatement/IfStatement.java:18:13
   (global.set $$class-initialized@ifstatement.IfStatement (i32.const 1))
-  ;;@ ifstatement/IfStatement.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ifstatement/readable-j2wasm.js/ifstatement/IfStatement.java:18:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

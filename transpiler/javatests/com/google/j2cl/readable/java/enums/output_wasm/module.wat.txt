@@ -292,16 +292,16 @@
 ;;; <anonymous> implements Function<Integer, Integer> <anonymous> implements Function<Integer, Integer>.$create()
 (func $$create__@enums.Enum3.$LambdaImplementor$1
  (result (ref null $enums.Enum3.$LambdaImplementor$1))
- ;;@ enums/Enum1.java:59:9
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
  (local $$instance (ref null $enums.Enum3.$LambdaImplementor$1))
  (block
-  ;;@ enums/Enum1.java:59:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
   (call $$clinit__void_<once>_@enums.Enum3.$LambdaImplementor$1 )
-  ;;@ enums/Enum1.java:59:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
   (local.set $$instance (struct.new $enums.Enum3.$LambdaImplementor$1 (ref.as_non_null (global.get $enums.Enum3.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $enums.Enum3.$LambdaImplementor$1.itable)) (i32.const 0)))
-  ;;@ enums/Enum1.java:59:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
   (call $$ctor__void_$p_enums_Enum3_$LambdaImplementor$1@enums.Enum3.$LambdaImplementor$1 (ref.as_non_null (local.get $$instance)))
-  ;;@ enums/Enum1.java:59:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
   (return (local.get $$instance))
  )
 )
@@ -309,9 +309,9 @@
 ;;; void <anonymous> implements Function<Integer, Integer>.$ctor()
 (func $$ctor__void_$p_enums_Enum3_$LambdaImplementor$1@enums.Enum3.$LambdaImplementor$1
  (param $this (ref null $enums.Enum3.$LambdaImplementor$1))
- ;;@ enums/Enum1.java:59:9
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
  (block
-  ;;@ enums/Enum1.java:59:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -322,11 +322,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $v (ref null $java.lang.Integer))
  (result (ref null $java.lang.Integer))
- ;;@ enums/Enum1.java:59:9
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
  (local $this (ref null $enums.Enum3.$LambdaImplementor$1))
  (local.set $this (ref.cast (ref $enums.Enum3.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
-  ;;@ enums/Enum1.java:59:14
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:14
   (return (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (i32.const 1) (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $v))))))
  )
 )
@@ -338,11 +338,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ enums/Enum1.java:59:9
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
  (local $this (ref null $enums.Enum3.$LambdaImplementor$1))
  (local.set $this (ref.cast (ref $enums.Enum3.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
-  ;;@ enums/Enum1.java:59:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
   (return (call $m_andThen__java_util_function_Function__java_util_function_Function@java.util.function.Function (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
 )
@@ -354,11 +354,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ enums/Enum1.java:59:9
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
  (local $this (ref null $enums.Enum3.$LambdaImplementor$1))
  (local.set $this (ref.cast (ref $enums.Enum3.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
-  ;;@ enums/Enum1.java:59:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
   (return (call_ref $function.m_apply__java_lang_Integer__java_lang_Integer (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Integer) (local.get $arg0))(struct.get $enums.Enum3.$LambdaImplementor$1.vtable $m_apply__java_lang_Integer__java_lang_Integer (struct.get $enums.Enum3.$LambdaImplementor$1 $vtable(local.get $this)))))
  )
 )
@@ -370,11 +370,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ enums/Enum1.java:59:9
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
  (local $this (ref null $enums.Enum3.$LambdaImplementor$1))
  (local.set $this (ref.cast (ref $enums.Enum3.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
-  ;;@ enums/Enum1.java:59:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
   (return (call $m_compose__java_util_function_Function__java_util_function_Function@java.util.function.Function (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
 )
@@ -382,20 +382,20 @@
 
 ;;; void <anonymous> implements Function<Integer, Integer>.$clinit()
 (func $$clinit__void_<once>_@enums.Enum3.$LambdaImplementor$1
- ;;@ enums/Enum1.java:59:9
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
  (block
-  ;;@ enums/Enum1.java:59:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
   (if (global.get $$class-initialized@enums.Enum3.$LambdaImplementor$1)
    (then
-    ;;@ enums/Enum1.java:59:9
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
     (return )
    )
   )
-  ;;@ enums/Enum1.java:59:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
   (global.set $$class-initialized@enums.Enum3.$LambdaImplementor$1 (i32.const 1))
-  ;;@ enums/Enum1.java:59:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
   (call $$clinit__void_<once>_@java.lang.Object )
-  ;;@ enums/Enum1.java:59:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
   (call $$clinit__void_<once>_@java.util.function.Function )
  )
 )
@@ -434,14 +434,14 @@
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
  (result (ref null $enums.Enum1))
- ;;@ enums/Enum1.java:20:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:20:12
  (local $$instance (ref null $enums.Enum1))
  (block
-  ;;@ enums/Enum1.java:20:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:20:12
   (local.set $$instance (struct.new $enums.Enum1 (ref.as_non_null (global.get $enums.Enum1.vtable)) (ref.as_non_null (global.get $enums.Enum1.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
-  ;;@ enums/Enum1.java:20:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:20:12
   (call $$ctor__java_lang_String__int__void_$p_enums_Enum1@enums.Enum1 (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
-  ;;@ enums/Enum1.java:20:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:20:12
   (return (local.get $$instance))
  )
 )
@@ -451,13 +451,13 @@
  (param $this (ref null $enums.Enum1))
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
- ;;@ enums/Enum1.java:20:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:20:12
  (block
-  ;;@ enums/Enum1.java:20:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:20:12
   (struct.set $java.lang.Enum $name@java.lang.Enum (local.get $this) (local.get $$name))
-  ;;@ enums/Enum1.java:20:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:20:12
   (struct.set $java.lang.Enum $ordinal@java.lang.Enum (local.get $this) (local.get $$ordinal))
-  ;;@ enums/Enum1.java:20:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:20:12
   (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
  )
 )
@@ -466,20 +466,20 @@
 (func $m_valueOf__java_lang_String__enums_Enum1@enums.Enum1
  (param $name (ref null $java.lang.String))
  (result (ref null $enums.Enum1))
- ;;@ enums/Enum1.java:20:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:20:12
  (block
-  ;;@ enums/Enum1.java:20:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:20:12
   (call $$clinit__void_<once>_@enums.Enum1 )
-  ;;@ enums/Enum1.java:20:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:20:12
   (if (ref.is_null (global.get $namesToValuesMap@enums.Enum1))
    (then
     (block
-     ;;@ enums/Enum1.java:20:12
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:20:12
      (global.set $namesToValuesMap@enums.Enum1 (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values_$private__arrayOf_enums_Enum1@enums.Enum1 )))
     )
    )
   )
-  ;;@ enums/Enum1.java:20:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:20:12
   (return (ref.cast (ref null $enums.Enum1) (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $namesToValuesMap@enums.Enum1))))
  )
 )
@@ -487,11 +487,11 @@
 ;;; Enum1[] Enum1.values()
 (func $m_values__arrayOf_enums_Enum1@enums.Enum1
  (result (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ enums/Enum1.java:20:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:20:12
  (block
-  ;;@ enums/Enum1.java:20:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:20:12
   (call $$clinit__void_<once>_@enums.Enum1 )
-  ;;@ enums/Enum1.java:20:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:20:12
   (return (call $m_values_$private__arrayOf_enums_Enum1@enums.Enum1 ))
  )
 )
@@ -499,31 +499,31 @@
 ;;; Enum1[] Enum1.values_$private()
 (func $m_values_$private__arrayOf_enums_Enum1@enums.Enum1
  (result (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ enums/Enum1.java:20:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:20:12
  (block
-  ;;@ enums/Enum1.java:20:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:20:12
   (return (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (global.get $V1@enums.Enum1)(global.get $V2@enums.Enum1))))
  )
 )
 
 ;;; void Enum1.$clinit()
 (func $$clinit__void_<once>_@enums.Enum1
- ;;@ enums/Enum1.java:20:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:20:12
  (block
-  ;;@ enums/Enum1.java:20:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:20:12
   (if (global.get $$class-initialized@enums.Enum1)
    (then
-    ;;@ enums/Enum1.java:20:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:20:12
     (return )
    )
   )
-  ;;@ enums/Enum1.java:20:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:20:12
   (global.set $$class-initialized@enums.Enum1 (i32.const 1))
-  ;;@ enums/Enum1.java:20:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:20:12
   (call $$clinit__void_<once>_@java.lang.Enum )
-  ;;@ enums/Enum1.java:21:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:21:2
   (global.set $V1@enums.Enum1 (call $$create__java_lang_String__int@enums.Enum1 (call $$getString_|V1|__java_lang_String_<once>_@enums.Enum1 )(i32.const 0)))
-  ;;@ enums/Enum1.java:22:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:22:2
   (global.set $V2@enums.Enum1 (call $$create__java_lang_String__int@enums.Enum1 (call $$getString_|V2|__java_lang_String_<once>_@enums.Enum1 )(i32.const 1)))
  )
 )
@@ -563,14 +563,14 @@
  (param $$ordinal i32)
  (param $foo i32)
  (result (ref null $enums.Enum2))
- ;;@ enums/Enum1.java:33:2
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:33:2
  (local $$instance (ref null $enums.Enum2))
  (block
-  ;;@ enums/Enum1.java:33:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:33:2
   (local.set $$instance (struct.new $enums.Enum2 (ref.as_non_null (global.get $enums.Enum2.vtable)) (ref.as_non_null (global.get $enums.Enum2.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (i32.const 0)))
-  ;;@ enums/Enum1.java:33:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:33:2
   (call $$ctor__java_lang_String__int__int__void_$p_enums_Enum2@enums.Enum2 (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal)(local.get $foo))
-  ;;@ enums/Enum1.java:33:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:33:2
   (return (local.get $$instance))
  )
 )
@@ -581,17 +581,17 @@
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
  (param $foo i32)
- ;;@ enums/Enum1.java:33:2
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:33:2
  (block
-  ;;@ enums/Enum1.java:33:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:33:2
   (struct.set $java.lang.Enum $name@java.lang.Enum (local.get $this) (local.get $$name))
-  ;;@ enums/Enum1.java:33:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:33:2
   (struct.set $java.lang.Enum $ordinal@java.lang.Enum (local.get $this) (local.get $$ordinal))
-  ;;@ enums/Enum1.java:33:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:33:17
   (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
-  ;;@ enums/Enum1.java:33:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:33:17
   (call $$init__void_$p_enums_Enum2@enums.Enum2 (ref.as_non_null (local.get $this)))
-  ;;@ enums/Enum1.java:34:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:34:4
   (struct.set $enums.Enum2 $foo@enums.Enum2 (local.get $this) (local.get $foo))
  )
 )
@@ -602,14 +602,14 @@
  (param $$ordinal i32)
  (param $foo (ref null $java.lang.Enum))
  (result (ref null $enums.Enum2))
- ;;@ enums/Enum1.java:37:2
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:37:2
  (local $$instance (ref null $enums.Enum2))
  (block
-  ;;@ enums/Enum1.java:37:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:37:2
   (local.set $$instance (struct.new $enums.Enum2 (ref.as_non_null (global.get $enums.Enum2.vtable)) (ref.as_non_null (global.get $enums.Enum2.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (i32.const 0)))
-  ;;@ enums/Enum1.java:37:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:37:2
   (call $$ctor__java_lang_String__int__java_lang_Enum__void_$p_enums_Enum2@enums.Enum2 (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal)(local.get $foo))
-  ;;@ enums/Enum1.java:37:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:37:2
   (return (local.get $$instance))
  )
 )
@@ -620,13 +620,13 @@
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
  (param $foo (ref null $java.lang.Enum))
- ;;@ enums/Enum1.java:37:2
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:37:2
  (block
-  ;;@ enums/Enum1.java:37:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:37:2
   (struct.set $java.lang.Enum $name@java.lang.Enum (local.get $this) (local.get $$name))
-  ;;@ enums/Enum1.java:37:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:37:2
   (struct.set $java.lang.Enum $ordinal@java.lang.Enum (local.get $this) (local.get $$ordinal))
-  ;;@ enums/Enum1.java:38:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:38:4
   (call $$ctor__java_lang_String__int__int__void_$p_enums_Enum2@enums.Enum2 (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal)(call $m_ordinal__int@java.lang.Enum (ref.as_non_null (local.get $foo))))
  )
 )
@@ -637,14 +637,14 @@
  (param $$ordinal i32)
  (param $somePars (ref null $javaemul.internal.WasmArray.OfObject))
  (result (ref null $enums.Enum2))
- ;;@ enums/Enum1.java:41:2
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:41:2
  (local $$instance (ref null $enums.Enum2))
  (block
-  ;;@ enums/Enum1.java:41:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:41:2
   (local.set $$instance (struct.new $enums.Enum2 (ref.as_non_null (global.get $enums.Enum2.vtable)) (ref.as_non_null (global.get $enums.Enum2.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (i32.const 0)))
-  ;;@ enums/Enum1.java:41:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:41:2
   (call $$ctor__java_lang_String__int__arrayOf_java_lang_Object__void_$p_enums_Enum2@enums.Enum2 (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal)(local.get $somePars))
-  ;;@ enums/Enum1.java:41:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:41:2
   (return (local.get $$instance))
  )
 )
@@ -655,13 +655,13 @@
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
  (param $somePars (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ enums/Enum1.java:41:2
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:41:2
  (block
-  ;;@ enums/Enum1.java:41:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:41:2
   (struct.set $java.lang.Enum $name@java.lang.Enum (local.get $this) (local.get $$name))
-  ;;@ enums/Enum1.java:41:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:41:2
   (struct.set $java.lang.Enum $ordinal@java.lang.Enum (local.get $this) (local.get $$ordinal))
-  ;;@ enums/Enum1.java:42:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:42:4
   (call $$ctor__java_lang_String__int__int__void_$p_enums_Enum2@enums.Enum2 (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal)(array.len (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $somePars))))
  )
 )
@@ -670,11 +670,11 @@
 (func $m_f__java_lang_Object__enums_Enum2@enums.Enum2
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $enums.Enum2))
- ;;@ enums/Enum1.java:45:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:45:15
  (block
-  ;;@ enums/Enum1.java:45:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:45:15
   (call $$clinit__void_<once>_@enums.Enum2 )
-  ;;@ enums/Enum1.java:45:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:45:15
   (return (call $m_f_$private__java_lang_Object__enums_Enum2@enums.Enum2 (local.get $arg0)))
  )
 )
@@ -683,9 +683,9 @@
 (func $m_f_$private__java_lang_Object__enums_Enum2@enums.Enum2
  (param $o (ref null $java.lang.Object))
  (result (ref null $enums.Enum2))
- ;;@ enums/Enum1.java:45:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:45:15
  (block
-  ;;@ enums/Enum1.java:46:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:46:4
   (return (ref.null $enums.Enum2))
  )
 )
@@ -694,18 +694,18 @@
 (func $m_specialMethods__void_$pp_enums@enums.Enum2
  (type $function.m_specialMethods__void_$pp_enums)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ enums/Enum1.java:51:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:51:7
  (local $o1 i32)
  (local $o2 i32)
  (local $l i32)
  (local $this (ref null $enums.Enum2))
  (local.set $this (ref.cast (ref $enums.Enum2) (local.get $this.untyped)))
  (block
-  ;;@ enums/Enum1.java:52:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:52:4
   (local.set $o1 (call $m_ordinal__int@java.lang.Enum (ref.as_non_null (call $m_valueOf_$private__java_lang_String__enums_Enum2@enums.Enum2 (ref.null $java.lang.String)))))
-  ;;@ enums/Enum1.java:53:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:53:4
   (local.set $o2 (call $m_ordinal__int@java.lang.Enum (ref.as_non_null (call $m_valueOf_$private__java_lang_String__enums_Enum2@enums.Enum2 (call $$getString_|VALUE1|__java_lang_String_<once>_@enums.Enum2 )))))
-  ;;@ enums/Enum1.java:54:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:54:4
   (local.set $l (array.len (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (call $m_values_$private__arrayOf_enums_Enum2@enums.Enum2 ))))
  )
 )
@@ -715,11 +715,11 @@
 (func $m_valueOf__java_lang_String__enums_Enum2@enums.Enum2
  (param $arg0 (ref null $java.lang.String))
  (result (ref null $enums.Enum2))
- ;;@ enums/Enum1.java:25:5
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:25:5
  (block
-  ;;@ enums/Enum1.java:25:5
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:25:5
   (call $$clinit__void_<once>_@enums.Enum2 )
-  ;;@ enums/Enum1.java:25:5
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:25:5
   (return (call $m_valueOf_$private__java_lang_String__enums_Enum2@enums.Enum2 (local.get $arg0)))
  )
 )
@@ -728,18 +728,18 @@
 (func $m_valueOf_$private__java_lang_String__enums_Enum2@enums.Enum2
  (param $name (ref null $java.lang.String))
  (result (ref null $enums.Enum2))
- ;;@ enums/Enum1.java:25:5
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:25:5
  (block
-  ;;@ enums/Enum1.java:25:5
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:25:5
   (if (ref.is_null (global.get $namesToValuesMap@enums.Enum2))
    (then
     (block
-     ;;@ enums/Enum1.java:25:5
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:25:5
      (global.set $namesToValuesMap@enums.Enum2 (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values_$private__arrayOf_enums_Enum2@enums.Enum2 )))
     )
    )
   )
-  ;;@ enums/Enum1.java:25:5
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:25:5
   (return (ref.cast (ref null $enums.Enum2) (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $namesToValuesMap@enums.Enum2))))
  )
 )
@@ -747,11 +747,11 @@
 ;;; Enum2[] Enum2.values()
 (func $m_values__arrayOf_enums_Enum2@enums.Enum2
  (result (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ enums/Enum1.java:25:5
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:25:5
  (block
-  ;;@ enums/Enum1.java:25:5
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:25:5
   (call $$clinit__void_<once>_@enums.Enum2 )
-  ;;@ enums/Enum1.java:25:5
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:25:5
   (return (call $m_values_$private__arrayOf_enums_Enum2@enums.Enum2 ))
  )
 )
@@ -759,9 +759,9 @@
 ;;; Enum2[] Enum2.values_$private()
 (func $m_values_$private__arrayOf_enums_Enum2@enums.Enum2
  (result (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ enums/Enum1.java:25:5
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:25:5
  (block
-  ;;@ enums/Enum1.java:25:5
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:25:5
   (return (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 4 (global.get $VALUE1@enums.Enum2)(global.get $VALUE2@enums.Enum2)(global.get $VALUE3@enums.Enum2)(global.get $VALUE4@enums.Enum2))))
  )
 )
@@ -769,9 +769,9 @@
 ;;; void Enum2.$init()
 (func $$init__void_$p_enums_Enum2@enums.Enum2
  (param $this (ref null $enums.Enum2))
- ;;@ enums/Enum1.java:25:5
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:25:5
  (block
-  ;;@ enums/Enum1.java:31:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:31:2
   (struct.set $enums.Enum2 $foo@enums.Enum2 (local.get $this) (call $m_ordinal__int@java.lang.Enum (ref.as_non_null (block (result (ref null $enums.Enum1))
    (call $$clinit__void_<once>_@enums.Enum1 )
    (global.get $V1@enums.Enum1)
@@ -781,31 +781,31 @@
 
 ;;; void Enum2.$clinit()
 (func $$clinit__void_<once>_@enums.Enum2
- ;;@ enums/Enum1.java:25:5
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:25:5
  (block
-  ;;@ enums/Enum1.java:25:5
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:25:5
   (if (global.get $$class-initialized@enums.Enum2)
    (then
-    ;;@ enums/Enum1.java:25:5
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:25:5
     (return )
    )
   )
-  ;;@ enums/Enum1.java:25:5
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:25:5
   (global.set $$class-initialized@enums.Enum2 (i32.const 1))
-  ;;@ enums/Enum1.java:25:5
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:25:5
   (call $$clinit__void_<once>_@java.lang.Enum )
-  ;;@ enums/Enum1.java:26:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:26:2
   (global.set $VALUE1@enums.Enum2 (call $$create__java_lang_String__int__int@enums.Enum2 (call $$getString_|VALUE1|__java_lang_String_<once>_@enums.Enum2 )(i32.const 0)(i32.const 2)))
-  ;;@ enums/Enum1.java:27:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:27:2
   (global.set $VALUE2@enums.Enum2 (call $$create__java_lang_String__int__java_lang_Enum@enums.Enum2 (call $$getString_|VALUE2|__java_lang_String_<once>_@enums.Enum2 )(i32.const 1)(block (result (ref null $enums.Enum1))
    (call $$clinit__void_<once>_@enums.Enum1 )
    (global.get $V1@enums.Enum1)
   )))
-  ;;@ enums/Enum1.java:28:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:28:2
   (global.set $VALUE3@enums.Enum2 (call $$create__java_lang_String__int__arrayOf_java_lang_Object@enums.Enum2 (call $$getString_|VALUE3|__java_lang_String_<once>_@enums.Enum2 )(i32.const 2)(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 0 ))))
-  ;;@ enums/Enum1.java:29:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:29:2
   (global.set $VALUE4@enums.Enum2 (call $$create__java_lang_String__int__int@enums.Enum2.1 (call $$getString_|VALUE4|__java_lang_String_<once>_@enums.Enum2 )(i32.const 3)(i32.const 5)))
-  ;;@ enums/Enum1.java:49:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:49:2
   (global.set $C@enums.Enum2 (call $m_f_$private__java_lang_Object__enums_Enum2@enums.Enum2 (call $$create__@java.lang.Object )))
  )
 )
@@ -845,14 +845,14 @@
  (param $$ordinal i32)
  (param $function (ref null $java.lang.Object))
  (result (ref null $enums.Enum3))
- ;;@ enums/Enum1.java:61:2
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:61:2
  (local $$instance (ref null $enums.Enum3))
  (block
-  ;;@ enums/Enum1.java:61:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:61:2
   (local.set $$instance (struct.new $enums.Enum3 (ref.as_non_null (global.get $enums.Enum3.vtable)) (ref.as_non_null (global.get $enums.Enum3.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
-  ;;@ enums/Enum1.java:61:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:61:2
   (call $$ctor__java_lang_String__int__java_util_function_Function__void_$p_enums_Enum3@enums.Enum3 (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal)(local.get $function))
-  ;;@ enums/Enum1.java:61:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:61:2
   (return (local.get $$instance))
  )
 )
@@ -863,13 +863,13 @@
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
  (param $function (ref null $java.lang.Object))
- ;;@ enums/Enum1.java:61:2
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:61:2
  (block
-  ;;@ enums/Enum1.java:61:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:61:2
   (struct.set $java.lang.Enum $name@java.lang.Enum (local.get $this) (local.get $$name))
-  ;;@ enums/Enum1.java:61:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:61:2
   (struct.set $java.lang.Enum $ordinal@java.lang.Enum (local.get $this) (local.get $$ordinal))
-  ;;@ enums/Enum1.java:61:45
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:61:45
   (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
  )
 )
@@ -878,20 +878,20 @@
 (func $m_valueOf__java_lang_String__enums_Enum3@enums.Enum3
  (param $name (ref null $java.lang.String))
  (result (ref null $enums.Enum3))
- ;;@ enums/Enum1.java:58:5
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:58:5
  (block
-  ;;@ enums/Enum1.java:58:5
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:58:5
   (call $$clinit__void_<once>_@enums.Enum3 )
-  ;;@ enums/Enum1.java:58:5
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:58:5
   (if (ref.is_null (global.get $namesToValuesMap@enums.Enum3))
    (then
     (block
-     ;;@ enums/Enum1.java:58:5
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:58:5
      (global.set $namesToValuesMap@enums.Enum3 (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values_$private__arrayOf_enums_Enum3@enums.Enum3 )))
     )
    )
   )
-  ;;@ enums/Enum1.java:58:5
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:58:5
   (return (ref.cast (ref null $enums.Enum3) (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $namesToValuesMap@enums.Enum3))))
  )
 )
@@ -899,11 +899,11 @@
 ;;; Enum3[] Enum3.values()
 (func $m_values__arrayOf_enums_Enum3@enums.Enum3
  (result (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ enums/Enum1.java:58:5
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:58:5
  (block
-  ;;@ enums/Enum1.java:58:5
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:58:5
   (call $$clinit__void_<once>_@enums.Enum3 )
-  ;;@ enums/Enum1.java:58:5
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:58:5
   (return (call $m_values_$private__arrayOf_enums_Enum3@enums.Enum3 ))
  )
 )
@@ -911,29 +911,29 @@
 ;;; Enum3[] Enum3.values_$private()
 (func $m_values_$private__arrayOf_enums_Enum3@enums.Enum3
  (result (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ enums/Enum1.java:58:5
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:58:5
  (block
-  ;;@ enums/Enum1.java:58:5
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:58:5
   (return (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (global.get $VALUE1@enums.Enum3))))
  )
 )
 
 ;;; void Enum3.$clinit()
 (func $$clinit__void_<once>_@enums.Enum3
- ;;@ enums/Enum1.java:58:5
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:58:5
  (block
-  ;;@ enums/Enum1.java:58:5
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:58:5
   (if (global.get $$class-initialized@enums.Enum3)
    (then
-    ;;@ enums/Enum1.java:58:5
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:58:5
     (return )
    )
   )
-  ;;@ enums/Enum1.java:58:5
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:58:5
   (global.set $$class-initialized@enums.Enum3 (i32.const 1))
-  ;;@ enums/Enum1.java:58:5
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:58:5
   (call $$clinit__void_<once>_@java.lang.Enum )
-  ;;@ enums/Enum1.java:59:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:2
   (global.set $VALUE1@enums.Enum3 (call $$create__java_lang_String__int__java_util_function_Function@enums.Enum3 (call $$getString_|VALUE1|__java_lang_String_<once>_@enums.Enum2 )(i32.const 0)(call $$create__@enums.Enum3.$LambdaImplementor$1 )))
  )
 )
@@ -973,16 +973,16 @@
  (param $$ordinal i32)
  (param $$_0 i32)
  (result (ref null $enums.Enum2.1))
- ;;@ enums/Enum1.java:29:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:29:12
  (local $$instance (ref null $enums.Enum2.1))
  (block
-  ;;@ enums/Enum1.java:29:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:29:12
   (call $$clinit__void_<once>_@enums.Enum2.1 )
-  ;;@ enums/Enum1.java:29:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:29:12
   (local.set $$instance (struct.new $enums.Enum2.1 (ref.as_non_null (global.get $enums.Enum2.1.vtable)) (ref.as_non_null (global.get $enums.Enum2.1.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (i32.const 0)))
-  ;;@ enums/Enum1.java:29:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:29:12
   (call $$ctor__java_lang_String__int__int__void_$p_enums_Enum2_1@enums.Enum2.1 (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal)(local.get $$_0))
-  ;;@ enums/Enum1.java:29:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:29:12
   (return (local.get $$instance))
  )
 )
@@ -993,27 +993,27 @@
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
  (param $$_0 i32)
- ;;@ enums/Enum1.java:29:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:29:12
  (block
-  ;;@ enums/Enum1.java:29:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:29:12
   (call $$ctor__java_lang_String__int__int__void_$p_enums_Enum2@enums.Enum2 (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal)(local.get $$_0))
  )
 )
 
 ;;; void <anonymous> extends Enum2.$clinit()
 (func $$clinit__void_<once>_@enums.Enum2.1
- ;;@ enums/Enum1.java:29:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:29:12
  (block
-  ;;@ enums/Enum1.java:29:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:29:12
   (if (global.get $$class-initialized@enums.Enum2.1)
    (then
-    ;;@ enums/Enum1.java:29:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:29:12
     (return )
    )
   )
-  ;;@ enums/Enum1.java:29:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:29:12
   (global.set $$class-initialized@enums.Enum2.1 (i32.const 1))
-  ;;@ enums/Enum1.java:29:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:29:12
   (call $$clinit__void_<once>_@enums.Enum2 )
  )
 )

@@ -44,16 +44,16 @@
 ;;; Main Main.$create()
 (func $$create__@systemgetproperty.Main
  (result (ref null $systemgetproperty.Main))
- ;;@ systemgetproperty/Main.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/systemgetproperty/readable-j2wasm.js/systemgetproperty/Main.java:18:13
  (local $$instance (ref null $systemgetproperty.Main))
  (block
-  ;;@ systemgetproperty/Main.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/systemgetproperty/readable-j2wasm.js/systemgetproperty/Main.java:18:13
   (call $$clinit__void_<once>_@systemgetproperty.Main )
-  ;;@ systemgetproperty/Main.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/systemgetproperty/readable-j2wasm.js/systemgetproperty/Main.java:18:13
   (local.set $$instance (struct.new $systemgetproperty.Main (ref.as_non_null (global.get $systemgetproperty.Main.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ systemgetproperty/Main.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/systemgetproperty/readable-j2wasm.js/systemgetproperty/Main.java:18:13
   (call $$ctor__void_$p_systemgetproperty_Main@systemgetproperty.Main (ref.as_non_null (local.get $$instance)))
-  ;;@ systemgetproperty/Main.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/systemgetproperty/readable-j2wasm.js/systemgetproperty/Main.java:18:13
   (return (local.get $$instance))
  )
 )
@@ -61,9 +61,9 @@
 ;;; void Main.$ctor()
 (func $$ctor__void_$p_systemgetproperty_Main@systemgetproperty.Main
  (param $this (ref null $systemgetproperty.Main))
- ;;@ systemgetproperty/Main.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/systemgetproperty/readable-j2wasm.js/systemgetproperty/Main.java:18:13
  (block
-  ;;@ systemgetproperty/Main.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/systemgetproperty/readable-j2wasm.js/systemgetproperty/Main.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -71,7 +71,7 @@
 ;;; void Main.main(String[] args)
 (func $m_main__arrayOf_java_lang_String__void@systemgetproperty.Main
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ systemgetproperty/Main.java:24:21
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/systemgetproperty/readable-j2wasm.js/systemgetproperty/Main.java:24:21
  (local $x i32)
  (local $$propertyValue (ref null $java.lang.String))
  (local $$defaultValue (ref null $java.lang.String))
@@ -80,33 +80,33 @@
  (local $$propertyValue_2 (ref null $java.lang.String))
  (local $$defaultValue_2 (ref null $java.lang.String))
  (block
-  ;;@ systemgetproperty/Main.java:24:41
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/systemgetproperty/readable-j2wasm.js/systemgetproperty/Main.java:24:41
   (call $$clinit__void_<once>_@systemgetproperty.Main )
-  ;;@ systemgetproperty/Main.java:25:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/systemgetproperty/readable-j2wasm.js/systemgetproperty/Main.java:25:4
   
-  ;;@ systemgetproperty/Main.java:26:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/systemgetproperty/readable-j2wasm.js/systemgetproperty/Main.java:26:4
   (local.set $x (ref.eq (global.get $property@systemgetproperty.Main) (call $$getString_|SIMPLE|__java_lang_String_<once>_@systemgetproperty.Main )))
-  ;;@ systemgetproperty/Main.java:27:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/systemgetproperty/readable-j2wasm.js/systemgetproperty/Main.java:27:4
   (local.set $x (call $m_equals__java_lang_Object__boolean@java.lang.String (ref.as_non_null (global.get $property@systemgetproperty.Main))(call $$getString_|SIMPLE|__java_lang_String_<once>_@systemgetproperty.Main )))
-  ;;@ systemgetproperty/Main.java:28:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/systemgetproperty/readable-j2wasm.js/systemgetproperty/Main.java:28:4
   (local.set $x (call $m_equalsIgnoreCase__java_lang_String__boolean@java.lang.String (ref.as_non_null (global.get $property@systemgetproperty.Main))(call $$getString_|SIMPLE|__java_lang_String_<once>_@systemgetproperty.Main )))
-  ;;@ systemgetproperty/Main.java:29:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/systemgetproperty/readable-j2wasm.js/systemgetproperty/Main.java:29:4
   (local.set $x (ref.eq (global.get $property@systemgetproperty.Main) (call $$getString_|NOTSIMPLE|__java_lang_String_<once>_@systemgetproperty.Main )))
-  ;;@ systemgetproperty/Main.java:31:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/systemgetproperty/readable-j2wasm.js/systemgetproperty/Main.java:31:4
   (local.set $x (call $m_equals__java_lang_Object__boolean@java.lang.String (ref.as_non_null (global.get $propertyWithDefault@systemgetproperty.Main))(call $$getString_|SIMPLE|__java_lang_String_<once>_@systemgetproperty.Main )))
-  ;;@ systemgetproperty/Main.java:32:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/systemgetproperty/readable-j2wasm.js/systemgetproperty/Main.java:32:4
   (local.set $x (call $m_equals__java_lang_Object__boolean@java.lang.String (ref.as_non_null (block (result (ref null $java.lang.String))
    (local.set $$propertyValue (call $$jre.bar__java_lang_String_<once>_@javaemul.internal.SystemPropertyPool ))
    (local.set $$defaultValue (call $$getString_|bar|__java_lang_String_<once>_@systemgetproperty.Main ))
    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$propertyValue)) (then (local.get $$defaultValue)) (else (local.get $$propertyValue)))
   ))(call $$getString_|bar|__java_lang_String_<once>_@systemgetproperty.Main )))
-  ;;@ systemgetproperty/Main.java:33:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/systemgetproperty/readable-j2wasm.js/systemgetproperty/Main.java:33:4
   (local.set $x (call $m_equals__java_lang_Object__boolean@java.lang.String (ref.as_non_null (block (result (ref null $java.lang.String))
    (local.set $$propertyValue_1 (call $$jre.classMetadata__java_lang_String_<once>_@javaemul.internal.SystemPropertyPool ))
    (local.set $$defaultValue_1 (call $m_mightHaveSideEffects__java_lang_String@systemgetproperty.Main ))
    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$propertyValue_1)) (then (local.get $$defaultValue_1)) (else (local.get $$propertyValue_1)))
   ))(call $$getString_|SIMPLE|__java_lang_String_<once>_@systemgetproperty.Main )))
-  ;;@ systemgetproperty/Main.java:34:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/systemgetproperty/readable-j2wasm.js/systemgetproperty/Main.java:34:4
   (local.set $x (call $m_equals__java_lang_Object__boolean@java.lang.String (ref.as_non_null (block (result (ref null $java.lang.String))
    (local.set $$propertyValue_2 (call $$unset.property__java_lang_String_<once>_@javaemul.internal.SystemPropertyPool ))
    (local.set $$defaultValue_2 (call $m_mightHaveSideEffects__java_lang_String@systemgetproperty.Main ))
@@ -118,33 +118,33 @@
 ;;; String Main.mightHaveSideEffects()
 (func $m_mightHaveSideEffects__java_lang_String@systemgetproperty.Main
  (result (ref null $java.lang.String))
- ;;@ systemgetproperty/Main.java:37:24
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/systemgetproperty/readable-j2wasm.js/systemgetproperty/Main.java:37:24
  (block
-  ;;@ systemgetproperty/Main.java:38:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/systemgetproperty/readable-j2wasm.js/systemgetproperty/Main.java:38:4
   (return (call $$getString_|Foo|__java_lang_String_<once>_@systemgetproperty.Main ))
  )
 )
 
 ;;; void Main.$clinit()
 (func $$clinit__void_<once>_@systemgetproperty.Main
- ;;@ systemgetproperty/Main.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/systemgetproperty/readable-j2wasm.js/systemgetproperty/Main.java:18:13
  (local $$propertyValue (ref null $java.lang.String))
  (local $$defaultValue (ref null $java.lang.String))
  (block
-  ;;@ systemgetproperty/Main.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/systemgetproperty/readable-j2wasm.js/systemgetproperty/Main.java:18:13
   (if (global.get $$class-initialized@systemgetproperty.Main)
    (then
-    ;;@ systemgetproperty/Main.java:18:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/systemgetproperty/readable-j2wasm.js/systemgetproperty/Main.java:18:13
     (return )
    )
   )
-  ;;@ systemgetproperty/Main.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/systemgetproperty/readable-j2wasm.js/systemgetproperty/Main.java:18:13
   (global.set $$class-initialized@systemgetproperty.Main (i32.const 1))
-  ;;@ systemgetproperty/Main.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/systemgetproperty/readable-j2wasm.js/systemgetproperty/Main.java:18:13
   (call $$clinit__void_<once>_@java.lang.Object )
-  ;;@ systemgetproperty/Main.java:20:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/systemgetproperty/readable-j2wasm.js/systemgetproperty/Main.java:20:2
   (global.set $property@systemgetproperty.Main (call $$jre.classMetadata__java_lang_String_<once>_@javaemul.internal.SystemPropertyPool ))
-  ;;@ systemgetproperty/Main.java:21:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/systemgetproperty/readable-j2wasm.js/systemgetproperty/Main.java:21:2
   (global.set $propertyWithDefault@systemgetproperty.Main (block (result (ref null $java.lang.String))
    (local.set $$propertyValue (call $$jre.classMetadata__java_lang_String_<once>_@javaemul.internal.SystemPropertyPool ))
    (local.set $$defaultValue (call $$getString_|default|__java_lang_String_<once>_@systemgetproperty.Main ))

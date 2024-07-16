@@ -46,6 +46,9 @@ public interface BackendOptions {
 
   boolean getEmitReadableSourceMap();
 
+  @Nullable
+  String getSourceMappingPathPrefix();
+
   boolean getGenerateKytheIndexingMetadata();
 
   boolean isNullMarkedSupported();

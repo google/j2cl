@@ -46,16 +46,16 @@
 ;;; SimpleLongs SimpleLongs.$create()
 (func $$create__@simplelongs.SimpleLongs
  (result (ref null $simplelongs.SimpleLongs))
- ;;@ simplelongs/SimpleLongs.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:18:13
  (local $$instance (ref null $simplelongs.SimpleLongs))
  (block
-  ;;@ simplelongs/SimpleLongs.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:18:13
   (call $$clinit__void_<once>_@simplelongs.SimpleLongs )
-  ;;@ simplelongs/SimpleLongs.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:18:13
   (local.set $$instance (struct.new $simplelongs.SimpleLongs (ref.as_non_null (global.get $simplelongs.SimpleLongs.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i64.const 0) (i32.const 0)))
-  ;;@ simplelongs/SimpleLongs.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:18:13
   (call $$ctor__void_$p_simplelongs_SimpleLongs@simplelongs.SimpleLongs (ref.as_non_null (local.get $$instance)))
-  ;;@ simplelongs/SimpleLongs.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:18:13
   (return (local.get $$instance))
  )
 )
@@ -63,11 +63,11 @@
 ;;; void SimpleLongs.$ctor()
 (func $$ctor__void_$p_simplelongs_SimpleLongs@simplelongs.SimpleLongs
  (param $this (ref null $simplelongs.SimpleLongs))
- ;;@ simplelongs/SimpleLongs.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:18:13
  (block
-  ;;@ simplelongs/SimpleLongs.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;;@ simplelongs/SimpleLongs.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:18:13
   (call $$init__void_$p_simplelongs_SimpleLongs@simplelongs.SimpleLongs (ref.as_non_null (local.get $this)))
  )
 )
@@ -77,11 +77,11 @@
  (type $function.m_getBar__long)
  (param $this.untyped (ref $java.lang.Object))
  (result i64)
- ;;@ simplelongs/SimpleLongs.java:21:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:21:14
  (local $this (ref null $simplelongs.SimpleLongs))
  (local.set $this (ref.cast (ref $simplelongs.SimpleLongs) (local.get $this.untyped)))
  (block
-  ;;@ simplelongs/SimpleLongs.java:22:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:22:4
   (return (i64.const 0))
  )
 )
@@ -92,13 +92,13 @@
  (type $function.m_getWithSideEffect__simplelongs_SimpleLongs)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $simplelongs.SimpleLongs))
- ;;@ simplelongs/SimpleLongs.java:28:21
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:28:21
  (local $this (ref null $simplelongs.SimpleLongs))
  (local.set $this (ref.cast (ref $simplelongs.SimpleLongs) (local.get $this.untyped)))
  (block
-  ;;@ simplelongs/SimpleLongs.java:29:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:29:4
   (struct.set $simplelongs.SimpleLongs $sideEffect@simplelongs.SimpleLongs (local.get $this) (i32.add (struct.get $simplelongs.SimpleLongs $sideEffect@simplelongs.SimpleLongs (local.get $this)) (i32.const 1)))
-  ;;@ simplelongs/SimpleLongs.java:30:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:30:4
   (return (local.get $this))
  )
 )
@@ -108,7 +108,7 @@
 (func $m_main__void@simplelongs.SimpleLongs
  (type $function.m_main__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ simplelongs/SimpleLongs.java:34:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:34:14
  (local $a i64)
  (local $b i64)
  (local $c i64)
@@ -127,37 +127,37 @@
  (local $this (ref null $simplelongs.SimpleLongs))
  (local.set $this (ref.cast (ref $simplelongs.SimpleLongs) (local.get $this.untyped)))
  (block
-  ;;@ simplelongs/SimpleLongs.java:36:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:36:4
   (local.set $a (i64.const 0))
-  ;;@ simplelongs/SimpleLongs.java:37:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:37:4
   (local.set $a (i64.sub (i64.const 0) (i64.const 100000)))
-  ;;@ simplelongs/SimpleLongs.java:38:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:38:4
   (local.set $a (i64.const 100000))
-  ;;@ simplelongs/SimpleLongs.java:41:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:41:4
   (local.set $b (i64.sub (i64.const 0) (i64.const 2147483648)))
-  ;;@ simplelongs/SimpleLongs.java:42:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:42:4
   (local.set $b (i64.const 2147483648))
-  ;;@ simplelongs/SimpleLongs.java:43:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:43:4
   (local.set $b (i64.const -9223372036854775808))
-  ;;@ simplelongs/SimpleLongs.java:44:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:44:4
   (local.set $b (i64.const 9223372036854775807))
-  ;;@ simplelongs/SimpleLongs.java:47:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:47:4
   (local.set $c (i64.add (local.get $a) (local.get $b)))
-  ;;@ simplelongs/SimpleLongs.java:48:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:48:4
   (local.set $c (call $m_safeDivision__long__long__long@javaemul.internal.Primitives (local.get $a)(local.get $b)))
-  ;;@ simplelongs/SimpleLongs.java:51:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:51:4
   (local.set $e (block (result i64)
    (local.set $a (i64.add (local.get $a) (i64.const 1)))
    (local.get $a)
   ))
-  ;;@ simplelongs/SimpleLongs.java:52:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:52:4
   (local.set $e (block (result i64)
    (local.set $$qualifier (local.get $this))
    (local.set $$value (i64.add (struct.get $simplelongs.SimpleLongs $foo@simplelongs.SimpleLongs (local.get $this)) (i64.const 1)))
    (struct.set $simplelongs.SimpleLongs $foo@simplelongs.SimpleLongs (local.get $$qualifier) (local.get $$value))
    (local.get $$value)
   ))
-  ;;@ simplelongs/SimpleLongs.java:53:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:53:4
   (local.set $e (block (result i64)
    (local.set $$qualifier_1 (call_ref $function.m_getWithSideEffect__simplelongs_SimpleLongs (ref.as_non_null (local.get $this))(struct.get $simplelongs.SimpleLongs.vtable $m_getWithSideEffect__simplelongs_SimpleLongs (struct.get $simplelongs.SimpleLongs $vtable(local.get $this)))))
    (local.set $$qualifier_2 (local.get $$qualifier_1))
@@ -165,28 +165,28 @@
    (struct.set $simplelongs.SimpleLongs $foo@simplelongs.SimpleLongs (local.get $$qualifier_2) (local.get $$value_1))
    (local.get $$value_1)
   ))
-  ;;@ simplelongs/SimpleLongs.java:56:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:56:4
   (local.set $f (block (result i64)
    (local.set $$value_2 (local.get $a))
    (local.set $a (i64.add (local.get $a) (i64.const 1)))
    (local.get $$value_2)
   ))
-  ;;@ simplelongs/SimpleLongs.java:57:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:57:4
   (local.set $f (block (result i64)
    (local.set $$value_3 (struct.get $simplelongs.SimpleLongs $foo@simplelongs.SimpleLongs (local.get $this)))
    (struct.set $simplelongs.SimpleLongs $foo@simplelongs.SimpleLongs (local.get $this) (i64.add (struct.get $simplelongs.SimpleLongs $foo@simplelongs.SimpleLongs (local.get $this)) (i64.const 1)))
    (local.get $$value_3)
   ))
-  ;;@ simplelongs/SimpleLongs.java:58:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:58:4
   (local.set $f (block (result i64)
    (local.set $$qualifier_3 (call_ref $function.m_getWithSideEffect__simplelongs_SimpleLongs (ref.as_non_null (local.get $this))(struct.get $simplelongs.SimpleLongs.vtable $m_getWithSideEffect__simplelongs_SimpleLongs (struct.get $simplelongs.SimpleLongs $vtable(local.get $this)))))
    (local.set $$value_4 (struct.get $simplelongs.SimpleLongs $foo@simplelongs.SimpleLongs (local.get $$qualifier_3)))
    (struct.set $simplelongs.SimpleLongs $foo@simplelongs.SimpleLongs (local.get $$qualifier_3) (i64.add (struct.get $simplelongs.SimpleLongs $foo@simplelongs.SimpleLongs (local.get $$qualifier_3)) (i64.const 1)))
    (local.get $$value_4)
   ))
-  ;;@ simplelongs/SimpleLongs.java:61:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:61:4
   (local.set $g (struct.get $simplelongs.SimpleLongs $foo@simplelongs.SimpleLongs (local.get $this)))
-  ;;@ simplelongs/SimpleLongs.java:62:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:62:4
   (local.set $g (call_ref $function.m_getBar__long (ref.as_non_null (local.get $this))(struct.get $simplelongs.SimpleLongs.vtable $m_getBar__long (struct.get $simplelongs.SimpleLongs $vtable(local.get $this)))))
  )
 )
@@ -195,27 +195,27 @@
 ;;; void SimpleLongs.$init()
 (func $$init__void_$p_simplelongs_SimpleLongs@simplelongs.SimpleLongs
  (param $this (ref null $simplelongs.SimpleLongs))
- ;;@ simplelongs/SimpleLongs.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:18:13
  (block
-  ;;@ simplelongs/SimpleLongs.java:19:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:19:2
   (struct.set $simplelongs.SimpleLongs $foo@simplelongs.SimpleLongs (local.get $this) (i64.const 0))
  )
 )
 
 ;;; void SimpleLongs.$clinit()
 (func $$clinit__void_<once>_@simplelongs.SimpleLongs
- ;;@ simplelongs/SimpleLongs.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:18:13
  (block
-  ;;@ simplelongs/SimpleLongs.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:18:13
   (if (global.get $$class-initialized@simplelongs.SimpleLongs)
    (then
-    ;;@ simplelongs/SimpleLongs.java:18:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:18:13
     (return )
    )
   )
-  ;;@ simplelongs/SimpleLongs.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:18:13
   (global.set $$class-initialized@simplelongs.SimpleLongs (i32.const 1))
-  ;;@ simplelongs/SimpleLongs.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelongs/readable-j2wasm.js/simplelongs/SimpleLongs.java:18:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

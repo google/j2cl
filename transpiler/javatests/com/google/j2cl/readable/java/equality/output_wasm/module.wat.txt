@@ -40,16 +40,16 @@
 ;;; Equality Equality.$create()
 (func $$create__@equality.Equality
  (result (ref null $equality.Equality))
- ;;@ equality/Equality.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/equality/readable-j2wasm.js/equality/Equality.java:18:13
  (local $$instance (ref null $equality.Equality))
  (block
-  ;;@ equality/Equality.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/equality/readable-j2wasm.js/equality/Equality.java:18:13
   (call $$clinit__void_<once>_@equality.Equality )
-  ;;@ equality/Equality.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/equality/readable-j2wasm.js/equality/Equality.java:18:13
   (local.set $$instance (struct.new $equality.Equality (ref.as_non_null (global.get $equality.Equality.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ equality/Equality.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/equality/readable-j2wasm.js/equality/Equality.java:18:13
   (call $$ctor__void_$p_equality_Equality@equality.Equality (ref.as_non_null (local.get $$instance)))
-  ;;@ equality/Equality.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/equality/readable-j2wasm.js/equality/Equality.java:18:13
   (return (local.get $$instance))
  )
 )
@@ -57,9 +57,9 @@
 ;;; void Equality.$ctor()
 (func $$ctor__void_$p_equality_Equality@equality.Equality
  (param $this (ref null $equality.Equality))
- ;;@ equality/Equality.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/equality/readable-j2wasm.js/equality/Equality.java:18:13
  (block
-  ;;@ equality/Equality.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/equality/readable-j2wasm.js/equality/Equality.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -68,7 +68,7 @@
 (func $m_test__void@equality.Equality
  (type $function.m_test__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ equality/Equality.java:19:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/equality/readable-j2wasm.js/equality/Equality.java:19:14
  (local $a i32)
  (local $b i32)
  (local $c i32)
@@ -81,29 +81,29 @@
  (local.set $this (ref.cast (ref $equality.Equality) (local.get $this.untyped)))
  (block
   (block
-   ;;@ equality/Equality.java:22:6
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/equality/readable-j2wasm.js/equality/Equality.java:22:6
    (local.set $a (i32.eq (i32.const 0) (i32.const 0)))
-   ;;@ equality/Equality.java:23:6
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/equality/readable-j2wasm.js/equality/Equality.java:23:6
    (local.set $b (i32.ne (i32.const 0) (i32.const 1)))
   )
   (block
-   ;;@ equality/Equality.java:28:6
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/equality/readable-j2wasm.js/equality/Equality.java:28:6
    (local.set $c (i32.eqz (ref.eq (call $$create__@java.lang.Object ) (call $$create__@java.lang.Object ))))
   )
   (block
-   ;;@ equality/Equality.java:33:6
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/equality/readable-j2wasm.js/equality/Equality.java:33:6
    (local.set $d (ref.eq (call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 0.0)) (call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 0.0))))
   )
   (block
-   ;;@ equality/Equality.java:38:6
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/equality/readable-j2wasm.js/equality/Equality.java:38:6
    (local.set $e (ref.eq (call $m_valueOf__float__java_lang_Float@java.lang.Float (f32.const 0.0)) (call $m_valueOf__float__java_lang_Float@java.lang.Float (f32.const 0.0))))
   )
   (block
-   ;;@ equality/Equality.java:43:6
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/equality/readable-j2wasm.js/equality/Equality.java:43:6
    (local.set $f (i32.eqz (ref.is_null (call $$create__@java.lang.Object ))))
-   ;;@ equality/Equality.java:44:6
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/equality/readable-j2wasm.js/equality/Equality.java:44:6
    (local.set $g (i32.eqz (ref.is_null (call $$create__@java.lang.Object ))))
-   ;;@ equality/Equality.java:45:6
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/equality/readable-j2wasm.js/equality/Equality.java:45:6
    (local.set $h (i32.eqz (ref.is_null (call $m_newWithLength__int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (i32.const 0)))))
   )
  )
@@ -112,18 +112,18 @@
 
 ;;; void Equality.$clinit()
 (func $$clinit__void_<once>_@equality.Equality
- ;;@ equality/Equality.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/equality/readable-j2wasm.js/equality/Equality.java:18:13
  (block
-  ;;@ equality/Equality.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/equality/readable-j2wasm.js/equality/Equality.java:18:13
   (if (global.get $$class-initialized@equality.Equality)
    (then
-    ;;@ equality/Equality.java:18:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/equality/readable-j2wasm.js/equality/Equality.java:18:13
     (return )
    )
   )
-  ;;@ equality/Equality.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/equality/readable-j2wasm.js/equality/Equality.java:18:13
   (global.set $$class-initialized@equality.Equality (i32.const 1))
-  ;;@ equality/Equality.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/equality/readable-j2wasm.js/equality/Equality.java:18:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

@@ -47,16 +47,16 @@
 ;;; CompileTimeConstant<T> CompileTimeConstant.$create()
 (func $$create__@compiletimeconstant.CompileTimeConstant
  (result (ref null $compiletimeconstant.CompileTimeConstant))
- ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:18:13
  (local $$instance (ref null $compiletimeconstant.CompileTimeConstant))
  (block
-  ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:18:13
   (call $$clinit__void_<once>_@compiletimeconstant.CompileTimeConstant )
-  ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:18:13
   (local.set $$instance (struct.new $compiletimeconstant.CompileTimeConstant (ref.as_non_null (global.get $compiletimeconstant.CompileTimeConstant.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:18:13
   (call $$ctor__void_$p_compiletimeconstant_CompileTimeConstant@compiletimeconstant.CompileTimeConstant (ref.as_non_null (local.get $$instance)))
-  ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:18:13
   (return (local.get $$instance))
  )
 )
@@ -64,11 +64,11 @@
 ;;; void CompileTimeConstant.$ctor()
 (func $$ctor__void_$p_compiletimeconstant_CompileTimeConstant@compiletimeconstant.CompileTimeConstant
  (param $this (ref null $compiletimeconstant.CompileTimeConstant))
- ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:18:13
  (block
-  ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:18:13
   (call $$init__void_$p_compiletimeconstant_CompileTimeConstant@compiletimeconstant.CompileTimeConstant (ref.as_non_null (local.get $this)))
  )
 )
@@ -76,7 +76,7 @@
 ;;; void CompileTimeConstant.$init()
 (func $$init__void_$p_compiletimeconstant_CompileTimeConstant@compiletimeconstant.CompileTimeConstant
  (param $this (ref null $compiletimeconstant.CompileTimeConstant))
- ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:18:13
  (local $b i32)
  (local $s (ref null $java.lang.String))
  (local $l (ref null $java.lang.String))
@@ -93,59 +93,59 @@
  (local $intTimesOverflow i32)
  (local $intShlOverflow i32)
  (block
-  ;;@ compiletimeconstant/CompileTimeConstant.java:63:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:63:4
   (local.set $b (i32.const 1))
-  ;;@ compiletimeconstant/CompileTimeConstant.java:64:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:64:4
   (local.set $s (call $$getString_|10000Tur_tle...|__java_lang_String_<once>_@compiletimeconstant.CompileTimeConstant ))
-  ;;@ compiletimeconstant/CompileTimeConstant.java:65:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:65:4
   (local.set $l (call $$getString_|ThisIsALongS...|__java_lang_String_<once>_@compiletimeconstant.CompileTimeConstant ))
-  ;;@ compiletimeconstant/CompileTimeConstant.java:66:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:66:4
   (local.set $m (call $$getString_|ThisIsALongS...|_1__java_lang_String_<once>_@compiletimeconstant.CompileTimeConstant ))
-  ;;@ compiletimeconstant/CompileTimeConstant.java:67:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:67:4
   (local.set $n (call $$getString_|ThisIsALongS...|_2__java_lang_String_<once>_@compiletimeconstant.CompileTimeConstant ))
-  ;;@ compiletimeconstant/CompileTimeConstant.java:68:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:68:4
   (local.set $c (global.get $classLiteral@compiletimeconstant.CompileTimeConstant))
-  ;;@ compiletimeconstant/CompileTimeConstant.java:70:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:70:4
   (local.set $minByte (i32.sub (i32.const 0) (i32.const 128)))
-  ;;@ compiletimeconstant/CompileTimeConstant.java:71:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:71:4
   (local.set $minShort (i32.sub (i32.const 0) (i32.const 32768)))
-  ;;@ compiletimeconstant/CompileTimeConstant.java:72:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:72:4
   (local.set $minInt (i32.const -2147483648))
-  ;;@ compiletimeconstant/CompileTimeConstant.java:73:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:73:4
   (local.set $minLong (i64.const -9223372036854775808))
-  ;;@ compiletimeconstant/CompileTimeConstant.java:75:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:75:4
   (local.set $intUnaryMinusOverflow (i32.sub (i32.const 0) (i32.const -2147483648)))
-  ;;@ compiletimeconstant/CompileTimeConstant.java:76:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:76:4
   (local.set $intPlusOverflow (i32.add (i32.const 2147483647) (i32.const 1)))
-  ;;@ compiletimeconstant/CompileTimeConstant.java:77:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:77:4
   (local.set $intMinusOverflow (i32.sub (i32.const -2147483648) (i32.const 1)))
-  ;;@ compiletimeconstant/CompileTimeConstant.java:78:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:78:4
   (local.set $intTimesOverflow (i32.mul (i32.const 2147483647) (i32.const 2)))
-  ;;@ compiletimeconstant/CompileTimeConstant.java:79:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:79:4
   (local.set $intShlOverflow (i32.shl (i32.const 2147483647) (i32.const 2)))
  )
 )
 
 ;;; void CompileTimeConstant.$clinit()
 (func $$clinit__void_<once>_@compiletimeconstant.CompileTimeConstant
- ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:18:13
  (block
-  ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:18:13
   (if (global.get $$class-initialized@compiletimeconstant.CompileTimeConstant)
    (then
-    ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:18:13
     (return )
    )
   )
-  ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:18:13
   (global.set $$class-initialized@compiletimeconstant.CompileTimeConstant (i32.const 1))
-  ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:18:13
   (call $$clinit__void_<once>_@java.lang.Object )
-  ;;@ compiletimeconstant/CompileTimeConstant.java:19:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:19:2
   (global.set $OBJ@compiletimeconstant.CompileTimeConstant (ref.null $java.lang.Object))
-  ;;@ compiletimeconstant/CompileTimeConstant.java:30:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:30:2
   (global.set $K@compiletimeconstant.CompileTimeConstant (ref.null $java.lang.String))
-  ;;@ compiletimeconstant/CompileTimeConstant.java:48:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:48:2
   (global.set $classLiteral@compiletimeconstant.CompileTimeConstant (call $$getClassMetadata__java_lang_Class_<once>_@compiletimeconstant.CompileTimeConstant ))
  )
 )

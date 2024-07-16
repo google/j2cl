@@ -295,6 +295,11 @@ def _j2cl_transpile(
     args.add("-libraryinfooutput", library_info_output)
     args.add("-experimentalJavaFrontend", ctx.attr._java_frontend[BuildSettingInfo].value)
     args.add("-experimentalBackend", backend)
+
+    if backend == "WASM_MODULAR":
+        # Add a prefix to where the Java source files will be located relative to the source map.
+        args.add(output_dir.short_path, format = "-sourceMappingPathPrefix=%s/")
+
     for flag, value in internal_transpiler_flags.items():
         if value:
             args.add("-" + flag.replace("_", ""))

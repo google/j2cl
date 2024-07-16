@@ -149,16 +149,16 @@
 
 ;;; void SomeInterface.$clinit()
 (func $$clinit__void_<once>_@overridingmethods.SomeInterface
- ;;@ overridingmethods/Child.java:18:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:18:10
  (block
-  ;;@ overridingmethods/Child.java:18:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:18:10
   (if (global.get $$class-initialized@overridingmethods.SomeInterface)
    (then
-    ;;@ overridingmethods/Child.java:18:10
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:18:10
     (return )
    )
   )
-  ;;@ overridingmethods/Child.java:18:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:18:10
   (global.set $$class-initialized@overridingmethods.SomeInterface (i32.const 1))
  )
 )
@@ -182,16 +182,16 @@
 ;;; Parent Parent.$create()
 (func $$create__@overridingmethods.Parent
  (result (ref null $overridingmethods.Parent))
- ;;@ overridingmethods/Child.java:22:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:22:6
  (local $$instance (ref null $overridingmethods.Parent))
  (block
-  ;;@ overridingmethods/Child.java:22:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:22:6
   (call $$clinit__void_<once>_@overridingmethods.Parent )
-  ;;@ overridingmethods/Child.java:22:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:22:6
   (local.set $$instance (struct.new $overridingmethods.Parent (ref.as_non_null (global.get $overridingmethods.Parent.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ overridingmethods/Child.java:22:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:22:6
   (call $$ctor__void_$p_overridingmethods_Parent@overridingmethods.Parent (ref.as_non_null (local.get $$instance)))
-  ;;@ overridingmethods/Child.java:22:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:22:6
   (return (local.get $$instance))
  )
 )
@@ -199,9 +199,9 @@
 ;;; void Parent.$ctor()
 (func $$ctor__void_$p_overridingmethods_Parent@overridingmethods.Parent
  (param $this (ref null $overridingmethods.Parent))
- ;;@ overridingmethods/Child.java:22:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:22:6
  (block
-  ;;@ overridingmethods/Child.java:22:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:22:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -210,7 +210,7 @@
 (func $m_nonFinal__void@overridingmethods.Parent
  (type $function.m_nonFinal__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ overridingmethods/Child.java:23:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:23:14
  (local $this (ref null $overridingmethods.Parent))
  (local.set $this (ref.cast (ref $overridingmethods.Parent) (local.get $this.untyped)))
  (block
@@ -222,7 +222,7 @@
 (func $m_finalInChild__void@overridingmethods.Parent
  (type $function.m_finalInChild__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ overridingmethods/Child.java:25:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:25:14
  (local $this (ref null $overridingmethods.Parent))
  (local.set $this (ref.cast (ref $overridingmethods.Parent) (local.get $this.untyped)))
  (block
@@ -234,7 +234,7 @@
 (func $m_finalInParent__void@overridingmethods.Parent
  (type $function.m_finalInParent__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ overridingmethods/Child.java:27:20
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:27:20
  (local $this (ref null $overridingmethods.Parent))
  (local.set $this (ref.cast (ref $overridingmethods.Parent) (local.get $this.untyped)))
  (block
@@ -244,18 +244,18 @@
 
 ;;; void Parent.$clinit()
 (func $$clinit__void_<once>_@overridingmethods.Parent
- ;;@ overridingmethods/Child.java:22:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:22:6
  (block
-  ;;@ overridingmethods/Child.java:22:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:22:6
   (if (global.get $$class-initialized@overridingmethods.Parent)
    (then
-    ;;@ overridingmethods/Child.java:22:6
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:22:6
     (return )
    )
   )
-  ;;@ overridingmethods/Child.java:22:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:22:6
   (global.set $$class-initialized@overridingmethods.Parent (i32.const 1))
-  ;;@ overridingmethods/Child.java:22:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:22:6
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -292,16 +292,16 @@
 ;;; Child Child.$create()
 (func $$create__@overridingmethods.Child
  (result (ref null $overridingmethods.Child))
- ;;@ overridingmethods/Child.java:30:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:30:6
  (local $$instance (ref null $overridingmethods.Child))
  (block
-  ;;@ overridingmethods/Child.java:30:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:30:6
   (call $$clinit__void_<once>_@overridingmethods.Child )
-  ;;@ overridingmethods/Child.java:30:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:30:6
   (local.set $$instance (struct.new $overridingmethods.Child (ref.as_non_null (global.get $overridingmethods.Child.vtable)) (ref.as_non_null (global.get $overridingmethods.Child.itable)) (i32.const 0)))
-  ;;@ overridingmethods/Child.java:30:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:30:6
   (call $$ctor__void_$p_overridingmethods_Child@overridingmethods.Child (ref.as_non_null (local.get $$instance)))
-  ;;@ overridingmethods/Child.java:30:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:30:6
   (return (local.get $$instance))
  )
 )
@@ -309,9 +309,9 @@
 ;;; void Child.$ctor()
 (func $$ctor__void_$p_overridingmethods_Child@overridingmethods.Child
  (param $this (ref null $overridingmethods.Child))
- ;;@ overridingmethods/Child.java:30:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:30:6
  (block
-  ;;@ overridingmethods/Child.java:30:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:30:6
   (call $$ctor__void_$p_overridingmethods_Parent@overridingmethods.Parent (ref.as_non_null (local.get $this)))
  )
 )
@@ -320,7 +320,7 @@
 (func $m_nonFinal__void@overridingmethods.Child
  (type $function.m_nonFinal__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ overridingmethods/Child.java:32:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:32:14
  (local $this (ref null $overridingmethods.Child))
  (local.set $this (ref.cast (ref $overridingmethods.Child) (local.get $this.untyped)))
  (block
@@ -332,7 +332,7 @@
 (func $m_finalInChild__void@overridingmethods.Child
  (type $function.m_finalInChild__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ overridingmethods/Child.java:35:20
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:35:20
  (local $this (ref null $overridingmethods.Child))
  (local.set $this (ref.cast (ref $overridingmethods.Child) (local.get $this.untyped)))
  (block
@@ -344,7 +344,7 @@
 (func $m_interfaceMethod__void@overridingmethods.Child
  (type $function.m_interfaceMethod__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ overridingmethods/Child.java:38:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:38:14
  (local $this (ref null $overridingmethods.Child))
  (local.set $this (ref.cast (ref $overridingmethods.Child) (local.get $this.untyped)))
  (block
@@ -354,18 +354,18 @@
 
 ;;; void Child.$clinit()
 (func $$clinit__void_<once>_@overridingmethods.Child
- ;;@ overridingmethods/Child.java:30:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:30:6
  (block
-  ;;@ overridingmethods/Child.java:30:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:30:6
   (if (global.get $$class-initialized@overridingmethods.Child)
    (then
-    ;;@ overridingmethods/Child.java:30:6
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:30:6
     (return )
    )
   )
-  ;;@ overridingmethods/Child.java:30:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:30:6
   (global.set $$class-initialized@overridingmethods.Child (i32.const 1))
-  ;;@ overridingmethods/Child.java:30:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:30:6
   (call $$clinit__void_<once>_@overridingmethods.Parent )
  )
 )
@@ -402,16 +402,16 @@
 ;;; FinalChild FinalChild.$create()
 (func $$create__@overridingmethods.FinalChild
  (result (ref null $overridingmethods.FinalChild))
- ;;@ overridingmethods/Child.java:41:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:41:12
  (local $$instance (ref null $overridingmethods.FinalChild))
  (block
-  ;;@ overridingmethods/Child.java:41:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:41:12
   (call $$clinit__void_<once>_@overridingmethods.FinalChild )
-  ;;@ overridingmethods/Child.java:41:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:41:12
   (local.set $$instance (struct.new $overridingmethods.FinalChild (ref.as_non_null (global.get $overridingmethods.FinalChild.vtable)) (ref.as_non_null (global.get $overridingmethods.FinalChild.itable)) (i32.const 0)))
-  ;;@ overridingmethods/Child.java:41:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:41:12
   (call $$ctor__void_$p_overridingmethods_FinalChild@overridingmethods.FinalChild (ref.as_non_null (local.get $$instance)))
-  ;;@ overridingmethods/Child.java:41:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:41:12
   (return (local.get $$instance))
  )
 )
@@ -419,9 +419,9 @@
 ;;; void FinalChild.$ctor()
 (func $$ctor__void_$p_overridingmethods_FinalChild@overridingmethods.FinalChild
  (param $this (ref null $overridingmethods.FinalChild))
- ;;@ overridingmethods/Child.java:41:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:41:12
  (block
-  ;;@ overridingmethods/Child.java:41:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:41:12
   (call $$ctor__void_$p_overridingmethods_Parent@overridingmethods.Parent (ref.as_non_null (local.get $this)))
  )
 )
@@ -430,7 +430,7 @@
 (func $m_nonFinal__void@overridingmethods.FinalChild
  (type $function.m_nonFinal__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ overridingmethods/Child.java:43:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:43:14
  (local $this (ref null $overridingmethods.FinalChild))
  (local.set $this (ref.cast (ref $overridingmethods.FinalChild) (local.get $this.untyped)))
  (block
@@ -442,7 +442,7 @@
 (func $m_finalInChild__void@overridingmethods.FinalChild
  (type $function.m_finalInChild__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ overridingmethods/Child.java:46:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:46:14
  (local $this (ref null $overridingmethods.FinalChild))
  (local.set $this (ref.cast (ref $overridingmethods.FinalChild) (local.get $this.untyped)))
  (block
@@ -454,7 +454,7 @@
 (func $m_interfaceMethod__void@overridingmethods.FinalChild
  (type $function.m_interfaceMethod__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ overridingmethods/Child.java:49:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:49:14
  (local $this (ref null $overridingmethods.FinalChild))
  (local.set $this (ref.cast (ref $overridingmethods.FinalChild) (local.get $this.untyped)))
  (block
@@ -464,18 +464,18 @@
 
 ;;; void FinalChild.$clinit()
 (func $$clinit__void_<once>_@overridingmethods.FinalChild
- ;;@ overridingmethods/Child.java:41:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:41:12
  (block
-  ;;@ overridingmethods/Child.java:41:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:41:12
   (if (global.get $$class-initialized@overridingmethods.FinalChild)
    (then
-    ;;@ overridingmethods/Child.java:41:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:41:12
     (return )
    )
   )
-  ;;@ overridingmethods/Child.java:41:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:41:12
   (global.set $$class-initialized@overridingmethods.FinalChild (i32.const 1))
-  ;;@ overridingmethods/Child.java:41:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/overridingmethods/readable-j2wasm.js/overridingmethods/Child.java:41:12
   (call $$clinit__void_<once>_@overridingmethods.Parent )
  )
 )

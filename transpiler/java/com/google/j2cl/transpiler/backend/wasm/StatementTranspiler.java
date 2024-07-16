@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.base.Predicates.not;
 import static java.util.Arrays.stream;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
 import com.google.common.math.Stats;
 import com.google.j2cl.common.SourcePosition;
@@ -59,7 +60,8 @@ final class StatementTranspiler {
   public static void render(
       Statement statement,
       final SourceBuilder builder,
-      final WasmGenerationEnvironment environment) {
+      final WasmGenerationEnvironment environment,
+      String sourceMappingPathPrefix) {
 
     class SourceTransformer extends AbstractVisitor {
       @Override
@@ -573,23 +575,24 @@ final class StatementTranspiler {
       }
 
       void render(Statement stmt) {
-        StatementTranspiler.render(stmt, builder, environment);
+        StatementTranspiler.render(stmt, builder, environment, sourceMappingPathPrefix);
       }
     }
 
     if (!(statement instanceof Block)) {
-      renderSourceMappingComment(statement.getSourcePosition(), builder);
+      renderSourceMappingComment(sourceMappingPathPrefix, statement.getSourcePosition(), builder);
     }
     statement.accept(new SourceTransformer());
   }
 
   public static void renderSourceMappingComment(
-      SourcePosition sourcePosition, SourceBuilder builder) {
+      String sourceMappingPathPrefix, SourcePosition sourcePosition, SourceBuilder builder) {
     if (sourcePosition != SourcePosition.NONE) {
       builder.newLine();
       builder.append(
           String.format(
-              ";;@ %s:%d:%d",
+              ";;@ %s%s:%d:%d",
+              Strings.nullToEmpty(sourceMappingPathPrefix),
               sourcePosition.getPackageRelativePath(),
               // Lines and column are zero based, but DevTools expects lines to be 1-based and
               // columns to be zero based.

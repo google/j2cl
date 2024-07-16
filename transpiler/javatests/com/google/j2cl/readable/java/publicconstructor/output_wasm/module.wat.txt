@@ -38,16 +38,16 @@
 ;;; PublicConstructor PublicConstructor.$create()
 (func $$create__@publicconstructor.PublicConstructor
  (result (ref null $publicconstructor.PublicConstructor))
- ;;@ publicconstructor/PublicConstructor.java:19:9
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/publicconstructor/readable-j2wasm.js/publicconstructor/PublicConstructor.java:19:9
  (local $$instance (ref null $publicconstructor.PublicConstructor))
  (block
-  ;;@ publicconstructor/PublicConstructor.java:19:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/publicconstructor/readable-j2wasm.js/publicconstructor/PublicConstructor.java:19:9
   (call $$clinit__void_<once>_@publicconstructor.PublicConstructor )
-  ;;@ publicconstructor/PublicConstructor.java:19:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/publicconstructor/readable-j2wasm.js/publicconstructor/PublicConstructor.java:19:9
   (local.set $$instance (struct.new $publicconstructor.PublicConstructor (ref.as_non_null (global.get $publicconstructor.PublicConstructor.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ publicconstructor/PublicConstructor.java:19:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/publicconstructor/readable-j2wasm.js/publicconstructor/PublicConstructor.java:19:9
   (call $$ctor__void_$p_publicconstructor_PublicConstructor@publicconstructor.PublicConstructor (ref.as_non_null (local.get $$instance)))
-  ;;@ publicconstructor/PublicConstructor.java:19:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/publicconstructor/readable-j2wasm.js/publicconstructor/PublicConstructor.java:19:9
   (return (local.get $$instance))
  )
 )
@@ -55,27 +55,27 @@
 ;;; void PublicConstructor.$ctor()
 (func $$ctor__void_$p_publicconstructor_PublicConstructor@publicconstructor.PublicConstructor
  (param $this (ref null $publicconstructor.PublicConstructor))
- ;;@ publicconstructor/PublicConstructor.java:19:9
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/publicconstructor/readable-j2wasm.js/publicconstructor/PublicConstructor.java:19:9
  (block
-  ;;@ publicconstructor/PublicConstructor.java:19:29
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/publicconstructor/readable-j2wasm.js/publicconstructor/PublicConstructor.java:19:29
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void PublicConstructor.$clinit()
 (func $$clinit__void_<once>_@publicconstructor.PublicConstructor
- ;;@ publicconstructor/PublicConstructor.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/publicconstructor/readable-j2wasm.js/publicconstructor/PublicConstructor.java:18:13
  (block
-  ;;@ publicconstructor/PublicConstructor.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/publicconstructor/readable-j2wasm.js/publicconstructor/PublicConstructor.java:18:13
   (if (global.get $$class-initialized@publicconstructor.PublicConstructor)
    (then
-    ;;@ publicconstructor/PublicConstructor.java:18:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/publicconstructor/readable-j2wasm.js/publicconstructor/PublicConstructor.java:18:13
     (return )
    )
   )
-  ;;@ publicconstructor/PublicConstructor.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/publicconstructor/readable-j2wasm.js/publicconstructor/PublicConstructor.java:18:13
   (global.set $$class-initialized@publicconstructor.PublicConstructor (i32.const 1))
-  ;;@ publicconstructor/PublicConstructor.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/publicconstructor/readable-j2wasm.js/publicconstructor/PublicConstructor.java:18:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

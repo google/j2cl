@@ -79,16 +79,16 @@
 ;;; LocalClassWithConstructor LocalClassWithConstructor.$create()
 (func $$create__@localclasswithconstructor.LocalClassWithConstructor
  (result (ref null $localclasswithconstructor.LocalClassWithConstructor))
- ;;@ localclasswithconstructor/LocalClassWithConstructor.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:18:13
  (local $$instance (ref null $localclasswithconstructor.LocalClassWithConstructor))
  (block
-  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:18:13
   (call $$clinit__void_<once>_@localclasswithconstructor.LocalClassWithConstructor )
-  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:18:13
   (local.set $$instance (struct.new $localclasswithconstructor.LocalClassWithConstructor (ref.as_non_null (global.get $localclasswithconstructor.LocalClassWithConstructor.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:18:13
   (call $$ctor__void_$p_localclasswithconstructor_LocalClassWithConstructor@localclasswithconstructor.LocalClassWithConstructor (ref.as_non_null (local.get $$instance)))
-  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:18:13
   (return (local.get $$instance))
  )
 )
@@ -96,9 +96,9 @@
 ;;; void LocalClassWithConstructor.$ctor()
 (func $$ctor__void_$p_localclasswithconstructor_LocalClassWithConstructor@localclasswithconstructor.LocalClassWithConstructor
  (param $this (ref null $localclasswithconstructor.LocalClassWithConstructor))
- ;;@ localclasswithconstructor/LocalClassWithConstructor.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:18:13
  (block
-  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -108,14 +108,14 @@
  (type $function.m_test__int__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $p i32)
- ;;@ localclasswithconstructor/LocalClassWithConstructor.java:19:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:19:14
  (local $localVar i32)
  (local $this (ref null $localclasswithconstructor.LocalClassWithConstructor))
  (local.set $this (ref.cast (ref $localclasswithconstructor.LocalClassWithConstructor) (local.get $this.untyped)))
  (block
-  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:20:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:20:4
   (local.set $localVar (i32.const 1))
-  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:34:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:34:4
   (drop (call $$create__localclasswithconstructor_LocalClassWithConstructor__int__int__int@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (local.get $this)(local.get $localVar)(local.get $p)(i32.const 1)))
  )
 )
@@ -123,18 +123,18 @@
 
 ;;; void LocalClassWithConstructor.$clinit()
 (func $$clinit__void_<once>_@localclasswithconstructor.LocalClassWithConstructor
- ;;@ localclasswithconstructor/LocalClassWithConstructor.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:18:13
  (block
-  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:18:13
   (if (global.get $$class-initialized@localclasswithconstructor.LocalClassWithConstructor)
    (then
-    ;;@ localclasswithconstructor/LocalClassWithConstructor.java:18:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:18:13
     (return )
    )
   )
-  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:18:13
   (global.set $$class-initialized@localclasswithconstructor.LocalClassWithConstructor (i32.const 1))
-  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:18:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -176,16 +176,16 @@
  (param $a i32)
  (param $b i32)
  (result (ref null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass))
- ;;@ localclasswithconstructor/LocalClassWithConstructor.java:25:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:25:13
  (local $$instance (ref null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass))
  (block
-  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:25:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:25:13
   (call $$clinit__void_<once>_@localclasswithconstructor.LocalClassWithConstructor.1LocalClass )
-  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:25:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:25:13
   (local.set $$instance (struct.new $localclasswithconstructor.LocalClassWithConstructor.1LocalClass (ref.as_non_null (global.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (i32.const 0) (ref.null $localclasswithconstructor.LocalClassWithConstructor) (i32.const 0)))
-  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:25:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:25:13
   (call $$ctor__localclasswithconstructor_LocalClassWithConstructor__int__int__int__int__void_$p_localclasswithconstructor_LocalClassWithConstructor_1LocalClass@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$captured_localVar)(local.get $$captured_p)(local.get $a)(local.get $b))
-  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:25:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:25:13
   (return (local.get $$instance))
  )
 )
@@ -198,17 +198,17 @@
  (param $$captured_p i32)
  (param $a i32)
  (param $b i32)
- ;;@ localclasswithconstructor/LocalClassWithConstructor.java:25:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:25:13
  (block
-  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:22:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:22:10
   (struct.set $localclasswithconstructor.LocalClassWithConstructor.1LocalClass $$outer_this@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (local.get $this) (local.get $$outer_this))
-  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:20:14
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:20:14
   (struct.set $localclasswithconstructor.LocalClassWithConstructor.1LocalClass $$captured_localVar@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (local.get $this) (local.get $$captured_localVar))
-  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:19:29
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:19:29
   (struct.set $localclasswithconstructor.LocalClassWithConstructor.1LocalClass $$captured_p@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (local.get $this) (local.get $$captured_p))
-  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:25:38
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:25:38
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:26:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:26:8
   (struct.set $localclasswithconstructor.LocalClassWithConstructor.1LocalClass $field@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (local.get $this) (i32.add (i32.add (local.get $$captured_localVar) (local.get $a)) (local.get $b)))
  )
 )
@@ -220,16 +220,16 @@
  (param $$captured_p i32)
  (param $a i32)
  (result (ref null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass))
- ;;@ localclasswithconstructor/LocalClassWithConstructor.java:29:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:29:13
  (local $$instance (ref null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass))
  (block
-  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:29:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:29:13
   (call $$clinit__void_<once>_@localclasswithconstructor.LocalClassWithConstructor.1LocalClass )
-  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:29:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:29:13
   (local.set $$instance (struct.new $localclasswithconstructor.LocalClassWithConstructor.1LocalClass (ref.as_non_null (global.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (i32.const 0) (ref.null $localclasswithconstructor.LocalClassWithConstructor) (i32.const 0)))
-  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:29:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:29:13
   (call $$ctor__localclasswithconstructor_LocalClassWithConstructor__int__int__int__void_$p_localclasswithconstructor_LocalClassWithConstructor_1LocalClass@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$captured_localVar)(local.get $$captured_p)(local.get $a))
-  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:29:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:29:13
   (return (local.get $$instance))
  )
 )
@@ -241,29 +241,29 @@
  (param $$captured_localVar i32)
  (param $$captured_p i32)
  (param $a i32)
- ;;@ localclasswithconstructor/LocalClassWithConstructor.java:29:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:29:13
  (block
-  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:30:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:30:8
   (call $$ctor__localclasswithconstructor_LocalClassWithConstructor__int__int__int__int__void_$p_localclasswithconstructor_LocalClassWithConstructor_1LocalClass@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (ref.as_non_null (local.get $this))(local.get $$outer_this)(local.get $$captured_localVar)(local.get $$captured_p)(local.get $a)(local.get $$captured_p))
-  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:31:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:31:8
   (struct.set $localclasswithconstructor.LocalClassWithConstructor.1LocalClass $field@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (local.get $this) (local.get $$captured_localVar))
  )
 )
 
 ;;; void LocalClass.$clinit()
 (func $$clinit__void_<once>_@localclasswithconstructor.LocalClassWithConstructor.1LocalClass
- ;;@ localclasswithconstructor/LocalClassWithConstructor.java:22:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:22:10
  (block
-  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:22:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:22:10
   (if (global.get $$class-initialized@localclasswithconstructor.LocalClassWithConstructor.1LocalClass)
    (then
-    ;;@ localclasswithconstructor/LocalClassWithConstructor.java:22:10
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:22:10
     (return )
    )
   )
-  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:22:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:22:10
   (global.set $$class-initialized@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (i32.const 1))
-  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:22:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclasswithconstructor/readable-j2wasm.js/localclasswithconstructor/LocalClassWithConstructor.java:22:10
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

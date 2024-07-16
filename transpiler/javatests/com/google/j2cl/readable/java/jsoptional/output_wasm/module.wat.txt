@@ -295,16 +295,16 @@
 
 ;;; void Function.$clinit()
 (func $$clinit__void_<once>_@jsoptional.Main.Function
- ;;@ jsoptional/Main.java:38:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:38:12
  (block
-  ;;@ jsoptional/Main.java:38:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:38:12
   (if (global.get $$class-initialized@jsoptional.Main.Function)
    (then
-    ;;@ jsoptional/Main.java:38:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:38:12
     (return )
    )
   )
-  ;;@ jsoptional/Main.java:38:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:38:12
   (global.set $$class-initialized@jsoptional.Main.Function (i32.const 1))
  )
 )
@@ -327,16 +327,16 @@
 
 ;;; void I.$clinit()
 (func $$clinit__void_<once>_@jsoptional.Main.I
- ;;@ jsoptional/Main.java:60:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:60:12
  (block
-  ;;@ jsoptional/Main.java:60:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:60:12
   (if (global.get $$class-initialized@jsoptional.Main.I)
    (then
-    ;;@ jsoptional/Main.java:60:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:60:12
     (return )
    )
   )
-  ;;@ jsoptional/Main.java:60:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:60:12
   (global.set $$class-initialized@jsoptional.Main.I (i32.const 1))
  )
 )
@@ -364,7 +364,7 @@
  (param $i1 i32)
  (param $d (ref null $java.lang.Double))
  (param $i (ref null $java.lang.Integer))
- ;;@ jsoptional/Main.java:26:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:26:14
  (local $this (ref null $jsoptional.Main))
  (local.set $this (ref.cast (ref $jsoptional.Main) (local.get $this.untyped)))
  (block
@@ -379,7 +379,7 @@
  (param $s1 (ref null $java.lang.String))
  (param $d (ref null $java.lang.Double))
  (param $i (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ jsoptional/Main.java:29:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:29:14
  (local $this (ref null $jsoptional.Main))
  (local.set $this (ref.cast (ref $jsoptional.Main) (local.get $this.untyped)))
  (block
@@ -392,9 +392,9 @@
  (param $i1 i32)
  (param $d (ref null $java.lang.Double))
  (param $i (ref null $java.lang.Integer))
- ;;@ jsoptional/Main.java:32:21
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:32:21
  (block
-  ;;@ jsoptional/Main.java:32:88
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:32:88
   (call $$clinit__void_<once>_@jsoptional.Main )
  )
 )
@@ -404,9 +404,9 @@
  (param $s1 (ref null $java.lang.String))
  (param $d (ref null $java.lang.Double))
  (param $i (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ jsoptional/Main.java:35:21
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:35:21
  (block
-  ;;@ jsoptional/Main.java:35:82
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:35:82
   (call $$clinit__void_<once>_@jsoptional.Main )
  )
 )
@@ -415,16 +415,16 @@
 (func $$create__java_lang_String@jsoptional.Main
  (param $a (ref null $java.lang.String))
  (result (ref null $jsoptional.Main))
- ;;@ jsoptional/Main.java:45:9
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:45:9
  (local $$instance (ref null $jsoptional.Main))
  (block
-  ;;@ jsoptional/Main.java:45:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:45:9
   (call $$clinit__void_<once>_@jsoptional.Main )
-  ;;@ jsoptional/Main.java:45:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:45:9
   (local.set $$instance (struct.new $jsoptional.Main (ref.as_non_null (global.get $jsoptional.Main.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.Object)))
-  ;;@ jsoptional/Main.java:45:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:45:9
   (call $$ctor__java_lang_String__void_$p_jsoptional_Main@jsoptional.Main (ref.as_non_null (local.get $$instance))(local.get $a))
-  ;;@ jsoptional/Main.java:45:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:45:9
   (return (local.get $$instance))
  )
 )
@@ -433,11 +433,11 @@
 (func $$ctor__java_lang_String__void_$p_jsoptional_Main@jsoptional.Main
  (param $this (ref null $jsoptional.Main))
  (param $a (ref null $java.lang.String))
- ;;@ jsoptional/Main.java:45:9
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:45:9
  (block
-  ;;@ jsoptional/Main.java:45:36
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:45:36
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;;@ jsoptional/Main.java:45:36
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:45:36
   (call $$init__void_$p_jsoptional_Main@jsoptional.Main (ref.as_non_null (local.get $this)))
  )
 )
@@ -447,7 +447,7 @@
  (type $function.m_testFunction__jsoptional_Main_Function__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $f (ref null $java.lang.Object))
- ;;@ jsoptional/Main.java:54:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:54:14
  (local $this (ref null $jsoptional.Main))
  (local.set $this (ref.cast (ref $jsoptional.Main) (local.get $this.untyped)))
  (block
@@ -460,7 +460,7 @@
  (type $function.m_testOptionalFunction__jsoptional_Main_Function__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $f (ref null $java.lang.Object))
- ;;@ jsoptional/Main.java:57:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:57:14
  (local $this (ref null $jsoptional.Main))
  (local.set $this (ref.cast (ref $jsoptional.Main) (local.get $this.untyped)))
  (block
@@ -471,27 +471,27 @@
 ;;; void Main.$init()
 (func $$init__void_$p_jsoptional_Main@jsoptional.Main
  (param $this (ref null $jsoptional.Main))
- ;;@ jsoptional/Main.java:24:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:24:13
  (block
-  ;;@ jsoptional/Main.java:42:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:42:2
   (struct.set $jsoptional.Main $f@jsoptional.Main (local.get $this) (call $$create__@jsoptional.Main.$LambdaImplementor$1 ))
  )
 )
 
 ;;; void Main.$clinit()
 (func $$clinit__void_<once>_@jsoptional.Main
- ;;@ jsoptional/Main.java:24:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:24:13
  (block
-  ;;@ jsoptional/Main.java:24:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:24:13
   (if (global.get $$class-initialized@jsoptional.Main)
    (then
-    ;;@ jsoptional/Main.java:24:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:24:13
     (return )
    )
   )
-  ;;@ jsoptional/Main.java:24:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:24:13
   (global.set $$class-initialized@jsoptional.Main (i32.const 1))
-  ;;@ jsoptional/Main.java:24:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:24:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -528,16 +528,16 @@
 ;;; <anonymous> implements Function <anonymous> implements Function.$create()
 (func $$create__@jsoptional.Main.$LambdaImplementor$1
  (result (ref null $jsoptional.Main.$LambdaImplementor$1))
- ;;@ jsoptional/Main.java:42:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:42:15
  (local $$instance (ref null $jsoptional.Main.$LambdaImplementor$1))
  (block
-  ;;@ jsoptional/Main.java:42:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:42:15
   (call $$clinit__void_<once>_@jsoptional.Main.$LambdaImplementor$1 )
-  ;;@ jsoptional/Main.java:42:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:42:15
   (local.set $$instance (struct.new $jsoptional.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $jsoptional.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $jsoptional.Main.$LambdaImplementor$1.itable)) (i32.const 0)))
-  ;;@ jsoptional/Main.java:42:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:42:15
   (call $$ctor__void_$p_jsoptional_Main_$LambdaImplementor$1@jsoptional.Main.$LambdaImplementor$1 (ref.as_non_null (local.get $$instance)))
-  ;;@ jsoptional/Main.java:42:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:42:15
   (return (local.get $$instance))
  )
 )
@@ -545,9 +545,9 @@
 ;;; void <anonymous> implements Function.$ctor()
 (func $$ctor__void_$p_jsoptional_Main_$LambdaImplementor$1@jsoptional.Main.$LambdaImplementor$1
  (param $this (ref null $jsoptional.Main.$LambdaImplementor$1))
- ;;@ jsoptional/Main.java:42:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:42:15
  (block
-  ;;@ jsoptional/Main.java:42:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:42:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -559,11 +559,11 @@
  (param $s (ref null $java.lang.String))
  (param $varargs (ref null $javaemul.internal.WasmArray.OfObject))
  (result (ref null $java.lang.Object))
- ;;@ jsoptional/Main.java:42:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:42:15
  (local $this (ref null $jsoptional.Main.$LambdaImplementor$1))
  (local.set $this (ref.cast (ref $jsoptional.Main.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
-  ;;@ jsoptional/Main.java:42:31
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:42:31
   (return (local.get $s))
  )
 )
@@ -571,18 +571,18 @@
 
 ;;; void <anonymous> implements Function.$clinit()
 (func $$clinit__void_<once>_@jsoptional.Main.$LambdaImplementor$1
- ;;@ jsoptional/Main.java:42:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:42:15
  (block
-  ;;@ jsoptional/Main.java:42:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:42:15
   (if (global.get $$class-initialized@jsoptional.Main.$LambdaImplementor$1)
    (then
-    ;;@ jsoptional/Main.java:42:15
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:42:15
     (return )
    )
   )
-  ;;@ jsoptional/Main.java:42:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:42:15
   (global.set $$class-initialized@jsoptional.Main.$LambdaImplementor$1 (i32.const 1))
-  ;;@ jsoptional/Main.java:42:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:42:15
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -619,16 +619,16 @@
 ;;; AFunction AFunction.$create()
 (func $$create__@jsoptional.Main.AFunction
  (result (ref null $jsoptional.Main.AFunction))
- ;;@ jsoptional/Main.java:47:21
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:47:21
  (local $$instance (ref null $jsoptional.Main.AFunction))
  (block
-  ;;@ jsoptional/Main.java:47:21
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:47:21
   (call $$clinit__void_<once>_@jsoptional.Main.AFunction )
-  ;;@ jsoptional/Main.java:47:21
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:47:21
   (local.set $$instance (struct.new $jsoptional.Main.AFunction (ref.as_non_null (global.get $jsoptional.Main.AFunction.vtable)) (ref.as_non_null (global.get $jsoptional.Main.AFunction.itable)) (i32.const 0)))
-  ;;@ jsoptional/Main.java:47:21
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:47:21
   (call $$ctor__void_$p_jsoptional_Main_AFunction@jsoptional.Main.AFunction (ref.as_non_null (local.get $$instance)))
-  ;;@ jsoptional/Main.java:47:21
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:47:21
   (return (local.get $$instance))
  )
 )
@@ -636,9 +636,9 @@
 ;;; void AFunction.$ctor()
 (func $$ctor__void_$p_jsoptional_Main_AFunction@jsoptional.Main.AFunction
  (param $this (ref null $jsoptional.Main.AFunction))
- ;;@ jsoptional/Main.java:47:21
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:47:21
  (block
-  ;;@ jsoptional/Main.java:47:21
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:47:21
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -650,11 +650,11 @@
  (param $i (ref null $java.lang.String))
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  (result (ref null $java.lang.Object))
- ;;@ jsoptional/Main.java:49:18
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:49:18
  (local $this (ref null $jsoptional.Main.AFunction))
  (local.set $this (ref.cast (ref $jsoptional.Main.AFunction) (local.get $this.untyped)))
  (block
-  ;;@ jsoptional/Main.java:50:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:50:6
   (return (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $args)) (i32.const 0)))
  )
 )
@@ -662,18 +662,18 @@
 
 ;;; void AFunction.$clinit()
 (func $$clinit__void_<once>_@jsoptional.Main.AFunction
- ;;@ jsoptional/Main.java:47:21
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:47:21
  (block
-  ;;@ jsoptional/Main.java:47:21
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:47:21
   (if (global.get $$class-initialized@jsoptional.Main.AFunction)
    (then
-    ;;@ jsoptional/Main.java:47:21
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:47:21
     (return )
    )
   )
-  ;;@ jsoptional/Main.java:47:21
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:47:21
   (global.set $$class-initialized@jsoptional.Main.AFunction (i32.const 1))
-  ;;@ jsoptional/Main.java:47:21
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:47:21
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -710,16 +710,16 @@
 ;;; TemplatedSubtype<T> TemplatedSubtype.$create()
 (func $$create__@jsoptional.Main.TemplatedSubtype
  (result (ref null $jsoptional.Main.TemplatedSubtype))
- ;;@ jsoptional/Main.java:65:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:65:15
  (local $$instance (ref null $jsoptional.Main.TemplatedSubtype))
  (block
-  ;;@ jsoptional/Main.java:65:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:65:15
   (call $$clinit__void_<once>_@jsoptional.Main.TemplatedSubtype )
-  ;;@ jsoptional/Main.java:65:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:65:15
   (local.set $$instance (struct.new $jsoptional.Main.TemplatedSubtype (ref.as_non_null (global.get $jsoptional.Main.TemplatedSubtype.vtable)) (ref.as_non_null (global.get $jsoptional.Main.TemplatedSubtype.itable)) (i32.const 0)))
-  ;;@ jsoptional/Main.java:65:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:65:15
   (call $$ctor__void_$p_jsoptional_Main_TemplatedSubtype@jsoptional.Main.TemplatedSubtype (ref.as_non_null (local.get $$instance)))
-  ;;@ jsoptional/Main.java:65:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:65:15
   (return (local.get $$instance))
  )
 )
@@ -727,9 +727,9 @@
 ;;; void TemplatedSubtype.$ctor()
 (func $$ctor__void_$p_jsoptional_Main_TemplatedSubtype@jsoptional.Main.TemplatedSubtype
  (param $this (ref null $jsoptional.Main.TemplatedSubtype))
- ;;@ jsoptional/Main.java:65:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:65:15
  (block
-  ;;@ jsoptional/Main.java:65:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:65:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -740,7 +740,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $t (ref null $java.lang.String))
  (param $o (ref null $java.lang.Object))
- ;;@ jsoptional/Main.java:67:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:67:16
  (local $this (ref null $jsoptional.Main.TemplatedSubtype))
  (local.set $this (ref.cast (ref $jsoptional.Main.TemplatedSubtype) (local.get $this.untyped)))
  (block
@@ -754,11 +754,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
- ;;@ jsoptional/Main.java:65:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:65:15
  (local $this (ref null $jsoptional.Main.TemplatedSubtype))
  (local.set $this (ref.cast (ref $jsoptional.Main.TemplatedSubtype) (local.get $this.untyped)))
  (block
-  ;;@ jsoptional/Main.java:65:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:65:15
   (call_ref $function.m_m__java_lang_String__java_lang_Object__void (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0))(local.get $arg1)(struct.get $jsoptional.Main.TemplatedSubtype.vtable $m_m__java_lang_String__java_lang_Object__void (struct.get $jsoptional.Main.TemplatedSubtype $vtable(local.get $this))))
  )
 )
@@ -766,18 +766,18 @@
 
 ;;; void TemplatedSubtype.$clinit()
 (func $$clinit__void_<once>_@jsoptional.Main.TemplatedSubtype
- ;;@ jsoptional/Main.java:65:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:65:15
  (block
-  ;;@ jsoptional/Main.java:65:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:65:15
   (if (global.get $$class-initialized@jsoptional.Main.TemplatedSubtype)
    (then
-    ;;@ jsoptional/Main.java:65:15
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:65:15
     (return )
    )
   )
-  ;;@ jsoptional/Main.java:65:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:65:15
   (global.set $$class-initialized@jsoptional.Main.TemplatedSubtype (i32.const 1))
-  ;;@ jsoptional/Main.java:65:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:65:15
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -816,16 +816,16 @@
  (param $$outer_this (ref null $jsoptional.Main))
  (param $a (ref null $java.lang.Object))
  (result (ref null $jsoptional.Main.SpecializedSubtype))
- ;;@ jsoptional/Main.java:74:11
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:74:11
  (local $$instance (ref null $jsoptional.Main.SpecializedSubtype))
  (block
-  ;;@ jsoptional/Main.java:74:11
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:74:11
   (call $$clinit__void_<once>_@jsoptional.Main.SpecializedSubtype )
-  ;;@ jsoptional/Main.java:74:11
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:74:11
   (local.set $$instance (struct.new $jsoptional.Main.SpecializedSubtype (ref.as_non_null (global.get $jsoptional.Main.SpecializedSubtype.vtable)) (ref.as_non_null (global.get $jsoptional.Main.SpecializedSubtype.itable)) (i32.const 0) (ref.null $jsoptional.Main)))
-  ;;@ jsoptional/Main.java:74:11
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:74:11
   (call $$ctor__jsoptional_Main__java_lang_Object__void_$p_jsoptional_Main_SpecializedSubtype@jsoptional.Main.SpecializedSubtype (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $a))
-  ;;@ jsoptional/Main.java:74:11
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:74:11
   (return (local.get $$instance))
  )
 )
@@ -835,11 +835,11 @@
  (param $this (ref null $jsoptional.Main.SpecializedSubtype))
  (param $$outer_this (ref null $jsoptional.Main))
  (param $a (ref null $java.lang.Object))
- ;;@ jsoptional/Main.java:74:11
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:74:11
  (block
-  ;;@ jsoptional/Main.java:72:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:72:8
   (struct.set $jsoptional.Main.SpecializedSubtype $$outer_this@jsoptional.Main.SpecializedSubtype (local.get $this) (local.get $$outer_this))
-  ;;@ jsoptional/Main.java:74:52
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:74:52
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -850,7 +850,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $t (ref null $java.lang.String))
  (param $o (ref null $java.lang.Object))
- ;;@ jsoptional/Main.java:77:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:77:16
  (local $this (ref null $jsoptional.Main.SpecializedSubtype))
  (local.set $this (ref.cast (ref $jsoptional.Main.SpecializedSubtype) (local.get $this.untyped)))
  (block
@@ -864,11 +864,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
- ;;@ jsoptional/Main.java:72:8
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:72:8
  (local $this (ref null $jsoptional.Main.SpecializedSubtype))
  (local.set $this (ref.cast (ref $jsoptional.Main.SpecializedSubtype) (local.get $this.untyped)))
  (block
-  ;;@ jsoptional/Main.java:72:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:72:8
   (call_ref $function.m_m__java_lang_String__java_lang_Object__void (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0))(local.get $arg1)(struct.get $jsoptional.Main.SpecializedSubtype.vtable $m_m__java_lang_String__java_lang_Object__void (struct.get $jsoptional.Main.SpecializedSubtype $vtable(local.get $this))))
  )
 )
@@ -876,18 +876,18 @@
 
 ;;; void SpecializedSubtype.$clinit()
 (func $$clinit__void_<once>_@jsoptional.Main.SpecializedSubtype
- ;;@ jsoptional/Main.java:72:8
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:72:8
  (block
-  ;;@ jsoptional/Main.java:72:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:72:8
   (if (global.get $$class-initialized@jsoptional.Main.SpecializedSubtype)
    (then
-    ;;@ jsoptional/Main.java:72:8
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:72:8
     (return )
    )
   )
-  ;;@ jsoptional/Main.java:72:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:72:8
   (global.set $$class-initialized@jsoptional.Main.SpecializedSubtype (i32.const 1))
-  ;;@ jsoptional/Main.java:72:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:72:8
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -924,16 +924,16 @@
 ;;; NonJsTypeSubtype NonJsTypeSubtype.$create()
 (func $$create__@jsoptional.Main.NonJsTypeSubtype
  (result (ref null $jsoptional.Main.NonJsTypeSubtype))
- ;;@ jsoptional/Main.java:80:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:80:15
  (local $$instance (ref null $jsoptional.Main.NonJsTypeSubtype))
  (block
-  ;;@ jsoptional/Main.java:80:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:80:15
   (call $$clinit__void_<once>_@jsoptional.Main.NonJsTypeSubtype )
-  ;;@ jsoptional/Main.java:80:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:80:15
   (local.set $$instance (struct.new $jsoptional.Main.NonJsTypeSubtype (ref.as_non_null (global.get $jsoptional.Main.NonJsTypeSubtype.vtable)) (ref.as_non_null (global.get $jsoptional.Main.NonJsTypeSubtype.itable)) (i32.const 0)))
-  ;;@ jsoptional/Main.java:80:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:80:15
   (call $$ctor__void_$p_jsoptional_Main_NonJsTypeSubtype@jsoptional.Main.NonJsTypeSubtype (ref.as_non_null (local.get $$instance)))
-  ;;@ jsoptional/Main.java:80:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:80:15
   (return (local.get $$instance))
  )
 )
@@ -941,9 +941,9 @@
 ;;; void NonJsTypeSubtype.$ctor()
 (func $$ctor__void_$p_jsoptional_Main_NonJsTypeSubtype@jsoptional.Main.NonJsTypeSubtype
  (param $this (ref null $jsoptional.Main.NonJsTypeSubtype))
- ;;@ jsoptional/Main.java:80:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:80:15
  (block
-  ;;@ jsoptional/Main.java:80:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:80:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -954,7 +954,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $t (ref null $java.lang.String))
  (param $o (ref null $java.lang.Object))
- ;;@ jsoptional/Main.java:82:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:82:16
  (local $this (ref null $jsoptional.Main.NonJsTypeSubtype))
  (local.set $this (ref.cast (ref $jsoptional.Main.NonJsTypeSubtype) (local.get $this.untyped)))
  (block
@@ -968,11 +968,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
- ;;@ jsoptional/Main.java:80:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:80:15
  (local $this (ref null $jsoptional.Main.NonJsTypeSubtype))
  (local.set $this (ref.cast (ref $jsoptional.Main.NonJsTypeSubtype) (local.get $this.untyped)))
  (block
-  ;;@ jsoptional/Main.java:80:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:80:15
   (call_ref $function.m_m__java_lang_String__java_lang_Object__void (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0))(local.get $arg1)(struct.get $jsoptional.Main.NonJsTypeSubtype.vtable $m_m__java_lang_String__java_lang_Object__void (struct.get $jsoptional.Main.NonJsTypeSubtype $vtable(local.get $this))))
  )
 )
@@ -980,18 +980,18 @@
 
 ;;; void NonJsTypeSubtype.$clinit()
 (func $$clinit__void_<once>_@jsoptional.Main.NonJsTypeSubtype
- ;;@ jsoptional/Main.java:80:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:80:15
  (block
-  ;;@ jsoptional/Main.java:80:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:80:15
   (if (global.get $$class-initialized@jsoptional.Main.NonJsTypeSubtype)
    (then
-    ;;@ jsoptional/Main.java:80:15
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:80:15
     (return )
    )
   )
-  ;;@ jsoptional/Main.java:80:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:80:15
   (global.set $$class-initialized@jsoptional.Main.NonJsTypeSubtype (i32.const 1))
-  ;;@ jsoptional/Main.java:80:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoptional/readable-j2wasm.js/jsoptional/Main.java:80:15
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

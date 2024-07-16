@@ -40,16 +40,16 @@
 ;;; WhileStatement WhileStatement.$create()
 (func $$create__@whilestatement.WhileStatement
  (result (ref null $whilestatement.WhileStatement))
- ;;@ whilestatement/WhileStatement.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/whilestatement/readable-j2wasm.js/whilestatement/WhileStatement.java:18:13
  (local $$instance (ref null $whilestatement.WhileStatement))
  (block
-  ;;@ whilestatement/WhileStatement.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/whilestatement/readable-j2wasm.js/whilestatement/WhileStatement.java:18:13
   (call $$clinit__void_<once>_@whilestatement.WhileStatement )
-  ;;@ whilestatement/WhileStatement.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/whilestatement/readable-j2wasm.js/whilestatement/WhileStatement.java:18:13
   (local.set $$instance (struct.new $whilestatement.WhileStatement (ref.as_non_null (global.get $whilestatement.WhileStatement.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ whilestatement/WhileStatement.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/whilestatement/readable-j2wasm.js/whilestatement/WhileStatement.java:18:13
   (call $$ctor__void_$p_whilestatement_WhileStatement@whilestatement.WhileStatement (ref.as_non_null (local.get $$instance)))
-  ;;@ whilestatement/WhileStatement.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/whilestatement/readable-j2wasm.js/whilestatement/WhileStatement.java:18:13
   (return (local.get $$instance))
  )
 )
@@ -57,9 +57,9 @@
 ;;; void WhileStatement.$ctor()
 (func $$ctor__void_$p_whilestatement_WhileStatement@whilestatement.WhileStatement
  (param $this (ref null $whilestatement.WhileStatement))
- ;;@ whilestatement/WhileStatement.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/whilestatement/readable-j2wasm.js/whilestatement/WhileStatement.java:18:13
  (block
-  ;;@ whilestatement/WhileStatement.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/whilestatement/readable-j2wasm.js/whilestatement/WhileStatement.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -68,20 +68,20 @@
 (func $m_test__void@whilestatement.WhileStatement
  (type $function.m_test__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ whilestatement/WhileStatement.java:19:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/whilestatement/readable-j2wasm.js/whilestatement/WhileStatement.java:19:14
  (local $count i32)
  (local $this (ref null $whilestatement.WhileStatement))
  (local.set $this (ref.cast (ref $whilestatement.WhileStatement) (local.get $this.untyped)))
  (block
-  ;;@ whilestatement/WhileStatement.java:20:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/whilestatement/readable-j2wasm.js/whilestatement/WhileStatement.java:20:4
   (local.set $count (i32.const 0))
-  ;;@ whilestatement/WhileStatement.java:21:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/whilestatement/readable-j2wasm.js/whilestatement/WhileStatement.java:21:4
   (block $LOOP.BREAK
    (loop
     (br_if 1 (i32.eqz (i32.lt_s (local.get $count) (i32.const 5))))
     (block $LOOP.CONTINUE
      (block
-      ;;@ whilestatement/WhileStatement.java:22:6
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/whilestatement/readable-j2wasm.js/whilestatement/WhileStatement.java:22:6
       (local.set $count (i32.add (local.get $count) (i32.const 1)))
      )
     )
@@ -94,18 +94,18 @@
 
 ;;; void WhileStatement.$clinit()
 (func $$clinit__void_<once>_@whilestatement.WhileStatement
- ;;@ whilestatement/WhileStatement.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/whilestatement/readable-j2wasm.js/whilestatement/WhileStatement.java:18:13
  (block
-  ;;@ whilestatement/WhileStatement.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/whilestatement/readable-j2wasm.js/whilestatement/WhileStatement.java:18:13
   (if (global.get $$class-initialized@whilestatement.WhileStatement)
    (then
-    ;;@ whilestatement/WhileStatement.java:18:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/whilestatement/readable-j2wasm.js/whilestatement/WhileStatement.java:18:13
     (return )
    )
   )
-  ;;@ whilestatement/WhileStatement.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/whilestatement/readable-j2wasm.js/whilestatement/WhileStatement.java:18:13
   (global.set $$class-initialized@whilestatement.WhileStatement (i32.const 1))
-  ;;@ whilestatement/WhileStatement.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/whilestatement/readable-j2wasm.js/whilestatement/WhileStatement.java:18:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

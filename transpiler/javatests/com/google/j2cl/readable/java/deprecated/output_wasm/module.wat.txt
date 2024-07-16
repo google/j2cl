@@ -184,16 +184,16 @@
 
 ;;; void DeprecatedInterface.$clinit()
 (func $$clinit__void_<once>_@deprecated.DeprecatedExample.DeprecatedInterface
- ;;@ deprecated/DeprecatedExample.java:41:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:41:12
  (block
-  ;;@ deprecated/DeprecatedExample.java:41:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:41:12
   (if (global.get $$class-initialized@deprecated.DeprecatedExample.DeprecatedInterface)
    (then
-    ;;@ deprecated/DeprecatedExample.java:41:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:41:12
     (return )
    )
   )
-  ;;@ deprecated/DeprecatedExample.java:41:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:41:12
   (global.set $$class-initialized@deprecated.DeprecatedExample.DeprecatedInterface (i32.const 1))
  )
 )
@@ -216,16 +216,16 @@
 
 ;;; void DeprecatedJsFunction.$clinit()
 (func $$clinit__void_<once>_@deprecated.DeprecatedExample.DeprecatedJsFunction
- ;;@ deprecated/DeprecatedExample.java:48:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:48:12
  (block
-  ;;@ deprecated/DeprecatedExample.java:48:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:48:12
   (if (global.get $$class-initialized@deprecated.DeprecatedExample.DeprecatedJsFunction)
    (then
-    ;;@ deprecated/DeprecatedExample.java:48:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:48:12
     (return )
    )
   )
-  ;;@ deprecated/DeprecatedExample.java:48:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:48:12
   (global.set $$class-initialized@deprecated.DeprecatedExample.DeprecatedJsFunction (i32.const 1))
  )
 )
@@ -249,9 +249,9 @@
 ;;; void DeprecatedExample.deprecatedStaticMethod(Object someObject)
 (func $m_deprecatedStaticMethod__java_lang_Object__void@deprecated.DeprecatedExample
  (param $someObject (ref null $java.lang.Object))
- ;;@ deprecated/DeprecatedExample.java:31:21
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:31:21
  (block
-  ;;@ deprecated/DeprecatedExample.java:31:63
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:31:63
   (call $$clinit__void_<once>_@deprecated.DeprecatedExample )
  )
 )
@@ -261,7 +261,7 @@
  (type $function.m_deprecatedInstanceMethod__java_lang_String__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $someArg (ref null $java.lang.String))
- ;;@ deprecated/DeprecatedExample.java:34:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:34:14
  (local $this (ref null $deprecated.DeprecatedExample))
  (local.set $this (ref.cast (ref $deprecated.DeprecatedExample) (local.get $this.untyped)))
  (block
@@ -272,16 +272,16 @@
 ;;; DeprecatedExample DeprecatedExample.$create()
 (func $$create__@deprecated.DeprecatedExample
  (result (ref null $deprecated.DeprecatedExample))
- ;;@ deprecated/DeprecatedExample.java:37:9
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:37:9
  (local $$instance (ref null $deprecated.DeprecatedExample))
  (block
-  ;;@ deprecated/DeprecatedExample.java:37:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:37:9
   (call $$clinit__void_<once>_@deprecated.DeprecatedExample )
-  ;;@ deprecated/DeprecatedExample.java:37:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:37:9
   (local.set $$instance (struct.new $deprecated.DeprecatedExample (ref.as_non_null (global.get $deprecated.DeprecatedExample.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.String)))
-  ;;@ deprecated/DeprecatedExample.java:37:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:37:9
   (call $$ctor__void_$p_deprecated_DeprecatedExample@deprecated.DeprecatedExample (ref.as_non_null (local.get $$instance)))
-  ;;@ deprecated/DeprecatedExample.java:37:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:37:9
   (return (local.get $$instance))
  )
 )
@@ -289,11 +289,11 @@
 ;;; void DeprecatedExample.$ctor()
 (func $$ctor__void_$p_deprecated_DeprecatedExample@deprecated.DeprecatedExample
  (param $this (ref null $deprecated.DeprecatedExample))
- ;;@ deprecated/DeprecatedExample.java:37:9
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:37:9
  (block
-  ;;@ deprecated/DeprecatedExample.java:37:29
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:37:29
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;;@ deprecated/DeprecatedExample.java:37:29
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:37:29
   (call $$init__void_$p_deprecated_DeprecatedExample@deprecated.DeprecatedExample (ref.as_non_null (local.get $this)))
  )
 )
@@ -301,27 +301,27 @@
 ;;; void DeprecatedExample.$init()
 (func $$init__void_$p_deprecated_DeprecatedExample@deprecated.DeprecatedExample
  (param $this (ref null $deprecated.DeprecatedExample))
- ;;@ deprecated/DeprecatedExample.java:25:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:25:13
  (block
-  ;;@ deprecated/DeprecatedExample.java:28:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:28:2
   (struct.set $deprecated.DeprecatedExample $deprecatedInstanceField@deprecated.DeprecatedExample (local.get $this) (call $$getString_|deprecated_f...|__java_lang_String_<once>_@deprecated.DeprecatedExample ))
  )
 )
 
 ;;; void DeprecatedExample.$clinit()
 (func $$clinit__void_<once>_@deprecated.DeprecatedExample
- ;;@ deprecated/DeprecatedExample.java:25:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:25:13
  (block
-  ;;@ deprecated/DeprecatedExample.java:25:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:25:13
   (if (global.get $$class-initialized@deprecated.DeprecatedExample)
    (then
-    ;;@ deprecated/DeprecatedExample.java:25:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:25:13
     (return )
    )
   )
-  ;;@ deprecated/DeprecatedExample.java:25:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:25:13
   (global.set $$class-initialized@deprecated.DeprecatedExample (i32.const 1))
-  ;;@ deprecated/DeprecatedExample.java:25:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:25:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -360,14 +360,14 @@
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
  (result (ref null $deprecated.DeprecatedExample.DeprecatedEnum))
- ;;@ deprecated/DeprecatedExample.java:55:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:55:7
  (local $$instance (ref null $deprecated.DeprecatedExample.DeprecatedEnum))
  (block
-  ;;@ deprecated/DeprecatedExample.java:55:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:55:7
   (local.set $$instance (struct.new $deprecated.DeprecatedExample.DeprecatedEnum (ref.as_non_null (global.get $deprecated.DeprecatedExample.DeprecatedEnum.vtable)) (ref.as_non_null (global.get $deprecated.DeprecatedExample.DeprecatedEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
-  ;;@ deprecated/DeprecatedExample.java:55:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:55:7
   (call $$ctor__java_lang_String__int__void_$p_deprecated_DeprecatedExample_DeprecatedEnum@deprecated.DeprecatedExample.DeprecatedEnum (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
-  ;;@ deprecated/DeprecatedExample.java:55:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:55:7
   (return (local.get $$instance))
  )
 )
@@ -377,13 +377,13 @@
  (param $this (ref null $deprecated.DeprecatedExample.DeprecatedEnum))
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
- ;;@ deprecated/DeprecatedExample.java:55:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:55:7
  (block
-  ;;@ deprecated/DeprecatedExample.java:55:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:55:7
   (struct.set $java.lang.Enum $name@java.lang.Enum (local.get $this) (local.get $$name))
-  ;;@ deprecated/DeprecatedExample.java:55:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:55:7
   (struct.set $java.lang.Enum $ordinal@java.lang.Enum (local.get $this) (local.get $$ordinal))
-  ;;@ deprecated/DeprecatedExample.java:55:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:55:7
   (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
  )
 )
@@ -392,20 +392,20 @@
 (func $m_valueOf__java_lang_String__deprecated_DeprecatedExample_DeprecatedEnum@deprecated.DeprecatedExample.DeprecatedEnum
  (param $name (ref null $java.lang.String))
  (result (ref null $deprecated.DeprecatedExample.DeprecatedEnum))
- ;;@ deprecated/DeprecatedExample.java:55:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:55:7
  (block
-  ;;@ deprecated/DeprecatedExample.java:55:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:55:7
   (call $$clinit__void_<once>_@deprecated.DeprecatedExample.DeprecatedEnum )
-  ;;@ deprecated/DeprecatedExample.java:55:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:55:7
   (if (ref.is_null (global.get $namesToValuesMap@deprecated.DeprecatedExample.DeprecatedEnum))
    (then
     (block
-     ;;@ deprecated/DeprecatedExample.java:55:7
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:55:7
      (global.set $namesToValuesMap@deprecated.DeprecatedExample.DeprecatedEnum (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values_$private__arrayOf_deprecated_DeprecatedExample_DeprecatedEnum@deprecated.DeprecatedExample.DeprecatedEnum )))
     )
    )
   )
-  ;;@ deprecated/DeprecatedExample.java:55:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:55:7
   (return (ref.cast (ref null $deprecated.DeprecatedExample.DeprecatedEnum) (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $namesToValuesMap@deprecated.DeprecatedExample.DeprecatedEnum))))
  )
 )
@@ -413,11 +413,11 @@
 ;;; DeprecatedEnum[] DeprecatedEnum.values()
 (func $m_values__arrayOf_deprecated_DeprecatedExample_DeprecatedEnum@deprecated.DeprecatedExample.DeprecatedEnum
  (result (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ deprecated/DeprecatedExample.java:55:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:55:7
  (block
-  ;;@ deprecated/DeprecatedExample.java:55:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:55:7
   (call $$clinit__void_<once>_@deprecated.DeprecatedExample.DeprecatedEnum )
-  ;;@ deprecated/DeprecatedExample.java:55:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:55:7
   (return (call $m_values_$private__arrayOf_deprecated_DeprecatedExample_DeprecatedEnum@deprecated.DeprecatedExample.DeprecatedEnum ))
  )
 )
@@ -425,29 +425,29 @@
 ;;; DeprecatedEnum[] DeprecatedEnum.values_$private()
 (func $m_values_$private__arrayOf_deprecated_DeprecatedExample_DeprecatedEnum@deprecated.DeprecatedExample.DeprecatedEnum
  (result (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ deprecated/DeprecatedExample.java:55:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:55:7
  (block
-  ;;@ deprecated/DeprecatedExample.java:55:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:55:7
   (return (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (global.get $A_VALUE@deprecated.DeprecatedExample.DeprecatedEnum))))
  )
 )
 
 ;;; void DeprecatedEnum.$clinit()
 (func $$clinit__void_<once>_@deprecated.DeprecatedExample.DeprecatedEnum
- ;;@ deprecated/DeprecatedExample.java:55:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:55:7
  (block
-  ;;@ deprecated/DeprecatedExample.java:55:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:55:7
   (if (global.get $$class-initialized@deprecated.DeprecatedExample.DeprecatedEnum)
    (then
-    ;;@ deprecated/DeprecatedExample.java:55:7
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:55:7
     (return )
    )
   )
-  ;;@ deprecated/DeprecatedExample.java:55:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:55:7
   (global.set $$class-initialized@deprecated.DeprecatedExample.DeprecatedEnum (i32.const 1))
-  ;;@ deprecated/DeprecatedExample.java:55:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:55:7
   (call $$clinit__void_<once>_@java.lang.Enum )
-  ;;@ deprecated/DeprecatedExample.java:56:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:56:4
   (global.set $A_VALUE@deprecated.DeprecatedExample.DeprecatedEnum (call $$create__java_lang_String__int@deprecated.DeprecatedExample.DeprecatedEnum (call $$getString_|A_VALUE|__java_lang_String_<once>_@deprecated.DeprecatedExample.DeprecatedEnum )(i32.const 0)))
  )
 )
@@ -486,14 +486,14 @@
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
  (result (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum))
- ;;@ deprecated/DeprecatedExample.java:62:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
  (local $$instance (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum))
  (block
-  ;;@ deprecated/DeprecatedExample.java:62:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
   (local.set $$instance (struct.new $deprecated.DeprecatedExample.DeprecatedJsEnum (ref.as_non_null (global.get $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable)) (ref.as_non_null (global.get $deprecated.DeprecatedExample.DeprecatedJsEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
-  ;;@ deprecated/DeprecatedExample.java:62:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
   (call $$ctor__java_lang_String__int__void_$p_deprecated_DeprecatedExample_DeprecatedJsEnum@deprecated.DeprecatedExample.DeprecatedJsEnum (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
-  ;;@ deprecated/DeprecatedExample.java:62:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
   (return (local.get $$instance))
  )
 )
@@ -503,13 +503,13 @@
  (param $this (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum))
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
- ;;@ deprecated/DeprecatedExample.java:62:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
  (block
-  ;;@ deprecated/DeprecatedExample.java:62:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
   (struct.set $java.lang.Enum $name@java.lang.Enum (local.get $this) (local.get $$name))
-  ;;@ deprecated/DeprecatedExample.java:62:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
   (struct.set $java.lang.Enum $ordinal@java.lang.Enum (local.get $this) (local.get $$ordinal))
-  ;;@ deprecated/DeprecatedExample.java:62:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
   (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
  )
 )
@@ -518,20 +518,20 @@
 (func $m_valueOf__java_lang_String__deprecated_DeprecatedExample_DeprecatedJsEnum@deprecated.DeprecatedExample.DeprecatedJsEnum
  (param $name (ref null $java.lang.String))
  (result (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum))
- ;;@ deprecated/DeprecatedExample.java:62:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
  (block
-  ;;@ deprecated/DeprecatedExample.java:62:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
   (call $$clinit__void_<once>_@deprecated.DeprecatedExample.DeprecatedJsEnum )
-  ;;@ deprecated/DeprecatedExample.java:62:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
   (if (ref.is_null (global.get $namesToValuesMap@deprecated.DeprecatedExample.DeprecatedJsEnum))
    (then
     (block
-     ;;@ deprecated/DeprecatedExample.java:62:7
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
      (global.set $namesToValuesMap@deprecated.DeprecatedExample.DeprecatedJsEnum (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values_$private__arrayOf_deprecated_DeprecatedExample_DeprecatedJsEnum@deprecated.DeprecatedExample.DeprecatedJsEnum )))
     )
    )
   )
-  ;;@ deprecated/DeprecatedExample.java:62:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
   (return (ref.cast (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum) (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $namesToValuesMap@deprecated.DeprecatedExample.DeprecatedJsEnum))))
  )
 )
@@ -539,11 +539,11 @@
 ;;; DeprecatedJsEnum[] DeprecatedJsEnum.values()
 (func $m_values__arrayOf_deprecated_DeprecatedExample_DeprecatedJsEnum@deprecated.DeprecatedExample.DeprecatedJsEnum
  (result (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ deprecated/DeprecatedExample.java:62:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
  (block
-  ;;@ deprecated/DeprecatedExample.java:62:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
   (call $$clinit__void_<once>_@deprecated.DeprecatedExample.DeprecatedJsEnum )
-  ;;@ deprecated/DeprecatedExample.java:62:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
   (return (call $m_values_$private__arrayOf_deprecated_DeprecatedExample_DeprecatedJsEnum@deprecated.DeprecatedExample.DeprecatedJsEnum ))
  )
 )
@@ -551,29 +551,29 @@
 ;;; DeprecatedJsEnum[] DeprecatedJsEnum.values_$private()
 (func $m_values_$private__arrayOf_deprecated_DeprecatedExample_DeprecatedJsEnum@deprecated.DeprecatedExample.DeprecatedJsEnum
  (result (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ deprecated/DeprecatedExample.java:62:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
  (block
-  ;;@ deprecated/DeprecatedExample.java:62:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
   (return (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (global.get $A_VALUE@deprecated.DeprecatedExample.DeprecatedJsEnum))))
  )
 )
 
 ;;; void DeprecatedJsEnum.$clinit()
 (func $$clinit__void_<once>_@deprecated.DeprecatedExample.DeprecatedJsEnum
- ;;@ deprecated/DeprecatedExample.java:62:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
  (block
-  ;;@ deprecated/DeprecatedExample.java:62:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
   (if (global.get $$class-initialized@deprecated.DeprecatedExample.DeprecatedJsEnum)
    (then
-    ;;@ deprecated/DeprecatedExample.java:62:7
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
     (return )
    )
   )
-  ;;@ deprecated/DeprecatedExample.java:62:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
   (global.set $$class-initialized@deprecated.DeprecatedExample.DeprecatedJsEnum (i32.const 1))
-  ;;@ deprecated/DeprecatedExample.java:62:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
   (call $$clinit__void_<once>_@java.lang.Enum )
-  ;;@ deprecated/DeprecatedExample.java:63:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:63:4
   (global.set $A_VALUE@deprecated.DeprecatedExample.DeprecatedJsEnum (call $$create__java_lang_String__int@deprecated.DeprecatedExample.DeprecatedJsEnum (call $$getString_|A_VALUE|__java_lang_String_<once>_@deprecated.DeprecatedExample.DeprecatedEnum )(i32.const 0)))
  )
 )

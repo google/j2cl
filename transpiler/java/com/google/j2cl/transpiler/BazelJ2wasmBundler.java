@@ -417,7 +417,8 @@ final class BazelJ2wasmBundler extends BazelWorker {
     public String getItableInterfaceGetters(WasmGenerationEnvironment environment) {
       SourceBuilder sourceBuilder = new SourceBuilder();
       WasmConstructsGenerator constructsGenerator =
-          new WasmConstructsGenerator(environment, sourceBuilder);
+          new WasmConstructsGenerator(
+              environment, sourceBuilder, /* sourceMappingPathPrefix= */ null);
       interfaces.forEach(
           i -> {
             int itableFieldIndex = itableAllocator.getItableFieldIndex(i.name);

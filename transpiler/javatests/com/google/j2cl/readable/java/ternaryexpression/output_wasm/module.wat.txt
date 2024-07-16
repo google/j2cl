@@ -40,16 +40,16 @@
 ;;; TernaryExpression TernaryExpression.$create()
 (func $$create__@ternaryexpression.TernaryExpression
  (result (ref null $ternaryexpression.TernaryExpression))
- ;;@ ternaryexpression/TernaryExpression.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:18:13
  (local $$instance (ref null $ternaryexpression.TernaryExpression))
  (block
-  ;;@ ternaryexpression/TernaryExpression.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:18:13
   (call $$clinit__void_<once>_@ternaryexpression.TernaryExpression )
-  ;;@ ternaryexpression/TernaryExpression.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:18:13
   (local.set $$instance (struct.new $ternaryexpression.TernaryExpression (ref.as_non_null (global.get $ternaryexpression.TernaryExpression.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ ternaryexpression/TernaryExpression.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:18:13
   (call $$ctor__void_$p_ternaryexpression_TernaryExpression@ternaryexpression.TernaryExpression (ref.as_non_null (local.get $$instance)))
-  ;;@ ternaryexpression/TernaryExpression.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:18:13
   (return (local.get $$instance))
  )
 )
@@ -57,9 +57,9 @@
 ;;; void TernaryExpression.$ctor()
 (func $$ctor__void_$p_ternaryexpression_TernaryExpression@ternaryexpression.TernaryExpression
  (param $this (ref null $ternaryexpression.TernaryExpression))
- ;;@ ternaryexpression/TernaryExpression.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:18:13
  (block
-  ;;@ ternaryexpression/TernaryExpression.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -68,7 +68,7 @@
 (func $m_test__void@ternaryexpression.TernaryExpression
  (type $function.m_test__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ ternaryexpression/TernaryExpression.java:20:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:20:14
  (local $a i32)
  (local $number i32)
  (local $b i32)
@@ -76,13 +76,13 @@
  (local $this (ref null $ternaryexpression.TernaryExpression))
  (local.set $this (ref.cast (ref $ternaryexpression.TernaryExpression) (local.get $this.untyped)))
  (block
-  ;;@ ternaryexpression/TernaryExpression.java:21:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:21:4
   (local.set $a (i32.const 1))
-  ;;@ ternaryexpression/TernaryExpression.java:22:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:22:4
   (local.set $number (if (result i32) (local.get $a) (then (i32.const 1)) (else (i32.const 2))))
-  ;;@ ternaryexpression/TernaryExpression.java:24:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:24:4
   (local.set $b (if (result i32) (i32.eq (local.get $number) (i32.const 1)) (then (i32.eq (local.get $number) (i32.const 2))) (else (i32.eq (local.get $number) (i32.const 1)))))
-  ;;@ ternaryexpression/TernaryExpression.java:26:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:26:4
   (local.set $value (call $m_intValue__int@java.lang.Integer (ref.as_non_null (if (result (ref null $java.lang.Integer)) (local.get $b) (then (call $$create__int@java.lang.Integer (i32.const 15))) (else (call $$create__int@java.lang.Integer (i32.const 30)))))))
  )
 )
@@ -90,18 +90,18 @@
 
 ;;; void TernaryExpression.$clinit()
 (func $$clinit__void_<once>_@ternaryexpression.TernaryExpression
- ;;@ ternaryexpression/TernaryExpression.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:18:13
  (block
-  ;;@ ternaryexpression/TernaryExpression.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:18:13
   (if (global.get $$class-initialized@ternaryexpression.TernaryExpression)
    (then
-    ;;@ ternaryexpression/TernaryExpression.java:18:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:18:13
     (return )
    )
   )
-  ;;@ ternaryexpression/TernaryExpression.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:18:13
   (global.set $$class-initialized@ternaryexpression.TernaryExpression (i32.const 1))
-  ;;@ ternaryexpression/TernaryExpression.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:18:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

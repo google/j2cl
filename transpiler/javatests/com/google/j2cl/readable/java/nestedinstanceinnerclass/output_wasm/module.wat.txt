@@ -114,11 +114,11 @@
 ;;; OuterClass OuterClass.$create()
 (func $$create__@nestedinstanceinnerclass.OuterClass
  (result (ref null $nestedinstanceinnerclass.OuterClass))
- ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:18:13
  (block
-  ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:18:13
   (call $$clinit__void_<once>_@nestedinstanceinnerclass.OuterClass )
-  ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:18:13
   (return (call $$create_$private__@nestedinstanceinnerclass.OuterClass ))
  )
 )
@@ -126,14 +126,14 @@
 ;;; OuterClass OuterClass.$create_$private()
 (func $$create_$private__@nestedinstanceinnerclass.OuterClass
  (result (ref null $nestedinstanceinnerclass.OuterClass))
- ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:18:13
  (local $$instance (ref null $nestedinstanceinnerclass.OuterClass))
  (block
-  ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:18:13
   (local.set $$instance (struct.new $nestedinstanceinnerclass.OuterClass (ref.as_non_null (global.get $nestedinstanceinnerclass.OuterClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:18:13
   (call $$ctor__void_$p_nestedinstanceinnerclass_OuterClass@nestedinstanceinnerclass.OuterClass (ref.as_non_null (local.get $$instance)))
-  ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:18:13
   (return (local.get $$instance))
  )
 )
@@ -141,9 +141,9 @@
 ;;; void OuterClass.$ctor()
 (func $$ctor__void_$p_nestedinstanceinnerclass_OuterClass@nestedinstanceinnerclass.OuterClass
  (param $this (ref null $nestedinstanceinnerclass.OuterClass))
- ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:18:13
  (block
-  ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -152,11 +152,11 @@
 (func $m_test__void@nestedinstanceinnerclass.OuterClass
  (type $function.m_test__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ nestedinstanceinnerclass/OuterClass.java:26:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:26:14
  (local $this (ref null $nestedinstanceinnerclass.OuterClass))
  (local.set $this (ref.cast (ref $nestedinstanceinnerclass.OuterClass) (local.get $this.untyped)))
  (block
-  ;;@ nestedinstanceinnerclass/OuterClass.java:27:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:27:4
   (drop (call $$create__nestedinstanceinnerclass_OuterClass_InnerClass@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (call $$create__nestedinstanceinnerclass_OuterClass@nestedinstanceinnerclass.OuterClass.InnerClass (call $$create_$private__@nestedinstanceinnerclass.OuterClass ))))
  )
 )
@@ -164,18 +164,18 @@
 
 ;;; void OuterClass.$clinit()
 (func $$clinit__void_<once>_@nestedinstanceinnerclass.OuterClass
- ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:18:13
  (block
-  ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:18:13
   (if (global.get $$class-initialized@nestedinstanceinnerclass.OuterClass)
    (then
-    ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:18:13
     (return )
    )
   )
-  ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:18:13
   (global.set $$class-initialized@nestedinstanceinnerclass.OuterClass (i32.const 1))
-  ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:18:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -213,16 +213,16 @@
 (func $$create__nestedinstanceinnerclass_OuterClass_InnerClass@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass
  (param $$outer_this (ref null $nestedinstanceinnerclass.OuterClass.InnerClass))
  (result (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass))
- ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:20:17
  (local $$instance (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass))
  (block
-  ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:20:17
   (call $$clinit__void_<once>_@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass )
-  ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:20:17
   (local.set $$instance (struct.new $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (ref.as_non_null (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $nestedinstanceinnerclass.OuterClass.InnerClass) (ref.null $nestedinstanceinnerclass.OuterClass.InnerClass) (ref.null $nestedinstanceinnerclass.OuterClass)))
-  ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:20:17
   (call $$ctor__nestedinstanceinnerclass_OuterClass_InnerClass__void_$p_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:20:17
   (return (local.get $$instance))
  )
 )
@@ -231,13 +231,13 @@
 (func $$ctor__nestedinstanceinnerclass_OuterClass_InnerClass__void_$p_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass
  (param $this (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass))
  (param $$outer_this (ref null $nestedinstanceinnerclass.OuterClass.InnerClass))
- ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:20:17
  (block
-  ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:20:17
   (struct.set $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass $$outer_this@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (local.get $this) (local.get $$outer_this))
-  ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:20:17
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:20:17
   (call $$init__void_$p_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (ref.as_non_null (local.get $this)))
  )
 )
@@ -245,29 +245,29 @@
 ;;; void InnerInnerClass.$init()
 (func $$init__void_$p_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass
  (param $this (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass))
- ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:20:17
  (block
-  ;;@ nestedinstanceinnerclass/OuterClass.java:21:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:21:6
   (struct.set $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass $x@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (local.get $this) (struct.get $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass $$outer_this@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (local.get $this)))
-  ;;@ nestedinstanceinnerclass/OuterClass.java:22:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:22:6
   (struct.set $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass $y@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (local.get $this) (struct.get $nestedinstanceinnerclass.OuterClass.InnerClass $$outer_this@nestedinstanceinnerclass.OuterClass.InnerClass (struct.get $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass $$outer_this@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (local.get $this))))
  )
 )
 
 ;;; void InnerInnerClass.$clinit()
 (func $$clinit__void_<once>_@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass
- ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:20:17
  (block
-  ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:20:17
   (if (global.get $$class-initialized@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass)
    (then
-    ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:20:17
     (return )
    )
   )
-  ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:20:17
   (global.set $$class-initialized@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (i32.const 1))
-  ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:20:17
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -305,16 +305,16 @@
 (func $$create__nestedinstanceinnerclass_OuterClass@nestedinstanceinnerclass.OuterClass.InnerClass
  (param $$outer_this (ref null $nestedinstanceinnerclass.OuterClass))
  (result (ref null $nestedinstanceinnerclass.OuterClass.InnerClass))
- ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:19:15
  (local $$instance (ref null $nestedinstanceinnerclass.OuterClass.InnerClass))
  (block
-  ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:19:15
   (call $$clinit__void_<once>_@nestedinstanceinnerclass.OuterClass.InnerClass )
-  ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:19:15
   (local.set $$instance (struct.new $nestedinstanceinnerclass.OuterClass.InnerClass (ref.as_non_null (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $nestedinstanceinnerclass.OuterClass)))
-  ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:19:15
   (call $$ctor__nestedinstanceinnerclass_OuterClass__void_$p_nestedinstanceinnerclass_OuterClass_InnerClass@nestedinstanceinnerclass.OuterClass.InnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:19:15
   (return (local.get $$instance))
  )
 )
@@ -323,29 +323,29 @@
 (func $$ctor__nestedinstanceinnerclass_OuterClass__void_$p_nestedinstanceinnerclass_OuterClass_InnerClass@nestedinstanceinnerclass.OuterClass.InnerClass
  (param $this (ref null $nestedinstanceinnerclass.OuterClass.InnerClass))
  (param $$outer_this (ref null $nestedinstanceinnerclass.OuterClass))
- ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:19:15
  (block
-  ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:19:15
   (struct.set $nestedinstanceinnerclass.OuterClass.InnerClass $$outer_this@nestedinstanceinnerclass.OuterClass.InnerClass (local.get $this) (local.get $$outer_this))
-  ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:19:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void InnerClass.$clinit()
 (func $$clinit__void_<once>_@nestedinstanceinnerclass.OuterClass.InnerClass
- ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:19:15
  (block
-  ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:19:15
   (if (global.get $$class-initialized@nestedinstanceinnerclass.OuterClass.InnerClass)
    (then
-    ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:19:15
     (return )
    )
   )
-  ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:19:15
   (global.set $$class-initialized@nestedinstanceinnerclass.OuterClass.InnerClass (i32.const 1))
-  ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:19:15
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

@@ -52,16 +52,16 @@
 ;;; SynchronizedMethod SynchronizedMethod.$create()
 (func $$create__@synchronizedmethod.SynchronizedMethod
  (result (ref null $synchronizedmethod.SynchronizedMethod))
- ;;@ synchronizedmethod/SynchronizedMethod.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedmethod/readable-j2wasm.js/synchronizedmethod/SynchronizedMethod.java:18:13
  (local $$instance (ref null $synchronizedmethod.SynchronizedMethod))
  (block
-  ;;@ synchronizedmethod/SynchronizedMethod.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedmethod/readable-j2wasm.js/synchronizedmethod/SynchronizedMethod.java:18:13
   (call $$clinit__void_<once>_@synchronizedmethod.SynchronizedMethod )
-  ;;@ synchronizedmethod/SynchronizedMethod.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedmethod/readable-j2wasm.js/synchronizedmethod/SynchronizedMethod.java:18:13
   (local.set $$instance (struct.new $synchronizedmethod.SynchronizedMethod (ref.as_non_null (global.get $synchronizedmethod.SynchronizedMethod.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (i32.const 0)))
-  ;;@ synchronizedmethod/SynchronizedMethod.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedmethod/readable-j2wasm.js/synchronizedmethod/SynchronizedMethod.java:18:13
   (call $$ctor__void_$p_synchronizedmethod_SynchronizedMethod@synchronizedmethod.SynchronizedMethod (ref.as_non_null (local.get $$instance)))
-  ;;@ synchronizedmethod/SynchronizedMethod.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedmethod/readable-j2wasm.js/synchronizedmethod/SynchronizedMethod.java:18:13
   (return (local.get $$instance))
  )
 )
@@ -69,9 +69,9 @@
 ;;; void SynchronizedMethod.$ctor()
 (func $$ctor__void_$p_synchronizedmethod_SynchronizedMethod@synchronizedmethod.SynchronizedMethod
  (param $this (ref null $synchronizedmethod.SynchronizedMethod))
- ;;@ synchronizedmethod/SynchronizedMethod.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedmethod/readable-j2wasm.js/synchronizedmethod/SynchronizedMethod.java:18:13
  (block
-  ;;@ synchronizedmethod/SynchronizedMethod.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedmethod/readable-j2wasm.js/synchronizedmethod/SynchronizedMethod.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -80,13 +80,13 @@
 (func $m_testNonStatic__void@synchronizedmethod.SynchronizedMethod
  (type $function.m_testNonStatic__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ synchronizedmethod/SynchronizedMethod.java:25:27
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedmethod/readable-j2wasm.js/synchronizedmethod/SynchronizedMethod.java:25:27
  (local $this (ref null $synchronizedmethod.SynchronizedMethod))
  (local.set $this (ref.cast (ref $synchronizedmethod.SynchronizedMethod) (local.get $this.untyped)))
  (block
-  ;;@ synchronizedmethod/SynchronizedMethod.java:26:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedmethod/readable-j2wasm.js/synchronizedmethod/SynchronizedMethod.java:26:4
   (struct.set $synchronizedmethod.SynchronizedMethod $a@synchronizedmethod.SynchronizedMethod (local.get $this) (i32.add (struct.get $synchronizedmethod.SynchronizedMethod $a@synchronizedmethod.SynchronizedMethod (local.get $this)) (i32.const 1)))
-  ;;@ synchronizedmethod/SynchronizedMethod.java:27:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedmethod/readable-j2wasm.js/synchronizedmethod/SynchronizedMethod.java:27:4
   (struct.set $synchronizedmethod.SynchronizedMethod $b@synchronizedmethod.SynchronizedMethod (local.get $this) (i32.sub (struct.get $synchronizedmethod.SynchronizedMethod $b@synchronizedmethod.SynchronizedMethod (local.get $this)) (i32.const 1)))
  )
 )
@@ -94,13 +94,13 @@
 
 ;;; void SynchronizedMethod.testStatic()
 (func $m_testStatic__void@synchronizedmethod.SynchronizedMethod
- ;;@ synchronizedmethod/SynchronizedMethod.java:30:34
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedmethod/readable-j2wasm.js/synchronizedmethod/SynchronizedMethod.java:30:34
  (block
-  ;;@ synchronizedmethod/SynchronizedMethod.java:30:47
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedmethod/readable-j2wasm.js/synchronizedmethod/SynchronizedMethod.java:30:47
   (call $$clinit__void_<once>_@synchronizedmethod.SynchronizedMethod )
-  ;;@ synchronizedmethod/SynchronizedMethod.java:31:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedmethod/readable-j2wasm.js/synchronizedmethod/SynchronizedMethod.java:31:4
   (global.set $sa@synchronizedmethod.SynchronizedMethod (i32.add (global.get $sa@synchronizedmethod.SynchronizedMethod) (i32.const 1)))
-  ;;@ synchronizedmethod/SynchronizedMethod.java:32:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedmethod/readable-j2wasm.js/synchronizedmethod/SynchronizedMethod.java:32:4
   (global.set $sb@synchronizedmethod.SynchronizedMethod (i32.sub (global.get $sb@synchronizedmethod.SynchronizedMethod) (i32.const 1)))
  )
 )
@@ -111,17 +111,17 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $bool i32)
  (result i32)
- ;;@ synchronizedmethod/SynchronizedMethod.java:35:26
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedmethod/readable-j2wasm.js/synchronizedmethod/SynchronizedMethod.java:35:26
  (local $$value i32)
  (local $$value_1 i32)
  (local $this (ref null $synchronizedmethod.SynchronizedMethod))
  (local.set $this (ref.cast (ref $synchronizedmethod.SynchronizedMethod) (local.get $this.untyped)))
  (block
-  ;;@ synchronizedmethod/SynchronizedMethod.java:36:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedmethod/readable-j2wasm.js/synchronizedmethod/SynchronizedMethod.java:36:4
   (if (local.get $bool)
    (then
     (block
-     ;;@ synchronizedmethod/SynchronizedMethod.java:37:6
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedmethod/readable-j2wasm.js/synchronizedmethod/SynchronizedMethod.java:37:6
      (return (block (result i32)
       (local.set $$value (struct.get $synchronizedmethod.SynchronizedMethod $a@synchronizedmethod.SynchronizedMethod (local.get $this)))
       (struct.set $synchronizedmethod.SynchronizedMethod $a@synchronizedmethod.SynchronizedMethod (local.get $this) (i32.add (struct.get $synchronizedmethod.SynchronizedMethod $a@synchronizedmethod.SynchronizedMethod (local.get $this)) (i32.const 1)))
@@ -130,7 +130,7 @@
     )
    )
   )
-  ;;@ synchronizedmethod/SynchronizedMethod.java:39:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedmethod/readable-j2wasm.js/synchronizedmethod/SynchronizedMethod.java:39:4
   (return (block (result i32)
    (local.set $$value_1 (struct.get $synchronizedmethod.SynchronizedMethod $b@synchronizedmethod.SynchronizedMethod (local.get $this)))
    (struct.set $synchronizedmethod.SynchronizedMethod $b@synchronizedmethod.SynchronizedMethod (local.get $this) (i32.sub (struct.get $synchronizedmethod.SynchronizedMethod $b@synchronizedmethod.SynchronizedMethod (local.get $this)) (i32.const 1)))
@@ -146,23 +146,23 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $b1 i32)
  (param $b2 i32)
- ;;@ synchronizedmethod/SynchronizedMethod.java:42:27
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedmethod/readable-j2wasm.js/synchronizedmethod/SynchronizedMethod.java:42:27
  (local $this (ref null $synchronizedmethod.SynchronizedMethod))
  (local.set $this (ref.cast (ref $synchronizedmethod.SynchronizedMethod) (local.get $this.untyped)))
  (block
-  ;;@ synchronizedmethod/SynchronizedMethod.java:43:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedmethod/readable-j2wasm.js/synchronizedmethod/SynchronizedMethod.java:43:4
   (if (local.get $b1)
    (then
     (block
-     ;;@ synchronizedmethod/SynchronizedMethod.java:44:6
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedmethod/readable-j2wasm.js/synchronizedmethod/SynchronizedMethod.java:44:6
      (drop (call $m_apply__java_lang_String__java_lang_String_$p_synchronizedmethod_SynchronizedMethod@synchronizedmethod.SynchronizedMethod (ref.as_non_null (local.get $this))(call $$getString_|foo|__java_lang_String_<once>_@synchronizedmethod.SynchronizedMethod )))
     )
    )(else
-    ;;@ synchronizedmethod/SynchronizedMethod.java:45:11
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedmethod/readable-j2wasm.js/synchronizedmethod/SynchronizedMethod.java:45:11
     (if (local.get $b2)
      (then
       (block
-       ;;@ synchronizedmethod/SynchronizedMethod.java:46:6
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedmethod/readable-j2wasm.js/synchronizedmethod/SynchronizedMethod.java:46:6
        (drop (call $m_apply__java_lang_String__java_lang_String_$p_synchronizedmethod_SynchronizedMethod@synchronizedmethod.SynchronizedMethod (ref.as_non_null (local.get $this))(call $$getString_|bar|__java_lang_String_<once>_@synchronizedmethod.SynchronizedMethod )))
       )
      )
@@ -178,27 +178,27 @@
  (param $this (ref null $synchronizedmethod.SynchronizedMethod))
  (param $string (ref null $java.lang.String))
  (result (ref null $java.lang.String))
- ;;@ synchronizedmethod/SynchronizedMethod.java:50:17
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedmethod/readable-j2wasm.js/synchronizedmethod/SynchronizedMethod.java:50:17
  (block
-  ;;@ synchronizedmethod/SynchronizedMethod.java:51:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedmethod/readable-j2wasm.js/synchronizedmethod/SynchronizedMethod.java:51:4
   (return (local.get $string))
  )
 )
 
 ;;; void SynchronizedMethod.$clinit()
 (func $$clinit__void_<once>_@synchronizedmethod.SynchronizedMethod
- ;;@ synchronizedmethod/SynchronizedMethod.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedmethod/readable-j2wasm.js/synchronizedmethod/SynchronizedMethod.java:18:13
  (block
-  ;;@ synchronizedmethod/SynchronizedMethod.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedmethod/readable-j2wasm.js/synchronizedmethod/SynchronizedMethod.java:18:13
   (if (global.get $$class-initialized@synchronizedmethod.SynchronizedMethod)
    (then
-    ;;@ synchronizedmethod/SynchronizedMethod.java:18:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedmethod/readable-j2wasm.js/synchronizedmethod/SynchronizedMethod.java:18:13
     (return )
    )
   )
-  ;;@ synchronizedmethod/SynchronizedMethod.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedmethod/readable-j2wasm.js/synchronizedmethod/SynchronizedMethod.java:18:13
   (global.set $$class-initialized@synchronizedmethod.SynchronizedMethod (i32.const 1))
-  ;;@ synchronizedmethod/SynchronizedMethod.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedmethod/readable-j2wasm.js/synchronizedmethod/SynchronizedMethod.java:18:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

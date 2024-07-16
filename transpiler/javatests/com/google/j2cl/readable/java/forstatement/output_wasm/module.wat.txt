@@ -46,16 +46,16 @@
 ;;; ForStatement ForStatement.$create()
 (func $$create__@forstatement.ForStatement
  (result (ref null $forstatement.ForStatement))
- ;;@ forstatement/ForStatement.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:18:13
  (local $$instance (ref null $forstatement.ForStatement))
  (block
-  ;;@ forstatement/ForStatement.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:18:13
   (call $$clinit__void_<once>_@forstatement.ForStatement )
-  ;;@ forstatement/ForStatement.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:18:13
   (local.set $$instance (struct.new $forstatement.ForStatement (ref.as_non_null (global.get $forstatement.ForStatement.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ forstatement/ForStatement.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:18:13
   (call $$ctor__void_$p_forstatement_ForStatement@forstatement.ForStatement (ref.as_non_null (local.get $$instance)))
-  ;;@ forstatement/ForStatement.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:18:13
   (return (local.get $$instance))
  )
 )
@@ -63,9 +63,9 @@
 ;;; void ForStatement.$ctor()
 (func $$ctor__void_$p_forstatement_ForStatement@forstatement.ForStatement
  (param $this (ref null $forstatement.ForStatement))
- ;;@ forstatement/ForStatement.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:18:13
  (block
-  ;;@ forstatement/ForStatement.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -74,7 +74,7 @@
 (func $m_test__void@forstatement.ForStatement
  (type $function.m_test__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ forstatement/ForStatement.java:19:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:19:14
  (local $i i32)
  (local $count i32)
  (local $l i64)
@@ -84,7 +84,7 @@
  (local $this (ref null $forstatement.ForStatement))
  (local.set $this (ref.cast (ref $forstatement.ForStatement) (local.get $this.untyped)))
  (block
-  ;;@ forstatement/ForStatement.java:20:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:20:4
   (local.set $i (i32.const 0))
   (local.set $count (i32.const 0))
   (block $LOOP.BREAK
@@ -92,7 +92,7 @@
     (br_if 1 (i32.eqz (i32.lt_s (local.get $i) (i32.const 100))))
     (block $LOOP.CONTINUE
      (block
-      ;;@ forstatement/ForStatement.java:21:6
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:21:6
       (local.set $count (i32.add (local.get $count) (i32.const 1)))
      )
     )
@@ -100,7 +100,7 @@
     (br 0)
    )
   )
-  ;;@ forstatement/ForStatement.java:24:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:24:4
   (local.set $l (i64.const 0))
   (local.set $count_1 (i64.const 0))
   (block $LOOP_1.BREAK
@@ -108,7 +108,7 @@
     (br_if 1 (i32.eqz (i64.lt_s (local.get $l) (i64.const 100))))
     (block $LOOP_1.CONTINUE
      (block
-      ;;@ forstatement/ForStatement.java:25:6
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:25:6
       (local.set $count_1 (i64.add (local.get $count_1) (i64.const 1)))
      )
     )
@@ -117,9 +117,9 @@
     (br 0)
    )
   )
-  ;;@ forstatement/ForStatement.java:28:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:28:4
   (local.set $a (i32.const 0))
-  ;;@ forstatement/ForStatement.java:29:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:29:4
   (block $LOOP_2.BREAK
    (loop
     (br_if 1 (i32.eqz (block (result i32)
@@ -133,9 +133,9 @@
     (br 0)
    )
   )
-  ;;@ forstatement/ForStatement.java:31:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:31:4
   (local.set $b (i32.const 0))
-  ;;@ forstatement/ForStatement.java:32:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:32:4
   (block $LOOP_3.BREAK
    (loop
     (br_if 1 (i32.eqz (block (result i32)
@@ -149,7 +149,7 @@
     (br 0)
    )
   )
-  ;;@ forstatement/ForStatement.java:34:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:34:4
   (drop (call $m_returnsValue__int@forstatement.ForStatement ))
   (block $LOOP_4.BREAK
    (loop
@@ -169,7 +169,7 @@
 (func $m_testContinue__void@forstatement.ForStatement
  (type $function.m_testContinue__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ forstatement/ForStatement.java:37:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:37:14
  (local $i i32)
  (local $j i32)
  (local $k i32)
@@ -177,7 +177,7 @@
  (local $this (ref null $forstatement.ForStatement))
  (local.set $this (ref.cast (ref $forstatement.ForStatement) (local.get $this.untyped)))
  (block
-  ;;@ forstatement/ForStatement.java:38:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:38:4
   (local.set $i (i32.const 0))
   (local.set $j (i32.const 0))
   (block $LABEL.BREAK
@@ -185,16 +185,16 @@
     (br_if 1 (i32.eqz (i32.lt_s (local.get $i) (i32.const 10))))
     (block $LABEL.CONTINUE
      (block
-      ;;@ forstatement/ForStatement.java:40:6
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:40:6
       (if (i32.eq (local.get $i) (i32.const 5))
        (then
         (block
-         ;;@ forstatement/ForStatement.java:41:8
+         ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:41:8
          (br $LABEL.CONTINUE)
         )
        )
       )
-      ;;@ forstatement/ForStatement.java:43:6
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:43:6
       (local.set $k (i32.const 0))
       (local.set $l (i32.const 0))
       (block $LOOP.BREAK
@@ -202,11 +202,11 @@
         (br_if 1 (i32.eqz (i32.lt_s (local.get $k) (i32.const 10))))
         (block $LOOP.CONTINUE
          (block
-          ;;@ forstatement/ForStatement.java:44:8
+          ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:44:8
           (if (i32.eq (local.get $j) (i32.const 5))
            (then
             (block
-             ;;@ forstatement/ForStatement.java:45:10
+             ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:45:10
              (br $LABEL.CONTINUE)
             )
            )
@@ -233,14 +233,14 @@
 (func $m_testInitializeInForCondition__void@forstatement.ForStatement
  (type $function.m_testInitializeInForCondition__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ forstatement/ForStatement.java:51:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:51:14
  (local $i i32)
  (local $x i32)
  (local $y i32)
  (local $this (ref null $forstatement.ForStatement))
  (local.set $this (ref.cast (ref $forstatement.ForStatement) (local.get $this.untyped)))
  (block
-  ;;@ forstatement/ForStatement.java:52:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:52:4
   (local.set $i (i32.const 0))
   (block $LOOP.BREAK
    (loop
@@ -250,9 +250,9 @@
     ) (i32.const 0))) (else (i32.const 0)))))
     (block $LOOP.CONTINUE
      (block
-      ;;@ forstatement/ForStatement.java:53:6
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:53:6
       
-      ;;@ forstatement/ForStatement.java:54:6
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:54:6
       (local.set $y (i32.add (local.get $i) (local.get $x)))
      )
     )
@@ -268,16 +268,16 @@
 (func $m_testForStatementInsideDeadCode__void@forstatement.ForStatement
  (type $function.m_testForStatementInsideDeadCode__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ forstatement/ForStatement.java:58:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:58:14
  (local $i i32)
  (local $this (ref null $forstatement.ForStatement))
  (local.set $this (ref.cast (ref $forstatement.ForStatement) (local.get $this.untyped)))
  (block
-  ;;@ forstatement/ForStatement.java:59:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:59:4
   (if (i32.const 0)
    (then
     (block
-     ;;@ forstatement/ForStatement.java:62:6
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:62:6
      (local.set $i (i32.const 0))
      (block $LOOP.BREAK
       (loop
@@ -300,27 +300,27 @@
 ;;; int ForStatement.returnsValue()
 (func $m_returnsValue__int@forstatement.ForStatement
  (result i32)
- ;;@ forstatement/ForStatement.java:66:21
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:66:21
  (block
-  ;;@ forstatement/ForStatement.java:67:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:67:4
   (return (i32.const 1))
  )
 )
 
 ;;; void ForStatement.$clinit()
 (func $$clinit__void_<once>_@forstatement.ForStatement
- ;;@ forstatement/ForStatement.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:18:13
  (block
-  ;;@ forstatement/ForStatement.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:18:13
   (if (global.get $$class-initialized@forstatement.ForStatement)
    (then
-    ;;@ forstatement/ForStatement.java:18:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:18:13
     (return )
    )
   )
-  ;;@ forstatement/ForStatement.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:18:13
   (global.set $$class-initialized@forstatement.ForStatement (i32.const 1))
-  ;;@ forstatement/ForStatement.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/forstatement/readable-j2wasm.js/forstatement/ForStatement.java:18:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

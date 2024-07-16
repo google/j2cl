@@ -230,16 +230,16 @@
 ;;; SimpleLocalClass SimpleLocalClass.$create()
 (func $$create__@simplelocalclass.SimpleLocalClass
  (result (ref null $simplelocalclass.SimpleLocalClass))
- ;;@ simplelocalclass/SimpleLocalClass.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:18:13
  (local $$instance (ref null $simplelocalclass.SimpleLocalClass))
  (block
-  ;;@ simplelocalclass/SimpleLocalClass.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:18:13
   (call $$clinit__void_<once>_@simplelocalclass.SimpleLocalClass )
-  ;;@ simplelocalclass/SimpleLocalClass.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:18:13
   (local.set $$instance (struct.new $simplelocalclass.SimpleLocalClass (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ simplelocalclass/SimpleLocalClass.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:18:13
   (call $$ctor__void_$p_simplelocalclass_SimpleLocalClass@simplelocalclass.SimpleLocalClass (ref.as_non_null (local.get $$instance)))
-  ;;@ simplelocalclass/SimpleLocalClass.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:18:13
   (return (local.get $$instance))
  )
 )
@@ -247,9 +247,9 @@
 ;;; void SimpleLocalClass.$ctor()
 (func $$ctor__void_$p_simplelocalclass_SimpleLocalClass@simplelocalclass.SimpleLocalClass
  (param $this (ref null $simplelocalclass.SimpleLocalClass))
- ;;@ simplelocalclass/SimpleLocalClass.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:18:13
  (block
-  ;;@ simplelocalclass/SimpleLocalClass.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -259,21 +259,21 @@
  (type $function.m_test__int__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $p i32)
- ;;@ simplelocalclass/SimpleLocalClass.java:19:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:19:14
  (local $localVar i32)
  (local $$qualifier (ref null $simplelocalclass.SimpleLocalClass.1InnerClass))
  (local $this (ref null $simplelocalclass.SimpleLocalClass))
  (local.set $this (ref.cast (ref $simplelocalclass.SimpleLocalClass) (local.get $this.untyped)))
  (block
-  ;;@ simplelocalclass/SimpleLocalClass.java:20:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:20:4
   (local.set $localVar (i32.const 1))
   (block
-   ;;@ simplelocalclass/SimpleLocalClass.java:26:4
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:26:4
    (local.set $$qualifier (call $$create__simplelocalclass_SimpleLocalClass__int__int@simplelocalclass.SimpleLocalClass.1InnerClass (local.get $this)(local.get $localVar)(local.get $p)))
-   ;;@ simplelocalclass/SimpleLocalClass.java:26:4
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:26:4
    (drop (call_ref $function.m_fun__int (ref.as_non_null (local.get $$qualifier))(struct.get $simplelocalclass.SimpleLocalClass.1InnerClass.vtable $m_fun__int (struct.get $simplelocalclass.SimpleLocalClass.1InnerClass $vtable(local.get $$qualifier)))))
   )
-  ;;@ simplelocalclass/SimpleLocalClass.java:30:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:30:4
   (drop (call $$create__simplelocalclass_SimpleLocalClass@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (local.get $this)))
  )
 )
@@ -283,12 +283,12 @@
 (func $m_fun__void@simplelocalclass.SimpleLocalClass
  (type $function.m_fun__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ simplelocalclass/SimpleLocalClass.java:34:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:34:14
  (local $localVar i32)
  (local $this (ref null $simplelocalclass.SimpleLocalClass))
  (local.set $this (ref.cast (ref $simplelocalclass.SimpleLocalClass) (local.get $this.untyped)))
  (block
-  ;;@ simplelocalclass/SimpleLocalClass.java:35:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:35:4
   (local.set $localVar (i32.const 1))
  )
 )
@@ -298,7 +298,7 @@
 (func $m_foo__void@simplelocalclass.SimpleLocalClass
  (type $function.m_foo__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ simplelocalclass/SimpleLocalClass.java:42:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:42:14
  (local $this (ref null $simplelocalclass.SimpleLocalClass))
  (local.set $this (ref.cast (ref $simplelocalclass.SimpleLocalClass) (local.get $this.untyped)))
  (block
@@ -308,18 +308,18 @@
 
 ;;; void SimpleLocalClass.$clinit()
 (func $$clinit__void_<once>_@simplelocalclass.SimpleLocalClass
- ;;@ simplelocalclass/SimpleLocalClass.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:18:13
  (block
-  ;;@ simplelocalclass/SimpleLocalClass.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:18:13
   (if (global.get $$class-initialized@simplelocalclass.SimpleLocalClass)
    (then
-    ;;@ simplelocalclass/SimpleLocalClass.java:18:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:18:13
     (return )
    )
   )
-  ;;@ simplelocalclass/SimpleLocalClass.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:18:13
   (global.set $$class-initialized@simplelocalclass.SimpleLocalClass (i32.const 1))
-  ;;@ simplelocalclass/SimpleLocalClass.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:18:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -359,16 +359,16 @@
  (param $$captured_localVar i32)
  (param $$captured_p i32)
  (result (ref null $simplelocalclass.SimpleLocalClass.1InnerClass))
- ;;@ simplelocalclass/SimpleLocalClass.java:21:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:21:10
  (local $$instance (ref null $simplelocalclass.SimpleLocalClass.1InnerClass))
  (block
-  ;;@ simplelocalclass/SimpleLocalClass.java:21:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:21:10
   (call $$clinit__void_<once>_@simplelocalclass.SimpleLocalClass.1InnerClass )
-  ;;@ simplelocalclass/SimpleLocalClass.java:21:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:21:10
   (local.set $$instance (struct.new $simplelocalclass.SimpleLocalClass.1InnerClass (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (i32.const 0) (ref.null $simplelocalclass.SimpleLocalClass)))
-  ;;@ simplelocalclass/SimpleLocalClass.java:21:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:21:10
   (call $$ctor__simplelocalclass_SimpleLocalClass__int__int__void_$p_simplelocalclass_SimpleLocalClass_1InnerClass@simplelocalclass.SimpleLocalClass.1InnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$captured_localVar)(local.get $$captured_p))
-  ;;@ simplelocalclass/SimpleLocalClass.java:21:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:21:10
   (return (local.get $$instance))
  )
 )
@@ -379,15 +379,15 @@
  (param $$outer_this (ref null $simplelocalclass.SimpleLocalClass))
  (param $$captured_localVar i32)
  (param $$captured_p i32)
- ;;@ simplelocalclass/SimpleLocalClass.java:21:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:21:10
  (block
-  ;;@ simplelocalclass/SimpleLocalClass.java:21:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:21:10
   (struct.set $simplelocalclass.SimpleLocalClass.1InnerClass $$outer_this@simplelocalclass.SimpleLocalClass.1InnerClass (local.get $this) (local.get $$outer_this))
-  ;;@ simplelocalclass/SimpleLocalClass.java:20:14
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:20:14
   (struct.set $simplelocalclass.SimpleLocalClass.1InnerClass $$captured_localVar@simplelocalclass.SimpleLocalClass.1InnerClass (local.get $this) (local.get $$captured_localVar))
-  ;;@ simplelocalclass/SimpleLocalClass.java:19:29
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:19:29
   (struct.set $simplelocalclass.SimpleLocalClass.1InnerClass $$captured_p@simplelocalclass.SimpleLocalClass.1InnerClass (local.get $this) (local.get $$captured_p))
-  ;;@ simplelocalclass/SimpleLocalClass.java:21:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:21:10
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -397,11 +397,11 @@
  (type $function.m_fun__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ simplelocalclass/SimpleLocalClass.java:22:17
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:22:17
  (local $this (ref null $simplelocalclass.SimpleLocalClass.1InnerClass))
  (local.set $this (ref.cast (ref $simplelocalclass.SimpleLocalClass.1InnerClass) (local.get $this.untyped)))
  (block
-  ;;@ simplelocalclass/SimpleLocalClass.java:23:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:23:8
   (return (i32.add (struct.get $simplelocalclass.SimpleLocalClass.1InnerClass $$captured_localVar@simplelocalclass.SimpleLocalClass.1InnerClass (local.get $this)) (struct.get $simplelocalclass.SimpleLocalClass.1InnerClass $$captured_p@simplelocalclass.SimpleLocalClass.1InnerClass (local.get $this))))
  )
 )
@@ -409,18 +409,18 @@
 
 ;;; void InnerClass.$clinit()
 (func $$clinit__void_<once>_@simplelocalclass.SimpleLocalClass.1InnerClass
- ;;@ simplelocalclass/SimpleLocalClass.java:21:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:21:10
  (block
-  ;;@ simplelocalclass/SimpleLocalClass.java:21:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:21:10
   (if (global.get $$class-initialized@simplelocalclass.SimpleLocalClass.1InnerClass)
    (then
-    ;;@ simplelocalclass/SimpleLocalClass.java:21:10
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:21:10
     (return )
    )
   )
-  ;;@ simplelocalclass/SimpleLocalClass.java:21:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:21:10
   (global.set $$class-initialized@simplelocalclass.SimpleLocalClass.1InnerClass (i32.const 1))
-  ;;@ simplelocalclass/SimpleLocalClass.java:21:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:21:10
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -458,16 +458,16 @@
 (func $$create__simplelocalclass_SimpleLocalClass@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures
  (param $$outer_this (ref null $simplelocalclass.SimpleLocalClass))
  (result (ref null $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures))
- ;;@ simplelocalclass/SimpleLocalClass.java:29:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:29:10
  (local $$instance (ref null $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures))
  (block
-  ;;@ simplelocalclass/SimpleLocalClass.java:29:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:29:10
   (call $$clinit__void_<once>_@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures )
-  ;;@ simplelocalclass/SimpleLocalClass.java:29:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:29:10
   (local.set $$instance (struct.new $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $simplelocalclass.SimpleLocalClass)))
-  ;;@ simplelocalclass/SimpleLocalClass.java:29:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:29:10
   (call $$ctor__simplelocalclass_SimpleLocalClass__void_$p_simplelocalclass_SimpleLocalClass_1InnerClassWithoutCaptures@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;;@ simplelocalclass/SimpleLocalClass.java:29:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:29:10
   (return (local.get $$instance))
  )
 )
@@ -476,29 +476,29 @@
 (func $$ctor__simplelocalclass_SimpleLocalClass__void_$p_simplelocalclass_SimpleLocalClass_1InnerClassWithoutCaptures@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures
  (param $this (ref null $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures))
  (param $$outer_this (ref null $simplelocalclass.SimpleLocalClass))
- ;;@ simplelocalclass/SimpleLocalClass.java:29:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:29:10
  (block
-  ;;@ simplelocalclass/SimpleLocalClass.java:29:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:29:10
   (struct.set $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures $$outer_this@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (local.get $this) (local.get $$outer_this))
-  ;;@ simplelocalclass/SimpleLocalClass.java:29:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:29:10
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void InnerClassWithoutCaptures.$clinit()
 (func $$clinit__void_<once>_@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures
- ;;@ simplelocalclass/SimpleLocalClass.java:29:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:29:10
  (block
-  ;;@ simplelocalclass/SimpleLocalClass.java:29:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:29:10
   (if (global.get $$class-initialized@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures)
    (then
-    ;;@ simplelocalclass/SimpleLocalClass.java:29:10
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:29:10
     (return )
    )
   )
-  ;;@ simplelocalclass/SimpleLocalClass.java:29:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:29:10
   (global.set $$class-initialized@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (i32.const 1))
-  ;;@ simplelocalclass/SimpleLocalClass.java:29:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:29:10
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -537,16 +537,16 @@
  (param $$outer_this (ref null $simplelocalclass.SimpleLocalClass))
  (param $$captured_localVar i32)
  (result (ref null $simplelocalclass.SimpleLocalClass.2InnerClass))
- ;;@ simplelocalclass/SimpleLocalClass.java:36:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:36:10
  (local $$instance (ref null $simplelocalclass.SimpleLocalClass.2InnerClass))
  (block
-  ;;@ simplelocalclass/SimpleLocalClass.java:36:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:36:10
   (call $$clinit__void_<once>_@simplelocalclass.SimpleLocalClass.2InnerClass )
-  ;;@ simplelocalclass/SimpleLocalClass.java:36:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:36:10
   (local.set $$instance (struct.new $simplelocalclass.SimpleLocalClass.2InnerClass (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.2InnerClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (ref.null $simplelocalclass.SimpleLocalClass) (i32.const 0)))
-  ;;@ simplelocalclass/SimpleLocalClass.java:36:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:36:10
   (call $$ctor__simplelocalclass_SimpleLocalClass__int__void_$p_simplelocalclass_SimpleLocalClass_2InnerClass@simplelocalclass.SimpleLocalClass.2InnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$captured_localVar))
-  ;;@ simplelocalclass/SimpleLocalClass.java:36:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:36:10
   (return (local.get $$instance))
  )
 )
@@ -556,15 +556,15 @@
  (param $this (ref null $simplelocalclass.SimpleLocalClass.2InnerClass))
  (param $$outer_this (ref null $simplelocalclass.SimpleLocalClass))
  (param $$captured_localVar i32)
- ;;@ simplelocalclass/SimpleLocalClass.java:36:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:36:10
  (block
-  ;;@ simplelocalclass/SimpleLocalClass.java:36:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:36:10
   (struct.set $simplelocalclass.SimpleLocalClass.2InnerClass $$outer_this@simplelocalclass.SimpleLocalClass.2InnerClass (local.get $this) (local.get $$outer_this))
-  ;;@ simplelocalclass/SimpleLocalClass.java:35:14
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:35:14
   (struct.set $simplelocalclass.SimpleLocalClass.2InnerClass $$captured_localVar@simplelocalclass.SimpleLocalClass.2InnerClass (local.get $this) (local.get $$captured_localVar))
-  ;;@ simplelocalclass/SimpleLocalClass.java:36:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:36:10
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;;@ simplelocalclass/SimpleLocalClass.java:36:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:36:10
   (call $$init__void_$p_simplelocalclass_SimpleLocalClass_2InnerClass@simplelocalclass.SimpleLocalClass.2InnerClass (ref.as_non_null (local.get $this)))
  )
 )
@@ -572,27 +572,27 @@
 ;;; void InnerClass.$init()
 (func $$init__void_$p_simplelocalclass_SimpleLocalClass_2InnerClass@simplelocalclass.SimpleLocalClass.2InnerClass
  (param $this (ref null $simplelocalclass.SimpleLocalClass.2InnerClass))
- ;;@ simplelocalclass/SimpleLocalClass.java:36:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:36:10
  (block
-  ;;@ simplelocalclass/SimpleLocalClass.java:37:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:37:6
   (struct.set $simplelocalclass.SimpleLocalClass.2InnerClass $field@simplelocalclass.SimpleLocalClass.2InnerClass (local.get $this) (struct.get $simplelocalclass.SimpleLocalClass.2InnerClass $$captured_localVar@simplelocalclass.SimpleLocalClass.2InnerClass (local.get $this)))
  )
 )
 
 ;;; void InnerClass.$clinit()
 (func $$clinit__void_<once>_@simplelocalclass.SimpleLocalClass.2InnerClass
- ;;@ simplelocalclass/SimpleLocalClass.java:36:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:36:10
  (block
-  ;;@ simplelocalclass/SimpleLocalClass.java:36:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:36:10
   (if (global.get $$class-initialized@simplelocalclass.SimpleLocalClass.2InnerClass)
    (then
-    ;;@ simplelocalclass/SimpleLocalClass.java:36:10
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:36:10
     (return )
    )
   )
-  ;;@ simplelocalclass/SimpleLocalClass.java:36:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:36:10
   (global.set $$class-initialized@simplelocalclass.SimpleLocalClass.2InnerClass (i32.const 1))
-  ;;@ simplelocalclass/SimpleLocalClass.java:36:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:36:10
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -630,16 +630,16 @@
 (func $$create__simplelocalclass_SimpleLocalClass@simplelocalclass.SimpleLocalClass.1Abc$InnerClass
  (param $$outer_this (ref null $simplelocalclass.SimpleLocalClass))
  (result (ref null $simplelocalclass.SimpleLocalClass.1Abc$InnerClass))
- ;;@ simplelocalclass/SimpleLocalClass.java:43:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:43:10
  (local $$instance (ref null $simplelocalclass.SimpleLocalClass.1Abc$InnerClass))
  (block
-  ;;@ simplelocalclass/SimpleLocalClass.java:43:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:43:10
   (call $$clinit__void_<once>_@simplelocalclass.SimpleLocalClass.1Abc$InnerClass )
-  ;;@ simplelocalclass/SimpleLocalClass.java:43:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:43:10
   (local.set $$instance (struct.new $simplelocalclass.SimpleLocalClass.1Abc$InnerClass (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $simplelocalclass.SimpleLocalClass)))
-  ;;@ simplelocalclass/SimpleLocalClass.java:43:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:43:10
   (call $$ctor__simplelocalclass_SimpleLocalClass__void_$p_simplelocalclass_SimpleLocalClass_1Abc$InnerClass@simplelocalclass.SimpleLocalClass.1Abc$InnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;;@ simplelocalclass/SimpleLocalClass.java:43:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:43:10
   (return (local.get $$instance))
  )
 )
@@ -648,29 +648,29 @@
 (func $$ctor__simplelocalclass_SimpleLocalClass__void_$p_simplelocalclass_SimpleLocalClass_1Abc$InnerClass@simplelocalclass.SimpleLocalClass.1Abc$InnerClass
  (param $this (ref null $simplelocalclass.SimpleLocalClass.1Abc$InnerClass))
  (param $$outer_this (ref null $simplelocalclass.SimpleLocalClass))
- ;;@ simplelocalclass/SimpleLocalClass.java:43:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:43:10
  (block
-  ;;@ simplelocalclass/SimpleLocalClass.java:43:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:43:10
   (struct.set $simplelocalclass.SimpleLocalClass.1Abc$InnerClass $$outer_this@simplelocalclass.SimpleLocalClass.1Abc$InnerClass (local.get $this) (local.get $$outer_this))
-  ;;@ simplelocalclass/SimpleLocalClass.java:43:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:43:10
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void Abc$InnerClass.$clinit()
 (func $$clinit__void_<once>_@simplelocalclass.SimpleLocalClass.1Abc$InnerClass
- ;;@ simplelocalclass/SimpleLocalClass.java:43:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:43:10
  (block
-  ;;@ simplelocalclass/SimpleLocalClass.java:43:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:43:10
   (if (global.get $$class-initialized@simplelocalclass.SimpleLocalClass.1Abc$InnerClass)
    (then
-    ;;@ simplelocalclass/SimpleLocalClass.java:43:10
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:43:10
     (return )
    )
   )
-  ;;@ simplelocalclass/SimpleLocalClass.java:43:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:43:10
   (global.set $$class-initialized@simplelocalclass.SimpleLocalClass.1Abc$InnerClass (i32.const 1))
-  ;;@ simplelocalclass/SimpleLocalClass.java:43:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:43:10
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -708,16 +708,16 @@
 (func $$create__simplelocalclass_SimpleLocalClass@simplelocalclass.SimpleLocalClass.1Klm$InnerClass
  (param $$outer_this (ref null $simplelocalclass.SimpleLocalClass))
  (result (ref null $simplelocalclass.SimpleLocalClass.1Klm$InnerClass))
- ;;@ simplelocalclass/SimpleLocalClass.java:44:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:44:10
  (local $$instance (ref null $simplelocalclass.SimpleLocalClass.1Klm$InnerClass))
  (block
-  ;;@ simplelocalclass/SimpleLocalClass.java:44:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:44:10
   (call $$clinit__void_<once>_@simplelocalclass.SimpleLocalClass.1Klm$InnerClass )
-  ;;@ simplelocalclass/SimpleLocalClass.java:44:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:44:10
   (local.set $$instance (struct.new $simplelocalclass.SimpleLocalClass.1Klm$InnerClass (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $simplelocalclass.SimpleLocalClass)))
-  ;;@ simplelocalclass/SimpleLocalClass.java:44:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:44:10
   (call $$ctor__simplelocalclass_SimpleLocalClass__void_$p_simplelocalclass_SimpleLocalClass_1Klm$InnerClass@simplelocalclass.SimpleLocalClass.1Klm$InnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;;@ simplelocalclass/SimpleLocalClass.java:44:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:44:10
   (return (local.get $$instance))
  )
 )
@@ -726,29 +726,29 @@
 (func $$ctor__simplelocalclass_SimpleLocalClass__void_$p_simplelocalclass_SimpleLocalClass_1Klm$InnerClass@simplelocalclass.SimpleLocalClass.1Klm$InnerClass
  (param $this (ref null $simplelocalclass.SimpleLocalClass.1Klm$InnerClass))
  (param $$outer_this (ref null $simplelocalclass.SimpleLocalClass))
- ;;@ simplelocalclass/SimpleLocalClass.java:44:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:44:10
  (block
-  ;;@ simplelocalclass/SimpleLocalClass.java:44:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:44:10
   (struct.set $simplelocalclass.SimpleLocalClass.1Klm$InnerClass $$outer_this@simplelocalclass.SimpleLocalClass.1Klm$InnerClass (local.get $this) (local.get $$outer_this))
-  ;;@ simplelocalclass/SimpleLocalClass.java:44:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:44:10
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void Klm$InnerClass.$clinit()
 (func $$clinit__void_<once>_@simplelocalclass.SimpleLocalClass.1Klm$InnerClass
- ;;@ simplelocalclass/SimpleLocalClass.java:44:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:44:10
  (block
-  ;;@ simplelocalclass/SimpleLocalClass.java:44:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:44:10
   (if (global.get $$class-initialized@simplelocalclass.SimpleLocalClass.1Klm$InnerClass)
    (then
-    ;;@ simplelocalclass/SimpleLocalClass.java:44:10
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:44:10
     (return )
    )
   )
-  ;;@ simplelocalclass/SimpleLocalClass.java:44:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:44:10
   (global.set $$class-initialized@simplelocalclass.SimpleLocalClass.1Klm$InnerClass (i32.const 1))
-  ;;@ simplelocalclass/SimpleLocalClass.java:44:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplelocalclass/readable-j2wasm.js/simplelocalclass/SimpleLocalClass.java:44:10
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

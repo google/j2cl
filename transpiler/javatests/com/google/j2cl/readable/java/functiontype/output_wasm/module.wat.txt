@@ -58,16 +58,16 @@
 
 ;;; void Function.$clinit()
 (func $$clinit__void_<once>_@functiontype.Function
- ;;@ functiontype/FunctionImpl.java:18:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/functiontype/readable-j2wasm.js/functiontype/FunctionImpl.java:18:10
  (block
-  ;;@ functiontype/FunctionImpl.java:18:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/functiontype/readable-j2wasm.js/functiontype/FunctionImpl.java:18:10
   (if (global.get $$class-initialized@functiontype.Function)
    (then
-    ;;@ functiontype/FunctionImpl.java:18:10
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/functiontype/readable-j2wasm.js/functiontype/FunctionImpl.java:18:10
     (return )
    )
   )
-  ;;@ functiontype/FunctionImpl.java:18:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/functiontype/readable-j2wasm.js/functiontype/FunctionImpl.java:18:10
   (global.set $$class-initialized@functiontype.Function (i32.const 1))
  )
 )
@@ -91,16 +91,16 @@
 ;;; FunctionImpl FunctionImpl.$create()
 (func $$create__@functiontype.FunctionImpl
  (result (ref null $functiontype.FunctionImpl))
- ;;@ functiontype/FunctionImpl.java:20:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/functiontype/readable-j2wasm.js/functiontype/FunctionImpl.java:20:13
  (local $$instance (ref null $functiontype.FunctionImpl))
  (block
-  ;;@ functiontype/FunctionImpl.java:20:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/functiontype/readable-j2wasm.js/functiontype/FunctionImpl.java:20:13
   (call $$clinit__void_<once>_@functiontype.FunctionImpl )
-  ;;@ functiontype/FunctionImpl.java:20:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/functiontype/readable-j2wasm.js/functiontype/FunctionImpl.java:20:13
   (local.set $$instance (struct.new $functiontype.FunctionImpl (ref.as_non_null (global.get $functiontype.FunctionImpl.vtable)) (ref.as_non_null (global.get $functiontype.FunctionImpl.itable)) (i32.const 0)))
-  ;;@ functiontype/FunctionImpl.java:20:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/functiontype/readable-j2wasm.js/functiontype/FunctionImpl.java:20:13
   (call $$ctor__void_$p_functiontype_FunctionImpl@functiontype.FunctionImpl (ref.as_non_null (local.get $$instance)))
-  ;;@ functiontype/FunctionImpl.java:20:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/functiontype/readable-j2wasm.js/functiontype/FunctionImpl.java:20:13
   (return (local.get $$instance))
  )
 )
@@ -108,9 +108,9 @@
 ;;; void FunctionImpl.$ctor()
 (func $$ctor__void_$p_functiontype_FunctionImpl@functiontype.FunctionImpl
  (param $this (ref null $functiontype.FunctionImpl))
- ;;@ functiontype/FunctionImpl.java:20:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/functiontype/readable-j2wasm.js/functiontype/FunctionImpl.java:20:13
  (block
-  ;;@ functiontype/FunctionImpl.java:20:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/functiontype/readable-j2wasm.js/functiontype/FunctionImpl.java:20:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -120,7 +120,7 @@
  (type $function.m_test__functiontype_Function__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $f (ref null $java.lang.Object))
- ;;@ functiontype/FunctionImpl.java:21:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/functiontype/readable-j2wasm.js/functiontype/FunctionImpl.java:21:14
  (local $this (ref null $functiontype.FunctionImpl))
  (local.set $this (ref.cast (ref $functiontype.FunctionImpl) (local.get $this.untyped)))
  (block
@@ -130,18 +130,18 @@
 
 ;;; void FunctionImpl.$clinit()
 (func $$clinit__void_<once>_@functiontype.FunctionImpl
- ;;@ functiontype/FunctionImpl.java:20:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/functiontype/readable-j2wasm.js/functiontype/FunctionImpl.java:20:13
  (block
-  ;;@ functiontype/FunctionImpl.java:20:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/functiontype/readable-j2wasm.js/functiontype/FunctionImpl.java:20:13
   (if (global.get $$class-initialized@functiontype.FunctionImpl)
    (then
-    ;;@ functiontype/FunctionImpl.java:20:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/functiontype/readable-j2wasm.js/functiontype/FunctionImpl.java:20:13
     (return )
    )
   )
-  ;;@ functiontype/FunctionImpl.java:20:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/functiontype/readable-j2wasm.js/functiontype/FunctionImpl.java:20:13
   (global.set $$class-initialized@functiontype.FunctionImpl (i32.const 1))
-  ;;@ functiontype/FunctionImpl.java:20:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/functiontype/readable-j2wasm.js/functiontype/FunctionImpl.java:20:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

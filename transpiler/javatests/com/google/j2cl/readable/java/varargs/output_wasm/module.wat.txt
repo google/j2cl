@@ -173,16 +173,16 @@
 
 ;;; void FunctionalInterface.$clinit()
 (func $$clinit__void_<once>_@varargs.Varargs.FunctionalInterface
- ;;@ varargs/Varargs.java:21:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:21:12
  (block
-  ;;@ varargs/Varargs.java:21:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:21:12
   (if (global.get $$class-initialized@varargs.Varargs.FunctionalInterface)
    (then
-    ;;@ varargs/Varargs.java:21:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:21:12
     (return )
    )
   )
-  ;;@ varargs/Varargs.java:21:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:21:12
   (global.set $$class-initialized@varargs.Varargs.FunctionalInterface (i32.const 1))
  )
 )
@@ -207,16 +207,16 @@
 (func $$create__arrayOf_int@varargs.Varargs
  (param $args (ref null $javaemul.internal.WasmArray.OfInt))
  (result (ref null $varargs.Varargs))
- ;;@ varargs/Varargs.java:27:9
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:27:9
  (local $$instance (ref null $varargs.Varargs))
  (block
-  ;;@ varargs/Varargs.java:27:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:27:9
   (call $$clinit__void_<once>_@varargs.Varargs )
-  ;;@ varargs/Varargs.java:27:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:27:9
   (local.set $$instance (struct.new $varargs.Varargs (ref.as_non_null (global.get $varargs.Varargs.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject)))
-  ;;@ varargs/Varargs.java:27:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:27:9
   (call $$ctor__arrayOf_int__void_$p_varargs_Varargs@varargs.Varargs (ref.as_non_null (local.get $$instance))(local.get $args))
-  ;;@ varargs/Varargs.java:27:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:27:9
   (return (local.get $$instance))
  )
 )
@@ -225,9 +225,9 @@
 (func $$ctor__arrayOf_int__void_$p_varargs_Varargs@varargs.Varargs
  (param $this (ref null $varargs.Varargs))
  (param $args (ref null $javaemul.internal.WasmArray.OfInt))
- ;;@ varargs/Varargs.java:27:9
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:27:9
  (block
-  ;;@ varargs/Varargs.java:27:30
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:27:30
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -235,11 +235,11 @@
 ;;; Varargs Varargs.$create()
 (func $$create__@varargs.Varargs
  (result (ref null $varargs.Varargs))
- ;;@ varargs/Varargs.java:29:9
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:29:9
  (block
-  ;;@ varargs/Varargs.java:29:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:29:9
   (call $$clinit__void_<once>_@varargs.Varargs )
-  ;;@ varargs/Varargs.java:29:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:29:9
   (return (call $$create_$private__@varargs.Varargs ))
  )
 )
@@ -247,14 +247,14 @@
 ;;; Varargs Varargs.$create_$private()
 (func $$create_$private__@varargs.Varargs
  (result (ref null $varargs.Varargs))
- ;;@ varargs/Varargs.java:29:9
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:29:9
  (local $$instance (ref null $varargs.Varargs))
  (block
-  ;;@ varargs/Varargs.java:29:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:29:9
   (local.set $$instance (struct.new $varargs.Varargs (ref.as_non_null (global.get $varargs.Varargs.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject)))
-  ;;@ varargs/Varargs.java:29:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:29:9
   (call $$ctor__void_$p_varargs_Varargs@varargs.Varargs (ref.as_non_null (local.get $$instance)))
-  ;;@ varargs/Varargs.java:29:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:29:9
   (return (local.get $$instance))
  )
 )
@@ -262,9 +262,9 @@
 ;;; void Varargs.$ctor()
 (func $$ctor__void_$p_varargs_Varargs@varargs.Varargs
  (param $this (ref null $varargs.Varargs))
- ;;@ varargs/Varargs.java:29:9
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:29:9
  (block
-  ;;@ varargs/Varargs.java:30:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:30:4
   (call $$ctor__arrayOf_int__void_$p_varargs_Varargs@varargs.Varargs (ref.as_non_null (local.get $this))(call $m_newWithLiteral__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@varargs.Varargs-1 (i32.const 0) (i32.const 1))))
  )
 )
@@ -275,7 +275,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $a i32)
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ varargs/Varargs.java:33:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:33:14
  (local $this (ref null $varargs.Varargs))
  (local.set $this (ref.cast (ref $varargs.Varargs) (local.get $this.untyped)))
  (block
@@ -288,7 +288,7 @@
  (type $function.m_testCloneable__arrayOf_java_lang_Cloneable__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ varargs/Varargs.java:35:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:35:14
  (local $this (ref null $varargs.Varargs))
  (local.set $this (ref.cast (ref $varargs.Varargs) (local.get $this.untyped)))
  (block
@@ -301,7 +301,7 @@
  (type $function.m_testSerializable__arrayOf_java_io_Serializable__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ varargs/Varargs.java:37:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:37:14
  (local $this (ref null $varargs.Varargs))
  (local.set $this (ref.cast (ref $varargs.Varargs) (local.get $this.untyped)))
  (block
@@ -314,11 +314,11 @@
  (type $function.m_testAssignment__arrayOf_java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ varargs/Varargs.java:39:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:39:14
  (local $this (ref null $varargs.Varargs))
  (local.set $this (ref.cast (ref $varargs.Varargs) (local.get $this.untyped)))
  (block
-  ;;@ varargs/Varargs.java:40:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:40:4
   (struct.set $varargs.Varargs $args@varargs.Varargs (local.get $this) (local.get $args))
  )
 )
@@ -329,7 +329,7 @@
  (type $function.m_testLambda__varargs_Varargs_FunctionalInterface__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $functionalInterface (ref null $java.lang.Object))
- ;;@ varargs/Varargs.java:43:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:43:14
  (local $this (ref null $varargs.Varargs))
  (local.set $this (ref.cast (ref $varargs.Varargs) (local.get $this.untyped)))
  (block
@@ -340,11 +340,11 @@
 ;;; void Varargs.fun(T... arg0)
 (func $m_fun__arrayOf_java_lang_Number__void@varargs.Varargs
  (param $arg0 (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ varargs/Varargs.java:45:40
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:45:40
  (block
-  ;;@ varargs/Varargs.java:45:40
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:45:40
   (call $$clinit__void_<once>_@varargs.Varargs )
-  ;;@ varargs/Varargs.java:45:40
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:45:40
   (call $m_fun_$private__arrayOf_java_lang_Number__void@varargs.Varargs (local.get $arg0))
  )
 )
@@ -352,7 +352,7 @@
 ;;; void Varargs.fun_$private(T... elements)
 (func $m_fun_$private__arrayOf_java_lang_Number__void@varargs.Varargs
  (param $elements (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ varargs/Varargs.java:45:40
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:45:40
  (block
  )
 )
@@ -361,11 +361,11 @@
 (func $m_bar__java_lang_Number__java_lang_Number__void@varargs.Varargs
  (param $a (ref null $java.lang.Number))
  (param $b (ref null $java.lang.Number))
- ;;@ varargs/Varargs.java:47:40
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:47:40
  (block
-  ;;@ varargs/Varargs.java:47:54
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:47:54
   (call $$clinit__void_<once>_@varargs.Varargs )
-  ;;@ varargs/Varargs.java:48:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:48:4
   (call $m_fun_$private__arrayOf_java_lang_Number__void@varargs.Varargs (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (local.get $a)(local.get $b))))
  )
 )
@@ -374,11 +374,11 @@
 (func $m_passthrough__java_lang_Object__java_lang_Object@varargs.Varargs
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ varargs/Varargs.java:51:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:51:22
  (block
-  ;;@ varargs/Varargs.java:51:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:51:22
   (call $$clinit__void_<once>_@varargs.Varargs )
-  ;;@ varargs/Varargs.java:51:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:51:22
   (return (call $m_passthrough_$private__java_lang_Object__java_lang_Object@varargs.Varargs (local.get $arg0)))
  )
 )
@@ -387,9 +387,9 @@
 (func $m_passthrough_$private__java_lang_Object__java_lang_Object@varargs.Varargs
  (param $o (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ varargs/Varargs.java:51:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:51:22
  (block
-  ;;@ varargs/Varargs.java:52:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:52:4
   (return (local.get $o))
  )
 )
@@ -399,7 +399,7 @@
  (type $function.m_testOverloaded__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $o (ref null $java.lang.Object))
- ;;@ varargs/Varargs.java:55:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:55:14
  (local $this (ref null $varargs.Varargs))
  (local.set $this (ref.cast (ref $varargs.Varargs) (local.get $this.untyped)))
  (block
@@ -413,7 +413,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $o (ref null $java.lang.String))
  (param $rest (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ varargs/Varargs.java:57:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:57:14
  (local $this (ref null $varargs.Varargs))
  (local.set $this (ref.cast (ref $varargs.Varargs) (local.get $this.untyped)))
  (block
@@ -426,7 +426,7 @@
  (type $function.m_testOverloaded__long__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $l i64)
- ;;@ varargs/Varargs.java:59:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:59:14
  (local $this (ref null $varargs.Varargs))
  (local.set $this (ref.cast (ref $varargs.Varargs) (local.get $this.untyped)))
  (block
@@ -440,7 +440,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $l i64)
  (param $rest (ref null $javaemul.internal.WasmArray.OfLong))
- ;;@ varargs/Varargs.java:61:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:61:14
  (local $this (ref null $varargs.Varargs))
  (local.set $this (ref.cast (ref $varargs.Varargs) (local.get $this.untyped)))
  (block
@@ -452,48 +452,48 @@
 (func $m_main__void@varargs.Varargs
  (type $function.m_main__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ varargs/Varargs.java:63:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:63:14
  (local $v (ref null $varargs.Varargs))
  (local $this (ref null $varargs.Varargs))
  (local.set $this (ref.cast (ref $varargs.Varargs) (local.get $this.untyped)))
  (block
-  ;;@ varargs/Varargs.java:64:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:64:4
   (local.set $v (call $$create_$private__@varargs.Varargs ))
-  ;;@ varargs/Varargs.java:65:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:65:4
   (call_ref $function.m_test__int__arrayOf_java_lang_Object__void (ref.as_non_null (local.get $v))(i32.const 1)(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 0 ))(struct.get $varargs.Varargs.vtable $m_test__int__arrayOf_java_lang_Object__void (struct.get $varargs.Varargs $vtable(local.get $v))))
-  ;;@ varargs/Varargs.java:66:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:66:4
   (call_ref $function.m_test__int__arrayOf_java_lang_Object__void (ref.as_non_null (local.get $v))(i32.const 1)(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (call $$create__@java.lang.Object )))(struct.get $varargs.Varargs.vtable $m_test__int__arrayOf_java_lang_Object__void (struct.get $varargs.Varargs $vtable(local.get $v))))
-  ;;@ varargs/Varargs.java:67:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:67:4
   (call_ref $function.m_test__int__arrayOf_java_lang_Object__void (ref.as_non_null (local.get $v))(i32.const 1)(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (call $$create__@java.lang.Object )))(struct.get $varargs.Varargs.vtable $m_test__int__arrayOf_java_lang_Object__void (struct.get $varargs.Varargs $vtable(local.get $v))))
-  ;;@ varargs/Varargs.java:68:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:68:4
   (call_ref $function.m_test__int__arrayOf_java_lang_Object__void (ref.as_non_null (local.get $v))(i32.const 1)(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 0 ))(struct.get $varargs.Varargs.vtable $m_test__int__arrayOf_java_lang_Object__void (struct.get $varargs.Varargs $vtable(local.get $v))))
-  ;;@ varargs/Varargs.java:69:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:69:4
   (call_ref $function.m_test__int__arrayOf_java_lang_Object__void (ref.as_non_null (local.get $v))(i32.const 1)(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 0 ))(struct.get $varargs.Varargs.vtable $m_test__int__arrayOf_java_lang_Object__void (struct.get $varargs.Varargs $vtable(local.get $v))))
-  ;;@ varargs/Varargs.java:70:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:70:4
   (call_ref $function.m_test__int__arrayOf_java_lang_Object__void (ref.as_non_null (local.get $v))(i32.const 1)(ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (call $m_passthrough_$private__java_lang_Object__java_lang_Object@varargs.Varargs (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (call $$getString_|a|__java_lang_String_<once>_@varargs.Varargs )))))(struct.get $varargs.Varargs.vtable $m_test__int__arrayOf_java_lang_Object__void (struct.get $varargs.Varargs $vtable(local.get $v))))
-  ;;@ varargs/Varargs.java:71:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:71:4
   (call_ref $function.m_test__int__arrayOf_java_lang_Object__void (ref.as_non_null (local.get $v))(i32.const 1)(ref.null $javaemul.internal.WasmArray.OfObject)(struct.get $varargs.Varargs.vtable $m_test__int__arrayOf_java_lang_Object__void (struct.get $varargs.Varargs $vtable(local.get $v))))
-  ;;@ varargs/Varargs.java:72:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:72:4
   (call_ref $function.m_testCloneable__arrayOf_java_lang_Cloneable__void (ref.as_non_null (local.get $v))(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 0 ))(struct.get $varargs.Varargs.vtable $m_testCloneable__arrayOf_java_lang_Cloneable__void (struct.get $varargs.Varargs $vtable(local.get $v))))
-  ;;@ varargs/Varargs.java:73:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:73:4
   (call_ref $function.m_testSerializable__arrayOf_java_io_Serializable__void (ref.as_non_null (local.get $v))(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 0 ))(struct.get $varargs.Varargs.vtable $m_testSerializable__arrayOf_java_io_Serializable__void (struct.get $varargs.Varargs $vtable(local.get $v))))
-  ;;@ varargs/Varargs.java:74:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:74:4
   (call_ref $function.m_testLambda__varargs_Varargs_FunctionalInterface__void (ref.as_non_null (local.get $v))(call $$create__varargs_Varargs@varargs.Varargs.$LambdaImplementor$1 (local.get $this))(struct.get $varargs.Varargs.vtable $m_testLambda__varargs_Varargs_FunctionalInterface__void (struct.get $varargs.Varargs $vtable(local.get $v))))
-  ;;@ varargs/Varargs.java:77:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:77:4
   (call_ref $function.m_testOverloaded__java_lang_Object__void (ref.as_non_null (local.get $v))(call $$getString_|foo|__java_lang_String_<once>_@varargs.Varargs )(struct.get $varargs.Varargs.vtable $m_testOverloaded__java_lang_Object__void (struct.get $varargs.Varargs $vtable(local.get $v))))
-  ;;@ varargs/Varargs.java:79:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:79:4
   (call_ref $function.m_testOverloaded__java_lang_String__arrayOf_java_lang_Object__void (ref.as_non_null (local.get $v))(call $$getString_|foo|__java_lang_String_<once>_@varargs.Varargs )(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (call $$getString_|bar|__java_lang_String_<once>_@varargs.Varargs )))(struct.get $varargs.Varargs.vtable $m_testOverloaded__java_lang_String__arrayOf_java_lang_Object__void (struct.get $varargs.Varargs $vtable(local.get $v))))
-  ;;@ varargs/Varargs.java:81:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:81:4
   (call_ref $function.m_testOverloaded__java_lang_Object__void (ref.as_non_null (local.get $v))(call $$getString_|foo|__java_lang_String_<once>_@varargs.Varargs )(struct.get $varargs.Varargs.vtable $m_testOverloaded__java_lang_Object__void (struct.get $varargs.Varargs $vtable(local.get $v))))
-  ;;@ varargs/Varargs.java:83:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:83:4
   (call_ref $function.m_testOverloaded__long__void (ref.as_non_null (local.get $v))(i64.const 1)(struct.get $varargs.Varargs.vtable $m_testOverloaded__long__void (struct.get $varargs.Varargs $vtable(local.get $v))))
-  ;;@ varargs/Varargs.java:85:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:85:4
   (call_ref $function.m_testOverloaded__java_lang_Object__void (ref.as_non_null (local.get $v))(call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.const 1))(struct.get $varargs.Varargs.vtable $m_testOverloaded__java_lang_Object__void (struct.get $varargs.Varargs $vtable(local.get $v))))
-  ;;@ varargs/Varargs.java:87:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:87:4
   (call_ref $function.m_testOverloaded__long__void (ref.as_non_null (local.get $v))(i64.const 1)(struct.get $varargs.Varargs.vtable $m_testOverloaded__long__void (struct.get $varargs.Varargs $vtable(local.get $v))))
-  ;;@ varargs/Varargs.java:89:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:89:4
   (call_ref $function.m_testOverloaded__long__arrayOf_long__void (ref.as_non_null (local.get $v))(i64.const 1)(call $m_newWithLiteral__arrayOf_long__javaemul_internal_WasmArray_OfLong@javaemul.internal.WasmArray.OfLong (array.new_data $long.array $arrayliteral@varargs.Varargs-2 (i32.const 0) (i32.const 2)))(struct.get $varargs.Varargs.vtable $m_testOverloaded__long__arrayOf_long__void (struct.get $varargs.Varargs $vtable(local.get $v))))
-  ;;@ varargs/Varargs.java:91:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:91:4
   (call_ref $function.m_testOverloaded__long__arrayOf_long__void (ref.as_non_null (local.get $v))(i64.const 1)(call $m_newWithLiteral__arrayOf_long__javaemul_internal_WasmArray_OfLong@javaemul.internal.WasmArray.OfLong (array.new_data $long.array $arrayliteral@varargs.Varargs-3 (i32.const 0) (i32.const 2)))(struct.get $varargs.Varargs.vtable $m_testOverloaded__long__arrayOf_long__void (struct.get $varargs.Varargs $vtable(local.get $v))))
  )
 )
@@ -501,18 +501,18 @@
 
 ;;; void Varargs.$clinit()
 (func $$clinit__void_<once>_@varargs.Varargs
- ;;@ varargs/Varargs.java:20:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:20:13
  (block
-  ;;@ varargs/Varargs.java:20:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:20:13
   (if (global.get $$class-initialized@varargs.Varargs)
    (then
-    ;;@ varargs/Varargs.java:20:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:20:13
     (return )
    )
   )
-  ;;@ varargs/Varargs.java:20:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:20:13
   (global.set $$class-initialized@varargs.Varargs (i32.const 1))
-  ;;@ varargs/Varargs.java:20:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:20:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -550,16 +550,16 @@
 (func $$create__varargs_Varargs@varargs.Varargs.$LambdaImplementor$1
  (param $$outer_this (ref null $varargs.Varargs))
  (result (ref null $varargs.Varargs.$LambdaImplementor$1))
- ;;@ varargs/Varargs.java:74:17
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:74:17
  (local $$instance (ref null $varargs.Varargs.$LambdaImplementor$1))
  (block
-  ;;@ varargs/Varargs.java:74:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:74:17
   (call $$clinit__void_<once>_@varargs.Varargs.$LambdaImplementor$1 )
-  ;;@ varargs/Varargs.java:74:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:74:17
   (local.set $$instance (struct.new $varargs.Varargs.$LambdaImplementor$1 (ref.as_non_null (global.get $varargs.Varargs.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $varargs.Varargs.$LambdaImplementor$1.itable)) (i32.const 0) (ref.null $varargs.Varargs)))
-  ;;@ varargs/Varargs.java:74:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:74:17
   (call $$ctor__varargs_Varargs__void_$p_varargs_Varargs_$LambdaImplementor$1@varargs.Varargs.$LambdaImplementor$1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;;@ varargs/Varargs.java:74:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:74:17
   (return (local.get $$instance))
  )
 )
@@ -568,11 +568,11 @@
 (func $$ctor__varargs_Varargs__void_$p_varargs_Varargs_$LambdaImplementor$1@varargs.Varargs.$LambdaImplementor$1
  (param $this (ref null $varargs.Varargs.$LambdaImplementor$1))
  (param $$outer_this (ref null $varargs.Varargs))
- ;;@ varargs/Varargs.java:74:17
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:74:17
  (block
-  ;;@ varargs/Varargs.java:74:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:74:17
   (struct.set $varargs.Varargs.$LambdaImplementor$1 $$outer_this@varargs.Varargs.$LambdaImplementor$1 (local.get $this) (local.get $$outer_this))
-  ;;@ varargs/Varargs.java:74:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:74:17
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -582,11 +582,11 @@
  (type $function.m_apply__arrayOf_java_lang_String__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $it (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ varargs/Varargs.java:74:17
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:74:17
  (local $this (ref null $varargs.Varargs.$LambdaImplementor$1))
  (local.set $this (ref.cast (ref $varargs.Varargs.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
-  ;;@ varargs/Varargs.java:74:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:74:23
   (struct.set $varargs.Varargs $args@varargs.Varargs (struct.get $varargs.Varargs.$LambdaImplementor$1 $$outer_this@varargs.Varargs.$LambdaImplementor$1 (local.get $this)) (local.get $it))
  )
 )
@@ -594,18 +594,18 @@
 
 ;;; void <anonymous> implements FunctionalInterface.$clinit()
 (func $$clinit__void_<once>_@varargs.Varargs.$LambdaImplementor$1
- ;;@ varargs/Varargs.java:74:17
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:74:17
  (block
-  ;;@ varargs/Varargs.java:74:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:74:17
   (if (global.get $$class-initialized@varargs.Varargs.$LambdaImplementor$1)
    (then
-    ;;@ varargs/Varargs.java:74:17
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:74:17
     (return )
    )
   )
-  ;;@ varargs/Varargs.java:74:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:74:17
   (global.set $$class-initialized@varargs.Varargs.$LambdaImplementor$1 (i32.const 1))
-  ;;@ varargs/Varargs.java:74:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:74:17
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -642,16 +642,16 @@
 ;;; Child Child.$create()
 (func $$create__@varargs.Child
  (result (ref null $varargs.Child))
- ;;@ varargs/Varargs.java:96:9
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:96:9
  (local $$instance (ref null $varargs.Child))
  (block
-  ;;@ varargs/Varargs.java:96:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:96:9
   (call $$clinit__void_<once>_@varargs.Child )
-  ;;@ varargs/Varargs.java:96:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:96:9
   (local.set $$instance (struct.new $varargs.Child (ref.as_non_null (global.get $varargs.Child.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject)))
-  ;;@ varargs/Varargs.java:96:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:96:9
   (call $$ctor__void_$p_varargs_Child@varargs.Child (ref.as_non_null (local.get $$instance)))
-  ;;@ varargs/Varargs.java:96:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:96:9
   (return (local.get $$instance))
  )
 )
@@ -659,27 +659,27 @@
 ;;; void Child.$ctor()
 (func $$ctor__void_$p_varargs_Child@varargs.Child
  (param $this (ref null $varargs.Child))
- ;;@ varargs/Varargs.java:96:9
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:96:9
  (block
-  ;;@ varargs/Varargs.java:97:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:97:4
   (call $$ctor__arrayOf_int__void_$p_varargs_Varargs@varargs.Varargs (ref.as_non_null (local.get $this))(call $m_newWithLiteral__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@varargs.Child-1 (i32.const 0) (i32.const 1))))
  )
 )
 
 ;;; void Child.$clinit()
 (func $$clinit__void_<once>_@varargs.Child
- ;;@ varargs/Varargs.java:95:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:95:6
  (block
-  ;;@ varargs/Varargs.java:95:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:95:6
   (if (global.get $$class-initialized@varargs.Child)
    (then
-    ;;@ varargs/Varargs.java:95:6
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:95:6
     (return )
    )
   )
-  ;;@ varargs/Varargs.java:95:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:95:6
   (global.set $$class-initialized@varargs.Child (i32.const 1))
-  ;;@ varargs/Varargs.java:95:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:95:6
   (call $$clinit__void_<once>_@varargs.Varargs )
  )
 )

@@ -264,16 +264,16 @@
 
 ;;; void Fn.$clinit()
 (func $$clinit__void_<once>_@parameterassignments.Main.Fn
- ;;@ parameterassignments/Main.java:41:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:41:12
  (block
-  ;;@ parameterassignments/Main.java:41:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:41:12
   (if (global.get $$class-initialized@parameterassignments.Main.Fn)
    (then
-    ;;@ parameterassignments/Main.java:41:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:41:12
     (return )
    )
   )
-  ;;@ parameterassignments/Main.java:41:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:41:12
   (global.set $$class-initialized@parameterassignments.Main.Fn (i32.const 1))
  )
 )
@@ -296,16 +296,16 @@
 
 ;;; void FnPrimitiveVarargs.$clinit()
 (func $$clinit__void_<once>_@parameterassignments.Main.FnPrimitiveVarargs
- ;;@ parameterassignments/Main.java:51:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:51:12
  (block
-  ;;@ parameterassignments/Main.java:51:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:51:12
   (if (global.get $$class-initialized@parameterassignments.Main.FnPrimitiveVarargs)
    (then
-    ;;@ parameterassignments/Main.java:51:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:51:12
     (return )
    )
   )
-  ;;@ parameterassignments/Main.java:51:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:51:12
   (global.set $$class-initialized@parameterassignments.Main.FnPrimitiveVarargs (i32.const 1))
  )
 )
@@ -328,16 +328,16 @@
 
 ;;; void FnObjectVarargs.$clinit()
 (func $$clinit__void_<once>_@parameterassignments.Main.FnObjectVarargs
- ;;@ parameterassignments/Main.java:60:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:60:12
  (block
-  ;;@ parameterassignments/Main.java:60:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:60:12
   (if (global.get $$class-initialized@parameterassignments.Main.FnObjectVarargs)
    (then
-    ;;@ parameterassignments/Main.java:60:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:60:12
     (return )
    )
   )
-  ;;@ parameterassignments/Main.java:60:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:60:12
   (global.set $$class-initialized@parameterassignments.Main.FnObjectVarargs (i32.const 1))
  )
 )
@@ -364,16 +364,16 @@
  (param $explicitFinal i32)
  (param $implicitFinal i32)
  (result (ref null $parameterassignments.Main))
- ;;@ parameterassignments/Main.java:19:2
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:19:2
  (local $$instance (ref null $parameterassignments.Main))
  (block
-  ;;@ parameterassignments/Main.java:19:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:19:2
   (call $$clinit__void_<once>_@parameterassignments.Main )
-  ;;@ parameterassignments/Main.java:19:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:19:2
   (local.set $$instance (struct.new $parameterassignments.Main (ref.as_non_null (global.get $parameterassignments.Main.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
-  ;;@ parameterassignments/Main.java:19:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:19:2
   (call $$ctor__int__int__int__void_$p_parameterassignments_Main@parameterassignments.Main (ref.as_non_null (local.get $$instance))(local.get $nonFinal)(local.get $explicitFinal)(local.get $implicitFinal))
-  ;;@ parameterassignments/Main.java:19:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:19:2
   (return (local.get $$instance))
  )
 )
@@ -384,11 +384,11 @@
  (param $nonFinal i32)
  (param $explicitFinal i32)
  (param $implicitFinal i32)
- ;;@ parameterassignments/Main.java:19:2
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:19:2
  (block
-  ;;@ parameterassignments/Main.java:20:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:20:4
   (call $$ctor__int__int__int__boolean__void_$p_parameterassignments_Main@parameterassignments.Main (ref.as_non_null (local.get $this))(local.get $nonFinal)(local.get $explicitFinal)(local.get $implicitFinal)(i32.const 1))
-  ;;@ parameterassignments/Main.java:21:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:21:4
   (local.set $nonFinal (i32.add (i32.add (local.get $nonFinal) (local.get $explicitFinal)) (local.get $implicitFinal)))
  )
 )
@@ -400,16 +400,16 @@
  (param $implicitFinal i32)
  (param $flag i32)
  (result (ref null $parameterassignments.Main))
- ;;@ parameterassignments/Main.java:24:2
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:24:2
  (local $$instance (ref null $parameterassignments.Main))
  (block
-  ;;@ parameterassignments/Main.java:24:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:24:2
   (call $$clinit__void_<once>_@parameterassignments.Main )
-  ;;@ parameterassignments/Main.java:24:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:24:2
   (local.set $$instance (struct.new $parameterassignments.Main (ref.as_non_null (global.get $parameterassignments.Main.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
-  ;;@ parameterassignments/Main.java:24:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:24:2
   (call $$ctor__int__int__int__boolean__void_$p_parameterassignments_Main@parameterassignments.Main (ref.as_non_null (local.get $$instance))(local.get $nonFinal)(local.get $explicitFinal)(local.get $implicitFinal)(local.get $flag))
-  ;;@ parameterassignments/Main.java:24:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:24:2
   (return (local.get $$instance))
  )
 )
@@ -421,13 +421,13 @@
  (param $explicitFinal i32)
  (param $implicitFinal i32)
  (param $flag i32)
- ;;@ parameterassignments/Main.java:24:2
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:24:2
  (block
-  ;;@ parameterassignments/Main.java:24:79
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:24:79
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;;@ parameterassignments/Main.java:24:79
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:24:79
   (call $$init__void_$p_parameterassignments_Main@parameterassignments.Main (ref.as_non_null (local.get $this)))
-  ;;@ parameterassignments/Main.java:25:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:25:4
   (local.set $nonFinal (i32.add (i32.add (local.get $nonFinal) (local.get $explicitFinal)) (local.get $implicitFinal)))
  )
 )
@@ -440,13 +440,13 @@
  (param $explicitFinal i32)
  (param $implicitFinal i32)
  (result i32)
- ;;@ parameterassignments/Main.java:28:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:28:6
  (local $this (ref null $parameterassignments.Main))
  (local.set $this (ref.cast (ref $parameterassignments.Main) (local.get $this.untyped)))
  (block
-  ;;@ parameterassignments/Main.java:29:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:29:4
   (local.set $nonFinal (i32.add (i32.add (local.get $nonFinal) (local.get $explicitFinal)) (local.get $implicitFinal)))
-  ;;@ parameterassignments/Main.java:30:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:30:4
   (return (local.get $nonFinal))
  )
 )
@@ -458,11 +458,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $o (ref null $java.lang.Object))
  (param $oa (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ parameterassignments/Main.java:33:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:33:7
  (local $this (ref null $parameterassignments.Main))
  (local.set $this (ref.cast (ref $parameterassignments.Main) (local.get $this.untyped)))
  (block
-  ;;@ parameterassignments/Main.java:34:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:34:4
   (local.set $oa (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (local.get $o)(array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $oa)) (i32.const 0)))))
  )
 )
@@ -474,11 +474,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $i i32)
  (param $ia (ref null $javaemul.internal.WasmArray.OfInt))
- ;;@ parameterassignments/Main.java:37:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:37:7
  (local $this (ref null $parameterassignments.Main))
  (local.set $this (ref.cast (ref $parameterassignments.Main) (local.get $this.untyped)))
  (block
-  ;;@ parameterassignments/Main.java:38:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:38:4
   (local.set $ia (call $m_newWithLiteral__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.new_fixed $int.array 2 (local.get $i)(array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ia)) (i32.const 0)))))
  )
 )
@@ -487,31 +487,31 @@
 ;;; void Main.$init()
 (func $$init__void_$p_parameterassignments_Main@parameterassignments.Main
  (param $this (ref null $parameterassignments.Main))
- ;;@ parameterassignments/Main.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:18:13
  (block
-  ;;@ parameterassignments/Main.java:45:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:45:2
   (struct.set $parameterassignments.Main $fn@parameterassignments.Main (local.get $this) (call $$create__@parameterassignments.Main.$LambdaImplementor$1 ))
-  ;;@ parameterassignments/Main.java:55:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:55:2
   (struct.set $parameterassignments.Main $fnPrimitiveVarargs@parameterassignments.Main (local.get $this) (call $$create__@parameterassignments.Main.$LambdaImplementor$2 ))
-  ;;@ parameterassignments/Main.java:64:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:64:2
   (struct.set $parameterassignments.Main $fnObjectVarargs@parameterassignments.Main (local.get $this) (call $$create__@parameterassignments.Main.$LambdaImplementor$3 ))
  )
 )
 
 ;;; void Main.$clinit()
 (func $$clinit__void_<once>_@parameterassignments.Main
- ;;@ parameterassignments/Main.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:18:13
  (block
-  ;;@ parameterassignments/Main.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:18:13
   (if (global.get $$class-initialized@parameterassignments.Main)
    (then
-    ;;@ parameterassignments/Main.java:18:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:18:13
     (return )
    )
   )
-  ;;@ parameterassignments/Main.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:18:13
   (global.set $$class-initialized@parameterassignments.Main (i32.const 1))
-  ;;@ parameterassignments/Main.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:18:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -548,16 +548,16 @@
 ;;; <anonymous> implements Fn <anonymous> implements Fn.$create()
 (func $$create__@parameterassignments.Main.$LambdaImplementor$1
  (result (ref null $parameterassignments.Main.$LambdaImplementor$1))
- ;;@ parameterassignments/Main.java:46:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:46:6
  (local $$instance (ref null $parameterassignments.Main.$LambdaImplementor$1))
  (block
-  ;;@ parameterassignments/Main.java:46:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:46:6
   (call $$clinit__void_<once>_@parameterassignments.Main.$LambdaImplementor$1 )
-  ;;@ parameterassignments/Main.java:46:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:46:6
   (local.set $$instance (struct.new $parameterassignments.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $parameterassignments.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $parameterassignments.Main.$LambdaImplementor$1.itable)) (i32.const 0)))
-  ;;@ parameterassignments/Main.java:46:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:46:6
   (call $$ctor__void_$p_parameterassignments_Main_$LambdaImplementor$1@parameterassignments.Main.$LambdaImplementor$1 (ref.as_non_null (local.get $$instance)))
-  ;;@ parameterassignments/Main.java:46:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:46:6
   (return (local.get $$instance))
  )
 )
@@ -565,9 +565,9 @@
 ;;; void <anonymous> implements Fn.$ctor()
 (func $$ctor__void_$p_parameterassignments_Main_$LambdaImplementor$1@parameterassignments.Main.$LambdaImplementor$1
  (param $this (ref null $parameterassignments.Main.$LambdaImplementor$1))
- ;;@ parameterassignments/Main.java:46:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:46:6
  (block
-  ;;@ parameterassignments/Main.java:46:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:46:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -579,13 +579,13 @@
  (param $nonFinal i32)
  (param $implicitFinal i32)
  (result i32)
- ;;@ parameterassignments/Main.java:46:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:46:6
  (local $this (ref null $parameterassignments.Main.$LambdaImplementor$1))
  (local.set $this (ref.cast (ref $parameterassignments.Main.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
-  ;;@ parameterassignments/Main.java:47:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:47:8
   (local.set $nonFinal (i32.add (local.get $nonFinal) (local.get $implicitFinal)))
-  ;;@ parameterassignments/Main.java:48:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:48:8
   (return (local.get $nonFinal))
  )
 )
@@ -593,18 +593,18 @@
 
 ;;; void <anonymous> implements Fn.$clinit()
 (func $$clinit__void_<once>_@parameterassignments.Main.$LambdaImplementor$1
- ;;@ parameterassignments/Main.java:46:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:46:6
  (block
-  ;;@ parameterassignments/Main.java:46:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:46:6
   (if (global.get $$class-initialized@parameterassignments.Main.$LambdaImplementor$1)
    (then
-    ;;@ parameterassignments/Main.java:46:6
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:46:6
     (return )
    )
   )
-  ;;@ parameterassignments/Main.java:46:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:46:6
   (global.set $$class-initialized@parameterassignments.Main.$LambdaImplementor$1 (i32.const 1))
-  ;;@ parameterassignments/Main.java:46:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:46:6
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -641,16 +641,16 @@
 ;;; <anonymous> implements FnPrimitiveVarargs <anonymous> implements FnPrimitiveVarargs.$create()
 (func $$create__@parameterassignments.Main.$LambdaImplementor$2
  (result (ref null $parameterassignments.Main.$LambdaImplementor$2))
- ;;@ parameterassignments/Main.java:56:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:56:6
  (local $$instance (ref null $parameterassignments.Main.$LambdaImplementor$2))
  (block
-  ;;@ parameterassignments/Main.java:56:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:56:6
   (call $$clinit__void_<once>_@parameterassignments.Main.$LambdaImplementor$2 )
-  ;;@ parameterassignments/Main.java:56:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:56:6
   (local.set $$instance (struct.new $parameterassignments.Main.$LambdaImplementor$2 (ref.as_non_null (global.get $parameterassignments.Main.$LambdaImplementor$2.vtable)) (ref.as_non_null (global.get $parameterassignments.Main.$LambdaImplementor$2.itable)) (i32.const 0)))
-  ;;@ parameterassignments/Main.java:56:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:56:6
   (call $$ctor__void_$p_parameterassignments_Main_$LambdaImplementor$2@parameterassignments.Main.$LambdaImplementor$2 (ref.as_non_null (local.get $$instance)))
-  ;;@ parameterassignments/Main.java:56:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:56:6
   (return (local.get $$instance))
  )
 )
@@ -658,9 +658,9 @@
 ;;; void <anonymous> implements FnPrimitiveVarargs.$ctor()
 (func $$ctor__void_$p_parameterassignments_Main_$LambdaImplementor$2@parameterassignments.Main.$LambdaImplementor$2
  (param $this (ref null $parameterassignments.Main.$LambdaImplementor$2))
- ;;@ parameterassignments/Main.java:56:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:56:6
  (block
-  ;;@ parameterassignments/Main.java:56:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:56:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -671,11 +671,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $i i32)
  (param $is (ref null $javaemul.internal.WasmArray.OfInt))
- ;;@ parameterassignments/Main.java:56:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:56:6
  (local $this (ref null $parameterassignments.Main.$LambdaImplementor$2))
  (local.set $this (ref.cast (ref $parameterassignments.Main.$LambdaImplementor$2) (local.get $this.untyped)))
  (block
-  ;;@ parameterassignments/Main.java:57:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:57:8
   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $is)) (i32.const 0) (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $is)) (i32.const 1)))
  )
 )
@@ -683,18 +683,18 @@
 
 ;;; void <anonymous> implements FnPrimitiveVarargs.$clinit()
 (func $$clinit__void_<once>_@parameterassignments.Main.$LambdaImplementor$2
- ;;@ parameterassignments/Main.java:56:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:56:6
  (block
-  ;;@ parameterassignments/Main.java:56:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:56:6
   (if (global.get $$class-initialized@parameterassignments.Main.$LambdaImplementor$2)
    (then
-    ;;@ parameterassignments/Main.java:56:6
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:56:6
     (return )
    )
   )
-  ;;@ parameterassignments/Main.java:56:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:56:6
   (global.set $$class-initialized@parameterassignments.Main.$LambdaImplementor$2 (i32.const 1))
-  ;;@ parameterassignments/Main.java:56:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:56:6
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -731,16 +731,16 @@
 ;;; <anonymous> implements FnObjectVarargs <anonymous> implements FnObjectVarargs.$create()
 (func $$create__@parameterassignments.Main.$LambdaImplementor$3
  (result (ref null $parameterassignments.Main.$LambdaImplementor$3))
- ;;@ parameterassignments/Main.java:65:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:65:6
  (local $$instance (ref null $parameterassignments.Main.$LambdaImplementor$3))
  (block
-  ;;@ parameterassignments/Main.java:65:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:65:6
   (call $$clinit__void_<once>_@parameterassignments.Main.$LambdaImplementor$3 )
-  ;;@ parameterassignments/Main.java:65:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:65:6
   (local.set $$instance (struct.new $parameterassignments.Main.$LambdaImplementor$3 (ref.as_non_null (global.get $parameterassignments.Main.$LambdaImplementor$3.vtable)) (ref.as_non_null (global.get $parameterassignments.Main.$LambdaImplementor$3.itable)) (i32.const 0)))
-  ;;@ parameterassignments/Main.java:65:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:65:6
   (call $$ctor__void_$p_parameterassignments_Main_$LambdaImplementor$3@parameterassignments.Main.$LambdaImplementor$3 (ref.as_non_null (local.get $$instance)))
-  ;;@ parameterassignments/Main.java:65:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:65:6
   (return (local.get $$instance))
  )
 )
@@ -748,9 +748,9 @@
 ;;; void <anonymous> implements FnObjectVarargs.$ctor()
 (func $$ctor__void_$p_parameterassignments_Main_$LambdaImplementor$3@parameterassignments.Main.$LambdaImplementor$3
  (param $this (ref null $parameterassignments.Main.$LambdaImplementor$3))
- ;;@ parameterassignments/Main.java:65:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:65:6
  (block
-  ;;@ parameterassignments/Main.java:65:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:65:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -761,11 +761,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $o (ref null $java.lang.Object))
  (param $os (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ parameterassignments/Main.java:65:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:65:6
  (local $this (ref null $parameterassignments.Main.$LambdaImplementor$3))
  (local.set $this (ref.cast (ref $parameterassignments.Main.$LambdaImplementor$3) (local.get $this.untyped)))
  (block
-  ;;@ parameterassignments/Main.java:66:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:66:8
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $os)) (i32.const 0) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $os)) (i32.const 1)))
  )
 )
@@ -773,18 +773,18 @@
 
 ;;; void <anonymous> implements FnObjectVarargs.$clinit()
 (func $$clinit__void_<once>_@parameterassignments.Main.$LambdaImplementor$3
- ;;@ parameterassignments/Main.java:65:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:65:6
  (block
-  ;;@ parameterassignments/Main.java:65:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:65:6
   (if (global.get $$class-initialized@parameterassignments.Main.$LambdaImplementor$3)
    (then
-    ;;@ parameterassignments/Main.java:65:6
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:65:6
     (return )
    )
   )
-  ;;@ parameterassignments/Main.java:65:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:65:6
   (global.set $$class-initialized@parameterassignments.Main.$LambdaImplementor$3 (i32.const 1))
-  ;;@ parameterassignments/Main.java:65:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:65:6
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -824,16 +824,16 @@
  (param $explicitFinal i32)
  (param $implicitFinal i32)
  (result (ref null $parameterassignments.Main.SubMain))
- ;;@ parameterassignments/Main.java:70:11
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:70:11
  (local $$instance (ref null $parameterassignments.Main.SubMain))
  (block
-  ;;@ parameterassignments/Main.java:70:11
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:70:11
   (call $$clinit__void_<once>_@parameterassignments.Main.SubMain )
-  ;;@ parameterassignments/Main.java:70:11
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:70:11
   (local.set $$instance (struct.new $parameterassignments.Main.SubMain (ref.as_non_null (global.get $parameterassignments.Main.SubMain.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
-  ;;@ parameterassignments/Main.java:70:11
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:70:11
   (call $$ctor__int__int__int__void_$p_parameterassignments_Main_SubMain@parameterassignments.Main.SubMain (ref.as_non_null (local.get $$instance))(local.get $nonFinal)(local.get $explicitFinal)(local.get $implicitFinal))
-  ;;@ parameterassignments/Main.java:70:11
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:70:11
   (return (local.get $$instance))
  )
 )
@@ -844,11 +844,11 @@
  (param $nonFinal i32)
  (param $explicitFinal i32)
  (param $implicitFinal i32)
- ;;@ parameterassignments/Main.java:70:11
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:70:11
  (block
-  ;;@ parameterassignments/Main.java:71:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:71:6
   (call $$ctor__int__int__int__void_$p_parameterassignments_Main@parameterassignments.Main (ref.as_non_null (local.get $this))(local.get $nonFinal)(local.get $explicitFinal)(local.get $implicitFinal))
-  ;;@ parameterassignments/Main.java:72:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:72:6
   (local.set $nonFinal (i32.add (i32.add (local.get $nonFinal) (local.get $explicitFinal)) (local.get $implicitFinal)))
  )
 )
@@ -861,13 +861,13 @@
  (param $explicitFinal i32)
  (param $implicitFinal i32)
  (result i32)
- ;;@ parameterassignments/Main.java:75:8
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:75:8
  (local $this (ref null $parameterassignments.Main.SubMain))
  (local.set $this (ref.cast (ref $parameterassignments.Main.SubMain) (local.get $this.untyped)))
  (block
-  ;;@ parameterassignments/Main.java:76:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:76:6
   (local.set $nonFinal (i32.add (i32.add (local.get $nonFinal) (local.get $explicitFinal)) (local.get $implicitFinal)))
-  ;;@ parameterassignments/Main.java:77:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:77:6
   (return (call $m_test__int__int__int__int_$pp_parameterassignments@parameterassignments.Main (ref.as_non_null (local.get $this))(local.get $nonFinal)(local.get $explicitFinal)(local.get $implicitFinal)))
  )
 )
@@ -875,18 +875,18 @@
 
 ;;; void SubMain.$clinit()
 (func $$clinit__void_<once>_@parameterassignments.Main.SubMain
- ;;@ parameterassignments/Main.java:69:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:69:22
  (block
-  ;;@ parameterassignments/Main.java:69:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:69:22
   (if (global.get $$class-initialized@parameterassignments.Main.SubMain)
    (then
-    ;;@ parameterassignments/Main.java:69:22
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:69:22
     (return )
    )
   )
-  ;;@ parameterassignments/Main.java:69:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:69:22
   (global.set $$class-initialized@parameterassignments.Main.SubMain (i32.const 1))
-  ;;@ parameterassignments/Main.java:69:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:69:22
   (call $$clinit__void_<once>_@parameterassignments.Main )
  )
 )

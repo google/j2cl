@@ -38,14 +38,14 @@
 ;;; PrivateConstructor PrivateConstructor.$create()
 (func $$create__@privateconstructor.PrivateConstructor
  (result (ref null $privateconstructor.PrivateConstructor))
- ;;@ privateconstructor/PrivateConstructor.java:19:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/privateconstructor/readable-j2wasm.js/privateconstructor/PrivateConstructor.java:19:10
  (local $$instance (ref null $privateconstructor.PrivateConstructor))
  (block
-  ;;@ privateconstructor/PrivateConstructor.java:19:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/privateconstructor/readable-j2wasm.js/privateconstructor/PrivateConstructor.java:19:10
   (local.set $$instance (struct.new $privateconstructor.PrivateConstructor (ref.as_non_null (global.get $privateconstructor.PrivateConstructor.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ privateconstructor/PrivateConstructor.java:19:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/privateconstructor/readable-j2wasm.js/privateconstructor/PrivateConstructor.java:19:10
   (call $$ctor__void_$p_privateconstructor_PrivateConstructor@privateconstructor.PrivateConstructor (ref.as_non_null (local.get $$instance)))
-  ;;@ privateconstructor/PrivateConstructor.java:19:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/privateconstructor/readable-j2wasm.js/privateconstructor/PrivateConstructor.java:19:10
   (return (local.get $$instance))
  )
 )
@@ -53,27 +53,27 @@
 ;;; void PrivateConstructor.$ctor()
 (func $$ctor__void_$p_privateconstructor_PrivateConstructor@privateconstructor.PrivateConstructor
  (param $this (ref null $privateconstructor.PrivateConstructor))
- ;;@ privateconstructor/PrivateConstructor.java:19:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/privateconstructor/readable-j2wasm.js/privateconstructor/PrivateConstructor.java:19:10
  (block
-  ;;@ privateconstructor/PrivateConstructor.java:19:31
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/privateconstructor/readable-j2wasm.js/privateconstructor/PrivateConstructor.java:19:31
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void PrivateConstructor.$clinit()
 (func $$clinit__void_<once>_@privateconstructor.PrivateConstructor
- ;;@ privateconstructor/PrivateConstructor.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/privateconstructor/readable-j2wasm.js/privateconstructor/PrivateConstructor.java:18:13
  (block
-  ;;@ privateconstructor/PrivateConstructor.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/privateconstructor/readable-j2wasm.js/privateconstructor/PrivateConstructor.java:18:13
   (if (global.get $$class-initialized@privateconstructor.PrivateConstructor)
    (then
-    ;;@ privateconstructor/PrivateConstructor.java:18:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/privateconstructor/readable-j2wasm.js/privateconstructor/PrivateConstructor.java:18:13
     (return )
    )
   )
-  ;;@ privateconstructor/PrivateConstructor.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/privateconstructor/readable-j2wasm.js/privateconstructor/PrivateConstructor.java:18:13
   (global.set $$class-initialized@privateconstructor.PrivateConstructor (i32.const 1))
-  ;;@ privateconstructor/PrivateConstructor.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/privateconstructor/readable-j2wasm.js/privateconstructor/PrivateConstructor.java:18:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

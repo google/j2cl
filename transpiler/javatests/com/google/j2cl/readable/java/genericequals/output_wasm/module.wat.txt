@@ -43,16 +43,16 @@
 (func $$create__java_lang_Object@genericequals.GenericEquals
  (param $value (ref null $java.lang.Object))
  (result (ref null $genericequals.GenericEquals))
- ;;@ genericequals/GenericEquals.java:23:9
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:23:9
  (local $$instance (ref null $genericequals.GenericEquals))
  (block
-  ;;@ genericequals/GenericEquals.java:23:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:23:9
   (call $$clinit__void_<once>_@genericequals.GenericEquals )
-  ;;@ genericequals/GenericEquals.java:23:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:23:9
   (local.set $$instance (struct.new $genericequals.GenericEquals (ref.as_non_null (global.get $genericequals.GenericEquals.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $genericequals.GenericEquals) (ref.null $java.lang.Object)))
-  ;;@ genericequals/GenericEquals.java:23:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:23:9
   (call $$ctor__java_lang_Object__void_$p_genericequals_GenericEquals@genericequals.GenericEquals (ref.as_non_null (local.get $$instance))(local.get $value))
-  ;;@ genericequals/GenericEquals.java:23:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:23:9
   (return (local.get $$instance))
  )
 )
@@ -61,13 +61,13 @@
 (func $$ctor__java_lang_Object__void_$p_genericequals_GenericEquals@genericequals.GenericEquals
  (param $this (ref null $genericequals.GenericEquals))
  (param $value (ref null $java.lang.Object))
- ;;@ genericequals/GenericEquals.java:23:9
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:23:9
  (block
-  ;;@ genericequals/GenericEquals.java:23:32
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:23:32
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;;@ genericequals/GenericEquals.java:24:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:24:4
   (struct.set $genericequals.GenericEquals $value@genericequals.GenericEquals (local.get $this) (local.get $value))
-  ;;@ genericequals/GenericEquals.java:25:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:25:4
   (struct.set $genericequals.GenericEquals $value2@genericequals.GenericEquals (local.get $this) (ref.null $genericequals.GenericEquals))
  )
 )
@@ -78,11 +78,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $other (ref null $genericequals.GenericEquals))
  (result (ref null $java.lang.Object))
- ;;@ genericequals/GenericEquals.java:28:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:28:16
  (local $this (ref null $genericequals.GenericEquals))
  (local.set $this (ref.cast (ref $genericequals.GenericEquals) (local.get $this.untyped)))
  (block
-  ;;@ genericequals/GenericEquals.java:29:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:29:4
   (return (struct.get $genericequals.GenericEquals $value@genericequals.GenericEquals (struct.get $genericequals.GenericEquals $value2@genericequals.GenericEquals (local.get $other))))
  )
 )
@@ -94,32 +94,32 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $obj (ref null $java.lang.Object))
  (result i32)
- ;;@ genericequals/GenericEquals.java:33:17
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:33:17
  (local $other (ref null $genericequals.GenericEquals))
  (local $this (ref null $genericequals.GenericEquals))
  (local.set $this (ref.cast (ref $genericequals.GenericEquals) (local.get $this.untyped)))
  (block
-  ;;@ genericequals/GenericEquals.java:34:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:34:4
   (if (ref.eq (local.get $obj) (local.get $this))
    (then
     (block
-     ;;@ genericequals/GenericEquals.java:35:6
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:35:6
      (return (i32.const 1))
     )
    )
   )
-  ;;@ genericequals/GenericEquals.java:37:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:37:4
   (if (i32.eqz (ref.test (ref $genericequals.GenericEquals) (local.get $obj)))
    (then
     (block
-     ;;@ genericequals/GenericEquals.java:38:6
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:38:6
      (return (i32.const 0))
     )
    )
   )
-  ;;@ genericequals/GenericEquals.java:40:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:40:4
   (local.set $other (ref.cast (ref null $genericequals.GenericEquals) (local.get $obj)))
-  ;;@ genericequals/GenericEquals.java:41:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:41:4
   (return (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (struct.get $genericequals.GenericEquals $value@genericequals.GenericEquals (local.get $this)))(struct.get $genericequals.GenericEquals $value@genericequals.GenericEquals (local.get $other))(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(struct.get $genericequals.GenericEquals $value@genericequals.GenericEquals (local.get $this))))))
  )
 )
@@ -127,18 +127,18 @@
 
 ;;; void GenericEquals.$clinit()
 (func $$clinit__void_<once>_@genericequals.GenericEquals
- ;;@ genericequals/GenericEquals.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:18:13
  (block
-  ;;@ genericequals/GenericEquals.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:18:13
   (if (global.get $$class-initialized@genericequals.GenericEquals)
    (then
-    ;;@ genericequals/GenericEquals.java:18:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:18:13
     (return )
    )
   )
-  ;;@ genericequals/GenericEquals.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:18:13
   (global.set $$class-initialized@genericequals.GenericEquals (i32.const 1))
-  ;;@ genericequals/GenericEquals.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:18:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

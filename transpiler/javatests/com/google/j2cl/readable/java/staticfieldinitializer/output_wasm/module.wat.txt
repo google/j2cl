@@ -44,16 +44,16 @@
 ;;; StaticFieldInitializer StaticFieldInitializer.$create()
 (func $$create__@staticfieldinitializer.StaticFieldInitializer
  (result (ref null $staticfieldinitializer.StaticFieldInitializer))
- ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticfieldinitializer/readable-j2wasm.js/staticfieldinitializer/StaticFieldInitializer.java:18:13
  (local $$instance (ref null $staticfieldinitializer.StaticFieldInitializer))
  (block
-  ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticfieldinitializer/readable-j2wasm.js/staticfieldinitializer/StaticFieldInitializer.java:18:13
   (call $$clinit__void_<once>_@staticfieldinitializer.StaticFieldInitializer )
-  ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticfieldinitializer/readable-j2wasm.js/staticfieldinitializer/StaticFieldInitializer.java:18:13
   (local.set $$instance (struct.new $staticfieldinitializer.StaticFieldInitializer (ref.as_non_null (global.get $staticfieldinitializer.StaticFieldInitializer.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticfieldinitializer/readable-j2wasm.js/staticfieldinitializer/StaticFieldInitializer.java:18:13
   (call $$ctor__void_$p_staticfieldinitializer_StaticFieldInitializer@staticfieldinitializer.StaticFieldInitializer (ref.as_non_null (local.get $$instance)))
-  ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticfieldinitializer/readable-j2wasm.js/staticfieldinitializer/StaticFieldInitializer.java:18:13
   (return (local.get $$instance))
  )
 )
@@ -61,31 +61,31 @@
 ;;; void StaticFieldInitializer.$ctor()
 (func $$ctor__void_$p_staticfieldinitializer_StaticFieldInitializer@staticfieldinitializer.StaticFieldInitializer
  (param $this (ref null $staticfieldinitializer.StaticFieldInitializer))
- ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticfieldinitializer/readable-j2wasm.js/staticfieldinitializer/StaticFieldInitializer.java:18:13
  (block
-  ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticfieldinitializer/readable-j2wasm.js/staticfieldinitializer/StaticFieldInitializer.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void StaticFieldInitializer.$clinit()
 (func $$clinit__void_<once>_@staticfieldinitializer.StaticFieldInitializer
- ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticfieldinitializer/readable-j2wasm.js/staticfieldinitializer/StaticFieldInitializer.java:18:13
  (block
-  ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticfieldinitializer/readable-j2wasm.js/staticfieldinitializer/StaticFieldInitializer.java:18:13
   (if (global.get $$class-initialized@staticfieldinitializer.StaticFieldInitializer)
    (then
-    ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticfieldinitializer/readable-j2wasm.js/staticfieldinitializer/StaticFieldInitializer.java:18:13
     (return )
    )
   )
-  ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticfieldinitializer/readable-j2wasm.js/staticfieldinitializer/StaticFieldInitializer.java:18:13
   (global.set $$class-initialized@staticfieldinitializer.StaticFieldInitializer (i32.const 1))
-  ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticfieldinitializer/readable-j2wasm.js/staticfieldinitializer/StaticFieldInitializer.java:18:13
   (call $$clinit__void_<once>_@java.lang.Object )
-  ;;@ staticfieldinitializer/StaticFieldInitializer.java:19:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticfieldinitializer/readable-j2wasm.js/staticfieldinitializer/StaticFieldInitializer.java:19:2
   (global.set $a@staticfieldinitializer.StaticFieldInitializer (i32.const 2))
-  ;;@ staticfieldinitializer/StaticFieldInitializer.java:20:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticfieldinitializer/readable-j2wasm.js/staticfieldinitializer/StaticFieldInitializer.java:20:2
   (global.set $b@staticfieldinitializer.StaticFieldInitializer (i32.mul (global.get $a@staticfieldinitializer.StaticFieldInitializer) (i32.const 4)))
  )
 )

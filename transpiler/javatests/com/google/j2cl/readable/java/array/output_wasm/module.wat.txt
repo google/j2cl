@@ -163,16 +163,16 @@
 
 ;;; void $Overlay.$clinit()
 (func $$clinit__void_<once>_@array.Arrays.NativeType.$Overlay
- ;;@ array/Arrays.java:155:23
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:155:23
  (block
-  ;;@ array/Arrays.java:155:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:155:23
   (if (global.get $$class-initialized@array.Arrays.NativeType.$Overlay)
    (then
-    ;;@ array/Arrays.java:155:23
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:155:23
     (return )
    )
   )
-  ;;@ array/Arrays.java:155:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:155:23
   (global.set $$class-initialized@array.Arrays.NativeType.$Overlay (i32.const 1))
  )
 )
@@ -209,16 +209,16 @@
 ;;; Arrays Arrays.$create()
 (func $$create__@array.Arrays
  (result (ref null $array.Arrays))
- ;;@ array/Arrays.java:24:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:24:13
  (local $$instance (ref null $array.Arrays))
  (block
-  ;;@ array/Arrays.java:24:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:24:13
   (call $$clinit__void_<once>_@array.Arrays )
-  ;;@ array/Arrays.java:24:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:24:13
   (local.set $$instance (struct.new $array.Arrays (ref.as_non_null (global.get $array.Arrays.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ array/Arrays.java:24:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:24:13
   (call $$ctor__void_$p_array_Arrays@array.Arrays (ref.as_non_null (local.get $$instance)))
-  ;;@ array/Arrays.java:24:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:24:13
   (return (local.get $$instance))
  )
 )
@@ -226,9 +226,9 @@
 ;;; void Arrays.$ctor()
 (func $$ctor__void_$p_array_Arrays@array.Arrays
  (param $this (ref null $array.Arrays))
- ;;@ array/Arrays.java:24:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:24:13
  (block
-  ;;@ array/Arrays.java:24:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:24:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -237,7 +237,7 @@
 (func $m_testObjectArray__void@array.Arrays
  (type $function.m_testObjectArray__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ array/Arrays.java:25:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:25:14
  (local $objects (ref null $javaemul.internal.WasmArray.OfObject))
  (local $objects2d (ref null $javaemul.internal.WasmArray.OfObject))
  (local $arrayLiteral2d (ref null $javaemul.internal.WasmArray.OfObject))
@@ -245,27 +245,27 @@
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (ref $array.Arrays) (local.get $this.untyped)))
  (block
-  ;;@ array/Arrays.java:27:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:27:4
   (local.set $objects (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 100)))
-  ;;@ array/Arrays.java:28:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:28:4
   (local.set $objects (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 0)))
-  ;;@ array/Arrays.java:29:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:29:4
   (local.set $objects (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (ref.null $java.lang.Object)(ref.null $java.lang.Object))))
-  ;;@ array/Arrays.java:30:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:30:4
   (local.set $objects2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $m_newWithLiteral__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@array.Arrays-1 (i32.const 0) (i32.const 2)))(i32.const -1)))
-  ;;@ array/Arrays.java:31:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:31:4
   (local.set $objects2d (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (ref.null $java.lang.Object)(ref.null $java.lang.Object)))(ref.null $java.lang.Object))))
-  ;;@ array/Arrays.java:32:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:32:4
   (local.set $objects2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $m_newWithLiteral__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@array.Arrays-2 (i32.const 0) (i32.const 2)))(i32.const -1)))
-  ;;@ array/Arrays.java:33:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:33:4
   (local.set $arrayLiteral2d (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (ref.null $java.lang.Object)(ref.null $java.lang.Object)))(ref.null $java.lang.Object))))
-  ;;@ array/Arrays.java:36:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:36:4
   (local.set $object (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $objects)) (i32.const 0)))
-  ;;@ array/Arrays.java:37:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:37:4
   (local.set $object (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $objects2d)) (i32.const 0)))) (i32.const 1)))
-  ;;@ array/Arrays.java:40:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:40:4
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $objects)) (i32.const 0) (ref.null $java.lang.Object))
-  ;;@ array/Arrays.java:41:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:41:4
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $objects2d)) (i32.const 0)))) (i32.const 1) (ref.null $java.lang.Object))
  )
 )
@@ -275,32 +275,32 @@
 (func $m_testJavaTypeArray__void@array.Arrays
  (type $function.m_testJavaTypeArray__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ array/Arrays.java:46:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:46:14
  (local $objects (ref null $javaemul.internal.WasmArray.OfObject))
  (local $objects2d (ref null $javaemul.internal.WasmArray.OfObject))
  (local $someObject (ref null $array.Arrays.SomeObject))
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (ref $array.Arrays) (local.get $this.untyped)))
  (block
-  ;;@ array/Arrays.java:48:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:48:4
   (local.set $objects (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 100)))
-  ;;@ array/Arrays.java:49:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:49:4
   (local.set $objects (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 0)))
-  ;;@ array/Arrays.java:50:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:50:4
   (local.set $objects (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (ref.null $java.lang.Object)(ref.null $java.lang.Object))))
-  ;;@ array/Arrays.java:51:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:51:4
   (local.set $objects2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $m_newWithLiteral__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@array.Arrays-3 (i32.const 0) (i32.const 2)))(i32.const -1)))
-  ;;@ array/Arrays.java:52:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:52:4
   (local.set $objects2d (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (ref.null $java.lang.Object)(ref.null $java.lang.Object)))(ref.null $java.lang.Object))))
-  ;;@ array/Arrays.java:53:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:53:4
   (local.set $objects2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $m_newWithLiteral__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@array.Arrays-4 (i32.const 0) (i32.const 2)))(i32.const -1)))
-  ;;@ array/Arrays.java:56:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:56:4
   (local.set $someObject (ref.cast (ref null $array.Arrays.SomeObject) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $objects)) (i32.const 0))))
-  ;;@ array/Arrays.java:57:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:57:4
   (local.set $someObject (ref.cast (ref null $array.Arrays.SomeObject) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $objects2d)) (i32.const 0)))) (i32.const 1))))
-  ;;@ array/Arrays.java:60:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:60:4
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $objects)) (i32.const 0) (ref.null $java.lang.Object))
-  ;;@ array/Arrays.java:61:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:61:4
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $objects2d)) (i32.const 0)))) (i32.const 1) (ref.null $java.lang.Object))
  )
 )
@@ -310,7 +310,7 @@
 (func $m_testIntArrays__void_$pp_array@array.Arrays
  (type $function.m_testIntArrays__void_$pp_array)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ array/Arrays.java:64:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:64:7
  (local $ints (ref null $javaemul.internal.WasmArray.OfInt))
  (local $ints2d (ref null $javaemul.internal.WasmArray.OfObject))
  (local $n i32)
@@ -319,39 +319,39 @@
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (ref $array.Arrays) (local.get $this.untyped)))
  (block
-  ;;@ array/Arrays.java:66:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:66:4
   (local.set $ints (call $m_newWithLength__int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (i32.const 100)))
-  ;;@ array/Arrays.java:67:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:67:4
   (local.set $ints (call $m_newWithLength__int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (i32.const 0)))
-  ;;@ array/Arrays.java:68:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:68:4
   (local.set $ints (call $m_newWithLiteral__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@array.Arrays-5 (i32.const 0) (i32.const 2))))
-  ;;@ array/Arrays.java:69:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:69:4
   (local.set $ints2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $m_newWithLiteral__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@array.Arrays-6 (i32.const 0) (i32.const 2)))(i32.const 5)))
-  ;;@ array/Arrays.java:70:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:70:4
   (local.set $ints2d (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (call $m_newWithLiteral__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@array.Arrays-7 (i32.const 0) (i32.const 2)))(ref.null $java.lang.Object))))
-  ;;@ array/Arrays.java:71:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:71:4
   (local.set $ints2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $m_newWithLiteral__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@array.Arrays-8 (i32.const 0) (i32.const 2)))(i32.const 5)))
-  ;;@ array/Arrays.java:74:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:74:4
   (local.set $n (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0)))
-  ;;@ array/Arrays.java:75:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:75:4
   (local.set $n (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (ref.cast (ref null $javaemul.internal.WasmArray.OfInt) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $ints2d)) (i32.const 0)))) (i32.const 1)))
-  ;;@ array/Arrays.java:78:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:78:4
   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0) (i32.const 1))
-  ;;@ array/Arrays.java:79:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:79:4
   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (ref.cast (ref null $javaemul.internal.WasmArray.OfInt) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $ints2d)) (i32.const 0)))) (i32.const 1) (i32.const 1))
-  ;;@ array/Arrays.java:82:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:82:4
   (local.set $b (i32.const 1))
-  ;;@ array/Arrays.java:83:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:83:4
   (local.set $c (i32.const 97))
-  ;;@ array/Arrays.java:84:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:84:4
   (local.set $ints (call $m_newWithLength__int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (local.get $b)))
-  ;;@ array/Arrays.java:85:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:85:4
   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (local.get $b) (local.get $b))
-  ;;@ array/Arrays.java:86:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:86:4
   (local.set $ints (call $m_newWithLength__int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (local.get $c)))
-  ;;@ array/Arrays.java:87:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:87:4
   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (local.get $c) (local.get $c))
-  ;;@ array/Arrays.java:88:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:88:4
   (local.set $ints (call $m_newWithLiteral__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.new_fixed $int.array 2 (local.get $b)(local.get $c))))
  )
 )
@@ -361,7 +361,7 @@
 (func $m_testLongArrays__void_$pp_array@array.Arrays
  (type $function.m_testLongArrays__void_$pp_array)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ array/Arrays.java:91:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:91:7
  (local $longs (ref null $javaemul.internal.WasmArray.OfLong))
  (local $longs2d (ref null $javaemul.internal.WasmArray.OfObject))
  (local $n i64)
@@ -370,39 +370,39 @@
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (ref $array.Arrays) (local.get $this.untyped)))
  (block
-  ;;@ array/Arrays.java:93:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:93:4
   (local.set $longs (call $m_newWithLength__int__javaemul_internal_WasmArray_OfLong@javaemul.internal.WasmArray.OfLong (i32.const 100)))
-  ;;@ array/Arrays.java:94:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:94:4
   (local.set $longs (call $m_newWithLength__int__javaemul_internal_WasmArray_OfLong@javaemul.internal.WasmArray.OfLong (i32.const 0)))
-  ;;@ array/Arrays.java:95:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:95:4
   (local.set $longs (call $m_newWithLiteral__arrayOf_long__javaemul_internal_WasmArray_OfLong@javaemul.internal.WasmArray.OfLong (array.new_data $long.array $arrayliteral@array.Arrays-9 (i32.const 0) (i32.const 2))))
-  ;;@ array/Arrays.java:96:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:96:4
   (local.set $longs2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $m_newWithLiteral__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@array.Arrays-10 (i32.const 0) (i32.const 2)))(i32.const 6)))
-  ;;@ array/Arrays.java:97:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:97:4
   (local.set $longs2d (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (call $m_newWithLiteral__arrayOf_long__javaemul_internal_WasmArray_OfLong@javaemul.internal.WasmArray.OfLong (array.new_data $long.array $arrayliteral@array.Arrays-11 (i32.const 0) (i32.const 2)))(ref.null $java.lang.Object))))
-  ;;@ array/Arrays.java:98:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:98:4
   (local.set $longs2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $m_newWithLiteral__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@array.Arrays-12 (i32.const 0) (i32.const 2)))(i32.const 6)))
-  ;;@ array/Arrays.java:101:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:101:4
   (local.set $n (array.get $long.array (struct.get $javaemul.internal.WasmArray.OfLong $elements@javaemul.internal.WasmArray.OfLong (local.get $longs)) (i32.const 0)))
-  ;;@ array/Arrays.java:102:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:102:4
   (local.set $n (array.get $long.array (struct.get $javaemul.internal.WasmArray.OfLong $elements@javaemul.internal.WasmArray.OfLong (ref.cast (ref null $javaemul.internal.WasmArray.OfLong) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $longs2d)) (i32.const 0)))) (i32.const 1)))
-  ;;@ array/Arrays.java:105:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:105:4
   (array.set $long.array (struct.get $javaemul.internal.WasmArray.OfLong $elements@javaemul.internal.WasmArray.OfLong (local.get $longs)) (i32.const 0) (i64.const 1))
-  ;;@ array/Arrays.java:106:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:106:4
   (array.set $long.array (struct.get $javaemul.internal.WasmArray.OfLong $elements@javaemul.internal.WasmArray.OfLong (ref.cast (ref null $javaemul.internal.WasmArray.OfLong) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $longs2d)) (i32.const 0)))) (i32.const 1) (i64.const 1))
-  ;;@ array/Arrays.java:109:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:109:4
   (local.set $b (i32.const 1))
-  ;;@ array/Arrays.java:110:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:110:4
   (local.set $c (i32.const 97))
-  ;;@ array/Arrays.java:111:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:111:4
   (local.set $longs (call $m_newWithLength__int__javaemul_internal_WasmArray_OfLong@javaemul.internal.WasmArray.OfLong (local.get $b)))
-  ;;@ array/Arrays.java:112:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:112:4
   (array.set $long.array (struct.get $javaemul.internal.WasmArray.OfLong $elements@javaemul.internal.WasmArray.OfLong (local.get $longs)) (local.get $b) (i64.extend_i32_s (local.get $b)))
-  ;;@ array/Arrays.java:113:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:113:4
   (local.set $longs (call $m_newWithLength__int__javaemul_internal_WasmArray_OfLong@javaemul.internal.WasmArray.OfLong (local.get $c)))
-  ;;@ array/Arrays.java:114:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:114:4
   (array.set $long.array (struct.get $javaemul.internal.WasmArray.OfLong $elements@javaemul.internal.WasmArray.OfLong (local.get $longs)) (local.get $c) (i64.extend_i32_u (local.get $c)))
-  ;;@ array/Arrays.java:115:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:115:4
   (local.set $longs (call $m_newWithLiteral__arrayOf_long__javaemul_internal_WasmArray_OfLong@javaemul.internal.WasmArray.OfLong (array.new_fixed $long.array 2 (i64.extend_i32_s (local.get $b))(i64.extend_i32_u (local.get $c)))))
  )
 )
@@ -412,32 +412,32 @@
 (func $m_testDevirtualizedTypeArrays__void_$pp_array@array.Arrays
  (type $function.m_testDevirtualizedTypeArrays__void_$pp_array)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ array/Arrays.java:118:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:118:7
  (local $booleans (ref null $javaemul.internal.WasmArray.OfObject))
  (local $booleans2d (ref null $javaemul.internal.WasmArray.OfObject))
  (local $b i32)
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (ref $array.Arrays) (local.get $this.untyped)))
  (block
-  ;;@ array/Arrays.java:120:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:120:4
   (local.set $booleans (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 100)))
-  ;;@ array/Arrays.java:121:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:121:4
   (local.set $booleans (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 0)))
-  ;;@ array/Arrays.java:122:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:122:4
   (local.set $booleans (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.const 1))(call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.const 0)))))
-  ;;@ array/Arrays.java:123:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:123:4
   (local.set $booleans2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $m_newWithLiteral__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@array.Arrays-13 (i32.const 0) (i32.const 2)))(i32.const -1)))
-  ;;@ array/Arrays.java:124:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:124:4
   (local.set $booleans2d (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.const 1))(call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.const 0))))(ref.null $java.lang.Object))))
-  ;;@ array/Arrays.java:125:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:125:4
   (local.set $booleans2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $m_newWithLiteral__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@array.Arrays-14 (i32.const 0) (i32.const 2)))(i32.const -1)))
-  ;;@ array/Arrays.java:128:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:128:4
   (local.set $b (call $m_booleanValue__boolean@java.lang.Boolean (ref.as_non_null (ref.cast (ref null $java.lang.Boolean) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $booleans)) (i32.const 0))))))
-  ;;@ array/Arrays.java:129:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:129:4
   (local.set $b (call $m_booleanValue__boolean@java.lang.Boolean (ref.as_non_null (ref.cast (ref null $java.lang.Boolean) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $booleans2d)) (i32.const 0)))) (i32.const 1))))))
-  ;;@ array/Arrays.java:132:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:132:4
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $booleans)) (i32.const 0) (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.const 1)))
-  ;;@ array/Arrays.java:133:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:133:4
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $booleans2d)) (i32.const 0)))) (i32.const 1) (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.const 0)))
  )
 )
@@ -447,32 +447,32 @@
 (func $m_testStringArrays__void_$pp_array@array.Arrays
  (type $function.m_testStringArrays__void_$pp_array)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ array/Arrays.java:136:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:136:7
  (local $strings (ref null $javaemul.internal.WasmArray.OfObject))
  (local $strings2d (ref null $javaemul.internal.WasmArray.OfObject))
  (local $b (ref null $java.lang.String))
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (ref $array.Arrays) (local.get $this.untyped)))
  (block
-  ;;@ array/Arrays.java:138:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:138:4
   (local.set $strings (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 100)))
-  ;;@ array/Arrays.java:139:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:139:4
   (local.set $strings (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 0)))
-  ;;@ array/Arrays.java:140:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:140:4
   (local.set $strings (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (ref.null $java.lang.Object)(ref.null $java.lang.Object))))
-  ;;@ array/Arrays.java:141:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:141:4
   (local.set $strings2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $m_newWithLiteral__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@array.Arrays-15 (i32.const 0) (i32.const 2)))(i32.const -1)))
-  ;;@ array/Arrays.java:142:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:142:4
   (local.set $strings2d (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (ref.null $java.lang.Object)(ref.null $java.lang.Object)))(ref.null $java.lang.Object))))
-  ;;@ array/Arrays.java:143:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:143:4
   (local.set $strings2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $m_newWithLiteral__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@array.Arrays-16 (i32.const 0) (i32.const 2)))(i32.const -1)))
-  ;;@ array/Arrays.java:146:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:146:4
   (local.set $b (ref.cast (ref null $java.lang.String) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $strings)) (i32.const 0))))
-  ;;@ array/Arrays.java:147:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:147:4
   (local.set $b (ref.cast (ref null $java.lang.String) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $strings2d)) (i32.const 0)))) (i32.const 1))))
-  ;;@ array/Arrays.java:150:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:150:4
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $strings)) (i32.const 0) (ref.null $java.lang.Object))
-  ;;@ array/Arrays.java:151:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:151:4
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $strings2d)) (i32.const 0)))) (i32.const 1) (ref.null $java.lang.Object))
  )
 )
@@ -482,15 +482,15 @@
 (func $m_testErasureCastsOnArrayAccess__void@array.Arrays
  (type $function.m_testErasureCastsOnArrayAccess__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ array/Arrays.java:176:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:176:14
  (local $container (ref null $array.Arrays.ArrayContainer))
  (local $s (ref null $java.lang.String))
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (ref $array.Arrays) (local.get $this.untyped)))
  (block
-  ;;@ array/Arrays.java:177:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:177:4
   (local.set $container (ref.null $array.Arrays.ArrayContainer))
-  ;;@ array/Arrays.java:178:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:178:4
   (local.set $s (ref.cast (ref null $java.lang.String) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (struct.get $array.Arrays.ArrayContainer $data@array.Arrays.ArrayContainer (local.get $container)))) (i32.const 0))))
  )
 )
@@ -500,17 +500,17 @@
 (func $m_testCovariance__void@array.Arrays
  (type $function.m_testCovariance__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ array/Arrays.java:181:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:181:14
  (local $objectArray (ref null $javaemul.internal.WasmArray.OfObject))
  (local $stringArray (ref null $javaemul.internal.WasmArray.OfObject))
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (ref $array.Arrays) (local.get $this.untyped)))
  (block
-  ;;@ array/Arrays.java:182:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:182:4
   (local.set $objectArray (ref.null $javaemul.internal.WasmArray.OfObject))
-  ;;@ array/Arrays.java:183:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:183:4
   (local.set $stringArray (ref.null $javaemul.internal.WasmArray.OfObject))
-  ;;@ array/Arrays.java:184:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:184:4
   (local.set $objectArray (local.get $stringArray))
  )
 )
@@ -520,13 +520,13 @@
 (func $m_testArraysSupertypeClosureTypes__void@array.Arrays
  (type $function.m_testArraysSupertypeClosureTypes__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ array/Arrays.java:193:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:193:14
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (ref $array.Arrays) (local.get $this.untyped)))
  (block
-  ;;@ array/Arrays.java:194:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:194:4
   (call_ref $function.m_consumesCloneable__java_lang_Cloneable__void (ref.as_non_null (local.get $this))(call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 10))(struct.get $array.Arrays.vtable $m_consumesCloneable__java_lang_Cloneable__void (struct.get $array.Arrays $vtable(local.get $this))))
-  ;;@ array/Arrays.java:195:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:195:4
   (call_ref $function.m_consumesSerializable__java_io_Serializable__void (ref.as_non_null (local.get $this))(call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 10))(struct.get $array.Arrays.vtable $m_consumesSerializable__java_io_Serializable__void (struct.get $array.Arrays $vtable(local.get $this))))
  )
 )
@@ -537,7 +537,7 @@
  (type $function.m_consumesCloneable__java_lang_Cloneable__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $cloneable (ref null $java.lang.Object))
- ;;@ array/Arrays.java:198:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:198:14
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (ref $array.Arrays) (local.get $this.untyped)))
  (block
@@ -550,7 +550,7 @@
  (type $function.m_consumesSerializable__java_io_Serializable__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $serializable (ref null $java.lang.Object))
- ;;@ array/Arrays.java:200:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:200:14
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (ref $array.Arrays) (local.get $this.untyped)))
  (block
@@ -560,18 +560,18 @@
 
 ;;; void Arrays.$clinit()
 (func $$clinit__void_<once>_@array.Arrays
- ;;@ array/Arrays.java:24:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:24:13
  (block
-  ;;@ array/Arrays.java:24:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:24:13
   (if (global.get $$class-initialized@array.Arrays)
    (then
-    ;;@ array/Arrays.java:24:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:24:13
     (return )
    )
   )
-  ;;@ array/Arrays.java:24:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:24:13
   (global.set $$class-initialized@array.Arrays (i32.const 1))
-  ;;@ array/Arrays.java:24:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:24:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -609,14 +609,14 @@
 (func $$create__array_Arrays@array.Arrays.SomeObject
  (param $$outer_this (ref null $array.Arrays))
  (result (ref null $array.Arrays.SomeObject))
- ;;@ array/Arrays.java:44:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:44:16
  (local $$instance (ref null $array.Arrays.SomeObject))
  (block
-  ;;@ array/Arrays.java:44:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:44:16
   (local.set $$instance (struct.new $array.Arrays.SomeObject (ref.as_non_null (global.get $array.Arrays.SomeObject.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $array.Arrays)))
-  ;;@ array/Arrays.java:44:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:44:16
   (call $$ctor__array_Arrays__void_$p_array_Arrays_SomeObject@array.Arrays.SomeObject (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;;@ array/Arrays.java:44:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:44:16
   (return (local.get $$instance))
  )
 )
@@ -625,29 +625,29 @@
 (func $$ctor__array_Arrays__void_$p_array_Arrays_SomeObject@array.Arrays.SomeObject
  (param $this (ref null $array.Arrays.SomeObject))
  (param $$outer_this (ref null $array.Arrays))
- ;;@ array/Arrays.java:44:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:44:16
  (block
-  ;;@ array/Arrays.java:44:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:44:16
   (struct.set $array.Arrays.SomeObject $$outer_this@array.Arrays.SomeObject (local.get $this) (local.get $$outer_this))
-  ;;@ array/Arrays.java:44:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:44:16
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void SomeObject.$clinit()
 (func $$clinit__void_<once>_@array.Arrays.SomeObject
- ;;@ array/Arrays.java:44:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:44:16
  (block
-  ;;@ array/Arrays.java:44:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:44:16
   (if (global.get $$class-initialized@array.Arrays.SomeObject)
    (then
-    ;;@ array/Arrays.java:44:16
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:44:16
     (return )
    )
   )
-  ;;@ array/Arrays.java:44:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:44:16
   (global.set $$class-initialized@array.Arrays.SomeObject (i32.const 1))
-  ;;@ array/Arrays.java:44:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:44:16
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -686,14 +686,14 @@
 ;;; ArrayContainer<T> ArrayContainer.$create()
 (func $$create__@array.Arrays.ArrayContainer
  (result (ref null $array.Arrays.ArrayContainer))
- ;;@ array/Arrays.java:187:23
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:187:23
  (local $$instance (ref null $array.Arrays.ArrayContainer))
  (block
-  ;;@ array/Arrays.java:187:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:187:23
   (local.set $$instance (struct.new $array.Arrays.ArrayContainer (ref.as_non_null (global.get $array.Arrays.ArrayContainer.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject)))
-  ;;@ array/Arrays.java:187:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:187:23
   (call $$ctor__void_$p_array_Arrays_ArrayContainer@array.Arrays.ArrayContainer (ref.as_non_null (local.get $$instance)))
-  ;;@ array/Arrays.java:187:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:187:23
   (return (local.get $$instance))
  )
 )
@@ -701,27 +701,27 @@
 ;;; void ArrayContainer.$ctor()
 (func $$ctor__void_$p_array_Arrays_ArrayContainer@array.Arrays.ArrayContainer
  (param $this (ref null $array.Arrays.ArrayContainer))
- ;;@ array/Arrays.java:187:23
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:187:23
  (block
-  ;;@ array/Arrays.java:187:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:187:23
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void ArrayContainer.$clinit()
 (func $$clinit__void_<once>_@array.Arrays.ArrayContainer
- ;;@ array/Arrays.java:187:23
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:187:23
  (block
-  ;;@ array/Arrays.java:187:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:187:23
   (if (global.get $$class-initialized@array.Arrays.ArrayContainer)
    (then
-    ;;@ array/Arrays.java:187:23
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:187:23
     (return )
    )
   )
-  ;;@ array/Arrays.java:187:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:187:23
   (global.set $$class-initialized@array.Arrays.ArrayContainer (i32.const 1))
-  ;;@ array/Arrays.java:187:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:187:23
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

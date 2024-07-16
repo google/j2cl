@@ -369,7 +369,11 @@ public enum Backend {
     @Override
     public void generateOutputs(BackendOptions options, Library library, Problems problems) {
       WasmGeneratorStage.generateMonolithicOutput(
-          library, options.getOutput(), options.getLibraryInfoOutput(), problems);
+          library,
+          options.getOutput(),
+          options.getLibraryInfoOutput(),
+          options.getSourceMappingPathPrefix(),
+          problems);
     }
 
     @Override
@@ -520,7 +524,11 @@ public enum Backend {
     @Override
     public void generateOutputs(BackendOptions options, Library library, Problems problems) {
       WasmGeneratorStage.generateModularOutput(
-          library, options.getOutput(), options.getLibraryInfoOutput(), problems);
+          library,
+          options.getOutput(),
+          options.getLibraryInfoOutput(),
+          options.getSourceMappingPathPrefix(),
+          problems);
     }
 
     @Override

@@ -47,16 +47,16 @@
 ;;; StaticInitializers StaticInitializers.$create()
 (func $$create__@staticinitializers.StaticInitializers
  (result (ref null $staticinitializers.StaticInitializers))
- ;;@ staticinitializers/StaticInitializers.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:18:13
  (local $$instance (ref null $staticinitializers.StaticInitializers))
  (block
-  ;;@ staticinitializers/StaticInitializers.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:18:13
   (call $$clinit__void_<once>_@staticinitializers.StaticInitializers )
-  ;;@ staticinitializers/StaticInitializers.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:18:13
   (local.set $$instance (struct.new $staticinitializers.StaticInitializers (ref.as_non_null (global.get $staticinitializers.StaticInitializers.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ staticinitializers/StaticInitializers.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:18:13
   (call $$ctor__void_$p_staticinitializers_StaticInitializers@staticinitializers.StaticInitializers (ref.as_non_null (local.get $$instance)))
-  ;;@ staticinitializers/StaticInitializers.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:18:13
   (return (local.get $$instance))
  )
 )
@@ -64,41 +64,41 @@
 ;;; void StaticInitializers.$ctor()
 (func $$ctor__void_$p_staticinitializers_StaticInitializers@staticinitializers.StaticInitializers
  (param $this (ref null $staticinitializers.StaticInitializers))
- ;;@ staticinitializers/StaticInitializers.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:18:13
  (block
-  ;;@ staticinitializers/StaticInitializers.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void StaticInitializers.$clinit()
 (func $$clinit__void_<once>_@staticinitializers.StaticInitializers
- ;;@ staticinitializers/StaticInitializers.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:18:13
  (local $duplicated i32)
  (local $duplicated_1 i32)
  (block
-  ;;@ staticinitializers/StaticInitializers.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:18:13
   (if (global.get $$class-initialized@staticinitializers.StaticInitializers)
    (then
-    ;;@ staticinitializers/StaticInitializers.java:18:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:18:13
     (return )
    )
   )
-  ;;@ staticinitializers/StaticInitializers.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:18:13
   (global.set $$class-initialized@staticinitializers.StaticInitializers (i32.const 1))
-  ;;@ staticinitializers/StaticInitializers.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:18:13
   (call $$clinit__void_<once>_@java.lang.Object )
-  ;;@ staticinitializers/StaticInitializers.java:19:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:19:2
   (global.set $a@staticinitializers.StaticInitializers (i32.const 5))
-  ;;@ staticinitializers/StaticInitializers.java:21:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:21:2
   (global.set $b@staticinitializers.StaticInitializers (i32.mul (global.get $a@staticinitializers.StaticInitializers) (i32.const 2)))
-  ;;@ staticinitializers/StaticInitializers.java:26:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:26:4
   (global.set $a@staticinitializers.StaticInitializers (i32.const 10))
-  ;;@ staticinitializers/StaticInitializers.java:27:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:27:4
   (global.set $c@staticinitializers.StaticInitializers (i32.add (global.get $a@staticinitializers.StaticInitializers) (global.get $b@staticinitializers.StaticInitializers)))
-  ;;@ staticinitializers/StaticInitializers.java:28:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:28:4
   (local.set $duplicated (global.get $c@staticinitializers.StaticInitializers))
-  ;;@ staticinitializers/StaticInitializers.java:32:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:32:4
   (local.set $duplicated_1 (i32.const 1))
  )
 )

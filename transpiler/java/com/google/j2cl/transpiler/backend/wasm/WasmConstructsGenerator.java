@@ -55,10 +55,15 @@ public class WasmConstructsGenerator {
 
   private final SourceBuilder builder;
   private final WasmGenerationEnvironment environment;
+  private final String sourceMappingPathPrefix;
 
-  public WasmConstructsGenerator(WasmGenerationEnvironment environment, SourceBuilder builder) {
+  public WasmConstructsGenerator(
+      WasmGenerationEnvironment environment,
+      SourceBuilder builder,
+      String sourceMappingPathPrefix) {
     this.environment = environment;
     this.builder = builder;
+    this.sourceMappingPathPrefix = sourceMappingPathPrefix;
   }
 
   void emitDataSegments(Library library) {
@@ -422,7 +427,8 @@ public class WasmConstructsGenerator {
 
     // Emit a source mapping at the entry of a method so that when stepping into a method
     // the debugger shows the right source line.
-    StatementTranspiler.renderSourceMappingComment(method.getSourcePosition(), builder);
+    StatementTranspiler.renderSourceMappingComment(
+        sourceMappingPathPrefix, method.getSourcePosition(), builder);
 
     // Emit locals.
     for (Variable variable : collectLocals(method)) {
@@ -448,7 +454,7 @@ public class WasmConstructsGenerator {
               environment.getWasmTypeName(enclosingTypeDescriptor)));
     }
 
-    StatementTranspiler.render(method.getBody(), builder, environment);
+    StatementTranspiler.render(method.getBody(), builder, environment, sourceMappingPathPrefix);
     builder.unindent();
     builder.newLine();
     builder.append(")");

@@ -110,16 +110,16 @@
 
 ;;; void $Overlay.$clinit()
 (func $$clinit__void_<once>_@packageinfosubpackage.Foo.NativeBar.$Overlay
- ;;@ packageinfosubpackage/Foo.java:23:23
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/Foo.java:23:23
  (block
-  ;;@ packageinfosubpackage/Foo.java:23:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/Foo.java:23:23
   (if (global.get $$class-initialized@packageinfosubpackage.Foo.NativeBar.$Overlay)
    (then
-    ;;@ packageinfosubpackage/Foo.java:23:23
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/Foo.java:23:23
     (return )
    )
   )
-  ;;@ packageinfosubpackage/Foo.java:23:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/Foo.java:23:23
   (global.set $$class-initialized@packageinfosubpackage.Foo.NativeBar.$Overlay (i32.const 1))
  )
 )
@@ -156,16 +156,16 @@
 ;;; Foo Foo.$create()
 (func $$create__@packageinfosubpackage.Foo
  (result (ref null $packageinfosubpackage.Foo))
- ;;@ packageinfosubpackage/Foo.java:20:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/Foo.java:20:13
  (local $$instance (ref null $packageinfosubpackage.Foo))
  (block
-  ;;@ packageinfosubpackage/Foo.java:20:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/Foo.java:20:13
   (call $$clinit__void_<once>_@packageinfosubpackage.Foo )
-  ;;@ packageinfosubpackage/Foo.java:20:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/Foo.java:20:13
   (local.set $$instance (struct.new $packageinfosubpackage.Foo (ref.as_non_null (global.get $packageinfosubpackage.Foo.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null extern)))
-  ;;@ packageinfosubpackage/Foo.java:20:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/Foo.java:20:13
   (call $$ctor__void_$p_packageinfosubpackage_Foo@packageinfosubpackage.Foo (ref.as_non_null (local.get $$instance)))
-  ;;@ packageinfosubpackage/Foo.java:20:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/Foo.java:20:13
   (return (local.get $$instance))
  )
 )
@@ -173,11 +173,11 @@
 ;;; void Foo.$ctor()
 (func $$ctor__void_$p_packageinfosubpackage_Foo@packageinfosubpackage.Foo
  (param $this (ref null $packageinfosubpackage.Foo))
- ;;@ packageinfosubpackage/Foo.java:20:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/Foo.java:20:13
  (block
-  ;;@ packageinfosubpackage/Foo.java:20:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/Foo.java:20:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;;@ packageinfosubpackage/Foo.java:20:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/Foo.java:20:13
   (call $$init__void_$p_packageinfosubpackage_Foo@packageinfosubpackage.Foo (ref.as_non_null (local.get $this)))
  )
 )
@@ -185,27 +185,27 @@
 ;;; void Foo.$init()
 (func $$init__void_$p_packageinfosubpackage_Foo@packageinfosubpackage.Foo
  (param $this (ref null $packageinfosubpackage.Foo))
- ;;@ packageinfosubpackage/Foo.java:20:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/Foo.java:20:13
  (block
-  ;;@ packageinfosubpackage/Foo.java:28:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/Foo.java:28:2
   (struct.set $packageinfosubpackage.Foo $nativeBar@packageinfosubpackage.Foo (local.get $this) (call $m_<init>__@packageinfosubpackage.Foo.NativeBar ))
  )
 )
 
 ;;; void Foo.$clinit()
 (func $$clinit__void_<once>_@packageinfosubpackage.Foo
- ;;@ packageinfosubpackage/Foo.java:20:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/Foo.java:20:13
  (block
-  ;;@ packageinfosubpackage/Foo.java:20:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/Foo.java:20:13
   (if (global.get $$class-initialized@packageinfosubpackage.Foo)
    (then
-    ;;@ packageinfosubpackage/Foo.java:20:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/Foo.java:20:13
     (return )
    )
   )
-  ;;@ packageinfosubpackage/Foo.java:20:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/Foo.java:20:13
   (global.set $$class-initialized@packageinfosubpackage.Foo (i32.const 1))
-  ;;@ packageinfosubpackage/Foo.java:20:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/Foo.java:20:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -244,16 +244,16 @@
 ;;; Bar Bar.$create()
 (func $$create__@packageinfosubpackage.subpackage.Bar
  (result (ref null $packageinfosubpackage.subpackage.Bar))
- ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/subpackage/Bar.java:21:13
  (local $$instance (ref null $packageinfosubpackage.subpackage.Bar))
  (block
-  ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/subpackage/Bar.java:21:13
   (call $$clinit__void_<once>_@packageinfosubpackage.subpackage.Bar )
-  ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/subpackage/Bar.java:21:13
   (local.set $$instance (struct.new $packageinfosubpackage.subpackage.Bar (ref.as_non_null (global.get $packageinfosubpackage.subpackage.Bar.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/subpackage/Bar.java:21:13
   (call $$ctor__void_$p_packageinfosubpackage_subpackage_Bar@packageinfosubpackage.subpackage.Bar (ref.as_non_null (local.get $$instance)))
-  ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/subpackage/Bar.java:21:13
   (return (local.get $$instance))
  )
 )
@@ -261,27 +261,27 @@
 ;;; void Bar.$ctor()
 (func $$ctor__void_$p_packageinfosubpackage_subpackage_Bar@packageinfosubpackage.subpackage.Bar
  (param $this (ref null $packageinfosubpackage.subpackage.Bar))
- ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/subpackage/Bar.java:21:13
  (block
-  ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/subpackage/Bar.java:21:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void Bar.$clinit()
 (func $$clinit__void_<once>_@packageinfosubpackage.subpackage.Bar
- ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/subpackage/Bar.java:21:13
  (block
-  ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/subpackage/Bar.java:21:13
   (if (global.get $$class-initialized@packageinfosubpackage.subpackage.Bar)
    (then
-    ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/subpackage/Bar.java:21:13
     (return )
    )
   )
-  ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/subpackage/Bar.java:21:13
   (global.set $$class-initialized@packageinfosubpackage.subpackage.Bar (i32.const 1))
-  ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/subpackage/Bar.java:21:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

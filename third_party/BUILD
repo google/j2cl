@@ -149,6 +149,11 @@ java_library(
 )
 
 alias(
+    name = "runfiles",
+    actual = "@bazel_tools//tools/java/runfiles",
+)
+
+alias(
     name = "protobuf_util_json",
     actual = "@com_google_protobuf//:protobuf_java_util",
 )

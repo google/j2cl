@@ -139,16 +139,16 @@
 
 ;;; void MyJsInterface.$clinit()
 (func $$clinit__void_<once>_@jsbridgebackward.MyJsInterface
- ;;@ jsbridgebackward/InterfaceImpl.java:21:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:21:10
  (block
-  ;;@ jsbridgebackward/InterfaceImpl.java:21:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:21:10
   (if (global.get $$class-initialized@jsbridgebackward.MyJsInterface)
    (then
-    ;;@ jsbridgebackward/InterfaceImpl.java:21:10
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:21:10
     (return )
    )
   )
-  ;;@ jsbridgebackward/InterfaceImpl.java:21:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:21:10
   (global.set $$class-initialized@jsbridgebackward.MyJsInterface (i32.const 1))
  )
 )
@@ -172,16 +172,16 @@
 ;;; A A.$create()
 (func $$create__@jsbridgebackward.A
  (result (ref null $jsbridgebackward.A))
- ;;@ jsbridgebackward/InterfaceImpl.java:25:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:25:6
  (local $$instance (ref null $jsbridgebackward.A))
  (block
-  ;;@ jsbridgebackward/InterfaceImpl.java:25:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:25:6
   (call $$clinit__void_<once>_@jsbridgebackward.A )
-  ;;@ jsbridgebackward/InterfaceImpl.java:25:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:25:6
   (local.set $$instance (struct.new $jsbridgebackward.A (ref.as_non_null (global.get $jsbridgebackward.A.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ jsbridgebackward/InterfaceImpl.java:25:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:25:6
   (call $$ctor__void_$p_jsbridgebackward_A@jsbridgebackward.A (ref.as_non_null (local.get $$instance)))
-  ;;@ jsbridgebackward/InterfaceImpl.java:25:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:25:6
   (return (local.get $$instance))
  )
 )
@@ -189,9 +189,9 @@
 ;;; void A.$ctor()
 (func $$ctor__void_$p_jsbridgebackward_A@jsbridgebackward.A
  (param $this (ref null $jsbridgebackward.A))
- ;;@ jsbridgebackward/InterfaceImpl.java:25:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:25:6
  (block
-  ;;@ jsbridgebackward/InterfaceImpl.java:25:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:25:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -202,11 +202,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $a i32)
  (result i32)
- ;;@ jsbridgebackward/InterfaceImpl.java:26:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:26:13
  (local $this (ref null $jsbridgebackward.A))
  (local.set $this (ref.cast (ref $jsbridgebackward.A) (local.get $this.untyped)))
  (block
-  ;;@ jsbridgebackward/InterfaceImpl.java:27:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:27:4
   (return (local.get $a))
  )
 )
@@ -214,18 +214,18 @@
 
 ;;; void A.$clinit()
 (func $$clinit__void_<once>_@jsbridgebackward.A
- ;;@ jsbridgebackward/InterfaceImpl.java:25:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:25:6
  (block
-  ;;@ jsbridgebackward/InterfaceImpl.java:25:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:25:6
   (if (global.get $$class-initialized@jsbridgebackward.A)
    (then
-    ;;@ jsbridgebackward/InterfaceImpl.java:25:6
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:25:6
     (return )
    )
   )
-  ;;@ jsbridgebackward/InterfaceImpl.java:25:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:25:6
   (global.set $$class-initialized@jsbridgebackward.A (i32.const 1))
-  ;;@ jsbridgebackward/InterfaceImpl.java:25:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:25:6
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -262,16 +262,16 @@
 ;;; InterfaceImpl InterfaceImpl.$create()
 (func $$create__@jsbridgebackward.InterfaceImpl
  (result (ref null $jsbridgebackward.InterfaceImpl))
- ;;@ jsbridgebackward/InterfaceImpl.java:31:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:31:13
  (local $$instance (ref null $jsbridgebackward.InterfaceImpl))
  (block
-  ;;@ jsbridgebackward/InterfaceImpl.java:31:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:31:13
   (call $$clinit__void_<once>_@jsbridgebackward.InterfaceImpl )
-  ;;@ jsbridgebackward/InterfaceImpl.java:31:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:31:13
   (local.set $$instance (struct.new $jsbridgebackward.InterfaceImpl (ref.as_non_null (global.get $jsbridgebackward.InterfaceImpl.vtable)) (ref.as_non_null (global.get $jsbridgebackward.InterfaceImpl.itable)) (i32.const 0)))
-  ;;@ jsbridgebackward/InterfaceImpl.java:31:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:31:13
   (call $$ctor__void_$p_jsbridgebackward_InterfaceImpl@jsbridgebackward.InterfaceImpl (ref.as_non_null (local.get $$instance)))
-  ;;@ jsbridgebackward/InterfaceImpl.java:31:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:31:13
   (return (local.get $$instance))
  )
 )
@@ -279,27 +279,27 @@
 ;;; void InterfaceImpl.$ctor()
 (func $$ctor__void_$p_jsbridgebackward_InterfaceImpl@jsbridgebackward.InterfaceImpl
  (param $this (ref null $jsbridgebackward.InterfaceImpl))
- ;;@ jsbridgebackward/InterfaceImpl.java:31:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:31:13
  (block
-  ;;@ jsbridgebackward/InterfaceImpl.java:31:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:31:13
   (call $$ctor__void_$p_jsbridgebackward_A@jsbridgebackward.A (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void InterfaceImpl.$clinit()
 (func $$clinit__void_<once>_@jsbridgebackward.InterfaceImpl
- ;;@ jsbridgebackward/InterfaceImpl.java:31:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:31:13
  (block
-  ;;@ jsbridgebackward/InterfaceImpl.java:31:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:31:13
   (if (global.get $$class-initialized@jsbridgebackward.InterfaceImpl)
    (then
-    ;;@ jsbridgebackward/InterfaceImpl.java:31:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:31:13
     (return )
    )
   )
-  ;;@ jsbridgebackward/InterfaceImpl.java:31:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:31:13
   (global.set $$class-initialized@jsbridgebackward.InterfaceImpl (i32.const 1))
-  ;;@ jsbridgebackward/InterfaceImpl.java:31:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:31:13
   (call $$clinit__void_<once>_@jsbridgebackward.A )
  )
 )
@@ -336,16 +336,16 @@
 ;;; SubInterfaceImpl SubInterfaceImpl.$create()
 (func $$create__@jsbridgebackward.SubInterfaceImpl
  (result (ref null $jsbridgebackward.SubInterfaceImpl))
- ;;@ jsbridgebackward/InterfaceImpl.java:36:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:36:6
  (local $$instance (ref null $jsbridgebackward.SubInterfaceImpl))
  (block
-  ;;@ jsbridgebackward/InterfaceImpl.java:36:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:36:6
   (call $$clinit__void_<once>_@jsbridgebackward.SubInterfaceImpl )
-  ;;@ jsbridgebackward/InterfaceImpl.java:36:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:36:6
   (local.set $$instance (struct.new $jsbridgebackward.SubInterfaceImpl (ref.as_non_null (global.get $jsbridgebackward.SubInterfaceImpl.vtable)) (ref.as_non_null (global.get $jsbridgebackward.SubInterfaceImpl.itable)) (i32.const 0)))
-  ;;@ jsbridgebackward/InterfaceImpl.java:36:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:36:6
   (call $$ctor__void_$p_jsbridgebackward_SubInterfaceImpl@jsbridgebackward.SubInterfaceImpl (ref.as_non_null (local.get $$instance)))
-  ;;@ jsbridgebackward/InterfaceImpl.java:36:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:36:6
   (return (local.get $$instance))
  )
 )
@@ -353,9 +353,9 @@
 ;;; void SubInterfaceImpl.$ctor()
 (func $$ctor__void_$p_jsbridgebackward_SubInterfaceImpl@jsbridgebackward.SubInterfaceImpl
  (param $this (ref null $jsbridgebackward.SubInterfaceImpl))
- ;;@ jsbridgebackward/InterfaceImpl.java:36:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:36:6
  (block
-  ;;@ jsbridgebackward/InterfaceImpl.java:36:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:36:6
   (call $$ctor__void_$p_jsbridgebackward_InterfaceImpl@jsbridgebackward.InterfaceImpl (ref.as_non_null (local.get $this)))
  )
 )
@@ -366,11 +366,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $a i32)
  (result i32)
- ;;@ jsbridgebackward/InterfaceImpl.java:39:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:39:13
  (local $this (ref null $jsbridgebackward.SubInterfaceImpl))
  (local.set $this (ref.cast (ref $jsbridgebackward.SubInterfaceImpl) (local.get $this.untyped)))
  (block
-  ;;@ jsbridgebackward/InterfaceImpl.java:40:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:40:4
   (return (i32.const 0))
  )
 )
@@ -378,18 +378,18 @@
 
 ;;; void SubInterfaceImpl.$clinit()
 (func $$clinit__void_<once>_@jsbridgebackward.SubInterfaceImpl
- ;;@ jsbridgebackward/InterfaceImpl.java:36:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:36:6
  (block
-  ;;@ jsbridgebackward/InterfaceImpl.java:36:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:36:6
   (if (global.get $$class-initialized@jsbridgebackward.SubInterfaceImpl)
    (then
-    ;;@ jsbridgebackward/InterfaceImpl.java:36:6
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:36:6
     (return )
    )
   )
-  ;;@ jsbridgebackward/InterfaceImpl.java:36:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:36:6
   (global.set $$class-initialized@jsbridgebackward.SubInterfaceImpl (i32.const 1))
-  ;;@ jsbridgebackward/InterfaceImpl.java:36:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsbridgebackward/readable-j2wasm.js/jsbridgebackward/InterfaceImpl.java:36:6
   (call $$clinit__void_<once>_@jsbridgebackward.InterfaceImpl )
  )
 )

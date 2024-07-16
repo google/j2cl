@@ -79,16 +79,16 @@
 ;;; Strings Strings.$create()
 (func $$create__@strings.Strings
  (result (ref null $strings.Strings))
- ;;@ strings/Strings.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:18:13
  (local $$instance (ref null $strings.Strings))
  (block
-  ;;@ strings/Strings.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:18:13
   (call $$clinit__void_<once>_@strings.Strings )
-  ;;@ strings/Strings.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:18:13
   (local.set $$instance (struct.new $strings.Strings (ref.as_non_null (global.get $strings.Strings.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.String)))
-  ;;@ strings/Strings.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:18:13
   (call $$ctor__void_$p_strings_Strings@strings.Strings (ref.as_non_null (local.get $$instance)))
-  ;;@ strings/Strings.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:18:13
   (return (local.get $$instance))
  )
 )
@@ -96,11 +96,11 @@
 ;;; void Strings.$ctor()
 (func $$ctor__void_$p_strings_Strings@strings.Strings
  (param $this (ref null $strings.Strings))
- ;;@ strings/Strings.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:18:13
  (block
-  ;;@ strings/Strings.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;;@ strings/Strings.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:18:13
   (call $$init__void_$p_strings_Strings@strings.Strings (ref.as_non_null (local.get $this)))
  )
 )
@@ -109,7 +109,7 @@
 (func $m_test__void@strings.Strings
  (type $function.m_test__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ strings/Strings.java:29:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:29:14
  (local $s1 (ref null $java.lang.String))
  (local $s2 (ref null $java.lang.String))
  (local $s3 (ref null $java.lang.String))
@@ -122,63 +122,63 @@
  (local $this (ref null $strings.Strings))
  (local.set $this (ref.cast (ref $strings.Strings) (local.get $this.untyped)))
  (block
-  ;;@ strings/Strings.java:31:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:31:4
   (local.set $s1 (ref.null $java.lang.String))
-  ;;@ strings/Strings.java:32:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:32:4
   (local.set $s2 (ref.null $java.lang.String))
-  ;;@ strings/Strings.java:33:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:33:4
   (local.set $s3 (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $s1))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $s2))))
-  ;;@ strings/Strings.java:34:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:34:4
   (local.set $s2 (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $s2))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $s2))))
-  ;;@ strings/Strings.java:35:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:35:4
   (local.set $s1 (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $s1))(call $$getString_|a|__java_lang_String_<once>_@strings.Strings )))
-  ;;@ strings/Strings.java:37:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:37:4
   (local.set $s3 (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $s1))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $s1)))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $s2)))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (ref.null $java.lang.Object)))(call $$getString_|a|__java_lang_String_<once>_@strings.Strings )))
-  ;;@ strings/Strings.java:39:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:39:4
   (local.set $s3 (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $$getString_|a|__java_lang_String_<once>_@strings.Strings )(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $s1)))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $s1)))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $s2)))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (ref.null $java.lang.Object))))
-  ;;@ strings/Strings.java:42:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:42:4
   
-  ;;@ strings/Strings.java:43:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:43:4
   (local.set $c1 (i32.const 70))
-  ;;@ strings/Strings.java:44:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:44:4
   (local.set $c2 (i32.const 111))
-  ;;@ strings/Strings.java:45:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:45:4
   (local.set $s4 (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__int__java_lang_String@java.lang.String (i32.add (local.get $c1) (local.get $c2)))(call $$getString_|o|__java_lang_String_<once>_@strings.Strings )))
-  ;;@ strings/Strings.java:46:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:46:4
   (local.set $s4 (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $s4))(call $$getString_|1|__java_lang_String_<once>_@strings.Strings )))
-  ;;@ strings/Strings.java:49:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:49:4
   (local.set $s4 (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $s4))(call $m_valueOf__long__java_lang_String@java.lang.String (i64.const 1))))
-  ;;@ strings/Strings.java:50:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:50:4
   (local.set $s4 (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $s4))(call $m_valueOf__char__java_lang_String@java.lang.String (i32.const 67))))
-  ;;@ strings/Strings.java:51:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:51:4
   (local.set $s4 (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $s4))(call $m_valueOf__int__java_lang_String@java.lang.String (i32.const 1))))
-  ;;@ strings/Strings.java:52:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:52:4
   (local.set $s4 (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $s4))(call $m_valueOf__double__java_lang_String@java.lang.String (f64.const 1.0))))
-  ;;@ strings/Strings.java:53:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:53:4
   (local.set $s4 (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $s4))(call $m_valueOf__float__java_lang_String@java.lang.String (f32.const 1.0))))
-  ;;@ strings/Strings.java:54:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:54:4
   (local.set $s4 (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $s4))(call $m_valueOf__int__java_lang_String@java.lang.String (i32.const 1))))
   (block
-   ;;@ strings/Strings.java:56:4
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:56:4
    (local.set $$qualifier (call $$create__@strings.Strings.StringHolder ))
-   ;;@ strings/Strings.java:56:4
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:56:4
    (struct.set $strings.Strings.StringHolder $s@strings.Strings.StringHolder (local.get $$qualifier) (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (struct.get $strings.Strings.StringHolder $s@strings.Strings.StringHolder (local.get $$qualifier)))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $s4))))
   )
   (block
-   ;;@ strings/Strings.java:57:4
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:57:4
    (local.set $$qualifier_1 (call $$create__@strings.Strings.StringHolder ))
-   ;;@ strings/Strings.java:57:4
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:57:4
    (struct.set $strings.Strings.StringHolder $s@strings.Strings.StringHolder (local.get $$qualifier_1) (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (struct.get $strings.Strings.StringHolder $s@strings.Strings.StringHolder (local.get $$qualifier_1)))(call $m_valueOf__char__java_lang_String@java.lang.String (local.get $c1))))
   )
   (block
-   ;;@ strings/Strings.java:58:4
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:58:4
    (local.set $$qualifier_2 (call $$create__@strings.Strings.StringHolder ))
-   ;;@ strings/Strings.java:58:4
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:58:4
    (struct.set $strings.Strings.StringHolder $s@strings.Strings.StringHolder (local.get $$qualifier_2) (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (struct.get $strings.Strings.StringHolder $s@strings.Strings.StringHolder (local.get $$qualifier_2)))(call $$getString_|o|__java_lang_String_<once>_@strings.Strings )))
   )
-  ;;@ strings/Strings.java:60:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:60:4
   (local.set $s1 (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__int__java_lang_String@java.lang.String (i32.add (i32.const 1) (i32.const 2)))(call $$getString_|s|__java_lang_String_<once>_@strings.Strings )))
-  ;;@ strings/Strings.java:61:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:61:4
   (local.set $s1 (call $$getString_|s12|__java_lang_String_<once>_@strings.Strings ))
  )
 )
@@ -187,31 +187,31 @@
 ;;; void Strings.$init()
 (func $$init__void_$p_strings_Strings@strings.Strings
  (param $this (ref null $strings.Strings))
- ;;@ strings/Strings.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:18:13
  (block
-  ;;@ strings/Strings.java:19:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:19:2
   (struct.set $strings.Strings $someString@strings.Strings (local.get $this) (call $$getString_|This_is_a_st...|__java_lang_String_<once>_@strings.Strings ))
-  ;;@ strings/Strings.java:21:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:21:2
   (struct.set $strings.Strings $nonBmpChar@strings.Strings (local.get $this) (call $$getString_|_|__java_lang_String_<once>_@strings.Strings ))
-  ;;@ strings/Strings.java:22:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:22:2
   (struct.set $strings.Strings $wideColon@strings.Strings (local.get $this) (call $$getString_|_|_1__java_lang_String_<once>_@strings.Strings ))
  )
 )
 
 ;;; void Strings.$clinit()
 (func $$clinit__void_<once>_@strings.Strings
- ;;@ strings/Strings.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:18:13
  (block
-  ;;@ strings/Strings.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:18:13
   (if (global.get $$class-initialized@strings.Strings)
    (then
-    ;;@ strings/Strings.java:18:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:18:13
     (return )
    )
   )
-  ;;@ strings/Strings.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:18:13
   (global.set $$class-initialized@strings.Strings (i32.const 1))
-  ;;@ strings/Strings.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:18:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -248,16 +248,16 @@
 ;;; StringHolder StringHolder.$create()
 (func $$create__@strings.Strings.StringHolder
  (result (ref null $strings.Strings.StringHolder))
- ;;@ strings/Strings.java:25:23
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:25:23
  (local $$instance (ref null $strings.Strings.StringHolder))
  (block
-  ;;@ strings/Strings.java:25:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:25:23
   (call $$clinit__void_<once>_@strings.Strings.StringHolder )
-  ;;@ strings/Strings.java:25:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:25:23
   (local.set $$instance (struct.new $strings.Strings.StringHolder (ref.as_non_null (global.get $strings.Strings.StringHolder.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.String)))
-  ;;@ strings/Strings.java:25:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:25:23
   (call $$ctor__void_$p_strings_Strings_StringHolder@strings.Strings.StringHolder (ref.as_non_null (local.get $$instance)))
-  ;;@ strings/Strings.java:25:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:25:23
   (return (local.get $$instance))
  )
 )
@@ -265,11 +265,11 @@
 ;;; void StringHolder.$ctor()
 (func $$ctor__void_$p_strings_Strings_StringHolder@strings.Strings.StringHolder
  (param $this (ref null $strings.Strings.StringHolder))
- ;;@ strings/Strings.java:25:23
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:25:23
  (block
-  ;;@ strings/Strings.java:25:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:25:23
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;;@ strings/Strings.java:25:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:25:23
   (call $$init__void_$p_strings_Strings_StringHolder@strings.Strings.StringHolder (ref.as_non_null (local.get $this)))
  )
 )
@@ -277,27 +277,27 @@
 ;;; void StringHolder.$init()
 (func $$init__void_$p_strings_Strings_StringHolder@strings.Strings.StringHolder
  (param $this (ref null $strings.Strings.StringHolder))
- ;;@ strings/Strings.java:25:23
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:25:23
  (block
-  ;;@ strings/Strings.java:26:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:26:4
   (struct.set $strings.Strings.StringHolder $s@strings.Strings.StringHolder (local.get $this) (call $$getString_|A|__java_lang_String_<once>_@strings.Strings.StringHolder ))
  )
 )
 
 ;;; void StringHolder.$clinit()
 (func $$clinit__void_<once>_@strings.Strings.StringHolder
- ;;@ strings/Strings.java:25:23
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:25:23
  (block
-  ;;@ strings/Strings.java:25:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:25:23
   (if (global.get $$class-initialized@strings.Strings.StringHolder)
    (then
-    ;;@ strings/Strings.java:25:23
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:25:23
     (return )
    )
   )
-  ;;@ strings/Strings.java:25:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:25:23
   (global.set $$class-initialized@strings.Strings.StringHolder (i32.const 1))
-  ;;@ strings/Strings.java:25:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:25:23
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

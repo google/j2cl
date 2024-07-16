@@ -235,9 +235,9 @@
 (func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Interface
  (param $this (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
- ;;@ interfaces/Main.java:26:17
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:26:17
  (block
-  ;;@ interfaces/Main.java:27:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:27:6
   (call $m_privateMethod__java_lang_Object__void_$p_interfaces_Main_Interface@interfaces.Main.Interface (ref.as_non_null (local.get $this))(local.get $t))
  )
 )
@@ -247,32 +247,32 @@
 (func $m_privateMethod__java_lang_Object__void_$p_interfaces_Main_Interface@interfaces.Main.Interface
  (param $this (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
- ;;@ interfaces/Main.java:30:17
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:30:17
  (block
  )
 )
 
 ;;; void Interface.staticInterfaceMethod()
 (func $m_staticInterfaceMethod__void@interfaces.Main.Interface
- ;;@ interfaces/Main.java:32:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:32:16
  (block
-  ;;@ interfaces/Main.java:32:40
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:32:40
   (call $$clinit__void_<once>_@interfaces.Main.Interface )
  )
 )
 
 ;;; void Interface.$clinit()
 (func $$clinit__void_<once>_@interfaces.Main.Interface
- ;;@ interfaces/Main.java:20:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:20:12
  (block
-  ;;@ interfaces/Main.java:20:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:20:12
   (if (global.get $$class-initialized@interfaces.Main.Interface)
    (then
-    ;;@ interfaces/Main.java:20:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:20:12
     (return )
    )
   )
-  ;;@ interfaces/Main.java:20:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:20:12
   (global.set $$class-initialized@interfaces.Main.Interface (i32.const 1))
  )
 )
@@ -296,16 +296,16 @@
 ;;; Main Main.$create()
 (func $$create__@interfaces.Main
  (result (ref null $interfaces.Main))
- ;;@ interfaces/Main.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:18:13
  (local $$instance (ref null $interfaces.Main))
  (block
-  ;;@ interfaces/Main.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:18:13
   (call $$clinit__void_<once>_@interfaces.Main )
-  ;;@ interfaces/Main.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:18:13
   (local.set $$instance (struct.new $interfaces.Main (ref.as_non_null (global.get $interfaces.Main.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ interfaces/Main.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:18:13
   (call $$ctor__void_$p_interfaces_Main@interfaces.Main (ref.as_non_null (local.get $$instance)))
-  ;;@ interfaces/Main.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:18:13
   (return (local.get $$instance))
  )
 )
@@ -313,9 +313,9 @@
 ;;; void Main.$ctor()
 (func $$ctor__void_$p_interfaces_Main@interfaces.Main
  (param $this (ref null $interfaces.Main))
- ;;@ interfaces/Main.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:18:13
  (block
-  ;;@ interfaces/Main.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -324,7 +324,7 @@
 (func $m_testInterfaceMembers__void_$pp_interfaces@interfaces.Main
  (type $function.m_testInterfaceMembers__void_$pp_interfaces)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ interfaces/Main.java:59:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:59:7
  (local $i (ref null $java.lang.Object))
  (local $impl (ref null $interfaces.Main.Implementor))
  (local $enumImpl (ref null $interfaces.Main.EnumImplementor))
@@ -333,37 +333,37 @@
  (local $this (ref null $interfaces.Main))
  (local.set $this (ref.cast (ref $interfaces.Main) (local.get $this.untyped)))
  (block
-  ;;@ interfaces/Main.java:60:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:60:4
   (local.set $i (call $$create__interfaces_Main@interfaces.Main.Implementor (local.get $this)))
-  ;;@ interfaces/Main.java:61:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:61:4
   (call_ref $function.m_interfaceMethod__void (ref.as_non_null (local.get $i))(struct.get $interfaces.Main.Interface.vtable $m_interfaceMethod__void (ref.cast (ref $interfaces.Main.Interface.vtable) (call $get.itable.$interfaces.Main.Interface (local.get $i)))))
-  ;;@ interfaces/Main.java:62:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:62:4
   (call_ref $function.m_defaultMethod__java_lang_Object__void (ref.as_non_null (local.get $i))(ref.null $java.lang.String)(struct.get $interfaces.Main.Interface.vtable $m_defaultMethod__java_lang_Object__void (ref.cast (ref $interfaces.Main.Interface.vtable) (call $get.itable.$interfaces.Main.Interface (local.get $i)))))
-  ;;@ interfaces/Main.java:63:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:63:4
   (drop (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $i))(struct.get $java.lang.Object.vtable $m_toString__java_lang_String (struct.get $java.lang.Object $vtable(local.get $i)))))
-  ;;@ interfaces/Main.java:65:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:65:4
   (local.set $impl (call $$create__interfaces_Main@interfaces.Main.Implementor (local.get $this)))
-  ;;@ interfaces/Main.java:66:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:66:4
   (call_ref $function.m_defaultMethod__java_lang_String__void (ref.as_non_null (local.get $impl))(ref.null $java.lang.String)(struct.get $interfaces.Main.Implementor.vtable $m_defaultMethod__java_lang_String__void (struct.get $interfaces.Main.Implementor $vtable(local.get $impl))))
-  ;;@ interfaces/Main.java:68:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:68:4
   (local.set $enumImpl (block (result (ref null $interfaces.Main.EnumImplementor))
    (call $$clinit__void_<once>_@interfaces.Main.EnumImplementor )
    (global.get $ONE@interfaces.Main.EnumImplementor)
   ))
-  ;;@ interfaces/Main.java:69:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:69:4
   (call_ref $function.m_defaultMethod__java_lang_String__void (ref.as_non_null (local.get $enumImpl))(ref.null $java.lang.String)(struct.get $interfaces.Main.EnumImplementor.vtable $m_defaultMethod__java_lang_String__void (struct.get $interfaces.Main.EnumImplementor $vtable(local.get $enumImpl))))
-  ;;@ interfaces/Main.java:71:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:71:4
   (call $m_staticInterfaceMethod__void@interfaces.Main.Interface )
-  ;;@ interfaces/Main.java:72:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:72:4
   (local.set $x (i32.add (block (result i32)
    (drop (call $$create__interfaces_Main@interfaces.Main.Implementor (local.get $this)))
    (i32.const 1)
   ) (i32.const 2)))
-  ;;@ interfaces/Main.java:74:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:74:4
   (local.set $si (call $$create__interfaces_Main@interfaces.Main.Implementor (local.get $this)))
-  ;;@ interfaces/Main.java:75:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:75:4
   (call_ref $function.m_interfaceMethod__void (ref.as_non_null (local.get $si))(struct.get $interfaces.Main.SubInterface.vtable $m_interfaceMethod__void (ref.cast (ref $interfaces.Main.SubInterface.vtable) (call $get.itable.$interfaces.Main.SubInterface (local.get $si)))))
-  ;;@ interfaces/Main.java:76:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:76:4
   (call_ref $function.m_defaultMethod__java_lang_String__void (ref.as_non_null (local.get $si))(ref.null $java.lang.String)(struct.get $interfaces.Main.SubInterface.vtable $m_defaultMethod__java_lang_String__void (ref.cast (ref $interfaces.Main.SubInterface.vtable) (call $get.itable.$interfaces.Main.SubInterface (local.get $si)))))
  )
 )
@@ -371,18 +371,18 @@
 
 ;;; void Main.$clinit()
 (func $$clinit__void_<once>_@interfaces.Main
- ;;@ interfaces/Main.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:18:13
  (block
-  ;;@ interfaces/Main.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:18:13
   (if (global.get $$class-initialized@interfaces.Main)
    (then
-    ;;@ interfaces/Main.java:18:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:18:13
     (return )
    )
   )
-  ;;@ interfaces/Main.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:18:13
   (global.set $$class-initialized@interfaces.Main (i32.const 1))
-  ;;@ interfaces/Main.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:18:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -420,9 +420,9 @@
 (func $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface
  (param $this (ref null $java.lang.Object))
  (param $s (ref null $java.lang.String))
- ;;@ interfaces/Main.java:39:17
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:39:17
  (block
-  ;;@ interfaces/Main.java:40:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:40:6
   (call $m_defaultMethod__java_lang_Object__void@interfaces.Main.Interface (ref.as_non_null (local.get $this))(local.get $s))
  )
 )
@@ -430,18 +430,18 @@
 
 ;;; void SubInterface.$clinit()
 (func $$clinit__void_<once>_@interfaces.Main.SubInterface
- ;;@ interfaces/Main.java:38:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:38:12
  (block
-  ;;@ interfaces/Main.java:38:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:38:12
   (if (global.get $$class-initialized@interfaces.Main.SubInterface)
    (then
-    ;;@ interfaces/Main.java:38:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:38:12
     (return )
    )
   )
-  ;;@ interfaces/Main.java:38:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:38:12
   (global.set $$class-initialized@interfaces.Main.SubInterface (i32.const 1))
-  ;;@ interfaces/Main.java:38:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:38:12
   (call $$clinit__void_<once>_@interfaces.Main.Interface )
  )
 )
@@ -466,16 +466,16 @@
 (func $$create__interfaces_Main@interfaces.Main.Implementor
  (param $$outer_this (ref null $interfaces.Main))
  (result (ref null $interfaces.Main.Implementor))
- ;;@ interfaces/Main.java:44:8
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:44:8
  (local $$instance (ref null $interfaces.Main.Implementor))
  (block
-  ;;@ interfaces/Main.java:44:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:44:8
   (call $$clinit__void_<once>_@interfaces.Main.Implementor )
-  ;;@ interfaces/Main.java:44:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:44:8
   (local.set $$instance (struct.new $interfaces.Main.Implementor (ref.as_non_null (global.get $interfaces.Main.Implementor.vtable)) (ref.as_non_null (global.get $interfaces.Main.Implementor.itable)) (i32.const 0) (ref.null $interfaces.Main)))
-  ;;@ interfaces/Main.java:44:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:44:8
   (call $$ctor__interfaces_Main__void_$p_interfaces_Main_Implementor@interfaces.Main.Implementor (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;;@ interfaces/Main.java:44:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:44:8
   (return (local.get $$instance))
  )
 )
@@ -484,11 +484,11 @@
 (func $$ctor__interfaces_Main__void_$p_interfaces_Main_Implementor@interfaces.Main.Implementor
  (param $this (ref null $interfaces.Main.Implementor))
  (param $$outer_this (ref null $interfaces.Main))
- ;;@ interfaces/Main.java:44:8
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:44:8
  (block
-  ;;@ interfaces/Main.java:44:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:44:8
   (struct.set $interfaces.Main.Implementor $$outer_this@interfaces.Main.Implementor (local.get $this) (local.get $$outer_this))
-  ;;@ interfaces/Main.java:44:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:44:8
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -497,7 +497,7 @@
 (func $m_interfaceMethod__void@interfaces.Main.Implementor
  (type $function.m_interfaceMethod__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ interfaces/Main.java:46:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:46:16
  (local $this (ref null $interfaces.Main.Implementor))
  (local.set $this (ref.cast (ref $interfaces.Main.Implementor) (local.get $this.untyped)))
  (block
@@ -510,11 +510,11 @@
  (type $function.m_defaultMethod__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
- ;;@ interfaces/Main.java:44:8
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:44:8
  (local $this (ref null $interfaces.Main.Implementor))
  (local.set $this (ref.cast (ref $interfaces.Main.Implementor) (local.get $this.untyped)))
  (block
-  ;;@ interfaces/Main.java:44:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:44:8
   (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0)))
  )
 )
@@ -525,11 +525,11 @@
  (type $function.m_defaultMethod__java_lang_String__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.String))
- ;;@ interfaces/Main.java:44:8
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:44:8
  (local $this (ref null $interfaces.Main.Implementor))
  (local.set $this (ref.cast (ref $interfaces.Main.Implementor) (local.get $this.untyped)))
  (block
-  ;;@ interfaces/Main.java:44:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:44:8
   (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(local.get $arg0))
  )
 )
@@ -537,22 +537,22 @@
 
 ;;; void Implementor.$clinit()
 (func $$clinit__void_<once>_@interfaces.Main.Implementor
- ;;@ interfaces/Main.java:44:8
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:44:8
  (block
-  ;;@ interfaces/Main.java:44:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:44:8
   (if (global.get $$class-initialized@interfaces.Main.Implementor)
    (then
-    ;;@ interfaces/Main.java:44:8
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:44:8
     (return )
    )
   )
-  ;;@ interfaces/Main.java:44:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:44:8
   (global.set $$class-initialized@interfaces.Main.Implementor (i32.const 1))
-  ;;@ interfaces/Main.java:44:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:44:8
   (call $$clinit__void_<once>_@java.lang.Object )
-  ;;@ interfaces/Main.java:44:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:44:8
   (call $$clinit__void_<once>_@interfaces.Main.SubInterface )
-  ;;@ interfaces/Main.java:44:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:44:8
   (call $$clinit__void_<once>_@interfaces.Main.Interface )
  )
 )
@@ -590,11 +590,11 @@
 (func $$ctor__interfaces_Main__void_$p_interfaces_Main_AbstractImplementor@interfaces.Main.AbstractImplementor
  (param $this (ref null $interfaces.Main.AbstractImplementor))
  (param $$outer_this (ref null $interfaces.Main))
- ;;@ interfaces/Main.java:50:17
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:50:17
  (block
-  ;;@ interfaces/Main.java:50:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:50:17
   (struct.set $interfaces.Main.AbstractImplementor $$outer_this@interfaces.Main.AbstractImplementor (local.get $this) (local.get $$outer_this))
-  ;;@ interfaces/Main.java:50:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:50:17
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -604,11 +604,11 @@
  (type $function.m_defaultMethod__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
- ;;@ interfaces/Main.java:50:17
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:50:17
  (local $this (ref null $interfaces.Main.AbstractImplementor))
  (local.set $this (ref.cast (ref $interfaces.Main.AbstractImplementor) (local.get $this.untyped)))
  (block
-  ;;@ interfaces/Main.java:50:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:50:17
   (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0)))
  )
 )
@@ -619,11 +619,11 @@
  (type $function.m_defaultMethod__java_lang_String__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.String))
- ;;@ interfaces/Main.java:50:17
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:50:17
  (local $this (ref null $interfaces.Main.AbstractImplementor))
  (local.set $this (ref.cast (ref $interfaces.Main.AbstractImplementor) (local.get $this.untyped)))
  (block
-  ;;@ interfaces/Main.java:50:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:50:17
   (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(local.get $arg0))
  )
 )
@@ -631,20 +631,20 @@
 
 ;;; void AbstractImplementor.$clinit()
 (func $$clinit__void_<once>_@interfaces.Main.AbstractImplementor
- ;;@ interfaces/Main.java:50:17
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:50:17
  (block
-  ;;@ interfaces/Main.java:50:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:50:17
   (if (global.get $$class-initialized@interfaces.Main.AbstractImplementor)
    (then
-    ;;@ interfaces/Main.java:50:17
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:50:17
     (return )
    )
   )
-  ;;@ interfaces/Main.java:50:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:50:17
   (global.set $$class-initialized@interfaces.Main.AbstractImplementor (i32.const 1))
-  ;;@ interfaces/Main.java:50:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:50:17
   (call $$clinit__void_<once>_@java.lang.Object )
-  ;;@ interfaces/Main.java:50:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:50:17
   (call $$clinit__void_<once>_@interfaces.Main.SubInterface )
  )
 )
@@ -670,14 +670,14 @@
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
  (result (ref null $interfaces.Main.EnumImplementor))
- ;;@ interfaces/Main.java:52:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:52:7
  (local $$instance (ref null $interfaces.Main.EnumImplementor))
  (block
-  ;;@ interfaces/Main.java:52:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:52:7
   (local.set $$instance (struct.new $interfaces.Main.EnumImplementor (ref.as_non_null (global.get $interfaces.Main.EnumImplementor.vtable)) (ref.as_non_null (global.get $interfaces.Main.EnumImplementor.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
-  ;;@ interfaces/Main.java:52:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:52:7
   (call $$ctor__java_lang_String__int__void_$p_interfaces_Main_EnumImplementor@interfaces.Main.EnumImplementor (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
-  ;;@ interfaces/Main.java:52:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:52:7
   (return (local.get $$instance))
  )
 )
@@ -687,13 +687,13 @@
  (param $this (ref null $interfaces.Main.EnumImplementor))
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
- ;;@ interfaces/Main.java:52:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:52:7
  (block
-  ;;@ interfaces/Main.java:52:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:52:7
   (struct.set $java.lang.Enum $name@java.lang.Enum (local.get $this) (local.get $$name))
-  ;;@ interfaces/Main.java:52:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:52:7
   (struct.set $java.lang.Enum $ordinal@java.lang.Enum (local.get $this) (local.get $$ordinal))
-  ;;@ interfaces/Main.java:52:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:52:7
   (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
  )
 )
@@ -702,7 +702,7 @@
 (func $m_interfaceMethod__void@interfaces.Main.EnumImplementor
  (type $function.m_interfaceMethod__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ interfaces/Main.java:56:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:56:16
  (local $this (ref null $interfaces.Main.EnumImplementor))
  (local.set $this (ref.cast (ref $interfaces.Main.EnumImplementor) (local.get $this.untyped)))
  (block
@@ -715,11 +715,11 @@
  (type $function.m_defaultMethod__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
- ;;@ interfaces/Main.java:52:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:52:7
  (local $this (ref null $interfaces.Main.EnumImplementor))
  (local.set $this (ref.cast (ref $interfaces.Main.EnumImplementor) (local.get $this.untyped)))
  (block
-  ;;@ interfaces/Main.java:52:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:52:7
   (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0)))
  )
 )
@@ -730,11 +730,11 @@
  (type $function.m_defaultMethod__java_lang_String__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.String))
- ;;@ interfaces/Main.java:52:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:52:7
  (local $this (ref null $interfaces.Main.EnumImplementor))
  (local.set $this (ref.cast (ref $interfaces.Main.EnumImplementor) (local.get $this.untyped)))
  (block
-  ;;@ interfaces/Main.java:52:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:52:7
   (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(local.get $arg0))
  )
 )
@@ -744,20 +744,20 @@
 (func $m_valueOf__java_lang_String__interfaces_Main_EnumImplementor@interfaces.Main.EnumImplementor
  (param $name (ref null $java.lang.String))
  (result (ref null $interfaces.Main.EnumImplementor))
- ;;@ interfaces/Main.java:52:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:52:7
  (block
-  ;;@ interfaces/Main.java:52:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:52:7
   (call $$clinit__void_<once>_@interfaces.Main.EnumImplementor )
-  ;;@ interfaces/Main.java:52:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:52:7
   (if (ref.is_null (global.get $namesToValuesMap@interfaces.Main.EnumImplementor))
    (then
     (block
-     ;;@ interfaces/Main.java:52:7
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:52:7
      (global.set $namesToValuesMap@interfaces.Main.EnumImplementor (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values_$private__arrayOf_interfaces_Main_EnumImplementor@interfaces.Main.EnumImplementor )))
     )
    )
   )
-  ;;@ interfaces/Main.java:52:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:52:7
   (return (ref.cast (ref null $interfaces.Main.EnumImplementor) (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $namesToValuesMap@interfaces.Main.EnumImplementor))))
  )
 )
@@ -765,11 +765,11 @@
 ;;; EnumImplementor[] EnumImplementor.values()
 (func $m_values__arrayOf_interfaces_Main_EnumImplementor@interfaces.Main.EnumImplementor
  (result (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ interfaces/Main.java:52:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:52:7
  (block
-  ;;@ interfaces/Main.java:52:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:52:7
   (call $$clinit__void_<once>_@interfaces.Main.EnumImplementor )
-  ;;@ interfaces/Main.java:52:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:52:7
   (return (call $m_values_$private__arrayOf_interfaces_Main_EnumImplementor@interfaces.Main.EnumImplementor ))
  )
 )
@@ -777,31 +777,31 @@
 ;;; EnumImplementor[] EnumImplementor.values_$private()
 (func $m_values_$private__arrayOf_interfaces_Main_EnumImplementor@interfaces.Main.EnumImplementor
  (result (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ interfaces/Main.java:52:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:52:7
  (block
-  ;;@ interfaces/Main.java:52:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:52:7
   (return (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (global.get $ONE@interfaces.Main.EnumImplementor))))
  )
 )
 
 ;;; void EnumImplementor.$clinit()
 (func $$clinit__void_<once>_@interfaces.Main.EnumImplementor
- ;;@ interfaces/Main.java:52:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:52:7
  (block
-  ;;@ interfaces/Main.java:52:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:52:7
   (if (global.get $$class-initialized@interfaces.Main.EnumImplementor)
    (then
-    ;;@ interfaces/Main.java:52:7
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:52:7
     (return )
    )
   )
-  ;;@ interfaces/Main.java:52:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:52:7
   (global.set $$class-initialized@interfaces.Main.EnumImplementor (i32.const 1))
-  ;;@ interfaces/Main.java:52:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:52:7
   (call $$clinit__void_<once>_@java.lang.Enum )
-  ;;@ interfaces/Main.java:52:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:52:7
   (call $$clinit__void_<once>_@interfaces.Main.SubInterface )
-  ;;@ interfaces/Main.java:53:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:53:4
   (global.set $ONE@interfaces.Main.EnumImplementor (call $$create__java_lang_String__int@interfaces.Main.EnumImplementor (call $$getString_|ONE|__java_lang_String_<once>_@interfaces.Main.EnumImplementor )(i32.const 0)))
  )
 )
