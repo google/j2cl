@@ -11,7 +11,10 @@ package(
 integration_test(
     name = "classliteralstripped",
     srcs = glob(["*.java"]),
-    closure_defines = {"jre.classMetadata": "'STRIPPED'"},
+    closure_defines = {
+        "jre.classMetadata": "'STRIPPED'",
+        "goog.DEBUG": "false",  # Disable goog.DEBUG to avoid helping names to be unique.
+    },
     # Class literal stripping is only applicable for JS output.
     enable_jvm_test = False,
     # TODO(b/202428351): Generics support

@@ -163,8 +163,9 @@ class Util {
    */
   static $getGeneratedClassName_(ctor) {
     const propName = '$$generatedClassName';
-    return ctor.prototype[propName] ||
-        (ctor.prototype[propName] = 'Class$obf_' + ++Util.$nextUniqId_);
+    return ctor.prototype.hasOwnProperty(propName) ?
+        ctor.prototype[propName] :
+        ctor.prototype[propName] = 'Class$obf_' + ++Util.$nextUniqId_;
   }
 
   /**
