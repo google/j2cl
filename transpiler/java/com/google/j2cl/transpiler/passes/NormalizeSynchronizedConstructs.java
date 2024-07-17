@@ -32,19 +32,10 @@ import com.google.j2cl.transpiler.ast.TypeLiteral;
  * Object with synchronized methods, and rewriting synchronized methods to synchronized blocks.
  */
 public final class NormalizeSynchronizedConstructs extends NormalizationPass {
-  private static final boolean SKIP_IMPLIED_LOCK_TRANSFORMATION =
-      "true"
-          .equals(
-              System.getProperty(
-                  "com.google.j2cl.transpiler.backend.kotlin.skipImpliedLockTransformation"));
 
   /** Perform normalization of synchronized constructs as described in the class javadoc. */
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    if (SKIP_IMPLIED_LOCK_TRANSFORMATION) {
-      normalizeSynchronizedMethods(compilationUnit);
-      return;
-    }
     insertJ2ktMonitorSuperclass(compilationUnit);
     normalizeSynchronizedMethods(compilationUnit);
   }
