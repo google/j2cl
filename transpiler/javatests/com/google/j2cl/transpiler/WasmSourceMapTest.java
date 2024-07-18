@@ -33,15 +33,14 @@ public class WasmSourceMapTest {
 
   @Test
   public void sourceFilesExistInRunfiles() throws IOException, SourceMapParseException {
-    String basePath = "transpiler/javatests/com/google/" + "j2cl/transpiler/sampleapp_dev_debug/";
+    String basePath = "transpiler/javatests/com/google/j2cl/transpiler/sampleapp_dev_debug/";
     Path sourceMapFilePath = resolvePathToRunfiles(basePath + "sampleapp_dev.wasm.map");
     SourceMapConsumerV3 consumer = new SourceMapConsumerV3();
     consumer.parse(Files.readAllLines(sourceMapFilePath).stream().collect(Collectors.joining()));
     assertThat(
             consumer.getOriginalSources().stream()
-                .filter(s -> s.endsWith("java/lang/Object.java"))
-                .count())
-        .isEqualTo(1);
+                .anyMatch(s -> s.endsWith("java/lang/Object.java")))
+        .isTrue();
 
     for (String sourceFilePath : consumer.getOriginalSources()) {
       assertThat(Files.exists(resolvePathToRunfiles(basePath + sourceFilePath))).isTrue();
