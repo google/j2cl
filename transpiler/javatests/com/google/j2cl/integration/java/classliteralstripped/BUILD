@@ -14,6 +14,7 @@ integration_test(
     closure_defines = {
         "jre.classMetadata": "'STRIPPED'",
         "goog.DEBUG": "false",  # Disable goog.DEBUG to avoid helping names to be unique.
+        "goog.DISALLOW_TEST_ONLY_CODE": "false",
     },
     # Class literal stripping is only applicable for JS output.
     enable_jvm_test = False,
