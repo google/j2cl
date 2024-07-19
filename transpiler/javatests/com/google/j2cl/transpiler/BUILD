@@ -167,7 +167,9 @@ j2wasm_application(
 java_test(
     name = "WasmSourceMapTest",
     srcs = ["WasmSourceMapTest.java"],
-    data = [":sampleapp_dev"],
+    data = [
+        ":sampleapp_dev",
+    ],
     deps = [
         "//third_party:jscomp",
         "//third_party:junit",

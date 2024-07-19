@@ -193,8 +193,7 @@ def _impl_j2wasm_application(ctx):
             mnemonic = "J2wasm",
         )
 
-    debug_dir_name = ctx.label.name + "_debug"
-    source_map_base_url = ctx.attr.source_map_base_url or debug_dir_name
+    source_map_base_url = ctx.attr.source_map_base_url or "."
 
     input = ctx.outputs.wat
     input_source_map = None
@@ -270,45 +269,21 @@ def _impl_j2wasm_application(ctx):
     _remap_symbol_map(ctx, transpile_out, binaryen_symbolmap)
 
     runfiles.append(ctx.outputs.wasm)
+    runfiles.append(ctx.outputs.srcmap)
+    runfiles.append(ctx.outputs.symbolmap)
+    symlinks = {}
 
-    # Make the debugging data available in runfiles.
-    # Note that we are making sure that the sourcemap file is in the root next to
-    # others so the relative paths are correct.
-    # TODO(b/353589462): Do not copy source files.
-    debug_dir = ctx.actions.declare_directory(debug_dir_name)
-    runfiles.append(debug_dir)
+    # Provide the Java sources via symlinks in the runfiles.
     if ctx.attr.use_modular_pipeline:
-        srcmap_args = ctx.actions.args()
+        # Compute the directory where the source map file will reside (relative to `runtime_root`).
+        source_map_short_path_dir = ctx.outputs.srcmap.short_path.removesuffix(ctx.outputs.srcmap.basename)
+        for module_output in module_outputs.to_list():
+            # Add the module output to the runfiles.
+            runfiles.append(module_output)
 
-        # For each module, pass a pair with the full path and the short path separated
-        # by ':'.
-        srcmap_args.add_all([(m.path + ":" + m.short_path) for m in module_outputs.to_list()])
-
-        # srcmap_args.add_all(module_outputs, expand_directories = False)
-        ctx.actions.run_shell(
-            inputs = module_outputs.to_list() + [transpile_out, ctx.outputs.srcmap, ctx.outputs.symbolmap],
-            outputs = [debug_dir],
-            arguments = [srcmap_args],
-            # TODO(b/176105504): Link instead copy when native tree support lands.
-            command = (
-                "for var in \"$@\"; do mkdir -p %s/${var#*:}; cp -rL  ${var%%:*}/* %s/${var#*:}; done;" % (debug_dir.path, debug_dir.path) +
-                "cp %s %s %s" % (ctx.outputs.srcmap.path, ctx.outputs.symbolmap.path, debug_dir.path)
-            ),
-            mnemonic = "J2wasm",
-            progress_message = "Providing Java sources for debugging",
-        )
-    else:
-        ctx.actions.run_shell(
-            inputs = [transpile_out, ctx.outputs.srcmap, ctx.outputs.symbolmap],
-            outputs = [debug_dir],
-            # TODO(b/176105504): Link instead copy when native tree support lands.
-            command = (
-                "cp -rL %s/* %s;" % (transpile_out.path, debug_dir.path) +
-                "cp %s %s %s" % (ctx.outputs.srcmap.path, ctx.outputs.symbolmap.path, debug_dir.path)
-            ),
-            mnemonic = "J2wasm",
-            progress_message = "Providing Java sources for debugging",
-        )
+            # Rebase all source files relative to sourcemap
+            module_sourcemap_relative_path = source_map_short_path_dir + module_output.short_path
+            symlinks[module_sourcemap_relative_path] = module_output
 
     # Make the actual JS imports mapping file using the template.
     js_module = ctx.actions.declare_file(ctx.label.name + ".js")
@@ -339,7 +314,7 @@ def _impl_j2wasm_application(ctx):
                 ctx.outputs.jsimports,
                 ctx.outputs.symbolmap,
             ]),
-            data_runfiles = ctx.runfiles(files = runfiles),
+            data_runfiles = ctx.runfiles(files = runfiles, symlinks = symlinks),
         ),
         OutputGroupInfo(_validation = _trigger_javac_build(ctx.attr.deps)),
     ]
