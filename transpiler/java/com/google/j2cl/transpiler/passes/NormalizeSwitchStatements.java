@@ -42,10 +42,11 @@ public class NormalizeSwitchStatements extends NormalizationPass {
             TypeDescriptor expressionTypeDescriptor = expression.getTypeDescriptor();
 
             if (TypeDescriptors.isJavaLangString(expressionTypeDescriptor)
-                || expressionTypeDescriptor.isJsEnum()) {
-              // Switch on strings and JsEnums should throw on null.
+                || (AstUtils.isJsEnumBoxingSupported() && expressionTypeDescriptor.isJsEnum())) {
+              // Switch on strings and unboxed JsEnums should throw on null.
               return SwitchStatement.Builder.from(switchStatement)
-                  .setSwitchExpression(RuntimeMethods.createCheckNotNullCall(expression))
+                  .setSwitchExpression(
+                      RuntimeMethods.createCheckNotNullCall(switchStatement.getSwitchExpression()))
                   .build();
             }
 

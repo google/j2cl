@@ -118,7 +118,6 @@ import com.google.j2cl.transpiler.passes.NormalizeInterfaceMethods;
 import com.google.j2cl.transpiler.passes.NormalizeInterfaces;
 import com.google.j2cl.transpiler.passes.NormalizeJsAwaitMethodInvocations;
 import com.google.j2cl.transpiler.passes.NormalizeJsDocCastExpressions;
-import com.google.j2cl.transpiler.passes.NormalizeJsEnumInstanceOfAndCasts;
 import com.google.j2cl.transpiler.passes.NormalizeJsEnums;
 import com.google.j2cl.transpiler.passes.NormalizeJsFunctionPropertyInvocations;
 import com.google.j2cl.transpiler.passes.NormalizeJsVarargs;
@@ -156,10 +155,10 @@ import com.google.j2cl.transpiler.passes.OptimizeKotlinCompanions;
 import com.google.j2cl.transpiler.passes.OptimizeXplatForEach;
 import com.google.j2cl.transpiler.passes.PropagateCompileTimeConstants;
 import com.google.j2cl.transpiler.passes.PropagateConstants;
-import com.google.j2cl.transpiler.passes.PropagateJsEnumConstants;
 import com.google.j2cl.transpiler.passes.PropagateNullabilityJ2kt;
 import com.google.j2cl.transpiler.passes.RecoverShortcutBooleanOperator;
 import com.google.j2cl.transpiler.passes.RemoveCustomIsInstanceMethods;
+import com.google.j2cl.transpiler.passes.RemoveNameFromJsEnums;
 import com.google.j2cl.transpiler.passes.RemoveNativeTypes;
 import com.google.j2cl.transpiler.passes.RemoveNestedBlocks;
 import com.google.j2cl.transpiler.passes.RemoveNoopStatements;
@@ -174,7 +173,6 @@ import com.google.j2cl.transpiler.passes.ResolveImplicitInstanceQualifiers;
 import com.google.j2cl.transpiler.passes.ResolveImplicitStaticQualifiers;
 import com.google.j2cl.transpiler.passes.RestoreVariableScoping;
 import com.google.j2cl.transpiler.passes.RewriteAssignmentExpressions;
-import com.google.j2cl.transpiler.passes.RewriteJsEnumNullChecks;
 import com.google.j2cl.transpiler.passes.RewriteReferenceEqualityOperations;
 import com.google.j2cl.transpiler.passes.RewriteShortcutOperators;
 import com.google.j2cl.transpiler.passes.RewriteUnaryExpressions;
@@ -427,7 +425,7 @@ public enum Backend {
           NormalizeCatchClauses::new,
           () -> new NormalizeEnumClasses(/* useMakeEnumNameIndirection= */ false),
           // Must run after NormalizeEnumClasses and before NormalizeOverlayMembers.
-          NormalizeJsEnums::new,
+          RemoveNameFromJsEnums::new,
           NormalizeOverlayMembers::new,
           NormalizeInstanceCompileTimeConstants::new,
           () -> new NormalizeShifts(/* narrowAllToInt= */ false),
@@ -449,22 +447,11 @@ public enum Backend {
           StaticallyEvaluateStringComparison::new,
           () -> new InsertStringConversions(/* skipPrimitivesAndNonNullableString= */ false),
           ImplementStringConcatenation::new,
-          // Must run after NormalizeSwitchStatements, ImplementStringConcatenation.
-          InsertJsEnumBoxingAndUnboxingConversions::new,
-          PropagateJsEnumConstants::new,
           InsertNarrowingReferenceConversions::new,
           () -> new InsertUnboxingConversions(/* areBooleanAndDoubleBoxed= */ true),
           () -> new InsertBoxingConversions(/* areBooleanAndDoubleBoxed= */ true),
           () -> new InsertNarrowingPrimitiveConversions(/* treatFloatAsDouble= */ false),
           () -> new InsertWideningPrimitiveConversions(/* needFloatOrDoubleWidening= */ true),
-          // Must run after primitive conversions, otherwise it will remove int conversions.
-          // Must run before RewriteReferenceEqualityOperations, because it could introduce null
-          // checks.
-          NormalizeJsEnumInstanceOfAndCasts::new,
-          // Rewrite 'a != b' to '!(a == b)'
-          // Must run after InsertJsEnumBoxingAndUnboxingConversions.
-          RewriteReferenceEqualityOperations::new,
-          RewriteJsEnumNullChecks::new,
           ImplementDivisionOperations::new,
           ImplementFloatingPointRemainderOperation::new,
           // Rewrite 'a || b' into 'a ? true : b' and 'a && b' into 'a ? b : false'
@@ -583,7 +570,7 @@ public enum Backend {
           NormalizeCatchClauses::new,
           () -> new NormalizeEnumClasses(/* useMakeEnumNameIndirection= */ false),
           // Must run after NormalizeEnumClasses
-          NormalizeJsEnums::new,
+          RemoveNameFromJsEnums::new,
           NormalizeOverlayMembers::new,
           NormalizeInstanceCompileTimeConstants::new,
           () -> new NormalizeShifts(/* narrowAllToInt= */ false),
@@ -602,21 +589,11 @@ public enum Backend {
           StaticallyEvaluateStringComparison::new,
           () -> new InsertStringConversions(/* skipPrimitivesAndNonNullableString= */ false),
           ImplementStringConcatenation::new,
-          // Must run after NormalizeSwitchStatements, ImplementStringConcatenation.
-          InsertJsEnumBoxingAndUnboxingConversions::new,
           InsertNarrowingReferenceConversions::new,
           () -> new InsertUnboxingConversions(/* areBooleanAndDoubleBoxed= */ true),
           () -> new InsertBoxingConversions(/* areBooleanAndDoubleBoxed= */ true),
           () -> new InsertNarrowingPrimitiveConversions(/* treatFloatAsDouble= */ false),
           () -> new InsertWideningPrimitiveConversions(/* needFloatOrDoubleWidening= */ true),
-          // Must run after primitive conversions, otherwise it will remove int conversions.
-          // Must run before RewriteReferenceEqualityOperations, because it could introduce null
-          // checks.
-          NormalizeJsEnumInstanceOfAndCasts::new,
-          // Rewrite 'a != b' to '!(a == b)'
-          // Must run after InsertJsEnumBoxingAndUnboxingConversions.
-          RewriteReferenceEqualityOperations::new,
-          RewriteJsEnumNullChecks::new,
           ImplementDivisionOperations::new,
           ImplementFloatingPointRemainderOperation::new,
           // Rewrite 'a || b' into 'a ? true : b' and 'a && b' into 'a ? b : false'

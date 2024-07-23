@@ -17,6 +17,7 @@ package wasm;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertFalse;
+import static com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointerException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 import javaemul.internal.annotations.Wasm;
@@ -134,12 +135,36 @@ public class Main {
     THREE
   }
 
-  private static PlainJsEnum returnNullValue() {
+  @JsEnum(hasCustomValue = true)
+  enum StringJsEnum {
+    HELLO("Hello"),
+    GOODBYE("Good Bye");
+
+    String value;
+
+    StringJsEnum(String value) {
+      this.value = value;
+    }
+  }
+
+  // TODO(b/301342159): Remove this test and add to java/jsenum when this throws an NPE for Closure.
+  private static void testJsEnumUnboxedReturn() {
+    assertThrowsNullPointerException(
+        () -> {
+          returnNullPlainJsEnum().ordinal();
+        });
+
+    assertThrowsNullPointerException(
+        () -> {
+          String val = returnNullStringJsEnum().value;
+        });
+  }
+
+  private static PlainJsEnum returnNullPlainJsEnum() {
     return null;
   }
 
-  private static void testJsEnumUnboxedReturn() {
-    // TODO(b/301342159): Remove this test and add a test to java/jsenum when this throws an NPE.
-    assertTrue(returnNullValue().ordinal() == Integer.MIN_VALUE);
+  private static StringJsEnum returnNullStringJsEnum() {
+    return null;
   }
 }

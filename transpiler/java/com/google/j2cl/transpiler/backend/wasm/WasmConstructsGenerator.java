@@ -241,9 +241,7 @@ public class WasmConstructsGenerator {
   }
 
   private void renderTypeStructs(Type type, boolean isModular) {
-    if (type.isNative()
-        || type.getDeclaration().getWasmInfo() != null
-        || AstUtils.isNonNativeJsEnum(type.getTypeDescriptor())) {
+    if (type.isNative() || type.getDeclaration().getWasmInfo() != null) {
       return;
     }
 
@@ -295,7 +293,7 @@ public class WasmConstructsGenerator {
 
   private void emitStaticFieldGlobals(Type type) {
     var fields = type.getStaticFields();
-    if (AstUtils.isNonNativeJsEnum(type.getTypeDescriptor()) || fields.isEmpty()) {
+    if (fields.isEmpty()) {
       return;
     }
     emitBeginCodeComment(type, "static fields");
@@ -564,7 +562,6 @@ public class WasmConstructsGenerator {
         .map(Type::getDeclaration)
         .filter(not(TypeDeclaration::isAbstract))
         .filter(type -> type.getWasmInfo() == null)
-        .filter(not(AstUtils::isNonNativeJsEnum))
         .forEach(
             t -> {
               emitVtablesInitialization(t);
@@ -845,7 +842,6 @@ public class WasmConstructsGenerator {
   void emitForEachType(Library library, Consumer<Type> emitter, String comment) {
     library
         .streamTypes()
-        .filter(t -> !AstUtils.isNonNativeJsEnum(t.getTypeDescriptor()))
         // Emit the types supertypes first.
         .sorted(Comparator.comparing(t -> t.getDeclaration().getTypeHierarchyDepth()))
         .forEach(

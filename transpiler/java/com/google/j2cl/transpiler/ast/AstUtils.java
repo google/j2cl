@@ -1162,10 +1162,14 @@ public final class AstUtils {
 
   /** Returns true {@code typeDescriptor} requires bridges be generated for boxing/unboxing. */
   public static boolean needsJsEnumBoxingBridges(TypeDescriptor typeDescriptor) {
+    return isJsEnumBoxingSupported() && isNonNativeJsEnum(typeDescriptor);
+  }
+
+  /** Returns true if JsEnums undergo boxing/unboxing in this backend in general. */
+  public static boolean isJsEnumBoxingSupported() {
     // Check if the JsEnum boxed type exists for the current backend. Not all backends utilize
     // JsEnum semantics.
-    return TypeDescriptors.get().javaemulInternalBoxedLightEnum != null
-        && isNonNativeJsEnum(typeDescriptor);
+    return TypeDescriptors.get().javaemulInternalBoxedLightEnum != null;
   }
 
   /**
@@ -1184,15 +1188,6 @@ public final class AstUtils {
 
   /** Gets the initial value for a field or variable for the be assigned to a Wasm variable. */
   public static Expression getInitialValue(TypeDescriptor typeDescriptor) {
-    // JsEnum default values are special case.
-    // TODO(b/299984505): Is there a better way to do this?
-    if (isNonNativeJsEnum(typeDescriptor)) {
-      TypeDescriptor valueTypeDescriptor = getJsEnumValueFieldType(typeDescriptor);
-      return valueTypeDescriptor.isPrimitive()
-          ? valueTypeDescriptor.toBoxedType().getFieldDescriptor("MIN_VALUE").getConstantValue()
-          : valueTypeDescriptor.getDefaultValue();
-    }
-
     return typeDescriptor.getDefaultValue();
   }
 

@@ -19,7 +19,6 @@ import com.google.common.base.Joiner;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
-import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
@@ -166,12 +165,6 @@ public abstract class ImplementStaticInitializationBase extends NormalizationPas
   boolean triggersClinit(MemberDescriptor memberDescriptor, Type enclosingType) {
     if (memberDescriptor.isNative()) {
       // Skip native members.
-      return false;
-    }
-
-    if (memberDescriptor.isEnumConstant()
-        && AstUtils.isNonNativeJsEnum(memberDescriptor.getEnclosingTypeDescriptor())) {
-      // Skip accesses to JsEnum constants. This may not be normalized out on all backends.
       return false;
     }
 

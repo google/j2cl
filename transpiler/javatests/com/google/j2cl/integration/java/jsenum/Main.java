@@ -25,6 +25,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertUnderlyingTypeEq
 import static com.google.j2cl.integration.testing.Asserts.fail;
 import static jsenum.NativeEnums.nativeClinitCalled;
 
+import com.google.j2cl.integration.testing.TestUtils;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
@@ -314,8 +315,7 @@ public class Main {
         break;
     }
 
-    assertThrows(
-        NullPointerException.class,
+    assertThrowsNullPointerException(
         () -> {
           PlainJsEnum nullJsEnum = null;
           switch (nullJsEnum) {
@@ -388,7 +388,10 @@ public class Main {
     Integer i = v.ordinal();
     assertTrue(i.intValue() == 1);
 
-    assertFalse(v instanceof Enum);
+    if (!TestUtils.isWasm()) {
+      // JsEnums are still instance of Enum in Wasm.
+      assertFalse(v instanceof Enum);
+    }
     assertTrue(v instanceof PlainJsEnum);
     assertFalse((Object) v instanceof Double);
     assertTrue(v instanceof Comparable);
@@ -476,8 +479,7 @@ public class Main {
         break;
     }
 
-    assertThrows(
-        NullPointerException.class,
+    assertThrowsNullPointerException(
         () -> {
           StringJsEnum nullJsEnum = null;
           switch (nullJsEnum) {
@@ -494,7 +496,6 @@ public class Main {
     // Object methods calls on a variable of JsEnum type.
     assertTrue(v.hashCode() == StringJsEnum.HELLO.hashCode());
     assertTrue(v.hashCode() != StringJsEnum.GOODBYE.hashCode());
-    assertTrue(v.toString().equals(HELLO_STRING));
     assertTrue(v.equals(StringJsEnum.HELLO));
     assertFalse(v.equals(HELLO_STRING));
 
@@ -508,7 +509,6 @@ public class Main {
     // Object methods calls on a variable of Object type.
     assertTrue(o.hashCode() == StringJsEnum.HELLO.hashCode());
     assertTrue(o.hashCode() != StringJsEnum.GOODBYE.hashCode());
-    assertTrue(o.toString().equals(HELLO_STRING));
     assertTrue(o.equals(StringJsEnum.HELLO));
     assertFalse(o.equals(StringJsEnum.GOODBYE));
     assertTrue(o.equals(v));
@@ -516,10 +516,16 @@ public class Main {
 
     assertTrue(v.value.equals(HELLO_STRING));
 
-    assertFalse(v instanceof Enum);
+    if (!TestUtils.isWasm()) {
+      // JsEnums are still instance of Enum in Wasm.
+      assertFalse(v instanceof Enum);
+    }
     assertTrue(v instanceof StringJsEnum);
     assertFalse((Object) v instanceof String);
-    assertFalse(v instanceof Comparable);
+    if (!TestUtils.isWasm()) {
+      // JsEnums are still instance of Enum in Wasm.
+      assertFalse(v instanceof Comparable);
+    }
     assertTrue(v instanceof Serializable);
     assertFalse((Object) v instanceof PlainJsEnum);
 
@@ -548,6 +554,12 @@ public class Main {
           Object unused = (StringJsEnum & Comparable<StringJsEnum>) o;
         },
         Comparable.class);
+
+    if (!TestUtils.isWasm()) {
+      // TODO(b/353352388): The value field is not used in toString in Wasm.
+      assertTrue(v.toString().equals(HELLO_STRING));
+      assertTrue(o.toString().equals(HELLO_STRING));
+    }
   }
 
   @Wasm("nop") // Non-native JsMethod not supported in Wasm.
@@ -574,6 +586,7 @@ public class Main {
     }
   }
 
+  @Wasm("nop") // In Wasm, there is no boxing logic and clinit is called for JsEnum value accesses.
   private static void testJsEnumClassInitialization() {
     assertFalse(nonNativeClinitCalled);
     // Access to an enum value does not trigger clinit.

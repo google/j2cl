@@ -511,7 +511,7 @@ public abstract class TypeDeclaration
 
   @Memoized
   public TypeDeclaration getMetadataTypeDeclaration() {
-    if (isNative() || isJsEnum()) {
+    if (isNative() || (isJsEnum() && AstUtils.isJsEnumBoxingSupported())) {
       return getOverlayImplementationTypeDeclaration();
     }
 
@@ -1080,7 +1080,8 @@ public abstract class TypeDeclaration
               setNative(false);
               break;
             }
-            // fall through
+            // Do not fall through. In Wasm, JsEnums still inherit from Enum for now.
+            break;
           default:
             // The actual supertype for JsEnums is Object. JsEnum don't really extend Enum
             // and modeling that fact in the type model allows passes that query assignability (e.g.
