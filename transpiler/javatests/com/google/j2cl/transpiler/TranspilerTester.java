@@ -309,6 +309,16 @@ public class TranspilerTester {
     return this;
   }
 
+  public TranspilerTester addNullMarkPackageInfo(String pkg) {
+    var unused =
+        addCompilationUnit(
+            "org.jspecify.annotations.NullMarked", "public @interface NullMarked {}");
+    return addFile(
+        Path.of(pkg.replace('.', '/'), "package-info.java"),
+        "@org.jspecify.annotations.NullMarked",
+        "package " + pkg + ";");
+  }
+
   public TranspileResult assertTranspileSucceeds() {
     return transpile().assertNoErrors();
   }

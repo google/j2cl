@@ -55,6 +55,7 @@ public final class J2ktRestrictionsChecker {
 
           @Override
           public boolean enterType(Type type) {
+            checkNullMarked(type);
             checkSuperTypeVisibilities(type);
             checkInterfaceTypeVisibilities(type);
             return true;
@@ -90,6 +91,15 @@ public final class J2ktRestrictionsChecker {
                     referencedTypeDescriptor.getReadableDescription(),
                     getDescription(referencedVisibility));
               }
+            }
+          }
+
+          private void checkNullMarked(Type type) {
+            if (!type.getDeclaration().isNullMarked() && !type.getDeclaration().isAnnotation()) {
+              problems.warning(
+                  type.getSourcePosition(),
+                  "Type '%s' must be directly or indirectly @NullMarked.",
+                  type.getDeclaration().getQualifiedSourceName());
             }
           }
 
