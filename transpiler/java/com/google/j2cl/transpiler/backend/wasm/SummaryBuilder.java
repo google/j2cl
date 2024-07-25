@@ -94,30 +94,30 @@ public final class SummaryBuilder {
       return;
     }
 
-    if (type.isInterface()) {
-      int typeId = getTypeId(type.getTypeDescriptor());
-      summary.addInterfaces(typeId);
-      return;
-    }
-
     int typeId = getTypeId(type.getTypeDescriptor());
 
     TypeInfo.Builder typeHierarchyInfoBuilder =
         TypeInfo.newBuilder().setTypeId(typeId).setAbstract(type.getDeclaration().isAbstract());
 
-    DeclaredTypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
-    if (superTypeDescriptor != null && !superTypeDescriptor.isNative()) {
-      typeHierarchyInfoBuilder.setExtendsType(getTypeId(superTypeDescriptor));
+    TypeDeclaration superTypeDeclaration =
+        WasmGenerationEnvironment.getTypeLayoutSuperTypeDeclaration(type.getDeclaration());
+    if (superTypeDeclaration != null && !superTypeDeclaration.isNative()) {
+      typeHierarchyInfoBuilder.setExtendsType(
+          getTypeId(superTypeDeclaration.toUnparameterizedTypeDescriptor()));
     }
 
-    type.getDeclaration().getAllSuperInterfaces().stream()
-        .filter(not(TypeDeclaration::isNative))
-        .forEach(
-            t ->
-                typeHierarchyInfoBuilder.addImplementsTypes(
-                    getTypeId(t.toUnparameterizedTypeDescriptor())));
+    if (type.isInterface()) {
+      summary.addInterfaces(typeHierarchyInfoBuilder.build());
+    } else {
+      type.getDeclaration().getAllSuperInterfaces().stream()
+          .filter(not(TypeDeclaration::isNative))
+          .forEach(
+              t ->
+                  typeHierarchyInfoBuilder.addImplementsTypes(
+                      getTypeId(t.toUnparameterizedTypeDescriptor())));
 
-    summary.addTypes(typeHierarchyInfoBuilder.build());
+      summary.addTypes(typeHierarchyInfoBuilder.build());
+    }
   }
 
   private int getTypeId(DeclaredTypeDescriptor typeDescriptor) {

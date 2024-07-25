@@ -62,6 +62,10 @@ abstract class WasmTypeLayout {
 
   abstract DeclaredTypeDescriptor getTypeDescriptor();
 
+  TypeDeclaration getTypeDeclaration() {
+    return getTypeDescriptor().getTypeDeclaration();
+  }
+
   /** The wasm representation of the superclass for this Java class. */
   @Nullable
   abstract WasmTypeLayout getWasmSupertypeLayout();

@@ -442,7 +442,8 @@ public class WasmGenerationEnvironment {
             .filter(Predicates.not(Type::isInterface))
             .map(Type::getDeclaration)
             .collect(toImmutableList()),
-        TypeDeclaration::getAllSuperInterfaces);
+        TypeDeclaration::getAllSuperInterfaces,
+        WasmGenerationEnvironment::getTypeLayoutSuperTypeDeclaration);
   }
 
   /** Returns a wasm layout creating it from a type declaration if it wasn't created before. */
@@ -470,9 +471,9 @@ public class WasmGenerationEnvironment {
     return wasmTypeLayoutByTypeDeclaration.get(typeDeclaration);
   }
 
+  /** Gets a supertype declaration for the specified type to be used in generating the Wasm type. */
   @Nullable
-  private static TypeDeclaration getTypeLayoutSuperTypeDeclaration(
-      TypeDeclaration typeDeclaration) {
+  static TypeDeclaration getTypeLayoutSuperTypeDeclaration(TypeDeclaration typeDeclaration) {
     if (typeDeclaration.isInterface()) {
       // For interfaces, choose a suitable "superinterface". Java interfaces can inherit multiple
       // parent interfaces, which cannot be fully expressed in Wasm.
