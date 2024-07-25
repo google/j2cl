@@ -22,7 +22,6 @@ import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static com.google.j2cl.common.StringUtils.unescapeWtf16;
 import static java.lang.String.format;
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static java.util.stream.Collectors.toMap;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
@@ -358,10 +357,10 @@ final class BazelJ2wasmBundler extends BazelWorker {
           c ->
               c.getImplementedInterfaces()
                   .forEach(i -> implementedInterfaceNamesByTypeName.put(c.getName(), i.getName())));
-      Map<String, String> superInterfaceNamesByTypeName =
+      ImmutableMap<String, String> superInterfaceNamesByTypeName =
           interfaces.stream()
               .filter(i -> i.superType != null)
-              .collect(toMap(Type::getName, i -> i.superType.getName()));
+              .collect(toImmutableMap(Type::getName, i -> i.superType.getName()));
       return new ItableAllocator<>(
           classes.stream().map(Type::getName).collect(toImmutableList()),
           implementedInterfaceNamesByTypeName::get,
