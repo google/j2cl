@@ -28,6 +28,7 @@ import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.ThisOrSuperReference;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
+import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import java.util.HashSet;
 import java.util.Set;
@@ -96,6 +97,27 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
                   .build();
             }
             return methodCall;
+          }
+
+          @Override
+          public TypeDescriptor rewriteDeclaredTypeDescriptor(
+              DeclaredTypeDescriptor declaredTypeDescriptor) {
+            TypeDeclaration typeDeclaration = declaredTypeDescriptor.getTypeDeclaration();
+            if (optimizedClasses.contains(typeDeclaration)) {
+              return declaredTypeDescriptor.getFunctionalInterface();
+            }
+            return declaredTypeDescriptor;
+          }
+
+          @Override
+          public TypeDeclaration rewriteTypeDeclaration(TypeDeclaration typeDeclaration) {
+            if (optimizedClasses.contains(typeDeclaration)) {
+              return typeDeclaration
+                  .toUnparameterizedTypeDescriptor()
+                  .getFunctionalInterface()
+                  .getTypeDeclaration();
+            }
+            return typeDeclaration;
           }
         });
   }

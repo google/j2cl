@@ -67,6 +67,11 @@ open class JsFunctionOptimization {
     }
    }
   }
+  val f = object : JsFunctionOptimization.F {
+   override fun m(s: String?): String? {
+    return ""
+   }
+  }
  }
 
  @JsFunction

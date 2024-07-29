@@ -212,6 +212,23 @@
  ))
 )
 
+;;; Code for jsfunction.JsFunctionOptimization.2 [type definition]
+(type $jsfunction.JsFunctionOptimization.2.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_m__java_lang_String__java_lang_String (ref $function.m_m__java_lang_String__java_lang_String))
+ ))
+)
+(type $jsfunction.JsFunctionOptimization.2 (sub $java.lang.Object (struct
+ (field $vtable (ref $jsfunction.JsFunctionOptimization.2.vtable))
+ (field $itable (ref $jsfunction.JsFunctionOptimization.2.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@jsfunction.JsFunctionOptimization.2 (mut (ref null $jsfunction.JsFunctionOptimization)))
+ ))
+)
+
 ;;; Code for jsfunction.Main [type definition]
 (type $jsfunction.Main.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
@@ -675,6 +692,8 @@
 
 ;;; Code for jsfunction.JsFunctionOptimization.1 [imports]
 
+;;; Code for jsfunction.JsFunctionOptimization.2 [imports]
+
 ;;; Code for jsfunction.Main [imports]
 
 ;;; Code for jsfunction.Main.$LambdaImplementor$1 [imports]
@@ -783,6 +802,14 @@
  (i32.const 0)
 )
 (global $$class@jsfunction.JsFunctionOptimization.1 (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for jsfunction.JsFunctionOptimization.2 [static fields]
+(global $$class-initialized@jsfunction.JsFunctionOptimization.2 (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsfunction.JsFunctionOptimization.2 (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -1171,6 +1198,22 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_m__void_$pp_jsfunction@jsfunction.JsFunctionOptimization.1)
+ )
+)
+
+;;; Code for jsfunction.JsFunctionOptimization.2 [vtable.init]
+(global $jsfunction.JsFunctionOptimization.2.vtable (ref $jsfunction.JsFunctionOptimization.2.vtable)
+ (struct.new $jsfunction.JsFunctionOptimization.2.vtable
+  (ref.func $$getClassImpl__java_lang_Class@jsfunction.JsFunctionOptimization.2)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_m__java_lang_String__java_lang_String@jsfunction.JsFunctionOptimization.2)
+ )
+)
+(global $jsfunction.JsFunctionOptimization.F.vtable@$jsfunction.JsFunctionOptimization.2 (ref $jsfunction.JsFunctionOptimization.F.vtable)
+ (struct.new $jsfunction.JsFunctionOptimization.F.vtable
+  (ref.func $m_m__java_lang_String__java_lang_String@jsfunction.JsFunctionOptimization.2)
  )
 )
 
@@ -2090,11 +2133,14 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $r i32)
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/JsFunctionOptimization.java:27:14
+ (local $f (ref null $jsfunction.JsFunctionOptimization.2))
  (local $this (ref null $jsfunction.JsFunctionOptimization))
  (local.set $this (ref.cast (ref $jsfunction.JsFunctionOptimization) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/JsFunctionOptimization.java:28:4
   (drop (call $$create__jsfunction_JsFunctionOptimization__int@jsfunction.JsFunctionOptimization.1 (local.get $this)(local.get $r)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/JsFunctionOptimization.java:80:4
+  (local.set $f (call $$create__jsfunction_JsFunctionOptimization@jsfunction.JsFunctionOptimization.2 (local.get $this)))
  )
 )
 (elem declare func $m_main__int__void@jsfunction.JsFunctionOptimization)
@@ -2786,6 +2832,100 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsfunction.JsFunctionOptimization.1)
+
+;;; Code for jsfunction.JsFunctionOptimization.2 [methods]
+
+;;; <anonymous> implements F <anonymous> implements F.$create(JsFunctionOptimization $outer_this)
+(func $$create__jsfunction_JsFunctionOptimization@jsfunction.JsFunctionOptimization.2
+ (param $$outer_this (ref null $jsfunction.JsFunctionOptimization))
+ (result (ref null $jsfunction.JsFunctionOptimization.2))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/JsFunctionOptimization.java:81:16
+ (local $$instance (ref null $jsfunction.JsFunctionOptimization.2))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/JsFunctionOptimization.java:81:16
+  (call $$clinit__void_<once>_@jsfunction.JsFunctionOptimization.2 )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/JsFunctionOptimization.java:81:16
+  (local.set $$instance (struct.new $jsfunction.JsFunctionOptimization.2 (ref.as_non_null (global.get $jsfunction.JsFunctionOptimization.2.vtable)) (ref.as_non_null (global.get $jsfunction.JsFunctionOptimization.2.itable)) (i32.const 0) (ref.null $jsfunction.JsFunctionOptimization)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/JsFunctionOptimization.java:81:16
+  (call $$ctor__jsfunction_JsFunctionOptimization__void_$p_jsfunction_JsFunctionOptimization_2@jsfunction.JsFunctionOptimization.2 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/JsFunctionOptimization.java:81:16
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> implements F.$ctor(JsFunctionOptimization $outer_this)
+(func $$ctor__jsfunction_JsFunctionOptimization__void_$p_jsfunction_JsFunctionOptimization_2@jsfunction.JsFunctionOptimization.2
+ (param $this (ref null $jsfunction.JsFunctionOptimization.2))
+ (param $$outer_this (ref null $jsfunction.JsFunctionOptimization))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/JsFunctionOptimization.java:81:16
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/JsFunctionOptimization.java:81:16
+  (struct.set $jsfunction.JsFunctionOptimization.2 $$outer_this@jsfunction.JsFunctionOptimization.2 (local.get $this) (local.get $$outer_this))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/JsFunctionOptimization.java:81:16
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; String <anonymous> implements F.m(String s)
+(func $m_m__java_lang_String__java_lang_String@jsfunction.JsFunctionOptimization.2
+ (type $function.m_m__java_lang_String__java_lang_String)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $s (ref null $java.lang.String))
+ (result (ref null $java.lang.String))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/JsFunctionOptimization.java:83:24
+ (local $this (ref null $jsfunction.JsFunctionOptimization.2))
+ (local.set $this (ref.cast (ref $jsfunction.JsFunctionOptimization.2) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/JsFunctionOptimization.java:84:12
+  (return (call $$getString_||__java_lang_String_<once>_@jsfunction.JsFunctionOptimization.1 ))
+ )
+)
+(elem declare func $m_m__java_lang_String__java_lang_String@jsfunction.JsFunctionOptimization.2)
+
+;;; void <anonymous> implements F.$clinit()
+(func $$clinit__void_<once>_@jsfunction.JsFunctionOptimization.2
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/JsFunctionOptimization.java:81:16
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/JsFunctionOptimization.java:81:16
+  (if (global.get $$class-initialized@jsfunction.JsFunctionOptimization.2)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/JsFunctionOptimization.java:81:16
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/JsFunctionOptimization.java:81:16
+  (global.set $$class-initialized@jsfunction.JsFunctionOptimization.2 (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/JsFunctionOptimization.java:81:16
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> <anonymous> implements F.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsfunction.JsFunctionOptimization.2
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jsfunction.JsFunctionOptimization.2)))
+   (then
+    (return (global.get $$class@jsfunction.JsFunctionOptimization.2))
+   )
+  )
+  (global.set $$class@jsfunction.JsFunctionOptimization.2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsfunction.J...|__java_lang_String_<once>_@jsfunction.JsFunctionOptimization.2 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@jsfunction.JsFunctionOptimization.2))
+ )
+)
+
+;;; Class<?> <anonymous> implements F.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsfunction.JsFunctionOptimization.2
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jsfunction.JsFunctionOptimization.2))
+ (local.set $this (ref.cast (ref $jsfunction.JsFunctionOptimization.2) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsfunction.JsFunctionOptimization.2 ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@jsfunction.JsFunctionOptimization.2)
 
 ;;; Code for jsfunction.Main [methods]
 

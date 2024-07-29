@@ -74,5 +74,15 @@ public class JsFunctionOptimization {
         };
       }
     };
+
+    // Make sure that optimized types are not leaked if they are propagated through inference.
+    // TODO(b/355664391): Make sure that more complex cases of inference are handled correctly.
+    var f =
+        new F() {
+          @Override
+          public String m(String s) {
+            return "";
+          }
+        };
   }
 }
