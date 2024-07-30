@@ -17,8 +17,10 @@ package com.google.j2cl.transpiler.passes;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
+import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
+import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
@@ -41,15 +43,65 @@ import javax.annotation.Nullable;
 public class OptimizeAnonymousInnerClassesToFunctionExpressions extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    /* Keeps track of the classes that were optimized away to fix references. */
+    Set<TypeDeclaration> unoptimizeableClasses = new HashSet<>();
+
+    // 1. Collects types that cannot be optimized due to the type having been propagated by
+    // inference.
+    //
+    // There are two ways that the type can be leaked:
+    //  - to a variable with inferred type (i.e. declared with var), this case we handle by
+    //    changing the type of the variable.
+    //  - to a parameter in a method. This case we backoff.
+    //  - to an array literal. This case we backoff.
+    //  - and potentially to a field. Which we also backoff.
+    //
+    // The type might end up in a deep parameterization but for that to occur there needs to be
+    // a parameter assignment with the type.
+    compilationUnit.accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitMethodDescriptor(MethodDescriptor methodDescriptor) {
+            methodDescriptor.getParameterTypeDescriptors().stream()
+                .map(TypeDescriptor::toRawTypeDescriptor)
+                .forEach(this::backoffType);
+          }
+
+          @Override
+          public void exitFieldDescriptor(FieldDescriptor fieldDescriptor) {
+            backoffType(fieldDescriptor.getTypeDescriptor().toRawTypeDescriptor());
+          }
+
+          @Override
+          public void exitArrayTypeDescriptor(ArrayTypeDescriptor arrayTypeDescriptor) {
+            backoffType(arrayTypeDescriptor.getLeafTypeDescriptor().toRawTypeDescriptor());
+          }
+
+          private void backoffType(TypeDescriptor typeDescriptor) {
+            if (typeDescriptor instanceof ArrayTypeDescriptor) {
+              // Handle varargs and array literals.
+              backoffType(((ArrayTypeDescriptor) typeDescriptor).getLeafTypeDescriptor());
+            } else if (typeDescriptor instanceof DeclaredTypeDescriptor) {
+              TypeDeclaration typeDeclaration =
+                  ((DeclaredTypeDescriptor) typeDescriptor).getTypeDeclaration();
+              if (typeDeclaration.isAnonymous()) {
+                unoptimizeableClasses.add(typeDeclaration);
+              }
+            }
+          }
+        });
+
+    // Keeps track of the classes that were optimized away to fix references.
     Set<TypeDeclaration> optimizedClasses = new HashSet<>();
-    // Replace each instantiation with the corresponding functional expression.
+
+    // 2. Replace each instantiation with the corresponding functional expression.
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
           public Node rewriteNewInstance(NewInstance newInstance) {
             Type anonymousInnerClass = newInstance.getAnonymousInnerClass();
-            if (anonymousInnerClass != null && canBeOptimized(anonymousInnerClass)) {
+            if (anonymousInnerClass != null
+                && !unoptimizeableClasses.contains(anonymousInnerClass.getDeclaration())
+                && canBeOptimized(anonymousInnerClass)) {
               // Rewrites
               //
               //  new JsFunctionInterface() {
@@ -70,7 +122,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
           }
         });
 
-    // Replace all references to the type that was optimized away.
+    // 3. Replace all references to the type that was optimized away.
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override

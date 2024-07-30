@@ -84,5 +84,37 @@ public class JsFunctionOptimization {
             return "";
           }
         };
+
+    Object[] array = {
+      new F() {
+        @Override
+        public String m(String s) {
+          return "";
+        }
+      }
+    };
+
+    new Holder<>(
+        new F() {
+          @Override
+          public String m(String s) {
+            return "";
+          }
+        });
+
+    new Holder<>(
+        1,
+        new F() {
+          @Override
+          public String m(String s) {
+            return "";
+          }
+        });
+  }
+
+  class Holder<T> {
+    Holder(T value) {}
+
+    Holder(int i, T... value) {}
   }
 }

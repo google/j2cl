@@ -1,0 +1,56 @@
+goog.module('jsfunction.JsFunctionOptimization.$4$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
+
+let JsFunctionOptimization = goog.forwardDeclare('jsfunction.JsFunctionOptimization$impl');
+
+class $4 extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {JsFunctionOptimization} @nodts*/
+  this.$outer_this__jsfunction_JsFunctionOptimization_4;
+ }
+ /** @nodts @return {function(?string):?string} */
+ static $create__jsfunction_JsFunctionOptimization(/** JsFunctionOptimization */ $outer_this) {
+  $4.$clinit();
+  let $instance = new $4();
+  $instance.$ctor__jsfunction_JsFunctionOptimization_4__jsfunction_JsFunctionOptimization__void($outer_this);
+  return $Util.$makeLambdaFunction($4.prototype.m_m__java_lang_String__java_lang_String, $instance, $4.$copy);
+ }
+ /** @nodts */
+ $ctor__jsfunction_JsFunctionOptimization_4__jsfunction_JsFunctionOptimization__void(/** JsFunctionOptimization */ $outer_this) {
+  this.$outer_this__jsfunction_JsFunctionOptimization_4 = $outer_this;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @return {?string} */
+ m_m__java_lang_String__java_lang_String(/** ?string */ s) {
+  return '';
+ }
+ /** @nodts */
+ static $clinit() {
+  $4.$clinit = () =>{};
+  $4.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$is__jsfunction_JsFunctionOptimization_4;
+ }
+ /** @nodts */
+ static $copy(/** ? */ from, /** ? */ to) {
+  to.$outer_this__jsfunction_JsFunctionOptimization_4 = from.$outer_this__jsfunction_JsFunctionOptimization_4;
+  to.$is__jsfunction_JsFunctionOptimization_4 = true;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$JavaScriptFunction.$markImplementor($4);
+$Util.$setClassMetadata($4, 'jsfunction.JsFunctionOptimization$4');
+
+exports = $4;
+
+//# sourceMappingURL=JsFunctionOptimization$4.js.map

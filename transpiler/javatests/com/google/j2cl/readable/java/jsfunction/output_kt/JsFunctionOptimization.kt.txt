@@ -20,10 +20,12 @@ package jsfunction
 import javaemul.lang.*
 import jsinterop.annotations.JsFunction
 import kotlin.Any
+import kotlin.Array
 import kotlin.Int
 import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
+import kotlin.arrayOf
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
@@ -72,6 +74,21 @@ open class JsFunctionOptimization {
     return ""
    }
   }
+  val array: Array<Any?>? = arrayOf<Any?>(object : JsFunctionOptimization.F {
+   override fun m(s: String?): String? {
+    return ""
+   }
+  })
+  Holder(object : JsFunctionOptimization.F {
+   override fun m(s: String?): String? {
+    return ""
+   }
+  })
+  Holder(1, object : JsFunctionOptimization.F {
+   override fun m(s: String?): String? {
+    return ""
+   }
+  })
  }
 
  @JsFunction
@@ -80,5 +97,13 @@ open class JsFunctionOptimization {
   fun m(
    @ObjCName("withNSString") s: String?
   ): String?
+ }
+
+ open inner class Holder<T> {
+  internal constructor(value: T)
+
+  internal constructor(i: Int, vararg value: T) {
+   val value_1: Array<T>? = value as Array<T>?
+  }
  }
 }

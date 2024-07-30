@@ -4,6 +4,10 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $1 = goog.forwardDeclare('jsfunction.JsFunctionOptimization.$1$impl');
+let $4 = goog.forwardDeclare('jsfunction.JsFunctionOptimization.$4$impl');
+let $5 = goog.forwardDeclare('jsfunction.JsFunctionOptimization.$5$impl');
+let Holder = goog.forwardDeclare('jsfunction.JsFunctionOptimization.Holder$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 
 class JsFunctionOptimization extends j_l_Object {
  /** @protected @nodts */
@@ -27,6 +31,11 @@ class JsFunctionOptimization extends j_l_Object {
   let f = (/** ?string */ s) =>{
    return '';
   };
+  let array = [(/** ?string */ s_1) =>{
+   return '';
+  }];
+  Holder.$create__jsfunction_JsFunctionOptimization__java_lang_Object(this, /**@type {$4}*/ ($4.$create__jsfunction_JsFunctionOptimization(this)));
+  Holder.$create__jsfunction_JsFunctionOptimization__int__arrayOf_java_lang_Object(this, 1, /**@type {!Array<$5>}*/ ($Arrays.$stampType([/**@type {$5}*/ ($5.$create__jsfunction_JsFunctionOptimization(this))], $5)));
  }
  /** @nodts */
  static $clinit() {
@@ -42,6 +51,10 @@ class JsFunctionOptimization extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   $1 = goog.module.get('jsfunction.JsFunctionOptimization.$1$impl');
+  $4 = goog.module.get('jsfunction.JsFunctionOptimization.$4$impl');
+  $5 = goog.module.get('jsfunction.JsFunctionOptimization.$5$impl');
+  Holder = goog.module.get('jsfunction.JsFunctionOptimization.Holder$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
  }
 }
 $Util.$setClassMetadata(JsFunctionOptimization, 'jsfunction.JsFunctionOptimization');
