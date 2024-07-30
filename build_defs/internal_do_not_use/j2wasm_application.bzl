@@ -464,12 +464,15 @@ def j2wasm_application(name, defines = dict(), **kwargs):
             # matter. First -O3 will be the slowest, so we isolate it in a
             # stage1 invocation (due to go/forge-limits for time).
             "-O3",
+            "--cfp-reftest",
             "--optimize-j2cl",
             "--gufa",
             "--unsubtyping",
             "-O3",
+            "--cfp-reftest",
             "--optimize-j2cl",
             "-O3",
+            "--cfp-reftest",
             "--optimize-j2cl",
 
             # Stage 2
@@ -483,16 +486,21 @@ def j2wasm_application(name, defines = dict(), **kwargs):
             "--gufa",
             "--unsubtyping",
             "-O3",
+            "--cfp-reftest",
             "--optimize-j2cl",
             "-O3",
+            "--cfp-reftest",
             "--optimize-j2cl",
             "-O3",
+            "--cfp-reftest",
             "--optimize-j2cl",
             "--gufa",
             "--unsubtyping",
             "-O3",
+            "--cfp-reftest",
             "--optimize-j2cl",
             "-O3",
+            "--cfp-reftest",
             "--optimize-j2cl",
 
             # Stage 3
@@ -506,11 +514,14 @@ def j2wasm_application(name, defines = dict(), **kwargs):
             "--unsubtyping",
             # Get several rounds of -O3 after intrinsic lowering.
             "-O3",
+            "--cfp-reftest",
             "--optimize-j2cl",
             "-O3",
             "--optimize-j2cl",
+            "--cfp-reftest",
             "--type-merging",
             "-O3",
+            "--cfp-reftest",
             "--optimize-j2cl",
 
             # Final clean-ups.
