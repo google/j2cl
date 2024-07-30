@@ -43,6 +43,4 @@ public class MyJsType implements OtherInterface {
   public int fun(int a) {
     return a - 1;
   }
-
-  // toString method is also accidentally overriden which is a @JsMethod.
 }

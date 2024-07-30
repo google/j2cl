@@ -15,12 +15,6 @@
  */
 package jsbridgemethodaccidentaloverride;
 
-import jsinterop.annotations.JsNonNull;
-
 public interface OtherInterface {
   int fun(int a);
-
-  @Override
-  @JsNonNull
-  String toString();
 }
