@@ -44,5 +44,4 @@ actual class Timer {
     get() = (now() - resetMillis).toFloat()
 }
 
-@JsMethod(name = "Date.now", namespace = JsPackage.GLOBAL)
-private external fun now(): Double
+@JsMethod(name = "performance.now", namespace = JsPackage.GLOBAL) private external fun now(): Double

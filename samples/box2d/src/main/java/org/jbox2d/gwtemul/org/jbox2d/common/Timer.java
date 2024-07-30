@@ -42,6 +42,6 @@ public class Timer {
     return (float) (now() - resetMillis);
   }
 
-  @JsMethod(namespace = JsPackage.GLOBAL, name = "Date.now")
+  @JsMethod(name = "performance.now", namespace = JsPackage.GLOBAL)
   private static native double now();
 }
