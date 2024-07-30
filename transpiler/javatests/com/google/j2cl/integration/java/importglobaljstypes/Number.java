@@ -33,18 +33,15 @@ public class Number {
     return Number.fun(x);
   }
 
-  /**
-   * Tests for generic native type.
-   */
   @JsType(isNative = true, namespace = GLOBAL, name = "Function")
-  private interface NativeFunction<T> {
-    T apply(Object thisContext, int[] argsArray);
+  private interface NativeFunction {
+    Object apply(Object thisContext, int[] argsArray);
   }
 
   @JsProperty(name = "String.fromCharCode", namespace = GLOBAL)
-  private static native NativeFunction<String> getFromCharCodeFunction();
+  private static native NativeFunction getFromCharCodeFunction();
 
   public static String fromCharCode(int[] array) {
-    return getFromCharCodeFunction().apply(null, array);
+    return (String) getFromCharCodeFunction().apply(null, array);
   }
 }
