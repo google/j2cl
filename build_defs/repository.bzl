@@ -59,8 +59,8 @@ def _load_binaryen():
     _github_repo(
         name="com_google_binaryen",
         repo = "WebAssembly/binaryen",
-        tag = "669bc06d0566041bfdbae97f87e60130945b557f",
-        sha256 = "d0ae6b5ab9e60534cda8eb372e4d6eb94a5c128fd829ad170556090f28fd7b60",
+        tag = "6645f0c05b8e9268f35742bb6b0a67e0a9c40795",
+        sha256 = "a3b0c6b4884cd147913088817f6e238e700394834a7cbd8610acd6b23bdd4860",
         patch_args = ["-p1"],
         build_file = "@com_google_j2cl//build_defs/internal_do_not_use/binaryen:BUILD.binaryen",
         patches = ["@com_google_j2cl//build_defs/internal_do_not_use/binaryen:generate_intrinsics.patch"],
