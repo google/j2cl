@@ -1,0 +1,35 @@
+goog.module('foreachstatement.ForEachStatement.StringIterator$impl');
+
+const Iterator = goog.require('java.util.Iterator$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @extends {Iterator<?string>}
+ */
+class StringIterator {
+ /** @nodts */
+ static $clinit() {
+  StringIterator.$clinit = () =>{};
+  StringIterator.$loadModules();
+  Iterator.$clinit();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  Iterator.$markImplementor(ctor);
+  ctor.prototype.$implements__foreachstatement_ForEachStatement_StringIterator = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__foreachstatement_ForEachStatement_StringIterator;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+StringIterator.$markImplementor(/**@type {Function}*/ (StringIterator));
+$Util.$setClassMetadataForInterface(StringIterator, 'foreachstatement.ForEachStatement$StringIterator');
+
+exports = StringIterator;
+
+//# sourceMappingURL=ForEachStatement$StringIterator.js.map

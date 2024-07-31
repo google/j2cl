@@ -1,0 +1,47 @@
+goog.module('foreachstatement.ForEachStatement.StringIterable$impl');
+
+const Iterable = goog.require('java.lang.Iterable$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('foreachstatement.ForEachStatement.StringIterable.$LambdaAdaptor$impl');
+let StringIterator = goog.forwardDeclare('foreachstatement.ForEachStatement.StringIterator$impl');
+
+/**
+ * @interface
+ * @extends {Iterable<?string>}
+ */
+class StringIterable {
+ /** @abstract @nodts @return {StringIterator} */
+ m_iterator__foreachstatement_ForEachStatement_StringIterator() {}
+ /** @nodts @return {StringIterable} */
+ static $adapt(/** ?function():StringIterator */ fn) {
+  StringIterable.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts */
+ static $clinit() {
+  StringIterable.$clinit = () =>{};
+  StringIterable.$loadModules();
+  Iterable.$clinit();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  Iterable.$markImplementor(ctor);
+  ctor.prototype.$implements__foreachstatement_ForEachStatement_StringIterable = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__foreachstatement_ForEachStatement_StringIterable;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('foreachstatement.ForEachStatement.StringIterable.$LambdaAdaptor$impl');
+ }
+}
+StringIterable.$markImplementor(/**@type {Function}*/ (StringIterable));
+$Util.$setClassMetadataForInterface(StringIterable, 'foreachstatement.ForEachStatement$StringIterable');
+
+exports = StringIterable;
+
+//# sourceMappingURL=ForEachStatement$StringIterable.js.map

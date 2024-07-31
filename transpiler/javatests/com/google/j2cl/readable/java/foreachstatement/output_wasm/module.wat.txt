@@ -32,6 +32,24 @@
  ))
 )
 
+;;; Code for foreachstatement.ForEachStatement.StringIterable [type definition]
+(type $foreachstatement.ForEachStatement.StringIterable.vtable (sub $java.lang.Iterable.vtable (struct
+ (field $m_forEach__java_util_function_Consumer__void (ref $function.m_forEach__java_util_function_Consumer__void))
+ (field $m_iterator__java_util_Iterator (ref $function.m_iterator__java_util_Iterator))
+ (field $m_spliterator__java_util_Spliterator (ref $function.m_spliterator__java_util_Spliterator))
+ (field $m_iterator__foreachstatement_ForEachStatement_StringIterator (ref $function.m_iterator__foreachstatement_ForEachStatement_StringIterator))
+ ))
+)
+
+;;; Code for foreachstatement.ForEachStatement.StringIterator [type definition]
+(type $foreachstatement.ForEachStatement.StringIterator.vtable (sub $java.util.Iterator.vtable (struct
+ (field $m_forEachRemaining__java_util_function_Consumer__void (ref $function.m_forEachRemaining__java_util_function_Consumer__void))
+ (field $m_hasNext__boolean (ref $function.m_hasNext__boolean))
+ (field $m_next__java_lang_Object (ref $function.m_next__java_lang_Object))
+ (field $m_remove__void (ref $function.m_remove__void))
+ ))
+)
+
 ;;; Code for foreachstatement.ForEachStatement.Exception1 [type definition]
 (type $foreachstatement.ForEachStatement.Exception1.vtable (sub $java.lang.Exception.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
@@ -180,6 +198,10 @@
 
 ;;; Code for foreachstatement.ForEachStatement.IterableReturningTypeVariable [imports]
 
+;;; Code for foreachstatement.ForEachStatement.StringIterable [imports]
+
+;;; Code for foreachstatement.ForEachStatement.StringIterator [imports]
+
 ;;; Code for foreachstatement.ForEachStatement.Exception1 [imports]
 
 ;;; Code for foreachstatement.ForEachStatement.Exception2 [imports]
@@ -233,6 +255,22 @@
  (i32.const 0)
 )
 (global $$class@foreachstatement.ForEachStatement.IterableReturningTypeVariable (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for foreachstatement.ForEachStatement.StringIterable [static fields]
+(global $$class-initialized@foreachstatement.ForEachStatement.StringIterable (mut i32)
+ (i32.const 0)
+)
+(global $$class@foreachstatement.ForEachStatement.StringIterable (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for foreachstatement.ForEachStatement.StringIterator [static fields]
+(global $$class-initialized@foreachstatement.ForEachStatement.StringIterator (mut i32)
+ (i32.const 0)
+)
+(global $$class@foreachstatement.ForEachStatement.StringIterator (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -847,6 +885,31 @@
  )
 )
 
+;;; void ForEachStatement.testOverriddenIterator(StringIterable i)
+(func $m_testOverriddenIterator__foreachstatement_ForEachStatement_StringIterable__void_$p_foreachstatement_ForEachStatement@foreachstatement.ForEachStatement
+ (param $this (ref null $foreachstatement.ForEachStatement))
+ (param $i (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/foreachstatement/readable-j2wasm.js/foreachstatement/ForEachStatement.java:131:15
+ (local $$iterator (ref null $java.lang.Object))
+ (local $s (ref null $java.lang.String))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/foreachstatement/readable-j2wasm.js/foreachstatement/ForEachStatement.java:132:4
+  (local.set $$iterator (call_ref $function.m_iterator__foreachstatement_ForEachStatement_StringIterator (ref.as_non_null (local.get $i))(struct.get $foreachstatement.ForEachStatement.StringIterable.vtable $m_iterator__foreachstatement_ForEachStatement_StringIterator (ref.cast (ref $foreachstatement.ForEachStatement.StringIterable.vtable) (call $get.itable.$foreachstatement.ForEachStatement.StringIterable (local.get $i))))))
+  (block $LOOP.BREAK
+   (loop
+    (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator))(struct.get $foreachstatement.ForEachStatement.StringIterator.vtable $m_hasNext__boolean (ref.cast (ref $foreachstatement.ForEachStatement.StringIterator.vtable) (call $get.itable.$foreachstatement.ForEachStatement.StringIterator (local.get $$iterator)))))))
+    (block $LOOP.CONTINUE
+     (block
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/foreachstatement/readable-j2wasm.js/foreachstatement/ForEachStatement.java:132:4
+      (local.set $s (ref.cast (ref null $java.lang.String) (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator))(struct.get $foreachstatement.ForEachStatement.StringIterator.vtable $m_next__java_lang_Object (ref.cast (ref $foreachstatement.ForEachStatement.StringIterator.vtable) (call $get.itable.$foreachstatement.ForEachStatement.StringIterator (local.get $$iterator)))))))
+     )
+    )
+    (br 0)
+   )
+  )
+ )
+)
+
 ;;; void ForEachStatement.$clinit()
 (func $$clinit__void_<once>_@foreachstatement.ForEachStatement
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/foreachstatement/readable-j2wasm.js/foreachstatement/ForEachStatement.java:22:13
@@ -1012,6 +1075,74 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@foreachstatement.ForEachStatement.IterableReturningTypeVariable)
+
+;;; Code for foreachstatement.ForEachStatement.StringIterable [methods]
+
+;;; void StringIterable.$clinit()
+(func $$clinit__void_<once>_@foreachstatement.ForEachStatement.StringIterable
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/foreachstatement/readable-j2wasm.js/foreachstatement/ForEachStatement.java:125:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/foreachstatement/readable-j2wasm.js/foreachstatement/ForEachStatement.java:125:12
+  (if (global.get $$class-initialized@foreachstatement.ForEachStatement.StringIterable)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/foreachstatement/readable-j2wasm.js/foreachstatement/ForEachStatement.java:125:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/foreachstatement/readable-j2wasm.js/foreachstatement/ForEachStatement.java:125:12
+  (global.set $$class-initialized@foreachstatement.ForEachStatement.StringIterable (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/foreachstatement/readable-j2wasm.js/foreachstatement/ForEachStatement.java:125:12
+  (call $$clinit__void_<once>_@java.lang.Iterable )
+ )
+)
+
+;;; Class<T> StringIterable.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@foreachstatement.ForEachStatement.StringIterable
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@foreachstatement.ForEachStatement.StringIterable)))
+   (then
+    (return (global.get $$class@foreachstatement.ForEachStatement.StringIterable))
+   )
+  )
+  (global.set $$class@foreachstatement.ForEachStatement.StringIterable (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|foreachstate...|__java_lang_String_<once>_@foreachstatement.ForEachStatement.StringIterable )))
+  (return (global.get $$class@foreachstatement.ForEachStatement.StringIterable))
+ )
+)
+
+;;; Code for foreachstatement.ForEachStatement.StringIterator [methods]
+
+;;; void StringIterator.$clinit()
+(func $$clinit__void_<once>_@foreachstatement.ForEachStatement.StringIterator
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/foreachstatement/readable-j2wasm.js/foreachstatement/ForEachStatement.java:129:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/foreachstatement/readable-j2wasm.js/foreachstatement/ForEachStatement.java:129:12
+  (if (global.get $$class-initialized@foreachstatement.ForEachStatement.StringIterator)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/foreachstatement/readable-j2wasm.js/foreachstatement/ForEachStatement.java:129:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/foreachstatement/readable-j2wasm.js/foreachstatement/ForEachStatement.java:129:12
+  (global.set $$class-initialized@foreachstatement.ForEachStatement.StringIterator (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/foreachstatement/readable-j2wasm.js/foreachstatement/ForEachStatement.java:129:12
+  (call $$clinit__void_<once>_@java.util.Iterator )
+ )
+)
+
+;;; Class<T> StringIterator.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@foreachstatement.ForEachStatement.StringIterator
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@foreachstatement.ForEachStatement.StringIterator)))
+   (then
+    (return (global.get $$class@foreachstatement.ForEachStatement.StringIterator))
+   )
+  )
+  (global.set $$class@foreachstatement.ForEachStatement.StringIterator (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|foreachstate...|__java_lang_String_<once>_@foreachstatement.ForEachStatement.StringIterator )))
+  (return (global.get $$class@foreachstatement.ForEachStatement.StringIterator))
+ )
+)
 
 ;;; Code for foreachstatement.ForEachStatement.Exception1 [methods]
 

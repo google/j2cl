@@ -19,15 +19,18 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.common.collect.ImmutableSet.toImmutableSet;
 import static com.google.common.collect.MoreCollectors.onlyElement;
 import static com.google.common.collect.MoreCollectors.toOptional;
 import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toCollection;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Streams;
 import com.google.j2cl.common.ThreadLocalInterner;
 import com.google.j2cl.common.visitor.Processor;
@@ -39,6 +42,7 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration.SourceLanguage;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -543,11 +547,24 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   @Override
   public MethodDescriptor getMethodDescriptor(String methodName, TypeDescriptor... parameters) {
     String targetSignature = MethodDescriptor.buildMethodSignature(methodName, parameters);
-    return getMethodDescriptors().stream()
-        .filter(Predicates.not(MethodDescriptor::isGeneralizingdBridge))
-        .filter(m -> m.getSignature().equals(targetSignature))
-        .collect(toOptional())
-        .orElse(null);
+    Set<MethodDescriptor> potentialMatches =
+        getMethodDescriptors().stream()
+            .filter(Predicates.not(MethodDescriptor::isGeneralizingdBridge))
+            .filter(m -> m.getSignature().equals(targetSignature))
+            .collect(toCollection(HashSet::new));
+
+    if (potentialMatches.size() < 2) {
+      return Iterables.getOnlyElement(potentialMatches, null);
+    }
+
+    // There are more than two methods that match; filter out overridden methods.
+    potentialMatches.stream()
+        .flatMap(m -> m.getJavaOverriddenMethodDescriptors().stream())
+        // Collect to a set so that we can remove from potential matches, and not get
+        // ConcurrentModificationException.
+        .collect(toImmutableSet())
+        .forEach(potentialMatches::remove);
+    return Iterables.getOnlyElement(potentialMatches);
   }
 
   /**

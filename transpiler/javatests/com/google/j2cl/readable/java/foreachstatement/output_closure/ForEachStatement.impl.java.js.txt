@@ -7,6 +7,7 @@ let Exception1 = goog.forwardDeclare('foreachstatement.ForEachStatement.Exceptio
 let Exception2 = goog.forwardDeclare('foreachstatement.ForEachStatement.Exception2$impl');
 let Exception3 = goog.forwardDeclare('foreachstatement.ForEachStatement.Exception3$impl');
 let Exception4 = goog.forwardDeclare('foreachstatement.ForEachStatement.Exception4$impl');
+let StringIterable = goog.forwardDeclare('foreachstatement.ForEachStatement.StringIterable$impl');
 let Character = goog.forwardDeclare('java.lang.Character$impl');
 let Exception = goog.forwardDeclare('java.lang.Exception$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
@@ -134,6 +135,12 @@ class ForEachStatement extends j_l_Object {
    {
     i_3 = i_3 + 1 | 0;
    }
+  }
+ }
+ /** @nodts */
+ m_testOverriddenIterator__foreachstatement_ForEachStatement_StringIterable__void_$p_foreachstatement_ForEachStatement(/** StringIterable */ i) {
+  for (let $iterator = i.m_iterator__foreachstatement_ForEachStatement_StringIterator(); $iterator.m_hasNext__boolean(); ) {
+   let s = /**@type {?string}*/ ($Casts.$to($iterator.m_next__java_lang_Object(), j_l_String));
   }
  }
  /** @nodts */

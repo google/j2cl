@@ -20,6 +20,7 @@ package foreachstatement
 import javaemul.lang.*
 import java.lang.Integer
 import javaemul.lang.JavaIterable
+import javaemul.lang.JavaIterator
 import kotlin.Any
 import kotlin.Char
 import kotlin.Exception
@@ -119,6 +120,10 @@ open class ForEachStatement {
   }
  }
 
+ private fun testOverriddenIterator(i: ForEachStatement.StringIterable?) {
+  for (s in i!!) {}
+ }
+
  open class Exception1 internal constructor(): java.lang.Exception(), JavaIterable<Number?> {
   override fun iterator(): MutableIterator<Number?> {
    return null!!
@@ -148,4 +153,10 @@ open class ForEachStatement {
    return null!!
   }
  }
+
+ fun interface StringIterable: JavaIterable<String?> {
+  override fun iterator(): ForEachStatement.StringIterator
+ }
+
+ interface StringIterator: JavaIterator<String?> {}
 }

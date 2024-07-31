@@ -121,4 +121,14 @@ public class ForEachStatement {
       i++;
     }
   }
+
+  interface StringIterable extends Iterable<String> {
+    StringIterator iterator();
+  }
+
+  interface StringIterator extends Iterator<String> {}
+
+  private void testOverriddenIterator(StringIterable i) {
+    for (String s : i) {}
+  }
 }
