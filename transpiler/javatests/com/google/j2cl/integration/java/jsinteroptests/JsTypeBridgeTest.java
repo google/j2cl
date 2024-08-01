@@ -15,7 +15,7 @@
  */
 package jsinteroptests;
 
-import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 
 import jsinterop.annotations.JsType;
 
@@ -82,9 +82,5 @@ public class JsTypeBridgeTest {
 
     listWithExport.add("Tight");
     assertEquals("TightListImpl", listWithExport.x);
-  }
-
-  private void assertEquals(Object expect, Object actual) {
-    assertTrue(expect.equals(actual));
   }
 }

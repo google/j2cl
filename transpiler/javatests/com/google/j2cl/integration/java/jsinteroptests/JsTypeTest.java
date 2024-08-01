@@ -115,7 +115,7 @@ public class JsTypeTest {
 
     @Override
     public Iterator iterator() {
-      return null;
+      throw new UnsupportedOperationException();
     }
   }
 
