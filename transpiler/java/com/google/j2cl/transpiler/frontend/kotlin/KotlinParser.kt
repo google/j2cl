@@ -89,6 +89,10 @@ class KotlinParser(
         EnvironmentConfigFiles.JVM_CONFIG_FILES,
       )
 
+    if (environment.configuration.getBoolean(CommonConfigurationKeys.USE_FIR)) {
+      throw UnsupportedOperationException("FIR is not supported")
+    }
+
     // Register friend modules so that we do not trigger visibility errors.
     ModuleVisibilityManager.SERVICE.getInstance(environment.project)
       .addEligibleFriends(currentTarget, classpathEntries)
