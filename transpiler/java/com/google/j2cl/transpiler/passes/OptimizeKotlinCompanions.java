@@ -41,8 +41,6 @@ import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.ThisOrSuperReference;
 import com.google.j2cl.transpiler.ast.Type;
-import com.google.j2cl.transpiler.ast.TypeDescriptor;
-import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nullable;
@@ -152,7 +150,7 @@ public class OptimizeKotlinCompanions extends NormalizationPass {
         new AbstractVisitor() {
           @Override
           public void exitType(Type type) {
-            if (isOptimizableCompanion(type.getTypeDescriptor())) {
+            if (type.getTypeDescriptor().isOptimizableKotlinCompanion()) {
               Type enclosingType = (Type) getParent();
               Field companionInstanceField =
                   enclosingType.getStaticFields().stream()
@@ -169,40 +167,6 @@ public class OptimizeKotlinCompanions extends NormalizationPass {
             rewriteCompanionInstanceFieldReferences(type);
           }
         });
-  }
-
-  private static boolean isOptimizableCompanion(TypeDescriptor typeDescriptor) {
-    if (!(typeDescriptor instanceof DeclaredTypeDescriptor)) {
-      return false;
-    }
-
-    DeclaredTypeDescriptor companion = (DeclaredTypeDescriptor) typeDescriptor;
-
-    // TODO(b/337362819): Uncomment this when the Java frontend is correctly settings SourceLanguage
-    // for Kotlin deps.
-    // if (companion.getTypeDeclaration().getSourceLanguage() != KOTLIN) {
-    //   return false;
-    // }
-
-    // We use the following heuristic to find if a type represent a Kotlin companion object class:
-    // - The type should be a static nested final class named `Companion`
-    // - The enclosing class should have a static field named `Companion` of the same type.
-    // TODO(b/335000000): Add the ability to mark class as Kotlin companion.
-    if (!companion.isClass()
-        || !companion.isFinal()
-        || !companion.getSimpleSourceName().equals("Companion")
-        || companion.getEnclosingTypeDescriptor() == null
-        || companion.getEnclosingTypeDescriptor().getDeclaredFieldDescriptors().stream()
-            .noneMatch(
-                f ->
-                    f.getName().equals("Companion")
-                        && f.getTypeDescriptor().isSameBaseType(typeDescriptor))) {
-      return false;
-    }
-    // In order to be able to optimize the companion object, it should not extend any class nor
-    // implement any interface.
-    return TypeDescriptors.isJavaLangObject(companion.getSuperTypeDescriptor())
-        && companion.getInterfaceTypeDescriptors().isEmpty();
   }
 
   /**
@@ -279,6 +243,10 @@ public class OptimizeKotlinCompanions extends NormalizationPass {
    * <p>When the JvmStatic function is native, kotlinc move the method on the enclosing type (for
    * JNI compatibility) and creates the forwarding method on the companion. In that particular case
    * we do not have anything to do.
+   *
+   * <p>Custom `$isInstance` methods are moved to the enclosing type but no forwarding method is
+   * created on the companion to avoid conflicting with the static `isInstance` method created
+   * later.
    */
   private static void moveCompanionMethodsToEnclosingType(Type enclosingType, Type companion) {
     companion.accept(
@@ -314,6 +282,13 @@ public class OptimizeKotlinCompanions extends NormalizationPass {
 
             enclosingType.addMember(
                 Method.Builder.from(method).setMethodDescriptor(staticMethodDescriptor).build());
+
+            // If the companion method is a custom `$isInstance` method, we do not want to create
+            // a forwarding method on the companion to avoid conflicting with the static
+            // `$isInstance` method added later.
+            if (method.getDescriptor().isCustomIsInstanceMethod()) {
+              return null;
+            }
 
             // The companion method is replaced by a method calling the corresponding static method
             // in the enclosing type.
@@ -431,7 +406,10 @@ public class OptimizeKotlinCompanions extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Node rewriteMethodCall(MethodCall methodCall) {
-            if (!isOptimizableCompanion(methodCall.getTarget().getEnclosingTypeDescriptor())) {
+            if (!methodCall
+                .getTarget()
+                .getEnclosingTypeDescriptor()
+                .isOptimizableKotlinCompanion()) {
               return methodCall;
             }
 
@@ -509,7 +487,7 @@ public class OptimizeKotlinCompanions extends NormalizationPass {
           @Override
           public Node rewriteFieldAccess(FieldAccess fieldAccess) {
             if (!isCompanionInstanceField(fieldAccess.getTarget())
-                || !isOptimizableCompanion(fieldAccess.getTarget().getTypeDescriptor())) {
+                || !fieldAccess.getTarget().getTypeDescriptor().isOptimizableKotlinCompanion()) {
               return fieldAccess;
             }
 

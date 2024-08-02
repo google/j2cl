@@ -1029,10 +1029,19 @@ public class JsInteropRestrictionsChecker {
 
   private void checkCustomIsInstanceMethod(Method method) {
     MethodDescriptor methodDescriptor = method.getDescriptor();
-    if (methodDescriptor.isInstanceMember() || methodDescriptor.getVisibility().isPrivate()) {
+    if (methodDescriptor.isInstanceMember()
+        // If the custom `isInstance` method is defined in a Kotlin companion object, The method
+        // will be later moved to the enclosing type and become static.
+        && !methodDescriptor.getEnclosingTypeDescriptor().isOptimizableKotlinCompanion()) {
       problems.error(
           method.getSourcePosition(),
-          "Custom '$isInstance' method '%s' has to be static and non private.",
+          "Custom '$isInstance' method '%s' has to be static.",
+          method.getReadableDescription());
+    }
+    if (methodDescriptor.getVisibility().isPrivate()) {
+      problems.error(
+          method.getSourcePosition(),
+          "Custom '$isInstance' method '%s' has to be non private.",
           method.getReadableDescription());
     }
     if (!TypeDescriptors.isPrimitiveBoolean(methodDescriptor.getReturnTypeDescriptor())) {

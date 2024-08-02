@@ -3483,11 +3483,11 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "}")
         .assertErrorsWithoutSourcePosition(
             "Custom '$isInstance' method 'boolean BadIsInstanceVisibility.$isInstance(Object o)'"
-                + " has to be static and non private.",
+                + " has to be non private.",
             "Custom '$isInstance' method 'void BadIsInstanceReturnType.$isInstance(Object o)' has"
                 + " to return 'boolean'.",
             "Custom '$isInstance' method 'boolean BadIsInstanceMembership.$isInstance(Object o)'"
-                + " has to be static and non private.",
+                + " has to be static.",
             "Native JsType method 'boolean BadIsInstanceOnNativeType.$isInstance(Object o)' should"
                 + " be native, abstract or JsOverlay.");
   }

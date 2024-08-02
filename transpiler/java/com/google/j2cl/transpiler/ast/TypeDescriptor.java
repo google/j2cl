@@ -320,6 +320,14 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
     return false;
   }
 
+  /**
+   * Returns true if the given type descriptor is a Kotlin companion object class that can be
+   * optimized.
+   */
+  public boolean isOptimizableKotlinCompanion() {
+    return false;
+  }
+
   /** A unique string for a give type. Used for interning. */
   public abstract String getUniqueId();
 
