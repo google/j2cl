@@ -92,6 +92,13 @@ open class MultipleAbstractParents {
  @ObjCName("J2ktMultipleabstractparentsMultipleAbstractParents_AbstractStringList2", exact = true)
  abstract class AbstractStringList2: MultipleAbstractParents.AbstractList2<String?>(), MultipleAbstractParents.IStringList {}
 
+ @ObjCName("J2ktMultipleabstractparentsMultipleAbstractParents_SubAbstractStringList2", exact = true)
+ open class SubAbstractStringList2: MultipleAbstractParents.AbstractStringList2() {
+  override fun getFoo(t: String?): String? {
+   return null
+  }
+ }
+
  @ObjCName("J2ktMultipleabstractparentsMultipleAbstractParents_AbstractStringList3", exact = true)
  abstract class AbstractStringList3: MultipleAbstractParents.AbstractList2<String?>() {}
 

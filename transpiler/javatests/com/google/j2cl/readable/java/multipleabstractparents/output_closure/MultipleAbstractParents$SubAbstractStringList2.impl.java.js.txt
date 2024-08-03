@@ -1,0 +1,55 @@
+goog.module('multipleabstractparents.MultipleAbstractParents.SubAbstractStringList2$impl');
+
+const AbstractStringList2 = goog.require('multipleabstractparents.MultipleAbstractParents.AbstractStringList2$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+class SubAbstractStringList2 extends AbstractStringList2 {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!SubAbstractStringList2} */
+ static $create__() {
+  SubAbstractStringList2.$clinit();
+  let $instance = new SubAbstractStringList2();
+  $instance.$ctor__multipleabstractparents_MultipleAbstractParents_SubAbstractStringList2__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__multipleabstractparents_MultipleAbstractParents_SubAbstractStringList2__void() {
+  this.$ctor__multipleabstractparents_MultipleAbstractParents_AbstractStringList2__void();
+ }
+ /** @override @nodts @return {?string} */
+ m_getFoo__java_lang_String__java_lang_String(/** ?string */ t) {
+  return null;
+ }
+ //Bridge method.
+ /** @final @override @nodts @return {?string} */
+ m_getFoo__java_lang_Object__java_lang_String(/** ?string */ arg0) {
+  return this.m_getFoo__java_lang_String__java_lang_String(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
+ }
+ /** @nodts */
+ static $clinit() {
+  SubAbstractStringList2.$clinit = () =>{};
+  SubAbstractStringList2.$loadModules();
+  AbstractStringList2.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SubAbstractStringList2;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(SubAbstractStringList2, 'multipleabstractparents.MultipleAbstractParents$SubAbstractStringList2');
+
+exports = SubAbstractStringList2;
+
+//# sourceMappingURL=MultipleAbstractParents$SubAbstractStringList2.js.map

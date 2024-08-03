@@ -50,6 +50,13 @@ public class MultipleAbstractParents {
   public abstract static class AbstractStringList2 extends AbstractList2<String>
       implements IStringList {}
 
+  public static class SubAbstractStringList2 extends AbstractStringList2 {
+    @Override
+    public String getFoo(String t) {
+      return null;
+    }
+  }
+
   public abstract static class AbstractStringList3 extends AbstractList2<String> {}
 
   public static class StringList extends AbstractStringList {}
