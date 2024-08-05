@@ -17,13 +17,23 @@ package j2ktnotpassing;
 
 public class LambdaReturnFromBlock {
 
-  public void foo() {
+  public void testDoWhile() {
     // TODO(b/355488953): This should generate valid Kotlin output.
     Function<Void> fn =
         () -> {
           do {
             return null;
           } while (false);
+        };
+  }
+
+  public void testSynchronized() {
+    // TODO(b/354043703): This should generate valid Kotlin output.
+    Function<Void> fn =
+        () -> {
+          synchronized (this) {
+            return null;
+          }
         };
   }
 

@@ -21,17 +21,28 @@ import javaemul.lang.*
 import java.lang.Void
 import kotlin.OptIn
 import kotlin.Suppress
+import kotlin.Unit
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
+import kotlin.synchronized
 
 @ObjCName("J2ktJ2ktnotpassingLambdaReturnFromBlock", exact = true)
 open class LambdaReturnFromBlock {
- @ObjCName("foo")
- open fun foo() {
+ @ObjCName("testDoWhile")
+ open fun testDoWhile() {
   val fn: LambdaReturnFromBlock.Function<Void?>? = LambdaReturnFromBlock.Function<Void?> {
    do {
     return@Function null
    } while (false)
+  }
+ }
+
+ @ObjCName("testSynchronized")
+ open fun testSynchronized() {
+  val fn: LambdaReturnFromBlock.Function<Void?>? = LambdaReturnFromBlock.Function<Void?> {
+   synchronized<Unit>(this) {
+    return@Function null
+   }
   }
  }
 
