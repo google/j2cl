@@ -19,6 +19,7 @@ package bridgemethods
 
 import javaemul.lang.*
 import jsinterop.annotations.JsType
+import kotlin.Any
 import kotlin.AssertionError
 import kotlin.Comparable
 import kotlin.Double
@@ -219,3 +220,26 @@ open class Consumer<T> internal constructor() {
 }
 
 open class StringConsumerImpl internal constructor(): Consumer<String?>(), StringConsumer {}
+
+abstract class SpecializingReturnAbstractClass internal constructor() {
+ @ObjCName("foo")
+ abstract fun foo(): Any?
+}
+
+fun interface SpecializingReturnInterface {
+ @ObjCName("foo")
+ fun foo(): String?
+}
+
+interface InterfaceWithDefaultMethod {
+ @ObjCName("foo")
+ fun foo(): Any? {
+  return "A"
+ }
+}
+
+fun interface InterfaceOverridingDefaultMethod: InterfaceWithDefaultMethod {
+ override fun foo(): String?
+}
+
+abstract class DoesNotInheritDefaultMethod2 internal constructor(): InterfaceOverridingDefaultMethod, InterfaceWithDefaultMethod {}

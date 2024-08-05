@@ -1,0 +1,51 @@
+goog.module('bridgemethods.DoesNotInheritDefaultMethod2$impl');
+
+const InterfaceOverridingDefaultMethod = goog.require('bridgemethods.InterfaceOverridingDefaultMethod$impl');
+const InterfaceWithDefaultMethod = goog.require('bridgemethods.InterfaceWithDefaultMethod$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ * @implements {InterfaceOverridingDefaultMethod}
+ * @implements {InterfaceWithDefaultMethod}
+ */
+class DoesNotInheritDefaultMethod2 extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__bridgemethods_DoesNotInheritDefaultMethod2__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ //Bridge method.
+ /** @final @override @nodts @return {?string} */
+ m_foo__java_lang_Object() {
+  return this.m_foo__java_lang_String();
+ }
+ /** @nodts */
+ static $clinit() {
+  DoesNotInheritDefaultMethod2.$clinit = () =>{};
+  DoesNotInheritDefaultMethod2.$loadModules();
+  j_l_Object.$clinit();
+  InterfaceWithDefaultMethod.$clinit();
+  InterfaceWithDefaultMethod.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof DoesNotInheritDefaultMethod2;
+ }
+ /** @abstract @override @nodts @return {?string} */
+ m_foo__java_lang_String() {}
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+InterfaceOverridingDefaultMethod.$markImplementor(DoesNotInheritDefaultMethod2);
+InterfaceWithDefaultMethod.$markImplementor(DoesNotInheritDefaultMethod2);
+$Util.$setClassMetadata(DoesNotInheritDefaultMethod2, 'bridgemethods.DoesNotInheritDefaultMethod2');
+
+exports = DoesNotInheritDefaultMethod2;
+
+//# sourceMappingURL=DoesNotInheritDefaultMethod2.js.map

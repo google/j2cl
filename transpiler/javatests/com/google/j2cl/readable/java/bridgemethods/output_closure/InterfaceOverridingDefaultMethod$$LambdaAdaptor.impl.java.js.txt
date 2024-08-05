@@ -1,0 +1,58 @@
+goog.module('bridgemethods.InterfaceOverridingDefaultMethod.$LambdaAdaptor$impl');
+
+const InterfaceOverridingDefaultMethod = goog.require('bridgemethods.InterfaceOverridingDefaultMethod$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let InterfaceWithDefaultMethod = goog.forwardDeclare('bridgemethods.InterfaceWithDefaultMethod$impl');
+
+/**
+ * @implements {InterfaceOverridingDefaultMethod}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function():?string */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function():?string} @nodts*/
+  this.f_fn__bridgemethods_InterfaceOverridingDefaultMethod_$LambdaAdaptor;
+  this.$ctor__bridgemethods_InterfaceOverridingDefaultMethod_$LambdaAdaptor__bridgemethods_InterfaceOverridingDefaultMethod_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__bridgemethods_InterfaceOverridingDefaultMethod_$LambdaAdaptor__bridgemethods_InterfaceOverridingDefaultMethod_$JsFunction__void(/** ?function():?string */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__bridgemethods_InterfaceOverridingDefaultMethod_$LambdaAdaptor = fn;
+ }
+ /** @override @nodts @return {?string} */
+ m_foo__java_lang_String() {
+  let /** ?function():?string */ $function;
+  return ($function = this.f_fn__bridgemethods_InterfaceOverridingDefaultMethod_$LambdaAdaptor, $function());
+ }
+ //Bridge method.
+ /** @final @override @nodts @return {?string} */
+ m_foo__java_lang_Object() {
+  return this.m_foo__java_lang_String();
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+  InterfaceWithDefaultMethod.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  InterfaceWithDefaultMethod = goog.module.get('bridgemethods.InterfaceWithDefaultMethod$impl');
+ }
+}
+InterfaceOverridingDefaultMethod.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'bridgemethods.InterfaceOverridingDefaultMethod$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=InterfaceOverridingDefaultMethod$$LambdaAdaptor.js.map

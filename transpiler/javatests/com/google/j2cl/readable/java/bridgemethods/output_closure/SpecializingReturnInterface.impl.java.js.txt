@@ -1,0 +1,42 @@
+goog.module('bridgemethods.SpecializingReturnInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('bridgemethods.SpecializingReturnInterface.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class SpecializingReturnInterface {
+ /** @abstract @nodts @return {?string} */
+ m_foo__java_lang_String() {}
+ /** @nodts @return {SpecializingReturnInterface} */
+ static $adapt(/** ?function():?string */ fn) {
+  SpecializingReturnInterface.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts */
+ static $clinit() {
+  SpecializingReturnInterface.$clinit = () =>{};
+  SpecializingReturnInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__bridgemethods_SpecializingReturnInterface = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__bridgemethods_SpecializingReturnInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('bridgemethods.SpecializingReturnInterface.$LambdaAdaptor$impl');
+ }
+}
+SpecializingReturnInterface.$markImplementor(/**@type {Function}*/ (SpecializingReturnInterface));
+$Util.$setClassMetadataForInterface(SpecializingReturnInterface, 'bridgemethods.SpecializingReturnInterface');
+
+exports = SpecializingReturnInterface;
+
+//# sourceMappingURL=SpecializingReturnInterface.js.map

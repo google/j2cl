@@ -176,3 +176,34 @@ class Consumer<T> {
 
 // Needs a specializing bridge from accept(String) to super.accept(Object).
 class StringConsumerImpl extends Consumer<String> implements StringConsumer {}
+
+// Repro for b/357041082
+abstract class SpecializingReturnAbstractClass {
+  public abstract Object foo();
+}
+
+interface SpecializingReturnInterface {
+  String foo();
+}
+
+// TODO(b/357041082): Reenable when the bug is fixed. Commented out due to wasm type errors.
+// abstract class SpecializingReturnAbstractSubClass extends SpecializingReturnAbstractClass
+//     implements SpecializingReturnInterface {}
+
+// Repro for b/357043910
+interface InterfaceWithDefaultMethod {
+  default Object foo() {
+    return "A";
+  }
+}
+
+interface InterfaceOverridingDefaultMethod extends InterfaceWithDefaultMethod {
+  String foo();
+}
+
+// TODO(b/357043910): Reenable when the bug is fixed. Commented out due to wasm type errors.
+// abstract class DoesNotInheritDefaultMethod1
+//     implements InterfaceWithDefaultMethod, InterfaceOverridingDefaultMethod {}
+
+abstract class DoesNotInheritDefaultMethod2
+    implements InterfaceOverridingDefaultMethod, InterfaceWithDefaultMethod {}

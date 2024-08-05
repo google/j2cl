@@ -1,0 +1,38 @@
+goog.module('bridgemethods.InterfaceWithDefaultMethod$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class InterfaceWithDefaultMethod {
+ /** @abstract @nodts @return {*} */
+ m_foo__java_lang_Object() {}
+ /** @nodts @return {*} */
+ static m_foo__$default__bridgemethods_InterfaceWithDefaultMethod__java_lang_Object(/** !InterfaceWithDefaultMethod */ $thisArg) {
+  InterfaceWithDefaultMethod.$clinit();
+  return 'A';
+ }
+ /** @nodts */
+ static $clinit() {
+  InterfaceWithDefaultMethod.$clinit = () =>{};
+  InterfaceWithDefaultMethod.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__bridgemethods_InterfaceWithDefaultMethod = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__bridgemethods_InterfaceWithDefaultMethod;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+InterfaceWithDefaultMethod.$markImplementor(/**@type {Function}*/ (InterfaceWithDefaultMethod));
+$Util.$setClassMetadataForInterface(InterfaceWithDefaultMethod, 'bridgemethods.InterfaceWithDefaultMethod');
+
+exports = InterfaceWithDefaultMethod;
+
+//# sourceMappingURL=InterfaceWithDefaultMethod.js.map

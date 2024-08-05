@@ -1,0 +1,38 @@
+goog.module('bridgemethods.SpecializingReturnAbstractClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ */
+class SpecializingReturnAbstractClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__bridgemethods_SpecializingReturnAbstractClass__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @abstract @nodts @return {*} */
+ m_foo__java_lang_Object() {}
+ /** @nodts */
+ static $clinit() {
+  SpecializingReturnAbstractClass.$clinit = () =>{};
+  SpecializingReturnAbstractClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SpecializingReturnAbstractClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(SpecializingReturnAbstractClass, 'bridgemethods.SpecializingReturnAbstractClass');
+
+exports = SpecializingReturnAbstractClass;
+
+//# sourceMappingURL=SpecializingReturnAbstractClass.js.map

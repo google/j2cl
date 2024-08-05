@@ -1,0 +1,48 @@
+goog.module('bridgemethods.SpecializingReturnInterface.$LambdaAdaptor$impl');
+
+const SpecializingReturnInterface = goog.require('bridgemethods.SpecializingReturnInterface$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @implements {SpecializingReturnInterface}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function():?string */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function():?string} @nodts*/
+  this.f_fn__bridgemethods_SpecializingReturnInterface_$LambdaAdaptor;
+  this.$ctor__bridgemethods_SpecializingReturnInterface_$LambdaAdaptor__bridgemethods_SpecializingReturnInterface_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__bridgemethods_SpecializingReturnInterface_$LambdaAdaptor__bridgemethods_SpecializingReturnInterface_$JsFunction__void(/** ?function():?string */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__bridgemethods_SpecializingReturnInterface_$LambdaAdaptor = fn;
+ }
+ /** @override @nodts @return {?string} */
+ m_foo__java_lang_String() {
+  let /** ?function():?string */ $function;
+  return ($function = this.f_fn__bridgemethods_SpecializingReturnInterface_$LambdaAdaptor, $function());
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+SpecializingReturnInterface.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'bridgemethods.SpecializingReturnInterface$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=SpecializingReturnInterface$$LambdaAdaptor.js.map

@@ -36,6 +36,18 @@
  ))
 )
 
+;;; Code for bridgemethods.SpecializingReturnInterface [type definition]
+(type $bridgemethods.SpecializingReturnInterface.vtable (sub (struct
+ (field $m_foo__java_lang_String (ref $function.m_foo__java_lang_String))
+ ))
+)
+
+;;; Code for bridgemethods.InterfaceWithDefaultMethod [type definition]
+(type $bridgemethods.InterfaceWithDefaultMethod.vtable (sub (struct
+ (field $m_foo__java_lang_Object (ref $function.m_foo__java_lang_Object))
+ ))
+)
+
 ;;; Code for bridgemethods.TestCase10036.BI3 [type definition]
 (type $bridgemethods.TestCase10036.BI3.vtable (sub (struct
  (field $m_get__java_lang_String__java_lang_String (ref $function.m_get__java_lang_String__java_lang_String))
@@ -222,6 +234,29 @@
  (field $vtable (ref $bridgemethods.Consumer.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
+;;; Code for bridgemethods.SpecializingReturnAbstractClass [type definition]
+(type $bridgemethods.SpecializingReturnAbstractClass.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_foo__java_lang_Object (ref $function.m_foo__java_lang_Object))
+ ))
+)
+(type $bridgemethods.SpecializingReturnAbstractClass (sub $java.lang.Object (struct
+ (field $vtable (ref $bridgemethods.SpecializingReturnAbstractClass.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
+;;; Code for bridgemethods.InterfaceOverridingDefaultMethod [type definition]
+(type $bridgemethods.InterfaceOverridingDefaultMethod.vtable (sub $bridgemethods.InterfaceWithDefaultMethod.vtable (struct
+ (field $m_foo__java_lang_Object (ref $function.m_foo__java_lang_Object))
+ (field $m_foo__java_lang_String (ref $function.m_foo__java_lang_String))
  ))
 )
 
@@ -457,6 +492,23 @@
  ))
 )
 
+;;; Code for bridgemethods.DoesNotInheritDefaultMethod2 [type definition]
+(type $bridgemethods.DoesNotInheritDefaultMethod2.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_foo__java_lang_Object (ref $function.m_foo__java_lang_Object))
+ (field $m_foo__java_lang_String (ref $function.m_foo__java_lang_String))
+ ))
+)
+(type $bridgemethods.DoesNotInheritDefaultMethod2 (sub $java.lang.Object (struct
+ (field $vtable (ref $bridgemethods.DoesNotInheritDefaultMethod2.vtable))
+ (field $itable (ref $bridgemethods.DoesNotInheritDefaultMethod2.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
 ;;; Code for bridgemethods.TestCase10036.B [type definition]
 (type $bridgemethods.TestCase10036.B.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
@@ -626,6 +678,10 @@
 
 ;;; Code for bridgemethods.StringConsumer [imports]
 
+;;; Code for bridgemethods.SpecializingReturnInterface [imports]
+
+;;; Code for bridgemethods.InterfaceWithDefaultMethod [imports]
+
 ;;; Code for bridgemethods.TestCase10036.BI3 [imports]
 
 ;;; Code for bridgemethods.TestCase10036.BI2 [imports]
@@ -658,6 +714,10 @@
 
 ;;; Code for bridgemethods.Consumer [imports]
 
+;;; Code for bridgemethods.SpecializingReturnAbstractClass [imports]
+
+;;; Code for bridgemethods.InterfaceOverridingDefaultMethod [imports]
+
 ;;; Code for bridgemethods.TestCase10036.BI1 [imports]
 
 ;;; Code for bridgemethods.TestCase102.B [imports]
@@ -689,6 +749,8 @@
 ;;; Code for bridgemethods.ReparametrerizedChild [imports]
 
 ;;; Code for bridgemethods.StringConsumerImpl [imports]
+
+;;; Code for bridgemethods.DoesNotInheritDefaultMethod2 [imports]
 
 ;;; Code for bridgemethods.TestCase10036.B [imports]
 
@@ -897,6 +959,46 @@
  (i32.const 0)
 )
 (global $$class@bridgemethods.StringConsumerImpl (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for bridgemethods.SpecializingReturnAbstractClass [static fields]
+(global $$class-initialized@bridgemethods.SpecializingReturnAbstractClass (mut i32)
+ (i32.const 0)
+)
+(global $$class@bridgemethods.SpecializingReturnAbstractClass (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for bridgemethods.SpecializingReturnInterface [static fields]
+(global $$class-initialized@bridgemethods.SpecializingReturnInterface (mut i32)
+ (i32.const 0)
+)
+(global $$class@bridgemethods.SpecializingReturnInterface (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for bridgemethods.InterfaceWithDefaultMethod [static fields]
+(global $$class-initialized@bridgemethods.InterfaceWithDefaultMethod (mut i32)
+ (i32.const 0)
+)
+(global $$class@bridgemethods.InterfaceWithDefaultMethod (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for bridgemethods.InterfaceOverridingDefaultMethod [static fields]
+(global $$class-initialized@bridgemethods.InterfaceOverridingDefaultMethod (mut i32)
+ (i32.const 0)
+)
+(global $$class@bridgemethods.InterfaceOverridingDefaultMethod (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for bridgemethods.DoesNotInheritDefaultMethod2 [static fields]
+(global $$class-initialized@bridgemethods.DoesNotInheritDefaultMethod2 (mut i32)
+ (i32.const 0)
+)
+(global $$class@bridgemethods.DoesNotInheritDefaultMethod2 (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -1690,6 +1792,82 @@
   )
   (global.set $$class@bridgemethods.StringConsumer (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|bridgemethod...|__java_lang_String_<once>_@bridgemethods.StringConsumer )))
   (return (global.get $$class@bridgemethods.StringConsumer))
+ )
+)
+
+;;; Code for bridgemethods.SpecializingReturnInterface [methods]
+
+;;; void SpecializingReturnInterface.$clinit()
+(func $$clinit__void_<once>_@bridgemethods.SpecializingReturnInterface
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:185:10
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:185:10
+  (if (global.get $$class-initialized@bridgemethods.SpecializingReturnInterface)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:185:10
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:185:10
+  (global.set $$class-initialized@bridgemethods.SpecializingReturnInterface (i32.const 1))
+ )
+)
+
+;;; Class<T> SpecializingReturnInterface.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgemethods.SpecializingReturnInterface
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgemethods.SpecializingReturnInterface)))
+   (then
+    (return (global.get $$class@bridgemethods.SpecializingReturnInterface))
+   )
+  )
+  (global.set $$class@bridgemethods.SpecializingReturnInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|bridgemethod...|__java_lang_String_<once>_@bridgemethods.SpecializingReturnInterface )))
+  (return (global.get $$class@bridgemethods.SpecializingReturnInterface))
+ )
+)
+
+;;; Code for bridgemethods.InterfaceWithDefaultMethod [methods]
+
+;;; Object InterfaceWithDefaultMethod.foo()
+(func $m_foo__java_lang_Object@bridgemethods.InterfaceWithDefaultMethod
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:195:17
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:196:4
+  (return (call $$getString_|A|__java_lang_String_<once>_@bridgemethods.InterfaceWithDefaultMethod ))
+ )
+)
+(elem declare func $m_foo__java_lang_Object@bridgemethods.InterfaceWithDefaultMethod)
+
+;;; void InterfaceWithDefaultMethod.$clinit()
+(func $$clinit__void_<once>_@bridgemethods.InterfaceWithDefaultMethod
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:194:10
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:194:10
+  (if (global.get $$class-initialized@bridgemethods.InterfaceWithDefaultMethod)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:194:10
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:194:10
+  (global.set $$class-initialized@bridgemethods.InterfaceWithDefaultMethod (i32.const 1))
+ )
+)
+
+;;; Class<T> InterfaceWithDefaultMethod.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgemethods.InterfaceWithDefaultMethod
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgemethods.InterfaceWithDefaultMethod)))
+   (then
+    (return (global.get $$class@bridgemethods.InterfaceWithDefaultMethod))
+   )
+  )
+  (global.set $$class@bridgemethods.InterfaceWithDefaultMethod (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|bridgemethod...|__java_lang_String_<once>_@bridgemethods.InterfaceWithDefaultMethod )))
+  (return (global.get $$class@bridgemethods.InterfaceWithDefaultMethod))
  )
 )
 
@@ -2789,6 +2967,84 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@bridgemethods.Consumer)
+
+;;; Code for bridgemethods.SpecializingReturnAbstractClass [methods]
+
+;;; void SpecializingReturnAbstractClass.$ctor()
+(func $$ctor__void_$p_bridgemethods_SpecializingReturnAbstractClass@bridgemethods.SpecializingReturnAbstractClass
+ (param $this (ref null $bridgemethods.SpecializingReturnAbstractClass))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:181:15
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:181:15
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void SpecializingReturnAbstractClass.$clinit()
+(func $$clinit__void_<once>_@bridgemethods.SpecializingReturnAbstractClass
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:181:15
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:181:15
+  (if (global.get $$class-initialized@bridgemethods.SpecializingReturnAbstractClass)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:181:15
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:181:15
+  (global.set $$class-initialized@bridgemethods.SpecializingReturnAbstractClass (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:181:15
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> SpecializingReturnAbstractClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgemethods.SpecializingReturnAbstractClass
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgemethods.SpecializingReturnAbstractClass)))
+   (then
+    (return (global.get $$class@bridgemethods.SpecializingReturnAbstractClass))
+   )
+  )
+  (global.set $$class@bridgemethods.SpecializingReturnAbstractClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|bridgemethod...|__java_lang_String_<once>_@bridgemethods.SpecializingReturnAbstractClass )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@bridgemethods.SpecializingReturnAbstractClass))
+ )
+)
+
+;;; Code for bridgemethods.InterfaceOverridingDefaultMethod [methods]
+
+;;; void InterfaceOverridingDefaultMethod.$clinit()
+(func $$clinit__void_<once>_@bridgemethods.InterfaceOverridingDefaultMethod
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:200:10
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:200:10
+  (if (global.get $$class-initialized@bridgemethods.InterfaceOverridingDefaultMethod)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:200:10
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:200:10
+  (global.set $$class-initialized@bridgemethods.InterfaceOverridingDefaultMethod (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:200:10
+  (call $$clinit__void_<once>_@bridgemethods.InterfaceWithDefaultMethod )
+ )
+)
+
+;;; Class<T> InterfaceOverridingDefaultMethod.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgemethods.InterfaceOverridingDefaultMethod
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgemethods.InterfaceOverridingDefaultMethod)))
+   (then
+    (return (global.get $$class@bridgemethods.InterfaceOverridingDefaultMethod))
+   )
+  )
+  (global.set $$class@bridgemethods.InterfaceOverridingDefaultMethod (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|bridgemethod...|__java_lang_String_<once>_@bridgemethods.InterfaceOverridingDefaultMethod )))
+  (return (global.get $$class@bridgemethods.InterfaceOverridingDefaultMethod))
+ )
+)
 
 ;;; Code for bridgemethods.TestCase10036.BI1 [methods]
 
@@ -4077,6 +4333,69 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@bridgemethods.StringConsumerImpl)
+
+;;; Code for bridgemethods.DoesNotInheritDefaultMethod2 [methods]
+
+;;; void DoesNotInheritDefaultMethod2.$ctor()
+(func $$ctor__void_$p_bridgemethods_DoesNotInheritDefaultMethod2@bridgemethods.DoesNotInheritDefaultMethod2
+ (param $this (ref null $bridgemethods.DoesNotInheritDefaultMethod2))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:208:15
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:208:15
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; String DoesNotInheritDefaultMethod2.foo()
+(func $m_foo__java_lang_Object@bridgemethods.DoesNotInheritDefaultMethod2
+ (type $function.m_foo__java_lang_Object)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:208:15
+ (local $this (ref null $bridgemethods.DoesNotInheritDefaultMethod2))
+ (local.set $this (ref.cast (ref $bridgemethods.DoesNotInheritDefaultMethod2) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:208:15
+  (return (call_ref $function.m_foo__java_lang_String (ref.as_non_null (local.get $this))(struct.get $bridgemethods.DoesNotInheritDefaultMethod2.vtable $m_foo__java_lang_String (struct.get $bridgemethods.DoesNotInheritDefaultMethod2 $vtable(local.get $this)))))
+ )
+)
+(elem declare func $m_foo__java_lang_Object@bridgemethods.DoesNotInheritDefaultMethod2)
+
+;;; void DoesNotInheritDefaultMethod2.$clinit()
+(func $$clinit__void_<once>_@bridgemethods.DoesNotInheritDefaultMethod2
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:208:15
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:208:15
+  (if (global.get $$class-initialized@bridgemethods.DoesNotInheritDefaultMethod2)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:208:15
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:208:15
+  (global.set $$class-initialized@bridgemethods.DoesNotInheritDefaultMethod2 (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:208:15
+  (call $$clinit__void_<once>_@java.lang.Object )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:208:15
+  (call $$clinit__void_<once>_@bridgemethods.InterfaceWithDefaultMethod )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:208:15
+  (call $$clinit__void_<once>_@bridgemethods.InterfaceWithDefaultMethod )
+ )
+)
+
+;;; Class<T> DoesNotInheritDefaultMethod2.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgemethods.DoesNotInheritDefaultMethod2
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgemethods.DoesNotInheritDefaultMethod2)))
+   (then
+    (return (global.get $$class@bridgemethods.DoesNotInheritDefaultMethod2))
+   )
+  )
+  (global.set $$class@bridgemethods.DoesNotInheritDefaultMethod2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|bridgemethod...|__java_lang_String_<once>_@bridgemethods.DoesNotInheritDefaultMethod2 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@bridgemethods.DoesNotInheritDefaultMethod2))
+ )
+)
 
 ;;; Code for bridgemethods.TestCase10036.B [methods]
 
