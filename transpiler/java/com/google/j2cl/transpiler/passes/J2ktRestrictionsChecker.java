@@ -95,6 +95,11 @@ public final class J2ktRestrictionsChecker {
           }
 
           private void checkNullMarked(Type type) {
+            // Don't check for NullMarked in our own integration and readable tests where this is
+            // often intentionally omitted.
+            if (isFromJ2clReadableOrIntegrationTest(type)) {
+              return;
+            }
             if (!type.getDeclaration().isNullMarked() && !type.getDeclaration().isAnnotation()) {
               problems.warning(
                   type.getSourcePosition(),
@@ -220,5 +225,12 @@ public final class J2ktRestrictionsChecker {
     }
 
     return Visibility.PUBLIC;
+  }
+
+  private static boolean isFromJ2clReadableOrIntegrationTest(Type type) {
+    String sourceFilePath = type.getSourcePosition().getFilePath();
+    return sourceFilePath != null
+        && (sourceFilePath.contains("javatests/com/google/j2cl/integration")
+            || sourceFilePath.contains("javatests/com/google/j2cl/readable"));
   }
 }
