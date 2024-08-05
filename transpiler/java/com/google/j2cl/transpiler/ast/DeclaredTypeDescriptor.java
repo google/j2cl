@@ -896,6 +896,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         // introduced by this interface, or default methods that will need to replace an overridden
         // (default) method.
         if (overriddenMethod == null
+            || isSpecializingAbstractMethodReturnType(methodDescriptor, overriddenMethod)
             || isOverridingDefaultMethod(methodDescriptor, overriddenMethod)) {
           targetByOverrideKey.put(overrideKey, methodDescriptor);
         }
@@ -903,6 +904,32 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     }
 
     return targetByOverrideKey;
+  }
+
+  /**
+   * Returns true if {@code candidateMethod} specializes the return of abstract method {@code
+   * method}.
+   *
+   * <p>When many abstract methods are involved, there is an ambiguity on which is the right method
+   * to be the target of an override signature. This happens because the return type can be
+   * specialized by any of them, and the right target is that one with the more specific return
+   * type.
+   */
+  private static boolean isSpecializingAbstractMethodReturnType(
+      MethodDescriptor candidateMethod, MethodDescriptor method) {
+    if (!method.isAbstract()) {
+      return false;
+    }
+
+    TypeDescriptor returnTypeDescriptor =
+        candidateMethod.getReturnTypeDescriptor().toRawTypeDescriptor();
+    TypeDescriptor overriddenReturnTypeDescriptor =
+        method.getReturnTypeDescriptor().toRawTypeDescriptor();
+
+    if (returnTypeDescriptor.isSameBaseType(overriddenReturnTypeDescriptor)) {
+      return false;
+    }
+    return returnTypeDescriptor.isAssignableTo(overriddenReturnTypeDescriptor);
   }
 
   /**

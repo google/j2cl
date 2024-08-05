@@ -243,3 +243,5 @@ fun interface InterfaceOverridingDefaultMethod: InterfaceWithDefaultMethod {
 }
 
 abstract class DoesNotInheritDefaultMethod2 internal constructor(): InterfaceOverridingDefaultMethod, InterfaceWithDefaultMethod {}
+
+abstract class SpecializingReturnAbstractSubclass internal constructor(): SpecializingReturnAbstractClass(), SpecializingReturnInterface {}

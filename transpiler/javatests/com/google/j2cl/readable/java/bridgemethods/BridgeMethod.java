@@ -207,3 +207,8 @@ interface InterfaceOverridingDefaultMethod extends InterfaceWithDefaultMethod {
 
 abstract class DoesNotInheritDefaultMethod2
     implements InterfaceOverridingDefaultMethod, InterfaceWithDefaultMethod {}
+
+abstract class SpecializingReturnAbstractSubclass extends SpecializingReturnAbstractClass
+    implements SpecializingReturnInterface {
+  // foo(Object) should be a bridge method.
+}

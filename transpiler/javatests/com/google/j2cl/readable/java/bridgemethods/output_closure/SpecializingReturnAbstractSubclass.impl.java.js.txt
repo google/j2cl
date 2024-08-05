@@ -1,0 +1,46 @@
+goog.module('bridgemethods.SpecializingReturnAbstractSubclass$impl');
+
+const SpecializingReturnAbstractClass = goog.require('bridgemethods.SpecializingReturnAbstractClass$impl');
+const SpecializingReturnInterface = goog.require('bridgemethods.SpecializingReturnInterface$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ * @implements {SpecializingReturnInterface}
+ */
+class SpecializingReturnAbstractSubclass extends SpecializingReturnAbstractClass {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__bridgemethods_SpecializingReturnAbstractSubclass__void() {
+  this.$ctor__bridgemethods_SpecializingReturnAbstractClass__void();
+ }
+ //Bridge method.
+ /** @final @override @nodts @return {?string} */
+ m_foo__java_lang_Object() {
+  return this.m_foo__java_lang_String();
+ }
+ /** @nodts */
+ static $clinit() {
+  SpecializingReturnAbstractSubclass.$clinit = () =>{};
+  SpecializingReturnAbstractSubclass.$loadModules();
+  SpecializingReturnAbstractClass.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SpecializingReturnAbstractSubclass;
+ }
+ /** @abstract @override @nodts @return {?string} */
+ m_foo__java_lang_String() {}
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+SpecializingReturnInterface.$markImplementor(SpecializingReturnAbstractSubclass);
+$Util.$setClassMetadata(SpecializingReturnAbstractSubclass, 'bridgemethods.SpecializingReturnAbstractSubclass');
+
+exports = SpecializingReturnAbstractSubclass;
+
+//# sourceMappingURL=SpecializingReturnAbstractSubclass.js.map

@@ -509,6 +509,23 @@
  ))
 )
 
+;;; Code for bridgemethods.SpecializingReturnAbstractSubclass [type definition]
+(type $bridgemethods.SpecializingReturnAbstractSubclass.vtable (sub $bridgemethods.SpecializingReturnAbstractClass.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_foo__java_lang_Object (ref $function.m_foo__java_lang_Object))
+ (field $m_foo__java_lang_String (ref $function.m_foo__java_lang_String))
+ ))
+)
+(type $bridgemethods.SpecializingReturnAbstractSubclass (sub $bridgemethods.SpecializingReturnAbstractClass (struct
+ (field $vtable (ref $bridgemethods.SpecializingReturnAbstractSubclass.vtable))
+ (field $itable (ref $bridgemethods.SpecializingReturnAbstractSubclass.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
 ;;; Code for bridgemethods.TestCase10036.B [type definition]
 (type $bridgemethods.TestCase10036.B.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
@@ -751,6 +768,8 @@
 ;;; Code for bridgemethods.StringConsumerImpl [imports]
 
 ;;; Code for bridgemethods.DoesNotInheritDefaultMethod2 [imports]
+
+;;; Code for bridgemethods.SpecializingReturnAbstractSubclass [imports]
 
 ;;; Code for bridgemethods.TestCase10036.B [imports]
 
@@ -999,6 +1018,14 @@
  (i32.const 0)
 )
 (global $$class@bridgemethods.DoesNotInheritDefaultMethod2 (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for bridgemethods.SpecializingReturnAbstractSubclass [static fields]
+(global $$class-initialized@bridgemethods.SpecializingReturnAbstractSubclass (mut i32)
+ (i32.const 0)
+)
+(global $$class@bridgemethods.SpecializingReturnAbstractSubclass (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -4394,6 +4421,65 @@
   )
   (global.set $$class@bridgemethods.DoesNotInheritDefaultMethod2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|bridgemethod...|__java_lang_String_<once>_@bridgemethods.DoesNotInheritDefaultMethod2 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@bridgemethods.DoesNotInheritDefaultMethod2))
+ )
+)
+
+;;; Code for bridgemethods.SpecializingReturnAbstractSubclass [methods]
+
+;;; void SpecializingReturnAbstractSubclass.$ctor()
+(func $$ctor__void_$p_bridgemethods_SpecializingReturnAbstractSubclass@bridgemethods.SpecializingReturnAbstractSubclass
+ (param $this (ref null $bridgemethods.SpecializingReturnAbstractSubclass))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:211:15
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:211:15
+  (call $$ctor__void_$p_bridgemethods_SpecializingReturnAbstractClass@bridgemethods.SpecializingReturnAbstractClass (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; String SpecializingReturnAbstractSubclass.foo()
+(func $m_foo__java_lang_Object@bridgemethods.SpecializingReturnAbstractSubclass
+ (type $function.m_foo__java_lang_Object)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:211:15
+ (local $this (ref null $bridgemethods.SpecializingReturnAbstractSubclass))
+ (local.set $this (ref.cast (ref $bridgemethods.SpecializingReturnAbstractSubclass) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:211:15
+  (return (call_ref $function.m_foo__java_lang_String (ref.as_non_null (local.get $this))(struct.get $bridgemethods.SpecializingReturnAbstractSubclass.vtable $m_foo__java_lang_String (struct.get $bridgemethods.SpecializingReturnAbstractSubclass $vtable(local.get $this)))))
+ )
+)
+(elem declare func $m_foo__java_lang_Object@bridgemethods.SpecializingReturnAbstractSubclass)
+
+;;; void SpecializingReturnAbstractSubclass.$clinit()
+(func $$clinit__void_<once>_@bridgemethods.SpecializingReturnAbstractSubclass
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:211:15
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:211:15
+  (if (global.get $$class-initialized@bridgemethods.SpecializingReturnAbstractSubclass)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:211:15
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:211:15
+  (global.set $$class-initialized@bridgemethods.SpecializingReturnAbstractSubclass (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:211:15
+  (call $$clinit__void_<once>_@bridgemethods.SpecializingReturnAbstractClass )
+ )
+)
+
+;;; Class<T> SpecializingReturnAbstractSubclass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgemethods.SpecializingReturnAbstractSubclass
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgemethods.SpecializingReturnAbstractSubclass)))
+   (then
+    (return (global.get $$class@bridgemethods.SpecializingReturnAbstractSubclass))
+   )
+  )
+  (global.set $$class@bridgemethods.SpecializingReturnAbstractSubclass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|bridgemethod...|__java_lang_String_<once>_@bridgemethods.SpecializingReturnAbstractSubclass )(call $$getClassMetadata__java_lang_Class_<once>_@bridgemethods.SpecializingReturnAbstractClass )))
+  (return (global.get $$class@bridgemethods.SpecializingReturnAbstractSubclass))
  )
 )
 
