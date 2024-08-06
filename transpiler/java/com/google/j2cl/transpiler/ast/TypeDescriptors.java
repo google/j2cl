@@ -73,6 +73,9 @@ public class TypeDescriptors {
   @QualifiedBinaryName("java.lang.NullPointerException")
   public DeclaredTypeDescriptor javaLangNullPointerException;
 
+  @QualifiedBinaryName("java.lang.AssertionError")
+  public DeclaredTypeDescriptor javaLangAssertionError;
+
   public DeclaredTypeDescriptor javaLangNumber;
   public DeclaredTypeDescriptor javaLangObject;
   public DeclaredTypeDescriptor javaLangRunnable;

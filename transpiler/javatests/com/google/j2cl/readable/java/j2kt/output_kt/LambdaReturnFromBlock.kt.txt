@@ -1,4 +1,4 @@
-// Generated from "j2ktnotpassing/LambdaReturnFromBlock.java"
+// Generated from "j2kt/LambdaReturnFromBlock.java"
 @file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
@@ -15,10 +15,12 @@
  "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
  "VARIABLE_WITH_REDUNDANT_INITIALIZER")
 
-package j2ktnotpassing
+package j2kt
 
 import javaemul.lang.*
+import java.lang.AssertionError
 import java.lang.Void
+import javaemul.lang.J2ktMonitor
 import kotlin.OptIn
 import kotlin.Suppress
 import kotlin.Unit
@@ -26,7 +28,7 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 import kotlin.synchronized
 
-@ObjCName("J2ktJ2ktnotpassingLambdaReturnFromBlock", exact = true)
+@ObjCName("J2ktJ2ktLambdaReturnFromBlock", exact = true)
 open class LambdaReturnFromBlock {
  @ObjCName("testDoWhile")
  open fun testDoWhile() {
@@ -34,16 +36,23 @@ open class LambdaReturnFromBlock {
    do {
     return@Function null
    } while (false)
+   throw AssertionError("Unreachable")
   }
  }
 
  @ObjCName("testSynchronized")
  open fun testSynchronized() {
   val fn: LambdaReturnFromBlock.Function<Void?>? = LambdaReturnFromBlock.Function<Void?> {
-   synchronized<Unit>(this) {
+   synchronized<Unit>(LambdaReturnFromBlock.lock!!) {
     return@Function null
    }
+   throw AssertionError("Unreachable")
   }
+ }
+
+ @ObjCName("J2ktJ2ktLambdaReturnFromBlockCompanion", exact = true)
+ companion object {
+  private val lock: J2ktMonitor? = J2ktMonitor()
  }
 
  fun interface Function<O> {

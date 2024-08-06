@@ -13,12 +13,13 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package j2ktnotpassing;
+package j2kt;
+
+import javaemul.lang.J2ktMonitor;
 
 public class LambdaReturnFromBlock {
 
   public void testDoWhile() {
-    // TODO(b/355488953): This should generate valid Kotlin output.
     Function<Void> fn =
         () -> {
           do {
@@ -27,11 +28,12 @@ public class LambdaReturnFromBlock {
         };
   }
 
+  private static final J2ktMonitor lock = new J2ktMonitor();
+
   public void testSynchronized() {
-    // TODO(b/354043703): This should generate valid Kotlin output.
     Function<Void> fn =
         () -> {
-          synchronized (this) {
+          synchronized (lock) {
             return null;
           }
         };

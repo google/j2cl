@@ -85,6 +85,7 @@ import com.google.j2cl.transpiler.passes.InsertStringConversions;
 import com.google.j2cl.transpiler.passes.InsertStringConversionsJ2kt;
 import com.google.j2cl.transpiler.passes.InsertTypeAnnotationOnGenericReturnTypes;
 import com.google.j2cl.transpiler.passes.InsertUnboxingConversions;
+import com.google.j2cl.transpiler.passes.InsertUnreachableAssertionErrors;
 import com.google.j2cl.transpiler.passes.InsertWideningPrimitiveConversions;
 import com.google.j2cl.transpiler.passes.InsertWideningPrimitiveConversionsJ2kt;
 import com.google.j2cl.transpiler.passes.J2ktRestrictionsChecker;
@@ -739,6 +740,7 @@ public enum Backend {
           NormalizeArrayCreationsJ2kt::new,
           OptimizeImplicitSuperCalls::new,
           OptimizeImplicitConstructors::new,
+          InsertUnreachableAssertionErrors::new,
 
           // Verification
           VerifySingleAstReference::new,
