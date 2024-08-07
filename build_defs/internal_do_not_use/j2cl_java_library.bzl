@@ -8,6 +8,16 @@ load(":j2kt_import.bzl", "create_J2ktInfo_for_java_import")
 load(":provider.bzl", "J2clInfo", "J2ktInfo")
 
 def _impl_j2cl_library(ctx):
+    extra_javacopts = [
+        # Dagger fast-init is more code size optimal for web, so enable it by default.
+        "-Adagger.fastInit=enabled",
+        # Disable ThreadSafe checker since we don't support multi-threading and can cause annoyance
+        # to users with AutoFactory (http://yaqs/9094400422428278784#a1n2).
+        "-Xep:ThreadSafe:OFF",
+    ]
+    if ctx.attr.optimize_autovalue:
+        extra_javacopts.append("-Acom.google.auto.value.OmitIdentifiers")
+
     if ctx.attr.j2kt_web_experiment_enabled:
         jvm_srcs, js_srcs = split_srcs(ctx.files.srcs)
 
@@ -20,7 +30,7 @@ def _impl_j2cl_library(ctx):
             plugins = _javaplugin_providers_of(ctx.attr.plugins),
             exported_plugins = _javaplugin_providers_of(ctx.attr.exported_plugins),
             output_jar = ctx.actions.declare_file(ctx.label.name + "_j2kt_web_jvm.jar"),
-            javac_opts = ctx.attr.javacopts,
+            javac_opts = extra_javacopts + ctx.attr.javacopts,
             strip_annotation = "GwtIncompatible",
             # TODO(b/322906767): Remove when the bug is fixed.
             custom_args = [
@@ -39,16 +49,6 @@ def _impl_j2cl_library(ctx):
         j2kt_provider = []
         srcs = ctx.files.srcs
         kt_common_srcs = ctx.files.kt_common_srcs
-
-    extra_javacopts = [
-        # Dagger fast-init is more code size optimal for web, so enable it by default.
-        "-Adagger.fastInit=enabled",
-        # Disable ThreadSafe checker since we don't support multi-threading and can cause annoyance
-        # to users with AutoFactory (http://yaqs/9094400422428278784#a1n2).
-        "-Xep:ThreadSafe:OFF",
-    ]
-    if ctx.attr.optimize_autovalue:
-        extra_javacopts.append("-Acom.google.auto.value.OmitIdentifiers")
 
     # Restrict the usage of kotlincopts to internal-only callers.
     # TODO(b/240682589): Setup a way for users to safely pass in flags.
