@@ -85,7 +85,6 @@ public class TypeDescriptors {
 
   public DeclaredTypeDescriptor javaUtilArrays;
   public DeclaredTypeDescriptor javaUtilCollection;
-  public DeclaredTypeDescriptor javaUtilIterator;
   public DeclaredTypeDescriptor javaUtilMap;
   public DeclaredTypeDescriptor javaUtilObjects;
 
