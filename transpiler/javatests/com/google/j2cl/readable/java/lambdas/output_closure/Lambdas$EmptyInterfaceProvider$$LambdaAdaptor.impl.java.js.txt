@@ -1,0 +1,50 @@
+goog.module('lambdas.Lambdas.EmptyInterfaceProvider.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const EmptyInterfaceProvider = goog.require('lambdas.Lambdas.EmptyInterfaceProvider$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let EmptyInterface = goog.forwardDeclare('lambdas.Lambdas.EmptyInterface$impl');
+
+/**
+ * @implements {EmptyInterfaceProvider}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function():EmptyInterface */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function():EmptyInterface} @nodts*/
+  this.f_fn__lambdas_Lambdas_EmptyInterfaceProvider_$LambdaAdaptor;
+  this.$ctor__lambdas_Lambdas_EmptyInterfaceProvider_$LambdaAdaptor__lambdas_Lambdas_EmptyInterfaceProvider_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__lambdas_Lambdas_EmptyInterfaceProvider_$LambdaAdaptor__lambdas_Lambdas_EmptyInterfaceProvider_$JsFunction__void(/** ?function():EmptyInterface */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__lambdas_Lambdas_EmptyInterfaceProvider_$LambdaAdaptor = fn;
+ }
+ /** @override @nodts @return {EmptyInterface} */
+ m_provide__lambdas_Lambdas_EmptyInterface() {
+  let /** ?function():EmptyInterface */ $function;
+  return ($function = this.f_fn__lambdas_Lambdas_EmptyInterfaceProvider_$LambdaAdaptor, $function());
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+EmptyInterfaceProvider.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'lambdas.Lambdas$EmptyInterfaceProvider$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=Lambdas$EmptyInterfaceProvider$$LambdaAdaptor.js.map

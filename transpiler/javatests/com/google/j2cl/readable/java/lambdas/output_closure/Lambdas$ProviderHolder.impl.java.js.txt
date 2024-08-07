@@ -1,0 +1,74 @@
+goog.module('lambdas.Lambdas.ProviderHolder$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let EmptyInterface = goog.forwardDeclare('lambdas.Lambdas.EmptyInterface$impl');
+let EmptyInterfaceProvider = goog.forwardDeclare('lambdas.Lambdas.EmptyInterfaceProvider$impl');
+let $1 = goog.forwardDeclare('lambdas.Lambdas.ProviderHolder.$1$impl');
+let $2 = goog.forwardDeclare('lambdas.Lambdas.ProviderHolder.$2$impl');
+
+class ProviderHolder extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!ProviderHolder} */
+ static $create__() {
+  ProviderHolder.$clinit();
+  let $instance = new ProviderHolder();
+  $instance.$ctor__lambdas_Lambdas_ProviderHolder__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__lambdas_Lambdas_ProviderHolder__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {EmptyInterface} */
+ static get f_emptyInterface__lambdas_Lambdas_ProviderHolder() {
+  return (ProviderHolder.$clinit(), ProviderHolder.$static_emptyInterface__lambdas_Lambdas_ProviderHolder);
+ }
+ /** @nodts @return {EmptyInterfaceProvider} */
+ static get f_provideFromField__lambdas_Lambdas_ProviderHolder() {
+  return (ProviderHolder.$clinit(), ProviderHolder.$static_provideFromField__lambdas_Lambdas_ProviderHolder);
+ }
+ /** @nodts @return {EmptyInterfaceProvider} */
+ static get f_provideFromAnonImpl__lambdas_Lambdas_ProviderHolder() {
+  return (ProviderHolder.$clinit(), ProviderHolder.$static_provideFromAnonImpl__lambdas_Lambdas_ProviderHolder);
+ }
+ /** @nodts */
+ static $clinit() {
+  ProviderHolder.$clinit = () =>{};
+  ProviderHolder.$loadModules();
+  j_l_Object.$clinit();
+  ProviderHolder.$static_emptyInterface__lambdas_Lambdas_ProviderHolder = $1.$create__();
+  ProviderHolder.$static_provideFromField__lambdas_Lambdas_ProviderHolder = EmptyInterfaceProvider.$adapt(() =>{
+   return ProviderHolder.$static_emptyInterface__lambdas_Lambdas_ProviderHolder;
+  });
+  ProviderHolder.$static_provideFromAnonImpl__lambdas_Lambdas_ProviderHolder = EmptyInterfaceProvider.$adapt(() =>{
+   return $2.$create__();
+  });
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ProviderHolder;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  EmptyInterfaceProvider = goog.module.get('lambdas.Lambdas.EmptyInterfaceProvider$impl');
+  $1 = goog.module.get('lambdas.Lambdas.ProviderHolder.$1$impl');
+  $2 = goog.module.get('lambdas.Lambdas.ProviderHolder.$2$impl');
+ }
+}
+/**@private {EmptyInterface} @nodts*/
+ProviderHolder.$static_emptyInterface__lambdas_Lambdas_ProviderHolder;
+/**@private {EmptyInterfaceProvider} @nodts*/
+ProviderHolder.$static_provideFromField__lambdas_Lambdas_ProviderHolder;
+/**@private {EmptyInterfaceProvider} @nodts*/
+ProviderHolder.$static_provideFromAnonImpl__lambdas_Lambdas_ProviderHolder;
+$Util.$setClassMetadata(ProviderHolder, 'lambdas.Lambdas$ProviderHolder');
+
+exports = ProviderHolder;
+
+//# sourceMappingURL=Lambdas$ProviderHolder.js.map

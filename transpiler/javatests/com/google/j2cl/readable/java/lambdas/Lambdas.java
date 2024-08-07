@@ -350,5 +350,17 @@ public class Lambdas {
       Runnable r = () -> super.m();
     }
   }
+
+  interface EmptyInterface {}
+
+  interface EmptyInterfaceProvider {
+    EmptyInterface provide();
+  }
+
+  static class ProviderHolder {
+    public static final EmptyInterface emptyInterface = new EmptyInterface() {};
+    public static final EmptyInterfaceProvider provideFromField = () -> emptyInterface;
+    public static final EmptyInterfaceProvider provideFromAnonImpl = () -> new EmptyInterface() {};
+  }
 }
 

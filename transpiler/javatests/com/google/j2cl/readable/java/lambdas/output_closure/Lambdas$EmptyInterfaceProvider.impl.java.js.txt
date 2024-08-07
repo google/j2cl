@@ -1,0 +1,43 @@
+goog.module('lambdas.Lambdas.EmptyInterfaceProvider$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let EmptyInterface = goog.forwardDeclare('lambdas.Lambdas.EmptyInterface$impl');
+let $LambdaAdaptor = goog.forwardDeclare('lambdas.Lambdas.EmptyInterfaceProvider.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class EmptyInterfaceProvider {
+ /** @abstract @nodts @return {EmptyInterface} */
+ m_provide__lambdas_Lambdas_EmptyInterface() {}
+ /** @nodts @return {EmptyInterfaceProvider} */
+ static $adapt(/** ?function():EmptyInterface */ fn) {
+  EmptyInterfaceProvider.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts */
+ static $clinit() {
+  EmptyInterfaceProvider.$clinit = () =>{};
+  EmptyInterfaceProvider.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__lambdas_Lambdas_EmptyInterfaceProvider = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__lambdas_Lambdas_EmptyInterfaceProvider;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('lambdas.Lambdas.EmptyInterfaceProvider.$LambdaAdaptor$impl');
+ }
+}
+EmptyInterfaceProvider.$markImplementor(/**@type {Function}*/ (EmptyInterfaceProvider));
+$Util.$setClassMetadataForInterface(EmptyInterfaceProvider, 'lambdas.Lambdas$EmptyInterfaceProvider');
+
+exports = EmptyInterfaceProvider;
+
+//# sourceMappingURL=Lambdas$EmptyInterfaceProvider.js.map

@@ -483,4 +483,28 @@ open class Lambdas {
    }
   }
  }
+
+ interface EmptyInterface {}
+
+ fun interface EmptyInterfaceProvider {
+  @ObjCName("provide")
+  fun provide(): Lambdas.EmptyInterface?
+ }
+
+ open class ProviderHolder internal constructor() {
+  companion object {
+   @JvmField
+   val emptyInterface: Lambdas.EmptyInterface? = object : Lambdas.EmptyInterface {}
+
+   @JvmField
+   val provideFromField: Lambdas.EmptyInterfaceProvider? = Lambdas.EmptyInterfaceProvider {
+    return@EmptyInterfaceProvider Lambdas.ProviderHolder.emptyInterface
+   }
+
+   @JvmField
+   val provideFromAnonImpl: Lambdas.EmptyInterfaceProvider? = Lambdas.EmptyInterfaceProvider {
+    return@EmptyInterfaceProvider object : Lambdas.EmptyInterface {}
+   }
+  }
+ }
 }
