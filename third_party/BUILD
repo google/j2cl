@@ -18,6 +18,11 @@ alias(
     actual = "@com_google_code_findbugs_jsr305",
 )
 
+j2cl_import(
+    name = "jsr305_annotations-j2cl",
+    jar = "@com_google_code_findbugs_jsr305//jar",
+)
+
 alias(
     name = "j2objc_annotations",
     actual = "@j2objc_annotations",
