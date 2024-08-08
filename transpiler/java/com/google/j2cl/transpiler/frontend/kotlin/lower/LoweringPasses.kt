@@ -114,7 +114,6 @@ private val loweringPassFactories: List<J2clLoweringPassFactory> = buildList {
   // keeping the returned value and lower return statements inside the block to break statement.
   add(::ReturnableBlockLowering)
   // Optimize for loops on arrays and integer like progressions.
-
   add(::ForLoopsLowering)
   // Replace null varargs with empty array calls.
   add(::EmptyVarargLowering)
@@ -185,6 +184,8 @@ private val loweringPassFactories: List<J2clLoweringPassFactory> = buildList {
   add(::MangleWellKnownShadowingFunctionsLowering)
   // Removes enum super constructor calls and cleans up effectively empty constructors.
   add(::EnumClassConstructorLowering)
+  // Implement enumEntries intrinsic. Must run after function inlining.
+  add(::EnumEntriesIntrinsicLowering)
 
   // BLOCK DECOMPOSITION
   // Transforms statement-like-expression nodes into pure-statement. This should be the last
