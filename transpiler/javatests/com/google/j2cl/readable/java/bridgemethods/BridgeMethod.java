@@ -186,9 +186,10 @@ interface SpecializingReturnInterface {
   String foo();
 }
 
-// TODO(b/357041082): Reenable when the bug is fixed. Commented out due to wasm type errors.
-// abstract class SpecializingReturnAbstractSubClass extends SpecializingReturnAbstractClass
-//     implements SpecializingReturnInterface {}
+abstract class SpecializingReturnAbstractSubclass extends SpecializingReturnAbstractClass
+    implements SpecializingReturnInterface {
+  // foo(Object) should be a bridge method.
+}
 
 // Repro for b/357043910
 interface InterfaceWithDefaultMethod {
@@ -201,14 +202,8 @@ interface InterfaceOverridingDefaultMethod extends InterfaceWithDefaultMethod {
   String foo();
 }
 
-// TODO(b/357043910): Reenable when the bug is fixed. Commented out due to wasm type errors.
-// abstract class DoesNotInheritDefaultMethod1
-//     implements InterfaceWithDefaultMethod, InterfaceOverridingDefaultMethod {}
+abstract class DoesNotInheritDefaultMethod1
+    implements InterfaceWithDefaultMethod, InterfaceOverridingDefaultMethod {}
 
 abstract class DoesNotInheritDefaultMethod2
     implements InterfaceOverridingDefaultMethod, InterfaceWithDefaultMethod {}
-
-abstract class SpecializingReturnAbstractSubclass extends SpecializingReturnAbstractClass
-    implements SpecializingReturnInterface {
-  // foo(Object) should be a bridge method.
-}

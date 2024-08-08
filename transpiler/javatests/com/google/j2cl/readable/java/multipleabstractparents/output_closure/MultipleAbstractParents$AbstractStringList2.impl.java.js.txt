@@ -4,6 +4,9 @@ const AbstractList2 = goog.require('multipleabstractparents.MultipleAbstractPare
 const IStringList = goog.require('multipleabstractparents.MultipleAbstractParents.IStringList$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
 /**
  * @abstract
  * @extends {AbstractList2<?string>}
@@ -20,8 +23,8 @@ class AbstractStringList2 extends AbstractList2 {
  }
  //Bridge method.
  /** @final @override @nodts @return {?string} */
- m_getFoo__java_lang_String__java_lang_String(/** ?string */ arg0) {
-  return this.m_getFoo__java_lang_Object__java_lang_String(arg0);
+ m_getFoo__java_lang_Object__java_lang_String(/** ?string */ arg0) {
+  return this.m_getFoo__java_lang_String__java_lang_String(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
  }
  /** @nodts */
  static $clinit() {
@@ -34,10 +37,13 @@ class AbstractStringList2 extends AbstractList2 {
   return instance instanceof AbstractStringList2;
  }
  /** @abstract @override @nodts @return {?string} */
- m_getFoo__java_lang_Object__java_lang_String(/** ?string */ arg0) {}
+ m_getFoo__java_lang_String__java_lang_String(/** ?string */ arg0) {}
  
  /** @nodts */
- static $loadModules() {}
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
 }
 IStringList.$markImplementor(AbstractStringList2);
 $Util.$setClassMetadata(AbstractStringList2, 'multipleabstractparents.MultipleAbstractParents$AbstractStringList2');

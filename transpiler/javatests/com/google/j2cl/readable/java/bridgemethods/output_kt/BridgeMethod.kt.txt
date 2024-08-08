@@ -231,6 +231,8 @@ fun interface SpecializingReturnInterface {
  fun foo(): String?
 }
 
+abstract class SpecializingReturnAbstractSubclass internal constructor(): SpecializingReturnAbstractClass(), SpecializingReturnInterface {}
+
 interface InterfaceWithDefaultMethod {
  @ObjCName("foo")
  fun foo(): Any? {
@@ -242,6 +244,6 @@ fun interface InterfaceOverridingDefaultMethod: InterfaceWithDefaultMethod {
  override fun foo(): String?
 }
 
-abstract class DoesNotInheritDefaultMethod2 internal constructor(): InterfaceOverridingDefaultMethod, InterfaceWithDefaultMethod {}
+abstract class DoesNotInheritDefaultMethod1 internal constructor(): InterfaceWithDefaultMethod, InterfaceOverridingDefaultMethod {}
 
-abstract class SpecializingReturnAbstractSubclass internal constructor(): SpecializingReturnAbstractClass(), SpecializingReturnInterface {}
+abstract class DoesNotInheritDefaultMethod2 internal constructor(): InterfaceOverridingDefaultMethod, InterfaceWithDefaultMethod {}

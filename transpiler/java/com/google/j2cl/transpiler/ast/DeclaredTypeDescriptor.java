@@ -852,6 +852,25 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   /**
    * Determines the actual implementation target that will handle all the mangled names associated
    * with an override key.
+   *
+   * <p>The target for an override key will be either a concrete implementation in the class
+   * hierarchy, a default method inherited from one of its interface or an abstract method. The main
+   * idea is to collect the set of all methods that are at the bottom of the override chains for the
+   * specific override key and select the method with the most specific return type, preferring
+   * concrete implementations to abstract or default methods; this results in the following
+   * scenarios:
+   *
+   * <ul>
+   *   <li>If there is a concrete implementation, select that one (this is achieved by adding class
+   *       methods before looking at accidental overrides and relying that accidental overrides
+   *       cannot specialize the return type in this case).
+   *   <li>If a default method is the actual implementation, Java enforces the "diamond" property,
+   *       i.e. that method is at the bottom of the only override chain for the override key.
+   *   <li>There are one or several abstract methods coming from either the class hierarchy or the
+   *       interfaces. In this case the method with the more specialized return type is the one
+   *       selected. This situation can only occur in an abstract class, since any concrete subclass
+   *       will be required to provide an implementation and would fall into the first case.
+   * </ul>
    */
   // TODO(b/70853239): This computation should be done in the traversal in getPolymorphicMethods(),
   // but due to inaccuracies in specializeTypeVariables it cannot be move there yet. Move
@@ -882,23 +901,16 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
               }
             });
 
-    // 3. Now add the override keys and the corresponding targets introduced by interfaces. These
-    // might be a new abstract method, a new default method or a default method that overrode an
-    // existing target. Methods in an interface that are already implements in the class are not
-    // targets but an interface might introduce a new methods (default or abstract) or might
-    // override a default method that is not implemented in the class.
+    // 3. Now add the override keys and the corresponding targets introduced by interfaces.
     for (DeclaredTypeDescriptor superInterface : getInterfaceTypeDescriptors()) {
-      for (MethodDescriptor methodDescriptor :
+      for (MethodDescriptor candidateMethod :
           superInterface.getOverrideKeyToTargetMap(sourceLanguage).values()) {
-        String overrideKey = methodDescriptor.getOverrideKey(sourceLanguage);
-        MethodDescriptor overriddenMethod = targetByOverrideKey.get(overrideKey);
-        // Looking at the superinterfaces to see if we find new targets for new override chains
-        // introduced by this interface, or default methods that will need to replace an overridden
-        // (default) method.
-        if (overriddenMethod == null
-            || isSpecializingAbstractMethodReturnType(methodDescriptor, overriddenMethod)
-            || isOverridingDefaultMethod(methodDescriptor, overriddenMethod)) {
-          targetByOverrideKey.put(overrideKey, methodDescriptor);
+        String overrideKey = candidateMethod.getOverrideKey(sourceLanguage);
+        MethodDescriptor currentTarget = targetByOverrideKey.get(overrideKey);
+
+        // See if the interface method becomes the target.
+        if (isSupersedingTarget(candidateMethod, currentTarget)) {
+          targetByOverrideKey.put(overrideKey, candidateMethod);
         }
       }
     }
@@ -906,55 +918,54 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return targetByOverrideKey;
   }
 
+  /** Returns true if the candidate method supersedes the current target method. */
+  private static boolean isSupersedingTarget(
+      MethodDescriptor candidateMethod, MethodDescriptor currentTarget) {
+    if (currentTarget == null) {
+      return true;
+    }
+
+    if (candidateMethod
+        .getEnclosingTypeDescriptor()
+        .isSubtypeOf(currentTarget.getEnclosingTypeDescriptor())) {
+      // Candidate method overrides the current target so it definitely replaces it.
+      return true;
+    }
+
+    if (currentTarget
+        .getEnclosingTypeDescriptor()
+        .isSubtypeOf(candidateMethod.getEnclosingTypeDescriptor())) {
+      // Candidate method is overridden by the current target; so it does not replace it.
+      return false;
+    }
+
+    // The candidate method and the current target are not in the same override chain.
+    // If the candidate method specializes the return type it will become the target.
+    // Note that this can only occur when the class is abstract. Otherwise the method with the most
+    // specialized signature is already provided in the concrete class.
+    return isSpecializingReturnType(candidateMethod, currentTarget);
+  }
+
   /**
    * Returns true if {@code candidateMethod} specializes the return of abstract method {@code
-   * method}.
+   * currentTarget}.
    *
    * <p>When many abstract methods are involved, there is an ambiguity on which is the right method
    * to be the target of an override signature. This happens because the return type can be
    * specialized by any of them, and the right target is that one with the more specific return
    * type.
    */
-  private static boolean isSpecializingAbstractMethodReturnType(
-      MethodDescriptor candidateMethod, MethodDescriptor method) {
-    if (!method.isAbstract()) {
-      return false;
-    }
-
+  private static boolean isSpecializingReturnType(
+      MethodDescriptor candidateMethod, MethodDescriptor currentTarget) {
     TypeDescriptor returnTypeDescriptor =
         candidateMethod.getReturnTypeDescriptor().toRawTypeDescriptor();
     TypeDescriptor overriddenReturnTypeDescriptor =
-        method.getReturnTypeDescriptor().toRawTypeDescriptor();
+        currentTarget.getReturnTypeDescriptor().toRawTypeDescriptor();
 
     if (returnTypeDescriptor.isSameBaseType(overriddenReturnTypeDescriptor)) {
       return false;
     }
     return returnTypeDescriptor.isAssignableTo(overriddenReturnTypeDescriptor);
-  }
-
-  /**
-   * Returns true if {@code candidateMethod} is a default method that overrides {@code method}.
-   *
-   * <p>Note that in the case that a new method overrides the current method, the current method
-   * might be a default method or an abstract interface method.
-   */
-  private static boolean isOverridingDefaultMethod(
-      MethodDescriptor candidateMethod, MethodDescriptor method) {
-    if (!candidateMethod.isDefaultMethod()) {
-      return false;
-    }
-
-    if (!method.getEnclosingTypeDescriptor().isInterface()) {
-      return false;
-    }
-
-    // Keep the method at the bottom of the hierarchy since if that one is a default method the one
-    // further down has to be the target.
-    TypeDeclaration candidateDeclaration =
-        candidateMethod.getEnclosingTypeDescriptor().getTypeDeclaration();
-    TypeDeclaration currentDeclaration = method.getEnclosingTypeDescriptor().getTypeDeclaration();
-    return candidateDeclaration.getTypeHierarchyDepth()
-        >= currentDeclaration.getTypeHierarchyDepth();
   }
 
   /** Returns true if the method needs a specializing bridge. */
