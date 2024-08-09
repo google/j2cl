@@ -101,6 +101,7 @@ open class Main {
   }
  }
 
+ @ObjCName("J2ktJsoptionalMain_Function", exact = true)
  @JsFunction
  fun interface Function {
   @ObjCName("f1")
@@ -110,6 +111,7 @@ open class Main {
   ): Any?
  }
 
+ @ObjCName("J2ktJsoptionalMain_AFunction", exact = true)
  class AFunction internal constructor(): Main.Function {
   override fun f1(@JsOptional i: String?, vararg args: Any?): Any? {
    val args_1: Array<Any?>? = args as Array<Any?>?
@@ -117,6 +119,7 @@ open class Main {
   }
  }
 
+ @ObjCName("J2ktJsoptionalMain_I", exact = true)
  @JsType
  fun interface I<T> {
   @ObjCName("m")
@@ -126,11 +129,13 @@ open class Main {
   )
  }
 
+ @ObjCName("J2ktJsoptionalMain_TemplatedSubtype", exact = true)
  @JsType
  open class TemplatedSubtype<T: String?> internal constructor(): Main.I<T> {
   override fun m(t: T, @JsOptional o: Any?) {}
  }
 
+ @ObjCName("J2ktJsoptionalMain_SpecializedSubtype", exact = true)
  @JsType
  open inner class SpecializedSubtype constructor(
   @ObjCName("Id") @JsOptional a: Any?
@@ -138,6 +143,7 @@ open class Main {
   override fun m(t: String?, @JsOptional o: Any?) {}
  }
 
+ @ObjCName("J2ktJsoptionalMain_NonJsTypeSubtype", exact = true)
  open class NonJsTypeSubtype internal constructor(): Main.I<String?> {
   override fun m(t: String?, @JsOptional o: Any?) {}
  }

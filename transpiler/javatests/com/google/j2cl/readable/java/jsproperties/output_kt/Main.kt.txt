@@ -29,7 +29,9 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
+@ObjCName("J2ktJspropertiesFoo", exact = true)
 open class Foo internal constructor() {
+ @ObjCName("J2ktJspropertiesFooCompanion", exact = true)
  companion object {
   private var f: Int = 0
 
@@ -67,6 +69,7 @@ open class Foo internal constructor() {
  }
 }
 
+@ObjCName("J2ktJspropertiesBar", exact = true)
 open class Bar internal constructor() {
  private var f: Int = 0
 
@@ -102,11 +105,13 @@ open class Bar internal constructor() {
  }
 }
 
+@ObjCName("J2ktJspropertiesNativeFoo", exact = true)
 open class NativeFoo internal constructor() {
  @ObjCName("getA")
  @JsProperty(name = "hasOwnProperty")
  external open fun getA(): Any?
 
+ @ObjCName("J2ktJspropertiesNativeFooCompanion", exact = true)
  companion object {
   @JvmStatic
   @ObjCName("getB")
@@ -115,6 +120,7 @@ open class NativeFoo internal constructor() {
  }
 }
 
+@ObjCName("J2ktJspropertiesInterfaceWithDefaultJsProperties", exact = true)
 interface InterfaceWithDefaultJsProperties {
  @ObjCName("getM")
  @JsProperty
@@ -129,6 +135,7 @@ interface InterfaceWithDefaultJsProperties {
  ) {}
 }
 
+@ObjCName("J2ktJspropertiesImplementsInterfaceWithDefaultJsProperties", exact = true)
 open class ImplementsInterfaceWithDefaultJsProperties internal constructor(): InterfaceWithDefaultJsProperties {}
 
 @ObjCName("J2ktJspropertiesMain", exact = true)

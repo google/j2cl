@@ -124,39 +124,46 @@ open class ForEachStatement {
   for (s in i!!) {}
  }
 
+ @ObjCName("J2ktForeachstatementForEachStatement_Exception1", exact = true)
  open class Exception1 internal constructor(): java.lang.Exception(), JavaIterable<Number?> {
   override fun iterator(): MutableIterator<Number?> {
    return null!!
   }
  }
 
+ @ObjCName("J2ktForeachstatementForEachStatement_Exception2", exact = true)
  open class Exception2 internal constructor(): java.lang.Exception(), JavaIterable<Int?> {
   override fun iterator(): MutableIterator<Int?> {
    return null!!
   }
  }
 
+ @ObjCName("J2ktForeachstatementForEachStatement_Exception3", exact = true)
  open class Exception3 internal constructor(): java.lang.Exception(), JavaIterable<Int> {
   override fun iterator(): MutableIterator<Int> {
    return null!!
   }
  }
 
+ @ObjCName("J2ktForeachstatementForEachStatement_Exception4", exact = true)
  open class Exception4 internal constructor(): java.lang.Exception(), JavaIterable<Any?> {
   override fun iterator(): MutableIterator<Any?> {
    return null!! as MutableIterator<Any?>
   }
  }
 
+ @ObjCName("J2ktForeachstatementForEachStatement_IterableReturningTypeVariable", exact = true)
  open class IterableReturningTypeVariable<U, T: MutableIterator<Int?>> internal constructor(): JavaIterable<Int?> {
   override fun iterator(): T {
    return null!!
   }
  }
 
+ @ObjCName("J2ktForeachstatementForEachStatement_StringIterable", exact = true)
  fun interface StringIterable: JavaIterable<String?> {
   override fun iterator(): ForEachStatement.StringIterator
  }
 
+ @ObjCName("J2ktForeachstatementForEachStatement_StringIterator", exact = true)
  interface StringIterator: JavaIterator<String?> {}
 }

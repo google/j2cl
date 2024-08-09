@@ -139,8 +139,10 @@ open class Casts {
   val s: String? = (if (false) foo else bar) as String?
  }
 
+ @ObjCName("J2ktCastCasts_Foo", exact = true)
  open inner class Foo internal constructor() {
   @JvmField
+  @ObjCName("field_")
   var field: Any? = Any()
 
   @ObjCName("method")

@@ -27,17 +27,22 @@ import kotlin.native.ObjCName
 
 @ObjCName("J2ktAnnotationMain", exact = true)
 open class Main {
+ @ObjCName("J2ktAnnotationMain_Foo", exact = true)
  interface Foo: Annotation {
   @ObjCName("bar")
   fun bar(): Int
 
+  @ObjCName("J2ktAnnotationMain_FooCompanion", exact = true)
   companion object {
+   @ObjCName("CONSTANT_")
    const val CONSTANT: Int = 123
   }
  }
 
+ @ObjCName("J2ktAnnotationMain_Zoo", exact = true)
  interface Zoo: Annotation {}
 
+ @ObjCName("J2ktAnnotationMain_Bar", exact = true)
  open inner class Bar internal constructor() {
   internal open fun baz_pp_annotation(): Int {
    val foo: Main.Foo? = null

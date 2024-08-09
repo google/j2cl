@@ -43,11 +43,13 @@ open class DefinitelyNotNull {
   }
  }
 
+ @ObjCName("J2ktJ2ktDefinitelyNotNull_Ordering", exact = true)
  open class Ordering<T> internal constructor() {
   internal open fun <S: T> reverse_pp_j2kt(): DefinitelyNotNull.Ordering<S> {
    throw RuntimeException()
   }
 
+  @ObjCName("J2ktJ2ktDefinitelyNotNull_OrderingCompanion", exact = true)
   companion object {
    @JvmStatic
    internal fun <E> reversed_pp_j2kt(ordering: DefinitelyNotNull.Ordering<in E>): DefinitelyNotNull.Ordering<in E> {
@@ -78,6 +80,7 @@ open class DefinitelyNotNull {
   }
  }
 
+ @ObjCName("J2ktJ2ktDefinitelyNotNull_Equivalence", exact = true)
  fun interface Equivalence<T: Any> {
   @ObjCName("equivalent")
   fun equivalent(

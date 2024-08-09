@@ -200,6 +200,7 @@ open class Main {
  }
 }
 
+@ObjCName("J2ktNativekttypesSubclass", exact = true)
 open class Subclass<V>: KTopLevel<V>, KInterface<V> {
  internal constructor(v: V): super(v)
 
@@ -248,6 +249,7 @@ open class Subclass<V>: KTopLevel<V>, KInterface<V> {
  }
 }
 
+@ObjCName("J2ktNativekttypesSubsubclass", exact = true)
 open class Subsubclass<V>: Subclass<V> {
  internal constructor(v: V): super(v)
 
@@ -296,6 +298,7 @@ open class Subsubclass<V>: Subclass<V> {
  }
 }
 
+@ObjCName("J2ktNativekttypesBridgeSubclass", exact = true)
 open class BridgeSubclass internal constructor(): KBridge() {
  override fun method() {
   super<KBridge>.method()

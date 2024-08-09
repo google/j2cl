@@ -30,6 +30,7 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
+@ObjCName("J2ktAnonymousclassSomeClass", exact = true)
 abstract class SomeClass {
  @ObjCName("foo")
  abstract fun foo(): String?
@@ -37,12 +38,14 @@ abstract class SomeClass {
  internal constructor(i: Int)
 }
 
+@ObjCName("J2ktAnonymousclassSomeClassWithStaticMembers", exact = true)
 abstract class SomeClassWithStaticMembers {
  @ObjCName("foo")
  abstract fun foo(): String?
 
  internal constructor(i: Int)
 
+ @ObjCName("J2ktAnonymousclassSomeClassWithStaticMembersCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun staticMethod_pp_anonymousclass() {}
@@ -100,9 +103,12 @@ open class AnonymousClass {
  }
 }
 
+@ObjCName("J2ktAnonymousclassSomeInterface", exact = true)
 interface SomeInterface {
+ @ObjCName("J2ktAnonymousclassSomeInterfaceCompanion", exact = true)
  companion object {
   @JvmField
+  @ObjCName("implicitlyStatic_")
   val implicitlyStatic: SomeClass? = object : SomeClass(1) {
    override fun foo(): String? {
     return "a"
@@ -111,18 +117,21 @@ interface SomeInterface {
  }
 }
 
+@ObjCName("J2ktAnonymousclassJsConstructorClass", exact = true)
 open class JsConstructorClass {
  @JsConstructor
  internal constructor(o: Any?)
 
  internal constructor(): this(if (JsConstructorClass.trueVar_pp_anonymousclass) object : Any() {} else null)
 
+ @ObjCName("J2ktAnonymousclassJsConstructorClassCompanion", exact = true)
  companion object {
   @JvmField
   internal var trueVar_pp_anonymousclass: Boolean = true
  }
 }
 
+@ObjCName("J2ktAnonymousclassJsConstructorSubclass", exact = true)
 open class JsConstructorSubclass: JsConstructorClass {
  @JsConstructor
  internal constructor(): super(if (JsConstructorClass.trueVar_pp_anonymousclass) object : Any() {} else null)

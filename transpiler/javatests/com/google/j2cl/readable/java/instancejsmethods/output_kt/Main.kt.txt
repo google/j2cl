@@ -26,11 +26,13 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
+@ObjCName("J2ktInstancejsmethodsMyInterface", exact = true)
 fun interface MyInterface {
  @ObjCName("intfFoo")
  fun intfFoo(): Int
 }
 
+@ObjCName("J2ktInstancejsmethodsSuperParent", exact = true)
 open class SuperParent internal constructor() {
  @ObjCName("fun")
  open fun `fun`(
@@ -49,6 +51,7 @@ open class SuperParent internal constructor() {
  }
 }
 
+@ObjCName("J2ktInstancejsmethodsParent", exact = true)
 open class Parent internal constructor(): SuperParent() {
  @JsMethod(name = "sum")
  override fun `fun`(a: Int, b: Int): Int {
@@ -69,6 +72,7 @@ open class Parent internal constructor(): SuperParent() {
  }
 }
 
+@ObjCName("J2ktInstancejsmethodsChild", exact = true)
 open class Child internal constructor(): Parent(), MyInterface {
  override fun `fun`(a: Int, b: Int): Int {
   return a + b + 1

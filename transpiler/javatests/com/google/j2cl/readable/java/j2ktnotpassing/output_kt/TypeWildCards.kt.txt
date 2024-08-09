@@ -47,6 +47,7 @@ open class TypeWildCards {
   }
  }
 
+ @ObjCName("J2ktJ2ktnotpassingTypeWildCards_Observer", exact = true)
  fun interface Observer<E> {
   @ObjCName("on")
   fun on(
@@ -54,6 +55,7 @@ open class TypeWildCards {
   )
  }
 
+ @ObjCName("J2ktJ2ktnotpassingTypeWildCards_Observable", exact = true)
  fun interface Observable<E> {
   @ObjCName("addObserver")
   fun addObserver(
@@ -61,6 +63,7 @@ open class TypeWildCards {
   )
  }
 
+ @ObjCName("J2ktJ2ktnotpassingTypeWildCards_RecursiveObservable", exact = true)
  fun interface RecursiveObservable<E: TypeWildCards.RecursiveObservable<E>?> {
   @ObjCName("addObserver")
   fun addObserver(

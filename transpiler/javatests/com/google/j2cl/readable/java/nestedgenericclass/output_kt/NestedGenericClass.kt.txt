@@ -83,11 +83,13 @@ open class NestedGenericClass<T> {
   }
  }
 
+ @ObjCName("J2ktNestedgenericclassNestedGenericClass_RecursiveTypeVariable", exact = true)
  open inner class RecursiveTypeVariable<T: NestedGenericClass<T>.RecursiveTypeVariable<T>?> internal constructor() {
   internal open fun test_pp_nestedgenericclass(t: T) {
    t!!.Inner()
   }
 
+  @ObjCName("J2ktNestedgenericclassNestedGenericClass_RecursiveTypeVariable_Inner", exact = true)
   open inner class Inner internal constructor() {}
  }
 }

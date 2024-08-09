@@ -40,6 +40,9 @@ import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
  * @property nameRenderer underlying name renderer
  */
 internal data class TypeRenderer(val nameRenderer: NameRenderer) {
+  private val environment: Environment
+    get() = nameRenderer.environment
+
   private fun memberRenderer(type: Type): MemberRenderer =
     MemberRenderer(nameRenderer.plusLocalNames(type), type)
 
@@ -99,7 +102,7 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
     return when {
       ktPrimaryConstructor != null ->
         memberRenderer(type).run {
-          ktPrimaryConstructor.toObjCNames().let { objCNames ->
+          objCNameRenderer.renderedObjCNames(ktPrimaryConstructor).let { objCNames ->
             spaceSeparated(
               annotationsSource(ktPrimaryConstructor.descriptor, objCNames),
               join(

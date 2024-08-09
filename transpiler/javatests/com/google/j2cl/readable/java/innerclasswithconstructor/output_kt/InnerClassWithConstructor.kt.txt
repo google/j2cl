@@ -31,8 +31,10 @@ open class InnerClassWithConstructor {
  @ObjCName("a_")
  var a: Int = 0
 
+ @ObjCName("J2ktInnerclasswithconstructorInnerClassWithConstructor_InnerClass", exact = true)
  open inner class InnerClass {
   @JvmField
+  @ObjCName("b_")
   var b: Int = 0
 
   constructor(
@@ -44,10 +46,12 @@ open class InnerClassWithConstructor {
   constructor(): this(this@InnerClassWithConstructor.a)
  }
 
+ @ObjCName("J2ktInnerclasswithconstructorInnerClassWithConstructor_InnerClassWithSingleConstructor", exact = true)
  open inner class InnerClassWithSingleConstructor constructor(
   @ObjCName("Int") b: Int
  ) {
   @JvmField
+  @ObjCName("b_")
   var b: Int = 0
 
   init {

@@ -156,6 +156,7 @@ open class Varargs {
   }
  }
 
+ @ObjCName("J2ktVarargsVarargs_FunctionalInterface", exact = true)
  fun interface FunctionalInterface {
   @ObjCName("apply")
   fun apply(
@@ -164,6 +165,7 @@ open class Varargs {
  }
 }
 
+@ObjCName("J2ktVarargsChild", exact = true)
 open class Child: Varargs {
  constructor(): super(1)
 }

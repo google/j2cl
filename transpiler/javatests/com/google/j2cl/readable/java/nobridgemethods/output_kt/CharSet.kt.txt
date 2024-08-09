@@ -26,8 +26,10 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
+@ObjCName("J2ktNobridgemethodsEntry", exact = true)
 interface Entry<K> {}
 
+@ObjCName("J2ktNobridgemethodsMap", exact = true)
 abstract class Map<K> internal constructor() {
  @ObjCName("getCeilingEntry")
  abstract fun getCeilingEntry(
@@ -35,11 +37,13 @@ abstract class Map<K> internal constructor() {
  ): Entry<K>?
 }
 
+@ObjCName("J2ktNobridgemethodsTreeMap", exact = true)
 open class TreeMap<K> internal constructor(): Map<K>() {
  override fun getCeilingEntry(key: K): TreeMap.InnerEntry<K>? {
   return TreeMap.InnerEntry<K>()
  }
 
+ @ObjCName("J2ktNobridgemethodsTreeMap_InnerEntry", exact = true)
  open class InnerEntry<K> internal constructor(): Entry<K> {}
 }
 

@@ -31,6 +31,7 @@ fun interface ParameterizedType<F, T>: overwrittentypevariables.otherpkg.Paramet
  override fun accept(value: F): T
 }
 
+@ObjCName("J2ktOverwrittentypevariablesParameterizedTypeImpl", exact = true)
 open class ParameterizedTypeImpl internal constructor(): ParameterizedType<String?, Int?> {
  override fun accept(value: String?): Int? {
   return Integer.valueOf(1)

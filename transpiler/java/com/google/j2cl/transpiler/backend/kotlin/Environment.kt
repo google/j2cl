@@ -20,6 +20,7 @@ import com.google.j2cl.transpiler.ast.FieldDescriptor
 import com.google.j2cl.transpiler.ast.HasName
 import com.google.j2cl.transpiler.ast.MemberDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor
+import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.Visibility
 import com.google.j2cl.transpiler.backend.kotlin.ast.Import
 import com.google.j2cl.transpiler.backend.kotlin.ast.Visibility as KtVisibility
@@ -125,6 +126,13 @@ internal data class Environment(
       // Use default visibility for everything else.
       else -> memberDescriptor.visibility!!.defaultMemberKtVisibility
     }
+
+  /** Returns Kotlin type visibility. */
+  fun ktVisibility(typeDeclaration: TypeDeclaration): KtVisibility =
+    // Render all types as public, to allow extending with wider visibility which is legal in Java,
+    // but illegal in Kotlin.
+    // TODO(b/358052247): Render private types as private if possible
+    KtVisibility.PUBLIC
 
   /**
    * Inferred visibility, which does not require explicit visibility modifier in the source code.

@@ -26,12 +26,14 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
+@ObjCName("J2ktUnimplementedbridgemethodI", exact = true)
 fun interface I<T> {
  @ObjCName("foo")
  fun foo(
   @ObjCName("withId") t: T
  ): Int
 
+ @ObjCName("J2ktUnimplementedbridgemethodICompanion", exact = true)
  companion object {
   @JvmStatic
   @ObjCName("staticFoo")
@@ -41,8 +43,10 @@ fun interface I<T> {
  }
 }
 
+@ObjCName("J2ktUnimplementedbridgemethodJ", exact = true)
 fun interface J: I<String?> {}
 
+@ObjCName("J2ktUnimplementedbridgemethodBar", exact = true)
 abstract class Bar internal constructor(): J {}
 
 @ObjCName("J2ktUnimplementedbridgemethodFoo", exact = true)

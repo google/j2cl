@@ -28,6 +28,7 @@ import kotlin.native.ObjCName
 
 @ObjCName("J2ktNativekttypesNullabilityPropagation", exact = true)
 class NullabilityPropagation {
+ @ObjCName("J2ktNativekttypesNullabilityPropagation_NullabilityToPropagate", exact = true)
  interface NullabilityToPropagate<ExtendsNullable, ExtendsNonNull: Any> {
   @ObjCName("nullableString1")
   fun nullableString1(
@@ -105,6 +106,7 @@ class NullabilityPropagation {
   ): String
  }
 
+ @ObjCName("J2ktNativekttypesNullabilityPropagation_Interface", exact = true)
  fun interface Interface {
   @ObjCName("nonNullStringDoubleOverride")
   fun nonNullStringDoubleOverride(
@@ -112,6 +114,7 @@ class NullabilityPropagation {
   ): String
  }
 
+ @ObjCName("J2ktNativekttypesNullabilityPropagation_Subtype", exact = true)
  open inner class Subtype internal constructor(): NullabilityPropagation.NullabilityToPropagate<String?, String>, NullabilityPropagation.Interface {
   override fun nullableString1(s: String?): String? {
    return s
@@ -174,6 +177,7 @@ class NullabilityPropagation {
   }
  }
 
+ @ObjCName("J2ktNativekttypesNullabilityPropagation_SubSubType", exact = true)
  open inner class SubSubType internal constructor(): NullabilityPropagation.Subtype() {
   override fun nonNullStringTransitive(s: String): String {
    return s

@@ -23,8 +23,10 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
+@ObjCName("J2ktSubclassgenericclassGenericClass", exact = true)
 open class GenericClass<T> internal constructor() {}
 
+@ObjCName("J2ktSubclassgenericclassGenericSubclassGenericClass", exact = true)
 open class GenericSubclassGenericClass<T> internal constructor(): GenericClass<T>() {}
 
 @ObjCName("J2ktSubclassgenericclassSubclassGenericClass", exact = true)

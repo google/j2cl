@@ -190,6 +190,7 @@ open class Nullability {
   }
  }
 
+ @ObjCName("J2ktNullabilityNullability_Foo", exact = true)
  open class Foo<T> internal constructor() {
   internal open fun bar_pp_nullability(t: T) {}
 
@@ -202,6 +203,7 @@ open class Nullability {
   }
  }
 
+ @ObjCName("J2ktNullabilityNullability_MyFunction", exact = true)
  @JsFunction
  fun interface MyFunction {
   @ObjCName("x")
@@ -227,6 +229,7 @@ open class Nullability {
   }
  }
 
+ @ObjCName("J2ktNullabilityNullability_NullableTemplatedReturn", exact = true)
  fun interface NullableTemplatedReturn<T> {
   @ObjCName("foo")
   fun foo(): T?
@@ -239,6 +242,7 @@ open class Nullability {
   }
  }
 
+ @ObjCName("J2ktNullabilityNullability_ParameterizedDefaultNullability", exact = true)
  open class ParameterizedDefaultNullability<N> internal constructor() {
   internal open fun getNullable_pp_nullability(): N? {
    return null
@@ -253,6 +257,7 @@ open class Nullability {
   }
  }
 
+ @ObjCName("J2ktNullabilityNullability_ParameterizedNullable", exact = true)
  open class ParameterizedNullable<N> internal constructor() {
   internal open fun getNullable_pp_nullability(): N? {
    return null
@@ -267,6 +272,7 @@ open class Nullability {
   }
  }
 
+ @ObjCName("J2ktNullabilityNullability_ParameterizedNonNullable", exact = true)
  open class ParameterizedNonNullable<N: Any> internal constructor() {
   internal open fun getNullable_pp_nullability(): N? {
    return null
@@ -281,21 +287,29 @@ open class Nullability {
   }
  }
 
+ @ObjCName("J2ktNullabilityNullability_NonNullableInsideNullable", exact = true)
  open class NonNullableInsideNullable<T> internal constructor() {
   internal open fun nonNullableTest_pp_nullability(nonNullable: Nullability.ParameterizedNonNullable<T & Any>?) {}
  }
 
+ @ObjCName("J2ktNullabilityNullability_Recursive", exact = true)
  open class Recursive<T> internal constructor() where T: Nullability.Recursive<T>, T: Marker? {}
 
+ @ObjCName("J2ktNullabilityNullability_RecursiveNullable", exact = true)
  open class RecursiveNullable<T> internal constructor() where T: Nullability.RecursiveNullable<T>?, T: Marker? {}
 
+ @ObjCName("J2ktNullabilityNullability_RecursiveChild", exact = true)
  open class RecursiveChild internal constructor(): Nullability.Recursive<Nullability.RecursiveChild>(), Marker {}
 
+ @ObjCName("J2ktNullabilityNullability_RecursiveNullableChild", exact = true)
  open class RecursiveNullableChild internal constructor(): Nullability.RecursiveNullable<Nullability.RecursiveNullableChild?>(), Marker {}
 
+ @ObjCName("J2ktNullabilityNullability_RecursiveParam", exact = true)
  open class RecursiveParam<T> internal constructor() where T: Nullability.Recursive<T>, T: Marker? {}
 
+ @ObjCName("J2ktNullabilityNullability_RecursiveNullableParam", exact = true)
  open class RecursiveNullableParam<T> internal constructor() where T: Nullability.RecursiveNullable<T>?, T: Marker? {}
 }
 
+@ObjCName("J2ktNullabilityMarker", exact = true)
 interface Marker {}

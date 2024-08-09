@@ -25,7 +25,9 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
+@ObjCName("J2ktAnonymousinnerclassA", exact = true)
 open class A internal constructor() {
+ @ObjCName("J2ktAnonymousinnerclassA_B", exact = true)
  open inner class B internal constructor() {}
 }
 

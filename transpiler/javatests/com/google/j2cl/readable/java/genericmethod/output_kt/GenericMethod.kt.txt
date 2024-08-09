@@ -172,24 +172,28 @@ open class GenericMethod<T> {
   }
  }
 
+ @ObjCName("J2ktGenericmethodGenericMethod_SuperContainer", exact = true)
  open class SuperContainer<C: GenericMethod.Container<*>?> internal constructor() {
   internal open fun get_pp_genericmethod(): C {
    return null as C
   }
  }
 
+ @ObjCName("J2ktGenericmethodGenericMethod_Container", exact = true)
  open class Container<CT: GenericMethod.Content?> internal constructor() {
   internal open fun get_pp_genericmethod(): CT {
    return null as CT
   }
  }
 
+ @ObjCName("J2ktGenericmethodGenericMethod_Content", exact = true)
  open class Content internal constructor() {
   internal open fun getProp_pp_genericmethod(): String? {
    return null
   }
  }
 
+ @ObjCName("J2ktGenericmethodGenericMethod_Consumer", exact = true)
  fun interface Consumer<V> {
   @ObjCName("accept")
   fun accept(
@@ -197,6 +201,7 @@ open class GenericMethod<T> {
   )
  }
 
+ @ObjCName("J2ktGenericmethodGenericMethod_Supplier", exact = true)
  fun interface Supplier<V> {
   @ObjCName("get")
   fun get(): V

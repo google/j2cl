@@ -28,6 +28,7 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
+@ObjCName("J2ktDevirtualizedsupermethodcallSubNumber", exact = true)
 open class SubNumber internal constructor(): JavaNumber() {
  override fun toInt(): Int {
   return 0
@@ -46,6 +47,7 @@ open class SubNumber internal constructor(): JavaNumber() {
  }
 }
 
+@ObjCName("J2ktDevirtualizedsupermethodcallFooCallsSuperObjectMethod", exact = true)
 open class FooCallsSuperObjectMethod internal constructor() {
  override fun hashCode(): Int {
   return super.hashCode()

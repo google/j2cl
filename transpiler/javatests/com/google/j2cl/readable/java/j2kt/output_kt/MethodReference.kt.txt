@@ -24,7 +24,9 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
+@ObjCName("J2ktJ2ktMethodReference", exact = true)
 class MethodReference internal constructor() {
+ @ObjCName("J2ktJ2ktMethodReferenceCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun <T> foo_pp_j2kt(inputs: MethodReference.Foo<out MethodReference.Foo<out T>?>?) {
@@ -40,6 +42,7 @@ class MethodReference internal constructor() {
   internal fun <F, T> transform_pp_j2kt(foo: MethodReference.Foo<F>?, function: MethodReference.Function<in F, out T>?) {}
  }
 
+ @ObjCName("J2ktJ2ktMethodReference_Function", exact = true)
  interface Function<T, R> {
   @ObjCName("apply")
   fun <H> apply(
@@ -47,6 +50,7 @@ class MethodReference internal constructor() {
   ): R
  }
 
+ @ObjCName("J2ktJ2ktMethodReference_Foo", exact = true)
  fun interface Foo<T> {
   @ObjCName("bar")
   fun bar(): MethodReference.Foo<T>?

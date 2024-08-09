@@ -30,6 +30,7 @@ open class ExplicitNotNullable {
   return (x as ExplicitNotNullable.DependentTypeParameters<Any, E?>).getThis_pp_j2ktnotpassing()
  }
 
+ @ObjCName("J2ktJ2ktnotpassingExplicitNotNullable_Function", exact = true)
  fun interface Function<I, O> {
   @ObjCName("apply")
   fun apply(
@@ -37,6 +38,7 @@ open class ExplicitNotNullable {
   ): O
  }
 
+ @ObjCName("J2ktJ2ktnotpassingExplicitNotNullable_DependentTypeParameters", exact = true)
  open class DependentTypeParameters<E: Any, T: E?> internal constructor() {
   internal open fun getThis_pp_j2ktnotpassing(): ExplicitNotNullable.DependentTypeParameters<E, T> {
    return this

@@ -193,12 +193,14 @@ open class InnerClassInitOrder {
   }
  }
 
+ @ObjCName("J2ktInnerclassinitorderInnerClassInitOrder_OuterRefFromSuperCtorBase", exact = true)
  open class OuterRefFromSuperCtorBase {
   internal constructor(o: Any?) {
    o!!.hashCode()
   }
  }
 
+ @ObjCName("J2ktInnerclassinitorderInnerClassInitOrder_OuterRefFromSuperCtorCall", exact = true)
  open inner class OuterRefFromSuperCtorCall constructor(): InnerClassInitOrder.OuterRefFromSuperCtorBase(object : Any() {
   override fun hashCode(): Int {
    this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + 100
@@ -206,6 +208,7 @@ open class InnerClassInitOrder {
   }
  }) {}
 
+ @ObjCName("J2ktInnerclassinitorderInnerClassInitOrder_OuterRefFromThisCtorCall", exact = true)
  open inner class OuterRefFromThisCtorCall: InnerClassInitOrder.OuterRefFromSuperCtorBase {
   constructor(
    @ObjCName("Id") `object`: Any?
@@ -219,6 +222,7 @@ open class InnerClassInitOrder {
   })
  }
 
+ @ObjCName("J2ktInnerclassinitorderInnerClassInitOrder_InnerClass", exact = true)
  open inner class InnerClass internal constructor() {
   init {
    this.callInner_pp_innerclassinitorder()
@@ -239,6 +243,7 @@ open class InnerClassInitOrder {
   }
  }
 
+ @ObjCName("J2ktInnerclassinitorderInnerClassInitOrder_P1", exact = true)
  open class P1<T1> {
   @JvmField
   internal val value_pp_innerclassinitorder: Int
@@ -249,11 +254,13 @@ open class InnerClassInitOrder {
    this.value_pp_innerclassinitorder = i
   }
 
+  @ObjCName("J2ktInnerclassinitorderInnerClassInitOrder_P1_P2", exact = true)
   open inner class P2<T2>: InnerClassInitOrder.P1<T1> {
    internal constructor(): this(1)
 
    internal constructor(i: Int): super(i)
 
+   @ObjCName("J2ktInnerclassinitorderInnerClassInitOrder_P1_P2_P3", exact = true)
    open inner class P3<T3>: InnerClassInitOrder.P1<T1>.P2<T2> {
     internal constructor(): this(1)
 
@@ -262,14 +269,17 @@ open class InnerClassInitOrder {
   }
  }
 
+ @ObjCName("J2ktInnerclassinitorderInnerClassInitOrder_ESOuter", exact = true)
  open class ESOuter internal constructor() {
   @ObjCName("newESInner")
   open fun newESInner(): InnerClassInitOrder.ESOuter.ESInner? {
    return ESInner()
   }
 
+  @ObjCName("J2ktInnerclassinitorderInnerClassInitOrder_ESOuter_ESInner", exact = true)
   open inner class ESInner {
    @JvmField
+   @ObjCName("value_")
    var value: Int = 0
 
    constructor() {
@@ -284,20 +294,24 @@ open class InnerClassInitOrder {
   }
  }
 
+ @ObjCName("J2ktInnerclassinitorderInnerClassInitOrder_ESInnerSubclass", exact = true)
  open class ESInnerSubclass: InnerClassInitOrder.ESOuter.ESInner {
   internal constructor(outer: InnerClassInitOrder.ESOuter?)
 
   internal constructor(value: Int, outer: InnerClassInitOrder.ESOuter?): super(value)
  }
 
+ @ObjCName("J2ktInnerclassinitorderInnerClassInitOrder_ESWGOuter", exact = true)
  open class ESWGOuter<T> internal constructor() {
   @ObjCName("newESWGInner")
   open fun newESWGInner(): InnerClassInitOrder.ESWGOuter<T>.ESWGInner? {
    return ESWGInner()
   }
 
+  @ObjCName("J2ktInnerclassinitorderInnerClassInitOrder_ESWGOuter_ESWGInner", exact = true)
   open inner class ESWGInner {
    @JvmField
+   @ObjCName("value_")
    var value: Int = 0
 
    constructor() {
@@ -312,6 +326,7 @@ open class InnerClassInitOrder {
   }
  }
 
+ @ObjCName("J2ktInnerclassinitorderInnerClassInitOrder_ESWGInnerSubclass", exact = true)
  open class ESWGInnerSubclass: InnerClassInitOrder.ESWGOuter<String?>.ESWGInner {
   internal constructor(outer: InnerClassInitOrder.ESWGOuter<String?>?)
 

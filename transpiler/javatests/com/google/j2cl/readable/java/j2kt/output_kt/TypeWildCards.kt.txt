@@ -26,7 +26,9 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
+@ObjCName("J2ktJ2ktTypeWildCards", exact = true)
 open class TypeWildCards internal constructor() {
+ @ObjCName("J2ktJ2ktTypeWildCardsCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun testSupplierWithUpperAndLowerBounds_pp_j2kt(supplier: TypeWildCards.SupplierWithUpperBound<in TypeWildCards.Child?>?) {
@@ -82,15 +84,19 @@ open class TypeWildCards internal constructor() {
   }
  }
 
+ @ObjCName("J2ktJ2ktTypeWildCards_Parent", exact = true)
  open class Parent internal constructor() {}
 
+ @ObjCName("J2ktJ2ktTypeWildCards_Child", exact = true)
  open class Child internal constructor(): TypeWildCards.Parent() {}
 
+ @ObjCName("J2ktJ2ktTypeWildCards_SupplierWithUpperBound", exact = true)
  fun interface SupplierWithUpperBound<T: TypeWildCards.Parent?> {
   @ObjCName("get")
   fun get(): T
  }
 
+ @ObjCName("J2ktJ2ktTypeWildCards_Observer", exact = true)
  fun interface Observer<E> {
   @ObjCName("on")
   fun on(
@@ -98,6 +104,7 @@ open class TypeWildCards internal constructor() {
   )
  }
 
+ @ObjCName("J2ktJ2ktTypeWildCards_KtInObserver", exact = true)
  fun interface KtInObserver<in E> {
   @ObjCName("on")
   fun on(
@@ -105,6 +112,7 @@ open class TypeWildCards internal constructor() {
   )
  }
 
+ @ObjCName("J2ktJ2ktTypeWildCards_Observable", exact = true)
  fun interface Observable<E> {
   @ObjCName("addObserver")
   fun addObserver(
@@ -112,6 +120,7 @@ open class TypeWildCards internal constructor() {
   )
  }
 
+ @ObjCName("J2ktJ2ktTypeWildCards_SuperWildcardObservable", exact = true)
  fun interface SuperWildcardObservable<E> {
   @ObjCName("addObserver")
   fun addObserver(
@@ -119,6 +128,7 @@ open class TypeWildCards internal constructor() {
   )
  }
 
+ @ObjCName("J2ktJ2ktTypeWildCards_KtInObservable", exact = true)
  fun interface KtInObservable<E> {
   @ObjCName("addObserver")
   fun addObserver(
@@ -126,6 +136,7 @@ open class TypeWildCards internal constructor() {
   )
  }
 
+ @ObjCName("J2ktJ2ktTypeWildCards_RecursiveObservable", exact = true)
  fun interface RecursiveObservable<E: TypeWildCards.RecursiveObservable<E>?> {
   @ObjCName("addObserver")
   fun addObserver(
@@ -133,6 +144,7 @@ open class TypeWildCards internal constructor() {
   )
  }
 
+ @ObjCName("J2ktJ2ktTypeWildCards_ObserverHolder", exact = true)
  open class ObserverHolder<E> internal constructor() {
   @JvmField
   internal var observer_pp_j2kt: TypeWildCards.Observer<E>? = null

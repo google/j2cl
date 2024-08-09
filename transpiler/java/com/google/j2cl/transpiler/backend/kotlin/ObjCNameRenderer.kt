@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.FieldDescriptor
+import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotation
@@ -34,6 +35,9 @@ import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
  */
 internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
 
+  private val environment: Environment
+    get() = nameRenderer.environment
+
   fun objCNameAnnotationSource(name: String, exact: Boolean? = null): Source =
     annotation(
       nameRenderer.sourceWithOptInQualifiedName("kotlin.experimental.ExperimentalObjCName") {
@@ -44,12 +48,12 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
     )
 
   fun objCAnnotationSource(typeDeclaration: TypeDeclaration): Source =
-    Source.emptyUnless(typeDeclaration.needsObjCNameAnnotation) {
+    Source.emptyUnless(needsObjCNameAnnotation(typeDeclaration)) {
       objCNameAnnotationSource(typeDeclaration.objCName, exact = true)
     }
 
   fun objCAnnotationSource(companionObject: CompanionObject): Source =
-    Source.emptyUnless(companionObject.needsObjCNameAnnotation) {
+    Source.emptyUnless(needsObjCNameAnnotation(companionObject)) {
       objCNameAnnotationSource(companionObject.declaration.objCName, exact = true)
     }
 
@@ -62,8 +66,40 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
     }
 
   fun objCAnnotationSource(fieldDescriptor: FieldDescriptor): Source =
-    Source.emptyUnless(fieldDescriptor.needsObjCNameAnnotations) {
+    Source.emptyUnless(needsObjCNameAnnotation(fieldDescriptor)) {
       objCNameAnnotationSource(fieldDescriptor.objCName)
+    }
+
+  private fun needsObjCNameAnnotation(typeDeclaration: TypeDeclaration): Boolean =
+    environment.ktVisibility(typeDeclaration).needsObjCNameAnnotation &&
+      !typeDeclaration.isLocal &&
+      !typeDeclaration.isAnonymous
+
+  private fun needsObjCNameAnnotation(companionObject: CompanionObject): Boolean =
+    needsObjCNameAnnotation(companionObject.enclosingTypeDeclaration)
+
+  private fun needsObjCNameAnnotation(methodDescriptor: MethodDescriptor): Boolean =
+    methodDescriptor.enclosingTypeDescriptor.typeDeclaration.let { enclosingTypeDeclaration ->
+      !enclosingTypeDeclaration.isLocal &&
+        !enclosingTypeDeclaration.isAnonymous &&
+        environment.ktVisibility(methodDescriptor).needsObjCNameAnnotation &&
+        !methodDescriptor.isKtOverride
+    }
+
+  private fun needsObjCNameAnnotation(fieldDescriptor: FieldDescriptor): Boolean =
+    fieldDescriptor.enclosingTypeDescriptor.typeDeclaration.let { enclosingTypeDeclaration ->
+      needsObjCNameAnnotation(enclosingTypeDeclaration) &&
+        !enclosingTypeDeclaration.isLocal &&
+        !enclosingTypeDeclaration.isAnonymous &&
+        environment.ktVisibility(fieldDescriptor).needsObjCNameAnnotation
+    }
+
+  internal fun renderedObjCNames(method: Method): MethodObjCNames? =
+    method.descriptor.let { descriptor ->
+      when {
+        !needsObjCNameAnnotation(descriptor) -> null
+        else -> method.toObjCNames()
+      }
     }
 
   companion object {

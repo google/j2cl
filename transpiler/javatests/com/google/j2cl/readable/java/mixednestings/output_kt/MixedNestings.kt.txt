@@ -24,6 +24,7 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
+@ObjCName("J2ktMixednestingsMyInterface", exact = true)
 fun interface MyInterface {
  @ObjCName("fun")
  fun `fun`(
@@ -41,6 +42,7 @@ open class MixedNestings {
   A().a()
  }
 
+ @ObjCName("J2ktMixednestingsMixedNestings_A", exact = true)
  open inner class A internal constructor() {
   @ObjCName("aa")
   open fun aa() {}

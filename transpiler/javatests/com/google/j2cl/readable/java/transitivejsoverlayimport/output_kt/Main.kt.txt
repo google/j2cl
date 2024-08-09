@@ -31,12 +31,14 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
+@ObjCName("J2ktTransitivejsoverlayimportImmediate", exact = true)
 @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
 open class Immediate internal constructor(): Transitive() {
  @JsOverlay
  internal fun doImmediateInstanceMethod_pp_transitivejsoverlayimport() {}
 }
 
+@ObjCName("J2ktTransitivejsoverlayimportNonNativeUpper", exact = true)
 open class NonNativeUpper: Immediate {
  @JsConstructor
  constructor()
@@ -44,6 +46,7 @@ open class NonNativeUpper: Immediate {
  internal open fun doNonNativeUpperInstanceMethod_pp_transitivejsoverlayimport() {}
 }
 
+@ObjCName("J2ktTransitivejsoverlayimportNonNativeLower", exact = true)
 open class NonNativeLower: NonNativeUpper {
  @JsConstructor
  constructor()
@@ -51,6 +54,7 @@ open class NonNativeLower: NonNativeUpper {
  internal open fun doNonNativeLowerInstanceMethod_pp_transitivejsoverlayimport() {}
 }
 
+@ObjCName("J2ktTransitivejsoverlayimportTransitive", exact = true)
 @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
 open class Transitive internal constructor() {
  @JsProperty(name = "constructor")

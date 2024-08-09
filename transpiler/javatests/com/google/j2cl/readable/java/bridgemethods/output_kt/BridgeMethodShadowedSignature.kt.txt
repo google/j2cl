@@ -27,6 +27,7 @@ import kotlin.native.ObjCName
 
 @ObjCName("J2ktBridgemethodsBridgeMethodShadowedSignature", exact = true)
 open class BridgeMethodShadowedSignature {
+ @ObjCName("J2ktBridgemethodsBridgeMethodShadowedSignature_I", exact = true)
  fun interface I<I1> {
   @ObjCName("get")
   fun get(
@@ -34,6 +35,7 @@ open class BridgeMethodShadowedSignature {
   ): String?
  }
 
+ @ObjCName("J2ktBridgemethodsBridgeMethodShadowedSignature_B", exact = true)
  abstract class B<B1, B2> internal constructor(): BridgeMethodShadowedSignature.I<B1> {
   @ObjCName("get")
   open fun get(
@@ -43,5 +45,6 @@ open class BridgeMethodShadowedSignature {
   }
  }
 
+ @ObjCName("J2ktBridgemethodsBridgeMethodShadowedSignature_C", exact = true)
  open class C<C1> internal constructor(): BridgeMethodShadowedSignature.B<C1, Consumer<in C1>?>(), BridgeMethodShadowedSignature.I<C1> {}
 }

@@ -298,6 +298,7 @@ open class Lambdas {
   }
  }
 
+ @ObjCName("J2ktLambdasLambdas_FunctionalInterface", exact = true)
  fun interface FunctionalInterface {
   @ObjCName("m")
   fun m(
@@ -305,6 +306,7 @@ open class Lambdas {
   ): Int
  }
 
+ @ObjCName("J2ktLambdasLambdas_Functional", exact = true)
  fun interface Functional<T> {
   @ObjCName("wrap")
   fun wrap(
@@ -312,6 +314,7 @@ open class Lambdas {
   ): Lambdas.Functional<T>?
  }
 
+ @ObjCName("J2ktLambdasLambdas_GenericFunctionalInterface", exact = true)
  fun interface GenericFunctionalInterface<T> {
   @ObjCName("m")
   fun m(
@@ -319,6 +322,7 @@ open class Lambdas {
   ): T
  }
 
+ @ObjCName("J2ktLambdasLambdas_BiFunction", exact = true)
  fun interface BiFunction<T, U, R> {
   @ObjCName("apply")
   fun apply(
@@ -336,12 +340,14 @@ open class Lambdas {
   }
  }
 
+ @ObjCName("J2ktLambdasLambdas_Function", exact = true)
  fun interface Function<T, R> {
   @ObjCName("apply")
   fun apply(
    @ObjCName("withId") t: T
   ): R
 
+  @ObjCName("J2ktLambdasLambdas_FunctionCompanion", exact = true)
   companion object {
    @JvmStatic
    @ObjCName("identity")
@@ -353,19 +359,23 @@ open class Lambdas {
   }
  }
 
+ @ObjCName("J2ktLambdasLambdas_FunctionalInterfaceWithMethodReturningVoid", exact = true)
  fun interface FunctionalInterfaceWithMethodReturningVoid {
   @ObjCName("run")
   fun run()
  }
 
+ @ObjCName("J2ktLambdasLambdas_Parent", exact = true)
  open class Parent internal constructor() {
   @JvmField
+  @ObjCName("fieldInParent_")
   var fieldInParent: Int = 0
 
   @ObjCName("funInParent")
   open fun funInParent() {}
  }
 
+ @ObjCName("J2ktLambdasLambdas_LambdaInSubClass", exact = true)
  open class LambdaInSubClass internal constructor(): Lambdas.Parent() {
   @ObjCName("testLambdaInSubclass")
   open fun testLambdaInSubclass() {
@@ -410,12 +420,14 @@ open class Lambdas {
   )
  }
 
+ @ObjCName("J2ktLambdasLambdas_IdentityFunction", exact = true)
  class IdentityFunction internal constructor(): Lambdas.GenericJsFunction<Any?, Any?> {
   override fun apply(o: Any?): Any? {
    return o
   }
  }
 
+ @ObjCName("J2ktLambdasLambdas_Equals", exact = true)
  interface Equals<T> {
   @ObjCName("get")
   fun get(): T {
@@ -423,11 +435,13 @@ open class Lambdas {
   }
  }
 
+ @ObjCName("J2ktLambdasLambdas_JsSupplier", exact = true)
  fun interface JsSupplier<T: Number?>: Lambdas.Equals<T> {
   @JsMethod
   override fun get(): T
  }
 
+ @ObjCName("J2ktLambdasLambdas_JustADefaultT", exact = true)
  interface JustADefaultT<T> {
   @ObjCName("method")
   fun method(
@@ -435,6 +449,7 @@ open class Lambdas {
   ) {}
  }
 
+ @ObjCName("J2ktLambdasLambdas_JustADefaultS", exact = true)
  interface JustADefaultS<S> {
   @ObjCName("method")
   fun method(
@@ -442,16 +457,19 @@ open class Lambdas {
   ) {}
  }
 
+ @ObjCName("J2ktLambdasLambdas_MarkerWithDefaultMethod", exact = true)
  interface MarkerWithDefaultMethod {
   @ObjCName("defaultMethod")
   fun defaultMethod() {}
  }
 
+ @ObjCName("J2ktLambdasLambdas_Runnable", exact = true)
  fun interface Runnable {
   @ObjCName("run")
   fun run()
  }
 
+ @ObjCName("J2ktLambdasLambdas_Outer", exact = true)
  open inner class Outer internal constructor() {
   internal open fun m_pp_lambdas() {}
 
@@ -462,10 +480,12 @@ open class Lambdas {
   }
  }
 
+ @ObjCName("J2ktLambdasLambdas_Super", exact = true)
  open inner class Super internal constructor() {
   internal open fun m_pp_lambdas() {}
  }
 
+ @ObjCName("J2ktLambdasLambdas_Sub", exact = true)
  open inner class Sub internal constructor(): Lambdas.Super() {
   internal open fun n_pp_lambdas() {
    val r: Lambdas.Runnable? = object : Lambdas.Runnable {
@@ -476,6 +496,7 @@ open class Lambdas {
   }
  }
 
+ @ObjCName("J2ktLambdasLambdas_SubWithLambda", exact = true)
  open inner class SubWithLambda internal constructor(): Lambdas.Super() {
   internal open fun n_pp_lambdas() {
    val r: Lambdas.Runnable? = Lambdas.Runnable {
@@ -484,24 +505,31 @@ open class Lambdas {
   }
  }
 
+ @ObjCName("J2ktLambdasLambdas_EmptyInterface", exact = true)
  interface EmptyInterface {}
 
+ @ObjCName("J2ktLambdasLambdas_EmptyInterfaceProvider", exact = true)
  fun interface EmptyInterfaceProvider {
   @ObjCName("provide")
   fun provide(): Lambdas.EmptyInterface?
  }
 
+ @ObjCName("J2ktLambdasLambdas_ProviderHolder", exact = true)
  open class ProviderHolder internal constructor() {
+  @ObjCName("J2ktLambdasLambdas_ProviderHolderCompanion", exact = true)
   companion object {
    @JvmField
+   @ObjCName("emptyInterface_")
    val emptyInterface: Lambdas.EmptyInterface? = object : Lambdas.EmptyInterface {}
 
    @JvmField
+   @ObjCName("provideFromField_")
    val provideFromField: Lambdas.EmptyInterfaceProvider? = Lambdas.EmptyInterfaceProvider {
     return@EmptyInterfaceProvider Lambdas.ProviderHolder.emptyInterface
    }
 
    @JvmField
+   @ObjCName("provideFromAnonImpl_")
    val provideFromAnonImpl: Lambdas.EmptyInterfaceProvider? = Lambdas.EmptyInterfaceProvider {
     return@EmptyInterfaceProvider object : Lambdas.EmptyInterface {}
    }

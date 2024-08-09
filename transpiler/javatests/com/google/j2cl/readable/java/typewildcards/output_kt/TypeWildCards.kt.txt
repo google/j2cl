@@ -28,6 +28,7 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
+@ObjCName("J2ktTypewildcardsFunction", exact = true)
 fun interface Function<I, O> {
  @ObjCName("apply")
  fun apply(
@@ -35,24 +36,30 @@ fun interface Function<I, O> {
  ): O
 }
 
+@ObjCName("J2ktTypewildcardsList", exact = true)
 interface List<I> {}
 
+@ObjCName("J2ktTypewildcardsGenericType", exact = true)
 open class GenericType<T> internal constructor() {
  internal open fun get_pp_typewildcards(): T {
   return null as T
  }
 }
 
+@ObjCName("J2ktTypewildcardsBar", exact = true)
 open class Bar internal constructor() {}
 
+@ObjCName("J2ktTypewildcardsRecursiveType", exact = true)
 open class RecursiveType<T: RecursiveType<T>?> {
  constructor(
   @ObjCName("TypewildcardsRecursiveType") wildcardParameter: RecursiveType<*>?
  )
 }
 
+@ObjCName("J2ktTypewildcardsDeepRecursiveType", exact = true)
 interface DeepRecursiveType<T: GenericType<in T>?> {}
 
+@ObjCName("J2ktTypewildcardsRecursiveSubtype", exact = true)
 open class RecursiveSubtype: RecursiveType<RecursiveSubtype?> {
  constructor(
   @ObjCName("TypewildcardsRecursiveType") wildcardParameter: RecursiveType<*>?
@@ -178,16 +185,19 @@ open class TypeWildCards {
   internal var valMultipleGenerics_pp_typewildcards: TypeWildCards.MultipleGenerics<*, String?, *>? = TypeWildCards.createMultipleGenerics_pp_typewildcards(TypeWildCards.listWithWildcard_pp_typewildcards) as TypeWildCards.MultipleGenerics<*, String?, *>?
  }
 
+ @ObjCName("J2ktTypewildcardsTypeWildCards_X", exact = true)
  fun interface X {
   @ObjCName("m")
   fun m()
  }
 
+ @ObjCName("J2ktTypewildcardsTypeWildCards_Y", exact = true)
  fun interface Y {
   @ObjCName("n")
   fun n()
  }
 
+ @ObjCName("J2ktTypewildcardsTypeWildCards_A", exact = true)
  open class A internal constructor(): TypeWildCards.X {
   @JvmField
   internal var f_pp_typewildcards: Int = 0
@@ -216,12 +226,15 @@ open class TypeWildCards {
  @ObjCName("J2ktTypewildcardsTypeWildCards_SubOtherElement", exact = true)
  abstract inner class SubOtherElement: TypeWildCards.OtherElement(), TypeWildCards.HasKey {}
 
+ @ObjCName("J2ktTypewildcardsTypeWildCards_Foo", exact = true)
  open inner class Foo internal constructor(): GenericType<TypeWildCards.Foo?>() {}
 
+ @ObjCName("J2ktTypewildcardsTypeWildCards_RecursiveInterface", exact = true)
  fun interface RecursiveInterface<T: TypeWildCards.RecursiveInterface<T, C>?, C> {
   @ObjCName("m")
   fun m(): T
  }
 
+ @ObjCName("J2ktTypewildcardsTypeWildCards_MultipleGenerics", exact = true)
  open class MultipleGenerics<A, B, C> internal constructor() {}
 }

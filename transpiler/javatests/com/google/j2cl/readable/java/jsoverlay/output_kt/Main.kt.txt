@@ -89,6 +89,7 @@ open class Main {
   }
  }
 
+ @ObjCName("J2ktJsoverlayMain_NativeJsTypeInterfaceWithOverlayImpl", exact = true)
  open class NativeJsTypeInterfaceWithOverlayImpl internal constructor(): Main.NativeJsTypeInterfaceWithOverlay {
   override fun m(): Int {
    return 0
@@ -175,17 +176,22 @@ open class Main {
   }
  }
 
+ @ObjCName("J2ktJsoverlayMain_NativeJsTypeWithOverlayConstant", exact = true)
  @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
  open class NativeJsTypeWithOverlayConstant internal constructor() {
+  @ObjCName("J2ktJsoverlayMain_NativeJsTypeWithOverlayConstantCompanion", exact = true)
   companion object {
+   @ObjCName("COMPILE_TIME_CONSTANT_")
    @JsOverlay
    const val COMPILE_TIME_CONSTANT: Int = 10
 
+   @ObjCName("STRING_COMPILE_TIME_CONSTANT_")
    @JsOverlay
    const val STRING_COMPILE_TIME_CONSTANT: String = "10"
   }
  }
 
+ @ObjCName("J2ktJsoverlayMain_Intf", exact = true)
  @JsFunction
  fun interface Intf {
   @ObjCName("run")
@@ -193,6 +199,7 @@ open class Main {
  }
 }
 
+@ObjCName("J2ktJsoverlayParameterizedNativeInterface", exact = true)
 @JsType(name = "?", namespace = JsPackage.GLOBAL, isNative = true)
 interface ParameterizedNativeInterface<T> {
  @ObjCName("shadowsTypeVariable")

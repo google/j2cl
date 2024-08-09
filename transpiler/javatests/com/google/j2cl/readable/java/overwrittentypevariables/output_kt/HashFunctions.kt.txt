@@ -26,6 +26,7 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
+@ObjCName("J2ktOverwrittentypevariablesMyFunction", exact = true)
 fun interface MyFunction<F, T> {
  @ObjCName("apply")
  fun apply(
@@ -33,6 +34,7 @@ fun interface MyFunction<F, T> {
  ): T
 }
 
+@ObjCName("J2ktOverwrittentypevariablesHashFunction", exact = true)
 fun interface HashFunction<T>: MyFunction<T, String?> {}
 
 @ObjCName("J2ktOverwrittentypevariablesHashFunctions", exact = true)

@@ -323,6 +323,7 @@ open class DefaultNotNullable {
   }
  }
 
+ @ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullable_ParameterizedInterface", exact = true)
  interface ParameterizedInterface<T: Any> {
   @ObjCName("add")
   fun add(
@@ -335,6 +336,7 @@ open class DefaultNotNullable {
   ): T?
  }
 
+ @ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullable_ImplementsParameterizedInterface", exact = true)
  open inner class ImplementsParameterizedInterface internal constructor(): DefaultNotNullable.ParameterizedInterface<String> {
   override fun add(s: String): String {
    return "Hey"
@@ -345,18 +347,25 @@ open class DefaultNotNullable {
   }
  }
 
+ @ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullable_NullableBound", exact = true)
  interface NullableBound<T: DefaultNotNullable.NullableBound<T>?> {}
 
+ @ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullable_NonNullableBound", exact = true)
  interface NonNullableBound<T: DefaultNotNullable.NonNullableBound<T>> {}
 
+ @ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullable_NullableBoundWithNonNullArgument", exact = true)
  interface NullableBoundWithNonNullArgument: DefaultNotNullable.NullableBound<DefaultNotNullable.NullableBoundWithNonNullArgument> {}
 
+ @ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullable_NullableBoundWithNullableArgument", exact = true)
  interface NullableBoundWithNullableArgument: DefaultNotNullable.NullableBound<DefaultNotNullable.NullableBoundWithNullableArgument?> {}
 
+ @ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullable_NonNullBoundWithNonNullArgument", exact = true)
  interface NonNullBoundWithNonNullArgument: DefaultNotNullable.NonNullableBound<DefaultNotNullable.NonNullBoundWithNonNullArgument> {}
 
+ @ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullable_NonNullBoundWithNullableArgument", exact = true)
  interface NonNullBoundWithNullableArgument: DefaultNotNullable.NonNullableBound<DefaultNotNullable.NonNullBoundWithNullableArgument> {}
 
+ @ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullable_ParameterizedDefaultNullability", exact = true)
  open class ParameterizedDefaultNullability<N: Any> {
   @JvmField
   internal var nullable_pp_nullability_defaultnotnullable: N? = null
@@ -394,6 +403,7 @@ open class DefaultNotNullable {
   internal open fun jsOptional_pp_nullability_defaultnotnullable(a: String, @JsOptional optional: N?) {}
  }
 
+ @ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullable_ParameterizedNullable", exact = true)
  open class ParameterizedNullable<N> {
   @JvmField
   internal var nullable_pp_nullability_defaultnotnullable: N? = null
@@ -428,6 +438,7 @@ open class DefaultNotNullable {
   internal open fun setDefaultNullability_pp_nullability_defaultnotnullable(n: N) {}
  }
 
+ @ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullable_ParameterizedNonNullable", exact = true)
  open class ParameterizedNonNullable<N: Any> {
   @JvmField
   internal var nullable_pp_nullability_defaultnotnullable: N? = null
@@ -462,6 +473,7 @@ open class DefaultNotNullable {
   internal open fun setDefaultNullability_pp_nullability_defaultnotnullable(n: N) {}
  }
 
+ @ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullable_Consumer", exact = true)
  fun interface Consumer<T> {
   @ObjCName("accept")
   fun accept(

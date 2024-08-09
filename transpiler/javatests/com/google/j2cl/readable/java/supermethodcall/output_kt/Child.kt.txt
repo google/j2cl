@@ -26,16 +26,19 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
+@ObjCName("J2ktSupermethodcallGrandParentInterface", exact = true)
 interface GrandParentInterface {
  @ObjCName("defaultGrandParent")
  fun defaultGrandParent() {}
 }
 
+@ObjCName("J2ktSupermethodcallParentInterface", exact = true)
 interface ParentInterface {
  @ObjCName("defaultParent")
  fun defaultParent() {}
 }
 
+@ObjCName("J2ktSupermethodcallGrandParent", exact = true)
 open class GrandParent internal constructor() {
  @ObjCName("grandParentSimplest")
  open fun grandParentSimplest() {}
@@ -57,6 +60,7 @@ open class GrandParent internal constructor() {
  open fun defaultGrandParent() {}
 }
 
+@ObjCName("J2ktSupermethodcallParent", exact = true)
 open class Parent internal constructor(): GrandParent(), ParentInterface {
  @ObjCName("parentSimplest")
  open fun parentSimplest() {}
@@ -111,29 +115,35 @@ open class Child: Parent(), GrandParentInterface {
  }
 }
 
+@ObjCName("J2ktSupermethodcallI1", exact = true)
 interface I1 {
  @ObjCName("m")
  fun m() {}
 }
 
+@ObjCName("J2ktSupermethodcallI2", exact = true)
 fun interface I2 {
  @ObjCName("m")
  fun m()
 }
 
+@ObjCName("J2ktSupermethodcallI3", exact = true)
 interface I3: I1 {}
 
+@ObjCName("J2ktSupermethodcallSuper", exact = true)
 open class Super internal constructor() {
  @ObjCName("m")
  open fun m() {}
 }
 
+@ObjCName("J2ktSupermethodcallSub", exact = true)
 open class Sub internal constructor(): Super(), I2, I3 {
  override fun m() {
   super<I3>.m()
  }
 }
 
+@ObjCName("J2ktSupermethodcallSuperToStringTest", exact = true)
 abstract class SuperToStringTest internal constructor(): I1 {
  override fun toString(): String {
   return super.toString()

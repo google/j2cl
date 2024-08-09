@@ -24,10 +24,13 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
+@ObjCName("J2ktImplementsgenericinterfaceGenericInterface", exact = true)
 interface GenericInterface<T> {}
 
+@ObjCName("J2ktImplementsgenericinterfaceGenericSubInterface", exact = true)
 interface GenericSubInterface<T>: GenericInterface<T> {}
 
+@ObjCName("J2ktImplementsgenericinterfaceGenericInterfaceGenericImpl", exact = true)
 open class GenericInterfaceGenericImpl<T> internal constructor(): GenericInterface<T> {}
 
 @ObjCName("J2ktImplementsgenericinterfaceGenericInterfaceImpl", exact = true)

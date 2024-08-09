@@ -147,30 +147,36 @@ open class CastGenerics<T, E: Number?> {
   }
  }
 
+ @ObjCName("J2ktCastCastGenerics_A", exact = true)
  fun interface A {
   @ObjCName("mA")
   fun mA()
  }
 
+ @ObjCName("J2ktCastCastGenerics_B", exact = true)
  fun interface B {
   @ObjCName("mB")
   fun mB()
  }
 
+ @ObjCName("J2ktCastCastGenerics_BaseImplementor", exact = true)
  abstract class BaseImplementor internal constructor(): CastGenerics.A, CastGenerics.B {}
 
+ @ObjCName("J2ktCastCastGenerics_Implementor", exact = true)
  open class Implementor internal constructor(): CastGenerics.BaseImplementor() {
   override fun mA() {}
 
   override fun mB() {}
  }
 
+ @ObjCName("J2ktCastCastGenerics_Container", exact = true)
  open class Container<T> internal constructor() {
   internal open fun get_pp_cast(): T {
    return null as T
   }
  }
 
+ @ObjCName("J2ktCastCastGenerics_NullMarkedContainer", exact = true)
  open class NullMarkedContainer<T: Any> {
   private var value: T
 
@@ -183,8 +189,10 @@ open class CastGenerics<T, E: Number?> {
   }
  }
 
+ @ObjCName("J2ktCastCastGenerics_Empty1", exact = true)
  interface Empty1 {}
 
+ @ObjCName("J2ktCastCastGenerics_Empty2", exact = true)
  interface Empty2<TT> {}
 
  @ObjCName("J2ktCastCastGenerics_Foo", exact = true)

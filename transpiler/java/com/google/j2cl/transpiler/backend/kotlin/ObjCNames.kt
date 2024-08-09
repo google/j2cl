@@ -20,7 +20,6 @@ import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.FieldDescriptor
 import com.google.j2cl.transpiler.ast.Method
-import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.TypeDeclaration
@@ -28,9 +27,8 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.Variable
-import com.google.j2cl.transpiler.ast.Visibility
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionDeclaration
-import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionObject
+import com.google.j2cl.transpiler.backend.kotlin.ast.Visibility as KtVisibility
 import com.google.j2cl.transpiler.backend.kotlin.common.camelCaseStartsWith
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.common.mapFirst
@@ -53,39 +51,14 @@ internal val String.escapeObjCEnumProperty: String
 
 internal fun Method.toObjCNames(): MethodObjCNames? =
   when {
-    !descriptor.needsObjCNameAnnotations -> null
     descriptor.isConstructor -> toConstructorObjCNames()
     else -> toNonConstructorObjCNames()
   }
 
-private val MethodDescriptor.needsObjCNameAnnotations: Boolean
-  get() =
-    enclosingTypeDescriptor.typeDeclaration.let { enclosingTypeDeclaration ->
-      !enclosingTypeDeclaration.isLocal &&
-        !enclosingTypeDeclaration.isAnonymous &&
-        visibility.needsObjCNameAnnotation &&
-        !isKtOverride
-    }
+internal val KtVisibility.needsObjCNameAnnotation
+  get() = this == KtVisibility.PUBLIC || this == KtVisibility.PROTECTED
 
-internal val FieldDescriptor.needsObjCNameAnnotations: Boolean
-  get() =
-    enclosingTypeDescriptor.typeDeclaration.let { enclosingTypeDeclaration ->
-      enclosingTypeDeclaration.visibility.needsObjCNameAnnotation &&
-        !enclosingTypeDeclaration.isLocal &&
-        !enclosingTypeDeclaration.isAnonymous &&
-        visibility.needsObjCNameAnnotation
-    }
-
-internal val TypeDeclaration.needsObjCNameAnnotation: Boolean
-  get() = visibility.needsObjCNameAnnotation && !isLocal && !isAnonymous
-
-internal val CompanionObject.needsObjCNameAnnotation
-  get() = enclosingTypeDeclaration.needsObjCNameAnnotation
-
-private val Visibility.needsObjCNameAnnotation
-  get() = this == Visibility.PUBLIC || this == Visibility.PROTECTED
-
-private fun Method.toConstructorObjCNames(): MethodObjCNames =
+internal fun Method.toConstructorObjCNames(): MethodObjCNames =
   descriptor.objectiveCName.let { objectiveCName ->
     MethodObjCNames(
       "init",
@@ -109,7 +82,7 @@ private fun Method.toConstructorObjCNames(): MethodObjCNames =
     )
   }
 
-private fun Method.toNonConstructorObjCNames(): MethodObjCNames =
+internal fun Method.toNonConstructorObjCNames(): MethodObjCNames =
   descriptor.objectiveCName.let { objectiveCName ->
     if (objectiveCName == null || !objectiveCName.contains(":")) {
       MethodObjCNames(

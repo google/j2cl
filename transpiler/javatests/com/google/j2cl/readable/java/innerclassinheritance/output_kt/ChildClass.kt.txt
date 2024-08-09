@@ -26,16 +26,20 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
+@ObjCName("J2ktInnerclassinheritanceParentOuter", exact = true)
 open class ParentOuter internal constructor() {
  @JvmField
+ @ObjCName("fieldInParentOuter_")
  var fieldInParentOuter: Int = 0
 
  @ObjCName("funInParentOuter")
  open fun funInParentOuter() {}
 }
 
+@ObjCName("J2ktInnerclassinheritanceParentInner", exact = true)
 open class ParentInner internal constructor() {
  @JvmField
+ @ObjCName("fieldInParentInner_")
  var fieldInParentInner: Int = 0
 
  @ObjCName("funInParentInner")
@@ -70,8 +74,10 @@ open class ChildClass: ParentOuter() {
   LocalClass().test()
  }
 
+ @ObjCName("J2ktInnerclassinheritanceChildClass_InnerClass", exact = true)
  open inner class InnerClass internal constructor(): ParentInner() {
   @JvmField
+  @ObjCName("fieldInInner_")
   var fieldInInner: Int = 0
 
   @ObjCName("funInInner")

@@ -141,11 +141,13 @@ open class MethodReferences<T> {
   }
  }
 
+ @ObjCName("J2ktMethodreferencesMethodReferences_Producer", exact = true)
  fun interface Producer<T> {
   @ObjCName("produce")
   fun produce(): T
  }
 
+ @ObjCName("J2ktMethodreferencesMethodReferences_Predicate", exact = true)
  fun interface Predicate<T> {
   @ObjCName("apply")
   fun apply(
@@ -153,6 +155,7 @@ open class MethodReferences<T> {
   ): Boolean
  }
 
+ @ObjCName("J2ktMethodreferencesMethodReferences_ArrayProducer", exact = true)
  fun interface ArrayProducer<T> {
   @ObjCName("produce")
   fun produce(
@@ -160,12 +163,14 @@ open class MethodReferences<T> {
   ): Array<T>?
  }
 
+ @ObjCName("J2ktMethodreferencesMethodReferences_ObjectCapturingOuter", exact = true)
  open inner class ObjectCapturingOuter internal constructor() {
   internal open fun getMain_pp_methodreferences(): MethodReferences<T>? {
    return this@MethodReferences as MethodReferences<T>?
   }
  }
 
+ @ObjCName("J2ktMethodreferencesMethodReferences_Function", exact = true)
  fun interface Function<T, U> {
   @ObjCName("apply")
   fun apply(
@@ -173,6 +178,7 @@ open class MethodReferences<T> {
   ): U
  }
 
+ @ObjCName("J2ktMethodreferencesMethodReferences_BiFunction", exact = true)
  fun interface BiFunction<T, U, V> {
   @ObjCName("apply")
   fun apply(
@@ -181,12 +187,14 @@ open class MethodReferences<T> {
   ): V
  }
 
+ @ObjCName("J2ktMethodreferencesMethodReferences_JsProducer", exact = true)
  @JsFunction
  fun interface JsProducer<T> {
   @ObjCName("produce")
   fun produce(): T
  }
 
+ @ObjCName("J2ktMethodreferencesMethodReferences_JsFunctionInterface", exact = true)
  @JsFunction
  fun interface JsFunctionInterface<T, U> {
   @ObjCName("apply")
@@ -195,6 +203,7 @@ open class MethodReferences<T> {
   ): U
  }
 
+ @ObjCName("J2ktMethodreferencesMethodReferences_JsBiFunction", exact = true)
  @JsFunction
  fun interface JsBiFunction<T, U, V> {
   @ObjCName("apply")

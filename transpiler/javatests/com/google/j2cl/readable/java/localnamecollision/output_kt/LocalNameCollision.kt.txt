@@ -69,7 +69,9 @@ open class LocalNameCollision {
  }
 }
 
+@ObjCName("J2ktLocalnamecollisionA", exact = true)
 open class A internal constructor() {
+ @ObjCName("J2ktLocalnamecollisionACompanion", exact = true)
  companion object {
   @JvmField
   internal var A_pp_localnamecollision: localnamecollision.A? = null
@@ -86,5 +88,6 @@ open class A internal constructor() {
   }
  }
 
+ @ObjCName("J2ktLocalnamecollisionA_B", exact = true)
  open class B internal constructor() {}
 }

@@ -28,6 +28,7 @@ import kotlin.native.ObjCName
 open class Foo {
  private var nativeBar: Foo.NativeBar? = Foo.NativeBar()
 
+ @ObjCName("J2ktPackageinfosubpackageFoo_NativeBar", exact = true)
  @JsType(name = "Bar", namespace = "packageinfosubpackage.subpackage", isNative = true)
  open class NativeBar {
   constructor()

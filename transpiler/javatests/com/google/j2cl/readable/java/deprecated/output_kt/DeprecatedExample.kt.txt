@@ -55,6 +55,7 @@ open class DeprecatedExample {
   ) {}
  }
 
+ @ObjCName("J2ktDeprecatedDeprecatedExample_DeprecatedInterface", exact = true)
  @JsType
  fun interface DeprecatedInterface {
   @ObjCName("doAThing")
@@ -63,6 +64,7 @@ open class DeprecatedExample {
   )
  }
 
+ @ObjCName("J2ktDeprecatedDeprecatedExample_DeprecatedJsFunction", exact = true)
  @JsFunction
  fun interface DeprecatedJsFunction {
   @ObjCName("doAThing")
@@ -71,13 +73,17 @@ open class DeprecatedExample {
   )
  }
 
+ @ObjCName("J2ktDeprecatedDeprecatedExample_DeprecatedEnum", exact = true)
  @JsType
  enum class DeprecatedEnum {
+  @ObjCName("A_VALUE")
   A_VALUE;
  }
 
+ @ObjCName("J2ktDeprecatedDeprecatedExample_DeprecatedJsEnum", exact = true)
  @JsEnum
  enum class DeprecatedJsEnum {
+  @ObjCName("A_VALUE")
   A_VALUE;
  }
 }

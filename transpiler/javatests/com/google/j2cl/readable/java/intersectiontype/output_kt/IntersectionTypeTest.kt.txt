@@ -29,11 +29,13 @@ import kotlin.jvm.JvmStatic
 import kotlin.let
 import kotlin.native.ObjCName
 
+@ObjCName("J2ktIntersectiontypeGetable", exact = true)
 fun interface Getable<T> {
  @ObjCName("get")
  fun get(): T
 }
 
+@ObjCName("J2ktIntersectiontypeSetable", exact = true)
 fun interface Setable {
  @ObjCName("set")
  fun set(
@@ -41,8 +43,10 @@ fun interface Setable {
  )
 }
 
+@ObjCName("J2ktIntersectiontypeSerial", exact = true)
 interface Serial {}
 
+@ObjCName("J2ktIntersectiontypeCmp", exact = true)
 fun interface Cmp {
  @ObjCName("cmp")
  fun cmp(): Int
@@ -53,6 +57,7 @@ fun interface Cmp {
  }
 }
 
+@ObjCName("J2ktIntersectiontypeCmp2", exact = true)
 fun interface Cmp2<T> {
  @ObjCName("cmp")
  fun cmp(
@@ -60,6 +65,7 @@ fun interface Cmp2<T> {
  ): Int
 }
 
+@ObjCName("J2ktIntersectiontypeCmpImpl", exact = true)
 open class CmpImpl internal constructor(): Cmp {
  override fun cmp(): Int {
   return 1
@@ -180,6 +186,7 @@ open class IntersectionTypeTest<U> {
   }
  }
 
+ @ObjCName("J2ktIntersectiontypeIntersectionTypeTest_MapEntry", exact = true)
  open inner class MapEntry internal constructor() {
   @ObjCName("method")
   open fun <T> method(
@@ -189,11 +196,15 @@ open class IntersectionTypeTest<U> {
   }
  }
 
+ @ObjCName("J2ktIntersectiontypeIntersectionTypeTest_A", exact = true)
  open class A internal constructor() {}
 
+ @ObjCName("J2ktIntersectiontypeIntersectionTypeTest_EmptyA", exact = true)
  interface EmptyA {}
 
+ @ObjCName("J2ktIntersectiontypeIntersectionTypeTest_EmptyB", exact = true)
  interface EmptyB {}
 
+ @ObjCName("J2ktIntersectiontypeIntersectionTypeTest_SomeConcreteType", exact = true)
  open class SomeConcreteType internal constructor() {}
 }

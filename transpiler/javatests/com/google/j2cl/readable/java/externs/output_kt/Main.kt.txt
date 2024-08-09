@@ -67,12 +67,14 @@ open class Main {
   }
  }
 
+ @ObjCName("J2ktExternsMain_FooImpl", exact = true)
  open class FooImpl internal constructor() {
   @JvmField
   @JsProperty(name = "foo")
   internal var foo_pp_externs: String? = null
  }
 
+ @ObjCName("J2ktExternsMain_FooOverlay", exact = true)
  @JsType(name = "Foo", namespace = JsPackage.GLOBAL, isNative = true)
  fun interface FooOverlay {
   @ObjCName("getFoo")

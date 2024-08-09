@@ -182,6 +182,7 @@ open class TryCatch {
   private val closableThing: TryCatch.ClosableThing? = TryCatch.ClosableThing()
  }
 
+ @ObjCName("J2ktTrycatchTryCatch_ClosableThing", exact = true)
  open class ClosableThing internal constructor(): AutoCloseable {
   override fun close() {}
  }

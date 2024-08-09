@@ -1,4 +1,5 @@
 // Generated from "exception/MyException.java"
+@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -18,9 +19,13 @@ package exception
 
 import javaemul.lang.*
 import java.lang.Exception
+import kotlin.OptIn
 import kotlin.Suppress
 import kotlin.Throwable
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 
+@ObjCName("J2ktExceptionMyException", exact = true)
 class MyException: Exception {
  internal constructor()
 

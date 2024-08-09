@@ -192,7 +192,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
       INIT_KEYWORD
     } else {
       val methodDescriptor = method.descriptor
-      val methodObjCNames = method.toObjCNames()
+      val methodObjCNames = objCNameRenderer.renderedObjCNames(method)
       newLineSeparated(
         Source.emptyUnless(methodDescriptor.isStatic) { jvmStaticAnnotationSource() },
         annotationsSource(methodDescriptor, methodObjCNames),

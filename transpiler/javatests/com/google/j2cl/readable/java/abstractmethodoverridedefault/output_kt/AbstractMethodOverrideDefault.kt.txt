@@ -25,6 +25,7 @@ import kotlin.native.ObjCName
 
 @ObjCName("J2ktAbstractmethodoverridedefaultAbstractMethodOverrideDefault", exact = true)
 open class AbstractMethodOverrideDefault {
+ @ObjCName("J2ktAbstractmethodoverridedefaultAbstractMethodOverrideDefault_I", exact = true)
  fun interface I {
   @ObjCName("foo")
   fun foo()
@@ -33,6 +34,7 @@ open class AbstractMethodOverrideDefault {
   fun bar() {}
  }
 
+ @ObjCName("J2ktAbstractmethodoverridedefaultAbstractMethodOverrideDefault_J", exact = true)
  fun interface J {
   @ObjCName("foo")
   fun foo() {}
@@ -41,10 +43,12 @@ open class AbstractMethodOverrideDefault {
   fun bar()
  }
 
+ @ObjCName("J2ktAbstractmethodoverridedefaultAbstractMethodOverrideDefault_A", exact = true)
  abstract class A internal constructor(): AbstractMethodOverrideDefault.I {
   abstract override fun foo()
  }
 
+ @ObjCName("J2ktAbstractmethodoverridedefaultAbstractMethodOverrideDefault_B", exact = true)
  abstract class B internal constructor(): AbstractMethodOverrideDefault.A(), AbstractMethodOverrideDefault.J {
   override fun bar() {
    if (false) {
@@ -55,6 +59,7 @@ open class AbstractMethodOverrideDefault {
   abstract override fun foo()
  }
 
+ @ObjCName("J2ktAbstractmethodoverridedefaultAbstractMethodOverrideDefault_C", exact = true)
  open class C internal constructor(): AbstractMethodOverrideDefault.A() {
   override fun foo() {}
 
