@@ -49,14 +49,14 @@ internal val String.escapeObjCProperty: String
 internal val String.escapeObjCEnumProperty: String
   get() = escapeObjCKeyword.escapeReservedObjCPrefixWith("the")
 
+internal val KtVisibility.needsObjCNameAnnotation
+  get() = isPublic || isProtected
+
 internal fun Method.toObjCNames(): MethodObjCNames? =
   when {
     descriptor.isConstructor -> toConstructorObjCNames()
     else -> toNonConstructorObjCNames()
   }
-
-internal val KtVisibility.needsObjCNameAnnotation
-  get() = this == KtVisibility.PUBLIC || this == KtVisibility.PROTECTED
 
 internal fun Method.toConstructorObjCNames(): MethodObjCNames =
   descriptor.objectiveCName.let { objectiveCName ->

@@ -25,7 +25,6 @@ import com.google.j2cl.transpiler.ast.Library
 import com.google.j2cl.transpiler.ast.MemberDescriptor
 import com.google.j2cl.transpiler.ast.MemberReference
 import com.google.j2cl.transpiler.ast.Type
-import com.google.j2cl.transpiler.ast.Visibility
 import com.google.j2cl.transpiler.backend.common.UniqueNamesResolver.computeUniqueNames
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 
@@ -129,7 +128,7 @@ private fun CompilationUnit.buildPrivateKtInternalMemberDescriptorSet(): Set<Mem
           ) {
             superTypeDeclaration.declaredMethodDescriptors
               .asSequence()
-              .filter { it.isConstructor && it.visibility == Visibility.PRIVATE }
+              .filter { it.isConstructor && it.visibility.isPrivate }
               .forEach { add(it) }
           }
         }
@@ -138,7 +137,7 @@ private fun CompilationUnit.buildPrivateKtInternalMemberDescriptorSet(): Set<Mem
           // Add declared member if it's referenced outside its enclosing type.
           val memberDescriptor = memberReference.target.declarationDescriptor
           val currentTypeDeclaration = currentType.declaration
-          if (memberDescriptor.visibility == Visibility.PRIVATE) {
+          if (memberDescriptor.visibility.isPrivate) {
             val enclosingTypeDeclaration = memberDescriptor.enclosingTypeDescriptor.typeDeclaration
             if (!currentTypeDeclaration.equalsOrEnclosedIn(enclosingTypeDeclaration)) {
               add(memberDescriptor)

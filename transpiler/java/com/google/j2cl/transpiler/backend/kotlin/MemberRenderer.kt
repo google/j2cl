@@ -48,7 +48,6 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.initializer
 import com.google.j2cl.transpiler.backend.kotlin.MemberDescriptorRenderer.Companion.enumValueDeclarationNameSource
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionObject
 import com.google.j2cl.transpiler.backend.kotlin.ast.Member
-import com.google.j2cl.transpiler.backend.kotlin.ast.Visibility as KtVisibility
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.colonSeparated
@@ -148,7 +147,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
       !jvmFieldsAreIllegal &&
         !isConst &&
         !field.isKtLateInit &&
-        environment.ktVisibility(fieldDescriptor) != KtVisibility.PRIVATE
+        !environment.ktVisibility(fieldDescriptor).isPrivate
     val initializer = field.initializer
 
     return newLineSeparated(

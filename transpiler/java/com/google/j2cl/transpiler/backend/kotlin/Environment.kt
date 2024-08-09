@@ -109,8 +109,7 @@ internal data class Environment(
   /** Returns whether the given member descriptor should be rendered as private in Kotlin. */
   private fun isKtPrivate(memberDescriptor: MemberDescriptor): Boolean =
     memberDescriptor.declarationDescriptor.let {
-      it.visibility == Visibility.PRIVATE &&
-        !privateAsKtInternalDeclarationMemberDescriptorSet.contains(it)
+      it.visibility.isPrivate && !privateAsKtInternalDeclarationMemberDescriptorSet.contains(it)
     }
 
   /** Returns Kotlin member visibility. */

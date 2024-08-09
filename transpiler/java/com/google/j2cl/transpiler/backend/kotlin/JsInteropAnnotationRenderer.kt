@@ -25,7 +25,6 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotation
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.assignment
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.literal
-import com.google.j2cl.transpiler.backend.kotlin.ast.Visibility as KtVisibility
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.dotSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
@@ -201,7 +200,7 @@ internal data class JsInteropAnnotationRenderer(val nameRenderer: NameRenderer) 
       // part  of the J2CL ast.
       enclosingTypeDescriptor.isJsType &&
         !enclosingTypeDescriptor.isNative &&
-        environment.ktVisibility(this) == KtVisibility.PUBLIC &&
+        environment.ktVisibility(this).isPublic &&
         originalJsInfo.jsMemberType == JsMemberType.NONE
 
   companion object {
