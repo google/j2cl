@@ -87,7 +87,10 @@ def _compile(
             backend,
             internal_transpiler_flags,
             kt_common_srcs,
-            kotlincopts,
+            # Forcefully enable IR serialization. J2CL only needs this to have
+            # Kotlinc deserialize IR from dependencies; we do not actually emit
+            # any serialized IR (that all happens on the JVM side).
+            kotlincopts + KOTLIN_SERIALIZE_IR_FLAGS,
         )
         library_info = [output_library_info]
     else:
@@ -350,16 +353,19 @@ DEFAULT_J2CL_KOTLINCOPTS = [
     # KMP should be enabled to allow for passing common sources and using
     # expect/actual syntax.
     "-Xmulti-platform",
-    # Enable the serialization of the IR
-    # Currently all IR elements are being serialized to workaround missing IR in
-    # some instances, ex. a lambda within an inline member. See: b/263391416
-    # TODO(b/264661698): Reduce to just serialization of inline functions.
-    "-Xserialize-ir=all",
     # Have kotlinc's IR lowering passes generate objects for SAM implementations.
     # J2CL lowering passes cannot handle invokedynamic-based representations.
     "-Xsam-conversions=class",
     # TODO(b/317551802): Remove this once the language version is updated.
     "-language-version=1.9",
+]
+
+KOTLIN_SERIALIZE_IR_FLAGS = [
+    # Enable the serialization of the IR
+    # Currently all IR elements are being serialized to workaround missing IR in
+    # some instances, ex. a lambda within an inline member. See: b/263391416
+    # TODO(b/264661698): Reduce to just serialization of inline functions.
+    "-Xserialize-ir=all",
 ]
 
 J2CL_JAVA_TOOLCHAIN_ATTRS = {
