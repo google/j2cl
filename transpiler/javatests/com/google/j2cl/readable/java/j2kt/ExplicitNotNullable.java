@@ -13,17 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2ktnotpassing;
+package j2kt;
 
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
 public class ExplicitNotNullable {
-  interface Function<I extends @Nullable Object, O extends @Nullable Object> {
-    O apply(I i);
-  }
-  
   // Replicates wildcard problems in Guava's PairwiseEquivalence.
   static class DependentTypeParameters<E, T extends @Nullable E> {
     DependentTypeParameters<E, T> getThis() {

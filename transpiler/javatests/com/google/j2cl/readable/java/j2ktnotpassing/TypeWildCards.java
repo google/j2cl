@@ -39,22 +39,4 @@ public class TypeWildCards {
     // "addObserver(Observer<? super E> observer)".
     observable.addObserver(e -> {});
   }
-
-  static class WithDependentBounds {
-    interface Event {}
-
-    interface Collection<V> {}
-
-    interface Observer<E extends Event, C extends Collection<E>> {
-      void on(C events);
-    }
-
-    static class Holder<E extends Event, V extends Collection<E>> {
-      Observer<E, V> observer;
-    }
-
-    public static void testHolder(Holder<?, ?> observerHolder) {
-      observerHolder.observer = e -> {};
-    }
-  }
 }

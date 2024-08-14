@@ -17,18 +17,22 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.MemberReference;
+import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeVariable;
 
-/** Inserts projection casts for method-call qualifiers, necessary for Kotlin */
+/** Inserts projection casts for method-call qualifiers, necessary for Kotlin. */
+// TODO(b/359458054): Improve detection of places where projection cast are necessary.
 public final class InsertQualifierProjectionCasts extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
@@ -55,8 +59,11 @@ public final class InsertQualifierProjectionCasts extends NormalizationPass {
               return memberReference;
             }
 
+            ImmutableSet<TypeVariable> currentTypeParameters =
+                getCurrentTypeParameters(getCurrentMember().getDescriptor());
             TypeDescriptor typeDescriptor = qualifier.getTypeDescriptor();
-            TypeDescriptor projectedTypeDescriptor = projectTypeArgumentsUpperBound(typeDescriptor);
+            TypeDescriptor projectedTypeDescriptor =
+                projectTypeArgumentsUpperBound(typeDescriptor, currentTypeParameters);
             if (typeDescriptor.equals(projectedTypeDescriptor)) {
               return memberReference;
             }
@@ -72,13 +79,14 @@ public final class InsertQualifierProjectionCasts extends NormalizationPass {
         });
   }
 
-  private static TypeDescriptor projectTypeArgumentsUpperBound(TypeDescriptor typeDescriptor) {
+  private static TypeDescriptor projectTypeArgumentsUpperBound(
+      TypeDescriptor typeDescriptor, ImmutableSet<TypeVariable> currentTypeParameters) {
     if (typeDescriptor instanceof DeclaredTypeDescriptor) {
       DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
       return DeclaredTypeDescriptor.Builder.from(declaredTypeDescriptor)
           .setTypeArgumentDescriptors(
               declaredTypeDescriptor.getTypeArgumentDescriptors().stream()
-                  .map(InsertQualifierProjectionCasts::projectUpperBound)
+                  .map(typeArgument -> projectUpperBound(typeArgument, currentTypeParameters))
                   .collect(toImmutableList()))
           .build();
     }
@@ -86,14 +94,44 @@ public final class InsertQualifierProjectionCasts extends NormalizationPass {
     return typeDescriptor;
   }
 
-  private static TypeDescriptor projectUpperBound(TypeDescriptor typeDescriptor) {
+  private static TypeDescriptor projectUpperBound(
+      TypeDescriptor typeDescriptor, ImmutableSet<TypeVariable> currentTypeParameters) {
     if (typeDescriptor instanceof TypeVariable) {
       TypeVariable typeVariable = (TypeVariable) typeDescriptor;
       if (typeVariable.isWildcardOrCapture()
           && typeVariable.getLowerBoundTypeDescriptor() == null) {
-        return typeVariable.getUpperBoundTypeDescriptor();
+        return projectFreeTypeVariables(
+            typeVariable.getUpperBoundTypeDescriptor(), currentTypeParameters);
       }
     }
     return typeDescriptor;
+  }
+
+  /** Project non-recursive free type variables to their bounds. */
+  private static TypeDescriptor projectFreeTypeVariables(
+      TypeDescriptor typeDescriptor, ImmutableSet<TypeVariable> currentTypeParameters) {
+    return typeDescriptor.specializeTypeVariables(
+        typeVariable ->
+            !currentTypeParameters.contains(typeVariable) && !typeVariable.hasRecursiveDefinition()
+                ? typeVariable.getUpperBoundTypeDescriptor()
+                : typeVariable);
+  }
+
+  private static ImmutableSet<TypeVariable> getCurrentTypeParameters(
+      MemberDescriptor memberDescriptor) {
+    ImmutableSet.Builder<TypeVariable> builder = ImmutableSet.builder();
+    if (memberDescriptor instanceof MethodDescriptor) {
+      MethodDescriptor methodDescriptor = (MethodDescriptor) memberDescriptor;
+      builder.addAll(methodDescriptor.getTypeParameterTypeDescriptors());
+    }
+
+    if (!memberDescriptor.isStatic()) {
+      builder.addAll(
+          memberDescriptor
+              .getEnclosingTypeDescriptor()
+              .getTypeDeclaration()
+              .getTypeParameterDescriptors());
+    }
+    return builder.build();
   }
 }

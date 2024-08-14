@@ -65,7 +65,7 @@ class TypeWildCards {
   }
 
   public static <T extends Observable<?>> void testObservableParameterized(T observable) {
-    // TODO(b/261839232): "Expected Nothing" issue
+    // TODO(b/261839232): "Expected Nothing" issue, cast to Observable<@Nullable Object> would help
     // observable.addObserver(e -> {});
   }
 
@@ -102,23 +102,21 @@ class TypeWildCards {
     }
   }
 
-  // TODO(b/359458054): Uncomment when InsertQualifierProjectionCasts pass is fixed, and projections
-  //  do not include free {@code C} type variable.
-  // static class WithDependentBounds {
-  //   interface Event {}
-  //
-  //   interface Collection<V> {}
-  //
-  //   interface Observer<E extends Event, C extends Collection<E>> {
-  //     void on(C events);
-  //   }
-  //
-  //   static class Holder<E extends Event, C extends Collection<E>> {
-  //     Observer<E, C> observer;
-  //   }
-  //
-  //   public static void test(Holder<?, ?> holder) {
-  //     holder.observer = e -> {};
-  //   }
-  // }
+  static class WithDependentBounds {
+    interface Event {}
+
+    interface Collection<V> {}
+
+    interface Observer<E extends Event, C extends Collection<E>> {
+      void on(C events);
+    }
+
+    static class Holder<E extends Event, C extends Collection<E>> {
+      Observer<E, C> observer;
+    }
+
+    public static void test(Holder<?, ?> holder) {
+      holder.observer = e -> {};
+    }
+  }
 }

@@ -21,7 +21,6 @@ import javaemul.lang.*
 import kotlin.OptIn
 import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
-import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
@@ -70,40 +69,5 @@ open class TypeWildCards {
   fun addObserver(
    @ObjCName("withJ2ktnotpassingTypeWildCards_Observer") observer: TypeWildCards.Observer<E>?
   )
- }
-
- @ObjCName("J2ktJ2ktnotpassingTypeWildCards_WithDependentBounds", exact = true)
- open class WithDependentBounds internal constructor() {
-  @ObjCName("J2ktJ2ktnotpassingTypeWildCards_WithDependentBoundsCompanion", exact = true)
-  companion object {
-   @JvmStatic
-   @ObjCName("testHolder")
-   fun testHolder(
-    @ObjCName("withJ2ktnotpassingTypeWildCards_WithDependentBounds_Holder") observerHolder: TypeWildCards.WithDependentBounds.Holder<*, *>?
-   ) {
-    (observerHolder as TypeWildCards.WithDependentBounds.Holder<TypeWildCards.WithDependentBounds.Event?, TypeWildCards.WithDependentBounds.Collection<E>?>?)!!.observer_pp_j2ktnotpassing = TypeWildCards.WithDependentBounds.Observer { e ->
-    }
-   }
-  }
-
-  @ObjCName("J2ktJ2ktnotpassingTypeWildCards_WithDependentBounds_Event", exact = true)
-  interface Event {}
-
-  @ObjCName("J2ktJ2ktnotpassingTypeWildCards_WithDependentBounds_Collection", exact = true)
-  interface Collection<V> {}
-
-  @ObjCName("J2ktJ2ktnotpassingTypeWildCards_WithDependentBounds_Observer", exact = true)
-  fun interface Observer<E: TypeWildCards.WithDependentBounds.Event?, C: TypeWildCards.WithDependentBounds.Collection<E>?> {
-   @ObjCName("on")
-   fun on(
-    @ObjCName("withJ2ktnotpassingTypeWildCards_WithDependentBounds_Collection") events: C
-   )
-  }
-
-  @ObjCName("J2ktJ2ktnotpassingTypeWildCards_WithDependentBounds_Holder", exact = true)
-  open class Holder<E: TypeWildCards.WithDependentBounds.Event?, V: TypeWildCards.WithDependentBounds.Collection<E>?> internal constructor() {
-   @JvmField
-   internal var observer_pp_j2ktnotpassing: TypeWildCards.WithDependentBounds.Observer<E, V>? = null
-  }
  }
 }

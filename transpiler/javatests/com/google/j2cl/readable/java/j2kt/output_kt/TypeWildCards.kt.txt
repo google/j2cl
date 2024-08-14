@@ -181,4 +181,39 @@ open class TypeWildCards internal constructor() {
    internal var observer_pp_j2kt: TypeWildCards.WithBounds.Observer<E>? = null
   }
  }
+
+ @ObjCName("J2ktJ2ktTypeWildCards_WithDependentBounds", exact = true)
+ open class WithDependentBounds internal constructor() {
+  @ObjCName("J2ktJ2ktTypeWildCards_WithDependentBoundsCompanion", exact = true)
+  companion object {
+   @JvmStatic
+   @ObjCName("test")
+   fun test(
+    @ObjCName("withJ2ktTypeWildCards_WithDependentBounds_Holder") holder: TypeWildCards.WithDependentBounds.Holder<*, *>?
+   ) {
+    (holder as TypeWildCards.WithDependentBounds.Holder<TypeWildCards.WithDependentBounds.Event?, TypeWildCards.WithDependentBounds.Collection<TypeWildCards.WithDependentBounds.Event?>?>?)!!.observer_pp_j2kt = TypeWildCards.WithDependentBounds.Observer { e ->
+    }
+   }
+  }
+
+  @ObjCName("J2ktJ2ktTypeWildCards_WithDependentBounds_Event", exact = true)
+  interface Event {}
+
+  @ObjCName("J2ktJ2ktTypeWildCards_WithDependentBounds_Collection", exact = true)
+  interface Collection<V> {}
+
+  @ObjCName("J2ktJ2ktTypeWildCards_WithDependentBounds_Observer", exact = true)
+  fun interface Observer<E: TypeWildCards.WithDependentBounds.Event?, C: TypeWildCards.WithDependentBounds.Collection<E>?> {
+   @ObjCName("on")
+   fun on(
+    @ObjCName("withJ2ktTypeWildCards_WithDependentBounds_Collection") events: C
+   )
+  }
+
+  @ObjCName("J2ktJ2ktTypeWildCards_WithDependentBounds_Holder", exact = true)
+  open class Holder<E: TypeWildCards.WithDependentBounds.Event?, C: TypeWildCards.WithDependentBounds.Collection<E>?> internal constructor() {
+   @JvmField
+   internal var observer_pp_j2kt: TypeWildCards.WithDependentBounds.Observer<E, C>? = null
+  }
+ }
 }
