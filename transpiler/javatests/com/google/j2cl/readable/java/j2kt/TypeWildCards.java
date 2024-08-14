@@ -85,4 +85,40 @@ class TypeWildCards {
   public static void testObserverHolder(ObserverHolder<?> observerHolder) {
     observerHolder.observer = e -> {};
   }
+
+  static class WithBounds {
+    interface Event {}
+
+    interface Observer<E extends Event> {
+      void on(E event);
+    }
+
+    static class Holder<E extends Event> {
+      Observer<E> observer;
+    }
+
+    public static void test(Holder<?> holder) {
+      holder.observer = e -> {};
+    }
+  }
+
+  // TODO(b/359458054): Uncomment when InsertQualifierProjectionCasts pass is fixed, and projections
+  //  do not include free {@code C} type variable.
+  // static class WithDependentBounds {
+  //   interface Event {}
+  //
+  //   interface Collection<V> {}
+  //
+  //   interface Observer<E extends Event, C extends Collection<E>> {
+  //     void on(C events);
+  //   }
+  //
+  //   static class Holder<E extends Event, C extends Collection<E>> {
+  //     Observer<E, C> observer;
+  //   }
+  //
+  //   public static void test(Holder<?, ?> holder) {
+  //     holder.observer = e -> {};
+  //   }
+  // }
 }
