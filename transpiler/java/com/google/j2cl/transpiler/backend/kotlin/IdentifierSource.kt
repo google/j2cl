@@ -29,14 +29,18 @@ internal fun qualifiedIdentifierSource(identifier: String): Source =
 
 private val String.identifierString
   get() =
-    replace("$", "___").let { withoutDollars ->
-      withoutDollars.letIf(Keywords.isHard(withoutDollars) || !withoutDollars.isValidIdentifier) {
-        withoutDollars.inBackTicks
+    if (isEmpty()) {
+      "___EMPTY___"
+    } else {
+      replace("$", "___").let { withoutDollars ->
+        withoutDollars.letIf(Keywords.isHard(withoutDollars) || !withoutDollars.isValidIdentifier) {
+          withoutDollars.inBackTicks
+        }
       }
     }
 
 private val String.isValidIdentifier: Boolean
-  get() = first().isValidIdentifierFirstChar && all { it.isValidIdentifierChar }
+  get() = (firstOrNull()?.isValidIdentifierFirstChar ?: false) && all { it.isValidIdentifierChar }
 
 private val Char.isValidIdentifierChar: Boolean
   get() = isLetterOrDigit() || this == '_'

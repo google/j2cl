@@ -33,7 +33,7 @@ open class TypeWildCards {
   fun <T: TypeWildCards.Observable<*>?> testObservableParameterized(
    @ObjCName("withJ2ktnotpassingTypeWildCards_Observable") observable: T
   ) {
-   observable!!.addObserver(TypeWildCards.Observer { e ->
+   observable!!.addObserver(TypeWildCards.Observer { e /* capture-1 of * */ ->
    })
   }
 
@@ -42,7 +42,7 @@ open class TypeWildCards {
   fun testRecursiveObservable(
    @ObjCName("withJ2ktnotpassingTypeWildCards_RecursiveObservable") observable: TypeWildCards.RecursiveObservable<*>?
   ) {
-   observable!!.addObserver(TypeWildCards.Observer { e ->
+   observable!!.addObserver(TypeWildCards.Observer { e /* capture-2 of out TypeWildCards.RecursiveObservable<*>? */ ->
    })
   }
  }

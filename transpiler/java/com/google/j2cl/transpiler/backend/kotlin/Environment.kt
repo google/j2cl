@@ -21,6 +21,7 @@ import com.google.j2cl.transpiler.ast.HasName
 import com.google.j2cl.transpiler.ast.MemberDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.TypeDeclaration
+import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.Visibility
 import com.google.j2cl.transpiler.backend.kotlin.ast.Import
 import com.google.j2cl.transpiler.backend.kotlin.ast.Visibility as KtVisibility
@@ -47,6 +48,7 @@ internal data class Environment(
     mutableMapOf(),
   private val importedOptInQualifiedNamesMutableSet: MutableSet<String> = mutableSetOf(),
   private val privateAsKtInternalDeclarationMemberDescriptorSet: Set<MemberDescriptor> = setOf(),
+  private val captureIndices: MutableMap<TypeVariable, Int> = mutableMapOf(),
 ) {
   /**
    * Returns identifier for the given named node. Use "_MISSING" prefix for missing names, to help
@@ -172,4 +174,7 @@ internal data class Environment(
 
   internal fun isKtNameMangled(memberDescriptor: MemberDescriptor): Boolean =
     memberDescriptor.name != ktMangledName(memberDescriptor)
+
+  internal fun captureIndex(captureTypeVariable: TypeVariable): Int =
+    captureIndices.computeIfAbsent(captureTypeVariable) { captureIndices.size }
 }

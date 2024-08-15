@@ -48,16 +48,19 @@ import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
  * @param typeDescriptor the type descriptor to get the source for
  * @param asSuperType whether to use bridge name for the super-type
  * @param projectRawToWildcards whether to project raw types to use wildcards
+ * @param rendersCaptures whether to render captures
  */
 internal fun NameRenderer.typeDescriptorSource(
   typeDescriptor: TypeDescriptor,
   asSuperType: Boolean = false,
   projectRawToWildcards: Boolean = false,
+  rendersCaptures: Boolean = false,
 ): Source =
   TypeDescriptorRenderer(
       this,
       asSuperType = asSuperType,
       projectRawToWildcards = projectRawToWildcards,
+      rendersCaptures = rendersCaptures,
     )
     .source(typeDescriptor.withImplicitNullability)
 
@@ -72,6 +75,7 @@ internal fun NameRenderer.typeArgumentsSource(typeArguments: List<TypeArgument>)
  * @property seenTypeVariables a set of seen type variables used to detect recursion
  * @property asSuperType whether to render a super-type, using bridge name if present
  * @property projectRawToWildcards whether to project raw types to wildcards, or bounds
+ * @param rendersCaptures whether to render captures
  */
 internal data class TypeDescriptorRenderer(
   private val nameRenderer: NameRenderer,
@@ -79,7 +83,11 @@ internal data class TypeDescriptorRenderer(
   // TODO(b/246842682): Remove when bridge types are materialized as TypeDescriptors
   private val asSuperType: Boolean = false,
   private val projectRawToWildcards: Boolean = false,
+  private val rendersCaptures: Boolean = false,
 ) {
+  private val environment: Environment
+    get() = nameRenderer.environment
+
   /** Returns source for the given type descriptor. */
   fun source(typeDescriptor: TypeDescriptor): Source =
     when (typeDescriptor) {
@@ -144,7 +152,7 @@ internal data class TypeDescriptorRenderer(
         if (typeVariable.isWildcardOrCapture) {
           spaceSeparated(
             Source.emptyUnless(typeVariable.isCapture) {
-              blockComment(spaceSeparated(CAPTURE_KEYWORD, OF_KEYWORD))
+              captureSource(typeVariable).let { if (rendersCaptures) it else blockComment(it) }
             },
             typeVariable.lowerBoundTypeDescriptor.let { lowerBound ->
               if (lowerBound != null) {
@@ -187,4 +195,14 @@ internal data class TypeDescriptorRenderer(
 
   private fun didSee(typeVariable: TypeVariable): Boolean =
     seenTypeVariables.contains(typeVariable.toDeclaration())
+
+  private fun captureSource(captureTypeVariable: TypeVariable): Source =
+    spaceSeparated(
+      join(
+        CAPTURE_KEYWORD,
+        source("-"),
+        source(environment.captureIndex(captureTypeVariable).inc().toString()),
+      ),
+      OF_KEYWORD,
+    )
 }

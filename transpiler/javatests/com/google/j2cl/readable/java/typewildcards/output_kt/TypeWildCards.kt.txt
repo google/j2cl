@@ -120,7 +120,7 @@ open class TypeWildCards {
  open fun testInferredGenericIntersection() {
   val elements: List<TypeWildCards.Element?>? = null
   val otherElements: List<TypeWildCards.SubOtherElement?>? = null
-  val integers: List<Int?>? = TypeWildCards.transform(TypeWildCards.concat(elements, otherElements), Function { a ->
+  val integers: List<Int?>? = TypeWildCards.transform(TypeWildCards.concat(elements, otherElements), Function { a /* Any? & TypeWildCards.HasKey? & TypeWildCards.IntegerSupplier? */ ->
    a!!.getKey()
    return@Function a!!.get()
   })

@@ -96,6 +96,7 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.VAL_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.VAR_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.asExpression
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.at
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.blockComment
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.classLiteral
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.initializer
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.isExpression
@@ -104,8 +105,8 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.nonNull
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.COLON
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.SPACE
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
-import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.colonSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.dotSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inAngleBrackets
@@ -614,13 +615,17 @@ internal data class ExpressionRenderer(
     )
 
   private fun variableSource(variable: Variable): Source =
-    colonSeparated(
-      nameRenderer.nameSource(variable),
-      variable.typeDescriptor
-        .takeIf { it.isKtDenotableNonWildcard }
-        ?.let { nameRenderer.typeDescriptorSource(it) }
-        .orEmpty(),
-    )
+    join(nameRenderer.nameSource(variable), variableDeclaratorSource(variable.typeDescriptor))
+
+  private fun variableDeclaratorSource(typeDescriptor: TypeDescriptor): Source =
+    if (typeDescriptor.isKtDenotableNonWildcard) {
+      spaceSeparated(COLON, nameRenderer.typeDescriptorSource(typeDescriptor))
+    } else {
+      join(
+        SPACE,
+        blockComment(nameRenderer.typeDescriptorSource(typeDescriptor, rendersCaptures = true)),
+      )
+    }
 
   private fun leftSubExpressionSource(precedence: Precedence, operand: Expression) =
     expressionInParensSource(operand, precedence.requiresParensOnLeft(operand.precedence))
