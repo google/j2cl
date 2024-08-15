@@ -12,9 +12,6 @@ package(
 proto_library(
     name = "foo",
     srcs = ["foo.proto"],
-    deps = [
-        "//java/com/google/protobuf/contrib/immutablejs:options_proto",
-    ],
 )
 
 proto_library(
@@ -22,7 +19,6 @@ proto_library(
     srcs = ["bar.proto"],
     deps = [
         ":foo",
-        "//java/com/google/protobuf/contrib/immutablejs:options_proto",
     ],
 )
 
