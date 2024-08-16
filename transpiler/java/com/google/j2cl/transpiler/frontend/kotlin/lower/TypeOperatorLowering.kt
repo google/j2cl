@@ -81,6 +81,9 @@ internal class TypeOperatorLowering(private val backendContext: JvmBackendContex
   private fun lowerCast(argument: IrExpression, type: IrType): IrExpression =
     when {
       // MODIFIED BY GOOGLE:
+      // If we're casting the result of an implicit cast, skip the implicit cast.
+      argument is IrTypeOperatorCall && argument.operator == IrTypeOperator.IMPLICIT_CAST ->
+        lowerCast(argument.argument, type)
       // Skip cast operations when the argument type and the cast to type match.
       type == argument.type -> argument
       // END OF MODIFICATIONS
