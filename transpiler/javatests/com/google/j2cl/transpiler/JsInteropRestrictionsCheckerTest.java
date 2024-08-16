@@ -1894,7 +1894,14 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  public String toString() { return null; }",
             "}",
             "class AListSubclass<T extends MyJsEnum> {}",
-            "interface EnumList<E extends Enum<E>> {}")
+            "interface EnumList<E extends Enum<E>> {}",
+            "abstract class WithFunctionReturningEnum {",
+            "  abstract Enum f();",
+            "}",
+            // TODO(b/360192255): This code should be rejected by the restriction checker.
+            "abstract class SpecializingEnumToJsEnum extends WithFunctionReturningEnum {",
+            "  abstract MyJsEnum f();",
+            "}")
         .assertErrorsWithoutSourcePosition(
             "Non-custom-valued JsEnum 'MyJsEnum' cannot have constructor 'MyJsEnum()'.",
             "Non-custom-valued JsEnum 'MyJsEnum' cannot have constructor 'MyJsEnum(int x)'.",
