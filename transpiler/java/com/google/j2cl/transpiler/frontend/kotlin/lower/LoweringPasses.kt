@@ -186,6 +186,8 @@ private val loweringPassFactories: List<J2clLoweringPassFactory> = buildList {
   add(::EnumClassConstructorLowering)
   // Implement enumEntries intrinsic. Must run after function inlining.
   add(::EnumEntriesIntrinsicLowering)
+  // Rewrites calls to KFunction.invoke() as FunctionN.invoke().
+  add(::RewriteKFunctionInvokeLowering)
 
   // BLOCK DECOMPOSITION
   // Transforms statement-like-expression nodes into pure-statement. This should be the last
