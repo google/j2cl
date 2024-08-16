@@ -32,6 +32,8 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.STAR_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.blockComment
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.HYPHEN_MINUS
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.NUMBER_SIGN
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.ampersandSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.dotSeparated
@@ -197,12 +199,11 @@ internal data class TypeDescriptorRenderer(
     seenTypeVariables.contains(typeVariable.toDeclaration())
 
   private fun captureSource(captureTypeVariable: TypeVariable): Source =
-    spaceSeparated(
-      join(
-        CAPTURE_KEYWORD,
-        source("-"),
-        source(environment.captureIndex(captureTypeVariable).inc().toString()),
-      ),
+    join(
+      CAPTURE_KEYWORD,
+      NUMBER_SIGN,
+      source(environment.captureIndex(captureTypeVariable).inc().toString()),
+      HYPHEN_MINUS,
       OF_KEYWORD,
     )
 }

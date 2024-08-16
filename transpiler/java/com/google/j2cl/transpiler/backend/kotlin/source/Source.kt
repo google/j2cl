@@ -90,6 +90,8 @@ private constructor(
     val RIGHT_CURLY_BRACKET = source("}")
     val LEFT_SQUARE_BRACKET = source("[")
     val RIGHT_SQUARE_BRACKET = source("]")
+    val NUMBER_SIGN = source("#")
+    val HYPHEN_MINUS = source("-")
 
     /** Returns a source containing the given string. */
     fun source(string: String) =

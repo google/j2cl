@@ -40,7 +40,7 @@ open class TypeWildCards internal constructor() {
   fun testObservable(
    @ObjCName("withJ2ktTypeWildCards_Observable") observable: TypeWildCards.Observable<*>?
   ) {
-   (observable as TypeWildCards.Observable<Any?>?)!!.addObserver(TypeWildCards.Observer { e /* capture-1 of * */ ->
+   (observable as TypeWildCards.Observable<Any?>?)!!.addObserver(TypeWildCards.Observer { e /* capture#1-of * */ ->
    })
   }
 
@@ -55,7 +55,7 @@ open class TypeWildCards internal constructor() {
   fun testSuperWildcardObservable(
    @ObjCName("withJ2ktTypeWildCards_SuperWildcardObservable") observable: TypeWildCards.SuperWildcardObservable<*>?
   ) {
-   (observable as TypeWildCards.SuperWildcardObservable<Any?>?)!!.addObserver(TypeWildCards.Observer { e /* capture-2 of * */ ->
+   (observable as TypeWildCards.SuperWildcardObservable<Any?>?)!!.addObserver(TypeWildCards.Observer { e /* capture#2-of * */ ->
    })
   }
 
@@ -64,7 +64,7 @@ open class TypeWildCards internal constructor() {
   fun testKtInObservable(
    @ObjCName("withJ2ktTypeWildCards_KtInObservable") observable: TypeWildCards.KtInObservable<*>?
   ) {
-   (observable as TypeWildCards.KtInObservable<Any?>?)!!.addObserver(TypeWildCards.KtInObserver { e /* capture-3 of * */ ->
+   (observable as TypeWildCards.KtInObservable<Any?>?)!!.addObserver(TypeWildCards.KtInObserver { e /* capture#3-of * */ ->
    })
   }
 
@@ -79,7 +79,7 @@ open class TypeWildCards internal constructor() {
   fun testObserverHolder(
    @ObjCName("withJ2ktTypeWildCards_ObserverHolder") observerHolder: TypeWildCards.ObserverHolder<*>?
   ) {
-   (observerHolder as TypeWildCards.ObserverHolder<Any?>?)!!.observer_pp_j2kt = TypeWildCards.Observer { e /* capture-4 of * */ ->
+   (observerHolder as TypeWildCards.ObserverHolder<Any?>?)!!.observer_pp_j2kt = TypeWildCards.Observer { e /* capture#4-of * */ ->
    }
   }
  }
@@ -159,7 +159,7 @@ open class TypeWildCards internal constructor() {
    fun test(
     @ObjCName("withJ2ktTypeWildCards_WithBounds_Holder") holder: TypeWildCards.WithBounds.Holder<*>?
    ) {
-    (holder as TypeWildCards.WithBounds.Holder<TypeWildCards.WithBounds.Event?>?)!!.observer_pp_j2kt = TypeWildCards.WithBounds.Observer { e /* capture-5 of out TypeWildCards.WithBounds.Event? */ ->
+    (holder as TypeWildCards.WithBounds.Holder<TypeWildCards.WithBounds.Event?>?)!!.observer_pp_j2kt = TypeWildCards.WithBounds.Observer { e /* capture#5-of out TypeWildCards.WithBounds.Event? */ ->
     }
    }
   }
@@ -191,7 +191,7 @@ open class TypeWildCards internal constructor() {
    fun test(
     @ObjCName("withJ2ktTypeWildCards_WithDependentBounds_Holder") holder: TypeWildCards.WithDependentBounds.Holder<*, *>?
    ) {
-    (holder as TypeWildCards.WithDependentBounds.Holder<TypeWildCards.WithDependentBounds.Event?, TypeWildCards.WithDependentBounds.Collection<TypeWildCards.WithDependentBounds.Event?>?>?)!!.observer_pp_j2kt = TypeWildCards.WithDependentBounds.Observer { e /* capture-6 of out TypeWildCards.WithDependentBounds.Collection<capture-7 of out TypeWildCards.WithDependentBounds.Event?>? */ ->
+    (holder as TypeWildCards.WithDependentBounds.Holder<TypeWildCards.WithDependentBounds.Event?, TypeWildCards.WithDependentBounds.Collection<TypeWildCards.WithDependentBounds.Event?>?>?)!!.observer_pp_j2kt = TypeWildCards.WithDependentBounds.Observer { e /* capture#6-of out TypeWildCards.WithDependentBounds.Collection<capture#7-of out TypeWildCards.WithDependentBounds.Event?>? */ ->
     }
    }
   }
