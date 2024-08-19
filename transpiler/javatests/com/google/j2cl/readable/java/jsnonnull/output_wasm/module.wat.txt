@@ -47,6 +47,22 @@
  ))
 )
 
+;;; Code for jsnonnull.Main.MyFunction.$LambdaAdaptor [type definition]
+(type $jsnonnull.Main.MyFunction.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_x__java_lang_String__java_lang_String (ref $function.m_x__java_lang_String__java_lang_String))
+ ))
+)
+(type $jsnonnull.Main.MyFunction.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $jsnonnull.Main.MyFunction.$LambdaAdaptor.vtable))
+ (field $itable (ref $jsnonnull.Main.MyFunction.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
 ;;; Code for jsnonnull.Main.StringComparator [type definition]
 (type $jsnonnull.Main.StringComparator.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
@@ -127,6 +143,8 @@
 
 ;;; Code for jsnonnull.Main [imports]
 
+;;; Code for jsnonnull.Main.MyFunction.$LambdaAdaptor [imports]
+
 ;;; Code for jsnonnull.Main.StringComparator [imports]
 
 ;;; Code for jsnonnull.Main.NullableStringComparator [imports]
@@ -138,6 +156,14 @@
  (i32.const 0)
 )
 (global $$class@jsnonnull.Main (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for jsnonnull.Main.MyFunction.$LambdaAdaptor [static fields]
+(global $$class-initialized@jsnonnull.Main.MyFunction.$LambdaAdaptor (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsnonnull.Main.MyFunction.$LambdaAdaptor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -562,6 +588,63 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsnonnull.Main)
+
+;;; Code for jsnonnull.Main.MyFunction.$LambdaAdaptor [methods]
+
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_jsnonnull_Main_MyFunction_$LambdaAdaptor@jsnonnull.Main.MyFunction.$LambdaAdaptor
+ (param $this (ref null $jsnonnull.Main.MyFunction.$LambdaAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@jsnonnull.Main.MyFunction.$LambdaAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
+  (if (global.get $$class-initialized@jsnonnull.Main.MyFunction.$LambdaAdaptor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
+  (global.set $$class-initialized@jsnonnull.Main.MyFunction.$LambdaAdaptor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsnonnull.Main.MyFunction.$LambdaAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jsnonnull.Main.MyFunction.$LambdaAdaptor)))
+   (then
+    (return (global.get $$class@jsnonnull.Main.MyFunction.$LambdaAdaptor))
+   )
+  )
+  (global.set $$class@jsnonnull.Main.MyFunction.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsnonnull.Ma...|__java_lang_String_<once>_@jsnonnull.Main.MyFunction.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@jsnonnull.Main.MyFunction.$LambdaAdaptor))
+ )
+)
+
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsnonnull.Main.MyFunction.$LambdaAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jsnonnull.Main.MyFunction.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $jsnonnull.Main.MyFunction.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsnonnull.Main.MyFunction.$LambdaAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@jsnonnull.Main.MyFunction.$LambdaAdaptor)
 
 ;;; Code for jsnonnull.Main.StringComparator [methods]
 

@@ -1,22 +1,3 @@
-;;; Code for enums.Enum3.$LambdaImplementor$1 [type definition]
-(type $enums.Enum3.$LambdaImplementor$1.vtable (sub $java.lang.Object.vtable (struct
- (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_andThen__java_util_function_Function__java_util_function_Function (ref $function.m_andThen__java_util_function_Function__java_util_function_Function))
- (field $m_apply__java_lang_Integer__java_lang_Integer (ref $function.m_apply__java_lang_Integer__java_lang_Integer))
- (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
- (field $m_compose__java_util_function_Function__java_util_function_Function (ref $function.m_compose__java_util_function_Function__java_util_function_Function))
- ))
-)
-(type $enums.Enum3.$LambdaImplementor$1 (sub $java.lang.Object (struct
- (field $vtable (ref $enums.Enum3.$LambdaImplementor$1.vtable))
- (field $itable (ref $enums.Enum3.$LambdaImplementor$1.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
-
 ;;; Code for enums.Enum1 [type definition]
 (type $enums.Enum1.vtable (sub $java.lang.Enum.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
@@ -76,6 +57,25 @@
  ))
 )
 
+;;; Code for enums.Enum3.$LambdaImplementor$1 [type definition]
+(type $enums.Enum3.$LambdaImplementor$1.vtable (sub $java.util.function.Function.$LambdaAdaptor.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_andThen__java_util_function_Function__java_util_function_Function (ref $function.m_andThen__java_util_function_Function__java_util_function_Function))
+ (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
+ (field $m_compose__java_util_function_Function__java_util_function_Function (ref $function.m_compose__java_util_function_Function__java_util_function_Function))
+ (field $m_apply__java_lang_Integer__java_lang_Integer (ref $function.m_apply__java_lang_Integer__java_lang_Integer))
+ ))
+)
+(type $enums.Enum3.$LambdaImplementor$1 (sub $java.util.function.Function.$LambdaAdaptor (struct
+ (field $vtable (ref $enums.Enum3.$LambdaImplementor$1.vtable))
+ (field $itable (ref $enums.Enum3.$LambdaImplementor$1.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
 ;;; Code for enums.Enum2.1 [type definition]
 (type $enums.Enum2.1.vtable (sub $enums.Enum2.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
@@ -97,13 +97,13 @@
  ))
 )
 
-;;; Code for enums.Enum3.$LambdaImplementor$1 [imports]
-
 ;;; Code for enums.Enum1 [imports]
 
 ;;; Code for enums.Enum2 [imports]
 
 ;;; Code for enums.Enum3 [imports]
+
+;;; Code for enums.Enum3.$LambdaImplementor$1 [imports]
 
 ;;; Code for enums.Enum2.1 [imports]
 
@@ -269,163 +269,23 @@
 ;;; Code for enums.Enum3.$LambdaImplementor$1 [vtable.init]
 (global $enums.Enum3.$LambdaImplementor$1.vtable (ref $enums.Enum3.$LambdaImplementor$1.vtable)
  (struct.new $enums.Enum3.$LambdaImplementor$1.vtable
-  (ref.func $$getClassImpl__java_lang_Class@enums.Enum3.$LambdaImplementor$1)
+  (ref.func $$getClassImpl__java_lang_Class@java.util.function.Function.$LambdaAdaptor)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_andThen__java_util_function_Function__java_util_function_Function@enums.Enum3.$LambdaImplementor$1)
-  (ref.func $m_apply__java_lang_Integer__java_lang_Integer@enums.Enum3.$LambdaImplementor$1)
+  (ref.func $m_andThen__java_util_function_Function__java_util_function_Function@java.util.function.Function.$LambdaAdaptor)
   (ref.func $m_apply__java_lang_Object__java_lang_Object@enums.Enum3.$LambdaImplementor$1)
-  (ref.func $m_compose__java_util_function_Function__java_util_function_Function@enums.Enum3.$LambdaImplementor$1)
+  (ref.func $m_compose__java_util_function_Function__java_util_function_Function@java.util.function.Function.$LambdaAdaptor)
+  (ref.func $m_apply__java_lang_Integer__java_lang_Integer@enums.Enum3.$LambdaImplementor$1)
  )
 )
 (global $java.util.function.Function.vtable@$enums.Enum3.$LambdaImplementor$1 (ref $java.util.function.Function.vtable)
  (struct.new $java.util.function.Function.vtable
-  (ref.func $m_andThen__java_util_function_Function__java_util_function_Function@enums.Enum3.$LambdaImplementor$1)
+  (ref.func $m_andThen__java_util_function_Function__java_util_function_Function@java.util.function.Function.$LambdaAdaptor)
   (ref.func $m_apply__java_lang_Object__java_lang_Object@enums.Enum3.$LambdaImplementor$1)
-  (ref.func $m_compose__java_util_function_Function__java_util_function_Function@enums.Enum3.$LambdaImplementor$1)
+  (ref.func $m_compose__java_util_function_Function__java_util_function_Function@java.util.function.Function.$LambdaAdaptor)
  )
 )
-
-;;; Code for enums.Enum3.$LambdaImplementor$1 [methods]
-
-;;; <anonymous> implements Function<Integer, Integer> <anonymous> implements Function<Integer, Integer>.$create()
-(func $$create__@enums.Enum3.$LambdaImplementor$1
- (result (ref null $enums.Enum3.$LambdaImplementor$1))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
- (local $$instance (ref null $enums.Enum3.$LambdaImplementor$1))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
-  (call $$clinit__void_<once>_@enums.Enum3.$LambdaImplementor$1 )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
-  (local.set $$instance (struct.new $enums.Enum3.$LambdaImplementor$1 (ref.as_non_null (global.get $enums.Enum3.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $enums.Enum3.$LambdaImplementor$1.itable)) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
-  (call $$ctor__void_$p_enums_Enum3_$LambdaImplementor$1@enums.Enum3.$LambdaImplementor$1 (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
-  (return (local.get $$instance))
- )
-)
-
-;;; void <anonymous> implements Function<Integer, Integer>.$ctor()
-(func $$ctor__void_$p_enums_Enum3_$LambdaImplementor$1@enums.Enum3.$LambdaImplementor$1
- (param $this (ref null $enums.Enum3.$LambdaImplementor$1))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
- )
-)
-
-;;; Integer <anonymous> implements Function<Integer, Integer>.apply(Integer v)
-(func $m_apply__java_lang_Integer__java_lang_Integer@enums.Enum3.$LambdaImplementor$1
- (type $function.m_apply__java_lang_Integer__java_lang_Integer)
- (param $this.untyped (ref $java.lang.Object))
- (param $v (ref null $java.lang.Integer))
- (result (ref null $java.lang.Integer))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
- (local $this (ref null $enums.Enum3.$LambdaImplementor$1))
- (local.set $this (ref.cast (ref $enums.Enum3.$LambdaImplementor$1) (local.get $this.untyped)))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:14
-  (return (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (i32.const 1) (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $v))))))
- )
-)
-(elem declare func $m_apply__java_lang_Integer__java_lang_Integer@enums.Enum3.$LambdaImplementor$1)
-
-;;; Function<Integer, V> <anonymous> implements Function<Integer, Integer>.andThen(Function<? super Integer, ? extends V> arg0)
-(func $m_andThen__java_util_function_Function__java_util_function_Function@enums.Enum3.$LambdaImplementor$1
- (type $function.m_andThen__java_util_function_Function__java_util_function_Function)
- (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
- (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
- (local $this (ref null $enums.Enum3.$LambdaImplementor$1))
- (local.set $this (ref.cast (ref $enums.Enum3.$LambdaImplementor$1) (local.get $this.untyped)))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
-  (return (call $m_andThen__java_util_function_Function__java_util_function_Function@java.util.function.Function (ref.as_non_null (local.get $this))(local.get $arg0)))
- )
-)
-(elem declare func $m_andThen__java_util_function_Function__java_util_function_Function@enums.Enum3.$LambdaImplementor$1)
-
-;;; Integer <anonymous> implements Function<Integer, Integer>.apply(T arg0)
-(func $m_apply__java_lang_Object__java_lang_Object@enums.Enum3.$LambdaImplementor$1
- (type $function.m_apply__java_lang_Object__java_lang_Object)
- (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
- (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
- (local $this (ref null $enums.Enum3.$LambdaImplementor$1))
- (local.set $this (ref.cast (ref $enums.Enum3.$LambdaImplementor$1) (local.get $this.untyped)))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
-  (return (call_ref $function.m_apply__java_lang_Integer__java_lang_Integer (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Integer) (local.get $arg0))(struct.get $enums.Enum3.$LambdaImplementor$1.vtable $m_apply__java_lang_Integer__java_lang_Integer (struct.get $enums.Enum3.$LambdaImplementor$1 $vtable(local.get $this)))))
- )
-)
-(elem declare func $m_apply__java_lang_Object__java_lang_Object@enums.Enum3.$LambdaImplementor$1)
-
-;;; Function<V, Integer> <anonymous> implements Function<Integer, Integer>.compose(Function<? super V, ? extends Integer> arg0)
-(func $m_compose__java_util_function_Function__java_util_function_Function@enums.Enum3.$LambdaImplementor$1
- (type $function.m_compose__java_util_function_Function__java_util_function_Function)
- (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
- (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
- (local $this (ref null $enums.Enum3.$LambdaImplementor$1))
- (local.set $this (ref.cast (ref $enums.Enum3.$LambdaImplementor$1) (local.get $this.untyped)))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
-  (return (call $m_compose__java_util_function_Function__java_util_function_Function@java.util.function.Function (ref.as_non_null (local.get $this))(local.get $arg0)))
- )
-)
-(elem declare func $m_compose__java_util_function_Function__java_util_function_Function@enums.Enum3.$LambdaImplementor$1)
-
-;;; void <anonymous> implements Function<Integer, Integer>.$clinit()
-(func $$clinit__void_<once>_@enums.Enum3.$LambdaImplementor$1
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
-  (if (global.get $$class-initialized@enums.Enum3.$LambdaImplementor$1)
-   (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
-    (return )
-   )
-  )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
-  (global.set $$class-initialized@enums.Enum3.$LambdaImplementor$1 (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
-  (call $$clinit__void_<once>_@java.lang.Object )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
-  (call $$clinit__void_<once>_@java.util.function.Function )
- )
-)
-
-;;; Class<T> <anonymous> implements Function<Integer, Integer>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@enums.Enum3.$LambdaImplementor$1
- (result (ref null $java.lang.Class))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$class@enums.Enum3.$LambdaImplementor$1)))
-   (then
-    (return (global.get $$class@enums.Enum3.$LambdaImplementor$1))
-   )
-  )
-  (global.set $$class@enums.Enum3.$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|enums.Enum3_...|__java_lang_String_<once>_@enums.Enum3.$LambdaImplementor$1 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
-  (return (global.get $$class@enums.Enum3.$LambdaImplementor$1))
- )
-)
-
-;;; Class<?> <anonymous> implements Function<Integer, Integer>.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@enums.Enum3.$LambdaImplementor$1
- (type $function.$getClassImpl__java_lang_Class)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $enums.Enum3.$LambdaImplementor$1))
- (local.set $this (ref.cast (ref $enums.Enum3.$LambdaImplementor$1) (local.get $this.untyped)))
- (block
-  (return (call $$getClassMetadata__java_lang_Class_<once>_@enums.Enum3.$LambdaImplementor$1 ))
- )
-)
-(elem declare func $$getClassImpl__java_lang_Class@enums.Enum3.$LambdaImplementor$1)
 
 ;;; Code for enums.Enum1 [methods]
 
@@ -964,6 +824,101 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@enums.Enum3)
+
+;;; Code for enums.Enum3.$LambdaImplementor$1 [methods]
+
+;;; <anonymous> implements Function<Integer, Integer> <anonymous> implements Function<Integer, Integer>.$create()
+(func $$create__@enums.Enum3.$LambdaImplementor$1
+ (result (ref null $enums.Enum3.$LambdaImplementor$1))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
+ (local $$instance (ref null $enums.Enum3.$LambdaImplementor$1))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
+  (call $$clinit__void_<once>_@enums.Enum3.$LambdaImplementor$1 )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
+  (local.set $$instance (struct.new $enums.Enum3.$LambdaImplementor$1 (ref.as_non_null (global.get $enums.Enum3.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $enums.Enum3.$LambdaImplementor$1.itable)) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
+  (call $$ctor__void_$p_enums_Enum3_$LambdaImplementor$1@enums.Enum3.$LambdaImplementor$1 (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> implements Function<Integer, Integer>.$ctor()
+(func $$ctor__void_$p_enums_Enum3_$LambdaImplementor$1@enums.Enum3.$LambdaImplementor$1
+ (param $this (ref null $enums.Enum3.$LambdaImplementor$1))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
+  (call $$ctor__void_$p_java_util_function_Function_$LambdaAdaptor@java.util.function.Function.$LambdaAdaptor (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; Integer <anonymous> implements Function<Integer, Integer>.apply(Integer v)
+(func $m_apply__java_lang_Integer__java_lang_Integer@enums.Enum3.$LambdaImplementor$1
+ (type $function.m_apply__java_lang_Integer__java_lang_Integer)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $v (ref null $java.lang.Integer))
+ (result (ref null $java.lang.Integer))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
+ (local $this (ref null $enums.Enum3.$LambdaImplementor$1))
+ (local.set $this (ref.cast (ref $enums.Enum3.$LambdaImplementor$1) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:14
+  (return (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (i32.const 1) (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $v))))))
+ )
+)
+(elem declare func $m_apply__java_lang_Integer__java_lang_Integer@enums.Enum3.$LambdaImplementor$1)
+
+;;; Integer <anonymous> implements Function<Integer, Integer>.apply(T arg0)
+(func $m_apply__java_lang_Object__java_lang_Object@enums.Enum3.$LambdaImplementor$1
+ (type $function.m_apply__java_lang_Object__java_lang_Object)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
+ (local $this (ref null $enums.Enum3.$LambdaImplementor$1))
+ (local.set $this (ref.cast (ref $enums.Enum3.$LambdaImplementor$1) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
+  (return (call_ref $function.m_apply__java_lang_Integer__java_lang_Integer (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Integer) (local.get $arg0))(struct.get $enums.Enum3.$LambdaImplementor$1.vtable $m_apply__java_lang_Integer__java_lang_Integer (struct.get $enums.Enum3.$LambdaImplementor$1 $vtable(local.get $this)))))
+ )
+)
+(elem declare func $m_apply__java_lang_Object__java_lang_Object@enums.Enum3.$LambdaImplementor$1)
+
+;;; void <anonymous> implements Function<Integer, Integer>.$clinit()
+(func $$clinit__void_<once>_@enums.Enum3.$LambdaImplementor$1
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
+  (if (global.get $$class-initialized@enums.Enum3.$LambdaImplementor$1)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
+  (global.set $$class-initialized@enums.Enum3.$LambdaImplementor$1 (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
+  (call $$clinit__void_<once>_@java.util.function.Function.$LambdaAdaptor )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:9
+  (call $$clinit__void_<once>_@java.util.function.Function )
+ )
+)
+
+;;; Class<T> <anonymous> implements Function<Integer, Integer>.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@enums.Enum3.$LambdaImplementor$1
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@enums.Enum3.$LambdaImplementor$1)))
+   (then
+    (return (global.get $$class@enums.Enum3.$LambdaImplementor$1))
+   )
+  )
+  (global.set $$class@enums.Enum3.$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|enums.Enum3_...|__java_lang_String_<once>_@enums.Enum3.$LambdaImplementor$1 )(call $$getClassMetadata__java_lang_Class_<once>_@java.util.function.Function.$LambdaAdaptor )))
+  (return (global.get $$class@enums.Enum3.$LambdaImplementor$1))
+ )
+)
 
 ;;; Code for enums.Enum2.1 [methods]
 

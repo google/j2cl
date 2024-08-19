@@ -489,6 +489,19 @@
  )
 )
 
+;;; Class<?> SomeClass.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@anonymousclass.SomeClass
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $anonymousclass.SomeClass))
+ (local.set $this (ref.cast (ref $anonymousclass.SomeClass) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@anonymousclass.SomeClass ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@anonymousclass.SomeClass)
+
 ;;; Code for anonymousclass.SomeClassWithStaticMembers [methods]
 
 ;;; void SomeClassWithStaticMembers.$ctor(int i)
@@ -542,6 +555,19 @@
   (return (global.get $$class@anonymousclass.SomeClassWithStaticMembers))
  )
 )
+
+;;; Class<?> SomeClassWithStaticMembers.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@anonymousclass.SomeClassWithStaticMembers
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $anonymousclass.SomeClassWithStaticMembers))
+ (local.set $this (ref.cast (ref $anonymousclass.SomeClassWithStaticMembers) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@anonymousclass.SomeClassWithStaticMembers ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@anonymousclass.SomeClassWithStaticMembers)
 
 ;;; Code for anonymousclass.AnonymousClass [methods]
 

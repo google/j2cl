@@ -255,6 +255,19 @@
  )
 )
 
+;;; Class<?> Foo.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@boundedtypesupercall.Main.Foo
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $boundedtypesupercall.Main.Foo))
+ (local.set $this (ref.cast (ref $boundedtypesupercall.Main.Foo) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@boundedtypesupercall.Main.Foo ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@boundedtypesupercall.Main.Foo)
+
 ;;; Code for boundedtypesupercall.Main.Bar [methods]
 
 ;;; Bar<T> Bar.$create()

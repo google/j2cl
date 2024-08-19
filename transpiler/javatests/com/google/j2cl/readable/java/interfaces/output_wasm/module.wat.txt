@@ -21,11 +21,46 @@
  ))
 )
 
+;;; Code for interfaces.Main.Interface.$LambdaAdaptor [type definition]
+(type $interfaces.Main.Interface.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_defaultMethod__java_lang_Object__void (ref $function.m_defaultMethod__java_lang_Object__void))
+ (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
+ ))
+)
+(type $interfaces.Main.Interface.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $interfaces.Main.Interface.$LambdaAdaptor.vtable))
+ (field $itable (ref $interfaces.Main.Interface.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
 ;;; Code for interfaces.Main.SubInterface [type definition]
 (type $interfaces.Main.SubInterface.vtable (sub $interfaces.Main.Interface.vtable (struct
  (field $m_defaultMethod__java_lang_Object__void (ref $function.m_defaultMethod__java_lang_Object__void))
  (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
  (field $m_defaultMethod__java_lang_String__void (ref $function.m_defaultMethod__java_lang_String__void))
+ ))
+)
+
+;;; Code for interfaces.Main.SubInterface.$LambdaAdaptor [type definition]
+(type $interfaces.Main.SubInterface.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_defaultMethod__java_lang_Object__void (ref $function.m_defaultMethod__java_lang_Object__void))
+ (field $m_defaultMethod__java_lang_String__void (ref $function.m_defaultMethod__java_lang_String__void))
+ (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
+ ))
+)
+(type $interfaces.Main.SubInterface.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $interfaces.Main.SubInterface.$LambdaAdaptor.vtable))
+ (field $itable (ref $interfaces.Main.SubInterface.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
 
@@ -93,7 +128,11 @@
 
 ;;; Code for interfaces.Main [imports]
 
+;;; Code for interfaces.Main.Interface.$LambdaAdaptor [imports]
+
 ;;; Code for interfaces.Main.SubInterface [imports]
+
+;;; Code for interfaces.Main.SubInterface.$LambdaAdaptor [imports]
 
 ;;; Code for interfaces.Main.Implementor [imports]
 
@@ -106,6 +145,22 @@
  (i32.const 0)
 )
 (global $$class@interfaces.Main (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for interfaces.Main.Interface.$LambdaAdaptor [static fields]
+(global $$class-initialized@interfaces.Main.Interface.$LambdaAdaptor (mut i32)
+ (i32.const 0)
+)
+(global $$class@interfaces.Main.Interface.$LambdaAdaptor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for interfaces.Main.SubInterface.$LambdaAdaptor [static fields]
+(global $$class-initialized@interfaces.Main.SubInterface.$LambdaAdaptor (mut i32)
+ (i32.const 0)
+)
+(global $$class@interfaces.Main.SubInterface.$LambdaAdaptor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -404,6 +459,80 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@interfaces.Main)
 
+;;; Code for interfaces.Main.Interface.$LambdaAdaptor [methods]
+
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_interfaces_Main_Interface_$LambdaAdaptor@interfaces.Main.Interface.$LambdaAdaptor
+ (param $this (ref null $interfaces.Main.Interface.$LambdaAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:20:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:20:12
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaAdaptor.defaultMethod(T arg0)
+(func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Interface.$LambdaAdaptor
+ (type $function.m_defaultMethod__java_lang_Object__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:20:12
+ (local $this (ref null $interfaces.Main.Interface.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $interfaces.Main.Interface.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:20:12
+  (call $m_defaultMethod__java_lang_Object__void@interfaces.Main.Interface (ref.as_non_null (local.get $this))(local.get $arg0))
+ )
+)
+(elem declare func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Interface.$LambdaAdaptor)
+
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@interfaces.Main.Interface.$LambdaAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:20:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:20:12
+  (if (global.get $$class-initialized@interfaces.Main.Interface.$LambdaAdaptor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:20:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:20:12
+  (global.set $$class-initialized@interfaces.Main.Interface.$LambdaAdaptor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:20:12
+  (call $$clinit__void_<once>_@java.lang.Object )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:20:12
+  (call $$clinit__void_<once>_@interfaces.Main.Interface )
+ )
+)
+
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@interfaces.Main.Interface.$LambdaAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@interfaces.Main.Interface.$LambdaAdaptor)))
+   (then
+    (return (global.get $$class@interfaces.Main.Interface.$LambdaAdaptor))
+   )
+  )
+  (global.set $$class@interfaces.Main.Interface.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|interfaces.M...|__java_lang_String_<once>_@interfaces.Main.Interface.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@interfaces.Main.Interface.$LambdaAdaptor))
+ )
+)
+
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@interfaces.Main.Interface.$LambdaAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $interfaces.Main.Interface.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $interfaces.Main.Interface.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@interfaces.Main.Interface.$LambdaAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@interfaces.Main.Interface.$LambdaAdaptor)
+
 ;;; Code for interfaces.Main.SubInterface [methods]
 
 ;;; void SubInterface.defaultMethod(String s)
@@ -449,6 +578,95 @@
   (return (global.get $$class@interfaces.Main.SubInterface))
  )
 )
+
+;;; Code for interfaces.Main.SubInterface.$LambdaAdaptor [methods]
+
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_interfaces_Main_SubInterface_$LambdaAdaptor@interfaces.Main.SubInterface.$LambdaAdaptor
+ (param $this (ref null $interfaces.Main.SubInterface.$LambdaAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:38:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:38:12
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaAdaptor.defaultMethod(T arg0)
+(func $m_defaultMethod__java_lang_Object__void@interfaces.Main.SubInterface.$LambdaAdaptor
+ (type $function.m_defaultMethod__java_lang_Object__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:38:12
+ (local $this (ref null $interfaces.Main.SubInterface.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $interfaces.Main.SubInterface.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:38:12
+  (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0)))
+ )
+)
+(elem declare func $m_defaultMethod__java_lang_Object__void@interfaces.Main.SubInterface.$LambdaAdaptor)
+
+;;; void $LambdaAdaptor.defaultMethod(String arg0)
+(func $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface.$LambdaAdaptor
+ (type $function.m_defaultMethod__java_lang_String__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.String))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:38:12
+ (local $this (ref null $interfaces.Main.SubInterface.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $interfaces.Main.SubInterface.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:38:12
+  (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(local.get $arg0))
+ )
+)
+(elem declare func $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface.$LambdaAdaptor)
+
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@interfaces.Main.SubInterface.$LambdaAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:38:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:38:12
+  (if (global.get $$class-initialized@interfaces.Main.SubInterface.$LambdaAdaptor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:38:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:38:12
+  (global.set $$class-initialized@interfaces.Main.SubInterface.$LambdaAdaptor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:38:12
+  (call $$clinit__void_<once>_@java.lang.Object )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:38:12
+  (call $$clinit__void_<once>_@interfaces.Main.SubInterface )
+ )
+)
+
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@interfaces.Main.SubInterface.$LambdaAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@interfaces.Main.SubInterface.$LambdaAdaptor)))
+   (then
+    (return (global.get $$class@interfaces.Main.SubInterface.$LambdaAdaptor))
+   )
+  )
+  (global.set $$class@interfaces.Main.SubInterface.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|interfaces.M...|__java_lang_String_<once>_@interfaces.Main.SubInterface.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@interfaces.Main.SubInterface.$LambdaAdaptor))
+ )
+)
+
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@interfaces.Main.SubInterface.$LambdaAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $interfaces.Main.SubInterface.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $interfaces.Main.SubInterface.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@interfaces.Main.SubInterface.$LambdaAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@interfaces.Main.SubInterface.$LambdaAdaptor)
 
 ;;; Code for interfaces.Main.Implementor [methods]
 
@@ -652,6 +870,19 @@
   (return (global.get $$class@interfaces.Main.AbstractImplementor))
  )
 )
+
+;;; Class<?> AbstractImplementor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@interfaces.Main.AbstractImplementor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $interfaces.Main.AbstractImplementor))
+ (local.set $this (ref.cast (ref $interfaces.Main.AbstractImplementor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@interfaces.Main.AbstractImplementor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@interfaces.Main.AbstractImplementor)
 
 ;;; Code for interfaces.Main.EnumImplementor [methods]
 

@@ -357,6 +357,19 @@
  )
 )
 
+;;; Class<?> AbstractType.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@typeannotations.AbstractType
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $typeannotations.AbstractType))
+ (local.set $this (ref.cast (ref $typeannotations.AbstractType) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@typeannotations.AbstractType ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@typeannotations.AbstractType)
+
 ;;; Code for typeannotations.AbstractTypeNonNull [methods]
 
 ;;; void AbstractTypeNonNull.$ctor()
@@ -418,6 +431,19 @@
   (return (global.get $$class@typeannotations.AbstractTypeNonNull))
  )
 )
+
+;;; Class<?> AbstractTypeNonNull.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@typeannotations.AbstractTypeNonNull
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $typeannotations.AbstractTypeNonNull))
+ (local.set $this (ref.cast (ref $typeannotations.AbstractTypeNonNull) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@typeannotations.AbstractTypeNonNull ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@typeannotations.AbstractTypeNonNull)
 
 ;;; Code for typeannotations.Parent [methods]
 

@@ -136,6 +136,10 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     types.add(type);
   }
 
+  public void addTypes(List<Type> types) {
+    types.forEach(this::addType);
+  }
+
   public List<Member> getMembers() {
     return members;
   }

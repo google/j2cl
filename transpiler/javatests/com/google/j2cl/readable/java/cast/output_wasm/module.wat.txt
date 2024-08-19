@@ -41,6 +41,38 @@
  ))
 )
 
+;;; Code for cast.CastGenerics.A.$LambdaAdaptor [type definition]
+(type $cast.CastGenerics.A.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_mA__void (ref $function.m_mA__void))
+ ))
+)
+(type $cast.CastGenerics.A.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $cast.CastGenerics.A.$LambdaAdaptor.vtable))
+ (field $itable (ref $cast.CastGenerics.A.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
+;;; Code for cast.CastGenerics.B.$LambdaAdaptor [type definition]
+(type $cast.CastGenerics.B.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_mB__void (ref $function.m_mB__void))
+ ))
+)
+(type $cast.CastGenerics.B.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $cast.CastGenerics.B.$LambdaAdaptor.vtable))
+ (field $itable (ref $cast.CastGenerics.B.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
 ;;; Code for cast.CastGenerics.BaseImplementor [type definition]
 (type $cast.CastGenerics.BaseImplementor.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
@@ -257,6 +289,10 @@
 
 ;;; Code for cast.CastGenerics [imports]
 
+;;; Code for cast.CastGenerics.A.$LambdaAdaptor [imports]
+
+;;; Code for cast.CastGenerics.B.$LambdaAdaptor [imports]
+
 ;;; Code for cast.CastGenerics.BaseImplementor [imports]
 
 ;;; Code for cast.CastGenerics.Container [imports]
@@ -286,6 +322,22 @@
  (i32.const 0)
 )
 (global $$class@cast.CastGenerics (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for cast.CastGenerics.A.$LambdaAdaptor [static fields]
+(global $$class-initialized@cast.CastGenerics.A.$LambdaAdaptor (mut i32)
+ (i32.const 0)
+)
+(global $$class@cast.CastGenerics.A.$LambdaAdaptor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for cast.CastGenerics.B.$LambdaAdaptor [static fields]
+(global $$class-initialized@cast.CastGenerics.B.$LambdaAdaptor (mut i32)
+ (i32.const 0)
+)
+(global $$class@cast.CastGenerics.B.$LambdaAdaptor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -1109,6 +1161,120 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@cast.CastGenerics)
 
+;;; Code for cast.CastGenerics.A.$LambdaAdaptor [methods]
+
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_cast_CastGenerics_A_$LambdaAdaptor@cast.CastGenerics.A.$LambdaAdaptor
+ (param $this (ref null $cast.CastGenerics.A.$LambdaAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:29:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:29:12
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@cast.CastGenerics.A.$LambdaAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:29:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:29:12
+  (if (global.get $$class-initialized@cast.CastGenerics.A.$LambdaAdaptor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:29:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:29:12
+  (global.set $$class-initialized@cast.CastGenerics.A.$LambdaAdaptor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:29:12
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@cast.CastGenerics.A.$LambdaAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@cast.CastGenerics.A.$LambdaAdaptor)))
+   (then
+    (return (global.get $$class@cast.CastGenerics.A.$LambdaAdaptor))
+   )
+  )
+  (global.set $$class@cast.CastGenerics.A.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|cast.CastGen...|__java_lang_String_<once>_@cast.CastGenerics.A.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@cast.CastGenerics.A.$LambdaAdaptor))
+ )
+)
+
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@cast.CastGenerics.A.$LambdaAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $cast.CastGenerics.A.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $cast.CastGenerics.A.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@cast.CastGenerics.A.$LambdaAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@cast.CastGenerics.A.$LambdaAdaptor)
+
+;;; Code for cast.CastGenerics.B.$LambdaAdaptor [methods]
+
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_cast_CastGenerics_B_$LambdaAdaptor@cast.CastGenerics.B.$LambdaAdaptor
+ (param $this (ref null $cast.CastGenerics.B.$LambdaAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:33:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:33:12
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@cast.CastGenerics.B.$LambdaAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:33:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:33:12
+  (if (global.get $$class-initialized@cast.CastGenerics.B.$LambdaAdaptor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:33:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:33:12
+  (global.set $$class-initialized@cast.CastGenerics.B.$LambdaAdaptor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:33:12
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@cast.CastGenerics.B.$LambdaAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@cast.CastGenerics.B.$LambdaAdaptor)))
+   (then
+    (return (global.get $$class@cast.CastGenerics.B.$LambdaAdaptor))
+   )
+  )
+  (global.set $$class@cast.CastGenerics.B.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|cast.CastGen...|__java_lang_String_<once>_@cast.CastGenerics.B.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@cast.CastGenerics.B.$LambdaAdaptor))
+ )
+)
+
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@cast.CastGenerics.B.$LambdaAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $cast.CastGenerics.B.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $cast.CastGenerics.B.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@cast.CastGenerics.B.$LambdaAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@cast.CastGenerics.B.$LambdaAdaptor)
+
 ;;; Code for cast.CastGenerics.BaseImplementor [methods]
 
 ;;; void BaseImplementor.$ctor()
@@ -1152,6 +1318,19 @@
   (return (global.get $$class@cast.CastGenerics.BaseImplementor))
  )
 )
+
+;;; Class<?> BaseImplementor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@cast.CastGenerics.BaseImplementor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $cast.CastGenerics.BaseImplementor))
+ (local.set $this (ref.cast (ref $cast.CastGenerics.BaseImplementor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@cast.CastGenerics.BaseImplementor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@cast.CastGenerics.BaseImplementor)
 
 ;;; Code for cast.CastGenerics.Container [methods]
 

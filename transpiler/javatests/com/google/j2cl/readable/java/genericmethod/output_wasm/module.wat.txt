@@ -34,6 +34,38 @@
  ))
 )
 
+;;; Code for genericmethod.GenericMethod.Consumer.$LambdaAdaptor [type definition]
+(type $genericmethod.GenericMethod.Consumer.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_accept__java_lang_Object__void (ref $function.m_accept__java_lang_Object__void))
+ ))
+)
+(type $genericmethod.GenericMethod.Consumer.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $genericmethod.GenericMethod.Consumer.$LambdaAdaptor.vtable))
+ (field $itable (ref $genericmethod.GenericMethod.Consumer.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
+;;; Code for genericmethod.GenericMethod.Supplier.$LambdaAdaptor [type definition]
+(type $genericmethod.GenericMethod.Supplier.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
+ ))
+)
+(type $genericmethod.GenericMethod.Supplier.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $genericmethod.GenericMethod.Supplier.$LambdaAdaptor.vtable))
+ (field $itable (ref $genericmethod.GenericMethod.Supplier.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
 ;;; Code for genericmethod.GenericMethod.SuperContainer [type definition]
 (type $genericmethod.GenericMethod.SuperContainer.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
@@ -142,6 +174,10 @@
 
 ;;; Code for genericmethod.GenericMethod [imports]
 
+;;; Code for genericmethod.GenericMethod.Consumer.$LambdaAdaptor [imports]
+
+;;; Code for genericmethod.GenericMethod.Supplier.$LambdaAdaptor [imports]
+
 ;;; Code for genericmethod.GenericMethod.SuperContainer [imports]
 
 ;;; Code for genericmethod.GenericMethod.Container [imports]
@@ -157,6 +193,22 @@
  (i32.const 0)
 )
 (global $$class@genericmethod.GenericMethod (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for genericmethod.GenericMethod.Consumer.$LambdaAdaptor [static fields]
+(global $$class-initialized@genericmethod.GenericMethod.Consumer.$LambdaAdaptor (mut i32)
+ (i32.const 0)
+)
+(global $$class@genericmethod.GenericMethod.Consumer.$LambdaAdaptor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for genericmethod.GenericMethod.Supplier.$LambdaAdaptor [static fields]
+(global $$class-initialized@genericmethod.GenericMethod.Supplier.$LambdaAdaptor (mut i32)
+ (i32.const 0)
+)
+(global $$class@genericmethod.GenericMethod.Supplier.$LambdaAdaptor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -834,6 +886,120 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@genericmethod.GenericMethod)
+
+;;; Code for genericmethod.GenericMethod.Consumer.$LambdaAdaptor [methods]
+
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_genericmethod_GenericMethod_Consumer_$LambdaAdaptor@genericmethod.GenericMethod.Consumer.$LambdaAdaptor
+ (param $this (ref null $genericmethod.GenericMethod.Consumer.$LambdaAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:135:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:135:12
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@genericmethod.GenericMethod.Consumer.$LambdaAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:135:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:135:12
+  (if (global.get $$class-initialized@genericmethod.GenericMethod.Consumer.$LambdaAdaptor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:135:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:135:12
+  (global.set $$class-initialized@genericmethod.GenericMethod.Consumer.$LambdaAdaptor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:135:12
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@genericmethod.GenericMethod.Consumer.$LambdaAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@genericmethod.GenericMethod.Consumer.$LambdaAdaptor)))
+   (then
+    (return (global.get $$class@genericmethod.GenericMethod.Consumer.$LambdaAdaptor))
+   )
+  )
+  (global.set $$class@genericmethod.GenericMethod.Consumer.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|genericmetho...|__java_lang_String_<once>_@genericmethod.GenericMethod.Consumer.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@genericmethod.GenericMethod.Consumer.$LambdaAdaptor))
+ )
+)
+
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@genericmethod.GenericMethod.Consumer.$LambdaAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $genericmethod.GenericMethod.Consumer.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $genericmethod.GenericMethod.Consumer.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@genericmethod.GenericMethod.Consumer.$LambdaAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@genericmethod.GenericMethod.Consumer.$LambdaAdaptor)
+
+;;; Code for genericmethod.GenericMethod.Supplier.$LambdaAdaptor [methods]
+
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_genericmethod_GenericMethod_Supplier_$LambdaAdaptor@genericmethod.GenericMethod.Supplier.$LambdaAdaptor
+ (param $this (ref null $genericmethod.GenericMethod.Supplier.$LambdaAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:139:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:139:12
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@genericmethod.GenericMethod.Supplier.$LambdaAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:139:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:139:12
+  (if (global.get $$class-initialized@genericmethod.GenericMethod.Supplier.$LambdaAdaptor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:139:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:139:12
+  (global.set $$class-initialized@genericmethod.GenericMethod.Supplier.$LambdaAdaptor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:139:12
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@genericmethod.GenericMethod.Supplier.$LambdaAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@genericmethod.GenericMethod.Supplier.$LambdaAdaptor)))
+   (then
+    (return (global.get $$class@genericmethod.GenericMethod.Supplier.$LambdaAdaptor))
+   )
+  )
+  (global.set $$class@genericmethod.GenericMethod.Supplier.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|genericmetho...|__java_lang_String_<once>_@genericmethod.GenericMethod.Supplier.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@genericmethod.GenericMethod.Supplier.$LambdaAdaptor))
+ )
+)
+
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@genericmethod.GenericMethod.Supplier.$LambdaAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $genericmethod.GenericMethod.Supplier.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $genericmethod.GenericMethod.Supplier.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@genericmethod.GenericMethod.Supplier.$LambdaAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@genericmethod.GenericMethod.Supplier.$LambdaAdaptor)
 
 ;;; Code for genericmethod.GenericMethod.SuperContainer [methods]
 

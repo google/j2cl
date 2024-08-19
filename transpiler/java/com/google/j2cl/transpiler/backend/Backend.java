@@ -21,6 +21,7 @@ import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.backend.closure.OutputGeneratorStage;
 import com.google.j2cl.transpiler.backend.kotlin.KotlinGeneratorStage;
 import com.google.j2cl.transpiler.backend.wasm.WasmGeneratorStage;
+import com.google.j2cl.transpiler.passes.AddAbstractLambdaAdaptorClasses;
 import com.google.j2cl.transpiler.passes.AddAbstractMethodStubs;
 import com.google.j2cl.transpiler.passes.AddBridgeMethods;
 import com.google.j2cl.transpiler.passes.AddDisambiguatingOverloadResolutionCastsJ2kt;
@@ -410,7 +411,9 @@ public enum Backend {
           VerifySingleAstReference::new,
           VerifyParamAndArgCounts::new,
           VerifyReferenceScoping::new,
+          OptimizeAnonymousInnerClassesToFunctionExpressions::new,
           ImplementLambdaExpressionsViaImplementorClasses::new,
+          AddAbstractLambdaAdaptorClasses::new,
 
           // Default constructors and explicit super calls should be synthesized first.
           CreateImplicitConstructors::new,
@@ -554,7 +557,9 @@ public enum Backend {
           VerifySingleAstReference::new,
           VerifyParamAndArgCounts::new,
           VerifyReferenceScoping::new,
+          OptimizeAnonymousInnerClassesToFunctionExpressions::new,
           ImplementLambdaExpressionsViaImplementorClasses::new,
+          AddAbstractLambdaAdaptorClasses::new,
 
           // Default constructors and explicit super calls should be synthesized first.
           CreateImplicitConstructors::new,

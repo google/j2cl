@@ -32,6 +32,7 @@ import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.Type;
+import com.google.j2cl.transpiler.ast.TypeDeclaration.Origin;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.TypeLiteral;
@@ -57,7 +58,7 @@ public class ImplementClassMetadataViaGetters extends NormalizationPass {
 
   /** Synthesizes the getClass() override for this class. */
   private static void synthesizeGetClassImplementationMethods(Type type) {
-    if (type.isInterface() || type.isAbstract() || type.isNative()) {
+    if (!needsGetClassImplementation(type)) {
       return;
     }
 
@@ -80,6 +81,13 @@ public class ImplementClassMetadataViaGetters extends NormalizationPass {
                     .build())
             .setSourcePosition(SourcePosition.NONE)
             .build());
+  }
+
+  private static boolean needsGetClassImplementation(Type type) {
+    if (type.isInterface() || type.isNative()) {
+      return false;
+    }
+    return type.getDeclaration().getOrigin() != Origin.LAMBDA_IMPLEMENTOR;
   }
 
   private static MethodDescriptor getGetClassImplMethodDescriptor(

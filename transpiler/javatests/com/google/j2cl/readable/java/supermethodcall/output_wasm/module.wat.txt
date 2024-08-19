@@ -80,6 +80,22 @@
  ))
 )
 
+;;; Code for supermethodcall.I2.$LambdaAdaptor [type definition]
+(type $supermethodcall.I2.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_m__void (ref $function.m_m__void))
+ ))
+)
+(type $supermethodcall.I2.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $supermethodcall.I2.$LambdaAdaptor.vtable))
+ (field $itable (ref $supermethodcall.I2.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
 ;;; Code for supermethodcall.Parent [type definition]
 (type $supermethodcall.Parent.vtable (sub $supermethodcall.GrandParent.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
@@ -159,6 +175,8 @@
 ;;; Code for supermethodcall.Super [imports]
 
 ;;; Code for supermethodcall.SuperToStringTest [imports]
+
+;;; Code for supermethodcall.I2.$LambdaAdaptor [imports]
 
 ;;; Code for supermethodcall.Parent [imports]
 
@@ -251,6 +269,14 @@
  (i32.const 0)
 )
 (global $$class@supermethodcall.SuperToStringTest (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for supermethodcall.I2.$LambdaAdaptor [static fields]
+(global $$class-initialized@supermethodcall.I2.$LambdaAdaptor (mut i32)
+ (i32.const 0)
+)
+(global $$class@supermethodcall.I2.$LambdaAdaptor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -842,6 +868,76 @@
   (return (global.get $$class@supermethodcall.SuperToStringTest))
  )
 )
+
+;;; Class<?> SuperToStringTest.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@supermethodcall.SuperToStringTest
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $supermethodcall.SuperToStringTest))
+ (local.set $this (ref.cast (ref $supermethodcall.SuperToStringTest) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@supermethodcall.SuperToStringTest ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@supermethodcall.SuperToStringTest)
+
+;;; Code for supermethodcall.I2.$LambdaAdaptor [methods]
+
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_supermethodcall_I2_$LambdaAdaptor@supermethodcall.I2.$LambdaAdaptor
+ (param $this (ref null $supermethodcall.I2.$LambdaAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/supermethodcall/readable-j2wasm.js/supermethodcall/Child.java:102:10
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supermethodcall/readable-j2wasm.js/supermethodcall/Child.java:102:10
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@supermethodcall.I2.$LambdaAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/supermethodcall/readable-j2wasm.js/supermethodcall/Child.java:102:10
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supermethodcall/readable-j2wasm.js/supermethodcall/Child.java:102:10
+  (if (global.get $$class-initialized@supermethodcall.I2.$LambdaAdaptor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/supermethodcall/readable-j2wasm.js/supermethodcall/Child.java:102:10
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supermethodcall/readable-j2wasm.js/supermethodcall/Child.java:102:10
+  (global.set $$class-initialized@supermethodcall.I2.$LambdaAdaptor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supermethodcall/readable-j2wasm.js/supermethodcall/Child.java:102:10
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@supermethodcall.I2.$LambdaAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@supermethodcall.I2.$LambdaAdaptor)))
+   (then
+    (return (global.get $$class@supermethodcall.I2.$LambdaAdaptor))
+   )
+  )
+  (global.set $$class@supermethodcall.I2.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|supermethodc...|__java_lang_String_<once>_@supermethodcall.I2.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@supermethodcall.I2.$LambdaAdaptor))
+ )
+)
+
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@supermethodcall.I2.$LambdaAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $supermethodcall.I2.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $supermethodcall.I2.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@supermethodcall.I2.$LambdaAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@supermethodcall.I2.$LambdaAdaptor)
 
 ;;; Code for supermethodcall.Parent [methods]
 

@@ -26,6 +26,22 @@
  ))
 )
 
+;;; Code for unimplementedbridgemethod.I.$LambdaAdaptor [type definition]
+(type $unimplementedbridgemethod.I.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_foo__java_lang_Object__int (ref $function.m_foo__java_lang_Object__int))
+ ))
+)
+(type $unimplementedbridgemethod.I.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $unimplementedbridgemethod.I.$LambdaAdaptor.vtable))
+ (field $itable (ref $unimplementedbridgemethod.I.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
 ;;; Code for unimplementedbridgemethod.Bar [type definition]
 (type $unimplementedbridgemethod.Bar.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
@@ -42,13 +58,33 @@
  ))
 )
 
+;;; Code for unimplementedbridgemethod.J.$LambdaAdaptor [type definition]
+(type $unimplementedbridgemethod.J.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_foo__java_lang_Object__int (ref $function.m_foo__java_lang_Object__int))
+ ))
+)
+(type $unimplementedbridgemethod.J.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $unimplementedbridgemethod.J.$LambdaAdaptor.vtable))
+ (field $itable (ref $unimplementedbridgemethod.J.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
 ;;; Code for unimplementedbridgemethod.I [imports]
 
 ;;; Code for unimplementedbridgemethod.J [imports]
 
 ;;; Code for unimplementedbridgemethod.Foo [imports]
 
+;;; Code for unimplementedbridgemethod.I.$LambdaAdaptor [imports]
+
 ;;; Code for unimplementedbridgemethod.Bar [imports]
+
+;;; Code for unimplementedbridgemethod.J.$LambdaAdaptor [imports]
 
 ;;; Code for unimplementedbridgemethod.I [static fields]
 (global $$class-initialized@unimplementedbridgemethod.I (mut i32)
@@ -79,6 +115,22 @@
  (i32.const 0)
 )
 (global $$class@unimplementedbridgemethod.Foo (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for unimplementedbridgemethod.I.$LambdaAdaptor [static fields]
+(global $$class-initialized@unimplementedbridgemethod.I.$LambdaAdaptor (mut i32)
+ (i32.const 0)
+)
+(global $$class@unimplementedbridgemethod.I.$LambdaAdaptor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for unimplementedbridgemethod.J.$LambdaAdaptor [static fields]
+(global $$class-initialized@unimplementedbridgemethod.J.$LambdaAdaptor (mut i32)
+ (i32.const 0)
+)
+(global $$class@unimplementedbridgemethod.J.$LambdaAdaptor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -202,6 +254,76 @@
  )
 )
 
+;;; Class<?> Foo.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@unimplementedbridgemethod.Foo
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $unimplementedbridgemethod.Foo))
+ (local.set $this (ref.cast (ref $unimplementedbridgemethod.Foo) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@unimplementedbridgemethod.Foo ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@unimplementedbridgemethod.Foo)
+
+;;; Code for unimplementedbridgemethod.I.$LambdaAdaptor [methods]
+
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_unimplementedbridgemethod_I_$LambdaAdaptor@unimplementedbridgemethod.I.$LambdaAdaptor
+ (param $this (ref null $unimplementedbridgemethod.I.$LambdaAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/unimplementedbridgemethod/readable-j2wasm.js/unimplementedbridgemethod/Foo.java:18:10
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unimplementedbridgemethod/readable-j2wasm.js/unimplementedbridgemethod/Foo.java:18:10
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@unimplementedbridgemethod.I.$LambdaAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/unimplementedbridgemethod/readable-j2wasm.js/unimplementedbridgemethod/Foo.java:18:10
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unimplementedbridgemethod/readable-j2wasm.js/unimplementedbridgemethod/Foo.java:18:10
+  (if (global.get $$class-initialized@unimplementedbridgemethod.I.$LambdaAdaptor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/unimplementedbridgemethod/readable-j2wasm.js/unimplementedbridgemethod/Foo.java:18:10
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unimplementedbridgemethod/readable-j2wasm.js/unimplementedbridgemethod/Foo.java:18:10
+  (global.set $$class-initialized@unimplementedbridgemethod.I.$LambdaAdaptor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unimplementedbridgemethod/readable-j2wasm.js/unimplementedbridgemethod/Foo.java:18:10
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@unimplementedbridgemethod.I.$LambdaAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@unimplementedbridgemethod.I.$LambdaAdaptor)))
+   (then
+    (return (global.get $$class@unimplementedbridgemethod.I.$LambdaAdaptor))
+   )
+  )
+  (global.set $$class@unimplementedbridgemethod.I.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|unimplemente...|__java_lang_String_<once>_@unimplementedbridgemethod.I.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@unimplementedbridgemethod.I.$LambdaAdaptor))
+ )
+)
+
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@unimplementedbridgemethod.I.$LambdaAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $unimplementedbridgemethod.I.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $unimplementedbridgemethod.I.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@unimplementedbridgemethod.I.$LambdaAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@unimplementedbridgemethod.I.$LambdaAdaptor)
+
 ;;; Code for unimplementedbridgemethod.Bar [methods]
 
 ;;; void Bar.$ctor()
@@ -245,3 +367,73 @@
   (return (global.get $$class@unimplementedbridgemethod.Bar))
  )
 )
+
+;;; Class<?> Bar.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@unimplementedbridgemethod.Bar
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $unimplementedbridgemethod.Bar))
+ (local.set $this (ref.cast (ref $unimplementedbridgemethod.Bar) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@unimplementedbridgemethod.Bar ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@unimplementedbridgemethod.Bar)
+
+;;; Code for unimplementedbridgemethod.J.$LambdaAdaptor [methods]
+
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_unimplementedbridgemethod_J_$LambdaAdaptor@unimplementedbridgemethod.J.$LambdaAdaptor
+ (param $this (ref null $unimplementedbridgemethod.J.$LambdaAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/unimplementedbridgemethod/readable-j2wasm.js/unimplementedbridgemethod/Foo.java:25:10
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unimplementedbridgemethod/readable-j2wasm.js/unimplementedbridgemethod/Foo.java:25:10
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@unimplementedbridgemethod.J.$LambdaAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/unimplementedbridgemethod/readable-j2wasm.js/unimplementedbridgemethod/Foo.java:25:10
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unimplementedbridgemethod/readable-j2wasm.js/unimplementedbridgemethod/Foo.java:25:10
+  (if (global.get $$class-initialized@unimplementedbridgemethod.J.$LambdaAdaptor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/unimplementedbridgemethod/readable-j2wasm.js/unimplementedbridgemethod/Foo.java:25:10
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unimplementedbridgemethod/readable-j2wasm.js/unimplementedbridgemethod/Foo.java:25:10
+  (global.set $$class-initialized@unimplementedbridgemethod.J.$LambdaAdaptor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unimplementedbridgemethod/readable-j2wasm.js/unimplementedbridgemethod/Foo.java:25:10
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@unimplementedbridgemethod.J.$LambdaAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@unimplementedbridgemethod.J.$LambdaAdaptor)))
+   (then
+    (return (global.get $$class@unimplementedbridgemethod.J.$LambdaAdaptor))
+   )
+  )
+  (global.set $$class@unimplementedbridgemethod.J.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|unimplemente...|__java_lang_String_<once>_@unimplementedbridgemethod.J.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@unimplementedbridgemethod.J.$LambdaAdaptor))
+ )
+)
+
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@unimplementedbridgemethod.J.$LambdaAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $unimplementedbridgemethod.J.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $unimplementedbridgemethod.J.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@unimplementedbridgemethod.J.$LambdaAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@unimplementedbridgemethod.J.$LambdaAdaptor)

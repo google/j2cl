@@ -39,8 +39,8 @@
  ))
 )
 
-;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay.1 [type definition]
-(type $jsoverlay.Main.NativeJsTypeWithOverlay.1.vtable (sub $java.lang.Object.vtable (struct
+;;; Code for jsoverlay.Main.Intf.$LambdaAdaptor [type definition]
+(type $jsoverlay.Main.Intf.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
@@ -48,15 +48,30 @@
  (field $m_run__void (ref $function.m_run__void))
  ))
 )
-(type $jsoverlay.Main.NativeJsTypeWithOverlay.1 (sub $java.lang.Object (struct
- (field $vtable (ref $jsoverlay.Main.NativeJsTypeWithOverlay.1.vtable))
- (field $itable (ref $jsoverlay.Main.NativeJsTypeWithOverlay.1.itable))
+(type $jsoverlay.Main.Intf.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $jsoverlay.Main.Intf.$LambdaAdaptor.vtable))
+ (field $itable (ref $jsoverlay.Main.Intf.$LambdaAdaptor.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@jsoverlay.Main.NativeJsTypeWithOverlay.1 (mut (ref null extern)))
  ))
 )
 
 ;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay [type definition]
+
+;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1 [type definition]
+(type $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1.vtable (sub $jsoverlay.Main.Intf.$LambdaAdaptor.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_run__void (ref $function.m_run__void))
+ ))
+)
+(type $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1 (sub $jsoverlay.Main.Intf.$LambdaAdaptor (struct
+ (field $vtable (ref $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1.vtable))
+ (field $itable (ref $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 
 ;;; Code for jsoverlay.Main.NativeJsTypeInterfaceWithOverlay [imports]
 
@@ -74,7 +89,7 @@
 
 ;;; Code for jsoverlay.Main [imports]
 
-;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay.1 [imports]
+;;; Code for jsoverlay.Main.Intf.$LambdaAdaptor [imports]
 
 ;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay [imports]
 
@@ -103,6 +118,8 @@
  (param $value i32)
 )
 
+;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1 [imports]
+
 ;;; Code for jsoverlay.Main [static fields]
 (global $$class-initialized@jsoverlay.Main (mut i32)
  (i32.const 0)
@@ -111,11 +128,19 @@
  (ref.null $java.lang.Class)
 )
 
-;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay.1 [static fields]
-(global $$class-initialized@jsoverlay.Main.NativeJsTypeWithOverlay.1 (mut i32)
+;;; Code for jsoverlay.Main.Intf.$LambdaAdaptor [static fields]
+(global $$class-initialized@jsoverlay.Main.Intf.$LambdaAdaptor (mut i32)
  (i32.const 0)
 )
-(global $$class@jsoverlay.Main.NativeJsTypeWithOverlay.1 (mut (ref null $java.lang.Class))
+(global $$class@jsoverlay.Main.Intf.$LambdaAdaptor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1 [static fields]
+(global $$class-initialized@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1 (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1 (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -161,19 +186,19 @@
  )
 )
 
-;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay.1 [vtable.init]
-(global $jsoverlay.Main.NativeJsTypeWithOverlay.1.vtable (ref $jsoverlay.Main.NativeJsTypeWithOverlay.1.vtable)
- (struct.new $jsoverlay.Main.NativeJsTypeWithOverlay.1.vtable
-  (ref.func $$getClassImpl__java_lang_Class@jsoverlay.Main.NativeJsTypeWithOverlay.1)
+;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1 [vtable.init]
+(global $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1.vtable (ref $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1.vtable)
+ (struct.new $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1.vtable
+  (ref.func $$getClassImpl__java_lang_Class@jsoverlay.Main.Intf.$LambdaAdaptor)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_run__void@jsoverlay.Main.NativeJsTypeWithOverlay.1)
+  (ref.func $m_run__void@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1)
  )
 )
-(global $jsoverlay.Main.Intf.vtable@$jsoverlay.Main.NativeJsTypeWithOverlay.1 (ref $jsoverlay.Main.Intf.vtable)
+(global $jsoverlay.Main.Intf.vtable@$jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1 (ref $jsoverlay.Main.Intf.vtable)
  (struct.new $jsoverlay.Main.Intf.vtable
-  (ref.func $m_run__void@jsoverlay.Main.NativeJsTypeWithOverlay.1)
+  (ref.func $m_run__void@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1)
  )
 )
 
@@ -347,15 +372,15 @@
 (func $m_overlayWithJsFunction__$devirt__jsoverlay_Main_NativeJsTypeWithOverlay__void@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay
  (param $$thisArg (ref null extern))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:84:22
- (local $$qualifier (ref null $jsoverlay.Main.NativeJsTypeWithOverlay.1))
+ (local $$qualifier (ref null $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:84:22
   (call $$clinit__void_<once>_@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay )
   (block
    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:85:6
-   (local.set $$qualifier (call $$create__jsoverlay_Main_NativeJsTypeWithOverlay@jsoverlay.Main.NativeJsTypeWithOverlay.1 (local.get $$thisArg)))
+   (local.set $$qualifier (call $$create__@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1 ))
    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:85:6
-   (call_ref $function.m_run__void (ref.as_non_null (local.get $$qualifier))(struct.get $jsoverlay.Main.NativeJsTypeWithOverlay.1.vtable $m_run__void (struct.get $jsoverlay.Main.NativeJsTypeWithOverlay.1 $vtable(local.get $$qualifier))))
+   (call_ref $function.m_run__void (ref.as_non_null (local.get $$qualifier))(struct.get $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1.vtable $m_run__void (struct.get $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1 $vtable(local.get $$qualifier))))
   )
  )
 )
@@ -560,94 +585,134 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsoverlay.Main)
 
-;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay.1 [methods]
+;;; Code for jsoverlay.Main.Intf.$LambdaAdaptor [methods]
 
-;;; <anonymous> implements Intf <anonymous> implements Intf.$create(NativeJsTypeWithOverlay $outer_this)
-(func $$create__jsoverlay_Main_NativeJsTypeWithOverlay@jsoverlay.Main.NativeJsTypeWithOverlay.1
- (param $$outer_this (ref null extern))
- (result (ref null $jsoverlay.Main.NativeJsTypeWithOverlay.1))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:85:17
- (local $$instance (ref null $jsoverlay.Main.NativeJsTypeWithOverlay.1))
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_jsoverlay_Main_Intf_$LambdaAdaptor@jsoverlay.Main.Intf.$LambdaAdaptor
+ (param $this (ref null $jsoverlay.Main.Intf.$LambdaAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:99:20
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:85:17
-  (call $$clinit__void_<once>_@jsoverlay.Main.NativeJsTypeWithOverlay.1 )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:85:17
-  (local.set $$instance (struct.new $jsoverlay.Main.NativeJsTypeWithOverlay.1 (ref.as_non_null (global.get $jsoverlay.Main.NativeJsTypeWithOverlay.1.vtable)) (ref.as_non_null (global.get $jsoverlay.Main.NativeJsTypeWithOverlay.1.itable)) (i32.const 0) (ref.null extern)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:85:17
-  (call $$ctor__jsoverlay_Main_NativeJsTypeWithOverlay__void_$p_jsoverlay_Main_NativeJsTypeWithOverlay_1@jsoverlay.Main.NativeJsTypeWithOverlay.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:85:17
-  (return (local.get $$instance))
- )
-)
-
-;;; void <anonymous> implements Intf.$ctor(NativeJsTypeWithOverlay $outer_this)
-(func $$ctor__jsoverlay_Main_NativeJsTypeWithOverlay__void_$p_jsoverlay_Main_NativeJsTypeWithOverlay_1@jsoverlay.Main.NativeJsTypeWithOverlay.1
- (param $this (ref null $jsoverlay.Main.NativeJsTypeWithOverlay.1))
- (param $$outer_this (ref null extern))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:85:17
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:85:17
-  (struct.set $jsoverlay.Main.NativeJsTypeWithOverlay.1 $$outer_this@jsoverlay.Main.NativeJsTypeWithOverlay.1 (local.get $this) (local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:85:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:99:20
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
-;;; void <anonymous> implements Intf.run()
-(func $m_run__void@jsoverlay.Main.NativeJsTypeWithOverlay.1
- (type $function.m_run__void)
- (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:87:20
- (local $this (ref null $jsoverlay.Main.NativeJsTypeWithOverlay.1))
- (local.set $this (ref.cast (ref $jsoverlay.Main.NativeJsTypeWithOverlay.1) (local.get $this.untyped)))
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@jsoverlay.Main.Intf.$LambdaAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:99:20
  (block
- )
-)
-(elem declare func $m_run__void@jsoverlay.Main.NativeJsTypeWithOverlay.1)
-
-;;; void <anonymous> implements Intf.$clinit()
-(func $$clinit__void_<once>_@jsoverlay.Main.NativeJsTypeWithOverlay.1
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:85:17
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:85:17
-  (if (global.get $$class-initialized@jsoverlay.Main.NativeJsTypeWithOverlay.1)
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:99:20
+  (if (global.get $$class-initialized@jsoverlay.Main.Intf.$LambdaAdaptor)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:85:17
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:99:20
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:85:17
-  (global.set $$class-initialized@jsoverlay.Main.NativeJsTypeWithOverlay.1 (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:85:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:99:20
+  (global.set $$class-initialized@jsoverlay.Main.Intf.$LambdaAdaptor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:99:20
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
-;;; Class<T> <anonymous> implements Intf.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@jsoverlay.Main.NativeJsTypeWithOverlay.1
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsoverlay.Main.Intf.$LambdaAdaptor
  (result (ref null $java.lang.Class))
  (block
-  (if (i32.eqz (ref.is_null (global.get $$class@jsoverlay.Main.NativeJsTypeWithOverlay.1)))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsoverlay.Main.Intf.$LambdaAdaptor)))
    (then
-    (return (global.get $$class@jsoverlay.Main.NativeJsTypeWithOverlay.1))
+    (return (global.get $$class@jsoverlay.Main.Intf.$LambdaAdaptor))
    )
   )
-  (global.set $$class@jsoverlay.Main.NativeJsTypeWithOverlay.1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsoverlay.Ma...|__java_lang_String_<once>_@jsoverlay.Main.NativeJsTypeWithOverlay.1 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
-  (return (global.get $$class@jsoverlay.Main.NativeJsTypeWithOverlay.1))
+  (global.set $$class@jsoverlay.Main.Intf.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsoverlay.Ma...|__java_lang_String_<once>_@jsoverlay.Main.Intf.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@jsoverlay.Main.Intf.$LambdaAdaptor))
  )
 )
 
-;;; Class<?> <anonymous> implements Intf.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@jsoverlay.Main.NativeJsTypeWithOverlay.1
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsoverlay.Main.Intf.$LambdaAdaptor
  (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $this (ref null $jsoverlay.Main.NativeJsTypeWithOverlay.1))
- (local.set $this (ref.cast (ref $jsoverlay.Main.NativeJsTypeWithOverlay.1) (local.get $this.untyped)))
+ (local $this (ref null $jsoverlay.Main.Intf.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $jsoverlay.Main.Intf.$LambdaAdaptor) (local.get $this.untyped)))
  (block
-  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsoverlay.Main.NativeJsTypeWithOverlay.1 ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsoverlay.Main.Intf.$LambdaAdaptor ))
  )
 )
-(elem declare func $$getClassImpl__java_lang_Class@jsoverlay.Main.NativeJsTypeWithOverlay.1)
+(elem declare func $$getClassImpl__java_lang_Class@jsoverlay.Main.Intf.$LambdaAdaptor)
 
 ;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay [methods]
+
+;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1 [methods]
+
+;;; <anonymous> implements Intf <anonymous> implements Intf.$create()
+(func $$create__@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1
+ (result (ref null $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:87:20
+ (local $$instance (ref null $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:87:20
+  (call $$clinit__void_<once>_@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1 )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:87:20
+  (local.set $$instance (struct.new $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1 (ref.as_non_null (global.get $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1.itable)) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:87:20
+  (call $$ctor__void_$p_jsoverlay_Main_NativeJsTypeWithOverlay_$LambdaImplementor$1@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1 (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:87:20
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> implements Intf.$ctor()
+(func $$ctor__void_$p_jsoverlay_Main_NativeJsTypeWithOverlay_$LambdaImplementor$1@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1
+ (param $this (ref null $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:87:20
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:87:20
+  (call $$ctor__void_$p_jsoverlay_Main_Intf_$LambdaAdaptor@jsoverlay.Main.Intf.$LambdaAdaptor (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void <anonymous> implements Intf.run()
+(func $m_run__void@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1
+ (type $function.m_run__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:87:20
+ (local $this (ref null $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1))
+ (local.set $this (ref.cast (ref $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_run__void@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1)
+
+;;; void <anonymous> implements Intf.$clinit()
+(func $$clinit__void_<once>_@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:87:20
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:87:20
+  (if (global.get $$class-initialized@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:87:20
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:87:20
+  (global.set $$class-initialized@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1 (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:87:20
+  (call $$clinit__void_<once>_@jsoverlay.Main.Intf.$LambdaAdaptor )
+ )
+)
+
+;;; Class<T> <anonymous> implements Intf.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1)))
+   (then
+    (return (global.get $$class@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1))
+   )
+  )
+  (global.set $$class@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsoverlay.Ma...|__java_lang_String_<once>_@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1 )(call $$getClassMetadata__java_lang_Class_<once>_@jsoverlay.Main.Intf.$LambdaAdaptor )))
+  (return (global.get $$class@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1))
+ )
+)

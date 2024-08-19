@@ -38,8 +38,40 @@
  ))
 )
 
-;;; Code for libraryinfo.Main.$LambdaImplementor$1 [type definition]
-(type $libraryinfo.Main.$LambdaImplementor$1.vtable (sub $java.lang.Object.vtable (struct
+;;; Code for libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor [type definition]
+(type $libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_foo__void (ref $function.m_foo__void))
+ ))
+)
+(type $libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor.vtable))
+ (field $itable (ref $libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
+;;; Code for libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor [type definition]
+(type $libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_accessibleFunctionalInterfaceMethod__void (ref $function.m_accessibleFunctionalInterfaceMethod__void))
+ ))
+)
+(type $libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor.vtable))
+ (field $itable (ref $libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
+;;; Code for libraryinfo.Main.Function.$LambdaAdaptor [type definition]
+(type $libraryinfo.Main.Function.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
@@ -47,9 +79,9 @@
  (field $m_apply__java_lang_String__void (ref $function.m_apply__java_lang_String__void))
  ))
 )
-(type $libraryinfo.Main.$LambdaImplementor$1 (sub $java.lang.Object (struct
- (field $vtable (ref $libraryinfo.Main.$LambdaImplementor$1.vtable))
- (field $itable (ref $libraryinfo.Main.$LambdaImplementor$1.itable))
+(type $libraryinfo.Main.Function.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $libraryinfo.Main.Function.$LambdaAdaptor.vtable))
+ (field $itable (ref $libraryinfo.Main.Function.$LambdaAdaptor.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
@@ -119,6 +151,22 @@
  ))
 )
 
+;;; Code for libraryinfo.Main.$LambdaImplementor$1 [type definition]
+(type $libraryinfo.Main.$LambdaImplementor$1.vtable (sub $libraryinfo.Main.Function.$LambdaAdaptor.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_apply__java_lang_String__void (ref $function.m_apply__java_lang_String__void))
+ ))
+)
+(type $libraryinfo.Main.$LambdaImplementor$1 (sub $libraryinfo.Main.Function.$LambdaAdaptor (struct
+ (field $vtable (ref $libraryinfo.Main.$LambdaImplementor$1.vtable))
+ (field $itable (ref $libraryinfo.Main.$LambdaImplementor$1.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
 ;;; Code for libraryinfo.Main.MyJsEnum [type definition]
 (type $libraryinfo.Main.MyJsEnum.vtable (sub $java.lang.Enum.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
@@ -172,7 +220,11 @@
  (param $o i32)
 )
 
-;;; Code for libraryinfo.Main.$LambdaImplementor$1 [imports]
+;;; Code for libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor [imports]
+
+;;; Code for libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor [imports]
+
+;;; Code for libraryinfo.Main.Function.$LambdaAdaptor [imports]
 
 ;;; Code for libraryinfo.Main.1 [imports]
 
@@ -181,6 +233,8 @@
 ;;; Code for libraryinfo.Main.MyJsType [imports]
 
 ;;; Code for libraryinfo.Main.Foo [imports]
+
+;;; Code for libraryinfo.Main.$LambdaImplementor$1 [imports]
 
 ;;; Code for libraryinfo.Main.MyJsEnum [imports]
 
@@ -194,6 +248,30 @@
  (i32.const 0)
 )
 (global $$class@libraryinfo.Main (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor [static fields]
+(global $$class-initialized@libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor (mut i32)
+ (i32.const 0)
+)
+(global $$class@libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor [static fields]
+(global $$class-initialized@libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor (mut i32)
+ (i32.const 0)
+)
+(global $$class@libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for libraryinfo.Main.Function.$LambdaAdaptor [static fields]
+(global $$class-initialized@libraryinfo.Main.Function.$LambdaAdaptor (mut i32)
+ (i32.const 0)
+)
+(global $$class@libraryinfo.Main.Function.$LambdaAdaptor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -319,7 +397,7 @@
 ;;; Code for libraryinfo.Main.$LambdaImplementor$1 [vtable.init]
 (global $libraryinfo.Main.$LambdaImplementor$1.vtable (ref $libraryinfo.Main.$LambdaImplementor$1.vtable)
  (struct.new $libraryinfo.Main.$LambdaImplementor$1.vtable
-  (ref.func $$getClassImpl__java_lang_Class@libraryinfo.Main.$LambdaImplementor$1)
+  (ref.func $$getClassImpl__java_lang_Class@libraryinfo.Main.Function.$LambdaAdaptor)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
@@ -700,94 +778,176 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@libraryinfo.Main)
 
-;;; Code for libraryinfo.Main.$LambdaImplementor$1 [methods]
+;;; Code for libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor [methods]
 
-;;; <anonymous> implements Function <anonymous> implements Function.$create()
-(func $$create__@libraryinfo.Main.$LambdaImplementor$1
- (result (ref null $libraryinfo.Main.$LambdaImplementor$1))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:17
- (local $$instance (ref null $libraryinfo.Main.$LambdaImplementor$1))
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_libraryinfo_Main_FunctionnalInterface_$LambdaAdaptor@libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor
+ (param $this (ref null $libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:40:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:17
-  (call $$clinit__void_<once>_@libraryinfo.Main.$LambdaImplementor$1 )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:17
-  (local.set $$instance (struct.new $libraryinfo.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $libraryinfo.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.$LambdaImplementor$1.itable)) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:17
-  (call $$ctor__void_$p_libraryinfo_Main_$LambdaImplementor$1@libraryinfo.Main.$LambdaImplementor$1 (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:17
-  (return (local.get $$instance))
- )
-)
-
-;;; void <anonymous> implements Function.$ctor()
-(func $$ctor__void_$p_libraryinfo_Main_$LambdaImplementor$1@libraryinfo.Main.$LambdaImplementor$1
- (param $this (ref null $libraryinfo.Main.$LambdaImplementor$1))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:17
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:40:12
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
-;;; void <anonymous> implements Function.apply(String s)
-(func $m_apply__java_lang_String__void@libraryinfo.Main.$LambdaImplementor$1
- (type $function.m_apply__java_lang_String__void)
- (param $this.untyped (ref $java.lang.Object))
- (param $s (ref null $java.lang.String))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:17
- (local $this (ref null $libraryinfo.Main.$LambdaImplementor$1))
- (local.set $this (ref.cast (ref $libraryinfo.Main.$LambdaImplementor$1) (local.get $this.untyped)))
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:40:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:22
-  (call $m_log__int__void@libraryinfo.Main (i32.const 42))
- )
-)
-(elem declare func $m_apply__java_lang_String__void@libraryinfo.Main.$LambdaImplementor$1)
-
-;;; void <anonymous> implements Function.$clinit()
-(func $$clinit__void_<once>_@libraryinfo.Main.$LambdaImplementor$1
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:17
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:17
-  (if (global.get $$class-initialized@libraryinfo.Main.$LambdaImplementor$1)
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:40:12
+  (if (global.get $$class-initialized@libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:17
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:40:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:17
-  (global.set $$class-initialized@libraryinfo.Main.$LambdaImplementor$1 (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:17
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:40:12
+  (global.set $$class-initialized@libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:40:12
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
-;;; Class<T> <anonymous> implements Function.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@libraryinfo.Main.$LambdaImplementor$1
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor
  (result (ref null $java.lang.Class))
  (block
-  (if (i32.eqz (ref.is_null (global.get $$class@libraryinfo.Main.$LambdaImplementor$1)))
+  (if (i32.eqz (ref.is_null (global.get $$class@libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor)))
    (then
-    (return (global.get $$class@libraryinfo.Main.$LambdaImplementor$1))
+    (return (global.get $$class@libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor))
    )
   )
-  (global.set $$class@libraryinfo.Main.$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|libraryinfo....|__java_lang_String_<once>_@libraryinfo.Main.$LambdaImplementor$1 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
-  (return (global.get $$class@libraryinfo.Main.$LambdaImplementor$1))
+  (global.set $$class@libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|libraryinfo....|__java_lang_String_<once>_@libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor))
  )
 )
 
-;;; Class<?> <anonymous> implements Function.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@libraryinfo.Main.$LambdaImplementor$1
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor
  (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $this (ref null $libraryinfo.Main.$LambdaImplementor$1))
- (local.set $this (ref.cast (ref $libraryinfo.Main.$LambdaImplementor$1) (local.get $this.untyped)))
+ (local $this (ref null $libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor) (local.get $this.untyped)))
  (block
-  (return (call $$getClassMetadata__java_lang_Class_<once>_@libraryinfo.Main.$LambdaImplementor$1 ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor ))
  )
 )
-(elem declare func $$getClassImpl__java_lang_Class@libraryinfo.Main.$LambdaImplementor$1)
+(elem declare func $$getClassImpl__java_lang_Class@libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor)
+
+;;; Code for libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor [methods]
+
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_libraryinfo_Main_JsAccessibleFunctionnalInterface_$LambdaAdaptor@libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor
+ (param $this (ref null $libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:44:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:44:12
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:44:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:44:12
+  (if (global.get $$class-initialized@libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:44:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:44:12
+  (global.set $$class-initialized@libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:44:12
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor)))
+   (then
+    (return (global.get $$class@libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor))
+   )
+  )
+  (global.set $$class@libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|libraryinfo....|__java_lang_String_<once>_@libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor))
+ )
+)
+
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor)
+
+;;; Code for libraryinfo.Main.Function.$LambdaAdaptor [methods]
+
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_libraryinfo_Main_Function_$LambdaAdaptor@libraryinfo.Main.Function.$LambdaAdaptor
+ (param $this (ref null $libraryinfo.Main.Function.$LambdaAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:50:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:50:12
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@libraryinfo.Main.Function.$LambdaAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:50:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:50:12
+  (if (global.get $$class-initialized@libraryinfo.Main.Function.$LambdaAdaptor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:50:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:50:12
+  (global.set $$class-initialized@libraryinfo.Main.Function.$LambdaAdaptor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:50:12
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@libraryinfo.Main.Function.$LambdaAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@libraryinfo.Main.Function.$LambdaAdaptor)))
+   (then
+    (return (global.get $$class@libraryinfo.Main.Function.$LambdaAdaptor))
+   )
+  )
+  (global.set $$class@libraryinfo.Main.Function.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|libraryinfo....|__java_lang_String_<once>_@libraryinfo.Main.Function.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@libraryinfo.Main.Function.$LambdaAdaptor))
+ )
+)
+
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@libraryinfo.Main.Function.$LambdaAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $libraryinfo.Main.Function.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $libraryinfo.Main.Function.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@libraryinfo.Main.Function.$LambdaAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@libraryinfo.Main.Function.$LambdaAdaptor)
 
 ;;; Code for libraryinfo.Main.1 [methods]
 
@@ -1127,6 +1287,82 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@libraryinfo.Main.Foo)
+
+;;; Code for libraryinfo.Main.$LambdaImplementor$1 [methods]
+
+;;; <anonymous> implements Function <anonymous> implements Function.$create()
+(func $$create__@libraryinfo.Main.$LambdaImplementor$1
+ (result (ref null $libraryinfo.Main.$LambdaImplementor$1))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:17
+ (local $$instance (ref null $libraryinfo.Main.$LambdaImplementor$1))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:17
+  (call $$clinit__void_<once>_@libraryinfo.Main.$LambdaImplementor$1 )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:17
+  (local.set $$instance (struct.new $libraryinfo.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $libraryinfo.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.$LambdaImplementor$1.itable)) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:17
+  (call $$ctor__void_$p_libraryinfo_Main_$LambdaImplementor$1@libraryinfo.Main.$LambdaImplementor$1 (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:17
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> implements Function.$ctor()
+(func $$ctor__void_$p_libraryinfo_Main_$LambdaImplementor$1@libraryinfo.Main.$LambdaImplementor$1
+ (param $this (ref null $libraryinfo.Main.$LambdaImplementor$1))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:17
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:17
+  (call $$ctor__void_$p_libraryinfo_Main_Function_$LambdaAdaptor@libraryinfo.Main.Function.$LambdaAdaptor (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void <anonymous> implements Function.apply(String s)
+(func $m_apply__java_lang_String__void@libraryinfo.Main.$LambdaImplementor$1
+ (type $function.m_apply__java_lang_String__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $s (ref null $java.lang.String))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:17
+ (local $this (ref null $libraryinfo.Main.$LambdaImplementor$1))
+ (local.set $this (ref.cast (ref $libraryinfo.Main.$LambdaImplementor$1) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:22
+  (call $m_log__int__void@libraryinfo.Main (i32.const 42))
+ )
+)
+(elem declare func $m_apply__java_lang_String__void@libraryinfo.Main.$LambdaImplementor$1)
+
+;;; void <anonymous> implements Function.$clinit()
+(func $$clinit__void_<once>_@libraryinfo.Main.$LambdaImplementor$1
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:17
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:17
+  (if (global.get $$class-initialized@libraryinfo.Main.$LambdaImplementor$1)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:17
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:17
+  (global.set $$class-initialized@libraryinfo.Main.$LambdaImplementor$1 (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:17
+  (call $$clinit__void_<once>_@libraryinfo.Main.Function.$LambdaAdaptor )
+ )
+)
+
+;;; Class<T> <anonymous> implements Function.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@libraryinfo.Main.$LambdaImplementor$1
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@libraryinfo.Main.$LambdaImplementor$1)))
+   (then
+    (return (global.get $$class@libraryinfo.Main.$LambdaImplementor$1))
+   )
+  )
+  (global.set $$class@libraryinfo.Main.$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|libraryinfo....|__java_lang_String_<once>_@libraryinfo.Main.$LambdaImplementor$1 )(call $$getClassMetadata__java_lang_Class_<once>_@libraryinfo.Main.Function.$LambdaAdaptor )))
+  (return (global.get $$class@libraryinfo.Main.$LambdaImplementor$1))
+ )
+)
 
 ;;; Code for libraryinfo.Main.MyJsEnum [methods]
 

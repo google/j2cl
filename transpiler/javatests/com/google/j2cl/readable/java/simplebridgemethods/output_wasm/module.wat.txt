@@ -68,6 +68,22 @@
  ))
 )
 
+;;; Code for simplebridgemethods.Callable.$LambdaAdaptor [type definition]
+(type $simplebridgemethods.Callable.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_call__java_lang_Object__void (ref $function.m_call__java_lang_Object__void))
+ ))
+)
+(type $simplebridgemethods.Callable.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $simplebridgemethods.Callable.$LambdaAdaptor.vtable))
+ (field $itable (ref $simplebridgemethods.Callable.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
 ;;; Code for simplebridgemethods.Subclass [type definition]
 (type $simplebridgemethods.Subclass.vtable (sub $simplebridgemethods.Superclass.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
@@ -110,6 +126,8 @@
 ;;; Code for simplebridgemethods.AnotherTask [imports]
 
 ;;; Code for simplebridgemethods.SimpleBridgeMethods [imports]
+
+;;; Code for simplebridgemethods.Callable.$LambdaAdaptor [imports]
 
 ;;; Code for simplebridgemethods.Subclass [imports]
 
@@ -168,6 +186,14 @@
  (i32.const 0)
 )
 (global $$class@simplebridgemethods.SimpleBridgeMethods (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for simplebridgemethods.Callable.$LambdaAdaptor [static fields]
+(global $$class-initialized@simplebridgemethods.Callable.$LambdaAdaptor (mut i32)
+ (i32.const 0)
+)
+(global $$class@simplebridgemethods.Callable.$LambdaAdaptor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -629,6 +655,63 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@simplebridgemethods.SimpleBridgeMethods)
+
+;;; Code for simplebridgemethods.Callable.$LambdaAdaptor [methods]
+
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_simplebridgemethods_Callable_$LambdaAdaptor@simplebridgemethods.Callable.$LambdaAdaptor
+ (param $this (ref null $simplebridgemethods.Callable.$LambdaAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:34:10
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:34:10
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@simplebridgemethods.Callable.$LambdaAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:34:10
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:34:10
+  (if (global.get $$class-initialized@simplebridgemethods.Callable.$LambdaAdaptor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:34:10
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:34:10
+  (global.set $$class-initialized@simplebridgemethods.Callable.$LambdaAdaptor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:34:10
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@simplebridgemethods.Callable.$LambdaAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@simplebridgemethods.Callable.$LambdaAdaptor)))
+   (then
+    (return (global.get $$class@simplebridgemethods.Callable.$LambdaAdaptor))
+   )
+  )
+  (global.set $$class@simplebridgemethods.Callable.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|simplebridge...|__java_lang_String_<once>_@simplebridgemethods.Callable.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@simplebridgemethods.Callable.$LambdaAdaptor))
+ )
+)
+
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@simplebridgemethods.Callable.$LambdaAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $simplebridgemethods.Callable.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $simplebridgemethods.Callable.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@simplebridgemethods.Callable.$LambdaAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@simplebridgemethods.Callable.$LambdaAdaptor)
 
 ;;; Code for simplebridgemethods.Subclass [methods]
 

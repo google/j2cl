@@ -27,6 +27,7 @@ import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
+import com.google.j2cl.transpiler.ast.TypeDeclaration.Origin;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -156,6 +157,8 @@ abstract class WasmTypeLayout {
   Map<String, MethodDescriptor> getAllPolymorphicMethodsByMangledName() {
     Map<String, MethodDescriptor> instanceMethodsByMangledName = new LinkedHashMap<>();
     if (getWasmSupertypeLayout() != null) {
+      // Add all the methods from the super type layout to ensure that they appear in the same
+      // order as in the superclass.
       instanceMethodsByMangledName.putAll(
           getWasmSupertypeLayout().getAllPolymorphicMethodsByMangledName());
     }
@@ -164,10 +167,16 @@ abstract class WasmTypeLayout {
         .filter(this::needsVtableEntry)
         .sorted(Comparator.comparing(MethodDescriptor::getMangledName))
         .forEach(md -> instanceMethodsByMangledName.put(md.getMangledName(), md));
-    // Patch entry for $getClassImpl, since it is explicitly overridden in every class but does not
-    // appear as overridden at the right target when calling getPolymorphicMethods().
+    // Patch entry for $getClassImpl. In the type model there is only `Object::$getClasImpl` and
+    // that is what is returned by `getPolymorphicMethod()`. But it is overridden in the AST
+    // in a predictable manner by the pass that synthesizes the overrides and needs to be explicitly
+    // patched here.
     if (!typeDescriptor.isInterface()) {
-      MethodDescriptor getClassMethodDescriptor = getGetClassMethodDescriptor(typeDescriptor);
+      MethodDescriptor getClassMethodDescriptor =
+          getGetClassMethodDescriptor(
+              typeDescriptor.getTypeDeclaration().getOrigin() == Origin.LAMBDA_IMPLEMENTOR
+                  ? typeDescriptor.getSuperTypeDescriptor()
+                  : typeDescriptor);
       instanceMethodsByMangledName.put(
           getClassMethodDescriptor.getMangledName(), getClassMethodDescriptor);
     }

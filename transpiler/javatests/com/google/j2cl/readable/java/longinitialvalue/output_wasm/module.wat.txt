@@ -69,3 +69,16 @@
   (return (global.get $$class@longinitialvalue.LongInitialValue))
  )
 )
+
+;;; Class<?> LongInitialValue.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@longinitialvalue.LongInitialValue
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $longinitialvalue.LongInitialValue))
+ (local.set $this (ref.cast (ref $longinitialvalue.LongInitialValue) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@longinitialvalue.LongInitialValue ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@longinitialvalue.LongInitialValue)

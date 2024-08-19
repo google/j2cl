@@ -37,6 +37,22 @@
  ))
 )
 
+;;; Code for instancejsmethods.MyInterface.$LambdaAdaptor [type definition]
+(type $instancejsmethods.MyInterface.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_intfFoo__int (ref $function.m_intfFoo__int))
+ ))
+)
+(type $instancejsmethods.MyInterface.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $instancejsmethods.MyInterface.$LambdaAdaptor.vtable))
+ (field $itable (ref $instancejsmethods.MyInterface.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
 ;;; Code for instancejsmethods.Parent [type definition]
 (type $instancejsmethods.Parent.vtable (sub $instancejsmethods.SuperParent.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
@@ -80,6 +96,8 @@
 
 ;;; Code for instancejsmethods.Main [imports]
 
+;;; Code for instancejsmethods.MyInterface.$LambdaAdaptor [imports]
+
 ;;; Code for instancejsmethods.Parent [imports]
 
 ;;; Code for instancejsmethods.Child [imports]
@@ -121,6 +139,14 @@
  (i32.const 0)
 )
 (global $$class@instancejsmethods.Main (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for instancejsmethods.MyInterface.$LambdaAdaptor [static fields]
+(global $$class-initialized@instancejsmethods.MyInterface.$LambdaAdaptor (mut i32)
+ (i32.const 0)
+)
+(global $$class@instancejsmethods.MyInterface.$LambdaAdaptor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -476,6 +502,63 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@instancejsmethods.Main)
+
+;;; Code for instancejsmethods.MyInterface.$LambdaAdaptor [methods]
+
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_instancejsmethods_MyInterface_$LambdaAdaptor@instancejsmethods.MyInterface.$LambdaAdaptor
+ (param $this (ref null $instancejsmethods.MyInterface.$LambdaAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:20:10
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:20:10
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@instancejsmethods.MyInterface.$LambdaAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:20:10
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:20:10
+  (if (global.get $$class-initialized@instancejsmethods.MyInterface.$LambdaAdaptor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:20:10
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:20:10
+  (global.set $$class-initialized@instancejsmethods.MyInterface.$LambdaAdaptor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:20:10
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@instancejsmethods.MyInterface.$LambdaAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@instancejsmethods.MyInterface.$LambdaAdaptor)))
+   (then
+    (return (global.get $$class@instancejsmethods.MyInterface.$LambdaAdaptor))
+   )
+  )
+  (global.set $$class@instancejsmethods.MyInterface.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|instancejsme...|__java_lang_String_<once>_@instancejsmethods.MyInterface.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@instancejsmethods.MyInterface.$LambdaAdaptor))
+ )
+)
+
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@instancejsmethods.MyInterface.$LambdaAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $instancejsmethods.MyInterface.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $instancejsmethods.MyInterface.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@instancejsmethods.MyInterface.$LambdaAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@instancejsmethods.MyInterface.$LambdaAdaptor)
 
 ;;; Code for instancejsmethods.Parent [methods]
 

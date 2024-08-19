@@ -271,6 +271,19 @@
  )
 )
 
+;;; Class<?> ClassWithAbstractMethod.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@gwtincompatible.Interface.ClassWithAbstractMethod
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $gwtincompatible.Interface.ClassWithAbstractMethod))
+ (local.set $this (ref.cast (ref $gwtincompatible.Interface.ClassWithAbstractMethod) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@gwtincompatible.Interface.ClassWithAbstractMethod ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@gwtincompatible.Interface.ClassWithAbstractMethod)
+
 ;;; Code for gwtincompatible.Implementor [static fields]
 (global $$class-initialized@gwtincompatible.Implementor (mut i32)
  (i32.const 0)
@@ -526,6 +539,19 @@
   (return (global.get $$class@gwtincompatible.Implementor.SomeEnum))
  )
 )
+
+;;; Class<?> SomeEnum.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@gwtincompatible.Implementor.SomeEnum
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $gwtincompatible.Implementor.SomeEnum))
+ (local.set $this (ref.cast (ref $gwtincompatible.Implementor.SomeEnum) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@gwtincompatible.Implementor.SomeEnum ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@gwtincompatible.Implementor.SomeEnum)
 
 ;;; Code for gwtincompatible.Implementor.SomeEnum.1 [methods]
 

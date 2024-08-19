@@ -22,6 +22,7 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
+import com.google.j2cl.transpiler.ast.TypeDeclaration.Origin;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -32,6 +33,13 @@ import javax.annotation.Nullable;
 public final class LambdaAdaptorTypeDescriptors {
   private static final String FUNCTIONAL_INTERFACE_JSFUNCTION_CLASS_NAME = "JsFunction";
   private static final String FUNCTIONAL_INTERFACE_ADAPTOR_CLASS_NAME = "LambdaAdaptor";
+
+  /** Returns the TypeDescriptor for an abstract lambda implementor super class. */
+  public static DeclaredTypeDescriptor createAbstractLambdaAdaptorTypeDescriptor(
+      TypeDescriptor typeDescriptor) {
+    return createLambdaAdaptorTypeDescriptor(
+        typeDescriptor, (DeclaredTypeDescriptor) typeDescriptor, true, Optional.empty());
+  }
 
   /** Returns the TypeDescriptor for a LambdaAdaptor class. */
   public static DeclaredTypeDescriptor createLambdaAdaptorTypeDescriptor(
@@ -44,6 +52,16 @@ public final class LambdaAdaptorTypeDescriptors {
   public static DeclaredTypeDescriptor createLambdaAdaptorTypeDescriptor(
       TypeDescriptor typeDescriptor,
       DeclaredTypeDescriptor enclosingTypeDescriptor,
+      Optional<Integer> uniqueId) {
+    return createLambdaAdaptorTypeDescriptor(
+        typeDescriptor, enclosingTypeDescriptor, false, uniqueId);
+  }
+
+  /** Returns the TypeDescriptor for lambda instances of the functional interface. */
+  private static DeclaredTypeDescriptor createLambdaAdaptorTypeDescriptor(
+      TypeDescriptor typeDescriptor,
+      DeclaredTypeDescriptor enclosingTypeDescriptor,
+      boolean isAbstract,
       Optional<Integer> uniqueId) {
 
     DeclaredTypeDescriptor functionalInterfaceTypeDescriptor =
@@ -75,6 +93,7 @@ public final class LambdaAdaptorTypeDescriptors {
             enclosingTypeDescriptor.toUnparameterizedTypeDescriptor(),
             TypeDescriptors.toUnparameterizedTypeDescriptors(interfaceTypeDescriptors),
             jsFunctionInterface.toUnparameterizedTypeDescriptor(),
+            isAbstract,
             uniqueId);
 
     return DeclaredTypeDescriptor.newBuilder()
@@ -86,7 +105,9 @@ public final class LambdaAdaptorTypeDescriptors {
         .setTypeArgumentDescriptors(typeArgumentDescriptors)
         .setDeclaredMethodDescriptorsFactory(
             adaptorTypeDescriptor ->
-                getLambdaAdaptorMethodDescriptors(jsFunctionInterface, adaptorTypeDescriptor))
+                isAbstract
+                    ? ImmutableList.of()
+                    : getLambdaAdaptorMethodDescriptors(jsFunctionInterface, adaptorTypeDescriptor))
         .build();
   }
 
@@ -110,6 +131,7 @@ public final class LambdaAdaptorTypeDescriptors {
       DeclaredTypeDescriptor enclosingTypeDescriptor,
       List<DeclaredTypeDescriptor> interfaceTypeDescriptors,
       DeclaredTypeDescriptor jsFunctionInterface,
+      boolean isAbstract,
       Optional<Integer> uniqueId) {
 
     TypeDeclaration enclosingTypeDeclaration = enclosingTypeDescriptor.getTypeDeclaration();
@@ -129,16 +151,21 @@ public final class LambdaAdaptorTypeDescriptors {
         .setClassComponents(classComponents)
         .setDeclaredMethodDescriptorsFactory(
             adaptorTypeDeclaration ->
-                getLambdaAdaptorMethodDescriptors(
-                    jsFunctionInterface, adaptorTypeDeclaration.toUnparameterizedTypeDescriptor()))
+                isAbstract
+                    ? ImmutableList.of()
+                    : getLambdaAdaptorMethodDescriptors(
+                        jsFunctionInterface,
+                        adaptorTypeDeclaration.toUnparameterizedTypeDescriptor()))
         .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.copyOf(interfaceTypeDescriptors))
         .setTypeParameterDescriptors(typeParameterDescriptors)
         .setUnparameterizedTypeDescriptorFactory(
             () ->
                 createLambdaAdaptorTypeDescriptor(
-                    lambdaTypeDescriptor, enclosingTypeDescriptor, uniqueId))
+                    lambdaTypeDescriptor, enclosingTypeDescriptor, isAbstract, uniqueId))
+        .setHasAbstractModifier(isAbstract)
         .setVisibility(Visibility.PUBLIC)
         .setKind(Kind.CLASS)
+        .setOrigin(Origin.LAMBDA_ABSTRACT_ADAPTOR)
         .build();
   }
 

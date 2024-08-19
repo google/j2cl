@@ -27,6 +27,38 @@
  ))
 )
 
+;;; Code for deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor [type definition]
+(type $deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_doAThing__int__void (ref $function.m_doAThing__int__void))
+ ))
+)
+(type $deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor.vtable))
+ (field $itable (ref $deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
+;;; Code for deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor [type definition]
+(type $deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_doAThing__java_lang_Object__void (ref $function.m_doAThing__java_lang_Object__void))
+ ))
+)
+(type $deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor.vtable))
+ (field $itable (ref $deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
 ;;; Code for deprecated.DeprecatedExample.DeprecatedEnum [type definition]
 (type $deprecated.DeprecatedExample.DeprecatedEnum.vtable (sub $java.lang.Enum.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
@@ -71,6 +103,10 @@
 
 ;;; Code for deprecated.DeprecatedExample [imports]
 
+;;; Code for deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor [imports]
+
+;;; Code for deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor [imports]
+
 ;;; Code for deprecated.DeprecatedExample.DeprecatedEnum [imports]
 
 ;;; Code for deprecated.DeprecatedExample.DeprecatedJsEnum [imports]
@@ -80,6 +116,22 @@
  (i32.const 0)
 )
 (global $$class@deprecated.DeprecatedExample (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor [static fields]
+(global $$class-initialized@deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor (mut i32)
+ (i32.const 0)
+)
+(global $$class@deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor [static fields]
+(global $$class-initialized@deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor (mut i32)
+ (i32.const 0)
+)
+(global $$class@deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -352,6 +404,120 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@deprecated.DeprecatedExample)
+
+;;; Code for deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor [methods]
+
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_deprecated_DeprecatedExample_DeprecatedInterface_$LambdaAdaptor@deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor
+ (param $this (ref null $deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:41:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:41:12
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:41:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:41:12
+  (if (global.get $$class-initialized@deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:41:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:41:12
+  (global.set $$class-initialized@deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:41:12
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor)))
+   (then
+    (return (global.get $$class@deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor))
+   )
+  )
+  (global.set $$class@deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|deprecated.D...|__java_lang_String_<once>_@deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor))
+ )
+)
+
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor)
+
+;;; Code for deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor [methods]
+
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_deprecated_DeprecatedExample_DeprecatedJsFunction_$LambdaAdaptor@deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor
+ (param $this (ref null $deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:48:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:48:12
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:48:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:48:12
+  (if (global.get $$class-initialized@deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:48:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:48:12
+  (global.set $$class-initialized@deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:48:12
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor)))
+   (then
+    (return (global.get $$class@deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor))
+   )
+  )
+  (global.set $$class@deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|deprecated.D...|__java_lang_String_<once>_@deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor))
+ )
+)
+
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor)
 
 ;;; Code for deprecated.DeprecatedExample.DeprecatedEnum [methods]
 

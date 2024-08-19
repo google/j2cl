@@ -4,6 +4,22 @@
  ))
 )
 
+;;; Code for packageprivatemethods.package1.Interface.$LambdaAdaptor [type definition]
+(type $packageprivatemethods.package1.Interface.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_exposedInChildWithInterface__int__int__int (ref $function.m_exposedInChildWithInterface__int__int__int))
+ ))
+)
+(type $packageprivatemethods.package1.Interface.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $packageprivatemethods.package1.Interface.$LambdaAdaptor.vtable))
+ (field $itable (ref $packageprivatemethods.package1.Interface.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
 ;;; Code for packageprivatemethods.package1.SuperParent [type definition]
 (type $packageprivatemethods.package1.SuperParent.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
@@ -112,6 +128,8 @@
 
 ;;; Code for packageprivatemethods.package1.Interface [imports]
 
+;;; Code for packageprivatemethods.package1.Interface.$LambdaAdaptor [imports]
+
 ;;; Code for packageprivatemethods.package1.SuperParent [imports]
 
 ;;; Code for packageprivatemethods.package1.Parent [imports]
@@ -135,6 +153,14 @@
  (i32.const 0)
 )
 (global $$class@packageprivatemethods.package1.Interface (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for packageprivatemethods.package1.Interface.$LambdaAdaptor [static fields]
+(global $$class-initialized@packageprivatemethods.package1.Interface.$LambdaAdaptor (mut i32)
+ (i32.const 0)
+)
+(global $$class@packageprivatemethods.package1.Interface.$LambdaAdaptor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -261,6 +287,63 @@
   (return (global.get $$class@packageprivatemethods.package1.Interface))
  )
 )
+
+;;; Code for packageprivatemethods.package1.Interface.$LambdaAdaptor [methods]
+
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_packageprivatemethods_package1_Interface_$LambdaAdaptor@packageprivatemethods.package1.Interface.$LambdaAdaptor
+ (param $this (ref null $packageprivatemethods.package1.Interface.$LambdaAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageprivatemethods/readable-j2wasm.js/packageprivatemethods/package1/Interface.java:18:17
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageprivatemethods/readable-j2wasm.js/packageprivatemethods/package1/Interface.java:18:17
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@packageprivatemethods.package1.Interface.$LambdaAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageprivatemethods/readable-j2wasm.js/packageprivatemethods/package1/Interface.java:18:17
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageprivatemethods/readable-j2wasm.js/packageprivatemethods/package1/Interface.java:18:17
+  (if (global.get $$class-initialized@packageprivatemethods.package1.Interface.$LambdaAdaptor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageprivatemethods/readable-j2wasm.js/packageprivatemethods/package1/Interface.java:18:17
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageprivatemethods/readable-j2wasm.js/packageprivatemethods/package1/Interface.java:18:17
+  (global.set $$class-initialized@packageprivatemethods.package1.Interface.$LambdaAdaptor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageprivatemethods/readable-j2wasm.js/packageprivatemethods/package1/Interface.java:18:17
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@packageprivatemethods.package1.Interface.$LambdaAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@packageprivatemethods.package1.Interface.$LambdaAdaptor)))
+   (then
+    (return (global.get $$class@packageprivatemethods.package1.Interface.$LambdaAdaptor))
+   )
+  )
+  (global.set $$class@packageprivatemethods.package1.Interface.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|packagepriva...|__java_lang_String_<once>_@packageprivatemethods.package1.Interface.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@packageprivatemethods.package1.Interface.$LambdaAdaptor))
+ )
+)
+
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@packageprivatemethods.package1.Interface.$LambdaAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $packageprivatemethods.package1.Interface.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $packageprivatemethods.package1.Interface.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@packageprivatemethods.package1.Interface.$LambdaAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@packageprivatemethods.package1.Interface.$LambdaAdaptor)
 
 ;;; Code for packageprivatemethods.package1.SuperParent [methods]
 
@@ -481,6 +564,19 @@
   (return (global.get $$class@packageprivatemethods.package1.Parent))
  )
 )
+
+;;; Class<?> Parent.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@packageprivatemethods.package1.Parent
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $packageprivatemethods.package1.Parent))
+ (local.set $this (ref.cast (ref $packageprivatemethods.package1.Parent) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@packageprivatemethods.package1.Parent ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@packageprivatemethods.package1.Parent)
 
 ;;; Code for packageprivatemethods.package1.Child [methods]
 
@@ -733,6 +829,19 @@
   (return (global.get $$class@packageprivatemethods.package2.SubParent))
  )
 )
+
+;;; Class<?> SubParent.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@packageprivatemethods.package2.SubParent
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $packageprivatemethods.package2.SubParent))
+ (local.set $this (ref.cast (ref $packageprivatemethods.package2.SubParent) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@packageprivatemethods.package2.SubParent ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@packageprivatemethods.package2.SubParent)
 
 ;;; Code for packageprivatemethods.package2.SubChild [methods]
 

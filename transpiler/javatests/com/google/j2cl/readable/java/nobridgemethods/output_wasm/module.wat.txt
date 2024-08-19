@@ -267,6 +267,19 @@
  )
 )
 
+;;; Class<?> Map.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nobridgemethods.Map
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nobridgemethods.Map))
+ (local.set $this (ref.cast (ref $nobridgemethods.Map) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nobridgemethods.Map ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nobridgemethods.Map)
+
 ;;; Code for nobridgemethods.CharSet [methods]
 
 ;;; CharSet CharSet.$create()

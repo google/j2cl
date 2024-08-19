@@ -73,6 +73,13 @@ public abstract class TypeDeclaration
     KOTLIN
   }
 
+  /** The origin of the class. */
+  public enum Origin {
+    SOURCE,
+    LAMBDA_ABSTRACT_ADAPTOR,
+    LAMBDA_IMPLEMENTOR
+  }
+
   private static final String OVERLAY_IMPLEMENTATION_CLASS_SUFFIX = "Overlay";
 
   /**
@@ -236,6 +243,8 @@ public abstract class TypeDeclaration
   public MethodDescriptor getEnclosingMethodDescriptor() {
     return getEnclosingMethodDescriptorFactory().get();
   }
+
+  public abstract Origin getOrigin();
 
   abstract Supplier<MethodDescriptor> getEnclosingMethodDescriptorFactory();
 
@@ -855,6 +864,7 @@ public abstract class TypeDeclaration
         // Default values.
         .setVisibility(Visibility.PUBLIC)
         .setSourceLanguage(SourceLanguage.JAVA)
+        .setOrigin(Origin.SOURCE)
         .setHasAbstractModifier(false)
         .setAnonymous(false)
         .setNative(false)
@@ -946,6 +956,8 @@ public abstract class TypeDeclaration
     public abstract Builder setFunctionalInterface(boolean isFunctionalInterface);
 
     public abstract Builder setAnnotatedWithFunctionalInterface(boolean isAnnotated);
+
+    public abstract Builder setOrigin(Origin origin);
 
     public abstract Builder setAnnotatedWithAutoValue(boolean annotatedWithAutoValue);
 

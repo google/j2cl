@@ -23,6 +23,11 @@ import com.google.j2cl.transpiler.ast.FunctionExpression;
  */
 public class NormalizeLambdaExpressionsJ2kt
     extends ImplementLambdaExpressionsViaImplementorClasses {
+
+  public NormalizeLambdaExpressionsJ2kt() {
+    super(/* extendAbstractAdaptorClass= */ false);
+  }
+
   @Override
   protected boolean shouldRewrite(FunctionExpression functionExpression) {
     return !functionExpression

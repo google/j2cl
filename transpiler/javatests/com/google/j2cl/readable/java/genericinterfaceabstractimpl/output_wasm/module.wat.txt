@@ -117,3 +117,16 @@
   (return (global.get $$class@genericinterfaceabstractimpl.AbstractImpl))
  )
 )
+
+;;; Class<?> AbstractImpl.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@genericinterfaceabstractimpl.AbstractImpl
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $genericinterfaceabstractimpl.AbstractImpl))
+ (local.set $this (ref.cast (ref $genericinterfaceabstractimpl.AbstractImpl) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@genericinterfaceabstractimpl.AbstractImpl ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@genericinterfaceabstractimpl.AbstractImpl)
