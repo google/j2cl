@@ -4,6 +4,7 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
+let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
 let Optional = goog.forwardDeclare('java.util.Optional$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
@@ -21,6 +22,7 @@ let StringJsEnum_$Overlay = goog.forwardDeclare('jsenum.Main.StringJsEnum.$Overl
 let Supplier = goog.forwardDeclare('jsenum.Main.Supplier$impl');
 let TemplatedField = goog.forwardDeclare('jsenum.Main.TemplatedField$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Comparables = goog.forwardDeclare('vmbootstrap.Comparables$impl');
 let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
 let $Enums_BoxedComparableLightEnum = goog.forwardDeclare('vmbootstrap.Enums.BoxedComparableLightEnum$impl');
@@ -165,6 +167,61 @@ class Main extends j_l_Object {
   });
  }
  /** @nodts */
+ static m_testNonNativeJsEnumArrays__void() {
+  let arr = [IntJsEnum.MINUSONE, IntJsEnum.TWENTY];
+  let b1 = $Equality.$same(arr[0], IntJsEnum.MINUSONE);
+  let b2 = $Equality.$same(arr[1], IntJsEnum.TWENTY);
+  let obj = /**@type {$Enums_BoxedLightEnum<?IntJsEnum>}*/ ($Enums.box(arr[0], IntJsEnum_$Overlay));
+  let v = arr[0];
+  let arr2 = new Array(2);
+  $Arrays.$set(arr2, 0, IntJsEnum.MINUSONE);
+  $Arrays.$set(arr2, 1, IntJsEnum.TWENTY);
+  let nestedArr = [[IntJsEnum.MINUSONE]];
+  $Arrays.$set(nestedArr, 0, [IntJsEnum.TWENTY]);
+  let arrayWithNull = [/**@type {?IntJsEnum}*/ ($Enums.unbox(null, IntJsEnum_$Overlay))];
+  $Arrays.$set(arrayWithNull, 0, /**@type {?IntJsEnum}*/ ($Enums.unbox(null, IntJsEnum_$Overlay)));
+  let list = /**@type {!ArrayList<$Enums_BoxedLightEnum<?IntJsEnum>>}*/ (ArrayList.$create__());
+  obj = list.m_toArray__arrayOf_java_lang_Object();
+  Main.m_nonNativeJsEnumVarargs__arrayOf_jsenum_Main_IntJsEnum__void([IntJsEnum.MINUSONE, IntJsEnum.TWENTY]);
+  Main.m_nonNativeJsEnumArrayVarargs__arrayOf_arrayOf_jsenum_Main_IntJsEnum__void([[IntJsEnum.MINUSONE], [IntJsEnum.TWENTY]]);
+  Main.m_tVarargs__arrayOf_java_lang_Object__void([/**@type {$Enums_BoxedLightEnum<!IntJsEnum>}*/ ($Enums.box(IntJsEnum.MINUSONE, IntJsEnum_$Overlay)), /**@type {$Enums_BoxedLightEnum<!IntJsEnum>}*/ ($Enums.box(IntJsEnum.TWENTY, IntJsEnum_$Overlay))]);
+ }
+ /** @nodts */
+ static m_nonNativeJsEnumVarargs__arrayOf_jsenum_Main_IntJsEnum__void(/** Array<?IntJsEnum> */ values) {
+  let v = values[0];
+ }
+ /** @nodts */
+ static m_nonNativeJsEnumArrayVarargs__arrayOf_arrayOf_jsenum_Main_IntJsEnum__void(/** Array<Array<?IntJsEnum>> */ values) {
+  let v = values[0];
+ }
+ /** @nodts @template T */
+ static m_tVarargs__arrayOf_java_lang_Object__void(/** Array<T> */ values) {
+  let v = values[0];
+ }
+ /** @nodts */
+ static m_testNonNativeStringJsEnumArrays__void() {
+  let arr = [StringJsEnum.ONE, StringJsEnum.THREE];
+  let b1 = $Equality.$same(arr[0], StringJsEnum.ONE);
+  let obj = /**@type {$Enums_BoxedLightEnum<?StringJsEnum>}*/ ($Enums.box(arr[0], StringJsEnum_$Overlay));
+  let v = arr[0];
+  let arr2 = new Array(2);
+  $Arrays.$set(arr2, 0, StringJsEnum.ONE);
+  let nestedArr = [[StringJsEnum.ONE]];
+  let arrayWithNull = [/**@type {?StringJsEnum}*/ ($Enums.unbox(null, StringJsEnum_$Overlay))];
+  $Arrays.$set(arrayWithNull, 0, /**@type {?StringJsEnum}*/ ($Enums.unbox(null, StringJsEnum_$Overlay)));
+ }
+ /** @nodts */
+ static m_testNativeJsEnumArrays__void() {
+  let arr = [NativeStringEnum.ONE, NativeStringEnum.THREE];
+  let b1 = $Equality.$same(arr[0], NativeStringEnum.ONE);
+  let arr2 = new Array(2);
+  $Arrays.$set(arr2, 0, NativeStringEnum.ONE);
+  let nestedArr = [[NativeStringEnum.ONE]];
+  $Arrays.$set(nestedArr, 0, [NativeStringEnum.THREE]);
+  let arrayWithNull = [null];
+  $Arrays.$set(arrayWithNull, 0, null);
+ }
+ /** @nodts */
  static $clinit() {
   Main.$clinit = () =>{};
   Main.$loadModules();
@@ -178,6 +235,7 @@ class Main extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   Comparable = goog.module.get('java.lang.Comparable$impl');
+  ArrayList = goog.module.get('java.util.ArrayList$impl');
   Arrays = goog.module.get('java.util.Arrays$impl');
   Optional = goog.module.get('java.util.Optional$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
@@ -195,6 +253,7 @@ class Main extends j_l_Object {
   Supplier = goog.module.get('jsenum.Main.Supplier$impl');
   TemplatedField = goog.module.get('jsenum.Main.TemplatedField$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Comparables = goog.module.get('vmbootstrap.Comparables$impl');
   $Enums = goog.module.get('vmbootstrap.Enums$impl');
   $Objects = goog.module.get('vmbootstrap.Objects$impl');

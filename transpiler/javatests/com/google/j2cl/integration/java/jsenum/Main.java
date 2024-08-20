@@ -27,6 +27,7 @@ import static jsenum.NativeEnums.nativeClinitCalled;
 
 import com.google.j2cl.integration.testing.TestUtils;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.SortedSet;
@@ -75,6 +76,11 @@ public class Main {
     testSpecializedSuperType();
     testSpecializedSuperTypeUnderlyingType();
     testBoxingPartialInlining();
+    testNonNativeJsEnumArrays();
+    testNonNativeStringJsEnumArrays();
+    testNonNativeJsEnumArrayBoxing();
+    testNativeJsEnumArray();
+    testJsEnumVarargs();
   }
 
   @Wasm("nop") // TODO(b/288145698): Support native JsEnum.
@@ -959,4 +965,125 @@ public class Main {
       throw new NullPointerException();
     }
   }
+
+  private static void testNonNativeJsEnumArrays() {
+    PlainJsEnum[] arr = new PlainJsEnum[] {PlainJsEnum.THREE, PlainJsEnum.TWO};
+    assertTrue(arr.length == 2);
+    assertTrue(arr[0] == PlainJsEnum.THREE);
+    assertTrue(arr[1] == PlainJsEnum.TWO);
+
+    PlainJsEnum[] arr2 = new PlainJsEnum[2];
+    assertTrue(arr2.length == 2);
+    arr2[0] = PlainJsEnum.THREE;
+    arr2[1] = PlainJsEnum.TWO;
+    assertTrue(arr2[0] == PlainJsEnum.THREE);
+    assertTrue(arr2[1] == PlainJsEnum.TWO);
+
+    PlainJsEnum[] arrayWithNull = new PlainJsEnum[] {null};
+    assertTrue(arrayWithNull[0] == null);
+
+    PlainJsEnum[] arrayWithDefaults = new PlainJsEnum[1];
+    assertTrue(arrayWithDefaults[0] == null);
+
+    Object[] objArray = new Object[] {PlainJsEnum.ONE};
+    assertTrue(objArray[0] == PlainJsEnum.ONE);
+
+    List<PlainJsEnum> list = new ArrayList<PlainJsEnum>();
+    list.add(PlainJsEnum.ONE);
+    assertTrue(list.toArray()[0] == PlainJsEnum.ONE);
+
+    PlainJsEnum[][] nestedArr = new PlainJsEnum[][] {{PlainJsEnum.THREE}};
+    assertTrue(nestedArr.length == 1);
+    assertTrue(nestedArr[0].length == 1);
+    assertTrue(nestedArr[0][0] == PlainJsEnum.THREE);
+
+    nestedArr[0] = new PlainJsEnum[] {PlainJsEnum.TWO};
+    assertTrue(nestedArr[0][0] == PlainJsEnum.TWO);
+  }
+
+  private static void testNonNativeStringJsEnumArrays() {
+    StringJsEnum[] arr = new StringJsEnum[] {StringJsEnum.HELLO, StringJsEnum.GOODBYE};
+    assertTrue(arr.length == 2);
+    assertTrue(arr[0] == StringJsEnum.HELLO);
+    assertTrue(arr[1] == StringJsEnum.GOODBYE);
+
+    StringJsEnum[] arr2 = new StringJsEnum[2];
+    assertTrue(arr2.length == 2);
+    arr2[0] = StringJsEnum.HELLO;
+    arr2[1] = StringJsEnum.GOODBYE;
+    assertTrue(arr2[0] == StringJsEnum.HELLO);
+    assertTrue(arr2[1] == StringJsEnum.GOODBYE);
+
+    StringJsEnum[] arrayWithNull = new StringJsEnum[] {null};
+    assertTrue(arrayWithNull[0] == null);
+
+    StringJsEnum[] arrayWithDefaults = new StringJsEnum[1];
+    assertTrue(arrayWithDefaults[0] == null);
+  }
+
+  @Wasm("nop") // JsEnum boxing not implemented in Wasm.
+  private static void testNonNativeJsEnumArrayBoxing() {
+    // JsEnums are stored as unboxed in an array.
+    PlainJsEnum[] arr = new PlainJsEnum[] {PlainJsEnum.THREE};
+    assertUnderlyingTypeEquals(Double.class, arr[0]);
+
+    StringJsEnum[] arr2 = new StringJsEnum[] {StringJsEnum.HELLO};
+    assertUnderlyingTypeEquals(String.class, arr2[0]);
+  }
+
+  @Wasm("nop") // TODO(b/288145698): Support native JsEnum.
+  private static void testNativeJsEnumArray() {
+    NativeEnum[] arr = new NativeEnum[] {NativeEnum.ACCEPT, NativeEnum.CANCEL};
+    assertTrue(arr.length == 2);
+    assertTrue(arr[0] == NativeEnum.ACCEPT);
+    assertTrue(arr[1] == NativeEnum.CANCEL);
+
+    NativeEnum[] arr2 = new NativeEnum[2];
+    assertTrue(arr2.length == 2);
+    arr2[0] = NativeEnum.ACCEPT;
+    arr2[1] = NativeEnum.CANCEL;
+    assertTrue(arr2[0] == NativeEnum.ACCEPT);
+    assertTrue(arr2[1] == NativeEnum.CANCEL);
+
+    NativeEnum[] arrayWithNull = new NativeEnum[] {null};
+    assertTrue(arrayWithNull[0] == null);
+
+    NativeEnum[] arrayWithDefaults = new NativeEnum[1];
+    assertTrue(arrayWithDefaults[0] == null);
+
+    NativeEnum[][] nestedArr = new NativeEnum[][] {{NativeEnum.ACCEPT}};
+    assertTrue(nestedArr.length == 1);
+    assertTrue(nestedArr[0].length == 1);
+    assertTrue(nestedArr[0][0] == NativeEnum.ACCEPT);
+
+    nestedArr[0] = new NativeEnum[] {NativeEnum.CANCEL};
+    assertTrue(nestedArr[0][0] == NativeEnum.CANCEL);
+  }
+
+  private static void testJsEnumVarargs() {
+    checkTVarargs(PlainJsEnum.ONE);
+    checkJsEnumVarargs(PlainJsEnum.ONE);
+
+    DerivedWithoutJsEnumVarargs d = new DerivedWithoutJsEnumVarargs();
+    d.checkTVarargs(PlainJsEnum.ONE);
+
+    BaseWithTVarargs b = new DerivedWithoutJsEnumVarargs();
+    b.checkTVarargs(PlainJsEnum.ONE);
+  }
+
+  private static <T> void checkTVarargs(T... t) {
+    assertTrue(t[0] == PlainJsEnum.ONE);
+  }
+
+  private static void checkJsEnumVarargs(PlainJsEnum... t) {
+    assertTrue(t[0] == PlainJsEnum.ONE);
+  }
+
+  private static class BaseWithTVarargs<T> {
+    public void checkTVarargs(T... t) {
+      assertTrue(t[0] == PlainJsEnum.ONE);
+    }
+  }
+
+  private static class DerivedWithoutJsEnumVarargs extends BaseWithTVarargs<PlainJsEnum> {}
 }

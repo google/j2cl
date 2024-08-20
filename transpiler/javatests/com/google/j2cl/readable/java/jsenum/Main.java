@@ -15,7 +15,9 @@
  */
 package jsenum;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import jsinterop.annotations.JsEnum;
 import jsinterop.annotations.JsFunction;
@@ -302,5 +304,73 @@ public class Main {
   private static void testVarargs() {
     varargsConsumer(SomeJsEnum.A, SomeJsEnum.A);
     Consumer<SomeJsEnum> consumer = Main::varargsConsumer;
+  }
+
+  private static void testNonNativeJsEnumArrays() {
+    IntJsEnum[] arr = new IntJsEnum[] {IntJsEnum.MINUSONE, IntJsEnum.TWENTY};
+    boolean b1 = arr[0] == IntJsEnum.MINUSONE;
+    boolean b2 = arr[1] == IntJsEnum.TWENTY;
+    Object obj = arr[0];
+    IntJsEnum v = arr[0];
+
+    IntJsEnum[] arr2 = new IntJsEnum[2];
+    arr2[0] = IntJsEnum.MINUSONE;
+    arr2[1] = IntJsEnum.TWENTY;
+
+    IntJsEnum[][] nestedArr = new IntJsEnum[][] {{IntJsEnum.MINUSONE}};
+    nestedArr[0] = new IntJsEnum[] {IntJsEnum.TWENTY};
+
+    IntJsEnum[] arrayWithNull = new IntJsEnum[] {null};
+    arrayWithNull[0] = null;
+
+    List<IntJsEnum> list = new ArrayList<IntJsEnum>();
+    obj = list.toArray();
+
+    nonNativeJsEnumVarargs(IntJsEnum.MINUSONE, IntJsEnum.TWENTY);
+    nonNativeJsEnumArrayVarargs(
+        new IntJsEnum[] {IntJsEnum.MINUSONE}, new IntJsEnum[] {IntJsEnum.TWENTY});
+
+    tVarargs(IntJsEnum.MINUSONE, IntJsEnum.TWENTY);
+  }
+
+  private static void nonNativeJsEnumVarargs(IntJsEnum... values) {
+    IntJsEnum v = values[0];
+  }
+
+  private static void nonNativeJsEnumArrayVarargs(IntJsEnum[]... values) {
+    IntJsEnum[] v = values[0];
+  }
+
+  private static <T> void tVarargs(T... values) {
+    T v = values[0];
+  }
+
+  private static void testNonNativeStringJsEnumArrays() {
+    StringJsEnum[] arr = new StringJsEnum[] {StringJsEnum.ONE, StringJsEnum.THREE};
+    boolean b1 = arr[0] == StringJsEnum.ONE;
+    Object obj = arr[0];
+    StringJsEnum v = arr[0];
+
+    StringJsEnum[] arr2 = new StringJsEnum[2];
+    arr2[0] = StringJsEnum.ONE;
+
+    StringJsEnum[][] nestedArr = new StringJsEnum[][] {{StringJsEnum.ONE}};
+
+    StringJsEnum[] arrayWithNull = new StringJsEnum[] {null};
+    arrayWithNull[0] = null;
+  }
+
+  private static void testNativeJsEnumArrays() {
+    NativeStringEnum[] arr = new NativeStringEnum[] {NativeStringEnum.ONE, NativeStringEnum.THREE};
+    boolean b1 = arr[0] == NativeStringEnum.ONE;
+
+    NativeStringEnum[] arr2 = new NativeStringEnum[2];
+    arr2[0] = NativeStringEnum.ONE;
+
+    NativeStringEnum[][] nestedArr = new NativeStringEnum[][] {{NativeStringEnum.ONE}};
+    nestedArr[0] = new NativeStringEnum[] {NativeStringEnum.THREE};
+
+    NativeStringEnum[] arrayWithNull = new NativeStringEnum[] {null};
+    arrayWithNull[0] = null;
   }
 }

@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
+import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.BreakStatement;
@@ -213,7 +214,7 @@ public class VerifyNormalizedUnits extends NormalizationPass {
             // There are no direct nesting of array literals.
             checkState(
                 !(getParent() instanceof ArrayLiteral)
-                    || arrayLiteral.getTypeDescriptor().isUntypedArray());
+                    || AstUtils.shouldUseUntypedArray(arrayLiteral.getTypeDescriptor()));
             if (verifyForWasm) {}
           }
 

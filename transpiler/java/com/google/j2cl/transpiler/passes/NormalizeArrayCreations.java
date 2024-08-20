@@ -23,6 +23,7 @@ import com.google.common.collect.Lists;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
+import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.JsDocCastExpression;
@@ -59,7 +60,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
   private static Expression implementArrayCreationWithDimensions(NewArray newArrayExpression) {
     checkArgument(!(newArrayExpression.getInitializer() instanceof ArrayLiteral));
 
-    if (newArrayExpression.getTypeDescriptor().isUntypedArray()) {
+    if (AstUtils.shouldUseUntypedArray(newArrayExpression.getTypeDescriptor())) {
       if (newArrayExpression.getDimensionExpressions().size() == 1) {
         Expression dimensionExpression =
             Iterables.getOnlyElement(newArrayExpression.getDimensionExpressions());
@@ -107,7 +108,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
     Expression dimensionLengthExpression =
         checkNotNull(newArrayExpression.getDimensionExpressions().get(0));
 
-    if (newArrayExpression.getTypeDescriptor().isUntypedArray()) {
+    if (AstUtils.shouldUseUntypedArray(newArrayExpression.getTypeDescriptor())) {
       return createNonNullableAnnotation(
           RuntimeMethods.createArraysMethodCall(
               "$createNativeWithInitializer",
@@ -145,7 +146,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
     Expression initializer = newArrayExpression.getInitializer();
     checkArgument(initializer instanceof ArrayLiteral);
 
-    if (newArrayExpression.getTypeDescriptor().isUntypedArray()) {
+    if (AstUtils.shouldUseUntypedArray(newArrayExpression.getTypeDescriptor())) {
       return initializer;
     }
 

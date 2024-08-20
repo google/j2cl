@@ -1571,16 +1571,16 @@
 
 ;;; void Supplier.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.Supplier
- ;;@ jsenum/Main.java:27:12
+ ;;@ jsenum/Main.java:29:12
  (block
-  ;;@ jsenum/Main.java:27:12
+  ;;@ jsenum/Main.java:29:12
   (if (global.get $$class-initialized@jsenum.Main.Supplier)
    (then
-    ;;@ jsenum/Main.java:27:12
+    ;;@ jsenum/Main.java:29:12
     (return )
    )
   )
-  ;;@ jsenum/Main.java:27:12
+  ;;@ jsenum/Main.java:29:12
   (global.set $$class-initialized@jsenum.Main.Supplier (i32.const 1))
  )
 )
@@ -1617,16 +1617,16 @@
 
 ;;; void Consumer.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.Consumer
- ;;@ jsenum/Main.java:31:12
+ ;;@ jsenum/Main.java:33:12
  (block
-  ;;@ jsenum/Main.java:31:12
+  ;;@ jsenum/Main.java:33:12
   (if (global.get $$class-initialized@jsenum.Main.Consumer)
    (then
-    ;;@ jsenum/Main.java:31:12
+    ;;@ jsenum/Main.java:33:12
     (return )
    )
   )
-  ;;@ jsenum/Main.java:31:12
+  ;;@ jsenum/Main.java:33:12
   (global.set $$class-initialized@jsenum.Main.Consumer (i32.const 1))
  )
 )
@@ -1663,16 +1663,16 @@
 
 ;;; void JsFunctionSuppiler.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.JsFunctionSuppiler
- ;;@ jsenum/Main.java:176:12
+ ;;@ jsenum/Main.java:178:12
  (block
-  ;;@ jsenum/Main.java:176:12
+  ;;@ jsenum/Main.java:178:12
   (if (global.get $$class-initialized@jsenum.Main.JsFunctionSuppiler)
    (then
-    ;;@ jsenum/Main.java:176:12
+    ;;@ jsenum/Main.java:178:12
     (return )
    )
   )
-  ;;@ jsenum/Main.java:176:12
+  ;;@ jsenum/Main.java:178:12
   (global.set $$class-initialized@jsenum.Main.JsFunctionSuppiler (i32.const 1))
  )
 )
@@ -1710,16 +1710,16 @@
 ;;; Main Main.$create()
 (func $$create__@jsenum.Main
  (result (ref null $jsenum.Main))
- ;;@ jsenum/Main.java:26:13
+ ;;@ jsenum/Main.java:28:13
  (local $$instance (ref null $jsenum.Main))
  (block
-  ;;@ jsenum/Main.java:26:13
+  ;;@ jsenum/Main.java:28:13
   (call $$clinit__void_<once>_@jsenum.Main )
-  ;;@ jsenum/Main.java:26:13
+  ;;@ jsenum/Main.java:28:13
   (local.set $$instance (struct.new $jsenum.Main (ref.as_non_null (global.get $jsenum.Main.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ jsenum/Main.java:26:13
+  ;;@ jsenum/Main.java:28:13
   (call $$ctor__void_$p_jsenum_Main@jsenum.Main (ref.as_non_null (local.get $$instance)))
-  ;;@ jsenum/Main.java:26:13
+  ;;@ jsenum/Main.java:28:13
   (return (local.get $$instance))
  )
 )
@@ -1727,16 +1727,16 @@
 ;;; void Main.$ctor()
 (func $$ctor__void_$p_jsenum_Main@jsenum.Main
  (param $this (ref null $jsenum.Main))
- ;;@ jsenum/Main.java:26:13
+ ;;@ jsenum/Main.java:28:13
  (block
-  ;;@ jsenum/Main.java:26:13
+  ;;@ jsenum/Main.java:28:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void Main.testJsEnumSwitch()
 (func $m_testJsEnumSwitch__void@jsenum.Main
- ;;@ jsenum/Main.java:101:21
+ ;;@ jsenum/Main.java:103:21
  (local $comparableJsEnum (ref null $jsenum.Main.ComparableJsEnum))
  (local $$qualifier (ref null $jsenum.Main.ComparableJsEnum))
  (local $$expression i32)
@@ -1753,9 +1753,9 @@
  (local $supplier (ref null $java.lang.Object))
  (local $consummer (ref null $java.lang.Object))
  (block
-  ;;@ jsenum/Main.java:101:40
+  ;;@ jsenum/Main.java:103:40
   (call $$clinit__void_<once>_@jsenum.Main )
-  ;;@ jsenum/Main.java:102:4
+  ;;@ jsenum/Main.java:104:4
   (local.set $comparableJsEnum (if (result (ref null $jsenum.Main.ComparableJsEnum)) (i32.eq (block (result i32)
    (local.set $$qualifier (block (result (ref null $jsenum.Main.ComparableJsEnum))
     (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
@@ -1766,30 +1766,30 @@
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $TWO@jsenum.Main.ComparableJsEnum)
   )) (else (ref.null $java.lang.Object))))
-  ;;@ jsenum/Main.java:104:4
+  ;;@ jsenum/Main.java:106:4
   (block $SWITCH.BREAK
    (block
-    ;;@ jsenum/Main.java:104:4
+    ;;@ jsenum/Main.java:106:4
     (local.set $$expression (call $m_ordinal__int@java.lang.Enum (ref.as_non_null (local.get $comparableJsEnum))))
-    ;;@ jsenum/Main.java:104:4
+    ;;@ jsenum/Main.java:106:4
     (block
      (block
       (block ;; evaluate expression and jump
        (br_table 0 1 (i32.sub (local.get $$expression) (i32.const 2)))
       )
       ;; case 2:
-      ;;@ jsenum/Main.java:106:8
+      ;;@ jsenum/Main.java:108:8
       (br $SWITCH.BREAK)
      )
      ;; default:
     )
    )
   )
-  ;;@ jsenum/Main.java:110:4
+  ;;@ jsenum/Main.java:112:4
   (local.set $comparable (local.get $comparableJsEnum))
-  ;;@ jsenum/Main.java:111:4
-  (local.set $comparableJsEnum (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (local.get $comparable)))
   ;;@ jsenum/Main.java:113:4
+  (local.set $comparableJsEnum (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (local.get $comparable)))
+  ;;@ jsenum/Main.java:115:4
   (local.set $intJsEnum (if (result (ref null $jsenum.Main.IntJsEnum)) (i32.eq (block (result i32)
    (local.set $$qualifier_1 (block (result (ref null $jsenum.Main.IntJsEnum))
     (call $$clinit__void_<once>_@jsenum.Main.IntJsEnum )
@@ -1800,44 +1800,44 @@
    (call $$clinit__void_<once>_@jsenum.Main.IntJsEnum )
    (global.get $ELEVEN@jsenum.Main.IntJsEnum)
   )) (else (ref.null $java.lang.Object))))
-  ;;@ jsenum/Main.java:114:4
+  ;;@ jsenum/Main.java:116:4
   (block $SWITCH_1.BREAK
    (block
-    ;;@ jsenum/Main.java:114:4
+    ;;@ jsenum/Main.java:116:4
     (local.set $$expression_1 (call $m_ordinal__int@java.lang.Enum (ref.as_non_null (local.get $intJsEnum))))
-    ;;@ jsenum/Main.java:114:4
+    ;;@ jsenum/Main.java:116:4
     (block
      (block
       (block ;; evaluate expression and jump
        (br_table 0 1 (i32.sub (local.get $$expression_1) (i32.const 1)))
       )
       ;; case 1:
-      ;;@ jsenum/Main.java:116:8
+      ;;@ jsenum/Main.java:118:8
       (br $SWITCH_1.BREAK)
      )
      ;; default:
     )
    )
   )
-  ;;@ jsenum/Main.java:120:4
+  ;;@ jsenum/Main.java:122:4
   (local.set $o (local.get $intJsEnum))
-  ;;@ jsenum/Main.java:121:4
+  ;;@ jsenum/Main.java:123:4
   (local.set $intJsEnum (ref.cast (ref null $jsenum.Main.IntJsEnum) (local.get $o)))
-  ;;@ jsenum/Main.java:124:4
+  ;;@ jsenum/Main.java:126:4
   (local.set $equal (ref.eq (local.get $intJsEnum) (block (result (ref null $jsenum.Main.IntJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.IntJsEnum )
    (global.get $TWENTY@jsenum.Main.IntJsEnum)
   )))
-  ;;@ jsenum/Main.java:125:4
-  (local.set $isInstance (ref.test (ref $jsenum.Main.IntJsEnum) (local.get $intJsEnum)))
   ;;@ jsenum/Main.java:127:4
+  (local.set $isInstance (ref.test (ref $jsenum.Main.IntJsEnum) (local.get $intJsEnum)))
+  ;;@ jsenum/Main.java:129:4
   (local.set $isInstance (if (result i32) (ref.is_null (local.get $intJsEnum))
    (then (i32.const 0))
    (else 
     (ref.test (ref $java.lang.Comparable.vtable) (call $get.itable.$java.lang.Comparable (local.get $intJsEnum) ))
    )
   ))
-  ;;@ jsenum/Main.java:129:4
+  ;;@ jsenum/Main.java:131:4
   (local.set $stringJsEnum (if (result (ref null $jsenum.Main.StringJsEnum)) (ref.eq (block (result (ref null $java.lang.String))
    (local.set $$qualifier_2 (block (result (ref null $jsenum.Main.StringJsEnum))
     (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
@@ -1848,26 +1848,26 @@
    (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
    (global.get $THREE@jsenum.Main.StringJsEnum)
   )) (else (ref.null $java.lang.Object))))
-  ;;@ jsenum/Main.java:130:4
+  ;;@ jsenum/Main.java:132:4
   (block $SWITCH_2.BREAK
    (block
-    ;;@ jsenum/Main.java:130:4
+    ;;@ jsenum/Main.java:132:4
     (local.set $$expression_2 (call $m_ordinal__int@java.lang.Enum (ref.as_non_null (local.get $stringJsEnum))))
-    ;;@ jsenum/Main.java:130:4
+    ;;@ jsenum/Main.java:132:4
     (block
      (block
       (block ;; evaluate expression and jump
        (br_table 0 1 (local.get $$expression_2))
       )
       ;; case 0:
-      ;;@ jsenum/Main.java:132:8
+      ;;@ jsenum/Main.java:134:8
       (br $SWITCH_2.BREAK)
      )
      ;; default:
     )
    )
   )
-  ;;@ jsenum/Main.java:136:4
+  ;;@ jsenum/Main.java:138:4
   (drop (call $m_compareTo__java_lang_Enum__int@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.NativeStringEnum))
    (call $$clinit__void_<once>_@jsenum.Main.NativeStringEnum )
    (global.get $ONE@jsenum.Main.NativeStringEnum)
@@ -1875,7 +1875,7 @@
    (call $$clinit__void_<once>_@jsenum.Main.NativeStringEnum )
    (global.get $THREE@jsenum.Main.NativeStringEnum)
   )))
-  ;;@ jsenum/Main.java:137:4
+  ;;@ jsenum/Main.java:139:4
   (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.NativeStringEnum))
    (call $$clinit__void_<once>_@jsenum.Main.NativeStringEnum )
    (global.get $ONE@jsenum.Main.NativeStringEnum)
@@ -1883,46 +1883,46 @@
    (call $$clinit__void_<once>_@jsenum.Main.NativeStringEnum )
    (global.get $THREE@jsenum.Main.NativeStringEnum)
   )))
-  ;;@ jsenum/Main.java:139:4
+  ;;@ jsenum/Main.java:141:4
   (local.set $supplier (call $$create__@jsenum.Main.$LambdaImplementor$1 ))
-  ;;@ jsenum/Main.java:140:4
-  (local.set $consummer (call $$create__@jsenum.Main.$LambdaImplementor$2 ))
   ;;@ jsenum/Main.java:142:4
+  (local.set $consummer (call $$create__@jsenum.Main.$LambdaImplementor$2 ))
+  ;;@ jsenum/Main.java:144:4
   (call $m_acceptsJsFunctionSupplier__jsenum_Main_JsFunctionSuppiler__void@jsenum.Main (call $$create__@jsenum.Main.$LambdaImplementor$3 ))
-  ;;@ jsenum/Main.java:143:4
+  ;;@ jsenum/Main.java:145:4
   (call $m_acceptsSupplierOfSupplier__jsenum_Main_Supplier__void@jsenum.Main (call $$create__@jsenum.Main.$LambdaImplementor$5 ))
  )
 )
 
 ;;; void Main.testJsEnumAutoboxingSpecialMethods()
 (func $m_testJsEnumAutoboxingSpecialMethods__void@jsenum.Main
- ;;@ jsenum/Main.java:146:22
+ ;;@ jsenum/Main.java:148:22
  (local $stringJsEnum (ref null $jsenum.Main.StringJsEnum))
  (local $nullStringJsEnum (ref null $jsenum.Main.StringJsEnum))
  (local $jsEnum (ref null $jsenum.Main.ComparableJsEnum))
  (local $nullJsEnum (ref null $jsenum.Main.ComparableJsEnum))
  (local $o (ref null $java.lang.Object))
  (block
-  ;;@ jsenum/Main.java:147:4
+  ;;@ jsenum/Main.java:149:4
   (local.set $stringJsEnum (block (result (ref null $jsenum.Main.StringJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
    (global.get $ONE@jsenum.Main.StringJsEnum)
   ))
-  ;;@ jsenum/Main.java:148:4
+  ;;@ jsenum/Main.java:150:4
   (local.set $nullStringJsEnum (ref.null $java.lang.Object))
-  ;;@ jsenum/Main.java:149:4
+  ;;@ jsenum/Main.java:151:4
   (local.set $jsEnum (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
   ))
-  ;;@ jsenum/Main.java:150:4
+  ;;@ jsenum/Main.java:152:4
   (local.set $nullJsEnum (ref.null $java.lang.Object))
-  ;;@ jsenum/Main.java:151:4
+  ;;@ jsenum/Main.java:153:4
   (local.set $o (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
   ))
-  ;;@ jsenum/Main.java:153:4
+  ;;@ jsenum/Main.java:155:4
   (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.StringJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
    (global.get $ONE@jsenum.Main.StringJsEnum)
@@ -1930,46 +1930,33 @@
    (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
    (global.get $THREE@jsenum.Main.StringJsEnum)
   )))
-  ;;@ jsenum/Main.java:154:4
-  (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.StringJsEnum))
-   (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
-   (global.get $ONE@jsenum.Main.StringJsEnum)
-  ))(local.get $stringJsEnum)))
-  ;;@ jsenum/Main.java:155:4
-  (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.StringJsEnum))
-   (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
-   (global.get $ONE@jsenum.Main.StringJsEnum)
-  ))(local.get $nullStringJsEnum)))
   ;;@ jsenum/Main.java:156:4
   (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.StringJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
    (global.get $ONE@jsenum.Main.StringJsEnum)
-  ))(ref.null $java.lang.Object)))
+  ))(local.get $stringJsEnum)))
   ;;@ jsenum/Main.java:157:4
   (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.StringJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
    (global.get $ONE@jsenum.Main.StringJsEnum)
-  ))(local.get $o)))
+  ))(local.get $nullStringJsEnum)))
   ;;@ jsenum/Main.java:158:4
+  (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.StringJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
+   (global.get $ONE@jsenum.Main.StringJsEnum)
+  ))(ref.null $java.lang.Object)))
+  ;;@ jsenum/Main.java:159:4
+  (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.StringJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
+   (global.get $ONE@jsenum.Main.StringJsEnum)
+  ))(local.get $o)))
+  ;;@ jsenum/Main.java:160:4
   (drop (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $o))(block (result (ref null $jsenum.Main.StringJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
    (global.get $THREE@jsenum.Main.StringJsEnum)
   )(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(local.get $o)))))
-  ;;@ jsenum/Main.java:160:4
-  (drop (call $m_compareTo__java_lang_Enum__int@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.ComparableJsEnum))
-   (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
-   (global.get $ONE@jsenum.Main.ComparableJsEnum)
-  ))(block (result (ref null $jsenum.Main.ComparableJsEnum))
-   (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
-   (global.get $ZERO@jsenum.Main.ComparableJsEnum)
-  )))
-  ;;@ jsenum/Main.java:161:4
-  (drop (call $m_compareTo__java_lang_Enum__int@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.ComparableJsEnum))
-   (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
-   (global.get $ONE@jsenum.Main.ComparableJsEnum)
-  ))(ref.null $java.lang.Object)))
   ;;@ jsenum/Main.java:162:4
-  (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.ComparableJsEnum))
+  (drop (call $m_compareTo__java_lang_Enum__int@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
   ))(block (result (ref null $jsenum.Main.ComparableJsEnum))
@@ -1977,36 +1964,49 @@
    (global.get $ZERO@jsenum.Main.ComparableJsEnum)
   )))
   ;;@ jsenum/Main.java:163:4
-  (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.ComparableJsEnum))
+  (drop (call $m_compareTo__java_lang_Enum__int@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
-  ))(local.get $jsEnum)))
+  ))(ref.null $java.lang.Object)))
   ;;@ jsenum/Main.java:164:4
   (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
-  ))(local.get $nullJsEnum)))
+  ))(block (result (ref null $jsenum.Main.ComparableJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
+   (global.get $ZERO@jsenum.Main.ComparableJsEnum)
+  )))
   ;;@ jsenum/Main.java:165:4
   (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
-  ))(ref.null $java.lang.Object)))
+  ))(local.get $jsEnum)))
   ;;@ jsenum/Main.java:166:4
   (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
-  ))(local.get $o)))
+  ))(local.get $nullJsEnum)))
   ;;@ jsenum/Main.java:167:4
+  (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.ComparableJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
+   (global.get $ONE@jsenum.Main.ComparableJsEnum)
+  ))(ref.null $java.lang.Object)))
+  ;;@ jsenum/Main.java:168:4
+  (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.ComparableJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
+   (global.get $ONE@jsenum.Main.ComparableJsEnum)
+  ))(local.get $o)))
+  ;;@ jsenum/Main.java:169:4
   (drop (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $o))(block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ZERO@jsenum.Main.ComparableJsEnum)
   )(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(local.get $o)))))
-  ;;@ jsenum/Main.java:169:4
+  ;;@ jsenum/Main.java:171:4
   (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.StringJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
    (global.get $ONE@jsenum.Main.StringJsEnum)
   ))(local.get $jsEnum)))
-  ;;@ jsenum/Main.java:171:4
+  ;;@ jsenum/Main.java:173:4
   (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (call $m_boxingPassthrough__java_lang_Object__java_lang_Object@jsenum.Main (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
@@ -2014,7 +2014,7 @@
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
   )))))
-  ;;@ jsenum/Main.java:172:4
+  ;;@ jsenum/Main.java:174:4
   (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (call $m_boxingPassthrough__java_lang_Object__java_lang_Object@jsenum.Main (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
@@ -2028,7 +2028,7 @@
 ;;; void Main.acceptsJsFunctionSupplier(JsFunctionSuppiler<ComparableJsEnum> supplier)
 (func $m_acceptsJsFunctionSupplier__jsenum_Main_JsFunctionSuppiler__void@jsenum.Main
  (param $supplier (ref null $java.lang.Object))
- ;;@ jsenum/Main.java:180:22
+ ;;@ jsenum/Main.java:182:22
  (block
  )
 )
@@ -2036,22 +2036,22 @@
 ;;; void Main.acceptsSupplierOfSupplier(Supplier<Supplier<ComparableJsEnum>> supplier)
 (func $m_acceptsSupplierOfSupplier__jsenum_Main_Supplier__void@jsenum.Main
  (param $supplier (ref null $java.lang.Object))
- ;;@ jsenum/Main.java:182:22
+ ;;@ jsenum/Main.java:184:22
  (block
  )
 )
 
 ;;; void Main.testReturnsAndParameters()
 (func $m_testReturnsAndParameters__void@jsenum.Main
- ;;@ jsenum/Main.java:184:22
+ ;;@ jsenum/Main.java:186:22
  (local $returnedValue (ref null $jsenum.Main.ComparableJsEnum))
  (local $returnedNullValue (ref null $jsenum.Main.ComparableJsEnum))
  (block
-  ;;@ jsenum/Main.java:185:4
-  (local.set $returnedValue (call $m_returnsJsEnum__jsenum_Main_ComparableJsEnum@jsenum.Main ))
-  ;;@ jsenum/Main.java:186:4
-  (local.set $returnedNullValue (call $m_returnsNullJsEnum__jsenum_Main_ComparableJsEnum@jsenum.Main ))
   ;;@ jsenum/Main.java:187:4
+  (local.set $returnedValue (call $m_returnsJsEnum__jsenum_Main_ComparableJsEnum@jsenum.Main ))
+  ;;@ jsenum/Main.java:188:4
+  (local.set $returnedNullValue (call $m_returnsNullJsEnum__jsenum_Main_ComparableJsEnum@jsenum.Main ))
+  ;;@ jsenum/Main.java:189:4
   (call $m_takesJsEnum__jsenum_Main_ComparableJsEnum__void@jsenum.Main (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
@@ -2062,9 +2062,9 @@
 ;;; ComparableJsEnum Main.returnsJsEnum()
 (func $m_returnsJsEnum__jsenum_Main_ComparableJsEnum@jsenum.Main
  (result (ref null $jsenum.Main.ComparableJsEnum))
- ;;@ jsenum/Main.java:190:34
+ ;;@ jsenum/Main.java:192:34
  (block
-  ;;@ jsenum/Main.java:191:4
+  ;;@ jsenum/Main.java:193:4
   (return (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
@@ -2075,9 +2075,9 @@
 ;;; ComparableJsEnum Main.returnsNullJsEnum()
 (func $m_returnsNullJsEnum__jsenum_Main_ComparableJsEnum@jsenum.Main
  (result (ref null $jsenum.Main.ComparableJsEnum))
- ;;@ jsenum/Main.java:194:34
+ ;;@ jsenum/Main.java:196:34
  (block
-  ;;@ jsenum/Main.java:195:4
+  ;;@ jsenum/Main.java:197:4
   (return (ref.null $java.lang.Object))
  )
 )
@@ -2085,40 +2085,40 @@
 ;;; void Main.takesJsEnum(ComparableJsEnum value)
 (func $m_takesJsEnum__jsenum_Main_ComparableJsEnum__void@jsenum.Main
  (param $value (ref null $jsenum.Main.ComparableJsEnum))
- ;;@ jsenum/Main.java:198:22
+ ;;@ jsenum/Main.java:200:22
  (block
  )
 )
 
 ;;; void Main.testBoxUnboxWithTypeInference()
 (func $m_testBoxUnboxWithTypeInference__void@jsenum.Main
- ;;@ jsenum/Main.java:200:22
+ ;;@ jsenum/Main.java:202:22
  (local $templatedField (ref null $jsenum.Main.TemplatedField))
  (local $unboxed (ref null $jsenum.Main.ComparableJsEnum))
  (local $b i32)
  (block
-  ;;@ jsenum/Main.java:202:4
+  ;;@ jsenum/Main.java:204:4
   (local.set $templatedField (call $$create__java_lang_Object@jsenum.Main.TemplatedField (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
   )))
-  ;;@ jsenum/Main.java:204:4
-  (local.set $unboxed (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (call_ref $function.m_getValue__java_lang_Object_$pp_jsenum (ref.as_non_null (local.get $templatedField))(struct.get $jsenum.Main.TemplatedField.vtable $m_getValue__java_lang_Object_$pp_jsenum (struct.get $jsenum.Main.TemplatedField $vtable(local.get $templatedField))))))
-  ;;@ jsenum/Main.java:205:4
-  (local.set $unboxed (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (struct.get $jsenum.Main.TemplatedField $value@jsenum.Main.TemplatedField (local.get $templatedField))))
   ;;@ jsenum/Main.java:206:4
+  (local.set $unboxed (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (call_ref $function.m_getValue__java_lang_Object_$pp_jsenum (ref.as_non_null (local.get $templatedField))(struct.get $jsenum.Main.TemplatedField.vtable $m_getValue__java_lang_Object_$pp_jsenum (struct.get $jsenum.Main.TemplatedField $vtable(local.get $templatedField))))))
+  ;;@ jsenum/Main.java:207:4
+  (local.set $unboxed (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (struct.get $jsenum.Main.TemplatedField $value@jsenum.Main.TemplatedField (local.get $templatedField))))
+  ;;@ jsenum/Main.java:208:4
   (struct.set $jsenum.Main.TemplatedField $value@jsenum.Main.TemplatedField (local.get $templatedField) (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
   ))
-  ;;@ jsenum/Main.java:207:4
+  ;;@ jsenum/Main.java:209:4
   (drop (call $m_asList__arrayOf_java_lang_Object__java_util_List@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
   )))))
-  ;;@ jsenum/Main.java:208:4
+  ;;@ jsenum/Main.java:210:4
   (drop (call $m_ordinal__int@java.lang.Enum (ref.as_non_null (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (call_ref $function.m_getValue__java_lang_Object_$pp_jsenum (ref.as_non_null (local.get $templatedField))(struct.get $jsenum.Main.TemplatedField.vtable $m_getValue__java_lang_Object_$pp_jsenum (struct.get $jsenum.Main.TemplatedField $vtable(local.get $templatedField))))))))
-  ;;@ jsenum/Main.java:209:4
+  ;;@ jsenum/Main.java:211:4
   (local.set $b (ref.eq (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
@@ -2133,20 +2133,20 @@
 (func $m_boxingPassthrough__java_lang_Object__java_lang_Object@jsenum.Main
  (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ jsenum/Main.java:224:23
+ ;;@ jsenum/Main.java:226:23
  (block
-  ;;@ jsenum/Main.java:225:4
+  ;;@ jsenum/Main.java:227:4
   (return (local.get $t))
  )
 )
 
 ;;; void Main.boxingWithGenerics()
 (func $m_boxingWithGenerics__void@jsenum.Main
- ;;@ jsenum/Main.java:228:14
+ ;;@ jsenum/Main.java:230:14
  (block
-  ;;@ jsenum/Main.java:228:35
+  ;;@ jsenum/Main.java:230:35
   (call $$clinit__void_<once>_@jsenum.Main )
-  ;;@ jsenum/Main.java:229:4
+  ;;@ jsenum/Main.java:231:4
   (drop (call $$create__java_util_Optional@jsenum.Main.Foo (call $m_of__java_lang_Object__java_util_Optional@java.util.Optional (block (result (ref null $jsenum.Main.IntJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.IntJsEnum )
    (global.get $MINUSONE@jsenum.Main.IntJsEnum)
@@ -2158,11 +2158,11 @@
 (func $m_varargsConsumer__arrayOf_java_lang_Object__java_lang_Object@jsenum.Main
  (param $arg0 (ref null $javaemul.internal.WasmArray.OfObject))
  (result (ref null $java.lang.Object))
- ;;@ jsenum/Main.java:286:23
+ ;;@ jsenum/Main.java:288:23
  (block
-  ;;@ jsenum/Main.java:286:23
+  ;;@ jsenum/Main.java:288:23
   (call $$clinit__void_<once>_@jsenum.Main )
-  ;;@ jsenum/Main.java:286:23
+  ;;@ jsenum/Main.java:288:23
   (return (call $m_varargsConsumer_$private__arrayOf_java_lang_Object__java_lang_Object@jsenum.Main (local.get $arg0)))
  )
 )
@@ -2171,19 +2171,19 @@
 (func $m_varargsConsumer_$private__arrayOf_java_lang_Object__java_lang_Object@jsenum.Main
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  (result (ref null $java.lang.Object))
- ;;@ jsenum/Main.java:286:23
+ ;;@ jsenum/Main.java:288:23
  (block
-  ;;@ jsenum/Main.java:287:4
+  ;;@ jsenum/Main.java:289:4
   (return (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $args)) (i32.const 0)))
  )
 )
 
 ;;; void Main.testVarargs()
 (func $m_testVarargs__void@jsenum.Main
- ;;@ jsenum/Main.java:302:22
+ ;;@ jsenum/Main.java:304:22
  (local $consumer (ref null $java.lang.Object))
  (block
-  ;;@ jsenum/Main.java:303:4
+  ;;@ jsenum/Main.java:305:4
   (drop (call $m_varargsConsumer_$private__arrayOf_java_lang_Object__java_lang_Object@jsenum.Main (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (block (result (ref null $jsenum.Main.SomeJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.SomeJsEnum )
    (global.get $A@jsenum.Main.SomeJsEnum)
@@ -2191,25 +2191,243 @@
    (call $$clinit__void_<once>_@jsenum.Main.SomeJsEnum )
    (global.get $A@jsenum.Main.SomeJsEnum)
   )))))
-  ;;@ jsenum/Main.java:304:4
+  ;;@ jsenum/Main.java:306:4
   (local.set $consumer (call $$create__@jsenum.Main.$LambdaImplementor$6 ))
+ )
+)
+
+;;; void Main.testNonNativeJsEnumArrays()
+(func $m_testNonNativeJsEnumArrays__void@jsenum.Main
+ ;;@ jsenum/Main.java:309:22
+ (local $arr (ref null $javaemul.internal.WasmArray.OfObject))
+ (local $b1 i32)
+ (local $b2 i32)
+ (local $obj (ref null $java.lang.Object))
+ (local $v (ref null $jsenum.Main.IntJsEnum))
+ (local $arr2 (ref null $javaemul.internal.WasmArray.OfObject))
+ (local $nestedArr (ref null $javaemul.internal.WasmArray.OfObject))
+ (local $arrayWithNull (ref null $javaemul.internal.WasmArray.OfObject))
+ (local $list (ref null $java.lang.Object))
+ (block
+  ;;@ jsenum/Main.java:310:4
+  (local.set $arr (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (block (result (ref null $jsenum.Main.IntJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.IntJsEnum )
+   (global.get $MINUSONE@jsenum.Main.IntJsEnum)
+  )(block (result (ref null $jsenum.Main.IntJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.IntJsEnum )
+   (global.get $TWENTY@jsenum.Main.IntJsEnum)
+  ))))
+  ;;@ jsenum/Main.java:311:4
+  (local.set $b1 (ref.eq (ref.cast (ref null $jsenum.Main.IntJsEnum) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arr)) (i32.const 0))) (block (result (ref null $jsenum.Main.IntJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.IntJsEnum )
+   (global.get $MINUSONE@jsenum.Main.IntJsEnum)
+  )))
+  ;;@ jsenum/Main.java:312:4
+  (local.set $b2 (ref.eq (ref.cast (ref null $jsenum.Main.IntJsEnum) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arr)) (i32.const 1))) (block (result (ref null $jsenum.Main.IntJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.IntJsEnum )
+   (global.get $TWENTY@jsenum.Main.IntJsEnum)
+  )))
+  ;;@ jsenum/Main.java:313:4
+  (local.set $obj (ref.cast (ref null $jsenum.Main.IntJsEnum) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arr)) (i32.const 0))))
+  ;;@ jsenum/Main.java:314:4
+  (local.set $v (ref.cast (ref null $jsenum.Main.IntJsEnum) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arr)) (i32.const 0))))
+  ;;@ jsenum/Main.java:316:4
+  (local.set $arr2 (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 2)))
+  ;;@ jsenum/Main.java:317:4
+  (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arr2)) (i32.const 0) (block (result (ref null $jsenum.Main.IntJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.IntJsEnum )
+   (global.get $MINUSONE@jsenum.Main.IntJsEnum)
+  ))
+  ;;@ jsenum/Main.java:318:4
+  (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arr2)) (i32.const 1) (block (result (ref null $jsenum.Main.IntJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.IntJsEnum )
+   (global.get $TWENTY@jsenum.Main.IntJsEnum)
+  ))
+  ;;@ jsenum/Main.java:320:4
+  (local.set $nestedArr (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (block (result (ref null $jsenum.Main.IntJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.IntJsEnum )
+   (global.get $MINUSONE@jsenum.Main.IntJsEnum)
+  ))))))
+  ;;@ jsenum/Main.java:321:4
+  (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $nestedArr)) (i32.const 0) (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (block (result (ref null $jsenum.Main.IntJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.IntJsEnum )
+   (global.get $TWENTY@jsenum.Main.IntJsEnum)
+  ))))
+  ;;@ jsenum/Main.java:323:4
+  (local.set $arrayWithNull (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (ref.null $java.lang.Object))))
+  ;;@ jsenum/Main.java:324:4
+  (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arrayWithNull)) (i32.const 0) (ref.null $java.lang.Object))
+  ;;@ jsenum/Main.java:326:4
+  (local.set $list (call $$create__@java.util.ArrayList ))
+  ;;@ jsenum/Main.java:327:4
+  (local.set $obj (call_ref $function.m_toArray__arrayOf_java_lang_Object (ref.as_non_null (local.get $list))(struct.get $java.util.List.vtable $m_toArray__arrayOf_java_lang_Object (ref.cast (ref $java.util.List.vtable) (call $get.itable.$java.util.List (local.get $list))))))
+  ;;@ jsenum/Main.java:329:4
+  (call $m_nonNativeJsEnumVarargs__arrayOf_jsenum_Main_IntJsEnum__void@jsenum.Main (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (block (result (ref null $jsenum.Main.IntJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.IntJsEnum )
+   (global.get $MINUSONE@jsenum.Main.IntJsEnum)
+  )(block (result (ref null $jsenum.Main.IntJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.IntJsEnum )
+   (global.get $TWENTY@jsenum.Main.IntJsEnum)
+  ))))
+  ;;@ jsenum/Main.java:330:4
+  (call $m_nonNativeJsEnumArrayVarargs__arrayOf_arrayOf_jsenum_Main_IntJsEnum__void@jsenum.Main (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (block (result (ref null $jsenum.Main.IntJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.IntJsEnum )
+   (global.get $MINUSONE@jsenum.Main.IntJsEnum)
+  )))(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (block (result (ref null $jsenum.Main.IntJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.IntJsEnum )
+   (global.get $TWENTY@jsenum.Main.IntJsEnum)
+  ))))))
+  ;;@ jsenum/Main.java:333:4
+  (call $m_tVarargs__arrayOf_java_lang_Object__void@jsenum.Main (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (block (result (ref null $jsenum.Main.IntJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.IntJsEnum )
+   (global.get $MINUSONE@jsenum.Main.IntJsEnum)
+  )(block (result (ref null $jsenum.Main.IntJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.IntJsEnum )
+   (global.get $TWENTY@jsenum.Main.IntJsEnum)
+  ))))
+ )
+)
+
+;;; void Main.nonNativeJsEnumVarargs(IntJsEnum... values)
+(func $m_nonNativeJsEnumVarargs__arrayOf_jsenum_Main_IntJsEnum__void@jsenum.Main
+ (param $values (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ jsenum/Main.java:336:22
+ (local $v (ref null $jsenum.Main.IntJsEnum))
+ (block
+  ;;@ jsenum/Main.java:337:4
+  (local.set $v (ref.cast (ref null $jsenum.Main.IntJsEnum) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $values)) (i32.const 0))))
+ )
+)
+
+;;; void Main.nonNativeJsEnumArrayVarargs(IntJsEnum[]... values)
+(func $m_nonNativeJsEnumArrayVarargs__arrayOf_arrayOf_jsenum_Main_IntJsEnum__void@jsenum.Main
+ (param $values (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ jsenum/Main.java:340:22
+ (local $v (ref null $javaemul.internal.WasmArray.OfObject))
+ (block
+  ;;@ jsenum/Main.java:341:4
+  (local.set $v (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $values)) (i32.const 0))))
+ )
+)
+
+;;; void Main.tVarargs(T... values)
+(func $m_tVarargs__arrayOf_java_lang_Object__void@jsenum.Main
+ (param $values (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ jsenum/Main.java:344:26
+ (local $v (ref null $java.lang.Object))
+ (block
+  ;;@ jsenum/Main.java:345:4
+  (local.set $v (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $values)) (i32.const 0)))
+ )
+)
+
+;;; void Main.testNonNativeStringJsEnumArrays()
+(func $m_testNonNativeStringJsEnumArrays__void@jsenum.Main
+ ;;@ jsenum/Main.java:348:22
+ (local $arr (ref null $javaemul.internal.WasmArray.OfObject))
+ (local $b1 i32)
+ (local $obj (ref null $java.lang.Object))
+ (local $v (ref null $jsenum.Main.StringJsEnum))
+ (local $arr2 (ref null $javaemul.internal.WasmArray.OfObject))
+ (local $nestedArr (ref null $javaemul.internal.WasmArray.OfObject))
+ (local $arrayWithNull (ref null $javaemul.internal.WasmArray.OfObject))
+ (block
+  ;;@ jsenum/Main.java:349:4
+  (local.set $arr (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (block (result (ref null $jsenum.Main.StringJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
+   (global.get $ONE@jsenum.Main.StringJsEnum)
+  )(block (result (ref null $jsenum.Main.StringJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
+   (global.get $THREE@jsenum.Main.StringJsEnum)
+  ))))
+  ;;@ jsenum/Main.java:350:4
+  (local.set $b1 (ref.eq (ref.cast (ref null $jsenum.Main.StringJsEnum) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arr)) (i32.const 0))) (block (result (ref null $jsenum.Main.StringJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
+   (global.get $ONE@jsenum.Main.StringJsEnum)
+  )))
+  ;;@ jsenum/Main.java:351:4
+  (local.set $obj (ref.cast (ref null $jsenum.Main.StringJsEnum) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arr)) (i32.const 0))))
+  ;;@ jsenum/Main.java:352:4
+  (local.set $v (ref.cast (ref null $jsenum.Main.StringJsEnum) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arr)) (i32.const 0))))
+  ;;@ jsenum/Main.java:354:4
+  (local.set $arr2 (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 2)))
+  ;;@ jsenum/Main.java:355:4
+  (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arr2)) (i32.const 0) (block (result (ref null $jsenum.Main.StringJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
+   (global.get $ONE@jsenum.Main.StringJsEnum)
+  ))
+  ;;@ jsenum/Main.java:357:4
+  (local.set $nestedArr (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (block (result (ref null $jsenum.Main.StringJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
+   (global.get $ONE@jsenum.Main.StringJsEnum)
+  ))))))
+  ;;@ jsenum/Main.java:359:4
+  (local.set $arrayWithNull (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (ref.null $java.lang.Object))))
+  ;;@ jsenum/Main.java:360:4
+  (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arrayWithNull)) (i32.const 0) (ref.null $java.lang.Object))
+ )
+)
+
+;;; void Main.testNativeJsEnumArrays()
+(func $m_testNativeJsEnumArrays__void@jsenum.Main
+ ;;@ jsenum/Main.java:363:22
+ (local $arr (ref null $javaemul.internal.WasmArray.OfObject))
+ (local $b1 i32)
+ (local $arr2 (ref null $javaemul.internal.WasmArray.OfObject))
+ (local $nestedArr (ref null $javaemul.internal.WasmArray.OfObject))
+ (local $arrayWithNull (ref null $javaemul.internal.WasmArray.OfObject))
+ (block
+  ;;@ jsenum/Main.java:364:4
+  (local.set $arr (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (block (result (ref null $jsenum.Main.NativeStringEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.NativeStringEnum )
+   (global.get $ONE@jsenum.Main.NativeStringEnum)
+  )(block (result (ref null $jsenum.Main.NativeStringEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.NativeStringEnum )
+   (global.get $THREE@jsenum.Main.NativeStringEnum)
+  ))))
+  ;;@ jsenum/Main.java:365:4
+  (local.set $b1 (ref.eq (ref.cast (ref null $jsenum.Main.NativeStringEnum) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arr)) (i32.const 0))) (block (result (ref null $jsenum.Main.NativeStringEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.NativeStringEnum )
+   (global.get $ONE@jsenum.Main.NativeStringEnum)
+  )))
+  ;;@ jsenum/Main.java:367:4
+  (local.set $arr2 (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 2)))
+  ;;@ jsenum/Main.java:368:4
+  (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arr2)) (i32.const 0) (block (result (ref null $jsenum.Main.NativeStringEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.NativeStringEnum )
+   (global.get $ONE@jsenum.Main.NativeStringEnum)
+  ))
+  ;;@ jsenum/Main.java:370:4
+  (local.set $nestedArr (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (block (result (ref null $jsenum.Main.NativeStringEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.NativeStringEnum )
+   (global.get $ONE@jsenum.Main.NativeStringEnum)
+  ))))))
+  ;;@ jsenum/Main.java:371:4
+  (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $nestedArr)) (i32.const 0) (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (block (result (ref null $jsenum.Main.NativeStringEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.NativeStringEnum )
+   (global.get $THREE@jsenum.Main.NativeStringEnum)
+  ))))
+  ;;@ jsenum/Main.java:373:4
+  (local.set $arrayWithNull (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (ref.null $java.lang.Object))))
+  ;;@ jsenum/Main.java:374:4
+  (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arrayWithNull)) (i32.const 0) (ref.null $java.lang.Object))
  )
 )
 
 ;;; void Main.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main
- ;;@ jsenum/Main.java:26:13
+ ;;@ jsenum/Main.java:28:13
  (block
-  ;;@ jsenum/Main.java:26:13
+  ;;@ jsenum/Main.java:28:13
   (if (global.get $$class-initialized@jsenum.Main)
    (then
-    ;;@ jsenum/Main.java:26:13
+    ;;@ jsenum/Main.java:28:13
     (return )
    )
   )
-  ;;@ jsenum/Main.java:26:13
+  ;;@ jsenum/Main.java:28:13
   (global.set $$class-initialized@jsenum.Main (i32.const 1))
-  ;;@ jsenum/Main.java:26:13
+  ;;@ jsenum/Main.java:28:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -2274,27 +2492,27 @@
 ;;; void $LambdaAdaptor.$ctor()
 (func $$ctor__void_$p_jsenum_Main_Supplier_$LambdaAdaptor@jsenum.Main.Supplier.$LambdaAdaptor
  (param $this (ref null $jsenum.Main.Supplier.$LambdaAdaptor))
- ;;@ jsenum/Main.java:27:12
+ ;;@ jsenum/Main.java:29:12
  (block
-  ;;@ jsenum/Main.java:27:12
+  ;;@ jsenum/Main.java:29:12
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void $LambdaAdaptor.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.Supplier.$LambdaAdaptor
- ;;@ jsenum/Main.java:27:12
+ ;;@ jsenum/Main.java:29:12
  (block
-  ;;@ jsenum/Main.java:27:12
+  ;;@ jsenum/Main.java:29:12
   (if (global.get $$class-initialized@jsenum.Main.Supplier.$LambdaAdaptor)
    (then
-    ;;@ jsenum/Main.java:27:12
+    ;;@ jsenum/Main.java:29:12
     (return )
    )
   )
-  ;;@ jsenum/Main.java:27:12
+  ;;@ jsenum/Main.java:29:12
   (global.set $$class-initialized@jsenum.Main.Supplier.$LambdaAdaptor (i32.const 1))
-  ;;@ jsenum/Main.java:27:12
+  ;;@ jsenum/Main.java:29:12
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -2345,27 +2563,27 @@
 ;;; void $LambdaAdaptor.$ctor()
 (func $$ctor__void_$p_jsenum_Main_Consumer_$LambdaAdaptor@jsenum.Main.Consumer.$LambdaAdaptor
  (param $this (ref null $jsenum.Main.Consumer.$LambdaAdaptor))
- ;;@ jsenum/Main.java:31:12
+ ;;@ jsenum/Main.java:33:12
  (block
-  ;;@ jsenum/Main.java:31:12
+  ;;@ jsenum/Main.java:33:12
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void $LambdaAdaptor.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.Consumer.$LambdaAdaptor
- ;;@ jsenum/Main.java:31:12
+ ;;@ jsenum/Main.java:33:12
  (block
-  ;;@ jsenum/Main.java:31:12
+  ;;@ jsenum/Main.java:33:12
   (if (global.get $$class-initialized@jsenum.Main.Consumer.$LambdaAdaptor)
    (then
-    ;;@ jsenum/Main.java:31:12
+    ;;@ jsenum/Main.java:33:12
     (return )
    )
   )
-  ;;@ jsenum/Main.java:31:12
+  ;;@ jsenum/Main.java:33:12
   (global.set $$class-initialized@jsenum.Main.Consumer.$LambdaAdaptor (i32.const 1))
-  ;;@ jsenum/Main.java:31:12
+  ;;@ jsenum/Main.java:33:12
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -2416,27 +2634,27 @@
 ;;; void $LambdaAdaptor.$ctor()
 (func $$ctor__void_$p_jsenum_Main_JsFunctionSuppiler_$LambdaAdaptor@jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor
  (param $this (ref null $jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor))
- ;;@ jsenum/Main.java:176:12
+ ;;@ jsenum/Main.java:178:12
  (block
-  ;;@ jsenum/Main.java:176:12
+  ;;@ jsenum/Main.java:178:12
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void $LambdaAdaptor.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor
- ;;@ jsenum/Main.java:176:12
+ ;;@ jsenum/Main.java:178:12
  (block
-  ;;@ jsenum/Main.java:176:12
+  ;;@ jsenum/Main.java:178:12
   (if (global.get $$class-initialized@jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor)
    (then
-    ;;@ jsenum/Main.java:176:12
+    ;;@ jsenum/Main.java:178:12
     (return )
    )
   )
-  ;;@ jsenum/Main.java:176:12
+  ;;@ jsenum/Main.java:178:12
   (global.set $$class-initialized@jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor (i32.const 1))
-  ;;@ jsenum/Main.java:176:12
+  ;;@ jsenum/Main.java:178:12
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -2488,16 +2706,16 @@
 (func $$create__java_lang_Object@jsenum.Main.TemplatedField
  (param $value (ref null $java.lang.Object))
  (result (ref null $jsenum.Main.TemplatedField))
- ;;@ jsenum/Main.java:215:4
+ ;;@ jsenum/Main.java:217:4
  (local $$instance (ref null $jsenum.Main.TemplatedField))
  (block
-  ;;@ jsenum/Main.java:215:4
+  ;;@ jsenum/Main.java:217:4
   (call $$clinit__void_<once>_@jsenum.Main.TemplatedField )
-  ;;@ jsenum/Main.java:215:4
+  ;;@ jsenum/Main.java:217:4
   (local.set $$instance (struct.new $jsenum.Main.TemplatedField (ref.as_non_null (global.get $jsenum.Main.TemplatedField.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.Object)))
-  ;;@ jsenum/Main.java:215:4
+  ;;@ jsenum/Main.java:217:4
   (call $$ctor__java_lang_Object__void_$p_jsenum_Main_TemplatedField@jsenum.Main.TemplatedField (ref.as_non_null (local.get $$instance))(local.get $value))
-  ;;@ jsenum/Main.java:215:4
+  ;;@ jsenum/Main.java:217:4
   (return (local.get $$instance))
  )
 )
@@ -2506,11 +2724,11 @@
 (func $$ctor__java_lang_Object__void_$p_jsenum_Main_TemplatedField@jsenum.Main.TemplatedField
  (param $this (ref null $jsenum.Main.TemplatedField))
  (param $value (ref null $java.lang.Object))
- ;;@ jsenum/Main.java:215:4
+ ;;@ jsenum/Main.java:217:4
  (block
-  ;;@ jsenum/Main.java:215:28
+  ;;@ jsenum/Main.java:217:28
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;;@ jsenum/Main.java:216:6
+  ;;@ jsenum/Main.java:218:6
   (struct.set $jsenum.Main.TemplatedField $value@jsenum.Main.TemplatedField (local.get $this) (local.get $value))
  )
 )
@@ -2520,11 +2738,11 @@
  (type $function.m_getValue__java_lang_Object_$pp_jsenum)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ jsenum/Main.java:219:6
+ ;;@ jsenum/Main.java:221:6
  (local $this (ref null $jsenum.Main.TemplatedField))
  (local.set $this (ref.cast (ref $jsenum.Main.TemplatedField) (local.get $this.untyped)))
  (block
-  ;;@ jsenum/Main.java:220:6
+  ;;@ jsenum/Main.java:222:6
   (return (struct.get $jsenum.Main.TemplatedField $value@jsenum.Main.TemplatedField (local.get $this)))
  )
 )
@@ -2532,18 +2750,18 @@
 
 ;;; void TemplatedField.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.TemplatedField
- ;;@ jsenum/Main.java:212:23
+ ;;@ jsenum/Main.java:214:23
  (block
-  ;;@ jsenum/Main.java:212:23
+  ;;@ jsenum/Main.java:214:23
   (if (global.get $$class-initialized@jsenum.Main.TemplatedField)
    (then
-    ;;@ jsenum/Main.java:212:23
+    ;;@ jsenum/Main.java:214:23
     (return )
    )
   )
-  ;;@ jsenum/Main.java:212:23
+  ;;@ jsenum/Main.java:214:23
   (global.set $$class-initialized@jsenum.Main.TemplatedField (i32.const 1))
-  ;;@ jsenum/Main.java:212:23
+  ;;@ jsenum/Main.java:214:23
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -2595,16 +2813,16 @@
 (func $$create__java_util_Optional@jsenum.Main.Foo
  (param $c (ref null $java.util.Optional))
  (result (ref null $jsenum.Main.Foo))
- ;;@ jsenum/Main.java:233:4
+ ;;@ jsenum/Main.java:235:4
  (local $$instance (ref null $jsenum.Main.Foo))
  (block
-  ;;@ jsenum/Main.java:233:4
+  ;;@ jsenum/Main.java:235:4
   (call $$clinit__void_<once>_@jsenum.Main.Foo )
-  ;;@ jsenum/Main.java:233:4
+  ;;@ jsenum/Main.java:235:4
   (local.set $$instance (struct.new $jsenum.Main.Foo (ref.as_non_null (global.get $jsenum.Main.Foo.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ jsenum/Main.java:233:4
+  ;;@ jsenum/Main.java:235:4
   (call $$ctor__java_util_Optional__void_$p_jsenum_Main_Foo@jsenum.Main.Foo (ref.as_non_null (local.get $$instance))(local.get $c))
-  ;;@ jsenum/Main.java:233:4
+  ;;@ jsenum/Main.java:235:4
   (return (local.get $$instance))
  )
 )
@@ -2613,27 +2831,27 @@
 (func $$ctor__java_util_Optional__void_$p_jsenum_Main_Foo@jsenum.Main.Foo
  (param $this (ref null $jsenum.Main.Foo))
  (param $c (ref null $java.util.Optional))
- ;;@ jsenum/Main.java:233:4
+ ;;@ jsenum/Main.java:235:4
  (block
-  ;;@ jsenum/Main.java:233:31
+  ;;@ jsenum/Main.java:235:31
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void Foo.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.Foo
- ;;@ jsenum/Main.java:232:15
+ ;;@ jsenum/Main.java:234:15
  (block
-  ;;@ jsenum/Main.java:232:15
+  ;;@ jsenum/Main.java:234:15
   (if (global.get $$class-initialized@jsenum.Main.Foo)
    (then
-    ;;@ jsenum/Main.java:232:15
+    ;;@ jsenum/Main.java:234:15
     (return )
    )
   )
-  ;;@ jsenum/Main.java:232:15
+  ;;@ jsenum/Main.java:234:15
   (global.set $$class-initialized@jsenum.Main.Foo (i32.const 1))
-  ;;@ jsenum/Main.java:232:15
+  ;;@ jsenum/Main.java:234:15
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -2684,16 +2902,16 @@
 ;;; SupplierConsumerImpl<T> SupplierConsumerImpl.$create()
 (func $$create__@jsenum.Main.SupplierConsumerImpl
  (result (ref null $jsenum.Main.SupplierConsumerImpl))
- ;;@ jsenum/Main.java:248:15
+ ;;@ jsenum/Main.java:250:15
  (local $$instance (ref null $jsenum.Main.SupplierConsumerImpl))
  (block
-  ;;@ jsenum/Main.java:248:15
+  ;;@ jsenum/Main.java:250:15
   (call $$clinit__void_<once>_@jsenum.Main.SupplierConsumerImpl )
-  ;;@ jsenum/Main.java:248:15
+  ;;@ jsenum/Main.java:250:15
   (local.set $$instance (struct.new $jsenum.Main.SupplierConsumerImpl (ref.as_non_null (global.get $jsenum.Main.SupplierConsumerImpl.vtable)) (ref.as_non_null (global.get $jsenum.Main.SupplierConsumerImpl.itable)) (i32.const 0)))
-  ;;@ jsenum/Main.java:248:15
+  ;;@ jsenum/Main.java:250:15
   (call $$ctor__void_$p_jsenum_Main_SupplierConsumerImpl@jsenum.Main.SupplierConsumerImpl (ref.as_non_null (local.get $$instance)))
-  ;;@ jsenum/Main.java:248:15
+  ;;@ jsenum/Main.java:250:15
   (return (local.get $$instance))
  )
 )
@@ -2701,9 +2919,9 @@
 ;;; void SupplierConsumerImpl.$ctor()
 (func $$ctor__void_$p_jsenum_Main_SupplierConsumerImpl@jsenum.Main.SupplierConsumerImpl
  (param $this (ref null $jsenum.Main.SupplierConsumerImpl))
- ;;@ jsenum/Main.java:248:15
+ ;;@ jsenum/Main.java:250:15
  (block
-  ;;@ jsenum/Main.java:248:15
+  ;;@ jsenum/Main.java:250:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -2713,7 +2931,7 @@
  (type $function.m_accept__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $t (ref null $java.lang.Object))
- ;;@ jsenum/Main.java:251:16
+ ;;@ jsenum/Main.java:253:16
  (local $this (ref null $jsenum.Main.SupplierConsumerImpl))
  (local.set $this (ref.cast (ref $jsenum.Main.SupplierConsumerImpl) (local.get $this.untyped)))
  (block
@@ -2726,11 +2944,11 @@
  (type $function.m_get__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ jsenum/Main.java:254:13
+ ;;@ jsenum/Main.java:256:13
  (local $this (ref null $jsenum.Main.SupplierConsumerImpl))
  (local.set $this (ref.cast (ref $jsenum.Main.SupplierConsumerImpl) (local.get $this.untyped)))
  (block
-  ;;@ jsenum/Main.java:255:6
+  ;;@ jsenum/Main.java:257:6
   (return (ref.null $java.lang.Object))
  )
 )
@@ -2738,18 +2956,18 @@
 
 ;;; void SupplierConsumerImpl.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.SupplierConsumerImpl
- ;;@ jsenum/Main.java:248:15
+ ;;@ jsenum/Main.java:250:15
  (block
-  ;;@ jsenum/Main.java:248:15
+  ;;@ jsenum/Main.java:250:15
   (if (global.get $$class-initialized@jsenum.Main.SupplierConsumerImpl)
    (then
-    ;;@ jsenum/Main.java:248:15
+    ;;@ jsenum/Main.java:250:15
     (return )
    )
   )
-  ;;@ jsenum/Main.java:248:15
+  ;;@ jsenum/Main.java:250:15
   (global.set $$class-initialized@jsenum.Main.SupplierConsumerImpl (i32.const 1))
-  ;;@ jsenum/Main.java:248:15
+  ;;@ jsenum/Main.java:250:15
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -2799,16 +3017,16 @@
 
 ;;; void ComparableJsEnumSupplierConsumer.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.ComparableJsEnumSupplierConsumer
- ;;@ jsenum/Main.java:259:12
+ ;;@ jsenum/Main.java:261:12
  (block
-  ;;@ jsenum/Main.java:259:12
+  ;;@ jsenum/Main.java:261:12
   (if (global.get $$class-initialized@jsenum.Main.ComparableJsEnumSupplierConsumer)
    (then
-    ;;@ jsenum/Main.java:259:12
+    ;;@ jsenum/Main.java:261:12
     (return )
    )
   )
-  ;;@ jsenum/Main.java:259:12
+  ;;@ jsenum/Main.java:261:12
   (global.set $$class-initialized@jsenum.Main.ComparableJsEnumSupplierConsumer (i32.const 1))
  )
 )
@@ -2847,14 +3065,14 @@
 (func $$create__arrayOf_java_lang_Object@jsenum.Main.BaseVarargs
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  (result (ref null $jsenum.Main.BaseVarargs))
- ;;@ jsenum/Main.java:291:4
+ ;;@ jsenum/Main.java:293:4
  (local $$instance (ref null $jsenum.Main.BaseVarargs))
  (block
-  ;;@ jsenum/Main.java:291:4
+  ;;@ jsenum/Main.java:293:4
   (local.set $$instance (struct.new $jsenum.Main.BaseVarargs (ref.as_non_null (global.get $jsenum.Main.BaseVarargs.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ jsenum/Main.java:291:4
+  ;;@ jsenum/Main.java:293:4
   (call $$ctor__arrayOf_java_lang_Object__void_$p_jsenum_Main_BaseVarargs@jsenum.Main.BaseVarargs (ref.as_non_null (local.get $$instance))(local.get $args))
-  ;;@ jsenum/Main.java:291:4
+  ;;@ jsenum/Main.java:293:4
   (return (local.get $$instance))
  )
 )
@@ -2863,27 +3081,27 @@
 (func $$ctor__arrayOf_java_lang_Object__void_$p_jsenum_Main_BaseVarargs@jsenum.Main.BaseVarargs
  (param $this (ref null $jsenum.Main.BaseVarargs))
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ jsenum/Main.java:291:4
+ ;;@ jsenum/Main.java:293:4
  (block
-  ;;@ jsenum/Main.java:291:27
+  ;;@ jsenum/Main.java:293:27
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void BaseVarargs.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.BaseVarargs
- ;;@ jsenum/Main.java:290:23
+ ;;@ jsenum/Main.java:292:23
  (block
-  ;;@ jsenum/Main.java:290:23
+  ;;@ jsenum/Main.java:292:23
   (if (global.get $$class-initialized@jsenum.Main.BaseVarargs)
    (then
-    ;;@ jsenum/Main.java:290:23
+    ;;@ jsenum/Main.java:292:23
     (return )
    )
   )
-  ;;@ jsenum/Main.java:290:23
+  ;;@ jsenum/Main.java:292:23
   (global.set $$class-initialized@jsenum.Main.BaseVarargs (i32.const 1))
-  ;;@ jsenum/Main.java:290:23
+  ;;@ jsenum/Main.java:292:23
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -2934,16 +3152,16 @@
 ;;; <anonymous> implements Supplier<ComparableJsEnum> <anonymous> implements Supplier<ComparableJsEnum>.$create()
 (func $$create__@jsenum.Main.$LambdaImplementor$1
  (result (ref null $jsenum.Main.$LambdaImplementor$1))
- ;;@ jsenum/Main.java:139:42
+ ;;@ jsenum/Main.java:141:42
  (local $$instance (ref null $jsenum.Main.$LambdaImplementor$1))
  (block
-  ;;@ jsenum/Main.java:139:42
+  ;;@ jsenum/Main.java:141:42
   (call $$clinit__void_<once>_@jsenum.Main.$LambdaImplementor$1 )
-  ;;@ jsenum/Main.java:139:42
+  ;;@ jsenum/Main.java:141:42
   (local.set $$instance (struct.new $jsenum.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $jsenum.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $jsenum.Main.$LambdaImplementor$1.itable)) (i32.const 0)))
-  ;;@ jsenum/Main.java:139:42
+  ;;@ jsenum/Main.java:141:42
   (call $$ctor__void_$p_jsenum_Main_$LambdaImplementor$1@jsenum.Main.$LambdaImplementor$1 (ref.as_non_null (local.get $$instance)))
-  ;;@ jsenum/Main.java:139:42
+  ;;@ jsenum/Main.java:141:42
   (return (local.get $$instance))
  )
 )
@@ -2951,9 +3169,9 @@
 ;;; void <anonymous> implements Supplier<ComparableJsEnum>.$ctor()
 (func $$ctor__void_$p_jsenum_Main_$LambdaImplementor$1@jsenum.Main.$LambdaImplementor$1
  (param $this (ref null $jsenum.Main.$LambdaImplementor$1))
- ;;@ jsenum/Main.java:139:42
+ ;;@ jsenum/Main.java:141:42
  (block
-  ;;@ jsenum/Main.java:139:42
+  ;;@ jsenum/Main.java:141:42
   (call $$ctor__void_$p_jsenum_Main_Supplier_$LambdaAdaptor@jsenum.Main.Supplier.$LambdaAdaptor (ref.as_non_null (local.get $this)))
  )
 )
@@ -2963,11 +3181,11 @@
  (type $function.m_get__jsenum_Main_ComparableJsEnum)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $jsenum.Main.ComparableJsEnum))
- ;;@ jsenum/Main.java:139:42
+ ;;@ jsenum/Main.java:141:42
  (local $this (ref null $jsenum.Main.$LambdaImplementor$1))
  (local.set $this (ref.cast (ref $jsenum.Main.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
-  ;;@ jsenum/Main.java:139:48
+  ;;@ jsenum/Main.java:141:48
   (return (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
@@ -2981,11 +3199,11 @@
  (type $function.m_get__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ jsenum/Main.java:139:42
+ ;;@ jsenum/Main.java:141:42
  (local $this (ref null $jsenum.Main.$LambdaImplementor$1))
  (local.set $this (ref.cast (ref $jsenum.Main.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
-  ;;@ jsenum/Main.java:139:42
+  ;;@ jsenum/Main.java:141:42
   (return (call_ref $function.m_get__jsenum_Main_ComparableJsEnum (ref.as_non_null (local.get $this))(struct.get $jsenum.Main.$LambdaImplementor$1.vtable $m_get__jsenum_Main_ComparableJsEnum (struct.get $jsenum.Main.$LambdaImplementor$1 $vtable(local.get $this)))))
  )
 )
@@ -2993,18 +3211,18 @@
 
 ;;; void <anonymous> implements Supplier<ComparableJsEnum>.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.$LambdaImplementor$1
- ;;@ jsenum/Main.java:139:42
+ ;;@ jsenum/Main.java:141:42
  (block
-  ;;@ jsenum/Main.java:139:42
+  ;;@ jsenum/Main.java:141:42
   (if (global.get $$class-initialized@jsenum.Main.$LambdaImplementor$1)
    (then
-    ;;@ jsenum/Main.java:139:42
+    ;;@ jsenum/Main.java:141:42
     (return )
    )
   )
-  ;;@ jsenum/Main.java:139:42
+  ;;@ jsenum/Main.java:141:42
   (global.set $$class-initialized@jsenum.Main.$LambdaImplementor$1 (i32.const 1))
-  ;;@ jsenum/Main.java:139:42
+  ;;@ jsenum/Main.java:141:42
   (call $$clinit__void_<once>_@jsenum.Main.Supplier.$LambdaAdaptor )
  )
 )
@@ -3042,16 +3260,16 @@
 ;;; <anonymous> implements Consumer<ComparableJsEnum> <anonymous> implements Consumer<ComparableJsEnum>.$create()
 (func $$create__@jsenum.Main.$LambdaImplementor$2
  (result (ref null $jsenum.Main.$LambdaImplementor$2))
- ;;@ jsenum/Main.java:140:43
+ ;;@ jsenum/Main.java:142:43
  (local $$instance (ref null $jsenum.Main.$LambdaImplementor$2))
  (block
-  ;;@ jsenum/Main.java:140:43
+  ;;@ jsenum/Main.java:142:43
   (call $$clinit__void_<once>_@jsenum.Main.$LambdaImplementor$2 )
-  ;;@ jsenum/Main.java:140:43
+  ;;@ jsenum/Main.java:142:43
   (local.set $$instance (struct.new $jsenum.Main.$LambdaImplementor$2 (ref.as_non_null (global.get $jsenum.Main.$LambdaImplementor$2.vtable)) (ref.as_non_null (global.get $jsenum.Main.$LambdaImplementor$2.itable)) (i32.const 0)))
-  ;;@ jsenum/Main.java:140:43
+  ;;@ jsenum/Main.java:142:43
   (call $$ctor__void_$p_jsenum_Main_$LambdaImplementor$2@jsenum.Main.$LambdaImplementor$2 (ref.as_non_null (local.get $$instance)))
-  ;;@ jsenum/Main.java:140:43
+  ;;@ jsenum/Main.java:142:43
   (return (local.get $$instance))
  )
 )
@@ -3059,9 +3277,9 @@
 ;;; void <anonymous> implements Consumer<ComparableJsEnum>.$ctor()
 (func $$ctor__void_$p_jsenum_Main_$LambdaImplementor$2@jsenum.Main.$LambdaImplementor$2
  (param $this (ref null $jsenum.Main.$LambdaImplementor$2))
- ;;@ jsenum/Main.java:140:43
+ ;;@ jsenum/Main.java:142:43
  (block
-  ;;@ jsenum/Main.java:140:43
+  ;;@ jsenum/Main.java:142:43
   (call $$ctor__void_$p_jsenum_Main_Consumer_$LambdaAdaptor@jsenum.Main.Consumer.$LambdaAdaptor (ref.as_non_null (local.get $this)))
  )
 )
@@ -3071,11 +3289,11 @@
  (type $function.m_accept__jsenum_Main_ComparableJsEnum__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $e (ref null $jsenum.Main.ComparableJsEnum))
- ;;@ jsenum/Main.java:140:43
+ ;;@ jsenum/Main.java:142:43
  (local $this (ref null $jsenum.Main.$LambdaImplementor$2))
  (local.set $this (ref.cast (ref $jsenum.Main.$LambdaImplementor$2) (local.get $this.untyped)))
  (block
-  ;;@ jsenum/Main.java:140:48
+  ;;@ jsenum/Main.java:142:48
   (drop (call $m_ordinal__int@java.lang.Enum (ref.as_non_null (local.get $e))))
  )
 )
@@ -3086,11 +3304,11 @@
  (type $function.m_accept__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
- ;;@ jsenum/Main.java:140:43
+ ;;@ jsenum/Main.java:142:43
  (local $this (ref null $jsenum.Main.$LambdaImplementor$2))
  (local.set $this (ref.cast (ref $jsenum.Main.$LambdaImplementor$2) (local.get $this.untyped)))
  (block
-  ;;@ jsenum/Main.java:140:43
+  ;;@ jsenum/Main.java:142:43
   (call_ref $function.m_accept__jsenum_Main_ComparableJsEnum__void (ref.as_non_null (local.get $this))(ref.cast (ref null $jsenum.Main.ComparableJsEnum) (local.get $arg0))(struct.get $jsenum.Main.$LambdaImplementor$2.vtable $m_accept__jsenum_Main_ComparableJsEnum__void (struct.get $jsenum.Main.$LambdaImplementor$2 $vtable(local.get $this))))
  )
 )
@@ -3098,18 +3316,18 @@
 
 ;;; void <anonymous> implements Consumer<ComparableJsEnum>.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.$LambdaImplementor$2
- ;;@ jsenum/Main.java:140:43
+ ;;@ jsenum/Main.java:142:43
  (block
-  ;;@ jsenum/Main.java:140:43
+  ;;@ jsenum/Main.java:142:43
   (if (global.get $$class-initialized@jsenum.Main.$LambdaImplementor$2)
    (then
-    ;;@ jsenum/Main.java:140:43
+    ;;@ jsenum/Main.java:142:43
     (return )
    )
   )
-  ;;@ jsenum/Main.java:140:43
+  ;;@ jsenum/Main.java:142:43
   (global.set $$class-initialized@jsenum.Main.$LambdaImplementor$2 (i32.const 1))
-  ;;@ jsenum/Main.java:140:43
+  ;;@ jsenum/Main.java:142:43
   (call $$clinit__void_<once>_@jsenum.Main.Consumer.$LambdaAdaptor )
  )
 )
@@ -3147,16 +3365,16 @@
 ;;; <anonymous> implements JsFunctionSuppiler<ComparableJsEnum> <anonymous> implements JsFunctionSuppiler<ComparableJsEnum>.$create()
 (func $$create__@jsenum.Main.$LambdaImplementor$3
  (result (ref null $jsenum.Main.$LambdaImplementor$3))
- ;;@ jsenum/Main.java:142:30
+ ;;@ jsenum/Main.java:144:30
  (local $$instance (ref null $jsenum.Main.$LambdaImplementor$3))
  (block
-  ;;@ jsenum/Main.java:142:30
+  ;;@ jsenum/Main.java:144:30
   (call $$clinit__void_<once>_@jsenum.Main.$LambdaImplementor$3 )
-  ;;@ jsenum/Main.java:142:30
+  ;;@ jsenum/Main.java:144:30
   (local.set $$instance (struct.new $jsenum.Main.$LambdaImplementor$3 (ref.as_non_null (global.get $jsenum.Main.$LambdaImplementor$3.vtable)) (ref.as_non_null (global.get $jsenum.Main.$LambdaImplementor$3.itable)) (i32.const 0)))
-  ;;@ jsenum/Main.java:142:30
+  ;;@ jsenum/Main.java:144:30
   (call $$ctor__void_$p_jsenum_Main_$LambdaImplementor$3@jsenum.Main.$LambdaImplementor$3 (ref.as_non_null (local.get $$instance)))
-  ;;@ jsenum/Main.java:142:30
+  ;;@ jsenum/Main.java:144:30
   (return (local.get $$instance))
  )
 )
@@ -3164,9 +3382,9 @@
 ;;; void <anonymous> implements JsFunctionSuppiler<ComparableJsEnum>.$ctor()
 (func $$ctor__void_$p_jsenum_Main_$LambdaImplementor$3@jsenum.Main.$LambdaImplementor$3
  (param $this (ref null $jsenum.Main.$LambdaImplementor$3))
- ;;@ jsenum/Main.java:142:30
+ ;;@ jsenum/Main.java:144:30
  (block
-  ;;@ jsenum/Main.java:142:30
+  ;;@ jsenum/Main.java:144:30
   (call $$ctor__void_$p_jsenum_Main_JsFunctionSuppiler_$LambdaAdaptor@jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor (ref.as_non_null (local.get $this)))
  )
 )
@@ -3176,11 +3394,11 @@
  (type $function.m_get__jsenum_Main_ComparableJsEnum)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $jsenum.Main.ComparableJsEnum))
- ;;@ jsenum/Main.java:142:30
+ ;;@ jsenum/Main.java:144:30
  (local $this (ref null $jsenum.Main.$LambdaImplementor$3))
  (local.set $this (ref.cast (ref $jsenum.Main.$LambdaImplementor$3) (local.get $this.untyped)))
  (block
-  ;;@ jsenum/Main.java:142:36
+  ;;@ jsenum/Main.java:144:36
   (return (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
@@ -3194,11 +3412,11 @@
  (type $function.m_get__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ jsenum/Main.java:142:30
+ ;;@ jsenum/Main.java:144:30
  (local $this (ref null $jsenum.Main.$LambdaImplementor$3))
  (local.set $this (ref.cast (ref $jsenum.Main.$LambdaImplementor$3) (local.get $this.untyped)))
  (block
-  ;;@ jsenum/Main.java:142:30
+  ;;@ jsenum/Main.java:144:30
   (return (call_ref $function.m_get__jsenum_Main_ComparableJsEnum (ref.as_non_null (local.get $this))(struct.get $jsenum.Main.$LambdaImplementor$3.vtable $m_get__jsenum_Main_ComparableJsEnum (struct.get $jsenum.Main.$LambdaImplementor$3 $vtable(local.get $this)))))
  )
 )
@@ -3206,18 +3424,18 @@
 
 ;;; void <anonymous> implements JsFunctionSuppiler<ComparableJsEnum>.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.$LambdaImplementor$3
- ;;@ jsenum/Main.java:142:30
+ ;;@ jsenum/Main.java:144:30
  (block
-  ;;@ jsenum/Main.java:142:30
+  ;;@ jsenum/Main.java:144:30
   (if (global.get $$class-initialized@jsenum.Main.$LambdaImplementor$3)
    (then
-    ;;@ jsenum/Main.java:142:30
+    ;;@ jsenum/Main.java:144:30
     (return )
    )
   )
-  ;;@ jsenum/Main.java:142:30
+  ;;@ jsenum/Main.java:144:30
   (global.set $$class-initialized@jsenum.Main.$LambdaImplementor$3 (i32.const 1))
-  ;;@ jsenum/Main.java:142:30
+  ;;@ jsenum/Main.java:144:30
   (call $$clinit__void_<once>_@jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor )
  )
 )
@@ -3255,16 +3473,16 @@
 ;;; <anonymous> implements Supplier<ComparableJsEnum> <anonymous> implements Supplier<ComparableJsEnum>.$create()
 (func $$create__@jsenum.Main.$LambdaImplementor$4
  (result (ref null $jsenum.Main.$LambdaImplementor$4))
- ;;@ jsenum/Main.java:143:37
+ ;;@ jsenum/Main.java:145:37
  (local $$instance (ref null $jsenum.Main.$LambdaImplementor$4))
  (block
-  ;;@ jsenum/Main.java:143:37
+  ;;@ jsenum/Main.java:145:37
   (call $$clinit__void_<once>_@jsenum.Main.$LambdaImplementor$4 )
-  ;;@ jsenum/Main.java:143:37
+  ;;@ jsenum/Main.java:145:37
   (local.set $$instance (struct.new $jsenum.Main.$LambdaImplementor$4 (ref.as_non_null (global.get $jsenum.Main.$LambdaImplementor$4.vtable)) (ref.as_non_null (global.get $jsenum.Main.$LambdaImplementor$4.itable)) (i32.const 0)))
-  ;;@ jsenum/Main.java:143:37
+  ;;@ jsenum/Main.java:145:37
   (call $$ctor__void_$p_jsenum_Main_$LambdaImplementor$4@jsenum.Main.$LambdaImplementor$4 (ref.as_non_null (local.get $$instance)))
-  ;;@ jsenum/Main.java:143:37
+  ;;@ jsenum/Main.java:145:37
   (return (local.get $$instance))
  )
 )
@@ -3272,9 +3490,9 @@
 ;;; void <anonymous> implements Supplier<ComparableJsEnum>.$ctor()
 (func $$ctor__void_$p_jsenum_Main_$LambdaImplementor$4@jsenum.Main.$LambdaImplementor$4
  (param $this (ref null $jsenum.Main.$LambdaImplementor$4))
- ;;@ jsenum/Main.java:143:37
+ ;;@ jsenum/Main.java:145:37
  (block
-  ;;@ jsenum/Main.java:143:37
+  ;;@ jsenum/Main.java:145:37
   (call $$ctor__void_$p_jsenum_Main_Supplier_$LambdaAdaptor@jsenum.Main.Supplier.$LambdaAdaptor (ref.as_non_null (local.get $this)))
  )
 )
@@ -3284,11 +3502,11 @@
  (type $function.m_get__jsenum_Main_ComparableJsEnum)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $jsenum.Main.ComparableJsEnum))
- ;;@ jsenum/Main.java:143:37
+ ;;@ jsenum/Main.java:145:37
  (local $this (ref null $jsenum.Main.$LambdaImplementor$4))
  (local.set $this (ref.cast (ref $jsenum.Main.$LambdaImplementor$4) (local.get $this.untyped)))
  (block
-  ;;@ jsenum/Main.java:143:43
+  ;;@ jsenum/Main.java:145:43
   (return (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
@@ -3302,11 +3520,11 @@
  (type $function.m_get__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ jsenum/Main.java:143:37
+ ;;@ jsenum/Main.java:145:37
  (local $this (ref null $jsenum.Main.$LambdaImplementor$4))
  (local.set $this (ref.cast (ref $jsenum.Main.$LambdaImplementor$4) (local.get $this.untyped)))
  (block
-  ;;@ jsenum/Main.java:143:37
+  ;;@ jsenum/Main.java:145:37
   (return (call_ref $function.m_get__jsenum_Main_ComparableJsEnum (ref.as_non_null (local.get $this))(struct.get $jsenum.Main.$LambdaImplementor$4.vtable $m_get__jsenum_Main_ComparableJsEnum (struct.get $jsenum.Main.$LambdaImplementor$4 $vtable(local.get $this)))))
  )
 )
@@ -3314,18 +3532,18 @@
 
 ;;; void <anonymous> implements Supplier<ComparableJsEnum>.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.$LambdaImplementor$4
- ;;@ jsenum/Main.java:143:37
+ ;;@ jsenum/Main.java:145:37
  (block
-  ;;@ jsenum/Main.java:143:37
+  ;;@ jsenum/Main.java:145:37
   (if (global.get $$class-initialized@jsenum.Main.$LambdaImplementor$4)
    (then
-    ;;@ jsenum/Main.java:143:37
+    ;;@ jsenum/Main.java:145:37
     (return )
    )
   )
-  ;;@ jsenum/Main.java:143:37
+  ;;@ jsenum/Main.java:145:37
   (global.set $$class-initialized@jsenum.Main.$LambdaImplementor$4 (i32.const 1))
-  ;;@ jsenum/Main.java:143:37
+  ;;@ jsenum/Main.java:145:37
   (call $$clinit__void_<once>_@jsenum.Main.Supplier.$LambdaAdaptor )
  )
 )
@@ -3363,16 +3581,16 @@
 ;;; <anonymous> implements Supplier<Supplier<ComparableJsEnum>> <anonymous> implements Supplier<Supplier<ComparableJsEnum>>.$create()
 (func $$create__@jsenum.Main.$LambdaImplementor$5
  (result (ref null $jsenum.Main.$LambdaImplementor$5))
- ;;@ jsenum/Main.java:143:30
+ ;;@ jsenum/Main.java:145:30
  (local $$instance (ref null $jsenum.Main.$LambdaImplementor$5))
  (block
-  ;;@ jsenum/Main.java:143:30
+  ;;@ jsenum/Main.java:145:30
   (call $$clinit__void_<once>_@jsenum.Main.$LambdaImplementor$5 )
-  ;;@ jsenum/Main.java:143:30
+  ;;@ jsenum/Main.java:145:30
   (local.set $$instance (struct.new $jsenum.Main.$LambdaImplementor$5 (ref.as_non_null (global.get $jsenum.Main.$LambdaImplementor$5.vtable)) (ref.as_non_null (global.get $jsenum.Main.$LambdaImplementor$5.itable)) (i32.const 0)))
-  ;;@ jsenum/Main.java:143:30
+  ;;@ jsenum/Main.java:145:30
   (call $$ctor__void_$p_jsenum_Main_$LambdaImplementor$5@jsenum.Main.$LambdaImplementor$5 (ref.as_non_null (local.get $$instance)))
-  ;;@ jsenum/Main.java:143:30
+  ;;@ jsenum/Main.java:145:30
   (return (local.get $$instance))
  )
 )
@@ -3380,9 +3598,9 @@
 ;;; void <anonymous> implements Supplier<Supplier<ComparableJsEnum>>.$ctor()
 (func $$ctor__void_$p_jsenum_Main_$LambdaImplementor$5@jsenum.Main.$LambdaImplementor$5
  (param $this (ref null $jsenum.Main.$LambdaImplementor$5))
- ;;@ jsenum/Main.java:143:30
+ ;;@ jsenum/Main.java:145:30
  (block
-  ;;@ jsenum/Main.java:143:30
+  ;;@ jsenum/Main.java:145:30
   (call $$ctor__void_$p_jsenum_Main_Supplier_$LambdaAdaptor@jsenum.Main.Supplier.$LambdaAdaptor (ref.as_non_null (local.get $this)))
  )
 )
@@ -3392,11 +3610,11 @@
  (type $function.m_get__jsenum_Main_Supplier)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ jsenum/Main.java:143:30
+ ;;@ jsenum/Main.java:145:30
  (local $this (ref null $jsenum.Main.$LambdaImplementor$5))
  (local.set $this (ref.cast (ref $jsenum.Main.$LambdaImplementor$5) (local.get $this.untyped)))
  (block
-  ;;@ jsenum/Main.java:143:36
+  ;;@ jsenum/Main.java:145:36
   (return (call $$create__@jsenum.Main.$LambdaImplementor$4 ))
  )
 )
@@ -3407,11 +3625,11 @@
  (type $function.m_get__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ jsenum/Main.java:143:30
+ ;;@ jsenum/Main.java:145:30
  (local $this (ref null $jsenum.Main.$LambdaImplementor$5))
  (local.set $this (ref.cast (ref $jsenum.Main.$LambdaImplementor$5) (local.get $this.untyped)))
  (block
-  ;;@ jsenum/Main.java:143:30
+  ;;@ jsenum/Main.java:145:30
   (return (call_ref $function.m_get__jsenum_Main_Supplier (ref.as_non_null (local.get $this))(struct.get $jsenum.Main.$LambdaImplementor$5.vtable $m_get__jsenum_Main_Supplier (struct.get $jsenum.Main.$LambdaImplementor$5 $vtable(local.get $this)))))
  )
 )
@@ -3419,18 +3637,18 @@
 
 ;;; void <anonymous> implements Supplier<Supplier<ComparableJsEnum>>.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.$LambdaImplementor$5
- ;;@ jsenum/Main.java:143:30
+ ;;@ jsenum/Main.java:145:30
  (block
-  ;;@ jsenum/Main.java:143:30
+  ;;@ jsenum/Main.java:145:30
   (if (global.get $$class-initialized@jsenum.Main.$LambdaImplementor$5)
    (then
-    ;;@ jsenum/Main.java:143:30
+    ;;@ jsenum/Main.java:145:30
     (return )
    )
   )
-  ;;@ jsenum/Main.java:143:30
+  ;;@ jsenum/Main.java:145:30
   (global.set $$class-initialized@jsenum.Main.$LambdaImplementor$5 (i32.const 1))
-  ;;@ jsenum/Main.java:143:30
+  ;;@ jsenum/Main.java:145:30
   (call $$clinit__void_<once>_@jsenum.Main.Supplier.$LambdaAdaptor )
  )
 )
@@ -3468,16 +3686,16 @@
 ;;; <anonymous> implements Consumer<SomeJsEnum> <anonymous> implements Consumer<SomeJsEnum>.$create()
 (func $$create__@jsenum.Main.$LambdaImplementor$6
  (result (ref null $jsenum.Main.$LambdaImplementor$6))
- ;;@ jsenum/Main.java:304:36
+ ;;@ jsenum/Main.java:306:36
  (local $$instance (ref null $jsenum.Main.$LambdaImplementor$6))
  (block
-  ;;@ jsenum/Main.java:304:36
+  ;;@ jsenum/Main.java:306:36
   (call $$clinit__void_<once>_@jsenum.Main.$LambdaImplementor$6 )
-  ;;@ jsenum/Main.java:304:36
+  ;;@ jsenum/Main.java:306:36
   (local.set $$instance (struct.new $jsenum.Main.$LambdaImplementor$6 (ref.as_non_null (global.get $jsenum.Main.$LambdaImplementor$6.vtable)) (ref.as_non_null (global.get $jsenum.Main.$LambdaImplementor$6.itable)) (i32.const 0)))
-  ;;@ jsenum/Main.java:304:36
+  ;;@ jsenum/Main.java:306:36
   (call $$ctor__void_$p_jsenum_Main_$LambdaImplementor$6@jsenum.Main.$LambdaImplementor$6 (ref.as_non_null (local.get $$instance)))
-  ;;@ jsenum/Main.java:304:36
+  ;;@ jsenum/Main.java:306:36
   (return (local.get $$instance))
  )
 )
@@ -3485,9 +3703,9 @@
 ;;; void <anonymous> implements Consumer<SomeJsEnum>.$ctor()
 (func $$ctor__void_$p_jsenum_Main_$LambdaImplementor$6@jsenum.Main.$LambdaImplementor$6
  (param $this (ref null $jsenum.Main.$LambdaImplementor$6))
- ;;@ jsenum/Main.java:304:36
+ ;;@ jsenum/Main.java:306:36
  (block
-  ;;@ jsenum/Main.java:304:36
+  ;;@ jsenum/Main.java:306:36
   (call $$ctor__void_$p_jsenum_Main_Consumer_$LambdaAdaptor@jsenum.Main.Consumer.$LambdaAdaptor (ref.as_non_null (local.get $this)))
  )
 )
@@ -3497,11 +3715,11 @@
  (type $function.m_accept__jsenum_Main_SomeJsEnum__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $jsenum.Main.SomeJsEnum))
- ;;@ jsenum/Main.java:304:36
+ ;;@ jsenum/Main.java:306:36
  (local $this (ref null $jsenum.Main.$LambdaImplementor$6))
  (local.set $this (ref.cast (ref $jsenum.Main.$LambdaImplementor$6) (local.get $this.untyped)))
  (block
-  ;;@ jsenum/Main.java:304:36
+  ;;@ jsenum/Main.java:306:36
   (drop (call $m_varargsConsumer__arrayOf_java_lang_Object__java_lang_Object@jsenum.Main (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (local.get $arg0)))))
  )
 )
@@ -3512,11 +3730,11 @@
  (type $function.m_accept__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
- ;;@ jsenum/Main.java:304:36
+ ;;@ jsenum/Main.java:306:36
  (local $this (ref null $jsenum.Main.$LambdaImplementor$6))
  (local.set $this (ref.cast (ref $jsenum.Main.$LambdaImplementor$6) (local.get $this.untyped)))
  (block
-  ;;@ jsenum/Main.java:304:36
+  ;;@ jsenum/Main.java:306:36
   (call_ref $function.m_accept__jsenum_Main_SomeJsEnum__void (ref.as_non_null (local.get $this))(ref.cast (ref null $jsenum.Main.SomeJsEnum) (local.get $arg0))(struct.get $jsenum.Main.$LambdaImplementor$6.vtable $m_accept__jsenum_Main_SomeJsEnum__void (struct.get $jsenum.Main.$LambdaImplementor$6 $vtable(local.get $this))))
  )
 )
@@ -3524,18 +3742,18 @@
 
 ;;; void <anonymous> implements Consumer<SomeJsEnum>.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.$LambdaImplementor$6
- ;;@ jsenum/Main.java:304:36
+ ;;@ jsenum/Main.java:306:36
  (block
-  ;;@ jsenum/Main.java:304:36
+  ;;@ jsenum/Main.java:306:36
   (if (global.get $$class-initialized@jsenum.Main.$LambdaImplementor$6)
    (then
-    ;;@ jsenum/Main.java:304:36
+    ;;@ jsenum/Main.java:306:36
     (return )
    )
   )
-  ;;@ jsenum/Main.java:304:36
+  ;;@ jsenum/Main.java:306:36
   (global.set $$class-initialized@jsenum.Main.$LambdaImplementor$6 (i32.const 1))
-  ;;@ jsenum/Main.java:304:36
+  ;;@ jsenum/Main.java:306:36
   (call $$clinit__void_<once>_@jsenum.Main.Consumer.$LambdaAdaptor )
  )
 )
@@ -3575,14 +3793,14 @@
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
  (result (ref null $jsenum.Main.ComparableJsEnum))
- ;;@ jsenum/Main.java:36:7
+ ;;@ jsenum/Main.java:38:7
  (local $$instance (ref null $jsenum.Main.ComparableJsEnum))
  (block
-  ;;@ jsenum/Main.java:36:7
+  ;;@ jsenum/Main.java:38:7
   (local.set $$instance (struct.new $jsenum.Main.ComparableJsEnum (ref.as_non_null (global.get $jsenum.Main.ComparableJsEnum.vtable)) (ref.as_non_null (global.get $jsenum.Main.ComparableJsEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
-  ;;@ jsenum/Main.java:36:7
+  ;;@ jsenum/Main.java:38:7
   (call $$ctor__java_lang_String__int__void_$p_jsenum_Main_ComparableJsEnum@jsenum.Main.ComparableJsEnum (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
-  ;;@ jsenum/Main.java:36:7
+  ;;@ jsenum/Main.java:38:7
   (return (local.get $$instance))
  )
 )
@@ -3592,13 +3810,13 @@
  (param $this (ref null $jsenum.Main.ComparableJsEnum))
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
- ;;@ jsenum/Main.java:36:7
+ ;;@ jsenum/Main.java:38:7
  (block
-  ;;@ jsenum/Main.java:36:7
+  ;;@ jsenum/Main.java:38:7
   (struct.set $java.lang.Enum $name@java.lang.Enum (local.get $this) (local.get $$name))
-  ;;@ jsenum/Main.java:36:7
+  ;;@ jsenum/Main.java:38:7
   (struct.set $java.lang.Enum $ordinal@java.lang.Enum (local.get $this) (local.get $$ordinal))
-  ;;@ jsenum/Main.java:36:7
+  ;;@ jsenum/Main.java:38:7
   (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
  )
 )
@@ -3608,11 +3826,11 @@
  (type $function.m_getValue__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ jsenum/Main.java:41:15
+ ;;@ jsenum/Main.java:43:15
  (local $this (ref null $jsenum.Main.ComparableJsEnum))
  (local.set $this (ref.cast (ref $jsenum.Main.ComparableJsEnum) (local.get $this.untyped)))
  (block
-  ;;@ jsenum/Main.java:42:6
+  ;;@ jsenum/Main.java:44:6
   (return (call $m_ordinal__int@java.lang.Enum (ref.as_non_null (local.get $this))))
  )
 )
@@ -3620,24 +3838,24 @@
 
 ;;; void ComparableJsEnum.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum
- ;;@ jsenum/Main.java:36:7
+ ;;@ jsenum/Main.java:38:7
  (block
-  ;;@ jsenum/Main.java:36:7
+  ;;@ jsenum/Main.java:38:7
   (if (global.get $$class-initialized@jsenum.Main.ComparableJsEnum)
    (then
-    ;;@ jsenum/Main.java:36:7
+    ;;@ jsenum/Main.java:38:7
     (return )
    )
   )
-  ;;@ jsenum/Main.java:36:7
+  ;;@ jsenum/Main.java:38:7
   (global.set $$class-initialized@jsenum.Main.ComparableJsEnum (i32.const 1))
-  ;;@ jsenum/Main.java:36:7
+  ;;@ jsenum/Main.java:38:7
   (call $$clinit__void_<once>_@java.lang.Enum )
-  ;;@ jsenum/Main.java:37:4
-  (global.set $ZERO@jsenum.Main.ComparableJsEnum (call $$create__java_lang_String__int@jsenum.Main.ComparableJsEnum (ref.null $java.lang.String)(i32.const 0)))
-  ;;@ jsenum/Main.java:38:4
-  (global.set $ONE@jsenum.Main.ComparableJsEnum (call $$create__java_lang_String__int@jsenum.Main.ComparableJsEnum (ref.null $java.lang.String)(i32.const 1)))
   ;;@ jsenum/Main.java:39:4
+  (global.set $ZERO@jsenum.Main.ComparableJsEnum (call $$create__java_lang_String__int@jsenum.Main.ComparableJsEnum (ref.null $java.lang.String)(i32.const 0)))
+  ;;@ jsenum/Main.java:40:4
+  (global.set $ONE@jsenum.Main.ComparableJsEnum (call $$create__java_lang_String__int@jsenum.Main.ComparableJsEnum (ref.null $java.lang.String)(i32.const 1)))
+  ;;@ jsenum/Main.java:41:4
   (global.set $TWO@jsenum.Main.ComparableJsEnum (call $$create__java_lang_String__int@jsenum.Main.ComparableJsEnum (ref.null $java.lang.String)(i32.const 2)))
  )
 )
@@ -3690,11 +3908,11 @@
  (type $function.m_getValue__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ jsenum/Main.java:54:15
+ ;;@ jsenum/Main.java:56:15
  (local $this (ref null $jsenum.Main.IntJsEnum))
  (local.set $this (ref.cast (ref $jsenum.Main.IntJsEnum) (local.get $this.untyped)))
  (block
-  ;;@ jsenum/Main.java:55:6
+  ;;@ jsenum/Main.java:57:6
   (return (struct.get $jsenum.Main.IntJsEnum $value@jsenum.Main.IntJsEnum (local.get $this)))
  )
 )
@@ -3706,14 +3924,14 @@
  (param $$ordinal i32)
  (param $value i32)
  (result (ref null $jsenum.Main.IntJsEnum))
- ;;@ jsenum/Main.java:58:4
+ ;;@ jsenum/Main.java:60:4
  (local $$instance (ref null $jsenum.Main.IntJsEnum))
  (block
-  ;;@ jsenum/Main.java:58:4
+  ;;@ jsenum/Main.java:60:4
   (local.set $$instance (struct.new $jsenum.Main.IntJsEnum (ref.as_non_null (global.get $jsenum.Main.IntJsEnum.vtable)) (ref.as_non_null (global.get $jsenum.Main.IntJsEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (i32.const 0)))
-  ;;@ jsenum/Main.java:58:4
+  ;;@ jsenum/Main.java:60:4
   (call $$ctor__java_lang_String__int__int__void_$p_jsenum_Main_IntJsEnum@jsenum.Main.IntJsEnum (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal)(local.get $value))
-  ;;@ jsenum/Main.java:58:4
+  ;;@ jsenum/Main.java:60:4
   (return (local.get $$instance))
  )
 )
@@ -3724,39 +3942,39 @@
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
  (param $value i32)
- ;;@ jsenum/Main.java:58:4
+ ;;@ jsenum/Main.java:60:4
  (block
-  ;;@ jsenum/Main.java:58:4
+  ;;@ jsenum/Main.java:60:4
   (struct.set $java.lang.Enum $name@java.lang.Enum (local.get $this) (local.get $$name))
-  ;;@ jsenum/Main.java:58:4
+  ;;@ jsenum/Main.java:60:4
   (struct.set $java.lang.Enum $ordinal@java.lang.Enum (local.get $this) (local.get $$ordinal))
-  ;;@ jsenum/Main.java:58:25
+  ;;@ jsenum/Main.java:60:25
   (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
-  ;;@ jsenum/Main.java:59:6
+  ;;@ jsenum/Main.java:61:6
   (struct.set $jsenum.Main.IntJsEnum $value@jsenum.Main.IntJsEnum (local.get $this) (local.get $value))
  )
 )
 
 ;;; void IntJsEnum.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.IntJsEnum
- ;;@ jsenum/Main.java:47:7
+ ;;@ jsenum/Main.java:49:7
  (block
-  ;;@ jsenum/Main.java:47:7
+  ;;@ jsenum/Main.java:49:7
   (if (global.get $$class-initialized@jsenum.Main.IntJsEnum)
    (then
-    ;;@ jsenum/Main.java:47:7
+    ;;@ jsenum/Main.java:49:7
     (return )
    )
   )
-  ;;@ jsenum/Main.java:47:7
+  ;;@ jsenum/Main.java:49:7
   (global.set $$class-initialized@jsenum.Main.IntJsEnum (i32.const 1))
-  ;;@ jsenum/Main.java:47:7
+  ;;@ jsenum/Main.java:49:7
   (call $$clinit__void_<once>_@java.lang.Enum )
-  ;;@ jsenum/Main.java:48:4
-  (global.set $MINUSONE@jsenum.Main.IntJsEnum (call $$create__java_lang_String__int__int@jsenum.Main.IntJsEnum (ref.null $java.lang.String)(i32.const 0)(i32.const -1)))
-  ;;@ jsenum/Main.java:49:4
-  (global.set $TWENTY@jsenum.Main.IntJsEnum (call $$create__java_lang_String__int__int@jsenum.Main.IntJsEnum (ref.null $java.lang.String)(i32.const 1)(i32.const 20)))
   ;;@ jsenum/Main.java:50:4
+  (global.set $MINUSONE@jsenum.Main.IntJsEnum (call $$create__java_lang_String__int__int@jsenum.Main.IntJsEnum (ref.null $java.lang.String)(i32.const 0)(i32.const -1)))
+  ;;@ jsenum/Main.java:51:4
+  (global.set $TWENTY@jsenum.Main.IntJsEnum (call $$create__java_lang_String__int__int@jsenum.Main.IntJsEnum (ref.null $java.lang.String)(i32.const 1)(i32.const 20)))
+  ;;@ jsenum/Main.java:52:4
   (global.set $ELEVEN@jsenum.Main.IntJsEnum (call $$create__java_lang_String__int__int@jsenum.Main.IntJsEnum (ref.null $java.lang.String)(i32.const 2)(i32.const 11)))
  )
 )
@@ -3809,11 +4027,11 @@
  (type $function.m_getValue__java_lang_String)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.String))
- ;;@ jsenum/Main.java:70:18
+ ;;@ jsenum/Main.java:72:18
  (local $this (ref null $jsenum.Main.StringJsEnum))
  (local.set $this (ref.cast (ref $jsenum.Main.StringJsEnum) (local.get $this.untyped)))
  (block
-  ;;@ jsenum/Main.java:71:6
+  ;;@ jsenum/Main.java:73:6
   (return (struct.get $jsenum.Main.StringJsEnum $value@jsenum.Main.StringJsEnum (local.get $this)))
  )
 )
@@ -3825,14 +4043,14 @@
  (param $$ordinal i32)
  (param $value (ref null $java.lang.String))
  (result (ref null $jsenum.Main.StringJsEnum))
- ;;@ jsenum/Main.java:74:4
+ ;;@ jsenum/Main.java:76:4
  (local $$instance (ref null $jsenum.Main.StringJsEnum))
  (block
-  ;;@ jsenum/Main.java:74:4
+  ;;@ jsenum/Main.java:76:4
   (local.set $$instance (struct.new $jsenum.Main.StringJsEnum (ref.as_non_null (global.get $jsenum.Main.StringJsEnum.vtable)) (ref.as_non_null (global.get $jsenum.Main.StringJsEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (ref.null $java.lang.String)))
-  ;;@ jsenum/Main.java:74:4
+  ;;@ jsenum/Main.java:76:4
   (call $$ctor__java_lang_String__int__java_lang_String__void_$p_jsenum_Main_StringJsEnum@jsenum.Main.StringJsEnum (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal)(local.get $value))
-  ;;@ jsenum/Main.java:74:4
+  ;;@ jsenum/Main.java:76:4
   (return (local.get $$instance))
  )
 )
@@ -3843,37 +4061,37 @@
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
  (param $value (ref null $java.lang.String))
- ;;@ jsenum/Main.java:74:4
+ ;;@ jsenum/Main.java:76:4
  (block
-  ;;@ jsenum/Main.java:74:4
+  ;;@ jsenum/Main.java:76:4
   (struct.set $java.lang.Enum $name@java.lang.Enum (local.get $this) (local.get $$name))
-  ;;@ jsenum/Main.java:74:4
+  ;;@ jsenum/Main.java:76:4
   (struct.set $java.lang.Enum $ordinal@java.lang.Enum (local.get $this) (local.get $$ordinal))
-  ;;@ jsenum/Main.java:74:31
+  ;;@ jsenum/Main.java:76:31
   (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
-  ;;@ jsenum/Main.java:75:6
+  ;;@ jsenum/Main.java:77:6
   (struct.set $jsenum.Main.StringJsEnum $value@jsenum.Main.StringJsEnum (local.get $this) (local.get $value))
  )
 )
 
 ;;; void StringJsEnum.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.StringJsEnum
- ;;@ jsenum/Main.java:64:7
+ ;;@ jsenum/Main.java:66:7
  (block
-  ;;@ jsenum/Main.java:64:7
+  ;;@ jsenum/Main.java:66:7
   (if (global.get $$class-initialized@jsenum.Main.StringJsEnum)
    (then
-    ;;@ jsenum/Main.java:64:7
+    ;;@ jsenum/Main.java:66:7
     (return )
    )
   )
-  ;;@ jsenum/Main.java:64:7
+  ;;@ jsenum/Main.java:66:7
   (global.set $$class-initialized@jsenum.Main.StringJsEnum (i32.const 1))
-  ;;@ jsenum/Main.java:64:7
+  ;;@ jsenum/Main.java:66:7
   (call $$clinit__void_<once>_@java.lang.Enum )
-  ;;@ jsenum/Main.java:65:4
+  ;;@ jsenum/Main.java:67:4
   (global.set $ONE@jsenum.Main.StringJsEnum (call $$create__java_lang_String__int__java_lang_String@jsenum.Main.StringJsEnum (ref.null $java.lang.String)(i32.const 0)(call $$getString_|ONE|__java_lang_String_<once>_@jsenum.Main.StringJsEnum )))
-  ;;@ jsenum/Main.java:66:4
+  ;;@ jsenum/Main.java:68:4
   (global.set $THREE@jsenum.Main.StringJsEnum (call $$create__java_lang_String__int__java_lang_String@jsenum.Main.StringJsEnum (ref.null $java.lang.String)(i32.const 1)(call $$getString_|THREE|__java_lang_String_<once>_@jsenum.Main.StringJsEnum )))
  )
 )
@@ -3954,11 +4172,11 @@
  (type $function.m_getValue__java_lang_String)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.String))
- ;;@ jsenum/Main.java:86:18
+ ;;@ jsenum/Main.java:88:18
  (local $this (ref null $jsenum.Main.NonNullableStringJsEnum))
  (local.set $this (ref.cast (ref $jsenum.Main.NonNullableStringJsEnum) (local.get $this.untyped)))
  (block
-  ;;@ jsenum/Main.java:87:6
+  ;;@ jsenum/Main.java:89:6
   (return (struct.get $jsenum.Main.NonNullableStringJsEnum $value@jsenum.Main.NonNullableStringJsEnum (local.get $this)))
  )
 )
@@ -3970,14 +4188,14 @@
  (param $$ordinal i32)
  (param $value (ref null $java.lang.String))
  (result (ref null $jsenum.Main.NonNullableStringJsEnum))
- ;;@ jsenum/Main.java:90:4
+ ;;@ jsenum/Main.java:92:4
  (local $$instance (ref null $jsenum.Main.NonNullableStringJsEnum))
  (block
-  ;;@ jsenum/Main.java:90:4
+  ;;@ jsenum/Main.java:92:4
   (local.set $$instance (struct.new $jsenum.Main.NonNullableStringJsEnum (ref.as_non_null (global.get $jsenum.Main.NonNullableStringJsEnum.vtable)) (ref.as_non_null (global.get $jsenum.Main.NonNullableStringJsEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (ref.null $java.lang.String)))
-  ;;@ jsenum/Main.java:90:4
+  ;;@ jsenum/Main.java:92:4
   (call $$ctor__java_lang_String__int__java_lang_String__void_$p_jsenum_Main_NonNullableStringJsEnum@jsenum.Main.NonNullableStringJsEnum (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal)(local.get $value))
-  ;;@ jsenum/Main.java:90:4
+  ;;@ jsenum/Main.java:92:4
   (return (local.get $$instance))
  )
 )
@@ -3988,37 +4206,37 @@
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
  (param $value (ref null $java.lang.String))
- ;;@ jsenum/Main.java:90:4
+ ;;@ jsenum/Main.java:92:4
  (block
-  ;;@ jsenum/Main.java:90:4
+  ;;@ jsenum/Main.java:92:4
   (struct.set $java.lang.Enum $name@java.lang.Enum (local.get $this) (local.get $$name))
-  ;;@ jsenum/Main.java:90:4
+  ;;@ jsenum/Main.java:92:4
   (struct.set $java.lang.Enum $ordinal@java.lang.Enum (local.get $this) (local.get $$ordinal))
-  ;;@ jsenum/Main.java:90:42
+  ;;@ jsenum/Main.java:92:42
   (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
-  ;;@ jsenum/Main.java:91:6
+  ;;@ jsenum/Main.java:93:6
   (struct.set $jsenum.Main.NonNullableStringJsEnum $value@jsenum.Main.NonNullableStringJsEnum (local.get $this) (local.get $value))
  )
 )
 
 ;;; void NonNullableStringJsEnum.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.NonNullableStringJsEnum
- ;;@ jsenum/Main.java:80:7
+ ;;@ jsenum/Main.java:82:7
  (block
-  ;;@ jsenum/Main.java:80:7
+  ;;@ jsenum/Main.java:82:7
   (if (global.get $$class-initialized@jsenum.Main.NonNullableStringJsEnum)
    (then
-    ;;@ jsenum/Main.java:80:7
+    ;;@ jsenum/Main.java:82:7
     (return )
    )
   )
-  ;;@ jsenum/Main.java:80:7
+  ;;@ jsenum/Main.java:82:7
   (global.set $$class-initialized@jsenum.Main.NonNullableStringJsEnum (i32.const 1))
-  ;;@ jsenum/Main.java:80:7
+  ;;@ jsenum/Main.java:82:7
   (call $$clinit__void_<once>_@java.lang.Enum )
-  ;;@ jsenum/Main.java:81:4
+  ;;@ jsenum/Main.java:83:4
   (global.set $ONE@jsenum.Main.NonNullableStringJsEnum (call $$create__java_lang_String__int__java_lang_String@jsenum.Main.NonNullableStringJsEnum (ref.null $java.lang.String)(i32.const 0)(call $$getString_|ONE|__java_lang_String_<once>_@jsenum.Main.StringJsEnum )))
-  ;;@ jsenum/Main.java:82:4
+  ;;@ jsenum/Main.java:84:4
   (global.set $THREE@jsenum.Main.NonNullableStringJsEnum (call $$create__java_lang_String__int__java_lang_String@jsenum.Main.NonNullableStringJsEnum (ref.null $java.lang.String)(i32.const 1)(call $$getString_|THREE|__java_lang_String_<once>_@jsenum.Main.StringJsEnum )))
  )
 )
@@ -4071,14 +4289,14 @@
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
  (result (ref null $jsenum.Main.NativeStringEnum))
- ;;@ jsenum/Main.java:96:7
+ ;;@ jsenum/Main.java:98:7
  (local $$instance (ref null $jsenum.Main.NativeStringEnum))
  (block
-  ;;@ jsenum/Main.java:96:7
+  ;;@ jsenum/Main.java:98:7
   (local.set $$instance (struct.new $jsenum.Main.NativeStringEnum (ref.as_non_null (global.get $jsenum.Main.NativeStringEnum.vtable)) (ref.as_non_null (global.get $jsenum.Main.NativeStringEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
-  ;;@ jsenum/Main.java:96:7
+  ;;@ jsenum/Main.java:98:7
   (call $$ctor__java_lang_String__int__void_$p_jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
-  ;;@ jsenum/Main.java:96:7
+  ;;@ jsenum/Main.java:98:7
   (return (local.get $$instance))
  )
 )
@@ -4088,13 +4306,13 @@
  (param $this (ref null $jsenum.Main.NativeStringEnum))
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
- ;;@ jsenum/Main.java:96:7
+ ;;@ jsenum/Main.java:98:7
  (block
-  ;;@ jsenum/Main.java:96:7
+  ;;@ jsenum/Main.java:98:7
   (struct.set $java.lang.Enum $name@java.lang.Enum (local.get $this) (local.get $$name))
-  ;;@ jsenum/Main.java:96:7
+  ;;@ jsenum/Main.java:98:7
   (struct.set $java.lang.Enum $ordinal@java.lang.Enum (local.get $this) (local.get $$ordinal))
-  ;;@ jsenum/Main.java:96:7
+  ;;@ jsenum/Main.java:98:7
   (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
  )
 )
@@ -4103,20 +4321,20 @@
 (func $m_valueOf__java_lang_String__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum
  (param $name (ref null $java.lang.String))
  (result (ref null $jsenum.Main.NativeStringEnum))
- ;;@ jsenum/Main.java:96:7
+ ;;@ jsenum/Main.java:98:7
  (block
-  ;;@ jsenum/Main.java:96:7
+  ;;@ jsenum/Main.java:98:7
   (call $$clinit__void_<once>_@jsenum.Main.NativeStringEnum )
-  ;;@ jsenum/Main.java:96:7
+  ;;@ jsenum/Main.java:98:7
   (if (ref.is_null (global.get $namesToValuesMap@jsenum.Main.NativeStringEnum))
    (then
     (block
-     ;;@ jsenum/Main.java:96:7
+     ;;@ jsenum/Main.java:98:7
      (global.set $namesToValuesMap@jsenum.Main.NativeStringEnum (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values_$private__arrayOf_jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum )))
     )
    )
   )
-  ;;@ jsenum/Main.java:96:7
+  ;;@ jsenum/Main.java:98:7
   (return (ref.cast (ref null $jsenum.Main.NativeStringEnum) (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $namesToValuesMap@jsenum.Main.NativeStringEnum))))
  )
 )
@@ -4124,11 +4342,11 @@
 ;;; NativeStringEnum[] NativeStringEnum.values()
 (func $m_values__arrayOf_jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum
  (result (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ jsenum/Main.java:96:7
+ ;;@ jsenum/Main.java:98:7
  (block
-  ;;@ jsenum/Main.java:96:7
+  ;;@ jsenum/Main.java:98:7
   (call $$clinit__void_<once>_@jsenum.Main.NativeStringEnum )
-  ;;@ jsenum/Main.java:96:7
+  ;;@ jsenum/Main.java:98:7
   (return (call $m_values_$private__arrayOf_jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum ))
  )
 )
@@ -4136,31 +4354,31 @@
 ;;; NativeStringEnum[] NativeStringEnum.values_$private()
 (func $m_values_$private__arrayOf_jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum
  (result (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ jsenum/Main.java:96:7
+ ;;@ jsenum/Main.java:98:7
  (block
-  ;;@ jsenum/Main.java:96:7
+  ;;@ jsenum/Main.java:98:7
   (return (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (global.get $ONE@jsenum.Main.NativeStringEnum)(global.get $THREE@jsenum.Main.NativeStringEnum))))
  )
 )
 
 ;;; void NativeStringEnum.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.NativeStringEnum
- ;;@ jsenum/Main.java:96:7
+ ;;@ jsenum/Main.java:98:7
  (block
-  ;;@ jsenum/Main.java:96:7
+  ;;@ jsenum/Main.java:98:7
   (if (global.get $$class-initialized@jsenum.Main.NativeStringEnum)
    (then
-    ;;@ jsenum/Main.java:96:7
+    ;;@ jsenum/Main.java:98:7
     (return )
    )
   )
-  ;;@ jsenum/Main.java:96:7
+  ;;@ jsenum/Main.java:98:7
   (global.set $$class-initialized@jsenum.Main.NativeStringEnum (i32.const 1))
-  ;;@ jsenum/Main.java:96:7
+  ;;@ jsenum/Main.java:98:7
   (call $$clinit__void_<once>_@java.lang.Enum )
-  ;;@ jsenum/Main.java:97:4
+  ;;@ jsenum/Main.java:99:4
   (global.set $ONE@jsenum.Main.NativeStringEnum (call $$create__java_lang_String__int@jsenum.Main.NativeStringEnum (call $$getString_|ONE|__java_lang_String_<once>_@jsenum.Main.StringJsEnum )(i32.const 0)))
-  ;;@ jsenum/Main.java:98:4
+  ;;@ jsenum/Main.java:100:4
   (global.set $THREE@jsenum.Main.NativeStringEnum (call $$create__java_lang_String__int@jsenum.Main.NativeStringEnum (call $$getString_|THREE|__java_lang_String_<once>_@jsenum.Main.StringJsEnum )(i32.const 1)))
  )
 )
@@ -4213,14 +4431,14 @@
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
  (result (ref null $jsenum.Main.JsEnumWithRenamedProperties))
- ;;@ jsenum/Main.java:237:7
+ ;;@ jsenum/Main.java:239:7
  (local $$instance (ref null $jsenum.Main.JsEnumWithRenamedProperties))
  (block
-  ;;@ jsenum/Main.java:237:7
+  ;;@ jsenum/Main.java:239:7
   (local.set $$instance (struct.new $jsenum.Main.JsEnumWithRenamedProperties (ref.as_non_null (global.get $jsenum.Main.JsEnumWithRenamedProperties.vtable)) (ref.as_non_null (global.get $jsenum.Main.JsEnumWithRenamedProperties.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
-  ;;@ jsenum/Main.java:237:7
+  ;;@ jsenum/Main.java:239:7
   (call $$ctor__java_lang_String__int__void_$p_jsenum_Main_JsEnumWithRenamedProperties@jsenum.Main.JsEnumWithRenamedProperties (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
-  ;;@ jsenum/Main.java:237:7
+  ;;@ jsenum/Main.java:239:7
   (return (local.get $$instance))
  )
 )
@@ -4230,13 +4448,13 @@
  (param $this (ref null $jsenum.Main.JsEnumWithRenamedProperties))
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
- ;;@ jsenum/Main.java:237:7
+ ;;@ jsenum/Main.java:239:7
  (block
-  ;;@ jsenum/Main.java:237:7
+  ;;@ jsenum/Main.java:239:7
   (struct.set $java.lang.Enum $name@java.lang.Enum (local.get $this) (local.get $$name))
-  ;;@ jsenum/Main.java:237:7
+  ;;@ jsenum/Main.java:239:7
   (struct.set $java.lang.Enum $ordinal@java.lang.Enum (local.get $this) (local.get $$ordinal))
-  ;;@ jsenum/Main.java:237:7
+  ;;@ jsenum/Main.java:239:7
   (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
  )
 )
@@ -4246,11 +4464,11 @@
  (type $function.m_getValue__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ jsenum/Main.java:243:15
+ ;;@ jsenum/Main.java:245:15
  (local $this (ref null $jsenum.Main.JsEnumWithRenamedProperties))
  (local.set $this (ref.cast (ref $jsenum.Main.JsEnumWithRenamedProperties) (local.get $this.untyped)))
  (block
-  ;;@ jsenum/Main.java:244:6
+  ;;@ jsenum/Main.java:246:6
   (return (call $m_ordinal__int@java.lang.Enum (ref.as_non_null (local.get $this))))
  )
 )
@@ -4258,24 +4476,24 @@
 
 ;;; void JsEnumWithRenamedProperties.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.JsEnumWithRenamedProperties
- ;;@ jsenum/Main.java:237:7
+ ;;@ jsenum/Main.java:239:7
  (block
-  ;;@ jsenum/Main.java:237:7
+  ;;@ jsenum/Main.java:239:7
   (if (global.get $$class-initialized@jsenum.Main.JsEnumWithRenamedProperties)
    (then
-    ;;@ jsenum/Main.java:237:7
+    ;;@ jsenum/Main.java:239:7
     (return )
    )
   )
-  ;;@ jsenum/Main.java:237:7
+  ;;@ jsenum/Main.java:239:7
   (global.set $$class-initialized@jsenum.Main.JsEnumWithRenamedProperties (i32.const 1))
-  ;;@ jsenum/Main.java:237:7
+  ;;@ jsenum/Main.java:239:7
   (call $$clinit__void_<once>_@java.lang.Enum )
-  ;;@ jsenum/Main.java:238:4
-  (global.set $ZERO@jsenum.Main.JsEnumWithRenamedProperties (call $$create__java_lang_String__int@jsenum.Main.JsEnumWithRenamedProperties (ref.null $java.lang.String)(i32.const 0)))
   ;;@ jsenum/Main.java:240:4
+  (global.set $ZERO@jsenum.Main.JsEnumWithRenamedProperties (call $$create__java_lang_String__int@jsenum.Main.JsEnumWithRenamedProperties (ref.null $java.lang.String)(i32.const 0)))
+  ;;@ jsenum/Main.java:242:4
   (global.set $ONE@jsenum.Main.JsEnumWithRenamedProperties (call $$create__java_lang_String__int@jsenum.Main.JsEnumWithRenamedProperties (ref.null $java.lang.String)(i32.const 1)))
-  ;;@ jsenum/Main.java:241:4
+  ;;@ jsenum/Main.java:243:4
   (global.set $TWO@jsenum.Main.JsEnumWithRenamedProperties (call $$create__java_lang_String__int@jsenum.Main.JsEnumWithRenamedProperties (ref.null $java.lang.String)(i32.const 2)))
  )
 )
@@ -4326,16 +4544,16 @@
 ;;; ComparableJsEnumSupplierConsumerImpl ComparableJsEnumSupplierConsumerImpl.$create()
 (func $$create__@jsenum.Main.ComparableJsEnumSupplierConsumerImpl
  (result (ref null $jsenum.Main.ComparableJsEnumSupplierConsumerImpl))
- ;;@ jsenum/Main.java:267:15
+ ;;@ jsenum/Main.java:269:15
  (local $$instance (ref null $jsenum.Main.ComparableJsEnumSupplierConsumerImpl))
  (block
-  ;;@ jsenum/Main.java:267:15
+  ;;@ jsenum/Main.java:269:15
   (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnumSupplierConsumerImpl )
-  ;;@ jsenum/Main.java:267:15
+  ;;@ jsenum/Main.java:269:15
   (local.set $$instance (struct.new $jsenum.Main.ComparableJsEnumSupplierConsumerImpl (ref.as_non_null (global.get $jsenum.Main.ComparableJsEnumSupplierConsumerImpl.vtable)) (ref.as_non_null (global.get $jsenum.Main.ComparableJsEnumSupplierConsumerImpl.itable)) (i32.const 0)))
-  ;;@ jsenum/Main.java:267:15
+  ;;@ jsenum/Main.java:269:15
   (call $$ctor__void_$p_jsenum_Main_ComparableJsEnumSupplierConsumerImpl@jsenum.Main.ComparableJsEnumSupplierConsumerImpl (ref.as_non_null (local.get $$instance)))
-  ;;@ jsenum/Main.java:267:15
+  ;;@ jsenum/Main.java:269:15
   (return (local.get $$instance))
  )
 )
@@ -4343,9 +4561,9 @@
 ;;; void ComparableJsEnumSupplierConsumerImpl.$ctor()
 (func $$ctor__void_$p_jsenum_Main_ComparableJsEnumSupplierConsumerImpl@jsenum.Main.ComparableJsEnumSupplierConsumerImpl
  (param $this (ref null $jsenum.Main.ComparableJsEnumSupplierConsumerImpl))
- ;;@ jsenum/Main.java:267:15
+ ;;@ jsenum/Main.java:269:15
  (block
-  ;;@ jsenum/Main.java:267:15
+  ;;@ jsenum/Main.java:269:15
   (call $$ctor__void_$p_jsenum_Main_SupplierConsumerImpl@jsenum.Main.SupplierConsumerImpl (ref.as_non_null (local.get $this)))
  )
 )
@@ -4355,11 +4573,11 @@
  (type $function.m_accept__jsenum_Main_ComparableJsEnum__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $jsenum.Main.ComparableJsEnum))
- ;;@ jsenum/Main.java:267:15
+ ;;@ jsenum/Main.java:269:15
  (local $this (ref null $jsenum.Main.ComparableJsEnumSupplierConsumerImpl))
  (local.set $this (ref.cast (ref $jsenum.Main.ComparableJsEnumSupplierConsumerImpl) (local.get $this.untyped)))
  (block
-  ;;@ jsenum/Main.java:267:15
+  ;;@ jsenum/Main.java:269:15
   (call $m_accept__java_lang_Object__void@jsenum.Main.SupplierConsumerImpl (ref.as_non_null (local.get $this))(local.get $arg0))
  )
 )
@@ -4370,11 +4588,11 @@
  (type $function.m_get__jsenum_Main_ComparableJsEnum)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $jsenum.Main.ComparableJsEnum))
- ;;@ jsenum/Main.java:267:15
+ ;;@ jsenum/Main.java:269:15
  (local $this (ref null $jsenum.Main.ComparableJsEnumSupplierConsumerImpl))
  (local.set $this (ref.cast (ref $jsenum.Main.ComparableJsEnumSupplierConsumerImpl) (local.get $this.untyped)))
  (block
-  ;;@ jsenum/Main.java:267:15
+  ;;@ jsenum/Main.java:269:15
   (return (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (call_ref $function.m_get__java_lang_Object (ref.as_non_null (local.get $this))(struct.get $jsenum.Main.ComparableJsEnumSupplierConsumerImpl.vtable $m_get__java_lang_Object (struct.get $jsenum.Main.ComparableJsEnumSupplierConsumerImpl $vtable(local.get $this))))))
  )
 )
@@ -4382,18 +4600,18 @@
 
 ;;; void ComparableJsEnumSupplierConsumerImpl.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.ComparableJsEnumSupplierConsumerImpl
- ;;@ jsenum/Main.java:267:15
+ ;;@ jsenum/Main.java:269:15
  (block
-  ;;@ jsenum/Main.java:267:15
+  ;;@ jsenum/Main.java:269:15
   (if (global.get $$class-initialized@jsenum.Main.ComparableJsEnumSupplierConsumerImpl)
    (then
-    ;;@ jsenum/Main.java:267:15
+    ;;@ jsenum/Main.java:269:15
     (return )
    )
   )
-  ;;@ jsenum/Main.java:267:15
+  ;;@ jsenum/Main.java:269:15
   (global.set $$class-initialized@jsenum.Main.ComparableJsEnumSupplierConsumerImpl (i32.const 1))
-  ;;@ jsenum/Main.java:267:15
+  ;;@ jsenum/Main.java:269:15
   (call $$clinit__void_<once>_@jsenum.Main.SupplierConsumerImpl )
  )
 )
@@ -4444,16 +4662,16 @@
 ;;; ComparableJsEnumSupplierConsumerImplWithOverrides ComparableJsEnumSupplierConsumerImplWithOverrides.$create()
 (func $$create__@jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides
  (result (ref null $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides))
- ;;@ jsenum/Main.java:270:15
+ ;;@ jsenum/Main.java:272:15
  (local $$instance (ref null $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides))
  (block
-  ;;@ jsenum/Main.java:270:15
+  ;;@ jsenum/Main.java:272:15
   (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides )
-  ;;@ jsenum/Main.java:270:15
+  ;;@ jsenum/Main.java:272:15
   (local.set $$instance (struct.new $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides (ref.as_non_null (global.get $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides.vtable)) (ref.as_non_null (global.get $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides.itable)) (i32.const 0)))
-  ;;@ jsenum/Main.java:270:15
+  ;;@ jsenum/Main.java:272:15
   (call $$ctor__void_$p_jsenum_Main_ComparableJsEnumSupplierConsumerImplWithOverrides@jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides (ref.as_non_null (local.get $$instance)))
-  ;;@ jsenum/Main.java:270:15
+  ;;@ jsenum/Main.java:272:15
   (return (local.get $$instance))
  )
 )
@@ -4461,9 +4679,9 @@
 ;;; void ComparableJsEnumSupplierConsumerImplWithOverrides.$ctor()
 (func $$ctor__void_$p_jsenum_Main_ComparableJsEnumSupplierConsumerImplWithOverrides@jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides
  (param $this (ref null $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides))
- ;;@ jsenum/Main.java:270:15
+ ;;@ jsenum/Main.java:272:15
  (block
-  ;;@ jsenum/Main.java:270:15
+  ;;@ jsenum/Main.java:272:15
   (call $$ctor__void_$p_jsenum_Main_SupplierConsumerImpl@jsenum.Main.SupplierConsumerImpl (ref.as_non_null (local.get $this)))
  )
 )
@@ -4473,7 +4691,7 @@
  (type $function.m_accept__jsenum_Main_ComparableJsEnum__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $t (ref null $jsenum.Main.ComparableJsEnum))
- ;;@ jsenum/Main.java:273:16
+ ;;@ jsenum/Main.java:275:16
  (local $this (ref null $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides))
  (local.set $this (ref.cast (ref $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides) (local.get $this.untyped)))
  (block
@@ -4486,11 +4704,11 @@
  (type $function.m_get__jsenum_Main_ComparableJsEnum)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $jsenum.Main.ComparableJsEnum))
- ;;@ jsenum/Main.java:276:28
+ ;;@ jsenum/Main.java:278:28
  (local $this (ref null $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides))
  (local.set $this (ref.cast (ref $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides) (local.get $this.untyped)))
  (block
-  ;;@ jsenum/Main.java:277:6
+  ;;@ jsenum/Main.java:279:6
   (return (ref.null $java.lang.Object))
  )
 )
@@ -4501,11 +4719,11 @@
  (type $function.m_get__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ jsenum/Main.java:270:15
+ ;;@ jsenum/Main.java:272:15
  (local $this (ref null $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides))
  (local.set $this (ref.cast (ref $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides) (local.get $this.untyped)))
  (block
-  ;;@ jsenum/Main.java:270:15
+  ;;@ jsenum/Main.java:272:15
   (return (call_ref $function.m_get__jsenum_Main_ComparableJsEnum (ref.as_non_null (local.get $this))(struct.get $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides.vtable $m_get__jsenum_Main_ComparableJsEnum (struct.get $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides $vtable(local.get $this)))))
  )
 )
@@ -4516,11 +4734,11 @@
  (type $function.m_accept__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
- ;;@ jsenum/Main.java:270:15
+ ;;@ jsenum/Main.java:272:15
  (local $this (ref null $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides))
  (local.set $this (ref.cast (ref $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides) (local.get $this.untyped)))
  (block
-  ;;@ jsenum/Main.java:270:15
+  ;;@ jsenum/Main.java:272:15
   (call_ref $function.m_accept__jsenum_Main_ComparableJsEnum__void (ref.as_non_null (local.get $this))(ref.cast (ref null $jsenum.Main.ComparableJsEnum) (local.get $arg0))(struct.get $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides.vtable $m_accept__jsenum_Main_ComparableJsEnum__void (struct.get $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides $vtable(local.get $this))))
  )
 )
@@ -4528,18 +4746,18 @@
 
 ;;; void ComparableJsEnumSupplierConsumerImplWithOverrides.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides
- ;;@ jsenum/Main.java:270:15
+ ;;@ jsenum/Main.java:272:15
  (block
-  ;;@ jsenum/Main.java:270:15
+  ;;@ jsenum/Main.java:272:15
   (if (global.get $$class-initialized@jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides)
    (then
-    ;;@ jsenum/Main.java:270:15
+    ;;@ jsenum/Main.java:272:15
     (return )
    )
   )
-  ;;@ jsenum/Main.java:270:15
+  ;;@ jsenum/Main.java:272:15
   (global.set $$class-initialized@jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides (i32.const 1))
-  ;;@ jsenum/Main.java:270:15
+  ;;@ jsenum/Main.java:272:15
   (call $$clinit__void_<once>_@jsenum.Main.SupplierConsumerImpl )
  )
 )
@@ -4592,14 +4810,14 @@
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
  (result (ref null $jsenum.Main.SomeJsEnum))
- ;;@ jsenum/Main.java:282:14
+ ;;@ jsenum/Main.java:284:14
  (local $$instance (ref null $jsenum.Main.SomeJsEnum))
  (block
-  ;;@ jsenum/Main.java:282:14
+  ;;@ jsenum/Main.java:284:14
   (local.set $$instance (struct.new $jsenum.Main.SomeJsEnum (ref.as_non_null (global.get $jsenum.Main.SomeJsEnum.vtable)) (ref.as_non_null (global.get $jsenum.Main.SomeJsEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
-  ;;@ jsenum/Main.java:282:14
+  ;;@ jsenum/Main.java:284:14
   (call $$ctor__java_lang_String__int__void_$p_jsenum_Main_SomeJsEnum@jsenum.Main.SomeJsEnum (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
-  ;;@ jsenum/Main.java:282:14
+  ;;@ jsenum/Main.java:284:14
   (return (local.get $$instance))
  )
 )
@@ -4609,33 +4827,33 @@
  (param $this (ref null $jsenum.Main.SomeJsEnum))
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
- ;;@ jsenum/Main.java:282:14
+ ;;@ jsenum/Main.java:284:14
  (block
-  ;;@ jsenum/Main.java:282:14
+  ;;@ jsenum/Main.java:284:14
   (struct.set $java.lang.Enum $name@java.lang.Enum (local.get $this) (local.get $$name))
-  ;;@ jsenum/Main.java:282:14
+  ;;@ jsenum/Main.java:284:14
   (struct.set $java.lang.Enum $ordinal@java.lang.Enum (local.get $this) (local.get $$ordinal))
-  ;;@ jsenum/Main.java:282:14
+  ;;@ jsenum/Main.java:284:14
   (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
  )
 )
 
 ;;; void SomeJsEnum.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.SomeJsEnum
- ;;@ jsenum/Main.java:282:14
+ ;;@ jsenum/Main.java:284:14
  (block
-  ;;@ jsenum/Main.java:282:14
+  ;;@ jsenum/Main.java:284:14
   (if (global.get $$class-initialized@jsenum.Main.SomeJsEnum)
    (then
-    ;;@ jsenum/Main.java:282:14
+    ;;@ jsenum/Main.java:284:14
     (return )
    )
   )
-  ;;@ jsenum/Main.java:282:14
+  ;;@ jsenum/Main.java:284:14
   (global.set $$class-initialized@jsenum.Main.SomeJsEnum (i32.const 1))
-  ;;@ jsenum/Main.java:282:14
+  ;;@ jsenum/Main.java:284:14
   (call $$clinit__void_<once>_@java.lang.Enum )
-  ;;@ jsenum/Main.java:283:4
+  ;;@ jsenum/Main.java:285:4
   (global.set $A@jsenum.Main.SomeJsEnum (call $$create__java_lang_String__int@jsenum.Main.SomeJsEnum (ref.null $java.lang.String)(i32.const 0)))
  )
 )
@@ -4686,14 +4904,14 @@
 ;;; SubtypeVarargs SubtypeVarargs.$create()
 (func $$create__@jsenum.Main.SubtypeVarargs
  (result (ref null $jsenum.Main.SubtypeVarargs))
- ;;@ jsenum/Main.java:295:4
+ ;;@ jsenum/Main.java:297:4
  (local $$instance (ref null $jsenum.Main.SubtypeVarargs))
  (block
-  ;;@ jsenum/Main.java:295:4
+  ;;@ jsenum/Main.java:297:4
   (local.set $$instance (struct.new $jsenum.Main.SubtypeVarargs (ref.as_non_null (global.get $jsenum.Main.SubtypeVarargs.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ jsenum/Main.java:295:4
+  ;;@ jsenum/Main.java:297:4
   (call $$ctor__void_$p_jsenum_Main_SubtypeVarargs@jsenum.Main.SubtypeVarargs (ref.as_non_null (local.get $$instance)))
-  ;;@ jsenum/Main.java:295:4
+  ;;@ jsenum/Main.java:297:4
   (return (local.get $$instance))
  )
 )
@@ -4701,9 +4919,9 @@
 ;;; void SubtypeVarargs.$ctor()
 (func $$ctor__void_$p_jsenum_Main_SubtypeVarargs@jsenum.Main.SubtypeVarargs
  (param $this (ref null $jsenum.Main.SubtypeVarargs))
- ;;@ jsenum/Main.java:295:4
+ ;;@ jsenum/Main.java:297:4
  (block
-  ;;@ jsenum/Main.java:296:6
+  ;;@ jsenum/Main.java:298:6
   (call $$ctor__arrayOf_java_lang_Object__void_$p_jsenum_Main_BaseVarargs@jsenum.Main.BaseVarargs (ref.as_non_null (local.get $this))(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (block (result (ref null $jsenum.Main.SomeJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.SomeJsEnum )
    (global.get $A@jsenum.Main.SomeJsEnum)
@@ -4716,18 +4934,18 @@
 
 ;;; void SubtypeVarargs.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.SubtypeVarargs
- ;;@ jsenum/Main.java:294:23
+ ;;@ jsenum/Main.java:296:23
  (block
-  ;;@ jsenum/Main.java:294:23
+  ;;@ jsenum/Main.java:296:23
   (if (global.get $$class-initialized@jsenum.Main.SubtypeVarargs)
    (then
-    ;;@ jsenum/Main.java:294:23
+    ;;@ jsenum/Main.java:296:23
     (return )
    )
   )
-  ;;@ jsenum/Main.java:294:23
+  ;;@ jsenum/Main.java:296:23
   (global.set $$class-initialized@jsenum.Main.SubtypeVarargs (i32.const 1))
-  ;;@ jsenum/Main.java:294:23
+  ;;@ jsenum/Main.java:296:23
   (call $$clinit__void_<once>_@jsenum.Main.BaseVarargs )
  )
 )
@@ -4778,14 +4996,14 @@
 ;;; SubtypeImplicitVarargs SubtypeImplicitVarargs.$create()
 (func $$create__@jsenum.Main.SubtypeImplicitVarargs
  (result (ref null $jsenum.Main.SubtypeImplicitVarargs))
- ;;@ jsenum/Main.java:300:23
+ ;;@ jsenum/Main.java:302:23
  (local $$instance (ref null $jsenum.Main.SubtypeImplicitVarargs))
  (block
-  ;;@ jsenum/Main.java:300:23
+  ;;@ jsenum/Main.java:302:23
   (local.set $$instance (struct.new $jsenum.Main.SubtypeImplicitVarargs (ref.as_non_null (global.get $jsenum.Main.SubtypeImplicitVarargs.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ jsenum/Main.java:300:23
+  ;;@ jsenum/Main.java:302:23
   (call $$ctor__void_$p_jsenum_Main_SubtypeImplicitVarargs@jsenum.Main.SubtypeImplicitVarargs (ref.as_non_null (local.get $$instance)))
-  ;;@ jsenum/Main.java:300:23
+  ;;@ jsenum/Main.java:302:23
   (return (local.get $$instance))
  )
 )
@@ -4793,27 +5011,27 @@
 ;;; void SubtypeImplicitVarargs.$ctor()
 (func $$ctor__void_$p_jsenum_Main_SubtypeImplicitVarargs@jsenum.Main.SubtypeImplicitVarargs
  (param $this (ref null $jsenum.Main.SubtypeImplicitVarargs))
- ;;@ jsenum/Main.java:300:23
+ ;;@ jsenum/Main.java:302:23
  (block
-  ;;@ jsenum/Main.java:300:23
+  ;;@ jsenum/Main.java:302:23
   (call $$ctor__arrayOf_java_lang_Object__void_$p_jsenum_Main_BaseVarargs@jsenum.Main.BaseVarargs (ref.as_non_null (local.get $this))(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 0 )))
  )
 )
 
 ;;; void SubtypeImplicitVarargs.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.SubtypeImplicitVarargs
- ;;@ jsenum/Main.java:300:23
+ ;;@ jsenum/Main.java:302:23
  (block
-  ;;@ jsenum/Main.java:300:23
+  ;;@ jsenum/Main.java:302:23
   (if (global.get $$class-initialized@jsenum.Main.SubtypeImplicitVarargs)
    (then
-    ;;@ jsenum/Main.java:300:23
+    ;;@ jsenum/Main.java:302:23
     (return )
    )
   )
-  ;;@ jsenum/Main.java:300:23
+  ;;@ jsenum/Main.java:302:23
   (global.set $$class-initialized@jsenum.Main.SubtypeImplicitVarargs (i32.const 1))
-  ;;@ jsenum/Main.java:300:23
+  ;;@ jsenum/Main.java:302:23
   (call $$clinit__void_<once>_@jsenum.Main.BaseVarargs )
  )
 )

@@ -163,6 +163,7 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
             "  private static void acceptsNativeTypeArray(MyNativeType[] p) {}",
             "  private static void acceptsNativeTypeVarargs(MyNativeType... p) {}",
             "  private static void acceptsNativeTypeVarargsArray(MyNativeType[]... p) {}",
+            "  private static void acceptsArrayOfNativeTypeArrayList(List<MyNativeType[]>[] p) {}",
             "  private static MyNativeType[] returnsNativeTypeArray() { return null; }",
             "  private static <T> T[] returnsTArray() { return null; }",
             "  private static <T> T returnsT() { return null; }",
@@ -189,6 +190,8 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
                 + " type 'MyNativeType[]'. (b/261079024)",
             "Parameter 'p' in 'void Main.acceptsNativeTypeVarargsArray(MyNativeType[]... p)' cannot"
                 + " be of type 'MyNativeType[][]'. (b/261079024)",
+            "Parameter 'p' in 'void Main.acceptsArrayOfNativeTypeArrayList(List<MyNativeType[]>[]"
+                + " p)' cannot be of type 'List<MyNativeType[]>[]'. (b/261079024)",
             "Return type of 'MyNativeType[] Main.returnsNativeTypeArray()' cannot be of type"
                 + " 'MyNativeType[]'. (b/261079024)",
             "Array creation 'new MyNativeType[1]' cannot be of type 'MyNativeType[]'."
@@ -243,6 +246,8 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
             "Field 'Main<T>.myNativeType' cannot be of type 'List<MyNativeType>'. (b/290992813)",
             "Parameter 'p' in 'void Main.acceptsNativeTypeList(List<MyNativeType> p)' cannot be of"
                 + " type 'List<MyNativeType>'. (b/290992813)",
+            "Parameter 'p' in 'void Main.acceptsNativeTypeVarargsList(List<MyNativeType>... p)'"
+                + " cannot be of type 'List<MyNativeType>[]'. (b/290992813)",
             "Return type of 'List<MyNativeType> Main.returnsNativeTypeList()' cannot be of type"
                 + " 'List<MyNativeType>'. (b/290992813)",
             "Object creation 'new ArrayList.<init>()' cannot be of type 'ArrayList<MyNativeType>'."

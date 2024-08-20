@@ -281,6 +281,8 @@ public class JsInteropRestrictionsChecker {
         type,
         TypeDescriptor::isNative,
         /* onlyCheckTypeSpecialization= */ true,
+        // Native type arrays are checked elsewhere.
+        /* checkArrayComponent= */ false,
         /* disallowedTypeDescription= */ "type with Native type argument",
         /* messageSuffix= */ " (b/290992813)");
   }
@@ -290,6 +292,7 @@ public class JsInteropRestrictionsChecker {
         type,
         TypeDescriptor::isNativeJsArray,
         /* onlyCheckTypeSpecialization= */ false,
+        /* checkArrayComponent= */ true,
         /* disallowedTypeDescription= */ "Native type array",
         /* messageSuffix= */ " (b/261079024)");
   }
@@ -651,6 +654,13 @@ public class JsInteropRestrictionsChecker {
     checkJsEnumAssignments(type);
     checkJsEnumArrays(type);
     checkJsEnumValueFieldAssignment(type);
+
+    checkOverrides(
+        type,
+        // Not checking parameters.
+        (a, b) -> false,
+        JsInteropRestrictionsChecker::isDisallowedJsEnumAssignment,
+        /* checkedTypeMessage= */ "JsEnum");
   }
 
   private void checkJsEnumMethodCalls(Type type) {
@@ -760,46 +770,153 @@ public class JsInteropRestrictionsChecker {
               private void checkJsEnumAssignment(
                   TypeDescriptor toTypeDescriptor, Expression expression) {
                 TypeDescriptor expressionTypeDescriptor = expression.getTypeDescriptor();
-                TypeDescriptor targetRawTypeDescriptor = toTypeDescriptor.toRawTypeDescriptor();
-                if (!expressionTypeDescriptor.isJsEnum() || targetRawTypeDescriptor.isJsEnum()) {
-                  return;
-                }
 
-                if (TypeDescriptors.isJavaLangObject(targetRawTypeDescriptor)) {
-                  return;
+                if (isDisallowedJsEnumAssignment(toTypeDescriptor, expressionTypeDescriptor)) {
+                  // TODO(b/65465035): When source position is tracked at the expression level,
+                  // the error reporting here should include source position.
+                  problems.error(
+                      getSourcePosition(),
+                      "%s '%s' cannot be assigned to '%s'.",
+                      TypeDescriptors.isJavaLangComparable(toTypeDescriptor.toRawTypeDescriptor())
+                          ? getJsEnumTypeText(expressionTypeDescriptor)
+                          : "JsEnum",
+                      expressionTypeDescriptor.getReadableDescription(),
+                      toTypeDescriptor.getReadableDescription());
                 }
-
-                if (TypeDescriptors.isJavaIoSerializable(targetRawTypeDescriptor)) {
-                  return;
-                }
-
-                String messagePrefix = "JsEnum";
-                if (TypeDescriptors.isJavaLangComparable(targetRawTypeDescriptor)) {
-                  if (expressionTypeDescriptor.getJsEnumInfo().supportsComparable()) {
-                    return;
-                  }
-                  messagePrefix = getJsEnumTypeText(expressionTypeDescriptor);
-                }
-
-                // TODO(b/65465035): When source position is tracked at the expression level,
-                // the error reporting here should include source position.
-                problems.error(
-                    getSourcePosition(),
-                    "%s '%s' cannot be assigned to '%s'.",
-                    messagePrefix,
-                    expressionTypeDescriptor.getReadableDescription(),
-                    toTypeDescriptor.getReadableDescription());
               }
             }));
   }
 
+  private static boolean isDisallowedJsEnumAssignment(
+      TypeDescriptor toTypeDescriptor, TypeDescriptor expressionTypeDescriptor) {
+    TypeDescriptor targetRawTypeDescriptor = toTypeDescriptor.toRawTypeDescriptor();
+    if (!expressionTypeDescriptor.isJsEnum() || targetRawTypeDescriptor.isJsEnum()) {
+      return false;
+    }
+
+    if (TypeDescriptors.isJavaLangObject(targetRawTypeDescriptor)
+        || TypeDescriptors.isJavaIoSerializable(targetRawTypeDescriptor)) {
+      // Assignment to Object or Serializable is allowed.
+      return false;
+    }
+
+    if (TypeDescriptors.isJavaLangComparable(targetRawTypeDescriptor)
+        && expressionTypeDescriptor.getJsEnumInfo().supportsComparable()) {
+      return false;
+    }
+
+    return true;
+  }
+
   private void checkJsEnumArrays(Type type) {
+    // JsEnum arrays cannot be assigned to Object[], T[], T..., and so on.
+    checkTypeAssignments(
+        type,
+        JsInteropRestrictionsChecker::isDisallowedJsEnumArrayAssignment,
+        /* targetTypeDescription= */ "JsEnum array",
+        /* errorMessageSuffix= */ "");
+
+    // JsEnum arrays are not allowed to be used in most type parameters.
     checkAllowedTypes(
         type,
         AstUtils::isNonNativeJsEnumArray,
-        /* onlyCheckTypeSpecialization= */ false,
-        /* disallowedTypeDescription= */ "JsEnum array",
-        /* messageSuffix= */ " (b/118299062)");
+        /* onlyCheckTypeSpecialization= */ true,
+        /* checkArrayComponent= */ true,
+        /* disallowedTypeDescription= */ "JsEnum array type",
+        /* messageSuffix= */ "");
+
+    checkOverrides(
+        type,
+        JsInteropRestrictionsChecker::isDisallowedJsEnumArrayOverride,
+        JsInteropRestrictionsChecker::isDisallowedJsEnumArrayOverride,
+        /* checkedTypeMessage= */ "JsEnum array");
+  }
+
+  private static boolean isDisallowedJsEnumArrayAssignment(
+      TypeDescriptor toTypeDescriptor, Expression expression) {
+    TypeDescriptor expressionTypeDescriptor = expression.getTypeDescriptor();
+    return !expressionTypeDescriptor.isSameBaseType(toTypeDescriptor)
+        && hasDisallowedType(
+            expressionTypeDescriptor,
+            expressionTypeDescriptor,
+            AstUtils::isNonNativeJsEnumArray,
+            /* onlyCheckTypeSpecialization= */ false,
+            /* checkArrayComponent= */ true);
+  }
+
+  private static boolean isDisallowedJsEnumArrayOverride(
+      TypeDescriptor toTypeDescriptor, TypeDescriptor expressionTypeDescriptor) {
+    // For override checking, We want to check both (base=T, child=MyJsEnum[]) and (base=List<T>,
+    // child=List<MyJsEnum[]>), so also perform the check when the parameter types match but the
+    // base type has type variables.
+    return (!expressionTypeDescriptor.isSameBaseType(toTypeDescriptor)
+            || !toTypeDescriptor.getAllTypeVariables().isEmpty())
+        && hasDisallowedType(
+            expressionTypeDescriptor,
+            expressionTypeDescriptor,
+            AstUtils::isNonNativeJsEnumArray,
+            /* onlyCheckTypeSpecialization= */ false,
+            /* checkArrayComponent= */ true);
+  }
+
+  private void checkOverrides(
+      Type type,
+      BiFunction<TypeDescriptor, TypeDescriptor, Boolean> isDisallowedParameterOverride,
+      BiFunction<TypeDescriptor, TypeDescriptor, Boolean> isDisallowedReturnTypeOverride,
+      String checkedTypeMessage) {
+    type.getMembers()
+        .forEach(
+            member ->
+                checkOverrides(
+                    member,
+                    isDisallowedParameterOverride,
+                    isDisallowedReturnTypeOverride,
+                    checkedTypeMessage));
+  }
+
+  private void checkOverrides(
+      Member member,
+      BiFunction<TypeDescriptor, TypeDescriptor, Boolean> isDisallowedParameterOverride,
+      BiFunction<TypeDescriptor, TypeDescriptor, Boolean> isDisallowedReturnTypeOverride,
+      String checkedTypeMessage) {
+    if (!member.isMethod()) {
+      return;
+    }
+
+    Method method = (Method) member;
+    MethodDescriptor methodDescriptor = method.getDescriptor();
+    for (MethodDescriptor m : methodDescriptor.getJavaOverriddenMethodDescriptors()) {
+      MethodDescriptor overriddenMethodDescriptor = m.getDeclarationDescriptor();
+      for (int argIndex = 0;
+          argIndex < methodDescriptor.getParameterDescriptors().size();
+          argIndex++) {
+        TypeDescriptor parameterDescriptor =
+            methodDescriptor.getParameterDescriptors().get(argIndex).getTypeDescriptor();
+        TypeDescriptor overriddenParameterDescriptor =
+            overriddenMethodDescriptor.getParameterDescriptors().get(argIndex).getTypeDescriptor();
+
+        if (isDisallowedParameterOverride.apply(
+            overriddenParameterDescriptor, parameterDescriptor)) {
+          problems.error(
+              member.getSourcePosition(),
+              "Method '%s' cannot override method '%s' with a %s parameter.",
+              methodDescriptor.getReadableDescription(),
+              overriddenMethodDescriptor.getReadableDescription(),
+              checkedTypeMessage);
+        }
+      }
+
+      if (isDisallowedReturnTypeOverride.apply(
+          overriddenMethodDescriptor.getReturnTypeDescriptor(),
+          methodDescriptor.getReturnTypeDescriptor())) {
+        problems.error(
+            member.getSourcePosition(),
+            "Method '%s' cannot override method '%s' with a %s return type.",
+            methodDescriptor.getReadableDescription(),
+            overriddenMethodDescriptor.getReadableDescription(),
+            checkedTypeMessage);
+      }
+    }
   }
 
   private void checkJsEnumValueFieldAssignment(Type type) {
@@ -856,6 +973,12 @@ public class JsInteropRestrictionsChecker {
                   instanceOfExpression.getSourcePosition(),
                   "Cannot do instanceof against native JsType '%s'.",
                   testTypeDescriptor.getReadableDescription());
+            } else if (AstUtils.isNonNativeJsEnumArray(
+                instanceOfExpression.getTestTypeDescriptor())) {
+              problems.error(
+                  instanceOfExpression.getSourcePosition(),
+                  "Cannot do instanceof against JsEnum array '%s'.",
+                  instanceOfExpression.getTestTypeDescriptor().getReadableDescription());
             } else if (testTypeDescriptor.isJsFunctionImplementation()) {
               problems.error(
                   instanceOfExpression.getSourcePosition(),
@@ -2346,6 +2469,7 @@ public class JsInteropRestrictionsChecker {
       Type type,
       Predicate<TypeDescriptor> isTypeDisallowed,
       boolean onlyCheckTypeSpecialization,
+      boolean checkArrayComponent,
       String disallowedTypeDescription,
       String messageSuffix) {
     type.accept(
@@ -2363,6 +2487,7 @@ public class JsInteropRestrictionsChecker {
                 superTypeDescriptor,
                 isTypeDisallowed,
                 onlyCheckTypeSpecialization,
+                checkArrayComponent,
                 nestedType.getSourcePosition(),
                 messagePrefix,
                 messageSuffix);
@@ -2382,6 +2507,7 @@ public class JsInteropRestrictionsChecker {
                 variableTypeDescriptor,
                 isTypeDisallowed,
                 onlyCheckTypeSpecialization,
+                checkArrayComponent,
                 sourcePosition == SourcePosition.NONE
                     ? getCurrentMember().getSourcePosition()
                     : sourcePosition,
@@ -2394,7 +2520,13 @@ public class JsInteropRestrictionsChecker {
             checkMethodSignature(
                 method,
                 Predicates.not(
-                    t -> hasDisallowedType(t, t, isTypeDisallowed, onlyCheckTypeSpecialization)),
+                    t ->
+                        hasDisallowedType(
+                            t,
+                            t,
+                            isTypeDisallowed,
+                            onlyCheckTypeSpecialization,
+                            checkArrayComponent)),
                 messageSuffix);
           }
 
@@ -2403,7 +2535,13 @@ public class JsInteropRestrictionsChecker {
             checkMethodSignature(
                 functionExpression,
                 Predicates.not(
-                    t -> hasDisallowedType(t, t, isTypeDisallowed, onlyCheckTypeSpecialization)),
+                    t ->
+                        hasDisallowedType(
+                            t,
+                            t,
+                            isTypeDisallowed,
+                            onlyCheckTypeSpecialization,
+                            checkArrayComponent)),
                 messageSuffix);
           }
 
@@ -2417,6 +2555,7 @@ public class JsInteropRestrictionsChecker {
                 fieldTypeDescriptor,
                 isTypeDisallowed,
                 onlyCheckTypeSpecialization,
+                checkArrayComponent,
                 field.getSourcePosition(),
                 messagePrefix,
                 messageSuffix);
@@ -2439,6 +2578,7 @@ public class JsInteropRestrictionsChecker {
                 declaredTypeDescriptor,
                 isTypeDisallowed,
                 onlyCheckTypeSpecialization,
+                checkArrayComponent,
                 getCurrentMember().getSourcePosition(),
                 messagePrefix,
                 messageSuffix);
@@ -2463,6 +2603,7 @@ public class JsInteropRestrictionsChecker {
                 declaredTypeDescriptor,
                 isTypeDisallowed,
                 onlyCheckTypeSpecialization,
+                checkArrayComponent,
                 getCurrentMember().getSourcePosition(),
                 messagePrefix,
                 messageSuffix);
@@ -2479,6 +2620,7 @@ public class JsInteropRestrictionsChecker {
                 newArrayTypeDescriptor,
                 isTypeDisallowed,
                 onlyCheckTypeSpecialization,
+                checkArrayComponent,
                 getCurrentMember().getSourcePosition(),
                 messagePrefix,
                 messageSuffix);
@@ -2493,6 +2635,7 @@ public class JsInteropRestrictionsChecker {
                 instanceTypeDescriptor,
                 isTypeDisallowed,
                 onlyCheckTypeSpecialization,
+                checkArrayComponent,
                 getCurrentMember().getSourcePosition(),
                 messagePrefix,
                 messageSuffix);
@@ -2505,7 +2648,8 @@ public class JsInteropRestrictionsChecker {
                 testTypeDescriptor,
                 testTypeDescriptor,
                 isTypeDisallowed,
-                onlyCheckTypeSpecialization)) {
+                onlyCheckTypeSpecialization,
+                checkArrayComponent)) {
               problems.error(
                   instanceOfExpression.getSourcePosition(),
                   "Cannot do instanceof against %s '%s'.%s",
@@ -2522,7 +2666,8 @@ public class JsInteropRestrictionsChecker {
                 castTypeDescriptor,
                 castTypeDescriptor,
                 isTypeDisallowed,
-                onlyCheckTypeSpecialization)) {
+                onlyCheckTypeSpecialization,
+                checkArrayComponent)) {
               // TODO(b/65465035): Emit the expression source position when it is tracked.
               problems.error(
                   getCurrentMember().getSourcePosition(),
@@ -2536,33 +2681,39 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void errorIfDisallowedType(
-      TypeDescriptor typeDescriptor,
+      TypeDescriptor inferredTypeDescriptor,
       TypeDescriptor declaredTypeDescriptor,
       Predicate<TypeDescriptor> isTypeDisallowed,
       boolean onlyCheckTypeSpecialization,
+      boolean checkArrayComponent,
       SourcePosition sourcePosition,
       String messagePrefix,
       String messageSuffix) {
     if (hasDisallowedType(
-        typeDescriptor, declaredTypeDescriptor, isTypeDisallowed, onlyCheckTypeSpecialization)) {
+        inferredTypeDescriptor,
+        declaredTypeDescriptor,
+        isTypeDisallowed,
+        onlyCheckTypeSpecialization,
+        checkArrayComponent)) {
       problems.error(
           sourcePosition,
           "%s cannot be of type '%s'.%s",
           messagePrefix,
-          typeDescriptor.getReadableDescription(),
+          inferredTypeDescriptor.getReadableDescription(),
           messageSuffix);
     }
   }
 
   /**
    * Deeply checks the given type against the specified predicate. Returns {@code true} if the
-   * predicate returns true for any type or type argument.
+   * predicate returns true for any type, type argument, or array component.
    */
   private static boolean hasDisallowedType(
       TypeDescriptor inferredTypeDescriptor,
       TypeDescriptor declaredTypeDescriptor,
       Predicate<TypeDescriptor> isTypeDisallowed,
-      boolean onlyCheckTypeSpecialization) {
+      boolean onlyCheckTypeSpecialization,
+      boolean checkArrayComponent) {
     if (!onlyCheckTypeSpecialization && isTypeDisallowed.test(inferredTypeDescriptor)) {
       return true;
     }
@@ -2570,8 +2721,40 @@ public class JsInteropRestrictionsChecker {
       return true;
     }
 
+    if (declaredTypeDescriptor.isArray()) {
+      ArrayTypeDescriptor declaredArrayTypeDescriptor =
+          (ArrayTypeDescriptor) declaredTypeDescriptor;
+      if (declaredArrayTypeDescriptor.getLeafTypeDescriptor().isTypeVariable()
+          && isTypeDisallowed.test(inferredTypeDescriptor)) {
+        return true;
+      }
+    }
+
+    if (inferredTypeDescriptor.isArray()) {
+      ArrayTypeDescriptor inferredArrayTypeDescriptor =
+          (ArrayTypeDescriptor) inferredTypeDescriptor;
+      if (checkArrayComponent) {
+        return hasDisallowedType(
+            inferredArrayTypeDescriptor.getComponentTypeDescriptor(),
+            declaredTypeDescriptor.isArray()
+                ? ((ArrayTypeDescriptor) declaredTypeDescriptor).getComponentTypeDescriptor()
+                : inferredArrayTypeDescriptor.getComponentTypeDescriptor(),
+            isTypeDisallowed,
+            onlyCheckTypeSpecialization,
+            checkArrayComponent);
+      }
+
+      // If we don't check array components (`A` in `A[]`), we should still check the type arguments
+      // of the leaf type (for example, `A` in `List<A>[][]`).
+      inferredTypeDescriptor = inferredArrayTypeDescriptor.getLeafTypeDescriptor();
+      declaredTypeDescriptor =
+          declaredTypeDescriptor.isArray()
+              ? ((ArrayTypeDescriptor) declaredTypeDescriptor).getLeafTypeDescriptor()
+              : inferredArrayTypeDescriptor.getLeafTypeDescriptor();
+    }
+
     if (inferredTypeDescriptor instanceof DeclaredTypeDescriptor) {
-      ImmutableList<TypeDescriptor> inferredTypeArguments =
+      List<TypeDescriptor> inferredTypeArguments =
           ((DeclaredTypeDescriptor) inferredTypeDescriptor).getTypeArgumentDescriptors();
       List<TypeDescriptor> declaredTypeArguments =
           declaredTypeDescriptor instanceof DeclaredTypeDescriptor
@@ -2584,7 +2767,8 @@ public class JsInteropRestrictionsChecker {
                 ? declaredTypeArguments.get(typeArgIndex)
                 : inferredTypeArguments.get(typeArgIndex),
             isTypeDisallowed,
-            false)) {
+            /* onlyCheckTypeSpecialization= */ false,
+            checkArrayComponent)) {
           return true;
         }
       }

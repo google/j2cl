@@ -1898,7 +1898,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "abstract class WithFunctionReturningEnum {",
             "  abstract Enum f();",
             "}",
-            // TODO(b/360192255): This code should be rejected by the restriction checker.
             "abstract class SpecializingEnumToJsEnum extends WithFunctionReturningEnum {",
             "  abstract MyJsEnum f();",
             "}")
@@ -1934,7 +1933,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "JsEnum 'MyJsEnum' cannot have an instance initializer.",
             "Type 'AListSubclass' cannot define a type variable with a JsEnum as a bound.",
             "Cannot use 'super' in JsOverlay method 'void MyJsEnum.anOverlayMethod()'.",
-            "Cannot use 'super' in JsEnum method 'void MyJsEnum.aMethod()'.");
+            "Cannot use 'super' in JsEnum method 'void MyJsEnum.aMethod()'.",
+            "Method 'MyJsEnum SpecializingEnumToJsEnum.f()' cannot override method 'Enum"
+                + " WithFunctionReturningEnum.f()' with a JsEnum return type.");
   }
 
   public void testJsEnumSucceeds() {
@@ -2286,6 +2287,41 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         .assertNoWarnings();
   }
 
+  public void testJsEnumArraysSucceeds() {
+    assertTranspileSucceeds(
+            "Main",
+            "import java.util.List;",
+            "import java.util.function.Function;",
+            "import jsinterop.annotations.*;",
+            "public class Main<T> {",
+            "  @JsEnum enum MyJsEnum {A, B}",
+            "  MyJsEnum[] myJsEnum;",
+            "  private static void acceptsJsEnumArray(MyJsEnum[] p) {}",
+            "  private static void acceptsJsEnumVarargs(MyJsEnum... p) {}",
+            "  private static void acceptsJsEnumVarargsArray(MyJsEnum[]... p) {}",
+            "  private static <T> void acceptsTVarargs(T... p) {}",
+            "  private static MyJsEnum[] returnsJsEnumArray() { return null; }",
+            "  private static void arrays() {",
+            "    Object[] array = null;",
+            "    array[0] = MyJsEnum.A;",
+            "    List<MyJsEnum> l = null;",
+            "    List<MyJsEnum>[] ll = null;",
+            "    Object[] oarr = l.toArray();",
+            "    MyJsEnum[] arr = null;",
+            "    MyJsEnum[][] arr2 = null;",
+            "    acceptsJsEnumArray(new MyJsEnum[0]);",
+            "    acceptsJsEnumVarargs(new MyJsEnum[0]);",
+            "    acceptsJsEnumVarargsArray(new MyJsEnum[0]);",
+            // We generally disallow assignment of JsEnum arrays to generic T[]. However, we
+            // specifically make an exception for varargs (we change the type of the passed array to
+            // Object[] in a desugaring pass, JsEnums are allowed as elements of Object[]).
+            "    acceptsTVarargs(MyJsEnum.A, MyJsEnum.B);",
+            "    MyJsEnum e = returnsJsEnumArray()[0];",
+            "  }",
+            "}")
+        .assertNoWarnings();
+  }
+
   public void testJsEnumArraysFails() {
     assertTranspileFails(
             "Main",
@@ -2294,55 +2330,189 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "import jsinterop.annotations.*;",
             "public class Main<T> {",
             "  @JsEnum enum MyJsEnum {A, B}",
-            "  MyJsEnum[] myJsEnum;",
-            "  T[] tArray;",
             "  T t;",
-            "  private static void acceptsJsEnumArray(MyJsEnum[] p) {}",
-            "  private static void acceptsJsEnumVarargs(MyJsEnum... p) {}",
-            "  private static void acceptsJsEnumVarargsArray(MyJsEnum[]... p) {}",
-            "  private static MyJsEnum[] returnsJsEnumArray() { return null;}",
-            "  private static <T> T[] returnsTArray(T t) { return null;}",
+            "  T[] tArray;",
+            "  T[][] tArrayArray;",
+            "  List<T> tList;",
+            "  List<T[]> tArrayList;",
+            "  private static void acceptsObjectArray(Object[] p) {}",
+            "  private static <T> T returnsT() { return null; }",
+            "  private static <T> T[] returnsTArray(T t) { return null; }",
+            "  private static <T> T[][] returnsTArrayArray(T t) { return null; }",
+            "  private static <T> List<T[]> returnsTArrayList(T t) { return null; }",
+            "  private static <T> List<T[][]> returnsTArrayArrayList(T t) { return null; }",
+            "  private List<T[]> instanceReturnsTArrayList() { return null; }",
+            "  private static <T> void acceptsT(T t) {}",
+            "  private static <T> void acceptsTArray(T[] t) {}",
+            "  private static <T> void acceptsTArrayArray(T[][] t) {}",
+            "  private static <T> void acceptsTVarargs(T... p) {}",
+            "  private static void acceptsJsEnumArrayListVarargs(List<MyJsEnum[]>... p) {}",
             "  private static void arrays() {",
+            "    Object[] array = new MyJsEnum[0];",
+            "    Object[] array2 = new MyJsEnum[0][];",
+            "    acceptsObjectArray(new MyJsEnum[0]);",
             "    Object o = new MyJsEnum[1];",
-            "    MyJsEnum[] arr = null;",
-            "    List<MyJsEnum[]> list = null;",
             "    o = (Function<? extends Object, ? extends Object>) (MyJsEnum[] p1) -> p1;",
             "    o = (Function<? extends Object, ? extends Object>) (MyJsEnum... p2) -> p2;",
             "    o = (MyJsEnum[]) o;",
             "    if (o instanceof MyJsEnum[]) { }",
-            "    MyJsEnum e = returnsTArray(MyJsEnum.A)[0];",
-            "    e = new Main<MyJsEnum>().tArray[0];",
+            "    MyJsEnum[] arr = new MyJsEnum[0];",
+            "    acceptsT(new MyJsEnum[0]);",
+            "    acceptsTArray(new MyJsEnum[0]);",
+            "    acceptsTArrayArray(new MyJsEnum[0][]);",
+            "    Main.<MyJsEnum>acceptsTVarargs(new MyJsEnum[0]);",
+            "    returnsTArray(MyJsEnum.A);",
+            "    returnsTArrayArray(MyJsEnum.A);",
+            "    returnsTArrayList(MyJsEnum.A);",
+            "    returnsTArrayArrayList(MyJsEnum.A);",
+            "    new Main<MyJsEnum[]>().instanceReturnsTArrayList();",
+            "    MyJsEnum e;",
+            "    e = Main.<MyJsEnum[]>returnsT()[0];",
             "    e = new Main<MyJsEnum[]>().t[0];",
+            "    e = new Main<MyJsEnum>().tArray[0];",
+            "    e = new Main<MyJsEnum>().tArrayArray[0][0];",
+            "    e = new Main<MyJsEnum[]>().tList.get(0)[0];",
+            "    e = new Main<MyJsEnum>().tArrayList.get(0)[0];",
+            "    arr.getClass();",
+            "    List<MyJsEnum[]> list = null;",
+            "    DerivedWithJsEnumArrayField buggy = new DerivedWithJsEnumArrayField();",
+            "    e = buggy.arr[0];",
             "  }",
+            "}",
+            "class Derived extends Main<Main.MyJsEnum[]> {}",
+            "class BaseWithTArrayParams<T>{",
+            "  void acceptsTVarargs(T... p) {}",
+            "  void acceptsTArray(T[] p) {}",
+            "  void acceptsTArrayArray(T[][] p) {}",
+            "  void acceptsTArrayList(List<T[]> p) {}",
+            "  void acceptsTArrayListArray(List<T[]>[] p) {}",
+            "  T[] returnsTArray() { return null; }",
+            "  T[][] returnsTArrayArray() { return null; }",
+            "  List<T[]> returnsTArrayList() { return null; }",
+            "  List<T[]>[] returnsTArrayListArray() { return null; }",
+            "}",
+            "class DerivedWithJsEnumArrayParams extends BaseWithTArrayParams<Main.MyJsEnum> {",
+            "  @Override void acceptsTVarargs(Main.MyJsEnum... p) {}",
+            "  @Override void acceptsTArray(Main.MyJsEnum[] p) {}",
+            "  @Override void acceptsTArrayArray(Main.MyJsEnum[][] p) {}",
+            "  @Override void acceptsTArrayList(List<Main.MyJsEnum[]> p) {}",
+            "  @Override void acceptsTArrayListArray(List<Main.MyJsEnum[]>[] p) {}",
+            "  @Override Main.MyJsEnum[] returnsTArray() { return null; }",
+            "  @Override Main.MyJsEnum[][] returnsTArrayArray() { return null; }",
+            "  @Override List<Main.MyJsEnum[]> returnsTArrayList() { return null; }",
+            "  @Override List<Main.MyJsEnum[]>[] returnsTArrayListArray() { return null; }",
+            "}",
+            "class DerivedCallingSuperJsEnumVararg extends BaseWithTArrayParams<Main.MyJsEnum> {",
+            "  void callsSuperAcceptsTVarargs(Main.MyJsEnum... p) {",
+            "    super.acceptsTVarargs(p);",
+            "  }",
+            "}",
+            "class BaseWithTArrayField<T>{",
+            "  T[] arr;",
+            "}",
+            "class DerivedWithJsEnumArrayField extends BaseWithTArrayField<Main.MyJsEnum> {",
             "}")
         .assertErrorsWithoutSourcePosition(
-            "Cannot cast to JsEnum array 'MyJsEnum[]'. (b/118299062)",
-            "Cannot do instanceof against JsEnum array 'MyJsEnum[]'. (b/118299062)",
-            "Field 'Main<T>.myJsEnum' cannot be of type 'MyJsEnum[]'. (b/118299062)",
-            "Parameter 'p' in 'void Main.acceptsJsEnumArray(MyJsEnum[] p)' cannot be of "
-                + "type 'MyJsEnum[]'. (b/118299062)",
-            "Parameter 'p' in 'void Main.acceptsJsEnumVarargs(MyJsEnum... p)' cannot be of type "
-                + "'MyJsEnum[]'. (b/118299062)",
-            "Parameter 'p' in 'void Main.acceptsJsEnumVarargsArray(MyJsEnum[]... p)' cannot be of "
-                + "type 'MyJsEnum[][]'. (b/118299062)",
-            "Return type of 'MyJsEnum[] Main.returnsJsEnumArray()' cannot be of type 'MyJsEnum[]'. "
-                + "(b/118299062)",
-            "Array creation 'new MyJsEnum[1]' cannot be of type 'MyJsEnum[]'. " + "(b/118299062)",
-            "Variable 'arr' cannot be of type 'MyJsEnum[]'. (b/118299062)",
-            "Variable 'list' cannot be of type 'List<MyJsEnum[]>'. (b/118299062)",
-            "Parameter 'p1' in '<lambda>' cannot be of type 'MyJsEnum[]'. (b/118299062)",
-            "Parameter 'p2' in '<lambda>' cannot be of type 'MyJsEnum[]'. (b/118299062)",
-            "Returned type in call to method 'MyJsEnum[] Main.returnsTArray(MyJsEnum)' cannot be "
-                + "of type 'MyJsEnum[]'. (b/118299062)",
-            "Reference to field 'Main<MyJsEnum>.tArray' cannot be of type 'MyJsEnum[]'."
-                + " (b/118299062)",
-            "Object creation 'new Main.<init>()' cannot be of type 'Main<MyJsEnum[]>'."
-                + " (b/118299062)",
-            "Reference to field 'Main<MyJsEnum[]>.t' cannot be of type 'MyJsEnum[]'."
-                + " (b/118299062)");
+            "JsEnum array 'MyJsEnum[]' cannot be assigned to 'Object[]'.",
+            "JsEnum array 'MyJsEnum[][]' cannot be assigned to 'Object[]'.",
+            "JsEnum array 'MyJsEnum[]' cannot be assigned to 'Object[]'.",
+            "JsEnum array 'MyJsEnum[]' cannot be assigned to 'Object'.",
+            "JsEnum array 'MyJsEnum[]' cannot be assigned to 'R'.",
+            "JsEnum array 'MyJsEnum[]' cannot be assigned to 'R'.",
+            "JsEnum array 'MyJsEnum[]' cannot be assigned to 'Object'.",
+            // Method invocation `acceptsT(new MyJsEnum[0])`.
+            "JsEnum array 'MyJsEnum[]' cannot be assigned to 'T'.",
+            // Array access qualifier in `Main.<MyJsEnum[]>returnsT()[0]`.
+            "JsEnum array 'MyJsEnum[]' cannot be assigned to 'T'.",
+            // Array access qualifier in `new Main<MyJsEnum[]>().t[0]`.
+            "JsEnum array 'MyJsEnum[]' cannot be assigned to 'T'.",
+            // Method invocation `acceptsTArray(new MyJsEnum[0])`.
+            "JsEnum array 'MyJsEnum[]' cannot be assigned to 'T[]'.",
+            // Array access qualifier in `new Main<MyJsEnum>().tArray[0]`.
+            "JsEnum array 'MyJsEnum[]' cannot be assigned to 'T[]'.",
+            // Method invocation `acceptsTArrayArray(new MyJsEnum[0][])`.
+            "JsEnum array 'MyJsEnum[][]' cannot be assigned to 'T[][]'.",
+            // Method invocation `<MyJsEnum>acceptsTVarargs(new MyJsEnum[0])`.
+            "JsEnum array 'MyJsEnum[]' cannot be assigned to 'T[]'.",
+            // Array access qualifier in `new Main<MyJsEnum>().tArrayArray[0][0]`.
+            "JsEnum array 'MyJsEnum[][]' cannot be assigned to 'T[][]'.",
+            // Array access qualifier in `buggy.arr[0]` where `arr` is `T[]`.
+            "JsEnum array 'MyJsEnum[]' cannot be assigned to 'T[]'.",
+            "Parameter 'p' in 'void Main.acceptsJsEnumArrayListVarargs(List<MyJsEnum[]>... p)'"
+                + " cannot be of type 'List<MyJsEnum[]>[]'.",
+            "Returned type in call to method 'MyJsEnum[] Main.returnsTArray(MyJsEnum)' cannot be of"
+                + " type 'MyJsEnum[]'.",
+            "Returned type in call to method 'MyJsEnum[] Main.returnsT()' cannot be of type"
+                + " 'MyJsEnum[]'.",
+            "Returned type in call to method 'MyJsEnum[][] Main.returnsTArrayArray(MyJsEnum)'"
+                + " cannot be of type 'MyJsEnum[][]'.",
+            "Returned type in call to method 'List<MyJsEnum[]> Main.returnsTArrayList(MyJsEnum)'"
+                + " cannot be of type 'List<MyJsEnum[]>'.",
+            "Returned type in call to method 'List<MyJsEnum[][]>"
+                + " Main.returnsTArrayArrayList(MyJsEnum)' cannot be of type 'List<MyJsEnum[][]>'.",
+            "Returned type in call to method 'List<MyJsEnum[][]> Main.instanceReturnsTArrayList()'"
+                + " cannot be of type 'List<MyJsEnum[][]>'.",
+            "Object creation 'new Main.<init>()' cannot be of type 'Main<MyJsEnum[]>'.",
+            "Reference to field 'Main<MyJsEnum[]>.t' cannot be of type 'MyJsEnum[]'.",
+            "Reference to field 'Main<MyJsEnum>.tArray' cannot be of type 'MyJsEnum[]'.",
+            "Reference to field 'Main<MyJsEnum>.tArrayArray' cannot be of type 'MyJsEnum[][]'.",
+            "Returned type in call to method 'MyJsEnum[] List.get(int)' cannot be of type"
+                + " 'MyJsEnum[]'.",
+            // Array access qualifier in `List<E>.get(a)[b]` where the array expression is `E`.
+            "JsEnum array 'MyJsEnum[]' cannot be assigned to 'E'.",
+            "JsEnum array 'MyJsEnum[]' cannot be assigned to 'E'.",
+            // Type parameter of field `List<T> tList`.
+            "Reference to field 'Main<MyJsEnum[]>.tList' cannot be of type 'List<MyJsEnum[]>'.",
+            "Reference to field 'Main<MyJsEnum>.tArrayList' cannot be of type 'List<MyJsEnum[]>'.",
+            "Cannot do instanceof against JsEnum array 'MyJsEnum[]'.",
+            "Cannot access member of 'Object' with JsEnum array 'MyJsEnum[]'.",
+            "Reference to field 'BaseWithTArrayField<MyJsEnum>.arr' cannot be of type"
+                + " 'MyJsEnum[]'.",
+            "Variable 'list' cannot be of type 'List<MyJsEnum[]>'.",
+            "Supertype of 'Derived' cannot be of type 'Main<MyJsEnum[]>'.",
+            "Method 'void DerivedWithJsEnumArrayParams.acceptsTVarargs(MyJsEnum...)' cannot"
+                + " override method 'void BaseWithTArrayParams.acceptsTVarargs(Object...)' with a"
+                + " JsEnum array parameter.",
+            "Method 'void DerivedWithJsEnumArrayParams.acceptsTArray(MyJsEnum[])' cannot override"
+                + " method 'void BaseWithTArrayParams.acceptsTArray(Object[])' with a JsEnum array"
+                + " parameter.",
+            "Method 'void DerivedWithJsEnumArrayParams.acceptsTArrayArray(MyJsEnum[][])' cannot"
+                + " override method 'void BaseWithTArrayParams.acceptsTArrayArray(Object[][])' with"
+                + " a JsEnum array parameter.",
+            "Parameter 'p' in 'void DerivedWithJsEnumArrayParams.acceptsTArrayList(List<MyJsEnum[]>"
+                + " p)' cannot be of type 'List<MyJsEnum[]>'.",
+            "Method 'void DerivedWithJsEnumArrayParams.acceptsTArrayList(List)' cannot override"
+                + " method 'void BaseWithTArrayParams.acceptsTArrayList(List)' with a JsEnum array"
+                + " parameter.",
+            "Parameter 'p' in 'void"
+                + " DerivedWithJsEnumArrayParams.acceptsTArrayListArray(List<MyJsEnum[]>[] p)'"
+                + " cannot be of type 'List<MyJsEnum[]>[]'.",
+            "Method 'void DerivedWithJsEnumArrayParams.acceptsTArrayListArray(List[])' cannot"
+                + " override method 'void BaseWithTArrayParams.acceptsTArrayListArray(List[])' with"
+                + " a JsEnum array parameter.",
+            "Method 'MyJsEnum[] DerivedWithJsEnumArrayParams.returnsTArray()' cannot override"
+                + " method 'T[] BaseWithTArrayParams.returnsTArray()' with a JsEnum array return"
+                + " type.",
+            "Method 'MyJsEnum[][] DerivedWithJsEnumArrayParams.returnsTArrayArray()' cannot"
+                + " override method 'T[][] BaseWithTArrayParams.returnsTArrayArray()' with a JsEnum"
+                + " array return type.",
+            "Return type of 'List<MyJsEnum[]> DerivedWithJsEnumArrayParams.returnsTArrayList()'"
+                + " cannot be of type 'List<MyJsEnum[]>'.",
+            "Method 'List<MyJsEnum[]> DerivedWithJsEnumArrayParams.returnsTArrayList()' cannot"
+                + " override method 'List<T[]> BaseWithTArrayParams.returnsTArrayList()' with a"
+                + " JsEnum array return type.",
+            "Return type of 'List<MyJsEnum[]>[]"
+                + " DerivedWithJsEnumArrayParams.returnsTArrayListArray()' cannot be of type"
+                + " 'List<MyJsEnum[]>[]'.",
+            "Method 'List<MyJsEnum[]>[] DerivedWithJsEnumArrayParams.returnsTArrayListArray()'"
+                + " cannot override method 'List<T[]>[]"
+                + " BaseWithTArrayParams.returnsTArrayListArray()' with a JsEnum array return"
+                + " type.",
+            // Method call `super.acceptsTVarargs(p)`
+            "JsEnum array 'MyJsEnum[]' cannot be assigned to 'T[]'.");
   }
 
-  public void testJsEnumArraysSucceeds() {
+  public void testNativeJsEnumArraysSucceeds() {
     assertTranspileSucceeds(
             "test.Main",
             "import java.util.List;",
