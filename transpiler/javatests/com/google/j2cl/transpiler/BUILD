@@ -170,6 +170,7 @@ java_test(
     data = [
         ":sampleapp_dev",
     ],
+    tags = ["j2wasm"],
     deps = [
         "//third_party:jscomp",
         "//third_party:junit",
