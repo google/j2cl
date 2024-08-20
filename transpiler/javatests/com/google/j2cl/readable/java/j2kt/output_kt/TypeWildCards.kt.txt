@@ -73,15 +73,6 @@ open class TypeWildCards internal constructor() {
   fun testRecursiveObservable(
    @ObjCName("withJ2ktTypeWildCards_RecursiveObservable") observable: TypeWildCards.RecursiveObservable<*>?
   ) {}
-
-  @JvmStatic
-  @ObjCName("testObserverHolder")
-  fun testObserverHolder(
-   @ObjCName("withJ2ktTypeWildCards_ObserverHolder") observerHolder: TypeWildCards.ObserverHolder<*>?
-  ) {
-   (observerHolder as TypeWildCards.ObserverHolder<Any?>?)!!.observer_pp_j2kt = TypeWildCards.Observer { e /* capture#4-of * */ ->
-   }
-  }
  }
 
  @ObjCName("J2ktJ2ktTypeWildCards_Parent", exact = true)
@@ -144,10 +135,59 @@ open class TypeWildCards internal constructor() {
   )
  }
 
- @ObjCName("J2ktJ2ktTypeWildCards_ObserverHolder", exact = true)
- open class ObserverHolder<E> internal constructor() {
-  @JvmField
-  internal var observer_pp_j2kt: TypeWildCards.Observer<E>? = null
+ @ObjCName("J2ktJ2ktTypeWildCards_WithoutBounds", exact = true)
+ open class WithoutBounds internal constructor() {
+  @ObjCName("J2ktJ2ktTypeWildCards_WithoutBoundsCompanion", exact = true)
+  companion object {
+   @JvmStatic
+   @ObjCName("testSetField")
+   fun testSetField(
+    @ObjCName("withJ2ktTypeWildCards_WithoutBounds_Holder") holder: TypeWildCards.WithoutBounds.Holder<*>?
+   ) {
+    (holder as TypeWildCards.WithoutBounds.Holder<Any?>?)!!.observer_pp_j2kt = TypeWildCards.WithoutBounds.Observer { e /* capture#4-of * */ ->
+    }
+   }
+
+   @JvmStatic
+   @ObjCName("testSetMethod")
+   fun testSetMethod(
+    @ObjCName("withJ2ktTypeWildCards_WithoutBounds_Holder") holder: TypeWildCards.WithoutBounds.Holder<*>?
+   ) {
+    (holder as TypeWildCards.WithoutBounds.Holder<Any?>?)!!.set_pp_j2kt(TypeWildCards.WithoutBounds.Observer { e /* capture#5-of * */ ->
+    })
+   }
+
+   @JvmStatic
+   @ObjCName("testSetStaticMethod")
+   fun testSetStaticMethod(
+    @ObjCName("withJ2ktTypeWildCards_WithoutBounds_Holder") holder: TypeWildCards.WithoutBounds.Holder<*>?
+   ) {
+    TypeWildCards.WithoutBounds.Holder.setStatic_pp_j2kt(holder, TypeWildCards.WithoutBounds.Observer { e /* capture#6-of * */ ->
+    })
+   }
+  }
+
+  @ObjCName("J2ktJ2ktTypeWildCards_WithoutBounds_Observer", exact = true)
+  fun interface Observer<E> {
+   @ObjCName("on")
+   fun on(
+    @ObjCName("withId") event: E
+   )
+  }
+
+  @ObjCName("J2ktJ2ktTypeWildCards_WithoutBounds_Holder", exact = true)
+  open class Holder<E> internal constructor() {
+   @JvmField
+   internal var observer_pp_j2kt: TypeWildCards.WithoutBounds.Observer<E>? = null
+
+   internal open fun set_pp_j2kt(observer: TypeWildCards.WithoutBounds.Observer<E>?) {}
+
+   @ObjCName("J2ktJ2ktTypeWildCards_WithoutBounds_HolderCompanion", exact = true)
+   companion object {
+    @JvmStatic
+    internal fun <E> setStatic_pp_j2kt(holder: TypeWildCards.WithoutBounds.Holder<E>?, observer: TypeWildCards.WithoutBounds.Observer<E>?) {}
+   }
+  }
  }
 
  @ObjCName("J2ktJ2ktTypeWildCards_WithBounds", exact = true)
@@ -155,12 +195,30 @@ open class TypeWildCards internal constructor() {
   @ObjCName("J2ktJ2ktTypeWildCards_WithBoundsCompanion", exact = true)
   companion object {
    @JvmStatic
-   @ObjCName("test")
-   fun test(
+   @ObjCName("testSetField")
+   fun testSetField(
     @ObjCName("withJ2ktTypeWildCards_WithBounds_Holder") holder: TypeWildCards.WithBounds.Holder<*>?
    ) {
-    (holder as TypeWildCards.WithBounds.Holder<TypeWildCards.WithBounds.Event?>?)!!.observer_pp_j2kt = TypeWildCards.WithBounds.Observer { e /* capture#5-of out TypeWildCards.WithBounds.Event? */ ->
+    (holder as TypeWildCards.WithBounds.Holder<TypeWildCards.WithBounds.Event?>?)!!.observer_pp_j2kt = TypeWildCards.WithBounds.Observer { e /* capture#7-of out TypeWildCards.WithBounds.Event? */ ->
     }
+   }
+
+   @JvmStatic
+   @ObjCName("testSetMethod")
+   fun testSetMethod(
+    @ObjCName("withJ2ktTypeWildCards_WithBounds_Holder") holder: TypeWildCards.WithBounds.Holder<*>?
+   ) {
+    (holder as TypeWildCards.WithBounds.Holder<TypeWildCards.WithBounds.Event?>?)!!.set_pp_j2kt(TypeWildCards.WithBounds.Observer { e /* capture#8-of out TypeWildCards.WithBounds.Event? */ ->
+    })
+   }
+
+   @JvmStatic
+   @ObjCName("testSetStaticMethod")
+   fun testSetStaticMethod(
+    @ObjCName("withJ2ktTypeWildCards_WithBounds_Holder") holder: TypeWildCards.WithBounds.Holder<*>?
+   ) {
+    TypeWildCards.WithBounds.Holder.setStatic_pp_j2kt(holder, TypeWildCards.WithBounds.Observer { e /* capture#9-of out TypeWildCards.WithBounds.Event? */ ->
+    })
    }
   }
 
@@ -179,6 +237,14 @@ open class TypeWildCards internal constructor() {
   open class Holder<E: TypeWildCards.WithBounds.Event?> internal constructor() {
    @JvmField
    internal var observer_pp_j2kt: TypeWildCards.WithBounds.Observer<E>? = null
+
+   internal open fun set_pp_j2kt(observer: TypeWildCards.WithBounds.Observer<E>?) {}
+
+   @ObjCName("J2ktJ2ktTypeWildCards_WithBounds_HolderCompanion", exact = true)
+   companion object {
+    @JvmStatic
+    internal fun <E: TypeWildCards.WithBounds.Event?> setStatic_pp_j2kt(holder: TypeWildCards.WithBounds.Holder<E>?, observer: TypeWildCards.WithBounds.Observer<E>?) {}
+   }
   }
  }
 
@@ -187,12 +253,30 @@ open class TypeWildCards internal constructor() {
   @ObjCName("J2ktJ2ktTypeWildCards_WithDependentBoundsCompanion", exact = true)
   companion object {
    @JvmStatic
-   @ObjCName("test")
-   fun test(
+   @ObjCName("testSetField")
+   fun testSetField(
     @ObjCName("withJ2ktTypeWildCards_WithDependentBounds_Holder") holder: TypeWildCards.WithDependentBounds.Holder<*, *>?
    ) {
-    (holder as TypeWildCards.WithDependentBounds.Holder<TypeWildCards.WithDependentBounds.Event?, TypeWildCards.WithDependentBounds.Collection<TypeWildCards.WithDependentBounds.Event?>?>?)!!.observer_pp_j2kt = TypeWildCards.WithDependentBounds.Observer { e /* capture#6-of out TypeWildCards.WithDependentBounds.Collection<capture#7-of out TypeWildCards.WithDependentBounds.Event?>? */ ->
+    (holder as TypeWildCards.WithDependentBounds.Holder<TypeWildCards.WithDependentBounds.Event?, TypeWildCards.WithDependentBounds.Collection<TypeWildCards.WithDependentBounds.Event?>?>?)!!.observer_pp_j2kt = TypeWildCards.WithDependentBounds.Observer { e /* capture#10-of out TypeWildCards.WithDependentBounds.Collection<capture#11-of out TypeWildCards.WithDependentBounds.Event?>? */ ->
     }
+   }
+
+   @JvmStatic
+   @ObjCName("testSetMethod")
+   fun testSetMethod(
+    @ObjCName("withJ2ktTypeWildCards_WithDependentBounds_Holder") holder: TypeWildCards.WithDependentBounds.Holder<*, *>?
+   ) {
+    (holder as TypeWildCards.WithDependentBounds.Holder<TypeWildCards.WithDependentBounds.Event?, TypeWildCards.WithDependentBounds.Collection<TypeWildCards.WithDependentBounds.Event?>?>?)!!.set_pp_j2kt(TypeWildCards.WithDependentBounds.Observer { e /* capture#12-of out TypeWildCards.WithDependentBounds.Collection<capture#13-of out TypeWildCards.WithDependentBounds.Event?>? */ ->
+    })
+   }
+
+   @JvmStatic
+   @ObjCName("testSetStaticMethod")
+   fun testSetStaticMethod(
+    @ObjCName("withJ2ktTypeWildCards_WithDependentBounds_Holder") holder: TypeWildCards.WithDependentBounds.Holder<*, *>?
+   ) {
+    TypeWildCards.WithDependentBounds.Holder.setStatic_pp_j2kt(holder, TypeWildCards.WithDependentBounds.Observer { e /* capture#14-of out TypeWildCards.WithDependentBounds.Collection<capture#15-of out TypeWildCards.WithDependentBounds.Event?>? */ ->
+    })
    }
   }
 
@@ -214,6 +298,14 @@ open class TypeWildCards internal constructor() {
   open class Holder<E: TypeWildCards.WithDependentBounds.Event?, C: TypeWildCards.WithDependentBounds.Collection<E>?> internal constructor() {
    @JvmField
    internal var observer_pp_j2kt: TypeWildCards.WithDependentBounds.Observer<E, C>? = null
+
+   internal open fun set_pp_j2kt(observer: TypeWildCards.WithDependentBounds.Observer<E, C>?) {}
+
+   @ObjCName("J2ktJ2ktTypeWildCards_WithDependentBounds_HolderCompanion", exact = true)
+   companion object {
+    @JvmStatic
+    internal fun <E: TypeWildCards.WithDependentBounds.Event?, C: TypeWildCards.WithDependentBounds.Collection<E>?> setStatic_pp_j2kt(holder: TypeWildCards.WithDependentBounds.Holder<E, C>?, observer: TypeWildCards.WithDependentBounds.Observer<E, C>?) {}
+   }
   }
  }
 }

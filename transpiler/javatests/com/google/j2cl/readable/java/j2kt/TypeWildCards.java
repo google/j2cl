@@ -56,10 +56,6 @@ class TypeWildCards {
     void addObserver(Observer<E> observer);
   }
 
-  static class ObserverHolder<E> {
-    Observer<E> observer;
-  }
-
   public static void testObservable(Observable<?> observable) {
     observable.addObserver(e -> {});
   }
@@ -82,8 +78,30 @@ class TypeWildCards {
     // observable.addObserver(e -> {});
   }
 
-  public static void testObserverHolder(ObserverHolder<?> observerHolder) {
-    observerHolder.observer = e -> {};
+  static class WithoutBounds {
+    interface Observer<E> {
+      void on(E event);
+    }
+
+    static class Holder<E> {
+      Observer<E> observer;
+
+      void set(Observer<E> observer) {}
+
+      static <E> void setStatic(Holder<E> holder, Observer<E> observer) {}
+    }
+
+    public static void testSetField(Holder<?> holder) {
+      holder.observer = e -> {};
+    }
+
+    public static void testSetMethod(Holder<?> holder) {
+      holder.set(e -> {});
+    }
+
+    public static void testSetStaticMethod(Holder<?> holder) {
+      Holder.setStatic(holder, e -> {});
+    }
   }
 
   static class WithBounds {
@@ -95,10 +113,22 @@ class TypeWildCards {
 
     static class Holder<E extends Event> {
       Observer<E> observer;
+
+      void set(Observer<E> observer) {}
+
+      static <E extends Event> void setStatic(Holder<E> holder, Observer<E> observer) {}
     }
 
-    public static void test(Holder<?> holder) {
+    public static void testSetField(Holder<?> holder) {
       holder.observer = e -> {};
+    }
+
+    public static void testSetMethod(Holder<?> holder) {
+      holder.set(e -> {});
+    }
+
+    public static void testSetStaticMethod(Holder<?> holder) {
+      Holder.setStatic(holder, e -> {});
     }
   }
 
@@ -113,10 +143,23 @@ class TypeWildCards {
 
     static class Holder<E extends Event, C extends Collection<E>> {
       Observer<E, C> observer;
+
+      void set(Observer<E, C> observer) {}
+
+      static <E extends Event, C extends Collection<E>> void setStatic(
+          Holder<E, C> holder, Observer<E, C> observer) {}
     }
 
-    public static void test(Holder<?, ?> holder) {
+    public static void testSetField(Holder<?, ?> holder) {
       holder.observer = e -> {};
+    }
+
+    public static void testSetMethod(Holder<?, ?> holder) {
+      holder.set(e -> {});
+    }
+
+    public static void testSetStaticMethod(Holder<?, ?> holder) {
+      Holder.setStatic(holder, e -> {});
     }
   }
 }
