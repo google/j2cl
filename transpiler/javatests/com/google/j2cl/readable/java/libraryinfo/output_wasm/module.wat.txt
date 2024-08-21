@@ -341,9 +341,6 @@
 (global $C@libraryinfo.Main.MyJsEnum (mut (ref null $libraryinfo.Main.MyJsEnum))
  (ref.null $libraryinfo.Main.MyJsEnum)
 )
-(global $namesToValuesMap@libraryinfo.Main.MyJsEnum (mut (ref null $java.lang.Object))
- (ref.null $java.lang.Object)
-)
 (global $$class-initialized@libraryinfo.Main.MyJsEnum (mut i32)
  (i32.const 0)
 )
@@ -1399,50 +1396,6 @@
  )
 )
 
-;;; MyJsEnum MyJsEnum.valueOf(String name)
-(func $m_valueOf__java_lang_String__libraryinfo_Main_MyJsEnum@libraryinfo.Main.MyJsEnum
- (param $name (ref null $java.lang.String))
- (result (ref null $libraryinfo.Main.MyJsEnum))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:59:7
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:59:7
-  (call $$clinit__void_<once>_@libraryinfo.Main.MyJsEnum )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:59:7
-  (if (ref.is_null (global.get $namesToValuesMap@libraryinfo.Main.MyJsEnum))
-   (then
-    (block
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:59:7
-     (global.set $namesToValuesMap@libraryinfo.Main.MyJsEnum (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values_$private__arrayOf_libraryinfo_Main_MyJsEnum@libraryinfo.Main.MyJsEnum )))
-    )
-   )
-  )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:59:7
-  (return (ref.cast (ref null $libraryinfo.Main.MyJsEnum) (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $namesToValuesMap@libraryinfo.Main.MyJsEnum))))
- )
-)
-
-;;; MyJsEnum[] MyJsEnum.values()
-(func $m_values__arrayOf_libraryinfo_Main_MyJsEnum@libraryinfo.Main.MyJsEnum
- (result (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:59:7
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:59:7
-  (call $$clinit__void_<once>_@libraryinfo.Main.MyJsEnum )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:59:7
-  (return (call $m_values_$private__arrayOf_libraryinfo_Main_MyJsEnum@libraryinfo.Main.MyJsEnum ))
- )
-)
-
-;;; MyJsEnum[] MyJsEnum.values_$private()
-(func $m_values_$private__arrayOf_libraryinfo_Main_MyJsEnum@libraryinfo.Main.MyJsEnum
- (result (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:59:7
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:59:7
-  (return (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 3 (global.get $A@libraryinfo.Main.MyJsEnum)(global.get $B@libraryinfo.Main.MyJsEnum)(global.get $C@libraryinfo.Main.MyJsEnum))))
- )
-)
-
 ;;; void MyJsEnum.$clinit()
 (func $$clinit__void_<once>_@libraryinfo.Main.MyJsEnum
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:59:7
@@ -1459,11 +1412,11 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:59:7
   (call $$clinit__void_<once>_@java.lang.Enum )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:60:4
-  (global.set $A@libraryinfo.Main.MyJsEnum (call $$create__java_lang_String__int@libraryinfo.Main.MyJsEnum (call $$getString_|A|__java_lang_String_<once>_@libraryinfo.Main.MyJsEnum )(i32.const 0)))
+  (global.set $A@libraryinfo.Main.MyJsEnum (call $$create__java_lang_String__int@libraryinfo.Main.MyJsEnum (ref.null $java.lang.String)(i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:61:4
-  (global.set $B@libraryinfo.Main.MyJsEnum (call $$create__java_lang_String__int@libraryinfo.Main.MyJsEnum (call $$getString_|B|__java_lang_String_<once>_@libraryinfo.Main.MyJsEnum )(i32.const 1)))
+  (global.set $B@libraryinfo.Main.MyJsEnum (call $$create__java_lang_String__int@libraryinfo.Main.MyJsEnum (ref.null $java.lang.String)(i32.const 1)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:62:4
-  (global.set $C@libraryinfo.Main.MyJsEnum (call $$create__java_lang_String__int@libraryinfo.Main.MyJsEnum (call $$getString_|C|__java_lang_String_<once>_@libraryinfo.Main.MyJsEnum )(i32.const 2)))
+  (global.set $C@libraryinfo.Main.MyJsEnum (call $$create__java_lang_String__int@libraryinfo.Main.MyJsEnum (ref.null $java.lang.String)(i32.const 2)))
  )
 )
 

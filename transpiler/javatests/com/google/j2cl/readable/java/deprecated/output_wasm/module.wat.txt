@@ -169,9 +169,6 @@
 (global $A_VALUE@deprecated.DeprecatedExample.DeprecatedJsEnum (mut (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum))
  (ref.null $deprecated.DeprecatedExample.DeprecatedJsEnum)
 )
-(global $namesToValuesMap@deprecated.DeprecatedExample.DeprecatedJsEnum (mut (ref null $java.lang.Object))
- (ref.null $java.lang.Object)
-)
 (global $$class-initialized@deprecated.DeprecatedExample.DeprecatedJsEnum (mut i32)
  (i32.const 0)
 )
@@ -680,50 +677,6 @@
  )
 )
 
-;;; DeprecatedJsEnum DeprecatedJsEnum.valueOf(String name)
-(func $m_valueOf__java_lang_String__deprecated_DeprecatedExample_DeprecatedJsEnum@deprecated.DeprecatedExample.DeprecatedJsEnum
- (param $name (ref null $java.lang.String))
- (result (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
-  (call $$clinit__void_<once>_@deprecated.DeprecatedExample.DeprecatedJsEnum )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
-  (if (ref.is_null (global.get $namesToValuesMap@deprecated.DeprecatedExample.DeprecatedJsEnum))
-   (then
-    (block
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
-     (global.set $namesToValuesMap@deprecated.DeprecatedExample.DeprecatedJsEnum (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values_$private__arrayOf_deprecated_DeprecatedExample_DeprecatedJsEnum@deprecated.DeprecatedExample.DeprecatedJsEnum )))
-    )
-   )
-  )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
-  (return (ref.cast (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum) (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $namesToValuesMap@deprecated.DeprecatedExample.DeprecatedJsEnum))))
- )
-)
-
-;;; DeprecatedJsEnum[] DeprecatedJsEnum.values()
-(func $m_values__arrayOf_deprecated_DeprecatedExample_DeprecatedJsEnum@deprecated.DeprecatedExample.DeprecatedJsEnum
- (result (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
-  (call $$clinit__void_<once>_@deprecated.DeprecatedExample.DeprecatedJsEnum )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
-  (return (call $m_values_$private__arrayOf_deprecated_DeprecatedExample_DeprecatedJsEnum@deprecated.DeprecatedExample.DeprecatedJsEnum ))
- )
-)
-
-;;; DeprecatedJsEnum[] DeprecatedJsEnum.values_$private()
-(func $m_values_$private__arrayOf_deprecated_DeprecatedExample_DeprecatedJsEnum@deprecated.DeprecatedExample.DeprecatedJsEnum
- (result (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
-  (return (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (global.get $A_VALUE@deprecated.DeprecatedExample.DeprecatedJsEnum))))
- )
-)
-
 ;;; void DeprecatedJsEnum.$clinit()
 (func $$clinit__void_<once>_@deprecated.DeprecatedExample.DeprecatedJsEnum
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
@@ -740,7 +693,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:62:7
   (call $$clinit__void_<once>_@java.lang.Enum )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:63:4
-  (global.set $A_VALUE@deprecated.DeprecatedExample.DeprecatedJsEnum (call $$create__java_lang_String__int@deprecated.DeprecatedExample.DeprecatedJsEnum (call $$getString_|A_VALUE|__java_lang_String_<once>_@deprecated.DeprecatedExample.DeprecatedEnum )(i32.const 0)))
+  (global.set $A_VALUE@deprecated.DeprecatedExample.DeprecatedJsEnum (call $$create__java_lang_String__int@deprecated.DeprecatedExample.DeprecatedJsEnum (ref.null $java.lang.String)(i32.const 0)))
  )
 )
 
