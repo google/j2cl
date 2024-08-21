@@ -17,10 +17,10 @@
 
 package com.google.j2cl.transpiler.frontend.kotlin
 
+import com.google.j2cl.transpiler.frontend.kotlin.ir.fqnOrFail
 import com.google.j2cl.transpiler.frontend.kotlin.ir.fromQualifiedBinaryName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isArrayType
 import com.google.j2cl.transpiler.frontend.kotlin.ir.javaName
-import com.google.j2cl.transpiler.frontend.kotlin.ir.nonNullFqn
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
 import org.jetbrains.kotlin.backend.jvm.ir.erasedUpperBound
@@ -90,7 +90,7 @@ internal class BuiltinsResolver(
         // otherwise the class of the type.
         val clazz = erasedUpperBound
         val clazzSymbol = resolveClass(clazz.symbol) ?: clazz.symbol
-        "L${clazzSymbol.nonNullFqn};"
+        "L${clazzSymbol.fqnOrFail};"
       }
     }
 

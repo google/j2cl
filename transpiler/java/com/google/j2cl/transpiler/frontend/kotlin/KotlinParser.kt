@@ -133,7 +133,7 @@ class KotlinParser(
                   packageAnnotationsResolver,
                   lowerings.jvmBackendContext,
                 ),
-                IntrinsicMethods(pluginContext.irBuiltIns),
+                lowerings.intrinsics,
               )
               .convert(moduleFragment)
         }

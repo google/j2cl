@@ -36,6 +36,7 @@ import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.Visibility
 import com.google.j2cl.transpiler.frontend.jdt.PackageAnnotationsResolver
 import com.google.j2cl.transpiler.frontend.kotlin.ir.enumEntries
+import com.google.j2cl.transpiler.frontend.kotlin.ir.fqnOrFail
 import com.google.j2cl.transpiler.frontend.kotlin.ir.fromQualifiedBinaryName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getAllTypeParameters
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getJsEnumInfo
@@ -109,7 +110,6 @@ import org.jetbrains.kotlin.ir.util.dump
 import org.jetbrains.kotlin.ir.util.file
 import org.jetbrains.kotlin.ir.util.hasAnnotation
 import org.jetbrains.kotlin.ir.util.isAnonymousObject
-import org.jetbrains.kotlin.ir.util.isFacadeClass
 import org.jetbrains.kotlin.ir.util.isFakeOverride
 import org.jetbrains.kotlin.ir.util.isFromJava
 import org.jetbrains.kotlin.ir.util.isInterface
@@ -202,28 +202,6 @@ class KotlinEnvironment(
     return pluginContext.referenceClass(ClassId.fromQualifiedBinaryName(qualifiedBinaryName))?.let {
       getDeclaredTypeDescriptor(it.defaultType.makeNullable())
     }
-  }
-
-  internal fun getWellKnowMethodDescriptor(
-    fnFqn: String,
-    vararg parameters: TypeDescriptor,
-  ): MethodDescriptor {
-    val fqName = FqName(fnFqn)
-    @OptIn(FirIncompatiblePluginAPI::class)
-    return pluginContext
-      .referenceFunctions(fqName)
-      .map { it.owner.parent }
-      .distinct()
-      .mapNotNull {
-        when {
-          it is IrFile ->
-            getWellKnownTypeDescriptor(it.getFileClassInfo().fileClassFqName.asString())
-          it.isFacadeClass ->
-            getDeclaredType((it as IrClass).defaultType, useDeclarationVariance = false)
-          else -> null
-        }?.getMethodDescriptor(fqName.shortName().asString(), *parameters)
-      }
-      .single()
   }
 
   fun getDeclarationForType(irClass: IrClass?): TypeDeclaration? {
@@ -769,7 +747,7 @@ class KotlinEnvironment(
   private val IrTypeParameter.uniqueKey: String
     get() =
       getClassComponents().joinToString("::") +
-        superTypes.joinToString("|") { it.fullyQualifiedName.asString() }
+        superTypes.joinToString("|") { it.fqnOrFail.asString() }
 
   private fun Map<IrTypeParameterSymbol, IrTypeArgument>.toTypeDescriptorByTypeVariableMap() =
     entries.associate {

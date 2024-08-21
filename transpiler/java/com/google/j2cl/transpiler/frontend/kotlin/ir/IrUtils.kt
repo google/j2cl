@@ -90,6 +90,7 @@ import org.jetbrains.kotlin.ir.types.IrTypeArgument
 import org.jetbrains.kotlin.ir.types.IrTypeProjection
 import org.jetbrains.kotlin.ir.types.classOrFail
 import org.jetbrains.kotlin.ir.types.classOrNull
+import org.jetbrains.kotlin.ir.types.classifierOrNull
 import org.jetbrains.kotlin.ir.types.defaultType
 import org.jetbrains.kotlin.ir.types.extractTypeParameters
 import org.jetbrains.kotlin.ir.types.impl.makeTypeProjection
@@ -418,11 +419,14 @@ fun IrDeclaration.getTopLevelEnclosingClass(): IrClass {
   return checkNotNull(parentClassOrNull).getTopLevelEnclosingClass()
 }
 
-val IrClassifierSymbol.nonNullFqn: FqName
+val IrClassifierSymbol.fqnOrFail: FqName
   get() =
     checkNotNull((owner as? IrDeclarationWithName)?.fqNameWhenAvailable) {
       "Fqn not available for this kind of class [$this]"
     }
+
+val IrType.fqnOrFail: FqName
+  get() = checkNotNull(classifierOrNull?.fqnOrFail) { "Fqn not available for this type [$this]" }
 
 val IrFunction.isAbstract: Boolean
   get() = this is IrOverridableMember && modality == Modality.ABSTRACT

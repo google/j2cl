@@ -81,6 +81,7 @@ import com.google.j2cl.transpiler.ast.VariableDeclarationExpression
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment
 import com.google.j2cl.transpiler.ast.WhileStatement
 import com.google.j2cl.transpiler.frontend.common.AbstractCompilationUnitBuilder
+import com.google.j2cl.transpiler.frontend.kotlin.ir.IntrinsicMethods
 import com.google.j2cl.transpiler.frontend.kotlin.ir.findFunctionByName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getArguments
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getFunctionExpression
@@ -684,7 +685,6 @@ class CompilationUnitBuilder(
       irCall.isArraySetCall -> convertArraySetCall(irCall)
       irCall.isArrayOfCall -> convertArrayOfCall(irCall)
       irCall.isArrayOfNullCall -> createNewArray(irCall)
-      irCall.isArrayIteratorCall -> convertArrayIteratorCall(irCall)
       irCall.isIsArrayOfCall -> convertIsArrayOfCall(irCall)
       irCall.isDataClassArrayMemberHashCode -> convertDataClassArrayMemberCall(irCall, "hashCode")
       irCall.isDataClassArrayMemberToString -> convertDataClassArrayMemberCall(irCall, "toString")
@@ -697,7 +697,6 @@ class CompilationUnitBuilder(
       irCall.isKClassJavaObjectTypePropertyReference ->
         convertKClassJavaPropertyReference(irCall, wrapPrimitives = true)
       irCall.isRangeToCall -> convertRangeToCall(irCall)
-      irCall.isRangeUntilCall -> convertRangeUntilCall(irCall)
       irCall.isBinaryOperation -> convertBinaryOperation(irCall)
       irCall.isPrefixOperation -> convertPrefixOperation(irCall)
       irCall.isEqualsOperator -> convertEqualsOperator(irCall)
@@ -821,26 +820,6 @@ class CompilationUnitBuilder(
     return convertExpression(irCall.getArguments()[0])
   }
 
-  private fun convertArrayIteratorCall(irCall: IrCall): Expression {
-    require(irCall.valueArgumentsCount == 0) { "invalid number of arguments" }
-    val isPrimitive = irCall.dispatchReceiver!!.type.isPrimitiveArray()
-    val qualifier = convertQualifier(irCall)!!
-    val qualifierTypeDescriptor =
-      qualifier.typeDescriptor.toRawTypeDescriptor() as ArrayTypeDescriptor
-    val methodDescriptor =
-      environment.getWellKnowMethodDescriptor(
-        "kotlin.jvm.internal.iterator",
-        if (isPrimitive) qualifierTypeDescriptor else TypeDescriptors.get().javaLangObjectArray,
-      )
-
-    // Rewrite a call in the form of `arr.iterator()` into `iterator(arr)`,  in particular the
-    // qualifier is being moved to be the first argument.
-    return MethodCall.Builder.from(methodDescriptor)
-      .setArguments(convertQualifier(irCall))
-      .setSourcePosition(getSourcePosition(irCall))
-      .build()
-  }
-
   private fun convertIsArrayOfCall(irCall: IrCall): Expression =
     // Transforms `array.isArrayOf<String>()` to `array instanceof String[]`
     InstanceOfExpression.newBuilder()
@@ -893,25 +872,6 @@ class CompilationUnitBuilder(
           convertExpression(checkNotNull(irCall.getValueArgument(0))),
         )
       )
-      .build()
-  }
-
-  private fun convertRangeUntilCall(irCall: IrCall): Expression {
-    require(irCall.valueArgumentsCount == 1) { "invalid number of arguments" }
-    val qualifier = checkNotNull(convertQualifier(irCall))
-    val valueArgumentExpression = convertExpression(checkNotNull(irCall.getValueArgument(0)))
-    val methodDescriptor =
-      environment.getWellKnowMethodDescriptor(
-        "kotlin.ranges.until",
-        // We need to pass the dispatch receiver as the first argument because it's an extension
-        // function.
-        qualifier.typeDescriptor,
-        valueArgumentExpression.typeDescriptor,
-      )
-
-    return MethodCall.Builder.from(methodDescriptor)
-      .setArguments(qualifier, valueArgumentExpression)
-      .setSourcePosition(getSourcePosition(irCall))
       .build()
   }
 
@@ -1724,9 +1684,6 @@ class CompilationUnitBuilder(
   private val IrCall.isIsArrayOfCall: Boolean
     get() = intrinsicMethods.isIsArrayOf(this)
 
-  private val IrCall.isArrayIteratorCall: Boolean
-    get() = intrinsicMethods.isArrayIterator(this)
-
   private val IrCall.isDataClassArrayMemberToString: Boolean
     get() = intrinsicMethods.isDataClassArrayMemberToString(this)
 
@@ -1738,9 +1695,6 @@ class CompilationUnitBuilder(
 
   private val IrCall.isRangeToCall: Boolean
     get() = intrinsicMethods.isRangeTo(this)
-
-  private val IrCall.isRangeUntilCall: Boolean
-    get() = intrinsicMethods.isRangeUntil(this)
 
   private val IrCall.isEqualsOperator: Boolean
     get() = intrinsicMethods.isEqualsOperator(this)

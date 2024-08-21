@@ -17,6 +17,7 @@
 
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
+import com.google.j2cl.transpiler.frontend.kotlin.ir.IntrinsicMethods
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsIgnore
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsProperty
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsType
@@ -43,8 +44,10 @@ import org.jetbrains.kotlin.ir.util.patchDeclarationParents
 import org.jetbrains.kotlin.resolve.deprecation.DeprecationResolver
 
 /** Context used in the lowering passes and wrapping the `JvmBackendContext`. */
-class J2clBackendContext(val jvmBackendContext: JvmBackendContext) :
-  CommonBackendContext by jvmBackendContext {
+class J2clBackendContext(
+  val jvmBackendContext: JvmBackendContext,
+  val intrinsics: IntrinsicMethods,
+) : CommonBackendContext by jvmBackendContext {
   override val preferJavaLikeCounterLoop: Boolean
     get() = false
 

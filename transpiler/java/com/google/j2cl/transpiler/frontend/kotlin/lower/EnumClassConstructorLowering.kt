@@ -13,6 +13,8 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+@file:OptIn(UnsafeDuringIrConstructionAPI::class)
+
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsEnum
@@ -22,11 +24,16 @@ import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.IrStatement
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrConstructor
+import org.jetbrains.kotlin.ir.declarations.IrDeclarationOrigin
 import org.jetbrains.kotlin.ir.declarations.IrFile
+import org.jetbrains.kotlin.ir.declarations.IrFunction
 import org.jetbrains.kotlin.ir.declarations.createBlockBody
 import org.jetbrains.kotlin.ir.expressions.IrBlock
 import org.jetbrains.kotlin.ir.expressions.IrBody
 import org.jetbrains.kotlin.ir.expressions.IrEnumConstructorCall
+import org.jetbrains.kotlin.ir.expressions.IrSyntheticBody
+import org.jetbrains.kotlin.ir.expressions.IrSyntheticBodyKind
+import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.util.constructors
 import org.jetbrains.kotlin.ir.util.isEnumClass
 import org.jetbrains.kotlin.ir.util.parentAsClass
@@ -35,10 +42,12 @@ import org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid
 import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 
 /**
- * Removes super enum constructor calls and effectively empty constructors from enums.
+ * Removes super enum constructor calls and effectively empty constructors from enums. This will
+ * normalize the AST to better match the Java pattern, where the JLS does not permit an explicit
+ * super enum constructor call (it's purely implicit).
  *
- * This will normalize the AST to better match the Java pattern, where the JLS does not permit an
- * explicit super enum constructor call (it's purely implicit).
+ * Remove the <get-entries> special function from Enum classes. All references are rewritten at the
+ * call site.
  */
 internal class EnumClassConstructorLowering(private val context: JvmBackendContext) :
   FileLoweringPass, IrElementVisitorVoid {
@@ -55,6 +64,12 @@ internal class EnumClassConstructorLowering(private val context: JvmBackendConte
 
     if (declaration.isEnumClass) {
       declaration.constructors.forEach(this::cleanupSuperEnumConstructorCall)
+      // Remove the <get-entries> special function from Enum classes.
+      declaration.declarations.removeIf {
+        it is IrFunction &&
+          it.origin == IrDeclarationOrigin.ENUM_CLASS_SPECIAL_MEMBER &&
+          (it.body as? IrSyntheticBody)?.kind == IrSyntheticBodyKind.ENUM_ENTRIES
+      }
       // Remove the now empty implicit constructors from JsEnum.
       if (declaration.isJsEnum) {
         declaration.declarations.removeIf { it is IrConstructor && it.isEffectivelyEmpty() }

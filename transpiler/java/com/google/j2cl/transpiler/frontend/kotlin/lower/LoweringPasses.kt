@@ -17,6 +17,7 @@
 
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
+import com.google.j2cl.transpiler.frontend.kotlin.ir.IntrinsicMethods
 import com.google.j2cl.transpiler.frontend.kotlin.ir.fromQualifiedBinaryName
 import org.jetbrains.kotlin.backend.common.CompilationException
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
@@ -183,10 +184,10 @@ private val loweringPassFactories: List<J2clLoweringPassFactory> = buildList {
   add(::KotlinNothingValueCallsLowering)
   // Mange the names of functions that are shadowing those in super types.
   add(::MangleWellKnownShadowingFunctionsLowering)
+  // Implement intrinsic. Must run after function inlining.
+  add(::IntrinsicFunctionCallsLowering)
   // Removes enum super constructor calls and cleans up effectively empty constructors.
   add(::EnumClassConstructorLowering)
-  // Implement enumEntries intrinsic. Must run after function inlining.
-  add(::EnumEntriesIntrinsicLowering)
   // Rewrites calls to KFunction.invoke() as FunctionN.invoke().
   add(::RewriteKFunctionInvokeLowering)
 
@@ -225,13 +226,16 @@ class LoweringPasses(
   private val compilerConfiguration: CompilerConfiguration,
 ) : IrGenerationExtension {
   lateinit var jvmBackendContext: JvmBackendContext
+  lateinit var intrinsics: IntrinsicMethods
 
   override fun generate(moduleFragment: IrModuleFragment, pluginContext: IrPluginContext) {
     preloadWellKnownSymbols(pluginContext)
 
     jvmBackendContext =
       createJvmBackendContext(state, compilerConfiguration, moduleFragment, pluginContext)
-    val j2clBackendContext = J2clBackendContext(jvmBackendContext)
+    intrinsics = IntrinsicMethods(pluginContext.irBuiltIns)
+
+    val j2clBackendContext = J2clBackendContext(jvmBackendContext, intrinsics)
 
     // TODO(b/264284345): remove this pass when the bug is fixed.
     // Detect deserialized orphaned IR nodes due to b/264284345 and assign them a parent.
@@ -286,7 +290,7 @@ private fun createJvmBackendContext(
     irSerializer = null,
     irDeserializer = JvmIrDeserializerImpl(),
     irProviders = emptyList<IrProvider>(),
-    irPluginContext = null,
+    irPluginContext = pluginContext,
   )
 
 /**

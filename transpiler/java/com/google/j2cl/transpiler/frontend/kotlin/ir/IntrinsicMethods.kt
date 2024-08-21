@@ -14,13 +14,12 @@
  * the License.
  */
 @file:Suppress("JAVA_MODULE_DOES_NOT_DEPEND_ON_MODULE")
+@file:OptIn(UnsafeDuringIrConstructionAPI::class)
 
-package com.google.j2cl.transpiler.frontend.kotlin
+package com.google.j2cl.transpiler.frontend.kotlin.ir
 
 import com.google.j2cl.transpiler.ast.BinaryOperator
 import com.google.j2cl.transpiler.ast.PrefixOperator
-import com.google.j2cl.transpiler.frontend.kotlin.ir.isArrayType
-import com.google.j2cl.transpiler.frontend.kotlin.ir.nonNullFqn
 import org.jetbrains.kotlin.builtins.StandardNames
 import org.jetbrains.kotlin.ir.IrBuiltIns
 import org.jetbrains.kotlin.ir.declarations.IrClass
@@ -32,15 +31,16 @@ import org.jetbrains.kotlin.ir.symbols.IrClassifierSymbol
 import org.jetbrains.kotlin.ir.symbols.IrConstructorSymbol
 import org.jetbrains.kotlin.ir.symbols.IrFunctionSymbol
 import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
-import org.jetbrains.kotlin.ir.types.IrType
+import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.types.classFqName
-import org.jetbrains.kotlin.ir.types.classifierOrNull
 import org.jetbrains.kotlin.ir.util.constructors
 import org.jetbrains.kotlin.ir.util.defaultType
+import org.jetbrains.kotlin.ir.util.isEnumClass
 import org.jetbrains.kotlin.ir.util.isFileClass
 import org.jetbrains.kotlin.ir.util.kotlinFqName
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
 import org.jetbrains.kotlin.name.FqName
+import org.jetbrains.kotlin.name.Name
 
 /**
  * KotlinC uses intrinsics methods for representing some specific operations. The implementations of
@@ -88,15 +88,12 @@ class IntrinsicMethods(val irBuiltIns: IrBuiltIns) {
 
   // Contains the set of all symbols corresponding to the different arrayOf functions.
   // e.g. [arrayOf, intArrayOf, booleanArrayOf...]
-  private val arrayOfSymbolKeys =
-    buildSet<Key> {
-      add(Key(kotlinFqn, "arrayOf", listOf(arrayFqn)))
-      irBuiltIns.primitiveTypesToPrimitiveArrays.forEach { (primitive, primitiveArray) ->
-        add(
-          Key(kotlinFqn, "${primitive.name.lowercase()}ArrayOf", listOf(primitiveArray.nonNullFqn))
-        )
-      }
+  private val arrayOfSymbolKeys = buildSet {
+    add(Key(kotlinFqn, "arrayOf", listOf(arrayFqn)))
+    irBuiltIns.primitiveTypesToPrimitiveArrays.forEach { (primitive, primitiveArray) ->
+      add(Key(kotlinFqn, "${primitive.name.lowercase()}ArrayOf", listOf(primitiveArray.fqnOrFail)))
     }
+  }
 
   fun isArrayOf(irCall: IrCall): Boolean {
     return irCall.symbol.toKey() in arrayOfSymbolKeys
@@ -150,6 +147,21 @@ class IntrinsicMethods(val irBuiltIns: IrBuiltIns) {
 
   fun isRangeUntil(irCall: IrCall): Boolean =
     irCall.symbol.toKey() in rangeUntilCallByIntrinsicSymbolKey
+
+  private val enumEntriesKey = Key(FqName("kotlin.enums"), "enumEntriesIntrinsic")
+
+  fun isEnumEntries(irCall: IrCall): Boolean = irCall.symbol.toKey() == enumEntriesKey
+
+  private val enumGetEntriesName = Name.special("<get-entries>")
+
+  fun isEnumGetEntries(irCall: IrCall): Boolean =
+    with(irCall.symbol.owner) {
+      name == enumGetEntriesName &&
+        parentClassOrNull?.isEnumClass == true &&
+        dispatchReceiverParameter == null &&
+        extensionReceiverParameter == null &&
+        valueParameters.isEmpty()
+    }
 
   private val prefixOperatorByIntrinsicSymbolKey =
     (mapPrefixOperation("not", PrefixOperator.COMPLEMENT) +
@@ -216,7 +228,7 @@ class IntrinsicMethods(val irBuiltIns: IrBuiltIns) {
     // The code below creates the mappings for the methods and all possible overloads.
     return applicableClasses.flatMap { leftSide ->
       applicableClasses.map { rightSide ->
-        Key(leftSide.nonNullFqn, methodName, listOf(rightSide.nonNullFqn)) to binaryOperator
+        Key(leftSide.fqnOrFail, methodName, listOf(rightSide.fqnOrFail)) to binaryOperator
       }
     }
   }
@@ -243,7 +255,7 @@ class IntrinsicMethods(val irBuiltIns: IrBuiltIns) {
     // The method we want to map is defined on each class of {@code applicableClasses}, hence
     // create a map for each of the variants.
     return applicableClasses.map { operand ->
-      Key(operand.nonNullFqn, methodName, listOf()) to prefixOperator
+      Key(operand.fqnOrFail, methodName, listOf()) to prefixOperator
     }
   }
 
@@ -284,7 +296,7 @@ class IntrinsicMethods(val irBuiltIns: IrBuiltIns) {
     methodName: String,
   ): List<Key> =
     leftSide.flatMap { left ->
-      rightSide.map { right -> Key(left.nonNullFqn, methodName, listOf(right.nonNullFqn)) }
+      rightSide.map { right -> Key(left.fqnOrFail, methodName, listOf(right.fqnOrFail)) }
     }
 
   private data class Key(
@@ -302,7 +314,7 @@ class IntrinsicMethods(val irBuiltIns: IrBuiltIns) {
         parent is IrClass && parent.isFileClass ->
           (parent.parent as IrPackageFragment).packageFqName
         // For instance method, use the fqn of the enclosing class.
-        parent is IrClass -> parent.symbol.nonNullFqn
+        parent is IrClass -> parent.symbol.fqnOrFail
         // Some intrinsic methods are not defined in a file and their direct parent is the package
         // they belong to.
         parent is IrPackageFragment -> parent.packageFqName
@@ -318,7 +330,7 @@ class IntrinsicMethods(val irBuiltIns: IrBuiltIns) {
 }
 
 private fun getParameterTypeFqName(irValueParameter: IrValueParameter): FqName =
-  irValueParameter.type.fullyQualifiedName
+  irValueParameter.type.fqnOrFail
 
 private fun IrCall.isArrayMethodCall(methodName: String): Boolean {
   val callee = symbol.owner
@@ -326,7 +338,3 @@ private fun IrCall.isArrayMethodCall(methodName: String): Boolean {
 
   return calleeEnclosingType.isArrayType() && callee.name.asString() == methodName
 }
-
-// TODO(dramaix): move shared extension functions to a file named IrUtils.kt
-internal val IrType.fullyQualifiedName: FqName
-  get() = checkNotNull(classifierOrNull?.nonNullFqn) { "Fqn not available for this type [$this]" }
