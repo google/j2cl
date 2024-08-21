@@ -1196,16 +1196,6 @@ class JavaEnvironment {
 
     PackageInfoCache packageInfoCache = PackageInfoCache.get();
 
-    boolean isFromSource = ((ClassSymbol) typeElement).classfile == null;
-    if (isFromSource) {
-      TypeElement topLevelTypeBinding = toTopLevelTypeBinding(typeElement);
-      // Let the PackageInfoCache know that this class is Source, otherwise it would have to rummage
-      // around in the class path to figure it out and it might even come up with the wrong answer
-      // for example if this class has also been globbed into some other library that is a
-      // dependency of this one.
-      PackageInfoCache.get().markAsSource(getBinaryNameFromTypeBinding(topLevelTypeBinding));
-    }
-
     // Compute these first since they're reused in other calculations.
     String packageName = getPackageOf(typeElement).getQualifiedName().toString();
     boolean isAbstract = isAbstract(typeElement) && !isInterface(typeElement);

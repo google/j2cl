@@ -1276,7 +1276,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       boolean isNullMarked = isNullMarked(javacUnit);
       PackageInfoCache.get()
           .setPackageProperties(
-              PackageInfoCache.SOURCE_CLASS_PATH_ENTRY,
               packageName,
               packageJsNamespace,
               // TODO(b/135123615): need to support ObjectiveCName extraction.

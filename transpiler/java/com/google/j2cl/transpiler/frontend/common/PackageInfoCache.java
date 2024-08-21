@@ -20,9 +20,7 @@ import static com.google.common.base.Preconditions.checkState;
 import static java.util.Arrays.stream;
 
 import com.google.auto.value.AutoValue;
-import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Iterables;
-import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2objc.annotations.ObjectiveCName;
@@ -42,16 +40,6 @@ import org.jspecify.annotations.NullMarked;
 /**
  * A cache for information on package-info files that are needed for transpilation, like JsInterop
  * annotations.
- *
- * <p>The cached information comes from two sources. It can either be extracted from previously
- * compiled package-info.class files in the classpath or from package-info.java sources that are
- * part of the current compile.
- *
- * <p>Requests are answered against the package-info file in the same package and same class path
- * entry as the queried about type. To do anything else would lead to inconsistent answers when
- * multiple class path entries contain the same packages but with different package info files,
- * depending on what arbitrary set of class path entries do or do not happen to be included in the
- * current compile.
  */
 public class PackageInfoCache {
 
@@ -88,8 +76,6 @@ public class PackageInfoCache {
     }
   }
 
-  public static final String SOURCE_CLASS_PATH_ENTRY = "[source]";
-
   /**
    * When nothing is known about a particular package in a particular class path entry the answers
    * to questions about package properties are taken from this instance.
@@ -98,11 +84,6 @@ public class PackageInfoCache {
 
   /** Allows for the initialization/retrieval of one shared PackageInfoCache instance per thread. */
   private static final ThreadLocal<PackageInfoCache> packageInfoCacheStorage = new ThreadLocal<>();
-
-  @VisibleForTesting
-  public static void clear() {
-    packageInfoCacheStorage.remove();
-  }
 
   public static PackageInfoCache get() {
     return checkNotNull(packageInfoCacheStorage.get());
@@ -133,21 +114,14 @@ public class PackageInfoCache {
     URLClassLoader resourcesClassLoader =
         new URLClassLoader(Iterables.toArray(classPathUrls, URL.class), null);
 
-    packageInfoCacheStorage.set(new PackageInfoCache(resourcesClassLoader, problems));
+    packageInfoCacheStorage.set(new PackageInfoCache(resourcesClassLoader));
   }
 
-  private static String toSpecificPackagePath(String classPathEntry, String packagePath) {
-    return classPathEntry + ":" + packagePath;
-  }
-
-  private final Problems problems;
-  private final Map<String, PackageReport> packageReportBySpecificPackagePath = new HashMap<>();
   private final Map<String, PackageReport> packageReportByTypeName = new HashMap<>();
   private final ClassLoader resourcesClassLoader;
 
-  private PackageInfoCache(ClassLoader resourcesClassLoader, Problems problems) {
+  private PackageInfoCache(ClassLoader resourcesClassLoader) {
     this.resourcesClassLoader = resourcesClassLoader;
-    this.problems = problems;
   }
 
   /**
@@ -170,28 +144,9 @@ public class PackageInfoCache {
     return getPackageReport(topLevelTypeSourceName).isNullMarked();
   }
 
-  /**
-   * Let the PackageInfoCache know that this class is Source, otherwise it would have to rummage
-   * around in the class path to figure it out and it might even come up with the wrong answer. For
-   * example if this class has also been globbed into some other library that is a dependency of
-   * this one.
-   */
-  public void markAsSource(String topLevelTypeSourceName) {
-    propagateSpecificInfo(SOURCE_CLASS_PATH_ENTRY, topLevelTypeSourceName);
-  }
-
-  /**
-   * Specify the JavaScript namespace and whether it defines a null marked scope for a given package
-   * (as identified by the combination of class path entry and package path).
-   */
   public void setPackageProperties(
-      String classPathEntry,
-      String packagePath,
-      String packageJsNamespace,
-      String objectiveCName,
-      boolean isNullMarked) {
-    setReportForPackage(
-        classPathEntry,
+      String packagePath, String packageJsNamespace, String objectiveCName, boolean isNullMarked) {
+    packageReportByTypeName.put(
         packagePath,
         PackageReport.newBuilder()
             .setJsNamespace(packageJsNamespace)
@@ -200,111 +155,33 @@ public class PackageInfoCache {
             .build());
   }
 
-  @SuppressWarnings({"resource", "unused"})
-  private Annotation[] findBytecodePackageAnnotations(String classPathEntry, String packagePath) {
-    checkNotNull(classPathEntry);
-    String packageInfoRelativeFilePath =
-        OutputUtils.getPackageRelativePath(packagePath, "package-info.class");
+  private PackageReport getPackageReport(String packagePath) {
+    return packageReportByTypeName.computeIfAbsent(packagePath, this::parsePackageInfo);
+  }
+
+  private PackageReport parsePackageInfo(String packagePath) {
+    Annotation[] packageAnnotations = findBytecodePackageAnnotations(packagePath);
+    if (packageAnnotations == null) {
+      return DEFAULT_PACKAGE_REPORT;
+    } else {
+      return PackageReport.newBuilder()
+          .setJsNamespace(getPackageJsNamespace(packageAnnotations))
+          .setObjectiveCName(getPackageObjectiveCName(packageAnnotations))
+          .setNullMarked(hasNullMarkedAnnotation(packageAnnotations))
+          .build();
+    }
+  }
+
+  private Annotation[] findBytecodePackageAnnotations(String packagePath) {
     String packageInfoSourceName = packagePath + ".package-info";
-
-    Annotation[] annotations = {};
+    Annotation[] annotations = null;
     try {
-      URLClassLoader entryClassLoader =
-          new URLClassLoader(new URL[] {new URL(classPathEntry)}, resourcesClassLoader);
-
-      // This find does not recurse up the class loader parent chain. We want to know if *exactly*
-      // this class path entry contains the package-info class.
-      URL packageInfoResource = entryClassLoader.findResource(packageInfoRelativeFilePath);
-      if (packageInfoResource == null) {
-        return annotations;
-      }
-
-      // This load *does* recurse up the class loader parent chain and this is important to be able
-      // to load the annotations that are referenced. They are almost certain to not be available in
-      // just the particular target class path entry.
-      Class<?> packageInfoClass = entryClassLoader.loadClass(packageInfoSourceName);
+      Class<?> packageInfoClass = resourcesClassLoader.loadClass(packageInfoSourceName);
       annotations = packageInfoClass.getAnnotations();
-    } catch (ClassNotFoundException e) {
-      problems.fatal(FatalError.PACKAGE_INFO_PARSE, packageInfoRelativeFilePath);
-    } catch (MalformedURLException e) {
-      problems.fatal(FatalError.CLASS_PATH_URL, classPathEntry);
+    } catch (ClassNotFoundException ignored) {
+      // No package-info file in the classpath.
     }
     return annotations;
-  }
-
-  /** Returns the first classpath entry that provides class file for the given type. */
-  @Nullable
-  private String findOriginClassPathEntry(String typeName) {
-    String classFilePath = typeName.replace('.', '/') + ".class";
-
-    URL typeResource = resourcesClassLoader.getResource(classFilePath);
-    if (typeResource == null) {
-      return null;
-    } else {
-      if (typeResource.getProtocol().equals("jrt")) {
-        // Java 9 SDK url, ignore for now.
-        // TODO(rluble): revisit when compiling under -source 9.
-        return null;
-      }
-      String resourcePath = typeResource.getFile();
-      String originClassPathEntry =
-          resourcePath.substring(0, resourcePath.length() - classFilePath.length());
-      if (originClassPathEntry.endsWith("/")) {
-        originClassPathEntry = originClassPathEntry.substring(0, originClassPathEntry.length() - 1);
-      }
-      if (originClassPathEntry.endsWith("!")) {
-        originClassPathEntry = originClassPathEntry.substring(0, originClassPathEntry.length() - 1);
-      }
-      return originClassPathEntry;
-    }
-  }
-
-  private String getPackage(String topLevelTypeSourceName) {
-    int lastDotIndex = topLevelTypeSourceName.lastIndexOf(".");
-    if (lastDotIndex == -1) {
-      return topLevelTypeSourceName;
-    }
-    return topLevelTypeSourceName.substring(0, lastDotIndex);
-  }
-
-  private PackageReport getPackageReport(String topLevelTypeSourceName) {
-    if (packageReportByTypeName.containsKey(topLevelTypeSourceName)) {
-      return packageReportByTypeName.get(topLevelTypeSourceName);
-    }
-
-    String originClassPathEntry = findOriginClassPathEntry(topLevelTypeSourceName);
-    String packagePath = getPackage(topLevelTypeSourceName);
-    String specificPackagePath = toSpecificPackagePath(originClassPathEntry, packagePath);
-
-    if (originClassPathEntry == null) {
-      return DEFAULT_PACKAGE_REPORT;
-    }
-
-    if (!packageReportBySpecificPackagePath.containsKey(specificPackagePath)) {
-      parsePackageInfo(originClassPathEntry, packagePath, topLevelTypeSourceName);
-    }
-
-    if (packageReportBySpecificPackagePath.containsKey(specificPackagePath)) {
-      PackageReport packageReport = packageReportBySpecificPackagePath.get(specificPackagePath);
-      packageReportByTypeName.put(topLevelTypeSourceName, packageReport);
-      return packageReport;
-    }
-
-    return DEFAULT_PACKAGE_REPORT;
-  }
-
-  private void parsePackageInfo(
-      String classPathEntry, String packagePath, String topLevelTypeSourceName) {
-    
-    Annotation[] packageAnnotations = findBytecodePackageAnnotations(classPathEntry, packagePath);
-
-    setPackageProperties(
-        classPathEntry,
-        packagePath,
-        getPackageJsNamespace(packageAnnotations),
-        getPackageObjectiveCName(packageAnnotations),
-        hasNullMarkedAnnotation(packageAnnotations));
-    propagateSpecificInfo(classPathEntry, topLevelTypeSourceName);
   }
 
   @Nullable
@@ -353,28 +230,5 @@ public class PackageInfoCache {
         .filter(a -> a.annotationType().getName().equals(annotationClass.getName()))
         .findFirst()
         .orElse(null);
-  }
-
-  /**
-   * Propagate cached info about a specific package path (which is a combination of a class path
-   * entry and a package path) to apply to an exact type name. This saves the cost of needing to do
-   * an origin class path check on the given type every time info about it is requested.
-   */
-  private void propagateSpecificInfo(String classPathEntry, String topLevelTypeSourceName) {
-    PackageReport packageReport =
-        packageReportBySpecificPackagePath.getOrDefault(
-            toSpecificPackagePath(classPathEntry, getPackage(topLevelTypeSourceName)),
-            DEFAULT_PACKAGE_REPORT);
-
-    packageReportByTypeName.put(topLevelTypeSourceName, packageReport);
-  }
-
-  private void setReportForPackage(
-      String classPathEntry, String packagePath, PackageReport packageReport) {
-    if (packageReport == null) {
-      packageReport = DEFAULT_PACKAGE_REPORT;
-    }
-    String specificPackagePath = toSpecificPackagePath(classPathEntry, packagePath);
-    packageReportBySpecificPackagePath.put(specificPackagePath, packageReport);
   }
 }
