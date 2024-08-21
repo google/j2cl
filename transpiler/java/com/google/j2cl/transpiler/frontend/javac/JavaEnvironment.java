@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.frontend.javac;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.HAS_NO_SIDE_EFFECTS_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.UNCHECKED_CAST_ANNOTATION_NAME;
@@ -113,9 +114,8 @@ class JavaEnvironment {
   }
 
   private void initWellKnownTypes(Collection<String> wellKnownQualifiedBinaryNames) {
-    if (TypeDescriptors.isInitialized()) {
-      return;
-    }
+    checkState(!TypeDescriptors.isInitialized());
+
     TypeDescriptors.SingletonBuilder builder = new TypeDescriptors.SingletonBuilder();
     // Add well-known, non-primitive types.
     wellKnownQualifiedBinaryNames.forEach(

@@ -999,9 +999,8 @@ public class JdtEnvironment {
   }
 
   public void initWellKnownTypes(Iterable<ITypeBinding> typesToResolve) {
-    if (TypeDescriptors.isInitialized()) {
-      return;
-    }
+    checkState(!TypeDescriptors.isInitialized());
+
     TypeDescriptors.SingletonBuilder builder = new TypeDescriptors.SingletonBuilder();
     // Add well-known reference types.`
     createDescriptorsFromBindings(typesToResolve).forEach(builder::addReferenceType);

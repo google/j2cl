@@ -182,9 +182,7 @@ class KotlinEnvironment(
   }
 
   private fun initWellKnownTypes() {
-    if (TypeDescriptors.isInitialized()) {
-      return
-    }
+    check(!TypeDescriptors.isInitialized())
 
     val builder = SingletonBuilder()
 
