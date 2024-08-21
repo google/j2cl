@@ -562,7 +562,12 @@ class KotlinEnvironment(
     val resolvedSymbol = builtinsResolver.resolveFunctionSymbol(irFunction.symbol)
     if (resolvedSymbol != irFunction.symbol)
       return getDeclaredMethodDescriptor(resolvedSymbol.owner)
-    val enclosingTypeDescriptor = getEnclosingTypeDescriptor(irFunction)!!
+
+    val enclosingTypeDescriptor =
+      checkNotNull(getEnclosingTypeDescriptor(irFunction)) {
+        "No enclosing type for ${irFunction.dump()}"
+      }
+
     val isConstructor = irFunction is IrConstructor
     val parameterDescriptors = ImmutableList.builder<MethodDescriptor.ParameterDescriptor>()
 
