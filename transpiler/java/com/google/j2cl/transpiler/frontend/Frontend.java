@@ -23,8 +23,6 @@ import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.frontend.common.PackageInfoCache;
 import com.google.j2cl.transpiler.frontend.javac.JavacParser;
 import com.google.j2cl.transpiler.frontend.jdt.CompilationUnitBuilder;
-import com.google.j2cl.transpiler.frontend.jdt.CompilationUnitsAndTypeBindings;
-import com.google.j2cl.transpiler.frontend.jdt.JdtParser;
 import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.List;
@@ -34,14 +32,13 @@ public enum Frontend {
   JDT {
     @Override
     public List<CompilationUnit> compile(FrontendOptions options, Problems problems) {
-      JdtParser parser = new JdtParser(options.getClasspaths(), problems);
-      CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings =
-          parser.parseFiles(
-              options.getSources(),
-              /* useTargetPath= */ options.getGenerateKytheIndexingMetadata(),
-              options.getForbiddenAnnotations());
-      problems.abortIfHasErrors();
-      return CompilationUnitBuilder.build(compilationUnitsAndTypeBindings, parser);
+      // TODO(goktug): Create a frontend entry point consistent with the other frontends.
+      return CompilationUnitBuilder.build(
+          options.getClasspaths(),
+          options.getSources(),
+          /* useTargetPath= */ options.getGenerateKytheIndexingMetadata(),
+          options.getForbiddenAnnotations(),
+          problems);
     }
 
     @Override

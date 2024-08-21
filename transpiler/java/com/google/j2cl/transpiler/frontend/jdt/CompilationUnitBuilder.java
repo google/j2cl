@@ -26,7 +26,9 @@ import static java.util.stream.Collectors.toList;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.common.FilePosition;
+import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
+import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.transpiler.ast.ArrayAccess;
 import com.google.j2cl.transpiler.ast.ArrayCreationReference;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
@@ -1426,7 +1428,20 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   public static List<CompilationUnit> build(
-      CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings, JdtParser jdtParser) {
+      List<String> classpaths,
+      List<FileInfo> filePaths,
+      boolean useTargetPath,
+      List<String> forbiddenAnnotations,
+      Problems problems) {
+    JdtParser jdtParser = new JdtParser(classpaths, problems);
+    CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings =
+        jdtParser.parseFiles(
+            filePaths,
+            useTargetPath,
+            forbiddenAnnotations,
+            TypeDescriptors.getWellKnownTypeNames());
+    problems.abortIfHasErrors();
+
     JdtEnvironment environment =
         new JdtEnvironment(
             PackageAnnotationsResolver.create(

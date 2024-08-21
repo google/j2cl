@@ -20,7 +20,6 @@ import com.google.common.collect.Iterables;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourceUtils.FileInfo;
-import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -61,13 +60,6 @@ public class JdtParser {
 
     this.classpathEntries = ImmutableList.copyOf(classpathEntries);
     this.problems = problems;
-  }
-
-  /** Returns a map from file paths to compilation units after JDT parsing. */
-  public CompilationUnitsAndTypeBindings parseFiles(
-      List<FileInfo> filePaths, boolean useTargetPath, List<String> forbiddenAnnotations) {
-    return parseFiles(
-        filePaths, useTargetPath, forbiddenAnnotations, TypeDescriptors.getWellKnownTypeNames());
   }
 
   /** Returns a map from file paths to compilation units after JDT parsing. */
@@ -136,10 +128,7 @@ public class JdtParser {
   @Nullable
   public ITypeBinding resolveBinding(String qualifiedBinaryName) {
     List<ITypeBinding> bindings = resolveBindings(ImmutableList.of(qualifiedBinaryName));
-    if (bindings.isEmpty()) {
-      return null;
-    }
-    return Iterables.getOnlyElement(bindings);
+    return Iterables.getOnlyElement(bindings, null);
   }
 
   private ASTParser newASTParser() {

@@ -71,7 +71,7 @@ public final class PackageAnnotationsResolver {
       return Stream.of();
     }
 
-    var parsingResult = parser.parseFiles(sources, false, ImmutableList.of());
+    var parsingResult = parser.parseFiles(sources, false, ImmutableList.of(), ImmutableList.of());
     return parsingResult.getCompilationUnitsByFilePath().values().stream();
   }
 
