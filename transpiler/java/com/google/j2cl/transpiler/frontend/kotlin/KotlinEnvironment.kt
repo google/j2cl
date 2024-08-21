@@ -36,6 +36,7 @@ import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.Visibility
 import com.google.j2cl.transpiler.frontend.jdt.PackageAnnotationsResolver
 import com.google.j2cl.transpiler.frontend.kotlin.ir.enumEntries
+import com.google.j2cl.transpiler.frontend.kotlin.ir.fromQualifiedBinaryName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getAllTypeParameters
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getJsEnumInfo
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getJsInfo
@@ -124,6 +125,7 @@ import org.jetbrains.kotlin.ir.util.packageFqName
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
 import org.jetbrains.kotlin.ir.util.resolveFakeOverrideMaybeAbstractOrFail
 import org.jetbrains.kotlin.ir.util.superTypes
+import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.FqNameUnsafe
 import org.jetbrains.kotlin.types.Variance
@@ -187,7 +189,7 @@ class KotlinEnvironment(
     val builder = SingletonBuilder()
 
     for (name in TypeDescriptors.getWellKnownTypeNames()) {
-      val typeDescriptor = getWellKnownTypeDescriptor(name.replace('$', '.'))
+      val typeDescriptor = getWellKnownTypeDescriptor(name)
       if (typeDescriptor != null) {
         builder.addReferenceType(typeDescriptor)
       }
@@ -196,11 +198,11 @@ class KotlinEnvironment(
     builder.buildSingleton()
   }
 
-  private fun getWellKnownTypeDescriptor(typeFqn: String): DeclaredTypeDescriptor? =
-    @OptIn(FirIncompatiblePluginAPI::class)
-    pluginContext.referenceClass(FqName(typeFqn))?.let {
+  private fun getWellKnownTypeDescriptor(qualifiedBinaryName: String): DeclaredTypeDescriptor? {
+    return pluginContext.referenceClass(ClassId.fromQualifiedBinaryName(qualifiedBinaryName))?.let {
       getDeclaredTypeDescriptor(it.defaultType.makeNullable())
     }
+  }
 
   internal fun getWellKnowMethodDescriptor(
     fnFqn: String,

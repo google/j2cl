@@ -17,6 +17,7 @@
 
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
+import com.google.j2cl.transpiler.frontend.kotlin.ir.fromQualifiedBinaryName
 import org.jetbrains.kotlin.backend.common.CompilationException
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
 import org.jetbrains.kotlin.backend.common.extensions.IrGenerationExtension
@@ -310,26 +311,26 @@ private fun preloadWellKnownSymbols(pluginContext: IrPluginContext) {
       StandardClassIds.CharRange,
       StandardClassIds.LongRange,
       StandardClassIds.IntRange,
-      ClassId.fromString("kotlin/ranges/UIntRange"),
-      ClassId.fromString("kotlin/ranges/ULongRange"),
-      ClassId.fromString("kotlin/ranges/CharProgression"),
-      ClassId.fromString("kotlin/ranges/IntProgression"),
-      ClassId.fromString("kotlin/ranges/LongProgression"),
-      ClassId.fromString("kotlin/ranges/UIntProgression"),
-      ClassId.fromString("kotlin/ranges/ULongProgression"),
-      ClassId.fromString("kotlin/ranges/UIntRange"),
+      ClassId.fromQualifiedBinaryName("kotlin.ranges.UIntRange"),
+      ClassId.fromQualifiedBinaryName("kotlin.ranges.ULongRange"),
+      ClassId.fromQualifiedBinaryName("kotlin.ranges.CharProgression"),
+      ClassId.fromQualifiedBinaryName("kotlin.ranges.IntProgression"),
+      ClassId.fromQualifiedBinaryName("kotlin.ranges.LongProgression"),
+      ClassId.fromQualifiedBinaryName("kotlin.ranges.UIntProgression"),
+      ClassId.fromQualifiedBinaryName("kotlin.ranges.ULongProgression"),
+      ClassId.fromQualifiedBinaryName("kotlin.ranges.UIntRange"),
 
       // Referenced by ArrayConstructorLowering.
-      ClassId.fromString("javaemul/internal/ArrayHelper"),
-      ClassId.fromString("kotlin/jvm/internal/BooleanArrayInitializer"),
-      ClassId.fromString("kotlin/jvm/internal/IntArrayInitializer"),
-      ClassId.fromString("kotlin/jvm/internal/LongArrayInitializer"),
-      ClassId.fromString("kotlin/jvm/internal/ShortArrayInitializer"),
-      ClassId.fromString("kotlin/jvm/internal/ByteArrayInitializer"),
-      ClassId.fromString("kotlin/jvm/internal/CharArrayInitializer"),
-      ClassId.fromString("kotlin/jvm/internal/DoubleArrayInitializer"),
-      ClassId.fromString("kotlin/jvm/internal/FloatArrayInitializer"),
-      ClassId.fromString("kotlin/jvm/internal/ArrayInitializer"),
+      ClassId.fromQualifiedBinaryName("javaemul.internal.ArrayHelper"),
+      ClassId.fromQualifiedBinaryName("kotlin.jvm.internal.BooleanArrayInitializer"),
+      ClassId.fromQualifiedBinaryName("kotlin.jvm.internal.IntArrayInitializer"),
+      ClassId.fromQualifiedBinaryName("kotlin.jvm.internal.LongArrayInitializer"),
+      ClassId.fromQualifiedBinaryName("kotlin.jvm.internal.ShortArrayInitializer"),
+      ClassId.fromQualifiedBinaryName("kotlin.jvm.internal.ByteArrayInitializer"),
+      ClassId.fromQualifiedBinaryName("kotlin.jvm.internal.CharArrayInitializer"),
+      ClassId.fromQualifiedBinaryName("kotlin.jvm.internal.DoubleArrayInitializer"),
+      ClassId.fromQualifiedBinaryName("kotlin.jvm.internal.FloatArrayInitializer"),
+      ClassId.fromQualifiedBinaryName("kotlin.jvm.internal.ArrayInitializer"),
     )
   for (classId in classesToPreload) {
     pluginContext.referenceClass(classId)

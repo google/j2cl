@@ -17,10 +17,10 @@
 
 package com.google.j2cl.transpiler.frontend.kotlin
 
+import com.google.j2cl.transpiler.frontend.kotlin.ir.fromQualifiedBinaryName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isArrayType
 import com.google.j2cl.transpiler.frontend.kotlin.ir.javaName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.nonNullFqn
-import org.jetbrains.kotlin.backend.common.extensions.FirIncompatiblePluginAPI
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
 import org.jetbrains.kotlin.backend.jvm.ir.erasedUpperBound
@@ -44,7 +44,7 @@ import org.jetbrains.kotlin.name.FqNameUnsafe
 
 internal class BuiltinsResolver(
   private val pluginContext: IrPluginContext,
-  private val jvmbackendContext: JvmBackendContext
+  private val jvmbackendContext: JvmBackendContext,
 ) {
   fun resolveFunctionSymbol(irFunctionSymbol: IrFunctionSymbol): IrFunctionSymbol {
     val resolvedClass =
@@ -108,8 +108,7 @@ internal class BuiltinsResolver(
     val fqName = irClassSymbol.owner.kotlinFqName.toUnsafe()
     val mappedClassId =
       mapToIntrinsicImplementation(fqName) ?: mapKotlinToJava(fqName) ?: return null
-    @OptIn(FirIncompatiblePluginAPI::class)
-    val resolvedClass = pluginContext.referenceClass(mappedClassId.asSingleFqName()) ?: return null
+    val resolvedClass = pluginContext.referenceClass(mappedClassId) ?: return null
     check(resolvedClass.isBound) {
       "Resolved class to unbound symbol, originally: ${irClassSymbol.owner.render()}"
     }
@@ -141,9 +140,7 @@ private fun mapKotlinToJava(kotlinFqName: FqNameUnsafe): ClassId? {
 }
 
 private val intrinsicImplementations =
-  mapOf(
-    "kotlin.Nothing" to ClassId.fromString("kotlin.jvm.internal.NothingStub"),
-  )
+  mapOf("kotlin.Nothing" to ClassId.fromQualifiedBinaryName("kotlin.jvm.internal.NothingStub"))
 
 private fun mapToIntrinsicImplementation(kotlinFqName: FqNameUnsafe): ClassId? =
   intrinsicImplementations[kotlinFqName.asString()]
