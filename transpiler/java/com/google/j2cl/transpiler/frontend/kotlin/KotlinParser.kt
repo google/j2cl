@@ -22,7 +22,6 @@ import com.google.j2cl.common.SourceUtils.FileInfo
 import com.google.j2cl.transpiler.ast.CompilationUnit
 import com.google.j2cl.transpiler.frontend.jdt.JdtParser
 import com.google.j2cl.transpiler.frontend.jdt.PackageAnnotationsResolver
-import com.google.j2cl.transpiler.frontend.kotlin.BazelJarAutoFriends.addEligibleFriends
 import com.google.j2cl.transpiler.frontend.kotlin.lower.LoweringPasses
 import com.intellij.openapi.util.Disposer
 import java.io.File
@@ -85,7 +84,7 @@ class KotlinParser(
       KotlinCoreEnvironment.createForProduction(
         // TODO(b/243860591): The disposable needs to be disposed once the transpilation is done.
         Disposer.newDisposable(),
-        createCompilerConfiguration(sources),
+        createCompilerConfiguration(sources, currentTarget),
         EnvironmentConfigFiles.JVM_CONFIG_FILES,
       )
 
@@ -95,7 +94,7 @@ class KotlinParser(
 
     // Register friend modules so that we do not trigger visibility errors.
     ModuleVisibilityManager.SERVICE.getInstance(environment.project)
-      .addEligibleFriends(currentTarget, classpathEntries)
+      .addEligibleFriends(environment.configuration)
 
     // analyze() will return null if it failed analysis phase. Errors should have been collected
     // into Problems.
@@ -154,8 +153,11 @@ class KotlinParser(
     return compilationUnitBuilderExtension.compilationUnits
   }
 
-  private fun createCompilerConfiguration(sources: List<FileInfo>): CompilerConfiguration {
-    val arguments = createCompilerArguments(sources)
+  private fun createCompilerConfiguration(
+    sources: List<FileInfo>,
+    currentTarget: String?,
+  ): CompilerConfiguration {
+    val arguments = createCompilerArguments(sources, currentTarget)
     val configuration = CompilerConfiguration()
 
     val messageCollector = ProblemsMessageCollector(problems)
@@ -194,7 +196,7 @@ class KotlinParser(
     return configuration
   }
 
-  private fun createCompilerArguments(sources: List<FileInfo>) =
+  private fun createCompilerArguments(sources: List<FileInfo>, currentTarget: String?) =
     K2JVMCompilerArguments().also { arguments ->
       parseCommandLineArguments(kotlincopts, arguments)
       arguments.classpath = classpathEntries.joinToString(File.pathSeparator)
@@ -204,6 +206,8 @@ class KotlinParser(
           .map(FileInfo::sourcePath)
           .toTypedArray()
       arguments.freeArgs = sources.map(FileInfo::sourcePath)
+
+      arguments.setEligibleFriends(currentTarget)
     }
 
   private class ProblemsMessageCollector constructor(private val problems: Problems) :

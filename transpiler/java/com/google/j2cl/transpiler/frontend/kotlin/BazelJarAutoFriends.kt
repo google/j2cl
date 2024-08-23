@@ -22,29 +22,38 @@ import java.io.BufferedInputStream
 import java.nio.file.Files
 import java.nio.file.Path
 import java.util.jar.JarInputStream
+import org.jetbrains.kotlin.cli.common.arguments.K2JVMCompilerArguments
+import org.jetbrains.kotlin.config.CompilerConfiguration
+import org.jetbrains.kotlin.config.JVMConfigurationKeys
 import org.jetbrains.kotlin.load.kotlin.ModuleVisibilityManager
 
-internal object BazelJarAutoFriends {
+internal fun ModuleVisibilityManager.addEligibleFriends(configuration: CompilerConfiguration) {
+  val friendPaths = configuration.getList(JVMConfigurationKeys.FRIEND_PATHS)
+  for (path in friendPaths) {
+    this.addFriendPath(path)
+  }
+}
 
-  internal fun ModuleVisibilityManager.addEligibleFriends(
-    currentTarget: String?,
-    classPath: List<String>,
-  ) {
-    if (currentTarget == null) return
-    val currentLabel = BzlLabel.parseOrThrow(currentTarget)
-    loadLabels(classPath.map(Path::of)).forEach { (depPath, depLabel) ->
-      if (depLabel != null && AutoFriends.isEligibleFriend(currentLabel, depLabel)) {
-        addFriendPath(depPath.toString())
+internal fun K2JVMCompilerArguments.setEligibleFriends(currentTarget: String?) {
+  if (currentTarget == null) return
+
+  val currentLabel = BzlLabel.parseOrThrow(currentTarget)
+
+  this.friendPaths =
+    this.classpath
+      .orEmpty()
+      .split(":")
+      .filter {
+        val depPath = Path.of(it)
+        val depLabel = useManifestFast(depPath) { it.targetLabel } ?: return@filter false
+        AutoFriends.isEligibleFriend(currentLabel, depLabel)
       }
-    }
-  }
+      .toTypedArray()
+}
 
-  private fun loadLabels(classpath: List<Path>): Map<Path, BzlLabel?> {
-    return classpath.associateWith { path -> useManifestFast(path) { it.targetLabel } }
-  }
-
-  private fun <T> useManifestFast(path: Path, block: (KtManifest) -> T): T? {
-    return JarInputStream(BufferedInputStream(Files.newInputStream(path)), /* verify= */ false)
-      .use { jar -> jar.manifest?.let { block(KtManifest(it)) } }
+private fun <T> useManifestFast(path: Path, block: (KtManifest) -> T): T? {
+  return JarInputStream(BufferedInputStream(Files.newInputStream(path)), /* verify= */ false).use {
+    jar ->
+    jar.manifest?.let { block(KtManifest(it)) }
   }
 }
