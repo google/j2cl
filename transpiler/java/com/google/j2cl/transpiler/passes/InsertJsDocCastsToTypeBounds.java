@@ -92,7 +92,7 @@ public class InsertJsDocCastsToTypeBounds extends NormalizationPass {
               @Override
               public Expression rewriteTypeConversionContext(
                   TypeDescriptor inferredTypeDescriptor,
-                  TypeDescriptor actualTypeDescriptor,
+                  TypeDescriptor declaredTypeDescriptor,
                   Expression expression) {
                 return maybeAddJsDocAnnotation(inferredTypeDescriptor, expression);
               }

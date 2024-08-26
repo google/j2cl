@@ -38,7 +38,7 @@ public final class InsertCastsOnNullabilityMismatch extends NormalizationPass {
               @Override
               public Expression rewriteMemberQualifierContext(
                   TypeDescriptor inferredTypeDescriptor,
-                  TypeDescriptor actualTypeDescriptor,
+                  TypeDescriptor declaredTypeDescriptor,
                   Expression expression) {
                 return expression;
               }
@@ -46,7 +46,7 @@ public final class InsertCastsOnNullabilityMismatch extends NormalizationPass {
               @Override
               public Expression rewriteTypeConversionContext(
                   TypeDescriptor inferredTypeDescriptor,
-                  TypeDescriptor actualTypeDescriptor,
+                  TypeDescriptor declaredTypeDescriptor,
                   Expression expression) {
                 return needsCast(expression.getTypeDescriptor(), project(inferredTypeDescriptor))
                     ? CastExpression.newBuilder()

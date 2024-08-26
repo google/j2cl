@@ -46,17 +46,17 @@ public class InsertJsEnumBoxingAndUnboxingConversions extends NormalizationPass 
               @Override
               public Expression rewriteTypeConversionContext(
                   TypeDescriptor inferredTypeDescriptor,
-                  TypeDescriptor toDeclaredTypeDescriptor,
+                  TypeDescriptor declaredTypeDescriptor,
                   Expression expression) {
                 TypeDescriptor fromTypeDescriptor = expression.getDeclaredTypeDescriptor();
                 if (AstUtils.isNonNativeJsEnum(fromTypeDescriptor)
-                    && !AstUtils.isNonNativeJsEnum(toDeclaredTypeDescriptor)) {
+                    && !AstUtils.isNonNativeJsEnum(declaredTypeDescriptor)) {
                   return box(expression);
                 }
 
-                if (AstUtils.isNonNativeJsEnum(toDeclaredTypeDescriptor)
+                if (AstUtils.isNonNativeJsEnum(declaredTypeDescriptor)
                     && !AstUtils.isNonNativeJsEnum(fromTypeDescriptor)) {
-                  return unbox(toDeclaredTypeDescriptor, expression);
+                  return unbox(declaredTypeDescriptor, expression);
                 }
                 return expression;
               }

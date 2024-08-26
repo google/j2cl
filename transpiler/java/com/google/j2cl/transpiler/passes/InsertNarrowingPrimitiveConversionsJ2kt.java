@@ -40,16 +40,16 @@ public class InsertNarrowingPrimitiveConversionsJ2kt extends NormalizationPass {
               @Override
               public Expression rewriteTypeConversionContext(
                   TypeDescriptor inferredTypeDescriptor,
-                  TypeDescriptor actualTypeDescriptor,
+                  TypeDescriptor declaredTypeDescriptor,
                   Expression expression) {
                 TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
-                TypeDescriptor toTypeDescriptor = actualTypeDescriptor;
+                TypeDescriptor toTypeDescriptor = declaredTypeDescriptor;
 
                 if (!fromTypeDescriptor.isPrimitive()) {
                   return expression;
                 }
 
-                if (!actualTypeDescriptor.isPrimitive()) {
+                if (!declaredTypeDescriptor.isPrimitive()) {
                   return expression;
                 }
 

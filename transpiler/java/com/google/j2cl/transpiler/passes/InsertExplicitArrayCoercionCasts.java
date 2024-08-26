@@ -40,7 +40,7 @@ public class InsertExplicitArrayCoercionCasts extends NormalizationPass {
               @Override
               public Expression rewriteTypeConversionContext(
                   TypeDescriptor inferredTypeDescriptor,
-                  TypeDescriptor actualTypeDescriptor,
+                  TypeDescriptor declaredTypeDescriptor,
                   Expression expression) {
                 return needsCast(inferredTypeDescriptor, expression.getTypeDescriptor())
                     ? CastExpression.newBuilder()
@@ -53,13 +53,13 @@ public class InsertExplicitArrayCoercionCasts extends NormalizationPass {
               @Override
               public Expression rewriteMethodInvocationContext(
                   ParameterDescriptor inferredParameterDescriptor,
-                  ParameterDescriptor actualParameterDescriptor,
+                  ParameterDescriptor declaredParameterDescriptor,
                   Expression argument) {
                 // Don't rewrite vararg array literals.
-                return actualParameterDescriptor.isVarargs() && argument instanceof ArrayLiteral
+                return declaredParameterDescriptor.isVarargs() && argument instanceof ArrayLiteral
                     ? argument
                     : super.rewriteMethodInvocationContext(
-                        inferredParameterDescriptor, actualParameterDescriptor, argument);
+                        inferredParameterDescriptor, declaredParameterDescriptor, argument);
               }
             }));
   }

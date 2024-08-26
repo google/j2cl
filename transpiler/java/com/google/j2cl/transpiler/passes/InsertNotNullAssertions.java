@@ -49,7 +49,7 @@ public final class InsertNotNullAssertions extends NormalizationPass {
               @Override
               public Expression rewriteTypeConversionContext(
                   TypeDescriptor inferredTypeDescriptor,
-                  TypeDescriptor actualTypeDescriptor,
+                  TypeDescriptor declaredTypeDescriptor,
                   Expression expression) {
 
                 if (expression instanceof MethodCall
@@ -63,7 +63,7 @@ public final class InsertNotNullAssertions extends NormalizationPass {
 
                 return !TypeDescriptors.isJavaLangVoid(inferredTypeDescriptor)
                         && (!inferredTypeDescriptor.canBeNull()
-                            || !actualTypeDescriptor.canBeNull())
+                            || !declaredTypeDescriptor.canBeNull())
                     ? insertNotNullAssertionIfNeeded(getSourcePosition(), expression)
                     : expression;
               }
@@ -76,7 +76,7 @@ public final class InsertNotNullAssertions extends NormalizationPass {
               @Override
               public Expression rewriteNonNullTypeConversionContext(
                   TypeDescriptor inferredTypeDescriptor,
-                  TypeDescriptor actualTypeDescriptor,
+                  TypeDescriptor declaredTypeDescriptor,
                   Expression expression) {
                 return insertNotNullAssertionIfNeeded(getSourcePosition(), expression);
               }

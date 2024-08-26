@@ -51,7 +51,7 @@ public class InsertCastForLowerBounds extends NormalizationPass {
               @Override
               public Expression rewriteTypeConversionContext(
                   TypeDescriptor inferredTypeDescriptor,
-                  TypeDescriptor actualTypeDescriptor,
+                  TypeDescriptor declaredTypeDescriptor,
                   Expression expression) {
                 TypeDescriptor typeDescriptor = expression.getTypeDescriptor();
                 boolean needsCast =

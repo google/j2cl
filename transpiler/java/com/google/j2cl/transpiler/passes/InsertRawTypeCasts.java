@@ -32,7 +32,7 @@ public final class InsertRawTypeCasts extends NormalizationPass {
               @Override
               public Expression rewriteTypeConversionContext(
                   TypeDescriptor inferredTypeDescriptor,
-                  TypeDescriptor actualTypeDescriptor,
+                  TypeDescriptor declaredTypeDescriptor,
                   Expression expression) {
                 // "super" is not an expression in Kotlin (nor in Java). It can only be used
                 // directly as a qualifier, hence it can not be cast.

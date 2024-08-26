@@ -37,7 +37,7 @@ public class NormalizeNullLiterals extends NormalizationPass {
               @Override
               public Expression rewriteTypeConversionContext(
                   TypeDescriptor inferredTypeDescriptor,
-                  TypeDescriptor actualTypeDescriptor,
+                  TypeDescriptor declaredTypeDescriptor,
                   Expression expression) {
                 if (expression instanceof NullLiteral) {
                   if (AstUtils.isNonNativeJsEnum(inferredTypeDescriptor)) {

@@ -129,7 +129,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     @SuppressWarnings("unused")
     protected Expression rewriteTypeConversionContext(
         TypeDescriptor inferredTypeDescriptor,
-        TypeDescriptor actualTypeDescriptor,
+        TypeDescriptor declaredTypeDescriptor,
         Expression expression) {
       return expression;
     }
@@ -140,19 +140,22 @@ public final class ConversionContextVisitor extends AbstractRewriter {
      */
     protected Expression rewriteNonNullTypeConversionContext(
         TypeDescriptor inferredTypeDescriptor,
-        TypeDescriptor actualTypeDescriptor,
+        TypeDescriptor declaredTypeDescriptor,
         Expression expression) {
       return rewriteTypeConversionContext(
-          inferredTypeDescriptor.toNonNullable(), actualTypeDescriptor.toNonNullable(), expression);
+          inferredTypeDescriptor.toNonNullable(),
+          declaredTypeDescriptor.toNonNullable(),
+          expression);
     }
 
     /** An {@code expression} that has been assigned to a field or variable of a particular type. */
     protected Expression rewriteAssignmentContext(
         TypeDescriptor inferredTypeDescriptor,
-        TypeDescriptor actualTypeDescriptor,
+        TypeDescriptor declaredTypeDescriptor,
         Expression expression) {
       // Handle generically as a type conversion context.
-      return rewriteTypeConversionContext(inferredTypeDescriptor, actualTypeDescriptor, expression);
+      return rewriteTypeConversionContext(
+          inferredTypeDescriptor, declaredTypeDescriptor, expression);
     }
 
     /**
@@ -191,22 +194,22 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     /** An {@code expression} that is used as a qualifier of a member of a particular type. */
     protected Expression rewriteMemberQualifierContext(
         TypeDescriptor inferredTypeDescriptor,
-        TypeDescriptor actualTypeDescriptor,
+        TypeDescriptor declaredTypeDescriptor,
         Expression expression) {
       // Handle generically as a type conversion context.
       return rewriteNonNullTypeConversionContext(
-          inferredTypeDescriptor, actualTypeDescriptor, expression);
+          inferredTypeDescriptor, declaredTypeDescriptor, expression);
     }
 
     /** An {@code argument} that is passed to a method as a parameter. */
     protected Expression rewriteMethodInvocationContext(
         ParameterDescriptor inferredParameterDescriptor,
-        ParameterDescriptor actualParameterDescriptor,
+        ParameterDescriptor declaredParameterDescriptor,
         Expression argument) {
       // By default handle method invocation parameter passing like assignments.
       return rewriteTypeConversionContext(
           inferredParameterDescriptor.getTypeDescriptor(),
-          actualParameterDescriptor.getTypeDescriptor(),
+          declaredParameterDescriptor.getTypeDescriptor(),
           argument);
     }
 
