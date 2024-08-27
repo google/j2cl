@@ -336,8 +336,9 @@ private fun preloadWellKnownSymbols(pluginContext: IrPluginContext) {
       ClassId.fromQualifiedBinaryName("kotlin.jvm.internal.FloatArrayInitializer"),
       ClassId.fromQualifiedBinaryName("kotlin.jvm.internal.ArrayInitializer"),
     )
+
   for (classId in classesToPreload) {
-    pluginContext.referenceClass(classId)
+    checkNotNull(pluginContext.referenceClass(classId)) { "Class $classId not found." }
   }
 
   val functionsToPreload =
@@ -353,7 +354,13 @@ private fun preloadWellKnownSymbols(pluginContext: IrPluginContext) {
       FqName("kotlin.jvm.internal.toFloatArrayInitializer"),
       FqName("kotlin.jvm.internal.toArrayInitializer"),
     )
-  for (functionName in functionsToPreload) {
-    pluginContext.referenceFunctions(CallableId(functionName.parent(), functionName.shortName()))
+  for (function in functionsToPreload) {
+    check(
+      pluginContext
+        .referenceFunctions(CallableId(function.parent(), function.shortName()))
+        .isNotEmpty()
+    ) {
+      "Function $function not found."
+    }
   }
 }
