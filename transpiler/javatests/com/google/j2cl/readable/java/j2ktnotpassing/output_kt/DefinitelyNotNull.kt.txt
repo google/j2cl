@@ -21,6 +21,7 @@ import javaemul.lang.*
 import java.lang.RuntimeException
 import kotlin.Any
 import kotlin.OptIn
+import kotlin.String
 import kotlin.Suppress
 import kotlin.collections.MutableIterable
 import kotlin.experimental.ExperimentalObjCName
@@ -30,6 +31,20 @@ import kotlin.native.ObjCName
 
 @ObjCName("J2ktJ2ktnotpassingDefinitelyNotNull", exact = true)
 open class DefinitelyNotNull {
+ @ObjCName("J2ktJ2ktnotpassingDefinitelyNotNullCompanion", exact = true)
+ companion object {
+  @JvmStatic
+  internal fun testNotNullSupplier_pp_j2ktnotpassing(supplier: DefinitelyNotNull.NotNullSupplier<out String?>): String {
+   return (supplier as DefinitelyNotNull.NotNullSupplier<String?>).getNotNull()
+  }
+ }
+
+ @ObjCName("J2ktJ2ktnotpassingDefinitelyNotNull_NotNullSupplier", exact = true)
+ fun interface NotNullSupplier<T> {
+  @ObjCName("getNotNull")
+  fun getNotNull(): T & Any
+ }
+
  @ObjCName("J2ktJ2ktnotpassingDefinitelyNotNull_Ordering", exact = true)
  open class Ordering<T> internal constructor() {
   internal open fun <S: T> reverse_pp_j2ktnotpassing(): DefinitelyNotNull.Ordering<S> {
