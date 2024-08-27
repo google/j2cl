@@ -27,6 +27,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors.BootstrapType;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.OptionalInt;
@@ -165,6 +166,28 @@ public final class RuntimeMethods {
                     TypeDescriptors.get().javaLangString,
                     TypeDescriptors.get().javaLangString))
         .setArguments(left, right)
+        .build();
+  }
+
+  public static MethodCall createStringFromWasmArrayMethodCall(char[] value) {
+    List<Expression> arrayInitializers = new ArrayList<>();
+    for (var c : value) {
+      arrayInitializers.add(NumberLiteral.fromChar(c));
+    }
+
+    // Use the imprecise getMethodDescriptorByName to avoid having the internal type used in the
+    // api as a known type descriptor.
+    MethodDescriptor stringCreator =
+        TypeDescriptors.get().javaLangString.getMethodDescriptorByName("fromNativeCharArray");
+    return MethodCall.Builder.from(stringCreator)
+        .setArguments(
+            new ArrayLiteral(
+                ArrayTypeDescriptor.newBuilder()
+                    .setComponentTypeDescriptor(PrimitiveTypes.CHAR)
+                    .setMarkedAsNativeWasmArray(true)
+                    .build(),
+                arrayInitializers),
+            NumberLiteral.fromInt(arrayInitializers.size()))
         .build();
   }
 

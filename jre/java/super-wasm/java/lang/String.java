@@ -737,6 +737,14 @@ public final class String implements Comparable<String>, CharSequence, Serializa
     return new String(nativeConcat(str1.value, str2.value));
   }
 
+  // Needed to be able to pass a native wasm i32 array to a non native method.
+  @Wasm("$char.array")
+  private interface CharArrayRef {}
+
+  static String fromNativeCharArray(CharArrayRef x, int length) {
+    return new String(nativeFromCharCodeArray(x, 0, length));
+  }
+
   static String fromJsString(NativeString o) {
     return o == null ? null : new String(o);
   }
@@ -786,6 +794,9 @@ public final class String implements Comparable<String>, CharSequence, Serializa
 
   @Wasm("string.new_wtf16_array")
   private static native NativeString nativeFromCharCodeArray(char[] x, int start, int end);
+
+  @Wasm("string.new_wtf16_array")
+  private static native NativeString nativeFromCharCodeArray(CharArrayRef x, int start, int end);
 
   @Wasm("string.encode_wtf16_array")
   private static native int nativeGetChars(NativeString s, char[] x, int start);

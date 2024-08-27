@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.ast;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.google.common.base.Ascii;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
@@ -51,14 +53,27 @@ public class StringLiteralGettersCreator {
 
     if (synthesizeMethod) {
       type.synthesizeLazilyInitializedField(
-          "$string_" + snippet,
-          RuntimeMethods.createStringFromJsStringMethodCall(stringLiteral),
-          getLiteralMethod);
+          "$string_" + snippet, createStringFromLiteral(value), getLiteralMethod);
     }
 
     literalMethodByString.put(value, getLiteralMethod);
 
     return getLiteralMethod;
+  }
+
+  private MethodCall createStringFromLiteral(String value) {
+    if (!isValidUtf8String(value)) {
+      // Strings represented natively in the wasm as string.const need to be valid UTF8 strings. In
+      // the case it is not, emit it by initializing from a char array.
+      return RuntimeMethods.createStringFromWasmArrayMethodCall(value.toCharArray());
+    }
+    return RuntimeMethods.createStringFromJsStringMethodCall(new StringLiteral(value));
+  }
+
+  private static boolean isValidUtf8String(String value) {
+    // Malformed UTF8 strings are sanitized in the .getBytes() api and if the string was malformed
+    // it won't convert back to the same string.
+    return new String(value.getBytes(UTF_8), UTF_8).equals(value);
   }
 
   /** Returns the descriptor for the getter of the string literal. */
