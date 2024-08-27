@@ -15,24 +15,11 @@
  */
 package j2ktnotpassing;
 
-import jsinterop.annotations.JsNonNull;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
 public class DefinitelyNotNull {
-  interface NotNullSupplier<T extends @Nullable Object> {
-    @JsNonNull
-    T getNotNull();
-  }
-
-  static String testNotNullSupplier(NotNullSupplier<? extends @Nullable String> supplier) {
-    // TODO(b/361088311): It fails to compile in Kotlin because of:
-    //  https://youtrack.jetbrains.com/issue/KT-70814
-    // J2KT needs to generate an explicit cast to non-null {@code String}.
-    return supplier.getNotNull();
-  }
-
   static class Ordering<T extends @Nullable Object> {
     <S extends T> Ordering<S> reverse() {
       throw new RuntimeException();
