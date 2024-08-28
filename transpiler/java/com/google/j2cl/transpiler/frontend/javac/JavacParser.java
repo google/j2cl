@@ -25,6 +25,7 @@ import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.frontend.common.FrontendOptions;
 import com.google.j2cl.transpiler.frontend.common.PackageInfoCache;
 import com.sun.source.tree.CompilationUnitTree;
 import com.sun.tools.javac.api.JavacTaskImpl;
@@ -52,21 +53,18 @@ import javax.tools.ToolProvider;
  */
 public class JavacParser {
   private final Problems problems;
-  private final ImmutableList<String> classpathEntries;
 
-  /** Create and initialize a JavacParser based on passed parameters. */
-  public JavacParser(List<String> classpathEntries, Problems problems) {
-    this.classpathEntries = ImmutableList.copyOf(classpathEntries);
+  public JavacParser(Problems problems) {
     this.problems = problems;
-    // Records information about package-info files supplied as byte code.
-    PackageInfoCache.init(classpathEntries, problems);
   }
 
   /** Returns a map from file paths to compilation units after Javac parsing. */
   @Nullable
-  public Library parseFiles(
-      List<FileInfo> filePaths, boolean useTargetPath, ImmutableList<String> forbiddenAnnotations) {
+  public Library parseFiles(FrontendOptions options) {
+    // Records information about package-info files supplied as byte code.
+    PackageInfoCache.init(options.getClasspaths(), problems);
 
+    ImmutableList<FileInfo> filePaths = options.getSources();
     if (filePaths.isEmpty()) {
       return Library.newEmpty();
     }
@@ -82,7 +80,7 @@ public class JavacParser {
       JavacFileManager fileManager =
           (JavacFileManager)
               compiler.getStandardFileManager(diagnostics, null, StandardCharsets.UTF_8);
-      List<File> searchpath = classpathEntries.stream().map(File::new).collect(toList());
+      List<File> searchpath = options.getClasspaths().stream().map(File::new).collect(toList());
       fileManager.setLocation(StandardLocation.PLATFORM_CLASS_PATH, searchpath);
       fileManager.setLocation(StandardLocation.CLASS_PATH, searchpath);
       JavacTaskImpl task =
@@ -104,7 +102,7 @@ public class JavacParser {
                       targetPathBySourcePath.keySet().stream().map(File::new).collect(toList())));
       List<CompilationUnitTree> javacCompilationUnits = Lists.newArrayList(task.parse());
       task.analyze();
-      reportErrors(diagnostics, javacCompilationUnits, forbiddenAnnotations);
+      reportErrors(diagnostics, javacCompilationUnits, options.getForbiddenAnnotations());
       problems.abortIfHasErrors();
 
       JavaEnvironment javaEnvironment =

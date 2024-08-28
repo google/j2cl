@@ -21,6 +21,7 @@ import com.google.j2cl.common.Problems
 import com.google.j2cl.common.SourceUtils.FileInfo
 import com.google.j2cl.transpiler.ast.CompilationUnit
 import com.google.j2cl.transpiler.ast.Library
+import com.google.j2cl.transpiler.frontend.common.FrontendOptions
 import com.google.j2cl.transpiler.frontend.jdt.JdtParser
 import com.google.j2cl.transpiler.frontend.jdt.PackageAnnotationsResolver
 import com.google.j2cl.transpiler.frontend.kotlin.lower.LoweringPasses
@@ -62,15 +63,11 @@ import org.jetbrains.kotlin.metadata.jvm.deserialization.JvmMetadataVersion
 import org.jetbrains.kotlin.metadata.jvm.deserialization.JvmProtoBufUtil
 
 /** A parser for Kotlin sources that builds {@code CompilationtUnit}s. */
-class KotlinParser(
-  private val classpathEntries: List<String>,
-  private val kotlincopts: List<String>,
-  private val problems: Problems,
-  private val currentTarget: String?,
-) {
+class KotlinParser(private val problems: Problems) {
 
   /** Returns a list of compilation units after Kotlinc parsing. */
-  fun parseFiles(sources: List<FileInfo>): Library {
+  fun parseFiles(options: FrontendOptions): Library {
+    val sources = options.sources
     if (sources.isEmpty()) {
       return Library.newEmpty()
     }
@@ -79,13 +76,13 @@ class KotlinParser(
       sources.filter { it.originalPath().endsWith("package-info.java") }
 
     val packageAnnotationsResolver =
-      PackageAnnotationsResolver.create(packageInfoSources, JdtParser(classpathEntries, problems))
+      PackageAnnotationsResolver.create(packageInfoSources, JdtParser(options.classpaths, problems))
 
     val environment =
       KotlinCoreEnvironment.createForProduction(
         // TODO(b/243860591): The disposable needs to be disposed once the transpilation is done.
         Disposer.newDisposable(),
-        createCompilerConfiguration(sources, currentTarget),
+        createCompilerConfiguration(options),
         EnvironmentConfigFiles.JVM_CONFIG_FILES,
       )
 
@@ -158,11 +155,8 @@ class KotlinParser(
       .build()
   }
 
-  private fun createCompilerConfiguration(
-    sources: List<FileInfo>,
-    currentTarget: String?,
-  ): CompilerConfiguration {
-    val arguments = createCompilerArguments(sources, currentTarget)
+  private fun createCompilerConfiguration(options: FrontendOptions): CompilerConfiguration {
+    val arguments = createCompilerArguments(options)
     val configuration = CompilerConfiguration()
 
     val messageCollector = ProblemsMessageCollector(problems)
@@ -201,18 +195,18 @@ class KotlinParser(
     return configuration
   }
 
-  private fun createCompilerArguments(sources: List<FileInfo>, currentTarget: String?) =
+  private fun createCompilerArguments(options: FrontendOptions) =
     K2JVMCompilerArguments().also { arguments ->
-      parseCommandLineArguments(kotlincopts, arguments)
-      arguments.classpath = classpathEntries.joinToString(File.pathSeparator)
+      parseCommandLineArguments(options.kotlincOptions, arguments)
+      arguments.classpath = options.classpaths.joinToString(File.pathSeparator)
       arguments.commonSources =
-        sources
+        options.sources
           .filter { it.originalPath().startsWith("common-srcs/") }
           .map(FileInfo::sourcePath)
           .toTypedArray()
-      arguments.freeArgs = sources.map(FileInfo::sourcePath)
+      arguments.freeArgs = options.sources.map(FileInfo::sourcePath)
 
-      arguments.setEligibleFriends(currentTarget)
+      arguments.setEligibleFriends(options.targetLabel)
     }
 
   private class ProblemsMessageCollector constructor(private val problems: Problems) :

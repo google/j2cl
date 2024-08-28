@@ -28,7 +28,6 @@ import com.google.common.collect.Iterables;
 import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
-import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.transpiler.ast.ArrayAccess;
 import com.google.j2cl.transpiler.ast.ArrayCreationReference;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
@@ -95,6 +94,7 @@ import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.WhileStatement;
 import com.google.j2cl.transpiler.frontend.common.AbstractCompilationUnitBuilder;
+import com.google.j2cl.transpiler.frontend.common.FrontendOptions;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -1427,18 +1427,13 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     return converter.convert(sourceFilePath, compilationUnit);
   }
 
-  public static List<CompilationUnit> build(
-      List<String> classpaths,
-      List<FileInfo> filePaths,
-      boolean useTargetPath,
-      List<String> forbiddenAnnotations,
-      Problems problems) {
-    JdtParser jdtParser = new JdtParser(classpaths, problems);
+  public static List<CompilationUnit> build(FrontendOptions options, Problems problems) {
+    JdtParser jdtParser = new JdtParser(options.getClasspaths(), problems);
     CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings =
         jdtParser.parseFiles(
-            filePaths,
-            useTargetPath,
-            forbiddenAnnotations,
+            options.getSources(),
+            options.getGenerateKytheIndexingMetadata(),
+            options.getForbiddenAnnotations(),
             TypeDescriptors.getWellKnownTypeNames());
     problems.abortIfHasErrors();
 

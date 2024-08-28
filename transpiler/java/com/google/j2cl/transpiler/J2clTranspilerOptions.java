@@ -28,7 +28,7 @@ import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.transpiler.backend.Backend;
 import com.google.j2cl.transpiler.backend.BackendOptions;
 import com.google.j2cl.transpiler.frontend.Frontend;
-import com.google.j2cl.transpiler.frontend.FrontendOptions;
+import com.google.j2cl.transpiler.frontend.common.FrontendOptions;
 import java.nio.file.Path;
 import java.util.List;
 import javax.annotation.Nullable;

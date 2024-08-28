@@ -18,13 +18,12 @@ package com.google.j2cl.transpiler.frontend;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.common.Problems;
-import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Library;
+import com.google.j2cl.transpiler.frontend.common.FrontendOptions;
 import com.google.j2cl.transpiler.frontend.javac.JavacParser;
 import com.google.j2cl.transpiler.frontend.jdt.CompilationUnitBuilder;
 import java.lang.reflect.Constructor;
 import java.util.Arrays;
-import java.util.List;
 
 /** Drives the frontend to parse, type check and resolve Java source code. */
 public enum Frontend {
@@ -32,14 +31,9 @@ public enum Frontend {
     @Override
     public Library parse(FrontendOptions options, Problems problems) {
       // TODO(goktug): Create a frontend entry point consistent with the other frontends.
-      List<CompilationUnit> compilationUnits =
-          CompilationUnitBuilder.build(
-              options.getClasspaths(),
-              options.getSources(),
-              /* useTargetPath= */ options.getGenerateKytheIndexingMetadata(),
-              options.getForbiddenAnnotations(),
-              problems);
-      return Library.newBuilder().setCompilationUnits(compilationUnits).build();
+      return Library.newBuilder()
+          .setCompilationUnits(CompilationUnitBuilder.build(options, problems))
+          .build();
     }
 
     @Override
@@ -50,11 +44,7 @@ public enum Frontend {
   JAVAC {
     @Override
     public Library parse(FrontendOptions options, Problems problems) {
-      return new JavacParser(options.getClasspaths(), problems)
-          .parseFiles(
-              options.getSources(),
-              /* useTargetPath= */ options.getGenerateKytheIndexingMetadata(),
-              options.getForbiddenAnnotations());
+      return new JavacParser(problems).parseFiles(options);
     }
 
     @Override
@@ -72,16 +62,10 @@ public enum Frontend {
             Class.forName("com.google.j2cl.transpiler.frontend.kotlin.KotlinParser");
         Constructor<?> parserCtor =
             Iterables.getOnlyElement(Arrays.asList(kotlinParser.getDeclaredConstructors()));
-        Object parserInstance =
-            parserCtor.newInstance(
-                options.getClasspaths(),
-                options.getKotlincOptions(),
-                problems,
-                options.getTargetLabel());
         return (Library)
             kotlinParser
-                .getMethod("parseFiles", List.class)
-                .invoke(parserInstance, options.getSources());
+                .getMethod("parseFiles", FrontendOptions.class)
+                .invoke(parserCtor.newInstance(problems), options);
       } catch (Exception e) {
         Throwables.throwIfUnchecked(e);
         throw new RuntimeException(e);
