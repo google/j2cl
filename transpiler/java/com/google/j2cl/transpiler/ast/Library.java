@@ -53,6 +53,10 @@ public class Library extends Node {
     return Visitor_Library.visit(processor, this);
   }
 
+  public static Library newEmpty() {
+    return new Builder().build();
+  }
+
   public static Builder newBuilder() {
     return new Builder();
   }

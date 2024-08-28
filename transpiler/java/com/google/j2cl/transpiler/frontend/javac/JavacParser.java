@@ -23,7 +23,9 @@ import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.frontend.common.PackageInfoCache;
 import com.sun.source.tree.CompilationUnitTree;
 import com.sun.tools.javac.api.JavacTaskImpl;
 import com.sun.tools.javac.file.JavacFileManager;
@@ -54,18 +56,19 @@ public class JavacParser {
 
   /** Create and initialize a JavacParser based on passed parameters. */
   public JavacParser(List<String> classpathEntries, Problems problems) {
-
     this.classpathEntries = ImmutableList.copyOf(classpathEntries);
     this.problems = problems;
+    // Records information about package-info files supplied as byte code.
+    PackageInfoCache.init(classpathEntries, problems);
   }
 
   /** Returns a map from file paths to compilation units after Javac parsing. */
   @Nullable
-  public List<CompilationUnit> parseFiles(
+  public Library parseFiles(
       List<FileInfo> filePaths, boolean useTargetPath, ImmutableList<String> forbiddenAnnotations) {
 
     if (filePaths.isEmpty()) {
-      return ImmutableList.of();
+      return Library.newEmpty();
     }
 
     // The map must be ordered because it will be iterated over later and if it was not ordered then
@@ -102,13 +105,15 @@ public class JavacParser {
       List<CompilationUnitTree> javacCompilationUnits = Lists.newArrayList(task.parse());
       task.analyze();
       if (hasErrors(diagnostics, javacCompilationUnits, forbiddenAnnotations)) {
-        return ImmutableList.of();
+        return Library.newEmpty();
       }
 
       JavaEnvironment javaEnvironment =
           new JavaEnvironment(task.getContext(), TypeDescriptors.getWellKnownTypeNames());
 
-      return CompilationUnitBuilder.build(javacCompilationUnits, javaEnvironment);
+      ImmutableList<CompilationUnit> compilationUnits =
+          CompilationUnitBuilder.build(javacCompilationUnits, javaEnvironment);
+      return Library.newBuilder().setCompilationUnits(compilationUnits).build();
     } catch (IOException e) {
       problems.fatal(FatalError.valueOf(e.getMessage()));
       return null;

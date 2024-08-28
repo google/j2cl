@@ -20,6 +20,7 @@ package com.google.j2cl.transpiler.frontend.kotlin
 import com.google.j2cl.common.Problems
 import com.google.j2cl.common.SourceUtils.FileInfo
 import com.google.j2cl.transpiler.ast.CompilationUnit
+import com.google.j2cl.transpiler.ast.Library
 import com.google.j2cl.transpiler.frontend.jdt.JdtParser
 import com.google.j2cl.transpiler.frontend.jdt.PackageAnnotationsResolver
 import com.google.j2cl.transpiler.frontend.kotlin.lower.LoweringPasses
@@ -69,9 +70,9 @@ class KotlinParser(
 ) {
 
   /** Returns a list of compilation units after Kotlinc parsing. */
-  fun parseFiles(sources: List<FileInfo>): List<CompilationUnit> {
+  fun parseFiles(sources: List<FileInfo>): Library {
     if (sources.isEmpty()) {
-      return emptyList()
+      return Library.newEmpty()
     }
 
     val packageInfoSources: List<FileInfo> =
@@ -98,7 +99,7 @@ class KotlinParser(
 
     // analyze() will return null if it failed analysis phase. Errors should have been collected
     // into Problems.
-    val analysis = KotlinToJVMBytecodeCompiler.analyze(environment) ?: return emptyList()
+    val analysis = KotlinToJVMBytecodeCompiler.analyze(environment) ?: return Library.newEmpty()
 
     val state =
       GenerationState.Builder(
@@ -150,7 +151,9 @@ class KotlinParser(
         )
       )
 
-    return compilationUnitBuilderExtension.compilationUnits
+    return Library.newBuilder()
+      .setCompilationUnits(compilationUnitBuilderExtension.compilationUnits)
+      .build()
   }
 
   private fun createCompilerConfiguration(

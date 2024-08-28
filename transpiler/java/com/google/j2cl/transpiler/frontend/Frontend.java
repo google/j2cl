@@ -20,7 +20,6 @@ import com.google.common.collect.Iterables;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Library;
-import com.google.j2cl.transpiler.frontend.common.PackageInfoCache;
 import com.google.j2cl.transpiler.frontend.javac.JavacParser;
 import com.google.j2cl.transpiler.frontend.jdt.CompilationUnitBuilder;
 import java.lang.reflect.Constructor;
@@ -31,14 +30,16 @@ import java.util.List;
 public enum Frontend {
   JDT {
     @Override
-    public List<CompilationUnit> compile(FrontendOptions options, Problems problems) {
+    public Library parse(FrontendOptions options, Problems problems) {
       // TODO(goktug): Create a frontend entry point consistent with the other frontends.
-      return CompilationUnitBuilder.build(
-          options.getClasspaths(),
-          options.getSources(),
-          /* useTargetPath= */ options.getGenerateKytheIndexingMetadata(),
-          options.getForbiddenAnnotations(),
-          problems);
+      List<CompilationUnit> compilationUnits =
+          CompilationUnitBuilder.build(
+              options.getClasspaths(),
+              options.getSources(),
+              /* useTargetPath= */ options.getGenerateKytheIndexingMetadata(),
+              options.getForbiddenAnnotations(),
+              problems);
+      return Library.newBuilder().setCompilationUnits(compilationUnits).build();
     }
 
     @Override
@@ -48,7 +49,7 @@ public enum Frontend {
   },
   JAVAC {
     @Override
-    public List<CompilationUnit> compile(FrontendOptions options, Problems problems) {
+    public Library parse(FrontendOptions options, Problems problems) {
       return new JavacParser(options.getClasspaths(), problems)
           .parseFiles(
               options.getSources(),
@@ -63,7 +64,7 @@ public enum Frontend {
   },
   KOTLIN {
     @Override
-    public List<CompilationUnit> compile(FrontendOptions options, Problems problems) {
+    public Library parse(FrontendOptions options, Problems problems) {
       try {
         // Temporary workaround to turn Kotlin compiler dep into a soft runtime dependency.
         // TODO(b/217287994): Remove after a regular dependency is allowed.
@@ -77,14 +78,13 @@ public enum Frontend {
                 options.getKotlincOptions(),
                 problems,
                 options.getTargetLabel());
-        @SuppressWarnings("unchecked")
-        List<CompilationUnit> compilationUnits =
-            (List<CompilationUnit>)
+        Library library =
+            (Library)
                 kotlinParser
                     .getMethod("parseFiles", List.class)
                     .invoke(parserInstance, options.getSources());
         problems.abortIfHasErrors();
-        return compilationUnits;
+        return library;
       } catch (Exception e) {
         Throwables.throwIfUnchecked(e);
         throw new RuntimeException(e);
@@ -97,13 +97,7 @@ public enum Frontend {
     }
   };
 
-  public Library getLibrary(FrontendOptions options, Problems problems) {
-    // Records information about package-info files supplied as byte code.
-    PackageInfoCache.init(options.getClasspaths(), problems);
-    return Library.newBuilder().setCompilationUnits(compile(options, problems)).build();
-  }
-
-  abstract List<CompilationUnit> compile(FrontendOptions options, Problems problems);
+  public abstract Library parse(FrontendOptions options, Problems problems);
 
   public abstract boolean isJavaFrontend();
 }

@@ -17,7 +17,7 @@ package com.google.j2cl.transpiler.frontend.kotlin;
 
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourceUtils;
-import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.Library;
 import java.util.List;
 
 /** Kotlin frontend is not supported yet in open-source due to build related issues. */
@@ -25,7 +25,7 @@ public class KotlinParser {
 
   public KotlinParser(List<String> classpathEntries, List<String> kotlincopts, Problems problems, String currentTarget) {}
 
-  public List<CompilationUnit> parseFiles(List<SourceUtils.FileInfo> filePaths) {
+  public Library parseFiles(List<SourceUtils.FileInfo> filePaths) {
     return null;
   }
 }
