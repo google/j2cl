@@ -78,13 +78,10 @@ public enum Frontend {
                 options.getKotlincOptions(),
                 problems,
                 options.getTargetLabel());
-        Library library =
-            (Library)
-                kotlinParser
-                    .getMethod("parseFiles", List.class)
-                    .invoke(parserInstance, options.getSources());
-        problems.abortIfHasErrors();
-        return library;
+        return (Library)
+            kotlinParser
+                .getMethod("parseFiles", List.class)
+                .invoke(parserInstance, options.getSources());
       } catch (Exception e) {
         Throwables.throwIfUnchecked(e);
         throw new RuntimeException(e);

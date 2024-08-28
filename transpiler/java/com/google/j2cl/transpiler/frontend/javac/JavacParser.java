@@ -104,9 +104,8 @@ public class JavacParser {
                       targetPathBySourcePath.keySet().stream().map(File::new).collect(toList())));
       List<CompilationUnitTree> javacCompilationUnits = Lists.newArrayList(task.parse());
       task.analyze();
-      if (hasErrors(diagnostics, javacCompilationUnits, forbiddenAnnotations)) {
-        return Library.newEmpty();
-      }
+      reportErrors(diagnostics, javacCompilationUnits, forbiddenAnnotations);
+      problems.abortIfHasErrors();
 
       JavaEnvironment javaEnvironment =
           new JavaEnvironment(task.getContext(), TypeDescriptors.getWellKnownTypeNames());
@@ -120,11 +119,10 @@ public class JavacParser {
     }
   }
 
-  private boolean hasErrors(
+  private void reportErrors(
       DiagnosticCollector<JavaFileObject> diagnosticCollector,
       List<CompilationUnitTree> javacCompilationUnits,
       ImmutableList<String> forbiddenAnnotations) {
-    boolean hasErrors = false;
     // Here we check for instances of @GwtIncompatible in the ast. If that is the case, we throw an
     // error since these should have been stripped by the build system already.
     for (String forbiddenAnnotation : forbiddenAnnotations) {
@@ -146,9 +144,7 @@ public class JavacParser {
             diagnostic.getSource().getName(),
             "%s",
             diagnostic.getMessage(Locale.US));
-        hasErrors = true;
       }
     }
-    return hasErrors;
   }
 }

@@ -99,7 +99,9 @@ class KotlinParser(
 
     // analyze() will return null if it failed analysis phase. Errors should have been collected
     // into Problems.
-    val analysis = KotlinToJVMBytecodeCompiler.analyze(environment) ?: return Library.newEmpty()
+    val analysis = KotlinToJVMBytecodeCompiler.analyze(environment)
+    problems.abortIfHasErrors()
+    checkNotNull(analysis)
 
     val state =
       GenerationState.Builder(

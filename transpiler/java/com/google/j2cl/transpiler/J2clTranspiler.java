@@ -85,6 +85,7 @@ class J2clTranspiler {
       MethodDescriptor.ParameterDescriptor.setIgnoreDoNotAutoboxAnnotations();
     }
     Library library = options.getFrontend().parse(options, problems);
+    problems.abortIfHasErrors();
     if (!library.isEmpty()) {
       desugarLibrary(library);
       checkLibrary(library);
