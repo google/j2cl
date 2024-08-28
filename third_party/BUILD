@@ -9,6 +9,11 @@ package(
 )
 
 alias(
+    name = "asm",
+    actual = "@org_ow2_asm_asm",
+)
+
+alias(
     name = "guava",
     actual = "@com_google_guava",
 )

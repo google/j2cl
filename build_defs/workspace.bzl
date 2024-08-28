@@ -196,6 +196,14 @@ def setup_j2cl_workspace(**kwargs):
         sha256 = "83ce07ec2058d8d629feb4e269216e286560b0e4587dea883f4e16b64ea51cad",
     )
 
+    jvm_maven_import_external(
+        name = "org_ow2_asm_asm",
+        artifact = "org.ow2.asm:asm:9.7",
+        server_urls = _MAVEN_CENTRAL_URLS,
+        artifact_sha256 = "adf46d5e34940bdf148ecdd26a9ee8eea94496a72034ff7141066b3eea5c4e9d",
+        licenses = ["notice"],
+    )
+
     kotlin_repositories(
         compiler_release = {
             "urls": [

@@ -17,15 +17,14 @@ package com.google.j2cl.transpiler.frontend.common;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
-import static java.util.Arrays.stream;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.Iterables;
+import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2objc.annotations.ObjectiveCName;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -36,6 +35,10 @@ import java.util.Map;
 import javax.annotation.Nullable;
 import jsinterop.annotations.JsPackage;
 import org.jspecify.annotations.NullMarked;
+import org.objectweb.asm.AnnotationVisitor;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.Type;
 
 /**
  * A cache for information on package-info files that are needed for transpilation, like JsInterop
@@ -114,14 +117,16 @@ public class PackageInfoCache {
     URLClassLoader resourcesClassLoader =
         new URLClassLoader(Iterables.toArray(classPathUrls, URL.class), null);
 
-    packageInfoCacheStorage.set(new PackageInfoCache(resourcesClassLoader));
+    packageInfoCacheStorage.set(new PackageInfoCache(resourcesClassLoader, problems));
   }
 
   private final Map<String, PackageReport> packageReportByTypeName = new HashMap<>();
-  private final ClassLoader resourcesClassLoader;
+  private final URLClassLoader resourcesClassLoader;
+  private final Problems problems;
 
-  private PackageInfoCache(ClassLoader resourcesClassLoader) {
+  private PackageInfoCache(URLClassLoader resourcesClassLoader, Problems problems) {
     this.resourcesClassLoader = resourcesClassLoader;
+    this.problems = problems;
   }
 
   /**
@@ -160,75 +165,69 @@ public class PackageInfoCache {
   }
 
   private PackageReport parsePackageInfo(String packagePath) {
-    Annotation[] packageAnnotations = findBytecodePackageAnnotations(packagePath);
+    Map<String, String> packageAnnotations = findBytecodePackageAnnotations(packagePath);
     if (packageAnnotations == null) {
       return DEFAULT_PACKAGE_REPORT;
     } else {
       return PackageReport.newBuilder()
-          .setJsNamespace(getPackageJsNamespace(packageAnnotations))
-          .setObjectiveCName(getPackageObjectiveCName(packageAnnotations))
-          .setNullMarked(hasNullMarkedAnnotation(packageAnnotations))
+          .setJsNamespace(getAnnotation(packageAnnotations, JsPackage.class))
+          .setObjectiveCName(getAnnotation(packageAnnotations, ObjectiveCName.class))
+          .setNullMarked(getAnnotation(packageAnnotations, NullMarked.class) != null)
           .build();
     }
   }
 
-  private Annotation[] findBytecodePackageAnnotations(String packagePath) {
-    String packageInfoSourceName = packagePath + ".package-info";
-    Annotation[] annotations = null;
-    try {
-      Class<?> packageInfoClass = resourcesClassLoader.loadClass(packageInfoSourceName);
-      annotations = packageInfoClass.getAnnotations();
-    } catch (ClassNotFoundException ignored) {
-      // No package-info file in the classpath.
+  @Nullable
+  private Map<String, String> findBytecodePackageAnnotations(String packagePath) {
+    String packageInfoRelativeFilePath =
+        OutputUtils.getPackageRelativePath(packagePath, "package-info.class");
+    URL packageInfoResource = resourcesClassLoader.findResource(packageInfoRelativeFilePath);
+    if (packageInfoResource == null) {
+      return null;
     }
+
+    var annotations = new HashMap<String, String>();
+    // Prefill with known annotations so we can use it to avoid traversing unrelated annotations.
+    annotations.put(JsPackage.class.getName(), null);
+    annotations.put(ObjectiveCName.class.getName(), null);
+    annotations.put(NullMarked.class.getName(), null);
+
+    final int opcode = org.objectweb.asm.Opcodes.ASM9;
+    parsePackageInfoClass(
+        packageInfoResource,
+        new ClassVisitor(opcode) {
+          @Override
+          @Nullable
+          public AnnotationVisitor visitAnnotation(String descriptor, boolean visible) {
+            String annotationName = Type.getType(descriptor).getClassName();
+            if (!annotations.containsKey(annotationName)) {
+              return null; // Unknown annotation, stop traversal.
+            }
+
+            // Annotation is present: initialize with empty value (might be overridden in visitor).
+            annotations.put(annotationName, "");
+            return new AnnotationVisitor(opcode) {
+              @Override
+              public void visit(String name, Object value) {
+                annotations.put(annotationName, value.toString());
+              }
+            };
+          }
+        });
+
     return annotations;
   }
 
-  @Nullable
-  private static String getPackageJsNamespace(Annotation[] packageAnnotations) {
-    return getAnnotationField(packageAnnotations, JsPackage.class, "namespace");
-  }
-
-  @Nullable
-  private static String getPackageObjectiveCName(Annotation[] packageAnnotations) {
-    return getAnnotationField(packageAnnotations, ObjectiveCName.class, "value");
-  }
-
-  private static boolean hasNullMarkedAnnotation(Annotation[] packageAnnotations) {
-    return getAnnotation(packageAnnotations, NullMarked.class) != null;
-  }
-
-  /**
-   * Finds an annotation and retrieves a field value via reflection.
-   *
-   * <p>Note that reflection needs to be used to access these annotations since they are loaded
-   * using a different classloader that does not share state with the classloader the compiler is
-   * running with.
-   */
-  @Nullable
-  private static String getAnnotationField(
-      Annotation[] annotations, Class<?> annotationClass, String field) {
-    Annotation annotation = getAnnotation(annotations, annotationClass);
-    if (annotation == null) {
-      return null;
-    }
-
+  private void parsePackageInfoClass(URL url, ClassVisitor classVisitor) {
     try {
-      Method fieldAccessor = annotation.annotationType().getMethod(field);
-      return (String) fieldAccessor.invoke(annotation);
-    } catch (Exception e) {
-      return null;
+      new ClassReader(url.openStream()).accept(classVisitor, ClassReader.SKIP_CODE);
+    } catch (IOException e) {
+      problems.fatal(FatalError.CANNOT_OPEN_FILE, e.toString());
     }
   }
 
   @Nullable
-  private static Annotation getAnnotation(Annotation[] annotations, Class<?> annotationClass) {
-    if (annotations == null) {
-      return null;
-    }
-    return stream(annotations)
-        .filter(a -> a.annotationType().getName().equals(annotationClass.getName()))
-        .findFirst()
-        .orElse(null);
+  private static String getAnnotation(Map<String, String> annotations, Class<?> annotationClass) {
+    return annotations.get(annotationClass.getName());
   }
 }
