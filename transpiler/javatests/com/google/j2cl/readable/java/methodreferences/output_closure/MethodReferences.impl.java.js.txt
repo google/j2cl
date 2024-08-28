@@ -53,6 +53,8 @@ class MethodReferences extends j_l_Object {
  m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences(/** (Number|number) */ n) {
   return false;
  }
+ /** @nodts @template U, V */
+ static m_acceptFunctionSuperVariance__methodreferences_MethodReferences_Function__void(/** MethodReferences_Function<?, V> */ f) {}
  /** @nodts */
  m_main__void_$pp_methodreferences() {
   let /** !MethodReferences<T> */ $$q, /** !MethodReferences<*> */ $$q_1, /** !MethodReferences<*> */ $$q_2;
@@ -129,6 +131,10 @@ class MethodReferences extends j_l_Object {
   };
   objectFactory = /**@type {!Producer<*>}*/ (Producer.$adapt(() =>{
    return MethodReferences.m_m__java_lang_Object();
+  }));
+  MethodReferences.m_acceptFunctionSuperVariance__methodreferences_MethodReferences_Function__void(MethodReferences_Function.$adapt((arg0_19) =>{
+   let arg0_20 = /**@type {MethodReferences}*/ ($Casts.$to(arg0_19, MethodReferences));
+   return arg0_20.m_self__java_lang_Object_$pp_methodreferences();
   }));
  }
  /** @nodts @return {Producer<?string>} */

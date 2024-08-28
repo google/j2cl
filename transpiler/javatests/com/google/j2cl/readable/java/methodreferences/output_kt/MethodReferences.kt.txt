@@ -123,6 +123,9 @@ open class MethodReferences<T> {
   objectFactory = ((MethodReferences.Producer {
    return@Producer MethodReferences.m_pp_methodreferences()
   } as MethodReferences.Producer<*>) as Any) as MethodReferences.Producer<Any?>
+  MethodReferences.acceptFunctionSuperVariance<MethodReferences<Any?>?, Any?>(MethodReferences.Function { arg0_10: MethodReferences<Any?>? ->
+   return@Function arg0_10!!.self_pp_methodreferences()
+  })
  }
 
  @ObjCName("J2ktMethodreferencesMethodReferencesCompanion", exact = true)
@@ -139,6 +142,9 @@ open class MethodReferences<T> {
     return@Producer ______q!!.toString()
    }
   }
+
+  @JvmStatic
+  private fun <U, V> acceptFunctionSuperVariance(f: MethodReferences.Function<in U, V>?) {}
  }
 
  @ObjCName("J2ktMethodreferencesMethodReferences_Producer", exact = true)

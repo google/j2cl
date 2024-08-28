@@ -79,6 +79,8 @@ public class MethodReferences<T> {
     return false;
   }
 
+  private static <U, V> void acceptFunctionSuperVariance(Function<? super U, V> f) {}
+
   void main() {
     Producer<Object> objectFactory = Object::new;
     // Static method
@@ -124,5 +126,8 @@ public class MethodReferences<T> {
     // These are all redundant casts that should be removable, even after the method references is
     // rewritten as a lambda.
     objectFactory = (Producer<Object>) ((Object) ((Producer<?>) MethodReferences::m));
+
+    // super-type variance
+    acceptFunctionSuperVariance(MethodReferences<Object>::self);
   }
 }
