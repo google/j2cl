@@ -23,6 +23,7 @@ import com.google.j2cl.transpiler.frontend.common.FrontendOptions;
 import com.google.j2cl.transpiler.frontend.javac.JavacParser;
 import com.google.j2cl.transpiler.frontend.jdt.CompilationUnitBuilder;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 
 /** Drives the frontend to parse, type check and resolve Java source code. */
@@ -67,8 +68,10 @@ public enum Frontend {
                 .getMethod("parseFiles", FrontendOptions.class)
                 .invoke(parserCtor.newInstance(problems), options);
       } catch (Exception e) {
-        Throwables.throwIfUnchecked(e);
-        throw new RuntimeException(e);
+        // Retrieve the original exception if it was thrown by the method called using invoke.
+        Throwable cause = e instanceof InvocationTargetException ? e.getCause() : e;
+        Throwables.throwIfUnchecked(cause);
+        throw new RuntimeException(cause);
       }
     }
 
