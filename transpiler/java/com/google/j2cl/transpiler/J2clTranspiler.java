@@ -92,6 +92,9 @@ class J2clTranspiler {
       normalizeLibrary(library);
     }
     options.getBackend().generateOutputs(options, library, problems);
+
+    // Now we are done, release resources from the frontend if needed.
+    library.dispose();
   }
 
   private void desugarLibrary(Library library) {

@@ -78,10 +78,10 @@ class KotlinParser(private val problems: Problems) {
     val packageAnnotationsResolver =
       PackageAnnotationsResolver.create(packageInfoSources, JdtParser(options.classpaths, problems))
 
+    val kotlincDisposable = Disposer.newDisposable("J2CL Root Disposable")
     val environment =
       KotlinCoreEnvironment.createForProduction(
-        // TODO(b/243860591): The disposable needs to be disposed once the transpilation is done.
-        Disposer.newDisposable(),
+        kotlincDisposable,
         createCompilerConfiguration(options),
         EnvironmentConfigFiles.JVM_CONFIG_FILES,
       )
@@ -152,6 +152,7 @@ class KotlinParser(private val problems: Problems) {
 
     return Library.newBuilder()
       .setCompilationUnits(compilationUnitBuilderExtension.compilationUnits)
+      .setDisposableListener { Disposer.dispose(kotlincDisposable) }
       .build()
   }
 

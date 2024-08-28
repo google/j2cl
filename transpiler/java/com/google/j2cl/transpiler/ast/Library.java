@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 import java.util.List;
@@ -26,13 +27,21 @@ import java.util.stream.Stream;
 @Visitable
 public class Library extends Node {
   @Visitable List<CompilationUnit> compilationUnits;
+  private final DisposableListener disposableListener;
 
-  private Library(List<CompilationUnit> compilationUnits) {
+  private Library(List<CompilationUnit> compilationUnits, DisposableListener disposableListener) {
     this.compilationUnits = checkNotNull(compilationUnits);
+    this.disposableListener = disposableListener;
   }
 
   public List<CompilationUnit> getCompilationUnits() {
     return compilationUnits;
+  }
+
+  public void dispose() {
+    if (disposableListener != null) {
+      disposableListener.onDispose();
+    }
   }
 
   public Stream<Type> streamTypes() {
@@ -64,18 +73,31 @@ public class Library extends Node {
   /** Builder for Library. */
   public static class Builder {
     private List<CompilationUnit> compilationUnits;
+    private DisposableListener disposableListener;
 
     public static Builder from(Library library) {
       return newBuilder().setCompilationUnits(library.getCompilationUnits());
     }
 
+    @CanIgnoreReturnValue
     public Builder setCompilationUnits(List<CompilationUnit> compilationUnits) {
       this.compilationUnits = compilationUnits;
       return this;
     }
 
-    public Library build() {
-      return new Library(compilationUnits);
+    @CanIgnoreReturnValue
+    public Builder setDisposableListener(DisposableListener disposableListener) {
+      this.disposableListener = disposableListener;
+      return this;
     }
+
+    public Library build() {
+      return new Library(compilationUnits, disposableListener);
+    }
+  }
+
+  /** Listener for library disposal. */
+  public interface DisposableListener {
+    void onDispose();
   }
 }
