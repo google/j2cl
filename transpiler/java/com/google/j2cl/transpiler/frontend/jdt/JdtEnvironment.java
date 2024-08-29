@@ -54,6 +54,7 @@ import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.Visibility;
 import com.google.j2cl.transpiler.frontend.common.Nullability;
+import com.google.j2cl.transpiler.frontend.common.PackageInfoCache;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -104,7 +105,8 @@ public class JdtEnvironment {
    */
   @CanIgnoreReturnValue
   public JdtEnvironment(JdtParser jdtParser, Collection<String> wellKnownTypesBinaryNames) {
-    this.packageAnnotationsResolver = PackageAnnotationsResolver.create(Stream.of(), jdtParser);
+    PackageInfoCache.init(ImmutableList.of(), null);
+    this.packageAnnotationsResolver = PackageAnnotationsResolver.create(Stream.of());
     this.initWellKnownTypes(jdtParser.resolveBindings(wellKnownTypesBinaryNames));
   }
 

@@ -95,6 +95,7 @@ import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.WhileStatement;
 import com.google.j2cl.transpiler.frontend.common.AbstractCompilationUnitBuilder;
 import com.google.j2cl.transpiler.frontend.common.FrontendOptions;
+import com.google.j2cl.transpiler.frontend.common.PackageInfoCache;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -1428,6 +1429,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   public static List<CompilationUnit> build(FrontendOptions options, Problems problems) {
+    PackageInfoCache.init(options.getClasspaths(), problems);
     JdtParser jdtParser = new JdtParser(options.getClasspaths(), problems);
     CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings =
         jdtParser.parseFiles(
@@ -1442,8 +1444,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             PackageAnnotationsResolver.create(
                 compilationUnitsAndTypeBindings.getCompilationUnitsByFilePath().entrySet().stream()
                     .filter(e -> e.getKey().endsWith("package-info.java"))
-                    .map(Entry::getValue),
-                jdtParser));
+                    .map(Entry::getValue)));
 
     Map<String, org.eclipse.jdt.core.dom.CompilationUnit> jdtUnitsByFilePath =
         compilationUnitsAndTypeBindings.getCompilationUnitsByFilePath();

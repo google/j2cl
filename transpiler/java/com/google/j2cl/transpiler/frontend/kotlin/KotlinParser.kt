@@ -22,6 +22,7 @@ import com.google.j2cl.common.SourceUtils.FileInfo
 import com.google.j2cl.transpiler.ast.CompilationUnit
 import com.google.j2cl.transpiler.ast.Library
 import com.google.j2cl.transpiler.frontend.common.FrontendOptions
+import com.google.j2cl.transpiler.frontend.common.PackageInfoCache
 import com.google.j2cl.transpiler.frontend.jdt.JdtParser
 import com.google.j2cl.transpiler.frontend.jdt.PackageAnnotationsResolver
 import com.google.j2cl.transpiler.frontend.kotlin.lower.LoweringPasses
@@ -75,6 +76,7 @@ class KotlinParser(private val problems: Problems) {
     val packageInfoSources: List<FileInfo> =
       sources.filter { it.originalPath().endsWith("package-info.java") }
 
+    PackageInfoCache.init(options.classpaths, problems)
     val packageAnnotationsResolver =
       PackageAnnotationsResolver.create(packageInfoSources, JdtParser(options.classpaths, problems))
 

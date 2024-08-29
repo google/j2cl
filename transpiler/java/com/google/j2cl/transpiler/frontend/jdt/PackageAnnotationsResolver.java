@@ -16,51 +16,44 @@
 package com.google.j2cl.transpiler.frontend.jdt;
 
 import static com.google.common.base.Preconditions.checkState;
-import static com.google.j2cl.transpiler.frontend.common.PackageInfoCache.DEFAULT_PACKAGE_REPORT;
 import static com.google.j2cl.transpiler.frontend.jdt.JsInteropAnnotationUtils.getJsNamespace;
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtObjectiveCName;
-import static java.util.Arrays.stream;
 
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.SourceUtils.FileInfo;
-import com.google.j2cl.transpiler.frontend.common.Nullability;
-import com.google.j2cl.transpiler.frontend.common.PackageInfoCache.PackageReport;
-import java.util.HashMap;
+import com.google.j2cl.transpiler.frontend.common.PackageInfoCache;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Stream;
 import org.eclipse.jdt.core.dom.CompilationUnit;
-import org.eclipse.jdt.core.dom.ITypeBinding;
 
 /** A utility class to resolve and cache package annotations. */
 public final class PackageAnnotationsResolver {
 
-  private final Map<String, PackageReport> packageReportByPackageName = new HashMap<>();
-  private final JdtParser parser;
-
   /** Create a PackageAnnotationResolver with the source package-info CompilationUnits. */
   public static PackageAnnotationsResolver create(
-      Stream<CompilationUnit> packageInfoCompilationUnits, JdtParser parser) {
-    var packageAnnotationResolver = new PackageAnnotationsResolver(parser);
+      Stream<CompilationUnit> packageInfoCompilationUnits) {
+    var packageAnnotationResolver = new PackageAnnotationsResolver();
     packageAnnotationResolver.populateFromCompilationUnits(packageInfoCompilationUnits);
     return packageAnnotationResolver;
   }
 
   /** Create a PackageAnnotationResolver with package infos in sources. */
   public static PackageAnnotationsResolver create(List<FileInfo> sources, JdtParser parser) {
-    return create(parsePackageInfoFiles(sources, parser), parser);
+    return create(parsePackageInfoFiles(sources, parser));
   }
 
+  private final PackageInfoCache packageInfoCache;
+
   public String getJsNameSpace(String packageName) {
-    return getPackageReport(packageName).getJsNamespace();
+    return packageInfoCache.getJsNamespace(packageName);
   }
 
   public String getObjectiveCNamePrefix(String packageName) {
-    return getPackageReport(packageName).getObjectiveCName();
+    return packageInfoCache.getObjectiveCName(packageName);
   }
 
   public boolean isNullMarked(String packageName) {
-    return getPackageReport(packageName).isNullMarked();
+    return packageInfoCache.isNullMarked(packageName);
   }
 
   /** Parser package-info files from sources. */
@@ -86,7 +79,7 @@ public final class PackageAnnotationsResolver {
 
           // Records information about package-info files supplied as source code.
           if (packageDeclaration != null) {
-            setPackageProperties(
+            packageInfoCache.setPackageProperties(
                 packageDeclaration.getName().getFullyQualifiedName(),
                 getJsNamespace(packageDeclaration),
                 getKtObjectiveCName(packageDeclaration),
@@ -95,47 +88,7 @@ public final class PackageAnnotationsResolver {
         });
   }
 
-  public void setPackageProperties(
-      String packageName, String jsNamespace, String objectiveCName, boolean isNullMarked) {
-    packageReportByPackageName.put(
-        packageName,
-        PackageReport.newBuilder()
-            .setJsNamespace(jsNamespace)
-            .setObjectiveCName(objectiveCName)
-            .setNullMarked(isNullMarked)
-            .build());
-  }
-
-  private PackageReport getPackageReport(String packageName) {
-    return packageReportByPackageName.computeIfAbsent(packageName, this::createPackageReport);
-  }
-
-  private PackageReport createPackageReport(String packageName) {
-    ITypeBinding packageInfoBinding = parser.resolveBinding(packageName + ".package-info");
-    if (packageInfoBinding == null) {
-      return DEFAULT_PACKAGE_REPORT;
-    }
-
-    boolean isNullMarked =
-        stream(packageInfoBinding.getAnnotations())
-            .anyMatch(
-                a -> Nullability.isNullMarkedAnnotation(a.getAnnotationType().getQualifiedName()));
-
-    String objectiveCName =
-        getKtObjectiveCName(
-            KtInteropAnnotationUtils.getKtObjectiveCNameAnnotation(
-                packageInfoBinding.getAnnotations()));
-
-    String jsNamespace =
-        getJsNamespace(JsInteropAnnotationUtils.getJsPackageAnnotation(packageInfoBinding));
-    return PackageReport.newBuilder()
-        .setJsNamespace(jsNamespace)
-        .setObjectiveCName(objectiveCName)
-        .setNullMarked(isNullMarked)
-        .build();
-  }
-
-  private PackageAnnotationsResolver(JdtParser parser) {
-    this.parser = parser;
+  private PackageAnnotationsResolver() {
+    this.packageInfoCache = PackageInfoCache.get();
   }
 }
