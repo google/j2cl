@@ -20,6 +20,7 @@ import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.KtVariance
 import com.google.j2cl.transpiler.ast.MethodDescriptor
+import com.google.j2cl.transpiler.ast.NullabilityAnnotation
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors
@@ -101,26 +102,12 @@ internal fun TypeDescriptor.contains(
     else -> false
   }
 
-internal val TypeDescriptor.isKtDenotableNonWildcard: Boolean
+internal val TypeDescriptor.isDenotableNonWildcard: Boolean
   get() =
     when (this) {
-      is TypeVariable -> !isWildcard && isKtDenotable
-      else -> isKtDenotable
-    }
-
-internal val TypeDescriptor.isKtDenotable: Boolean
-  get() =
-    when (this) {
-      is IntersectionTypeDescriptor ->
-        // Kotlin supports "T & Any" intersection.
-        intersectionTypeDescriptors.let { intersections ->
-          intersections.size == 2 &&
-            intersections[0].let { it is TypeVariable && !it.isWildcardOrCapture } &&
-            intersections[1] == anyTypeDescriptor
-        }
+      is TypeVariable -> !isWildcard && isDenotable
       else -> isDenotable
     }
-
 internal val TypeVariable.hasNullableBounds: Boolean
   get() = upperBoundTypeDescriptor.canBeNull() && hasNullableRecursiveBounds
 
@@ -143,11 +130,8 @@ internal fun TypeDescriptor.makeNonNull(): TypeDescriptor =
           // for wildcards and captures should also be done by `toNonNullable()`. The only
           // kotlin output specific piece is the handling of `*`.
           if (hasNullableBounds) {
-            // Convert to {@code T & Any}
-            IntersectionTypeDescriptor.newBuilder()
-              .setIntersectionTypeDescriptors(
-                listOf(withoutNullabilityAnnotations(), anyTypeDescriptor)
-              )
+            TypeVariable.Builder.from(this)
+              .setNullabilityAnnotation(NullabilityAnnotation.NOT_NULLABLE)
               .build()
           } else {
             withoutNullabilityAnnotations()

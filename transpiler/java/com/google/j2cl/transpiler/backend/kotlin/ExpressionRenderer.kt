@@ -618,7 +618,7 @@ internal data class ExpressionRenderer(
     join(nameRenderer.nameSource(variable), variableDeclaratorSource(variable.typeDescriptor))
 
   private fun variableDeclaratorSource(typeDescriptor: TypeDescriptor): Source =
-    if (typeDescriptor.isKtDenotableNonWildcard) {
+    if (typeDescriptor.isDenotableNonWildcard) {
       spaceSeparated(COLON, nameRenderer.typeDescriptorSource(typeDescriptor))
     } else {
       join(
