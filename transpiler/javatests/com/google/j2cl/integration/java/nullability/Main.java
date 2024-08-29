@@ -28,6 +28,7 @@ public class Main {
     testNullableVoid();
     testExplicitTypeArguments();
     testImplicitTypeArguments();
+    testImplicitTypeArguments_wildcards();
   }
 
   // Currently, both non-null and nullable Void are translated to nullable type in Kotlin, which is
@@ -112,9 +113,24 @@ public class Main {
     }
   }
 
+  private static void testImplicitTypeArguments_wildcards() {
+    Supplier<?> supplier = Supplier.<@Nullable String>of(null);
+    accept1(supplier.getValue());
+    accept2("foo", supplier.getValue());
+    acceptVarargs("foo", supplier.getValue());
+  }
+
   private static <T extends @Nullable Object> void accept1(T t) {}
 
   private static <T extends @Nullable Object> void accept2(T t1, T t2) {}
 
   private static <T extends @Nullable Object> void acceptVarargs(T... t) {}
+
+  private interface Supplier<V extends @Nullable Object> {
+    V getValue();
+
+    static <V extends @Nullable Object> Supplier<V> of(V v) {
+      return () -> v;
+    }
+  }
 }

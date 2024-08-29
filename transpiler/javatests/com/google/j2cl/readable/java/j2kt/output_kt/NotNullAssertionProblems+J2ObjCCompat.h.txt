@@ -6,11 +6,17 @@
 @class J2ktJ2ktNotNullAssertionProblemsCompanion;
 @class NSString;
 
+@protocol J2ktJ2ktNotNullAssertionProblems_Supplier;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @compatibility_alias J2ktNotNullAssertionProblems J2ktJ2ktNotNullAssertionProblems;
 
 @compatibility_alias J2ktNotNullAssertionProblemsCompanion J2ktJ2ktNotNullAssertionProblemsCompanion;
+
+NS_INLINE void J2ktNotNullAssertionProblems_testImplicitTypeArguments_wildcardsWithJ2ktNotNullAssertionProblems_Supplier_(id<J2ktJ2ktNotNullAssertionProblems_Supplier> wildcardSupplier) {
+ [J2ktJ2ktNotNullAssertionProblemsCompanion.shared testImplicitTypeArguments_wildcardsWithJ2ktNotNullAssertionProblems_Supplier:wildcardSupplier];
+}
 
 NS_INLINE void J2ktNotNullAssertionProblems_accept1WithId_(id t) {
  [J2ktJ2ktNotNullAssertionProblemsCompanion.shared accept1WithId:t];
@@ -23,5 +29,7 @@ NS_INLINE void J2ktNotNullAssertionProblems_accept2WithId_withId_(id t1, id t2) 
 NS_INLINE NSString* _Nullable J2ktNotNullAssertionProblems_nullableString(void) {
  return [J2ktJ2ktNotNullAssertionProblemsCompanion.shared nullableString];
 }
+
+#define J2ktNotNullAssertionProblems_Supplier J2ktJ2ktNotNullAssertionProblems_Supplier
 
 NS_ASSUME_NONNULL_END

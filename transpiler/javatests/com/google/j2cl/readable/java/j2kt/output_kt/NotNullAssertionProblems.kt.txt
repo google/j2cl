@@ -30,8 +30,8 @@ import kotlin.native.ObjCName
 
 @ObjCName("J2ktJ2ktNotNullAssertionProblems", exact = true)
 open class NotNullAssertionProblems {
- @ObjCName("test")
- open fun test() {
+ @ObjCName("testImplicitTypeArguments")
+ open fun testImplicitTypeArguments() {
   NotNullAssertionProblems.accept1<Any>(null!!)
   NotNullAssertionProblems.accept2<String>("foo", null!!)
   NotNullAssertionProblems.accept2<String>("foo", NotNullAssertionProblems.nullableString()!!)
@@ -41,6 +41,16 @@ open class NotNullAssertionProblems {
 
  @ObjCName("J2ktJ2ktNotNullAssertionProblemsCompanion", exact = true)
  companion object {
+  @JvmStatic
+  @ObjCName("testImplicitTypeArguments_wildcards")
+  fun testImplicitTypeArguments_wildcards(
+   @ObjCName("withJ2ktNotNullAssertionProblems_Supplier") wildcardSupplier: NotNullAssertionProblems.Supplier<*>
+  ) {
+   NotNullAssertionProblems.accept1((wildcardSupplier as NotNullAssertionProblems.Supplier<Any?>).getValue())
+   NotNullAssertionProblems.accept2<Any?>("foo", (wildcardSupplier as NotNullAssertionProblems.Supplier<Any?>).getValue())
+   NotNullAssertionProblems.acceptVararg<Any?>("foo", (wildcardSupplier as NotNullAssertionProblems.Supplier<Any?>).getValue())
+  }
+
   @JvmStatic
   @ObjCName("accept1")
   fun <T> accept1(
@@ -77,5 +87,11 @@ open class NotNullAssertionProblems {
   internal open fun f_pp_j2kt(): V {
    return (if (true) this.defaultValue_pp_j2kt else this.defaultValue_pp_j2kt) as V
   }
+ }
+
+ @ObjCName("J2ktJ2ktNotNullAssertionProblems_Supplier", exact = true)
+ fun interface Supplier<V> {
+  @ObjCName("getValue")
+  fun getValue(): V
  }
 }

@@ -21,7 +21,7 @@ import org.jspecify.annotations.Nullable;
 /** A test covering cases with unnecessary not-null {@code !!} assertions. */
 @NullMarked
 public class NotNullAssertionProblems {
-  public void test() {
+  public void testImplicitTypeArguments() {
     accept1(null);
 
     accept2("foo", null);
@@ -29,6 +29,13 @@ public class NotNullAssertionProblems {
 
     acceptVararg("foo", null);
     acceptVararg("foo", nullableString());
+  }
+
+  public static void testImplicitTypeArguments_wildcards(Supplier<?> wildcardSupplier) {
+    // Non-null assertion should not be inserted for {@code supplier.getValue()}.
+    accept1(wildcardSupplier.getValue());
+    accept2("foo", wildcardSupplier.getValue());
+    acceptVararg("foo", wildcardSupplier.getValue());
   }
 
   public static <T extends @Nullable Object> void accept1(T t) {}
@@ -47,5 +54,9 @@ public class NotNullAssertionProblems {
     V f() {
       return true ? defaultValue : defaultValue;
     }
+  }
+
+  public interface Supplier<V extends @Nullable Object> {
+    V getValue();
   }
 }
