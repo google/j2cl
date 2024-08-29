@@ -220,9 +220,7 @@ final class BazelJ2clBuilder extends BazelWorker {
   private static List<String> getPathEntries(String path) {
     List<String> entries = new ArrayList<>();
     for (String entry : Splitter.on(File.pathSeparatorChar).omitEmptyStrings().split(path)) {
-      if (new File(entry).exists()) {
-        entries.add(entry);
-      }
+      entries.add(entry);
     }
     return entries;
   }
