@@ -41,7 +41,6 @@ import org.jetbrains.kotlin.descriptors.Visibilities
 import org.jetbrains.kotlin.descriptors.java.JavaVisibilities
 import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.ObsoleteDescriptorBasedAPI
-import org.jetbrains.kotlin.ir.backend.js.ir.JsIrBuilder
 import org.jetbrains.kotlin.ir.declarations.IrAnnotationContainer
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrConstructor
@@ -494,26 +493,8 @@ val IrDeclaration.isClinit: Boolean
 private val IrFunction.isPropertyGetter: Boolean
   get() = this is IrSimpleFunction && this == this.correspondingPropertySymbol?.owner?.getter
 
-val IrFunction.isDecomposedFieldInitializer
-  get() = origin == JsIrBuilder.SYNTHESIZED_DECLARATION && name.asString().endsWith("\$init\$")
-
-val IrFunction.hasVoidReturn
-  // Functions that explicitly return Unit should be treated as a void return. However, decomposed
-  // blocks from field initializers will be transformed into an init function. In that case we want
-  // to honor the Unit return rather than void.
-  //
-  // For example:
-  // fun foo(): Unit {}
-  // val f = foo()
-  //
-  // will be decomposed into:
-  //
-  // val f = f$init()
-  // fun f$init() {
-  //   foo()
-  //   return Unit
-  // }
-  get() = returnType.isUnit() && !isDecomposedFieldInitializer && !isPropertyGetter
+val IrFunction.hasVoidReturn: Boolean
+  get() = returnType.isUnit() && !isPropertyGetter
 
 fun IrFunction.javaName(jvmBackendContext: JvmBackendContext): String? =
   when (this) {
