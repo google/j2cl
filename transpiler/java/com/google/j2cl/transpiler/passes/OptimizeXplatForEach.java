@@ -220,6 +220,9 @@ public class OptimizeXplatForEach extends NormalizationPass {
   private static final ImmutableList<WellKnownIterable> WELL_KNOWN_ITERABLES =
       ImmutableList.of(
           WellKnownIterable.builder(IterationType.FOR_ARRAY)
+              .enclosingClassQualifiedName("com.google.gwt.corp.collections.AbstractJsArray")
+              .build(),
+          WellKnownIterable.builder(IterationType.FOR_ARRAY)
               .enclosingClassQualifiedName("com.google.gwt.corp.collections.JsArray")
               .build(),
           WellKnownIterable.builder(IterationType.FOR_ARRAY)
@@ -227,6 +230,11 @@ public class OptimizeXplatForEach extends NormalizationPass {
               .build(),
           WellKnownIterable.builder(IterationType.FOR_ARRAY)
               .enclosingClassQualifiedName("com.google.gwt.corp.collections.UnmodifiableJsArray")
+              .build(),
+          WellKnownIterable.builder(IterationType.FOR_ARRAY)
+              .enclosingClassQualifiedName(
+                  "com.google.apps.docs.xplat.collections.AbstractJsArrayInteger")
+              .holdsPrimitiveValues(true)
               .build(),
           WellKnownIterable.builder(IterationType.FOR_ARRAY)
               .enclosingClassQualifiedName("com.google.apps.docs.xplat.collections.JsArrayInteger")
