@@ -23,7 +23,7 @@ import org.jetbrains.kotlin.backend.common.lower.irBlock
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
 import org.jetbrains.kotlin.backend.jvm.ir.createJvmIrBuilder
 import org.jetbrains.kotlin.ir.builders.irBlock
-import org.jetbrains.kotlin.ir.builders.irGetField
+import org.jetbrains.kotlin.ir.builders.irUnit
 import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.ir.expressions.IrCall
 import org.jetbrains.kotlin.ir.expressions.IrExpression
@@ -40,7 +40,6 @@ import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
  * ```
  *
  * will lower to:
- *
  * ```
  * fun foo(): Unit {}
  * val x = {
@@ -62,12 +61,7 @@ internal class KotlinUnitValueLowering(private val context: JvmBackendContext) :
     return with(context.createJvmIrBuilder(currentScope!!, expression)) {
       irBlock(expression, null, expression.type) {
         +super.visitCall(expression)
-        +irGetField(
-          null,
-          this@KotlinUnitValueLowering.context.cachedDeclarations.getFieldForObjectInstance(
-            context.irBuiltIns.unitClass.owner
-          )
-        )
+        +irUnit()
       }
     }
   }
