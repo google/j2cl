@@ -21,6 +21,22 @@ import org.jspecify.annotations.Nullable;
 
 @NullMarked
 public class DefinitelyNotNull {
+  interface NotNullSupplier<T extends @Nullable Object> {
+    @JsNonNull
+    T getNotNull();
+  }
+
+  static String testNotNullSupplier(NotNullSupplier<? extends @Nullable String> supplier) {
+    // TODO(b/361088311): It fails to compile in Kotlin because of:
+    //  https://youtrack.jetbrains.com/issue/KT-70814
+    // The type of {@code supplier.getNonNull()} expression is inferred as {@code String?} in
+    // Kotlin, so J2KT needs to generate a non-null assertion to match {@code String} return type.
+    // Note: Currently it works because J2KT inserts unnecessary unchecked
+    // {@code supplier as Supplier<String?>} cast, however these cast will soon disappear when the
+    // b/663670610 bug is fixed.
+    return supplier.getNotNull();
+  }
+
   static class Ordering<T extends @Nullable Object> {
     <S extends T> Ordering<S> reverse() {
       throw new RuntimeException();

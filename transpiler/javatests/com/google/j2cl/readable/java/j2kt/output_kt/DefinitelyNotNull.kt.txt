@@ -22,6 +22,7 @@ import java.lang.RuntimeException
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.OptIn
+import kotlin.String
 import kotlin.Suppress
 import kotlin.collections.MutableIterable
 import kotlin.experimental.ExperimentalObjCName
@@ -33,6 +34,11 @@ open class DefinitelyNotNull {
  @ObjCName("J2ktJ2ktDefinitelyNotNullCompanion", exact = true)
  companion object {
   @JvmStatic
+  internal fun testNotNullSupplier_pp_j2kt(supplier: DefinitelyNotNull.NotNullSupplier<out String?>): String {
+   return (supplier as DefinitelyNotNull.NotNullSupplier<String?>).getNotNull()
+  }
+
+  @JvmStatic
   @ObjCName("testEquivalence")
   fun <T> testEquivalence(
    @ObjCName("withJ2ktDefinitelyNotNull_Equivalence") equivalence: DefinitelyNotNull.Equivalence<in T & Any>,
@@ -41,6 +47,12 @@ open class DefinitelyNotNull {
   ): Boolean {
    return equivalence.equivalent(a, b)
   }
+ }
+
+ @ObjCName("J2ktJ2ktDefinitelyNotNull_NotNullSupplier", exact = true)
+ fun interface NotNullSupplier<T> {
+  @ObjCName("getNotNull")
+  fun getNotNull(): T & Any
  }
 
  @ObjCName("J2ktJ2ktDefinitelyNotNull_Ordering", exact = true)
