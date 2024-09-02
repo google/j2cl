@@ -18,6 +18,7 @@
 package j2ktnotpassing
 
 import javaemul.lang.*
+import kotlin.Any
 import kotlin.OptIn
 import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
@@ -33,7 +34,7 @@ open class TypeWildCards {
   fun <T: TypeWildCards.Observable<*>?> testObservableParameterized(
    @ObjCName("withJ2ktnotpassingTypeWildCards_Observable") observable: T
   ) {
-   observable!!.addObserver(TypeWildCards.Observer { e /* capture#1-of * */ ->
+   (observable as TypeWildCards.Observable<Any?>?)!!.addObserver(TypeWildCards.Observer { e /* capture#1-of * */ ->
    })
   }
 
@@ -42,7 +43,7 @@ open class TypeWildCards {
   fun testRecursiveObservable(
    @ObjCName("withJ2ktnotpassingTypeWildCards_RecursiveObservable") observable: TypeWildCards.RecursiveObservable<*>?
   ) {
-   observable!!.addObserver(TypeWildCards.Observer { e /* capture#2-of out TypeWildCards.RecursiveObservable<*>? */ ->
+   (observable as TypeWildCards.RecursiveObservable<TypeWildCards.RecursiveObservable<E>?>?)!!.addObserver(TypeWildCards.Observer { e /* capture#2-of out TypeWildCards.RecursiveObservable<*>? */ ->
    })
   }
  }

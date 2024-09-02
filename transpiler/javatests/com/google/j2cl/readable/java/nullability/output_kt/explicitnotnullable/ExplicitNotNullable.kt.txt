@@ -357,7 +357,7 @@ open class ExplicitNotNullable {
   @JvmStatic
   internal fun testParametrizedMethod_pp_nullability_explicitnotnullable(f: ExplicitNotNullable.Function<in String, out String>, string: String): String {
    val localString: String? = string
-   return (f as ExplicitNotNullable.Function<in String, String>).apply(localString as String)
+   return f.apply(localString as String)
   }
 
   @JvmStatic

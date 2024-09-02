@@ -42,7 +42,7 @@ open class GenericEquals<T> {
  open fun foo(
   @ObjCName("withGenericequalsGenericEquals") other: GenericEquals<*>?
  ): Any? {
-  return ((other as GenericEquals<Any?>?)!!.value2 as GenericEquals<Any?>?)!!.value
+  return other!!.value2!!.value
  }
 
  override fun equals(obj: Any?): Boolean {
@@ -53,6 +53,6 @@ open class GenericEquals<T> {
    return false
   }
   val other: GenericEquals<*>? = obj as GenericEquals<*>?
-  return this.value!!.equals((other as GenericEquals<Any?>?)!!.value)
+  return this.value!!.equals(other!!.value)
  }
 }

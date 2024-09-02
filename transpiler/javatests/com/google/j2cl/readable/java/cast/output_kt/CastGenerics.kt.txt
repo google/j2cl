@@ -113,14 +113,14 @@ open class CastGenerics<T, E: Number?> {
    var oA: Any? = strictlyA!!.get_pp_cast()
    var a: CastGenerics.A? = strictlyA!!.get_pp_cast()
    val extendsA: CastGenerics.Container<out CastGenerics.A?>? = null
-   oA = (extendsA as CastGenerics.Container<CastGenerics.A?>?)!!.get_pp_cast()
-   a = (extendsA as CastGenerics.Container<CastGenerics.A?>?)!!.get_pp_cast()
+   oA = extendsA!!.get_pp_cast()
+   a = extendsA!!.get_pp_cast()
    val superA: CastGenerics.Container<in CastGenerics.A?>? = null
    oA = superA!!.get_pp_cast()
    val strictlyString: CastGenerics.Container<String?>? = null
    str = strictlyString!!.get_pp_cast()
    val extendsString: CastGenerics.Container<out String?>? = null
-   str = (extendsString as CastGenerics.Container<String?>?)!!.get_pp_cast()
+   str = extendsString!!.get_pp_cast()
    val superString: CastGenerics.Container<in String?>? = null
    oA = superString!!.get_pp_cast()
   }
@@ -129,7 +129,7 @@ open class CastGenerics<T, E: Number?> {
   @ObjCName("testErasureCastInNullMarkedCode")
   fun testErasureCastInNullMarkedCode() {
    val container: CastGenerics.NullMarkedContainer<out String>? = CastGenerics.NullMarkedContainer<String>("abc")
-   val s: String? = (container as CastGenerics.NullMarkedContainer<String>?)!!.get_pp_cast()
+   val s: String? = container!!.get_pp_cast()
   }
 
   @JvmStatic

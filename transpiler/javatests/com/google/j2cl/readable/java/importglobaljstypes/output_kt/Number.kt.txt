@@ -22,7 +22,6 @@ import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsPackage
 import jsinterop.annotations.JsProperty
 import jsinterop.annotations.JsType
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Int
@@ -70,7 +69,7 @@ open class Number {
 
   @JvmStatic
   private fun getArrayLength(array: Number.NativeArray<*>?): Int {
-   return (array as Number.NativeArray<Any?>?)!!.getLength()
+   return array!!.getLength()
   }
  }
 

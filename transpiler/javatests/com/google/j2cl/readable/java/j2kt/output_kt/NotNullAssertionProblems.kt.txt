@@ -46,9 +46,9 @@ open class NotNullAssertionProblems {
   fun testImplicitTypeArguments_wildcards(
    @ObjCName("withJ2ktNotNullAssertionProblems_Supplier") wildcardSupplier: NotNullAssertionProblems.Supplier<*>
   ) {
-   NotNullAssertionProblems.accept1((wildcardSupplier as NotNullAssertionProblems.Supplier<Any?>).getValue())
-   NotNullAssertionProblems.accept2<Any?>("foo", (wildcardSupplier as NotNullAssertionProblems.Supplier<Any?>).getValue())
-   NotNullAssertionProblems.acceptVararg<Any?>("foo", (wildcardSupplier as NotNullAssertionProblems.Supplier<Any?>).getValue())
+   NotNullAssertionProblems.accept1(wildcardSupplier.getValue())
+   NotNullAssertionProblems.accept2<Any?>("foo", wildcardSupplier.getValue())
+   NotNullAssertionProblems.acceptVararg<Any?>("foo", wildcardSupplier.getValue())
   }
 
   @JvmStatic

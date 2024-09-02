@@ -35,7 +35,7 @@ open class DefinitelyNotNull {
  companion object {
   @JvmStatic
   internal fun testNotNullSupplier_pp_j2kt(supplier: DefinitelyNotNull.NotNullSupplier<out String?>): String {
-   return (supplier as DefinitelyNotNull.NotNullSupplier<String?>).getNotNull()!!
+   return supplier.getNotNull()!!
   }
 
   @JvmStatic
