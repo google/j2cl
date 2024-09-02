@@ -31,9 +31,6 @@ public class DefinitelyNotNull {
     //  https://youtrack.jetbrains.com/issue/KT-70814
     // The type of {@code supplier.getNonNull()} expression is inferred as {@code String?} in
     // Kotlin, so J2KT needs to generate a non-null assertion to match {@code String} return type.
-    // Note: Currently it works because J2KT inserts unnecessary unchecked
-    // {@code supplier as Supplier<String?>} cast, however these cast will soon disappear when the
-    // b/663670610 bug is fixed.
     return supplier.getNotNull();
   }
 

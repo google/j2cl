@@ -28,6 +28,7 @@ import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewriter;
@@ -52,12 +53,13 @@ public final class InsertNotNullAssertions extends NormalizationPass {
                   TypeDescriptor declaredTypeDescriptor,
                   Expression expression) {
 
+                // Do not insert a null assertion if the return type of a call inferred to be
+                // non-null. Kotlin does not null check these situations
+                // (https://youtrack.jetbrains.com/issue/KT-8135) and there is existing code
+                // that takes advantage of that.
                 if (expression instanceof MethodCall
-                    && !expression.getTypeDescriptor().canBeNull()) {
-                  // Do not insert a null assertion if the return type of a call inferred to be
-                  // non-null. Kotlin does not null check these situations
-                  // (https://youtrack.jetbrains.com/issue/KT-8135) and there is existing code
-                  // that takes advantage of that.
+                    && !expression.getTypeDescriptor().canBeNull()
+                    && !isWildcardOrCaptureAnnotatedNonNullable(expression.getTypeDescriptor())) {
                   return expression;
                 }
 
@@ -86,9 +88,13 @@ public final class InsertNotNullAssertions extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Node rewriteAssertStatement(AssertStatement assertStatement) {
+            Expression message = assertStatement.getMessage();
+            if (message == null) {
+              return assertStatement;
+            }
+
             return AssertStatement.Builder.from(assertStatement)
-                .setMessage(
-                    insertElvisIfNeeded(assertStatement.getMessage(), new StringLiteral("null")))
+                .setMessage(insertElvisIfNeeded(message, new StringLiteral("null")))
                 .build();
           }
         });
@@ -96,7 +102,7 @@ public final class InsertNotNullAssertions extends NormalizationPass {
 
   private Expression insertNotNullAssertionIfNeeded(
       SourcePosition sourcePosition, Expression expression) {
-    if (expression == null || !expression.canBeNull()) {
+    if (isInferredAsNonNullInKotlin(expression)) {
       // Don't insert null-check for expressions which are known to be non-null, regardless of
       // nullability annotations.
       return expression;
@@ -110,7 +116,7 @@ public final class InsertNotNullAssertions extends NormalizationPass {
 
   private static Expression insertElvisIfNeeded(
       Expression expression, Expression nonNullExpression) {
-    if (expression == null || !expression.canBeNull()) {
+    if (isInferredAsNonNullInKotlin(expression)) {
       // Don't insert null-check for expressions which are known to be non-null, regardless of
       // nullability annotations.
       return expression;
@@ -144,5 +150,19 @@ public final class InsertNotNullAssertions extends NormalizationPass {
                 .setTypeDescriptor(TypeDescriptors.get().javaLangObject.toNonNullable())
                 .build())
         .build();
+  }
+
+  private static boolean isInferredAsNonNullInKotlin(Expression expression) {
+    return !expression.canBeNull()
+        && !isWildcardOrCaptureAnnotatedNonNullable(expression.getTypeDescriptor());
+  }
+
+  // TODO(b/361088311): Remove this workaround when the Kotlin bug is fixed.
+  private static boolean isWildcardOrCaptureAnnotatedNonNullable(TypeDescriptor typeDescriptor) {
+    if (typeDescriptor instanceof TypeVariable) {
+      TypeVariable typeVariable = (TypeVariable) typeDescriptor;
+      return typeVariable.isWildcardOrCapture() && typeVariable.isAnnotatedNonNullable();
+    }
+    return false;
   }
 }
