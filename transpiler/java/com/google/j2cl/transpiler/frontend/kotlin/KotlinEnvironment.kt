@@ -286,7 +286,7 @@ class KotlinEnvironment(
     getDeclaredType(irType as IrSimpleType, useDeclarationVariance = false)
 
   fun getDeclaredTypeDescriptor(irType: IrType): DeclaredTypeDescriptor =
-    getReferenceTypeDescriptor(irType) as DeclaredTypeDescriptor
+    getTypeDescriptor(irType) as DeclaredTypeDescriptor
 
   fun getTypeDescriptor(irType: IrType): TypeDescriptor {
     return typeDescriptorByIrType.getOrPut(irType) {
@@ -296,7 +296,7 @@ class KotlinEnvironment(
             val typeParameter = irType.classifierOrNull!!.owner as IrTypeParameter
             getTypeVariable(typeParameter, !typeParameter.isFromJava() && irType.isMarkedNullable())
           }
-          irType.isArrayType() -> getArrayTypeDescriptor(irType)
+          irType.isArrayType() -> createArrayTypeDescriptor(irType)
           irType is IrSimpleType -> getDeclaredType(irType, useDeclarationVariance = true)
           else -> TODO("Not supported type $irType")
         }
@@ -346,7 +346,7 @@ class KotlinEnvironment(
       if (irTypeParameter.superTypes.size == 1) {
         { getReferenceTypeDescriptor(irTypeParameter.superTypes.single()) }
       } else {
-        { createIntersectionType(irTypeParameter.superTypes) }
+        { createIntersectionTypeDescriptor(irTypeParameter.superTypes) }
       }
 
     return TypeVariable.newBuilder()
@@ -359,12 +359,12 @@ class KotlinEnvironment(
       .build()
   }
 
-  private fun createIntersectionType(types: List<IrType>): IntersectionTypeDescriptor =
+  private fun createIntersectionTypeDescriptor(types: List<IrType>): IntersectionTypeDescriptor =
     IntersectionTypeDescriptor.newBuilder()
       .setIntersectionTypeDescriptors(types.map(::getReferenceTypeDescriptor))
       .build()
 
-  private fun getArrayTypeDescriptor(arrayType: IrType) =
+  private fun createArrayTypeDescriptor(arrayType: IrType) =
     ArrayTypeDescriptor.newBuilder()
       .setComponentTypeDescriptor(
         getReferenceTypeDescriptor(arrayType.getArrayElementType(pluginContext.irBuiltIns))
