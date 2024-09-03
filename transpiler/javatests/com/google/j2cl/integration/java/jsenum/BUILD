@@ -37,6 +37,4 @@ integration_test(
     # Contains JsInterop features which are only applicable for JS output.
     enable_jvm_test = False,
     enable_kt = False,
-    # TODO(b/325056024): jsenums are not yet supported in the modular pipeline
-    use_modular_pipeline = False,
 )
