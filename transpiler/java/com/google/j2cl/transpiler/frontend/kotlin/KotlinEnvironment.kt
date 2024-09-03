@@ -276,22 +276,6 @@ class KotlinEnvironment(
       )
     }
 
-  internal fun getReferenceTypeDescriptorForTypeArgument(
-    irTypeArgument: IrTypeArgument
-  ): TypeDescriptor =
-    when (irTypeArgument) {
-      is IrStarProjection -> TypeVariable.createWildcard()
-      is IrTypeProjection -> {
-        var type = getReferenceTypeDescriptor(irTypeArgument.typeOrNull!!)
-        when (irTypeArgument.variance) {
-          Variance.INVARIANT -> type
-          Variance.IN_VARIANCE -> TypeVariable.createWildcardWithLowerBound(type)
-          Variance.OUT_VARIANCE -> TypeVariable.createWildcardWithUpperBound(type)
-        }
-      }
-      else -> TODO("Not supported type argument $irTypeArgument")
-    }
-
   /**
    * Returns a type descriptor to be used as a super type in a type declaration.
    *
@@ -339,6 +323,20 @@ class KotlinEnvironment(
   //  how to match varargs methods.
   fun getReferenceTypeDescriptorForFunctionReference(irType: IrSimpleType) =
     getDeclaredType(irType, useDeclarationVariance = false)
+
+  fun getReferenceTypeDescriptorForTypeArgument(irTypeArgument: IrTypeArgument): TypeDescriptor =
+    when (irTypeArgument) {
+      is IrStarProjection -> TypeVariable.createWildcard()
+      is IrTypeProjection -> {
+        val type = getReferenceTypeDescriptor(irTypeArgument.typeOrNull!!)
+        when (irTypeArgument.variance) {
+          Variance.INVARIANT -> type
+          Variance.IN_VARIANCE -> TypeVariable.createWildcardWithLowerBound(type)
+          Variance.OUT_VARIANCE -> TypeVariable.createWildcardWithUpperBound(type)
+        }
+      }
+      else -> TODO("Not supported type argument $irTypeArgument")
+    }
 
   private fun getTypeVariable(
     irTypeParameter: IrTypeParameter,
