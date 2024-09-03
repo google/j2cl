@@ -175,7 +175,6 @@ import org.jetbrains.kotlin.ir.types.classOrNull
 import org.jetbrains.kotlin.ir.types.impl.makeTypeProjection
 import org.jetbrains.kotlin.ir.types.isNullable
 import org.jetbrains.kotlin.ir.types.isPrimitiveType
-import org.jetbrains.kotlin.ir.types.isUnit
 import org.jetbrains.kotlin.ir.types.makeNotNull
 import org.jetbrains.kotlin.ir.types.makeNullable
 import org.jetbrains.kotlin.ir.types.typeWithArguments
@@ -496,19 +495,13 @@ class CompilationUnitBuilder(
       .build()
 
   private fun convertReturnStatement(irReturn: IrReturn): Statement {
-    val returnTarget = (irReturn.returnTargetSymbol as? IrFunctionSymbol)?.owner
+    val returnTarget = (irReturn.returnTargetSymbol as IrFunctionSymbol).owner
     val value =
       // If the method return type should be represented as a void, omit the return value of Unit.
-      if (
-        irReturn.value.type.isUnit() &&
-          returnTarget != null &&
-          returnTarget.hasVoidReturn &&
-          !returnTarget.isMultifileBridge()
-      ) {
-        // Ensure we only see a Unit.INSTANCE reference, or a variable reference. The latter is
-        // likely the result of block decomposition (ex. a tmp variable), but regardless, reading a
-        // variable is a pure operation and safe to omit.
-        check(irReturn.value.isUnitInstanceReference || irReturn.value is IrGetValue) {
+      // (Except muti-file bridge methods which are not lowered and it is not safe to drop their
+      // return value.)
+      if (returnTarget.hasVoidReturn && !returnTarget.isMultifileBridge()) {
+        check(irReturn.value.isUnitInstanceReference) {
           "Methods with a void return type should have been lowered to only return Unit.INSTANCE"
         }
         null
