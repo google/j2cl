@@ -103,7 +103,6 @@ def _impl_j2wasm_application(ctx):
         args.add_all(ctx.attr.entry_points, before_each = "-experimentalGenerateWasmExport")
         args.add_all(ctx.attr.defines, before_each = "-experimentalDefineForWasm")
         args.add_all(ctx.attr.transpiler_args)
-        args.add("-experimentalWasmEnableNonNativeJsEnum")
 
         args.add_all(srcs)
 

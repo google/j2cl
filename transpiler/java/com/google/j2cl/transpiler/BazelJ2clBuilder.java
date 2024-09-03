@@ -135,10 +135,6 @@ final class BazelJ2clBuilder extends BazelWorker {
   @Option(name = "-experimentalDefineForWasm", handler = MapOptionHandler.class, hidden = true)
   Map<String, String> definesForWasm = new HashMap<>();
 
-  // TODO(b/181615162): Remove this flag after optimizing JsEnums and enabling it.
-  @Option(name = "-experimentalWasmEnableNonNativeJsEnum", hidden = true)
-  boolean wasmEnableNonNativeJsEnum = false;
-
   @Override
   protected void run(Problems problems) {
     try (Output out = OutputUtils.initOutput(this.output, problems)) {
@@ -210,7 +206,6 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setBackend(this.backend)
         .setWasmEntryPointStrings(ImmutableList.copyOf(this.wasmEntryPoints))
         .setDefinesForWasm(ImmutableMap.copyOf(definesForWasm))
-        .setWasmEnableNonNativeJsEnum(wasmEnableNonNativeJsEnum)
         .setNullMarkedSupported(this.enableJSpecifySupport)
         .setKotlincOptions(ImmutableList.copyOf(kotlincOptions))
         .setForbiddenAnnotations(ImmutableList.copyOf(forbiddenAnnotations))

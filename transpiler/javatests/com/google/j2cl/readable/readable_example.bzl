@@ -103,7 +103,6 @@ def readable_example(
             name = "readable_wasm",
             deps = [":readable-j2wasm"],
             entry_points = wasm_entry_points,
-            internal_transpiler_args = ["-experimentalWasmEnableNonNativeJsEnum"] if not use_modular_pipeline else [],
             use_modular_pipeline = use_modular_pipeline,
         )
 

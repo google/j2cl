@@ -69,13 +69,7 @@ class J2clTranspiler {
     if (options.getBackend().isWasm()) {
       // TODO(b/178738483): Remove hack that makes mangling backend dependent.
       MemberDescriptor.setWasmManglingPatterns();
-      if (options.getWasmEnableNonNativeJsEnum()) {
-        // TODO(b/181615162): Remove hack that makes it possible to ignore JsEnum in Wasm.
-        TypeDeclaration.setIgnoreNativeJsEnumAnnotations();
-      } else {
-        // TODO(b/181615162): Remove hack that makes it possible to ignore JsEnum in Wasm.
-        TypeDeclaration.setIgnoreJsEnumAnnotations();
-      }
+      TypeDeclaration.setImplementWasmJsEnumSemantics();
       // TODO(b/317164851): Remove hack that makes jsinfo ignored for non-native types in Wasm.
       FieldDescriptor.setIgnoreNonNativeJsInfo();
       MethodDescriptor.setIgnoreNonNativeJsInfo();

@@ -302,7 +302,6 @@ def _j2cl_transpile(
     if backend == "WASM_MODULAR":
         # Add a prefix to where the Java source files will be located relative to the source map.
         args.add(output_dir.short_path, format = "-sourceMappingPathPrefix=%s/")
-        args.add("-experimentalWasmEnableNonNativeJsEnum")
 
     for flag, value in internal_transpiler_flags.items():
         if value:
