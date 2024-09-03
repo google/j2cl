@@ -138,49 +138,38 @@ class KotlinEnvironment(
 ) {
   private val builtinsResolver = BuiltinsResolver(pluginContext, jvmBackendContext)
   private val typeDescriptorByIrType: MutableMap<IrType, TypeDescriptor> = HashMap()
-  private val primitiveTypeDescriptorsByIrType: Map<IrType, TypeDescriptor> =
-    mapOf(
-      pluginContext.irBuiltIns.booleanType to PrimitiveTypes.BOOLEAN,
-      pluginContext.irBuiltIns.byteType to PrimitiveTypes.BYTE,
-      pluginContext.irBuiltIns.charType to PrimitiveTypes.CHAR,
-      pluginContext.irBuiltIns.doubleType to PrimitiveTypes.DOUBLE,
-      pluginContext.irBuiltIns.floatType to PrimitiveTypes.FLOAT,
-      pluginContext.irBuiltIns.intType to PrimitiveTypes.INT,
-      pluginContext.irBuiltIns.longType to PrimitiveTypes.LONG,
-      pluginContext.irBuiltIns.shortType to PrimitiveTypes.SHORT,
-    )
 
   init {
     initWellKnownTypes()
 
-    // Add mappings for basic types to their corresponding boxed types.
-    primitiveTypeDescriptorsByIrType.forEach {
-      typeDescriptorByIrType +=
-        mapOf(
-          it.key to it.value.toBoxedType(),
-          it.key.makeNullable() to it.value.toBoxedType().toNullable(),
-        )
-    }
+    mapOf(
+        pluginContext.irBuiltIns.booleanType to PrimitiveTypes.BOOLEAN,
+        pluginContext.irBuiltIns.byteType to PrimitiveTypes.BYTE,
+        pluginContext.irBuiltIns.charType to PrimitiveTypes.CHAR,
+        pluginContext.irBuiltIns.doubleType to PrimitiveTypes.DOUBLE,
+        pluginContext.irBuiltIns.floatType to PrimitiveTypes.FLOAT,
+        pluginContext.irBuiltIns.intType to PrimitiveTypes.INT,
+        pluginContext.irBuiltIns.longType to PrimitiveTypes.LONG,
+        pluginContext.irBuiltIns.shortType to PrimitiveTypes.SHORT,
+      )
+      .forEach {
+        // Add default mappings for basic types to their corresponding Java types.
+        typeDescriptorByIrType[it.key] = it.value
+        typeDescriptorByIrType[it.key.makeNullable()] = it.value.toBoxedType().toNullable()
 
-    // Add mappings for primitive arrays types.
-    primitiveTypeDescriptorsByIrType.forEach {
-      val arrayType = pluginContext.irBuiltIns.primitiveArrayForType[it.key]
-      if (arrayType != null) {
-        typeDescriptorByIrType +=
-          mapOf(
-            arrayType.defaultType to
-              ArrayTypeDescriptor.newBuilder()
-                .setComponentTypeDescriptor(it.value)
-                .setNullable(false)
-                .build(),
-            arrayType.defaultType.makeNullable() to
-              ArrayTypeDescriptor.newBuilder()
-                .setComponentTypeDescriptor(it.value)
-                .setNullable(true)
-                .build(),
-          )
+        // Add mappings for primitive arrays types.
+        val arrayType = pluginContext.irBuiltIns.primitiveArrayForType[it.key]!!.defaultType
+        typeDescriptorByIrType[arrayType] =
+          ArrayTypeDescriptor.newBuilder()
+            .setComponentTypeDescriptor(it.value)
+            .setNullable(false)
+            .build()
+        typeDescriptorByIrType[arrayType.makeNullable()] =
+          ArrayTypeDescriptor.newBuilder()
+            .setComponentTypeDescriptor(it.value)
+            .setNullable(true)
+            .build()
       }
-    }
   }
 
   private fun initWellKnownTypes() {
@@ -287,9 +276,6 @@ class KotlinEnvironment(
       )
     }
 
-  fun getTypeDescriptor(irType: IrType): TypeDescriptor =
-    primitiveTypeDescriptorsByIrType[irType] ?: getReferenceTypeDescriptor(irType)
-
   internal fun getReferenceTypeDescriptorForTypeArgument(
     irTypeArgument: IrTypeArgument
   ): TypeDescriptor =
@@ -318,15 +304,7 @@ class KotlinEnvironment(
   fun getDeclaredTypeDescriptor(irType: IrType): DeclaredTypeDescriptor =
     getReferenceTypeDescriptor(irType) as DeclaredTypeDescriptor
 
-  /**
-   * Returns a type descriptor that is a reference type.
-   *
-   * <p> In Kotlin there is some ambiguity related to mapping of basic types to primitive or boxed
-   * types (for basic types that have primitive mappings). Nullable basic types are always mapped to
-   * nullable reference types however non-nullable basic types might be mapped to non-nullable
-   * reference types or primitive types depending on the usage.
-   */
-  fun getReferenceTypeDescriptor(irType: IrType): TypeDescriptor {
+  fun getTypeDescriptor(irType: IrType): TypeDescriptor {
     return typeDescriptorByIrType.getOrPut(irType) {
       var typeDescriptor =
         when {
@@ -348,6 +326,12 @@ class KotlinEnvironment(
       }
       return typeDescriptor
     }
+  }
+
+  fun getReferenceTypeDescriptor(irType: IrType): TypeDescriptor {
+    val typeDescriptor = getTypeDescriptor(irType)
+    // In reference context, primitive types are mapped to their boxed variants.
+    return if (typeDescriptor.isPrimitive) typeDescriptor.toBoxedType() else typeDescriptor
   }
 
   // TODO(b/287681086): Review which cases need the propagation of the declaration variance, in the
