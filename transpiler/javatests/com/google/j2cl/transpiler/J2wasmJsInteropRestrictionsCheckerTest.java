@@ -40,7 +40,14 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
         "  static native C test(C c);",
         "}",
         "@JsType(isNative = true)",
-        "class C {}");
+        "class C {}",
+        "class Main {",
+        "  void test() {",
+        // Assignment and casting to null is allowed, even when the null literal is of unknown type.
+        "    MyNative n;",
+        "    n = (MyNative) null;",
+        "  }",
+        "}");
   }
 
   public void testNativeJsTypeInvalidMembersFails() {
@@ -116,7 +123,7 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
             "Native JsType 'Buggy' cannot be assigned to 'Object'. (b/262009761)",
             "Native JsType 'AlsoBuggy' cannot be assigned to 'Object'. (b/262009761)",
             "Native JsType 'Buggy' cannot be cast to 'Object'. (b/262009761)",
-            "Native JsType 'Object' cannot be cast to 'Buggy'. (b/262009761)",
+            "'Object' cannot be cast to Native JsType 'Buggy'. (b/262009761)",
             "Cannot access member of 'Object' with Native JsType 'Buggy'. (b/262009761)");
   }
 

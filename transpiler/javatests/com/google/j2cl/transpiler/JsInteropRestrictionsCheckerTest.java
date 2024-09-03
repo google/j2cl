@@ -2350,11 +2350,12 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  private static void arrays() {",
             "    Object[] array = new MyJsEnum[0];",
             "    Object[] array2 = new MyJsEnum[0][];",
+            "    Object[] array3 = (Object[]) new MyJsEnum[0];",
             "    acceptsObjectArray(new MyJsEnum[0]);",
             "    Object o = new MyJsEnum[1];",
             "    o = (Function<? extends Object, ? extends Object>) (MyJsEnum[] p1) -> p1;",
             "    o = (Function<? extends Object, ? extends Object>) (MyJsEnum... p2) -> p2;",
-            "    o = (MyJsEnum[]) o;",
+            "    o = (MyJsEnum[]) o;", // 31
             "    if (o instanceof MyJsEnum[]) { }",
             "    MyJsEnum[] arr = new MyJsEnum[0];",
             "    acceptsT(new MyJsEnum[0]);",
@@ -2363,7 +2364,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "    Main.<MyJsEnum>acceptsTVarargs(new MyJsEnum[0]);",
             "    returnsTArray(MyJsEnum.A);",
             "    returnsTArrayArray(MyJsEnum.A);",
-            "    returnsTArrayList(MyJsEnum.A);",
+            "    returnsTArrayList(MyJsEnum.A);", // 40
             "    returnsTArrayArrayList(MyJsEnum.A);",
             "    new Main<MyJsEnum[]>().instanceReturnsTArrayList();",
             "    MyJsEnum e;",
@@ -2373,7 +2374,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "    e = new Main<MyJsEnum>().tArrayArray[0][0];",
             "    e = new Main<MyJsEnum[]>().tList.get(0)[0];",
             "    e = new Main<MyJsEnum>().tArrayList.get(0)[0];",
-            "    arr.getClass();",
+            "    arr.getClass();", // 50
             "    List<MyJsEnum[]> list = null;",
             "    DerivedWithJsEnumArrayField buggy = new DerivedWithJsEnumArrayField();",
             "    e = buggy.arr[0];",
@@ -2415,10 +2416,12 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         .assertErrorsWithoutSourcePosition(
             "JsEnum array 'MyJsEnum[]' cannot be assigned to 'Object[]'.",
             "JsEnum array 'MyJsEnum[][]' cannot be assigned to 'Object[]'.",
+            "JsEnum array 'MyJsEnum[]' cannot be cast to 'Object[]'.",
             "JsEnum array 'MyJsEnum[]' cannot be assigned to 'Object[]'.",
             "JsEnum array 'MyJsEnum[]' cannot be assigned to 'Object'.",
             "JsEnum array 'MyJsEnum[]' cannot be assigned to 'R'.",
             "JsEnum array 'MyJsEnum[]' cannot be assigned to 'R'.",
+            "'Object' cannot be cast to JsEnum array 'MyJsEnum[]'.",
             "JsEnum array 'MyJsEnum[]' cannot be assigned to 'Object'.",
             // Method invocation `acceptsT(new MyJsEnum[0])`.
             "JsEnum array 'MyJsEnum[]' cannot be assigned to 'T'.",

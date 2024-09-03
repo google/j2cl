@@ -305,20 +305,12 @@ public class JsInteropRestrictionsChecker {
     checkTypeAssignments(
         type,
         JsInteropRestrictionsChecker::isDisallowedNativeJsTypeAssignment,
-        /* targetTypeDescription= */ "Native JsType",
         /* errorMessageSuffix= */ " (b/262009761)");
   }
 
   private static boolean isDisallowedNativeJsTypeAssignment(
-      TypeDescriptor toTypeDescriptor, Expression expression) {
-    TypeDescriptor expressionTypeDescriptor = expression.getTypeDescriptor();
-    if (toTypeDescriptor.isNative() == expressionTypeDescriptor.isNative()) {
-      return false;
-    }
-    if (toTypeDescriptor.isNative() && expression instanceof NullLiteral) {
-      return false;
-    }
-    return true;
+      TypeDescriptor toTypeDescriptor, TypeDescriptor fromTypeDescriptor) {
+    return toTypeDescriptor.isNative() != fromTypeDescriptor.isNative();
   }
 
   private void checkJsFunctionLambdas(Type type) {
@@ -567,9 +559,8 @@ public class JsInteropRestrictionsChecker {
     if (!requiresConstructor(enclosingTypeDeclaration)) {
       problems.error(
           constructor.getSourcePosition(),
-          "%s '%s' cannot have constructor '%s'.",
-          getJsEnumTypeText(enclosingTypeDeclaration),
-          enclosingTypeDeclaration.getReadableDescription(),
+          "%s cannot have constructor '%s'.",
+          getReadableDescriptionWithPrefix(enclosingTypeDeclaration),
           constructor.getReadableDescription());
       return;
     }
@@ -688,7 +679,7 @@ public class JsInteropRestrictionsChecker {
               return;
             }
 
-            String messagePrefix = "JsEnum";
+            String messagePrefix = "JsEnum ";
 
             String targetMethodSignature = target.getDeclarationDescriptor().getSignature();
             if (targetMethodSignature.equals("compareTo(java.lang.Enum)")) {
@@ -696,14 +687,14 @@ public class JsInteropRestrictionsChecker {
                 return;
               }
               // Customize the message to give a better idea why compareTo() is forbidden.
-              messagePrefix = getJsEnumTypeText(qualifierTypeDescriptor);
+              messagePrefix = getTypeKindPrefix(qualifierTypeDescriptor);
             }
             if (targetMethodSignature.equals("ordinal()")) {
               if (qualifierTypeDescriptor.getJsEnumInfo().supportsOrdinal()) {
                 return;
               }
               // Customize the message to give a better idea why ordinal() is forbidden.
-              messagePrefix = getJsEnumTypeText(qualifierTypeDescriptor);
+              messagePrefix = getTypeKindPrefix(qualifierTypeDescriptor);
             }
 
             String bugMessage = "";
@@ -713,30 +704,13 @@ public class JsInteropRestrictionsChecker {
 
             problems.error(
                 methodCall.getSourcePosition(),
-                "%s '%s' does not support '%s'.%s",
+                "%s'%s' does not support '%s'.%s",
                 messagePrefix,
                 qualifierTypeDescriptor.getReadableDescription(),
                 target.getReadableDescription(),
                 bugMessage);
           }
         });
-  }
-
-  private static String getJsEnumTypeText(TypeDeclaration typeDeclaration) {
-    return getJsEnumTypeText(typeDeclaration.toUnparameterizedTypeDescriptor());
-  }
-
-  private static String getJsEnumTypeText(TypeDescriptor typeDescriptor) {
-    checkArgument(typeDescriptor.isJsEnum());
-    if (typeDescriptor.isNative()) {
-      return "Native JsEnum";
-    }
-
-    if (typeDescriptor.getJsEnumInfo().hasCustomValue()) {
-      return "Custom-valued JsEnum";
-    }
-
-    return "Non-custom-valued JsEnum";
   }
 
   private void checkJsEnumAssignments(Type type) {
@@ -776,10 +750,10 @@ public class JsInteropRestrictionsChecker {
                   // the error reporting here should include source position.
                   problems.error(
                       getSourcePosition(),
-                      "%s '%s' cannot be assigned to '%s'.",
+                      "%s'%s' cannot be assigned to '%s'.",
                       TypeDescriptors.isJavaLangComparable(toTypeDescriptor.toRawTypeDescriptor())
-                          ? getJsEnumTypeText(expressionTypeDescriptor)
-                          : "JsEnum",
+                          ? getTypeKindPrefix(expressionTypeDescriptor)
+                          : "JsEnum ",
                       expressionTypeDescriptor.getReadableDescription(),
                       toTypeDescriptor.getReadableDescription());
                 }
@@ -813,7 +787,6 @@ public class JsInteropRestrictionsChecker {
     checkTypeAssignments(
         type,
         JsInteropRestrictionsChecker::isDisallowedJsEnumArrayAssignment,
-        /* targetTypeDescription= */ "JsEnum array",
         /* errorMessageSuffix= */ "");
 
     // JsEnum arrays are not allowed to be used in most type parameters.
@@ -833,15 +806,20 @@ public class JsInteropRestrictionsChecker {
   }
 
   private static boolean isDisallowedJsEnumArrayAssignment(
-      TypeDescriptor toTypeDescriptor, Expression expression) {
-    TypeDescriptor expressionTypeDescriptor = expression.getTypeDescriptor();
+      TypeDescriptor toTypeDescriptor, TypeDescriptor expressionTypeDescriptor) {
     return !expressionTypeDescriptor.isSameBaseType(toTypeDescriptor)
-        && hasDisallowedType(
-            expressionTypeDescriptor,
-            expressionTypeDescriptor,
-            AstUtils::isNonNativeJsEnumArray,
-            /* onlyCheckTypeSpecialization= */ false,
-            /* checkArrayComponent= */ true);
+        && (hasDisallowedType(
+                expressionTypeDescriptor,
+                expressionTypeDescriptor,
+                AstUtils::isNonNativeJsEnumArray,
+                /* onlyCheckTypeSpecialization= */ false,
+                /* checkArrayComponent= */ true)
+            || hasDisallowedType(
+                toTypeDescriptor,
+                toTypeDescriptor,
+                AstUtils::isNonNativeJsEnumArray,
+                /* onlyCheckTypeSpecialization= */ false,
+                /* checkArrayComponent= */ true));
   }
 
   private static boolean isDisallowedJsEnumArrayOverride(
@@ -2404,8 +2382,7 @@ public class JsInteropRestrictionsChecker {
 
   private void checkTypeAssignments(
       Type type,
-      BiFunction<TypeDescriptor, Expression, Boolean> isAssignmentDisallowed,
-      String targetTypeDescription,
+      BiFunction<TypeDescriptor, TypeDescriptor, Boolean> isAssignmentDisallowed,
       String errorMessageSuffix) {
     type.accept(
         new ConversionContextVisitor(
@@ -2415,13 +2392,13 @@ public class JsInteropRestrictionsChecker {
                   TypeDescriptor inferredTypeDescriptor,
                   TypeDescriptor declaredTypeDescriptor,
                   Expression expression) {
-                if (isAssignmentDisallowed.apply(declaredTypeDescriptor, expression)) {
+                if (isAssignmentDisallowed(
+                    declaredTypeDescriptor, expression, isAssignmentDisallowed)) {
                   problems.error(
                       getSourcePosition(),
-                      "%s '%s' cannot be assigned to '%s'.%s",
-                      targetTypeDescription,
-                      expression.getTypeDescriptor().getReadableDescription(),
-                      declaredTypeDescriptor.getReadableDescription(),
+                      "%s cannot be assigned to %s.%s",
+                      getReadableDescriptionWithPrefix(expression.getTypeDescriptor()),
+                      getReadableDescriptionWithPrefix(declaredTypeDescriptor),
                       errorMessageSuffix);
                 }
                 return expression;
@@ -2432,13 +2409,13 @@ public class JsInteropRestrictionsChecker {
                   TypeDescriptor inferredTypeDescriptor,
                   TypeDescriptor declaredTypeDescriptor,
                   Expression qualifierExpression) {
-                if (isAssignmentDisallowed.apply(declaredTypeDescriptor, qualifierExpression)) {
+                if (isAssignmentDisallowed(
+                    declaredTypeDescriptor, qualifierExpression, isAssignmentDisallowed)) {
                   problems.error(
                       getSourcePosition(),
-                      "Cannot access member of '%s' with %s '%s'.%s",
-                      declaredTypeDescriptor.getReadableDescription(),
-                      targetTypeDescription,
-                      qualifierExpression.getTypeDescriptor().getReadableDescription(),
+                      "Cannot access member of %s with %s.%s",
+                      getReadableDescriptionWithPrefix(declaredTypeDescriptor),
+                      getReadableDescriptionWithPrefix(qualifierExpression.getTypeDescriptor()),
                       errorMessageSuffix);
                 }
                 return qualifierExpression;
@@ -2446,19 +2423,76 @@ public class JsInteropRestrictionsChecker {
 
               @Override
               public Expression rewriteCastContext(CastExpression castExpression) {
-                if (isAssignmentDisallowed.apply(
-                    castExpression.getCastTypeDescriptor(), castExpression.getExpression())) {
+                if (isAssignmentDisallowed(
+                    castExpression.getCastTypeDescriptor(),
+                    castExpression.getExpression(),
+                    isAssignmentDisallowed)) {
                   problems.error(
                       getSourcePosition(),
-                      "%s '%s' cannot be cast to '%s'.%s",
-                      targetTypeDescription,
-                      castExpression.getExpression().getTypeDescriptor().getReadableDescription(),
-                      castExpression.getCastTypeDescriptor().getReadableDescription(),
+                      "%s cannot be cast to %s.%s",
+                      getReadableDescriptionWithPrefix(
+                          castExpression.getExpression().getTypeDescriptor()),
+                      getReadableDescriptionWithPrefix(castExpression.getCastTypeDescriptor()),
                       errorMessageSuffix);
                 }
                 return castExpression;
               }
             }));
+  }
+
+  private boolean isAssignmentDisallowed(
+      TypeDescriptor toTypeDescriptor,
+      Expression expression,
+      BiFunction<TypeDescriptor, TypeDescriptor, Boolean> isAssignmentDisallowed) {
+    // Allow NullLiteral to be assigned. NullLiteral is typed as Object until a later normalization
+    // pass.
+    if (expression instanceof NullLiteral) {
+      return false;
+    }
+
+    return isAssignmentDisallowed.apply(toTypeDescriptor, expression.getTypeDescriptor());
+  }
+
+  /**
+   * Returns the readable description of the specified type with a descriptive prefix (see {@link
+   * #getTypeKindPrefix}).
+   */
+  private static String getReadableDescriptionWithPrefix(TypeDeclaration typeDeclaration) {
+    return getReadableDescriptionWithPrefix(typeDeclaration.toUnparameterizedTypeDescriptor());
+  }
+
+  /**
+   * Returns the readable description of the specified type with a descriptive prefix (see {@link
+   * #getTypeKindPrefix}).
+   */
+  private static String getReadableDescriptionWithPrefix(TypeDescriptor typeDescriptor) {
+    return getTypeKindPrefix(typeDescriptor) + "'" + typeDescriptor.getReadableDescription() + "'";
+  }
+
+  /**
+   * Returns a string prefix describing the specified type. For example, native types may return
+   * "Native JsType ".
+   */
+  private static String getTypeKindPrefix(TypeDescriptor typeDescriptor) {
+    if (typeDescriptor.isJsEnum()) {
+      if (typeDescriptor.isNative()) {
+        return "Native JsEnum ";
+      }
+      if (typeDescriptor.getJsEnumInfo().hasCustomValue()) {
+        return "Custom-valued JsEnum ";
+      }
+      return "Non-custom-valued JsEnum ";
+    }
+
+    if (typeDescriptor.isNative()) {
+      return "Native JsType ";
+    }
+
+    if (AstUtils.isNonNativeJsEnumArray(typeDescriptor)) {
+      return "JsEnum array ";
+    }
+
+    return "";
   }
 
   /**
