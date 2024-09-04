@@ -22,6 +22,7 @@ import com.google.j2cl.jre.java8.lang.StringTest;
 import com.google.j2cl.jre.java8.math.BigIntegerConvertTest;
 import com.google.j2cl.jre.java8.util.ArrayListTest;
 import com.google.j2cl.jre.java8.util.ArraysTest;
+import com.google.j2cl.jre.java8.util.Base64Test;
 import com.google.j2cl.jre.java8.util.CollectionsTest;
 import com.google.j2cl.jre.java8.util.ComparatorTest;
 import com.google.j2cl.jre.java8.util.DoubleSummaryStatisticsTest;
@@ -56,18 +57,19 @@ import org.junit.runners.Suite.SuiteClasses;
 /** Test JRE emulations. */
 @RunWith(Suite.class)
 @SuiteClasses({
-  //-- java.lang
+  // -- java.lang
   DoubleTest.class,
   FloatTest.class,
   MathTest.class,
   StringTest.class,
 
-  //-- java.math
+  // -- java.math
   BigIntegerConvertTest.class,
 
-  //-- java.util
+  // -- java.util
   ArraysTest.class,
   ArrayListTest.class,
+  Base64Test.class,
   CollectionsTest.class,
   LinkedListTest.class,
   ListTest.class,
@@ -90,7 +92,7 @@ import org.junit.runners.Suite.SuiteClasses;
   IntSummaryStatisticsTest.class,
   LongSummaryStatisticsTest.class,
 
-  //-- java.util.stream
+  // -- java.util.stream
   CollectorsTest.class,
   DoubleStreamTest.class,
   IntStreamTest.class,
@@ -98,4 +100,4 @@ import org.junit.runners.Suite.SuiteClasses;
   StreamTest.class,
   StreamSupportTest.class,
 })
-public class EmulJava8Suite { }
+public class EmulJava8Suite {}
