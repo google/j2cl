@@ -171,6 +171,7 @@ def j2cl_test_common(
         compile = 0,
         platform = "CLOSURE",
         optimize_wasm = False,
+        use_magic_string_imports = False,
         wasm_defs = {},
         browsers = None,
         extra_defs = [],
@@ -254,6 +255,7 @@ def j2cl_test_common(
             deps = [":%s_testlib" % name],
             tags = tags,
             optimize = optimize_wasm,
+            use_magic_string_imports = use_magic_string_imports,
             defines = wasm_defs,
         )
 

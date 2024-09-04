@@ -14,14 +14,24 @@ goog.module("%MODULE_NAME%.j2wasm");
 
 %IMPORTS%
 
+const options = { "builtins": ["js-string"] , "importedStringConstants": "'"'"'" }
+
 /**
  * Instantiates the web assembly module. This is the recommended way to load & instantate
  * Wasm module.
  *
  * @param {string|!Response|!Promise<!Response>} urlOrResponse
  * @return {!Promise<!WebAssembly.Instance>}
+ * @suppress {checkTypes} Externs are missing options parameter (phase 2)
  */
 async function instantiateStreaming(urlOrResponse) {
+    const useMagicStringImports = %USE_MAGIC_STRING_IMPORTS%;
+    if (useMagicStringImports) {
+        // Shortcut for magic import case.
+        const response = typeof urlOrResponse == "string" ? fetch(urlOrResponse) : urlOrResponse;
+        const {instance} = await WebAssembly.instantiateStreaming(response, getImports(), options);
+        return instance;
+    }
     const module = await compileStreaming(urlOrResponse);
     return instantiate(module);
 }
@@ -29,18 +39,18 @@ async function instantiateStreaming(urlOrResponse) {
 /**
  * @param {string|!Response|!Promise<!Response>} urlOrResponse
  * @return {!Promise<!WebAssembly.Module>}
- * @suppress {checkTypes} Externs is missing options parameter (phase 2)
+ * @suppress {checkTypes} Externs are missing options parameter (phase 2)
  */
 async function compileStreaming(urlOrResponse) {
     const response =
         typeof urlOrResponse == "string" ? fetch(urlOrResponse) : urlOrResponse;
-    return WebAssembly.compileStreaming(response, { "builtins": ["js-string"] });
+    return WebAssembly.compileStreaming(response, options);
 }
 
 /**
  * @param {!WebAssembly.Module} module
  * @return {!Promise<!WebAssembly.Instance>}
- * @suppress {checkTypes} Externs is missing overloads for WebAssembly.instantiate.
+ * @suppress {checkTypes} Externs are missing overloads for WebAssembly.instantiate.
  */
 async function instantiate(module) {
     return WebAssembly.instantiate(module, prepareImports(module));
@@ -57,10 +67,10 @@ async function instantiate(module) {
  *
  * @param {!BufferSource} moduleObject
  * @return {!WebAssembly.Instance}
- * @suppress {checkTypes} Externs is missing options parameter (phase 2)
+ * @suppress {checkTypes} Externs are missing options parameter (phase 2)
  */
 function instantiateBlocking(moduleObject) {
-    const module = new WebAssembly.Module(moduleObject, { "builtins": ["js-string"] });
+    const module = new WebAssembly.Module(moduleObject, options);
     return new WebAssembly.Instance(module, prepareImports(module));
 }
 
@@ -287,11 +297,14 @@ def _impl_j2wasm_application(ctx):
 
     # Make the actual JS imports mapping file using the template.
     js_module = ctx.actions.declare_file(ctx.label.name + ".js")
+    module_name = ctx.label.name.replace("-", "_")
+    use_magic_string_imports = str(ctx.attr.use_magic_string_imports).lower()
     ctx.actions.run_shell(
         inputs = [ctx.outputs.jsimports],
         outputs = [js_module],
         command = "echo '%s' " % _JS_IMPORTS_TEMPLATE +
-                  "| sed -e 's/%%MODULE_NAME%%/%s/g' " % ctx.label.name.replace("-", "_") +
+                  "| sed -e 's/%%MODULE_NAME%%/%s/g' " % module_name +
+                  "| sed -e 's/%%USE_MAGIC_STRING_IMPORTS%%/%s/g' " % use_magic_string_imports +
                   "| sed -e '/%%IMPORTS%%/r %s' -e '//d ' " % ctx.outputs.jsimports.path +
                   ">> %s" % js_module.path,
         mnemonic = "J2wasm",
@@ -377,6 +390,7 @@ _J2WASM_APP_ATTRS = {
     # TODO(b/296477606): Remove when symbol map file can be linked from the binary for debugging.
     "enable_debug_info": attr.bool(default = False),
     "use_modular_pipeline": attr.bool(default = True),
+    "use_magic_string_imports": attr.bool(),
     "_jre": attr.label(default = Label("//build_defs/internal_do_not_use:j2wasm_jre")),
     "_j2cl_transpiler": attr.label(
         cfg = "exec",
@@ -452,6 +466,8 @@ def j2wasm_application(name, defines = dict(), **kwargs):
     optimized_defines.update(defines)
 
     transpiler_args = kwargs.pop("internal_transpiler_args", [])
+    use_magic_string_imports = kwargs.pop("use_magic_string_imports", False)
+    string_lowering = "--string-lowering-magic-imports-assert" if use_magic_string_imports else "--string-lowering"
 
     _j2wasm_application(
         name = name,
@@ -525,7 +541,7 @@ def j2wasm_application(name, defines = dict(), **kwargs):
             "--optimize-j2cl",
 
             # Final clean-ups.
-            "--string-lowering",
+            string_lowering,
             "--remove-unused-module-elements",
             "--reorder-globals",
 
@@ -534,6 +550,7 @@ def j2wasm_application(name, defines = dict(), **kwargs):
         ],
         transpiler_args = transpiler_args,
         defines = ["%s=%s" % (k, v) for (k, v) in optimized_defines.items()],
+        use_magic_string_imports = use_magic_string_imports,
         **kwargs
     )
     _j2wasm_application(
@@ -541,11 +558,12 @@ def j2wasm_application(name, defines = dict(), **kwargs):
         binaryen_args = [
             "--debuginfo",
             "--intrinsic-lowering",
-            "--string-lowering",
+            string_lowering,
             # Remove the intrinsic import declarations which are not removed by lowering itself.
             "--remove-unused-module-elements",
         ],
         transpiler_args = transpiler_args,
         defines = ["%s=%s" % (k, v) for (k, v) in dev_defines.items()],
+        use_magic_string_imports = use_magic_string_imports,
         **kwargs
     )
