@@ -321,7 +321,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
 
     private Method convert(MethodDeclaration methodDeclaration) {
-      boolean inNullMarkedScope = getCurrentType().getDeclaration().isNullMarked();
+      boolean inNullMarkedScope = inNullMarkedScope();
       List<Variable> parameters = new ArrayList<>();
       for (SingleVariableDeclaration parameter :
           JdtEnvironment.<SingleVariableDeclaration>asTypedList(methodDeclaration.parameters())) {
@@ -379,8 +379,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       ArrayTypeDescriptor typeDescriptor =
           (ArrayTypeDescriptor)
               environment.createTypeDescriptor(
-                  expression.resolveTypeBinding(),
-                  getCurrentType().getDeclaration().isNullMarked());
+                  expression.resolveTypeBinding(), inNullMarkedScope());
       return NewArray.newBuilder()
           .setTypeDescriptor(typeDescriptor)
           .setDimensionExpressions(dimensionExpressions)
@@ -392,8 +391,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       return new ArrayLiteral(
           (ArrayTypeDescriptor)
               environment.createTypeDescriptor(
-                  expression.resolveTypeBinding(),
-                  getCurrentType().getDeclaration().isNullMarked()),
+                  expression.resolveTypeBinding(), inNullMarkedScope()),
           convertExpressions(JdtEnvironment.asTypedList(expression.expressions())));
     }
 
@@ -407,8 +405,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       // inferred from the expression.
       TypeDescriptor castTypeDescriptor =
           environment.createTypeDescriptor(
-              expression.getType().resolveBinding(),
-              getCurrentType().getDeclaration().isNullMarked());
+              expression.getType().resolveBinding(), inNullMarkedScope());
 
       Expression castExpression = convert(expression.getExpression());
 
@@ -586,8 +583,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         org.eclipse.jdt.core.dom.ConditionalExpression conditionalExpression) {
       TypeDescriptor conditionalTypeDescriptor =
           environment.createTypeDescriptor(
-              conditionalExpression.resolveTypeBinding(),
-              getCurrentType().getDeclaration().isNullMarked());
+              conditionalExpression.resolveTypeBinding(), inNullMarkedScope());
       Expression condition = convert(conditionalExpression.getExpression());
       Expression trueExpression = convert(conditionalExpression.getThenExpression());
       Expression falseExpression = convert(conditionalExpression.getElseExpression());
@@ -801,8 +797,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       return FunctionExpression.newBuilder()
           .setTypeDescriptor(
               environment.createTypeDescriptor(
-                  expression.resolveTypeBinding(),
-                  getCurrentType().getDeclaration().isNullMarked()))
+                  expression.resolveTypeBinding(), inNullMarkedScope()))
           .setJsAsync(functionalMethodDescriptor.isJsAsync())
           .setParameters(
               JdtEnvironment.<VariableDeclaration>asTypedList(expression.parameters()).stream()
@@ -853,8 +848,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
       SourcePosition sourcePosition = getSourcePosition(expression);
       TypeDescriptor expressionTypeDescriptor =
-          environment.createTypeDescriptor(
-              expression.resolveTypeBinding(), getCurrentType().getDeclaration().isNullMarked());
+          environment.createTypeDescriptor(expression.resolveTypeBinding(), inNullMarkedScope());
 
       // MethodDescriptor target of the method reference.
       MethodDescriptor referencedMethodDescriptor = resolveMethodReferenceTarget(expression);
@@ -908,8 +902,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     private Expression convert(CreationReference expression) {
       ITypeBinding expressionTypeBinding = expression.getType().resolveBinding();
       TypeDescriptor expressionTypeDescriptor =
-          environment.createTypeDescriptor(
-              expressionTypeBinding, getCurrentType().getDeclaration().isNullMarked());
+          environment.createTypeDescriptor(expressionTypeBinding, inNullMarkedScope());
       MethodDescriptor functionalMethodDescriptor =
           environment.createMethodDescriptor(
               expression.resolveTypeBinding().getFunctionalInterfaceMethod());
@@ -952,8 +945,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       ITypeBinding expressionTypeBinding = expression.resolveTypeBinding();
       return MethodReference.newBuilder()
           .setTypeDescriptor(
-              environment.createDeclaredTypeDescriptor(
-                  expressionTypeBinding, getCurrentType().getDeclaration().isNullMarked()))
+              environment.createDeclaredTypeDescriptor(expressionTypeBinding, inNullMarkedScope()))
           .setReferencedMethodDescriptor(
               environment.createMethodDescriptor(expression.resolveMethodBinding()))
           .setInterfaceMethodDescriptor(
@@ -1236,7 +1228,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     private Variable convert(
         org.eclipse.jdt.core.dom.SingleVariableDeclaration variableDeclaration) {
-      boolean inNullMarkedScope = getCurrentType().getDeclaration().isNullMarked();
+      boolean inNullMarkedScope = inNullMarkedScope();
       Variable variable = createVariable(variableDeclaration, inNullMarkedScope);
       if (variableDeclaration.getType() instanceof org.eclipse.jdt.core.dom.UnionType) {
         // Union types are only relevant in multi catch variable declarations, which appear in the
@@ -1375,7 +1367,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     private VariableDeclarationFragment convert(
         org.eclipse.jdt.core.dom.VariableDeclarationFragment variableDeclarationFragment) {
-      boolean inNullMarkedScope = getCurrentType().getDeclaration().isNullMarked();
+      boolean inNullMarkedScope = inNullMarkedScope();
       Variable variable = createVariable(variableDeclarationFragment, inNullMarkedScope);
       return VariableDeclarationFragment.newBuilder()
           .setVariable(variable)
@@ -1419,6 +1411,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       TypeDeclaration typeDeclaration = environment.createDeclarationForType(typeBinding);
 
       return new Type(getSourcePosition(sourcePositionNode), typeDeclaration);
+    }
+
+    private boolean inNullMarkedScope() {
+      return getCurrentType().getDeclaration().isNullMarked();
     }
   }
 
