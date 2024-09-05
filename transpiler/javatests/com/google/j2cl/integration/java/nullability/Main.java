@@ -26,9 +26,19 @@ public class Main {
   public static void main(String... args) {
     testVoid();
     testNullableVoid();
-    testExplicitTypeArguments();
-    testImplicitTypeArguments();
-    testImplicitTypeArguments_wildcards();
+
+    testExplicitInvocationTypeArguments();
+    testExplicitConstructorTypeArguments();
+
+    testImplicitInvocationTypeArguments();
+    testImplicitConstructorTypeArguments();
+    testRawConstructorTypeArguments();
+
+    testImplicitInvocationTypeArgumentsWithWildcards();
+    testImplicitConstructorTypeArgumentsWithWildcards();
+    testRawConstructorTypeArgumentsWithWildcards();
+
+    testImplicitConstructorTypeArgumentsWithInference();
   }
 
   // Currently, both non-null and nullable Void are translated to nullable type in Kotlin, which is
@@ -69,7 +79,7 @@ public class Main {
     }
   }
 
-  private static void testExplicitTypeArguments() {
+  private static void testExplicitInvocationTypeArguments() {
     String string = "foo";
     @Nullable String nullableString = null;
 
@@ -86,7 +96,24 @@ public class Main {
     Main.<@Nullable String>acceptVarargs(nullableString, string);
   }
 
-  private static void testImplicitTypeArguments() {
+  private static void testExplicitConstructorTypeArguments() {
+    String string = "foo";
+    @Nullable String nullableString = null;
+
+    new Consumer<@Nullable String>(string);
+    new Consumer<@Nullable String>(nullableString);
+
+    new Consumer<@Nullable String>(nullableString, string);
+    new Consumer<@Nullable String>(string, nullableString);
+
+    new VarargConsumer<@Nullable String>();
+    new VarargConsumer<@Nullable String>(string);
+    new VarargConsumer<@Nullable String>(nullableString);
+    new VarargConsumer<@Nullable String>(string, nullableString);
+    new VarargConsumer<@Nullable String>(nullableString, string);
+  }
+
+  private static void testImplicitInvocationTypeArguments() {
     String string = "foo";
     @Nullable String nullableString = null;
 
@@ -113,18 +140,89 @@ public class Main {
     }
   }
 
-  private static void testImplicitTypeArguments_wildcards() {
+  private static void testImplicitConstructorTypeArguments() {
+    String string = "foo";
+    @Nullable String nullableString = null;
+
+    new Consumer<>(string);
+    new Consumer<>(nullableString);
+
+    new VarargConsumer<>();
+    new VarargConsumer<>(string);
+    new VarargConsumer<>(nullableString);
+
+    // TODO(b/324940602): Use TestUtils.isJ2ktWeb() when it's implemented, or...
+    // TODO(b/324550390): Remove the condition when the bug is fixed.
+    if (!isJ2Kt()) {
+      // T inferred as Any, instead of Any?
+      new Consumer<>(null);
+
+      // T inferred as String, instead of String?
+      new Consumer<>(nullableString, string);
+      new Consumer<>(string, nullableString);
+
+      // T inferred as String, instead of String?
+      new VarargConsumer<>(string, nullableString);
+      new VarargConsumer<>(nullableString, string);
+    }
+  }
+
+  @SuppressWarnings({"rawtypes", "unchecked"})
+  private static void testRawConstructorTypeArguments() {
+    String string = "foo";
+    @Nullable String nullableString = null;
+
+    new Consumer(string);
+    new Consumer(nullableString);
+
+    new VarargConsumer();
+    new VarargConsumer(string);
+    new VarargConsumer(nullableString);
+
+    new Consumer(null);
+
+    new Consumer(nullableString, string);
+    new Consumer(string, nullableString);
+
+    new VarargConsumer(string, nullableString);
+    new VarargConsumer(nullableString, string);
+  }
+
+  private static void testImplicitInvocationTypeArgumentsWithWildcards() {
     Supplier<?> supplier = Supplier.<@Nullable String>of(null);
     accept1(supplier.getValue());
     accept2("foo", supplier.getValue());
     acceptVarargs("foo", supplier.getValue());
   }
 
-  private static <T extends @Nullable Object> void accept1(T t) {}
+  private static void testImplicitConstructorTypeArgumentsWithWildcards() {
+    Supplier<?> supplier = Supplier.<@Nullable String>of(null);
+    new Consumer<>(supplier.getValue());
+    new Consumer<>("foo", supplier.getValue());
+    new VarargConsumer<>("foo", supplier.getValue());
+  }
 
-  private static <T extends @Nullable Object> void accept2(T t1, T t2) {}
+  @SuppressWarnings({"rawtypes", "unchecked"})
+  private static void testRawConstructorTypeArgumentsWithWildcards() {
+    Supplier<?> supplier = Supplier.<@Nullable String>of(null);
+    new Consumer(supplier.getValue());
+    new Consumer("foo", supplier.getValue());
+    new VarargConsumer("foo", supplier.getValue());
+  }
 
-  private static <T extends @Nullable Object> void acceptVarargs(T... t) {}
+  private static void testImplicitConstructorTypeArgumentsWithInference() {
+    // TODO(b/324550390): Non-null assertion inserted in accept(null!!).
+    if (!isJ2Kt()) {
+      new Consumer<>("foo", null).accept(null);
+      new VarargConsumer<>("foo", null).accept(null);
+    }
+  }
+
+  private static <T extends @Nullable Object> void accept1(T unused) {}
+
+  private static <T extends @Nullable Object> void accept2(T unused1, T unused2) {}
+
+  private static <T extends @Nullable Object> void acceptVarargs(T... unused) {}
 
   private interface Supplier<V extends @Nullable Object> {
     V getValue();
@@ -132,5 +230,19 @@ public class Main {
     static <V extends @Nullable Object> Supplier<V> of(V v) {
       return () -> v;
     }
+  }
+
+  private static class Consumer<T extends @Nullable Object> {
+    private Consumer(T unused) {}
+
+    private Consumer(T unused1, T unused2) {}
+
+    private void accept(T unused) {}
+  }
+
+  private static class VarargConsumer<T extends @Nullable Object> {
+    private VarargConsumer(T... unused) {}
+
+    private void accept(T unused) {}
   }
 }

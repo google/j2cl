@@ -30,8 +30,17 @@ import kotlin.native.ObjCName
 
 @ObjCName("J2ktJ2ktNotNullAssertionProblems", exact = true)
 open class NotNullAssertionProblems {
- @ObjCName("testImplicitTypeArguments")
- open fun testImplicitTypeArguments() {
+ @ObjCName("testExplicitInvocationTypeArguments")
+ open fun testExplicitInvocationTypeArguments() {
+  NotNullAssertionProblems.accept1<String?>(null)
+  NotNullAssertionProblems.accept2<String?>("foo", null)
+  NotNullAssertionProblems.accept2<String?>("foo", NotNullAssertionProblems.nullableString())
+  NotNullAssertionProblems.acceptVararg<String?>("foo", null)
+  NotNullAssertionProblems.acceptVararg<String?>("foo", NotNullAssertionProblems.nullableString())
+ }
+
+ @ObjCName("testImplicitInvocationTypeArguments")
+ open fun testImplicitInvocationTypeArguments() {
   NotNullAssertionProblems.accept1<Any>(null!!)
   NotNullAssertionProblems.accept2<String>("foo", null!!)
   NotNullAssertionProblems.accept2<String>("foo", NotNullAssertionProblems.nullableString()!!)
@@ -39,16 +48,70 @@ open class NotNullAssertionProblems {
   NotNullAssertionProblems.acceptVararg<String>("foo", NotNullAssertionProblems.nullableString()!!)
  }
 
+ @ObjCName("testExplicitConstructorTypeArguments")
+ open fun testExplicitConstructorTypeArguments() {
+  NotNullAssertionProblems.Consumer<String?>(null)
+  NotNullAssertionProblems.Consumer<String?>("foo", null)
+  NotNullAssertionProblems.Consumer<String?>("foo", NotNullAssertionProblems.nullableString())
+  NotNullAssertionProblems.VarargConsumer<String?>("foo", null)
+  NotNullAssertionProblems.VarargConsumer<String?>("foo", NotNullAssertionProblems.nullableString())
+ }
+
+ @ObjCName("testImplicitConstructorTypeArguments")
+ open fun testImplicitConstructorTypeArguments() {
+  NotNullAssertionProblems.Consumer<Any>(null!!)
+  NotNullAssertionProblems.Consumer<String>("foo", null!!)
+  NotNullAssertionProblems.Consumer<String>("foo", NotNullAssertionProblems.nullableString()!!)
+  NotNullAssertionProblems.VarargConsumer<String>("foo", null!!)
+  NotNullAssertionProblems.VarargConsumer<String>("foo", NotNullAssertionProblems.nullableString()!!)
+ }
+
+ @ObjCName("testImplicitRawConstructorTypeArguments")
+ open fun testImplicitRawConstructorTypeArguments() {
+  NotNullAssertionProblems.Consumer<Any?>(null)
+  NotNullAssertionProblems.Consumer<Any?>("foo", null)
+  NotNullAssertionProblems.Consumer<Any?>("foo", NotNullAssertionProblems.nullableString())
+  NotNullAssertionProblems.VarargConsumer<Any?>("foo", null)
+  NotNullAssertionProblems.VarargConsumer<Any?>("foo", NotNullAssertionProblems.nullableString())
+ }
+
  @ObjCName("J2ktJ2ktNotNullAssertionProblemsCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("testImplicitTypeArguments_wildcards")
-  fun testImplicitTypeArguments_wildcards(
+  @ObjCName("testImplicitInvocationTypeArguments_wildcards")
+  fun testImplicitInvocationTypeArguments_wildcards(
    @ObjCName("withJ2ktNotNullAssertionProblems_Supplier") wildcardSupplier: NotNullAssertionProblems.Supplier<*>
   ) {
    NotNullAssertionProblems.accept1(wildcardSupplier.getValue())
    NotNullAssertionProblems.accept2<Any?>("foo", wildcardSupplier.getValue())
    NotNullAssertionProblems.acceptVararg<Any?>("foo", wildcardSupplier.getValue())
+  }
+
+  @JvmStatic
+  @ObjCName("testImplicitConstructorTypeArguments_wildcards")
+  fun testImplicitConstructorTypeArguments_wildcards(
+   @ObjCName("withJ2ktNotNullAssertionProblems_Supplier") wildcardSupplier: NotNullAssertionProblems.Supplier<*>
+  ) {
+   NotNullAssertionProblems.Consumer(wildcardSupplier.getValue())
+   NotNullAssertionProblems.Consumer<Any?>("foo", wildcardSupplier.getValue())
+   NotNullAssertionProblems.VarargConsumer<Any?>("foo", wildcardSupplier.getValue())
+  }
+
+  @JvmStatic
+  @ObjCName("testRawConstructorTypeArguments_wildcards")
+  fun testRawConstructorTypeArguments_wildcards(
+   @ObjCName("withJ2ktNotNullAssertionProblems_Supplier") wildcardSupplier: NotNullAssertionProblems.Supplier<*>
+  ) {
+   NotNullAssertionProblems.Consumer<Any?>(wildcardSupplier.getValue())
+   NotNullAssertionProblems.Consumer<Any?>("foo", wildcardSupplier.getValue())
+   NotNullAssertionProblems.VarargConsumer<Any?>("foo", wildcardSupplier.getValue())
+  }
+
+  @JvmStatic
+  @ObjCName("testImplicitConstructorTypeArguments_inference")
+  fun testImplicitConstructorTypeArguments_inference() {
+   NotNullAssertionProblems.Consumer<String>("foo", null!!).accept(null!!)
+   NotNullAssertionProblems.VarargConsumer<String>("foo", null!!).accept(null!!)
   }
 
   @JvmStatic
@@ -77,6 +140,37 @@ open class NotNullAssertionProblems {
   fun nullableString(): String? {
    return null
   }
+ }
+
+ @ObjCName("J2ktJ2ktNotNullAssertionProblems_Consumer", exact = true)
+ open class Consumer<T> {
+  constructor(
+   @ObjCName("Id") t: T
+  )
+
+  constructor(
+   @ObjCName("Id") t1: T,
+   @ObjCName("withId") t2: T
+  )
+
+  @ObjCName("accept")
+  open fun accept(
+   @ObjCName("withId") t: T
+  ) {}
+ }
+
+ @ObjCName("J2ktJ2ktNotNullAssertionProblems_VarargConsumer", exact = true)
+ open class VarargConsumer<T> {
+  constructor(
+   vararg @ObjCName("NSObjectArray") ts: T
+  ) {
+   val ts_1: Array<T> = ts as Array<T>
+  }
+
+  @ObjCName("accept")
+  open fun accept(
+   @ObjCName("withId") t: T
+  ) {}
  }
 
  @ObjCName("J2ktJ2ktNotNullAssertionProblems_C", exact = true)

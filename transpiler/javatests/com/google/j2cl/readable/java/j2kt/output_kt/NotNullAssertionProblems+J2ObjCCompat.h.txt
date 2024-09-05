@@ -4,6 +4,8 @@
 
 @class J2ktJ2ktNotNullAssertionProblems;
 @class J2ktJ2ktNotNullAssertionProblemsCompanion;
+@class J2ktJ2ktNotNullAssertionProblems_Consumer;
+@class J2ktJ2ktNotNullAssertionProblems_VarargConsumer;
 @class NSString;
 
 @protocol J2ktJ2ktNotNullAssertionProblems_Supplier;
@@ -14,8 +16,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @compatibility_alias J2ktNotNullAssertionProblemsCompanion J2ktJ2ktNotNullAssertionProblemsCompanion;
 
-NS_INLINE void J2ktNotNullAssertionProblems_testImplicitTypeArguments_wildcardsWithJ2ktNotNullAssertionProblems_Supplier_(id<J2ktJ2ktNotNullAssertionProblems_Supplier> wildcardSupplier) {
- [J2ktJ2ktNotNullAssertionProblemsCompanion.shared testImplicitTypeArguments_wildcardsWithJ2ktNotNullAssertionProblems_Supplier:wildcardSupplier];
+NS_INLINE void J2ktNotNullAssertionProblems_testImplicitInvocationTypeArguments_wildcardsWithJ2ktNotNullAssertionProblems_Supplier_(id<J2ktJ2ktNotNullAssertionProblems_Supplier> wildcardSupplier) {
+ [J2ktJ2ktNotNullAssertionProblemsCompanion.shared testImplicitInvocationTypeArguments_wildcardsWithJ2ktNotNullAssertionProblems_Supplier:wildcardSupplier];
+}
+
+NS_INLINE void J2ktNotNullAssertionProblems_testImplicitConstructorTypeArguments_wildcardsWithJ2ktNotNullAssertionProblems_Supplier_(id<J2ktJ2ktNotNullAssertionProblems_Supplier> wildcardSupplier) {
+ [J2ktJ2ktNotNullAssertionProblemsCompanion.shared testImplicitConstructorTypeArguments_wildcardsWithJ2ktNotNullAssertionProblems_Supplier:wildcardSupplier];
+}
+
+NS_INLINE void J2ktNotNullAssertionProblems_testRawConstructorTypeArguments_wildcardsWithJ2ktNotNullAssertionProblems_Supplier_(id<J2ktJ2ktNotNullAssertionProblems_Supplier> wildcardSupplier) {
+ [J2ktJ2ktNotNullAssertionProblemsCompanion.shared testRawConstructorTypeArguments_wildcardsWithJ2ktNotNullAssertionProblems_Supplier:wildcardSupplier];
+}
+
+NS_INLINE void J2ktNotNullAssertionProblems_testImplicitConstructorTypeArguments_inference(void) {
+ [J2ktJ2ktNotNullAssertionProblemsCompanion.shared testImplicitConstructorTypeArguments_inference];
 }
 
 NS_INLINE void J2ktNotNullAssertionProblems_accept1WithId_(id t) {
@@ -29,6 +43,26 @@ NS_INLINE void J2ktNotNullAssertionProblems_accept2WithId_withId_(id t1, id t2) 
 NS_INLINE NSString* _Nullable J2ktNotNullAssertionProblems_nullableString(void) {
  return [J2ktJ2ktNotNullAssertionProblemsCompanion.shared nullableString];
 }
+
+@compatibility_alias J2ktNotNullAssertionProblems_Consumer J2ktJ2ktNotNullAssertionProblems_Consumer;
+
+NS_INLINE J2ktJ2ktNotNullAssertionProblems_Consumer* create_J2ktNotNullAssertionProblems_Consumer_initWithId_(id t) {
+ return [[J2ktJ2ktNotNullAssertionProblems_Consumer alloc] initWithId:t];
+}
+
+NS_INLINE J2ktJ2ktNotNullAssertionProblems_Consumer* new_J2ktNotNullAssertionProblems_Consumer_initWithId_(id t) {
+ return [[J2ktJ2ktNotNullAssertionProblems_Consumer alloc] initWithId:t];
+}
+
+NS_INLINE J2ktJ2ktNotNullAssertionProblems_Consumer* create_J2ktNotNullAssertionProblems_Consumer_initWithId_withId_(id t1, id t2) {
+ return [[J2ktJ2ktNotNullAssertionProblems_Consumer alloc] initWithId:t1 withId:t2];
+}
+
+NS_INLINE J2ktJ2ktNotNullAssertionProblems_Consumer* new_J2ktNotNullAssertionProblems_Consumer_initWithId_withId_(id t1, id t2) {
+ return [[J2ktJ2ktNotNullAssertionProblems_Consumer alloc] initWithId:t1 withId:t2];
+}
+
+@compatibility_alias J2ktNotNullAssertionProblems_VarargConsumer J2ktJ2ktNotNullAssertionProblems_VarargConsumer;
 
 #define J2ktNotNullAssertionProblems_Supplier J2ktJ2ktNotNullAssertionProblems_Supplier
 
