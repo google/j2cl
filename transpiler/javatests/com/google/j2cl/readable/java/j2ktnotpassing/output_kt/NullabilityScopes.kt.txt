@@ -28,19 +28,17 @@ import kotlin.native.ObjCName
 open class NullabilityScopes {
  @ObjCName("J2ktJ2ktnotpassingNullabilityScopes_NullMarkedScope", exact = true)
  open class NullMarkedScope {
-  @ObjCName("testNullMarkedWildcardConstructor")
-  open fun testNullMarkedWildcardConstructor(
-   @ObjCName("withJ2ktnotpassingNullabilityScopes_NullMarkedScope_Foo") nullMarkedFoo: NullabilityScopes.NullMarkedScope.Foo<String>
-  ) {
-   NullabilityScopes.NullMarkedScope.Foo<String>(nullMarkedFoo)
-   NullabilityScopes.NullMarkedScope.Foo<String>(nullMarkedFoo)
-  }
-
-  @ObjCName("testNonNullMarkedWildcardConstructor")
-  open fun testNonNullMarkedWildcardConstructor(
+  @ObjCName("testNonNullMarkedWildcardConstructorImplicitTypeArguments")
+  open fun testNonNullMarkedWildcardConstructorImplicitTypeArguments(
    @ObjCName("withJ2ktnotpassingNullabilityScopes_NonNullMarkedScope_Foo") nonNullMarkedFoo: NullabilityScopes.NonNullMarkedScope.Foo<String>
   ) {
    NullabilityScopes.NonNullMarkedScope.Foo<String?>(nonNullMarkedFoo)
+  }
+
+  @ObjCName("testNonNullMarkedWildcardConstructorExplicitTypeArguments")
+  open fun testNonNullMarkedWildcardConstructorExplicitTypeArguments(
+   @ObjCName("withJ2ktnotpassingNullabilityScopes_NonNullMarkedScope_Foo") nonNullMarkedFoo: NullabilityScopes.NonNullMarkedScope.Foo<String>
+  ) {
    NullabilityScopes.NonNullMarkedScope.Foo<String?>(nonNullMarkedFoo)
   }
 

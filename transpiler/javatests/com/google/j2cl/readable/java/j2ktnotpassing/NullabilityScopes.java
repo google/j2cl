@@ -28,14 +28,13 @@ public class NullabilityScopes {
       public Foo(Foo<? extends K> foo) {}
     }
 
-    public void testNullMarkedWildcardConstructor(NullMarkedScope.Foo<String> nullMarkedFoo) {
-      new NullMarkedScope.Foo<>(nullMarkedFoo);
-      new NullMarkedScope.Foo<String>(nullMarkedFoo);
-    }
-
-    public void testNonNullMarkedWildcardConstructor(
+    public void testNonNullMarkedWildcardConstructorImplicitTypeArguments(
         NonNullMarkedScope.Foo<String> nonNullMarkedFoo) {
       new NonNullMarkedScope.Foo<>(nonNullMarkedFoo);
+    }
+
+    public void testNonNullMarkedWildcardConstructorExplicitTypeArguments(
+        NonNullMarkedScope.Foo<String> nonNullMarkedFoo) {
       new NonNullMarkedScope.Foo<String>(nonNullMarkedFoo);
     }
   }

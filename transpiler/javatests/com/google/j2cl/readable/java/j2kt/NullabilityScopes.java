@@ -27,18 +27,34 @@ public class NullabilityScopes {
       public Foo(Foo<? extends K> foo) {}
     }
 
-    public void testNullMarkedWildcardConstructor(NullMarkedScope.Foo<String> nullMarkedFoo) {
+    public void testNullMarkedWildcardConstructorRaw(NullMarkedScope.Foo<String> nullMarkedFoo) {
       new NullMarkedScope.Foo(nullMarkedFoo);
-      // TODO(b/361769898): Uncomment when fixed
-      // new NullMarkedScope.Foo<>(nullMarkedFoo);
-      // new NullMarkedScope.Foo<String>(nullMarkedFoo);
     }
 
-    public void testNonNullMarkedWildcardConstructor(
+    public void testNullMarkedWildcardConstructorImplicitTypeArguments(
+        NullMarkedScope.Foo<String> nullMarkedFoo) {
+      new NullMarkedScope.Foo<>(nullMarkedFoo);
+    }
+
+    public void testNullMarkedWildcardConstructorExplicitTypeArguments(
+        NullMarkedScope.Foo<String> nullMarkedFoo) {
+      new NullMarkedScope.Foo<String>(nullMarkedFoo);
+    }
+
+    public void testNonNullMarkedWildcardConstructorRaw(
         NonNullMarkedScope.Foo<String> nonNullMarkedFoo) {
       new NonNullMarkedScope.Foo(nonNullMarkedFoo);
+    }
+
+    public void testNonNullMarkedWildcardConstructorImplicitTypeArguemnts(
+        NonNullMarkedScope.Foo<String> nonNullMarkedFoo) {
       // TODO(b/361769898): Uncomment when fixed
       // new NonNullMarkedScope.Foo<>(nonNullMarkedFoo);
+    }
+
+    public void testNonNullMarkedWildcardConstructorExplicitTypeArguments(
+        NonNullMarkedScope.Foo<String> nonNullMarkedFoo) {
+      // TODO(b/361769898): Uncomment when fixed
       // new NonNullMarkedScope.Foo<String>(nonNullMarkedFoo);
     }
   }
@@ -50,16 +66,32 @@ public class NullabilityScopes {
       public Foo(Foo<? extends K> foo) {}
     }
 
-    public void testNullMarkedWildcardConstructor(NullMarkedScope.Foo<String> nullMarkedFoo) {
+    public void testNullMarkedWildcardConstructorRaw(NullMarkedScope.Foo<String> nullMarkedFoo) {
       new NullMarkedScope.Foo(nullMarkedFoo);
+    }
+
+    public void testNullMarkedWildcardConstructorImplicitTypeArguments(
+        NullMarkedScope.Foo<String> nullMarkedFoo) {
       new NullMarkedScope.Foo<>(nullMarkedFoo);
+    }
+
+    public void testNullMarkedWildcardConstructorExplicitTypeArguments(
+        NullMarkedScope.Foo<String> nullMarkedFoo) {
       new NullMarkedScope.Foo<String>(nullMarkedFoo);
     }
 
-    public void testNonNullMarkedWildcardConstructor(
+    public void testNonNullMarkedWildcardConstructorRaw(
         NonNullMarkedScope.Foo<String> nonNullMarkedFoo) {
       new NonNullMarkedScope.Foo(nonNullMarkedFoo);
+    }
+
+    public void testNonNullMarkedWildcardConstructorImplicitTypeArguments(
+        NonNullMarkedScope.Foo<String> nonNullMarkedFoo) {
       new NonNullMarkedScope.Foo<>(nonNullMarkedFoo);
+    }
+
+    public void testNonNullMarkedWildcardConstructorExplicitTypeArguments(
+        NonNullMarkedScope.Foo<String> nonNullMarkedFoo) {
       new NonNullMarkedScope.Foo<String>(nonNullMarkedFoo);
     }
   }
