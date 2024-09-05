@@ -25,15 +25,15 @@ const options = { "builtins": ["js-string"] , "importedStringConstants": "'"'"'"
  * @suppress {checkTypes} Externs are missing options parameter (phase 2)
  */
 async function instantiateStreaming(urlOrResponse) {
-    const useMagicStringImports = %USE_MAGIC_STRING_IMPORTS%;
-    if (useMagicStringImports) {
-        // Shortcut for magic import case.
-        const response = typeof urlOrResponse == "string" ? fetch(urlOrResponse) : urlOrResponse;
-        const {instance} = await WebAssembly.instantiateStreaming(response, getImports(), options);
-        return instance;
-    }
-    const module = await compileStreaming(urlOrResponse);
-    return instantiate(module);
+  const useMagicStringImports = %USE_MAGIC_STRING_IMPORTS%;
+  if (useMagicStringImports) {
+    // Shortcut for magic import case.
+    const response = typeof urlOrResponse == "string" ? fetch(urlOrResponse) : urlOrResponse;
+    const {instance} = await WebAssembly.instantiateStreaming(response, getImports(), options);
+    return instance;
+  }
+  const module = await compileStreaming(urlOrResponse);
+  return instantiate(module);
 }
 
 /**
@@ -42,9 +42,9 @@ async function instantiateStreaming(urlOrResponse) {
  * @suppress {checkTypes} Externs are missing options parameter (phase 2)
  */
 async function compileStreaming(urlOrResponse) {
-    const response =
-        typeof urlOrResponse == "string" ? fetch(urlOrResponse) : urlOrResponse;
-    return WebAssembly.compileStreaming(response, options);
+  const response =
+      typeof urlOrResponse == "string" ? fetch(urlOrResponse) : urlOrResponse;
+  return WebAssembly.compileStreaming(response, options);
 }
 
 /**
@@ -53,7 +53,7 @@ async function compileStreaming(urlOrResponse) {
  * @suppress {checkTypes} Externs are missing overloads for WebAssembly.instantiate.
  */
 async function instantiate(module) {
-    return WebAssembly.instantiate(module, prepareImports(module));
+  return WebAssembly.instantiate(module, prepareImports(module));
 }
 
 /**
@@ -70,8 +70,8 @@ async function instantiate(module) {
  * @suppress {checkTypes} Externs are missing options parameter (phase 2)
  */
 function instantiateBlocking(moduleObject) {
-    const module = new WebAssembly.Module(moduleObject, options);
-    return new WebAssembly.Instance(module, prepareImports(module));
+  const module = new WebAssembly.Module(moduleObject, options);
+  return new WebAssembly.Instance(module, prepareImports(module));
 }
 
 /**
@@ -79,13 +79,13 @@ function instantiateBlocking(moduleObject) {
  * @return {!Object<string, *>}
  */
 function prepareImports(module) {
-    const imports = getImports();
-    const stringConsts = WebAssembly.Module.customSections(module, "string.consts")[0];
-    if (stringConsts) {
-      const decodedConsts = new TextDecoder().decode(stringConsts);
-      imports["string.const"] = JSON.parse(decodedConsts);
-    }
-    return imports;
+  const imports = getImports();
+  const stringConsts = WebAssembly.Module.customSections(module, "string.consts")[0];
+  if (stringConsts) {
+    const decodedConsts = new TextDecoder().decode(stringConsts);
+    imports["string.const"] = JSON.parse(decodedConsts);
+  }
+  return imports;
 }
 
 exports = {compileStreaming, instantiate, instantiateStreaming, instantiateBlocking};
