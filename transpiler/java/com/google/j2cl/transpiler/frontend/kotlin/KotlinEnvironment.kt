@@ -289,8 +289,8 @@ class KotlinEnvironment(
     getTypeDescriptor(irType) as DeclaredTypeDescriptor
 
   fun getTypeDescriptor(irType: IrType): TypeDescriptor {
-    return typeDescriptorByIrType.getOrPut(irType) {
-      var typeDescriptor =
+    var typeDescriptor =
+      typeDescriptorByIrType.getOrPut(irType) {
         when {
           irType.isTypeParameter() -> {
             val typeParameter = irType.classifierOrNull!!.owner as IrTypeParameter
@@ -300,16 +300,20 @@ class KotlinEnvironment(
           irType is IrSimpleType -> getDeclaredType(irType, useDeclarationVariance = true)
           else -> TODO("Not supported type $irType")
         }
-      // TODO(b/266964795): Properly handle type declarations with unsafe variance. Only when
-      // @UnsafeVariance annotates types that are directly the parameter should be replaced by the
-      // erasure; for @UnsafeVariance usages in other parameterized types a wildcard should be used.
-      //   contains(e: @UnsafeVariance E) -->  contains(e : Object)
-      //   containsAll(c: Collection<@UnsafeVariance E> c) --> containsAll(e : Collection<out E> c)
-      if (irType.annotations.hasAnnotation(FqName("kotlin.UnsafeVariance"))) {
-        typeDescriptor = typeDescriptor.toRawTypeDescriptor()
       }
-      return typeDescriptor
+
+    // TODO(b/266964795): Properly handle type declarations with unsafe variance. Only when
+    // @UnsafeVariance annotates types that are directly the parameter should be replaced by the
+    // erasure; for @UnsafeVariance usages in other parameterized types a wildcard should be used.
+    //   contains(e: @UnsafeVariance E) -->  contains(e : Object)
+    //   containsAll(c: Collection<@UnsafeVariance E> c) --> containsAll(e : Collection<out E> c)
+    // TODO(b/365133427): Annotations are not accounted for hashcode and equals so the logic is
+    // moved outside of cache. We should move it back once the bug is fixed.
+    val annotations = irType.annotations
+    if (!annotations.isEmpty() && annotations.hasAnnotation(FqName("kotlin.UnsafeVariance"))) {
+      typeDescriptor = typeDescriptor.toRawTypeDescriptor()
     }
+    return typeDescriptor
   }
 
   fun getReferenceTypeDescriptor(irType: IrType): TypeDescriptor {
