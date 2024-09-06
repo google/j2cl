@@ -90,6 +90,12 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
         .assertWarningsWithSourcePosition(
             "Warning:B.java:2: Type 'bar.B' must be directly or indirectly @NullMarked.");
 
+    // Enums are tolerated as not being NullMarked.
+    newTranspilerTester("foo.A", "enum A {}").assertTranspileSucceeds();
+
+    // Annotations are tolerated as not being NullMarked.
+    newTranspilerTester("foo.A", "@interface A {}").assertTranspileSucceeds();
+
     newTranspilerTester(
             "test.Main",
             "class Outer {",

@@ -100,7 +100,12 @@ public final class J2ktRestrictionsChecker {
             if (isFromJ2clReadableOrIntegrationTest(type)) {
               return;
             }
-            if (!type.getDeclaration().isNullMarked() && !type.getDeclaration().isAnnotation()) {
+            // Allow tolerance of some types not being null marked:
+            //   - Annotations are not propagated by J2KT anyway.
+            //   - Enums
+            if (!type.getDeclaration().isNullMarked()
+                && !type.getDeclaration().isAnnotation()
+                && !type.isEnum()) {
               problems.warning(
                   type.getSourcePosition(),
                   "Type '%s' must be directly or indirectly @NullMarked.",
