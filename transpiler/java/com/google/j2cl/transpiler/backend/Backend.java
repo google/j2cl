@@ -684,7 +684,6 @@ public enum Backend {
           VerifyReferenceScoping::new,
 
           // Normalizations
-          NormalizeNullLiterals::new,
           NormalizeMinValueIntegralLiterals::new,
           CreateImplicitConstructors::new,
           InsertExplicitSuperCalls::new,
