@@ -51,7 +51,7 @@ open class Main {
 
  internal open fun testObjectVarargs_pp_parameterassignments(o: Any?, vararg oa: Any?) {
   var oa_1: Array<Any?>? = oa as Array<Any?>?
-  oa_1 = (arrayOf<Any?>(o, oa_1!![0]) as Array<*>?) as Array<Any?>?
+  oa_1 = arrayOf<Any?>(o, oa_1!![0])
  }
 
  internal open fun testPrimitiveVarargs_pp_parameterassignments(i: Int, vararg ia: Int) {

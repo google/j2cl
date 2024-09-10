@@ -86,7 +86,7 @@ open class IntersectionTypeTest<U> {
   val o: Any? = IntersectionTypeTest.m()
   IntersectionTypeTest.set((o).let { it as IntersectionTypeTest.A?; it as IntersectionTypeTest.EmptyA?; it })
   IntersectionTypeTest.set(IntersectionTypeTest.m())
-  val g: Getable<*>? = IntersectionTypeTest.n() as Getable<*>?
+  val g: Getable<*>? = IntersectionTypeTest.n() as Getable<Any?>?
  }
 
  @ObjCName("testDefaultMethodCall")

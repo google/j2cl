@@ -60,12 +60,16 @@ open class NullabilityScopes {
   @ObjCName("testNonNullMarkedWildcardConstructorImplicitTypeArguemnts")
   open fun testNonNullMarkedWildcardConstructorImplicitTypeArguemnts(
    @ObjCName("withJ2ktNullabilityScopes_NonNullMarkedScope_Foo") nonNullMarkedFoo: NullabilityScopes.NonNullMarkedScope.Foo<String>
-  ) {}
+  ) {
+   NullabilityScopes.NonNullMarkedScope.Foo<String?>(nonNullMarkedFoo)
+  }
 
   @ObjCName("testNonNullMarkedWildcardConstructorExplicitTypeArguments")
   open fun testNonNullMarkedWildcardConstructorExplicitTypeArguments(
    @ObjCName("withJ2ktNullabilityScopes_NonNullMarkedScope_Foo") nonNullMarkedFoo: NullabilityScopes.NonNullMarkedScope.Foo<String>
-  ) {}
+  ) {
+   NullabilityScopes.NonNullMarkedScope.Foo<String?>(nonNullMarkedFoo)
+  }
 
   @ObjCName("J2ktJ2ktNullabilityScopes_NullMarkedScope_Foo", exact = true)
   open class Foo<K> {
@@ -74,6 +78,18 @@ open class NullabilityScopes {
    constructor(
     @ObjCName("J2ktNullabilityScopes_NullMarkedScope_Foo") foo: NullabilityScopes.NullMarkedScope.Foo<out K>
    )
+  }
+
+  @ObjCName("J2ktJ2ktNullabilityScopes_NullMarkedScope_Array", exact = true)
+  interface Array<T> {}
+
+  @ObjCName("J2ktJ2ktNullabilityScopes_NullMarkedScope_Cell", exact = true)
+  interface Cell<T: NullabilityScopes.NullMarkedScope.Cell<T>> {}
+
+  @ObjCName("J2ktJ2ktNullabilityScopes_NullMarkedScope_Table", exact = true)
+  fun interface Table<T: NullabilityScopes.NullMarkedScope.Cell<T>> {
+   @ObjCName("getNullableCells")
+   fun getNullableCells(): NullabilityScopes.NullMarkedScope.Array<T?>
   }
  }
 
@@ -90,14 +106,14 @@ open class NullabilityScopes {
   open fun testNullMarkedWildcardConstructorImplicitTypeArguments(
    @ObjCName("withJ2ktNullabilityScopes_NullMarkedScope_Foo") nullMarkedFoo: NullabilityScopes.NullMarkedScope.Foo<String?>?
   ) {
-   NullabilityScopes.NullMarkedScope.Foo<String>(nullMarkedFoo!! as NullabilityScopes.NullMarkedScope.Foo<out String>)
+   NullabilityScopes.NullMarkedScope.Foo<String>(nullMarkedFoo!! as NullabilityScopes.NullMarkedScope.Foo<String>)
   }
 
   @ObjCName("testNullMarkedWildcardConstructorExplicitTypeArguments")
   open fun testNullMarkedWildcardConstructorExplicitTypeArguments(
    @ObjCName("withJ2ktNullabilityScopes_NullMarkedScope_Foo") nullMarkedFoo: NullabilityScopes.NullMarkedScope.Foo<String?>?
   ) {
-   NullabilityScopes.NullMarkedScope.Foo<String>(nullMarkedFoo!! as NullabilityScopes.NullMarkedScope.Foo<out String>)
+   NullabilityScopes.NullMarkedScope.Foo<String>(nullMarkedFoo!! as NullabilityScopes.NullMarkedScope.Foo<String>)
   }
 
   @ObjCName("testNonNullMarkedWildcardConstructorRaw")
@@ -111,14 +127,21 @@ open class NullabilityScopes {
   open fun testNonNullMarkedWildcardConstructorImplicitTypeArguments(
    @ObjCName("withJ2ktNullabilityScopes_NonNullMarkedScope_Foo") nonNullMarkedFoo: NullabilityScopes.NonNullMarkedScope.Foo<String?>?
   ) {
-   NullabilityScopes.NonNullMarkedScope.Foo<String?>(nonNullMarkedFoo as NullabilityScopes.NonNullMarkedScope.Foo<out String?>?)
+   NullabilityScopes.NonNullMarkedScope.Foo<String?>(nonNullMarkedFoo)
   }
 
   @ObjCName("testNonNullMarkedWildcardConstructorExplicitTypeArguments")
   open fun testNonNullMarkedWildcardConstructorExplicitTypeArguments(
    @ObjCName("withJ2ktNullabilityScopes_NonNullMarkedScope_Foo") nonNullMarkedFoo: NullabilityScopes.NonNullMarkedScope.Foo<String?>?
   ) {
-   NullabilityScopes.NonNullMarkedScope.Foo<String?>(nonNullMarkedFoo as NullabilityScopes.NonNullMarkedScope.Foo<out String?>?)
+   NullabilityScopes.NonNullMarkedScope.Foo<String?>(nonNullMarkedFoo)
+  }
+
+  @ObjCName("testRecursiveWildcardConversion")
+  open fun testRecursiveWildcardConversion(
+   @ObjCName("withJ2ktNullabilityScopes_NullMarkedScope_Table") table: NullabilityScopes.NullMarkedScope.Table<out NullabilityScopes.NullMarkedScope.Cell<*>>?
+  ): NullabilityScopes.NullMarkedScope.Array<out NullabilityScopes.NullMarkedScope.Cell<*>?>? {
+   return table!!.getNullableCells() as NullabilityScopes.NullMarkedScope.Array<NullabilityScopes.NullMarkedScope.Cell<*>?>?
   }
 
   @ObjCName("J2ktJ2ktNullabilityScopes_NonNullMarkedScope_Foo", exact = true)

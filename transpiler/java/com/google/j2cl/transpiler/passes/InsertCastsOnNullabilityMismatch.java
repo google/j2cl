@@ -15,17 +15,26 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.j2cl.transpiler.ast.TypeVariable.createWildcardWithUpperAndLowerBound;
+
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Streams;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor;
+import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.TypeVariable;
+import com.google.j2cl.transpiler.ast.UnionTypeDescriptor;
 import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewriter;
+import java.util.Objects;
+import javax.annotation.Nullable;
 
 /** Inserts casts in places where necessary due to nullability differences in type arguments. */
 public final class InsertCastsOnNullabilityMismatch extends NormalizationPass {
@@ -48,16 +57,28 @@ public final class InsertCastsOnNullabilityMismatch extends NormalizationPass {
                   TypeDescriptor inferredTypeDescriptor,
                   TypeDescriptor declaredTypeDescriptor,
                   Expression expression) {
-                return needsCast(expression.getTypeDescriptor(), project(inferredTypeDescriptor))
-                    ? CastExpression.newBuilder()
-                        .setExpression(expression)
-                        .setCastTypeDescriptor(project(inferredTypeDescriptor))
-                        .build()
-                    : expression;
+                TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
+                if (!needsCast(fromTypeDescriptor, projectForNeedsCast(inferredTypeDescriptor))) {
+                  return expression;
+                }
+
+                // Reject the cast if the cast type descriptor is equal to the original type
+                // descriptor, minus non-null to nullable conversion.
+                TypeDescriptor castTypeDescriptor = project(inferredTypeDescriptor);
+                if (castTypeDescriptor.isNullable()
+                    && castTypeDescriptor.equals(fromTypeDescriptor.toNullable())) {
+                  return expression;
+                }
+
+                return CastExpression.newBuilder()
+                    .setExpression(expression)
+                    .setCastTypeDescriptor(castTypeDescriptor)
+                    .build();
               }
             }));
   }
 
+  // TODO(b/361769898): Rewrite to improve detection of cast.
   private static boolean needsCast(TypeDescriptor from, TypeDescriptor to) {
     if (!to.isDenotable() || TypeDescriptors.isJavaLangVoid(to)) {
       return false;
@@ -88,17 +109,18 @@ public final class InsertCastsOnNullabilityMismatch extends NormalizationPass {
     return from.isNullable() != to.isNullable() || typeArgumentsNeedsCast(from, to);
   }
 
-  private static TypeDescriptor project(TypeDescriptor typeDescriptor) {
+  // TODO(b/361769898): Remove when needsCast() is rewritten.
+  private static TypeDescriptor projectForNeedsCast(TypeDescriptor typeDescriptor) {
     if (typeDescriptor instanceof TypeVariable) {
       TypeVariable typeVariable = (TypeVariable) typeDescriptor;
       if (typeVariable.isWildcardOrCapture()) {
         TypeDescriptor projected;
         TypeDescriptor lowerBound = typeVariable.getLowerBoundTypeDescriptor();
         if (lowerBound != null) {
-          projected = project(lowerBound);
+          projected = projectForNeedsCast(lowerBound);
         } else {
           TypeDescriptor upperBound = typeVariable.getUpperBoundTypeDescriptor();
-          projected = project(upperBound);
+          projected = projectForNeedsCast(upperBound);
         }
         if (typeVariable.isNullable()) {
           projected = projected.toNullable();
@@ -132,5 +154,138 @@ public final class InsertCastsOnNullabilityMismatch extends NormalizationPass {
     }
 
     return ImmutableList.of();
+  }
+
+  private static TypeDescriptor project(TypeDescriptor typeDescriptor) {
+    return project(typeDescriptor, Variance.OUT, ImmutableSet.of());
+  }
+
+  private static TypeDescriptor project(
+      TypeDescriptor typeDescriptor, Variance variance, ImmutableSet<TypeVariable> seen) {
+    if (typeDescriptor instanceof PrimitiveTypeDescriptor) {
+      return typeDescriptor;
+    } else if (typeDescriptor instanceof ArrayTypeDescriptor) {
+      ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
+      return ArrayTypeDescriptor.Builder.from(arrayTypeDescriptor)
+          .setComponentTypeDescriptor(
+              projectArgument(
+                  arrayTypeDescriptor.getComponentTypeDescriptor(),
+                  /* typeParameter= */ null,
+                  variance,
+                  seen))
+          .build();
+    } else if (typeDescriptor instanceof DeclaredTypeDescriptor) {
+      DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
+      return DeclaredTypeDescriptor.Builder.from(declaredTypeDescriptor)
+          .setTypeArgumentDescriptors(
+              Streams.zip(
+                      declaredTypeDescriptor
+                          .getTypeDeclaration()
+                          .getTypeParameterDescriptors()
+                          .stream(),
+                      declaredTypeDescriptor.getTypeArgumentDescriptors().stream(),
+                      (typeParameter, typeArgument) ->
+                          projectArgument(typeArgument, typeParameter, variance, seen))
+                  .collect(toImmutableList()))
+          .build();
+    } else if (typeDescriptor instanceof TypeVariable) {
+      TypeVariable typeVariable = (TypeVariable) typeDescriptor;
+      if (!typeVariable.isWildcardOrCapture()) {
+        return typeVariable;
+      } else {
+        if (seen.contains(typeVariable)) {
+          return typeVariable;
+        }
+        ImmutableSet<TypeVariable> newSeen =
+            ImmutableSet.<TypeVariable>builder().addAll(seen).add(typeVariable).build();
+
+        TypeDescriptor lowerBound = typeVariable.getLowerBoundTypeDescriptor();
+        TypeDescriptor upperBound = typeVariable.getUpperBoundTypeDescriptor();
+
+        switch (variance) {
+          case IN_OUT:
+            TypeDescriptor projectedUpperBound = project(upperBound, variance, newSeen);
+            TypeDescriptor projectedLowerBound =
+                lowerBound == null ? null : project(lowerBound, variance, newSeen);
+            if (upperBound.equals(projectedUpperBound)
+                && Objects.equals(lowerBound, projectedLowerBound)) {
+              return typeVariable;
+            }
+            return createWildcardWithUpperAndLowerBound(projectedUpperBound, projectedLowerBound);
+          case IN:
+            if (lowerBound != null) {
+              return project(lowerBound, Variance.IN, newSeen);
+            } else {
+              return project(upperBound, Variance.IN_OUT, newSeen);
+            }
+          case OUT:
+            if (lowerBound != null) {
+              return project(lowerBound, Variance.IN_OUT, newSeen);
+            } else {
+              return project(upperBound, Variance.OUT, newSeen);
+            }
+        }
+        throw new AssertionError();
+      }
+    } else if (typeDescriptor instanceof IntersectionTypeDescriptor) {
+      IntersectionTypeDescriptor intersectionTypeDescriptor =
+          (IntersectionTypeDescriptor) typeDescriptor;
+      return IntersectionTypeDescriptor.newBuilder()
+          .setIntersectionTypeDescriptors(
+              intersectionTypeDescriptor.getIntersectionTypeDescriptors().stream()
+                  .map(it -> project(it, variance, seen))
+                  .collect(toImmutableList()))
+          .build();
+    } else if (typeDescriptor instanceof UnionTypeDescriptor) {
+      UnionTypeDescriptor unionTypeDescriptor = (UnionTypeDescriptor) typeDescriptor;
+      return UnionTypeDescriptor.newBuilder()
+          .setUnionTypeDescriptors(
+              unionTypeDescriptor.getUnionTypeDescriptors().stream()
+                  .map(it -> project(it, variance, seen))
+                  .collect(toImmutableList()))
+          .build();
+    } else {
+      throw new AssertionError();
+    }
+  }
+
+  private static TypeDescriptor projectArgument(
+      TypeDescriptor argumentTypeDescriptor,
+      @Nullable TypeVariable typeParameter,
+      Variance variance,
+      ImmutableSet<TypeVariable> seen) {
+    // Don't project unbound wildcards with recursive declaration, as it'll result in recursive type
+    // parameter appearing in the projection. Without this check, given the
+    // {@code Foo<T extends Foo<T>>} declaration, the projection of {@code Foo<?>} would appear as
+    // {@code Foo<Foo<T>>}.
+    if (isUnboundWildcardWithRecursiveDeclaration(argumentTypeDescriptor, typeParameter)) {
+      return argumentTypeDescriptor;
+    }
+
+    return project(
+        argumentTypeDescriptor,
+        isWildcard(argumentTypeDescriptor) ? variance : Variance.IN_OUT,
+        seen);
+  }
+
+  private static boolean isUnboundWildcardWithRecursiveDeclaration(
+      TypeDescriptor typeDescriptor, @Nullable TypeVariable typeParameter) {
+    if (typeDescriptor instanceof TypeVariable) {
+      TypeVariable typeVariable = (TypeVariable) typeDescriptor;
+      return typeParameter != null
+          && typeParameter.hasRecursiveDefinition()
+          && typeVariable.isWildcardOrCapture()
+          && typeVariable
+              .getUpperBoundTypeDescriptor()
+              .toNullable()
+              .equals(typeParameter.getUpperBoundTypeDescriptor().toNullable());
+    }
+    return false;
+  }
+
+  private enum Variance {
+    IN,
+    OUT,
+    IN_OUT
   }
 }

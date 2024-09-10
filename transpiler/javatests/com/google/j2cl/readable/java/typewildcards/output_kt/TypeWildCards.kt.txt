@@ -111,9 +111,9 @@ open class TypeWildCards {
 
  @ObjCName("test")
  open fun test() {
-  this.unbounded(GenericType<Bar?>() as GenericType<*>?)
-  this.upperBound(GenericType<Bar?>() as GenericType<out Bar?>?)
-  this.lowerBound(GenericType<Bar?>() as GenericType<in Bar?>?)
+  this.unbounded(GenericType<Bar?>() as GenericType<Any?>?)
+  this.upperBound(GenericType<Bar?>())
+  this.lowerBound(GenericType<Bar?>())
  }
 
  @ObjCName("testInferredGenericIntersection")
@@ -182,7 +182,7 @@ open class TypeWildCards {
   internal var listWithWildcard_pp_typewildcards: List<*>? = null
 
   @JvmField
-  internal var valMultipleGenerics_pp_typewildcards: TypeWildCards.MultipleGenerics<*, String?, *>? = TypeWildCards.createMultipleGenerics_pp_typewildcards(TypeWildCards.listWithWildcard_pp_typewildcards) as TypeWildCards.MultipleGenerics<*, String?, *>?
+  internal var valMultipleGenerics_pp_typewildcards: TypeWildCards.MultipleGenerics<*, String?, *>? = TypeWildCards.createMultipleGenerics_pp_typewildcards(TypeWildCards.listWithWildcard_pp_typewildcards) as TypeWildCards.MultipleGenerics<Any?, String?, Any?>?
  }
 
  @ObjCName("J2ktTypewildcardsTypeWildCards_X", exact = true)

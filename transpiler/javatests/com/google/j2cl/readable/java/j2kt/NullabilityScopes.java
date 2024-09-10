@@ -15,6 +15,9 @@
  */
 package j2kt;
 
+import j2kt.NullabilityScopes.NullMarkedScope.Array;
+import j2kt.NullabilityScopes.NullMarkedScope.Cell;
+import j2kt.NullabilityScopes.NullMarkedScope.Table;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -25,6 +28,14 @@ public class NullabilityScopes {
       public Foo() {}
 
       public Foo(Foo<? extends K> foo) {}
+    }
+
+    public interface Array<T extends @Nullable Object> {}
+
+    public interface Cell<T extends Cell<T>> {}
+
+    public interface Table<T extends Cell<T>> {
+      Array<@Nullable T> getNullableCells();
     }
 
     public void testNullMarkedWildcardConstructorRaw(NullMarkedScope.Foo<String> nullMarkedFoo) {
@@ -48,14 +59,12 @@ public class NullabilityScopes {
 
     public void testNonNullMarkedWildcardConstructorImplicitTypeArguemnts(
         NonNullMarkedScope.Foo<String> nonNullMarkedFoo) {
-      // TODO(b/361769898): Uncomment when fixed
-      // new NonNullMarkedScope.Foo<>(nonNullMarkedFoo);
+      new NonNullMarkedScope.Foo<>(nonNullMarkedFoo);
     }
 
     public void testNonNullMarkedWildcardConstructorExplicitTypeArguments(
         NonNullMarkedScope.Foo<String> nonNullMarkedFoo) {
-      // TODO(b/361769898): Uncomment when fixed
-      // new NonNullMarkedScope.Foo<String>(nonNullMarkedFoo);
+      new NonNullMarkedScope.Foo<String>(nonNullMarkedFoo);
     }
   }
 
@@ -93,6 +102,11 @@ public class NullabilityScopes {
     public void testNonNullMarkedWildcardConstructorExplicitTypeArguments(
         NonNullMarkedScope.Foo<String> nonNullMarkedFoo) {
       new NonNullMarkedScope.Foo<String>(nonNullMarkedFoo);
+    }
+
+    public Array<? extends Cell<?>> testRecursiveWildcardConversion(
+        Table<? extends Cell<?>> table) {
+      return table.getNullableCells();
     }
   }
 }

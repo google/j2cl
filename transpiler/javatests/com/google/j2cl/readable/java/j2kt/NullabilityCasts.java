@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2ktnotpassing;
+package j2kt;
 
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -31,7 +31,6 @@ public class NullabilityCasts {
     throw new RuntimeException();
   }
 
-  // TODO(b/361769898): Move to "j2kt" when the bug is fixed.
   void testCapturesInLambdas(boolean condition, Async<@Nullable String> async) {
     tranformAsync(
         async,

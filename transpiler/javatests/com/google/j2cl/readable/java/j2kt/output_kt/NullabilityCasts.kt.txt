@@ -1,4 +1,4 @@
-// Generated from "j2ktnotpassing/NullabilityCasts.java"
+// Generated from "j2kt/NullabilityCasts.java"
 @file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
@@ -15,7 +15,7 @@
  "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
  "VARIABLE_WITH_REDUNDANT_INITIALIZER")
 
-package j2ktnotpassing
+package j2kt
 
 import javaemul.lang.*
 import java.lang.AssertionError
@@ -28,28 +28,28 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktnotpassingNullabilityCasts", exact = true)
+@ObjCName("J2ktJ2ktNullabilityCasts", exact = true)
 open class NullabilityCasts {
- internal open fun testCapturesInLambdas_pp_j2ktnotpassing(condition: Boolean, async: NullabilityCasts.Async<String?>) {
-  NullabilityCasts.tranformAsync_pp_j2ktnotpassing<String?, String?>(async, NullabilityCasts.AsyncFunction { it: String? ->
+ internal open fun testCapturesInLambdas_pp_j2kt(condition: Boolean, async: NullabilityCasts.Async<String?>) {
+  NullabilityCasts.tranformAsync_pp_j2kt<String?, String?>(async, NullabilityCasts.AsyncFunction { it: String? ->
    if (condition) {
-    return@AsyncFunction async as NullabilityCasts.Async<out String?>
+    return@AsyncFunction async as NullabilityCasts.Async<String?>
    } else {
-    return@AsyncFunction async as NullabilityCasts.Async<out String?>
+    return@AsyncFunction async as NullabilityCasts.Async<String?>
    }
    throw AssertionError("Unreachable")
   })
  }
 
- @ObjCName("J2ktJ2ktnotpassingNullabilityCastsCompanion", exact = true)
+ @ObjCName("J2ktJ2ktNullabilityCastsCompanion", exact = true)
  companion object {
   @JvmStatic
-  internal fun <I, O> tranformAsync_pp_j2ktnotpassing(async: NullabilityCasts.Async<I>, function: NullabilityCasts.AsyncFunction<in I, out O>): NullabilityCasts.Async<O> {
+  internal fun <I, O> tranformAsync_pp_j2kt(async: NullabilityCasts.Async<I>, function: NullabilityCasts.AsyncFunction<in I, out O>): NullabilityCasts.Async<O> {
    throw RuntimeException()
   }
  }
 
- @ObjCName("J2ktJ2ktnotpassingNullabilityCasts_AsyncFunction", exact = true)
+ @ObjCName("J2ktJ2ktNullabilityCasts_AsyncFunction", exact = true)
  fun interface AsyncFunction<I, O> {
   @ObjCName("apply")
   fun apply(
@@ -57,6 +57,6 @@ open class NullabilityCasts {
   ): NullabilityCasts.Async<O>
  }
 
- @ObjCName("J2ktJ2ktnotpassingNullabilityCasts_Async", exact = true)
+ @ObjCName("J2ktJ2ktNullabilityCasts_Async", exact = true)
  interface Async<V> {}
 }
