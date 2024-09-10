@@ -2703,7 +2703,10 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsOptionalSucceeds() {
     newTesterWithDefaults()
-        .addCompilationUnit("org.jspecify.annotations.Nullable", "public @interface Nullable {}")
+        .addCompilationUnit(
+            "org.jspecify.annotations.Nullable",
+            "@java.lang.annotation.Target(java.lang.annotation.ElementType.TYPE_USE)",
+            "public @interface Nullable {}")
         .addCompilationUnit(
             "test.Buggy",
             "import jsinterop.annotations.*;",
@@ -2739,7 +2742,10 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsOptionalNotJsOptionalOverrideFails() {
     newTesterWithDefaults()
-        .addCompilationUnit("org.jspecify.annotations.Nullable", "public @interface Nullable {}")
+        .addCompilationUnit(
+            "org.jspecify.annotations.Nullable",
+            "@java.lang.annotation.Target(java.lang.annotation.ElementType.TYPE_USE)",
+            "public @interface Nullable {}")
         .addCompilationUnit(
             "test.Buggy",
             "import jsinterop.annotations.*;",
@@ -2838,7 +2844,10 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "-experimentalenablejspecifysupportdonotenablewithoutjspecifystaticcheckingoryoumightcauseanoutage")
         .addCompilationUnit(
             "org.jspecify.annotations.NullMarked", "public @interface NullMarked {}")
-        .addCompilationUnit("org.jspecify.annotations.Nullable", "public @interface Nullable {}")
+        .addCompilationUnit(
+            "org.jspecify.annotations.Nullable",
+            "@java.lang.annotation.Target(java.lang.annotation.ElementType.TYPE_USE)",
+            "public @interface Nullable {}")
         .addCompilationUnit(
             "test.Buggy",
             "import jsinterop.annotations.*;",
