@@ -381,28 +381,18 @@ class KotlinEnvironment(
     useDeclarationVariance: Boolean,
   ): DeclaredTypeDescriptor {
     val irType = originalType.resolveBuiltinClass(useDeclarationVariance)
-    val classDeclaration = checkNotNull(irType.getClass()) { "No valid type" }
-    val nullableDefaultType = classDeclaration.defaultType.makeNullable()
+    val defaultType = irType.getClass()!!.defaultType
 
-    if (
-      irType.getTypeSubstitutionMap(useDeclarationVariance).isNotEmpty() &&
-        nullableDefaultType != irType
-    ) {
-      // When type is parametrized returns a specialized version of the declaration type descriptor.
-      // Note: we need to test if the current processed type is not the default type of the class in
-      // order to avoid infinite recursion. typeSubstitutionMap is never empty for parametrized
-      // types because it contains at least the mapping between the type parameters and itself.
-      // Ex: for List<T>, typeSubstitutionMap = { T -> T }
-      return (getTypeDescriptor(nullableDefaultType)
-          .specializeTypeVariables(
-            irType
-              .getTypeSubstitutionMap(useDeclarationVariance)
-              .toTypeDescriptorByTypeVariableMap()
-          ) as DeclaredTypeDescriptor)
-        .withNullability(irType.isNullable())
-    }
+    // If type matches default type, we are effectively constructoring the default type so no
+    // specialization is needed.
+    if (defaultType == irType) return createUnparameterizedTypeDescriptor(irType)
 
-    // Build the unparameterized type descriptor.
+    return getDeclaredTypeDescriptor(defaultType)
+      .specializeTypeDescriptor(irType, useDeclarationVariance)
+  }
+
+  private fun createUnparameterizedTypeDescriptor(irType: IrSimpleType): DeclaredTypeDescriptor {
+    val classDeclaration = irType.getClass()!!
     return DeclaredTypeDescriptor.newBuilder()
       .setTypeDeclaration(getDeclarationForType(classDeclaration))
       .setEnclosingTypeDescriptor(getEnclosingTypeDescriptor(classDeclaration))
@@ -435,6 +425,21 @@ class KotlinEnvironment(
       .setNullable(irType.isNullable())
       .setTypeArgumentDescriptors(irType.arguments.map(::getReferenceTypeDescriptorForTypeArgument))
       .build()
+  }
+
+  private fun DeclaredTypeDescriptor.specializeTypeDescriptor(
+    irType: IrSimpleType,
+    useDeclarationVariance: Boolean,
+  ): DeclaredTypeDescriptor {
+    // Adjust nullability.
+    var td = if (irType.isNullable()) toNullable() else toNonNullable()
+    if (!irType.arguments.isEmpty()) {
+      // Adjust type arguments.
+      val subsitutionMap =
+        irType.getTypeSubstitutionMap(useDeclarationVariance).toTypeDescriptorByTypeVariableMap()
+      td = td.specializeTypeVariables(subsitutionMap) as DeclaredTypeDescriptor
+    }
+    return td
   }
 
   fun getMethodDescriptor(
@@ -825,7 +830,3 @@ private fun remapDeclarationTypeVarianceOntoArguments(
       argument
     }
   }
-
-private fun DeclaredTypeDescriptor.withNullability(isNullable: Boolean): DeclaredTypeDescriptor {
-  return if (isNullable) toNullable() else toNonNullable()
-}
