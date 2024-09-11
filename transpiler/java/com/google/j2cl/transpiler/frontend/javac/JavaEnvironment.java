@@ -38,6 +38,7 @@ import com.google.j2cl.transpiler.ast.JsInfo;
 import com.google.j2cl.transpiler.ast.Literal;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
+import com.google.j2cl.transpiler.ast.PackageDeclaration;
 import com.google.j2cl.transpiler.ast.PostfixOperator;
 import com.google.j2cl.transpiler.ast.PrefixOperator;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
@@ -1169,25 +1170,6 @@ class JavaEnvironment {
     throw new InternalCompilerError("Type binding %s not handled.", typeElement);
   }
 
-  private static String getJsName(final TypeElement classSymbol) {
-    return JsInteropAnnotationUtils.getJsName(classSymbol);
-  }
-
-  @Nullable
-  private static String getJsNamespace(TypeElement classSymbol, PackageInfoCache packageInfoCache) {
-    String jsNamespace = JsInteropAnnotationUtils.getJsNamespace(classSymbol);
-    if (jsNamespace != null) {
-      return jsNamespace;
-    }
-
-    // Maybe namespace is set via package-info file?
-    boolean isTopLevelType = classSymbol.getEnclosingElement().getKind() == ElementKind.PACKAGE;
-    if (isTopLevelType) {
-      return packageInfoCache.getJsNamespace(getBinaryNameFromTypeBinding(classSymbol));
-    }
-    return null;
-  }
-
   @Nullable
   TypeDeclaration createDeclarationForType(final TypeElement typeElement) {
     if (typeElement == null) {
@@ -1197,7 +1179,6 @@ class JavaEnvironment {
     PackageInfoCache packageInfoCache = PackageInfoCache.get();
 
     // Compute these first since they're reused in other calculations.
-    String packageName = getPackageOf(typeElement).getQualifiedName().toString();
     boolean isAbstract = isAbstract(typeElement) && !isInterface(typeElement);
     Kind kind = getKindFromTypeBinding(typeElement);
     // TODO(b/341721484): Even though enums can not have the final modifier, turbine make them final
@@ -1261,12 +1242,12 @@ class JavaEnvironment {
         .setNative(JsInteropUtils.isJsNativeType(typeElement))
         .setAnonymous(isAnonymous(typeElement))
         .setLocal(isLocal(typeElement))
-        .setSimpleJsName(getJsName(typeElement))
-        .setCustomizedJsNamespace(getJsNamespace(typeElement, packageInfoCache))
+        .setSimpleJsName(JsInteropAnnotationUtils.getJsName(typeElement))
+        .setCustomizedJsNamespace(JsInteropAnnotationUtils.getJsNamespace(typeElement))
         .setNullMarked(isNullMarked)
         .setOriginalSimpleSourceName(
             typeElement.getSimpleName() != null ? typeElement.getSimpleName().toString() : null)
-        .setPackageName(packageName)
+        .setPackage(createPackageDeclaration(getPackageOf(typeElement), packageInfoCache))
         .setSuperTypeDescriptorFactory(
             () ->
                 (DeclaredTypeDescriptor)
@@ -1286,6 +1267,16 @@ class JavaEnvironment {
         .setDeclaredFieldDescriptorsFactory(declaredFields)
         .setUnusableByJsSuppressed(JsInteropAnnotationUtils.isUnusableByJsSuppressed(typeElement))
         .setDeprecated(isDeprecated(typeElement))
+        .build();
+  }
+
+  private static PackageDeclaration createPackageDeclaration(
+      PackageElement packageElement, PackageInfoCache packageInfoCache) {
+    // Caching is left to PackageDeclaration.Builder since construction is trivial.
+    String packageName = packageElement.getQualifiedName().toString();
+    return PackageDeclaration.newBuilder()
+        .setName(packageName)
+        .setCustomizedJsNamespace(packageInfoCache.getJsNamespace(packageName))
         .build();
   }
 

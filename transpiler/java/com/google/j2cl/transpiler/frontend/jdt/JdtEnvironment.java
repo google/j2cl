@@ -43,6 +43,7 @@ import com.google.j2cl.transpiler.ast.Literal;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.NullabilityAnnotation;
+import com.google.j2cl.transpiler.ast.PackageDeclaration;
 import com.google.j2cl.transpiler.ast.PostfixOperator;
 import com.google.j2cl.transpiler.ast.PrefixOperator;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
@@ -70,6 +71,7 @@ import org.eclipse.jdt.core.dom.BodyDeclaration;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
+import org.eclipse.jdt.core.dom.IPackageBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.IVariableBinding;
 import org.eclipse.jdt.core.dom.InfixExpression;
@@ -1126,11 +1128,6 @@ public class JdtEnvironment {
     throw new InternalCompilerError("Type binding %s not handled", typeBinding);
   }
 
-  private static String getJsName(final ITypeBinding typeBinding) {
-    checkArgument(!typeBinding.isPrimitive());
-    return JsInteropAnnotationUtils.getJsName(typeBinding);
-  }
-
   @Nullable
   private String getObjectiveCNamePrefix(ITypeBinding typeBinding) {
     checkArgument(!typeBinding.isPrimitive());
@@ -1140,17 +1137,6 @@ public class JdtEnvironment {
     return objectiveCNamePrefix != null || !isTopLevelType
         ? objectiveCNamePrefix
         : packageAnnotationsResolver.getObjectiveCNamePrefix(typeBinding.getPackage().getName());
-  }
-
-  @Nullable
-  private String getJsNamespace(ITypeBinding typeBinding) {
-    checkArgument(!typeBinding.isPrimitive());
-    String jsNamespace = JsInteropAnnotationUtils.getJsNamespace(typeBinding);
-    boolean isTopLevelType = typeBinding.getDeclaringClass() == null;
-
-    return jsNamespace != null || !isTopLevelType
-        ? jsNamespace
-        : packageAnnotationsResolver.getJsNameSpace(typeBinding.getPackage().getName());
   }
 
   @Nullable
@@ -1172,8 +1158,6 @@ public class JdtEnvironment {
     checkArgument(!typeBinding.isCapture());
 
     // Compute these first since they're reused in other calculations.
-    String packageName =
-        typeBinding.getPackage() == null ? null : typeBinding.getPackage().getName();
     boolean isAbstract = isAbstract(typeBinding);
     Kind kind = getKindFromTypeBinding(typeBinding);
     // TODO(b/341721484): Even though enums can not have the final modifier, turbine make them final
@@ -1219,14 +1203,14 @@ public class JdtEnvironment {
             .setNative(JsInteropUtils.isJsNativeType(typeBinding))
             .setAnonymous(typeBinding.isAnonymous())
             .setLocal(isLocal(typeBinding))
-            .setSimpleJsName(getJsName(typeBinding))
-            .setCustomizedJsNamespace(getJsNamespace(typeBinding))
+            .setSimpleJsName(JsInteropAnnotationUtils.getJsName(typeBinding))
+            .setCustomizedJsNamespace(JsInteropAnnotationUtils.getJsNamespace(typeBinding))
             .setObjectiveCNamePrefix(getObjectiveCNamePrefix(typeBinding))
             .setKtTypeInfo(KtInteropUtils.getKtTypeInfo(typeBinding))
             .setKtObjcInfo(KtInteropUtils.getKtObjcInfo(typeBinding))
             .setNullMarked(isNullMarked)
             .setOriginalSimpleSourceName(typeBinding.getName())
-            .setPackageName(packageName)
+            .setPackage(createPackageDeclaration(typeBinding.getPackage()))
             .setTypeParameterDescriptors(
                 getTypeArgumentTypeDescriptors(
                         typeBinding, /* inNullMarkedScope= */ isNullMarked, TypeVariable.class)
@@ -1246,6 +1230,15 @@ public class JdtEnvironment {
             .build();
     cachedTypeDeclarationByTypeBinding.put(typeBinding, typeDeclaration);
     return typeDeclaration;
+  }
+
+  private PackageDeclaration createPackageDeclaration(IPackageBinding packageBinding) {
+    // Caching is left to PackageDeclaration.Builder since construction is trivial.
+    String packageName = packageBinding.getName();
+    return PackageDeclaration.newBuilder()
+        .setName(packageName)
+        .setCustomizedJsNamespace(packageAnnotationsResolver.getJsNameSpace(packageName))
+        .build();
   }
 
   private ImmutableList<MethodDescriptor> createMethodDescriptors(IMethodBinding[] methodBindings) {

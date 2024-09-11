@@ -25,6 +25,7 @@ import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.Literal
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.NullabilityAnnotation
+import com.google.j2cl.transpiler.ast.PackageDeclaration
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDeclaration.SourceLanguage.JAVA
@@ -117,7 +118,6 @@ import org.jetbrains.kotlin.ir.util.isKFunction
 import org.jetbrains.kotlin.ir.util.isLocal
 import org.jetbrains.kotlin.ir.util.isReal
 import org.jetbrains.kotlin.ir.util.isStatic
-import org.jetbrains.kotlin.ir.util.isTopLevel
 import org.jetbrains.kotlin.ir.util.isTypeParameter
 import org.jetbrains.kotlin.ir.util.isVararg
 import org.jetbrains.kotlin.ir.util.kotlinFqName
@@ -212,7 +212,7 @@ class KotlinEnvironment(
       .setAnnotation(irClass.j2clIsAnnotation)
       .setSourceLanguage(if (irClass.isFromJava()) JAVA else KOTLIN)
       .setOriginalSimpleSourceName(irClass.simpleSourceName)
-      .setPackageName(packageName.asString())
+      .setPackage(createPackageDeclaration(packageName.asString()))
       .setVisibility(irClass.j2clVisibility)
       .setEnclosingTypeDeclaration(enclosingTypeDeclaration)
       .setUnparameterizedTypeDescriptorFactory { _ ->
@@ -259,22 +259,19 @@ class KotlinEnvironment(
       .setWasmInfo(irClass.getWasmInfo())
       .apply {
         val jsMemberAnnotation = irClass.getJsMemberAnnotationInfo()
-        setCustomizedJsNamespace(jsMemberAnnotation?.namespace ?: irClass.packageInfoNamespace)
+        setCustomizedJsNamespace(jsMemberAnnotation?.namespace)
         setSimpleJsName(jsMemberAnnotation?.name)
         setNative(jsMemberAnnotation?.isNative ?: false)
       }
       .build()
   }
 
-  private val IrClass.packageInfoNamespace: String?
-    get() {
-      if (!isTopLevel) {
-        return null
-      }
-      return packageAnnotationsResolver.getJsNameSpace(
-        checkNotNull(classId).packageFqName.asString()
-      )
-    }
+  private fun createPackageDeclaration(packageName: String) =
+    // Caching is left to PackageDeclaration.Builder since construction is trivial.
+    PackageDeclaration.newBuilder()
+      .setName(packageName)
+      .setCustomizedJsNamespace(packageAnnotationsResolver.getJsNameSpace(packageName))
+      .build()
 
   /**
    * Returns a type descriptor to be used as a super type in a type declaration.

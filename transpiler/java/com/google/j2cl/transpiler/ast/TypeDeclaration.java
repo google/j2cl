@@ -203,12 +203,15 @@ public abstract class TypeDeclaration
     return isNative() ? getModuleName() : getModuleName() + "$impl";
   }
 
+  public abstract PackageDeclaration getPackage();
+
   /** Returns the fully package qualified name like "com.google.common". */
-  @Nullable
-  public abstract String getPackageName();
+  public String getPackageName() {
+    return getPackage().getName();
+  }
 
   public boolean isInSamePackage(TypeDeclaration other) {
-    return getPackageName().equals(other.getPackageName());
+    return getPackage() == other.getPackage();
   }
 
   /**
@@ -482,7 +485,7 @@ public abstract class TypeDeclaration
     }
 
     if (getEnclosingTypeDeclaration() == null) {
-      return getPackageName();
+      return getPackage().getJsNamespace();
     }
 
     if (isNative()) {
@@ -882,6 +885,7 @@ public abstract class TypeDeclaration
         .setUnusableByJsSuppressed(false)
         .setDeprecated(false)
         .setNullMarked(false)
+        .setPackage(PackageDeclaration.DEFAULT_PACKAGE)
         .setTypeParameterDescriptors(ImmutableList.of())
         .setDeclaredMethodDescriptorsFactory(() -> ImmutableList.of())
         .setDeclaredFieldDescriptorsFactory(() -> ImmutableList.of())
@@ -986,7 +990,7 @@ public abstract class TypeDeclaration
 
     public abstract Builder setOriginalSimpleSourceName(String originalSimpleSourceName);
 
-    public abstract Builder setPackageName(String packageName);
+    public abstract Builder setPackage(PackageDeclaration packageDeclaration);
 
     public abstract Builder setSimpleJsName(String simpleJsName);
 
@@ -1044,8 +1048,6 @@ public abstract class TypeDeclaration
         Supplier<ImmutableList<TypeDeclaration>> memberTypeDeclarationsFactory);
 
     // Builder accessors to aid construction.
-    abstract Optional<String> getPackageName();
-
     abstract ImmutableList<String> getClassComponents();
 
     abstract Optional<String> getSimpleJsName();
@@ -1091,8 +1093,8 @@ public abstract class TypeDeclaration
         }
       }
 
-      if (!getPackageName().isPresent() && getEnclosingTypeDeclaration().isPresent()) {
-        setPackageName(getEnclosingTypeDeclaration().get().getPackageName());
+      if (getEnclosingTypeDeclaration().isPresent()) {
+        setPackage(getEnclosingTypeDeclaration().get().getPackage());
       }
 
       if (!getSimpleJsName().isPresent()) {
@@ -1102,14 +1104,6 @@ public abstract class TypeDeclaration
       checkState(!isAnnotation() || getKind() == Kind.INTERFACE);
 
       TypeDeclaration typeDeclaration = autoBuild();
-
-      // If this is an inner class, make sure the package is consistent.
-      checkState(
-          typeDeclaration.getEnclosingTypeDeclaration() == null
-              || typeDeclaration
-                  .getEnclosingTypeDeclaration()
-                  .getPackageName()
-                  .equals(typeDeclaration.getPackageName()));
 
       // Has to be an interface to be a functional interface.
       checkState(typeDeclaration.isInterface() || !typeDeclaration.isFunctionalInterface());

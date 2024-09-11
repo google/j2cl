@@ -525,7 +525,7 @@ public class TypeDescriptors {
             // overlay.
             .setNative(!isBootstrapNamespace(jsNamespace))
             .setCustomizedJsNamespace(jsNamespace)
-            .setPackageName(getSyntheticPackageName(jsNamespace))
+            .setPackage(getSyntheticPackage(jsNamespace))
             .setUnparameterizedTypeDescriptorFactory(
                 () -> createSyntheticTypeDescriptor(kind, jsNamespace, className))
             // Synthetic type declarations do not need to have type variables.
@@ -559,13 +559,13 @@ public class TypeDescriptors {
    * to the same TypeDeclaration creating potential for inconsistencies. The prefix "$synthetic" was
    * chosen to avoid collision with packages in the actual source code.
    */
-  private static String getSyntheticPackageName(String jsNamespace) {
-    if (isBootstrapNamespace(jsNamespace)) {
+  private static PackageDeclaration getSyntheticPackage(String jsNamespace) {
+    if (!isBootstrapNamespace(jsNamespace)) {
       // Avoid prepending synthetic to our runtime types. Those are not really synthetic. Bootstrap
       // types are handwritten non native types.
-      return jsNamespace;
+      jsNamespace = "$synthetic." + jsNamespace;
     }
-    return "$synthetic." + jsNamespace;
+    return PackageDeclaration.newBuilder().setName(jsNamespace).build();
   }
 
   /** Returns the unparameterized version of {@code typeDescriptors}. */
