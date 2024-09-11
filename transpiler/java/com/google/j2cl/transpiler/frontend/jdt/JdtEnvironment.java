@@ -870,33 +870,8 @@ public class JdtEnvironment {
     ImmutableList<TypeDescriptor> typeArgumentTypeDescriptors =
         convertTypeArguments(methodBinding.getTypeArguments(), inNullMarkedScope);
 
-    ImmutableList.Builder<ParameterDescriptor> parameterDescriptorBuilder = ImmutableList.builder();
-    // The descriptor needs to have the same number of parameters as its declaration, however in
-    // some cases with lambdas (see b/231457578) jdt adds synthetic parameters at the beginning.
-    // Hence we keep just the last n parameters, where n is the number of parameters in
-    // the declaration binding.
-    int firstNonSyntheticParameter =
-        methodBinding.getParameterTypes().length
-            - methodBinding.getMethodDeclaration().getParameterTypes().length;
-
-    for (int i = firstNonSyntheticParameter; i < methodBinding.getParameterTypes().length; i++) {
-      TypeDescriptor parameterTypeDescriptor =
-          adjustForSyntheticEnumMethod(
-              methodBinding,
-              createTypeDescriptorWithNullability(
-                  methodBinding.getParameterTypes()[i],
-                  methodBinding.getParameterAnnotations(i),
-                  inNullMarkedScope));
-
-      parameterDescriptorBuilder.add(
-          ParameterDescriptor.newBuilder()
-              .setTypeDescriptor(parameterTypeDescriptor)
-              .setJsOptional(JsInteropUtils.isJsOptional(methodBinding, i))
-              .setVarargs(
-                  i == methodBinding.getParameterTypes().length - 1 && methodBinding.isVarargs())
-              .setDoNotAutobox(JsInteropUtils.isDoNotAutobox(methodBinding, i))
-              .build());
-    }
+    ImmutableList<ParameterDescriptor> parameterDescriptors =
+        convertParameterDescriptors(methodBinding, inNullMarkedScope);
 
     ImmutableList<TypeDescriptor> exceptionTypeDescriptors =
         FluentIterable.from(methodBinding.getExceptionTypes()).stream()
@@ -904,12 +879,11 @@ public class JdtEnvironment {
             .map(TypeDescriptor::toNonNullable)
             .collect(toImmutableList());
 
-    boolean hasUncheckedCast = hasUncheckedCastAnnotation(methodBinding);
     methodDescriptor =
         MethodDescriptor.newBuilder()
             .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
             .setName(isConstructor ? null : methodName)
-            .setParameterDescriptors(parameterDescriptorBuilder.build())
+            .setParameterDescriptors(parameterDescriptors)
             .setDeclarationDescriptor(declarationMethodDescriptor)
             .setReturnTypeDescriptor(returnTypeDescriptor)
             .setExceptionTypeDescriptors(exceptionTypeDescriptors)
@@ -933,10 +907,39 @@ public class JdtEnvironment {
                 JsInteropAnnotationUtils.isUnusableByJsSuppressed(methodBinding))
             .setSideEffectFree(isAnnotatedWithHasNoSideEffects(methodBinding))
             .setDeprecated(isDeprecated(methodBinding))
-            .setUncheckedCast(hasUncheckedCast)
+            .setUncheckedCast(hasUncheckedCastAnnotation(methodBinding))
             .build();
     cachedMethodDescriptorByMethodBinding.put(methodBinding, methodDescriptor);
     return methodDescriptor;
+  }
+
+  private ImmutableList<ParameterDescriptor> convertParameterDescriptors(
+      IMethodBinding methodBinding, boolean inNullMarkedScope) {
+    ITypeBinding[] parameterTypes = methodBinding.getParameterTypes();
+    ImmutableList.Builder<ParameterDescriptor> parameterDescriptorBuilder = ImmutableList.builder();
+    // The descriptor needs to have the same number of parameters as its declaration, however in
+    // some cases with lambdas (see b/231457578) jdt adds synthetic parameters at the beginning.
+    // Hence we keep just the last n parameters, where n is the number of parameters in
+    // the declaration binding.
+    int firstNonSyntheticParameter =
+        parameterTypes.length - methodBinding.getMethodDeclaration().getParameterTypes().length;
+
+    for (int i = firstNonSyntheticParameter; i < parameterTypes.length; i++) {
+      TypeDescriptor parameterTypeDescriptor =
+          adjustForSyntheticEnumMethod(
+              methodBinding,
+              createTypeDescriptorWithNullability(
+                  parameterTypes[i], methodBinding.getParameterAnnotations(i), inNullMarkedScope));
+
+      parameterDescriptorBuilder.add(
+          ParameterDescriptor.newBuilder()
+              .setTypeDescriptor(parameterTypeDescriptor)
+              .setJsOptional(JsInteropUtils.isJsOptional(methodBinding, i))
+              .setVarargs(i == parameterTypes.length - 1 && methodBinding.isVarargs())
+              .setDoNotAutobox(JsInteropUtils.isDoNotAutobox(methodBinding, i))
+              .build());
+    }
+    return parameterDescriptorBuilder.build();
   }
 
   /**
