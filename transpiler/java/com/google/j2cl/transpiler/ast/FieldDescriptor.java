@@ -210,6 +210,8 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     }
 
     return FieldDescriptor.Builder.from(this)
+        // Ensure that declaration descriptor is set to original since we are modifying the types.
+        .setDeclarationDescriptor(getDeclarationDescriptor())
         .setTypeDescriptor(
             getTypeDescriptor().specializeTypeVariables(replacingTypeDescriptorByTypeVariable))
         .build();
