@@ -471,18 +471,13 @@ class KotlinEnvironment(
         )
     }
     require(!resolvedFunctionDeclaration.isFakeOverride)
-    val declarationMethodDescriptor = getDeclaredMethodDescriptor(resolvedFunctionDeclaration)
-    val methodDescriptor =
-      declarationMethodDescriptor.specializeTypeVariables(
-        cumulativeTypeArgumentsByTypeParameter.toTypeDescriptorByTypeVariableMap()
-      )
-    if (methodDescriptor == declarationMethodDescriptor) {
-      return declarationMethodDescriptor
-    }
 
-    return MethodDescriptor.Builder.from(methodDescriptor)
-      .setDeclarationDescriptor(declarationMethodDescriptor)
-      .build()
+    val declarationMethodDescriptor = getDeclaredMethodDescriptor(resolvedFunctionDeclaration)
+
+    if (cumulativeTypeArgumentsByTypeParameter.isEmpty()) return declarationMethodDescriptor
+    return declarationMethodDescriptor.specializeTypeVariables(
+      cumulativeTypeArgumentsByTypeParameter.toTypeDescriptorByTypeVariableMap()
+    )
   }
 
   private fun resolveTypeParametersForFunction(
@@ -599,18 +594,11 @@ class KotlinEnvironment(
     typeArgumentsByTypeParameter: Map<IrTypeParameterSymbol, IrTypeArgument>,
   ): FieldDescriptor {
     val declarationFieldDescriptor = getDeclaredFieldDescriptor(field)
-    val fieldDescriptor =
-      declarationFieldDescriptor.specializeTypeVariables(
-        typeArgumentsByTypeParameter.toTypeDescriptorByTypeVariableMap()
-      )
 
-    if (fieldDescriptor == declarationFieldDescriptor) {
-      return declarationFieldDescriptor
-    }
-
-    return FieldDescriptor.Builder.from(fieldDescriptor)
-      .setDeclarationDescriptor(declarationFieldDescriptor)
-      .build()
+    if (typeArgumentsByTypeParameter.isEmpty()) return declarationFieldDescriptor
+    return declarationFieldDescriptor.specializeTypeVariables(
+      typeArgumentsByTypeParameter.toTypeDescriptorByTypeVariableMap()
+    )
   }
 
   fun getDeclaredFieldDescriptor(irField: IrField): FieldDescriptor {
