@@ -32,6 +32,10 @@ class TypeWildCards {
     Parent parent = supplier.get();
   }
 
+  static void testNullWithLowerBound(Observer<? super Child> observer) {
+    observer.on(null);
+  }
+
   interface Observer<E> {
     void on(E event);
   }

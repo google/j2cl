@@ -36,6 +36,11 @@ open class TypeWildCards internal constructor() {
   }
 
   @JvmStatic
+  internal fun testNullWithLowerBound_pp_j2kt(observer: TypeWildCards.Observer<in TypeWildCards.Child?>?) {
+   observer!!.on(null)
+  }
+
+  @JvmStatic
   @ObjCName("testObservable")
   fun testObservable(
    @ObjCName("withJ2ktTypeWildCards_Observable") observable: TypeWildCards.Observable<*>?
