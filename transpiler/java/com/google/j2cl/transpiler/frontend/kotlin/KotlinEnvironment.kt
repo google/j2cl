@@ -138,6 +138,9 @@ class KotlinEnvironment(
 ) {
   private val builtinsResolver = BuiltinsResolver(pluginContext, jvmBackendContext)
   private val typeDescriptorByIrType: MutableMap<IrType, TypeDescriptor> = HashMap()
+  private val typeDeclarationByIrClass: MutableMap<IrClass, TypeDeclaration> = HashMap()
+  private val methodDescriptorByIrFunction: MutableMap<IrFunction, MethodDescriptor> = HashMap()
+  private val fieldDescriptorByIrField: MutableMap<IrField, FieldDescriptor> = HashMap()
 
   init {
     initWellKnownTypes()
@@ -196,74 +199,77 @@ class KotlinEnvironment(
   fun getDeclarationForType(irClass: IrClass?): TypeDeclaration? {
     irClass ?: return null
 
-    var enclosingTypeDeclaration = irClass.parentClassOrNull?.let { getDeclarationForType(it) }
+    return typeDeclarationByIrClass.getOrPut(irClass) {
 
-    // TODO(b/259156400): Remove when the original stdlib file compiles with `-Xserialize-ir` flag.
-    val packageName =
-      when {
-        irClass.isStubbedPrimitiveIteratorClass() -> FqName("kotlin.collections")
-        irClass.isStubbedPrimitiveRangeClass() -> FqName("kotlin.ranges")
-        else -> irClass.packageFqName!!
-      }
+      // TODO(b/259156400): Remove when the original stdlib file compiles with `-Xserialize-ir`
+      // flag.
+      val packageName =
+        when {
+          irClass.isStubbedPrimitiveIteratorClass() -> FqName("kotlin.collections")
+          irClass.isStubbedPrimitiveRangeClass() -> FqName("kotlin.ranges")
+          else -> irClass.packageFqName!!
+        }
 
-    return TypeDeclaration.newBuilder()
-      .setClassComponents(irClass.getClassComponents())
-      .setKind(irClass.j2clKind)
-      .setAnnotation(irClass.j2clIsAnnotation)
-      .setSourceLanguage(if (irClass.isFromJava()) JAVA else KOTLIN)
-      .setOriginalSimpleSourceName(irClass.simpleSourceName)
-      .setPackage(createPackageDeclaration(packageName.asString()))
-      .setVisibility(irClass.j2clVisibility)
-      .setEnclosingTypeDeclaration(enclosingTypeDeclaration)
-      .setUnparameterizedTypeDescriptorFactory { _ ->
-        getDeclaredTypeDescriptor(irClass.defaultType)
-      }
-      .setDeclaredMethodDescriptorsFactory { _ ->
-        ImmutableList.copyOf(irClass.methods.map(::getDeclaredMethodDescriptor))
-      }
-      .setDeclaredFieldDescriptorsFactory { _ ->
-        ImmutableList.copyOf(
-          irClass.enumEntries.map(::getDeclaredFieldDescriptor) +
-            irClass.getDeclaredFields().map(::getDeclaredFieldDescriptor).toList()
-        )
-      }
-      .setSuperTypeDescriptorFactory { _ ->
-        irClass.superClass?.let { getSuperTypeDescriptor(it.makeNullable()) }
-      }
-      .setInterfaceTypeDescriptorsFactory { _ ->
-        ImmutableList.copyOf(
-          irClass.superTypes
-            .filter(IrType::isInterface)
-            .map(IrType::makeNullable)
-            .map(::getSuperTypeDescriptor)
-            // We can have duplicate types after JVM intrinsics have been resolved. See b/308776304
-            .distinctBy { it.typeDeclaration }
-        )
-      }
-      .setMemberTypeDeclarationsFactory {
-        ImmutableList.copyOf(
-          irClass.declarations.filterIsInstance<IrClass>().map { c -> getDeclarationForType(c)!! }
-        )
-      }
-      .setTypeParameterDescriptors(irClass.getAllTypeParameters().map(::getTypeVariable).toList())
-      .setCapturingEnclosingInstance(irClass.isCapturingEnclosingInstance)
-      .setFunctionalInterface(irClass.isFunctionalInterface)
-      .setHasAbstractModifier(irClass.isAbstract)
-      .setFinal(irClass.isFinal)
-      .setLocal(irClass.isLocal && !irClass.isAnonymousObject)
-      .setAnonymous(irClass.isAnonymousObject)
-      .setDeprecated(irClass.isDeprecated)
-      .setJsType(irClass.isJsType)
-      .setJsFunctionInterface(irClass.isJsFunction)
-      .setJsEnumInfo(irClass.getJsEnumInfo())
-      .setWasmInfo(irClass.getWasmInfo())
-      .apply {
-        val jsMemberAnnotation = irClass.getJsMemberAnnotationInfo()
-        setCustomizedJsNamespace(jsMemberAnnotation?.namespace)
-        setSimpleJsName(jsMemberAnnotation?.name)
-        setNative(jsMemberAnnotation?.isNative ?: false)
-      }
-      .build()
+      TypeDeclaration.newBuilder()
+        .setClassComponents(irClass.getClassComponents())
+        .setKind(irClass.j2clKind)
+        .setAnnotation(irClass.j2clIsAnnotation)
+        .setSourceLanguage(if (irClass.isFromJava()) JAVA else KOTLIN)
+        .setOriginalSimpleSourceName(irClass.simpleSourceName)
+        .setPackage(createPackageDeclaration(packageName.asString()))
+        .setVisibility(irClass.j2clVisibility)
+        .setEnclosingTypeDeclaration(getDeclarationForType(irClass.parentClassOrNull))
+        .setUnparameterizedTypeDescriptorFactory { _ ->
+          getDeclaredTypeDescriptor(irClass.defaultType)
+        }
+        .setDeclaredMethodDescriptorsFactory { _ ->
+          ImmutableList.copyOf(irClass.methods.map(::getDeclaredMethodDescriptor))
+        }
+        .setDeclaredFieldDescriptorsFactory { _ ->
+          ImmutableList.copyOf(
+            irClass.enumEntries.map(::getDeclaredFieldDescriptor) +
+              irClass.getDeclaredFields().map(::getDeclaredFieldDescriptor).toList()
+          )
+        }
+        .setSuperTypeDescriptorFactory { _ ->
+          irClass.superClass?.let { getSuperTypeDescriptor(it.makeNullable()) }
+        }
+        .setInterfaceTypeDescriptorsFactory { _ ->
+          ImmutableList.copyOf(
+            irClass.superTypes
+              .filter(IrType::isInterface)
+              .map(IrType::makeNullable)
+              .map(::getSuperTypeDescriptor)
+              // We can have duplicate types after JVM intrinsics have been resolved. See
+              // b/308776304
+              .distinctBy { it.typeDeclaration }
+          )
+        }
+        .setMemberTypeDeclarationsFactory {
+          ImmutableList.copyOf(
+            irClass.declarations.filterIsInstance<IrClass>().map { c -> getDeclarationForType(c)!! }
+          )
+        }
+        .setTypeParameterDescriptors(irClass.getAllTypeParameters().map(::getTypeVariable).toList())
+        .setCapturingEnclosingInstance(irClass.isCapturingEnclosingInstance)
+        .setFunctionalInterface(irClass.isFunctionalInterface)
+        .setHasAbstractModifier(irClass.isAbstract)
+        .setFinal(irClass.isFinal)
+        .setLocal(irClass.isLocal && !irClass.isAnonymousObject)
+        .setAnonymous(irClass.isAnonymousObject)
+        .setDeprecated(irClass.isDeprecated)
+        .setJsType(irClass.isJsType)
+        .setJsFunctionInterface(irClass.isJsFunction)
+        .setJsEnumInfo(irClass.getJsEnumInfo())
+        .setWasmInfo(irClass.getWasmInfo())
+        .apply {
+          val jsMemberAnnotation = irClass.getJsMemberAnnotationInfo()
+          setCustomizedJsNamespace(jsMemberAnnotation?.namespace)
+          setSimpleJsName(jsMemberAnnotation?.name)
+          setNative(jsMemberAnnotation?.isNative ?: false)
+        }
+        .build()
+    }
   }
 
   private fun createPackageDeclaration(packageName: String) =
@@ -522,68 +528,70 @@ class KotlinEnvironment(
   }
 
   fun getDeclaredMethodDescriptor(irFunction: IrFunction): MethodDescriptor {
-    val resolvedSymbol = builtinsResolver.resolveFunctionSymbol(irFunction.symbol)
-    if (resolvedSymbol != irFunction.symbol)
-      return getDeclaredMethodDescriptor(resolvedSymbol.owner)
+    return methodDescriptorByIrFunction.getOrPut(irFunction) {
+      val resolvedSymbol = builtinsResolver.resolveFunctionSymbol(irFunction.symbol)
+      if (resolvedSymbol != irFunction.symbol)
+        return@getOrPut getDeclaredMethodDescriptor(resolvedSymbol.owner)
 
-    val enclosingTypeDescriptor =
-      checkNotNull(getEnclosingTypeDescriptor(irFunction)) {
-        "No enclosing type for ${irFunction.dump()}"
+      val enclosingTypeDescriptor =
+        checkNotNull(getEnclosingTypeDescriptor(irFunction)) {
+          "No enclosing type for ${irFunction.dump()}"
+        }
+
+      val isConstructor = irFunction is IrConstructor
+      val parameterDescriptors = ImmutableList.builder<MethodDescriptor.ParameterDescriptor>()
+
+      val parameters = irFunction.getParameters()
+      parameters.withIndex().forEach { (index, param) ->
+        parameterDescriptors.add(
+          MethodDescriptor.ParameterDescriptor.newBuilder()
+            .setTypeDescriptor(getTypeDescriptor(param.type))
+            .setJsOptional(param.isJsOptional)
+            .setDoNotAutobox(param.isDoNotAutobox)
+            .setVarargs(index == parameters.lastIndex && param.isVararg)
+            .build()
+        )
       }
 
-    val isConstructor = irFunction is IrConstructor
-    val parameterDescriptors = ImmutableList.builder<MethodDescriptor.ParameterDescriptor>()
+      val visibility = irFunction.j2clVisibility
+      val isStatic = (irFunction.isStatic || irFunction.parent !is IrDeclaration) && !isConstructor
 
-    val parameters = irFunction.getParameters()
-    parameters.withIndex().forEach { (index, param) ->
-      parameterDescriptors.add(
-        MethodDescriptor.ParameterDescriptor.newBuilder()
-          .setTypeDescriptor(getTypeDescriptor(param.type))
-          .setJsOptional(param.isJsOptional)
-          .setDoNotAutobox(param.isDoNotAutobox)
-          .setVarargs(index == parameters.lastIndex && param.isVararg)
-          .build()
-      )
+      val isNative =
+        irFunction.isExternal ||
+          (!irFunction.getJsInfo().isJsOverlay &&
+            enclosingTypeDescriptor.isNative &&
+            irFunction.isAbstract)
+
+      MethodDescriptor.newBuilder()
+        .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
+        .setName(irFunction.javaName(jvmBackendContext))
+        .setParameterDescriptors(parameterDescriptors.build())
+        .setReturnTypeDescriptor(
+          if (irFunction.hasVoidReturn) {
+            PrimitiveTypes.VOID
+          } else {
+            getTypeDescriptor(irFunction.returnType)
+          }
+        )
+        .setVisibility(visibility)
+        .setConstructor(isConstructor)
+        .setStatic(isStatic)
+        .setAbstract(irFunction.isAbstract)
+        .setFinal(irFunction.isFinal)
+        .setNative(isNative)
+        .setDefaultMethod(
+          enclosingTypeDescriptor.isInterface &&
+            !irFunction.isAbstract &&
+            !visibility.isPrivate &&
+            !isStatic
+        )
+        .setTypeParameterTypeDescriptors(irFunction.typeParameters.map(::getTypeVariable))
+        .setDeprecated(irFunction.isDeprecated)
+        .setOriginalJsInfo(irFunction.getJsInfo())
+        .setUncheckedCast(irFunction.isUncheckedCast)
+        .setWasmInfo(irFunction.getWasmInfo())
+        .build()
     }
-
-    val visibility = irFunction.j2clVisibility
-    val isStatic = (irFunction.isStatic || irFunction.parent !is IrDeclaration) && !isConstructor
-
-    val isNative =
-      irFunction.isExternal ||
-        (!irFunction.getJsInfo().isJsOverlay &&
-          enclosingTypeDescriptor.isNative &&
-          irFunction.isAbstract)
-
-    return MethodDescriptor.newBuilder()
-      .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
-      .setName(irFunction.javaName(jvmBackendContext))
-      .setParameterDescriptors(parameterDescriptors.build())
-      .setReturnTypeDescriptor(
-        if (irFunction.hasVoidReturn) {
-          PrimitiveTypes.VOID
-        } else {
-          getTypeDescriptor(irFunction.returnType)
-        }
-      )
-      .setVisibility(visibility)
-      .setConstructor(isConstructor)
-      .setStatic(isStatic)
-      .setAbstract(irFunction.isAbstract)
-      .setFinal(irFunction.isFinal)
-      .setNative(isNative)
-      .setDefaultMethod(
-        enclosingTypeDescriptor.isInterface &&
-          !irFunction.isAbstract &&
-          !visibility.isPrivate &&
-          !isStatic
-      )
-      .setTypeParameterTypeDescriptors(irFunction.typeParameters.map(::getTypeVariable))
-      .setDeprecated(irFunction.isDeprecated)
-      .setOriginalJsInfo(irFunction.getJsInfo())
-      .setUncheckedCast(irFunction.isUncheckedCast)
-      .setWasmInfo(irFunction.getWasmInfo())
-      .build()
   }
 
   fun getFieldDescriptor(
@@ -599,36 +607,40 @@ class KotlinEnvironment(
   }
 
   fun getDeclaredFieldDescriptor(irField: IrField): FieldDescriptor {
-    val resolvedSymbol = builtinsResolver.resolveFieldSymbol(irField.symbol)
-    if (resolvedSymbol != irField.symbol) return getDeclaredFieldDescriptor(resolvedSymbol.owner)
-    val fieldTypeDescriptor = getTypeDescriptor(irField.type)
+    return fieldDescriptorByIrField.getOrPut(irField) {
+      val resolvedSymbol = builtinsResolver.resolveFieldSymbol(irField.symbol)
+      if (resolvedSymbol != irField.symbol)
+        return@getOrPut getDeclaredFieldDescriptor(resolvedSymbol.owner)
 
-    var constantValue =
-      irField.constantValue()?.value?.let { Literal.fromValue(it, fieldTypeDescriptor) }
-    if (constantValue == null && irField.correspondingPropertySymbol?.owner?.isConst == true) {
-      // In Kotlin, const val initialized to their default value does not have initializer and
-      // `irField.constantValue()` returns null. In that case use the default value of the field
-      // type.
-      constantValue = fieldTypeDescriptor.defaultValue
+      val fieldTypeDescriptor = getTypeDescriptor(irField.type)
+
+      var constantValue =
+        irField.constantValue()?.value?.let { Literal.fromValue(it, fieldTypeDescriptor) }
+      if (constantValue == null && irField.correspondingPropertySymbol?.owner?.isConst == true) {
+        // In Kotlin, const val initialized to their default value does not have initializer and
+        // `irField.constantValue()` returns null. In that case use the default value of the field
+        // type.
+        constantValue = fieldTypeDescriptor.defaultValue
+      }
+
+      FieldDescriptor.newBuilder()
+        .setEnclosingTypeDescriptor(getEnclosingTypeDescriptor(irField))
+        .setName(irField.name.asString())
+        .setTypeDescriptor(fieldTypeDescriptor)
+        .setVisibility(irField.j2clVisibility)
+        .setCompileTimeConstant(constantValue != null)
+        .setConstantValue(constantValue)
+        // Kotlin has stricter requirements for val properties than exists for Java final fields;
+        // thus  we allow val properties to be native JS members, but we pretend like it's non-final
+        // in the  J2CL AST to not fail JsInterop restriction checks later on. Weaken the final
+        // semantics here should cause a practical problem as the JVM compilations would have
+        // already enforced the final semantics.
+        .setFinal(irField.isFinal && !irField.isNativeJsField)
+        .setStatic(irField.isStatic || irField.parent !is IrDeclaration)
+        .setDeprecated(irField.isDeprecated)
+        .setOriginalJsInfo(irField.getJsInfo())
+        .build()
     }
-
-    return FieldDescriptor.newBuilder()
-      .setEnclosingTypeDescriptor(getEnclosingTypeDescriptor(irField))
-      .setName(irField.name.asString())
-      .setTypeDescriptor(fieldTypeDescriptor)
-      .setVisibility(irField.j2clVisibility)
-      .setCompileTimeConstant(constantValue != null)
-      .setConstantValue(constantValue)
-      // Kotlin has stricter requirements for val properties than exists for Java final fields; thus
-      // we allow val properties to be native JS members, but we pretend like it's non-final in the
-      // J2CL AST to not fail JsInterop restriction checks later on. Weaken the final semantics here
-      // should cause a practical problem as the JVM compilations would have already enforced the
-      // final semantics.
-      .setFinal(irField.isFinal && !irField.isNativeJsField)
-      .setStatic(irField.isStatic || irField.parent !is IrDeclaration)
-      .setDeprecated(irField.isDeprecated)
-      .setOriginalJsInfo(irField.getJsInfo())
-      .build()
   }
 
   fun getDeclaredFieldDescriptor(irEnumEntry: IrEnumEntry): FieldDescriptor =
