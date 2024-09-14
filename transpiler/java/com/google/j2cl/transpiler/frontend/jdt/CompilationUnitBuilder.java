@@ -24,6 +24,7 @@ import static java.util.stream.Collectors.toCollection;
 import static java.util.stream.Collectors.toList;
 
 import com.google.common.base.Predicates;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.Problems;
@@ -1448,9 +1449,11 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     CompilationUnitBuilder compilationUnitBuilder =
         new CompilationUnitBuilder(wellKnownTypeBindings, environment);
 
-    return jdtUnitsByFilePath.entrySet().stream()
-        .map(entry -> compilationUnitBuilder.buildCompilationUnit(entry.getKey(), entry.getValue()))
-        .collect(toImmutableList());
+    ImmutableList.Builder<CompilationUnit> compilationUnits = ImmutableList.builder();
+    for (var e : jdtUnitsByFilePath.entrySet()) {
+      compilationUnits.add(compilationUnitBuilder.buildCompilationUnit(e.getKey(), e.getValue()));
+    }
+    return compilationUnits.build();
   }
 
   private CompilationUnitBuilder(
