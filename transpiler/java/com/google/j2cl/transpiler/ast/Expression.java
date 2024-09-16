@@ -247,20 +247,12 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
 
   /** Returns whether the expression needs parenthesis if it is emitted as the left operand. */
   public final boolean requiresParensOnLeft(Expression expression) {
-    if (getPrecedence().getValue() > expression.getPrecedence().getValue()) {
-      return true;
-    }
-    return getPrecedence().getAssociativity() != Associativity.LEFT
-        && getPrecedence() == expression.getPrecedence();
+    return getPrecedence().requiresParensOnLeft(expression.getPrecedence());
   }
 
   /** Returns whether the expression needs parenthesis if it is emitted as the right operand. */
   public final boolean requiresParensOnRight(Expression expression) {
-    if (getPrecedence().getValue() > expression.getPrecedence().getValue()) {
-      return true;
-    }
-    return getPrecedence().getAssociativity() != Associativity.RIGHT
-        && getPrecedence() == expression.getPrecedence();
+    return getPrecedence().requiresParensOnRight(expression.getPrecedence());
   }
 
   /**
@@ -329,6 +321,20 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
 
     public Expression.Associativity getAssociativity() {
       return associativity;
+    }
+
+    public final boolean requiresParensOnLeft(Precedence precedence) {
+      if (getValue() > precedence.getValue()) {
+        return true;
+      }
+      return getAssociativity() != Associativity.LEFT && this == precedence;
+    }
+
+    public final boolean requiresParensOnRight(Precedence precedence) {
+      if (getValue() > precedence.getValue()) {
+        return true;
+      }
+      return getAssociativity() != Associativity.RIGHT && this == precedence;
     }
   }
 
