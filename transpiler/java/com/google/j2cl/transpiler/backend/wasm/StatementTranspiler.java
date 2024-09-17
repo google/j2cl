@@ -399,10 +399,9 @@ final class StatementTranspiler {
         builder.emitWithMapping(
             throwStatement.getSourcePosition(),
             () -> {
+              builder.append("(throw $exception.event ");
               renderExpression(throwStatement.getExpression());
-              // Since throw in JS invisible, adding unreachable keeps the Wasm invariants.
-              builder.newLine();
-              builder.append("(unreachable)");
+              builder.append(")");
             });
         return false;
       }

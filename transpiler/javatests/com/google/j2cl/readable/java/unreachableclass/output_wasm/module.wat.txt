@@ -210,8 +210,7 @@
      )(else
       (block
        ;;@ transpiler/javatests/com/google/j2cl/readable/java/unreachableclass/readable-j2wasm.js/unreachableclass/Main.java:21:33
-       (call $m_throwJsError__javaemul_internal_ThrowableUtils_JsObject__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (local.get $__$exc)))
-       (unreachable)
+       (throw $exception.event (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (local.get $__$exc)))
       )
      )
     )

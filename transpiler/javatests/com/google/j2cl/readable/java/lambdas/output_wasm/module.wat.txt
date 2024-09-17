@@ -6470,8 +6470,7 @@
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$18) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:172:10
-  (call $m_throwJsError__javaemul_internal_ThrowableUtils_JsObject__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $$create__@java.lang.RuntimeException )))
-  (unreachable)
+  (throw $exception.event (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $$create__@java.lang.RuntimeException )))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_String__java_lang_Double@lambdas.Lambdas.$LambdaImplementor$18)

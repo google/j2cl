@@ -584,8 +584,7 @@
   (try (do
    (block
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/foreachstatement/readable-j2wasm.js/foreachstatement/ForEachStatement.java:59:6
-    (call $m_throwJsError__javaemul_internal_ThrowableUtils_JsObject__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $$create__@java.lang.Exception )))
-    (unreachable)
+    (throw $exception.event (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $$create__@java.lang.Exception )))
    )
   ) (catch $exception.event
    (local.set $__$jsexc (pop externref))
@@ -644,8 +643,7 @@
        )(else
         (block
          ;;@ transpiler/javatests/com/google/j2cl/readable/java/foreachstatement/readable-j2wasm.js/foreachstatement/ForEachStatement.java:60:40
-         (call $m_throwJsError__javaemul_internal_ThrowableUtils_JsObject__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (local.get $__$exc)))
-         (unreachable)
+         (throw $exception.event (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (local.get $__$exc)))
         )
        )
       )
@@ -657,8 +655,7 @@
   (try (do
    (block
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/foreachstatement/readable-j2wasm.js/foreachstatement/ForEachStatement.java:68:6
-    (call $m_throwJsError__javaemul_internal_ThrowableUtils_JsObject__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $$create__@java.lang.Exception )))
-    (unreachable)
+    (throw $exception.event (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $$create__@java.lang.Exception )))
    )
   ) (catch $exception.event
    (local.set $__$jsexc_1 (pop externref))
@@ -692,8 +689,7 @@
      )(else
       (block
        ;;@ transpiler/javatests/com/google/j2cl/readable/java/foreachstatement/readable-j2wasm.js/foreachstatement/ForEachStatement.java:69:40
-       (call $m_throwJsError__javaemul_internal_ThrowableUtils_JsObject__void@javaemul.internal.Exceptions (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (local.get $__$exc_1)))
-       (unreachable)
+       (throw $exception.event (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (local.get $__$exc_1)))
       )
      )
     )
