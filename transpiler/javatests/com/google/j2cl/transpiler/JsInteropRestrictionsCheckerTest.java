@@ -2355,7 +2355,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "    Object o = new MyJsEnum[1];",
             "    o = (Function<? extends Object, ? extends Object>) (MyJsEnum[] p1) -> p1;",
             "    o = (Function<? extends Object, ? extends Object>) (MyJsEnum... p2) -> p2;",
-            "    o = (MyJsEnum[]) o;", // 31
+            "    o = (MyJsEnum[]) o;",
             "    if (o instanceof MyJsEnum[]) { }",
             "    MyJsEnum[] arr = new MyJsEnum[0];",
             "    acceptsT(new MyJsEnum[0]);",
@@ -2364,7 +2364,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "    Main.<MyJsEnum>acceptsTVarargs(new MyJsEnum[0]);",
             "    returnsTArray(MyJsEnum.A);",
             "    returnsTArrayArray(MyJsEnum.A);",
-            "    returnsTArrayList(MyJsEnum.A);", // 40
+            "    returnsTArrayList(MyJsEnum.A);",
             "    returnsTArrayArrayList(MyJsEnum.A);",
             "    new Main<MyJsEnum[]>().instanceReturnsTArrayList();",
             "    MyJsEnum e;",
@@ -2374,7 +2374,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "    e = new Main<MyJsEnum>().tArrayArray[0][0];",
             "    e = new Main<MyJsEnum[]>().tList.get(0)[0];",
             "    e = new Main<MyJsEnum>().tArrayList.get(0)[0];",
-            "    arr.getClass();", // 50
+            "    arr.getClass();",
             "    List<MyJsEnum[]> list = null;",
             "    DerivedWithJsEnumArrayField buggy = new DerivedWithJsEnumArrayField();",
             "    e = buggy.arr[0];",
