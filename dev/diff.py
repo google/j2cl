@@ -100,10 +100,10 @@ def main(argv):
   else:
     modified = _create_target_info(argv.targets[1])
 
-  _diff(original, modified, argv.filter_noise)
+  _diff(original, modified, argv.size, argv.filter_noise)
 
 
-def _diff(original, modified, filter_noise):
+def _diff(original, modified, is_size, filter_noise):
   print("Constructing a diff of changes in '%s'" % modified.blaze_target)
 
   is_wasm = modified.blaze_target.endswith(".wasm")
@@ -122,6 +122,10 @@ def _diff(original, modified, filter_noise):
       modified.workspace_path,
       ["--define=J2CL_APP_STYLE=PRETTY"],
   )
+
+  if is_size:
+    _diff_size(original, modified)
+    return
 
   if is_wasm:
     print("  Disassembling.")
@@ -183,7 +187,39 @@ def _diff(original, modified, filter_noise):
   )
 
 
+def _diff_size(original, modified):
+  """Calculates and outputs the size difference of the original and modified targets."""
+  print("  Performing size diff...")
+
+  _print_size_diff(
+      "Uncompressed",
+      os.path.getsize(original.get_output_file()),
+      os.path.getsize(modified.get_output_file())
+  )
+
+  _print_size_diff(
+      "Compressed",
+      repo_util.get_compressed_size(original.get_output_file()),
+      repo_util.get_compressed_size(modified.get_output_file()),
+  )
+
+
+def _print_size_diff(prefix, original_size, modified_size):
+  diff = modified_size - original_size
+  print(f"    {prefix}")
+  print(f"      Original: {original_size}")
+  print(f"      Modified: {modified_size}")
+  print(f"      Diff: {diff:+} ({diff/original_size:.1%})")
+
+
 def add_arguments(parser):
+  parser.add_argument(
+      "--size",
+      default=False,
+      action=argparse.BooleanOptionalAction,
+      help="Perform a size diff instead of a binary diff.",
+  )
+
   parser.add_argument(
       "--filter_noise",
       default=True,
