@@ -2761,7 +2761,9 @@
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:117:14
  (local $foo (ref null $java.lang.Object))
  (local $bar (ref null $java.lang.Object))
- (local $s (ref null $java.lang.String))
+ (local $notString (ref null $java.lang.Integer))
+ (local $s1 (ref null $java.lang.String))
+ (local $s2 (ref null $java.lang.String))
  (local $this (ref null $cast.Casts))
  (local.set $this (ref.cast (ref $cast.Casts) (local.get $this.untyped)))
  (block
@@ -2770,7 +2772,11 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:119:4
   (local.set $bar (call $$getString_|bar|__java_lang_String_<once>_@cast.Casts ))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:120:4
-  (local.set $s (ref.cast (ref null $java.lang.String) (if (result (ref null $java.lang.Object)) (i32.const 0) (then (local.get $foo)) (else (local.get $bar)))))
+  (local.set $notString (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 123)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:121:4
+  (local.set $s1 (ref.cast (ref null $java.lang.String) (if (result (ref null $java.lang.Object)) (i32.const 0) (then (local.get $foo)) (else (local.get $bar)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:122:4
+  (local.set $s2 (ref.cast (ref null $java.lang.String) (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $$getString_|foo|__java_lang_String_<once>_@cast.Casts )(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $notString)))))
  )
 )
 (elem declare func $m_testPrecedence__void@cast.Casts)

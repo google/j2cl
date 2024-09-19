@@ -12,5 +12,7 @@ integration_test(
     name = "casts",
     srcs = glob(["*.java"]),
     # TODO(b/202428351): Generics support
-    enable_kt = False,
+    enable_kt_native = False,
+    # TODO(b/278942389): Enable when TestUtils.isJ2Kt() detects J2KT-web
+    enable_kt_web = False,
 )

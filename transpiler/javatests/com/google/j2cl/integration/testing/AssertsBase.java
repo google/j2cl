@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.integration.testing;
 
+import static com.google.j2cl.integration.testing.TestUtils.isJ2Kt;
 import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 
 import com.google.j2cl.integration.testing.Asserts.JsRunnable;
@@ -76,7 +77,14 @@ public class AssertsBase {
   }
 
   public static void assertThrowsClassCastException(JsRunnable runnable, Class<?> toClass) {
-    assertThrowsClassCastException(runnable, toClass.getName());
+    assertThrowsClassCastException(
+        runnable,
+        // TODO(b/368263653): On J2KT, Class.getComponentType() always returns Object.class for
+        //  non-primitive arrays, so skip the check for exception message as we don't know the
+        //  actual component type to check for.
+        isJ2Kt() && toClass.isArray() && !toClass.getComponentType().isPrimitive()
+            ? null
+            : toClass.getName());
   }
 
   public static void assertThrowsNullPointerException(JsRunnable runnable) {

@@ -117,6 +117,8 @@ public class Casts {
   public void testPrecedence() {
     Object foo = "foo";
     Object bar = "bar";
-    String s = (String) (false ? foo : bar);
+    Integer notString = 123;
+    String s1 = (String) (false ? foo : bar);
+    String s2 = (String) ("foo" + notString);
   }
 }

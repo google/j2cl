@@ -19,6 +19,7 @@ package cast
 
 import javaemul.lang.*
 import java.io.Serializable
+import java.lang.Integer
 import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
@@ -136,7 +137,9 @@ open class Casts {
  open fun testPrecedence() {
   val foo: Any? = "foo"
   val bar: Any? = "bar"
-  val s: String? = (if (false) foo else bar) as String?
+  val notString: Int? = Integer.valueOf(123)
+  val s1: String? = (if (false) foo else bar) as String?
+  val s2: String? = ("foo" + notString) as String
  }
 
  @ObjCName("J2ktCastCasts_Foo", exact = true)

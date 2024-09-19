@@ -15,8 +15,10 @@
  */
 package casts;
 
+import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.TestUtils.isJ2Kt;
 import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 
 import java.io.Serializable;
@@ -48,6 +50,7 @@ public class Main {
     testDevirtualizedCasts_comparable();
     testDevirtualizedCasts_charSequence();
     testDevirtualizedCasts_void();
+    testPrecedence();
   }
 
   public interface Interface {}
@@ -159,12 +162,14 @@ public class Main {
         String[].class);
     // Make sure access to the length field performs the right cast. The length field
     // has special handling in CompilationUnitBuider.
-    assertThrowsClassCastException(
-        () -> {
-          int unused = objectArrayInArrayContainer.data.length;
-        },
-        String[].class);
-
+    // TODO(b/368266647): Erasure cast is missing in Kotlin
+    if (!isJ2Kt()) {
+      assertThrowsClassCastException(
+          () -> {
+            int unused = objectArrayInArrayContainer.data.length;
+          },
+          String[].class);
+    }
     // Not even an array.
     assertThrowsClassCastException(
         () -> {
@@ -190,16 +195,19 @@ public class Main {
 
     // Array of the wrong type.
     Container<String[]> objectArrayInContainer = new Container<>(new Object[1]);
-    assertThrowsClassCastException(
-        () -> {
-          String unused = objectArrayInContainer.data[0];
-        },
-        String[].class);
-    assertThrowsClassCastException(
-        () -> {
-          int unused = objectArrayInContainer.data.length;
-        },
-        String[].class);
+    // TODO(b/368266647): Erasure cast is missing in Kotlin
+    if (!isJ2Kt()) {
+      assertThrowsClassCastException(
+          () -> {
+            String unused = objectArrayInContainer.data[0];
+          },
+          String[].class);
+      assertThrowsClassCastException(
+          () -> {
+            int unused = objectArrayInContainer.data.length;
+          },
+          String[].class);
+    }
 
     // Not even an array.
     Container<String[]> notAnArrayInContainer = new Container<>(new Object());
@@ -575,7 +583,8 @@ public class Main {
         () -> {
           throw returnObjectAsT(new RuntimeException());
         },
-        RuntimeException.class);
+        // TODO(b/368266647): On J2KT it reports Throwable.
+        !isJ2Kt() ? RuntimeException.class : Throwable.class);
   }
 
   private static void testCasts_erasureCastOnConversion() {
@@ -583,7 +592,8 @@ public class Main {
         () -> {
           int i = (int) returnObjectAsT(new Integer(1));
         },
-        Integer.class);
+        // TODO(b/368266647): On J2KT it reports Number.
+        !isJ2Kt() ? Integer.class : Number.class);
   }
 
   private static <T> T returnObjectAsT(T unused) {
@@ -626,5 +636,16 @@ public class Main {
             Foo foo = (Foo) h.reset().f;
           }
         });
+  }
+
+  private static void testPrecedence() {
+    Object foo = "foo";
+    Object bar = "bar";
+    Integer notString = 123;
+    assertEquals("bar", (String) (false ? foo : bar));
+
+    // Should be translated to: {@code ("foo" + notString) as String}
+    // and not: {@code "foo" + notString as String} which would cause class cast exception.
+    assertEquals("foo123", (String) ("foo" + notString));
   }
 }
