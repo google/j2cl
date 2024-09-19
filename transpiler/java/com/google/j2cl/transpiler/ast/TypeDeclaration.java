@@ -885,7 +885,6 @@ public abstract class TypeDeclaration
         .setUnusableByJsSuppressed(false)
         .setDeprecated(false)
         .setNullMarked(false)
-        .setPackage(PackageDeclaration.DEFAULT_PACKAGE)
         .setTypeParameterDescriptors(ImmutableList.of())
         .setDeclaredMethodDescriptorsFactory(() -> ImmutableList.of())
         .setDeclaredFieldDescriptorsFactory(() -> ImmutableList.of())
@@ -929,6 +928,8 @@ public abstract class TypeDeclaration
   @AutoValue.Builder
   public abstract static class Builder {
     public abstract Builder setAnonymous(boolean isAnonymous);
+
+    public abstract Builder setClassComponents(String... classComponents);
 
     public abstract Builder setClassComponents(List<String> classComponents);
 
@@ -992,6 +993,13 @@ public abstract class TypeDeclaration
 
     public abstract Builder setPackage(PackageDeclaration packageDeclaration);
 
+    private String qualifiedSourceName;
+
+    public Builder setQualifiedSourceName(String qualifiedSourceName) {
+      this.qualifiedSourceName = qualifiedSourceName;
+      return this;
+    }
+
     public abstract Builder setSimpleJsName(String simpleJsName);
 
     public abstract Builder setCustomizedJsNamespace(String jsNamespace);
@@ -1048,9 +1056,11 @@ public abstract class TypeDeclaration
         Supplier<ImmutableList<TypeDeclaration>> memberTypeDeclarationsFactory);
 
     // Builder accessors to aid construction.
-    abstract ImmutableList<String> getClassComponents();
+    abstract Optional<ImmutableList<String>> getClassComponents();
 
     abstract Optional<String> getSimpleJsName();
+
+    abstract Optional<PackageDeclaration> getPackage();
 
     abstract Optional<TypeDeclaration> getEnclosingTypeDeclaration();
 
@@ -1093,12 +1103,28 @@ public abstract class TypeDeclaration
         }
       }
 
-      if (getEnclosingTypeDeclaration().isPresent()) {
+      if (qualifiedSourceName != null) {
+        // Setting qualifiedSourceName is only allowed for top-level types and shouldn't be mixed
+        // with other construction styles (like providing packages, class components, etc.).
+        checkState(getEnclosingTypeDeclaration().isEmpty());
+        checkState(getPackage().isEmpty());
+        checkState(getClassComponents().isEmpty());
+
+        int lastDot = qualifiedSourceName.lastIndexOf('.');
+        setPackage(
+            PackageDeclaration.newBuilder()
+                .setName(lastDot == -1 ? "" : qualifiedSourceName.substring(0, lastDot))
+                .build());
+        setClassComponents(qualifiedSourceName.substring(lastDot + 1));
+      }
+
+      if (!getPackage().isPresent()) {
+        // If no package is set, enclosing type is mandatory where we can get the package from.
         setPackage(getEnclosingTypeDeclaration().get().getPackage());
       }
 
       if (!getSimpleJsName().isPresent()) {
-        setSimpleJsName(AstUtils.getSimpleSourceName(getClassComponents()));
+        setSimpleJsName(AstUtils.getSimpleSourceName(getClassComponents().get()));
       }
 
       checkState(!isAnnotation() || getKind() == Kind.INTERFACE);

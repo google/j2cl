@@ -23,8 +23,6 @@ import javax.annotation.Nullable;
 @AutoValue
 public abstract class PackageDeclaration {
 
-  public static final PackageDeclaration DEFAULT_PACKAGE = newBuilder().setName("").build();
-
   public abstract String getName();
 
   @Nullable

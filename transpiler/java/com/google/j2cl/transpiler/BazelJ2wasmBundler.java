@@ -65,7 +65,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -205,8 +204,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
         new com.google.j2cl.transpiler.ast.Type(
             SourcePosition.NONE,
             TypeDeclaration.newBuilder()
-                .setClassComponents(
-                    ImmutableList.of("wasm", "stringLiteral", "StringLiteralHolder"))
+                .setQualifiedSourceName("wasm.stringLiteral.StringLiteralHolder")
                 .setKind(Kind.CLASS)
                 .build());
 
@@ -270,7 +268,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
     // Synthesize the forwarding logic.
     TypeDeclaration typeDeclaration =
         TypeDeclaration.newBuilder()
-            .setClassComponents(Arrays.asList(enclosingTypeQualifiedSourceName.split("\\.")))
+            .setQualifiedSourceName(enclosingTypeQualifiedSourceName)
             .setKind(Kind.CLASS)
             .build();
     com.google.j2cl.transpiler.ast.Type type = getType(typeDeclaration);

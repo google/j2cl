@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import com.google.common.collect.ImmutableList;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
@@ -24,7 +23,6 @@ import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Node;
-import com.google.j2cl.transpiler.ast.PackageDeclaration;
 import com.google.j2cl.transpiler.ast.PrefixExpression;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
@@ -103,8 +101,7 @@ public final class ImplementBitLevelOperatorsJ2kt extends NormalizationPass {
           .setTypeDeclaration(
               TypeDeclaration.newBuilder()
                   .setKind(Kind.CLASS)
-                  .setPackage(PackageDeclaration.newBuilder().setName("j2kt").build())
-                  .setClassComponents(ImmutableList.of("BasicType"))
+                  .setQualifiedSourceName("j2kt.BasicType")
                   .build())
           .build();
 }

@@ -1142,7 +1142,7 @@ public final class AstUtils {
   /** Return the type descriptor for the holder of system properties. */
   public static TypeDeclaration getSystemPropertyHolder() {
     return TypeDeclaration.newBuilder()
-        .setClassComponents(ImmutableList.of("javaemul.internal.SystemPropertyPool"))
+        .setQualifiedSourceName("javaemul.internal.SystemPropertyPool")
         .setKind(Kind.INTERFACE)
         .build();
   }

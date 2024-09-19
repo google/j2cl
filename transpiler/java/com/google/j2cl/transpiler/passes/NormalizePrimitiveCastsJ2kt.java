@@ -21,7 +21,6 @@ import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveChar;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveFloatOrDouble;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveInt;
 
-import com.google.common.collect.ImmutableList;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
@@ -32,7 +31,6 @@ import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Node;
-import com.google.j2cl.transpiler.ast.PackageDeclaration;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
@@ -94,8 +92,7 @@ public class NormalizePrimitiveCastsJ2kt extends NormalizationPass {
           .setTypeDeclaration(
               TypeDeclaration.newBuilder()
                   .setKind(Kind.CLASS)
-                  .setPackage(PackageDeclaration.newBuilder().setName("j2kt").build())
-                  .setClassComponents(ImmutableList.of("BasicType"))
+                  .setQualifiedSourceName("j2kt.BasicType")
                   .build())
           .build();
 

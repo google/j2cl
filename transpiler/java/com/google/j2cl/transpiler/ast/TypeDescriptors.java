@@ -520,7 +520,7 @@ public class TypeDescriptors {
 
     TypeDeclaration typeDeclaration =
         TypeDeclaration.newBuilder()
-            .setClassComponents(ImmutableList.of(className))
+            .setClassComponents(className)
             // Mark bootstrap classes as non native so that the goog.require doesn't reference
             // overlay.
             .setNative(!isBootstrapNamespace(jsNamespace))
