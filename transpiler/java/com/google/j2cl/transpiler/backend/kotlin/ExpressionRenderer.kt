@@ -27,7 +27,6 @@ import com.google.j2cl.transpiler.ast.CastExpression
 import com.google.j2cl.transpiler.ast.ConditionalExpression
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.Expression
-import com.google.j2cl.transpiler.ast.Expression.Associativity
 import com.google.j2cl.transpiler.ast.Expression.Precedence
 import com.google.j2cl.transpiler.ast.ExpressionWithComment
 import com.google.j2cl.transpiler.ast.FieldAccess
@@ -180,20 +179,14 @@ internal data class ExpressionRenderer(
     }
 
   private fun arrayAccessSource(arrayAccess: ArrayAccess): Source =
-    getOperatorSource(arrayAccess.arrayExpression, arrayAccess.indexExpression)
-
-  private fun getOperatorSource(qualifier: Expression, argument: Expression): Source =
     join(
-      expressionInParensSource(
-        qualifier,
-        Precedence.MEMBER_ACCESS.requiresParensOnLeft(qualifier.precedence),
-      ),
-      inSquareBrackets(expressionSource(argument)),
+      leftSubExpressionSource(arrayAccess.ktPrecedence, arrayAccess.arrayExpression),
+      inSquareBrackets(expressionSource(arrayAccess.indexExpression)),
     )
 
   private fun arrayLengthSource(arrayLength: ArrayLength): Source =
     dotSeparated(
-      leftSubExpressionSource(arrayLength.precedence, arrayLength.arrayExpression),
+      leftSubExpressionSource(arrayLength.ktPrecedence, arrayLength.arrayExpression),
       SIZE_IDENTIFIER,
     )
 
@@ -239,12 +232,12 @@ internal data class ExpressionRenderer(
       ) {
         identifierSource(environment.ktMangledName(leftOperand.target))
       } else {
-        leftSubExpressionSource(expression.precedence, leftOperand)
+        leftSubExpressionSource(expression.ktPrecedence, leftOperand)
       }
     }
 
   private fun rightOperandSource(expression: BinaryExpression): Source =
-    rightSubExpressionSource(expression.precedence, expression.rightOperand)
+    rightSubExpressionSource(expression.ktPrecedence, expression.rightOperand)
 
   private fun castExpressionSource(castExpression: CastExpression): Source =
     castExpression.castTypeDescriptor.let { castTypeDescriptor ->
@@ -252,7 +245,7 @@ internal data class ExpressionRenderer(
         // Render cast to intersection type descriptor: (A & B & C) x
         // using smart casts: (x).let { it as A; it as B; it as C; it }
         dotSeparated(
-          inParentheses(expressionSource(castExpression.expression)),
+          leftSubExpressionSource(castExpression.ktPrecedence, castExpression.expression),
           spaceSeparated(
             nameRenderer.extensionMemberQualifiedNameSource("kotlin.let"),
             inInlineCurlyBrackets(
@@ -266,7 +259,7 @@ internal data class ExpressionRenderer(
         )
       } else {
         asExpression(
-          leftSubExpressionSource(castExpression.precedence, castExpression.expression),
+          leftSubExpressionSource(castExpression.ktPrecedence, castExpression.expression),
           castTypeDescriptorSource(castExpression.castTypeDescriptor),
         )
       }
@@ -323,7 +316,7 @@ internal data class ExpressionRenderer(
 
   private fun instanceOfExpressionSource(instanceOfExpression: InstanceOfExpression): Source =
     isExpression(
-      leftSubExpressionSource(instanceOfExpression.precedence, instanceOfExpression.expression),
+      leftSubExpressionSource(instanceOfExpression.ktPrecedence, instanceOfExpression.expression),
       instanceOfTestTypeDescriptorSource(instanceOfExpression.testTypeDescriptor),
     )
 
@@ -544,14 +537,14 @@ internal data class ExpressionRenderer(
 
   private fun postfixExpressionSource(expression: PostfixExpression): Source =
     join(
-      leftSubExpressionSource(expression.precedence, expression.operand),
+      leftSubExpressionSource(expression.ktPrecedence, expression.operand),
       expression.operator.ktSource,
     )
 
   private fun prefixExpressionSource(expression: PrefixExpression): Source =
     expression.operator.let { operator ->
       operator.ktSource.let { symbolSource ->
-        rightSubExpressionSource(expression.precedence, expression.operand).let { operandSource ->
+        rightSubExpressionSource(expression.ktPrecedence, expression.operand).let { operandSource ->
           if (operator.needsSpace) {
             spaceSeparated(symbolSource, operandSource)
           } else {
@@ -628,10 +621,10 @@ internal data class ExpressionRenderer(
     }
 
   private fun leftSubExpressionSource(precedence: Precedence, operand: Expression) =
-    expressionInParensSource(operand, precedence.requiresParensOnLeft(operand.precedence))
+    expressionInParensSource(operand, precedence.requiresParensOnLeft(operand.ktPrecedence))
 
   private fun rightSubExpressionSource(precedence: Precedence, operand: Expression) =
-    expressionInParensSource(operand, precedence.requiresParensOnRight(operand.precedence))
+    expressionInParensSource(operand, precedence.requiresParensOnRight(operand.ktPrecedence))
 
   private fun expressionInParensSource(expression: Expression, needsParentheses: Boolean) =
     expressionSource(expression).letIf(needsParentheses) { inParentheses(it) }
@@ -675,7 +668,7 @@ internal data class ExpressionRenderer(
         } else if (
           memberReference.target.isInstanceMember || !qualifier.isNonQualifiedThisReference
         ) {
-          leftSubExpressionSource(memberReference.precedence, qualifier)
+          leftSubExpressionSource(memberReference.ktPrecedence, qualifier)
         } else {
           Source.EMPTY
         }
@@ -762,13 +755,19 @@ internal data class ExpressionRenderer(
     private val MemberReference.isLocalNewInstance: Boolean
       get() = this is NewInstance && typeDescriptor.typeDeclaration.isLocal
 
-    private fun Precedence.requiresParensOnLeft(operand: Precedence): Boolean =
-      operand == Precedence.CONDITIONAL ||
-        value > operand.value ||
-        (associativity != Associativity.LEFT && this == operand)
-
-    private fun Precedence.requiresParensOnRight(operand: Precedence): Boolean =
-      value > operand.value || (associativity != Associativity.RIGHT && this == operand)
+    private val Expression.ktPrecedence: Precedence
+      get() =
+        when (this) {
+          is CastExpression ->
+            when (castTypeDescriptor) {
+              // cast to intersection types is rendered as "x.let { it as T1; it as T2; it }"
+              is IntersectionTypeDescriptor -> Precedence.MEMBER_ACCESS
+              // cast to simple types is rendered as "x as T"
+              // TODO(b/368404944): Decouple the precedence value and associativity from the AST
+              else -> Precedence.AS_OPERATOR
+            }
+          else -> precedence
+        }
 
     private val BinaryExpression.useEquality: Boolean
       get() =

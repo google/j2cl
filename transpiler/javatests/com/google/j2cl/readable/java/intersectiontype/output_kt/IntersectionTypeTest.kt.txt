@@ -84,7 +84,7 @@ open class IntersectionTypeTest<U> {
  @ObjCName("testMethodCall")
  open fun testMethodCall() {
   val o: Any? = IntersectionTypeTest.m()
-  IntersectionTypeTest.set((o).let { it as IntersectionTypeTest.A?; it as IntersectionTypeTest.EmptyA?; it })
+  IntersectionTypeTest.set(o.let { it as IntersectionTypeTest.A?; it as IntersectionTypeTest.EmptyA?; it })
   IntersectionTypeTest.set(IntersectionTypeTest.m())
   val g: Getable<*>? = IntersectionTypeTest.n() as Getable<Any?>?
  }
@@ -93,8 +93,8 @@ open class IntersectionTypeTest<U> {
  open fun testDefaultMethodCall(
   @ObjCName("withId") o: Any?
  ) {
-  ((o).let { it as Cmp?; it as IntersectionTypeTest.EmptyA?; it })!!.defaultM()
-  ((o).let { it as CmpImpl?; it as IntersectionTypeTest.EmptyA?; it })!!.defaultM()
+  o.let { it as Cmp?; it as IntersectionTypeTest.EmptyA?; it }!!.defaultM()
+  o.let { it as CmpImpl?; it as IntersectionTypeTest.EmptyA?; it }!!.defaultM()
  }
 
  @ObjCName("J2ktIntersectiontypeIntersectionTypeTestCompanion", exact = true)
@@ -114,9 +114,9 @@ open class IntersectionTypeTest<U> {
    @ObjCName("withId") o: Any?
   ): Getable<T>? {
    if (o == null) {
-    return (o).let { it as Getable<T>?; it as Setable?; it }
+    return o.let { it as Getable<T>?; it as Setable?; it }
    }
-   return (o).let { it as Getable<T>?; it as Setable?; it }
+   return o.let { it as Getable<T>?; it as Setable?; it }
   }
 
   @JvmStatic
@@ -124,7 +124,7 @@ open class IntersectionTypeTest<U> {
   fun <T> cast1(
    @ObjCName("withId") s: Any?
   ): Getable<Comparable<String>?>? {
-   return (s).let { it as Getable<Comparable<String>?>?; it as Setable?; it }
+   return s.let { it as Getable<Comparable<String>?>?; it as Setable?; it }
   }
 
   @JvmStatic
@@ -132,7 +132,7 @@ open class IntersectionTypeTest<U> {
   fun <T> cast2(
    @ObjCName("withId") s: Any?
   ): Getable<Comparable<T & Any>?>? {
-   return (s).let { it as Getable<Comparable<T & Any>?>?; it as Setable?; it }
+   return s.let { it as Getable<Comparable<T & Any>?>?; it as Setable?; it }
   }
 
   @JvmStatic
@@ -156,9 +156,9 @@ open class IntersectionTypeTest<U> {
   fun testClosureAssignment(
    @ObjCName("withId") o: Any?
   ) {
-   val e: IntersectionTypeTest.A? = (o).let { it as IntersectionTypeTest.A?; it as IntersectionTypeTest.EmptyA?; it as IntersectionTypeTest.EmptyB?; it }
-   val g: IntersectionTypeTest.EmptyA? = (o).let { it as IntersectionTypeTest.A?; it as IntersectionTypeTest.EmptyA?; it as IntersectionTypeTest.EmptyB?; it }
-   val s: IntersectionTypeTest.EmptyB? = (o).let { it as IntersectionTypeTest.A?; it as IntersectionTypeTest.EmptyA?; it as IntersectionTypeTest.EmptyB?; it }
+   val e: IntersectionTypeTest.A? = o.let { it as IntersectionTypeTest.A?; it as IntersectionTypeTest.EmptyA?; it as IntersectionTypeTest.EmptyB?; it }
+   val g: IntersectionTypeTest.EmptyA? = o.let { it as IntersectionTypeTest.A?; it as IntersectionTypeTest.EmptyA?; it as IntersectionTypeTest.EmptyB?; it }
+   val s: IntersectionTypeTest.EmptyB? = o.let { it as IntersectionTypeTest.A?; it as IntersectionTypeTest.EmptyA?; it as IntersectionTypeTest.EmptyB?; it }
   }
 
   @JvmStatic
@@ -168,7 +168,7 @@ open class IntersectionTypeTest<U> {
 
   @JvmStatic
   private fun <T> m(): T where T: IntersectionTypeTest.A?, T: IntersectionTypeTest.EmptyA? {
-   return (IntersectionTypeTest.get<Any?>(Any()) as T?) as T
+   return IntersectionTypeTest.get<Any?>(Any()) as T? as T
   }
 
   @JvmStatic
@@ -182,7 +182,7 @@ open class IntersectionTypeTest<U> {
   @JvmStatic
   private fun <T> callOnIntersetionTypes(t: T) where T: IntersectionTypeTest.SomeConcreteType?, T: Cmp? {
    t!!.cmp()
-   ((null).let { it as IntersectionTypeTest.SomeConcreteType?; it as Cmp?; it })!!.cmp()
+   null.let { it as IntersectionTypeTest.SomeConcreteType?; it as Cmp?; it }!!.cmp()
   }
  }
 
@@ -192,7 +192,7 @@ open class IntersectionTypeTest<U> {
   open fun <T> method(
    @ObjCName("withId") o: Any?
   ): Getable<T>? {
-   return (o).let { it as Getable<T>?; it as Setable?; it }
+   return o.let { it as Getable<T>?; it as Setable?; it }
   }
  }
 

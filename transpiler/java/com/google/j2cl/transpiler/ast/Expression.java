@@ -294,6 +294,7 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
     POSTFIX(18, Expression.Associativity.NONE),
     PREFIX(17, Expression.Associativity.RIGHT),
     CAST(16, Expression.Associativity.RIGHT),
+    AS_OPERATOR(16, Expression.Associativity.LEFT),
     MULTIPLICATIVE(15, Expression.Associativity.LEFT),
     ADDITIVE(14, Expression.Associativity.LEFT),
     SHIFT_OPERATOR(13, Expression.Associativity.LEFT),
