@@ -42,6 +42,17 @@
  ))
 )
 
+;;; Code for nativejstypes.Empty.$Overlay [type definition]
+(type $nativejstypes.Empty.$Overlay.vtable (sub (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ ))
+)
+(type $nativejstypes.Empty.$Overlay (sub (struct
+ (field $vtable (ref $nativejstypes.Empty.$Overlay.vtable))
+ (field $itable (ref $itable))
+ ))
+)
+
 ;;; Code for nativejstypes.Foo.$Overlay [type definition]
 (type $nativejstypes.Foo.$Overlay.vtable (sub (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
@@ -127,6 +138,8 @@
 
 ;;; Code for nativejstypes.Bar.Inner [type definition]
 
+;;; Code for nativejstypes.Empty [type definition]
+
 ;;; Code for nativejstypes.Foo [type definition]
 
 ;;; Code for nativejstypes.Headers [type definition]
@@ -163,6 +176,8 @@
 ;;; Code for nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay [imports]
 
 ;;; Code for nativejstypes.Bar.Inner.$Overlay [imports]
+
+;;; Code for nativejstypes.Empty.$Overlay [imports]
 
 ;;; Code for nativejstypes.Foo.$Overlay [imports]
 
@@ -288,6 +303,8 @@
 (func $m_getInnerStatic__int@nativejstypes.Bar.Inner (import "imports" "nativejstypes.Bar.Inner.getInnerStatic") 
  (result i32)
 )
+
+;;; Code for nativejstypes.Empty [imports]
 
 ;;; Code for nativejstypes.Foo [imports]
 
@@ -469,6 +486,14 @@
  (ref.null $java.lang.Class)
 )
 
+;;; Code for nativejstypes.Empty.$Overlay [static fields]
+(global $$class-initialized@nativejstypes.Empty.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@nativejstypes.Empty.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
 ;;; Code for nativejstypes.Foo.$Overlay [static fields]
 (global $$class-initialized@nativejstypes.Foo.$Overlay (mut i32)
  (i32.const 0)
@@ -558,6 +583,13 @@
 (global $nativejstypes.Bar.Inner.$Overlay.vtable (ref $nativejstypes.Bar.Inner.$Overlay.vtable)
  (struct.new $nativejstypes.Bar.Inner.$Overlay.vtable
   (ref.func $$getClassImpl__java_lang_Class@nativejstypes.Bar.Inner.$Overlay)
+ )
+)
+
+;;; Code for nativejstypes.Empty.$Overlay [vtable.init]
+(global $nativejstypes.Empty.$Overlay.vtable (ref $nativejstypes.Empty.$Overlay.vtable)
+ (struct.new $nativejstypes.Empty.$Overlay.vtable
+  (ref.func $$getClassImpl__java_lang_Class@nativejstypes.Empty.$Overlay)
  )
 )
 
@@ -799,6 +831,51 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nativejstypes.Bar.Inner.$Overlay)
+
+;;; Code for nativejstypes.Empty.$Overlay [methods]
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void_<once>_@nativejstypes.Empty.$Overlay
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Empty.java:22:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Empty.java:22:6
+  (if (global.get $$class-initialized@nativejstypes.Empty.$Overlay)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Empty.java:22:6
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Empty.java:22:6
+  (global.set $$class-initialized@nativejstypes.Empty.$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.Empty.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nativejstypes.Empty.$Overlay)))
+   (then
+    (return (global.get $$class@nativejstypes.Empty.$Overlay))
+   )
+  )
+  (global.set $$class@nativejstypes.Empty.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.Empty.$Overlay )(ref.null $java.lang.Class)))
+  (return (global.get $$class@nativejstypes.Empty.$Overlay))
+ )
+)
+
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nativejstypes.Empty.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nativejstypes.Empty.$Overlay))
+ (local.set $this (ref.cast (ref $nativejstypes.Empty.$Overlay) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.Empty.$Overlay ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nativejstypes.Empty.$Overlay)
 
 ;;; Code for nativejstypes.Foo.$Overlay [methods]
 
@@ -1122,6 +1199,8 @@
 ;;; Code for nativejstypes.BarInnerWithDotInNameAndHasNamespace [methods]
 
 ;;; Code for nativejstypes.Bar.Inner [methods]
+
+;;; Code for nativejstypes.Empty [methods]
 
 ;;; Code for nativejstypes.Foo [methods]
 
