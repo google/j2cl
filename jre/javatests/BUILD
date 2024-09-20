@@ -214,6 +214,7 @@ closure_js_binary(
     name = "conformance_binary",
     defs = COMFORMANCE_CHECK_FLAGS,
     extra_inputs = ["conformance_proto.txt"],
+    use_precompiled_libraries = False,
     deps = ["//:jre"],
 )
 
@@ -222,6 +223,7 @@ closure_js_binary(
     compiler = "//javascript/tools/jscompiler:head",
     defs = COMFORMANCE_CHECK_FLAGS,
     extra_inputs = ["conformance_proto.txt"],
+    use_precompiled_libraries = False,
     deps = ["//:jre"],
 )
 
@@ -230,6 +232,7 @@ closure_js_binary(
     compiler = "//javascript/tools/jscompiler:head",
     defs = COMFORMANCE_CHECK_FLAGS + WHITESPACE_ONLY_FLAGS,
     extra_inputs = ["conformance_proto.txt"],
+    use_precompiled_libraries = False,
     deps = ["//:jre"],
 )
 
