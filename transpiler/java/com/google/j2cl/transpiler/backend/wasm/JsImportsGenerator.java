@@ -29,7 +29,6 @@ import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
-import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.Variable;
@@ -244,11 +243,6 @@ public final class JsImportsGenerator {
     }
 
     @Override
-    public void exitType(Type type) {
-      collectModuleImports(type.getTypeDescriptor());
-    }
-
-    @Override
     public void exitMethod(Method method) {
       MethodDescriptor methodDescriptor = method.getDescriptor();
       if (!shouldGenerateImport(methodDescriptor)) {
@@ -283,7 +277,11 @@ public final class JsImportsGenerator {
 
     private void addModuleImports(MethodDescriptor methodDescriptor) {
       if (!methodDescriptor.isExtern()) {
-        moduleImports.add(methodDescriptor.getJsNamespace());
+        if (methodDescriptor.hasJsNamespace()) {
+          moduleImports.add(methodDescriptor.getJsNamespace());
+        } else {
+          collectModuleImports(methodDescriptor.getEnclosingTypeDescriptor());
+        }
       }
 
       methodDescriptor.getParameterTypeDescriptors().forEach(this::collectModuleImports);
