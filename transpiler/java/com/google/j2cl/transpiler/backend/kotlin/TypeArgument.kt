@@ -49,11 +49,28 @@ internal val ArrayTypeDescriptor.typeArgument
 
 internal fun DeclaredTypeDescriptor.typeArguments(
   projectRawToWildcards: Boolean = false
-): List<TypeArgument> =
-  typeDeclaration.directlyDeclaredTypeParameterDescriptors.zip(
-    directlyDeclaredNonRawTypeArgumentDescriptors(projectToWildcards = projectRawToWildcards),
-    ::typeArgument,
-  )
+): List<TypeArgument> {
+  val specializedtypeDescriptor =
+    if (isRaw) {
+      toUnparameterizedTypeDescriptor()
+        .specializeRawTypeVariables(
+          toWildcards = projectRawToWildcards || typeDeclaration.hasRecursiveTypeBounds()
+        )
+    } else this
+  return typeDeclaration.typeParameterDescriptors
+    .zip(specializedtypeDescriptor.typeArgumentDescriptors, ::typeArgument)
+    .take(typeDeclaration.directlyDeclaredTypeParameterCount)
+}
+
+private fun DeclaredTypeDescriptor.specializeRawTypeVariables(
+  toWildcards: Boolean
+): DeclaredTypeDescriptor = specializeTypeVariables {
+  if (toWildcards) {
+    TypeVariable.createWildcard()
+  } else {
+    (it.toRawTypeDescriptor() as DeclaredTypeDescriptor).specializeRawTypeVariables(toWildcards)
+  }
+}
 
 internal val MethodDescriptor.typeArguments: List<TypeArgument>
   get() =

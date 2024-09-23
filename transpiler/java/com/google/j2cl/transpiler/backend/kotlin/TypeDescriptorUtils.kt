@@ -33,25 +33,6 @@ import kotlin.streams.asSequence
 internal val TypeDescriptor.isImplicitUpperBound
   get() = this == nullableAnyTypeDescriptor
 
-// TODO(b/216796920): Remove when the bug is fixed.
-private val DeclaredTypeDescriptor.directlyDeclaredTypeArgumentDescriptors: List<TypeDescriptor>
-  get() = typeArgumentDescriptors.take(typeDeclaration.directlyDeclaredTypeParameterCount)
-
-internal fun DeclaredTypeDescriptor.directlyDeclaredNonRawTypeArgumentDescriptors(
-  projectToWildcards: Boolean
-): List<TypeDescriptor> =
-  if (!isRaw) directlyDeclaredTypeArgumentDescriptors
-  else
-    projectToWildcards.or(typeDeclaration.hasRecursiveTypeBounds()).let { mapToWildcard ->
-      typeDeclaration.directlyDeclaredTypeParameterDescriptors.map {
-        if (mapToWildcard) {
-          TypeVariable.createWildcard()
-        } else {
-          it.upperBoundTypeDescriptor.toRawTypeDescriptor()
-        }
-      }
-    }
-
 /** Returns direct super type to use for super method call. */
 internal fun DeclaredTypeDescriptor.directSuperTypeForMethodCall(
   methodDescriptor: MethodDescriptor
