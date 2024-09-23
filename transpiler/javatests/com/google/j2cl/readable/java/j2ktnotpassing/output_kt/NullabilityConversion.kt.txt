@@ -54,6 +54,20 @@ open class NullabilityConversion {
     }
    }
 
+   @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Parameterized_SimpleUpperWildcardToUpperWildcard", exact = true)
+   open class SimpleUpperWildcardToUpperWildcard {
+    @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Parameterized_SimpleUpperWildcardToUpperWildcardCompanion", exact = true)
+    companion object {
+     @JvmStatic
+     @ObjCName("nullableToNonNull")
+     fun nullableToNonNull(
+      @ObjCName("withJ2ktnotpassingNullabilityConversion_Generic") it: NullabilityConversion.Generic<out NullabilityConversion.Child?>
+     ): NullabilityConversion.Generic<out NullabilityConversion.Parent> {
+      return it
+     }
+    }
+   }
+
    @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Parameterized_SimpleLowerWildcardToLowerWildcard", exact = true)
    open class SimpleLowerWildcardToLowerWildcard {
     @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Parameterized_SimpleLowerWildcardToLowerWildcardCompanion", exact = true)

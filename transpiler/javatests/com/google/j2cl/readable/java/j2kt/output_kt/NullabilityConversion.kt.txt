@@ -210,7 +210,7 @@ open class NullabilityConversion {
      @ObjCName("nullableToNonNull")
      fun nullableToNonNull(
       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<NullabilityConversion.Child?>
-     ): NullabilityConversion.Generic<*> {
+     ): NullabilityConversion.Generic<out NullabilityConversion.Parent> {
       return it as NullabilityConversion.Generic<NullabilityConversion.Parent>
      }
 
@@ -226,7 +226,7 @@ open class NullabilityConversion {
      @ObjCName("nonNullToNonNull")
      fun nonNullToNonNull(
       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<NullabilityConversion.Child>
-     ): NullabilityConversion.Generic<*> {
+     ): NullabilityConversion.Generic<out NullabilityConversion.Parent> {
       return it
      }
     }
@@ -275,14 +275,6 @@ open class NullabilityConversion {
      }
 
      @JvmStatic
-     @ObjCName("nullableToNonNull")
-     fun nullableToNonNull(
-      @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<out NullabilityConversion.Child?>
-     ): NullabilityConversion.Generic<*> {
-      return it
-     }
-
-     @JvmStatic
      @ObjCName("nonNullToNullable")
      fun nonNullToNullable(
       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<out NullabilityConversion.Child>
@@ -294,7 +286,7 @@ open class NullabilityConversion {
      @ObjCName("nonNullToNonNull")
      fun nonNullToNonNull(
       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<out NullabilityConversion.Child>
-     ): NullabilityConversion.Generic<*> {
+     ): NullabilityConversion.Generic<out NullabilityConversion.Parent> {
       return it
      }
     }

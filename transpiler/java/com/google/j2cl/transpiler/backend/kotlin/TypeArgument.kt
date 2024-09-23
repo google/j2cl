@@ -19,7 +19,6 @@ import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptor
-import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.backend.kotlin.common.runIf
 
@@ -81,8 +80,8 @@ internal val MethodDescriptor.typeArguments: List<TypeArgument>
 
 private fun typeArgument(declarationTypeParameter: TypeVariable, typeDescriptor: TypeDescriptor) =
   TypeArgument(declarationTypeParameter, typeDescriptor.withImplicitNullability)
-    .withFixedUnboundWildcard
     .withInferredNullability
+    .withFixedUnboundWildcard
     .updatedWithParameterVariance
 
 private val TypeArgument.withInferredNullability: TypeArgument
@@ -94,15 +93,13 @@ private val TypeArgument.updatedWithParameterVariance: TypeArgument
 // TODO(b/245807463): Remove this fix when these bugs are fixed in the AST.
 // TODO(b/255722110): Remove this fix when these bugs are fixed in the AST.
 private val TypeArgument.withFixedUnboundWildcard: TypeArgument
-  get() = runIf(needsFixForUnboundWildcard) { copy(typeDescriptor = TypeVariable.createWildcard()) }
+  get() = runIf(isUnboundWildcardOrCapture) { copy(typeDescriptor = TypeVariable.createWildcard()) }
 
 // TODO(b/245807463): Remove this fix when these bugs are fixed in the AST.
 // TODO(b/255722110): Remove this fix when these bugs are fixed in the AST.
-private val TypeArgument.needsFixForUnboundWildcard
+private val TypeArgument.isUnboundWildcardOrCapture
   get() =
     typeDescriptor is TypeVariable &&
       typeDescriptor.isWildcardOrCapture &&
       typeDescriptor.lowerBoundTypeDescriptor == null &&
-      !isJavaLangObject(typeDescriptor.upperBoundTypeDescriptor) &&
-      typeDescriptor.upperBoundTypeDescriptor.toNonNullable() ==
-        declarationTypeVariable.upperBoundTypeDescriptor.toNonNullable()
+      typeDescriptor.upperBoundTypeDescriptor == declarationTypeVariable.upperBoundTypeDescriptor

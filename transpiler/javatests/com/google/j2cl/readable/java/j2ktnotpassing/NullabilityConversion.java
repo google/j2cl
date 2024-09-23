@@ -35,6 +35,13 @@ public class NullabilityConversion {
         }
       }
 
+      public static class SimpleUpperWildcardToUpperWildcard {
+        public static Generic<? extends Parent> nullableToNonNull(
+            Generic<? extends @Nullable Child> it) {
+          return it;
+        }
+      }
+
       public static class SimpleLowerWildcardToLowerWildcard {
         public static Generic<? super @Nullable Child> nonNullToNullable(
             Generic<? super Parent> it) {

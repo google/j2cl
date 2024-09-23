@@ -126,11 +126,11 @@ open class GenericMethod<T> {
    val content: GenericMethod.Content? = list!!.get(0)!!.get_pp_genericmethod()
    GenericMethod.acceptsString(content!!.getProp_pp_genericmethod())
    GenericMethod.acceptsContent(content)
-   val nestedWildcardList: MutableList<GenericMethod.SuperContainer<out GenericMethod.Container<*>?>?>? = ArrayList<GenericMethod.SuperContainer<out GenericMethod.Container<*>>>() as MutableList<GenericMethod.SuperContainer<out GenericMethod.Container<*>?>?>?
+   val nestedWildcardList: MutableList<GenericMethod.SuperContainer<out GenericMethod.Container<*>?>?>? = ArrayList<GenericMethod.SuperContainer<out GenericMethod.Container<out GenericMethod.Content>>>() as MutableList<GenericMethod.SuperContainer<out GenericMethod.Container<*>?>?>?
    val nestedContent: GenericMethod.Content? = nestedWildcardList!!.get(0)!!.get_pp_genericmethod()!!.get_pp_genericmethod()
    GenericMethod.acceptsString(nestedContent!!.getProp_pp_genericmethod())
    GenericMethod.acceptsContent(nestedContent)
-   val deepWildcardList: MutableList<GenericMethod.SuperContainer<GenericMethod.Container<*>?>?>? = ArrayList<GenericMethod.SuperContainer<GenericMethod.Container<*>>>() as MutableList<GenericMethod.SuperContainer<GenericMethod.Container<*>?>?>?
+   val deepWildcardList: MutableList<GenericMethod.SuperContainer<GenericMethod.Container<*>?>?>? = ArrayList<GenericMethod.SuperContainer<GenericMethod.Container<out GenericMethod.Content>>>() as MutableList<GenericMethod.SuperContainer<GenericMethod.Container<*>?>?>?
    val deepContent: GenericMethod.Content? = deepWildcardList!!.get(0)!!.get_pp_genericmethod()!!.get_pp_genericmethod()
    GenericMethod.acceptsString(deepContent!!.getProp_pp_genericmethod())
    GenericMethod.acceptsContent(deepContent)

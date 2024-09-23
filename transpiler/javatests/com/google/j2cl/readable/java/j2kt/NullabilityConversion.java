@@ -148,10 +148,11 @@ public class NullabilityConversion {
           return it;
         }
 
-        public static Generic<? extends Parent> nullableToNonNull(
-            Generic<? extends @Nullable Child> it) {
-          return it;
-        }
+        // TODO(b/361769898): Uncomment when fixed
+        // public static Generic<? extends Parent> nullableToNonNull(
+        //     Generic<? extends @Nullable Child> it) {
+        //   return it;
+        // }
 
         public static Generic<? extends @Nullable Parent> nonNullToNullable(
             Generic<? extends Child> it) {
