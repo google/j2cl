@@ -476,7 +476,12 @@ public class JdtEnvironment {
     return false;
   }
 
-  private static TypeDescriptor withNullability(TypeDescriptor typeDescriptor, boolean nullable) {
+  @Nullable
+  private static DeclaredTypeDescriptor withNullability(
+      DeclaredTypeDescriptor typeDescriptor, boolean nullable) {
+    if (typeDescriptor == null) {
+      return null;
+    }
     return nullable ? typeDescriptor.toNullable() : typeDescriptor.toNonNullable();
   }
 
