@@ -1059,12 +1059,6 @@ public class JdtEnvironment {
             .setTypeDeclaration(typeDeclaration)
             .setEnclosingTypeDescriptor(
                 enclosingTypeDescriptor != null ? enclosingTypeDescriptor.toNonNullable() : null)
-            .setInterfaceTypeDescriptorsFactory(
-                () ->
-                    createTypeDescriptors(
-                        typeBinding.getInterfaces(),
-                        typeDeclaration.isNullMarked(),
-                        DeclaredTypeDescriptor.class))
             .setTypeArgumentDescriptors(
                 getTypeArgumentTypeDescriptors(typeBinding, inNullMarkedScope))
             .setDeclaredFieldDescriptorsFactory(

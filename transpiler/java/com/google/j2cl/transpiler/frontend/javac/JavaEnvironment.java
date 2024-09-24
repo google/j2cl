@@ -1027,14 +1027,6 @@ class JavaEnvironment {
         DeclaredTypeDescriptor.newBuilder()
             .setTypeDeclaration(typeDeclaration)
             .setEnclosingTypeDescriptor(createDeclaredTypeDescriptor(classType.getEnclosingType()))
-            .setInterfaceTypeDescriptorsFactory(
-                td ->
-                    createTypeDescriptors(
-                        javacTypes.directSupertypes(classType).stream()
-                            .filter(Type::isInterface)
-                            .collect(toImmutableList()),
-                        inNullMarkedScope,
-                        DeclaredTypeDescriptor.class))
             .setSingleAbstractMethodDescriptorFactory(
                 td -> {
                   MethodSymbol functionalInterfaceMethod = getFunctionalInterfaceMethod(classType);

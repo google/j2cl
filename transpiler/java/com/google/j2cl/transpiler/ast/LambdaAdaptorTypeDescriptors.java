@@ -99,8 +99,6 @@ public final class LambdaAdaptorTypeDescriptors {
     return DeclaredTypeDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setTypeDeclaration(adaptorDeclaration)
-        .setTypeArgumentDescriptors(functionalInterfaceTypeDescriptor.getTypeArgumentDescriptors())
-        .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.copyOf(interfaceTypeDescriptors))
         .setTypeArgumentDescriptors(typeArgumentDescriptors)
         .setDeclaredMethodDescriptorsFactory(
             adaptorTypeDescriptor ->

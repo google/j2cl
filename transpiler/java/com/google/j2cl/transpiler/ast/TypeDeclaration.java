@@ -606,11 +606,6 @@ public abstract class TypeDeclaration
         .setTypeDeclaration(this)
         .setEnclosingTypeDescriptor(
             applyOrNull(getEnclosingTypeDeclaration(), t -> t.toRawTypeDescriptor()))
-        .setInterfaceTypeDescriptorsFactory(
-            () ->
-                getInterfaceTypeDescriptors().stream()
-                    .map(DeclaredTypeDescriptor::toRawTypeDescriptor)
-                    .collect(toImmutableList()))
         .setTypeArgumentDescriptors(ImmutableList.of())
         .setDeclaredFieldDescriptorsFactory(
             () ->
@@ -856,7 +851,6 @@ public abstract class TypeDeclaration
                     applyOrNull(
                         self.getEnclosingTypeDeclaration(),
                         t -> t.toUnparameterizedTypeDescriptor()))
-                .setInterfaceTypeDescriptorsFactory(self::getInterfaceTypeDescriptors)
                 .setTypeArgumentDescriptors(self.getTypeParameterDescriptors())
                 .build();
 

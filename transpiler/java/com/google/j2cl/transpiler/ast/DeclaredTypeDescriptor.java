@@ -213,17 +213,15 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   @Nullable
   abstract DescriptorFactory<ImmutableList<FieldDescriptor>> getDeclaredFieldDescriptorsFactory();
 
-  @Nullable
-  abstract DescriptorFactory<ImmutableList<DeclaredTypeDescriptor>>
-      getInterfaceTypeDescriptorsFactory();
-
   /**
    * Returns a list of the type descriptors of interfaces that are explicitly implemented directly
    * on this type.
    */
   @Memoized
   public ImmutableList<DeclaredTypeDescriptor> getInterfaceTypeDescriptors() {
-    return getInterfaceTypeDescriptorsFactory().get(this);
+    return getTypeDeclaration().getInterfaceTypeDescriptors().stream()
+        .map(this::applyLocalParameterization)
+        .collect(toImmutableList());
   }
 
   @Nullable
@@ -408,9 +406,11 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   @Nullable
   public DeclaredTypeDescriptor getSuperTypeDescriptor() {
     DeclaredTypeDescriptor superTypeDescriptor = getTypeDeclaration().getSuperTypeDescriptor();
-    if (superTypeDescriptor == null) {
-      return null;
-    }
+    return superTypeDescriptor == null ? null : applyLocalParameterization(superTypeDescriptor);
+  }
+
+  private DeclaredTypeDescriptor applyLocalParameterization(
+      DeclaredTypeDescriptor superTypeDescriptor) {
     return superTypeDescriptor.specializeTypeVariables(
         TypeDescriptors.mappingFunctionFromMap(getLocalParameterization()));
   }
@@ -1218,7 +1218,8 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         .filter(Predicates.notNull());
   }
 
-  private Map<TypeVariable, TypeDescriptor> getLocalParameterization() {
+  @Memoized
+  Map<TypeVariable, TypeDescriptor> getLocalParameterization() {
     ImmutableList<TypeVariable> typeVariables = getTypeDeclaration().getTypeParameterDescriptors();
     ImmutableList<TypeDescriptor> typeArguments = getTypeArgumentDescriptors();
 
@@ -1268,11 +1269,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
             getTypeArgumentDescriptors().stream()
                 .map(t -> t.specializeTypeVariables(parameterization, seen))
                 .collect(toImmutableList()))
-        .setInterfaceTypeDescriptorsFactory(
-            () ->
-                getInterfaceTypeDescriptors().stream()
-                    .map(t -> t.specializeTypeVariables(parameterization))
-                    .collect(toImmutableList()))
         .setSingleAbstractMethodDescriptorFactory(
             () ->
                 getSingleAbstractMethodDescriptor() != null
@@ -1347,8 +1343,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         .setNullable(true)
         .setTypeArgumentDescriptors(ImmutableList.of())
         .setDeclaredMethodDescriptorsFactory(() -> ImmutableList.of())
-        .setDeclaredFieldDescriptorsFactory(() -> ImmutableList.of())
-        .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.of());
+        .setDeclaredFieldDescriptorsFactory(() -> ImmutableList.of());
   }
 
   /** Builder for a TypeDescriptor. */
@@ -1362,15 +1357,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
     public abstract Builder setTypeArgumentDescriptors(
         Iterable<? extends TypeDescriptor> typeArgumentDescriptors);
-
-    public abstract Builder setInterfaceTypeDescriptorsFactory(
-        DescriptorFactory<ImmutableList<DeclaredTypeDescriptor>> interfaceTypeDescriptorsFactory);
-
-    public Builder setInterfaceTypeDescriptorsFactory(
-        Supplier<ImmutableList<DeclaredTypeDescriptor>> interfaceTypeDescriptorsFactory) {
-      return setInterfaceTypeDescriptorsFactory(
-          typeDescriptor -> interfaceTypeDescriptorsFactory.get());
-    }
 
     public abstract Builder setSingleAbstractMethodDescriptorFactory(
         DescriptorFactory<MethodDescriptor> singleAbstractMethodDescriptorFactory);

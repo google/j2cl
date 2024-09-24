@@ -408,17 +408,6 @@ class KotlinEnvironment(
             classDeclaration.getDeclaredFields().map { getFieldDescriptor(it, emptyMap()) }
         )
       }
-      .setInterfaceTypeDescriptorsFactory { _ ->
-        ImmutableList.copyOf(
-          irType
-            .superTypes()
-            .filter(IrType::isInterface)
-            .map(IrType::makeNullable)
-            .map(::getSuperTypeDescriptor)
-            // We can have duplicate types after JVM intrinsics have been resolved. See b/308776304
-            .distinctBy { it.typeDeclaration }
-        )
-      }
       .setSingleAbstractMethodDescriptorFactory { _ ->
         classDeclaration.singleAbstractMethod?.let { getMethodDescriptor(it, emptyMap()) }
       }
