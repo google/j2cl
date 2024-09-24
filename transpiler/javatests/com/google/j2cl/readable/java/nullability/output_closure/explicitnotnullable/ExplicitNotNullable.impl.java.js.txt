@@ -301,14 +301,14 @@ class ExplicitNotNullable extends j_l_Object {
  static m_testLambdaNullability__void() {
   ExplicitNotNullable.$clinit();
   let lambda = Consumer.$adapt((s) =>{
-   let s_1 = /**@type {?string}*/ ($Casts.$to(s, j_l_String));
+   let s_1 = /**@type {string}*/ ($Casts.$to(s, j_l_String));
   });
   let nullable = Consumer.$adapt((arg0) =>{
-   let arg0_1 = /**@type {?string}*/ ($Casts.$to(arg0, j_l_String));
+   let arg0_1 = /**@type {string}*/ ($Casts.$to(arg0, j_l_String));
    DefaultNullable.m_nullableAccept__java_lang_String__void(arg0_1);
   });
   let nonNullable = Consumer.$adapt((arg0_2) =>{
-   let arg0_3 = /**@type {?string}*/ ($Casts.$to(arg0_2, j_l_String));
+   let arg0_3 = /**@type {string}*/ ($Casts.$to(arg0_2, j_l_String));
    ExplicitNotNullable.m_nonNullableAccept__java_lang_String__void(arg0_3);
   });
   let newObject = Supplier.$adapt(() =>{
@@ -408,7 +408,7 @@ class ExplicitNotNullable extends j_l_Object {
   this.f_f29__nullability_explicitnotnullable_ExplicitNotNullable_ = /**@type {!Array<string>}*/ ($Arrays.$create([1], j_l_String));
   this.f_f30__nullability_explicitnotnullable_ExplicitNotNullable_ = /**@type {!Array<?string>}*/ ($Arrays.$create([1], j_l_String));
   this.f_i__nullability_explicitnotnullable_ExplicitNotNullable = ExplicitNotNullable_Function.$adapt((s) =>{
-   let s_1 = /**@type {?string}*/ ($Casts.$to(s, j_l_String));
+   let s_1 = /**@type {string}*/ ($Casts.$to(s, j_l_String));
    return s_1;
   });
  }
