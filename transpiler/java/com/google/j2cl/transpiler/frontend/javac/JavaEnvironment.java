@@ -21,7 +21,6 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.HAS_NO_SIDE_EFFECTS_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.UNCHECKED_CAST_ANNOTATION_NAME;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
@@ -1028,16 +1027,6 @@ class JavaEnvironment {
         DeclaredTypeDescriptor.newBuilder()
             .setTypeDeclaration(typeDeclaration)
             .setEnclosingTypeDescriptor(createDeclaredTypeDescriptor(classType.getEnclosingType()))
-            .setSuperTypeDescriptorFactory(
-                td ->
-                    td.isInterface()
-                        ? null
-                        : createDeclaredTypeDescriptor(
-                            javacTypes.directSupertypes(classType).stream()
-                                .filter(Predicates.not(Type::isInterface))
-                                .findFirst()
-                                .orElse(null),
-                            inNullMarkedScope))
             .setInterfaceTypeDescriptorsFactory(
                 td ->
                     createTypeDescriptors(

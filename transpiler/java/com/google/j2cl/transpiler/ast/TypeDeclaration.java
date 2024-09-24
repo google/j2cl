@@ -606,8 +606,6 @@ public abstract class TypeDeclaration
         .setTypeDeclaration(this)
         .setEnclosingTypeDescriptor(
             applyOrNull(getEnclosingTypeDeclaration(), t -> t.toRawTypeDescriptor()))
-        .setSuperTypeDescriptorFactory(
-            () -> applyOrNull(getSuperTypeDescriptor(), t -> t.toRawTypeDescriptor()))
         .setInterfaceTypeDescriptorsFactory(
             () ->
                 getInterfaceTypeDescriptors().stream()
@@ -858,7 +856,6 @@ public abstract class TypeDeclaration
                     applyOrNull(
                         self.getEnclosingTypeDeclaration(),
                         t -> t.toUnparameterizedTypeDescriptor()))
-                .setSuperTypeDescriptorFactory(self::getSuperTypeDescriptor)
                 .setInterfaceTypeDescriptorsFactory(self::getInterfaceTypeDescriptors)
                 .setTypeArgumentDescriptors(self.getTypeParameterDescriptors())
                 .build();

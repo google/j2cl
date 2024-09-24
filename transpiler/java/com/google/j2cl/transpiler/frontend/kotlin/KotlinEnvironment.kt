@@ -408,9 +408,6 @@ class KotlinEnvironment(
             classDeclaration.getDeclaredFields().map { getFieldDescriptor(it, emptyMap()) }
         )
       }
-      .setSuperTypeDescriptorFactory { _ ->
-        irType.superClass?.let { getSuperTypeDescriptor(it.makeNullable()) }
-      }
       .setInterfaceTypeDescriptorsFactory { _ ->
         ImmutableList.copyOf(
           irType

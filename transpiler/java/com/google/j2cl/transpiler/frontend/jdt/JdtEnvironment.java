@@ -1059,11 +1059,6 @@ public class JdtEnvironment {
             .setTypeDeclaration(typeDeclaration)
             .setEnclosingTypeDescriptor(
                 enclosingTypeDescriptor != null ? enclosingTypeDescriptor.toNonNullable() : null)
-            // Create the super types in the @NullMarked context of the type
-            .setSuperTypeDescriptorFactory(
-                () ->
-                    createDeclaredTypeDescriptor(
-                        typeBinding.getSuperclass(), typeDeclaration.isNullMarked()))
             .setInterfaceTypeDescriptorsFactory(
                 () ->
                     createTypeDescriptors(

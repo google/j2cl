@@ -217,9 +217,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   abstract DescriptorFactory<ImmutableList<DeclaredTypeDescriptor>>
       getInterfaceTypeDescriptorsFactory();
 
-  @Nullable
-  abstract DescriptorFactory<DeclaredTypeDescriptor> getSuperTypeDescriptorFactory();
-
   /**
    * Returns a list of the type descriptors of interfaces that are explicitly implemented directly
    * on this type.
@@ -410,7 +407,12 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   @Memoized
   @Nullable
   public DeclaredTypeDescriptor getSuperTypeDescriptor() {
-    return getSuperTypeDescriptorFactory().get(this);
+    DeclaredTypeDescriptor superTypeDescriptor = getTypeDeclaration().getSuperTypeDescriptor();
+    if (superTypeDescriptor == null) {
+      return null;
+    }
+    return superTypeDescriptor.specializeTypeVariables(
+        TypeDescriptors.mappingFunctionFromMap(getLocalParameterization()));
   }
 
   public abstract TypeDeclaration getTypeDeclaration();
@@ -1266,11 +1268,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
             getTypeArgumentDescriptors().stream()
                 .map(t -> t.specializeTypeVariables(parameterization, seen))
                 .collect(toImmutableList()))
-        .setSuperTypeDescriptorFactory(
-            () ->
-                getSuperTypeDescriptor() != null
-                    ? getSuperTypeDescriptor().specializeTypeVariables(parameterization)
-                    : null)
         .setInterfaceTypeDescriptorsFactory(
             () ->
                 getInterfaceTypeDescriptors().stream()
@@ -1351,8 +1348,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         .setTypeArgumentDescriptors(ImmutableList.of())
         .setDeclaredMethodDescriptorsFactory(() -> ImmutableList.of())
         .setDeclaredFieldDescriptorsFactory(() -> ImmutableList.of())
-        .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.of())
-        .setSuperTypeDescriptorFactory(() -> null);
+        .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.of());
   }
 
   /** Builder for a TypeDescriptor. */
@@ -1385,14 +1381,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
           typeDescriptor -> singleAbstractMethodDescriptorFactory.get());
     }
 
-    public abstract Builder setSuperTypeDescriptorFactory(
-        DescriptorFactory<DeclaredTypeDescriptor> superTypeDescriptorFactory);
-
-    public Builder setSuperTypeDescriptorFactory(
-        Supplier<DeclaredTypeDescriptor> superTypeDescriptorFactory) {
-      return setSuperTypeDescriptorFactory(typeDescriptor -> superTypeDescriptorFactory.get());
-    }
-
     public abstract Builder setDeclaredMethodDescriptorsFactory(
         DescriptorFactory<ImmutableList<MethodDescriptor>> declaredMethodDescriptorsFactory);
 
@@ -1422,16 +1410,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
     @SuppressWarnings("ReferenceEquality")
     public DeclaredTypeDescriptor build() {
-      if (getTypeDeclaration().isEnum()
-          && getTypeDeclaration().getJsEnumInfo() != null
-          && AstUtils.isJsEnumBoxingSupported()) {
-        // JsEnums don't extend Enum but Object. Fix it up on construction.
-        // Cannot use isJsEnum() directly here since the construction happens before validation and
-        // there might be invalid code, e.g. an interface marked as JsEnum, where the fix up should
-        // not happen. Otherwise other invariants will be broken.
-        setSuperTypeDescriptorFactory(() -> TypeDescriptors.get().javaLangObject);
-      }
-
       DeclaredTypeDescriptor typeDescriptor = autoBuild();
 
       checkState(
