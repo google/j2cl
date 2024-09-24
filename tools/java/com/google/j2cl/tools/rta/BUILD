@@ -1,6 +1,8 @@
 # Description:
 #  Implementation of RTA algorithm used to do fast method pruning.
 
+load("@rules_java//java:defs.bzl", "java_binary", "java_library")
+
 package(
     default_applicable_licenses = ["//:j2cl_license"],
     licenses = ["notice"],

@@ -6,6 +6,7 @@ load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_binary")
 load("//build_defs:rules.bzl", "j2cl_library", "j2cl_test", "j2kt_native_library", "j2wasm_test")
 load("//javascript/tools/jscompiler/builddefs:flags.bzl", "VERBOSE_WARNING_FLAGS_STRICT", "WHITESPACE_ONLY_FLAGS")
 load("//third_party/bazel_rules/rules_closure/closure:defs.bzl", "closure_js_binary")
+load("@rules_java//java:defs.bzl", "java_test")
 load(":j2cl_multi_test.bzl", "j2cl_multi_test")
 
 package(

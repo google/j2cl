@@ -3,6 +3,8 @@
 #   annotations on source code elements and comments them out so that they do not get parsed by
 #   J2CL.
 
+load("@rules_java//java:defs.bzl", "java_binary", "java_library")
+
 package(
     default_applicable_licenses = ["//:j2cl_license"],
     licenses = ["notice"],
