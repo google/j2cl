@@ -749,6 +749,11 @@ public enum Backend {
           VerifySingleAstReference::new,
           VerifyReferenceScoping::new);
     }
+
+    @Override
+    public boolean isKotlin() {
+      return true;
+    }
   };
 
   public abstract ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories();
@@ -761,6 +766,10 @@ public enum Backend {
   public abstract void generateOutputs(BackendOptions options, Library library, Problems problems);
 
   public boolean isWasm() {
+    return false;
+  }
+
+  public boolean isKotlin() {
     return false;
   }
 }

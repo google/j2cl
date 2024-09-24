@@ -905,6 +905,13 @@ public abstract class TypeDeclaration
     implementWasmJsEnumSemantics.set(true);
   }
 
+  private static final ThreadLocal<Boolean> preserveJavaJsEnumHierarchy =
+      ThreadLocal.withInitial(() -> false);
+
+  public static void setPreserveJavaJsEnumHierarchy() {
+    preserveJavaJsEnumHierarchy.set(true);
+  }
+
   TypeDeclaration acceptInternal(Processor processor) {
     return Visitor_TypeDeclaration.visit(processor, this);
   }
@@ -1069,6 +1076,7 @@ public abstract class TypeDeclaration
         setJsFunctionInterface(false);
       }
 
+      // TODO(b/181615162): Find a better way to expose different flavors of type models by backend.
       if (getKind() == Kind.ENUM && getJsEnumInfo().isPresent()) {
         if (implementWasmJsEnumSemantics.get()) {
           // TODO(b/288145698): Support native JsEnum in Wasm.
@@ -1077,7 +1085,7 @@ public abstract class TypeDeclaration
             setNative(false);
           }
           // Note: Do not modify the supertype. In Wasm, JsEnums still inherit from Enum for now.
-        } else {
+        } else if (!preserveJavaJsEnumHierarchy.get()) {
           // The actual supertype for JsEnums is Object. JsEnum don't really extend Enum
           // and modeling that fact in the type model allows passes that query assignability (e.g.
           // to implement casts, instance ofs and JsEnum boxing etc.) to get the right answer.
