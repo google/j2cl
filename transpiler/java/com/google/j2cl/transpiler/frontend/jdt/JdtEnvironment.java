@@ -1048,17 +1048,10 @@ public class JdtEnvironment {
     }
     checkArgument(typeBinding.isClass() || typeBinding.isInterface() || typeBinding.isEnum());
 
-    TypeDeclaration typeDeclaration = createDeclarationForType(typeBinding.getTypeDeclaration());
-
-    DeclaredTypeDescriptor enclosingTypeDescriptor =
-        createDeclaredTypeDescriptor(typeBinding.getDeclaringClass(), inNullMarkedScope);
-
     // Compute these even later
     typeDescriptor =
         DeclaredTypeDescriptor.newBuilder()
-            .setTypeDeclaration(typeDeclaration)
-            .setEnclosingTypeDescriptor(
-                enclosingTypeDescriptor != null ? enclosingTypeDescriptor.toNonNullable() : null)
+            .setTypeDeclaration(createDeclarationForType(typeBinding.getTypeDeclaration()))
             .setTypeArgumentDescriptors(
                 getTypeArgumentTypeDescriptors(typeBinding, inNullMarkedScope))
             .setDeclaredFieldDescriptorsFactory(

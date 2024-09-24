@@ -97,7 +97,6 @@ public final class LambdaAdaptorTypeDescriptors {
             uniqueId);
 
     return DeclaredTypeDescriptor.newBuilder()
-        .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setTypeDeclaration(adaptorDeclaration)
         .setTypeArgumentDescriptors(typeArgumentDescriptors)
         .setDeclaredMethodDescriptorsFactory(
@@ -226,7 +225,6 @@ public final class LambdaAdaptorTypeDescriptors {
         createJsFunctionTypeDeclaration(functionalTypeDescriptor);
 
     return DeclaredTypeDescriptor.newBuilder()
-        .setEnclosingTypeDescriptor(functionalTypeDescriptor)
         .setTypeDeclaration(jsFunctionDeclaration)
         .setTypeArgumentDescriptors(functionalTypeDescriptor.getTypeArgumentDescriptors())
         .setSingleAbstractMethodDescriptorFactory(

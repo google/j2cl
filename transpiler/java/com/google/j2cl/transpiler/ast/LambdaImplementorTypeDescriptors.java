@@ -84,7 +84,6 @@ public final class LambdaImplementorTypeDescriptors {
             extendsAbstractAdaptor);
 
     return DeclaredTypeDescriptor.newBuilder()
-        .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setTypeDeclaration(implementorTypeDeclaration)
         .setTypeArgumentDescriptors(typeParameters)
         .setDeclaredMethodDescriptorsFactory(

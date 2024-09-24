@@ -398,7 +398,6 @@ class KotlinEnvironment(
     val classDeclaration = irType.getClass()!!
     return DeclaredTypeDescriptor.newBuilder()
       .setTypeDeclaration(getDeclarationForType(classDeclaration))
-      .setEnclosingTypeDescriptor(getEnclosingTypeDescriptor(classDeclaration))
       .setDeclaredMethodDescriptorsFactory { _ ->
         ImmutableList.copyOf(classDeclaration.methods.map { getMethodDescriptor(it, emptyMap()) })
       }

@@ -1026,7 +1026,6 @@ class JavaEnvironment {
     DeclaredTypeDescriptor typeDescriptor =
         DeclaredTypeDescriptor.newBuilder()
             .setTypeDeclaration(typeDeclaration)
-            .setEnclosingTypeDescriptor(createDeclaredTypeDescriptor(classType.getEnclosingType()))
             .setSingleAbstractMethodDescriptorFactory(
                 td -> {
                   MethodSymbol functionalInterfaceMethod = getFunctionalInterfaceMethod(classType);

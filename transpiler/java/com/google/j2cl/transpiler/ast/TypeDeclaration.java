@@ -604,8 +604,6 @@ public abstract class TypeDeclaration
     // or if the raw types should always be equivalent to the unparameterized type.
     return DeclaredTypeDescriptor.newBuilder()
         .setTypeDeclaration(this)
-        .setEnclosingTypeDescriptor(
-            applyOrNull(getEnclosingTypeDeclaration(), t -> t.toRawTypeDescriptor()))
         .setTypeArgumentDescriptors(ImmutableList.of())
         .setDeclaredFieldDescriptorsFactory(
             () ->
@@ -847,10 +845,6 @@ public abstract class TypeDeclaration
         self ->
             DeclaredTypeDescriptor.newBuilder()
                 .setTypeDeclaration(self)
-                .setEnclosingTypeDescriptor(
-                    applyOrNull(
-                        self.getEnclosingTypeDeclaration(),
-                        t -> t.toUnparameterizedTypeDescriptor()))
                 .setTypeArgumentDescriptors(self.getTypeParameterDescriptors())
                 .build();
 

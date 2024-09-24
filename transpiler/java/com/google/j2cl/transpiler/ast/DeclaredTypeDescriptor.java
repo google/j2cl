@@ -72,8 +72,14 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     T get(DeclaredTypeDescriptor typeDescriptor);
   }
 
+  @Memoized
   @Nullable
-  public abstract DeclaredTypeDescriptor getEnclosingTypeDescriptor();
+  public DeclaredTypeDescriptor getEnclosingTypeDescriptor() {
+    TypeDeclaration enclosingType = getTypeDeclaration().getEnclosingTypeDeclaration();
+    return enclosingType == null
+        ? null
+        : applyLocalParameterization(enclosingType.toUnparameterizedTypeDescriptor());
+  }
 
   public abstract ImmutableList<TypeDescriptor> getTypeArgumentDescriptors();
 
@@ -1284,10 +1290,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
                 getDeclaredMethodDescriptors().stream()
                     .map(m -> m.specializeTypeVariables(parameterization))
                     .collect(toImmutableList()))
-        .setEnclosingTypeDescriptor(
-            getEnclosingTypeDescriptor() != null
-                ? getEnclosingTypeDescriptor().specializeTypeVariables(parameterization)
-                : null)
         .build();
   }
 
@@ -1349,9 +1351,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   /** Builder for a TypeDescriptor. */
   @AutoValue.Builder
   public abstract static class Builder {
-
-    public abstract Builder setEnclosingTypeDescriptor(
-        DeclaredTypeDescriptor enclosingTypeDescriptor);
 
     public abstract Builder setNullable(boolean isNullable);
 
