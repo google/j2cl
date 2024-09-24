@@ -146,7 +146,7 @@ internal fun TypeDescriptor.makeNonNull(): TypeDescriptor =
       else -> error("Unhandled $this")
     }
 
-private val nullableAnyTypeDescriptor: TypeDescriptor
+internal val nullableAnyTypeDescriptor: TypeDescriptor
   get() = typeDescriptors.javaLangObject
 
 private val anyTypeDescriptor: TypeDescriptor
@@ -175,3 +175,11 @@ internal val TypeDescriptor.variableHasAmpersandAny: Boolean
 
 internal val TypeDescriptor.withImplicitNullability
   get() = runIf(isJavaLangVoid(this)) { toNullable() }
+
+internal val arrayComponentTypeParameter: TypeVariable
+  get() =
+    TypeVariable.newBuilder()
+      .setName("T")
+      .setUpperBoundTypeDescriptorSupplier { nullableAnyTypeDescriptor }
+      .setUniqueKey("kotlin.Array:T")
+      .build()

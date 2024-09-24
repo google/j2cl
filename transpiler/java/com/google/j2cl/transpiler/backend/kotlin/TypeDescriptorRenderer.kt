@@ -66,9 +66,9 @@ internal fun NameRenderer.typeDescriptorSource(
     )
     .source(typeDescriptor.withImplicitNullability)
 
-/** Returns source for the given list of type arguments. */
-internal fun NameRenderer.typeArgumentsSource(typeArguments: List<TypeArgument>): Source =
-  TypeDescriptorRenderer(this).argumentsSource(typeArguments)
+/** Returns source for the given list of type bindings. */
+internal fun NameRenderer.typeBindingsSource(typeBindings: List<TypeBinding>): Source =
+  TypeDescriptorRenderer(this).typeBindingsSource(typeBindings)
 
 /**
  * Type descriptor renderer, contains options for rendering type descriptor sources.
@@ -101,12 +101,12 @@ internal data class TypeDescriptorRenderer(
       else -> throw InternalCompilerError("Unexpected ${typeDescriptor::class.java.simpleName}")
     }
 
-  /** Returns source for the given list of type arguments. */
-  fun argumentsSource(arguments: List<TypeArgument>): Source =
-    inAngleBrackets(commaSeparated(arguments.map { source(it) }))
+  /** Returns source for the given list of type bindings. */
+  fun typeBindingsSource(typeBindings: List<TypeBinding>): Source =
+    inAngleBrackets(commaSeparated(typeBindings.map { source(it) }))
 
-  /** Returns source for the given type arguments. */
-  fun source(typeArgument: TypeArgument): Source = child.source(typeArgument.typeDescriptor)
+  /** Returns source for the given type bindings. */
+  fun source(typeBinding: TypeBinding): Source = child.source(typeBinding.typeArgumentDescriptor)
 
   /** Renderer for child type descriptors, including: arguments, bounds, intersections, etc... */
   private val child
@@ -134,16 +134,16 @@ internal data class TypeDescriptorRenderer(
           identifierSource(typeDeclaration.ktSimpleName(asSuperType)),
         )
       },
-      argumentsSource(declaredTypeDescriptor),
+      typeBindingsSource(declaredTypeDescriptor),
       nullableSuffixSource(declaredTypeDescriptor),
     )
   }
 
-  private fun argumentsSource(declaredTypeDescriptor: DeclaredTypeDescriptor): Source =
+  private fun typeBindingsSource(declaredTypeDescriptor: DeclaredTypeDescriptor): Source =
     declaredTypeDescriptor
-      .typeArguments(projectRawToWildcards = projectRawToWildcards)
+      .typeArgumentTypeBindings(projectRawToWildcards = projectRawToWildcards)
       .takeIf { it.isNotEmpty() }
-      ?.let(::argumentsSource)
+      ?.let(this::typeBindingsSource)
       .orEmpty()
 
   private fun variableSource(typeVariable: TypeVariable): Source =

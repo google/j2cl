@@ -191,9 +191,9 @@ internal data class ExpressionRenderer(
     )
 
   private fun arrayLiteralSource(arrayLiteral: ArrayLiteral): Source =
-    arrayLiteral.typeDescriptor.typeArgument.let { typeArgument ->
+    arrayLiteral.typeDescriptor.componentTypeBinding.let { typeBinding ->
       join(
-        when (typeArgument.typeDescriptor) {
+        when (typeBinding.typeArgumentDescriptor) {
           PrimitiveTypes.BOOLEAN ->
             nameRenderer.topLevelQualifiedNameSource("kotlin.booleanArrayOf")
           PrimitiveTypes.CHAR -> nameRenderer.topLevelQualifiedNameSource("kotlin.charArrayOf")
@@ -206,7 +206,7 @@ internal data class ExpressionRenderer(
           else ->
             join(
               nameRenderer.topLevelQualifiedNameSource("kotlin.arrayOf"),
-              nameRenderer.typeArgumentsSource(listOf(typeArgument)),
+              nameRenderer.typeBindingsSource(listOf(typeBinding)),
             )
         },
         inParentheses(commaSeparated(arrayLiteral.valueExpressions.map(this::expressionSource))),
@@ -387,7 +387,7 @@ internal data class ExpressionRenderer(
               .takeIf { !it.target.isKtProperty }
               ?.let {
                 join(
-                  invocationTypeArgumentsSource(methodDescriptor.typeArguments),
+                  invocationTypeArgumentsSource(methodDescriptor.typeArgumentTypeBindings),
                   invocationSource(expression),
                 )
               }
@@ -397,12 +397,12 @@ internal data class ExpressionRenderer(
     }
 
   private fun invocationTypeArgumentsSource(
-    typeArguments: List<TypeArgument>,
+    typeBindings: List<TypeBinding>,
     omitNonDenotable: Boolean = true,
   ): Source =
-    typeArguments
-      .takeIf { it.isNotEmpty() && (it.all(TypeArgument::isDenotable) || !omitNonDenotable) }
-      ?.let { nameRenderer.typeArgumentsSource(it) }
+    typeBindings
+      .takeIf { it.isNotEmpty() && (it.all(TypeBinding::isDenotable) || !omitNonDenotable) }
+      ?.let { nameRenderer.typeBindingsSource(it) }
       .orEmpty()
 
   internal fun invocationSource(invocation: Invocation) =
@@ -426,22 +426,23 @@ internal data class ExpressionRenderer(
     firstDimension: Expression,
     remainingDimensions: List<Expression>,
   ): Source =
-    arrayTypeDescriptor.typeArgument.let { typeArgument ->
-      typeArgument.typeDescriptor.let { componentTypeDescriptor ->
+    arrayTypeDescriptor.componentTypeBinding.let { componentTypeBinding ->
+      componentTypeBinding.typeArgumentDescriptor.let { componentTypeDescriptor ->
         if (remainingDimensions.isEmpty()) {
           if (componentTypeDescriptor is PrimitiveTypeDescriptor) {
             primitiveArrayOfSource(componentTypeDescriptor, firstDimension)
           } else {
-            arrayOfNullsSource(typeArgument, firstDimension)
+            arrayOfNullsSource(componentTypeBinding, firstDimension)
           }
         } else {
           remainingDimensions.first().let { nextDimension ->
-            if (nextDimension is NullLiteral) arrayOfNullsSource(typeArgument, firstDimension)
+            if (nextDimension is NullLiteral)
+              arrayOfNullsSource(componentTypeBinding, firstDimension)
             else
               spaceSeparated(
                 join(
                   nameRenderer.topLevelQualifiedNameSource("kotlin.Array"),
-                  nameRenderer.typeArgumentsSource(listOf(typeArgument)),
+                  nameRenderer.typeBindingsSource(listOf(componentTypeBinding)),
                   inParentheses(expressionSource(firstDimension)),
                 ),
                 block(
@@ -478,17 +479,17 @@ internal data class ExpressionRenderer(
       inParentheses(expressionSource(dimension)),
     )
 
-  private fun arrayOfNullsSource(typeArgument: TypeArgument, dimension: Expression): Source =
+  private fun arrayOfNullsSource(typeArgument: TypeBinding, dimension: Expression): Source =
     join(
-      if (typeArgument.typeDescriptor.isNullable) {
+      if (typeArgument.typeArgumentDescriptor.isNullable) {
         join(
           nameRenderer.extensionMemberQualifiedNameSource("kotlin.arrayOfNulls"),
-          nameRenderer.typeArgumentsSource(listOf(typeArgument.toNonNullable())),
+          nameRenderer.typeBindingsSource(listOf(typeArgument.toNonNullable())),
         )
       } else {
         join(
           nameRenderer.extensionMemberQualifiedNameSource("javaemul.lang.uninitializedArrayOf"),
-          nameRenderer.typeArgumentsSource(listOf(typeArgument)),
+          nameRenderer.typeBindingsSource(listOf(typeArgument)),
         )
       },
       inParentheses(expressionSource(dimension)),
@@ -531,7 +532,7 @@ internal data class ExpressionRenderer(
         } else {
           nameRenderer.qualifiedNameSource(typeDescriptor, asSuperType = true)
         },
-        invocationTypeArgumentsSource(typeDescriptor.typeArguments(), omitNonDenotable),
+        invocationTypeArgumentsSource(typeDescriptor.typeArgumentTypeBindings(), omitNonDenotable),
       )
     }
 
