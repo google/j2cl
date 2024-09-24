@@ -11,6 +11,7 @@ load(
     "j2wasm_application",
     "j2wasm_library",
 )
+load("@rules_java//java:defs.bzl", "java_binary", "java_import", "java_library", "java_test")
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],

@@ -1,3 +1,5 @@
+load("@rules_java//java:defs.bzl", "java_library")
+
 # Description:
 #   This package contains frontend code that uses OpenJDK/javac to parse, typecheck and resolve
 #   Java code.

@@ -1,6 +1,8 @@
 # Description:
 #   This package contains frontend common code that is agnostic of the actual frontend used.
 
+load("@rules_java//java:defs.bzl", "java_library")
+
 package(
     default_applicable_licenses = ["//:j2cl_license"],
     default_visibility = [

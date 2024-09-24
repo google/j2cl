@@ -1,4 +1,5 @@
 load("//build_defs:rules.bzl", "j2cl_import")
+load("@rules_java//java:defs.bzl", "java_library", "java_plugin")
 load(
     "//transpiler/javatests/com/google/j2cl/readable:readable_example.bzl",
     "readable_example",

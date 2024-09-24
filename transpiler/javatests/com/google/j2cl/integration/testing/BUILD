@@ -2,6 +2,7 @@
 #   Utilites for tests.
 
 load("//build_defs:rules.bzl", "j2cl_library", "j2kt_jvm_library", "j2kt_native_library", "j2wasm_library")
+load("@rules_java//java:defs.bzl", "java_library")
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],

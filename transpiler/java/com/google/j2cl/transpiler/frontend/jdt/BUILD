@@ -1,6 +1,8 @@
 # Description:
 #   This package contains frontend that uses Eclispe/JDT to parse, typecheck and resolve Java code.
 
+load("@rules_java//java:defs.bzl", "java_library")
+
 package(
     default_applicable_licenses = ["//:j2cl_license"],
     default_visibility = [

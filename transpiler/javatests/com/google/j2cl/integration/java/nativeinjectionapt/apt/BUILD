@@ -1,4 +1,5 @@
 load("//build_defs:rules.bzl", "j2cl_library")
+load("@rules_java//java:defs.bzl", "java_plugin")
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],
