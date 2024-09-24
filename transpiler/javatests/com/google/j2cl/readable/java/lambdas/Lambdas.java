@@ -15,7 +15,6 @@
  */
 package lambdas;
 
-
 import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
@@ -163,6 +162,10 @@ public class Lambdas {
     R apply(T t);
   }
 
+  private static class Wrapper<T> {
+    T wrapped = null;
+  }
+
   public <T extends Enum<T>> void testLambdaWithGenerics() {
     callWithTypeVariable(i -> i, new Error());
     callParameterized(i -> i, new Error());
@@ -173,6 +176,7 @@ public class Lambdas {
         });
     callWithBiFunction((x, y) -> 3.0);
     Function<? super T, ?> f = item -> 1L;
+    Function<Wrapper<String>, String> f2 = item -> item.wrapped;
   }
 
   public static Object m() {

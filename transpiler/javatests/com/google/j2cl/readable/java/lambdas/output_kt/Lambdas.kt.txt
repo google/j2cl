@@ -176,6 +176,9 @@ open class Lambdas {
   val f: Lambdas.Function<in T, *>? = Lambdas.Function { item: T ->
    return@Function Long.valueOf(1L)
   }
+  val f2: Lambdas.Function<Lambdas.Wrapper<String?>?, String?>? = Lambdas.Function<Lambdas.Wrapper<String?>?, String?> { item_1: Lambdas.Wrapper<String?>? ->
+   return@Function item_1!!.wrapped_pp_lambdas
+  }
  }
 
  @ObjCName("testLambdaReturningVoidAsExpression")
@@ -357,6 +360,12 @@ open class Lambdas {
     }
    }
   }
+ }
+
+ @ObjCName("J2ktLambdasLambdas_Wrapper", exact = true)
+ open class Wrapper<T> internal constructor() {
+  @JvmField
+  internal var wrapped_pp_lambdas: T = null as T
  }
 
  @ObjCName("J2ktLambdasLambdas_FunctionalInterfaceWithMethodReturningVoid", exact = true)

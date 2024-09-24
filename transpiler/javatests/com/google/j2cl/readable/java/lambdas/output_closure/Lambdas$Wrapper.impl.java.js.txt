@@ -1,0 +1,49 @@
+goog.module('lambdas.Lambdas.Wrapper$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ */
+class Wrapper extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {T} @nodts*/
+  this.f_wrapped__lambdas_Lambdas_Wrapper;
+ }
+ /** @nodts @template T @return {!Wrapper<T>} */
+ static $create__() {
+  let $instance = new Wrapper();
+  $instance.$ctor__lambdas_Lambdas_Wrapper__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__lambdas_Lambdas_Wrapper__void() {
+  this.$ctor__java_lang_Object__void();
+  this.$init__void_$p_lambdas_Lambdas_Wrapper();
+ }
+ /** @private @nodts */
+ $init__void_$p_lambdas_Lambdas_Wrapper() {
+  this.f_wrapped__lambdas_Lambdas_Wrapper = null;
+ }
+ /** @nodts */
+ static $clinit() {
+  Wrapper.$clinit = () =>{};
+  Wrapper.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Wrapper;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Wrapper, 'lambdas.Lambdas$Wrapper');
+
+exports = Wrapper;
+
+//# sourceMappingURL=Lambdas$Wrapper.js.map

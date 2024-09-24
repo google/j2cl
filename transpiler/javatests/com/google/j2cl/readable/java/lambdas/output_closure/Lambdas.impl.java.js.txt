@@ -26,6 +26,7 @@ let FunctionalInterfaceWithMethodReturningVoid = goog.forwardDeclare('lambdas.La
 let GenericFunctionalInterface = goog.forwardDeclare('lambdas.Lambdas.GenericFunctionalInterface$impl');
 let IdentityFunction = goog.forwardDeclare('lambdas.Lambdas.IdentityFunction$impl');
 let JsSupplier = goog.forwardDeclare('lambdas.Lambdas.JsSupplier$impl');
+let Wrapper = goog.forwardDeclare('lambdas.Lambdas.Wrapper$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
@@ -181,6 +182,10 @@ class Lambdas extends j_l_Object {
    let item_1 = /**@type {Enum}*/ ($Casts.$to(item, Enum));
    return Long.m_valueOf__long__java_lang_Long($Long.fromInt(1));
   });
+  let f2 = Lambdas_Function.$adapt((item_2) =>{
+   let item_3 = /**@type {Wrapper}*/ ($Casts.$to(item_2, Wrapper));
+   return /**@type {?string}*/ ($Casts.$to(item_3.f_wrapped__lambdas_Lambdas_Wrapper, j_l_String));
+  });
  }
  /** @nodts @return {*} */
  static m_m__java_lang_Object() {
@@ -301,6 +306,7 @@ class Lambdas extends j_l_Object {
   GenericFunctionalInterface = goog.module.get('lambdas.Lambdas.GenericFunctionalInterface$impl');
   IdentityFunction = goog.module.get('lambdas.Lambdas.IdentityFunction$impl');
   JsSupplier = goog.module.get('lambdas.Lambdas.JsSupplier$impl');
+  Wrapper = goog.module.get('lambdas.Lambdas.Wrapper$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Long = goog.module.get('nativebootstrap.Long$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
