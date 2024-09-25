@@ -215,6 +215,7 @@ def _js_readable_targets(readable_target, dir_out, defs):
         ] + defs,
         compiler = "//javascript/tools/jscompiler:head",
         extra_inputs = ["//transpiler/javatests/com/google/j2cl/readable:conformance_proto"],
+        use_precompiled_libraries = False,
         deps = [":%s" % readable_target],
     )
 
