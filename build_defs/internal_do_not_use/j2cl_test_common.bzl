@@ -283,9 +283,7 @@ def j2cl_test_common(
         "//testing/web/js/browser_services:console_poster.js",
     ]
 
-    if compile:
-        defs.append("--define=goog.ENABLE_DEBUG_LOADER=true")
-    else:
+    if not compile:
         # enforce bundled mode since the debug loader is disabled
         jvm_flags.append("-Djsrunner.net.useJsBundles=true")
 

@@ -111,8 +111,6 @@ def j2cl_application(
     # uncompiled code. As a workaround we load it via script tag just before
     # dev.js (see below).
     define_dev = {
-        # closure debug loader is slow and complains about cyclic deps.
-        "goog.ENABLE_DEBUG_LOADER": False,
         # checks are  always enabled in debug but setting it make sure user code
         # doesn't accidentally rely on exceptions to be thrown by converting them
         # to assertion errors.
