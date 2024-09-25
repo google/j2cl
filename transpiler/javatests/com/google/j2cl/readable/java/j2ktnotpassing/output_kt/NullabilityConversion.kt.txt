@@ -28,21 +28,90 @@ import kotlin.native.ObjCName
 @ObjCName("J2ktJ2ktnotpassingNullabilityConversion", exact = true)
 open class NullabilityConversion {
  @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Parent", exact = true)
- open class Parent {}
+ interface Parent {}
 
  @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Child", exact = true)
- open class Child: NullabilityConversion.Parent() {}
+ interface Child: NullabilityConversion.Parent {}
 
  @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Generic", exact = true)
- open class Generic<T: NullabilityConversion.Parent?> {}
+ interface Generic<T: NullabilityConversion.Parent?> {}
+
+ @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Consumer", exact = true)
+ fun interface Consumer<T: NullabilityConversion.Parent?> {
+  @ObjCName("set")
+  fun set(
+   @ObjCName("withJ2ktnotpassingNullabilityConversion_Parent") t: T
+  )
+ }
+
+ @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Supplier", exact = true)
+ fun interface Supplier<T: NullabilityConversion.Child?> {
+  @ObjCName("get")
+  fun get(): T
+ }
 
  @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests", exact = true)
  open class Tests {
-  @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Parameterized", exact = true)
-  open class Parameterized {
-   @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Parameterized_SimpleToLowerWildcard", exact = true)
+  @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Types", exact = true)
+  open class Types {
+   @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Types_SimpleUpperWildcardToLowerWildcard", exact = true)
+   open class SimpleUpperWildcardToLowerWildcard {
+    @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Types_SimpleUpperWildcardToLowerWildcardCompanion", exact = true)
+    companion object {
+     @JvmStatic
+     @ObjCName("nullableToNonNull")
+     fun nullableToNonNull(
+      @ObjCName("withJ2ktnotpassingNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in NullabilityConversion.Parent>,
+      @ObjCName("withJ2ktnotpassingNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<*>
+     ) {
+      consumer.set(supplier.get())
+     }
+    }
+   }
+
+   @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Types_VariableToLowerWildcard", exact = true)
+   open class VariableToLowerWildcard {
+    @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Types_VariableToLowerWildcardCompanion", exact = true)
+    companion object {
+     @JvmStatic
+     @ObjCName("defaultToNonNull")
+     fun <T: NullabilityConversion.Child?> defaultToNonNull(
+      @ObjCName("withJ2ktnotpassingNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in T & Any>,
+      @ObjCName("withJ2ktnotpassingNullabilityConversion_Child") t: T
+     ) {
+      consumer.set(t)
+     }
+    }
+   }
+
+   @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Types_UpperWildcardToVariable", exact = true)
+   open class UpperWildcardToVariable {
+    @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Types_UpperWildcardToVariableCompanion", exact = true)
+    companion object {
+     @JvmStatic
+     @ObjCName("defaultToNonNull")
+     fun <T: NullabilityConversion.Child?> defaultToNonNull(
+      @ObjCName("withJ2ktnotpassingNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<out T>
+     ): T & Any {
+      return supplier.get()
+     }
+
+     @JvmStatic
+     @ObjCName("nullableToDefault")
+     fun <T: NullabilityConversion.Child?> nullableToDefault(
+      @ObjCName("withJ2ktnotpassingNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<out T?>
+     ): T {
+      return supplier.get()
+     }
+    }
+   }
+  }
+
+  @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_TypeArguments", exact = true)
+  open class TypeArguments {
+   @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_TypeArguments_SimpleToLowerWildcard", exact = true)
    open class SimpleToLowerWildcard {
-    @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Parameterized_SimpleToLowerWildcardCompanion", exact = true)
+    @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_TypeArguments_SimpleToLowerWildcardCompanion", exact = true)
     companion object {
      @JvmStatic
      @ObjCName("nonNullToNullable")
@@ -54,9 +123,9 @@ open class NullabilityConversion {
     }
    }
 
-   @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Parameterized_SimpleUpperWildcardToUpperWildcard", exact = true)
+   @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_TypeArguments_SimpleUpperWildcardToUpperWildcard", exact = true)
    open class SimpleUpperWildcardToUpperWildcard {
-    @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Parameterized_SimpleUpperWildcardToUpperWildcardCompanion", exact = true)
+    @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_TypeArguments_SimpleUpperWildcardToUpperWildcardCompanion", exact = true)
     companion object {
      @JvmStatic
      @ObjCName("nullableToNonNull")
@@ -68,9 +137,9 @@ open class NullabilityConversion {
     }
    }
 
-   @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Parameterized_SimpleLowerWildcardToLowerWildcard", exact = true)
+   @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_TypeArguments_SimpleLowerWildcardToLowerWildcard", exact = true)
    open class SimpleLowerWildcardToLowerWildcard {
-    @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Parameterized_SimpleLowerWildcardToLowerWildcardCompanion", exact = true)
+    @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_TypeArguments_SimpleLowerWildcardToLowerWildcardCompanion", exact = true)
     companion object {
      @JvmStatic
      @ObjCName("nonNullToNullable")
@@ -82,9 +151,9 @@ open class NullabilityConversion {
     }
    }
 
-   @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Parameterized_VariableToVariable", exact = true)
+   @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_TypeArguments_VariableToVariable", exact = true)
    open class VariableToVariable {
-    @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Parameterized_VariableToVariableCompanion", exact = true)
+    @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_TypeArguments_VariableToVariableCompanion", exact = true)
     companion object {
      @JvmStatic
      @ObjCName("defaultToNonNull")
@@ -104,9 +173,9 @@ open class NullabilityConversion {
     }
    }
 
-   @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Parameterized_VariableToUpperWildcard", exact = true)
+   @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_TypeArguments_VariableToUpperWildcard", exact = true)
    open class VariableToUpperWildcard {
-    @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Parameterized_VariableToUpperWildcardCompanion", exact = true)
+    @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_TypeArguments_VariableToUpperWildcardCompanion", exact = true)
     companion object {
      @JvmStatic
      @ObjCName("defaultToNonNull")
@@ -118,9 +187,9 @@ open class NullabilityConversion {
     }
    }
 
-   @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Parameterized_VariableToLowerWildcard", exact = true)
+   @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_TypeArguments_VariableToLowerWildcard", exact = true)
    open class VariableToLowerWildcard {
-    @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Parameterized_VariableToLowerWildcardCompanion", exact = true)
+    @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_TypeArguments_VariableToLowerWildcardCompanion", exact = true)
     companion object {
      @JvmStatic
      @ObjCName("defaultToNullable")
@@ -148,9 +217,9 @@ open class NullabilityConversion {
     }
    }
 
-   @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Parameterized_VariableUpperWildcardToUpperWildcard", exact = true)
+   @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_TypeArguments_VariableUpperWildcardToUpperWildcard", exact = true)
    open class VariableUpperWildcardToUpperWildcard {
-    @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Parameterized_VariableUpperWildcardToUpperWildcardCompanion", exact = true)
+    @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_TypeArguments_VariableUpperWildcardToUpperWildcardCompanion", exact = true)
     companion object {
      @JvmStatic
      @ObjCName("defaultToNonNull")
@@ -178,9 +247,9 @@ open class NullabilityConversion {
     }
    }
 
-   @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Parameterized_VariableLowerWildcardToLowerWildcard", exact = true)
+   @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_TypeArguments_VariableLowerWildcardToLowerWildcard", exact = true)
    open class VariableLowerWildcardToLowerWildcard {
-    @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Parameterized_VariableLowerWildcardToLowerWildcardCompanion", exact = true)
+    @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_TypeArguments_VariableLowerWildcardToLowerWildcardCompanion", exact = true)
     companion object {
      @JvmStatic
      @ObjCName("defaultToNullable")
