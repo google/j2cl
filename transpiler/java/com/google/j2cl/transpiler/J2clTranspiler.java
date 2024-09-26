@@ -77,9 +77,8 @@ class J2clTranspiler {
       TypeDeclaration.setIgnoreJsFunctionAnnotations();
       // TODO(b/178738483): Remove hack that makes it possible to ignore DoNotAutobox in Wasm.
       MethodDescriptor.ParameterDescriptor.setIgnoreDoNotAutoboxAnnotations();
-    } else if (options.getBackend().isKotlin()) {
-      TypeDeclaration.setPreserveJavaJsEnumHierarchy();
     }
+
     Library library = options.getFrontend().parse(options, problems);
     problems.abortIfHasErrors();
     if (!library.isEmpty()) {

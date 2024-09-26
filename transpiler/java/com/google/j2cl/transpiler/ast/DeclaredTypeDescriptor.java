@@ -309,6 +309,11 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
   @Override
   public boolean isAssignableTo(TypeDescriptor that) {
+    if (isJsEnum()) {
+      return TypeDescriptors.isJavaLangObject(that)
+          || isSameBaseType(that)
+          || (getJsEnumInfo().supportsComparable() && TypeDescriptors.isJavaLangComparable(that));
+    }
     TypeDescriptor thatRawTypeDescriptor = that.toRawTypeDescriptor();
     return thatRawTypeDescriptor instanceof DeclaredTypeDescriptor
         && isSubtypeOf((DeclaredTypeDescriptor) thatRawTypeDescriptor);
