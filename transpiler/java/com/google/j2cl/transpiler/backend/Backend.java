@@ -162,6 +162,7 @@ import com.google.j2cl.transpiler.passes.RemoveCustomIsInstanceMethods;
 import com.google.j2cl.transpiler.passes.RemoveNameFromJsEnums;
 import com.google.j2cl.transpiler.passes.RemoveNativeTypes;
 import com.google.j2cl.transpiler.passes.RemoveNestedBlocks;
+import com.google.j2cl.transpiler.passes.RemoveNonreferencedNativeMethods;
 import com.google.j2cl.transpiler.passes.RemoveNoopStatements;
 import com.google.j2cl.transpiler.passes.RemoveUnnecessaryLabels;
 import com.google.j2cl.transpiler.passes.RemoveUnneededCasts;
@@ -489,6 +490,7 @@ public enum Backend {
           InsertExceptionConversions::new,
           InsertExternConversionsWasm::new,
           RemoveCustomIsInstanceMethods::new,
+          RemoveNonreferencedNativeMethods::new,
           RemoveNoopStatements::new,
 
           // Passes that transform the AST to match the requirements of the Wasm instruction set.
@@ -631,6 +633,7 @@ public enum Backend {
           InsertExceptionConversions::new,
           InsertExternConversionsWasm::new,
           RemoveCustomIsInstanceMethods::new,
+          RemoveNonreferencedNativeMethods::new,
           RemoveNoopStatements::new,
 
           // Passes that transform the AST to match the requirements of the Wasm instruction set.
