@@ -39,6 +39,7 @@ import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.MemberReference;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
+import com.google.j2cl.transpiler.ast.MethodReference;
 import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
@@ -161,6 +162,12 @@ public class VerifyNormalizedUnits extends NormalizationPass {
               checkState(
                   methodCall.getTarget().getEnclosingTypeDescriptor().isJsFunctionInterface());
             }
+          }
+
+          @Override
+          public void exitMethodReference(MethodReference methodReference) {
+            // Method references are desugared to lambda expressions.
+            throw new IllegalStateException();
           }
 
           @Override
