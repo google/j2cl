@@ -1,0 +1,901 @@
+;;; Code for xplatforeach.NativeJsEnum [type definition]
+(type $xplatforeach.NativeJsEnum.vtable (sub $java.lang.Enum.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_compareTo__java_lang_Object__int (ref $function.m_compareTo__java_lang_Object__int))
+ (field $m_getDeclaringClass__java_lang_Class (ref $function.m_getDeclaringClass__java_lang_Class))
+ ))
+)
+(type $xplatforeach.NativeJsEnum (sub $java.lang.Enum (struct
+ (field $vtable (ref $xplatforeach.NativeJsEnum.vtable))
+ (field $itable (ref $xplatforeach.NativeJsEnum.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $name@java.lang.Enum (mut (ref null $java.lang.String)))
+ (field $ordinal@java.lang.Enum (mut i32))
+ ))
+)
+
+;;; Code for xplatforeach.SomeJsEnum [type definition]
+(type $xplatforeach.SomeJsEnum.vtable (sub $java.lang.Enum.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_compareTo__java_lang_Object__int (ref $function.m_compareTo__java_lang_Object__int))
+ (field $m_getDeclaringClass__java_lang_Class (ref $function.m_getDeclaringClass__java_lang_Class))
+ ))
+)
+(type $xplatforeach.SomeJsEnum (sub $java.lang.Enum (struct
+ (field $vtable (ref $xplatforeach.SomeJsEnum.vtable))
+ (field $itable (ref $xplatforeach.SomeJsEnum.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $name@java.lang.Enum (mut (ref null $java.lang.String)))
+ (field $ordinal@java.lang.Enum (mut i32))
+ (field $value@xplatforeach.SomeJsEnum (mut i32))
+ ))
+)
+
+;;; Code for xplatforeach.ForEachStatements [type definition]
+(type $xplatforeach.ForEachStatements.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+(type $xplatforeach.ForEachStatements (sub $java.lang.Object (struct
+ (field $vtable (ref $xplatforeach.ForEachStatements.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
+;;; Code for xplatforeach.NativeJsEnum [imports]
+
+;;; Code for xplatforeach.SomeJsEnum [imports]
+
+;;; Code for xplatforeach.ForEachStatements [imports]
+
+;;; Code for xplatforeach.NativeJsEnum [static fields]
+(global $FOO@xplatforeach.NativeJsEnum (mut (ref null $xplatforeach.NativeJsEnum))
+ (ref.null $xplatforeach.NativeJsEnum)
+)
+(global $namesToValuesMap@xplatforeach.NativeJsEnum (mut (ref null $java.lang.Object))
+ (ref.null $java.lang.Object)
+)
+(global $$class-initialized@xplatforeach.NativeJsEnum (mut i32)
+ (i32.const 0)
+)
+(global $$class@xplatforeach.NativeJsEnum (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for xplatforeach.SomeJsEnum [static fields]
+(global $FOO@xplatforeach.SomeJsEnum (mut (ref null $xplatforeach.SomeJsEnum))
+ (ref.null $xplatforeach.SomeJsEnum)
+)
+(global $$class-initialized@xplatforeach.SomeJsEnum (mut i32)
+ (i32.const 0)
+)
+(global $$class@xplatforeach.SomeJsEnum (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for xplatforeach.NativeJsEnum [vtable.init]
+(global $xplatforeach.NativeJsEnum.vtable (ref $xplatforeach.NativeJsEnum.vtable)
+ (struct.new $xplatforeach.NativeJsEnum.vtable
+  (ref.func $$getClassImpl__java_lang_Class@xplatforeach.NativeJsEnum)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Enum)
+  (ref.func $m_hashCode__int@java.lang.Enum)
+  (ref.func $m_toString__java_lang_String@java.lang.Enum)
+  (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
+  (ref.func $m_getDeclaringClass__java_lang_Class@java.lang.Enum)
+ )
+)
+(global $java.lang.Comparable.vtable@$xplatforeach.NativeJsEnum (ref $java.lang.Comparable.vtable)
+ (struct.new $java.lang.Comparable.vtable
+  (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
+ )
+)
+(global $java.io.Serializable.vtable@$xplatforeach.NativeJsEnum (ref $java.io.Serializable.vtable)
+ (struct.new $java.io.Serializable.vtable
+ )
+)
+
+;;; Code for xplatforeach.SomeJsEnum [vtable.init]
+(global $xplatforeach.SomeJsEnum.vtable (ref $xplatforeach.SomeJsEnum.vtable)
+ (struct.new $xplatforeach.SomeJsEnum.vtable
+  (ref.func $$getClassImpl__java_lang_Class@xplatforeach.SomeJsEnum)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Enum)
+  (ref.func $m_hashCode__int@java.lang.Enum)
+  (ref.func $m_toString__java_lang_String@java.lang.Enum)
+  (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
+  (ref.func $m_getDeclaringClass__java_lang_Class@java.lang.Enum)
+ )
+)
+(global $java.lang.Comparable.vtable@$xplatforeach.SomeJsEnum (ref $java.lang.Comparable.vtable)
+ (struct.new $java.lang.Comparable.vtable
+  (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
+ )
+)
+(global $java.io.Serializable.vtable@$xplatforeach.SomeJsEnum (ref $java.io.Serializable.vtable)
+ (struct.new $java.io.Serializable.vtable
+ )
+)
+
+;;; Code for xplatforeach.NativeJsEnum [methods]
+
+;;; NativeJsEnum NativeJsEnum.$create(String $name, int $ordinal)
+(func $$create__java_lang_String__int@xplatforeach.NativeJsEnum
+ (param $$name (ref null $java.lang.String))
+ (param $$ordinal i32)
+ (result (ref null $xplatforeach.NativeJsEnum))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/NativeJsEnum.java:21:12
+ (local $$instance (ref null $xplatforeach.NativeJsEnum))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/NativeJsEnum.java:21:12
+  (local.set $$instance (struct.new $xplatforeach.NativeJsEnum (ref.as_non_null (global.get $xplatforeach.NativeJsEnum.vtable)) (ref.as_non_null (global.get $xplatforeach.NativeJsEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/NativeJsEnum.java:21:12
+  (call $$ctor__java_lang_String__int__void_$p_xplatforeach_NativeJsEnum@xplatforeach.NativeJsEnum (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/NativeJsEnum.java:21:12
+  (return (local.get $$instance))
+ )
+)
+
+;;; void NativeJsEnum.$ctor(String $name, int $ordinal)
+(func $$ctor__java_lang_String__int__void_$p_xplatforeach_NativeJsEnum@xplatforeach.NativeJsEnum
+ (param $this (ref null $xplatforeach.NativeJsEnum))
+ (param $$name (ref null $java.lang.String))
+ (param $$ordinal i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/NativeJsEnum.java:21:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/NativeJsEnum.java:21:12
+  (struct.set $java.lang.Enum $name@java.lang.Enum (local.get $this) (local.get $$name))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/NativeJsEnum.java:21:12
+  (struct.set $java.lang.Enum $ordinal@java.lang.Enum (local.get $this) (local.get $$ordinal))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/NativeJsEnum.java:21:12
+  (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
+ )
+)
+
+;;; NativeJsEnum NativeJsEnum.valueOf(String name)
+(func $m_valueOf__java_lang_String__xplatforeach_NativeJsEnum@xplatforeach.NativeJsEnum
+ (param $name (ref null $java.lang.String))
+ (result (ref null $xplatforeach.NativeJsEnum))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/NativeJsEnum.java:21:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/NativeJsEnum.java:21:12
+  (call $$clinit__void_<once>_@xplatforeach.NativeJsEnum )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/NativeJsEnum.java:21:12
+  (if (ref.is_null (global.get $namesToValuesMap@xplatforeach.NativeJsEnum))
+   (then
+    (block
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/NativeJsEnum.java:21:12
+     (global.set $namesToValuesMap@xplatforeach.NativeJsEnum (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values_$private__arrayOf_xplatforeach_NativeJsEnum@xplatforeach.NativeJsEnum )))
+    )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/NativeJsEnum.java:21:12
+  (return (ref.cast (ref null $xplatforeach.NativeJsEnum) (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $namesToValuesMap@xplatforeach.NativeJsEnum))))
+ )
+)
+
+;;; NativeJsEnum[] NativeJsEnum.values()
+(func $m_values__arrayOf_xplatforeach_NativeJsEnum@xplatforeach.NativeJsEnum
+ (result (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/NativeJsEnum.java:21:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/NativeJsEnum.java:21:12
+  (call $$clinit__void_<once>_@xplatforeach.NativeJsEnum )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/NativeJsEnum.java:21:12
+  (return (call $m_values_$private__arrayOf_xplatforeach_NativeJsEnum@xplatforeach.NativeJsEnum ))
+ )
+)
+
+;;; NativeJsEnum[] NativeJsEnum.values_$private()
+(func $m_values_$private__arrayOf_xplatforeach_NativeJsEnum@xplatforeach.NativeJsEnum
+ (result (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/NativeJsEnum.java:21:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/NativeJsEnum.java:21:12
+  (return (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (global.get $FOO@xplatforeach.NativeJsEnum))))
+ )
+)
+
+;;; void NativeJsEnum.$clinit()
+(func $$clinit__void_<once>_@xplatforeach.NativeJsEnum
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/NativeJsEnum.java:21:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/NativeJsEnum.java:21:12
+  (if (global.get $$class-initialized@xplatforeach.NativeJsEnum)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/NativeJsEnum.java:21:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/NativeJsEnum.java:21:12
+  (global.set $$class-initialized@xplatforeach.NativeJsEnum (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/NativeJsEnum.java:21:12
+  (call $$clinit__void_<once>_@java.lang.Enum )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/NativeJsEnum.java:22:2
+  (global.set $FOO@xplatforeach.NativeJsEnum (call $$create__java_lang_String__int@xplatforeach.NativeJsEnum (call $$getString_|FOO|__java_lang_String_<once>_@xplatforeach.NativeJsEnum )(i32.const 0)))
+ )
+)
+
+;;; Class<T> NativeJsEnum.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@xplatforeach.NativeJsEnum
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@xplatforeach.NativeJsEnum)))
+   (then
+    (return (global.get $$class@xplatforeach.NativeJsEnum))
+   )
+  )
+  (global.set $$class@xplatforeach.NativeJsEnum (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|xplatforeach...|__java_lang_String_<once>_@xplatforeach.NativeJsEnum )))
+  (return (global.get $$class@xplatforeach.NativeJsEnum))
+ )
+)
+
+;;; Class<?> NativeJsEnum.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@xplatforeach.NativeJsEnum
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $xplatforeach.NativeJsEnum))
+ (local.set $this (ref.cast (ref $xplatforeach.NativeJsEnum) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@xplatforeach.NativeJsEnum ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@xplatforeach.NativeJsEnum)
+
+;;; Code for xplatforeach.SomeJsEnum [methods]
+
+;;; SomeJsEnum SomeJsEnum.$create(String $name, int $ordinal, int value)
+(func $$create__java_lang_String__int__int@xplatforeach.SomeJsEnum
+ (param $$name (ref null $java.lang.String))
+ (param $$ordinal i32)
+ (param $value i32)
+ (result (ref null $xplatforeach.SomeJsEnum))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/SomeJsEnum.java:25:2
+ (local $$instance (ref null $xplatforeach.SomeJsEnum))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/SomeJsEnum.java:25:2
+  (local.set $$instance (struct.new $xplatforeach.SomeJsEnum (ref.as_non_null (global.get $xplatforeach.SomeJsEnum.vtable)) (ref.as_non_null (global.get $xplatforeach.SomeJsEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/SomeJsEnum.java:25:2
+  (call $$ctor__java_lang_String__int__int__void_$p_xplatforeach_SomeJsEnum@xplatforeach.SomeJsEnum (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal)(local.get $value))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/SomeJsEnum.java:25:2
+  (return (local.get $$instance))
+ )
+)
+
+;;; void SomeJsEnum.$ctor(String $name, int $ordinal, int value)
+(func $$ctor__java_lang_String__int__int__void_$p_xplatforeach_SomeJsEnum@xplatforeach.SomeJsEnum
+ (param $this (ref null $xplatforeach.SomeJsEnum))
+ (param $$name (ref null $java.lang.String))
+ (param $$ordinal i32)
+ (param $value i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/SomeJsEnum.java:25:2
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/SomeJsEnum.java:25:2
+  (struct.set $java.lang.Enum $name@java.lang.Enum (local.get $this) (local.get $$name))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/SomeJsEnum.java:25:2
+  (struct.set $java.lang.Enum $ordinal@java.lang.Enum (local.get $this) (local.get $$ordinal))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/SomeJsEnum.java:25:24
+  (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/SomeJsEnum.java:26:4
+  (struct.set $xplatforeach.SomeJsEnum $value@xplatforeach.SomeJsEnum (local.get $this) (local.get $value))
+ )
+)
+
+;;; void SomeJsEnum.$clinit()
+(func $$clinit__void_<once>_@xplatforeach.SomeJsEnum
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/SomeJsEnum.java:21:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/SomeJsEnum.java:21:12
+  (if (global.get $$class-initialized@xplatforeach.SomeJsEnum)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/SomeJsEnum.java:21:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/SomeJsEnum.java:21:12
+  (global.set $$class-initialized@xplatforeach.SomeJsEnum (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/SomeJsEnum.java:21:12
+  (call $$clinit__void_<once>_@java.lang.Enum )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/fakes-j2wasm.js/xplatforeach/SomeJsEnum.java:22:2
+  (global.set $FOO@xplatforeach.SomeJsEnum (call $$create__java_lang_String__int__int@xplatforeach.SomeJsEnum (ref.null $java.lang.String)(i32.const 0)(i32.const 1)))
+ )
+)
+
+;;; Class<T> SomeJsEnum.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@xplatforeach.SomeJsEnum
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@xplatforeach.SomeJsEnum)))
+   (then
+    (return (global.get $$class@xplatforeach.SomeJsEnum))
+   )
+  )
+  (global.set $$class@xplatforeach.SomeJsEnum (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|xplatforeach...|__java_lang_String_<once>_@xplatforeach.SomeJsEnum )))
+  (return (global.get $$class@xplatforeach.SomeJsEnum))
+ )
+)
+
+;;; Class<?> SomeJsEnum.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@xplatforeach.SomeJsEnum
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $xplatforeach.SomeJsEnum))
+ (local.set $this (ref.cast (ref $xplatforeach.SomeJsEnum) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@xplatforeach.SomeJsEnum ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@xplatforeach.SomeJsEnum)
+
+;;; Code for xplatforeach.ForEachStatements [static fields]
+(global $$class-initialized@xplatforeach.ForEachStatements (mut i32)
+ (i32.const 0)
+)
+(global $$class@xplatforeach.ForEachStatements (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for xplatforeach.ForEachStatements [vtable.init]
+(global $xplatforeach.ForEachStatements.vtable (ref $xplatforeach.ForEachStatements.vtable)
+ (struct.new $xplatforeach.ForEachStatements.vtable
+  (ref.func $$getClassImpl__java_lang_Class@xplatforeach.ForEachStatements)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+
+;;; Code for xplatforeach.ForEachStatements [methods]
+
+;;; ForEachStatements ForEachStatements.$create()
+(func $$create__@xplatforeach.ForEachStatements
+ (result (ref null $xplatforeach.ForEachStatements))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:29:13
+ (local $$instance (ref null $xplatforeach.ForEachStatements))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:29:13
+  (call $$clinit__void_<once>_@xplatforeach.ForEachStatements )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:29:13
+  (local.set $$instance (struct.new $xplatforeach.ForEachStatements (ref.as_non_null (global.get $xplatforeach.ForEachStatements.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:29:13
+  (call $$ctor__void_$p_xplatforeach_ForEachStatements@xplatforeach.ForEachStatements (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:29:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void ForEachStatements.$ctor()
+(func $$ctor__void_$p_xplatforeach_ForEachStatements@xplatforeach.ForEachStatements
+ (param $this (ref null $xplatforeach.ForEachStatements))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:29:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:29:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void ForEachStatements.jsArray(JsArray<Throwable> array)
+(func $m_jsArray__com_google_gwt_corp_collections_JsArray__void@xplatforeach.ForEachStatements
+ (param $array (ref null extern))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:30:14
+ (local $$iterator (ref null $java.lang.Object))
+ (local $$qualifier (ref null $java.lang.Object))
+ (local $element (ref null $java.lang.Throwable))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:30:48
+  (call $$clinit__void_<once>_@xplatforeach.ForEachStatements )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:31:4
+  (local.set $$iterator (block (result (ref null $java.lang.Object))
+   (local.set $$qualifier (call $m_getIterable__$devirt__com_google_gwt_corp_collections_JsArray__java_lang_Iterable@com.google.gwt.corp.collections.JsArray.$Overlay (local.get $array)))
+   (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast (ref $java.lang.Iterable.vtable) (call $get.itable.$java.lang.Iterable (local.get $$qualifier)))))
+  ))
+  (block $LOOP.BREAK
+   (loop
+    (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator)))))))
+    (block $LOOP.CONTINUE
+     (block
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:31:4
+      (local.set $element (ref.cast (ref null $java.lang.Throwable) (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator)))))))
+      (block
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:32:6
+       (drop (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $element)))
+      )
+     )
+    )
+    (br 0)
+   )
+  )
+ )
+)
+
+;;; void ForEachStatements.jsArrayOfJsEnum(JsArray<SomeJsEnum> array)
+(func $m_jsArrayOfJsEnum__com_google_gwt_corp_collections_JsArray__void@xplatforeach.ForEachStatements
+ (param $array (ref null extern))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:36:14
+ (local $$iterator (ref null $java.lang.Object))
+ (local $$qualifier (ref null $java.lang.Object))
+ (local $element (ref null $xplatforeach.SomeJsEnum))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:36:57
+  (call $$clinit__void_<once>_@xplatforeach.ForEachStatements )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:37:4
+  (local.set $$iterator (block (result (ref null $java.lang.Object))
+   (local.set $$qualifier (call $m_getIterable__$devirt__com_google_gwt_corp_collections_JsArray__java_lang_Iterable@com.google.gwt.corp.collections.JsArray.$Overlay (local.get $array)))
+   (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast (ref $java.lang.Iterable.vtable) (call $get.itable.$java.lang.Iterable (local.get $$qualifier)))))
+  ))
+  (block $LOOP.BREAK
+   (loop
+    (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator)))))))
+    (block $LOOP.CONTINUE
+     (block
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:37:4
+      (local.set $element (ref.cast (ref null $xplatforeach.SomeJsEnum) (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator)))))))
+      (block
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:38:6
+       (drop (call $m_valueOf__int__java_lang_String@java.lang.String (struct.get $xplatforeach.SomeJsEnum $value@xplatforeach.SomeJsEnum (local.get $element))))
+      )
+     )
+    )
+    (br 0)
+   )
+  )
+ )
+)
+
+;;; void ForEachStatements.jsArrayOfNativeJsEnum(JsArray<NativeJsEnum> array)
+(func $m_jsArrayOfNativeJsEnum__com_google_gwt_corp_collections_JsArray__void@xplatforeach.ForEachStatements
+ (param $array (ref null extern))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:42:14
+ (local $$iterator (ref null $java.lang.Object))
+ (local $$qualifier (ref null $java.lang.Object))
+ (local $element (ref null $xplatforeach.NativeJsEnum))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:42:65
+  (call $$clinit__void_<once>_@xplatforeach.ForEachStatements )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:43:4
+  (local.set $$iterator (block (result (ref null $java.lang.Object))
+   (local.set $$qualifier (call $m_getIterable__$devirt__com_google_gwt_corp_collections_JsArray__java_lang_Iterable@com.google.gwt.corp.collections.JsArray.$Overlay (local.get $array)))
+   (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast (ref $java.lang.Iterable.vtable) (call $get.itable.$java.lang.Iterable (local.get $$qualifier)))))
+  ))
+  (block $LOOP.BREAK
+   (loop
+    (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator)))))))
+    (block $LOOP.CONTINUE
+     (block
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:43:4
+      (local.set $element (ref.cast (ref null $xplatforeach.NativeJsEnum) (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator)))))))
+      (block
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:44:6
+       (drop (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $element)))
+      )
+     )
+    )
+    (br 0)
+   )
+  )
+ )
+)
+
+;;; void ForEachStatements.immutableJsArray(ImmutableJsArray<Throwable> array)
+(func $m_immutableJsArray__com_google_gwt_corp_collections_ImmutableJsArray__void@xplatforeach.ForEachStatements
+ (param $array (ref null extern))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:48:14
+ (local $$iterator (ref null $java.lang.Object))
+ (local $$qualifier (ref null $java.lang.Object))
+ (local $element (ref null $java.lang.Throwable))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:48:66
+  (call $$clinit__void_<once>_@xplatforeach.ForEachStatements )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:49:4
+  (local.set $$iterator (block (result (ref null $java.lang.Object))
+   (local.set $$qualifier (call $m_getIterable__$devirt__com_google_gwt_corp_collections_ImmutableJsArray__java_lang_Iterable@com.google.gwt.corp.collections.ImmutableJsArray.$Overlay (local.get $array)))
+   (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast (ref $java.lang.Iterable.vtable) (call $get.itable.$java.lang.Iterable (local.get $$qualifier)))))
+  ))
+  (block $LOOP.BREAK
+   (loop
+    (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator)))))))
+    (block $LOOP.CONTINUE
+     (block
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:49:4
+      (local.set $element (ref.cast (ref null $java.lang.Throwable) (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator)))))))
+      (block
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:50:6
+       (drop (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $element)))
+      )
+     )
+    )
+    (br 0)
+   )
+  )
+ )
+)
+
+;;; void ForEachStatements.unmodifiableJsArray(UnmodifiableJsArray<Throwable> array)
+(func $m_unmodifiableJsArray__com_google_gwt_corp_collections_UnmodifiableJsArray__void@xplatforeach.ForEachStatements
+ (param $array (ref null extern))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:54:14
+ (local $$iterator (ref null $java.lang.Object))
+ (local $$qualifier (ref null $java.lang.Object))
+ (local $element (ref null $java.lang.Throwable))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:54:72
+  (call $$clinit__void_<once>_@xplatforeach.ForEachStatements )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:55:4
+  (local.set $$iterator (block (result (ref null $java.lang.Object))
+   (local.set $$qualifier (call $m_getIterable__$devirt__com_google_gwt_corp_collections_UnmodifiableJsArray__java_lang_Iterable@com.google.gwt.corp.collections.UnmodifiableJsArray.$Overlay (local.get $array)))
+   (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast (ref $java.lang.Iterable.vtable) (call $get.itable.$java.lang.Iterable (local.get $$qualifier)))))
+  ))
+  (block $LOOP.BREAK
+   (loop
+    (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator)))))))
+    (block $LOOP.CONTINUE
+     (block
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:55:4
+      (local.set $element (ref.cast (ref null $java.lang.Throwable) (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator)))))))
+      (block
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:56:6
+       (drop (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $element)))
+      )
+     )
+    )
+    (br 0)
+   )
+  )
+ )
+)
+
+;;; void ForEachStatements.jsArrayInteger(JsArrayInteger array)
+(func $m_jsArrayInteger__com_google_apps_docs_xplat_collections_JsArrayInteger__void@xplatforeach.ForEachStatements
+ (param $array (ref null extern))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:60:14
+ (local $$iterator (ref null $java.lang.Object))
+ (local $$qualifier (ref null $java.lang.Object))
+ (local $element i32)
+ (local $$iterator_1 (ref null $java.lang.Object))
+ (local $$qualifier_1 (ref null $java.lang.Object))
+ (local $element_1 (ref null $java.lang.Integer))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:60:51
+  (call $$clinit__void_<once>_@xplatforeach.ForEachStatements )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:61:4
+  (local.set $$iterator (block (result (ref null $java.lang.Object))
+   (local.set $$qualifier (call $m_getIterable__$devirt__com_google_apps_docs_xplat_collections_JsArrayInteger__java_lang_Iterable@com.google.apps.docs.xplat.collections.JsArrayInteger.$Overlay (local.get $array)))
+   (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast (ref $java.lang.Iterable.vtable) (call $get.itable.$java.lang.Iterable (local.get $$qualifier)))))
+  ))
+  (block $LOOP.BREAK
+   (loop
+    (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator)))))))
+    (block $LOOP.CONTINUE
+     (block
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:61:4
+      (local.set $element (call $m_intValue__int@java.lang.Integer (ref.as_non_null (ref.cast (ref null $java.lang.Integer) (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator)))))))))
+      (block
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:62:6
+       (drop (call $m_valueOf__int__java_lang_String@java.lang.String (local.get $element)))
+      )
+     )
+    )
+    (br 0)
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:65:4
+  (local.set $$iterator_1 (block (result (ref null $java.lang.Object))
+   (local.set $$qualifier_1 (call $m_getIterable__$devirt__com_google_apps_docs_xplat_collections_JsArrayInteger__java_lang_Iterable@com.google.apps.docs.xplat.collections.JsArrayInteger.$Overlay (local.get $array)))
+   (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast (ref $java.lang.Iterable.vtable) (call $get.itable.$java.lang.Iterable (local.get $$qualifier_1)))))
+  ))
+  (block $LOOP_1.BREAK
+   (loop
+    (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator_1))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator_1)))))))
+    (block $LOOP_1.CONTINUE
+     (block
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:65:4
+      (local.set $element_1 (ref.cast (ref null $java.lang.Integer) (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator_1))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator_1)))))))
+      (block
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:66:6
+       (drop (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $element_1)))
+      )
+     )
+    )
+    (br 0)
+   )
+  )
+ )
+)
+
+;;; void ForEachStatements.serializedJsArray(SerializedJsArray array)
+(func $m_serializedJsArray__com_google_apps_docs_xplat_collections_SerializedJsArray__void@xplatforeach.ForEachStatements
+ (param $array (ref null extern))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:70:14
+ (local $$iterator (ref null $java.lang.Object))
+ (local $$qualifier (ref null $java.lang.Object))
+ (local $element (ref null $java.lang.Object))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:70:57
+  (call $$clinit__void_<once>_@xplatforeach.ForEachStatements )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:71:4
+  (local.set $$iterator (block (result (ref null $java.lang.Object))
+   (local.set $$qualifier (call $m_getIterable__$devirt__com_google_apps_docs_xplat_collections_SerializedJsArray__java_lang_Iterable@com.google.apps.docs.xplat.collections.SerializedJsArray.$Overlay (local.get $array)))
+   (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast (ref $java.lang.Iterable.vtable) (call $get.itable.$java.lang.Iterable (local.get $$qualifier)))))
+  ))
+  (block $LOOP.BREAK
+   (loop
+    (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator)))))))
+    (block $LOOP.CONTINUE
+     (block
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:71:4
+      (local.set $element (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator))))))
+      (block
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:72:6
+       (drop (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $element)))
+      )
+     )
+    )
+    (br 0)
+   )
+  )
+ )
+)
+
+;;; void ForEachStatements.serializedJsMap(SerializedJsMap map)
+(func $m_serializedJsMap__com_google_apps_docs_xplat_collections_SerializedJsMap__void@xplatforeach.ForEachStatements
+ (param $map (ref null extern))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:76:14
+ (local $keys (ref null $java.lang.String))
+ (local $$iterator (ref null $java.lang.Object))
+ (local $$qualifier (ref null $java.lang.Object))
+ (local $key (ref null $java.lang.String))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:76:51
+  (call $$clinit__void_<once>_@xplatforeach.ForEachStatements )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:77:4
+  (local.set $keys (call $$getString_||__java_lang_String_<once>_@xplatforeach.ForEachStatements ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:78:4
+  (local.set $$iterator (block (result (ref null $java.lang.Object))
+   (local.set $$qualifier (call $m_getIterableKeys__$devirt__com_google_apps_docs_xplat_collections_SerializedJsMap__java_lang_Iterable@com.google.apps.docs.xplat.collections.SerializedJsMap.$Overlay (local.get $map)))
+   (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast (ref $java.lang.Iterable.vtable) (call $get.itable.$java.lang.Iterable (local.get $$qualifier)))))
+  ))
+  (block $LOOP.BREAK
+   (loop
+    (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator)))))))
+    (block $LOOP.CONTINUE
+     (block
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:78:4
+      (local.set $key (ref.cast (ref null $java.lang.String) (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator)))))))
+      (block
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:79:6
+       (local.set $keys (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $keys))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $key))))
+      )
+     )
+    )
+    (br 0)
+   )
+  )
+ )
+)
+
+;;; void ForEachStatements.unsafeJsMap(UnsafeJsMap<?> map)
+(func $m_unsafeJsMap__com_google_apps_docs_xplat_collections_UnsafeJsMap__void@xplatforeach.ForEachStatements
+ (param $map (ref null extern))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:83:14
+ (local $keys (ref null $java.lang.String))
+ (local $$iterator (ref null $java.lang.Object))
+ (local $$qualifier (ref null $java.lang.Object))
+ (local $key (ref null $java.lang.String))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:83:46
+  (call $$clinit__void_<once>_@xplatforeach.ForEachStatements )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:84:4
+  (local.set $keys (call $$getString_||__java_lang_String_<once>_@xplatforeach.ForEachStatements ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:85:4
+  (local.set $$iterator (block (result (ref null $java.lang.Object))
+   (local.set $$qualifier (call $m_getIterableKeys__$devirt__com_google_apps_docs_xplat_collections_UnsafeJsMap__java_lang_Iterable@com.google.apps.docs.xplat.collections.UnsafeJsMap.$Overlay (local.get $map)))
+   (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast (ref $java.lang.Iterable.vtable) (call $get.itable.$java.lang.Iterable (local.get $$qualifier)))))
+  ))
+  (block $LOOP.BREAK
+   (loop
+    (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator)))))))
+    (block $LOOP.CONTINUE
+     (block
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:85:4
+      (local.set $key (ref.cast (ref null $java.lang.String) (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator)))))))
+      (block
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:86:6
+       (local.set $keys (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $keys))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $key))))
+      )
+     )
+    )
+    (br 0)
+   )
+  )
+ )
+)
+
+;;; void ForEachStatements.unsafeJsMapInteger(UnsafeJsMapInteger map)
+(func $m_unsafeJsMapInteger__com_google_apps_docs_xplat_collections_UnsafeJsMapInteger__void@xplatforeach.ForEachStatements
+ (param $map (ref null extern))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:90:14
+ (local $keys (ref null $java.lang.String))
+ (local $$iterator (ref null $java.lang.Object))
+ (local $$qualifier (ref null $java.lang.Object))
+ (local $key (ref null $java.lang.String))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:90:57
+  (call $$clinit__void_<once>_@xplatforeach.ForEachStatements )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:91:4
+  (local.set $keys (call $$getString_||__java_lang_String_<once>_@xplatforeach.ForEachStatements ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:92:4
+  (local.set $$iterator (block (result (ref null $java.lang.Object))
+   (local.set $$qualifier (call $m_getIterableKeys__$devirt__com_google_apps_docs_xplat_collections_UnsafeJsMapInteger__java_lang_Iterable@com.google.apps.docs.xplat.collections.UnsafeJsMapInteger.$Overlay (local.get $map)))
+   (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast (ref $java.lang.Iterable.vtable) (call $get.itable.$java.lang.Iterable (local.get $$qualifier)))))
+  ))
+  (block $LOOP.BREAK
+   (loop
+    (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator)))))))
+    (block $LOOP.CONTINUE
+     (block
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:92:4
+      (local.set $key (ref.cast (ref null $java.lang.String) (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator)))))))
+      (block
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:93:6
+       (local.set $keys (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $keys))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $key))))
+      )
+     )
+    )
+    (br 0)
+   )
+  )
+ )
+)
+
+;;; void ForEachStatements.unsafeJsSet(UnsafeJsSet set)
+(func $m_unsafeJsSet__com_google_apps_docs_xplat_collections_UnsafeJsSet__void@xplatforeach.ForEachStatements
+ (param $set (ref null extern))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:97:14
+ (local $keys (ref null $java.lang.String))
+ (local $$iterator (ref null $java.lang.Object))
+ (local $$qualifier (ref null $java.lang.Object))
+ (local $key (ref null $java.lang.String))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:97:43
+  (call $$clinit__void_<once>_@xplatforeach.ForEachStatements )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:98:4
+  (local.set $keys (call $$getString_||__java_lang_String_<once>_@xplatforeach.ForEachStatements ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:99:4
+  (local.set $$iterator (block (result (ref null $java.lang.Object))
+   (local.set $$qualifier (call $m_getIterableKeys__$devirt__com_google_apps_docs_xplat_collections_UnsafeJsSet__java_lang_Iterable@com.google.apps.docs.xplat.collections.UnsafeJsSet.$Overlay (local.get $set)))
+   (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast (ref $java.lang.Iterable.vtable) (call $get.itable.$java.lang.Iterable (local.get $$qualifier)))))
+  ))
+  (block $LOOP.BREAK
+   (loop
+    (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator)))))))
+    (block $LOOP.CONTINUE
+     (block
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:99:4
+      (local.set $key (ref.cast (ref null $java.lang.String) (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator)))))))
+      (block
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:100:6
+       (local.set $keys (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $keys))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $key))))
+      )
+     )
+    )
+    (br 0)
+   )
+  )
+ )
+)
+
+;;; void ForEachStatements.sparseArray(SparseArray<?> array)
+(func $m_sparseArray__com_google_apps_docs_xplat_structs_SparseArray__void@xplatforeach.ForEachStatements
+ (param $array (ref null extern))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:104:14
+ (local $sumOfKeys i32)
+ (local $$iterator (ref null $java.lang.Object))
+ (local $$qualifier (ref null $java.lang.Object))
+ (local $key (ref null $java.lang.Integer))
+ (local $$iterator_1 (ref null $java.lang.Object))
+ (local $$qualifier_1 (ref null $java.lang.Object))
+ (local $key_1 i32)
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:104:48
+  (call $$clinit__void_<once>_@xplatforeach.ForEachStatements )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:105:4
+  (local.set $sumOfKeys (i32.const 0))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:106:4
+  (local.set $$iterator (block (result (ref null $java.lang.Object))
+   (local.set $$qualifier (call $m_getIterableKeys__$devirt__com_google_apps_docs_xplat_structs_SparseArray__java_lang_Iterable@com.google.apps.docs.xplat.structs.SparseArray.$Overlay (local.get $array)))
+   (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast (ref $java.lang.Iterable.vtable) (call $get.itable.$java.lang.Iterable (local.get $$qualifier)))))
+  ))
+  (block $LOOP.BREAK
+   (loop
+    (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator)))))))
+    (block $LOOP.CONTINUE
+     (block
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:106:4
+      (local.set $key (ref.cast (ref null $java.lang.Integer) (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator)))))))
+      (block
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:107:6
+       (local.set $sumOfKeys (i32.add (local.get $sumOfKeys) (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $key)))))
+      )
+     )
+    )
+    (br 0)
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:110:4
+  (local.set $$iterator_1 (block (result (ref null $java.lang.Object))
+   (local.set $$qualifier_1 (call $m_getIterableKeys__$devirt__com_google_apps_docs_xplat_structs_SparseArray__java_lang_Iterable@com.google.apps.docs.xplat.structs.SparseArray.$Overlay (local.get $array)))
+   (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast (ref $java.lang.Iterable.vtable) (call $get.itable.$java.lang.Iterable (local.get $$qualifier_1)))))
+  ))
+  (block $LOOP_1.BREAK
+   (loop
+    (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator_1))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator_1)))))))
+    (block $LOOP_1.CONTINUE
+     (block
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:110:4
+      (local.set $key_1 (call $m_intValue__int@java.lang.Integer (ref.as_non_null (ref.cast (ref null $java.lang.Integer) (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator_1))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator_1)))))))))
+      (block
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:111:6
+       (local.set $sumOfKeys (i32.add (local.get $sumOfKeys) (local.get $key_1)))
+      )
+     )
+    )
+    (br 0)
+   )
+  )
+ )
+)
+
+;;; void ForEachStatements.$clinit()
+(func $$clinit__void_<once>_@xplatforeach.ForEachStatements
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:29:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:29:13
+  (if (global.get $$class-initialized@xplatforeach.ForEachStatements)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:29:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:29:13
+  (global.set $$class-initialized@xplatforeach.ForEachStatements (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:29:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> ForEachStatements.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@xplatforeach.ForEachStatements
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@xplatforeach.ForEachStatements)))
+   (then
+    (return (global.get $$class@xplatforeach.ForEachStatements))
+   )
+  )
+  (global.set $$class@xplatforeach.ForEachStatements (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|xplatforeach...|__java_lang_String_<once>_@xplatforeach.ForEachStatements )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@xplatforeach.ForEachStatements))
+ )
+)
+
+;;; Class<?> ForEachStatements.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@xplatforeach.ForEachStatements
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $xplatforeach.ForEachStatements))
+ (local.set $this (ref.cast (ref $xplatforeach.ForEachStatements) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@xplatforeach.ForEachStatements ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@xplatforeach.ForEachStatements)

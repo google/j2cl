@@ -25,6 +25,5 @@ j2cl_library(
 readable_example(
     srcs = glob(["*.java"]),
     generate_kt_readables = False,
-    generate_wasm_readables = False,
     deps = [":fakes"],
 )
