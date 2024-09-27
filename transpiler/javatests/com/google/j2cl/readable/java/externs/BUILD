@@ -29,6 +29,7 @@ readable_example(
     ]),
     # Native JsType does not make sense for j2kt-native.
     build_kt_native_readables = False,
+    # Casting non-native type to/from native type not supported in Wasm.
     generate_wasm_readables = False,
     deps = [
         ":externs",
