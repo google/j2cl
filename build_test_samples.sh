@@ -18,10 +18,10 @@ set -ex
 # Build and test Hello World sample in its own workspace
 (cd samples/helloworld && bazel test ...)
 
+# Build wasm Hello World sample in its own workspace
+(cd samples/wasm && bazel test ...)
+
 if [[ $1 == "CI" ]]; then
   # Build Guava sample in its own workspace
   (cd samples/guava && bazel build ...)
-
-  # Build wasm Hello World sample in its own workspace
-  (cd samples/wasm && bazel test ...)
 fi
