@@ -2301,6 +2301,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  private static void acceptsJsEnumVarargsArray(MyJsEnum[]... p) {}",
             "  private static <T> void acceptsTVarargs(T... p) {}",
             "  private static MyJsEnum[] returnsJsEnumArray() { return null; }",
+            "  static class ParametricConstructorVarargs<E> {",
+            "    ParametricConstructorVarargs(E... p) {}",
+            "  }",
             "  private static void arrays() {",
             "    Object[] array = null;",
             "    array[0] = MyJsEnum.A;",
@@ -2316,6 +2319,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             // specifically make an exception for varargs (we change the type of the passed array to
             // Object[] in a desugaring pass, JsEnums are allowed as elements of Object[]).
             "    acceptsTVarargs(MyJsEnum.A, MyJsEnum.B);",
+            "    new ParametricConstructorVarargs<>(MyJsEnum.A, MyJsEnum.B);",
             "    MyJsEnum e = returnsJsEnumArray()[0];",
             "  }",
             "}")

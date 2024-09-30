@@ -35,7 +35,6 @@ import com.google.j2cl.transpiler.passes.ConvertMethodReferencesToLambdas;
 import com.google.j2cl.transpiler.passes.CreateImplicitConstructors;
 import com.google.j2cl.transpiler.passes.DevirtualizeBoxedTypesAndJsFunctionImplementations;
 import com.google.j2cl.transpiler.passes.DevirtualizeMethodCalls;
-import com.google.j2cl.transpiler.passes.ErasePackagedJsEnumVarargs;
 import com.google.j2cl.transpiler.passes.ExpandCompoundAssignments;
 import com.google.j2cl.transpiler.passes.ExtractNonIdempotentExpressions;
 import com.google.j2cl.transpiler.passes.FilloutMissingSourceMapInformation;
@@ -134,6 +133,7 @@ import com.google.j2cl.transpiler.passes.NormalizeNativePropertyAccesses;
 import com.google.j2cl.transpiler.passes.NormalizeNullLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeNumberLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeOverlayMembers;
+import com.google.j2cl.transpiler.passes.NormalizePackagedJsEnumVarargsLiterals;
 import com.google.j2cl.transpiler.passes.NormalizePrimitiveCastsJ2kt;
 import com.google.j2cl.transpiler.passes.NormalizeShifts;
 import com.google.j2cl.transpiler.passes.NormalizeStaticMemberQualifiers;
@@ -209,7 +209,7 @@ public enum Backend {
           // depend on Expression.isEffectivelyInvariant it can take advantage.
           MakeVariablesFinal::new,
           ConvertMethodReferencesToLambdas::new,
-          ErasePackagedJsEnumVarargs::new,
+          NormalizePackagedJsEnumVarargsLiterals::new,
           ResolveImplicitInstanceQualifiers::new,
           // Must be run before NormalizeForEachStatement.
           OptimizeXplatForEach::new,
@@ -253,6 +253,9 @@ public enum Backend {
           // Default constructors and explicit super calls should be synthesized first.
           CreateImplicitConstructors::new,
           InsertExplicitSuperCalls::new,
+          // Make sure that array literals that might have been inserted by previous passes so that
+          // JsEnum varargs literals have the proper array type.
+          NormalizePackagedJsEnumVarargsLiterals::new,
           // Resolve captures
           ResolveCaptures::new,
           // ... and flatten the class hierarchy.
@@ -385,7 +388,7 @@ public enum Backend {
           // removed.
           MakeVariablesFinal::new,
           ConvertMethodReferencesToLambdas::new,
-          ErasePackagedJsEnumVarargs::new,
+          NormalizePackagedJsEnumVarargsLiterals::new,
           ResolveImplicitInstanceQualifiers::new,
           NormalizeForEachIterable::new,
           // Must run after NormalizeForEachIterable.
@@ -418,6 +421,9 @@ public enum Backend {
           // Default constructors and explicit super calls should be synthesized first.
           CreateImplicitConstructors::new,
           InsertExplicitSuperCalls::new,
+          // Make sure that array literals that might have been inserted by previous passes so that
+          // JsEnum varargs literals have the proper array type.
+          NormalizePackagedJsEnumVarargsLiterals::new,
 
           // Resolve captures
           ResolveCaptures::new,
@@ -531,7 +537,7 @@ public enum Backend {
           // removed.
           MakeVariablesFinal::new,
           ConvertMethodReferencesToLambdas::new,
-          ErasePackagedJsEnumVarargs::new,
+          NormalizePackagedJsEnumVarargsLiterals::new,
           ResolveImplicitInstanceQualifiers::new,
           NormalizeForEachIterable::new,
           // Must run after NormalizeForEachIterable.
@@ -564,6 +570,9 @@ public enum Backend {
           // Default constructors and explicit super calls should be synthesized first.
           CreateImplicitConstructors::new,
           InsertExplicitSuperCalls::new,
+          // Make sure that array literals that might have been inserted by previous passes so that
+          // JsEnum varargs literals have the proper array type.
+          NormalizePackagedJsEnumVarargsLiterals::new,
 
           // Resolve captures
           ResolveCaptures::new,
