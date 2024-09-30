@@ -92,19 +92,19 @@ def make_size_report(path_name, original_bundled_targets, original_opt_targets,
           create_report(test_name, original_increment, modified_increment)
       )
 
-  changed_reports = [report for report in all_reports if report[0] != 100]
-  shrinkage_reports = [report for report in changed_reports if report[0] < 100]
-  expansion_reports = [report for report in changed_reports if report[0] > 100]
+  changed_reports = [report for report in all_reports if report[0] != 1]
+  shrinkage_reports = [report for report in changed_reports if report[0] < 1]
+  expansion_reports = [report for report in changed_reports if report[0] > 1]
 
   size_report_file.write(
-      "There are %s optimized size changes.\n" % len(changed_reports))
+      f"There are {len(changed_reports)} optimized size changes.\n")
 
   if modified_total_size != original_total_size:
-    total_percent = (modified_total_size / float(original_total_size)) * 100
+    total_percent = (modified_total_size / float(original_total_size))
     size_report_file.write(
-        "Total optimized size (of already existing tests) "
-        "changed from\n  %s to %s bytes (100%%->%2.1f%%).\n" %
-        (original_total_size, modified_total_size, total_percent))
+        "Total optimized size (of already existing tests) changed from\n "
+        f"{original_total_size} to {modified_total_size} bytes "
+        f"(100%->{total_percent:2.1%}).\n")
   else:
     size_report_file.write(
         "Total size (of already existing tests) did not change.\n")
@@ -141,7 +141,7 @@ def make_size_report(path_name, original_bundled_targets, original_opt_targets,
   size_report_file.write("**************************************\n")
   print_table(size_report_file, all_reports)
 
-  print("  Closing report (%s)" % size_report_file.name)
+  print(f"  Closing report ({size_report_file.name})")
   size_report_file.close()
 
 
@@ -169,12 +169,11 @@ def create_report(test_name, original_size, modified_size):
 
   if original_size >= 0:
     # Both files exist, so compare their sizes.
-    size_percent = (modified_size / float(original_size)) * 100
-    note = "unchanged" if size_percent == 100 else "%.1f%%" % (
-        size_percent - 100)
+    size_percent = (modified_size / float(original_size))
+    note = "unchanged" if size_percent == 1 else f"{size_percent:.1%}"
   else:
     # The original file doesn't exist, this is a new result.
-    size_percent = 100
+    size_percent = 1
     note = "new"
 
   row_format = size_format + " %s (%s)\n"
@@ -202,7 +201,7 @@ def make_optimized_test_list(optimized_tests):
   optimized_tests_file.write("]\n")
 
   optimized_tests_file.close()
-  print("  Generated test file list (%s)" % optimized_tests_file.name)
+  print(f"  Generated test file list ({optimized_tests_file.name})")
 
 
 def main(unused_argv):

@@ -203,7 +203,7 @@ def get_file_from_target(target):
 
 def sync_j2size_repo():
   g4_sync_cmds = [
-      "synced_to_cl=@$(srcfs get_readonly) && " +
+      "synced_to_cl=@$(srcfs get_readonly) && "
       "cd $(p4 g4d -f j2cl-size) && g4 sync $synced_to_cl"
   ]
   run_cmd(g4_sync_cmds, shell=True)
@@ -214,7 +214,7 @@ def get_j2size_repo_path():
 
 
 def get_repo_path(workspace):
-  return "/google/src/cloud/%s/%s/google3" % (getpass.getuser(), workspace)
+  return f"/google/src/cloud/{getpass.getuser()}/{workspace}/google3"
 
 
 def run_cmd(cmd_args, cwd=None, include_stderr=False, shell=False):

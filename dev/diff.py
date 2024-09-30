@@ -104,7 +104,7 @@ def main(argv):
 
 
 def _diff(original, modified, is_size, filter_noise):
-  print("Constructing a diff of changes in '%s'" % modified.blaze_target)
+  print(f"Constructing a diff of changes in '{modified.blaze_target}'.")
 
   is_wasm = modified.blaze_target.endswith(".wasm")
 

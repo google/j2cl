@@ -34,14 +34,13 @@ def replace_pattern(pattern_string, replacement, in_value):
 
 def get_readable_dirs(name_filter, rule_suffix=""):
   """Finds and returns the dirs of readable examples."""
-  return _get_dirs_from_blaze_query("%s:readable%s$" %
-                                    (name_filter, rule_suffix))
+  return _get_dirs_from_blaze_query(f"{name_filter}:readable{rule_suffix}$")
 
 
 def _get_dirs_from_blaze_query(rules_filter):
   dirs = repo_util.run_cmd([
       "blaze", "query",
-      "filter('%s', %s)" % (rules_filter, READABLE_TARGET_PATTERN),
+      f"filter('{rules_filter}', {READABLE_TARGET_PATTERN})",
       "--output=package"
   ]).splitlines()
   return list(filter(bool, dirs))
@@ -176,12 +175,12 @@ def replace_transpiled_j2kt(readable_dirs):
 def _replace_readable_outputs(readable_dirs, tree_artifact_dir, output_dir):
   """Copy and replace readable directories with output from Blaze."""
   for readable_dir in readable_dirs:
-    transpiler_output = "blaze-bin/%s/%s" % (readable_dir, tree_artifact_dir)
-    output = "%s/%s" % (readable_dir, output_dir)
+    transpiler_output = f"blaze-bin/{readable_dir}/{tree_artifact_dir}"
+    output = f"{readable_dir}/{output_dir}"
     repo_util.run_cmd(["rm", "-Rf", output])
     repo_util.run_cmd(["mkdir", output])
     repo_util.run_cmd(
-        ["cp --no-preserve=mode -r %s/* %s" % (transpiler_output, output)],
+        [f"cp --no-preserve=mode -r {transpiler_output}/* {output}"],
         shell=True)
 
 
