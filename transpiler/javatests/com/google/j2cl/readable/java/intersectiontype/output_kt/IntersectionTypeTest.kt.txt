@@ -140,7 +140,7 @@ open class IntersectionTypeTest<U> {
   fun method(): Cmp? {
    return (Cmp {
     return@Cmp 1
-   }).let { it as Cmp?; it as Serial?; it }
+   }).let { it as Cmp; it as Serial; it }
   }
 
   @JvmStatic

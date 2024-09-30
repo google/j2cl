@@ -156,7 +156,7 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
     return IntersectionTypeDescriptor.newBuilder()
         .setIntersectionTypeDescriptors(
             getIntersectionTypeDescriptors().stream()
-                .map(TypeDescriptor::toNullable)
+                .map(TypeDescriptor::toNonNullable)
                 .collect(toImmutableList()))
         .build();
   }
