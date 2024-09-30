@@ -26,7 +26,6 @@ import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Invocation;
 import com.google.j2cl.transpiler.ast.Node;
-import java.util.ArrayList;
 
 /**
  * Creates an Object[] literal instead of a JsEnum[] literal for T varargs where T is specialized to
@@ -80,9 +79,6 @@ public final class NormalizePackagedJsEnumVarargsLiterals extends NormalizationP
       return invocation;
     }
 
-    var updatedArguments =
-        new ArrayList<>(invocation.getArguments().subList(0, invocation.getArguments().size() - 1));
-
     // TODO(b/118615488): remove this when BoxedLightEnums are surfaces to J2CL.
     //
     // Here we create an array using the bound of declared type T[] instead of the actual inferred
@@ -92,13 +88,17 @@ public final class NormalizePackagedJsEnumVarargsLiterals extends NormalizationP
     // the supertype in the implicit array creation due to varargs, instead of an array of the
     // inferred subtype. Making this choice allows the use of common varargs APIs such as
     // Arrays.asList() with JsEnum values.
-    var parameterDeclaration =
+
+    var varargsParameterDeclaration =
         Iterables.getLast(
             invocation.getTarget().getDeclarationDescriptor().getParameterDescriptors());
-    updatedArguments.add(
-        new ArrayLiteral(
-            (ArrayTypeDescriptor) parameterDeclaration.getTypeDescriptor().toRawTypeDescriptor(),
-            ((ArrayLiteral) lastArgument).getValueExpressions()));
-    return Invocation.Builder.from(invocation).setArguments(updatedArguments).build();
+
+    return Invocation.Builder.from(invocation)
+        .replaceVarargsArgument(
+            new ArrayLiteral(
+                (ArrayTypeDescriptor)
+                    varargsParameterDeclaration.getTypeDescriptor().toRawTypeDescriptor(),
+                ((ArrayLiteral) lastArgument).getValueExpressions()))
+        .build();
   }
 }
