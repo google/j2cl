@@ -28,6 +28,15 @@ import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewrite
  * they appear.
  */
 public class NormalizeNullLiterals extends NormalizationPass {
+  private final boolean boxJsEnumNulls;
+
+  public NormalizeNullLiterals() {
+    this(/* boxJsEnumNulls= */ false);
+  }
+
+  public NormalizeNullLiterals(boolean boxJsEnumNulls) {
+    this.boxJsEnumNulls = boxJsEnumNulls;
+  }
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
@@ -40,7 +49,9 @@ public class NormalizeNullLiterals extends NormalizationPass {
                   TypeDescriptor declaredTypeDescriptor,
                   Expression expression) {
                 if (expression instanceof NullLiteral) {
-                  if (AstUtils.isNonNativeJsEnum(inferredTypeDescriptor)) {
+                  // TODO(b/352162979): Implement a better approach to determining JsEnum in passes
+                  // and in backends
+                  if (boxJsEnumNulls && AstUtils.isNonNativeJsEnum(inferredTypeDescriptor)) {
                     // JsEnums types are removed, so this should be the boxed type. j.l.Object also
                     // works because boxed js enum types are never explicitly referred to in method
                     // signatures, and the only other types they can be passed as is Comparable and
