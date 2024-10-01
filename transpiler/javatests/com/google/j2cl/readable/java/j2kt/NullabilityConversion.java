@@ -58,20 +58,40 @@ public class NullabilityConversion {
       }
 
       public static class UpperWildcardToSimple {
-        public static @Nullable Parent nullableToNullable(Supplier<? extends @Nullable Child> it) {
-          return it.get();
+        public static @Nullable Parent nullableToNullable(
+            Supplier<? extends @Nullable Child> supplier) {
+          return supplier.get();
         }
 
-        public static Parent nullableToNonNull(Supplier<? extends @Nullable Child> it) {
-          return it.get();
+        public static Parent nullableToNonNull(Supplier<? extends @Nullable Child> supplier) {
+          return supplier.get();
         }
 
-        public static @Nullable Parent nonNullToNullable(Supplier<? extends Child> it) {
-          return it.get();
+        public static @Nullable Parent nonNullToNullable(Supplier<? extends Child> supplier) {
+          return supplier.get();
         }
 
-        public static Parent nonNullToNonNull(Supplier<? extends Child> it) {
-          return it.get();
+        public static Parent nonNullToNonNull(Supplier<? extends Child> supplier) {
+          return supplier.get();
+        }
+      }
+
+      public static class LowerWildcardToSimple {
+        public static @Nullable Parent nullableToNullable(
+            Supplier<? super @Nullable Child> supplier) {
+          return supplier.get();
+        }
+
+        public static Parent nullableToNonNull(Supplier<? super @Nullable Child> supplier) {
+          return supplier.get();
+        }
+
+        public static @Nullable Parent nonNullToNullable(Supplier<? super Child> supplier) {
+          return supplier.get();
+        }
+
+        public static Parent nonNullToNonNull(Supplier<? super Child> supplier) {
+          return supplier.get();
         }
       }
 
@@ -316,7 +336,7 @@ public class NullabilityConversion {
 
         public static class SimpleUpperWildcardToUpperWildcard {
           public static Generic<? extends @Nullable Parent> nullableToNullable(
-              Generic<? super @Nullable Child> it) {
+              Generic<? extends @Nullable Child> it) {
             return it;
           }
 
