@@ -336,6 +336,29 @@ public class NullabilityConversion {
           }
         }
 
+        public static class SimpleLowerWildcardToUpperWildcard {
+          public static Generic<? extends @Nullable Parent> nullableToNullable(
+              Generic<? super @Nullable Child> it) {
+            return it;
+          }
+
+          // TODO(b/361769898): Uncomment when fixed
+          // public static Generic<? extends Parent> nullableToNonNull(
+          //     Generic<? super @Nullable Child> it) {
+          //   return it;
+          // }
+
+          public static Generic<? extends @Nullable Parent> nonNullToNullable(
+              Generic<? super Child> it) {
+            return it;
+          }
+
+          // TODO(b/361769898): Uncomment when fixed
+          // public static Generic<? extends Parent> nonNullToNonNull(Generic<? super Child> it) {
+          //   return it;
+          // }
+        }
+
         public static class SimpleLowerWildcardToLowerWildcard {
           public static Generic<? super @Nullable Child> nullableToNullable(
               Generic<? super @Nullable Parent> it) {
