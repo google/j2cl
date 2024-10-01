@@ -37,7 +37,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
@@ -306,8 +305,7 @@ public abstract class TypeDeclaration
       return false;
     }
 
-    MethodDescriptor methodDescriptor =
-        toUnparameterizedTypeDescriptor().getSingleAbstractMethodDescriptor();
+    MethodDescriptor methodDescriptor = getSingleAbstractMethodDescriptor();
     return !methodDescriptor.isKtProperty()
         && methodDescriptor.getTypeParameterTypeDescriptors().isEmpty();
   }
@@ -615,11 +613,6 @@ public abstract class TypeDeclaration
                 getDeclaredMethodDescriptors().stream()
                     .map(MethodDescriptor::toRawMemberDescriptor)
                     .collect(toImmutableList()))
-        .setSingleAbstractMethodDescriptorFactory(
-            () ->
-                applyOrNull(
-                    toUnparameterizedTypeDescriptor().getSingleAbstractMethodDescriptor(),
-                    t -> t.toRawMemberDescriptor()))
         .build();
   }
 
@@ -760,6 +753,13 @@ public abstract class TypeDeclaration
         .filter(MethodDescriptor::isJsConstructor)
         .collect(toImmutableList());
   }
+
+  @Memoized
+  @Nullable
+  public MethodDescriptor getSingleAbstractMethodDescriptor() {
+    return getSingleAbstractMethodDescriptorFactory().get(this);
+  }
+
   /**
    * The list of fields declared in the type. Note: this does not include methods synthetic fields
    * (like captures) nor supertype fields.
@@ -830,6 +830,9 @@ public abstract class TypeDeclaration
   abstract DescriptorFactory<ImmutableList<MethodDescriptor>> getDeclaredMethodDescriptorsFactory();
 
   @Nullable
+  abstract DescriptorFactory<MethodDescriptor> getSingleAbstractMethodDescriptorFactory();
+
+  @Nullable
   abstract DescriptorFactory<ImmutableList<FieldDescriptor>> getDeclaredFieldDescriptorsFactory();
 
   @Nullable
@@ -872,16 +875,13 @@ public abstract class TypeDeclaration
         .setNullMarked(false)
         .setTypeParameterDescriptors(ImmutableList.of())
         .setDeclaredMethodDescriptorsFactory(() -> ImmutableList.of())
+        .setSingleAbstractMethodDescriptorFactory(() -> null)
         .setDeclaredFieldDescriptorsFactory(() -> ImmutableList.of())
         .setMemberTypeDeclarationsFactory(() -> ImmutableList.of())
         .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.of())
         .setEnclosingMethodDescriptorFactory(() -> null)
         .setUnparameterizedTypeDescriptorFactory(unparameterizedFactory)
         .setSuperTypeDescriptorFactory(() -> null);
-  }
-
-  private static <T, U> U applyOrNull(T descriptor, Function<T, U> function) {
-    return descriptor == null ? null : function.apply(descriptor);
   }
 
   // TODO(b/340930928): This is a temporary hack since JsFunction is not supported in Wasm.
@@ -1026,6 +1026,15 @@ public abstract class TypeDeclaration
         Supplier<ImmutableList<MethodDescriptor>> declaredMethodDescriptorsFactory) {
       return setDeclaredMethodDescriptorsFactory(
           typeDescriptor -> declaredMethodDescriptorsFactory.get());
+    }
+
+    public abstract Builder setSingleAbstractMethodDescriptorFactory(
+        DescriptorFactory<MethodDescriptor> singleDeclaredAbstractMethodDescriptorFactory);
+
+    public Builder setSingleAbstractMethodDescriptorFactory(
+        Supplier<MethodDescriptor> singleDeclaredAbstractMethodDescriptorFactory) {
+      return setSingleAbstractMethodDescriptorFactory(
+          typeDescriptor -> singleDeclaredAbstractMethodDescriptorFactory.get());
     }
 
     public abstract Builder setDeclaredFieldDescriptorsFactory(

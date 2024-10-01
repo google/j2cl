@@ -214,9 +214,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   abstract DescriptorFactory<ImmutableList<MethodDescriptor>> getDeclaredMethodDescriptorsFactory();
 
   @Nullable
-  abstract DescriptorFactory<MethodDescriptor> getSingleAbstractMethodDescriptorFactory();
-
-  @Nullable
   abstract DescriptorFactory<ImmutableList<FieldDescriptor>> getDeclaredFieldDescriptorsFactory();
 
   /**
@@ -233,7 +230,11 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   @Nullable
   @Memoized
   public MethodDescriptor getSingleAbstractMethodDescriptor() {
-    return getSingleAbstractMethodDescriptorFactory().get(this);
+    MethodDescriptor methodDescriptor = getTypeDeclaration().getSingleAbstractMethodDescriptor();
+    if (methodDescriptor == null) {
+      return null;
+    }
+    return methodDescriptor.specializeTypeVariables(getTransitiveParameterization());
   }
 
   /** Returns the single declared constructor fo this class. */
@@ -263,8 +264,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   public DeclaredTypeDescriptor getFunctionalInterface() {
     return isFunctionalInterface()
         ? this
-        : getInterfaceTypeDescriptors()
-            .stream()
+        : getInterfaceTypeDescriptors().stream()
             .filter(DeclaredTypeDescriptor::isFunctionalInterface)
             .findFirst()
             .orElse(null);
@@ -372,7 +372,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
       }
     }
   }
-
 
   /**
    * Returns the qualified JavaScript name of the type. Same as {@link #getQualifiedSourceName}
@@ -545,8 +544,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     if (typeArgumentDescriptors.isEmpty()) {
       return "";
     }
-    return typeArgumentDescriptors
-        .stream()
+    return typeArgumentDescriptors.stream()
         .map(TypeDescriptor::getUniqueId)
         .collect(joining(", ", "<", ">"));
   }
@@ -1165,8 +1163,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
     // TODO(b/79210574): reconsider whether types with only static JsMembers are actually
     // referenceable externally.
-    return getDeclaredMemberDescriptors()
-        .stream()
+    return getDeclaredMemberDescriptors().stream()
         .filter(Predicates.not(MemberDescriptor::isOrOverridesJavaLangObjectMethod))
         .anyMatch(MemberDescriptor::isJsMember);
   }
@@ -1280,11 +1277,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
             getTypeArgumentDescriptors().stream()
                 .map(t -> t.specializeTypeVariables(parameterization, seen))
                 .collect(toImmutableList()))
-        .setSingleAbstractMethodDescriptorFactory(
-            () ->
-                getSingleAbstractMethodDescriptor() != null
-                    ? getSingleAbstractMethodDescriptor().specializeTypeVariables(parameterization)
-                    : null)
         .setDeclaredFieldDescriptorsFactory(
             () ->
                 getDeclaredFieldDescriptors().stream()
@@ -1361,15 +1353,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
     public abstract Builder setTypeArgumentDescriptors(
         Iterable<? extends TypeDescriptor> typeArgumentDescriptors);
-
-    public abstract Builder setSingleAbstractMethodDescriptorFactory(
-        DescriptorFactory<MethodDescriptor> singleAbstractMethodDescriptorFactory);
-
-    public Builder setSingleAbstractMethodDescriptorFactory(
-        Supplier<MethodDescriptor> singleAbstractMethodDescriptorFactory) {
-      return setSingleAbstractMethodDescriptorFactory(
-          typeDescriptor -> singleAbstractMethodDescriptorFactory.get());
-    }
 
     public abstract Builder setDeclaredMethodDescriptorsFactory(
         DescriptorFactory<ImmutableList<MethodDescriptor>> declaredMethodDescriptorsFactory);

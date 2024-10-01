@@ -225,6 +225,9 @@ class KotlinEnvironment(
         .setDeclaredMethodDescriptorsFactory { _ ->
           ImmutableList.copyOf(irClass.methods.map(::getDeclaredMethodDescriptor))
         }
+        .setSingleAbstractMethodDescriptorFactory { _ ->
+          irClass.singleAbstractMethod?.let(::getDeclaredMethodDescriptor)
+        }
         .setDeclaredFieldDescriptorsFactory { _ ->
           ImmutableList.copyOf(
             irClass.enumEntries.map(::getDeclaredFieldDescriptor) +
@@ -406,9 +409,6 @@ class KotlinEnvironment(
           classDeclaration.enumEntries.map(::getDeclaredFieldDescriptor) +
             classDeclaration.getDeclaredFields().map { getFieldDescriptor(it, emptyMap()) }
         )
-      }
-      .setSingleAbstractMethodDescriptorFactory { _ ->
-        classDeclaration.singleAbstractMethod?.let { getMethodDescriptor(it, emptyMap()) }
       }
       .setNullable(irType.isNullable())
       .setTypeArgumentDescriptors(irType.arguments.map(::getReferenceTypeDescriptorForTypeArgument))

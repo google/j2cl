@@ -199,6 +199,7 @@ public final class LambdaAdaptorTypeDescriptors {
         .setEnclosingTypeDescriptor(adaptorTypeDescriptor)
         // Remove the method type parameters as they when moved to the adaptor type.
         .setTypeParameterTypeDescriptors(ImmutableList.of())
+        .setTypeArgumentTypeDescriptors(ImmutableList.of())
         .setSynthetic(false)
         .setAbstract(false)
         .build();
@@ -219,13 +220,11 @@ public final class LambdaAdaptorTypeDescriptors {
     return DeclaredTypeDescriptor.newBuilder()
         .setTypeDeclaration(jsFunctionDeclaration)
         .setTypeArgumentDescriptors(functionalTypeDescriptor.getTypeArgumentDescriptors())
-        .setSingleAbstractMethodDescriptorFactory(
-            jsfunctionTypeDescriptor ->
-                createJsFunctionMethodDescriptor(
-                    jsfunctionTypeDescriptor, functionalMethodDescriptor))
         .setDeclaredMethodDescriptorsFactory(
             jsfunctionTypeDescriptor ->
-                ImmutableList.of(jsfunctionTypeDescriptor.getSingleAbstractMethodDescriptor()))
+                ImmutableList.of(
+                    createJsFunctionMethodDescriptor(
+                        jsfunctionTypeDescriptor, functionalMethodDescriptor)))
         .build();
   }
 
@@ -266,11 +265,10 @@ public final class LambdaAdaptorTypeDescriptors {
                 ImmutableList.of(
                     createJsFunctionMethodDescriptor(
                         jsfunctionTypeDeclaration.toUnparameterizedTypeDescriptor(),
-                        functionalTypeDescriptor.getSingleAbstractMethodDescriptor())))
+                        typeDeclaration.getSingleAbstractMethodDescriptor())))
         .setUnparameterizedTypeDescriptorFactory(
-            () ->
-                createJsFunctionTypeDescriptor(
-                    functionalTypeDescriptor.toUnparameterizedTypeDescriptor()))
+            () -> createJsFunctionTypeDescriptor(typeDeclaration.toUnparameterizedTypeDescriptor()))
+        .setSingleAbstractMethodDescriptorFactory(t -> t.getDeclaredMethodDescriptors().get(0))
         .setVisibility(Visibility.PUBLIC)
         .setKind(Kind.INTERFACE)
         .build();

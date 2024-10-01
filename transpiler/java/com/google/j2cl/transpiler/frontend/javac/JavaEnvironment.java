@@ -1026,16 +1026,6 @@ class JavaEnvironment {
     DeclaredTypeDescriptor typeDescriptor =
         DeclaredTypeDescriptor.newBuilder()
             .setTypeDeclaration(typeDeclaration)
-            .setSingleAbstractMethodDescriptorFactory(
-                td -> {
-                  MethodSymbol functionalInterfaceMethod = getFunctionalInterfaceMethod(classType);
-                  return createMethodDescriptor(
-                      td,
-                      (MethodSymbol)
-                          functionalInterfaceMethod.asMemberOf(
-                              ((ClassSymbol) classType.asElement()).asType(), internalTypes),
-                      getFunctionalInterfaceMethodDecl(classType));
-                })
             .setTypeArgumentDescriptors(
                 createTypeDescriptors(getTypeArguments(classType), inNullMarkedScope))
             .setDeclaredFieldDescriptorsFactory(declaredFields)
@@ -1182,6 +1172,11 @@ class JavaEnvironment {
           return listBuilder.build();
         };
 
+    Supplier<MethodDescriptor> singleAbstractMethod =
+        () ->
+            createDeclarationMethodDescriptor(
+                getFunctionalInterfaceMethodDecl(typeElement.asType()));
+
     Supplier<ImmutableList<FieldDescriptor>> declaredFields =
         () ->
             typeElement.getEnclosedElements().stream()
@@ -1244,6 +1239,7 @@ class JavaEnvironment {
                 .collect(toImmutableList()))
         .setVisibility(getVisibility(typeElement))
         .setDeclaredMethodDescriptorsFactory(declaredMethods)
+        .setSingleAbstractMethodDescriptorFactory(singleAbstractMethod)
         .setDeclaredFieldDescriptorsFactory(declaredFields)
         .setUnusableByJsSuppressed(JsInteropAnnotationUtils.isUnusableByJsSuppressed(typeElement))
         .setDeprecated(isDeprecated(typeElement))

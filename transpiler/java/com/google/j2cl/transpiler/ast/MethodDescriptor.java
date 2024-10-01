@@ -477,7 +477,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     DeclaredTypeDescriptor enclosingType = getEnclosingTypeDescriptor();
     if (enclosingType.isJsFunctionInterface()) {
-      return this == enclosingType.getSingleAbstractMethodDescriptor();
+      MethodDescriptor singleAbstractMethod = enclosingType.getSingleAbstractMethodDescriptor();
+      return singleAbstractMethod != null
+          && this == singleAbstractMethod.getDeclarationDescriptor();
     }
 
     return enclosingType.isJsFunctionImplementation()

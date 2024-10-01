@@ -530,7 +530,6 @@ public class JdtEnvironment {
     return NullabilityAnnotation.NONE;
   }
 
-
   private static boolean isIntersectionType(ITypeBinding binding) {
     return binding.isIntersectionType()
         // JDT returns true for isIntersectionType() for type variables, wildcards and captures
@@ -1058,7 +1057,6 @@ public class JdtEnvironment {
                 () -> createFieldDescriptorsOrderedById(typeBinding.getDeclaredFields()))
             .setDeclaredMethodDescriptorsFactory(
                 () -> createMethodDescriptors(typeBinding.getDeclaredMethods()))
-            .setSingleAbstractMethodDescriptorFactory(() -> getFunctionInterfaceMethod(typeBinding))
             .build();
     putTypeDescriptorInCache(inNullMarkedScope, typeBinding, typeDescriptor);
     return typeDescriptor;
@@ -1066,22 +1064,12 @@ public class JdtEnvironment {
 
   @Nullable
   private MethodDescriptor getFunctionInterfaceMethod(ITypeBinding typeBinding) {
+    checkArgument(typeBinding == typeBinding.getTypeDeclaration());
     IMethodBinding functionalInterfaceMethod = typeBinding.getFunctionalInterfaceMethod();
     if (!typeBinding.isInterface() || functionalInterfaceMethod == null) {
       return null;
     }
-    // typeBinding.getFunctionalInterfaceMethod returns in some cases the method declaration
-    // instead of the method with the corresponding parameterization. Note: this is observed in
-    // the case when a type is parameterized with a wildcard, e.g. JsFunction<?>.
-    return createMethodDescriptor(
-        Arrays.stream(typeBinding.getDeclaredMethods())
-            .filter(
-                methodBinding ->
-                    methodBinding
-                        .getMethodDeclaration()
-                        .equals(functionalInterfaceMethod.getMethodDeclaration()))
-            .findFirst()
-            .orElse(functionalInterfaceMethod));
+    return createMethodDescriptor(functionalInterfaceMethod);
   }
 
   private DeclaredTypeDescriptor getCachedTypeDescriptor(
@@ -1207,6 +1195,7 @@ public class JdtEnvironment {
             .setVisibility(getVisibility(typeBinding))
             .setDeclaredMethodDescriptorsFactory(
                 () -> createMethodDescriptors(typeBinding.getDeclaredMethods()))
+            .setSingleAbstractMethodDescriptorFactory(() -> getFunctionInterfaceMethod(typeBinding))
             .setDeclaredFieldDescriptorsFactory(
                 () -> createFieldDescriptorsOrderedById(typeBinding.getDeclaredFields()))
             .setMemberTypeDeclarationsFactory(
