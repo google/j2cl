@@ -35,7 +35,7 @@ public class RerunningJ2clTranspilerTest extends TestCase {
         .assertNoWarnings();
   }
 
-  public void testCompileKotlinStdLibTwice() throws Exception {
+  public void testCompileKotlinBox2DTwice() throws Exception {
     // Unlike for the java frontend test that use the JRE, we are not using Kotlin stdlib for
     // replicating the test for the Koltin frontend. Compiling stdlib is challenging due to the
     // complexity of stdlib compilation(special flags, builtins, etc.) and could require temporary

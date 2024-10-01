@@ -145,6 +145,7 @@ java_test(
         ":libjre_native.jar",
         "//samples/box2d/src/main/kotlin/idiomatic:libbox2d_kt_library-j2cl-src.jar",
     ],
+    shard_count = 2,
     runtime_deps = [
         "//transpiler/java/com/google/j2cl/transpiler/frontend/kotlin",
     ],
