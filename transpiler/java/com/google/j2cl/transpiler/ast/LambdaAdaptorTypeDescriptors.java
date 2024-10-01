@@ -213,14 +213,6 @@ public final class LambdaAdaptorTypeDescriptors {
     MethodDescriptor functionalMethodDescriptor =
         functionalTypeDescriptor.getSingleAbstractMethodDescriptor();
 
-    // Remove varargs if the functional method is not a JsMethod, otherwise it will become
-    // JsVarargs due to being varargs in a JsFunction, that will cause it to loose
-    // runtime type checking on the varargs parameter.
-    MethodDescriptor jsFunctionMethodDescriptor =
-        !functionalMethodDescriptor.isJsMethod()
-            ? removeJsMethodVarargs(functionalMethodDescriptor)
-            : functionalMethodDescriptor;
-
     TypeDeclaration jsFunctionDeclaration =
         createJsFunctionTypeDeclaration(functionalTypeDescriptor);
 
@@ -230,7 +222,7 @@ public final class LambdaAdaptorTypeDescriptors {
         .setSingleAbstractMethodDescriptorFactory(
             jsfunctionTypeDescriptor ->
                 createJsFunctionMethodDescriptor(
-                    jsfunctionTypeDescriptor, jsFunctionMethodDescriptor))
+                    jsfunctionTypeDescriptor, functionalMethodDescriptor))
         .setDeclaredMethodDescriptorsFactory(
             jsfunctionTypeDescriptor ->
                 ImmutableList.of(jsfunctionTypeDescriptor.getSingleAbstractMethodDescriptor()))
@@ -287,25 +279,38 @@ public final class LambdaAdaptorTypeDescriptors {
   /** Returns the MethodDescriptor for the single method in the synthetic @JsFunction interface. */
   private static MethodDescriptor createJsFunctionMethodDescriptor(
       DeclaredTypeDescriptor jsfunctionTypeDescriptor, MethodDescriptor singleAbstractMethod) {
+    // Remove varargs if the functional method is not a JsMethod, otherwise it will become
+    // JsVarargs due to being varargs in a JsFunction, that will cause it to loose
+    // runtime type checking on the varargs parameter.
+    singleAbstractMethod =
+        singleAbstractMethod.isJsMethod()
+            ? singleAbstractMethod
+            : removeJsMethodVarargs(singleAbstractMethod);
+    // Remove the type parameters in the functional method since they are not allowed in
+    // @JsFunction interfaces.
+    singleAbstractMethod = singleAbstractMethod.withoutTypeParameters();
+
+    return createJsFunctionMethodDescriptorImpl(jsfunctionTypeDescriptor, singleAbstractMethod);
+  }
+
+  private static MethodDescriptor createJsFunctionMethodDescriptorImpl(
+      DeclaredTypeDescriptor jsfunctionTypeDescriptor, MethodDescriptor simpliedMethod) {
     // TODO(rluble): Migrate to MethodDescriptor.transform.
-    return MethodDescriptor.Builder.from(singleAbstractMethod)
+    return MethodDescriptor.Builder.from(simpliedMethod)
         .setEnclosingTypeDescriptor(jsfunctionTypeDescriptor)
         .setDeclarationDescriptor(
             createRelatedMethodDeclaration(
                 t ->
-                    createJsFunctionMethodDescriptor(
-                        t, singleAbstractMethod.getDeclarationDescriptor()),
+                    createJsFunctionMethodDescriptorImpl(
+                        t, simpliedMethod.getDeclarationDescriptor()),
                 jsfunctionTypeDescriptor))
         .setOriginalJsInfo(
             JsInfo.newBuilder()
                 .setJsMemberType(JsMemberType.NONE)
-                .setJsAsync(singleAbstractMethod.getJsInfo().isJsAsync())
+                .setJsAsync(simpliedMethod.getJsInfo().isJsAsync())
                 .build())
         .setNative(false)
-        .build()
-        // Remove the type parameters in the functional method since they are not allowed in
-        // @JsFunction interfaces.
-        .withoutTypeParameters();
+        .build();
   }
 
   @Nullable
