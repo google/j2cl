@@ -429,13 +429,19 @@ public class JdtEnvironment {
         TypeDescriptor boundTypeDescriptor =
             createTypeDescriptorWithNullability(
                 bound, bound.getTypeAnnotations(), inNullMarkedScope);
-        return typeBinding.isUpperbound()
-            ? boundTypeDescriptor
-            : TypeDescriptors.get()
-                .javaLangObject
-                // Use the nullability of the lower bound for the upper bound of a lower bounded
-                // wildcard.
-                .toNullable(boundTypeDescriptor.isNullable());
+        if (typeBinding.isUpperbound()) {
+          return boundTypeDescriptor;
+        }
+
+        // Fallback to use type bounds to cover cases for lower bounds that also have upper bound
+        // type constraints as in the following example:
+        //
+        // interface Parent {}
+        // interface Child extends Parent {}
+        // interface Generic<T extends Parent> {}
+        //
+        // To satisfy declaration constraints, the upper bound for `Generic<? super Child>` should
+        // be `Parent`.
       }
     }
     ITypeBinding[] bounds = typeBinding.getTypeBounds();
