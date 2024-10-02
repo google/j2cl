@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.j2cl.transpiler.ast.AstUtils.isBoxableJsEnumType;
 
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.SourcePosition;
@@ -377,10 +378,10 @@ public final class ConversionContextVisitor extends AbstractRewriter {
 
     // JsEnum boxing conversion context.
     if (AstUtils.matchesJsEnumBoxingConversionContext(binaryExpression)) {
-      if (AstUtils.isNonNativeJsEnum(leftOperand.getDeclaredTypeDescriptor())) {
+      if (isBoxableJsEnumType(leftOperand.getDeclaredTypeDescriptor())) {
         leftOperand = contextRewriter.rewriteJsEnumBoxingConversionContext(leftOperand);
       }
-      if (AstUtils.isNonNativeJsEnum(rightOperand.getDeclaredTypeDescriptor())) {
+      if (isBoxableJsEnumType(rightOperand.getDeclaredTypeDescriptor())) {
         rightOperand = contextRewriter.rewriteJsEnumBoxingConversionContext(rightOperand);
       }
     }

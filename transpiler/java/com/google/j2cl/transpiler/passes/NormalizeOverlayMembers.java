@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.j2cl.transpiler.ast.AstUtils.isBoxableJsEnumType;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AstUtils;
@@ -164,7 +165,7 @@ public class NormalizeOverlayMembers extends NormalizationPass {
       return false;
     }
     return memberDescriptor.isJsOverlay()
-        || (AstUtils.isNonNativeJsEnum(memberDescriptor.getEnclosingTypeDescriptor())
+        || (isBoxableJsEnumType(memberDescriptor.getEnclosingTypeDescriptor())
             && !memberDescriptor.isEnumConstant());
   }
 }

@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.j2cl.transpiler.ast.AstUtils.isBoxableJsEnumType;
 
 import com.google.common.collect.Iterables;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
@@ -169,7 +170,7 @@ public class NormalizeCasts extends NormalizationPass {
       // of an intersection cast is the erasure of its first component).
       castTypeDescriptor = ((IntersectionTypeDescriptor) castTypeDescriptor).getFirstType();
     }
-    if (AstUtils.isNonNativeJsEnum(castTypeDescriptor)) {
+    if (isBoxableJsEnumType(castTypeDescriptor)) {
       // TODO(b/118615488): Surface enum boxed types so that this hack is not needed.
       castTypeDescriptor = TypeDescriptors.getEnumBoxType(castTypeDescriptor);
     }

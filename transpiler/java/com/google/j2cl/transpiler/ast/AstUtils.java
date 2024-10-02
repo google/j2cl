@@ -1106,7 +1106,7 @@ public final class AstUtils {
   }
 
   /** Returns true {@code typeDescriptor} requires bridges be generated for boxing/unboxing. */
-  public static boolean needsJsEnumBoxingBridges(TypeDescriptor typeDescriptor) {
+  public static boolean isBoxableJsEnumType(TypeDescriptor typeDescriptor) {
     return isJsEnumBoxingSupported() && isNonNativeJsEnum(typeDescriptor);
   }
 
@@ -1115,14 +1115,6 @@ public final class AstUtils {
     // Check if the JsEnum boxed type exists for the current backend. Not all backends utilize
     // JsEnum semantics.
     return TypeDescriptors.get().javaemulInternalBoxedLightEnum != null;
-  }
-
-  /**
-   * Returns true if {@code typeDescriptor} is a non native JsEnum, i.e. a JsEnum that requires
-   * boxing.
-   */
-  public static boolean isNonNativeJsEnum(TypeDeclaration typeDeclaration) {
-    return typeDeclaration.isJsEnum() && !typeDeclaration.isNative();
   }
 
   /** Returns true if {@code typeDescriptor} is a non native JsEnum array. */

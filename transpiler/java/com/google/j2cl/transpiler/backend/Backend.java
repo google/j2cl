@@ -501,7 +501,7 @@ public enum Backend {
 
           // Passes that transform the AST to match the requirements of the Wasm instruction set.
           // Make null literals to have the type required by their use.
-          () -> new NormalizeNullLiterals(/* boxJsEnumNulls= */ true),
+          NormalizeNullLiterals::new,
           // Rewrite 'a != b' to '!(a == b)'
           RewriteReferenceEqualityOperations::new,
 
@@ -647,7 +647,7 @@ public enum Backend {
 
           // Passes that transform the AST to match the requirements of the Wasm instruction set.
           // Make null literals to have the type required by their use.
-          () -> new NormalizeNullLiterals(/* boxJsEnumNulls= */ true),
+          NormalizeNullLiterals::new,
           // Rewrite 'a != b' to '!(a == b)'
           RewriteReferenceEqualityOperations::new,
 

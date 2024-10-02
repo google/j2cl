@@ -22,6 +22,7 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableSet.toImmutableSet;
 import static com.google.common.collect.MoreCollectors.onlyElement;
 import static com.google.common.collect.MoreCollectors.toOptional;
+import static com.google.j2cl.transpiler.ast.AstUtils.isBoxableJsEnumType;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toCollection;
 
@@ -1051,7 +1052,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         // which would be the right one that is consistent with the overridden method.
         parameterDescriptors.add(fromBridge);
       } else if (fromTarget.getTypeDescriptor() != fromBridgeDeclaration.getTypeDescriptor()
-          && AstUtils.needsJsEnumBoxingBridges(fromTarget.getTypeDescriptor())) {
+          && isBoxableJsEnumType(fromTarget.getTypeDescriptor())) {
         // Type was specialized to a non-native JsEnum, use the boxed type in the bridge
         // parameter.
         parameterDescriptors.add(
@@ -1093,7 +1094,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
       // Kotlin bridges to method that specializes the return to primitive.
       return bridgeReturnTypeDescriptor;
     }
-    if (AstUtils.needsJsEnumBoxingBridges(targetReturnTypeDescriptor)
+    if (isBoxableJsEnumType(targetReturnTypeDescriptor)
         && bridgeMethodDescriptor.getDeclarationDescriptor().getReturnTypeDescriptor()
             != targetReturnTypeDescriptor) {
       // Return type descriptor specialized to non native enum, expose it with the proper boxed
