@@ -47,6 +47,9 @@ class TargetInfo:
     repo_util.sync_j2size_repo()
     return target_info
 
+  def is_wasm(self):
+    return self.blaze_target.endswith(".wasm")
+
 
 def _create_target_info(target):
   decomposed_target = target.split("@", 1)
@@ -100,17 +103,15 @@ def main(argv):
   else:
     modified = _create_target_info(argv.targets[1])
 
-  _diff(original, modified, argv.size, argv.filter_noise)
+  _diff(original, modified, argv.size, argv.lines, argv.filter_noise)
 
 
-def _diff(original, modified, is_size, filter_noise):
+def _diff(original, modified, is_size, is_size_lines, filter_noise):
   print(f"Constructing a diff of changes in '{modified.blaze_target}'.")
-
-  is_wasm = modified.blaze_target.endswith(".wasm")
 
   original_targets = [original.blaze_target]
   modified_targets = [modified.blaze_target]
-  if is_wasm:
+  if original.is_wasm():
     original_targets += [original.blaze_target + ".map"]
     modified_targets += [modified.blaze_target + ".map"]
 
@@ -124,10 +125,10 @@ def _diff(original, modified, is_size, filter_noise):
   )
 
   if is_size:
-    _diff_size(original, modified)
+    _diff_size(original, modified, is_size_lines)
     return
 
-  if is_wasm:
+  if original.is_wasm():
     print("  Disassembling.")
     repo_util.build(["//third_party/binaryen:wasm-dis"])
     wasm_dis_cmd = ["blaze-bin/third_party/binaryen/wasm-dis", "--enable-gc"]
@@ -187,7 +188,7 @@ def _diff(original, modified, is_size, filter_noise):
   )
 
 
-def _diff_size(original, modified):
+def _diff_size(original, modified, is_size_lines):
   """Calculates and outputs the size difference of the original and modified targets."""
   print("  Performing size diff...")
 
@@ -202,6 +203,25 @@ def _diff_size(original, modified):
       repo_util.get_compressed_size(original.get_output_file()),
       repo_util.get_compressed_size(modified.get_output_file()),
   )
+
+  if original.is_wasm():
+    # go/bloaty
+    subprocess.call(
+        [
+            "/google/bin/releases/protobuf-team/bloaty/bloaty",
+            "--allow_unsafe_non_google3_input",
+            "--domain=file",
+            "-d", "inlines" if is_size_lines else "compileunits",
+            "-n", "0",  # No limit on number of rows
+            "--source-map="
+            + f"{original.get_output_file()}={original.get_output_file()}.map",
+            "--source-map="
+            + f"{modified.get_output_file()}={modified.get_output_file()}.map",
+            f"{modified.get_output_file()}",
+            "--",
+            f"{original.get_output_file()}",
+        ]
+    )
 
 
 def _print_size_diff(prefix, original_size, modified_size):
@@ -218,6 +238,13 @@ def add_arguments(parser):
       default=False,
       action=argparse.BooleanOptionalAction,
       help="Perform a size diff instead of a binary diff.",
+  )
+
+  parser.add_argument(
+      "--lines",
+      default=False,
+      action=argparse.BooleanOptionalAction,
+      help="For the size diff, compare by line. Defaults to file. See --size.",
   )
 
   parser.add_argument(
