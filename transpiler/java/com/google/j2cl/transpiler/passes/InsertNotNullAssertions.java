@@ -146,7 +146,7 @@ public final class InsertNotNullAssertions extends NormalizationPass {
             ConditionalExpression.newBuilder()
                 .setConditionExpression(expression.infixEqualsNull())
                 .setTrueExpression(nonNullExpression)
-                .setFalseExpression(expression.clone())
+                .setFalseExpression(expression.clone().postfixNotNullAssertion())
                 .setTypeDescriptor(TypeDescriptors.get().javaLangObject.toNonNullable())
                 .build())
         .build();

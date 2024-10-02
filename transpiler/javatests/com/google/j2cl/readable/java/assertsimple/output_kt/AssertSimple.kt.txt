@@ -46,12 +46,12 @@ open class AssertSimple {
     "null"
    }
    assert(1 + 2 == 3) {
-    if (args == null) "null" else args as Any
+    if (args == null) "null" else args!!
    }
    assert(1 + 2 == 3) {
     run {
      val tmp: String? = args!![0]
-     if (tmp == null) "null" else tmp as Any
+     if (tmp == null) "null" else tmp!!
     }
    }
    assert(1 + 2 == 3) {
