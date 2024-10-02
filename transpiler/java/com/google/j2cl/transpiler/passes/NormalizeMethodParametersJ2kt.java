@@ -118,6 +118,11 @@ public class NormalizeMethodParametersJ2kt extends NormalizationPass {
           @Override
           public Node rewriteCatchClause(CatchClause catchClause) {
             Variable exceptionVariable = catchClause.getExceptionVariable();
+
+            TypeDescriptor exceptionTypeDescriptor = exceptionVariable.getTypeDescriptor();
+            exceptionVariable.setTypeDescriptor(
+                exceptionVariable.getTypeDescriptor().toNonNullable());
+
             if (exceptionVariable.isFinal()) {
               return catchClause;
             }
@@ -126,7 +131,8 @@ public class NormalizeMethodParametersJ2kt extends NormalizationPass {
                 .setBody(
                     redeclareItems(
                         catchClause.getBody(),
-                        ImmutableList.of(new RewriteItem(exceptionVariable))))
+                        ImmutableList.of(
+                            new RewriteItem(exceptionVariable, exceptionTypeDescriptor))))
                 .build();
           }
 

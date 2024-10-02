@@ -39,9 +39,9 @@ open class TryCatch {
   try {
    throw ClassCastException()
   } catch (e: NullPointerException) {
-   throw e!!
+   throw e
   } catch (e: kotlin.ClassCastException) {
-   throw e!!
+   throw e
   } catch (r: RuntimeException) {
    var r_1: RuntimeException? = r
    r_1 = null
@@ -65,7 +65,7 @@ open class TryCatch {
   try {
    throw ClassCastException()
   } catch (e: Throwable) {
-   throw e!!
+   throw e
   }
  }
 
@@ -88,7 +88,7 @@ open class TryCatch {
     throw java.lang.Exception()
    } catch (___exceptionFromTry: Throwable) {
     ___primaryExc = ___exceptionFromTry
-    throw ___exceptionFromTry!!
+    throw ___exceptionFromTry
    } finally {
     ___primaryExc = Exceptions.safeClose(thing2, ___primaryExc)
     ___primaryExc = Exceptions.safeClose(thing, ___primaryExc)
@@ -111,7 +111,7 @@ open class TryCatch {
     throw java.lang.Exception()
    } catch (___exceptionFromTry: Throwable) {
     ___primaryExc = ___exceptionFromTry
-    throw ___exceptionFromTry!!
+    throw ___exceptionFromTry
    } finally {
     ___primaryExc = Exceptions.safeClose(___resource_1, ___primaryExc)
     ___primaryExc = Exceptions.safeClose(___resource, ___primaryExc)
@@ -130,7 +130,7 @@ open class TryCatch {
     throw java.lang.Exception()
    } catch (___exceptionFromTry: Throwable) {
     ___primaryExc = ___exceptionFromTry
-    throw ___exceptionFromTry!!
+    throw ___exceptionFromTry
    } finally {
     ___primaryExc = Exceptions.safeClose(___resource, ___primaryExc)
     if (___primaryExc != null) throw ___primaryExc!!

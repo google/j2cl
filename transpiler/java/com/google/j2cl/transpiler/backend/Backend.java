@@ -722,6 +722,9 @@ public enum Backend {
           NormalizeVarargParametersJ2kt::new,
           NormalizeFieldInitializationJ2kt::new,
           NormalizeVariableInitialization::new,
+          MakeVariablesFinal::new,
+          // Needs to run after NormalizeVarargParametersJ2kt and MakeVariablesFinal.
+          NormalizeMethodParametersJ2kt::new,
           NormalizeLabels::new,
           NormalizeForStatements::new,
           NormalizeSwitchStatementsJ2kt::new,
@@ -739,10 +742,6 @@ public enum Backend {
 
           // Needs to run after non-null assertions are inserted.
           InsertStringConversionsJ2kt::new,
-          MakeVariablesFinal::new,
-
-          // Needs to run after NormalizeVarargParametersJ2kt.
-          NormalizeMethodParametersJ2kt::new,
 
           // Needs to run after NormalizeNonFinalVariablesJ2kt.
           InsertExplicitArrayCoercionCasts::new,
