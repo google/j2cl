@@ -23,6 +23,7 @@ readable_example(
     ]),
     # Native JsType does not make sense for j2kt-native.
     build_kt_native_readables = False,
+    # TODO(b/288128177): Calling Object methods on native types currently not supported in Wasm.
     generate_wasm_readables = False,
     deps = [
         "//third_party:jsinterop-annotations-j2cl",
