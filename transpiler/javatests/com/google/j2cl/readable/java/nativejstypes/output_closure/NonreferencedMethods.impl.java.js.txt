@@ -1,0 +1,40 @@
+goog.module('nativejstypes.NonreferencedMethods$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class NonreferencedMethods extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!NonreferencedMethods} */
+ static $create__() {
+  NonreferencedMethods.$clinit();
+  let $instance = new NonreferencedMethods();
+  $instance.$ctor__nativejstypes_NonreferencedMethods__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nativejstypes_NonreferencedMethods__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  NonreferencedMethods.$clinit = () =>{};
+  NonreferencedMethods.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NonreferencedMethods;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(NonreferencedMethods, 'nativejstypes.NonreferencedMethods');
+
+exports = NonreferencedMethods;
+
+//# sourceMappingURL=NonreferencedMethods.js.map

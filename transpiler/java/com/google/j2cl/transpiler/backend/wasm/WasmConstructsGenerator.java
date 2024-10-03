@@ -350,11 +350,6 @@ public class WasmConstructsGenerator {
         methodDescriptor.getEnclosingTypeDescriptor().isNative()
             && methodDescriptor.isConstructor();
     JsMethodImport jsMethodImport = environment.getJsMethodImport(methodDescriptor);
-    if (jsMethodImport == null && isNativeConstructor) {
-      // TODO(b/279187295): These are implicit constructors of native types that don't really exist,
-      // remove this check once they are removed from the AST.
-      return;
-    }
     builder.newLine();
     builder.newLine();
     builder.append(";;; " + method.getReadableDescription());

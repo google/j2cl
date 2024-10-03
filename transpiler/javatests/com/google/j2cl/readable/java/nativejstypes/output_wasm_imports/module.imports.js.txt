@@ -5,6 +5,8 @@ const j2wasm_DoubleUtils = goog.require('j2wasm.DoubleUtils');
 const j2wasm_ExceptionUtils = goog.require('j2wasm.ExceptionUtils');
 const j2wasm_StringUtils = goog.require('j2wasm.StringUtils');
 const nativejstypes_Bar = goog.require('nativejstypes.Bar');
+const nativejstypes_NativeNonreferencedMethods = goog.require('nativejstypes.NativeNonreferencedMethods');
+const nativejstypes_NativeReferencedPrivateMethods = goog.require('nativejstypes.NativeReferencedPrivateMethods');
 const nativejstypes_Nullability = goog.require('nativejstypes.Nullability');
 const toplevel = goog.require('toplevel');
 
@@ -93,6 +95,8 @@ function getImports() {
    'get nativejstypes.Bar.f': () => nativejstypes_Bar.f,
    'get nativejstypes.Bar.x': (/** !nativejstypes_Bar */ $instance, ) => $instance.x,
    'get nativejstypes.Bar.y': (/** !nativejstypes_Bar */ $instance, ) => $instance.y,
+   'get nativejstypes.NativeReferencedPrivateMethods.s': () => nativejstypes_NativeReferencedPrivateMethods.s,
+   'get nativejstypes.NativeReferencedPrivateMethods.x': (/** !nativejstypes_NativeReferencedPrivateMethods */ $instance, ) => $instance.x,
    'get toplevel.Nested.x': (/** !toplevel.Nested */ $instance, ) => $instance.x,
    'get toplevel.x': () => toplevel.x,
    'j2wasm.CharUtils.charToLowerCase': j2wasm_CharUtils.charToLowerCase,
@@ -113,6 +117,10 @@ function getImports() {
    'nativejstypes.Bar.constructor$2': (/** number */ x, /** number */ y, ) => new nativejstypes_Bar(x, y, ),
    'nativejstypes.Bar.getStatic': nativejstypes_Bar.getStatic,
    'nativejstypes.Bar.product': (/** !nativejstypes_Bar */ $instance, ) => $instance.product(),
+   'nativejstypes.NativeNonreferencedMethods.getInstance2': (/** !nativejstypes_NativeNonreferencedMethods */ $instance, ) => $instance.getInstance2(),
+   'nativejstypes.NativeReferencedPrivateMethods.constructor': () => new nativejstypes_NativeReferencedPrivateMethods(),
+   'nativejstypes.NativeReferencedPrivateMethods.getInstance': (/** !nativejstypes_NativeReferencedPrivateMethods */ $instance, ) => $instance.getInstance(),
+   'nativejstypes.NativeReferencedPrivateMethods.getStatic': nativejstypes_NativeReferencedPrivateMethods.getStatic,
    'nativejstypes.Nullability.acceptsNull$1': (/** !nativejstypes_Nullability */ $instance, /** string */ arg, ) => $instance.acceptsNull(arg, ),
    'nativejstypes.Nullability.constructor': () => new nativejstypes_Nullability(),
    'nativejstypes.Nullability.doesNotAcceptNull$1': (/** !nativejstypes_Nullability */ $instance, /** string */ arg, ) => $instance.doesNotAcceptNull(arg, ),

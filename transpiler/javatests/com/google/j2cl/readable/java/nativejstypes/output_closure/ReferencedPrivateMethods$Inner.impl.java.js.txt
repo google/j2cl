@@ -1,0 +1,49 @@
+goog.module('nativejstypes.ReferencedPrivateMethods.Inner$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let NativeReferencedPrivateMethods = goog.forwardDeclare('nativejstypes.NativeReferencedPrivateMethods');
+
+class Inner extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Inner} */
+ static $create__() {
+  Inner.$clinit();
+  let $instance = new Inner();
+  $instance.$ctor__nativejstypes_ReferencedPrivateMethods_Inner__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nativejstypes_ReferencedPrivateMethods_Inner__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {number} */
+ m_getInstance__int() {
+  let t = new NativeReferencedPrivateMethods();
+  return t.x + NativeReferencedPrivateMethods.s + t.getInstance() + NativeReferencedPrivateMethods.getStatic() | 0;
+ }
+ /** @nodts */
+ static $clinit() {
+  Inner.$clinit = () =>{};
+  Inner.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Inner;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  NativeReferencedPrivateMethods = goog.module.get('nativejstypes.NativeReferencedPrivateMethods');
+ }
+}
+$Util.$setClassMetadata(Inner, 'nativejstypes.ReferencedPrivateMethods$Inner');
+
+exports = Inner;
+
+//# sourceMappingURL=ReferencedPrivateMethods$Inner.js.map

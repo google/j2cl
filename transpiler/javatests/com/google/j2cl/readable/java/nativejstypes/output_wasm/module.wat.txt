@@ -75,6 +75,28 @@
  ))
 )
 
+;;; Code for nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.$Overlay [type definition]
+(type $nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.$Overlay.vtable (sub (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ ))
+)
+(type $nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.$Overlay (sub (struct
+ (field $vtable (ref $nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.$Overlay.vtable))
+ (field $itable (ref $itable))
+ ))
+)
+
+;;; Code for nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass.$Overlay [type definition]
+(type $nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass.$Overlay.vtable (sub (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ ))
+)
+(type $nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass.$Overlay (sub (struct
+ (field $vtable (ref $nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass.$Overlay.vtable))
+ (field $itable (ref $itable))
+ ))
+)
+
 ;;; Code for nativejstypes.Nullability.$Overlay [type definition]
 (type $nativejstypes.Nullability.$Overlay.vtable (sub (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
@@ -93,6 +115,17 @@
 )
 (type $nativejstypes.NullabilityNullMarked.$Overlay (sub (struct
  (field $vtable (ref $nativejstypes.NullabilityNullMarked.$Overlay.vtable))
+ (field $itable (ref $itable))
+ ))
+)
+
+;;; Code for nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay [type definition]
+(type $nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay.vtable (sub (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ ))
+)
+(type $nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay (sub (struct
+ (field $vtable (ref $nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay.vtable))
  (field $itable (ref $itable))
  ))
 )
@@ -159,9 +192,61 @@
  ))
 )
 
+;;; Code for nativejstypes.NonreferencedMethods [type definition]
+(type $nativejstypes.NonreferencedMethods.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+(type $nativejstypes.NonreferencedMethods (sub $java.lang.Object (struct
+ (field $vtable (ref $nativejstypes.NonreferencedMethods.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
+;;; Code for nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass [type definition]
+
+;;; Code for nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass [type definition]
+
 ;;; Code for nativejstypes.Nullability [type definition]
 
 ;;; Code for nativejstypes.NullabilityNullMarked [type definition]
+
+;;; Code for nativejstypes.ReferencedPrivateMethods [type definition]
+(type $nativejstypes.ReferencedPrivateMethods.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+(type $nativejstypes.ReferencedPrivateMethods (sub $java.lang.Object (struct
+ (field $vtable (ref $nativejstypes.ReferencedPrivateMethods.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
+;;; Code for nativejstypes.ReferencedPrivateMethods.Inner [type definition]
+(type $nativejstypes.ReferencedPrivateMethods.Inner.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getInstance__int (ref $function.m_getInstance__int))
+ ))
+)
+(type $nativejstypes.ReferencedPrivateMethods.Inner (sub $java.lang.Object (struct
+ (field $vtable (ref $nativejstypes.ReferencedPrivateMethods.Inner.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
+;;; Code for nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods [type definition]
 
 ;;; Code for nativejstypes.TopLevel [type definition]
 
@@ -183,9 +268,15 @@
 
 ;;; Code for nativejstypes.Headers.$Overlay [imports]
 
+;;; Code for nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.$Overlay [imports]
+
+;;; Code for nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass.$Overlay [imports]
+
 ;;; Code for nativejstypes.Nullability.$Overlay [imports]
 
 ;;; Code for nativejstypes.NullabilityNullMarked.$Overlay [imports]
+
+;;; Code for nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay [imports]
 
 ;;; Code for nativejstypes.TopLevel.$Overlay [imports]
 
@@ -366,6 +457,18 @@
 
 ;;; Code for nativejstypes.Main [imports]
 
+;;; Code for nativejstypes.NonreferencedMethods [imports]
+
+;;; Code for nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass [imports]
+
+;;; Code for nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass [imports]
+
+;;; int NativeMembersOnPrivateClass.getInstance2()
+(func $m_getInstance2__int@nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass (import "imports" "nativejstypes.NativeNonreferencedMethods.getInstance2") 
+ (param $this (ref null extern))
+ (result i32)
+)
+
 ;;; Code for nativejstypes.Nullability [imports]
 
 ;;; Nullability()
@@ -402,6 +505,39 @@
 (func $m_doesNotAcceptNull__java_lang_String_NativeString__void@nativejstypes.NullabilityNullMarked (import "imports" "nativejstypes.Nullability.doesNotAcceptNull$1") 
  (param $this (ref null extern))
  (param $arg (ref null string))
+)
+
+;;; Code for nativejstypes.ReferencedPrivateMethods [imports]
+
+;;; Code for nativejstypes.ReferencedPrivateMethods.Inner [imports]
+
+;;; Code for nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods [imports]
+
+;;; NativeReferencedPrivateMethods()
+(func $m_<init>__@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods (import "imports" "nativejstypes.NativeReferencedPrivateMethods.constructor") 
+ (result (ref null extern))
+)
+
+;;; int NativeReferencedPrivateMethods.getInstance()
+(func $m_getInstance__int_$p_nativejstypes_ReferencedPrivateMethods_NativeReferencedPrivateMethods@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods (import "imports" "nativejstypes.NativeReferencedPrivateMethods.getInstance") 
+ (param $this (ref null extern))
+ (result i32)
+)
+
+;;; int NativeReferencedPrivateMethods.getStatic()
+(func $m_getStatic__int@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods (import "imports" "nativejstypes.NativeReferencedPrivateMethods.getStatic") 
+ (result i32)
+)
+
+;;; int NativeReferencedPrivateMethods.x()
+(func $f_x__int_$p_nativejstypes_ReferencedPrivateMethods_NativeReferencedPrivateMethods@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods (import "imports" "get nativejstypes.NativeReferencedPrivateMethods.x") 
+ (param $this (ref null extern))
+ (result i32)
+)
+
+;;; int NativeReferencedPrivateMethods.s()
+(func $f_s__int@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods (import "imports" "get nativejstypes.NativeReferencedPrivateMethods.s") 
+ (result i32)
 )
 
 ;;; Code for nativejstypes.TopLevel [imports]
@@ -518,6 +654,30 @@
  (ref.null $java.lang.Class)
 )
 
+;;; Code for nativejstypes.NonreferencedMethods [static fields]
+(global $$class-initialized@nativejstypes.NonreferencedMethods (mut i32)
+ (i32.const 0)
+)
+(global $$class@nativejstypes.NonreferencedMethods (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.$Overlay [static fields]
+(global $$class-initialized@nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass.$Overlay [static fields]
+(global $$class-initialized@nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
 ;;; Code for nativejstypes.Nullability.$Overlay [static fields]
 (global $$class-initialized@nativejstypes.Nullability.$Overlay (mut i32)
  (i32.const 0)
@@ -531,6 +691,30 @@
  (i32.const 0)
 )
 (global $$class@nativejstypes.NullabilityNullMarked.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for nativejstypes.ReferencedPrivateMethods [static fields]
+(global $$class-initialized@nativejstypes.ReferencedPrivateMethods (mut i32)
+ (i32.const 0)
+)
+(global $$class@nativejstypes.ReferencedPrivateMethods (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for nativejstypes.ReferencedPrivateMethods.Inner [static fields]
+(global $$class-initialized@nativejstypes.ReferencedPrivateMethods.Inner (mut i32)
+ (i32.const 0)
+)
+(global $$class@nativejstypes.ReferencedPrivateMethods.Inner (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay [static fields]
+(global $$class-initialized@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -617,6 +801,30 @@
  )
 )
 
+;;; Code for nativejstypes.NonreferencedMethods [vtable.init]
+(global $nativejstypes.NonreferencedMethods.vtable (ref $nativejstypes.NonreferencedMethods.vtable)
+ (struct.new $nativejstypes.NonreferencedMethods.vtable
+  (ref.func $$getClassImpl__java_lang_Class@nativejstypes.NonreferencedMethods)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+
+;;; Code for nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.$Overlay [vtable.init]
+(global $nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.$Overlay.vtable (ref $nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.$Overlay.vtable)
+ (struct.new $nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.$Overlay.vtable
+  (ref.func $$getClassImpl__java_lang_Class@nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.$Overlay)
+ )
+)
+
+;;; Code for nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass.$Overlay [vtable.init]
+(global $nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass.$Overlay.vtable (ref $nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass.$Overlay.vtable)
+ (struct.new $nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass.$Overlay.vtable
+  (ref.func $$getClassImpl__java_lang_Class@nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass.$Overlay)
+ )
+)
+
 ;;; Code for nativejstypes.Nullability.$Overlay [vtable.init]
 (global $nativejstypes.Nullability.$Overlay.vtable (ref $nativejstypes.Nullability.$Overlay.vtable)
  (struct.new $nativejstypes.Nullability.$Overlay.vtable
@@ -628,6 +836,34 @@
 (global $nativejstypes.NullabilityNullMarked.$Overlay.vtable (ref $nativejstypes.NullabilityNullMarked.$Overlay.vtable)
  (struct.new $nativejstypes.NullabilityNullMarked.$Overlay.vtable
   (ref.func $$getClassImpl__java_lang_Class@nativejstypes.NullabilityNullMarked.$Overlay)
+ )
+)
+
+;;; Code for nativejstypes.ReferencedPrivateMethods [vtable.init]
+(global $nativejstypes.ReferencedPrivateMethods.vtable (ref $nativejstypes.ReferencedPrivateMethods.vtable)
+ (struct.new $nativejstypes.ReferencedPrivateMethods.vtable
+  (ref.func $$getClassImpl__java_lang_Class@nativejstypes.ReferencedPrivateMethods)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+
+;;; Code for nativejstypes.ReferencedPrivateMethods.Inner [vtable.init]
+(global $nativejstypes.ReferencedPrivateMethods.Inner.vtable (ref $nativejstypes.ReferencedPrivateMethods.Inner.vtable)
+ (struct.new $nativejstypes.ReferencedPrivateMethods.Inner.vtable
+  (ref.func $$getClassImpl__java_lang_Class@nativejstypes.ReferencedPrivateMethods.Inner)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getInstance__int@nativejstypes.ReferencedPrivateMethods.Inner)
+ )
+)
+
+;;; Code for nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay [vtable.init]
+(global $nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay.vtable (ref $nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay.vtable)
+ (struct.new $nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay.vtable
+  (ref.func $$getClassImpl__java_lang_Class@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay)
  )
 )
 
@@ -967,6 +1203,96 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@nativejstypes.Headers.$Overlay)
 
+;;; Code for nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.$Overlay [methods]
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void_<once>_@nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.$Overlay
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NonreferencedMethods.java:24:22
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NonreferencedMethods.java:24:22
+  (if (global.get $$class-initialized@nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.$Overlay)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NonreferencedMethods.java:24:22
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NonreferencedMethods.java:24:22
+  (global.set $$class-initialized@nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.$Overlay)))
+   (then
+    (return (global.get $$class@nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.$Overlay))
+   )
+  )
+  (global.set $$class@nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.$Overlay )(ref.null $java.lang.Class)))
+  (return (global.get $$class@nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.$Overlay))
+ )
+)
+
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.$Overlay))
+ (local.set $this (ref.cast (ref $nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.$Overlay) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.$Overlay ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.$Overlay)
+
+;;; Code for nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass.$Overlay [methods]
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void_<once>_@nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass.$Overlay
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NonreferencedMethods.java:38:23
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NonreferencedMethods.java:38:23
+  (if (global.get $$class-initialized@nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass.$Overlay)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NonreferencedMethods.java:38:23
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NonreferencedMethods.java:38:23
+  (global.set $$class-initialized@nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass.$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass.$Overlay)))
+   (then
+    (return (global.get $$class@nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass.$Overlay))
+   )
+  )
+  (global.set $$class@nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass.$Overlay )(ref.null $java.lang.Class)))
+  (return (global.get $$class@nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass.$Overlay))
+ )
+)
+
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass.$Overlay))
+ (local.set $this (ref.cast (ref $nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass.$Overlay) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass.$Overlay ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass.$Overlay)
+
 ;;; Code for nativejstypes.Nullability.$Overlay [methods]
 
 ;;; void $Overlay.$clinit()
@@ -1056,6 +1382,51 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nativejstypes.NullabilityNullMarked.$Overlay)
+
+;;; Code for nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay [methods]
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void_<once>_@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:31:23
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:31:23
+  (if (global.get $$class-initialized@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:31:23
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:31:23
+  (global.set $$class-initialized@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay)))
+   (then
+    (return (global.get $$class@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay))
+   )
+  )
+  (global.set $$class@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay )(ref.null $java.lang.Class)))
+  (return (global.get $$class@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay))
+ )
+)
+
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay))
+ (local.set $this (ref.cast (ref $nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay)
 
 ;;; Code for nativejstypes.TopLevel.$Overlay [methods]
 
@@ -1419,9 +1790,255 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@nativejstypes.Main)
 
+;;; Code for nativejstypes.NonreferencedMethods [methods]
+
+;;; NonreferencedMethods NonreferencedMethods.$create()
+(func $$create__@nativejstypes.NonreferencedMethods
+ (result (ref null $nativejstypes.NonreferencedMethods))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NonreferencedMethods.java:21:13
+ (local $$instance (ref null $nativejstypes.NonreferencedMethods))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NonreferencedMethods.java:21:13
+  (call $$clinit__void_<once>_@nativejstypes.NonreferencedMethods )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NonreferencedMethods.java:21:13
+  (local.set $$instance (struct.new $nativejstypes.NonreferencedMethods (ref.as_non_null (global.get $nativejstypes.NonreferencedMethods.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NonreferencedMethods.java:21:13
+  (call $$ctor__void_$p_nativejstypes_NonreferencedMethods@nativejstypes.NonreferencedMethods (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NonreferencedMethods.java:21:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void NonreferencedMethods.$ctor()
+(func $$ctor__void_$p_nativejstypes_NonreferencedMethods@nativejstypes.NonreferencedMethods
+ (param $this (ref null $nativejstypes.NonreferencedMethods))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NonreferencedMethods.java:21:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NonreferencedMethods.java:21:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void NonreferencedMethods.$clinit()
+(func $$clinit__void_<once>_@nativejstypes.NonreferencedMethods
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NonreferencedMethods.java:21:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NonreferencedMethods.java:21:13
+  (if (global.get $$class-initialized@nativejstypes.NonreferencedMethods)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NonreferencedMethods.java:21:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NonreferencedMethods.java:21:13
+  (global.set $$class-initialized@nativejstypes.NonreferencedMethods (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NonreferencedMethods.java:21:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> NonreferencedMethods.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.NonreferencedMethods
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nativejstypes.NonreferencedMethods)))
+   (then
+    (return (global.get $$class@nativejstypes.NonreferencedMethods))
+   )
+  )
+  (global.set $$class@nativejstypes.NonreferencedMethods (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.NonreferencedMethods )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@nativejstypes.NonreferencedMethods))
+ )
+)
+
+;;; Class<?> NonreferencedMethods.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nativejstypes.NonreferencedMethods
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nativejstypes.NonreferencedMethods))
+ (local.set $this (ref.cast (ref $nativejstypes.NonreferencedMethods) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.NonreferencedMethods ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nativejstypes.NonreferencedMethods)
+
+;;; Code for nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass [methods]
+
+;;; Code for nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass [methods]
+
 ;;; Code for nativejstypes.Nullability [methods]
 
 ;;; Code for nativejstypes.NullabilityNullMarked [methods]
+
+;;; Code for nativejstypes.ReferencedPrivateMethods [methods]
+
+;;; ReferencedPrivateMethods ReferencedPrivateMethods.$create()
+(func $$create__@nativejstypes.ReferencedPrivateMethods
+ (result (ref null $nativejstypes.ReferencedPrivateMethods))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:21:6
+ (local $$instance (ref null $nativejstypes.ReferencedPrivateMethods))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:21:6
+  (call $$clinit__void_<once>_@nativejstypes.ReferencedPrivateMethods )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:21:6
+  (local.set $$instance (struct.new $nativejstypes.ReferencedPrivateMethods (ref.as_non_null (global.get $nativejstypes.ReferencedPrivateMethods.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:21:6
+  (call $$ctor__void_$p_nativejstypes_ReferencedPrivateMethods@nativejstypes.ReferencedPrivateMethods (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:21:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void ReferencedPrivateMethods.$ctor()
+(func $$ctor__void_$p_nativejstypes_ReferencedPrivateMethods@nativejstypes.ReferencedPrivateMethods
+ (param $this (ref null $nativejstypes.ReferencedPrivateMethods))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:21:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:21:6
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void ReferencedPrivateMethods.$clinit()
+(func $$clinit__void_<once>_@nativejstypes.ReferencedPrivateMethods
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:21:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:21:6
+  (if (global.get $$class-initialized@nativejstypes.ReferencedPrivateMethods)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:21:6
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:21:6
+  (global.set $$class-initialized@nativejstypes.ReferencedPrivateMethods (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:21:6
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> ReferencedPrivateMethods.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.ReferencedPrivateMethods
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nativejstypes.ReferencedPrivateMethods)))
+   (then
+    (return (global.get $$class@nativejstypes.ReferencedPrivateMethods))
+   )
+  )
+  (global.set $$class@nativejstypes.ReferencedPrivateMethods (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.ReferencedPrivateMethods )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@nativejstypes.ReferencedPrivateMethods))
+ )
+)
+
+;;; Class<?> ReferencedPrivateMethods.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nativejstypes.ReferencedPrivateMethods
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nativejstypes.ReferencedPrivateMethods))
+ (local.set $this (ref.cast (ref $nativejstypes.ReferencedPrivateMethods) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.ReferencedPrivateMethods ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nativejstypes.ReferencedPrivateMethods)
+
+;;; Code for nativejstypes.ReferencedPrivateMethods.Inner [methods]
+
+;;; Inner Inner.$create()
+(func $$create__@nativejstypes.ReferencedPrivateMethods.Inner
+ (result (ref null $nativejstypes.ReferencedPrivateMethods.Inner))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:22:22
+ (local $$instance (ref null $nativejstypes.ReferencedPrivateMethods.Inner))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:22:22
+  (call $$clinit__void_<once>_@nativejstypes.ReferencedPrivateMethods.Inner )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:22:22
+  (local.set $$instance (struct.new $nativejstypes.ReferencedPrivateMethods.Inner (ref.as_non_null (global.get $nativejstypes.ReferencedPrivateMethods.Inner.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:22:22
+  (call $$ctor__void_$p_nativejstypes_ReferencedPrivateMethods_Inner@nativejstypes.ReferencedPrivateMethods.Inner (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:22:22
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Inner.$ctor()
+(func $$ctor__void_$p_nativejstypes_ReferencedPrivateMethods_Inner@nativejstypes.ReferencedPrivateMethods.Inner
+ (param $this (ref null $nativejstypes.ReferencedPrivateMethods.Inner))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:22:22
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:22:22
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; int Inner.getInstance()
+(func $m_getInstance__int@nativejstypes.ReferencedPrivateMethods.Inner
+ (type $function.m_getInstance__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:23:15
+ (local $t (ref null extern))
+ (local $this (ref null $nativejstypes.ReferencedPrivateMethods.Inner))
+ (local.set $this (ref.cast (ref $nativejstypes.ReferencedPrivateMethods.Inner) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:24:6
+  (local.set $t (call $m_<init>__@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:25:6
+  (return (i32.add (i32.add (i32.add (call $f_x__int_$p_nativejstypes_ReferencedPrivateMethods_NativeReferencedPrivateMethods@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods (ref.as_non_null (local.get $t))) (call $f_s__int@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods )) (call $m_getInstance__int_$p_nativejstypes_ReferencedPrivateMethods_NativeReferencedPrivateMethods@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods (ref.as_non_null (local.get $t)))) (call $m_getStatic__int@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods )))
+ )
+)
+(elem declare func $m_getInstance__int@nativejstypes.ReferencedPrivateMethods.Inner)
+
+;;; void Inner.$clinit()
+(func $$clinit__void_<once>_@nativejstypes.ReferencedPrivateMethods.Inner
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:22:22
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:22:22
+  (if (global.get $$class-initialized@nativejstypes.ReferencedPrivateMethods.Inner)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:22:22
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:22:22
+  (global.set $$class-initialized@nativejstypes.ReferencedPrivateMethods.Inner (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:22:22
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> Inner.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.ReferencedPrivateMethods.Inner
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nativejstypes.ReferencedPrivateMethods.Inner)))
+   (then
+    (return (global.get $$class@nativejstypes.ReferencedPrivateMethods.Inner))
+   )
+  )
+  (global.set $$class@nativejstypes.ReferencedPrivateMethods.Inner (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.ReferencedPrivateMethods.Inner )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@nativejstypes.ReferencedPrivateMethods.Inner))
+ )
+)
+
+;;; Class<?> Inner.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nativejstypes.ReferencedPrivateMethods.Inner
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nativejstypes.ReferencedPrivateMethods.Inner))
+ (local.set $this (ref.cast (ref $nativejstypes.ReferencedPrivateMethods.Inner) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.ReferencedPrivateMethods.Inner ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nativejstypes.ReferencedPrivateMethods.Inner)
+
+;;; Code for nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods [methods]
 
 ;;; Code for nativejstypes.TopLevel [methods]
 

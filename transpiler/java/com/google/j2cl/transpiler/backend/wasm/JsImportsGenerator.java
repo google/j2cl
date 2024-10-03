@@ -341,13 +341,6 @@ public final class JsImportsGenerator {
     if (methodDescriptor.getWasmInfo() != null) {
       return false;
     }
-    // Exclude private, parameterless constructors.
-    // TODO(b/279187295) Make this more robust by checking for callers first.
-    if (methodDescriptor.isConstructor()
-        && methodDescriptor.getVisibility().isPrivate()
-        && methodDescriptor.getParameterDescriptors().isEmpty()) {
-      return false;
-    }
     return true;
   }
 

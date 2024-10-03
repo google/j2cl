@@ -1,0 +1,71 @@
+// Generated from "nativejstypes/NonreferencedMethods.java"
+@file:OptIn(ExperimentalObjCName::class)
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER")
+
+package nativejstypes
+
+import javaemul.lang.*
+import jsinterop.annotations.JsType
+import kotlin.Int
+import kotlin.OptIn
+import kotlin.Suppress
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
+
+@ObjCName("J2ktNativejstypesNonreferencedMethods", exact = true)
+open class NonreferencedMethods {
+ @ObjCName("J2ktNativejstypesNonreferencedMethods_NativePrivateMembersOnPublicClass", exact = true)
+ @JsType(name = "NativeNonreferencedMethods", namespace = "nativejstypes", isNative = true)
+ open class NativePrivateMembersOnPublicClass {
+  private var x: Int = 0
+
+  private constructor(x: Int)
+
+  private external fun getInstance1(): Int
+
+  @ObjCName("J2ktNativejstypesNonreferencedMethods_NativePrivateMembersOnPublicClassCompanion", exact = true)
+  companion object {
+   private var s: Int = 0
+
+   @JvmStatic
+   private external fun getStatic(): Int
+  }
+ }
+
+ @ObjCName("J2ktNativejstypesNonreferencedMethods_NativeMembersOnPrivateClass", exact = true)
+ @JsType(name = "NativeNonreferencedMethods", namespace = "nativejstypes", isNative = true)
+ open class NativeMembersOnPrivateClass {
+  constructor(
+   @ObjCName("Int") x: Int
+  )
+
+  @ObjCName("getInstance2")
+  external open fun getInstance2(): Int
+
+  @ObjCName("J2ktNativejstypesNonreferencedMethods_NativeMembersOnPrivateClassCompanion", exact = true)
+  companion object {
+   @JvmField
+   @ObjCName("s_")
+   var s: Int = 0
+
+   @JvmStatic
+   @ObjCName("getStatic")
+   external fun getStatic(): Int
+  }
+ }
+}

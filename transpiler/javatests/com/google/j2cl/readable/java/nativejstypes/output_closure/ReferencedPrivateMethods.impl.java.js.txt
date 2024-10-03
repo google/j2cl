@@ -1,0 +1,40 @@
+goog.module('nativejstypes.ReferencedPrivateMethods$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class ReferencedPrivateMethods extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!ReferencedPrivateMethods} */
+ static $create__() {
+  ReferencedPrivateMethods.$clinit();
+  let $instance = new ReferencedPrivateMethods();
+  $instance.$ctor__nativejstypes_ReferencedPrivateMethods__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nativejstypes_ReferencedPrivateMethods__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  ReferencedPrivateMethods.$clinit = () =>{};
+  ReferencedPrivateMethods.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ReferencedPrivateMethods;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(ReferencedPrivateMethods, 'nativejstypes.ReferencedPrivateMethods');
+
+exports = ReferencedPrivateMethods;
+
+//# sourceMappingURL=ReferencedPrivateMethods.js.map

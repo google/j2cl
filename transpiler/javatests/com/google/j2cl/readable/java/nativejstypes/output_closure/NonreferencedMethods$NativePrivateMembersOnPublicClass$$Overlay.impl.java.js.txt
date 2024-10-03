@@ -1,0 +1,25 @@
+goog.module('nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.$Overlay$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const NativePrivateMembersOnPublicClass = goog.require('nativejstypes.NativeNonreferencedMethods');
+
+/** @nodts */
+class $Overlay {
+ /** @nodts */
+ static $clinit() {
+  $Overlay.$clinit = () =>{};
+  $Overlay.$loadModules();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NativePrivateMembersOnPublicClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($Overlay, 'nativejstypes.NativeNonreferencedMethods');
+
+exports = $Overlay;
+
+//# sourceMappingURL=NonreferencedMethods$NativePrivateMembersOnPublicClass$$Overlay.js.map
