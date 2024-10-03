@@ -208,7 +208,11 @@ def _impl_j2wasm_application(ctx):
     input = ctx.outputs.wat
     input_source_map = None
     binaryen_symbolmap = ctx.actions.declare_file(ctx.label.name + ".binaryen.symbolmap")
-    stages = _extract_stages(ctx.attr.binaryen_args)
+    binaryen_args = ctx.attr.binaryen_args
+    if ctx.attr.use_magic_string_imports:
+        magic_imports_flag = "--string-lowering-magic-imports-assert"
+        binaryen_args = [magic_imports_flag if x == "--string-lowering" else x for x in binaryen_args]
+    stages = _extract_stages(binaryen_args)
     current_stage = 0
     for stage_args in stages:
         current_stage += 1
@@ -466,8 +470,6 @@ def j2wasm_application(name, defines = dict(), **kwargs):
     optimized_defines.update(defines)
 
     transpiler_args = kwargs.pop("internal_transpiler_args", [])
-    use_magic_string_imports = kwargs.pop("use_magic_string_imports", False)
-    string_lowering = "--string-lowering-magic-imports-assert" if use_magic_string_imports else "--string-lowering"
 
     _j2wasm_application(
         name = name,
@@ -541,7 +543,7 @@ def j2wasm_application(name, defines = dict(), **kwargs):
             "--optimize-j2cl",
 
             # Final clean-ups.
-            string_lowering,
+            "--string-lowering",
             "--remove-unused-module-elements",
             "--reorder-globals",
 
@@ -550,7 +552,6 @@ def j2wasm_application(name, defines = dict(), **kwargs):
         ],
         transpiler_args = transpiler_args,
         defines = ["%s=%s" % (k, v) for (k, v) in optimized_defines.items()],
-        use_magic_string_imports = use_magic_string_imports,
         **kwargs
     )
     _j2wasm_application(
@@ -558,12 +559,11 @@ def j2wasm_application(name, defines = dict(), **kwargs):
         binaryen_args = [
             "--debuginfo",
             "--intrinsic-lowering",
-            string_lowering,
+            "--string-lowering",
             # Remove the intrinsic import declarations which are not removed by lowering itself.
             "--remove-unused-module-elements",
         ],
         transpiler_args = transpiler_args,
         defines = ["%s=%s" % (k, v) for (k, v) in dev_defines.items()],
-        use_magic_string_imports = use_magic_string_imports,
         **kwargs
     )
