@@ -170,7 +170,7 @@ def create_report(test_name, original_size, modified_size):
   if original_size >= 0:
     # Both files exist, so compare their sizes.
     size_percent = (modified_size / float(original_size))
-    note = "unchanged" if size_percent == 1 else f"{size_percent:.1%}"
+    note = "unchanged" if size_percent == 1 else f"{size_percent-1:+.1%}"
   else:
     # The original file doesn't exist, this is a new result.
     size_percent = 1
