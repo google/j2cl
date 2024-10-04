@@ -24,7 +24,7 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public class TreeMapIntegerDoubleWithComparatorTest extends TreeMapIntegerDoubleTest {
   @Override
-  protected NavigableMap<@Nullable Integer, Double> createNavigableMap() {
+  protected NavigableMap<Integer, Double> createNavigableMap() {
     setComparator(
         new Comparator<@Nullable Integer>() {
           @Override
