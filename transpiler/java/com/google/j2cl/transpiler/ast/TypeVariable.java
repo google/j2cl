@@ -256,14 +256,7 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
     if (declaration != specializedTypeVariable) {
       // The variable has been specialized, apply the nullability annotation if the type variable
       // reference was annotated.
-      switch (getNullabilityAnnotation()) {
-        case NULLABLE:
-          return specializedTypeVariable.toNullable();
-        case NOT_NULLABLE:
-          return specializedTypeVariable.toNonNullable();
-        default:
-          return specializedTypeVariable;
-      }
+      return specializedTypeVariable.withNullabilityAnnotation(getNullabilityAnnotation());
     }
     return this;
   }

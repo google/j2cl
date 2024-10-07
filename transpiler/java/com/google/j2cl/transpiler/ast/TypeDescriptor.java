@@ -196,6 +196,20 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
     return isNullable();
   }
 
+  /** Returns this type descriptor with nullability set from the given annotation. */
+  public final TypeDescriptor withNullabilityAnnotation(
+      NullabilityAnnotation nullabilityAnnotation) {
+    switch (nullabilityAnnotation) {
+      case NOT_NULLABLE:
+        return toNonNullable();
+      case NONE:
+        return this;
+      case NULLABLE:
+        return toNullable();
+    }
+    throw new AssertionError();
+  }
+
   /** Returns type descriptor for the same type use the type parameters from the declaration. */
   public abstract TypeDescriptor toUnparameterizedTypeDescriptor();
 
