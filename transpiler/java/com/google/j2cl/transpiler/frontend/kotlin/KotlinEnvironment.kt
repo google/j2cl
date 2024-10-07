@@ -362,7 +362,7 @@ class KotlinEnvironment(
     return TypeVariable.newBuilder()
       .setName(irTypeParameter.name.asString())
       .setUniqueKey(irTypeParameter.uniqueKey)
-      .setUpperBoundTypeDescriptorSupplier(upperBoundFactory)
+      .setUpperBoundTypeDescriptorFactory(upperBoundFactory)
       .setNullabilityAnnotation(
         if (isNullable) NullabilityAnnotation.NULLABLE else NullabilityAnnotation.NONE
       )

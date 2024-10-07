@@ -1162,7 +1162,7 @@ public class JsInteropRestrictionsChecker {
     MethodDescriptor methodDescriptor = method.getDescriptor();
     for (MethodDescriptor overriddenMethodDescriptor :
         methodDescriptor.getJavaOverriddenMethodDescriptors()) {
-      if (!overriddenMethodDescriptor.isJsMember()) {
+      if (!overriddenMethodDescriptor.isJsMember() || overriddenMethodDescriptor.isBridge()) {
         continue;
       }
 

@@ -43,11 +43,19 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
 
   @Memoized
   public TypeDescriptor getUpperBoundTypeDescriptor() {
-    TypeDescriptor boundTypeDescriptor = getUpperBoundTypeDescriptorSupplier().get();
+    TypeDescriptor boundTypeDescriptor = getUpperBoundTypeDescriptorFactory().get(this);
     return boundTypeDescriptor != null ? boundTypeDescriptor : TypeDescriptors.get().javaLangObject;
   }
 
-  public abstract Supplier<TypeDescriptor> getUpperBoundTypeDescriptorSupplier();
+  /**
+   * References to some descriptors need to be deferred since type variables are immutable and the
+   * reference graph might be cyclic.
+   */
+  public interface DescriptorFactory<T> {
+    T get(TypeVariable typeVariable);
+  }
+
+  public abstract DescriptorFactory<TypeDescriptor> getUpperBoundTypeDescriptorFactory();
 
   @Nullable
   abstract String getUniqueKey();
@@ -196,7 +204,7 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
         lowerBound != null ? replaceTypeDescriptors(lowerBound, fn, seen) : null;
     if (upperBound != newUpperBound || lowerBound != newLowerBound) {
       return Builder.from(this)
-          .setUpperBoundTypeDescriptorSupplier(() -> newUpperBound)
+          .setUpperBoundTypeDescriptorFactory(() -> newUpperBound)
           .setLowerBoundTypeDescriptor(newLowerBound)
           .setUniqueKey("<Auto>" + getUniqueId())
           .build();
@@ -318,7 +326,7 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
     return TypeVariable.newBuilder()
         .setWildcard(true)
         .setNullabilityAnnotation(NullabilityAnnotation.NONE)
-        .setUpperBoundTypeDescriptorSupplier(() -> upperBound)
+        .setUpperBoundTypeDescriptorFactory(() -> upperBound)
         .setLowerBoundTypeDescriptor(lowerBound)
         // Create an unique key that does not conflict with the keys used for other types nor for
         // type variables coming from JDT, which follow "<declaring_type>:<name>...".
@@ -383,8 +391,13 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
   @AutoValue.Builder
   public abstract static class Builder {
 
-    public abstract Builder setUpperBoundTypeDescriptorSupplier(
-        Supplier<TypeDescriptor> boundTypeDescriptorFactory);
+    public abstract Builder setUpperBoundTypeDescriptorFactory(
+        DescriptorFactory<TypeDescriptor> boundTypeDescriptorFactory);
+
+    public Builder setUpperBoundTypeDescriptorFactory(
+        Supplier<TypeDescriptor> boundTypeDescriptorFactory) {
+      return setUpperBoundTypeDescriptorFactory(self -> boundTypeDescriptorFactory.get());
+    }
 
     public abstract Builder setUniqueKey(String uniqueKey);
 

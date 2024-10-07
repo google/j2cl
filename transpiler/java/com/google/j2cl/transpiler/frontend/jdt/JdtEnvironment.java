@@ -387,7 +387,7 @@ public class JdtEnvironment {
                   .get();
     }
     return TypeVariable.newBuilder()
-        .setUpperBoundTypeDescriptorSupplier(upperBoundTypeDescriptorFactory)
+        .setUpperBoundTypeDescriptorFactory(upperBoundTypeDescriptorFactory)
         .setLowerBoundTypeDescriptor(getLowerBoundTypeDescriptor(typeBinding, inNullMarkedScope))
         .setWildcard(typeBinding.isWildcardType())
         .setCapture(typeBinding.isCapture())

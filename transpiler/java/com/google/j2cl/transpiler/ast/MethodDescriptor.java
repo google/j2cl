@@ -23,6 +23,7 @@ import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Streams;
@@ -42,7 +43,6 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
 
@@ -781,7 +781,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         signatureDescriptors
             .map(TypeDescriptor::toRawTypeDescriptor)
             .map(TypeDescriptor::getMangledName)
-            .collect(Collectors.joining("__"));
+            .collect(joining("__"));
 
     return buildMangledName(signature + suffix);
   }
@@ -900,7 +900,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
                         && !typeDescriptor.isNullable()
                     ? typeDescriptor.toRawTypeDescriptor().toUnboxedType()
                     : typeDescriptor)
-        .collect(ImmutableList.toImmutableList());
+        .collect(toImmutableList());
   }
 
   /**
@@ -1057,12 +1057,13 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .flatMap(
             t ->
                 Stream.concat(
-                    // TODO(b/225175417): The work around to the problem of computing the
-                    // specialized bounds for a type variable is to look at both the declared
-                    // methods from the super types (which include the right type variable
-                    // specialization, and the computed polymorphic method that contain bridges.
+                    // TODO(b/371568713): Different native methods might have the same mangled name
+                    // and getPolymorphicMethods will return only one of them in this case; to
+                    // workaround this problem we also include all native methods declared in the
+                    // type.
                     t.getDeclaredMethodDescriptors().stream()
-                        .filter(MethodDescriptor::isPolymorphic),
+                        .filter(MethodDescriptor::isPolymorphic)
+                        .filter(MethodDescriptor::isNative),
                     t.getPolymorphicMethods().stream()))
         .filter(isOverrideFn)
         .forEach(
@@ -1101,42 +1102,158 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     if (AstUtils.isIdentityFunction(replacingTypeDescriptorByTypeVariable)) {
       return this;
     }
-
-    // Original type variables.
-    TypeDescriptor returnTypeDescriptor = getReturnTypeDescriptor();
-    ImmutableList<TypeDescriptor> parameterTypeDescriptors = getParameterTypeDescriptors();
-
-    // Specialized type variables (possibly recursively).
-    TypeDescriptor specializedReturnTypeDescriptor =
-        returnTypeDescriptor.specializeTypeVariables(replacingTypeDescriptorByTypeVariable);
-    ImmutableList<TypeDescriptor> specializedParameterTypeDescriptors =
-        parameterTypeDescriptors.stream()
-            .map(
-                typeDescriptor ->
-                    typeDescriptor.specializeTypeVariables(replacingTypeDescriptorByTypeVariable))
-            .collect(toImmutableList());
+    // First specialize the type parameters/type arguments since that might introduce new captures
+    // that need to be propagated. e.g.
+    // class A<T> {
+    //   <S extends List<T>, U extends S> void m(X<U>) {...}
+    // }
+    //
+    // class B extends A<String> {
+    //    // <S1 extends List<String>, U1 extends S1> void m(X<U1>)  should be the bridge here.
+    // }
+    //
 
     // Specializing a declaration means specializing the type parameters; whereas specializing a
     // usage site, means specializing the type variables that might appear in the current
     // type arguments.
+    ImmutableList<? extends TypeDescriptor> typeArgumentTypeDescriptors =
+        isDeclaration() ? getTypeParameterTypeDescriptors() : getTypeArgumentTypeDescriptors();
+
+    // Compute the new specialization mapping by creating replacement type variables whenever
+    // bounds need to be specialized.
+    var updatedReplacingTypeDescriptorByTypeVariable =
+        propagateChangesInBounds(
+            typeArgumentTypeDescriptors, replacingTypeDescriptorByTypeVariable);
+
+    // Specialize the type arguments using the updated mapping.
     ImmutableList<TypeDescriptor> specializedTypeArgumentDescriptors =
-        (isDeclaration() ? getTypeParameterTypeDescriptors() : getTypeArgumentTypeDescriptors())
-            .stream()
-                .map(
-                    typeDescriptor ->
-                        typeDescriptor.specializeTypeVariables(
-                            replacingTypeDescriptorByTypeVariable))
-                .collect(toImmutableList());
+        typeArgumentTypeDescriptors.stream()
+            .map(
+                typeDescriptor ->
+                    typeDescriptor.specializeTypeVariables(
+                        updatedReplacingTypeDescriptorByTypeVariable))
+            .collect(toImmutableList());
+
+    // Specialize the return type using the updated mapping.
+    TypeDescriptor returnTypeDescriptor = getReturnTypeDescriptor();
+    TypeDescriptor specializedReturnTypeDescriptor =
+        returnTypeDescriptor.specializeTypeVariables(updatedReplacingTypeDescriptorByTypeVariable);
+
+    // Specialize the parameters type using the updated mapping.
+    ImmutableList<TypeDescriptor> parameterTypeDescriptors = getParameterTypeDescriptors();
+    ImmutableList<TypeDescriptor> specializedParameterTypeDescriptors =
+        parameterTypeDescriptors.stream()
+            .map(
+                typeDescriptor ->
+                    typeDescriptor.specializeTypeVariables(
+                        updatedReplacingTypeDescriptorByTypeVariable))
+            .collect(toImmutableList());
+
+    DeclaredTypeDescriptor specializedEnclosingTypeDescriptor =
+        getEnclosingTypeDescriptor()
+            .specializeTypeVariables(updatedReplacingTypeDescriptorByTypeVariable);
+
+    if (specializedEnclosingTypeDescriptor.equals(getEnclosingTypeDescriptor())
+        && specializedTypeArgumentDescriptors.equals(typeArgumentTypeDescriptors)
+        && specializedReturnTypeDescriptor.equals(returnTypeDescriptor)
+        && specializedParameterTypeDescriptors.equals(parameterTypeDescriptors)) {
+      // Nothing has changed, return the original descriptor.
+      return this;
+    }
 
     return MethodDescriptor.Builder.from(this)
         .setDeclarationDescriptor(getDeclarationDescriptor())
         .setTypeArgumentTypeDescriptors(specializedTypeArgumentDescriptors)
         .setReturnTypeDescriptor(specializedReturnTypeDescriptor)
         .updateParameterTypeDescriptors(specializedParameterTypeDescriptors)
-        .setEnclosingTypeDescriptor(
-            getEnclosingTypeDescriptor()
-                .specializeTypeVariables(replacingTypeDescriptorByTypeVariable))
+        .setEnclosingTypeDescriptor(specializedEnclosingTypeDescriptor)
         .build();
+  }
+
+  private Function<TypeVariable, ? extends TypeDescriptor> propagateChangesInBounds(
+      ImmutableList<? extends TypeDescriptor> argumentTypeDescriptors,
+      Function<TypeVariable, ? extends TypeDescriptor> replacingTypeDescriptorByTypeVariable) {
+    if (argumentTypeDescriptors.isEmpty()) {
+      return replacingTypeDescriptorByTypeVariable;
+    }
+
+    TypeDescriptor nextArgument = Iterables.getFirst(argumentTypeDescriptors, null);
+    return propagateChangesInBounds(
+        argumentTypeDescriptors.subList(1, argumentTypeDescriptors.size()),
+        maybeIntroduceNewTypeVariable(nextArgument, replacingTypeDescriptorByTypeVariable));
+  }
+
+  private static Function<TypeVariable, ? extends TypeDescriptor> maybeIntroduceNewTypeVariable(
+      TypeDescriptor typeDescriptor,
+      Function<TypeVariable, ? extends TypeDescriptor> replacingTypeDescriptorByTypeVariable) {
+    if (!typeDescriptor.isTypeVariable()) {
+      // Not a type variable, nothing to do.
+      return replacingTypeDescriptorByTypeVariable;
+    }
+
+    var typeVariable = ((TypeVariable) typeDescriptor).toDeclaration();
+    if (typeVariable.isWildcardOrCapture()) {
+      // Wildcards bounds are specialized directly by `specializeTypeVariables` since the
+      // declaration is implicit in the usage.
+      // TODO(b/246332093): Captures in the current state are in most places handled like wildcards
+      // until we improve the modeling; the scenarios where we rely heavily in substitution (e.g.
+      // bridge construction) do not involve captures.
+      return replacingTypeDescriptorByTypeVariable;
+    }
+
+    if (!typeVariable
+        .specializeTypeVariables(replacingTypeDescriptorByTypeVariable)
+        .equals(typeVariable)) {
+      // If the type variable will be replaced, there is no need to change their bounds, e.g.
+      //
+      //   <S, T extends X<S>>
+      //
+      // with a mapping
+      //
+      //     S -> A
+      //     T -> B
+      //
+      // will result in
+      //
+      //    <A, B>
+      //
+      return replacingTypeDescriptorByTypeVariable;
+    }
+
+    // Check if the bound is affected.
+    var boundTypeDescriptor = typeVariable.getUpperBoundTypeDescriptor();
+    var specializedBoundTypeDescriptor =
+        boundTypeDescriptor.specializeTypeVariables(replacingTypeDescriptorByTypeVariable);
+    if (boundTypeDescriptor.equals(specializedBoundTypeDescriptor)) {
+      return replacingTypeDescriptorByTypeVariable;
+    }
+
+    // The bound was specialized, introduce a new type variable and add it to the replacement
+    // function.
+    TypeVariable replacementTypeVariable =
+        TypeVariable.newBuilder()
+            .setName(typeVariable.getName())
+            .setUniqueKey(
+                typeVariable.getUniqueKey()
+                    + "#SpecializedBound#"
+                    + specializedBoundTypeDescriptor.getUniqueId())
+            .setUpperBoundTypeDescriptorFactory(
+                self ->
+                    // The bound might also refer to the variable that is being replaced, e.g. in
+                    //
+                    //   T extends X<T, U>
+                    //
+                    // if there is a replacement U -> V, the declaration needs to be
+                    //
+                    //  T1 extends X<T1, V>.
+                    specializedBoundTypeDescriptor.specializeTypeVariables(
+                        ImmutableMap.of(typeVariable, self)))
+            .build();
+
+    return tv ->
+        tv.equals(typeVariable)
+            ? replacementTypeVariable
+            : replacingTypeDescriptorByTypeVariable.apply(tv);
   }
 
   @Override
@@ -1252,7 +1369,26 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     }
 
     public Builder makeDeclaration() {
-      return setDeclarationDescriptor(null).setTypeArgumentTypeDescriptors(ImmutableList.of());
+      // Replace type variables as some might haven been replaced due to changes in bounds.
+      var typeParameters = new ArrayList<>(getTypeParameterTypeDescriptors());
+
+      int i = 0;
+      // Argument list might be shorter than parameter list due to raw types.
+      for (var argument : getTypeArgumentTypeDescriptors()) {
+        if (isFreeTypeVariable(argument)) {
+          typeParameters.set(i, (TypeVariable) argument);
+        }
+        i++;
+      }
+
+      return setDeclarationDescriptor(null)
+          .setTypeParameterTypeDescriptors(typeParameters)
+          .setTypeArgumentTypeDescriptors(ImmutableList.of());
+    }
+
+    private static boolean isFreeTypeVariable(TypeDescriptor typeDescriptor) {
+      return typeDescriptor.isTypeVariable()
+          && !((TypeVariable) typeDescriptor).isWildcardOrCapture();
     }
 
     /** Internal use only. Use {@link #makeBridge}. */
@@ -1357,6 +1493,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     @CanIgnoreReturnValue
     public abstract Builder setExceptionTypeDescriptors(
         ImmutableList<TypeDescriptor> exceptionTypeDescriptors);
+
+    public abstract ImmutableList<TypeDescriptor> getTypeArgumentTypeDescriptors();
 
     public abstract Builder setTypeArgumentTypeDescriptors(List<TypeDescriptor> typeArguments);
 

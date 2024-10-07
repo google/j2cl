@@ -1,0 +1,45 @@
+goog.module('bridgemethods.PackagePrivateBridgeSuper$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T, U
+ */
+class PackagePrivateBridgeSuper extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T, U @return {!PackagePrivateBridgeSuper<T, U>} */
+ static $create__() {
+  PackagePrivateBridgeSuper.$clinit();
+  let $instance = new PackagePrivateBridgeSuper();
+  $instance.$ctor__bridgemethods_PackagePrivateBridgeSuper__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__bridgemethods_PackagePrivateBridgeSuper__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @template S, R */
+ m_m__bridgemethods_PackagePrivateBridgeSuper__java_lang_Object__java_lang_Object__java_lang_Object__void_$pp_bridgemethods(/** R */ r, /** S */ s, /** T */ t, /** U */ u) {}
+ /** @nodts */
+ static $clinit() {
+  PackagePrivateBridgeSuper.$clinit = () =>{};
+  PackagePrivateBridgeSuper.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof PackagePrivateBridgeSuper;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(PackagePrivateBridgeSuper, 'bridgemethods.PackagePrivateBridgeSuper');
+
+exports = PackagePrivateBridgeSuper;
+
+//# sourceMappingURL=PackagePrivateBridgeSuper.js.map

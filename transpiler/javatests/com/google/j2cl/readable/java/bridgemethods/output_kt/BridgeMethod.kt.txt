@@ -280,3 +280,23 @@ abstract class DoesNotInheritDefaultMethod1 internal constructor(): InterfaceWit
 
 @ObjCName("J2ktBridgemethodsDoesNotInheritDefaultMethod2", exact = true)
 abstract class DoesNotInheritDefaultMethod2 internal constructor(): InterfaceOverridingDefaultMethod, InterfaceWithDefaultMethod {}
+
+@ObjCName("J2ktBridgemethodsPackagePrivateBridgeSuper", exact = true)
+open class PackagePrivateBridgeSuper<T, U> internal constructor() {
+ internal open fun <S: T, R: PackagePrivateBridgeSuper<S, R>?> m_pp_bridgemethods(r: R, s: S, t: T, u: U) {}
+}
+
+@ObjCName("J2ktBridgemethodsPackagePrivateBridge", exact = true)
+class PackagePrivateBridge<V, W> internal constructor(): PackagePrivateBridgeSuper<V, W>() {
+ @ObjCName("m")
+ public fun <S: V, R: PackagePrivateBridgeSuper<S, R>?> m(
+  @ObjCName("withBridgemethodsPackagePrivateBridgeSuper") r: R,
+  @ObjCName("withId") s: S,
+  @ObjCName("withId") v: V,
+  @ObjCName("withId") w: W
+ ) {}
+
+ override fun <S: V, R: PackagePrivateBridgeSuper<S, R>?> m_pp_bridgemethods(arg0: R, arg1: S, arg2: V, arg3: W) {
+  this.m(arg0, arg1, arg2, arg3)
+ }
+}

@@ -207,3 +207,12 @@ abstract class DoesNotInheritDefaultMethod1
 
 abstract class DoesNotInheritDefaultMethod2
     implements InterfaceOverridingDefaultMethod, InterfaceWithDefaultMethod {}
+
+class PackagePrivateBridgeSuper<T, U> {
+  <S extends T, R extends PackagePrivateBridgeSuper<S, R>> void m(R r, S s, T t, U u) {}
+}
+
+final class PackagePrivateBridge<V, W> extends PackagePrivateBridgeSuper<V, W> {
+  @Override
+  public <S extends V, R extends PackagePrivateBridgeSuper<S, R>> void m(R r, S s, V v, W w) {}
+}

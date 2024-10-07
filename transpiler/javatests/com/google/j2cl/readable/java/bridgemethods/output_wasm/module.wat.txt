@@ -276,6 +276,22 @@
  ))
 )
 
+;;; Code for bridgemethods.PackagePrivateBridgeSuper [type definition]
+(type $bridgemethods.PackagePrivateBridgeSuper.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_m__bridgemethods_PackagePrivateBridgeSuper__java_lang_Object__java_lang_Object__java_lang_Object__void_$pp_bridgemethods (ref $function.m_m__bridgemethods_PackagePrivateBridgeSuper__java_lang_Object__java_lang_Object__java_lang_Object__void_$pp_bridgemethods))
+ ))
+)
+(type $bridgemethods.PackagePrivateBridgeSuper (sub $java.lang.Object (struct
+ (field $vtable (ref $bridgemethods.PackagePrivateBridgeSuper.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
 ;;; Code for bridgemethods.SomeOtherFooInterface.$LambdaAdaptor [type definition]
 (type $bridgemethods.SomeOtherFooInterface.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
@@ -719,6 +735,22 @@
  ))
 )
 
+;;; Code for bridgemethods.PackagePrivateBridge [type definition]
+(type $bridgemethods.PackagePrivateBridge.vtable (sub $bridgemethods.PackagePrivateBridgeSuper.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_m__bridgemethods_PackagePrivateBridgeSuper__java_lang_Object__java_lang_Object__java_lang_Object__void_$pp_bridgemethods (ref $function.m_m__bridgemethods_PackagePrivateBridgeSuper__java_lang_Object__java_lang_Object__java_lang_Object__void_$pp_bridgemethods))
+ ))
+)
+(type $bridgemethods.PackagePrivateBridge (sub $bridgemethods.PackagePrivateBridgeSuper (struct
+ (field $vtable (ref $bridgemethods.PackagePrivateBridge.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
 ;;; Code for bridgemethods.TestCase10036.BI1.$LambdaAdaptor [type definition]
 (type $bridgemethods.TestCase10036.BI1.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
@@ -963,6 +995,8 @@
 
 ;;; Code for bridgemethods.InterfaceOverridingDefaultMethod [imports]
 
+;;; Code for bridgemethods.PackagePrivateBridgeSuper [imports]
+
 ;;; Code for bridgemethods.SomeOtherFooInterface.$LambdaAdaptor [imports]
 
 ;;; Code for bridgemethods.Getter.$LambdaAdaptor [imports]
@@ -1020,6 +1054,8 @@
 ;;; Code for bridgemethods.DoesNotInheritDefaultMethod1 [imports]
 
 ;;; Code for bridgemethods.DoesNotInheritDefaultMethod2 [imports]
+
+;;; Code for bridgemethods.PackagePrivateBridge [imports]
 
 ;;; Code for bridgemethods.TestCase10036.BI1.$LambdaAdaptor [imports]
 
@@ -1296,6 +1332,22 @@
  (i32.const 0)
 )
 (global $$class@bridgemethods.DoesNotInheritDefaultMethod2 (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for bridgemethods.PackagePrivateBridgeSuper [static fields]
+(global $$class-initialized@bridgemethods.PackagePrivateBridgeSuper (mut i32)
+ (i32.const 0)
+)
+(global $$class@bridgemethods.PackagePrivateBridgeSuper (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for bridgemethods.PackagePrivateBridge [static fields]
+(global $$class-initialized@bridgemethods.PackagePrivateBridge (mut i32)
+ (i32.const 0)
+)
+(global $$class@bridgemethods.PackagePrivateBridge (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -1848,6 +1900,28 @@
 (global $bridgemethods.StringConsumer.vtable@$bridgemethods.StringConsumerImpl (ref $bridgemethods.StringConsumer.vtable)
  (struct.new $bridgemethods.StringConsumer.vtable
   (ref.func $m_accept__java_lang_String__void@bridgemethods.StringConsumerImpl)
+ )
+)
+
+;;; Code for bridgemethods.PackagePrivateBridgeSuper [vtable.init]
+(global $bridgemethods.PackagePrivateBridgeSuper.vtable (ref $bridgemethods.PackagePrivateBridgeSuper.vtable)
+ (struct.new $bridgemethods.PackagePrivateBridgeSuper.vtable
+  (ref.func $$getClassImpl__java_lang_Class@bridgemethods.PackagePrivateBridgeSuper)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_m__bridgemethods_PackagePrivateBridgeSuper__java_lang_Object__java_lang_Object__java_lang_Object__void_$pp_bridgemethods@bridgemethods.PackagePrivateBridgeSuper)
+ )
+)
+
+;;; Code for bridgemethods.PackagePrivateBridge [vtable.init]
+(global $bridgemethods.PackagePrivateBridge.vtable (ref $bridgemethods.PackagePrivateBridge.vtable)
+ (struct.new $bridgemethods.PackagePrivateBridge.vtable
+  (ref.func $$getClassImpl__java_lang_Class@bridgemethods.PackagePrivateBridge)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_m__bridgemethods_PackagePrivateBridgeSuper__java_lang_Object__java_lang_Object__java_lang_Object__void_$pp_bridgemethods@bridgemethods.PackagePrivateBridge)
  )
 )
 
@@ -3508,6 +3582,96 @@
   (return (global.get $$class@bridgemethods.InterfaceOverridingDefaultMethod))
  )
 )
+
+;;; Code for bridgemethods.PackagePrivateBridgeSuper [methods]
+
+;;; PackagePrivateBridgeSuper<T, U> PackagePrivateBridgeSuper.$create()
+(func $$create__@bridgemethods.PackagePrivateBridgeSuper
+ (result (ref null $bridgemethods.PackagePrivateBridgeSuper))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:211:6
+ (local $$instance (ref null $bridgemethods.PackagePrivateBridgeSuper))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:211:6
+  (call $$clinit__void_<once>_@bridgemethods.PackagePrivateBridgeSuper )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:211:6
+  (local.set $$instance (struct.new $bridgemethods.PackagePrivateBridgeSuper (ref.as_non_null (global.get $bridgemethods.PackagePrivateBridgeSuper.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:211:6
+  (call $$ctor__void_$p_bridgemethods_PackagePrivateBridgeSuper@bridgemethods.PackagePrivateBridgeSuper (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:211:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void PackagePrivateBridgeSuper.$ctor()
+(func $$ctor__void_$p_bridgemethods_PackagePrivateBridgeSuper@bridgemethods.PackagePrivateBridgeSuper
+ (param $this (ref null $bridgemethods.PackagePrivateBridgeSuper))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:211:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:211:6
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void PackagePrivateBridgeSuper.m(R r, S s, T t, U u)
+(func $m_m__bridgemethods_PackagePrivateBridgeSuper__java_lang_Object__java_lang_Object__java_lang_Object__void_$pp_bridgemethods@bridgemethods.PackagePrivateBridgeSuper
+ (type $function.m_m__bridgemethods_PackagePrivateBridgeSuper__java_lang_Object__java_lang_Object__java_lang_Object__void_$pp_bridgemethods)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $r (ref null $bridgemethods.PackagePrivateBridgeSuper))
+ (param $s (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
+ (param $u (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:212:64
+ (local $this (ref null $bridgemethods.PackagePrivateBridgeSuper))
+ (local.set $this (ref.cast (ref $bridgemethods.PackagePrivateBridgeSuper) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_m__bridgemethods_PackagePrivateBridgeSuper__java_lang_Object__java_lang_Object__java_lang_Object__void_$pp_bridgemethods@bridgemethods.PackagePrivateBridgeSuper)
+
+;;; void PackagePrivateBridgeSuper.$clinit()
+(func $$clinit__void_<once>_@bridgemethods.PackagePrivateBridgeSuper
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:211:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:211:6
+  (if (global.get $$class-initialized@bridgemethods.PackagePrivateBridgeSuper)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:211:6
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:211:6
+  (global.set $$class-initialized@bridgemethods.PackagePrivateBridgeSuper (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:211:6
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> PackagePrivateBridgeSuper.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgemethods.PackagePrivateBridgeSuper
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgemethods.PackagePrivateBridgeSuper)))
+   (then
+    (return (global.get $$class@bridgemethods.PackagePrivateBridgeSuper))
+   )
+  )
+  (global.set $$class@bridgemethods.PackagePrivateBridgeSuper (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|bridgemethod...|__java_lang_String_<once>_@bridgemethods.PackagePrivateBridgeSuper )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@bridgemethods.PackagePrivateBridgeSuper))
+ )
+)
+
+;;; Class<?> PackagePrivateBridgeSuper.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@bridgemethods.PackagePrivateBridgeSuper
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $bridgemethods.PackagePrivateBridgeSuper))
+ (local.set $this (ref.cast (ref $bridgemethods.PackagePrivateBridgeSuper) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@bridgemethods.PackagePrivateBridgeSuper ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@bridgemethods.PackagePrivateBridgeSuper)
 
 ;;; Code for bridgemethods.SomeOtherFooInterface.$LambdaAdaptor [methods]
 
@@ -5616,6 +5780,114 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@bridgemethods.DoesNotInheritDefaultMethod2)
+
+;;; Code for bridgemethods.PackagePrivateBridge [methods]
+
+;;; PackagePrivateBridge<V, W> PackagePrivateBridge.$create()
+(func $$create__@bridgemethods.PackagePrivateBridge
+ (result (ref null $bridgemethods.PackagePrivateBridge))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:215:12
+ (local $$instance (ref null $bridgemethods.PackagePrivateBridge))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:215:12
+  (call $$clinit__void_<once>_@bridgemethods.PackagePrivateBridge )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:215:12
+  (local.set $$instance (struct.new $bridgemethods.PackagePrivateBridge (ref.as_non_null (global.get $bridgemethods.PackagePrivateBridge.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:215:12
+  (call $$ctor__void_$p_bridgemethods_PackagePrivateBridge@bridgemethods.PackagePrivateBridge (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:215:12
+  (return (local.get $$instance))
+ )
+)
+
+;;; void PackagePrivateBridge.$ctor()
+(func $$ctor__void_$p_bridgemethods_PackagePrivateBridge@bridgemethods.PackagePrivateBridge
+ (param $this (ref null $bridgemethods.PackagePrivateBridge))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:215:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:215:12
+  (call $$ctor__void_$p_bridgemethods_PackagePrivateBridgeSuper@bridgemethods.PackagePrivateBridgeSuper (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void PackagePrivateBridge.m(R r, S s, V v, W w)
+(func $m_m__bridgemethods_PackagePrivateBridgeSuper__java_lang_Object__java_lang_Object__java_lang_Object__void@bridgemethods.PackagePrivateBridge
+ (type $function.m_m__bridgemethods_PackagePrivateBridgeSuper__java_lang_Object__java_lang_Object__java_lang_Object__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $r (ref null $bridgemethods.PackagePrivateBridgeSuper))
+ (param $s (ref null $java.lang.Object))
+ (param $v (ref null $java.lang.Object))
+ (param $w (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:217:71
+ (local $this (ref null $bridgemethods.PackagePrivateBridge))
+ (local.set $this (ref.cast (ref $bridgemethods.PackagePrivateBridge) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_m__bridgemethods_PackagePrivateBridgeSuper__java_lang_Object__java_lang_Object__java_lang_Object__void@bridgemethods.PackagePrivateBridge)
+
+;;; void PackagePrivateBridge.m(R arg0, S arg1, T arg2, U arg3)
+(func $m_m__bridgemethods_PackagePrivateBridgeSuper__java_lang_Object__java_lang_Object__java_lang_Object__void_$pp_bridgemethods@bridgemethods.PackagePrivateBridge
+ (type $function.m_m__bridgemethods_PackagePrivateBridgeSuper__java_lang_Object__java_lang_Object__java_lang_Object__void_$pp_bridgemethods)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $bridgemethods.PackagePrivateBridgeSuper))
+ (param $arg1 (ref null $java.lang.Object))
+ (param $arg2 (ref null $java.lang.Object))
+ (param $arg3 (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:215:12
+ (local $this (ref null $bridgemethods.PackagePrivateBridge))
+ (local.set $this (ref.cast (ref $bridgemethods.PackagePrivateBridge) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:215:12
+  (call $m_m__bridgemethods_PackagePrivateBridgeSuper__java_lang_Object__java_lang_Object__java_lang_Object__void@bridgemethods.PackagePrivateBridge (ref.as_non_null (local.get $this))(local.get $arg0)(local.get $arg1)(local.get $arg2)(local.get $arg3))
+ )
+)
+(elem declare func $m_m__bridgemethods_PackagePrivateBridgeSuper__java_lang_Object__java_lang_Object__java_lang_Object__void_$pp_bridgemethods@bridgemethods.PackagePrivateBridge)
+
+;;; void PackagePrivateBridge.$clinit()
+(func $$clinit__void_<once>_@bridgemethods.PackagePrivateBridge
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:215:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:215:12
+  (if (global.get $$class-initialized@bridgemethods.PackagePrivateBridge)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:215:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:215:12
+  (global.set $$class-initialized@bridgemethods.PackagePrivateBridge (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:215:12
+  (call $$clinit__void_<once>_@bridgemethods.PackagePrivateBridgeSuper )
+ )
+)
+
+;;; Class<T> PackagePrivateBridge.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgemethods.PackagePrivateBridge
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgemethods.PackagePrivateBridge)))
+   (then
+    (return (global.get $$class@bridgemethods.PackagePrivateBridge))
+   )
+  )
+  (global.set $$class@bridgemethods.PackagePrivateBridge (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|bridgemethod...|__java_lang_String_<once>_@bridgemethods.PackagePrivateBridge )(call $$getClassMetadata__java_lang_Class_<once>_@bridgemethods.PackagePrivateBridgeSuper )))
+  (return (global.get $$class@bridgemethods.PackagePrivateBridge))
+ )
+)
+
+;;; Class<?> PackagePrivateBridge.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@bridgemethods.PackagePrivateBridge
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $bridgemethods.PackagePrivateBridge))
+ (local.set $this (ref.cast (ref $bridgemethods.PackagePrivateBridge) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@bridgemethods.PackagePrivateBridge ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@bridgemethods.PackagePrivateBridge)
 
 ;;; Code for bridgemethods.TestCase10036.BI1.$LambdaAdaptor [methods]
 

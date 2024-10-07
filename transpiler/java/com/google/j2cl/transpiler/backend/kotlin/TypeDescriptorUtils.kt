@@ -122,7 +122,7 @@ internal fun TypeDescriptor.makeNonNull(): TypeDescriptor =
           this
         } else {
           TypeVariable.Builder.from(this)
-            .setUpperBoundTypeDescriptorSupplier { upperBoundTypeDescriptor.makeNonNull() }
+            .setUpperBoundTypeDescriptorFactory { _ -> upperBoundTypeDescriptor.makeNonNull() }
             // Set some unique ID to avoid conflict with other type variables.
             // TODO(b/246332093): Remove when the bug is fixed, and uniqueId reflects bounds
             // properly.
@@ -180,6 +180,6 @@ internal val arrayComponentTypeParameter: TypeVariable
   get() =
     TypeVariable.newBuilder()
       .setName("T")
-      .setUpperBoundTypeDescriptorSupplier { nullableAnyTypeDescriptor }
+      .setUpperBoundTypeDescriptorFactory { _ -> nullableAnyTypeDescriptor }
       .setUniqueKey("kotlin.Array:T")
       .build()
