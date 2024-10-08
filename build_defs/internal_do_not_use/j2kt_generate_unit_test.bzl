@@ -83,6 +83,7 @@ def j2kt_generate_unit_test(name, test_class, deps, platform = "J2KT-JVM", tags 
         kt_apple_test_library(
             name = name,
             srcs = [":" + name + "_transpile_gen"],
+            features = ["kotlin_native.multi_action_framework"],
             target_compatible_with = ["//third_party/bazel_platforms/os:ios"],
             deps = [
                 ":" + name + "_lib",
