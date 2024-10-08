@@ -99,11 +99,6 @@ public final class LambdaAdaptorTypeDescriptors {
     return DeclaredTypeDescriptor.newBuilder()
         .setTypeDeclaration(adaptorDeclaration)
         .setTypeArgumentDescriptors(typeArgumentDescriptors)
-        .setDeclaredMethodDescriptorsFactory(
-            adaptorTypeDescriptor ->
-                isAbstract
-                    ? ImmutableList.of()
-                    : getLambdaAdaptorMethodDescriptors(jsFunctionInterface, adaptorTypeDescriptor))
         .build();
   }
 
@@ -211,20 +206,9 @@ public final class LambdaAdaptorTypeDescriptors {
     DeclaredTypeDescriptor functionalTypeDescriptor = typeDescriptor.getFunctionalInterface();
     checkArgument(!functionalTypeDescriptor.isJsFunctionInterface());
 
-    MethodDescriptor functionalMethodDescriptor =
-        functionalTypeDescriptor.getSingleAbstractMethodDescriptor();
-
-    TypeDeclaration jsFunctionDeclaration =
-        createJsFunctionTypeDeclaration(functionalTypeDescriptor);
-
     return DeclaredTypeDescriptor.newBuilder()
-        .setTypeDeclaration(jsFunctionDeclaration)
+        .setTypeDeclaration(createJsFunctionTypeDeclaration(functionalTypeDescriptor))
         .setTypeArgumentDescriptors(functionalTypeDescriptor.getTypeArgumentDescriptors())
-        .setDeclaredMethodDescriptorsFactory(
-            jsfunctionTypeDescriptor ->
-                ImmutableList.of(
-                    createJsFunctionMethodDescriptor(
-                        jsfunctionTypeDescriptor, functionalMethodDescriptor)))
         .build();
   }
 

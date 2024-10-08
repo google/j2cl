@@ -48,12 +48,12 @@ internal fun DeclaredTypeDescriptor.directSuperTypeForMethodCall(
         superType.declaredMethodDescriptors.find {
           it == methodDescriptor || it.isOverride(methodDescriptor)
         }
-      when (declaredSuperMethodDescriptor) {
+      when (declaredSuperMethodDescriptor?.declarationDescriptor) {
         // The method has not been found nor it is overridden in this supertype so continue looking
         // up the hierarchy; so if we find it up the hierarchy this is the supertype to return.
         null -> superType.takeIf { it.directSuperTypeForMethodCall(methodDescriptor) != null }
         // We found the implementation targeted, so return this supertype.
-        methodDescriptor -> superType
+        methodDescriptor.declarationDescriptor -> superType
         // We found an override of the method in the hierarchy, so this supertype is not providing
         // the implementation targeted.
         else -> null

@@ -424,7 +424,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   // the details.
   abstract MethodDescriptor getDeclarationDescriptorOrNullIfSelf();
 
-  @Override
   @Memoized
   public MethodDescriptor toRawMemberDescriptor() {
     return toBuilder()
@@ -436,6 +435,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
             getParameterDescriptors().stream()
                 .map(ParameterDescriptor::toRawParameterDescriptor)
                 .collect(toImmutableList()))
+        .setDeclarationDescriptor(getDeclarationDescriptor())
         .build();
   }
 

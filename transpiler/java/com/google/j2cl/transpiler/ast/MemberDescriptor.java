@@ -71,8 +71,6 @@ public abstract class MemberDescriptor
 
   public abstract MemberDescriptor getDeclarationDescriptor();
 
-  public abstract MemberDescriptor toRawMemberDescriptor();
-
   /** Returns true if {@code typeDescriptor} is the enclosing class of this member. */
   public boolean isMemberOf(DeclaredTypeDescriptor typeDescriptor) {
     return isMemberOf(typeDescriptor.getTypeDeclaration());

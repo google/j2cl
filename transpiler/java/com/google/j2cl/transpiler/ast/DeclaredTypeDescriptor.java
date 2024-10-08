@@ -210,10 +210,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return !getTypeArgumentDescriptors().isEmpty();
   }
 
-  /* PRIVATE AUTO_VALUE PROPERTIES */
-  @Nullable
-  abstract DescriptorFactory<ImmutableList<MethodDescriptor>> getDeclaredMethodDescriptorsFactory();
-
   @Nullable
   abstract DescriptorFactory<ImmutableList<FieldDescriptor>> getDeclaredFieldDescriptorsFactory();
 
@@ -556,7 +552,13 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
    */
   @Memoized
   public Collection<MethodDescriptor> getDeclaredMethodDescriptors() {
-    return getDeclaredMethodDescriptorsFactory().get(this);
+    if (isRaw()) {
+      return getTypeDeclaration().getDeclaredMethodDescriptors().stream()
+          .map(MethodDescriptor::toRawMemberDescriptor)
+          .collect(toImmutableList());
+    }
+    return specializeMethods(
+        getTypeDeclaration().getDeclaredMethodDescriptors(), getLocalParameterization());
   }
 
   /**
@@ -1283,11 +1285,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
                 getDeclaredFieldDescriptors().stream()
                     .map(f -> f.specializeTypeVariables(parameterization))
                     .collect(toImmutableList()))
-        .setDeclaredMethodDescriptorsFactory(
-            () ->
-                getDeclaredMethodDescriptors().stream()
-                    .map(m -> m.specializeTypeVariables(parameterization))
-                    .collect(toImmutableList()))
         .build();
   }
 
@@ -1342,7 +1339,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         // Default values.
         .setNullable(true)
         .setTypeArgumentDescriptors(ImmutableList.of())
-        .setDeclaredMethodDescriptorsFactory(() -> ImmutableList.of())
         .setDeclaredFieldDescriptorsFactory(() -> ImmutableList.of());
   }
 
@@ -1354,15 +1350,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
     public abstract Builder setTypeArgumentDescriptors(
         Iterable<? extends TypeDescriptor> typeArgumentDescriptors);
-
-    public abstract Builder setDeclaredMethodDescriptorsFactory(
-        DescriptorFactory<ImmutableList<MethodDescriptor>> declaredMethodDescriptorsFactory);
-
-    public Builder setDeclaredMethodDescriptorsFactory(
-        Supplier<ImmutableList<MethodDescriptor>> declaredMethodDescriptorsFactory) {
-      return setDeclaredMethodDescriptorsFactory(
-          typeDescriptor -> declaredMethodDescriptorsFactory.get());
-    }
 
     public abstract Builder setDeclaredFieldDescriptorsFactory(
         DescriptorFactory<ImmutableList<FieldDescriptor>> declaredFieldDescriptorsFactory);

@@ -86,9 +86,6 @@ public final class LambdaImplementorTypeDescriptors {
     return DeclaredTypeDescriptor.newBuilder()
         .setTypeDeclaration(implementorTypeDeclaration)
         .setTypeArgumentDescriptors(typeParameters)
-        .setDeclaredMethodDescriptorsFactory(
-            implementorTypeDescriptor ->
-                ImmutableList.of(getLambdaMethod(implementorTypeDescriptor)))
         .build();
   }
 

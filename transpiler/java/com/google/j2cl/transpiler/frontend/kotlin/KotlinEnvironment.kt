@@ -401,9 +401,6 @@ class KotlinEnvironment(
     val classDeclaration = irType.getClass()!!
     return DeclaredTypeDescriptor.newBuilder()
       .setTypeDeclaration(getDeclarationForType(classDeclaration))
-      .setDeclaredMethodDescriptorsFactory { _ ->
-        ImmutableList.copyOf(classDeclaration.methods.map { getMethodDescriptor(it, emptyMap()) })
-      }
       .setDeclaredFieldDescriptorsFactory { _ ->
         ImmutableList.copyOf(
           classDeclaration.enumEntries.map(::getDeclaredFieldDescriptor) +

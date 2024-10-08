@@ -997,17 +997,6 @@ class JavaEnvironment {
       return cachedTypeDescriptor;
     }
 
-    Supplier<ImmutableList<MethodDescriptor>> declaredMethods =
-        () ->
-            getDeclaredMethods((ClassType) classType).stream()
-                .map(
-                    methodDeclarationPair ->
-                        createMethodDescriptor(
-                            createDeclaredTypeDescriptor(classType, inNullMarkedScope),
-                            methodDeclarationPair.getMethodSymbol(),
-                            methodDeclarationPair.getDeclarationMethodSymbol()))
-                .collect(toImmutableList());
-
     Supplier<ImmutableList<FieldDescriptor>> declaredFields =
         () ->
             ((TypeElement) classType.asElement())
@@ -1029,7 +1018,6 @@ class JavaEnvironment {
             .setTypeArgumentDescriptors(
                 createTypeDescriptors(getTypeArguments(classType), inNullMarkedScope))
             .setDeclaredFieldDescriptorsFactory(declaredFields)
-            .setDeclaredMethodDescriptorsFactory(declaredMethods)
             .build();
     putTypeDescriptorInCache(inNullMarkedScope, classType, typeDescriptor);
     return typeDescriptor;
