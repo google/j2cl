@@ -1232,6 +1232,13 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         .filter(Predicates.notNull());
   }
 
+  /**
+   * Returns a map of the type variables declared in this type context (including its enclosing ones
+   * if the type is an inner class) to the corresponding type argument.
+   */
+  // TODO(b/372291869): If the type is raw, there will still be a mapping for the type variables to
+  // their corresponding raw type, but there will be no way to know if the parameterization comes
+  // from a raw type or from a type that is not raw but has the same type arguments.
   @Memoized
   Map<TypeVariable, TypeDescriptor> getLocalParameterization() {
     ImmutableList<TypeVariable> typeVariables = getTypeDeclaration().getTypeParameterDescriptors();
@@ -1239,8 +1246,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
     Map<TypeVariable, TypeDescriptor> typeArgumentsByTypeVariable = new LinkedHashMap<>();
 
-    boolean isRaw = typeArguments.isEmpty();
-    if (isRaw) {
+    if (isRaw()) {
       typeArguments =
           typeVariables.stream().map(TypeVariable::toRawTypeDescriptor).collect(toImmutableList());
     }
