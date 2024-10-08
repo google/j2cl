@@ -461,20 +461,20 @@ public class OptimizeKotlinCompanions extends NormalizationPass {
 
     // The companion method is not annotated with `JvmStatic` create a new descriptor for the static
     // method.
-    return MethodDescriptor.Builder.from(companionMethod)
-        .setStatic(true)
-        .setSynthetic(true)
-        .setEnclosingTypeDescriptor(companionEnclosingType)
-        .setDeclarationDescriptor(
-            companionMethod.isDeclaration()
-                ? null
-                : getCorrespondingStaticMethodDescriptor(
-                    companionMethod.getDeclarationDescriptor()))
-        .setOriginalJsInfo(
-            companionEnclosingType.isNative() || companionEnclosingType.isJsFunctionInterface()
-                ? JsInfo.newBuilder().setJsMemberType(JsMemberType.NONE).setJsOverlay(true).build()
-                : JsInfo.NONE)
-        .build();
+    return companionMethod.transform(
+        builder ->
+            builder
+                .setStatic(true)
+                .setSynthetic(true)
+                .setEnclosingTypeDescriptor(companionEnclosingType)
+                .setOriginalJsInfo(
+                    companionEnclosingType.isNative()
+                            || companionEnclosingType.isJsFunctionInterface()
+                        ? JsInfo.newBuilder()
+                            .setJsMemberType(JsMemberType.NONE)
+                            .setJsOverlay(true)
+                            .build()
+                        : JsInfo.NONE));
   }
 
   /**
