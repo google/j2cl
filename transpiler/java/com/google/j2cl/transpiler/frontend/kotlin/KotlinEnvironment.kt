@@ -401,12 +401,6 @@ class KotlinEnvironment(
     val classDeclaration = irType.getClass()!!
     return DeclaredTypeDescriptor.newBuilder()
       .setTypeDeclaration(getDeclarationForType(classDeclaration))
-      .setDeclaredFieldDescriptorsFactory { _ ->
-        ImmutableList.copyOf(
-          classDeclaration.enumEntries.map(::getDeclaredFieldDescriptor) +
-            classDeclaration.getDeclaredFields().map { getFieldDescriptor(it, emptyMap()) }
-        )
-      }
       .setNullable(irType.isNullable())
       .setTypeArgumentDescriptors(irType.arguments.map(::getReferenceTypeDescriptorForTypeArgument))
       .build()

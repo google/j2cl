@@ -1059,8 +1059,6 @@ public class JdtEnvironment {
             .setTypeDeclaration(createDeclarationForType(typeBinding.getTypeDeclaration()))
             .setTypeArgumentDescriptors(
                 getTypeArgumentTypeDescriptors(typeBinding, inNullMarkedScope))
-            .setDeclaredFieldDescriptorsFactory(
-                () -> createFieldDescriptorsOrderedById(typeBinding.getDeclaredFields()))
             .build();
     putTypeDescriptorInCache(inNullMarkedScope, typeBinding, typeDescriptor);
     return typeDescriptor;

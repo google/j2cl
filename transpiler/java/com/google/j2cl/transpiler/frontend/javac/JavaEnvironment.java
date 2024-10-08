@@ -997,18 +997,6 @@ class JavaEnvironment {
       return cachedTypeDescriptor;
     }
 
-    Supplier<ImmutableList<FieldDescriptor>> declaredFields =
-        () ->
-            ((TypeElement) classType.asElement())
-                .getEnclosedElements().stream()
-                    .filter(
-                        element ->
-                            element.getKind() == ElementKind.FIELD
-                                || element.getKind() == ElementKind.ENUM_CONSTANT)
-                    .map(VariableElement.class::cast)
-                    .map(this::createFieldDescriptor)
-                    .collect(toImmutableList());
-
     TypeDeclaration typeDeclaration = createDeclarationForType((TypeElement) classType.asElement());
 
     // Compute these even later
@@ -1017,7 +1005,6 @@ class JavaEnvironment {
             .setTypeDeclaration(typeDeclaration)
             .setTypeArgumentDescriptors(
                 createTypeDescriptors(getTypeArguments(classType), inNullMarkedScope))
-            .setDeclaredFieldDescriptorsFactory(declaredFields)
             .build();
     putTypeDescriptorInCache(inNullMarkedScope, classType, typeDescriptor);
     return typeDescriptor;

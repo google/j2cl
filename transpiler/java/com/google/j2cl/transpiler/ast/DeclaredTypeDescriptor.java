@@ -50,7 +50,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
-import java.util.function.Supplier;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
 
@@ -209,9 +208,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   public boolean hasTypeArguments() {
     return !getTypeArgumentDescriptors().isEmpty();
   }
-
-  @Nullable
-  abstract DescriptorFactory<ImmutableList<FieldDescriptor>> getDeclaredFieldDescriptorsFactory();
 
   /**
    * Returns a list of the type descriptors of interfaces that are explicitly implemented directly
@@ -567,7 +563,14 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
    */
   @Memoized
   public Collection<FieldDescriptor> getDeclaredFieldDescriptors() {
-    return getDeclaredFieldDescriptorsFactory().get(this);
+    if (isRaw()) {
+      return getTypeDeclaration().getDeclaredFieldDescriptors().stream()
+          .map(FieldDescriptor::toRawMemberDescriptor)
+          .collect(toImmutableList());
+    }
+    return getTypeDeclaration().getDeclaredFieldDescriptors().stream()
+        .map(f -> f.specializeTypeVariables(getLocalParameterization()))
+        .collect(toImmutableList());
   }
 
   @Memoized
@@ -1280,11 +1283,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
             getTypeArgumentDescriptors().stream()
                 .map(t -> t.specializeTypeVariables(parameterization, seen))
                 .collect(toImmutableList()))
-        .setDeclaredFieldDescriptorsFactory(
-            () ->
-                getDeclaredFieldDescriptors().stream()
-                    .map(f -> f.specializeTypeVariables(parameterization))
-                    .collect(toImmutableList()))
         .build();
   }
 
@@ -1338,8 +1336,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return new AutoValue_DeclaredTypeDescriptor.Builder()
         // Default values.
         .setNullable(true)
-        .setTypeArgumentDescriptors(ImmutableList.of())
-        .setDeclaredFieldDescriptorsFactory(() -> ImmutableList.of());
+        .setTypeArgumentDescriptors(ImmutableList.of());
   }
 
   /** Builder for a TypeDescriptor. */
@@ -1350,15 +1347,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
     public abstract Builder setTypeArgumentDescriptors(
         Iterable<? extends TypeDescriptor> typeArgumentDescriptors);
-
-    public abstract Builder setDeclaredFieldDescriptorsFactory(
-        DescriptorFactory<ImmutableList<FieldDescriptor>> declaredFieldDescriptorsFactory);
-
-    public Builder setDeclaredFieldDescriptorsFactory(
-        Supplier<ImmutableList<FieldDescriptor>> declaredFieldDescriptorsFactory) {
-      return setDeclaredFieldDescriptorsFactory(
-          typeDescriptor -> declaredFieldDescriptorsFactory.get());
-    }
 
     public abstract Builder setTypeDeclaration(TypeDeclaration typeDeclaration);
 
