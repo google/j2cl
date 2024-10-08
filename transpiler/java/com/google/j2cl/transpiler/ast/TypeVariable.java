@@ -316,6 +316,14 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
       TypeDescriptor upperBound, @Nullable TypeDescriptor lowerBound) {
     String upperBoundKey = "<??_^_>" + upperBound.getUniqueId();
     String lowerBoundKey = lowerBound == null ? "" : "<??_v_>" + lowerBound.getUniqueId();
+
+    String name = "?";
+    if (lowerBound != null) {
+      name += " super " + lowerBound.getReadableDescription();
+    } else if (!TypeDescriptors.isJavaLangObject(upperBound)) {
+      name += " extends " + upperBound.getReadableDescription();
+    }
+
     return TypeVariable.newBuilder()
         .setWildcard(true)
         .setNullabilityAnnotation(NullabilityAnnotation.NONE)
@@ -325,7 +333,7 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
         // type variables coming from JDT, which follow "<declaring_type>:<name>...".
         // {@see org.eclipse.jdt.core.BindingKey}.
         .setUniqueKey(upperBoundKey + lowerBoundKey)
-        .setName("?")
+        .setName(name)
         .build();
   }
 
