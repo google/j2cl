@@ -25,8 +25,6 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Origin;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
-import javax.annotation.Nullable;
 
 /** Utility TypeDescriptors methods related to lambda synthesis. */
 // TODO(b/63118697): Simplify this code once TD refactoring makes it easier to implement.
@@ -184,19 +182,15 @@ public final class LambdaAdaptorTypeDescriptors {
 
     MethodDescriptor functionalInterfaceMethodDescriptor =
         functionalInterfaceTypeDescriptor.getSingleAbstractMethodDescriptor();
-    // TODO(rluble): Migrate to MethodDescriptor.transform.
     return MethodDescriptor.Builder.from(functionalInterfaceMethodDescriptor)
-        .setNative(false)
-        // This is the declaration.
-        .setDeclarationDescriptor(
-            createRelatedMethodDeclaration(
-                LambdaAdaptorTypeDescriptors::getAdaptorForwardingMethod, adaptorTypeDescriptor))
+        .setDeclarationDescriptor(null)
         .setEnclosingTypeDescriptor(adaptorTypeDescriptor)
         // Remove the method type parameters as they when moved to the adaptor type.
         .setTypeParameterTypeDescriptors(ImmutableList.of())
         .setTypeArgumentTypeDescriptors(ImmutableList.of())
         .setSynthetic(false)
         .setAbstract(false)
+        .setNative(false)
         .build();
   }
 
@@ -210,24 +204,6 @@ public final class LambdaAdaptorTypeDescriptors {
         .setTypeDeclaration(createJsFunctionTypeDeclaration(functionalTypeDescriptor))
         .setTypeArgumentDescriptors(functionalTypeDescriptor.getTypeArgumentDescriptors())
         .build();
-  }
-
-  /**
-   * Removes the varargs attribute from the varargs parameter if {@code functionalMethodDescriptor}
-   * is a varargs method.
-   */
-  private static MethodDescriptor removeJsMethodVarargs(
-      MethodDescriptor functionalMethodDescriptor) {
-    return functionalMethodDescriptor.transform(
-        builder ->
-            builder.setParameterDescriptors(
-                builder.getParameterDescriptors().stream()
-                    .map(
-                        parameterDescriptor ->
-                            ParameterDescriptor.newBuilder()
-                                .setTypeDescriptor(parameterDescriptor.getTypeDescriptor())
-                                .build())
-                    .collect(toImmutableList())));
   }
 
   /** Returns the TypeDeclaration for the JsFunction class. */
@@ -261,50 +237,35 @@ public final class LambdaAdaptorTypeDescriptors {
   /** Returns the MethodDescriptor for the single method in the synthetic @JsFunction interface. */
   private static MethodDescriptor createJsFunctionMethodDescriptor(
       DeclaredTypeDescriptor jsfunctionTypeDescriptor, MethodDescriptor singleAbstractMethod) {
-    // Remove varargs if the functional method is not a JsMethod, otherwise it will become
-    // JsVarargs due to being varargs in a JsFunction, that will cause it to loose
-    // runtime type checking on the varargs parameter.
-    singleAbstractMethod =
-        singleAbstractMethod.isJsMethod()
-            ? singleAbstractMethod
-            : removeJsMethodVarargs(singleAbstractMethod);
     // Remove the type parameters in the functional method since they are not allowed in
     // @JsFunction interfaces.
     singleAbstractMethod = singleAbstractMethod.withoutTypeParameters();
 
-    return createJsFunctionMethodDescriptorImpl(jsfunctionTypeDescriptor, singleAbstractMethod);
-  }
+    // Remove varargs if the functional method is not a JsMethod, otherwise it will become
+    // JsVarargs due to being varargs in a JsFunction, that will cause it to loose
+    // runtime type checking on the varargs parameter.
+    var parameterDescriptors =
+        singleAbstractMethod.isJsMethod()
+            ? singleAbstractMethod.getParameterDescriptors()
+            : singleAbstractMethod.getParameterDescriptors().stream()
+                .map(
+                    parameterDescriptor ->
+                        ParameterDescriptor.newBuilder()
+                            .setTypeDescriptor(parameterDescriptor.getTypeDescriptor())
+                            .build())
+                .collect(toImmutableList());
 
-  private static MethodDescriptor createJsFunctionMethodDescriptorImpl(
-      DeclaredTypeDescriptor jsfunctionTypeDescriptor, MethodDescriptor simpliedMethod) {
-    // TODO(rluble): Migrate to MethodDescriptor.transform.
-    return MethodDescriptor.Builder.from(simpliedMethod)
+    return MethodDescriptor.Builder.from(singleAbstractMethod)
+        .setDeclarationDescriptor(null)
         .setEnclosingTypeDescriptor(jsfunctionTypeDescriptor)
-        .setDeclarationDescriptor(
-            createRelatedMethodDeclaration(
-                t ->
-                    createJsFunctionMethodDescriptorImpl(
-                        t, simpliedMethod.getDeclarationDescriptor()),
-                jsfunctionTypeDescriptor))
+        .setParameterDescriptors(parameterDescriptors)
         .setOriginalJsInfo(
             JsInfo.newBuilder()
                 .setJsMemberType(JsMemberType.NONE)
-                .setJsAsync(simpliedMethod.getJsInfo().isJsAsync())
+                .setJsAsync(singleAbstractMethod.getJsInfo().isJsAsync())
                 .build())
         .setNative(false)
         .build();
-  }
-
-  @Nullable
-  private static MethodDescriptor createRelatedMethodDeclaration(
-      Function<DeclaredTypeDescriptor, MethodDescriptor> creator,
-      DeclaredTypeDescriptor typeDescriptor) {
-    DeclaredTypeDescriptor unparameterizedTypeDescriptor =
-        typeDescriptor.toUnparameterizedTypeDescriptor();
-    if (unparameterizedTypeDescriptor.equals(typeDescriptor)) {
-      return null;
-    }
-    return creator.apply(unparameterizedTypeDescriptor);
   }
 
   private LambdaAdaptorTypeDescriptors() {}
