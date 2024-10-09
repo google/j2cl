@@ -185,7 +185,7 @@ public class AddEnumImplicitMethods extends NormalizationPass {
 
     ArrayTypeDescriptor arrayTypeDescriptor =
         ArrayTypeDescriptor.newBuilder()
-            .setComponentTypeDescriptor(enumType.getTypeDescriptor())
+            .setComponentTypeDescriptor(enumType.getTypeDescriptor().toNonNullable())
             .build();
 
     enumType.addMember(
