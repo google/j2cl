@@ -600,7 +600,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     String targetSignature = MethodDescriptor.buildMethodSignature(methodName, parameters);
     Set<MethodDescriptor> potentialMatches =
         getMethodDescriptors().stream()
-            .filter(Predicates.not(MethodDescriptor::isGeneralizingdBridge))
+            .filter(Predicates.not(MethodDescriptor::isSynthetic))
             .filter(m -> m.getSignature().equals(targetSignature))
             .collect(toCollection(HashSet::new));
 
@@ -614,7 +614,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         // Collect to a set so that we can remove from potential matches, and not get
         // ConcurrentModificationException.
         .collect(toImmutableSet())
-        .forEach(potentialMatches::remove);
+        .forEach(m -> potentialMatches.removeIf(m::isSameMethod));
     return Iterables.getOnlyElement(potentialMatches);
   }
 
@@ -1221,6 +1221,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return specializedTypeArgumentByTypeParameters;
   }
 
+  /** Returns a stream with all the direct supertypes of this type. */
   public Stream<DeclaredTypeDescriptor> getSuperTypesStream() {
     DeclaredTypeDescriptor superTypeDescriptor = getSuperTypeDescriptor();
     if (isInterface()) {
@@ -1230,6 +1231,17 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     }
     return Stream.concat(getInterfaceTypeDescriptors().stream(), Stream.of(superTypeDescriptor))
         .filter(Predicates.notNull());
+  }
+
+  /** Returns all the supertypes of this type. */
+  @Memoized
+  ImmutableSet<DeclaredTypeDescriptor> getTransitiveSuperTypes() {
+    var superTypes = ImmutableSet.<DeclaredTypeDescriptor>builder();
+    getSuperTypesStream().forEach(superTypes::add);
+    getSuperTypesStream()
+        .flatMap(t -> t.getTransitiveSuperTypes().stream())
+        .forEach(superTypes::add);
+    return superTypes.build();
   }
 
   /**

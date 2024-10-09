@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject;
 import static java.util.stream.Collectors.joining;
 
 import com.google.auto.value.AutoValue;
@@ -683,6 +684,16 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return ktObjcInfo != null ? ktObjcInfo.getObjectiveCName() : null;
   }
 
+  /** Returns true if this descriptor and {@code other} refer to the same method declaration. */
+  // TODO(b/372055363): This should be equivalent to
+  //  `getDeclarationDescriptor().equals(other.getDeclarationDescriptor())`
+  public boolean isSameMethod(MethodDescriptor other) {
+    return getEnclosingTypeDescriptor().isSameBaseType(other.getEnclosingTypeDescriptor())
+        && getDeclarationDescriptor()
+            .getSignature()
+            .equals(other.getDeclarationDescriptor().getSignature());
+  }
+
   @Override
   @Memoized
   public boolean isOrOverridesJavaLangObjectMethod() {
@@ -690,7 +701,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return false;
     }
 
-    if (TypeDescriptors.isJavaLangObject(getEnclosingTypeDescriptor())) {
+    if (isJavaLangObject(getEnclosingTypeDescriptor())) {
       return true;
     }
 
@@ -1009,8 +1020,19 @@ public abstract class MethodDescriptor extends MemberDescriptor {
    */
   @Memoized
   public ImmutableSet<MethodDescriptor> getJavaOverriddenMethodDescriptors() {
-    return getOverriddenMethodDescriptors(
-        this::isOverride, MethodDescriptor::getJavaOverriddenMethodDescriptors);
+    if (!isPolymorphic()) {
+      return ImmutableSet.of();
+    }
+
+    var overriddenMethodsBuilder = ImmutableSet.<MethodDescriptor>builder();
+
+    getEnclosingTypeDescriptor().getTransitiveSuperTypes().stream()
+        .flatMap(t -> t.getDeclaredMethodDescriptors().stream())
+        .filter(MethodDescriptor::isPolymorphic)
+        .filter(this::isOverride)
+        .forEach(overriddenMethodsBuilder::add);
+
+    return overriddenMethodsBuilder.build();
   }
 
   /**
@@ -1027,50 +1049,20 @@ public abstract class MethodDescriptor extends MemberDescriptor {
    */
   @Memoized
   public ImmutableSet<MethodDescriptor> getJsOverriddenMethodDescriptors() {
-    return getOverriddenMethodDescriptors(
-        m ->
-            m.getMangledName().equals(getMangledName())
-                // Interface methods never override class methods in JavaScript, but in our model
-                // we see the methods on all supertypes including those of java.lang.Object.
-                && (!getEnclosingTypeDescriptor().isInterface()
-                    || m.getEnclosingTypeDescriptor().isInterface()),
-        MethodDescriptor::getJsOverriddenMethodDescriptors);
-  }
-
-  /**
-   * Generic recursive computation of overridden.
-   *
-   * <p>Note that the getOverriddenMethodsFn is passed as a parameter to take advantage of the
-   * memoization and limit the computation cost.
-   */
-  private ImmutableSet<MethodDescriptor> getOverriddenMethodDescriptors(
-      Predicate<MethodDescriptor> isOverrideFn,
-      Function<MethodDescriptor, Set<MethodDescriptor>> getOverriddenMethodsFn) {
     if (!isPolymorphic()) {
       return ImmutableSet.of();
     }
 
-    ImmutableSet.Builder<MethodDescriptor> overriddenMethodsBuilder = new ImmutableSet.Builder<>();
+    var overriddenMethodsBuilder = ImmutableSet.<MethodDescriptor>builder();
 
     getEnclosingTypeDescriptor()
         .getSuperTypesStream()
-        .flatMap(
-            t ->
-                Stream.concat(
-                    // TODO(b/371568713): Different native methods might have the same mangled name
-                    // and getPolymorphicMethods will return only one of them in this case; to
-                    // workaround this problem we also include all native methods declared in the
-                    // type.
-                    t.getDeclaredMethodDescriptors().stream()
-                        .filter(MethodDescriptor::isPolymorphic)
-                        .filter(MethodDescriptor::isNative),
-                    t.getPolymorphicMethods().stream()))
-        .filter(isOverrideFn)
-        .forEach(
-            m -> {
-              overriddenMethodsBuilder.add(m);
-              overriddenMethodsBuilder.addAll(getOverriddenMethodsFn.apply(m));
-            });
+        // Remove java.lang.Object as a supertype if the type is an interface since in JavaScript
+        // interface methods never override class methods.
+        .filter(t -> !(getEnclosingTypeDescriptor().isInterface() && isJavaLangObject(t)))
+        .flatMap(t -> t.getPolymorphicMethods().stream())
+        .filter(m -> m.getMangledName().equals(getMangledName()))
+        .forEach(m -> overriddenMethodsBuilder.add(m).addAll(m.getJsOverriddenMethodDescriptors()));
 
     return overriddenMethodsBuilder.build();
   }
