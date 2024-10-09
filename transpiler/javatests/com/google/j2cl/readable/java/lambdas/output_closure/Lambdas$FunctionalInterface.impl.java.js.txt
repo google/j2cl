@@ -10,7 +10,7 @@ let $LambdaAdaptor = goog.forwardDeclare('lambdas.Lambdas.FunctionalInterface.$L
 class FunctionalInterface {
  /** @abstract @nodts @return {number} */
  m_m__int__int(/** number */ i) {}
- /** @nodts @return {FunctionalInterface} */
+ /** @nodts @return {!FunctionalInterface} */
  static $adapt(/** ?function(number):number */ fn) {
   FunctionalInterface.$clinit();
   return new $LambdaAdaptor(fn);

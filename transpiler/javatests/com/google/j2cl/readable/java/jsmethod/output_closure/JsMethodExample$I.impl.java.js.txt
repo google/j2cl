@@ -10,7 +10,7 @@ let $LambdaAdaptor = goog.forwardDeclare('jsmethod.JsMethodExample.I.$LambdaAdap
 class I {
  /** @abstract */
  mString(/** ?string */ s) {}
- /** @nodts @return {I} */
+ /** @nodts @return {!I} */
  static $adapt(/** ?function(?string):void */ fn) {
   I.$clinit();
   return new $LambdaAdaptor(fn);

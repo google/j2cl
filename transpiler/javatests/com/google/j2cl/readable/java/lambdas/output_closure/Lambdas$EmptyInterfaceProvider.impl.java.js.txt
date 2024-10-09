@@ -11,7 +11,7 @@ let $LambdaAdaptor = goog.forwardDeclare('lambdas.Lambdas.EmptyInterfaceProvider
 class EmptyInterfaceProvider {
  /** @abstract @nodts @return {EmptyInterface} */
  m_provide__lambdas_Lambdas_EmptyInterface() {}
- /** @nodts @return {EmptyInterfaceProvider} */
+ /** @nodts @return {!EmptyInterfaceProvider} */
  static $adapt(/** ?function():EmptyInterface */ fn) {
   EmptyInterfaceProvider.$clinit();
   return new $LambdaAdaptor(fn);

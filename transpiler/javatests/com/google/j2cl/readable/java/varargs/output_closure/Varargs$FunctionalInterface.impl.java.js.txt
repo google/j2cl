@@ -10,7 +10,7 @@ let $LambdaAdaptor = goog.forwardDeclare('varargs.Varargs.FunctionalInterface.$L
 class FunctionalInterface {
  /** @abstract @nodts */
  m_apply__arrayOf_java_lang_String__void(/** Array<?string> */ strings) {}
- /** @nodts @return {FunctionalInterface} */
+ /** @nodts @return {!FunctionalInterface} */
  static $adapt(/** ?function(Array<?string>):void */ fn) {
   FunctionalInterface.$clinit();
   return new $LambdaAdaptor(fn);

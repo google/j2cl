@@ -10,7 +10,7 @@ let $LambdaAdaptor = goog.forwardDeclare('bridgemethods.TestCase102.BI2.$LambdaA
 class BI2 {
  /** @abstract */
  set(/** ?string */ value) {}
- /** @nodts @return {BI2} */
+ /** @nodts @return {!BI2} */
  static $adapt(/** ?function(?string):void */ fn) {
   BI2.$clinit();
   return new $LambdaAdaptor(fn);

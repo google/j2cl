@@ -10,7 +10,7 @@ let $LambdaAdaptor = goog.forwardDeclare('typewildcards.TypeWildCards.Y.$LambdaA
 class Y {
  /** @abstract @nodts */
  m_n__void() {}
- /** @nodts @return {Y} */
+ /** @nodts @return {!Y} */
  static $adapt(/** ?function():void */ fn) {
   Y.$clinit();
   return new $LambdaAdaptor(fn);

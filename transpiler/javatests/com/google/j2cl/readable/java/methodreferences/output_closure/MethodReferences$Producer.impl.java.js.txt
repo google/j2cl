@@ -11,7 +11,7 @@ let $LambdaAdaptor = goog.forwardDeclare('methodreferences.MethodReferences.Prod
 class Producer {
  /** @abstract @nodts @return {T} */
  m_produce__java_lang_Object() {}
- /** @nodts @template T @return {Producer<T>} */
+ /** @nodts @template T @return {!Producer<T>} */
  static $adapt(/** ?function():T */ fn) {
   Producer.$clinit();
   return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));

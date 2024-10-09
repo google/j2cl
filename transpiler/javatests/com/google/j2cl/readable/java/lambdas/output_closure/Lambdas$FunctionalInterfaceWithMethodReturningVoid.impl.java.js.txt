@@ -10,7 +10,7 @@ let $LambdaAdaptor = goog.forwardDeclare('lambdas.Lambdas.FunctionalInterfaceWit
 class FunctionalInterfaceWithMethodReturningVoid {
  /** @abstract @nodts */
  m_run__void() {}
- /** @nodts @return {FunctionalInterfaceWithMethodReturningVoid} */
+ /** @nodts @return {!FunctionalInterfaceWithMethodReturningVoid} */
  static $adapt(/** ?function():void */ fn) {
   FunctionalInterfaceWithMethodReturningVoid.$clinit();
   return new $LambdaAdaptor(fn);

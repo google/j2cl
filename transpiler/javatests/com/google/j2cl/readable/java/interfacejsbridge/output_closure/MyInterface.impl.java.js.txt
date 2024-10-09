@@ -10,7 +10,7 @@ let $LambdaAdaptor = goog.forwardDeclare('interfacejsbridge.MyInterface.$LambdaA
 class MyInterface {
  /** @abstract @nodts @return {number} */
  m_foo__int__int(/** number */ a) {}
- /** @nodts @return {MyInterface} */
+ /** @nodts @return {!MyInterface} */
  static $adapt(/** ?function(number):number */ fn) {
   MyInterface.$clinit();
   return new $LambdaAdaptor(fn);

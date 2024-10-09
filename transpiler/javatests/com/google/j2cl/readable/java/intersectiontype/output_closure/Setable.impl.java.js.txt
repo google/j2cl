@@ -10,7 +10,7 @@ let $LambdaAdaptor = goog.forwardDeclare('intersectiontype.Setable.$LambdaAdapto
 class Setable {
  /** @abstract @nodts */
  m_set__int__void(/** number */ i) {}
- /** @nodts @return {Setable} */
+ /** @nodts @return {!Setable} */
  static $adapt(/** ?function(number):void */ fn) {
   Setable.$clinit();
   return new $LambdaAdaptor(fn);

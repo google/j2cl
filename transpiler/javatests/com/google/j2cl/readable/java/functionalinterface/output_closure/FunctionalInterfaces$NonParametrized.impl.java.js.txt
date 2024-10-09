@@ -10,7 +10,7 @@ let $LambdaAdaptor = goog.forwardDeclare('functionalinterface.FunctionalInterfac
 class NonParametrized {
  /** @abstract @nodts @return {?string} */
  m_apply__java_lang_String__java_lang_String(/** ?string */ string_1) {}
- /** @nodts @return {NonParametrized} */
+ /** @nodts @return {!NonParametrized} */
  static $adapt(/** ?function(?string):?string */ fn) {
   NonParametrized.$clinit();
   return new $LambdaAdaptor(fn);

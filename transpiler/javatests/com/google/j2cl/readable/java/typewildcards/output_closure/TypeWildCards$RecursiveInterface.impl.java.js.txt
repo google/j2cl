@@ -11,7 +11,7 @@ let $LambdaAdaptor = goog.forwardDeclare('typewildcards.TypeWildCards.RecursiveI
 class RecursiveInterface {
  /** @abstract @nodts @return {T} */
  m_m__typewildcards_TypeWildCards_RecursiveInterface() {}
- /** @nodts @template T, C @return {RecursiveInterface<T, C>} */
+ /** @nodts @template T, C @return {!RecursiveInterface<T, C>} */
  static $adapt(/** ?function():T */ fn) {
   RecursiveInterface.$clinit();
   return /**@type {!$LambdaAdaptor<T, C>}*/ (new $LambdaAdaptor(fn));

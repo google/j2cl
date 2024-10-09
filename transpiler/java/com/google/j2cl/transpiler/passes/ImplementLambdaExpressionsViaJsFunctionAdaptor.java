@@ -213,7 +213,7 @@ public class ImplementLambdaExpressionsViaJsFunctionAdaptor extends Normalizatio
         .setStatic(true)
         .setParameterTypeDescriptors(jsFunctionTypeDescriptor)
         .setTypeParameterTypeDescriptors(jsFunctionTypeDescriptor.getAllTypeVariables())
-        .setReturnTypeDescriptor(enclosingTypeDescriptor)
+        .setReturnTypeDescriptor(enclosingTypeDescriptor.toNonNullable())
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setOrigin(MethodOrigin.SYNTHETIC_ADAPT_LAMBDA)
         .build();

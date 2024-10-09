@@ -14,7 +14,7 @@ let $LambdaAdaptor = goog.forwardDeclare('interfacejsbridge.SubInterface.$Lambda
 class SubInterface {
  /** @abstract @override @return {number} */
  foo(/** number */ a) {}
- /** @nodts @return {SubInterface} */
+ /** @nodts @return {!SubInterface} */
  static $adapt(/** ?function(number):number */ fn) {
   SubInterface.$clinit();
   return new $LambdaAdaptor(fn);

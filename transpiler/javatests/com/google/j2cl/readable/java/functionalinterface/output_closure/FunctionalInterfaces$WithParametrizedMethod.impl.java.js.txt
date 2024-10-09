@@ -10,7 +10,7 @@ let $LambdaAdaptor = goog.forwardDeclare('functionalinterface.FunctionalInterfac
 class WithParametrizedMethod {
  /** @abstract @nodts @template T @return {T} */
  m_apply__java_lang_Object__java_lang_Object(/** T */ t) {}
- /** @nodts @return {WithParametrizedMethod} */
+ /** @nodts @return {!WithParametrizedMethod} */
  static $adapt(/** ?function(?):? */ fn) {
   WithParametrizedMethod.$clinit();
   return new $LambdaAdaptor(fn);

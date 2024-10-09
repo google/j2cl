@@ -11,7 +11,7 @@ let $LambdaAdaptor = goog.forwardDeclare('intersectiontype.Getable.$LambdaAdapto
 class Getable {
  /** @abstract @nodts @return {T} */
  m_get__java_lang_Object() {}
- /** @nodts @template T @return {Getable<T>} */
+ /** @nodts @template T @return {!Getable<T>} */
  static $adapt(/** ?function():T */ fn) {
   Getable.$clinit();
   return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));

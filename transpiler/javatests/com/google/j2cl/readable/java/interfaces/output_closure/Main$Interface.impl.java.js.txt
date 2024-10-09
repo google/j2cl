@@ -19,7 +19,7 @@ class Interface {
  }
  /** @abstract @return {?string} */
  toString() {}
- /** @nodts @template T @return {Interface<T>} */
+ /** @nodts @template T @return {!Interface<T>} */
  static $adapt(/** ?function():void */ fn) {
   Interface.$clinit();
   return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));

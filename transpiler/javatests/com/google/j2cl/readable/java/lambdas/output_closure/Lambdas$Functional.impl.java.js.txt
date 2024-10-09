@@ -11,7 +11,7 @@ let $LambdaAdaptor = goog.forwardDeclare('lambdas.Lambdas.Functional.$LambdaAdap
 class Functional {
  /** @abstract @nodts @return {Functional<T>} */
  m_wrap__lambdas_Lambdas_Functional__lambdas_Lambdas_Functional(/** Functional<T> */ f) {}
- /** @nodts @template T @return {Functional<T>} */
+ /** @nodts @template T @return {!Functional<T>} */
  static $adapt(/** ?function(Functional<T>):Functional<T> */ fn) {
   Functional.$clinit();
   return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));

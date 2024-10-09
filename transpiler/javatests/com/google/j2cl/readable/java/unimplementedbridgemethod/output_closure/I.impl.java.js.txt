@@ -16,7 +16,7 @@ class I {
   I.$clinit();
   return 0;
  }
- /** @nodts @template T @return {I<T>} */
+ /** @nodts @template T @return {!I<T>} */
  static $adapt(/** ?function(T):number */ fn) {
   I.$clinit();
   return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));

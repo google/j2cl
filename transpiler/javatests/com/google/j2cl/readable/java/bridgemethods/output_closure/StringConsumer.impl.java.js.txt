@@ -10,7 +10,7 @@ let $LambdaAdaptor = goog.forwardDeclare('bridgemethods.StringConsumer.$LambdaAd
 class StringConsumer {
  /** @abstract @nodts */
  m_accept__java_lang_String__void(/** ?string */ s) {}
- /** @nodts @return {StringConsumer} */
+ /** @nodts @return {!StringConsumer} */
  static $adapt(/** ?function(?string):void */ fn) {
   StringConsumer.$clinit();
   return new $LambdaAdaptor(fn);

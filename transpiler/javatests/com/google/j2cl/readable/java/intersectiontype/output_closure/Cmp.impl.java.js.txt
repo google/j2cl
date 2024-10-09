@@ -12,7 +12,7 @@ class Cmp {
  m_cmp__int() {}
  /** @abstract @nodts @return {number} */
  m_defaultM__int() {}
- /** @nodts @return {Cmp} */
+ /** @nodts @return {!Cmp} */
  static $adapt(/** ?function():number */ fn) {
   Cmp.$clinit();
   return new $LambdaAdaptor(fn);

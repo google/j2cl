@@ -14,7 +14,7 @@ let $LambdaAdaptor = goog.forwardDeclare('lambdas.Lambdas.JsSupplier.$LambdaAdap
 class JsSupplier {
  /** @abstract @return {T} */
  get() {}
- /** @nodts @template T @return {JsSupplier<T>} */
+ /** @nodts @template T @return {!JsSupplier<T>} */
  static $adapt(/** ?function():T */ fn) {
   JsSupplier.$clinit();
   return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));

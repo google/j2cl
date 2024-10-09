@@ -10,7 +10,7 @@ let $LambdaAdaptor = goog.forwardDeclare('functionalinterface.FunctionalInterfac
 class WithKtProperty {
  /** @abstract @nodts @return {number} */
  m_size__int() {}
- /** @nodts @return {WithKtProperty} */
+ /** @nodts @return {!WithKtProperty} */
  static $adapt(/** ?function():number */ fn) {
   WithKtProperty.$clinit();
   return new $LambdaAdaptor(fn);

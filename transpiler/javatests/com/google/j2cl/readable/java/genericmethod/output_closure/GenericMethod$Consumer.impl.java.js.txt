@@ -11,7 +11,7 @@ let $LambdaAdaptor = goog.forwardDeclare('genericmethod.GenericMethod.Consumer.$
 class Consumer {
  /** @abstract @nodts */
  m_accept__java_lang_Object__void(/** V */ v) {}
- /** @nodts @template V @return {Consumer<V>} */
+ /** @nodts @template V @return {!Consumer<V>} */
  static $adapt(/** ?function(V):void */ fn) {
   Consumer.$clinit();
   return /**@type {!$LambdaAdaptor<V>}*/ (new $LambdaAdaptor(fn));

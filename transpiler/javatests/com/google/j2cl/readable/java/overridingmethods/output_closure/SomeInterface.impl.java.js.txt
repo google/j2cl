@@ -10,7 +10,7 @@ let $LambdaAdaptor = goog.forwardDeclare('overridingmethods.SomeInterface.$Lambd
 class SomeInterface {
  /** @abstract @nodts */
  m_interfaceMethod__void() {}
- /** @nodts @return {SomeInterface} */
+ /** @nodts @return {!SomeInterface} */
  static $adapt(/** ?function():void */ fn) {
   SomeInterface.$clinit();
   return new $LambdaAdaptor(fn);

@@ -13,7 +13,7 @@ let StringIterator = goog.forwardDeclare('foreachstatement.ForEachStatement.Stri
 class StringIterable {
  /** @abstract @nodts @return {StringIterator} */
  m_iterator__foreachstatement_ForEachStatement_StringIterator() {}
- /** @nodts @return {StringIterable} */
+ /** @nodts @return {!StringIterable} */
  static $adapt(/** ?function():StringIterator */ fn) {
   StringIterable.$clinit();
   return new $LambdaAdaptor(fn);

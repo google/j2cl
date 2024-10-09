@@ -11,7 +11,7 @@ let $LambdaAdaptor = goog.forwardDeclare('methodreferences.MethodReferences.Pred
 class Predicate {
  /** @abstract @nodts @return {boolean} */
  m_apply__java_lang_Object__boolean(/** T */ parameter) {}
- /** @nodts @template T @return {Predicate<T>} */
+ /** @nodts @template T @return {!Predicate<T>} */
  static $adapt(/** ?function(T):boolean */ fn) {
   Predicate.$clinit();
   return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));

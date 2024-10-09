@@ -10,7 +10,7 @@ let $LambdaAdaptor = goog.forwardDeclare('lambdas.Lambdas.Runnable.$LambdaAdapto
 class Runnable {
  /** @abstract @nodts */
  m_run__void() {}
- /** @nodts @return {Runnable} */
+ /** @nodts @return {!Runnable} */
  static $adapt(/** ?function():void */ fn) {
   Runnable.$clinit();
   return new $LambdaAdaptor(fn);

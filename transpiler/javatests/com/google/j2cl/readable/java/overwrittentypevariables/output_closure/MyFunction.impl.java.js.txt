@@ -11,7 +11,7 @@ let $LambdaAdaptor = goog.forwardDeclare('overwrittentypevariables.MyFunction.$L
 class MyFunction {
  /** @abstract @nodts @return {T} */
  m_apply__java_lang_Object__java_lang_Object(/** F */ input) {}
- /** @nodts @template F, T @return {MyFunction<F, T>} */
+ /** @nodts @template F, T @return {!MyFunction<F, T>} */
  static $adapt(/** ?function(F):T */ fn) {
   MyFunction.$clinit();
   return /**@type {!$LambdaAdaptor<F, T>}*/ (new $LambdaAdaptor(fn));

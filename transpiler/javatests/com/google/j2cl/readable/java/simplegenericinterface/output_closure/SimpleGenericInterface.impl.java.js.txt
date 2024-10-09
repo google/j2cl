@@ -11,7 +11,7 @@ let $LambdaAdaptor = goog.forwardDeclare('simplegenericinterface.SimpleGenericIn
 class SimpleGenericInterface {
  /** @abstract @nodts @return {T} */
  m_fun__java_lang_Object__java_lang_Object(/** T */ t) {}
- /** @nodts @template T @return {SimpleGenericInterface<T>} */
+ /** @nodts @template T @return {!SimpleGenericInterface<T>} */
  static $adapt(/** ?function(T):T */ fn) {
   SimpleGenericInterface.$clinit();
   return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));

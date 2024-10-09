@@ -11,7 +11,7 @@ let $LambdaAdaptor = goog.forwardDeclare('nullability.defaultnullable.DefaultNul
 class Consumer {
  /** @abstract @nodts */
  m_accept__java_lang_Object__void(/** T */ t) {}
- /** @nodts @template T @return {Consumer<T>} */
+ /** @nodts @template T @return {!Consumer<T>} */
  static $adapt(/** ?function(T):void */ fn) {
   Consumer.$clinit();
   return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));

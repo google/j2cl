@@ -10,7 +10,7 @@ let $LambdaAdaptor = goog.forwardDeclare('jsfunction.Main.ApiWithMethodReturning
 class ApiWithMethodReturningParametricJsFunction {
  /** @abstract @nodts @template T @return {?function(T):void} */
  m_anApi__jsfunction_Main_ParametricJsFunction() {}
- /** @nodts @return {ApiWithMethodReturningParametricJsFunction} */
+ /** @nodts @return {!ApiWithMethodReturningParametricJsFunction} */
  static $adapt(/** ?function():?function(?):void */ fn) {
   ApiWithMethodReturningParametricJsFunction.$clinit();
   return new $LambdaAdaptor(fn);

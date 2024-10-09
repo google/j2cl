@@ -11,7 +11,7 @@ let $LambdaAdaptor = goog.forwardDeclare('overwrittentypevariables.HashFunction.
  * @extends {MyFunction<T, ?string>}
  */
 class HashFunction {
- /** @nodts @template T @return {HashFunction<T>} */
+ /** @nodts @template T @return {!HashFunction<T>} */
  static $adapt(/** ?function(T):?string */ fn) {
   HashFunction.$clinit();
   return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));

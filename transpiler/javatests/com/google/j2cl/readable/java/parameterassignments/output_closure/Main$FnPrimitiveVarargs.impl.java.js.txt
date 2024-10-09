@@ -10,7 +10,7 @@ let $LambdaAdaptor = goog.forwardDeclare('parameterassignments.Main.FnPrimitiveV
 class FnPrimitiveVarargs {
  /** @abstract @nodts */
  m_test__int__arrayOf_int__void(/** number */ i, /** Array<number> */ is) {}
- /** @nodts @return {FnPrimitiveVarargs} */
+ /** @nodts @return {!FnPrimitiveVarargs} */
  static $adapt(/** ?function(number, Array<number>):void */ fn) {
   FnPrimitiveVarargs.$clinit();
   return new $LambdaAdaptor(fn);

@@ -12,7 +12,7 @@ let $LambdaAdaptor = goog.forwardDeclare('multipleabstractparents.MultipleAbstra
 class IStringList {
  /** @abstract @nodts @return {?string} */
  m_getFoo__java_lang_String__java_lang_String(/** ?string */ string_1) {}
- /** @nodts @return {IStringList} */
+ /** @nodts @return {!IStringList} */
  static $adapt(/** ?function(?string):?string */ fn) {
   IStringList.$clinit();
   return new $LambdaAdaptor(fn);

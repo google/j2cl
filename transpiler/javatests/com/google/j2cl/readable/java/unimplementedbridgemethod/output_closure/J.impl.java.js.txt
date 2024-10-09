@@ -10,7 +10,7 @@ let $LambdaAdaptor = goog.forwardDeclare('unimplementedbridgemethod.J.$LambdaAda
  * @extends {I<?string>}
  */
 class J {
- /** @nodts @return {J} */
+ /** @nodts @return {!J} */
  static $adapt(/** ?function(?string):number */ fn) {
   J.$clinit();
   return new $LambdaAdaptor(fn);

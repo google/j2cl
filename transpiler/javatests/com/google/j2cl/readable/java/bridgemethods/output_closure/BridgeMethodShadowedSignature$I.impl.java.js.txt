@@ -12,7 +12,7 @@ let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
 class I {
  /** @abstract @nodts @return {?string} */
  m_get__java_util_function_Consumer__java_lang_String(/** Consumer<?> */ consumer) {}
- /** @nodts @template I1 @return {I<I1>} */
+ /** @nodts @template I1 @return {!I<I1>} */
  static $adapt(/** ?function(Consumer<?>):?string */ fn) {
   I.$clinit();
   return /**@type {!$LambdaAdaptor<I1>}*/ (new $LambdaAdaptor(fn));

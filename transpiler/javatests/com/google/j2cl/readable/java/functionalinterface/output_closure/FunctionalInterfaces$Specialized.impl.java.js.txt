@@ -12,7 +12,7 @@ let $LambdaAdaptor = goog.forwardDeclare('functionalinterface.FunctionalInterfac
 class Specialized {
  /** @abstract @nodts @return {?string} */
  m_apply__java_lang_String__java_lang_String(/** ?string */ string_1) {}
- /** @nodts @return {Specialized} */
+ /** @nodts @return {!Specialized} */
  static $adapt(/** ?function(?string):?string */ fn) {
   Specialized.$clinit();
   return new $LambdaAdaptor(fn);

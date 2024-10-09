@@ -11,7 +11,7 @@ let $LambdaAdaptor = goog.forwardDeclare('jsenum.Main.Supplier.$LambdaAdaptor$im
 class Supplier {
  /** @abstract @nodts @return {T} */
  m_get__java_lang_Object() {}
- /** @nodts @template T @return {Supplier<T>} */
+ /** @nodts @template T @return {!Supplier<T>} */
  static $adapt(/** ?function():T */ fn) {
   Supplier.$clinit();
   return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));

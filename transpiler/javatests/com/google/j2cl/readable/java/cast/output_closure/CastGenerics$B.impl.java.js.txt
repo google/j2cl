@@ -10,7 +10,7 @@ let $LambdaAdaptor = goog.forwardDeclare('cast.CastGenerics.B.$LambdaAdaptor$imp
 class B {
  /** @abstract @nodts */
  m_mB__void() {}
- /** @nodts @return {B} */
+ /** @nodts @return {!B} */
  static $adapt(/** ?function():void */ fn) {
   B.$clinit();
   return new $LambdaAdaptor(fn);

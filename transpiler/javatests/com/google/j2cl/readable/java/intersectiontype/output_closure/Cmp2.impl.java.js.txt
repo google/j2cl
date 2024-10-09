@@ -11,7 +11,7 @@ let $LambdaAdaptor = goog.forwardDeclare('intersectiontype.Cmp2.$LambdaAdaptor$i
 class Cmp2 {
  /** @abstract @nodts @return {number} */
  m_cmp__int__int(/** number */ a) {}
- /** @nodts @template T @return {Cmp2<T>} */
+ /** @nodts @template T @return {!Cmp2<T>} */
  static $adapt(/** ?function(number):number */ fn) {
   Cmp2.$clinit();
   return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));

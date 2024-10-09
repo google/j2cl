@@ -12,7 +12,7 @@ let $LambdaAdaptor = goog.forwardDeclare('bridgemethods.InterfaceOverridingDefau
 class InterfaceOverridingDefaultMethod {
  /** @abstract @nodts @return {?string} */
  m_foo__java_lang_String() {}
- /** @nodts @return {InterfaceOverridingDefaultMethod} */
+ /** @nodts @return {!InterfaceOverridingDefaultMethod} */
  static $adapt(/** ?function():?string */ fn) {
   InterfaceOverridingDefaultMethod.$clinit();
   return new $LambdaAdaptor(fn);

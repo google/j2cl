@@ -11,7 +11,7 @@ let $LambdaAdaptor = goog.forwardDeclare('methodreferences.MethodReferences.Arra
 class ArrayProducer {
  /** @abstract @nodts @return {Array<T>} */
  m_produce__int__arrayOf_java_lang_Object(/** number */ size) {}
- /** @nodts @template T @return {ArrayProducer<T>} */
+ /** @nodts @template T @return {!ArrayProducer<T>} */
  static $adapt(/** ?function(number):Array<T> */ fn) {
   ArrayProducer.$clinit();
   return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));

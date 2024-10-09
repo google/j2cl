@@ -11,7 +11,7 @@ let $LambdaAdaptor = goog.forwardDeclare('multipleabstractparents.MultipleAbstra
 class List {
  /** @abstract @nodts @return {?string} */
  m_getFoo__java_lang_Object__java_lang_String(/** T */ t) {}
- /** @nodts @template T @return {List<T>} */
+ /** @nodts @template T @return {!List<T>} */
  static $adapt(/** ?function(T):?string */ fn) {
   List.$clinit();
   return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));

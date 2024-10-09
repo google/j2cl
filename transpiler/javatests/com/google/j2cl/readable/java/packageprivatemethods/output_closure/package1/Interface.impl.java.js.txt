@@ -10,7 +10,7 @@ let $LambdaAdaptor = goog.forwardDeclare('packageprivatemethods.package1.Interfa
 class Interface {
  /** @abstract @nodts @return {number} */
  m_exposedInChildWithInterface__int__int__int(/** number */ a, /** number */ b) {}
- /** @nodts @return {Interface} */
+ /** @nodts @return {!Interface} */
  static $adapt(/** ?function(number, number):number */ fn) {
   Interface.$clinit();
   return new $LambdaAdaptor(fn);

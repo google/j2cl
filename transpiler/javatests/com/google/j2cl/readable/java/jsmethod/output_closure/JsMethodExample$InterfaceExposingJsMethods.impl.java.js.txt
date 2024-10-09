@@ -14,7 +14,7 @@ class InterfaceExposingJsMethods {
  m() {}
  /** @abstract */
  n() {}
- /** @nodts @return {InterfaceExposingJsMethods} */
+ /** @nodts @return {!InterfaceExposingJsMethods} */
  static $adapt(/** ?function():void */ fn) {
   InterfaceExposingJsMethods.$clinit();
   return new $LambdaAdaptor(fn);

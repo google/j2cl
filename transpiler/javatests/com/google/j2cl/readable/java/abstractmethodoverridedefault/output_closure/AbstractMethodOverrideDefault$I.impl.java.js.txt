@@ -12,7 +12,7 @@ class I {
  m_foo__void() {}
  /** @abstract @nodts */
  m_bar__void() {}
- /** @nodts @return {I} */
+ /** @nodts @return {!I} */
  static $adapt(/** ?function():void */ fn) {
   I.$clinit();
   return new $LambdaAdaptor(fn);

@@ -11,7 +11,7 @@ let $LambdaAdaptor = goog.forwardDeclare('typewildcards.Function.$LambdaAdaptor$
 class typewildcards_Function {
  /** @abstract @nodts @return {O} */
  m_apply__java_lang_Object__java_lang_Object(/** I */ i) {}
- /** @nodts @template I, O @return {typewildcards_Function<I, O>} */
+ /** @nodts @template I, O @return {!typewildcards_Function<I, O>} */
  static $adapt(/** ?function(I):O */ fn) {
   typewildcards_Function.$clinit();
   return /**@type {!$LambdaAdaptor<I, O>}*/ (new $LambdaAdaptor(fn));

@@ -11,7 +11,7 @@ let $LambdaAdaptor = goog.forwardDeclare('overwrittentypevariables.otherpkg.Para
 class ParameterizedType {
  /** @abstract @nodts @return {R} */
  m_accept__java_lang_Object__java_lang_Object(/** T */ value) {}
- /** @nodts @template T, R @return {ParameterizedType<T, R>} */
+ /** @nodts @template T, R @return {!ParameterizedType<T, R>} */
  static $adapt(/** ?function(T):R */ fn) {
   ParameterizedType.$clinit();
   return /**@type {!$LambdaAdaptor<T, R>}*/ (new $LambdaAdaptor(fn));

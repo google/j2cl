@@ -10,7 +10,7 @@ let $LambdaAdaptor = goog.forwardDeclare('instancejsmethods.MyInterface.$LambdaA
 class MyInterface {
  /** @abstract @nodts @return {number} */
  m_intfFoo__int() {}
- /** @nodts @return {MyInterface} */
+ /** @nodts @return {!MyInterface} */
  static $adapt(/** ?function():number */ fn) {
   MyInterface.$clinit();
   return new $LambdaAdaptor(fn);

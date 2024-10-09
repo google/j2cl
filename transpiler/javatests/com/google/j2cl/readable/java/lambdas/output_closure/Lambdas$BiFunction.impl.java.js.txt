@@ -14,7 +14,7 @@ class BiFunction {
  m_apply__java_lang_Object__java_lang_Object__java_lang_Object(/** T */ t, /** U */ u) {}
  /** @abstract @nodts @template V @return {BiFunction<T, U, V>} */
  m_andThen__lambdas_Lambdas_Function__lambdas_Lambdas_BiFunction(/** Lambdas_Function<?, ?> */ after) {}
- /** @nodts @template T, U, R @return {BiFunction<T, U, R>} */
+ /** @nodts @template T, U, R @return {!BiFunction<T, U, R>} */
  static $adapt(/** ?function(T, U):R */ fn) {
   BiFunction.$clinit();
   return /**@type {!$LambdaAdaptor<T, U, R>}*/ (new $LambdaAdaptor(fn));

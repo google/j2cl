@@ -11,7 +11,7 @@ let $LambdaAdaptor = goog.forwardDeclare('methodreferences.MethodReferences.BiFu
 class BiFunction {
  /** @abstract @nodts @return {V} */
  m_apply__java_lang_Object__java_lang_Object__java_lang_Object(/** T */ t, /** U */ u) {}
- /** @nodts @template T, U, V @return {BiFunction<T, U, V>} */
+ /** @nodts @template T, U, V @return {!BiFunction<T, U, V>} */
  static $adapt(/** ?function(T, U):V */ fn) {
   BiFunction.$clinit();
   return /**@type {!$LambdaAdaptor<T, U, V>}*/ (new $LambdaAdaptor(fn));

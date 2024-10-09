@@ -11,7 +11,7 @@ let $LambdaAdaptor = goog.forwardDeclare('bridgejsmethod.Main.G.$LambdaAdaptor$i
 class G {
  /** @abstract @nodts @return {V} */
  m_enclose__java_lang_Object__java_lang_Object(/** V */ value) {}
- /** @nodts @template V @return {G<V>} */
+ /** @nodts @template V @return {!G<V>} */
  static $adapt(/** ?function(V):V */ fn) {
   G.$clinit();
   return /**@type {!$LambdaAdaptor<V>}*/ (new $LambdaAdaptor(fn));

@@ -16,7 +16,7 @@ class WithObjectMethods {
  hashCode() {}
  /** @abstract @return {boolean} */
  equals(/** * */ object) {}
- /** @nodts @return {WithObjectMethods} */
+ /** @nodts @return {!WithObjectMethods} */
  static $adapt(/** ?function(?string):?string */ fn) {
   WithObjectMethods.$clinit();
   return new $LambdaAdaptor(fn);
