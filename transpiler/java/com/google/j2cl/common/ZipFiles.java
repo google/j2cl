@@ -33,7 +33,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 /** Small fill in for io.ZipFiles since it's not open source yet. */
-final class ZipFiles {
+public class ZipFiles {
 
   private static final class ZipEntryByteSource extends ByteSource {
 

@@ -19,19 +19,17 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.auto.value.AutoValue;
-import com.google.common.collect.Iterables;
-import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
+import com.google.j2cl.common.ZipFiles;
 import com.google.j2objc.annotations.ObjectiveCName;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.util.ArrayList;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 import javax.annotation.Nullable;
 import jsinterop.annotations.JsPackage;
 import org.jspecify.annotations.NullMarked;
@@ -97,36 +95,15 @@ public class PackageInfoCache {
         packageInfoCacheStorage.get() == null,
         "PackageInfoCache should only be initialized once per thread.");
 
-    // Constructs a URLClassLoader to do the dirty work of finding package-info.class files in the
-    // classpath of the compile.
-    List<URL> classPathUrls = new ArrayList<>();
-    for (String classPathEntry : classPathEntries) {
-      try {
-        classPathUrls.add(new URL("file:" + classPathEntry));
-      } catch (MalformedURLException e) {
-        problems.fatal(FatalError.CANNOT_OPEN_FILE, e.toString());
-      }
-    }
-
-    // Create a parent-less classloader to make sure it does not load anything from the classpath
-    // the compiler is running with. This allows to load supersourced versions of the annotations;
-    // however, the classes loaded by this classloader do not share the same class instances and
-    // are considered different classes than the ones loaded by the compiler *even* if they load
-    // the same classfile. Any manipulation of instances loaded by this classloader need to be done
-    // reflectively.
-    URLClassLoader resourcesClassLoader =
-        new URLClassLoader(Iterables.toArray(classPathUrls, URL.class), null);
-
-    packageInfoCacheStorage.set(new PackageInfoCache(resourcesClassLoader, problems));
+    packageInfoCacheStorage.set(new PackageInfoCache(classPathEntries, problems));
   }
 
   private final Map<String, PackageReport> packageReportByTypeName = new HashMap<>();
-  private final URLClassLoader resourcesClassLoader;
   private final Problems problems;
 
-  private PackageInfoCache(URLClassLoader resourcesClassLoader, Problems problems) {
-    this.resourcesClassLoader = resourcesClassLoader;
+  private PackageInfoCache(List<String> classPathEntries, Problems problems) {
     this.problems = problems;
+    indexPackageInfo(classPathEntries);
   }
 
   /**
@@ -161,31 +138,24 @@ public class PackageInfoCache {
   }
 
   private PackageReport getPackageReport(String packagePath) {
-    return packageReportByTypeName.computeIfAbsent(packagePath, this::parsePackageInfo);
+    return packageReportByTypeName.getOrDefault(packagePath, DEFAULT_PACKAGE_REPORT);
   }
 
-  private PackageReport parsePackageInfo(String packagePath) {
-    Map<String, String> packageAnnotations = findBytecodePackageAnnotations(packagePath);
-    if (packageAnnotations == null) {
-      return DEFAULT_PACKAGE_REPORT;
-    } else {
-      return PackageReport.newBuilder()
-          .setJsNamespace(getAnnotation(packageAnnotations, JsPackage.class))
-          .setObjectiveCName(getAnnotation(packageAnnotations, ObjectiveCName.class))
-          .setNullMarked(getAnnotation(packageAnnotations, NullMarked.class) != null)
-          .build();
+  private void indexPackageInfo(List<String> classPathEntries) {
+    for (String classPathEntry : classPathEntries) {
+      try (ZipFile zipFile = new ZipFile(classPathEntry)) {
+        for (ZipEntry entry : ZipFiles.entries(zipFile)) {
+          if (entry.getName().endsWith("package-info.class")) {
+            recordPackageInfo(zipFile.getInputStream(entry));
+          }
+        }
+      } catch (IOException e) {
+        problems.fatal(FatalError.CANNOT_OPEN_FILE, e.toString());
+      }
     }
   }
 
-  @Nullable
-  private Map<String, String> findBytecodePackageAnnotations(String packagePath) {
-    String packageInfoRelativeFilePath =
-        OutputUtils.getPackageRelativePath(packagePath, "package-info.class");
-    URL packageInfoResource = resourcesClassLoader.findResource(packageInfoRelativeFilePath);
-    if (packageInfoResource == null) {
-      return null;
-    }
-
+  private void recordPackageInfo(InputStream packageInfoStream) {
     var annotations = new HashMap<String, String>();
     // Prefill with known annotations so we can use it to avoid traversing unrelated annotations.
     annotations.put(JsPackage.class.getName(), null);
@@ -193,8 +163,7 @@ public class PackageInfoCache {
     annotations.put(NullMarked.class.getName(), null);
 
     final int opcode = org.objectweb.asm.Opcodes.ASM9;
-    parsePackageInfoClass(
-        packageInfoResource,
+    var visitor =
         new ClassVisitor(opcode) {
           @Override
           @Nullable
@@ -213,14 +182,19 @@ public class PackageInfoCache {
               }
             };
           }
-        });
+        };
 
-    return annotations;
-  }
-
-  private void parsePackageInfoClass(URL url, ClassVisitor classVisitor) {
     try {
-      new ClassReader(url.openStream()).accept(classVisitor, ClassReader.SKIP_CODE);
+      var reader = new ClassReader(packageInfoStream);
+      reader.accept(visitor, ClassReader.SKIP_CODE);
+      var packageName = reader.getClassName().replace("/package-info", "").replace('/', '.');
+      packageReportByTypeName.put(
+          packageName,
+          PackageReport.newBuilder()
+              .setJsNamespace(getAnnotation(annotations, JsPackage.class))
+              .setObjectiveCName(getAnnotation(annotations, ObjectiveCName.class))
+              .setNullMarked(getAnnotation(annotations, NullMarked.class) != null)
+              .build());
     } catch (IOException e) {
       problems.fatal(FatalError.CANNOT_OPEN_FILE, e.toString());
     }
