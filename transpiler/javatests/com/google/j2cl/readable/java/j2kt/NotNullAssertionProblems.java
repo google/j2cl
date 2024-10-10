@@ -21,86 +21,114 @@ import org.jspecify.annotations.Nullable;
 /** A test covering cases with unnecessary not-null {@code !!} assertions. */
 @NullMarked
 public class NotNullAssertionProblems {
-  public void testExplicitInvocationTypeArguments() {
+  public void testExplicitInvocationTypeArguments(
+      String string, Supplier<String> supplier, @Nullable String nullableString) {
     NotNullAssertionProblems.<@Nullable String>accept1(null);
 
-    NotNullAssertionProblems.<@Nullable String>accept2("foo", null);
-    NotNullAssertionProblems.<@Nullable String>accept2("foo", nullableString());
+    NotNullAssertionProblems.<@Nullable String>accept2(string, null);
+    NotNullAssertionProblems.<@Nullable String>accept2(string, nullableString);
 
-    NotNullAssertionProblems.<@Nullable String>acceptVararg("foo", null);
-    NotNullAssertionProblems.<@Nullable String>acceptVararg("foo", nullableString());
+    NotNullAssertionProblems.<@Nullable String>acceptVararg(string, null);
+    NotNullAssertionProblems.<@Nullable String>acceptVararg(string, nullableString);
+
+    NotNullAssertionProblems.<@Nullable String>acceptGeneric(supplier, nullableString);
+    NotNullAssertionProblems.<@Nullable String>acceptUpperBound(supplier, nullableString);
   }
 
-  public void testImplicitInvocationTypeArguments() {
+  public void testImplicitInvocationTypeArguments(
+      String string, Supplier<String> supplier, @Nullable String nullableString) {
     accept1(null);
 
-    accept2("foo", null);
-    accept2("foo", nullableString());
+    accept2(string, null);
+    accept2(string, nullableString);
 
-    acceptVararg("foo", null);
-    acceptVararg("foo", nullableString());
+    acceptVararg(string, null);
+    acceptVararg(string, nullableString);
+
+    acceptGeneric(supplier, nullableString);
+    acceptUpperBound(supplier, nullableString);
   }
 
-  public void testExplicitConstructorTypeArguments() {
+  public void testExplicitConstructorTypeArguments(
+      String string, Supplier<String> supplier, @Nullable String nullableString) {
     new Consumer<@Nullable String>(null);
 
-    new Consumer<@Nullable String>("foo", null);
-    new Consumer<@Nullable String>("foo", nullableString());
+    new Consumer<@Nullable String>(string, null);
+    new Consumer<@Nullable String>(string, nullableString);
 
-    new VarargConsumer<@Nullable String>("foo", null);
-    new VarargConsumer<@Nullable String>("foo", nullableString());
+    new VarargConsumer<@Nullable String>(string, null);
+    new VarargConsumer<@Nullable String>(string, nullableString);
+
+    new GenericConsumer<@Nullable String>(supplier, nullableString);
+    new UpperWildcardConsumer<@Nullable String>(supplier, nullableString);
   }
 
-  public void testImplicitConstructorTypeArguments() {
+  public void testImplicitConstructorTypeArguments(
+      String string, Supplier<String> supplier, @Nullable String nullableString) {
     new Consumer<>(null);
 
-    new Consumer<>("foo", null);
-    new Consumer<>("foo", nullableString());
+    new Consumer<>(string, null);
+    new Consumer<>(string, nullableString);
 
-    new VarargConsumer<>("foo", null);
-    new VarargConsumer<>("foo", nullableString());
+    new VarargConsumer<>(string, null);
+    new VarargConsumer<>(string, nullableString);
+
+    new GenericConsumer<>(supplier, nullableString);
+    new UpperWildcardConsumer<>(supplier, nullableString);
   }
 
-  public void testImplicitRawConstructorTypeArguments() {
+  public void testImplicitRawConstructorTypeArguments(
+      String string, Supplier<String> supplier, @Nullable String nullableString) {
     new Consumer(null);
 
-    new Consumer("foo", null);
-    new Consumer("foo", nullableString());
+    new Consumer(string, null);
+    new Consumer(string, nullableString);
 
-    new VarargConsumer("foo", null);
-    new VarargConsumer("foo", nullableString());
+    new VarargConsumer(string, null);
+    new VarargConsumer(string, nullableString);
+
+    new GenericConsumer(supplier, nullableString);
+    new UpperWildcardConsumer(supplier, nullableString);
   }
 
-  public static void testImplicitInvocationTypeArguments_wildcards(Supplier<?> wildcardSupplier) {
+  public static void testImplicitInvocationTypeArguments_wildcards(
+      String string, Supplier<?> wildcardSupplier) {
     // Non-null assertion should not be inserted for {@code supplier.getValue()}.
     accept1(wildcardSupplier.getValue());
-    accept2("foo", wildcardSupplier.getValue());
-    acceptVararg("foo", wildcardSupplier.getValue());
+    accept2(string, wildcardSupplier.getValue());
+    acceptVararg(string, wildcardSupplier.getValue());
   }
 
-  public static void testImplicitConstructorTypeArguments_wildcards(Supplier<?> wildcardSupplier) {
+  public static void testImplicitConstructorTypeArguments_wildcards(
+      String string, Supplier<?> wildcardSupplier) {
     // Non-null assertion should not be inserted for {@code supplier.getValue()}.
     new Consumer<>(wildcardSupplier.getValue());
-    new Consumer<>("foo", wildcardSupplier.getValue());
-    new VarargConsumer<>("foo", wildcardSupplier.getValue());
+    new Consumer<>(string, wildcardSupplier.getValue());
+    new VarargConsumer<>(string, wildcardSupplier.getValue());
   }
 
-  public static void testRawConstructorTypeArguments_wildcards(Supplier<?> wildcardSupplier) {
+  public static void testRawConstructorTypeArguments_wildcards(
+      String string, Supplier<?> wildcardSupplier) {
     // Non-null assertion should not be inserted for {@code supplier.getValue()}.
     new Consumer(wildcardSupplier.getValue());
-    new Consumer("foo", wildcardSupplier.getValue());
-    new VarargConsumer("foo", wildcardSupplier.getValue());
+    new Consumer(string, wildcardSupplier.getValue());
+    new VarargConsumer(string, wildcardSupplier.getValue());
   }
 
-  public static void testImplicitConstructorTypeArguments_inference() {
+  public static void testImplicitConstructorTypeArguments_inference(String string) {
     // Non-null assertion should not be inserted for {@code accept(null)}.
-    new Consumer<>("foo", null).accept(null);
-    new VarargConsumer<>("foo", null).accept(null);
+    new Consumer<>(string, null).accept(null);
+    new VarargConsumer<>(string, null).accept(null);
   }
 
   public static <T extends @Nullable Object> void accept1(T t) {}
 
   public static <T extends @Nullable Object> void accept2(T t1, T t2) {}
+
+  public static <T extends @Nullable Object> void acceptUpperBound(
+      Supplier<? extends T> t1, T t2) {}
+
+  public static <T extends @Nullable Object> void acceptGeneric(Supplier<T> t1, T t2) {}
 
   public static <T extends @Nullable Object> void acceptVararg(T... varargs) {}
 
@@ -118,8 +146,16 @@ public class NotNullAssertionProblems {
     public void accept(T t) {}
   }
 
-  public static @Nullable String nullableString() {
-    return null;
+  public static class GenericConsumer<T extends @Nullable Object> {
+    public GenericConsumer(Supplier<T> supplier, T t) {}
+
+    public void accept(T t) {}
+  }
+
+  public static class UpperWildcardConsumer<T extends @Nullable Object> {
+    public UpperWildcardConsumer(Supplier<? extends T> supplier, T t) {}
+
+    public void accept(T t) {}
   }
 
   static class C<V extends @Nullable Object> {
