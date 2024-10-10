@@ -899,7 +899,31 @@ public abstract class MethodDescriptor extends MemberDescriptor {
             // for all non-nullable "primitive" types).
             ? convertNonNullableBoxedTypesToPrimitives(getParameterTypeDescriptors())
             : getParameterTypeDescriptors();
-    return buildMethodSignature(getName(), parameterTypeDescriptors);
+    return buildMethodSignature(getNameApplyingKotlinRenames(), parameterTypeDescriptors);
+  }
+
+  /** Returns the method name but accounts for kotlin's rename of {@code T List.remove(int)}. */
+  // TODO(b/372484266): Do this in a more principled manner.
+  private String getNameApplyingKotlinRenames() {
+    if (getName().equals("remove")
+        && TypeDescriptors.isPrimitiveBoolean(getReturnTypeDescriptor())
+        && getParameterDescriptors().size() == 1
+        && TypeDescriptors.isPrimitiveInt(
+            Iterables.getOnlyElement(getParameterTypeDescriptors()))) {
+      // Kotlin renames the method `T List<T>.remove(int)` to `removeAt` so that it does not
+      // clash with `boolean List<T>.remove(T)` when specializing to `List<Int>`. Internally we need
+      // to preserve the original names to interoperate with Java code, so the new name only applies
+      // when reasoning about overrides. For the Java frontend it is safe to always use an arbitrary
+      // and unique override key for `boolean remove(int)`, since methods that only involve
+      // primitives in their parameter and return types can never specialize them. In Kotlin this
+      // change resolves the source renaming by making the signatures of `int remove(int)` and
+      // `boolean remove(int)` different.
+      // Note that in Java the remove API is `boolean List<Int>.remove(Object)` but kotlin creates a
+      // special override `boolean List<Int>.remove(Int)` which is the one we need to have a
+      // special case for here.
+      return "remove#specialized";
+    }
+    return getName();
   }
 
   private ImmutableList<TypeDescriptor> convertNonNullableBoxedTypesToPrimitives(
