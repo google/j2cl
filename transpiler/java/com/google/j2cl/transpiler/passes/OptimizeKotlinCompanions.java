@@ -200,7 +200,9 @@ public class OptimizeKotlinCompanions extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Node rewriteThisOrSuperReference(ThisOrSuperReference thisOrSuperReference) {
-            if (!thisOrSuperReference.getTypeDescriptor().equals(companion.getTypeDescriptor())) {
+            if (!thisOrSuperReference
+                .getTypeDescriptor()
+                .isSameBaseType(companion.getTypeDescriptor())) {
               return thisOrSuperReference;
             }
 
