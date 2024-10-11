@@ -526,8 +526,6 @@ public class TypeDescriptors {
             .setNative(!isBootstrapNamespace(jsNamespace))
             .setCustomizedJsNamespace(jsNamespace)
             .setPackage(getSyntheticPackage(jsNamespace))
-            .setUnparameterizedTypeDescriptorFactory(
-                () -> createSyntheticTypeDescriptor(kind, jsNamespace, className))
             // Synthetic type declarations do not need to have type variables.
             // TODO(b/63118697): Make sure declarations are consistent with descriptor w.r.t
             // type parameters.

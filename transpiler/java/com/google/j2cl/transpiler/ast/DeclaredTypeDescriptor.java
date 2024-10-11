@@ -1371,8 +1371,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     private static final ThreadLocalInterner<DeclaredTypeDescriptor> interner =
         new ThreadLocalInterner<>();
 
-    abstract TypeDeclaration getTypeDeclaration();
-
     abstract DeclaredTypeDescriptor autoBuild();
 
     @SuppressWarnings("ReferenceEquality")

@@ -219,9 +219,6 @@ class KotlinEnvironment(
         .setPackage(createPackageDeclaration(packageName.asString()))
         .setVisibility(irClass.j2clVisibility)
         .setEnclosingTypeDeclaration(getDeclarationForType(irClass.parentClassOrNull))
-        .setUnparameterizedTypeDescriptorFactory { _ ->
-          getDeclaredTypeDescriptor(irClass.defaultType)
-        }
         .setDeclaredMethodDescriptorsFactory { _ ->
           ImmutableList.copyOf(irClass.methods.map(::getDeclaredMethodDescriptor))
         }

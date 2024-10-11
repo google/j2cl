@@ -1160,8 +1160,6 @@ public class JdtEnvironment {
                 () ->
                     createTypeDescriptors(
                         typeBinding.getInterfaces(), isNullMarked, DeclaredTypeDescriptor.class))
-            .setUnparameterizedTypeDescriptorFactory(
-                () -> createDeclaredTypeDescriptor(typeBinding, isNullMarked))
             .setHasAbstractModifier(isAbstract)
             .setKind(kind)
             .setAnnotation(typeBinding.isAnnotation())

@@ -591,8 +591,9 @@ public abstract class TypeDeclaration
    */
   @Memoized
   public DeclaredTypeDescriptor toRawTypeDescriptor() {
-    return toUnparameterizedTypeDescriptor().toBuilder()
-        .setNullable(true)
+    return DeclaredTypeDescriptor.newBuilder()
+        .setTypeDeclaration(this)
+        // Explicitly set the type arguments to empty.
         .setTypeArgumentDescriptors(ImmutableList.of())
         .build();
   }
@@ -662,7 +663,10 @@ public abstract class TypeDeclaration
    */
   @Memoized
   public DeclaredTypeDescriptor toUnparameterizedTypeDescriptor() {
-    return getUnparameterizedTypeDescriptorFactory().get(this);
+    return DeclaredTypeDescriptor.newBuilder()
+        .setTypeDeclaration(this)
+        .setTypeArgumentDescriptors(getTypeParameterDescriptors())
+        .build();
   }
 
   /** A unique string for a give type. Used for interning. */
@@ -802,8 +806,6 @@ public abstract class TypeDeclaration
   abstract DescriptorFactory<ImmutableList<DeclaredTypeDescriptor>>
       getInterfaceTypeDescriptorsFactory();
 
-  abstract DescriptorFactory<DeclaredTypeDescriptor> getUnparameterizedTypeDescriptorFactory();
-
   @Nullable
   abstract DescriptorFactory<DeclaredTypeDescriptor> getSuperTypeDescriptorFactory();
 
@@ -822,16 +824,6 @@ public abstract class TypeDeclaration
   abstract Builder toBuilder();
 
   public static Builder newBuilder() {
-    DescriptorFactory<DeclaredTypeDescriptor> unparameterizedFactory =
-        // TODO(b/117105240): Remove once the type declaration is properly decoupled from the
-        // type descriptor. For now we need to set all the fields that might be parameterized to
-        // provide a reasonable default for the unparameterized type descriptor factory.
-        self ->
-            DeclaredTypeDescriptor.newBuilder()
-                .setTypeDeclaration(self)
-                .setTypeArgumentDescriptors(self.getTypeParameterDescriptors())
-                .build();
-
     return new AutoValue_TypeDeclaration.Builder()
         // Default values.
         .setVisibility(Visibility.PUBLIC)
@@ -861,7 +853,6 @@ public abstract class TypeDeclaration
         .setMemberTypeDeclarationsFactory(() -> ImmutableList.of())
         .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.of())
         .setEnclosingMethodDescriptorFactory(() -> null)
-        .setUnparameterizedTypeDescriptorFactory(unparameterizedFactory)
         .setSuperTypeDescriptorFactory(() -> null);
   }
 
@@ -989,15 +980,6 @@ public abstract class TypeDeclaration
     public Builder setSuperTypeDescriptorFactory(
         Supplier<DeclaredTypeDescriptor> superTypeDescriptorFactory) {
       return setSuperTypeDescriptorFactory(typeDescriptor -> superTypeDescriptorFactory.get());
-    }
-
-    public abstract Builder setUnparameterizedTypeDescriptorFactory(
-        DescriptorFactory<DeclaredTypeDescriptor> unparameterizedTypeDescriptorFactory);
-
-    public Builder setUnparameterizedTypeDescriptorFactory(
-        Supplier<DeclaredTypeDescriptor> unparameterizedTypeDescriptorFactory) {
-      return setUnparameterizedTypeDescriptorFactory(
-          typeDescriptor -> unparameterizedTypeDescriptorFactory.get());
     }
 
     public abstract Builder setDeclaredMethodDescriptorsFactory(

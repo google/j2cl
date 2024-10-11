@@ -39,22 +39,6 @@ public final class LambdaImplementorTypeDescriptors {
       DeclaredTypeDescriptor enclosingTypeDescriptor,
       int uniqueId,
       boolean capturesEnclosingInstance,
-      List<TypeVariable> typeParameters) {
-    return createLambdaImplementorTypeDescriptor(
-        typeDescriptor,
-        enclosingTypeDescriptor,
-        uniqueId,
-        capturesEnclosingInstance,
-        typeParameters,
-        false);
-  }
-
-  /** Returns the TypeDescriptor for lambda instances of the functional interface. */
-  public static DeclaredTypeDescriptor createLambdaImplementorTypeDescriptor(
-      TypeDescriptor typeDescriptor,
-      DeclaredTypeDescriptor enclosingTypeDescriptor,
-      int uniqueId,
-      boolean capturesEnclosingInstance,
       List<TypeVariable> typeParameters,
       boolean extendsAbstractAdaptor) {
 
@@ -75,7 +59,6 @@ public final class LambdaImplementorTypeDescriptors {
 
     TypeDeclaration implementorTypeDeclaration =
         createLambdaImplementorTypeDeclaration(
-            typeDescriptor,
             enclosingTypeDescriptor,
             interfaceTypeDescriptors,
             uniqueId,
@@ -129,7 +112,6 @@ public final class LambdaImplementorTypeDescriptors {
 
   /** Returns the TypeDeclaration for the LambdaAdaptor class. */
   private static TypeDeclaration createLambdaImplementorTypeDeclaration(
-      TypeDescriptor lambdaTypeDescriptor,
       DeclaredTypeDescriptor enclosingTypeDescriptor,
       List<DeclaredTypeDescriptor> interfaceTypeDescriptors,
       int uniqueId,
@@ -153,14 +135,6 @@ public final class LambdaImplementorTypeDescriptors {
                     getLambdaMethod(implementorTypeDeclaration.toUnparameterizedTypeDescriptor())))
         .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.copyOf(interfaceTypeDescriptors))
         .setTypeParameterDescriptors(typeParameters)
-        .setUnparameterizedTypeDescriptorFactory(
-            () ->
-                createLambdaImplementorTypeDescriptor(
-                    lambdaTypeDescriptor,
-                    enclosingTypeDescriptor,
-                    uniqueId,
-                    capturesEnclosingInstance,
-                    typeParameters))
         .setVisibility(Visibility.PUBLIC)
         .setCapturingEnclosingInstance(capturesEnclosingInstance)
         .setKind(Kind.CLASS)

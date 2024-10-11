@@ -1178,8 +1178,6 @@ class JavaEnvironment {
                     isNullMarked,
                     DeclaredTypeDescriptor.class,
                     typeElement))
-        .setUnparameterizedTypeDescriptorFactory(
-            () -> createDeclaredTypeDescriptor(typeElement.asType()))
         .setHasAbstractModifier(isAbstract)
         .setKind(kind)
         .setAnnotation(isAnnotation(typeElement))

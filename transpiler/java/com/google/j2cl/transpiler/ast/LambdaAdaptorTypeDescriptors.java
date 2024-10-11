@@ -87,7 +87,6 @@ public final class LambdaAdaptorTypeDescriptors {
 
     TypeDeclaration adaptorDeclaration =
         createLambdaAdaptorTypeDeclaration(
-            typeDescriptor.toUnparameterizedTypeDescriptor(),
             enclosingTypeDescriptor.toUnparameterizedTypeDescriptor(),
             TypeDescriptors.toUnparameterizedTypeDescriptors(interfaceTypeDescriptors),
             jsFunctionInterface.toUnparameterizedTypeDescriptor(),
@@ -116,7 +115,6 @@ public final class LambdaAdaptorTypeDescriptors {
 
   /** Returns the TypeDeclaration for the LambdaAdaptor class. */
   private static TypeDeclaration createLambdaAdaptorTypeDeclaration(
-      TypeDescriptor lambdaTypeDescriptor,
       DeclaredTypeDescriptor enclosingTypeDescriptor,
       List<DeclaredTypeDescriptor> interfaceTypeDescriptors,
       DeclaredTypeDescriptor jsFunctionInterface,
@@ -147,10 +145,6 @@ public final class LambdaAdaptorTypeDescriptors {
                         adaptorTypeDeclaration.toUnparameterizedTypeDescriptor()))
         .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.copyOf(interfaceTypeDescriptors))
         .setTypeParameterDescriptors(typeParameterDescriptors)
-        .setUnparameterizedTypeDescriptorFactory(
-            () ->
-                createLambdaAdaptorTypeDescriptor(
-                    lambdaTypeDescriptor, enclosingTypeDescriptor, isAbstract, uniqueId))
         .setHasAbstractModifier(isAbstract)
         .setVisibility(Visibility.PUBLIC)
         .setKind(Kind.CLASS)
@@ -226,8 +220,6 @@ public final class LambdaAdaptorTypeDescriptors {
                     createJsFunctionMethodDescriptor(
                         jsfunctionTypeDeclaration.toUnparameterizedTypeDescriptor(),
                         typeDeclaration.getSingleAbstractMethodDescriptor())))
-        .setUnparameterizedTypeDescriptorFactory(
-            () -> createJsFunctionTypeDescriptor(typeDeclaration.toUnparameterizedTypeDescriptor()))
         .setSingleAbstractMethodDescriptorFactory(t -> t.getDeclaredMethodDescriptors().get(0))
         .setVisibility(Visibility.PUBLIC)
         .setKind(Kind.INTERFACE)
