@@ -1561,6 +1561,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     abstract Builder setDeclarationDescriptorOrNullIfSelf(
         MethodDescriptor declarationMethodDescriptor);
 
+    abstract MethodDescriptor getDeclarationDescriptorOrNullIfSelf();
+
     abstract boolean isConstructor();
 
     abstract boolean isNative();
@@ -1576,6 +1578,11 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       boolean isNative = isNative() || getEnclosingTypeDescriptor().isNative();
       if (!isNative && ignoreNonNativeJsInfo.get()) {
         setOriginalJsInfo(JsInfo.NONE);
+      }
+
+      if (getDeclarationDescriptorOrNullIfSelf() == null) {
+        // Use a canonical version of the enclosing type descriptor in method declarations.
+        setEnclosingTypeDescriptor(getEnclosingTypeDescriptor().toUnparameterizedTypeDescriptor());
       }
 
       MethodDescriptor methodDescriptor = autoBuild();
