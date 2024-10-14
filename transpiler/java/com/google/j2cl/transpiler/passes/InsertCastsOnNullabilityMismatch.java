@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.collect.ImmutableList.toImmutableList;
-import static com.google.j2cl.transpiler.ast.TypeVariable.createWildcardWithUpperAndLowerBound;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -33,7 +32,6 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor;
 import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewriter;
-import java.util.Objects;
 import javax.annotation.Nullable;
 
 /** Inserts casts in places where necessary due to nullability differences in type arguments. */
@@ -201,14 +199,9 @@ public final class InsertCastsOnNullabilityMismatch extends NormalizationPass {
 
         switch (variance) {
           case IN_OUT:
-            TypeDescriptor projectedUpperBound = project(upperBound, variance, newSeen);
-            TypeDescriptor projectedLowerBound =
-                lowerBound == null ? null : project(lowerBound, variance, newSeen);
-            if (upperBound.equals(projectedUpperBound)
-                && Objects.equals(lowerBound, projectedLowerBound)) {
-              return typeVariable;
-            }
-            return createWildcardWithUpperAndLowerBound(projectedUpperBound, projectedLowerBound);
+            return typeVariable
+                .toWildcard()
+                .withRewrittenBounds(it -> project(it, variance, newSeen));
           case IN:
             if (lowerBound != null) {
               return project(lowerBound, Variance.IN, newSeen);

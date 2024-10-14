@@ -30,9 +30,9 @@ class MethodReference internal constructor() {
  companion object {
   @JvmStatic
   internal fun <T> foo_pp_j2kt(inputs: MethodReference.Foo<out MethodReference.Foo<out T>?>?) {
-   MethodReference.transform_pp_j2kt(inputs, object : MethodReference.Function<MethodReference.Foo<out T>?, MethodReference.Foo</* capture#1-of */ out T>?> {
-    override fun <H> apply(arg0: MethodReference.Foo<out T>?): MethodReference.Foo</* capture#1-of */ out T>? {
-     val arg0_1 /* capture#2-of out MethodReference.Foo<out T>? */ = arg0 as MethodReference.Foo<out T>?
+   MethodReference.transform_pp_j2kt(inputs, object : MethodReference.Function<MethodReference.Foo<out T>?, MethodReference.Foo<out T>?> {
+    override fun <H> apply(arg0: MethodReference.Foo<out T>?): MethodReference.Foo<out T>? {
+     val arg0_1 /* capture#1-of out MethodReference.Foo<out T>? */ = arg0 as MethodReference.Foo<out T>?
      return arg0_1!!.bar()
     }
    })
