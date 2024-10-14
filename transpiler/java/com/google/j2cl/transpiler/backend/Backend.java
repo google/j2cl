@@ -367,6 +367,11 @@ public enum Backend {
           VerifyReferenceScoping::new,
           VerifyNormalizedUnits::new);
     }
+
+    @Override
+    public boolean isClosure() {
+      return true;
+    }
   },
   WASM {
     @Override
@@ -781,6 +786,10 @@ public enum Backend {
   }
 
   public boolean isKotlin() {
+    return false;
+  }
+
+  public boolean isClosure() {
     return false;
   }
 }

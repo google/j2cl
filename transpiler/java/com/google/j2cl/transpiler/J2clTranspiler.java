@@ -68,7 +68,6 @@ class J2clTranspiler {
   private void transpileImpl() {
     if (options.getBackend().isWasm()) {
       // TODO(b/178738483): Remove hack that makes mangling backend dependent.
-      MemberDescriptor.setWasmManglingPatterns();
       TypeDeclaration.setImplementWasmJsEnumSemantics();
       // TODO(b/317164851): Remove hack that makes jsinfo ignored for non-native types in Wasm.
       FieldDescriptor.setIgnoreNonNativeJsInfo();
@@ -77,6 +76,8 @@ class J2clTranspiler {
       TypeDeclaration.setIgnoreJsFunctionAnnotations();
       // TODO(b/178738483): Remove hack that makes it possible to ignore DoNotAutobox in Wasm.
       MethodDescriptor.ParameterDescriptor.setIgnoreDoNotAutoboxAnnotations();
+    } else if (options.getBackend().isClosure()) {
+      MemberDescriptor.setClosureManglingPatterns();
     }
 
     Library library = options.getFrontend().parse(options, problems);
