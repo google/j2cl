@@ -53,34 +53,16 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
 
-/**
- * A usage-site reference to a declared type, i.e. a class, an interface or an enum.
- *
- * <p>Some properties are lazily calculated since type relationships are a graph (not a tree) and
- * this class is a value type. Those properties are set through {@code DescriptorFactory}.
- */
+/** A usage-site reference to a declared type, i.e. a class, an interface or an enum. */
 @Visitable
 @AutoValue
 public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     implements HasUnusableByJsSuppression {
 
-  /**
-   * References to some descriptors need to be deferred in some cases since it will cause infinite
-   * loops.
-   */
-  public interface DescriptorFactory<T> {
-    T get(DeclaredTypeDescriptor typeDescriptor);
-  }
+  /* The actual type declaration this descriptor is referencing. */
+  public abstract TypeDeclaration getTypeDeclaration();
 
-  @Memoized
-  @Nullable
-  public DeclaredTypeDescriptor getEnclosingTypeDescriptor() {
-    TypeDeclaration enclosingType = getTypeDeclaration().getEnclosingTypeDeclaration();
-    return enclosingType == null
-        ? null
-        : applyLocalParameterization(enclosingType.toUnparameterizedTypeDescriptor());
-  }
-
+  /* The parameterization for the type. */
   public abstract ImmutableList<TypeDescriptor> getTypeArgumentDescriptors();
 
   @Override
@@ -207,6 +189,16 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
   public boolean hasTypeArguments() {
     return !getTypeArgumentDescriptors().isEmpty();
+  }
+
+  /** Returns the enclosing type descriptor for this type. */
+  @Memoized
+  @Nullable
+  public DeclaredTypeDescriptor getEnclosingTypeDescriptor() {
+    TypeDeclaration enclosingType = getTypeDeclaration().getEnclosingTypeDeclaration();
+    return enclosingType == null
+        ? null
+        : applyLocalParameterization(enclosingType.toUnparameterizedTypeDescriptor());
   }
 
   /**
@@ -417,8 +409,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return superTypeDescriptor.specializeTypeVariables(
         TypeDescriptors.mappingFunctionFromMap(getLocalParameterization()));
   }
-
-  public abstract TypeDeclaration getTypeDeclaration();
 
   /** Returns the class initializer method descriptor for a particular type. */
   @Memoized
