@@ -18,7 +18,6 @@ package com.google.j2cl.transpiler.ast;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableSet.toImmutableSet;
-import static java.util.stream.Collectors.joining;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
@@ -669,20 +668,10 @@ public abstract class TypeDeclaration
         .build();
   }
 
-  /** A unique string for a give type. Used for interning. */
+  /** A unique string for a given type. Used for interning. */
   @Memoized
   public String getUniqueId() {
-    String uniqueKey = getQualifiedBinaryName();
-    return uniqueKey + TypeDeclaration.createTypeParametersUniqueId(getTypeParameterDescriptors());
-  }
-
-  private static String createTypeParametersUniqueId(List<TypeVariable> typeParameterDescriptors) {
-    if (typeParameterDescriptors == null || typeParameterDescriptors.isEmpty()) {
-      return "";
-    }
-    return typeParameterDescriptors.stream()
-        .map(TypeVariable::getUniqueId)
-        .collect(joining(", ", "<", ">"));
+    return getQualifiedBinaryName();
   }
 
   @Override

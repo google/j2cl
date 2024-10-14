@@ -528,16 +528,17 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   @Memoized
   @Override
   public String getUniqueId() {
-    String uniqueKey = getQualifiedBinaryName();
     String prefix = isNullable() ? "?" : "!";
-    return prefix + uniqueKey + createTypeArgumentsUniqueId(getTypeArgumentDescriptors());
+    return prefix
+        + getTypeDeclaration().getUniqueId()
+        + createBracketedIdsString(getTypeArgumentDescriptors());
   }
 
-  private static String createTypeArgumentsUniqueId(List<TypeDescriptor> typeArgumentDescriptors) {
-    if (typeArgumentDescriptors.isEmpty()) {
+  private static String createBracketedIdsString(List<TypeDescriptor> typeDescriptors) {
+    if (typeDescriptors.isEmpty()) {
       return "";
     }
-    return typeArgumentDescriptors.stream()
+    return typeDescriptors.stream()
         .map(TypeDescriptor::getUniqueId)
         .collect(joining(", ", "<", ">"));
   }
