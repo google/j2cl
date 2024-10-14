@@ -198,7 +198,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     TypeDeclaration enclosingType = getTypeDeclaration().getEnclosingTypeDeclaration();
     return enclosingType == null
         ? null
-        : applyLocalParameterization(enclosingType.toUnparameterizedTypeDescriptor());
+        : applyParameterization(enclosingType.toUnparameterizedTypeDescriptor());
   }
 
   /**
@@ -208,7 +208,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   @Memoized
   public ImmutableList<DeclaredTypeDescriptor> getInterfaceTypeDescriptors() {
     return getTypeDeclaration().getInterfaceTypeDescriptors().stream()
-        .map(this::applyLocalParameterization)
+        .map(this::applyParameterization)
         .collect(toImmutableList());
   }
 
@@ -219,7 +219,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     if (methodDescriptor == null) {
       return null;
     }
-    return methodDescriptor.specializeTypeVariables(getTransitiveParameterization());
+    return methodDescriptor.specializeTypeVariables(getParameterization());
   }
 
   /** Returns the single declared constructor fo this class. */
@@ -401,13 +401,12 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   @Nullable
   public DeclaredTypeDescriptor getSuperTypeDescriptor() {
     DeclaredTypeDescriptor superTypeDescriptor = getTypeDeclaration().getSuperTypeDescriptor();
-    return superTypeDescriptor == null ? null : applyLocalParameterization(superTypeDescriptor);
+    return superTypeDescriptor == null ? null : applyParameterization(superTypeDescriptor);
   }
 
-  private DeclaredTypeDescriptor applyLocalParameterization(
-      DeclaredTypeDescriptor superTypeDescriptor) {
-    return superTypeDescriptor.specializeTypeVariables(
-        TypeDescriptors.mappingFunctionFromMap(getLocalParameterization()));
+  private DeclaredTypeDescriptor applyParameterization(DeclaredTypeDescriptor typeDescriptor) {
+    return typeDescriptor.specializeTypeVariables(
+        TypeDescriptors.mappingFunctionFromMap(getTypeArgumentsByTypeTypeParameter()));
   }
 
   /** Returns the class initializer method descriptor for a particular type. */
@@ -545,7 +544,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
           .collect(toImmutableList());
     }
     return specializeMethods(
-        getTypeDeclaration().getDeclaredMethodDescriptors(), getLocalParameterization());
+        getTypeDeclaration().getDeclaredMethodDescriptors(), getTypeArgumentsByTypeTypeParameter());
   }
 
   /**
@@ -560,7 +559,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
           .collect(toImmutableList());
     }
     return getTypeDeclaration().getDeclaredFieldDescriptors().stream()
-        .map(f -> f.specializeTypeVariables(getLocalParameterization()))
+        .map(f -> f.specializeTypeVariables(getTypeArgumentsByTypeTypeParameter()))
         .collect(toImmutableList());
   }
 
@@ -666,8 +665,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   public Collection<MethodDescriptor> getPolymorphicMethods() {
     DeclaredTypeDescriptor declaration = toUnparameterizedTypeDescriptor();
     if (!declaration.equals(this)) {
-      return specializeMethods(
-          declaration.getPolymorphicMethods(), getTransitiveParameterization());
+      return specializeMethods(declaration.getPolymorphicMethods(), getParameterization());
     }
 
     // The bridges need to be computed at the type declaration in order to create them as
@@ -1201,13 +1199,12 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
    * }</pre>
    */
   @Memoized
-  public Map<TypeVariable, TypeDescriptor> getTransitiveParameterization() {
+  public Map<TypeVariable, TypeDescriptor> getParameterization() {
     Map<TypeVariable, TypeDescriptor> specializedTypeArgumentByTypeParameters =
-        new LinkedHashMap<>(getLocalParameterization());
+        new LinkedHashMap<>(getTypeArgumentsByTypeTypeParameter());
 
     getSuperTypesStream()
-        .forEach(
-            t -> specializedTypeArgumentByTypeParameters.putAll(t.getTransitiveParameterization()));
+        .forEach(t -> specializedTypeArgumentByTypeParameters.putAll(t.getParameterization()));
 
     return specializedTypeArgumentByTypeParameters;
   }
@@ -1243,19 +1240,19 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   // their corresponding raw type, but there will be no way to know if the parameterization comes
   // from a raw type or from a type that is not raw but has the same type arguments.
   @Memoized
-  Map<TypeVariable, TypeDescriptor> getLocalParameterization() {
+  Map<TypeVariable, TypeDescriptor> getTypeArgumentsByTypeTypeParameter() {
     ImmutableList<TypeVariable> typeVariables = getTypeDeclaration().getTypeParameterDescriptors();
     ImmutableList<TypeDescriptor> typeArguments = getTypeArgumentDescriptors();
 
-    Map<TypeVariable, TypeDescriptor> typeArgumentsByTypeVariable = new LinkedHashMap<>();
+    Map<TypeVariable, TypeDescriptor> typeArgumentsByTypeParameter = new LinkedHashMap<>();
 
     if (isRaw()) {
       typeArguments =
           typeVariables.stream().map(TypeVariable::toRawTypeDescriptor).collect(toImmutableList());
     }
     Streams.forEachPair(
-        typeVariables.stream(), typeArguments.stream(), typeArgumentsByTypeVariable::put);
-    return typeArgumentsByTypeVariable;
+        typeVariables.stream(), typeArguments.stream(), typeArgumentsByTypeParameter::put);
+    return typeArgumentsByTypeParameter;
   }
 
   @Override

@@ -69,7 +69,7 @@ public class PropagateNullabilityJ2kt extends NormalizationPass {
 
   private static MethodDescriptor propagateNullability(MethodDescriptor from, MethodDescriptor to) {
     Map<TypeVariable, TypeDescriptor> parametrization =
-        to.getEnclosingTypeDescriptor().getTransitiveParameterization();
+        to.getEnclosingTypeDescriptor().getParameterization();
     return MethodDescriptor.Builder.from(to)
         .setReturnTypeDescriptor(
             propagateReturnTypeNullability(
