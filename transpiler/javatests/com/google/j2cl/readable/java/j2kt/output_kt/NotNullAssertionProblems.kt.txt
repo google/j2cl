@@ -23,6 +23,7 @@ import kotlin.Array
 import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
+import kotlin.arrayOf
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
@@ -30,6 +31,28 @@ import kotlin.native.ObjCName
 
 @ObjCName("J2ktJ2ktNotNullAssertionProblems", exact = true)
 open class NotNullAssertionProblems {
+ @ObjCName("testArrayLiteral")
+ open fun testArrayLiteral(
+  @ObjCName("withNSString") string: String,
+  @ObjCName("withNSString") nullableString: String?
+ ) {
+  val array1: Array<String?>? = arrayOf<String>(string, null!!) as Array<String?>?
+  val array2: Array<String?>? = arrayOf<String>(string, nullableString!!) as Array<String?>?
+  val array3: Array<String?>? = arrayOf<String>(null!!, string) as Array<String?>?
+  val array4: Array<String?>? = arrayOf<String>(nullableString!!, string) as Array<String?>?
+ }
+
+ @ObjCName("testNewArray")
+ open fun testNewArray(
+  @ObjCName("withNSString") string: String,
+  @ObjCName("withNSString") nullableString: String?
+ ) {
+  val array1: Array<String?>? = arrayOf<String?>(string, null)
+  val array2: Array<String?>? = arrayOf<String?>(string, nullableString)
+  val array3: Array<String?>? = arrayOf<String?>(null, string)
+  val array4: Array<String?>? = arrayOf<String?>(nullableString, string)
+ }
+
  @ObjCName("testExplicitInvocationTypeArguments")
  open fun testExplicitInvocationTypeArguments(
   @ObjCName("withNSString") string: String,
@@ -39,8 +62,12 @@ open class NotNullAssertionProblems {
   NotNullAssertionProblems.accept1<String?>(null)
   NotNullAssertionProblems.accept2<String?>(string, null)
   NotNullAssertionProblems.accept2<String?>(string, nullableString)
+  NotNullAssertionProblems.accept2<String?>(null, string)
+  NotNullAssertionProblems.accept2<String?>(nullableString, string)
   NotNullAssertionProblems.acceptVararg<String?>(string, null)
   NotNullAssertionProblems.acceptVararg<String?>(string, nullableString)
+  NotNullAssertionProblems.acceptVararg<String?>(null, string)
+  NotNullAssertionProblems.acceptVararg<String?>(nullableString, string)
   NotNullAssertionProblems.acceptGeneric<String?>(supplier as NotNullAssertionProblems.Supplier<String?>, nullableString)
   NotNullAssertionProblems.acceptUpperBound<String?>(supplier, nullableString)
  }
@@ -54,8 +81,12 @@ open class NotNullAssertionProblems {
   NotNullAssertionProblems.accept1<Any>(null!!)
   NotNullAssertionProblems.accept2<String>(string, null!!)
   NotNullAssertionProblems.accept2<String>(string, nullableString!!)
+  NotNullAssertionProblems.accept2<String>(null!!, string)
+  NotNullAssertionProblems.accept2<String?>(nullableString, string)
   NotNullAssertionProblems.acceptVararg<String>(string, null!!)
   NotNullAssertionProblems.acceptVararg<String>(string, nullableString!!)
+  NotNullAssertionProblems.acceptVararg<String>(null!!, string)
+  NotNullAssertionProblems.acceptVararg<String?>(nullableString, string)
   NotNullAssertionProblems.acceptGeneric<String>(supplier, nullableString!!)
   NotNullAssertionProblems.acceptUpperBound<String>(supplier, nullableString!!)
  }
@@ -69,8 +100,12 @@ open class NotNullAssertionProblems {
   NotNullAssertionProblems.Consumer<String?>(null)
   NotNullAssertionProblems.Consumer<String?>(string, null)
   NotNullAssertionProblems.Consumer<String?>(string, nullableString)
+  NotNullAssertionProblems.Consumer<String?>(null, string)
+  NotNullAssertionProblems.Consumer<String?>(nullableString, string)
   NotNullAssertionProblems.VarargConsumer<String?>(string, null)
   NotNullAssertionProblems.VarargConsumer<String?>(string, nullableString)
+  NotNullAssertionProblems.VarargConsumer<String?>(null, string)
+  NotNullAssertionProblems.VarargConsumer<String?>(nullableString, string)
   NotNullAssertionProblems.GenericConsumer<String?>(supplier as NotNullAssertionProblems.Supplier<String?>, nullableString)
   NotNullAssertionProblems.UpperWildcardConsumer<String?>(supplier, nullableString)
  }
@@ -84,8 +119,12 @@ open class NotNullAssertionProblems {
   NotNullAssertionProblems.Consumer<Any>(null!!)
   NotNullAssertionProblems.Consumer<String>(string, null!!)
   NotNullAssertionProblems.Consumer<String>(string, nullableString!!)
+  NotNullAssertionProblems.Consumer<String>(null!!, string)
+  NotNullAssertionProblems.Consumer<String?>(nullableString, string)
   NotNullAssertionProblems.VarargConsumer<String>(string, null!!)
   NotNullAssertionProblems.VarargConsumer<String>(string, nullableString!!)
+  NotNullAssertionProblems.VarargConsumer<String>(null!!, string)
+  NotNullAssertionProblems.VarargConsumer<String?>(nullableString, string)
   NotNullAssertionProblems.GenericConsumer<String>(supplier, nullableString!!)
   NotNullAssertionProblems.UpperWildcardConsumer<String>(supplier, nullableString!!)
  }
@@ -99,8 +138,12 @@ open class NotNullAssertionProblems {
   NotNullAssertionProblems.Consumer<Any?>(null)
   NotNullAssertionProblems.Consumer<Any?>(string, null)
   NotNullAssertionProblems.Consumer<Any?>(string, nullableString)
+  NotNullAssertionProblems.Consumer<Any?>(null, string)
+  NotNullAssertionProblems.Consumer<Any?>(nullableString, string)
   NotNullAssertionProblems.VarargConsumer<Any?>(string, null)
   NotNullAssertionProblems.VarargConsumer<Any?>(string, nullableString)
+  NotNullAssertionProblems.VarargConsumer<Any?>(null, string)
+  NotNullAssertionProblems.VarargConsumer<Any?>(nullableString, string)
   NotNullAssertionProblems.GenericConsumer<Any?>(supplier as NotNullAssertionProblems.Supplier<Any?>, nullableString)
   NotNullAssertionProblems.UpperWildcardConsumer<Any?>(supplier as NotNullAssertionProblems.Supplier<Any?>, nullableString)
  }

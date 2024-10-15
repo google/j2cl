@@ -21,15 +21,33 @@ import org.jspecify.annotations.Nullable;
 /** A test covering cases with unnecessary not-null {@code !!} assertions. */
 @NullMarked
 public class NotNullAssertionProblems {
+  public void testArrayLiteral(String string, @Nullable String nullableString) {
+    @Nullable String[] array1 = {string, null};
+    @Nullable String[] array2 = {string, nullableString};
+    @Nullable String[] array3 = {null, string};
+    @Nullable String[] array4 = {nullableString, string};
+  }
+
+  public void testNewArray(String string, @Nullable String nullableString) {
+    @Nullable String[] array1 = new @Nullable String[] {string, null};
+    @Nullable String[] array2 = new @Nullable String[] {string, nullableString};
+    @Nullable String[] array3 = new @Nullable String[] {null, string};
+    @Nullable String[] array4 = new @Nullable String[] {nullableString, string};
+  }
+
   public void testExplicitInvocationTypeArguments(
       String string, Supplier<String> supplier, @Nullable String nullableString) {
     NotNullAssertionProblems.<@Nullable String>accept1(null);
 
     NotNullAssertionProblems.<@Nullable String>accept2(string, null);
     NotNullAssertionProblems.<@Nullable String>accept2(string, nullableString);
+    NotNullAssertionProblems.<@Nullable String>accept2(null, string);
+    NotNullAssertionProblems.<@Nullable String>accept2(nullableString, string);
 
     NotNullAssertionProblems.<@Nullable String>acceptVararg(string, null);
     NotNullAssertionProblems.<@Nullable String>acceptVararg(string, nullableString);
+    NotNullAssertionProblems.<@Nullable String>acceptVararg(null, string);
+    NotNullAssertionProblems.<@Nullable String>acceptVararg(nullableString, string);
 
     NotNullAssertionProblems.<@Nullable String>acceptGeneric(supplier, nullableString);
     NotNullAssertionProblems.<@Nullable String>acceptUpperBound(supplier, nullableString);
@@ -41,9 +59,13 @@ public class NotNullAssertionProblems {
 
     accept2(string, null);
     accept2(string, nullableString);
+    accept2(null, string);
+    accept2(nullableString, string);
 
     acceptVararg(string, null);
     acceptVararg(string, nullableString);
+    acceptVararg(null, string);
+    acceptVararg(nullableString, string);
 
     acceptGeneric(supplier, nullableString);
     acceptUpperBound(supplier, nullableString);
@@ -55,9 +77,13 @@ public class NotNullAssertionProblems {
 
     new Consumer<@Nullable String>(string, null);
     new Consumer<@Nullable String>(string, nullableString);
+    new Consumer<@Nullable String>(null, string);
+    new Consumer<@Nullable String>(nullableString, string);
 
     new VarargConsumer<@Nullable String>(string, null);
     new VarargConsumer<@Nullable String>(string, nullableString);
+    new VarargConsumer<@Nullable String>(null, string);
+    new VarargConsumer<@Nullable String>(nullableString, string);
 
     new GenericConsumer<@Nullable String>(supplier, nullableString);
     new UpperWildcardConsumer<@Nullable String>(supplier, nullableString);
@@ -69,9 +95,13 @@ public class NotNullAssertionProblems {
 
     new Consumer<>(string, null);
     new Consumer<>(string, nullableString);
+    new Consumer<>(null, string);
+    new Consumer<>(nullableString, string);
 
     new VarargConsumer<>(string, null);
     new VarargConsumer<>(string, nullableString);
+    new VarargConsumer<>(null, string);
+    new VarargConsumer<>(nullableString, string);
 
     new GenericConsumer<>(supplier, nullableString);
     new UpperWildcardConsumer<>(supplier, nullableString);
@@ -83,9 +113,13 @@ public class NotNullAssertionProblems {
 
     new Consumer(string, null);
     new Consumer(string, nullableString);
+    new Consumer(null, string);
+    new Consumer(nullableString, string);
 
     new VarargConsumer(string, null);
     new VarargConsumer(string, nullableString);
+    new VarargConsumer(null, string);
+    new VarargConsumer(nullableString, string);
 
     new GenericConsumer(supplier, nullableString);
     new UpperWildcardConsumer(supplier, nullableString);
