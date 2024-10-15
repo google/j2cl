@@ -119,7 +119,7 @@ class ImportGatherer extends AbstractVisitor {
     // one can access devirtualized overlay methods and static methods, and those need a direct
     // reference to the declaring class at the usage site. In order of AJD to preserve those,
     // wherever they are exposed they need to be required.
-    nativeType.toUnparameterizedTypeDescriptor().getDeclaredMemberDescriptors().stream()
+    nativeType.toDescriptor().getDeclaredMemberDescriptors().stream()
         .filter(m -> !m.isJsOverlay())
         .forEach(
             m -> {

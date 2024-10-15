@@ -164,10 +164,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
           @Override
           public TypeDeclaration rewriteTypeDeclaration(TypeDeclaration typeDeclaration) {
             if (optimizedClasses.contains(typeDeclaration)) {
-              return typeDeclaration
-                  .toUnparameterizedTypeDescriptor()
-                  .getFunctionalInterface()
-                  .getTypeDeclaration();
+              return typeDeclaration.toDescriptor().getFunctionalInterface().getTypeDeclaration();
             }
             return typeDeclaration;
           }

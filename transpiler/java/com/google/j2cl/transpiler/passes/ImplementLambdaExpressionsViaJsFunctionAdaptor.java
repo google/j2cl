@@ -68,7 +68,8 @@ public class ImplementLambdaExpressionsViaJsFunctionAdaptor extends Normalizatio
               DeclaredTypeDescriptor adaptorTypeDescriptor =
                   LambdaAdaptorTypeDescriptors.createLambdaAdaptorTypeDescriptor(typeDescriptor);
               DeclaredTypeDescriptor jsFunctionTypeDescriptor =
-                  LambdaAdaptorTypeDescriptors.createJsFunctionTypeDescriptor(typeDescriptor);
+                  LambdaAdaptorTypeDescriptors.createJsFunctionTypeDescriptor(
+                      typeDescriptor.getFunctionalInterface());
 
               // Create and add the LambdaAdaptor type for the functional interface.
               newLambdaAdaptors.add(
@@ -116,13 +117,13 @@ public class ImplementLambdaExpressionsViaJsFunctionAdaptor extends Normalizatio
                           // the corresponding synthetic @JsFunction interface.
                           .setTypeDescriptor(
                               createJsFunctionTypeDescriptor(
-                                  functionExpression.getTypeDescriptor()))
+                                  functionExpression.getTypeDescriptor().getFunctionalInterface()))
                           .build())
                   .build();
             }
 
             DeclaredTypeDescriptor functionalInterfaceTypeDescriptor =
-                (DeclaredTypeDescriptor) typeDescriptor;
+                typeDescriptor.getFunctionalInterface();
             // A.$adapt((...) -> {...})
             return MethodCall.Builder.from(
                     getAdaptMethodDescriptor(
@@ -132,7 +133,7 @@ public class ImplementLambdaExpressionsViaJsFunctionAdaptor extends Normalizatio
                 .setArguments(
                     FunctionExpression.Builder.from(functionExpression)
                         .setTypeDescriptor(
-                            createJsFunctionTypeDescriptor(functionExpression.getTypeDescriptor()))
+                            createJsFunctionTypeDescriptor(functionalInterfaceTypeDescriptor))
                         .build())
                 .build();
           }
@@ -243,8 +244,8 @@ public class ImplementLambdaExpressionsViaJsFunctionAdaptor extends Normalizatio
       DeclaredTypeDescriptor adaptorTypeDescriptor) {
 
     // In most cases, e.g. when the adaptor type is shared, adaptorTypeDescriptor is already
-    // an unparameterized type descriptor since the creation of the adaptor is driven from
-    // the declaration of the functional interface and not from a usage.
+    // an the declaration version of the type descriptor since the creation of the adaptor is driven
+    // from the declaration of the functional interface and not from a usage.
     // In the cases where the adaptor is not shared and driven from a usage (e.g. intersection
     // types) the adaptor class could either use the paramterization found in the usage
     // or use the more general parameterization from the declaration (e.g. if it is an intersection
@@ -259,7 +260,7 @@ public class ImplementLambdaExpressionsViaJsFunctionAdaptor extends Normalizatio
     //
     //   Callsite:      Object fn = (Consumer<String> and Serializable)  t -> {};
     //
-    //   Unparameterized adaptor: (this is the one generated below),
+    //   Adaptor declaration: (this is the one generated below),
     //
     //   class Consumer$Adaptor<T> implements Consumer<T>, Serializable {
     //       Consumer$Adaptor( /** function(T):void */ fn);
@@ -271,11 +272,11 @@ public class ImplementLambdaExpressionsViaJsFunctionAdaptor extends Normalizatio
     //       Consumer$Adaptor( /** function(String):void */ fn);
     //   }
     //
-    adaptorTypeDescriptor = adaptorTypeDescriptor.toUnparameterizedTypeDescriptor();
+    adaptorTypeDescriptor = adaptorTypeDescriptor.getDeclarationDescriptor();
 
     DeclaredTypeDescriptor jsFunctionTypeDescriptor =
         LambdaAdaptorTypeDescriptors.createJsFunctionTypeDescriptor(
-            typeDescriptor.toUnparameterizedTypeDescriptor());
+            typeDescriptor.getFunctionalInterface().getDeclarationDescriptor());
     Type adaptorType = new Type(sourcePosition, adaptorTypeDescriptor.getTypeDeclaration());
 
     // Create the field to contain the lambda function as a JsFunction.

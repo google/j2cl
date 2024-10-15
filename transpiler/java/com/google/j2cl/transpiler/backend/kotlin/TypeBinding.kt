@@ -59,10 +59,9 @@ private fun DeclaredTypeDescriptor.toNonRawTypeDescriptor(
   projectRawToWildcards: Boolean = false
 ): DeclaredTypeDescriptor =
   runIf(isRaw) {
-    toUnparameterizedTypeDescriptor()
-      .specializeRawTypeVariables(
-        toWildcards = projectRawToWildcards || typeDeclaration.hasRecursiveTypeBounds()
-      )
+    declarationDescriptor.specializeRawTypeVariables(
+      toWildcards = projectRawToWildcards || typeDeclaration.hasRecursiveTypeBounds()
+    )
   }
 
 private fun DeclaredTypeDescriptor.specializeRawTypeVariables(

@@ -84,7 +84,7 @@ public final class LambdaImplementorTypeDescriptors {
       return typeDescriptor;
     }
 
-    typeDescriptor = typeDescriptor.toUnparameterizedTypeDescriptor();
+    typeDescriptor = typeDescriptor.getDeclarationDescriptor();
 
     return (DeclaredTypeDescriptor)
         typeDescriptor.specializeTypeVariables(
@@ -131,8 +131,7 @@ public final class LambdaImplementorTypeDescriptors {
         .setClassComponents(classComponents)
         .setDeclaredMethodDescriptorsFactory(
             implementorTypeDeclaration ->
-                ImmutableList.of(
-                    getLambdaMethod(implementorTypeDeclaration.toUnparameterizedTypeDescriptor())))
+                ImmutableList.of(getLambdaMethod(implementorTypeDeclaration.toDescriptor())))
         .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.copyOf(interfaceTypeDescriptors))
         .setTypeParameterDescriptors(typeParameters)
         .setVisibility(Visibility.PUBLIC)

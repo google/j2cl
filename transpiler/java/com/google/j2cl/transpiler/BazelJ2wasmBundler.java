@@ -281,7 +281,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
       MethodDescriptor literalGetter, TypeDeclaration fromType, String forwardingMethodName) {
     MethodDescriptor forwarderDescriptor =
         MethodDescriptor.newBuilder()
-            .setEnclosingTypeDescriptor(fromType.toUnparameterizedTypeDescriptor())
+            .setEnclosingTypeDescriptor(fromType.toDescriptor())
             .setName(forwardingMethodName)
             .setOrigin(MethodOrigin.SYNTHETIC_STRING_LITERAL_GETTER)
             .setStatic(true)

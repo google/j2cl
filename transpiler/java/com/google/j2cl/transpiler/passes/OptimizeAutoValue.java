@@ -267,8 +267,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
 
           @Override
           public TypeDeclaration rewriteTypeDeclaration(TypeDeclaration typeDeclaration) {
-            return replaceTypeDescriptors(typeDeclaration.toUnparameterizedTypeDescriptor(), fn)
-                .getTypeDeclaration();
+            return replaceTypeDescriptors(typeDeclaration.toDescriptor(), fn).getTypeDeclaration();
           }
 
           @Override

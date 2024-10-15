@@ -182,11 +182,6 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
   }
 
   @Override
-  public TypeDescriptor toUnparameterizedTypeDescriptor() {
-    return this;
-  }
-
-  @Override
   public boolean canBeReferencedExternally() {
     return toRawTypeDescriptor().canBeReferencedExternally();
   }

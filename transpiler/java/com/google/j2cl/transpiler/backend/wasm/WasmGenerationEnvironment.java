@@ -132,7 +132,7 @@ public class WasmGenerationEnvironment {
   }
 
   String getWasmTypeName(TypeDeclaration typeDeclaration) {
-    return getWasmTypeName(typeDeclaration.toUnparameterizedTypeDescriptor());
+    return getWasmTypeName(typeDeclaration.toDescriptor());
   }
 
   String getWasmTypeName(TypeDescriptor typeDescriptor) {
@@ -167,7 +167,7 @@ public class WasmGenerationEnvironment {
   }
 
   public String getTypeSignature(TypeDeclaration typeDeclaration) {
-    return getTypeSignature(typeDeclaration.toUnparameterizedTypeDescriptor());
+    return getTypeSignature(typeDeclaration.toDescriptor());
   }
 
   public String getTypeSignature(TypeDescriptor typeDescriptor) {
@@ -195,7 +195,7 @@ public class WasmGenerationEnvironment {
 
   /** Returns the name of the global that stores the itable for a Java type. */
   public String getWasmItableGlobalName(TypeDeclaration typeDeclaration) {
-    return getWasmItableGlobalName(typeDeclaration.toUnparameterizedTypeDescriptor());
+    return getWasmItableGlobalName(typeDeclaration.toDescriptor());
   }
 
   /** Returns the name of the wasm type of the vtable for a Java type. */
@@ -205,7 +205,7 @@ public class WasmGenerationEnvironment {
 
   /** Returns the name of the wasm type of the vtable for a Java type. */
   public String getWasmVtableTypeName(TypeDeclaration typeDeclaration) {
-    return getWasmVtableTypeName(typeDeclaration.toUnparameterizedTypeDescriptor());
+    return getWasmVtableTypeName(typeDeclaration.toDescriptor());
   }
 
   /** Returns the name of the wasm type of the itable for a Java type. */

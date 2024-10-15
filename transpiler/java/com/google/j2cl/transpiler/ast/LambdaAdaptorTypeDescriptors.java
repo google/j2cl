@@ -87,9 +87,9 @@ public final class LambdaAdaptorTypeDescriptors {
 
     TypeDeclaration adaptorDeclaration =
         createLambdaAdaptorTypeDeclaration(
-            enclosingTypeDescriptor.toUnparameterizedTypeDescriptor(),
-            TypeDescriptors.toUnparameterizedTypeDescriptors(interfaceTypeDescriptors),
-            jsFunctionInterface.toUnparameterizedTypeDescriptor(),
+            enclosingTypeDescriptor.getDeclarationDescriptor(),
+            TypeDescriptors.getDeclarationDescriptors(interfaceTypeDescriptors),
+            jsFunctionInterface.getDeclarationDescriptor(),
             isAbstract,
             uniqueId);
 
@@ -141,8 +141,7 @@ public final class LambdaAdaptorTypeDescriptors {
                 isAbstract
                     ? ImmutableList.of()
                     : getLambdaAdaptorMethodDescriptors(
-                        jsFunctionInterface,
-                        adaptorTypeDeclaration.toUnparameterizedTypeDescriptor()))
+                        jsFunctionInterface, adaptorTypeDeclaration.toDescriptor()))
         .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.copyOf(interfaceTypeDescriptors))
         .setTypeParameterDescriptors(typeParameterDescriptors)
         .setHasAbstractModifier(isAbstract)
@@ -190,8 +189,7 @@ public final class LambdaAdaptorTypeDescriptors {
 
   /** Returns the TypeDescriptor for lambda instances of the functional interface. */
   public static DeclaredTypeDescriptor createJsFunctionTypeDescriptor(
-      TypeDescriptor typeDescriptor) {
-    DeclaredTypeDescriptor functionalTypeDescriptor = typeDescriptor.getFunctionalInterface();
+      DeclaredTypeDescriptor functionalTypeDescriptor) {
     checkArgument(!functionalTypeDescriptor.isJsFunctionInterface());
 
     return DeclaredTypeDescriptor.newBuilder()
@@ -218,7 +216,7 @@ public final class LambdaAdaptorTypeDescriptors {
             jsfunctionTypeDeclaration ->
                 ImmutableList.of(
                     createJsFunctionMethodDescriptor(
-                        jsfunctionTypeDeclaration.toUnparameterizedTypeDescriptor(),
+                        jsfunctionTypeDeclaration.toDescriptor(),
                         typeDeclaration.getSingleAbstractMethodDescriptor())))
         .setSingleAbstractMethodDescriptorFactory(t -> t.getDeclaredMethodDescriptors().get(0))
         .setVisibility(Visibility.PUBLIC)

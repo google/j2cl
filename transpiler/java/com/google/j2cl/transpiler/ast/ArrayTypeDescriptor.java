@@ -136,15 +136,6 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  @Memoized
-  public ArrayTypeDescriptor toUnparameterizedTypeDescriptor() {
-    return toBuilder()
-        .setComponentTypeDescriptor(getComponentTypeDescriptor().toUnparameterizedTypeDescriptor())
-        .setNullable(true)
-        .build();
-  }
-
-  @Override
   public boolean isAssignableTo(TypeDescriptor that) {
     ArrayTypeDescriptor thisRawTypeDescriptor = toRawTypeDescriptor();
     TypeDescriptor thatRawTypeDescriptor = that.toRawTypeDescriptor();

@@ -1070,7 +1070,7 @@ public final class AstUtils {
   public static MethodDescriptor getSystemGetPropertyGetter(
       String systemPropertyString, boolean requiredProperty) {
     return MethodDescriptor.newBuilder()
-        .setEnclosingTypeDescriptor(getSystemPropertyHolder().toUnparameterizedTypeDescriptor())
+        .setEnclosingTypeDescriptor(getSystemPropertyHolder().toDescriptor())
         // TODO(rluble): Sanitize the system property string.
         .setName(systemPropertyString)
         .setReturnTypeDescriptor(TypeDescriptors.get().javaLangString)

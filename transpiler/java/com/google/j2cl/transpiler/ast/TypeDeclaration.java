@@ -652,16 +652,11 @@ public abstract class TypeDeclaration
   }
 
   /**
-   * Returns the usage site TypeDescriptor corresponding to this declaration site TypeDeclaration.
-   *
-   * <p>A completely correct solution would specialize type parameters into type arguments and
-   * cascade those changes into declared methods and modifications to the method declaration site of
-   * declared methods. But our AST is not in a position to do all of that. Instead we trust that a
-   * real JDT usage site TypeBinding has already been processed somewhere and we attempt to retrieve
-   * the matching TypeDescriptor.
+   * Returns the usage site type descriptor corresponding to this declaration with the trivial
+   * parameterization.
    */
   @Memoized
-  public DeclaredTypeDescriptor toUnparameterizedTypeDescriptor() {
+  public DeclaredTypeDescriptor toDescriptor() {
     return DeclaredTypeDescriptor.newBuilder()
         .setTypeDeclaration(this)
         .setTypeArgumentDescriptors(getTypeParameterDescriptors())
@@ -685,7 +680,7 @@ public abstract class TypeDeclaration
     // TODO(b/70951075): distinguish between Java isSubtypeOf and our target interpretation of
     // isSubtypeOf for optimization purposes in the context of jsinterop. Note that this method is
     // used assuming it provides Java semantics.
-    return TypeDescriptors.isJavaLangObject(that.toUnparameterizedTypeDescriptor())
+    return TypeDescriptors.isJavaLangObject(that.toDescriptor())
         || getAllSuperTypesIncludingSelf().contains(that);
   }
 
@@ -693,7 +688,7 @@ public abstract class TypeDeclaration
   public Set<TypeDeclaration> getAllSuperTypesIncludingSelf() {
     Set<TypeDeclaration> allSupertypesIncludingSelf = new LinkedHashSet<>();
     allSupertypesIncludingSelf.add(this);
-    toUnparameterizedTypeDescriptor()
+    toDescriptor()
         .getSuperTypesStream()
         .forEach(
             t ->

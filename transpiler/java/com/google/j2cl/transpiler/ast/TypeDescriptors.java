@@ -566,13 +566,11 @@ public class TypeDescriptors {
     return PackageDeclaration.newBuilder().setName(jsNamespace).build();
   }
 
-  /** Returns the unparameterized version of {@code typeDescriptors}. */
-  @SuppressWarnings("unchecked")
-  public static <T extends TypeDescriptor> ImmutableList<T> toUnparameterizedTypeDescriptors(
-      List<T> typeDescriptors) {
+  /** Returns the declaration version of {@code typeDescriptors}. */
+  public static ImmutableList<DeclaredTypeDescriptor> getDeclarationDescriptors(
+      List<DeclaredTypeDescriptor> typeDescriptors) {
     return typeDescriptors.stream()
-        .map(TypeDescriptor::toUnparameterizedTypeDescriptor)
-        .map(typeDescriptor -> (T) typeDescriptor)
+        .map(DeclaredTypeDescriptor::getDeclarationDescriptor)
         .collect(toImmutableList());
   }
 

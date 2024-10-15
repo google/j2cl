@@ -541,7 +541,7 @@ class JavaEnvironment {
     FieldDescriptor declarationFieldDescriptor = null;
     if (!javacTypes.isSameType(variableElement.asType(), type)) {
       // Field references might be parameterized, and when they are we set the declaration
-      // descriptor to the unparameterized declaration.
+      // descriptor.
       declarationFieldDescriptor = createFieldDescriptor(variableElement, variableElement.asType());
     }
 
@@ -637,7 +637,7 @@ class JavaEnvironment {
     if (isSpecialized(declarationMethodElement, parameters, returnType)) {
       declarationMethodDescriptor =
           createDeclarationMethodDescriptor(
-              declarationMethodElement, enclosingTypeDescriptor.toUnparameterizedTypeDescriptor());
+              declarationMethodElement, enclosingTypeDescriptor.getDeclarationDescriptor());
     }
 
     TypeDescriptor returnTypeDescriptor =

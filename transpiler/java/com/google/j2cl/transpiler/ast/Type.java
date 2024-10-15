@@ -60,7 +60,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
    * declaration.
    */
   public DeclaredTypeDescriptor getTypeDescriptor() {
-    return getDeclaration().toUnparameterizedTypeDescriptor();
+    return getDeclaration().toDescriptor();
   }
 
   public boolean containsMethod(String mangledName) {

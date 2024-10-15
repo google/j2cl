@@ -148,7 +148,7 @@ class ClosureTypesGenerator {
                 Maps::immutableEntry)
             .collect(toImmutableMap(Map.Entry::getKey, Map.Entry::getValue));
     return (DeclaredTypeDescriptor)
-        typeDescriptor.toUnparameterizedTypeDescriptor().specializeTypeVariables(specializationMap);
+        typeDescriptor.getDeclarationDescriptor().specializeTypeVariables(specializationMap);
   }
 
   /** Returns the Closure type for a primitive type descriptor */
@@ -216,7 +216,7 @@ class ClosureTypesGenerator {
           new HashSet<>(typeDescriptor.getTypeDeclaration().getTypeParameterDescriptors());
       typeDescriptor =
           typeDescriptor
-              .toUnparameterizedTypeDescriptor()
+              .getDeclarationDescriptor()
               .specializeTypeVariables(
                   t ->
                       typeParameterDescriptors.contains(t)

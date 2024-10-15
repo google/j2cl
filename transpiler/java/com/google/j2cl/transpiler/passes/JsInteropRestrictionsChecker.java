@@ -1611,7 +1611,7 @@ public class JsInteropRestrictionsChecker {
             DeclaredTypeDescriptor jsFunctionType = (DeclaredTypeDescriptor) t;
             if (foundJsFunctions.add(jsFunctionType.getTypeDeclaration())) {
               unexploredJsFunctionMethods.offer(
-                  jsFunctionType.toUnparameterizedTypeDescriptor().getJsFunctionMethodDescriptor());
+                  jsFunctionType.getDeclarationDescriptor().getJsFunctionMethodDescriptor());
             }
           });
 
@@ -2458,7 +2458,7 @@ public class JsInteropRestrictionsChecker {
    * #getTypeKindPrefix}).
    */
   private static String getReadableDescriptionWithPrefix(TypeDeclaration typeDeclaration) {
-    return getReadableDescriptionWithPrefix(typeDeclaration.toUnparameterizedTypeDescriptor());
+    return getReadableDescriptionWithPrefix(typeDeclaration.toDescriptor());
   }
 
   /**

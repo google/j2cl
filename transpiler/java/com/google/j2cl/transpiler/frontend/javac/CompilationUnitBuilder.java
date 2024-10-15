@@ -917,14 +917,14 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       return new ThisReference(
           environment
               .createDeclarationForType((ClassSymbol) ((JCIdent) expression).sym)
-              .toUnparameterizedTypeDescriptor(),
+              .toDescriptor(),
           /* isQualified= */ true);
     }
     if (fieldAccess.name.contentEquals("super")) {
       return new SuperReference(
           environment
               .createDeclarationForType((ClassSymbol) ((JCIdent) expression).sym)
-              .toUnparameterizedTypeDescriptor());
+              .toDescriptor());
     }
     Expression qualifier;
     if (fieldAccess.sym instanceof VariableElement) {

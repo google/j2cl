@@ -433,7 +433,7 @@ public class ResolveCaptures extends NormalizationPass {
   private static FieldDescriptor getFieldDescriptorForCapture(
       TypeDeclaration typeDeclaration, Variable capturedVariable) {
     return FieldDescriptor.newBuilder()
-        .setEnclosingTypeDescriptor(typeDeclaration.toUnparameterizedTypeDescriptor())
+        .setEnclosingTypeDescriptor(typeDeclaration.toDescriptor())
         .setName("$captured_" + capturedVariable.getName())
         .setTypeDescriptor(capturedVariable.getTypeDescriptor())
         .setStatic(false)

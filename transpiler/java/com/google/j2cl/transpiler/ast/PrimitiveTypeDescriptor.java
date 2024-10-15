@@ -112,11 +112,6 @@ public class PrimitiveTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public PrimitiveTypeDescriptor toUnparameterizedTypeDescriptor() {
-    return this;
-  }
-
-  @Override
   public DeclaredTypeDescriptor toBoxedType() {
     return TypeDescriptors.getBoxTypeFromPrimitiveType(this).toNonNullable();
   }

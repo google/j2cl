@@ -50,8 +50,7 @@ abstract class WasmTypeLayout {
   /** Create a layout for a type that is declared in a different library. */
   static WasmTypeLayout createFromTypeDeclaration(
       TypeDeclaration typeDeclaration, WasmTypeLayout wasmSupertypeLayout) {
-    return new AutoValue_WasmTypeLayout(
-        null, typeDeclaration.toUnparameterizedTypeDescriptor(), wasmSupertypeLayout);
+    return new AutoValue_WasmTypeLayout(null, typeDeclaration.toDescriptor(), wasmSupertypeLayout);
   }
 
   /**

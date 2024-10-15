@@ -83,15 +83,6 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  @Memoized
-  public UnionTypeDescriptor toUnparameterizedTypeDescriptor() {
-    return newBuilder()
-        .setUnionTypeDescriptors(
-            TypeDescriptors.toUnparameterizedTypeDescriptors(getUnionTypeDescriptors()))
-        .build();
-  }
-
-  @Override
   public boolean isAssignableTo(TypeDescriptor that) {
     return getUnionTypeDescriptors()
         .stream()

@@ -1582,7 +1582,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
       if (getDeclarationDescriptorOrNullIfSelf() == null) {
         // Use a canonical version of the enclosing type descriptor in method declarations.
-        setEnclosingTypeDescriptor(getEnclosingTypeDescriptor().toUnparameterizedTypeDescriptor());
+        setEnclosingTypeDescriptor(getEnclosingTypeDescriptor().getDeclarationDescriptor());
       }
 
       MethodDescriptor methodDescriptor = autoBuild();

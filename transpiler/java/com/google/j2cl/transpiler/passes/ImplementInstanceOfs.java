@@ -153,8 +153,7 @@ public class ImplementInstanceOfs extends NormalizationPass {
     // instance instanceof Type.
     return InstanceOfExpression.newBuilder()
         .setExpression(instance.createReference())
-        .setTestTypeDescriptor(
-            type.getUnderlyingTypeDeclaration().toUnparameterizedTypeDescriptor())
+        .setTestTypeDescriptor(type.getUnderlyingTypeDeclaration().toDescriptor())
         .build();
   }
 
@@ -195,7 +194,7 @@ public class ImplementInstanceOfs extends NormalizationPass {
     return RuntimeMethods.createEnumsMethodCall(
         "isInstanceOf",
         instance.createReference(),
-        typeDeclaration.toUnparameterizedTypeDescriptor().getMetadataConstructorReference());
+        typeDeclaration.toDescriptor().getMetadataConstructorReference());
   }
 
   /**

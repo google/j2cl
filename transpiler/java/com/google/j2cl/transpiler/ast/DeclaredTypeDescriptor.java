@@ -59,10 +59,10 @@ import javax.annotation.Nullable;
 public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     implements HasUnusableByJsSuppression {
 
-  /* The actual type declaration this descriptor is referencing. */
+  /** The actual type declaration this descriptor is referencing. */
   public abstract TypeDeclaration getTypeDeclaration();
 
-  /* The parameterization for the type. */
+  /** The parameterization for the type. */
   public abstract ImmutableList<TypeDescriptor> getTypeArgumentDescriptors();
 
   @Override
@@ -196,9 +196,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   @Nullable
   public DeclaredTypeDescriptor getEnclosingTypeDescriptor() {
     TypeDeclaration enclosingType = getTypeDeclaration().getEnclosingTypeDeclaration();
-    return enclosingType == null
-        ? null
-        : applyParameterization(enclosingType.toUnparameterizedTypeDescriptor());
+    return enclosingType == null ? null : applyParameterization(enclosingType.toDescriptor());
   }
 
   /**
@@ -261,9 +259,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   }
 
   public DeclaredTypeDescriptor getOverlayImplementationTypeDescriptor() {
-    return getTypeDeclaration()
-        .getOverlayImplementationTypeDeclaration()
-        .toUnparameterizedTypeDescriptor();
+    return getTypeDeclaration().getOverlayImplementationTypeDeclaration().toDescriptor();
   }
 
   public boolean hasOverlayImplementationType() {
@@ -287,9 +283,9 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         && getTypeArgumentDescriptors().isEmpty();
   }
 
-  @Override
-  public DeclaredTypeDescriptor toUnparameterizedTypeDescriptor() {
-    return getTypeDeclaration().toUnparameterizedTypeDescriptor();
+  /** Returns type descriptor for the same type use the type parameters from the declaration. */
+  public DeclaredTypeDescriptor getDeclarationDescriptor() {
+    return getTypeDeclaration().toDescriptor();
   }
 
   @Override
@@ -449,7 +445,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   public MethodDescriptor getIsInstanceMethodDescriptor() {
     return MethodDescriptor.newBuilder()
         .setName(MethodDescriptor.IS_INSTANCE_METHOD_NAME)
-        .setEnclosingTypeDescriptor(getMetadataTypeDeclaration().toUnparameterizedTypeDescriptor())
+        .setEnclosingTypeDescriptor(getMetadataTypeDeclaration().toDescriptor())
         .setParameterTypeDescriptors(TypeDescriptors.getUnknownType())
         .setReturnTypeDescriptor(PrimitiveTypes.BOOLEAN)
         .setOrigin(MethodOrigin.SYNTHETIC_INSTANCE_OF_SUPPORT_METHOD)
@@ -462,7 +458,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   public MethodDescriptor getMarkImplementorMethodDescriptor() {
     return MethodDescriptor.newBuilder()
         .setName(MethodDescriptor.MARK_IMPLEMENTOR_METHOD_NAME)
-        .setEnclosingTypeDescriptor(getMetadataTypeDeclaration().toUnparameterizedTypeDescriptor())
+        .setEnclosingTypeDescriptor(getMetadataTypeDeclaration().toDescriptor())
         .setParameterTypeDescriptors(TypeDescriptors.get().nativeFunction)
         .setReturnTypeDescriptor(PrimitiveTypes.VOID)
         .setOrigin(MethodOrigin.SYNTHETIC_INSTANCE_OF_SUPPORT_METHOD)
@@ -487,9 +483,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return MethodDescriptor.newBuilder()
         .setName(MethodDescriptor.COPY_METHOD_NAME)
         .setEnclosingTypeDescriptor(
-            getMetadataConstructorReference()
-                .getReferencedTypeDeclaration()
-                .toUnparameterizedTypeDescriptor())
+            getMetadataConstructorReference().getReferencedTypeDeclaration().toDescriptor())
         .setParameterTypeDescriptors(
             TypeDescriptors.getUnknownType(), TypeDescriptors.getUnknownType())
         .setReturnTypeDescriptor(PrimitiveTypes.VOID)
@@ -501,7 +495,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   /** Returns the FieldDescriptor corresponding to the enclosing class instance. */
   public FieldDescriptor getFieldDescriptorForEnclosingInstance() {
     return FieldDescriptor.newBuilder()
-        .setEnclosingTypeDescriptor(toUnparameterizedTypeDescriptor())
+        .setEnclosingTypeDescriptor(getDeclarationDescriptor())
         .setName("$outer_this")
         .setTypeDescriptor(
             getEnclosingTypeDescriptor()
@@ -663,14 +657,14 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
    */
   @Memoized
   public Collection<MethodDescriptor> getPolymorphicMethods() {
-    DeclaredTypeDescriptor declaration = toUnparameterizedTypeDescriptor();
+    DeclaredTypeDescriptor declaration = getDeclarationDescriptor();
     if (!declaration.equals(this)) {
       return specializeMethods(declaration.getPolymorphicMethods(), getParameterization());
     }
 
     // The bridges need to be computed at the type declaration in order to create them as
-    // declarations. That is why the computation is performed at the unparameterized type descriptor
-    // (as it is equivalent to the type declaration).
+    // declarations. That is why the computation is performed at the declaration version of
+    // the type descriptor.
 
     Map<String, MethodDescriptor> methodsByMangledName = new LinkedHashMap<>();
 

@@ -210,9 +210,6 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
     throw new AssertionError();
   }
 
-  /** Returns type descriptor for the same type use the type parameters from the declaration. */
-  public abstract TypeDescriptor toUnparameterizedTypeDescriptor();
-
   /**
    * Returns the erasure type (see definition of erasure type at
    * http://help.eclipse.org/luna/index.jsp) with an empty type arguments list.
@@ -298,8 +295,8 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
   /**
    * Returns true if the two types have the same raw type.
    *
-   * <p>The raw type is always an unparameterized (nullable) declared type or a primitive type. And
-   * is defined as follows:
+   * <p>The raw type is always a declared type, an array of raw type or a primitive type. And is
+   * defined as follows:
    * <li>If the type is a primitive type "{@code p}"-> then its raw type is itself, "{@code p}".
    * <li>If the type is a class, interface or enum "{@code !C<String>}" -> then its raw type is the
    *     (nullable) declared type with no parameterization, "{@code C}"

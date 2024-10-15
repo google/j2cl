@@ -314,15 +314,6 @@ public final class RuntimeMethods {
     return createEnumsMethodCall(unboxingMethod, expression, toTypeDescriptor);
   }
 
-  /** Create a call to Enums.isInstanceOf. */
-  public static Expression createEnumsInstanceOfMethodCall(
-      Expression expression, TypeDescriptor testTypeDescriptor) {
-    MethodDescriptor methodDescriptor =
-        TypeDescriptors.get().javaemulInternalEnums.getMethodDescriptorByName("isInstanceOf");
-    return createEnumsMethodCall(
-        methodDescriptor, expression, testTypeDescriptor.toUnparameterizedTypeDescriptor());
-  }
-
   public static Expression createEnumsEqualsMethodCall(Expression instance, Expression other) {
     checkArgument(
         instance.getTypeDescriptor().isJsEnum()

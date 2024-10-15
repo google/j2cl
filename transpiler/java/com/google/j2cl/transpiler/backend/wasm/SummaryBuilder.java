@@ -102,8 +102,7 @@ public final class SummaryBuilder {
     TypeDeclaration superTypeDeclaration =
         WasmGenerationEnvironment.getTypeLayoutSuperTypeDeclaration(type.getDeclaration());
     if (superTypeDeclaration != null && !superTypeDeclaration.isNative()) {
-      typeHierarchyInfoBuilder.setExtendsType(
-          getTypeId(superTypeDeclaration.toUnparameterizedTypeDescriptor()));
+      typeHierarchyInfoBuilder.setExtendsType(getTypeId(superTypeDeclaration.toDescriptor()));
     }
 
     if (type.isInterface()) {
@@ -111,10 +110,7 @@ public final class SummaryBuilder {
     } else {
       type.getDeclaration().getAllSuperInterfaces().stream()
           .filter(not(TypeDeclaration::isNative))
-          .forEach(
-              t ->
-                  typeHierarchyInfoBuilder.addImplementsTypes(
-                      getTypeId(t.toUnparameterizedTypeDescriptor())));
+          .forEach(t -> typeHierarchyInfoBuilder.addImplementsTypes(getTypeId(t.toDescriptor())));
 
       summary.addTypes(typeHierarchyInfoBuilder.build());
     }
