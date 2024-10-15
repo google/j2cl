@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -157,14 +158,14 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     @Override
     public String getPrefix() {
       switch (this) {
-          // User written methods and bridges need to be mangled the same way.
+        // User written methods and bridges need to be mangled the same way.
         case SOURCE:
         case GENERALIZING_BRIDGE:
         case SPECIALIZING_BRIDGE:
         case DEFAULT_METHOD_BRIDGE:
         case ABSTRACT_STUB:
           return "m_";
-          // Getters and setters need to be mangled as fields.
+        // Getters and setters need to be mangled as fields.
         case SYNTHETIC_SYSTEM_PROPERTY_GETTER_REQUIRED:
         case SYNTHETIC_SYSTEM_PROPERTY_GETTER_OPTIONAL:
           // Synthetic property getters use the name of the property as the name of the method hence
@@ -173,7 +174,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         case SYNTHETIC_PROPERTY_SETTER:
         case SYNTHETIC_PROPERTY_GETTER:
           return FieldOrigin.SOURCE.getPrefix();
-          // Don't prefix the rest, they all start with "$"
+        // Don't prefix the rest, they all start with "$"
         default:
           return "";
       }
@@ -1165,9 +1166,12 @@ public abstract class MethodDescriptor extends MemberDescriptor {
                         updatedReplacingTypeDescriptorByTypeVariable))
             .collect(toImmutableList());
 
+    DeclaredTypeDescriptor enclosingTypeDescriptor = getEnclosingTypeDescriptor();
     DeclaredTypeDescriptor specializedEnclosingTypeDescriptor =
-        getEnclosingTypeDescriptor()
-            .specializeTypeVariables(updatedReplacingTypeDescriptorByTypeVariable);
+        isStatic()
+            ? enclosingTypeDescriptor
+            : enclosingTypeDescriptor.specializeTypeVariables(
+                updatedReplacingTypeDescriptorByTypeVariable);
 
     if (specializedEnclosingTypeDescriptor.equals(getEnclosingTypeDescriptor())
         && specializedTypeArgumentDescriptors.equals(typeArgumentTypeDescriptors)
@@ -1270,6 +1274,26 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         tv.equals(typeVariable)
             ? replacementTypeVariable
             : replacingTypeDescriptorByTypeVariable.apply(tv);
+  }
+
+  /**
+   * Returns the mapping between all the type variables in the enclosing context and the type
+   * arguments.
+   *
+   * <p>Note: It does not include the mapping for wildcards; hence this parameterization is not
+   * enough to recreate a method descriptor from its declaration.
+   */
+  @Memoized
+  public Map<TypeVariable, TypeDescriptor> getParameterization() {
+    Map<TypeVariable, TypeDescriptor> parameterization = new LinkedHashMap<>();
+    Streams.forEachPair(
+        getDeclarationDescriptor().getTypeParameterTypeDescriptors().stream(),
+        getTypeArgumentTypeDescriptors().stream(),
+        parameterization::put);
+    if (!isStatic()) {
+      parameterization.putAll(getEnclosingTypeDescriptor().getParameterization());
+    }
+    return parameterization;
   }
 
   @Override
@@ -1630,7 +1654,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
                     .filter(ParameterDescriptor::isVarargs)
                     .count()
                 <= 1);
-
 
         // varargs parameter is the last one.
         checkState(
