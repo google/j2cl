@@ -1055,11 +1055,8 @@ public class JdtEnvironment {
 
     // Compute these even later
     typeDescriptor =
-        DeclaredTypeDescriptor.newBuilder()
-            .setTypeDeclaration(createDeclarationForType(typeBinding.getTypeDeclaration()))
-            .setTypeArgumentDescriptors(
-                getTypeArgumentTypeDescriptors(typeBinding, inNullMarkedScope))
-            .build();
+        createDeclarationForType(typeBinding.getTypeDeclaration())
+            .toDescriptor(getTypeArgumentTypeDescriptors(typeBinding, inNullMarkedScope));
     putTypeDescriptorInCache(inNullMarkedScope, typeBinding, typeDescriptor);
     return typeDescriptor;
   }

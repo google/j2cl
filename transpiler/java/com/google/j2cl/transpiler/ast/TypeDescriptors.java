@@ -518,26 +518,21 @@ public class TypeDescriptors {
   private static DeclaredTypeDescriptor createSyntheticTypeDescriptor(
       Kind kind, String jsNamespace, String className, TypeDescriptor... typeArgumentDescriptors) {
 
-    TypeDeclaration typeDeclaration =
-        TypeDeclaration.newBuilder()
-            .setClassComponents(className)
-            // Mark bootstrap classes as non native so that the goog.require doesn't reference
-            // overlay.
-            .setNative(!isBootstrapNamespace(jsNamespace))
-            .setCustomizedJsNamespace(jsNamespace)
-            .setPackage(getSyntheticPackage(jsNamespace))
-            // Synthetic type declarations do not need to have type variables.
-            // TODO(b/63118697): Make sure declarations are consistent with descriptor w.r.t
-            // type parameters.
-            .setTypeParameterDescriptors(ImmutableList.of())
-            .setVisibility(Visibility.PUBLIC)
-            .setKind(kind)
-            .build();
-
-    return DeclaredTypeDescriptor.newBuilder()
-        .setTypeDeclaration(typeDeclaration)
-        .setTypeArgumentDescriptors(Arrays.asList(typeArgumentDescriptors))
-        .build();
+    return TypeDeclaration.newBuilder()
+        .setClassComponents(className)
+        // Mark bootstrap classes as non native so that the goog.require doesn't reference
+        // overlay.
+        .setNative(!isBootstrapNamespace(jsNamespace))
+        .setCustomizedJsNamespace(jsNamespace)
+        .setPackage(getSyntheticPackage(jsNamespace))
+        // Synthetic type declarations do not need to have type variables.
+        // TODO(b/63118697): Make sure declarations are consistent with descriptor w.r.t
+        // type parameters.
+        .setTypeParameterDescriptors(ImmutableList.of())
+        .setVisibility(Visibility.PUBLIC)
+        .setKind(kind)
+        .build()
+        .toDescriptor(Arrays.asList(typeArgumentDescriptors));
   }
 
   private static boolean isBootstrapNamespace(String jsNamespace) {

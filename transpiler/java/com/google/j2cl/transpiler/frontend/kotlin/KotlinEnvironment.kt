@@ -384,23 +384,9 @@ class KotlinEnvironment(
     useDeclarationVariance: Boolean,
   ): DeclaredTypeDescriptor {
     val irType = originalType.resolveBuiltinClass(useDeclarationVariance)
-    val defaultType = irType.getClass()!!.defaultType
-
-    // If type matches default type, we are effectively constructoring the default type so no
-    // specialization is needed.
-    if (defaultType == irType) return createUnparameterizedTypeDescriptor(irType)
-
-    return getDeclaredTypeDescriptor(defaultType)
+    return getDeclarationForType(irType.getClass())!!
+      .toDescriptor()
       .specializeTypeDescriptor(irType, useDeclarationVariance)
-  }
-
-  private fun createUnparameterizedTypeDescriptor(irType: IrSimpleType): DeclaredTypeDescriptor {
-    val classDeclaration = irType.getClass()!!
-    return DeclaredTypeDescriptor.newBuilder()
-      .setTypeDeclaration(getDeclarationForType(classDeclaration))
-      .setNullable(irType.isNullable())
-      .setTypeArgumentDescriptors(irType.arguments.map(::getReferenceTypeDescriptorForTypeArgument))
-      .build()
   }
 
   private fun DeclaredTypeDescriptor.specializeTypeDescriptor(

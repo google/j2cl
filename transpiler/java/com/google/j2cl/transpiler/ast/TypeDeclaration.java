@@ -585,19 +585,6 @@ public abstract class TypeDeclaration
   }
 
   /**
-   * Returns the erasure type (see definition of erasure type at
-   * http://help.eclipse.org/luna/index.jsp) with an empty type arguments list.
-   */
-  @Memoized
-  public DeclaredTypeDescriptor toRawTypeDescriptor() {
-    return DeclaredTypeDescriptor.newBuilder()
-        .setTypeDeclaration(this)
-        // Explicitly set the type arguments to empty.
-        .setTypeArgumentDescriptors(ImmutableList.of())
-        .build();
-  }
-
-  /**
    * Returns the fully package qualified source name like "com.google.common.Outer.Inner". Used in
    * places where original name is useful (like aliasing, identifying the corresponding java type,
    * Debug/Error output, etc.
@@ -652,14 +639,30 @@ public abstract class TypeDeclaration
   }
 
   /**
+   * Returns the erasure type (see definition of erasure type at
+   * http://help.eclipse.org/luna/index.jsp) with an empty type arguments list.
+   */
+  @Memoized
+  public DeclaredTypeDescriptor toRawTypeDescriptor() {
+    return toDescriptor(ImmutableList.of());
+  }
+
+  /**
    * Returns the usage site type descriptor corresponding to this declaration with the trivial
    * parameterization.
    */
   @Memoized
   public DeclaredTypeDescriptor toDescriptor() {
+    return toDescriptor(getTypeParameterDescriptors());
+  }
+
+  /** Returns the usage site type descriptor with parameterization. */
+  public DeclaredTypeDescriptor toDescriptor(
+      Iterable<? extends TypeDescriptor> typeArgumentDescriptors) {
     return DeclaredTypeDescriptor.newBuilder()
         .setTypeDeclaration(this)
-        .setTypeArgumentDescriptors(getTypeParameterDescriptors())
+        .setTypeArgumentDescriptors(typeArgumentDescriptors)
+        .setNullable(true)
         .build();
   }
 

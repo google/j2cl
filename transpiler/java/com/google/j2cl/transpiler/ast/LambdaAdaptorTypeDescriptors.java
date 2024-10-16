@@ -93,10 +93,7 @@ public final class LambdaAdaptorTypeDescriptors {
             isAbstract,
             uniqueId);
 
-    return DeclaredTypeDescriptor.newBuilder()
-        .setTypeDeclaration(adaptorDeclaration)
-        .setTypeArgumentDescriptors(typeArgumentDescriptors)
-        .build();
+    return adaptorDeclaration.toDescriptor(typeArgumentDescriptors);
   }
 
   /**
@@ -192,10 +189,8 @@ public final class LambdaAdaptorTypeDescriptors {
       DeclaredTypeDescriptor functionalTypeDescriptor) {
     checkArgument(!functionalTypeDescriptor.isJsFunctionInterface());
 
-    return DeclaredTypeDescriptor.newBuilder()
-        .setTypeDeclaration(createJsFunctionTypeDeclaration(functionalTypeDescriptor))
-        .setTypeArgumentDescriptors(functionalTypeDescriptor.getTypeArgumentDescriptors())
-        .build();
+    return createJsFunctionTypeDeclaration(functionalTypeDescriptor)
+        .toDescriptor(functionalTypeDescriptor.getTypeArgumentDescriptors());
   }
 
   /** Returns the TypeDeclaration for the JsFunction class. */

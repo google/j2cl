@@ -66,10 +66,7 @@ public final class LambdaImplementorTypeDescriptors {
             typeParameters,
             extendsAbstractAdaptor);
 
-    return DeclaredTypeDescriptor.newBuilder()
-        .setTypeDeclaration(implementorTypeDeclaration)
-        .setTypeArgumentDescriptors(typeParameters)
-        .build();
+    return implementorTypeDeclaration.toDescriptor(typeParameters);
   }
 
   /** Sanitize the type arguments of a declared type descriptor. */

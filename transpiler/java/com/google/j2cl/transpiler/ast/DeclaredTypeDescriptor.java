@@ -1332,11 +1332,8 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
   abstract Builder toBuilder();
 
-  public static Builder newBuilder() {
-    return new AutoValue_DeclaredTypeDescriptor.Builder()
-        // Default values.
-        .setNullable(true)
-        .setTypeArgumentDescriptors(ImmutableList.of());
+  static Builder newBuilder() {
+    return new AutoValue_DeclaredTypeDescriptor.Builder();
   }
 
   /** Builder for a TypeDescriptor. */

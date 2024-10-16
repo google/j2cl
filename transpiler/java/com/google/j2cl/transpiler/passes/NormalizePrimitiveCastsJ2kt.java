@@ -88,13 +88,11 @@ public class NormalizePrimitiveCastsJ2kt extends NormalizationPass {
   }
 
   private static final DeclaredTypeDescriptor KOTLIN_BASIC_TYPE =
-      DeclaredTypeDescriptor.newBuilder()
-          .setTypeDeclaration(
-              TypeDeclaration.newBuilder()
-                  .setKind(Kind.CLASS)
-                  .setQualifiedSourceName("j2kt.BasicType")
-                  .build())
-          .build();
+      TypeDeclaration.newBuilder()
+          .setKind(Kind.CLASS)
+          .setQualifiedSourceName("j2kt.BasicType")
+          .build()
+          .toDescriptor();
 
   private static Expression convertCharCode(Expression expression) {
     FieldDescriptor castToFieldDescriptor =

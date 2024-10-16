@@ -997,15 +997,9 @@ class JavaEnvironment {
       return cachedTypeDescriptor;
     }
 
-    TypeDeclaration typeDeclaration = createDeclarationForType((TypeElement) classType.asElement());
-
-    // Compute these even later
     DeclaredTypeDescriptor typeDescriptor =
-        DeclaredTypeDescriptor.newBuilder()
-            .setTypeDeclaration(typeDeclaration)
-            .setTypeArgumentDescriptors(
-                createTypeDescriptors(getTypeArguments(classType), inNullMarkedScope))
-            .build();
+        createDeclarationForType((TypeElement) classType.asElement())
+            .toDescriptor(createTypeDescriptors(getTypeArguments(classType), inNullMarkedScope));
     putTypeDescriptorInCache(inNullMarkedScope, classType, typeDescriptor);
     return typeDescriptor;
   }
