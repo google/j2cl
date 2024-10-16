@@ -1,0 +1,119 @@
+// Generated from "j2kt/SmartCasts.java"
+@file:OptIn(ExperimentalObjCName::class)
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER")
+
+package j2kt
+
+import javaemul.lang.*
+import kotlin.Any
+import kotlin.OptIn
+import kotlin.Suppress
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
+
+@ObjCName("J2ktJ2ktSmartCasts", exact = true)
+open class SmartCasts {
+ @ObjCName("J2ktJ2ktSmartCastsCompanion", exact = true)
+ companion object {
+  @JvmStatic
+  @ObjCName("testNonFinalVariableReference")
+  fun <T: Any> testNonFinalVariableReference(
+   @ObjCName("withJ2ktSmartCasts_Foo") foo: SmartCasts.Foo<T>,
+   @ObjCName("withJ2ktSmartCasts_Foo") foo2: SmartCasts.Foo<T>
+  ) {
+   var localFoo: SmartCasts.Foo<T>? = foo
+   localFoo = foo2
+   SmartCasts.acceptFooOfObject((localFoo as SmartCasts.Foo<Any>?)!!)
+   SmartCasts.acceptFooOfT<T>(localFoo!!)
+  }
+
+  @JvmStatic
+  @ObjCName("testNonFinalFieldAccess")
+  fun <T: Any> testNonFinalFieldAccess(
+   @ObjCName("withJ2ktSmartCasts_Container") container: SmartCasts.Container<T>
+  ) {
+   SmartCasts.acceptFooOfObject(container.nonFinalFoo as SmartCasts.Foo<Any>)
+   SmartCasts.acceptFooOfT<T>(container.nonFinalFoo)
+  }
+
+  @JvmStatic
+  @ObjCName("testInvocation")
+  fun <T: Any> testInvocation(
+   @ObjCName("withJ2ktSmartCasts_Container") container: SmartCasts.Container<T>
+  ) {
+   SmartCasts.acceptFooOfObject(container.getFoo() as SmartCasts.Foo<Any>)
+   SmartCasts.acceptFooOfT<T>(container.getFoo())
+  }
+
+  @JvmStatic
+  @ObjCName("testTypeArgumentInference")
+  fun <T: Any> testTypeArgumentInference(
+   @ObjCName("withJ2ktSmartCasts_Foo") foo: SmartCasts.Foo<T>
+  ) {
+   SmartCasts.acceptFooOfObject(foo as SmartCasts.Foo<Any>)
+   SmartCasts.acceptT<T>(foo.get())
+  }
+
+  @JvmStatic
+  @ObjCName("acceptFooOfObject")
+  fun acceptFooOfObject(
+   @ObjCName("withJ2ktSmartCasts_Foo") foo: SmartCasts.Foo<Any>
+  ) {}
+
+  @JvmStatic
+  @ObjCName("acceptFooOfT")
+  fun <T: Any> acceptFooOfT(
+   @ObjCName("withJ2ktSmartCasts_Foo") foo: SmartCasts.Foo<T>
+  ) {}
+
+  @JvmStatic
+  @ObjCName("acceptT")
+  fun <T: Any> acceptT(
+   @ObjCName("withId") foo: T
+  ) {}
+ }
+
+ @ObjCName("J2ktJ2ktSmartCasts_Foo", exact = true)
+ fun interface Foo<T: Any> {
+  @ObjCName("get")
+  fun get(): T
+ }
+
+ @ObjCName("J2ktJ2ktSmartCasts_Container", exact = true)
+ class Container<T: Any> {
+  @JvmField
+  @ObjCName("foo_")
+  val foo: SmartCasts.Foo<T>
+
+  @JvmField
+  @ObjCName("nonFinalFoo_")
+  var nonFinalFoo: SmartCasts.Foo<T>
+
+  constructor(
+   @ObjCName("J2ktSmartCasts_Foo") foo: SmartCasts.Foo<T>
+  ) {
+   this.foo = foo
+   this.nonFinalFoo = foo
+  }
+
+  @ObjCName("getFoo")
+  fun getFoo(): SmartCasts.Foo<T> {
+   return this.foo
+  }
+ }
+}
