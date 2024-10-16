@@ -171,18 +171,16 @@ public final class InsertCastsOnNullabilityMismatch extends NormalizationPass {
           .build();
     } else if (typeDescriptor instanceof DeclaredTypeDescriptor) {
       DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
-      return DeclaredTypeDescriptor.Builder.from(declaredTypeDescriptor)
-          .setTypeArgumentDescriptors(
-              Streams.zip(
-                      declaredTypeDescriptor
-                          .getTypeDeclaration()
-                          .getTypeParameterDescriptors()
-                          .stream(),
-                      declaredTypeDescriptor.getTypeArgumentDescriptors().stream(),
-                      (typeParameter, typeArgument) ->
-                          projectArgument(typeArgument, typeParameter, variance, seen))
-                  .collect(toImmutableList()))
-          .build();
+      return declaredTypeDescriptor.withTypeArguments(
+          Streams.zip(
+                  declaredTypeDescriptor
+                      .getTypeDeclaration()
+                      .getTypeParameterDescriptors()
+                      .stream(),
+                  declaredTypeDescriptor.getTypeArgumentDescriptors().stream(),
+                  (typeParameter, typeArgument) ->
+                      projectArgument(typeArgument, typeParameter, variance, seen))
+              .collect(toImmutableList()));
     } else if (typeDescriptor instanceof TypeVariable) {
       TypeVariable typeVariable = (TypeVariable) typeDescriptor;
       if (!typeVariable.isWildcardOrCapture()) {

@@ -117,12 +117,10 @@ public class NormalizeJsDocCastExpressions extends NormalizationPass {
               // avoid "unknown type" errors.
               if (castDeclaredTypeDescriptor.hasTypeArguments()) {
                 castTypeDescriptor =
-                    DeclaredTypeDescriptor.Builder.from(castDeclaredTypeDescriptor)
-                        .setTypeArgumentDescriptors(
-                            castDeclaredTypeDescriptor.getTypeArgumentDescriptors().stream()
-                                .map(NormalizeJsDocCastExpressions::replaceWildcardWithBound)
-                                .collect(toImmutableList()))
-                        .build();
+                    castDeclaredTypeDescriptor.withTypeArguments(
+                        castDeclaredTypeDescriptor.getTypeArgumentDescriptors().stream()
+                            .map(NormalizeJsDocCastExpressions::replaceWildcardWithBound)
+                            .collect(toImmutableList()));
               }
             }
 

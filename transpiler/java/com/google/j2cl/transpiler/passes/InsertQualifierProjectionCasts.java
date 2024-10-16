@@ -155,12 +155,10 @@ public final class InsertQualifierProjectionCasts extends NormalizationPass {
       TypeDescriptor typeDescriptor, ImmutableSet<TypeVariable> currentTypeParameters) {
     if (typeDescriptor instanceof DeclaredTypeDescriptor) {
       DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
-      return DeclaredTypeDescriptor.Builder.from(declaredTypeDescriptor)
-          .setTypeArgumentDescriptors(
-              declaredTypeDescriptor.getTypeArgumentDescriptors().stream()
-                  .map(typeArgument -> projectUpperBound(typeArgument, currentTypeParameters))
-                  .collect(toImmutableList()))
-          .build();
+      return declaredTypeDescriptor.withTypeArguments(
+          declaredTypeDescriptor.getTypeArgumentDescriptors().stream()
+              .map(typeArgument -> projectUpperBound(typeArgument, currentTypeParameters))
+              .collect(toImmutableList()));
     } else if (typeDescriptor instanceof TypeVariable) {
       TypeVariable typeVariable = (TypeVariable) typeDescriptor;
       if (typeVariable.getLowerBoundTypeDescriptor() == null) {

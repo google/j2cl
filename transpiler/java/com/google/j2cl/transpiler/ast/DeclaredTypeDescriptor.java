@@ -1120,7 +1120,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
       return this;
     }
 
-    return DeclaredTypeDescriptor.Builder.from(this).setNullable(true).build();
+    return toBuilder().setNullable(true).build();
   }
 
   @Memoized
@@ -1130,7 +1130,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
       return this;
     }
 
-    return DeclaredTypeDescriptor.Builder.from(this).setNullable(false).build();
+    return toBuilder().setNullable(false).build();
   }
 
   @Override
@@ -1255,7 +1255,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     ImmutableList<TypeDescriptor> newtypeArguments =
         replaceTypeDescriptors(typeArguments, fn, seen);
     if (!typeArguments.equals(newtypeArguments)) {
-      return Builder.from(this).setTypeArgumentDescriptors(newtypeArguments).build();
+      return withTypeArguments(newtypeArguments);
     }
 
     // We should also re-write TypeVariable for the TypeDescriptor however the type model  currently
@@ -1278,18 +1278,20 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
       return this;
     }
 
-    return Builder.from(this)
-        .setTypeArgumentDescriptors(
-            getTypeArgumentDescriptors().stream()
-                .map(t -> t.specializeTypeVariables(parameterization, seen))
-                .collect(toImmutableList()))
-        .build();
+    return withTypeArguments(
+        getTypeArgumentDescriptors().stream()
+            .map(t -> t.specializeTypeVariables(parameterization, seen))
+            .collect(toImmutableList()));
   }
 
   @Override
   public DeclaredTypeDescriptor specializeTypeVariables(
       Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable) {
     return specializeTypeVariables(replacementTypeArgumentByTypeVariable, ImmutableSet.of());
+  }
+
+  public DeclaredTypeDescriptor withTypeArguments(Iterable<TypeDescriptor> typeArguments) {
+    return toBuilder().setTypeArgumentDescriptors(typeArguments).build();
   }
 
   @Override
@@ -1374,10 +1376,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
             TypeDescriptors.get().globalNamespace);
       }
       return internedTypeDescriptor;
-    }
-
-    public static Builder from(final DeclaredTypeDescriptor typeDescriptor) {
-      return typeDescriptor.toBuilder();
     }
   }
 }

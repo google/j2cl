@@ -747,9 +747,7 @@ class JavaEnvironment {
               currentEntry.arg,
               applyNullabilityAnnotation(replacements.get(currentEntry.arg), rest, isNullable));
         }
-        return DeclaredTypeDescriptor.Builder.from(declaredTypeDescriptor)
-            .setTypeArgumentDescriptors(replacements)
-            .build();
+        return declaredTypeDescriptor.withTypeArguments(replacements);
       case ARRAY:
         ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
         return ArrayTypeDescriptor.newBuilder()
