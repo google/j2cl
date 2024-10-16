@@ -171,7 +171,7 @@ internal data class ExpressionRenderer(
       is NewInstance -> newInstanceSource(expression)
       is PostfixExpression -> postfixExpressionSource(expression)
       is PrefixExpression -> prefixExpressionSource(expression)
-      is SuperReference -> superReferenceSource(expression)
+      is SuperReference -> superReferenceSource()
       is ThisReference -> thisReferenceSource(expression)
       is VariableDeclarationExpression -> variableDeclarationExpressionSource(expression)
       is VariableReference -> variableReferenceSource(expression)
@@ -555,12 +555,9 @@ internal data class ExpressionRenderer(
       }
     }
 
-  private fun superReferenceSource(superReference: SuperReference): Source =
-    superReferenceSource(superTypeDescriptor = null, qualifierTypeDescriptor = null)
-
   private fun superReferenceSource(
-    superTypeDescriptor: DeclaredTypeDescriptor?,
-    qualifierTypeDescriptor: DeclaredTypeDescriptor?,
+    superTypeDescriptor: DeclaredTypeDescriptor? = null,
+    qualifierTypeDescriptor: DeclaredTypeDescriptor? = null,
   ): Source =
     join(
       SUPER_KEYWORD,
