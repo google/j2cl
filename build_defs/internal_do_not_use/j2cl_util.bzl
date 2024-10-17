@@ -65,12 +65,12 @@ def to_parallel_targets(key, args, name_fun):
 
 def to_parallel_target(label, name_fun):
     if type(label) == "string":
-        return name_fun(_absolute_label(label))
+        return name_fun(absolute_label(label))
 
     # Label Object
     return label.relative(":%s" % name_fun(label.name))
 
-def _absolute_label(label):
+def absolute_label(label):
     if label.startswith("//") or label.startswith("@"):
         if ":" in label:
             return label
