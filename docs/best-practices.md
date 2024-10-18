@@ -1,4 +1,4 @@
-[//]: # TOC
+ <!-- TOC -->
 
 # J2CL Best Practices
 

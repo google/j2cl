@@ -1,4 +1,4 @@
-[//]: # TOC
+ <!-- TOC -->
 
 # J2CL JsInterop by Example
 

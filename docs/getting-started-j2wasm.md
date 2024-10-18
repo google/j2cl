@@ -1,5 +1,5 @@
 
-[//]: # TOC
+ <!-- TOC -->
 
 # Getting Started for J2CL/Wasm (Experimental)
 
