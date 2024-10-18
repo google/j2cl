@@ -29,6 +29,8 @@ BENCH_ROOT = "benchmarking/java/com/google/j2cl/benchmarks/"
 JVM_BENCH_PATTERN = BENCH_ROOT + "%s"
 J2CL_BENCH_PATTERN = BENCH_ROOT + "%s-j2cl"
 J2WASM_BENCH_PATTERN = BENCH_ROOT + "%s-j2wasm"
+BLAZE_CMD = "bazel"
+BIN_DIR = BLAZE_CMD + "-bin/"
 
 
 def get_benchmarks(bench_name, platforms):
@@ -85,7 +87,7 @@ def build_targets_with_workspace(
 
 def build(test_targets, blaze_flags=None, cwd=None):
   """Blaze builds provided integration tests in parallel."""
-  run_cmd(["blaze", "build"] + (blaze_flags or []) + test_targets, cwd=cwd)
+  run_cmd([BLAZE_CMD, "build"] + (blaze_flags or []) + test_targets, cwd=cwd)
 
 
 def get_optimized_target(test_name):
@@ -123,7 +125,7 @@ def parse_name(test_name):
 
 def get_rule_kind(target, cwd=None):
   """Returns the rule kind of the target if it exists, otherwise return None."""
-  command = ["blaze", "query", '"%s"' % target, "--output=label_kind"]
+  command = [BLAZE_CMD, "query", '"%s"' % target, "--output=label_kind"]
 
   try:
     result = run_cmd(command, cwd=cwd).split()
@@ -145,7 +147,7 @@ def get_all_size_tests(cwd=None):
 
 def _get_tests_with_tag(tag, cwd=None):
   command = [
-      "blaze", "query",
+      BLAZE_CMD, "query",
       "attr(\"tags\",\"%s\",%s...)" % (tag, INTEGRATION_ROOT)
   ]
 
