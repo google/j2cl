@@ -324,7 +324,7 @@ public final class JsImportsGenerator {
           newImport.getMethod().getSourcePosition(),
           "Native methods '%s' and '%s', importing JavaScript method '%s', have"
               + " different parameter types ('%s' vs '%s'), currently disallowed"
-              + " due to performance concerns (b/279081023).",
+              + " due to performance concerns (b/371225463).",
           existingImport.getMethod().getReadableDescription(),
           newImport.getMethod().getReadableDescription(),
           existingImport.getImportKey(),
