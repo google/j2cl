@@ -21,9 +21,15 @@ import org.jspecify.annotations.NullMarked;
 public class SmartCasts {
   public interface Foo<T> {
     T get();
+
+    // TODO(b/283448200): Uncomment when fixed.
+    // default void testThisReference() {
+    //   acceptFooOfObject((Foo<Object>) this);
+    //   acceptFooOfT(this);
+    // }
   }
 
-  public static final class Container<T> {
+  public static class Container<T> {
     public final Foo<T> foo;
     public Foo<T> nonFinalFoo;
 
@@ -34,6 +40,40 @@ public class SmartCasts {
 
     public Foo<T> getFoo() {
       return foo;
+    }
+
+    // TODO(b/283448200): Uncomment when fixed.
+    // public void testImplicitThisReference() {
+    //   acceptFooOfObject((Foo<Object>) foo);
+    //   acceptFooOfT(foo);
+    // }
+
+    // TODO(b/283448200): Uncomment when fixed.
+    // public void testExplicitThisReference() {
+    //   acceptFooOfObject((Foo<Object>) this.foo);
+    //   acceptFooOfT(this.foo);
+    // }
+
+    // TODO(b/283448200): Uncomment when fixed.
+    // public void testMixedThisReference() {
+    //   acceptFooOfObject((Foo<Object>) this.foo);
+    //   acceptFooOfT(foo);
+    // }
+
+    public static class SubContainer<T> extends Container<T> {
+      SubContainer(Foo<T> foo) {
+        super(foo);
+      }
+
+      public void testSuperReference() {
+        acceptFooOfObject((Foo<Object>) super.foo);
+        acceptFooOfT(super.foo);
+      }
+
+      public void testSuperAndThisReference() {
+        acceptFooOfObject((Foo<Object>) super.foo);
+        acceptFooOfT(this.foo);
+      }
     }
   }
 
@@ -55,6 +95,18 @@ public class SmartCasts {
     localFoo = foo2;
     acceptFooOfObject((Foo<Object>) localFoo);
     acceptFooOfT(localFoo);
+  }
+
+  // TODO(b/283448200): Uncomment when fixed.
+  // public static <T> void testArguments(Foo<T> foo) {
+  //   acceptFooOfObjectAndT((Foo<Object>) foo, foo);
+  // }
+
+  public static <T> void testIfStatement(Foo<T> foo, boolean condition) {
+    if (condition) {
+      acceptT((Foo<Object>) foo);
+    }
+    acceptFooOfT(foo);
   }
 
   // TODO(b/283448200): Uncomment when fixed.
@@ -88,6 +140,8 @@ public class SmartCasts {
   public static void acceptFooOfObject(Foo<Object> foo) {}
 
   public static <T> void acceptFooOfT(Foo<T> foo) {}
+
+  public static <T> void acceptFooOfObjectAndT(Foo<Object> foo, Foo<T> foo2) {}
 
   public static <T> void acceptT(T foo) {}
 }

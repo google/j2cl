@@ -2,9 +2,12 @@
 
 #import <Foundation/NSObjCRuntime.h>
 
+#import "third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h"
+
 @class J2ktJ2ktSmartCasts;
 @class J2ktJ2ktSmartCastsCompanion;
 @class J2ktJ2ktSmartCasts_Container;
+@class J2ktJ2ktSmartCasts_Container_SubContainer;
 
 @protocol J2ktJ2ktSmartCasts_Foo;
 
@@ -16,6 +19,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_INLINE void J2ktSmartCasts_testNonFinalVariableReferenceWithJ2ktSmartCasts_Foo_withJ2ktSmartCasts_Foo_(id<J2ktJ2ktSmartCasts_Foo> foo, id<J2ktJ2ktSmartCasts_Foo> foo2) {
  [J2ktJ2ktSmartCastsCompanion.shared testNonFinalVariableReferenceWithJ2ktSmartCasts_Foo:foo withJ2ktSmartCasts_Foo:foo2];
+}
+
+NS_INLINE void J2ktSmartCasts_testIfStatementWithJ2ktSmartCasts_Foo_withBoolean_(id<J2ktJ2ktSmartCasts_Foo> foo, jboolean condition) {
+ [J2ktJ2ktSmartCastsCompanion.shared testIfStatementWithJ2ktSmartCasts_Foo:foo withBoolean:condition];
 }
 
 NS_INLINE void J2ktSmartCasts_testNonFinalFieldAccessWithJ2ktSmartCasts_Container_(J2ktJ2ktSmartCasts_Container* container) {
@@ -38,6 +45,10 @@ NS_INLINE void J2ktSmartCasts_acceptFooOfTWithJ2ktSmartCasts_Foo_(id<J2ktJ2ktSma
  [J2ktJ2ktSmartCastsCompanion.shared acceptFooOfTWithJ2ktSmartCasts_Foo:foo];
 }
 
+NS_INLINE void J2ktSmartCasts_acceptFooOfObjectAndTWithJ2ktSmartCasts_Foo_withJ2ktSmartCasts_Foo_(id<J2ktJ2ktSmartCasts_Foo> foo, id<J2ktJ2ktSmartCasts_Foo> foo2) {
+ [J2ktJ2ktSmartCastsCompanion.shared acceptFooOfObjectAndTWithJ2ktSmartCasts_Foo:foo withJ2ktSmartCasts_Foo:foo2];
+}
+
 NS_INLINE void J2ktSmartCasts_acceptTWithId_(id foo) {
  [J2ktJ2ktSmartCastsCompanion.shared acceptTWithId:foo];
 }
@@ -53,5 +64,7 @@ NS_INLINE J2ktJ2ktSmartCasts_Container* create_J2ktSmartCasts_Container_initWith
 NS_INLINE J2ktJ2ktSmartCasts_Container* new_J2ktSmartCasts_Container_initWithJ2ktSmartCasts_Foo_(id<J2ktJ2ktSmartCasts_Foo> foo) {
  return [[J2ktJ2ktSmartCasts_Container alloc] initWithJ2ktSmartCasts_Foo:foo];
 }
+
+@compatibility_alias J2ktSmartCasts_Container_SubContainer J2ktJ2ktSmartCasts_Container_SubContainer;
 
 NS_ASSUME_NONNULL_END

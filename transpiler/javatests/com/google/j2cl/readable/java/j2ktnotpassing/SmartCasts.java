@@ -19,13 +19,33 @@ import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 public class SmartCasts {
-  public interface Foo<T> {}
+  public interface Foo<T> {
+    default void testThisReference() {
+      acceptFooOfObject((Foo<Object>) this);
+      acceptFooOfT(this);
+    }
+  }
 
   public static final class Container<T> {
     public final Foo<T> foo;
 
     public Container(Foo<T> foo) {
       this.foo = foo;
+    }
+
+    public void testImplicitThisReference() {
+      acceptFooOfObject((Foo<Object>) foo);
+      acceptFooOfT(foo);
+    }
+
+    public void testExplicitThisReference() {
+      acceptFooOfObject((Foo<Object>) this.foo);
+      acceptFooOfT(this.foo);
+    }
+
+    public void testMixedThisReference() {
+      acceptFooOfObject((Foo<Object>) this.foo);
+      acceptFooOfT(foo);
     }
   }
 
@@ -38,6 +58,10 @@ public class SmartCasts {
     final Foo<T> localFoo = foo;
     acceptFooOfObject((Foo<Object>) localFoo);
     acceptFooOfT(localFoo); // Kotlin compiler error: Expected Foo<T>, got Foo<Any>
+  }
+
+  public static <T> void testArguments(Foo<T> foo) {
+    acceptFooOfObjectAndT((Foo<Object>) foo, foo);
   }
 
   public static <T> void testFinalFieldAccess(Container<T> container) {
@@ -53,4 +77,6 @@ public class SmartCasts {
   public static void acceptFooOfObject(Foo<Object> foo) {}
 
   public static <T> void acceptFooOfT(Foo<T> foo) {}
+
+  public static <T> void acceptFooOfObjectAndT(Foo<Object> foo, Foo<T> foo2) {}
 }

@@ -19,6 +19,7 @@ package j2kt
 
 import javaemul.lang.*
 import kotlin.Any
+import kotlin.Boolean
 import kotlin.OptIn
 import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
@@ -40,6 +41,18 @@ open class SmartCasts {
    localFoo = foo2
    SmartCasts.acceptFooOfObject((localFoo as SmartCasts.Foo<Any>?)!!)
    SmartCasts.acceptFooOfT<T>(localFoo!!)
+  }
+
+  @JvmStatic
+  @ObjCName("testIfStatement")
+  fun <T: Any> testIfStatement(
+   @ObjCName("withJ2ktSmartCasts_Foo") foo: SmartCasts.Foo<T>,
+   @ObjCName("withBoolean") condition: Boolean
+  ) {
+   if (condition) {
+    SmartCasts.acceptT<SmartCasts.Foo<Any>>(foo as SmartCasts.Foo<Any>)
+   }
+   SmartCasts.acceptFooOfT<T>(foo)
   }
 
   @JvmStatic
@@ -82,6 +95,13 @@ open class SmartCasts {
   ) {}
 
   @JvmStatic
+  @ObjCName("acceptFooOfObjectAndT")
+  fun <T: Any> acceptFooOfObjectAndT(
+   @ObjCName("withJ2ktSmartCasts_Foo") foo: SmartCasts.Foo<Any>,
+   @ObjCName("withJ2ktSmartCasts_Foo") foo2: SmartCasts.Foo<T>
+  ) {}
+
+  @JvmStatic
   @ObjCName("acceptT")
   fun <T: Any> acceptT(
    @ObjCName("withId") foo: T
@@ -95,7 +115,7 @@ open class SmartCasts {
  }
 
  @ObjCName("J2ktJ2ktSmartCasts_Container", exact = true)
- class Container<T: Any> {
+ open class Container<T: Any> {
   @JvmField
   @ObjCName("foo_")
   val foo: SmartCasts.Foo<T>
@@ -112,8 +132,25 @@ open class SmartCasts {
   }
 
   @ObjCName("getFoo")
-  fun getFoo(): SmartCasts.Foo<T> {
+  open fun getFoo(): SmartCasts.Foo<T> {
    return this.foo
+  }
+
+  @ObjCName("J2ktJ2ktSmartCasts_Container_SubContainer", exact = true)
+  open class SubContainer<T: Any>: SmartCasts.Container<T> {
+   internal constructor(foo: SmartCasts.Foo<T>): super(foo)
+
+   @ObjCName("testSuperReference")
+   open fun testSuperReference() {
+    SmartCasts.acceptFooOfObject(super.foo as SmartCasts.Foo<Any>)
+    SmartCasts.acceptFooOfT<T>(super.foo)
+   }
+
+   @ObjCName("testSuperAndThisReference")
+   open fun testSuperAndThisReference() {
+    SmartCasts.acceptFooOfObject(super.foo as SmartCasts.Foo<Any>)
+    SmartCasts.acceptFooOfT<T>(this.foo)
+   }
   }
  }
 }

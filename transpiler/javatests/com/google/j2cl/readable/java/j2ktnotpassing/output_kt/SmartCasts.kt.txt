@@ -50,6 +50,14 @@ open class SmartCasts {
   }
 
   @JvmStatic
+  @ObjCName("testArguments")
+  fun <T: Any> testArguments(
+   @ObjCName("withJ2ktnotpassingSmartCasts_Foo") foo: SmartCasts.Foo<T>
+  ) {
+   SmartCasts.acceptFooOfObjectAndT<T>(foo as SmartCasts.Foo<Any>, foo)
+  }
+
+  @JvmStatic
   @ObjCName("testFinalFieldAccess")
   fun <T: Any> testFinalFieldAccess(
    @ObjCName("withJ2ktnotpassingSmartCasts_Container") container: SmartCasts.Container<T>
@@ -78,10 +86,23 @@ open class SmartCasts {
   fun <T: Any> acceptFooOfT(
    @ObjCName("withJ2ktnotpassingSmartCasts_Foo") foo: SmartCasts.Foo<T>
   ) {}
+
+  @JvmStatic
+  @ObjCName("acceptFooOfObjectAndT")
+  fun <T: Any> acceptFooOfObjectAndT(
+   @ObjCName("withJ2ktnotpassingSmartCasts_Foo") foo: SmartCasts.Foo<Any>,
+   @ObjCName("withJ2ktnotpassingSmartCasts_Foo") foo2: SmartCasts.Foo<T>
+  ) {}
  }
 
  @ObjCName("J2ktJ2ktnotpassingSmartCasts_Foo", exact = true)
- interface Foo<T: Any> {}
+ interface Foo<T: Any> {
+  @ObjCName("testThisReference")
+  fun testThisReference() {
+   SmartCasts.acceptFooOfObject(this as SmartCasts.Foo<Any>)
+   SmartCasts.acceptFooOfT<T>(this)
+  }
+ }
 
  @ObjCName("J2ktJ2ktnotpassingSmartCasts_Container", exact = true)
  class Container<T: Any> {
@@ -93,6 +114,24 @@ open class SmartCasts {
    @ObjCName("J2ktnotpassingSmartCasts_Foo") foo: SmartCasts.Foo<T>
   ) {
    this.foo = foo
+  }
+
+  @ObjCName("testImplicitThisReference")
+  fun testImplicitThisReference() {
+   SmartCasts.acceptFooOfObject(this.foo as SmartCasts.Foo<Any>)
+   SmartCasts.acceptFooOfT<T>(this.foo)
+  }
+
+  @ObjCName("testExplicitThisReference")
+  fun testExplicitThisReference() {
+   SmartCasts.acceptFooOfObject(this.foo as SmartCasts.Foo<Any>)
+   SmartCasts.acceptFooOfT<T>(this.foo)
+  }
+
+  @ObjCName("testMixedThisReference")
+  fun testMixedThisReference() {
+   SmartCasts.acceptFooOfObject(this.foo as SmartCasts.Foo<Any>)
+   SmartCasts.acceptFooOfT<T>(this.foo)
   }
  }
 }
