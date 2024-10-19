@@ -159,9 +159,8 @@ public final class InsertNotNullAssertions extends NormalizationPass {
 
   // TODO(b/361088311): Remove this workaround when the Kotlin bug is fixed.
   private static boolean isWildcardOrCaptureAnnotatedNonNullable(TypeDescriptor typeDescriptor) {
-    if (typeDescriptor instanceof TypeVariable) {
-      TypeVariable typeVariable = (TypeVariable) typeDescriptor;
-      return typeVariable.isWildcardOrCapture() && typeVariable.isAnnotatedNonNullable();
+    if (typeDescriptor.isWildcardOrCapture()) {
+      return ((TypeVariable) typeDescriptor).isAnnotatedNonNullable();
     }
     return false;
   }

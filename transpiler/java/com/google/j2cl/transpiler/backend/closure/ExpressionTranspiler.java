@@ -56,7 +56,6 @@ import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
-import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
@@ -215,8 +214,7 @@ public final class ExpressionTranspiler {
           parameterType = ((ArrayTypeDescriptor) parameterType).getComponentTypeDescriptor();
         }
 
-        return parameterType.isTypeVariable()
-            && ((TypeVariable) parameterType).isWildcardOrCapture();
+        return parameterType.isWildcardOrCapture();
       }
 
       @Override

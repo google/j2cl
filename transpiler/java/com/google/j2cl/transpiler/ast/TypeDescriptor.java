@@ -112,6 +112,11 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
     return false;
   }
 
+  /** Return true if it is an unnamed type variable, i.e. a wildcard or capture. */
+  public boolean isWildcardOrCapture() {
+    return false;
+  }
+
   /** Returns whether the described type is a functional interface (JLS 9.8). */
   public boolean isFunctionalInterface() {
     return false;

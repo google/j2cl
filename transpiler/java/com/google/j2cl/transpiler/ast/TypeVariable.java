@@ -149,7 +149,7 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
     return this.getUpperBoundTypeDescriptor().isAssignableTo(that);
   }
 
-  /** Return true if it is an unnamed type variable, i.e. a wildcard or capture. */
+  @Override
   public final boolean isWildcardOrCapture() {
     return isWildcard() || isCapture();
   }

@@ -27,7 +27,6 @@ import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
-import com.google.j2cl.transpiler.ast.TypeVariable;
 
 /**
  * Inserts a boxing operation when a primitive type is being put into a reference type slot in
@@ -104,8 +103,7 @@ public class InsertBoxingConversions extends NormalizationPass {
       // could be assigned back to a variable of type T; therefore the result type should be
       // preserved.
       boolean insertCast =
-          toTypeDescriptor instanceof TypeVariable
-              && !((TypeVariable) toTypeDescriptor).isWildcardOrCapture();
+          toTypeDescriptor.isTypeVariable() && !toTypeDescriptor.isWildcardOrCapture();
       return insertCast
           ? CastExpression.newBuilder()
               .setExpression(boxedExpression)
