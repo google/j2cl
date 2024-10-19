@@ -18,6 +18,7 @@
 import argparse
 import sys
 
+import bench
 import diff
 import make_size_report
 import presubmit
@@ -47,6 +48,7 @@ if __name__ == "__main__":
 
   _add_cmd(parsers, "size", make_size_report, "Generate size report.")
   _add_cmd(parsers, "gen", replace_all, "Regenerate readable examples.")
+  _add_cmd(parsers, "bench", bench, "Run a benchmark.")
   _add_cmd(parsers, "diff", diff, "Compare integration test output.")
   _add_cmd(parsers, "test", test_integration, "Run an integration test.")
   _add_cmd(parsers, "testall", test_all, "Run all tests.")
