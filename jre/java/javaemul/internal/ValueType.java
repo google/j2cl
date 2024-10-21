@@ -155,8 +155,7 @@ public abstract class ValueType {
   private static native String[] filteredkeys(ValueType type);
 
   @JsMethod
-  private static native void mixin(
-      Constructor target, Constructor source, int mask, String... excludes);
+  static native void mixin(Constructor target, Constructor source, int mask, String... excludes);
 
   @JsMethod(namespace = "goog.reflect")
   static native String objectProperty(String name, Object type);
