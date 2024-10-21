@@ -4,6 +4,8 @@
 
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
 load("//build_defs:rules.bzl", "j2cl_import", "j2cl_library", "j2wasm_library")
+load("//build_defs/internal_do_not_use:j2cl_common.bzl", "DEFAULT_J2CL_JAVAC_OPTS")
+load("//build_defs/internal_do_not_use:j2wasm_common.bzl", "DEFAULT_J2WASM_JAVAC_OPTS")
 load("@rules_java//java:defs.bzl", "java_library")
 load(":j2cl_java_toolchain.bzl", "j2cl_java_toolchain")
 load(":package_sources.bzl", "package_sources")
@@ -13,7 +15,7 @@ package(
     licenses = ["notice"],
 )
 
-JRE_JAVAC_VERSION_OPTS = [
+JRE_JAVAC_OPTS = [
     # Remove the system (aka pre Java9 'bootclasspath').
     # We need this to compile JRE otherwise it will result in a split package for JRE sources.
     "--system",
@@ -24,22 +26,10 @@ JRE_JAVAC_VERSION_OPTS = [
     # Allow JRE classes are allowed to depend on the jsinterop annotations
     "--add-reads",
     "java.base=ALL-UNNAMED",
-    # Avoid optimized JVM String concat which introduces calls to unsupported APIs.
-    "-XDstringConcat=inline",
     # Remove warnings that are not relevant to JRE since it is actually a JRE implementaiton.
     "-Xep:ShouldNotSubclass:OFF",
     # Remove crv since we don't want to dep on ErrorProne annotations from JRE.
     "-Xep:CheckReturnValue:OFF",
-    # Enable Java 11 for the JRE sources
-    "-source",
-    "11",
-    "-target",
-    "11",
-]
-
-JRE_JAVAC_OPTS = JRE_JAVAC_VERSION_OPTS + [
-    # Avoid log site injection which introduces calls to unsupported APIs
-    "-XDinjectLogSites=false",
 ]
 
 java_library(
@@ -160,7 +150,7 @@ j2cl_library(
 java_library(
     name = "jre_bootclasspath",
     srcs = [":jre_java_files"],
-    javacopts = JRE_JAVAC_OPTS,
+    javacopts = JRE_JAVAC_OPTS + DEFAULT_J2CL_JAVAC_OPTS,
     visibility = ["//transpiler/javatests/com/google/j2cl/transpiler:__pkg__"],
     deps = [
         ":javaemul_internal_annotations",
@@ -171,7 +161,7 @@ java_library(
 java_library(
     name = "jre_bootclasspath-j2wasm",
     srcs = [":jre_java_files-j2wasm"],
-    javacopts = JRE_JAVAC_OPTS,
+    javacopts = JRE_JAVAC_OPTS + DEFAULT_J2CL_JAVAC_OPTS + DEFAULT_J2WASM_JAVAC_OPTS,
     visibility = ["//transpiler/javatests/com/google/j2cl/transpiler:__pkg__"],
     deps = [
         ":javaemul_internal_annotations",
