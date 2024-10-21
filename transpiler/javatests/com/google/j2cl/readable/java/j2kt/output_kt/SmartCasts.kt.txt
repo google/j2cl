@@ -19,6 +19,7 @@ package j2kt
 
 import javaemul.lang.*
 import kotlin.Any
+import kotlin.Array
 import kotlin.Boolean
 import kotlin.OptIn
 import kotlin.Suppress
@@ -105,6 +106,18 @@ open class SmartCasts {
   @ObjCName("acceptT")
   fun <T: Any> acceptT(
    @ObjCName("withId") foo: T
+  ) {}
+
+  @JvmStatic
+  @ObjCName("acceptArrayOfObject")
+  fun acceptArrayOfObject(
+   @ObjCName("withNSObjectArray") a: Array<Any>
+  ) {}
+
+  @JvmStatic
+  @ObjCName("acceptArrayOfT")
+  fun <T: Any> acceptArrayOfT(
+   @ObjCName("withNSObjectArray") a: Array<T>
   ) {}
  }
 

@@ -74,9 +74,23 @@ public class SmartCasts {
     acceptFooOfT(container.foo); // Kotlin compiler error: Expected Foo<T>, got Foo<Any>
   }
 
+  public static <T> void testArray(T[] a) {
+    acceptArrayOfObject(a);
+    acceptArrayOfT(a);
+  }
+
+  public static <T> void testVararg(T... a) {
+    acceptArrayOfObject(a);
+    acceptArrayOfT(a);
+  }
+
   public static void acceptFooOfObject(Foo<Object> foo) {}
 
   public static <T> void acceptFooOfT(Foo<T> foo) {}
 
   public static <T> void acceptFooOfObjectAndT(Foo<Object> foo, Foo<T> foo2) {}
+
+  public static void acceptArrayOfObject(Object[] a) {}
+
+  public static <T> void acceptArrayOfT(T[] a) {}
 }
