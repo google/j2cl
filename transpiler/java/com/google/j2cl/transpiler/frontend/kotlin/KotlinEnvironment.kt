@@ -70,7 +70,6 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.methods
 import com.google.j2cl.transpiler.frontend.kotlin.ir.simpleSourceName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.singleAbstractMethod
 import com.google.j2cl.transpiler.frontend.kotlin.ir.typeSubstitutionMap
-import org.jetbrains.kotlin.backend.common.extensions.FirIncompatiblePluginAPI
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
 import org.jetbrains.kotlin.backend.jvm.ir.constantValue
@@ -705,7 +704,6 @@ class KotlinEnvironment(
     useDeclarationVariance: Boolean = true
   ): IrSimpleType {
     val classSymbol = classOrNull ?: return this
-    @OptIn(FirIncompatiblePluginAPI::class)
     val builtinClass = builtinsResolver.resolveClass(classSymbol) ?: return this
 
     val originalTypeParams = classSymbol.owner.typeParameters
