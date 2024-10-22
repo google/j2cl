@@ -131,14 +131,14 @@ public class DateTest extends TestCase {
     Date accum0 = create();
     Object a0 = accum0.clone();
     assertFalse(a0 == accum0);
-    assertEquals(a0, accum0);
+    assertEquals(accum0, a0);
     // /////////////////////////////
     // Past
     // /////////////////////////////
     Date accum1 = create(PAST);
     Object a1 = accum1.clone();
     assertFalse(a1 == accum1);
-    assertEquals(a1, accum1);
+    assertEquals(accum1, a1);
 
     // /////////////////////////////
     // Future
@@ -146,7 +146,7 @@ public class DateTest extends TestCase {
     Date accum2 = create(FUTURE);
     Object a2 = accum2.clone();
     assertFalse(a2 == accum2);
-    assertEquals(a2, accum2);
+    assertEquals(accum2, a2);
   }
 
   /** Testing for public int java.util.Date.compareTo(java.util.Date). */
@@ -355,8 +355,8 @@ public class DateTest extends TestCase {
     int newDayNum = 31;
     Date dateWithThirtyDays = new Date(2006 - 1900, monthNum, 30);
     dateWithThirtyDays.setDate(newDayNum);
-    assertEquals(dateWithThirtyDays.getMonth(), monthNum + 1);
-    assertEquals(dateWithThirtyDays.getDate(), newDayNum - numDaysInOldMonth);
+    assertEquals(monthNum + 1, dateWithThirtyDays.getMonth());
+    assertEquals(newDayNum - numDaysInOldMonth, dateWithThirtyDays.getDate());
   }
 
   @J2ktIncompatible // Not nullable according to Jspecify
@@ -416,7 +416,7 @@ public class DateTest extends TestCase {
     for (int i = 1; i < 29; i++) {
       Date accum0 = create();
       accum0.setDate(i);
-      assertEquals(accum0.getDate(), i);
+      assertEquals(i, accum0.getDate());
     }
   }
 
@@ -429,7 +429,7 @@ public class DateTest extends TestCase {
         return;
       }
       accum0.setHours(i);
-      assertEquals(accum0.getHours(), i);
+      assertEquals(i, accum0.getHours());
     }
   }
 
@@ -445,8 +445,8 @@ public class DateTest extends TestCase {
     int numDaysInNewMonth = 28;
     Date dateWithThirtyOneDays = new Date(2006 - 1900, 11, dayNum); // December
     dateWithThirtyOneDays.setMonth(newMonthNum);
-    assertEquals(dateWithThirtyOneDays.getMonth(), newMonthNum + 1);
-    assertEquals(dateWithThirtyOneDays.getDate(), dayNum - numDaysInNewMonth);
+    assertEquals(newMonthNum + 1, dateWithThirtyOneDays.getMonth());
+    assertEquals(dayNum - numDaysInNewMonth, dateWithThirtyOneDays.getDate());
   }
 
   /**
@@ -461,9 +461,9 @@ public class DateTest extends TestCase {
     int numDaysInFebInNewYear = 28;
     Date leapYearDate = new Date(2004 - 1900, monthNum, dayNum);
     leapYearDate.setYear(newYearNum);
-    assertEquals(leapYearDate.getYear(), newYearNum);
-    assertEquals(leapYearDate.getMonth(), monthNum + 1);
-    assertEquals(leapYearDate.getDate(), dayNum - numDaysInFebInNewYear);
+    assertEquals(newYearNum, leapYearDate.getYear());
+    assertEquals(monthNum + 1, leapYearDate.getMonth());
+    assertEquals(dayNum - numDaysInFebInNewYear, leapYearDate.getDate());
   }
 
   /** Testing for public void java.util.Date.setMinutes(int). */
@@ -471,7 +471,7 @@ public class DateTest extends TestCase {
     for (int i = 0; i < 24; i++) {
       Date accum0 = create();
       accum0.setMinutes(i);
-      assertEquals(accum0.getMinutes(), i);
+      assertEquals(i, accum0.getMinutes());
     }
   }
 
@@ -485,7 +485,7 @@ public class DateTest extends TestCase {
       // not have 29, 30, or 31 days in it, respectively.
       Date accum0 = new Date(2006 - 1900, 11, 1); // December
       accum0.setMonth(i);
-      assertEquals(accum0.getMonth(), i);
+      assertEquals(i, accum0.getMonth());
     }
   }
 
@@ -494,7 +494,7 @@ public class DateTest extends TestCase {
     for (int i = 0; i < 24; i++) {
       Date accum0 = create();
       accum0.setSeconds(i);
-      assertEquals(accum0.getSeconds(), i);
+      assertEquals(i, accum0.getSeconds());
     }
   }
 
@@ -504,7 +504,7 @@ public class DateTest extends TestCase {
     for (int i = 0; i < values.length; i++) {
       Date accum0 = create();
       accum0.setTime(values[i]);
-      assertEquals(accum0.getTime(), values[i]);
+      assertEquals(values[i], accum0.getTime());
     }
   }
 
@@ -519,9 +519,9 @@ public class DateTest extends TestCase {
     int newYearNum = yearNum + 4;
     Date leapYearDate = new Date(yearNum, monthNum, dayNum);
     leapYearDate.setYear(newYearNum);
-    assertEquals(leapYearDate.getYear(), newYearNum);
-    assertEquals(leapYearDate.getMonth(), monthNum);
-    assertEquals(leapYearDate.getDate(), dayNum);
+    assertEquals(newYearNum, leapYearDate.getYear());
+    assertEquals(monthNum, leapYearDate.getMonth());
+    assertEquals(dayNum, leapYearDate.getDate());
   }
 
   /** Testing for public void java.util.Date.setYear(int). */
@@ -532,7 +532,7 @@ public class DateTest extends TestCase {
       // when the date is February 29th, and we set the year to a non-leap year
       Date accum0 = new Date(2006 - 1900, 11, 01); // December
       accum0.setYear(i);
-      assertEquals(accum0.getYear(), i);
+      assertEquals(i, accum0.getYear());
     }
   }
 
