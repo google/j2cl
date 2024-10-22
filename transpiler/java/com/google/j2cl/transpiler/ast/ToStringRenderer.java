@@ -456,7 +456,7 @@ class ToStringRenderer {
       @Override
       public boolean enterSwitchStatement(SwitchStatement switchStatement) {
         print("switch (");
-        accept(switchStatement.getSwitchExpression());
+        accept(switchStatement.getExpression());
         print(") {");
         indent();
         for (SwitchCase switchCase : switchStatement.getCases()) {

@@ -710,16 +710,14 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   @Override
   public SwitchStatement rewriteSwitchStatement(SwitchStatement switchStatement) {
 
-    Expression switchExpression =
-        contextRewriter.rewriteSwitchExpressionContext(switchStatement.getSwitchExpression());
+    Expression expression =
+        contextRewriter.rewriteSwitchExpressionContext(switchStatement.getExpression());
 
-    if (switchExpression == switchStatement.getSwitchExpression()) {
+    if (expression == switchStatement.getExpression()) {
       return switchStatement;
     }
 
-    return SwitchStatement.Builder.from(switchStatement)
-        .setSwitchExpression(switchExpression)
-        .build();
+    return SwitchStatement.Builder.from(switchStatement).setExpression(expression).build();
   }
 
   @Override

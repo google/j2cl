@@ -398,7 +398,7 @@ public class ImplementFinallyViaControlFlow extends NormalizationPass {
       }
       SwitchStatement.Builder dispatchStatementBuilder =
           SwitchStatement.newBuilder()
-              .setSwitchExpression(exitSelectorVariable.createReference())
+              .setExpression(exitSelectorVariable.createReference())
               .setSourcePosition(originalTryStatement.getSourcePosition());
       // The normal control flow path has an exit selector of 0; returns, breaks, continues and
       // throws will have their own value starting from 1 and will have a branch in the switch.

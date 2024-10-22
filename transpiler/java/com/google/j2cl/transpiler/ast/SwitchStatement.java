@@ -31,18 +31,18 @@ import java.util.List;
 /** Switch Statement. */
 @Visitable
 public class SwitchStatement extends Statement {
-  @Visitable Expression switchExpression;
+  @Visitable Expression expression;
   @Visitable List<SwitchCase> cases = new ArrayList<>();
 
   private SwitchStatement(
-      SourcePosition sourcePosition, Expression switchExpression, List<SwitchCase> cases) {
+      SourcePosition sourcePosition, Expression expression, List<SwitchCase> cases) {
     super(sourcePosition);
-    this.switchExpression = checkNotNull(switchExpression);
+    this.expression = checkNotNull(expression);
     this.cases.addAll(checkNotNull(cases));
   }
 
-  public Expression getSwitchExpression() {
-    return switchExpression;
+  public Expression getExpression() {
+    return expression;
   }
 
   public List<SwitchCase> getCases() {
@@ -58,7 +58,7 @@ public class SwitchStatement extends Statement {
   public SwitchStatement clone() {
     return SwitchStatement.newBuilder()
         .setSourcePosition(getSourcePosition())
-        .setSwitchExpression(switchExpression.clone())
+        .setExpression(expression.clone())
         .setCases(AstUtils.clone(cases))
         .build();
   }
@@ -74,14 +74,14 @@ public class SwitchStatement extends Statement {
 
   /** A Builder for SwitchStatement. */
   public static class Builder {
-    private Expression switchExpression;
+    private Expression expression;
     private List<SwitchCase> switchCases = new ArrayList<>();
     private SourcePosition sourcePosition;
 
     public static Builder from(SwitchStatement switchStatement) {
       return newBuilder()
           .setSourcePosition(switchStatement.getSourcePosition())
-          .setSwitchExpression(switchStatement.getSwitchExpression())
+          .setExpression(switchStatement.getExpression())
           .setCases(switchStatement.getCases());
     }
 
@@ -92,8 +92,8 @@ public class SwitchStatement extends Statement {
     }
 
     @CanIgnoreReturnValue
-    public Builder setSwitchExpression(Expression switchExpression) {
-      this.switchExpression = switchExpression;
+    public Builder setExpression(Expression expression) {
+      this.expression = expression;
       return this;
     }
 
@@ -115,7 +115,7 @@ public class SwitchStatement extends Statement {
     }
 
     public SwitchStatement build() {
-      return new SwitchStatement(sourcePosition, switchExpression, switchCases);
+      return new SwitchStatement(sourcePosition, expression, switchCases);
     }
 
     private Builder() {}

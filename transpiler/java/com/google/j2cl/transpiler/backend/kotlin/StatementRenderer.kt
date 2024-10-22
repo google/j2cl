@@ -215,7 +215,7 @@ internal data class StatementRenderer(
   private fun switchStatementSource(switchStatement: SwitchStatement): Source =
     spaceSeparated(
       WHEN_KEYWORD,
-      inParentheses(expressionSource(switchStatement.switchExpression)),
+      inParentheses(expressionSource(switchStatement.expression)),
       block(
         newLineSeparated(
           // TODO(b/263161219): Represent WhenStatement as a data class, convert from

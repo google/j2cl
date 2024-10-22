@@ -1257,7 +1257,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
 
     private SwitchStatement convert(org.eclipse.jdt.core.dom.SwitchStatement switchStatement) {
-      Expression switchExpression = convert(switchStatement.getExpression());
+      Expression expression = convert(switchStatement.getExpression());
 
       List<SwitchCase.Builder> caseBuilders = new ArrayList<>();
       for (org.eclipse.jdt.core.dom.Statement statement :
@@ -1272,7 +1272,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
       return SwitchStatement.newBuilder()
           .setSourcePosition(getSourcePosition(switchStatement))
-          .setSwitchExpression(switchExpression)
+          .setExpression(expression)
           .setCases(caseBuilders.stream().map(SwitchCase.Builder::build).collect(toImmutableList()))
           .build();
     }

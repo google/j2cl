@@ -211,7 +211,7 @@ final class StatementTranspiler {
       }
 
       private void renderSwitchDispatchTable(SwitchStatement switchStatement) {
-        if (isPrimitiveOrJsEnum(switchStatement.getSwitchExpression().getTypeDescriptor())) {
+        if (isPrimitiveOrJsEnum(switchStatement.getExpression().getTypeDescriptor())) {
           Stats stats =
               Stats.of(
                   switchStatement.getCases().stream()
@@ -324,7 +324,7 @@ final class StatementTranspiler {
         builder.newLine();
         builder.append("(br_table ");
         stream(slots).forEach(slot -> builder.append(slot + " "));
-        emitBranchIndexExpression(switchStatement.getSwitchExpression(), offset);
+        emitBranchIndexExpression(switchStatement.getExpression(), offset);
         builder.append(")");
         builder.closeParens();
       }
@@ -358,8 +358,7 @@ final class StatementTranspiler {
           // If the condition for this case is met, jump to the start of the case, i.e. jump out
           // of all of the previous enclosing blocks.
           Expression condition =
-              createCaseCondition(
-                  switchCase.getCaseExpression(), switchStatement.getSwitchExpression());
+              createCaseCondition(switchCase.getCaseExpression(), switchStatement.getExpression());
           renderConditionalBranch(switchStatement.getSourcePosition(), condition, casePosition);
         }
 
@@ -372,15 +371,14 @@ final class StatementTranspiler {
 
       /** Creates the condition to compare the switch expression with the case expression. */
       private Expression createCaseCondition(
-          Expression switchCaseExpression, Expression switchExpression) {
+          Expression switchCaseExpression, Expression expression) {
         if (TypeDescriptors.isJavaLangString(switchCaseExpression.getTypeDescriptor())) {
           // Strings are compared using equals.
-          return RuntimeMethods.createStringEqualsMethodCall(
-              switchCaseExpression, switchExpression);
+          return RuntimeMethods.createStringEqualsMethodCall(switchCaseExpression, expression);
         }
 
         checkState(switchCaseExpression.getTypeDescriptor().isPrimitive());
-        return switchExpression.infixEquals(switchCaseExpression);
+        return expression.infixEquals(switchCaseExpression);
       }
 
       @Override

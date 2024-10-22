@@ -554,7 +554,7 @@ class CompilationUnitBuilder(
 
   private fun convertSwitchCase(irSwitch: IrSwitch) =
     SwitchStatement.newBuilder()
-      .setSwitchExpression(convertExpression(irSwitch.switchExpression))
+      .setExpression(convertExpression(irSwitch.switchExpression))
       .setSourcePosition(getSourcePosition(irSwitch))
       .setCases(irSwitch.cases.map { convertCaseStatement(it) })
       .build()

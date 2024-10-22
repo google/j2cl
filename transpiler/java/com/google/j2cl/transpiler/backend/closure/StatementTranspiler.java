@@ -275,7 +275,7 @@ public class StatementTranspiler {
             switchStatement.getSourcePosition(),
             () -> {
               builder.append("switch (");
-              renderExpression(switchStatement.getSwitchExpression());
+              renderExpression(switchStatement.getExpression());
               builder.append(") ");
               builder.openBrace();
               for (SwitchCase switchcase : switchStatement.getCases()) {

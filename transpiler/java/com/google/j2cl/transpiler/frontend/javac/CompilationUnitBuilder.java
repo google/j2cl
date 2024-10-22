@@ -460,7 +460,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     return SwitchStatement.newBuilder()
         .setSourcePosition(getSourcePosition(switchStatement))
-        .setSwitchExpression(convertExpressionOrNull(switchStatement.getExpression()))
+        .setExpression(convertExpressionOrNull(switchStatement.getExpression()))
         .setCases(
             switchStatement.getCases().stream()
                 .map(

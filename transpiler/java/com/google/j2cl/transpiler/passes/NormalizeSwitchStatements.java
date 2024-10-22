@@ -38,15 +38,15 @@ public class NormalizeSwitchStatements extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public SwitchStatement rewriteSwitchStatement(SwitchStatement switchStatement) {
-            Expression expression = switchStatement.getSwitchExpression();
+            Expression expression = switchStatement.getExpression();
             TypeDescriptor expressionTypeDescriptor = expression.getTypeDescriptor();
 
             if (TypeDescriptors.isJavaLangString(expressionTypeDescriptor)
                 || (AstUtils.isJsEnumBoxingSupported() && expressionTypeDescriptor.isJsEnum())) {
               // Switch on strings and unboxed JsEnums should throw on null.
               return SwitchStatement.Builder.from(switchStatement)
-                  .setSwitchExpression(
-                      RuntimeMethods.createCheckNotNullCall(switchStatement.getSwitchExpression()))
+                  .setExpression(
+                      RuntimeMethods.createCheckNotNullCall(switchStatement.getExpression()))
                   .build();
             }
 
@@ -71,10 +71,10 @@ public class NormalizeSwitchStatements extends NormalizationPass {
    */
   private static SwitchStatement convertEnumSwitchStatement(SwitchStatement switchStatement) {
     return SwitchStatement.Builder.from(switchStatement)
-        .setSwitchExpression(
+        .setExpression(
             MethodCall.Builder.from(
                     TypeDescriptors.get().javaLangEnum.getMethodDescriptor("ordinal"))
-                .setQualifier(switchStatement.getSwitchExpression())
+                .setQualifier(switchStatement.getExpression())
                 .build())
         .setCases(
             switchStatement.getCases().stream()

@@ -91,22 +91,22 @@ public class ExtractNonIdempotentExpressions extends NormalizationPass {
 
           @Override
           public Statement rewriteSwitchStatement(SwitchStatement switchStatement) {
-            Expression switchExpression = switchStatement.getSwitchExpression();
-            if (!switchExpression.isIdempotent()) {
+            Expression expression = switchStatement.getExpression();
+            if (!expression.isIdempotent()) {
               Variable switchVariable =
                   Variable.newBuilder()
                       .setName("$expression")
                       .setFinal(true)
-                      .setTypeDescriptor(switchExpression.getTypeDescriptor())
+                      .setTypeDescriptor(expression.getTypeDescriptor())
                       .build();
               return Block.newBuilder()
                   .setStatements(
                       VariableDeclarationExpression.newBuilder()
-                          .addVariableDeclaration(switchVariable, switchExpression)
+                          .addVariableDeclaration(switchVariable, expression)
                           .build()
                           .makeStatement(switchStatement.getSourcePosition()),
                       SwitchStatement.Builder.from(switchStatement)
-                          .setSwitchExpression(switchVariable.createReference())
+                          .setExpression(switchVariable.createReference())
                           .build())
                   .build();
             }
