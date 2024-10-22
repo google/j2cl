@@ -84,7 +84,6 @@ import com.google.j2cl.transpiler.frontend.common.AbstractCompilationUnitBuilder
 import com.google.j2cl.transpiler.frontend.kotlin.ir.IntrinsicMethods
 import com.google.j2cl.transpiler.frontend.kotlin.ir.findFunctionByName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getArguments
-import com.google.j2cl.transpiler.frontend.kotlin.ir.getFunctionExpression
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getNameSourcePosition
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getParameters
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getSourcePosition
@@ -98,6 +97,7 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.isUnitInstanceReference
 import com.google.j2cl.transpiler.frontend.kotlin.ir.javaName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.resolveLabel
 import com.google.j2cl.transpiler.frontend.kotlin.ir.typeSubstitutionMap
+import com.google.j2cl.transpiler.frontend.kotlin.ir.unfoldExpression
 import com.google.j2cl.transpiler.frontend.kotlin.lower.IrForInLoop
 import com.google.j2cl.transpiler.frontend.kotlin.lower.IrForLoop
 import com.google.j2cl.transpiler.frontend.kotlin.lower.IrSwitch
@@ -1289,7 +1289,7 @@ class CompilationUnitBuilder(
   }
 
   private fun convertSamConversion(irTypeOperatorCall: IrTypeOperatorCall): Expression {
-    val expression = irTypeOperatorCall.argument
+    val expression = irTypeOperatorCall.unfoldExpression()
     val functionalTypeDescriptor = environment.getDeclaredTypeDescriptor(irTypeOperatorCall.type)
     return when (expression) {
       is IrFunctionReference -> createFunctionExpression(functionalTypeDescriptor, expression)
@@ -1300,13 +1300,10 @@ class CompilationUnitBuilder(
           convertQualifier(expression),
           expression.getter,
         )
+      is IrFunctionExpression -> createFunctionExpression(functionalTypeDescriptor, expression)
       else ->
-        // TODO(b/225955286): Implement conversion functionality from things that are not
-        // lambdas.
-        createFunctionExpression(
-          functionalTypeDescriptor,
-          irTypeOperatorCall.getFunctionExpression(),
-        )
+        // TODO(b/225955286): Implement conversion functionality from things that are not lambdas.
+        throw IllegalStateException("Unsupported SAM conversion ${irTypeOperatorCall.dump()}")
     }
   }
 

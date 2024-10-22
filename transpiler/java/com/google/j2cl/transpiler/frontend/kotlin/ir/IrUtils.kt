@@ -75,6 +75,7 @@ import org.jetbrains.kotlin.ir.expressions.IrFunctionReference
 import org.jetbrains.kotlin.ir.expressions.IrGetField
 import org.jetbrains.kotlin.ir.expressions.IrLoop
 import org.jetbrains.kotlin.ir.expressions.IrMemberAccessExpression
+import org.jetbrains.kotlin.ir.expressions.IrPropertyReference
 import org.jetbrains.kotlin.ir.expressions.IrSetField
 import org.jetbrains.kotlin.ir.expressions.IrSetValue
 import org.jetbrains.kotlin.ir.expressions.IrStatementOrigin
@@ -130,12 +131,14 @@ import org.jetbrains.kotlin.types.Variance
 import org.jetbrains.kotlin.utils.addIfNotNull
 
 /** Returns the actual function expression from inside a nested type operator. */
-fun IrTypeOperatorCall.getFunctionExpression(): IrFunctionExpression =
+fun IrTypeOperatorCall.unfoldExpression(): IrExpression =
   // TODO(b/225955286): Fix to handle the general case.
   argument.let {
     when (it) {
-      is IrTypeOperatorCall -> it.getFunctionExpression()
-      is IrFunctionExpression -> it
+      is IrTypeOperatorCall -> it.unfoldExpression()
+      is IrFunctionExpression,
+      is IrFunctionReference,
+      is IrPropertyReference -> it
       else -> throw IllegalStateException("Unsupported arguments type")
     }
   }
