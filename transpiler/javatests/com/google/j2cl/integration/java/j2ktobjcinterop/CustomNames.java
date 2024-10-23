@@ -28,10 +28,10 @@ public final class CustomNames {
   @ObjectiveCName("init")
   public CustomNames() {}
 
-  @ObjectiveCName("init")
+  @ObjectiveCName("init2")
   public CustomNames(long i) {}
 
-  @ObjectiveCName("init")
+  @ObjectiveCName("init3")
   public CustomNames(long i, String s) {}
 
   @ObjectiveCName("custom")
@@ -48,4 +48,19 @@ public final class CustomNames {
 
   @ObjectiveCName("custom")
   public void method(long i, String s) {}
+
+  @ObjectiveCName("staticCustom")
+  public static void staticMethod() {}
+
+  @ObjectiveCName("staticCustomWithIndex:")
+  public static void staticMethod(int i) {}
+
+  @ObjectiveCName("staticCustomWithIndex:name:")
+  public static void staticMethod(int i, String s) {}
+
+  @ObjectiveCName("staticCustom2")
+  public static void staticMethod(long i) {}
+
+  @ObjectiveCName("staticCustom3")
+  public static void staticMethod(long i, String s) {}
 }

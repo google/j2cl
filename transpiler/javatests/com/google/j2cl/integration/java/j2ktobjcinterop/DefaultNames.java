@@ -63,4 +63,11 @@ public final class DefaultNames {
   public <T extends String> void genericMethod(T t) {}
 
   public int field;
+  public static int staticField;
+
+  public static void staticMethod() {}
+
+  public static void staticMethod(int i) {}
+
+  public static void staticMethod(int i, String s) {}
 }

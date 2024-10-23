@@ -15,8 +15,7 @@
  */
 package j2ktobjcinterop;
 
-public class Main {
-  public static void main(String... args) {
-    // The actual interop tests are "ObjCInteropTest.m" and "SwiftInteropTest.swift".
-  }
+public enum EnumNames {
+  ONE,
+  TWO
 }
