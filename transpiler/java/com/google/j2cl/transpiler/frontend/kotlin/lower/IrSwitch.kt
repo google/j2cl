@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
 
 /** Represent a `switch` statement. */
 class IrSwitch(
-  val switchExpression: IrExpression,
+  val expression: IrExpression,
   val cases: List<IrSwitchCase>,
   override val startOffset: Int,
   override val endOffset: Int,
@@ -32,7 +32,7 @@ class IrSwitch(
   }
 
   override fun <D> acceptChildren(visitor: IrElementVisitor<Unit, D>, data: D) {
-    switchExpression.accept(visitor, data)
+    expression.accept(visitor, data)
     cases.forEach { it.accept(visitor, data) }
   }
 }

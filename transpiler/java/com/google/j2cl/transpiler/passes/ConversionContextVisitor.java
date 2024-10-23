@@ -180,7 +180,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     }
 
     /** An {@code expression} that is subject of a switch statement. */
-    protected Expression rewriteSwitchExpressionContext(Expression expression) {
+    protected Expression rewriteSwitchSubjectContext(Expression expression) {
       TypeDescriptor typeDescriptor = expression.getTypeDescriptor();
       if (!TypeDescriptors.isBoxedOrPrimitiveType(typeDescriptor)) {
         return rewriteNonNullTypeConversionContext(
@@ -711,7 +711,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   public SwitchStatement rewriteSwitchStatement(SwitchStatement switchStatement) {
 
     Expression expression =
-        contextRewriter.rewriteSwitchExpressionContext(switchStatement.getExpression());
+        contextRewriter.rewriteSwitchSubjectContext(switchStatement.getExpression());
 
     if (expression == switchStatement.getExpression()) {
       return switchStatement;

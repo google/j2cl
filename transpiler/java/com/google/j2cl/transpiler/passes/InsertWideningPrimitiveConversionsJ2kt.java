@@ -86,7 +86,7 @@ public class InsertWideningPrimitiveConversionsJ2kt extends NormalizationPass {
       }
 
       @Override
-      public Expression rewriteSwitchExpressionContext(Expression expression) {
+      public Expression rewriteSwitchSubjectContext(Expression expression) {
         // Don't apply unary numeric promotion to switch expression.
         return expression;
       }
