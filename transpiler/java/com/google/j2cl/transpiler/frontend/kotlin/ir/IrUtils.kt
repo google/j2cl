@@ -31,7 +31,6 @@ import org.jetbrains.kotlin.backend.jvm.fullValueParameterList
 import org.jetbrains.kotlin.backend.jvm.getRequiresMangling
 import org.jetbrains.kotlin.backend.jvm.ir.getJvmNameFromAnnotation
 import org.jetbrains.kotlin.backend.jvm.ir.getSingleAbstractMethod
-import org.jetbrains.kotlin.backend.jvm.lower.StaticInitializersLowering
 import org.jetbrains.kotlin.descriptors.CallableMemberDescriptor
 import org.jetbrains.kotlin.descriptors.ClassKind
 import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
@@ -490,8 +489,10 @@ val IrDeclaration.isSynthetic
       // onto the original annotations. We have no use for these stubs.
       origin == JvmLoweredDeclarationOrigin.SYNTHETIC_METHOD_FOR_PROPERTY_OR_TYPEALIAS_ANNOTATIONS
 
+private val clinitName = Name.special("<clinit>")
+
 val IrDeclaration.isClinit: Boolean
-  get() = this is IrFunction && name == StaticInitializersLowering.Companion.clinitName
+  get() = this is IrFunction && name == clinitName
 
 private val IrFunction.isPropertyGetter: Boolean
   get() = this is IrSimpleFunction && this == this.correspondingPropertySymbol?.owner?.getter
