@@ -107,6 +107,8 @@ private val loweringPassFactories: List<J2clLoweringPassFactory> = buildList {
   // Remove inline functions with reified type parameters as these functions cannot be called from
   // Java
   add(::RemoveInlineDeclarationsWithReifiedTypeParametersLowering)
+  // Replace `emptyArray()` calls with `arrayOf()` calls.
+  add(::EmptyArrayLowering)
   // Remove functions that contain unsigned varargs in the signature as a temporary workaround for
   // b/242573966.
   // TODO(b/242573966): Remove this when we can handle unsigned vararg types.
