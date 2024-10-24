@@ -81,6 +81,10 @@ We can provide the implementation for this method by also adding the file
  * @return {string}
  */
 Foo.getValue = function() {
+  // Note: The class static initializer needs to be manually invoked in any
+  // non-private static members.
+  Foo.$clinit();
+
   return window.someStr;
 }
 ```
