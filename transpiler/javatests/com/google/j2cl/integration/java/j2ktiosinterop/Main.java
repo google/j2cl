@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package j2ktobjcinterop;
+package j2ktiosinterop;
 
 public class Main {
   public static void main(String... args) {

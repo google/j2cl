@@ -9,7 +9,7 @@ package(
 )
 
 integration_test(
-    name = "j2ktobjcinterop",
+    name = "j2ktiosinterop",
     srcs = glob(["*.java"]),
     deps = [
         "//third_party:j2objc_annotations",

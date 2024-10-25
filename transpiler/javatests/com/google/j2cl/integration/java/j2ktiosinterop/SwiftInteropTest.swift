@@ -14,15 +14,15 @@
  * the License.
  */
 import XCTest
-import third_party_java_src_j2cl_transpiler_javatests_com_google_j2cl_integration_java_j2ktobjcinterop_SwiftInteropFramework
+import third_party_java_src_j2cl_transpiler_javatests_com_google_j2cl_integration_java_j2ktiosinterop_SwiftInteropFramework
 
 final class SwiftInteropTest: XCTestCase {
   func testDefaultNames() {
-    var obj: J2ktJ2ktobjcinteropDefaultNames
+    var obj: J2ktJ2ktiosinteropDefaultNames
 
-    obj = J2ktJ2ktobjcinteropDefaultNames()
-    obj = J2ktJ2ktobjcinteropDefaultNames(Int: 1)
-    obj = J2ktJ2ktobjcinteropDefaultNames(Int: 1, withNSString: "")
+    obj = J2ktJ2ktiosinteropDefaultNames()
+    obj = J2ktJ2ktiosinteropDefaultNames(Int: 1)
+    obj = J2ktJ2ktiosinteropDefaultNames(Int: 1, withNSString: "")
 
     obj.method()
     obj.method(withBoolean: true)
@@ -47,12 +47,12 @@ final class SwiftInteropTest: XCTestCase {
     obj.genericMethod(withNSString: nil)
 
     obj.field_ = obj.field_
-    J2ktJ2ktobjcinteropDefaultNamesCompanion.shared.staticField_ =
-      J2ktJ2ktobjcinteropDefaultNamesCompanion.shared.staticField_
+    J2ktJ2ktiosinteropDefaultNamesCompanion.shared.staticField_ =
+      J2ktJ2ktiosinteropDefaultNamesCompanion.shared.staticField_
 
-    J2ktJ2ktobjcinteropDefaultNamesCompanion.shared.staticMethod()
-    J2ktJ2ktobjcinteropDefaultNamesCompanion.shared.staticMethod(withInt: 1)
-    J2ktJ2ktobjcinteropDefaultNamesCompanion.shared.staticMethod(withInt: 1, withNSString: "")
+    J2ktJ2ktiosinteropDefaultNamesCompanion.shared.staticMethod()
+    J2ktJ2ktiosinteropDefaultNamesCompanion.shared.staticMethod(withInt: 1)
+    J2ktJ2ktiosinteropDefaultNamesCompanion.shared.staticMethod(withInt: 1, withNSString: "")
   }
 
   func testCustomNames() {
@@ -81,8 +81,8 @@ final class SwiftInteropTest: XCTestCase {
   }
 
   func testEnumNames() {
-    var e: J2ktJ2ktobjcinteropEnumNames
-    e = J2ktJ2ktobjcinteropEnumNames.ONE
-    e = J2ktJ2ktobjcinteropEnumNames.TWO
+    var e: J2ktJ2ktiosinteropEnumNames
+    e = J2ktJ2ktiosinteropEnumNames.ONE
+    e = J2ktJ2ktiosinteropEnumNames.TWO
   }
 }

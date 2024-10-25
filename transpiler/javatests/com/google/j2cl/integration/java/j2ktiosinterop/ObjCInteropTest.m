@@ -1,8 +1,8 @@
 #import <XCTest/XCTest.h>
 
-#import "transpiler/javatests/com/google/j2cl/integration/java/j2ktobjcinterop/CustomNames.h"
-#import "transpiler/javatests/com/google/j2cl/integration/java/j2ktobjcinterop/DefaultNames.h"
-#import "transpiler/javatests/com/google/j2cl/integration/java/j2ktobjcinterop/EnumNames.h"
+#import "transpiler/javatests/com/google/j2cl/integration/java/j2ktiosinterop/CustomNames.h"
+#import "transpiler/javatests/com/google/j2cl/integration/java/j2ktiosinterop/DefaultNames.h"
+#import "transpiler/javatests/com/google/j2cl/integration/java/j2ktiosinterop/EnumNames.h"
 
 @interface ObjCInteropTest : XCTestCase
 @end
@@ -10,18 +10,18 @@
 @implementation ObjCInteropTest
 
 - (void)testDefaultNames {
-  J2ktJ2ktobjcinteropDefaultNames *obj;
-  obj = [[J2ktJ2ktobjcinteropDefaultNames alloc] init];
-  obj = [[J2ktJ2ktobjcinteropDefaultNames alloc] initWithInt:1];
-  obj = [[J2ktJ2ktobjcinteropDefaultNames alloc] initWithInt:1 withNSString:@""];
+  J2ktJ2ktiosinteropDefaultNames *obj;
+  obj = [[J2ktJ2ktiosinteropDefaultNames alloc] init];
+  obj = [[J2ktJ2ktiosinteropDefaultNames alloc] initWithInt:1];
+  obj = [[J2ktJ2ktiosinteropDefaultNames alloc] initWithInt:1 withNSString:@""];
 
-  obj = create_J2ktobjcinteropDefaultNames_init();
-  obj = create_J2ktobjcinteropDefaultNames_initWithInt_(1);
-  obj = create_J2ktobjcinteropDefaultNames_initWithInt_withNSString_(1, @"");
+  obj = create_J2ktiosinteropDefaultNames_init();
+  obj = create_J2ktiosinteropDefaultNames_initWithInt_(1);
+  obj = create_J2ktiosinteropDefaultNames_initWithInt_withNSString_(1, @"");
 
-  obj = new_J2ktobjcinteropDefaultNames_init();
-  obj = new_J2ktobjcinteropDefaultNames_initWithInt_(1);
-  obj = new_J2ktobjcinteropDefaultNames_initWithInt_withNSString_(1, @"");
+  obj = new_J2ktiosinteropDefaultNames_init();
+  obj = new_J2ktiosinteropDefaultNames_initWithInt_(1);
+  obj = new_J2ktiosinteropDefaultNames_initWithInt_withNSString_(1, @"");
 
   [obj method];
   [obj methodWithBoolean:YES];
@@ -47,16 +47,16 @@
 
   obj.field_ = obj.field_;
 
-  J2ktJ2ktobjcinteropDefaultNamesCompanion.shared.staticField_ =
-      J2ktJ2ktobjcinteropDefaultNamesCompanion.shared.staticField_;
+  J2ktJ2ktiosinteropDefaultNamesCompanion.shared.staticField_ =
+      J2ktJ2ktiosinteropDefaultNamesCompanion.shared.staticField_;
 
-  [J2ktJ2ktobjcinteropDefaultNamesCompanion.shared staticMethod];
-  [J2ktJ2ktobjcinteropDefaultNamesCompanion.shared staticMethodWithInt:1];
-  [J2ktJ2ktobjcinteropDefaultNamesCompanion.shared staticMethodWithInt:1 withNSString:@""];
+  [J2ktJ2ktiosinteropDefaultNamesCompanion.shared staticMethod];
+  [J2ktJ2ktiosinteropDefaultNamesCompanion.shared staticMethodWithInt:1];
+  [J2ktJ2ktiosinteropDefaultNamesCompanion.shared staticMethodWithInt:1 withNSString:@""];
 
-  J2ktobjcinteropDefaultNames_staticMethod();
-  J2ktobjcinteropDefaultNames_staticMethodWithInt_(1);
-  J2ktobjcinteropDefaultNames_staticMethodWithInt_withNSString_(1, @"");
+  J2ktiosinteropDefaultNames_staticMethod();
+  J2ktiosinteropDefaultNames_staticMethodWithInt_(1);
+  J2ktiosinteropDefaultNames_staticMethodWithInt_withNSString_(1, @"");
 }
 
 - (void)testCustomNames {
@@ -105,16 +105,16 @@
 }
 
 - (void)testEnumNames {
-  J2ktJ2ktobjcinteropEnumNames *e;
-  e = J2ktJ2ktobjcinteropEnumNames.ONE;
-  e = J2ktJ2ktobjcinteropEnumNames.TWO;
+  J2ktJ2ktiosinteropEnumNames *e;
+  e = J2ktJ2ktiosinteropEnumNames.ONE;
+  e = J2ktJ2ktiosinteropEnumNames.TWO;
 
-  e = J2ktobjcinteropEnumNames_get_ONE();
-  e = J2ktobjcinteropEnumNames_get_TWO();
+  e = J2ktiosinteropEnumNames_get_ONE();
+  e = J2ktiosinteropEnumNames_get_TWO();
 
-  J2ktobjcinteropEnumNames_Enum e2;
-  e2 = J2ktobjcinteropEnumNames_Enum_ONE;
-  e2 = J2ktobjcinteropEnumNames_Enum_TWO;
+  J2ktiosinteropEnumNames_Enum e2;
+  e2 = J2ktiosinteropEnumNames_Enum_ONE;
+  e2 = J2ktiosinteropEnumNames_Enum_TWO;
 }
 
 @end
