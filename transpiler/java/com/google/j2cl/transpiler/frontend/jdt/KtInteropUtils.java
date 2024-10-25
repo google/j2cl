@@ -81,19 +81,26 @@ public class KtInteropUtils {
   }
 
   public static KtInfo getKtInfo(IMethodBinding methodBinding) {
-    return getKtInfo(methodBinding.getAnnotations());
+    return getKtInfo(methodBinding.getAnnotations(), /* isUninitializedWarningSuppressed= */ false);
   }
 
   public static KtInfo getKtInfo(IVariableBinding variableBinding) {
-    return getKtInfo(variableBinding.getAnnotations());
+    // Checking for both property annotations and class-wide annotations for uninitialized warning
+    // suppression.
+    boolean isUninitializedWarningSuppressed =
+        isUninitializedWarningSuppressed(variableBinding.getAnnotations())
+            || isUninitializedWarningSuppressed(
+                variableBinding.getDeclaringClass().getAnnotations());
+    return getKtInfo(variableBinding.getAnnotations(), isUninitializedWarningSuppressed);
   }
 
-  private static KtInfo getKtInfo(IAnnotationBinding[] annotationBindings) {
+  private static KtInfo getKtInfo(
+      IAnnotationBinding[] annotationBindings, boolean isUninitializedWarningSuppressed) {
     return KtInfo.newBuilder()
         .setProperty(isKtProperty(annotationBindings))
         .setName(getKtName(annotationBindings))
         .setDisabled(isKtDisabled(annotationBindings))
-        .setUninitializedWarningSuppressed(isUninitializedWarningSuppressed(annotationBindings))
+        .setUninitializedWarningSuppressed(isUninitializedWarningSuppressed)
         .setThrows(isThrows(annotationBindings))
         .build();
   }

@@ -59,4 +59,9 @@ open class LateInit<T: Any> {
  open fun test(): Int {
   return this.publicField.length + this.privateField.length + this.initializedField.length + this.nullableField!!.length + this.finalField.length + this.primitiveField + this.genericField.hashCode()
  }
+
+ @ObjCName("J2ktJ2ktLateInit_Inner", exact = true)
+ open inner class Inner internal constructor() {
+  private lateinit var unmarkedInnerField: String
+ }
 }
