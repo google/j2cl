@@ -19,6 +19,7 @@ package com.google.j2cl.transpiler.frontend.kotlin.lower
 
 import com.google.j2cl.transpiler.frontend.kotlin.ir.IntrinsicMethods
 import com.google.j2cl.transpiler.frontend.kotlin.ir.fromQualifiedBinaryName
+import java.lang.IllegalArgumentException
 import org.jetbrains.kotlin.backend.common.CompilationException
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
 import org.jetbrains.kotlin.backend.common.extensions.IrGenerationExtension
@@ -38,6 +39,7 @@ import org.jetbrains.kotlin.backend.common.phaser.CompilerPhase
 import org.jetbrains.kotlin.backend.common.phaser.PhaseConfig
 import org.jetbrains.kotlin.backend.common.phaser.PhaseConfigurationService
 import org.jetbrains.kotlin.backend.common.phaser.PhaserState
+import org.jetbrains.kotlin.backend.common.serialization.signature.PublicIdSignatureComputer
 import org.jetbrains.kotlin.backend.common.wrapWithCompilationException
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
 import org.jetbrains.kotlin.backend.jvm.JvmBackendExtension
@@ -51,12 +53,31 @@ import org.jetbrains.kotlin.backend.jvm.lower.JvmLocalClassPopupLowering
 import org.jetbrains.kotlin.backend.jvm.lower.JvmPropertiesLowering
 import org.jetbrains.kotlin.backend.jvm.lower.StaticInitializersLowering
 import org.jetbrains.kotlin.codegen.state.GenerationState
+import org.jetbrains.kotlin.config.CommonConfigurationKeys
 import org.jetbrains.kotlin.config.CompilerConfiguration
+import org.jetbrains.kotlin.fir.backend.DelicateDeclarationStorageApi
+import org.jetbrains.kotlin.fir.backend.Fir2IrComponents
+import org.jetbrains.kotlin.ir.IrBuiltIns
+import org.jetbrains.kotlin.ir.ObsoleteDescriptorBasedAPI
 import org.jetbrains.kotlin.ir.backend.js.lower.cleanup.CleanupLowering
 import org.jetbrains.kotlin.ir.backend.js.lower.inline.RemoveInlineDeclarationsWithReifiedTypeParametersLowering
+import org.jetbrains.kotlin.ir.backend.jvm.serialization.JvmIrMangler
+import org.jetbrains.kotlin.ir.backend.jvm.serialization.JvmIrMangler.isExported
+import org.jetbrains.kotlin.ir.declarations.IrDeclaration
 import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
 import org.jetbrains.kotlin.ir.linkage.IrProvider
+import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
+import org.jetbrains.kotlin.ir.symbols.IrConstructorSymbol
+import org.jetbrains.kotlin.ir.symbols.IrEnumEntrySymbol
+import org.jetbrains.kotlin.ir.symbols.IrFieldSymbol
+import org.jetbrains.kotlin.ir.symbols.IrPropertySymbol
+import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
+import org.jetbrains.kotlin.ir.symbols.IrSymbol
+import org.jetbrains.kotlin.ir.symbols.IrTypeAliasSymbol
+import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.util.SymbolTable
+import org.jetbrains.kotlin.ir.util.fileOrNull
+import org.jetbrains.kotlin.ir.util.isStatic
 import org.jetbrains.kotlin.name.CallableId
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
@@ -267,16 +288,28 @@ private fun IrModuleFragment.lower(
   }
 }
 
+@OptIn(UnsafeDuringIrConstructionAPI::class, ObsoleteDescriptorBasedAPI::class)
 private fun createJvmBackendContext(
   state: GenerationState,
   compilerConfiguration: CompilerConfiguration,
   moduleFragment: IrModuleFragment,
   pluginContext: IrPluginContext,
-) =
-  JvmBackendContext(
+): JvmBackendContext {
+  var symbolTable = pluginContext.symbolTable as SymbolTable
+
+  // TODO(b/374966022): Remove this once we don't rely on IR serialization anymore for inlining.
+  if (compilerConfiguration.getBoolean(CommonConfigurationKeys.USE_FIR)) {
+    // K2 does not populate the symbolTable but it still is used by the IR deserializer to know if
+    // the symbols exists or need to be created. We will manually populate the SymbolTable.
+    symbolTable =
+      SymbolTable(symbolTable.signaturer, symbolTable.irFactory, symbolTable.nameProvider)
+    symbolTable.populate(pluginContext.irBuiltIns)
+  }
+
+  return JvmBackendContext(
     state,
     moduleFragment.irBuiltins,
-    pluginContext.symbolTable as SymbolTable,
+    symbolTable,
     PhaseConfig(
       object : CompilerPhase<JvmBackendContext, Unit, Unit> {
         override fun invoke(
@@ -294,6 +327,71 @@ private fun createJvmBackendContext(
     irProviders = emptyList<IrProvider>(),
     irPluginContext = pluginContext,
   )
+}
+
+@OptIn(DelicateDeclarationStorageApi::class, UnsafeDuringIrConstructionAPI::class)
+private fun SymbolTable.populate(irBuiltIns: IrBuiltIns) {
+  val irSignaturer = PublicIdSignatureComputer(JvmIrMangler)
+
+  @Suppress("IMPLICIT_CAST_TO_ANY")
+  fun addSymbol(symbol: IrSymbol) {
+    if (!symbol.isBound) {
+      return
+    }
+    val declaration =
+      symbol.owner as? IrDeclaration
+        ?: throw IllegalArgumentException("Not an IrDeclaration $symbol")
+    if (!declaration.isExported(false)) {
+      // These declaration are declared in an anonymous or local context and cannot be referenced
+      // outside if this context.
+      return
+    }
+    val signature =
+      symbol.signature
+        ?: irSignaturer.inFile((declaration.fileOrNull)?.symbol) {
+          irSignaturer.computeSignature(declaration)
+        }
+    val unused =
+      when (symbol) {
+        is IrClassSymbol -> declareClassWithSignature(signature, symbol)
+        is IrTypeAliasSymbol -> declareTypeAliasIfNotExists(signature, { symbol }, { it.owner })
+        is IrEnumEntrySymbol -> declareEnumEntry(signature, { symbol }, { it.owner })
+        is IrSimpleFunctionSymbol -> declareSimpleFunctionWithSignature(signature, symbol)
+        is IrConstructorSymbol -> declareConstructorWithSignature(signature, symbol)
+        is IrPropertySymbol -> declarePropertyWithSignature(signature, symbol)
+        is IrFieldSymbol -> declareFieldWithSignature(signature, symbol)
+        else -> throw AssertionError("Unexpected symbol $symbol")
+      }
+  }
+
+  // collects all existing bound symbols in componentStorage.
+  val componentsStorage = irBuiltIns.anyClass.owner as Fir2IrComponents
+  componentsStorage.classifierStorage.forEachCachedDeclarationSymbol(::addSymbol)
+  componentsStorage.declarationStorage.forEachCachedDeclarationSymbol(::addSymbol)
+
+  // add the builtins so the IrDeserializer does not create new symbol for them.
+  with(irBuiltIns) {
+    buildList {
+        addAll(lessFunByOperandType.values)
+        addAll(lessOrEqualFunByOperandType.values)
+        addAll(greaterFunByOperandType.values)
+        addAll(greaterOrEqualFunByOperandType.values)
+        addAll(ieee754equalsFunByOperandType.values)
+        add(eqeqeqSymbol)
+        add(eqeqSymbol)
+        add(throwCceSymbol)
+        add(throwIseSymbol)
+        add(andandSymbol)
+        add(ororSymbol)
+        add(noWhenBranchMatchedExceptionSymbol)
+        add(illegalArgumentExceptionSymbol)
+        add(dataClassArrayMemberHashCodeSymbol)
+        add(dataClassArrayMemberToStringSymbol)
+        add(checkNotNullSymbol)
+      }
+      .forEach(::addSymbol)
+  }
+}
 
 /**
  * Preload symbols that are well-known to lowering passes that may not have been referenced by the
