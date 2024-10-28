@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.LinkedHashMultimap;
@@ -39,16 +38,14 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
-import java.util.ArrayDeque;
-import java.util.Deque;
 import java.util.List;
 
 /**
  * Moves variable declarations to enclosing blocks.
  *
  * <p>Our AST treats variable declarations as expressions, and as such they can appear as
- * subexpressions. JavaScript only allows variable declarations as Statements and in some specific
- * contexts like for loops, etc.
+ * subexpressions. For example, JavaScript only allows variable declarations as Statements and in
+ * some specific contexts like for loops.
  */
 public class MoveVariableDeclarationsToEnclosingBlock extends NormalizationPass {
   private final boolean fromSwitchStatementsOnly;
@@ -67,20 +64,14 @@ public class MoveVariableDeclarationsToEnclosingBlock extends NormalizationPass 
         LinkedHashMultimap.create();
 
     // Variable declarations in JavaScript can only appear in a few constructs, namely as the top
-    // level expression in a statement and in the first component of a for each loops.
+    // level expression in a statement and in the first component of a for each loops; whereas in
+    // Kotlin, that translates switch statements into when expressions, each case defines a scope,
+    // so variables declared in one case are not in scope in a different case.
+
     // This visitor collects all variable declarations that appear in constructs where it would be
-    // illegal to have them in JavaScript.
-    // TODO(b/216517933): Simplify using getParent()
+    // illegal to have them in the different backends.
     compilationUnit.accept(
         new AbstractVisitor() {
-          Deque<Block> enclosingBlocks = new ArrayDeque<>();
-
-          @Override
-          public boolean enterBlock(Block block) {
-            enclosingBlocks.push(block);
-            return true;
-          }
-
           /**
            * In Java, you may declare a variable within a switch statement branch and use it within
            * another branch. J2CL, by default, translates variable definitions to 'let' which are
@@ -117,11 +108,6 @@ public class MoveVariableDeclarationsToEnclosingBlock extends NormalizationPass 
                 }
               }
             }
-          }
-
-          @Override
-          public void exitBlock(Block block) {
-            checkState(block == enclosingBlocks.pop());
           }
 
           @Override
@@ -188,8 +174,9 @@ public class MoveVariableDeclarationsToEnclosingBlock extends NormalizationPass 
 
           private void relocateToEnclosingBlock(
               VariableDeclarationExpression variableDeclarationExpression) {
+            Block enclosingBlock = (Block) getParent(Block.class::isInstance);
             variableDeclarationsToRelocateByBlock.put(
-                checkNotNull(enclosingBlocks.peek()), variableDeclarationExpression);
+                checkNotNull(enclosingBlock), variableDeclarationExpression);
           }
 
           private void visitInitializers(
