@@ -224,7 +224,7 @@ public class TreeMap<K, V> extends AbstractMap<K, V>
   }
 
   @SuppressWarnings("unchecked")
-  private Node<K, V> findByObject(Object key) {
+  Node<K, V> findByObject(Object key) {
     Node<K, V> node = root;
     while (node != null) {
       int c = comparator.compare((K) key, node.getKey());

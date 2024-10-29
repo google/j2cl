@@ -65,6 +65,12 @@ public class EnumMapTest extends TestCase {
     THIRTY,
   }
 
+  enum Letters {
+    A,
+    B,
+    C,
+  }
+
   private static <E extends Enum<E>> void enumTests(Class<E> e, E[] enums) {
     EnumMap<E, Integer> numbers = new EnumMap<>(e);
     HashMap<E, Integer> numbersMap = new HashMap<>();
@@ -223,5 +229,44 @@ public class EnumMapTest extends TestCase {
       fail();
     } catch (IllegalArgumentException expected) {
     }
+  }
+
+  @SuppressWarnings("CollectionIncompatibleType") // test of incorrect call
+  public void testDifferentEnumGet() {
+    EnumMap<Numbers, Integer> numbers = new EnumMap<>(Numbers.class);
+    numbers.put(Numbers.ZERO, 0);
+    assertNull(numbers.get(Letters.A));
+  }
+
+  @SuppressWarnings("CollectionIncompatibleType") // test of incorrect call
+  public void testDifferentEnumRemove() {
+    EnumMap<Numbers, Integer> numbers = new EnumMap<>(Numbers.class);
+    numbers.put(Numbers.ZERO, 0);
+    assertNull(numbers.remove(Letters.A));
+  }
+
+  @SuppressWarnings("CollectionIncompatibleType") // test of incorrect call
+  public void testDifferentEnumContainsKey() {
+    EnumMap<Numbers, Integer> numbers = new EnumMap<>(Numbers.class);
+    numbers.put(Numbers.ZERO, 0);
+    assertFalse(numbers.containsKey(Letters.A));
+  }
+
+  public void testNullEnumGet() {
+    EnumMap<Numbers, Integer> numbers = new EnumMap<>(Numbers.class);
+    numbers.put(Numbers.ZERO, 0);
+    assertNull(numbers.get(null));
+  }
+
+  public void testNullEnumRemove() {
+    EnumMap<Numbers, Integer> numbers = new EnumMap<>(Numbers.class);
+    numbers.put(Numbers.ZERO, 0);
+    assertNull(numbers.remove(null));
+  }
+
+  public void testNullEnumContainsKey() {
+    EnumMap<Numbers, Integer> numbers = new EnumMap<>(Numbers.class);
+    numbers.put(Numbers.ZERO, 0);
+    assertFalse(numbers.containsKey(null));
   }
 }

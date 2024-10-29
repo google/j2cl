@@ -48,7 +48,7 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> implements 
 
   @Override
   public boolean containsKey(Object key) {
-    return map.containsKey(key);
+    return getEntry(key) != null;
   }
 
   @Override
@@ -67,8 +67,9 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> implements 
   }
 
   @Override
-  public V get(Object k) {
-    return map.get(k);
+  public V get(Object key) {
+    Entry<K, V> entry = getEntry(key);
+    return entry != null ? entry.getValue() : null;
   }
 
   @Override
@@ -78,11 +79,37 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> implements 
 
   @Override
   public V remove(Object key) {
-    return map.remove(key);
+    Entry<K, V> entry = getEntry(key);
+    return entry != null ? map.remove(key) : null;
   }
 
   @Override
   public int size() {
     return map.size();
+  }
+
+  /**
+   * Returns the entry in the backing map for the given key (or {@code null} if there is no such
+   * entry).
+   *
+   * <p>The difference between this method and a straight call to the backing map is twofold:
+   *
+   * <ul>
+   *   <li>The backing map uses a natural-order comparator, so it throws NPE for nulls. This method
+   *       returns {@code null}.
+   *   <li>The J2CL {@link Enum#compareTo} does not check that the two enum constants are from the
+   *       same enum. This method handles that by calling {@code equals} on the result.
+   * </ul>
+   *
+   * <p>We use this method to implement correct behavior for the most common methods in the most
+   * common cases. However, less common operations can still produce incorrect behavior. TODO:
+   * b/376045993 - Fix more of them.
+   */
+  private Entry<K, V> getEntry(Object key) {
+    if (key == null) {
+      return null;
+    }
+    Entry<K, V> entry = map.findByObject(key);
+    return entry != null && entry.getKey().equals(key) ? entry : null;
   }
 }
