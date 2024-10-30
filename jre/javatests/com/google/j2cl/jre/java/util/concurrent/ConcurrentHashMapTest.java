@@ -486,6 +486,7 @@ public class ConcurrentHashMapTest extends EmulTestBase {
   }
 
   /** SetValue of an EntrySet entry sets value in the map. */
+  @J2ktIncompatible // TODO: b/375691754
   public void testSetValueWriteThrough() {
     // Adapted from a bug report by Eric Zoerner
     ConcurrentHashMap<Integer, Integer> map = new ConcurrentHashMap<>(2);
