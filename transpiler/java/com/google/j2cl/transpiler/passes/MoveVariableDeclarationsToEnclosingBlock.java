@@ -229,6 +229,10 @@ public class MoveVariableDeclarationsToEnclosingBlock extends NormalizationPass 
               .map(VariableDeclarationFragment::getVariable)
               .collect(toImmutableList());
 
+      // Make the relocated variables nullable since only the declaration is moved, not the
+      // initializers.
+      variablesToRelocate.forEach(v -> v.setTypeDescriptor(v.getTypeDescriptor().toNullable()));
+
       block
           .getStatements()
           .add(
