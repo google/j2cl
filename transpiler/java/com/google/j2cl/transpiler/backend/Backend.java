@@ -38,6 +38,7 @@ import com.google.j2cl.transpiler.passes.DevirtualizeMethodCalls;
 import com.google.j2cl.transpiler.passes.ExpandCompoundAssignments;
 import com.google.j2cl.transpiler.passes.ExtractNonIdempotentExpressions;
 import com.google.j2cl.transpiler.passes.FilloutMissingSourceMapInformation;
+import com.google.j2cl.transpiler.passes.FixJavaKotlinMethodOverrideMismatch;
 import com.google.j2cl.transpiler.passes.ImplementArraysAsClasses;
 import com.google.j2cl.transpiler.passes.ImplementAssertStatements;
 import com.google.j2cl.transpiler.passes.ImplementBitLevelOperatorsJ2kt;
@@ -698,6 +699,7 @@ public enum Backend {
           VerifyReferenceScoping::new,
 
           // Normalizations
+          FixJavaKotlinMethodOverrideMismatch::new,
           NormalizeNullLiterals::new,
           NormalizeMinValueIntegralLiterals::new,
           CreateImplicitConstructors::new,

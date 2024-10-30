@@ -41,6 +41,14 @@ public class AddVisibilityMethodBridgesJ2kt extends NormalizationPass {
     for (Method method : type.getMethods()) {
       MethodDescriptor methodDescriptor = method.getDescriptor();
       if (AstUtils.needsVisibilityBridge(methodDescriptor)) {
+        // This is the case of a package private method that became public or protected in this
+        // class and it only needs to be considered override if at the same time the class
+        // implements an interface which this method overrides.
+        if (methodDescriptor.getJavaOverriddenMethodDescriptors().stream()
+            .allMatch(it -> !it.getEnclosingTypeDescriptor().isInterface())) {
+          method.setForcedJavaOverride(false);
+        }
+
         type.addMember(createBridgeMethod(type, methodDescriptor));
       }
     }

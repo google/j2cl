@@ -41,6 +41,7 @@ public class Method extends Member implements MethodLike {
   @Visitable Block body;
   private final String jsDocDescription;
   private final String wasmExportName;
+  @Nullable private Boolean isForcedJavaOverride;
 
   private Method(
       SourcePosition sourcePosition,
@@ -48,13 +49,15 @@ public class Method extends Member implements MethodLike {
       List<Variable> parameters,
       Block body,
       String jsDocDescription,
-      String wasmExportName) {
+      String wasmExportName,
+      @Nullable Boolean isForcedJavaOverride) {
     super(sourcePosition);
     this.methodDescriptor = checkNotNull(methodDescriptor);
     this.parameters.addAll(checkNotNull(parameters));
     this.jsDocDescription = jsDocDescription;
     this.wasmExportName = wasmExportName;
     this.body = checkNotNull(body);
+    this.isForcedJavaOverride = isForcedJavaOverride;
   }
 
   @Override
@@ -129,6 +132,19 @@ public class Method extends Member implements MethodLike {
     return wasmExportName;
   }
 
+  @Nullable
+  public Boolean isForcedJavaOverride() {
+    return isForcedJavaOverride;
+  }
+
+  public void setForcedJavaOverride(@Nullable Boolean isForcedJavaOverride) {
+    this.isForcedJavaOverride = isForcedJavaOverride;
+  }
+
+  public final boolean isJavaOverride() {
+    return isForcedJavaOverride != null ? isForcedJavaOverride : methodDescriptor.isJavaOverride();
+  }
+
   public static Builder newBuilder() {
     return new Builder();
   }
@@ -196,6 +212,7 @@ public class Method extends Member implements MethodLike {
     private String wasmExportName;
     private SourcePosition bodySourcePosition;
     private SourcePosition sourcePosition;
+    @Nullable private Boolean isForcedJavaOverride;
 
     public static Builder from(Method method) {
       Builder builder = new Builder();
@@ -206,6 +223,7 @@ public class Method extends Member implements MethodLike {
       builder.wasmExportName = method.getWasmExportName();
       builder.bodySourcePosition = method.getBody().getSourcePosition();
       builder.sourcePosition = method.getSourcePosition();
+      builder.isForcedJavaOverride = method.isForcedJavaOverride();
       return builder;
     }
 
@@ -300,19 +318,22 @@ public class Method extends Member implements MethodLike {
     }
 
     public Method build() {
-      if (bodySourcePosition == null) {
-        bodySourcePosition = sourcePosition;
-      }
       Block body =
           Block.newBuilder()
-              .setSourcePosition(bodySourcePosition)
+              .setSourcePosition(bodySourcePosition != null ? bodySourcePosition : sourcePosition)
               .setStatements(statements)
               .build();
       checkState(parameters.size() == methodDescriptor.getParameterDescriptors().size());
       checkState(methodDescriptor.isDeclaration());
 
       return new Method(
-          sourcePosition, methodDescriptor, parameters, body, jsDocDescription, wasmExportName);
+          sourcePosition,
+          methodDescriptor,
+          parameters,
+          body,
+          jsDocDescription,
+          wasmExportName,
+          isForcedJavaOverride);
     }
   }
 }

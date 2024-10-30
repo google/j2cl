@@ -66,12 +66,6 @@ internal val MethodDescriptor.isOpen: Boolean
       !isStatic &&
       !visibility.isPrivate
 
-internal val MethodDescriptor.needsOpenModifier: Boolean
-  get() = isOpen && !isKtOverride
-
-internal val MethodDescriptor.needsFinalModifier: Boolean
-  get() = !isOpen && isKtOverride && enclosingTypeDescriptor.typeDeclaration.isOpen
-
 internal val Visibility.defaultMemberKtVisibility: KtVisibility
   get() =
     when (this) {

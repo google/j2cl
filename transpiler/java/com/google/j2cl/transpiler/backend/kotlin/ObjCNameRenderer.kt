@@ -78,12 +78,12 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
   private fun needsObjCNameAnnotation(companionObject: CompanionObject): Boolean =
     needsObjCNameAnnotation(companionObject.enclosingTypeDeclaration)
 
-  private fun needsObjCNameAnnotation(methodDescriptor: MethodDescriptor): Boolean =
-    methodDescriptor.enclosingTypeDescriptor.typeDeclaration.let { enclosingTypeDeclaration ->
+  private fun needsObjCNameAnnotation(method: Method): Boolean =
+    method.descriptor.enclosingTypeDescriptor.typeDeclaration.let { enclosingTypeDeclaration ->
       !enclosingTypeDeclaration.isLocal &&
         !enclosingTypeDeclaration.isAnonymous &&
-        environment.ktVisibility(methodDescriptor).needsObjCNameAnnotation &&
-        !methodDescriptor.isKtOverride
+        environment.ktVisibility(method.descriptor).needsObjCNameAnnotation &&
+        !method.isJavaOverride
     }
 
   private fun needsObjCNameAnnotation(fieldDescriptor: FieldDescriptor): Boolean =
@@ -95,11 +95,9 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
     }
 
   internal fun renderedObjCNames(method: Method): MethodObjCNames? =
-    method.descriptor.let { descriptor ->
-      when {
-        !needsObjCNameAnnotation(descriptor) -> null
-        else -> method.toObjCNames()
-      }
+    when {
+      !needsObjCNameAnnotation(method) -> null
+      else -> method.toObjCNames()
     }
 
   companion object {

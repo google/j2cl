@@ -23,7 +23,6 @@ import com.google.j2cl.transpiler.ast.Field
 import com.google.j2cl.transpiler.ast.InitializerBlock
 import com.google.j2cl.transpiler.ast.Member as JavaMember
 import com.google.j2cl.transpiler.ast.Method
-import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor
 import com.google.j2cl.transpiler.ast.MethodLike
 import com.google.j2cl.transpiler.ast.NewInstance
@@ -157,7 +156,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
     return newLineSeparated(
       Source.emptyUnless(isJvmField) { jvmFieldAnnotationSource() },
       objCNameRenderer.objCAnnotationSource(fieldDescriptor),
-      jsInteropAnnotationRenderer.jsInteropAnnotationsSource(fieldDescriptor),
+      jsInteropAnnotationRenderer.jsInteropAnnotationsSource(field),
       spaceSeparated(
         memberDescriptorRenderer.visibilityModifierSource(field.descriptor),
         Source.emptyUnless(isConst) { CONST_KEYWORD },
@@ -198,9 +197,9 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
       val methodObjCNames = objCNameRenderer.renderedObjCNames(method)
       newLineSeparated(
         Source.emptyUnless(methodDescriptor.isStatic) { jvmStaticAnnotationSource() },
-        annotationsSource(methodDescriptor, methodObjCNames),
+        annotationsSource(method, methodObjCNames),
         spaceSeparated(
-          memberDescriptorRenderer.methodModifiersSource(methodDescriptor),
+          methodModifiersSource(method),
           colonSeparated(
             join(
               memberDescriptorRenderer.methodKindAndNameSource(methodDescriptor),
@@ -217,12 +216,24 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
       )
     }
 
-  fun annotationsSource(methodDescriptor: MethodDescriptor, methodObjCNames: MethodObjCNames?) =
+  private fun methodModifiersSource(method: Method): Source =
+    spaceSeparated(
+      memberDescriptorRenderer.visibilityModifierSource(method.descriptor),
+      Source.emptyUnless(!method.descriptor.enclosingTypeDescriptor.typeDeclaration.isInterface) {
+        spaceSeparated(
+          Source.emptyUnless(method.descriptor.isNative) { KotlinSource.EXTERNAL_KEYWORD },
+          method.inheritanceModifierSource,
+        )
+      },
+      Source.emptyUnless(method.isJavaOverride) { KotlinSource.OVERRIDE_KEYWORD },
+    )
+
+  fun annotationsSource(method: Method, methodObjCNames: MethodObjCNames?) =
     newLineSeparated(
-      objCNameRenderer.objCAnnotationSource(methodDescriptor, methodObjCNames),
-      jsInteropAnnotationRenderer.jsInteropAnnotationsSource(methodDescriptor),
-      memberDescriptorRenderer.jvmThrowsAnnotationSource(methodDescriptor),
-      memberDescriptorRenderer.nativeThrowsAnnotationSource(methodDescriptor),
+      objCNameRenderer.objCAnnotationSource(method.descriptor, methodObjCNames),
+      jsInteropAnnotationRenderer.jsInteropAnnotationsSource(method),
+      memberDescriptorRenderer.jvmThrowsAnnotationSource(method.descriptor),
+      memberDescriptorRenderer.nativeThrowsAnnotationSource(method.descriptor),
     )
 
   fun methodParametersSource(method: MethodLike, objCParameterNames: List<String>? = null): Source {
@@ -301,7 +312,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
       .let { newInstance ->
         newLineSeparated(
           objCNameRenderer.objCAnnotationSource(field.descriptor),
-          jsInteropAnnotationRenderer.jsInteropAnnotationsSource(field.descriptor),
+          jsInteropAnnotationRenderer.jsInteropAnnotationsSource(field),
           spaceSeparated(
             join(
               field.descriptor.enumValueDeclarationNameSource,

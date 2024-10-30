@@ -84,18 +84,6 @@ internal data class MemberDescriptorRenderer(val nameRenderer: NameRenderer) {
       }
       .orEmpty()
 
-  fun methodModifiersSource(methodDescriptor: MethodDescriptor): Source =
-    spaceSeparated(
-      visibilityModifierSource(methodDescriptor),
-      Source.emptyUnless(!methodDescriptor.enclosingTypeDescriptor.typeDeclaration.isInterface) {
-        spaceSeparated(
-          Source.emptyUnless(methodDescriptor.isNative) { KotlinSource.EXTERNAL_KEYWORD },
-          methodDescriptor.inheritanceModifierSource,
-        )
-      },
-      Source.emptyUnless(methodDescriptor.isKtOverride) { KotlinSource.OVERRIDE_KEYWORD },
-    )
-
   fun visibilityModifierSource(memberDescriptor: MemberDescriptor): Source =
     environment
       .ktVisibility(memberDescriptor)
@@ -107,15 +95,6 @@ internal data class MemberDescriptorRenderer(val nameRenderer: NameRenderer) {
     // TODO(b/316324154): Remove when no longer necessary
     val SHOULD_RENDER_NATIVE_THROWS: Boolean =
       !getBoolean("com.google.j2cl.transpiler.backend.kotlin.isNativeThrowsDisabled")
-
-    val MethodDescriptor.inheritanceModifierSource
-      get() =
-        when {
-          isAbstract -> KotlinSource.ABSTRACT_KEYWORD
-          needsOpenModifier -> KotlinSource.OPEN_KEYWORD
-          needsFinalModifier -> KotlinSource.FINAL_KEYWORD
-          else -> Source.EMPTY
-        }
 
     val FieldDescriptor.enumValueDeclarationNameSource: Source
       get() =

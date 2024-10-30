@@ -104,7 +104,7 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
         memberRenderer(type).run {
           objCNameRenderer.renderedObjCNames(ktPrimaryConstructor).let { objCNames ->
             spaceSeparated(
-              annotationsSource(ktPrimaryConstructor.descriptor, objCNames),
+              annotationsSource(ktPrimaryConstructor, objCNames),
               join(
                 KotlinSource.CONSTRUCTOR_KEYWORD,
                 methodParametersSource(ktPrimaryConstructor, objCNames?.parameterNames),
