@@ -95,8 +95,9 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> implements 
    * <p>The difference between this method and a straight call to the backing map is twofold:
    *
    * <ul>
-   *   <li>The backing map uses a natural-order comparator, so it throws NPE for nulls. This method
-   *       returns {@code null}.
+   *   <li>The backing map uses a natural-order comparator, so it throws NPE for nulls and CCE for
+   *       non-enum values. (Contrast to the JDK implementatation, which catches such exceptions.)
+   *       This method returns {@code null}.
    *   <li>The J2CL {@link Enum#compareTo} does not check that the two enum constants are from the
    *       same enum. This method handles that by calling {@code equals} on the result.
    * </ul>
@@ -106,7 +107,7 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> implements 
    * b/376045993 - Fix more of them.
    */
   private Entry<K, V> getEntry(Object key) {
-    if (key == null) {
+    if (!(key instanceof Enum)) {
       return null;
     }
     Entry<K, V> entry = map.findByObject(key);

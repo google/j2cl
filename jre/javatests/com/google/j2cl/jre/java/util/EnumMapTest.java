@@ -269,4 +269,22 @@ public class EnumMapTest extends TestCase {
     numbers.put(Numbers.ZERO, 0);
     assertFalse(numbers.containsKey(null));
   }
+
+  public void testNonEnumGet() {
+    EnumMap<Numbers, Integer> numbers = new EnumMap<>(Numbers.class);
+    numbers.put(Numbers.ZERO, 0);
+    assertNull(numbers.get(new Object()));
+  }
+
+  public void testNonEnumRemove() {
+    EnumMap<Numbers, Integer> numbers = new EnumMap<>(Numbers.class);
+    numbers.put(Numbers.ZERO, 0);
+    assertNull(numbers.remove(new Object()));
+  }
+
+  public void testNonEnumContainsKey() {
+    EnumMap<Numbers, Integer> numbers = new EnumMap<>(Numbers.class);
+    numbers.put(Numbers.ZERO, 0);
+    assertFalse(numbers.containsKey(new Object()));
+  }
 }
