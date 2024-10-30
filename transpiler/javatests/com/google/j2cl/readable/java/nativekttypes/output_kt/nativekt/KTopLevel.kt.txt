@@ -45,38 +45,44 @@ open class KTopLevel<O> {
  }
 
  @ObjCName("methodAsProperty")
- open val methodAsProperty: Int get() {
-  return 0
- }
+ open val methodAsProperty: Int
+  get() {
+   return 0
+  }
 
  @ObjCName("nonGetMethodAsProperty")
- open val nonGetMethodAsProperty: Int get() {
-  return 0
- }
+ open val nonGetMethodAsProperty: Int
+  get() {
+   return 0
+  }
 
  @ObjCName("renamedMethodAsProperty")
- open val renamedMethodAsProperty: Int get() {
-  return 0
- }
+ open val renamedMethodAsProperty: Int
+  get() {
+   return 0
+  }
 
  @ObjCName("getRenamedMethodAsProperty")
- open val getRenamedMethodAsProperty: Int get() {
-  return 0
- }
+ open val getRenamedMethodAsProperty: Int
+  get() {
+   return 0
+  }
 
  @JvmField
  @ObjCName("isRenamedField_")
  var isRenamedField: Boolean = false
 
  @ObjCName("isMethodAsProperty")
- open val isMethodAsProperty: Boolean get() {
-  return false
- }
+ open val isMethodAsProperty: Boolean
+  get() {
+   return false
+  }
 
  @ObjCName("getstartingmethodAsProperty")
- open val getstartingmethodAsProperty: Int get() {
-  return 0
- }
+ open val getstartingmethodAsProperty: Int
+  get() {
+   return 0
+  }
 
  constructor(
   @ObjCName("Id") o: O

@@ -48,12 +48,15 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.initializer
 import com.google.j2cl.transpiler.backend.kotlin.MemberDescriptorRenderer.Companion.enumValueDeclarationNameSource
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionObject
 import com.google.j2cl.transpiler.backend.kotlin.ast.Member
+import com.google.j2cl.transpiler.backend.kotlin.common.runIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.NEW_LINE
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.colonSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.emptyLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParentheses
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.indented
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.indentedIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.join
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLineSeparated
@@ -117,18 +120,19 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
   private fun methodSource(method: Method): Source =
     method.renderedStatements.let { statements ->
       // Don't render primary constructor if it's empty.
-      Source.emptyUnless(!isKtPrimaryConstructor(method) || !statements.isEmpty()) {
+      Source.emptyUnless(!isKtPrimaryConstructor(method) || statements.isNotEmpty()) {
         spaceSeparated(
           methodHeaderSource(method),
           Source.emptyUnless(!method.isAbstract && !method.isNative) {
             // Constructors with no statements can be rendered without curly braces.
             Source.emptyUnless(!method.isConstructor || statements.isNotEmpty()) {
               spaceSeparated(
-                Source.emptyUnless(method.descriptor.isKtProperty) {
-                  join(GET_KEYWORD, inParentheses(Source.EMPTY))
-                },
-                block(statementRenderer.statementsSource(statements)),
-              )
+                  Source.emptyUnless(method.descriptor.isKtProperty) {
+                    join(GET_KEYWORD, inParentheses(Source.EMPTY))
+                  },
+                  block(statementRenderer.statementsSource(statements)),
+                )
+                .runIf(method.descriptor.isKtProperty) { indented(NEW_LINE + this) }
             }
           },
         )
