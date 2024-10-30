@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.frontend.javac;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static java.util.stream.Collectors.toCollection;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.ComparisonChain;
@@ -1264,7 +1265,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   private List<Expression> convertExpressions(List<JCExpression> expressions) {
-    return expressions.stream().map(this::convertExpression).collect(toImmutableList());
+    return expressions.stream().map(this::convertExpression).collect(toCollection(ArrayList::new));
   }
 
   private CompilationUnit build(JCCompilationUnit javacUnit) {
