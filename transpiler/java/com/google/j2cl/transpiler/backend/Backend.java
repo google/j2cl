@@ -155,6 +155,7 @@ import com.google.j2cl.transpiler.passes.OptimizeImplicitConstructors;
 import com.google.j2cl.transpiler.passes.OptimizeImplicitSuperCalls;
 import com.google.j2cl.transpiler.passes.OptimizeKotlinCompanions;
 import com.google.j2cl.transpiler.passes.OptimizeXplatForEach;
+import com.google.j2cl.transpiler.passes.PreventSmartCasts;
 import com.google.j2cl.transpiler.passes.PropagateCompileTimeConstants;
 import com.google.j2cl.transpiler.passes.PropagateConstants;
 import com.google.j2cl.transpiler.passes.PropagateNullabilityJ2kt;
@@ -762,6 +763,9 @@ public enum Backend {
           OptimizeImplicitSuperCalls::new,
           OptimizeImplicitConstructors::new,
           InsertUnreachableAssertionErrors::new,
+
+          // This needs to run after all passes that can potentially add casts.
+          PreventSmartCasts::new,
 
           // Verification
           VerifySingleAstReference::new,

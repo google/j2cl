@@ -70,7 +70,7 @@ open class NotNullAssertionProblems {
   NotNullAssertionProblems.acceptVararg<String?>(null, string)
   NotNullAssertionProblems.acceptVararg<String?>(nullableString, string)
   NotNullAssertionProblems.acceptGeneric<String?>(supplier as NotNullAssertionProblems.Supplier<String?>, nullableString)
-  NotNullAssertionProblems.acceptUpperBound<String?>(supplier, nullableString)
+  NotNullAssertionProblems.acceptUpperBound<String?>(supplier as NotNullAssertionProblems.Supplier<String>, nullableString)
  }
 
  @ObjCName("testImplicitInvocationTypeArguments")
@@ -108,7 +108,7 @@ open class NotNullAssertionProblems {
   NotNullAssertionProblems.VarargConsumer<String?>(null, string)
   NotNullAssertionProblems.VarargConsumer<String?>(nullableString, string)
   NotNullAssertionProblems.GenericConsumer<String?>(supplier as NotNullAssertionProblems.Supplier<String?>, nullableString)
-  NotNullAssertionProblems.UpperWildcardConsumer<String?>(supplier, nullableString)
+  NotNullAssertionProblems.UpperWildcardConsumer<String?>(supplier as NotNullAssertionProblems.Supplier<String>, nullableString)
  }
 
  @ObjCName("testImplicitConstructorTypeArguments")

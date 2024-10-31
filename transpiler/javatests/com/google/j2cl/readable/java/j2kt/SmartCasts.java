@@ -15,6 +15,7 @@
  */
 package j2kt;
 
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
@@ -22,11 +23,34 @@ public class SmartCasts {
   public interface Foo<T> {
     T get();
 
-    // TODO(b/283448200): Uncomment when fixed.
-    // default void testThisReference() {
-    //   acceptFooOfObject((Foo<Object>) this);
-    //   acceptFooOfT(this);
-    // }
+    default void testThisReference() {
+      acceptFooOfObject((Foo<Object>) this);
+      acceptFooOfT(this);
+    }
+  }
+
+  void testThisReferenceInConstructor() {
+    class Local<T extends Local<T>> {
+      final Object fieldInitializedInConstructor;
+      T t;
+
+      Local() {
+        t = (T) this;
+        fieldInitializedInConstructor = 1;
+      }
+    }
+  }
+
+  void testThisReferenceInInitializer() {
+    class Local<T extends Local<T>> {
+      @NonNull Object fieldInitializedInInitializer;
+      T t;
+
+      {
+        t = (T) this;
+        fieldInitializedInInitializer = 1;
+      }
+    }
   }
 
   public static class Container<T> {
@@ -42,23 +66,20 @@ public class SmartCasts {
       return foo;
     }
 
-    // TODO(b/283448200): Uncomment when fixed.
-    // public void testImplicitThisReference() {
-    //   acceptFooOfObject((Foo<Object>) foo);
-    //   acceptFooOfT(foo);
-    // }
+    public void testImplicitThisReference() {
+      acceptFooOfObject((Foo<Object>) foo);
+      acceptFooOfT(foo);
+    }
 
-    // TODO(b/283448200): Uncomment when fixed.
-    // public void testExplicitThisReference() {
-    //   acceptFooOfObject((Foo<Object>) this.foo);
-    //   acceptFooOfT(this.foo);
-    // }
+    public void testExplicitThisReference() {
+      acceptFooOfObject((Foo<Object>) this.foo);
+      acceptFooOfT(this.foo);
+    }
 
-    // TODO(b/283448200): Uncomment when fixed.
-    // public void testMixedThisReference() {
-    //   acceptFooOfObject((Foo<Object>) this.foo);
-    //   acceptFooOfT(foo);
-    // }
+    public void testMixedThisReference() {
+      acceptFooOfObject((Foo<Object>) this.foo);
+      acceptFooOfT(foo);
+    }
 
     public static class SubContainer<T> extends Container<T> {
       SubContainer(Foo<T> foo) {
@@ -77,18 +98,16 @@ public class SmartCasts {
     }
   }
 
-  // TODO(b/283448200): Uncomment when fixed.
-  // public static <T> void testParameterReference(Foo<T> foo) {
-  //   acceptFooOfObject((Foo<Object>) foo);
-  //   acceptFooOfT(foo);
-  // }
+  public static <T> void testParameterReference(Foo<T> foo) {
+    acceptFooOfObject((Foo<Object>) foo);
+    acceptFooOfT(foo);
+  }
 
-  // TODO(b/283448200): Uncomment when fixed.
-  // public static <T> void testFinalVariableReference(Foo<T> foo) {
-  //   final Foo<T> localFoo = foo;
-  //   acceptFooOfObject((Foo<Object>) localFoo);
-  //   acceptFooOfT(localFoo);
-  // }
+  public static <T> void testFinalVariableReference(Foo<T> foo) {
+    final Foo<T> localFoo = foo;
+    acceptFooOfObject((Foo<Object>) localFoo);
+    acceptFooOfT(localFoo);
+  }
 
   public static <T> void testNonFinalVariableReference(Foo<T> foo, Foo<T> foo2) {
     Foo<T> localFoo = foo;
@@ -97,10 +116,9 @@ public class SmartCasts {
     acceptFooOfT(localFoo);
   }
 
-  // TODO(b/283448200): Uncomment when fixed.
-  // public static <T> void testArguments(Foo<T> foo) {
-  //   acceptFooOfObjectAndT((Foo<Object>) foo, foo);
-  // }
+  public static <T> void testArguments(Foo<T> foo) {
+    acceptFooOfObjectAndT((Foo<Object>) foo, foo);
+  }
 
   public static <T> void testIfStatement(Foo<T> foo, boolean condition) {
     if (condition) {
@@ -109,18 +127,15 @@ public class SmartCasts {
     acceptFooOfT(foo);
   }
 
-  // TODO(b/283448200): Uncomment when fixed.
-  // public static <T> void testFinalFieldAccess(Container<T> container) {
-  //   acceptFooOfObject((Foo<Object>) container.foo);
-  //   acceptFooOfT(container.foo);
-  // }
+  public static <T> void testFinalFieldAccess(Container<T> container) {
+    acceptFooOfObject((Foo<Object>) container.foo);
+    acceptFooOfT(container.foo);
+  }
 
-  // TODO(b/283448200): Uncomment when fixed.
-  // public static <T> void testFinalFieldAccessThroughCastVariable(
-  //     Container<T> container) {
-  //   acceptFooOfObject(((Container<Object>) container).foo);
-  //   acceptFooOfT(container.foo);
-  // }
+  public static <T> void testFinalFieldAccessThroughCastVariable(Container<T> container) {
+    acceptFooOfObject(((Container<Object>) container).foo);
+    acceptFooOfT(container.foo);
+  }
 
   public static <T> void testNonFinalFieldAccess(Container<T> container) {
     acceptFooOfObject((Foo<Object>) container.nonFinalFoo);
@@ -137,17 +152,15 @@ public class SmartCasts {
     acceptT(foo.get());
   }
 
-  // TODO(b/283448200): Uncomment when fixed.
-  // public static <T> void testArray(T[] a) {
-  //   acceptArrayOfObject(a);
-  //   acceptArrayOfT(a);
-  // }
+  public static <T> void testArray(T[] a) {
+    acceptArrayOfObject(a);
+    acceptArrayOfT(a);
+  }
 
-  // TODO(b/283448200): Uncomment when fixed.
-  // public static <T> void testVararg(T... a) {
-  //   acceptArrayOfObject(a);
-  //   acceptArrayOfT(a);
-  // }
+  public static <T> void testVararg(T... a) {
+    acceptArrayOfObject(a);
+    acceptArrayOfT(a);
+  }
 
   public static void acceptFooOfObject(Foo<Object> foo) {}
 
