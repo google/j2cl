@@ -19,6 +19,7 @@
 package protobuf
 
 import javaemul.lang.*
+import com.google.protobuf.Parser
 import kotlin.OptIn
 import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
@@ -34,7 +35,9 @@ open class Protobuf {
   builder!!.testField
   val message: MyMessage? = builder!!.build()
   message!!.testField
+  val chainedMessage: MyMessage? = MyMessage.newBuilder().setTestField(1).setTestField(2).build()
   val defaultMessage: MyMessage? = MyMessage.getDefaultInstance()
   defaultMessage!!.testField
+  val parser: Parser<*>? = message!!.getParserForType()
  }
 }

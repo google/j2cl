@@ -20,27 +20,24 @@ package protobuf
 
 import javaemul.lang.*
 import com.google.protobuf.GeneratedMessage
+import java.lang.RuntimeException
 import kotlin.Int
 import kotlin.OptIn
 import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
-import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktProtobufMyMessage", exact = true)
 open class MyMessage: GeneratedMessage {
- @JvmField
- @ObjCName("testField_")
- val testField: Int
-
- @ObjCName("getTestField")
- open fun getTestField(): Int {
-  return this.testField
- }
+ @ObjCName("testField")
+ open val testField: Int
+  get() {
+   throw RuntimeException()
+  }
 
  private constructor(testField: Int) {
-  this.testField = testField
+  throw RuntimeException()
  }
 
  @ObjCName("J2ktProtobufMyMessageCompanion", exact = true)
@@ -48,40 +45,36 @@ open class MyMessage: GeneratedMessage {
   @JvmStatic
   @ObjCName("getDefaultInstance")
   fun getDefaultInstance(): MyMessage {
-   return MyMessage(0)
+   throw RuntimeException()
   }
 
   @JvmStatic
   @ObjCName("newBuilder")
   fun newBuilder(): MyMessage.Builder {
-   return MyMessage.Builder()
+   throw RuntimeException()
   }
  }
 
  @ObjCName("J2ktProtobufMyMessage_Builder", exact = true)
  open class Builder: GeneratedMessage.Builder {
-  @JvmField
-  @ObjCName("testField_")
-  var testField: Int = 0
-
-  @ObjCName("getTestField")
-  open fun getTestField(): Int {
-   return this.testField
-  }
+  @ObjCName("testField")
+  open val testField: Int
+   get() {
+    throw RuntimeException()
+   }
 
   @ObjCName("setTestField")
   open fun setTestField(
    @ObjCName("withInt") testField: Int
   ): MyMessage.Builder {
-   this.testField = testField
-   return this
+   throw RuntimeException()
   }
 
   @ObjCName("build")
   open fun build(): MyMessage {
-   return MyMessage(this@Builder.testField)
+   throw RuntimeException()
   }
 
-  internal constructor()
+  private constructor()
  }
 }

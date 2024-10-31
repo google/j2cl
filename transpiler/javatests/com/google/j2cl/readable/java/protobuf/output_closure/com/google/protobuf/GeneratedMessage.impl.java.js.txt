@@ -3,6 +3,10 @@ goog.module('com.google.protobuf.GeneratedMessage$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Parser = goog.forwardDeclare('com.google.protobuf.Parser$impl');
+let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+
 class GeneratedMessage extends j_l_Object {
  /** @protected @nodts */
  constructor() {
@@ -19,6 +23,10 @@ class GeneratedMessage extends j_l_Object {
  $ctor__com_google_protobuf_GeneratedMessage__void() {
   this.$ctor__java_lang_Object__void();
  }
+ /** @nodts @return {Parser<?>} */
+ m_getParserForType__com_google_protobuf_Parser() {
+  throw $Exceptions.toJs(RuntimeException.$create__());
+ }
  /** @nodts */
  static $clinit() {
   GeneratedMessage.$clinit = () =>{};
@@ -31,7 +39,10 @@ class GeneratedMessage extends j_l_Object {
  }
  
  /** @nodts */
- static $loadModules() {}
+ static $loadModules() {
+  RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+ }
 }
 $Util.$setClassMetadata(GeneratedMessage, 'com.google.protobuf.GeneratedMessage');
 

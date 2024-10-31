@@ -3,31 +3,29 @@ goog.module('protobuf.MyMessage.Builder$impl');
 const GeneratedMessage_Builder = goog.require('com.google.protobuf.GeneratedMessage.Builder$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
 let MyMessage = goog.forwardDeclare('protobuf.MyMessage$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 class Builder extends GeneratedMessage_Builder {
  /** @protected @nodts */
  constructor() {
   super();
-  /**@type {number} @nodts*/
-  this.f_testField__protobuf_MyMessage_Builder = 0;
  }
  /** @nodts @return {number} */
  m_getTestField__int() {
-  return this.f_testField__protobuf_MyMessage_Builder;
+  throw $Exceptions.toJs(RuntimeException.$create__());
  }
  /** @nodts @return {!Builder} */
  m_setTestField__int__protobuf_MyMessage_Builder(/** number */ testField) {
-  this.f_testField__protobuf_MyMessage_Builder = testField;
-  return this;
+  throw $Exceptions.toJs(RuntimeException.$create__());
  }
  /** @nodts @return {!MyMessage} */
  m_build__protobuf_MyMessage() {
-  return MyMessage.$create__int(this.f_testField__protobuf_MyMessage_Builder);
+  throw $Exceptions.toJs(RuntimeException.$create__());
  }
  /** @nodts @return {!Builder} */
  static $create__() {
-  Builder.$clinit();
   let $instance = new Builder();
   $instance.$ctor__protobuf_MyMessage_Builder__void();
   return $instance;
@@ -49,7 +47,8 @@ class Builder extends GeneratedMessage_Builder {
  
  /** @nodts */
  static $loadModules() {
-  MyMessage = goog.module.get('protobuf.MyMessage$impl');
+  RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
  }
 }
 $Util.$setClassMetadata(Builder, 'protobuf.MyMessage$Builder');

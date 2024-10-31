@@ -1,8 +1,10 @@
 goog.module('protobuf.MyMessage');
 
 goog.require('com.google.protobuf.GeneratedMessage');
+goog.require('java.lang.RuntimeException');
 goog.require('nativebootstrap.Util');
 goog.require('protobuf.MyMessage.Builder');
+goog.require('vmbootstrap.Exceptions');
 
 const MyMessage = goog.require('protobuf.MyMessage$impl');
 exports = MyMessage;

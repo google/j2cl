@@ -3,32 +3,31 @@ goog.module('protobuf.MyMessage$impl');
 const GeneratedMessage = goog.require('com.google.protobuf.GeneratedMessage$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
 let Builder = goog.forwardDeclare('protobuf.MyMessage.Builder$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 class MyMessage extends GeneratedMessage {
  /** @protected @nodts */
  constructor() {
   super();
-  /**@type {number} @nodts*/
-  this.f_testField__protobuf_MyMessage = 0;
  }
  /** @nodts @return {number} */
  m_getTestField__int() {
-  return this.f_testField__protobuf_MyMessage;
+  throw $Exceptions.toJs(RuntimeException.$create__());
  }
  /** @nodts @return {!MyMessage} */
  static m_getDefaultInstance__protobuf_MyMessage() {
   MyMessage.$clinit();
-  return MyMessage.$create__int(0);
+  throw $Exceptions.toJs(RuntimeException.$create__());
  }
  /** @nodts @return {!Builder} */
  static m_newBuilder__protobuf_MyMessage_Builder() {
   MyMessage.$clinit();
-  return Builder.$create__();
+  throw $Exceptions.toJs(RuntimeException.$create__());
  }
  /** @nodts @return {!MyMessage} */
  static $create__int(/** number */ testField) {
-  MyMessage.$clinit();
   let $instance = new MyMessage();
   $instance.$ctor__protobuf_MyMessage__int__void(testField);
   return $instance;
@@ -36,7 +35,7 @@ class MyMessage extends GeneratedMessage {
  /** @nodts */
  $ctor__protobuf_MyMessage__int__void(/** number */ testField) {
   this.$ctor__com_google_protobuf_GeneratedMessage__void();
-  this.f_testField__protobuf_MyMessage = testField;
+  throw $Exceptions.toJs(RuntimeException.$create__());
  }
  /** @nodts */
  static $clinit() {
@@ -51,7 +50,8 @@ class MyMessage extends GeneratedMessage {
  
  /** @nodts */
  static $loadModules() {
-  Builder = goog.module.get('protobuf.MyMessage.Builder$impl');
+  RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
  }
 }
 $Util.$setClassMetadata(MyMessage, 'protobuf.MyMessage');

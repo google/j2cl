@@ -28,8 +28,10 @@ class Protobuf extends j_l_Object {
   builder.m_getTestField__int();
   let message = builder.m_build__protobuf_MyMessage();
   message.m_getTestField__int();
+  let chainedMessage = MyMessage.m_newBuilder__protobuf_MyMessage_Builder().m_setTestField__int__protobuf_MyMessage_Builder(1).m_setTestField__int__protobuf_MyMessage_Builder(2).m_build__protobuf_MyMessage();
   let defaultMessage = MyMessage.m_getDefaultInstance__protobuf_MyMessage();
   defaultMessage.m_getTestField__int();
+  let parser = message.m_getParserForType__com_google_protobuf_Parser();
  }
  /** @nodts */
  static $clinit() {

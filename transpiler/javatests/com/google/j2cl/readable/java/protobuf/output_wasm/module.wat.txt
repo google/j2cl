@@ -20,6 +20,7 @@
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getParserForType__com_google_protobuf_Parser (ref $function.m_getParserForType__com_google_protobuf_Parser))
  (field $m_getTestField__int (ref $function.m_getTestField__int))
  ))
 )
@@ -27,7 +28,6 @@
  (field $vtable (ref $protobuf.MyMessage.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $testField@protobuf.MyMessage (mut i32))
  ))
 )
 
@@ -46,7 +46,6 @@
  (field $vtable (ref $protobuf.MyMessage.Builder.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $testField@protobuf.MyMessage.Builder (mut i32))
  ))
 )
 
@@ -87,6 +86,7 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getParserForType__com_google_protobuf_Parser@com.google.protobuf.GeneratedMessage)
   (ref.func $m_getTestField__int@protobuf.MyMessage)
  )
 )
@@ -120,16 +120,16 @@
 ;;; Protobuf Protobuf.$create()
 (func $$create__@protobuf.Protobuf
  (result (ref null $protobuf.Protobuf))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:20:13
  (local $$instance (ref null $protobuf.Protobuf))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:20:13
   (call $$clinit__void_<once>_@protobuf.Protobuf )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:20:13
   (local.set $$instance (struct.new $protobuf.Protobuf (ref.as_non_null (global.get $protobuf.Protobuf.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:20:13
   (call $$ctor__void_$p_protobuf_Protobuf@protobuf.Protobuf (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:20:13
   (return (local.get $$instance))
  )
 )
@@ -137,9 +137,9 @@
 ;;; void Protobuf.$ctor()
 (func $$ctor__void_$p_protobuf_Protobuf@protobuf.Protobuf
  (param $this (ref null $protobuf.Protobuf))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:20:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:20:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -148,45 +148,63 @@
 (func $m_test__void@protobuf.Protobuf
  (type $function.m_test__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:19:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:21:14
  (local $builder (ref null $protobuf.MyMessage.Builder))
  (local $message (ref null $protobuf.MyMessage))
+ (local $chainedMessage (ref null $protobuf.MyMessage))
+ (local $$qualifier (ref null $protobuf.MyMessage.Builder))
+ (local $$qualifier_1 (ref null $protobuf.MyMessage.Builder))
+ (local $$qualifier_2 (ref null $protobuf.MyMessage.Builder))
  (local $defaultMessage (ref null $protobuf.MyMessage))
+ (local $parser (ref null $com.google.protobuf.Parser))
  (local $this (ref null $protobuf.Protobuf))
  (local.set $this (ref.cast (ref $protobuf.Protobuf) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:20:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:22:4
   (local.set $builder (call $m_newBuilder__protobuf_MyMessage_Builder@protobuf.MyMessage ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:21:4
-  (drop (call_ref $function.m_setTestField__int__protobuf_MyMessage_Builder (ref.as_non_null (local.get $builder))(i32.const 42)(struct.get $protobuf.MyMessage.Builder.vtable $m_setTestField__int__protobuf_MyMessage_Builder (struct.get $protobuf.MyMessage.Builder $vtable(local.get $builder)))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:23:4
-  (drop (call_ref $function.m_getTestField__int (ref.as_non_null (local.get $builder))(struct.get $protobuf.MyMessage.Builder.vtable $m_getTestField__int (struct.get $protobuf.MyMessage.Builder $vtable(local.get $builder)))))
+  (drop (call_ref $function.m_setTestField__int__protobuf_MyMessage_Builder (ref.as_non_null (local.get $builder))(i32.const 42)(struct.get $protobuf.MyMessage.Builder.vtable $m_setTestField__int__protobuf_MyMessage_Builder (struct.get $protobuf.MyMessage.Builder $vtable(local.get $builder)))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:25:4
+  (drop (call_ref $function.m_getTestField__int (ref.as_non_null (local.get $builder))(struct.get $protobuf.MyMessage.Builder.vtable $m_getTestField__int (struct.get $protobuf.MyMessage.Builder $vtable(local.get $builder)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:27:4
   (local.set $message (call_ref $function.m_build__protobuf_MyMessage (ref.as_non_null (local.get $builder))(struct.get $protobuf.MyMessage.Builder.vtable $m_build__protobuf_MyMessage (struct.get $protobuf.MyMessage.Builder $vtable(local.get $builder)))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:26:4
-  (drop (call_ref $function.m_getTestField__int (ref.as_non_null (local.get $message))(struct.get $protobuf.MyMessage.vtable $m_getTestField__int (struct.get $protobuf.MyMessage $vtable(local.get $message)))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:28:4
+  (drop (call_ref $function.m_getTestField__int (ref.as_non_null (local.get $message))(struct.get $protobuf.MyMessage.vtable $m_getTestField__int (struct.get $protobuf.MyMessage $vtable(local.get $message)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:30:4
+  (local.set $chainedMessage (block (result (ref null $protobuf.MyMessage))
+   (local.set $$qualifier (block (result (ref null $protobuf.MyMessage.Builder))
+    (local.set $$qualifier_1 (block (result (ref null $protobuf.MyMessage.Builder))
+     (local.set $$qualifier_2 (call $m_newBuilder__protobuf_MyMessage_Builder@protobuf.MyMessage ))
+     (call_ref $function.m_setTestField__int__protobuf_MyMessage_Builder (ref.as_non_null (local.get $$qualifier_2))(i32.const 1)(struct.get $protobuf.MyMessage.Builder.vtable $m_setTestField__int__protobuf_MyMessage_Builder (struct.get $protobuf.MyMessage.Builder $vtable(local.get $$qualifier_2))))
+    ))
+    (call_ref $function.m_setTestField__int__protobuf_MyMessage_Builder (ref.as_non_null (local.get $$qualifier_1))(i32.const 2)(struct.get $protobuf.MyMessage.Builder.vtable $m_setTestField__int__protobuf_MyMessage_Builder (struct.get $protobuf.MyMessage.Builder $vtable(local.get $$qualifier_1))))
+   ))
+   (call_ref $function.m_build__protobuf_MyMessage (ref.as_non_null (local.get $$qualifier))(struct.get $protobuf.MyMessage.Builder.vtable $m_build__protobuf_MyMessage (struct.get $protobuf.MyMessage.Builder $vtable(local.get $$qualifier))))
+  ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:32:4
   (local.set $defaultMessage (call $m_getDefaultInstance__protobuf_MyMessage@protobuf.MyMessage ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:29:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:33:4
   (drop (call_ref $function.m_getTestField__int (ref.as_non_null (local.get $defaultMessage))(struct.get $protobuf.MyMessage.vtable $m_getTestField__int (struct.get $protobuf.MyMessage $vtable(local.get $defaultMessage)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:35:4
+  (local.set $parser (call_ref $function.m_getParserForType__com_google_protobuf_Parser (ref.as_non_null (local.get $message))(struct.get $protobuf.MyMessage.vtable $m_getParserForType__com_google_protobuf_Parser (struct.get $protobuf.MyMessage $vtable(local.get $message)))))
  )
 )
 (elem declare func $m_test__void@protobuf.Protobuf)
 
 ;;; void Protobuf.$clinit()
 (func $$clinit__void_<once>_@protobuf.Protobuf
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:20:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:20:13
   (if (global.get $$class-initialized@protobuf.Protobuf)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:18:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:20:13
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:20:13
   (global.set $$class-initialized@protobuf.Protobuf (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:20:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -230,7 +248,7 @@
  (local.set $this (ref.cast (ref $protobuf.MyMessage) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:27:4
-  (return (struct.get $protobuf.MyMessage $testField@protobuf.MyMessage (local.get $this)))
+  (throw $exception.event (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $$create__@java.lang.RuntimeException )))
  )
 )
 (elem declare func $m_getTestField__int@protobuf.MyMessage)
@@ -243,7 +261,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:30:47
   (call $$clinit__void_<once>_@protobuf.MyMessage )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:31:4
-  (return (call $$create_$private__int@protobuf.MyMessage (i32.const 0)))
+  (throw $exception.event (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $$create__@java.lang.RuntimeException )))
  )
 )
 
@@ -255,32 +273,19 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:34:37
   (call $$clinit__void_<once>_@protobuf.MyMessage )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:35:4
-  (return (call $$create__@protobuf.MyMessage.Builder ))
+  (throw $exception.event (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $$create__@java.lang.RuntimeException )))
  )
 )
 
-;;; MyMessage MyMessage.$create(int arg0)
+;;; MyMessage MyMessage.$create(int testField)
 (func $$create__int@protobuf.MyMessage
- (param $arg0 i32)
- (result (ref null $protobuf.MyMessage))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:38:10
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:38:10
-  (call $$clinit__void_<once>_@protobuf.MyMessage )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:38:10
-  (return (call $$create_$private__int@protobuf.MyMessage (local.get $arg0)))
- )
-)
-
-;;; MyMessage MyMessage.$create_$private(int testField)
-(func $$create_$private__int@protobuf.MyMessage
  (param $testField i32)
  (result (ref null $protobuf.MyMessage))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:38:10
  (local $$instance (ref null $protobuf.MyMessage))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:38:10
-  (local.set $$instance (struct.new $protobuf.MyMessage (ref.as_non_null (global.get $protobuf.MyMessage.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $protobuf.MyMessage (ref.as_non_null (global.get $protobuf.MyMessage.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:38:10
   (call $$ctor__int__void_$p_protobuf_MyMessage@protobuf.MyMessage (ref.as_non_null (local.get $$instance))(local.get $testField))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:38:10
@@ -297,24 +302,24 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:38:35
   (call $$ctor__void_$p_com_google_protobuf_GeneratedMessage@com.google.protobuf.GeneratedMessage (ref.as_non_null (local.get $this)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:39:4
-  (struct.set $protobuf.MyMessage $testField@protobuf.MyMessage (local.get $this) (local.get $testField))
+  (throw $exception.event (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $$create__@java.lang.RuntimeException )))
  )
 )
 
 ;;; void MyMessage.$clinit()
 (func $$clinit__void_<once>_@protobuf.MyMessage
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:22:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:23:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:22:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:23:13
   (if (global.get $$class-initialized@protobuf.MyMessage)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:22:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:23:13
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:22:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:23:13
   (global.set $$class-initialized@protobuf.MyMessage (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:22:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:23:13
   (call $$clinit__void_<once>_@com.google.protobuf.GeneratedMessage )
  )
 )
@@ -353,12 +358,12 @@
  (type $function.m_getTestField__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:46:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:45:15
  (local $this (ref null $protobuf.MyMessage.Builder))
  (local.set $this (ref.cast (ref $protobuf.MyMessage.Builder) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:47:6
-  (return (struct.get $protobuf.MyMessage.Builder $testField@protobuf.MyMessage.Builder (local.get $this)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:46:6
+  (throw $exception.event (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $$create__@java.lang.RuntimeException )))
  )
 )
 (elem declare func $m_getTestField__int@protobuf.MyMessage.Builder)
@@ -369,14 +374,12 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $testField i32)
  (result (ref null $protobuf.MyMessage.Builder))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:50:19
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:49:19
  (local $this (ref null $protobuf.MyMessage.Builder))
  (local.set $this (ref.cast (ref $protobuf.MyMessage.Builder) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:51:6
-  (struct.set $protobuf.MyMessage.Builder $testField@protobuf.MyMessage.Builder (local.get $this) (local.get $testField))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:52:6
-  (return (local.get $this))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:50:6
+  (throw $exception.event (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $$create__@java.lang.RuntimeException )))
  )
 )
 (elem declare func $m_setTestField__int__protobuf_MyMessage_Builder@protobuf.MyMessage.Builder)
@@ -386,12 +389,12 @@
  (type $function.m_build__protobuf_MyMessage)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $protobuf.MyMessage))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:55:21
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:53:21
  (local $this (ref null $protobuf.MyMessage.Builder))
  (local.set $this (ref.cast (ref $protobuf.MyMessage.Builder) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:56:6
-  (return (call $$create__int@protobuf.MyMessage (struct.get $protobuf.MyMessage.Builder $testField@protobuf.MyMessage.Builder (local.get $this))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:54:6
+  (throw $exception.event (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $$create__@java.lang.RuntimeException )))
  )
 )
 (elem declare func $m_build__protobuf_MyMessage@protobuf.MyMessage.Builder)
@@ -399,16 +402,14 @@
 ;;; Builder Builder.$create()
 (func $$create__@protobuf.MyMessage.Builder
  (result (ref null $protobuf.MyMessage.Builder))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:59:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:57:12
  (local $$instance (ref null $protobuf.MyMessage.Builder))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:59:12
-  (call $$clinit__void_<once>_@protobuf.MyMessage.Builder )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:59:12
-  (local.set $$instance (struct.new $protobuf.MyMessage.Builder (ref.as_non_null (global.get $protobuf.MyMessage.Builder.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:59:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:57:12
+  (local.set $$instance (struct.new $protobuf.MyMessage.Builder (ref.as_non_null (global.get $protobuf.MyMessage.Builder.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:57:12
   (call $$ctor__void_$p_protobuf_MyMessage_Builder@protobuf.MyMessage.Builder (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:59:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:57:12
   (return (local.get $$instance))
  )
 )
@@ -416,9 +417,9 @@
 ;;; void Builder.$ctor()
 (func $$ctor__void_$p_protobuf_MyMessage_Builder@protobuf.MyMessage.Builder
  (param $this (ref null $protobuf.MyMessage.Builder))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:59:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:57:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:59:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/MyMessage.java:57:22
   (call $$ctor__void_$p_com_google_protobuf_GeneratedMessage_Builder@com.google.protobuf.GeneratedMessage.Builder (ref.as_non_null (local.get $this)))
  )
 )
