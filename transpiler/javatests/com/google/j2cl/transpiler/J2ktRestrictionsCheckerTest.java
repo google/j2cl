@@ -111,6 +111,50 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
             "Warning:Main.java:2: Type 'test.Outer' must be directly or indirectly @NullMarked.");
   }
 
+  public void testKtPropertyNonEmptyParametersFails() {
+    newTranspilerTester(
+            "test.Main",
+            "abstract class Main {",
+            "  @javaemul.internal.annotations.KtProperty",
+            "  abstract int method(int foo);",
+            "}")
+        .addCompilationUnit(
+            "javaemul.internal.annotations.KtProperty", "public @interface KtProperty {}")
+        .assertTranspileFails()
+        .assertErrorsWithSourcePosition(
+            "Error:Main.java:4: Method 'int Main.method(int foo)' can not be '@KtProperty', as it"
+                + " has non-empty parameters.");
+  }
+
+  public void testKtPropertyVoidReturnTypeFails() {
+    newTranspilerTester(
+            "test.Main",
+            "abstract class Main {",
+            "  @javaemul.internal.annotations.KtProperty",
+            "  abstract void method();",
+            "}")
+        .addCompilationUnit(
+            "javaemul.internal.annotations.KtProperty", "public @interface KtProperty {}")
+        .assertTranspileFails()
+        .assertErrorsWithSourcePosition(
+            "Error:Main.java:4: Method 'void Main.method()' can not be '@KtProperty', as it has"
+                + " void return type.");
+  }
+
+  public void testKtPropertyConstructorFails() {
+    newTranspilerTester(
+            "test.Main",
+            "class Main {",
+            "  @javaemul.internal.annotations.KtProperty",
+            "  Main() {}",
+            "}")
+        .addCompilationUnit(
+            "javaemul.internal.annotations.KtProperty", "public @interface KtProperty {}")
+        .assertTranspileFails()
+        .assertErrorsWithSourcePosition(
+            "Error:Main.java:4: Constructor 'Main()' can not be '@KtProperty'.");
+  }
+
   private TranspilerTester newTranspilerTester(String compilationUnitName, String... code) {
     return TranspilerTester.newTesterWithDefaults()
         .addArgs("-backend", "KOTLIN")

@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid;
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.common.Problems;
@@ -44,6 +46,7 @@ public final class J2ktRestrictionsChecker {
           public boolean enterMethod(Method method) {
             checkNotGenericConstructor(method);
             checkReferencedTypeVisibilities(method);
+            checkKtProperty(method);
             return true;
           }
 
@@ -91,6 +94,34 @@ public final class J2ktRestrictionsChecker {
                     referencedTypeDescriptor.getReadableDescription(),
                     getDescription(referencedVisibility));
               }
+            }
+          }
+
+          private void checkKtProperty(Method method) {
+            MethodDescriptor methodDescriptor = method.getDescriptor();
+            if (!methodDescriptor.isKtProperty()) {
+              return;
+            }
+
+            if (methodDescriptor.isConstructor()) {
+              problems.error(
+                  method.getSourcePosition(),
+                  "Constructor '%s' can not be '@KtProperty'.",
+                  method.getReadableDescription());
+            }
+
+            if (!methodDescriptor.getParameterDescriptors().isEmpty()) {
+              problems.error(
+                  method.getSourcePosition(),
+                  "Method '%s' can not be '@KtProperty', as it has non-empty parameters.",
+                  method.getReadableDescription());
+            }
+
+            if (isPrimitiveVoid(methodDescriptor.getReturnTypeDescriptor())) {
+              problems.error(
+                  method.getSourcePosition(),
+                  "Method '%s' can not be '@KtProperty', as it has void return type.",
+                  method.getReadableDescription());
             }
           }
 
