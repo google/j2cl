@@ -340,7 +340,7 @@ class CompilationUnitBuilder(
     irAnonymousInitializer: IrAnonymousInitializer
   ): InitializerBlock =
     InitializerBlock.newBuilder()
-      .setBlock(convertBody(irAnonymousInitializer.body))
+      .setBody(convertBody(irAnonymousInitializer.body))
       .setDescriptor(
         environment
           .getDeclaredTypeDescriptor(irAnonymousInitializer.parentAsClass.defaultType)

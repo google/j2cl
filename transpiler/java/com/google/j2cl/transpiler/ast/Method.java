@@ -20,7 +20,6 @@ import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.stream.Collectors.joining;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.SourcePosition;
@@ -70,23 +69,7 @@ public class Method extends Member implements MethodLike {
     return parameters;
   }
 
-  @Nullable
   @Override
-  public Variable getJsVarargsParameter() {
-    if (methodDescriptor.isJsMethodVarargs()) {
-      return getVarargsParameter();
-    }
-    return null;
-  }
-
-  @Nullable
-  public Variable getVarargsParameter() {
-    if (methodDescriptor.isVarargs()) {
-      return Iterables.getLast(getParameters());
-    }
-    return null;
-  }
-
   public Block getBody() {
     return body;
   }

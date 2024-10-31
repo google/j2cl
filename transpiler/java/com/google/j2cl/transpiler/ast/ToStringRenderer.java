@@ -300,7 +300,7 @@ class ToStringRenderer {
         if (initializerBlock.isStatic()) {
           print("static ");
         }
-        accept(initializerBlock.getBlock());
+        accept(initializerBlock.getBody());
         return false;
       }
 

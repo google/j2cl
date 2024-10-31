@@ -226,7 +226,7 @@ public class ImplementStaticInitializationViaClinitFunctionRedirection
     // Code from static initializer blocks.
     List<Statement> clinitStatements =
         type.getStaticInitializerBlocks().stream()
-            .flatMap(initializerBlock -> initializerBlock.getBlock().getStatements().stream())
+            .flatMap(initializerBlock -> initializerBlock.getBody().getStatements().stream())
             .collect(toImmutableList());
 
     type.addMember(

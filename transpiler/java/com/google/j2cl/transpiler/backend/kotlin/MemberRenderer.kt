@@ -187,7 +187,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
     annotation(nameRenderer.topLevelQualifiedNameSource("kotlin.jvm.JvmStatic"))
 
   private fun initializerBlockSource(initializerBlock: InitializerBlock): Source =
-    spaceSeparated(INIT_KEYWORD, statementRenderer.statementSource(initializerBlock.block))
+    spaceSeparated(INIT_KEYWORD, statementRenderer.statementSource(initializerBlock.body))
 
   private fun methodHeaderSource(method: Method): Source =
     if (isKtPrimaryConstructor(method)) {

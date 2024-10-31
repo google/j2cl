@@ -44,7 +44,7 @@ public class ImplementInstanceInitialization extends NormalizationPass {
     checkArgument(!type.isInterface());
     List<Statement> statements =
         type.getInstanceInitializerBlocks().stream()
-            .flatMap(initializerBlock -> initializerBlock.getBlock().getStatements().stream())
+            .flatMap(initializerBlock -> initializerBlock.getBody().getStatements().stream())
             .collect(toImmutableList());
 
     type.addMember(

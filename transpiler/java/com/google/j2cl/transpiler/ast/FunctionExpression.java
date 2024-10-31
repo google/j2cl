@@ -17,7 +17,6 @@ package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import com.google.common.collect.Iterables;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
@@ -25,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
-import javax.annotation.Nullable;
 
 /** Class for an inline (lambda) function expression. */
 @Visitable
@@ -72,15 +70,7 @@ public class FunctionExpression extends Expression implements MethodLike {
     return sourcePosition;
   }
 
-  @Nullable
   @Override
-  public Variable getJsVarargsParameter() {
-    if (isJsVarargs()) {
-      return Iterables.getLast(getParameters());
-    }
-    return null;
-  }
-
   public Block getBody() {
     return body;
   }

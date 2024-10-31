@@ -86,7 +86,7 @@ public class NormalizeOverlayMembers extends NormalizationPass {
       } else {
         InitializerBlock initializerBlock = (InitializerBlock) member;
         checkState(initializerBlock.isStatic());
-        overlayClass.addStaticInitializerBlock(initializerBlock.getBlock());
+        overlayClass.addStaticInitializerBlock(initializerBlock.getBody());
       }
     }
 

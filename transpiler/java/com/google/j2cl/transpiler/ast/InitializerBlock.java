@@ -18,27 +18,28 @@ package com.google.j2cl.transpiler.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
+import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
+import java.util.List;
 
 /** A node that represents an initializer block. */
 @Visitable
-public class InitializerBlock extends Member {
-  @Visitable Block block;
+public class InitializerBlock extends Member implements MethodLike {
+  @Visitable Block body;
   @Visitable MethodDescriptor methodDescriptor;
 
   private InitializerBlock(
-      SourcePosition sourcePosition,
-      Block block,
-      MethodDescriptor methodDescriptor) {
+      SourcePosition sourcePosition, Block body, MethodDescriptor methodDescriptor) {
     super(sourcePosition);
-    this.block = checkNotNull(block);
+    this.body = checkNotNull(body);
     this.methodDescriptor = checkNotNull(methodDescriptor);
   }
 
-  public Block getBlock() {
-    return block;
+  @Override
+  public Block getBody() {
+    return body;
   }
 
   @Override
@@ -52,6 +53,11 @@ public class InitializerBlock extends Member {
   }
 
   @Override
+  public List<Variable> getParameters() {
+    return ImmutableList.of();
+  }
+
+  @Override
   Node acceptInternal(Processor processor) {
     return Visitor_InitializerBlock.visit(processor, this);
   }
@@ -62,13 +68,13 @@ public class InitializerBlock extends Member {
 
   /** Builder for InitializerBlock. */
   public static class Builder {
-    private Block block;
+    private Block body;
     private SourcePosition sourcePosition;
     private MethodDescriptor methodDescriptor;
 
     public static Builder from(InitializerBlock initializerBlock) {
       return newBuilder()
-          .setBlock(initializerBlock.getBlock())
+          .setBody(initializerBlock.getBody())
           .setSourcePosition(initializerBlock.getSourcePosition())
           .setDescriptor(initializerBlock.getDescriptor());
     }
@@ -78,8 +84,8 @@ public class InitializerBlock extends Member {
       return this;
     }
 
-    public Builder setBlock(Block block) {
-      this.block = block;
+    public Builder setBody(Block body) {
+      this.body = body;
       return this;
     }
 
@@ -90,9 +96,9 @@ public class InitializerBlock extends Member {
 
 
     public InitializerBlock build() {
-      checkState(block != null);
+      checkState(body != null);
       checkState(sourcePosition != null);
-      return new InitializerBlock(sourcePosition, block, methodDescriptor);
+      return new InitializerBlock(sourcePosition, body, methodDescriptor);
     }
   }
 }

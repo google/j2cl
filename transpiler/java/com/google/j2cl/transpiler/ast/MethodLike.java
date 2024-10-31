@@ -15,16 +15,36 @@
  */
 package com.google.j2cl.transpiler.ast;
 
+import com.google.common.collect.Iterables;
 import java.util.List;
+import javax.annotation.Nullable;
 
 /** Interface that describes elements that look like method definitions. */
 public interface MethodLike extends HasSourcePosition, HasReadableDescription {
-  /** Returns the method descriptor related the functional node. */
+  /** Returns the method descriptor related to the node. */
   MethodDescriptor getDescriptor();
 
   /** Returns list of parameter declarations. */
   List<Variable> getParameters();
 
-  /** Returns the declaration of the JsVarArgs parameter if any */
-  Variable getJsVarargsParameter();
+  /** Returns the declaration of the Varargs parameter if any */
+  @Nullable
+  default Variable getVarargsParameter() {
+    if (getDescriptor().isVarargs()) {
+      return Iterables.getLast(getParameters());
+    }
+    return null;
+  }
+
+  /** Returns the declaration of the JsVarargs parameter if any */
+  @Nullable
+  default Variable getJsVarargsParameter() {
+    if (getDescriptor().isJsMethodVarargs()) {
+      return getVarargsParameter();
+    }
+    return null;
+  }
+
+  /** Returns the body related to the node. */
+  Block getBody();
 }
