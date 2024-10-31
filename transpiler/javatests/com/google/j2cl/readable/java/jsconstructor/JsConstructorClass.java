@@ -202,4 +202,26 @@ public class JsConstructorClass {
       this(new Object());
     }
   }
+
+  class JsConstructorClassWithExplicitConstructor {
+    @JsConstructor
+    JsConstructorClassWithExplicitConstructor(int i) {}
+  }
+
+  class JsConstructorSubclass extends JsConstructorClassWithExplicitConstructor {
+    @JsConstructor
+    JsConstructorSubclass() {
+      super(1);
+
+      // Adds a case in which the variable `i` needs to be hoisted to the top scope, and since it
+      // is a constructor it might end up being defined before the call to super, which is
+      // what is being tested here.
+      switch (0) {
+        case 0:
+          int i = 0;
+        case 1:
+          i = 2;
+      }
+    }
+  }
 }

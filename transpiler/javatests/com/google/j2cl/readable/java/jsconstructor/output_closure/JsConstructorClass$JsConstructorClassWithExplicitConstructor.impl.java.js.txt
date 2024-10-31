@@ -1,0 +1,40 @@
+goog.module('jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let JsConstructorClass = goog.forwardDeclare('jsconstructor.JsConstructorClass$impl');
+
+class JsConstructorClassWithExplicitConstructor extends j_l_Object {
+ 
+ constructor(/** JsConstructorClass */ $outer_this, /** number */ i) {
+  JsConstructorClassWithExplicitConstructor.$clinit();
+  super();
+  /**@type {JsConstructorClass} @nodts*/
+  this.$outer_this__jsconstructor_JsConstructorClass_JsConstructorClassWithExplicitConstructor;
+  this.$ctor__jsconstructor_JsConstructorClass_JsConstructorClassWithExplicitConstructor__jsconstructor_JsConstructorClass__int__void($outer_this, i);
+ }
+ /** @nodts */
+ $ctor__jsconstructor_JsConstructorClass_JsConstructorClassWithExplicitConstructor__jsconstructor_JsConstructorClass__int__void(/** JsConstructorClass */ $outer_this, /** number */ i) {
+  this.$outer_this__jsconstructor_JsConstructorClass_JsConstructorClassWithExplicitConstructor = $outer_this;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  JsConstructorClassWithExplicitConstructor.$clinit = () =>{};
+  JsConstructorClassWithExplicitConstructor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof JsConstructorClassWithExplicitConstructor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(JsConstructorClassWithExplicitConstructor, 'jsconstructor.JsConstructorClass$JsConstructorClassWithExplicitConstructor');
+
+exports = JsConstructorClassWithExplicitConstructor;
+
+//# sourceMappingURL=JsConstructorClass$JsConstructorClassWithExplicitConstructor.js.map

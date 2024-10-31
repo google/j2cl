@@ -74,6 +74,22 @@
  ))
 )
 
+;;; Code for jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor [type definition]
+(type $jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+(type $jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor (sub $java.lang.Object (struct
+ (field $vtable (ref $jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor (mut (ref null $jsconstructor.JsConstructorClass)))
+ ))
+)
+
 ;;; Code for jsconstructor.JsConstructorClass.B [type definition]
 (type $jsconstructor.JsConstructorClass.B.vtable (sub $jsconstructor.JsConstructorClass.A.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
@@ -167,6 +183,23 @@
  (field $vtable (ref $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
+;;; Code for jsconstructor.JsConstructorClass.JsConstructorSubclass [type definition]
+(type $jsconstructor.JsConstructorClass.JsConstructorSubclass.vtable (sub $jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+(type $jsconstructor.JsConstructorClass.JsConstructorSubclass (sub $jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor (struct
+ (field $vtable (ref $jsconstructor.JsConstructorClass.JsConstructorSubclass.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor (mut (ref null $jsconstructor.JsConstructorClass)))
+ (field $$outer_this@jsconstructor.JsConstructorClass.JsConstructorSubclass (mut (ref null $jsconstructor.JsConstructorClass)))
  ))
 )
 
@@ -270,6 +303,8 @@
 
 ;;; Code for jsconstructor.JsConstructorClass.RegularType [imports]
 
+;;; Code for jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor [imports]
+
 ;;; Code for jsconstructor.JsConstructorClass.B [imports]
 
 ;;; Code for jsconstructor.JsConstructorClass.H [imports]
@@ -281,6 +316,8 @@
 ;;; Code for jsconstructor.JsConstructorClass.InstanceVarargs [imports]
 
 ;;; Code for jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType [imports]
+
+;;; Code for jsconstructor.JsConstructorClass.JsConstructorSubclass [imports]
 
 ;;; Code for jsconstructor.JsConstructorClass.C [imports]
 
@@ -417,6 +454,22 @@
  (i32.const 0)
 )
 (global $$class@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor [static fields]
+(global $$class-initialized@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for jsconstructor.JsConstructorClass.JsConstructorSubclass [static fields]
+(global $$class-initialized@jsconstructor.JsConstructorClass.JsConstructorSubclass (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsconstructor.JsConstructorClass.JsConstructorSubclass (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -574,6 +627,26 @@
 (global $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.vtable (ref $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.vtable)
  (struct.new $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.vtable
   (ref.func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+
+;;; Code for jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor [vtable.init]
+(global $jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor.vtable (ref $jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor.vtable)
+ (struct.new $jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor.vtable
+  (ref.func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+
+;;; Code for jsconstructor.JsConstructorClass.JsConstructorSubclass [vtable.init]
+(global $jsconstructor.JsConstructorClass.JsConstructorSubclass.vtable (ref $jsconstructor.JsConstructorClass.JsConstructorSubclass.vtable)
+ (struct.new $jsconstructor.JsConstructorClass.JsConstructorSubclass.vtable
+  (ref.func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.JsConstructorSubclass)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
@@ -996,6 +1069,86 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.RegularType)
+
+;;; Code for jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor [methods]
+
+;;; JsConstructorClassWithExplicitConstructor JsConstructorClassWithExplicitConstructor.$create(JsConstructorClass $outer_this, int i)
+(func $$create__jsconstructor_JsConstructorClass__int@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor
+ (param $$outer_this (ref null $jsconstructor.JsConstructorClass))
+ (param $i i32)
+ (result (ref null $jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:208:4
+ (local $$instance (ref null $jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:208:4
+  (call $$clinit__void_<once>_@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:208:4
+  (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $jsconstructor.JsConstructorClass)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:208:4
+  (call $$ctor__jsconstructor_JsConstructorClass__int__void_$p_jsconstructor_JsConstructorClass_JsConstructorClassWithExplicitConstructor@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $i))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:208:4
+  (return (local.get $$instance))
+ )
+)
+
+;;; void JsConstructorClassWithExplicitConstructor.$ctor(JsConstructorClass $outer_this, int i)
+(func $$ctor__jsconstructor_JsConstructorClass__int__void_$p_jsconstructor_JsConstructorClass_JsConstructorClassWithExplicitConstructor@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor
+ (param $this (ref null $jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor))
+ (param $$outer_this (ref null $jsconstructor.JsConstructorClass))
+ (param $i i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:208:4
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:206:8
+  (struct.set $jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor $$outer_this@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor (local.get $this) (local.get $$outer_this))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:208:53
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void JsConstructorClassWithExplicitConstructor.$clinit()
+(func $$clinit__void_<once>_@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:206:8
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:206:8
+  (if (global.get $$class-initialized@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:206:8
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:206:8
+  (global.set $$class-initialized@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:206:8
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> JsConstructorClassWithExplicitConstructor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor)))
+   (then
+    (return (global.get $$class@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor))
+   )
+  )
+  (global.set $$class@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsconstructo...|__java_lang_String_<once>_@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor))
+ )
+)
+
+;;; Class<?> JsConstructorClassWithExplicitConstructor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor))
+ (local.set $this (ref.cast (ref $jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor)
 
 ;;; Code for jsconstructor.JsConstructorClass.B [methods]
 
@@ -1559,6 +1712,102 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType)
+
+;;; Code for jsconstructor.JsConstructorClass.JsConstructorSubclass [methods]
+
+;;; JsConstructorSubclass JsConstructorSubclass.$create(JsConstructorClass $outer_this)
+(func $$create__jsconstructor_JsConstructorClass@jsconstructor.JsConstructorClass.JsConstructorSubclass
+ (param $$outer_this (ref null $jsconstructor.JsConstructorClass))
+ (result (ref null $jsconstructor.JsConstructorClass.JsConstructorSubclass))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:213:4
+ (local $$instance (ref null $jsconstructor.JsConstructorClass.JsConstructorSubclass))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:213:4
+  (call $$clinit__void_<once>_@jsconstructor.JsConstructorClass.JsConstructorSubclass )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:213:4
+  (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.JsConstructorSubclass (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.JsConstructorSubclass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $jsconstructor.JsConstructorClass) (ref.null $jsconstructor.JsConstructorClass)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:213:4
+  (call $$ctor__jsconstructor_JsConstructorClass__void_$p_jsconstructor_JsConstructorClass_JsConstructorSubclass@jsconstructor.JsConstructorClass.JsConstructorSubclass (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:213:4
+  (return (local.get $$instance))
+ )
+)
+
+;;; void JsConstructorSubclass.$ctor(JsConstructorClass $outer_this)
+(func $$ctor__jsconstructor_JsConstructorClass__void_$p_jsconstructor_JsConstructorClass_JsConstructorSubclass@jsconstructor.JsConstructorClass.JsConstructorSubclass
+ (param $this (ref null $jsconstructor.JsConstructorClass.JsConstructorSubclass))
+ (param $$outer_this (ref null $jsconstructor.JsConstructorClass))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:213:4
+ (local $i i32)
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:211:8
+  (struct.set $jsconstructor.JsConstructorClass.JsConstructorSubclass $$outer_this@jsconstructor.JsConstructorClass.JsConstructorSubclass (local.get $this) (local.get $$outer_this))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:214:6
+  (call $$ctor__jsconstructor_JsConstructorClass__int__void_$p_jsconstructor_JsConstructorClass_JsConstructorClassWithExplicitConstructor@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor (ref.as_non_null (local.get $this))(local.get $$outer_this)(i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:219:6
+  (block $SWITCH.BREAK
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:219:6
+   (block
+    (block
+     (block ;; evaluate expression and jump
+      (br_table 0 1 2 (i32.const 0))
+     )
+     ;; case 0:
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:221:10
+     (local.set $i (i32.const 0))
+    )
+    ;; case 1:
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:223:10
+    (local.set $i (i32.const 2))
+   )
+  )
+ )
+)
+
+;;; void JsConstructorSubclass.$clinit()
+(func $$clinit__void_<once>_@jsconstructor.JsConstructorClass.JsConstructorSubclass
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:211:8
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:211:8
+  (if (global.get $$class-initialized@jsconstructor.JsConstructorClass.JsConstructorSubclass)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:211:8
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:211:8
+  (global.set $$class-initialized@jsconstructor.JsConstructorClass.JsConstructorSubclass (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:211:8
+  (call $$clinit__void_<once>_@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor )
+ )
+)
+
+;;; Class<T> JsConstructorSubclass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsconstructor.JsConstructorClass.JsConstructorSubclass
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jsconstructor.JsConstructorClass.JsConstructorSubclass)))
+   (then
+    (return (global.get $$class@jsconstructor.JsConstructorClass.JsConstructorSubclass))
+   )
+  )
+  (global.set $$class@jsconstructor.JsConstructorClass.JsConstructorSubclass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsconstructo...|__java_lang_String_<once>_@jsconstructor.JsConstructorClass.JsConstructorSubclass )(call $$getClassMetadata__java_lang_Class_<once>_@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor )))
+  (return (global.get $$class@jsconstructor.JsConstructorClass.JsConstructorSubclass))
+ )
+)
+
+;;; Class<?> JsConstructorSubclass.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.JsConstructorSubclass
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jsconstructor.JsConstructorClass.JsConstructorSubclass))
+ (local.set $this (ref.cast (ref $jsconstructor.JsConstructorClass.JsConstructorSubclass) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsconstructor.JsConstructorClass.JsConstructorSubclass ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.JsConstructorSubclass)
 
 ;;; Code for jsconstructor.JsConstructorClass.C [methods]
 
