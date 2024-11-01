@@ -161,6 +161,23 @@ public class GwtIncompatibleStripperTest {
   }
 
   @Test
+  public void testProcessEnumConstant() {
+    String before =
+        Joiner.on("\n")
+            .join("public enum Foo {", "  A,", "  @GwtIncompatible", "  B,", "  C;", "}");
+    String after =
+        Joiner.on("\n")
+            .join(
+                "public enum Foo {",
+                "  A,",
+                Strings.repeat(" ", "  @GwtIncompatible".length()),
+                Strings.repeat(" ", "  B,".length()),
+                "  C;",
+                "}");
+    assertEquals(after, GwtIncompatibleStripper.strip(before, "GwtIncompatible"));
+  }
+
+  @Test
   public void testProcessAnnotationMember() {
     String before =
         Joiner.on("\n")

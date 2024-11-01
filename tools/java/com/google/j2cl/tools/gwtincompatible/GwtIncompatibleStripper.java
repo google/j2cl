@@ -37,6 +37,7 @@ import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.CompilationUnit;
+import org.eclipse.jdt.core.dom.EnumConstantDeclaration;
 import org.eclipse.jdt.core.dom.ImportDeclaration;
 
 /**
@@ -81,12 +82,12 @@ public final class GwtIncompatibleStripper {
     }
 
     Map<String, String> compilerOptions = new HashMap<>();
-    compilerOptions.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_9);
-    compilerOptions.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, JavaCore.VERSION_9);
-    compilerOptions.put(JavaCore.COMPILER_COMPLIANCE, JavaCore.VERSION_9);
+    compilerOptions.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_11);
+    compilerOptions.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, JavaCore.VERSION_11);
+    compilerOptions.put(JavaCore.COMPILER_COMPLIANCE, JavaCore.VERSION_11);
 
     // Parse the file.
-    ASTParser parser = ASTParser.newParser(AST.JLS9);
+    ASTParser parser = ASTParser.newParser(AST.JLS11);
     parser.setCompilerOptions(compilerOptions);
     parser.setResolveBindings(false);
     parser.setSource(fileContent.toCharArray());
@@ -133,6 +134,17 @@ public final class GwtIncompatibleStripper {
       StringBuilder strippedCodeBuilder = new StringBuilder();
       for (char c : fileContent.substring(startPosition, endPosition).toCharArray()) {
         strippedCodeBuilder.append(Character.isWhitespace(c) ? c : ' ');
+      }
+      if (nodeToWrap instanceof EnumConstantDeclaration) {
+        // HACK: We assume that if there is a comma, it directly follows the enum constant and we
+        // remove it. In practice this should work for most cases since if there is a comma
+        // following the constant, the formatter will have it adjacent to the constant. If this is
+        // the last constant then it would not be followed by a comma but rather by a semicolon; and
+        // in this case it is ok to just remove the constant and leave the preceding comma.
+        if (fileContent.charAt(endPosition) == ',') {
+          strippedCodeBuilder.append(' ');
+          endPosition++;
+        }
       }
       newFileContent.append(strippedCodeBuilder);
       currentPosition = endPosition;
