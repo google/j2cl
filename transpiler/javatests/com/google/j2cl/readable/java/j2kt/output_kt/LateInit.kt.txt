@@ -64,5 +64,10 @@ open class LateInit<T: Any> {
  @ObjCName("J2ktJ2ktLateInit_Inner", exact = true)
  open inner class Inner internal constructor() {
   private lateinit var unmarkedInnerField: String
+
+  @ObjCName("J2ktJ2ktLateInit_Inner_InnerInner", exact = true)
+  open inner class InnerInner internal constructor() {
+   private lateinit var unmarkedInnerInnerField: String
+  }
  }
 }
