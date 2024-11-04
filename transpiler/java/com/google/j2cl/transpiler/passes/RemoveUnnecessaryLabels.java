@@ -23,6 +23,7 @@ import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.BreakOrContinueStatement;
 import com.google.j2cl.transpiler.ast.BreakStatement;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.ContinueStatement;
 import com.google.j2cl.transpiler.ast.DoWhileStatement;
 import com.google.j2cl.transpiler.ast.Label;
@@ -30,7 +31,6 @@ import com.google.j2cl.transpiler.ast.LabelReference;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.Statement;
-import com.google.j2cl.transpiler.ast.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -41,20 +41,20 @@ import java.util.Set;
 public class RemoveUnnecessaryLabels extends NormalizationPass {
 
   @Override
-  public void applyTo(Type type) {
-    removeDoWhileFalseLoops(type);
-    pushLabelsInward(type);
-    collapseNestedLabels(type);
-    removeLabelOnImplicitBreakOrContinueStatement(type);
-    removeUnreferencedLabels(type);
+  public void applyTo(CompilationUnit compilationUnit) {
+    removeDoWhileFalseLoops(compilationUnit);
+    pushLabelsInward(compilationUnit);
+    collapseNestedLabels(compilationUnit);
+    removeLabelOnImplicitBreakOrContinueStatement(compilationUnit);
+    removeUnreferencedLabels(compilationUnit);
   }
 
   /**
    * Remove loops of the form `do ... while(false)` since those are commonly inserted by
    * transformation of kotlin code.
    */
-  private static void removeDoWhileFalseLoops(Type type) {
-    type.accept(
+  private static void removeDoWhileFalseLoops(CompilationUnit compilationUnit) {
+    compilationUnit.accept(
         new AbstractRewriter() {
           // Collect the labels associated with `do {...} while (false)` loops to convert any
           // continue statements targetting the loop into break statements since in this situation
@@ -97,8 +97,8 @@ public class RemoveUnnecessaryLabels extends NormalizationPass {
    * Move labels applied on blocks to the last statement of the block if there is no break targeting
    * the label in the other statements of the block.
    */
-  private static void pushLabelsInward(Type type) {
-    type.accept(
+  private static void pushLabelsInward(CompilationUnit compilationUnit) {
+    compilationUnit.accept(
         new AbstractRewriter() {
           @Override
           public Node rewriteLabeledStatement(LabeledStatement labeledStatement) {
@@ -161,8 +161,8 @@ public class RemoveUnnecessaryLabels extends NormalizationPass {
    *   }
    * </code>
    */
-  private static void collapseNestedLabels(Type type) {
-    type.accept(
+  private static void collapseNestedLabels(CompilationUnit compilationUnit) {
+    compilationUnit.accept(
         new AbstractRewriter() {
           private final Map<Label, Label> labelReplacementMap = new HashMap<>();
 
@@ -214,8 +214,9 @@ public class RemoveUnnecessaryLabels extends NormalizationPass {
         });
   }
 
-  private static void removeLabelOnImplicitBreakOrContinueStatement(Type type) {
-    type.accept(
+  private static void removeLabelOnImplicitBreakOrContinueStatement(
+      CompilationUnit compilationUnit) {
+    compilationUnit.accept(
         new LabelAwareRewriter() {
           @Override
           public Node rewriteBreakOrContinueStatement(
@@ -233,8 +234,8 @@ public class RemoveUnnecessaryLabels extends NormalizationPass {
         });
   }
 
-  private static void removeUnreferencedLabels(Type type) {
-    type.accept(
+  private static void removeUnreferencedLabels(CompilationUnit compilationUnit) {
+    compilationUnit.accept(
         new AbstractRewriter() {
           private final Set<Label> labelsSeen = new HashSet<>();
 

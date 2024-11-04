@@ -16,7 +16,7 @@
 package com.google.j2cl.transpiler.passes;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
-import com.google.j2cl.transpiler.ast.Type;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 
@@ -27,8 +27,8 @@ import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
  */
 public class NormalizeVariableInitialization extends NormalizationPass {
   @Override
-  public void applyTo(Type type) {
-    type.accept(
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(
         new AbstractRewriter() {
           @Override
           public VariableDeclarationFragment rewriteVariableDeclarationFragment(

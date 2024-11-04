@@ -18,13 +18,13 @@ package com.google.j2cl.transpiler.passes;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.transpiler.ast.BreakOrContinueStatement;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Label;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.LoopStatement;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
-import com.google.j2cl.transpiler.ast.Type;
 
 /**
  * Assigns a label to each loop and switch that does not already have one, and makes all breaks and
@@ -34,8 +34,8 @@ import com.google.j2cl.transpiler.ast.Type;
 public class NormalizeLabels extends NormalizationPass {
 
   @Override
-  public void applyTo(Type type) {
-    type.accept(
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(
         new LabelAwareRewriter() {
           @Override
           protected Statement rewriteLoopStatement(
