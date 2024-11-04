@@ -343,12 +343,14 @@ public enum Backend {
           // Normalize multiexpressions again to remove unnecessary clutter, but run before
           // variable motion.
           NormalizeMultiExpressions::new,
-          MoveVariableDeclarationsToEnclosingBlock::new,
           RemoveUnneededJsDocCasts::new,
           NormalizeJsDocCastExpressions::new,
           NormalizeJsAwaitMethodInvocations::new,
           RemoveUnneededNotNullChecks::new,
           ImplementNotNullOperator::new,
+
+          // Needs to run after all passes that create variable declarations in multi-expressions.
+          MoveVariableDeclarationsToEnclosingBlock::new,
           NormalizeLabels::new,
           RemoveUnnecessaryLabels::new,
           RemoveUnreachableCode::new,

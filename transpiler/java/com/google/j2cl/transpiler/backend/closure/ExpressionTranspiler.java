@@ -18,7 +18,6 @@ package com.google.j2cl.transpiler.backend.closure;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
@@ -344,25 +343,8 @@ public final class ExpressionTranspiler {
       @Override
       public boolean enterMultiExpression(MultiExpression multiExpression) {
         List<Expression> expressions = multiExpression.getExpressions();
-        if (expressions.stream()
-            .anyMatch(Predicates.instanceOf(VariableDeclarationExpression.class))) {
-          // If the multiexpression declares variables enclosing in an anonymous function
-          // context.
-          sourceBuilder.append("( () => {");
-          for (Expression expression : expressions.subList(0, expressions.size() - 1)) {
-            // Top level expression no need for parens.
-            renderNoParens(expression);
-            sourceBuilder.append(";");
-          }
-          Expression returnValue = Iterables.getLast(expressions);
-          sourceBuilder.append(" return ");
-          // Return values never need enclosing parens.
-          renderNoParens(returnValue);
-          sourceBuilder.append(";})()");
-        } else {
-          checkArgument(expressions.size() > 1);
-          renderDelimitedAndCommaSeparated("(", ")", expressions);
-        }
+        checkArgument(expressions.size() > 1);
+        renderDelimitedAndCommaSeparated("(", ")", expressions);
         return false;
       }
 

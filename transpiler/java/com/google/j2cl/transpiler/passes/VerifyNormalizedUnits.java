@@ -43,6 +43,7 @@ import com.google.j2cl.transpiler.ast.MethodReference;
 import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
+import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SwitchCase;
 import com.google.j2cl.transpiler.ast.TryStatement;
 import com.google.j2cl.transpiler.ast.Type;
@@ -308,9 +309,10 @@ public class VerifyNormalizedUnits extends NormalizationPass {
           @Override
           public void exitVariableDeclarationExpression(
               VariableDeclarationExpression variableDeclarationExpression) {
-            if (variableDeclarationExpression.getFragments().isEmpty()) {
-              throw new IllegalStateException();
+            if (!verifyForWasm) {
+              checkState(getParent() instanceof Statement);
             }
+            checkState(!variableDeclarationExpression.getFragments().isEmpty());
             checkState(
                 variableDeclarationExpression.getFragments().stream()
                     .allMatch(f -> !f.getVariable().isParameter()));
