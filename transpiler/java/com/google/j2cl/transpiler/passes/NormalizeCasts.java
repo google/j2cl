@@ -175,7 +175,7 @@ public class NormalizeCasts extends NormalizationPass {
       castTypeDescriptor = TypeDescriptors.getEnumBoxType(castTypeDescriptor);
     }
     return JsDocCastExpression.newBuilder()
-        .setCastType(castTypeDescriptor)
+        .setCastTypeDescriptor(castTypeDescriptor)
         .setExpression(expression)
         .build();
   }

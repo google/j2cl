@@ -127,7 +127,7 @@ public class NormalizeJsDocCastExpressions extends NormalizationPass {
             // Replace out of bounds type variables that might have been left by the frontend
             // if the inferrence was not needed for Java compilation.
             return JsDocCastExpression.Builder.from(jsDocCastExpression)
-                .setCastType(
+                .setCastTypeDescriptor(
                     castTypeDescriptor.specializeTypeVariables(
                         typeVariable ->
                             replaceOutofScopeTypeVariable(getCurrentMember(), typeVariable)))

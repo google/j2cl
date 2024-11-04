@@ -190,7 +190,7 @@ public class InsertErasureTypeSafetyCasts extends NormalizationPass {
       return isUncheckedCast(expression)
           ? JsDocCastExpression.newBuilder()
               .setExpression(expression)
-              .setCastType(toTypeDescriptor)
+              .setCastTypeDescriptor(toTypeDescriptor)
               .build()
           : CastExpression.newBuilder()
               .setExpression(expression)

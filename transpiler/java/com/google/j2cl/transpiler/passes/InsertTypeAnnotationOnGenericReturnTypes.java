@@ -63,7 +63,7 @@ public class InsertTypeAnnotationOnGenericReturnTypes extends NormalizationPass 
                 && isReturnSpecialized) {
               return JsDocCastExpression.newBuilder()
                   .setExpression(methodCall)
-                  .setCastType(methodCall.getTypeDescriptor())
+                  .setCastTypeDescriptor(methodCall.getTypeDescriptor())
                   .build();
             }
             return methodCall;

@@ -160,7 +160,7 @@ public class OptimizeXplatForEach extends NormalizationPass {
                 JsDocCastExpression.newBuilder()
                     .setExpression(
                         RuntimeMethods.createNumberCall(propertyVariable.createReference()))
-                    .setCastType(PrimitiveTypes.INT)
+                    .setCastTypeDescriptor(PrimitiveTypes.INT)
                     .build())
             .build();
 
@@ -210,7 +210,7 @@ public class OptimizeXplatForEach extends NormalizationPass {
     return ForEachStatement.Builder.from(forEachStatement)
         .setIterableExpression(
             JsDocCastExpression.newBuilder()
-                .setCastType(
+                .setCastTypeDescriptor(
                     ArrayTypeDescriptor.newBuilder().setComponentTypeDescriptor(valueType).build())
                 .setExpression(target)
                 .build())

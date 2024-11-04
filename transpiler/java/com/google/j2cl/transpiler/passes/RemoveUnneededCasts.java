@@ -79,7 +79,7 @@ public class RemoveUnneededCasts extends NormalizationPass {
             JsDocCastExpression jsDocCast =
                 JsDocCastExpression.newBuilder()
                     .setExpression(castExpression.getExpression())
-                    .setCastType(castExpression.getTypeDescriptor())
+                    .setCastTypeDescriptor(castExpression.getTypeDescriptor())
                     .build();
             replaceIn(thenStatement, castExpression, jsDocCast);
           }

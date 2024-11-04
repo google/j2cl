@@ -75,7 +75,7 @@ public class ImplementInstanceOfs extends NormalizationPass {
               type.getTypeDescriptor(),
               // TODO(b/79389970): remove cast after b/79389970 is handled in Closure.
               JsDocCastExpression.newBuilder()
-                  .setCastType(TypeDescriptors.get().nativeFunction)
+                  .setCastTypeDescriptor(TypeDescriptors.get().nativeFunction)
                   .setExpression(new JavaScriptConstructorReference(type.getDeclaration()))
                   .build()));
     } else {

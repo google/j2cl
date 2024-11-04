@@ -163,7 +163,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
       Expression expression, TypeDescriptor typeDescriptor) {
     return JsDocCastExpression.newBuilder()
         .setExpression(expression)
-        .setCastType(typeDescriptor.toNonNullable())
+        .setCastTypeDescriptor(typeDescriptor.toNonNullable())
         .build();
   }
 }

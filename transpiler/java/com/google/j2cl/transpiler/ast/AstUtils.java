@@ -912,7 +912,7 @@ public final class AstUtils {
           // by passes based on ContextRewriter.
           varargsParameterDescriptor.isDoNotAutobox()
               ? JsDocCastExpression.newBuilder()
-                  .setCastType(varargsTypeDescriptor.getComponentTypeDescriptor())
+                  .setCastTypeDescriptor(varargsTypeDescriptor.getComponentTypeDescriptor())
                   .setExpression(arguments.get(i))
                   .build()
               : arguments.get(i));
@@ -1147,7 +1147,7 @@ public final class AstUtils {
     // and conversions such as boxing are correctly preserved (e.g. if the expression was assigned
     // to an Integer variable).
     return JsDocCastExpression.newBuilder()
-        .setCastType(valueTypeDescriptor)
+        .setCastTypeDescriptor(valueTypeDescriptor)
         .setExpression(
             CastExpression.newBuilder()
                 .setCastTypeDescriptor(jsEnumExpression.getTypeDescriptor())

@@ -108,7 +108,7 @@ public class InsertJsDocCastsToTypeBounds extends NormalizationPass {
         && !inferredType.isIntersection()
         && !TypeDescriptors.isJavaLangObject(inferredType)) {
       return JsDocCastExpression.newBuilder()
-          .setCastType(inferredType)
+          .setCastTypeDescriptor(inferredType)
           .setExpression(expression)
           .build();
     }

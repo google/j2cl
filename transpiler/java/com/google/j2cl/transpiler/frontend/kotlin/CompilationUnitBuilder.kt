@@ -1234,7 +1234,7 @@ class CompilationUnitBuilder(
           // the cast can not be replaced by a JsDocCastExpression.
           JsDocCastExpression.newBuilder()
             .setExpression(expression)
-            .setCastType(testTypeDescriptor)
+            .setCastTypeDescriptor(testTypeDescriptor)
             .build()
         } else {
           CastExpression.newBuilder()

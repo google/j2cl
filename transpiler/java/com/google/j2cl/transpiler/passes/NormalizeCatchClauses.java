@@ -186,7 +186,7 @@ public class NormalizeCatchClauses extends NormalizationPass {
                 catchVariable,
                 JsDocCastExpression.newBuilder()
                     .setExpression(exceptionVariable.createReference())
-                    .setCastType(catchVariable.getTypeDescriptor())
+                    .setCastTypeDescriptor(catchVariable.getTypeDescriptor())
                     .build())
             .build()
             .makeStatement(catchBody.getSourcePosition());
