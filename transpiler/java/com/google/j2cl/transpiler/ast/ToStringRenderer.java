@@ -436,11 +436,11 @@ class ToStringRenderer {
 
       @Override
       public boolean enterSwitchCase(SwitchCase switchCase) {
-        if (switchCase.getCaseExpression() != null) {
+        if (switchCase.isDefault()) {
+          print("default");
+        } else {
           print("case ");
           accept(switchCase.getCaseExpression());
-        } else {
-          print("default");
         }
         print(":");
         indent();

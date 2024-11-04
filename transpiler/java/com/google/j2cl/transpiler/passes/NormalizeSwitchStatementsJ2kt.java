@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.passes;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.auto.value.AutoValue;
+import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Streams;
@@ -172,8 +173,8 @@ public class NormalizeSwitchStatementsJ2kt extends NormalizationPass {
     // not have fallthroughs and can be arbitrarily reordered.
     cases =
         Streams.concat(
-                cases.stream().filter(it -> it.getCaseExpression() != null),
-                cases.stream().filter(it -> it.getCaseExpression() == null))
+                cases.stream().filter(Predicates.not(SwitchCase::isDefault)),
+                cases.stream().filter(SwitchCase::isDefault))
             .collect(toImmutableList());
 
     Statement rewrittenSwitchStatement =
@@ -287,7 +288,7 @@ public class NormalizeSwitchStatementsJ2kt extends NormalizationPass {
     return casesExceptLast.stream()
         .allMatch(
             switchCase ->
-                switchCase.getCaseExpression() != null
+                !switchCase.isDefault()
                     && (switchCase.getStatements().isEmpty()
                         || breaksOutOfSwitchStatement(switchCase.getStatements())));
   }
@@ -334,8 +335,7 @@ public class NormalizeSwitchStatementsJ2kt extends NormalizationPass {
   }
 
   private static SwitchStatement ensureExhaustive(SwitchStatement switchStatement) {
-    if (switchStatement.getCases().stream()
-        .anyMatch(switchCase -> switchCase.getCaseExpression() == null)) {
+    if (switchStatement.getCases().stream().anyMatch(SwitchCase::isDefault)) {
       return switchStatement;
     }
 
