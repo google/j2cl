@@ -52,6 +52,7 @@ import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.StringLiteral
 import com.google.j2cl.transpiler.ast.SuperReference
+import com.google.j2cl.transpiler.ast.SwitchExpression
 import com.google.j2cl.transpiler.ast.ThisReference
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDeclaration
@@ -172,6 +173,7 @@ internal data class ExpressionRenderer(
       is PostfixExpression -> postfixExpressionSource(expression)
       is PrefixExpression -> prefixExpressionSource(expression)
       is SuperReference -> superReferenceSource()
+      is SwitchExpression -> switchExpressionSource(expression)
       is ThisReference -> thisReferenceSource(expression)
       is VariableDeclarationExpression -> variableDeclarationExpressionSource(expression)
       is VariableReference -> variableReferenceSource(expression)
@@ -565,6 +567,31 @@ internal data class ExpressionRenderer(
         ?.let { inAngleBrackets(nameRenderer.qualifiedNameSource(it, asSuperType = true)) }
         .orEmpty(),
       qualifierTypeDescriptor?.let { labelReferenceSource(it) }.orEmpty(),
+    )
+
+  private fun switchExpressionSource(switchExpression: SwitchExpression): Source =
+    spaceSeparated(
+      KotlinSource.WHEN_KEYWORD,
+      inParentheses(expressionSource(switchExpression.expression)),
+      block(
+        newLineSeparated(
+          switchExpression.cases.map { case ->
+            if (case.isDefault) {
+              infix(
+                ELSE_KEYWORD,
+                ARROW_OPERATOR,
+                block(statementRenderer.statementsSource(case.statements)),
+              )
+            } else {
+              infix(
+                commaSeparated(case.caseExpressions.map(::expressionSource)),
+                ARROW_OPERATOR,
+                block(statementRenderer.statementsSource(case.statements)),
+              )
+            }
+          }
+        )
+      ),
     )
 
   private fun thisReferenceSource(thisReference: ThisReference): Source =

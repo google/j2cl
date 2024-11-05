@@ -32,7 +32,6 @@ import com.google.j2cl.transpiler.ast.LabeledStatement
 import com.google.j2cl.transpiler.ast.LocalClassDeclarationStatement
 import com.google.j2cl.transpiler.ast.ReturnStatement
 import com.google.j2cl.transpiler.ast.Statement
-import com.google.j2cl.transpiler.ast.SwitchStatement
 import com.google.j2cl.transpiler.ast.SynchronizedStatement
 import com.google.j2cl.transpiler.ast.ThrowStatement
 import com.google.j2cl.transpiler.ast.TryStatement
@@ -41,7 +40,6 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
 import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.ast.WhileStatement
-import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.ARROW_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.AT_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.BREAK_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.CATCH_KEYWORD
@@ -55,7 +53,6 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.IN_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.RETURN_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.THROW_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.TRY_KEYWORD
-import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.WHEN_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.WHILE_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.assignment
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.at
@@ -64,7 +61,6 @@ import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.colonSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inAngleBrackets
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParentheses
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.infix
@@ -120,7 +116,6 @@ internal data class StatementRenderer(
       is LabeledStatement -> labeledStatementSource(statement)
       is LocalClassDeclarationStatement -> localClassDeclarationStatementSource(statement)
       is ReturnStatement -> returnStatementSource(statement)
-      is SwitchStatement -> switchStatementSource(statement)
       is SynchronizedStatement -> synchronizedStatementSource(statement)
       is WhileStatement -> whileStatementSource(statement)
       is ThrowStatement -> throwStatementSource(statement)
@@ -210,31 +205,6 @@ internal data class StatementRenderer(
     spaceSeparated(
       join(RETURN_KEYWORD, currentReturnLabelIdentifier?.let { labelReference(it) }.orEmpty()),
       returnStatement.expression?.let(::expressionSource).orEmpty(),
-    )
-
-  private fun switchStatementSource(switchStatement: SwitchStatement): Source =
-    spaceSeparated(
-      WHEN_KEYWORD,
-      inParentheses(expressionSource(switchStatement.expression)),
-      block(
-        newLineSeparated(
-          // TODO(b/263161219): Represent WhenStatement as a data class, convert from
-          // SwitchStatement and render as Source.
-          run {
-            switchStatement.cases.map { case ->
-              if (case.isDefault) {
-                infix(ELSE_KEYWORD, ARROW_OPERATOR, block(statementsSource(case.statements)))
-              } else {
-                infix(
-                  commaSeparated(case.caseExpressions.map(::expressionSource)),
-                  ARROW_OPERATOR,
-                  block(statementsSource(case.statements)),
-                )
-              }
-            }
-          }
-        )
-      ),
     )
 
   private fun synchronizedStatementSource(synchronizedStatement: SynchronizedStatement): Source =
