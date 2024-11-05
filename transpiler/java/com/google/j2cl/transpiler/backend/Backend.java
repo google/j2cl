@@ -92,7 +92,6 @@ import com.google.j2cl.transpiler.passes.J2ktRestrictionsChecker;
 import com.google.j2cl.transpiler.passes.JsInteropRestrictionsChecker;
 import com.google.j2cl.transpiler.passes.MakeVariablesFinal;
 import com.google.j2cl.transpiler.passes.MoveNestedClassesToTop;
-import com.google.j2cl.transpiler.passes.MoveVariableDeclarationsToEnclosingBlock;
 import com.google.j2cl.transpiler.passes.NormalizationPass;
 import com.google.j2cl.transpiler.passes.NormalizeArrayAccesses;
 import com.google.j2cl.transpiler.passes.NormalizeArrayCreations;
@@ -176,13 +175,13 @@ import com.google.j2cl.transpiler.passes.RemoveWasmAnnotatedMethodBodies;
 import com.google.j2cl.transpiler.passes.ResolveCaptures;
 import com.google.j2cl.transpiler.passes.ResolveImplicitInstanceQualifiers;
 import com.google.j2cl.transpiler.passes.ResolveImplicitStaticQualifiers;
-import com.google.j2cl.transpiler.passes.RestoreVariableScoping;
 import com.google.j2cl.transpiler.passes.RewriteAssignmentExpressions;
 import com.google.j2cl.transpiler.passes.RewriteReferenceEqualityOperations;
 import com.google.j2cl.transpiler.passes.RewriteShortcutOperators;
 import com.google.j2cl.transpiler.passes.RewriteUnaryExpressions;
 import com.google.j2cl.transpiler.passes.StaticallyEvaluateStringComparison;
 import com.google.j2cl.transpiler.passes.StaticallyEvaluateStringConcatenation;
+import com.google.j2cl.transpiler.passes.VariableDeclarationHoister;
 import com.google.j2cl.transpiler.passes.VerifyNormalizedUnits;
 import com.google.j2cl.transpiler.passes.VerifyParamAndArgCounts;
 import com.google.j2cl.transpiler.passes.VerifyReferenceScoping;
@@ -219,7 +218,6 @@ public enum Backend {
           NormalizeForEachIterable::new,
           // Must run after NormalizeForEachIterable.
           () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ true),
-          RestoreVariableScoping::new,
           NormalizeSuperMemberReferences::new,
           RecoverShortcutBooleanOperator::new);
     }
@@ -242,6 +240,7 @@ public enum Backend {
           VerifySingleAstReference::new,
           VerifyParamAndArgCounts::new,
           VerifyReferenceScoping::new,
+
           // Passes that change the class hierarchy or nesting structure (and passes needed for
           // those).
           OptimizeAnonymousInnerClassesToFunctionExpressions::new,
@@ -351,7 +350,7 @@ public enum Backend {
           ImplementNotNullOperator::new,
 
           // Needs to run after all passes that create variable declarations in multi-expressions.
-          MoveVariableDeclarationsToEnclosingBlock::new,
+          () -> new VariableDeclarationHoister(/* allowDeclarationsInExpressions= */ false),
           NormalizeLabels::new,
           RemoveUnnecessaryLabels::new,
           RemoveUnreachableCode::new,
@@ -369,7 +368,7 @@ public enum Backend {
           // Post-verifications
           VerifySingleAstReference::new,
           VerifyParamAndArgCounts::new,
-          VerifyReferenceScoping::new,
+          VerifyReferenceScoping::allowOnlyStatementScopes,
           VerifyNormalizedUnits::new);
     }
 
@@ -665,6 +664,7 @@ public enum Backend {
           VerifySingleAstReference::new,
           VerifyParamAndArgCounts::new,
           VerifyReferenceScoping::new
+
           // TODO(b/283154833): Add the invariants for modular_wasm
           // () -> new VerifyNormalizedUnits(/* verifyForWasm= **/ true)
           );
@@ -723,7 +723,7 @@ public enum Backend {
           // after MakeVariablesFinal.
           NormalizeForEachStatementJ2kt::new,
           NormalizeStaticMemberQualifiers::new,
-          () -> new MoveVariableDeclarationsToEnclosingBlock(/* fromSwitchStatementsOnly= */ true),
+          () -> new VariableDeclarationHoister(/* allowDeclarationsInExpressions= */ true),
           NormalizeMultiExpressions::new,
           () -> new ExpandCompoundAssignments(/* expandAll= */ true),
           RewriteAssignmentExpressions::new,
@@ -773,7 +773,7 @@ public enum Backend {
 
           // Verification
           VerifySingleAstReference::new,
-          VerifyReferenceScoping::new);
+          VerifyReferenceScoping::allowExpressionScopes);
     }
 
     @Override

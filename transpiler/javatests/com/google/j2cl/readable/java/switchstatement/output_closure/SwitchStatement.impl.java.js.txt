@@ -61,11 +61,12 @@ class SwitchStatement extends j_l_Object {
  }
  /** @nodts */
  static m_testSwitchVariableDeclarations__void() {
-  let /** number */ unassigned, /** number */ unassigned2, /** number */ i, /** number */ j, /** number */ b, /** number */ i_1;
+  let /** number */ i;
   switch (3) {
    case 1: 
+    let /** number */ unassigned, /** number */ unassigned2;
     i = 0;
-    (j = 2, b = j + 1 | 0);
+    let j = 2, b = j + 1 | 0;
     break;
    case 3: 
     i = 3;
@@ -74,7 +75,7 @@ class SwitchStatement extends j_l_Object {
   }
   switch (5) {
    case 5: 
-    i_1 = 1;
+    let i_1 = 1;
     break;
   }
   $Asserts.$assert(false);
