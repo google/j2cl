@@ -67,6 +67,7 @@ import com.google.j2cl.transpiler.ast.PostfixOperator;
 import com.google.j2cl.transpiler.ast.PrefixExpression;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Statement;
+import com.google.j2cl.transpiler.ast.SwitchExpression;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
 import com.google.j2cl.transpiler.ast.SynchronizedStatement;
 import com.google.j2cl.transpiler.ast.ThisOrSuperReference;
@@ -78,6 +79,7 @@ import com.google.j2cl.transpiler.ast.UnaryExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.VariableReference;
+import com.google.j2cl.transpiler.ast.YieldStatement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nullable;
@@ -691,6 +693,20 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   }
 
   @Override
+  public YieldStatement rewriteYieldStatement(YieldStatement yieldStatement) {
+    // assignment context
+    Expression expression =
+        rewriteTypeConversionContextWithoutDeclaration(
+            getEnclosingSwitchExpression().getTypeDescriptor(), yieldStatement.getExpression());
+
+    if (expression == yieldStatement.getExpression()) {
+      return yieldStatement;
+    }
+
+    return YieldStatement.Builder.from(yieldStatement).setExpression(expression).build();
+  }
+
+  @Override
   public Statement rewriteStatement(Statement statement) {
     // Every statement needs to be handled explicitly or excluded here.
     if (statement instanceof ExpressionStatement
@@ -705,6 +721,19 @@ public final class ConversionContextVisitor extends AbstractRewriter {
       return statement;
     }
     throw new IllegalStateException();
+  }
+
+  @Override
+  public SwitchExpression rewriteSwitchExpression(SwitchExpression switchExpression) {
+
+    Expression expression =
+        contextRewriter.rewriteSwitchSubjectContext(switchExpression.getExpression());
+
+    if (expression == switchExpression.getExpression()) {
+      return switchExpression;
+    }
+
+    return SwitchExpression.Builder.from(switchExpression).setExpression(expression).build();
   }
 
   @Override
@@ -770,6 +799,10 @@ public final class ConversionContextVisitor extends AbstractRewriter {
 
   private MethodLike getEnclosingMethodLike() {
     return (MethodLike) getParent(MethodLike.class::isInstance);
+  }
+
+  private SwitchExpression getEnclosingSwitchExpression() {
+    return (SwitchExpression) getParent(SwitchExpression.class::isInstance);
   }
 
   private Expression rewriteTypeConversionContextWithoutDeclaration(

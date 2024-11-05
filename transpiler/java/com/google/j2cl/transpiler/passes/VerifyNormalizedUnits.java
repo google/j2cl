@@ -45,6 +45,7 @@ import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SwitchCase;
+import com.google.j2cl.transpiler.ast.SwitchExpression;
 import com.google.j2cl.transpiler.ast.TryStatement;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
@@ -52,6 +53,7 @@ import com.google.j2cl.transpiler.ast.TypeLiteral;
 import com.google.j2cl.transpiler.ast.UnaryExpression;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
+import com.google.j2cl.transpiler.ast.YieldStatement;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -291,6 +293,18 @@ public class VerifyNormalizedUnits extends NormalizationPass {
                         || caseExpression instanceof NumberLiteral);
               }
             }
+          }
+
+          @Override
+          public void exitSwitchExpression(SwitchExpression switchExpression) {
+            // Switch expressions are expected to be normalized away.
+            throw new IllegalStateException();
+          }
+
+          @Override
+          public void exitYieldStatement(YieldStatement yieldStatement) {
+            // Yield statements are expected to be normalized away.
+            throw new IllegalStateException();
           }
 
           @Override
