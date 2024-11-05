@@ -35,7 +35,10 @@ public class KotlinKeywords {
   public int val = 0;
   public int var = 0;
   public int when = 0;
-  
+
+  public int __ = 0;
+  public int ___ = 0;
+
   public int test(int in) {
     int as = this.as + in;
     int delete = this.delete + in;
@@ -49,6 +52,9 @@ public class KotlinKeywords {
     int val = this.val + in;
     int var = this.var + in;
     int when = this.when + in;
+
+    int __ = this.__ + in;
+    int ___ = this.___ + in;
 
     int temp = OVERFLOW + DOMAIN + in;
 

@@ -33,7 +33,11 @@ private val String.identifierString
       "___EMPTY___"
     } else {
       replace("$", "___").let { withoutDollars ->
-        withoutDollars.letIf(Keywords.isHard(withoutDollars) || !withoutDollars.isValidIdentifier) {
+        withoutDollars.letIf(
+          Keywords.isHard(withoutDollars) ||
+            Keywords.isReserved(withoutDollars) ||
+            !withoutDollars.isValidIdentifier
+        ) {
           withoutDollars.inBackTicks
         }
       }

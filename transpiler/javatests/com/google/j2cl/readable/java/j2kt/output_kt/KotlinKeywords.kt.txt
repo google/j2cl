@@ -80,6 +80,14 @@ open class KotlinKeywords {
  @ObjCName("when_")
  var `when`: Int = 0
 
+ @JvmField
+ @ObjCName("___")
+ var `__`: Int = 0
+
+ @JvmField
+ @ObjCName("____")
+ var `___`: Int = 0
+
  @ObjCName("test")
  open fun test(
   @ObjCName("withInt") `in`: Int
@@ -96,6 +104,8 @@ open class KotlinKeywords {
   val `val`: Int = this.`val` + `in`
   val `var`: Int = this.`var` + `in`
   val `when`: Int = this.`when` + `in`
+  val `__`: Int = this.`__` + `in`
+  val `___`: Int = this.`___` + `in`
   val temp: Int = KotlinKeywords.OVERFLOW + KotlinKeywords.DOMAIN + `in`
   return KotlinKeywords.BIG_ENDIAN + KotlinKeywords.LITTLE_ENDIAN + KotlinKeywords.NULL + `in`
  }
