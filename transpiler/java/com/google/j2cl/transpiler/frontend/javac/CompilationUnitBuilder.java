@@ -57,6 +57,7 @@ import com.google.j2cl.transpiler.ast.Label;
 import com.google.j2cl.transpiler.ast.LabelReference;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.Literal;
+import com.google.j2cl.transpiler.ast.LocalClassDeclarationStatement;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
@@ -148,7 +149,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 import javax.annotation.Nullable;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
@@ -168,6 +168,22 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     this.environment = environment;
   }
 
+  /**
+   * Constructs a type and maintains the type stack.
+   *
+   * @return The created {@link Type}.
+   */
+  private Type convertType(
+      ClassSymbol typeElement, List<JCTree> bodyDeclarations, JCTree sourcePositionNode) {
+    Type type = createType(typeElement, sourcePositionNode);
+    return processEnclosedBy(
+        type,
+        () -> {
+          convertTypeBody(type, bodyDeclarations);
+          return type;
+        });
+  }
+
   @Nullable
   private Type createType(ClassSymbol typeElement, JCTree sourcePositionNode) {
     if (typeElement == null) {
@@ -182,35 +198,12 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         typeDeclaration);
   }
 
-  /**
-   * Constructs a type, maintains the type stack and let's the caller to do additional work by
-   * supplying a {@code typeProcessor}.
-   *
-   * @return {T} the value returned by {@code typeProcessor}
-   */
-  private <T> T convertAndAddType(
-      ClassSymbol typeElement,
-      List<JCTree> bodyDeclarations,
-      JCTree sourcePositionNode,
-      Function<Type, T> typeProcessor) {
-    Type type = createType(typeElement, sourcePositionNode);
-    getCurrentCompilationUnit().addType(type);
-    return processEnclosedBy(
-        type,
-        () -> {
-          ;
-          convertTypeBody(type, bodyDeclarations);
-          return typeProcessor.apply(type);
-        });
-  }
-
   private Type convertClassDeclaration(JCClassDecl classDecl) {
     return convertClassDeclaration(classDecl, classDecl);
   }
 
   private Type convertClassDeclaration(JCClassDecl classDecl, JCTree sourcePositionNode) {
-    return convertAndAddType(
-        classDecl.sym, classDecl.getMembers(), sourcePositionNode, type -> null);
+    return convertType(classDecl.sym, classDecl.getMembers(), sourcePositionNode);
   }
 
   private void convertTypeBody(Type type, List<JCTree> bodyDeclarations) {
@@ -245,7 +238,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       } else if (bodyDeclaration instanceof JCClassDecl) {
         // Nested class
         JCClassDecl nestedTypeDeclaration = (JCClassDecl) bodyDeclaration;
-        convertClassDeclaration(nestedTypeDeclaration);
+        type.addType(convertClassDeclaration(nestedTypeDeclaration));
       } else {
         throw internalCompilerError(
             "Unimplemented translation for BodyDeclaration type: %s.",
@@ -579,8 +572,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       case BREAK:
         return convertBreak((JCBreak) jcStatement);
       case CLASS:
-        convertClassDeclaration((JCClassDecl) jcStatement);
-        return null;
+        return new LocalClassDeclarationStatement(
+            convertClassDeclaration((JCClassDecl) jcStatement), getSourcePosition(jcStatement));
       case CONTINUE:
         return convertContinue((JCContinue) jcStatement);
       case DO_WHILE_LOOP:
@@ -1296,7 +1289,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             javacUnit.getPackageName() == null ? "" : javacUnit.getPackageName().toString()));
     for (JCTree tree : javacUnit.getTypeDecls()) {
       if (tree instanceof JCClassDecl) {
-        convertClassDeclaration((JCClassDecl) tree);
+        getCurrentCompilationUnit().addType(convertClassDeclaration((JCClassDecl) tree));
       }
     }
     return getCurrentCompilationUnit();
