@@ -219,32 +219,17 @@ internal data class StatementRenderer(
       block(
         newLineSeparated(
           // TODO(b/263161219): Represent WhenStatement as a data class, convert from
-          // SwitchStatement
-          // and render as Source.
+          // SwitchStatement and render as Source.
           run {
-            val caseExpressions = mutableListOf<Expression>()
             switchStatement.cases.map { case ->
-              val caseExpression = case.caseExpression
-              if (caseExpression == null) {
-                // It's OK to skip empty cases, since they will fall-through to the default case,
-                // and
-                // since
-                // these are case clauses from Java, their evaluation does never have side effects.
-                caseExpressions.clear()
+              if (case.isDefault) {
                 infix(ELSE_KEYWORD, ARROW_OPERATOR, block(statementsSource(case.statements)))
               } else {
-                caseExpressions.add(caseExpression)
-                val caseStatements = case.statements
-                if (caseStatements.isNotEmpty()) {
-                  infix(
-                      commaSeparated(caseExpressions.map(::expressionSource)),
-                      ARROW_OPERATOR,
-                      block(statementsSource(caseStatements)),
-                    )
-                    .also { caseExpressions.clear() }
-                } else {
-                  Source.EMPTY
-                }
+                infix(
+                  commaSeparated(case.caseExpressions.map(::expressionSource)),
+                  ARROW_OPERATOR,
+                  block(statementsSource(case.statements)),
+                )
               }
             }
           }

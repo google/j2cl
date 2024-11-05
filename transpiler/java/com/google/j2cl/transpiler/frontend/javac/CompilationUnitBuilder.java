@@ -467,11 +467,18 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
                 .map(
                     caseClause ->
                         SwitchCase.newBuilder()
-                            .setCaseExpression(convertExpressionOrNull(caseClause.getExpression()))
+                            .setCaseExpressions(convertExpressionToList(caseClause.getExpression()))
                             .setStatements(convertStatements(caseClause.getStatements()))
                             .build())
                 .collect(toImmutableList()))
         .build();
+  }
+
+  private List<Expression> convertExpressionToList(JCExpression expression) {
+    if (expression == null) {
+      return ImmutableList.of();
+    }
+    return ImmutableList.of(convertExpression(expression));
   }
 
   private ThrowStatement convertThrow(JCThrow statement) {

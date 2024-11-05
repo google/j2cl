@@ -161,6 +161,7 @@ import com.google.j2cl.transpiler.passes.PropagateConstants;
 import com.google.j2cl.transpiler.passes.PropagateNullabilityJ2kt;
 import com.google.j2cl.transpiler.passes.RecoverShortcutBooleanOperator;
 import com.google.j2cl.transpiler.passes.RemoveCustomIsInstanceMethods;
+import com.google.j2cl.transpiler.passes.RemoveEmptyFallthroughSwitchCases;
 import com.google.j2cl.transpiler.passes.RemoveNameFromJsEnums;
 import com.google.j2cl.transpiler.passes.RemoveNativeTypes;
 import com.google.j2cl.transpiler.passes.RemoveNestedBlocks;
@@ -700,6 +701,7 @@ public enum Backend {
           VerifySingleAstReference::new,
           VerifyParamAndArgCounts::new,
           VerifyReferenceScoping::new,
+          RemoveEmptyFallthroughSwitchCases::new,
 
           // Normalizations
           FixJavaKotlinMethodOverrideMismatch::new,

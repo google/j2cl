@@ -250,31 +250,25 @@ public class NormalizeSwitchStatementsJ2kt extends NormalizationPass {
   /** Convert switch case expressions to be of the same type as switch expression. */
   private static SwitchStatement normalizeSwitchCaseTypes(SwitchStatement switchStatement) {
     TypeDescriptor targetTypeDescriptor = switchStatement.getExpression().getTypeDescriptor();
-    return SwitchStatement.Builder.from(switchStatement)
-        .setCases(
-            switchStatement.getCases().stream()
-                .map(
-                    switchCase -> convertSwitchCaseExpressionType(switchCase, targetTypeDescriptor))
-                .collect(toImmutableList()))
-        .build();
+    switchStatement
+        .getCases()
+        .forEach(switchCase -> convertSwitchCaseExpressionType(switchCase, targetTypeDescriptor));
+    return switchStatement;
   }
 
-  private static SwitchCase convertSwitchCaseExpressionType(
+  private static void convertSwitchCaseExpressionType(
       SwitchCase switchCase, TypeDescriptor targetTypeDescriptor) {
-    Expression caseExpression = switchCase.getCaseExpression();
-    if (caseExpression == null) {
-      return switchCase;
-    }
+    List<Expression> caseExpressions = switchCase.getCaseExpressions();
+    for (int i = 0; i < caseExpressions.size(); i++) {
+      Expression caseExpression = caseExpressions.get(i);
 
-    if (!(caseExpression instanceof NumberLiteral)) {
-      return switchCase;
+      if (caseExpression instanceof NumberLiteral) {
+        NumberLiteral literal = (NumberLiteral) caseExpression;
+        caseExpressions.set(
+            i,
+            new NumberLiteral((PrimitiveTypeDescriptor) targetTypeDescriptor, literal.getValue()));
+      }
     }
-
-    NumberLiteral literal = (NumberLiteral) caseExpression;
-    return SwitchCase.Builder.from(switchCase)
-        .setCaseExpression(
-            new NumberLiteral((PrimitiveTypeDescriptor) targetTypeDescriptor, literal.getValue()))
-        .build();
   }
 
   /**

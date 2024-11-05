@@ -283,12 +283,13 @@ public class VerifyNormalizedUnits extends NormalizationPass {
           @Override
           public void exitSwitchCase(SwitchCase switchCase) {
             if (verifyForWasm) {
-              // The only expressions allowed in a switch case are strings and number literals.
-              Expression caseExpression = switchCase.getCaseExpression();
-              checkState(
-                  switchCase.isDefault()
-                      || TypeDescriptors.isJavaLangString(caseExpression.getTypeDescriptor())
-                      || caseExpression instanceof NumberLiteral);
+              for (Expression caseExpression : switchCase.getCaseExpressions()) {
+                // The only expressions allowed in a switch case are strings and number literals.
+                checkState(
+                    switchCase.isDefault()
+                        || TypeDescriptors.isJavaLangString(caseExpression.getTypeDescriptor())
+                        || caseExpression instanceof NumberLiteral);
+              }
             }
           }
 

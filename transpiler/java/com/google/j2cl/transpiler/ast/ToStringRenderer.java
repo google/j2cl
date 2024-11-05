@@ -440,7 +440,7 @@ class ToStringRenderer {
           print("default");
         } else {
           print("case ");
-          accept(switchCase.getCaseExpression());
+          printSeparated(", ", switchCase.getCaseExpressions());
         }
         print(":");
         indent();

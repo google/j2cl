@@ -543,20 +543,15 @@ open class SwitchStatement {
   SWITCH@ do {
    CASE@ do {
     CASE_1@ do {
-     CASE_2@ do {
-      when (i) {
-       1 -> {
-        break@CASE_2
-       }
-       3 -> {
-        break@CASE
-       }
-       else -> {
-        break@CASE_1
-       }
+     when (i) {
+      3 -> {
+       break@CASE
       }
-      break@SWITCH
-     } while (false)
+      else -> {
+       break@CASE_1
+      }
+     }
+     break@SWITCH
     } while (false)
     result = result + 10
     break@SWITCH
@@ -570,28 +565,16 @@ open class SwitchStatement {
  private fun testDefaultNotLast_fallThroughDefault(i: Int): Int {
   var result: Int = 0
   SWITCH@ do {
-   CASE@ do {
-    CASE_1@ do {
-     CASE_2@ do {
-      when (i) {
-       1 -> {
-        break@CASE_2
-       }
-       3 -> {
-        break@CASE
-       }
-       else -> {
-        break@CASE_1
-       }
-      }
-      break@SWITCH
-     } while (false)
+   when (i) {
+    1 -> {
      result = result + 10
      break@SWITCH
-    } while (false)
-   } while (false)
-   result = result + 100
-   break@SWITCH
+    }
+    else -> {
+     result = result + 100
+     break@SWITCH
+    }
+   }
   } while (false)
   return result
  }

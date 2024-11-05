@@ -1285,7 +1285,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
               // would represent negative values as unary expressions, e.g - <constant>. The Wasm
               // backend relies on switch case constant for switch on integral values to be
               // literals.
-              .setCaseExpression(convertAndFoldExpression(statement.getExpression()));
+              .setCaseExpressions(
+                  ImmutableList.of(convertAndFoldExpression(statement.getExpression())));
     }
 
     private SynchronizedStatement convert(

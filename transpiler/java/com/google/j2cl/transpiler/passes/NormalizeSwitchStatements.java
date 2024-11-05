@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.passes;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
+import com.google.common.collect.ImmutableList;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
@@ -90,11 +91,12 @@ public class NormalizeSwitchStatements extends NormalizationPass {
 
     FieldAccess enumFieldAccess = (FieldAccess) switchCase.getCaseExpression();
     return SwitchCase.Builder.from(switchCase)
-        .setCaseExpression(
-            FieldAccess.Builder.from(enumFieldAccess)
-                .setTarget(
-                    AstUtils.getEnumOrdinalConstantFieldDescriptor(enumFieldAccess.getTarget()))
-                .build())
+        .setCaseExpressions(
+            ImmutableList.of(
+                FieldAccess.Builder.from(enumFieldAccess)
+                    .setTarget(
+                        AstUtils.getEnumOrdinalConstantFieldDescriptor(enumFieldAccess.getTarget()))
+                    .build()))
         .build();
   }
 }

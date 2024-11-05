@@ -17,6 +17,7 @@
 
 package com.google.j2cl.transpiler.frontend.kotlin
 
+import com.google.common.collect.ImmutableList
 import com.google.j2cl.common.SourcePosition
 import com.google.j2cl.transpiler.ast.ArrayAccess
 import com.google.j2cl.transpiler.ast.ArrayLength
@@ -566,7 +567,10 @@ class CompilationUnitBuilder(
     }
 
     return SwitchCase.newBuilder()
-      .setCaseExpression(irSwitchCase.caseExpression?.let { convertExpression(it) })
+      .setCaseExpressions(
+        irSwitchCase.caseExpression?.let { ImmutableList.of(convertExpression(it)) }
+          ?: ImmutableList.of()
+      )
       .setStatements(statements)
       .build()
   }
