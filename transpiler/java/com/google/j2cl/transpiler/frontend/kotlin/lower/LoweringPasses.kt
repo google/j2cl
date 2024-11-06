@@ -53,6 +53,7 @@ import org.jetbrains.kotlin.backend.jvm.lower.JvmLateinitLowering
 import org.jetbrains.kotlin.backend.jvm.lower.JvmLocalClassPopupLowering
 import org.jetbrains.kotlin.backend.jvm.lower.JvmPropertiesLowering
 import org.jetbrains.kotlin.backend.jvm.lower.StaticInitializersLowering
+import org.jetbrains.kotlin.builtins.PrimitiveType
 import org.jetbrains.kotlin.codegen.state.GenerationState
 import org.jetbrains.kotlin.config.CommonConfigurationKeys
 import org.jetbrains.kotlin.config.CompilerConfiguration
@@ -83,6 +84,7 @@ import org.jetbrains.kotlin.name.CallableId
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.StandardClassIds
+import org.jetbrains.kotlin.types.expressions.OperatorConventions
 
 /** The list of lowering passes to run in execution order. */
 private val loweringPassFactories: List<J2clLoweringPassFactory> = buildList {
@@ -381,6 +383,19 @@ private fun SymbolTable.populate(irBuiltIns: IrBuiltIns) {
 
   // add the builtins so the IrDeserializer does not create new symbol for them.
   with(irBuiltIns) {
+    // Add symbols of numeric conversion function (toInt, toDouble...) as they are used in
+    // checks in NumericConversionLowering.
+    fun getNumericConversionsFunctionSymbols(): List<IrSymbol> {
+      val symbols = arrayListOf<IrSymbol>()
+      for (type in PrimitiveType.NUMBER_TYPES) {
+        val typeClass = findClass(type.typeName)!!
+        for (name in OperatorConventions.NUMBER_CONVERSIONS) {
+          findBuiltInClassMemberFunctions(typeClass, name).singleOrNull()?.let { symbols.add(it) }
+        }
+      }
+      return symbols
+    }
+
     buildList {
         addAll(lessFunByOperandType.values)
         addAll(lessOrEqualFunByOperandType.values)
@@ -398,6 +413,7 @@ private fun SymbolTable.populate(irBuiltIns: IrBuiltIns) {
         add(dataClassArrayMemberHashCodeSymbol)
         add(dataClassArrayMemberToStringSymbol)
         add(checkNotNullSymbol)
+        addAll(getNumericConversionsFunctionSymbols())
       }
       .forEach(::addSymbol)
   }
