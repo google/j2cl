@@ -758,6 +758,7 @@ public enum Backend {
           // Needs to run after NormalizeNonFinalVariablesJ2kt.
           InsertExplicitArrayCoercionCasts::new,
           NormalizeMultiExpressions::new,
+          () -> new RemoveUnnecessaryLabels(/* onlyLoopsAreBreakable= */ true),
           RemoveNestedBlocks::new,
           RemoveNoopStatements::new,
 

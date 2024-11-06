@@ -28,8 +28,8 @@ import kotlin.native.ObjCName
 open class BreakStatement {
  @ObjCName("test")
  open fun test() {
-  LOOP@ while (true) {
-   break@LOOP
+  while (true) {
+   break
   }
  }
 }

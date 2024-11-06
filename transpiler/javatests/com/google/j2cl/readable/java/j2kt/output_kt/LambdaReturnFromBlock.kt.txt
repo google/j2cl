@@ -36,10 +36,7 @@ open class LambdaReturnFromBlock {
  @ObjCName("testDoWhile")
  open fun testDoWhile() {
   val fn: LambdaReturnFromBlock.Function<Void?>? = LambdaReturnFromBlock.Function<Void?> {
-   do {
-    return@Function null
-   } while (false)
-   throw AssertionError("Unreachable")
+   return@Function null
   }
  }
 

@@ -29,13 +29,13 @@ import kotlin.native.ObjCName
 open class LabeledStatement {
  @ObjCName("loopStatements")
  open fun loopStatements() {
-  LABEL@ while (true) {
-   break@LABEL
+  while (true) {
+   break
   }
-  WHILE@ while (true) {
+  while (true) {
    when (0) {
     0 -> {
-     continue@WHILE
+     continue
     }
     else -> {}
    }
@@ -45,45 +45,37 @@ open class LabeledStatement {
  @ObjCName("simpleStatement")
  open fun simpleStatement() {
   this.foo()
-  LABEL@ do {
-   break@LABEL
+  do {
+   break
   } while (false)
-  LABEL_1@ do {
-   break@LABEL_1
+  do {
+   break
   } while (false)
-  LABEL_2@ do {
-   break@LABEL_2
+  do {
+   break
   } while (false)
-  LOOP@ do {
-   continue@LOOP
+  do {
+   break
   } while (false)
   return
  }
 
  @ObjCName("block")
- open fun block() {
-  LABEL@ do {
-   break@LABEL
-  } while (false)
- }
+ open fun block() {}
 
  @ObjCName("ifStatement")
  open fun ifStatement() {
-  LABEL@ do {
-   if (true) {
-    break@LABEL
-   }
-  } while (false)
+  if (true) {}
  }
 
  @ObjCName("switchStatement")
  open fun switchStatement() {
   LABEL@ do {
    CASE@ do {
-    CASE_1@ do {
+    do {
      when (0) {
       0 -> {
-       break@CASE_1
+       break
       }
       else -> {
        break@CASE
@@ -100,13 +92,9 @@ open class LabeledStatement {
 
  @ObjCName("nestedScopes")
  open fun nestedScopes() {
-  do {
-   object : Any() {
-    internal fun m_pp_labelstatement() {
-     do {} while (false)
-    }
-   }
-  } while (false)
+  object : Any() {
+   internal fun m_pp_labelstatement() {}
+  }
  }
 
  private fun foo() {}

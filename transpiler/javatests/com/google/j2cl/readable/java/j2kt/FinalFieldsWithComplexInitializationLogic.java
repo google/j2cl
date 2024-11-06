@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2ktnotpassing;
+package j2kt;
 
-public class InitializationProblemWithSwitchStatement {
+public class FinalFieldsWithComplexInitializationLogic {
   private final int finalField;
 
-  InitializationProblemWithSwitchStatement(int i) {
+  FinalFieldsWithComplexInitializationLogic(int i) {
     switch (i) {
       case 1:
         finalField = 1;

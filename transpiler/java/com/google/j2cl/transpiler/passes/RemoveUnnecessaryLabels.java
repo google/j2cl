@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.collect.Iterables;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
@@ -29,6 +28,7 @@ import com.google.j2cl.transpiler.ast.DoWhileStatement;
 import com.google.j2cl.transpiler.ast.Label;
 import com.google.j2cl.transpiler.ast.LabelReference;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
+import com.google.j2cl.transpiler.ast.LoopStatement;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.Statement;
 import java.util.HashMap;
@@ -39,6 +39,16 @@ import java.util.Set;
 
 /** Remove unnecessary labels that could have been created by J2KT or Kotlin frontend. */
 public class RemoveUnnecessaryLabels extends NormalizationPass {
+
+  private final boolean onlyLoopsAreBreakable;
+
+  public RemoveUnnecessaryLabels() {
+    this(false);
+  }
+
+  public RemoveUnnecessaryLabels(boolean onlyLoopsAreBreakable) {
+    this.onlyLoopsAreBreakable = onlyLoopsAreBreakable;
+  }
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
@@ -53,7 +63,7 @@ public class RemoveUnnecessaryLabels extends NormalizationPass {
    * Remove loops of the form `do ... while(false)` since those are commonly inserted by
    * transformation of kotlin code.
    */
-  private static void removeDoWhileFalseLoops(CompilationUnit compilationUnit) {
+  private void removeDoWhileFalseLoops(CompilationUnit compilationUnit) {
     compilationUnit.accept(
         new AbstractRewriter() {
           // Collect the labels associated with `do {...} while (false)` loops to convert any
@@ -64,7 +74,7 @@ public class RemoveUnnecessaryLabels extends NormalizationPass {
           @Override
           public boolean shouldProcessDoWhileStatement(DoWhileStatement doWhileStatement) {
             if (doWhileStatement.getConditionExpression().isBooleanFalse()) {
-              labelsToConvert.add(getEnclosingLabel());
+              addEnclosingLabel();
             }
             return true;
           }
@@ -79,16 +89,19 @@ public class RemoveUnnecessaryLabels extends NormalizationPass {
 
           @Override
           public Node rewriteDoWhileStatement(DoWhileStatement doWhileStatement) {
-            if (doWhileStatement.getConditionExpression().isBooleanFalse()) {
-              return doWhileStatement.getBody();
+            Statement body = doWhileStatement.getBody();
+            if (doWhileStatement.getConditionExpression().isBooleanFalse()
+                && (!(getParent() instanceof LabeledStatement) || canBeLabeled(body))) {
+              return body;
             }
             return doWhileStatement;
           }
 
-          private Label getEnclosingLabel() {
-            // NormalizeLabels has been run so every loop has a label assigned.
-            checkState(getParent() instanceof LabeledStatement);
-            return ((LabeledStatement) getParent()).getLabel();
+          private void addEnclosingLabel() {
+            // Only loops that that are targeted by breaks or continues are labeled.
+            if (getParent() instanceof LabeledStatement) {
+              labelsToConvert.add(((LabeledStatement) getParent()).getLabel());
+            }
           }
         });
   }
@@ -97,7 +110,7 @@ public class RemoveUnnecessaryLabels extends NormalizationPass {
    * Move labels applied on blocks to the last statement of the block if there is no break targeting
    * the label in the other statements of the block.
    */
-  private static void pushLabelsInward(CompilationUnit compilationUnit) {
+  private void pushLabelsInward(CompilationUnit compilationUnit) {
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
@@ -111,6 +124,9 @@ public class RemoveUnnecessaryLabels extends NormalizationPass {
               return labeledBlock;
             }
             Statement lastStatement = Iterables.getLast(labeledBlock.getStatements());
+            if (!canBeLabeled(lastStatement)) {
+              return labeledStatement;
+            }
 
             List<Statement> allStatementsButLast =
                 labeledBlock.getStatements().subList(0, labeledBlock.getStatements().size() - 1);
@@ -253,5 +269,9 @@ public class RemoveUnnecessaryLabels extends NormalizationPass {
             return labeledStatement.getStatement();
           }
         });
+  }
+
+  private boolean canBeLabeled(Statement statement) {
+    return !onlyLoopsAreBreakable || statement instanceof LoopStatement;
   }
 }

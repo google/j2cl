@@ -28,10 +28,6 @@ import kotlin.native.ObjCName
 open class ContinueStatement {
  @ObjCName("test")
  open fun test() {
-  while (true) {
-   LOOP_CONTINUE@ do {
-    break@LOOP_CONTINUE
-   } while (false)
-  }
+  while (true) {}
  }
 }
