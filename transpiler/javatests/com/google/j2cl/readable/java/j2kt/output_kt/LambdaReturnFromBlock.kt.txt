@@ -22,10 +22,12 @@ import javaemul.lang.*
 import java.lang.AssertionError
 import java.lang.Void
 import javaemul.lang.J2ktMonitor
+import kotlin.Int
 import kotlin.OptIn
 import kotlin.Suppress
 import kotlin.Unit
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 import kotlin.synchronized
 
@@ -46,6 +48,24 @@ open class LambdaReturnFromBlock {
   val fn: LambdaReturnFromBlock.Function<Void?>? = LambdaReturnFromBlock.Function<Void?> {
    synchronized<Unit>(LambdaReturnFromBlock.lock!!) {
     return@Function null
+   }
+   throw AssertionError("Unreachable")
+  }
+ }
+
+ @JvmField
+ internal var x_pp_j2kt: Int = 1
+
+ @ObjCName("testSwitchInLambda")
+ open fun testSwitchInLambda() {
+  val fn: LambdaReturnFromBlock.Function<Void?>? = LambdaReturnFromBlock.Function<Void?> {
+   when (this.x_pp_j2kt) {
+    1 -> {
+     return@Function null
+    }
+    else -> {
+     return@Function null
+    }
    }
    throw AssertionError("Unreachable")
   }

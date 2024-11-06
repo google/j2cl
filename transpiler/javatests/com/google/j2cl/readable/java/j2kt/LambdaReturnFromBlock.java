@@ -39,6 +39,20 @@ public class LambdaReturnFromBlock {
         };
   }
 
+  int x = 1;
+
+  public void testSwitchInLambda() {
+    Function<Void> fn =
+        () -> {
+          switch (x) {
+            case 1:
+              return null;
+            default:
+              return null;
+          }
+        };
+  }
+
   interface Function<O> {
     O apply();
   }
