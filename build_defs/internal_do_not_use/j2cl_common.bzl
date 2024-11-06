@@ -385,11 +385,6 @@ J2CL_TOOLCHAIN_ATTRS = {
         cfg = "exec",
         executable = True,
     ),
-    "_jar": attr.label(
-        cfg = "exec",
-        executable = True,
-        default = Label("@bazel_tools//tools/jdk:jar"),
-    ),
     "_java_frontend": attr.label(
         default = Label("//:experimental_java_frontend"),
     ),
