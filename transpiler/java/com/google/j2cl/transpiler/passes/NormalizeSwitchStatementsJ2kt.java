@@ -35,9 +35,11 @@ import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
+import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SwitchCase;
+import com.google.j2cl.transpiler.ast.SwitchExpression;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
 import com.google.j2cl.transpiler.ast.ThrowStatement;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
@@ -109,7 +111,12 @@ public class NormalizeSwitchStatementsJ2kt extends NormalizationPass {
           @Override
           public Node rewriteSwitchStatement(SwitchStatement switchStatement) {
             if (canConvertDirectlyToWhen(switchStatement)) {
-              return switchStatement;
+              return SwitchExpression.newBuilder()
+                  .setTypeDescriptor(PrimitiveTypes.VOID)
+                  .setExpression(switchStatement.getExpression())
+                  .setCases(switchStatement.getCases())
+                  .build()
+                  .makeStatement(switchStatement.getSourcePosition());
             }
 
             List<SwitchCaseWithLabel> switchCasesAndLabels =
@@ -177,15 +184,15 @@ public class NormalizeSwitchStatementsJ2kt extends NormalizationPass {
                 cases.stream().filter(SwitchCase::isDefault))
             .collect(toImmutableList());
 
-    Statement rewrittenSwitchStatement =
-        SwitchStatement.newBuilder()
-            .setSourcePosition(sourcePosition)
+    Expression whenExpression =
+        SwitchExpression.newBuilder()
+            .setTypeDescriptor(PrimitiveTypes.VOID)
             .setExpression(expression)
             .setCases(cases)
             .build();
 
     return Block.newBuilder()
-        .addStatement(rewrittenSwitchStatement)
+        .addStatement(whenExpression.makeStatement(sourcePosition))
         .addStatement(
             BreakStatement.newBuilder()
                 .setSourcePosition(sourcePosition)
