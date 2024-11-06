@@ -6,18 +6,18 @@ def load_j2cl_repo_deps():
     # TODO(b/211017789):Use old proto version until maven issue is fixed.
     http_archive(
         name = "com_google_protobuf",
-        strip_prefix = "protobuf-3.15.3",
-        sha256 = "b10bf4e2d1a7586f54e64a5d9e7837e5188fc75ae69e36f215eb01def4f9721b",
+        strip_prefix = "protobuf-3.19.0",
+        sha256 = "",
         urls = [
-            "https://github.com/protocolbuffers/protobuf/archive/v3.15.3.tar.gz",
+            "https://github.com/protocolbuffers/protobuf/archive/v3.19.0.tar.gz",
         ],
     )
 
     _github_repo(
         name = "io_bazel_rules_closure",
         repo = "bazelbuild/rules_closure",
-        tag = "7518080612867268f626a78a9592f07e7806ad40",
-        sha256 = "55361e1925d6117e373a0b7db9dfb0663e6a1b537c2b1bb8e9957ed1f0e386db",
+        tag = "7dc462656229f37f0ab90bba3c82c9f6b8171ebf",
+        sha256 = "09965ff4236d678c81bcfb1a42502ba7e8feafa92be02ccf0d8d4eccc51379be",
     )
 
     # TODO(goktug): Consider moving to setup_j2cl_workspace after licences migration

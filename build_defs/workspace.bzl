@@ -58,7 +58,7 @@ def setup_j2cl_workspace(**kwargs):
     )
 
     jvm_maven_import_external(
-        name = "j2objc_annotations",
+        name = "com_google_j2objc_annotations",
         artifact = "com.google.j2objc:j2objc-annotations:1.3",
         server_urls = _MAVEN_CENTRAL_URLS,
         licenses = ["notice"],
@@ -230,4 +230,16 @@ def setup_j2cl_workspace(**kwargs):
     native.bind(
         name = "error_prone_annotations",
         actual = "@com_google_errorprone_error_prone_annotations",
+    )
+
+    # Required by protobuf_java_util
+    native.bind(
+        name = "jsr305",
+        actual = "@com_google_code_findbugs_jsr305",
+    )
+
+    # Required by protobuf_java_util
+    native.bind(
+        name = "j2objc_annotations",
+        actual = "@com_google_j2objc_annotations",
     )

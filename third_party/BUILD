@@ -30,12 +30,12 @@ j2cl_import(
 
 alias(
     name = "j2objc_annotations",
-    actual = "@j2objc_annotations",
+    actual = "@com_google_j2objc_annotations",
 )
 
 j2cl_import(
     name = "j2objc_annotations-j2cl",
-    jar = "@j2objc_annotations//jar",
+    jar = "@com_google_j2objc_annotations//jar",
 )
 
 alias(
