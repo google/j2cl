@@ -206,7 +206,7 @@ build_test(
 COMFORMANCE_CHECK_FLAGS = VERBOSE_WARNING_FLAGS_STRICT + [
     "--conformance_config=conformance_proto.txt",
     "--jscomp_error=conformanceViolations",
-    "--jscomp_error=unusedLocalVariables",
+    "--jscomp_error=strictPrimitiveOperators",
     # TODO(michaelthomas): Enable once all errors are fixed. Yes, seriously.
     # "--jscomp_error=reportUnknownTypes",
 ]
