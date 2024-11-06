@@ -197,6 +197,9 @@ private val loweringPassFactories: List<J2clLoweringPassFactory> = buildList {
       replaceDefaultValuesWithStubs = true,
     )
   }
+  // TODO(b/377502016): Remove this pass once smart cast's bug is fixed.
+  // Cleanup IMPLICIT_CAST introduced by smart casts that cast a expression to a parent type.
+  add(::SmartCastCleaner)
   add(::BridgeLowering)
   // Transforms some cast/instanceof operations.
   add(::TypeOperatorLowering)
