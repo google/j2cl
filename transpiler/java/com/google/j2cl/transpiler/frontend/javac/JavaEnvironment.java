@@ -20,6 +20,7 @@ import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.HAS_NO_SIDE_EFFECTS_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.UNCHECKED_CAST_ANNOTATION_NAME;
+import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.WASM_ANNOTATION_NAME;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -865,6 +866,7 @@ class JavaEnvironment {
         .setStatic(isStatic)
         .setConstructor(isConstructor)
         .setNative(isNative)
+        .setWasmInfo(getWasmInfo(declarationMethodElement))
         .setFinal(isFinal(declarationMethodElement))
         .setDefaultMethod(isDefault)
         .setAbstract(isAbstract(declarationMethodElement))
@@ -1184,6 +1186,7 @@ class JavaEnvironment {
         .setLocal(isLocal(typeElement))
         .setSimpleJsName(JsInteropAnnotationUtils.getJsName(typeElement))
         .setCustomizedJsNamespace(JsInteropAnnotationUtils.getJsNamespace(typeElement))
+        .setWasmInfo(getWasmInfo(typeElement))
         .setNullMarked(isNullMarked)
         .setOriginalSimpleSourceName(
             typeElement.getSimpleName() != null ? typeElement.getSimpleName().toString() : null)
@@ -1379,6 +1382,17 @@ class JavaEnvironment {
     } else {
       return Visibility.PACKAGE_PRIVATE;
     }
+  }
+
+  @Nullable
+  private static String getWasmInfo(Element element) {
+    AnnotationMirror wasmAnnotation =
+        AnnotationUtils.findAnnotationBindingByName(
+            element.getAnnotationMirrors(), WASM_ANNOTATION_NAME);
+    if (wasmAnnotation == null) {
+      return null;
+    }
+    return AnnotationUtils.getAnnotationParameterString(wasmAnnotation, "value");
   }
 
   private static boolean isDeprecated(AnnotatedConstruct binding) {
