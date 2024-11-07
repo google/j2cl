@@ -88,10 +88,6 @@
 [return value;] => [return value;] "sourcemap.SourceMap.testStatements"
 [testLambdaAndMethodReference] => [m_testLambdaAndMethodReference__int__void_$p_sourcemap_SourceMap]
 [n] => [n] "n"
-[{
-    Function<Integer, Integer> f = i -> i + 1;
-...    Supplier<Integer> f3 = this::simpleMethod;
-  }] => [let /** ArrayList */ $$q;] "sourcemap.SourceMap.testLambdaAndMethodReference"
 [Function<Integer, Integer> f = i -> i + 1;] => [let f = j_u_function_Function.$adapt((i) =>{
    let i_1 = /**@type {Integer}*/ ($Casts.$to(i, Integer));
    return Integer.m_valueOf__int__java_lang_Integer(i_1.m_intValue__int() + 1 | 0);
@@ -101,6 +97,10 @@
 [i -> i + 1] => [let i_1 = /**@type {Integer}*/ ($Casts.$to(i, Integer));] "sourcemap.SourceMap.<lambda in testLambdaAndMethodReference>"
 [i] => [i_1] "i"
 [i + 1] => [return Integer.m_valueOf__int__java_lang_Integer(i_1.m_intValue__int() + 1 | 0);] "sourcemap.SourceMap.<lambda in testLambdaAndMethodReference>"
+[{
+    Function<Integer, Integer> f = i -> i + 1;
+...    Supplier<Integer> f3 = this::simpleMethod;
+  }] => [let /** ArrayList */ $$q;] "sourcemap.SourceMap.testLambdaAndMethodReference"
 [Supplier<Integer> f2 = new ArrayList()::size;] => [let f2 = ($$q = /**@type {!ArrayList}*/ (ArrayList.$create__()), Supplier.$adapt(() =>{
    return Integer.m_valueOf__int__java_lang_Integer($$q.size());
   }));] "sourcemap.SourceMap.testLambdaAndMethodReference"

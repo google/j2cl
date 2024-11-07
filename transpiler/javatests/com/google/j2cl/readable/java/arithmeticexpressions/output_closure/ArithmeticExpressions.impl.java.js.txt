@@ -126,7 +126,6 @@ class ArithmeticExpressions extends j_l_Object {
  }
  /** @nodts */
  m_testCompoundBoxedTypes__void() {
-  let /** Integer */ $value, /** Integer */ $value_1, /** Integer */ $value_2;
   let c = Integer.m_valueOf__int__java_lang_Integer(1000);
   let d = Integer.m_valueOf__int__java_lang_Integer(10000);
   d = Integer.m_valueOf__int__java_lang_Integer(d.m_intValue__int() + c.m_intValue__int() | 0);
@@ -138,6 +137,7 @@ class ArithmeticExpressions extends j_l_Object {
   e = c = Integer.m_valueOf__int__java_lang_Integer(c.m_intValue__int() + 1 | 0);
   let e2 = 100;
   e2 = Double.m_doubleValue__java_lang_Double__double(e2) + 1;
+  let /** Integer */ $value, /** Integer */ $value_1, /** Integer */ $value_2;
   let f = ($value = c, c = Integer.m_valueOf__int__java_lang_Integer(c.m_intValue__int() + 1 | 0), $value);
   f = ($value_1 = c, c = Integer.m_valueOf__int__java_lang_Integer(c.m_intValue__int() + 1 | 0), $value_1);
   let b = Byte.m_valueOf__byte__java_lang_Byte(0);
@@ -214,11 +214,11 @@ class ArithmeticExpressions extends j_l_Object {
  }
  /** @nodts */
  static $clinit() {
-  let /** !$Long */ $value;
   ArithmeticExpressions.$clinit = () =>{};
   ArithmeticExpressions.$loadModules();
   j_l_Object.$clinit();
   ArithmeticExpressions.$static_one__arithmeticexpressions_ArithmeticExpressions = $Long.fromInt(1);
+  let /** !$Long */ $value;
   ArithmeticExpressions.$static_foo__arithmeticexpressions_ArithmeticExpressions = ($value = ArithmeticExpressions.$static_one__arithmeticexpressions_ArithmeticExpressions, ArithmeticExpressions.$static_one__arithmeticexpressions_ArithmeticExpressions = $LongUtils.plus(ArithmeticExpressions.$static_one__arithmeticexpressions_ArithmeticExpressions, $Long.fromInt(1)), $value);
   ArithmeticExpressions.f_counter__arithmeticexpressions_ArithmeticExpressions_ = $Long.fromInt(0);
  }

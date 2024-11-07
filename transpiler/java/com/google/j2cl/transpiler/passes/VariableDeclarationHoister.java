@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static java.lang.Math.min;
 import static java.util.Collections.reverse;
 import static java.util.stream.Collectors.toCollection;
 
@@ -118,6 +119,7 @@ public class VariableDeclarationHoister extends NormalizationPass {
     // Keeps track of the block that will have the declarations for the variables that need
     // to be hoisted.
     SetMultimap<Block, Variable> variableByTargetScopeBlock = LinkedHashMultimap.create();
+    Map<Block, Integer> declarationPointByTargetScopeBlock = new HashMap<>();
 
     // Transform declarations into assignments, so that the effects of the expressions are kept
     // in the original location.
@@ -141,7 +143,26 @@ public class VariableDeclarationHoister extends NormalizationPass {
               return variableDeclarationExpression;
             }
 
+            // Get the block where the variable declarations will be moved to.
             Block block = getLastBlock(enclosingScopes);
+
+            // Get the full list of parents for the declaration (these are innermost first). Find
+            // the node immediately inside the target block to determine the latest valid insertion
+            // point for the declaration.
+            ImmutableList<Object> declarationSiteParents = getParents().collect(toImmutableList());
+            Object statementContainingDeclaration =
+                declarationSiteParents.get(declarationSiteParents.indexOf(block) - 1);
+
+            // The variable can be inserted before statement that contains the current declaration.
+            int insertionPoint = block.getStatements().indexOf(statementContainingDeclaration);
+
+            // Since all the variables that are moved to a block are declared together, the
+            // insertion point will be the closest to the top of the block.
+            declarationPointByTargetScopeBlock.merge(
+                block,
+                insertionPoint,
+                (Integer lastInsertionPoint, Integer newValue) ->
+                    min(newValue, lastInsertionPoint.intValue()));
 
             // Collect the variables that need to be moved and the target block.
             variableDeclarationExpression.getFragments().stream()
@@ -166,9 +187,11 @@ public class VariableDeclarationHoister extends NormalizationPass {
           }
         });
 
-    // Insert declarations into corresponding blocks.
+    // Insert declarations into corresponding blocks, just before where the first moved declaration
+    // was.
     for (Block block : variableByTargetScopeBlock.keySet()) {
       Set<Variable> variablesToRelocate = variableByTargetScopeBlock.get(block);
+      int insertionPointInBlock = declarationPointByTargetScopeBlock.get(block);
 
       // Make the variables nullable since the declaration will assign the default value.
       variablesToRelocate.forEach(v -> v.setTypeDescriptor(v.getTypeDescriptor().toNullable()));
@@ -176,7 +199,9 @@ public class VariableDeclarationHoister extends NormalizationPass {
       block
           .getStatements()
           .add(
-              0,
+              // Note: since we insert all the variables in a single declaration there is no need
+              // to adjust insertion points.
+              insertionPointInBlock,
               VariableDeclarationExpression.newBuilder()
                   .addVariableDeclarations(variablesToRelocate)
                   .build()

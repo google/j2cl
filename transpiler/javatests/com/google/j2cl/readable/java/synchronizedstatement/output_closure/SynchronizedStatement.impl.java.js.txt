@@ -33,15 +33,15 @@ class SynchronizedStatement extends j_l_Object {
  }
  /** @nodts @return {number} */
  m_testReturn__int() {
-  let /** number */ $value;
   {
    $Util.$synchronized(this);
    if (this.f_a__synchronizedstatement_SynchronizedStatement_ < 10) {
-    let /** number */ $value_1;
-    return ($value_1 = this.f_a__synchronizedstatement_SynchronizedStatement_, this.f_a__synchronizedstatement_SynchronizedStatement_ = this.f_a__synchronizedstatement_SynchronizedStatement_ + 1 | 0, $value_1);
+    let /** number */ $value;
+    return ($value = this.f_a__synchronizedstatement_SynchronizedStatement_, this.f_a__synchronizedstatement_SynchronizedStatement_ = this.f_a__synchronizedstatement_SynchronizedStatement_ + 1 | 0, $value);
    }
   }
-  return ($value = this.f_b__synchronizedstatement_SynchronizedStatement_, this.f_b__synchronizedstatement_SynchronizedStatement_ = this.f_b__synchronizedstatement_SynchronizedStatement_ - 1 | 0, $value);
+  let /** number */ $value_1;
+  return ($value_1 = this.f_b__synchronizedstatement_SynchronizedStatement_, this.f_b__synchronizedstatement_SynchronizedStatement_ = this.f_b__synchronizedstatement_SynchronizedStatement_ - 1 | 0, $value_1);
  }
  /** @nodts */
  m_testBreakAndContinue__void() {
