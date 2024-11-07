@@ -235,6 +235,10 @@ private val loweringPassFactories: List<J2clLoweringPassFactory> = buildList {
   add(::CreateForLoopLowering)
   // Convert some `when` statements to a `switch` java-like statement.
   add(::CreateSwitchLowering)
+  // Ensures that any top-level referenced members from another compilation unit have an enclosing
+  // class. The inliner can introduce refernces to top-level members from another compilation unit
+  // that were not referenced before.
+  add(::ExternalPackageParentPatcherLowering)
   // Cleanup the unreachable code that exist after the statement-like-expression
   // transformation to make the IrTree valid.
   add(::CleanupLowering)
@@ -265,6 +269,17 @@ class LoweringPasses(
     intrinsics = IntrinsicMethods(pluginContext.irBuiltIns)
 
     val j2clBackendContext = J2clBackendContext(jvmBackendContext, intrinsics)
+
+    // The K2 frontend does not create a FileKt class  for referenced/ top-level members defined in
+    // another compilation unit. Instead, it attaches them to an IrPackageFragment.
+    // This lowering addresses this by creating the necessary file class and moving the top-level
+    // members into it. This is needed to ensure the serialized IR for top-level inline functions
+    // can be deserialized correctly. (The serialized IR being part of the metadata of the enclosing
+    // class after Kotlin/JVM compilation.)
+    // This pass must be executed before `FixOrphanNode` so that `FixOrphanNode` can properly
+    // navigate through the bodies of external top-level inline functions.
+    // TODO(b/374966022): Remove this early run of this pass when the new inliner is used.
+    ExternalPackageParentPatcherLowering(jvmBackendContext).lower(moduleFragment)
 
     // TODO(b/264284345): remove this pass when the bug is fixed.
     // Detect deserialized orphaned IR nodes due to b/264284345 and assign them a parent.
