@@ -55,9 +55,12 @@ class BlockDecomposerLowering(val context: JvmBackendContext) :
     // We just need a call to a method that return nothing. This method call will be removed by the
     // cleanup lowering pass.
     return JsIrBuilder.buildCall(
-      context.irBuiltIns.illegalArgumentExceptionSymbol,
-      context.irBuiltIns.nothingType,
-    )
+        context.ir.symbols.throwUnsupportedOperationException,
+        context.irBuiltIns.nothingType,
+      )
+      .apply {
+        putValueArgument(0, JsIrBuilder.buildString(context.irBuiltIns.stringType, "unreachable"))
+      }
     // END OF MODIFICATIONS
   }
 }
