@@ -858,6 +858,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         environment.createMethodDescriptor(
             (ExecutableType) memberReference.referentType, returnType, methodSymbol);
     Expression qualifier = convertExpressionOrNull(memberReference.getQualifierExpression());
+    if (qualifier instanceof JavaScriptConstructorReference) {
+      // The qualifier was just the class name, remove it.
+      qualifier = null;
+    }
 
     return MethodReference.newBuilder()
         .setTypeDescriptor(expressionTypeDescriptor)
@@ -922,11 +926,21 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           /* isQualified= */ true);
     }
     if (fieldAccess.name.contentEquals("super")) {
-      return new SuperReference(
+      DeclaredTypeDescriptor typeDescriptor =
           environment
               .createDeclarationForType((ClassSymbol) ((JCIdent) expression).sym)
-              .toDescriptor());
+              .toDescriptor();
+
+      boolean isQualified = !typeDescriptor.isInterface();
+      if (isQualified) {
+        // This is a qualified super call, targeting an outer class method.
+        return new SuperReference(typeDescriptor, isQualified);
+      }
+
+      // Call targeting a method in the super types, including superinterfaces.
+      return new SuperReference(getCurrentType().getTypeDescriptor());
     }
+
     Expression qualifier;
     if (fieldAccess.sym instanceof VariableElement) {
       qualifier = convertExpression(expression);
