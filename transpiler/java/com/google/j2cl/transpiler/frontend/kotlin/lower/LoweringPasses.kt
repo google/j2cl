@@ -47,12 +47,7 @@ import org.jetbrains.kotlin.backend.jvm.JvmBackendExtension
 import org.jetbrains.kotlin.backend.jvm.JvmGeneratorExtensionsImpl
 import org.jetbrains.kotlin.backend.jvm.JvmIrDeserializerImpl
 import org.jetbrains.kotlin.backend.jvm.ir.constantValue
-import org.jetbrains.kotlin.backend.jvm.lower.JvmDefaultParameterInjector
 import org.jetbrains.kotlin.backend.jvm.lower.JvmInventNamesForLocalClasses
-import org.jetbrains.kotlin.backend.jvm.lower.JvmLateinitLowering
-import org.jetbrains.kotlin.backend.jvm.lower.JvmLocalClassPopupLowering
-import org.jetbrains.kotlin.backend.jvm.lower.JvmPropertiesLowering
-import org.jetbrains.kotlin.backend.jvm.lower.StaticInitializersLowering
 import org.jetbrains.kotlin.builtins.PrimitiveType
 import org.jetbrains.kotlin.codegen.state.GenerationState
 import org.jetbrains.kotlin.config.CommonConfigurationKeys
