@@ -22,6 +22,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointe
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.Asserts.fail;
 
+import com.google.j2cl.integration.testing.TestUtils;
 import java.util.function.Supplier;
 
 public class Main {
@@ -169,14 +170,18 @@ public class Main {
         fail();
     }
 
-    assertThrowsClassCastException(
-        () -> {
-          Supplier<Numbers> integerSupplier = (Supplier) () -> new Integer(1);
-          switch (integerSupplier.get()) {
-            default:
-              fail();
-          }
-        });
+    if (!TestUtils.isJ2KtNative()) {
+      // Switch statements in Kotlin/Native do not throw erasure casts, instead they would flow to
+      // the default case.
+      assertThrowsClassCastException(
+          () -> {
+            Supplier<Numbers> integerSupplier = (Supplier) () -> new Integer(1);
+            switch (integerSupplier.get()) {
+              default:
+                fail();
+            }
+          });
+    }
   }
 
   private static void testCascades() {
