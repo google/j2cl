@@ -1,0 +1,168 @@
+// Generated from "libraryinfo/Main.java"
+@file:OptIn(ExperimentalObjCName::class)
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN")
+
+package libraryinfo
+
+import javaemul.lang.*
+import java.lang.Class
+import jsinterop.annotations.JsEnum
+import jsinterop.annotations.JsFunction
+import jsinterop.annotations.JsMethod
+import jsinterop.annotations.JsPackage
+import jsinterop.annotations.JsProperty
+import jsinterop.annotations.JsType
+import kotlin.Any
+import kotlin.Int
+import kotlin.OptIn
+import kotlin.String
+import kotlin.Suppress
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
+import kotlin.jvm.javaObjectType
+import kotlin.native.ObjCName
+
+@ObjCName("J2ktLibraryinfoMain", exact = true)
+open class Main {
+ private fun execute() {
+  Main.log(42)
+ }
+
+ override fun toString(): String {
+  return super.toString()
+ }
+
+ @ObjCName("J2ktLibraryinfoMainCompanion", exact = true)
+ companion object {
+  @JvmField
+  @ObjCName("STATIC_FIELD_")
+  var STATIC_FIELD: String? = "STATIC_FIELD"
+
+  @ObjCName("CONSTANT_")
+  const val CONSTANT: String = "STATIC_FIELD"
+
+  @ObjCName("JS_CONSTANT_")
+  @JsProperty
+  const val JS_CONSTANT: String = "STATIC_FIELD"
+
+  @JvmStatic
+  @ObjCName("entryPoint")
+  @JsMethod
+  fun entryPoint() {
+   Main().execute()
+   var jsFunction: Main.Function? = Main.FunctionImpl()
+   jsFunction = Main.Function { s: String? ->
+    Main.log(42)
+   }
+   jsFunction!!.apply("foo")
+   Main.MyJsType()
+   object : Any() {
+    @JsMethod(name = "foo")
+    internal fun foo_pp_libraryinfo() {}
+   }
+  }
+
+  @JvmStatic
+  @ObjCName("log")
+  @JsMethod(name = "console.log", namespace = JsPackage.GLOBAL)
+  external fun log(
+   @ObjCName("withInt") o: Int
+  )
+
+  @JvmStatic
+  @ObjCName("main")
+  @JsMethod
+  fun main() {
+   val foo: Main.Foo? = null
+   foo!!.instanceMethod_pp_libraryinfo()
+   val clazz: Class<*>? = Main.Foo::class.javaObjectType
+  }
+ }
+
+ @ObjCName("J2ktLibraryinfoMain_JsTypeInterface", exact = true)
+ @JsType
+ interface JsTypeInterface {
+  @ObjCName("foo")
+  fun foo()
+
+  @ObjCName("bar")
+  fun bar()
+ }
+
+ @ObjCName("J2ktLibraryinfoMain_FunctionnalInterface", exact = true)
+ fun interface FunctionnalInterface {
+  @ObjCName("foo")
+  fun foo()
+ }
+
+ @ObjCName("J2ktLibraryinfoMain_JsAccessibleFunctionnalInterface", exact = true)
+ fun interface JsAccessibleFunctionnalInterface {
+  @ObjCName("accessibleFunctionalInterfaceMethod")
+  @JsMethod
+  fun accessibleFunctionalInterfaceMethod()
+ }
+
+ @ObjCName("J2ktLibraryinfoMain_Function", exact = true)
+ @JsFunction
+ fun interface Function {
+  @ObjCName("apply")
+  fun apply(
+   @ObjCName("withNSString") s: String?
+  )
+ }
+
+ @ObjCName("J2ktLibraryinfoMain_FunctionImpl", exact = true)
+ class FunctionImpl internal constructor(): Main.Function {
+  override fun apply(s: String?) {}
+ }
+
+ @ObjCName("J2ktLibraryinfoMain_MyJsEnum", exact = true)
+ @JsEnum
+ enum class MyJsEnum {
+  @ObjCName("A")
+  A,
+  @ObjCName("B")
+  B,
+  @ObjCName("C")
+  C;
+ }
+
+ @ObjCName("J2ktLibraryinfoMain_MyEnum", exact = true)
+ enum class MyEnum {
+  @ObjCName("FOO")
+  FOO,
+  @ObjCName("BAR")
+  BAR;
+ }
+
+ @ObjCName("J2ktLibraryinfoMain_MyJsType", exact = true)
+ @JsType
+ open class MyJsType {
+  @JvmField
+  internal var someField_pp_libraryinfo: Any? = null
+
+  constructor() {
+   this.someField_pp_libraryinfo = Main()
+  }
+ }
+
+ @ObjCName("J2ktLibraryinfoMain_Foo", exact = true)
+ open inner class Foo {
+  internal open fun instanceMethod_pp_libraryinfo() {}
+ }
+}
