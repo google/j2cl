@@ -99,7 +99,7 @@ Foo.getValue = function() {
 
     Generally if you get to the point of having to do this, you're better off
     writing the code separately in JS and
-    [using JsInteorp to call it](jsinterop-by-example.md#jstype-interface-with-closure-utilities).
+    [using JsInterop to call it](jsinterop-by-example.md#jstype-interface-with-closure-utilities).
 
 *   Be particularly mindful of nullability in `native.js` files. The JSCompiler
     does not enforce nullability checks within J2CL-generated code, and since
