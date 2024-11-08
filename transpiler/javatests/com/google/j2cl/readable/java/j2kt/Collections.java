@@ -253,12 +253,11 @@ public class Collections {
       return super.get(key);
     }
 
-    // TODO(b/378098579): Uncomment when fixed
-    // @Override
-    // public V getOrDefault(@Nullable Object key, V defaultValue) {
-    //   key = convert(key);
-    //   return super.getOrDefault(key, defaultValue);
-    // }
+    @Override
+    public @Nullable V getOrDefault(@Nullable Object key, @Nullable V defaultValue) {
+      key = convert(key);
+      return super.getOrDefault(key, defaultValue);
+    }
 
     @Override
     public void putAll(Map<? extends K, ? extends V> m) {
@@ -322,12 +321,11 @@ public class Collections {
       return super.get(key);
     }
 
-    // TODO(b/378098579): Uncomment when fixed
-    // @Override
-    // public String getOrDefault(@Nullable Object key, String defaultValue) {
-    //   key = convert(key);
-    //   return super.getOrDefault(key, defaultValue);
-    // }
+    @Override
+    public @Nullable String getOrDefault(@Nullable Object key, @Nullable String defaultValue) {
+      key = convert(key);
+      return super.getOrDefault(key, defaultValue);
+    }
   }
 
   private static @Nullable Object convert(@Nullable Object object) {

@@ -346,6 +346,12 @@ open class Collections {
    return super<JavaAbstractMap>.java_get(key_1) as V
   }
 
+  override fun java_getOrDefault(key: Any?, defaultValue: V?): V? {
+   var key_1: Any? = key
+   key_1 = Collections.convert(key_1)
+   return super<JavaAbstractMap>.java_getOrDefault(key_1, defaultValue)
+  }
+
   override fun java_putAll(m: MutableMap<out K, out V>) {
    super<JavaAbstractMap>.java_putAll(m)
   }
@@ -415,6 +421,12 @@ open class Collections {
    var key_1: Any? = key
    key_1 = Collections.convert(key_1)
    return super<Collections.CustomMap>.java_get(key_1)
+  }
+
+  override fun java_getOrDefault(key: Any?, defaultValue: String?): String? {
+   var key_1: Any? = key
+   key_1 = Collections.convert(key_1)
+   return super<Collections.CustomMap>.java_getOrDefault(key_1, defaultValue)
   }
  }
 }
