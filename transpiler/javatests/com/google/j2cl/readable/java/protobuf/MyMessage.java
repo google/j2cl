@@ -17,11 +17,17 @@ package protobuf;
 
 import com.google.protobuf.GeneratedMessage;
 import com.google.protobuf.Internal.ProtoNonnullApi;
+import com.google.protobuf.Parser;
+import javaemul.internal.annotations.KtNative;
+import org.jspecify.annotations.NullMarked;
 
 @ProtoNonnullApi
+@KtNative(name = "protobuf.MyMessage")
+@NullMarked
 public class MyMessage extends GeneratedMessage {
-  // Emulates Kotlin property
-  public final int testField = 0;
+  public Parser<MyMessage> getParserForType() {
+    throw new RuntimeException();
+  }
 
   public int getTestField() {
     throw new RuntimeException();
@@ -41,9 +47,6 @@ public class MyMessage extends GeneratedMessage {
 
   @ProtoNonnullApi
   public static class Builder extends GeneratedMessage.Builder {
-    // Emulates Kotlin property
-    public int testField = 0;
-
     public int getTestField() {
       throw new RuntimeException();
     }

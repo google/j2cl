@@ -13,12 +13,29 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.protobuf;
+package protobuf
 
-import javaemul.internal.annotations.KtNative;
-import javaemul.internal.annotations.KtOut;
-import org.jspecify.annotations.NullMarked;
+import com.google.protobuf.GeneratedMessage
+import com.google.protobuf.Parser
 
-@KtNative(name = "com.google.protobuf.Parser")
-@NullMarked
-public class Parser<@KtOut T> {}
+class MyMessage : GeneratedMessage() {
+  override val parserForType: Parser<MyMessage>
+    get() = TODO()
+
+  val testField: Int = TODO()
+
+  class Builder : GeneratedMessage.Builder() {
+    var testField: Int = TODO()
+
+    // Needed for J2KT
+    fun setTestField(testField: Int): Builder = TODO()
+
+    fun build(): MyMessage = TODO()
+  }
+
+  companion object {
+    fun getDefaultInstance(): MyMessage = TODO()
+
+    fun newBuilder(): Builder = TODO()
+  }
+}

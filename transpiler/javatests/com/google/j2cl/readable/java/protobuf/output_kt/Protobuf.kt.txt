@@ -19,6 +19,7 @@
 package protobuf
 
 import javaemul.lang.*
+import com.google.protobuf.GeneratedMessage
 import com.google.protobuf.Parser
 import kotlin.Int
 import kotlin.OptIn
@@ -41,6 +42,7 @@ open class Protobuf {
   val defaultMessage: MyMessage? = MyMessage.getDefaultInstance()
   defaultMessage!!.testField
   val parser: Parser<*>? = message!!.parserForType
+  val generatedMessageParser: Parser<GeneratedMessage>? = (message as GeneratedMessage?)!!.parserForType
   val enumOne: MyEnum? = MyEnum.ONE
   val enumOneNumber: Int = MyEnum.ONE.number
  }

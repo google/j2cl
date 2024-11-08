@@ -3,6 +3,7 @@ goog.module('protobuf.MyMessage$impl');
 const GeneratedMessage = goog.require('com.google.protobuf.GeneratedMessage$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Parser = goog.forwardDeclare('com.google.protobuf.Parser$impl');
 let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
 let Builder = goog.forwardDeclare('protobuf.MyMessage.Builder$impl');
 let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
@@ -11,8 +12,10 @@ class MyMessage extends GeneratedMessage {
  /** @protected @nodts */
  constructor() {
   super();
-  /**@const {number} @nodts*/
-  this.f_testField__protobuf_MyMessage = 0;
+ }
+ /** @override @nodts @return {!Parser<!MyMessage>} */
+ m_getParserForType__com_google_protobuf_Parser() {
+  throw $Exceptions.toJs(RuntimeException.$create__());
  }
  /** @nodts @return {number} */
  m_getTestField__int() {

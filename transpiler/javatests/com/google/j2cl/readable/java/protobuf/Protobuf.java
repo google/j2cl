@@ -15,8 +15,11 @@
  */
 package protobuf;
 
+import com.google.protobuf.GeneratedMessage;
 import com.google.protobuf.Parser;
+import org.jspecify.annotations.NullMarked;
 
+@NullMarked
 public class Protobuf {
   public void test() {
     MyMessage.Builder builder = MyMessage.newBuilder();
@@ -33,6 +36,8 @@ public class Protobuf {
     defaultMessage.getTestField();
 
     Parser<?> parser = message.getParserForType();
+    Parser<? extends GeneratedMessage> generatedMessageParser =
+        ((GeneratedMessage) message).getParserForType();
 
     MyEnum enumOne = MyEnum.ONE;
     int enumOneNumber = MyEnum.ONE.number;

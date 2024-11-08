@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Google Inc.
+ * Copyright 2024 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,20 +13,6 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.protobuf;
+package com.google.protobuf
 
-import javaemul.internal.annotations.KtNative;
-import org.jspecify.annotations.NullMarked;
-
-@KtNative(name = "com.google.protobuf.GeneratedMessage")
-@NullMarked
-public class GeneratedMessage {
-  // Emulates Kotlin property
-  public final Parser<? extends GeneratedMessage> parserForType = null;
-
-  public Parser<? extends GeneratedMessage> getParserForType() {
-    throw new RuntimeException();
-  }
-
-  public static class Builder {}
-}
+class Parser<out T>
