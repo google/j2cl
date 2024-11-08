@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Google Inc.
+ * Copyright 2024 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -15,13 +15,6 @@
  */
 package com.google.protobuf;
 
-public class GeneratedMessage {
-  // Emulates Kotlin property
-  public final Parser<?> parserForType = null;
-
-  public Parser<?> getParserForType() {
-    throw new RuntimeException();
-  }
-
-  public static class Builder {}
+public interface EnumLite {
+  int getNumber();
 }

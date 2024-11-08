@@ -20,10 +20,12 @@ package protobuf
 
 import javaemul.lang.*
 import com.google.protobuf.Parser
+import kotlin.Int
 import kotlin.OptIn
 import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
+import protobuf.MyEnum
 import protobuf.MyMessage
 
 @ObjCName("J2ktProtobufProtobuf", exact = true)
@@ -38,6 +40,8 @@ open class Protobuf {
   val chainedMessage: MyMessage? = MyMessage.newBuilder().setTestField(1).setTestField(2).build()
   val defaultMessage: MyMessage? = MyMessage.getDefaultInstance()
   defaultMessage!!.testField
-  val parser: Parser<*>? = message!!.getParserForType()
+  val parser: Parser<*>? = message!!.parserForType
+  val enumOne: MyEnum? = MyEnum.ONE
+  val enumOneNumber: Int = MyEnum.ONE.number
  }
 }

@@ -1,0 +1,48 @@
+goog.module('com.google.protobuf.EnumLite.$LambdaAdaptor$impl');
+
+const EnumLite = goog.require('com.google.protobuf.EnumLite$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @implements {EnumLite}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function():number */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function():number} @nodts*/
+  this.f_fn__com_google_protobuf_EnumLite_$LambdaAdaptor;
+  this.$ctor__com_google_protobuf_EnumLite_$LambdaAdaptor__com_google_protobuf_EnumLite_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__com_google_protobuf_EnumLite_$LambdaAdaptor__com_google_protobuf_EnumLite_$JsFunction__void(/** ?function():number */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__com_google_protobuf_EnumLite_$LambdaAdaptor = fn;
+ }
+ /** @override @nodts @return {number} */
+ m_getNumber__int() {
+  let /** ?function():number */ $function;
+  return ($function = this.f_fn__com_google_protobuf_EnumLite_$LambdaAdaptor, $function());
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+EnumLite.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'com.google.protobuf.EnumLite$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=EnumLite$$LambdaAdaptor.js.map

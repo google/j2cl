@@ -281,11 +281,8 @@ private val collectionTypeDescriptors: Set<TypeDescriptor>
 private val TypeDeclaration.isCollection: Boolean
   get() = toDescriptor().run { collectionTypeDescriptors.any { isAssignableTo(it) } }
 
-private val TypeDeclaration.isProtobufMessageOrBuilder: Boolean
-  get() = toDescriptor().isProtobufMessageOrBuilder()
-
 private val TypeDeclaration.shouldRender: Boolean
-  get() = visibility.isPublic && existsInObjC && !isCollection && !isProtobufMessageOrBuilder
+  get() = visibility.isPublic && existsInObjC && !isCollection && !isProtobuf
 
 private val TypeDeclaration.existsInObjC: Boolean
   get() = !isKtNative || mappedObjCNameRenderer != null

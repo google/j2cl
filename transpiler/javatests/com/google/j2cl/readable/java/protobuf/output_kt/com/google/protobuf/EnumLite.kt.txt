@@ -1,4 +1,4 @@
-// Generated from "com/google/protobuf/GeneratedMessage.java"
+// Generated from "com/google/protobuf/EnumLite.java"
 @file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
@@ -19,25 +19,14 @@
 package com.google.protobuf
 
 import javaemul.lang.*
-import com.google.protobuf.Parser
-import java.lang.RuntimeException
+import kotlin.Int
 import kotlin.OptIn
 import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
-import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktComGoogleProtobufGeneratedMessage", exact = true)
-open class GeneratedMessage {
- @JvmField
- @ObjCName("parserForType_")
- val parserForType: Parser<*>? = null
-
- @ObjCName("getParserForType")
- open fun getParserForType(): Parser<*>? {
-  throw RuntimeException()
- }
-
- @ObjCName("J2ktComGoogleProtobufGeneratedMessage_Builder", exact = true)
- open class Builder {}
+@ObjCName("J2ktComGoogleProtobufEnumLite", exact = true)
+fun interface EnumLite {
+ @ObjCName("getNumber")
+ fun getNumber(): Int
 }

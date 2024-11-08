@@ -382,8 +382,8 @@ internal data class ExpressionRenderer(
   private fun methodInvocationSource(expression: MethodCall): Source =
     expression.target.let { methodDescriptor ->
       when {
-        methodDescriptor.isProtobufGetter() ->
-          identifierSource(computeProtobufPropertyName(expression.target.name!!))
+        methodDescriptor.isProtobufGetter ->
+          identifierSource(expression.target.name!!.toProtobufPropertyName())
         else ->
           join(
             identifierSource(environment.ktMangledName(expression.target)),

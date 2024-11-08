@@ -1,0 +1,89 @@
+goog.module('protobuf.MyEnum$impl');
+
+const EnumLite = goog.require('com.google.protobuf.EnumLite$impl');
+const Enum = goog.require('java.lang.Enum$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+
+/**
+ * @extends {Enum<!MyEnum>}
+ * @implements {EnumLite}
+ */
+class MyEnum extends Enum {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@const {number} @nodts*/
+  this.f_number__protobuf_MyEnum = 0;
+ }
+ /** @nodts @return {!MyEnum} */
+ static $create__java_lang_String__int(/** ?string */ $name, /** number */ $ordinal) {
+  let $instance = new MyEnum();
+  $instance.$ctor__protobuf_MyEnum__java_lang_String__int__void($name, $ordinal);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__protobuf_MyEnum__java_lang_String__int__void(/** ?string */ $name, /** number */ $ordinal) {
+  this.f_name__java_lang_Enum_ = $name;
+  this.f_ordinal__java_lang_Enum_ = $ordinal;
+  this.$ctor__java_lang_Enum__java_lang_String__int__void($name, $ordinal);
+ }
+ /** @override @nodts @return {number} */
+ m_getNumber__int() {
+  MyEnum.$clinit();
+  throw $Exceptions.toJs(RuntimeException.$create__());
+ }
+ /** @nodts @return {!MyEnum} */
+ static m_valueOf__java_lang_String__protobuf_MyEnum(/** string */ name) {
+  MyEnum.$clinit();
+  if ($Equality.$same(MyEnum.f_namesToValuesMap__protobuf_MyEnum_, null)) {
+   MyEnum.f_namesToValuesMap__protobuf_MyEnum_ = /**@type {Map<?string, !MyEnum>}*/ ($Enums.createMapFromValues(MyEnum.m_values__arrayOf_protobuf_MyEnum()));
+  }
+  return /**@type {MyEnum}*/ ($Enums.getValueFromNameAndMap(name, MyEnum.f_namesToValuesMap__protobuf_MyEnum_));
+ }
+ /** @nodts @return {!Array<!MyEnum>} */
+ static m_values__arrayOf_protobuf_MyEnum() {
+  MyEnum.$clinit();
+  return /**@type {!Array<!MyEnum>}*/ ($Arrays.$stampType([MyEnum.f_ONE__protobuf_MyEnum, MyEnum.f_TWO__protobuf_MyEnum], MyEnum));
+ }
+ /** @nodts */
+ static $clinit() {
+  MyEnum.$clinit = () =>{};
+  MyEnum.$loadModules();
+  Enum.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof MyEnum;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $Enums = goog.module.get('vmbootstrap.Enums$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+ }
+}
+/**@const {number} @nodts*/
+MyEnum.$ordinal_ONE__protobuf_MyEnum = 0;
+/**@const {number} @nodts*/
+MyEnum.$ordinal_TWO__protobuf_MyEnum = 1;
+/**@const {!MyEnum} @nodts*/
+MyEnum.f_ONE__protobuf_MyEnum = /**@pureOrBreakMyCode*/ MyEnum.$create__java_lang_String__int($Util.$makeEnumName('ONE'), MyEnum.$ordinal_ONE__protobuf_MyEnum);
+/**@const {!MyEnum} @nodts*/
+MyEnum.f_TWO__protobuf_MyEnum = /**@pureOrBreakMyCode*/ MyEnum.$create__java_lang_String__int($Util.$makeEnumName('TWO'), MyEnum.$ordinal_TWO__protobuf_MyEnum);
+/**@type {Map<?string, !MyEnum>} @nodts*/
+MyEnum.f_namesToValuesMap__protobuf_MyEnum_;
+EnumLite.$markImplementor(MyEnum);
+$Util.$setClassMetadataForEnum(MyEnum, 'protobuf.MyEnum');
+
+exports = MyEnum;
+
+//# sourceMappingURL=MyEnum.js.map

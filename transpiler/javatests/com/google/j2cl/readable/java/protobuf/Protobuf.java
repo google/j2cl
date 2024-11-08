@@ -33,5 +33,8 @@ public class Protobuf {
     defaultMessage.getTestField();
 
     Parser<?> parser = message.getParserForType();
+
+    MyEnum enumOne = MyEnum.ONE;
+    int enumOneNumber = MyEnum.ONE.number;
   }
 }

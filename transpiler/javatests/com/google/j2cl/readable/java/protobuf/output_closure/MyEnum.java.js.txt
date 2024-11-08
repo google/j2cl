@@ -1,0 +1,14 @@
+goog.module('protobuf.MyEnum');
+
+goog.require('com.google.protobuf.EnumLite');
+goog.require('java.lang.Enum');
+goog.require('java.lang.RuntimeException');
+goog.require('javaemul.internal.Enums.NativeMap.$Overlay');
+goog.require('nativebootstrap.Equality');
+goog.require('nativebootstrap.Util');
+goog.require('vmbootstrap.Arrays');
+goog.require('vmbootstrap.Enums');
+goog.require('vmbootstrap.Exceptions');
+
+const MyEnum = goog.require('protobuf.MyEnum$impl');
+exports = MyEnum;

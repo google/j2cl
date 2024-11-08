@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Google Inc.
+ * Copyright 2024 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,15 +13,20 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.protobuf;
+package protobuf;
 
-public class GeneratedMessage {
+import com.google.protobuf.EnumLite;
+import com.google.protobuf.Internal.ProtoNonnullApi;
+
+@ProtoNonnullApi
+public enum MyEnum implements EnumLite {
+  ONE,
+  TWO;
+
   // Emulates Kotlin property
-  public final Parser<?> parserForType = null;
+  public final int number = 0;
 
-  public Parser<?> getParserForType() {
+  public int getNumber() {
     throw new RuntimeException();
   }
-
-  public static class Builder {}
 }

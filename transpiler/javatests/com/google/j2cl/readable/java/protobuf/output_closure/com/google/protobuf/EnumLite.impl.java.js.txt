@@ -1,0 +1,42 @@
+goog.module('com.google.protobuf.EnumLite$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('com.google.protobuf.EnumLite.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class EnumLite {
+ /** @abstract @nodts @return {number} */
+ m_getNumber__int() {}
+ /** @nodts @return {!EnumLite} */
+ static $adapt(/** ?function():number */ fn) {
+  EnumLite.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts */
+ static $clinit() {
+  EnumLite.$clinit = () =>{};
+  EnumLite.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__com_google_protobuf_EnumLite = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__com_google_protobuf_EnumLite;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('com.google.protobuf.EnumLite.$LambdaAdaptor$impl');
+ }
+}
+EnumLite.$markImplementor(/**@type {Function}*/ (EnumLite));
+$Util.$setClassMetadataForInterface(EnumLite, 'com.google.protobuf.EnumLite');
+
+exports = EnumLite;
+
+//# sourceMappingURL=EnumLite.js.map

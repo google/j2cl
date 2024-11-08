@@ -17,12 +17,12 @@ package protobuf;
 
 import com.google.protobuf.GeneratedMessage;
 import com.google.protobuf.Internal.ProtoNonnullApi;
-import javaemul.internal.annotations.KtProperty;
 
 @ProtoNonnullApi
 public class MyMessage extends GeneratedMessage {
+  // Emulates Kotlin property
+  public final int testField = 0;
 
-  @KtProperty
   public int getTestField() {
     throw new RuntimeException();
   }
@@ -41,7 +41,9 @@ public class MyMessage extends GeneratedMessage {
 
   @ProtoNonnullApi
   public static class Builder extends GeneratedMessage.Builder {
-    @KtProperty
+    // Emulates Kotlin property
+    public int testField = 0;
+
     public int getTestField() {
       throw new RuntimeException();
     }

@@ -15,57 +15,21 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
-import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor
-import com.google.j2cl.transpiler.ast.TypeDescriptor
+import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.common.camelCaseStartsWith
+import com.google.j2cl.transpiler.backend.kotlin.common.runIf
 
-internal fun MethodDescriptor.isProtoExtensionChecker() =
-  qualifiedBinaryName ==
-    "com.google.protobuf.GeneratedMessageLite\$ExtendableMessage.hasExtension" ||
-    qualifiedBinaryName == "com.google.protobuf.GeneratedMessage\$ExtendableMessage.hasExtension"
+internal val TypeDeclaration.isProtobuf: Boolean
+  get() = allSuperTypesIncludingSelf.any { it.packageName == "com.google.protobuf" }
 
-internal fun MethodDescriptor.isProtoExtensionGetter() =
-  qualifiedBinaryName ==
-    "com.google.protobuf.GeneratedMessageLite\$ExtendableMessage.getExtension" ||
-    qualifiedBinaryName == "com.google.protobuf.GeneratedMessage\$ExtendableMessage.getExtension"
+internal val MethodDescriptor.isProtobuf: Boolean
+  get() = !isStatic && enclosingTypeDescriptor.typeDeclaration.isProtobuf
 
-internal fun MethodDescriptor.isProtobufGetter(): Boolean {
-  if (!isProtobufMethod() || !parameterDescriptors.isEmpty()) {
-    return false
-  }
-  val name = name ?: ""
-  return (name.startsWith("get") && name != "getDefaultInstance")
-}
+private const val GET: String = "get"
 
-internal fun MethodDescriptor.isProtobufMethod() =
-  !isStatic && enclosingTypeDescriptor.isProtobufMessageOrBuilder()
+internal val MethodDescriptor.isProtobufGetter: Boolean
+  get() = isProtobuf && parameterDescriptors.isEmpty() && name?.startsWith(GET) ?: false
 
-internal fun TypeDescriptor.isProtobufBuilder(): Boolean {
-  if (this !is DeclaredTypeDescriptor) {
-    return false
-  }
-  val superTypeDescriptor: DeclaredTypeDescriptor = superTypeDescriptor ?: return false
-  val name = superTypeDescriptor.qualifiedSourceName
-  return name == "com.google.protobuf.GeneratedMessage.Builder" ||
-    name == "com.google.protobuf.GeneratedMessageLite.Builder" ||
-    name == "com.google.protobuf.GeneratedMessageLite.ExtendableBuilder"
-}
-
-internal fun computeProtobufPropertyName(methodName: String) =
-  if (methodName.camelCaseStartsWith("get")) {
-    methodName[3].toLowerCase() + methodName.substring(4)
-  } else {
-    methodName
-  }
-
-private fun DeclaredTypeDescriptor.isProtobufMessage(): Boolean {
-  val superTypeDescriptor: DeclaredTypeDescriptor = superTypeDescriptor ?: return false
-  val name = superTypeDescriptor.qualifiedSourceName
-  return name == "com.google.protobuf.GeneratedMessage" ||
-    name == "com.google.protobuf.GeneratedMessageLite" ||
-    name == "com.google.protobuf.GeneratedMessageLite.ExtendableMessage"
-}
-
-internal fun DeclaredTypeDescriptor.isProtobufMessageOrBuilder() =
-  isProtobufMessage() || isProtobufBuilder()
+internal fun String.toProtobufPropertyName() =
+  runIf(camelCaseStartsWith(GET)) { substring(GET.length).replaceFirstChar { it.toLowerCase() } }
