@@ -574,7 +574,11 @@ class KotlinEnvironment(
 
       var constantValue =
         irField.constantValue()?.value?.let { Literal.fromValue(it, fieldTypeDescriptor) }
-      if (constantValue == null && irField.correspondingPropertySymbol?.owner?.isConst == true) {
+      if (
+        constantValue == null &&
+          !irField.isFromJava() &&
+          irField.correspondingPropertySymbol?.owner?.isConst == true
+      ) {
         // In Kotlin, const val initialized to their default value does not have initializer and
         // `irField.constantValue()` returns null. In that case use the default value of the field
         // type.
