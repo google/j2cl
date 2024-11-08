@@ -40,6 +40,6 @@ public class Protobuf {
         ((GeneratedMessage) message).getParserForType();
 
     MyEnum enumOne = MyEnum.ONE;
-    int enumOneNumber = MyEnum.ONE.number;
+    int enumOneNumber = MyEnum.ONE.getNumber();
   }
 }

@@ -13,19 +13,8 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package protobuf;
+package com.google.protobuf
 
-import com.google.protobuf.EnumLite;
-import com.google.protobuf.Internal.ProtoNonnullApi;
-import javaemul.internal.annotations.KtNative;
-
-@KtNative(name = "protobuf.MyEnum")
-@ProtoNonnullApi
-public enum MyEnum implements EnumLite {
-  ONE,
-  TWO;
-
-  public int getNumber() {
-    throw new RuntimeException();
-  }
+interface EnumLite {
+  val number: Int
 }
