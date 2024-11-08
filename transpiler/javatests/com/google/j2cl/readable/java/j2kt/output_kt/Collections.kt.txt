@@ -1,0 +1,420 @@
+// Generated from "j2kt/Collections.java"
+@file:OptIn(ExperimentalObjCName::class)
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN")
+
+package j2kt
+
+import javaemul.lang.*
+import java.lang.RuntimeException
+import javaemul.lang.JavaAbstractCollection
+import javaemul.lang.JavaAbstractList
+import javaemul.lang.JavaAbstractMap
+import kotlin.Any
+import kotlin.Boolean
+import kotlin.Int
+import kotlin.OptIn
+import kotlin.String
+import kotlin.Suppress
+import kotlin.collections.MutableCollection
+import kotlin.collections.MutableIterator
+import kotlin.collections.MutableList
+import kotlin.collections.MutableMap
+import kotlin.collections.MutableMap.MutableEntry
+import kotlin.collections.MutableSet
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
+
+@ObjCName("J2ktJ2ktCollections", exact = true)
+open class Collections {
+ @ObjCName("J2ktJ2ktCollectionsCompanion", exact = true)
+ companion object {
+  @JvmStatic
+  @ObjCName("testCollection_generic")
+  fun <T> testCollection_generic(
+   @ObjCName("withJavaUtilCollection") collection: MutableCollection<T>
+  ) {
+   collection.java_contains(Collections.generic<T>())
+   collection.java_remove(Collections.generic<T>())
+   collection.java_containsAll(Collections.genericCollection<T>())
+   collection.java_addAll(Collections.genericCollection<T>())
+   collection.java_removeAll(Collections.genericCollection<T>())
+   collection.java_retainAll(Collections.genericCollection<T>())
+   collection.java_contains(Collections.mismatching() as Any?)
+   collection.java_remove(Collections.mismatching() as Any?)
+   collection.java_containsAll(Collections.mismatchingCollection())
+   collection.java_removeAll(Collections.mismatchingCollection())
+   collection.java_retainAll(Collections.mismatchingCollection())
+  }
+
+  @JvmStatic
+  @ObjCName("testCollection_parameterized")
+  fun testCollection_parameterized(
+   @ObjCName("withJavaUtilCollection") collection: MutableCollection<String>
+  ) {
+   collection.java_contains(Collections.string())
+   collection.java_remove(Collections.string())
+   collection.java_containsAll(Collections.collectionOfString())
+   collection.java_addAll(Collections.collectionOfString())
+   collection.java_removeAll(Collections.collectionOfString())
+   collection.java_retainAll(Collections.collectionOfString())
+   collection.java_contains(Collections.mismatching() as Any?)
+   collection.java_remove(Collections.mismatching() as Any?)
+   collection.java_containsAll(Collections.mismatchingCollection())
+   collection.java_removeAll(Collections.mismatchingCollection())
+   collection.java_retainAll(Collections.mismatchingCollection())
+  }
+
+  @JvmStatic
+  @ObjCName("testCollection_specialized")
+  fun testCollection_specialized(
+   @ObjCName("withJ2ktCollections_CollectionOfString") collection: Collections.CollectionOfString
+  ) {
+   collection.java_contains(Collections.string())
+   collection.java_remove(Collections.string())
+   collection.java_containsAll(Collections.collectionOfString())
+   collection.java_addAll(Collections.collectionOfString())
+   collection.java_removeAll(Collections.collectionOfString())
+   collection.java_retainAll(Collections.collectionOfString())
+   collection.java_contains(Collections.mismatching() as Any?)
+   collection.java_remove(Collections.mismatching() as Any?)
+   collection.java_containsAll(Collections.mismatchingCollection())
+   collection.java_removeAll(Collections.mismatchingCollection())
+   collection.java_retainAll(Collections.mismatchingCollection())
+  }
+
+  @JvmStatic
+  @ObjCName("testList_generic")
+  fun <T> testList_generic(
+   @ObjCName("withJavaUtilList") list: MutableList<T>
+  ) {
+   list.java_indexOf(Collections.generic<T>())
+   list.java_lastIndexOf(Collections.generic<T>())
+   list.java_indexOf(Collections.mismatching() as Any?)
+   list.java_lastIndexOf(Collections.mismatching() as Any?)
+  }
+
+  @JvmStatic
+  @ObjCName("testList_parameterized")
+  fun testList_parameterized(
+   @ObjCName("withJavaUtilList") list: MutableList<String>
+  ) {
+   list.java_indexOf(Collections.string())
+   list.java_lastIndexOf(Collections.string())
+   list.java_indexOf(Collections.mismatching() as Any?)
+   list.java_lastIndexOf(Collections.mismatching() as Any?)
+  }
+
+  @JvmStatic
+  @ObjCName("testList_specialized")
+  fun testList_specialized(
+   @ObjCName("withJ2ktCollections_ListOfString") list: Collections.ListOfString
+  ) {
+   list.java_indexOf(Collections.string())
+   list.java_lastIndexOf(Collections.string())
+   list.java_indexOf(Collections.mismatching() as Any?)
+   list.java_lastIndexOf(Collections.mismatching() as Any?)
+  }
+
+  @JvmStatic
+  @ObjCName("testMap_generic")
+  fun <K, V> testMap_generic(
+   @ObjCName("withJavaUtilMap") map: MutableMap<K, V>
+  ) {
+   map.java_get(Collections.generic<K>())
+   map.java_getOrDefault(Collections.generic<K>(), Collections.generic<V?>())
+   map.java_containsKey(Collections.generic<K>())
+   map.java_containsValue(Collections.generic<V>())
+   map.java_putAll(Collections.genericMap<K, V>())
+   map.java_remove(Collections.generic<K>())
+   map.java_remove(Collections.generic<K>(), Collections.generic<V>())
+   map.java_get(Collections.mismatching() as Any?)
+   map.java_getOrDefault(Collections.mismatching() as Any?, Collections.generic<V?>())
+   map.java_containsKey(Collections.mismatching() as Any?)
+   map.java_containsValue(Collections.mismatching() as Any?)
+   map.java_remove(Collections.mismatching() as Any?)
+   map.java_remove(Collections.mismatching() as Any?, Collections.mismatching() as Any?)
+  }
+
+  @JvmStatic
+  @ObjCName("testMap_parameterized")
+  fun testMap_parameterized(
+   @ObjCName("withJavaUtilMap") map: MutableMap<String, String>
+  ) {
+   map.java_get(Collections.string())
+   map.java_getOrDefault(Collections.string(), Collections.string())
+   map.java_containsKey(Collections.string())
+   map.java_containsValue(Collections.string())
+   map.java_putAll(Collections.mapOfString())
+   map.java_remove(Collections.string())
+   map.java_remove(Collections.string(), Collections.string())
+   map.java_get(Collections.mismatching() as Any?)
+   map.java_getOrDefault(Collections.mismatching() as Any?, Collections.string())
+   map.java_containsKey(Collections.mismatching() as Any?)
+   map.java_containsValue(Collections.mismatching() as Any?)
+   map.java_remove(Collections.mismatching() as Any?)
+   map.java_remove(Collections.mismatching() as Any?, Collections.mismatching() as Any?)
+  }
+
+  @JvmStatic
+  @ObjCName("testMap_specialized")
+  fun testMap_specialized(
+   @ObjCName("withJ2ktCollections_MapOfString") map: Collections.MapOfString
+  ) {
+   map.java_get(Collections.string())
+   map.java_getOrDefault(Collections.string(), Collections.string())
+   map.java_containsKey(Collections.string())
+   map.java_containsValue(Collections.string())
+   map.java_putAll(Collections.mapOfString())
+   map.java_remove(Collections.string())
+   map.java_remove(Collections.string(), Collections.string())
+   map.java_get(Collections.mismatching() as Any?)
+   map.java_getOrDefault(Collections.mismatching() as Any?, Collections.string())
+   map.java_containsKey(Collections.mismatching() as Any?)
+   map.java_containsValue(Collections.mismatching() as Any?)
+   map.java_remove(Collections.mismatching() as Any?)
+   map.java_remove(Collections.mismatching() as Any?, Collections.mismatching() as Any?)
+  }
+
+  @JvmStatic
+  private fun convert(`object`: Any?): Any? {
+   return `object`
+  }
+
+  @JvmStatic
+  private fun convertCollection(c: MutableCollection<*>): MutableCollection<*> {
+   return c
+  }
+
+  @JvmStatic
+  private fun <T> generic(): T {
+   throw RuntimeException()
+  }
+
+  @JvmStatic
+  private fun string(): String {
+   throw RuntimeException()
+  }
+
+  @JvmStatic
+  private fun mismatching(): Int {
+   throw RuntimeException()
+  }
+
+  @JvmStatic
+  private fun <T> genericCollection(): MutableCollection<T> {
+   throw RuntimeException()
+  }
+
+  @JvmStatic
+  private fun collectionOfString(): MutableCollection<String> {
+   throw RuntimeException()
+  }
+
+  @JvmStatic
+  private fun mismatchingCollection(): MutableCollection<Int> {
+   throw RuntimeException()
+  }
+
+  @JvmStatic
+  private fun <K, V> genericMap(): MutableMap<K, V> {
+   throw RuntimeException()
+  }
+
+  @JvmStatic
+  private fun mapOfString(): MutableMap<String, String> {
+   throw RuntimeException()
+  }
+ }
+
+ @ObjCName("J2ktJ2ktCollections_CustomCollection", exact = true)
+ open class CustomCollection<T>: JavaAbstractCollection<T>() {
+  override fun iterator(): MutableIterator<T> {
+   return null!!
+  }
+
+  override val size: Int
+   get() {
+    return 0
+   }
+
+  override fun java_contains(o: Any?): Boolean {
+   var o_1: Any? = o
+   o_1 = Collections.convert(o_1)
+   return super<JavaAbstractCollection>.java_contains(o_1)
+  }
+
+  override fun java_remove(o: Any?): Boolean {
+   var o_1: Any? = o
+   o_1 = Collections.convert(o_1)
+   return super<JavaAbstractCollection>.java_remove(o_1)
+  }
+
+  override fun java_containsAll(c: MutableCollection<*>): Boolean {
+   var c_1: MutableCollection<*> = c
+   c_1 = Collections.convertCollection(c_1)
+   return super<JavaAbstractCollection>.java_containsAll(c_1)
+  }
+
+  override fun java_removeAll(c: MutableCollection<*>): Boolean {
+   var c_1: MutableCollection<*> = c
+   c_1 = Collections.convertCollection(c_1)
+   return super<JavaAbstractCollection>.java_removeAll(c_1)
+  }
+
+  override fun java_retainAll(c: MutableCollection<*>): Boolean {
+   var c_1: MutableCollection<*> = c
+   c_1 = Collections.convertCollection(c_1)
+   return super<JavaAbstractCollection>.java_retainAll(c_1)
+  }
+ }
+
+ @ObjCName("J2ktJ2ktCollections_CustomList", exact = true)
+ open class CustomList<T>: JavaAbstractList<T>() {
+  override fun get(index: Int): T {
+   return null as T
+  }
+
+  override val size: Int
+   get() {
+    return 0
+   }
+
+  override fun java_indexOf(o: Any?): Int {
+   var o_1: Any? = o
+   o_1 = Collections.convert(o_1)
+   return super<JavaAbstractList>.java_indexOf(o_1)
+  }
+
+  override fun java_lastIndexOf(o: Any?): Int {
+   var o_1: Any? = o
+   o_1 = Collections.convert(o_1)
+   return super<JavaAbstractList>.java_lastIndexOf(o_1)
+  }
+ }
+
+ @ObjCName("J2ktJ2ktCollections_CustomMap", exact = true)
+ open class CustomMap<K, V>: JavaAbstractMap<K, V>() {
+  override val entries: MutableSet<MutableEntry<K, V>>
+   get() {
+    throw RuntimeException()
+   }
+
+  override fun java_containsKey(key: Any?): Boolean {
+   var key_1: Any? = key
+   key_1 = Collections.convert(key_1)
+   return super<JavaAbstractMap>.java_containsKey(key_1)
+  }
+
+  override fun java_containsValue(value: Any?): Boolean {
+   var value_1: Any? = value
+   value_1 = Collections.convert(value_1)
+   return super<JavaAbstractMap>.java_containsValue(value_1)
+  }
+
+  override fun java_remove(key: Any?): V {
+   var key_1: Any? = key
+   key_1 = Collections.convert(key_1)
+   return super<JavaAbstractMap>.java_remove(key_1) as V
+  }
+
+  override fun java_remove(key: Any?, value: Any?): Boolean {
+   var key_1: Any? = key
+   var value_1: Any? = value
+   key_1 = Collections.convert(key_1)
+   value_1 = Collections.convert(value_1)
+   return super<JavaAbstractMap>.java_remove(key_1, value_1)
+  }
+
+  override fun java_get(key: Any?): V {
+   var key_1: Any? = key
+   key_1 = Collections.convert(key_1)
+   return super<JavaAbstractMap>.java_get(key_1) as V
+  }
+
+  override fun java_putAll(m: MutableMap<out K, out V>) {
+   super<JavaAbstractMap>.java_putAll(m)
+  }
+ }
+
+ @ObjCName("J2ktJ2ktCollections_CollectionOfString", exact = true)
+ open class CollectionOfString: Collections.CustomCollection<String>() {
+  @ObjCName("containsInteger")
+  open fun containsInteger(
+   @ObjCName("withJavaLangInteger") integer: Int
+  ): Boolean {
+   return super<Collections.CustomCollection>.java_remove(integer as Any?)
+  }
+
+  @ObjCName("removeInteger")
+  open fun removeInteger(
+   @ObjCName("withJavaLangInteger") integer: Int
+  ): Boolean {
+   return super<Collections.CustomCollection>.java_remove(integer as Any?)
+  }
+ }
+
+ @ObjCName("J2ktJ2ktCollections_ListOfString", exact = true)
+ open class ListOfString: Collections.CustomList<String>() {
+  override fun java_indexOf(o: Any?): Int {
+   var o_1: Any? = o
+   o_1 = Collections.convert(o_1)
+   return super<Collections.CustomList>.java_indexOf(o_1)
+  }
+
+  override fun java_lastIndexOf(o: Any?): Int {
+   var o_1: Any? = o
+   o_1 = Collections.convert(o_1)
+   return super<Collections.CustomList>.java_lastIndexOf(o_1)
+  }
+ }
+
+ @ObjCName("J2ktJ2ktCollections_MapOfString", exact = true)
+ open class MapOfString: Collections.CustomMap<String, String>() {
+  override fun java_containsKey(key: Any?): Boolean {
+   var key_1: Any? = key
+   key_1 = Collections.convert(key_1)
+   return super<Collections.CustomMap>.java_containsKey(key_1)
+  }
+
+  override fun java_containsValue(value: Any?): Boolean {
+   var value_1: Any? = value
+   value_1 = Collections.convert(value_1)
+   return super<Collections.CustomMap>.java_containsValue(value_1)
+  }
+
+  override fun java_remove(key: Any?): String {
+   var key_1: Any? = key
+   key_1 = Collections.convert(key_1)
+   return super<Collections.CustomMap>.java_remove(key_1)
+  }
+
+  override fun java_remove(key: Any?, value: Any?): Boolean {
+   var key_1: Any? = key
+   var value_1: Any? = value
+   key_1 = Collections.convert(key_1)
+   value_1 = Collections.convert(value_1)
+   return super<Collections.CustomMap>.java_remove(key_1, value_1)
+  }
+
+  override fun java_get(key: Any?): String {
+   var key_1: Any? = key
+   key_1 = Collections.convert(key_1)
+   return super<Collections.CustomMap>.java_get(key_1)
+  }
+ }
+}
