@@ -78,6 +78,7 @@ import org.jetbrains.kotlin.ir.expressions.IrPropertyReference
 import org.jetbrains.kotlin.ir.expressions.IrSetField
 import org.jetbrains.kotlin.ir.expressions.IrSetValue
 import org.jetbrains.kotlin.ir.expressions.IrStatementOrigin
+import org.jetbrains.kotlin.ir.expressions.IrTypeOperator
 import org.jetbrains.kotlin.ir.expressions.IrTypeOperatorCall
 import org.jetbrains.kotlin.ir.symbols.IrClassifierSymbol
 import org.jetbrains.kotlin.ir.symbols.IrFunctionSymbol
@@ -245,8 +246,7 @@ fun IrMemberAccessExpression<*>.getTypeSubstitutionMap(
 
   val receiverType =
     if (superQualifierSymbol != null) superQualifierSymbol.defaultType as? IrSimpleType
-    else dispatchReceiver?.type as? IrSimpleType
-
+    else getRealDispatcherReceiverForTypeSubstitution(irFunction)
   val dispatchReceiverTypeArguments = receiverType?.arguments ?: emptyList()
 
   if (typeParameters.isEmpty() && dispatchReceiverTypeArguments.isEmpty()) {
@@ -282,6 +282,44 @@ fun IrMemberAccessExpression<*>.getTypeSubstitutionMap(
     it.value.symbol to makeTypeProjection(getTypeArgument(it.index)!!, it.value.variance)
     // End of modification
   }
+}
+
+// TODO(b/377502016): remove this method when bug on JetBrain side is fixed.
+private fun IrMemberAccessExpression<*>.getRealDispatcherReceiverForTypeSubstitution(
+  callee: IrFunction
+): IrSimpleType? {
+  val dispatchReceiver = this.dispatchReceiver
+  // With K2, we see extra implicit cast inserted on the dispatch receiver on fakeoverride function
+  // calls.
+  // The targeted function still being the fakeoverride defined on the original dispatch receiver
+  // class (before the implicit cast), we need to return the original type to not lose any type
+  // argument information that would break our type substitution mechanism.
+  // Ex: let say we have a property `var foo : Foo<String> = ...`, when we call the
+  // equals() methods on it, Kotlinc *may* implicitly cast `foo` to `Any` losing the type argument
+  // of `Foo`. The call to `equals` is still targeting to the fakeoverride `equals` method defined
+  // on Foo.
+
+  // We try to narrow as much as we can the cases where we need to "patch" the dispatchReceiver type
+  if (
+    dispatchReceiver is IrTypeOperatorCall &&
+      dispatchReceiver.operator == IrTypeOperator.IMPLICIT_CAST
+  ) {
+    val originalDispatchReceiver = dispatchReceiver.argument
+
+    if (
+      // We only need that for fake override where we need to propagate type parameter substitution.
+      callee.isFakeOverride &&
+        // Patch the dispatchReceiver only if the callee is defined on the class of the type before
+        // the implicit cast
+        callee.parentClassOrNull != null &&
+        callee.parentClassOrNull!!.symbol == originalDispatchReceiver.type.classOrNull
+    ) {
+
+      return originalDispatchReceiver.type as? IrSimpleType
+    }
+  }
+
+  return dispatchReceiver?.type as? IrSimpleType
 }
 
 // Adapted from org/jetbrains/kotlin/ir/util/IrUtils.kt
