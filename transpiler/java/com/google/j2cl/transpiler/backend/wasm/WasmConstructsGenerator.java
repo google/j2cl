@@ -444,7 +444,7 @@ public class WasmConstructsGenerator {
               environment.getWasmTypeName(enclosingTypeDescriptor)));
     }
 
-    StatementTranspiler.render(method.getBody(), builder, environment, sourceMappingPathPrefix);
+    StatementTranspiler.render(method.getBody(), builder, environment);
     builder.unindent();
     builder.newLine();
     builder.append(")");

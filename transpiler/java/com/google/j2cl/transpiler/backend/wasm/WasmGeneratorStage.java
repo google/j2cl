@@ -59,7 +59,10 @@ public class WasmGeneratorStage {
     this(null, null, null, problems);
     this.environment =
         new WasmGenerationEnvironment(
-            library, JsImportsGenerator.collectImports(library, problems), /* isModular= */ true);
+            library,
+            JsImportsGenerator.collectImports(library, problems),
+            sourceMappingPathPrefix,
+            /* isModular= */ true);
   }
 
   private WasmGeneratorStage(
@@ -93,7 +96,9 @@ public class WasmGeneratorStage {
     }
 
     Imports jsImports = JsImportsGenerator.collectImports(library, problems);
-    environment = new WasmGenerationEnvironment(library, jsImports, /* isModular= */ true);
+    environment =
+        new WasmGenerationEnvironment(
+            library, jsImports, sourceMappingPathPrefix, /* isModular= */ true);
     SummaryBuilder summaryBuilder = new SummaryBuilder(library, environment, problems);
 
     JsImportsGenerator.collectImportSnippets(jsImports)

@@ -60,8 +60,7 @@ final class StatementTranspiler {
   public static void render(
       Statement statement,
       final SourceBuilder builder,
-      final WasmGenerationEnvironment environment,
-      String sourceMappingPathPrefix) {
+      final WasmGenerationEnvironment environment) {
 
     class SourceTransformer extends AbstractVisitor {
       @Override
@@ -572,12 +571,13 @@ final class StatementTranspiler {
       }
 
       void render(Statement stmt) {
-        StatementTranspiler.render(stmt, builder, environment, sourceMappingPathPrefix);
+        StatementTranspiler.render(stmt, builder, environment);
       }
     }
 
     if (!(statement instanceof Block)) {
-      renderSourceMappingComment(sourceMappingPathPrefix, statement.getSourcePosition(), builder);
+      renderSourceMappingComment(
+          environment.getSourceMappingPathPrefix(), statement.getSourcePosition(), builder);
     }
     statement.accept(new SourceTransformer());
   }

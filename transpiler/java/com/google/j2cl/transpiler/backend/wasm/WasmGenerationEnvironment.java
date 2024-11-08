@@ -382,18 +382,25 @@ public class WasmGenerationEnvironment {
     return jsImports.getMethodImports().get(methodDescriptor) != null;
   }
 
+  String getSourceMappingPathPrefix() {
+    return sourceMappingPathPrefix;
+  }
+
   private final boolean isModular;
   private final Library library;
   private final JsImportsGenerator.Imports jsImports;
   private final ItableAllocator<TypeDeclaration> itableAllocator;
+  private final String sourceMappingPathPrefix;
 
   WasmGenerationEnvironment(Library library, Imports jsImports) {
-    this(library, jsImports, /* isModular= */ false);
+    this(library, jsImports, /* sourceMappingPathPrefix= */ null, /* isModular= */ false);
   }
 
-  WasmGenerationEnvironment(Library library, Imports jsImports, boolean isModular) {
+  WasmGenerationEnvironment(
+      Library library, Imports jsImports, String sourceMappingPathPrefix, boolean isModular) {
     this.isModular = isModular;
     this.library = library;
+    this.sourceMappingPathPrefix = sourceMappingPathPrefix;
 
     // Resolve variable names into unique wasm identifiers.
     library
