@@ -93,12 +93,13 @@ Foo.getValue = function() {
 
 *   **DO NOT** add extra goog.requires to `native.js` files. Since these are
     concatenated with the transpiled code for the rest of the file, this is
-    effectively putting import in the middle of the file. Additionally, the
-    imports you add may conflict with existing imports.
+    effectively putting imports in the middle of the file. Additionally, the
+    imports you add may conflict with existing imports or cause incorrect
+    loading semantics, both of which will be confusing to debug.
 
-    Instead, ensure the Java code has imports for all the types you'll need.
-    These imports will be accessible in the `native.js` by referencing their
-    simple names.
+    Generally if you get to the point of having to do this, you're better off
+    writing the code separately in JS and
+    [using JsInteorp to call it](jsinterop-by-example.md#jstype-interface-with-closure-utilities).
 
 *   Be particularly mindful of nullability in `native.js` files. The JSCompiler
     does not enforce nullability checks within J2CL-generated code, and since
