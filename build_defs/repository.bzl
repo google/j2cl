@@ -7,7 +7,7 @@ def load_j2cl_repo_deps():
     http_archive(
         name = "com_google_protobuf",
         strip_prefix = "protobuf-3.19.0",
-        sha256 = "",
+        sha256 = "4a045294ec76cb6eae990a21adb5d8b3c78be486f1507faa601541d1ccefbd6b",
         urls = [
             "https://github.com/protocolbuffers/protobuf/archive/v3.19.0.tar.gz",
         ],
