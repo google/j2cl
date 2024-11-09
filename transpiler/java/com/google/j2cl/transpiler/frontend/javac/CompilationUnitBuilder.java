@@ -144,8 +144,10 @@ import com.sun.tools.javac.tree.JCTree.JCVariableDecl;
 import com.sun.tools.javac.tree.JCTree.JCWhileLoop;
 import com.sun.tools.javac.tree.JCTree.Tag;
 import java.io.IOException;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -161,7 +163,11 @@ import javax.lang.model.type.ExecutableType;
 public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   private final JavaEnvironment environment;
   private final Map<VariableElement, Variable> variableByVariableElement = new HashMap<>();
-  private final Map<String, Label> labelsInScope = new HashMap<>();
+  // Keeps track of labels that are currently in scope. Even though labels cannot have the
+  // same name if they are nested in the same method body, labels with the same name could
+  // be lexically nested by being in different methods bodies, e.g. from local or anonymous
+  // classes or lambdas.
+  private final Map<String, Deque<Label>> labelsInScope = new HashMap<>();
   private JCCompilationUnit javacUnit;
 
   private CompilationUnitBuilder(JavaEnvironment environment) {
@@ -333,14 +339,14 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
   private LabeledStatement convertLabeledStatement(JCLabeledStatement statement) {
     Label label = Label.newBuilder().setName(statement.getLabel().toString()).build();
-    checkState(labelsInScope.put(label.getName(), label) == null);
+    labelsInScope.computeIfAbsent(label.getName(), n -> new ArrayDeque<>()).push(label);
     LabeledStatement labeledStatment =
         LabeledStatement.newBuilder()
             .setSourcePosition(getSourcePosition(statement))
             .setLabel(label)
             .setStatement(convertStatement(statement.getStatement()))
             .build();
-    labelsInScope.remove(label.getName());
+    labelsInScope.get(label.getName()).pop();
     return labeledStatment;
   }
 
@@ -360,7 +366,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
   @Nullable
   private LabelReference getLabelReferenceOrNull(Name label) {
-    return label == null ? null : labelsInScope.get(label.toString()).createReference();
+    return label == null ? null : labelsInScope.get(label.toString()).peek().createReference();
   }
 
   private DoWhileStatement convertDoWhileLoop(JCDoWhileLoop statement) {
