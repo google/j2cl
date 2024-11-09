@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.frontend.javac;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.common.collect.MoreCollectors.onlyElement;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.HAS_NO_SIDE_EFFECTS_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.UNCHECKED_CAST_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.WASM_ANNOTATION_NAME;
@@ -43,6 +44,7 @@ import com.google.j2cl.transpiler.ast.PostfixOperator;
 import com.google.j2cl.transpiler.ast.PrefixOperator;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
+import com.google.j2cl.transpiler.ast.TypeDeclaration.DescriptorFactory;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
@@ -1141,10 +1143,22 @@ class JavaEnvironment {
           return listBuilder.build();
         };
 
-    Supplier<MethodDescriptor> singleAbstractMethod =
-        () ->
-            createDeclarationMethodDescriptor(
-                getFunctionalInterfaceMethodDecl(typeElement.asType()));
+    DescriptorFactory<MethodDescriptor> singleAbstractMethod =
+        typeDeclaration -> {
+          if (kind != Kind.INTERFACE) {
+            return null;
+          }
+          // Get the declaration, possibly in a supertype.
+          var declaration =
+              createDeclarationMethodDescriptor(
+                  getFunctionalInterfaceMethodDecl(typeElement.asType()));
+          return declaration == null
+              ? null
+              // Find the parameterized version in the type.
+              : typeDeclaration.toDescriptor().getPolymorphicMethods().stream()
+                  .filter(m -> m.getDeclarationDescriptor() == declaration)
+                  .collect(onlyElement());
+        };
 
     Supplier<ImmutableList<FieldDescriptor>> declaredFields =
         () ->
