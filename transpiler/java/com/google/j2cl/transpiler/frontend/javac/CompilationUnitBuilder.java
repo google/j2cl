@@ -794,6 +794,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     return FunctionExpression.newBuilder()
         .setTypeDescriptor(getTargetType(expression))
+        .setJsAsync(functionalMethodDescriptor.isJsAsync())
         .setParameters(
             expression.getParameters().stream()
                 .map(variable -> createVariable((JCVariableDecl) variable, true))
