@@ -18,7 +18,7 @@ package com.google.j2cl.transpiler.frontend.javac;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
-import static com.google.common.collect.MoreCollectors.onlyElement;
+import static com.google.common.collect.MoreCollectors.toOptional;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.HAS_NO_SIDE_EFFECTS_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.UNCHECKED_CAST_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.WASM_ANNOTATION_NAME;
@@ -44,7 +44,6 @@ import com.google.j2cl.transpiler.ast.PostfixOperator;
 import com.google.j2cl.transpiler.ast.PrefixOperator;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
-import com.google.j2cl.transpiler.ast.TypeDeclaration.DescriptorFactory;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
@@ -1143,22 +1142,9 @@ class JavaEnvironment {
           return listBuilder.build();
         };
 
-    DescriptorFactory<MethodDescriptor> singleAbstractMethod =
-        typeDeclaration -> {
-          if (kind != Kind.INTERFACE) {
-            return null;
-          }
-          // Get the declaration, possibly in a supertype.
-          var declaration =
-              createDeclarationMethodDescriptor(
-                  getFunctionalInterfaceMethodDecl(typeElement.asType()));
-          return declaration == null
-              ? null
-              // Find the parameterized version in the type.
-              : typeDeclaration.toDescriptor().getPolymorphicMethods().stream()
-                  .filter(m -> m.getDeclarationDescriptor() == declaration)
-                  .collect(onlyElement());
-        };
+    Supplier<MethodDescriptor> singleAbstractMethod =
+        () ->
+            kind != Kind.INTERFACE ? null : getSingleAbstractMethodDescriptor(typeElement.asType());
 
     Supplier<ImmutableList<FieldDescriptor>> declaredFields =
         () ->
@@ -1309,26 +1295,28 @@ class JavaEnvironment {
     return type;
   }
 
-  MethodDescriptor getJsFunctionMethodDescriptor(TypeMirror type) {
+  @Nullable
+  MethodDescriptor getSingleAbstractMethodDescriptor(TypeMirror type) {
     DeclaredTypeDescriptor expressionTypeDescriptor =
         createDeclaredTypeDescriptor(getFunctionalInterface((Type) type));
-    return createMethodDescriptor(
-        expressionTypeDescriptor,
-        (MethodSymbol) getFunctionalInterfaceMethod(type).asMemberOf((Type) type, internalTypes),
-        getFunctionalInterfaceMethod(type));
+
+    // Returns the method declaration.
+    var declaration = createDeclarationMethodDescriptor(getFunctionalInterfaceMethodDecl(type));
+    return declaration == null
+        ? null
+        // Find the parameterized version in the type, since declaration might be the
+        // unparameterized version from a supertype.
+        : expressionTypeDescriptor.getPolymorphicMethods().stream()
+            .filter(m -> m.getDeclarationDescriptor() == declaration)
+            .collect(toOptional())
+            .orElse(declaration);
   }
+
 
   @Nullable
   private MethodSymbol getFunctionalInterfaceMethodDecl(TypeMirror typeMirror) {
     return Optional.ofNullable(getFunctionalInterfaceMethodPair(typeMirror))
         .map(MethodDeclarationPair::getDeclarationMethodSymbol)
-        .orElse(null);
-  }
-
-  @Nullable
-  private MethodSymbol getFunctionalInterfaceMethod(TypeMirror typeMirror) {
-    return Optional.ofNullable(getFunctionalInterfaceMethodPair(typeMirror))
-        .map(MethodDeclarationPair::getMethodSymbol)
         .orElse(null);
   }
 

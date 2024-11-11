@@ -790,7 +790,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
   private Expression convertLambda(JCLambda expression) {
     MethodDescriptor functionalMethodDescriptor =
-        environment.getJsFunctionMethodDescriptor(expression.type);
+        environment.getSingleAbstractMethodDescriptor(expression.type);
 
     return FunctionExpression.newBuilder()
         .setTypeDescriptor(getTargetType(expression))
@@ -844,7 +844,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     DeclaredTypeDescriptor expressionTypeDescriptor =
         environment.createDeclaredTypeDescriptor(memberReference.type);
     MethodDescriptor functionalMethodDescriptor =
-        environment.getJsFunctionMethodDescriptor(memberReference.type);
+        environment.getSingleAbstractMethodDescriptor(memberReference.type);
 
     if (methodSymbol.getEnclosingElement().getQualifiedName().contentEquals("Array")) {
       // Arrays member references are seen as references to members on a class Array.
