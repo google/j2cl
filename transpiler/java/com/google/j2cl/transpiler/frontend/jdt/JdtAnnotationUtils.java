@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.transpiler.frontend.jdt;
 
-import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getSuppressWarningsAnnotation;
+import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.SUPPRESS_WARNINGS_ANNOTATION_NAME;
 import static java.util.Arrays.stream;
 
 import com.google.common.base.Predicate;
@@ -162,6 +162,11 @@ public final class JdtAnnotationUtils {
 
     Object[] suppressions = JdtAnnotationUtils.getArrayAttribute(annotationBinding, "value");
     return stream(suppressions).anyMatch(warning::equals);
+  }
+
+  public static IAnnotationBinding getSuppressWarningsAnnotation(
+      IAnnotationBinding[] annotationBindings) {
+    return findAnnotationBindingByName(annotationBindings, SUPPRESS_WARNINGS_ANNOTATION_NAME);
   }
 
   public static boolean isNullMarked(PackageDeclaration packageDeclaration) {

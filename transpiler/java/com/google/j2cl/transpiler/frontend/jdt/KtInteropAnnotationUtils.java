@@ -23,7 +23,6 @@ import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_OB
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_OUT_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_PROPERTY_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_THROWS_ANNOTATION_NAME;
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.SUPPRESS_WARNINGS_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.findAnnotationBindingByName;
 import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.getAnnotationBinding;
 import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.getStringAttribute;
@@ -87,10 +86,5 @@ public class KtInteropAnnotationUtils {
 
   public static IAnnotationBinding getKtThrowsAnnotation(IAnnotationBinding[] annotationBindings) {
     return findAnnotationBindingByName(annotationBindings, KT_THROWS_ANNOTATION_NAME);
-  }
-
-  public static IAnnotationBinding getSuppressWarningsAnnotation(
-      IAnnotationBinding[] annotationBindings) {
-    return findAnnotationBindingByName(annotationBindings, SUPPRESS_WARNINGS_ANNOTATION_NAME);
   }
 }
