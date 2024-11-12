@@ -16,9 +16,12 @@
 package com.google.j2cl.transpiler.passes;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.FieldAccess;
+import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
+import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.ThisReference;
 
@@ -84,6 +87,24 @@ public class NormalizeSuperMemberReferences extends NormalizationPass {
                 .setQualifier(
                     new ThisReference(qualifier.getTypeDescriptor(), qualifier.isQualified()))
                 .build();
+          }
+
+          @Override
+          public Node rewriteMethod(Method method) {
+            if (!getCurrentType().isEnum()
+                || !method.isConstructor()
+                || !AstUtils.hasSuperCall(method)) {
+              return method;
+            }
+
+            // This is a constructor of an enum with a super constructor call. Users can not
+            // explicitly write the super call to java.lang.Enum, hence it was synthesized by the
+            // frontend and can be removed.
+            method
+                .getBody()
+                .getStatements()
+                .remove(AstUtils.getConstructorInvocationStatement(method));
+            return method;
           }
         });
   }
