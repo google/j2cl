@@ -2,7 +2,7 @@
 
 load("@rules_java//java:defs.bzl", "JavaInfo", "java_common")
 load(":j2cl_common.bzl", "J2CL_TOOLCHAIN_ATTRS", "j2cl_common", "split_srcs")
-load(":j2cl_js_common.bzl", "J2CL_JS_ATTRS", "JS_PROVIDER_NAME", "j2cl_js_provider")
+load(":j2cl_js_common.bzl", "J2CL_JS_ATTRS", "JsInfo", "j2cl_js_provider")
 load(":j2kt_common.bzl", "j2kt_common")
 load(":j2kt_import.bzl", "create_J2ktInfo_for_java_import")
 load(":provider.bzl", "J2clInfo", "J2ktInfo")
@@ -107,7 +107,7 @@ def _j2cl_or_js_providers_of(deps):
     return [_j2cl_or_js_provider_of(d) for d in deps]
 
 def _j2cl_or_js_provider_of(dep):
-    return dep[J2clInfo] if J2clInfo in dep else dep[JS_PROVIDER_NAME]
+    return dep[J2clInfo] if J2clInfo in dep else dep[JsInfo]
 
 def _javaplugin_providers_of(deps):
     plugin_provider = getattr(java_common, "JavaPluginInfo") if hasattr(java_common, "JavaPluginInfo") else JavaInfo
@@ -128,8 +128,8 @@ _J2CL_LIB_ATTRS = {
     # TODO(goktug): Try to limit this further.
     "srcs": attr.label_list(allow_files = [".java", ".kt", ".js", ".srcjar", ".jar", ".zip"]),
     "kt_common_srcs": attr.label_list(allow_files = [".kt"]),
-    "deps": attr.label_list(providers = [JS_PROVIDER_NAME]),
-    "exports": attr.label_list(providers = [JS_PROVIDER_NAME]),
+    "deps": attr.label_list(providers = [JsInfo]),
+    "exports": attr.label_list(providers = [JsInfo]),
     "plugins": attr.label_list(allow_rules = ["java_plugin", "java_library"], cfg = "exec"),
     "exported_plugins": attr.label_list(allow_rules = ["java_plugin", "java_library"], cfg = "exec"),
     "javacopts": attr.string_list(),

@@ -66,13 +66,13 @@ def js_devserver(
 
 js_binary = closure_js_binary
 
+JsInfo = ClosureJsLibraryInfo
+
 J2CL_JS_TOOLCHAIN_ATTRS = CLOSURE_JS_TOOLCHAIN_ATTRS
 
 J2CL_JS_ATTRS = {
     "js_suppress": attr.string_list(),
 }
-
-JS_PROVIDER_NAME = ClosureJsLibraryInfo
 
 J2CL_OPTIMIZED_DEFS = [
     "--define=goog.DEBUG=false",
