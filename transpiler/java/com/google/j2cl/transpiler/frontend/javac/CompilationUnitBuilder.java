@@ -119,7 +119,6 @@ import com.sun.tools.javac.tree.JCTree.JCExpression;
 import com.sun.tools.javac.tree.JCTree.JCExpressionStatement;
 import com.sun.tools.javac.tree.JCTree.JCFieldAccess;
 import com.sun.tools.javac.tree.JCTree.JCForLoop;
-import com.sun.tools.javac.tree.JCTree.JCFunctionalExpression;
 import com.sun.tools.javac.tree.JCTree.JCIdent;
 import com.sun.tools.javac.tree.JCTree.JCIf;
 import com.sun.tools.javac.tree.JCTree.JCInstanceOf;
@@ -789,11 +788,12 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   private Expression convertLambda(JCLambda expression) {
+    TypeDescriptor expressionTypeDescriptor = environment.createTypeDescriptor(expression.type);
     MethodDescriptor functionalMethodDescriptor =
-        environment.getSingleAbstractMethodDescriptor(expression.type);
+        expressionTypeDescriptor.getFunctionalInterface().getSingleAbstractMethodDescriptor();
 
     return FunctionExpression.newBuilder()
-        .setTypeDescriptor(getTargetType(expression))
+        .setTypeDescriptor(expressionTypeDescriptor)
         .setJsAsync(functionalMethodDescriptor.isJsAsync())
         .setParameters(
             expression.getParameters().stream()
@@ -805,10 +805,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
                 .getStatements())
         .setSourcePosition(getSourcePosition(expression))
         .build();
-  }
-
-  private TypeDescriptor getTargetType(JCFunctionalExpression expression) {
-    return environment.createTypeDescriptor(expression.type);
   }
 
   // Lambda expression bodies can be either an Expression or a Statement
@@ -841,10 +837,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   private Expression convertMemberReference(JCMemberReference memberReference) {
     MethodSymbol methodSymbol = (MethodSymbol) memberReference.sym;
 
-    DeclaredTypeDescriptor expressionTypeDescriptor =
-        environment.createDeclaredTypeDescriptor(memberReference.type);
+    TypeDescriptor expressionTypeDescriptor =
+        environment.createTypeDescriptor(memberReference.type);
     MethodDescriptor functionalMethodDescriptor =
-        environment.getSingleAbstractMethodDescriptor(memberReference.type);
+        expressionTypeDescriptor.getFunctionalInterface().getSingleAbstractMethodDescriptor();
 
     if (methodSymbol.getEnclosingElement().getQualifiedName().contentEquals("Array")) {
       // Arrays member references are seen as references to members on a class Array.

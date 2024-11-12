@@ -44,6 +44,7 @@ import com.google.j2cl.transpiler.ast.PostfixOperator;
 import com.google.j2cl.transpiler.ast.PrefixOperator;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
+import com.google.j2cl.transpiler.ast.TypeDeclaration.DescriptorFactory;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
@@ -1142,9 +1143,30 @@ class JavaEnvironment {
           return listBuilder.build();
         };
 
-    Supplier<MethodDescriptor> singleAbstractMethod =
-        () ->
-            kind != Kind.INTERFACE ? null : getSingleAbstractMethodDescriptor(typeElement.asType());
+    DescriptorFactory<MethodDescriptor> singleAbstractMethod =
+        typeDeclaration -> {
+          if (kind != Kind.INTERFACE) {
+            return null;
+          }
+          // Get the actual abstract method from the frontend; which will return the unparameterized
+          // declaration possibly from a supertype.
+          var declaration =
+              createDeclarationMethodDescriptor(
+                  getFunctionalInterfaceMethodDecl(typeElement.asType()));
+
+          // With the unparametrized declaration, we can just go over all the methods exposed in
+          // this class and find the only one with the same declaration.
+          return declaration == null
+              ? null
+              : typeDeclaration.toDescriptor().getPolymorphicMethods().stream()
+                  .filter(m -> m.getDeclarationDescriptor().equals(declaration))
+                  // TODO(b/378579276) : This should be onlyElement() since it must exists, but
+                  // we have a bug in the construction where in some cases declaration
+                  // descriptors for the same method are not equal, in that case we return the
+                  // declaration possibly with the wrong paramterization.
+                  .collect(toOptional())
+                  .orElse(declaration);
+        };
 
     Supplier<ImmutableList<FieldDescriptor>> declaredFields =
         () ->
@@ -1284,34 +1306,6 @@ class JavaEnvironment {
     }
     return (TypeElement) enclosing;
   }
-
-  @Nullable
-  private TypeMirror getFunctionalInterface(Type type) {
-    if (type.isIntersection()) {
-      return ((IntersectionType) type)
-          .getBounds().stream().filter(this::isFunctionalInterface).findFirst().orElse(null);
-    }
-    checkArgument(isFunctionalInterface(type));
-    return type;
-  }
-
-  @Nullable
-  MethodDescriptor getSingleAbstractMethodDescriptor(TypeMirror type) {
-    DeclaredTypeDescriptor expressionTypeDescriptor =
-        createDeclaredTypeDescriptor(getFunctionalInterface((Type) type));
-
-    // Returns the method declaration.
-    var declaration = createDeclarationMethodDescriptor(getFunctionalInterfaceMethodDecl(type));
-    return declaration == null
-        ? null
-        // Find the parameterized version in the type, since declaration might be the
-        // unparameterized version from a supertype.
-        : expressionTypeDescriptor.getPolymorphicMethods().stream()
-            .filter(m -> m.getDeclarationDescriptor() == declaration)
-            .collect(toOptional())
-            .orElse(declaration);
-  }
-
 
   @Nullable
   private MethodSymbol getFunctionalInterfaceMethodDecl(TypeMirror typeMirror) {
