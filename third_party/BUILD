@@ -25,7 +25,7 @@ alias(
 
 j2cl_import(
     name = "jsr305_annotations-j2cl",
-    jar = "@com_google_code_findbugs_jsr305//jar",
+    jar = ":jsr305_annotations",
 )
 
 alias(
@@ -35,7 +35,7 @@ alias(
 
 j2cl_import(
     name = "j2objc_annotations-j2cl",
-    jar = "@com_google_j2objc_annotations//jar",
+    jar = ":j2objc_annotations",
 )
 
 alias(
@@ -45,7 +45,7 @@ alias(
 
 j2cl_import(
     name = "jspecify_annotations-j2cl",
-    jar = "@org_jspecify//jar",
+    jar = ":jspecify_annotations",
 )
 
 alias(
@@ -91,7 +91,7 @@ alias(
 
 j2cl_import(
     name = "auto_value-j2cl",
-    jar = "@com_google_auto_value//jar",
+    jar = ":auto_value",
 )
 
 java_library(
