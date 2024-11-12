@@ -36,7 +36,6 @@ import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.backend.jvm.JvmIrCodegenFactory
 import org.jetbrains.kotlin.backend.jvm.JvmIrDeserializerImpl
 import org.jetbrains.kotlin.builtins.DefaultBuiltIns
-import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY
 import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys.ORIGINAL_MESSAGE_COLLECTOR_KEY
 import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys.PHASE_CONFIG
 import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys.RENDER_DIAGNOSTIC_INTERNAL_NAME
@@ -70,6 +69,7 @@ import org.jetbrains.kotlin.cli.jvm.setupJvmSpecificArguments
 import org.jetbrains.kotlin.codegen.ClassBuilderFactories
 import org.jetbrains.kotlin.codegen.CodegenFactory
 import org.jetbrains.kotlin.codegen.state.GenerationState
+import org.jetbrains.kotlin.config.CommonConfigurationKeys.MESSAGE_COLLECTOR_KEY
 import org.jetbrains.kotlin.config.CommonConfigurationKeys.MODULE_NAME
 import org.jetbrains.kotlin.config.CommonConfigurationKeys.USE_FIR
 import org.jetbrains.kotlin.config.CompilerConfiguration
@@ -78,7 +78,6 @@ import org.jetbrains.kotlin.diagnostics.DiagnosticReporterFactory
 import org.jetbrains.kotlin.diagnostics.impl.PendingDiagnosticsCollectorWithSuppress
 import org.jetbrains.kotlin.fir.backend.jvm.JvmFir2IrExtensions
 import org.jetbrains.kotlin.fir.descriptors.FirModuleDescriptor
-import org.jetbrains.kotlin.ir.backend.jvm.serialization.JvmIrMangler
 import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
 import org.jetbrains.kotlin.load.kotlin.ModuleVisibilityManager
 import org.jetbrains.kotlin.metadata.jvm.deserialization.JvmMetadataVersion
@@ -123,6 +122,17 @@ class KotlinParser(private val problems: Problems) {
         compilerConfiguration,
         EnvironmentConfigFiles.JVM_CONFIG_FILES,
       )
+
+    // Override ModuleVisibilityManager to workaround https://youtrack.jetbrains.com/issue/KT-73042
+    // TODO(b/378673045): Remove when the underlying bug from JetBrain is fixed.
+    val unused =
+      environment.projectEnvironment.project.picoContainer.unregisterComponent(
+        ModuleVisibilityManager::class.java.name
+      )
+    environment.projectEnvironment.project.registerService(
+      ModuleVisibilityManager::class.java,
+      J2CLModuleVisibilityManagerImpl(),
+    )
 
     // Register friend modules so that we do not trigger visibility errors.
     ModuleVisibilityManager.SERVICE.getInstance(environment.project)
@@ -228,7 +238,7 @@ class KotlinParser(private val problems: Problems) {
 
     val unused =
       analysisResults.convertToIrAndActualizeForJvm(
-        JvmFir2IrExtensions(compilerConfiguration, JvmIrDeserializerImpl(), JvmIrMangler),
+        JvmFir2IrExtensions(compilerConfiguration, JvmIrDeserializerImpl()),
         compilerConfiguration,
         diagnosticsReporter,
         IrGenerationExtension.getInstances(projectEnvironment.project),

@@ -18,7 +18,9 @@ package com.google.j2cl.transpiler.frontend.kotlin
 import com.google.devtools.kotlin.common.AutoFriends
 import com.google.devtools.kotlin.common.BzlLabel
 import com.google.devtools.kotlin.common.KtManifest
+import com.intellij.openapi.Disposable
 import java.io.BufferedInputStream
+import java.io.File
 import java.nio.file.Files
 import java.nio.file.Path
 import java.util.jar.JarInputStream
@@ -26,6 +28,7 @@ import org.jetbrains.kotlin.cli.common.arguments.K2JVMCompilerArguments
 import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.config.JVMConfigurationKeys
 import org.jetbrains.kotlin.load.kotlin.ModuleVisibilityManager
+import org.jetbrains.kotlin.modules.Module
 
 internal fun ModuleVisibilityManager.addEligibleFriends(configuration: CompilerConfiguration) {
   val friendPaths = configuration.getList(JVMConfigurationKeys.FRIEND_PATHS)
@@ -55,5 +58,26 @@ private fun <T> useManifestFast(path: Path, block: (KtManifest) -> T): T? {
   return JarInputStream(BufferedInputStream(Files.newInputStream(path)), /* verify= */ false).use {
     jar ->
     jar.manifest?.let { block(KtManifest(it)) }
+  }
+}
+
+// Copied and modified from org.jetbrains.kotlin.cli.common.CliModuleVisibilityManagerImpl to
+// workaround https://youtrack.jetbrains.com/issue/KT-73042
+class J2CLModuleVisibilityManagerImpl() : ModuleVisibilityManager, Disposable {
+  override val chunk: MutableList<Module> = arrayListOf()
+  override val friendPaths: MutableList<String> = arrayListOf()
+
+  override fun addModule(module: Module) {
+    chunk.add(module)
+  }
+
+  override fun addFriendPath(path: String) {
+    friendPaths.add(File(path).absolutePath)
+    // Store the non-absolute path to workaround https://youtrack.jetbrains.com/issue/KT-73042
+    friendPaths.add(path)
+  }
+
+  override fun dispose() {
+    chunk.clear()
   }
 }

@@ -358,6 +358,8 @@ DEFAULT_J2CL_KOTLINCOPTS = [
     "-Xsam-conversions=class",
     # TODO(b/317551802): Remove this once the language version is updated.
     "-language-version=1.9",
+    # TODO(b/347052390): Remove once the const evaluation optimization crash is fixed (KT-70391).
+    "-Xignore-const-optimization-errors",
 ]
 
 KOTLIN_SERIALIZE_IR_FLAGS = [

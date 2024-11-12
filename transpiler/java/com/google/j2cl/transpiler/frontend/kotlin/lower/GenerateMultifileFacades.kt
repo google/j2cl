@@ -18,13 +18,17 @@ package com.google.j2cl.transpiler.frontend.kotlin.lower
 
 import org.jetbrains.kotlin.backend.common.ClassLoweringPass
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
+import org.jetbrains.kotlin.backend.common.ModuleLoweringPass
+import org.jetbrains.kotlin.backend.common.lower.LoweredDeclarationOrigins
 import org.jetbrains.kotlin.backend.common.lower.createIrBuilder
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
 import org.jetbrains.kotlin.backend.jvm.JvmLoweredDeclarationOrigin
 import org.jetbrains.kotlin.backend.jvm.MultifileFacadeFileEntry
 import org.jetbrains.kotlin.backend.jvm.ir.fileParent
 import org.jetbrains.kotlin.backend.jvm.isMultifileBridge
-import org.jetbrains.kotlin.backend.jvm.lower.StaticInitializersLowering
+import org.jetbrains.kotlin.backend.jvm.multifileFacadeClassForPart
+import org.jetbrains.kotlin.backend.jvm.multifileFacadeForPart
+import org.jetbrains.kotlin.backend.jvm.multifileFacadePartMember
 import org.jetbrains.kotlin.config.JvmAnalysisFlags
 import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
 import org.jetbrains.kotlin.descriptors.Modality
@@ -56,37 +60,29 @@ import org.jetbrains.kotlin.resolve.jvm.diagnostics.JvmBackendErrors
  *
  * Copied and modified from org.jetbrains.kotlin.backend.jvm.lower.GenerateMultifileFacades.kt.
  */
-// MODIFIED BY GOOGLE:
-// Added a wrapper class to expose the functionality cleanly to LoweringPasses.kt
-internal class GenerateMultifileFacadesLowering(private val context: JvmBackendContext) {
-  fun lower(module: IrModuleFragment) {
-    generateMultifileFacades(context, module)
-  }
-}
+internal class GenerateMultifileFacades(private val context: JvmBackendContext) :
+  ModuleLoweringPass {
+  override fun lower(irModule: IrModuleFragment) {
+    val functionDelegates = mutableMapOf<IrSimpleFunction, IrSimpleFunction>()
 
-// END OF MODIFICATIONS
+    // In -Xmultifile-parts-inherit mode, instead of generating "bridge" methods in the facade which
+    // call into parts,
+    // we construct an inheritance chain such that all part members are present as fake overrides in
+    // the facade.
+    val shouldGeneratePartHierarchy =
+      context.config.languageVersionSettings.getFlag(JvmAnalysisFlags.inheritMultifileParts)
+    irModule.files.addAll(
+      generateMultifileFacades(irModule, context, shouldGeneratePartHierarchy, functionDelegates)
+    )
 
-private fun generateMultifileFacades(context: JvmBackendContext, module: IrModuleFragment) {
-  val functionDelegates = mutableMapOf<IrSimpleFunction, IrSimpleFunction>()
+    UpdateFunctionCallSites(functionDelegates).lower(irModule)
+    UpdateConstantFacadePropertyReferences(context, shouldGeneratePartHierarchy).lower(irModule)
 
-  // In -Xmultifile-parts-inherit mode, instead of generating "bridge" methods in the facade which
-  // call into parts,
-  // we construct an inheritance chain such that all part members are present as fake overrides in
-  // the facade.
-  val shouldGeneratePartHierarchy =
-    context.state.languageVersionSettings.getFlag(JvmAnalysisFlags.inheritMultifileParts)
-  module.files.addAll(
-    generateMultifileFacades(module, context, shouldGeneratePartHierarchy, functionDelegates)
-  )
+    context.multifileFacadesToAdd.clear()
 
-  UpdateFunctionCallSites(functionDelegates).lower(module)
-  UpdateConstantFacadePropertyReferences(context, shouldGeneratePartHierarchy).lower(module)
-
-  context.multifileFacadesToAdd.clear()
-
-  functionDelegates.entries.associateTo(context.multifileFacadeMemberToPartMember) {
-    (member, newMember) ->
-    newMember to member
+    for ((member, newMember) in functionDelegates) {
+      newMember.multifileFacadePartMember = member
+    }
   }
 }
 
@@ -176,8 +172,8 @@ private fun generateMultifileFacades(
     file.declarations.add(facadeClass)
 
     for (partClass in partClasses) {
-      context.multifileFacadeForPart[partClass.attributeOwnerId as IrClass] = jvmClassName
-      context.multifileFacadeClassForPart[partClass.attributeOwnerId as IrClass] = facadeClass
+      partClass.multifileFacadeForPart = jvmClassName
+      partClass.multifileFacadeClassForPart = facadeClass
 
       val correspondingProperties = CorrespondingPropertyCache(context, facadeClass)
       for (member in partClass.declarations) {
@@ -283,7 +279,7 @@ private fun IrSimpleFunction.createMultifileDelegateIfNeeded(
     DescriptorVisibilities.isPrivate(originalVisibility) ||
       name == StaticInitializersLowering.clinitName ||
       origin == IrDeclarationOrigin.SYNTHETIC_ACCESSOR ||
-      origin == JvmLoweredDeclarationOrigin.INLINE_LAMBDA ||
+      origin == LoweredDeclarationOrigins.INLINE_LAMBDA ||
       origin == IrDeclarationOrigin.LOCAL_FUNCTION_FOR_LAMBDA ||
       origin == IrDeclarationOrigin.PROPERTY_DELEGATE ||
       origin == IrDeclarationOrigin.ADAPTER_FOR_FUN_INTERFACE_CONSTRUCTOR ||
@@ -437,7 +433,7 @@ private class UpdateConstantFacadePropertyReferences(
         else -> null
       } ?: return null
     val parent = declaration.parent as? IrClass ?: return null
-    val facadeClass = context.multifileFacadeClassForPart[parent.attributeOwnerId]
+    val facadeClass = parent.multifileFacadeClassForPart
 
     return if (
       shouldGeneratePartHierarchy ||

@@ -47,7 +47,6 @@ import org.jetbrains.kotlin.backend.jvm.JvmBackendExtension
 import org.jetbrains.kotlin.backend.jvm.JvmGeneratorExtensionsImpl
 import org.jetbrains.kotlin.backend.jvm.JvmIrDeserializerImpl
 import org.jetbrains.kotlin.backend.jvm.ir.constantValue
-import org.jetbrains.kotlin.backend.jvm.lower.JvmInventNamesForLocalClasses
 import org.jetbrains.kotlin.builtins.PrimitiveType
 import org.jetbrains.kotlin.codegen.state.GenerationState
 import org.jetbrains.kotlin.config.CommonConfigurationKeys
@@ -74,7 +73,6 @@ import org.jetbrains.kotlin.ir.symbols.IrTypeAliasSymbol
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.util.SymbolTable
 import org.jetbrains.kotlin.ir.util.fileOrNull
-import org.jetbrains.kotlin.ir.util.isStatic
 import org.jetbrains.kotlin.name.CallableId
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
@@ -283,7 +281,7 @@ class LoweringPasses(
     loweringPassFactories.forEach { moduleFragment.lower(j2clBackendContext, it) }
 
     // Generate facade classes for JvmMultifileClass parts.
-    GenerateMultifileFacadesLowering(jvmBackendContext).lower(moduleFragment)
+    GenerateMultifileFacades(jvmBackendContext).lower(moduleFragment)
   }
 }
 

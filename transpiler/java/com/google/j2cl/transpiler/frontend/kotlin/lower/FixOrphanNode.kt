@@ -42,7 +42,7 @@ import org.jetbrains.kotlin.ir.descriptors.IrBasedSimpleFunctionDescriptor
 import org.jetbrains.kotlin.ir.expressions.IrConstKind
 import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.expressions.IrFunctionAccessExpression
-import org.jetbrains.kotlin.ir.symbols.impl.IrBindablePublicSymbolBase
+import org.jetbrains.kotlin.ir.symbols.impl.IrSymbolBase
 import org.jetbrains.kotlin.ir.types.IrSimpleType
 import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.ir.types.classFqName
@@ -113,7 +113,7 @@ internal class FixOrphanNode(val context: IrPluginContext) :
       // the `parent` field of this function is not initialized.
       // We will unbind the symbol and regenerate the IR node from the bytecode.
       val symbol =
-        expression.symbol as? IrBindablePublicSymbolBase<*, *>
+        expression.symbol as? IrSymbolBase<*, *>
           ?: throw IllegalStateException("Unexpected symbol type.")
       val isProperty = expression is IrProperty
 
@@ -149,11 +149,11 @@ internal class FixOrphanNode(val context: IrPluginContext) :
     checkNotNull((context.symbolTable as SymbolTable).lazyWrapper.stubGenerator)
 
   private fun getFunctionDescriptorFromBytecode(
-    symbol: IrBindablePublicSymbolBase<*, *>,
+    symbol: IrSymbolBase<*, *>,
     memberName: Name,
-    isProperty: Boolean
+    isProperty: Boolean,
   ): CallableMemberDescriptor {
-    val packageDescriptor = context.moduleDescriptor.getPackage(symbol.signature.packageFqName())
+    val packageDescriptor = context.moduleDescriptor.getPackage(symbol.signature!!.packageFqName())
 
     // find the package fragment coming from the JVM byte code that contains the member and get
     // the descriptor from there.
@@ -192,7 +192,7 @@ internal class FixOrphanNode(val context: IrPluginContext) :
         return memberDescriptors.single {
           isSameType(
             originalExtensionReceiverType,
-            (it as PropertyDescriptor).extensionReceiverParameter?.type
+            (it as PropertyDescriptor).extensionReceiverParameter?.type,
           )
         }
       }
@@ -211,7 +211,7 @@ internal class FixOrphanNode(val context: IrPluginContext) :
 
   private fun isSameFunctionDescriptor(
     irFunctionDesc: IrBasedSimpleFunctionDescriptor,
-    binaryFunctionDesc: FunctionDescriptor
+    binaryFunctionDesc: FunctionDescriptor,
   ): Boolean {
     if (getJvmName(irFunctionDesc) != getJvmName(binaryFunctionDesc)) {
       return false
@@ -275,13 +275,13 @@ internal class FixOrphanNode(val context: IrPluginContext) :
     return typeFromIr.toKotlinType() == typeFromBinary
   }
 
-  private fun unbindSymbol(symbol: IrBindablePublicSymbolBase<*, *>) {
+  private fun unbindSymbol(symbol: IrSymbolBase<*, *>) {
     // This is the first hacky part of this pass. There is no public API to unbind a symbol, so we
     // use reflection for resetting the private backing field `_owner` so the symbol is considered
     // as unbound and the new IR node that will be generated from byte code will be assigned to him.
     val ownerProperty =
-      IrBindablePublicSymbolBase::class.memberProperties.first { it.name == "_owner" }
-        as KMutableProperty1<IrBindablePublicSymbolBase<*, *>, Any?>
+      IrSymbolBase::class.memberProperties.first { it.name == "_owner" }
+        as KMutableProperty1<IrSymbolBase<*, *>, Any?>
     ownerProperty.isAccessible = true
     ownerProperty.set(symbol, null)
   }
