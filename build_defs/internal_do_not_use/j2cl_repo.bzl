@@ -158,18 +158,7 @@ def j2cl_maven_import_external(
         annotation_only = False,
         **kwargs):
     coordinates = _decode_maven_coordinates(artifact, default_packaging = "jar")
-    if annotation_only:
-        src_coordinates = coordinates
-    else:
-        src_coordinates = struct(
-            group_id = coordinates.group_id,
-            artifact_id = coordinates.artifact_id,
-            version = coordinates.version,
-            classifier = "sources",
-            packaging = "jar",
-        )
-
-    srcjar_urls = _convert_coordinates_to_urls(src_coordinates, server_urls)
+    srcjar_urls = _convert_coordinates_to_urls(coordinates, server_urls)
     tags = kwargs.pop("tags", [])
     tags.append("maven_coordinates=" + artifact)
 
