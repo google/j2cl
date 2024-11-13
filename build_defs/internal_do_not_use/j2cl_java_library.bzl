@@ -1,6 +1,6 @@
 """J2CL library rules."""
 
-load("@rules_java//java:defs.bzl", "JavaInfo", "java_common")
+load("@rules_java//java:defs.bzl", "JavaInfo", "JavaPluginInfo")
 load(":j2cl_common.bzl", "J2CL_TOOLCHAIN_ATTRS", "j2cl_common", "split_srcs")
 load(":j2cl_js_common.bzl", "J2CL_JS_ATTRS", "JsInfo", "j2cl_js_provider")
 load(":j2kt_common.bzl", "j2kt_common")
@@ -27,8 +27,8 @@ def _impl_j2cl_library(ctx):
             srcs = jvm_srcs,
             java_deps = [p._private_.java_info for p in _j2kt_providers_of(ctx.attr.deps)],
             j2kt_exports = [p for p in _j2kt_providers_of(ctx.attr.exports)],
-            plugins = _javaplugin_providers_of(ctx.attr.plugins),
-            exported_plugins = _javaplugin_providers_of(ctx.attr.exported_plugins),
+            plugins = [p[JavaPluginInfo] for p in ctx.attr.plugins],
+            exported_plugins = [p[JavaPluginInfo] for p in ctx.attr.exported_plugins],
             output_jar = ctx.actions.declare_file(ctx.label.name + "_j2kt_web_jvm.jar"),
             javac_opts = extra_javacopts + ctx.attr.javacopts,
             strip_annotation = "GwtIncompatible",
@@ -61,8 +61,8 @@ def _impl_j2cl_library(ctx):
         kt_common_srcs = kt_common_srcs,
         deps = _j2cl_or_js_providers_of(ctx.attr.deps),
         exports = _j2cl_or_js_providers_of(ctx.attr.exports),
-        plugins = _javaplugin_providers_of(ctx.attr.plugins),
-        exported_plugins = _javaplugin_providers_of(ctx.attr.exported_plugins),
+        plugins = [p[JavaPluginInfo] for p in ctx.attr.plugins],
+        exported_plugins = [p[JavaPluginInfo] for p in ctx.attr.exported_plugins],
         output_jar = ctx.outputs.jar,
         javac_opts = extra_javacopts + ctx.attr.javacopts,
         kotlincopts = ctx.attr.kotlincopts,
@@ -108,10 +108,6 @@ def _j2cl_or_js_providers_of(deps):
 
 def _j2cl_or_js_provider_of(dep):
     return dep[J2clInfo] if J2clInfo in dep else dep[JsInfo]
-
-def _javaplugin_providers_of(deps):
-    plugin_provider = getattr(java_common, "JavaPluginInfo") if hasattr(java_common, "JavaPluginInfo") else JavaInfo
-    return [d[plugin_provider] for d in deps]
 
 _J2KT_WEB_EXPERIMENT_ATTRS = {
     "j2kt_web_experiment_enabled": attr.bool(default = False),
