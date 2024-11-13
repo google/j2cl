@@ -83,20 +83,26 @@ public class JavacParser {
       List<File> searchpath = options.getClasspaths().stream().map(File::new).collect(toList());
       fileManager.setLocation(StandardLocation.PLATFORM_CLASS_PATH, searchpath);
       fileManager.setLocation(StandardLocation.CLASS_PATH, searchpath);
+      List<String> javacOptions =
+          // If getSystem is empty, we are compiling the JRE. In that case, we must pass javac opts
+          // to allow us to override the JRE. Otherwise, this specifies the directory where our
+          // version of the JRE is.
+          options.getSystem().isEmpty()
+              ? ImmutableList.of(
+                  // Allow overwriting classes in the JRE module
+                  "--patch-module",
+                  "java.base=.",
+                  // Allow JRE classes to depend on jsinterop annotations (in the unnamed module)
+                  "--add-reads",
+                  "java.base=ALL-UNNAMED")
+              : ImmutableList.of("--system", options.getSystem());
       JavacTaskImpl task =
           (JavacTaskImpl)
               compiler.getTask(
                   null,
                   fileManager,
                   diagnostics,
-                  // TODO(b/143213486): Figure out how to make the pipeline work with the module
-                  // system.
-                  ImmutableList.of(
-                      "--patch-module",
-                      "java.base=.",
-                      // Allow JRE classes are allowed to depend on the jsinterop annotations
-                      "--add-reads",
-                      "java.base=ALL-UNNAMED"),
+                  javacOptions,
                   null,
                   fileManager.getJavaFileObjectsFromFiles(
                       targetPathBySourcePath.keySet().stream().map(File::new).collect(toList())));
@@ -137,11 +143,16 @@ public class JavacParser {
     }
     for (Diagnostic<? extends JavaFileObject> diagnostic : diagnosticCollector.getDiagnostics()) {
       if (diagnostic.getKind() == Kind.ERROR) {
-        problems.error(
-            (int) diagnostic.getLineNumber(),
-            diagnostic.getSource().getName(),
-            "%s",
-            diagnostic.getMessage(Locale.US));
+        String errorMessage = diagnostic.getMessage(Locale.US);
+        if (diagnostic.getSource() != null) {
+          problems.error(
+              (int) diagnostic.getLineNumber(),
+              diagnostic.getSource().getName(),
+              "%s",
+              errorMessage);
+        } else {
+          problems.error("%s", errorMessage);
+        }
       }
     }
   }

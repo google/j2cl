@@ -59,6 +59,12 @@ final class BazelJ2clBuilder extends BazelWorker {
   String classPath;
 
   @Option(
+      name = "-system",
+      metaVar = "<path>",
+      usage = "Specifies the location of the system modules.")
+  String system = "";
+
+  @Option(
       name = "-output",
       required = true,
       metaVar = "<path>",
@@ -194,6 +200,7 @@ final class BazelJ2clBuilder extends BazelWorker {
                 .build())
         .setNativeSources(allNativeSources)
         .setClasspaths(getPathEntries(this.classPath))
+        .setSystem(this.system)
         .setOutput(output)
         .setTargetLabel(targetLabel)
         .setLibraryInfoOutput(this.libraryInfoOutput)

@@ -27,6 +27,12 @@ def _compile(
     java_toolchain = _get_java_toolchain(ctx)
     jvm_srcs, js_srcs = split_srcs(srcs)
 
+    # Heuristic to determine if we need to specify the jre module. Our jre defines --system=none.
+    jdk_system_set = any([s for s in javac_opts if s.startswith("--system")])
+
+    # TODO(b/197211878): Switch to a public API when available.
+    [jdk_system] = java_toolchain._bootclasspath_info._system_inputs.to_list() if not jdk_system_set else [None]
+
     has_srcs_to_transpile = (jvm_srcs or kt_common_srcs)
     has_kotlin_srcs = any([src for src in jvm_srcs if src.extension == "kt"]) or kt_common_srcs
 
@@ -81,6 +87,7 @@ def _compile(
         _j2cl_transpile(
             ctx,
             jvm_provider,
+            jdk_system,
             js_srcs,
             output_js,
             output_library_info,
@@ -253,6 +260,7 @@ def _strip_incompatible_annotation(ctx, name, java_srcs, mnemonic, strip_annotat
 def _j2cl_transpile(
         ctx,
         jvm_provider,
+        jdk_system,
         js_srcs,
         output_dir,
         library_info_output,
@@ -291,6 +299,9 @@ def _j2cl_transpile(
     args.set_param_file_format("multiline")
     args.add_joined("-classpath", classpath, join_with = ctx.configuration.host_path_separator)
 
+    if jdk_system:
+        args.add("-system", jdk_system.path)
+
     # Explicitly format this as Bazel target labels can start with a @, which
     # can be misinterpreted as a flag file to load.
     args.add(ctx.label, format = "-targetLabel=%s")
@@ -327,7 +338,7 @@ def _j2cl_transpile(
         # kt_common_srcs are not read by the transpiler as they are already
         # included in the srcjars of srcs. However, params.add_all requires them
         # to be inputs in order to be properly expanded out into params.
-        inputs = depset(srcs + kt_common_srcs, transitive = [classpath]),
+        inputs = depset(srcs + kt_common_srcs + ([jdk_system] if jdk_system else []), transitive = [classpath]),
         outputs = [output_dir, library_info_output],
         executable = j2cl_transpiler_override or ctx.executable._j2cl_transpiler,
         arguments = [args],

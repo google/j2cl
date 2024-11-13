@@ -28,6 +28,8 @@ public interface FrontendOptions {
 
   ImmutableList<String> getClasspaths();
 
+  String getSystem();
+
   boolean getGenerateKytheIndexingMetadata();
 
   boolean isNullMarkedSupported();

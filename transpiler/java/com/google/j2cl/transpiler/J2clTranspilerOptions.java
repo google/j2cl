@@ -43,6 +43,7 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
 
   public static Builder newBuilder() {
     return new AutoValue_J2clTranspilerOptions.Builder()
+        .setSystem("")
         .setOptimizeAutoValue(false)
         .setNullMarkedSupported(false);
   }
@@ -63,6 +64,8 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
     public abstract Builder setNativeSources(List<FileInfo> files);
 
     public abstract Builder setClasspaths(List<String> entries);
+
+    public abstract Builder setSystem(String jdkSystem);
 
     public abstract Builder setOutput(Output output);
 
