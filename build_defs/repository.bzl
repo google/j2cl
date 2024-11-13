@@ -16,8 +16,8 @@ def load_j2cl_repo_deps():
     _github_repo(
         name = "io_bazel_rules_closure",
         repo = "bazelbuild/rules_closure",
-        tag = "071b519a5dda47ef451aa62393749fa764360471",
-        sha256 = "e7554ab97743bee8627a750d4f19754f3c6c81cf4cb823a2afe7e9653c0304fa",
+        tag = "b8d260a3236ccf325429f7ba9b5cc2094d2b8a81",
+        sha256 = "e1eab8bfd56c32dfed0509576e2ab1e010dada5eba7c7845f33a0984bf1acef2",
     )
 
     # TODO(goktug): Consider moving to setup_j2cl_workspace after licences migration
