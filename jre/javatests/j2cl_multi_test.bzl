@@ -30,8 +30,8 @@ def j2cl_multi_test(name, test_class, deps, enable_kt_jvm = False, enable_kt_nat
         runtime_deps = deps,
         browsers = [
             "//testing/web/browsers:chrome-linux",
-            "//jre/javatests:firefox-linux",
             "//testing/web/browsers:safari-macos",
+            "//build_defs/internal_do_not_use/browser:firefox-linux",
         ],
         **kwargs
     )
