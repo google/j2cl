@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.common.collect.ImmutableSet.toImmutableSet;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject;
 import static java.util.stream.Collectors.joining;
 
@@ -1049,15 +1050,12 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return ImmutableSet.of();
     }
 
-    var overriddenMethodsBuilder = ImmutableSet.<MethodDescriptor>builder();
-
-    getEnclosingTypeDescriptor().getTransitiveSuperTypes().stream()
+    return getEnclosingTypeDescriptor().getAllSuperTypesIncludingSelf().stream()
+        .filter(t -> t != getEnclosingTypeDescriptor())
         .flatMap(t -> t.getDeclaredMethodDescriptors().stream())
         .filter(MethodDescriptor::isPolymorphic)
         .filter(this::isOverride)
-        .forEach(overriddenMethodsBuilder::add);
-
-    return overriddenMethodsBuilder.build();
+        .collect(toImmutableSet());
   }
 
   /**

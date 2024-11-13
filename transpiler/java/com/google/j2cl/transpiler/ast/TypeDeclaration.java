@@ -32,7 +32,6 @@ import com.google.j2cl.common.ThreadLocalInterner;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 import com.google.j2cl.transpiler.ast.TypeDescriptors.BootstrapType;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -689,15 +688,9 @@ public abstract class TypeDeclaration
 
   @Memoized
   public Set<TypeDeclaration> getAllSuperTypesIncludingSelf() {
-    Set<TypeDeclaration> allSupertypesIncludingSelf = new LinkedHashSet<>();
-    allSupertypesIncludingSelf.add(this);
-    toDescriptor()
-        .getSuperTypesStream()
-        .forEach(
-            t ->
-                allSupertypesIncludingSelf.addAll(
-                    t.getTypeDeclaration().getAllSuperTypesIncludingSelf()));
-    return allSupertypesIncludingSelf;
+    return toDescriptor().getAllSuperTypesIncludingSelf().stream()
+        .map(DeclaredTypeDescriptor::getTypeDeclaration)
+        .collect(toImmutableSet());
   }
 
   @Memoized

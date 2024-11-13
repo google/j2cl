@@ -1215,15 +1215,14 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         .filter(Predicates.notNull());
   }
 
-  /** Returns all the supertypes of this type. */
+  /** Returns all the supertypes of this type including itself. */
   @Memoized
-  ImmutableSet<DeclaredTypeDescriptor> getTransitiveSuperTypes() {
-    var superTypes = ImmutableSet.<DeclaredTypeDescriptor>builder();
-    getSuperTypesStream().forEach(superTypes::add);
+  public Set<DeclaredTypeDescriptor> getAllSuperTypesIncludingSelf() {
+    Set<DeclaredTypeDescriptor> allSupertypesIncludingSelf = new LinkedHashSet<>();
+    allSupertypesIncludingSelf.add(this);
     getSuperTypesStream()
-        .flatMap(t -> t.getTransitiveSuperTypes().stream())
-        .forEach(superTypes::add);
-    return superTypes.build();
+        .forEach(t -> allSupertypesIncludingSelf.addAll(t.getAllSuperTypesIncludingSelf()));
+    return allSupertypesIncludingSelf;
   }
 
   /**

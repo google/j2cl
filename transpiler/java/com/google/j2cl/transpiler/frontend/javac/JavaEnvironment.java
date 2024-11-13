@@ -18,7 +18,7 @@ package com.google.j2cl.transpiler.frontend.javac;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
-import static com.google.common.collect.MoreCollectors.toOptional;
+import static com.google.common.collect.MoreCollectors.onlyElement;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.HAS_NO_SIDE_EFFECTS_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.UNCHECKED_CAST_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.WASM_ANNOTATION_NAME;
@@ -1138,24 +1138,27 @@ class JavaEnvironment {
           if (kind != Kind.INTERFACE) {
             return null;
           }
+
           // Get the actual abstract method from the frontend; which will return the unparameterized
           // declaration possibly from a supertype.
           var declaration =
               createDeclarationMethodDescriptor(
                   getFunctionalInterfaceMethodDecl(typeElement.asType()));
 
-          // With the unparametrized declaration, we can just go over all the methods exposed in
-          // this class and find the only one with the same declaration.
-          return declaration == null
-              ? null
-              : typeDeclaration.toDescriptor().getPolymorphicMethods().stream()
-                  .filter(m -> m.getDeclarationDescriptor().equals(declaration))
-                  // TODO(b/378579276) : This should be onlyElement() since it must exists, but
-                  // we have a bug in the construction where in some cases declaration
-                  // descriptors for the same method are not equal, in that case we return the
-                  // declaration possibly with the wrong paramterization.
-                  .collect(toOptional())
-                  .orElse(declaration);
+          if (declaration == null) {
+            return null;
+          }
+
+          // Find the parameterized supertype.
+          var parameterizedFunctionalInterface =
+              typeDeclaration.toDescriptor().getAllSuperTypesIncludingSelf().stream()
+                  .filter(declaration.getEnclosingTypeDescriptor()::isSameBaseType)
+                  .collect(onlyElement());
+
+          // Find the parameterized version of the single abstract method in the type.
+          return parameterizedFunctionalInterface.getDeclaredMethodDescriptors().stream()
+              .filter(m -> m.getDeclarationDescriptor() == declaration)
+              .collect(onlyElement());
         };
 
     Supplier<ImmutableList<FieldDescriptor>> declaredFields =
@@ -1320,16 +1323,20 @@ class JavaEnvironment {
           .getBounds().stream()
               .filter(this::isFunctionalInterface)
               .map(this::getFunctionalInterfaceMethodPair)
-              .findFirst()
-              .orElse(null);
+              .collect(onlyElement());
     }
     return getMethods((ClassType) type).stream()
         .filter(
-            p ->
-                isAbstract(p.getDeclarationMethodSymbol())
-                    && !isJavaLangObjectOverride(p.getDeclarationMethodSymbol()))
+            m ->
+                isAbstract(m.getDeclarationMethodSymbol())
+                    && !isJavaLangObjectOverride(m.getDeclarationMethodSymbol()))
+        // There are cases in which the functional interface extends two distinct functional
+        // interfaces. In those cases all the methods that remain abstract in this interface must
+        // be compatible (i.e. have the same signature in the current parameterization). In this
+        // case any of them are suitable abstract methods as the method that implements the
+        // functional interface will always override both.
         .findFirst()
-        .orElse(null);
+        .get();
   }
 
   private boolean isFunctionalInterface(TypeMirror type) {
