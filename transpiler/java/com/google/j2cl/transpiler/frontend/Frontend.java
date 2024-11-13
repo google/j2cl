@@ -21,7 +21,7 @@ import com.google.j2cl.common.Problems;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.frontend.common.FrontendOptions;
 import com.google.j2cl.transpiler.frontend.javac.JavacParser;
-import com.google.j2cl.transpiler.frontend.jdt.CompilationUnitBuilder;
+import com.google.j2cl.transpiler.frontend.jdt.JdtParser;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
@@ -31,10 +31,7 @@ public enum Frontend {
   JDT {
     @Override
     public Library parse(FrontendOptions options, Problems problems) {
-      // TODO(goktug): Create a frontend entry point consistent with the other frontends.
-      return Library.newBuilder()
-          .setCompilationUnits(CompilationUnitBuilder.build(options, problems))
-          .build();
+      return new JdtParser(problems).parseFiles(options);
     }
 
     @Override

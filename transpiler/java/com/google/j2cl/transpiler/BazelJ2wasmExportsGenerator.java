@@ -82,16 +82,16 @@ final class BazelJ2wasmExportsGenerator extends BazelWorker {
 
       // Create a parser just to resolve binary names, with no sources to parse.
       // TODO(b/294284380): Make this independent of the frontend.
-      JdtParser parser = new JdtParser(classPathEntries, problems);
+      JdtParser parser = new JdtParser(problems);
       Set<String> wellKnownTypeNames = TypeDescriptors.getWellKnownTypeNames();
       binaryNames.addAll(wellKnownTypeNames);
       var bindings =
-          parser.resolveBindings(binaryNames).stream()
+          parser.resolveBindings(classPathEntries, binaryNames).stream()
               // Methods in annotations can not be exported, and additionally the bindings might
               // not be complete and cannot be fully resolved to descriptors.
               .filter(not(ITypeBinding::isAnnotation))
               .collect(toImmutableList());
-      var environment = new JdtEnvironment(parser, wellKnownTypeNames);
+      var environment = new JdtEnvironment(parser, classPathEntries, wellKnownTypeNames);
 
       var typeDescriptors = environment.createDescriptorsFromBindings(bindings);
 

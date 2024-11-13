@@ -288,7 +288,8 @@ class KotlinParser(private val problems: Problems) {
     PackageInfoCache.init(options.classpaths, problems)
     return PackageAnnotationsResolver.create(
       packageInfoSources,
-      JdtParser(options.classpaths, problems),
+      JdtParser(problems),
+      options.classpaths,
     )
   }
 

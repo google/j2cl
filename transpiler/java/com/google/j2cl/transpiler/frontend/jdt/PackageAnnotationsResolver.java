@@ -19,7 +19,6 @@ import static com.google.common.base.Preconditions.checkState;
 import static com.google.j2cl.transpiler.frontend.jdt.JsInteropAnnotationUtils.getJsNamespace;
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtObjectiveCName;
 
-import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.transpiler.frontend.common.PackageInfoCache;
 import java.util.List;
@@ -38,8 +37,9 @@ public final class PackageAnnotationsResolver {
   }
 
   /** Create a PackageAnnotationResolver with package infos in sources. */
-  public static PackageAnnotationsResolver create(List<FileInfo> sources, JdtParser parser) {
-    return create(parsePackageInfoFiles(sources, parser));
+  public static PackageAnnotationsResolver create(
+      List<FileInfo> sources, JdtParser parser, List<String> classpathEntries) {
+    return create(parsePackageInfoFiles(sources, parser, classpathEntries));
   }
 
   private final PackageInfoCache packageInfoCache;
@@ -56,16 +56,10 @@ public final class PackageAnnotationsResolver {
     return packageInfoCache.isNullMarked(packageName);
   }
 
-  /** Parser package-info files from sources. */
+  /** Parse package-info files from sources. */
   private static Stream<CompilationUnit> parsePackageInfoFiles(
-      List<FileInfo> sources, JdtParser parser) {
-
-    if (sources.isEmpty()) {
-      return Stream.of();
-    }
-
-    var parsingResult = parser.parseFiles(sources, false, ImmutableList.of(), ImmutableList.of());
-    return parsingResult.getCompilationUnitsByFilePath().values().stream();
+      List<FileInfo> sources, JdtParser parser, List<String> classpathEntries) {
+    return parser.parseFiles(sources, classpathEntries).stream();
   }
 
   /** Populates the cache for the annotations in package-info compilation units. */

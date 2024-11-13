@@ -27,7 +27,6 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.common.FilePosition;
-import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.ArrayAccess;
 import com.google.j2cl.transpiler.ast.ArrayCreationReference;
@@ -95,15 +94,12 @@ import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.WhileStatement;
 import com.google.j2cl.transpiler.frontend.common.AbstractCompilationUnitBuilder;
-import com.google.j2cl.transpiler.frontend.common.FrontendOptions;
-import com.google.j2cl.transpiler.frontend.common.PackageInfoCache;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import javax.annotation.Nullable;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
@@ -1420,45 +1416,13 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
   }
 
-  private CompilationUnit buildCompilationUnit(
+  CompilationUnit buildCompilationUnit(
       String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit compilationUnit) {
     ASTConverter converter = new ASTConverter();
     return converter.convert(sourceFilePath, compilationUnit);
   }
 
-  public static List<CompilationUnit> build(FrontendOptions options, Problems problems) {
-    PackageInfoCache.init(options.getClasspaths(), problems);
-    JdtParser jdtParser = new JdtParser(options.getClasspaths(), problems);
-    CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings =
-        jdtParser.parseFiles(
-            options.getSources(),
-            options.getGenerateKytheIndexingMetadata(),
-            options.getForbiddenAnnotations(),
-            TypeDescriptors.getWellKnownTypeNames());
-    problems.abortIfHasErrors();
-
-    JdtEnvironment environment =
-        new JdtEnvironment(
-            PackageAnnotationsResolver.create(
-                compilationUnitsAndTypeBindings.getCompilationUnitsByFilePath().entrySet().stream()
-                    .filter(e -> e.getKey().endsWith("package-info.java"))
-                    .map(Entry::getValue)));
-
-    Map<String, org.eclipse.jdt.core.dom.CompilationUnit> jdtUnitsByFilePath =
-        compilationUnitsAndTypeBindings.getCompilationUnitsByFilePath();
-    List<ITypeBinding> wellKnownTypeBindings = compilationUnitsAndTypeBindings.getTypeBindings();
-    CompilationUnitBuilder compilationUnitBuilder =
-        new CompilationUnitBuilder(wellKnownTypeBindings, environment);
-
-    ImmutableList.Builder<CompilationUnit> compilationUnits = ImmutableList.builder();
-    for (var e : jdtUnitsByFilePath.entrySet()) {
-      compilationUnits.add(compilationUnitBuilder.buildCompilationUnit(e.getKey(), e.getValue()));
-    }
-    return compilationUnits.build();
-  }
-
-  private CompilationUnitBuilder(
-      List<ITypeBinding> wellKnownTypeBindings, JdtEnvironment environment) {
+  CompilationUnitBuilder(List<ITypeBinding> wellKnownTypeBindings, JdtEnvironment environment) {
     this.environment = environment;
     environment.initWellKnownTypes(wellKnownTypeBindings);
   }

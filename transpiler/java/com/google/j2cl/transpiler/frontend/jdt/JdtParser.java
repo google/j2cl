@@ -20,6 +20,10 @@ import com.google.common.collect.Iterables;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourceUtils.FileInfo;
+import com.google.j2cl.transpiler.ast.Library;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.frontend.common.FrontendOptions;
+import com.google.j2cl.transpiler.frontend.common.PackageInfoCache;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,6 +32,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.eclipse.jdt.core.BindingKey;
@@ -48,29 +53,70 @@ public class JdtParser {
   private static final String JAVA_VERSION = JavaCore.VERSION_11;
   private static final int AST_JLS_VERSION = AST.JLS11;
 
-  private final Problems problems;
   private final Map<String, String> compilerOptions = new HashMap<>();
-  private final ImmutableList<String> classpathEntries;
+  private final Problems problems;
 
   /** Create and initialize a JdtParser based on passed parameters. */
-  public JdtParser(Iterable<String> classpathEntries, Problems problems) {
+  public JdtParser(Problems problems) {
     compilerOptions.put(JavaCore.COMPILER_SOURCE, JAVA_VERSION);
     compilerOptions.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, JAVA_VERSION);
     compilerOptions.put(JavaCore.COMPILER_COMPLIANCE, JAVA_VERSION);
 
-    this.classpathEntries = ImmutableList.copyOf(classpathEntries);
     this.problems = problems;
   }
 
+  public Library parseFiles(FrontendOptions options) {
+    PackageInfoCache.init(options.getClasspaths(), problems);
+    CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings =
+        parseFiles(
+            options.getSources(),
+            options.getClasspaths(),
+            options.getGenerateKytheIndexingMetadata(),
+            options.getForbiddenAnnotations(),
+            TypeDescriptors.getWellKnownTypeNames());
+    problems.abortIfHasErrors();
+
+    JdtEnvironment environment =
+        new JdtEnvironment(
+            PackageAnnotationsResolver.create(
+                compilationUnitsAndTypeBindings.getCompilationUnitsByFilePath().entrySet().stream()
+                    .filter(e -> e.getKey().endsWith("package-info.java"))
+                    .map(Entry::getValue)));
+
+    Map<String, CompilationUnit> jdtUnitsByFilePath =
+        compilationUnitsAndTypeBindings.getCompilationUnitsByFilePath();
+    List<ITypeBinding> wellKnownTypeBindings = compilationUnitsAndTypeBindings.getTypeBindings();
+    CompilationUnitBuilder compilationUnitBuilder =
+        new CompilationUnitBuilder(wellKnownTypeBindings, environment);
+
+    ImmutableList.Builder<com.google.j2cl.transpiler.ast.CompilationUnit> compilationUnits =
+        ImmutableList.builder();
+    for (var e : jdtUnitsByFilePath.entrySet()) {
+      compilationUnits.add(compilationUnitBuilder.buildCompilationUnit(e.getKey(), e.getValue()));
+    }
+    return Library.newBuilder().setCompilationUnits(compilationUnits.build()).build();
+  }
+
+  public Collection<CompilationUnit> parseFiles(
+      List<FileInfo> filePaths, List<String> classpathEntries) {
+    if (filePaths.isEmpty()) {
+      return ImmutableList.of();
+    }
+    return parseFiles(filePaths, classpathEntries, false, ImmutableList.of(), ImmutableList.of())
+        .getCompilationUnitsByFilePath()
+        .values();
+  }
+
   /** Returns a map from file paths to compilation units after JDT parsing. */
-  public CompilationUnitsAndTypeBindings parseFiles(
+  private CompilationUnitsAndTypeBindings parseFiles(
       List<FileInfo> filePaths,
+      List<String> classpathEntries,
       boolean useTargetPath,
       List<String> forbiddenAnnotations,
       Collection<String> binaryNamesToResolve) {
 
     // Parse and create a compilation unit for every file.
-    ASTParser parser = newASTParser();
+    ASTParser parser = newASTParser(classpathEntries);
 
     // The map must be ordered because it will be iterated over later and if it was not ordered then
     // our output would be unstable
@@ -116,9 +162,11 @@ public class JdtParser {
   }
 
   /** Resolves binary names to type bindings. */
-  public List<ITypeBinding> resolveBindings(Collection<String> binaryNames) {
+  public List<ITypeBinding> resolveBindings(
+      List<String> classpathEntries, Collection<String> binaryNames) {
     return parseFiles(
             /* filePaths= */ new ArrayList<>(),
+            /* classpathEntries= */ classpathEntries,
             /* useTargetPath= */ false,
             /* forbiddenAnnotations= */ new ArrayList<>(),
             binaryNames)
@@ -126,12 +174,13 @@ public class JdtParser {
   }
 
   @Nullable
-  public ITypeBinding resolveBinding(String qualifiedBinaryName) {
-    List<ITypeBinding> bindings = resolveBindings(ImmutableList.of(qualifiedBinaryName));
+  public ITypeBinding resolveBinding(List<String> classpathEntries, String qualifiedBinaryName) {
+    List<ITypeBinding> bindings =
+        resolveBindings(classpathEntries, ImmutableList.of(qualifiedBinaryName));
     return Iterables.getOnlyElement(bindings, null);
   }
 
-  private ASTParser newASTParser() {
+  private ASTParser newASTParser(List<String> classpathEntries) {
     ASTParser parser = ASTParser.newParser(AST_JLS_VERSION);
 
     parser.setCompilerOptions(compilerOptions);

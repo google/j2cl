@@ -135,7 +135,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
     // TODO(b/294284380): consider removing JDT and manually synthesizing required types.
     var classPathEntries = Splitter.on(File.pathSeparatorChar).splitToList(this.classPath);
     new JdtEnvironment(
-        new JdtParser(classPathEntries, problems), TypeDescriptors.getWellKnownTypeNames());
+        new JdtParser(problems), classPathEntries, TypeDescriptors.getWellKnownTypeNames());
 
     var referencedSystemProperties =
         getSummaries()

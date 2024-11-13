@@ -106,10 +106,13 @@ public class JdtEnvironment {
    * might be all that is needed by the caller.
    */
   @CanIgnoreReturnValue
-  public JdtEnvironment(JdtParser jdtParser, Collection<String> wellKnownTypesBinaryNames) {
+  public JdtEnvironment(
+      JdtParser jdtParser,
+      List<String> classpathEntries,
+      Collection<String> wellKnownTypesBinaryNames) {
     PackageInfoCache.init(ImmutableList.of(), null);
     this.packageAnnotationsResolver = PackageAnnotationsResolver.create(Stream.of());
-    this.initWellKnownTypes(jdtParser.resolveBindings(wellKnownTypesBinaryNames));
+    this.initWellKnownTypes(jdtParser.resolveBindings(classpathEntries, wellKnownTypesBinaryNames));
   }
 
   public JdtEnvironment(PackageAnnotationsResolver packageAnnotationsResolver) {
