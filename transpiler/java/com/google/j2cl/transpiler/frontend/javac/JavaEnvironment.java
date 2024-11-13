@@ -882,16 +882,6 @@ class JavaEnvironment {
         .build();
   }
 
-  /** Returns true if the element is annotated with @UncheckedCast. */
-  private static boolean hasUncheckedCastAnnotation(Element element) {
-    return AnnotationUtils.hasAnnotation(element, UNCHECKED_CAST_ANNOTATION_NAME);
-  }
-
-  /** Returns true if the element is annotated with @HasNoSideEffects. */
-  private static boolean isAnnotatedWithHasNoSideEffects(Element element) {
-    return AnnotationUtils.hasAnnotation(element, HAS_NO_SIDE_EFFECTS_ANNOTATION_NAME);
-  }
-
   private boolean isJavaLangObjectOverride(MethodSymbol method) {
     return getJavaLangObjectMethods().stream()
         .anyMatch(
@@ -1201,6 +1191,10 @@ class JavaEnvironment {
         .setFinal(isFinal)
         .setFunctionalInterface(isFunctionalInterface(typeElement.asType()))
         .setJsFunctionInterface(JsInteropUtils.isJsFunction(typeElement))
+        .setAnnotatedWithFunctionalInterface(isAnnotatedWithFunctionalInterface(typeElement))
+        .setAnnotatedWithAutoValue(isAnnotatedWithAutoValue(typeElement))
+        .setAnnotatedWithAutoValueBuilder(isAnnotatedWithAutoValueBuilder(typeElement))
+        .setTestClass(isTestClass(typeElement))
         .setJsType(JsInteropUtils.isJsType(typeElement))
         .setJsEnumInfo(jsEnumInfo)
         .setNative(JsInteropUtils.isJsNativeType(typeElement))
@@ -1417,5 +1411,34 @@ class JavaEnvironment {
 
   private static boolean isSynthetic(Element element) {
     return element instanceof Symbol && (((Symbol) element).flags() & Flags.SYNTHETIC) != 0;
+  }
+
+  /** Returns true if the element is annotated with @UncheckedCast. */
+  private static boolean hasUncheckedCastAnnotation(Element element) {
+    return AnnotationUtils.hasAnnotation(element, UNCHECKED_CAST_ANNOTATION_NAME);
+  }
+
+  /** Returns true if the element is annotated with @HasNoSideEffects. */
+  private static boolean isAnnotatedWithHasNoSideEffects(Element element) {
+    return AnnotationUtils.hasAnnotation(element, HAS_NO_SIDE_EFFECTS_ANNOTATION_NAME);
+  }
+
+  /** Returns true if the element is annotated with @FunctionalInterface. */
+  private static boolean isAnnotatedWithFunctionalInterface(Element element) {
+    return AnnotationUtils.hasAnnotation(element, FunctionalInterface.class.getName());
+  }
+
+  private static boolean isAnnotatedWithAutoValue(Element element) {
+    return AnnotationUtils.hasAnnotation(element, "com.google.auto.value.AutoValue");
+  }
+
+  private static boolean isAnnotatedWithAutoValueBuilder(Element element) {
+    return AnnotationUtils.hasAnnotation(element, "com.google.auto.value.AutoValue.Builder");
+  }
+
+  private static boolean isTestClass(Element element) {
+    return AnnotationUtils.hasAnnotation(element, "org.junit.runner.RunWith")
+        || AnnotationUtils.hasAnnotation(
+            element, "com.google.apps.xplat.testing.parameterized.RunParameterized");
   }
 }
