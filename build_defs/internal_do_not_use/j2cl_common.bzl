@@ -367,8 +367,6 @@ DEFAULT_J2CL_KOTLINCOPTS = [
     # Have kotlinc's IR lowering passes generate objects for SAM implementations.
     # J2CL lowering passes cannot handle invokedynamic-based representations.
     "-Xsam-conversions=class",
-    # TODO(b/317551802): Remove this once the language version is updated.
-    "-language-version=1.9",
     # TODO(b/347052390): Remove once the const evaluation optimization crash is fixed (KT-70391).
     "-Xignore-const-optimization-errors",
 ]
