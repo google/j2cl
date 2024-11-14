@@ -131,7 +131,7 @@ j2cl_multi_test(
 
 j2cl_multi_test(
     name = "EmulJava9",
-    enable_kt_native = False,
+    enable_j2kt_native = False,
     shard_count = 2,
     test_class = "com.google.j2cl.jre.EmulJava9Suite",
     deps = [":emul_tests_lib"],
@@ -162,7 +162,7 @@ j2cl_library(
 
 j2cl_multi_test(
     name = "JsSuite",
-    enable_kt_native = False,
+    enable_j2kt_native = False,
     enable_wasm = False,
     test_class = "com.google.j2cl.jre.JsSuite",
     deps = [":js_tests_lib"],
