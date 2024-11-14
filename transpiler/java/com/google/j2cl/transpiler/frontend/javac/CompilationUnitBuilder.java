@@ -1011,6 +1011,11 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     JCExpression jcQualifier = getExplicitQualifier(methodInvocation);
     Expression qualifier = convertExpressionOrNull(jcQualifier);
     MethodSymbol methodSymbol = getMemberSymbol(methodInvocation.getMethodSelect());
+    if (qualifier instanceof JavaScriptConstructorReference) {
+      // Remove qualifier if it is a type name. Only allowed for static methods.
+      checkState(methodSymbol.isStatic());
+      qualifier = null;
+    }
 
     MethodDescriptor methodDescriptor =
         environment.createMethodDescriptor(
