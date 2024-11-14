@@ -35,6 +35,7 @@ def integration_test(
         main_class = None,
         closure_defines = dict(),
         suppress = [],
+        javacopts = [],
         tags = [],
         **kwargs):
     """Macro that turns Java files into integration test targets.
@@ -81,6 +82,7 @@ def integration_test(
         deps = deps,
         tags = tags,
         js_suppress = suppress,
+        javacopts = javacopts,
         enable_nullability = enable_nullability,
     )
 
@@ -131,7 +133,7 @@ def integration_library(name, srcs = [], deps = [], exports = [], enable_nullabi
         srcs = srcs,
         deps = [to_parallel_target(d, _to_j2cl_name) for d in deps],
         exports = [to_parallel_target(e, _to_j2cl_name) for e in exports],
-        javacopts = JAVAC_FLAGS,
+        javacopts = JAVAC_FLAGS + kwargs.pop("javacopts", []),
         generate_build_test = False,
         experimental_enable_jspecify_support_do_not_enable_without_jspecify_static_checking_or_you_might_cause_an_outage = enable_nullability,
         **kwargs
