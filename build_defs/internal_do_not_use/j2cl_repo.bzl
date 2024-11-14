@@ -76,6 +76,10 @@ def _j2cl_import_external(repository_ctx):
                 prop = prop[:-1]
             lines.append("    %s = %s," % (prop, repr(value)))
 
+    additional_attrs = repository_ctx.attr.additional_rule_attrs
+    for attr_key in additional_attrs:
+        lines.append("    %s = %s," % (attr_key, additional_attrs[attr_key]))
+
     lines.append(")")
     lines.append("")
 
