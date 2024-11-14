@@ -590,7 +590,8 @@ class JavaEnvironment {
 
     MethodDescriptor declarationMethodDescriptor = null;
     List<? extends TypeMirror> parameterTypes = methodType.getParameterTypes();
-    if (isSpecialized(declarationMethodElement, parameterTypes, returnType)) {
+    if (isSpecialized(
+        enclosingTypeDescriptor, declarationMethodElement, parameterTypes, returnType)) {
       declarationMethodDescriptor = createDeclarationMethodDescriptor(declarationMethodElement);
     }
 
@@ -637,7 +638,7 @@ class JavaEnvironment {
             .collect(toImmutableList());
 
     TypeMirror returnType = methodElement.getReturnType();
-    if (isSpecialized(declarationMethodElement, parameters, returnType)) {
+    if (isSpecialized(enclosingTypeDescriptor, declarationMethodElement, parameters, returnType)) {
       declarationMethodDescriptor =
           createDeclarationMethodDescriptor(
               declarationMethodElement, enclosingTypeDescriptor.getDeclarationDescriptor());
@@ -802,6 +803,7 @@ class JavaEnvironment {
    * class declaration.
    */
   private boolean isSpecialized(
+      DeclaredTypeDescriptor enclosingTypeDescriptor,
       ExecutableElement declarationMethodElement,
       List<? extends TypeMirror> parameters,
       TypeMirror returnType) {
@@ -810,7 +812,10 @@ class JavaEnvironment {
                 parameters.stream(),
                 declarationMethodElement.getParameters().stream(),
                 (thisType, thatType) -> isSameType(thisType, thatType.asType()))
-            .allMatch(equals -> equals);
+            .allMatch(equals -> equals)
+        || !enclosingTypeDescriptor
+            .getTypeArgumentDescriptors()
+            .equals(enclosingTypeDescriptor.getTypeDeclaration().getTypeParameterDescriptors());
   }
 
   private boolean isSameType(TypeMirror thisType, TypeMirror thatType) {

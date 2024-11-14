@@ -859,7 +859,9 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             : memberReference.referentType.getReturnType();
     MethodDescriptor targetMethodDescriptor =
         environment.createMethodDescriptor(
-            (ExecutableType) memberReference.referentType, returnType, methodSymbol);
+            /* methodType= */ (ExecutableType) memberReference.referentType,
+            /* returnType= */ returnType,
+            /* declarationMethodElement= */ methodSymbol);
     Expression qualifier = convertExpressionOrNull(memberReference.getQualifierExpression());
     if (qualifier instanceof JavaScriptConstructorReference) {
       // The qualifier was just the class name, remove it.
@@ -973,10 +975,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     DeclaredTypeDescriptor targetType = environment.createDeclaredTypeDescriptor(expression.type);
     MethodDescriptor constructorMethodDescriptor =
         environment.createMethodDescriptor(
-            targetType,
-            (MethodSymbol)
+            /* enclosingTypeDescriptor= */ targetType,
+            /* methodElement= */ (MethodSymbol)
                 constructorBinding.asMemberOf(expression.type, environment.internalTypes),
-            constructorBinding);
+            /* declarationMethodElement= */ constructorBinding);
     Expression qualifier = convertExpressionOrNull(expression.getEnclosingExpression());
     List<Expression> arguments =
         convertArguments(constructorMethodDescriptor, expression.getArguments());
@@ -1012,9 +1014,9 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     MethodDescriptor methodDescriptor =
         environment.createMethodDescriptor(
-            (ExecutableType) methodInvocation.getMethodSelect().type,
-            methodInvocation.type,
-            methodSymbol);
+            /* methodType= */ (ExecutableType) methodInvocation.getMethodSelect().type,
+            /* returnType= */ methodInvocation.type,
+            /* declarationMethodElement= */ methodSymbol);
 
     if (methodDescriptor.isConstructor()
         && methodDescriptor.isMemberOf(TypeDescriptors.get().javaLangEnum)) {
