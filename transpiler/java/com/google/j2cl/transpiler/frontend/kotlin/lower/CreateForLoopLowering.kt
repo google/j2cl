@@ -157,6 +157,10 @@ private class LoopTransformer(
     context.ir.symbols.iterable.getSimpleFunction("iterator")!!.owner
   }
 
+  private val iteratorHasNextFunction: IrSimpleFunction by lazy {
+    context.ir.symbols.iterator.getSimpleFunction("hasNext")!!.owner
+  }
+
   override fun visitBlock(expression: IrBlock): IrExpression {
     // The psi2ir transformer wraps all `for` loop into an `IrBlock` with origin `FOR_LOOP`.
     // After this check, we are sure that we are manipulating `while` and `do while` loop that has
@@ -216,7 +220,8 @@ private class LoopTransformer(
     // call on the iterator.
     if (
       innerLoopBody.inductionVariableUpdate != null ||
-        (condition as? IrCall)?.origin != IrStatementOrigin.FOR_LOOP_HAS_NEXT
+        condition !is IrCall ||
+        !condition.symbol.owner.overrides(iteratorHasNextFunction)
     ) {
       return null
     }
