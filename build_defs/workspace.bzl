@@ -52,9 +52,9 @@ def setup_j2cl_workspace(**kwargs):
 
     http_archive(
       name = "bazel_common_javadoc",
-      strip_prefix = "bazel-common-213ecb74698948ce4e1597c9247f2ab8933553d7/tools/javadoc",
-      urls = ["https://github.com/google/bazel-common/archive/213ecb74698948ce4e1597c9247f2ab8933553d7.zip"],
-      sha256 = "dcefae7d8561f684f305223aad530e5dccb4e8068a653edfc2c89abe9570d2a6",
+      strip_prefix = "bazel-common-ebce2af3f0de560b649dcf98ef732a56b80e829c/tools/javadoc",
+      urls = ["https://github.com/google/bazel-common/archive/ebce2af3f0de560b649dcf98ef732a56b80e829c.zip"],
+      sha256 = "3f090bfb3c0c66e3c2d9ae229d184af1147e4c06223551aeb2ff292661371b9a",
     )
 
     jvm_maven_import_external(
