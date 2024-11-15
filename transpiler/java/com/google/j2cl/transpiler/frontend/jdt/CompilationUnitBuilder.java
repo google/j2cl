@@ -1273,8 +1273,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           .build();
     }
 
-    private SwitchCase.Builder convert(org.eclipse.jdt.core.dom.SwitchCase statement) {
-      return statement.isDefault()
+    private SwitchCase.Builder convert(org.eclipse.jdt.core.dom.SwitchCase switchCase) {
+      return switchCase.isDefault()
           ? SwitchCase.newBuilder()
           : SwitchCase.newBuilder()
               // Fold the constant in the switch case to avoid complex expressions. Otherwise JDT
@@ -1282,7 +1282,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
               // backend relies on switch case constant for switch on integral values to be
               // literals.
               .setCaseExpressions(
-                  ImmutableList.of(convertAndFoldExpression(statement.getExpression())));
+                  ImmutableList.of(
+                      convertAndFoldExpression(
+                          Iterables.getOnlyElement(
+                              JdtEnvironment.asTypedList(switchCase.expressions())))));
     }
 
     private SynchronizedStatement convert(

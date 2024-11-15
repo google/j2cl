@@ -82,12 +82,12 @@ public final class GwtIncompatibleStripper {
     }
 
     Map<String, String> compilerOptions = new HashMap<>();
-    compilerOptions.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_11);
-    compilerOptions.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, JavaCore.VERSION_11);
-    compilerOptions.put(JavaCore.COMPILER_COMPLIANCE, JavaCore.VERSION_11);
+    compilerOptions.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_14);
+    compilerOptions.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, JavaCore.VERSION_14);
+    compilerOptions.put(JavaCore.COMPILER_COMPLIANCE, JavaCore.VERSION_14);
 
     // Parse the file.
-    ASTParser parser = ASTParser.newParser(AST.JLS11);
+    ASTParser parser = ASTParser.newParser(AST.JLS14);
     parser.setCompilerOptions(compilerOptions);
     parser.setResolveBindings(false);
     parser.setSource(fileContent.toCharArray());
