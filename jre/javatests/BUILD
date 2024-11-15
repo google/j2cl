@@ -4,7 +4,7 @@
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_binary")
 load("//build_defs:rules.bzl", "j2cl_library", "j2cl_test", "j2kt_native_library", "j2wasm_test")
-load("//javascript/tools/jscompiler/builddefs:flags.bzl", "VERBOSE_WARNING_FLAGS_STRICT", "WHITESPACE_ONLY_FLAGS")
+load("//javascript/tools/jscompiler/builddefs:flags.bzl", "VERBOSE_WARNING_FLAGS_STRICT")
 load("//third_party/bazel_rules/rules_closure/closure:defs.bzl", "closure_js_binary")
 load("@rules_java//java:defs.bzl", "java_test")
 load(":j2cl_multi_test.bzl", "j2cl_multi_test")
@@ -200,7 +200,6 @@ build_test(
     targets = [
         ":conformance_binary",
         ":conformance_binary_head",
-        ":conformance_binary_whitespace_only",
     ],
 )
 
@@ -230,16 +229,18 @@ closure_js_binary(
 )
 
 closure_js_binary(
-    name = "conformance_binary_whitespace_only",
-    compiler = "//javascript/tools/jscompiler:head",
-    defs = COMFORMANCE_CHECK_FLAGS + WHITESPACE_ONLY_FLAGS,
-    extra_inputs = ["conformance_proto.txt"],
-    use_precompiled_libraries = False,
+    name = "conformance_binary_opensource",
+    dependency_mode = "SORT_ONLY",
+    suppress_on_all_sources_in_transitive_closure = [
+        "analyzerChecks",
+        "deprecated",
+    ],
     deps = ["//:jre"],
 )
 
 closure_js_binary(
-    name = "conformance_binary_opensource",
+    name = "conformance_binary_whitespace_only_opensource",
+    compilation_level = "WHITESPACE_ONLY",
     dependency_mode = "SORT_ONLY",
     suppress_on_all_sources_in_transitive_closure = [
         "analyzerChecks",
@@ -255,9 +256,17 @@ genrule(
 )
 
 sh_test(
-    name = "opensource_output_empty_test",
+    name = "opensource_stderr_empty_test",
     srcs = ["file_empty_check.sh"],
     args = ["$(location conformance_binary_opensource-stderr.txt)"],
     data = ["conformance_binary_opensource-stderr.txt"],
+    tags = ["j2cl"],
+)
+
+sh_test(
+    name = "whitespace_only_opensource_stderr_empty_test",
+    srcs = ["file_empty_check.sh"],
+    args = ["$(location conformance_binary_whitespace_only_opensource-stderr.txt)"],
+    data = ["conformance_binary_whitespace_only_opensource-stderr.txt"],
     tags = ["j2cl"],
 )
