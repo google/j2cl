@@ -259,9 +259,11 @@ public class StatementTranspiler {
         if (switchCase.isDefault()) {
           builder.append("default: ");
         } else {
-          builder.append("case ");
-          renderExpression(switchCase.getCaseExpression());
-          builder.append(": ");
+          for (Expression expression : switchCase.getCaseExpressions()) {
+            builder.append("case ");
+            renderExpression(expression);
+            builder.append(": ");
+          }
         }
         builder.indent();
         renderStatements(switchCase.getStatements());

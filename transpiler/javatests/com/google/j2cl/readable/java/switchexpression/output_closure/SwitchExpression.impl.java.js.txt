@@ -1,0 +1,93 @@
+goog.module('switchexpression.SwitchExpression$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
+let Short = goog.forwardDeclare('java.lang.Short$impl');
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
+
+class SwitchExpression extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!SwitchExpression} */
+ static $create__() {
+  SwitchExpression.$clinit();
+  let $instance = new SwitchExpression();
+  $instance.$ctor__switchexpression_SwitchExpression__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__switchexpression_SwitchExpression__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_testBasicSwitchExpressions__void() {
+  let a = 0;
+  let i = (() =>{
+   switch (3) {
+    case 1: 
+     return $Long.fromInt(5);
+    case 3: case 4: 
+     throw $Exceptions.toJs(RuntimeException.$create__());
+    default: 
+     {
+      let /** number */ $value;
+      let j = Short.m_valueOf__short__java_lang_Short($Primitives.narrowIntToShort(($value = a, a = a + 1 | 0, $value)));
+      return $Primitives.widenShortToLong(j.m_shortValue__short());
+     }
+   }
+  })();
+ }
+ /** @nodts */
+ static m_testSwitchExpressionsWithComplexControlFlow__void() {
+  let a = 0;
+  let i = (() =>{
+   switch (3) {
+    case 1: 
+     return $Long.fromInt(5);
+    case 3: case 4: 
+     throw $Exceptions.toJs(RuntimeException.$create__());
+    default: 
+     {
+      let /** number */ $value;
+      let j = Short.m_valueOf__short__java_lang_Short($Primitives.narrowIntToShort(($value = a, a = a + 1 | 0, $value)));
+      while (j.m_shortValue__short() < 3) {
+       if (j.m_shortValue__short() == 2) {
+        return $Long.fromInt(2);
+       }
+      }
+      return $Primitives.widenShortToLong(j.m_shortValue__short());
+     }
+   }
+  })();
+ }
+ /** @nodts */
+ static $clinit() {
+  SwitchExpression.$clinit = () =>{};
+  SwitchExpression.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SwitchExpression;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
+  Short = goog.module.get('java.lang.Short$impl');
+  $Long = goog.module.get('nativebootstrap.Long$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+  $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
+ }
+}
+$Util.$setClassMetadata(SwitchExpression, 'switchexpression.SwitchExpression');
+
+exports = SwitchExpression;
+
+//# sourceMappingURL=SwitchExpression.js.map

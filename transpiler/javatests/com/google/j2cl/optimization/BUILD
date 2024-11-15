@@ -25,6 +25,8 @@ j2cl_test(
     ],
     javacopts = [
         "-XepDisableAllChecks",
+        "-source 14",
+        "-target 14",
     ],
     deps = [
         ":OptimizationTestUtil",

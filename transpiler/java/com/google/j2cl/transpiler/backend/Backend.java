@@ -57,6 +57,7 @@ import com.google.j2cl.transpiler.passes.ImplementStaticInitializationViaClinitF
 import com.google.j2cl.transpiler.passes.ImplementStaticInitializationViaConditionChecks;
 import com.google.j2cl.transpiler.passes.ImplementStringCompileTimeConstants;
 import com.google.j2cl.transpiler.passes.ImplementStringConcatenation;
+import com.google.j2cl.transpiler.passes.ImplementSwitchExpressionsViaIifes;
 import com.google.j2cl.transpiler.passes.ImplementSynchronizedStatements;
 import com.google.j2cl.transpiler.passes.ImplementSystemGetProperty;
 import com.google.j2cl.transpiler.passes.InsertBitwiseOperatorBooleanCoercions;
@@ -303,6 +304,7 @@ public enum Backend {
           // Java semantic conversions.
           InsertJsEnumBoxingAndUnboxingConversions::new,
           RemoveUnneededCasts::new,
+          ImplementSwitchExpressionsViaIifes::new,
           NormalizeSwitchStatements::new,
           NormalizeArrayAccesses::new,
           ImplementAssertStatements::new,

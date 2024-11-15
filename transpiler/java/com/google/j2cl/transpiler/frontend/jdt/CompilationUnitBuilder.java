@@ -24,7 +24,6 @@ import static java.util.stream.Collectors.toCollection;
 import static java.util.stream.Collectors.toList;
 
 import com.google.common.base.Predicates;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.SourcePosition;
@@ -77,6 +76,7 @@ import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.SwitchCase;
+import com.google.j2cl.transpiler.ast.SwitchExpression;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
 import com.google.j2cl.transpiler.ast.SynchronizedStatement;
 import com.google.j2cl.transpiler.ast.ThisReference;
@@ -93,6 +93,7 @@ import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.WhileStatement;
+import com.google.j2cl.transpiler.ast.YieldStatement;
 import com.google.j2cl.transpiler.frontend.common.AbstractCompilationUnitBuilder;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -548,6 +549,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           return convert((org.eclipse.jdt.core.dom.SuperFieldAccess) expression);
         case ASTNode.SUPER_METHOD_INVOCATION:
           return convert((org.eclipse.jdt.core.dom.SuperMethodInvocation) expression);
+        case ASTNode.SWITCH_EXPRESSION:
+          return convert((org.eclipse.jdt.core.dom.SwitchExpression) expression);
         case ASTNode.THIS_EXPRESSION:
           return convert((org.eclipse.jdt.core.dom.ThisExpression) expression);
         case ASTNode.TYPE_LITERAL:
@@ -640,6 +643,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           return convert((org.eclipse.jdt.core.dom.VariableDeclarationStatement) statement);
         case ASTNode.WHILE_STATEMENT:
           return convert((org.eclipse.jdt.core.dom.WhileStatement) statement);
+        case ASTNode.YIELD_STATEMENT:
+          return convert((org.eclipse.jdt.core.dom.YieldStatement) statement);
         default:
           throw internalCompilerError(
               "Unexpected type for Statement: %s", statement.getClass().getName());
@@ -1192,11 +1197,16 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
 
     private ReturnStatement convert(org.eclipse.jdt.core.dom.ReturnStatement statement) {
-      // Grab the type of the return statement from the method declaration, not from the expression.
-
       return ReturnStatement.newBuilder()
           .setExpression(convertOrNull(statement.getExpression()))
           .setSourcePosition(getSourcePosition(statement))
+          .build();
+    }
+
+    private YieldStatement convert(org.eclipse.jdt.core.dom.YieldStatement statement) {
+      return YieldStatement.newBuilder()
+          .setSourcePosition(getSourcePosition(statement))
+          .setExpression(convert(statement.getExpression()))
           .build();
     }
 
@@ -1252,40 +1262,47 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       return new StringLiteral(literal.getLiteralValue());
     }
 
-    private SwitchStatement convert(org.eclipse.jdt.core.dom.SwitchStatement switchStatement) {
-      Expression expression = convert(switchStatement.getExpression());
+    private Expression convert(org.eclipse.jdt.core.dom.SwitchExpression expression) {
+      return SwitchExpression.newBuilder()
+          .setTypeDescriptor(environment.createTypeDescriptor(expression.resolveTypeBinding()))
+          .setExpression(convert(expression.getExpression()))
+          .setCases(createSwitchCases(JdtEnvironment.asTypedList(expression.statements())))
+          .build();
+    }
 
+    private SwitchStatement convert(org.eclipse.jdt.core.dom.SwitchStatement switchStatement) {
+      return SwitchStatement.newBuilder()
+          .setSourcePosition(getSourcePosition(switchStatement))
+          .setExpression(convert(switchStatement.getExpression()))
+          .setCases(createSwitchCases(JdtEnvironment.asTypedList(switchStatement.statements())))
+          .build();
+    }
+
+    private List<SwitchCase> createSwitchCases(
+        List<org.eclipse.jdt.core.dom.Statement> statements) {
       List<SwitchCase.Builder> caseBuilders = new ArrayList<>();
-      for (org.eclipse.jdt.core.dom.Statement statement :
-          JdtEnvironment.<org.eclipse.jdt.core.dom.Statement>asTypedList(
-              switchStatement.statements())) {
+      for (org.eclipse.jdt.core.dom.Statement statement : statements) {
         if (statement instanceof org.eclipse.jdt.core.dom.SwitchCase) {
           caseBuilders.add(convert((org.eclipse.jdt.core.dom.SwitchCase) statement));
         } else {
           Iterables.getLast(caseBuilders).addStatement(convertStatement(statement));
         }
       }
-
-      return SwitchStatement.newBuilder()
-          .setSourcePosition(getSourcePosition(switchStatement))
-          .setExpression(expression)
-          .setCases(caseBuilders.stream().map(SwitchCase.Builder::build).collect(toImmutableList()))
-          .build();
+      return caseBuilders.stream().map(SwitchCase.Builder::build).collect(toImmutableList());
     }
 
     private SwitchCase.Builder convert(org.eclipse.jdt.core.dom.SwitchCase switchCase) {
-      return switchCase.isDefault()
-          ? SwitchCase.newBuilder()
-          : SwitchCase.newBuilder()
-              // Fold the constant in the switch case to avoid complex expressions. Otherwise JDT
-              // would represent negative values as unary expressions, e.g - <constant>. The Wasm
-              // backend relies on switch case constant for switch on integral values to be
-              // literals.
-              .setCaseExpressions(
-                  ImmutableList.of(
-                      convertAndFoldExpression(
-                          Iterables.getOnlyElement(
-                              JdtEnvironment.asTypedList(switchCase.expressions())))));
+      return SwitchCase.newBuilder()
+          .setCaseExpressions(
+              JdtEnvironment.<org.eclipse.jdt.core.dom.Expression>asTypedList(
+                      switchCase.expressions())
+                  .stream()
+                  // Fold the constant in the switch case to avoid complex expressions. Otherwise
+                  // JDT would represent negative values as unary expressions, e.g - <constant>. The
+                  // Wasm backend relies on switch case constant for switch on integral values to be
+                  // literals.
+                  .map(this::convertAndFoldExpression)
+                  .collect(toImmutableList()));
     }
 
     private SynchronizedStatement convert(
