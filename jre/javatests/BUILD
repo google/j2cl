@@ -43,6 +43,7 @@ j2cl_library(
     deps = [
         "//jre/java:javaemul_internal_annotations-j2cl",
         "//third_party:jsinterop-annotations-j2cl",
+        "//third_party:jspecify_annotations-j2cl",
         "//third_party:junit-j2cl",
     ],
 )
@@ -145,7 +146,7 @@ j2cl_multi_test(
 )
 
 j2cl_multi_test(
-    name = "DateTimeSuite",
+    name = "DateTime",
     test_class = "com.google.j2cl.jre.DateTimeSuite",
     deps = [":emul_tests_lib"],
 )
@@ -170,7 +171,7 @@ j2cl_multi_test(
 
 # A smoke check that verifies es5 transpiled test works
 j2cl_test(
-    name = "ConcurrentSuite_es5",
+    name = "Concurrent_es5",
     browsers = ["//testing/web/browsers:chrome-linux"],
     generate_build_test = False,
     jvm_flags = ["-Djsrunner.net.transpileMode=always"],
@@ -178,7 +179,7 @@ j2cl_test(
     test_class = "com.google.j2cl.jre.ConcurrentSuite",
     runtime_deps = [
         ":emul_tests_lib",
-        "//third_party/java/junit:junit-j2cl",
+        "//third_party:junit-j2cl",
     ],
 )
 
@@ -189,7 +190,7 @@ j2wasm_test(
     use_magic_string_imports = True,
     runtime_deps = [
         ":emul_tests_lib-j2wasm",
-        "//third_party/java/junit:junit-j2wasm",
+        "//third_party:junit-j2wasm",
     ],
 )
 
