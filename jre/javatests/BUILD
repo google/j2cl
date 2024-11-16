@@ -4,7 +4,6 @@
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_binary")
 load("//build_defs:rules.bzl", "j2cl_library", "j2cl_test", "j2kt_native_library", "j2wasm_test")
-load("//javascript/tools/jscompiler/builddefs:flags.bzl", "VERBOSE_WARNING_FLAGS_STRICT")
 load("//third_party/bazel_rules/rules_closure/closure:defs.bzl", "closure_js_binary")
 load("@rules_java//java:defs.bzl", "java_test")
 load(":j2cl_multi_test.bzl", "j2cl_multi_test")
@@ -201,31 +200,6 @@ build_test(
         ":conformance_binary",
         ":conformance_binary_head",
     ],
-)
-
-COMFORMANCE_CHECK_FLAGS = VERBOSE_WARNING_FLAGS_STRICT + [
-    "--conformance_config=conformance_proto.txt",
-    "--jscomp_error=conformanceViolations",
-    "--jscomp_error=strictPrimitiveOperators",
-    # TODO(michaelthomas): Enable once all errors are fixed. Yes, seriously.
-    # "--jscomp_error=reportUnknownTypes",
-]
-
-closure_js_binary(
-    name = "conformance_binary",
-    defs = COMFORMANCE_CHECK_FLAGS,
-    extra_inputs = ["conformance_proto.txt"],
-    use_precompiled_libraries = False,
-    deps = ["//:jre"],
-)
-
-closure_js_binary(
-    name = "conformance_binary_head",
-    compiler = "//javascript/tools/jscompiler:head",
-    defs = COMFORMANCE_CHECK_FLAGS,
-    extra_inputs = ["conformance_proto.txt"],
-    use_precompiled_libraries = False,
-    deps = ["//:jre"],
 )
 
 closure_js_binary(
