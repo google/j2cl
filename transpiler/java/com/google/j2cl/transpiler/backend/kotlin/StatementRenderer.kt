@@ -40,6 +40,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
 import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.ast.WhileStatement
+import com.google.j2cl.transpiler.ast.YieldStatement
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.AT_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.BREAK_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.CATCH_KEYWORD
@@ -121,6 +122,7 @@ internal data class StatementRenderer(
       is WhileStatement -> whileStatementSource(statement)
       is ThrowStatement -> throwStatementSource(statement)
       is TryStatement -> tryStatementSource(statement)
+      is YieldStatement -> yieldStatementSource(statement)
       else -> throw InternalCompilerError("Unexpected ${statement::class.java.simpleName}")
     }.withMapping(statement.sourcePosition)
 
@@ -267,4 +269,12 @@ internal data class StatementRenderer(
           listOf(this)
         }
   }
+
+  private fun yieldStatementSource(yieldStatement: YieldStatement): Source =
+    // TODO(b/377873836): Decide how to label switch expressions to avoid possible incorrect
+    // interactions between constructs.
+    spaceSeparated(
+      join(RETURN_KEYWORD, labelReference("run")),
+      yieldStatement.expression?.let(::expressionSource).orEmpty(),
+    )
 }

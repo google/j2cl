@@ -102,6 +102,7 @@ public class NormalizeSwitchStatementsJ2kt extends NormalizationPass {
   public void applyTo(CompilationUnit compilationUnit) {
     normalizeSwitchStatements(compilationUnit);
     convertToSwitchExpression(compilationUnit);
+    reorderSwitchCases(compilationUnit);
     removeTrailingBreaks(compilationUnit);
   }
 
@@ -223,14 +224,6 @@ public class NormalizeSwitchStatementsJ2kt extends NormalizationPass {
                         switchCaseWithLabel.getSwitchCase(),
                         switchCaseWithLabel.getLabel(),
                         sourcePosition))
-            .collect(toImmutableList());
-
-    // Move `default` case at the end. Note that since this is just the dispatching switch, it does
-    // not have fallthroughs and can be arbitrarily reordered.
-    cases =
-        Streams.concat(
-                cases.stream().filter(Predicates.not(SwitchCase::isDefault)),
-                cases.stream().filter(SwitchCase::isDefault))
             .collect(toImmutableList());
 
     Expression whenExpression =
@@ -358,6 +351,23 @@ public class NormalizeSwitchStatementsJ2kt extends NormalizationPass {
   private static boolean breaksOutOfSwitchStatement(List<Statement> statements) {
     Statement lastStatement = Iterables.getLast(statements, null);
     return lastStatement != null && breaksOutOfSwitchStatement(lastStatement);
+  }
+
+  /** Moves the default case to the end. */
+  private void reorderSwitchCases(CompilationUnit compilationUnit) {
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          @Override
+          public Node rewriteSwitchExpression(SwitchExpression switchExpression) {
+            var cases =
+                Streams.concat(
+                        switchExpression.getCases().stream()
+                            .filter(Predicates.not(SwitchCase::isDefault)),
+                        switchExpression.getCases().stream().filter(SwitchCase::isDefault))
+                    .collect(toImmutableList());
+            return SwitchExpression.Builder.from(switchExpression).setCases(cases).build();
+          }
+        });
   }
 
   /** Removes breaks at the end that are equivalent to normal flow out. */

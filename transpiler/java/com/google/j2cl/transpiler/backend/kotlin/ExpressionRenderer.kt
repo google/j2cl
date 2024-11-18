@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.common.InternalCompilerError
+import com.google.j2cl.transpiler.ast.AbstractVisitor
 import com.google.j2cl.transpiler.ast.ArrayAccess
 import com.google.j2cl.transpiler.ast.ArrayLength
 import com.google.j2cl.transpiler.ast.ArrayLiteral
@@ -63,6 +64,7 @@ import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment
 import com.google.j2cl.transpiler.ast.VariableReference
+import com.google.j2cl.transpiler.ast.YieldStatement
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.AND_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.ARROW_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.ASSIGN_OPERATOR
@@ -110,7 +112,9 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.dotSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inAngleBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inCurlyBrackets
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inInlineCurlyBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inNewLine
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParentheses
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inSquareBrackets
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.infix
@@ -572,29 +576,41 @@ internal data class ExpressionRenderer(
     )
 
   private fun switchExpressionSource(switchExpression: SwitchExpression): Source =
-    spaceSeparated(
-      KotlinSource.WHEN_KEYWORD,
-      inParentheses(expressionSource(switchExpression.expression)),
-      block(
-        newLineSeparated(
-          switchExpression.cases.map { case ->
-            if (case.isDefault) {
-              infix(
-                ELSE_KEYWORD,
-                ARROW_OPERATOR,
-                block(statementRenderer.statementsSource(case.statements)),
-              )
-            } else {
-              infix(
-                commaSeparated(case.caseExpressions.map(::expressionSource)),
-                ARROW_OPERATOR,
-                block(statementRenderer.statementsSource(case.statements)),
-              )
+    enclosedByRunIf(switchExpression.hasYieldStatements) {
+      spaceSeparated(
+        KotlinSource.WHEN_KEYWORD,
+        inParentheses(expressionSource(switchExpression.expression)),
+        block(
+          newLineSeparated(
+            switchExpression.cases.map { case ->
+              if (case.isDefault) {
+                infix(
+                  ELSE_KEYWORD,
+                  ARROW_OPERATOR,
+                  block(statementRenderer.statementsSource(case.statements)),
+                )
+              } else {
+                infix(
+                  commaSeparated(case.caseExpressions.map(::expressionSource)),
+                  ARROW_OPERATOR,
+                  block(statementRenderer.statementsSource(case.statements)),
+                )
+              }
             }
-          }
-        )
-      ),
-    )
+          )
+        ),
+      )
+    }
+
+  private fun enclosedByRunIf(condition: Boolean, fn: () -> Source): Source =
+    fn().letIf(condition) {
+      spaceSeparated(
+        // TODO(b/377873836): Decide how to label switch expressions to avoid possible incorrect
+        // interactions between constructs.
+        nameRenderer.extensionMemberQualifiedNameSource("kotlin.run"),
+        inCurlyBrackets(inNewLine(it)),
+      )
+    }
 
   private fun thisReferenceSource(thisReference: ThisReference): Source =
     join(
@@ -801,5 +817,28 @@ internal data class ExpressionRenderer(
         leftOperand is NullLiteral ||
           rightOperand is NullLiteral ||
           (leftOperand.typeDescriptor.isPrimitive && rightOperand.typeDescriptor.isPrimitive)
+
+    private val SwitchExpression.hasYieldStatements: Boolean
+      get() {
+        for (switchCase in cases) {
+          var hasYieldStatement = false
+          switchCase.accept(
+            object : AbstractVisitor() {
+              override fun enterSwitchExpression(switchExpression: SwitchExpression?): Boolean {
+                // Do not recurse in nested switch expressions.
+                return false
+              }
+
+              override fun exitYieldStatement(yieldStatement: YieldStatement) {
+                hasYieldStatement = true
+              }
+            }
+          )
+          if (hasYieldStatement) {
+            return true
+          }
+        }
+        return false
+      }
   }
 }
