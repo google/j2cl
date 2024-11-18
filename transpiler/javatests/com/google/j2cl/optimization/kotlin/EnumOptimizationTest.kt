@@ -19,7 +19,6 @@ import com.google.j2cl.optimization.OptimizationTestUtil.assertFunctionMatches
 import jsinterop.annotations.JsEnum
 import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsProperty
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -89,9 +88,8 @@ class EnumOptimizationTest {
 
   @JsProperty private external fun getJsEnumEquals(): Any
 
-  // TODO(b/117514489): Enable and complete the test when unnecessary boxing is not longer emitted.
-  @Ignore
+  @Test
   fun equalsDoesNotBox() {
-    assertFunctionMatches(getJsEnumEquals(), "")
+    assertFunctionMatches(getJsEnumEquals(), "return !0;")
   }
 }
