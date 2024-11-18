@@ -100,6 +100,18 @@ class SourceMap extends j_l_Object {
  m_testLocalClass__void_$p_sourcemap_SourceMap() {
   $1LocalClass.$create__sourcemap_SourceMap(this);
  }
+ /** @nodts */
+ m_testSwitchExpression__void_$p_sourcemap_SourceMap() {
+  let v = 1;
+  let r = (() =>{
+   switch (v) {
+    case 1: case 2: 
+     return 10;
+    default: 
+     return 20;
+   }
+  })();
+ }
  //Default method forwarding stub.
  /** @override @nodts @return {Comparator<T>} */
  m_reversed__java_util_Comparator() {

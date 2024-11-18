@@ -127,4 +127,13 @@ abstract class SourceMap<T extends Number> implements Comparator<T> {
 
     Enum1(int i) {}
   }
+
+  private void testSwitchExpression() {
+    int v = 1;
+    int r =
+        switch (v) {
+          case 1, 2 -> 10;
+          default -> 20;
+        };
+  }
 }
