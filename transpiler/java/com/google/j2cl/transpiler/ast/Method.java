@@ -230,6 +230,11 @@ public class Method extends Member implements MethodLike {
     }
 
     @CanIgnoreReturnValue
+    public Builder setBody(Block body) {
+      return setStatements(body.getStatements());
+    }
+
+    @CanIgnoreReturnValue
     public Builder setStatements(List<Statement> statements) {
       this.statements = new ArrayList<>(statements);
       return this;
@@ -297,6 +302,12 @@ public class Method extends Member implements MethodLike {
     @CanIgnoreReturnValue
     public Builder setBodySourcePosition(SourcePosition sourcePosition) {
       this.bodySourcePosition = sourcePosition;
+      return this;
+    }
+
+    @CanIgnoreReturnValue
+    public Builder setForcedJavaOverride(@Nullable Boolean isForcedJavaOverride) {
+      this.isForcedJavaOverride = isForcedJavaOverride;
       return this;
     }
 

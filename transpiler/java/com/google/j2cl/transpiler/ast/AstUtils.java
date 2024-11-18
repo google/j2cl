@@ -270,6 +270,19 @@ public final class AstUtils {
   }
 
   /**
+   * Returns true if {@code expression} is left operand of simple or compound assignment binary
+   * expression.
+   */
+  public static boolean isAssignmentTarget(Expression expression, Object parent) {
+    if (parent instanceof BinaryExpression) {
+      BinaryExpression parentBinaryExpression = (BinaryExpression) parent;
+      return parentBinaryExpression.isSimpleOrCompoundAssignment()
+          && expression == parentBinaryExpression.getLeftOperand();
+    }
+    return false;
+  }
+
+  /**
    * See JLS 5.2.
    *
    * <p>Note that compound assignments are excluded here. The assignment context arising from

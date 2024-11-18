@@ -252,16 +252,16 @@ open class Collections {
     return 0
    }
 
-  override fun java_contains(o: Any?): Boolean {
+  override fun contains(o: T): Boolean {
    var o_1: Any? = o
    o_1 = Collections.convert(o_1)
-   return super<JavaAbstractCollection>.java_contains(o_1)
+   return super<JavaAbstractCollection>.contains(o_1 as T)
   }
 
-  override fun java_remove(o: Any?): Boolean {
+  override fun remove(o: T): Boolean {
    var o_1: Any? = o
    o_1 = Collections.convert(o_1)
-   return super<JavaAbstractCollection>.java_remove(o_1)
+   return super<JavaAbstractCollection>.remove(o_1 as T)
   }
 
   override fun java_containsAll(c: MutableCollection<*>): Boolean {
@@ -294,16 +294,16 @@ open class Collections {
     return 0
    }
 
-  override fun java_indexOf(o: Any?): Int {
+  override fun indexOf(o: T): Int {
    var o_1: Any? = o
    o_1 = Collections.convert(o_1)
-   return super<JavaAbstractList>.java_indexOf(o_1)
+   return super<JavaAbstractList>.indexOf(o_1 as T)
   }
 
-  override fun java_lastIndexOf(o: Any?): Int {
+  override fun lastIndexOf(o: T): Int {
    var o_1: Any? = o
    o_1 = Collections.convert(o_1)
-   return super<JavaAbstractList>.java_lastIndexOf(o_1)
+   return super<JavaAbstractList>.lastIndexOf(o_1 as T)
   }
  }
 
@@ -314,22 +314,22 @@ open class Collections {
     throw RuntimeException()
    }
 
-  override fun java_containsKey(key: Any?): Boolean {
+  override fun containsKey(key: K): Boolean {
    var key_1: Any? = key
    key_1 = Collections.convert(key_1)
-   return super<JavaAbstractMap>.java_containsKey(key_1)
+   return super<JavaAbstractMap>.containsKey(key_1 as K)
   }
 
-  override fun java_containsValue(value: Any?): Boolean {
+  override fun containsValue(value: V): Boolean {
    var value_1: Any? = value
    value_1 = Collections.convert(value_1)
-   return super<JavaAbstractMap>.java_containsValue(value_1)
+   return super<JavaAbstractMap>.containsValue(value_1 as V)
   }
 
-  override fun java_remove(key: Any?): V {
+  override fun remove(key: K): V {
    var key_1: Any? = key
    key_1 = Collections.convert(key_1)
-   return super<JavaAbstractMap>.java_remove(key_1) as V
+   return super<JavaAbstractMap>.remove(key_1 as K) as V
   }
 
   override fun java_remove(key: Any?, value: Any?): Boolean {
@@ -340,10 +340,10 @@ open class Collections {
    return super<JavaAbstractMap>.java_remove(key_1, value_1)
   }
 
-  override fun java_get(key: Any?): V {
+  override fun get(key: K): V {
    var key_1: Any? = key
    key_1 = Collections.convert(key_1)
-   return super<JavaAbstractMap>.java_get(key_1) as V
+   return super<JavaAbstractMap>.get(key_1 as K) as V
   }
 
   override fun java_getOrDefault(key: Any?, defaultValue: V?): V? {
@@ -363,50 +363,50 @@ open class Collections {
   open fun containsInteger(
    @ObjCName("withJavaLangInteger") integer: Int
   ): Boolean {
-   return super<Collections.CustomCollection>.java_remove(integer as Any?)
+   return super<Collections.CustomCollection>.remove(integer as String)
   }
 
   @ObjCName("removeInteger")
   open fun removeInteger(
    @ObjCName("withJavaLangInteger") integer: Int
   ): Boolean {
-   return super<Collections.CustomCollection>.java_remove(integer as Any?)
+   return super<Collections.CustomCollection>.remove(integer as String)
   }
  }
 
  @ObjCName("J2ktJ2ktCollections_ListOfString", exact = true)
  open class ListOfString: Collections.CustomList<String>() {
-  override fun java_indexOf(o: Any?): Int {
+  override fun indexOf(o: String): Int {
    var o_1: Any? = o
    o_1 = Collections.convert(o_1)
-   return super<Collections.CustomList>.java_indexOf(o_1)
+   return super<Collections.CustomList>.indexOf(o_1 as String)
   }
 
-  override fun java_lastIndexOf(o: Any?): Int {
+  override fun lastIndexOf(o: String): Int {
    var o_1: Any? = o
    o_1 = Collections.convert(o_1)
-   return super<Collections.CustomList>.java_lastIndexOf(o_1)
+   return super<Collections.CustomList>.lastIndexOf(o_1 as String)
   }
  }
 
  @ObjCName("J2ktJ2ktCollections_MapOfString", exact = true)
  open class MapOfString: Collections.CustomMap<String, String>() {
-  override fun java_containsKey(key: Any?): Boolean {
+  override fun containsKey(key: String): Boolean {
    var key_1: Any? = key
    key_1 = Collections.convert(key_1)
-   return super<Collections.CustomMap>.java_containsKey(key_1)
+   return super<Collections.CustomMap>.containsKey(key_1 as String)
   }
 
-  override fun java_containsValue(value: Any?): Boolean {
+  override fun containsValue(value: String): Boolean {
    var value_1: Any? = value
    value_1 = Collections.convert(value_1)
-   return super<Collections.CustomMap>.java_containsValue(value_1)
+   return super<Collections.CustomMap>.containsValue(value_1 as String)
   }
 
-  override fun java_remove(key: Any?): String {
+  override fun remove(key: String): String {
    var key_1: Any? = key
    key_1 = Collections.convert(key_1)
-   return super<Collections.CustomMap>.java_remove(key_1)
+   return super<Collections.CustomMap>.remove(key_1 as String)
   }
 
   override fun java_remove(key: Any?, value: Any?): Boolean {
@@ -417,10 +417,10 @@ open class Collections {
    return super<Collections.CustomMap>.java_remove(key_1, value_1)
   }
 
-  override fun java_get(key: Any?): String {
+  override fun get(key: String): String {
    var key_1: Any? = key
    key_1 = Collections.convert(key_1)
-   return super<Collections.CustomMap>.java_get(key_1)
+   return super<Collections.CustomMap>.get(key_1 as String)
   }
 
   override fun java_getOrDefault(key: Any?, defaultValue: String?): String? {
