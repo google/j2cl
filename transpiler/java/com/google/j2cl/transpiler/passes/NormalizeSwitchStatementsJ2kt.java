@@ -161,10 +161,7 @@ public class NormalizeSwitchStatementsJ2kt extends NormalizationPass {
           @Override
           public Node rewriteSwitchStatement(SwitchStatement switchStatement) {
             if (canConvertDirectlyToWhen(switchStatement)) {
-              return SwitchExpression.newBuilder()
-                  .setTypeDescriptor(PrimitiveTypes.VOID)
-                  .setExpression(switchStatement.getExpression())
-                  .setCases(switchStatement.getCases())
+              return SwitchExpression.Builder.from(switchStatement)
                   .build()
                   .makeStatement(switchStatement.getSourcePosition());
             }
@@ -231,6 +228,7 @@ public class NormalizeSwitchStatementsJ2kt extends NormalizationPass {
             .setTypeDescriptor(PrimitiveTypes.VOID)
             .setExpression(expression)
             .setCases(cases)
+            .setSourcePosition(sourcePosition)
             .build();
 
     return Block.newBuilder()
@@ -365,7 +363,7 @@ public class NormalizeSwitchStatementsJ2kt extends NormalizationPass {
                             .filter(Predicates.not(SwitchCase::isDefault)),
                         switchExpression.getCases().stream().filter(SwitchCase::isDefault))
                     .collect(toImmutableList());
-            return SwitchExpression.Builder.from(switchExpression).setCases(cases).build();
+            return switchExpression.toBuilder().setCases(cases).build();
           }
         });
   }

@@ -23,14 +23,12 @@ import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 /** Switch Statement. */
 @Visitable
-public class SwitchStatement extends Statement {
+public class SwitchStatement extends Statement implements SwitchConstruct<SwitchStatement> {
   @Visitable Expression expression;
   @Visitable List<SwitchCase> cases = new ArrayList<>();
 
@@ -41,10 +39,12 @@ public class SwitchStatement extends Statement {
     this.cases.addAll(checkNotNull(cases));
   }
 
+  @Override
   public Expression getExpression() {
     return expression;
   }
 
+  @Override
   public List<SwitchCase> getCases() {
     return cases;
   }
@@ -68,42 +68,45 @@ public class SwitchStatement extends Statement {
     return Visitor_SwitchStatement.visit(processor, this);
   }
 
+  @Override
+  public Builder toBuilder() {
+    return Builder.from(this);
+  }
+
   public static Builder newBuilder() {
     return new Builder();
   }
 
   /** A Builder for SwitchStatement. */
-  public static class Builder {
+  public static class Builder implements SwitchConstruct.Builder<SwitchStatement> {
     private Expression expression;
     private List<SwitchCase> switchCases = new ArrayList<>();
     private SourcePosition sourcePosition;
 
-    public static Builder from(SwitchStatement switchStatement) {
+    public static <T extends SwitchConstruct<T>> Builder from(SwitchConstruct<T> switchConstruct) {
       return newBuilder()
-          .setSourcePosition(switchStatement.getSourcePosition())
-          .setExpression(switchStatement.getExpression())
-          .setCases(switchStatement.getCases());
+          .setSourcePosition(switchConstruct.getSourcePosition())
+          .setExpression(switchConstruct.getExpression())
+          .setCases(switchConstruct.getCases());
     }
 
+    @Override
     @CanIgnoreReturnValue
     public Builder setSourcePosition(SourcePosition sourcePosition) {
       this.sourcePosition = sourcePosition;
       return this;
     }
 
+    @Override
     @CanIgnoreReturnValue
     public Builder setExpression(Expression expression) {
       this.expression = expression;
       return this;
     }
 
+    @Override
     @CanIgnoreReturnValue
-    public Builder setCases(SwitchCase... cases) {
-      return setCases(Arrays.asList(cases));
-    }
-
-    @CanIgnoreReturnValue
-    public Builder setCases(Collection<SwitchCase> cases) {
+    public Builder setCases(List<SwitchCase> cases) {
       this.switchCases = new ArrayList<>(cases);
       return this;
     }
@@ -114,6 +117,7 @@ public class SwitchStatement extends Statement {
       return this;
     }
 
+    @Override
     public SwitchStatement build() {
       return new SwitchStatement(sourcePosition, expression, switchCases);
     }

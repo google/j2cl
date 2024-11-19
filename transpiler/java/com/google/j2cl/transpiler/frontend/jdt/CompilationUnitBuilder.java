@@ -1267,6 +1267,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           .setTypeDescriptor(environment.createTypeDescriptor(expression.resolveTypeBinding()))
           .setExpression(convert(expression.getExpression()))
           .setCases(createSwitchCases(JdtEnvironment.asTypedList(expression.statements())))
+          .setSourcePosition(getSourcePosition(expression))
           .build();
     }
 

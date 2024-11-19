@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
@@ -82,13 +81,8 @@ public class ImplementSwitchExpressionsViaIifes extends NormalizationPass {
                     // Enclose the switch expression as a switch statement inside a function.
                     FunctionExpression.newBuilder()
                         .setTypeDescriptor(supplierJsFunctionTypeDescriptor)
-                        .setStatements(
-                            SwitchStatement.newBuilder()
-                                .setExpression(switchExpression.getExpression())
-                                .setCases(switchExpression.getCases())
-                                .setSourcePosition(SourcePosition.NONE)
-                                .build())
-                        .setSourcePosition(SourcePosition.NONE)
+                        .setStatements(SwitchStatement.Builder.from(switchExpression).build())
+                        .setSourcePosition(switchExpression.getSourcePosition())
                         .build())
                 .build();
           }

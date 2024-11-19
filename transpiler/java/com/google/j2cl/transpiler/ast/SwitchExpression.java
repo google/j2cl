@@ -18,28 +18,32 @@ package com.google.j2cl.transpiler.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 /** Class for switch expression. */
 @Visitable
-public class SwitchExpression extends Expression {
+public class SwitchExpression extends Expression implements SwitchConstruct<SwitchExpression> {
   @Visitable TypeDescriptor typeDescriptor;
   @Visitable Expression expression;
   @Visitable List<SwitchCase> cases = new ArrayList<>();
+  private final SourcePosition sourcePosition;
 
   private SwitchExpression(
-      TypeDescriptor typeDescriptor, Expression expression, List<SwitchCase> cases) {
+      SourcePosition sourcePosition,
+      TypeDescriptor typeDescriptor,
+      Expression expression,
+      List<SwitchCase> cases) {
     this.typeDescriptor = checkNotNull(typeDescriptor);
     this.expression = checkNotNull(expression);
     this.cases.addAll(checkNotNull(cases));
+    this.sourcePosition = checkNotNull(sourcePosition);
   }
 
+  @Override
   public Expression getExpression() {
     return expression;
   }
@@ -49,13 +53,19 @@ public class SwitchExpression extends Expression {
     return typeDescriptor;
   }
 
+  @Override
   public List<SwitchCase> getCases() {
     return cases;
   }
 
   @Override
+  public SourcePosition getSourcePosition() {
+    return sourcePosition;
+  }
+
+  @Override
   public Precedence getPrecedence() {
-    // In the only backend where this expression reaches (KOTLIN), it nevers needs to be
+    // In the only backend where this expression reaches (KOTLIN), it never needs to be
     // parenthesized.
     return Precedence.HIGHEST;
   }
@@ -74,22 +84,35 @@ public class SwitchExpression extends Expression {
     return Visitor_SwitchExpression.visit(processor, this);
   }
 
+  @Override
+  public Builder toBuilder() {
+    return Builder.from(this);
+  }
+
   public static Builder newBuilder() {
     return new Builder();
   }
 
   /** A Builder for SwitchExpression. */
-  public static class Builder {
+  public static class Builder implements SwitchConstruct.Builder<SwitchExpression> {
     private TypeDescriptor typeDescriptor;
-
     private Expression expression;
     private List<SwitchCase> switchCases = new ArrayList<>();
+    private SourcePosition sourcePosition = SourcePosition.NONE;
 
-    public static Builder from(SwitchExpression switchExpression) {
+    public static <T extends SwitchConstruct<T>> Builder from(SwitchConstruct<T> switchConstruct) {
       return newBuilder()
-          .setTypeDescriptor(switchExpression.getTypeDescriptor())
-          .setExpression(switchExpression.getExpression())
-          .setCases(switchExpression.getCases());
+          .setExpression(switchConstruct.getExpression())
+          .setCases(switchConstruct.getCases())
+          .setTypeDescriptor(switchConstruct.getTypeDescriptor())
+          .setSourcePosition(switchConstruct.getSourcePosition());
+    }
+
+    @Override
+    @CanIgnoreReturnValue
+    public Builder setSourcePosition(SourcePosition sourcePosition) {
+      this.sourcePosition = sourcePosition;
+      return this;
     }
 
     @CanIgnoreReturnValue
@@ -98,31 +121,23 @@ public class SwitchExpression extends Expression {
       return this;
     }
 
+    @Override
     @CanIgnoreReturnValue
     public Builder setExpression(Expression expression) {
       this.expression = expression;
       return this;
     }
 
+    @Override
     @CanIgnoreReturnValue
-    public Builder setCases(SwitchCase... cases) {
-      return setCases(Arrays.asList(cases));
-    }
-
-    @CanIgnoreReturnValue
-    public Builder setCases(Collection<SwitchCase> cases) {
+    public Builder setCases(List<SwitchCase> cases) {
       this.switchCases = new ArrayList<>(cases);
       return this;
     }
 
-    @CanIgnoreReturnValue
-    public Builder addCases(SwitchCase... cases) {
-      Collections.addAll(switchCases, cases);
-      return this;
-    }
-
+    @Override
     public SwitchExpression build() {
-      return new SwitchExpression(typeDescriptor, expression, switchCases);
+      return new SwitchExpression(sourcePosition, typeDescriptor, expression, switchCases);
     }
 
     private Builder() {}

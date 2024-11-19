@@ -67,6 +67,7 @@ import com.google.j2cl.transpiler.ast.PostfixOperator;
 import com.google.j2cl.transpiler.ast.PrefixExpression;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Statement;
+import com.google.j2cl.transpiler.ast.SwitchConstruct;
 import com.google.j2cl.transpiler.ast.SwitchExpression;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
 import com.google.j2cl.transpiler.ast.SynchronizedStatement;
@@ -725,28 +726,23 @@ public final class ConversionContextVisitor extends AbstractRewriter {
 
   @Override
   public SwitchExpression rewriteSwitchExpression(SwitchExpression switchExpression) {
-
-    Expression expression =
-        contextRewriter.rewriteSwitchSubjectContext(switchExpression.getExpression());
-
-    if (expression == switchExpression.getExpression()) {
-      return switchExpression;
-    }
-
-    return SwitchExpression.Builder.from(switchExpression).setExpression(expression).build();
+    return rewriteSwitchConstruct(switchExpression);
   }
 
   @Override
   public SwitchStatement rewriteSwitchStatement(SwitchStatement switchStatement) {
+    return rewriteSwitchConstruct(switchStatement);
+  }
 
+  private <T extends SwitchConstruct<T>> T rewriteSwitchConstruct(T switchConstruct) {
     Expression expression =
-        contextRewriter.rewriteSwitchSubjectContext(switchStatement.getExpression());
+        contextRewriter.rewriteSwitchSubjectContext(switchConstruct.getExpression());
 
-    if (expression == switchStatement.getExpression()) {
-      return switchStatement;
+    if (expression == switchConstruct.getExpression()) {
+      return switchConstruct;
     }
 
-    return SwitchStatement.Builder.from(switchStatement).setExpression(expression).build();
+    return switchConstruct.toBuilder().setExpression(expression).build();
   }
 
   @Override
