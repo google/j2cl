@@ -39,7 +39,7 @@ class IrSwitch(
 
 /** Represent a `case` of a `switch` statement. */
 class IrSwitchCase(
-  var caseExpression: IrExpression?,
+  var caseExpressions: List<IrExpression>,
   var body: IrExpression?,
   override val startOffset: Int,
   override val endOffset: Int,
@@ -49,7 +49,7 @@ class IrSwitchCase(
   }
 
   override fun <D> acceptChildren(visitor: IrElementVisitor<Unit, D>, data: D) {
-    caseExpression?.accept(visitor, data)
+    caseExpressions.forEach { it.accept(visitor, data) }
     body?.accept(visitor, data)
   }
 }

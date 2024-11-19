@@ -38,6 +38,7 @@ import org.jetbrains.kotlin.ir.expressions.IrTypeOperatorCall
 import org.jetbrains.kotlin.ir.expressions.IrWhen
 import org.jetbrains.kotlin.ir.expressions.impl.IrCompositeImpl
 import org.jetbrains.kotlin.ir.types.getClass
+import org.jetbrains.kotlin.ir.util.dump
 import org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid
 import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 import org.jetbrains.kotlin.ir.visitors.acceptVoid
@@ -62,11 +63,13 @@ import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
  *
  *   // #2: a `when` without subject
  *   when {
- *     // Multiple entry clause create a sub `when` expression.
+ *     // Multiple entry clause create a nested `when` expressions chain.
  *     when {
  *        tmp == MyEnum.ONE -> true
- *        tmp == MyEnum.TWO -> true
- *        else -> tmp == MyEnum.THREE
+ *        else -> when {
+ *            tmp == MyEnum.TWO -> true
+ *            else -> tmp == MyEnum.THREE
+ *        }
  *     } -> /* Result 1 */ ...
  *     tmp == MyEnum.FOUR -> /* Result 2 */ ...
  *     else -> throw NoWhenBranchMatchedException()
@@ -111,7 +114,7 @@ private class WhenTransformer(private val context: CommonBackendContext) :
       context.irBuiltIns.charType,
       context.irBuiltIns.byteType,
       context.irBuiltIns.shortType,
-      context.irBuiltIns.intType
+      context.irBuiltIns.intType,
     )
 
   /**
@@ -143,7 +146,6 @@ private class WhenTransformer(private val context: CommonBackendContext) :
     return expression
   }
 
-  @Suppress("KotlincFE10G3") // Deliberately using FE1.0 api until we switch to K2.
   private fun isValidWhenBlock(block: IrBlock): Boolean {
     if (block.origin != IrStatementOrigin.WHEN) {
       return false
@@ -173,9 +175,9 @@ private class WhenTransformer(private val context: CommonBackendContext) :
   private fun areBranchesValid(irWhen: IrWhen, subject: IrVariable): Boolean {
     for (branch in irWhen.branches) {
       if (branch is IrElseBranch) {
+        // Check the else branch only in the case of a multiple value clause.
         if (
-          irWhen.origin == IrStatementOrigin.WHEN_COMMA &&
-            !isValidWhenCondition(branch.result, subject)
+          irWhen.origin == IrStatementOrigin.OROR && !isValidWhenCondition(branch.result, subject)
         ) {
           // Multiple entry clause:
           // ```
@@ -183,15 +185,28 @@ private class WhenTransformer(private val context: CommonBackendContext) :
           //      VALUE_1, VALUE_2, ..., VALUE_N -> { /* BODY */ }
           //  }
           // ```
-          // is transformed into a `when` expression with single valued branches that returns true
-          // for those values.
+          // is transformed into an `or` sequence:
+          // ```
+          // if (((subject == VALUE_1) || (subject == VALUE_2)) ... || (subject = VALUE_N)) {
+          //   /* BODY */
+          // }
+          // ```
+          // represented as a nested `when` expressions chain:
           // ```
           //  val tmp = subject
           //  when {
           //    when {
-          //      tmp == VALUE_1 -> true
           //      ...
-          //      else -> tmp == VALUE_N
+          //        when {
+          //          when {
+          //            tmp == VALUE_1 -> true
+          //            else -> tmp == VALUE_2
+          //          } -> true
+          //          else ->  ...
+          //        when {
+          //          tmp == VALUE_N-1 -> true
+          //          else ->  tmp == VALUE_N-1
+          //        } ->true
           //    } ->  { /* BODY */ }
           //  }
           // ```
@@ -203,6 +218,7 @@ private class WhenTransformer(private val context: CommonBackendContext) :
         }
         continue
       }
+
       if (!isValidWhenCondition(branch.condition, subject)) {
         return false
       }
@@ -216,7 +232,7 @@ private class WhenTransformer(private val context: CommonBackendContext) :
         // Single entry clause:
         // ```
         //  when (subject) {
-        //      ENUM_ENTRY -> { /* BODY */ }
+        //      VALUE_1 -> { /* BODY */ }
         //  }
         // ```
         // is transformed to:
@@ -252,15 +268,28 @@ private class WhenTransformer(private val context: CommonBackendContext) :
         //      VALUE_1, VALUE_2, ..., VALUE_N -> { /* BODY */ }
         //  }
         // ```
-        // is transformed into a `when` expression with single valued branches that returns true for
-        // those values:
+        // is transformed into an `or` sequence:
+        // ```
+        // if (((subject == VALUE_1) || (subject == VALUE_2)) ... || (subject = VALUE_N)) {
+        //   /* BODY */
+        // }
+        // ```
+        // represented as a nested `when` expressions chain in the IR tree :
         // ```
         //  val tmp = subject
         //  when {
         //    when {
-        //      tmp == VALUE_1 -> true
         //      ...
-        //      else -> tmp == VALUE_N
+        //        when {
+        //          when {
+        //            tmp == VALUE_1 -> true
+        //            else -> tmp == VALUE_2
+        //          } -> true
+        //          else ->  ...
+        //        when {
+        //          tmp == VALUE_N-1 -> true
+        //          else ->  tmp == VALUE_N-1
+        //        } ->true
         //    } ->  { /* BODY */ }
         //  }
         // ```
@@ -269,9 +298,7 @@ private class WhenTransformer(private val context: CommonBackendContext) :
         // the values later.
         // Testing the origin of the `when` ensures it is created by the Kotlin compiler to model a
         // multiple entry clause.
-        if (
-          condition.origin != IrStatementOrigin.WHEN_COMMA || !areBranchesValid(condition, subject)
-        ) {
+        if (condition.origin != IrStatementOrigin.OROR || !areBranchesValid(condition, subject)) {
           return false
         }
       }
@@ -288,111 +315,61 @@ private class WhenTransformer(private val context: CommonBackendContext) :
       // adding a `break` as the last statement of a case body. If the `break` is unreachable, it
       // will be removed by the `CleanupLowering` pass.
       val caseBody = addBreakStatement(branch.result)
-
-      if (branch is IrElseBranch) {
-        caseStatements.add(IrSwitchCase(null, caseBody, branch.startOffset, branch.endOffset))
-        continue
-      }
-
-      when (val condition = branch.condition) {
-        is IrCall -> {
-          // single entry clause is represented by
-          // `subject == VALUE -> ...`
-          // and will create the following case :
-          // `case VALUE: ...`
-          caseStatements.add(
-            IrSwitchCase(
-              extractCaseExpression(condition),
-              caseBody,
-              branch.startOffset,
-              branch.endOffset
-            )
-          )
+      var cases =
+        if (branch is IrElseBranch) {
+          // default case.
+          listOf()
+        } else {
+          when (val condition = branch.condition) {
+            is IrCall -> {
+              // single entry clause is represented by
+              // `subject == VALUE -> ...`
+              // and will create the following case :
+              // `case VALUE: ...`
+              listOf(extractCaseExpression(condition))
+            }
+            is IrWhen -> {
+              // A `IrWhen` expression with multiple entry clauses.
+              // `VALUE_1, VALUE_2, ..., VALUE_N -> ...`
+              extractCasesInMultiEntryWhen(condition)
+            }
+            else -> throw AssertionError("Unexpected branch:${branch.dump()}")
+          }
         }
-        is IrWhen -> {
-          // A `IrWhen` expression with multiple entry clauses.
-          // `VALUE_1, VALUE_2, ..., VALUE_N -> ...`
-          caseStatements.addAll(
-            extractCasesInMultiEntryWhen(condition, caseBody, branch.startOffset, branch.endOffset)
-          )
-        }
-      }
+      caseStatements.add(IrSwitchCase(cases, caseBody, branch.startOffset, branch.endOffset))
     }
 
     return caseStatements
   }
 
-  fun extractCasesInMultiEntryWhen(
-    irWhen: IrWhen,
-    caseBody: IrExpression?,
-    startOffset: Int,
-    endOffset: Int
-  ): List<IrSwitchCase> {
-    val caseStatements = mutableListOf<IrSwitchCase>()
+  fun extractCasesInMultiEntryWhen(irWhen: IrWhen): List<IrExpression> {
+    // A `IrWhen` with multiple entry clause
+    // `VALUE_1, VALUE_2, ..., VALUE_N -> /* BODY */`
+    // is represented in the IR tree as a chain of nested `when`.
+    // We will traverse this `when` chain to collect all the case expressions to create the
+    // following cases list:
+    // ```
+    //  case VALUE_1, VALUE_2, ..., VALUE_N: /* Expression or Statement */
+    // ```
+    // TODO(b/163151103): Convert non-top level `when` to switch expressions.
+    val caseExpressions = mutableListOf<IrExpression>()
 
-    // A `IrWhen` expression with multiple entry clause
-    // `VALUE_1, VALUE_2, ..., VALUE_N -> /* Expression */`
-    // is transformed into a `when` expression with single valued branches that returns true for
-    // those values:
-    // ```
-    //  when {
-    //    when {
-    //      tmp == VALUE_1 -> true
-    //      tmp == VALUE_2 -> true
-    //      ...
-    //      else -> tmp == VALUE_N
-    //    } ->  /* Expression */
-    //  }
-    // ```
-    //
-    // A `IrWhen` statement with multiple entry clause
-    // `VALUE_1, VALUE_2, ..., VALUE_N -> return /* Statement */`
-    // is transformed into a chain of nested `when` expression with single valued branches that
-    // returns true for those values:
-    // ```
-    //  when {
-    //    when {
-    //      ...
-    //        when {
-    //          tmp == VALUE_1 -> true
-    //          else -> tmp == VALUE_2
-    //         } -> true
-    //         else -> tmp == VALUE_3
-    //      ...
-    //    } -> true
-    //    else -> tmp == VALUE_N
-    //  } ->  /* Statement */
-    //
-    // ```
-    // Both cases are transformed to create the following cases:
-    // ```
-    //  case VALUE_1:
-    //  case VALUE_2:
-    //  ...
-    //  case VALUE_N: /* Expression or Statement */ ...
-    // ```
-    // TODO(b/163151103): Reexamine this when `switch` expression is supported int the J2CL AST. The
-    //   inner `when` could be converted to a `switch` expression.
-    for (entry in irWhen.branches) {
-      if (entry is IrElseBranch) {
-        // Only the last case will have a body.
-        caseStatements.add(
-          IrSwitchCase(extractCaseExpression(entry.result), caseBody, startOffset, endOffset)
-        )
+    for (branch in irWhen.branches) {
+      // in a regular branch, the case expression is in the condition. In the else branch, it is in
+      // the result:
+      // ```
+      // subject == VALUE1 -> true
+      // else -> subject == VALUE2
+      // ```
+      val condition = if (branch is IrElseBranch) branch.result else branch.condition
+
+      if (condition is IrWhen) {
+        caseExpressions.addAll(extractCasesInMultiEntryWhen(condition))
       } else {
-        val condition = entry.condition
-        if (condition is IrWhen) {
-          caseStatements.addAll(
-            extractCasesInMultiEntryWhen(condition, null, startOffset, endOffset)
-          )
-        } else {
-          caseStatements.add(
-            IrSwitchCase(extractCaseExpression(entry.condition), null, startOffset, endOffset)
-          )
-        }
+        caseExpressions.add(extractCaseExpression(condition))
       }
     }
-    return caseStatements
+    return caseExpressions
   }
 
   private fun extractCaseExpression(irExpression: IrExpression): IrExpression {
@@ -408,7 +385,7 @@ private class WhenTransformer(private val context: CommonBackendContext) :
       originalBody.endOffset,
       originalBody.type,
       origin = null,
-      statements = listOf(originalBody, IrSwitchBreak())
+      statements = listOf(originalBody, IrSwitchBreak()),
     )
   }
 
