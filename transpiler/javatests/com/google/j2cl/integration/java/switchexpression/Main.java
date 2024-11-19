@@ -34,6 +34,7 @@ public class Main {
     testSwitchWithErasureCast();
     testStringSwitch();
     testThrow();
+    testNestedSwitch();
     testAutoboxing();
   }
 
@@ -209,6 +210,21 @@ public class Main {
       fail();
     } catch (ExceptionForSwitchExpression expected) {
     }
+  }
+
+  private static void testNestedSwitch() {
+    int i = 0;
+    int j = 1;
+    int result =
+        switch (i) {
+          case 0 ->
+              switch (j) {
+                case 0 -> 1;
+                default -> 2;
+              };
+          default -> 3;
+        };
+    assertEquals(2, result);
   }
 
   private static void testAutoboxing() {

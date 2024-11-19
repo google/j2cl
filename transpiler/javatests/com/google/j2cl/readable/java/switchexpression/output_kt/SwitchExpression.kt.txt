@@ -84,5 +84,38 @@ open class SwitchExpression {
     }
    }
   }
+
+  @JvmStatic
+  private fun testNestedSwitchExpressions() {
+   val a: Int = 0
+   val i: Long = run {
+    when (3) {
+     1 -> {
+      return@run run {
+       when (5) {
+        1 -> {
+         return@run 10L
+        }
+        else -> {
+         return@run run {
+          when (6) {
+           1 -> {
+            throw RuntimeException()
+           }
+           else -> {
+            return@run 5L
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+     else -> {
+      return@run a.toLong()
+     }
+    }
+   }
+  }
  }
 }

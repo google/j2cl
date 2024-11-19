@@ -38,16 +38,10 @@ public class SwitchExpression {
 
   private static void testSwitchExpressionsWithComplexControlFlow() {
     int a = 0;
-    // This it a switch expression featuring all the combinations in the spec per Java 14.
-    // Note that the different branches of the switch yield different types that are also different
-    // from the type that is assigned.
     long i =
         switch (3) {
-          // Simple case with implicit yield.
           case 1 -> 5;
-          // Case with 2 symbols that just throws.
           case 3, 4 -> throw new RuntimeException();
-          // Case with a block and and explicit yield.
           default -> {
             Short j = (short) a++;
             while (j < 3) {
@@ -57,6 +51,24 @@ public class SwitchExpression {
             }
             yield j;
           }
+        };
+  }
+
+  private static void testNestedSwitchExpressions() {
+    int a = 0;
+    long i =
+        switch (3) {
+          // Simple case with implicit yield.
+          case 1 ->
+              switch (5) {
+                case 1 -> 10;
+                default ->
+                    switch (6) {
+                      case 1 -> throw new RuntimeException();
+                      default -> 5;
+                    };
+              };
+          default -> a;
         };
   }
 }

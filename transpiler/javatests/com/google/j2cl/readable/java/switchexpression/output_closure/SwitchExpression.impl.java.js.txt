@@ -67,6 +67,32 @@ class SwitchExpression extends j_l_Object {
   })();
  }
  /** @nodts */
+ static m_testNestedSwitchExpressions__void() {
+  let a = 0;
+  let i = (() =>{
+   switch (3) {
+    case 1: 
+     return (() =>{
+      switch (5) {
+       case 1: 
+        return $Long.fromInt(10);
+       default: 
+        return (() =>{
+         switch (6) {
+          case 1: 
+           throw $Exceptions.toJs(RuntimeException.$create__());
+          default: 
+           return $Long.fromInt(5);
+         }
+        })();
+      }
+     })();
+    default: 
+     return $Primitives.widenIntToLong(a);
+   }
+  })();
+ }
+ /** @nodts */
  static $clinit() {
   SwitchExpression.$clinit = () =>{};
   SwitchExpression.$loadModules();
