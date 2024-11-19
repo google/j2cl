@@ -32,7 +32,7 @@ public class Collections {
     collection.contains(Collections.<T>generic());
     collection.remove(Collections.<T>generic());
     collection.containsAll(Collections.<T>genericCollection());
-    collection.addAll(Collections.<T>genericCollection());
+    collection.addAll(Collections.genericCollection());
     collection.removeAll(Collections.<T>genericCollection());
     collection.retainAll(Collections.<T>genericCollection());
 
@@ -74,6 +74,7 @@ public class Collections {
   }
 
   public static <T extends @Nullable Object> void testList_generic(List<T> list) {
+    list.addAll(0, Collections.genericCollection());
     list.indexOf(Collections.<T>generic());
     list.lastIndexOf(Collections.<T>generic());
 
@@ -82,6 +83,7 @@ public class Collections {
   }
 
   public static void testList_parameterized(List<String> list) {
+    list.addAll(0, collectionOfString());
     list.indexOf(string());
     list.lastIndexOf(string());
 
@@ -90,6 +92,7 @@ public class Collections {
   }
 
   public static void testList_specialized(ListOfString list) {
+    list.addAll(0, collectionOfString());
     list.indexOf(string());
     list.lastIndexOf(string());
 
@@ -173,6 +176,12 @@ public class Collections {
     }
 
     @Override
+    public boolean addAll(Collection<? extends T> c) {
+      c = convertCollection(c);
+      return super.addAll(c);
+    }
+
+    @Override
     public boolean containsAll(Collection<?> c) {
       c = convertCollection(c);
       return super.containsAll(c);
@@ -200,6 +209,12 @@ public class Collections {
     @Override
     public int size() {
       return 0;
+    }
+
+    @Override
+    public boolean addAll(int index, Collection<? extends T> c) {
+      c = convertCollection(c);
+      return super.addAll(index, c);
     }
 
     @Override
@@ -261,6 +276,7 @@ public class Collections {
 
     @Override
     public void putAll(Map<? extends K, ? extends V> m) {
+      m = convertMap(m);
       super.putAll(m);
     }
   }
@@ -328,12 +344,17 @@ public class Collections {
     }
   }
 
-  private static @Nullable Object convert(@Nullable Object object) {
+  private static <T extends @Nullable Object> T convert(T object) {
     return object;
   }
 
-  private static Collection<?> convertCollection(Collection<?> c) {
+  private static <T extends @Nullable Object> Collection<T> convertCollection(Collection<T> c) {
     return c;
+  }
+
+  private static <K extends @Nullable Object, V extends @Nullable Object> Map<K, V> convertMap(
+      Map<K, V> m) {
+    return m;
   }
 
   private static <T extends @Nullable Object> T generic() {
