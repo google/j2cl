@@ -11,8 +11,8 @@ package(
 integration_test(
     name = "switchexpression",
     srcs = glob(["*.java"]),
-    # TODO(b/375058137): Enable when bug is fixed.
-    enable_kt = False,
+    # TODO(b/379697518): Enable once @DoNotAutobox is propagated by J2KT.
+    enable_kt_web = False,
     # TODO(b/375058020): Enable when bug is fixed.
     enable_wasm = False,
     javacopts = [

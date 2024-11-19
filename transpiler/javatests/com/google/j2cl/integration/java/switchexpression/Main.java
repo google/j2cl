@@ -176,20 +176,24 @@ public class Main {
           }
         };
 
-    assertThrowsClassCastException(
-        () -> {
-          Supplier<Numbers> integerSupplier = (Supplier) () -> new Integer(1);
-          int unusedResult =
-              // supplier.get() goes through the `T Supplier<T>.get()` method in the interface, and
-              // thus must have an erasure cast. In this case it should throw CCE and not just
-              // fall into the default case.
-              switch (integerSupplier.get()) {
-                default -> {
-                  fail();
-                  yield 0;
-                }
-              };
-        });
+    if (!TestUtils.isJ2KtNative()) {
+      // Switch statements in Kotlin/Native do not throw erasure casts, instead they would flow to
+      // the default case.
+      assertThrowsClassCastException(
+          () -> {
+            Supplier<Numbers> integerSupplier = (Supplier) () -> new Integer(1);
+            int unusedResult =
+                // supplier.get() goes through the `T Supplier<T>.get()` method in the interface,
+                // and thus must have an erasure cast. In this case it should throw CCE and not just
+                // fall into the default case.
+                switch (integerSupplier.get()) {
+                  default -> {
+                    fail();
+                    yield 0;
+                  }
+                };
+          });
+    }
   }
 
   private static void testStringSwitch() {
