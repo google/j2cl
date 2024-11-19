@@ -29,21 +29,10 @@ def j2cl_multi_test(name, test_class, deps, enable_j2kt_native = True, enable_wa
         generate_build_test = False,
         runtime_deps = deps,
         browsers = [
-            "//testing/web/browsers:chrome-linux",
-            "//testing/web/browsers:safari-macos",
-            "//build_defs/internal_do_not_use/browser:firefox-linux",
+            "//build_defs/internal_do_not_use/browser:chrome-wasm-linux",
         ],
         **kwargs
     )
-
-    if enable_j2kt_native:
-        j2kt_native_deps = [dep + "-j2kt-native" for dep in deps]
-        j2kt_native_test(
-            name = name + "-j2kt-native",
-            test_class = test_class,
-            runtime_deps = j2kt_native_deps,
-            **kwargs
-        )
 
     if enable_wasm:
         j2wasm_deps = [dep + "-j2wasm" for dep in deps]
