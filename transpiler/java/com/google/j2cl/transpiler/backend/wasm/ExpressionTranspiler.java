@@ -51,6 +51,8 @@ import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.StringLiteral;
+import com.google.j2cl.transpiler.ast.SwitchExpression;
+import com.google.j2cl.transpiler.ast.SwitchStatement;
 import com.google.j2cl.transpiler.ast.ThisOrSuperReference;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
@@ -317,6 +319,27 @@ final class ExpressionTranspiler {
                 renderWithUnusedResult(expression, sourceBuilder, environment);
               }
             });
+        sourceBuilder.closeParens();
+        return false;
+      }
+
+      @Override
+      public boolean enterSwitchExpression(SwitchExpression switchExpression) {
+        String label = environment.getDeclarationName(switchExpression);
+        sourceBuilder.newLine();
+        // Create a block that will be the target of the yield statement, which will leave the
+        // result in the stack and break here.
+        sourceBuilder.openParens("block " + label);
+        sourceBuilder.append(
+            " (result " + environment.getWasmType(switchExpression.getTypeDescriptor()) + ")");
+
+        // Render the switch expression as if it where a switch statement, note that since
+        // all yields will break out of the switch there will be no fallthrough.
+        StatementTranspiler.render(
+            SwitchStatement.Builder.from(switchExpression).build(),
+            sourceBuilder,
+            environment,
+            label);
         sourceBuilder.closeParens();
         return false;
       }

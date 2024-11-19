@@ -10,8 +10,6 @@ package(
 
 readable_example(
     srcs = glob(["*.java"]),
-    # TODO(b/375058020): Enable when bug is fixed.
-    generate_wasm_readables = False,
     javacopts = [
         "-source 14",
         "-target 14",

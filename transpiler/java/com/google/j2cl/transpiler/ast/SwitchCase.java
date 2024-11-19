@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.ast;
 
-import com.google.common.collect.Iterables;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
@@ -41,11 +40,6 @@ public class SwitchCase extends Node implements Cloneable<SwitchCase> {
 
   public List<Expression> getCaseExpressions() {
     return caseExpressions;
-  }
-
-  // TODO(163151103): Remove pre Java 14 switch "emultation" code once the support is complete.
-  public Expression getCaseExpression() {
-    return Iterables.getOnlyElement(caseExpressions, null);
   }
 
   public List<Statement> getStatements() {

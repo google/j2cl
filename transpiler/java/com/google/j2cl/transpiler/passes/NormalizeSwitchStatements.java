@@ -24,8 +24,11 @@ import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.MethodCall;
+import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.SwitchCase;
+import com.google.j2cl.transpiler.ast.SwitchConstruct;
+import com.google.j2cl.transpiler.ast.SwitchExpression;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
@@ -38,25 +41,34 @@ public class NormalizeSwitchStatements extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public SwitchStatement rewriteSwitchStatement(SwitchStatement switchStatement) {
-            Expression expression = switchStatement.getExpression();
+            return normalizeSwitchConstruct(switchStatement);
+          }
+
+          @Override
+          public Node rewriteSwitchExpression(SwitchExpression switchExpression) {
+            return normalizeSwitchConstruct(switchExpression);
+          }
+
+          private <T extends SwitchConstruct<T>> T normalizeSwitchConstruct(T switchConstruct) {
+            Expression expression = switchConstruct.getExpression();
             TypeDescriptor expressionTypeDescriptor = expression.getTypeDescriptor();
 
             if (TypeDescriptors.isJavaLangString(expressionTypeDescriptor)
                 || (AstUtils.isJsEnumBoxingSupported() && expressionTypeDescriptor.isJsEnum())) {
               // Switch on strings and unboxed JsEnums should throw on null.
-              return SwitchStatement.Builder.from(switchStatement)
+              return switchConstruct.toBuilder()
                   .setExpression(
-                      RuntimeMethods.createCheckNotNullCall(switchStatement.getExpression()))
+                      RuntimeMethods.createCheckNotNullCall(switchConstruct.getExpression()))
                   .build();
             }
 
             if (expressionTypeDescriptor.isEnum()) {
-              return convertEnumSwitchStatement(switchStatement);
+              return convertEnumSwitchConstruct(switchConstruct);
             }
 
             checkArgument(TypeDescriptors.isBoxedOrPrimitiveType(expressionTypeDescriptor));
             // Switch on primitives do not require conversions.
-            return switchStatement;
+            return switchConstruct;
           }
         });
   }
@@ -69,15 +81,15 @@ public class NormalizeSwitchStatements extends NormalizationPass {
    * <li>1. avoid referring to enum objects on case clauses,
    * <li>2. throw if the expression is null to comply with Java semantics.
    */
-  private static SwitchStatement convertEnumSwitchStatement(SwitchStatement switchStatement) {
-    return SwitchStatement.Builder.from(switchStatement)
+  private static <T extends SwitchConstruct<T>> T convertEnumSwitchConstruct(T switchConstruct) {
+    return switchConstruct.toBuilder()
         .setExpression(
             MethodCall.Builder.from(
                     TypeDescriptors.get().javaLangEnum.getMethodDescriptor("ordinal"))
-                .setQualifier(switchStatement.getExpression())
+                .setQualifier(switchConstruct.getExpression())
                 .build())
         .setCases(
-            switchStatement.getCases().stream()
+            switchConstruct.getCases().stream()
                 .map(NormalizeSwitchStatements::convertToOrdinalCase)
                 .collect(toImmutableList()))
         .build();

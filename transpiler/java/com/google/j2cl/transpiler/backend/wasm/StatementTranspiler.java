@@ -16,8 +16,8 @@
 package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.base.Preconditions.checkState;
-import static com.google.common.base.Predicates.not;
 import static java.util.Arrays.stream;
+import static java.util.stream.Collectors.joining;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
@@ -29,6 +29,7 @@ import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.BooleanLiteral;
 import com.google.j2cl.transpiler.ast.BreakStatement;
 import com.google.j2cl.transpiler.ast.CatchClause;
+import com.google.j2cl.transpiler.ast.ConditionalExpression;
 import com.google.j2cl.transpiler.ast.ContinueStatement;
 import com.google.j2cl.transpiler.ast.DoWhileStatement;
 import com.google.j2cl.transpiler.ast.Expression;
@@ -39,6 +40,7 @@ import com.google.j2cl.transpiler.ast.Label;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.LoopStatement;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
+import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.Statement;
@@ -50,6 +52,7 @@ import com.google.j2cl.transpiler.ast.TryStatement;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.WhileStatement;
+import com.google.j2cl.transpiler.ast.YieldStatement;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.util.Arrays;
 import java.util.List;
@@ -61,6 +64,14 @@ final class StatementTranspiler {
       Statement statement,
       final SourceBuilder builder,
       final WasmGenerationEnvironment environment) {
+    render(statement, builder, environment, null);
+  }
+
+  public static void render(
+      Statement statement,
+      final SourceBuilder builder,
+      final WasmGenerationEnvironment environment,
+      final String enclosingSwitchStatementLabel) {
 
     class SourceTransformer extends AbstractVisitor {
       @Override
@@ -159,6 +170,23 @@ final class StatementTranspiler {
       }
 
       @Override
+      public boolean enterYieldStatement(YieldStatement yieldStatement) {
+        // Render the yield statement as just leaving the result in the stack and breaking
+        // out the the switch expression label.
+        builder.emitWithMapping(
+            yieldStatement.getSourcePosition(),
+            () -> {
+              builder.newLine();
+              if (yieldStatement.getExpression() != null) {
+                ExpressionTranspiler.render(yieldStatement.getExpression(), builder, environment);
+              }
+              builder.newLine();
+              builder.append("(br " + enclosingSwitchStatementLabel + ")");
+            });
+        return false;
+      }
+
+      @Override
       public boolean enterSwitchStatement(SwitchStatement switchStatement) {
         // Switch statements are emitted as a series of nested blocks, with the innermost block
         // corresponding to the first switch case, e.g. code like
@@ -202,7 +230,11 @@ final class StatementTranspiler {
           builder.append(
               switchCase.isDefault()
                   ? ";; default:"
-                  : ";; case " + switchCase.getCaseExpression() + ":");
+                  : ";; case "
+                      + switchCase.getCaseExpressions().stream()
+                          .map(Expression::toString)
+                          .collect(joining(","))
+                      + ":");
           renderStatements(switchCase.getStatements());
           builder.closeParens();
         }
@@ -214,7 +246,7 @@ final class StatementTranspiler {
           Stats stats =
               Stats.of(
                   switchStatement.getCases().stream()
-                      .filter(not(SwitchCase::isDefault))
+                      .flatMap(s -> s.getCaseExpressions().stream())
                       .mapToInt(StatementTranspiler::getSwitchCaseAsIntValue));
           if (isDense(stats)) {
             renderDenseSwitchDispatchTable(switchStatement, stats);
@@ -314,7 +346,9 @@ final class StatementTranspiler {
           if (switchCase.isDefault()) {
             continue;
           }
-          slots[getSwitchCaseAsIntValue(switchCase) - offset] = casePosition;
+          for (Expression caseExpression : switchCase.getCaseExpressions()) {
+            slots[getSwitchCaseAsIntValue(caseExpression) - offset] = casePosition;
+          }
         }
 
         builder.newLine();
@@ -338,6 +372,7 @@ final class StatementTranspiler {
         }
       }
 
+      // TODO(b/379473636): Move the handling of non-dense switches to a normalization pass.
       private void renderNonDenseSwitchDispatchTable(SwitchStatement switchStatement) {
         // Evaluate the switch expression and jump to the right case.
         builder.newLine();
@@ -357,7 +392,7 @@ final class StatementTranspiler {
           // If the condition for this case is met, jump to the start of the case, i.e. jump out
           // of all of the previous enclosing blocks.
           Expression condition =
-              createCaseCondition(switchCase.getCaseExpression(), switchStatement.getExpression());
+              createCaseCondition(switchCase.getCaseExpressions(), switchStatement.getExpression());
           renderConditionalBranch(switchStatement.getSourcePosition(), condition, casePosition);
         }
 
@@ -370,14 +405,46 @@ final class StatementTranspiler {
 
       /** Creates the condition to compare the switch expression with the case expression. */
       private Expression createCaseCondition(
-          Expression switchCaseExpression, Expression expression) {
-        if (TypeDescriptors.isJavaLangString(switchCaseExpression.getTypeDescriptor())) {
-          // Strings are compared using equals.
-          return RuntimeMethods.createStringEqualsMethodCall(switchCaseExpression, expression);
+          List<Expression> switchCaseExpressions, Expression expression) {
+        Expression condition = null;
+        for (Expression switchCaseExpression : switchCaseExpressions) {
+          Expression caseCondition;
+          if (TypeDescriptors.isJavaLangString(switchCaseExpression.getTypeDescriptor())) {
+            // Strings are compared using equals.
+            caseCondition =
+                RuntimeMethods.createStringEqualsMethodCall(switchCaseExpression, expression);
+          } else {
+            checkState(switchCaseExpression.getTypeDescriptor().isPrimitive());
+            caseCondition = expression.infixEquals(switchCaseExpression);
+          }
+          // Transform cases with more that one label short-circuit explicitly, since the backend
+          // does not implement it but rather a normalization pass that has already been run.
+          //
+          // A case expression of the form
+          //
+          //    case 1, 2, 3:
+          //
+          // will be rewritten as
+          //
+          //   e == 1 ? true : e == 2 ? true : e == 3
+          //
+          // which is the equivalent to
+          //
+          //  e == 1 || e == 2 || e == 3
+          //
+          // (There is no short-circuit "or" operator in Wasm.)
+          //
+          condition =
+              condition == null
+                  ? caseCondition
+                  : ConditionalExpression.newBuilder()
+                      .setConditionExpression(condition)
+                      .setTrueExpression(BooleanLiteral.get(true))
+                      .setFalseExpression(caseCondition)
+                      .setTypeDescriptor(PrimitiveTypes.BOOLEAN)
+                      .build();
         }
-
-        checkState(switchCaseExpression.getTypeDescriptor().isPrimitive());
-        return expression.infixEquals(switchCaseExpression);
+        return condition;
       }
 
       @Override
@@ -571,7 +638,7 @@ final class StatementTranspiler {
       }
 
       void render(Statement stmt) {
-        StatementTranspiler.render(stmt, builder, environment);
+        StatementTranspiler.render(stmt, builder, environment, enclosingSwitchStatementLabel);
       }
     }
 
@@ -598,9 +665,8 @@ final class StatementTranspiler {
     }
   }
 
-  private static int getSwitchCaseAsIntValue(SwitchCase switchCase) {
-    NumberLiteral caseExpression = (NumberLiteral) switchCase.getCaseExpression();
-    return caseExpression.getValue().intValue();
+  private static int getSwitchCaseAsIntValue(Expression caseExpression) {
+    return ((NumberLiteral) caseExpression).getValue().intValue();
   }
 
   private StatementTranspiler() {}

@@ -1,0 +1,287 @@
+;;; Code for switchexpression.SwitchExpression [type definition]
+(type $switchexpression.SwitchExpression.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+(type $switchexpression.SwitchExpression (sub $java.lang.Object (struct
+ (field $vtable (ref $switchexpression.SwitchExpression.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
+;;; Code for switchexpression.SwitchExpression [imports]
+
+;;; Code for switchexpression.SwitchExpression [static fields]
+(global $$class-initialized@switchexpression.SwitchExpression (mut i32)
+ (i32.const 0)
+)
+(global $$class@switchexpression.SwitchExpression (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for switchexpression.SwitchExpression [vtable.init]
+(global $switchexpression.SwitchExpression.vtable (ref $switchexpression.SwitchExpression.vtable)
+ (struct.new $switchexpression.SwitchExpression.vtable
+  (ref.func $$getClassImpl__java_lang_Class@switchexpression.SwitchExpression)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+
+;;; Code for switchexpression.SwitchExpression [methods]
+
+;;; SwitchExpression SwitchExpression.$create()
+(func $$create__@switchexpression.SwitchExpression
+ (result (ref null $switchexpression.SwitchExpression))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:18:13
+ (local $$instance (ref null $switchexpression.SwitchExpression))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:18:13
+  (call $$clinit__void_<once>_@switchexpression.SwitchExpression )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:18:13
+  (local.set $$instance (struct.new $switchexpression.SwitchExpression (ref.as_non_null (global.get $switchexpression.SwitchExpression.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:18:13
+  (call $$ctor__void_$p_switchexpression_SwitchExpression@switchexpression.SwitchExpression (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void SwitchExpression.$ctor()
+(func $$ctor__void_$p_switchexpression_SwitchExpression@switchexpression.SwitchExpression
+ (param $this (ref null $switchexpression.SwitchExpression))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:18:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void SwitchExpression.testBasicSwitchExpressions()
+(func $m_testBasicSwitchExpressions__void@switchexpression.SwitchExpression
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:20:22
+ (local $a i32)
+ (local $i i64)
+ (local $j (ref null $java.lang.Short))
+ (local $$value i32)
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:21:4
+  (local.set $a (i32.const 0))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:25:4
+  (local.set $i 
+  (block $SWITCH.0 (result i64)
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:26:8
+   (block
+    (block
+     (block
+      (block ;; evaluate expression and jump
+       (br_table 0 2 1 1 2 (i32.sub (i32.const 3) (i32.const 1)))
+      )
+      ;; case 1:
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:28:20
+      (i64.const 5)
+      (br $SWITCH.0)
+     )
+     ;; case 3,4:
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:30:23
+     (throw $exception.event (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $$create__@java.lang.RuntimeException )))
+    )
+    ;; default:
+    (block
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:33:12
+     (local.set $j (call $m_valueOf__short__java_lang_Short@java.lang.Short (i32.extend16_s (block (result i32)
+      (local.set $$value (local.get $a))
+      (local.set $a (i32.add (local.get $a) (i32.const 1)))
+      (local.get $$value)
+     ))))
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:34:12
+     (i64.extend_i32_s (call $m_shortValue__short@java.lang.Short (ref.as_non_null (local.get $j))))
+     (br $SWITCH.0)
+    )
+   )
+  ))
+ )
+)
+
+;;; void SwitchExpression.testSwitchExpressionsWithComplexControlFlow()
+(func $m_testSwitchExpressionsWithComplexControlFlow__void@switchexpression.SwitchExpression
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:39:22
+ (local $a i32)
+ (local $i i64)
+ (local $j (ref null $java.lang.Short))
+ (local $$value i32)
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:40:4
+  (local.set $a (i32.const 0))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:41:4
+  (local.set $i 
+  (block $SWITCH.0 (result i64)
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:42:8
+   (block
+    (block
+     (block
+      (block ;; evaluate expression and jump
+       (br_table 0 2 1 1 2 (i32.sub (i32.const 3) (i32.const 1)))
+      )
+      ;; case 1:
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:43:20
+      (i64.const 5)
+      (br $SWITCH.0)
+     )
+     ;; case 3,4:
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:44:23
+     (throw $exception.event (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $$create__@java.lang.RuntimeException )))
+    )
+    ;; default:
+    (block
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:46:12
+     (local.set $j (call $m_valueOf__short__java_lang_Short@java.lang.Short (i32.extend16_s (block (result i32)
+      (local.set $$value (local.get $a))
+      (local.set $a (i32.add (local.get $a) (i32.const 1)))
+      (local.get $$value)
+     ))))
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:47:12
+     (block $LOOP.BREAK
+      (loop
+       (br_if 1 (i32.eqz (i32.lt_s (call $m_shortValue__short@java.lang.Short (ref.as_non_null (local.get $j))) (i32.const 3))))
+       (block $LOOP.CONTINUE
+        (block
+         ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:48:14
+         (if (i32.eq (call $m_shortValue__short@java.lang.Short (ref.as_non_null (local.get $j))) (i32.const 2))
+          (then
+           (block
+            ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:49:16
+            (i64.const 2)
+            (br $SWITCH.0)
+           )
+          )
+         )
+        )
+       )
+       (br 0)
+      )
+     )
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:52:12
+     (i64.extend_i32_s (call $m_shortValue__short@java.lang.Short (ref.as_non_null (local.get $j))))
+     (br $SWITCH.0)
+    )
+   )
+  ))
+ )
+)
+
+;;; void SwitchExpression.testNestedSwitchExpressions()
+(func $m_testNestedSwitchExpressions__void@switchexpression.SwitchExpression
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:57:22
+ (local $a i32)
+ (local $i i64)
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:58:4
+  (local.set $a (i32.const 0))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:59:4
+  (local.set $i 
+  (block $SWITCH.0 (result i64)
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:60:8
+   (block
+    (block
+     (block ;; evaluate expression and jump
+      (br_table 0 1 (i32.sub (i32.const 3) (i32.const 1)))
+     )
+     ;; case 1:
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:63:14
+     
+     (block $SWITCH.1 (result i64)
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:63:14
+      (block
+       (block
+        (block ;; evaluate expression and jump
+         (br_table 0 1 (i32.sub (i32.const 5) (i32.const 1)))
+        )
+        ;; case 1:
+        ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:64:26
+        (i64.const 10)
+        (br $SWITCH.1)
+       )
+       ;; default:
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:66:20
+       
+       (block $SWITCH.2 (result i64)
+        ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:66:20
+        (block
+         (block
+          (block ;; evaluate expression and jump
+           (br_table 0 1 (i32.sub (i32.const 6) (i32.const 1)))
+          )
+          ;; case 1:
+          ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:67:32
+          (throw $exception.event (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $$create__@java.lang.RuntimeException )))
+         )
+         ;; default:
+         ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:68:33
+         (i64.const 5)
+         (br $SWITCH.2)
+        )
+       )
+       (br $SWITCH.1)
+      )
+     )
+     (br $SWITCH.0)
+    )
+    ;; default:
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:71:21
+    (i64.extend_i32_s (local.get $a))
+    (br $SWITCH.0)
+   )
+  ))
+ )
+)
+
+;;; void SwitchExpression.$clinit()
+(func $$clinit__void_<once>_@switchexpression.SwitchExpression
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:18:13
+  (if (global.get $$class-initialized@switchexpression.SwitchExpression)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:18:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:18:13
+  (global.set $$class-initialized@switchexpression.SwitchExpression (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:18:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> SwitchExpression.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@switchexpression.SwitchExpression
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@switchexpression.SwitchExpression)))
+   (then
+    (return (global.get $$class@switchexpression.SwitchExpression))
+   )
+  )
+  (global.set $$class@switchexpression.SwitchExpression (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|switchexpres...|__java_lang_String_<once>_@switchexpression.SwitchExpression )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@switchexpression.SwitchExpression))
+ )
+)
+
+;;; Class<?> SwitchExpression.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@switchexpression.SwitchExpression
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $switchexpression.SwitchExpression))
+ (local.set $this (ref.cast (ref $switchexpression.SwitchExpression) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@switchexpression.SwitchExpression ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@switchexpression.SwitchExpression)
