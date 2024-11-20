@@ -5,7 +5,7 @@ load("@bazel_skylib//rules:build_test.bzl", "build_test")
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_binary")
 load("//build_defs:rules.bzl", "j2cl_library", "j2cl_test", "j2kt_native_library", "j2wasm_test")
 load("//third_party/bazel_rules/rules_closure/closure:defs.bzl", "closure_js_binary")
-load("@rules_java//java:defs.bzl", "java_test")
+load("@rules_java//java:defs.bzl", "java_library")
 load(":j2cl_multi_test.bzl", "j2cl_multi_test")
 
 package(
@@ -24,7 +24,7 @@ SRCS = glob(
 )
 
 j2cl_library(
-    name = "emul_tests_lib",
+    name = "emul_tests_lib-j2cl",
     testonly = 1,
     srcs = SRCS,
     # Safe here as this is for tests only and there are no downstream users.
@@ -64,11 +64,9 @@ j2kt_native_library(
     ],
 )
 
-# This runs all test for emul in JVM, this way we can make sure that our tests
-# assert the right behaviour for the JRE emulation.
-java_test(
-    name = "AllEmulTest_Java",
-    size = "small",
+java_library(
+    name = "emul_tests_lib",
+    testonly = 1,
     srcs = SRCS,
     javacopts = [
         "-Xep:DoNotCall:OFF",
@@ -79,7 +77,6 @@ java_test(
         "-Xep:SelfEquals:OFF",
         "-Xep:ReturnValueIgnored:OFF",
     ],
-    test_class = "com.google.j2cl.jre.AllTests",
     deps = [
         "//jre/java:javaemul_internal_annotations",
         "//third_party:jsinterop-annotations",
@@ -151,7 +148,7 @@ j2cl_multi_test(
 )
 
 j2cl_library(
-    name = "js_tests_lib",
+    name = "js_tests_lib-j2cl",
     testonly = 1,
     srcs = JS_ONLY_SRCS,
     deps = [
@@ -163,6 +160,7 @@ j2cl_library(
 j2cl_multi_test(
     name = "JsSuite",
     enable_j2kt_native = False,
+    enable_jvm = False,
     enable_wasm = False,
     test_class = "com.google.j2cl.jre.JsSuite",
     deps = [":js_tests_lib"],
@@ -177,7 +175,7 @@ j2cl_test(
     shard_count = 4,
     test_class = "com.google.j2cl.jre.ConcurrentSuite",
     runtime_deps = [
-        ":emul_tests_lib",
+        ":emul_tests_lib-j2cl",
         "//third_party:junit-j2cl",
     ],
 )

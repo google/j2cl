@@ -12,14 +12,16 @@ j2cl_multi_test(
 
 """
 
+load("@rules_java//java:defs.bzl", "java_test")
 load("//build_defs:rules.bzl", "j2cl_test", "j2kt_native_test", "j2wasm_test")
 
-def j2cl_multi_test(name, test_class, deps, enable_j2kt_native = True, enable_wasm = True, **kwargs):
+def j2cl_multi_test(name, test_class, deps, enable_jvm = True, enable_j2kt_native = True, enable_wasm = True, **kwargs):
+    j2cl_deps = [dep + "-j2cl" for dep in deps]
     j2cl_test(
         name = name,
         test_class = test_class,
         generate_build_test = False,
-        runtime_deps = deps,
+        runtime_deps = j2cl_deps,
         **kwargs
     )
     j2cl_test(
@@ -27,12 +29,20 @@ def j2cl_multi_test(name, test_class, deps, enable_j2kt_native = True, enable_wa
         test_class = test_class,
         compile = 1,
         generate_build_test = False,
-        runtime_deps = deps,
+        runtime_deps = j2cl_deps,
         browsers = [
             "//build_defs/internal_do_not_use/browser:chrome-wasm-linux",
         ],
         **kwargs
     )
+
+    if enable_jvm:
+        java_test(
+            name = name + "-jvm",
+            test_class = test_class,
+            runtime_deps = deps,
+            **kwargs
+        )
 
     if enable_wasm:
         j2wasm_deps = [dep + "-j2wasm" for dep in deps]
