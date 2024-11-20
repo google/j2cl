@@ -75,8 +75,8 @@ open class Casts {
 
  private fun functionForInstanceofTest() {}
 
- @ObjCName("testCastObjectAfterInstanceOf")
- open fun testCastObjectAfterInstanceOf() {
+ @ObjCName("testCastVariableAfterInstanceOf")
+ open fun testCastVariableAfterInstanceOf() {
   var o: Any? = Any()
   if (o is Casts) {
    val c: Casts? = o as Casts?
@@ -101,6 +101,7 @@ open class Casts {
    this.functionForInstanceofTest()
    val cNotAvoidCastsTo_2: Casts? = o as Casts?
   }
+  val c_1: Casts? = if (o is Casts) o as Casts? else null
  }
 
  @ObjCName("testCastFieldAfterInstanceOf")
@@ -124,6 +125,7 @@ open class Casts {
    this.functionForInstanceofTest()
    val cNotAvoidCastsTo_2: Casts? = foo!!.field as Casts?
   }
+  val c_1: Casts? = if (foo!!.field is Casts) foo!!.field as Casts? else null
  }
 
  @ObjCName("testCaseMethodAfterInstanceOf")
@@ -132,6 +134,7 @@ open class Casts {
   if (foo!!.method() is Casts) {
    val cNotAvoidCastsTo: Casts? = foo!!.method() as Casts?
   }
+  val c: Casts? = if (foo!!.method() is Casts) foo!!.method() as Casts? else null
  }
 
  @ObjCName("testPrecedence")

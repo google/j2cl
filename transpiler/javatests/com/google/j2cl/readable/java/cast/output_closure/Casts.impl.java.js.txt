@@ -64,7 +64,7 @@ class Casts extends j_l_Object {
  /** @nodts */
  m_functionForInstanceofTest__void_$p_cast_Casts() {}
  /** @nodts */
- m_testCastObjectAfterInstanceOf__void() {
+ m_testCastVariableAfterInstanceOf__void() {
   let o = j_l_Object.$create__();
   if (Casts.$isInstance(o)) {
    let c = /**@type {Casts}*/ (o);
@@ -89,6 +89,7 @@ class Casts extends j_l_Object {
    this.m_functionForInstanceofTest__void_$p_cast_Casts();
    let cNotAvoidCastsTo_2 = /**@type {Casts}*/ ($Casts.$to(o, Casts));
   }
+  let c_1 = Casts.$isInstance(o) ? /**@type {Casts}*/ (o) : null;
  }
  /** @nodts */
  m_testCastFieldAfterInstanceOf__void() {
@@ -111,6 +112,7 @@ class Casts extends j_l_Object {
    this.m_functionForInstanceofTest__void_$p_cast_Casts();
    let cNotAvoidCastsTo_2 = /**@type {Casts}*/ ($Casts.$to(foo.f_field__cast_Casts_Foo, Casts));
   }
+  let c_1 = Casts.$isInstance(foo.f_field__cast_Casts_Foo) ? /**@type {Casts}*/ (foo.f_field__cast_Casts_Foo) : null;
  }
  /** @nodts */
  m_testCaseMethodAfterInstanceOf__void() {
@@ -118,6 +120,7 @@ class Casts extends j_l_Object {
   if (Casts.$isInstance(foo.m_method__java_lang_Object())) {
    let cNotAvoidCastsTo = /**@type {Casts}*/ ($Casts.$to(foo.m_method__java_lang_Object(), Casts));
   }
+  let c = Casts.$isInstance(foo.m_method__java_lang_Object()) ? /**@type {Casts}*/ ($Casts.$to(foo.m_method__java_lang_Object(), Casts)) : null;
  }
  /** @nodts */
  m_testPrecedence__void() {

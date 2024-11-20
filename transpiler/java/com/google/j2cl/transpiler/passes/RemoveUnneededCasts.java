@@ -17,16 +17,17 @@ package com.google.j2cl.transpiler.passes;
 
 import com.google.common.collect.Iterables;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
-import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.ConditionalExpression;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.IfStatement;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
 import com.google.j2cl.transpiler.ast.JsDocCastExpression;
+import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.ThisOrSuperReference;
@@ -42,82 +43,105 @@ import javax.annotation.Nullable;
  * of these casts because of JavaScript's loose Typing rules. For example;
  *
  * <pre>
- * if (o instanceof Casts) {
- *   Casts c = (Casts) o;  // remove this cast
+ * if (o instanceof A) {
+ *   A a = (A) o;  // (A) can be removed here.
  * }
+ * </pre>
+ *
+ * or in
+ *
+ * <pre>
+ * o instanceof A ? (A) o : e;  // (A) can be removed here.
  * </pre>
  */
 public class RemoveUnneededCasts extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(
-        new AbstractVisitor() {
+        new AbstractRewriter() {
           @Override
-          public void exitIfStatement(IfStatement ifStatement) {
-            Expression conditionExpression = ifStatement.getConditionExpression();
-            if (!(conditionExpression instanceof InstanceOfExpression)) {
-              return;
+          public Statement rewriteIfStatement(IfStatement ifStatement) {
+            Statement optimizedThenStatement =
+                optimizeCast(ifStatement.getConditionExpression(), ifStatement.getThenStatement());
+            if (optimizedThenStatement == null) {
+              // The statement was not optimized.
+              return ifStatement;
             }
+            return IfStatement.Builder.from(ifStatement)
+                .setThenStatement(optimizedThenStatement)
+                .build();
+          }
 
-            InstanceOfExpression instanceOfExpression = (InstanceOfExpression) conditionExpression;
-            Expression instanceOfTarget = instanceOfExpression.getExpression();
-            if (!hasNoSideEffects(instanceOfTarget)) {
-              return;
+          @Override
+          public Expression rewriteConditionalExpression(
+              ConditionalExpression conditionalExpression) {
+            Expression optimizedTrueExpression =
+                optimizeCast(
+                    conditionalExpression.getConditionExpression(),
+                    conditionalExpression.getTrueExpression());
+            if (optimizedTrueExpression == null) {
+              // The expression was not optimized.
+              return conditionalExpression;
             }
-
-            Statement thenStatement = ifStatement.getThenStatement();
-            CastExpression castExpression = getCast(thenStatement);
-            if (castExpression == null) {
-              return;
-            }
-
-            if (!castMatchesInstanceOf(castExpression, instanceOfExpression)) {
-              return;
-            }
-
-            // Replace the Java cast by a JsDoc cast to preserve the type of the expression.
-            JsDocCastExpression jsDocCast =
-                JsDocCastExpression.newBuilder()
-                    .setExpression(castExpression.getExpression())
-                    .setCastTypeDescriptor(castExpression.getTypeDescriptor())
-                    .build();
-            replaceIn(thenStatement, castExpression, jsDocCast);
+            return ConditionalExpression.Builder.from(conditionalExpression)
+                .setTrueExpression(optimizedTrueExpression)
+                .build();
           }
         });
   }
 
-  @Nullable
-  private static CastExpression getCast(Statement statement) {
-    if (statement instanceof Block) {
-      return getCast(Iterables.getFirst(((Block) statement).getStatements(), null));
+  /**
+   * Returns an optimized {@code inNode} if the condition {@code conditionExpression} allows to
+   * remove {@code castToOptimize}.
+   */
+  private static <T extends Node> T optimizeCast(Expression conditionExpression, T inNode) {
+    if (!(conditionExpression instanceof InstanceOfExpression)) {
+      return null;
     }
-    if (statement instanceof ExpressionStatement) {
-      return getCast((ExpressionStatement) statement);
+
+    InstanceOfExpression instanceOfExpression = (InstanceOfExpression) conditionExpression;
+    Expression instanceOfTarget = instanceOfExpression.getExpression();
+    if (!hasNoSideEffects(instanceOfTarget)) {
+      return null;
     }
-    return null;
+
+    CastExpression castExpression = getCast(inNode);
+    if (castExpression == null) {
+      return null;
+    }
+
+    if (!castMatchesInstanceOf(castExpression, instanceOfExpression)) {
+      return null;
+    }
+
+    // Replace the Java cast by a JsDoc cast to preserve the type of the expression.
+    JsDocCastExpression jsDocCast =
+        JsDocCastExpression.newBuilder()
+            .setExpression(castExpression.getExpression())
+            .setCastTypeDescriptor(castExpression.getTypeDescriptor())
+            .build();
+
+    return replaceIn(inNode, castExpression, jsDocCast);
   }
 
+  /** Returns a cast expression on if it is the first evaluable node in {@code Node}. */
   @Nullable
-  private static CastExpression getCast(ExpressionStatement expressionStatement) {
-    Expression expression = expressionStatement.getExpression();
-    if (expression instanceof VariableDeclarationExpression) {
-      VariableDeclarationExpression variableDeclarationExpression =
-          (VariableDeclarationExpression) expression;
-      return getCast(variableDeclarationExpression);
+  private static CastExpression getCast(Node node) {
+    if (node instanceof Block) {
+      return getCast(Iterables.getFirst(((Block) node).getStatements(), null));
     }
-    return null;
-  }
-
-  @Nullable
-  private static CastExpression getCast(
-      VariableDeclarationExpression variableDeclarationExpression) {
-    VariableDeclarationFragment variableDeclarationFragment =
-        variableDeclarationExpression.getFragments().get(0);
-    Expression variableDeclarationInitializer = variableDeclarationFragment.getInitializer();
-    if (variableDeclarationInitializer instanceof CastExpression) {
-      return (CastExpression) variableDeclarationInitializer;
+    if (node instanceof ExpressionStatement) {
+      return getCast(((ExpressionStatement) node).getExpression());
     }
-
+    if (node instanceof CastExpression) {
+      return (CastExpression) node;
+    }
+    if (node instanceof VariableDeclarationExpression) {
+      VariableDeclarationFragment variableDeclarationFragment =
+          ((VariableDeclarationExpression) node).getFragments().get(0);
+      Expression variableDeclarationInitializer = variableDeclarationFragment.getInitializer();
+      return getCast(variableDeclarationInitializer);
+    }
     return null;
   }
 
@@ -170,16 +194,18 @@ public class RemoveUnneededCasts extends NormalizationPass {
   // Note: This is not optimal since it continues iterating through all subnodes without stopping
   // after replacement.
 
-  private static void replaceIn(Statement statement, Expression oldValue, Expression newValue) {
-    statement.accept(
-        new AbstractRewriter() {
-          @Override
-          public Expression rewriteExpression(Expression expr) {
-            if (expr == oldValue) {
-              return newValue;
-            }
-            return expr;
-          }
-        });
+  @SuppressWarnings("unchecked")
+  private static <T extends Node> T replaceIn(T node, Expression oldValue, Expression newValue) {
+    return (T)
+        node.rewrite(
+            new AbstractRewriter() {
+              @Override
+              public Expression rewriteExpression(Expression expr) {
+                if (expr == oldValue) {
+                  return newValue;
+                }
+                return expr;
+              }
+            });
   }
 }

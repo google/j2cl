@@ -215,10 +215,10 @@
  (field $m_testCasToInterface__void (ref $function.m_testCasToInterface__void))
  (field $m_testCaseMethodAfterInstanceOf__void (ref $function.m_testCaseMethodAfterInstanceOf__void))
  (field $m_testCastFieldAfterInstanceOf__void (ref $function.m_testCastFieldAfterInstanceOf__void))
- (field $m_testCastObjectAfterInstanceOf__void (ref $function.m_testCastObjectAfterInstanceOf__void))
  (field $m_testCastToArray__void (ref $function.m_testCastToArray__void))
  (field $m_testCastToBoxedType__void (ref $function.m_testCastToBoxedType__void))
  (field $m_testCastToClass__void (ref $function.m_testCastToClass__void))
+ (field $m_testCastVariableAfterInstanceOf__void (ref $function.m_testCastVariableAfterInstanceOf__void))
  (field $m_testPrecedence__void (ref $function.m_testPrecedence__void))
  ))
 )
@@ -605,10 +605,10 @@
   (ref.func $m_testCasToInterface__void@cast.Casts)
   (ref.func $m_testCaseMethodAfterInstanceOf__void@cast.Casts)
   (ref.func $m_testCastFieldAfterInstanceOf__void@cast.Casts)
-  (ref.func $m_testCastObjectAfterInstanceOf__void@cast.Casts)
   (ref.func $m_testCastToArray__void@cast.Casts)
   (ref.func $m_testCastToBoxedType__void@cast.Casts)
   (ref.func $m_testCastToClass__void@cast.Casts)
+  (ref.func $m_testCastVariableAfterInstanceOf__void@cast.Casts)
   (ref.func $m_testPrecedence__void@cast.Casts)
  )
 )
@@ -2574,9 +2574,9 @@
  )
 )
 
-;;; void Casts.testCastObjectAfterInstanceOf()
-(func $m_testCastObjectAfterInstanceOf__void@cast.Casts
- (type $function.m_testCastObjectAfterInstanceOf__void)
+;;; void Casts.testCastVariableAfterInstanceOf()
+(func $m_testCastVariableAfterInstanceOf__void@cast.Casts
+ (type $function.m_testCastVariableAfterInstanceOf__void)
  (param $this.untyped (ref $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:52:14
  (local $o (ref null $java.lang.Object))
@@ -2589,6 +2589,7 @@
  (local $cAvoidCastsTo (ref null $cast.Casts))
  (local $cAvoidsCastsTo_3 (ref null $cast.Casts))
  (local $cNotAvoidCastsTo_2 (ref null $cast.Casts))
+ (local $c_1 (ref null $cast.Casts))
  (local $this (ref null $cast.Casts))
  (local.set $this (ref.cast (ref $cast.Casts) (local.get $this.untyped)))
  (block
@@ -2655,15 +2656,17 @@
     )
    )
   )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:78:4
+  (local.set $c_1 (if (result (ref null $cast.Casts)) (ref.test (ref $cast.Casts) (local.get $o)) (then (ref.cast (ref null $cast.Casts) (local.get $o))) (else (ref.null $cast.Casts))))
  )
 )
-(elem declare func $m_testCastObjectAfterInstanceOf__void@cast.Casts)
+(elem declare func $m_testCastVariableAfterInstanceOf__void@cast.Casts)
 
 ;;; void Casts.testCastFieldAfterInstanceOf()
 (func $m_testCastFieldAfterInstanceOf__void@cast.Casts
  (type $function.m_testCastFieldAfterInstanceOf__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:88:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:90:14
  (local $foo (ref null $cast.Casts.Foo))
  (local $c (ref null $cast.Casts))
  (local $cAvoidsCastsTo (ref null $cast.Casts))
@@ -2672,59 +2675,62 @@
  (local $cNotAvoidCastsTo_1 (ref null $cast.Casts))
  (local $cAvoidsCastsTo_2 (ref null $cast.Casts))
  (local $cNotAvoidCastsTo_2 (ref null $cast.Casts))
+ (local $c_1 (ref null $cast.Casts))
  (local $this (ref null $cast.Casts))
  (local.set $this (ref.cast (ref $cast.Casts) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:89:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:91:4
   (local.set $foo (call $$create__cast_Casts@cast.Casts.Foo (local.get $this)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:90:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:92:4
   (if (ref.test (ref $cast.Casts) (struct.get $cast.Casts.Foo $field@cast.Casts.Foo (local.get $foo)))
    (then
     (block
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:91:6
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:93:6
      (local.set $c (ref.cast (ref null $cast.Casts) (struct.get $cast.Casts.Foo $field@cast.Casts.Foo (local.get $foo))))
     )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:93:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:95:4
   (if (ref.test (ref $cast.Casts) (struct.get $cast.Casts.Foo $field@cast.Casts.Foo (local.get $foo)))
    (then
     (block
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:94:6
-     (local.set $cAvoidsCastsTo (ref.cast (ref null $cast.Casts) (struct.get $cast.Casts.Foo $field@cast.Casts.Foo (local.get $foo))))
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:95:6
-     (struct.set $cast.Casts.Foo $field@cast.Casts.Foo (local.get $foo) (call $$create__@java.lang.Object ))
      ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:96:6
+     (local.set $cAvoidsCastsTo (ref.cast (ref null $cast.Casts) (struct.get $cast.Casts.Foo $field@cast.Casts.Foo (local.get $foo))))
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:97:6
+     (struct.set $cast.Casts.Foo $field@cast.Casts.Foo (local.get $foo) (call $$create__@java.lang.Object ))
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:98:6
      (local.set $cNotAvoidCastsTo (ref.cast (ref null $cast.Casts) (struct.get $cast.Casts.Foo $field@cast.Casts.Foo (local.get $foo))))
     )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:98:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:100:4
   (if (ref.test (ref $cast.Casts) (struct.get $cast.Casts.Foo $field@cast.Casts.Foo (local.get $foo)))
    (then
     (block
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:99:6
-     (local.set $cAvoidsCastsTo_1 (ref.cast (ref null $cast.Casts) (struct.get $cast.Casts.Foo $field@cast.Casts.Foo (local.get $foo))))
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:100:6
-     (local.set $foo (call $$create__cast_Casts@cast.Casts.Foo (local.get $this)))
      ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:101:6
+     (local.set $cAvoidsCastsTo_1 (ref.cast (ref null $cast.Casts) (struct.get $cast.Casts.Foo $field@cast.Casts.Foo (local.get $foo))))
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:102:6
+     (local.set $foo (call $$create__cast_Casts@cast.Casts.Foo (local.get $this)))
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:103:6
      (local.set $cNotAvoidCastsTo_1 (ref.cast (ref null $cast.Casts) (struct.get $cast.Casts.Foo $field@cast.Casts.Foo (local.get $foo))))
     )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:103:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:105:4
   (if (ref.test (ref $cast.Casts) (struct.get $cast.Casts.Foo $field@cast.Casts.Foo (local.get $foo)))
    (then
     (block
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:104:6
-     (local.set $cAvoidsCastsTo_2 (ref.cast (ref null $cast.Casts) (struct.get $cast.Casts.Foo $field@cast.Casts.Foo (local.get $foo))))
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:105:6
-     (call $m_functionForInstanceofTest__void_$p_cast_Casts@cast.Casts (ref.as_non_null (local.get $this)))
      ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:106:6
+     (local.set $cAvoidsCastsTo_2 (ref.cast (ref null $cast.Casts) (struct.get $cast.Casts.Foo $field@cast.Casts.Foo (local.get $foo))))
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:107:6
+     (call $m_functionForInstanceofTest__void_$p_cast_Casts@cast.Casts (ref.as_non_null (local.get $this)))
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:108:6
      (local.set $cNotAvoidCastsTo_2 (ref.cast (ref null $cast.Casts) (struct.get $cast.Casts.Foo $field@cast.Casts.Foo (local.get $foo))))
     )
    )
   )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:111:4
+  (local.set $c_1 (if (result (ref null $cast.Casts)) (ref.test (ref $cast.Casts) (struct.get $cast.Casts.Foo $field@cast.Casts.Foo (local.get $foo))) (then (ref.cast (ref null $cast.Casts) (struct.get $cast.Casts.Foo $field@cast.Casts.Foo (local.get $foo)))) (else (ref.null $cast.Casts))))
  )
 )
 (elem declare func $m_testCastFieldAfterInstanceOf__void@cast.Casts)
@@ -2733,23 +2739,26 @@
 (func $m_testCaseMethodAfterInstanceOf__void@cast.Casts
  (type $function.m_testCaseMethodAfterInstanceOf__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:110:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:114:14
  (local $foo (ref null $cast.Casts.Foo))
  (local $cNotAvoidCastsTo (ref null $cast.Casts))
+ (local $c (ref null $cast.Casts))
  (local $this (ref null $cast.Casts))
  (local.set $this (ref.cast (ref $cast.Casts) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:111:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:115:4
   (local.set $foo (call $$create__cast_Casts@cast.Casts.Foo (local.get $this)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:112:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:116:4
   (if (ref.test (ref $cast.Casts) (call_ref $function.m_method__java_lang_Object (ref.as_non_null (local.get $foo))(struct.get $cast.Casts.Foo.vtable $m_method__java_lang_Object (struct.get $cast.Casts.Foo $vtable(local.get $foo)))))
    (then
     (block
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:113:6
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:117:6
      (local.set $cNotAvoidCastsTo (ref.cast (ref null $cast.Casts) (call_ref $function.m_method__java_lang_Object (ref.as_non_null (local.get $foo))(struct.get $cast.Casts.Foo.vtable $m_method__java_lang_Object (struct.get $cast.Casts.Foo $vtable(local.get $foo))))))
     )
    )
   )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:120:4
+  (local.set $c (if (result (ref null $cast.Casts)) (ref.test (ref $cast.Casts) (call_ref $function.m_method__java_lang_Object (ref.as_non_null (local.get $foo))(struct.get $cast.Casts.Foo.vtable $m_method__java_lang_Object (struct.get $cast.Casts.Foo $vtable(local.get $foo))))) (then (ref.cast (ref null $cast.Casts) (call_ref $function.m_method__java_lang_Object (ref.as_non_null (local.get $foo))(struct.get $cast.Casts.Foo.vtable $m_method__java_lang_Object (struct.get $cast.Casts.Foo $vtable(local.get $foo)))))) (else (ref.null $cast.Casts))))
  )
 )
 (elem declare func $m_testCaseMethodAfterInstanceOf__void@cast.Casts)
@@ -2758,7 +2767,7 @@
 (func $m_testPrecedence__void@cast.Casts
  (type $function.m_testPrecedence__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:117:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:123:14
  (local $foo (ref null $java.lang.Object))
  (local $bar (ref null $java.lang.Object))
  (local $notString (ref null $java.lang.Integer))
@@ -2767,15 +2776,15 @@
  (local $this (ref null $cast.Casts))
  (local.set $this (ref.cast (ref $cast.Casts) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:118:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:124:4
   (local.set $foo (call $$getString_|foo|__java_lang_String_<once>_@cast.Casts ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:119:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:125:4
   (local.set $bar (call $$getString_|bar|__java_lang_String_<once>_@cast.Casts ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:120:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:126:4
   (local.set $notString (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 123)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:121:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:127:4
   (local.set $s1 (ref.cast (ref null $java.lang.String) (if (result (ref null $java.lang.Object)) (i32.const 0) (then (local.get $foo)) (else (local.get $bar)))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:122:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:128:4
   (local.set $s2 (ref.cast (ref null $java.lang.String) (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $$getString_|foo|__java_lang_String_<once>_@cast.Casts )(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $notString)))))
  )
 )
@@ -2832,16 +2841,16 @@
 (func $$create__cast_Casts@cast.Casts.Foo
  (param $$outer_this (ref null $cast.Casts))
  (result (ref null $cast.Casts.Foo))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:80:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:82:16
  (local $$instance (ref null $cast.Casts.Foo))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:80:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:82:16
   (call $$clinit__void_<once>_@cast.Casts.Foo )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:80:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:82:16
   (local.set $$instance (struct.new $cast.Casts.Foo (ref.as_non_null (global.get $cast.Casts.Foo.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $cast.Casts) (ref.null $java.lang.Object)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:80:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:82:16
   (call $$ctor__cast_Casts__void_$p_cast_Casts_Foo@cast.Casts.Foo (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:80:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:82:16
   (return (local.get $$instance))
  )
 )
@@ -2850,13 +2859,13 @@
 (func $$ctor__cast_Casts__void_$p_cast_Casts_Foo@cast.Casts.Foo
  (param $this (ref null $cast.Casts.Foo))
  (param $$outer_this (ref null $cast.Casts))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:80:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:82:16
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:80:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:82:16
   (struct.set $cast.Casts.Foo $$outer_this@cast.Casts.Foo (local.get $this) (local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:80:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:82:16
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:80:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:82:16
   (call $$init__void_$p_cast_Casts_Foo@cast.Casts.Foo (ref.as_non_null (local.get $this)))
  )
 )
@@ -2866,11 +2875,11 @@
  (type $function.m_method__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:83:18
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:85:18
  (local $this (ref null $cast.Casts.Foo))
  (local.set $this (ref.cast (ref $cast.Casts.Foo) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:84:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:86:6
   (return (call $$create__@java.lang.Object ))
  )
 )
@@ -2879,27 +2888,27 @@
 ;;; void Foo.$init()
 (func $$init__void_$p_cast_Casts_Foo@cast.Casts.Foo
  (param $this (ref null $cast.Casts.Foo))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:80:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:82:16
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:81:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:83:4
   (struct.set $cast.Casts.Foo $field@cast.Casts.Foo (local.get $this) (call $$create__@java.lang.Object ))
  )
 )
 
 ;;; void Foo.$clinit()
 (func $$clinit__void_<once>_@cast.Casts.Foo
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:80:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:82:16
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:80:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:82:16
   (if (global.get $$class-initialized@cast.Casts.Foo)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:80:16
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:82:16
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:80:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:82:16
   (global.set $$class-initialized@cast.Casts.Foo (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:80:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:82:16
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
