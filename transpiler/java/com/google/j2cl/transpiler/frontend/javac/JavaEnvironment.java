@@ -101,6 +101,7 @@ import javax.lang.model.type.ExecutableType;
 import javax.lang.model.type.IntersectionType;
 import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
+import javax.lang.model.type.WildcardType;
 
 /** Utility functions to interact with JavaC internal representations. */
 class JavaEnvironment {
@@ -317,8 +318,7 @@ class JavaEnvironment {
     }
 
     if (typeMirror.getKind() == TypeKind.WILDCARD) {
-      return createWildcardTypeVariable(
-          ((javax.lang.model.type.WildcardType) typeMirror).getExtendsBound());
+      return createWildcardTypeVariable(((WildcardType) typeMirror).getExtendsBound());
     }
 
     boolean isNullable = isNullable(typeMirror, elementAnnotations, inNullMarkedScope);
@@ -398,7 +398,7 @@ class JavaEnvironment {
         .build();
   }
 
-  private TypeVariable createWildcardTypeVariable(TypeMirror bound) {
+  private TypeVariable createWildcardTypeVariable(@Nullable TypeMirror bound) {
     return TypeVariable.newBuilder()
         .setUpperBoundTypeDescriptorFactory(() -> createTypeDescriptor(bound))
         .setWildcard(true)
@@ -994,11 +994,45 @@ class JavaEnvironment {
       return cachedTypeDescriptor;
     }
 
+    TypeDeclaration typeDeclaration = createDeclarationForType((TypeElement) classType.asElement());
     DeclaredTypeDescriptor typeDescriptor =
-        createDeclarationForType((TypeElement) classType.asElement())
-            .toDescriptor(createTypeDescriptors(getTypeArguments(classType), inNullMarkedScope));
+        typeDeclaration.toDescriptor(
+            createTypeArgumentDescriptors(
+                getTypeArguments(classType), typeDeclaration, inNullMarkedScope));
     putTypeDescriptorInCache(inNullMarkedScope, classType, typeDescriptor);
     return typeDescriptor;
+  }
+
+  public ImmutableList<TypeDescriptor> createTypeArgumentDescriptors(
+      List<? extends TypeMirror> typeMirrors,
+      TypeDeclaration typeDeclaration,
+      boolean inNullMarkedScope) {
+    // TODO(b/246332093): Consider doing this in our type model after cleanup. Currently results in
+    // an infinite recursion.
+    return Streams.zip(
+            typeMirrors.stream(),
+            typeDeclaration.getTypeParameterDescriptors().stream(),
+            (typeMirror, declaredTypeVariable) -> {
+              if (typeMirror.getKind() == TypeKind.WILDCARD
+                  && isNullOrJavaLangObject(((WildcardType) typeMirror).getExtendsBound())
+                  && declaredTypeVariable != null) {
+                // If this is a wildcard but the bound is not specified (or is Object), we might be
+                // able to get a tighter bound from the declaration.
+                return TypeVariable.createWildcardWithUpperBound(
+                    declaredTypeVariable.getUpperBoundTypeDescriptor());
+              }
+              return createTypeDescriptor(typeMirror, inNullMarkedScope);
+            })
+        .collect(toImmutableList());
+  }
+
+  private boolean isNullOrJavaLangObject(@Nullable TypeMirror typeMirror) {
+    if (typeMirror == null) {
+      return true;
+    }
+    Element element = asElement(typeMirror);
+    return element instanceof TypeElement
+        && ((TypeElement) element).getQualifiedName().contentEquals("java.lang.Object");
   }
 
   private final Map<DeclaredType, DeclaredTypeDescriptor>
