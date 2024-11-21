@@ -11,45 +11,25 @@ load(
     "j2wasm_application",
     "j2wasm_library",
 )
-load("@rules_java//java:defs.bzl", "java_binary", "java_import", "java_library", "java_test")
+load("@rules_java//java:defs.bzl", "java_binary", "java_library", "java_test")
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],
     licenses = ["notice"],
 )
 
-java_import(
-    name = "jre",
-    jars = ["//jre/java:libjre.jar"],
-    srcjar = "//jre/java:libjre-src.jar",
-    tags = [
-        "incomplete-deps",
-    ],
-    deps = ["//jre/java:jre_bootclasspath"],
-)
-
 # A java_binary to create a merged jar of all deps of the standard runtime.
 java_binary(
     name = "jre_bundle",
     create_executable = 0,
-    runtime_deps = [":jre"],
-)
-
-java_import(
-    name = "jre-j2wasm",
-    jars = ["//jre/java:libjre-j2wasm.jar"],
-    srcjar = "//jre/java:libjre-j2wasm-src.jar",
-    tags = [
-        "incomplete-deps",
-    ],
-    deps = ["//jre/java:jre_bootclasspath-j2wasm"],
+    runtime_deps = ["//jre/java:jre_bootclasspath"],
 )
 
 # A java_binary to create a merged jar of all deps of the standard runtime for Wasm.
 java_binary(
     name = "jre_bundle-j2wasm",
     create_executable = 0,
-    runtime_deps = [":jre-j2wasm"],
+    runtime_deps = ["//jre/java:jre_bootclasspath-j2wasm"],
 )
 
 java_test(
