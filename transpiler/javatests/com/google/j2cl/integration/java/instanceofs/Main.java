@@ -33,6 +33,7 @@ public class Main {
     testInstanceOf_string();
     testInstanceOf_sideEffects();
     testInstanceOf_markerInterfaces();
+    testInstanceOf_patternVariable();
   }
 
   private static void testInstanceOf_class() {
@@ -373,4 +374,30 @@ public class Main {
   interface MarkerA {}
 
   interface MarkerB {}
+
+  private static void testInstanceOf_patternVariable() {
+    String hello = "hello";
+    Object o = hello;
+    assertTrue(o instanceof String s && s.length() == hello.length());
+    assertEquals(hello.length(), o instanceof String s ? s.length() : 0);
+
+    String bye = "bye";
+    o = bye;
+    if (!(o instanceof String s)) {
+      throw new AssertionError();
+    }
+    // The variable s is in scope here.
+    assertEquals(bye.length(), s.length());
+
+    o = Integer.valueOf(1);
+    while (o instanceof Number n) {
+      assertEquals(1, n.intValue());
+      break;
+    }
+
+    do {
+      o = Integer.valueOf(2);
+    } while (!(o instanceof Number n));
+    assertEquals(2, n.intValue());
+  }
 }

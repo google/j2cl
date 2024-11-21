@@ -17,6 +17,7 @@ let Short = goog.forwardDeclare('java.lang.Short$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
 let $$boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
 let $$byte = goog.forwardDeclare('vmbootstrap.primitives.$byte$impl');
 let $$char = goog.forwardDeclare('vmbootstrap.primitives.$char$impl');
@@ -108,6 +109,21 @@ class InstanceofExpressions extends j_l_Object {
   let b = !$Equality.$same(false ? 'foo' : 'bar', null);
  }
  /** @nodts */
+ m_testPatternMatch__void_$p_instanceofexpression_InstanceofExpressions() {
+  let /** * */ exp, /** ?string */ s, /** * */ exp_1, /** Integer */ i, /** * */ exp_2, /** (Number|number) */ n;
+  if (!((exp = j_l_Object.$create__(), s = j_l_String.$isInstance(exp) ? /**@type {?string}*/ (exp) : null), !$Equality.$same(s, null)) || j_l_String.m_length__java_lang_String__int(s) == 2) {
+   return;
+  }
+  if (((exp_1 = j_l_Object.$create__(), i = Integer.$isInstance(exp_1) ? /**@type {Integer}*/ (exp_1) : null), !$Equality.$same(i, null)) && i.m_intValue__int() == 2) {
+   let l = i.m_intValue__int();
+  }
+  if (!((exp_2 = j_l_Object.$create__(), n = Number.$isInstance(exp_2) ? /**@type {(Number|number)}*/ (exp_2) : null), !$Equality.$same(n, null))) {
+   let j = j_l_String.m_length__java_lang_String__int(s);
+  } else {
+   let k = $Numbers.m_byteValue__java_lang_Number__byte(n);
+  }
+ }
+ /** @nodts */
  static $clinit() {
   InstanceofExpressions.$clinit = () =>{};
   InstanceofExpressions.$loadModules();
@@ -134,6 +150,7 @@ class InstanceofExpressions extends j_l_Object {
   j_l_String = goog.module.get('java.lang.String$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
   $$boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
   $$byte = goog.module.get('vmbootstrap.primitives.$byte$impl');
   $$char = goog.module.get('vmbootstrap.primitives.$char$impl');

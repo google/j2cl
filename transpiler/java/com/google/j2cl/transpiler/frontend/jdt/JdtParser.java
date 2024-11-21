@@ -61,6 +61,7 @@ public class JdtParser {
     compilerOptions.put(JavaCore.COMPILER_SOURCE, JAVA_VERSION);
     compilerOptions.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, JAVA_VERSION);
     compilerOptions.put(JavaCore.COMPILER_COMPLIANCE, JAVA_VERSION);
+    compilerOptions.put(JavaCore.COMPILER_PB_ENABLE_PREVIEW_FEATURES, "enabled");
 
     this.problems = problems;
   }

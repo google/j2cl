@@ -45,6 +45,7 @@ import kotlin.Suppress
 import kotlin.arrayOfNulls
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
+import kotlin.run
 
 @ObjCName("J2ktInstanceofexpressionInstanceofExpressions", exact = true)
 open class InstanceofExpressions {
@@ -116,5 +117,37 @@ open class InstanceofExpressions {
  @ObjCName("testPrecedence")
  open fun testPrecedence() {
   val b: Boolean = (if (false) "foo" else "bar") is String
+ }
+
+ private fun testPatternMatch() {
+  var exp: Any? = null
+  var s: String? = null
+  var exp_1: Any? = null
+  var i: Int? = null
+  var exp_2: Any? = null
+  var n: Number? = null
+  if (!run {
+   exp = Any()
+   s = if (exp is String) exp as String? else null
+   s != null
+  } || s!!.length == 2) {
+   return
+  }
+  if (run {
+   exp_1 = Any()
+   i = if (exp_1 is Int) exp_1 as Int? else null
+   i != null
+  } && i!!.toInt() == 2) {
+   val l: Int = i!!.toInt()
+  }
+  if (!run {
+   exp_2 = Any()
+   n = if (exp_2 is Number) exp_2 as Number? else null
+   n != null
+  }) {
+   val j: Int = s!!.length
+  } else {
+   val k: Int = n!!.toByte().toInt()
+  }
  }
 }

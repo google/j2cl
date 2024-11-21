@@ -309,6 +309,67 @@
 )
 (elem declare func $m_testPrecedence__void@instanceofexpression.InstanceofExpressions)
 
+;;; void InstanceofExpressions.testPatternMatch()
+(func $m_testPatternMatch__void_$p_instanceofexpression_InstanceofExpressions@instanceofexpression.InstanceofExpressions
+ (param $this (ref null $instanceofexpression.InstanceofExpressions))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:94:15
+ (local $exp (ref null $java.lang.Object))
+ (local $s (ref null $java.lang.String))
+ (local $exp_1 (ref null $java.lang.Object))
+ (local $i (ref null $java.lang.Integer))
+ (local $l i32)
+ (local $exp_2 (ref null $java.lang.Object))
+ (local $n (ref null $java.lang.Number))
+ (local $j i32)
+ (local $k i32)
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:95:4
+  (if (if (result i32) (i32.eqz (block (result i32)
+    (local.set $exp (call $$create__@java.lang.Object ))
+    (local.set $s (if (result (ref null $java.lang.String)) (ref.test (ref $java.lang.String) (local.get $exp)) (then (ref.cast (ref null $java.lang.String) (local.get $exp))) (else (ref.null $java.lang.String))))
+    (i32.eqz (ref.is_null (local.get $s)))
+   )) (then (i32.const 1)) (else (i32.eq (call $m_length__int@java.lang.String (ref.as_non_null (local.get $s))) (i32.const 2))))
+   (then
+    (block
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:99:6
+     (return )
+    )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:101:4
+  (if (if (result i32) (block (result i32)
+    (local.set $exp_1 (call $$create__@java.lang.Object ))
+    (local.set $i (if (result (ref null $java.lang.Integer)) (ref.test (ref $java.lang.Integer) (local.get $exp_1)) (then (ref.cast (ref null $java.lang.Integer) (local.get $exp_1))) (else (ref.null $java.lang.Integer))))
+    (i32.eqz (ref.is_null (local.get $i)))
+   ) (then (i32.eq (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $i))) (i32.const 2))) (else (i32.const 0)))
+   (then
+    (block
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:105:6
+     (local.set $l (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $i))))
+    )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:107:4
+  (if (i32.eqz (block (result i32)
+    (local.set $exp_2 (call $$create__@java.lang.Object ))
+    (local.set $n (if (result (ref null $java.lang.Number)) (ref.test (ref $java.lang.Number) (local.get $exp_2)) (then (ref.cast (ref null $java.lang.Number) (local.get $exp_2))) (else (ref.null $java.lang.Number))))
+    (i32.eqz (ref.is_null (local.get $n)))
+   ))
+   (then
+    (block
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:110:6
+     (local.set $j (call $m_length__int@java.lang.String (ref.as_non_null (local.get $s))))
+    )
+   )(else
+    (block
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:112:6
+     (local.set $k (call_ref $function.m_byteValue__byte (ref.as_non_null (local.get $n))(struct.get $java.lang.Number.vtable $m_byteValue__byte (struct.get $java.lang.Number $vtable(local.get $n)))))
+    )
+   )
+  )
+ )
+)
+
 ;;; void InstanceofExpressions.$clinit()
 (func $$clinit__void_<once>_@instanceofexpression.InstanceofExpressions
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:20:13

@@ -90,4 +90,26 @@ public class InstanceofExpressions {
   public void testPrecedence() {
     boolean b = (false ? "foo" : "bar") instanceof String;
   }
+
+  private void testPatternMatch() {
+    if (!(new Object() instanceof String s)
+        // the rhs of the short-circuit or only evaluates in the lhs is false, which makes
+        // instanceof true and hence the variable s has meaning there.
+        || s.length() == 2) {
+      return;
+    }
+    if (new Object() instanceof Integer i
+        // since instanceof succeeded here we can immediately use the variable as the rhs of the
+        // and expression.
+        && i.intValue() == 2) {
+      int l = i.intValue();
+    }
+    if (!(new Object() instanceof Number n)) {
+      // Since we only reach this point in the program with the instanceof operation from the
+      // first if statement here we can refer to that variable.
+      int j = s.length();
+    } else {
+      int k = n.byteValue();
+    }
+  }
 }

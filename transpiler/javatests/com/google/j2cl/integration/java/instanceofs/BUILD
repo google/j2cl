@@ -12,4 +12,8 @@ integration_test(
     name = "instanceofs",
     srcs = glob(["*.java"]),
     enable_kt = False,
+    javacopts = [
+        "-source 17",
+        "-target 17",
+    ],
 )

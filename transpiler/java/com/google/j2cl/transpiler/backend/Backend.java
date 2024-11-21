@@ -33,6 +33,7 @@ import com.google.j2cl.transpiler.passes.AddNothingReturnStatements;
 import com.google.j2cl.transpiler.passes.AddVisibilityMethodBridgesJ2kt;
 import com.google.j2cl.transpiler.passes.ConvertMethodReferencesToLambdas;
 import com.google.j2cl.transpiler.passes.CreateImplicitConstructors;
+import com.google.j2cl.transpiler.passes.DesugarInstanceOfPatterns;
 import com.google.j2cl.transpiler.passes.DevirtualizeBoxedTypesAndJsFunctionImplementations;
 import com.google.j2cl.transpiler.passes.DevirtualizeMethodCalls;
 import com.google.j2cl.transpiler.passes.ExpandCompoundAssignments;
@@ -212,6 +213,7 @@ public enum Backend {
           // Early run of determining whether variables are effectively final so that passes that
           // depend on Expression.isEffectivelyInvariant it can take advantage.
           MakeVariablesFinal::new,
+          DesugarInstanceOfPatterns::new,
           ConvertMethodReferencesToLambdas::new,
           NormalizePackagedJsEnumVarargsLiterals::new,
           ResolveImplicitInstanceQualifiers::new,
@@ -399,6 +401,7 @@ public enum Backend {
           // TODO(b/277799806): Consider removing this pass if the immutable field optimization is
           // removed.
           MakeVariablesFinal::new,
+          DesugarInstanceOfPatterns::new,
           ConvertMethodReferencesToLambdas::new,
           NormalizePackagedJsEnumVarargsLiterals::new,
           ResolveImplicitInstanceQualifiers::new,
@@ -548,6 +551,7 @@ public enum Backend {
           // TODO(b/277799806): Consider removing this pass if the immutable field optimization is
           // removed.
           MakeVariablesFinal::new,
+          DesugarInstanceOfPatterns::new,
           ConvertMethodReferencesToLambdas::new,
           NormalizePackagedJsEnumVarargsLiterals::new,
           ResolveImplicitInstanceQualifiers::new,
@@ -688,6 +692,7 @@ public enum Backend {
     public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
       return ImmutableList.of(
           MakeVariablesFinal::new,
+          DesugarInstanceOfPatterns::new,
           ConvertMethodReferencesToLambdas::new,
           ResolveImplicitInstanceQualifiers::new);
     }

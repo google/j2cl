@@ -783,12 +783,17 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           .build();
     }
 
-    private InstanceOfExpression convert(org.eclipse.jdt.core.dom.InstanceofExpression expression) {
+    private Expression convert(org.eclipse.jdt.core.dom.InstanceofExpression expression) {
+      Expression e = convert(expression.getLeftOperand());
+      TypeDescriptor typeDescriptor =
+          environment.createTypeDescriptor(expression.getRightOperand().resolveBinding());
+      Variable patternVariable =
+          expression.getPatternVariable() == null ? null : convert(expression.getPatternVariable());
       return InstanceOfExpression.newBuilder()
           .setSourcePosition(getSourcePosition(expression))
-          .setExpression(convert(expression.getLeftOperand()))
-          .setTestTypeDescriptor(
-              environment.createTypeDescriptor(expression.getRightOperand().resolveBinding()))
+          .setExpression(e)
+          .setTestTypeDescriptor(typeDescriptor)
+          .setPatternVariable(patternVariable)
           .build();
     }
 
@@ -1230,7 +1235,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       }
 
       throw internalCompilerError(
-          "Unexpected binding class for SimpleName: %s", expression.getClass().getName());
+          "Unexpected binding class for SimpleName: %s", binding.getClass().getName());
     }
 
     private Variable convert(

@@ -30,6 +30,7 @@ import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.ForEachStatement;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.InitializerBlock;
+import com.google.j2cl.transpiler.ast.InstanceOfExpression;
 import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
 import com.google.j2cl.transpiler.ast.JsForInStatement;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
@@ -208,6 +209,11 @@ public class VerifyNormalizedUnits extends NormalizationPass {
           public void exitMultiExpression(MultiExpression multiExpression) {
             // No empty nor singleton multiexpressions should remain.
             checkState(multiExpression.getExpressions().size() > 1);
+          }
+
+          @Override
+          public void exitInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
+            checkState(instanceOfExpression.getPatternVariable() == null);
           }
 
           @Override
