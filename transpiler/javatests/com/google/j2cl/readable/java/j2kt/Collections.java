@@ -155,7 +155,7 @@ public class Collections {
   public static class CustomCollection<T extends @Nullable Object> extends AbstractCollection<T> {
     @Override
     public Iterator<T> iterator() {
-      return null;
+      throw new RuntimeException();
     }
 
     @Override
@@ -203,7 +203,7 @@ public class Collections {
   public static class CustomList<T extends @Nullable Object> extends AbstractList<T> {
     @Override
     public T get(int index) {
-      return null;
+      throw new IndexOutOfBoundsException();
     }
 
     @Override
@@ -250,7 +250,7 @@ public class Collections {
     }
 
     @Override
-    public V remove(@Nullable Object key) {
+    public @Nullable V remove(@Nullable Object key) {
       key = convert(key);
       return super.remove(key);
     }
@@ -263,7 +263,7 @@ public class Collections {
     }
 
     @Override
-    public V get(@Nullable Object key) {
+    public @Nullable V get(@Nullable Object key) {
       key = convert(key);
       return super.get(key);
     }
@@ -319,7 +319,7 @@ public class Collections {
     }
 
     @Override
-    public String remove(@Nullable Object key) {
+    public @Nullable String remove(@Nullable Object key) {
       key = convert(key);
       return super.remove(key);
     }
@@ -332,7 +332,7 @@ public class Collections {
     }
 
     @Override
-    public String get(@Nullable Object key) {
+    public @Nullable String get(@Nullable Object key) {
       key = convert(key);
       return super.get(key);
     }

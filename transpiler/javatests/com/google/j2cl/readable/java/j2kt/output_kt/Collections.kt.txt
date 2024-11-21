@@ -19,6 +19,7 @@
 package j2kt
 
 import javaemul.lang.*
+import java.lang.IndexOutOfBoundsException
 import java.lang.RuntimeException
 import javaemul.lang.JavaAbstractCollection
 import javaemul.lang.JavaAbstractList
@@ -252,7 +253,7 @@ open class Collections {
  @ObjCName("J2ktJ2ktCollections_CustomCollection", exact = true)
  open class CustomCollection<T>: JavaAbstractCollection<T>() {
   override fun iterator(): MutableIterator<T> {
-   return null!!
+   throw RuntimeException()
   }
 
   override val size: Int
@@ -300,7 +301,7 @@ open class Collections {
  @ObjCName("J2ktJ2ktCollections_CustomList", exact = true)
  open class CustomList<T>: JavaAbstractList<T>() {
   override fun get(index: Int): T {
-   return null as T
+   throw IndexOutOfBoundsException()
   }
 
   override val size: Int
@@ -346,10 +347,10 @@ open class Collections {
    return super<JavaAbstractMap>.containsValue(value_1 as V)
   }
 
-  override fun remove(key: K): V {
+  override fun remove(key: K): V? {
    var key_1: Any? = key
    key_1 = Collections.convert<Any?>(key_1)
-   return super<JavaAbstractMap>.remove(key_1 as K) as V
+   return super<JavaAbstractMap>.remove(key_1 as K)
   }
 
   override fun java_remove(key: Any?, value: Any?): Boolean {
@@ -360,10 +361,10 @@ open class Collections {
    return super<JavaAbstractMap>.java_remove(key_1, value_1)
   }
 
-  override fun get(key: K): V {
+  override fun get(key: K): V? {
    var key_1: Any? = key
    key_1 = Collections.convert<Any?>(key_1)
-   return super<JavaAbstractMap>.get(key_1 as K) as V
+   return super<JavaAbstractMap>.get(key_1 as K)
   }
 
   override fun java_getOrDefault(key: Any?, defaultValue: V?): V? {
@@ -425,7 +426,7 @@ open class Collections {
    return super<Collections.CustomMap>.containsValue(value_1 as String)
   }
 
-  override fun remove(key: String): String {
+  override fun remove(key: String): String? {
    var key_1: Any? = key
    key_1 = Collections.convert<Any?>(key_1)
    return super<Collections.CustomMap>.remove(key_1 as String)
@@ -439,7 +440,7 @@ open class Collections {
    return super<Collections.CustomMap>.java_remove(key_1, value_1)
   }
 
-  override fun get(key: String): String {
+  override fun get(key: String): String? {
    var key_1: Any? = key
    key_1 = Collections.convert<Any?>(key_1)
    return super<Collections.CustomMap>.get(key_1 as String)
