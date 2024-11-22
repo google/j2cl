@@ -73,6 +73,7 @@ open class Main {
   topLevel!!.instanceField = "foo"
   val fooStaticField: Any? = KTopLevel.staticField
   KTopLevel.staticField = "foo"
+  topLevel!!.nonPublicField = 0
   val i1: Int = topLevel!!.renamedField
   val i2: Int = topLevel!!.renamedMethod()
   val i3: Int = topLevel!!.methodAsProperty
@@ -81,6 +82,7 @@ open class Main {
   val i6: Boolean = topLevel!!.isRenamedField
   val i7: Boolean = topLevel!!.isMethodAsProperty
   val i8: Int = topLevel!!.getstartingmethodAsProperty
+  topLevel!!.nonPublicMethod()
   val nested: KNested<String?>? = KNested<String?>("foo")
   val nestedInstanceMethod: String? = nested!!.instanceMethod("foo")
   val nestedStaticMethod: String? = KNested.staticMethod<String?>("foo")

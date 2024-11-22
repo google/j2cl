@@ -15,6 +15,7 @@
  */
 package collisions;
 
+import javaemul.internal.annotations.KtName;
 import javaemul.internal.annotations.KtNative;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
@@ -34,8 +35,10 @@ class Blah {
 }
 
 class KtBlah {
+  @KtName("m")
   static void m() {}
 
+  @KtName("getN")
   static double getN() {
     return 1.0;
   }

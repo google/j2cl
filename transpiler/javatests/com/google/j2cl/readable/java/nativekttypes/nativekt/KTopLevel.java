@@ -47,6 +47,7 @@ public class KTopLevel<O> {
   public static Object staticField;
   public int renamedField;
 
+  @KtName("nonPublicField")
   int nonPublicField;
 
   public int renamedMethod() {
@@ -92,6 +93,7 @@ public class KTopLevel<O> {
     return o;
   }
 
+  @KtName("nonPublicMethod")
   void nonPublicMethod() {}
 
   public static <S> S staticMethod(S s) {

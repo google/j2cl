@@ -54,13 +54,9 @@ public abstract class MemberDescriptor
     return isField() || getKtInfo().isProperty();
   }
 
-  public String getKtName() {
-    String ktName = getKtInfo().getName();
-    if (ktName != null) {
-      return ktName;
-    }
-    String name = getName();
-    return getKtInfo().isProperty() ? KtInfo.computePropertyName(name) : name;
+  @Nullable
+  public String getExplicitKtName() {
+    return getKtInfo().getName();
   }
 
   public boolean isKtDisabled() {

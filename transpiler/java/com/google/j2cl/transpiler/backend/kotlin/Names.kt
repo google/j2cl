@@ -19,12 +19,17 @@ import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.CompilationUnit
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.FieldDescriptor
+import com.google.j2cl.transpiler.ast.KtInfo.computePropertyName
 import com.google.j2cl.transpiler.ast.MemberDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptor
+import com.google.j2cl.transpiler.backend.kotlin.common.letIf
+
+internal val MemberDescriptor.ktName: String
+  get() = explicitKtName ?: name!!.letIf(isKtProperty) { computePropertyName(it) }
 
 /** Map entry from simple name to qualified name. */
 internal val TypeDeclaration.nameMapEntry: Pair<String, String>
@@ -48,7 +53,7 @@ internal val Type.localTypeNameMap: Map<String, String>
 
 /** A set of field names used in this type. */
 internal val Type.localFieldNames: Set<String>
-  get() = fields.map { it.descriptor.ktName!! }.toSet()
+  get() = fields.map { it.descriptor.ktName }.toSet()
 
 /** A set of top-level qualified name strings in this compilation unit. */
 internal val CompilationUnit.localTypeNames: Map<String, String>

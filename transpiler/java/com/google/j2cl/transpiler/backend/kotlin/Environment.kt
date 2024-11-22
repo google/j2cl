@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
-import com.google.j2cl.transpiler.ast.AstUtils
+import com.google.j2cl.transpiler.ast.AstUtils.isJsEnumCustomValueField
 import com.google.j2cl.transpiler.ast.FieldDescriptor
 import com.google.j2cl.transpiler.ast.HasName
 import com.google.j2cl.transpiler.ast.MemberDescriptor
@@ -156,8 +156,13 @@ internal data class Environment(
 
   /** Kotlin mangled name for this member descriptor. */
   fun ktMangledName(memberDescriptor: MemberDescriptor): String =
-    if (AstUtils.isJsEnumCustomValueField(memberDescriptor)) memberDescriptor.name!!
-    else memberDescriptor.ktName + ktNameSuffix(memberDescriptor)
+    memberDescriptor.explicitKtName
+      ?: when {
+        isJsEnumCustomValueField(memberDescriptor) -> memberDescriptor.name!!
+        memberDescriptor.enclosingTypeDescriptor.typeDeclaration.isKtNative ->
+          memberDescriptor.ktName
+        else -> memberDescriptor.ktName + ktNameSuffix(memberDescriptor)
+      }
 
   /** Kotlin name suffix for this member descriptor. */
   private fun ktNameSuffix(memberDescriptor: MemberDescriptor): String =
