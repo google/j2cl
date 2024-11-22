@@ -39,6 +39,9 @@ open class KTopLevel<O> {
  @ObjCName("renamedField_")
  var renamedField: Int = 0
 
+ @JvmField
+ internal var nonPublicField_pp_nativekttypes_nativekt: Int = 0
+
  @ObjCName("renamedMethod")
  open fun renamedMethod(): Int {
   return 0
@@ -94,6 +97,8 @@ open class KTopLevel<O> {
  ): O {
   return o
  }
+
+ internal open fun nonPublicMethod_pp_nativekttypes_nativekt() {}
 
  @ObjCName("J2ktNativekttypesNativektKTopLevelCompanion", exact = true)
  companion object {

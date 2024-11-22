@@ -35,6 +35,8 @@ public class Main {
     topLevel.instanceField = "foo";
     Object fooStaticField = topLevel.staticField;
     topLevel.staticField = "foo";
+    // TODO(b/380317304): Uncomment when fixed.
+    // topLevel.nonPublicField = 0;
     int i1 = topLevel.fieldToRename;
     int i2 = topLevel.methodToRename();
     int i3 = topLevel.getMethodAsProperty();
@@ -43,6 +45,8 @@ public class Main {
     boolean i6 = topLevel.isFieldToRename;
     boolean i7 = topLevel.isMethodAsProperty();
     int i8 = topLevel.getstartingmethodAsProperty();
+    // TODO(b/380317304): Uncomment when fixed.
+    // topLevel.nonPublicMethod();
 
     NativeTopLevel.Nested<String> nested = new NativeTopLevel.Nested<>("foo");
     String nestedInstanceMethod = nested.instanceMethod("foo");

@@ -47,6 +47,8 @@ public class KTopLevel<O> {
   public static Object staticField;
   public int renamedField;
 
+  int nonPublicField;
+
   public int renamedMethod() {
     return 0;
   }
@@ -89,6 +91,8 @@ public class KTopLevel<O> {
   public O instanceMethod(O o) {
     return o;
   }
+
+  void nonPublicMethod() {}
 
   public static <S> S staticMethod(S s) {
     return s;

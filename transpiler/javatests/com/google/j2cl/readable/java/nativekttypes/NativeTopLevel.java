@@ -45,6 +45,8 @@ public class NativeTopLevel<O> {
   @KtName("renamedField")
   public int fieldToRename;
 
+  int nonPublicField;
+
   @KtName("renamedMethod")
   public native int methodToRename();
 
@@ -74,6 +76,8 @@ public class NativeTopLevel<O> {
   public NativeTopLevel(O o) {}
 
   public native O instanceMethod(O o);
+
+  native void nonPublicMethod();
 
   public static native <S> S staticMethod(S s);
 }
