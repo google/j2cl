@@ -78,9 +78,6 @@ private val loweringPassFactories: List<J2clLoweringPassFactory> = buildList {
   add(::StripTypeAliasDeclarationsLowering)
   // Put file level function and property declaration into a class.
   add(::FileClassLowering)
-  // Make JvmStatic functions in non-companion objects static and replace all call sites in the
-  // module.
-  add(::JvmStaticInObjectLowering)
   // Invent names for local classes and anonymous objects. Later passes may require all classes
   // to have a name for computing function signature.
   add(::JvmInventNamesForLocalClasses)
@@ -183,10 +180,6 @@ private val loweringPassFactories: List<J2clLoweringPassFactory> = buildList {
   // Cleanup IMPLICIT_CAST introduced by smart casts that cast a expression to a parent type.
   add(::SmartCastCleaner)
   add(::BridgeLowering)
-  // Transforms some cast/instanceof operations.
-  add(::TypeOperatorLowering)
-  // Rewrites numeric conversion calls (toInt(), toShort(), etc) to be simple casts instead.
-  add(::NumericConversionLowering)
   // Lowers calls to functions that return unit into a block of the call and a unit object ref.
   add(::KotlinUnitValueLowering)
   // Replaces IrExpressionBody with IrBlockBody returning the expression.
@@ -197,6 +190,13 @@ private val loweringPassFactories: List<J2clLoweringPassFactory> = buildList {
   add(::MangleWellKnownShadowingFunctionsLowering)
   // Implement intrinsic. Must run after function inlining.
   add(::IntrinsicFunctionCallsLowering)
+  // Make JvmStatic functions in non-companion objects static and replace all call sites in the
+  // module. Must run after IntrinsicFunctionCallsLowering and before TypeOperatorLowering.
+  add(::JvmStaticInObjectLowering)
+  // Transforms some cast/instanceof operations.
+  add(::TypeOperatorLowering)
+  // Rewrites numeric conversion calls (toInt(), toShort(), etc) to be simple casts instead.
+  add(::NumericConversionLowering)
   // Removes enum super constructor calls and cleans up effectively empty constructors.
   add(::EnumClassConstructorLowering)
   // Rewrites calls to KFunction.invoke() as FunctionN.invoke().
