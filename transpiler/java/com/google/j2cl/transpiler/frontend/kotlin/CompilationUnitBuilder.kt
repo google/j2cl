@@ -683,7 +683,6 @@ class CompilationUnitBuilder(
       irCall.isDataClassArrayMemberToString -> convertDataClassArrayMemberCall(irCall, "toString")
       irCall.isAnyToString -> convertAnyToStringCall(irCall)
       irCall.isCheckNotNullCall -> convertCheckNotNullCall(irCall)
-      irCall.isNoWhenBranchMatchedException -> convertNoWhenBranchMatchedException(irCall)
       irCall.isJavaClassPropertyReference -> convertJavaClassPropertyReference(irCall)
       irCall.isKClassJavaPropertyReference ->
         convertKClassJavaPropertyReference(irCall, wrapPrimitives = false)
@@ -950,19 +949,6 @@ class CompilationUnitBuilder(
     } else {
       argumentExpression.postfixNotNullAssertion()
     }
-  }
-
-  private fun convertNoWhenBranchMatchedException(irCall: IrCall): Expression {
-    require(irCall.valueArgumentsCount == 0) {
-      "throwNoWhenBranchMatchedException should have no arguments"
-    }
-    return MethodCall.Builder.from(
-        TypeDescriptors.get()
-          .kotlinJvmInternalIntrinsics!!
-          .getMethodDescriptor("throwNoWhenBranchMatchedException")
-      )
-      .setSourcePosition(getSourcePosition(irCall))
-      .build()
   }
 
   private fun convertPrefixOperation(irCall: IrCall): Expression {
@@ -1697,9 +1683,6 @@ class CompilationUnitBuilder(
 
   private val IrCall.isCheckNotNullCall: Boolean
     get() = intrinsicMethods.isCheckNotNull(this)
-
-  private val IrCall.isNoWhenBranchMatchedException: Boolean
-    get() = intrinsicMethods.isNoWhenBranchMatchedException(this)
 
   private val IrCall.isJavaClassPropertyReference: Boolean
     get() = intrinsicMethods.isJavaClassProperty(this)

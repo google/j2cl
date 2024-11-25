@@ -18,6 +18,7 @@
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
+import org.jetbrains.kotlin.backend.jvm.functionByName
 import org.jetbrains.kotlin.backend.jvm.ir.createJvmIrBuilder
 import org.jetbrains.kotlin.backend.jvm.ir.findEnumValuesFunction
 import org.jetbrains.kotlin.ir.backend.js.utils.typeArguments
@@ -38,6 +39,7 @@ import org.jetbrains.kotlin.ir.util.isPrimitiveArray
 import org.jetbrains.kotlin.ir.util.parentAsClass
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.name.CallableId
+import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
@@ -56,6 +58,7 @@ class IntrinsicFunctionCallsLowering(j2clBackendContext: J2clBackendContext) :
       expression.isEnumEntries || expression.isEnumGetEntries -> lowerEnumEntries(expression)
       expression.isRangeUntilCall -> lowerRangeUntilCall(expression)
       expression.isArrayIteratorCall -> lowerArrayIteratorCall(expression)
+      expression.isNoWhenBranchMatchedException -> lowerNoWhenBranchMatchedException(expression)
       else -> super.visitCall(expression)
     }
   }
@@ -143,6 +146,21 @@ class IntrinsicFunctionCallsLowering(j2clBackendContext: J2clBackendContext) :
     }
   }
 
+  private val jvmIntrinsicsClass by lazy {
+    context.irPluginContext!!.referenceClass(
+      ClassId.topLevel(FqName("kotlin.jvm.internal.Intrinsics"))
+    )!!
+  }
+
+  private val throwNoWhenBranchMatchedException by lazy {
+    jvmIntrinsicsClass.functionByName("throwNoWhenBranchMatchedException")
+  }
+
+  private fun lowerNoWhenBranchMatchedException(irCall: IrCall) =
+    context.createJvmIrBuilder(throwNoWhenBranchMatchedException, irCall).run {
+      irCall(throwNoWhenBranchMatchedException)
+    }
+
   private val IrCall.isEnumEntries: Boolean
     get() = intrinsics.isEnumEntries(this)
 
@@ -154,4 +172,7 @@ class IntrinsicFunctionCallsLowering(j2clBackendContext: J2clBackendContext) :
 
   private val IrCall.isEnumGetEntries: Boolean
     get() = intrinsics.isEnumGetEntries(this)
+
+  private val IrCall.isNoWhenBranchMatchedException: Boolean
+    get() = intrinsics.isNoWhenBranchMatchedException(this)
 }
