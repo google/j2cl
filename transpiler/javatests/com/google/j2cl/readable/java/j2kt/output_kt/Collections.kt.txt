@@ -30,6 +30,8 @@ import kotlin.Int
 import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
+import kotlin.collections.Collection
+import kotlin.collections.Map
 import kotlin.collections.MutableCollection
 import kotlin.collections.MutableIterator
 import kotlin.collections.MutableList
@@ -273,28 +275,28 @@ open class Collections {
    return super<JavaAbstractCollection>.remove(o_1 as T)
   }
 
-  override fun java_addAll(c: MutableCollection<out T>): Boolean {
-   var c_1: MutableCollection<out T> = c
+  override fun addAll(c: Collection<T>): Boolean {
+   var c_1: MutableCollection<out T> = c as MutableCollection<out T>
    c_1 = Collections.convertCollection(c_1)
-   return super<JavaAbstractCollection>.java_addAll(c_1)
+   return super<JavaAbstractCollection>.addAll(c_1 as Collection<T>)
   }
 
-  override fun java_containsAll(c: MutableCollection<*>): Boolean {
-   var c_1: MutableCollection<*> = c
+  override fun containsAll(c: Collection<T>): Boolean {
+   var c_1: MutableCollection<*> = c as MutableCollection<*>
    c_1 = Collections.convertCollection(c_1)
-   return super<JavaAbstractCollection>.java_containsAll(c_1)
+   return super<JavaAbstractCollection>.containsAll(c_1 as Collection<T>)
   }
 
-  override fun java_removeAll(c: MutableCollection<*>): Boolean {
-   var c_1: MutableCollection<*> = c
+  override fun removeAll(c: Collection<T>): Boolean {
+   var c_1: MutableCollection<*> = c as MutableCollection<*>
    c_1 = Collections.convertCollection(c_1)
-   return super<JavaAbstractCollection>.java_removeAll(c_1)
+   return super<JavaAbstractCollection>.removeAll(c_1 as Collection<T>)
   }
 
-  override fun java_retainAll(c: MutableCollection<*>): Boolean {
-   var c_1: MutableCollection<*> = c
+  override fun retainAll(c: Collection<T>): Boolean {
+   var c_1: MutableCollection<*> = c as MutableCollection<*>
    c_1 = Collections.convertCollection(c_1)
-   return super<JavaAbstractCollection>.java_retainAll(c_1)
+   return super<JavaAbstractCollection>.retainAll(c_1 as Collection<T>)
   }
  }
 
@@ -309,10 +311,10 @@ open class Collections {
     return 0
    }
 
-  override fun java_addAll(index: Int, c: MutableCollection<out T>): Boolean {
-   var c_1: MutableCollection<out T> = c
+  override fun addAll(index: Int, c: Collection<T>): Boolean {
+   var c_1: MutableCollection<out T> = c as MutableCollection<out T>
    c_1 = Collections.convertCollection(c_1)
-   return super<JavaAbstractList>.java_addAll(index, c_1)
+   return super<JavaAbstractList>.addAll(index, c_1 as Collection<T>)
   }
 
   override fun indexOf(o: T): Int {
@@ -353,12 +355,12 @@ open class Collections {
    return super<JavaAbstractMap>.remove(key_1 as K)
   }
 
-  override fun java_remove(key: Any?, value: Any?): Boolean {
-   var key_1: Any? = key
+  override fun remove(key: K, value: V): Boolean {
    var value_1: Any? = value
+   var key_1: Any? = key
    key_1 = Collections.convert<Any?>(key_1)
    value_1 = Collections.convert<Any?>(value_1)
-   return super<JavaAbstractMap>.java_remove(key_1, value_1)
+   return super<JavaAbstractMap>.remove(key_1 as K, value_1 as V)
   }
 
   override fun get(key: K): V? {
@@ -373,10 +375,10 @@ open class Collections {
    return super<JavaAbstractMap>.java_getOrDefault(key_1, defaultValue)
   }
 
-  override fun java_putAll(m: MutableMap<out K, out V>) {
-   var m_1: MutableMap<out K, out V> = m
+  override fun putAll(m: Map<out K, V>) {
+   var m_1: MutableMap<out K, out V> = m as MutableMap<out K, out V>
    m_1 = Collections.convertMap(m_1)
-   super<JavaAbstractMap>.java_putAll(m_1)
+   super<JavaAbstractMap>.putAll(m_1 as Map<out K, V>)
   }
  }
 
@@ -432,12 +434,12 @@ open class Collections {
    return super<Collections.CustomMap>.remove(key_1 as String)
   }
 
-  override fun java_remove(key: Any?, value: Any?): Boolean {
-   var key_1: Any? = key
+  override fun remove(key: String, value: String): Boolean {
    var value_1: Any? = value
+   var key_1: Any? = key
    key_1 = Collections.convert<Any?>(key_1)
    value_1 = Collections.convert<Any?>(value_1)
-   return super<Collections.CustomMap>.java_remove(key_1, value_1)
+   return super<Collections.CustomMap>.remove(key_1 as String, value_1 as String)
   }
 
   override fun get(key: String): String? {

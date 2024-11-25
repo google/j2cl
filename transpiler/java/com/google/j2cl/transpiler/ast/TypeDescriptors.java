@@ -89,6 +89,14 @@ public class TypeDescriptors {
   public DeclaredTypeDescriptor javaUtilList;
   public DeclaredTypeDescriptor javaUtilObjects;
 
+  @Nullable
+  @QualifiedBinaryName("java.util.ReadonlyCollection")
+  public DeclaredTypeDescriptor javaUtilReadonlyCollection;
+
+  @Nullable
+  @QualifiedBinaryName("java.util.ReadonlyMap")
+  public DeclaredTypeDescriptor javaUtilReadonlyMap;
+
   public DeclaredTypeDescriptor javaUtilFunctionSupplier;
 
   @QualifiedBinaryName("java.util.function.BooleanSupplier")
@@ -712,4 +720,3 @@ public class TypeDescriptors {
     String value();
   }
 }
-
