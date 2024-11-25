@@ -60,7 +60,7 @@ public class TranspilerTester {
         .setClassPathArg("transpiler/javatests/com/google/j2cl/transpiler/jre_bundle_deploy.jar");
   }
 
-  /** Creates a new transpiler tester initialized with Kotlin defaults. */
+  /** Creates a new transpiler tester initialized with Kotlin (frontend) defaults. */
   public static TranspilerTester newTesterWithKotlinDefaults() {
     return newTester()
         .addArgs("-frontend", "KOTLIN")
@@ -75,6 +75,14 @@ public class TranspilerTester {
         .addArgs("-kotlincOptions", "-language-version=1.9")
         .setClassPathArg(
             "transpiler/javatests/com/google/j2cl/transpiler/ktstdlib_bundle_deploy.jar");
+  }
+
+  /** Creates a new transpiler tester initialized with Kotlin (backend) defaults. */
+  public static TranspilerTester newTesterWithJ2ktDefaults() {
+    return newTester()
+        .addArgs("-backend", "KOTLIN")
+        .setClassPathArg(
+            "transpiler/javatests/com/google/j2cl/transpiler/jre_bundle-j2kt_deploy.jar");
   }
 
   /** Creates a new transpiler tester initialized with WASM defaults. */

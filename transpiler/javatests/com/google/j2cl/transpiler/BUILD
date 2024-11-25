@@ -25,6 +25,13 @@ java_binary(
     runtime_deps = ["//jre/java:jre_bootclasspath"],
 )
 
+# A java_binary to create a merged jar of all deps of the standard runtime for Kotlin backend.
+java_binary(
+    name = "jre_bundle-j2kt",
+    create_executable = 0,
+    runtime_deps = ["//third_party/java/xplat/j2kt:jre_bootclasspath-j2kt"],
+)
+
 # A java_binary to create a merged jar of all deps of the standard runtime for Wasm.
 java_binary(
     name = "jre_bundle-j2wasm",
@@ -88,7 +95,7 @@ java_test(
 java_test(
     name = "J2ktRestrictionsCheckerTest",
     srcs = ["J2ktRestrictionsCheckerTest.java"],
-    data = [":jre_bundle_deploy.jar"],
+    data = [":jre_bundle-j2kt_deploy.jar"],
     deps = [
         ":TranspilerTester",
         "//third_party:junit",

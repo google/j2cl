@@ -156,8 +156,7 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
   }
 
   private TranspilerTester newTranspilerTester(String compilationUnitName, String... code) {
-    return TranspilerTester.newTesterWithDefaults()
-        .addArgs("-backend", "KOTLIN")
+    return TranspilerTester.newTesterWithJ2ktDefaults()
         .addCompilationUnit(compilationUnitName, code);
   }
 }
