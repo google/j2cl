@@ -74,6 +74,7 @@ import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.SwitchCase;
+import com.google.j2cl.transpiler.ast.SwitchExpression;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
 import com.google.j2cl.transpiler.ast.SynchronizedStatement;
 import com.google.j2cl.transpiler.ast.ThisReference;
@@ -89,6 +90,7 @@ import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.WhileStatement;
+import com.google.j2cl.transpiler.ast.YieldStatement;
 import com.google.j2cl.transpiler.frontend.common.AbstractCompilationUnitBuilder;
 import com.google.j2cl.transpiler.frontend.common.Nullability;
 import com.google.j2cl.transpiler.frontend.common.PackageInfoCache;
@@ -108,6 +110,7 @@ import com.sun.tools.javac.tree.JCTree.JCAssignOp;
 import com.sun.tools.javac.tree.JCTree.JCBinary;
 import com.sun.tools.javac.tree.JCTree.JCBlock;
 import com.sun.tools.javac.tree.JCTree.JCBreak;
+import com.sun.tools.javac.tree.JCTree.JCCase;
 import com.sun.tools.javac.tree.JCTree.JCCatch;
 import com.sun.tools.javac.tree.JCTree.JCClassDecl;
 import com.sun.tools.javac.tree.JCTree.JCCompilationUnit;
@@ -150,6 +153,7 @@ import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import javax.annotation.Nullable;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
@@ -456,7 +460,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   private SwitchStatement convertSwitch(JCSwitch switchStatement) {
-
     return SwitchStatement.newBuilder()
         .setSourcePosition(getSourcePosition(switchStatement))
         .setExpression(convertExpressionOrNull(switchStatement.getExpression()))
@@ -465,18 +468,19 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
                 .map(
                     caseClause ->
                         SwitchCase.newBuilder()
-                            .setCaseExpressions(convertExpressionToList(caseClause.getExpression()))
+                            .setCaseExpressions(convertCaseExpressions(caseClause))
                             .setStatements(convertStatements(caseClause.getStatements()))
                             .build())
                 .collect(toImmutableList()))
         .build();
   }
 
-  private List<Expression> convertExpressionToList(JCExpression expression) {
-    if (expression == null) {
+  // TODO(b/380880096): Remove the stripping once opensource has the proper dependency.
+  private List<Expression> convertCaseExpressions(JCCase caseClause) {
+    if (caseClause.getExpression() == null) {
       return ImmutableList.of();
     }
-    return ImmutableList.of(convertExpression(expression));
+    return ImmutableList.of(convertExpression(caseClause.getExpression()));
   }
 
   private ThrowStatement convertThrow(JCThrow statement) {
@@ -531,12 +535,13 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   private ReturnStatement convertReturn(JCReturn statement) {
-    // Grab the type of the return statement from the method declaration, not from the expression.
     return ReturnStatement.newBuilder()
         .setExpression(convertExpressionOrNull(statement.getExpression()))
         .setSourcePosition(getSourcePosition(statement))
         .build();
   }
+
+  // TODO(b/380880096): Remove the stripping once opensource has the proper dependency.
 
   private SynchronizedStatement convertSynchronized(JCSynchronized statement) {
     return SynchronizedStatement.newBuilder()
@@ -597,6 +602,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         return convertLabeledStatement((JCLabeledStatement) jcStatement);
       case RETURN:
         return convertReturn((JCReturn) jcStatement);
+      // TODO(b/380880096): Remove the stripping once opensource has the proper dependency.
       case SWITCH:
         return convertSwitch((JCSwitch) jcStatement);
       case THROW:
@@ -620,7 +626,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   private ImmutableList<Statement> convertStatements(List<JCStatement> statements) {
-    return statements.stream().map(this::convertStatement).collect(toImmutableList());
+    return statements.stream()
+        .map(this::convertStatement)
+        .filter(Predicates.notNull())
+        .collect(toImmutableList());
   }
 
   private SourcePosition getSourcePosition(JCTree node) {
@@ -800,31 +809,36 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
                 .map(variable -> createVariable((JCVariableDecl) variable, true))
                 .collect(toImmutableList()))
         .setStatements(
-            convertLambdaBody(
-                    expression.getBody(), functionalMethodDescriptor.getReturnTypeDescriptor())
-                .getStatements())
+            getBodyAsStatements(
+                expression.getBody(),
+                (e) ->
+                    TypeDescriptors.isPrimitiveVoid(
+                            functionalMethodDescriptor.getReturnTypeDescriptor())
+                        ? e.makeStatement(getSourcePosition(expression.getBody()))
+                        : ReturnStatement.newBuilder()
+                            .setExpression(e)
+                            .setSourcePosition(getSourcePosition(expression.getBody()))
+                            .build()))
         .setSourcePosition(getSourcePosition(expression))
         .build();
   }
 
-  // Lambda expression bodies can be either an Expression or a Statement
-  private Block convertLambdaBody(JCTree lambdaBody, TypeDescriptor returnTypeDescriptor) {
-    Block body;
-    if (lambdaBody.getKind() == Kind.BLOCK) {
-      body = convertBlock((JCBlock) lambdaBody);
-    } else {
-      checkArgument(lambdaBody instanceof JCExpression);
-      Expression lambdaMethodBody = convertExpression((JCExpression) lambdaBody);
-      Statement statement =
-          AstUtils.createReturnOrExpressionStatement(
-              getSourcePosition(lambdaBody), lambdaMethodBody, returnTypeDescriptor);
-      body =
-          Block.newBuilder()
-              .setSourcePosition(getSourcePosition(lambdaBody))
-              .setStatements(statement)
-              .build();
+  /**
+   * Converts a body of a lambda expression or a switch expression case.
+   *
+   * <p>These bodies can consist of a single expression or a statement.
+   */
+  private List<Statement> getBodyAsStatements(
+      JCTree body, Function<Expression, Statement> toStatementFunction) {
+    if (body.getKind() == Kind.BLOCK) {
+      return convertBlock((JCBlock) body).getStatements();
     }
-    return body;
+    // Handling for lambda and switch cases that have an expression or a single statement instead of
+    // a body.
+    return ImmutableList.of(
+        body instanceof JCExpression
+            ? toStatementFunction.apply(convertExpression((JCExpression) body))
+            : convertStatement((JCStatement) body));
   }
 
   /**
@@ -938,14 +952,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
       boolean isQualified = !typeDescriptor.isInterface();
       if (isQualified) {
-        // This is a qualified super call, targeting an outer class method.
         return new SuperReference(typeDescriptor, isQualified);
       }
-
-      // Call targeting a method in the super types, including superinterfaces.
       return new SuperReference(getCurrentType().getTypeDescriptor());
     }
-
     Expression qualifier;
     if (fieldAccess.sym instanceof VariableElement) {
       qualifier = convertExpression(expression);
@@ -1208,6 +1218,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         return convertNewClass((JCNewClass) jcExpression);
       case PARENTHESIZED:
         return convertParens((JCParens) jcExpression);
+      // TODO(b/380880096): Remove the stripping once opensource has the proper dependency.
       case TYPE_CAST:
         return convertCast((JCTypeCast) jcExpression);
       case BOOLEAN_LITERAL:
