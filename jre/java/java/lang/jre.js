@@ -75,8 +75,8 @@ jre.checkedMode =
     goog.define('jre.checkedMode', goog.DEBUG ? 'ENABLED' : 'DISABLED');
 jre.addSystemPropertyFromGoogDefine('jre.checkedMode', jre.checkedMode);
 
-
-goog.provide('jre.checks');
+/** @const */
+jre.checks = {};
 
 /** @define {string} */
 jre.checks.checkLevel = goog.define('jre.checks.checkLevel', 'NORMAL');
