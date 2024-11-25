@@ -789,9 +789,13 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   private InstanceOfExpression convertInstanceOf(JCInstanceOf expression) {
+    Variable patternVariable = null;
+    // TODO(b/380880096): Remove the stripping once opensource has the proper dependency.
+
     return InstanceOfExpression.newBuilder()
         .setSourcePosition(getSourcePosition(expression))
         .setExpression(convertExpression(expression.getExpression()))
+        .setPatternVariable(patternVariable)
         .setTestTypeDescriptor(environment.createTypeDescriptor(expression.getType().type))
         .build();
   }
@@ -1078,7 +1082,9 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   private List<Expression> convertArguments(
       MethodDescriptor methodDescriptor, List<JCExpression> argumentExpressions) {
     List<Expression> arguments =
-        argumentExpressions.stream().map(this::convertExpression).collect(toImmutableList());
+        argumentExpressions.stream()
+            .map(this::convertExpression)
+            .collect(toCollection(ArrayList::new));
 
     return AstUtils.maybePackageVarargs(methodDescriptor, arguments);
   }
@@ -1121,16 +1127,14 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
 
     VarSymbol varSymbol = (VarSymbol) symbol;
-    if (symbol.getKind() == ElementKind.LOCAL_VARIABLE
-        || symbol.getKind() == ElementKind.RESOURCE_VARIABLE
-        || symbol.getKind() == ElementKind.PARAMETER
-        || symbol.getKind() == ElementKind.EXCEPTION_PARAMETER) {
-      Variable variable = variableByVariableElement.get(symbol);
-      return variable.createReference();
+    if (symbol.getKind() == ElementKind.FIELD) {
+      FieldDescriptor fieldDescriptor =
+          environment.createFieldDescriptor(varSymbol, identifier.type);
+      return FieldAccess.newBuilder().setTarget(fieldDescriptor).build();
     }
 
-    FieldDescriptor fieldDescriptor = environment.createFieldDescriptor(varSymbol, identifier.type);
-    return FieldAccess.newBuilder().setTarget(fieldDescriptor).build();
+    Variable variable = variableByVariableElement.get(symbol);
+    return variable.createReference();
   }
 
   private static boolean isSuperConstructorCall(JCMethodInvocation methodInvocation) {
