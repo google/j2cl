@@ -994,32 +994,34 @@ class JavaEnvironment {
       return cachedTypeDescriptor;
     }
 
-    TypeDeclaration typeDeclaration = createDeclarationForType((TypeElement) classType.asElement());
+    TypeElement typeElement = (TypeElement) classType.asElement();
     DeclaredTypeDescriptor typeDescriptor =
-        typeDeclaration.toDescriptor(
-            createTypeArgumentDescriptors(
-                getTypeArguments(classType), typeDeclaration, inNullMarkedScope));
+        createDeclarationForType(typeElement)
+            .toDescriptor(
+                createTypeArgumentDescriptors(
+                    getTypeArguments(classType),
+                    getTypeParameters(typeElement),
+                    inNullMarkedScope));
     putTypeDescriptorInCache(inNullMarkedScope, classType, typeDescriptor);
     return typeDescriptor;
   }
 
   public ImmutableList<TypeDescriptor> createTypeArgumentDescriptors(
       List<? extends TypeMirror> typeMirrors,
-      TypeDeclaration typeDeclaration,
+      List<? extends TypeParameterElement> declaredTypeParameters,
       boolean inNullMarkedScope) {
     // TODO(b/246332093): Consider doing this in our type model after cleanup. Currently results in
     // an infinite recursion.
     return Streams.zip(
             typeMirrors.stream(),
-            typeDeclaration.getTypeParameterDescriptors().stream(),
-            (typeMirror, declaredTypeVariable) -> {
+            declaredTypeParameters.stream(),
+            (typeMirror, typeParameter) -> {
               if (typeMirror.getKind() == TypeKind.WILDCARD
-                  && isNullOrJavaLangObject(((WildcardType) typeMirror).getExtendsBound())
-                  && declaredTypeVariable != null) {
+                  && isNullOrJavaLangObject(((WildcardType) typeMirror).getExtendsBound())) {
                 // If this is a wildcard but the bound is not specified (or is Object), we might be
                 // able to get a tighter bound from the declaration.
-                return TypeVariable.createWildcardWithUpperBound(
-                    declaredTypeVariable.getUpperBoundTypeDescriptor());
+                return createWildcardTypeVariable(
+                    ((javax.lang.model.type.TypeVariable) typeParameter.asType()).getUpperBound());
               }
               return createTypeDescriptor(typeMirror, inNullMarkedScope);
             })
