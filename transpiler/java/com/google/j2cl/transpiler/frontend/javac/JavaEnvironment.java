@@ -588,6 +588,19 @@ class JavaEnvironment {
     DeclaredTypeDescriptor enclosingTypeDescriptor =
         createDeclaredTypeDescriptor(declarationMethodElement.getEnclosingElement().asType());
 
+    // TODO(b/380911302): Remove redundance in the creation of method descriptors.
+    // The enclosing type descriptor might be a subclass of the actual type descriptor, hence
+    // traverse the supertypes to find the actual enclosing type descriptor without loosing the
+    // parameterization.
+    DeclaredTypeDescriptor unparameterizedEnclosingTypeDescriptor =
+        createDeclaredTypeDescriptor(
+            ((MethodSymbol) declarationMethodElement).baseSymbol().getEnclosingElement().asType());
+    enclosingTypeDescriptor =
+        enclosingTypeDescriptor.getAllSuperTypesIncludingSelf().stream()
+            .filter(unparameterizedEnclosingTypeDescriptor::isSameBaseType)
+            .findFirst()
+            .get();
+
     MethodDescriptor declarationMethodDescriptor = null;
     List<? extends TypeMirror> parameterTypes = methodType.getParameterTypes();
     if (isSpecialized(
