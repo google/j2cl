@@ -317,8 +317,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   private Method.Builder newMethodBuilder(ExecutableElement methodElement) {
-    MethodDescriptor methodDescriptor =
-        environment.createDeclarationMethodDescriptor(methodElement);
+    MethodDescriptor methodDescriptor = environment.createMethodDescriptor(methodElement);
     return Method.newBuilder().setMethodDescriptor(methodDescriptor);
   }
 
@@ -871,14 +870,9 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           .build();
     }
 
-    com.sun.tools.javac.code.Type returnType =
-        methodSymbol.isConstructor()
-            ? methodSymbol.getEnclosingElement().asType()
-            : memberReference.referentType.getReturnType();
     MethodDescriptor targetMethodDescriptor =
         environment.createMethodDescriptor(
-            /* methodType= */ (ExecutableType) memberReference.referentType,
-            /* returnType= */ returnType,
+            /* methodType= */ memberReference.referentType.asMethodType(),
             /* declarationMethodElement= */ methodSymbol);
     Expression qualifier = convertExpressionOrNull(memberReference.getQualifierExpression());
     if (qualifier instanceof JavaScriptConstructorReference) {
@@ -985,14 +979,14 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             ? convertClassDeclaration(expression.getClassBody(), expression)
             : null;
 
-    MethodSymbol constructorBinding = (MethodSymbol) expression.constructor;
+    MethodSymbol constructorElement = (MethodSymbol) expression.constructor;
     DeclaredTypeDescriptor targetType = environment.createDeclaredTypeDescriptor(expression.type);
     MethodDescriptor constructorMethodDescriptor =
         environment.createMethodDescriptor(
             /* enclosingTypeDescriptor= */ targetType,
-            /* methodElement= */ (MethodSymbol)
-                constructorBinding.asMemberOf(expression.type, environment.internalTypes),
-            /* declarationMethodElement= */ constructorBinding);
+            /* methodType= */ (ExecutableType)
+                constructorElement.asMemberOf(expression.type, environment.internalTypes).asType(),
+            /* declarationMethodElement= */ constructorElement);
     Expression qualifier = convertExpressionOrNull(expression.getEnclosingExpression());
     List<Expression> arguments =
         convertArguments(constructorMethodDescriptor, expression.getArguments());
@@ -1033,13 +1027,12 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     MethodDescriptor methodDescriptor =
         environment.createMethodDescriptor(
-            /* methodType= */ (ExecutableType) methodInvocation.getMethodSelect().type,
-            /* returnType= */ methodInvocation.type,
+            /* methodType= */ methodInvocation.getMethodSelect().type.asMethodType(),
             /* declarationMethodElement= */ methodSymbol);
 
     if (methodDescriptor.isConstructor()
         && methodDescriptor.isMemberOf(TypeDescriptors.get().javaLangEnum)) {
-      // Fix inconsitencies in calls to JRE's Enum constructor calls. Enum constructor has 2
+      // Fix inconsistencies in calls to JRE's Enum constructor calls. Enum constructor has 2
       // implicit parameters (name and ordinal) that are added by a normalization pass. This removes
       // the parameter definition from the descriptor so that they are consistent.
       checkArgument(
@@ -1127,7 +1120,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
 
     VarSymbol varSymbol = (VarSymbol) symbol;
-    if (symbol.getKind() == ElementKind.FIELD) {
+    if (symbol.getKind() == ElementKind.FIELD || symbol.getKind() == ElementKind.ENUM_CONSTANT) {
       FieldDescriptor fieldDescriptor =
           environment.createFieldDescriptor(varSymbol, identifier.type);
       return FieldAccess.newBuilder().setTarget(fieldDescriptor).build();

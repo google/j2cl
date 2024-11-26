@@ -579,16 +579,23 @@ class JavaEnvironment {
    *
    * @param methodType an ExecutableType containing the (inferred) specialization of the method in a
    *     usage location.
-   * @param returnType the (inferred) specialized return type.
    * @param declarationMethodElement the method declaration.
    */
   MethodDescriptor createMethodDescriptor(
-      ExecutableType methodType, Type returnType, ExecutableElement declarationMethodElement) {
+      ExecutableType methodType, ExecutableElement declarationMethodElement) {
 
     DeclaredTypeDescriptor enclosingTypeDescriptor =
         createDeclaredTypeDescriptor(declarationMethodElement.getEnclosingElement().asType());
+    return createMethodDescriptor(enclosingTypeDescriptor, methodType, declarationMethodElement);
+  }
 
-    // TODO(b/380911302): Remove redundance in the creation of method descriptors.
+  /** Create a MethodDescriptor directly based on the given JavaC ExecutableElement. */
+  MethodDescriptor createMethodDescriptor(
+      DeclaredTypeDescriptor enclosingTypeDescriptor,
+      ExecutableType methodType,
+      ExecutableElement declarationMethodElement) {
+
+    // TODO(b/380911302): Remove redundancy in the creation of method descriptors.
     // The enclosing type descriptor might be a subclass of the actual type descriptor, hence
     // traverse the supertypes to find the actual enclosing type descriptor without loosing the
     // parameterization.
@@ -602,59 +609,13 @@ class JavaEnvironment {
             .get();
 
     MethodDescriptor declarationMethodDescriptor = null;
-    List<? extends TypeMirror> parameterTypes = methodType.getParameterTypes();
-    if (isSpecialized(
-        enclosingTypeDescriptor, declarationMethodElement, parameterTypes, returnType)) {
-      declarationMethodDescriptor = createDeclarationMethodDescriptor(declarationMethodElement);
-    }
-
-    TypeDescriptor returnTypeDescriptor =
-        applyReturnTypeNullabilityAnnotations(
-            createTypeDescriptorWithNullability(
-                returnType,
-                declarationMethodElement.getAnnotationMirrors(),
-                enclosingTypeDescriptor.getTypeDeclaration().isNullMarked()),
-            declarationMethodElement);
-
-    ImmutableList.Builder<TypeDescriptor> parametersBuilder = ImmutableList.builder();
-    for (int i = 0; i < parameterTypes.size(); i++) {
-      parametersBuilder.add(
-          applyParameterNullabilityAnnotations(
-              createTypeDescriptorWithNullability(
-                  parameterTypes.get(i),
-                  declarationMethodElement.getParameters().get(i).getAnnotationMirrors(),
-                  enclosingTypeDescriptor.getTypeDeclaration().isNullMarked()),
-              declarationMethodElement,
-              i));
-    }
-
-    // generate type parameters declared in the method.
-    return createDeclaredMethodDescriptor(
-        enclosingTypeDescriptor.toNullable(),
-        declarationMethodElement,
-        declarationMethodDescriptor,
-        parametersBuilder.build(),
-        returnTypeDescriptor);
-  }
-
-  /** Create a MethodDescriptor directly based on the given JavaC ExecutableElement. */
-  MethodDescriptor createMethodDescriptor(
-      DeclaredTypeDescriptor enclosingTypeDescriptor,
-      ExecutableElement methodElement,
-      ExecutableElement declarationMethodElement) {
-
-    MethodDescriptor declarationMethodDescriptor = null;
 
     ImmutableList<TypeMirror> parameters =
-        methodElement.getParameters().stream()
-            .map(VariableElement::asType)
-            .collect(toImmutableList());
+        methodType.getParameterTypes().stream().collect(toImmutableList());
 
-    TypeMirror returnType = methodElement.getReturnType();
+    TypeMirror returnType = methodType.getReturnType();
     if (isSpecialized(enclosingTypeDescriptor, declarationMethodElement, parameters, returnType)) {
-      declarationMethodDescriptor =
-          createDeclarationMethodDescriptor(
-              declarationMethodElement, enclosingTypeDescriptor.getDeclarationDescriptor());
+      declarationMethodDescriptor = createMethodDescriptor(declarationMethodElement);
     }
 
     TypeDescriptor returnTypeDescriptor =
@@ -686,16 +647,11 @@ class JavaEnvironment {
   }
 
   /** Create a MethodDescriptor directly based on the given JavaC ExecutableElement. */
-  MethodDescriptor createDeclarationMethodDescriptor(ExecutableElement methodElement) {
+  MethodDescriptor createMethodDescriptor(ExecutableElement methodElement) {
     DeclaredTypeDescriptor enclosingTypeDescriptor =
         createDeclaredTypeDescriptor(methodElement.getEnclosingElement().asType());
-    return createDeclarationMethodDescriptor(methodElement, enclosingTypeDescriptor);
-  }
-
-  /** Create a MethodDescriptor directly based on the given JavaC ExecutableElement. */
-  MethodDescriptor createDeclarationMethodDescriptor(
-      ExecutableElement methodElement, DeclaredTypeDescriptor enclosingTypeDescriptor) {
-    return createMethodDescriptor(enclosingTypeDescriptor, methodElement, methodElement);
+    return createMethodDescriptor(
+        enclosingTypeDescriptor, (ExecutableType) methodElement.asType(), methodElement);
   }
 
 
@@ -1181,7 +1137,7 @@ class JavaEnvironment {
                               || element.getKind() == ElementKind.CONSTRUCTOR)
                   .map(MethodSymbol.class::cast)
                   .collect(toImmutableList())) {
-            MethodDescriptor methodDescriptor = createDeclarationMethodDescriptor(methodElement);
+            MethodDescriptor methodDescriptor = createMethodDescriptor(methodElement);
             listBuilder.add(methodDescriptor);
           }
           return listBuilder.build();
@@ -1196,8 +1152,7 @@ class JavaEnvironment {
           // Get the actual abstract method from the frontend; which will return the unparameterized
           // declaration possibly from a supertype.
           var declaration =
-              createDeclarationMethodDescriptor(
-                  getFunctionalInterfaceMethodDecl(typeElement.asType()));
+              createMethodDescriptor(getFunctionalInterfaceMethodDecl(typeElement.asType()));
 
           if (declaration == null) {
             return null;
