@@ -16,16 +16,54 @@
 package synchronizedstatement;
 
 import javaemul.internal.annotations.KtDisabled;
+import javaemul.lang.J2ktMonitor;
 
 public class SynchronizedStatement {
+  private static int staticA;
+  private static int staticB;
+
   private int a;
   private int b;
 
-  public void main() {
+  private final J2ktMonitor j2ktMonitor = new J2ktMonitor();
+  private final J2ktMonitor customMonitor = new CustomMonitor();
+
+  public void testSynchronizedOnThis() {
     synchronized (this) {
       a++;
       b--;
     }
+  }
+
+  public void testSynchronizedOnJ2ktMonitor() {
+    synchronized (j2ktMonitor) {
+      a++;
+      b--;
+    }
+  }
+
+  public void testSynchronizedOnCustomMonitor() {
+    synchronized (customMonitor) {
+      a++;
+      b--;
+    }
+  }
+
+  public synchronized void testSynchronizedMethod() {
+    a++;
+    b--;
+  }
+
+  public static void testSynchronizedOnClass() {
+    synchronized (SynchronizedStatement.class) {
+      staticA++;
+      staticB--;
+    }
+  }
+
+  public static synchronized void testSynchronizedStaticMethod() {
+    staticA++;
+    staticB--;
   }
 
   public int testReturn() {
@@ -77,4 +115,6 @@ public class SynchronizedStatement {
   public static class ExtendsSynchronized extends SynchronizedStatement {
     synchronized void foo() {}
   }
+
+  public static class CustomMonitor extends J2ktMonitor {}
 }

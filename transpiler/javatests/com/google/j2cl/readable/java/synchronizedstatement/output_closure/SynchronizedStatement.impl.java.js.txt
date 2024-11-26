@@ -3,6 +3,10 @@ goog.module('synchronizedstatement.SynchronizedStatement$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+let J2ktMonitor = goog.forwardDeclare('javaemul.lang.J2ktMonitor$impl');
+let CustomMonitor = goog.forwardDeclare('synchronizedstatement.SynchronizedStatement.CustomMonitor$impl');
+
 class SynchronizedStatement extends j_l_Object {
  /** @protected @nodts */
  constructor() {
@@ -11,6 +15,10 @@ class SynchronizedStatement extends j_l_Object {
   this.f_a__synchronizedstatement_SynchronizedStatement_ = 0;
   /**@type {number} @nodts*/
   this.f_b__synchronizedstatement_SynchronizedStatement_ = 0;
+  /**@type {J2ktMonitor} @nodts*/
+  this.f_j2ktMonitor__synchronizedstatement_SynchronizedStatement_;
+  /**@type {J2ktMonitor} @nodts*/
+  this.f_customMonitor__synchronizedstatement_SynchronizedStatement_;
  }
  /** @nodts @return {!SynchronizedStatement} */
  static $create__() {
@@ -22,14 +30,51 @@ class SynchronizedStatement extends j_l_Object {
  /** @nodts */
  $ctor__synchronizedstatement_SynchronizedStatement__void() {
   this.$ctor__java_lang_Object__void();
+  this.$init__void_$p_synchronizedstatement_SynchronizedStatement();
  }
  /** @nodts */
- m_main__void() {
+ m_testSynchronizedOnThis__void() {
   {
    $Util.$synchronized(this);
    this.f_a__synchronizedstatement_SynchronizedStatement_ = this.f_a__synchronizedstatement_SynchronizedStatement_ + 1 | 0;
    this.f_b__synchronizedstatement_SynchronizedStatement_ = this.f_b__synchronizedstatement_SynchronizedStatement_ - 1 | 0;
   }
+ }
+ /** @nodts */
+ m_testSynchronizedOnJ2ktMonitor__void() {
+  {
+   $Util.$synchronized(this.f_j2ktMonitor__synchronizedstatement_SynchronizedStatement_);
+   this.f_a__synchronizedstatement_SynchronizedStatement_ = this.f_a__synchronizedstatement_SynchronizedStatement_ + 1 | 0;
+   this.f_b__synchronizedstatement_SynchronizedStatement_ = this.f_b__synchronizedstatement_SynchronizedStatement_ - 1 | 0;
+  }
+ }
+ /** @nodts */
+ m_testSynchronizedOnCustomMonitor__void() {
+  {
+   $Util.$synchronized(this.f_customMonitor__synchronizedstatement_SynchronizedStatement_);
+   this.f_a__synchronizedstatement_SynchronizedStatement_ = this.f_a__synchronizedstatement_SynchronizedStatement_ + 1 | 0;
+   this.f_b__synchronizedstatement_SynchronizedStatement_ = this.f_b__synchronizedstatement_SynchronizedStatement_ - 1 | 0;
+  }
+ }
+ /** @nodts */
+ m_testSynchronizedMethod__void() {
+  this.f_a__synchronizedstatement_SynchronizedStatement_ = this.f_a__synchronizedstatement_SynchronizedStatement_ + 1 | 0;
+  this.f_b__synchronizedstatement_SynchronizedStatement_ = this.f_b__synchronizedstatement_SynchronizedStatement_ - 1 | 0;
+ }
+ /** @nodts */
+ static m_testSynchronizedOnClass__void() {
+  SynchronizedStatement.$clinit();
+  {
+   $Util.$synchronized(Class.$get(SynchronizedStatement));
+   SynchronizedStatement.f_staticA__synchronizedstatement_SynchronizedStatement_ = SynchronizedStatement.f_staticA__synchronizedstatement_SynchronizedStatement_ + 1 | 0;
+   SynchronizedStatement.f_staticB__synchronizedstatement_SynchronizedStatement_ = SynchronizedStatement.f_staticB__synchronizedstatement_SynchronizedStatement_ - 1 | 0;
+  }
+ }
+ /** @nodts */
+ static m_testSynchronizedStaticMethod__void() {
+  SynchronizedStatement.$clinit();
+  SynchronizedStatement.f_staticA__synchronizedstatement_SynchronizedStatement_ = SynchronizedStatement.f_staticA__synchronizedstatement_SynchronizedStatement_ + 1 | 0;
+  SynchronizedStatement.f_staticB__synchronizedstatement_SynchronizedStatement_ = SynchronizedStatement.f_staticB__synchronizedstatement_SynchronizedStatement_ - 1 | 0;
  }
  /** @nodts @return {number} */
  m_testReturn__int() {
@@ -80,6 +125,11 @@ class SynchronizedStatement extends j_l_Object {
  m_intMethod__int_$p_synchronizedstatement_SynchronizedStatement() {
   return 0;
  }
+ /** @private @nodts */
+ $init__void_$p_synchronizedstatement_SynchronizedStatement() {
+  this.f_j2ktMonitor__synchronizedstatement_SynchronizedStatement_ = J2ktMonitor.$create__();
+  this.f_customMonitor__synchronizedstatement_SynchronizedStatement_ = CustomMonitor.$create__();
+ }
  /** @nodts */
  static $clinit() {
   SynchronizedStatement.$clinit = () =>{};
@@ -92,8 +142,16 @@ class SynchronizedStatement extends j_l_Object {
  }
  
  /** @nodts */
- static $loadModules() {}
+ static $loadModules() {
+  Class = goog.module.get('java.lang.Class$impl');
+  J2ktMonitor = goog.module.get('javaemul.lang.J2ktMonitor$impl');
+  CustomMonitor = goog.module.get('synchronizedstatement.SynchronizedStatement.CustomMonitor$impl');
+ }
 }
+/**@type {number} @nodts*/
+SynchronizedStatement.f_staticA__synchronizedstatement_SynchronizedStatement_ = 0;
+/**@type {number} @nodts*/
+SynchronizedStatement.f_staticB__synchronizedstatement_SynchronizedStatement_ = 0;
 $Util.$setClassMetadata(SynchronizedStatement, 'synchronizedstatement.SynchronizedStatement');
 
 exports = SynchronizedStatement;

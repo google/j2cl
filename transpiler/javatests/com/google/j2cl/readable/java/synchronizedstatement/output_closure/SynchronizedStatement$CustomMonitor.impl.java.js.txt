@@ -1,0 +1,40 @@
+goog.module('synchronizedstatement.SynchronizedStatement.CustomMonitor$impl');
+
+const J2ktMonitor = goog.require('javaemul.lang.J2ktMonitor$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class CustomMonitor extends J2ktMonitor {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!CustomMonitor} */
+ static $create__() {
+  CustomMonitor.$clinit();
+  let $instance = new CustomMonitor();
+  $instance.$ctor__synchronizedstatement_SynchronizedStatement_CustomMonitor__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__synchronizedstatement_SynchronizedStatement_CustomMonitor__void() {
+  this.$ctor__javaemul_lang_J2ktMonitor__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  CustomMonitor.$clinit = () =>{};
+  CustomMonitor.$loadModules();
+  J2ktMonitor.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof CustomMonitor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(CustomMonitor, 'synchronizedstatement.SynchronizedStatement$CustomMonitor');
+
+exports = CustomMonitor;
+
+//# sourceMappingURL=SynchronizedStatement$CustomMonitor.js.map

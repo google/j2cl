@@ -25,6 +25,8 @@ import kotlin.OptIn
 import kotlin.Suppress
 import kotlin.Unit
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.jvm.JvmStatic
+import kotlin.jvm.javaObjectType
 import kotlin.native.ObjCName
 import kotlin.run
 import kotlin.synchronized
@@ -35,8 +37,36 @@ open class SynchronizedStatement: J2ktMonitor() {
 
  private var b: Int = 0
 
- @ObjCName("main")
- open fun main() {
+ private val j2ktMonitor: J2ktMonitor? = J2ktMonitor()
+
+ private val customMonitor: J2ktMonitor? = SynchronizedStatement.CustomMonitor()
+
+ @ObjCName("testSynchronizedOnThis")
+ open fun testSynchronizedOnThis() {
+  synchronized<Unit>(this) {
+   this.a = this.a + 1
+   this.b = this.b - 1
+  }
+ }
+
+ @ObjCName("testSynchronizedOnJ2ktMonitor")
+ open fun testSynchronizedOnJ2ktMonitor() {
+  synchronized<Unit>(this.j2ktMonitor!!) {
+   this.a = this.a + 1
+   this.b = this.b - 1
+  }
+ }
+
+ @ObjCName("testSynchronizedOnCustomMonitor")
+ open fun testSynchronizedOnCustomMonitor() {
+  synchronized<Unit>(this.customMonitor!!) {
+   this.a = this.a + 1
+   this.b = this.b - 1
+  }
+ }
+
+ @ObjCName("testSynchronizedMethod")
+ open fun testSynchronizedMethod() {
   synchronized<Unit>(this) {
    this.a = this.a + 1
    this.b = this.b - 1
@@ -88,10 +118,38 @@ open class SynchronizedStatement: J2ktMonitor() {
   return 0
  }
 
+ @ObjCName("J2ktSynchronizedstatementSynchronizedStatementCompanion", exact = true)
+ companion object {
+  private var staticA: Int = 0
+
+  private var staticB: Int = 0
+
+  @JvmStatic
+  @ObjCName("testSynchronizedOnClass")
+  fun testSynchronizedOnClass() {
+   synchronized<Unit>(SynchronizedStatement::class.javaObjectType) {
+    SynchronizedStatement.staticA = SynchronizedStatement.staticA + 1
+    SynchronizedStatement.staticB = SynchronizedStatement.staticB - 1
+   }
+  }
+
+  @JvmStatic
+  @ObjCName("testSynchronizedStaticMethod")
+  fun testSynchronizedStaticMethod() {
+   synchronized<Unit>(SynchronizedStatement::class.javaObjectType) {
+    SynchronizedStatement.staticA = SynchronizedStatement.staticA + 1
+    SynchronizedStatement.staticB = SynchronizedStatement.staticB - 1
+   }
+  }
+ }
+
  @ObjCName("J2ktSynchronizedstatementSynchronizedStatement_ExtendsSynchronized", exact = true)
  open class ExtendsSynchronized: SynchronizedStatement() {
   internal open fun foo_pp_synchronizedstatement() {
    synchronized<Unit>(this) {}
   }
  }
+
+ @ObjCName("J2ktSynchronizedstatementSynchronizedStatement_CustomMonitor", exact = true)
+ open class CustomMonitor: J2ktMonitor() {}
 }
