@@ -36,8 +36,10 @@ abstract class SourceMap<T extends Number> implements Comparator<T> {
   {
     if (uninitializedInstanceField == 1000) {
       uninitializedInstanceField2 = "Hello!";
-    } else {
+    } else if (uninitializedInstanceField == 2000) {
       uninitializedInstanceField2 = "World!";
+    } else {
+      uninitializedInstanceField2 = "Universe!";
     }
   }
 
