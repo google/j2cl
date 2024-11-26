@@ -17,9 +17,11 @@ package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.common.collect.ImmutableList;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -63,7 +65,7 @@ public class Library extends Node {
   }
 
   public static Library newEmpty() {
-    return new Builder().build();
+    return new Builder().setCompilationUnits(ImmutableList.of()).build();
   }
 
   public static Builder newBuilder() {
@@ -81,7 +83,7 @@ public class Library extends Node {
 
     @CanIgnoreReturnValue
     public Builder setCompilationUnits(List<CompilationUnit> compilationUnits) {
-      this.compilationUnits = compilationUnits;
+      this.compilationUnits = new ArrayList<>(compilationUnits);
       return this;
     }
 
