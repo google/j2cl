@@ -191,7 +191,7 @@ open class Main {
    val arrayWithNull: Array<Main.IntJsEnum?>? = arrayOf<Main.IntJsEnum?>(null)
    arrayWithNull!![0] = null
    val list: MutableList<Main.IntJsEnum?>? = ArrayList<Main.IntJsEnum>() as MutableList<Main.IntJsEnum?>?
-   obj = list!!.java_toArray()
+   obj = list!!.toArray()
    Main.nonNativeJsEnumVarargs(Main.IntJsEnum.MINUSONE, Main.IntJsEnum.TWENTY)
    Main.nonNativeJsEnumArrayVarargs(arrayOf<Main.IntJsEnum?>(Main.IntJsEnum.MINUSONE), arrayOf<Main.IntJsEnum?>(Main.IntJsEnum.TWENTY))
    Main.tVarargs<Main.IntJsEnum?>(Main.IntJsEnum.MINUSONE, Main.IntJsEnum.TWENTY)
