@@ -10,7 +10,8 @@ package(
 
 readable_example(
     srcs = glob(["*.java"]),
-    generate_kt_readables = False,  # @JsAsync not supported in Kotlin.
+    generate_kt_readables = False,  # JS only APIs.
+    generate_kt_web_readables = True,
     generate_wasm_readables = False,  # @JsAsync not supported in WASM.
     deps = ["//third_party:jsinterop-annotations-j2cl"],
 )

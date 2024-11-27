@@ -1,0 +1,149 @@
+// Generated from "jsasync/Main.java"
+@file:OptIn(ExperimentalObjCName::class)
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN")
+
+package jsasync
+
+import javaemul.lang.*
+import java.lang.Integer
+import java.lang.Void
+import jsinterop.annotations.JsAsync
+import jsinterop.annotations.JsFunction
+import jsinterop.annotations.JsMethod
+import jsinterop.annotations.JsPackage
+import jsinterop.annotations.JsType
+import kotlin.Int
+import kotlin.OptIn
+import kotlin.Suppress
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
+
+@ObjCName("J2ktJsasyncMain", exact = true)
+open class Main {
+ private val x: Main.IThenable<Int?>? = Main.Promise.resolve<Int?>(Integer.valueOf(10))
+
+ @JsAsync
+ internal open fun emptyAsyncMethod_pp_jsasync(): Main.IThenable<Void?>? {
+  return null
+ }
+
+ @JsAsync
+ internal open fun asyncMethod_pp_jsasync(): Main.IThenable<Int?>? {
+  val result: Int = Main.await<Int?>(Main.Promise.resolve<Int?>(Integer.valueOf(7)))!!.toInt()
+  return this.parametricAsyncMethod_pp_jsasync<Int?>(Integer.valueOf(result))
+ }
+
+ @JsAsync
+ internal open fun <T> parametricAsyncMethod_pp_jsasync(value: T): Main.IThenable<T>? {
+  return Main.Promise.resolve<T>(Main.await<T>(Main.Promise.resolve<T>(value)))
+ }
+
+ internal open fun testAsyncLambdas_pp_jsasync() {
+  val i: Main.AsyncInterface? = Main.AsyncInterface {
+   return@AsyncInterface Main.Promise.resolve<Int?>(Main.await<Int?>(Main.Promise.resolve<Int?>(Integer.valueOf(5))))
+  }
+  val o: Main.BaseInterface? = object : Main.BaseInterface {
+   @JsAsync
+   override fun asyncCall(): Main.IThenable<Int?>? {
+    return Main.Promise.resolve<Int?>(Main.await<Int?>(this@Main.x))
+   }
+  }
+  val j: Main.AsyncJsFunctionInterface? = Main.AsyncJsFunctionInterface {
+   return@AsyncJsFunctionInterface Main.Promise.resolve<Int?>(Main.await<Int?>(Main.Promise.resolve<Int?>(Integer.valueOf(5))))
+  }
+  val optimizableJsFunction: Main.JsFunctionInterface? = object : Main.JsFunctionInterface {
+   @JsAsync
+   override fun doSomething(): Main.IThenable<Int?>? {
+    return Main.Promise.resolve<Int?>(Main.await<Int?>(this@Main.x))
+   }
+  }
+  val unoptimizableJsFunction: Main.JsFunctionInterface? = object : Main.JsFunctionInterface {
+   @JsAsync
+   override fun doSomething(): Main.IThenable<Int?>? {
+    val tmp: Main.JsFunctionInterface? = this
+    return Main.Promise.resolve<Int?>(Main.await<Int?>(this@Main.x))
+   }
+  }
+ }
+
+ @ObjCName("J2ktJsasyncMainCompanion", exact = true)
+ companion object {
+  @JvmStatic
+  @JsAsync
+  internal fun staticAsyncMethod_pp_jsasync(): Main.IThenable<Void?>? {
+   return Main.Promise.resolve<Void?>(Main.await<Void?>(Main.Promise.resolve<Void?>(null as Void?)))
+  }
+
+  @JvmStatic
+  @JsMethod(namespace = JsPackage.GLOBAL)
+  private external fun <T> await(thenable: Main.IThenable<T>?): T
+ }
+
+ @ObjCName("J2ktJsasyncMain_BaseInterface", exact = true)
+ fun interface BaseInterface {
+  @ObjCName("asyncCall")
+  fun asyncCall(): Main.IThenable<Int?>?
+ }
+
+ @ObjCName("J2ktJsasyncMain_AsyncInterface", exact = true)
+ fun interface AsyncInterface: Main.BaseInterface {
+  @JsAsync
+  override fun asyncCall(): Main.IThenable<Int?>?
+ }
+
+ @ObjCName("J2ktJsasyncMain_InterfaceWithAsyncDefaultMethod", exact = true)
+ interface InterfaceWithAsyncDefaultMethod {
+  @ObjCName("asyncCall")
+  @JsAsync
+  fun asyncCall(): Main.IThenable<Int?>? {
+   return Main.Promise.resolve<Int?>(Main.await<Int?>(Main.Promise.resolve<Int?>(Integer.valueOf(5))))
+  }
+ }
+
+ @ObjCName("J2ktJsasyncMain_JsFunctionInterface", exact = true)
+ @JsFunction
+ fun interface JsFunctionInterface {
+  @ObjCName("doSomething")
+  fun doSomething(): Main.IThenable<Int?>?
+ }
+
+ @ObjCName("J2ktJsasyncMain_AsyncJsFunctionInterface", exact = true)
+ @JsFunction
+ fun interface AsyncJsFunctionInterface {
+  @ObjCName("doSomething")
+  @JsAsync
+  fun doSomething(): Main.IThenable<Int?>?
+ }
+
+ @ObjCName("J2ktJsasyncMain_IThenable", exact = true)
+ @JsType(namespace = JsPackage.GLOBAL, isNative = true)
+ interface IThenable<T> {}
+
+ @ObjCName("J2ktJsasyncMain_Promise", exact = true)
+ @JsType(namespace = JsPackage.GLOBAL, isNative = true)
+ open class Promise<T> internal constructor(): Main.IThenable<T> {
+  @ObjCName("J2ktJsasyncMain_PromiseCompanion", exact = true)
+  companion object {
+   @JvmStatic
+   @ObjCName("resolve")
+   external fun <T> resolve(
+    @ObjCName("withId") value: T
+   ): Main.Promise<T>?
+  }
+ }
+}

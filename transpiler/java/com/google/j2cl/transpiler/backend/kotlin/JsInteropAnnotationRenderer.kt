@@ -53,11 +53,7 @@ internal data class JsInteropAnnotationRenderer(val nameRenderer: NameRenderer) 
       .ifEmpty { jsOverlayAnnotationSource(field.descriptor) }
 
   fun jsInteropAnnotationsSource(method: Method): Source =
-    jsPropertyAnnotationSource(method)
-      .ifEmpty { jsMethodAnnotationSource(method) }
-      .ifEmpty { jsConstructorAnnotationSource(method.descriptor) }
-      .ifEmpty { jsIgnoreAnnotationSource(method.descriptor) }
-      .ifEmpty { jsOverlayAnnotationSource(method.descriptor) }
+    jsAsyncAnnotationSource(method) + jsMemberAnnotationSource(method)
 
   fun jsInteropAnnotationsSource(parameterDescriptor: ParameterDescriptor): Source =
     parameterDescriptor
@@ -66,6 +62,13 @@ internal data class JsInteropAnnotationRenderer(val nameRenderer: NameRenderer) 
         annotation(nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsOptional"))
       }
       .orEmpty()
+
+  private fun jsMemberAnnotationSource(method: Method): Source =
+    jsPropertyAnnotationSource(method)
+      .ifEmpty { jsMethodAnnotationSource(method) }
+      .ifEmpty { jsConstructorAnnotationSource(method.descriptor) }
+      .ifEmpty { jsIgnoreAnnotationSource(method.descriptor) }
+      .ifEmpty { jsOverlayAnnotationSource(method.descriptor) }
 
   private fun jsPropertyAnnotationSource(member: Member): Source =
     member
@@ -101,6 +104,14 @@ internal data class JsInteropAnnotationRenderer(val nameRenderer: NameRenderer) 
     method.descriptor
       .takeIf { it.isJsMethod }
       ?.let { jsInteropAnnotationSource(method, "jsinterop.annotations.JsMethod") }
+      .orEmpty()
+
+  private fun jsAsyncAnnotationSource(method: Method): Source =
+    method
+      .takeIf { it.descriptor.isJsAsync }
+      ?.let {
+        annotation(nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsAsync"))
+      }
       .orEmpty()
 
   /**

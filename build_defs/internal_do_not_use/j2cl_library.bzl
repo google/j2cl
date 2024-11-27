@@ -67,6 +67,9 @@ _J2KT_WEB_PACKAGES = [
 ]
 
 _J2KT_WEB_DISABLED_TARGETS = [
+    # Defines the special "await" method that is well-known to J2CL. This doesn't
+    # come through J2KT cleanly and will generate invalid code.
+    "//transpiler/javatests/com/google/j2cl/integration/java/jsasync:promise-j2cl",
 ]
 
 # Packages that j2cl rule will generate j2kt native packages by default. Used to simplify test

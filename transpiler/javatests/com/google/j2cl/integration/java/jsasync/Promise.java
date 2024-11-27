@@ -20,9 +20,9 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 @JsType(isNative = true, namespace = JsPackage.GLOBAL)
-class Promise<T> {
+public class Promise<T> {
   public static native <T> Promise<T> resolve(T value);
 
   @JsMethod(namespace = JsPackage.GLOBAL)
-  static native <T> T await(Promise<T> thenable);
+  public static native <T> T await(Promise<T> thenable);
 }
