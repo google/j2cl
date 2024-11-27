@@ -91,6 +91,7 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.getTypeSubstitutionMap
 import com.google.j2cl.transpiler.frontend.kotlin.ir.hasVoidReturn
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isAdaptedFunctionReference
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isClinit
+import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsAsync
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isSuperCall
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isSynthetic
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isUnitInstanceReference
@@ -1342,6 +1343,7 @@ class CompilationUnitBuilder(
     typeDescriptor: TypeDescriptor,
     irFunctionExpression: IrFunctionExpression,
   ): FunctionExpression {
+    check(typeDescriptor.isFunctionalInterface)
     val irFunction = irFunctionExpression.function
     val parameters = irFunction.getParameters().map(this::createVariable)
     val body =
@@ -1350,6 +1352,7 @@ class CompilationUnitBuilder(
 
     return FunctionExpression.newBuilder()
       .setTypeDescriptor(typeDescriptor)
+      .setJsAsync(typeDescriptor.functionalInterface!!.singleAbstractMethodDescriptor!!.isJsAsync)
       .setParameters(parameters)
       .setStatements(body.statements)
       .setSourcePosition(getSourcePosition(irFunction))

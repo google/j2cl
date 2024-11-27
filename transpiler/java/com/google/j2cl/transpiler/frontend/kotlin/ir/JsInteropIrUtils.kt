@@ -147,7 +147,7 @@ val IrClass.isJsFunction: Boolean
 val IrClass.isJsType: Boolean
   get() = findJsinteropAnnotation(JS_TYPE_ANNOTATION_FQ_NAME) != null
 
-private val IrFunction.isJsAsync: Boolean
+val IrFunction.isJsAsync: Boolean
   get() = findJsinteropAnnotation(JS_ASYNC_ANNOTATION_FQ_NAME) != null
 
 val IrClass.isJsEnum: Boolean
@@ -191,10 +191,10 @@ private val IrDeclaration.isJsOverlay: Boolean
     }
 
 fun IrDeclaration.getJsInfo(): JsInfo =
-  // TODO(b/225908831): Handle JsAsync
   JsInfo.newBuilder()
     .setJsMemberType(getJsMemberType())
     .setJsOverlay(isJsOverlay)
+    .setJsAsync(this is IrFunction && isJsAsync)
     .apply {
       if (isJsMember()) {
         getJsMemberAnnotationInfo()?.let {
