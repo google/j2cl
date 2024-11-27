@@ -10,8 +10,7 @@ package(
 
 readable_example(
     srcs = glob(["*.java"]),
-    # @JsAsync not supported in Kotlin.
-    generate_kt_readables = False,
-    generate_wasm_readables = False,  # JS varargs is not supported in Wasm.
+    generate_kt_readables = False,  # @JsAsync not supported in Kotlin.
+    generate_wasm_readables = False,  # @JsAsync not supported in WASM.
     deps = ["//third_party:jsinterop-annotations-j2cl"],
 )
