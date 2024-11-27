@@ -21,8 +21,8 @@ package j2kt
 import javaemul.lang.*
 import java.lang.IndexOutOfBoundsException
 import java.lang.RuntimeException
-import javaemul.lang.JavaAbstractCollection
-import javaemul.lang.JavaAbstractList
+import java.util.AbstractCollection
+import java.util.AbstractList
 import javaemul.lang.JavaAbstractMap
 import kotlin.Any
 import kotlin.Boolean
@@ -253,7 +253,7 @@ open class Collections {
  }
 
  @ObjCName("J2ktJ2ktCollections_CustomCollection", exact = true)
- open class CustomCollection<T>: JavaAbstractCollection<T>() {
+ open class CustomCollection<T>: AbstractCollection<T>() {
   override fun iterator(): MutableIterator<T> {
    throw RuntimeException()
   }
@@ -266,42 +266,42 @@ open class Collections {
   override fun contains(o: T): Boolean {
    var o_1: Any? = o
    o_1 = Collections.convert<Any?>(o_1)
-   return super<JavaAbstractCollection>.contains(o_1 as T)
+   return super<AbstractCollection>.contains(o_1 as T)
   }
 
   override fun remove(o: T): Boolean {
    var o_1: Any? = o
    o_1 = Collections.convert<Any?>(o_1)
-   return super<JavaAbstractCollection>.remove(o_1 as T)
+   return super<AbstractCollection>.remove(o_1 as T)
   }
 
   override fun addAll(c: Collection<T>): Boolean {
    var c_1: MutableCollection<out T> = c as MutableCollection<out T>
    c_1 = Collections.convertCollection(c_1)
-   return super<JavaAbstractCollection>.addAll(c_1 as Collection<T>)
+   return super<AbstractCollection>.addAll(c_1 as Collection<T>)
   }
 
   override fun containsAll(c: Collection<T>): Boolean {
    var c_1: MutableCollection<*> = c as MutableCollection<*>
    c_1 = Collections.convertCollection(c_1)
-   return super<JavaAbstractCollection>.containsAll(c_1 as Collection<T>)
+   return super<AbstractCollection>.containsAll(c_1 as Collection<T>)
   }
 
   override fun removeAll(c: Collection<T>): Boolean {
    var c_1: MutableCollection<*> = c as MutableCollection<*>
    c_1 = Collections.convertCollection(c_1)
-   return super<JavaAbstractCollection>.removeAll(c_1 as Collection<T>)
+   return super<AbstractCollection>.removeAll(c_1 as Collection<T>)
   }
 
   override fun retainAll(c: Collection<T>): Boolean {
    var c_1: MutableCollection<*> = c as MutableCollection<*>
    c_1 = Collections.convertCollection(c_1)
-   return super<JavaAbstractCollection>.retainAll(c_1 as Collection<T>)
+   return super<AbstractCollection>.retainAll(c_1 as Collection<T>)
   }
  }
 
  @ObjCName("J2ktJ2ktCollections_CustomList", exact = true)
- open class CustomList<T>: JavaAbstractList<T>() {
+ open class CustomList<T>: AbstractList<T>() {
   override fun get(index: Int): T {
    throw IndexOutOfBoundsException()
   }
@@ -314,19 +314,19 @@ open class Collections {
   override fun addAll(index: Int, c: Collection<T>): Boolean {
    var c_1: MutableCollection<out T> = c as MutableCollection<out T>
    c_1 = Collections.convertCollection(c_1)
-   return super<JavaAbstractList>.addAll(index, c_1 as Collection<T>)
+   return super<AbstractList>.addAll(index, c_1 as Collection<T>)
   }
 
   override fun indexOf(o: T): Int {
    var o_1: Any? = o
    o_1 = Collections.convert<Any?>(o_1)
-   return super<JavaAbstractList>.indexOf(o_1 as T)
+   return super<AbstractList>.indexOf(o_1 as T)
   }
 
   override fun lastIndexOf(o: T): Int {
    var o_1: Any? = o
    o_1 = Collections.convert<Any?>(o_1)
-   return super<JavaAbstractList>.lastIndexOf(o_1 as T)
+   return super<AbstractList>.lastIndexOf(o_1 as T)
   }
  }
 

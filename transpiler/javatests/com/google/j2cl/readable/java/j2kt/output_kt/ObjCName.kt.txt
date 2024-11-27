@@ -19,10 +19,10 @@
 package j2kt
 
 import javaemul.lang.*
+import java.util.AbstractList
 import java.util.HashMap
 import java.util.LinkedList
 import java.util.StringJoiner
-import javaemul.lang.JavaAbstractList
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Byte
@@ -535,7 +535,7 @@ open class ObjCName {
  }
 
  @kotlin.native.ObjCName("J2ktNewObjCName_SubCollection", exact = true)
- open class SubCollection<E>: JavaAbstractList<E>() {
+ open class SubCollection<E>: AbstractList<E>() {
   override fun get(index: Int): E {
    return null as E
   }

@@ -19,14 +19,14 @@
 package nativekttypes
 
 import javaemul.lang.*
+import java.util.AbstractCollection
+import java.util.AbstractList
 import java.util.AbstractMap
+import java.util.AbstractSet
 import kotlin.Any
 import kotlin.Comparable
 import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.collections.AbstractMutableCollection
-import kotlin.collections.AbstractMutableList
-import kotlin.collections.AbstractMutableSet
 import kotlin.collections.MutableCollection
 import kotlin.collections.MutableIterable
 import kotlin.collections.MutableIterator
@@ -64,11 +64,11 @@ class BoundsWithVariance internal constructor() {
 
  internal fun <E: Any> accept_pp_nativekttypes(o: MutableSet<out E>) {}
 
- internal fun <E: Any> accept_pp_nativekttypes(o: AbstractMutableCollection<out E>) {}
+ internal fun <E: Any> accept_pp_nativekttypes(o: AbstractCollection<out E>) {}
 
- internal fun <E: Any> accept_pp_nativekttypes(o: AbstractMutableList<out E>) {}
+ internal fun <E: Any> accept_pp_nativekttypes(o: AbstractList<out E>) {}
 
- internal fun <E: Any> accept_pp_nativekttypes(o: AbstractMutableSet<out E>) {}
+ internal fun <E: Any> accept_pp_nativekttypes(o: AbstractSet<out E>) {}
 
  internal fun <K: Any, V: Any> accept_pp_nativekttypes(o: MutableMap<in K, out V>) {}
 
