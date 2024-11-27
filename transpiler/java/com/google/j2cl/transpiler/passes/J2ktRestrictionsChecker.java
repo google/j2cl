@@ -43,25 +43,22 @@ public final class J2ktRestrictionsChecker {
     library.accept(
         new AbstractVisitor() {
           @Override
-          public boolean enterMethod(Method method) {
+          public void exitMethod(Method method) {
             checkNotGenericConstructor(method);
             checkReferencedTypeVisibilities(method);
             checkKtProperty(method);
-            return true;
           }
 
           @Override
-          public boolean enterField(Field field) {
+          public void exitField(Field field) {
             checkReferencedTypeVisibilities(field);
-            return true;
           }
 
           @Override
-          public boolean enterType(Type type) {
+          public void exitType(Type type) {
             checkNullMarked(type);
             checkSuperTypeVisibilities(type);
             checkInterfaceTypeVisibilities(type);
-            return true;
           }
 
           private void checkNotGenericConstructor(Method method) {
