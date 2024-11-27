@@ -11,6 +11,4 @@ package(
 integration_test(
     name = "jsconstructor",
     srcs = glob(["*.java"]),
-    # TODO: b/316920865 - Enable when JsConstructor is properly propagated.
-    enable_kt_web = False,
 )
