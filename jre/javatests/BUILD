@@ -2,9 +2,8 @@
 #   j2cl/jre: JRE subset for transpilation.
 
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
-load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_binary")
 load("//build_defs:rules.bzl", "j2cl_library", "j2cl_test", "j2kt_native_library", "j2wasm_test")
-load("//third_party/bazel_rules/rules_closure/closure:defs.bzl", "closure_js_binary")
+load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_binary")
 load("@rules_java//java:defs.bzl", "java_library")
 load(":j2cl_multi_test.bzl", "j2cl_multi_test")
 
