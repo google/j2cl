@@ -86,6 +86,7 @@ def j2cl_web_test(
         name,
         src,
         deps,
+        compile,
         browsers,
         data,
         test_class,
@@ -134,10 +135,17 @@ def j2cl_web_test(
     if default_browser and not browsers:
         browsers = [default_browser]
 
+    # If no browsers are specified, force compilation of the test.
+    # No browser means Phantomjs and Phantomjs doesn't work in bundle mode.
+    # This is hacky but the least disrubtive way to start honoring the flag.
+    if not browsers:
+        compile = True
+
     closure_js_test(
         name = name,
         srcs = [":%s" % testsuite_file_name],
         deps = deps,
+        compilation_level = "ADVANCED" if compile else "BUNDLE",
         browsers = browsers,
         data = data,
         testonly = 1,
