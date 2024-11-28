@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.j2cl.transpiler.ast.J2ktAstUtils.isSubtypeOfJ2ktMonitor;
+import static com.google.j2cl.transpiler.ast.J2ktAstUtils.isValidSynchronizedStatementExpressionTypeDescriptor;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid;
 
 import com.google.common.collect.ImmutableList;
@@ -29,10 +31,12 @@ import com.google.j2cl.transpiler.ast.Member;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.SynchronizedStatement;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Visibility;
 
 /** Checks and throws errors for constructs which can not be transpiled to Kotlin. */
@@ -59,6 +63,12 @@ public final class J2ktRestrictionsChecker {
             checkNullMarked(type);
             checkSuperTypeVisibilities(type);
             checkInterfaceTypeVisibilities(type);
+            checkSynchronizedMethods(type);
+          }
+
+          @Override
+          public void exitSynchronizedStatement(SynchronizedStatement synchronizedStatement) {
+            checkSynchronizedStatement(synchronizedStatement);
           }
 
           private void checkNotGenericConstructor(Method method) {
@@ -190,6 +200,48 @@ public final class J2ktRestrictionsChecker {
               }
             }
           }
+
+          private void checkSynchronizedMethods(Type type) {
+            boolean hasSynchronizedMethods =
+                type.getMethods().stream().anyMatch(it -> it.getDescriptor().isSynchronized());
+            if (!hasSynchronizedMethods) {
+              return;
+            }
+
+            if (isSubtypeOfJ2ktMonitor(type.getTypeDescriptor())) {
+              return;
+            }
+
+            problems.error(
+                type.getSourcePosition(),
+                "Type '%s' does not support synchronized methods as it does not extend '%s' or is"
+                    + " not a direct subclass of '%s'.",
+                type.getReadableDescription(),
+                TypeDescriptors.get().javaemulLangJ2ktMonitor.getReadableDescription(),
+                TypeDescriptors.get().javaLangObject.getReadableDescription());
+          }
+
+          private void checkSynchronizedStatement(SynchronizedStatement synchronizedStatement) {
+            TypeDescriptor expressionTypeDescriptor =
+                synchronizedStatement.getExpression().getTypeDescriptor();
+            if (isValidSynchronizedStatementExpressionTypeDescriptor(expressionTypeDescriptor)) {
+              return;
+            }
+
+            // TODO(b/381246369): Remove this check when the bug is fixed.
+            if (isInstanceOf(expressionTypeDescriptor, "com.google.common.base.XplatMonitor")) {
+              return;
+            }
+
+            problems.error(
+                synchronizedStatement.getSourcePosition(),
+                "Synchronized statement is valid only on instances of '%s' or '%s'.",
+                TypeDescriptors.get().javaLangClass.toRawTypeDescriptor().getReadableDescription(),
+                TypeDescriptors.get()
+                    .javaemulLangJ2ktMonitor
+                    .toRawTypeDescriptor()
+                    .getReadableDescription());
+          }
         });
   }
 
@@ -265,5 +317,15 @@ public final class J2ktRestrictionsChecker {
     return sourceFilePath != null
         && (sourceFilePath.contains("javatests/com/google/j2cl/integration")
             || sourceFilePath.contains("javatests/com/google/j2cl/readable"));
+  }
+
+  private static boolean isInstanceOf(TypeDescriptor typeDescriptor, String qualifiedSourceName) {
+    if (typeDescriptor instanceof DeclaredTypeDescriptor) {
+      DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
+      return declaredTypeDescriptor.getTypeDeclaration().getAllSuperTypesIncludingSelf().stream()
+          .map(TypeDeclaration::getQualifiedSourceName)
+          .anyMatch(it -> it.equals(qualifiedSourceName));
+    }
+    return false;
   }
 }

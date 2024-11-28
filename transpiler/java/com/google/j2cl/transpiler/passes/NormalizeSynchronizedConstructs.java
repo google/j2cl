@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.j2cl.transpiler.ast.J2ktAstUtils.implicitlyExtendsJ2ktMonitor;
+
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
@@ -63,14 +65,7 @@ public final class NormalizeSynchronizedConstructs extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Node rewriteType(Type type) {
-            // We can only insert monitor as a super class to the direct subclasses of j.l.Object.
-            if (!type.getTypeDescriptor().isClass()
-                || type.getSuperTypeDescriptor() == null
-                || !TypeDescriptors.isJavaLangObject(type.getSuperTypeDescriptor())) {
-              return type;
-            }
-
-            if (type.getMethods().stream().anyMatch(it -> it.getDescriptor().isSynchronized())) {
+            if (implicitlyExtendsJ2ktMonitor(type.getDeclaration())) {
               type.setSuperTypeDescriptor(TypeDescriptors.get().javaemulLangJ2ktMonitor);
             }
             return type;

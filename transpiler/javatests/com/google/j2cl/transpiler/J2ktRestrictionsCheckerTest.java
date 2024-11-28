@@ -155,6 +155,33 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
             "Error:Main.java:4: Constructor 'Main()' can not be '@KtProperty'.");
   }
 
+  public void testSynchronizedMethodInUnsupportedTypeFails() {
+    newTranspilerTester(
+            "test.Child",
+            "class Parent {}",
+            "class Child extends Parent {",
+            "  synchronized void method() {}",
+            "}")
+        .assertTranspileFails()
+        .assertErrorsWithSourcePosition(
+            "Error:Child.java:3: Type 'Child' does not support synchronized methods as it does not "
+                + "extend 'J2ktMonitor' or is not a direct subclass of 'Object'.");
+  }
+
+  public void testUnsupportedSynchronizedStatementFails() {
+    newTranspilerTester(
+            "test.Main",
+            "class Main {",
+            "  void method() {",
+            "    synchronized (this) {}",
+            "  }",
+            "}")
+        .assertTranspileFails()
+        .assertErrorsWithSourcePosition(
+            "Error:Main.java:4: Synchronized statement is valid only on instances of 'Class' or"
+                + " 'J2ktMonitor'.");
+  }
+
   private TranspilerTester newTranspilerTester(String compilationUnitName, String... code) {
     return TranspilerTester.newTesterWithJ2ktDefaults()
         .addCompilationUnit(compilationUnitName, code);
