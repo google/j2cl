@@ -53,6 +53,12 @@ open class Main {
   return Main.Promise.resolve<T>(Main.await<T>(Main.Promise.resolve<T>(value)))
  }
 
+ @JsAsync
+ @JsMethod(name = "jsAsyncAndJsMethod")
+ internal open fun jsAsyncAndJsMethod_pp_jsasync(): Main.IThenable<Void?>? {
+  return null
+ }
+
  internal open fun testAsyncLambdas_pp_jsasync() {
   val i: Main.AsyncInterface? = Main.AsyncInterface {
    return@AsyncInterface Main.Promise.resolve<Int?>(Main.await<Int?>(Main.Promise.resolve<Int?>(Integer.valueOf(5))))

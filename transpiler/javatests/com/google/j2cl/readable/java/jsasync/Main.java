@@ -46,6 +46,12 @@ public class Main {
     return Promise.resolve(await(Promise.resolve((Void) null)));
   }
 
+  @JsAsync
+  @JsMethod
+  IThenable<Void> jsAsyncAndJsMethod() {
+    return null;
+  }
+
   @SuppressWarnings("unused")
   void testAsyncLambdas() {
     AsyncInterface i = () -> Promise.resolve(await(Promise.resolve(5)));

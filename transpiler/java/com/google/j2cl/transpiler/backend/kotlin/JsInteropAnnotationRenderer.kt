@@ -30,6 +30,7 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.literal
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.dotSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.emptyUnless
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
@@ -54,7 +55,7 @@ internal data class JsInteropAnnotationRenderer(val nameRenderer: NameRenderer) 
       .ifEmpty { jsOverlayAnnotationSource(field.descriptor) }
 
   fun jsInteropAnnotationsSource(method: Method): Source =
-    jsAsyncAnnotationSource(method) + jsMemberAnnotationSource(method)
+    newLineSeparated(jsAsyncAnnotationSource(method), jsMemberAnnotationSource(method))
 
   fun jsInteropAnnotationsSource(parameterDescriptor: ParameterDescriptor): Source =
     emptyUnless(parameterDescriptor.isJsOptional) {
