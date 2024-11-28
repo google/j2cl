@@ -29,6 +29,7 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.assignment
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.literal
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.dotSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.emptyUnless
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
@@ -56,12 +57,9 @@ internal data class JsInteropAnnotationRenderer(val nameRenderer: NameRenderer) 
     jsAsyncAnnotationSource(method) + jsMemberAnnotationSource(method)
 
   fun jsInteropAnnotationsSource(parameterDescriptor: ParameterDescriptor): Source =
-    parameterDescriptor
-      .takeIf { it.isJsOptional }
-      ?.let {
-        annotation(nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsOptional"))
-      }
-      .orEmpty()
+    emptyUnless(parameterDescriptor.isJsOptional) {
+      annotation(nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsOptional"))
+    }
 
   private fun jsMemberAnnotationSource(method: Method): Source =
     jsPropertyAnnotationSource(method)
@@ -71,120 +69,95 @@ internal data class JsInteropAnnotationRenderer(val nameRenderer: NameRenderer) 
       .ifEmpty { jsOverlayAnnotationSource(method.descriptor) }
 
   private fun jsPropertyAnnotationSource(member: Member): Source =
-    member
-      .takeIf { it.descriptor.isJsProperty }
-      ?.let { jsInteropAnnotationSource(member, "jsinterop.annotations.JsProperty") }
-      .orEmpty()
+    emptyUnless(member.descriptor.isJsProperty) {
+      jsInteropAnnotationSource(member, "jsinterop.annotations.JsProperty")
+    }
 
   private fun jsIgnoreAnnotationSource(memberDescriptor: MemberDescriptor): Source =
-    memberDescriptor
-      .takeIf { it.hasJsIgnoreAnnotation }
-      ?.let {
-        annotation(nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsIgnore"))
-      }
-      .orEmpty()
+    emptyUnless(memberDescriptor.hasJsIgnoreAnnotation) {
+      annotation(nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsIgnore"))
+    }
 
   private fun jsOverlayAnnotationSource(memberDescriptor: MemberDescriptor): Source =
-    memberDescriptor
-      .takeIf { it.isJsOverlay }
-      ?.let {
-        annotation(nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsOverlay"))
-      }
-      .orEmpty()
+    emptyUnless(memberDescriptor.isJsOverlay) {
+      annotation(nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsOverlay"))
+    }
 
   private fun jsConstructorAnnotationSource(methodDescriptor: MethodDescriptor): Source =
-    methodDescriptor
-      .takeIf { it.hasJsConstructorAnnotation }
-      ?.let {
-        annotation(nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsConstructor"))
-      }
-      .orEmpty()
+    emptyUnless(methodDescriptor.hasJsConstructorAnnotation) {
+      annotation(nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsConstructor"))
+    }
 
   private fun jsMethodAnnotationSource(method: Method): Source =
-    method.descriptor
-      .takeIf { it.isJsMethod }
-      ?.let { jsInteropAnnotationSource(method, "jsinterop.annotations.JsMethod") }
-      .orEmpty()
+    emptyUnless(method.descriptor.isJsMethod) {
+      jsInteropAnnotationSource(method, "jsinterop.annotations.JsMethod")
+    }
 
   private fun jsAsyncAnnotationSource(method: Method): Source =
-    method
-      .takeIf { it.descriptor.isJsAsync }
-      ?.let {
-        annotation(nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsAsync"))
-      }
-      .orEmpty()
+    emptyUnless(method.descriptor.isJsAsync) {
+      annotation(nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsAsync"))
+    }
 
   /**
    * Render the `annotationQualifiedName` annotation if the member had an annotation in the source
    * or if it requires one to restore its jsname.
    */
   private fun jsInteropAnnotationSource(member: Member, annotationQualifiedName: String): Source =
-    member.descriptor
-      .takeIf {
-        it.originalJsInfo.hasJsMemberAnnotation ||
-          // If the name is mangled but it overrides a member (which means that one was already
-          // mangled) then the annotation is already emitted in the overridden member.
-          (environment.isKtNameMangled(it) && (member !is Method || !member.isJavaOverride))
-      }
-      ?.let {
-        val nameParameterValue =
-          it.originalJsInfo.jsName
-            // if there is no name specified in the original annotation but the name is mangled in
-            // Kotlin, use the simpleJsName otherwise do not emit any name.
-            ?: if (environment.isKtNameMangled(it)) it.simpleJsName else null
+    emptyUnless(hasJsInteropAnnotation(member)) {
+      annotation(
+        nameRenderer.topLevelQualifiedNameSource(annotationQualifiedName),
+        nameParameterSource(jsAnnotationNameParameterValue(member)),
+        namespaceParameterSource(member.descriptor.originalJsInfo.jsNamespace),
+      )
+    }
 
-        annotation(
-          nameRenderer.topLevelQualifiedNameSource(annotationQualifiedName),
-          nameParameterSource(nameParameterValue),
-          namespaceParameterSource(it.originalJsInfo.jsNamespace),
-        )
-      }
-      .orEmpty()
+  private fun hasJsInteropAnnotation(member: Member): Boolean =
+    member.descriptor.originalJsInfo.hasJsMemberAnnotation ||
+      // If the name is mangled but it overrides a member (which means that one was already
+      // mangled) then the annotation is already emitted in the overridden member.
+      (environment.isKtNameMangled(member.descriptor) &&
+        (member !is Method || !member.isJavaOverride))
+
+  private fun jsAnnotationNameParameterValue(member: Member): String? =
+    member.descriptor.originalJsInfo.jsName
+      // if there is no name specified in the original annotation but the name is mangled in
+      // Kotlin, use the simpleJsName otherwise do not emit any name.
+      ?: member.simpleJsName.takeIf { environment.isKtNameMangled(member.descriptor) }
 
   private fun jsFunctionAnnotationSource(typeDeclaration: TypeDeclaration): Source =
-    typeDeclaration
-      .takeIf { it.isJsFunctionInterface }
-      ?.let {
-        annotation(nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsFunction"))
-      }
-      .orEmpty()
+    emptyUnless(typeDeclaration.isJsFunctionInterface) {
+      annotation(nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsFunction"))
+    }
 
   private fun jsEnumAnnotationSource(typeDeclaration: TypeDeclaration): Source =
-    typeDeclaration
-      .takeIf { it.isJsEnum }
-      ?.let {
-        annotation(
-          nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsEnum"),
-          nameParameterSource(it),
-          namespaceParameterSource(it),
-          isNativeParameterSource(it.isNative),
-          booleanParameterSource(
-            "hasCustomValue",
-            checkNotNull(it.jsEnumInfo).hasCustomValue(),
-            false,
-          ),
-        )
-      }
-      .orEmpty()
+    emptyUnless(typeDeclaration.isJsEnum) {
+      annotation(
+        nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsEnum"),
+        nameParameterSource(typeDeclaration),
+        namespaceParameterSource(typeDeclaration),
+        isNativeParameterSource(typeDeclaration.isNative),
+        booleanParameterSource(
+          "hasCustomValue",
+          checkNotNull(typeDeclaration.jsEnumInfo).hasCustomValue(),
+          false,
+        ),
+      )
+    }
 
   private fun jsTypeAnnotationSource(typeDeclaration: TypeDeclaration): Source =
-    typeDeclaration
-      .takeIf { it.isJsType }
-      ?.let {
-        annotation(
-          nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsType"),
-          nameParameterSource(it),
-          namespaceParameterSource(it),
-          isNativeParameterSource(it.isNative),
-        )
-      }
-      .orEmpty()
+    emptyUnless(typeDeclaration.isJsType) {
+      annotation(
+        nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsType"),
+        nameParameterSource(typeDeclaration),
+        namespaceParameterSource(typeDeclaration),
+        isNativeParameterSource(typeDeclaration.isNative),
+      )
+    }
 
   private fun namespaceParameterSource(typeDeclaration: TypeDeclaration): Source =
-    typeDeclaration
-      .takeIf { it.hasCustomizedJsNamespace() }
-      ?.let { namespaceParameterSource(it.jsNamespace) }
-      .orEmpty()
+    emptyUnless(typeDeclaration.hasCustomizedJsNamespace()) {
+      namespaceParameterSource(typeDeclaration.jsNamespace)
+    }
 
   private fun namespaceParameterSource(namespace: String?): Source =
     namespace?.let { assignment(source("namespace"), namespaceSource(it)) }.orEmpty()
@@ -215,10 +188,9 @@ internal data class JsInteropAnnotationRenderer(val nameRenderer: NameRenderer) 
 
   companion object {
     private fun nameParameterSource(typeDeclaration: TypeDeclaration): Source =
-      typeDeclaration
-        .takeIf { it.simpleJsName != it.simpleSourceName }
-        ?.let { nameParameterSource(it.simpleJsName) }
-        .orEmpty()
+      emptyUnless(typeDeclaration.simpleJsName != typeDeclaration.simpleSourceName) {
+        nameParameterSource(typeDeclaration.simpleJsName)
+      }
 
     private fun nameParameterSource(value: String?): Source =
       value?.let { assignment(source("name"), literal(it)) }.orEmpty()
@@ -230,8 +202,7 @@ internal data class JsInteropAnnotationRenderer(val nameRenderer: NameRenderer) 
       name: String,
       value: Boolean,
       defaultValue: Boolean,
-    ): Source =
-      value.takeIf { it != defaultValue }?.let { assignment(source(name), literal(it)) }.orEmpty()
+    ): Source = emptyUnless(value != defaultValue) { assignment(source(name), literal(value)) }
 
     private val MethodDescriptor.hasJsConstructorAnnotation
       get() = originalJsInfo.hasJsMemberAnnotation && isJsConstructor
