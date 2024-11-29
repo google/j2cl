@@ -130,8 +130,7 @@ public class FixJavaKotlinCollectionMethodsMismatch extends NormalizationPass {
 
           @Override
           public Node rewriteMethodCall(MethodCall methodCall) {
-            MethodMapping methodMapping =
-                findMethodMapping(methodCall.getTarget().getDeclarationDescriptor());
+            MethodMapping methodMapping = findMethodMapping(methodCall.getTarget());
             if (methodMapping == null) {
               return methodCall;
             }
@@ -191,11 +190,9 @@ public class FixJavaKotlinCollectionMethodsMismatch extends NormalizationPass {
     }
 
     final boolean isOrOverrides(MethodDescriptor methodDescriptor) {
-      return methodDescriptor.equals(getJavaMethodDescriptor())
-          || (methodDescriptor
-                  .getEnclosingTypeDescriptor()
-                  .isSubtypeOf(getJavaMethodDescriptor().getEnclosingTypeDescriptor())
-              && methodDescriptor.isOverride(getJavaMethodDescriptor()));
+      return methodDescriptor.getDeclarationDescriptor().equals(getJavaMethodDescriptor())
+          || methodDescriptor.getJavaOverriddenMethodDescriptors().stream()
+              .anyMatch(it -> it.getDeclarationDescriptor().equals(getJavaMethodDescriptor()));
     }
 
     /**
