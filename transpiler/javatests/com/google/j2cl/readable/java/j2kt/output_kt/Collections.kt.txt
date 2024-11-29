@@ -24,6 +24,7 @@ import java.lang.RuntimeException
 import java.util.AbstractCollection
 import java.util.AbstractList
 import javaemul.lang.JavaAbstractMap
+import javaemul.lang.JavaMap
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Int
@@ -379,6 +380,19 @@ open class Collections {
    var m_1: MutableMap<out K, out V> = m as MutableMap<out K, out V>
    m_1 = Collections.convertMap(m_1)
    super<JavaAbstractMap>.putAll(m_1 as Map<out K, V>)
+  }
+ }
+
+ @ObjCName("J2ktJ2ktCollections_CustomMap2", exact = true)
+ abstract class CustomMap2<K, V>: Collections.CustomMap<K, V>(), JavaMap<K, V> {
+  override fun remove(key: K, value: V): Boolean {
+   val value_1: Any? = value
+   val key_1: Any? = key
+   return super<Collections.CustomMap>.remove(key_1 as K, value_1 as V)
+  }
+
+  override fun java_getOrDefault(arg0: Any?, arg1: V?): V? {
+   return super<Collections.CustomMap>.java_getOrDefault(arg0, arg1)
   }
  }
 
