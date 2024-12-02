@@ -257,7 +257,11 @@ private class CompanionObjectJvmStaticTransformer(val context: JvmBackendContext
 
     // The return type on the proxy was blindy copied from the original without remapping the
     // possible type parameters.
-    proxy.returnType = proxy.returnType.remapTypeParameters(callee, proxy)
+    static.returnType = static.returnType.remapTypeParameters(callee, static)
+    if (proxy != static) {
+      // Also remap the proxy if it has been newly created in the companion object.
+      proxy.returnType = proxy.returnType.remapTypeParameters(callee, proxy)
+    }
 
     return static to companionFun
   }
