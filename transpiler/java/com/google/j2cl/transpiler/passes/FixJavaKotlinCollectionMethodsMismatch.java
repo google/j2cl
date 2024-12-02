@@ -19,8 +19,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.j2cl.transpiler.ast.PrimitiveTypes.INT;
 import static com.google.j2cl.transpiler.ast.TypeVariable.createWildcardWithUpperBound;
-import static com.google.j2cl.transpiler.passes.FixJavaKotlinCollectionMethodsMismatch.MethodMapping.methodMapping;
-import static com.google.j2cl.transpiler.passes.FixJavaKotlinCollectionMethodsMismatch.ParameterMapping.parameterMapping;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
@@ -79,41 +77,89 @@ public class FixJavaKotlinCollectionMethodsMismatch extends NormalizationPass {
   private final ImmutableList<MethodMapping> methodMappings =
       ImmutableList.of(
           methodMapping(
-              collection, "addAll", parameterMapping(collection, readonlyCollectionOfElements)),
-          methodMapping(collection, "contains", parameterMapping(object, collectionElement)),
-          methodMapping(collection, "remove", parameterMapping(object, collectionElement)),
+              collection,
+              "addAll",
+              // parameters
+              parameterSignatureMapping(collection, readonlyCollectionOfElements)),
+          methodMapping(
+              collection,
+              "contains",
+              // parameters
+              parameterSignatureMapping(object, collectionElement)),
+          methodMapping(
+              collection,
+              "remove",
+              // parameters
+              parameterSignatureMapping(object, collectionElement)),
           methodMapping(
               collection,
               "containsAll",
-              parameterMapping(collection, readonlyCollectionOfElements)),
+              // parameters
+              parameterSignatureMapping(collection, readonlyCollectionOfElements)),
           methodMapping(
-              collection, "removeAll", parameterMapping(collection, readonlyCollectionOfElements)),
+              collection,
+              "removeAll",
+              // parameters
+              parameterSignatureMapping(collection, readonlyCollectionOfElements)),
           methodMapping(
-              collection, "retainAll", parameterMapping(collection, readonlyCollectionOfElements)),
-          methodMapping(map, "containsKey", parameterMapping(object, mapKey)),
-          methodMapping(map, "containsValue", parameterMapping(object, mapValue)),
-          methodMapping(map, "get", parameterMapping(object, mapKey)),
-          // TODO(b/364506629): This one needs return type conversion from V to V?
-          // methodMapping(
-          //     map,
-          //     "getOrDefault",
-          //     parameterMapping(object, mapKey),
-          //     parameterMapping(mapValue, mapValue)),
-          methodMapping(map, "putAll", parameterMapping(map, readonlyMapOfWildcardKeysAndValues)),
-          methodMapping(map, "remove", parameterMapping(object, mapKey)),
+              collection,
+              "retainAll",
+              // parameters
+              parameterSignatureMapping(collection, readonlyCollectionOfElements)),
           methodMapping(
-              map, "remove", parameterMapping(object, mapKey), parameterMapping(object, mapValue)),
+              map,
+              "containsKey",
+              // parameters
+              parameterSignatureMapping(object, mapKey)),
+          methodMapping(
+              map,
+              "containsValue",
+              // parameters
+              parameterSignatureMapping(object, mapValue)),
+          methodMapping(
+              map,
+              "get",
+              // parameters
+              parameterSignatureMapping(object, mapKey)),
+          methodMapping(
+              map,
+              "getOrDefault",
+              /* kotlinReturnTypeDescriptor= */ mapValue,
+              // parameters
+              parameterSignatureMapping(object, mapKey),
+              parameterSignatureMapping(object, mapValue)),
+          methodMapping(
+              map,
+              "putAll",
+              // parameters
+              parameterSignatureMapping(map, readonlyMapOfWildcardKeysAndValues)),
+          methodMapping(
+              map,
+              "remove",
+              // parameters
+              parameterSignatureMapping(object, mapKey)),
+          methodMapping(
+              map,
+              "remove",
+              // parameters
+              parameterSignatureMapping(object, mapKey),
+              parameterSignatureMapping(object, mapValue)),
           methodMapping(
               list,
               "addAll",
-              parameterMapping(INT, INT),
-              parameterMapping(collection, readonlyCollectionOfElements)),
-          methodMapping(list, "indexOf", parameterMapping(object, listElement)),
-          methodMapping(list, "lastIndexOf", parameterMapping(object, listElement)));
-
-  private static TypeVariable typeParameter(DeclaredTypeDescriptor typeDescriptor, int index) {
-    return typeDescriptor.getTypeDeclaration().getTypeParameterDescriptors().get(index);
-  }
+              // parameters
+              parameterSignatureMapping(INT, INT),
+              parameterSignatureMapping(collection, readonlyCollectionOfElements)),
+          methodMapping(
+              list,
+              "indexOf",
+              // parameters
+              parameterSignatureMapping(object, listElement)),
+          methodMapping(
+              list,
+              "lastIndexOf",
+              // parameters
+              parameterSignatureMapping(object, listElement)));
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
@@ -139,15 +185,57 @@ public class FixJavaKotlinCollectionMethodsMismatch extends NormalizationPass {
         });
   }
 
+  private static TypeVariable typeParameter(DeclaredTypeDescriptor typeDescriptor, int index) {
+    return typeDescriptor.getTypeDeclaration().getTypeParameterDescriptors().get(index);
+  }
+
+  private static ParameterSignatureMapping parameterSignatureMapping(
+      TypeDescriptor javaSignatureTypeDescriptor, TypeDescriptor kotlinTypeDescriptor) {
+    return new AutoValue_FixJavaKotlinCollectionMethodsMismatch_ParameterSignatureMapping(
+        javaSignatureTypeDescriptor, kotlinTypeDescriptor);
+  }
+
+  static MethodMapping methodMapping(
+      DeclaredTypeDescriptor enclosingTypeDescriptor,
+      String methodName,
+      ParameterSignatureMapping... parameterSignatureMappings) {
+    return methodMapping(enclosingTypeDescriptor, methodName, null, parameterSignatureMappings);
+  }
+
+  private static MethodMapping methodMapping(
+      DeclaredTypeDescriptor enclosingTypeDescriptor,
+      String methodName,
+      @Nullable TypeDescriptor kotlinReturnTypeDescriptor,
+      ParameterSignatureMapping... parameterSignatureMappings) {
+    ImmutableList<ParameterSignatureMapping> parameterTypeMappingsList =
+        ImmutableList.copyOf(parameterSignatureMappings);
+    ImmutableList<TypeDescriptor> parameterSignatureTypeDescriptors =
+        parameterTypeMappingsList.stream()
+            .map(ParameterSignatureMapping::getJavaSignatureTypeDescriptor)
+            .collect(toImmutableList());
+    MethodDescriptor javaMethodDescriptor =
+        checkNotNull(
+            enclosingTypeDescriptor.getMethodDescriptor(
+                methodName, parameterSignatureTypeDescriptors.toArray(new TypeDescriptor[] {})));
+    ImmutableList<TypeDescriptor> kotlinParameterTypeDescriptors =
+        parameterTypeMappingsList.stream()
+            .map(ParameterSignatureMapping::getKotlinTypeDescriptor)
+            .collect(toImmutableList());
+    MethodDescriptor kotlinMethodDescriptor =
+        MethodDescriptor.Builder.from(javaMethodDescriptor)
+            .updateParameterTypeDescriptors(kotlinParameterTypeDescriptors)
+            .setReturnTypeDescriptor(
+                kotlinReturnTypeDescriptor != null
+                    ? kotlinReturnTypeDescriptor
+                    : javaMethodDescriptor.getReturnTypeDescriptor())
+            .build();
+    return new AutoValue_FixJavaKotlinCollectionMethodsMismatch_MethodMapping(
+        javaMethodDescriptor, kotlinMethodDescriptor);
+  }
+
   /** A mapping from Java parameter signature to Kotlin parameter type. */
   @AutoValue
-  abstract static class ParameterMapping {
-    static ParameterMapping parameterMapping(
-        TypeDescriptor javaRawTypeDescriptor, TypeDescriptor kotlinTypeDescriptor) {
-      return new AutoValue_FixJavaKotlinCollectionMethodsMismatch_ParameterMapping(
-          javaRawTypeDescriptor, kotlinTypeDescriptor);
-    }
-
+  abstract static class ParameterSignatureMapping {
     abstract TypeDescriptor getJavaSignatureTypeDescriptor();
 
     abstract TypeDescriptor getKotlinTypeDescriptor();
@@ -156,40 +244,15 @@ public class FixJavaKotlinCollectionMethodsMismatch extends NormalizationPass {
   /** A mapping from Java method to Kotlin method. */
   @AutoValue
   abstract static class MethodMapping {
-    static MethodMapping methodMapping(
-        DeclaredTypeDescriptor enclosingTypeDescriptor,
-        String methodName,
-        ParameterMapping... parameterTypeMappings) {
-      ImmutableList<ParameterMapping> parameterTypeMappingsList =
-          ImmutableList.copyOf(parameterTypeMappings);
-      ImmutableList<TypeDescriptor> parameterSignatureTypeDescriptors =
-          parameterTypeMappingsList.stream()
-              .map(ParameterMapping::getJavaSignatureTypeDescriptor)
-              .collect(toImmutableList());
-      MethodDescriptor javaMethodDescriptor =
-          enclosingTypeDescriptor.getMethodDescriptor(
-              methodName, parameterSignatureTypeDescriptors.toArray(new TypeDescriptor[] {}));
-      ImmutableList<TypeDescriptor> kotlinParameterTypeDescriptors =
-          parameterTypeMappingsList.stream()
-              .map(ParameterMapping::getKotlinTypeDescriptor)
-              .collect(toImmutableList());
-      MethodDescriptor kotlinMethodDescriptor =
-          MethodDescriptor.Builder.from(javaMethodDescriptor)
-              .updateParameterTypeDescriptors(kotlinParameterTypeDescriptors)
-              .build();
-      return new AutoValue_FixJavaKotlinCollectionMethodsMismatch_MethodMapping(
-          javaMethodDescriptor, kotlinMethodDescriptor);
-    }
-
     abstract MethodDescriptor getJavaMethodDescriptor();
 
     abstract MethodDescriptor getKotlinMethodDescriptor();
 
-    final String getBridgeMethodName() {
+    private String getBridgeMethodName() {
       return "java_" + getJavaMethodDescriptor().getName();
     }
 
-    final boolean isOrOverrides(MethodDescriptor methodDescriptor) {
+    private boolean isOrOverrides(MethodDescriptor methodDescriptor) {
       return methodDescriptor.getDeclarationDescriptor().equals(getJavaMethodDescriptor())
           || methodDescriptor.getJavaOverriddenMethodDescriptors().stream()
               .anyMatch(it -> it.getDeclarationDescriptor().equals(getJavaMethodDescriptor()));
@@ -199,7 +262,9 @@ public class FixJavaKotlinCollectionMethodsMismatch extends NormalizationPass {
      * Fixes parameters in {@code method} to match Kotlin, and rewrites the body of the method to
      * introduce local variables with original types.
      */
-    final Method fixMethodParameters(Method method) {
+    private Method fixMethodParameters(Method method) {
+      MethodDescriptor javaMethodDescriptor = getJavaMethodDescriptor();
+      MethodDescriptor kotlinMethodDescriptor = getKotlinMethodDescriptor();
       MethodDescriptor methodDescriptor = method.getDescriptor();
 
       Map<TypeVariable, TypeDescriptor> parameterization =
@@ -210,9 +275,9 @@ public class FixJavaKotlinCollectionMethodsMismatch extends NormalizationPass {
       Block body = method.getBody();
       for (int i = 0; i < getJavaMethodDescriptor().getParameterTypeDescriptors().size(); i++) {
         TypeDescriptor javaDeclarationParameterTypeDescriptor =
-            getJavaMethodDescriptor().getParameterTypeDescriptors().get(i);
+            javaMethodDescriptor.getParameterTypeDescriptors().get(i);
         TypeDescriptor kotlinDeclarationParameterTypeDescriptor =
-            getKotlinMethodDescriptor().getParameterTypeDescriptors().get(i);
+            kotlinMethodDescriptor.getParameterTypeDescriptors().get(i);
         if (!javaDeclarationParameterTypeDescriptor.equals(
             kotlinDeclarationParameterTypeDescriptor)) {
           TypeDescriptor kotlinParameterTypeDescriptor =
@@ -255,9 +320,15 @@ public class FixJavaKotlinCollectionMethodsMismatch extends NormalizationPass {
         }
       }
 
+      TypeDescriptor kotlinReturnTypeDescriptor =
+          kotlinMethodDescriptor
+              .getReturnTypeDescriptor()
+              .specializeTypeVariables(parameterization);
+
       methodDescriptor =
           MethodDescriptor.Builder.from(methodDescriptor)
               .updateParameterTypeDescriptors(parameterTypeDescriptors)
+              .setReturnTypeDescriptor(kotlinReturnTypeDescriptor)
               .build();
 
       return Method.Builder.from(method)
@@ -305,7 +376,7 @@ public class FixJavaKotlinCollectionMethodsMismatch extends NormalizationPass {
       }
     }
 
-    static Expression insertCastIfNeeded(
+    private static Expression insertCastIfNeeded(
         Expression argument,
         TypeDescriptor javaParameterTypeDescriptor,
         TypeDescriptor kotlinParameterTypeDescriptor,
@@ -323,7 +394,7 @@ public class FixJavaKotlinCollectionMethodsMismatch extends NormalizationPass {
   }
 
   @Nullable
-  MethodMapping findMethodMapping(MethodDescriptor methodDescriptor) {
+  private MethodMapping findMethodMapping(MethodDescriptor methodDescriptor) {
     return methodMappings.stream()
         .filter(it -> it.isOrOverrides(methodDescriptor))
         .findFirst()

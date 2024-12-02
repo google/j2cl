@@ -283,13 +283,6 @@ public class Collections {
 
   public abstract static class CustomMap2<K extends @Nullable Object, V extends @Nullable Object>
       extends CustomMap<K, V> implements Map<K, V> {
-
-    // TODO: b/364506629 - Remove this. The Transpiler should generate it (with the correct
-    // signature).
-    @Override
-    public boolean remove(@Nullable Object key, @Nullable Object value) {
-      return super.remove(key, value);
-    }
   }
 
   public static class CollectionOfString extends CustomCollection<String> {

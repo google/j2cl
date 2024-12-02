@@ -370,10 +370,11 @@ open class Collections {
    return super<JavaAbstractMap>.get(key_1 as K)
   }
 
-  override fun java_getOrDefault(key: Any?, defaultValue: V?): V? {
+  override fun getOrDefault(key: K, defaultValue: V): V {
+   val defaultValue_1: V? = defaultValue
    var key_1: Any? = key
    key_1 = Collections.convert<Any?>(key_1)
-   return super<JavaAbstractMap>.java_getOrDefault(key_1, defaultValue)
+   return super<JavaAbstractMap>.getOrDefault(key_1 as K, defaultValue_1 as V) as V
   }
 
   override fun putAll(m: Map<out K, V>) {
@@ -385,14 +386,16 @@ open class Collections {
 
  @ObjCName("J2ktJ2ktCollections_CustomMap2", exact = true)
  abstract class CustomMap2<K, V>: Collections.CustomMap<K, V>(), JavaMap<K, V> {
-  override fun remove(key: K, value: V): Boolean {
-   val value_1: Any? = value
-   val key_1: Any? = key
-   return super<Collections.CustomMap>.remove(key_1 as K, value_1 as V)
+  override fun getOrDefault(arg0: K, arg1: V): V {
+   val arg1_1: V? = arg1
+   val arg0_1: Any? = arg0
+   return super<Collections.CustomMap>.getOrDefault(arg0_1 as K, arg1_1 as V) as V
   }
 
-  override fun java_getOrDefault(arg0: Any?, arg1: V?): V? {
-   return super<Collections.CustomMap>.java_getOrDefault(arg0, arg1)
+  override fun remove(arg0: K, arg1: V): Boolean {
+   val arg1_1: Any? = arg1
+   val arg0_1: Any? = arg0
+   return super<Collections.CustomMap>.remove(arg0_1 as K, arg1_1 as V)
   }
  }
 
@@ -462,10 +465,11 @@ open class Collections {
    return super<Collections.CustomMap>.get(key_1 as String)
   }
 
-  override fun java_getOrDefault(key: Any?, defaultValue: String?): String? {
+  override fun getOrDefault(key: String, defaultValue: String): String {
+   val defaultValue_1: String? = defaultValue
    var key_1: Any? = key
    key_1 = Collections.convert<Any?>(key_1)
-   return super<Collections.CustomMap>.java_getOrDefault(key_1, defaultValue)
+   return super<Collections.CustomMap>.getOrDefault(key_1 as String, defaultValue_1 as String)!!
   }
  }
 }

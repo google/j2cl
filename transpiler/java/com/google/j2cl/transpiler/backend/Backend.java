@@ -712,6 +712,9 @@ public enum Backend {
           RemoveEmptyFallthroughSwitchCases::new,
 
           // Normalizations
+          AddDisambiguatingSuperMethodForwardingStubs::new,
+
+          // Must be run after AddDisambiguatingSuperMethodForwardingStubs
           FixJavaKotlinMethodOverrideMismatch::new,
           FixJavaKotlinCollectionMethodsMismatch::new,
           NormalizeNullLiterals::new,
@@ -720,7 +723,6 @@ public enum Backend {
           InsertExplicitSuperCalls::new,
           NormalizeLambdaExpressionsJ2kt::new,
           AddJavaLangObjectForwardingMethods::new,
-          AddDisambiguatingSuperMethodForwardingStubs::new,
           AddDisambiguatingOverloadResolutionCastsJ2kt::new,
           AddVisibilityMethodBridgesJ2kt::new,
           NormalizeSynchronizedConstructs::new,
