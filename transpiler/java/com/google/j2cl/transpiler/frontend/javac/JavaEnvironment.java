@@ -829,6 +829,11 @@ class JavaEnvironment {
               .build());
     }
 
+    var thrownExceptions =
+        declarationMethodElement.getThrownTypes().stream()
+            .map(this::createTypeDescriptor)
+            .collect(toImmutableList());
+
     boolean hasUncheckedCast = hasUncheckedCastAnnotation(declarationMethodElement);
     return MethodDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
@@ -837,6 +842,7 @@ class JavaEnvironment {
         .setDeclarationDescriptor(declarationMethodDescriptor)
         .setReturnTypeDescriptor(isConstructor ? enclosingTypeDescriptor : returnTypeDescriptor)
         .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
+        .setExceptionTypeDescriptors(thrownExceptions)
         .setOriginalJsInfo(jsInfo)
         .setVisibility(visibility)
         .setStatic(isStatic)
