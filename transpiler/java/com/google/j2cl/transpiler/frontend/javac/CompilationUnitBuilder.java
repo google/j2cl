@@ -937,16 +937,12 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     if (fieldAccess.name.contentEquals("this")) {
       return new ThisReference(
-          environment
-              .createDeclarationForType((ClassSymbol) ((JCIdent) expression).sym)
-              .toDescriptor(),
+          environment.createDeclarationForType((ClassSymbol) expression.type.tsym).toDescriptor(),
           /* isQualified= */ true);
     }
     if (fieldAccess.name.contentEquals("super")) {
       DeclaredTypeDescriptor typeDescriptor =
-          environment
-              .createDeclarationForType((ClassSymbol) ((JCIdent) expression).sym)
-              .toDescriptor();
+          environment.createDeclarationForType((ClassSymbol) expression.type.tsym).toDescriptor();
 
       boolean isQualified = !typeDescriptor.isInterface();
       if (isQualified) {
