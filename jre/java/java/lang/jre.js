@@ -104,8 +104,8 @@ jre.addSystemPropertyFromGoogDefine('jre.checks.type', jre.checks.type);
 jre.checks.critical = goog.define('jre.checks.critical', 'AUTO');
 jre.addSystemPropertyFromGoogDefine('jre.checks.critical', jre.checks.critical);
 
-
-goog.provide('jre.logging');
+/** @const */
+jre.logging = {};
 
 /** @define {string} */
 jre.logging.logLevel =
