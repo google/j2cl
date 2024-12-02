@@ -97,7 +97,6 @@ public class Main {
 
   private static class Implementor implements ChildInterface, GenericInterface<String> {}
 
-  @SuppressWarnings("cast")
   private static void testInstanceOf_array() {
     // TODO(b/184675805): Enable for Wasm when array metadata is fully implemented.
     if (isWasm()) {
@@ -379,7 +378,7 @@ public class Main {
     String hello = "hello";
     Object o = hello;
     assertTrue(o instanceof String s && s.length() == hello.length());
-    assertEquals(hello.length(), o instanceof String s ? s.length() : 0);
+    assertTrue(hello.length() == (o instanceof String s ? s.length() : 0));
 
     String bye = "bye";
     o = bye;
