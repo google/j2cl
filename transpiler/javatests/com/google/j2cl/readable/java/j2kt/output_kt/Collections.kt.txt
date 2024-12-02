@@ -23,7 +23,7 @@ import java.lang.IndexOutOfBoundsException
 import java.lang.RuntimeException
 import java.util.AbstractCollection
 import java.util.AbstractList
-import javaemul.lang.JavaAbstractMap
+import java.util.AbstractMap
 import javaemul.lang.JavaMap
 import kotlin.Any
 import kotlin.Boolean
@@ -332,7 +332,7 @@ open class Collections {
  }
 
  @ObjCName("J2ktJ2ktCollections_CustomMap", exact = true)
- open class CustomMap<K, V>: JavaAbstractMap<K, V>() {
+ open class CustomMap<K, V>: AbstractMap<K, V>() {
   override val entries: MutableSet<MutableEntry<K, V>>
    get() {
     throw RuntimeException()
@@ -341,19 +341,19 @@ open class Collections {
   override fun containsKey(key: K): Boolean {
    var key_1: Any? = key
    key_1 = Collections.convert<Any?>(key_1)
-   return super<JavaAbstractMap>.containsKey(key_1 as K)
+   return super<AbstractMap>.containsKey(key_1 as K)
   }
 
   override fun containsValue(value: V): Boolean {
    var value_1: Any? = value
    value_1 = Collections.convert<Any?>(value_1)
-   return super<JavaAbstractMap>.containsValue(value_1 as V)
+   return super<AbstractMap>.containsValue(value_1 as V)
   }
 
   override fun remove(key: K): V? {
    var key_1: Any? = key
    key_1 = Collections.convert<Any?>(key_1)
-   return super<JavaAbstractMap>.remove(key_1 as K)
+   return super<AbstractMap>.remove(key_1 as K)
   }
 
   override fun remove(key: K, value: V): Boolean {
@@ -361,26 +361,26 @@ open class Collections {
    var key_1: Any? = key
    key_1 = Collections.convert<Any?>(key_1)
    value_1 = Collections.convert<Any?>(value_1)
-   return super<JavaAbstractMap>.remove(key_1 as K, value_1 as V)
+   return super<AbstractMap>.remove(key_1 as K, value_1 as V)
   }
 
   override fun get(key: K): V? {
    var key_1: Any? = key
    key_1 = Collections.convert<Any?>(key_1)
-   return super<JavaAbstractMap>.get(key_1 as K)
+   return super<AbstractMap>.get(key_1 as K)
   }
 
   override fun getOrDefault(key: K, defaultValue: V): V {
    val defaultValue_1: V? = defaultValue
    var key_1: Any? = key
    key_1 = Collections.convert<Any?>(key_1)
-   return super<JavaAbstractMap>.getOrDefault(key_1 as K, defaultValue_1 as V) as V
+   return super<AbstractMap>.getOrDefault(key_1 as K, defaultValue_1 as V) as V
   }
 
   override fun putAll(m: Map<out K, V>) {
    var m_1: MutableMap<out K, out V> = m as MutableMap<out K, out V>
    m_1 = Collections.convertMap(m_1)
-   super<JavaAbstractMap>.putAll(m_1 as Map<out K, V>)
+   super<AbstractMap>.putAll(m_1 as Map<out K, V>)
   }
  }
 
