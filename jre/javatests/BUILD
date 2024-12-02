@@ -22,22 +22,39 @@ SRCS = glob(
     exclude = JS_ONLY_SRCS,
 )
 
+ERROR_PRONE_SUPPRESSIONS = [
+    # keep sorted
+    "-Xep:CheckReturnValue:OFF",
+    "-Xep:ComparableType:OFF",
+    "-Xep:DoNotCall:OFF",
+    "-Xep:EqualsIncompatibleType:OFF",
+    "-Xep:IdentityBinaryExpression:OFF",
+    "-Xep:ReturnValueIgnored:OFF",
+    "-Xep:SelfComparison:OFF",
+    "-Xep:SelfEquality:OFF",
+    "-Xep:SelfEquals:OFF",
+]
+
+java_library(
+    name = "emul_tests_lib",
+    testonly = 1,
+    srcs = SRCS,
+    javacopts = ERROR_PRONE_SUPPRESSIONS,
+    deps = [
+        "//jre/java:javaemul_internal_annotations",
+        "//third_party:jsinterop-annotations",
+        "//third_party:jspecify_annotations",
+        "//third_party:junit",
+    ],
+)
+
 j2cl_library(
     name = "emul_tests_lib-j2cl",
     testonly = 1,
     srcs = SRCS,
     # Safe here as this is for tests only and there are no downstream users.
     experimental_enable_jspecify_support_do_not_enable_without_jspecify_static_checking_or_you_might_cause_an_outage = True,
-    javacopts = [
-        "-Xep:DoNotCall:OFF",
-        "-Xep:CheckReturnValue:OFF",
-        "-Xep:EqualsIncompatibleType:OFF",
-        "-Xep:ReturnValueIgnored:OFF",
-        "-Xep:IdentityBinaryExpression:OFF",
-        "-Xep:SelfComparison:OFF",
-        "-Xep:SelfEquality:OFF",
-        "-Xep:SelfEquals:OFF",
-    ],
+    javacopts = ERROR_PRONE_SUPPRESSIONS,
     deps = [
         "//jre/java:javaemul_internal_annotations-j2cl",
         "//third_party:jsinterop-annotations-j2cl",
@@ -57,29 +74,12 @@ j2kt_native_library(
             "com/google/j2cl/jre/java9/**/*.java",
         ],
     ),
+    javacopts = ERROR_PRONE_SUPPRESSIONS,
     deps = [
         "//jre/java:javaemul_internal_annotations-j2kt-native",
+        "//third_party:jsinterop-annotations-j2kt-native",
+        "//third_party:jspecify_annotations-j2kt-native",
         "//third_party:junit-j2kt-native",
-    ],
-)
-
-java_library(
-    name = "emul_tests_lib",
-    testonly = 1,
-    srcs = SRCS,
-    javacopts = [
-        "-Xep:DoNotCall:OFF",
-        "-Xep:IdentityBinaryExpression:OFF",
-        "-Xep:EqualsIncompatibleType:OFF",
-        "-Xep:SelfComparison:OFF",
-        "-Xep:SelfEquality:OFF",
-        "-Xep:SelfEquals:OFF",
-        "-Xep:ReturnValueIgnored:OFF",
-    ],
-    deps = [
-        "//jre/java:javaemul_internal_annotations",
-        "//third_party:jsinterop-annotations",
-        "//third_party:junit",
     ],
 )
 
