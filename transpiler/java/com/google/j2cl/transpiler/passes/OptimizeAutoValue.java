@@ -34,6 +34,7 @@ import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
@@ -75,6 +76,10 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
       return;
     }
 
+    // Remove implicit super constructor calls to guarantee a consistent initial state across the
+    // different frontends.
+    removeImplicitSuperConstructorCalls(library);
+
     Set<TypeDeclaration> inlinableTypes =
         library
             .streamTypes()
@@ -88,6 +93,50 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
 
     inlineImplementationTypes(library, inlinableTypes);
     optimizeAsValueTypes(library);
+  }
+
+  private static void removeImplicitSuperConstructorCalls(Library library) {
+    library
+        .streamTypes()
+        .forEach(
+            type -> {
+              if (!isAutoValueOrBuilderSubclass(type.getDeclaration())) {
+                return;
+              }
+
+              for (Method ctor : type.getConstructors()) {
+                if (!AstUtils.hasSuperCall(ctor)) {
+                  continue;
+                }
+
+                ExpressionStatement constructorInvocationStatement =
+                    AstUtils.getConstructorInvocationStatement(ctor);
+                if (ctor.getBody().getStatements().indexOf(constructorInvocationStatement) != 0) {
+                  // Exclude super calls that are not the first statement. This is to avoid
+                  // incorrectly reordering when there are statements before the super call (for
+                  // example, captures), because this would remove the super call in the middle and
+                  // then we later currently only add the calls back at the beginning.
+                  // TODO(b/382109887): Make sure this behaves consistently with jdt.
+                  continue;
+                }
+
+                MethodCall superConstructorCall =
+                    (MethodCall) constructorInvocationStatement.getExpression();
+                if (!superConstructorCall.getArguments().isEmpty()
+                    || superConstructorCall.getQualifier() != null) {
+                  continue;
+                }
+
+                ctor.getBody().getStatements().remove(constructorInvocationStatement);
+              }
+            });
+  }
+
+  private static boolean isAutoValueOrBuilderSubclass(TypeDeclaration type) {
+    return type != null
+        && (type.isAnnotatedWithAutoValue()
+            || type.isAnnotatedWithAutoValueBuilder()
+            || isAutoValueOrBuilderSubclass(type.getSuperTypeDeclaration()));
   }
 
   private static void inlineImplementationTypes(
