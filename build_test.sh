@@ -21,8 +21,8 @@ bazel build :all {jre,transpiler,tools,benchmarking,junit/generator,junit/emul}/
 # Do a quick smoke check of integration test
 bazel test transpiler/javatests/com/google/j2cl/integration/java/emptyclass/...
 
-# Run OpenSourceJRE test
-bazel test jre/javatests:OpenSourceJre
+# Run JRE tests
+bazel test jre/javatests/...
 
 # Run CI test if requested
 if [[ $1 == "CI" ]]; then

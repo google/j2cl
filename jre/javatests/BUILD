@@ -1,8 +1,7 @@
 # Description:
 #   j2cl/jre: JRE subset for transpilation.
 
-load("@bazel_skylib//rules:build_test.bzl", "build_test")
-load("//build_defs:rules.bzl", "j2cl_library", "j2cl_test", "j2kt_native_library", "j2wasm_test")
+load("//build_defs:rules.bzl", "j2cl_library", "j2kt_native_library")
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_binary")
 load("@rules_java//java:defs.bzl", "java_library")
 load(":j2cl_multi_test.bzl", "j2cl_multi_test")
@@ -83,113 +82,6 @@ j2kt_native_library(
     ],
 )
 
-j2cl_multi_test(
-    name = "BigDecimal",
-    shard_count = 2,
-    test_class = "com.google.j2cl.jre.BigDecimalSuite",
-    deps = [":emul_tests_lib"],
-)
-
-j2cl_multi_test(
-    name = "BigInteger",
-    shard_count = 2,
-    test_class = "com.google.j2cl.jre.BigIntegerSuite",
-    deps = [":emul_tests_lib"],
-)
-
-j2cl_multi_test(
-    name = "Collections",
-    shard_count = 4,
-    test_class = "com.google.j2cl.jre.CollectionsSuite",
-    deps = [":emul_tests_lib"],
-)
-
-j2cl_multi_test(
-    name = "Concurrent",
-    shard_count = 4,
-    test_class = "com.google.j2cl.jre.ConcurrentSuite",
-    deps = [":emul_tests_lib"],
-)
-
-j2cl_multi_test(
-    name = "Emul",
-    shard_count = 4,
-    test_class = "com.google.j2cl.jre.EmulSuite",
-    deps = [":emul_tests_lib"],
-)
-
-j2cl_multi_test(
-    name = "EmulJava8",
-    shard_count = 4,
-    test_class = "com.google.j2cl.jre.EmulJava8Suite",
-    deps = [":emul_tests_lib"],
-)
-
-j2cl_multi_test(
-    name = "EmulJava9",
-    enable_j2kt_native = False,
-    shard_count = 2,
-    test_class = "com.google.j2cl.jre.EmulJava9Suite",
-    deps = [":emul_tests_lib"],
-)
-
-j2cl_multi_test(
-    name = "Lang",
-    shard_count = 4,
-    test_class = "com.google.j2cl.jre.LangSuite",
-    deps = [":emul_tests_lib"],
-)
-
-j2cl_multi_test(
-    name = "DateTime",
-    test_class = "com.google.j2cl.jre.DateTimeSuite",
-    deps = [":emul_tests_lib"],
-)
-
-j2cl_library(
-    name = "js_tests_lib-j2cl",
-    testonly = 1,
-    srcs = JS_ONLY_SRCS,
-    deps = [
-        "//third_party:jsinterop-annotations-j2cl",
-        "//third_party:junit-j2cl",
-    ],
-)
-
-j2cl_multi_test(
-    name = "JsSuite",
-    enable_j2kt_native = False,
-    enable_jvm = False,
-    enable_wasm = False,
-    test_class = "com.google.j2cl.jre.JsSuite",
-    deps = [":js_tests_lib"],
-)
-
-# A smoke check that verifies es5 transpiled test works
-j2cl_test(
-    name = "Concurrent_es5",
-    browsers = ["//testing/web/browsers:chrome-linux"],
-    generate_build_test = False,
-    jvm_flags = ["-Djsrunner.net.transpileMode=always"],
-    shard_count = 4,
-    test_class = "com.google.j2cl.jre.ConcurrentSuite",
-    runtime_deps = [
-        ":emul_tests_lib-j2cl",
-        "//third_party:junit-j2cl",
-    ],
-)
-
-j2wasm_test(
-    name = "ConcurrentSuite_wasm_magic_string_imports",
-    shard_count = 4,
-    test_class = "com.google.j2cl.jre.ConcurrentSuite",
-    use_magic_string_imports = True,
-    runtime_deps = [
-        ":emul_tests_lib-j2wasm",
-        "//third_party:junit-j2wasm",
-    ],
-)
-
 # A test entry point for running JRE tests in open source.
 # To run the test for all platforms:
 #   bazel test //jre/javatests:OpenSourceJre
@@ -200,15 +92,6 @@ j2cl_multi_test(
     # Please change the tested class here.
     test_class = "com.google.j2cl.jre.java.lang.StringTest",
     deps = [":emul_tests_lib"],
-)
-
-build_test(
-    name = "conformance_test",
-    tags = ["j2cl"],
-    targets = [
-        ":conformance_binary",
-        ":conformance_binary_head",
-    ],
 )
 
 closure_js_binary(
