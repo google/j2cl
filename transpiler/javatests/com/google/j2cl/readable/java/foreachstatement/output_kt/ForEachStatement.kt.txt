@@ -20,8 +20,8 @@ package foreachstatement
 
 import javaemul.lang.*
 import java.lang.Integer
-import javaemul.lang.JavaIterable
 import javaemul.lang.JavaIterator
+import javaemul.lang.MutableIterableJvm
 import kotlin.Any
 import kotlin.Char
 import kotlin.Exception
@@ -126,42 +126,42 @@ open class ForEachStatement {
  }
 
  @ObjCName("J2ktForeachstatementForEachStatement_Exception1", exact = true)
- open class Exception1 internal constructor(): java.lang.Exception(), JavaIterable<Number?> {
+ open class Exception1 internal constructor(): java.lang.Exception(), MutableIterableJvm<Number?> {
   override fun iterator(): MutableIterator<Number?> {
    return null!!
   }
  }
 
  @ObjCName("J2ktForeachstatementForEachStatement_Exception2", exact = true)
- open class Exception2 internal constructor(): java.lang.Exception(), JavaIterable<Int?> {
+ open class Exception2 internal constructor(): java.lang.Exception(), MutableIterableJvm<Int?> {
   override fun iterator(): MutableIterator<Int?> {
    return null!!
   }
  }
 
  @ObjCName("J2ktForeachstatementForEachStatement_Exception3", exact = true)
- open class Exception3 internal constructor(): java.lang.Exception(), JavaIterable<Int> {
+ open class Exception3 internal constructor(): java.lang.Exception(), MutableIterableJvm<Int> {
   override fun iterator(): MutableIterator<Int> {
    return null!!
   }
  }
 
  @ObjCName("J2ktForeachstatementForEachStatement_Exception4", exact = true)
- open class Exception4 internal constructor(): java.lang.Exception(), JavaIterable<Any?> {
+ open class Exception4 internal constructor(): java.lang.Exception(), MutableIterableJvm<Any?> {
   override fun iterator(): MutableIterator<Any?> {
    return null!!
   }
  }
 
  @ObjCName("J2ktForeachstatementForEachStatement_IterableReturningTypeVariable", exact = true)
- open class IterableReturningTypeVariable<U, T: MutableIterator<Int?>> internal constructor(): JavaIterable<Int?> {
+ open class IterableReturningTypeVariable<U, T: MutableIterator<Int?>> internal constructor(): MutableIterableJvm<Int?> {
   override fun iterator(): T {
    return null!!
   }
  }
 
  @ObjCName("J2ktForeachstatementForEachStatement_StringIterable", exact = true)
- fun interface StringIterable: JavaIterable<String?> {
+ fun interface StringIterable: MutableIterableJvm<String?> {
   override fun iterator(): ForEachStatement.StringIterator
  }
 

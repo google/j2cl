@@ -23,7 +23,7 @@ import java.lang.Integer
 import java.lang.Long
 import java.lang.RuntimeException
 import java.lang.Void
-import javaemul.lang.JavaIterable
+import javaemul.lang.MutableIterableJvm
 import jsinterop.annotations.JsFunction
 import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsPackage
@@ -296,8 +296,8 @@ open class Lambdas {
   fun <T> testIterable(
    @ObjCName("withJavaLangIterable") iterable: MutableIterable<T>?
   ) {
-   val lambda: MutableIterable<T>? = JavaIterable<T> {
-    return@JavaIterable iterable!!.iterator()
+   val lambda: MutableIterable<T>? = MutableIterableJvm<T> {
+    return@MutableIterableJvm iterable!!.iterator()
    }
   }
  }
