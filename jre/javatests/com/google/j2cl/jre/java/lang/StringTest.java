@@ -860,8 +860,9 @@ public class StringTest extends TestCase {
     }
 
     try {
-      returnNull().indexOf("");
-      fail();
+      int index = returnNull().indexOf("");
+      // Use return value to avoid side-effect to be ignored by JSC.
+      fail(String.valueOf(index));
     } catch (NullPointerException e) {
       // expected
     }

@@ -190,6 +190,18 @@ j2wasm_test(
     ],
 )
 
+# A test entry point for running JRE tests in open source.
+# To run the test for all platforms:
+#   bazel test //jre/javatests:OpenSourceJre
+# To debug a failing web test target, bazel run <target>_debug. e.g.
+#   bazel run //jre/javatests:OpenSourceJre-j2cl_debug
+j2cl_multi_test(
+    name = "OpenSourceJre",
+    # Please change the tested class here.
+    test_class = "com.google.j2cl.jre.java.lang.StringTest",
+    deps = [":emul_tests_lib"],
+)
+
 build_test(
     name = "conformance_test",
     tags = ["j2cl"],

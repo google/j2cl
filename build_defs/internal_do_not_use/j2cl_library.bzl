@@ -122,6 +122,7 @@ _J2WASM_PACKAGES = [
     "third_party/java_src/j2cl",
     "build_defs/internal_do_not_use",
     "junit",
+    "jre",
     "samples",
     "third_party",
     "third_party/java_src/jsr330_inject",
