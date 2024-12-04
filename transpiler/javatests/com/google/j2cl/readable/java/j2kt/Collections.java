@@ -200,6 +200,11 @@ public class Collections {
     }
   }
 
+  public static class CustomCollectionDisambiguatingOverrides<T extends @Nullable Object>
+      extends CustomCollection<T> implements Collection<T> {
+    // Test that J2KT inserts disambiguating overrides.
+  }
+
   public static class CustomList<T extends @Nullable Object> extends AbstractList<T> {
     @Override
     public T get(int index) {
@@ -281,8 +286,18 @@ public class Collections {
     }
   }
 
-  public abstract static class CustomMap2<K extends @Nullable Object, V extends @Nullable Object>
+  public abstract static class CustomMapDisambiguatingOverrides<
+          K extends @Nullable Object, V extends @Nullable Object>
       extends CustomMap<K, V> implements Map<K, V> {
+    // Test that J2KT inserts disambiguating overrides.
+  }
+
+  public static class CustomMapReturnTypes<K extends @Nullable Object, V extends @Nullable Object>
+      extends CustomMap<K, V> {
+    @Override
+    public @Nullable V getOrDefault(@Nullable Object key, @Nullable V defaultValue) {
+      return defaultValue;
+    }
   }
 
   public static class CollectionOfString extends CustomCollection<String> {

@@ -24,6 +24,8 @@ import java.lang.RuntimeException
 import java.util.AbstractCollection
 import java.util.AbstractList
 import java.util.AbstractMap
+import java.util.Spliterator
+import javaemul.lang.JavaCollection
 import javaemul.lang.JavaMap
 import kotlin.Any
 import kotlin.Boolean
@@ -301,6 +303,13 @@ open class Collections {
   }
  }
 
+ @ObjCName("J2ktJ2ktCollections_CustomCollectionDisambiguatingOverrides", exact = true)
+ open class CustomCollectionDisambiguatingOverrides<T>: Collections.CustomCollection<T>(), JavaCollection<T> {
+  override fun spliterator(): Spliterator<T> {
+   return super<Collections.CustomCollection>.spliterator()
+  }
+ }
+
  @ObjCName("J2ktJ2ktCollections_CustomList", exact = true)
  open class CustomList<T>: AbstractList<T>() {
   override fun get(index: Int): T {
@@ -384,8 +393,8 @@ open class Collections {
   }
  }
 
- @ObjCName("J2ktJ2ktCollections_CustomMap2", exact = true)
- abstract class CustomMap2<K, V>: Collections.CustomMap<K, V>(), JavaMap<K, V> {
+ @ObjCName("J2ktJ2ktCollections_CustomMapDisambiguatingOverrides", exact = true)
+ abstract class CustomMapDisambiguatingOverrides<K, V>: Collections.CustomMap<K, V>(), JavaMap<K, V> {
   override fun getOrDefault(arg0: K, arg1: V): V {
    val arg1_1: V? = arg1
    val arg0_1: Any? = arg0
@@ -396,6 +405,15 @@ open class Collections {
    val arg1_1: Any? = arg1
    val arg0_1: Any? = arg0
    return super<Collections.CustomMap>.remove(arg0_1 as K, arg1_1 as V)
+  }
+ }
+
+ @ObjCName("J2ktJ2ktCollections_CustomMapReturnTypes", exact = true)
+ open class CustomMapReturnTypes<K, V>: Collections.CustomMap<K, V>() {
+  override fun getOrDefault(key: K, defaultValue: V): V {
+   val defaultValue_1: V? = defaultValue
+   val key_1: Any? = key
+   return defaultValue_1 as V
   }
  }
 
