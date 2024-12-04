@@ -111,14 +111,10 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
 
                 ExpressionStatement constructorInvocationStatement =
                     AstUtils.getConstructorInvocationStatement(ctor);
-                if (ctor.getBody().getStatements().indexOf(constructorInvocationStatement) != 0) {
-                  // Exclude super calls that are not the first statement. This is to avoid
-                  // incorrectly reordering when there are statements before the super call (for
-                  // example, captures), because this would remove the super call in the middle and
-                  // then we later currently only add the calls back at the beginning.
-                  // TODO(b/382109887): Make sure this behaves consistently with jdt.
-                  continue;
-                }
+                // The super call for AutoValue should always be the first statement. Captures, for
+                // example, are not possible. AutoValue does not support inner nor local classes.
+                checkState(
+                    ctor.getBody().getStatements().indexOf(constructorInvocationStatement) == 0);
 
                 MethodCall superConstructorCall =
                     (MethodCall) constructorInvocationStatement.getExpression();
