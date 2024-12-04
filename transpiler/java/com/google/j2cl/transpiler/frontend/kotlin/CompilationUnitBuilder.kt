@@ -112,6 +112,7 @@ import org.jetbrains.kotlin.ir.IrStatement
 import org.jetbrains.kotlin.ir.declarations.IrAnonymousInitializer
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrDeclaration
+import org.jetbrains.kotlin.ir.declarations.IrDeclarationOrigin
 import org.jetbrains.kotlin.ir.declarations.IrEnumEntry
 import org.jetbrains.kotlin.ir.declarations.IrField
 import org.jetbrains.kotlin.ir.declarations.IrFile
@@ -172,6 +173,7 @@ import org.jetbrains.kotlin.ir.symbols.IrValueSymbol
 import org.jetbrains.kotlin.ir.types.IrSimpleType
 import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.ir.types.IrTypeProjection
+import org.jetbrains.kotlin.ir.types.classOrFail
 import org.jetbrains.kotlin.ir.types.classOrNull
 import org.jetbrains.kotlin.ir.types.impl.makeTypeProjection
 import org.jetbrains.kotlin.ir.types.isNullable
@@ -305,9 +307,24 @@ class CompilationUnitBuilder(
       } else {
         irField.initializer?.let { convertExpression(it.expression) }
       }
+
+    val sourcePosition: SourcePosition
+    val nameSourcePosition: SourcePosition
+
+    if (irField.origin == IrDeclarationOrigin.FIELD_FOR_OBJECT_INSTANCE) {
+      // The synthetic IrField storing the unique instance of an object class does not have source
+      // position. In this case, we will use the name position of the object class.
+      val objectNameSourcePosition = getNameSourcePosition(irField.type.classOrFail.owner)
+      sourcePosition = objectNameSourcePosition
+      nameSourcePosition = objectNameSourcePosition
+    } else {
+      sourcePosition = getSourcePosition(irField)
+      nameSourcePosition = getNameSourcePosition(irField)
+    }
+
     return Field.Builder.from(declaredFieldDescriptor)
-      .setSourcePosition(getSourcePosition(irField))
-      .setNameSourcePosition(getNameSourcePosition(irField))
+      .setSourcePosition(sourcePosition)
+      .setNameSourcePosition(nameSourcePosition)
       .setInitializer(initializer)
       .build()
   }
@@ -374,7 +391,7 @@ class CompilationUnitBuilder(
     }
 
   private fun convertLocalClass(irClass: IrClass): Statement =
-    LocalClassDeclarationStatement(convertClass(irClass), getSourcePosition(irClass))
+    LocalClassDeclarationStatement(convertClass(irClass), getNameSourcePosition(irClass))
 
   private fun convertContainer(irBlock: IrContainerExpression): Block =
     Block.newBuilder()

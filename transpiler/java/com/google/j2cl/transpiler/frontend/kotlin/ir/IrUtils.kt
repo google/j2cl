@@ -18,7 +18,6 @@
 package com.google.j2cl.transpiler.frontend.kotlin.ir
 
 import com.google.common.base.CaseFormat
-import com.google.j2cl.common.SourcePosition
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind
 import com.google.j2cl.transpiler.ast.Visibility
 import com.google.j2cl.transpiler.frontend.common.FrontendConstants.DO_NOT_AUTOBOX_ANNOTATION_NAME
@@ -51,7 +50,6 @@ import org.jetbrains.kotlin.ir.declarations.IrDeclarationWithName
 import org.jetbrains.kotlin.ir.declarations.IrDeclarationWithVisibility
 import org.jetbrains.kotlin.ir.declarations.IrEnumEntry
 import org.jetbrains.kotlin.ir.declarations.IrField
-import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.ir.declarations.IrFunction
 import org.jetbrains.kotlin.ir.declarations.IrOverridableMember
 import org.jetbrains.kotlin.ir.declarations.IrProperty
@@ -72,11 +70,8 @@ import org.jetbrains.kotlin.ir.expressions.IrFunctionAccessExpression
 import org.jetbrains.kotlin.ir.expressions.IrFunctionExpression
 import org.jetbrains.kotlin.ir.expressions.IrFunctionReference
 import org.jetbrains.kotlin.ir.expressions.IrGetField
-import org.jetbrains.kotlin.ir.expressions.IrLoop
 import org.jetbrains.kotlin.ir.expressions.IrMemberAccessExpression
 import org.jetbrains.kotlin.ir.expressions.IrPropertyReference
-import org.jetbrains.kotlin.ir.expressions.IrSetField
-import org.jetbrains.kotlin.ir.expressions.IrSetValue
 import org.jetbrains.kotlin.ir.expressions.IrStatementOrigin
 import org.jetbrains.kotlin.ir.expressions.IrTypeOperator
 import org.jetbrains.kotlin.ir.expressions.IrTypeOperatorCall
@@ -88,7 +83,6 @@ import org.jetbrains.kotlin.ir.types.IrStarProjection
 import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.ir.types.IrTypeArgument
 import org.jetbrains.kotlin.ir.types.IrTypeProjection
-import org.jetbrains.kotlin.ir.types.classOrFail
 import org.jetbrains.kotlin.ir.types.classOrNull
 import org.jetbrains.kotlin.ir.types.classifierOrNull
 import org.jetbrains.kotlin.ir.types.defaultType
@@ -668,57 +662,8 @@ fun IrClass.isStubbedPrimitiveIteratorClass(): Boolean {
 internal val IrDeclaration.isCompanionMember: Boolean
   get() = (parent as? IrClass)?.isCompanion == true
 
-fun IrElement.getNameSourcePosition(irFile: IrFile, name: String? = null): SourcePosition =
-  getNamedPsiElement(irFile)?.getSourcePosition(irFile, name) ?: SourcePosition.NONE
-
-fun IrElement.getSourcePosition(irFile: IrFile): SourcePosition {
-  var sourceElementIr = this
-
-  if (this is IrField && origin == IrDeclarationOrigin.FIELD_FOR_OBJECT_INSTANCE) {
-    // For companion instance fields, we map this field to the corresponding object because its
-    // corresponding ir element does not exist in its original source.
-    sourceElementIr = type.classOrFail.owner
-  }
-
-  return sourceElementIr.getPsiElement(irFile)?.getSourcePosition(irFile) ?: SourcePosition.NONE
-}
-
 val IrElement.isTemporaryVariable: Boolean
   get() = this is IrVariable && origin == IrDeclarationOrigin.IR_TEMPORARY_VARIABLE
-
-val IrElement.isPrefixExpression: Boolean
-  get() =
-    this is IrSetValue &&
-      (origin == IrStatementOrigin.PREFIX_INCR || origin == IrStatementOrigin.PREFIX_DECR)
-
-val IrElement.isPostfixExpression: Boolean
-  get() =
-    this is IrSetValue &&
-      (origin == IrStatementOrigin.POSTFIX_INCR || origin == IrStatementOrigin.POSTFIX_DECR)
-
-val IrElement.isAugmentedAssignement: Boolean
-  get() =
-    this is IrSetValue &&
-      (origin == IrStatementOrigin.PLUSEQ ||
-        origin == IrStatementOrigin.MINUSEQ ||
-        origin == IrStatementOrigin.MULTEQ ||
-        origin == IrStatementOrigin.DIVEQ ||
-        origin == IrStatementOrigin.PERCEQ)
-
-val IrElement.isVariableDeclaration: Boolean
-  get() = this is IrVariable && origin == IrDeclarationOrigin.DEFINED
-
-val IrElement.isFieldDeclaration: Boolean
-  get() = this is IrSetField && origin == IrStatementOrigin.INITIALIZE_FIELD
-
-val IrElement.isFieldAssignment: Boolean
-  get() = this is IrSetField && !isFieldDeclaration
-
-val IrElement.isLabeledExpression: Boolean
-  get() = this is IrLoop && label != null
-
-val IrElement.isPrimaryConstructor: Boolean
-  get() = this is IrConstructor && this.isPrimary
 
 fun IrAnnotationContainer.copyAnnotationsWhen(
   filter: IrConstructorCall.() -> Boolean
