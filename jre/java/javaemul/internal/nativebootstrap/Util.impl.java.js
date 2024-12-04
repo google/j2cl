@@ -160,9 +160,21 @@ class Util {
    */
   static $getGeneratedClassName_(ctor) {
     const propName = '$$generatedClassName';
-    return ctor.prototype.hasOwnProperty(propName) ?
-        ctor.prototype[propName] :
-        ctor.prototype[propName] = 'Class$obf_' + ++Util.$nextUniqId_;
+    if (ctor.prototype.hasOwnProperty(propName)) {
+      return ctor.prototype[propName];
+    }
+
+    // Use the constructor "name", which should be the result of the variable
+    // name JSCompiler assigned the class/function to. This allows for manual
+    // deobfuscation of the class name.
+    const constructorName = ctor.name;
+    const nextUniqId = Util.$nextUniqIdByName_.get(constructorName) ?? 0;
+    Util.$nextUniqIdByName_.set(constructorName, nextUniqId + 1);
+    const generatedClassName =
+        'Class$obf_' + constructorName + '_' + nextUniqId;
+
+    ctor.prototype[propName] = generatedClassName;
+    return generatedClassName;
   }
 
   /**
@@ -289,9 +301,9 @@ class Util {
 
 
 /**
- * @private {number}
+ * @private @const {!Map<string, number>}
  */
-Util.$nextUniqId_ = 1000;
+Util.$nextUniqIdByName_ = new Map();
 
 /**
  * @type {number}
