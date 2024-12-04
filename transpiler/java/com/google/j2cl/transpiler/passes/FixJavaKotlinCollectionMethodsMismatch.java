@@ -31,7 +31,9 @@ import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.MethodLike;
 import com.google.j2cl.transpiler.ast.Node;
+import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
@@ -171,7 +173,7 @@ public class FixJavaKotlinCollectionMethodsMismatch extends NormalizationPass {
             if (methodMapping == null) {
               return method;
             }
-            return methodMapping.fixMethodParameters(method);
+            return methodMapping.fixMethodParametersAndReturnStatements(method);
           }
 
           @Override
@@ -259,10 +261,10 @@ public class FixJavaKotlinCollectionMethodsMismatch extends NormalizationPass {
     }
 
     /**
-     * Fixes parameters in {@code method} to match Kotlin, and rewrites the body of the method to
-     * introduce local variables with original types.
+     * Fixes parameters and return statements in {@code method} to match Kotlin, and rewrites the
+     * body of the method to introduce local variables with original types.
      */
-    private Method fixMethodParameters(Method method) {
+    private Method fixMethodParametersAndReturnStatements(Method method) {
       MethodDescriptor javaMethodDescriptor = getJavaMethodDescriptor();
       MethodDescriptor kotlinMethodDescriptor = getKotlinMethodDescriptor();
       MethodDescriptor methodDescriptor = method.getDescriptor();
@@ -320,6 +322,16 @@ public class FixJavaKotlinCollectionMethodsMismatch extends NormalizationPass {
         }
       }
 
+      TypeDescriptor javaDeclarationReturnTypeDescriptor =
+          javaMethodDescriptor.getReturnTypeDescriptor();
+      TypeDescriptor kotlinDeclarationReturnTypeDescriptor =
+          kotlinMethodDescriptor.getReturnTypeDescriptor();
+      if (!javaDeclarationReturnTypeDescriptor.equals(kotlinDeclarationReturnTypeDescriptor)) {
+        TypeDescriptor kotlinReturnTypeDescriptor =
+            kotlinDeclarationReturnTypeDescriptor.specializeTypeVariables(parameterization);
+        body = (Block) insertReturnStatementCasts(body, kotlinReturnTypeDescriptor);
+      }
+
       TypeDescriptor kotlinReturnTypeDescriptor =
           kotlinMethodDescriptor
               .getReturnTypeDescriptor()
@@ -336,6 +348,27 @@ public class FixJavaKotlinCollectionMethodsMismatch extends NormalizationPass {
           .setBody(body)
           .setForcedJavaOverride(true)
           .build();
+    }
+
+    private static Node insertReturnStatementCasts(Node node, TypeDescriptor castTypeDescriptor) {
+      return node.rewrite(
+          new AbstractRewriter() {
+            @Override
+            public Node rewriteReturnStatement(ReturnStatement returnStatement) {
+              if (getParent(MethodLike.class::isInstance) != null) {
+                // This is a return in other method-like node, nothing to do.
+                return returnStatement;
+              }
+
+              return ReturnStatement.Builder.from(returnStatement)
+                  .setExpression(
+                      CastExpression.newBuilder()
+                          .setExpression(returnStatement.getExpression())
+                          .setCastTypeDescriptor(castTypeDescriptor)
+                          .build())
+                  .build();
+            }
+          });
     }
 
     /**

@@ -487,7 +487,7 @@ open class Collections {
    val defaultValue_1: String? = defaultValue
    var key_1: Any? = key
    key_1 = Collections.convert<Any?>(key_1)
-   return super<Collections.CustomMap>.getOrDefault(key_1 as String, defaultValue_1 as String)!!
+   return super<Collections.CustomMap>.getOrDefault(key_1 as String, defaultValue_1 as String) as String
   }
  }
 }
