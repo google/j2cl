@@ -115,9 +115,10 @@ def j2cl_web_test(
             testsuite_file_name,
         ],
         cmd = "\n".join([
-            "unzip -q -o $(locations %s) *.js -d zip_out/" % src,
-            "cd zip_out/",
-            "mkdir -p ../$(RULEDIR)",
+            "TMP=$$(mktemp -d)",
+            "WD=$$(pwd)",
+            "unzip -q -o $(locations %s) *.js -d $$TMP" % src,
+            "cd $$TMP",
             "if [ $$(find . -name *.js | wc -l) -ne 1 ]; then",
             "  echo \"%s\"" % fail_multiple_testsuites,
             "  exit 1",
@@ -127,7 +128,8 @@ def j2cl_web_test(
             "  echo \"%s\"" % fail_suiteclass,
             "  exit 1",
             "fi",
-            "mv \"$$testsuite\" ../$@;",
+            "mv \"$$testsuite\" $$WD/$@;",
+            "rm -rf $$TMP",
         ]),
         testonly = 1,
     )
