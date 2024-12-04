@@ -63,11 +63,6 @@ j2cl_test_integration_test(
     extra_data = [
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:stacktrace-files",
     ],
-    # TODO(b/378085302): Re-enable after sourcemap is fixed.
-    tags = [
-        "manual",
-        "notap",
-    ],
     test_data = [
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:KotlinAnonymousClassesStacktraceTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:KotlinCustomExceptionStacktraceTest",
@@ -89,11 +84,6 @@ j2cl_test_integration_test(
     name = "KotlinStacktraceIntegration2Test",
     extra_data = [
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:stacktrace-files",
-    ],
-    # TODO(b/378085302): Re-enable after sourcemap is fixed.
-    tags = [
-        "manual",
-        "notap",
     ],
     test_data = [
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:KotlinDuplicateFileNameStacktraceTest",
