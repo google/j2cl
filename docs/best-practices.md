@@ -136,7 +136,7 @@ optimizations:
 ```python
 load("//build_defs:rules.bzl", "J2CL_OPTIMIZED_DEFS")
 
-js_binary(
+closure_js_binary(
     name = "optimized_j2cl_app",
     defs = J2CL_OPTIMIZED_DEFS,
     deps = [":js_lib"],
@@ -237,7 +237,7 @@ if (System.getProperty("some.define") == "YES") {
 ```
 
 ```build
-js_binary(
+closure_js_binary(
     name = "optimized_j2cl_app",
     defs = ["--define=some.define=YES"] + J2CL_OPTIMIZED_DEFS,
     deps = [":js_lib"],

@@ -1,6 +1,7 @@
 """Macro for generating binary targets for j2cl apps."""
 
-load(":j2cl_js_common.bzl", "J2CL_OPTIMIZED_DEFS", "js_binary", "js_devserver")
+load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_binary")
+load(":j2cl_js_common.bzl", "J2CL_OPTIMIZED_DEFS", "js_devserver")
 
 def j2cl_application(
         name,
@@ -94,7 +95,7 @@ def j2cl_application(
         "//conditions:default": extra_production_args,
     })
 
-    js_binary(
+    closure_js_binary(
         name = name,
         defs = J2CL_OPTIMIZED_DEFS + entry_point_defs + define_prod_defs + [
             "--rewrite_polyfills=%s" % rewrite_polyfills,

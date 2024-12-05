@@ -25,7 +25,7 @@ load("//build_defs/internal_do_not_use:j2kt_web_transition.bzl", "j2kt_web_trans
 load("//build_defs/internal_do_not_use:provider.bzl", "J2clInfo")
 load("@bazel_tools//tools/build_defs/apple:ios.bzl", "ios_build_test")
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
-load("@io_bazel_rules_closure//closure:defs.bzl", "js_binary")
+load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_binary")
 
 JAVAC_FLAGS = [
     "-XepDisableAllChecks",
@@ -199,7 +199,7 @@ def _js_readable_targets(readable_target, dir_out, defs):
     )
 
     # Verify compatibility of generated JS.
-    js_binary(
+    closure_js_binary(
         name = "%s_binary" % readable_target,
         defs = J2CL_OPTIMIZED_DEFS + [
             "--conformance_config=transpiler/javatests/com/google/j2cl/readable/conformance_proto.txt",

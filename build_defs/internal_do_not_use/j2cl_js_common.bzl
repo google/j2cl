@@ -64,8 +64,6 @@ def js_devserver(
         ],
     )
 
-js_binary = closure_js_binary
-
 JsInfo = ClosureJsLibraryInfo
 
 J2CL_JS_TOOLCHAIN_ATTRS = CLOSURE_JS_TOOLCHAIN_ATTRS
