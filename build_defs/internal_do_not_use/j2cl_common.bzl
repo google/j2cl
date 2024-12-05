@@ -403,6 +403,11 @@ J2CL_TOOLCHAIN_ATTRS = {
     "_java_frontend": attr.label(
         default = Label("//:experimental_java_frontend"),
     ),
+    "_zip": attr.label(
+        executable = True,
+        cfg = "exec",
+        default = Label("@bazel_tools//tools/zip:zipper"),
+    ),
 }
 J2CL_TOOLCHAIN_ATTRS.update(J2CL_JAVA_TOOLCHAIN_ATTRS)
 
