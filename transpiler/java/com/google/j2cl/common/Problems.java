@@ -177,6 +177,11 @@ public class Problems {
   }
 
   @FormatMethod
+  public void info(SourcePosition sourcePosition, String detailMessage, Object... args) {
+    problem(Severity.INFO, sourcePosition, detailMessage, args);
+  }
+
+  @FormatMethod
   public void info(String detailMessage, Object... args) {
     problem(Severity.INFO, String.format(detailMessage, args));
   }
