@@ -52,7 +52,14 @@ public final class JsInteropUtils {
 
   public static JsInfo getJsInfo(VariableElement member) {
     AnnotationMirror annotation = JsInteropAnnotationUtils.getJsPropertyAnnotation(member);
-    return getJsInfo(member, (TypeElement) member.getEnclosingElement(), annotation, false);
+    if (member.getEnclosingElement() instanceof TypeElement) {
+      return getJsInfo(member, (TypeElement) member.getEnclosingElement(), annotation, false);
+    }
+    return JsInfo.newBuilder()
+        .setJsMemberType(JsMemberType.NONE)
+        .setJsAsync(false)
+        .setJsOverlay(false)
+        .build();
   }
 
   private static JsInfo getJsInfo(
@@ -91,15 +98,15 @@ public final class JsInteropUtils {
   }
 
   @Nullable
-  public static JsEnumInfo getJsEnumInfo(TypeElement type) {
-    if (!isJsEnum(type)) {
+  public static JsEnumInfo getJsEnumInfo(AnnotatedConstruct annotatedConstruct) {
+    if (!isJsEnum(annotatedConstruct)) {
       return null;
     }
-    boolean hasCustomValue = JsInteropAnnotationUtils.hasCustomValue(type);
+    boolean hasCustomValue = JsInteropAnnotationUtils.hasCustomValue(annotatedConstruct);
     return JsEnumInfo.newBuilder()
         .setHasCustomValue(hasCustomValue)
-        .setSupportsComparable(!hasCustomValue || isJsNativeType(type))
-        .setSupportsOrdinal(!hasCustomValue && !isJsNativeType(type))
+        .setSupportsComparable(!hasCustomValue || isJsNativeType(annotatedConstruct))
+        .setSupportsOrdinal(!hasCustomValue && !isJsNativeType(annotatedConstruct))
         .build();
   }
 
@@ -145,12 +152,12 @@ public final class JsInteropUtils {
     return getJsInfo(method).getJsMemberType() != JsMemberType.NONE;
   }
 
-  public static boolean isJsAsync(AnnotatedConstruct method) {
-    return JsInteropAnnotationUtils.getJsAsyncAnnotation(method) != null;
+  public static boolean isJsAsync(AnnotatedConstruct annotatedConstruct) {
+    return JsInteropAnnotationUtils.getJsAsyncAnnotation(annotatedConstruct) != null;
   }
 
-  public static boolean isJsOverlay(AnnotatedConstruct method) {
-    return JsInteropAnnotationUtils.getJsOverlayAnnotation(method) != null;
+  public static boolean isJsOverlay(AnnotatedConstruct annotatedConstruct) {
+    return JsInteropAnnotationUtils.getJsOverlayAnnotation(annotatedConstruct) != null;
   }
 
   public static boolean isJsOptional(ExecutableElement method, int i) {
@@ -161,20 +168,20 @@ public final class JsInteropUtils {
     return JsInteropAnnotationUtils.getDoNotAutoboxAnnotation(method, i) != null;
   }
 
-  public static boolean isJsType(AnnotatedConstruct type) {
-    return JsInteropAnnotationUtils.getJsTypeAnnotation(type) != null;
+  public static boolean isJsType(AnnotatedConstruct annotatedConstruct) {
+    return JsInteropAnnotationUtils.getJsTypeAnnotation(annotatedConstruct) != null;
   }
 
-  public static boolean isJsEnum(AnnotatedConstruct type) {
-    return JsInteropAnnotationUtils.getJsEnumAnnotation(type) != null;
+  public static boolean isJsEnum(AnnotatedConstruct annotatedConstruct) {
+    return JsInteropAnnotationUtils.getJsEnumAnnotation(annotatedConstruct) != null;
   }
 
-  public static boolean isJsNativeType(AnnotatedConstruct type) {
-    return JsInteropAnnotationUtils.isJsNative(type);
+  public static boolean isJsNativeType(AnnotatedConstruct annotatedConstruct) {
+    return JsInteropAnnotationUtils.isJsNative(annotatedConstruct);
   }
 
-  public static boolean isJsFunction(AnnotatedConstruct type) {
-    return JsInteropAnnotationUtils.getJsFunctionAnnotation(type) != null;
+  public static boolean isJsFunction(AnnotatedConstruct annotatedConstruct) {
+    return JsInteropAnnotationUtils.getJsFunctionAnnotation(annotatedConstruct) != null;
   }
 
   private JsInteropUtils() {}

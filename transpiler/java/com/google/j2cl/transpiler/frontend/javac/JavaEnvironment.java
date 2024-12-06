@@ -22,6 +22,11 @@ import static com.google.common.collect.MoreCollectors.onlyElement;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.HAS_NO_SIDE_EFFECTS_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.UNCHECKED_CAST_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.WASM_ANNOTATION_NAME;
+import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.findAnnotationByName;
+import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.getAnnotationParameterString;
+import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.hasAnnotation;
+import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.hasNullMarkedAnnotation;
+import static com.google.j2cl.transpiler.frontend.javac.JsInteropAnnotationUtils.getJsNamespace;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -36,6 +41,7 @@ import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.transpiler.ast.JsEnumInfo;
 import com.google.j2cl.transpiler.ast.JsInfo;
+import com.google.j2cl.transpiler.ast.KtInfo;
 import com.google.j2cl.transpiler.ast.Literal;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
@@ -53,7 +59,6 @@ import com.google.j2cl.transpiler.ast.UnionTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.Visibility;
 import com.google.j2cl.transpiler.frontend.common.Nullability;
-import com.google.j2cl.transpiler.frontend.common.PackageInfoCache;
 import com.sun.tools.javac.code.Attribute.TypeCompound;
 import com.sun.tools.javac.code.Flags;
 import com.sun.tools.javac.code.Symbol;
@@ -394,6 +399,7 @@ class JavaEnvironment {
                 + (typeVariable.getUpperBound() != null
                     ? typeVariable.getUpperBound().toString()
                     : ""))
+        .setKtVariance(KtInteropUtils.getKtVariance(typeVariable.asElement()))
         .setName(typeVariable.asElement().getSimpleName().toString())
         .build();
   }
@@ -549,6 +555,7 @@ class JavaEnvironment {
     }
 
     JsInfo jsInfo = JsInteropUtils.getJsInfo(variableElement);
+    KtInfo ktInfo = KtInteropUtils.getKtInfo(variableElement);
     Object constantValue = variableElement.getConstantValue();
     boolean isCompileTimeConstant = constantValue != null;
     if (isCompileTimeConstant) {
@@ -562,6 +569,7 @@ class JavaEnvironment {
         .setStatic(isStatic)
         .setVisibility(visibility)
         .setOriginalJsInfo(jsInfo)
+        .setOriginalKtInfo(ktInfo)
         .setFinal(isFinal)
         .setCompileTimeConstant(isCompileTimeConstant)
         .setConstantValue(
@@ -808,6 +816,7 @@ class JavaEnvironment {
     Visibility visibility = getVisibility(declarationMethodElement);
     boolean isDefault = isDefaultMethod(declarationMethodElement);
     JsInfo jsInfo = JsInteropUtils.getJsInfo(declarationMethodElement);
+    KtInfo ktInfo = KtInteropUtils.getKtInfo(declarationMethodElement);
 
     boolean isNative =
         isNative(declarationMethodElement)
@@ -844,6 +853,7 @@ class JavaEnvironment {
         .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
         .setExceptionTypeDescriptors(thrownExceptions)
         .setOriginalJsInfo(jsInfo)
+        .setOriginalKtInfo(ktInfo)
         .setVisibility(visibility)
         .setStatic(isStatic)
         .setConstructor(isConstructor)
@@ -852,6 +862,7 @@ class JavaEnvironment {
         .setFinal(isFinal(declarationMethodElement))
         .setDefaultMethod(isDefault)
         .setAbstract(isAbstract(declarationMethodElement))
+        .setSynchronized(isSynchronized(declarationMethodElement))
         .setSynthetic(isSynthetic(declarationMethodElement))
         .setEnumSyntheticMethod(isEnumSyntheticMethod(declarationMethodElement))
         .setSideEffectFree(isAnnotatedWithHasNoSideEffects(declarationMethodElement))
@@ -1123,8 +1134,6 @@ class JavaEnvironment {
       return null;
     }
 
-    PackageInfoCache packageInfoCache = PackageInfoCache.get();
-
     // Compute these first since they're reused in other calculations.
     boolean isAbstract = isAbstract(typeElement) && !isInterface(typeElement);
     Kind kind = getKindFromTypeBinding(typeElement);
@@ -1191,7 +1200,7 @@ class JavaEnvironment {
 
     List<TypeParameterElement> typeParameterElements = getTypeParameters(typeElement);
 
-    boolean isNullMarked = isNullMarked(typeElement, packageInfoCache);
+    boolean isNullMarked = isNullMarked(typeElement);
     return TypeDeclaration.newBuilder()
         .setClassComponents(getClassComponents(typeElement))
         .setEnclosingTypeDeclaration(createDeclarationForType(getEnclosingType(typeElement)))
@@ -1216,15 +1225,21 @@ class JavaEnvironment {
         .setJsType(JsInteropUtils.isJsType(typeElement))
         .setJsEnumInfo(jsEnumInfo)
         .setNative(JsInteropUtils.isJsNativeType(typeElement))
+        .setAnnotatedWithFunctionalInterface(isAnnotatedWithFunctionalInterface(typeElement))
+        .setAnnotatedWithAutoValue(isAnnotatedWithAutoValue(typeElement))
+        .setAnnotatedWithAutoValueBuilder(isAnnotatedWithAutoValueBuilder(typeElement))
         .setAnonymous(isAnonymous(typeElement))
         .setLocal(isLocal(typeElement))
         .setSimpleJsName(JsInteropAnnotationUtils.getJsName(typeElement))
-        .setCustomizedJsNamespace(JsInteropAnnotationUtils.getJsNamespace(typeElement))
+        .setCustomizedJsNamespace(getJsNamespace(typeElement))
+        .setObjectiveCNamePrefix(getObjectiveCNamePrefix(typeElement))
+        .setKtTypeInfo(KtInteropUtils.getKtTypeInfo(typeElement))
+        .setKtObjcInfo(KtInteropUtils.getKtObjcInfo(typeElement))
         .setWasmInfo(getWasmInfo(typeElement))
         .setNullMarked(isNullMarked)
         .setOriginalSimpleSourceName(
             typeElement.getSimpleName() != null ? typeElement.getSimpleName().toString() : null)
-        .setPackage(createPackageDeclaration(getPackageOf(typeElement), packageInfoCache))
+        .setPackage(createPackageDeclaration(getPackageOf(typeElement)))
         .setSuperTypeDescriptorFactory(
             () ->
                 (DeclaredTypeDescriptor)
@@ -1248,36 +1263,24 @@ class JavaEnvironment {
         .build();
   }
 
-  private static PackageDeclaration createPackageDeclaration(
-      PackageElement packageElement, PackageInfoCache packageInfoCache) {
+  private static PackageDeclaration createPackageDeclaration(PackageElement packageElement) {
     // Caching is left to PackageDeclaration.Builder since construction is trivial.
     String packageName = packageElement.getQualifiedName().toString();
     return PackageDeclaration.newBuilder()
         .setName(packageName)
-        .setCustomizedJsNamespace(packageInfoCache.getJsNamespace(packageName))
+        .setCustomizedJsNamespace(getJsNamespace(packageElement))
         .build();
   }
 
-  private static boolean isNullMarked(TypeElement classSymbol, PackageInfoCache packageInfoCache) {
-    if (packageInfoCache.isNullMarked(
-        getBinaryNameFromTypeBinding(toTopLevelTypeBinding(classSymbol)))) {
-      // The package is NullMarked, no need to look further.
-      return true;
-    }
-
-    return hasNullMarkedAnnotation(classSymbol);
-  }
-
-  private static boolean hasNullMarkedAnnotation(TypeElement classSymbol) {
-    if (classSymbol.getAnnotationMirrors().stream()
-        .anyMatch(a -> Nullability.isNullMarkedAnnotation(AnnotationUtils.getAnnotationName(a)))) {
+  private static boolean isNullMarked(Element element) {
+    if (hasNullMarkedAnnotation(element)) {
       // The type is NullMarked, no need to look further.
       return true;
     }
 
-    Element enclosingElement = classSymbol.getEnclosingElement();
-    return enclosingElement instanceof TypeElement
-        && hasNullMarkedAnnotation((TypeElement) enclosingElement);
+    Element enclosingElement = element.getEnclosingElement();
+    return (enclosingElement instanceof TypeElement || enclosingElement instanceof PackageElement)
+        && isNullMarked(enclosingElement);
   }
 
   private static List<TypeParameterElement> getTypeParameters(TypeElement typeElement) {
@@ -1333,7 +1336,6 @@ class JavaEnvironment {
       return null;
     }
     if (type.isIntersection()) {
-
       return ((IntersectionType) type)
           .getBounds().stream()
               .filter(this::isFunctionalInterface)
@@ -1352,6 +1354,19 @@ class JavaEnvironment {
         // functional interface will always override both.
         .findFirst()
         .get();
+  }
+
+  @Nullable
+  private String getObjectiveCNamePrefix(TypeElement typeElement) {
+    // checkArgument(!typeElement.isPrimitive());
+    String objectiveCNamePrefix = KtInteropAnnotationUtils.getKtObjectiveCName(typeElement);
+    boolean isTopLevelType =
+        typeElement.getEnclosingElement() == null
+            || typeElement.getEnclosingElement() instanceof PackageElement;
+
+    return objectiveCNamePrefix != null || !isTopLevelType
+        ? objectiveCNamePrefix
+        : KtInteropAnnotationUtils.getKtObjectiveCName(getPackageOf(typeElement));
   }
 
   private boolean isFunctionalInterface(TypeMirror type) {
@@ -1398,17 +1413,15 @@ class JavaEnvironment {
 
   @Nullable
   private static String getWasmInfo(Element element) {
-    AnnotationMirror wasmAnnotation =
-        AnnotationUtils.findAnnotationBindingByName(
-            element.getAnnotationMirrors(), WASM_ANNOTATION_NAME);
+    AnnotationMirror wasmAnnotation = findAnnotationByName(element, WASM_ANNOTATION_NAME);
     if (wasmAnnotation == null) {
       return null;
     }
-    return AnnotationUtils.getAnnotationParameterString(wasmAnnotation, "value");
+    return getAnnotationParameterString(wasmAnnotation, "value");
   }
 
   private static boolean isDeprecated(AnnotatedConstruct binding) {
-    return AnnotationUtils.hasAnnotation(binding, Deprecated.class.getName());
+    return hasAnnotation(binding, Deprecated.class.getName());
   }
 
   private static boolean isDefaultMethod(Element element) {
@@ -1427,6 +1440,10 @@ class JavaEnvironment {
     return element.getModifiers().contains(Modifier.STATIC);
   }
 
+  public static boolean isSynchronized(Element element) {
+    return element.getModifiers().contains(Modifier.SYNCHRONIZED);
+  }
+
   private static boolean isNative(Element element) {
     return element.getModifiers().contains(Modifier.NATIVE);
   }
@@ -1437,30 +1454,29 @@ class JavaEnvironment {
 
   /** Returns true if the element is annotated with @UncheckedCast. */
   private static boolean hasUncheckedCastAnnotation(Element element) {
-    return AnnotationUtils.hasAnnotation(element, UNCHECKED_CAST_ANNOTATION_NAME);
+    return hasAnnotation(element, UNCHECKED_CAST_ANNOTATION_NAME);
   }
 
   /** Returns true if the element is annotated with @HasNoSideEffects. */
   private static boolean isAnnotatedWithHasNoSideEffects(Element element) {
-    return AnnotationUtils.hasAnnotation(element, HAS_NO_SIDE_EFFECTS_ANNOTATION_NAME);
+    return hasAnnotation(element, HAS_NO_SIDE_EFFECTS_ANNOTATION_NAME);
   }
 
   /** Returns true if the element is annotated with @FunctionalInterface. */
   private static boolean isAnnotatedWithFunctionalInterface(Element element) {
-    return AnnotationUtils.hasAnnotation(element, FunctionalInterface.class.getName());
+    return hasAnnotation(element, FunctionalInterface.class.getName());
   }
 
   private static boolean isAnnotatedWithAutoValue(Element element) {
-    return AnnotationUtils.hasAnnotation(element, "com.google.auto.value.AutoValue");
+    return hasAnnotation(element, "com.google.auto.value.AutoValue");
   }
 
   private static boolean isAnnotatedWithAutoValueBuilder(Element element) {
-    return AnnotationUtils.hasAnnotation(element, "com.google.auto.value.AutoValue.Builder");
+    return hasAnnotation(element, "com.google.auto.value.AutoValue.Builder");
   }
 
   private static boolean isTestClass(Element element) {
-    return AnnotationUtils.hasAnnotation(element, "org.junit.runner.RunWith")
-        || AnnotationUtils.hasAnnotation(
-            element, "com.google.apps.xplat.testing.parameterized.RunParameterized");
+    return hasAnnotation(element, "org.junit.runner.RunWith")
+        || hasAnnotation(element, "com.google.apps.xplat.testing.parameterized.RunParameterized");
   }
 }
