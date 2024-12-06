@@ -23,10 +23,12 @@ import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.HAS_N
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.UNCHECKED_CAST_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.WASM_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.findAnnotationByName;
+import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.getAnnotationName;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.getAnnotationParameterString;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.hasAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.hasNullMarkedAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.JsInteropAnnotationUtils.getJsNamespace;
+import static com.google.j2cl.transpiler.frontend.javac.KtInteropUtils.getKtVariance;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -42,9 +44,11 @@ import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.transpiler.ast.JsEnumInfo;
 import com.google.j2cl.transpiler.ast.JsInfo;
 import com.google.j2cl.transpiler.ast.KtInfo;
+import com.google.j2cl.transpiler.ast.KtVariance;
 import com.google.j2cl.transpiler.ast.Literal;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
+import com.google.j2cl.transpiler.ast.NullabilityAnnotation;
 import com.google.j2cl.transpiler.ast.PackageDeclaration;
 import com.google.j2cl.transpiler.ast.PostfixOperator;
 import com.google.j2cl.transpiler.ast.PrefixOperator;
@@ -64,6 +68,7 @@ import com.sun.tools.javac.code.Flags;
 import com.sun.tools.javac.code.Symbol;
 import com.sun.tools.javac.code.Symbol.ClassSymbol;
 import com.sun.tools.javac.code.Symbol.MethodSymbol;
+import com.sun.tools.javac.code.Symbol.TypeVariableSymbol;
 import com.sun.tools.javac.code.Symbol.VarSymbol;
 import com.sun.tools.javac.code.TargetType;
 import com.sun.tools.javac.code.Type;
@@ -241,13 +246,16 @@ class JavaEnvironment {
   }
 
   Variable createVariable(
-      SourcePosition sourcePosition, VariableElement variableElement, boolean isParameter) {
+      SourcePosition sourcePosition,
+      VariableElement variableElement,
+      boolean isParameter,
+      boolean inNullMarkedScope) {
     TypeMirror type = variableElement.asType();
     String name = variableElement.getSimpleName().toString();
     TypeDescriptor typeDescriptor =
         isParameter
             ? createTypeDescriptorWithNullability(
-                type, variableElement.getAnnotationMirrors(), /* inNullMarkedScope= */ false)
+                type, variableElement.getAnnotationMirrors(), inNullMarkedScope)
             : createTypeDescriptor(type);
     boolean isFinal = isFinal(variableElement);
     boolean isUnusableByJsSuppressed =
@@ -319,11 +327,15 @@ class JavaEnvironment {
     }
 
     if (typeMirror.getKind() == TypeKind.TYPEVAR) {
-      return createTypeVariable((javax.lang.model.type.TypeVariable) typeMirror);
+      return createTypeVariable(
+          (javax.lang.model.type.TypeVariable) typeMirror, elementAnnotations, inNullMarkedScope);
     }
 
     if (typeMirror.getKind() == TypeKind.WILDCARD) {
-      return createWildcardTypeVariable(((WildcardType) typeMirror).getExtendsBound());
+      return createWildcardTypeVariable(
+          ((WildcardType) typeMirror).getExtendsBound(),
+          ((WildcardType) typeMirror).getSuperBound(),
+          inNullMarkedScope);
     }
 
     boolean isNullable = isNullable(typeMirror, elementAnnotations, inNullMarkedScope);
@@ -350,11 +362,6 @@ class JavaEnvironment {
       List<? extends AnnotationMirror> elementAnnotations,
       boolean inNullMarkedScope) {
     checkArgument(!typeMirror.getKind().isPrimitive());
-
-    if (asTypeElement(typeMirror).getQualifiedName().contentEquals("java.lang.Void")) {
-      // Void is always nullable.
-      return true;
-    }
 
     Iterable<? extends AnnotationMirror> allAnnotations =
         Iterables.concat(elementAnnotations, typeMirror.getAnnotationMirrors());
@@ -383,15 +390,21 @@ class JavaEnvironment {
         annotationType.asElement().getQualifiedName().toString());
   }
 
-  private TypeVariable createTypeVariable(javax.lang.model.type.TypeVariable typeVariable) {
+  private TypeVariable createTypeVariable(
+      javax.lang.model.type.TypeVariable typeVariable,
+      List<? extends AnnotationMirror> elementAnnotations,
+      boolean inNullMarkedScope) {
     if (typeVariable instanceof CapturedType) {
-      return createWildcardTypeVariable(typeVariable.getUpperBound());
+      return createWildcardTypeVariable(
+          typeVariable.getUpperBound(), typeVariable.getLowerBound(), inNullMarkedScope);
     }
 
     Supplier<TypeDescriptor> boundTypeDescriptorFactory =
-        () -> createTypeDescriptor(typeVariable.getUpperBound());
+        () -> createTypeDescriptor(typeVariable.getUpperBound(), inNullMarkedScope);
 
     List<String> classComponents = getClassComponents(typeVariable);
+    KtVariance ktVariance =
+        getKtVariance(((TypeVariableSymbol) typeVariable.asElement()).baseSymbol());
     return TypeVariable.newBuilder()
         .setUpperBoundTypeDescriptorFactory(boundTypeDescriptorFactory)
         .setUniqueKey(
@@ -399,17 +412,25 @@ class JavaEnvironment {
                 + (typeVariable.getUpperBound() != null
                     ? typeVariable.getUpperBound().toString()
                     : ""))
-        .setKtVariance(KtInteropUtils.getKtVariance(typeVariable.asElement()))
+        .setKtVariance(ktVariance)
         .setName(typeVariable.asElement().getSimpleName().toString())
+        .setNullabilityAnnotation(getNullabilityAnnotation(typeVariable, elementAnnotations))
         .build();
   }
 
-  private TypeVariable createWildcardTypeVariable(@Nullable TypeMirror bound) {
+  private TypeVariable createWildcardTypeVariable(
+      @Nullable TypeMirror upperBound, @Nullable TypeMirror lowerBound, boolean inNullMarkedScope) {
     return TypeVariable.newBuilder()
-        .setUpperBoundTypeDescriptorFactory(() -> createTypeDescriptor(bound))
+        .setUpperBoundTypeDescriptorFactory(
+            () -> createTypeDescriptor(upperBound, inNullMarkedScope))
+        .setLowerBoundTypeDescriptor(createTypeDescriptor(lowerBound, inNullMarkedScope))
         .setWildcard(true)
         .setName("?")
-        .setUniqueKey("::?::" + (bound != null ? bound.toString() : ""))
+        .setUniqueKey(
+            "::^::"
+                + (upperBound != null ? upperBound.toString() : "")
+                + "::v::"
+                + (lowerBound != null ? lowerBound.toString() : ""))
         .build();
   }
 
@@ -590,18 +611,22 @@ class JavaEnvironment {
    * @param declarationMethodElement the method declaration.
    */
   MethodDescriptor createMethodDescriptor(
-      ExecutableType methodType, ExecutableElement declarationMethodElement) {
+      ExecutableType methodType,
+      ExecutableElement declarationMethodElement,
+      List<TypeDescriptor> typeArguments) {
 
     DeclaredTypeDescriptor enclosingTypeDescriptor =
         createDeclaredTypeDescriptor(declarationMethodElement.getEnclosingElement().asType());
-    return createMethodDescriptor(enclosingTypeDescriptor, methodType, declarationMethodElement);
+    return createMethodDescriptor(
+        enclosingTypeDescriptor, methodType, declarationMethodElement, typeArguments);
   }
 
   /** Create a MethodDescriptor directly based on the given JavaC ExecutableElement. */
   MethodDescriptor createMethodDescriptor(
       DeclaredTypeDescriptor enclosingTypeDescriptor,
       ExecutableType methodType,
-      ExecutableElement declarationMethodElement) {
+      ExecutableElement declarationMethodElement,
+      List<TypeDescriptor> typeArguments) {
 
     // TODO(b/380911302): Remove redundancy in the creation of method descriptors.
     // The enclosing type descriptor might be a subclass of the actual type descriptor, hence
@@ -647,11 +672,12 @@ class JavaEnvironment {
     }
 
     return createDeclaredMethodDescriptor(
-        enclosingTypeDescriptor.toNullable(),
+        enclosingTypeDescriptor,
         declarationMethodElement,
         declarationMethodDescriptor,
         parametersBuilder.build(),
-        returnTypeDescriptor);
+        returnTypeDescriptor,
+        typeArguments);
   }
 
   /** Create a MethodDescriptor directly based on the given JavaC ExecutableElement. */
@@ -659,7 +685,10 @@ class JavaEnvironment {
     DeclaredTypeDescriptor enclosingTypeDescriptor =
         createDeclaredTypeDescriptor(methodElement.getEnclosingElement().asType());
     return createMethodDescriptor(
-        enclosingTypeDescriptor, (ExecutableType) methodElement.asType(), methodElement);
+        enclosingTypeDescriptor,
+        (ExecutableType) methodElement.asType(),
+        methodElement,
+        ImmutableList.of());
   }
 
 
@@ -804,7 +833,8 @@ class JavaEnvironment {
       ExecutableElement declarationMethodElement,
       MethodDescriptor declarationMethodDescriptor,
       List<TypeDescriptor> parameters,
-      TypeDescriptor returnTypeDescriptor) {
+      TypeDescriptor returnTypeDescriptor,
+      List<TypeDescriptor> typeArguments) {
     ImmutableList<TypeVariable> typeParameterTypeDescriptors =
         declarationMethodElement.getTypeParameters().stream()
             .map(Element::asType)
@@ -851,6 +881,7 @@ class JavaEnvironment {
         .setDeclarationDescriptor(declarationMethodDescriptor)
         .setReturnTypeDescriptor(isConstructor ? enclosingTypeDescriptor : returnTypeDescriptor)
         .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
+        .setTypeArgumentTypeDescriptors(typeArguments)
         .setExceptionTypeDescriptors(thrownExceptions)
         .setOriginalJsInfo(jsInfo)
         .setOriginalKtInfo(ktInfo)
@@ -1002,12 +1033,15 @@ class JavaEnvironment {
             typeMirrors.stream(),
             declaredTypeParameters.stream(),
             (typeMirror, typeParameter) -> {
+              javax.lang.model.type.TypeVariable typeVariable =
+                  (javax.lang.model.type.TypeVariable) typeParameter.asType();
               if (typeMirror.getKind() == TypeKind.WILDCARD
-                  && isNullOrJavaLangObject(((WildcardType) typeMirror).getExtendsBound())) {
+                  && isNullOrJavaLangObject(((WildcardType) typeMirror).getExtendsBound())
+                  && !isNullOrJavaLangObject(typeVariable.getUpperBound())) {
                 // If this is a wildcard but the bound is not specified (or is Object), we might be
                 // able to get a tighter bound from the declaration.
                 return createWildcardTypeVariable(
-                    ((javax.lang.model.type.TypeVariable) typeParameter.asType()).getUpperBound());
+                    typeVariable.getUpperBound(), /* lowerBound= */ null, inNullMarkedScope);
               }
               return createTypeDescriptor(typeMirror, inNullMarkedScope);
             })
@@ -1204,6 +1238,14 @@ class JavaEnvironment {
     return TypeDeclaration.newBuilder()
         .setClassComponents(getClassComponents(typeElement))
         .setEnclosingTypeDeclaration(createDeclarationForType(getEnclosingType(typeElement)))
+        .setSuperTypeDescriptorFactory(
+            () ->
+                (DeclaredTypeDescriptor)
+                    applyNullabilityAnnotations(
+                        createDeclaredTypeDescriptor(typeElement.getSuperclass(), isNullMarked),
+                        typeElement,
+                        position ->
+                            position.type == TargetType.CLASS_EXTENDS && position.type_index == -1))
         .setInterfaceTypeDescriptorsFactory(
             () ->
                 createTypeDescriptors(
@@ -1240,19 +1282,11 @@ class JavaEnvironment {
         .setOriginalSimpleSourceName(
             typeElement.getSimpleName() != null ? typeElement.getSimpleName().toString() : null)
         .setPackage(createPackageDeclaration(getPackageOf(typeElement)))
-        .setSuperTypeDescriptorFactory(
-            () ->
-                (DeclaredTypeDescriptor)
-                    applyNullabilityAnnotations(
-                        createDeclaredTypeDescriptor(typeElement.getSuperclass(), isNullMarked),
-                        typeElement,
-                        position ->
-                            position.type == TargetType.CLASS_EXTENDS && position.type_index == -1))
         .setTypeParameterDescriptors(
             typeParameterElements.stream()
                 .map(TypeParameterElement::asType)
                 .map(javax.lang.model.type.TypeVariable.class::cast)
-                .map(this::createTypeVariable)
+                .map(tv -> createTypeVariable(tv, ImmutableList.of(), isNullMarked))
                 .collect(toImmutableList()))
         .setVisibility(getVisibility(typeElement))
         .setDeclaredMethodDescriptorsFactory(declaredMethods)
@@ -1367,6 +1401,27 @@ class JavaEnvironment {
     return objectiveCNamePrefix != null || !isTopLevelType
         ? objectiveCNamePrefix
         : KtInteropAnnotationUtils.getKtObjectiveCName(getPackageOf(typeElement));
+  }
+
+  /** Return whether a type is annotated for nullablility and which type of annotation it has. */
+  private static NullabilityAnnotation getNullabilityAnnotation(
+      AnnotatedConstruct annotatedConstruct, List<? extends AnnotationMirror> elementAnnotations) {
+
+    Iterable<AnnotationMirror> allAnnotations =
+        Iterables.concat(elementAnnotations, annotatedConstruct.getAnnotationMirrors());
+    for (AnnotationMirror annotation : allAnnotations) {
+      String annotationName = getAnnotationName(annotation);
+
+      if (Nullability.isNonNullAnnotation(annotationName)) {
+        return NullabilityAnnotation.NOT_NULLABLE;
+      }
+
+      if (Nullability.isNullableAnnotation(annotationName)) {
+        return NullabilityAnnotation.NULLABLE;
+      }
+    }
+
+    return NullabilityAnnotation.NONE;
   }
 
   private boolean isFunctionalInterface(TypeMirror type) {

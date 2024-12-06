@@ -311,7 +311,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         environment.createVariable(
             getNamePosition(variableElement.getSimpleName().toString(), variableDeclaration),
             variableElement,
-            isParameter);
+            isParameter,
+            getCurrentType().getDeclaration().isNullMarked());
     variableByVariableElement.put(variableElement, variable);
     return variable;
   }
@@ -870,10 +871,12 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           .build();
     }
 
+    List<TypeDescriptor> typeArguments = convertTypeArguments(memberReference.getTypeArguments());
     MethodDescriptor targetMethodDescriptor =
         environment.createMethodDescriptor(
             /* methodType= */ memberReference.referentType.asMethodType(),
-            /* declarationMethodElement= */ methodSymbol);
+            /* declarationMethodElement= */ methodSymbol,
+            typeArguments);
     Expression qualifier = convertExpressionOrNull(memberReference.getQualifierExpression());
     if (qualifier instanceof JavaScriptConstructorReference) {
       // The qualifier was just the class name, remove it.
@@ -977,12 +980,14 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     MethodSymbol constructorElement = (MethodSymbol) expression.constructor;
     DeclaredTypeDescriptor targetType = environment.createDeclaredTypeDescriptor(expression.type);
+    var typeArguments = convertTypeArguments(expression.getTypeArguments());
     MethodDescriptor constructorMethodDescriptor =
         environment.createMethodDescriptor(
             /* enclosingTypeDescriptor= */ targetType,
             /* methodType= */ (ExecutableType)
                 constructorElement.asMemberOf(expression.type, environment.internalTypes).asType(),
-            /* declarationMethodElement= */ constructorElement);
+            /* declarationMethodElement= */ constructorElement,
+            typeArguments);
     Expression qualifier = convertExpressionOrNull(expression.getEnclosingExpression());
     List<Expression> arguments =
         convertArguments(constructorMethodDescriptor, expression.getArguments());
@@ -1021,10 +1026,12 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       qualifier = null;
     }
 
+    var typeArguments = convertTypeArguments(methodInvocation.getTypeArguments());
     MethodDescriptor methodDescriptor =
         environment.createMethodDescriptor(
             /* methodType= */ methodInvocation.getMethodSelect().type.asMethodType(),
-            /* declarationMethodElement= */ methodSymbol);
+            /* declarationMethodElement= */ methodSymbol,
+            typeArguments);
 
     if (methodDescriptor.isConstructor()
         && methodDescriptor.isMemberOf(TypeDescriptors.get().javaLangEnum)) {
@@ -1076,6 +1083,16 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             .collect(toCollection(ArrayList::new));
 
     return AstUtils.maybePackageVarargs(methodDescriptor, arguments);
+  }
+
+  private ImmutableList<TypeDescriptor> convertTypeArguments(
+      List<? extends JCExpression> typeArguments) {
+    if (typeArguments == null) {
+      return ImmutableList.of();
+    }
+    return environment.createTypeDescriptors(
+        typeArguments.stream().map(e -> e.type).collect(toImmutableList()),
+        getCurrentType().getDeclaration().isNullMarked());
   }
 
   /**
