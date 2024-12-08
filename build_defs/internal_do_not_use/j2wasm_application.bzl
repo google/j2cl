@@ -271,7 +271,7 @@ def _impl_j2wasm_application(ctx):
             inputs = inputs,
             outputs = outputs,
             mnemonic = "J2wasm",
-            progress_message = "Compiling to Wasm (stage %s)" % current_stage,
+            progress_message = "Compiling to Wasm %s (stage %s)" % (ctx.label, current_stage),
             # Binaryen can leverage 4 cores with some amount of parallelism.
             execution_requirements = {"cpu:4": ""},
         )
