@@ -1,0 +1,66 @@
+// Generated from "j2ktnotpassing/NullabilityScopes2.java"
+@file:OptIn(ExperimentalObjCName::class)
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN")
+
+package j2ktnotpassing
+
+import javaemul.lang.*
+import java.lang.RuntimeException
+import java.util.function.Function
+import java.util.stream.Collector
+import kotlin.Any
+import kotlin.OptIn
+import kotlin.Suppress
+import kotlin.collections.MutableList
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
+
+@ObjCName("J2ktJ2ktnotpassingNullabilityScopes2", exact = true)
+open class NullabilityScopes2 internal constructor() {
+ @ObjCName("J2ktJ2ktnotpassingNullabilityScopes2_NullMarkedScope", exact = true)
+ open class NullMarkedScope internal constructor() {
+  @ObjCName("J2ktJ2ktnotpassingNullabilityScopes2_NullMarkedScopeCompanion", exact = true)
+  companion object {
+   @JvmStatic
+   @ObjCName("toList")
+   fun <E> toList(): Collector<E, *, MutableList<E>> {
+    throw RuntimeException()
+   }
+  }
+
+  @ObjCName("J2ktJ2ktnotpassingNullabilityScopes2_NullMarkedScope_Recursive", exact = true)
+  fun interface Recursive<M: NullabilityScopes2.NullMarkedScope.Recursive<M>> {
+   @ObjCName("toList")
+   fun toList(): MutableList<NullabilityScopes2.NullMarkedScope.Recursive<M>>
+  }
+ }
+
+ @ObjCName("J2ktJ2ktnotpassingNullabilityScopes2_NonNullMarkedScope", exact = true)
+ open class NonNullMarkedScope<T: NullabilityScopes2.NullMarkedScope.Recursive<T>> internal constructor() {
+  @ObjCName("flatten")
+  open fun flatten(
+   @ObjCName("withJ2ktnotpassingNullabilityScopes2_NullMarkedScope_Recursive") recursive: NullabilityScopes2.NullMarkedScope.Recursive<T>?
+  ): MutableList<Any?>? {
+   return recursive!!.toList().stream().map<MutableList<Any>>(Function { arg0: NullabilityScopes2.NullMarkedScope.Recursive<T> ->
+    return@Function this.flatten(arg0)
+   }).flatMap<Any>(Function { arg0_1: MutableList<Any> ->
+    return@Function arg0_1.stream()
+   }).collect<MutableList<Any>, Any>(NullabilityScopes2.NullMarkedScope.toList<Any>() as Collector<Any, Any, MutableList<Any>>) as MutableList<Any?>?
+  }
+ }
+}
