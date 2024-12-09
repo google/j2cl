@@ -6,7 +6,7 @@ def _impl(ctx):
     zip_tool = ctx.executable._zip
     src_jar = ctx.outputs.srcjar
     excludes = [
-        x.label.name.replace("super-wasm/", "").replace("super-wasm-alt/", "")
+        x.label.name.replace("super-wasm/", "")
         for x in (ctx.attr.super_srcs + ctx.attr.excludes)
     ]
     all_srcs = [f for f in ctx.files.srcs if not any([f.path.endswith(x) for x in excludes])]
