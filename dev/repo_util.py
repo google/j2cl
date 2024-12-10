@@ -27,8 +27,8 @@ SIZE_REPORT = INTEGRATION_ROOT + "size_report.txt"
 TEST_LIST = INTEGRATION_ROOT + "optimized_js_list.bzl"
 BENCH_ROOT = "benchmarking/java/com/google/j2cl/benchmarks/"
 JVM_BENCH_PATTERN = BENCH_ROOT + "%s"
-J2CL_BENCH_PATTERN = BENCH_ROOT + "%s-j2cl"
-J2WASM_BENCH_PATTERN = BENCH_ROOT + "%s-j2wasm"
+J2CL_BENCH_PATTERN = BENCH_ROOT + "%s-j2cl-%s"
+J2WASM_BENCH_PATTERN = BENCH_ROOT + "%s-j2wasm-%s"
 BLAZE_CMD = "bazel"
 BIN_DIR = BLAZE_CMD + "-bin/"
 
@@ -39,9 +39,11 @@ def get_benchmarks(bench_name, platforms):
   if "JVM" in platforms:
     benchmarks["JVM"] = JVM_BENCH_PATTERN % bench_name
   if "CLOSURE" in platforms:
-    benchmarks["J2CL"] = J2CL_BENCH_PATTERN % bench_name
+    benchmarks["JS_V8"] = J2CL_BENCH_PATTERN % (bench_name, "v8")
+    benchmarks["JS_SM"] = J2CL_BENCH_PATTERN % (bench_name, "sm")
   if "WASM" in platforms:
-    benchmarks["J2WASM"] = J2WASM_BENCH_PATTERN % bench_name
+    benchmarks["WASM_V8"] = J2WASM_BENCH_PATTERN % (bench_name, "v8")
+    benchmarks["WASM_SM"] = J2WASM_BENCH_PATTERN % (bench_name, "sm")
   return benchmarks
 
 

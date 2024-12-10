@@ -69,7 +69,7 @@ def benchmark(name, deps = []):
         entry_points = ["%s_launcher" % name],
     )
 
-    _d8_benchmark(
+    _jsvm_benchmark(
         name = "%s_local-j2cl" % name,
         data = [":%s_j2cl_entry.js" % name],
         tags = ["j2cl"],
@@ -102,7 +102,7 @@ def benchmark(name, deps = []):
         entry_points = ["%s_launcher" % name],
     )
 
-    _d8_benchmark(
+    _jsvm_benchmark(
         name = "%s_local-j2wasm" % name,
         data = [
             ":%s_j2wasm_entry.js" % name,
@@ -127,11 +127,15 @@ def gen_benchmark_suite(name):
         ],
     )
 
-def _d8_benchmark(name, data, tags):
+def _jsvm_benchmark(name, data, tags):
+    _jsvm_benchmark_impl(name + "-v8", "v8 --expose-gc --experimental-wasm-imported-strings --turboshaft-future", data, tags)
+    _jsvm_benchmark_impl(name + "-sm", "sm -P wasm_js_string_builtins -f", data, tags)
+
+def _jsvm_benchmark_impl(name, cmd, data, tags):
     native.genrule(
         name = "gen_%s_sh" % name,
         cmd = "echo cd $$(dirname $(location %s)) '&&' " % data[0] +
-              "v8 --expose-gc --experimental-wasm-imported-strings --turboshaft-future" +
+              cmd +
               " $$(basename $(location %s)) > $@" % data[0] +
               " -e \\''const results = JSON.parse(execute())'\\'" +
               " -e \\''console.log(results.reduce((a, b) => a + b) / results.length)'\\' ",
