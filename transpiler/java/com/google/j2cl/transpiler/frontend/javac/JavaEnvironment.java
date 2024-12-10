@@ -253,10 +253,11 @@ class JavaEnvironment {
     TypeMirror type = variableElement.asType();
     String name = variableElement.getSimpleName().toString();
     TypeDescriptor typeDescriptor =
-        isParameter
-            ? createTypeDescriptorWithNullability(
-                type, variableElement.getAnnotationMirrors(), inNullMarkedScope)
-            : createTypeDescriptor(type);
+        createTypeDescriptorWithNullability(
+            type, variableElement.getAnnotationMirrors(), inNullMarkedScope);
+    if (!isParameter) {
+      typeDescriptor = typeDescriptor.toNullable();
+    }
     boolean isFinal = isFinal(variableElement);
     boolean isUnusableByJsSuppressed =
         JsInteropAnnotationUtils.isUnusableByJsSuppressed(variableElement);
