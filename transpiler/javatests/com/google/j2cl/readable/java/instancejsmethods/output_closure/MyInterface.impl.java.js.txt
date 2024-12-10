@@ -35,7 +35,7 @@ class MyInterface {
  }
 }
 MyInterface.$markImplementor(/**@type {Function}*/ (MyInterface));
-$Util.$setClassMetadataForInterface(MyInterface, 'instancejsmethods.MyInterface');
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (MyInterface), 'instancejsmethods.MyInterface');
 
 exports = MyInterface;
 

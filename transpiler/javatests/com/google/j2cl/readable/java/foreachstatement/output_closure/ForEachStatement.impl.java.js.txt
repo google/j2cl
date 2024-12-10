@@ -60,12 +60,12 @@ class ForEachStatement extends j_l_Object {
    let __$exc = $Exceptions.toJava(__$jsexc);
    if (Exception1.$isInstance(__$exc) || Exception2.$isInstance(__$exc)) {
     let e = /**@type {(Exception1|Exception2)}*/ (__$exc);
-    for (let $iterator = /**@type {Iterable<(Number|number)>}*/ ($Casts.$to(e, Iterable)).m_iterator__java_util_Iterator(); $iterator.m_hasNext__boolean(); ) {
+    for (let $iterator = /**@type {Iterable<(Number|number)>}*/ ($Casts.$to(e, /**@type {Function}*/ (Iterable))).m_iterator__java_util_Iterator(); $iterator.m_hasNext__boolean(); ) {
      let o = /**@type {(Number|number)}*/ ($Casts.$to($iterator.m_next__java_lang_Object(), Number));
     }
    } else if (Exception3.$isInstance(__$exc) || Exception4.$isInstance(__$exc)) {
     let e_1 = /**@type {(Exception3|Exception4)}*/ (__$exc);
-    for (let $iterator_1 = /**@type {Iterable<*>}*/ ($Casts.$to(e_1, Iterable)).m_iterator__java_util_Iterator(); $iterator_1.m_hasNext__boolean(); ) {
+    for (let $iterator_1 = /**@type {Iterable<*>}*/ ($Casts.$to(e_1, /**@type {Function}*/ (Iterable))).m_iterator__java_util_Iterator(); $iterator_1.m_hasNext__boolean(); ) {
      let o_1 = $iterator_1.m_next__java_lang_Object();
     }
    } else {
@@ -78,7 +78,7 @@ class ForEachStatement extends j_l_Object {
    let __$exc_1 = $Exceptions.toJava(__$jsexc_1);
    if (Exception2.$isInstance(__$exc_1) || Exception3.$isInstance(__$exc_1)) {
     let e_2 = /**@type {(Exception2|Exception3)}*/ (__$exc_1);
-    for (let $iterator_2 = /**@type {Iterable<Integer>}*/ ($Casts.$to(e_2, Iterable)).m_iterator__java_util_Iterator(); $iterator_2.m_hasNext__boolean(); ) {
+    for (let $iterator_2 = /**@type {Iterable<Integer>}*/ ($Casts.$to(e_2, /**@type {Function}*/ (Iterable))).m_iterator__java_util_Iterator(); $iterator_2.m_hasNext__boolean(); ) {
      let o_2 = $Primitives.widenIntToLong(/**@type {Integer}*/ ($Casts.$to($iterator_2.m_next__java_lang_Object(), Integer)).m_intValue__int());
     }
    } else {
@@ -89,7 +89,7 @@ class ForEachStatement extends j_l_Object {
  /** @nodts @template T, U, V */
  m_testTypeVariable__void_$p_foreachstatement_ForEachStatement() {
   let iterable = null;
-  for (let $iterator = /**@type {!Iterable<?string>}*/ ($Casts.$to(iterable, Iterable)).m_iterator__java_util_Iterator(); $iterator.m_hasNext__boolean(); ) {
+  for (let $iterator = /**@type {!Iterable<?string>}*/ ($Casts.$to(iterable, /**@type {Function}*/ (Iterable))).m_iterator__java_util_Iterator(); $iterator.m_hasNext__boolean(); ) {
    let s = /**@type {?string}*/ ($Casts.$to($iterator.m_next__java_lang_Object(), j_l_String));
   }
   let anotherIterable = null;
@@ -97,10 +97,10 @@ class ForEachStatement extends j_l_Object {
    let s_1 = /**@type {Integer}*/ ($Casts.$to(/**@type {!Iterator<Integer>}*/ ($iterator_1).m_next__java_lang_Object(), Integer)).m_intValue__int();
   }
   let integerIterable = null;
-  for (let $iterator_2 = /**@type {!Iterable<Integer>}*/ ($Casts.$to(integerIterable, Iterable)).m_iterator__java_util_Iterator(); $iterator_2.m_hasNext__boolean(); ) {
+  for (let $iterator_2 = /**@type {!Iterable<Integer>}*/ ($Casts.$to(integerIterable, /**@type {Function}*/ (Iterable))).m_iterator__java_util_Iterator(); $iterator_2.m_hasNext__boolean(); ) {
    let i = /**@type {Integer}*/ ($Casts.$to($iterator_2.m_next__java_lang_Object(), Integer)).m_intValue__int();
   }
-  for (let $iterator_3 = /**@type {!Iterable<Integer>}*/ ($Casts.$to(integerIterable, Iterable)).m_iterator__java_util_Iterator(); $iterator_3.m_hasNext__boolean(); ) {
+  for (let $iterator_3 = /**@type {!Iterable<Integer>}*/ ($Casts.$to(integerIterable, /**@type {Function}*/ (Iterable))).m_iterator__java_util_Iterator(); $iterator_3.m_hasNext__boolean(); ) {
    let i_1 = $Primitives.widenIntToLong(/**@type {Integer}*/ ($Casts.$to($iterator_3.m_next__java_lang_Object(), Integer)).m_intValue__int());
   }
   let charIterable = null;

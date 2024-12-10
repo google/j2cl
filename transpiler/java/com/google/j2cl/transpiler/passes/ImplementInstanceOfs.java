@@ -27,7 +27,6 @@ import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
 import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
-import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
@@ -72,12 +71,7 @@ public class ImplementInstanceOfs extends NormalizationPass {
       // Type.$markImplementor(Type);
       type.addLoadTimeStatement(
           createMarkImplementorCall(
-              type.getTypeDescriptor(),
-              // TODO(b/79389970): remove cast after b/79389970 is handled in Closure.
-              JsDocCastExpression.newBuilder()
-                  .setCastTypeDescriptor(TypeDescriptors.get().nativeFunction)
-                  .setExpression(new JavaScriptConstructorReference(type.getDeclaration()))
-                  .build()));
+              type.getTypeDescriptor(), new JavaScriptConstructorReference(type.getDeclaration())));
     } else {
       // Call markImplementor on all interfaces that are directly implemented by the class to
       // implement the support instanceOf Interface.

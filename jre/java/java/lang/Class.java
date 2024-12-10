@@ -35,9 +35,7 @@ public final class Class<T> implements Type, Serializable {
    */
   @JsMethod
   @HasNoSideEffects
-  private static Class<?> $get(Object obj, @JsOptional Double opt_dimensionCount) {
-    // TODO(b/79389970): Change the argument to Constructor.
-    Constructor ctor = JsUtils.uncheckedCast(obj);
+  private static Class<?> $get(Constructor ctor, @JsOptional Double opt_dimensionCount) {
     int dimensionCount = JsUtils.coerceToInt(opt_dimensionCount);
     return ctor.cache("$$class/" + dimensionCount, () -> new Class(ctor, dimensionCount));
   }

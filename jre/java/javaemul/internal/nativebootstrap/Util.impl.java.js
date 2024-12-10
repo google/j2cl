@@ -50,8 +50,7 @@ class Util {
   }
 
   /**
-   * // TODO(b/79389970): change ctor to Function
-   * @param {Object} ctor
+   * @param {!Constructor} ctor
    * @param {string} name
    * @public
    */

@@ -28,7 +28,7 @@ class MyInterface {
  static $loadModules() {}
 }
 MyInterface.$markImplementor(/**@type {Function}*/ (MyInterface));
-$Util.$setClassMetadataForInterface(MyInterface, 'jsbridgeaccidentaloverride.MyInterface');
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (MyInterface), 'jsbridgeaccidentaloverride.MyInterface');
 
 exports = MyInterface;
 

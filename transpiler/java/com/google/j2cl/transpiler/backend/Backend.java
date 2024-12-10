@@ -28,6 +28,7 @@ import com.google.j2cl.transpiler.passes.AddDisambiguatingOverloadResolutionCast
 import com.google.j2cl.transpiler.passes.AddDisambiguatingSuperMethodForwardingStubs;
 import com.google.j2cl.transpiler.passes.AddEntryPointBridgesWasm;
 import com.google.j2cl.transpiler.passes.AddEnumImplicitMethods;
+import com.google.j2cl.transpiler.passes.AddInterfaceConstructorCasts;
 import com.google.j2cl.transpiler.passes.AddJavaLangObjectForwardingMethods;
 import com.google.j2cl.transpiler.passes.AddNothingReturnStatements;
 import com.google.j2cl.transpiler.passes.AddVisibilityMethodBridgesJ2kt;
@@ -349,6 +350,7 @@ public enum Backend {
           // variable motion.
           NormalizeMultiExpressions::new,
           RemoveUnneededJsDocCasts::new,
+          AddInterfaceConstructorCasts::new,
           NormalizeJsDocCastExpressions::new,
           NormalizeJsAwaitMethodInvocations::new,
           RemoveUnneededNotNullChecks::new,

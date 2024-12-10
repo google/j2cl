@@ -35,7 +35,7 @@ class MyInterface {
  }
 }
 MyInterface.$markImplementor(/**@type {Function}*/ (MyInterface));
-$Util.$setClassMetadataForInterface(MyInterface, 'abstractinterfaceimpl.MyInterface');
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (MyInterface), 'abstractinterfaceimpl.MyInterface');
 
 exports = MyInterface;
 

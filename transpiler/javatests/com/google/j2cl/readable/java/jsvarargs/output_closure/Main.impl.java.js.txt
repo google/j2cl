@@ -59,13 +59,13 @@ class Main extends j_l_Object {
  /** @return {Main} */
  static parameterizedType(.../** ...List<Main> */ elements) {
   Main.$clinit();
-  $Arrays.$stampType(elements, List);
+  $Arrays.$stampType(elements, /**@type {Function}*/ (List));
   return /**@type {Main}*/ ($Casts.$to(elements[0].getAtIndex(0), Main));
  }
  /** @template T @return {T} */
  static parameterizedByT(.../** ...List<T> */ elements) {
   Main.$clinit();
-  $Arrays.$stampType(elements, List);
+  $Arrays.$stampType(elements, /**@type {Function}*/ (List));
   return elements[0].getAtIndex(0);
  }
  /** @nodts */

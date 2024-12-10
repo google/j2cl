@@ -29,7 +29,7 @@ class SuperInterface {
  static $loadModules() {}
 }
 SuperInterface.$markImplementor(/**@type {Function}*/ (SuperInterface));
-$Util.$setClassMetadataForInterface(SuperInterface, 'accidentaloverride.SuperInterface');
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (SuperInterface), 'accidentaloverride.SuperInterface');
 
 exports = SuperInterface;
 

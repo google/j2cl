@@ -29,7 +29,7 @@ class MyInterface {
  static $loadModules() {}
 }
 MyInterface.$markImplementor(/**@type {Function}*/ (MyInterface));
-$Util.$setClassMetadataForInterface(MyInterface, 'genericinterfaceabstractimpl.MyInterface');
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (MyInterface), 'genericinterfaceabstractimpl.MyInterface');
 
 exports = MyInterface;
 
