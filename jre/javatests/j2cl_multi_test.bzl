@@ -73,4 +73,4 @@ def j2cl_multi_test(name, test_class, deps, enable_jvm = True, enable_j2kt_nativ
             **kwargs
         )
 
-    native.test_suite(name = name, tests = tests)
+    native.test_suite(name = name, tests = tests, tags = kwargs.pop("tags", []))
