@@ -48,16 +48,16 @@ internal fun K2JVMCompilerArguments.setEligibleFriends(currentTarget: String?) {
       .split(":")
       .filter {
         val depPath = Path.of(it)
-        val depLabel = useManifestFast(depPath) { it.targetLabel } ?: return@filter false
+        val depLabel = getLabelFromManifest(depPath) ?: return@filter false
         AutoFriends.isEligibleFriend(currentLabel, depLabel)
       }
       .toTypedArray()
 }
 
-private fun <T> useManifestFast(path: Path, block: (KtManifest) -> T): T? {
+private fun getLabelFromManifest(path: Path): BzlLabel? {
   return JarInputStream(BufferedInputStream(Files.newInputStream(path)), /* verify= */ false).use {
     jar ->
-    jar.manifest?.let { block(KtManifest(it)) }
+    jar.manifest?.let { KtManifest(it).targetLabel }
   }
 }
 
