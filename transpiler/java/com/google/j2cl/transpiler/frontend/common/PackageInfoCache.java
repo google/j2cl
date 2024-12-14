@@ -28,6 +28,8 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.jar.JarFile;
+import java.util.jar.Manifest;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import javax.annotation.Nullable;
@@ -99,6 +101,7 @@ public class PackageInfoCache {
   }
 
   private final Map<String, PackageReport> packageReportByTypeName = new HashMap<>();
+  private final Map<String, Manifest> manifestByPath = new HashMap<>();
   private final Problems problems;
 
   private PackageInfoCache(List<String> classPathEntries, Problems problems) {
@@ -126,6 +129,10 @@ public class PackageInfoCache {
     return getPackageReport(topLevelTypeSourceName).isNullMarked();
   }
 
+  public Manifest getManifest(String path) {
+    return manifestByPath.get(path);
+  }
+
   public void setPackageProperties(
       String packagePath, String packageJsNamespace, String objectiveCName, boolean isNullMarked) {
     packageReportByTypeName.put(
@@ -147,6 +154,9 @@ public class PackageInfoCache {
         for (ZipEntry entry : ZipFiles.entries(zipFile)) {
           if (entry.getName().endsWith("package-info.class")) {
             recordPackageInfo(zipFile.getInputStream(entry));
+          }
+          if (entry.getName().equals(JarFile.MANIFEST_NAME)) {
+            manifestByPath.put(classPathEntry, new Manifest(zipFile.getInputStream(entry)));
           }
         }
       } catch (IOException e) {

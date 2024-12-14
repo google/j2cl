@@ -18,12 +18,10 @@ package com.google.j2cl.transpiler.frontend.kotlin
 import com.google.devtools.kotlin.common.AutoFriends
 import com.google.devtools.kotlin.common.BzlLabel
 import com.google.devtools.kotlin.common.KtManifest
+import com.google.j2cl.transpiler.frontend.common.PackageInfoCache
 import com.intellij.openapi.Disposable
-import java.io.BufferedInputStream
 import java.io.File
-import java.nio.file.Files
-import java.nio.file.Path
-import java.util.jar.JarInputStream
+import java.util.jar.Manifest
 import org.jetbrains.kotlin.cli.common.arguments.K2JVMCompilerArguments
 import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.config.JVMConfigurationKeys
@@ -41,25 +39,20 @@ internal fun K2JVMCompilerArguments.setEligibleFriends(currentTarget: String?) {
   if (currentTarget == null) return
 
   val currentLabel = BzlLabel.parseOrThrow(currentTarget)
-
+  var packageInfoCache = PackageInfoCache.get()
   this.friendPaths =
     this.classpath
       .orEmpty()
       .split(":")
       .filter {
-        val depPath = Path.of(it)
-        val depLabel = getLabelFromManifest(depPath) ?: return@filter false
+        val depLabel = packageInfoCache.getManifest(it)?.targetLabel ?: return@filter false
         AutoFriends.isEligibleFriend(currentLabel, depLabel)
       }
       .toTypedArray()
 }
 
-private fun getLabelFromManifest(path: Path): BzlLabel? {
-  return JarInputStream(BufferedInputStream(Files.newInputStream(path)), /* verify= */ false).use {
-    jar ->
-    jar.manifest?.let { KtManifest(it).targetLabel }
-  }
-}
+private val Manifest.targetLabel: BzlLabel?
+  get() = KtManifest(this).targetLabel
 
 // Copied and modified from org.jetbrains.kotlin.cli.common.CliModuleVisibilityManagerImpl to
 // workaround https://youtrack.jetbrains.com/issue/KT-73042

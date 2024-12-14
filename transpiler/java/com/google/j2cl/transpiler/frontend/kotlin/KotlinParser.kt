@@ -95,6 +95,8 @@ class KotlinParser(private val problems: Problems) {
       return Library.newEmpty()
     }
 
+    PackageInfoCache.init(options.classpaths, problems)
+
     val kotlincDisposable = Disposer.newDisposable("J2CL Root Disposable")
     val compilerConfiguration = createCompilerConfiguration(options)
 
@@ -285,7 +287,6 @@ class KotlinParser(private val problems: Problems) {
     val packageInfoSources: List<FileInfo> =
       options.sources.filter { it.originalPath().endsWith("package-info.java") }
 
-    PackageInfoCache.init(options.classpaths, problems)
     return PackageAnnotationsResolver.create(
       packageInfoSources,
       JdtParser(problems),
