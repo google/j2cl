@@ -124,6 +124,7 @@ import org.jetbrains.kotlin.ir.util.packageFqName
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
 import org.jetbrains.kotlin.ir.util.resolveFakeOverrideMaybeAbstractOrFail
 import org.jetbrains.kotlin.ir.util.superTypes
+import org.jetbrains.kotlin.load.java.JvmAnnotationNames.ENHANCED_NULLABILITY_ANNOTATION
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.FqNameUnsafe
@@ -315,6 +316,14 @@ class KotlinEnvironment(
     if (!annotations.isEmpty() && annotations.hasAnnotation(FqName("kotlin.UnsafeVariance"))) {
       typeDescriptor = typeDescriptor.toRawTypeDescriptor()
     }
+
+    // If we mapped to a primitive type but the kotlin type was annotated with @EnhancedNullability
+    // that means we're interoping with a non-nullable Java boxed type. Kotlin cannot represent this
+    // in their type system so we need to be mindful to box the type again.
+    if (typeDescriptor.isPrimitive && irType.hasAnnotation(ENHANCED_NULLABILITY_ANNOTATION)) {
+      typeDescriptor = typeDescriptor.toBoxedType()
+    }
+
     return typeDescriptor
   }
 
