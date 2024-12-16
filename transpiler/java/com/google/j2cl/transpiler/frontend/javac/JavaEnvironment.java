@@ -395,26 +395,37 @@ class JavaEnvironment {
       javax.lang.model.type.TypeVariable typeVariable,
       List<? extends AnnotationMirror> elementAnnotations,
       boolean inNullMarkedScope) {
-    if (typeVariable instanceof CapturedType) {
-      return createWildcardTypeVariable(
-          typeVariable.getUpperBound(), typeVariable.getLowerBound(), inNullMarkedScope);
-    }
+    boolean isCapture = typeVariable instanceof CapturedType;
 
     Supplier<TypeDescriptor> boundTypeDescriptorFactory =
         () -> createTypeDescriptor(typeVariable.getUpperBound(), inNullMarkedScope);
 
+    TypeDescriptor lowerBound =
+        typeVariable.getLowerBound() != null
+                && typeVariable.getLowerBound().getKind() != TypeKind.NULL
+            ? createTypeDescriptor(typeVariable.getLowerBound(), inNullMarkedScope)
+            : null;
+
     List<String> classComponents = getClassComponents(typeVariable);
     KtVariance ktVariance =
         getKtVariance(((TypeVariableSymbol) typeVariable.asElement()).baseSymbol());
+
     return TypeVariable.newBuilder()
         .setUpperBoundTypeDescriptorFactory(boundTypeDescriptorFactory)
+        .setLowerBoundTypeDescriptor(lowerBound)
         .setUniqueKey(
-            String.join("::", classComponents)
+            (isCapture ? "capture of " : "")
+                + String.join("::", classComponents)
                 + (typeVariable.getUpperBound() != null
-                    ? typeVariable.getUpperBound().toString()
+                    ? "::^::" + typeVariable.getUpperBound()
+                    : "")
+                + (typeVariable.getLowerBound() != null
+                    ? "::v::" + typeVariable.getLowerBound()
                     : ""))
         .setKtVariance(ktVariance)
-        .setName(typeVariable.asElement().getSimpleName().toString())
+        .setName(
+            ((TypeVariableSymbol) typeVariable.asElement()).baseSymbol().getSimpleName().toString())
+        .setCapture(isCapture)
         .setNullabilityAnnotation(getNullabilityAnnotation(typeVariable, elementAnnotations))
         .build();
   }
@@ -423,15 +434,14 @@ class JavaEnvironment {
       @Nullable TypeMirror upperBound, @Nullable TypeMirror lowerBound, boolean inNullMarkedScope) {
     return TypeVariable.newBuilder()
         .setUpperBoundTypeDescriptorFactory(
-            () -> createTypeDescriptor(upperBound, inNullMarkedScope))
+            () -> lowerBound == null ? createTypeDescriptor(upperBound, inNullMarkedScope) : null)
         .setLowerBoundTypeDescriptor(createTypeDescriptor(lowerBound, inNullMarkedScope))
         .setWildcard(true)
         .setName("?")
         .setUniqueKey(
-            "::^::"
-                + (upperBound != null ? upperBound.toString() : "")
-                + "::v::"
-                + (lowerBound != null ? lowerBound.toString() : ""))
+            (inNullMarkedScope ? "+" : "-")
+                + (upperBound != null ? "::^::" + upperBound : "")
+                + (lowerBound != null ? "::v::" + lowerBound : ""))
         .build();
   }
 
@@ -838,9 +848,14 @@ class JavaEnvironment {
       List<TypeDescriptor> typeArguments) {
     ImmutableList<TypeVariable> typeParameterTypeDescriptors =
         declarationMethodElement.getTypeParameters().stream()
-            .map(Element::asType)
-            .map(this::createTypeDescriptor)
-            .map(TypeVariable.class::cast)
+            .map(TypeParameterElement::asType)
+            .map(javax.lang.model.type.TypeVariable.class::cast)
+            .map(
+                tv ->
+                    createTypeVariable(
+                        tv,
+                        ImmutableList.of(),
+                        enclosingTypeDescriptor.getTypeDeclaration().isNullMarked()))
             .collect(toImmutableList());
 
     boolean isStatic = isStatic(declarationMethodElement);
