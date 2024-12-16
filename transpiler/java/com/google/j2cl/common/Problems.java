@@ -16,6 +16,7 @@
 package com.google.j2cl.common;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.getBoolean;
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimaps;
@@ -33,6 +34,8 @@ import java.util.stream.Collectors;
 
 /** An error logger class that records the number of errors and provides error print methods. */
 public class Problems {
+  private static final boolean REPORT_DEBUG =
+      getBoolean("com.google.j2cl.common.Problems.reportDebug");
 
   /** Represents compiler fatal errors. */
   public enum FatalError {
@@ -78,7 +81,8 @@ public class Problems {
   public enum Severity {
     ERROR("Error"),
     WARNING("Warning"),
-    INFO("Info");
+    INFO("Info"),
+    DEBUG("Debug");
 
     Severity(String messagePrefix) {
       this.messagePrefix = messagePrefix;
@@ -131,6 +135,11 @@ public class Problems {
   @FormatMethod
   public void warning(String detailMessage, Object... args) {
     problem(Severity.WARNING, String.format(detailMessage, args));
+  }
+
+  @FormatMethod
+  public void debug(SourcePosition sourcePosition, String detailMessage, Object... args) {
+    problem(Severity.DEBUG, sourcePosition, detailMessage, args);
   }
 
   @FormatMethod
@@ -194,7 +203,9 @@ public class Problems {
   /** Prints all problems to provided output and returns the exit code. */
   public int reportAndGetExitCode(PrintWriter output) {
     for (Map.Entry<Severity, String> severityMessagePair : problemsBySeverity.entries()) {
-      output.println(severityMessagePair.getValue());
+      if (REPORT_DEBUG || severityMessagePair.getKey() != Severity.DEBUG) {
+        output.println(severityMessagePair.getValue());
+      }
     }
     if (hasErrors() || hasWarnings()) {
       output.printf(

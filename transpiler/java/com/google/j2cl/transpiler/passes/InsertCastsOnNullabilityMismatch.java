@@ -74,7 +74,7 @@ public final class InsertCastsOnNullabilityMismatch extends NormalizationPass {
 
                 Describer describer = new Describer();
                 getProblems()
-                    .info(
+                    .debug(
                         getSourcePosition(),
                         "Inserted nullability mismatch cast from '%s' to '%s'",
                         describer.getDescription(expression.getTypeDescriptor()),
