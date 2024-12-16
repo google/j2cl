@@ -40,10 +40,9 @@ class NullabilityInferenceProblem {
     throw new RuntimeException();
   }
 
-  // TODO(b/383581076): Uncomment when fixed.
-  // private static ImmutableList<User> testImplicitTypeArguments(Iterable<User> users) {
-  //   return sortedCopyOf(comparing(user -> user.getName().orElse("")), users);
-  // }
+  private static ImmutableList<User> testImplicitTypeArguments(Iterable<User> users) {
+    return sortedCopyOf(comparing(user -> user.getName().orElse("")), users);
+  }
 
   private static ImmutableList<User> testExplicitTypeArguments(Iterable<User> users) {
     return sortedCopyOf(

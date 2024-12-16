@@ -37,7 +37,7 @@ import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewrite
  * Inserts NOT_NULL_ASSERTION (!!) in places where Java performs implicit null-check, and when
  * conversion is needed from nullable to non-null type.
  */
-public final class InsertNotNullAssertions extends NormalizationPass {
+public final class InsertNotNullAssertionsOnNullabilityMismatch extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     // Insert non-null assertions when converting from nullable to non-null type.

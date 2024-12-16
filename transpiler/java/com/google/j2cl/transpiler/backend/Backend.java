@@ -82,7 +82,8 @@ import com.google.j2cl.transpiler.passes.InsertJsFunctionImplementationConversio
 import com.google.j2cl.transpiler.passes.InsertNarrowingPrimitiveConversions;
 import com.google.j2cl.transpiler.passes.InsertNarrowingPrimitiveConversionsJ2kt;
 import com.google.j2cl.transpiler.passes.InsertNarrowingReferenceConversions;
-import com.google.j2cl.transpiler.passes.InsertNotNullAssertions;
+import com.google.j2cl.transpiler.passes.InsertNotNullAssertionToPolyNullMethodCalls;
+import com.google.j2cl.transpiler.passes.InsertNotNullAssertionsOnNullabilityMismatch;
 import com.google.j2cl.transpiler.passes.InsertQualifierProjectionCasts;
 import com.google.j2cl.transpiler.passes.InsertRawTypeCasts;
 import com.google.j2cl.transpiler.passes.InsertStringConversions;
@@ -759,7 +760,8 @@ public enum Backend {
           NormalizePrimitiveCastsJ2kt::new,
           ImplementBitLevelOperatorsJ2kt::new,
           InsertQualifierProjectionCasts::new,
-          InsertNotNullAssertions::new,
+          InsertNotNullAssertionToPolyNullMethodCalls::new,
+          InsertNotNullAssertionsOnNullabilityMismatch::new,
           InsertCastsOnNullabilityMismatch::new,
           InsertCastForLowerBounds::new,
           InsertRawTypeCasts::new,

@@ -88,6 +88,7 @@ public class TypeDescriptors {
   public DeclaredTypeDescriptor javaUtilMap;
   public DeclaredTypeDescriptor javaUtilList;
   public DeclaredTypeDescriptor javaUtilObjects;
+  public DeclaredTypeDescriptor javaUtilOptional;
 
   @Nullable
   @QualifiedBinaryName("java.util.ReadonlyCollection")
