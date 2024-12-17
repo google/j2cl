@@ -13,10 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package nativekttypes.nativekt;
+package nativekttypes.nativekt
 
-public class KBridge extends KRequiringBridge {
-  public void method() {}
-
-  public static class Inner extends KRequiringBridge.Inner {}
+open class KRequiringBridge {
+  open class Inner
 }

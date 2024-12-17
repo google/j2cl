@@ -13,8 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package nativekttypes.nativekt;
+package nativekttypes.nativekt
 
-public class KRequiringBridge {
-  public static class Inner {}
+class KWithCompanionObject {
+  @JvmField var instanceField = 0
+
+  fun instanceMethod() {}
 }

@@ -13,8 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package nativekttypes.nativekt;
+package nativekttypes.nativekt
 
-public interface KFunctionalInterfaceRequiringBridge<V> {
-  V foo(V t);
+open class KBridge : KRequiringBridge() {
+  open fun method() {}
+
+  open class Inner : KRequiringBridge.Inner()
 }

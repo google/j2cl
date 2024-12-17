@@ -13,23 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package nativekttypes.nativekt;
+package nativekttypes.nativekt
 
-import javaemul.internal.annotations.KtProperty;
-
-public interface KInterface<V> {
-
-  interface KFunctionalInterface {
-    void run();
-  }
-
-  int interfaceMethod(V v);
-
-  int renamedInterfaceMethod(V v);
-
-  @KtProperty
-  int interfaceMethodAsProperty();
-
-  @KtProperty
-  int renamedInterfaceMethodAsProperty();
+fun interface KFunctionalInterfaceRequiringBridge<V> {
+  fun foo(t: V): V
 }

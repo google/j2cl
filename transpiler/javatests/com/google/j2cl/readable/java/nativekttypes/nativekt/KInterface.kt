@@ -13,6 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package nativekttypes.nativekt;
+package nativekttypes.nativekt
 
-public interface KFunctionalInterfaceBridge<V> extends KFunctionalInterfaceRequiringBridge<V> {}
+interface KInterface<V> {
+  fun interface KFunctionalInterface {
+    fun run()
+  }
+
+  fun interfaceMethod(v: V): Int
+
+  fun renamedInterfaceMethod(v: V): Int
+
+  val interfaceMethodAsProperty: Int
+
+  val renamedInterfaceMethodAsProperty: Int
+}

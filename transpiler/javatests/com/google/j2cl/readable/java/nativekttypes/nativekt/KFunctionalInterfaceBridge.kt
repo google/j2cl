@@ -13,10 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package nativekttypes.nativekt;
+package nativekttypes.nativekt
 
-public class KCompanionObject {
-  public static int staticField;
-
-  public static void staticMethod() {}
-}
+fun interface KFunctionalInterfaceBridge<V> : KFunctionalInterfaceRequiringBridge<V>
