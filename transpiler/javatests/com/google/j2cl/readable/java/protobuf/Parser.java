@@ -19,6 +19,6 @@ import javaemul.internal.annotations.KtNative;
 import javaemul.internal.annotations.KtOut;
 import org.jspecify.annotations.NullMarked;
 
-@KtNative(name = "com.google.protobuf.Parser")
+@KtNative
 @NullMarked
 public class Parser<@KtOut T> {}

@@ -22,7 +22,7 @@ import javaemul.internal.annotations.KtNative;
 import org.jspecify.annotations.NullMarked;
 
 @ProtoNonnullApi
-@KtNative(name = "protobuf.MyMessage")
+@KtNative
 @NullMarked
 public class MyMessage extends GeneratedMessage {
   public Parser<MyMessage> getParserForType() {

@@ -18,6 +18,7 @@ package nativekttypes;
 import javaemul.internal.annotations.KtDisabled;
 
 public class Main {
+  public NativeDefaultName nativeDefaultName;
   public NativeTopLevel<String> topLevelField;
   public NativeTopLevel.Nested<String> nestedField;
   public NativeTopLevel<String>.Inner<String> innerField;

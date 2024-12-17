@@ -19,7 +19,7 @@ import com.google.protobuf.EnumLite;
 import com.google.protobuf.Internal.ProtoNonnullApi;
 import javaemul.internal.annotations.KtNative;
 
-@KtNative(name = "protobuf.MyEnum")
+@KtNative
 @ProtoNonnullApi
 public enum MyEnum implements EnumLite {
   ONE,

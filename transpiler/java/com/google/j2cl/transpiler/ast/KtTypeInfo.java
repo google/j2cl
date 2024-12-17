@@ -21,6 +21,7 @@ import javax.annotation.Nullable;
 /** Kotlin type information. */
 @AutoValue
 public abstract class KtTypeInfo {
+  @Nullable
   public abstract String getQualifiedName();
 
   @Nullable
@@ -38,7 +39,7 @@ public abstract class KtTypeInfo {
   /** The builder. */
   @AutoValue.Builder
   public abstract static class Builder {
-    public abstract Builder setQualifiedName(String qualifiedName);
+    public abstract Builder setQualifiedName(@Nullable String qualifiedName);
 
     public abstract Builder setBridgeQualifiedName(@Nullable String bridgeQualifiedName);
 

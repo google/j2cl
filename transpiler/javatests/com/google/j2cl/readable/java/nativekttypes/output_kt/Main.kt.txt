@@ -31,6 +31,7 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.javaObjectType
 import kotlin.native.ObjCName
 import nativekttypes.Fn
+import nativekttypes.NativeDefaultName
 import nativekttypes.nativekt.KBridge
 import nativekttypes.nativekt.KCompanionObject
 import nativekttypes.nativekt.KFunctionalInterfaceBridge
@@ -45,6 +46,10 @@ import nativekttypes.nativekt.KWithCompanionObject
 
 @ObjCName("J2ktNativekttypesMain", exact = true)
 open class Main {
+ @JvmField
+ @ObjCName("nativeDefaultName_")
+ var nativeDefaultName: NativeDefaultName? = null
+
  @JvmField
  @ObjCName("topLevelField_")
  var topLevelField: KTopLevel<String?>? = null

@@ -18,7 +18,7 @@ package com.google.protobuf;
 import javaemul.internal.annotations.KtNative;
 import org.jspecify.annotations.NullMarked;
 
-@KtNative(name = "com.google.protobuf.GeneratedMessage")
+@KtNative
 @NullMarked
 public class GeneratedMessage {
   // Emulates Kotlin property
