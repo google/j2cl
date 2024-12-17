@@ -57,7 +57,7 @@ class KotlinGeneratorStage(private val output: OutputUtils.Output, private val p
   /** Generate ObjC outputs for a compilation unit. */
   private fun generateObjCOutputs(compilationUnit: CompilationUnit) {
     val source = compilationUnit.j2ObjCCompatHeaderSource
-    if (!source.isEmpty()) {
+    if (source.isNotEmpty()) {
       val path = compilationUnit.packageRelativePath.replace(".java", "+J2ObjCCompat.h")
       output.write(path, source.buildString())
     }

@@ -313,7 +313,7 @@ class KotlinEnvironment(
     // TODO(b/365133427): Annotations are not accounted for hashcode and equals so the logic is
     // moved outside of cache. We should move it back once the bug is fixed.
     val annotations = irType.annotations
-    if (!annotations.isEmpty() && annotations.hasAnnotation(FqName("kotlin.UnsafeVariance"))) {
+    if (annotations.isNotEmpty() && annotations.hasAnnotation(FqName("kotlin.UnsafeVariance"))) {
       typeDescriptor = typeDescriptor.toRawTypeDescriptor()
     }
 
@@ -403,7 +403,7 @@ class KotlinEnvironment(
   ): DeclaredTypeDescriptor {
     // Adjust nullability.
     var td = if (irType.isNullable()) toNullable() else toNonNullable()
-    if (!irType.arguments.isEmpty()) {
+    if (irType.arguments.isNotEmpty()) {
       // Adjust type arguments.
       val subsitutionMap =
         irType.getTypeSubstitutionMap(useDeclarationVariance).toTypeDescriptorByTypeVariableMap()
