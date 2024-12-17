@@ -15,6 +15,9 @@
  */
 package nativekttypes.nativekt
 
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
+
 open class KTopLevel<O>(o: O) {
   open class KNested<N>(n: N) {
     @JvmField var instanceField: N? = null
@@ -49,7 +52,7 @@ open class KTopLevel<O>(o: O) {
     return 0
   }
 
-  val methodAsProperty: Int
+  open val methodAsProperty: Int
     get() = 0
 
   open val nonGetMethodAsProperty: Int

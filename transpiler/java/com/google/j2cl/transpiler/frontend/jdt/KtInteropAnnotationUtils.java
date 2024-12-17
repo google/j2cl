@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.frontend.jdt;
 
+import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_NATIVE_ANNOTATION_NAME;
+import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_THROWS_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_DISABLED_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_IN_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_NAME_ANNOTATION_NAME;
@@ -22,7 +24,6 @@ import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_NA
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_OBJECTIVE_C_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_OUT_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_PROPERTY_ANNOTATION_NAME;
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_THROWS_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.findAnnotationBindingByName;
 import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.getAnnotationBinding;
 import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.getStringAttribute;
@@ -84,7 +85,13 @@ public class KtInteropAnnotationUtils {
     return findAnnotationBindingByName(annotationBindings, KT_OUT_ANNOTATION_NAME);
   }
 
-  public static IAnnotationBinding getKtThrowsAnnotation(IAnnotationBinding[] annotationBindings) {
-    return findAnnotationBindingByName(annotationBindings, KT_THROWS_ANNOTATION_NAME);
+  public static IAnnotationBinding getJ2ktThrowsAnnotation(
+      IAnnotationBinding[] annotationBindings) {
+    return findAnnotationBindingByName(annotationBindings, J2KT_THROWS_ANNOTATION_NAME);
+  }
+
+  public static IAnnotationBinding getJ2ktNativeAnnotation(
+      IAnnotationBinding[] annotationBindings) {
+    return findAnnotationBindingByName(annotationBindings, J2KT_NATIVE_ANNOTATION_NAME);
   }
 }

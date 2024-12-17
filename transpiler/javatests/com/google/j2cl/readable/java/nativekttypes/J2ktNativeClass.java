@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Google Inc.
+ * Copyright 2024 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,12 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package nativekttypes.nativekt
+package nativekttypes;
 
-import kotlin.jvm.JvmField
-
-class KWithCompanionObject {
-  @JvmField var instanceField = 0
-
-  fun instanceMethod() {}
-}
+@com.google.j2kt.annotations.KtNative
+public final class J2ktNativeClass {}

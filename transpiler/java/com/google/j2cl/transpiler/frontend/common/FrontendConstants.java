@@ -42,7 +42,8 @@ public final class FrontendConstants {
   public static final String KT_OUT_ANNOTATION_NAME = "javaemul.internal.annotations.KtOut";
   public static final String KT_PROPERTY_ANNOTATION_NAME =
       "javaemul.internal.annotations.KtProperty";
-  public static final String KT_THROWS_ANNOTATION_NAME = "com.google.j2kt.annotations.Throws";
+  public static final String J2KT_THROWS_ANNOTATION_NAME = "com.google.j2kt.annotations.Throws";
+  public static final String J2KT_NATIVE_ANNOTATION_NAME = "com.google.j2kt.annotations.KtNative";
   public static final String SUPPRESS_WARNINGS_ANNOTATION_NAME = "java.lang.SuppressWarnings";
   public static final String DO_NOT_AUTOBOX_ANNOTATION_NAME =
       "javaemul.internal.annotations.DoNotAutobox";

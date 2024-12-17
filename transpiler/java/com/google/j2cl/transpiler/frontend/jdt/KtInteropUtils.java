@@ -17,6 +17,8 @@ package com.google.j2cl.transpiler.frontend.jdt;
 
 import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.getStringAttribute;
 import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.isWarningSuppressed;
+import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getJ2ktNativeAnnotation;
+import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getJ2ktThrowsAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtDisabledAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtInAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtNameAnnotation;
@@ -24,7 +26,6 @@ import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.g
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtObjectiveCNameAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtOutAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtPropertyAnnotation;
-import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtThrowsAnnotation;
 
 import com.google.j2cl.transpiler.ast.KtInfo;
 import com.google.j2cl.transpiler.ast.KtObjcInfo;
@@ -66,18 +67,23 @@ public class KtInteropUtils {
   @Nullable
   private static KtTypeInfo getKtTypeInfo(IAnnotationBinding[] annotationBindings) {
     IAnnotationBinding annotationBinding = getKtNativeAnnotation(annotationBindings);
-    if (annotationBinding == null) {
-      return null;
+    if (annotationBinding != null) {
+      String qualifiedName = getStringAttribute(annotationBinding, "name");
+      String bridgeQualifiedName = getStringAttribute(annotationBinding, "bridgeName");
+      String companionObject = getStringAttribute(annotationBinding, "companionName");
+      return KtTypeInfo.newBuilder()
+          .setQualifiedName(qualifiedName)
+          .setBridgeQualifiedName(bridgeQualifiedName)
+          .setCompanionQualifiedName(companionObject)
+          .build();
     }
 
-    String qualifiedName = getStringAttribute(annotationBinding, "name");
-    String bridgeQualifiedName = getStringAttribute(annotationBinding, "bridgeName");
-    String companionObject = getStringAttribute(annotationBinding, "companionName");
-    return KtTypeInfo.newBuilder()
-        .setQualifiedName(qualifiedName)
-        .setBridgeQualifiedName(bridgeQualifiedName)
-        .setCompanionQualifiedName(companionObject)
-        .build();
+    annotationBinding = getJ2ktNativeAnnotation(annotationBindings);
+    if (annotationBinding != null) {
+      return KtTypeInfo.newBuilder().build();
+    }
+
+    return null;
   }
 
   public static KtInfo getKtInfo(IMethodBinding methodBinding) {
@@ -124,7 +130,7 @@ public class KtInteropUtils {
   }
 
   private static boolean isThrows(IAnnotationBinding[] annotationBindings) {
-    return getKtThrowsAnnotation(annotationBindings) != null;
+    return getJ2ktThrowsAnnotation(annotationBindings) != null;
   }
 
   public static boolean isUninitializedWarningSuppressed(IAnnotationBinding[] annotationBindings) {

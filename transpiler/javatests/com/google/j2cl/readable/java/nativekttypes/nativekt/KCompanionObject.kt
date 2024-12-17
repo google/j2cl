@@ -15,6 +15,8 @@
  */
 package nativekttypes.nativekt
 
+import kotlin.jvm.JvmField
+
 object KCompanionObject {
   @JvmField var staticField = 0
 

@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.frontend.javac;
 
+import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_NATIVE_ANNOTATION_NAME;
+import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_THROWS_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_DISABLED_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_IN_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_NAME_ANNOTATION_NAME;
@@ -22,7 +24,6 @@ import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_NA
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_OBJECTIVE_C_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_OUT_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_PROPERTY_ANNOTATION_NAME;
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_THROWS_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.SUPPRESS_WARNINGS_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.findAnnotationByName;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.getAnnotation;
@@ -78,8 +79,12 @@ public class KtInteropAnnotationUtils {
     return findAnnotationByName(annotatedConstruct, KT_OUT_ANNOTATION_NAME);
   }
 
-  public static AnnotationMirror getKtThrowsAnnotation(AnnotatedConstruct annotatedConstruct) {
-    return findAnnotationByName(annotatedConstruct, KT_THROWS_ANNOTATION_NAME);
+  public static AnnotationMirror getJ2ktThrowsAnnotation(AnnotatedConstruct annotatedConstruct) {
+    return findAnnotationByName(annotatedConstruct, J2KT_THROWS_ANNOTATION_NAME);
+  }
+
+  public static AnnotationMirror getJ2ktNativeAnnotation(AnnotatedConstruct annotatedConstruct) {
+    return findAnnotationByName(annotatedConstruct, J2KT_NATIVE_ANNOTATION_NAME);
   }
 
   public static AnnotationMirror getSuppressWarningsAnnotation(
