@@ -160,7 +160,13 @@ class SourceTest {
   }
 
   @Test
-  fun sourceIf() {
+  fun sourceEmptyIf() {
+    Source.emptyIf(true) { sourceA }.assertBuilds("")
+    Source.emptyIf(false) { sourceA }.assertBuilds("a")
+  }
+
+  @Test
+  fun sourceEmptyUnless() {
     Source.emptyUnless(true) { sourceA }.assertBuilds("a")
     Source.emptyUnless(false) { sourceA }.assertBuilds("")
   }

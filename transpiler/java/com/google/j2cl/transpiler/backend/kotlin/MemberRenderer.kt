@@ -122,9 +122,9 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
       Source.emptyUnless(!isKtPrimaryConstructor(method) || statements.isNotEmpty()) {
         spaceSeparated(
           methodHeaderSource(method),
-          Source.emptyUnless(!method.isAbstract && !method.isNative) {
+          Source.emptyIf(method.isAbstract || method.isNative) {
             // Constructors with no statements can be rendered without curly braces.
-            Source.emptyUnless(!method.isConstructor || statements.isNotEmpty()) {
+            Source.emptyIf(method.isConstructor && statements.isEmpty()) {
               spaceSeparated(
                   Source.emptyUnless(method.descriptor.isKtProperty) {
                     join(GET_KEYWORD, inParentheses(Source.EMPTY))
@@ -219,7 +219,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
   private fun methodModifiersSource(method: Method): Source =
     spaceSeparated(
       memberDescriptorRenderer.visibilityModifierSource(method.descriptor),
-      Source.emptyUnless(!method.descriptor.enclosingTypeDescriptor.typeDeclaration.isInterface) {
+      Source.emptyIf(method.descriptor.enclosingTypeDescriptor.typeDeclaration.isInterface) {
         spaceSeparated(
           Source.emptyUnless(method.descriptor.isNative) { KotlinSource.EXTERNAL_KEYWORD },
           method.inheritanceModifierSource,
@@ -241,8 +241,8 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
     val parameterDescriptors = methodDescriptor.parameterDescriptors
     val parameters = method.parameters
     val renderWithNewLines = objCParameterNames != null && parameters.isNotEmpty()
-    val optionalNewLineSource = Source.emptyUnless(renderWithNewLines) { Source.NEW_LINE }
-    return Source.emptyUnless(!methodDescriptor.isKtProperty) {
+    val optionalNewLineSource = Source.emptyUnless(renderWithNewLines) { NEW_LINE }
+    return Source.emptyIf(methodDescriptor.isKtProperty) {
       inParentheses(
         join(
           indentedIf(

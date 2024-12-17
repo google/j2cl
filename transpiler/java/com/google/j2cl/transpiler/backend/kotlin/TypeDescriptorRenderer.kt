@@ -116,7 +116,7 @@ internal data class TypeDescriptorRenderer(
     join(
       nameRenderer.qualifiedNameSource(arrayTypeDescriptor),
       arrayTypeDescriptor.componentTypeDescriptor.let {
-        Source.emptyUnless(!it.isPrimitive) { inAngleBrackets(child.source(it)) }
+        Source.emptyIf(it.isPrimitive) { inAngleBrackets(child.source(it)) }
       },
       nullableSuffixSource(arrayTypeDescriptor),
     )

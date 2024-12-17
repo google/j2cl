@@ -29,6 +29,7 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.assignment
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.literal
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.dotSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.emptyIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.emptyUnless
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
@@ -189,7 +190,7 @@ internal data class JsInteropAnnotationRenderer(val nameRenderer: NameRenderer) 
 
   companion object {
     private fun nameParameterSource(typeDeclaration: TypeDeclaration): Source =
-      emptyUnless(typeDeclaration.simpleJsName != typeDeclaration.simpleSourceName) {
+      emptyIf(typeDeclaration.simpleJsName == typeDeclaration.simpleSourceName) {
         nameParameterSource(typeDeclaration.simpleJsName)
       }
 
@@ -203,7 +204,7 @@ internal data class JsInteropAnnotationRenderer(val nameRenderer: NameRenderer) 
       name: String,
       value: Boolean,
       defaultValue: Boolean,
-    ): Source = emptyUnless(value != defaultValue) { assignment(source(name), literal(value)) }
+    ): Source = emptyIf(value == defaultValue) { assignment(source(name), literal(value)) }
 
     private val MethodDescriptor.hasJsConstructorAnnotation
       get() = originalJsInfo.hasJsMemberAnnotation && isJsConstructor

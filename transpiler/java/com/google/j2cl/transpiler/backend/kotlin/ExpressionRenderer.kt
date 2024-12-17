@@ -508,7 +508,7 @@ internal data class ExpressionRenderer(
       dotSeparated(
         qualifierSource(expression),
         spaceSeparated(
-          Source.emptyUnless(expression.anonymousInnerClass != null) {
+          Source.emptyIf(expression.anonymousInnerClass == null) {
             spaceSeparated(OBJECT_KEYWORD, COLON)
           },
           join(

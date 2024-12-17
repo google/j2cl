@@ -42,7 +42,7 @@ private constructor(
    * source.
    */
   operator fun plus(source: Source) =
-    emptyUnless(isNotEmpty() || source.isNotEmpty()) {
+    emptyIf(isEmpty() && source.isEmpty()) {
       Source { sourceBuilder ->
         sourceBuilder.append(this)
         sourceBuilder.append(source)
@@ -95,7 +95,13 @@ private constructor(
 
     /** Returns a source containing the given string. */
     fun source(string: String) =
-      emptyUnless(string.isNotEmpty()) { Source { sourceBuilder -> sourceBuilder.append(string) } }
+      emptyIf(string.isEmpty()) { Source { sourceBuilder -> sourceBuilder.append(string) } }
+
+    /**
+     * Returns empty source if the condition is satisfied, otherwise source returned from the given
+     * function.
+     */
+    inline fun emptyIf(condition: Boolean, fn: () -> Source) = if (condition) EMPTY else fn()
 
     /**
      * Returns source returned from the given function if the condition is satisfied, otherwise
@@ -105,7 +111,7 @@ private constructor(
 
     /** Join given sources using given separator, skipping empty ones. */
     fun join(sources: Iterable<Source>, separator: String = "") =
-      emptyUnless(sources.any(Source::isNotEmpty)) {
+      emptyIf(sources.all(Source::isEmpty)) {
         Source { sourceBuilder ->
           var first = true
           for (source in sources) {
@@ -146,7 +152,7 @@ private constructor(
       spaceSeparated(LEFT_CURLY_BRACKET, source, RIGHT_CURLY_BRACKET)
 
     fun indented(source: Source) =
-      emptyUnless(source.isNotEmpty()) {
+      emptyIf(source.isEmpty()) {
         Source { sourceBuilder ->
           sourceBuilder.indent()
           sourceBuilder.append(source)
