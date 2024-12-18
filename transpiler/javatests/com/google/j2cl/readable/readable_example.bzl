@@ -63,7 +63,7 @@ def readable_example(
       **kwargs: passes to j2cl_library
     """
 
-    if any([src for src in srcs if src.endswith(".kt")]):
+    if "readable/kotlin" in native.package_name():
         # J2KT doesn't make sense for Kotlin Frontend.
         generate_kt_readables = False
 
