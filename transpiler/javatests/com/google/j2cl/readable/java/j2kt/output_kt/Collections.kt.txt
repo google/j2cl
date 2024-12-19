@@ -26,8 +26,11 @@ import java.util.AbstractList
 import java.util.AbstractMap
 import java.util.Spliterator
 import javaemul.lang.JavaCollection
+import javaemul.lang.JavaList
 import javaemul.lang.JavaMap
+import javaemul.lang.uninitializedArrayOf
 import kotlin.Any
+import kotlin.Array
 import kotlin.Boolean
 import kotlin.Int
 import kotlin.OptIn
@@ -301,6 +304,14 @@ open class Collections {
    c_1 = Collections.convertCollection(c_1)
    return super<AbstractCollection>.retainAll(c_1 as Collection<T>)
   }
+
+  override fun toArray(): Array<Any?> {
+   return super<AbstractCollection>.toArray()
+  }
+
+  override fun <T1> toArray(a: Array<T1>): Array<T1> {
+   return super<AbstractCollection>.toArray<T1>(a)
+  }
  }
 
  @ObjCName("J2ktJ2ktCollections_CustomCollectionDisambiguatingOverrides", exact = true)
@@ -337,6 +348,14 @@ open class Collections {
    var o_1: Any? = o
    o_1 = Collections.convert<Any?>(o_1)
    return super<AbstractList>.lastIndexOf(o_1 as T)
+  }
+
+  override fun toArray(): Array<Any?> {
+   return super<AbstractList>.toArray()
+  }
+
+  override fun <T1> toArray(a: Array<T1>): Array<T1> {
+   return super<AbstractList>.toArray<T1>(a)
   }
  }
 
@@ -489,5 +508,23 @@ open class Collections {
    key_1 = Collections.convert<Any?>(key_1)
    return super<Collections.CustomMap>.getOrDefault(key_1 as String, defaultValue_1 as String) as String
   }
+ }
+
+ @ObjCName("J2ktJ2ktCollections_AbstractCollectionWithToArrayOverride", exact = true)
+ abstract class AbstractCollectionWithToArrayOverride<E>: JavaCollection<E> {
+  override fun toArray(): Array<Any?> {
+   return uninitializedArrayOf<Any>(0) as Array<Any?>
+  }
+
+  override fun <T> toArray(a: Array<T>): Array<T> {
+   return a
+  }
+ }
+
+ @ObjCName("J2ktJ2ktCollections_CollectionInterfaceWithToArrayOverride", exact = true)
+ interface CollectionInterfaceWithToArrayOverride<E>: JavaList<E> {
+  override fun toArray(): Array<Any?>
+
+  override fun <T> toArray(a: Array<T>): Array<T>
  }
 }

@@ -198,6 +198,16 @@ public class Collections {
       c = convertCollection(c);
       return super.retainAll(c);
     }
+
+    @Override
+    public @Nullable Object[] toArray() {
+      return super.toArray();
+    }
+
+    @Override
+    public <T1 extends @Nullable Object> T1[] toArray(T1[] a) {
+      return super.toArray(a);
+    }
   }
 
   public static class CustomCollectionDisambiguatingOverrides<T extends @Nullable Object>
@@ -232,6 +242,16 @@ public class Collections {
     public int lastIndexOf(@Nullable Object o) {
       o = convert(o);
       return super.lastIndexOf(o);
+    }
+
+    @Override
+    public @Nullable Object[] toArray() {
+      return super.toArray();
+    }
+
+    @Override
+    public <T1 extends @Nullable Object> T1[] toArray(T1[] a) {
+      return super.toArray(a);
     }
   }
 
@@ -361,6 +381,29 @@ public class Collections {
       key = convert(key);
       return super.getOrDefault(key, defaultValue);
     }
+  }
+
+  public abstract static class AbstractCollectionWithToArrayOverride<E extends @Nullable Object>
+      implements Collection<E> {
+
+    @Override
+    public @Nullable Object[] toArray() {
+      return new Object[0];
+    }
+
+    @Override
+    public <T extends @Nullable Object> T[] toArray(T[] a) {
+      return a;
+    }
+  }
+
+  public interface CollectionInterfaceWithToArrayOverride<E extends @Nullable Object>
+      extends List<E> {
+    @Override
+    @Nullable Object[] toArray();
+
+    @Override
+    <T extends @Nullable Object> T[] toArray(T[] a);
   }
 
   private static <T extends @Nullable Object> T convert(T object) {
