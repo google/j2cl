@@ -43,8 +43,9 @@ public abstract class SimpleAutoValue {
     return new AutoValue_SimpleAutoValue(42, true, "text", 43.0, 44.0, new int[] {45});
   }
 
-  private AutoValue_SimpleAutoValue field1;
-  @JsNonNull private AutoValue_SimpleAutoValue field2;
+  private EmptyAutoValue field1;
+  // Demonstrate a mismatch of nullability in the type descriptors still works.
+  @JsNonNull private EmptyAutoValue field2 = new AutoValue_EmptyAutoValue.Builder().build();
 
   static AutoValue_SimpleAutoValue[] castAndInstanceOf(Object o) {
     return o instanceof AutoValue_SimpleAutoValue[] ? (AutoValue_SimpleAutoValue[]) o : null;

@@ -1,0 +1,71 @@
+// Generated from "autovalue/AutoValue_AutoValueWithFields.java"
+@file:OptIn(ExperimentalObjCName::class)
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN")
+
+package autovalue
+
+import javaemul.lang.*
+import autovalue.AutoValueWithFields
+import kotlin.Any
+import kotlin.Boolean
+import kotlin.Int
+import kotlin.Long
+import kotlin.OptIn
+import kotlin.String
+import kotlin.Suppress
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
+
+@ObjCName("J2ktAutovalueAutoValue_AutoValueWithFields", exact = true)
+class AutoValue_AutoValueWithFields: AutoValueWithFields {
+ private val intField: Int
+
+ internal constructor(intField: Int) {
+  this.intField = intField
+ }
+
+ override fun getIntField(): Int {
+  return this.intField
+ }
+
+ override fun toString(): String {
+  return "AutoValueWithFields{" + "intField=" + this.intField + "}"
+ }
+
+ override fun equals(o: Any?): Boolean {
+  if (o === this) {
+   return true
+  }
+  if (o is AutoValueWithFields) {
+   val that: AutoValueWithFields? = o as AutoValueWithFields?
+   return this.intField == that!!.getIntField()
+  }
+  return false
+ }
+
+ override fun hashCode(): Int {
+  var h___: Int = 1
+  h___ = h___ * 1000003
+  h___ = h___.xor(this.intField)
+  return h___
+ }
+
+ @ObjCName("J2ktAutovalueAutoValue_AutoValueWithFieldsCompanion", exact = true)
+ companion object {
+  private const val serialVersionUID: Long = 42L
+ }
+}

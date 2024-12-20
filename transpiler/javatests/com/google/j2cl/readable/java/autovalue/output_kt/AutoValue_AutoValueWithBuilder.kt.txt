@@ -1,0 +1,117 @@
+// Generated from "autovalue/AutoValue_AutoValueWithBuilder.java"
+@file:OptIn(ExperimentalObjCName::class)
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN")
+
+package autovalue
+
+import javaemul.lang.*
+import autovalue.AutoValueWithBuilder
+import java.lang.IllegalStateException
+import kotlin.Any
+import kotlin.Boolean
+import kotlin.Byte
+import kotlin.Double
+import kotlin.Int
+import kotlin.OptIn
+import kotlin.String
+import kotlin.Suppress
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
+
+@ObjCName("J2ktAutovalueAutoValue_AutoValueWithBuilder", exact = true)
+class AutoValue_AutoValueWithBuilder: AutoValueWithBuilder {
+ private val booleanField: Boolean
+
+ private val nullableField: Double?
+
+ private constructor(booleanField: Boolean, nullableField: Double?) {
+  this.booleanField = booleanField
+  this.nullableField = nullableField
+ }
+
+ override fun getBooleanField(): Boolean {
+  return this.booleanField
+ }
+
+ override fun getNullableField(): Double? {
+  return this.nullableField
+ }
+
+ override fun toString(): String {
+  return "AutoValueWithBuilder{" + "booleanField=" + this.booleanField + ", " + "nullableField=" + this.nullableField + "}"
+ }
+
+ override fun equals(o: Any?): Boolean {
+  if (o === this) {
+   return true
+  }
+  if (o is AutoValueWithBuilder) {
+   val that: AutoValueWithBuilder? = o as AutoValueWithBuilder?
+   return this.booleanField == that!!.getBooleanField() && (if (this.nullableField == null) that!!.getNullableField() == null else this.nullableField!!.equals(that!!.getNullableField() as Any?))
+  }
+  return false
+ }
+
+ override fun hashCode(): Int {
+  var h___: Int = 1
+  h___ = h___ * 1000003
+  h___ = h___.xor(if (this.booleanField) 1231 else 1237)
+  h___ = h___ * 1000003
+  h___ = h___.xor(if (this.nullableField == null) 0 else this.nullableField!!.hashCode())
+  return h___
+ }
+
+ override fun toBuilder(): AutoValueWithBuilder.Builder? {
+  return AutoValue_AutoValueWithBuilder.Builder(this@AutoValue_AutoValueWithBuilder)
+ }
+
+ @ObjCName("J2ktAutovalueAutoValue_AutoValueWithBuilder_Builder", exact = true)
+ class Builder: AutoValueWithBuilder.Builder {
+  private var booleanField: Boolean = false
+
+  private var nullableField: Double? = null
+
+  private var set___0: Byte = 0.toByte()
+
+  internal constructor()
+
+  internal constructor(source: AutoValueWithBuilder?) {
+   this.booleanField = source!!.getBooleanField()
+   this.nullableField = source!!.getNullableField()
+   this.set___0 = 1.toByte()
+  }
+
+  override fun setBooleanField(booleanField: Boolean): AutoValueWithBuilder.Builder? {
+   this.booleanField = booleanField
+   this.set___0 = this.set___0.toInt().or(1.toByte().toInt()).toByte()
+   return this
+  }
+
+  override fun setNullableField(nullableField: Double?): AutoValueWithBuilder.Builder? {
+   this.nullableField = nullableField
+   return this
+  }
+
+  override fun build(): AutoValueWithBuilder? {
+   if (this.set___0.toInt() != 1) {
+    val missing: String? = " booleanField"
+    throw IllegalStateException("Missing required properties:" + missing)
+   }
+   return AutoValue_AutoValueWithBuilder(this@Builder.booleanField, this@Builder.nullableField)
+  }
+ }
+}

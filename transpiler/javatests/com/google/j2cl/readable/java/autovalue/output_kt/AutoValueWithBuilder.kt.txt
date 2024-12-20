@@ -1,0 +1,65 @@
+// Generated from "autovalue/AutoValueWithBuilder.java"
+@file:OptIn(ExperimentalObjCName::class)
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN")
+
+package autovalue
+
+import javaemul.lang.*
+import autovalue.AutoValue_AutoValueWithBuilder
+import kotlin.Boolean
+import kotlin.Double
+import kotlin.OptIn
+import kotlin.Suppress
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
+
+@ObjCName("J2ktAutovalueAutoValueWithBuilder", exact = true)
+abstract class AutoValueWithBuilder {
+ @ObjCName("getBooleanField")
+ abstract fun getBooleanField(): Boolean
+
+ @ObjCName("getNullableField")
+ abstract fun getNullableField(): Double?
+
+ @ObjCName("toBuilder")
+ abstract fun toBuilder(): AutoValueWithBuilder.Builder?
+
+ @ObjCName("J2ktAutovalueAutoValueWithBuilderCompanion", exact = true)
+ companion object {
+  @JvmStatic
+  internal fun create_pp_autovalue(): AutoValueWithBuilder? {
+   return AutoValue_AutoValueWithBuilder.Builder().setBooleanField(true)!!.build()
+  }
+ }
+
+ @ObjCName("J2ktAutovalueAutoValueWithBuilder_Builder", exact = true)
+ abstract class Builder internal constructor() {
+  @ObjCName("setBooleanField")
+  abstract fun setBooleanField(
+   @ObjCName("withBoolean") x: Boolean
+  ): AutoValueWithBuilder.Builder?
+
+  @ObjCName("setNullableField")
+  abstract fun setNullableField(
+   @ObjCName("withJavaLangDouble") x: Double?
+  ): AutoValueWithBuilder.Builder?
+
+  @ObjCName("build")
+  abstract fun build(): AutoValueWithBuilder?
+ }
+}

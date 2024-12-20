@@ -1,0 +1,123 @@
+// Generated from "autovalue/AutoValue_SimpleAutoValue.java"
+@file:OptIn(ExperimentalObjCName::class)
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN")
+
+package autovalue
+
+import javaemul.lang.*
+import autovalue.SimpleAutoValue
+import java.lang.NullPointerException
+import java.util.Arrays
+import kotlin.Any
+import kotlin.Boolean
+import kotlin.Double
+import kotlin.Int
+import kotlin.IntArray
+import kotlin.OptIn
+import kotlin.String
+import kotlin.Suppress
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
+
+@ObjCName("J2ktAutovalueAutoValue_SimpleAutoValue", exact = true)
+class AutoValue_SimpleAutoValue: SimpleAutoValue {
+ private val intField: Int
+
+ private val booleanField: Boolean
+
+ private val stringField: String?
+
+ private val doubleField: Double?
+
+ private val nullableField: Double?
+
+ private val arrayField: IntArray?
+
+ internal constructor(intField: Int, booleanField: Boolean, stringField: String?, doubleField: Double?, nullableField: Double?, arrayField: IntArray?) {
+  this.intField = intField
+  this.booleanField = booleanField
+  if (stringField == null) {
+   throw NullPointerException("Null stringField")
+  }
+  this.stringField = stringField
+  if (doubleField == null) {
+   throw NullPointerException("Null doubleField")
+  }
+  this.doubleField = doubleField
+  this.nullableField = nullableField
+  if (arrayField == null) {
+   throw NullPointerException("Null arrayField")
+  }
+  this.arrayField = arrayField
+ }
+
+ override fun getIntField(): Int {
+  return this.intField
+ }
+
+ override fun getBooleanField(): Boolean {
+  return this.booleanField
+ }
+
+ override fun getStringField(): String? {
+  return this.stringField
+ }
+
+ override fun getDoubleField(): Double? {
+  return this.doubleField
+ }
+
+ override fun getNullableField(): Double? {
+  return this.nullableField
+ }
+
+ override fun getArrayField(): IntArray? {
+  return this.arrayField
+ }
+
+ override fun toString(): String {
+  return "SimpleAutoValue{" + "intField=" + this.intField + ", " + "booleanField=" + this.booleanField + ", " + "stringField=" + this.stringField + ", " + "doubleField=" + this.doubleField + ", " + "nullableField=" + this.nullableField + ", " + "arrayField=" + Arrays.toString(this.arrayField) + "}"
+ }
+
+ override fun equals(o: Any?): Boolean {
+  if (o === this) {
+   return true
+  }
+  if (o is SimpleAutoValue) {
+   val that: SimpleAutoValue? = o as SimpleAutoValue?
+   return this.intField == that!!.getIntField() && this.booleanField == that!!.getBooleanField() && this.stringField!!.equals(that!!.getStringField()) && this.doubleField!!.equals(that!!.getDoubleField() as Any?) && (if (this.nullableField == null) that!!.getNullableField() == null else this.nullableField!!.equals(that!!.getNullableField() as Any?)) && Arrays.equals(this.arrayField, if (that is AutoValue_SimpleAutoValue) (that as AutoValue_SimpleAutoValue?)!!.arrayField else that!!.getArrayField())
+  }
+  return false
+ }
+
+ override fun hashCode(): Int {
+  var h___: Int = 1
+  h___ = h___ * 1000003
+  h___ = h___.xor(this.intField)
+  h___ = h___ * 1000003
+  h___ = h___.xor(if (this.booleanField) 1231 else 1237)
+  h___ = h___ * 1000003
+  h___ = h___.xor(this.stringField!!.hashCode())
+  h___ = h___ * 1000003
+  h___ = h___.xor(this.doubleField!!.hashCode())
+  h___ = h___ * 1000003
+  h___ = h___.xor(if (this.nullableField == null) 0 else this.nullableField!!.hashCode())
+  h___ = h___ * 1000003
+  h___ = h___.xor(Arrays.hashCode(this.arrayField))
+  return h___
+ }
+}

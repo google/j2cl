@@ -1,0 +1,66 @@
+// Generated from "autovalue/DefaultNonEmptyConstructorAutoValue.java"
+@file:OptIn(ExperimentalObjCName::class)
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN")
+
+package autovalue
+
+import javaemul.lang.*
+import autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue
+import kotlin.Boolean
+import kotlin.Int
+import kotlin.OptIn
+import kotlin.Suppress
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
+
+@ObjCName("J2ktAutovalueDefaultNonEmptyConstructorAutoValue", exact = true)
+abstract class DefaultNonEmptyConstructorAutoValue {
+ private val field: Int
+
+ internal constructor() {
+  this.field = 1
+ }
+
+ @ObjCName("getBooleanField")
+ abstract fun getBooleanField(): Boolean
+
+ @ObjCName("J2ktAutovalueDefaultNonEmptyConstructorAutoValueCompanion", exact = true)
+ companion object {
+  @JvmStatic
+  internal fun create_pp_autovalue(): DefaultNonEmptyConstructorAutoValue? {
+   return AutoValue_DefaultNonEmptyConstructorAutoValue.Builder().setBooleanField(true)!!.build()
+  }
+ }
+
+ @ObjCName("J2ktAutovalueDefaultNonEmptyConstructorAutoValue_Builder", exact = true)
+ abstract class Builder {
+  private val field: Int
+
+  internal constructor() {
+   this.field = 1
+  }
+
+  @ObjCName("setBooleanField")
+  abstract fun setBooleanField(
+   @ObjCName("withBoolean") x: Boolean
+  ): DefaultNonEmptyConstructorAutoValue.Builder?
+
+  @ObjCName("build")
+  abstract fun build(): DefaultNonEmptyConstructorAutoValue?
+ }
+}
