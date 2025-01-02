@@ -11,6 +11,7 @@ package(
 
 _JAVACOPTS = [
     "-Xep:EqualsHashCode:OFF",  # See go/equals-hashcode-lsc
+    "-Xep:MixedArrayDimensions:OFF",  # See go/lsc-mixedarraydimensions
 ]
 
 j2cl_library(
