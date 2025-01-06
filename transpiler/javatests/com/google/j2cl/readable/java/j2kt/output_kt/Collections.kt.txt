@@ -27,7 +27,7 @@ import java.util.AbstractMap
 import java.util.Spliterator
 import javaemul.lang.JavaCollection
 import javaemul.lang.JavaList
-import javaemul.lang.JavaMap
+import javaemul.lang.MutableMapJvm
 import javaemul.lang.uninitializedArrayOf
 import kotlin.Any
 import kotlin.Array
@@ -413,7 +413,7 @@ open class Collections {
  }
 
  @ObjCName("J2ktJ2ktCollections_CustomMapDisambiguatingOverrides", exact = true)
- abstract class CustomMapDisambiguatingOverrides<K, V>: Collections.CustomMap<K, V>(), JavaMap<K, V> {
+ abstract class CustomMapDisambiguatingOverrides<K, V>: Collections.CustomMap<K, V>(), MutableMapJvm<K, V> {
   override fun getOrDefault(arg0: K, arg1: V): V {
    val arg1_1: V? = arg1
    val arg0_1: Any? = arg0
