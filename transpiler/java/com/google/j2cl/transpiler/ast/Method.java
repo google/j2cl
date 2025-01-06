@@ -42,6 +42,8 @@ public class Method extends Member implements MethodLike {
   private final String wasmExportName;
   @Nullable private Boolean isForcedJavaOverride;
 
+  private boolean hasSuppressNothingToOverrideAnnotation;
+
   private Method(
       SourcePosition sourcePosition,
       MethodDescriptor methodDescriptor,
@@ -49,7 +51,8 @@ public class Method extends Member implements MethodLike {
       Block body,
       String jsDocDescription,
       String wasmExportName,
-      @Nullable Boolean isForcedJavaOverride) {
+      @Nullable Boolean isForcedJavaOverride,
+      boolean hasSuppressNothingToOverrideAnnotation) {
     super(sourcePosition);
     this.methodDescriptor = checkNotNull(methodDescriptor);
     this.parameters.addAll(checkNotNull(parameters));
@@ -57,6 +60,7 @@ public class Method extends Member implements MethodLike {
     this.wasmExportName = wasmExportName;
     this.body = checkNotNull(body);
     this.isForcedJavaOverride = isForcedJavaOverride;
+    this.hasSuppressNothingToOverrideAnnotation = hasSuppressNothingToOverrideAnnotation;
   }
 
   @Override
@@ -128,6 +132,15 @@ public class Method extends Member implements MethodLike {
     return isForcedJavaOverride != null ? isForcedJavaOverride : methodDescriptor.isJavaOverride();
   }
 
+  public boolean hasSuppressNothingToOverrideAnnotation() {
+    return hasSuppressNothingToOverrideAnnotation;
+  }
+
+  public void setHasSuppressNothingToOverrideAnnotation(
+      boolean hasSuppressNothingToOverrideAnnotation) {
+    this.hasSuppressNothingToOverrideAnnotation = hasSuppressNothingToOverrideAnnotation;
+  }
+
   public static Builder newBuilder() {
     return new Builder();
   }
@@ -196,6 +209,7 @@ public class Method extends Member implements MethodLike {
     private SourcePosition bodySourcePosition;
     private SourcePosition sourcePosition;
     @Nullable private Boolean isForcedJavaOverride;
+    private boolean hasSuppressNothingToOverrideAnnotation;
 
     public static Builder from(Method method) {
       Builder builder = new Builder();
@@ -207,6 +221,8 @@ public class Method extends Member implements MethodLike {
       builder.bodySourcePosition = method.getBody().getSourcePosition();
       builder.sourcePosition = method.getSourcePosition();
       builder.isForcedJavaOverride = method.isForcedJavaOverride();
+      builder.hasSuppressNothingToOverrideAnnotation =
+          method.hasSuppressNothingToOverrideAnnotation;
       return builder;
     }
 
@@ -311,6 +327,13 @@ public class Method extends Member implements MethodLike {
       return this;
     }
 
+    @CanIgnoreReturnValue
+    public Builder setSuppressNothingToOverrideAnnotation(
+        boolean suppressNothingToOverrideAnnotation) {
+      hasSuppressNothingToOverrideAnnotation = suppressNothingToOverrideAnnotation;
+      return this;
+    }
+
     public Method build() {
       Block body =
           Block.newBuilder()
@@ -327,7 +350,8 @@ public class Method extends Member implements MethodLike {
           body,
           jsDocDescription,
           wasmExportName,
-          isForcedJavaOverride);
+          isForcedJavaOverride,
+          hasSuppressNothingToOverrideAnnotation);
     }
   }
 }

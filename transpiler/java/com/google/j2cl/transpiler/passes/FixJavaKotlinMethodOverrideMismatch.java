@@ -30,11 +30,17 @@ public class FixJavaKotlinMethodOverrideMismatch extends NormalizationPass {
         new AbstractVisitor() {
           @Override
           public void exitMethod(Method method) {
-            // In Java clone() is magical: it is not declared in Cloneable but declared in Object
-            // and only really implemented if the interface Cloneable is implemented. In Kotlin it
-            // is explicitly declared in the Cloneable interface but not in Any.
             if (directlyOverridesJavaObjectClone(method.getDescriptor())) {
+              // In Java clone() is magical: it is not declared in Cloneable but declared in Object
+              // and only really implemented if the interface Cloneable is implemented. In Kotlin it
+              // is explicitly declared in the Cloneable interface but not in Any.
               method.setForcedJavaOverride(false);
+            } else if (directlyOverridesJavaUtilCollectionToArray(method.getDescriptor())) {
+              // In Kotlin JVM, (Mutable)Collection#toArray are not visible, so overrides cannot
+              // have the override modifier. On Kotlin Native, the emulated method is a regular
+              // method and overrides need the modifier. Mark the method for special handling in
+              // the renderer.
+              method.setHasSuppressNothingToOverrideAnnotation(true);
             }
           }
         });
@@ -49,5 +55,15 @@ public class FixJavaKotlinMethodOverrideMismatch extends NormalizationPass {
             .allMatch(
                 it ->
                     it.getDeclarationDescriptor().isMemberOf(TypeDescriptors.get().javaLangObject));
+  }
+
+  private static boolean directlyOverridesJavaUtilCollectionToArray(
+      MethodDescriptor methodDescriptor) {
+    return methodDescriptor.getName().equals("toArray")
+        && methodDescriptor.getJavaOverriddenMethodDescriptors().stream()
+            .allMatch(
+                it ->
+                    it.getDeclarationDescriptor()
+                        .isMemberOf(TypeDescriptors.get().javaUtilCollection));
   }
 }

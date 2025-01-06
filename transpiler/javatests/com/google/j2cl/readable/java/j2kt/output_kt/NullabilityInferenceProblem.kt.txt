@@ -22,7 +22,7 @@ import javaemul.lang.*
 import java.lang.RuntimeException
 import java.util.Optional
 import java.util.function.Function
-import javaemul.lang.JavaList
+import javaemul.lang.MutableListJvm
 import kotlin.Any
 import kotlin.Comparator
 import kotlin.OptIn
@@ -70,7 +70,7 @@ open class NullabilityInferenceProblem internal constructor() {
  }
 
  @ObjCName("J2ktJ2ktNullabilityInferenceProblem_ImmutableList", exact = true)
- interface ImmutableList<T: Any>: JavaList<T> {}
+ interface ImmutableList<T: Any>: MutableListJvm<T> {}
 
  @ObjCName("J2ktJ2ktNullabilityInferenceProblem_User", exact = true)
  fun interface User {

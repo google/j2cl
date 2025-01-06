@@ -25,8 +25,8 @@ import java.util.AbstractCollection
 import java.util.AbstractList
 import java.util.AbstractMap
 import java.util.Spliterator
-import javaemul.lang.JavaCollection
-import javaemul.lang.JavaList
+import javaemul.lang.MutableCollectionJvm
+import javaemul.lang.MutableListJvm
 import javaemul.lang.MutableMapJvm
 import javaemul.lang.uninitializedArrayOf
 import kotlin.Any
@@ -315,7 +315,7 @@ open class Collections {
  }
 
  @ObjCName("J2ktJ2ktCollections_CustomCollectionDisambiguatingOverrides", exact = true)
- open class CustomCollectionDisambiguatingOverrides<T>: Collections.CustomCollection<T>(), JavaCollection<T> {
+ open class CustomCollectionDisambiguatingOverrides<T>: Collections.CustomCollection<T>(), MutableCollectionJvm<T> {
   override fun spliterator(): Spliterator<T> {
    return super<Collections.CustomCollection>.spliterator()
   }
@@ -511,20 +511,24 @@ open class Collections {
  }
 
  @ObjCName("J2ktJ2ktCollections_AbstractCollectionWithToArrayOverride", exact = true)
- abstract class AbstractCollectionWithToArrayOverride<E>: JavaCollection<E> {
+ abstract class AbstractCollectionWithToArrayOverride<E>: MutableCollectionJvm<E> {
+  @Suppress("NOTHING_TO_OVERRIDE")
   override fun toArray(): Array<Any?> {
    return uninitializedArrayOf<Any>(0) as Array<Any?>
   }
 
+  @Suppress("NOTHING_TO_OVERRIDE")
   override fun <T> toArray(a: Array<T>): Array<T> {
    return a
   }
  }
 
  @ObjCName("J2ktJ2ktCollections_CollectionInterfaceWithToArrayOverride", exact = true)
- interface CollectionInterfaceWithToArrayOverride<E>: JavaList<E> {
+ interface CollectionInterfaceWithToArrayOverride<E>: MutableListJvm<E> {
+  @Suppress("NOTHING_TO_OVERRIDE")
   override fun toArray(): Array<Any?>
 
+  @Suppress("NOTHING_TO_OVERRIDE")
   override fun <T> toArray(a: Array<T>): Array<T>
  }
 }

@@ -22,7 +22,7 @@ import javaemul.lang.*
 import java.lang.RuntimeException
 import java.util.ArrayList
 import java.util.Comparator
-import javaemul.lang.JavaList
+import javaemul.lang.MutableListJvm
 import jsinterop.annotations.JsConstructor
 import jsinterop.annotations.JsFunction
 import jsinterop.annotations.JsMethod
@@ -214,7 +214,7 @@ open class Nullability {
  }
 
  @ObjCName("J2ktNullabilityNullability_StringList", exact = true)
- interface StringList: JavaList<String?> {}
+ interface StringList: MutableListJvm<String?> {}
 
  @ObjCName("J2ktNullabilityNullability_StringComparator", exact = true)
  open class StringComparator: Comparator<String> {

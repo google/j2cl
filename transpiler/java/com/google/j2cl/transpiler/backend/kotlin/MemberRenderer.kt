@@ -54,6 +54,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.colonSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.emptyLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.emptyUnless
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParentheses
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.indented
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.indentedIf
@@ -228,13 +229,22 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
       Source.emptyUnless(method.isJavaOverride) { KotlinSource.OVERRIDE_KEYWORD },
     )
 
-  fun annotationsSource(method: Method, methodObjCNames: MethodObjCNames?) =
+  fun annotationsSource(method: Method, methodObjCNames: MethodObjCNames?): Source =
     newLineSeparated(
       objCNameRenderer.objCAnnotationSource(method.descriptor, methodObjCNames),
       jsInteropAnnotationRenderer.jsInteropAnnotationsSource(method),
       memberDescriptorRenderer.jvmThrowsAnnotationSource(method.descriptor),
       memberDescriptorRenderer.nativeThrowsAnnotationSource(method.descriptor),
+      suppressNothingToOverrideSource(method),
     )
+
+  private fun suppressNothingToOverrideSource(method: Method): Source =
+    emptyUnless(method.hasSuppressNothingToOverrideAnnotation()) {
+      return annotation(
+        memberDescriptorRenderer.nameRenderer.topLevelQualifiedNameSource("kotlin.Suppress"),
+        KotlinSource.literal("NOTHING_TO_OVERRIDE"),
+      )
+    }
 
   fun methodParametersSource(method: MethodLike, objCParameterNames: List<String>? = null): Source {
     val methodDescriptor = method.descriptor
