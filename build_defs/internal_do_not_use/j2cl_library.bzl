@@ -114,7 +114,6 @@ _J2WASM_PACKAGES = [
     "third_party/java/qo_metafile",
     "third_party/java/qo_ole",
     "third_party/java/re2j",
-    "third_party/java/truth",
     "third_party/java_src/animal_sniffer",
     "third_party/java_src/dagger",
     "third_party/java_src/google_common/current",
@@ -129,7 +128,6 @@ _J2WASM_PACKAGES = [
     "third_party/java_src/qo_metafile",
     "third_party/java_src/qo_ole",
     "third_party/java_src/re2j",
-    "third_party/java_src/truth",
 ]
 
 _KOTLIN_STDLIB_TARGET = "//build_defs/internal_do_not_use:kotlin_stdlib"
