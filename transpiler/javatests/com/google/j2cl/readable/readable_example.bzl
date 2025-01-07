@@ -155,7 +155,7 @@ def readable_example(
             write_file(
                 name = "ParseHeaders_m",
                 out = "ParseHeaders.m",
-                content = ["""#import "%s/%s.h" """ % (native.package_name(), src[:-5]) for src in srcs],
+                content = ["""#import "%s/%s.h" """ % (native.package_name(), src[:-5]) for src in srcs if src.endswith(".java")],
                 tags = ["j2kt", "ios", "manual"],
             )
 
