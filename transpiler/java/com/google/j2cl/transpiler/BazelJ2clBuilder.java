@@ -58,6 +58,9 @@ final class BazelJ2clBuilder extends BazelWorker {
       usage = "Specifies where to find user class files and annotation processors.")
   String classPath;
 
+  @Option(name = "-directdeps", metaVar = "<path>", usage = "Specifies direct dependency jars.")
+  String directDeps = "";
+
   @Option(
       name = "-system",
       metaVar = "<path>",
@@ -200,6 +203,7 @@ final class BazelJ2clBuilder extends BazelWorker {
                 .build())
         .setNativeSources(allNativeSources)
         .setClasspaths(getPathEntries(this.classPath))
+        .setDirectDeps(getPathEntries(this.directDeps))
         .setSystem(this.system)
         .setOutput(output)
         .setTargetLabel(targetLabel)

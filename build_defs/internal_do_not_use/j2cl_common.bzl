@@ -81,6 +81,7 @@ def _compile(
         _j2cl_transpile(
             ctx,
             jvm_provider,
+            jvm_deps,
             get_jdk_system(java_toolchain, javac_opts),
             js_srcs,
             output_js,
@@ -266,6 +267,7 @@ def _strip_incompatible_annotation(ctx, name, java_srcs, mnemonic, strip_annotat
 def _j2cl_transpile(
         ctx,
         jvm_provider,
+        jvm_deps,
         jdk_system,
         js_srcs,
         output_dir,
@@ -280,30 +282,23 @@ def _j2cl_transpile(
     # In the Kotlin case, source_jars also include the common sources.
     srcs = jvm_provider.source_jars + js_srcs
 
+    bootclasspath = _get_java_toolchain(ctx).bootclasspath
+    direct_deps = depset(transitive = [bootclasspath] + [d.compile_jars for d in jvm_deps])
+
     if jvm_provider.compilation_info:
-        classpath = depset(
-            jvm_provider.compilation_info.boot_classpath,
-            transitive = [jvm_provider.compilation_info.compilation_classpath],
-        )
+        compilation_classpath = [jvm_provider.compilation_info.compilation_classpath]
     else:
         # TODO(b/214609427): JavaInfo created through Starlark does not have compilation_info set.
-        # We will compute the classpath manually using transitive_compile_time_jars (note that
-        # transitive_compile_time_jars contains current compiled code which should be excluded.)
-        compiled_jars = [output.compile_jar for output in jvm_provider.java_outputs if output.compile_jar]
-        compilation_classpath = [
-            jar
-            for jar in jvm_provider.transitive_compile_time_jars.to_list()
-            if jar not in compiled_jars
-        ]
-        classpath = depset(
-            _get_java_toolchain(ctx).bootclasspath.to_list(),
-            transitive = [depset(compilation_classpath)],
-        )
+        # We will compute the classpath manually using transitive_compile_time_jars.
+        compilation_classpath = [d.transitive_compile_time_jars for d in jvm_deps]
+
+    classpath = depset(transitive = [bootclasspath] + compilation_classpath)
 
     args = ctx.actions.args()
     args.use_param_file("@%s", use_always = True)
     args.set_param_file_format("multiline")
     args.add_joined("-classpath", classpath, join_with = ctx.configuration.host_path_separator)
+    args.add_joined("-directdeps", direct_deps, join_with = ctx.configuration.host_path_separator)
     args.add_all("-system", jdk_system, expand_directories = False)
 
     # Explicitly format this as Bazel target labels can start with a @, which

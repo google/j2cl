@@ -28,6 +28,9 @@ public interface FrontendOptions {
 
   ImmutableList<String> getClasspaths();
 
+  @Nullable
+  ImmutableList<String> getDirectDeps();
+
   String getSystem();
 
   boolean getGenerateKytheIndexingMetadata();

@@ -290,7 +290,7 @@ class KotlinParser(private val problems: Problems) {
     return PackageAnnotationsResolver.create(
       packageInfoSources,
       JdtParser(problems),
-      options.classpaths,
+      options.directDeps,
     )
   }
 
