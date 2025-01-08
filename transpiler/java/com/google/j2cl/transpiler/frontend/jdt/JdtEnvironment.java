@@ -702,6 +702,10 @@ public class JdtEnvironment {
         && methodBinding.getParameterTypes()[0].getQualifiedName().equals("java.lang.String");
   }
 
+  private static boolean isAnnotationMethod(IMethodBinding methodBinding) {
+    return methodBinding.getDeclaringClass().isAnnotation();
+  }
+
   /**
    * Returns true if instances of this type capture its outer instances; i.e. if it is an non static
    * member class, or an anonymous or local class defined in an instance context.
@@ -856,7 +860,7 @@ public class JdtEnvironment {
     TypeDescriptor returnTypeDescriptor =
         isConstructor
             ? enclosingTypeDescriptor.toNonNullable()
-            : adjustForSyntheticEnumMethod(
+            : adjustForSyntheticEnumOrAnnotationMethod(
                 methodBinding,
                 createTypeDescriptorWithNullability(
                     methodBinding.getReturnType(),
@@ -941,7 +945,7 @@ public class JdtEnvironment {
 
     for (int i = firstNonSyntheticParameter; i < parameterTypes.length; i++) {
       TypeDescriptor parameterTypeDescriptor =
-          adjustForSyntheticEnumMethod(
+          adjustForSyntheticEnumOrAnnotationMethod(
               methodBinding,
               createTypeDescriptorWithNullability(
                   parameterTypes[i], methodBinding.getParameterAnnotations(i), inNullMarkedScope));
@@ -959,14 +963,14 @@ public class JdtEnvironment {
 
   /**
    * Makes parameters and returns of the synthetic enum methods ({@code Enum.valueOf} and {@code
-   * Enum.values}) non-nullable.
+   * Enum.values}) and all annotation methods non-nullable.
    *
    * <p>Note that non-nullability is also applied to the component of array types to cover the
    * return of {@code Enum.values}.
    */
-  private TypeDescriptor adjustForSyntheticEnumMethod(
+  private TypeDescriptor adjustForSyntheticEnumOrAnnotationMethod(
       IMethodBinding methodBinding, TypeDescriptor typeDescriptor) {
-    if (!isEnumSyntheticMethod(methodBinding)) {
+    if (!isEnumSyntheticMethod(methodBinding) && !isAnnotationMethod(methodBinding)) {
       return typeDescriptor;
     }
 

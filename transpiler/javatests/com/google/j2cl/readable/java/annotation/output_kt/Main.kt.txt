@@ -50,10 +50,10 @@ open class Main {
    val annotationValue: Main.Zoo? = foo!!.annotationValue()
    val booleanArray: BooleanArray? = foo!!.booleanArray()
    val intArray: IntArray? = foo!!.intArray()
-   val stringArray: Array<String?>? = foo!!.stringArray()
-   val classArray: Array<Class<*>?>? = foo!!.classArray()
-   val enumArray: Array<Main.SomeEnum?>? = foo!!.enumArray()
-   val annotationArray: Array<Main.Zoo?>? = foo!!.annotationArray()
+   val stringArray: Array<String?>? = foo!!.stringArray() as Array<String?>?
+   val classArray: Array<Class<*>?>? = foo!!.classArray() as Array<Class<*>?>?
+   val enumArray: Array<Main.SomeEnum?>? = foo!!.enumArray() as Array<Main.SomeEnum?>?
+   val annotationArray: Array<Main.Zoo?>? = foo!!.annotationArray() as Array<Main.Zoo?>?
   }
  }
 
@@ -66,34 +66,34 @@ open class Main {
   fun intValue(): Int
 
   @ObjCName("stringValue")
-  fun stringValue(): String?
+  fun stringValue(): String
 
   @ObjCName("classValue")
-  fun classValue(): Class<*>?
+  fun classValue(): Class<*>
 
   @ObjCName("enumValue")
-  fun enumValue(): Main.SomeEnum?
+  fun enumValue(): Main.SomeEnum
 
   @ObjCName("annotationValue")
-  fun annotationValue(): Main.Zoo?
+  fun annotationValue(): Main.Zoo
 
   @ObjCName("booleanArray")
-  fun booleanArray(): BooleanArray?
+  fun booleanArray(): BooleanArray
 
   @ObjCName("intArray")
-  fun intArray(): IntArray?
+  fun intArray(): IntArray
 
   @ObjCName("stringArray")
-  fun stringArray(): Array<String?>?
+  fun stringArray(): Array<String>
 
   @ObjCName("classArray")
-  fun classArray(): Array<Class<*>?>?
+  fun classArray(): Array<Class<*>>
 
   @ObjCName("enumArray")
-  fun enumArray(): Array<Main.SomeEnum?>?
+  fun enumArray(): Array<Main.SomeEnum>
 
   @ObjCName("annotationArray")
-  fun annotationArray(): Array<Main.Zoo?>?
+  fun annotationArray(): Array<Main.Zoo>
 
   @ObjCName("J2ktAnnotationMain_FooCompanion", exact = true)
   companion object {
