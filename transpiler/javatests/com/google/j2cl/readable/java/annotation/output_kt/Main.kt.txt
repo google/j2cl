@@ -19,36 +19,103 @@
 package annotation
 
 import javaemul.lang.*
+import java.lang.Class
 import kotlin.Annotation
+import kotlin.Array
+import kotlin.Boolean
+import kotlin.BooleanArray
 import kotlin.Int
+import kotlin.IntArray
 import kotlin.OptIn
+import kotlin.String
 import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktAnnotationMain", exact = true)
 open class Main {
+ @ObjCName("J2ktAnnotationMainCompanion", exact = true)
+ companion object {
+  @JvmStatic
+  internal fun test_pp_annotation(foo: Main.Foo?) {
+   val booleanConstant: Boolean = Main.Foo.BOOLEAN_CONSTANT
+   val intConstant: Int = Main.Foo.INT_CONSTANT
+   val stringConstant: String? = Main.Foo.STRING_CONSTANT
+   val booleanValue: Boolean = foo!!.booleanValue()
+   val intValue: Int = foo!!.intValue()
+   val stringValue: String? = foo!!.stringValue()
+   val classValue: Class<*>? = foo!!.classValue()
+   val enumValue: Main.SomeEnum? = foo!!.enumValue()
+   val annotationValue: Main.Zoo? = foo!!.annotationValue()
+   val booleanArray: BooleanArray? = foo!!.booleanArray()
+   val intArray: IntArray? = foo!!.intArray()
+   val stringArray: Array<String?>? = foo!!.stringArray()
+   val classArray: Array<Class<*>?>? = foo!!.classArray()
+   val enumArray: Array<Main.SomeEnum?>? = foo!!.enumArray()
+   val annotationArray: Array<Main.Zoo?>? = foo!!.annotationArray()
+  }
+ }
+
  @ObjCName("J2ktAnnotationMain_Foo", exact = true)
  interface Foo: Annotation {
-  @ObjCName("bar")
-  fun bar(): Int
+  @ObjCName("booleanValue")
+  fun booleanValue(): Boolean
+
+  @ObjCName("intValue")
+  fun intValue(): Int
+
+  @ObjCName("stringValue")
+  fun stringValue(): String?
+
+  @ObjCName("classValue")
+  fun classValue(): Class<*>?
+
+  @ObjCName("enumValue")
+  fun enumValue(): Main.SomeEnum?
+
+  @ObjCName("annotationValue")
+  fun annotationValue(): Main.Zoo?
+
+  @ObjCName("booleanArray")
+  fun booleanArray(): BooleanArray?
+
+  @ObjCName("intArray")
+  fun intArray(): IntArray?
+
+  @ObjCName("stringArray")
+  fun stringArray(): Array<String?>?
+
+  @ObjCName("classArray")
+  fun classArray(): Array<Class<*>?>?
+
+  @ObjCName("enumArray")
+  fun enumArray(): Array<Main.SomeEnum?>?
+
+  @ObjCName("annotationArray")
+  fun annotationArray(): Array<Main.Zoo?>?
 
   @ObjCName("J2ktAnnotationMain_FooCompanion", exact = true)
   companion object {
-   @ObjCName("CONSTANT_")
-   const val CONSTANT: Int = 123
+   @ObjCName("BOOLEAN_CONSTANT_")
+   const val BOOLEAN_CONSTANT: Boolean = false
+
+   @ObjCName("INT_CONSTANT_")
+   const val INT_CONSTANT: Int = 123
+
+   @ObjCName("STRING_CONSTANT_")
+   const val STRING_CONSTANT: String = "foo"
   }
+ }
+
+ @ObjCName("J2ktAnnotationMain_SomeEnum", exact = true)
+ enum class SomeEnum {
+  @ObjCName("ZERO")
+  ZERO,
+  @ObjCName("ONE")
+  ONE;
  }
 
  @ObjCName("J2ktAnnotationMain_Zoo", exact = true)
  interface Zoo: Annotation {}
-
- @ObjCName("J2ktAnnotationMain_Bar", exact = true)
- open inner class Bar internal constructor() {
-  internal open fun baz_pp_annotation(): Int {
-   val foo: Main.Foo? = null
-   foo!!.bar()
-   return Main.Foo.CONSTANT
-  }
- }
 }

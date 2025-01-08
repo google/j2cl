@@ -3,13 +3,39 @@ goog.module('annotation.Main.Foo$impl');
 const Annotation = goog.require('java.lang.annotation.Annotation$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let SomeEnum = goog.forwardDeclare('annotation.Main.SomeEnum$impl');
+let Zoo = goog.forwardDeclare('annotation.Main.Zoo$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+
 /**
  * @interface
  * @extends {Annotation}
  */
 class Foo {
+ /** @abstract @nodts @return {boolean} */
+ m_booleanValue__boolean() {}
  /** @abstract @nodts @return {number} */
- m_bar__int() {}
+ m_intValue__int() {}
+ /** @abstract @nodts @return {?string} */
+ m_stringValue__java_lang_String() {}
+ /** @abstract @nodts @return {Class<?>} */
+ m_classValue__java_lang_Class() {}
+ /** @abstract @nodts @return {SomeEnum} */
+ m_enumValue__annotation_Main_SomeEnum() {}
+ /** @abstract @nodts @return {Zoo} */
+ m_annotationValue__annotation_Main_Zoo() {}
+ /** @abstract @nodts @return {Array<boolean>} */
+ m_booleanArray__arrayOf_boolean() {}
+ /** @abstract @nodts @return {Array<number>} */
+ m_intArray__arrayOf_int() {}
+ /** @abstract @nodts @return {Array<?string>} */
+ m_stringArray__arrayOf_java_lang_String() {}
+ /** @abstract @nodts @return {Array<Class<?>>} */
+ m_classArray__arrayOf_java_lang_Class() {}
+ /** @abstract @nodts @return {Array<SomeEnum>} */
+ m_enumArray__arrayOf_annotation_Main_SomeEnum() {}
+ /** @abstract @nodts @return {Array<Zoo>} */
+ m_annotationArray__arrayOf_annotation_Main_Zoo() {}
  /** @nodts */
  static $clinit() {
   Foo.$clinit = () =>{};
@@ -28,8 +54,12 @@ class Foo {
  /** @nodts */
  static $loadModules() {}
 }
+/**@const {boolean} @nodts*/
+Foo.f_BOOLEAN_CONSTANT__annotation_Main_Foo = false;
 /**@const {number} @nodts*/
-Foo.f_CONSTANT__annotation_Main_Foo = 123;
+Foo.f_INT_CONSTANT__annotation_Main_Foo = 123;
+/**@const {string} @nodts*/
+Foo.f_STRING_CONSTANT__annotation_Main_Foo = 'foo';
 Foo.$markImplementor(/**@type {Function}*/ (Foo));
 $Util.$setClassMetadataForInterface(/**@type {Function}*/ (Foo), 'annotation.Main$Foo');
 
