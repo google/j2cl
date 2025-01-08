@@ -139,7 +139,7 @@ final class BazelJ2clBuilder extends BazelWorker {
   List<String> wasmEntryPoints = new ArrayList<>();
 
   @Option(name = "-forbiddenAnnotation", hidden = true)
-  List<String> forbiddenAnnotations = new ArrayList();
+  List<String> forbiddenAnnotations = new ArrayList<>();
 
   @Option(name = "-experimentalDefineForWasm", handler = MapOptionHandler.class, hidden = true)
   Map<String, String> definesForWasm = new HashMap<>();
@@ -224,11 +224,7 @@ final class BazelJ2clBuilder extends BazelWorker {
   }
 
   private static List<String> getPathEntries(String path) {
-    List<String> entries = new ArrayList<>();
-    for (String entry : Splitter.on(File.pathSeparatorChar).omitEmptyStrings().split(path)) {
-      entries.add(entry);
-    }
-    return entries;
+    return Splitter.on(File.pathSeparatorChar).omitEmptyStrings().splitToList(path);
   }
 
   public static void main(String[] workerArgs) throws Exception {
