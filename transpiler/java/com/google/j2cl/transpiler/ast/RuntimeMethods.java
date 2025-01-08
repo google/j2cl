@@ -47,7 +47,10 @@ public final class RuntimeMethods {
         TypeDescriptors.get()
             .kotlinJvmInternalReflectionFactory
             .getMethodDescriptor("createKClass", TypeDescriptors.get().javaLangClass);
-    return MethodCall.Builder.from(methodDescriptor).setArguments(typeLiteral).build();
+
+    return MethodCall.Builder.from(toKotlinJvmStaticBridge(methodDescriptor))
+        .setArguments(typeLiteral)
+        .build();
   }
 
   public static MethodCall createKClassCall(Expression expression) {
@@ -55,7 +58,23 @@ public final class RuntimeMethods {
         TypeDescriptors.get()
             .kotlinJvmInternalReflectionFactory
             .getMethodDescriptor("createKClass", TypeDescriptors.get().javaLangObject);
-    return MethodCall.Builder.from(methodDescriptor).setArguments(expression).build();
+    return MethodCall.Builder.from(toKotlinJvmStaticBridge(methodDescriptor))
+        .setArguments(expression)
+        .build();
+  }
+
+  /**
+   * Returns a static {@link MethodDescriptor} given one representing a Kotlin @JvmStatic function.
+   */
+  private static MethodDescriptor toKotlinJvmStaticBridge(MethodDescriptor methodDescriptor) {
+    // In the Kotlin frontend, object members annotated with JvmStatic will not be denoted as being
+    // static as Kotlin will prefer going through the instance member on the singleton instance and
+    // This is, however, problematic when we're trying to build descriptors in the Kotlin frontend.
+    // Since we're only dealing with a well-known set of methods here, we'll trust that we've
+    // appropriately annotated them with @JvmStatic and force the descriptor to be marked static.
+    return methodDescriptor.isStatic()
+        ? methodDescriptor
+        : methodDescriptor.toBuilder().setStatic(true).build();
   }
 
   /** Create a call to the Arrays.$stampType method. */
