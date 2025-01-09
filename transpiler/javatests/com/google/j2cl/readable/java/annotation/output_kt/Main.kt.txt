@@ -42,58 +42,58 @@ open class Main {
    val booleanConstant: Boolean = Main.Foo.BOOLEAN_CONSTANT
    val intConstant: Int = Main.Foo.INT_CONSTANT
    val stringConstant: String? = Main.Foo.STRING_CONSTANT
-   val booleanValue: Boolean = foo!!.booleanValue()
-   val intValue: Int = foo!!.intValue()
-   val stringValue: String? = foo!!.stringValue()
-   val classValue: Class<*>? = foo!!.classValue()
-   val enumValue: Main.SomeEnum? = foo!!.enumValue()
-   val annotationValue: Main.Zoo? = foo!!.annotationValue()
-   val booleanArray: BooleanArray? = foo!!.booleanArray()
-   val intArray: IntArray? = foo!!.intArray()
-   val stringArray: Array<String?>? = foo!!.stringArray() as Array<String?>?
-   val classArray: Array<Class<*>?>? = foo!!.classArray() as Array<Class<*>?>?
-   val enumArray: Array<Main.SomeEnum?>? = foo!!.enumArray() as Array<Main.SomeEnum?>?
-   val annotationArray: Array<Main.Zoo?>? = foo!!.annotationArray() as Array<Main.Zoo?>?
+   val booleanValue: Boolean = foo!!.booleanValue
+   val intValue: Int = foo!!.intValue
+   val stringValue: String? = foo!!.stringValue
+   val classValue: Class<*>? = foo!!.classValue
+   val enumValue: Main.SomeEnum? = foo!!.enumValue
+   val annotationValue: Main.Zoo? = foo!!.annotationValue
+   val booleanArray: BooleanArray? = foo!!.booleanArray
+   val intArray: IntArray? = foo!!.intArray
+   val stringArray: Array<String?>? = foo!!.stringArray as Array<String?>?
+   val classArray: Array<Class<*>?>? = foo!!.classArray as Array<Class<*>?>?
+   val enumArray: Array<Main.SomeEnum?>? = foo!!.enumArray as Array<Main.SomeEnum?>?
+   val annotationArray: Array<Main.Zoo?>? = foo!!.annotationArray as Array<Main.Zoo?>?
   }
  }
 
  @ObjCName("J2ktAnnotationMain_Foo", exact = true)
  interface Foo: Annotation {
   @ObjCName("booleanValue")
-  fun booleanValue(): Boolean
+  val booleanValue: Boolean
 
   @ObjCName("intValue")
-  fun intValue(): Int
+  val intValue: Int
 
   @ObjCName("stringValue")
-  fun stringValue(): String
+  val stringValue: String
 
   @ObjCName("classValue")
-  fun classValue(): Class<*>
+  val classValue: Class<*>
 
   @ObjCName("enumValue")
-  fun enumValue(): Main.SomeEnum
+  val enumValue: Main.SomeEnum
 
   @ObjCName("annotationValue")
-  fun annotationValue(): Main.Zoo
+  val annotationValue: Main.Zoo
 
   @ObjCName("booleanArray")
-  fun booleanArray(): BooleanArray
+  val booleanArray: BooleanArray
 
   @ObjCName("intArray")
-  fun intArray(): IntArray
+  val intArray: IntArray
 
   @ObjCName("stringArray")
-  fun stringArray(): Array<String>
+  val stringArray: Array<String>
 
   @ObjCName("classArray")
-  fun classArray(): Array<Class<*>>
+  val classArray: Array<Class<*>>
 
   @ObjCName("enumArray")
-  fun enumArray(): Array<Main.SomeEnum>
+  val enumArray: Array<Main.SomeEnum>
 
   @ObjCName("annotationArray")
-  fun annotationArray(): Array<Main.Zoo>
+  val annotationArray: Array<Main.Zoo>
 
   @ObjCName("J2ktAnnotationMain_FooCompanion", exact = true)
   companion object {
