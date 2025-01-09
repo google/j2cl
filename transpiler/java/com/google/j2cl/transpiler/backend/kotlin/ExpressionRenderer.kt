@@ -385,18 +385,23 @@ internal data class ExpressionRenderer(
 
   private fun methodInvocationSource(expression: MethodCall): Source =
     expression.target.let { methodDescriptor ->
-      join(
-        identifierSource(environment.ktMangledName(expression.target)),
-        expression
-          .takeIf { !it.target.isKtProperty }
-          ?.let {
-            join(
-              invocationTypeArgumentsSource(methodDescriptor.typeArgumentTypeBindings),
-              invocationSource(expression),
-            )
-          }
-          .orEmpty(),
-      )
+      when {
+        methodDescriptor.isProtobufGetter ->
+          identifierSource(expression.target.name!!.toProtobufPropertyName())
+        else ->
+          join(
+            identifierSource(environment.ktMangledName(expression.target)),
+            expression
+              .takeIf { !it.target.isKtProperty }
+              ?.let {
+                join(
+                  invocationTypeArgumentsSource(methodDescriptor.typeArgumentTypeBindings),
+                  invocationSource(expression),
+                )
+              }
+              .orEmpty(),
+          )
+      }
     }
 
   private fun invocationTypeArgumentsSource(

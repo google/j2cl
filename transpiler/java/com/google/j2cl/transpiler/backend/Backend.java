@@ -32,7 +32,6 @@ import com.google.j2cl.transpiler.passes.AddInterfaceConstructorCasts;
 import com.google.j2cl.transpiler.passes.AddJavaLangObjectForwardingMethods;
 import com.google.j2cl.transpiler.passes.AddNothingReturnStatements;
 import com.google.j2cl.transpiler.passes.AddVisibilityMethodBridgesJ2kt;
-import com.google.j2cl.transpiler.passes.AnnotateProtobufMethodsAsKtProperties;
 import com.google.j2cl.transpiler.passes.ConvertMethodReferencesToLambdas;
 import com.google.j2cl.transpiler.passes.CreateImplicitConstructors;
 import com.google.j2cl.transpiler.passes.DesugarInstanceOfPatterns;
@@ -721,7 +720,6 @@ public enum Backend {
           // Must be run after AddDisambiguatingSuperMethodForwardingStubs
           FixJavaKotlinMethodOverrideMismatch::new,
           FixJavaKotlinCollectionMethodsMismatch::new,
-          AnnotateProtobufMethodsAsKtProperties::new,
           NormalizeNullLiterals::new,
           NormalizeMinValueIntegralLiterals::new,
           CreateImplicitConstructors::new,
