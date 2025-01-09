@@ -28,9 +28,6 @@ java_library(
 
 java_binary(
     name = "GwtIncompatibleStripper",
-    jvm_flags = [
-        "-Dj2cl.deterministicTimestamps=true",
-    ],
     main_class = "com.google.j2cl.tools.gwtincompatible.GwtIncompatibleStripperCommandLineRunner",
     runtime_deps = [":gwtincompatible_lib"],
 )
@@ -48,9 +45,6 @@ java_library(
 
 java_binary(
     name = "GwtIncompatibleStripper_worker",
-    jvm_flags = [
-        "-Dj2cl.deterministicTimestamps=true",
-    ],
     main_class = "com.google.j2cl.tools.gwtincompatible.BazelGwtIncompatibleStripper",
     visibility = ["//build_defs/internal_do_not_use:__pkg__"],
     runtime_deps = [":gwtincompatible_worker_lib"],

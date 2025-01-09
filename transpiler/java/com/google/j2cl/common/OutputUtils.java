@@ -52,7 +52,7 @@ public class OutputUtils {
 
     public void write(String path, byte[] content) {
       Path outputPath = root.resolve(path);
-      fileService.execute(() -> OutputUtils.writeToFile(outputPath, content, problems));
+      fileService.execute(() -> writeToFile(outputPath, content));
     }
 
     public void write(String path, String content) {
@@ -61,14 +61,55 @@ public class OutputUtils {
 
     public void write(String path, ImmutableList<String> contentChunks) {
       Path outputPath = root.resolve(path);
-      fileService.execute(() -> OutputUtils.writeToFile(outputPath, contentChunks, problems));
+      fileService.execute(() -> writeToFile(outputPath, contentChunks));
+    }
+
+    private void writeToFile(Path outputPath, byte[] content) {
+      try {
+        createDirectories(outputPath.getParent());
+        Files.write(outputPath, content);
+        onFileCreation(outputPath);
+      } catch (IOException e) {
+        problems.fatal(FatalError.CANNOT_WRITE_FILE, e.toString());
+      }
+    }
+
+    private void writeToFile(Path outputPath, ImmutableList<String> chunks) {
+      try {
+        createDirectories(outputPath.getParent());
+        try (BufferedWriter writer = Files.newBufferedWriter(outputPath, UTF_8)) {
+          for (String chunk : chunks) {
+            writer.append(chunk);
+          }
+        }
+        onFileCreation(outputPath);
+      } catch (IOException e) {
+        problems.fatal(FatalError.CANNOT_WRITE_FILE, e.toString());
+      }
     }
 
     public void copyFile(String fromAbsolute, String to) {
       Path fromPath = Paths.get(fromAbsolute);
       Path toPath = root.resolve(to);
-      fileService.execute(() -> OutputUtils.copyFile(fromPath, toPath, problems));
+      fileService.execute(() -> copyToFile(fromPath, toPath));
     }
+
+    private void copyToFile(Path from, Path to) {
+      try {
+        createDirectories(to.getParent());
+        Files.copy(
+            from, to, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.COPY_ATTRIBUTES);
+        onFileCreation(to);
+      } catch (IOException e) {
+        problems.fatal(FatalError.CANNOT_COPY_FILE, e.toString());
+      }
+    }
+
+    protected void createDirectories(Path outputPath) throws IOException {
+      Files.createDirectories(outputPath);
+    }
+
+    protected void onFileCreation(Path outputPath) throws IOException {}
 
     @Override
     public void close() {
@@ -102,6 +143,27 @@ public class OutputUtils {
     return new Output(problems, newFileSystem.getPath("/")) {
 
       @Override
+      protected final void createDirectories(Path outputPath) throws IOException {
+        // We are creating directories one by one so that we can reset the timestamp for each one.
+        if (outputPath == null || Files.exists(outputPath)) {
+          return;
+        }
+        createDirectories(outputPath.getParent());
+        Files.createDirectory(outputPath);
+        onFileCreation(outputPath);
+      }
+
+      private final FileTime defaultFileTime = FileTime.fromMillis(0);
+
+      @Override
+      protected void onFileCreation(Path path) throws IOException {
+        // Wipe entries modification time so that input->output mapping is stable
+        // regardless of the time of day.
+        Files.getFileAttributeView(path, BasicFileAttributeView.class)
+            .setTimes(defaultFileTime, defaultFileTime, defaultFileTime);
+      }
+
+      @Override
       public void close() {
         super.close();
         try {
@@ -131,70 +193,13 @@ public class OutputUtils {
     }
   }
 
-  private static void writeToFile(
-      Path outputPath, ImmutableList<String> chunks, Problems problems) {
-    try {
-      createDirectories(outputPath.getParent());
-      try (BufferedWriter writer = Files.newBufferedWriter(outputPath, UTF_8)) {
-        for (String chunk : chunks) {
-          writer.append(chunk);
-        }
-      }
-      // Wipe entries modification time so that input->output mapping is stable
-      // regardless of the time of day.
-      maybeResetAllTimeStamps(outputPath);
-    } catch (IOException e) {
-      problems.fatal(FatalError.CANNOT_WRITE_FILE, e.toString());
-    }
-  }
-
   public static void writeToFile(Path outputPath, byte[] content, Problems problems) {
     try {
-      createDirectories(outputPath.getParent());
+      Files.createDirectories(outputPath.getParent());
       Files.write(outputPath, content);
-      // Wipe entries modification time so that input->output mapping is stable
-      // regardless of the time of day.
-      maybeResetAllTimeStamps(outputPath);
     } catch (IOException e) {
       problems.fatal(FatalError.CANNOT_WRITE_FILE, e.toString());
     }
-  }
-
-  private static void copyFile(Path from, Path to, Problems problems) {
-    try {
-      createDirectories(to.getParent());
-      Files.copy(from, to, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.COPY_ATTRIBUTES);
-      // Wipe entries modification time so that input->output mapping is stable
-      // regardless of the time of day.
-      maybeResetAllTimeStamps(to);
-    } catch (IOException e) {
-      problems.fatal(FatalError.CANNOT_COPY_FILE, e.toString());
-    }
-  }
-
-  private static final boolean DETERMINISTIC_TIMESTAMPS =
-      Boolean.getBoolean("j2cl.deterministicTimestamps");
-
-  private static void createDirectories(Path outputPath) throws IOException {
-    if (!DETERMINISTIC_TIMESTAMPS) {
-      Files.createDirectories(outputPath);
-      return;
-    }
-    // We are creating directories one by one so that we can reset the timestamp for each one.
-    if (outputPath == null || Files.exists(outputPath)) {
-      return;
-    }
-    createDirectories(outputPath.getParent());
-    Files.createDirectory(outputPath);
-    maybeResetAllTimeStamps(outputPath);
-  }
-
-  private static void maybeResetAllTimeStamps(Path path) throws IOException {
-    if (!DETERMINISTIC_TIMESTAMPS) {
-      return;
-    }
-    Files.getFileAttributeView(path, BasicFileAttributeView.class)
-        .setTimes(FileTime.fromMillis(0), FileTime.fromMillis(0), FileTime.fromMillis(0));
   }
 
   /** Returns the package relative path for a file. */

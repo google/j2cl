@@ -43,7 +43,6 @@ java_binary(
     name = "J2clCommandLineRunner",
     jvm_flags = [
         "-XX:+TieredCompilation",
-        "-Dj2cl.deterministicTimestamps=true",
     ],
     main_class = "com.google.j2cl.transpiler.J2clCommandLineRunner",
     runtime_deps = [":commandlinerunner_lib"],
@@ -107,7 +106,6 @@ JVM_FLAGS = [
     "-Xss3M",
     # Disable bytecode verification to save from class-loading time.
     "-Xverify:none",
-    "-Dj2cl.deterministicTimestamps=true",
 ]
 
 java_binary(
