@@ -29,13 +29,13 @@ import kotlin.native.ObjCName
 @ObjCName("J2ktJ2ktnotpassingNullabilityConversion", exact = true)
 open class NullabilityConversion {
  @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Parent", exact = true)
- interface Parent {}
+ interface Parent
 
  @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Child", exact = true)
- interface Child: NullabilityConversion.Parent {}
+ interface Child: NullabilityConversion.Parent
 
  @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Generic", exact = true)
- interface Generic<T: NullabilityConversion.Parent?> {}
+ interface Generic<T: NullabilityConversion.Parent?>
 
  @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Consumer", exact = true)
  fun interface Consumer<T: NullabilityConversion.Parent?> {

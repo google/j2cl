@@ -139,7 +139,7 @@ open class JsConstructorClass {
 
  @ObjCName("J2ktJsconstructorJsConstructorClass_G", exact = true)
  @JsType
- open class G {}
+ open class G
 
  @ObjCName("J2ktJsconstructorJsConstructorClass_H", exact = true)
  open class H: JsConstructorClass.G {
@@ -150,7 +150,7 @@ open class JsConstructorClass {
  @ObjCName("J2ktJsconstructorJsConstructorClass_Outer", exact = true)
  open class Outer {
   @ObjCName("J2ktJsconstructorJsConstructorClass_Outer_I", exact = true)
-  open inner class I @JsConstructor constructor(): JsConstructorClass.G() {}
+  open inner class I @JsConstructor constructor(): JsConstructorClass.G()
  }
 
  @ObjCName("J2ktJsconstructorJsConstructorClass_Varargs", exact = true)
@@ -186,7 +186,7 @@ open class JsConstructorClass {
  @ObjCName("J2ktJsconstructorJsConstructorClass_InstanceVarargs", exact = true)
  open inner class InstanceVarargs @JsConstructor constructor(
   vararg @ObjCName("IntArray") args: Int
- ): JsConstructorClass.A(args!![1]) {}
+ ): JsConstructorClass.A(args!![1])
 
  @ObjCName("J2ktJsconstructorJsConstructorClass_RegularType", exact = true)
  open class RegularType {
@@ -206,7 +206,7 @@ open class JsConstructorClass {
  }
 
  @ObjCName("J2ktJsconstructorJsConstructorClass_JsConstructorClassWithExplicitConstructor", exact = true)
- open inner class JsConstructorClassWithExplicitConstructor @JsConstructor constructor(i: Int) {}
+ open inner class JsConstructorClassWithExplicitConstructor @JsConstructor constructor(i: Int)
 
  @ObjCName("J2ktJsconstructorJsConstructorClass_JsConstructorSubclass", exact = true)
  open inner class JsConstructorSubclass @JsConstructor constructor(): JsConstructorClass.JsConstructorClassWithExplicitConstructor(1) {

@@ -79,7 +79,7 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
               nameRenderer.whereClauseSource(
                 typeDeclaration.directlyDeclaredTypeParameterDescriptors
               ),
-              typeBodySource(type),
+              typeBodySource(type, skipEmptyBlock = true),
             ),
           )
         }
@@ -87,13 +87,14 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
       .withMapping(type.sourcePosition)
 
   /** Returns source with body of the given type. */
-  fun typeBodySource(type: Type): Source =
+  fun typeBodySource(type: Type, skipEmptyBlock: Boolean = false): Source =
     memberRenderer(type).run {
       block(
         emptyLineSeparated(
           Source.emptyUnless(type.isEnum) { memberRenderer(type).enumValuesSource(type) },
           emptyLineSeparated(type.ktMembers.map { memberRenderer(type).source(it) }),
-        )
+        ),
+        skipEmptyBlock = skipEmptyBlock,
       )
     }
 

@@ -45,10 +45,10 @@ fun interface I<T> {
 }
 
 @ObjCName("J2ktUnimplementedbridgemethodJ", exact = true)
-fun interface J: I<String?> {}
+fun interface J: I<String?>
 
 @ObjCName("J2ktUnimplementedbridgemethodBar", exact = true)
-abstract class Bar internal constructor(): J {}
+abstract class Bar internal constructor(): J
 
 @ObjCName("J2ktUnimplementedbridgemethodFoo", exact = true)
-abstract class Foo: I<String?> {}
+abstract class Foo: I<String?>

@@ -207,7 +207,7 @@ open class InnerClassInitOrder {
    this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + 100
    return 0
   }
- }) {}
+ })
 
  @ObjCName("J2ktInnerclassinitorderInnerClassInitOrder_OuterRefFromThisCtorCall", exact = true)
  open inner class OuterRefFromThisCtorCall: InnerClassInitOrder.OuterRefFromSuperCtorBase {
@@ -388,9 +388,9 @@ open class InnerClassInitOrder {
   }
 
   @ObjCName("J2ktInnerclassinitorderInnerClassInitOrder_Outer_TestQualifiedSuperCall", exact = true)
-  open class TestQualifiedSuperCall: InnerClassInitOrder.Outer.OuterIsNotSuper() {}
+  open class TestQualifiedSuperCall: InnerClassInitOrder.Outer.OuterIsNotSuper()
 
   @ObjCName("J2ktInnerclassinitorderInnerClassInitOrder_Outer_TestUnqualifiedSuperCall", exact = true)
-  open inner class TestUnqualifiedSuperCall: InnerClassInitOrder.Outer.OuterIsNotSuper() {}
+  open inner class TestUnqualifiedSuperCall: InnerClassInitOrder.Outer.OuterIsNotSuper()
  }
 }

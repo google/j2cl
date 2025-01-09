@@ -28,7 +28,7 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktNobridgemethodsEntry", exact = true)
-interface Entry<K> {}
+interface Entry<K>
 
 @ObjCName("J2ktNobridgemethodsMap", exact = true)
 abstract class Map<K> internal constructor() {
@@ -45,7 +45,7 @@ open class TreeMap<K> internal constructor(): Map<K>() {
  }
 
  @ObjCName("J2ktNobridgemethodsTreeMap_InnerEntry", exact = true)
- open class InnerEntry<K> internal constructor(): Entry<K> {}
+ open class InnerEntry<K> internal constructor(): Entry<K>
 }
 
 @ObjCName("J2ktNobridgemethodsCharSet", exact = true)

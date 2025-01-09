@@ -331,7 +331,9 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
                 ?.let { expressionRenderer.invocationSource(newInstance) }
                 .orEmpty(),
             ),
-            newInstance.anonymousInnerClass?.let { typeRenderer.typeBodySource(it) }.orEmpty(),
+            newInstance.anonymousInnerClass
+              ?.let { typeRenderer.typeBodySource(it, skipEmptyBlock = true) }
+              .orEmpty(),
           ),
         )
       }

@@ -349,22 +349,22 @@ open class DefaultNotNullable {
  }
 
  @ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullable_NullableBound", exact = true)
- interface NullableBound<T: DefaultNotNullable.NullableBound<T>?> {}
+ interface NullableBound<T: DefaultNotNullable.NullableBound<T>?>
 
  @ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullable_NonNullableBound", exact = true)
- interface NonNullableBound<T: DefaultNotNullable.NonNullableBound<T>> {}
+ interface NonNullableBound<T: DefaultNotNullable.NonNullableBound<T>>
 
  @ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullable_NullableBoundWithNonNullArgument", exact = true)
- interface NullableBoundWithNonNullArgument: DefaultNotNullable.NullableBound<DefaultNotNullable.NullableBoundWithNonNullArgument> {}
+ interface NullableBoundWithNonNullArgument: DefaultNotNullable.NullableBound<DefaultNotNullable.NullableBoundWithNonNullArgument>
 
  @ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullable_NullableBoundWithNullableArgument", exact = true)
- interface NullableBoundWithNullableArgument: DefaultNotNullable.NullableBound<DefaultNotNullable.NullableBoundWithNullableArgument?> {}
+ interface NullableBoundWithNullableArgument: DefaultNotNullable.NullableBound<DefaultNotNullable.NullableBoundWithNullableArgument?>
 
  @ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullable_NonNullBoundWithNonNullArgument", exact = true)
- interface NonNullBoundWithNonNullArgument: DefaultNotNullable.NonNullableBound<DefaultNotNullable.NonNullBoundWithNonNullArgument> {}
+ interface NonNullBoundWithNonNullArgument: DefaultNotNullable.NonNullableBound<DefaultNotNullable.NonNullBoundWithNonNullArgument>
 
  @ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullable_NonNullBoundWithNullableArgument", exact = true)
- interface NonNullBoundWithNullableArgument: DefaultNotNullable.NonNullableBound<DefaultNotNullable.NonNullBoundWithNullableArgument> {}
+ interface NonNullBoundWithNullableArgument: DefaultNotNullable.NonNullableBound<DefaultNotNullable.NonNullBoundWithNullableArgument>
 
  @ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullable_ParameterizedDefaultNullability", exact = true)
  open class ParameterizedDefaultNullability<N: Any> {

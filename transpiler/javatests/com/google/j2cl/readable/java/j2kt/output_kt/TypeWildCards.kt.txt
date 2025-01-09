@@ -82,10 +82,10 @@ open class TypeWildCards internal constructor() {
  }
 
  @ObjCName("J2ktJ2ktTypeWildCards_Parent", exact = true)
- open class Parent internal constructor() {}
+ open class Parent internal constructor()
 
  @ObjCName("J2ktJ2ktTypeWildCards_Child", exact = true)
- open class Child internal constructor(): TypeWildCards.Parent() {}
+ open class Child internal constructor(): TypeWildCards.Parent()
 
  @ObjCName("J2ktJ2ktTypeWildCards_SupplierWithUpperBound", exact = true)
  fun interface SupplierWithUpperBound<T: TypeWildCards.Parent?> {
@@ -229,7 +229,7 @@ open class TypeWildCards internal constructor() {
   }
 
   @ObjCName("J2ktJ2ktTypeWildCards_WithBounds_Event", exact = true)
-  interface Event {}
+  interface Event
 
   @ObjCName("J2ktJ2ktTypeWildCards_WithBounds_Observer", exact = true)
   fun interface Observer<E: TypeWildCards.WithBounds.Event?> {
@@ -287,10 +287,10 @@ open class TypeWildCards internal constructor() {
   }
 
   @ObjCName("J2ktJ2ktTypeWildCards_WithDependentBounds_Event", exact = true)
-  interface Event {}
+  interface Event
 
   @ObjCName("J2ktJ2ktTypeWildCards_WithDependentBounds_Collection", exact = true)
-  interface Collection<V> {}
+  interface Collection<V>
 
   @ObjCName("J2ktJ2ktTypeWildCards_WithDependentBounds_Observer", exact = true)
   fun interface Observer<E: TypeWildCards.WithDependentBounds.Event?, C: TypeWildCards.WithDependentBounds.Collection<E>?> {

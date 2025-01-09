@@ -119,10 +119,10 @@ open class Main {
  }
 
  @ObjCName("J2ktBridgejsmethodMain_E", exact = true)
- open class E: Main.B(), Main.J<String?> {}
+ open class E: Main.B(), Main.J<String?>
 
  @ObjCName("J2ktBridgejsmethodMain_F", exact = true)
- open class F: Main.A<Int?>(), Main.I<Int?> {}
+ open class F: Main.A<Int?>(), Main.I<Int?>
 
  @ObjCName("J2ktBridgejsmethodMain_G", exact = true)
  fun interface G<V> {
@@ -193,7 +193,7 @@ open class Main {
  }
 
  @ObjCName("J2ktBridgejsmethodMain_S", exact = true)
- open inner class S internal constructor(): Main.R() {}
+ open inner class S internal constructor(): Main.R()
 
  @ObjCName("J2ktBridgejsmethodMain_GrandParent", exact = true)
  open inner class GrandParent<T> internal constructor() {
@@ -217,7 +217,7 @@ open class Main {
  }
 
  @ObjCName("J2ktBridgejsmethodMain_ChildWithoutOverrides", exact = true)
- open inner class ChildWithoutOverrides internal constructor(): Main.Parent<Main.ChildWithoutOverrides?>() {}
+ open inner class ChildWithoutOverrides internal constructor(): Main.Parent<Main.ChildWithoutOverrides?>()
 
  @ObjCName("J2ktBridgejsmethodMain_ChildWithOverrides", exact = true)
  open inner class ChildWithOverrides<T: Main.ChildWithOverrides<T>?> internal constructor(): Main.Parent<T>() {

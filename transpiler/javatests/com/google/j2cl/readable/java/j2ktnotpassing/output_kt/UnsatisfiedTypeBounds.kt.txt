@@ -48,7 +48,7 @@ open class UnsatisfiedTypeBounds internal constructor() {
  }
 
  @ObjCName("J2ktJ2ktnotpassingUnsatisfiedTypeBounds_Command", exact = true)
- interface Command {}
+ interface Command
 
  @ObjCName("J2ktJ2ktnotpassingUnsatisfiedTypeBounds_FooCommand", exact = true)
  open class FooCommand internal constructor(): UnsatisfiedTypeBounds.Foo<UnsatisfiedTypeBounds.FooCommand>, UnsatisfiedTypeBounds.Command {
@@ -58,5 +58,5 @@ open class UnsatisfiedTypeBounds internal constructor() {
  }
 
  @ObjCName("J2ktJ2ktnotpassingUnsatisfiedTypeBounds_Helper", exact = true)
- class Helper<T: Any> internal constructor() {}
+ class Helper<T: Any> internal constructor()
 }

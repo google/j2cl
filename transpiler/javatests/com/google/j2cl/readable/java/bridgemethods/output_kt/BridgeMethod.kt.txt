@@ -113,7 +113,7 @@ open class SuperDualUnrelatedAccidentalBridges internal constructor() {
 }
 
 @ObjCName("J2ktBridgemethodsDualUnrelatedAccidentalBridges", exact = true)
-open class DualUnrelatedAccidentalBridges internal constructor(): SuperDualUnrelatedAccidentalBridges(), SomeInterface<String?, Double?>, SomeOtherFooInterface<String?> {}
+open class DualUnrelatedAccidentalBridges internal constructor(): SuperDualUnrelatedAccidentalBridges(), SomeInterface<String?, Double?>, SomeOtherFooInterface<String?>
 
 @ObjCName("J2ktBridgemethodsGetter", exact = true)
 fun interface Getter {
@@ -227,7 +227,7 @@ open class ReparametrerizedChild<E: ReparametrerizedChild<E>?> internal construc
 }
 
 @ObjCName("J2ktBridgemethodsLeafChild", exact = true)
-open class LeafChild internal constructor(): ReparametrerizedChild<LeafChild?>() {}
+open class LeafChild internal constructor(): ReparametrerizedChild<LeafChild?>()
 
 @ObjCName("J2ktBridgemethodsStringConsumer", exact = true)
 fun interface StringConsumer {
@@ -246,7 +246,7 @@ open class Consumer<T> internal constructor() {
 }
 
 @ObjCName("J2ktBridgemethodsStringConsumerImpl", exact = true)
-open class StringConsumerImpl internal constructor(): Consumer<String?>(), StringConsumer {}
+open class StringConsumerImpl internal constructor(): Consumer<String?>(), StringConsumer
 
 @ObjCName("J2ktBridgemethodsSpecializingReturnAbstractClass", exact = true)
 abstract class SpecializingReturnAbstractClass internal constructor() {
@@ -261,7 +261,7 @@ fun interface SpecializingReturnInterface {
 }
 
 @ObjCName("J2ktBridgemethodsSpecializingReturnAbstractSubclass", exact = true)
-abstract class SpecializingReturnAbstractSubclass internal constructor(): SpecializingReturnAbstractClass(), SpecializingReturnInterface {}
+abstract class SpecializingReturnAbstractSubclass internal constructor(): SpecializingReturnAbstractClass(), SpecializingReturnInterface
 
 @ObjCName("J2ktBridgemethodsInterfaceWithDefaultMethod", exact = true)
 interface InterfaceWithDefaultMethod {
@@ -277,10 +277,10 @@ fun interface InterfaceOverridingDefaultMethod: InterfaceWithDefaultMethod {
 }
 
 @ObjCName("J2ktBridgemethodsDoesNotInheritDefaultMethod1", exact = true)
-abstract class DoesNotInheritDefaultMethod1 internal constructor(): InterfaceWithDefaultMethod, InterfaceOverridingDefaultMethod {}
+abstract class DoesNotInheritDefaultMethod1 internal constructor(): InterfaceWithDefaultMethod, InterfaceOverridingDefaultMethod
 
 @ObjCName("J2ktBridgemethodsDoesNotInheritDefaultMethod2", exact = true)
-abstract class DoesNotInheritDefaultMethod2 internal constructor(): InterfaceOverridingDefaultMethod, InterfaceWithDefaultMethod {}
+abstract class DoesNotInheritDefaultMethod2 internal constructor(): InterfaceOverridingDefaultMethod, InterfaceWithDefaultMethod
 
 @ObjCName("J2ktBridgemethodsPackagePrivateBridgeSuper", exact = true)
 open class PackagePrivateBridgeSuper<T, U> internal constructor() {

@@ -202,11 +202,11 @@ private constructor(
 
     fun infix(lhs: Source, operator: Source, rhs: Source) = spaceSeparated(lhs, operator, rhs)
 
-    fun block(body: Source) =
-      if (body.isEmpty()) {
-        inCurlyBrackets(EMPTY)
-      } else {
-        inCurlyBrackets(inNewLine(body))
+    fun block(body: Source, skipEmptyBlock: Boolean = false) =
+      when {
+        body.isNotEmpty() -> inCurlyBrackets(inNewLine(body))
+        !skipEmptyBlock -> inCurlyBrackets(EMPTY)
+        else -> EMPTY
       }
 
     fun block(firstLine: Source, body: Source) =

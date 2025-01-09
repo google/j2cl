@@ -51,16 +51,16 @@ open class RawType internal constructor() {
  }
 
  @ObjCName("J2ktRawtypeRawType_Bound", exact = true)
- open class Bound<T: RawType?> internal constructor() {}
+ open class Bound<T: RawType?> internal constructor()
 
  @ObjCName("J2ktRawtypeRawType_BoundRecursively", exact = true)
- open class BoundRecursively<T: RawType.BoundRecursively<T>?> internal constructor() {}
+ open class BoundRecursively<T: RawType.BoundRecursively<T>?> internal constructor()
 
  @ObjCName("J2ktRawtypeRawType_BoundDependentDirect", exact = true)
- open class BoundDependentDirect<A, B: A> internal constructor() {}
+ open class BoundDependentDirect<A, B: A> internal constructor()
 
  @ObjCName("J2ktRawtypeRawType_BoundDependentIndirect", exact = true)
- open class BoundDependentIndirect<A, B: RawType.Unbound<A>?> internal constructor() {}
+ open class BoundDependentIndirect<A, B: RawType.Unbound<A>?> internal constructor()
 
  @ObjCName("J2ktRawtypeRawType_RawUnboundChild", exact = true)
  open class RawUnboundChild internal constructor(): RawType.Unbound<Any?>() {

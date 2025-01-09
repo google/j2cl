@@ -386,22 +386,22 @@ open class ExplicitNotNullable {
  }
 
  @ObjCName("J2ktNullabilityExplicitnotnullableExplicitNotNullable_NullableBound", exact = true)
- interface NullableBound<T: ExplicitNotNullable.NullableBound<T>?> {}
+ interface NullableBound<T: ExplicitNotNullable.NullableBound<T>?>
 
  @ObjCName("J2ktNullabilityExplicitnotnullableExplicitNotNullable_NonNullableBound", exact = true)
- interface NonNullableBound<T: ExplicitNotNullable.NonNullableBound<T>> {}
+ interface NonNullableBound<T: ExplicitNotNullable.NonNullableBound<T>>
 
  @ObjCName("J2ktNullabilityExplicitnotnullableExplicitNotNullable_NullableBoundWithNonNullArgument", exact = true)
- interface NullableBoundWithNonNullArgument: ExplicitNotNullable.NullableBound<ExplicitNotNullable.NullableBoundWithNonNullArgument> {}
+ interface NullableBoundWithNonNullArgument: ExplicitNotNullable.NullableBound<ExplicitNotNullable.NullableBoundWithNonNullArgument>
 
  @ObjCName("J2ktNullabilityExplicitnotnullableExplicitNotNullable_NullableBoundWithNullableArgument", exact = true)
- interface NullableBoundWithNullableArgument: ExplicitNotNullable.NullableBound<ExplicitNotNullable.NullableBoundWithNullableArgument?> {}
+ interface NullableBoundWithNullableArgument: ExplicitNotNullable.NullableBound<ExplicitNotNullable.NullableBoundWithNullableArgument?>
 
  @ObjCName("J2ktNullabilityExplicitnotnullableExplicitNotNullable_NonNullBoundWithNonNullArgument", exact = true)
- interface NonNullBoundWithNonNullArgument: ExplicitNotNullable.NonNullableBound<ExplicitNotNullable.NonNullBoundWithNonNullArgument> {}
+ interface NonNullBoundWithNonNullArgument: ExplicitNotNullable.NonNullableBound<ExplicitNotNullable.NonNullBoundWithNonNullArgument>
 
  @ObjCName("J2ktNullabilityExplicitnotnullableExplicitNotNullable_NonNullBoundWithNullableArgument", exact = true)
- interface NonNullBoundWithNullableArgument: ExplicitNotNullable.NonNullableBound<ExplicitNotNullable.NonNullBoundWithNullableArgument> {}
+ interface NonNullBoundWithNullableArgument: ExplicitNotNullable.NonNullableBound<ExplicitNotNullable.NonNullBoundWithNullableArgument>
 
  @ObjCName("J2ktNullabilityExplicitnotnullableExplicitNotNullable_ParameterizedDefaultNullability", exact = true)
  open class ParameterizedDefaultNullability<N: Any> {
@@ -563,5 +563,5 @@ open class OuterClass<E: Any> internal constructor() {
  }
 
  @ObjCName("J2ktNullabilityExplicitnotnullableOuterClass_InnerClass", exact = true)
- open inner class InnerClass<E: Any> internal constructor() {}
+ open inner class InnerClass<E: Any> internal constructor()
 }

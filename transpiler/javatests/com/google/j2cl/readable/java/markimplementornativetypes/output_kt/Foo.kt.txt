@@ -27,13 +27,13 @@ import kotlin.native.ObjCName
 
 @ObjCName("J2ktMarkimplementornativetypesMyNativeInterface", exact = true)
 @JsType(namespace = "test.foo", isNative = true)
-interface MyNativeInterface {}
+interface MyNativeInterface
 
 @ObjCName("J2ktMarkimplementornativetypesRegularInterface", exact = true)
-interface RegularInterface {}
+interface RegularInterface
 
 @ObjCName("J2ktMarkimplementornativetypesSubNativeInterface", exact = true)
-interface SubNativeInterface: MyNativeInterface, RegularInterface {}
+interface SubNativeInterface: MyNativeInterface, RegularInterface
 
 @ObjCName("J2ktMarkimplementornativetypesFoo", exact = true)
-open class Foo: MyNativeInterface, RegularInterface {}
+open class Foo: MyNativeInterface, RegularInterface

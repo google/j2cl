@@ -214,7 +214,7 @@ open class Nullability {
  }
 
  @ObjCName("J2ktNullabilityNullability_StringList", exact = true)
- interface StringList: MutableListJvm<String?> {}
+ interface StringList: MutableListJvm<String?>
 
  @ObjCName("J2ktNullabilityNullability_StringComparator", exact = true)
  open class StringComparator: Comparator<String> {
@@ -294,23 +294,23 @@ open class Nullability {
  }
 
  @ObjCName("J2ktNullabilityNullability_Recursive", exact = true)
- open class Recursive<T> internal constructor() where T: Nullability.Recursive<T>, T: Marker? {}
+ open class Recursive<T> internal constructor() where T: Nullability.Recursive<T>, T: Marker?
 
  @ObjCName("J2ktNullabilityNullability_RecursiveNullable", exact = true)
- open class RecursiveNullable<T> internal constructor() where T: Nullability.RecursiveNullable<T>?, T: Marker? {}
+ open class RecursiveNullable<T> internal constructor() where T: Nullability.RecursiveNullable<T>?, T: Marker?
 
  @ObjCName("J2ktNullabilityNullability_RecursiveChild", exact = true)
- open class RecursiveChild internal constructor(): Nullability.Recursive<Nullability.RecursiveChild>(), Marker {}
+ open class RecursiveChild internal constructor(): Nullability.Recursive<Nullability.RecursiveChild>(), Marker
 
  @ObjCName("J2ktNullabilityNullability_RecursiveNullableChild", exact = true)
- open class RecursiveNullableChild internal constructor(): Nullability.RecursiveNullable<Nullability.RecursiveNullableChild?>(), Marker {}
+ open class RecursiveNullableChild internal constructor(): Nullability.RecursiveNullable<Nullability.RecursiveNullableChild?>(), Marker
 
  @ObjCName("J2ktNullabilityNullability_RecursiveParam", exact = true)
- open class RecursiveParam<T> internal constructor() where T: Nullability.Recursive<T>, T: Marker? {}
+ open class RecursiveParam<T> internal constructor() where T: Nullability.Recursive<T>, T: Marker?
 
  @ObjCName("J2ktNullabilityNullability_RecursiveNullableParam", exact = true)
- open class RecursiveNullableParam<T> internal constructor() where T: Nullability.RecursiveNullable<T>?, T: Marker? {}
+ open class RecursiveNullableParam<T> internal constructor() where T: Nullability.RecursiveNullable<T>?, T: Marker?
 }
 
 @ObjCName("J2ktNullabilityMarker", exact = true)
-interface Marker {}
+interface Marker

@@ -35,7 +35,7 @@ open class NestedGenericClass<T> {
  open fun <S> `fun`(
   @ObjCName("withId") t: S
  ) {
-  open class E<S> internal constructor() {}
+  open class E<S> internal constructor()
   open class F internal constructor() {
    @JvmField
    var f: S? = null
@@ -48,7 +48,7 @@ open class NestedGenericClass<T> {
  open fun <T_1> bar() {
   open class G<T> internal constructor() {
    open fun <T_1> bar() {
-    open class H<T> internal constructor() {}
+    open class H<T> internal constructor()
     H<Number?>()
    }
   }
@@ -67,7 +67,7 @@ open class NestedGenericClass<T> {
  @ObjCName("J2ktNestedgenericclassNestedGenericClass_A", exact = true)
  open inner class A<T> {
   @ObjCName("J2ktNestedgenericclassNestedGenericClass_A_B", exact = true)
-  open inner class B<T> constructor() {}
+  open inner class B<T> constructor()
  }
 
  @ObjCName("J2ktNestedgenericclassNestedGenericClass_C", exact = true)
@@ -91,6 +91,6 @@ open class NestedGenericClass<T> {
   }
 
   @ObjCName("J2ktNestedgenericclassNestedGenericClass_RecursiveTypeVariable_Inner", exact = true)
-  open inner class Inner internal constructor() {}
+  open inner class Inner internal constructor()
  }
 }
