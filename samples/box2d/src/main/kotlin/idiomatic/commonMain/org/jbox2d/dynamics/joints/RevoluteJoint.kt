@@ -57,20 +57,28 @@ class RevoluteJoint(argWorld: IWorldPool, def: RevoluteJointDef) : Joint(argWorl
   val localAnchorB = Vec2().apply { set(def.localAnchorB) }
   var referenceAngle: Float = def.referenceAngle
     private set
+
   var enableMotor: Boolean = def.enableMotor
     private set
+
   var maxMotorTorque: Float = def.maxMotorTorque
     private set
+
   var motorSpeed: Float = def.motorSpeed
     private set
+
   var enableLimit: Boolean = def.enableLimit
     private set
+
   var lowerAngle: Float = def.lowerAngle
     private set
+
   var upperAngle: Float = def.upperAngle
     private set
+
   val jointAngle: Float
     get() = bodyB.sweep.a - bodyA.sweep.a - referenceAngle
+
   val jointSpeed: Float
     get() = bodyB.angularVelocity - bodyA.angularVelocity
 
@@ -180,10 +188,10 @@ class RevoluteJoint(argWorld: IWorldPool, def: RevoluteJointDef) : Joint(argWorl
       P.y = impulse.y
       vA.x -= mA * P.x
       vA.y -= mA * P.y
-      wA -= iA * (Vec2.cross(rA, P) + motorImpulse + impulse.z)
+      wA -= iA * ((rA cross P) + motorImpulse + impulse.z)
       vB.x += mB * P.x
       vB.y += mB * P.y
-      wB += iB * (Vec2.cross(rB, P) + motorImpulse + impulse.z)
+      wB += iB * ((rB cross P) + motorImpulse + impulse.z)
       pool.pushVec2(1)
     } else {
       impulse.setZero()
@@ -274,10 +282,10 @@ class RevoluteJoint(argWorld: IWorldPool, def: RevoluteJointDef) : Joint(argWorl
       P.set(localImpulse.x, localImpulse.y)
       vA.x -= mA * P.x
       vA.y -= mA * P.y
-      wA -= iA * (Vec2.cross(rA, P) + localImpulse.z)
+      wA -= iA * ((rA cross P) + localImpulse.z)
       vB.x += mB * P.x
       vB.y += mB * P.y
-      wB += iB * (Vec2.cross(rB, P) + localImpulse.z)
+      wB += iB * ((rB cross P) + localImpulse.z)
       pool.pushVec2(2)
       pool.pushVec3(2)
     } else {
@@ -293,10 +301,10 @@ class RevoluteJoint(argWorld: IWorldPool, def: RevoluteJointDef) : Joint(argWorl
       impulse.y += impulse.y
       vA.x -= mA * impulse.x
       vA.y -= mA * impulse.y
-      wA -= iA * Vec2.cross(rA, impulse)
+      wA -= iA * (rA cross impulse)
       vB.x += mB * impulse.x
       vB.y += mB * impulse.y
-      wB += iB * Vec2.cross(rB, impulse)
+      wB += iB * (rB cross impulse)
       pool.pushVec2(2)
     }
 
@@ -330,7 +338,7 @@ class RevoluteJoint(argWorld: IWorldPool, def: RevoluteJointDef) : Joint(argWorl
           MathUtils.clamp(
             angle - lowerAngle,
             -Settings.MAX_ANGULAR_CORRECTION,
-            Settings.MAX_ANGULAR_CORRECTION
+            Settings.MAX_ANGULAR_CORRECTION,
           )
         limitImpulse = -motorMass * C
         angularError = MathUtils.abs(C)
@@ -377,10 +385,10 @@ class RevoluteJoint(argWorld: IWorldPool, def: RevoluteJointDef) : Joint(argWorl
       impulse.negateLocal()
       cA.x -= mA * impulse.x
       cA.y -= mA * impulse.y
-      aA -= iA * Vec2.cross(rA, impulse)
+      aA -= iA * (rA cross impulse)
       cB.x += mB * impulse.x
       cB.y += mB * impulse.y
-      aB += iB * Vec2.cross(rB, impulse)
+      aB += iB * (rB cross impulse)
       pool.pushVec2(4)
       pool.pushMat22(1)
     }

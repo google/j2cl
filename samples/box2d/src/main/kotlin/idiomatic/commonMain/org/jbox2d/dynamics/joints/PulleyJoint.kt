@@ -160,8 +160,8 @@ class PulleyJoint(argWorldPool: IWorldPool, def: PulleyJointDef) : Joint(argWorl
     }
 
     // Compute effective mass.
-    val ruA = Vec2.cross(rA, uA)
-    val ruB = Vec2.cross(rB, uB)
+    val ruA = rA cross uA
+    val ruB = rB cross uB
     val mA = invMassA + invIA * ruA * ruA
     val mB = invMassB + invIB * ruB * ruB
     mass = mA + ratio * ratio * mB
@@ -180,10 +180,10 @@ class PulleyJoint(argWorldPool: IWorldPool, def: PulleyJointDef) : Joint(argWorl
       PB.set(uB).mulLocal(-ratio * impulse)
       vA.x += invMassA * PA.x
       vA.y += invMassA * PA.y
-      wA += invIA * Vec2.cross(rA, PA)
+      wA += invIA * (rA cross PA)
       vB.x += invMassB * PB.x
       vB.y += invMassB * PB.y
-      wB += invIB * Vec2.cross(rB, PB)
+      wB += invIB * (rB cross PB)
       pool.pushVec2(2)
     } else {
       impulse = 0.0f
@@ -209,17 +209,17 @@ class PulleyJoint(argWorldPool: IWorldPool, def: PulleyJointDef) : Joint(argWorl
     vpA.addLocal(vA)
     Vec2.crossToOutUnsafe(wB, rB, vpB)
     vpB.addLocal(vB)
-    val Cdot = -Vec2.dot(uA, vpA) - ratio * Vec2.dot(uB, vpB)
+    val Cdot = -(uA dot vpA) - ratio * (uB dot vpB)
     val localImpulse = -mass * Cdot
     impulse += localImpulse
     PA.set(uA).mulLocal(-localImpulse)
     PB.set(uB).mulLocal(-ratio * localImpulse)
     vA.x += invMassA * PA.x
     vA.y += invMassA * PA.y
-    wA += invIA * Vec2.cross(rA, PA)
+    wA += invIA * (rA cross PA)
     vB.x += invMassB * PB.x
     vB.y += invMassB * PB.y
-    wB += invIB * Vec2.cross(rB, PB)
+    wB += invIB * (rB cross PB)
 
     //    data.velocities[m_indexA].v.set(vA);
     data.velocities[indexA].w = wA
@@ -262,8 +262,8 @@ class PulleyJoint(argWorldPool: IWorldPool, def: PulleyJointDef) : Joint(argWorl
     }
 
     // Compute effective mass.
-    val ruA = Vec2.cross(rA, uA)
-    val ruB = Vec2.cross(rB, uB)
+    val ruA = rA cross uA
+    val ruB = rB cross uB
     val mA = invMassA + invIA * ruA * ruA
     val mB = invMassB + invIB * ruB * ruB
     var mass = mA + ratio * ratio * mB
@@ -277,10 +277,10 @@ class PulleyJoint(argWorldPool: IWorldPool, def: PulleyJointDef) : Joint(argWorl
     PB.set(uB).mulLocal(-ratio * impulse)
     cA.x += invMassA * PA.x
     cA.y += invMassA * PA.y
-    aA += invIA * Vec2.cross(rA, PA)
+    aA += invIA * (rA cross PA)
     cB.x += invMassB * PB.x
     cB.y += invMassB * PB.y
-    aB += invIB * Vec2.cross(rB, PB)
+    aB += invIB * (rB cross PB)
 
     //    data.positions[m_indexA].c.set(cA);
     data.positions[indexA].a = aA

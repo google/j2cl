@@ -109,8 +109,8 @@ class RopeJoint(worldPool: IWorldPool, def: RopeJointDef) : Joint(worldPool, def
     }
 
     // Compute effective mass.
-    val crA = Vec2.cross(rA, u)
-    val crB = Vec2.cross(rB, u)
+    val crA = rA cross u
+    val crB = rB cross u
     val invMass = invMassA + invIA * crA * crA + invMassB + invIB * crB * crB
     mass = if (invMass != 0.0f) 1.0f / invMass else 0.0f
     if (data.step.warmStarting) {
@@ -151,7 +151,7 @@ class RopeJoint(worldPool: IWorldPool, def: RopeJointDef) : Joint(worldPool, def
     Vec2.crossToOutUnsafe(wB, rB, vpB)
     vpB.addLocal(vB)
     val C = length - maxLength
-    var Cdot = Vec2.dot(u, temp.set(vpB).subLocal(vpA))
+    var Cdot = u dot temp.set(vpB).subLocal(vpA)
 
     // Predictive constraint.
     if (C < 0.0f) {

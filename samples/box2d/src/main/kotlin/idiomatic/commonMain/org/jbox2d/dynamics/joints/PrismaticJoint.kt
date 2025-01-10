@@ -103,22 +103,28 @@ import org.jbox2d.pooling.IWorldPool
  */
 class PrismaticJoint(argWorld: IWorldPool, def: PrismaticJointDef) : Joint(argWorld, def) {
   // Solver shared
-  val localAnchorA: Vec2 = Vec2(def.localAnchorA)
-  val localAnchorB: Vec2 = Vec2(def.localAnchorB)
-  val localXAxisA: Vec2 = Vec2(def.localAxisA).apply { normalize() }
+  val localAnchorA: Vec2 = def.localAnchorA.copy()
+  val localAnchorB: Vec2 = def.localAnchorB.copy()
+  val localXAxisA: Vec2 = def.localAxisA.copy().apply { normalize() }
   var referenceAngle: Float = def.referenceAngle
   var lowerTranslation: Float = def.lowerTranslation
     private set
+
   var upperTranslation: Float = def.upperTranslation
     private set
+
   var maxMotorForce: Float = def.maxMotorForce
     private set
+
   var motorSpeed: Float = def.motorSpeed
     private set
+
   var enableLimit: Boolean = def.enableLimit
     private set
+
   var enableMotor: Boolean = def.enableMotor
     private set
+
   protected val localYAxisA: Vec2 = Vec2().apply { Vec2.crossToOutUnsafe(1f, localXAxisA, this) }
   private val impulse: Vec3 = Vec3()
   private var motorImpulse: Float = 0.0f
@@ -188,7 +194,7 @@ class PrismaticJoint(argWorld: IWorldPool, def: PrismaticJointDef) : Joint(argWo
     Vec2.crossToOutUnsafe(wB, rB, temp2)
     Vec2.crossToOutUnsafe(wA, rA, temp3)
     temp2.addLocal(vB).subLocal(vA).subLocal(temp3)
-    val speed = Vec2.dot(d, temp) + Vec2.dot(axis, temp2)
+    val speed = (d dot temp) + (axis dot temp2)
     pool.pushVec2(9)
     return speed
   }
@@ -201,7 +207,7 @@ class PrismaticJoint(argWorld: IWorldPool, def: PrismaticJointDef) : Joint(argWo
     bodyB.getWorldPointToOut(localAnchorB, pB)
     bodyA.getWorldVectorToOutUnsafe(localXAxisA, axis)
     pB.subLocal(pA)
-    val translation = Vec2.dot(pB, axis)
+    val translation = pB dot axis
     pool.pushVec2(3)
     return translation
   }
@@ -318,8 +324,8 @@ class PrismaticJoint(argWorld: IWorldPool, def: PrismaticJointDef) : Joint(argWo
     run {
       Rot.mulToOutUnsafe(qA, localXAxisA, axis)
       temp.set(d).addLocal(rA)
-      a1 = Vec2.cross(temp, axis)
-      a2 = Vec2.cross(rB, axis)
+      a1 = temp cross axis
+      a2 = rB cross axis
       motorMass = mA + mB + iA * a1 * a1 + iB * a2 * a2
       if (motorMass > 0.0f) {
         motorMass = 1.0f / motorMass
@@ -330,8 +336,8 @@ class PrismaticJoint(argWorld: IWorldPool, def: PrismaticJointDef) : Joint(argWo
     run {
       Rot.mulToOutUnsafe(qA, localYAxisA, perp)
       temp.set(d).addLocal(rA)
-      s1 = Vec2.cross(temp, perp)
-      s2 = Vec2.cross(rB, perp)
+      s1 = temp cross perp
+      s2 = rB cross perp
       val k11 = mA + mB + iA * s1 * s1 + iB * s2 * s2
       val k12 = iA * s1 + iB * s2
       val k13 = iA * s1 * a1 + iB * s2 * a2
@@ -349,7 +355,7 @@ class PrismaticJoint(argWorld: IWorldPool, def: PrismaticJointDef) : Joint(argWo
 
     // Compute motor and limit terms.
     if (enableLimit) {
-      val jointTranslation = Vec2.dot(axis, d)
+      val jointTranslation = axis dot d
       if (MathUtils.abs(upperTranslation - lowerTranslation) < 2.0f * Settings.LINEAR_SLOP) {
         limitState = LimitState.EQUAL
       } else if (jointTranslation <= lowerTranslation) {
@@ -416,7 +422,7 @@ class PrismaticJoint(argWorld: IWorldPool, def: PrismaticJointDef) : Joint(argWo
     // Solve linear motor constraint.
     if (enableMotor && limitState != LimitState.EQUAL) {
       temp.set(vB).subLocal(vA)
-      val Cdot = Vec2.dot(axis, temp) + a2 * wB - a1 * wA
+      val Cdot = (axis dot temp) + a2 * wB - a1 * wA
       var impulse = motorMass * (motorSpeed - Cdot)
       val oldImpulse = motorImpulse
       val maxImpulse = data.step.dt * maxMotorForce
@@ -436,13 +442,13 @@ class PrismaticJoint(argWorld: IWorldPool, def: PrismaticJointDef) : Joint(argWo
     }
     val Cdot1 = pool.popVec2()
     temp.set(vB).subLocal(vA)
-    Cdot1.x = Vec2.dot(perp, temp) + s2 * wB - s1 * wA
+    Cdot1.x = (perp dot temp) + s2 * wB - s1 * wA
     Cdot1.y = wB - wA
     // System.out.println(Cdot1);
     if (enableLimit && limitState != LimitState.INACTIVE) {
       // Solve prismatic and limit constraint in block form.
       temp.set(vB).subLocal(vA)
-      val Cdot2: Float = Vec2.dot(axis, temp) + a2 * wB - a1 * wA
+      val Cdot2: Float = (axis dot temp) + a2 * wB - a1 * wA
       val Cdot = pool.popVec3()
       Cdot.set(Cdot1.x, Cdot1.y, Cdot2)
       val f1 = pool.popVec3()
@@ -535,26 +541,26 @@ class PrismaticJoint(argWorld: IWorldPool, def: PrismaticJointDef) : Joint(argWo
     Rot.mulToOutUnsafe(qB, temp.set(localAnchorB).subLocal(localCenterB), rB)
     d.set(cB).addLocal(rB).subLocal(cA).subLocal(rA)
     Rot.mulToOutUnsafe(qA, localXAxisA, axis)
-    val a1 = Vec2.cross(temp.set(d).addLocal(rA), axis)
-    val a2 = Vec2.cross(rB, axis)
+    val a1 = temp.set(d).addLocal(rA) cross axis
+    val a2 = rB cross axis
     Rot.mulToOutUnsafe(qA, localYAxisA, perp)
-    val s1 = Vec2.cross(temp.set(d).addLocal(rA), perp)
-    val s2 = Vec2.cross(rB, perp)
-    C1.x = Vec2.dot(perp, d)
+    val s1 = temp.set(d).addLocal(rA) cross perp
+    val s2 = rB cross perp
+    C1.x = perp dot d
     C1.y = aB - aA - referenceAngle
     var linearError = MathUtils.abs(C1.x)
     val angularError = MathUtils.abs(C1.y)
     var active = false
     var C2 = 0.0f
     if (enableLimit) {
-      val translation = Vec2.dot(axis, d)
+      val translation = axis dot d
       if (MathUtils.abs(upperTranslation - lowerTranslation) < 2.0f * Settings.LINEAR_SLOP) {
         // Prevent large angular corrections
         C2 =
           MathUtils.clamp(
             translation,
             -Settings.MAX_LINEAR_CORRECTION,
-            Settings.MAX_LINEAR_CORRECTION
+            Settings.MAX_LINEAR_CORRECTION,
           )
         linearError = MathUtils.max(linearError, MathUtils.abs(translation))
         active = true
@@ -564,7 +570,7 @@ class PrismaticJoint(argWorld: IWorldPool, def: PrismaticJointDef) : Joint(argWo
           MathUtils.clamp(
             translation - lowerTranslation + Settings.LINEAR_SLOP,
             -Settings.MAX_LINEAR_CORRECTION,
-            0.0f
+            0.0f,
           )
         linearError = MathUtils.max(linearError, lowerTranslation - translation)
         active = true
@@ -574,7 +580,7 @@ class PrismaticJoint(argWorld: IWorldPool, def: PrismaticJointDef) : Joint(argWo
           MathUtils.clamp(
             translation - upperTranslation - Settings.LINEAR_SLOP,
             0.0f,
-            Settings.MAX_LINEAR_CORRECTION
+            Settings.MAX_LINEAR_CORRECTION,
           )
         linearError = MathUtils.max(linearError, translation - upperTranslation)
         active = true

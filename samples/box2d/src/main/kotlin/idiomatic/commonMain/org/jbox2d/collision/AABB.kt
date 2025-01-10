@@ -28,22 +28,21 @@ import org.jbox2d.common.Vec2
 import org.jbox2d.pooling.IWorldPool
 import org.jbox2d.pooling.normal.DefaultWorldPool
 
-/** An axis-aligned bounding box. */
-class AABB {
+/**
+ * An axis-aligned bounding box.
+ *
+ * @param lowerVertex Bottom left vertex of bounding box.
+ * @param upperVertex Top right vertex of bounding box.
+ */
+class AABB(lowerVertex: Vec2? = null, upperVertex: Vec2? = null) {
   /** Bottom left vertex of bounding box. */
-  val lowerBound: Vec2
+  val lowerBound: Vec2 = lowerVertex?.copy() ?: Vec2()
 
   /** Top right vertex of bounding box. */
-  val upperBound: Vec2
+  val upperBound: Vec2 = upperVertex?.copy() ?: Vec2()
 
   val perimeter: Float
     get() = 2.0f * (upperBound.x - lowerBound.x + upperBound.y - lowerBound.y)
-
-  /** Creates the default object, with vertices at 0,0 and 0,0. */
-  constructor() {
-    lowerBound = Vec2()
-    upperBound = Vec2()
-  }
 
   /**
    * Copies from the given object
@@ -51,17 +50,6 @@ class AABB {
    * @param copy the object to copy from
    */
   constructor(copy: AABB) : this(copy.lowerBound, copy.upperBound) {}
-
-  /**
-   * Creates an AABB object using the given bounding vertices.
-   *
-   * @param lowerVertex the bottom left vertex of the bounding box
-   * @param maxVertex the top right vertex of the bounding box
-   */
-  constructor(lowerVertex: Vec2, upperVertex: Vec2) {
-    lowerBound = lowerVertex.clone() // clone to be safe
-    upperBound = upperVertex.clone()
-  }
 
   /**
    * Sets this object from the given object
@@ -96,7 +84,7 @@ class AABB {
    * @return
    */
   fun getCenter(): Vec2 {
-    val center = Vec2(lowerBound)
+    val center = lowerBound.copy()
     center.addLocal(upperBound)
     center.mulLocal(.5f)
     return center
@@ -113,7 +101,7 @@ class AABB {
    * @return
    */
   fun getExtents(): Vec2 {
-    val center = Vec2(upperBound)
+    val center = upperBound.copy()
     center.subLocal(lowerBound)
     center.mulLocal(.5f)
     return center
@@ -181,7 +169,7 @@ class AABB {
   @Deprecated(
     message =
       "please use {@link #raycast(RayCastOutput, RayCastInput, IWorldPool)} for better performance",
-    replaceWith = ReplaceWith("raycast(RayCastOutput, RayCastInput, IWorldPool)")
+    replaceWith = ReplaceWith("raycast(RayCastOutput, RayCastInput, IWorldPool)"),
   )
   fun raycast(output: RayCastOutput, input: RayCastInput): Boolean =
     raycast(output, input, DefaultWorldPool(4, 4))

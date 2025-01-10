@@ -72,7 +72,7 @@ class MassData {
   constructor(md: MassData) {
     mass = md.mass
     I = md.I
-    center = md.center.clone()
+    center = md.center.copy()
   }
 
   fun set(md: MassData) {

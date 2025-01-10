@@ -52,8 +52,8 @@ class Mat22 : Serializable {
    * @param c2 Column 2 of matrix
    */
   constructor(c1: Vec2, c2: Vec2) {
-    ex = c1.clone()
-    ey = c2.clone()
+    ex = c1.copy()
+    ey = c2.copy()
   }
 
   /**
@@ -287,10 +287,10 @@ class Mat22 : Serializable {
      * return C;
      */
     val C: Mat22 = Mat22()
-    C.ex.x = Vec2.dot(ex, B.ex)
-    C.ex.y = Vec2.dot(ey, B.ex)
-    C.ey.x = Vec2.dot(ex, B.ey)
-    C.ey.y = Vec2.dot(ey, B.ey)
+    C.ex.x = ex dot B.ex
+    C.ex.y = ey dot B.ex
+    C.ey.x = ex dot B.ey
+    C.ey.y = ey dot B.ey
     return C
   }
 

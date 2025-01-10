@@ -183,7 +183,7 @@ class Island {
     newBodyCapacity: Int,
     newContactCapacity: Int,
     newJointCapacity: Int,
-    newListener: ContactListener?
+    newListener: ContactListener?,
   ) {
     // System.out.println("Initializing Island");
     bodyCapacity = newBodyCapacity
@@ -381,7 +381,7 @@ class Island {
         if (
           b.flags and Body.Companion.AUTO_SLEEP_FLAG == 0 ||
             b.angularVelocity * b.angularVelocity > angTolSqr ||
-            Vec2.dot(b.linearVelocity, b.linearVelocity) > linTolSqr
+            (b.linearVelocity dot b.linearVelocity) > linTolSqr
         ) {
           b.sleepTime = 0.0f
           minSleepTime = 0.0f

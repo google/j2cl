@@ -32,8 +32,8 @@ import org.jbox2d.pooling.IWorldPool
 
 /** @author Daniel Murphy */
 class FrictionJoint(argWorldPool: IWorldPool, def: FrictionJointDef) : Joint(argWorldPool, def) {
-  val localAnchorA: Vec2 = Vec2(def.localAnchorA)
-  val localAnchorB: Vec2 = Vec2(def.localAnchorB)
+  val localAnchorA: Vec2 = def.localAnchorA.copy()
+  val localAnchorB: Vec2 = def.localAnchorB.copy()
   var maxForce: Float = def.maxForce
   var maxTorque: Float = def.maxTorque
 
@@ -125,10 +125,10 @@ class FrictionJoint(argWorldPool: IWorldPool, def: FrictionJointDef) : Joint(arg
       P.set(linearImpulse)
       temp.set(P).mulLocal(mA)
       vA.subLocal(temp)
-      wA -= iA * (Vec2.cross(rA, P) + angularImpulse)
+      wA -= iA * ((rA cross P) + angularImpulse)
       temp.set(P).mulLocal(mB)
       vB.addLocal(temp)
-      wB += iB * (Vec2.cross(rB, P) + angularImpulse)
+      wB += iB * ((rB cross P) + angularImpulse)
       pool.pushVec2(1)
     } else {
       linearImpulse.setZero()
@@ -191,10 +191,10 @@ class FrictionJoint(argWorldPool: IWorldPool, def: FrictionJointDef) : Joint(arg
       impulse.set(linearImpulse).subLocal(oldImpulse)
       temp.set(impulse).mulLocal(mA)
       vA.subLocal(temp)
-      wA -= iA * Vec2.cross(rA, impulse)
+      wA -= iA * (rA cross impulse)
       temp.set(impulse).mulLocal(mB)
       vB.addLocal(temp)
-      wB += iB * Vec2.cross(rB, impulse)
+      wB += iB * (rB cross impulse)
     }
 
     //    data.velocities[m_indexA].v.set(vA);

@@ -55,8 +55,8 @@ class WeldJoint(argWorld: IWorldPool, def: WeldJointDef) : Joint(argWorld, def) 
   var dampingRatio: Float = def.dampingRatio
 
   // Solver shared
-  val localAnchorA: Vec2 = Vec2(def.localAnchorA)
-  val localAnchorB: Vec2 = Vec2(def.localAnchorB)
+  val localAnchorA: Vec2 = def.localAnchorA.copy()
+  val localAnchorB: Vec2 = def.localAnchorB.copy()
   val referenceAngle: Float = def.referenceAngle
 
   private var bias = 0f
@@ -176,10 +176,10 @@ class WeldJoint(argWorld: IWorldPool, def: WeldJointDef) : Joint(argWorld, def) 
       P.set(impulse.x, impulse.y)
       vA.x -= mA * P.x
       vA.y -= mA * P.y
-      wA -= iA * (Vec2.cross(rA, P) + impulse.z)
+      wA -= iA * ((rA cross P) + impulse.z)
       vB.x += mB * P.x
       vB.y += mB * P.y
-      wB += iB * (Vec2.cross(rB, P) + impulse.z)
+      wB += iB * ((rB cross P) + impulse.z)
       pool.pushVec2(1)
     } else {
       impulse.setZero()
@@ -221,10 +221,10 @@ class WeldJoint(argWorld: IWorldPool, def: WeldJointDef) : Joint(argWorld, def) 
       impulse.y += P.y
       vA.x -= mA * P.x
       vA.y -= mA * P.y
-      wA -= iA * Vec2.cross(rA, P)
+      wA -= iA * (rA cross P)
       vB.x += mB * P.x
       vB.y += mB * P.y
-      wB += iB * Vec2.cross(rB, P)
+      wB += iB * (rB cross P)
     } else {
       Vec2.crossToOutUnsafe(wA, rA, temp)
       Vec2.crossToOutUnsafe(wB, rB, Cdot1)
@@ -239,10 +239,10 @@ class WeldJoint(argWorld: IWorldPool, def: WeldJointDef) : Joint(argWorld, def) 
       P.set(localImpulse.x, localImpulse.y)
       vA.x -= mA * P.x
       vA.y -= mA * P.y
-      wA -= iA * (Vec2.cross(rA, P) + localImpulse.z)
+      wA -= iA * ((rA cross P) + localImpulse.z)
       vB.x += mB * P.x
       vB.y += mB * P.y
-      wB += iB * (Vec2.cross(rB, P) + localImpulse.z)
+      wB += iB * ((rB cross P) + localImpulse.z)
       pool.pushVec3(2)
     }
 
@@ -293,10 +293,10 @@ class WeldJoint(argWorld: IWorldPool, def: WeldJointDef) : Joint(argWorld, def) 
       P.negateLocal()
       cA.x -= mA * P.x
       cA.y -= mA * P.y
-      aA -= iA * Vec2.cross(rA, P)
+      aA -= iA * (rA cross P)
       cB.x += mB * P.x
       cB.y += mB * P.y
-      aB += iB * Vec2.cross(rB, P)
+      aB += iB * (rB cross P)
     } else {
       C1.set(cB).addLocal(rB).subLocal(cA).subLocal(rA)
       val C2 = aB - aA - referenceAngle
@@ -310,10 +310,10 @@ class WeldJoint(argWorld: IWorldPool, def: WeldJointDef) : Joint(argWorld, def) 
       P.set(impulse.x, impulse.y)
       cA.x -= mA * P.x
       cA.y -= mA * P.y
-      aA -= iA * (Vec2.cross(rA, P) + impulse.z)
+      aA -= iA * ((rA cross P) + impulse.z)
       cB.x += mB * P.x
       cB.y += mB * P.y
-      aB += iB * (Vec2.cross(rB, P) + impulse.z)
+      aB += iB * ((rB cross P) + impulse.z)
       pool.pushVec3(2)
     }
 

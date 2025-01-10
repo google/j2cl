@@ -85,7 +85,7 @@ class Collision(private val pool: IWorldPool) {
     shapeB: Shape,
     indexB: Int,
     xfA: Transform,
-    xfB: Transform
+    xfB: Transform,
   ): Boolean {
     input.proxyA.set(shapeA, indexA)
     input.proxyB.set(shapeB, indexB)
@@ -112,7 +112,7 @@ class Collision(private val pool: IWorldPool) {
     circle1: CircleShape,
     xfA: Transform,
     circle2: CircleShape,
-    xfB: Transform
+    xfB: Transform,
   ) {
     manifold.pointCount = 0
     // before inline:
@@ -159,7 +159,7 @@ class Collision(private val pool: IWorldPool) {
     polygon: PolygonShape,
     xfA: Transform,
     circle: CircleShape,
-    xfB: Transform
+    xfB: Transform,
   ) {
     manifold.pointCount = 0
     // Vec2 v = circle.m_p;
@@ -342,7 +342,7 @@ class Collision(private val pool: IWorldPool) {
     xf1: Transform,
     edge1: Int,
     poly2: PolygonShape,
-    xf2: Transform
+    xf2: Transform,
   ): Float {
     @Suppress("UNUSED_VARIABLE") val count1 = poly1.count
     val vertices1 = poly1.vertices
@@ -419,7 +419,7 @@ class Collision(private val pool: IWorldPool) {
     poly1: PolygonShape,
     xf1: Transform,
     poly2: PolygonShape,
-    xf2: Transform
+    xf2: Transform,
   ) {
     val count1 = poly1.count
     val normals1 = poly1.normals
@@ -510,7 +510,7 @@ class Collision(private val pool: IWorldPool) {
     xf1: Transform,
     edge1: Int,
     poly2: PolygonShape,
-    xf2: Transform
+    xf2: Transform,
   ) {
     @Suppress("UNUSED_VARIABLE") val count1 = poly1.count
     val normals1 = poly1.normals
@@ -590,7 +590,7 @@ class Collision(private val pool: IWorldPool) {
     polyA: PolygonShape,
     xfA: Transform,
     polyB: PolygonShape,
-    xfB: Transform
+    xfB: Transform,
   ) {
     // Find edge normal of max separation on A - return if separating axis is found
     // Find edge normal of max separation on B - return if separation axis is found
@@ -727,7 +727,7 @@ class Collision(private val pool: IWorldPool) {
     edgeA: EdgeShape,
     xfA: Transform,
     circleB: CircleShape,
-    xfB: Transform
+    xfB: Transform,
   ) {
     manifold.pointCount = 0
 
@@ -740,8 +740,8 @@ class Collision(private val pool: IWorldPool) {
     e.set(B).subLocal(A)
 
     // Barycentric coordinates
-    val u = Vec2.dot(e, temp.set(B).subLocal(Q))
-    val v = Vec2.dot(e, temp.set(Q).subLocal(A))
+    val u = e dot temp.set(B).subLocal(Q)
+    val v = e dot temp.set(Q).subLocal(A)
     val radius = edgeA.radius + circleB.radius
 
     // ContactFeature cf;
@@ -751,7 +751,7 @@ class Collision(private val pool: IWorldPool) {
     // Region A
     if (v <= 0.0f) {
       d.set(Q).subLocal(A)
-      val dd = Vec2.dot(d, d)
+      val dd = d dot d
       if (dd > radius * radius) {
         return
       }
@@ -760,7 +760,7 @@ class Collision(private val pool: IWorldPool) {
       if (edgeA.hasVertex0) {
         val A1 = edgeA.vertex0
         e1.set(A).subLocal(A1)
-        val u1 = Vec2.dot(e1, temp.set(A).subLocal(Q))
+        val u1 = e1 dot temp.set(A).subLocal(Q)
 
         // Is the circle in Region AB of the previous edge?
         if (u1 > 0.0f) {
@@ -782,7 +782,7 @@ class Collision(private val pool: IWorldPool) {
     // Region B
     if (u <= 0.0f) {
       d.set(Q).subLocal(B)
-      val dd = Vec2.dot(d, d)
+      val dd = d dot d
       if (dd > radius * radius) {
         return
       }
@@ -792,7 +792,7 @@ class Collision(private val pool: IWorldPool) {
         val B2 = edgeA.vertex3
         val e2 = e1
         e2.set(B2).subLocal(B)
-        val v2 = Vec2.dot(e2, temp.set(Q).subLocal(B))
+        val v2 = e2 dot temp.set(Q).subLocal(B)
 
         // Is the circle in Region AB of the next edge?
         if (v2 > 0.0f) {
@@ -812,7 +812,7 @@ class Collision(private val pool: IWorldPool) {
     }
 
     // Region AB
-    val den = Vec2.dot(e, e)
+    val den = e dot e
     // assert is not supported in KMP.
     // assert(den > 0.0f)
 
@@ -820,13 +820,13 @@ class Collision(private val pool: IWorldPool) {
     P.set(A).mulLocal(u).addLocal(temp.set(B).mulLocal(v))
     P.mulLocal(1.0f / den)
     d.set(Q).subLocal(P)
-    val dd = Vec2.dot(d, d)
+    val dd = d dot d
     if (dd > radius * radius) {
       return
     }
     n.x = -e.y
     n.y = e.x
-    if (Vec2.dot(n, temp.set(Q).subLocal(A)) < 0.0f) {
+    if (n dot temp.set(Q).subLocal(A) < 0.0f) {
       n.set(-n.x, -n.y)
     }
     n.normalize()
@@ -846,7 +846,7 @@ class Collision(private val pool: IWorldPool) {
     edgeA: EdgeShape,
     xfA: Transform,
     polygonB: PolygonShape,
-    xfB: Transform
+    xfB: Transform,
   ) {
     collider.collide(manifold, edgeA, xfA, polygonB, xfB)
   }
@@ -890,7 +890,7 @@ class Collision(private val pool: IWorldPool) {
     PERSIST_STATE,
 
     /** point was removed in the update */
-    REMOVE_STATE
+    REMOVE_STATE,
   }
 
   /** This structure is used to keep track of the best separating axis. */
@@ -898,7 +898,7 @@ class Collision(private val pool: IWorldPool) {
     enum class Type {
       UNKNOWN,
       EDGE_A,
-      EDGE_B
+      EDGE_B,
     }
 
     var type: Type? = null
@@ -931,7 +931,7 @@ class Collision(private val pool: IWorldPool) {
     enum class VertexType {
       ISOLATED,
       CONCAVE,
-      CONVEX
+      CONVEX,
     }
 
     val polygonB = TempPolygon()
@@ -970,7 +970,7 @@ class Collision(private val pool: IWorldPool) {
       edgeA: EdgeShape,
       xfA: Transform,
       polygonB: PolygonShape,
-      xfB: Transform
+      xfB: Transform,
     ) {
       Transform.mulTransToOutUnsafe(xfA, xfB, xf)
       Transform.mulToOutUnsafe(xf, polygonB.centroid, centroidB)
@@ -985,7 +985,7 @@ class Collision(private val pool: IWorldPool) {
       edge1.set(v2).subLocal(v1)
       edge1.normalize()
       normal1.set(edge1.y, -edge1.x)
-      val offset1 = Vec2.dot(normal1, temp.set(centroidB).subLocal(v1))
+      val offset1 = normal1 dot temp.set(centroidB).subLocal(v1)
       var offset0 = 0.0f
       var offset2 = 0.0f
       var convex1 = false
@@ -996,8 +996,8 @@ class Collision(private val pool: IWorldPool) {
         edge0.set(v1).subLocal(v0)
         edge0.normalize()
         normal0.set(edge0.y, -edge0.x)
-        convex1 = Vec2.cross(edge0, edge1) >= 0.0f
-        offset0 = Vec2.dot(normal0, temp.set(centroidB).subLocal(v0))
+        convex1 = edge0 cross edge1 >= 0.0f
+        offset0 = normal0 dot temp.set(centroidB).subLocal(v0)
       }
 
       // Is there a following edge?
@@ -1005,8 +1005,8 @@ class Collision(private val pool: IWorldPool) {
         edge2.set(v3).subLocal(v2)
         edge2.normalize()
         normal2.set(edge2.y, -edge2.x)
-        convex2 = Vec2.cross(edge1, edge2) > 0.0f
-        offset2 = Vec2.dot(normal2, temp.set(centroidB).subLocal(v2))
+        convex2 = edge1 cross edge2 > 0.0f
+        offset2 = normal2 dot temp.set(centroidB).subLocal(v2)
       }
 
       // Determine front or back collision. Determine collision normal limits.
@@ -1211,9 +1211,9 @@ class Collision(private val pool: IWorldPool) {
 
         // Search for the polygon normal that is most anti-parallel to the edge normal.
         var bestIndex = 0
-        var bestValue = Vec2.dot(normal, this.polygonB.normals[0])
+        var bestValue = normal dot this.polygonB.normals[0]
         for (i in 1 until this.polygonB.count) {
-          val value = Vec2.dot(normal, this.polygonB.normals[i])
+          val value = normal dot this.polygonB.normals[i]
           if (value < bestValue) {
             bestValue = value
             bestIndex = i
@@ -1264,8 +1264,8 @@ class Collision(private val pool: IWorldPool) {
       }
       rf.sideNormal1.set(rf.normal.y, -rf.normal.x)
       rf.sideNormal2.set(rf.sideNormal1).negateLocal()
-      rf.sideOffset1 = Vec2.dot(rf.sideNormal1, rf.v1)
-      rf.sideOffset2 = Vec2.dot(rf.sideNormal2, rf.v2)
+      rf.sideOffset1 = rf.sideNormal1 dot rf.v1
+      rf.sideOffset2 = rf.sideNormal2 dot rf.v2
 
       // Clip incident edge against extruded edge1 side edges.
       var np: Int = clipSegmentToLine(clipPoints1, ie, rf.sideNormal1, rf.sideOffset1, rf.i1)
@@ -1289,7 +1289,7 @@ class Collision(private val pool: IWorldPool) {
       }
       var pointCount = 0
       for (i in 0 until Settings.MAX_MANIFOLD_POINTS) {
-        val separation: Float = Vec2.dot(rf.normal, temp.set(clipPoints2[i].v).subLocal(rf.v1))
+        val separation: Float = rf.normal dot temp.set(clipPoints2[i].v).subLocal(rf.v1)
         if (separation <= radius) {
           val cp = manifold.points[pointCount]
           if (primaryAxis.type == EPAxis.Type.EDGE_A) {
@@ -1357,11 +1357,11 @@ class Collision(private val pool: IWorldPool) {
 
         // Adjacency
         if (n.x * perp.x + n.y * perp.y >= 0.0f) {
-          if (Vec2.dot(temp.set(n).subLocal(upperLimit), normal) < -Settings.ANGULAR_SLOP) {
+          if (temp.set(n).subLocal(upperLimit) dot normal < -Settings.ANGULAR_SLOP) {
             continue
           }
         } else {
-          if (Vec2.dot(temp.set(n).subLocal(lowerLimit), normal) < -Settings.ANGULAR_SLOP) {
+          if (temp.set(n).subLocal(lowerLimit) dot normal < -Settings.ANGULAR_SLOP) {
             continue
           }
         }
@@ -1395,7 +1395,7 @@ class Collision(private val pool: IWorldPool) {
       state1: Array<PointState>,
       state2: Array<PointState>,
       manifold1: Manifold,
-      manifold2: Manifold
+      manifold2: Manifold,
     ) {
       for (i in 0 until Settings.MAX_MANIFOLD_POINTS) {
         state1[i] = PointState.NULL_STATE
@@ -1441,7 +1441,7 @@ class Collision(private val pool: IWorldPool) {
       vIn: Array<ClipVertex>,
       normal: Vec2,
       offset: Float,
-      vertexIndexA: Int
+      vertexIndexA: Int,
     ): Int {
 
       // Start with no output points
@@ -1452,8 +1452,8 @@ class Collision(private val pool: IWorldPool) {
       val vIn1v = vIn1.v
 
       // Calculate the distance of end points to the line
-      val distance0 = Vec2.dot(normal, vIn0v) - offset
-      val distance1 = Vec2.dot(normal, vIn1v) - offset
+      val distance0 = (normal dot vIn0v) - offset
+      val distance1 = (normal dot vIn1v) - offset
 
       // If the points are behind the plane
       if (distance0 <= 0.0f) {

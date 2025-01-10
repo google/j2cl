@@ -49,13 +49,13 @@ class Transform : Serializable {
 
   /** Initialize as a copy of another transform. */
   constructor(xf: Transform) {
-    p = xf.p.clone()
+    p = xf.p.copy()
     q = xf.q.clone()
   }
 
   /** Initialize using a position vector and a rotation matrix. */
   constructor(position: Vec2, rot: Rot) {
-    p = position.clone()
+    p = position.copy()
     q = rot.clone()
   }
 
@@ -96,7 +96,7 @@ class Transform : Serializable {
     fun mul(transform: Transform, v: Vec2): Vec2 =
       Vec2(
         transform.q.cos * v.x - transform.q.sin * v.y + transform.p.x,
-        transform.q.sin * v.x + transform.q.cos * v.y + transform.p.y
+        transform.q.sin * v.x + transform.q.cos * v.y + transform.p.y,
       )
 
     fun mulToOut(transform: Transform, v: Vec2, out: Vec2) {
@@ -117,7 +117,7 @@ class Transform : Serializable {
       val py = v.y - transform.p.y
       return Vec2(
         transform.q.cos * px + transform.q.sin * py,
-        -transform.q.sin * px + transform.q.cos * py
+        -transform.q.sin * px + transform.q.cos * py,
       )
     }
 

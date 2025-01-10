@@ -65,9 +65,9 @@ class PulleyJointDef : JointDef() {
     groundAnchorB = ga2
     localAnchorA = bodyA.getLocalPoint(anchor1)
     localAnchorB = bodyB.getLocalPoint(anchor2)
-    val d1 = anchor1.sub(ga1)
+    val d1 = anchor1 - ga1
     lengthA = d1.length()
-    val d2 = anchor2.sub(ga2)
+    val d2 = anchor2 - ga2
     lengthB = d2.length()
     ratio = r
     // assert is not supported in KMP.

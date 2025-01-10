@@ -83,7 +83,7 @@ class ManifoldPoint {
    * @param cp point to copy from
    */
   constructor(cp: ManifoldPoint) {
-    localPoint = cp.localPoint.clone()
+    localPoint = cp.localPoint.copy()
     normalImpulse = cp.normalImpulse
     tangentImpulse = cp.tangentImpulse
     id = ContactID(cp.id)

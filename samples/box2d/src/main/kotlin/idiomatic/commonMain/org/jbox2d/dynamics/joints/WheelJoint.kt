@@ -60,8 +60,10 @@ class WheelJoint(argPool: IWorldPool, def: WheelJointDef) : Joint(argPool, def) 
   val localXAxisA = Vec2().apply { set(def.localAxisA) }
   var maxMotorTorque: Float = def.maxMotorTorque
     private set
+
   var motorSpeed: Float = def.motorSpeed
     private set
+
   var enableMotor: Boolean = def.enableMotor
     private set
 
@@ -123,7 +125,7 @@ class WheelJoint(argPool: IWorldPool, def: WheelJointDef) : Joint(argPool, def) 
     b2.getWorldPointToOut(localAnchorA, p2)
     p2.subLocal(p1)
     b1.getWorldVectorToOut(localXAxisA, axis)
-    val translation = Vec2.dot(p2, axis)
+    val translation = p2 dot axis
     pool.pushVec2(3)
     return translation
   }
@@ -185,8 +187,8 @@ class WheelJoint(argPool: IWorldPool, def: WheelJointDef) : Joint(argPool, def) 
     // Point to line constraint
     run {
       Rot.mulToOut(qA, localYAxisA, ay)
-      sAy = Vec2.cross(temp.set(d).addLocal(rA), ay)
-      sBy = Vec2.cross(rB, ay)
+      sAy = temp.set(d).addLocal(rA) cross ay
+      sBy = rB cross ay
       mass = mA + mB + iA * sAy * sAy + iB * sBy * sBy
       if (mass > 0.0f) {
         mass = 1.0f / mass
@@ -199,12 +201,12 @@ class WheelJoint(argPool: IWorldPool, def: WheelJointDef) : Joint(argPool, def) 
     gamma = 0.0f
     if (frequencyHz > 0.0f) {
       Rot.mulToOut(qA, localXAxisA, ax)
-      sAx = Vec2.cross(temp.set(d).addLocal(rA), ax)
-      sBx = Vec2.cross(rB, ax)
+      sAx = temp.set(d).addLocal(rA) cross ax
+      sBx = rB cross ax
       val invMass = mA + mB + iA * sAx * sAx + iB * sBx * sBx
       if (invMass > 0.0f) {
         springMass = 1.0f / invMass
-        val C = Vec2.dot(d, ax)
+        val C = d dot ax
 
         // Frequency
         val omega = 2.0f * MathUtils.PI * frequencyHz
@@ -286,7 +288,7 @@ class WheelJoint(argPool: IWorldPool, def: WheelJointDef) : Joint(argPool, def) 
 
     // Solve spring constraint
     run {
-      val Cdot = Vec2.dot(ax, temp.set(vB).subLocal(vA)) + sBx * wB - sAx * wA
+      val Cdot = (ax dot temp.set(vB).subLocal(vA)) + sBx * wB - sAx * wA
       val impulse = -springMass * (Cdot + bias + gamma * springImpulse)
       springImpulse += impulse
       P.x = impulse * ax.x
@@ -315,7 +317,7 @@ class WheelJoint(argPool: IWorldPool, def: WheelJointDef) : Joint(argPool, def) 
 
     // Solve point to line constraint
     run {
-      val Cdot = Vec2.dot(ay, temp.set(vB).subLocal(vA)) + sBy * wB - sAy * wA
+      val Cdot = (ay dot temp.set(vB).subLocal(vA)) + sBy * wB - sAy * wA
       val localImpulse = -mass * Cdot
       impulse += localImpulse
       P.x = localImpulse * ay.x
@@ -352,9 +354,9 @@ class WheelJoint(argPool: IWorldPool, def: WheelJointDef) : Joint(argPool, def) 
     d.set(cB).subLocal(cA).addLocal(rB).subLocal(rA)
     val ay = pool.popVec2()
     Rot.mulToOut(qA, localYAxisA, ay)
-    val localSAy = Vec2.cross(temp.set(d).addLocal(rA), ay)
-    val localSBy = Vec2.cross(rB, ay)
-    val C = Vec2.dot(d, ay)
+    val localSAy = temp.set(d).addLocal(rA) cross ay
+    val localSBy = rB cross ay
+    val C = d dot ay
     val k = invMassA + invMassB + invIA * sAy * sAy + invIB * sBy * sBy
     val impulse: Float =
       if (k != 0.0f) {

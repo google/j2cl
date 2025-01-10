@@ -46,6 +46,7 @@ class MouseJoint(argWorld: IWorldPool, def: MouseJointDef) : Joint(argWorld, def
       }
       targetA.set(value)
     }
+
   var frequencyHz: Float = def.frequencyHz
   var dampingRatio: Float = def.dampingRatio
   var maxForce: Float = def.maxForce
@@ -144,7 +145,7 @@ class MouseJoint(argWorld: IWorldPool, def: MouseJointDef) : Joint(argWorld, def
       impulse.mulLocal(data.step.dtRatio)
       vB.x += invMassB * impulse.x
       vB.y += invMassB * impulse.y
-      wB += invIB * Vec2.cross(rB, impulse)
+      wB += invIB * (rB cross impulse)
     } else {
       impulse.setZero()
     }
@@ -179,7 +180,7 @@ class MouseJoint(argWorld: IWorldPool, def: MouseJointDef) : Joint(argWorld, def
     localImpulse.set(impulse).subLocal(temp)
     vB.x += invMassB * localImpulse.x
     vB.y += invMassB * localImpulse.y
-    wB += invIB * Vec2.cross(rB, localImpulse)
+    wB += invIB * (rB cross localImpulse)
 
     //    data.velocities[m_indexB].v.set(vB);
     data.velocities[indexB].w = wB

@@ -53,7 +53,7 @@ class ConstantVolumeJoint(private val world: World, def: ConstantVolumeJointDef)
     targetLengths = FloatArray(bodies.size)
     for (i in targetLengths.indices) {
       val next = if (i == targetLengths.size - 1) 0 else i + 1
-      val dist: Float = bodies[i].worldCenter.sub(bodies[next].worldCenter).length()
+      val dist: Float = (bodies[i].worldCenter - bodies[next].worldCenter).length()
       targetLengths[i] = dist
     }
     targetVolume = getBodyArea()
@@ -131,7 +131,7 @@ class ConstantVolumeJoint(private val world: World, def: ConstantVolumeJointDef)
       val next = if (i == bodies.size - 1) 0 else i + 1
       delta.set(
         toExtrude * (normals[i].x + normals[next].x),
-        toExtrude * (normals[i].y + normals[next].y)
+        toExtrude * (normals[i].y + normals[next].y),
       )
       // sumdeltax += dx;
       val normSqrd = delta.lengthSquared()
@@ -191,7 +191,7 @@ class ConstantVolumeJoint(private val world: World, def: ConstantVolumeJointDef)
       d[i].set(positions[bodies[next].islandIndex].c)
       d[i].subLocal(positions[bodies[prev].islandIndex].c)
       dotMassSum += d[i].lengthSquared() / bodies[i].mass
-      crossMassSum += Vec2.cross(velocities[bodies[i].islandIndex].v, d[i])
+      crossMassSum += velocities[bodies[i].islandIndex].v cross d[i]
     }
     val lambda = -2.0f * crossMassSum / dotMassSum
     // System.out.println(crossMassSum + " " +dotMassSum);

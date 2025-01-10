@@ -141,7 +141,7 @@ class GearJoint(argWorldPool: IWorldPool, def: GearJointDef) : Joint(argWorldPoo
       Rot.mulToOutUnsafe(xfA.q, localAnchorA, temp)
       temp.addLocal(xfA.p).subLocal(xfC.p)
       Rot.mulTransUnsafe(xfC.q, temp, pA)
-      coordinateA = Vec2.dot(pA.subLocal(pC), localAxisC)
+      coordinateA = pA.subLocal(pC) dot localAxisC
       pool.pushVec2(2)
     }
     bodyB = joint2.bodyB
@@ -170,7 +170,7 @@ class GearJoint(argWorldPool: IWorldPool, def: GearJointDef) : Joint(argWorldPoo
       Rot.mulToOutUnsafe(xfB.q, localAnchorB, temp)
       temp.addLocal(xfB.p).subLocal(xfD.p)
       Rot.mulTransUnsafe(xfD.q, temp, pB)
-      coordinateB = Vec2.dot(pB.subLocal(pD), localAxisD)
+      coordinateB = pB.subLocal(pD) dot localAxisD
       pool.pushVec2(2)
     }
     constant = coordinateA + ratio * coordinateB
@@ -249,8 +249,8 @@ class GearJoint(argWorldPool: IWorldPool, def: GearJointDef) : Joint(argWorldPoo
       Rot.mulToOutUnsafe(qC, localAxisC, JvAC)
       Rot.mulToOutUnsafe(qC, temp.set(localAnchorC).subLocal(lcC), rC)
       Rot.mulToOutUnsafe(qA, temp.set(localAnchorA).subLocal(lcA), rA)
-      JwC = Vec2.cross(rC, JvAC)
-      JwA = Vec2.cross(rA, JvAC)
+      JwC = rC cross JvAC
+      JwA = rA cross JvAC
       mass += mC + mA + iC * JwC * JwC + iA * JwA * JwA
       pool.pushVec2(2)
     }
@@ -267,8 +267,8 @@ class GearJoint(argWorldPool: IWorldPool, def: GearJointDef) : Joint(argWorldPoo
       Rot.mulToOutUnsafe(qD, temp.set(localAnchorD).subLocal(lcD), rD)
       Rot.mulToOutUnsafe(qB, temp.set(localAnchorB).subLocal(lcB), rB)
       JvBD.set(u).mulLocal(ratio)
-      JwD = ratio * Vec2.cross(rD, u)
-      JwB = ratio * Vec2.cross(rB, u)
+      JwD = ratio * (rD cross u)
+      JwB = ratio * (rB cross u)
       mass += ratio * ratio * (mD + mB) + iD * JwD * JwD + iB * JwB * JwB
       pool.pushVec2(3)
     }
@@ -315,8 +315,7 @@ class GearJoint(argWorldPool: IWorldPool, def: GearJointDef) : Joint(argWorldPoo
     var wD = data.velocities[indexD].w
     val temp1 = pool.popVec2()
     val temp2 = pool.popVec2()
-    var Cdot =
-      Vec2.dot(JvAC, temp1.set(vA).subLocal(vC)) + Vec2.dot(JvBD, temp2.set(vB).subLocal(vD))
+    var Cdot = (JvAC dot temp1.set(vA).subLocal(vC)) + (JvBD dot temp2.set(vB).subLocal(vD))
     Cdot += JwA * wA - JwC * wC + (JwB * wB - JwD * wD)
     pool.pushVec2(2)
     val localImpulse = -mass * Cdot
@@ -386,12 +385,12 @@ class GearJoint(argWorldPool: IWorldPool, def: GearJointDef) : Joint(argWorldPoo
       Rot.mulToOutUnsafe(qC, localAxisC, JvAC)
       Rot.mulToOutUnsafe(qC, temp.set(localAnchorC).subLocal(lcC), rC)
       Rot.mulToOutUnsafe(qA, temp.set(localAnchorA).subLocal(lcA), rA)
-      JwC = Vec2.cross(rC, JvAC)
-      JwA = Vec2.cross(rA, JvAC)
+      JwC = rC cross JvAC
+      JwA = rA cross JvAC
       mass += mC + mA + iC * JwC * JwC + iA * JwA * JwA
       pC.set(localAnchorC).subLocal(lcC)
       Rot.mulTransUnsafe(qC, temp.set(rA).addLocal(cA).subLocal(cC), pA)
-      coordinateA = Vec2.dot(pA.subLocal(pC), localAxisC)
+      coordinateA = pA.subLocal(pC) dot localAxisC
       pool.pushVec2(4)
     }
     if (typeB == JointType.REVOLUTE) {
@@ -410,12 +409,12 @@ class GearJoint(argWorldPool: IWorldPool, def: GearJointDef) : Joint(argWorldPoo
       Rot.mulToOutUnsafe(qD, temp.set(localAnchorD).subLocal(lcD), rD)
       Rot.mulToOutUnsafe(qB, temp.set(localAnchorB).subLocal(lcB), rB)
       JvBD.set(u).mulLocal(ratio)
-      JwD = Vec2.cross(rD, u)
-      JwB = Vec2.cross(rB, u)
+      JwD = rD cross u
+      JwB = rB cross u
       mass += ratio * ratio * (mD + mB) + iD * JwD * JwD + iB * JwB * JwB
       pD.set(localAnchorD).subLocal(lcD)
       Rot.mulTransUnsafe(qD, temp.set(rB).addLocal(cB).subLocal(cD), pB)
-      coordinateB = Vec2.dot(pB.subLocal(pD), localAxisD)
+      coordinateB = pB.subLocal(pD) dot localAxisD
       pool.pushVec2(5)
     }
     val C = coordinateA + ratio * coordinateB - constant

@@ -65,8 +65,8 @@ class DistanceJoint(argWorld: IWorldPool, def: DistanceJointDef) : Joint(argWorl
   var frequencyHz: Float = def.frequencyHz
   var dampingRatio: Float = def.dampingRatio
   var length: Float = def.length
-  val localAnchorA: Vec2 = def.localAnchorA.clone()
-  val localAnchorB: Vec2 = def.localAnchorB.clone()
+  val localAnchorA: Vec2 = def.localAnchorA.copy()
+  val localAnchorB: Vec2 = def.localAnchorB.copy()
 
   private var bias: Float = 0.0f
 
@@ -144,8 +144,8 @@ class DistanceJoint(argWorld: IWorldPool, def: DistanceJointDef) : Joint(argWorl
     } else {
       u.set(0.0f, 0.0f)
     }
-    val crAu = Vec2.cross(rA, u)
-    val crBu = Vec2.cross(rB, u)
+    val crAu = rA cross u
+    val crBu = rB cross u
     var invMass = invMassA + invIA * crAu * crAu + invMassB + invIB * crBu * crBu
 
     // Compute the effective mass matrix.
@@ -181,10 +181,10 @@ class DistanceJoint(argWorld: IWorldPool, def: DistanceJointDef) : Joint(argWorl
       P.set(u).mulLocal(impulse)
       vA.x -= invMassA * P.x
       vA.y -= invMassA * P.y
-      wA -= invIA * Vec2.cross(rA, P)
+      wA -= invIA * (rA cross P)
       vB.x += invMassB * P.x
       vB.y += invMassB * P.y
-      wB += invIB * Vec2.cross(rB, P)
+      wB += invIB * (rB cross P)
       pool.pushVec2(1)
     } else {
       impulse = 0.0f
@@ -208,7 +208,7 @@ class DistanceJoint(argWorld: IWorldPool, def: DistanceJointDef) : Joint(argWorl
     vpA.addLocal(vA)
     Vec2.crossToOutUnsafe(wB, rB, vpB)
     vpB.addLocal(vB)
-    val Cdot = Vec2.dot(u, vpB.subLocal(vpA))
+    val Cdot = u dot vpB.subLocal(vpA)
     val localImpulse = -mass * (Cdot + bias + gamma * impulse)
     impulse += localImpulse
     val Px = localImpulse * u.x

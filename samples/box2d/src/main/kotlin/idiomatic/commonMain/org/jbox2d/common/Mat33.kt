@@ -40,9 +40,9 @@ class Mat33 : Serializable {
   }
 
   constructor(argCol1: Vec3, argCol2: Vec3, argCol3: Vec3) {
-    ex = argCol1.clone()
-    ey = argCol2.clone()
-    ez = argCol3.clone()
+    ex = argCol1.copy()
+    ey = argCol2.copy()
+    ez = argCol3.copy()
   }
 
   fun setZero() {
@@ -109,16 +109,16 @@ class Mat33 : Serializable {
     // assert is not supported in KMP.
     // assert(b !== out)
     Vec3.crossToOutUnsafe(ey, ez, out)
-    var det = Vec3.dot(ex, out)
+    var det = ex dot out
     if (det != 0.0f) {
       det = 1.0f / det
     }
     Vec3.crossToOutUnsafe(ey, ez, out)
-    val x = det * Vec3.dot(b, out)
+    val x = det * (b dot out)
     Vec3.crossToOutUnsafe(b, ez, out)
-    val y = det * Vec3.dot(ex, out)
+    val y = det * (ex dot out)
     Vec3.crossToOutUnsafe(ey, b, out)
-    val z = det * Vec3.dot(ex, out)
+    val z = det * (ex dot out)
     out.x = x
     out.y = y
     out.z = z
@@ -198,7 +198,7 @@ class Mat33 : Serializable {
       Vec3(
         v.x * A.ex.x + v.y * A.ey.x + v.z + A.ez.x,
         v.x * A.ex.y + v.y * A.ey.y + (v.z * A.ez.y),
-        v.x * A.ex.z + v.y * A.ey.z + v.z * A.ez.z
+        v.x * A.ex.z + v.y * A.ey.z + v.z * A.ez.z,
       )
 
     fun mul22(A: Mat33, v: Vec2): Vec2 =

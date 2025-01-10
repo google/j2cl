@@ -21,32 +21,8 @@
  */
 package org.jbox2d.common
 
-import java.io.Serializable
-
 /** @author Daniel Murphy */
-class Vec3 : Serializable {
-  var x: Float
-  var y: Float
-  var z: Float
-
-  constructor() {
-    z = 0f
-    y = z
-    x = y
-  }
-
-  constructor(argX: Float, argY: Float, argZ: Float) {
-    x = argX
-    y = argY
-    z = argZ
-  }
-
-  constructor(argCopy: Vec3) {
-    x = argCopy.x
-    y = argCopy.y
-    z = argCopy.z
-  }
-
+data class Vec3(var x: Float = 0f, var y: Float = 0f, var z: Float = 0f) {
   fun set(argVec: Vec3): Vec3 {
     x = argVec.x
     y = argVec.y
@@ -61,15 +37,23 @@ class Vec3 : Serializable {
     return this
   }
 
+  operator fun plus(argVec: Vec3): Vec3 = Vec3(x + argVec.x, y + argVec.y, z + argVec.z)
+
+  operator fun minus(argVec: Vec3): Vec3 = Vec3(x - argVec.x, y - argVec.y, z - argVec.z)
+
+  operator fun times(argScalar: Float): Vec3 = Vec3(x * argScalar, y * argScalar, z * argScalar)
+
+  operator fun unaryMinus(): Vec3 = Vec3(-x, -y, -z)
+
+  infix fun dot(b: Vec3): Float = x * b.x + y * b.y + z * b.z
+
+  infix fun cross(b: Vec3): Vec3 = Vec3(y * b.z - z * b.y, z * b.x - x * b.z, x * b.y - y * b.x)
+
   fun addLocal(argVec: Vec3): Vec3 {
     x += argVec.x
     y += argVec.y
     z += argVec.z
     return this
-  }
-
-  fun add(argVec: Vec3): Vec3 {
-    return Vec3(x + argVec.x, y + argVec.y, z + argVec.z)
   }
 
   fun subLocal(argVec: Vec3): Vec3 {
@@ -79,23 +63,11 @@ class Vec3 : Serializable {
     return this
   }
 
-  fun sub(argVec: Vec3): Vec3 {
-    return Vec3(x - argVec.x, y - argVec.y, z - argVec.z)
-  }
-
   fun mulLocal(argScalar: Float): Vec3 {
     x *= argScalar
     y *= argScalar
     z *= argScalar
     return this
-  }
-
-  fun mul(argScalar: Float): Vec3 {
-    return Vec3(x * argScalar, y * argScalar, z * argScalar)
-  }
-
-  fun negate(): Vec3 {
-    return Vec3(-x, -y, -z)
   }
 
   fun negateLocal(): Vec3 {
@@ -111,42 +83,11 @@ class Vec3 : Serializable {
     z = 0f
   }
 
-  fun clone(): Vec3 {
-    return Vec3(this)
-  }
-
   override fun toString(): String {
     return "($x,$y,$z)"
   }
 
-  override fun hashCode(): Int {
-    val prime = 31
-    var result = 1
-    result = prime * result + x.toBits()
-    result = prime * result + y.toBits()
-    result = prime * result + z.toBits()
-    return result
-  }
-
-  override fun equals(other: Any?): Boolean {
-    if (this === other) return true
-    if (other == null) return false
-    if (this::class != other::class) return false
-    if (other !is Vec3) return false
-    if (x.toBits() != other.x.toBits()) return false
-    if (y.toBits() != other.y.toBits()) return false
-    return z.toBits() == other.z.toBits()
-  }
-
   companion object {
-    fun dot(a: Vec3, b: Vec3): Float {
-      return a.x * b.x + a.y * b.y + a.z * b.z
-    }
-
-    fun cross(a: Vec3, b: Vec3): Vec3 {
-      return Vec3(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x)
-    }
-
     fun crossToOut(a: Vec3, b: Vec3, out: Vec3) {
       val tempy = a.z * b.x - a.x * b.z
       val tempz = a.x * b.y - a.y * b.x

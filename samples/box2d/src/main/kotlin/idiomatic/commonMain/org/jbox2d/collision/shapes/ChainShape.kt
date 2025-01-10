@@ -90,7 +90,7 @@ class ChainShape : Shape(ShapeType.CHAIN) {
     output: RayCastOutput,
     input: RayCastInput,
     transform: Transform,
-    childIndex: Int
+    childIndex: Int,
   ): Boolean {
     // assert is not supported in KMP.
     // assert(childIndex < m_count)
@@ -160,9 +160,9 @@ class ChainShape : Shape(ShapeType.CHAIN) {
     // assert(m_vertices == null && m_count == 0)
     // assert(count >= 3)
     this.count = count + 1
-    this.vertices = Array(this.count) { Vec2(vertices[it]) }
+    this.vertices = Array(this.count) { vertices[it].copy() }
     var nonNullVertices = this.vertices!!
-    nonNullVertices[count] = Vec2(nonNullVertices[0])
+    nonNullVertices[count] = nonNullVertices[0].copy()
     for (i in 1 until count) {
       val v1 = vertices[i - 1]
       val v2 = vertices[i]
@@ -188,7 +188,7 @@ class ChainShape : Shape(ShapeType.CHAIN) {
     // assert(m_vertices == null && m_count == 0)
     // assert(count >= 2)
     this.count = count
-    this.vertices = Array(this.count) { Vec2(vertices[it]) }
+    this.vertices = Array(this.count) { vertices[it].copy() }
     for (i in 1 until this.count) {
       val v1 = vertices[i - 1]
       val v2 = vertices[i]

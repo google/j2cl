@@ -66,7 +66,7 @@ class Body(bd: BodyDef, world: World) {
       if (type == BodyType.STATIC) {
         return
       }
-      if (Vec2.dot(value, value) > 0.0f) {
+      if (value dot value > 0.0f) {
         setAwake(true)
       }
       field.set(value)
@@ -530,7 +530,7 @@ class Body(bd: BodyDef, world: World) {
     }
     invMass = 1.0f / mass
     if (massData.I > 0.0f && flags and FIXED_ROTATION_FLAG == 0) {
-      I = massData.I - mass * Vec2.dot(massData.center, massData.center)
+      I = massData.I - mass * (massData.center dot massData.center)
       // assert is not supported in KMP.
       // assert(m_I > 0.0f)
       invI = 1.0f / I
@@ -607,7 +607,7 @@ class Body(bd: BodyDef, world: World) {
     }
     if (I > 0.0f && (flags and FIXED_ROTATION_FLAG) == 0) {
       // Center the inertia about the center of mass.
-      I -= mass * Vec2.dot(localCenter, localCenter)
+      I -= mass * (localCenter dot localCenter)
       // assert is not supported in KMP.
       // assert(m_I > 0.0f)
       invI = 1.0f / I

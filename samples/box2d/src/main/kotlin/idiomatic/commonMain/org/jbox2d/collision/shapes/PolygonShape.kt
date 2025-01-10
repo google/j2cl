@@ -100,7 +100,7 @@ class PolygonShape : Shape(ShapeType.POLYGON) {
     verts: Array<Vec2>,
     num: Int,
     vecPool: Vec2Array?,
-    intPool: org.jbox2d.pooling.arrays.IntArray?
+    intPool: org.jbox2d.pooling.arrays.IntArray?,
   ) {
     // assert is not supported in KMP.
     // assert(3 <= num && num <= Settings.maxPolygonVertices)
@@ -140,7 +140,7 @@ class PolygonShape : Shape(ShapeType.POLYGON) {
         }
         val r = pool1.set(ps[ie]).subLocal(ps[hull[m]])
         val v = pool2.set(ps[j]).subLocal(ps[hull[m]])
-        val c = Vec2.cross(r, v)
+        val c = r cross v
         if (c < 0.0f) {
           ie = j
         }
@@ -298,7 +298,7 @@ class PolygonShape : Shape(ShapeType.POLYGON) {
     output: RayCastOutput,
     input: RayCastInput,
     transform: Transform,
-    childIndex: Int
+    childIndex: Int,
   ): Boolean {
     val xfq = transform.q
     val xfp = transform.p
@@ -387,7 +387,7 @@ class PolygonShape : Shape(ShapeType.POLYGON) {
       val p3 = if (i + 1 < count) vs[i + 1] else vs[0]
       e1.set(p2).subLocal(pRef)
       e2.set(p3).subLocal(pRef)
-      val D = Vec2.cross(e1, e2)
+      val D = e1 cross e2
       val triangleArea = 0.5f * D
       area += triangleArea
 
@@ -447,7 +447,7 @@ class PolygonShape : Shape(ShapeType.POLYGON) {
       // Triangle vertices.
       e1.set(vertices[i]).subLocal(s)
       e2.set(s).negateLocal().addLocal((if (i + 1 < count) vertices[i + 1] else vertices[0]))
-      val D = Vec2.cross(e1, e2)
+      val D = e1 cross e2
       val triangleArea = 0.5f * D
       area += triangleArea
 
@@ -474,7 +474,7 @@ class PolygonShape : Shape(ShapeType.POLYGON) {
     massData.I = I * density
 
     // Shift to center of mass then to original body origin.
-    massData.I += massData.mass * Vec2.dot(massData.center, massData.center)
+    massData.I += massData.mass * (massData.center dot massData.center)
   }
 
   /**
@@ -492,7 +492,7 @@ class PolygonShape : Shape(ShapeType.POLYGON) {
           continue
         }
         val v = pool2.set(vertices[j]).subLocal(p)
-        val c = Vec2.cross(e, v)
+        val c = e cross v
         if (c < 0.0f) {
           return false
         }
