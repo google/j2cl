@@ -1,0 +1,44 @@
+goog.module('annotation.Main.InterfaceExtendingAnnotation$impl');
+
+const Annotation = goog.require('java.lang.annotation.Annotation$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+
+/**
+ * @interface
+ * @extends {Annotation}
+ */
+class InterfaceExtendingAnnotation {
+ /** @nodts @return {!InterfaceExtendingAnnotation} */
+ static $adapt(/** ?function():Class<?> */ fn) {
+  InterfaceExtendingAnnotation.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts */
+ static $clinit() {
+  InterfaceExtendingAnnotation.$clinit = () =>{};
+  InterfaceExtendingAnnotation.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  Annotation.$markImplementor(ctor);
+  ctor.prototype.$implements__annotation_Main_InterfaceExtendingAnnotation = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__annotation_Main_InterfaceExtendingAnnotation;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor$impl');
+ }
+}
+InterfaceExtendingAnnotation.$markImplementor(/**@type {Function}*/ (InterfaceExtendingAnnotation));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (InterfaceExtendingAnnotation), 'annotation.Main$InterfaceExtendingAnnotation');
+
+exports = InterfaceExtendingAnnotation;
+
+//# sourceMappingURL=Main$InterfaceExtendingAnnotation.js.map

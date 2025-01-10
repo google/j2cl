@@ -1,0 +1,51 @@
+goog.module('annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor$impl');
+
+const InterfaceExtendingAnnotation = goog.require('annotation.Main.InterfaceExtendingAnnotation$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+let Annotation = goog.forwardDeclare('java.lang.annotation.Annotation$impl');
+
+/**
+ * @implements {InterfaceExtendingAnnotation}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function():Class<?> */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function():Class<?>} @nodts*/
+  this.f_fn__annotation_Main_InterfaceExtendingAnnotation_$LambdaAdaptor;
+  this.$ctor__annotation_Main_InterfaceExtendingAnnotation_$LambdaAdaptor__annotation_Main_InterfaceExtendingAnnotation_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__annotation_Main_InterfaceExtendingAnnotation_$LambdaAdaptor__annotation_Main_InterfaceExtendingAnnotation_$JsFunction__void(/** ?function():Class<?> */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__annotation_Main_InterfaceExtendingAnnotation_$LambdaAdaptor = fn;
+ }
+ /** @override @nodts @return {Class<?>} */
+ m_annotationType__java_lang_Class() {
+  let /** ?function():Class<?> */ $function;
+  return ($function = this.f_fn__annotation_Main_InterfaceExtendingAnnotation_$LambdaAdaptor, $function());
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+InterfaceExtendingAnnotation.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'annotation.Main$InterfaceExtendingAnnotation$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=Main$InterfaceExtendingAnnotation$$LambdaAdaptor.js.map

@@ -45,15 +45,26 @@ open class Main {
    val booleanValue: Boolean = foo!!.booleanValue
    val intValue: Int = foo!!.intValue
    val stringValue: String? = foo!!.stringValue
-   val classValue: Class<*>? = foo!!.classValue
    val enumValue: Main.SomeEnum? = foo!!.enumValue
    val annotationValue: Main.Zoo? = foo!!.annotationValue
    val booleanArray: BooleanArray? = foo!!.booleanArray
    val intArray: IntArray? = foo!!.intArray
    val stringArray: Array<String?>? = foo!!.stringArray as Array<String?>?
-   val classArray: Array<Class<*>?>? = foo!!.classArray as Array<Class<*>?>?
    val enumArray: Array<Main.SomeEnum?>? = foo!!.enumArray as Array<Main.SomeEnum?>?
    val annotationArray: Array<Main.Zoo?>? = foo!!.annotationArray as Array<Main.Zoo?>?
+  }
+
+  @JvmStatic
+  internal fun testClassValues_pp_annotation(foo: Main.Foo?) {}
+
+  @JvmStatic
+  internal fun test_pp_annotation(classImplementingAnnotation: Main.ClassImplementingAnnotation?): Annotation? {
+   return classImplementingAnnotation
+  }
+
+  @JvmStatic
+  internal fun test_pp_annotation(interfaceExtendingAnnotation: Main.InterfaceExtendingAnnotation?): Annotation? {
+   return interfaceExtendingAnnotation
   }
  }
 
@@ -118,4 +129,10 @@ open class Main {
 
  @ObjCName("J2ktAnnotationMain_Zoo", exact = true)
  interface Zoo: Annotation
+
+ @ObjCName("J2ktAnnotationMain_ClassImplementingAnnotation", exact = true)
+ abstract inner class ClassImplementingAnnotation internal constructor(): Annotation
+
+ @ObjCName("J2ktAnnotationMain_InterfaceExtendingAnnotation", exact = true)
+ interface InterfaceExtendingAnnotation: Annotation
 }

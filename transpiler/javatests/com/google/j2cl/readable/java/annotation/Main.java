@@ -15,6 +15,9 @@
  */
 package annotation;
 
+import java.lang.annotation.Annotation;
+import javaemul.internal.annotations.KtDisabled;
+
 public class Main {
   @interface Foo {
     boolean BOOLEAN_CONSTANT = false;
@@ -66,15 +69,33 @@ public class Main {
     boolean booleanValue = foo.booleanValue();
     int intValue = foo.intValue();
     String stringValue = foo.stringValue();
-    Class<?> classValue = foo.classValue();
     SomeEnum enumValue = foo.enumValue();
     Zoo annotationValue = foo.annotationValue();
 
     boolean[] booleanArray = foo.booleanArray();
     int[] intArray = foo.intArray();
     String[] stringArray = foo.stringArray();
-    Class<?>[] classArray = foo.classArray();
     SomeEnum[] enumArray = foo.enumArray();
     Zoo[] annotationArray = foo.annotationArray();
+  }
+
+  // TODO(b/377373351): Convert values from kotlin.reflect.KClass to java.lang.Class
+  @KtDisabled
+  static void testClassValues(Foo foo) {
+    Class<?> annotatationType = foo.annotationType();
+    Class<?> classValue = foo.classValue();
+    Class<?>[] classArray = foo.classArray();
+  }
+
+  abstract class ClassImplementingAnnotation implements Annotation {}
+
+  static Annotation test(ClassImplementingAnnotation classImplementingAnnotation) {
+    return classImplementingAnnotation;
+  }
+
+  interface InterfaceExtendingAnnotation extends Annotation {}
+
+  static Annotation test(InterfaceExtendingAnnotation interfaceExtendingAnnotation) {
+    return interfaceExtendingAnnotation;
   }
 }

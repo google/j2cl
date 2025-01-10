@@ -1,0 +1,47 @@
+goog.module('annotation.Main.ClassImplementingAnnotation$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const Annotation = goog.require('java.lang.annotation.Annotation$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Main = goog.forwardDeclare('annotation.Main$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+
+/**
+ * @abstract
+ * @implements {Annotation}
+ */
+class ClassImplementingAnnotation extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {Main} @nodts*/
+  this.$outer_this__annotation_Main_ClassImplementingAnnotation;
+ }
+ /** @nodts */
+ $ctor__annotation_Main_ClassImplementingAnnotation__annotation_Main__void(/** Main */ $outer_this) {
+  this.$outer_this__annotation_Main_ClassImplementingAnnotation = $outer_this;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  ClassImplementingAnnotation.$clinit = () =>{};
+  ClassImplementingAnnotation.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ClassImplementingAnnotation;
+ }
+ /** @abstract @override @nodts @return {Class<?>} */
+ m_annotationType__java_lang_Class() {}
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Annotation.$markImplementor(ClassImplementingAnnotation);
+$Util.$setClassMetadata(ClassImplementingAnnotation, 'annotation.Main$ClassImplementingAnnotation');
+
+exports = ClassImplementingAnnotation;
+
+//# sourceMappingURL=Main$ClassImplementingAnnotation.js.map
