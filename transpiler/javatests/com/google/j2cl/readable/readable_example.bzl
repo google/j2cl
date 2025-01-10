@@ -43,7 +43,6 @@ def readable_example(
         generate_readable_source_maps = False,
         generate_wasm_readables = True,
         generate_wasm_imports = False,
-        use_modular_pipeline = True,
         wasm_entry_points = [],
         generate_kt_readables = True,
         generate_kt_web_readables = False,
@@ -104,7 +103,6 @@ def readable_example(
             name = "readable_wasm",
             deps = [":readable-j2wasm"],
             entry_points = wasm_entry_points,
-            use_modular_pipeline = use_modular_pipeline,
         )
 
         _readable_diff_test(
