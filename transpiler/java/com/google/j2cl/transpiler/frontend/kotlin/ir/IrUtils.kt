@@ -623,39 +623,6 @@ val IrSimpleFunction.signatureRequiresMangling
 
 fun IrBreakContinue.resolveLabel(): String? = label ?: loop.label
 
-// TODO(b/259156400): Remove when the original stdlib file compiles with `-Xserialize-ir` flag.
-fun IrClass.isStubbedPrimitiveRangeClass(): Boolean {
-  if (packageFqName != FqName("kotlin.internal.j2cl")) {
-    return false
-  }
-  val enclosingClass = if (isCompanion) parentAsClass else this
-  return when (enclosingClass.name.asString()) {
-    "CharRange",
-    "IntRange",
-    "LongRange" -> true
-    else -> false
-  }
-}
-
-// TODO(b/259156400): Remove when the original stdlib file compiles with `-Xserialize-ir` flag.
-fun IrClass.isStubbedPrimitiveIteratorClass(): Boolean {
-  if (packageFqName != FqName("kotlin.internal.j2cl")) {
-    return false
-  }
-  val enclosingClass = if (isCompanion) parentAsClass else this
-  return when (enclosingClass.name.asString()) {
-    "ByteIterator",
-    "CharIterator",
-    "ShortIterator",
-    "IntIterator",
-    "LongIterator",
-    "FloatIterator",
-    "DoubleIterator",
-    "BooleanIterator" -> true
-    else -> false
-  }
-}
-
 internal val IrDeclaration.isCompanionMember: Boolean
   get() = (parent as? IrClass)?.isCompanion == true
 

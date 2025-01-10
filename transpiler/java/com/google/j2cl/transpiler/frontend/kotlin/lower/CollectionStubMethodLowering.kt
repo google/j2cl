@@ -5,7 +5,6 @@
 
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
-import com.google.j2cl.transpiler.frontend.kotlin.ir.isStubbedPrimitiveIteratorClass
 import org.jetbrains.kotlin.backend.common.ClassLoweringPass
 import org.jetbrains.kotlin.backend.common.lower.createIrBuilder
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
@@ -64,20 +63,6 @@ internal class CollectionStubMethodLowering(val context: JvmBackendContext) : Cl
     if (irClass.isInterface) {
       return
     }
-
-    // MODIFIED BY GOOGLE
-    // Don't add stubs to primitive iterator classes as the only one we would add is remove(), which
-    // is already a default method on base Iterator interface. This also avoids conflicts between
-    // doppelgänger types as the primitive iterators are both a builtin type and a real type. By
-    // keeping the shape of the types identical sidestep any issues.
-    // TODO(b/254656877): Remove this workaround when we better handle the duplicated types.
-    if (
-      irClass.symbol in context.ir.symbols.primitiveIteratorsByType.values ||
-        irClass.isStubbedPrimitiveIteratorClass()
-    ) {
-      return
-    }
-    // END OF MODIFICATIONS
 
     val methodStubsToGenerate = generateRelevantStubMethods(irClass)
     if (methodStubsToGenerate.isEmpty()) return

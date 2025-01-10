@@ -59,8 +59,6 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsFunction
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsOptional
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsType
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isNativeJsField
-import com.google.j2cl.transpiler.frontend.kotlin.ir.isStubbedPrimitiveIteratorClass
-import com.google.j2cl.transpiler.frontend.kotlin.ir.isStubbedPrimitiveRangeClass
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isUncheckedCast
 import com.google.j2cl.transpiler.frontend.kotlin.ir.j2clIsAnnotation
 import com.google.j2cl.transpiler.frontend.kotlin.ir.j2clKind
@@ -200,23 +198,13 @@ class KotlinEnvironment(
     irClass ?: return null
 
     return typeDeclarationByIrClass.getOrPut(irClass) {
-
-      // TODO(b/259156400): Remove when the original stdlib file compiles with `-Xserialize-ir`
-      // flag.
-      val packageName =
-        when {
-          irClass.isStubbedPrimitiveIteratorClass() -> FqName("kotlin.collections")
-          irClass.isStubbedPrimitiveRangeClass() -> FqName("kotlin.ranges")
-          else -> irClass.packageFqName!!
-        }
-
       TypeDeclaration.newBuilder()
         .setClassComponents(irClass.getClassComponents())
         .setKind(irClass.j2clKind)
         .setAnnotation(irClass.j2clIsAnnotation)
         .setSourceLanguage(if (irClass.isFromJava()) JAVA else KOTLIN)
         .setOriginalSimpleSourceName(irClass.simpleSourceName)
-        .setPackage(createPackageDeclaration(packageName.asString()))
+        .setPackage(createPackageDeclaration(irClass.packageFqName!!.asString()))
         .setVisibility(irClass.j2clVisibility)
         .setEnclosingTypeDeclaration(getDeclarationForType(irClass.parentClassOrNull))
         .setDeclaredMethodDescriptorsFactory { _ ->
