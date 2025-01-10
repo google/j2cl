@@ -42,7 +42,6 @@ import org.jetbrains.kotlin.ir.declarations.IrField
 import org.jetbrains.kotlin.ir.declarations.IrFunction
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.declarations.IrValueParameter
-import org.jetbrains.kotlin.ir.expressions.IrConstKind
 import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
 import org.jetbrains.kotlin.ir.types.getClass
 import org.jetbrains.kotlin.ir.types.isUnit
@@ -121,10 +120,10 @@ private val IrField.canBeJsProperty: Boolean
 private val IrConstructorCall.jsAnnotationInfo: JsAnnotationInfo
   get() =
     JsAnnotationInfo(
-      getValueArgumentAsConst(Name.identifier("name"), IrConstKind.String),
-      getValueArgumentAsConst(Name.identifier("namespace"), IrConstKind.String),
-      (getValueArgumentAsConst(Name.identifier("isNative"), IrConstKind.Boolean) ?: false),
-      (getValueArgumentAsConst(Name.identifier("hasCustomValue"), IrConstKind.Boolean) ?: false),
+      getValueArgumentAsConst<String>(Name.identifier("name")),
+      getValueArgumentAsConst<String>(Name.identifier("namespace")),
+      (getValueArgumentAsConst<Boolean>(Name.identifier("isNative")) ?: false),
+      (getValueArgumentAsConst<Boolean>(Name.identifier("hasCustomValue")) ?: false),
     )
 
 fun IrClass.getJsEnumInfo(): JsEnumInfo? {

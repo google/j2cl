@@ -19,6 +19,7 @@ package com.google.j2cl.transpiler.frontend.kotlin.ir
 
 import java.lang.IllegalArgumentException
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
+import org.jetbrains.kotlin.backend.common.serialization.mangle.MangleConstant.Companion.ENHANCED_NULLABILITY_MARK
 import org.jetbrains.kotlin.backend.common.serialization.signature.PublicIdSignatureComputer
 import org.jetbrains.kotlin.ir.backend.jvm.serialization.JvmIrMangler
 import org.jetbrains.kotlin.ir.declarations.IrDeclaration
@@ -140,21 +141,40 @@ class IrProviderFromPublicSignature(val pluginContext: IrPluginContext) : IrProv
     signature: CommonSignature
   ): T = this!!.owner.declarations.filterIsInstance<T>().matchingSignature(signature)
 
+  private fun computeIdWithoutNullabilityAnnotation(signature: CommonSignature): Long? {
+    if (signature.id == null) {
+      return null
+    }
+    if (signature.toString().contains(ENHANCED_NULLABILITY_MARK)) {
+      // The declaration is coming from java. The enhanced nullability annotation is not part of the
+      // serialized IR
+      // and added by Kotlinc. Let's replace that marker by the simple nullability marker to avoid
+      // missing a match
+      return with(JvmIrMangler) {
+        signature.description!!.replace(ENHANCED_NULLABILITY_MARK, "?").hashMangle
+      }
+    }
+    return signature.id
+  }
+
   private fun <T : IrDeclaration> Collection<T>.matchingSignature(signature: CommonSignature): T =
-    single {
+    singleOrNull {
       val declarationSignature = irSignaturer.computeSignature(it).asPublic()!!
+      val declarationSignatureId = computeIdWithoutNullabilityAnnotation(declarationSignature)
+      val signatureId = computeIdWithoutNullabilityAnnotation(signature)
+
       // When matching declarations that can be inherited, we need to use the id of the signature.
       // This is because the symbol signature for a call on a child class to an inherited function
       // differs from the signature of the function declared in the parent class, even though they
       // represent the same underlying declaration. Using the id ensures consistent matching
       // across inheritance hierarchies.
-      if (signature.id != null) {
-        signature.id == declarationSignature.id
+      if (signatureId != null) {
+        signatureId == declarationSignatureId
       } else {
         // Signature of declaration that cannot be inherited (like enum entries) does not have id.
         signature == declarationSignature
       }
-    }
+    } ?: error("Signature $signature not found")
 
   private fun <T : IrDeclaration> Collection<IrBindableSymbol<*, T>>.matchingDeclarationSignature(
     signature: CommonSignature

@@ -8,13 +8,13 @@ import org.jetbrains.kotlin.ir.declarations.IrField
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.expressions.*
 import org.jetbrains.kotlin.ir.expressions.impl.IrCompositeImpl
-import org.jetbrains.kotlin.ir.expressions.impl.copyWithOffsets
+import org.jetbrains.kotlin.ir.util.copyWithOffsets
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 
 // Copied from org.jetbrains.kotlin.backend.common.lower.InlineConstTransformer.
-// TODO(b/317551802): Try to remove this when switching to Kotlin 2.0.
+// TODO(b/381888802): Try to remove this when switching to language version 2.0.
 abstract class InlineConstTransformer : IrElementTransformerVoid() {
-  abstract val IrField.constantInitializer: IrConst<*>?
+  abstract val IrField.constantInitializer: IrConst?
 
   private fun IrExpression.lowerConstRead(receiver: IrExpression?, field: IrField?): IrExpression? {
     val value = field?.constantInitializer ?: return null
@@ -30,14 +30,14 @@ abstract class InlineConstTransformer : IrElementTransformerVoid() {
         endOffset,
         resultExpression.type,
         null,
-        listOf(receiver, resultExpression)
+        listOf(receiver, resultExpression),
       )
   }
 
-  abstract fun reportInlineConst(field: IrField, value: IrConst<*>)
+  abstract fun reportInlineConst(field: IrField, value: IrConst)
 
   fun IrExpression.shouldDropConstReceiver(): Boolean {
-    return this is IrConst<*> || this is IrGetValue || this is IrGetObjectValue
+    return this is IrConst || this is IrGetValue || this is IrGetObjectValue
   }
 
   override fun visitCall(expression: IrCall): IrExpression {

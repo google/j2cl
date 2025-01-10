@@ -610,7 +610,7 @@ class CompilationUnitBuilder(
       is IrSetValue -> convertSetValue(irExpression)
       is IrSetField -> convertSetField(irExpression)
       is IrGetField -> convertGetField(irExpression)
-      is IrConst<*> -> convertConstant(irExpression)
+      is IrConst -> convertConstant(irExpression)
       is IrTypeOperatorCall -> convertTypeOperatorCall(irExpression)
       is IrGetEnumValue -> convertGetEnumValue(irExpression)
       is IrFunctionAccessExpression -> convertFunctionAccessExpression(irExpression)
@@ -1207,7 +1207,7 @@ class CompilationUnitBuilder(
     throw IllegalStateException("Unknown value ${target.render()}")
   }
 
-  private fun convertConstant(irConst: IrConst<*>): Expression =
+  private fun convertConstant(irConst: IrConst): Expression =
     environment.getTypeDescriptor(irConst.type).let { typeDescriptor ->
       if (irConst.kind == IrConstKind.Null) typeDescriptor.nullValue
       else Literal.fromValue(irConst.value, typeDescriptor)

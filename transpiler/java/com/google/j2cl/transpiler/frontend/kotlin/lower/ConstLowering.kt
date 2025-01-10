@@ -45,12 +45,12 @@ class ConstLowering(val context: JvmBackendContext) : FileLoweringPass {
 
 private class JvmInlineConstTransformer(
   val irFile: IrFile,
-  val inlineConstTracker: InlineConstTracker?
+  val inlineConstTracker: InlineConstTracker?,
 ) : InlineConstTransformer() {
   override val IrField.constantInitializer
     get() = constantValue()
 
-  override fun reportInlineConst(field: IrField, value: IrConst<*>) {
+  override fun reportInlineConst(field: IrField, value: IrConst) {
     if (inlineConstTracker == null) return
     if (field.origin != IrDeclarationOrigin.IR_EXTERNAL_JAVA_DECLARATION_STUB) return
 

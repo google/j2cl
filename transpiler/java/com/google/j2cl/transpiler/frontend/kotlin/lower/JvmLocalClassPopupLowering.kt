@@ -9,6 +9,7 @@ import org.jetbrains.kotlin.backend.common.lower.LocalClassPopupLowering
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
 import org.jetbrains.kotlin.backend.jvm.JvmLoweredDeclarationOrigin
 import org.jetbrains.kotlin.backend.jvm.ir.findInlineLambdas
+import org.jetbrains.kotlin.backend.jvm.isEnclosedInConstructor
 import org.jetbrains.kotlin.ir.declarations.*
 
 // Copied from org.jetbrains.kotlin.backend.jvm.lower.JvmLocalClassPopupLowering to change the
@@ -46,7 +47,7 @@ internal class JvmLocalClassPopupLowering(context: JvmBackendContext) :
     if (
       parent is IrAnonymousInitializer && !parent.isStatic || parent is IrField && !parent.isStatic
     ) {
-      (context as JvmBackendContext).isEnclosedInConstructor.add(klass.attributeOwnerId)
+      klass.isEnclosedInConstructor = true
       return true
     }
     return false

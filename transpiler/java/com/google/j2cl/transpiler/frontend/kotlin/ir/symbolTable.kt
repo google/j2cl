@@ -115,13 +115,14 @@ fun SymbolTable.addSymbol(symbol: IrSymbol) {
       }
   val unused =
     when (symbol) {
-      is IrClassSymbol -> declareClassWithSignature(signature, symbol)
+      is IrClassSymbol -> declareClassIfNotExists(signature, { symbol }, { it.owner })
       is IrTypeAliasSymbol -> declareTypeAliasIfNotExists(signature, { symbol }, { it.owner })
       is IrEnumEntrySymbol -> declareEnumEntry(signature, { symbol }, { it.owner })
-      is IrSimpleFunctionSymbol -> declareSimpleFunctionWithSignature(signature, symbol)
-      is IrConstructorSymbol -> declareConstructorWithSignature(signature, symbol)
-      is IrPropertySymbol -> declarePropertyWithSignature(signature, symbol)
-      is IrFieldSymbol -> declareFieldWithSignature(signature, symbol)
+      is IrSimpleFunctionSymbol ->
+        declareSimpleFunctionIfNotExists(signature, { symbol }, { it.owner })
+      is IrConstructorSymbol -> declareConstructorIfNotExists(signature, { symbol }, { it.owner })
+      is IrPropertySymbol -> declarePropertyIfNotExists(signature, { symbol }, { it.owner })
+      is IrFieldSymbol -> declareField(signature, { symbol }, { it.owner })
       else -> throw AssertionError("Unexpected symbol $symbol")
     }
 }

@@ -21,14 +21,8 @@ import org.jetbrains.kotlin.backend.common.FileLoweringPass
 import org.jetbrains.kotlin.backend.common.ModuleLoweringPass
 import org.jetbrains.kotlin.backend.common.lower.LoweredDeclarationOrigins
 import org.jetbrains.kotlin.backend.common.lower.createIrBuilder
-import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
-import org.jetbrains.kotlin.backend.jvm.JvmLoweredDeclarationOrigin
-import org.jetbrains.kotlin.backend.jvm.MultifileFacadeFileEntry
+import org.jetbrains.kotlin.backend.jvm.*
 import org.jetbrains.kotlin.backend.jvm.ir.fileParent
-import org.jetbrains.kotlin.backend.jvm.isMultifileBridge
-import org.jetbrains.kotlin.backend.jvm.multifileFacadeClassForPart
-import org.jetbrains.kotlin.backend.jvm.multifileFacadeForPart
-import org.jetbrains.kotlin.backend.jvm.multifileFacadePartMember
 import org.jetbrains.kotlin.config.JvmAnalysisFlags
 import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
 import org.jetbrains.kotlin.descriptors.Modality
@@ -56,7 +50,7 @@ import org.jetbrains.kotlin.name.JvmStandardClassIds.JVM_SYNTHETIC_ANNOTATION_FQ
 import org.jetbrains.kotlin.resolve.jvm.diagnostics.JvmBackendErrors
 
 /**
- * Generates facade classes for @JvmMultifileClass parts.
+ * Generates [JvmMultifileClass] facades, based on the information provided by [FileClassLowering].
  *
  * Copied and modified from org.jetbrains.kotlin.backend.jvm.lower.GenerateMultifileFacades.kt.
  */
@@ -99,7 +93,7 @@ private fun generateMultifileFacades(
       throw UnsupportedOperationException(
         "Multi-file parts of a facade with JvmPackageName should all lie in the same Kotlin package:\n  " +
           partClasses.joinToString("\n  ") { klass ->
-            "Class ${klass.fqNameWhenAvailable}, JVM name ${context.classNameOverride[klass]}"
+            "Class ${klass.fqNameWhenAvailable}, JVM name ${klass.classNameOverride}"
           }
       )
     }
@@ -124,7 +118,7 @@ private fun generateMultifileFacades(
           createImplicitParameterDeclarationWithWrappedDescriptor()
           origin = IrDeclarationOrigin.JVM_MULTIFILE_CLASS
           if (jvmClassName.packageFqName != kotlinPackageFqName) {
-            context.classNameOverride[this] = jvmClassName
+            this.classNameOverride = jvmClassName
           }
           if (shouldGeneratePartHierarchy) {
             val superClass = modifyMultifilePartsForHierarchy(context, partClasses)
@@ -187,11 +181,9 @@ private fun generateMultifileFacades(
         // members are not inlined by the inliner used in J2CL and a delegated member need
         // to exist at runtime.
         // val correspondingProperty = member.correspondingPropertySymbol?.owner
-        // if (
-        //   member.hasAnnotation(INLINE_ONLY_ANNOTATION_FQ_NAME) ||
+        // if (member.hasAnnotation(INLINE_ONLY_ANNOTATION_FQ_NAME) ||
         //     correspondingProperty?.hasAnnotation(INLINE_ONLY_ANNOTATION_FQ_NAME) == true
-        // )
-        //   continue
+        // ) continue
         // END OF MODIFICATIONS
 
         val newMember =

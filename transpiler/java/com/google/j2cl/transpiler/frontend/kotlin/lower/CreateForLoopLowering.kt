@@ -319,8 +319,8 @@ private class LoopTransformer(
             return false
           }
         }
-        is IrConst<*> -> {
-          if (firstCallArg.value != (secondCallArg as? IrConst<*>)?.value) {
+        is IrConst -> {
+          if (firstCallArg.value != (secondCallArg as? IrConst)?.value) {
             return false
           }
         }

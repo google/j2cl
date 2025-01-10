@@ -27,6 +27,7 @@ import org.jetbrains.kotlin.ir.expressions.IrConstKind
 import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.expressions.impl.IrConstImpl
 import org.jetbrains.kotlin.ir.expressions.impl.IrConstructorCallImpl
+import org.jetbrains.kotlin.ir.expressions.impl.fromSymbolOwner
 import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
 import org.jetbrains.kotlin.ir.types.classifierOrNull
 import org.jetbrains.kotlin.ir.types.defaultType
@@ -40,7 +41,7 @@ internal class UnsignedConstLowering : FileLoweringPass, IrElementTransformerVoi
     irFile.transformChildrenVoid(this)
   }
 
-  override fun visitConst(expression: IrConst<*>): IrExpression {
+  override fun visitConst(expression: IrConst): IrExpression {
     if (!expression.type.isUnsigned()) return super.visitConst(expression)
     val classSymbol = expression.type.classifierOrNull as IrClassSymbol
     val constructor = classSymbol.constructors.single { it.owner.isPrimary }
@@ -52,28 +53,28 @@ internal class UnsignedConstLowering : FileLoweringPass, IrElementTransformerVoi
             UNDEFINED_OFFSET,
             UNDEFINED_OFFSET,
             argType,
-            IrConstKind.Byte.valueOf(expression)
+            expression.value as Byte,
           )
         IrConstKind.Short ->
           IrConstImpl.Companion.short(
             UNDEFINED_OFFSET,
             UNDEFINED_OFFSET,
             argType,
-            IrConstKind.Short.valueOf(expression)
+            expression.value as Short,
           )
         IrConstKind.Int ->
           IrConstImpl.Companion.int(
             UNDEFINED_OFFSET,
             UNDEFINED_OFFSET,
             argType,
-            IrConstKind.Int.valueOf(expression)
+            expression.value as Int,
           )
         IrConstKind.Long ->
           IrConstImpl.Companion.long(
             UNDEFINED_OFFSET,
             UNDEFINED_OFFSET,
             argType,
-            IrConstKind.Long.valueOf(expression)
+            expression.value as Long,
           )
         else -> compilationException("Unexpected unsigned kind: ${expression.kind}", expression)
       }

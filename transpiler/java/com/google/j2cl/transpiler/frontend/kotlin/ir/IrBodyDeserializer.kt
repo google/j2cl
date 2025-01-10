@@ -67,7 +67,6 @@ import org.jetbrains.kotlin.ir.IrBuiltIns
 import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.IrStatement
 import org.jetbrains.kotlin.ir.declarations.*
-import org.jetbrains.kotlin.ir.descriptors.*
 import org.jetbrains.kotlin.ir.expressions.*
 import org.jetbrains.kotlin.ir.expressions.impl.*
 import org.jetbrains.kotlin.ir.symbols.*
@@ -78,7 +77,6 @@ import org.jetbrains.kotlin.utils.memoryOptimizedMap
 
 // Copied from org.jetbrains.kotlin.backend.jvm.serialization.IrBodyDeserializer to access internal
 // api.
-@Suppress("CheckReturnValue")
 class IrBodyDeserializer(
   private val builtIns: IrBuiltIns,
   private val allowErrorNodes: Boolean,
@@ -259,7 +257,7 @@ class IrBodyDeserializer(
     type: IrType,
   ): IrConstructorCall {
     val symbol = deserializeTypedSymbol<IrConstructorSymbol>(proto.symbol, CONSTRUCTOR_SYMBOL)
-    return IrConstructorCallImpl(
+    return IrConstructorCallImplWithShape(
         start,
         end,
         type,
@@ -267,6 +265,9 @@ class IrBodyDeserializer(
         typeArgumentsCount = proto.memberAccess.typeArgumentCount,
         constructorTypeArgumentsCount = proto.constructorTypeArgumentsCount,
         valueArgumentsCount = proto.memberAccess.valueArgumentCount,
+        contextParameterCount = 0,
+        hasDispatchReceiver = proto.memberAccess.hasDispatchReceiver(),
+        hasExtensionReceiver = proto.memberAccess.hasExtensionReceiver(),
         origin = deserializeIrStatementOrigin(proto.hasOriginName()) { proto.originName },
       )
       .also { deserializeMemberAccessCommon(it, proto.memberAccess) }
@@ -280,13 +281,16 @@ class IrBodyDeserializer(
 
     val call: IrCall =
       // TODO: implement the last three args here.
-      IrCallImpl(
+      IrCallImplWithShape(
         start,
         end,
         type,
         symbol,
         proto.memberAccess.typeArgumentCount,
         proto.memberAccess.valueArgumentList.size,
+        contextParameterCount = 0,
+        hasDispatchReceiver = proto.memberAccess.hasDispatchReceiver(),
+        hasExtensionReceiver = proto.memberAccess.hasExtensionReceiver(),
         origin,
         superSymbol,
       )
@@ -315,13 +319,16 @@ class IrBodyDeserializer(
   ): IrDelegatingConstructorCall {
     val symbol = deserializeTypedSymbol<IrConstructorSymbol>(proto.symbol, CONSTRUCTOR_SYMBOL)
     val call =
-      IrDelegatingConstructorCallImpl(
+      IrDelegatingConstructorCallImplWithShape(
         start,
         end,
         builtIns.unitType,
         symbol,
         proto.memberAccess.typeArgumentCount,
         proto.memberAccess.valueArgumentCount,
+        contextParameterCount = 0,
+        hasDispatchReceiver = proto.memberAccess.hasDispatchReceiver(),
+        hasExtensionReceiver = proto.memberAccess.hasExtensionReceiver(),
       )
 
     deserializeMemberAccessCommon(call, proto.memberAccess)
@@ -335,13 +342,16 @@ class IrBodyDeserializer(
   ): IrEnumConstructorCall {
     val symbol = deserializeTypedSymbol<IrConstructorSymbol>(proto.symbol, CONSTRUCTOR_SYMBOL)
     val call =
-      IrEnumConstructorCallImpl(
+      IrEnumConstructorCallImplWithShape(
         start,
         end,
         builtIns.unitType,
         symbol,
         proto.memberAccess.typeArgumentCount,
         proto.memberAccess.valueArgumentCount,
+        contextParameterCount = 0,
+        hasDispatchReceiver = proto.memberAccess.hasDispatchReceiver(),
+        hasExtensionReceiver = proto.memberAccess.hasExtensionReceiver(),
       )
     deserializeMemberAccessCommon(call, proto.memberAccess)
     return call
@@ -412,13 +422,16 @@ class IrBodyDeserializer(
         proto.reflectionTargetSymbol
       }
     val callable =
-      IrFunctionReferenceImpl(
+      IrFunctionReferenceImplWithShape(
         start,
         end,
         type,
         symbol,
         proto.memberAccess.typeArgumentCount,
         proto.memberAccess.valueArgumentCount,
+        contextParameterCount = 0,
+        hasDispatchReceiver = proto.memberAccess.hasDispatchReceiver(),
+        hasExtensionReceiver = proto.memberAccess.hasExtensionReceiver(),
         reflectionTarget,
         origin,
       )
@@ -551,11 +564,13 @@ class IrBodyDeserializer(
     val origin = deserializeIrStatementOrigin(proto.hasOriginName()) { proto.originName }
 
     val callable =
-      IrPropertyReferenceImpl(
+      IrPropertyReferenceImplWithShape(
         start,
         end,
         type,
         symbol,
+        proto.memberAccess.hasDispatchReceiver(),
+        proto.memberAccess.hasExtensionReceiver(),
         proto.memberAccess.typeArgumentCount,
         field,
         getter,

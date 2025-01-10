@@ -152,7 +152,7 @@ internal class TypeOperatorLowering(private val backendContext: JvmBackendContex
       // MODIFIED BY GOOGLE:
       // Handle additional cases that are guaranteed to be non-null.
       // A const expression is only null if it's literally null.
-      is IrConst<*> -> this.value != null
+      is IrConst -> this.value != null
       // If all result branches are definitely non-null, then the when-expression must be non-null.
       is IrWhen -> this.branches.all { it.result.isDefinitelyNotNull() }
       // END OF MODIFICATIONS

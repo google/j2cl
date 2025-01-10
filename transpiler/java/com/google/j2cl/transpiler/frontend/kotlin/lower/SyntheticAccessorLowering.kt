@@ -45,7 +45,7 @@ import org.jetbrains.kotlin.name.NameUtils
  * Create public bridge for private top level functions called from inline functions.
  *
  * Copied and modified from
- * org.jetbrains.kotlin.ir.backend.js.lower.inline.SyntheticAccessorLowering.kt
+ * org.jetbrains.kotlin.ir.backend.js.lower.inline.LegacySyntheticAccessorLowering.kt
  */
 class SyntheticAccessorLowering(private val context: CommonBackendContext) : BodyLoweringPass {
 
@@ -172,14 +172,7 @@ class SyntheticAccessorLowering(private val context: CommonBackendContext) : Bod
     val newFunction = copier.copy(this)
 
     val irCall =
-      IrCallImpl(
-        startOffset,
-        endOffset,
-        newFunction.returnType,
-        symbol,
-        typeParameters.size,
-        valueParameters.size,
-      )
+      IrCallImpl(startOffset, endOffset, newFunction.returnType, symbol, typeParameters.size)
 
     newFunction.typeParameters.forEachIndexed { i, tp -> irCall.putTypeArgument(i, tp.defaultType) }
 
@@ -216,15 +209,7 @@ class SyntheticAccessorLowering(private val context: CommonBackendContext) : Bod
       functionMap[callee]?.let { newFunction ->
         val newExpression =
           expression.run {
-            IrCallImpl(
-              startOffset,
-              endOffset,
-              type,
-              newFunction.symbol,
-              typeArgumentsCount,
-              valueArgumentsCount,
-              origin,
-            )
+            IrCallImpl(startOffset, endOffset, type, newFunction.symbol, typeArgumentsCount, origin)
           }
 
         newExpression.copyTypeArgumentsFrom(expression)
@@ -254,7 +239,6 @@ class SyntheticAccessorLowering(private val context: CommonBackendContext) : Bod
               type,
               newFunction.symbol,
               typeArgumentsCount,
-              valueArgumentsCount,
             )
           }
 

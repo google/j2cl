@@ -6,7 +6,8 @@ package com.google.j2cl.transpiler.frontend.kotlin.lower
 
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
-import org.jetbrains.kotlin.backend.jvm.JvmFileFacadeClass
+import org.jetbrains.kotlin.backend.jvm.classNameOverride
+import org.jetbrains.kotlin.backend.jvm.createJvmFileFacadeClass
 import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.declarations.*
 import org.jetbrains.kotlin.ir.expressions.IrMemberAccessExpression
@@ -54,7 +55,7 @@ internal class ExternalPackageParentPatcherLowering(val context: JvmBackendConte
       val deserializedSource = declaration.containerSource ?: return null
       if (deserializedSource !is FacadeClassSource) return null
       val facadeName = deserializedSource.facadeClassName ?: deserializedSource.className
-      return JvmFileFacadeClass(
+      return createJvmFileFacadeClass(
           if (deserializedSource.facadeClassName != null) IrDeclarationOrigin.JVM_MULTIFILE_CLASS
           else IrDeclarationOrigin.FILE_CLASS,
           facadeName.fqNameForTopLevelClassMaybeWithDollars.shortName(),
@@ -63,7 +64,7 @@ internal class ExternalPackageParentPatcherLowering(val context: JvmBackendConte
         )
         .also {
           it.createParameterDeclarations()
-          context.classNameOverride[it] = facadeName
+          it.classNameOverride = facadeName
         }
     }
 
@@ -81,7 +82,6 @@ internal class ExternalPackageParentPatcherLowering(val context: JvmBackendConte
       property.parent = newParent
       property.getter?.parent = newParent
       property.setter?.parent = newParent
-
       property.backingField?.parent = newParent
     }
   }

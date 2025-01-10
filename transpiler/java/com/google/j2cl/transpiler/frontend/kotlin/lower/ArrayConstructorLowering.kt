@@ -46,6 +46,7 @@ import org.jetbrains.kotlin.ir.expressions.IrReturn
 import org.jetbrains.kotlin.ir.expressions.IrStatementOrigin
 import org.jetbrains.kotlin.ir.expressions.copyTypeArgumentsFrom
 import org.jetbrains.kotlin.ir.expressions.impl.IrCallImpl
+import org.jetbrains.kotlin.ir.expressions.impl.fromSymbolOwner
 import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
 import org.jetbrains.kotlin.ir.symbols.IrFunctionSymbol
 import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
@@ -145,7 +146,7 @@ class ArrayConstructorLowering(private val context: JvmBackendContext) :
         IrCallImpl.fromSymbolOwner(
             startOffset = originalInitializer.startOffset,
             endOffset = originalInitializer.endOffset,
-            adapterInitializerFor(classConstructed)
+            adapterInitializerFor(classConstructed),
           )
           .also {
             if (!classConstructed.isPrimitiveArrayClass) {
@@ -240,14 +241,14 @@ private fun escapesScope(irFunction: IrFunction): Boolean {
  */
 private class ArrayConstructorTransformer(
   val context: CommonBackendContext,
-  val container: IrSymbolOwner
+  val container: IrSymbolOwner,
 ) : IrElementTransformerVoidWithContext() {
 
   // Array(size, init) -> Array(size)
   companion object {
     internal fun arrayInlineToSizeConstructor(
       context: CommonBackendContext,
-      irConstructor: IrConstructor
+      irConstructor: IrConstructor,
     ): IrFunctionSymbol? {
       val clazz = irConstructor.constructedClass.symbol
       return when {
@@ -283,7 +284,7 @@ private class ArrayConstructorTransformer(
     val scope = (currentScope ?: createScope(container)).scope
     return context.createIrBuilder(scope.scopeOwnerSymbol).irBlock(
       expression.startOffset,
-      expression.endOffset
+      expression.endOffset,
     ) {
       val index = createTmpVariable(irInt(0), isMutable = true)
       val sizeVar = createTmpVariable(size)
@@ -321,7 +322,7 @@ private class ArrayConstructorTransformer(
           +irSet(
             index.symbol,
             irCallOp(inc.symbol, index.type, irGet(index)),
-            origin = IrStatementOrigin.PREFIX_INCR
+            origin = IrStatementOrigin.PREFIX_INCR,
           )
         }
       }

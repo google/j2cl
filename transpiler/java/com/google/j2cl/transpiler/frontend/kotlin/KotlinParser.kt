@@ -53,8 +53,9 @@ import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
 import org.jetbrains.kotlin.cli.jvm.compiler.KotlinToJVMBytecodeCompiler
 import org.jetbrains.kotlin.cli.jvm.compiler.NoScopeRecordCliBindingTrace
 import org.jetbrains.kotlin.cli.jvm.compiler.configureSourceRoots
+import org.jetbrains.kotlin.cli.jvm.compiler.pipeline.IncrementalCompilationApi
 import org.jetbrains.kotlin.cli.jvm.compiler.pipeline.ModuleCompilerInput
-import org.jetbrains.kotlin.cli.jvm.compiler.pipeline.compileModuleToAnalyzedFir
+import org.jetbrains.kotlin.cli.jvm.compiler.pipeline.compileModuleToAnalyzedFirViaLightTreeIncrementally
 import org.jetbrains.kotlin.cli.jvm.compiler.pipeline.convertToIrAndActualizeForJvm
 import org.jetbrains.kotlin.cli.jvm.compiler.pipeline.createProjectEnvironment
 import org.jetbrains.kotlin.cli.jvm.compiler.withModule
@@ -83,8 +84,6 @@ import org.jetbrains.kotlin.load.kotlin.ModuleVisibilityManager
 import org.jetbrains.kotlin.metadata.jvm.deserialization.JvmMetadataVersion
 import org.jetbrains.kotlin.metadata.jvm.deserialization.JvmProtoBufUtil
 import org.jetbrains.kotlin.modules.TargetId
-import org.jetbrains.kotlin.platform.CommonPlatforms
-import org.jetbrains.kotlin.platform.jvm.JvmPlatforms
 
 /** A parser for Kotlin sources that builds {@code CompilationtUnit}s. */
 class KotlinParser(private val problems: Problems) {
@@ -195,21 +194,21 @@ class KotlinParser(private val problems: Problems) {
       )
 
     val module = compilerConfiguration.get(MODULES)!![0]
-    val diagnosticsReporter = DiagnosticReporterFactory.createPendingReporter()
+    val diagnosticsReporter = DiagnosticReporterFactory.createPendingReporter(messageCollector)
 
     val analysisResults =
-      compileModuleToAnalyzedFir(
+      @OptIn(IncrementalCompilationApi::class)
+      compileModuleToAnalyzedFirViaLightTreeIncrementally(
+        projectEnvironment,
+        messageCollector,
+        compilerConfiguration,
         ModuleCompilerInput(
           TargetId(module),
           collectSources(compilerConfiguration, projectEnvironment, messageCollector),
-          CommonPlatforms.defaultCommonPlatform,
-          JvmPlatforms.unspecifiedJvmPlatform,
           compilerConfiguration,
         ),
-        projectEnvironment,
-        emptyList(),
-        null,
         diagnosticsReporter,
+        incrementalExcludesScope = null,
       )
 
     diagnosticsReporter.maybeReportErrorsAndAbort(messageCollector, compilerConfiguration)

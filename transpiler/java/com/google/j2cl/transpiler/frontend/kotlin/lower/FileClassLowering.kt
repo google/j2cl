@@ -19,6 +19,7 @@ package com.google.j2cl.transpiler.frontend.kotlin.lower
 import java.io.File
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
+import org.jetbrains.kotlin.backend.jvm.classNameOverride
 import org.jetbrains.kotlin.codegen.AsmUtil
 import org.jetbrains.kotlin.config.JvmAnalysisFlags
 import org.jetbrains.kotlin.config.LanguageFeature
@@ -50,14 +51,11 @@ import org.jetbrains.kotlin.resolve.inline.INLINE_ONLY_ANNOTATION_FQ_NAME
 import org.jetbrains.kotlin.resolve.jvm.JvmClassName
 
 /**
- * Put file level function and property declaration into a class.
+ * Puts file-level function and property declaration into a class.
  *
  * Copied from org.jetbrains.kotlin.backend.jvm.lower.FileClassLowering.kt
  */
-// MODIFIED BY GOOGLE
-// Removed compiler phase definition and increased visibility of the lowering class itself.
 internal class FileClassLowering(val context: JvmBackendContext) : FileLoweringPass {
-  // END OF MODIFICATIONS
   override fun lower(irFile: IrFile) {
     val classes = ArrayList<IrClass>()
     val fileClassMembers = ArrayList<IrDeclaration>()
@@ -157,7 +155,7 @@ internal class FileClassLowering(val context: JvmBackendContext) : FileLoweringP
         )
 
         if (fileClassInfo.fileClassFqName != fqNameWhenAvailable) {
-          context.classNameOverride[this] = JvmClassName.byInternalName(partClassType.internalName)
+          this.classNameOverride = JvmClassName.byInternalName(partClassType.internalName)
         }
 
         if (facadeClassType != null) {
@@ -229,7 +227,7 @@ private fun getLiteralStringFromAnnotation(annotationCall: IrConstructorCall): S
   if (annotationCall.valueArgumentsCount < 1) return null
   return annotationCall.getValueArgument(0)?.let {
     when {
-      it is IrConst<*> && it.kind == IrConstKind.String -> it.value as String
+      it is IrConst && it.kind == IrConstKind.String -> it.value as String
       else -> null // TODO: getArgumentExpression().safeAs<KtStringTemplateExpression>()
     }
   }

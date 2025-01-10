@@ -257,7 +257,7 @@ internal class JvmPropertiesLowering(private val backendContext: JvmBackendConte
           valueParameters =
             listOfNotNull(
               declaration.getter?.extensionReceiverParameter?.let {
-                it.copyTo(this, type = it.type.eraseTypeParameters(), index = 0)
+                it.copyTo(this, type = it.type.eraseTypeParameters())
               }
             )
           parent = declaration.parent

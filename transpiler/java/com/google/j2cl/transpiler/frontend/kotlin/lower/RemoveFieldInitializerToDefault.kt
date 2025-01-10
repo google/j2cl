@@ -40,19 +40,19 @@ internal class RemoveFieldInitializerToDefault : IrElementVisitorVoid, FileLower
 }
 
 private fun IrField.isInitializedToDefaultValue(): Boolean {
-  val constant = initializer?.expression as? IrConst<*> ?: return false
+  val constant = initializer?.expression as? IrConst ?: return false
 
   return if (type.isPrimitiveType(nullable = false)) {
     when (constant.kind) {
-      IrConstKind.Boolean -> !IrConstKind.Boolean.valueOf(constant)
-      IrConstKind.Char -> IrConstKind.Char.valueOf(constant).code == 0
+      IrConstKind.Boolean -> !(constant.value as Boolean)
+      IrConstKind.Char -> (constant.value as Char).code == 0
       IrConstKind.Byte,
       IrConstKind.Short,
       IrConstKind.Int,
       IrConstKind.Long -> (constant.value as Number).toLong() == 0L
       // Must use `equals` to differentiate between +0.0 and -0.0:
-      IrConstKind.Float -> IrConstKind.Float.valueOf(constant).equals(0.0f)
-      IrConstKind.Double -> IrConstKind.Double.valueOf(constant).equals(0.0)
+      IrConstKind.Float -> (constant.value as Float).equals(0.0f)
+      IrConstKind.Double -> (constant.value as Double).equals(0.0)
       else -> false
     }
   } else {

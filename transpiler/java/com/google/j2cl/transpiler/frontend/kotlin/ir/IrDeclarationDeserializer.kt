@@ -67,7 +67,7 @@ import org.jetbrains.kotlin.utils.*
 
 // Copied and modified from
 // org.jetbrains.kotlin.backend.jvm.serialization.IrDeclarationDeserializer.
-@Suppress("CheckReturnValue")
+@SuppressWarnings("CheckReturnValue")
 class IrDeclarationDeserializer(
   builtIns: IrBuiltIns,
   private val symbolTable: SymbolTable,
@@ -112,6 +112,8 @@ class IrDeclarationDeserializer(
     return makeTypeProjection(deserializeIrType(encoding.typeIndex), encoding.variance)
   }
 
+  // Deserializes all annotations, even having SOURCE retention, since they might be needed in
+  // backends, like @Volatile
   internal fun deserializeAnnotations(
     annotations: List<ProtoConstructorCall>
   ): List<IrConstructorCall> {
@@ -321,7 +323,6 @@ class IrDeclarationDeserializer(
 
   private fun deserializeIrValueParameter(
     proto: ProtoValueParameter,
-    index: Int,
     setParent: Boolean = true,
   ): IrValueParameter =
     withDeserializedIrDeclarationBase(proto.base, setParent) {
@@ -342,7 +343,6 @@ class IrDeclarationDeserializer(
           type = deserializeIrType(nameAndType.typeIndex),
           isAssignable = flags.isAssignable,
           symbol = symbol.checkSymbolType(fallbackSymbolKind = null),
-          index = index,
           varargElementType =
             if (proto.hasVarargElementType()) deserializeIrType(proto.varargElementType) else null,
           isCrossinline = flags.isCrossInline,
@@ -401,6 +401,8 @@ class IrDeclarationDeserializer(
 
           superTypes = proto.superTypeList.memoryOptimizedMap { deserializeIrType(it) }
 
+          // TODO(b/388547409): mapNotNullTo is perfectly valid to be unused.
+          @Suppress("CheckReturnValue")
           withExternalValue(isExternal) {
             val oldDeclarations = declarations.toSet()
             proto.declarationList
@@ -413,7 +415,7 @@ class IrDeclarationDeserializer(
               }
           }
 
-          thisReceiver = deserializeIrValueParameter(proto.thisReceiver, -1)
+          thisReceiver = deserializeIrValueParameter(proto.thisReceiver)
 
           // MODIFIED BY GOOGLE:
           // Fir2IrLazyClass compute the valueClassRepresentation field and does not allow to modify
@@ -538,9 +540,7 @@ class IrDeclarationDeserializer(
   private fun deserializeValueParameters(
     protos: List<ProtoValueParameter>
   ): List<IrValueParameter> {
-    return protos.memoryOptimizedMapIndexed { index, proto ->
-      deserializeIrValueParameter(proto, index)
-    }
+    return protos.memoryOptimizedMap { proto -> deserializeIrValueParameter(proto) }
   }
 
   /**
@@ -641,12 +641,10 @@ class IrDeclarationDeserializer(
           withBodyGuard {
             valueParameters = deserializeValueParameters(proto.valueParameterList)
             dispatchReceiverParameter =
-              if (proto.hasDispatchReceiver())
-                deserializeIrValueParameter(proto.dispatchReceiver, -1)
+              if (proto.hasDispatchReceiver()) deserializeIrValueParameter(proto.dispatchReceiver)
               else null
             extensionReceiverParameter =
-              if (proto.hasExtensionReceiver())
-                deserializeIrValueParameter(proto.extensionReceiver, -1)
+              if (proto.hasExtensionReceiver()) deserializeIrValueParameter(proto.extensionReceiver)
               else null
             contextReceiverParametersCount =
               if (proto.hasContextReceiverParametersCount()) proto.contextReceiverParametersCount

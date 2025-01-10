@@ -62,7 +62,6 @@ import org.jetbrains.kotlin.ir.declarations.IrVariable
 import org.jetbrains.kotlin.ir.expressions.IrBreakContinue
 import org.jetbrains.kotlin.ir.expressions.IrCall
 import org.jetbrains.kotlin.ir.expressions.IrConst
-import org.jetbrains.kotlin.ir.expressions.IrConstKind
 import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
 import org.jetbrains.kotlin.ir.expressions.IrEnumConstructorCall
 import org.jetbrains.kotlin.ir.expressions.IrExpression
@@ -492,7 +491,7 @@ fun IrClass.getWasmInfo(): String? = (this as IrDeclaration).getWasmInfo()
 
 private fun IrDeclaration.getWasmInfo(): String? =
   findAnnotation(WASM_ANNOTATION_FQ_NAME)
-    ?.getValueArgumentAsConst(WASM_ANNOTATION_VALUE_NAME, IrConstKind.String)
+    ?.getValueArgumentAsConst<String>(WASM_ANNOTATION_VALUE_NAME)
 
 private val WASM_ANNOTATION_FQ_NAME: FqName = FqName(WASM_ANNOTATION_NAME)
 private val WASM_ANNOTATION_VALUE_NAME = Name.identifier("value")
@@ -507,10 +506,8 @@ private fun IrDeclaration.findAnnotation(name: FqName): IrConstructorCall? {
   }
 }
 
-fun <T> IrConstructorCall.getValueArgumentAsConst(name: Name, kind: IrConstKind<T>): T? {
-  val valueArgumentAsConst = getValueArgument(name) as? IrConst<*> ?: return null
-  return kind.valueOf(valueArgumentAsConst)
-}
+inline fun <reified T> IrConstructorCall.getValueArgumentAsConst(name: Name): T? =
+  (getValueArgument(name) as? IrConst)?.value as T?
 
 val IrDeclaration.isSynthetic
   get() =

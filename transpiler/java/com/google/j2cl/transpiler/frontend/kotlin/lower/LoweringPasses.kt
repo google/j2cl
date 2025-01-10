@@ -81,6 +81,9 @@ private val loweringPassFactories: List<J2clLoweringPassFactory> = buildList {
   // Invent names for local classes and anonymous objects. Later passes may require all classes
   // to have a name for computing function signature.
   add(::JvmInventNamesForLocalClasses)
+  // Transform all callable reference (including defaults) to inline lambdas, mark inline lambdas
+  // for later passes.
+  add(::J2clInlineCallableReferenceToLambdaPhase)
   // Rewrites `Array(size) { index -> value }` using type-specific initializer lambdas.
   add(::ArrayConstructorLowering)
   // Create nullable backing fields and insert nullability checks for lateinit properties and
@@ -106,7 +109,7 @@ private val loweringPassFactories: List<J2clLoweringPassFactory> = buildList {
   // fun castTo$wrap(param: Any) String = castTo<String>(param)
   add(::WrapInlineDeclarationsWithReifiedTypeParametersLowering)
   // Perform function inlining.
-  add(::FunctionInlining)
+  add(::J2clFunctionInlining)
   // Remove inline functions with reified type parameters as these functions cannot be called from
   // Java
   add(::RemoveInlineDeclarationsWithReifiedTypeParametersLowering)

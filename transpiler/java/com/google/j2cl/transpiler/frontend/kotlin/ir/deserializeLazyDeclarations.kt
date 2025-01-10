@@ -23,11 +23,13 @@ import org.jetbrains.kotlin.backend.jvm.JvmIrTypeSystemContext
 import org.jetbrains.kotlin.backend.jvm.lower.SingletonObjectJvmStaticTransformer
 import org.jetbrains.kotlin.backend.jvm.serialization.proto.JvmIr
 import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
+import org.jetbrains.kotlin.descriptors.impl.PackageFragmentDescriptorImpl
 import org.jetbrains.kotlin.ir.IrBuiltIns
 import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.backend.jvm.serialization.JvmIrMangler
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrDeclaration
+import org.jetbrains.kotlin.ir.declarations.IrExternalPackageFragment
 import org.jetbrains.kotlin.ir.declarations.impl.IrFileImpl
 import org.jetbrains.kotlin.ir.linkage.IrProvider
 import org.jetbrains.kotlin.ir.symbols.IrPropertySymbol
@@ -42,6 +44,8 @@ import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 import org.jetbrains.kotlin.ir.visitors.acceptVoid
 import org.jetbrains.kotlin.load.kotlin.JvmPackagePartSource
 import org.jetbrains.kotlin.load.kotlin.KotlinJvmBinarySourceElement
+import org.jetbrains.kotlin.resolve.scopes.MemberScope
+import org.jetbrains.kotlin.types.error.ErrorModuleDescriptor
 
 // Copied and modified from org.jetbrains.kotlin.backend.jvm.JvmIrDeserializerImpl and
 // org.jetbrains.kotlin.backend.jvm.serialization.deserializeLazyDeclarations.kt
@@ -106,12 +110,33 @@ fun deserializeFromByteArray(
   val dummyIrFile =
     IrFileImpl(
       NaiveSourceBasedFileEntryImpl("<unknown>"),
-      IrFileSymbolImpl(),
+      // MODIFIED BY GOOGLE
+      // We need to create a dummy file that has a valid package fragment to appear later JVM
+      // lowering passes that expect it.
+      // Original code:
+      // IrFileSymbolImpl(),
+      IrFileSymbolImpl(
+        object :
+          PackageFragmentDescriptorImpl(ErrorModuleDescriptor, toplevelParent.packageFqName!!) {
+          override fun getMemberScope(): MemberScope {
+            TODO("Not implemented")
+          }
+        }
+      ),
+      // END OF MODIFICATIONS
       toplevelParent.packageFqName!!,
     )
   // On JVM, file-scope private declarations are uniquely identified by file facade's fq name.
   val dummyFileSignature =
     IdSignature.FileSignature(irProto.fileFacadeFqName, toplevelParent.packageFqName!!, "<unknown>")
+
+  // MODIFIED BY GOOGLE
+  // Attach the dummy file to the enclosing package fragment as JVM lowering passes expect to see it
+  // when traversing the parents.
+  if (toplevelParent.parent is IrExternalPackageFragment) {
+    toplevelParent.parent = dummyIrFile
+  }
+  // END OF MODIFICATIONS
 
   val symbolDeserializer =
     IrSymbolDeserializer(

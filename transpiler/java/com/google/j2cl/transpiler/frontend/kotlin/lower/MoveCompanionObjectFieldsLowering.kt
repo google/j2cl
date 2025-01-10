@@ -128,7 +128,7 @@ internal class MoveOrCopyCompanionObjectFieldsLowering(val context: J2clBackendC
             context.irFactory.createExpressionBody(
               startOffset,
               endOffset,
-              (expression as IrConst<*>).shallowCopy(),
+              (expression as IrConst).shallowCopy(),
             )
           }
         annotations += oldField.annotations
