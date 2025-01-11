@@ -106,7 +106,7 @@ def integration_test(
         deps = [
             ":%s-j2cl" % name,
             ":%s-TestRunner" % name,
-            "@com_google_javascript_closure_library//closure/goog/testing:testsuite",
+            "//third_party:closure_testsuite",
         ],
         # closure_js_test test infra is flaky so avoid noise in builds.
         flaky = True,
