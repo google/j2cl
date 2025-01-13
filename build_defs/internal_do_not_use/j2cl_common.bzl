@@ -176,9 +176,9 @@ def _java_compile(
         output_jar = None,
         javac_opts = [],
         mnemonic = "J2cl",
-        strip_annotation = "GwtIncompatible"):
+        strip_annotations = ["GwtIncompatible"]):
     output_jar = output_jar or ctx.actions.declare_file("lib%s.jar" % name)
-    stripped_java_srcs = [_strip_incompatible_annotation(ctx, name, srcs, mnemonic, strip_annotation)] if srcs else []
+    stripped_java_srcs = [_strip_incompatible_annotation(ctx, name, srcs, mnemonic, strip_annotations)] if srcs else []
     javac_opts = DEFAULT_J2CL_JAVAC_OPTS + javac_opts
 
     if ctx.var.get("GROK_ELLIPSIS_BUILD", None):
@@ -240,7 +240,7 @@ def get_jdk_system(java_toolchain, javac_opts):
     # TODO(b/197211878): Switch to a public API when available.
     return java_toolchain._bootclasspath_info._system_inputs.to_list() if not jdk_system_already_set else []
 
-def _strip_incompatible_annotation(ctx, name, java_srcs, mnemonic, strip_annotation):
+def _strip_incompatible_annotation(ctx, name, java_srcs, mnemonic, strip_annotations):
     # Paths are matched by Kythe to identify generated J2CL sources.
     output_file = ctx.actions.declare_file(name + "_j2cl_stripped-src.jar")
 
@@ -248,11 +248,12 @@ def _strip_incompatible_annotation(ctx, name, java_srcs, mnemonic, strip_annotat
     args.use_param_file("@%s", use_always = True)
     args.set_param_file_format("multiline")
     args.add("-d", output_file)
-    args.add("-annotation", strip_annotation)
+    args.add_all(strip_annotations, format_each = "-annotation=%s")
     args.add_all(java_srcs)
 
+    formatted_annotations = ", ".join(["@" + annotation for annotation in strip_annotations])
     ctx.actions.run(
-        progress_message = "Stripping @%s from %s" % (strip_annotation, name),
+        progress_message = "Stripping %s from %s" % (formatted_annotations, name),
         inputs = java_srcs,
         outputs = [output_file],
         executable = ctx.executable._j2cl_stripper,

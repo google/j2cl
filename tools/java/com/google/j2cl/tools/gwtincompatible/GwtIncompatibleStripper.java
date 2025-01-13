@@ -29,9 +29,12 @@ import com.google.j2cl.transpiler.frontend.jdt.AnnotatedNodeCollector;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTNode;
@@ -47,24 +50,25 @@ import org.eclipse.jdt.core.dom.ImportDeclaration;
  */
 public final class GwtIncompatibleStripper {
 
-  static void strip(List<String> files, Path outputPath, Problems problems, String annotationName) {
+  static void strip(
+      List<String> files, Path outputPath, Problems problems, List<String> annotationNames) {
     try (Output out = OutputUtils.initOutput(outputPath, problems)) {
       List<FileInfo> allPaths =
           SourceUtils.getAllSources(files, problems)
               .filter(f -> f.targetPath().endsWith(".java"))
               .collect(toImmutableList());
-      preprocessFiles(allPaths, out, problems, annotationName);
+      preprocessFiles(allPaths, out, problems, annotationNames);
     }
   }
 
   /** Preprocess all provided files and put them to provided output path. */
   private static void preprocessFiles(
-      List<FileInfo> fileInfos, Output output, Problems problems, String annotationName) {
+      List<FileInfo> fileInfos, Output output, Problems problems, List<String> annotationNames) {
     for (FileInfo fileInfo : fileInfos) {
       String processedFileContent;
       try {
         String fileContent = MoreFiles.asCharSource(Paths.get(fileInfo.sourcePath()), UTF_8).read();
-        processedFileContent = strip(fileContent, annotationName);
+        processedFileContent = strip(fileContent, annotationNames);
       } catch (IOException e) {
         problems.fatal(FatalError.CANNOT_OPEN_FILE, e.toString());
         return;
@@ -75,9 +79,9 @@ public final class GwtIncompatibleStripper {
     }
   }
 
-  public static String strip(String fileContent, String annotationName) {
-    // Avoid parsing if there are no textual references to the annotation name.
-    if (!fileContent.contains(annotationName)) {
+  public static String strip(String fileContent, List<String> annotationNames) {
+    // Avoid parsing if there are no textual references to the annotation name(s).
+    if (annotationNames.stream().noneMatch(fileContent::contains)) {
       return fileContent;
     }
 
@@ -94,12 +98,15 @@ public final class GwtIncompatibleStripper {
     CompilationUnit compilationUnit = (CompilationUnit) parser.createAST(null);
 
     // Find all the declarations with the annotation name
-    AnnotatedNodeCollector gwtIncompatibleVisitor = new AnnotatedNodeCollector(annotationName);
-    compilationUnit.accept(gwtIncompatibleVisitor);
-    List<ASTNode> gwtIncompatibleNodes = gwtIncompatibleVisitor.getNodes();
+    Set<ASTNode> nodesToRemove = new HashSet<>();
+    for (String annotationName : annotationNames) {
+      AnnotatedNodeCollector gwtIncompatibleVisitor = new AnnotatedNodeCollector(annotationName);
+      compilationUnit.accept(gwtIncompatibleVisitor);
+      nodesToRemove.addAll(gwtIncompatibleVisitor.getNodes());
+    }
 
     // Delete the gwtIncompatible nodes.
-    for (ASTNode gwtIncompatibleNode : gwtIncompatibleNodes) {
+    for (ASTNode gwtIncompatibleNode : nodesToRemove) {
       gwtIncompatibleNode.delete();
     }
 
@@ -111,7 +118,10 @@ public final class GwtIncompatibleStripper {
     // Wrap all the not needed nodes inside comments in the original source
     // (so we can preserve line numbers and have accurate source maps).
     List<ASTNode> nodesToWrap = Lists.newArrayList(unusedImportsNodes);
-    nodesToWrap.addAll(gwtIncompatibleNodes);
+    // Add the nodes to remove in start position order.
+    nodesToRemove.stream()
+        .sorted(Comparator.comparingInt(ASTNode::getStartPosition))
+        .forEach(nodesToWrap::add);
     if (nodesToWrap.isEmpty()) {
       // Nothing was changed.
       return fileContent;

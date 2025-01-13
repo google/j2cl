@@ -41,8 +41,8 @@ public final class GwtIncompatibleStripperCommandLineRunner extends CommandLineT
   @Option(
       name = "-annotation",
       metaVar = "<annotation>",
-      usage = "The name of the annotation to strip; defaults to 'GwtIncompatible'")
-  String annotation = "GwtIncompatible";
+      usage = "The name(s) of annotations to strip; defaults to 'GwtIncompatible'")
+  List<String> annotations = new ArrayList<>();
 
   private GwtIncompatibleStripperCommandLineRunner() {
     super("gwt-incompatible-stripper");
@@ -50,8 +50,11 @@ public final class GwtIncompatibleStripperCommandLineRunner extends CommandLineT
 
   @Override
   protected void run(Problems problems) {
+    if (annotations.isEmpty()) {
+      annotations.add("GwtIncompatible");
+    }
     checkSourceFiles(problems, files, ".java", ".srcjar", ".jar");
-    GwtIncompatibleStripper.strip(files, outputPath, problems, annotation);
+    GwtIncompatibleStripper.strip(files, outputPath, problems, annotations);
   }
 
   public static int run(String[] args) {

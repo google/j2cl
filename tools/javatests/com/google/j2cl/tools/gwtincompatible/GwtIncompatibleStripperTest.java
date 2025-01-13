@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static org.junit.Assert.assertEquals;
 
 import com.google.common.base.Joiner;
+import com.google.common.collect.ImmutableList;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -29,19 +30,22 @@ public class GwtIncompatibleStripperTest {
   @Test
   public void testNoProcess() {
     String content = "public class Foo {}";
-    assertEquals(content, GwtIncompatibleStripper.strip(content, "GwtIncompatible"));
+    assertEquals(
+        content, GwtIncompatibleStripper.strip(content, ImmutableList.of("GwtIncompatible")));
   }
 
   @Test
   public void testNoProcessOtherIncompatible() {
     String content = "@J2kIncompatible\npublic class Foo {}";
-    assertEquals(content, GwtIncompatibleStripper.strip(content, "GwtIncompatible"));
+    assertEquals(
+        content, GwtIncompatibleStripper.strip(content, ImmutableList.of("GwtIncompatible")));
   }
 
   @Test
   public void testNoProcessString() {
     String content = "public class Foo {String a = \"@GwtIncompatible\");}";
-    assertEquals(content, GwtIncompatibleStripper.strip(content, "GwtIncompatible"));
+    assertEquals(
+        content, GwtIncompatibleStripper.strip(content, ImmutableList.of("GwtIncompatible")));
   }
 
   @Test
@@ -60,7 +64,7 @@ public class GwtIncompatibleStripperTest {
             stripped("public class Foo {"),
             stripped("  public X m() {return null;}"),
             stripped("}"));
-    assertEquals(after, GwtIncompatibleStripper.strip(before, "GwtIncompatible"));
+    assertEquals(after, GwtIncompatibleStripper.strip(before, ImmutableList.of("GwtIncompatible")));
   }
 
   @Test
@@ -79,11 +83,12 @@ public class GwtIncompatibleStripperTest {
             stripped("public class Foo {"),
             stripped("  public X m() {return null;}"),
             stripped("}"));
-    assertEquals(after, GwtIncompatibleStripper.strip(before, "J2ktIncompatible"));
+    assertEquals(
+        after, GwtIncompatibleStripper.strip(before, ImmutableList.of("J2ktIncompatible")));
   }
 
   @Test
-  public void testProcessMultipleAnnotatons() {
+  public void testProcessMultipleAnnotationsPresent() {
     String before =
         lines(
             "import a.b.X;",
@@ -100,7 +105,44 @@ public class GwtIncompatibleStripperTest {
             stripped("public class Foo {"),
             stripped("  public X m() {return null;}"),
             stripped("}"));
-    assertEquals(after, GwtIncompatibleStripper.strip(before, "J2ktIncompatible"));
+    assertEquals(
+        after, GwtIncompatibleStripper.strip(before, ImmutableList.of("J2ktIncompatible")));
+  }
+
+  @Test
+  public void testProcessMultipleAnnotationsToStrip() {
+    String before =
+        lines(
+            "import a.b.X;",
+            "import a.b.Y;",
+            "import a.b.Z;",
+            "public class Foo {",
+            "  @GwtIncompatible",
+            "  @J2ktIncompatible",
+            "  public X m() {return null;}",
+            "  @GwtIncompatible",
+            "  public Y j2ktOnly() {return null;}",
+            "  @J2ktIncompatible",
+            "  public Z gwtOnly() {return null;}",
+            "}");
+    String after =
+        lines(
+            stripped("import a.b.X;"),
+            stripped("import a.b.Y;"),
+            stripped("import a.b.Z;"),
+            "public class Foo {",
+            stripped("  @GwtIncompatible"),
+            stripped("  @J2ktIncompatible"),
+            stripped("  public X m() {return null;}"),
+            stripped("  @GwtIncompatible"),
+            stripped("  public Y j2ktOnly() {return null;}"),
+            stripped("  @J2ktIncompatible"),
+            stripped("  public Z gwtOnly() {return null;}"),
+            "}");
+    assertEquals(
+        after,
+        GwtIncompatibleStripper.strip(
+            before, ImmutableList.of("J2ktIncompatible", "GwtIncompatible")));
   }
 
   @Test
@@ -125,7 +167,7 @@ public class GwtIncompatibleStripperTest {
             stripped("  @GwtIncompatible"),
             stripped("  public D n() {}"),
             "}");
-    assertEquals(after, GwtIncompatibleStripper.strip(before, "GwtIncompatible"));
+    assertEquals(after, GwtIncompatibleStripper.strip(before, ImmutableList.of("GwtIncompatible")));
   }
 
   @Test
@@ -146,7 +188,7 @@ public class GwtIncompatibleStripperTest {
             stripped("  public String b;"),
             "  public String c;",
             "}");
-    assertEquals(after, GwtIncompatibleStripper.strip(before, "GwtIncompatible"));
+    assertEquals(after, GwtIncompatibleStripper.strip(before, ImmutableList.of("GwtIncompatible")));
   }
 
   @Test
@@ -160,7 +202,7 @@ public class GwtIncompatibleStripperTest {
             stripped("  B,"),
             "  C;",
             "}");
-    assertEquals(after, GwtIncompatibleStripper.strip(before, "GwtIncompatible"));
+    assertEquals(after, GwtIncompatibleStripper.strip(before, ImmutableList.of("GwtIncompatible")));
   }
 
   @Test
@@ -179,7 +221,7 @@ public class GwtIncompatibleStripperTest {
             stripped("  @GwtIncompatible"),
             stripped("  public String n();"),
             "}");
-    assertEquals(after, GwtIncompatibleStripper.strip(before, "GwtIncompatible"));
+    assertEquals(after, GwtIncompatibleStripper.strip(before, ImmutableList.of("GwtIncompatible")));
   }
 
   @Test
@@ -218,7 +260,7 @@ public class GwtIncompatibleStripperTest {
             stripped("  }"),
             "  String s;",
             "}");
-    assertEquals(after, GwtIncompatibleStripper.strip(before, "GwtIncompatible"));
+    assertEquals(after, GwtIncompatibleStripper.strip(before, ImmutableList.of("GwtIncompatible")));
   }
 
   @Test
@@ -237,7 +279,7 @@ public class GwtIncompatibleStripperTest {
             stripped("  @GwtIncompatible"),
             stripped("  public void n() {foo(x /* the value of x */);}"),
             "}");
-    assertEquals(after, GwtIncompatibleStripper.strip(before, "GwtIncompatible"));
+    assertEquals(after, GwtIncompatibleStripper.strip(before, ImmutableList.of("GwtIncompatible")));
   }
 
   @Test
@@ -256,7 +298,7 @@ public class GwtIncompatibleStripperTest {
             stripped("  @GwtIncompatible"),
             "  \t" + stripped("public B n() {}"),
             "}");
-    assertEquals(after, GwtIncompatibleStripper.strip(before, "GwtIncompatible"));
+    assertEquals(after, GwtIncompatibleStripper.strip(before, ImmutableList.of("GwtIncompatible")));
   }
 
   @Test
@@ -277,7 +319,7 @@ public class GwtIncompatibleStripperTest {
             stripped("  //மெ.பை."),
             stripped("  public B n() {}"),
             "}");
-    assertEquals(after, GwtIncompatibleStripper.strip(before, "GwtIncompatible"));
+    assertEquals(after, GwtIncompatibleStripper.strip(before, ImmutableList.of("GwtIncompatible")));
   }
 
   private static String lines(String... lines) {
