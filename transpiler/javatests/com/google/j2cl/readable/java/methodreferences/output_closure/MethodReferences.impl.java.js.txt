@@ -7,6 +7,7 @@ let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let Double = goog.forwardDeclare('java.lang.Double$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let ArrayProducer = goog.forwardDeclare('methodreferences.MethodReferences.ArrayProducer$impl');
 let BiFunction = goog.forwardDeclare('methodreferences.MethodReferences.BiFunction$impl');
 let MethodReferences_Function = goog.forwardDeclare('methodreferences.MethodReferences.Function$impl');
@@ -49,6 +50,10 @@ class MethodReferences extends j_l_Object {
  m_self__java_lang_Object_$pp_methodreferences() {
   return this;
  }
+ /** @nodts @return {T} */
+ m_t__java_lang_Object_$pp_methodreferences() {
+  return null;
+ }
  /** @nodts @return {?boolean} */
  m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences(/** (Number|number) */ n) {
   return false;
@@ -67,6 +72,10 @@ class MethodReferences extends j_l_Object {
   objectFactory = ($$q = /**@type {!MethodReferences<T>}*/ (MethodReferences.$create__()), Producer.$adapt(() =>{
    return $$q.m_isA__java_lang_Boolean();
   }));
+  let parameterizedInstance = /**@type {!MethodReferences<?string>}*/ (MethodReferences.$create__());
+  let parameterizedFactory = Producer.$adapt(() =>{
+   return /**@type {?string}*/ ($Casts.$to(parameterizedInstance.m_t__java_lang_Object_$pp_methodreferences(), j_l_String));
+  });
   let biFunction = BiFunction.$adapt((arg0, arg1) =>{
    let arg0_1 = /**@type {MethodReferences<T>}*/ ($Casts.$to(arg0, MethodReferences));
    let arg1_1 = /**@type {(Number|number)}*/ ($Casts.$to(arg1, Number));
@@ -166,6 +175,7 @@ class MethodReferences extends j_l_Object {
   Double = goog.module.get('java.lang.Double$impl');
   Integer = goog.module.get('java.lang.Integer$impl');
   Number = goog.module.get('java.lang.Number$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
   ArrayProducer = goog.module.get('methodreferences.MethodReferences.ArrayProducer$impl');
   BiFunction = goog.module.get('methodreferences.MethodReferences.BiFunction$impl');
   MethodReferences_Function = goog.module.get('methodreferences.MethodReferences.Function$impl');

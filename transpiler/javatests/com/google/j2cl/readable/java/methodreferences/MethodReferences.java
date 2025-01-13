@@ -73,6 +73,10 @@ public class MethodReferences<T> {
     return this;
   }
 
+  T t() {
+    return null;
+  }
+
   static Producer<String> staticStringProducer = m()::toString;
 
   Boolean sameAs(Number n) {
@@ -88,6 +92,9 @@ public class MethodReferences<T> {
 
     // Qualified instance method
     objectFactory = new MethodReferences<T>()::isA;
+
+    MethodReferences<String> parameterizedInstance = new MethodReferences<String>();
+    Producer<String> parameterizedFactory = parameterizedInstance::t;
 
     BiFunction<MethodReferences<T>, Number, Boolean> biFunction = MethodReferences::sameAs;
 

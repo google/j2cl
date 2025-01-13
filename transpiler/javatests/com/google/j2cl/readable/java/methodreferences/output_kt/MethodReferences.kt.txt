@@ -47,6 +47,10 @@ open class MethodReferences<T> {
   return this
  }
 
+ internal open fun t_pp_methodreferences(): T {
+  return null as T
+ }
+
  internal open fun sameAs_pp_methodreferences(n: Number?): Boolean? {
   return java.lang.Boolean.valueOf(false)
  }
@@ -63,6 +67,10 @@ open class MethodReferences<T> {
    MethodReferences.Producer<Any?> {
     return@Producer ______q.isA()
    }
+  }
+  val parameterizedInstance: MethodReferences<String?>? = MethodReferences<String?>()
+  val parameterizedFactory: MethodReferences.Producer<String?>? = MethodReferences.Producer<String?> {
+   return@Producer parameterizedInstance!!.t_pp_methodreferences()
   }
   val biFunction: MethodReferences.BiFunction<MethodReferences<T>?, Number?, Boolean?>? = MethodReferences.BiFunction<MethodReferences<T>?, Number?, Boolean?> { arg0: MethodReferences<T>?, arg1: Number? ->
    return@BiFunction arg0!!.sameAs_pp_methodreferences(arg1)
