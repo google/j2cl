@@ -1,0 +1,79 @@
+goog.module('autovalue.AutoValue_AutoValueWithFields$impl');
+
+const AutoValueWithFields = goog.require('autovalue.AutoValueWithFields$impl');
+const $Long = goog.require('nativebootstrap.Long$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+
+/**
+ * @final
+ */
+class AutoValue__AutoValueWithFields extends AutoValueWithFields {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_intField__autovalue_AutoValue_AutoValueWithFields_ = 0;
+ }
+ /** @nodts @return {!AutoValue__AutoValueWithFields} */
+ static $create__int(/** number */ intField) {
+  AutoValue__AutoValueWithFields.$clinit();
+  let $instance = new AutoValue__AutoValueWithFields();
+  $instance.$ctor__autovalue_AutoValue_AutoValueWithFields__int__void(intField);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__autovalue_AutoValue_AutoValueWithFields__int__void(/** number */ intField) {
+  this.$ctor__autovalue_AutoValueWithFields__void();
+  this.f_intField__autovalue_AutoValue_AutoValueWithFields_ = intField;
+ }
+ /** @override @nodts @return {number} */
+ m_getIntField__int() {
+  return this.f_intField__autovalue_AutoValue_AutoValueWithFields_;
+ }
+ /** @override @return {string} */
+ toString() {
+  return '{' + this.f_intField__autovalue_AutoValue_AutoValueWithFields_ + '}';
+ }
+ /** @override @return {boolean} */
+ equals(/** * */ o) {
+  if ($Equality.$same(o, this)) {
+   return true;
+  }
+  if (AutoValueWithFields.$isInstance(o)) {
+   let that = /**@type {AutoValueWithFields}*/ (o);
+   return this.f_intField__autovalue_AutoValue_AutoValueWithFields_ == that.m_getIntField__int();
+  }
+  return false;
+ }
+ /** @override @return {number} */
+ hashCode() {
+  let h___ = 1;
+  h___ = Math.imul(h___, 1000003);
+  h___ = h___ ^ this.f_intField__autovalue_AutoValue_AutoValueWithFields_;
+  return h___;
+ }
+ /** @nodts */
+ static $clinit() {
+  AutoValue__AutoValueWithFields.$clinit = () =>{};
+  AutoValue__AutoValueWithFields.$loadModules();
+  AutoValueWithFields.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AutoValue__AutoValueWithFields;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+ }
+}
+/**@const {!$Long} @nodts*/
+AutoValue__AutoValueWithFields.f_serialVersionUID__autovalue_AutoValue_AutoValueWithFields_ = $Long.fromInt(42);
+$Util.$setClassMetadata(AutoValue__AutoValueWithFields, 'autovalue.AutoValue_AutoValueWithFields');
+
+exports = AutoValue__AutoValueWithFields;
+
+//# sourceMappingURL=AutoValue_AutoValueWithFields.js.map

@@ -1,0 +1,36 @@
+goog.module('autovalue.EmptyAutoValue$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ */
+class EmptyAutoValue extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__autovalue_EmptyAutoValue__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  EmptyAutoValue.$clinit = () =>{};
+  EmptyAutoValue.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof EmptyAutoValue;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(EmptyAutoValue, 'autovalue.EmptyAutoValue');
+
+exports = EmptyAutoValue;
+
+//# sourceMappingURL=EmptyAutoValue.js.map

@@ -1,0 +1,48 @@
+goog.module('autovalue.AutoValueWithFields$impl');
+
+const Parent = goog.require('autovalue.Parent$impl');
+const Serializable = goog.require('java.io.Serializable$impl');
+const $Long = goog.require('nativebootstrap.Long$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ * @implements {Serializable}
+ */
+class AutoValueWithFields extends Parent {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_userField2_pp_autovalue__autovalue_AutoValueWithFields = 0;
+ }
+ /** @nodts */
+ $ctor__autovalue_AutoValueWithFields__void() {
+  this.$ctor__autovalue_Parent__void();
+ }
+ /** @abstract @nodts @return {number} */
+ m_getIntField__int() {}
+ /** @nodts */
+ static $clinit() {
+  AutoValueWithFields.$clinit = () =>{};
+  AutoValueWithFields.$loadModules();
+  Parent.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AutoValueWithFields;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+/**@const {!$Long} @nodts*/
+AutoValueWithFields.f_serialVersionUID__autovalue_AutoValueWithFields_ = $Long.fromInt(42);
+/**@const {!$Long} @nodts*/
+AutoValueWithFields.f_staticField__autovalue_AutoValueWithFields_ = $Long.fromInt(42);
+Serializable.$markImplementor(AutoValueWithFields);
+$Util.$setClassMetadata(AutoValueWithFields, 'autovalue.AutoValueWithFields');
+
+exports = AutoValueWithFields;
+
+//# sourceMappingURL=AutoValueWithFields.js.map

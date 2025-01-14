@@ -1,0 +1,78 @@
+goog.module('autovalue.AutoValue_AutoValueWithGenerics$impl');
+
+const AutoValueWithGenerics = goog.require('autovalue.AutoValueWithGenerics$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+
+/**
+ * @final
+ * @template T
+ * @extends {AutoValueWithGenerics<T>}
+ */
+class AutoValue__AutoValueWithGenerics extends AutoValueWithGenerics {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {boolean} @nodts*/
+  this.f_booleanField__autovalue_AutoValue_AutoValueWithGenerics_ = false;
+ }
+ /** @nodts @template T @return {!AutoValue__AutoValueWithGenerics<T>} */
+ static $create__boolean(/** boolean */ booleanField) {
+  AutoValue__AutoValueWithGenerics.$clinit();
+  let $instance = new AutoValue__AutoValueWithGenerics();
+  $instance.$ctor__autovalue_AutoValue_AutoValueWithGenerics__boolean__void(booleanField);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__autovalue_AutoValue_AutoValueWithGenerics__boolean__void(/** boolean */ booleanField) {
+  this.$ctor__autovalue_AutoValueWithGenerics__void();
+  this.f_booleanField__autovalue_AutoValue_AutoValueWithGenerics_ = booleanField;
+ }
+ /** @override @nodts @return {boolean} */
+ m_getBooleanField__boolean() {
+  return this.f_booleanField__autovalue_AutoValue_AutoValueWithGenerics_;
+ }
+ /** @override @return {string} */
+ toString() {
+  return '{' + this.f_booleanField__autovalue_AutoValue_AutoValueWithGenerics_ + '}';
+ }
+ /** @override @return {boolean} */
+ equals(/** * */ o) {
+  if ($Equality.$same(o, this)) {
+   return true;
+  }
+  if (AutoValueWithGenerics.$isInstance(o)) {
+   let that = /**@type {AutoValueWithGenerics<*>}*/ (o);
+   return this.f_booleanField__autovalue_AutoValue_AutoValueWithGenerics_ == that.m_getBooleanField__boolean();
+  }
+  return false;
+ }
+ /** @override @return {number} */
+ hashCode() {
+  let h___ = 1;
+  h___ = Math.imul(h___, 1000003);
+  h___ = h___ ^ (this.f_booleanField__autovalue_AutoValue_AutoValueWithGenerics_ ? 1231 : 1237);
+  return h___;
+ }
+ /** @nodts */
+ static $clinit() {
+  AutoValue__AutoValueWithGenerics.$clinit = () =>{};
+  AutoValue__AutoValueWithGenerics.$loadModules();
+  AutoValueWithGenerics.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AutoValue__AutoValueWithGenerics;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+ }
+}
+$Util.$setClassMetadata(AutoValue__AutoValueWithGenerics, 'autovalue.AutoValue_AutoValueWithGenerics');
+
+exports = AutoValue__AutoValueWithGenerics;
+
+//# sourceMappingURL=AutoValue_AutoValueWithGenerics.js.map

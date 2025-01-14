@@ -1,0 +1,47 @@
+goog.module('autovalue.DefaultConstructorAutoValue$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Builder = goog.forwardDeclare('autovalue.AutoValue_DefaultConstructorAutoValue.Builder$impl');
+
+/**
+ * @abstract
+ */
+class DefaultConstructorAutoValue extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__autovalue_DefaultConstructorAutoValue__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @abstract @nodts @return {boolean} */
+ m_getBooleanField__boolean() {}
+ /** @nodts @return {DefaultConstructorAutoValue} */
+ static m_create_pp_autovalue__autovalue_DefaultConstructorAutoValue() {
+  DefaultConstructorAutoValue.$clinit();
+  return Builder.$create__().m_setBooleanField_pp_autovalue__boolean__autovalue_DefaultConstructorAutoValue_Builder(true).m_build__autovalue_DefaultConstructorAutoValue();
+ }
+ /** @nodts */
+ static $clinit() {
+  DefaultConstructorAutoValue.$clinit = () =>{};
+  DefaultConstructorAutoValue.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof DefaultConstructorAutoValue;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Builder = goog.module.get('autovalue.AutoValue_DefaultConstructorAutoValue.Builder$impl');
+ }
+}
+$Util.$setClassMetadata(DefaultConstructorAutoValue, 'autovalue.DefaultConstructorAutoValue');
+
+exports = DefaultConstructorAutoValue;
+
+//# sourceMappingURL=DefaultConstructorAutoValue.js.map

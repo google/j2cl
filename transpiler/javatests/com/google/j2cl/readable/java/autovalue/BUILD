@@ -20,6 +20,7 @@ readable_example(
         ["*.java"],
         exclude = ["J2ktIncompatible.java"],
     ),
+    generate_kt_web_readables = True,
     deps = [
         ":j2kt_incompatible",
         "//third_party:auto_value_generates_api-j2cl",

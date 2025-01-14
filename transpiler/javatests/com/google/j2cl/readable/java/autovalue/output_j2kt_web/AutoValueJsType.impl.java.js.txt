@@ -1,0 +1,40 @@
+goog.module('autovalue.AutoValueJsType$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ */
+class AutoValueJsType extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__autovalue_AutoValueJsType__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @abstract @return {number} */
+ getField() {}
+ /** @abstract @return {number} */
+ getField2() {}
+ /** @nodts */
+ static $clinit() {
+  AutoValueJsType.$clinit = () =>{};
+  AutoValueJsType.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AutoValueJsType;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(AutoValueJsType, 'autovalue.AutoValueJsType');
+
+exports = AutoValueJsType;
+
+//# sourceMappingURL=AutoValueJsType.js.map

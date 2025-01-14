@@ -1,0 +1,80 @@
+goog.module('autovalue.SimpleAutoValue$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Builder = goog.forwardDeclare('autovalue.AutoValue_EmptyAutoValue.Builder$impl');
+let AutoValue__SimpleAutoValue = goog.forwardDeclare('autovalue.AutoValue_SimpleAutoValue$impl');
+let EmptyAutoValue = goog.forwardDeclare('autovalue.EmptyAutoValue$impl');
+let Double = goog.forwardDeclare('java.lang.Double$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+/**
+ * @abstract
+ */
+class SimpleAutoValue extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_intField__autovalue_SimpleAutoValue_ = 0;
+  /**@type {EmptyAutoValue} @nodts*/
+  this.f_field1__autovalue_SimpleAutoValue_;
+  /**@type {!EmptyAutoValue} @nodts*/
+  this.f_field2__autovalue_SimpleAutoValue_;
+ }
+ /** @nodts */
+ $ctor__autovalue_SimpleAutoValue__void() {
+  this.$ctor__java_lang_Object__void();
+  this.f_field2__autovalue_SimpleAutoValue_ = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(Builder.$create__().m_build__autovalue_EmptyAutoValue());
+ }
+ /** @abstract @nodts @return {number} */
+ m_getIntField__int() {}
+ /** @abstract @nodts @return {boolean} */
+ m_getBooleanField__boolean() {}
+ /** @abstract @nodts @return {?string} */
+ m_getStringField__java_lang_String() {}
+ /** @abstract @nodts @return {?number} */
+ m_getDoubleField__java_lang_Double() {}
+ /** @abstract @nodts @return {?number} */
+ m_getNullableField__java_lang_Double() {}
+ /** @abstract @nodts @return {Array<number>} */
+ m_getArrayField__arrayOf_int() {}
+ /** @nodts @return {SimpleAutoValue} */
+ static m_create_pp_autovalue__autovalue_SimpleAutoValue() {
+  SimpleAutoValue.$clinit();
+  return AutoValue__SimpleAutoValue.$create__int__boolean__java_lang_String__java_lang_Double__java_lang_Double__arrayOf_int(42, true, 'text', Double.m_valueOf__double__java_lang_Double(43), Double.m_valueOf__double__java_lang_Double(44), /**@type {!Array<number>}*/ ($Arrays.$stampType([45], $$int)));
+ }
+ /** @nodts @return {Array<AutoValue__SimpleAutoValue>} */
+ static m_castAndInstanceOf_pp_autovalue__java_lang_Object__arrayOf_autovalue_AutoValue_SimpleAutoValue(/** * */ o) {
+  SimpleAutoValue.$clinit();
+  return $Arrays.$instanceIsOfType(o, j_l_Object, 1) ? /**@type {Array<AutoValue__SimpleAutoValue>}*/ ($Arrays.$castTo(o, AutoValue__SimpleAutoValue, 1)) : null;
+ }
+ /** @nodts */
+ static $clinit() {
+  SimpleAutoValue.$clinit = () =>{};
+  SimpleAutoValue.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SimpleAutoValue;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Builder = goog.module.get('autovalue.AutoValue_EmptyAutoValue.Builder$impl');
+  AutoValue__SimpleAutoValue = goog.module.get('autovalue.AutoValue_SimpleAutoValue$impl');
+  Double = goog.module.get('java.lang.Double$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
+ }
+}
+$Util.$setClassMetadata(SimpleAutoValue, 'autovalue.SimpleAutoValue');
+
+exports = SimpleAutoValue;
+
+//# sourceMappingURL=SimpleAutoValue.js.map

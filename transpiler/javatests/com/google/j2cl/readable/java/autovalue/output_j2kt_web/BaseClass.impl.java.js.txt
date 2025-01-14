@@ -1,0 +1,38 @@
+goog.module('autovalue.BaseClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ */
+class BaseClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__autovalue_BaseClass__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @abstract @nodts @return {number} */
+ m_getBaseField__int() {}
+ /** @nodts */
+ static $clinit() {
+  BaseClass.$clinit = () =>{};
+  BaseClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof BaseClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(BaseClass, 'autovalue.BaseClass');
+
+exports = BaseClass;
+
+//# sourceMappingURL=BaseClass.js.map

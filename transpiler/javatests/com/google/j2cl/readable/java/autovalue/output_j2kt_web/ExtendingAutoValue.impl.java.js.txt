@@ -1,0 +1,40 @@
+goog.module('autovalue.ExtendingAutoValue$impl');
+
+const BaseClass = goog.require('autovalue.BaseClass$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ */
+class ExtendingAutoValue extends BaseClass {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__autovalue_ExtendingAutoValue__void() {
+  this.$ctor__autovalue_BaseClass__void();
+ }
+ /** @abstract @nodts @return {boolean} */
+ m_getBooleanField__boolean() {}
+ /** @abstract @nodts @return {?string} */
+ m_getStringField__java_lang_String() {}
+ /** @nodts */
+ static $clinit() {
+  ExtendingAutoValue.$clinit = () =>{};
+  ExtendingAutoValue.$loadModules();
+  BaseClass.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ExtendingAutoValue;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(ExtendingAutoValue, 'autovalue.ExtendingAutoValue');
+
+exports = ExtendingAutoValue;
+
+//# sourceMappingURL=ExtendingAutoValue.js.map

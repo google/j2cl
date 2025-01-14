@@ -1,0 +1,57 @@
+goog.module('autovalue.AutoValue_AutoValueWithOverrides$impl');
+
+const AutoValueWithOverrides = goog.require('autovalue.AutoValueWithOverrides$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class AutoValue__AutoValueWithOverrides extends AutoValueWithOverrides {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_baseField__autovalue_AutoValue_AutoValueWithOverrides_ = 0;
+  /**@type {boolean} @nodts*/
+  this.f_booleanField__autovalue_AutoValue_AutoValueWithOverrides_ = false;
+ }
+ /** @nodts @return {!AutoValue__AutoValueWithOverrides} */
+ static $create__int__boolean(/** number */ baseField, /** boolean */ booleanField) {
+  AutoValue__AutoValueWithOverrides.$clinit();
+  let $instance = new AutoValue__AutoValueWithOverrides();
+  $instance.$ctor__autovalue_AutoValue_AutoValueWithOverrides__int__boolean__void(baseField, booleanField);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__autovalue_AutoValue_AutoValueWithOverrides__int__boolean__void(/** number */ baseField, /** boolean */ booleanField) {
+  this.$ctor__autovalue_AutoValueWithOverrides__void();
+  this.f_baseField__autovalue_AutoValue_AutoValueWithOverrides_ = baseField;
+  this.f_booleanField__autovalue_AutoValue_AutoValueWithOverrides_ = booleanField;
+ }
+ /** @override @nodts @return {number} */
+ m_getBaseField__int() {
+  return this.f_baseField__autovalue_AutoValue_AutoValueWithOverrides_;
+ }
+ /** @override @nodts @return {boolean} */
+ m_getBooleanField__boolean() {
+  return this.f_booleanField__autovalue_AutoValue_AutoValueWithOverrides_;
+ }
+ /** @nodts */
+ static $clinit() {
+  AutoValue__AutoValueWithOverrides.$clinit = () =>{};
+  AutoValue__AutoValueWithOverrides.$loadModules();
+  AutoValueWithOverrides.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AutoValue__AutoValueWithOverrides;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(AutoValue__AutoValueWithOverrides, 'autovalue.AutoValue_AutoValueWithOverrides');
+
+exports = AutoValue__AutoValueWithOverrides;
+
+//# sourceMappingURL=AutoValue_AutoValueWithOverrides.js.map

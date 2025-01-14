@@ -1,0 +1,57 @@
+goog.module('autovalue.AutoValueWithBuilder.Companion$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let AutoValueWithBuilder = goog.forwardDeclare('autovalue.AutoValueWithBuilder$impl');
+
+/**
+ * @final
+ */
+class Companion extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Companion} */
+ static $create__() {
+  let $instance = new Companion();
+  $instance.$ctor__autovalue_AutoValueWithBuilder_Companion__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__autovalue_AutoValueWithBuilder_Companion__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {AutoValueWithBuilder} */
+ m_create_pp_autovalue__autovalue_AutoValueWithBuilder() {
+  return AutoValueWithBuilder.m_create_pp_autovalue__autovalue_AutoValueWithBuilder();
+ }
+ /** @nodts @return {!Companion} */
+ static get f_Companion__autovalue_AutoValueWithBuilder_Companion() {
+  return (Companion.$clinit(), Companion.$static_Companion__autovalue_AutoValueWithBuilder_Companion);
+ }
+ /** @nodts */
+ static $clinit() {
+  Companion.$clinit = () =>{};
+  Companion.$loadModules();
+  j_l_Object.$clinit();
+  Companion.$static_Companion__autovalue_AutoValueWithBuilder_Companion = Companion.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Companion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  AutoValueWithBuilder = goog.module.get('autovalue.AutoValueWithBuilder$impl');
+ }
+}
+/**@private {!Companion} @nodts*/
+Companion.$static_Companion__autovalue_AutoValueWithBuilder_Companion;
+$Util.$setClassMetadata(Companion, 'autovalue.AutoValueWithBuilder$Companion');
+
+exports = Companion;
+
+//# sourceMappingURL=AutoValueWithBuilder$Companion.js.map

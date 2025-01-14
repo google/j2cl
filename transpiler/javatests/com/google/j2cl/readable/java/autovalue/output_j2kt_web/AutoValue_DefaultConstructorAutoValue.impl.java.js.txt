@@ -1,0 +1,76 @@
+goog.module('autovalue.AutoValue_DefaultConstructorAutoValue$impl');
+
+const DefaultConstructorAutoValue = goog.require('autovalue.DefaultConstructorAutoValue$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+
+/**
+ * @final
+ */
+class AutoValue__DefaultConstructorAutoValue extends DefaultConstructorAutoValue {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {boolean} @nodts*/
+  this.f_booleanField__autovalue_AutoValue_DefaultConstructorAutoValue_ = false;
+ }
+ /** @nodts @return {!AutoValue__DefaultConstructorAutoValue} */
+ static $create__boolean(/** boolean */ booleanField) {
+  AutoValue__DefaultConstructorAutoValue.$clinit();
+  let $instance = new AutoValue__DefaultConstructorAutoValue();
+  $instance.$ctor__autovalue_AutoValue_DefaultConstructorAutoValue__boolean__void(booleanField);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__autovalue_AutoValue_DefaultConstructorAutoValue__boolean__void(/** boolean */ booleanField) {
+  this.$ctor__autovalue_DefaultConstructorAutoValue__void();
+  this.f_booleanField__autovalue_AutoValue_DefaultConstructorAutoValue_ = booleanField;
+ }
+ /** @override @nodts @return {boolean} */
+ m_getBooleanField__boolean() {
+  return this.f_booleanField__autovalue_AutoValue_DefaultConstructorAutoValue_;
+ }
+ /** @override @return {string} */
+ toString() {
+  return '{' + this.f_booleanField__autovalue_AutoValue_DefaultConstructorAutoValue_ + '}';
+ }
+ /** @override @return {boolean} */
+ equals(/** * */ o) {
+  if ($Equality.$same(o, this)) {
+   return true;
+  }
+  if (DefaultConstructorAutoValue.$isInstance(o)) {
+   let that = /**@type {DefaultConstructorAutoValue}*/ (o);
+   return this.f_booleanField__autovalue_AutoValue_DefaultConstructorAutoValue_ == that.m_getBooleanField__boolean();
+  }
+  return false;
+ }
+ /** @override @return {number} */
+ hashCode() {
+  let h___ = 1;
+  h___ = Math.imul(h___, 1000003);
+  h___ = h___ ^ (this.f_booleanField__autovalue_AutoValue_DefaultConstructorAutoValue_ ? 1231 : 1237);
+  return h___;
+ }
+ /** @nodts */
+ static $clinit() {
+  AutoValue__DefaultConstructorAutoValue.$clinit = () =>{};
+  AutoValue__DefaultConstructorAutoValue.$loadModules();
+  DefaultConstructorAutoValue.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AutoValue__DefaultConstructorAutoValue;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+ }
+}
+$Util.$setClassMetadata(AutoValue__DefaultConstructorAutoValue, 'autovalue.AutoValue_DefaultConstructorAutoValue');
+
+exports = AutoValue__DefaultConstructorAutoValue;
+
+//# sourceMappingURL=AutoValue_DefaultConstructorAutoValue.js.map

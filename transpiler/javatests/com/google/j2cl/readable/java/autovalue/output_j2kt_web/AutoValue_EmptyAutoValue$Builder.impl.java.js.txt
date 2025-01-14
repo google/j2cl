@@ -1,0 +1,52 @@
+goog.module('autovalue.AutoValue_EmptyAutoValue.Builder$impl');
+
+const EmptyAutoValue_Builder = goog.require('autovalue.EmptyAutoValue.Builder$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let AutoValue__EmptyAutoValue = goog.forwardDeclare('autovalue.AutoValue_EmptyAutoValue$impl');
+let EmptyAutoValue = goog.forwardDeclare('autovalue.EmptyAutoValue$impl');
+
+/**
+ * @final
+ */
+class Builder extends EmptyAutoValue_Builder {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Builder} */
+ static $create__() {
+  Builder.$clinit();
+  let $instance = new Builder();
+  $instance.$ctor__autovalue_AutoValue_EmptyAutoValue_Builder__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__autovalue_AutoValue_EmptyAutoValue_Builder__void() {
+  this.$ctor__autovalue_EmptyAutoValue_Builder__void();
+ }
+ /** @override @nodts @return {EmptyAutoValue} */
+ m_build__autovalue_EmptyAutoValue() {
+  return AutoValue__EmptyAutoValue.$create__();
+ }
+ /** @nodts */
+ static $clinit() {
+  Builder.$clinit = () =>{};
+  Builder.$loadModules();
+  EmptyAutoValue_Builder.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Builder;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  AutoValue__EmptyAutoValue = goog.module.get('autovalue.AutoValue_EmptyAutoValue$impl');
+ }
+}
+$Util.$setClassMetadata(Builder, 'autovalue.AutoValue_EmptyAutoValue$Builder');
+
+exports = Builder;
+
+//# sourceMappingURL=AutoValue_EmptyAutoValue$Builder.js.map

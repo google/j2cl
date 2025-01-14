@@ -1,0 +1,50 @@
+goog.module('autovalue.AutoValueWithOverrides$impl');
+
+const BaseClass = goog.require('autovalue.BaseClass$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ */
+class AutoValueWithOverrides extends BaseClass {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__autovalue_AutoValueWithOverrides__void() {
+  this.$ctor__autovalue_BaseClass__void();
+ }
+ /** @abstract @nodts @return {boolean} */
+ m_getBooleanField__boolean() {}
+ /** @override @return {boolean} */
+ equals(/** * */ o) {
+  return false;
+ }
+ /** @override @return {number} */
+ hashCode() {
+  return 1;
+ }
+ /** @override @return {string} */
+ toString() {
+  return 'x';
+ }
+ /** @nodts */
+ static $clinit() {
+  AutoValueWithOverrides.$clinit = () =>{};
+  AutoValueWithOverrides.$loadModules();
+  BaseClass.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AutoValueWithOverrides;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(AutoValueWithOverrides, 'autovalue.AutoValueWithOverrides');
+
+exports = AutoValueWithOverrides;
+
+//# sourceMappingURL=AutoValueWithOverrides.js.map

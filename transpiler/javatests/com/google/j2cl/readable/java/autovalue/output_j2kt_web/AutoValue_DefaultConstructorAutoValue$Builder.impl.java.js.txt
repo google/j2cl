@@ -1,0 +1,72 @@
+goog.module('autovalue.AutoValue_DefaultConstructorAutoValue.Builder$impl');
+
+const DefaultConstructorAutoValue_Builder = goog.require('autovalue.DefaultConstructorAutoValue.Builder$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let AutoValue__DefaultConstructorAutoValue = goog.forwardDeclare('autovalue.AutoValue_DefaultConstructorAutoValue$impl');
+let DefaultConstructorAutoValue = goog.forwardDeclare('autovalue.DefaultConstructorAutoValue$impl');
+let IllegalStateException = goog.forwardDeclare('java.lang.IllegalStateException$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
+
+/**
+ * @final
+ */
+class Builder extends DefaultConstructorAutoValue_Builder {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {boolean} @nodts*/
+  this.f_booleanField__autovalue_AutoValue_DefaultConstructorAutoValue_Builder_ = false;
+  /**@type {number} @nodts*/
+  this.f_set___0__autovalue_AutoValue_DefaultConstructorAutoValue_Builder_ = 0;
+ }
+ /** @nodts @return {!Builder} */
+ static $create__() {
+  Builder.$clinit();
+  let $instance = new Builder();
+  $instance.$ctor__autovalue_AutoValue_DefaultConstructorAutoValue_Builder__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__autovalue_AutoValue_DefaultConstructorAutoValue_Builder__void() {
+  this.$ctor__autovalue_DefaultConstructorAutoValue_Builder__void();
+  this.f_set___0__autovalue_AutoValue_DefaultConstructorAutoValue_Builder_ = 0;
+ }
+ /** @override @nodts @return {DefaultConstructorAutoValue_Builder} */
+ m_setBooleanField_pp_autovalue__boolean__autovalue_DefaultConstructorAutoValue_Builder(/** boolean */ booleanField) {
+  this.f_booleanField__autovalue_AutoValue_DefaultConstructorAutoValue_Builder_ = booleanField;
+  this.f_set___0__autovalue_AutoValue_DefaultConstructorAutoValue_Builder_ = $Primitives.narrowIntToByte(this.f_set___0__autovalue_AutoValue_DefaultConstructorAutoValue_Builder_ | 1);
+  return this;
+ }
+ /** @override @nodts @return {DefaultConstructorAutoValue} */
+ m_build__autovalue_DefaultConstructorAutoValue() {
+  if (!(this.f_set___0__autovalue_AutoValue_DefaultConstructorAutoValue_Builder_ == 1)) {
+   throw $Exceptions.toJs(IllegalStateException.$create__());
+  }
+  return AutoValue__DefaultConstructorAutoValue.$create__boolean(this.f_booleanField__autovalue_AutoValue_DefaultConstructorAutoValue_Builder_);
+ }
+ /** @nodts */
+ static $clinit() {
+  Builder.$clinit = () =>{};
+  Builder.$loadModules();
+  DefaultConstructorAutoValue_Builder.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Builder;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  AutoValue__DefaultConstructorAutoValue = goog.module.get('autovalue.AutoValue_DefaultConstructorAutoValue$impl');
+  IllegalStateException = goog.module.get('java.lang.IllegalStateException$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+  $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
+ }
+}
+$Util.$setClassMetadata(Builder, 'autovalue.AutoValue_DefaultConstructorAutoValue$Builder');
+
+exports = Builder;
+
+//# sourceMappingURL=AutoValue_DefaultConstructorAutoValue$Builder.js.map

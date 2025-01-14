@@ -1,0 +1,80 @@
+goog.module('autovalue.AutoValue_AutoValueWithExtensions$impl');
+
+const ______AutoValue__AutoValueWithExtensions = goog.require('autovalue.___AutoValue_AutoValueWithExtensions$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let StringBuilder = goog.forwardDeclare('java.lang.StringBuilder$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let StringJvmExtensionsKt = goog.forwardDeclare('javaemul.lang.StringJvmExtensionsKt$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
+
+/**
+ * @final
+ */
+class AutoValue__AutoValueWithExtensions extends ______AutoValue__AutoValueWithExtensions {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!AutoValue__AutoValueWithExtensions} */
+ static $create__int__java_lang_String(/** number */ intField, /** ?string */ stringField) {
+  AutoValue__AutoValueWithExtensions.$clinit();
+  let $instance = new AutoValue__AutoValueWithExtensions();
+  $instance.$ctor__autovalue_AutoValue_AutoValueWithExtensions__int__java_lang_String__void(intField, stringField);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__autovalue_AutoValue_AutoValueWithExtensions__int__java_lang_String__void(/** number */ intField, /** ?string */ stringField) {
+  this.$ctor__autovalue____AutoValue_AutoValueWithExtensions__int__java_lang_String__void(intField, stringField);
+ }
+ /** @override @nodts @return {?string} */
+ m_toPrettyString_pp_autovalue__java_lang_String() {
+  return 'AutoValueWithExtensions {' + '\n' + '  intField = ' + this.m_getIntField__int() + ',' + '\n' + '  stringField = ' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(AutoValue__AutoValueWithExtensions.m_format__java_lang_Object__int__java_lang_String(this.m_getStringField__java_lang_String(), 1)) + ',' + '\n' + '}';
+ }
+ /** @nodts @return {?string} */
+ static m_format__java_lang_Object__int__java_lang_String(/** * */ value, /** number */ indentLevel) {
+  AutoValue__AutoValueWithExtensions.$clinit();
+  if ($Equality.$same(value, null)) {
+   return 'null';
+  }
+  return StringJvmExtensionsKt.m_java_replace__java_lang_String__java_lang_CharSequence__java_lang_CharSequence__java_lang_String($Objects.m_toString__java_lang_Object__java_lang_String(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(value)), '\n', '\n' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(AutoValue__AutoValueWithExtensions.m____indent__int__java_lang_String(indentLevel)));
+ }
+ /** @nodts @return {?string} */
+ static m____indent__int__java_lang_String(/** number */ level) {
+  AutoValue__AutoValueWithExtensions.$clinit();
+  let builder = StringBuilder.$create__();
+  let i = 0;
+  while (i < level) {
+   builder.m_append__java_lang_String__java_lang_StringBuilder('  ');
+   i = i + 1 | 0;
+  }
+  return builder.toString();
+ }
+ /** @nodts */
+ static $clinit() {
+  AutoValue__AutoValueWithExtensions.$clinit = () =>{};
+  AutoValue__AutoValueWithExtensions.$loadModules();
+  ______AutoValue__AutoValueWithExtensions.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AutoValue__AutoValueWithExtensions;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  StringBuilder = goog.module.get('java.lang.StringBuilder$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  StringJvmExtensionsKt = goog.module.get('javaemul.lang.StringJvmExtensionsKt$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Objects = goog.module.get('vmbootstrap.Objects$impl');
+ }
+}
+$Util.$setClassMetadata(AutoValue__AutoValueWithExtensions, 'autovalue.AutoValue_AutoValueWithExtensions');
+
+exports = AutoValue__AutoValueWithExtensions;
+
+//# sourceMappingURL=AutoValue_AutoValueWithExtensions.js.map

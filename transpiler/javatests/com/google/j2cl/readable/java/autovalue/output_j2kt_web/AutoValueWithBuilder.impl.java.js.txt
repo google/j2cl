@@ -1,0 +1,52 @@
+goog.module('autovalue.AutoValueWithBuilder$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Builder = goog.forwardDeclare('autovalue.AutoValueWithBuilder.Builder$impl');
+let AutoValue__AutoValueWithBuilder_Builder = goog.forwardDeclare('autovalue.AutoValue_AutoValueWithBuilder.Builder$impl');
+
+/**
+ * @abstract
+ */
+class AutoValueWithBuilder extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__autovalue_AutoValueWithBuilder__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @abstract @nodts @return {boolean} */
+ m_getBooleanField__boolean() {}
+ /** @abstract @nodts @return {?number} */
+ m_getNullableField__java_lang_Double() {}
+ /** @abstract @nodts @return {Builder} */
+ m_toBuilder__autovalue_AutoValueWithBuilder_Builder() {}
+ /** @nodts @return {AutoValueWithBuilder} */
+ static m_create_pp_autovalue__autovalue_AutoValueWithBuilder() {
+  AutoValueWithBuilder.$clinit();
+  return AutoValue__AutoValueWithBuilder_Builder.$create__().m_setBooleanField__boolean__autovalue_AutoValueWithBuilder_Builder(true).m_build__autovalue_AutoValueWithBuilder();
+ }
+ /** @nodts */
+ static $clinit() {
+  AutoValueWithBuilder.$clinit = () =>{};
+  AutoValueWithBuilder.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AutoValueWithBuilder;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  AutoValue__AutoValueWithBuilder_Builder = goog.module.get('autovalue.AutoValue_AutoValueWithBuilder.Builder$impl');
+ }
+}
+$Util.$setClassMetadata(AutoValueWithBuilder, 'autovalue.AutoValueWithBuilder');
+
+exports = AutoValueWithBuilder;
+
+//# sourceMappingURL=AutoValueWithBuilder.js.map
