@@ -54,6 +54,12 @@ public class NativeTopLevel<O> {
   public native int getMethodAsProperty();
 
   @KtProperty
+  public native int getUPPERCASEPREFIXMethodAsProperty();
+
+  @KtProperty
+  public native int getUPPERCASEMETHODASPROPERTY();
+
+  @KtProperty
   public native int nonGetMethodAsProperty();
 
   @KtProperty

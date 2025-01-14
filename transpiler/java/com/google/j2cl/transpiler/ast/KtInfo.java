@@ -15,8 +15,10 @@
  */
 package com.google.j2cl.transpiler.ast;
 
+import static com.google.common.base.Ascii.isUpperCase;
+import static com.google.common.base.Ascii.toLowerCase;
+
 import com.google.auto.value.AutoValue;
-import java.beans.Introspector;
 import javax.annotation.Nullable;
 
 /** Kotlin member information. */
@@ -63,7 +65,7 @@ public abstract class KtInfo {
 
   public static String computePropertyName(String methodName) {
     return startsWithCamelCase(methodName, "get")
-        ? Introspector.decapitalize(methodName.substring(3))
+        ? decapitalize(methodName.substring(3))
         : methodName;
   }
 
@@ -71,5 +73,46 @@ public abstract class KtInfo {
     return string.length() > prefix.length()
         && string.startsWith(prefix)
         && Character.isUpperCase(string.charAt(prefix.length()));
+  }
+
+  /**
+   * Decapitalizes a string, following this convention:
+   *
+   * <ul>
+   *   <li>"FooBar" -> "fooBar"
+   *   <li>"FOOBar" -> "fooBar"
+   *   <li>"FOO" -> "foo"
+   *   <li>"FOO_BAR" -> "foO_BAR"
+   * </ul>
+   */
+  // Based on:
+  // https://github.com/JetBrains/kotlin/blob/master/core/util.runtime/src/org/jetbrains/kotlin/utils/capitalizeDecapitalize.kt#L27
+  // TODO(micapolos): Use Kotlin's utility directly when Kotlin is always linked to the transpiler.
+  private static String decapitalize(String name) {
+    if (name.isEmpty()) {
+      return name;
+    }
+
+    if (!isUpperCase(name.charAt(0))) {
+      return name;
+    }
+
+    char[] chars = name.toCharArray();
+
+    // Lower-case first character.
+    chars[0] = toLowerCase(chars[0]);
+
+    // Lower-case following upper-case characters until the end, or until the last upper-case
+    // character (exclusive).
+    for (int i = 1; i < chars.length; i++) {
+      int i1 = i + 1;
+      if (i1 == chars.length || isUpperCase(chars[i1])) {
+        chars[i] = toLowerCase(chars[i]);
+      } else {
+        break;
+      }
+    }
+
+    return new String(chars);
   }
 }

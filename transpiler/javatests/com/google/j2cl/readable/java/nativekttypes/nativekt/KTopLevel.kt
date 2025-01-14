@@ -55,6 +55,12 @@ open class KTopLevel<O>(o: O) {
   open val methodAsProperty: Int
     get() = 0
 
+  open val uppercaseprefixMethodAsProperty: Int
+    get() = 0
+
+  open val uppercasemethodasproperty: Int
+    get() = 0
+
   open val nonGetMethodAsProperty: Int
     get() = 0
 

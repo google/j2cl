@@ -79,14 +79,16 @@ open class Main {
   val fooStaticField: Any? = KTopLevel.staticField
   KTopLevel.staticField = "foo"
   topLevel!!.nonPublicField = 0
-  val i1: Int = topLevel!!.renamedField
-  val i2: Int = topLevel!!.renamedMethod()
-  val i3: Int = topLevel!!.methodAsProperty
-  val i4: Int = topLevel!!.nonGetMethodAsProperty
-  val i5: Int = topLevel!!.renamedMethodAsProperty
-  val i6: Boolean = topLevel!!.isRenamedField
-  val i7: Boolean = topLevel!!.isMethodAsProperty
-  val i8: Int = topLevel!!.getstartingmethodAsProperty
+  val fieldToRename: Int = topLevel!!.renamedField
+  val methodToRename: Int = topLevel!!.renamedMethod()
+  val methodAsProperty: Int = topLevel!!.methodAsProperty
+  val uppercaseprefixMethodAsProperty: Int = topLevel!!.uppercaseprefixMethodAsProperty
+  val uppercasemethodasproperty: Int = topLevel!!.uppercasemethodasproperty
+  val nonGetMethodAsProperty: Int = topLevel!!.nonGetMethodAsProperty
+  val methodToRenameAsProperty: Int = topLevel!!.renamedMethodAsProperty
+  val isFieldToRename: Boolean = topLevel!!.isRenamedField
+  val isMethodAsProperty: Boolean = topLevel!!.isMethodAsProperty
+  val getstartingmethodAsProperty: Int = topLevel!!.getstartingmethodAsProperty
   topLevel!!.nonPublicMethod()
   val nested: KNested<String?>? = KNested<String?>("foo")
   val nestedInstanceMethod: String? = nested!!.instanceMethod("foo")
@@ -98,9 +100,9 @@ open class Main {
   val nestedAnonynous: KNested<String?>? = object : KNested<String?>("foo") {}
   val inner: KTopLevel<String?>.KInner<String?>? = topLevel!!.KInner<String?>("foo")
   val subclass: Subclass<String?>? = Subclass<String?>("foo")
-  val i9: Int = subclass!!.renamedMethod()
-  val i10: Int = subclass!!.interfaceMethod("foo")
-  val i11: Int = subclass!!.renamedInterfaceMethod("foo")
+  val subclassMethodToRename: Int = subclass!!.renamedMethod()
+  val subclassInterfaceMethod: Int = subclass!!.interfaceMethod("foo")
+  val subclassInterfaceMethodToRename: Int = subclass!!.renamedInterfaceMethod("foo")
   val interfaceAnonymousSubclass: KFunctionalInterface? = object : KFunctionalInterface {
    override fun run() {}
   }
@@ -221,6 +223,16 @@ open class Subclass<V>: KTopLevel<V>, KInterface<V> {
    return super<KTopLevel>.methodAsProperty
   }
 
+ override val uppercaseprefixMethodAsProperty: Int
+  get() {
+   return super<KTopLevel>.uppercaseprefixMethodAsProperty
+  }
+
+ override val uppercasemethodasproperty: Int
+  get() {
+   return super<KTopLevel>.uppercasemethodasproperty
+  }
+
  override val nonGetMethodAsProperty: Int
   get() {
    return super<KTopLevel>.nonGetMethodAsProperty
@@ -276,6 +288,16 @@ open class Subsubclass<V>: Subclass<V> {
  override val methodAsProperty: Int
   get() {
    return super<Subclass>.methodAsProperty
+  }
+
+ override val uppercaseprefixMethodAsProperty: Int
+  get() {
+   return super<Subclass>.uppercaseprefixMethodAsProperty
+  }
+
+ override val uppercasemethodasproperty: Int
+  get() {
+   return super<Subclass>.uppercasemethodasproperty
   }
 
  override val nonGetMethodAsProperty: Int

@@ -37,14 +37,16 @@ public class Main {
     Object fooStaticField = topLevel.staticField;
     topLevel.staticField = "foo";
     topLevel.nonPublicField = 0;
-    int i1 = topLevel.fieldToRename;
-    int i2 = topLevel.methodToRename();
-    int i3 = topLevel.getMethodAsProperty();
-    int i4 = topLevel.nonGetMethodAsProperty();
-    int i5 = topLevel.methodToRenameAsProperty();
-    boolean i6 = topLevel.isFieldToRename;
-    boolean i7 = topLevel.isMethodAsProperty();
-    int i8 = topLevel.getstartingmethodAsProperty();
+    int fieldToRename = topLevel.fieldToRename;
+    int methodToRename = topLevel.methodToRename();
+    int methodAsProperty = topLevel.getMethodAsProperty();
+    int uppercaseprefixMethodAsProperty = topLevel.getUPPERCASEPREFIXMethodAsProperty();
+    int uppercasemethodasproperty = topLevel.getUPPERCASEMETHODASPROPERTY();
+    int nonGetMethodAsProperty = topLevel.nonGetMethodAsProperty();
+    int methodToRenameAsProperty = topLevel.methodToRenameAsProperty();
+    boolean isFieldToRename = topLevel.isFieldToRename;
+    boolean isMethodAsProperty = topLevel.isMethodAsProperty();
+    int getstartingmethodAsProperty = topLevel.getstartingmethodAsProperty();
     topLevel.nonPublicMethod();
 
     NativeTopLevel.Nested<String> nested = new NativeTopLevel.Nested<>("foo");
@@ -60,9 +62,9 @@ public class Main {
     NativeTopLevel<String>.Inner<String> inner = topLevel.new Inner<String>("foo");
 
     Subclass<String> subclass = new Subclass<>("foo");
-    int i9 = subclass.methodToRename();
-    int i10 = subclass.interfaceMethod("foo");
-    int i11 = subclass.interfaceMethodToRename("foo");
+    int subclassMethodToRename = subclass.methodToRename();
+    int subclassInterfaceMethod = subclass.interfaceMethod("foo");
+    int subclassInterfaceMethodToRename = subclass.interfaceMethodToRename("foo");
 
     NativeInterface.NativeFunctionalInterface interfaceAnonymousSubclass =
         new NativeInterface.NativeFunctionalInterface() {
@@ -171,6 +173,16 @@ class Subclass<V> extends NativeTopLevel<V> implements NativeInterface<V> {
   }
 
   @Override
+  public int getUPPERCASEPREFIXMethodAsProperty() {
+    return super.getUPPERCASEPREFIXMethodAsProperty();
+  }
+
+  @Override
+  public int getUPPERCASEMETHODASPROPERTY() {
+    return super.getUPPERCASEMETHODASPROPERTY();
+  }
+
+  @Override
   public int nonGetMethodAsProperty() {
     return super.nonGetMethodAsProperty();
   }
@@ -229,6 +241,16 @@ class Subsubclass<V> extends Subclass<V> {
   @Override
   public int getMethodAsProperty() {
     return super.getMethodAsProperty();
+  }
+
+  @Override
+  public int getUPPERCASEPREFIXMethodAsProperty() {
+    return super.getUPPERCASEPREFIXMethodAsProperty();
+  }
+
+  @Override
+  public int getUPPERCASEMETHODASPROPERTY() {
+    return super.getUPPERCASEMETHODASPROPERTY();
   }
 
   @Override
