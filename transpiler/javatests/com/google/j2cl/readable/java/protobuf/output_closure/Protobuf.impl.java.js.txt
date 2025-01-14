@@ -26,13 +26,24 @@ class Protobuf extends j_l_Object {
  /** @nodts */
  m_test__void() {
   let builder = MyMessage.m_newBuilder__protobuf_MyMessage_Builder();
-  builder.m_setTestField__int__protobuf_MyMessage_Builder(42);
-  builder.m_getTestField__int();
+  builder.m_getFoo__int();
+  builder.m_setFoo__int__protobuf_MyMessage_Builder(1);
+  builder.m_getFooBar__int();
+  builder.m_setFooBar__int__protobuf_MyMessage_Builder(2);
+  builder.m_getX__int();
+  builder.m_setX__int__protobuf_MyMessage_Builder(3);
+  builder.m_getXValue__int();
+  builder.m_setXValue__int__protobuf_MyMessage_Builder(4);
+  builder.m_setXYZ__int__protobuf_MyMessage_Builder(5);
+  builder.m_setXYZValues__int__protobuf_MyMessage_Builder(6);
   let message = builder.m_build__protobuf_MyMessage();
-  message.m_getTestField__int();
-  let chainedMessage = MyMessage.m_newBuilder__protobuf_MyMessage_Builder().m_setTestField__int__protobuf_MyMessage_Builder(1).m_setTestField__int__protobuf_MyMessage_Builder(2).m_build__protobuf_MyMessage();
+  message.m_getFoo__int();
+  message.m_getFooBar__int();
+  message.m_getX__int();
+  message.m_getXValue__int();
+  let chainedMessage = MyMessage.m_newBuilder__protobuf_MyMessage_Builder().m_setFoo__int__protobuf_MyMessage_Builder(1).m_setFooBar__int__protobuf_MyMessage_Builder(2).m_setX__int__protobuf_MyMessage_Builder(3).m_setXValue__int__protobuf_MyMessage_Builder(4).m_setXYZ__int__protobuf_MyMessage_Builder(5).m_setXYZValues__int__protobuf_MyMessage_Builder(6).m_build__protobuf_MyMessage();
   let defaultMessage = MyMessage.m_getDefaultInstance__protobuf_MyMessage();
-  defaultMessage.m_getTestField__int();
+  defaultMessage.m_getFoo__int();
   let parser = message.m_getParserForType__com_google_protobuf_Parser();
   let generatedMessageParser = /**@type {GeneratedMessage}*/ (message).m_getParserForType__com_google_protobuf_Parser();
   let enumOne = MyEnum.f_ONE__protobuf_MyEnum;

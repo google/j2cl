@@ -21,6 +21,20 @@ import com.google.protobuf.Parser;
 import javaemul.internal.annotations.KtNative;
 import org.jspecify.annotations.NullMarked;
 
+/**
+ * Proto message, as if it was generated from:
+ *
+ * <pre>{@code
+ * message MyMessage {
+ *   int32 foo = 1;
+ *   int32 foo_bar = 2;
+ *   int32 x = 3;
+ *   int32 x_value = 4;
+ *   int32 x_y_z = 5;
+ *   int32 x_y_z_values = 6;
+ * }
+ * }</pre>
+ */
 @ProtoNonnullApi
 @KtNative
 @NullMarked
@@ -29,7 +43,27 @@ public class MyMessage extends GeneratedMessage {
     throw new RuntimeException();
   }
 
-  public int getTestField() {
+  public int getFoo() {
+    throw new RuntimeException();
+  }
+
+  public int getFooBar() {
+    throw new RuntimeException();
+  }
+
+  public int getX() {
+    throw new RuntimeException();
+  }
+
+  public int getXValue() {
+    throw new RuntimeException();
+  }
+
+  public int getXYZ() {
+    throw new RuntimeException();
+  }
+
+  public int getXYZValues() {
     throw new RuntimeException();
   }
 
@@ -47,11 +81,51 @@ public class MyMessage extends GeneratedMessage {
 
   @ProtoNonnullApi
   public static class Builder extends GeneratedMessage.Builder {
-    public int getTestField() {
+    public int getFoo() {
       throw new RuntimeException();
     }
 
-    public Builder setTestField(int testField) {
+    public int getFooBar() {
+      throw new RuntimeException();
+    }
+
+    public int getX() {
+      throw new RuntimeException();
+    }
+
+    public int getXValue() {
+      throw new RuntimeException();
+    }
+
+    public int getXYZ() {
+      throw new RuntimeException();
+    }
+
+    public int getXYZValues() {
+      throw new RuntimeException();
+    }
+
+    public Builder setFoo(int foo) {
+      throw new RuntimeException();
+    }
+
+    public Builder setFooBar(int foo) {
+      throw new RuntimeException();
+    }
+
+    public Builder setX(int x) {
+      throw new RuntimeException();
+    }
+
+    public Builder setXValue(int xValue) {
+      throw new RuntimeException();
+    }
+
+    public Builder setXYZ(int xyz) {
+      throw new RuntimeException();
+    }
+
+    public Builder setXYZValues(int xyzValues) {
       throw new RuntimeException();
     }
 

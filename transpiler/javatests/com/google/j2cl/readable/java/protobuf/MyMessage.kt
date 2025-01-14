@@ -18,17 +18,50 @@ package protobuf
 import com.google.protobuf.GeneratedMessage
 import com.google.protobuf.Parser
 
+/**
+ * Proto message, as if it was generated from:
+ * ```
+ * message MyMessage {
+ *   int32 foo = 1;
+ *   int32 foo_bar = 2;
+ *   int32 x = 3;
+ *   int32 x_value = 4;
+ *   int32 x_y_z = 5;
+ *   int32 x_y_z_values = 6;
+ * }
+ * ```
+ */
 class MyMessage : GeneratedMessage() {
   override val parserForType: Parser<MyMessage>
     get() = TODO()
 
-  val testField: Int = TODO()
+  val foo: Int = TODO()
+  val fooBar: Int = TODO()
+  val x: Int = TODO()
+  val xValue: Int = TODO()
+  val xyz: Int = TODO()
+  val xyzValues: Int = TODO()
 
   class Builder : GeneratedMessage.Builder() {
-    var testField: Int = TODO()
+    var foo: Int = TODO()
+    var fooBar: Int = TODO()
+    var x: Int = TODO()
+    var xValue: Int = TODO()
+    var xyz: Int = TODO()
+    var xyzValues: Int = TODO()
 
     // Needed for J2KT
-    fun setTestField(testField: Int): Builder = TODO()
+    fun setFoo(foo: Int): Builder = TODO()
+
+    fun setFooBar(fooBar: Int): Builder = TODO()
+
+    fun setX(x: Int): Builder = TODO()
+
+    fun setXValue(xValue: Int): Builder = TODO()
+
+    fun setXYZ(xyz: Int): Builder = TODO()
+
+    fun setXYZValues(xyzValues: Int): Builder = TODO()
 
     fun build(): MyMessage = TODO()
   }

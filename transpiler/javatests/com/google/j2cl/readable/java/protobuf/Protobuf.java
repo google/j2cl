@@ -23,17 +23,49 @@ import org.jspecify.annotations.NullMarked;
 public class Protobuf {
   public void test() {
     MyMessage.Builder builder = MyMessage.newBuilder();
-    builder.setTestField(42);
 
-    builder.getTestField();
+    builder.getFoo();
+    builder.setFoo(1);
+
+    builder.getFooBar();
+    builder.setFooBar(2);
+
+    builder.getX();
+    builder.setX(3);
+
+    builder.getXValue();
+    builder.setXValue(4);
+
+    // TODO(b/389737605): Uncomment when property is correctly translated to `xyz`.
+    // builder.getXYZ();
+    builder.setXYZ(5);
+
+    // TODO(b/389737605): Uncomment when property is correctly translated to `xyzValues`.
+    // builder.getXYZValues();
+    builder.setXYZValues(6);
 
     MyMessage message = builder.build();
-    message.getTestField();
+    message.getFoo();
+    message.getFooBar();
+    message.getX();
+    message.getXValue();
+    // TODO(b/389737605): Uncomment when property is correctly translated to `xyz`.
+    // message.getXYZ();
+    // TODO(b/389737605): Uncomment when property is correctly translated to `xyzValues`.
+    // message.getXYZValues();
 
-    MyMessage chainedMessage = MyMessage.newBuilder().setTestField(1).setTestField(2).build();
+    MyMessage chainedMessage =
+        MyMessage.newBuilder()
+            .setFoo(1)
+            .setFooBar(2)
+            .setX(3)
+            .setXValue(4)
+            .setXYZ(5)
+            .setXYZValues(6)
+            .build();
 
     MyMessage defaultMessage = MyMessage.getDefaultInstance();
-    defaultMessage.getTestField();
+    defaultMessage.getFoo();
 
     Parser<?> parser = message.getParserForType();
     Parser<? extends GeneratedMessage> generatedMessageParser =
