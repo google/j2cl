@@ -34,10 +34,8 @@ import com.intellij.openapi.util.Disposer
 import java.io.File
 import org.jetbrains.kotlin.backend.common.extensions.IrGenerationExtension
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
-import org.jetbrains.kotlin.backend.jvm.JvmIrCodegenFactory
 import org.jetbrains.kotlin.builtins.DefaultBuiltIns
 import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys.ORIGINAL_MESSAGE_COLLECTOR_KEY
-import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys.PHASE_CONFIG
 import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys.RENDER_DIAGNOSTIC_INTERNAL_NAME
 import org.jetbrains.kotlin.cli.common.arguments.K2JVMCompilerArguments
 import org.jetbrains.kotlin.cli.common.arguments.parseCommandLineArguments
@@ -49,8 +47,6 @@ import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSourceLocation
 import org.jetbrains.kotlin.cli.common.messages.MessageCollector
 import org.jetbrains.kotlin.cli.common.setupCommonArguments
 import org.jetbrains.kotlin.cli.jvm.compiler.EnvironmentConfigFiles
-import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
-import org.jetbrains.kotlin.cli.jvm.compiler.KotlinToJVMBytecodeCompiler
 import org.jetbrains.kotlin.cli.jvm.compiler.NoScopeRecordCliBindingTrace
 import org.jetbrains.kotlin.cli.jvm.compiler.configureSourceRoots
 import org.jetbrains.kotlin.cli.jvm.compiler.pipeline.IncrementalCompilationApi
@@ -68,7 +64,6 @@ import org.jetbrains.kotlin.cli.jvm.configureModuleChunk
 import org.jetbrains.kotlin.cli.jvm.configureStandardLibs
 import org.jetbrains.kotlin.cli.jvm.setupJvmSpecificArguments
 import org.jetbrains.kotlin.codegen.ClassBuilderFactories
-import org.jetbrains.kotlin.codegen.CodegenFactory
 import org.jetbrains.kotlin.codegen.state.GenerationState
 import org.jetbrains.kotlin.config.CommonConfigurationKeys.MESSAGE_COLLECTOR_KEY
 import org.jetbrains.kotlin.config.CommonConfigurationKeys.MODULE_NAME
@@ -80,7 +75,6 @@ import org.jetbrains.kotlin.diagnostics.impl.PendingDiagnosticsCollectorWithSupp
 import org.jetbrains.kotlin.fir.backend.jvm.JvmFir2IrExtensions
 import org.jetbrains.kotlin.fir.descriptors.FirModuleDescriptor
 import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
-import org.jetbrains.kotlin.load.kotlin.ModuleVisibilityManager
 import org.jetbrains.kotlin.metadata.jvm.deserialization.JvmMetadataVersion
 import org.jetbrains.kotlin.metadata.jvm.deserialization.JvmProtoBufUtil
 import org.jetbrains.kotlin.modules.TargetId
@@ -99,12 +93,9 @@ class KotlinParser(private val problems: Problems) {
     val kotlincDisposable = Disposer.newDisposable("J2CL Root Disposable")
     val compilerConfiguration = createCompilerConfiguration(options)
 
-    val compilationUnits =
-      if (compilerConfiguration.getBoolean(USE_FIR)) {
-        parseFilesWithK2(options, compilerConfiguration, kotlincDisposable)
-      } else {
-        parseFilesWithK1(options, compilerConfiguration, kotlincDisposable)
-      }
+    check(compilerConfiguration.getBoolean(USE_FIR)) { "Kotlin/Closure only supports > K2" }
+
+    val compilationUnits = parseFiles(options, compilerConfiguration, kotlincDisposable)
 
     return Library.newBuilder()
       .setCompilationUnits(compilationUnits)
@@ -112,73 +103,7 @@ class KotlinParser(private val problems: Problems) {
       .build()
   }
 
-  private fun parseFilesWithK1(
-    options: FrontendOptions,
-    compilerConfiguration: CompilerConfiguration,
-    disposable: Disposable,
-  ): List<CompilationUnit> {
-    val environment =
-      KotlinCoreEnvironment.createForProduction(
-        disposable,
-        compilerConfiguration,
-        EnvironmentConfigFiles.JVM_CONFIG_FILES,
-      )
-
-    // Override ModuleVisibilityManager to workaround https://youtrack.jetbrains.com/issue/KT-73042
-    // TODO(b/378673045): Remove when the underlying bug from JetBrain is fixed.
-    val unused =
-      environment.projectEnvironment.project.picoContainer.unregisterComponent(
-        ModuleVisibilityManager::class.java.name
-      )
-    environment.projectEnvironment.project.registerService(
-      ModuleVisibilityManager::class.java,
-      J2CLModuleVisibilityManagerImpl(),
-    )
-
-    // Register friend modules so that we do not trigger visibility errors.
-    ModuleVisibilityManager.SERVICE.getInstance(environment.project)
-      .addEligibleFriends(compilerConfiguration)
-
-    // analyze() will return null if it failed analysis phase. Errors should have been collected
-    // into Problems.
-    val analysis = KotlinToJVMBytecodeCompiler.analyze(environment)
-    problems.abortIfHasErrors()
-    checkNotNull(analysis)
-
-    val state =
-      GenerationState.Builder(
-          environment.project,
-          ClassBuilderFactories.THROW_EXCEPTION,
-          analysis.moduleDescriptor,
-          analysis.bindingContext,
-          environment.getSourceFiles(),
-          compilerConfiguration,
-        )
-        .isIrBackend(true)
-        .build()
-
-    val compilationUnitBuilderExtension =
-      createAndRegisterCompilationUnitBuilder(
-        compilerConfiguration,
-        environment.project,
-        state,
-        options,
-      )
-
-    JvmIrCodegenFactory(compilerConfiguration, compilerConfiguration.get(PHASE_CONFIG))
-      .convertToIr(
-        CodegenFactory.IrConversionInput.fromGenerationStateAndFiles(
-          state,
-          environment.getSourceFiles(),
-        )
-      )
-
-    problems.abortIfHasErrors()
-
-    return compilationUnitBuilderExtension.compilationUnits
-  }
-
-  private fun parseFilesWithK2(
+  private fun parseFiles(
     options: FrontendOptions,
     compilerConfiguration: CompilerConfiguration,
     disposable: Disposable,

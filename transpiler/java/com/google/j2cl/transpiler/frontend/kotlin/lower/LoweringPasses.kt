@@ -47,13 +47,11 @@ import org.jetbrains.kotlin.backend.jvm.JvmBackendExtension
 import org.jetbrains.kotlin.backend.jvm.JvmGeneratorExtensionsImpl
 import org.jetbrains.kotlin.backend.jvm.ir.constantValue
 import org.jetbrains.kotlin.codegen.state.GenerationState
-import org.jetbrains.kotlin.config.CommonConfigurationKeys
 import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.ir.ObsoleteDescriptorBasedAPI
 import org.jetbrains.kotlin.ir.backend.js.lower.cleanup.CleanupLowering
 import org.jetbrains.kotlin.ir.backend.js.lower.inline.RemoveInlineDeclarationsWithReifiedTypeParametersLowering
 import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
-import org.jetbrains.kotlin.ir.linkage.IrProvider
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.util.SymbolTable
 import org.jetbrains.kotlin.name.CallableId
@@ -287,21 +285,18 @@ private fun createJvmBackendContext(
   pluginContext: IrPluginContext,
 ): JvmBackendContext {
   var symbolTable = pluginContext.symbolTable as SymbolTable
-  var irProviders = emptyList<IrProvider>()
 
   // TODO(b/374966022): Remove this once we don't rely on IR serialization anymore for inlining.
-  if (compilerConfiguration.getBoolean(CommonConfigurationKeys.USE_FIR)) {
-    // K2 does not populate the symbolTable but it still is used by the IR deserializer to know if
-    // the symbols exists or need to be created. We will manually populate the SymbolTable.
-    symbolTable.populate(pluginContext.irBuiltIns)
-    // During IR deserialization, unbound symbols are created for references to external
-    // declarations that haven't been loaded yet. In the K1 frontend, a stub IrProvider relied on
-    // the descriptor API to load these symbols. However, we cannot reuse this in K2 due to the
-    // removal of the descriptor API. Therefore, we utilize this custom IrProvider, which rely on
-    // the public signature of the nbound symbols and the IR plugin API to resolve IR nodes linked
-    // to the symbols.
-    irProviders = listOf(IrProviderFromPublicSignature(pluginContext))
-  }
+  // K2 does not populate the symbolTable but it still is used by the IR deserializer to know if
+  // the symbols exists or need to be created. We will manually populate the SymbolTable.
+  symbolTable.populate(pluginContext.irBuiltIns)
+  // During IR deserialization, unbound symbols are created for references to external
+  // declarations that haven't been loaded yet. In the K1 frontend, a stub IrProvider relied on
+  // the descriptor API to load these symbols. However, we cannot reuse this in K2 due to the
+  // removal of the descriptor API. Therefore, we utilize this custom IrProvider, which rely on
+  // the public signature of the nbound symbols and the IR plugin API to resolve IR nodes linked
+  // to the symbols.
+  val irProviders = listOf(IrProviderFromPublicSignature(pluginContext))
 
   return JvmBackendContext(
     state,
