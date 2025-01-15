@@ -102,7 +102,7 @@ To setup your first project you can use the sample as template:
 
 ```shell
       $ cp -R <j2cl-repo>/samples/wasm <my-repo>/<app-name>
-      $ mv <my-repo>/<app-name>/WORKSPACE.remote <my-repo>/<app-name>/WORKSPACE
+      $ mv <my-repo>/<app-name>/MODULE.bazel <my-repo>/<app-name>/MODULE.bazel
 ```
 
 and you are done.
