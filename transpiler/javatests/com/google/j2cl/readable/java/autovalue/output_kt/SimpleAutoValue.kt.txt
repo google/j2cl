@@ -68,7 +68,14 @@ abstract class SimpleAutoValue {
  companion object {
   @JvmStatic
   internal fun create_pp_autovalue(): SimpleAutoValue? {
-   return AutoValue_SimpleAutoValue(42, true, "text", java.lang.Double.valueOf(43.0) as Double?, java.lang.Double.valueOf(44.0) as Double?, intArrayOf(45))
+   return AutoValue_SimpleAutoValue(
+    42,
+    true,
+    "text",
+    java.lang.Double.valueOf(43.0) as Double?,
+    java.lang.Double.valueOf(44.0) as Double?,
+    intArrayOf(45),
+   )
   }
 
   @JvmStatic

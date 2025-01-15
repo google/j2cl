@@ -117,8 +117,12 @@ open class DefaultNullable {
   @JvmStatic
   internal fun <N> genericNullableMethod_pp_nullability_defaultnullable(o: DefaultNullable.ParameterizedNullable<N>?, n: N?) {
    o!!.setNullable_pp_nullability_defaultnullable(n)
-   o!!.setNonNull_pp_nullability_defaultnullable(n!!)
-   o!!.setDefaultNullability_pp_nullability_defaultnullable(n as N)
+   o!!.setNonNull_pp_nullability_defaultnullable(
+    n!!,
+   )
+   o!!.setDefaultNullability_pp_nullability_defaultnullable(
+    n as N,
+   )
    o!!.getNullable_pp_nullability_defaultnullable()!!.hashCode()
    o!!.getNonNullable_pp_nullability_defaultnullable().hashCode()
    o!!.getDefaultNullability_pp_nullability_defaultnullable()!!.hashCode()
@@ -149,7 +153,9 @@ open class DefaultNullable {
   @JvmStatic
   internal fun <N> genericDefaultNullabilityMethod_pp_nullability_defaultnullable(o: DefaultNullable.ParameterizedDefaultNullability<N>?, n: N) {
    o!!.setNullable_pp_nullability_defaultnullable(n)
-   o!!.setNonNull_pp_nullability_defaultnullable(n!!)
+   o!!.setNonNull_pp_nullability_defaultnullable(
+    n!!,
+   )
    o!!.setDefaultNullability_pp_nullability_defaultnullable(n)
    o!!.getNullable_pp_nullability_defaultnullable()!!.hashCode()
    o!!.getNonNullable_pp_nullability_defaultnullable().hashCode()
@@ -165,7 +171,9 @@ open class DefaultNullable {
   @JvmStatic
   internal fun parametrizedNullableMethod_pp_nullability_defaultnullable(o: DefaultNullable.ParameterizedNullable<String?>?, s: String?) {
    o!!.setNullable_pp_nullability_defaultnullable(s)
-   o!!.setNonNull_pp_nullability_defaultnullable(s!!)
+   o!!.setNonNull_pp_nullability_defaultnullable(
+    s!!,
+   )
    o!!.setDefaultNullability_pp_nullability_defaultnullable(s)
    o!!.getNullable_pp_nullability_defaultnullable()!!.length
    o!!.getNonNullable_pp_nullability_defaultnullable().length
@@ -197,7 +205,9 @@ open class DefaultNullable {
   @JvmStatic
   internal fun parametrizedDefaultNullabilityMethod_pp_nullability_defaultnullable(o: DefaultNullable.ParameterizedDefaultNullability<String?>?, s: String?) {
    o!!.setNullable_pp_nullability_defaultnullable(s)
-   o!!.setNonNull_pp_nullability_defaultnullable(s!!)
+   o!!.setNonNull_pp_nullability_defaultnullable(
+    s!!,
+   )
    o!!.setDefaultNullability_pp_nullability_defaultnullable(s)
    o!!.getNullable_pp_nullability_defaultnullable()!!.length
    o!!.getNonNullable_pp_nullability_defaultnullable().length

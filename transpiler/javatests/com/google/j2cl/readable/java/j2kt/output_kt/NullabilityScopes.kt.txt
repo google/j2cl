@@ -34,7 +34,9 @@ open class NullabilityScopes {
   open fun testNullMarkedWildcardConstructorRaw(
    @ObjCName("withJ2ktNullabilityScopes_NullMarkedScope_Foo") nullMarkedFoo: NullabilityScopes.NullMarkedScope.Foo<String>
   ) {
-   NullabilityScopes.NullMarkedScope.Foo<Any?>(nullMarkedFoo as NullabilityScopes.NullMarkedScope.Foo<Any?>)
+   NullabilityScopes.NullMarkedScope.Foo<Any?>(
+    nullMarkedFoo as NullabilityScopes.NullMarkedScope.Foo<Any?>,
+   )
   }
 
   @ObjCName("testNullMarkedWildcardConstructorImplicitTypeArguments")
@@ -55,7 +57,9 @@ open class NullabilityScopes {
   open fun testNonNullMarkedWildcardConstructorRaw(
    @ObjCName("withJ2ktNullabilityScopes_NonNullMarkedScope_Foo") nonNullMarkedFoo: NullabilityScopes.NonNullMarkedScope.Foo<String>
   ) {
-   NullabilityScopes.NonNullMarkedScope.Foo<Any?>(nonNullMarkedFoo as NullabilityScopes.NonNullMarkedScope.Foo<Any?>?)
+   NullabilityScopes.NonNullMarkedScope.Foo<Any?>(
+    nonNullMarkedFoo as NullabilityScopes.NonNullMarkedScope.Foo<Any?>?,
+   )
   }
 
   @ObjCName("testNonNullMarkedWildcardConstructorImplicitTypeArguemnts")
@@ -100,28 +104,36 @@ open class NullabilityScopes {
   open fun testNullMarkedWildcardConstructorRaw(
    @ObjCName("withJ2ktNullabilityScopes_NullMarkedScope_Foo") nullMarkedFoo: NullabilityScopes.NullMarkedScope.Foo<String?>?
   ) {
-   NullabilityScopes.NullMarkedScope.Foo<Any?>(nullMarkedFoo!! as NullabilityScopes.NullMarkedScope.Foo<Any?>)
+   NullabilityScopes.NullMarkedScope.Foo<Any?>(
+    nullMarkedFoo!! as NullabilityScopes.NullMarkedScope.Foo<Any?>,
+   )
   }
 
   @ObjCName("testNullMarkedWildcardConstructorImplicitTypeArguments")
   open fun testNullMarkedWildcardConstructorImplicitTypeArguments(
    @ObjCName("withJ2ktNullabilityScopes_NullMarkedScope_Foo") nullMarkedFoo: NullabilityScopes.NullMarkedScope.Foo<String?>?
   ) {
-   NullabilityScopes.NullMarkedScope.Foo<String>(nullMarkedFoo!! as NullabilityScopes.NullMarkedScope.Foo<String>)
+   NullabilityScopes.NullMarkedScope.Foo<String>(
+    nullMarkedFoo!! as NullabilityScopes.NullMarkedScope.Foo<String>,
+   )
   }
 
   @ObjCName("testNullMarkedWildcardConstructorExplicitTypeArguments")
   open fun testNullMarkedWildcardConstructorExplicitTypeArguments(
    @ObjCName("withJ2ktNullabilityScopes_NullMarkedScope_Foo") nullMarkedFoo: NullabilityScopes.NullMarkedScope.Foo<String?>?
   ) {
-   NullabilityScopes.NullMarkedScope.Foo<String>(nullMarkedFoo!! as NullabilityScopes.NullMarkedScope.Foo<String>)
+   NullabilityScopes.NullMarkedScope.Foo<String>(
+    nullMarkedFoo!! as NullabilityScopes.NullMarkedScope.Foo<String>,
+   )
   }
 
   @ObjCName("testNonNullMarkedWildcardConstructorRaw")
   open fun testNonNullMarkedWildcardConstructorRaw(
    @ObjCName("withJ2ktNullabilityScopes_NonNullMarkedScope_Foo") nonNullMarkedFoo: NullabilityScopes.NonNullMarkedScope.Foo<String?>?
   ) {
-   NullabilityScopes.NonNullMarkedScope.Foo<Any?>(nonNullMarkedFoo as NullabilityScopes.NonNullMarkedScope.Foo<Any?>?)
+   NullabilityScopes.NonNullMarkedScope.Foo<Any?>(
+    nonNullMarkedFoo as NullabilityScopes.NonNullMarkedScope.Foo<Any?>?,
+   )
   }
 
   @ObjCName("testNonNullMarkedWildcardConstructorImplicitTypeArguments")

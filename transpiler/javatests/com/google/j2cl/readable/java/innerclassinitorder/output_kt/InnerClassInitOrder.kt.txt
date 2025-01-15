@@ -202,12 +202,14 @@ open class InnerClassInitOrder {
  }
 
  @ObjCName("J2ktInnerclassinitorderInnerClassInitOrder_OuterRefFromSuperCtorCall", exact = true)
- open inner class OuterRefFromSuperCtorCall constructor(): InnerClassInitOrder.OuterRefFromSuperCtorBase(object : Any() {
-  override fun hashCode(): Int {
-   this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + 100
-   return 0
-  }
- })
+ open inner class OuterRefFromSuperCtorCall constructor(): InnerClassInitOrder.OuterRefFromSuperCtorBase(
+  object : Any() {
+   override fun hashCode(): Int {
+    this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + 100
+    return 0
+   }
+  },
+ )
 
  @ObjCName("J2ktInnerclassinitorderInnerClassInitOrder_OuterRefFromThisCtorCall", exact = true)
  open inner class OuterRefFromThisCtorCall: InnerClassInitOrder.OuterRefFromSuperCtorBase {
@@ -215,12 +217,14 @@ open class InnerClassInitOrder {
    @ObjCName("Id") `object`: Any?
   ): super(`object`)
 
-  constructor(): this(object : Any() {
-   override fun hashCode(): Int {
-    this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + 1000
-    return 0
-   }
-  })
+  constructor(): this(
+   object : Any() {
+    override fun hashCode(): Int {
+     this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + 1000
+     return 0
+    }
+   },
+  )
  }
 
  @ObjCName("J2ktInnerclassinitorderInnerClassInitOrder_InnerClass", exact = true)

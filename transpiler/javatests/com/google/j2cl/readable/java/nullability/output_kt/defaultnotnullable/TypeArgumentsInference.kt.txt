@@ -47,7 +47,9 @@ open class TypeArgumentsInference {
   @JvmStatic
   @ObjCName("wildcardPairAndIdentity")
   fun <K> wildcardPairAndIdentity(): TypeArgumentsInference.Pair<K, *> {
-   return TypeArgumentsInference.pairIdentity<K, Any>(TypeArgumentsInference.wildcardPair<K>() as TypeArgumentsInference.Pair<K, Any>)
+   return TypeArgumentsInference.pairIdentity<K, Any>(
+    TypeArgumentsInference.wildcardPair<K>() as TypeArgumentsInference.Pair<K, Any>,
+   )
   }
  }
 

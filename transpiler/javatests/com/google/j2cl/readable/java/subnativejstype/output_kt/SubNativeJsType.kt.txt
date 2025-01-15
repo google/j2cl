@@ -40,7 +40,9 @@ open class SubNativeJsType: MyNativeJsType {
  @JsConstructor
  constructor(
   @ObjCName("Int") x: Int
- ): super(x + 1)
+ ): super(
+  x + 1,
+ )
 
  constructor(): this(10)
 }

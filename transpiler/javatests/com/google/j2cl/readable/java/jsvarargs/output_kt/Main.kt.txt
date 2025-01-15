@@ -73,39 +73,86 @@ open class Main {
   Main.f1(1, 1, 2)
   Main.f1(1)
   Main.f1(1)
-  Main.f1(1, *intArrayOf(1, 2)!!)
-  Main.f1(1, *intArrayOf(1, 2)!!)
-  Main.f1(1, *intArrayOf()!!)
-  Main.f1(1, *intArrayOf()!!)
+  Main.f1(
+   1,
+   *intArrayOf(1, 2)!!,
+  )
+  Main.f1(
+   1,
+   *intArrayOf(1, 2)!!,
+  )
+  Main.f1(
+   1,
+   *intArrayOf()!!,
+  )
+  Main.f1(
+   1,
+   *intArrayOf()!!,
+  )
   val ints: IntArray? = intArrayOf(1, 2)
-  Main.f1(1, *ints!!)
-  Main.f1(1, *ints!!)
-  Main.f1(1, *null!!)
+  Main.f1(
+   1,
+   *ints!!,
+  )
+  Main.f1(
+   1,
+   *ints!!,
+  )
+  Main.f1(
+   1,
+   *null!!,
+  )
  }
 
  @ObjCName("testStaticMethodFirst")
  open fun testStaticMethodFirst() {
   Main.f2(1, 2)
-  Main.generics<Int?>(Integer.valueOf(1), Integer.valueOf(2))
+  Main.generics<Int?>(
+   Integer.valueOf(1),
+   Integer.valueOf(2),
+  )
   Main.f2(1, 2)
-  Main.generics<Int?>(Integer.valueOf(1), Integer.valueOf(2))
+  Main.generics<Int?>(
+   Integer.valueOf(1),
+   Integer.valueOf(2),
+  )
   Main.f2()
   Main.generics<Any?>()
   Main.f2()
   Main.generics<Any?>()
   Main.generics<Int?>()
-  Main.f2(*intArrayOf(1, 2)!!)
-  Main.f2(*intArrayOf(1, 2)!!)
-  Main.generics<IntArray?>(intArrayOf(1, 2))
-  Main.generics<Int?>(*arrayOf<Int?>(Integer.valueOf(1), Integer.valueOf(2))!!)
-  Main.f2(*intArrayOf()!!)
-  Main.f2(*intArrayOf()!!)
-  Main.generics<IntArray?>(intArrayOf())
+  Main.f2(
+   *intArrayOf(1, 2)!!,
+  )
+  Main.f2(
+   *intArrayOf(1, 2)!!,
+  )
+  Main.generics<IntArray?>(
+   intArrayOf(1, 2),
+  )
+  Main.generics<Int?>(
+   *arrayOf<Int?>(Integer.valueOf(1), Integer.valueOf(2))!!,
+  )
+  Main.f2(
+   *intArrayOf()!!,
+  )
+  Main.f2(
+   *intArrayOf()!!,
+  )
+  Main.generics<IntArray?>(
+   intArrayOf(),
+  )
   val ints: IntArray? = intArrayOf(1, 2)
   val integers: Array<Int?>? = arrayOf<Int?>(Integer.valueOf(1), Integer.valueOf(2))
-  Main.f2(*ints!!)
-  Main.f2(*ints!!)
-  Main.generics<Int?>(*integers!!)
+  Main.f2(
+   *ints!!,
+  )
+  Main.f2(
+   *ints!!,
+  )
+  Main.generics<Int?>(
+   *integers!!,
+  )
  }
 
  @ObjCName("testInstanceMethodNotFirst")
@@ -113,10 +160,19 @@ open class Main {
   val m: Main? = Main(1)
   m!!.f3(1, 1, 2)
   m!!.f3(1)
-  m!!.f3(1, *intArrayOf(1, 2)!!)
-  m!!.f3(1, *intArrayOf()!!)
+  m!!.f3(
+   1,
+   *intArrayOf(1, 2)!!,
+  )
+  m!!.f3(
+   1,
+   *intArrayOf()!!,
+  )
   val ints: IntArray? = intArrayOf(1, 2)
-  m!!.f3(1, *ints!!)
+  m!!.f3(
+   1,
+   *ints!!,
+  )
  }
 
  @ObjCName("testInstanceMethodFirst")
@@ -124,10 +180,16 @@ open class Main {
   val m: Main? = Main(1)
   m!!.f4(1, 2)
   m!!.f4()
-  m!!.f4(*intArrayOf(1, 2)!!)
-  m!!.f4(*intArrayOf()!!)
+  m!!.f4(
+   *intArrayOf(1, 2)!!,
+  )
+  m!!.f4(
+   *intArrayOf()!!,
+  )
   val ints: IntArray? = intArrayOf(1, 2)
-  m!!.f4(*ints!!)
+  m!!.f4(
+   *ints!!,
+  )
  }
 
  @ObjCName("testJsFunction")
@@ -137,22 +199,36 @@ open class Main {
   val o2: Any? = Any()
   a!!.f1(0, o1, o2)
   a!!.f1(0)
-  a!!.f1(0, *arrayOf<Any?>(o1, o2)!!)
-  a!!.f1(0, *arrayOf<Any?>()!!)
+  a!!.f1(
+   0,
+   *arrayOf<Any?>(o1, o2)!!,
+  )
+  a!!.f1(
+   0,
+   *arrayOf<Any?>()!!,
+  )
   val os: Array<Any?>? = arrayOf<Any?>(o1, o2)
-  a!!.f1(0, *os!!)
+  a!!.f1(
+   0,
+   *os!!,
+  )
  }
 
  @ObjCName("testSideEffect")
  open fun testSideEffect() {
   val ints: IntArray? = intArrayOf(1, 2)
-  Main(1).f3(1, *ints!!)
+  Main(1).f3(
+   1,
+   *ints!!,
+  )
  }
 
  @ObjCName("testNullJsVarargs")
  open fun testNullJsVarargs() {
   val ints: IntArray? = null
-  Main.f2(*ints!!)
+  Main.f2(
+   *ints!!,
+  )
  }
 
  @ObjCName("testGenericJsFunctionWithVarags")
@@ -229,7 +305,9 @@ open class Main {
   constructor(
    @ObjCName("Int") i: Int,
    vararg @ObjCName("withNSObjectArray") args: Any?
-  ): super(*(args as Array<Any?>?)!!) {
+  ): super(
+   *(args as Array<Any?>?)!!,
+  ) {
    val args_1: Array<Any?>? = args as Array<Any?>?
   }
  }
@@ -281,10 +359,19 @@ open class Main {
   override fun f3(m: Int, vararg numbers: Int): Int {
    var a: Int = super<Main>.f3(1, 1, 2)
    a = a + super<Main>.f3(1)
-   a = a + super<Main>.f3(1, *intArrayOf(1, 2)!!)
-   a = a + super<Main>.f3(1, *intArrayOf()!!)
+   a = a + super<Main>.f3(
+    1,
+    *intArrayOf(1, 2)!!,
+   )
+   a = a + super<Main>.f3(
+    1,
+    *intArrayOf()!!,
+   )
    val ints: IntArray? = intArrayOf(1, 2)
-   a = a + super<Main>.f3(1, *ints!!)
+   a = a + super<Main>.f3(
+    1,
+    *ints!!,
+   )
    return a
   }
  }

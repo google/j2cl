@@ -62,7 +62,9 @@ abstract class ___AutoValue_AutoValueWithExtensions: AutoValueWithExtensions {
   }
   if (o is AutoValueWithExtensions) {
    val that: AutoValueWithExtensions? = o as AutoValueWithExtensions?
-   return this.intField == that!!.getIntField() && this.stringField!!.equals(that!!.getStringField())
+   return this.intField == that!!.getIntField() && this.stringField!!.equals(
+    that!!.getStringField(),
+   )
   }
   return false
  }
@@ -70,9 +72,13 @@ abstract class ___AutoValue_AutoValueWithExtensions: AutoValueWithExtensions {
  override fun hashCode(): Int {
   var h___: Int = 1
   h___ = h___ * 1000003
-  h___ = h___.xor(this.intField)
+  h___ = h___.xor(
+   this.intField,
+  )
   h___ = h___ * 1000003
-  h___ = h___.xor(this.stringField!!.hashCode())
+  h___ = h___.xor(
+   this.stringField!!.hashCode(),
+  )
   return h___
  }
 }

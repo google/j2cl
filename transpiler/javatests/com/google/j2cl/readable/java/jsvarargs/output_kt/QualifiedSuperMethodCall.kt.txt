@@ -37,10 +37,19 @@ open class QualifiedSuperMethodCall: Main {
   open fun test() {
    super<Main>@QualifiedSuperMethodCall.f3(1, 1, 2)
    super<Main>@QualifiedSuperMethodCall.f3(1)
-   super<Main>@QualifiedSuperMethodCall.f3(1, *intArrayOf(1, 2)!!)
-   super<Main>@QualifiedSuperMethodCall.f3(1, *intArrayOf()!!)
+   super<Main>@QualifiedSuperMethodCall.f3(
+    1,
+    *intArrayOf(1, 2)!!,
+   )
+   super<Main>@QualifiedSuperMethodCall.f3(
+    1,
+    *intArrayOf()!!,
+   )
    val ints: IntArray? = intArrayOf(1, 2)
-   super<Main>@QualifiedSuperMethodCall.f3(1, *ints!!)
+   super<Main>@QualifiedSuperMethodCall.f3(
+    1,
+    *ints!!,
+   )
   }
  }
 }

@@ -51,7 +51,9 @@ open class ImplicitParenthesis {
    primitiveInt = 5
    boxedInt = Int(10)
    primitiveInt = run {
-    boxedInt = Integer.valueOf(boxedInt!!.toInt() + primitiveInt)
+    boxedInt = Integer.valueOf(
+     boxedInt!!.toInt() + primitiveInt,
+    )
     boxedInt
    }!!.toInt()
    assert(primitiveInt == 15)
@@ -66,14 +68,18 @@ open class ImplicitParenthesis {
    boxedInt = Int(10)
    primitiveInt = run {
     val ___value: Int? = boxedInt
-    boxedInt = Integer.valueOf(boxedInt!!.toInt() + 1)
+    boxedInt = Integer.valueOf(
+     boxedInt!!.toInt() + 1,
+    )
     ___value
    }!!.toInt()
    assert(primitiveInt == 10)
    primitiveInt = 5
    boxedInt = Int(10)
    primitiveInt = run {
-    boxedInt = Integer.valueOf(boxedInt!!.toInt() + 1)
+    boxedInt = Integer.valueOf(
+     boxedInt!!.toInt() + 1,
+    )
     boxedInt
    }!!.toInt()
    assert(primitiveInt == 11)
@@ -91,13 +97,17 @@ open class ImplicitParenthesis {
    primitiveInt = 5
    boxedInt = Int(10)
    boxedBoolean = java.lang.Boolean.valueOf(true)
-   boxedBoolean = java.lang.Boolean.valueOf(boxedInt!!.toInt() == primitiveInt)
+   boxedBoolean = java.lang.Boolean.valueOf(
+    boxedInt!!.toInt() == primitiveInt,
+   )
    assert(boxedBoolean!!.booleanValue() == false)
   }
 
   @JvmStatic
   private fun parenthesisRemoval() {
-   Int(1 + 2)
+   Int(
+    1 + 2,
+   )
   }
  }
 }

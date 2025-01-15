@@ -32,14 +32,17 @@ import kotlin.native.ObjCName
 @ObjCName("J2ktJ2ktNullabilityCasts", exact = true)
 open class NullabilityCasts {
  internal open fun testCapturesInLambdas_pp_j2kt(condition: Boolean, async: NullabilityCasts.Async<String?>) {
-  NullabilityCasts.tranformAsync_pp_j2kt<String?, String?>(async, NullabilityCasts.AsyncFunction { it: String? ->
-   if (condition) {
-    return@AsyncFunction async as NullabilityCasts.Async<String?>
-   } else {
-    return@AsyncFunction async as NullabilityCasts.Async<String?>
-   }
-   throw AssertionError("Unreachable")
-  })
+  NullabilityCasts.tranformAsync_pp_j2kt<String?, String?>(
+   async,
+   NullabilityCasts.AsyncFunction { it: String? ->
+    if (condition) {
+     return@AsyncFunction async as NullabilityCasts.Async<String?>
+    } else {
+     return@AsyncFunction async as NullabilityCasts.Async<String?>
+    }
+    throw AssertionError("Unreachable")
+   },
+  )
  }
 
  @ObjCName("J2ktJ2ktNullabilityCastsCompanion", exact = true)

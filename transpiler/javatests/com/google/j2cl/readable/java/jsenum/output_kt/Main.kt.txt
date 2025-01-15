@@ -71,22 +71,30 @@ open class Main {
     Main.StringJsEnum.ONE -> {}
     else -> {}
    }
-   Main.NativeStringEnum.ONE.compareTo(Main.NativeStringEnum.THREE)
-   Main.NativeStringEnum.ONE.equals(Main.NativeStringEnum.THREE)
+   Main.NativeStringEnum.ONE.compareTo(
+    Main.NativeStringEnum.THREE,
+   )
+   Main.NativeStringEnum.ONE.equals(
+    Main.NativeStringEnum.THREE,
+   )
    val supplier: Main.Supplier<Main.ComparableJsEnum?>? = Main.Supplier<Main.ComparableJsEnum?> {
     return@Supplier Main.ComparableJsEnum.ONE
    }
    val consummer: Main.Consumer<Main.ComparableJsEnum?>? = Main.Consumer<Main.ComparableJsEnum?> { e: Main.ComparableJsEnum? ->
     e!!.ordinal
    }
-   Main.acceptsJsFunctionSupplier(Main.JsFunctionSuppiler<Main.ComparableJsEnum?> {
-    return@JsFunctionSuppiler Main.ComparableJsEnum.ONE
-   })
-   Main.acceptsSupplierOfSupplier(Main.Supplier<Main.Supplier<Main.ComparableJsEnum?>?> {
-    return@Supplier Main.Supplier<Main.ComparableJsEnum?> {
-     return@Supplier Main.ComparableJsEnum.ONE
-    }
-   })
+   Main.acceptsJsFunctionSupplier(
+    Main.JsFunctionSuppiler<Main.ComparableJsEnum?> {
+     return@JsFunctionSuppiler Main.ComparableJsEnum.ONE
+    },
+   )
+   Main.acceptsSupplierOfSupplier(
+    Main.Supplier<Main.Supplier<Main.ComparableJsEnum?>?> {
+     return@Supplier Main.Supplier<Main.ComparableJsEnum?> {
+      return@Supplier Main.ComparableJsEnum.ONE
+     }
+    },
+   )
   }
 
   @JvmStatic
@@ -96,23 +104,47 @@ open class Main {
    val jsEnum: Main.ComparableJsEnum? = Main.ComparableJsEnum.ONE
    val nullJsEnum: Main.ComparableJsEnum? = null
    val o: Any? = Main.ComparableJsEnum.ONE
-   Main.StringJsEnum.ONE.equals(Main.StringJsEnum.THREE)
+   Main.StringJsEnum.ONE.equals(
+    Main.StringJsEnum.THREE,
+   )
    Main.StringJsEnum.ONE.equals(stringJsEnum)
    Main.StringJsEnum.ONE.equals(nullStringJsEnum)
    Main.StringJsEnum.ONE.equals(null)
    Main.StringJsEnum.ONE.equals(o)
-   o!!.equals(Main.StringJsEnum.THREE)
-   Main.ComparableJsEnum.ONE.compareTo(Main.ComparableJsEnum.ZERO)
-   Main.ComparableJsEnum.ONE.compareTo(null!!)
-   Main.ComparableJsEnum.ONE.equals(Main.ComparableJsEnum.ZERO)
+   o!!.equals(
+    Main.StringJsEnum.THREE,
+   )
+   Main.ComparableJsEnum.ONE.compareTo(
+    Main.ComparableJsEnum.ZERO,
+   )
+   Main.ComparableJsEnum.ONE.compareTo(
+    null!!,
+   )
+   Main.ComparableJsEnum.ONE.equals(
+    Main.ComparableJsEnum.ZERO,
+   )
    Main.ComparableJsEnum.ONE.equals(jsEnum)
    Main.ComparableJsEnum.ONE.equals(nullJsEnum)
    Main.ComparableJsEnum.ONE.equals(null)
    Main.ComparableJsEnum.ONE.equals(o)
-   o!!.equals(Main.ComparableJsEnum.ZERO)
+   o!!.equals(
+    Main.ComparableJsEnum.ZERO,
+   )
    Main.StringJsEnum.ONE.equals(jsEnum)
-   Main.boxingPassthrough<Main.ComparableJsEnum?>(Main.ComparableJsEnum.ONE)!!.equals(Main.boxingPassthrough<Main.ComparableJsEnum?>(Main.ComparableJsEnum.ONE))
-   Main.boxingPassthrough<Main.ComparableJsEnum?>(Main.ComparableJsEnum.ONE)!!.equals(Main.boxingPassthrough<Main.StringJsEnum?>(Main.StringJsEnum.ONE))
+   Main.boxingPassthrough<Main.ComparableJsEnum?>(
+    Main.ComparableJsEnum.ONE,
+   )!!.equals(
+    Main.boxingPassthrough<Main.ComparableJsEnum?>(
+     Main.ComparableJsEnum.ONE,
+    ),
+   )
+   Main.boxingPassthrough<Main.ComparableJsEnum?>(
+    Main.ComparableJsEnum.ONE,
+   )!!.equals(
+    Main.boxingPassthrough<Main.StringJsEnum?>(
+     Main.StringJsEnum.ONE,
+    ),
+   )
   }
 
   @JvmStatic
@@ -125,7 +157,9 @@ open class Main {
   private fun testReturnsAndParameters() {
    val returnedValue: Main.ComparableJsEnum? = Main.returnsJsEnum()
    val returnedNullValue: Main.ComparableJsEnum? = Main.returnsNullJsEnum()
-   Main.takesJsEnum(Main.ComparableJsEnum.ONE)
+   Main.takesJsEnum(
+    Main.ComparableJsEnum.ONE,
+   )
   }
 
   @JvmStatic
@@ -143,13 +177,19 @@ open class Main {
 
   @JvmStatic
   private fun testBoxUnboxWithTypeInference() {
-   val templatedField: Main.TemplatedField<Main.ComparableJsEnum?>? = Main.TemplatedField<Main.ComparableJsEnum?>(Main.ComparableJsEnum.ONE)
+   val templatedField: Main.TemplatedField<Main.ComparableJsEnum?>? = Main.TemplatedField<Main.ComparableJsEnum?>(
+    Main.ComparableJsEnum.ONE,
+   )
    var unboxed: Main.ComparableJsEnum? = templatedField!!.getValue_pp_jsenum()
    unboxed = templatedField!!.value_pp_jsenum
    templatedField!!.value_pp_jsenum = Main.ComparableJsEnum.ONE
-   Arrays.asList<Main.ComparableJsEnum>(Main.ComparableJsEnum.ONE)
+   Arrays.asList<Main.ComparableJsEnum>(
+    Main.ComparableJsEnum.ONE,
+   )
    templatedField!!.getValue_pp_jsenum()!!.ordinal
-   val b: Boolean = Main.ComparableJsEnum.ONE === Main.boxingPassthrough<Main.ComparableJsEnum?>(Main.ComparableJsEnum.ONE)
+   val b: Boolean = Main.ComparableJsEnum.ONE === Main.boxingPassthrough<Main.ComparableJsEnum?>(
+    Main.ComparableJsEnum.ONE,
+   )
   }
 
   @JvmStatic
@@ -159,7 +199,11 @@ open class Main {
 
   @JvmStatic
   internal fun boxingWithGenerics_pp_jsenum() {
-   Main.Foo<Any?>(Optional.of<Main.IntJsEnum>(Main.IntJsEnum.MINUSONE) as Optional<Main.IntJsEnum>?)
+   Main.Foo<Any?>(
+    Optional.of<Main.IntJsEnum>(
+     Main.IntJsEnum.MINUSONE,
+    ) as Optional<Main.IntJsEnum>?,
+   )
   }
 
   @JvmStatic
@@ -170,7 +214,10 @@ open class Main {
 
   @JvmStatic
   private fun testVarargs() {
-   Main.varargsConsumer<Main.SomeJsEnum?>(Main.SomeJsEnum.A, Main.SomeJsEnum.A)
+   Main.varargsConsumer<Main.SomeJsEnum?>(
+    Main.SomeJsEnum.A,
+    Main.SomeJsEnum.A,
+   )
    val consumer: Main.Consumer<Main.SomeJsEnum?>? = Main.Consumer<Main.SomeJsEnum?> { arg0: Main.SomeJsEnum? ->
     Main.varargsConsumer<Main.SomeJsEnum?>(arg0)
    }
@@ -192,9 +239,18 @@ open class Main {
    arrayWithNull!![0] = null
    val list: MutableList<Main.IntJsEnum?>? = ArrayList<Main.IntJsEnum>() as MutableList<Main.IntJsEnum?>?
    obj = list!!.toArray()
-   Main.nonNativeJsEnumVarargs(Main.IntJsEnum.MINUSONE, Main.IntJsEnum.TWENTY)
-   Main.nonNativeJsEnumArrayVarargs(arrayOf<Main.IntJsEnum?>(Main.IntJsEnum.MINUSONE), arrayOf<Main.IntJsEnum?>(Main.IntJsEnum.TWENTY))
-   Main.tVarargs<Main.IntJsEnum?>(Main.IntJsEnum.MINUSONE, Main.IntJsEnum.TWENTY)
+   Main.nonNativeJsEnumVarargs(
+    Main.IntJsEnum.MINUSONE,
+    Main.IntJsEnum.TWENTY,
+   )
+   Main.nonNativeJsEnumArrayVarargs(
+    arrayOf<Main.IntJsEnum?>(Main.IntJsEnum.MINUSONE),
+    arrayOf<Main.IntJsEnum?>(Main.IntJsEnum.TWENTY),
+   )
+   Main.tVarargs<Main.IntJsEnum?>(
+    Main.IntJsEnum.MINUSONE,
+    Main.IntJsEnum.TWENTY,
+   )
   }
 
   @JvmStatic
@@ -430,7 +486,10 @@ open class Main {
 
  @ObjCName("J2ktJsenumMain_SubtypeVarargs", exact = true)
  open class SubtypeVarargs: Main.BaseVarargs<Main.SomeJsEnum?> {
-  internal constructor(): super(Main.SomeJsEnum.A, Main.SomeJsEnum.A)
+  internal constructor(): super(
+   Main.SomeJsEnum.A,
+   Main.SomeJsEnum.A,
+  )
  }
 
  @ObjCName("J2ktJsenumMain_SubtypeImplicitVarargs", exact = true)

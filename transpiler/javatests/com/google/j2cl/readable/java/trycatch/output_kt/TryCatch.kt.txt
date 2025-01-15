@@ -153,7 +153,9 @@ open class TryCatch {
  @ObjCName("testThrowGenerics")
  @Throws(Throwable::class)
  open fun testThrowGenerics() {
-  throw this.getT<Exception?>(java.lang.Exception())!!
+  throw this.getT<Exception?>(
+   java.lang.Exception(),
+  )!!
  }
 
  private fun <T> getT(t: T): T {

@@ -85,8 +85,12 @@ open class IntersectionTypeTest<U> {
  @ObjCName("testMethodCall")
  open fun testMethodCall() {
   val o: Any? = IntersectionTypeTest.m()
-  IntersectionTypeTest.set(o.let { it as IntersectionTypeTest.A?; it as IntersectionTypeTest.EmptyA?; it })
-  IntersectionTypeTest.set(IntersectionTypeTest.m())
+  IntersectionTypeTest.set(
+   o.let { it as IntersectionTypeTest.A?; it as IntersectionTypeTest.EmptyA?; it },
+  )
+  IntersectionTypeTest.set(
+   IntersectionTypeTest.m(),
+  )
   val g: Getable<*>? = IntersectionTypeTest.n() as Getable<Any?>?
  }
 
@@ -169,7 +173,9 @@ open class IntersectionTypeTest<U> {
 
   @JvmStatic
   private fun <T> m(): T where T: IntersectionTypeTest.A?, T: IntersectionTypeTest.EmptyA? {
-   return IntersectionTypeTest.get<Any?>(Any()) as T? as T
+   return IntersectionTypeTest.get<Any?>(
+    Any(),
+   ) as T? as T
   }
 
   @JvmStatic

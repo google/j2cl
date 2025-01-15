@@ -61,40 +61,55 @@ open class Lambdas {
 
  @ObjCName("testLambdaExpressionStyle")
  open fun testLambdaExpressionStyle() {
-  this.call(Lambdas.FunctionalInterface { i: Int ->
-   return@FunctionalInterface i + 1
-  }, 10)
+  this.call(
+   Lambdas.FunctionalInterface { i: Int ->
+    return@FunctionalInterface i + 1
+   },
+   10,
+  )
  }
 
  @ObjCName("testLambdaBlockStyle")
  open fun testLambdaBlockStyle() {
-  this.call(Lambdas.FunctionalInterface { i: Int ->
-   return@FunctionalInterface i + 2
-  }, 10)
+  this.call(
+   Lambdas.FunctionalInterface { i: Int ->
+    return@FunctionalInterface i + 2
+   },
+   10,
+  )
  }
 
  @ObjCName("testLambdaCaptureField")
  open fun testLambdaCaptureField() {
-  this.call(Lambdas.FunctionalInterface { i: Int ->
-   return@FunctionalInterface this.field + i + 1
-  }, 10)
+  this.call(
+   Lambdas.FunctionalInterface { i: Int ->
+    return@FunctionalInterface this.field + i + 1
+   },
+   10,
+  )
  }
 
  @ObjCName("testLambdaCaptureLocal")
  open fun testLambdaCaptureLocal() {
   val x: Int = 1
-  this.call(Lambdas.FunctionalInterface { i: Int ->
-   return@FunctionalInterface x + i + 1
-  }, 10)
+  this.call(
+   Lambdas.FunctionalInterface { i: Int ->
+    return@FunctionalInterface x + i + 1
+   },
+   10,
+  )
  }
 
  @ObjCName("testLambdaCaptureFieldAndLocal")
  open fun testLambdaCaptureFieldAndLocal() {
   val x: Int = 1
-  this.call(Lambdas.FunctionalInterface { i: Int ->
-   val y: Int = 1
-   return@FunctionalInterface x + y + this.field + i + 1
-  }, 10)
+  this.call(
+   Lambdas.FunctionalInterface { i: Int ->
+    val y: Int = 1
+    return@FunctionalInterface x + y + this.field + i + 1
+   },
+   10,
+  )
  }
 
  @ObjCName("funOuter")
@@ -102,28 +117,40 @@ open class Lambdas {
 
  @ObjCName("testLambdaCallOuterFunction")
  open fun testLambdaCallOuterFunction() {
-  this.call(Lambdas.FunctionalInterface { i: Int ->
-   this.funOuter()
-   this.funOuter()
-   this@Lambdas.funOuter()
-   return@FunctionalInterface i + 2
-  }, 10)
+  this.call(
+   Lambdas.FunctionalInterface { i: Int ->
+    this.funOuter()
+    this.funOuter()
+    this@Lambdas.funOuter()
+    return@FunctionalInterface i + 2
+   },
+   10,
+  )
  }
 
  @ObjCName("testNestedLambdas")
  open fun testNestedLambdas() {
-  this.call(Lambdas.FunctionalInterface { i: Int ->
-   return@FunctionalInterface this.call(Lambdas.FunctionalInterface { j: Int ->
-    return@FunctionalInterface j
-   }, 20)
-  }, 10)
+  this.call(
+   Lambdas.FunctionalInterface { i: Int ->
+    return@FunctionalInterface this.call(
+     Lambdas.FunctionalInterface { j: Int ->
+      return@FunctionalInterface j
+     },
+     20,
+    )
+   },
+   10,
+  )
  }
 
  @ObjCName("testReturnLabelNameConflictKotlin")
  open fun testReturnLabelNameConflictKotlin() {
-  this.call(Lambdas.FunctionalInterface { i: Int ->
-   return@FunctionalInterface i
-  }, 10)
+  this.call(
+   Lambdas.FunctionalInterface { i: Int ->
+    return@FunctionalInterface i
+   },
+   10,
+  )
  }
 
  @ObjCName("testInstanceMethodTypeVariableThroughLambda")
@@ -159,21 +186,34 @@ open class Lambdas {
 
  @ObjCName("testLambdaWithGenerics")
  open fun <T: Enum<T>> testLambdaWithGenerics() {
-  this.callWithTypeVariable<Error?>(Lambdas.GenericFunctionalInterface<Error?> { i: Error? ->
-   return@GenericFunctionalInterface i
-  }, java.lang.Error())
-  this.callParameterized(Lambdas.GenericFunctionalInterface<Error?> { i_1: Error? ->
-   return@GenericFunctionalInterface i_1
-  }, java.lang.Error())
-  Lambdas.callTypeVariableWithBounds<T>(Lambdas.GenericFunctionalInterface<Enum<T>?> { i_2: Enum<T>? ->
-   return@GenericFunctionalInterface i_2
-  }, null as Enum<T>?)
-  this.callWithBiFunction_pp_lambdas<Any?>(Lambdas.BiFunction<Any?, String?, Double?> { x: Any?, y: String? ->
-   throw RuntimeException()
-  })
-  this.callWithBiFunction_pp_lambdas<Any?>(Lambdas.BiFunction<Any?, String?, Double?> { x_1: Any?, y_1: String? ->
-   return@BiFunction java.lang.Double.valueOf(3.0)
-  })
+  this.callWithTypeVariable<Error?>(
+   Lambdas.GenericFunctionalInterface<Error?> { i: Error? ->
+    return@GenericFunctionalInterface i
+   },
+   java.lang.Error(),
+  )
+  this.callParameterized(
+   Lambdas.GenericFunctionalInterface<Error?> { i_1: Error? ->
+    return@GenericFunctionalInterface i_1
+   },
+   java.lang.Error(),
+  )
+  Lambdas.callTypeVariableWithBounds<T>(
+   Lambdas.GenericFunctionalInterface<Enum<T>?> { i_2: Enum<T>? ->
+    return@GenericFunctionalInterface i_2
+   },
+   null as Enum<T>?,
+  )
+  this.callWithBiFunction_pp_lambdas<Any?>(
+   Lambdas.BiFunction<Any?, String?, Double?> { x: Any?, y: String? ->
+    throw RuntimeException()
+   },
+  )
+  this.callWithBiFunction_pp_lambdas<Any?>(
+   Lambdas.BiFunction<Any?, String?, Double?> { x_1: Any?, y_1: String? ->
+    return@BiFunction java.lang.Double.valueOf(3.0)
+   },
+  )
   val f: Lambdas.Function<in T, *>? = Lambdas.Function { item: T ->
    return@Function Long.valueOf(1L)
   }
@@ -339,7 +379,9 @@ open class Lambdas {
    @ObjCName("withLambdasLambdas_Function") after: Lambdas.Function<in R, out V>?
   ): Lambdas.BiFunction<T, U, V>? {
    return Lambdas.BiFunction<T, U, V> { t: T, u: U ->
-    return@BiFunction after!!.apply(this.apply(t, u))
+    return@BiFunction after!!.apply(
+     this.apply(t, u),
+    )
    }
   }
  }

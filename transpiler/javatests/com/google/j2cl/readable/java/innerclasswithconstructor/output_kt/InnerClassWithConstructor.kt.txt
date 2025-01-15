@@ -44,7 +44,9 @@ open class InnerClassWithConstructor {
    this.b = this@InnerClassWithConstructor.a + b
   }
 
-  constructor(): this(this@InnerClassWithConstructor.a)
+  constructor(): this(
+   this@InnerClassWithConstructor.a,
+  )
  }
 
  @ObjCName("J2ktInnerclasswithconstructorInnerClassWithConstructor_InnerClassWithSingleConstructor", exact = true)

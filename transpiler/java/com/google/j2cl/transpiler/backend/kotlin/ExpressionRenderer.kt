@@ -107,6 +107,8 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.nonNull
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.COLON
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.COMMA
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.NEW_LINE
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.SPACE
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaSeparated
@@ -117,6 +119,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inInlin
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inNewLine
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParentheses
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inSquareBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.indented
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.infix
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.join
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLineSeparated
@@ -414,7 +417,14 @@ internal data class ExpressionRenderer(
       .orEmpty()
 
   internal fun invocationSource(invocation: Invocation) =
-    inParentheses(commaSeparated(invocation.arguments.map(this::expressionSource)))
+    inParentheses(argumentsSource(invocation.arguments))
+
+  private fun argumentsSource(arguments: List<Expression>) =
+    if (arguments.any(::shouldRenderArgumentInNewLine)) {
+      indented(join(arguments.map { inNewLine(expressionSource(it)) + COMMA })) + NEW_LINE
+    } else {
+      commaSeparated(arguments.map(this::expressionSource))
+    }
 
   private fun multiExpressionSource(multiExpression: MultiExpression): Source =
     spaceSeparated(
@@ -719,6 +729,10 @@ internal data class ExpressionRenderer(
     }
 
   companion object {
+    private fun shouldRenderArgumentInNewLine(argument: Expression): Boolean =
+      // This is a heuristic which gives good enough results.
+      argument.hasSideEffects()
+
     private fun BinaryOperator.ktSource(useEquality: Boolean): Source =
       when (this) {
         BinaryOperator.TIMES -> TIMES_OPERATOR

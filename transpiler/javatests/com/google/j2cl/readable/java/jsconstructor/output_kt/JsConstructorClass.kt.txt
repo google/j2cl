@@ -56,7 +56,9 @@ open class JsConstructorClass {
   @JsConstructor
   constructor(
    @ObjCName("Int") x: Int
-  ): super(x + 1) {
+  ): super(
+   x + 1,
+  ) {
    this.fB = 3
   }
 
@@ -67,7 +69,9 @@ open class JsConstructorClass {
   constructor(
    @ObjCName("Int") x: Int,
    @ObjCName("withInt") y: Int
-  ): this(x + y) {
+  ): this(
+   x + y,
+  ) {
    this.fB = x * y
   }
  }
@@ -81,14 +85,18 @@ open class JsConstructorClass {
   @JsConstructor
   constructor(
    @ObjCName("Int") x: Int
-  ): super(x * 2) {
+  ): super(
+   x * 2,
+  ) {
    this.fC = 6
   }
 
   constructor(
    @ObjCName("Int") x: Int,
    @ObjCName("withInt") y: Int
-  ): this(x + y) {
+  ): this(
+   x + y,
+  ) {
    this.fC = 7
   }
  }
@@ -132,7 +140,9 @@ open class JsConstructorClass {
   @JsConstructor
   constructor(
    @ObjCName("Int") x: Int
-  ): super(x + 2) {
+  ): super(
+   x + 2,
+  ) {
    this.fF = x + 3
   }
  }
@@ -158,7 +168,9 @@ open class JsConstructorClass {
   @JsConstructor
   constructor(
    vararg @ObjCName("IntArray") args: Int
-  ): super(args!![1])
+  ): super(
+   args!![1],
+  )
  }
 
  @ObjCName("J2ktJsconstructorJsConstructorClass_SubVarargs", exact = true)
@@ -167,18 +179,28 @@ open class JsConstructorClass {
   constructor(
    @ObjCName("Id") i: Any?,
    vararg @ObjCName("withIntArray") args: Int
-  ): super(*args!!)
+  ): super(
+   *args!!,
+  )
 
   constructor(
    @ObjCName("Int") j: Int
-  ): this(Any(), j)
+  ): this(
+   Any(),
+   j,
+  )
 
   @ObjCName("J2ktJsconstructorJsConstructorClass_SubVarargsCompanion", exact = true)
   companion object {
    @JvmStatic
    internal fun subNativeInvocation_pp_jsconstructor() {
     val unusedS1: JsConstructorClass.SubVarargs? = JsConstructorClass.SubVarargs(2)
-    val unusedS2: JsConstructorClass.SubVarargs? = JsConstructorClass.SubVarargs(Any(), 1, 2, 3)
+    val unusedS2: JsConstructorClass.SubVarargs? = JsConstructorClass.SubVarargs(
+     Any(),
+     1,
+     2,
+     3,
+    )
    }
   }
  }
@@ -186,7 +208,9 @@ open class JsConstructorClass {
  @ObjCName("J2ktJsconstructorJsConstructorClass_InstanceVarargs", exact = true)
  open inner class InstanceVarargs @JsConstructor constructor(
   vararg @ObjCName("IntArray") args: Int
- ): JsConstructorClass.A(args!![1])
+ ): JsConstructorClass.A(
+  args!![1],
+ )
 
  @ObjCName("J2ktJsconstructorJsConstructorClass_RegularType", exact = true)
  open class RegularType {
@@ -202,7 +226,9 @@ open class JsConstructorClass {
    @ObjCName("Id") `object`: Any?
   ): super(`object`)
 
-  constructor(): this(Any())
+  constructor(): this(
+   Any(),
+  )
  }
 
  @ObjCName("J2ktJsconstructorJsConstructorClass_JsConstructorClassWithExplicitConstructor", exact = true)

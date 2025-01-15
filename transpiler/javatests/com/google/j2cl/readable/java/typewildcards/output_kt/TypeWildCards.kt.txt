@@ -112,24 +112,35 @@ open class TypeWildCards {
 
  @ObjCName("test")
  open fun test() {
-  this.unbounded(GenericType<Bar?>() as GenericType<Any?>?)
-  this.upperBound(GenericType<Bar?>())
-  this.lowerBound(GenericType<Bar?>())
+  this.unbounded(
+   GenericType<Bar?>() as GenericType<Any?>?,
+  )
+  this.upperBound(
+   GenericType<Bar?>(),
+  )
+  this.lowerBound(
+   GenericType<Bar?>(),
+  )
  }
 
  @ObjCName("testInferredGenericIntersection")
  open fun testInferredGenericIntersection() {
   val elements: List<TypeWildCards.Element?>? = null
   val otherElements: List<TypeWildCards.SubOtherElement?>? = null
-  val integers: List<Int?>? = TypeWildCards.transform(TypeWildCards.concat(elements, otherElements), Function { a /* Any? & TypeWildCards.HasKey? & TypeWildCards.IntegerSupplier? */ ->
-   a!!.getKey()
-   return@Function a!!.get()
-  })
+  val integers: List<Int?>? = TypeWildCards.transform(
+   TypeWildCards.concat(elements, otherElements),
+   Function { a /* Any? & TypeWildCards.HasKey? & TypeWildCards.IntegerSupplier? */ ->
+    a!!.getKey()
+    return@Function a!!.get()
+   },
+  )
  }
 
  @ObjCName("testRecursiveGeneric")
  open fun testRecursiveGeneric() {
-  TypeWildCards.takesRecursiveGeneric(Foo())
+  TypeWildCards.takesRecursiveGeneric(
+   Foo(),
+  )
  }
 
  @ObjCName("J2ktTypewildcardsTypeWildCardsCompanion", exact = true)
@@ -183,7 +194,9 @@ open class TypeWildCards {
   internal var listWithWildcard_pp_typewildcards: List<*>? = null
 
   @JvmField
-  internal var valMultipleGenerics_pp_typewildcards: TypeWildCards.MultipleGenerics<*, String?, *>? = TypeWildCards.createMultipleGenerics_pp_typewildcards(TypeWildCards.listWithWildcard_pp_typewildcards) as TypeWildCards.MultipleGenerics<Any?, String?, Any?>?
+  internal var valMultipleGenerics_pp_typewildcards: TypeWildCards.MultipleGenerics<*, String?, *>? = TypeWildCards.createMultipleGenerics_pp_typewildcards(
+   TypeWildCards.listWithWildcard_pp_typewildcards,
+  ) as TypeWildCards.MultipleGenerics<Any?, String?, Any?>?
  }
 
  @ObjCName("J2ktTypewildcardsTypeWildCards_X", exact = true)

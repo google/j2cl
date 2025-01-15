@@ -174,8 +174,12 @@ open class ExplicitNotNullable {
   @JvmStatic
   internal fun <N> genericNullableMethod_pp_nullability_explicitnotnullable(o: ExplicitNotNullable.ParameterizedNullable<N>, n: N?) {
    o.setNullable_pp_nullability_explicitnotnullable(n)
-   o.setNonNull_pp_nullability_explicitnotnullable(n!!)
-   o.setDefaultNullability_pp_nullability_explicitnotnullable(n as N)
+   o.setNonNull_pp_nullability_explicitnotnullable(
+    n!!,
+   )
+   o.setDefaultNullability_pp_nullability_explicitnotnullable(
+    n as N,
+   )
    o.getNullable_pp_nullability_explicitnotnullable()!!.hashCode()
    o.getNonNullable_pp_nullability_explicitnotnullable().hashCode()
    o.getDefaultNullability_pp_nullability_explicitnotnullable()!!.hashCode()
@@ -222,7 +226,9 @@ open class ExplicitNotNullable {
   @JvmStatic
   internal fun parametrizedNullableMethod_pp_nullability_explicitnotnullable(o: ExplicitNotNullable.ParameterizedNullable<String?>, s: String?) {
    o.setNullable_pp_nullability_explicitnotnullable(s)
-   o.setNonNull_pp_nullability_explicitnotnullable(s!!)
+   o.setNonNull_pp_nullability_explicitnotnullable(
+    s!!,
+   )
    o.setDefaultNullability_pp_nullability_explicitnotnullable(s)
    o.getNullable_pp_nullability_explicitnotnullable()!!.length
    o.getNonNullable_pp_nullability_explicitnotnullable().length
@@ -358,7 +364,9 @@ open class ExplicitNotNullable {
   @JvmStatic
   internal fun testParametrizedMethod_pp_nullability_explicitnotnullable(f: ExplicitNotNullable.Function<in String, out String>, string: String): String {
    val localString: String? = string
-   return f.apply(localString as String)
+   return f.apply(
+    localString as String,
+   )
   }
 
   @JvmStatic

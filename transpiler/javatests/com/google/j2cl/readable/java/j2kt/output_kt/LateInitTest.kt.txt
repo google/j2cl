@@ -37,6 +37,9 @@ class LateInitTest {
 
  @ObjCName("behaviorBeingTested_expectedResult")
  fun behaviorBeingTested_expectedResult() {
-  Assert.assertEquals(this.uninitialized, "I have been initialized")
+  Assert.assertEquals(
+   this.uninitialized,
+   "I have been initialized",
+  )
  }
 }

@@ -36,6 +36,9 @@ class LateInitTest2: TestCase() {
 
  @ObjCName("testLateInit2")
  fun testLateInit2() {
-  TestCase.assertEquals(this.uninitialized, "I have been initialized")
+  TestCase.assertEquals(
+   this.uninitialized,
+   "I have been initialized",
+  )
  }
 }

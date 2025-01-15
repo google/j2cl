@@ -46,8 +46,10 @@ open class TypeWildCards internal constructor() {
   fun testObservable(
    @ObjCName("withJ2ktTypeWildCards_Observable") observable: TypeWildCards.Observable<*>?
   ) {
-   (observable as TypeWildCards.Observable<Any?>?)!!.addObserver(TypeWildCards.Observer { e /* capture#1-of * */ ->
-   })
+   (observable as TypeWildCards.Observable<Any?>?)!!.addObserver(
+    TypeWildCards.Observer { e /* capture#1-of * */ ->
+    },
+   )
   }
 
   @JvmStatic
@@ -61,8 +63,10 @@ open class TypeWildCards internal constructor() {
   fun testSuperWildcardObservable(
    @ObjCName("withJ2ktTypeWildCards_SuperWildcardObservable") observable: TypeWildCards.SuperWildcardObservable<*>?
   ) {
-   (observable as TypeWildCards.SuperWildcardObservable<Any?>?)!!.addObserver(TypeWildCards.Observer { e /* capture#2-of * */ ->
-   })
+   (observable as TypeWildCards.SuperWildcardObservable<Any?>?)!!.addObserver(
+    TypeWildCards.Observer { e /* capture#2-of * */ ->
+    },
+   )
   }
 
   @JvmStatic
@@ -70,8 +74,10 @@ open class TypeWildCards internal constructor() {
   fun testKtInObservable(
    @ObjCName("withJ2ktTypeWildCards_KtInObservable") observable: TypeWildCards.KtInObservable<*>?
   ) {
-   (observable as TypeWildCards.KtInObservable<Any?>?)!!.addObserver(TypeWildCards.KtInObserver { e /* capture#3-of * */ ->
-   })
+   (observable as TypeWildCards.KtInObservable<Any?>?)!!.addObserver(
+    TypeWildCards.KtInObserver { e /* capture#3-of * */ ->
+    },
+   )
   }
 
   @JvmStatic
@@ -159,8 +165,10 @@ open class TypeWildCards internal constructor() {
    fun testSetMethod(
     @ObjCName("withJ2ktTypeWildCards_WithoutBounds_Holder") holder: TypeWildCards.WithoutBounds.Holder<*>?
    ) {
-    (holder as TypeWildCards.WithoutBounds.Holder<Any?>?)!!.set_pp_j2kt(TypeWildCards.WithoutBounds.Observer { e /* capture#5-of * */ ->
-    })
+    (holder as TypeWildCards.WithoutBounds.Holder<Any?>?)!!.set_pp_j2kt(
+     TypeWildCards.WithoutBounds.Observer { e /* capture#5-of * */ ->
+     },
+    )
    }
 
    @JvmStatic
@@ -168,8 +176,11 @@ open class TypeWildCards internal constructor() {
    fun testSetStaticMethod(
     @ObjCName("withJ2ktTypeWildCards_WithoutBounds_Holder") holder: TypeWildCards.WithoutBounds.Holder<*>?
    ) {
-    TypeWildCards.WithoutBounds.Holder.setStatic_pp_j2kt(holder, TypeWildCards.WithoutBounds.Observer { e /* capture#6-of * */ ->
-    })
+    TypeWildCards.WithoutBounds.Holder.setStatic_pp_j2kt(
+     holder,
+     TypeWildCards.WithoutBounds.Observer { e /* capture#6-of * */ ->
+     },
+    )
    }
   }
 
@@ -214,8 +225,10 @@ open class TypeWildCards internal constructor() {
    fun testSetMethod(
     @ObjCName("withJ2ktTypeWildCards_WithBounds_Holder") holder: TypeWildCards.WithBounds.Holder<*>?
    ) {
-    (holder as TypeWildCards.WithBounds.Holder<TypeWildCards.WithBounds.Event?>?)!!.set_pp_j2kt(TypeWildCards.WithBounds.Observer { e /* capture#8-of out TypeWildCards.WithBounds.Event? */ ->
-    })
+    (holder as TypeWildCards.WithBounds.Holder<TypeWildCards.WithBounds.Event?>?)!!.set_pp_j2kt(
+     TypeWildCards.WithBounds.Observer { e /* capture#8-of out TypeWildCards.WithBounds.Event? */ ->
+     },
+    )
    }
 
    @JvmStatic
@@ -223,8 +236,11 @@ open class TypeWildCards internal constructor() {
    fun testSetStaticMethod(
     @ObjCName("withJ2ktTypeWildCards_WithBounds_Holder") holder: TypeWildCards.WithBounds.Holder<*>?
    ) {
-    TypeWildCards.WithBounds.Holder.setStatic_pp_j2kt(holder, TypeWildCards.WithBounds.Observer { e /* capture#9-of out TypeWildCards.WithBounds.Event? */ ->
-    })
+    TypeWildCards.WithBounds.Holder.setStatic_pp_j2kt(
+     holder,
+     TypeWildCards.WithBounds.Observer { e /* capture#9-of out TypeWildCards.WithBounds.Event? */ ->
+     },
+    )
    }
   }
 
@@ -272,8 +288,10 @@ open class TypeWildCards internal constructor() {
    fun testSetMethod(
     @ObjCName("withJ2ktTypeWildCards_WithDependentBounds_Holder") holder: TypeWildCards.WithDependentBounds.Holder<*, *>?
    ) {
-    (holder as TypeWildCards.WithDependentBounds.Holder<TypeWildCards.WithDependentBounds.Event?, TypeWildCards.WithDependentBounds.Collection<TypeWildCards.WithDependentBounds.Event?>?>?)!!.set_pp_j2kt(TypeWildCards.WithDependentBounds.Observer { e /* capture#12-of out TypeWildCards.WithDependentBounds.Collection<capture#13-of out TypeWildCards.WithDependentBounds.Event?>? */ ->
-    })
+    (holder as TypeWildCards.WithDependentBounds.Holder<TypeWildCards.WithDependentBounds.Event?, TypeWildCards.WithDependentBounds.Collection<TypeWildCards.WithDependentBounds.Event?>?>?)!!.set_pp_j2kt(
+     TypeWildCards.WithDependentBounds.Observer { e /* capture#12-of out TypeWildCards.WithDependentBounds.Collection<capture#13-of out TypeWildCards.WithDependentBounds.Event?>? */ ->
+     },
+    )
    }
 
    @JvmStatic
@@ -281,8 +299,11 @@ open class TypeWildCards internal constructor() {
    fun testSetStaticMethod(
     @ObjCName("withJ2ktTypeWildCards_WithDependentBounds_Holder") holder: TypeWildCards.WithDependentBounds.Holder<*, *>?
    ) {
-    TypeWildCards.WithDependentBounds.Holder.setStatic_pp_j2kt(holder, TypeWildCards.WithDependentBounds.Observer { e /* capture#14-of out TypeWildCards.WithDependentBounds.Collection<capture#15-of out TypeWildCards.WithDependentBounds.Event?>? */ ->
-    })
+    TypeWildCards.WithDependentBounds.Holder.setStatic_pp_j2kt(
+     holder,
+     TypeWildCards.WithDependentBounds.Observer { e /* capture#14-of out TypeWildCards.WithDependentBounds.Collection<capture#15-of out TypeWildCards.WithDependentBounds.Event?>? */ ->
+     },
+    )
    }
   }
 

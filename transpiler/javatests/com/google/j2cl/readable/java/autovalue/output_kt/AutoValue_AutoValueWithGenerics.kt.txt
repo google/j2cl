@@ -59,7 +59,9 @@ class AutoValue_AutoValueWithGenerics<T>: AutoValueWithGenerics<T> {
  override fun hashCode(): Int {
   var h___: Int = 1
   h___ = h___ * 1000003
-  h___ = h___.xor(if (this.booleanField) 1231 else 1237)
+  h___ = h___.xor(
+   if (this.booleanField) 1231 else 1237,
+  )
   return h___
  }
 }

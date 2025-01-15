@@ -242,41 +242,111 @@ open class AutoBoxing {
   var boxC: Char? = Character.valueOf(c)
   boxBool = java.lang.Boolean.valueOf(true)
   boxD = java.lang.Double.valueOf(2.2)
-  boxB = java.lang.Byte.valueOf(1.toByte())
+  boxB = java.lang.Byte.valueOf(
+   1.toByte(),
+  )
   boxF = java.lang.Float.valueOf(1.1f)
   boxI = Integer.valueOf(1)
   boxL = java.lang.Long.valueOf(2L)
-  boxS = java.lang.Short.valueOf(1.toShort())
+  boxS = java.lang.Short.valueOf(
+   1.toShort(),
+  )
   boxC = Character.valueOf('\u0001')
   boxC = Character.valueOf('a')
-  bool = this.unbox(java.lang.Boolean.valueOf(bool) as Boolean?)
-  d = this.unbox(java.lang.Double.valueOf(d) as Double?)
-  b = this.unbox(java.lang.Byte.valueOf(b) as Byte?)
-  f = this.unbox(java.lang.Float.valueOf(f) as Float?)
-  i = this.unbox(Integer.valueOf(i) as Int?)
-  l = this.unbox(java.lang.Long.valueOf(l) as Long?)
-  s = this.unbox(java.lang.Short.valueOf(s) as Short?)
-  c = this.unbox(Character.valueOf(c) as Char?)
+  bool = this.unbox(
+   java.lang.Boolean.valueOf(bool) as Boolean?,
+  )
+  d = this.unbox(
+   java.lang.Double.valueOf(d) as Double?,
+  )
+  b = this.unbox(
+   java.lang.Byte.valueOf(b) as Byte?,
+  )
+  f = this.unbox(
+   java.lang.Float.valueOf(f) as Float?,
+  )
+  i = this.unbox(
+   Integer.valueOf(i) as Int?,
+  )
+  l = this.unbox(
+   java.lang.Long.valueOf(l) as Long?,
+  )
+  s = this.unbox(
+   java.lang.Short.valueOf(s) as Short?,
+  )
+  c = this.unbox(
+   Character.valueOf(c) as Char?,
+  )
   var unusedDouble: Double = this.takesObjectAndReturnsPrimitiveDouble(4)
-  unusedDouble = this.sumWithoutBoxing(1, 2.2, 1.toByte(), 1.toShort(), 2.2.toFloat())
-  unusedDouble = this.sumWithoutBoxingJsVarargs(1, 2.2, 1.toByte(), 1.toShort(), 2.2.toFloat())
-  this.takesFloatVarArgs(java.lang.Float.valueOf(1.1f), java.lang.Float.valueOf('a'.code.toFloat()), java.lang.Float.valueOf(2.2.toFloat()))
+  unusedDouble = this.sumWithoutBoxing(
+   1,
+   2.2,
+   1.toByte(),
+   1.toShort(),
+   2.2.toFloat(),
+  )
+  unusedDouble = this.sumWithoutBoxingJsVarargs(
+   1,
+   2.2,
+   1.toByte(),
+   1.toShort(),
+   2.2.toFloat(),
+  )
+  this.takesFloatVarArgs(
+   java.lang.Float.valueOf(1.1f),
+   java.lang.Float.valueOf(
+    'a'.code.toFloat(),
+   ),
+   java.lang.Float.valueOf(
+    2.2.toFloat(),
+   ),
+  )
   var o: Any? = null
   o = java.lang.Double.valueOf(2.2)
   o = java.lang.Float.valueOf(1.1f)
   o = Integer.valueOf(1)
   o = Character.valueOf('a')
-  boxBool = java.lang.Boolean.valueOf(boxBool!!.booleanValue() && boxBool!!.booleanValue())
-  boxD = java.lang.Double.valueOf(boxD!!.toDouble() + boxD!!.toDouble())
-  boxI = Integer.valueOf(boxI!!.toInt() / boxI!!.toInt())
-  boxL = java.lang.Long.valueOf(boxL!!.toLong() / boxL!!.toLong())
-  boxBool = java.lang.Boolean.valueOf(!boxBool!!.booleanValue())
-  boxI = Integer.valueOf(+ boxI!!.toInt())
-  boxI = Integer.valueOf(- boxI!!.toInt())
-  boxI = Integer.valueOf(boxI!!.toInt().shl(boxI!!.toInt()))
-  boxI = Integer.valueOf(boxI!!.toInt().shl(boxL!!.toLong().toInt()))
-  boxL = java.lang.Long.valueOf(boxL!!.toLong().shl(boxI!!.toInt()))
-  boxL = java.lang.Long.valueOf(boxL!!.toLong().shl(boxL!!.toLong().toInt()))
+  boxBool = java.lang.Boolean.valueOf(
+   boxBool!!.booleanValue() && boxBool!!.booleanValue(),
+  )
+  boxD = java.lang.Double.valueOf(
+   boxD!!.toDouble() + boxD!!.toDouble(),
+  )
+  boxI = Integer.valueOf(
+   boxI!!.toInt() / boxI!!.toInt(),
+  )
+  boxL = java.lang.Long.valueOf(
+   boxL!!.toLong() / boxL!!.toLong(),
+  )
+  boxBool = java.lang.Boolean.valueOf(
+   !boxBool!!.booleanValue(),
+  )
+  boxI = Integer.valueOf(
+   + boxI!!.toInt(),
+  )
+  boxI = Integer.valueOf(
+   - boxI!!.toInt(),
+  )
+  boxI = Integer.valueOf(
+   boxI!!.toInt().shl(
+    boxI!!.toInt(),
+   ),
+  )
+  boxI = Integer.valueOf(
+   boxI!!.toInt().shl(
+    boxL!!.toLong().toInt(),
+   ),
+  )
+  boxL = java.lang.Long.valueOf(
+   boxL!!.toLong().shl(
+    boxI!!.toInt(),
+   ),
+  )
+  boxL = java.lang.Long.valueOf(
+   boxL!!.toLong().shl(
+    boxL!!.toLong().toInt(),
+   ),
+  )
   o = Integer.valueOf(15)
  }
 
@@ -284,11 +354,15 @@ open class AutoBoxing {
  open fun testUnboxing() {
   var boxBool: Boolean? = Boolean(true)
   var boxD: Double? = Double(2.2)
-  var boxB: Byte? = Byte(1.toByte())
+  var boxB: Byte? = Byte(
+   1.toByte(),
+  )
   var boxF: Float? = Float(1.1f)
   var boxI: Int? = Int(1)
   var boxL: Long? = Long(1L)
-  var boxS: Short? = Short(1.toShort())
+  var boxS: Short? = Short(
+   1.toShort(),
+  )
   var boxC: Char? = Char('a')
   var bool: Boolean = boxBool!!.booleanValue()
   var d: Double = boxD!!.toDouble()
@@ -298,27 +372,57 @@ open class AutoBoxing {
   var l: Long = boxL!!.toLong()
   val s: Short = boxS!!.toShort()
   val c: Char = boxC!!.toChar()
-  boxBool = this.box(boxBool!!.booleanValue())
-  boxD = this.box(boxD!!.toDouble())
-  boxB = this.box(boxB!!.toByte())
-  boxF = this.box(boxF!!.toFloat())
-  boxI = this.box(boxI!!.toInt())
-  boxL = this.box(boxL!!.toLong())
-  boxS = this.box(boxS!!.toShort())
-  boxC = this.box(boxC!!.toChar())
+  boxBool = this.box(
+   boxBool!!.booleanValue(),
+  )
+  boxD = this.box(
+   boxD!!.toDouble(),
+  )
+  boxB = this.box(
+   boxB!!.toByte(),
+  )
+  boxF = this.box(
+   boxF!!.toFloat(),
+  )
+  boxI = this.box(
+   boxI!!.toInt(),
+  )
+  boxL = this.box(
+   boxL!!.toLong(),
+  )
+  boxS = this.box(
+   boxS!!.toShort(),
+  )
+  boxC = this.box(
+   boxC!!.toChar(),
+  )
   d = boxB!!.toByte().toDouble()
   d = boxF!!.toFloat().toDouble()
   d = boxI!!.toInt().toDouble()
   d = boxL!!.toLong().toDouble()
   d = boxS!!.toShort().toDouble()
   d = boxC!!.toChar().code.toDouble()
-  this.takesAndReturnsPrimitiveDouble(boxB!!.toByte().toDouble())
-  this.takesAndReturnsPrimitiveDouble(boxF!!.toFloat().toDouble())
-  this.takesAndReturnsPrimitiveDouble(boxI!!.toInt().toDouble())
-  this.takesAndReturnsPrimitiveDouble(boxL!!.toLong().toDouble())
-  this.takesAndReturnsPrimitiveDouble(boxS!!.toShort().toDouble())
-  this.takesAndReturnsPrimitiveDouble(boxC!!.toChar().code.toDouble())
-  val v: Void? = this.takesAndReturnsVoid(this.takesAndReturnsVoid(null))
+  this.takesAndReturnsPrimitiveDouble(
+   boxB!!.toByte().toDouble(),
+  )
+  this.takesAndReturnsPrimitiveDouble(
+   boxF!!.toFloat().toDouble(),
+  )
+  this.takesAndReturnsPrimitiveDouble(
+   boxI!!.toInt().toDouble(),
+  )
+  this.takesAndReturnsPrimitiveDouble(
+   boxL!!.toLong().toDouble(),
+  )
+  this.takesAndReturnsPrimitiveDouble(
+   boxS!!.toShort().toDouble(),
+  )
+  this.takesAndReturnsPrimitiveDouble(
+   boxC!!.toChar().code.toDouble(),
+  )
+  val v: Void? = this.takesAndReturnsVoid(
+   this.takesAndReturnsVoid(null),
+  )
   bool = boxBool!!.booleanValue() && boxBool!!.booleanValue()
   d = boxD!!.toDouble() + boxD!!.toDouble()
   f = boxF!!.toFloat() - boxF!!.toFloat()
@@ -328,22 +432,36 @@ open class AutoBoxing {
   i = + boxI!!.toInt()
   i = - boxI!!.toInt()
   i = boxI!!.toInt().inv()
-  boxD = java.lang.Double.valueOf(- boxD!!.toDouble())
-  boxI = Integer.valueOf(- boxI!!.toInt())
+  boxD = java.lang.Double.valueOf(
+   - boxD!!.toDouble(),
+  )
+  boxI = Integer.valueOf(
+   - boxI!!.toInt(),
+  )
   when (boxI!!.toInt()) {
    else -> {}
   }
   i = i + run {
-   boxI = Integer.valueOf(boxI!!.toInt() + run {
-    i = i + boxI!!.toInt()
-    i
-   })
+   boxI = Integer.valueOf(
+    boxI!!.toInt() + run {
+     i = i + boxI!!.toInt()
+     i
+    },
+   )
    boxI
   }!!.toInt()
-  i = i.shl(boxI!!.toInt())
-  i = i.shl(boxL!!.toLong().toInt())
-  l = l.shl(boxI!!.toInt())
-  l = l.shl(boxL!!.toLong().toInt())
+  i = i.shl(
+   boxI!!.toInt(),
+  )
+  i = i.shl(
+   boxL!!.toLong().toInt(),
+  )
+  l = l.shl(
+   boxI!!.toInt(),
+  )
+  l = l.shl(
+   boxL!!.toLong().toInt(),
+  )
  }
 
  @ObjCName("testUnboxingBoolean")
@@ -360,16 +478,28 @@ open class AutoBoxing {
   br = boxB1 !== boxB2
   assert(boxr)
   assert(br)
-  boxr = boxB1!!.booleanValue().xor(boxB2!!.booleanValue())
-  br = boxB1!!.booleanValue().xor(boxB2!!.booleanValue())
+  boxr = boxB1!!.booleanValue().xor(
+   boxB2!!.booleanValue(),
+  )
+  br = boxB1!!.booleanValue().xor(
+   boxB2!!.booleanValue(),
+  )
   assert(boxr)
   assert(br)
-  boxr = boxB1!!.booleanValue().and(boxB2!!.booleanValue())
-  br = boxB1!!.booleanValue().and(boxB2!!.booleanValue())
+  boxr = boxB1!!.booleanValue().and(
+   boxB2!!.booleanValue(),
+  )
+  br = boxB1!!.booleanValue().and(
+   boxB2!!.booleanValue(),
+  )
   assert(boxr)
   assert(br)
-  boxr = boxB1!!.booleanValue().or(boxB2!!.booleanValue())
-  br = boxB1!!.booleanValue().or(boxB2!!.booleanValue())
+  boxr = boxB1!!.booleanValue().or(
+   boxB2!!.booleanValue(),
+  )
+  br = boxB1!!.booleanValue().or(
+   boxB2!!.booleanValue(),
+  )
   assert(boxr)
   assert(br)
   boxr = boxB1!!.booleanValue() && boxB2!!.booleanValue()
@@ -391,48 +521,84 @@ open class AutoBoxing {
   assert(boxr)
   assert(br)
   boxr = run {
-   boxB1 = java.lang.Boolean.valueOf(boxB1!!.booleanValue().and(boxB2!!.booleanValue()))
+   boxB1 = java.lang.Boolean.valueOf(
+    boxB1!!.booleanValue().and(
+     boxB2!!.booleanValue(),
+    ),
+   )
    boxB1
   }!!.booleanValue()
   br = run {
-   boxB1 = java.lang.Boolean.valueOf(boxB1!!.booleanValue().and(boxB2!!.booleanValue()))
+   boxB1 = java.lang.Boolean.valueOf(
+    boxB1!!.booleanValue().and(
+     boxB2!!.booleanValue(),
+    ),
+   )
    boxB1
   }!!.booleanValue()
   assert(boxr)
   assert(br)
   boxr = run {
-   boxB1 = java.lang.Boolean.valueOf(boxB1!!.booleanValue().or(boxB2!!.booleanValue()))
+   boxB1 = java.lang.Boolean.valueOf(
+    boxB1!!.booleanValue().or(
+     boxB2!!.booleanValue(),
+    ),
+   )
    boxB1
   }!!.booleanValue()
   br = run {
-   boxB1 = java.lang.Boolean.valueOf(boxB1!!.booleanValue().or(boxB2!!.booleanValue()))
+   boxB1 = java.lang.Boolean.valueOf(
+    boxB1!!.booleanValue().or(
+     boxB2!!.booleanValue(),
+    ),
+   )
    boxB1
   }!!.booleanValue()
   assert(boxr)
   assert(br)
   boxr = run {
-   boxB1 = java.lang.Boolean.valueOf(boxB1!!.booleanValue().xor(boxB2!!.booleanValue()))
+   boxB1 = java.lang.Boolean.valueOf(
+    boxB1!!.booleanValue().xor(
+     boxB2!!.booleanValue(),
+    ),
+   )
    boxB1
   }!!.booleanValue()
   br = run {
-   boxB1 = java.lang.Boolean.valueOf(boxB1!!.booleanValue().xor(boxB2!!.booleanValue()))
+   boxB1 = java.lang.Boolean.valueOf(
+    boxB1!!.booleanValue().xor(
+     boxB2!!.booleanValue(),
+    ),
+   )
    boxB1
   }!!.booleanValue()
   assert(boxr)
   assert(br)
   var boxB: Boolean? = null
-  boxB = java.lang.Boolean.valueOf(!boxB!!.booleanValue())
-  boxB = java.lang.Boolean.valueOf(boxB!!.booleanValue() && boxB!!.booleanValue())
+  boxB = java.lang.Boolean.valueOf(
+   !boxB!!.booleanValue(),
+  )
+  boxB = java.lang.Boolean.valueOf(
+   boxB!!.booleanValue() && boxB!!.booleanValue(),
+  )
   boxB = if (boxB!!.booleanValue()) boxB else boxB
   if (boxB!!.booleanValue()) {}
   var b: Boolean = false
-  b = b.or(run {
-   boxB = java.lang.Boolean.valueOf(boxB!!.booleanValue().or(run {
-    b = b.or(boxB!!.booleanValue())
-    b
-   }))
-   boxB
-  }!!.booleanValue())
+  b = b.or(
+   run {
+    boxB = java.lang.Boolean.valueOf(
+     boxB!!.booleanValue().or(
+      run {
+       b = b.or(
+        boxB!!.booleanValue(),
+       )
+       b
+      },
+     ),
+    )
+    boxB
+   }!!.booleanValue(),
+  )
  }
 
  @ObjCName("testUnboxingEquality")
@@ -481,24 +647,36 @@ open class AutoBoxing {
    var n: T? = java.lang.Long.valueOf(10L) as (T & Any)
    var l: Long = n!!.toLong()
    assert(l == 10L)
-   n = java.lang.Long.valueOf(n!!.toLong() + 1L) as T?
-   n = java.lang.Long.valueOf(n!!.toLong() + 1L) as T?
+   n = java.lang.Long.valueOf(
+    n!!.toLong() + 1L,
+   ) as T?
+   n = java.lang.Long.valueOf(
+    n!!.toLong() + 1L,
+   ) as T?
    n = run {
     val ___value: T? = n
-    n = java.lang.Long.valueOf(n!!.toLong() + 1L) as T?
+    n = java.lang.Long.valueOf(
+     n!!.toLong() + 1L,
+    ) as T?
     ___value
    }
    n = run {
-    n = java.lang.Long.valueOf(n!!.toLong() + 1L) as T?
+    n = java.lang.Long.valueOf(
+     n!!.toLong() + 1L,
+    ) as T?
     n
    }
    open class Local<T: Long?> internal constructor() {
     internal open fun toLong_pp_autoboxing(l: T): Long {
-     assert(l!!.equals(java.lang.Long.valueOf(11L) as Any?))
+     assert(l!!.equals(
+      java.lang.Long.valueOf(11L) as Any?,
+     ))
      return l!!.toLong()
     }
    }
-   l = Local<Long?>().toLong_pp_autoboxing(java.lang.Long.valueOf(11L))
+   l = Local<Long?>().toLong_pp_autoboxing(
+    java.lang.Long.valueOf(11L),
+   )
    assert(l == 11L)
   }
 
@@ -508,24 +686,36 @@ open class AutoBoxing {
    var n: T? = java.lang.Long.valueOf(10L) as (T & Any)
    var l: Long = n!!.toLong()
    assert(l == 10L)
-   n = java.lang.Long.valueOf(n!!.toLong() + 1L) as T?
-   n = java.lang.Long.valueOf(n!!.toLong() + 1L) as T?
+   n = java.lang.Long.valueOf(
+    n!!.toLong() + 1L,
+   ) as T?
+   n = java.lang.Long.valueOf(
+    n!!.toLong() + 1L,
+   ) as T?
    n = run {
     val ___value: T? = n
-    n = java.lang.Long.valueOf(n!!.toLong() + 1L) as T?
+    n = java.lang.Long.valueOf(
+     n!!.toLong() + 1L,
+    ) as T?
     ___value
    }
    n = run {
-    n = java.lang.Long.valueOf(n!!.toLong() + 1L) as T?
+    n = java.lang.Long.valueOf(
+     n!!.toLong() + 1L,
+    ) as T?
     n
    }
    open class Local<T> internal constructor() where T: Long?, T: Comparable<Long>? {
     internal open fun toLong_pp_autoboxing(l: T): Long {
-     assert(l!!.equals(java.lang.Long.valueOf(11L) as Any?))
+     assert(l!!.equals(
+      java.lang.Long.valueOf(11L) as Any?,
+     ))
      return l!!.toLong()
     }
    }
-   l = Local<Long?>().toLong_pp_autoboxing(java.lang.Long.valueOf(11L))
+   l = Local<Long?>().toLong_pp_autoboxing(
+    java.lang.Long.valueOf(11L),
+   )
    assert(l == 11L)
    val i: Int = Integer.valueOf(10).toInt()
   }

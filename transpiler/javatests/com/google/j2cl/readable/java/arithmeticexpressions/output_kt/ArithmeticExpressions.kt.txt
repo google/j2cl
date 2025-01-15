@@ -100,8 +100,12 @@ open class ArithmeticExpressions {
   val l: Boolean = 1 + 2 != 4
   val m: Boolean = Long.MAX_VALUE.toDouble() != 9.223372036854778E18
   val o: Double = ((5 + 1) / 2).toDouble() - 0.0
-  a = a.shl(31L.toInt())
-  a = a.shl(1L.toInt())
+  a = a.shl(
+   31L.toInt(),
+  )
+  a = a.shl(
+   1L.toInt(),
+  )
   a = (a.toLong() + 1L).toInt()
   a = (a.toLong() / 1L).toInt()
   a = (a.toDouble() + java.lang.Double.MAX_VALUE).toInt()
@@ -201,42 +205,68 @@ open class ArithmeticExpressions {
  open fun testCompoundBoxedTypes() {
   var c: Int? = Integer.valueOf(1000)
   var d: Int? = Integer.valueOf(10000)
-  d = Integer.valueOf(d!!.toInt() + c!!.toInt())
+  d = Integer.valueOf(
+   d!!.toInt() + c!!.toInt(),
+  )
   var i: Int = 43
-  d = Integer.valueOf(d!!.toInt() + i)
-  d = Integer.valueOf(d!!.toInt().shl(i))
+  d = Integer.valueOf(
+   d!!.toInt() + i,
+  )
+  d = Integer.valueOf(
+   d!!.toInt().shl(i),
+  )
   i = i + c!!.toInt()
   var e: Int? = run {
-   c = Integer.valueOf(c!!.toInt() + 1)
+   c = Integer.valueOf(
+    c!!.toInt() + 1,
+   )
    c
   }
   e = run {
-   c = Integer.valueOf(c!!.toInt() + 1)
+   c = Integer.valueOf(
+    c!!.toInt() + 1,
+   )
    c
   }
   var e2: Double? = java.lang.Double.valueOf(100.0)
-  e2 = java.lang.Double.valueOf(e2!!.toDouble() + 1.0)
+  e2 = java.lang.Double.valueOf(
+   e2!!.toDouble() + 1.0,
+  )
   var f: Int? = run {
    val ___value: Int? = c
-   c = Integer.valueOf(c!!.toInt() + 1)
+   c = Integer.valueOf(
+    c!!.toInt() + 1,
+   )
    ___value
   }
   f = run {
    val ___value_1: Int? = c
-   c = Integer.valueOf(c!!.toInt() + 1)
+   c = Integer.valueOf(
+    c!!.toInt() + 1,
+   )
    ___value_1
   }
-  var b: Byte? = java.lang.Byte.valueOf(0.toByte())
-  b = java.lang.Byte.valueOf((b!!.toByte().toInt() + 1.toByte().toInt()).toByte())
+  var b: Byte? = java.lang.Byte.valueOf(
+   0.toByte(),
+  )
+  b = java.lang.Byte.valueOf(
+   (b!!.toByte().toInt() + 1.toByte().toInt()).toByte(),
+  )
   var ch: Char? = Character.valueOf('c')
-  ch = Character.valueOf((ch!!.toChar().code + '\u0001'.code).toChar())
+  ch = Character.valueOf(
+   (ch!!.toChar().code + '\u0001'.code).toChar(),
+  )
   run {
-   f = Integer.valueOf(f!!.toInt() + 1)
+   f = Integer.valueOf(
+    f!!.toInt() + 1,
+   )
    f
   }!!.toInt()
   run {
    val ___value_2: Int? = f
-   f = Integer.valueOf(f!!.toInt() - 1)
+   f = Integer.valueOf(
+    f!!.toInt() - 1,
+   )
    ___value_2
   }!!.toInt()
   open class Ref<T> internal constructor() {
@@ -244,7 +274,9 @@ open class ArithmeticExpressions {
    internal var field_pp_arithmeticexpressions: T? = null
   }
   val ref: Ref<Byte?>? = null
-  ref!!.field_pp_arithmeticexpressions = java.lang.Byte.valueOf((ref!!.field_pp_arithmeticexpressions!!.toByte().toInt() + 1.toByte().toInt()).toByte())
+  ref!!.field_pp_arithmeticexpressions = java.lang.Byte.valueOf(
+   (ref!!.field_pp_arithmeticexpressions!!.toByte().toInt() + 1.toByte().toInt()).toByte(),
+  )
   val n: Int = 1 + ref!!.field_pp_arithmeticexpressions!!.toByte().toInt()
  }
 
@@ -258,7 +290,9 @@ open class ArithmeticExpressions {
   var l: kotlin.Long = 0L
   var d: Double = 0.0
   l = (2 - boxedInteger!!.toInt()).toLong() - 2L
-  l = 2.or(boxedInteger!!.toInt()).toLong().or(2L)
+  l = 2.or(
+   boxedInteger!!.toInt(),
+  ).toLong().or(2L)
   l = 1000000L * l * 60.toLong() * 60.toLong() * 24.toLong()
   l = (24 * 60 * 60).toLong() * l * 1000000L
   d = run {
@@ -269,10 +303,12 @@ open class ArithmeticExpressions {
    l
   }.toDouble()
   l = run {
-   boxedInteger = Integer.valueOf(run {
-    i = 20
-    i
-   })
+   boxedInteger = Integer.valueOf(
+    run {
+     i = 20
+     i
+    },
+   )
    boxedInteger
   }!!.toInt().toLong()
   l = (i + boxedInteger!!.toInt()).toLong() + l + 20.toLong()

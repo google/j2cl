@@ -45,7 +45,9 @@ enum class Enum2 {
  @ObjCName("VALUE1")
  VALUE1(2),
  @ObjCName("VALUE2")
- VALUE2(Enum1.V1 as Enum<*>?),
+ VALUE2(
+  Enum1.V1 as Enum<*>?,
+ ),
  @ObjCName("VALUE3")
  VALUE3,
  @ObjCName("VALUE4")
@@ -58,14 +60,20 @@ enum class Enum2 {
   this.foo_pp_enums = foo
  }
 
- constructor(foo: Enum<*>?): this(foo!!.ordinal)
+ constructor(foo: Enum<*>?): this(
+  foo!!.ordinal,
+ )
 
- constructor(vararg somePars: Any?): this(somePars!!.size) {
+ constructor(vararg somePars: Any?): this(
+  somePars!!.size,
+ ) {
   val somePars_1: Array<Any?>? = somePars as Array<Any?>?
  }
 
  internal open fun specialMethods_pp_enums() {
-  val o1: Int = Enum2.valueOf(null!!).ordinal
+  val o1: Int = Enum2.valueOf(
+   null!!,
+  ).ordinal
   val o2: Int = Enum2.valueOf("VALUE1").ordinal
   val l: Int = Enum2.values().size
  }
@@ -78,16 +86,22 @@ enum class Enum2 {
   }
 
   @JvmField
-  internal var C_pp_enums: Enum2? = Enum2.f_pp_enums(Any())
+  internal var C_pp_enums: Enum2? = Enum2.f_pp_enums(
+   Any(),
+  )
  }
 }
 
 @ObjCName("J2ktEnumsEnum3", exact = true)
 enum class Enum3 {
  @ObjCName("VALUE1")
- VALUE1(Function<Int?, Int?> { v: Int? ->
-  return@Function Integer.valueOf(1 + v!!.toInt())
- });
+ VALUE1(
+  Function<Int?, Int?> { v: Int? ->
+   return@Function Integer.valueOf(
+    1 + v!!.toInt(),
+   )
+  },
+ );
 
  constructor(function: Function<Int?, Int?>?)
 }

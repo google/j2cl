@@ -33,7 +33,10 @@ open class GenericClassLiteral {
  open fun test(
   @ObjCName("withJ2ktnotpassingGenericClassLiteral_Generic") genericFoo: GenericClassLiteral.Generic<GenericClassLiteral.Foo>
  ) {
-  this.accept<GenericClassLiteral.Generic<Any>>(genericFoo as GenericClassLiteral.Generic<Any>, GenericClassLiteral.Generic::class.javaObjectType)
+  this.accept<GenericClassLiteral.Generic<Any>>(
+   genericFoo as GenericClassLiteral.Generic<Any>,
+   GenericClassLiteral.Generic::class.javaObjectType,
+  )
  }
 
  @ObjCName("accept")

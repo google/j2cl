@@ -46,7 +46,10 @@ open class VarargOverloads internal constructor() {
   companion object {
    @JvmStatic
    internal fun test_pp_j2kt() {
-    VarargOverloads.NewInstanceOverload(0, *arrayOf<String?>()!!)
+    VarargOverloads.NewInstanceOverload(
+     0,
+     *arrayOf<String?>()!!,
+    )
    }
   }
  }
@@ -61,7 +64,9 @@ open class VarargOverloads internal constructor() {
    val strings_1: Array<String?>? = strings as Array<String?>?
   }
 
-  internal constructor(foo: Int): this(*arrayOf<String?>()!!)
+  internal constructor(foo: Int): this(
+   *arrayOf<String?>()!!,
+  )
  }
 
  @ObjCName("J2ktJ2ktVarargOverloads_SuperConstructorCallOverload", exact = true)
@@ -76,17 +81,23 @@ open class VarargOverloads internal constructor() {
 
   @ObjCName("J2ktJ2ktVarargOverloads_SuperConstructorCallOverload_Explicit", exact = true)
   open class Explicit: VarargOverloads.SuperConstructorCallOverload {
-   internal constructor(): super(*arrayOf<String?>()!!)
+   internal constructor(): super(
+    *arrayOf<String?>()!!,
+   )
   }
 
   @ObjCName("J2ktJ2ktVarargOverloads_SuperConstructorCallOverload_Implicit", exact = true)
   open class Implicit: VarargOverloads.SuperConstructorCallOverload {
-   internal constructor(): super(*arrayOf<String?>()!!)
+   internal constructor(): super(
+    *arrayOf<String?>()!!,
+   )
   }
 
   @ObjCName("J2ktJ2ktVarargOverloads_SuperConstructorCallOverload_FromImplicitConstructor", exact = true)
   open class FromImplicitConstructor: VarargOverloads.SuperConstructorCallOverload {
-   internal constructor(): super(*arrayOf<String?>()!!)
+   internal constructor(): super(
+    *arrayOf<String?>()!!,
+   )
   }
  }
 
@@ -101,7 +112,9 @@ open class VarargOverloads internal constructor() {
   }
 
   internal open fun test_pp_j2kt() {
-   this.method_pp_j2kt(*arrayOf<String?>()!!)
+   this.method_pp_j2kt(
+    *arrayOf<String?>()!!,
+   )
   }
  }
 
@@ -118,7 +131,9 @@ open class VarargOverloads internal constructor() {
    }
 
    internal open fun test_pp_j2kt() {
-    this.method_pp_j2kt(*arrayOf<String?>()!!)
+    this.method_pp_j2kt(
+     *arrayOf<String?>()!!,
+    )
    }
   }
  }
@@ -174,9 +189,13 @@ open class VarargOverloads internal constructor() {
  @ObjCName("J2ktJ2ktVarargOverloads_EnumWithOverloadedConstructors", exact = true)
  enum class EnumWithOverloadedConstructors {
   @ObjCName("CONSTRUCTOR_OVERLOAD")
-  CONSTRUCTOR_OVERLOAD(*arrayOf<String?>()!!),
+  CONSTRUCTOR_OVERLOAD(
+   *arrayOf<String?>()!!,
+  ),
   @ObjCName("SUPER_CONSTRUCTOR_OVERLOAD")
-  SUPER_CONSTRUCTOR_OVERLOAD(*arrayOf<String?>()!!);
+  SUPER_CONSTRUCTOR_OVERLOAD(
+   *arrayOf<String?>()!!,
+  );
 
   constructor(vararg objects: Any?) {
    val objects_1: Array<Any?>? = objects as Array<Any?>?

@@ -69,8 +69,14 @@ open class NotNullAssertionProblems {
   NotNullAssertionProblems.acceptVararg<String?>(string, nullableString)
   NotNullAssertionProblems.acceptVararg<String?>(null, string)
   NotNullAssertionProblems.acceptVararg<String?>(nullableString, string)
-  NotNullAssertionProblems.acceptGeneric<String?>(supplier as NotNullAssertionProblems.Supplier<String?>, nullableString)
-  NotNullAssertionProblems.acceptUpperBound<String?>(supplier as NotNullAssertionProblems.Supplier<String>, nullableString)
+  NotNullAssertionProblems.acceptGeneric<String?>(
+   supplier as NotNullAssertionProblems.Supplier<String?>,
+   nullableString,
+  )
+  NotNullAssertionProblems.acceptUpperBound<String?>(
+   supplier as NotNullAssertionProblems.Supplier<String>,
+   nullableString,
+  )
  }
 
  @ObjCName("testImplicitInvocationTypeArguments")
@@ -79,17 +85,43 @@ open class NotNullAssertionProblems {
   @ObjCName("withJ2ktNotNullAssertionProblems_Supplier") supplier: NotNullAssertionProblems.Supplier<String>,
   @ObjCName("withNSString") nullableString: String?
  ) {
-  NotNullAssertionProblems.accept1<Any>(null!!)
-  NotNullAssertionProblems.accept2<String>(string, null!!)
-  NotNullAssertionProblems.accept2<String>(string, nullableString!!)
-  NotNullAssertionProblems.accept2<String>(null!!, string)
+  NotNullAssertionProblems.accept1<Any>(
+   null!!,
+  )
+  NotNullAssertionProblems.accept2<String>(
+   string,
+   null!!,
+  )
+  NotNullAssertionProblems.accept2<String>(
+   string,
+   nullableString!!,
+  )
+  NotNullAssertionProblems.accept2<String>(
+   null!!,
+   string,
+  )
   NotNullAssertionProblems.accept2<String?>(nullableString, string)
-  NotNullAssertionProblems.acceptVararg<String>(string, null!!)
-  NotNullAssertionProblems.acceptVararg<String>(string, nullableString!!)
-  NotNullAssertionProblems.acceptVararg<String>(null!!, string)
+  NotNullAssertionProblems.acceptVararg<String>(
+   string,
+   null!!,
+  )
+  NotNullAssertionProblems.acceptVararg<String>(
+   string,
+   nullableString!!,
+  )
+  NotNullAssertionProblems.acceptVararg<String>(
+   null!!,
+   string,
+  )
   NotNullAssertionProblems.acceptVararg<String?>(nullableString, string)
-  NotNullAssertionProblems.acceptGeneric<String>(supplier, nullableString!!)
-  NotNullAssertionProblems.acceptUpperBound<String>(supplier, nullableString!!)
+  NotNullAssertionProblems.acceptGeneric<String>(
+   supplier,
+   nullableString!!,
+  )
+  NotNullAssertionProblems.acceptUpperBound<String>(
+   supplier,
+   nullableString!!,
+  )
  }
 
  @ObjCName("testExplicitConstructorTypeArguments")
@@ -107,8 +139,14 @@ open class NotNullAssertionProblems {
   NotNullAssertionProblems.VarargConsumer<String?>(string, nullableString)
   NotNullAssertionProblems.VarargConsumer<String?>(null, string)
   NotNullAssertionProblems.VarargConsumer<String?>(nullableString, string)
-  NotNullAssertionProblems.GenericConsumer<String?>(supplier as NotNullAssertionProblems.Supplier<String?>, nullableString)
-  NotNullAssertionProblems.UpperWildcardConsumer<String?>(supplier as NotNullAssertionProblems.Supplier<String>, nullableString)
+  NotNullAssertionProblems.GenericConsumer<String?>(
+   supplier as NotNullAssertionProblems.Supplier<String?>,
+   nullableString,
+  )
+  NotNullAssertionProblems.UpperWildcardConsumer<String?>(
+   supplier as NotNullAssertionProblems.Supplier<String>,
+   nullableString,
+  )
  }
 
  @ObjCName("testImplicitConstructorTypeArguments")
@@ -117,17 +155,43 @@ open class NotNullAssertionProblems {
   @ObjCName("withJ2ktNotNullAssertionProblems_Supplier") supplier: NotNullAssertionProblems.Supplier<String>,
   @ObjCName("withNSString") nullableString: String?
  ) {
-  NotNullAssertionProblems.Consumer<Any>(null!!)
-  NotNullAssertionProblems.Consumer<String>(string, null!!)
-  NotNullAssertionProblems.Consumer<String>(string, nullableString!!)
-  NotNullAssertionProblems.Consumer<String>(null!!, string)
+  NotNullAssertionProblems.Consumer<Any>(
+   null!!,
+  )
+  NotNullAssertionProblems.Consumer<String>(
+   string,
+   null!!,
+  )
+  NotNullAssertionProblems.Consumer<String>(
+   string,
+   nullableString!!,
+  )
+  NotNullAssertionProblems.Consumer<String>(
+   null!!,
+   string,
+  )
   NotNullAssertionProblems.Consumer<String?>(nullableString, string)
-  NotNullAssertionProblems.VarargConsumer<String>(string, null!!)
-  NotNullAssertionProblems.VarargConsumer<String>(string, nullableString!!)
-  NotNullAssertionProblems.VarargConsumer<String>(null!!, string)
+  NotNullAssertionProblems.VarargConsumer<String>(
+   string,
+   null!!,
+  )
+  NotNullAssertionProblems.VarargConsumer<String>(
+   string,
+   nullableString!!,
+  )
+  NotNullAssertionProblems.VarargConsumer<String>(
+   null!!,
+   string,
+  )
   NotNullAssertionProblems.VarargConsumer<String?>(nullableString, string)
-  NotNullAssertionProblems.GenericConsumer<String>(supplier, nullableString!!)
-  NotNullAssertionProblems.UpperWildcardConsumer<String>(supplier, nullableString!!)
+  NotNullAssertionProblems.GenericConsumer<String>(
+   supplier,
+   nullableString!!,
+  )
+  NotNullAssertionProblems.UpperWildcardConsumer<String>(
+   supplier,
+   nullableString!!,
+  )
  }
 
  @ObjCName("testImplicitRawConstructorTypeArguments")
@@ -145,8 +209,14 @@ open class NotNullAssertionProblems {
   NotNullAssertionProblems.VarargConsumer<Any?>(string, nullableString)
   NotNullAssertionProblems.VarargConsumer<Any?>(null, string)
   NotNullAssertionProblems.VarargConsumer<Any?>(nullableString, string)
-  NotNullAssertionProblems.GenericConsumer<Any?>(supplier as NotNullAssertionProblems.Supplier<Any?>, nullableString)
-  NotNullAssertionProblems.UpperWildcardConsumer<Any?>(supplier as NotNullAssertionProblems.Supplier<Any?>, nullableString)
+  NotNullAssertionProblems.GenericConsumer<Any?>(
+   supplier as NotNullAssertionProblems.Supplier<Any?>,
+   nullableString,
+  )
+  NotNullAssertionProblems.UpperWildcardConsumer<Any?>(
+   supplier as NotNullAssertionProblems.Supplier<Any?>,
+   nullableString,
+  )
  }
 
  @ObjCName("J2ktJ2ktNotNullAssertionProblemsCompanion", exact = true)
@@ -157,9 +227,17 @@ open class NotNullAssertionProblems {
    @ObjCName("withNSString") string: String,
    @ObjCName("withJ2ktNotNullAssertionProblems_Supplier") wildcardSupplier: NotNullAssertionProblems.Supplier<*>
   ) {
-   NotNullAssertionProblems.accept1(wildcardSupplier.getValue())
-   NotNullAssertionProblems.accept2<Any?>(string, wildcardSupplier.getValue())
-   NotNullAssertionProblems.acceptVararg<Any?>(string, wildcardSupplier.getValue())
+   NotNullAssertionProblems.accept1(
+    wildcardSupplier.getValue(),
+   )
+   NotNullAssertionProblems.accept2<Any?>(
+    string,
+    wildcardSupplier.getValue(),
+   )
+   NotNullAssertionProblems.acceptVararg<Any?>(
+    string,
+    wildcardSupplier.getValue(),
+   )
   }
 
   @JvmStatic
@@ -168,9 +246,17 @@ open class NotNullAssertionProblems {
    @ObjCName("withNSString") string: String,
    @ObjCName("withJ2ktNotNullAssertionProblems_Supplier") wildcardSupplier: NotNullAssertionProblems.Supplier<*>
   ) {
-   NotNullAssertionProblems.Consumer(wildcardSupplier.getValue())
-   NotNullAssertionProblems.Consumer<Any?>(string, wildcardSupplier.getValue())
-   NotNullAssertionProblems.VarargConsumer<Any?>(string, wildcardSupplier.getValue())
+   NotNullAssertionProblems.Consumer(
+    wildcardSupplier.getValue(),
+   )
+   NotNullAssertionProblems.Consumer<Any?>(
+    string,
+    wildcardSupplier.getValue(),
+   )
+   NotNullAssertionProblems.VarargConsumer<Any?>(
+    string,
+    wildcardSupplier.getValue(),
+   )
   }
 
   @JvmStatic
@@ -179,9 +265,17 @@ open class NotNullAssertionProblems {
    @ObjCName("withNSString") string: String,
    @ObjCName("withJ2ktNotNullAssertionProblems_Supplier") wildcardSupplier: NotNullAssertionProblems.Supplier<*>
   ) {
-   NotNullAssertionProblems.Consumer<Any?>(wildcardSupplier.getValue())
-   NotNullAssertionProblems.Consumer<Any?>(string, wildcardSupplier.getValue())
-   NotNullAssertionProblems.VarargConsumer<Any?>(string, wildcardSupplier.getValue())
+   NotNullAssertionProblems.Consumer<Any?>(
+    wildcardSupplier.getValue(),
+   )
+   NotNullAssertionProblems.Consumer<Any?>(
+    string,
+    wildcardSupplier.getValue(),
+   )
+   NotNullAssertionProblems.VarargConsumer<Any?>(
+    string,
+    wildcardSupplier.getValue(),
+   )
   }
 
   @JvmStatic
@@ -189,8 +283,18 @@ open class NotNullAssertionProblems {
   fun testImplicitConstructorTypeArguments_inference(
    @ObjCName("withNSString") string: String
   ) {
-   NotNullAssertionProblems.Consumer<String>(string, null!!).accept(null!!)
-   NotNullAssertionProblems.VarargConsumer<String>(string, null!!).accept(null!!)
+   NotNullAssertionProblems.Consumer<String>(
+    string,
+    null!!,
+   ).accept(
+    null!!,
+   )
+   NotNullAssertionProblems.VarargConsumer<String>(
+    string,
+    null!!,
+   ).accept(
+    null!!,
+   )
   }
 
   @JvmStatic

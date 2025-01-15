@@ -63,8 +63,12 @@ open class Main {
    vararg @ObjCName("withNSStringArray") args: String?
   ) {
    val args_1: Array<String?>? = args as Array<String?>?
-   Main.testFooOverlay(Main.FooImpl() as Any as Main.FooOverlay)
-   Main.useDirectlyAsFoo(Main.FooImpl())
+   Main.testFooOverlay(
+    Main.FooImpl() as Any as Main.FooOverlay,
+   )
+   Main.useDirectlyAsFoo(
+    Main.FooImpl(),
+   )
   }
  }
 

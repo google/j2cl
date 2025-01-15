@@ -50,29 +50,61 @@ open class BooleanOperations {
   r = r.xor(rs)
   r = r.and(rs)
   r = r.or(rs)
-  BooleanOperations.acceptBoolean(ls == rs)
-  BooleanOperations.acceptBoolean(ls != rs)
-  BooleanOperations.acceptBoolean(ls.xor(rs))
-  BooleanOperations.acceptBoolean(ls.and(rs))
-  BooleanOperations.acceptBoolean(ls.or(rs))
-  BooleanOperations.acceptBoolean(ls && rs)
-  BooleanOperations.acceptBoolean(ls || rs)
-  BooleanOperations.acceptBoolean(run {
-   ls = rs
-   ls
-  })
+  BooleanOperations.acceptBoolean(
+   ls == rs,
+  )
+  BooleanOperations.acceptBoolean(
+   ls != rs,
+  )
+  BooleanOperations.acceptBoolean(
+   ls.xor(rs),
+  )
+  BooleanOperations.acceptBoolean(
+   ls.and(rs),
+  )
+  BooleanOperations.acceptBoolean(
+   ls.or(rs),
+  )
+  BooleanOperations.acceptBoolean(
+   ls && rs,
+  )
+  BooleanOperations.acceptBoolean(
+   ls || rs,
+  )
+  BooleanOperations.acceptBoolean(
+   run {
+    ls = rs
+    ls
+   },
+  )
   var br: Boolean? = null
-  br = java.lang.Boolean.valueOf(ls == rs)
-  br = java.lang.Boolean.valueOf(ls != rs)
-  br = java.lang.Boolean.valueOf(ls.xor(rs))
-  br = java.lang.Boolean.valueOf(ls.and(rs))
-  br = java.lang.Boolean.valueOf(ls.or(rs))
-  br = java.lang.Boolean.valueOf(ls && rs)
-  br = java.lang.Boolean.valueOf(ls || rs)
-  br = java.lang.Boolean.valueOf(run {
-   ls = rs
-   ls
-  })
+  br = java.lang.Boolean.valueOf(
+   ls == rs,
+  )
+  br = java.lang.Boolean.valueOf(
+   ls != rs,
+  )
+  br = java.lang.Boolean.valueOf(
+   ls.xor(rs),
+  )
+  br = java.lang.Boolean.valueOf(
+   ls.and(rs),
+  )
+  br = java.lang.Boolean.valueOf(
+   ls.or(rs),
+  )
+  br = java.lang.Boolean.valueOf(
+   ls && rs,
+  )
+  br = java.lang.Boolean.valueOf(
+   ls || rs,
+  )
+  br = java.lang.Boolean.valueOf(
+   run {
+    ls = rs
+    ls
+   },
+  )
   if (ls == rs) {
    r = true
   }
@@ -108,10 +140,12 @@ open class BooleanOperations {
   val finalOuter: Outer? = Outer()
   finalOuter!!.b_pp_booleanoperations = finalOuter!!.b_pp_booleanoperations.or(true)
   var outer: Outer? = Outer()
-  outer!!.b_pp_booleanoperations = outer!!.b_pp_booleanoperations.or(run {
-   outer = null
-   outer
-  } == null)
+  outer!!.b_pp_booleanoperations = outer!!.b_pp_booleanoperations.or(
+   run {
+    outer = null
+    outer
+   } == null,
+  )
  }
 
  @ObjCName("J2ktBooleanoperationsBooleanOperationsCompanion", exact = true)

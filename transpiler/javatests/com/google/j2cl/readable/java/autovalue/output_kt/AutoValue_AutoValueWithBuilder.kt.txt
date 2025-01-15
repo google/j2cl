@@ -61,7 +61,9 @@ class AutoValue_AutoValueWithBuilder: AutoValueWithBuilder {
   }
   if (o is AutoValueWithBuilder) {
    val that: AutoValueWithBuilder? = o as AutoValueWithBuilder?
-   return this.booleanField == that!!.getBooleanField() && (if (this.nullableField == null) that!!.getNullableField() == null else this.nullableField!!.equals(that!!.getNullableField() as Any?))
+   return this.booleanField == that!!.getBooleanField() && (if (this.nullableField == null) that!!.getNullableField() == null else this.nullableField!!.equals(
+    that!!.getNullableField() as Any?,
+   ))
   }
   return false
  }
@@ -69,9 +71,13 @@ class AutoValue_AutoValueWithBuilder: AutoValueWithBuilder {
  override fun hashCode(): Int {
   var h___: Int = 1
   h___ = h___ * 1000003
-  h___ = h___.xor(if (this.booleanField) 1231 else 1237)
+  h___ = h___.xor(
+   if (this.booleanField) 1231 else 1237,
+  )
   h___ = h___ * 1000003
-  h___ = h___.xor(if (this.nullableField == null) 0 else this.nullableField!!.hashCode())
+  h___ = h___.xor(
+   if (this.nullableField == null) 0 else this.nullableField!!.hashCode(),
+  )
   return h___
  }
 
@@ -97,7 +103,9 @@ class AutoValue_AutoValueWithBuilder: AutoValueWithBuilder {
 
   override fun setBooleanField(booleanField: Boolean): AutoValueWithBuilder.Builder? {
    this.booleanField = booleanField
-   this.set___0 = this.set___0.toInt().or(1.toByte().toInt()).toByte()
+   this.set___0 = this.set___0.toInt().or(
+    1.toByte().toInt(),
+   ).toByte()
    return this
   }
 
@@ -109,9 +117,14 @@ class AutoValue_AutoValueWithBuilder: AutoValueWithBuilder {
   override fun build(): AutoValueWithBuilder? {
    if (this.set___0.toInt() != 1) {
     val missing: String? = " booleanField"
-    throw IllegalStateException("Missing required properties:" + missing)
+    throw IllegalStateException(
+     "Missing required properties:" + missing,
+    )
    }
-   return AutoValue_AutoValueWithBuilder(this@Builder.booleanField, this@Builder.nullableField)
+   return AutoValue_AutoValueWithBuilder(
+    this@Builder.booleanField,
+    this@Builder.nullableField,
+   )
   }
  }
 }

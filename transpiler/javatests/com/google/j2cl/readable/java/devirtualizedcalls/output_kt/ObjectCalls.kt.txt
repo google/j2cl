@@ -46,11 +46,15 @@ open class ObjectCalls {
 
  @ObjCName("test")
  open fun test() {
-  this.equals(Any())
+  this.equals(
+   Any(),
+  )
   this.hashCode()
   this.toString()
   this.getClass()
-  this.equals(Any())
+  this.equals(
+   Any(),
+  )
   this.hashCode()
   this.toString()
   this.getClass()
@@ -58,6 +62,8 @@ open class ObjectCalls {
 
  @ObjCName("testNotEquals")
  open fun testNotEquals(): Boolean {
-  return !this.equals(Any())
+  return !this.equals(
+   Any(),
+  )
  }
 }

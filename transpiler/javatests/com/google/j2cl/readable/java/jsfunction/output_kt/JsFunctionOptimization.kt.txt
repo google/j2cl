@@ -80,16 +80,21 @@ open class JsFunctionOptimization {
     return ""
    }
   })
-  Holder(object : JsFunctionOptimization.F {
-   override fun m(s: String?): String? {
-    return ""
-   }
-  })
-  Holder(1, object : JsFunctionOptimization.F {
-   override fun m(s: String?): String? {
-    return ""
-   }
-  })
+  Holder(
+   object : JsFunctionOptimization.F {
+    override fun m(s: String?): String? {
+     return ""
+    }
+   },
+  )
+  Holder(
+   1,
+   object : JsFunctionOptimization.F {
+    override fun m(s: String?): String? {
+     return ""
+    }
+   },
+  )
  }
 
  @ObjCName("J2ktJsfunctionJsFunctionOptimization_F", exact = true)

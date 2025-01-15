@@ -107,26 +107,64 @@ open class Varargs {
  open fun main() {
   val v: Varargs? = Varargs()
   v!!.test(1)
-  v!!.test(1, Any())
-  v!!.test(1, *arrayOf<Any?>(Any())!!)
-  v!!.test(1, *arrayOf<Any?>()!!)
-  v!!.test(1, *(arrayOf<Array<Any?>?>() as Array<Any?>?)!!)
-  v!!.test(1, *(Varargs.passthrough<Array<String?>?>(arrayOf<String?>("a")) as Array<Any?>?)!!)
-  v!!.test(1, *null!!)
-  v!!.testCloneable(*(arrayOf<Array<Any?>?>() as Array<Cloneable?>?)!!)
-  v!!.testSerializable(*(arrayOf<Array<Any?>?>() as Array<Serializable?>?)!!)
-  v!!.testLambda(Varargs.FunctionalInterface { it: Array<out String?>? ->
-   val it_1: Array<String?>? = it as Array<String?>?
-   this.args = it_1 as Array<Any?>?
-  })
-  v!!.testOverloaded("foo" as Any?)
+  v!!.test(
+   1,
+   Any(),
+  )
+  v!!.test(
+   1,
+   *arrayOf<Any?>(Any())!!,
+  )
+  v!!.test(
+   1,
+   *arrayOf<Any?>()!!,
+  )
+  v!!.test(
+   1,
+   *(arrayOf<Array<Any?>?>() as Array<Any?>?)!!,
+  )
+  v!!.test(
+   1,
+   *(Varargs.passthrough<Array<String?>?>(
+    arrayOf<String?>("a"),
+   ) as Array<Any?>?)!!,
+  )
+  v!!.test(
+   1,
+   *null!!,
+  )
+  v!!.testCloneable(
+   *(arrayOf<Array<Any?>?>() as Array<Cloneable?>?)!!,
+  )
+  v!!.testSerializable(
+   *(arrayOf<Array<Any?>?>() as Array<Serializable?>?)!!,
+  )
+  v!!.testLambda(
+   Varargs.FunctionalInterface { it: Array<out String?>? ->
+    val it_1: Array<String?>? = it as Array<String?>?
+    this.args = it_1 as Array<Any?>?
+   },
+  )
+  v!!.testOverloaded(
+   "foo" as Any?,
+  )
   v!!.testOverloaded("foo", "bar")
-  v!!.testOverloaded("foo" as Any)
-  v!!.testOverloaded(1.toLong())
-  v!!.testOverloaded(java.lang.Long.valueOf(1L) as Any?)
+  v!!.testOverloaded(
+   "foo" as Any,
+  )
+  v!!.testOverloaded(
+   1.toLong(),
+  )
+  v!!.testOverloaded(
+   java.lang.Long.valueOf(1L) as Any?,
+  )
   v!!.testOverloaded(1L)
   v!!.testOverloaded(1L, 2L, 3L)
-  v!!.testOverloaded(1.toLong(), 2L, 3L)
+  v!!.testOverloaded(
+   1.toLong(),
+   2L,
+   3L,
+  )
  }
 
  @ObjCName("J2ktVarargsVarargsCompanion", exact = true)

@@ -104,7 +104,9 @@ open class Main {
    val bar: Bar? = Bar(6, 7)
    val unusedStr: String? = bar!!.toString()
    val unusedHash: Int = bar!!.hashCode()
-   val unusedEq: Boolean = bar!!.equals(Any())
+   val unusedEq: Boolean = bar!!.equals(
+    Any(),
+   )
   }
 
   @JvmStatic

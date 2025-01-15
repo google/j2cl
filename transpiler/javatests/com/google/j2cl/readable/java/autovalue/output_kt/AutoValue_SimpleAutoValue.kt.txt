@@ -90,7 +90,9 @@ class AutoValue_SimpleAutoValue: SimpleAutoValue {
  }
 
  override fun toString(): String {
-  return "SimpleAutoValue{" + "intField=" + this.intField + ", " + "booleanField=" + this.booleanField + ", " + "stringField=" + this.stringField + ", " + "doubleField=" + this.doubleField + ", " + "nullableField=" + this.nullableField + ", " + "arrayField=" + Arrays.toString(this.arrayField) + "}"
+  return "SimpleAutoValue{" + "intField=" + this.intField + ", " + "booleanField=" + this.booleanField + ", " + "stringField=" + this.stringField + ", " + "doubleField=" + this.doubleField + ", " + "nullableField=" + this.nullableField + ", " + "arrayField=" + Arrays.toString(
+   this.arrayField,
+  ) + "}"
  }
 
  override fun equals(o: Any?): Boolean {
@@ -99,7 +101,16 @@ class AutoValue_SimpleAutoValue: SimpleAutoValue {
   }
   if (o is SimpleAutoValue) {
    val that: SimpleAutoValue? = o as SimpleAutoValue?
-   return this.intField == that!!.getIntField() && this.booleanField == that!!.getBooleanField() && this.stringField!!.equals(that!!.getStringField()) && this.doubleField!!.equals(that!!.getDoubleField() as Any?) && (if (this.nullableField == null) that!!.getNullableField() == null else this.nullableField!!.equals(that!!.getNullableField() as Any?)) && Arrays.equals(this.arrayField, if (that is AutoValue_SimpleAutoValue) (that as AutoValue_SimpleAutoValue?)!!.arrayField else that!!.getArrayField())
+   return this.intField == that!!.getIntField() && this.booleanField == that!!.getBooleanField() && this.stringField!!.equals(
+    that!!.getStringField(),
+   ) && this.doubleField!!.equals(
+    that!!.getDoubleField() as Any?,
+   ) && (if (this.nullableField == null) that!!.getNullableField() == null else this.nullableField!!.equals(
+    that!!.getNullableField() as Any?,
+   )) && Arrays.equals(
+    this.arrayField,
+    if (that is AutoValue_SimpleAutoValue) (that as AutoValue_SimpleAutoValue?)!!.arrayField else that!!.getArrayField(),
+   )
   }
   return false
  }
@@ -107,17 +118,31 @@ class AutoValue_SimpleAutoValue: SimpleAutoValue {
  override fun hashCode(): Int {
   var h___: Int = 1
   h___ = h___ * 1000003
-  h___ = h___.xor(this.intField)
+  h___ = h___.xor(
+   this.intField,
+  )
   h___ = h___ * 1000003
-  h___ = h___.xor(if (this.booleanField) 1231 else 1237)
+  h___ = h___.xor(
+   if (this.booleanField) 1231 else 1237,
+  )
   h___ = h___ * 1000003
-  h___ = h___.xor(this.stringField!!.hashCode())
+  h___ = h___.xor(
+   this.stringField!!.hashCode(),
+  )
   h___ = h___ * 1000003
-  h___ = h___.xor(this.doubleField!!.hashCode())
+  h___ = h___.xor(
+   this.doubleField!!.hashCode(),
+  )
   h___ = h___ * 1000003
-  h___ = h___.xor(if (this.nullableField == null) 0 else this.nullableField!!.hashCode())
+  h___ = h___.xor(
+   if (this.nullableField == null) 0 else this.nullableField!!.hashCode(),
+  )
   h___ = h___ * 1000003
-  h___ = h___.xor(Arrays.hashCode(this.arrayField))
+  h___ = h___.xor(
+   Arrays.hashCode(
+    this.arrayField,
+   ),
+  )
   return h___
  }
 }

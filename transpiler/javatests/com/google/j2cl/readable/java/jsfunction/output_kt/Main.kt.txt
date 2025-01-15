@@ -51,7 +51,10 @@ open class Main {
  open fun testJsFunction() {
   val func: Main.JsFunctionImplementation? = Main.JsFunctionImplementation()
   func!!.foo(10)
-  Main.callFn(Main.createNativeFunction(), 10)
+  Main.callFn(
+   Main.createNativeFunction(),
+   10,
+  )
   val a: Int = func!!.field
   func!!.bar()
  }
@@ -59,14 +62,20 @@ open class Main {
  @ObjCName("testJsFunctionsCapturingLocal")
  open fun testJsFunctionsCapturingLocal() {
   val n: Int = 4
-  Main.callFn(Main.JsFunctionInterface { number: Int ->
-   return@JsFunctionInterface number + n
-  }, n)
-  Main.callFn(object : Main.JsFunctionInterface {
-   override fun foo(a: Int): Int {
-    return a + n
-   }
-  }, n)
+  Main.callFn(
+   Main.JsFunctionInterface { number: Int ->
+    return@JsFunctionInterface number + n
+   },
+   n,
+  )
+  Main.callFn(
+   object : Main.JsFunctionInterface {
+    override fun foo(a: Int): Int {
+     return a + n
+    }
+   },
+   n,
+  )
   object : Main.JsFunctionInterface {
    override fun foo(a: Int): Int {
     this@Main.instanceMethod()
@@ -90,7 +99,9 @@ open class Main {
  @ObjCName("testJsFunctionErasureCasts")
  open fun testJsFunctionErasureCasts() {
   val list: MutableList<Main.Function<String?, String?>?>? = ArrayList<Main.Function<String, String>>() as MutableList<Main.Function<String?, String?>?>?
-  Main.acceptsJsFunction(list!!.get(0) as Main.Function<String?, String?>?)
+  Main.acceptsJsFunction(
+   list!!.get(0) as Main.Function<String?, String?>?,
+  )
  }
 
  internal open fun testJsFunctionVarargs_pp_jsfunction(): Main.JsFunctionVarargs? {
@@ -121,7 +132,10 @@ open class Main {
  @ObjCName("testVarArgsMethodReferenceToJsFuncion")
  open fun testVarArgsMethodReferenceToJsFuncion() {
   val c: Main.ForEachCallBack<Main.ElementalJsFunction?>? = Main.ForEachCallBack<Main.ElementalJsFunction?> { arg0: Main.ElementalJsFunction?, arg1: Int, arg2: Array<Main.ElementalJsFunction?>? ->
-   return@ForEachCallBack arg0!!.call(Integer.valueOf(arg1), arg2)
+   return@ForEachCallBack arg0!!.call(
+    Integer.valueOf(arg1),
+    arg2,
+   )
   }
  }
 
@@ -167,7 +181,9 @@ open class Main {
  internal open fun testFunctionExpressionTypeReplacement_pp_jsfunction() {
   val f: Main.ParametricJsFunction<String?>? = Main.ParametricJsFunction<String?> { unused: String? ->
    val l: MutableList<MutableList<*>?>? = ArrayList<MutableList<*>>() as MutableList<MutableList<*>?>?
-   l!!.add(ArrayList<String>())
+   l!!.add(
+    ArrayList<String>(),
+   )
   }
  }
 
@@ -229,7 +245,10 @@ open class Main {
    @ObjCName("withJsfunctionMain_JsBiFunction") f: Main.JsBiFunction<String?, Int?>?,
    @ObjCName("withNSString") s: String?
   ): String? {
-   return f!!.apply(s, Integer.valueOf(1))
+   return f!!.apply(
+    s,
+    Integer.valueOf(1),
+   )
   }
 
   @JvmStatic
@@ -258,7 +277,10 @@ open class Main {
    @ObjCName("withJsfunctionMain_TIntegerJsBiFunction") f: Main.TIntegerJsBiFunction<String?>?,
    @ObjCName("withNSString") s: String?
   ): String? {
-   return f!!.apply(s, Integer.valueOf(1) as Int?)
+   return f!!.apply(
+    s,
+    Integer.valueOf(1) as Int?,
+   )
   }
 
   @JvmStatic
@@ -266,16 +288,50 @@ open class Main {
   fun testParameterTypes() {
    val tIntegerJsBiFunction: Main.JsBiFunction<Any?, Number?>? = Main.TIntegerJsBiFunction<String?>() as Main.JsBiFunction<Any?, Number?>?
    val doubleDoubleJsBiFunction: Main.JsBiFunction<Any?, Number?>? = Main.DoubleDoubleJsBiFunction() as Main.JsBiFunction<Any?, Number?>?
-   Main.callInterfaceRaw(tIntegerJsBiFunction, "a", Integer.valueOf(1) as Number?)
-   Main.callInterfaceRaw(doubleDoubleJsBiFunction, java.lang.Double.valueOf(1.1) as Any?, java.lang.Double.valueOf(1.1) as Number?)
-   Main.callInterfaceParameterized(tIntegerJsBiFunction as Main.JsBiFunction<String?, Int?>?, "a")
-   Main.callInterfaceUnparameterized<String?, Int?>(tIntegerJsBiFunction as Main.JsBiFunction<String?, Int?>?, "a", Integer.valueOf(1))
-   Main.callInterfaceUnparameterized<Double?, Double?>(doubleDoubleJsBiFunction as Main.JsBiFunction<Double?, Double?>?, java.lang.Double.valueOf(1.1), java.lang.Double.valueOf(1.1))
-   Main.callImplementorRaw(Main.TIntegerJsBiFunction<Double?>() as Main.TIntegerJsBiFunction<Any?>?, java.lang.Double.valueOf(1.1) as Any?, Integer.valueOf(1) as Int?)
-   Main.callImplementorParameterized(Main.TIntegerJsBiFunction<String?>(), "")
-   tIntegerJsBiFunction!!.apply("a", Integer.valueOf(1))
-   doubleDoubleJsBiFunction!!.apply(java.lang.Double.valueOf(1.1), java.lang.Double.valueOf(1.1))
-   Main.callOnFunction(Main.DoubleDoubleJsBiFunction())
+   Main.callInterfaceRaw(
+    tIntegerJsBiFunction,
+    "a",
+    Integer.valueOf(1) as Number?,
+   )
+   Main.callInterfaceRaw(
+    doubleDoubleJsBiFunction,
+    java.lang.Double.valueOf(1.1) as Any?,
+    java.lang.Double.valueOf(1.1) as Number?,
+   )
+   Main.callInterfaceParameterized(
+    tIntegerJsBiFunction as Main.JsBiFunction<String?, Int?>?,
+    "a",
+   )
+   Main.callInterfaceUnparameterized<String?, Int?>(
+    tIntegerJsBiFunction as Main.JsBiFunction<String?, Int?>?,
+    "a",
+    Integer.valueOf(1),
+   )
+   Main.callInterfaceUnparameterized<Double?, Double?>(
+    doubleDoubleJsBiFunction as Main.JsBiFunction<Double?, Double?>?,
+    java.lang.Double.valueOf(1.1),
+    java.lang.Double.valueOf(1.1),
+   )
+   Main.callImplementorRaw(
+    Main.TIntegerJsBiFunction<Double?>() as Main.TIntegerJsBiFunction<Any?>?,
+    java.lang.Double.valueOf(1.1) as Any?,
+    Integer.valueOf(1) as Int?,
+   )
+   Main.callImplementorParameterized(
+    Main.TIntegerJsBiFunction<String?>(),
+    "",
+   )
+   tIntegerJsBiFunction!!.apply(
+    "a",
+    Integer.valueOf(1),
+   )
+   doubleDoubleJsBiFunction!!.apply(
+    java.lang.Double.valueOf(1.1),
+    java.lang.Double.valueOf(1.1),
+   )
+   Main.callOnFunction(
+    Main.DoubleDoubleJsBiFunction(),
+   )
   }
 
   @JvmStatic
@@ -510,9 +566,11 @@ open class Main {
  open class TestJsFunctionInJsOverlayCapturingOuter internal constructor() {
   @JsOverlay
   internal fun test_pp_jsfunction() {
-   this.sort_pp_jsfunction(Main.JsFunctionInterface { a: Int ->
-    return@JsFunctionInterface if (this@TestJsFunctionInJsOverlayCapturingOuter == null) 0 else 1
-   })
+   this.sort_pp_jsfunction(
+    Main.JsFunctionInterface { a: Int ->
+     return@JsFunctionInterface if (this@TestJsFunctionInJsOverlayCapturingOuter == null) 0 else 1
+    },
+   )
   }
 
   @JsOverlay

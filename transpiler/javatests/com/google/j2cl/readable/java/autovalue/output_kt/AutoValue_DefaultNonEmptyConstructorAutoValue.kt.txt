@@ -61,7 +61,9 @@ class AutoValue_DefaultNonEmptyConstructorAutoValue: DefaultNonEmptyConstructorA
  override fun hashCode(): Int {
   var h___: Int = 1
   h___ = h___ * 1000003
-  h___ = h___.xor(if (this.booleanField) 1231 else 1237)
+  h___ = h___.xor(
+   if (this.booleanField) 1231 else 1237,
+  )
   return h___
  }
 
@@ -73,16 +75,22 @@ class AutoValue_DefaultNonEmptyConstructorAutoValue: DefaultNonEmptyConstructorA
 
   override fun setBooleanField(booleanField: Boolean): DefaultNonEmptyConstructorAutoValue.Builder? {
    this.booleanField = booleanField
-   this.set___0 = this.set___0.toInt().or(1.toByte().toInt()).toByte()
+   this.set___0 = this.set___0.toInt().or(
+    1.toByte().toInt(),
+   ).toByte()
    return this
   }
 
   override fun build(): DefaultNonEmptyConstructorAutoValue? {
    if (this.set___0.toInt() != 1) {
     val missing: String? = " booleanField"
-    throw IllegalStateException("Missing required properties:" + missing)
+    throw IllegalStateException(
+     "Missing required properties:" + missing,
+    )
    }
-   return AutoValue_DefaultNonEmptyConstructorAutoValue(this@Builder.booleanField)
+   return AutoValue_DefaultNonEmptyConstructorAutoValue(
+    this@Builder.booleanField,
+   )
   }
  }
 }

@@ -69,7 +69,9 @@ class AutoValue_ExtendingAutoValue: ExtendingAutoValue {
   }
   if (o is ExtendingAutoValue) {
    val that: ExtendingAutoValue? = o as ExtendingAutoValue?
-   return this.baseField == that!!.getBaseField() && this.booleanField == that!!.getBooleanField() && this.stringField!!.equals(that!!.getStringField())
+   return this.baseField == that!!.getBaseField() && this.booleanField == that!!.getBooleanField() && this.stringField!!.equals(
+    that!!.getStringField(),
+   )
   }
   return false
  }
@@ -77,11 +79,17 @@ class AutoValue_ExtendingAutoValue: ExtendingAutoValue {
  override fun hashCode(): Int {
   var h___: Int = 1
   h___ = h___ * 1000003
-  h___ = h___.xor(this.baseField)
+  h___ = h___.xor(
+   this.baseField,
+  )
   h___ = h___ * 1000003
-  h___ = h___.xor(if (this.booleanField) 1231 else 1237)
+  h___ = h___.xor(
+   if (this.booleanField) 1231 else 1237,
+  )
   h___ = h___ * 1000003
-  h___ = h___.xor(this.stringField!!.hashCode())
+  h___ = h___.xor(
+   this.stringField!!.hashCode(),
+  )
   return h___
  }
 }

@@ -52,8 +52,13 @@ open class LambdaParameterTypeInference {
   fun <T> test(
    @ObjCName("withJ2ktLambdaParameterTypeInference_Supplier") supplier: LambdaParameterTypeInference.Supplier<out T>?
   ) {
-   LambdaParameterTypeInference.add(supplier, LambdaParameterTypeInference.wrap(LambdaParameterTypeInference.Consumer { x /* capture#1-of out T */ ->
-   }))
+   LambdaParameterTypeInference.add(
+    supplier,
+    LambdaParameterTypeInference.wrap(
+     LambdaParameterTypeInference.Consumer { x /* capture#1-of out T */ ->
+     },
+    ),
+   )
   }
  }
 

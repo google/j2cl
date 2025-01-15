@@ -49,8 +49,14 @@ open class Main {
    x = Main.property === "NOTSIMPLE"
    x = Main.propertyWithDefault!!.equals("SIMPLE")
    x = System.getProperty("jre.bar", "bar")!!.equals("bar")
-   x = System.getProperty("jre.classMetadata", Main.mightHaveSideEffects())!!.equals("SIMPLE")
-   x = System.getProperty("unset.property", Main.mightHaveSideEffects())!!.equals("foo")
+   x = System.getProperty(
+    "jre.classMetadata",
+    Main.mightHaveSideEffects(),
+   )!!.equals("SIMPLE")
+   x = System.getProperty(
+    "unset.property",
+    Main.mightHaveSideEffects(),
+   )!!.equals("foo")
   }
 
   @JvmStatic

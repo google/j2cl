@@ -35,8 +35,10 @@ open class TypeWildCards {
   fun <T: TypeWildCards.Observable<*>?> testObservableParameterized(
    @ObjCName("withJ2ktnotpassingTypeWildCards_Observable") observable: T
   ) {
-   (observable as TypeWildCards.Observable<Any?>?)!!.addObserver(TypeWildCards.Observer { e /* capture#1-of * */ ->
-   })
+   (observable as TypeWildCards.Observable<Any?>?)!!.addObserver(
+    TypeWildCards.Observer { e /* capture#1-of * */ ->
+    },
+   )
   }
 
   @JvmStatic
@@ -44,8 +46,10 @@ open class TypeWildCards {
   fun testRecursiveObservable(
    @ObjCName("withJ2ktnotpassingTypeWildCards_RecursiveObservable") observable: TypeWildCards.RecursiveObservable<*>?
   ) {
-   (observable as TypeWildCards.RecursiveObservable<TypeWildCards.RecursiveObservable<E>?>?)!!.addObserver(TypeWildCards.Observer { e /* capture#2-of out TypeWildCards.RecursiveObservable<*>? */ ->
-   })
+   (observable as TypeWildCards.RecursiveObservable<TypeWildCards.RecursiveObservable<E>?>?)!!.addObserver(
+    TypeWildCards.Observer { e /* capture#2-of out TypeWildCards.RecursiveObservable<*>? */ ->
+    },
+   )
   }
  }
 

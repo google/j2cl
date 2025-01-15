@@ -158,7 +158,9 @@ open class CastPrimitives {
 
  @ObjCName("testUnboxAndWiden")
  open fun testUnboxAndWiden() {
-  val boxedByte: Byte? = java.lang.Byte.valueOf(0.toByte())
+  val boxedByte: Byte? = java.lang.Byte.valueOf(
+   0.toByte(),
+  )
   val s: Short = boxedByte!!.toByte().toShort()
   val i: Int = boxedByte!!.toByte().toInt()
   val l: Long = boxedByte!!.toByte().toLong()
@@ -175,20 +177,48 @@ open class CastPrimitives {
   val l: Long = 9223372036854775807L
   val f: Float = 3.4028235E38f
   val d: Double = 1.7976931348623157E308
-  CastPrimitives.getShort(b.toShort())
-  CastPrimitives.getInt(b.toInt())
-  CastPrimitives.getLong(b.toLong())
-  CastPrimitives.getFloat(b.toFloat())
-  CastPrimitives.getDouble(b.toDouble())
-  CastPrimitives.getFloat(l.toFloat())
-  CastPrimitives.getDouble(l.toDouble())
-  CastPrimitives.getDouble(f.toDouble())
-  CastPrimitives.IntValueHolder(b.toInt())
-  CastPrimitives.IntValueHolder(c.code)
-  CastPrimitives.IntValueHolder(s.toInt())
-  CastPrimitives.LongValueHolder(b.toLong())
-  CastPrimitives.LongValueHolder(c.code.toLong())
-  CastPrimitives.LongValueHolder(i.toLong())
+  CastPrimitives.getShort(
+   b.toShort(),
+  )
+  CastPrimitives.getInt(
+   b.toInt(),
+  )
+  CastPrimitives.getLong(
+   b.toLong(),
+  )
+  CastPrimitives.getFloat(
+   b.toFloat(),
+  )
+  CastPrimitives.getDouble(
+   b.toDouble(),
+  )
+  CastPrimitives.getFloat(
+   l.toFloat(),
+  )
+  CastPrimitives.getDouble(
+   l.toDouble(),
+  )
+  CastPrimitives.getDouble(
+   f.toDouble(),
+  )
+  CastPrimitives.IntValueHolder(
+   b.toInt(),
+  )
+  CastPrimitives.IntValueHolder(
+   c.code,
+  )
+  CastPrimitives.IntValueHolder(
+   s.toInt(),
+  )
+  CastPrimitives.LongValueHolder(
+   b.toLong(),
+  )
+  CastPrimitives.LongValueHolder(
+   c.code.toLong(),
+  )
+  CastPrimitives.LongValueHolder(
+   i.toLong(),
+  )
  }
 
  @ObjCName("testImplicitArrayIndexCasts")
@@ -230,8 +260,12 @@ open class CastPrimitives {
   tlong = flong.shr(fint)
   tlong = flong + fshort.toLong()
   tlong = flong + flong
-  tlong = flong.shl(tlong.toInt())
-  tlong = tlong.shl(flong.toInt())
+  tlong = flong.shl(
+   tlong.toInt(),
+  )
+  tlong = tlong.shl(
+   flong.toInt(),
+  )
   tlong = (0 + 1).toLong() + 2L
  }
 

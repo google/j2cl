@@ -49,23 +49,40 @@ open class NullabilityInferenceProblem internal constructor() {
 
   @JvmStatic
   private fun testImplicitTypeArguments(users: MutableIterable<NullabilityInferenceProblem.User>): NullabilityInferenceProblem.ImmutableList<NullabilityInferenceProblem.User> {
-   return NullabilityInferenceProblem.sortedCopyOf<NullabilityInferenceProblem.User>(java.util.Comparator.comparing<NullabilityInferenceProblem.User, String>(Function { user: NullabilityInferenceProblem.User ->
-    return@Function user.getName().orElse("")!!
-   }), users)
+   return NullabilityInferenceProblem.sortedCopyOf<NullabilityInferenceProblem.User>(
+    java.util.Comparator.comparing<NullabilityInferenceProblem.User, String>(
+     Function { user: NullabilityInferenceProblem.User ->
+      return@Function user.getName().orElse("")!!
+     },
+    ),
+    users,
+   )
   }
 
   @JvmStatic
   private fun testExplicitTypeArguments(users: MutableIterable<NullabilityInferenceProblem.User>): NullabilityInferenceProblem.ImmutableList<NullabilityInferenceProblem.User> {
-   return NullabilityInferenceProblem.sortedCopyOf<NullabilityInferenceProblem.User>(java.util.Comparator.comparing<NullabilityInferenceProblem.User, String>(Function { user: NullabilityInferenceProblem.User ->
-    return@Function user.getName().orElse("")!!
-   }), users)
+   return NullabilityInferenceProblem.sortedCopyOf<NullabilityInferenceProblem.User>(
+    java.util.Comparator.comparing<NullabilityInferenceProblem.User, String>(
+     Function { user: NullabilityInferenceProblem.User ->
+      return@Function user.getName().orElse("")!!
+     },
+    ),
+    users,
+   )
   }
 
   @JvmStatic
   private fun testCheckNotNull(users: MutableIterable<NullabilityInferenceProblem.User>): NullabilityInferenceProblem.ImmutableList<NullabilityInferenceProblem.User> {
-   return NullabilityInferenceProblem.sortedCopyOf<NullabilityInferenceProblem.User>(java.util.Comparator.comparing<NullabilityInferenceProblem.User, String>(Function { user: NullabilityInferenceProblem.User ->
-    return@Function NullabilityInferenceProblem.checkNotNull<String>(user.getName().orElse("")!!)
-   }), users)
+   return NullabilityInferenceProblem.sortedCopyOf<NullabilityInferenceProblem.User>(
+    java.util.Comparator.comparing<NullabilityInferenceProblem.User, String>(
+     Function { user: NullabilityInferenceProblem.User ->
+      return@Function NullabilityInferenceProblem.checkNotNull<String>(
+       user.getName().orElse("")!!,
+      )
+     },
+    ),
+    users,
+   )
   }
  }
 

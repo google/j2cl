@@ -36,7 +36,9 @@ open class InterfaceDevirtualize {
   @ObjCName("withJavaLangComparable") c: Comparable<T & Any>?,
   @ObjCName("withId") t: T
  ): Int {
-  return c!!.compareTo(t!!)
+  return c!!.compareTo(
+   t!!,
+  )
  }
 
  @ObjCName("compare1")
@@ -44,7 +46,9 @@ open class InterfaceDevirtualize {
   @ObjCName("withJavaLangComparable") c: Comparable<Any>?,
   @ObjCName("withId") o: Any?
  ): Int {
-  return c!!.compareTo(o!!)
+  return c!!.compareTo(
+   o!!,
+  )
  }
 
  @ObjCName("compare2")
@@ -52,7 +56,9 @@ open class InterfaceDevirtualize {
   @ObjCName("withJavaLangComparable") c: Comparable<Double>?,
   @ObjCName("withJavaLangDouble") d: Double?
  ): Int {
-  return c!!.compareTo(d!!)
+  return c!!.compareTo(
+   d!!,
+  )
  }
 
  @ObjCName("compare3")
@@ -60,7 +66,9 @@ open class InterfaceDevirtualize {
   @ObjCName("withJavaLangDouble") d1: Double?,
   @ObjCName("withJavaLangDouble") d2: Double?
  ): Int {
-  return d1!!.compareTo(d2!!)
+  return d1!!.compareTo(
+   d2!!,
+  )
  }
 
  @ObjCName("compare2")
@@ -68,7 +76,9 @@ open class InterfaceDevirtualize {
   @ObjCName("withJavaLangComparable") c: Comparable<Boolean>?,
   @ObjCName("withJavaLangBoolean") d: Boolean?
  ): Int {
-  return c!!.compareTo(d!!)
+  return c!!.compareTo(
+   d!!,
+  )
  }
 
  @ObjCName("compare3")
@@ -76,7 +86,9 @@ open class InterfaceDevirtualize {
   @ObjCName("withJavaLangBoolean") d1: Boolean?,
   @ObjCName("withJavaLangBoolean") d2: Boolean?
  ): Int {
-  return d1!!.compareTo(d2!!)
+  return d1!!.compareTo(
+   d2!!,
+  )
  }
 
  @ObjCName("compare2")
@@ -84,7 +96,9 @@ open class InterfaceDevirtualize {
   @ObjCName("withJavaLangComparable") c: Comparable<Int>?,
   @ObjCName("withJavaLangInteger") d: Int?
  ): Int {
-  return c!!.compareTo(d!!)
+  return c!!.compareTo(
+   d!!,
+  )
  }
 
  @ObjCName("compare3")
@@ -92,6 +106,8 @@ open class InterfaceDevirtualize {
   @ObjCName("withJavaLangInteger") d1: Int?,
   @ObjCName("withJavaLangInteger") d2: Int?
  ): Int {
-  return d1!!.compareTo(d2!!)
+  return d1!!.compareTo(
+   d2!!,
+  )
  }
 }

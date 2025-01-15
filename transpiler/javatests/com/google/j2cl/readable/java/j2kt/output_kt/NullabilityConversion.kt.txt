@@ -188,7 +188,9 @@ open class NullabilityConversion {
       @ObjCName("withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in NullabilityConversion.Parent>,
       @ObjCName("withJ2ktNullabilityConversion_Child") it: NullabilityConversion.Child?
      ) {
-      consumer.set(it as NullabilityConversion.Parent)
+      consumer.set(
+       it as NullabilityConversion.Parent,
+      )
      }
 
      @JvmStatic
@@ -221,7 +223,9 @@ open class NullabilityConversion {
       @ObjCName("withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in NullabilityConversion.Parent?>,
       @ObjCName("withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<*>
      ) {
-      consumer.set(supplier.get())
+      consumer.set(
+       supplier.get(),
+      )
      }
 
      @JvmStatic
@@ -230,7 +234,9 @@ open class NullabilityConversion {
       @ObjCName("withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in NullabilityConversion.Parent?>,
       @ObjCName("withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<out NullabilityConversion.Child>
      ) {
-      consumer.set(supplier.get())
+      consumer.set(
+       supplier.get(),
+      )
      }
 
      @JvmStatic
@@ -239,7 +245,9 @@ open class NullabilityConversion {
       @ObjCName("withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in NullabilityConversion.Parent>,
       @ObjCName("withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<out NullabilityConversion.Child>
      ) {
-      consumer.set(supplier.get())
+      consumer.set(
+       supplier.get(),
+      )
      }
     }
    }
@@ -349,7 +357,9 @@ open class NullabilityConversion {
        @ObjCName("withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in T>,
        @ObjCName("withJ2ktNullabilityConversion_Child") t: T?
       ) {
-       consumer.set(t as T)
+       consumer.set(
+        t as T,
+       )
       }
 
       @JvmStatic
@@ -367,7 +377,9 @@ open class NullabilityConversion {
        @ObjCName("withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in T & Any>,
        @ObjCName("withJ2ktNullabilityConversion_Child") t: T?
       ) {
-       consumer.set(t as (T & Any))
+       consumer.set(
+        t as (T & Any),
+       )
       }
 
       @JvmStatic

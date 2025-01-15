@@ -40,7 +40,10 @@ open class NullabilityInferenceProblem2 {
    @ObjCName("withJ2ktNullabilityInferenceProblem2_Supplier") supplier: NullabilityInferenceProblem2.Supplier<E>
   ): E {
    val local: E? = supplier.get()
-   return this.foo<E>(local as E, supplier.get())
+   return this.foo<E>(
+    local as E,
+    supplier.get(),
+   )
   }
 
   @ObjCName("foo")

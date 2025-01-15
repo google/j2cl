@@ -31,9 +31,13 @@ import kotlin.native.ObjCName
 open class BridgeMethodDefault internal constructor() {
  init {
   val jj: BridgeMethodDefault.JJ? = BridgeMethodDefault.C()
-  jj!!.m(Any())
+  jj!!.m(
+   Any(),
+  )
   val i: BridgeMethodDefault.I<Any?>? = jj
-  i!!.m(Any())
+  i!!.m(
+   Any(),
+  )
  }
 
  @ObjCName("J2ktBridgemethodsBridgeMethodDefault_I", exact = true)

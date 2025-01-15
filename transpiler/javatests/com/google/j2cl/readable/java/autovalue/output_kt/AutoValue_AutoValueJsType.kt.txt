@@ -68,9 +68,13 @@ class AutoValue_AutoValueJsType: AutoValueJsType {
  override fun hashCode(): Int {
   var h___: Int = 1
   h___ = h___ * 1000003
-  h___ = h___.xor(this.field)
+  h___ = h___.xor(
+   this.field,
+  )
   h___ = h___ * 1000003
-  h___ = h___.xor(this.withJsMethod)
+  h___ = h___.xor(
+   this.withJsMethod,
+  )
   return h___
  }
 }

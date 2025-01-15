@@ -65,7 +65,9 @@ open class NullabilityConversion {
       @ObjCName("withJ2ktnotpassingNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in NullabilityConversion.Parent>,
       @ObjCName("withJ2ktnotpassingNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<*>
      ) {
-      consumer.set(supplier.get())
+      consumer.set(
+       supplier.get(),
+      )
      }
     }
    }

@@ -35,21 +35,27 @@ open class GenericMethodReferences {
  internal open fun accept_pp_j2kt(fn: InterfaceWithGenericMethod?) {}
 
  internal open fun test_pp_j2kt(instance: GenericMethodReferences?) {
-  this.accept_pp_j2kt(object : InterfaceWithGenericMethod {
-   override fun <T> apply(arg0: T): T {
-    return GenericMethodReferences.staticGenericMethod_pp_j2kt<T>(arg0)
-   }
-  })
-  this.accept_pp_j2kt(object : InterfaceWithGenericMethod {
-   override fun <T> apply(arg0: T): T {
-    return this@GenericMethodReferences.instanceGenericMethod_pp_j2kt<T>(arg0)
-   }
-  })
-  this.accept_pp_j2kt(object : InterfaceWithGenericMethod {
-   override fun <T> apply(arg0: T): T {
-    return instance!!.instanceGenericMethod_pp_j2kt<T>(arg0)
-   }
-  })
+  this.accept_pp_j2kt(
+   object : InterfaceWithGenericMethod {
+    override fun <T> apply(arg0: T): T {
+     return GenericMethodReferences.staticGenericMethod_pp_j2kt<T>(arg0)
+    }
+   },
+  )
+  this.accept_pp_j2kt(
+   object : InterfaceWithGenericMethod {
+    override fun <T> apply(arg0: T): T {
+     return this@GenericMethodReferences.instanceGenericMethod_pp_j2kt<T>(arg0)
+    }
+   },
+  )
+  this.accept_pp_j2kt(
+   object : InterfaceWithGenericMethod {
+    override fun <T> apply(arg0: T): T {
+     return instance!!.instanceGenericMethod_pp_j2kt<T>(arg0)
+    }
+   },
+  )
  }
 
  @ObjCName("J2ktJ2ktGenericMethodReferencesCompanion", exact = true)

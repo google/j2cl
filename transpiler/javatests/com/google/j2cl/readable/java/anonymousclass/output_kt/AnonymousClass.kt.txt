@@ -79,7 +79,9 @@ open class AnonymousClass {
 
  @ObjCName("main")
  open fun main() {
-  val instance: SomeClass? = object : SomeClass(this@AnonymousClass.i_pp_anonymousclass) {
+  val instance: SomeClass? = object : SomeClass(
+   this@AnonymousClass.i_pp_anonymousclass,
+  ) {
    @JvmField
    internal var object_pp_anonymousclass: Any? = this
 
@@ -90,7 +92,9 @@ open class AnonymousClass {
     return "a"
    }
   }
-  val instanceWithStaticMembers: SomeClassWithStaticMembers? = object : SomeClassWithStaticMembers(this@AnonymousClass.i_pp_anonymousclass) {
+  val instanceWithStaticMembers: SomeClassWithStaticMembers? = object : SomeClassWithStaticMembers(
+   this@AnonymousClass.i_pp_anonymousclass,
+  ) {
    @JvmField
    internal var object_pp_anonymousclass: Any? = this
 
@@ -123,7 +127,9 @@ open class JsConstructorClass {
  @JsConstructor
  internal constructor(o: Any?)
 
- internal constructor(): this(if (JsConstructorClass.trueVar_pp_anonymousclass) object : Any() {} else null)
+ internal constructor(): this(
+  if (JsConstructorClass.trueVar_pp_anonymousclass) object : Any() {} else null,
+ )
 
  @ObjCName("J2ktAnonymousclassJsConstructorClassCompanion", exact = true)
  companion object {
@@ -135,5 +141,7 @@ open class JsConstructorClass {
 @ObjCName("J2ktAnonymousclassJsConstructorSubclass", exact = true)
 open class JsConstructorSubclass: JsConstructorClass {
  @JsConstructor
- internal constructor(): super(if (JsConstructorClass.trueVar_pp_anonymousclass) object : Any() {} else null)
+ internal constructor(): super(
+  if (JsConstructorClass.trueVar_pp_anonymousclass) object : Any() {} else null,
+ )
 }

@@ -35,7 +35,10 @@ class AutoValue_AutoValueWithExtensions: ___AutoValue_AutoValueWithExtensions {
  internal constructor(intField: Int, stringField: String?): super(intField, stringField)
 
  override fun toPrettyString_pp_autovalue(): String? {
-  return "AutoValueWithExtensions {" + "\n" + "  intField = " + this.getIntField() + "," + "\n" + "  stringField = " + AutoValue_AutoValueWithExtensions.format(this.getStringField(), 1) + "," + "\n" + "}"
+  return "AutoValueWithExtensions {" + "\n" + "  intField = " + this.getIntField() + "," + "\n" + "  stringField = " + AutoValue_AutoValueWithExtensions.format(
+   this.getStringField(),
+   1,
+  ) + "," + "\n" + "}"
  }
 
  @ObjCName("J2ktAutovalueAutoValue_AutoValueWithExtensionsCompanion", exact = true)
@@ -45,7 +48,10 @@ class AutoValue_AutoValueWithExtensions: ___AutoValue_AutoValueWithExtensions {
    if (value == null) {
     return "null"
    }
-   return value!!.toString().java_replace("\n", "\n" + AutoValue_AutoValueWithExtensions.___indent(indentLevel))
+   return value!!.toString().java_replace(
+    "\n",
+    "\n" + AutoValue_AutoValueWithExtensions.___indent(indentLevel),
+   )
   }
 
   @JvmStatic

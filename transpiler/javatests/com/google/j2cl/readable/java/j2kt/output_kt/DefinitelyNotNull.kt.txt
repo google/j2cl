@@ -88,7 +88,9 @@ open class DefinitelyNotNull {
    fun <E> copyOfNullable(
     @ObjCName("withJavaLangIterable") iterable: MutableIterable<E>
    ): DefinitelyNotNull.ImmutableList<E & Any> {
-    return DefinitelyNotNull.ImmutableList.copyOf<E & Any>(iterable as MutableIterable<E & Any>)
+    return DefinitelyNotNull.ImmutableList.copyOf<E & Any>(
+     iterable as MutableIterable<E & Any>,
+    )
    }
   }
  }

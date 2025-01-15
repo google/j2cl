@@ -54,6 +54,8 @@ open class GenericEquals<T> {
    return false
   }
   val other: GenericEquals<*>? = obj as GenericEquals<*>?
-  return this.value!!.equals(other!!.value)
+  return this.value!!.equals(
+   other!!.value,
+  )
  }
 }

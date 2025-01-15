@@ -60,7 +60,9 @@ class AutoValue_AutoValueWithFields: AutoValueWithFields {
  override fun hashCode(): Int {
   var h___: Int = 1
   h___ = h___ * 1000003
-  h___ = h___.xor(this.intField)
+  h___ = h___.xor(
+   this.intField,
+  )
   return h___
  }
 
