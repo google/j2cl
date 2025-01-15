@@ -26,6 +26,7 @@ import kotlin.Exception
 import kotlin.NullPointerException
 import kotlin.OptIn
 import kotlin.RuntimeException
+import kotlin.String
 import kotlin.Suppress
 import kotlin.Throwable
 import kotlin.assert
@@ -180,6 +181,17 @@ open class TryCatch {
   throw throwable!!
  }
 
+ @ObjCName("testMultiCatchParameterizedException")
+ open fun testMultiCatchParameterizedException() {
+  try {
+   throw Exception1()
+  } catch (e: TryCatch.Exception2) {
+   e.f("")
+  } catch (e: TryCatch.Exception1) {
+   e.f("")
+  }
+ }
+
  @ObjCName("J2ktTrycatchTryCatchCompanion", exact = true)
  companion object {
   private val closableThing: TryCatch.ClosableThing? = TryCatch.ClosableThing()
@@ -189,4 +201,18 @@ open class TryCatch {
  open class ClosableThing internal constructor(): AutoCloseable {
   override fun close() {}
  }
+
+ @ObjCName("J2ktTrycatchTryCatch_GenericInterface", exact = true)
+ interface GenericInterface<T> {
+  @ObjCName("f")
+  fun f(
+   @ObjCName("withId") t: T
+  ) {}
+ }
+
+ @ObjCName("J2ktTrycatchTryCatch_Exception1", exact = true)
+ open inner class Exception1 internal constructor(): java.lang.RuntimeException(), TryCatch.GenericInterface<String?>
+
+ @ObjCName("J2ktTrycatchTryCatch_Exception2", exact = true)
+ open inner class Exception2 internal constructor(): java.lang.RuntimeException(), TryCatch.GenericInterface<String?>
 }

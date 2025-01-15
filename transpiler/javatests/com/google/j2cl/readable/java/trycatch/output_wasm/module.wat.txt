@@ -1,3 +1,9 @@
+;;; Code for trycatch.TryCatch.GenericInterface [type definition]
+(type $trycatch.TryCatch.GenericInterface.vtable (sub (struct
+ (field $m_f__java_lang_Object__void (ref $function.m_f__java_lang_Object__void))
+ ))
+)
+
 ;;; Code for trycatch.TryCatch [type definition]
 (type $trycatch.TryCatch.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
@@ -7,6 +13,7 @@
  (field $m_testEmptyThrowableCatch__void (ref $function.m_testEmptyThrowableCatch__void))
  (field $m_testEmptyThrowableRethrow__void (ref $function.m_testEmptyThrowableRethrow__void))
  (field $m_testFinally__void (ref $function.m_testFinally__void))
+ (field $m_testMultiCatchParameterizedException__void (ref $function.m_testMultiCatchParameterizedException__void))
  (field $m_testMultiCatch__void (ref $function.m_testMultiCatch__void))
  (field $m_testNestedTryCatch__void (ref $function.m_testNestedTryCatch__void))
  (field $m_testThrowBoundGenerics__void (ref $function.m_testThrowBoundGenerics__void))
@@ -40,9 +47,87 @@
  ))
 )
 
+;;; Code for trycatch.TryCatch.Exception1 [type definition]
+(type $trycatch.TryCatch.Exception1.vtable (sub $java.lang.RuntimeException.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_fillInStackTrace__java_lang_Throwable (ref $function.m_fillInStackTrace__java_lang_Throwable))
+ (field $m_getBackingJsObject__javaemul_internal_ThrowableUtils_JsObject (ref $function.m_getBackingJsObject__javaemul_internal_ThrowableUtils_JsObject))
+ (field $m_getCause__java_lang_Throwable (ref $function.m_getCause__java_lang_Throwable))
+ (field $m_getLocalizedMessage__java_lang_String (ref $function.m_getLocalizedMessage__java_lang_String))
+ (field $m_getMessage__java_lang_String (ref $function.m_getMessage__java_lang_String))
+ (field $m_getStackTrace__arrayOf_java_lang_StackTraceElement (ref $function.m_getStackTrace__arrayOf_java_lang_StackTraceElement))
+ (field $m_initCause__java_lang_Throwable__java_lang_Throwable (ref $function.m_initCause__java_lang_Throwable__java_lang_Throwable))
+ (field $m_printStackTrace__java_io_PrintStream__void (ref $function.m_printStackTrace__java_io_PrintStream__void))
+ (field $m_printStackTrace__void (ref $function.m_printStackTrace__void))
+ (field $m_privateInitError__javaemul_internal_ThrowableUtils_JsObject__void_$pp_java_lang (ref $function.m_privateInitError__javaemul_internal_ThrowableUtils_JsObject__void_$pp_java_lang))
+ (field $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void (ref $function.m_setStackTrace__arrayOf_java_lang_StackTraceElement__void))
+ (field $m_f__java_lang_Object__void (ref $function.m_f__java_lang_Object__void))
+ (field $m_f__java_lang_String__void (ref $function.m_f__java_lang_String__void))
+ ))
+)
+(type $trycatch.TryCatch.Exception1 (sub $java.lang.RuntimeException (struct
+ (field $vtable (ref $trycatch.TryCatch.Exception1.vtable))
+ (field $itable (ref $trycatch.TryCatch.Exception1.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $backingJsObject@java.lang.Throwable (mut (ref null extern)))
+ (field $cause@java.lang.Throwable (mut (ref null $java.lang.Throwable)))
+ (field $detailMessage@java.lang.Throwable (mut (ref null $java.lang.String)))
+ (field $disableStackTrace@java.lang.Throwable (mut i8))
+ (field $disableSuppression@java.lang.Throwable (mut i8))
+ (field $stackTrace@java.lang.Throwable (mut (ref null $javaemul.internal.WasmArray.OfObject)))
+ (field $suppressedExceptions@java.lang.Throwable (mut (ref null $java.util.ArrayList)))
+ (field $$outer_this@trycatch.TryCatch.Exception1 (mut (ref null $trycatch.TryCatch)))
+ ))
+)
+
+;;; Code for trycatch.TryCatch.Exception2 [type definition]
+(type $trycatch.TryCatch.Exception2.vtable (sub $java.lang.RuntimeException.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_fillInStackTrace__java_lang_Throwable (ref $function.m_fillInStackTrace__java_lang_Throwable))
+ (field $m_getBackingJsObject__javaemul_internal_ThrowableUtils_JsObject (ref $function.m_getBackingJsObject__javaemul_internal_ThrowableUtils_JsObject))
+ (field $m_getCause__java_lang_Throwable (ref $function.m_getCause__java_lang_Throwable))
+ (field $m_getLocalizedMessage__java_lang_String (ref $function.m_getLocalizedMessage__java_lang_String))
+ (field $m_getMessage__java_lang_String (ref $function.m_getMessage__java_lang_String))
+ (field $m_getStackTrace__arrayOf_java_lang_StackTraceElement (ref $function.m_getStackTrace__arrayOf_java_lang_StackTraceElement))
+ (field $m_initCause__java_lang_Throwable__java_lang_Throwable (ref $function.m_initCause__java_lang_Throwable__java_lang_Throwable))
+ (field $m_printStackTrace__java_io_PrintStream__void (ref $function.m_printStackTrace__java_io_PrintStream__void))
+ (field $m_printStackTrace__void (ref $function.m_printStackTrace__void))
+ (field $m_privateInitError__javaemul_internal_ThrowableUtils_JsObject__void_$pp_java_lang (ref $function.m_privateInitError__javaemul_internal_ThrowableUtils_JsObject__void_$pp_java_lang))
+ (field $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void (ref $function.m_setStackTrace__arrayOf_java_lang_StackTraceElement__void))
+ (field $m_f__java_lang_Object__void (ref $function.m_f__java_lang_Object__void))
+ (field $m_f__java_lang_String__void (ref $function.m_f__java_lang_String__void))
+ ))
+)
+(type $trycatch.TryCatch.Exception2 (sub $java.lang.RuntimeException (struct
+ (field $vtable (ref $trycatch.TryCatch.Exception2.vtable))
+ (field $itable (ref $trycatch.TryCatch.Exception2.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $backingJsObject@java.lang.Throwable (mut (ref null extern)))
+ (field $cause@java.lang.Throwable (mut (ref null $java.lang.Throwable)))
+ (field $detailMessage@java.lang.Throwable (mut (ref null $java.lang.String)))
+ (field $disableStackTrace@java.lang.Throwable (mut i8))
+ (field $disableSuppression@java.lang.Throwable (mut i8))
+ (field $stackTrace@java.lang.Throwable (mut (ref null $javaemul.internal.WasmArray.OfObject)))
+ (field $suppressedExceptions@java.lang.Throwable (mut (ref null $java.util.ArrayList)))
+ (field $$outer_this@trycatch.TryCatch.Exception2 (mut (ref null $trycatch.TryCatch)))
+ ))
+)
+
+;;; Code for trycatch.TryCatch.GenericInterface [imports]
+
 ;;; Code for trycatch.TryCatch [imports]
 
 ;;; Code for trycatch.TryCatch.ClosableThing [imports]
+
+;;; Code for trycatch.TryCatch.Exception1 [imports]
+
+;;; Code for trycatch.TryCatch.Exception2 [imports]
 
 ;;; Code for trycatch.TryCatch [static fields]
 (global $closableThing@trycatch.TryCatch (mut (ref null $trycatch.TryCatch.ClosableThing))
@@ -63,6 +148,30 @@
  (ref.null $java.lang.Class)
 )
 
+;;; Code for trycatch.TryCatch.GenericInterface [static fields]
+(global $$class-initialized@trycatch.TryCatch.GenericInterface (mut i32)
+ (i32.const 0)
+)
+(global $$class@trycatch.TryCatch.GenericInterface (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for trycatch.TryCatch.Exception1 [static fields]
+(global $$class-initialized@trycatch.TryCatch.Exception1 (mut i32)
+ (i32.const 0)
+)
+(global $$class@trycatch.TryCatch.Exception1 (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for trycatch.TryCatch.Exception2 [static fields]
+(global $$class-initialized@trycatch.TryCatch.Exception2 (mut i32)
+ (i32.const 0)
+)
+(global $$class@trycatch.TryCatch.Exception2 (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
 ;;; Code for trycatch.TryCatch [vtable.init]
 (global $trycatch.TryCatch.vtable (ref $trycatch.TryCatch.vtable)
  (struct.new $trycatch.TryCatch.vtable
@@ -73,6 +182,7 @@
   (ref.func $m_testEmptyThrowableCatch__void@trycatch.TryCatch)
   (ref.func $m_testEmptyThrowableRethrow__void@trycatch.TryCatch)
   (ref.func $m_testFinally__void@trycatch.TryCatch)
+  (ref.func $m_testMultiCatchParameterizedException__void@trycatch.TryCatch)
   (ref.func $m_testMultiCatch__void@trycatch.TryCatch)
   (ref.func $m_testNestedTryCatch__void@trycatch.TryCatch)
   (ref.func $m_testThrowBoundGenerics__void@trycatch.TryCatch)
@@ -97,6 +207,112 @@
 (global $java.lang.AutoCloseable.vtable@$trycatch.TryCatch.ClosableThing (ref $java.lang.AutoCloseable.vtable)
  (struct.new $java.lang.AutoCloseable.vtable
   (ref.func $m_close__void@trycatch.TryCatch.ClosableThing)
+ )
+)
+
+;;; Code for trycatch.TryCatch.Exception1 [vtable.init]
+(global $trycatch.TryCatch.Exception1.vtable (ref $trycatch.TryCatch.Exception1.vtable)
+ (struct.new $trycatch.TryCatch.Exception1.vtable
+  (ref.func $$getClassImpl__java_lang_Class@trycatch.TryCatch.Exception1)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Throwable)
+  (ref.func $m_fillInStackTrace__java_lang_Throwable@java.lang.Throwable)
+  (ref.func $m_getBackingJsObject__javaemul_internal_ThrowableUtils_JsObject@java.lang.Throwable)
+  (ref.func $m_getCause__java_lang_Throwable@java.lang.Throwable)
+  (ref.func $m_getLocalizedMessage__java_lang_String@java.lang.Throwable)
+  (ref.func $m_getMessage__java_lang_String@java.lang.Throwable)
+  (ref.func $m_getStackTrace__arrayOf_java_lang_StackTraceElement@java.lang.Throwable)
+  (ref.func $m_initCause__java_lang_Throwable__java_lang_Throwable@java.lang.Throwable)
+  (ref.func $m_printStackTrace__java_io_PrintStream__void@java.lang.Throwable)
+  (ref.func $m_printStackTrace__void@java.lang.Throwable)
+  (ref.func $m_privateInitError__javaemul_internal_ThrowableUtils_JsObject__void_$pp_java_lang@java.lang.Throwable)
+  (ref.func $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void@java.lang.Throwable)
+  (ref.func $m_f__java_lang_Object__void@trycatch.TryCatch.Exception1)
+  (ref.func $m_f__java_lang_String__void@trycatch.TryCatch.Exception1)
+ )
+)
+(global $trycatch.TryCatch.GenericInterface.vtable@$trycatch.TryCatch.Exception1 (ref $trycatch.TryCatch.GenericInterface.vtable)
+ (struct.new $trycatch.TryCatch.GenericInterface.vtable
+  (ref.func $m_f__java_lang_Object__void@trycatch.TryCatch.Exception1)
+ )
+)
+(global $java.io.Serializable.vtable@$trycatch.TryCatch.Exception1 (ref $java.io.Serializable.vtable)
+ (struct.new $java.io.Serializable.vtable
+ )
+)
+
+;;; Code for trycatch.TryCatch.Exception2 [vtable.init]
+(global $trycatch.TryCatch.Exception2.vtable (ref $trycatch.TryCatch.Exception2.vtable)
+ (struct.new $trycatch.TryCatch.Exception2.vtable
+  (ref.func $$getClassImpl__java_lang_Class@trycatch.TryCatch.Exception2)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Throwable)
+  (ref.func $m_fillInStackTrace__java_lang_Throwable@java.lang.Throwable)
+  (ref.func $m_getBackingJsObject__javaemul_internal_ThrowableUtils_JsObject@java.lang.Throwable)
+  (ref.func $m_getCause__java_lang_Throwable@java.lang.Throwable)
+  (ref.func $m_getLocalizedMessage__java_lang_String@java.lang.Throwable)
+  (ref.func $m_getMessage__java_lang_String@java.lang.Throwable)
+  (ref.func $m_getStackTrace__arrayOf_java_lang_StackTraceElement@java.lang.Throwable)
+  (ref.func $m_initCause__java_lang_Throwable__java_lang_Throwable@java.lang.Throwable)
+  (ref.func $m_printStackTrace__java_io_PrintStream__void@java.lang.Throwable)
+  (ref.func $m_printStackTrace__void@java.lang.Throwable)
+  (ref.func $m_privateInitError__javaemul_internal_ThrowableUtils_JsObject__void_$pp_java_lang@java.lang.Throwable)
+  (ref.func $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void@java.lang.Throwable)
+  (ref.func $m_f__java_lang_Object__void@trycatch.TryCatch.Exception2)
+  (ref.func $m_f__java_lang_String__void@trycatch.TryCatch.Exception2)
+ )
+)
+(global $trycatch.TryCatch.GenericInterface.vtable@$trycatch.TryCatch.Exception2 (ref $trycatch.TryCatch.GenericInterface.vtable)
+ (struct.new $trycatch.TryCatch.GenericInterface.vtable
+  (ref.func $m_f__java_lang_Object__void@trycatch.TryCatch.Exception2)
+ )
+)
+(global $java.io.Serializable.vtable@$trycatch.TryCatch.Exception2 (ref $java.io.Serializable.vtable)
+ (struct.new $java.io.Serializable.vtable
+ )
+)
+
+;;; Code for trycatch.TryCatch.GenericInterface [methods]
+
+;;; void GenericInterface.f(T t)
+(func $m_f__java_lang_Object__void@trycatch.TryCatch.GenericInterface
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:128:17
+ (block
+ )
+)
+(elem declare func $m_f__java_lang_Object__void@trycatch.TryCatch.GenericInterface)
+
+;;; void GenericInterface.$clinit()
+(func $$clinit__void_<once>_@trycatch.TryCatch.GenericInterface
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:127:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:127:12
+  (if (global.get $$class-initialized@trycatch.TryCatch.GenericInterface)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:127:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:127:12
+  (global.set $$class-initialized@trycatch.TryCatch.GenericInterface (i32.const 1))
+ )
+)
+
+;;; Class<T> GenericInterface.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@trycatch.TryCatch.GenericInterface
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@trycatch.TryCatch.GenericInterface)))
+   (then
+    (return (global.get $$class@trycatch.TryCatch.GenericInterface))
+   )
+  )
+  (global.set $$class@trycatch.TryCatch.GenericInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|trycatch.Try...|__java_lang_String_<once>_@trycatch.TryCatch.GenericInterface )))
+  (return (global.get $$class@trycatch.TryCatch.GenericInterface))
  )
 )
 
@@ -823,6 +1039,55 @@
 )
 (elem declare func $m_testThrowsParameterized__java_lang_Throwable__void@trycatch.TryCatch)
 
+;;; void TryCatch.testMultiCatchParameterizedException()
+(func $m_testMultiCatchParameterizedException__void@trycatch.TryCatch
+ (type $function.m_testMultiCatchParameterizedException__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:135:14
+ (local $__$jsexc (ref null extern))
+ (local $__$exc (ref null $java.lang.Throwable))
+ (local $e (ref null $java.lang.RuntimeException))
+ (local $$qualifier (ref null $java.lang.Object))
+ (local $this (ref null $trycatch.TryCatch))
+ (local.set $this (ref.cast (ref $trycatch.TryCatch) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:136:4
+  (try (do
+   (block
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:137:6
+    (throw $exception.event (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $$create__trycatch_TryCatch@trycatch.TryCatch.Exception1 (local.get $this))))
+   )
+  ) (catch $exception.event
+   (local.set $__$jsexc (pop externref))
+   (block
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:138:40
+    (local.set $__$exc (call $m_toJava__javaemul_internal_ThrowableUtils_JsObject__java_lang_Throwable@javaemul.internal.Exceptions (local.get $__$jsexc)))
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:138:40
+    (if (if (result i32) (ref.test (ref $trycatch.TryCatch.Exception2) (local.get $__$exc)) (then (i32.const 1)) (else (ref.test (ref $trycatch.TryCatch.Exception1) (local.get $__$exc))))
+     (then
+      (block
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:138:40
+       (local.set $e (ref.cast (ref null $java.lang.RuntimeException) (local.get $__$exc)))
+       (block
+        ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:139:6
+        (local.set $$qualifier (local.get $e))
+        ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:139:6
+        (call_ref $function.m_f__java_lang_Object__void (ref.as_non_null (local.get $$qualifier))(call $$getString_||__java_lang_String_<once>_@trycatch.TryCatch )(struct.get $trycatch.TryCatch.GenericInterface.vtable $m_f__java_lang_Object__void (ref.cast (ref $trycatch.TryCatch.GenericInterface.vtable) (call $get.itable.$trycatch.TryCatch.GenericInterface (local.get $$qualifier)))))
+       )
+      )
+     )(else
+      (block
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:138:40
+       (throw $exception.event (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (local.get $__$exc)))
+      )
+     )
+    )
+   )
+  ))
+ )
+)
+(elem declare func $m_testMultiCatchParameterizedException__void@trycatch.TryCatch)
+
 ;;; void TryCatch.$clinit()
 (func $$clinit__void_<once>_@trycatch.TryCatch
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:18:13
@@ -955,3 +1220,227 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@trycatch.TryCatch.ClosableThing)
+
+;;; Code for trycatch.TryCatch.Exception1 [methods]
+
+;;; Exception1 Exception1.$create(TryCatch $outer_this)
+(func $$create__trycatch_TryCatch@trycatch.TryCatch.Exception1
+ (param $$outer_this (ref null $trycatch.TryCatch))
+ (result (ref null $trycatch.TryCatch.Exception1))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:131:8
+ (local $$instance (ref null $trycatch.TryCatch.Exception1))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:131:8
+  (call $$clinit__void_<once>_@trycatch.TryCatch.Exception1 )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:131:8
+  (local.set $$instance (struct.new $trycatch.TryCatch.Exception1 (ref.as_non_null (global.get $trycatch.TryCatch.Exception1.vtable)) (ref.as_non_null (global.get $trycatch.TryCatch.Exception1.itable)) (i32.const 0) (ref.null extern) (ref.null $java.lang.Throwable) (ref.null $java.lang.String) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.util.ArrayList) (ref.null $trycatch.TryCatch)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:131:8
+  (call $$ctor__trycatch_TryCatch__void_$p_trycatch_TryCatch_Exception1@trycatch.TryCatch.Exception1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:131:8
+  (call_ref $function.m_privateInitError__javaemul_internal_ThrowableUtils_JsObject__void_$pp_java_lang (ref.as_non_null (local.get $$instance))(call $m_createJsError__java_lang_String_NativeString__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $m_toJsString__java_lang_String__java_lang_String_NativeString@java.lang.String (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$instance))(struct.get $trycatch.TryCatch.Exception1.vtable $m_toString__java_lang_String (struct.get $trycatch.TryCatch.Exception1 $vtable(local.get $$instance))))))(struct.get $trycatch.TryCatch.Exception1.vtable $m_privateInitError__javaemul_internal_ThrowableUtils_JsObject__void_$pp_java_lang (struct.get $trycatch.TryCatch.Exception1 $vtable(local.get $$instance))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:131:8
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Exception1.$ctor(TryCatch $outer_this)
+(func $$ctor__trycatch_TryCatch__void_$p_trycatch_TryCatch_Exception1@trycatch.TryCatch.Exception1
+ (param $this (ref null $trycatch.TryCatch.Exception1))
+ (param $$outer_this (ref null $trycatch.TryCatch))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:131:8
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:131:8
+  (struct.set $trycatch.TryCatch.Exception1 $$outer_this@trycatch.TryCatch.Exception1 (local.get $this) (local.get $$outer_this))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:131:8
+  (call $$ctor__void_$p_java_lang_RuntimeException@java.lang.RuntimeException (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Exception1.f(T arg0)
+(func $m_f__java_lang_Object__void@trycatch.TryCatch.Exception1
+ (type $function.m_f__java_lang_Object__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:131:8
+ (local $this (ref null $trycatch.TryCatch.Exception1))
+ (local.set $this (ref.cast (ref $trycatch.TryCatch.Exception1) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:131:8
+  (call $m_f__java_lang_Object__void@trycatch.TryCatch.GenericInterface (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0)))
+ )
+)
+(elem declare func $m_f__java_lang_Object__void@trycatch.TryCatch.Exception1)
+
+;;; void Exception1.f(String arg0)
+(func $m_f__java_lang_String__void@trycatch.TryCatch.Exception1
+ (type $function.m_f__java_lang_String__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.String))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:131:8
+ (local $this (ref null $trycatch.TryCatch.Exception1))
+ (local.set $this (ref.cast (ref $trycatch.TryCatch.Exception1) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:131:8
+  (call $m_f__java_lang_Object__void@trycatch.TryCatch.GenericInterface (ref.as_non_null (local.get $this))(local.get $arg0))
+ )
+)
+(elem declare func $m_f__java_lang_String__void@trycatch.TryCatch.Exception1)
+
+;;; void Exception1.$clinit()
+(func $$clinit__void_<once>_@trycatch.TryCatch.Exception1
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:131:8
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:131:8
+  (if (global.get $$class-initialized@trycatch.TryCatch.Exception1)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:131:8
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:131:8
+  (global.set $$class-initialized@trycatch.TryCatch.Exception1 (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:131:8
+  (call $$clinit__void_<once>_@java.lang.RuntimeException )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:131:8
+  (call $$clinit__void_<once>_@trycatch.TryCatch.GenericInterface )
+ )
+)
+
+;;; Class<T> Exception1.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@trycatch.TryCatch.Exception1
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@trycatch.TryCatch.Exception1)))
+   (then
+    (return (global.get $$class@trycatch.TryCatch.Exception1))
+   )
+  )
+  (global.set $$class@trycatch.TryCatch.Exception1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|trycatch.Try...|__java_lang_String_<once>_@trycatch.TryCatch.Exception1 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.RuntimeException )))
+  (return (global.get $$class@trycatch.TryCatch.Exception1))
+ )
+)
+
+;;; Class<?> Exception1.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@trycatch.TryCatch.Exception1
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $trycatch.TryCatch.Exception1))
+ (local.set $this (ref.cast (ref $trycatch.TryCatch.Exception1) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@trycatch.TryCatch.Exception1 ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@trycatch.TryCatch.Exception1)
+
+;;; Code for trycatch.TryCatch.Exception2 [methods]
+
+;;; Exception2 Exception2.$create(TryCatch $outer_this)
+(func $$create__trycatch_TryCatch@trycatch.TryCatch.Exception2
+ (param $$outer_this (ref null $trycatch.TryCatch))
+ (result (ref null $trycatch.TryCatch.Exception2))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:133:8
+ (local $$instance (ref null $trycatch.TryCatch.Exception2))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:133:8
+  (call $$clinit__void_<once>_@trycatch.TryCatch.Exception2 )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:133:8
+  (local.set $$instance (struct.new $trycatch.TryCatch.Exception2 (ref.as_non_null (global.get $trycatch.TryCatch.Exception2.vtable)) (ref.as_non_null (global.get $trycatch.TryCatch.Exception2.itable)) (i32.const 0) (ref.null extern) (ref.null $java.lang.Throwable) (ref.null $java.lang.String) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.util.ArrayList) (ref.null $trycatch.TryCatch)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:133:8
+  (call $$ctor__trycatch_TryCatch__void_$p_trycatch_TryCatch_Exception2@trycatch.TryCatch.Exception2 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:133:8
+  (call_ref $function.m_privateInitError__javaemul_internal_ThrowableUtils_JsObject__void_$pp_java_lang (ref.as_non_null (local.get $$instance))(call $m_createJsError__java_lang_String_NativeString__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $m_toJsString__java_lang_String__java_lang_String_NativeString@java.lang.String (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$instance))(struct.get $trycatch.TryCatch.Exception2.vtable $m_toString__java_lang_String (struct.get $trycatch.TryCatch.Exception2 $vtable(local.get $$instance))))))(struct.get $trycatch.TryCatch.Exception2.vtable $m_privateInitError__javaemul_internal_ThrowableUtils_JsObject__void_$pp_java_lang (struct.get $trycatch.TryCatch.Exception2 $vtable(local.get $$instance))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:133:8
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Exception2.$ctor(TryCatch $outer_this)
+(func $$ctor__trycatch_TryCatch__void_$p_trycatch_TryCatch_Exception2@trycatch.TryCatch.Exception2
+ (param $this (ref null $trycatch.TryCatch.Exception2))
+ (param $$outer_this (ref null $trycatch.TryCatch))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:133:8
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:133:8
+  (struct.set $trycatch.TryCatch.Exception2 $$outer_this@trycatch.TryCatch.Exception2 (local.get $this) (local.get $$outer_this))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:133:8
+  (call $$ctor__void_$p_java_lang_RuntimeException@java.lang.RuntimeException (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Exception2.f(T arg0)
+(func $m_f__java_lang_Object__void@trycatch.TryCatch.Exception2
+ (type $function.m_f__java_lang_Object__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:133:8
+ (local $this (ref null $trycatch.TryCatch.Exception2))
+ (local.set $this (ref.cast (ref $trycatch.TryCatch.Exception2) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:133:8
+  (call $m_f__java_lang_Object__void@trycatch.TryCatch.GenericInterface (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0)))
+ )
+)
+(elem declare func $m_f__java_lang_Object__void@trycatch.TryCatch.Exception2)
+
+;;; void Exception2.f(String arg0)
+(func $m_f__java_lang_String__void@trycatch.TryCatch.Exception2
+ (type $function.m_f__java_lang_String__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.String))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:133:8
+ (local $this (ref null $trycatch.TryCatch.Exception2))
+ (local.set $this (ref.cast (ref $trycatch.TryCatch.Exception2) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:133:8
+  (call $m_f__java_lang_Object__void@trycatch.TryCatch.GenericInterface (ref.as_non_null (local.get $this))(local.get $arg0))
+ )
+)
+(elem declare func $m_f__java_lang_String__void@trycatch.TryCatch.Exception2)
+
+;;; void Exception2.$clinit()
+(func $$clinit__void_<once>_@trycatch.TryCatch.Exception2
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:133:8
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:133:8
+  (if (global.get $$class-initialized@trycatch.TryCatch.Exception2)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:133:8
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:133:8
+  (global.set $$class-initialized@trycatch.TryCatch.Exception2 (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:133:8
+  (call $$clinit__void_<once>_@java.lang.RuntimeException )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:133:8
+  (call $$clinit__void_<once>_@trycatch.TryCatch.GenericInterface )
+ )
+)
+
+;;; Class<T> Exception2.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@trycatch.TryCatch.Exception2
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@trycatch.TryCatch.Exception2)))
+   (then
+    (return (global.get $$class@trycatch.TryCatch.Exception2))
+   )
+  )
+  (global.set $$class@trycatch.TryCatch.Exception2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|trycatch.Try...|__java_lang_String_<once>_@trycatch.TryCatch.Exception2 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.RuntimeException )))
+  (return (global.get $$class@trycatch.TryCatch.Exception2))
+ )
+)
+
+;;; Class<?> Exception2.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@trycatch.TryCatch.Exception2
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $trycatch.TryCatch.Exception2))
+ (local.set $this (ref.cast (ref $trycatch.TryCatch.Exception2) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@trycatch.TryCatch.Exception2 ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@trycatch.TryCatch.Exception2)

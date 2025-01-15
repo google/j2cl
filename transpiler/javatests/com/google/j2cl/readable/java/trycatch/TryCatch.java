@@ -123,5 +123,20 @@ public class TryCatch {
   public <T extends Throwable> void testThrowsParameterized(T throwable) throws T {
     throw throwable;
   }
-}
 
+  interface GenericInterface<T> {
+    default void f(T t) {}
+  }
+
+  class Exception1 extends RuntimeException implements GenericInterface<String> {}
+
+  class Exception2 extends RuntimeException implements GenericInterface<String> {}
+
+  public void testMultiCatchParameterizedException() {
+    try {
+      throw new Exception1();
+    } catch (Exception2 | Exception1 e) {
+      e.f("");
+    }
+  }
+}

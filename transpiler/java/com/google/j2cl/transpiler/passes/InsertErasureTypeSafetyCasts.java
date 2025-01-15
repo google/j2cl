@@ -169,6 +169,7 @@ public class InsertErasureTypeSafetyCasts extends NormalizationPass {
       TypeDescriptor fromTypeDescriptor, TypeDescriptor toTypeDescriptor, Expression expression) {
     if (!fromTypeDescriptor.isTypeVariable()
         && !fromTypeDescriptor.isIntersection()
+        && !fromTypeDescriptor.isUnion()
         && !(fromTypeDescriptor.isArray()
             && ((ArrayTypeDescriptor) fromTypeDescriptor)
                 .getLeafTypeDescriptor()

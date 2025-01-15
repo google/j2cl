@@ -1,0 +1,67 @@
+goog.module('trycatch.TryCatch.Exception1$impl');
+
+const RuntimeException = goog.require('java.lang.RuntimeException$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const GenericInterface = goog.require('trycatch.TryCatch.GenericInterface$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let TryCatch = goog.forwardDeclare('trycatch.TryCatch$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @implements {GenericInterface<?string>}
+ */
+class Exception1 extends RuntimeException {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {TryCatch} @nodts*/
+  this.$outer_this__trycatch_TryCatch_Exception1;
+ }
+ /** @nodts @return {!Exception1} */
+ static $create__trycatch_TryCatch(/** TryCatch */ $outer_this) {
+  Exception1.$clinit();
+  let $instance = new Exception1();
+  $instance.$ctor__trycatch_TryCatch_Exception1__trycatch_TryCatch__void($outer_this);
+  $instance.m_privateInitError__javaemul_internal_ThrowableUtils_JsObject__void_$pp_java_lang(new Error($instance));
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__trycatch_TryCatch_Exception1__trycatch_TryCatch__void(/** TryCatch */ $outer_this) {
+  this.$outer_this__trycatch_TryCatch_Exception1 = $outer_this;
+  this.$ctor__java_lang_RuntimeException__void();
+ }
+ //Bridge method.
+ /** @final @override @nodts */
+ m_f__java_lang_Object__void(/** ?string */ arg0) {
+  GenericInterface.m_f__$default__trycatch_TryCatch_GenericInterface__java_lang_Object__void(this, /**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
+ }
+ //Default method forwarding stub.
+ /** @nodts */
+ m_f__java_lang_String__void(/** ?string */ arg0) {
+  GenericInterface.m_f__$default__trycatch_TryCatch_GenericInterface__java_lang_Object__void(this, arg0);
+ }
+ /** @nodts */
+ static $clinit() {
+  Exception1.$clinit = () =>{};
+  Exception1.$loadModules();
+  RuntimeException.$clinit();
+  GenericInterface.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Exception1;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+GenericInterface.$markImplementor(Exception1);
+$Util.$setClassMetadata(Exception1, 'trycatch.TryCatch$Exception1');
+
+exports = Exception1;
+
+//# sourceMappingURL=TryCatch$Exception1.js.map

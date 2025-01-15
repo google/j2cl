@@ -1,0 +1,38 @@
+goog.module('trycatch.TryCatch.GenericInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class GenericInterface {
+ /** @abstract @nodts */
+ m_f__java_lang_Object__void(/** T */ t) {}
+ /** @nodts @template T */
+ static m_f__$default__trycatch_TryCatch_GenericInterface__java_lang_Object__void(/** !GenericInterface<T> */ $thisArg, /** T */ t) {
+  GenericInterface.$clinit();
+ }
+ /** @nodts */
+ static $clinit() {
+  GenericInterface.$clinit = () =>{};
+  GenericInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__trycatch_TryCatch_GenericInterface = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__trycatch_TryCatch_GenericInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+GenericInterface.$markImplementor(/**@type {Function}*/ (GenericInterface));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (GenericInterface), 'trycatch.TryCatch$GenericInterface');
+
+exports = GenericInterface;
+
+//# sourceMappingURL=TryCatch$GenericInterface.js.map
