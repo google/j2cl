@@ -17,7 +17,6 @@ goog.setTestOnly();
 
 const TestCase = goog.require('goog.testing.TestCase');
 const testSuite = goog.require('goog.testing.testSuite');
-const {assert} = goog.require('goog.asserts');
 
 /** @record */
 class TestCaseWrapper {
@@ -153,6 +152,19 @@ function /** string */ getName(
           match :
           javaWrapper.getParam(paramIndex, index));
   return `test${method}[${convertedName}]`;
+}
+
+/**
+ * @template T
+ * @param {T} condition The condition to check.
+ * @return {T} The value of the condition.
+ * @closurePrimitive {asserts.truthy}
+ */
+function assert(condition) {
+  if (!condition) {
+    throw new Error("Assertion failed");
+  }
+  return condition;
 }
 
 exports = {parameterizedTestSuite};

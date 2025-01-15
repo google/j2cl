@@ -169,11 +169,6 @@ alias(
 )
 
 alias(
-    name = "closure_asserts",
-    actual = "@com_google_javascript_closure_library//closure/goog/asserts",
-)
-
-alias(
     name = "closure_math_long",
     actual = "@com_google_javascript_closure_library//closure/goog/math:long",
 )
