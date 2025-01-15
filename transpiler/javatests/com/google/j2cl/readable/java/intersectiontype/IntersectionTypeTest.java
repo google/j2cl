@@ -131,4 +131,20 @@ public class IntersectionTypeTest<U> {
     t.cmp();
     ((SomeConcreteType & Cmp) null).cmp();
   }
+
+  static class GenericType<T> {
+    void doSomething(T t) {}
+  }
+
+  private static <T extends GenericType<String> & Getable<Integer>>
+      void callOnIntersectionTypeWithParameterizedType(T t) {
+    t.doSomething("");
+    t.get();
+  }
+
+  private static void callOnIntersectionTypeWithRawType() {
+    var t = (GenericType & Getable) new GenericType<String>();
+    t.doSomething("");
+    t.get();
+  }
 }

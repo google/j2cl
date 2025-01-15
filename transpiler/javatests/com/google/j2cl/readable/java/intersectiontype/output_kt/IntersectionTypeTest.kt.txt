@@ -191,6 +191,19 @@ open class IntersectionTypeTest<U> {
    t!!.cmp()
    null.let { it as IntersectionTypeTest.SomeConcreteType?; it as Cmp?; it }!!.cmp()
   }
+
+  @JvmStatic
+  private fun <T> callOnIntersectionTypeWithParameterizedType(t: T) where T: IntersectionTypeTest.GenericType<String?>?, T: Getable<Int?>? {
+   t!!.doSomething_pp_intersectiontype("")
+   t!!.get()
+  }
+
+  @JvmStatic
+  private fun callOnIntersectionTypeWithRawType() {
+   val t /* IntersectionTypeTest.GenericType<Any?>? & Getable<Any?>? */ = IntersectionTypeTest.GenericType<String?>().let { it as IntersectionTypeTest.GenericType<Any?>; it as Getable<Any?>; it }
+   (t!! as IntersectionTypeTest.GenericType<Any?>).doSomething_pp_intersectiontype("")
+   (t!! as Getable<Any?>).get()
+  }
  }
 
  @ObjCName("J2ktIntersectiontypeIntersectionTypeTest_MapEntry", exact = true)
@@ -214,4 +227,9 @@ open class IntersectionTypeTest<U> {
 
  @ObjCName("J2ktIntersectiontypeIntersectionTypeTest_SomeConcreteType", exact = true)
  open class SomeConcreteType internal constructor()
+
+ @ObjCName("J2ktIntersectiontypeIntersectionTypeTest_GenericType", exact = true)
+ open class GenericType<T> internal constructor() {
+  internal open fun doSomething_pp_intersectiontype(t: T) {}
+ }
 }

@@ -1,0 +1,45 @@
+goog.module('intersectiontype.IntersectionTypeTest.GenericType$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ */
+class GenericType extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!GenericType<T>} */
+ static $create__() {
+  GenericType.$clinit();
+  let $instance = new GenericType();
+  $instance.$ctor__intersectiontype_IntersectionTypeTest_GenericType__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__intersectiontype_IntersectionTypeTest_GenericType__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ m_doSomething__java_lang_Object__void_$pp_intersectiontype(/** T */ t) {}
+ /** @nodts */
+ static $clinit() {
+  GenericType.$clinit = () =>{};
+  GenericType.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof GenericType;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(GenericType, 'intersectiontype.IntersectionTypeTest$GenericType');
+
+exports = GenericType;
+
+//# sourceMappingURL=IntersectionTypeTest$GenericType.js.map

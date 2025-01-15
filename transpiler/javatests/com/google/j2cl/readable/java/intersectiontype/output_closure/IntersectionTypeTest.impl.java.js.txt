@@ -12,9 +12,11 @@ let $LambdaAdaptor$2 = goog.forwardDeclare('intersectiontype.IntersectionTypeTes
 let A = goog.forwardDeclare('intersectiontype.IntersectionTypeTest.A$impl');
 let EmptyA = goog.forwardDeclare('intersectiontype.IntersectionTypeTest.EmptyA$impl');
 let EmptyB = goog.forwardDeclare('intersectiontype.IntersectionTypeTest.EmptyB$impl');
+let GenericType = goog.forwardDeclare('intersectiontype.IntersectionTypeTest.GenericType$impl');
 let SomeConcreteType = goog.forwardDeclare('intersectiontype.IntersectionTypeTest.SomeConcreteType$impl');
 let Setable = goog.forwardDeclare('intersectiontype.Setable$impl');
 let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
@@ -117,6 +119,17 @@ class IntersectionTypeTest extends j_l_Object {
   /**@type {!Cmp}*/ ($Casts.$to(t, /**@type {Function}*/ (Cmp))).m_cmp__int();
   /**@type {!Cmp}*/ (null).m_cmp__int();
  }
+ /** @nodts @template T */
+ static m_callOnIntersectionTypeWithParameterizedType__intersectiontype_IntersectionTypeTest_GenericType__void(/** T */ t) {
+  /**@type {!GenericType<?string>}*/ (t).m_doSomething__java_lang_Object__void_$pp_intersectiontype('');
+  /**@type {!Getable<Integer>}*/ ($Casts.$to(t, /**@type {Function}*/ (Getable))).m_get__java_lang_Object();
+ }
+ /** @nodts */
+ static m_callOnIntersectionTypeWithRawType__void() {
+  let t = /**@type {!GenericType}*/ (GenericType.$create__());
+  t.m_doSomething__java_lang_Object__void_$pp_intersectiontype('');
+  /**@type {!Getable}*/ ($Casts.$to(t, /**@type {Function}*/ (Getable))).m_get__java_lang_Object();
+ }
  /** @nodts */
  static $clinit() {
   IntersectionTypeTest.$clinit = () =>{};
@@ -138,6 +151,7 @@ class IntersectionTypeTest extends j_l_Object {
   A = goog.module.get('intersectiontype.IntersectionTypeTest.A$impl');
   EmptyA = goog.module.get('intersectiontype.IntersectionTypeTest.EmptyA$impl');
   EmptyB = goog.module.get('intersectiontype.IntersectionTypeTest.EmptyB$impl');
+  GenericType = goog.module.get('intersectiontype.IntersectionTypeTest.GenericType$impl');
   Setable = goog.module.get('intersectiontype.Setable$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
