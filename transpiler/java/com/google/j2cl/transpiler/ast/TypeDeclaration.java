@@ -372,6 +372,12 @@ public abstract class TypeDeclaration
 
   public abstract boolean isDeprecated();
 
+  public boolean isProtobuf() {
+    return getAllSuperTypesIncludingSelf().stream()
+        .map(TypeDeclaration::getPackageName)
+        .anyMatch(it -> it.equals("com.google.protobuf"));
+  }
+
   public boolean isJsEnum() {
     return getJsEnumInfo() != null;
   }
