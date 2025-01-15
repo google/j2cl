@@ -17,8 +17,6 @@ package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.TypeDeclaration
-import com.google.j2cl.transpiler.backend.kotlin.common.camelCaseStartsWith
-import com.google.j2cl.transpiler.backend.kotlin.common.runIf
 
 internal val TypeDeclaration.isProtobuf: Boolean
   get() = allSuperTypesIncludingSelf.any { it.packageName == "com.google.protobuf" }
@@ -30,6 +28,3 @@ private const val GET: String = "get"
 
 internal val MethodDescriptor.isProtobufGetter: Boolean
   get() = isProtobuf && parameterDescriptors.isEmpty() && name?.startsWith(GET) ?: false
-
-internal fun String.toProtobufPropertyName() =
-  runIf(camelCaseStartsWith(GET)) { substring(GET.length).replaceFirstChar { it.toLowerCase() } }

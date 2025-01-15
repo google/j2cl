@@ -37,6 +37,7 @@ import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.Invocation
 import com.google.j2cl.transpiler.ast.JsDocCastExpression
 import com.google.j2cl.transpiler.ast.JsDocExpression
+import com.google.j2cl.transpiler.ast.KtInfo.computePropertyName
 import com.google.j2cl.transpiler.ast.Literal
 import com.google.j2cl.transpiler.ast.MemberReference
 import com.google.j2cl.transpiler.ast.MethodCall
@@ -390,7 +391,7 @@ internal data class ExpressionRenderer(
     expression.target.let { methodDescriptor ->
       when {
         methodDescriptor.isProtobufGetter ->
-          identifierSource(expression.target.name!!.toProtobufPropertyName())
+          identifierSource(computePropertyName(expression.target.name!!))
         else ->
           join(
             identifierSource(environment.ktMangledName(expression.target)),

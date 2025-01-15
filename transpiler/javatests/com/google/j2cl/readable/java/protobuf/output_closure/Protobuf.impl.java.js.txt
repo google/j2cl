@@ -34,13 +34,17 @@ class Protobuf extends j_l_Object {
   builder.m_setX__int__protobuf_MyMessage_Builder(3);
   builder.m_getXValue__int();
   builder.m_setXValue__int__protobuf_MyMessage_Builder(4);
+  builder.m_getXYZ__int();
   builder.m_setXYZ__int__protobuf_MyMessage_Builder(5);
+  builder.m_getXYZValues__int();
   builder.m_setXYZValues__int__protobuf_MyMessage_Builder(6);
   let message = builder.m_build__protobuf_MyMessage();
   message.m_getFoo__int();
   message.m_getFooBar__int();
   message.m_getX__int();
   message.m_getXValue__int();
+  message.m_getXYZ__int();
+  message.m_getXYZValues__int();
   let chainedMessage = MyMessage.m_newBuilder__protobuf_MyMessage_Builder().m_setFoo__int__protobuf_MyMessage_Builder(1).m_setFooBar__int__protobuf_MyMessage_Builder(2).m_setX__int__protobuf_MyMessage_Builder(3).m_setXValue__int__protobuf_MyMessage_Builder(4).m_setXYZ__int__protobuf_MyMessage_Builder(5).m_setXYZValues__int__protobuf_MyMessage_Builder(6).m_build__protobuf_MyMessage();
   let defaultMessage = MyMessage.m_getDefaultInstance__protobuf_MyMessage();
   defaultMessage.m_getFoo__int();

@@ -36,12 +36,10 @@ public class Protobuf {
     builder.getXValue();
     builder.setXValue(4);
 
-    // TODO(b/389737605): Uncomment when property is correctly translated to `xyz`.
-    // builder.getXYZ();
+    builder.getXYZ();
     builder.setXYZ(5);
 
-    // TODO(b/389737605): Uncomment when property is correctly translated to `xyzValues`.
-    // builder.getXYZValues();
+    builder.getXYZValues();
     builder.setXYZValues(6);
 
     MyMessage message = builder.build();
@@ -49,10 +47,8 @@ public class Protobuf {
     message.getFooBar();
     message.getX();
     message.getXValue();
-    // TODO(b/389737605): Uncomment when property is correctly translated to `xyz`.
-    // message.getXYZ();
-    // TODO(b/389737605): Uncomment when property is correctly translated to `xyzValues`.
-    // message.getXYZValues();
+    message.getXYZ();
+    message.getXYZValues();
 
     MyMessage chainedMessage =
         MyMessage.newBuilder()
