@@ -937,15 +937,19 @@ class CompilationUnitBuilder(
   }
 
   private fun convertReferenceEqualsOperator(irCall: IrCall): Expression {
-    val lhs = convertExpression(irCall.getValueArgument(0)!!)
+    var lhs = convertExpression(irCall.getValueArgument(0)!!)
     var rhs = convertExpression(irCall.getValueArgument(1)!!)
-    // In Kotlin === is almost equivalent to Java ==. The only difference is that if the lhs
-    // is a reference type, then the rhs is boxed if it is a primitive type. In Java, however, the
-    // operation unboxes if either side is a primitive.
 
-    if (!lhs.typeDescriptor.isPrimitive && rhs.typeDescriptor.isPrimitive) {
-      // Boxing semantics due to the lhs being a reference type, so force the boxing using a cast
-      // to j.l.Object.
+    // Kotlin leaves the semantics of reference equality between boxed and unboxed types as
+    // unspecified (KLS §8.9.1), but in practice will box primitive types if the LHS xor RHS side is
+    // a primitive. It will only compare primitives if both sides are primitive.
+    if (lhs.typeDescriptor.isPrimitive && !rhs.typeDescriptor.isPrimitive) {
+      lhs =
+        CastExpression.newBuilder()
+          .setCastTypeDescriptor(TypeDescriptors.get().javaLangObject)
+          .setExpression(lhs)
+          .build()
+    } else if (rhs.typeDescriptor.isPrimitive && !lhs.typeDescriptor.isPrimitive) {
       rhs =
         CastExpression.newBuilder()
           .setCastTypeDescriptor(TypeDescriptors.get().javaLangObject)
