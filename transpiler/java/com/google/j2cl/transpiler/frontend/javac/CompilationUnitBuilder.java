@@ -312,7 +312,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             getNamePosition(variableElement.getSimpleName().toString(), variableDeclaration),
             variableElement,
             isParameter,
-            getCurrentType().getDeclaration().isNullMarked());
+            inNullMarkedScope());
     variableByVariableElement.put(variableElement, variable);
     return variable;
   }
@@ -772,19 +772,39 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   private CastExpression convertCast(JCTypeCast expression) {
-    TypeDescriptor castTypeDescriptor = environment.createTypeDescriptor(expression.getType().type);
+    TypeDescriptor castTypeDescriptor =
+        environment.createTypeDescriptor(expression.getType().type, inNullMarkedScope());
+
+    Expression castExpression = convertExpression(expression.getExpression());
+
+    if (!castExpression.canBeNull()) {
+      castTypeDescriptor = castTypeDescriptor.toNonNullable();
+    } else if (castExpression.getTypeDescriptor().isNullable()) {
+      castTypeDescriptor = castTypeDescriptor.toNullable();
+    }
+
     return CastExpression.newBuilder()
-        .setExpression(convertExpression(expression.getExpression()))
+        .setExpression(castExpression)
         .setCastTypeDescriptor(castTypeDescriptor)
         .build();
   }
 
   private ConditionalExpression convertConditional(JCConditional conditionalExpression) {
+    TypeDescriptor conditionalTypeDescriptor =
+        environment.createTypeDescriptor(conditionalExpression.type, inNullMarkedScope());
+
+    Expression condition = convertExpression(conditionalExpression.getCondition());
+    Expression trueExpression = convertExpression(conditionalExpression.getTrueExpression());
+    Expression falseExpression = convertExpression(conditionalExpression.getFalseExpression());
     return ConditionalExpression.newBuilder()
-        .setTypeDescriptor(environment.createTypeDescriptor(conditionalExpression.type))
-        .setConditionExpression(convertExpression(conditionalExpression.getCondition()))
-        .setTrueExpression(convertExpression(conditionalExpression.getTrueExpression()))
-        .setFalseExpression(convertExpression(conditionalExpression.getFalseExpression()))
+        .setTypeDescriptor(
+            trueExpression.getTypeDescriptor().canBeNull()
+                    || falseExpression.getTypeDescriptor().canBeNull()
+                ? conditionalTypeDescriptor.toNullable()
+                : conditionalTypeDescriptor)
+        .setConditionExpression(condition)
+        .setTrueExpression(trueExpression)
+        .setFalseExpression(falseExpression)
         .build();
   }
 
@@ -865,7 +885,9 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       return ArrayCreationReference.newBuilder()
           .setTargetTypeDescriptor(
               environment.createTypeDescriptor(
-                  memberReference.getQualifierExpression().type, ArrayTypeDescriptor.class))
+                  memberReference.getQualifierExpression().type,
+                  inNullMarkedScope(),
+                  ArrayTypeDescriptor.class))
           .setInterfaceMethodDescriptor(functionalMethodDescriptor)
           .setSourcePosition(getSourcePosition(memberReference))
           .build();
@@ -894,7 +916,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
   private NewArray convertNewArray(JCNewArray expression) {
     ArrayTypeDescriptor typeDescriptor =
-        environment.createTypeDescriptor(expression.type, ArrayTypeDescriptor.class);
+        environment.createTypeDescriptor(
+            expression.type, inNullMarkedScope(), ArrayTypeDescriptor.class);
 
     List<Expression> dimensionExpressions = convertExpressions(expression.getDimensions());
     // Pad the dimension expressions with null values to denote omitted dimensions.
@@ -1390,5 +1413,9 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
               .compare(thisFilePath, thatFilePath)
               .result();
         });
+  }
+
+  private boolean inNullMarkedScope() {
+    return getCurrentType().getDeclaration().isNullMarked();
   }
 }
