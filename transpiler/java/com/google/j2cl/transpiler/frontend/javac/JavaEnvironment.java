@@ -1331,8 +1331,13 @@ class JavaEnvironment {
     }
 
     Element enclosingElement = element.getEnclosingElement();
-    return (enclosingElement instanceof TypeElement || enclosingElement instanceof PackageElement)
-        && isNullMarked(enclosingElement);
+    while (enclosingElement != null
+        && !(enclosingElement instanceof TypeElement
+            || enclosingElement instanceof PackageElement)) {
+      enclosingElement = enclosingElement.getEnclosingElement();
+    }
+
+    return enclosingElement != null && isNullMarked(enclosingElement);
   }
 
   private static List<TypeParameterElement> getTypeParameters(TypeElement typeElement) {
