@@ -46,7 +46,9 @@ internal val Type.ktMembers: List<KtMember>
   get() =
     members
       .asSequence()
-      .filter { !it.isStatic && (!declaration.isAnonymous || !it.isConstructor) }
+      .filter { !it.isStatic }
+      .filter { !declaration.isAnonymous || !it.isConstructor }
+      .filter { it !is Method || it != ktPrimaryConstructor || it.renderedStatements.isNotEmpty() }
       .map { KtMember.WithJavaMember(it) }
       .plus(toCompanionObjectOrNull()?.let { KtMember.WithCompanionObject(it) })
       .plus(types.map { KtMember.WithType(it) })

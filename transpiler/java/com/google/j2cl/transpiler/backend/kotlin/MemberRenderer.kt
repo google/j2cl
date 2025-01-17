@@ -17,7 +17,6 @@ package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.common.InternalCompilerError
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
-import com.google.j2cl.transpiler.ast.AstUtils
 import com.google.j2cl.transpiler.ast.AstUtils.getConstructorInvocation
 import com.google.j2cl.transpiler.ast.Field
 import com.google.j2cl.transpiler.ast.InitializerBlock
@@ -26,10 +25,7 @@ import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor
 import com.google.j2cl.transpiler.ast.MethodLike
 import com.google.j2cl.transpiler.ast.NewInstance
-import com.google.j2cl.transpiler.ast.ReturnStatement
-import com.google.j2cl.transpiler.ast.Statement
 import com.google.j2cl.transpiler.ast.Type
-import com.google.j2cl.transpiler.ast.TypeDescriptors
 import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.COMPANION_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.CONST_KEYWORD
@@ -47,7 +43,6 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.initializer
 import com.google.j2cl.transpiler.backend.kotlin.MemberDescriptorRenderer.Companion.enumValueDeclarationNameSource
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionObject
 import com.google.j2cl.transpiler.backend.kotlin.ast.Member
-import com.google.j2cl.transpiler.backend.kotlin.common.runIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.NEW_LINE
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
@@ -55,6 +50,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.colonSe
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.emptyLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.emptyUnless
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inNewLine
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParentheses
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.indented
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.indentedIf
@@ -118,26 +114,24 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
     }
 
   private fun methodSource(method: Method): Source =
-    method.renderedStatements.let { statements ->
-      // Don't render primary constructor if it's empty.
-      Source.emptyUnless(!isKtPrimaryConstructor(method) || statements.isNotEmpty()) {
-        spaceSeparated(
-          methodHeaderSource(method),
-          Source.emptyIf(method.isAbstract || method.isNative) {
-            // Constructors with no statements can be rendered without curly braces.
-            Source.emptyIf(method.isConstructor && statements.isEmpty()) {
-              spaceSeparated(
-                  Source.emptyUnless(method.descriptor.isKtProperty) {
-                    join(GET_KEYWORD, inParentheses(Source.EMPTY))
-                  },
-                  block(statementRenderer.statementsSource(statements)),
-                )
-                .runIf(method.descriptor.isKtProperty) { indented(NEW_LINE + this) }
-            }
-          },
-        )
-      }
-    }
+    spaceSeparated(
+      methodHeaderSource(method),
+      when {
+        method.isAbstract -> Source.EMPTY
+        method.isNative -> Source.EMPTY
+        method.isConstructor && method.renderedStatements.isEmpty() -> Source.EMPTY
+        method.descriptor.isKtProperty -> ktPropertyGetterSource(method)
+        else -> bodySource(method)
+      },
+    )
+
+  private fun ktPropertyGetterSource(method: Method): Source =
+    indented(
+      inNewLine(spaceSeparated(join(GET_KEYWORD, inParentheses(Source.EMPTY)), bodySource(method)))
+    )
+
+  private fun bodySource(method: Method): Source =
+    block(statementRenderer.statementsSource(method.renderedStatements))
 
   private fun isKtPrimaryConstructor(method: Method): Boolean =
     method == enclosingType.ktPrimaryConstructor
@@ -337,24 +331,4 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
           ),
         )
       }
-
-  companion object {
-    val Method.renderedStatements: List<Statement>
-      get() {
-        if (!descriptor.isKtDisabled) {
-          return body.statements.filter { !AstUtils.isConstructorInvocationStatement(it) }
-        }
-
-        if (TypeDescriptors.isPrimitiveVoid(descriptor.returnTypeDescriptor)) {
-          return listOf()
-        }
-
-        return listOf(
-          ReturnStatement.newBuilder()
-            .setSourcePosition(sourcePosition)
-            .setExpression(descriptor.returnTypeDescriptor.defaultValue)
-            .build()
-        )
-      }
-  }
 }
