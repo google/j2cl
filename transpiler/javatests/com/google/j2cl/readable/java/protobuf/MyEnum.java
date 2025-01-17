@@ -17,14 +17,13 @@ package protobuf;
 
 import com.google.protobuf.EnumLite;
 import com.google.protobuf.Internal.ProtoNonnullApi;
-import javaemul.internal.annotations.KtNative;
 
-@KtNative
 @ProtoNonnullApi
 public enum MyEnum implements EnumLite {
   ONE,
   TWO;
 
+  @Override
   public int getNumber() {
     throw new RuntimeException();
   }

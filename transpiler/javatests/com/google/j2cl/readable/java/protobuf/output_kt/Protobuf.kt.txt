@@ -57,7 +57,7 @@ open class Protobuf {
   val defaultMessage: MyMessage? = MyMessage.getDefaultInstance()
   defaultMessage!!.foo
   val parser: Parser<*>? = message!!.parserForType
-  val generatedMessageParser: Parser<GeneratedMessage>? = (message as GeneratedMessage?)!!.parserForType
+  val generatedMessageParser: Parser<out GeneratedMessage>? = (message as GeneratedMessage?)!!.parserForType
   val enumOne: MyEnum? = MyEnum.ONE
   val enumOneNumber: Int = MyEnum.ONE.number
  }

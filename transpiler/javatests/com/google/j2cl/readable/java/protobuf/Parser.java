@@ -15,10 +15,7 @@
  */
 package com.google.protobuf;
 
-import javaemul.internal.annotations.KtNative;
-import javaemul.internal.annotations.KtOut;
 import org.jspecify.annotations.NullMarked;
 
-@KtNative
 @NullMarked
-public class Parser<@KtOut T> {}
+public class Parser<T> {}

@@ -15,9 +15,6 @@
  */
 package com.google.protobuf;
 
-import javaemul.internal.annotations.KtNative;
-
-@KtNative
 public interface EnumLite {
   int getNumber();
 }

@@ -18,7 +18,6 @@ package protobuf;
 import com.google.protobuf.GeneratedMessage;
 import com.google.protobuf.Internal.ProtoNonnullApi;
 import com.google.protobuf.Parser;
-import javaemul.internal.annotations.KtNative;
 import org.jspecify.annotations.NullMarked;
 
 /**
@@ -36,7 +35,6 @@ import org.jspecify.annotations.NullMarked;
  * }</pre>
  */
 @ProtoNonnullApi
-@KtNative
 @NullMarked
 public class MyMessage extends GeneratedMessage {
   public Parser<MyMessage> getParserForType() {
