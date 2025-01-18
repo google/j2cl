@@ -226,7 +226,11 @@ public class WasmConstructsGenerator {
     // with the type $java.lang.Throwable.
     // TODO(b/277970998): Decide how to handle this hard coded import w.r.t. import generation.
     builder.newLine();
-    builder.append("(import \"WebAssembly\" \"JSTag\" (tag $exception.event (param externref)))");
+    builder.append("(type $_js_tag_type (func (param externref)))");
+    builder.newLine();
+    builder.append(
+        "(import \"WebAssembly\" \"JSTag\" (tag $exception.event (type $_js_tag_type) (param"
+            + " externref)))");
   }
 
   private void renderMonolithicTypeStructs(Type type) {
