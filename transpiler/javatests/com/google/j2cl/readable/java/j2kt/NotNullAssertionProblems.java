@@ -22,6 +22,7 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public class NotNullAssertionProblems {
   public void testArrayLiteral(String string, @Nullable String nullableString) {
+    @Nullable String[] array0 = {null};
     @Nullable String[] array1 = {string, null};
     @Nullable String[] array2 = {string, nullableString};
     @Nullable String[] array3 = {null, string};
@@ -29,6 +30,7 @@ public class NotNullAssertionProblems {
   }
 
   public void testNewArray(String string, @Nullable String nullableString) {
+    @Nullable String[] array0 = new @Nullable String[] {null};
     @Nullable String[] array1 = new @Nullable String[] {string, null};
     @Nullable String[] array2 = new @Nullable String[] {string, nullableString};
     @Nullable String[] array3 = new @Nullable String[] {null, string};

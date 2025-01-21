@@ -37,6 +37,7 @@ open class NotNullAssertionProblems {
   @ObjCName("withNSString") string: String,
   @ObjCName("withNSString") nullableString: String?
  ) {
+  val array0: Array<String?>? = arrayOf<String>(null!!) as Array<String?>?
   val array1: Array<String?>? = arrayOf<String>(string, null!!) as Array<String?>?
   val array2: Array<String?>? = arrayOf<String>(string, nullableString!!) as Array<String?>?
   val array3: Array<String?>? = arrayOf<String>(null!!, string) as Array<String?>?
@@ -48,6 +49,7 @@ open class NotNullAssertionProblems {
   @ObjCName("withNSString") string: String,
   @ObjCName("withNSString") nullableString: String?
  ) {
+  val array0: Array<String?>? = arrayOf<String?>(null)
   val array1: Array<String?>? = arrayOf<String?>(string, null)
   val array2: Array<String?>? = arrayOf<String?>(string, nullableString)
   val array3: Array<String?>? = arrayOf<String?>(null, string)
