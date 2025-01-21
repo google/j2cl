@@ -145,7 +145,7 @@ import com.google.j2cl.transpiler.passes.NormalizeShifts;
 import com.google.j2cl.transpiler.passes.NormalizeStaticMemberQualifiers;
 import com.google.j2cl.transpiler.passes.NormalizeStaticNativeMemberReferences;
 import com.google.j2cl.transpiler.passes.NormalizeSuperMemberReferences;
-import com.google.j2cl.transpiler.passes.NormalizeSwitchStatements;
+import com.google.j2cl.transpiler.passes.NormalizeSwitchConstructs;
 import com.google.j2cl.transpiler.passes.NormalizeSwitchStatementsJ2kt;
 import com.google.j2cl.transpiler.passes.NormalizeSynchronizedConstructs;
 import com.google.j2cl.transpiler.passes.NormalizeSystemGetPropertyCalls;
@@ -311,7 +311,7 @@ public enum Backend {
           InsertJsEnumBoxingAndUnboxingConversions::new,
           RemoveUnneededCasts::new,
           ImplementSwitchExpressionsViaIifes::new,
-          NormalizeSwitchStatements::new,
+          NormalizeSwitchConstructs::new,
           NormalizeArrayAccesses::new,
           ImplementAssertStatements::new,
           ImplementSynchronizedStatements::new,
@@ -468,7 +468,7 @@ public enum Backend {
           () -> new ExpandCompoundAssignments(/* expandAll= */ true),
           InsertErasureTypeSafetyCasts::new,
           RewriteUnaryExpressions::new,
-          NormalizeSwitchStatements::new,
+          NormalizeSwitchConstructs::new,
           // Propagate constants needs to run after NormalizeSwitchStatements since it introduces
           // field references to constant fields.
           PropagateConstants::new,
@@ -616,7 +616,7 @@ public enum Backend {
           () -> new ExpandCompoundAssignments(/* expandAll= */ true),
           InsertErasureTypeSafetyCasts::new,
           RewriteUnaryExpressions::new,
-          NormalizeSwitchStatements::new,
+          NormalizeSwitchConstructs::new,
           // Propagate constants needs to run after NormalizeSwitchStatements since it introduces
           // field references to constant fields.
           PropagateCompileTimeConstants::new,

@@ -21,25 +21,34 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
+import javax.annotation.Nullable;
 
 /** Class for a yield statement. */
 @Visitable
 public class YieldStatement extends Statement {
   @Visitable Expression expression;
+  @Visitable @Nullable LabelReference labelReference;
 
-  private YieldStatement(SourcePosition sourcePosition, Expression expression) {
+  private YieldStatement(
+      SourcePosition sourcePosition, Expression expression, LabelReference labelReference) {
     super(sourcePosition);
     this.expression = checkNotNull(expression);
+    this.labelReference = labelReference;
   }
 
   public Expression getExpression() {
     return expression;
   }
 
+  public LabelReference getLabelReference() {
+    return labelReference;
+  }
+
   @Override
   public YieldStatement clone() {
     return YieldStatement.newBuilder()
         .setExpression(expression.clone())
+        .setLabelReference(labelReference.clone())
         .setSourcePosition(getSourcePosition())
         .build();
   }
@@ -57,10 +66,12 @@ public class YieldStatement extends Statement {
   public static class Builder {
     private Expression expression;
     private SourcePosition sourcePosition;
+    private LabelReference labelReference;
 
     public static Builder from(YieldStatement yieldStatement) {
       return newBuilder()
           .setExpression(yieldStatement.getExpression())
+          .setLabelReference(yieldStatement.getLabelReference())
           .setSourcePosition(yieldStatement.getSourcePosition());
     }
 
@@ -71,13 +82,19 @@ public class YieldStatement extends Statement {
     }
 
     @CanIgnoreReturnValue
+    public Builder setLabelReference(LabelReference labelReference) {
+      this.labelReference = labelReference;
+      return this;
+    }
+
+    @CanIgnoreReturnValue
     public Builder setSourcePosition(SourcePosition sourcePosition) {
       this.sourcePosition = sourcePosition;
       return this;
     }
 
     public YieldStatement build() {
-      return new YieldStatement(sourcePosition, expression);
+      return new YieldStatement(sourcePosition, expression, labelReference);
     }
   }
 }

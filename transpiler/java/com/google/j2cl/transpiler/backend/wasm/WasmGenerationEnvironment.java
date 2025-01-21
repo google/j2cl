@@ -29,18 +29,17 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Multiset;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
+import com.google.j2cl.transpiler.ast.HasName;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
-import com.google.j2cl.transpiler.ast.SwitchExpression;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
@@ -49,10 +48,8 @@ import com.google.j2cl.transpiler.backend.common.UniqueNamesResolver;
 import com.google.j2cl.transpiler.backend.wasm.JsImportsGenerator.Imports;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.Function;
 import javax.annotation.Nullable;
 
@@ -284,9 +281,9 @@ public class WasmGenerationEnvironment {
         && descriptor.getName().equals("elements");
   }
 
-  private final Map<Object, String> nameByDeclaration = new HashMap<>();
+  private final Map<HasName, String> nameByDeclaration = new HashMap<>();
 
-  String getDeclarationName(Object declaration) {
+  String getDeclarationName(HasName declaration) {
     return "$" + checkNotNull(nameByDeclaration.get(declaration));
   }
 
@@ -398,8 +395,6 @@ public class WasmGenerationEnvironment {
     this(library, jsImports, /* sourceMappingPathPrefix= */ null, /* isModular= */ false);
   }
 
-  private static final String SWITCH_EXPRESSION_LABEL = "SWITCH";
-
   WasmGenerationEnvironment(
       Library library, Imports jsImports, String sourceMappingPathPrefix, boolean isModular) {
     this.isModular = isModular;
@@ -413,31 +408,6 @@ public class WasmGenerationEnvironment {
             t ->
                 nameByDeclaration.putAll(
                     UniqueNamesResolver.computeUniqueNames(ImmutableSet.of(), t)));
-
-    Set<String> usedNames = new HashSet<>(nameByDeclaration.values());
-
-    // Compute ids for switch expression labels that are unique per member and do not collide
-    // with any of the already assigned names.
-    library
-        .streamTypes()
-        .flatMap(t -> t.getMembers().stream())
-        .forEach(
-            member ->
-                member.accept(
-                    new AbstractVisitor() {
-                      private int index = 0;
-
-                      // Use preorder traversal so that the switches are numbered in the order
-                      // that they appear in the source.
-                      @Override
-                      public boolean enterSwitchExpression(SwitchExpression switchExpression) {
-                        String switchExpressionLabel = SWITCH_EXPRESSION_LABEL + "." + index++;
-                        checkState(!usedNames.contains(switchExpressionLabel));
-
-                        nameByDeclaration.put(switchExpression, switchExpressionLabel);
-                        return true;
-                      }
-                    }));
 
     // Create a representation for Java types that is useful to lay out the structs and
     // vtables needed in the wasm output.

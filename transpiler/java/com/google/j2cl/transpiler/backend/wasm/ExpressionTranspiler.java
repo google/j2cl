@@ -35,6 +35,7 @@ import com.google.j2cl.transpiler.ast.BooleanLiteral;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.ConditionalExpression;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
+import com.google.j2cl.transpiler.ast.EmbeddedStatement;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionWithComment;
 import com.google.j2cl.transpiler.ast.FieldAccess;
@@ -42,6 +43,8 @@ import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
 import com.google.j2cl.transpiler.ast.Invocation;
 import com.google.j2cl.transpiler.ast.JsDocCastExpression;
+import com.google.j2cl.transpiler.ast.Label;
+import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MultiExpression;
@@ -50,9 +53,8 @@ import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
+import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.StringLiteral;
-import com.google.j2cl.transpiler.ast.SwitchExpression;
-import com.google.j2cl.transpiler.ast.SwitchStatement;
 import com.google.j2cl.transpiler.ast.ThisOrSuperReference;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
@@ -324,22 +326,23 @@ final class ExpressionTranspiler {
       }
 
       @Override
-      public boolean enterSwitchExpression(SwitchExpression switchExpression) {
-        String label = environment.getDeclarationName(switchExpression);
+      public boolean enterEmbeddedStatement(EmbeddedStatement embeddedStatement) {
+        Statement statement = embeddedStatement.getStatement();
+        Label label = null;
+        if (statement instanceof LabeledStatement) {
+          LabeledStatement labeledStatement = (LabeledStatement) statement;
+          label = labeledStatement.getLabel();
+          statement = labeledStatement.getStatement();
+        }
         sourceBuilder.newLine();
-        // Create a block that will be the target of the yield statement, which will leave the
-        // result in the stack and break here.
-        sourceBuilder.openParens("block " + label);
+        sourceBuilder.openParens("block ");
+        if (label != null) {
+          sourceBuilder.append(environment.getDeclarationName(label));
+        }
         sourceBuilder.append(
-            " (result " + environment.getWasmType(switchExpression.getTypeDescriptor()) + ")");
+            " (result " + environment.getWasmType(embeddedStatement.getTypeDescriptor()) + ")");
 
-        // Render the switch expression as if it where a switch statement, note that since
-        // all yields will break out of the switch there will be no fallthrough.
-        StatementTranspiler.render(
-            SwitchStatement.Builder.from(switchExpression).build(),
-            sourceBuilder,
-            environment,
-            label);
+        StatementTranspiler.render(statement, sourceBuilder, environment);
         sourceBuilder.closeParens();
         return false;
       }

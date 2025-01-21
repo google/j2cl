@@ -64,14 +64,6 @@ final class StatementTranspiler {
       Statement statement,
       final SourceBuilder builder,
       final WasmGenerationEnvironment environment) {
-    render(statement, builder, environment, null);
-  }
-
-  public static void render(
-      Statement statement,
-      final SourceBuilder builder,
-      final WasmGenerationEnvironment environment,
-      final String enclosingSwitchStatementLabel) {
 
     class SourceTransformer extends AbstractVisitor {
       @Override
@@ -181,7 +173,11 @@ final class StatementTranspiler {
                 ExpressionTranspiler.render(yieldStatement.getExpression(), builder, environment);
               }
               builder.newLine();
-              builder.append("(br " + enclosingSwitchStatementLabel + ")");
+              builder.append(
+                  "(br "
+                      + environment.getDeclarationName(
+                          yieldStatement.getLabelReference().getTarget())
+                      + ")");
             });
         return false;
       }
@@ -638,7 +634,7 @@ final class StatementTranspiler {
       }
 
       void render(Statement stmt) {
-        StatementTranspiler.render(stmt, builder, environment, enclosingSwitchStatementLabel);
+        StatementTranspiler.render(stmt, builder, environment);
       }
     }
 

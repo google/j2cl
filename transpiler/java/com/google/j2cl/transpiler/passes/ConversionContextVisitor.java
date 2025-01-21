@@ -35,6 +35,7 @@ import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.ConditionalExpression;
 import com.google.j2cl.transpiler.ast.ContinueStatement;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
+import com.google.j2cl.transpiler.ast.EmbeddedStatement;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.ExpressionWithComment;
@@ -544,6 +545,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
         // expressions that needs only subexpressions to be handled
         || expression instanceof MultiExpression
         || expression instanceof ExpressionWithComment
+        || expression instanceof EmbeddedStatement
         || expression instanceof FunctionExpression
         || expression instanceof VariableDeclarationExpression
         || expression instanceof JsDocExpression
@@ -701,7 +703,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     // assignment context
     Expression expression =
         rewriteTypeConversionContextWithoutDeclaration(
-            getEnclosingSwitchExpression().getTypeDescriptor(), yieldStatement.getExpression());
+            getYieldTargetExpression().getTypeDescriptor(), yieldStatement.getExpression());
 
     if (expression == yieldStatement.getExpression()) {
       return yieldStatement;
@@ -800,8 +802,9 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     return (MethodLike) getParent(MethodLike.class::isInstance);
   }
 
-  private SwitchExpression getEnclosingSwitchExpression() {
-    return (SwitchExpression) getParent(SwitchExpression.class::isInstance);
+  private Expression getYieldTargetExpression() {
+    return (Expression)
+        getParent(o -> o instanceof SwitchExpression || o instanceof EmbeddedStatement);
   }
 
   private Expression rewriteTypeConversionContextWithoutDeclaration(

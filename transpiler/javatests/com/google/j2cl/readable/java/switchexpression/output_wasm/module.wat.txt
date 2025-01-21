@@ -74,7 +74,7 @@
   (local.set $a (i32.const 0))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:25:4
   (local.set $i 
-  (block $SWITCH.0 (result i64)
+  (block $SWITCH (result i64)
    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:26:8
    (block
     (block
@@ -85,7 +85,7 @@
       ;; case 1:
       ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:28:20
       (i64.const 5)
-      (br $SWITCH.0)
+      (br $SWITCH)
      )
      ;; case 3,4:
      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:30:23
@@ -101,7 +101,7 @@
      ))))
      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:34:12
      (i64.extend_i32_s (call $m_shortValue__short@java.lang.Short (ref.as_non_null (local.get $j))))
-     (br $SWITCH.0)
+     (br $SWITCH)
     )
    )
   ))
@@ -120,7 +120,7 @@
   (local.set $a (i32.const 0))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:41:4
   (local.set $i 
-  (block $SWITCH.0 (result i64)
+  (block $SWITCH (result i64)
    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:42:8
    (block
     (block
@@ -131,7 +131,7 @@
       ;; case 1:
       ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:43:20
       (i64.const 5)
-      (br $SWITCH.0)
+      (br $SWITCH)
      )
      ;; case 3,4:
      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:44:23
@@ -157,7 +157,7 @@
            (block
             ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:49:16
             (i64.const 2)
-            (br $SWITCH.0)
+            (br $SWITCH)
            )
           )
          )
@@ -168,7 +168,7 @@
      )
      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:52:12
      (i64.extend_i32_s (call $m_shortValue__short@java.lang.Short (ref.as_non_null (local.get $j))))
-     (br $SWITCH.0)
+     (br $SWITCH)
     )
    )
   ))
@@ -185,7 +185,7 @@
   (local.set $a (i32.const 0))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:59:4
   (local.set $i 
-  (block $SWITCH.0 (result i64)
+  (block $SWITCH (result i64)
    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:60:8
    (block
     (block
@@ -195,7 +195,7 @@
      ;; case 1:
      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:63:14
      
-     (block $SWITCH.1 (result i64)
+     (block $SWITCH_1 (result i64)
       ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:63:14
       (block
        (block
@@ -205,12 +205,12 @@
         ;; case 1:
         ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:64:26
         (i64.const 10)
-        (br $SWITCH.1)
+        (br $SWITCH_1)
        )
        ;; default:
        ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:66:20
        
-       (block $SWITCH.2 (result i64)
+       (block $SWITCH_2 (result i64)
         ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:66:20
         (block
          (block
@@ -224,18 +224,18 @@
          ;; default:
          ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:68:33
          (i64.const 5)
-         (br $SWITCH.2)
+         (br $SWITCH_2)
         )
        )
-       (br $SWITCH.1)
+       (br $SWITCH_1)
       )
      )
-     (br $SWITCH.0)
+     (br $SWITCH)
     )
     ;; default:
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:71:21
     (i64.extend_i32_s (local.get $a))
-    (br $SWITCH.0)
+    (br $SWITCH)
    )
   ))
  )
