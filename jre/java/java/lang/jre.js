@@ -62,8 +62,6 @@ jre.addSystemPropertyFromGoogDefine('COMPILED', String(COMPILED));
 jre.addSystemPropertyFromGoogDefine('goog.DEBUG', String(goog.DEBUG));
 jre.addSystemPropertyFromGoogDefine('goog.LOCALE', goog.LOCALE);
 jre.addSystemPropertyFromGoogDefine(
-    'goog.TRUSTED_SITE', String(goog.TRUSTED_SITE));
-jre.addSystemPropertyFromGoogDefine(
     'goog.FEATURESET_YEAR', String(goog.FEATURESET_YEAR));
 
 /** @define {string} */
