@@ -38,7 +38,11 @@ def j2kt_generate_unit_test(name, test_class, deps, platform = "J2KT-JVM", tags 
                 "//build_defs/internal_do_not_use:internal_junit_annotations-j2kt-jvm",
             ],
             exports = deps,
-            javacopts = ["-AtestPlatform=J2KT-JVM"],
+            javacopts = [
+                "-AtestPlatform=J2KT-JVM",
+                # Disable error prone checks since this is a generated code.
+                "-Xep:PackageLocation:OFF",
+            ],
             testonly = 1,
             tags = tags,
         )
@@ -51,7 +55,11 @@ def j2kt_generate_unit_test(name, test_class, deps, platform = "J2KT-JVM", tags 
                 "//build_defs/internal_do_not_use:internal_junit_annotations-j2kt-native",
             ],
             exports = deps,
-            javacopts = ["-AtestPlatform=J2KT-NATIVE"],
+            javacopts = [
+                "-AtestPlatform=J2KT-NATIVE",
+                # Disable error prone checks since this is a generated code.
+                "-Xep:PackageLocation:OFF",
+            ],
             testonly = 1,
             tags = tags,
         )
