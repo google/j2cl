@@ -309,8 +309,10 @@ public class VerifyNormalizedUnits extends NormalizationPass {
 
           @Override
           public void exitYieldStatement(YieldStatement yieldStatement) {
-            // Yield statements are expected to be normalized away.
-            throw new IllegalStateException();
+            if (!verifyForWasm) {
+              // Yield statements are expected to be normalized away.
+              throw new IllegalStateException();
+            }
           }
 
           @Override

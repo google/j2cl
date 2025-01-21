@@ -674,11 +674,8 @@ public enum Backend {
           // Post-verifications
           VerifySingleAstReference::new,
           VerifyParamAndArgCounts::new,
-          VerifyReferenceScoping::new
-
-          // TODO(b/283154833): Add the invariants for modular_wasm
-          // () -> new VerifyNormalizedUnits(/* verifyForWasm= **/ true)
-          );
+          VerifyReferenceScoping::new,
+          () -> new VerifyNormalizedUnits(/* verifyForWasm= **/ true));
     }
 
     @Override
