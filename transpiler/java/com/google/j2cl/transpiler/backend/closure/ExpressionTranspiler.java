@@ -32,6 +32,7 @@ import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.ConditionalExpression;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.Expression.Precedence;
 import com.google.j2cl.transpiler.ast.ExpressionWithComment;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
@@ -344,7 +345,21 @@ public final class ExpressionTranspiler {
       public boolean enterMultiExpression(MultiExpression multiExpression) {
         List<Expression> expressions = multiExpression.getExpressions();
         checkArgument(expressions.size() > 1);
-        renderDelimitedAndCommaSeparated("(", ")", expressions);
+        // TODO(b/390642878): Review the handling of multiexpressions once jscompiler fixes the
+        // inconsistencies in their handling of precedence
+        // Explicitly parenthesize multiexpressions since they are modeled with the highest
+        // precedence.
+        sourceBuilder.append("(");
+        String separator = "";
+        for (var expression : multiExpression.getExpressions()) {
+          sourceBuilder.append(separator);
+          separator = ", ";
+          // But when rendering the individual components use the COMMA expression precedence
+          // so that constructs with lower precedence are rendered correctly.
+          renderExpression(
+              expression, Precedence.COMMA.requiresParensOnLeft(expression.getPrecedence()));
+        }
+        sourceBuilder.append(")");
         return false;
       }
 

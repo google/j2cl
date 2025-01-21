@@ -306,7 +306,9 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
     LOGICAL_AND(7, Expression.Associativity.LEFT),
     LOGICAL_OR(6, Expression.Associativity.LEFT),
     CONDITIONAL(4, Expression.Associativity.RIGHT),
-    ASSIGNMENT(3, Expression.Associativity.RIGHT);
+    ASSIGNMENT(3, Expression.Associativity.RIGHT),
+    COMMA(2, Associativity.LEFT),
+    LOWEST(1, Associativity.NONE);
 
     Precedence(int value, Expression.Associativity associativity) {
       this.value = value;

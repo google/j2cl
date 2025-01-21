@@ -47,8 +47,8 @@ public class JsDocCastExpression extends Expression {
 
   @Override
   public Precedence getPrecedence() {
-    // These are always emitted with parens.
-    return Precedence.HIGHEST;
+    // TODO(b/390642878): Review the precedence once jscompiler treats the construct consistently.
+    return Precedence.LOWEST;
   }
 
   @Override

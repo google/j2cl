@@ -101,7 +101,7 @@
     Function<Integer, Integer> f = i -> i + 1;
 ...    Supplier<Integer> f3 = this::simpleMethod;
   }] => [let /** ArrayList */ $$q;] "sourcemap.SourceMap.testLambdaAndMethodReference"
-[Supplier<Integer> f2 = new ArrayList()::size;] => [let f2 = ($$q = /**@type {!ArrayList}*/ (ArrayList.$create__()), Supplier.$adapt(() =>{
+[Supplier<Integer> f2 = new ArrayList()::size;] => [let f2 = ($$q = (/**@type {!ArrayList}*/ (ArrayList.$create__())), Supplier.$adapt(() =>{
    return Integer.m_valueOf__int__java_lang_Integer($$q.size());
   }));] "sourcemap.SourceMap.testLambdaAndMethodReference"
 [f2] => [f2] "f2"

@@ -42,8 +42,8 @@ class IntersectionTypeTest extends j_l_Object {
  /** @nodts @template T */
  static m_getAndSet__intersectiontype_Getable__void(/** T */ object) {
   IntersectionTypeTest.$clinit();
-  /**@type {!Setable}*/ ($Casts.$to(object, /**@type {Function}*/ (Setable))).m_set__int__void(1);
-  /**@type {!Getable<*>}*/ (object).m_get__java_lang_Object();
+  (/**@type {!Setable}*/ ($Casts.$to(object, /**@type {Function}*/ (Setable)))).m_set__int__void(1);
+  (/**@type {!Getable<*>}*/ (object)).m_get__java_lang_Object();
  }
  /** @nodts @template T @return {Getable<T>} */
  static m_cast__java_lang_Object__intersectiontype_Getable(/** * */ o) {
@@ -111,24 +111,24 @@ class IntersectionTypeTest extends j_l_Object {
  }
  /** @nodts */
  m_testDefaultMethodCall__java_lang_Object__void(/** * */ o) {
-  /**@type {Cmp}*/ ($Casts.$to($Casts.$to(o, /**@type {Function}*/ (Cmp)), /**@type {Function}*/ (EmptyA))).m_defaultM__int();
-  /**@type {CmpImpl}*/ ($Casts.$to($Casts.$to(o, CmpImpl), /**@type {Function}*/ (EmptyA))).m_defaultM__int();
+  (/**@type {Cmp}*/ ($Casts.$to($Casts.$to(o, /**@type {Function}*/ (Cmp)), /**@type {Function}*/ (EmptyA)))).m_defaultM__int();
+  (/**@type {CmpImpl}*/ ($Casts.$to($Casts.$to(o, CmpImpl), /**@type {Function}*/ (EmptyA)))).m_defaultM__int();
  }
  /** @nodts @template T */
  static m_callOnIntersetionTypes__intersectiontype_IntersectionTypeTest_SomeConcreteType__void(/** T */ t) {
-  /**@type {!Cmp}*/ ($Casts.$to(t, /**@type {Function}*/ (Cmp))).m_cmp__int();
-  /**@type {!Cmp}*/ (null).m_cmp__int();
+  (/**@type {!Cmp}*/ ($Casts.$to(t, /**@type {Function}*/ (Cmp)))).m_cmp__int();
+  (/**@type {!Cmp}*/ (null)).m_cmp__int();
  }
  /** @nodts @template T */
  static m_callOnIntersectionTypeWithParameterizedType__intersectiontype_IntersectionTypeTest_GenericType__void(/** T */ t) {
-  /**@type {!GenericType<?string>}*/ (t).m_doSomething__java_lang_Object__void_$pp_intersectiontype('');
-  /**@type {!Getable<Integer>}*/ ($Casts.$to(t, /**@type {Function}*/ (Getable))).m_get__java_lang_Object();
+  (/**@type {!GenericType<?string>}*/ (t)).m_doSomething__java_lang_Object__void_$pp_intersectiontype('');
+  (/**@type {!Getable<Integer>}*/ ($Casts.$to(t, /**@type {Function}*/ (Getable)))).m_get__java_lang_Object();
  }
  /** @nodts */
  static m_callOnIntersectionTypeWithRawType__void() {
   let t = /**@type {!GenericType}*/ (GenericType.$create__());
   t.m_doSomething__java_lang_Object__void_$pp_intersectiontype('');
-  /**@type {!Getable}*/ ($Casts.$to(t, /**@type {Function}*/ (Getable))).m_get__java_lang_Object();
+  (/**@type {!Getable}*/ ($Casts.$to(t, /**@type {Function}*/ (Getable)))).m_get__java_lang_Object();
  }
  /** @nodts */
  static $clinit() {

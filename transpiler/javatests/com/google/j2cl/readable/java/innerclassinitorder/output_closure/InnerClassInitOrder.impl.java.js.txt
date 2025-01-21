@@ -72,8 +72,8 @@ class InnerClassInitOrder extends j_l_Object {
  /** @nodts */
  m_testExtendsNestedWithGenerics__void() {
   let o = /**@type {!ESWGOuter<?string>}*/ (ESWGOuter.$create__());
-  $Asserts.$assert(1 == /**@type {!ESWGInner<?string>}*/ (ESWGInner.$create__innerclassinitorder_InnerClassInitOrder_ESWGOuter(o)).f_value__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner);
-  $Asserts.$assert(2 == /**@type {!ESWGInner<?string>}*/ (ESWGInner.$create__innerclassinitorder_InnerClassInitOrder_ESWGOuter__int(o, 2)).f_value__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner);
+  $Asserts.$assert(1 == (/**@type {!ESWGInner<?string>}*/ (ESWGInner.$create__innerclassinitorder_InnerClassInitOrder_ESWGOuter(o))).f_value__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner);
+  $Asserts.$assert(2 == (/**@type {!ESWGInner<?string>}*/ (ESWGInner.$create__innerclassinitorder_InnerClassInitOrder_ESWGOuter__int(o, 2))).f_value__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner);
   $Asserts.$assert(1 == ESWGInnerSubclass.$create__innerclassinitorder_InnerClassInitOrder_ESWGOuter(o).f_value__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner);
   $Asserts.$assert(2 == ESWGInnerSubclass.$create__int__innerclassinitorder_InnerClassInitOrder_ESWGOuter(2, o).f_value__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner);
  }
@@ -81,12 +81,12 @@ class InnerClassInitOrder extends j_l_Object {
  m_testInnerClassCtors__void() {
   let p1 = /**@type {!P1<*>}*/ (P1.$create__());
   $Asserts.$assert(1 == p1.f_value__innerclassinitorder_InnerClassInitOrder_P1);
-  $Asserts.$assert(2 == /**@type {!P1<*>}*/ (P1.$create__int(2)).f_value__innerclassinitorder_InnerClassInitOrder_P1);
+  $Asserts.$assert(2 == (/**@type {!P1<*>}*/ (P1.$create__int(2))).f_value__innerclassinitorder_InnerClassInitOrder_P1);
   let p2 = /**@type {!P2<*, *>}*/ (P2.$create__innerclassinitorder_InnerClassInitOrder_P1(p1));
   $Asserts.$assert(1 == p2.f_value__innerclassinitorder_InnerClassInitOrder_P1);
-  $Asserts.$assert(2 == /**@type {!P2<*, *>}*/ (P2.$create__innerclassinitorder_InnerClassInitOrder_P1__int(p1, 2)).f_value__innerclassinitorder_InnerClassInitOrder_P1);
-  $Asserts.$assert(1 == /**@type {!P3<*, *, *>}*/ (P3.$create__innerclassinitorder_InnerClassInitOrder_P1_P2(p2)).f_value__innerclassinitorder_InnerClassInitOrder_P1);
-  $Asserts.$assert(2 == /**@type {!P3<*, *, *>}*/ (P3.$create__innerclassinitorder_InnerClassInitOrder_P1_P2__int(p2, 2)).f_value__innerclassinitorder_InnerClassInitOrder_P1);
+  $Asserts.$assert(2 == (/**@type {!P2<*, *>}*/ (P2.$create__innerclassinitorder_InnerClassInitOrder_P1__int(p1, 2))).f_value__innerclassinitorder_InnerClassInitOrder_P1);
+  $Asserts.$assert(1 == (/**@type {!P3<*, *, *>}*/ (P3.$create__innerclassinitorder_InnerClassInitOrder_P1_P2(p2))).f_value__innerclassinitorder_InnerClassInitOrder_P1);
+  $Asserts.$assert(2 == (/**@type {!P3<*, *, *>}*/ (P3.$create__innerclassinitorder_InnerClassInitOrder_P1_P2__int(p2, 2))).f_value__innerclassinitorder_InnerClassInitOrder_P1);
  }
  /** @nodts */
  m_testInnerClassInitialization__void() {

@@ -351,35 +351,35 @@ class AutoBoxing extends j_l_Object {
  static m_testUnboxingFromTypeVariable__void() {
   AutoBoxing.$clinit();
   let n = /**@type {T}*/ (Long.m_valueOf__long__java_lang_Long($Long.fromInt(10)));
-  let l = /**@type {!Long}*/ (n).m_longValue__long();
+  let l = (/**@type {!Long}*/ (n)).m_longValue__long();
   $Asserts.$assert($LongUtils.equals(l, $Long.fromInt(10)));
-  n = /**@type {T}*/ (Long.m_valueOf__long__java_lang_Long($LongUtils.plus(/**@type {!Long}*/ (n).m_longValue__long(), $Long.fromInt(1))));
-  n = /**@type {T}*/ (Long.m_valueOf__long__java_lang_Long($LongUtils.plus(/**@type {!Long}*/ (n).m_longValue__long(), $Long.fromInt(1))));
+  n = (/**@type {T}*/ (Long.m_valueOf__long__java_lang_Long($LongUtils.plus((/**@type {!Long}*/ (n)).m_longValue__long(), $Long.fromInt(1)))));
+  n = (/**@type {T}*/ (Long.m_valueOf__long__java_lang_Long($LongUtils.plus((/**@type {!Long}*/ (n)).m_longValue__long(), $Long.fromInt(1)))));
   let /** T */ $value;
-  n = ($value = n, n = /**@type {T}*/ (Long.m_valueOf__long__java_lang_Long($LongUtils.plus(/**@type {!Long}*/ (n).m_longValue__long(), $Long.fromInt(1)))), $value);
-  n = n = /**@type {T}*/ (Long.m_valueOf__long__java_lang_Long($LongUtils.plus(/**@type {!Long}*/ (n).m_longValue__long(), $Long.fromInt(1))));
-  l = /**@type {!$1Local<Long, T>}*/ ($1Local.$create__()).m_toLong__java_lang_Long__long_$pp_autoboxing(Long.m_valueOf__long__java_lang_Long($Long.fromInt(11)));
+  n = ($value = n, n = (/**@type {T}*/ (Long.m_valueOf__long__java_lang_Long($LongUtils.plus((/**@type {!Long}*/ (n)).m_longValue__long(), $Long.fromInt(1))))), $value);
+  n = n = (/**@type {T}*/ (Long.m_valueOf__long__java_lang_Long($LongUtils.plus((/**@type {!Long}*/ (n)).m_longValue__long(), $Long.fromInt(1)))));
+  l = (/**@type {!$1Local<Long, T>}*/ ($1Local.$create__())).m_toLong__java_lang_Long__long_$pp_autoboxing(Long.m_valueOf__long__java_lang_Long($Long.fromInt(11)));
   $Asserts.$assert($LongUtils.equals(l, $Long.fromInt(11)));
  }
  /** @nodts @template T */
  static m_testUnboxingFromIntersectionType__void() {
   AutoBoxing.$clinit();
   let n = /**@type {T}*/ (Long.m_valueOf__long__java_lang_Long($Long.fromInt(10)));
-  let l = /**@type {!Long}*/ (n).m_longValue__long();
+  let l = (/**@type {!Long}*/ (n)).m_longValue__long();
   $Asserts.$assert($LongUtils.equals(l, $Long.fromInt(10)));
-  n = /**@type {T}*/ (Long.m_valueOf__long__java_lang_Long($LongUtils.plus(/**@type {!Long}*/ (n).m_longValue__long(), $Long.fromInt(1))));
-  n = /**@type {T}*/ (Long.m_valueOf__long__java_lang_Long($LongUtils.plus(/**@type {!Long}*/ (n).m_longValue__long(), $Long.fromInt(1))));
+  n = (/**@type {T}*/ (Long.m_valueOf__long__java_lang_Long($LongUtils.plus((/**@type {!Long}*/ (n)).m_longValue__long(), $Long.fromInt(1)))));
+  n = (/**@type {T}*/ (Long.m_valueOf__long__java_lang_Long($LongUtils.plus((/**@type {!Long}*/ (n)).m_longValue__long(), $Long.fromInt(1)))));
   let /** T */ $value;
-  n = ($value = n, n = /**@type {T}*/ (Long.m_valueOf__long__java_lang_Long($LongUtils.plus(/**@type {!Long}*/ (n).m_longValue__long(), $Long.fromInt(1)))), $value);
-  n = n = /**@type {T}*/ (Long.m_valueOf__long__java_lang_Long($LongUtils.plus(/**@type {!Long}*/ (n).m_longValue__long(), $Long.fromInt(1))));
-  l = /**@type {!$2Local<Long, T>}*/ ($2Local.$create__()).m_toLong__java_lang_Long__long_$pp_autoboxing(Long.m_valueOf__long__java_lang_Long($Long.fromInt(11)));
+  n = ($value = n, n = (/**@type {T}*/ (Long.m_valueOf__long__java_lang_Long($LongUtils.plus((/**@type {!Long}*/ (n)).m_longValue__long(), $Long.fromInt(1))))), $value);
+  n = n = (/**@type {T}*/ (Long.m_valueOf__long__java_lang_Long($LongUtils.plus((/**@type {!Long}*/ (n)).m_longValue__long(), $Long.fromInt(1)))));
+  l = (/**@type {!$2Local<Long, T>}*/ ($2Local.$create__())).m_toLong__java_lang_Long__long_$pp_autoboxing(Long.m_valueOf__long__java_lang_Long($Long.fromInt(11)));
   $Asserts.$assert($LongUtils.equals(l, $Long.fromInt(11)));
   let i = Integer.m_valueOf__int__java_lang_Integer(10).m_intValue__int();
  }
  /** @nodts */
  m_testUnbox_withCast__void() {
   let supplier = /**@type {!$1Supplier<Integer>}*/ ($1Supplier.$create__autoboxing_AutoBoxing(this));
-  let i = /**@type {Integer}*/ ($Casts.$to(supplier.m_get__java_lang_Object_$pp_autoboxing(), Integer)).m_intValue__int();
+  let i = (/**@type {Integer}*/ ($Casts.$to(supplier.m_get__java_lang_Object_$pp_autoboxing(), Integer))).m_intValue__int();
  }
  /** @nodts */
  static $clinit() {
