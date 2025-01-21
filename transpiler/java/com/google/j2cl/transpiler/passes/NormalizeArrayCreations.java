@@ -81,9 +81,10 @@ public class NormalizeArrayCreations extends NormalizationPass {
       return createNonNullableAnnotation(
           RuntimeMethods.createArraysMethodCall(
               "$createNative",
-              new ArrayLiteral(
-                  TypeDescriptors.get().javaLangObjectArray,
-                  newArrayExpression.getDimensionExpressions())),
+              ArrayLiteral.newBuilder()
+                  .setTypeDescriptor(TypeDescriptors.get().javaLangObjectArray)
+                  .setValueExpressions(newArrayExpression.getDimensionExpressions())
+                  .build()),
           newArrayExpression.getTypeDescriptor());
     }
 
@@ -91,9 +92,10 @@ public class NormalizeArrayCreations extends NormalizationPass {
     return createNonNullableAnnotation(
         RuntimeMethods.createArraysMethodCall(
             "$create",
-            new ArrayLiteral(
-                TypeDescriptors.get().javaLangObjectArray,
-                newArrayExpression.getDimensionExpressions()),
+            ArrayLiteral.newBuilder()
+                .setTypeDescriptor(TypeDescriptors.get().javaLangObjectArray)
+                .setValueExpressions(newArrayExpression.getDimensionExpressions())
+                .build(),
             leafTypeDescriptor.getMetadataConstructorReference()),
         newArrayExpression.getTypeDescriptor());
   }

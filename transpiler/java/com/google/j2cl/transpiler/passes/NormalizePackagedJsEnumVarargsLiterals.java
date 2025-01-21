@@ -95,10 +95,12 @@ public final class NormalizePackagedJsEnumVarargsLiterals extends NormalizationP
 
     return Invocation.Builder.from(invocation)
         .replaceVarargsArgument(
-            new ArrayLiteral(
-                (ArrayTypeDescriptor)
-                    varargsParameterDeclaration.getTypeDescriptor().toRawTypeDescriptor(),
-                ((ArrayLiteral) lastArgument).getValueExpressions()))
+            ArrayLiteral.newBuilder()
+                .setTypeDescriptor(
+                    (ArrayTypeDescriptor)
+                        varargsParameterDeclaration.getTypeDescriptor().toRawTypeDescriptor())
+                .setValueExpressions(((ArrayLiteral) lastArgument).getValueExpressions())
+                .build())
         .build();
   }
 }

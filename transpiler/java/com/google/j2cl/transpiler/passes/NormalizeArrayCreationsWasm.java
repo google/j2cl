@@ -109,11 +109,13 @@ public class NormalizeArrayCreationsWasm extends NormalizationPass {
                     .collect(toImmutableList());
 
             return RuntimeMethods.createCreateMultiDimensionalArrayCall(
-                new ArrayLiteral(
-                    ArrayTypeDescriptor.newBuilder()
-                        .setComponentTypeDescriptor(PrimitiveTypes.INT)
-                        .build(),
-                    nonNullDimensions),
+                ArrayLiteral.newBuilder()
+                    .setTypeDescriptor(
+                        ArrayTypeDescriptor.newBuilder()
+                            .setComponentTypeDescriptor(PrimitiveTypes.INT)
+                            .build())
+                    .setValueExpressions(nonNullDimensions)
+                    .build(),
                 NumberLiteral.fromInt(getTypeIndex(newArray.getLeafTypeDescriptor())));
           }
         });

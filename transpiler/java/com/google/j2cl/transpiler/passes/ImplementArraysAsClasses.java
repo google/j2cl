@@ -124,9 +124,10 @@ public class ImplementArraysAsClasses extends NormalizationPass {
 
           @Override
           public Expression rewriteArrayLiteral(ArrayLiteral arrayLiteral) {
-            return new ArrayLiteral(
-                markArrayTypeDescriptorAsNative(arrayLiteral.getTypeDescriptor()),
-                arrayLiteral.getValueExpressions());
+            return arrayLiteral.toBuilder()
+                .setTypeDescriptor(
+                    markArrayTypeDescriptorAsNative(arrayLiteral.getTypeDescriptor()))
+                .build();
           }
 
           @Override
@@ -279,7 +280,7 @@ public class ImplementArraysAsClasses extends NormalizationPass {
                     TypeDescriptors.getWasmArrayType(arrayTypeDescriptor)
                         .getMethodDescriptor("newWithLiteral", nativeArrayTypeDescriptor))
                 .setArguments(
-                    new ArrayLiteral(nativeArrayTypeDescriptor, arrayLiteral.getValueExpressions()))
+                    arrayLiteral.toBuilder().setTypeDescriptor(nativeArrayTypeDescriptor).build())
                 .build();
           }
         });

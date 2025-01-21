@@ -165,7 +165,7 @@ public class NormalizeJsVarargs extends NormalizationPass {
       if (numberLiteral.getValue().intValue() == 0) {
         // This is newArray of zero length, even if it didn't have an initializer we can provide
         // and empty array literal of the right type.
-        return new ArrayLiteral(newArray.getTypeDescriptor());
+        return ArrayLiteral.newBuilder().setTypeDescriptor(newArray.getTypeDescriptor()).build();
       }
     }
 

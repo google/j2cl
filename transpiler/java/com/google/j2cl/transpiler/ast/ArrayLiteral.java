@@ -18,10 +18,12 @@ package com.google.j2cl.transpiler.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -32,11 +34,7 @@ public class ArrayLiteral extends Expression {
   @Visitable ArrayTypeDescriptor typeDescriptor;
   @Visitable List<Expression> valueExpressions = new ArrayList<>();
 
-  public ArrayLiteral(ArrayTypeDescriptor typeDescriptor, Expression... valueExpressions) {
-    this(typeDescriptor, Arrays.asList(valueExpressions));
-  }
-
-  public ArrayLiteral(
+  private ArrayLiteral(
       ArrayTypeDescriptor typeDescriptor, List<? extends Expression> valueExpressions) {
     checkState(typeDescriptor.isArray());
 
@@ -72,5 +70,54 @@ public class ArrayLiteral extends Expression {
   @Override
   Node acceptInternal(Processor processor) {
     return Visitor_ArrayLiteral.visit(processor, this);
+  }
+
+  public Builder toBuilder() {
+    return newBuilder()
+        .setTypeDescriptor(getTypeDescriptor())
+        .setValueExpressions(getValueExpressions());
+  }
+
+  public static Builder newBuilder() {
+    return new Builder();
+  }
+
+  /** Builder for ArrayLiteral. */
+  public static class Builder {
+    private ArrayTypeDescriptor typeDescriptor;
+    private List<Expression> valueExpressions = new ArrayList<>();
+
+    @CanIgnoreReturnValue
+    public Builder setTypeDescriptor(ArrayTypeDescriptor typeDescriptor) {
+      this.typeDescriptor = typeDescriptor;
+      return this;
+    }
+
+    @CanIgnoreReturnValue
+    public Builder setValueExpressions(List<Expression> valueExpressions) {
+      this.valueExpressions = new ArrayList<>(valueExpressions);
+      return this;
+    }
+
+    @CanIgnoreReturnValue
+    public Builder setValueExpressions(Expression... valueExpressions) {
+      return setValueExpressions(Arrays.asList(valueExpressions));
+    }
+
+    @CanIgnoreReturnValue
+    public Builder addValueExpressions(List<Expression> valueExpressions) {
+      this.valueExpressions.addAll(valueExpressions);
+      return this;
+    }
+
+    @CanIgnoreReturnValue
+    public Builder addValueExpressions(Expression... valueExpressions) {
+      Collections.addAll(this.valueExpressions, valueExpressions);
+      return this;
+    }
+
+    public ArrayLiteral build() {
+      return new ArrayLiteral(typeDescriptor, valueExpressions);
+    }
   }
 }

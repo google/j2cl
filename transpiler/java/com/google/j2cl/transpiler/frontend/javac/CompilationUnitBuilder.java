@@ -926,7 +926,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     ArrayLiteral arrayLiteral =
         expression.getInitializers() == null
             ? null
-            : new ArrayLiteral(typeDescriptor, convertExpressions(expression.getInitializers()));
+            : ArrayLiteral.newBuilder()
+                .setTypeDescriptor(typeDescriptor)
+                .setValueExpressions(convertExpressions(expression.getInitializers()))
+                .build();
 
     return NewArray.newBuilder()
         .setTypeDescriptor(typeDescriptor)

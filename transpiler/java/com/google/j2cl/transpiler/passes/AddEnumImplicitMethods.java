@@ -194,7 +194,11 @@ public class AddEnumImplicitMethods extends NormalizationPass {
                 enumType.getTypeDescriptor().getMethodDescriptor(VALUES_METHOD_NAME))
             .addStatements(
                 ReturnStatement.newBuilder()
-                    .setExpression(new ArrayLiteral(arrayTypeDescriptor, values))
+                    .setExpression(
+                        ArrayLiteral.newBuilder()
+                            .setTypeDescriptor(arrayTypeDescriptor)
+                            .setValueExpressions(values)
+                            .build())
                     .setSourcePosition(sourcePosition)
                     .build())
             .setSourcePosition(sourcePosition)

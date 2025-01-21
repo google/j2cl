@@ -299,7 +299,10 @@ public final class ConversionContextVisitor extends AbstractRewriter {
       return arrayLiteral;
     }
 
-    return new ArrayLiteral(typeDescriptor, valueExpressions);
+    return ArrayLiteral.newBuilder()
+        .setTypeDescriptor(typeDescriptor)
+        .setValueExpressions(valueExpressions)
+        .build();
   }
 
   @Override

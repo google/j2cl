@@ -914,23 +914,22 @@ public final class AstUtils {
         Iterables.getLast(methodDescriptor.getParameterDescriptors());
     ArrayTypeDescriptor varargsTypeDescriptor =
         (ArrayTypeDescriptor) varargsParameterDescriptor.getTypeDescriptor();
-    if (arguments.size() < parametersLength) {
-      // no argument for the varargs, add an empty array.
-      return new ArrayLiteral(varargsTypeDescriptor);
+    ArrayLiteral.Builder arrayLiteralBuilder =
+        ArrayLiteral.newBuilder().setTypeDescriptor(varargsTypeDescriptor);
+    if (arguments.size() >= parametersLength) {
+      for (int i = parametersLength - 1; i < arguments.size(); i++) {
+        arrayLiteralBuilder.addValueExpressions(
+            // Wrap isDoNotAutobox arguments in a JsDocCastExpression so that they don't get
+            // converted by passes based on ContextRewriter.
+            varargsParameterDescriptor.isDoNotAutobox()
+                ? JsDocCastExpression.newBuilder()
+                    .setCastTypeDescriptor(varargsTypeDescriptor.getComponentTypeDescriptor())
+                    .setExpression(arguments.get(i))
+                    .build()
+                : arguments.get(i));
+      }
     }
-    List<Expression> valueExpressions = new ArrayList<>();
-    for (int i = parametersLength - 1; i < arguments.size(); i++) {
-      valueExpressions.add(
-          // Wrap isDoNotAutobox arguments in a JsDocCastExpression so that they don't get converted
-          // by passes based on ContextRewriter.
-          varargsParameterDescriptor.isDoNotAutobox()
-              ? JsDocCastExpression.newBuilder()
-                  .setCastTypeDescriptor(varargsTypeDescriptor.getComponentTypeDescriptor())
-                  .setExpression(arguments.get(i))
-                  .build()
-              : arguments.get(i));
-    }
-    return new ArrayLiteral(varargsTypeDescriptor, valueExpressions);
+    return arrayLiteralBuilder.build();
   }
 
   /** Whether the function is the identity function. */

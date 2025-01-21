@@ -386,11 +386,14 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
 
     private ArrayLiteral convert(org.eclipse.jdt.core.dom.ArrayInitializer expression) {
-      return new ArrayLiteral(
-          (ArrayTypeDescriptor)
-              environment.createTypeDescriptor(
-                  expression.resolveTypeBinding(), inNullMarkedScope()),
-          convertExpressions(JdtEnvironment.asTypedList(expression.expressions())));
+      return ArrayLiteral.newBuilder()
+          .setTypeDescriptor(
+              (ArrayTypeDescriptor)
+                  environment.createTypeDescriptor(
+                      expression.resolveTypeBinding(), inNullMarkedScope()))
+          .setValueExpressions(
+              convertExpressions(JdtEnvironment.asTypedList(expression.expressions())))
+          .build();
     }
 
     private BooleanLiteral convert(org.eclipse.jdt.core.dom.BooleanLiteral literal) {

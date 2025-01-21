@@ -1387,10 +1387,10 @@ class CompilationUnitBuilder(
       .build()
 
   private fun convertVararg(vararg: IrVararg): Expression =
-    ArrayLiteral(
-      environment.getTypeDescriptor(vararg.type) as ArrayTypeDescriptor,
-      vararg.elements.map(::convertVarargElement),
-    )
+    ArrayLiteral.newBuilder()
+      .setTypeDescriptor(environment.getTypeDescriptor(vararg.type) as ArrayTypeDescriptor)
+      .setValueExpressions(vararg.elements.map(::convertVarargElement))
+      .build()
 
   private fun convertVarargElement(varargElement: IrVarargElement): Expression =
     when (varargElement) {

@@ -200,12 +200,14 @@ public final class RuntimeMethods {
         TypeDescriptors.get().javaLangString.getMethodDescriptorByName("fromNativeCharArray");
     return MethodCall.Builder.from(stringCreator)
         .setArguments(
-            new ArrayLiteral(
-                ArrayTypeDescriptor.newBuilder()
-                    .setComponentTypeDescriptor(PrimitiveTypes.CHAR)
-                    .setMarkedAsNativeWasmArray(true)
-                    .build(),
-                arrayInitializers),
+            ArrayLiteral.newBuilder()
+                .setTypeDescriptor(
+                    ArrayTypeDescriptor.newBuilder()
+                        .setComponentTypeDescriptor(PrimitiveTypes.CHAR)
+                        .setMarkedAsNativeWasmArray(true)
+                        .build())
+                .setValueExpressions(arrayInitializers)
+                .build(),
             NumberLiteral.fromInt(arrayInitializers.size()))
         .build();
   }

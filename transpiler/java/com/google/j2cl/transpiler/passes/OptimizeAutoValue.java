@@ -562,17 +562,19 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
     //   ValueType.objectProperty("<property2>", MyType),
     //   ...
     // ]
-    return new ArrayLiteral(
-        TypeDescriptors.get().javaLangObjectArray,
-        fields.stream()
-            .map(FieldDescriptor::getMangledName)
-            .map(StringLiteral::new)
-            .map(
-                name ->
-                    objectPropertyCallBuilder
-                        .setArguments(name, new JavaScriptConstructorReference(type))
-                        .build())
-            .toArray(Expression[]::new));
+    return ArrayLiteral.newBuilder()
+        .setTypeDescriptor(TypeDescriptors.get().javaLangObjectArray)
+        .setValueExpressions(
+            fields.stream()
+                .map(FieldDescriptor::getMangledName)
+                .map(StringLiteral::new)
+                .map(
+                    name ->
+                        objectPropertyCallBuilder
+                            .setArguments(name, new JavaScriptConstructorReference(type))
+                            .build())
+                .toArray(Expression[]::new))
+        .build();
   }
 
   private static Expression createPrototypeFieldAccess(Type type, FieldDescriptor field) {
