@@ -124,6 +124,7 @@ _J2WASM_PACKAGES = [
     "jre",
     "samples",
     "third_party",
+    "transpiler",
     "third_party/java_src/jsr330_inject",
     "third_party/java_src/qo_metafile",
     "third_party/java_src/qo_ole",

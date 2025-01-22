@@ -117,7 +117,13 @@ def integration_test(
         entry_points = ["gen.test.Harness"],
     )
 
-def integration_library(name, srcs = [], deps = [], exports = [], enable_nullability = False, **kwargs):
+def integration_library(
+        name,
+        srcs = [],
+        deps = [],
+        exports = [],
+        enable_wasm = True,
+        enable_nullability = False, **kwargs):
     default_deps = [
         "//jre/java:javaemul_internal_annotations",
         "//third_party:jsinterop-annotations",
@@ -135,6 +141,7 @@ def integration_library(name, srcs = [], deps = [], exports = [], enable_nullabi
         exports = [to_parallel_target(e, _to_j2cl_name) for e in exports],
         javacopts = JAVAC_FLAGS + kwargs.pop("javacopts", []),
         generate_build_test = False,
+        generate_j2wasm_library = None if enable_wasm else False,
         experimental_enable_jspecify_support_do_not_enable_without_jspecify_static_checking_or_you_might_cause_an_outage = enable_nullability,
         **kwargs
     )
