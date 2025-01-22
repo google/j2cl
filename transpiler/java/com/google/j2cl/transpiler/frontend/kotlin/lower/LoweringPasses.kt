@@ -245,8 +245,6 @@ class LoweringPasses(
   lateinit var intrinsics: IntrinsicMethods
 
   override fun generate(moduleFragment: IrModuleFragment, pluginContext: IrPluginContext) {
-    preloadWellKnownSymbols(pluginContext)
-
     jvmBackendContext =
       createJvmBackendContext(state, compilerConfiguration, moduleFragment, pluginContext)
     intrinsics = IntrinsicMethods(pluginContext.irBuiltIns)
@@ -319,76 +317,4 @@ private fun createJvmBackendContext(
     irProviders = irProviders,
     irPluginContext = pluginContext,
   )
-}
-
-/**
- * Preload symbols that are well-known to lowering passes that may not have been referenced by the
- * input code. This ensures that the symbols are present when we attempt to refer to them.
- */
-private fun preloadWellKnownSymbols(pluginContext: IrPluginContext) {
-  val classesToPreload =
-    listOf(
-      // The ForLoopsLowering tries to access the definition of the types below through the
-      // BuiltinsSymbolBase class. This class resolves the types by looking into a symbols table
-      // If the types are not referenced in the code we are compiling we ends up with an unbound
-      // symbol exception. We will simply preload these types coming from stdlib for now but we need
-      // to investigate more how Kotlin/JVM does not have the same issue and what they used to
-      // preload these types.
-      // TODO(b/277283695): Investigate how Kotlin/JVM ends up having these types loaded before
-      //  running the ForLoopsLowering pass and remove this method if needed.
-      StandardClassIds.UByte,
-      StandardClassIds.UShort,
-      StandardClassIds.UInt,
-      StandardClassIds.ULong,
-      StandardClassIds.CharRange,
-      StandardClassIds.LongRange,
-      StandardClassIds.IntRange,
-      ClassId.fromQualifiedBinaryName("kotlin.ranges.UIntRange"),
-      ClassId.fromQualifiedBinaryName("kotlin.ranges.ULongRange"),
-      ClassId.fromQualifiedBinaryName("kotlin.ranges.CharProgression"),
-      ClassId.fromQualifiedBinaryName("kotlin.ranges.IntProgression"),
-      ClassId.fromQualifiedBinaryName("kotlin.ranges.LongProgression"),
-      ClassId.fromQualifiedBinaryName("kotlin.ranges.UIntProgression"),
-      ClassId.fromQualifiedBinaryName("kotlin.ranges.ULongProgression"),
-      ClassId.fromQualifiedBinaryName("kotlin.ranges.UIntRange"),
-
-      // Referenced by ArrayConstructorLowering.
-      ClassId.fromQualifiedBinaryName("javaemul.internal.ArrayHelper"),
-      ClassId.fromQualifiedBinaryName("kotlin.jvm.internal.BooleanArrayInitializer"),
-      ClassId.fromQualifiedBinaryName("kotlin.jvm.internal.IntArrayInitializer"),
-      ClassId.fromQualifiedBinaryName("kotlin.jvm.internal.LongArrayInitializer"),
-      ClassId.fromQualifiedBinaryName("kotlin.jvm.internal.ShortArrayInitializer"),
-      ClassId.fromQualifiedBinaryName("kotlin.jvm.internal.ByteArrayInitializer"),
-      ClassId.fromQualifiedBinaryName("kotlin.jvm.internal.CharArrayInitializer"),
-      ClassId.fromQualifiedBinaryName("kotlin.jvm.internal.DoubleArrayInitializer"),
-      ClassId.fromQualifiedBinaryName("kotlin.jvm.internal.FloatArrayInitializer"),
-      ClassId.fromQualifiedBinaryName("kotlin.jvm.internal.ArrayInitializer"),
-    )
-
-  for (classId in classesToPreload) {
-    checkNotNull(pluginContext.referenceClass(classId)) { "Class $classId not found." }
-  }
-
-  val functionsToPreload =
-    listOf(
-      // Referenced by ArrayConstructorLowering.
-      FqName("kotlin.jvm.internal.toBooleanArrayInitializer"),
-      FqName("kotlin.jvm.internal.toIntArrayInitializer"),
-      FqName("kotlin.jvm.internal.toLongArrayInitializer"),
-      FqName("kotlin.jvm.internal.toShortArrayInitializer"),
-      FqName("kotlin.jvm.internal.toByteArrayInitializer"),
-      FqName("kotlin.jvm.internal.toCharArrayInitializer"),
-      FqName("kotlin.jvm.internal.toDoubleArrayInitializer"),
-      FqName("kotlin.jvm.internal.toFloatArrayInitializer"),
-      FqName("kotlin.jvm.internal.toArrayInitializer"),
-    )
-  for (function in functionsToPreload) {
-    check(
-      pluginContext
-        .referenceFunctions(CallableId(function.parent(), function.shortName()))
-        .isNotEmpty()
-    ) {
-      "Function $function not found."
-    }
-  }
 }
