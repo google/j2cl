@@ -64,14 +64,8 @@ public class NormalizeMultiExpressions extends NormalizationPass {
     @Override
     public Statement rewriteExpressionStatement(ExpressionStatement statement) {
       if (statement.getExpression() instanceof MultiExpression) {
-        // Since we're looking at MultiExpressions that are the primary expression of an
-        // ExpressionStatement, we know that the return value isn't used.
-        // That makes it safe to remove any subexpressions that don't have side effects.
         List<Expression> expressions =
-            ((MultiExpression) statement.getExpression())
-                .getExpressions().stream()
-                    .filter(Expression::hasSideEffects)
-                    .collect(toImmutableList());
+            ((MultiExpression) statement.getExpression()).getExpressions();
 
         if (expressions.isEmpty()) {
           // No expressions with side effects in this top level multexpression, remove completely.
@@ -101,13 +95,23 @@ public class NormalizeMultiExpressions extends NormalizationPass {
     @Override
     public Expression rewriteMultiExpression(MultiExpression multiExpression) {
       List<Expression> flattenedExpressions = new ArrayList<>();
-      for (Expression expression : multiExpression.getExpressions()) {
+      for (int i = 0; i < multiExpression.getExpressions().size(); i++) {
+        Expression expression = multiExpression.getExpressions().get(i);
+
+        // Any side-effect free expression can be removed as it's not observable, expect for the
+        // last expression.
+        boolean isLastExpression = i == multiExpression.getExpressions().size() - 1;
+        if (!isLastExpression && !expression.hasSideEffects()) {
+          continue;
+        }
+
         if (expression instanceof MultiExpression) {
           flattenedExpressions.addAll(((MultiExpression) expression).getExpressions());
         } else {
           flattenedExpressions.add(expression);
         }
       }
+
       return MultiExpression.newBuilder().setExpressions(flattenedExpressions).build();
     }
   }
