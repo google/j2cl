@@ -37,6 +37,7 @@ Guides
 - [JsInterop Cookbook](docs/jsinterop-by-example.md)
 - [J2CL Best Practices](docs/best-practices.md)
 - [Emulation Limitations](docs/limitations.md)
+- [Data Types and Semantics](docs/semantics.md)
 - [Bazel Tutorial](https://docs.bazel.build/versions/master/tutorial/java.html)
 - [Bazel Best Practices](https://docs.bazel.build/versions/master/best-practices.html)
 
