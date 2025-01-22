@@ -2,7 +2,7 @@
 # testing under j2cl.
 # JVM async testing support should be placed under Guava or Xplat.
 
-load("//build_defs:rules.bzl", "j2cl_library")
+load("//build_defs:rules.bzl", "j2cl_library", "j2kt_native_library")
 load("@rules_java//java:defs.bzl", "java_library")
 
 package(
@@ -36,5 +36,13 @@ j2cl_library(
     ],
     deps = [
         "//third_party:junit-j2cl",
+    ],
+)
+
+j2kt_native_library(
+    name = "async-j2kt-native",
+    testonly = 1,
+    srcs = [
+        "Timeout.java",
     ],
 )
