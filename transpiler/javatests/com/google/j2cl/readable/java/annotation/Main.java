@@ -34,6 +34,10 @@ public class Main {
 
     Class<?> classValue();
 
+    Class<String> stringClassValue();
+
+    Class<? extends Class<?>> wildcardClassValue();
+
     SomeEnum enumValue();
 
     Zoo annotationValue();
@@ -84,6 +88,8 @@ public class Main {
   static void testClassValues(Foo foo) {
     Class<?> annotatationType = foo.annotationType();
     Class<?> classValue = foo.classValue();
+    Class<String> stringClassValue = foo.stringClassValue();
+    Class<? extends Class<?>> wildcardClassValue = foo.wildcardClassValue();
     Class<?>[] classArray = foo.classArray();
   }
 

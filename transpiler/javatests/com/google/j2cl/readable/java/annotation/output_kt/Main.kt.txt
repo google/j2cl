@@ -82,6 +82,12 @@ open class Main {
   @ObjCName("classValue")
   val classValue: Class<*>
 
+  @ObjCName("stringClassValue")
+  val stringClassValue: Class<String>
+
+  @ObjCName("wildcardClassValue")
+  val wildcardClassValue: Class<out Class<*>>
+
   @ObjCName("enumValue")
   val enumValue: Main.SomeEnum
 
