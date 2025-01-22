@@ -329,6 +329,8 @@ final class ExpressionTranspiler {
       public boolean enterEmbeddedStatement(EmbeddedStatement embeddedStatement) {
         Statement statement = embeddedStatement.getStatement();
         Label label = null;
+        // TODO(b/391582571): Use a cleaner representation for a labeled block that has a
+        // return value.
         if (statement instanceof LabeledStatement) {
           LabeledStatement labeledStatement = (LabeledStatement) statement;
           label = labeledStatement.getLabel();

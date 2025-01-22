@@ -49,7 +49,9 @@ public class EmbeddedStatement extends Expression {
 
   @Override
   public Precedence getPrecedence() {
-    return Precedence.HIGHEST;
+    // EmbeddedStatement is emitted as an IIFE in JavaScript, hence the precedence is the same
+    // as the one for method call.
+    return Precedence.MEMBER_ACCESS;
   }
 
   @Override

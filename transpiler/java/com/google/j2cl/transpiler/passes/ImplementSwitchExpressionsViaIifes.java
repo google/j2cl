@@ -17,21 +17,15 @@ package com.google.j2cl.transpiler.passes;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
-import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
-import com.google.j2cl.transpiler.ast.FunctionExpression;
-import com.google.j2cl.transpiler.ast.LambdaAdaptorTypeDescriptors;
-import com.google.j2cl.transpiler.ast.MethodCall;
+import com.google.j2cl.transpiler.ast.EmbeddedStatement;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.SwitchExpression;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
-import com.google.j2cl.transpiler.ast.TypeDescriptor;
-import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.YieldStatement;
 
 /**
- * Implements switch expressions as an immediately invoked function expressions that executes a
- * switch statement..
+ * Implements switch expressions using EmbeddedStatements which are emitted as IIFEs.
  *
  * <p>In JavaScript switch constructs are only allowed as statements. This pass converts the switch
  * expression into switch statement and wraps it into an IIFE which allows us to execute a statement
@@ -72,16 +66,10 @@ public class ImplementSwitchExpressionsViaIifes extends NormalizationPass {
 
           @Override
           public Node rewriteSwitchExpression(SwitchExpression switchExpression) {
-            DeclaredTypeDescriptor supplierJsFunctionTypeDescriptor =
-                getSupplierJsFunction(switchExpression.getTypeDescriptor());
-
-            return MethodCall.Builder.from(
-                    supplierJsFunctionTypeDescriptor.getJsFunctionMethodDescriptor())
-                .setQualifier(
-                    // Enclose the switch expression as a switch statement inside a function.
-                    FunctionExpression.newBuilder()
-                        .setTypeDescriptor(supplierJsFunctionTypeDescriptor)
-                        .setStatements(SwitchStatement.Builder.from(switchExpression).build())
+            return EmbeddedStatement.newBuilder()
+                .setTypeDescriptor(switchExpression.getTypeDescriptor())
+                .setStatement(
+                    SwitchStatement.Builder.from(switchExpression)
                         .setSourcePosition(switchExpression.getSourcePosition())
                         .build())
                 .build();
@@ -95,28 +83,5 @@ public class ImplementSwitchExpressionsViaIifes extends NormalizationPass {
                 .build();
           }
         });
-  }
-
-  /** Returns the JsFunction supplier with the appropriate type for {@code typeDescriptor}. */
-  private DeclaredTypeDescriptor getSupplierJsFunction(TypeDescriptor typeDescriptor) {
-    // TODO(b/112308901): remove this hacky code when function types are modeled better.
-    return LambdaAdaptorTypeDescriptors.createJsFunctionTypeDescriptor(
-        getSupplierType(typeDescriptor));
-  }
-
-  /** Returns the supplier that is most suitable to be used for {@code typeDescriptor}. */
-  private DeclaredTypeDescriptor getSupplierType(TypeDescriptor typeDescriptor) {
-    if (!typeDescriptor.isPrimitive()) {
-      return TypeDescriptors.get()
-          .javaUtilFunctionSupplier
-          .specializeTypeVariables(typeVariable -> typeDescriptor);
-    } else if (TypeDescriptors.isPrimitiveBoolean(typeDescriptor)) {
-      return TypeDescriptors.get().javaUtilFunctionBooleanSupplier;
-    } else if (TypeDescriptors.isPrimitiveFloatOrDouble(typeDescriptor)) {
-      return TypeDescriptors.get().javaUtilFunctionDoubleSupplier;
-    } else if (TypeDescriptors.isPrimitiveLong(typeDescriptor)) {
-      return TypeDescriptors.get().javaUtilFunctionLongSupplier;
-    }
-    return TypeDescriptors.get().javaUtilFunctionIntSupplier;
   }
 }

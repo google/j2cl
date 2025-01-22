@@ -98,20 +98,6 @@ public class TypeDescriptors {
   @QualifiedBinaryName("java.util.ReadonlyMap")
   public DeclaredTypeDescriptor javaUtilReadonlyMap;
 
-  public DeclaredTypeDescriptor javaUtilFunctionSupplier;
-
-  @QualifiedBinaryName("java.util.function.BooleanSupplier")
-  public DeclaredTypeDescriptor javaUtilFunctionBooleanSupplier;
-
-  @QualifiedBinaryName("java.util.function.IntSupplier")
-  public DeclaredTypeDescriptor javaUtilFunctionIntSupplier;
-
-  @QualifiedBinaryName("java.util.function.LongSupplier")
-  public DeclaredTypeDescriptor javaUtilFunctionLongSupplier;
-
-  @QualifiedBinaryName("java.util.function.DoubleSupplier")
-  public DeclaredTypeDescriptor javaUtilFunctionDoubleSupplier;
-
   public DeclaredTypeDescriptor javaIoSerializable;
 
   @Nullable

@@ -28,9 +28,11 @@ import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.AwaitExpression;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
+import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.ConditionalExpression;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
+import com.google.j2cl.transpiler.ast.EmbeddedStatement;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Expression.Precedence;
 import com.google.j2cl.transpiler.ast.ExpressionWithComment;
@@ -52,6 +54,7 @@ import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PostfixExpression;
 import com.google.j2cl.transpiler.ast.PrefixExpression;
 import com.google.j2cl.transpiler.ast.PrefixOperator;
+import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
@@ -146,6 +149,24 @@ public final class ExpressionTranspiler {
         // expression.
         renderNoParens(expressionWithComment.getExpression());
         sourceBuilder.append(" /* " + expressionWithComment.getComment() + " */");
+        return false;
+      }
+
+      @Override
+      public boolean enterEmbeddedStatement(EmbeddedStatement expression) {
+        // Emit the embedded statements as a parameterless IIFE.
+        sourceBuilder.append("(() =>");
+        Statement statement = expression.getStatement();
+        StatementTranspiler.render(
+            statement instanceof Block
+                ? statement
+                : Block.newBuilder()
+                    .setStatements(statement)
+                    .setSourcePosition(statement.getSourcePosition())
+                    .build(),
+            environment,
+            sourceBuilder);
+        sourceBuilder.append(")()");
         return false;
       }
 
