@@ -111,4 +111,9 @@ public class ForEachStatements {
       sumOfKeys += key;
     }
   }
+
+  static void withoutBlock(JsArray<Throwable> array, SerializedJsMap map) {
+    for (Throwable element : array.getIterable()) String.valueOf(element);
+    for (String key : map.getIterableKeys()) key.substring(1);
+  }
 }

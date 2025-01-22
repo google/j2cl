@@ -855,6 +855,61 @@
  )
 )
 
+;;; void ForEachStatements.withoutBlock(JsArray<Throwable> array, SerializedJsMap map)
+(func $m_withoutBlock__com_google_gwt_corp_collections_JsArray__com_google_apps_docs_xplat_collections_SerializedJsMap__void@xplatforeach.ForEachStatements
+ (param $array (ref null extern))
+ (param $map (ref null extern))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:115:14
+ (local $$iterator (ref null $java.lang.Object))
+ (local $$qualifier (ref null $java.lang.Object))
+ (local $element (ref null $java.lang.Throwable))
+ (local $$iterator_1 (ref null $java.lang.Object))
+ (local $$qualifier_1 (ref null $java.lang.Object))
+ (local $key (ref null $java.lang.String))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:115:74
+  (call $$clinit__void_<once>_@xplatforeach.ForEachStatements )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:116:4
+  (local.set $$iterator (block (result (ref null $java.lang.Object))
+   (local.set $$qualifier (call $m_getIterable__$devirt__com_google_gwt_corp_collections_JsArray__java_lang_Iterable@com.google.gwt.corp.collections.JsArray.$Overlay (local.get $array)))
+   (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast (ref $java.lang.Iterable.vtable) (call $get.itable.$java.lang.Iterable (local.get $$qualifier)))))
+  ))
+  (block $LOOP.BREAK
+   (loop
+    (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator)))))))
+    (block $LOOP.CONTINUE
+     (block
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:116:4
+      (local.set $element (ref.cast (ref null $java.lang.Throwable) (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator)))))))
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:116:50
+      (drop (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $element)))
+     )
+    )
+    (br 0)
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:117:4
+  (local.set $$iterator_1 (block (result (ref null $java.lang.Object))
+   (local.set $$qualifier_1 (call $m_getIterableKeys__$devirt__com_google_apps_docs_xplat_collections_SerializedJsMap__java_lang_Iterable@com.google.apps.docs.xplat.collections.SerializedJsMap.$Overlay (local.get $map)))
+   (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast (ref $java.lang.Iterable.vtable) (call $get.itable.$java.lang.Iterable (local.get $$qualifier_1)))))
+  ))
+  (block $LOOP_1.BREAK
+   (loop
+    (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator_1))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator_1)))))))
+    (block $LOOP_1.CONTINUE
+     (block
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:117:4
+      (local.set $key (ref.cast (ref null $java.lang.String) (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator_1))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator_1)))))))
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:117:45
+      (drop (call $m_substring__int__java_lang_String@java.lang.String (ref.as_non_null (local.get $key))(i32.const 1)))
+     )
+    )
+    (br 0)
+   )
+  )
+ )
+)
+
 ;;; void ForEachStatements.$clinit()
 (func $$clinit__void_<once>_@xplatforeach.ForEachStatements
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:29:13

@@ -86,7 +86,7 @@ public class JsForInStatement extends LoopStatement {
 
   @Override
   Builder toBuilder() {
-    return new Builder(this);
+    return Builder.from(this);
   }
 
   public static Builder newBuilder() {
