@@ -1275,19 +1275,15 @@ class CompilationUnitBuilder(
       if (typeDescriptor.isTypeVariable) typeDescriptor.toRawTypeDescriptor() else typeDescriptor
 
     if (expressionTypeDescriptor.isPrimitive) {
-      // Kotlin only allows non-nullable primitive instanceOf type if the type is assignable, hence
-      // only if the instanceOf is true. `1 is Int` is valid but `1 is Double` is rejected by the
-      // compiler. However after inlining inline function with reified type parameters, the program
-      // can contain this kind of instanceOf expression.
-      // Ex:
-      // inline fun <reified T> instanceOf(o: Any) = o is T
-      // The following call site:
-      // val b = instanceOf<String>(1)
-      // is inlined as:
-      // val b = 1 is String
-      return BooleanLiteral.get(
-        expressionTypeDescriptor.toBoxedType().isAssignableTo(testTypeDescriptor)
-      )
+      // If the expression is a primitive we can statically compute the instanceof result rather
+      // than box it.
+      val result =
+        BooleanLiteral.get(
+          expressionTypeDescriptor.toBoxedType().isAssignableTo(testTypeDescriptor)
+        )
+      return MultiExpression.newBuilder()
+        .addExpressions(convertExpression(expression), result)
+        .build()
     }
     return InstanceOfExpression.newBuilder()
       .setExpression(convertExpression(expression))
