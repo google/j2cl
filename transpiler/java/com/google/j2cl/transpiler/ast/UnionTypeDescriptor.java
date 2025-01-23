@@ -193,6 +193,17 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
+  @Nullable
+  public DeclaredTypeDescriptor findSupertype(TypeDeclaration supertypeDeclaration) {
+    return getUnionTypeDescriptors().stream()
+        .map(td -> td.findSupertype(supertypeDeclaration))
+        // Perform a reduction where if any value is null, the result is null.
+        // For union types, all types must have the given supertype in order to be considered.
+        .reduce((a, b) -> (a == null || b == null) ? null : a)
+        .orElse(null);
+  }
+
+  @Override
   boolean isDenotable(ImmutableSet<TypeVariable> seen) {
     return false;
   }

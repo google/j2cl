@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.frontend.javac;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.stream.Collectors.toCollection;
@@ -893,17 +894,24 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           .build();
     }
 
-    List<TypeDescriptor> typeArguments = convertTypeArguments(memberReference.getTypeArguments());
-    MethodDescriptor targetMethodDescriptor =
-        environment.createMethodDescriptor(
-            /* methodType= */ memberReference.referentType.asMethodType(),
-            /* declarationMethodElement= */ methodSymbol,
-            typeArguments);
     Expression qualifier = convertExpressionOrNull(memberReference.getQualifierExpression());
     if (qualifier instanceof JavaScriptConstructorReference) {
       // The qualifier was just the class name, remove it.
       qualifier = null;
     }
+
+    DeclaredTypeDescriptor enclosingTypeDescriptor =
+        getParameterizedEnclosingType(
+            environment.createDeclaredTypeDescriptor(methodSymbol.getEnclosingElement().asType()),
+            qualifier);
+
+    List<TypeDescriptor> typeArguments = convertTypeArguments(memberReference.getTypeArguments());
+    MethodDescriptor targetMethodDescriptor =
+        environment.createMethodDescriptor(
+            enclosingTypeDescriptor,
+            /* methodType= */ memberReference.referentType.asMethodType(),
+            /* declarationMethodElement= */ methodSymbol,
+            typeArguments);
 
     return MethodReference.newBuilder()
         .setTypeDescriptor(expressionTypeDescriptor)
@@ -1052,9 +1060,18 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       qualifier = null;
     }
 
+    // The type arguments for the method itself. For example `String` in `C.<String>m()`.
     var typeArguments = convertTypeArguments(methodInvocation.getTypeArguments());
+
+    DeclaredTypeDescriptor enclosingTypeDescriptor =
+        environment.createDeclaredTypeDescriptor(methodSymbol.getEnclosingElement().asType());
+    if (!methodSymbol.isConstructor()) {
+      enclosingTypeDescriptor = getParameterizedEnclosingType(enclosingTypeDescriptor, qualifier);
+    }
+
     MethodDescriptor methodDescriptor =
         environment.createMethodDescriptor(
+            /* enclosingTypeDescriptor= */ enclosingTypeDescriptor,
             /* methodType= */ methodInvocation.getMethodSelect().type.asMethodType(),
             /* declarationMethodElement= */ methodSymbol,
             typeArguments);
@@ -1140,6 +1157,23 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
 
     return getQualifier(methodInvocation.getMethodSelect());
+  }
+
+  private DeclaredTypeDescriptor getParameterizedEnclosingType(
+      DeclaredTypeDescriptor enclosingTypeDescriptor, Expression qualifier) {
+    if (qualifier == null) {
+      return enclosingTypeDescriptor;
+    }
+
+    if (qualifier.getTypeDescriptor().isRaw()) {
+      return enclosingTypeDescriptor.toRawTypeDescriptor();
+    }
+
+    // In order to get the correct parameterization, find the parameterized type from the qualifier,
+    // if available. The methodSymbol's enclosing element will not have the necessary type
+    // information from javac.
+    return checkNotNull(
+        qualifier.getTypeDescriptor().findSupertype(enclosingTypeDescriptor.getTypeDeclaration()));
   }
 
   private Expression convertIdent(JCIdent identifier) {

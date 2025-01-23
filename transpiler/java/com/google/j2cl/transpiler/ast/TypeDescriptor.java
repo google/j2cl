@@ -298,6 +298,13 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
       Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable);
 
   /**
+   * Finds the supertype of this type (or this type itself) that has the same base type as given.
+   * The returned type has the parameterization of the current type.
+   */
+  @Nullable
+  public abstract DeclaredTypeDescriptor findSupertype(TypeDeclaration supertypeDeclaration);
+
+  /**
    * Returns true if the two types have the same raw type.
    *
    * <p>The raw type is always a declared type, an array of raw type or a primitive type. And is

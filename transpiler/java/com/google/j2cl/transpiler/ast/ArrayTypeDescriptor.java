@@ -23,6 +23,7 @@ import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.stream.Stream;
 import javax.annotation.Nullable;
 
 /** An array type. */
@@ -231,6 +232,18 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
   public ArrayTypeDescriptor specializeTypeVariables(
       Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable) {
     return specializeTypeVariables(replacementTypeArgumentByTypeVariable, ImmutableSet.of());
+  }
+
+  @Override
+  @Nullable
+  public DeclaredTypeDescriptor findSupertype(TypeDeclaration supertypeDeclaration) {
+    return Stream.of(
+            TypeDescriptors.get().javaLangObject,
+            TypeDescriptors.get().javaLangCloneable,
+            TypeDescriptors.get().javaIoSerializable)
+        .filter(td -> td.getTypeDeclaration().equals(supertypeDeclaration))
+        .findFirst()
+        .orElse(null);
   }
 
   @Override

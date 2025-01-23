@@ -201,6 +201,12 @@ public class PrimitiveTypeDescriptor extends TypeDescriptor {
     return specializeTypeVariables(replacementTypeArgumentByTypeVariable, ImmutableSet.of());
   }
 
+  @Override
+  @Nullable
+  public DeclaredTypeDescriptor findSupertype(TypeDeclaration supertypeDeclaration) {
+    throw new UnsupportedOperationException();
+  }
+
   /** A unique string for a give type. Used for interning. */
   @Override
   public String getUniqueId() {

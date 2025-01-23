@@ -1294,6 +1294,15 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   }
 
   @Override
+  @Nullable
+  public DeclaredTypeDescriptor findSupertype(TypeDeclaration supertypeDeclaration) {
+    return getAllSuperTypesIncludingSelf().stream()
+        .filter(supertype -> supertype.getTypeDeclaration().equals(supertypeDeclaration))
+        .findFirst()
+        .orElse(null);
+  }
+
+  @Override
   public String getReadableDescription() {
     return getTypeDeclaration().getReadableDescription()
         + (hasTypeArguments()

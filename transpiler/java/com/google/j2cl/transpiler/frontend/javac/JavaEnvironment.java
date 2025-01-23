@@ -616,24 +616,6 @@ class JavaEnvironment {
         .build();
   }
 
-  /**
-   * Creates a MethodDescriptor from javac internal representation.
-   *
-   * @param methodType an ExecutableType containing the (inferred) specialization of the method in a
-   *     usage location.
-   * @param declarationMethodElement the method declaration.
-   */
-  MethodDescriptor createMethodDescriptor(
-      ExecutableType methodType,
-      ExecutableElement declarationMethodElement,
-      List<TypeDescriptor> typeArguments) {
-
-    DeclaredTypeDescriptor enclosingTypeDescriptor =
-        createDeclaredTypeDescriptor(declarationMethodElement.getEnclosingElement().asType());
-    return createMethodDescriptor(
-        enclosingTypeDescriptor, methodType, declarationMethodElement, typeArguments);
-  }
-
   /** Create a MethodDescriptor directly based on the given JavaC ExecutableElement. */
   MethodDescriptor createMethodDescriptor(
       DeclaredTypeDescriptor enclosingTypeDescriptor,

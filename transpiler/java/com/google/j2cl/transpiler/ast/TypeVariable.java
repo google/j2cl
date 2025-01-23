@@ -254,6 +254,12 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
   }
 
   @Override
+  @Nullable
+  public DeclaredTypeDescriptor findSupertype(TypeDeclaration supertypeDeclaration) {
+    return getUpperBoundTypeDescriptor().findSupertype(supertypeDeclaration);
+  }
+
+  @Override
   public String getReadableDescription() {
     return getName();
   }
