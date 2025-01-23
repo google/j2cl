@@ -9,6 +9,7 @@ package(
 java_library(
     name = "ast",
     srcs = glob(["*.java"]),
+    javacopts = ["-Xep:BetaApi:OFF"],
     deps = [
         "//third_party:auto_value",
         "//third_party:guava",

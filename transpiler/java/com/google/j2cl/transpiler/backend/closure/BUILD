@@ -9,6 +9,7 @@ package(
 java_library(
     name = "closure",
     srcs = glob(["*.java"]),
+    javacopts = ["-Xep:BetaApi:OFF"],
     deps = [
         "//third_party:gson",
         "//third_party:guava",
