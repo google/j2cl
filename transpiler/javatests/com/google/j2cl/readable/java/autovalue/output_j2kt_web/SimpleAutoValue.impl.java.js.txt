@@ -1,20 +1,19 @@
 goog.module('autovalue.SimpleAutoValue$impl');
 
-const j_l_Object = goog.require('java.lang.Object$impl');
+const reflect = goog.require('goog.reflect');
+const ValueType = goog.require('javaemul.internal.ValueType$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Builder = goog.forwardDeclare('autovalue.AutoValue_EmptyAutoValue.Builder$impl');
-let AutoValue__SimpleAutoValue = goog.forwardDeclare('autovalue.AutoValue_SimpleAutoValue$impl');
 let EmptyAutoValue = goog.forwardDeclare('autovalue.EmptyAutoValue$impl');
 let Double = goog.forwardDeclare('java.lang.Double$impl');
+let j_l_Object = goog.forwardDeclare('java.lang.Object$impl');
+let Objects = goog.forwardDeclare('java.util.Objects$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
-/**
- * @abstract
- */
-class SimpleAutoValue extends j_l_Object {
+class SimpleAutoValue extends ValueType {
  /** @protected @nodts */
  constructor() {
   super();
@@ -24,39 +23,91 @@ class SimpleAutoValue extends j_l_Object {
   this.f_field1__autovalue_SimpleAutoValue_;
   /**@type {!EmptyAutoValue} @nodts*/
   this.f_field2__autovalue_SimpleAutoValue_;
+  /**@type {number} @nodts*/
+  this.f_intField__autovalue_AutoValue_SimpleAutoValue_ = 0;
+  /**@type {boolean} @nodts*/
+  this.f_booleanField__autovalue_AutoValue_SimpleAutoValue_ = false;
+  /**@type {?string} @nodts*/
+  this.f_stringField__autovalue_AutoValue_SimpleAutoValue_;
+  /**@type {?number} @nodts*/
+  this.f_doubleField__autovalue_AutoValue_SimpleAutoValue_;
+  /**@type {?number} @nodts*/
+  this.f_nullableField__autovalue_AutoValue_SimpleAutoValue_;
+  /**@type {Array<number>} @nodts*/
+  this.f_arrayField__autovalue_AutoValue_SimpleAutoValue_;
+ }
+ /** @nodts @return {!SimpleAutoValue} */
+ static $create__() {
+  SimpleAutoValue.$clinit();
+  let $instance = new SimpleAutoValue();
+  $instance.$ctor__autovalue_SimpleAutoValue__void();
+  return $instance;
  }
  /** @nodts */
  $ctor__autovalue_SimpleAutoValue__void() {
-  this.$ctor__java_lang_Object__void();
+  this.$ctor__javaemul_internal_ValueType__void();
   this.f_field2__autovalue_SimpleAutoValue_ = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(Builder.$create__().m_build__autovalue_EmptyAutoValue());
  }
- /** @abstract @nodts @return {number} */
- m_getIntField__int() {}
- /** @abstract @nodts @return {boolean} */
- m_getBooleanField__boolean() {}
- /** @abstract @nodts @return {?string} */
- m_getStringField__java_lang_String() {}
- /** @abstract @nodts @return {?number} */
- m_getDoubleField__java_lang_Double() {}
- /** @abstract @nodts @return {?number} */
- m_getNullableField__java_lang_Double() {}
- /** @abstract @nodts @return {Array<number>} */
- m_getArrayField__arrayOf_int() {}
  /** @nodts @return {SimpleAutoValue} */
  static m_create_pp_autovalue__autovalue_SimpleAutoValue() {
   SimpleAutoValue.$clinit();
-  return AutoValue__SimpleAutoValue.$create__int__boolean__java_lang_String__java_lang_Double__java_lang_Double__arrayOf_int(42, true, 'text', Double.m_valueOf__double__java_lang_Double(43), Double.m_valueOf__double__java_lang_Double(44), /**@type {!Array<number>}*/ ($Arrays.$stampType([45], $$int)));
+  return SimpleAutoValue.$create__int__boolean__java_lang_String__java_lang_Double__java_lang_Double__arrayOf_int(42, true, 'text', Double.m_valueOf__double__java_lang_Double(43), Double.m_valueOf__double__java_lang_Double(44), /**@type {!Array<number>}*/ ($Arrays.$stampType([45], $$int)));
  }
- /** @nodts @return {Array<AutoValue__SimpleAutoValue>} */
- static m_castAndInstanceOf_pp_autovalue__java_lang_Object__arrayOf_autovalue_AutoValue_SimpleAutoValue(/** * */ o) {
+ /** @nodts @return {Array<SimpleAutoValue>} */
+ static m_castAndInstanceOf_pp_autovalue__java_lang_Object__arrayOf_autovalue_SimpleAutoValue(/** * */ o) {
   SimpleAutoValue.$clinit();
-  return $Arrays.$instanceIsOfType(o, j_l_Object, 1) ? /**@type {Array<AutoValue__SimpleAutoValue>}*/ ($Arrays.$castTo(o, AutoValue__SimpleAutoValue, 1)) : null;
+  return $Arrays.$instanceIsOfType(o, j_l_Object, 1) ? /**@type {Array<SimpleAutoValue>}*/ ($Arrays.$castTo(o, SimpleAutoValue, 1)) : null;
+ }
+ /** @nodts @return {!SimpleAutoValue} */
+ static $create__int__boolean__java_lang_String__java_lang_Double__java_lang_Double__arrayOf_int(/** number */ intField, /** boolean */ booleanField, /** ?string */ stringField, /** ?number */ doubleField, /** ?number */ nullableField, /** Array<number> */ arrayField) {
+  SimpleAutoValue.$clinit();
+  let $instance = new SimpleAutoValue();
+  $instance.$ctor__autovalue_SimpleAutoValue__int__boolean__java_lang_String__java_lang_Double__java_lang_Double__arrayOf_int__void(intField, booleanField, stringField, doubleField, nullableField, arrayField);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__autovalue_SimpleAutoValue__int__boolean__java_lang_String__java_lang_Double__java_lang_Double__arrayOf_int__void(/** number */ intField, /** boolean */ booleanField, /** ?string */ stringField, /** ?number */ doubleField, /** ?number */ nullableField, /** Array<number> */ arrayField) {
+  this.$ctor__autovalue_SimpleAutoValue__void();
+  this.f_intField__autovalue_AutoValue_SimpleAutoValue_ = intField;
+  this.f_booleanField__autovalue_AutoValue_SimpleAutoValue_ = booleanField;
+  Objects.m_requireNonNull__java_lang_Object__java_lang_Object(stringField);
+  this.f_stringField__autovalue_AutoValue_SimpleAutoValue_ = stringField;
+  Objects.m_requireNonNull__java_lang_Object__java_lang_Object(doubleField);
+  this.f_doubleField__autovalue_AutoValue_SimpleAutoValue_ = doubleField;
+  this.f_nullableField__autovalue_AutoValue_SimpleAutoValue_ = nullableField;
+  Objects.m_requireNonNull__java_lang_Object__java_lang_Object(arrayField);
+  this.f_arrayField__autovalue_AutoValue_SimpleAutoValue_ = arrayField;
+  $J2CL_PRESERVE$(this.f_intField__autovalue_AutoValue_SimpleAutoValue_, this.f_booleanField__autovalue_AutoValue_SimpleAutoValue_, this.f_stringField__autovalue_AutoValue_SimpleAutoValue_, this.f_doubleField__autovalue_AutoValue_SimpleAutoValue_, this.f_nullableField__autovalue_AutoValue_SimpleAutoValue_, this.f_arrayField__autovalue_AutoValue_SimpleAutoValue_);
+ }
+ /** @nodts @return {number} */
+ m_getIntField__int() {
+  return this.f_intField__autovalue_AutoValue_SimpleAutoValue_;
+ }
+ /** @nodts @return {boolean} */
+ m_getBooleanField__boolean() {
+  return this.f_booleanField__autovalue_AutoValue_SimpleAutoValue_;
+ }
+ /** @nodts @return {?string} */
+ m_getStringField__java_lang_String() {
+  return this.f_stringField__autovalue_AutoValue_SimpleAutoValue_;
+ }
+ /** @nodts @return {?number} */
+ m_getDoubleField__java_lang_Double() {
+  return this.f_doubleField__autovalue_AutoValue_SimpleAutoValue_;
+ }
+ /** @nodts @return {?number} */
+ m_getNullableField__java_lang_Double() {
+  return this.f_nullableField__autovalue_AutoValue_SimpleAutoValue_;
+ }
+ /** @nodts @return {Array<number>} */
+ m_getArrayField__arrayOf_int() {
+  return this.f_arrayField__autovalue_AutoValue_SimpleAutoValue_;
  }
  /** @nodts */
  static $clinit() {
   SimpleAutoValue.$clinit = () =>{};
   SimpleAutoValue.$loadModules();
-  j_l_Object.$clinit();
+  ValueType.$clinit();
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
@@ -66,13 +117,15 @@ class SimpleAutoValue extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   Builder = goog.module.get('autovalue.AutoValue_EmptyAutoValue.Builder$impl');
-  AutoValue__SimpleAutoValue = goog.module.get('autovalue.AutoValue_SimpleAutoValue$impl');
   Double = goog.module.get('java.lang.Double$impl');
+  j_l_Object = goog.module.get('java.lang.Object$impl');
+  Objects = goog.module.get('java.util.Objects$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
  }
 }
+SimpleAutoValue.prototype.$excluded_fields = [reflect.objectProperty('f_intField__autovalue_SimpleAutoValue_', SimpleAutoValue), reflect.objectProperty('f_field1__autovalue_SimpleAutoValue_', SimpleAutoValue), reflect.objectProperty('f_field2__autovalue_SimpleAutoValue_', SimpleAutoValue)];
 $Util.$setClassMetadata(SimpleAutoValue, 'autovalue.SimpleAutoValue');
 
 exports = SimpleAutoValue;

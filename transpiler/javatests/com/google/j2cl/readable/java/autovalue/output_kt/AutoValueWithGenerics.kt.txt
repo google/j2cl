@@ -20,6 +20,7 @@ package autovalue
 
 import javaemul.lang.*
 import autovalue.AutoValue_AutoValueWithGenerics
+import javaemul.lang.annotations.WasAutoValue
 import kotlin.Boolean
 import kotlin.OptIn
 import kotlin.Suppress
@@ -28,6 +29,7 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktAutovalueAutoValueWithGenerics", exact = true)
+@WasAutoValue
 abstract class AutoValueWithGenerics<T> {
  @ObjCName("getBooleanField")
  abstract fun getBooleanField(): Boolean

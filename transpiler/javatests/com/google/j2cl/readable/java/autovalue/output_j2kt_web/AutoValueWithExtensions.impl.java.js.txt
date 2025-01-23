@@ -1,26 +1,27 @@
 goog.module('autovalue.AutoValueWithExtensions$impl');
 
-const j_l_Object = goog.require('java.lang.Object$impl');
+const ValueType = goog.require('javaemul.internal.ValueType$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let AutoValue__AutoValueWithExtensions = goog.forwardDeclare('autovalue.AutoValue_AutoValueWithExtensions$impl');
+let Objects = goog.forwardDeclare('java.util.Objects$impl');
 
 /**
  * @abstract
  */
-class AutoValueWithExtensions extends j_l_Object {
+class AutoValueWithExtensions extends ValueType {
  /** @protected @nodts */
  constructor() {
   super();
+  /**@type {number} @nodts*/
+  this.f_intField__autovalue____AutoValue_AutoValueWithExtensions_ = 0;
+  /**@type {?string} @nodts*/
+  this.f_stringField__autovalue____AutoValue_AutoValueWithExtensions_;
  }
  /** @nodts */
  $ctor__autovalue_AutoValueWithExtensions__void() {
-  this.$ctor__java_lang_Object__void();
+  this.$ctor__javaemul_internal_ValueType__void();
  }
- /** @abstract @nodts @return {number} */
- m_getIntField__int() {}
- /** @abstract @nodts @return {?string} */
- m_getStringField__java_lang_String() {}
  /** @abstract @nodts @return {?string} */
  m_toPrettyString_pp_autovalue__java_lang_String() {}
  /** @nodts @return {AutoValueWithExtensions} */
@@ -29,10 +30,26 @@ class AutoValueWithExtensions extends j_l_Object {
   return AutoValue__AutoValueWithExtensions.$create__int__java_lang_String(42, 'text');
  }
  /** @nodts */
+ $ctor__autovalue_AutoValueWithExtensions__int__java_lang_String__void(/** number */ intField, /** ?string */ stringField) {
+  this.$ctor__autovalue_AutoValueWithExtensions__void();
+  this.f_intField__autovalue____AutoValue_AutoValueWithExtensions_ = intField;
+  Objects.m_requireNonNull__java_lang_Object__java_lang_Object(stringField);
+  this.f_stringField__autovalue____AutoValue_AutoValueWithExtensions_ = stringField;
+  $J2CL_PRESERVE$(this.f_intField__autovalue____AutoValue_AutoValueWithExtensions_, this.f_stringField__autovalue____AutoValue_AutoValueWithExtensions_);
+ }
+ /** @nodts @return {number} */
+ m_getIntField__int() {
+  return this.f_intField__autovalue____AutoValue_AutoValueWithExtensions_;
+ }
+ /** @nodts @return {?string} */
+ m_getStringField__java_lang_String() {
+  return this.f_stringField__autovalue____AutoValue_AutoValueWithExtensions_;
+ }
+ /** @nodts */
  static $clinit() {
   AutoValueWithExtensions.$clinit = () =>{};
   AutoValueWithExtensions.$loadModules();
-  j_l_Object.$clinit();
+  ValueType.$clinit();
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
@@ -42,6 +59,7 @@ class AutoValueWithExtensions extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   AutoValue__AutoValueWithExtensions = goog.module.get('autovalue.AutoValue_AutoValueWithExtensions$impl');
+  Objects = goog.module.get('java.util.Objects$impl');
  }
 }
 $Util.$setClassMetadata(AutoValueWithExtensions, 'autovalue.AutoValueWithExtensions');

@@ -135,13 +135,8 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return getTypeDeclaration().isNoopCast();
   }
 
-  /**
-   * Returns true if the given type descriptor is a Kotlin companion object class that can be
-   * optimized. In order to be optimizable, the companion object should not extend any class nor
-   * implement any interface.
-   */
   @Override
-  public boolean isOptimizableKotlinCompanion() {
+  public boolean isKotlinCompanionClass() {
     // TODO(b/337362819): Uncomment this when the Java frontend is correctly settings SourceLanguage
     // for Kotlin deps.
     // if (getTypeDeclaration().getSourceLanguage() != KOTLIN) {
@@ -152,20 +147,26 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     // - The type should be a static nested final class named `Companion`
     // - The enclosing class should have a static field named `Companion` of the same type.
     // TODO(b/335000000): Add the ability to mark class as Kotlin companion.
-    if (!isClass()
-        || !isFinal()
-        || !getSimpleSourceName().equals("Companion")
-        || getEnclosingTypeDescriptor() == null
-        || getEnclosingTypeDescriptor().getDeclaredFieldDescriptors().stream()
-            .noneMatch(
-                f ->
-                    f.getName().equals("Companion")
-                        && f.getTypeDescriptor().isSameBaseType(this))) {
-      return false;
-    }
+    return isClass()
+        && isFinal()
+        && getSimpleSourceName().equals("Companion")
+        && getEnclosingTypeDescriptor() != null
+        && getEnclosingTypeDescriptor().getDeclaredFieldDescriptors().stream()
+            .anyMatch(
+                f -> f.getName().equals("Companion") && f.getTypeDescriptor().isSameBaseType(this));
+  }
+
+  /**
+   * Returns true if the given type descriptor is a Kotlin companion object class that can be
+   * optimized. In order to be optimizable, the companion object should not extend any class nor
+   * implement any interface.
+   */
+  @Override
+  public boolean isOptimizableKotlinCompanion() {
     // In order to be able to optimize the companion object, it should not extend any class nor
     // implement any interface.
-    return TypeDescriptors.isJavaLangObject(getSuperTypeDescriptor())
+    return isKotlinCompanionClass()
+        && TypeDescriptors.isJavaLangObject(getSuperTypeDescriptor())
         && getInterfaceTypeDescriptors().isEmpty();
   }
 

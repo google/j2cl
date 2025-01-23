@@ -1,35 +1,56 @@
 goog.module('autovalue.AutoValueWithGenerics$impl');
 
-const j_l_Object = goog.require('java.lang.Object$impl');
+const ValueType = goog.require('javaemul.internal.ValueType$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let AutoValue__AutoValueWithGenerics = goog.forwardDeclare('autovalue.AutoValue_AutoValueWithGenerics$impl');
-
 /**
- * @abstract
  * @template T
  */
-class AutoValueWithGenerics extends j_l_Object {
+class AutoValueWithGenerics extends ValueType {
  /** @protected @nodts */
  constructor() {
   super();
+  /**@type {boolean} @nodts*/
+  this.f_booleanField__autovalue_AutoValue_AutoValueWithGenerics_ = false;
+ }
+ /** @nodts @template T @return {!AutoValueWithGenerics<T>} */
+ static $create__() {
+  AutoValueWithGenerics.$clinit();
+  let $instance = new AutoValueWithGenerics();
+  $instance.$ctor__autovalue_AutoValueWithGenerics__void();
+  return $instance;
  }
  /** @nodts */
  $ctor__autovalue_AutoValueWithGenerics__void() {
-  this.$ctor__java_lang_Object__void();
+  this.$ctor__javaemul_internal_ValueType__void();
  }
- /** @abstract @nodts @return {boolean} */
- m_getBooleanField__boolean() {}
  /** @nodts @template T_1 @return {AutoValueWithGenerics<T_1>} */
  static m_create_pp_autovalue__autovalue_AutoValueWithGenerics() {
   AutoValueWithGenerics.$clinit();
-  return /**@type {!AutoValue__AutoValueWithGenerics<?>}*/ (AutoValue__AutoValueWithGenerics.$create__boolean(true));
+  return /**@type {!AutoValueWithGenerics<?>}*/ (AutoValueWithGenerics.$create__boolean(true));
+ }
+ /** @nodts @template T @return {!AutoValueWithGenerics<T>} */
+ static $create__boolean(/** boolean */ booleanField) {
+  AutoValueWithGenerics.$clinit();
+  let $instance = new AutoValueWithGenerics();
+  $instance.$ctor__autovalue_AutoValueWithGenerics__boolean__void(booleanField);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__autovalue_AutoValueWithGenerics__boolean__void(/** boolean */ booleanField) {
+  this.$ctor__autovalue_AutoValueWithGenerics__void();
+  this.f_booleanField__autovalue_AutoValue_AutoValueWithGenerics_ = booleanField;
+  $J2CL_PRESERVE$(this.f_booleanField__autovalue_AutoValue_AutoValueWithGenerics_);
+ }
+ /** @nodts @return {boolean} */
+ m_getBooleanField__boolean() {
+  return this.f_booleanField__autovalue_AutoValue_AutoValueWithGenerics_;
  }
  /** @nodts */
  static $clinit() {
   AutoValueWithGenerics.$clinit = () =>{};
   AutoValueWithGenerics.$loadModules();
-  j_l_Object.$clinit();
+  ValueType.$clinit();
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
@@ -37,9 +58,7 @@ class AutoValueWithGenerics extends j_l_Object {
  }
  
  /** @nodts */
- static $loadModules() {
-  AutoValue__AutoValueWithGenerics = goog.module.get('autovalue.AutoValue_AutoValueWithGenerics$impl');
- }
+ static $loadModules() {}
 }
 $Util.$setClassMetadata(AutoValueWithGenerics, 'autovalue.AutoValueWithGenerics');
 

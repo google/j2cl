@@ -3,7 +3,6 @@ goog.module('autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder$imp
 const DefaultNonEmptyConstructorAutoValue_Builder = goog.require('autovalue.DefaultNonEmptyConstructorAutoValue.Builder$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let AutoValue__DefaultNonEmptyConstructorAutoValue = goog.forwardDeclare('autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue$impl');
 let DefaultNonEmptyConstructorAutoValue = goog.forwardDeclare('autovalue.DefaultNonEmptyConstructorAutoValue$impl');
 let IllegalStateException = goog.forwardDeclare('java.lang.IllegalStateException$impl');
 let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
@@ -44,7 +43,7 @@ class Builder extends DefaultNonEmptyConstructorAutoValue_Builder {
   if (!(this.f_set___0__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_ == 1)) {
    throw $Exceptions.toJs(IllegalStateException.$create__());
   }
-  return AutoValue__DefaultNonEmptyConstructorAutoValue.$create__boolean(this.f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_);
+  return DefaultNonEmptyConstructorAutoValue.$create__boolean(this.f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_);
  }
  /** @nodts */
  static $clinit() {
@@ -59,7 +58,7 @@ class Builder extends DefaultNonEmptyConstructorAutoValue_Builder {
  
  /** @nodts */
  static $loadModules() {
-  AutoValue__DefaultNonEmptyConstructorAutoValue = goog.module.get('autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue$impl');
+  DefaultNonEmptyConstructorAutoValue = goog.module.get('autovalue.DefaultNonEmptyConstructorAutoValue$impl');
   IllegalStateException = goog.module.get('java.lang.IllegalStateException$impl');
   $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
   $Primitives = goog.module.get('vmbootstrap.Primitives$impl');

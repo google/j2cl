@@ -49,6 +49,8 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.getWasmInfo
 import com.google.j2cl.transpiler.frontend.kotlin.ir.hasVoidReturn
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isAbstract
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isArrayType
+import com.google.j2cl.transpiler.frontend.kotlin.ir.isAutoValue
+import com.google.j2cl.transpiler.frontend.kotlin.ir.isAutoValueBuilder
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isCapturingEnclosingInstance
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isClassType
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isDeprecated
@@ -250,6 +252,8 @@ class KotlinEnvironment(
         .setJsFunctionInterface(irClass.isJsFunction)
         .setJsEnumInfo(irClass.getJsEnumInfo())
         .setWasmInfo(irClass.getWasmInfo())
+        .setAnnotatedWithAutoValue(irClass.isAutoValue)
+        .setAnnotatedWithAutoValueBuilder(irClass.isAutoValueBuilder)
         .apply {
           val jsMemberAnnotation = irClass.getJsMemberAnnotationInfo()
           setCustomizedJsNamespace(jsMemberAnnotation?.namespace)

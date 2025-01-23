@@ -19,14 +19,17 @@
 package autovalue
 
 import javaemul.lang.*
+import javaemul.lang.annotations.WasAutoValue
 import kotlin.OptIn
 import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktAutovalueEmptyAutoValue", exact = true)
+@WasAutoValue
 abstract class EmptyAutoValue {
  @ObjCName("J2ktAutovalueEmptyAutoValue_Builder", exact = true)
+ @javaemul.lang.annotations.WasAutoValue.Builder
  abstract class Builder internal constructor() {
   @ObjCName("build")
   abstract fun build(): EmptyAutoValue?

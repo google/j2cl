@@ -20,6 +20,7 @@ package autovalue
 
 import javaemul.lang.*
 import autovalue.AutoValue_AutoValueWithExtensions
+import javaemul.lang.annotations.WasAutoValue
 import kotlin.Int
 import kotlin.OptIn
 import kotlin.String
@@ -29,6 +30,7 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktAutovalueAutoValueWithExtensions", exact = true)
+@WasAutoValue
 abstract class AutoValueWithExtensions internal constructor() {
  @ObjCName("getIntField")
  abstract fun getIntField(): Int

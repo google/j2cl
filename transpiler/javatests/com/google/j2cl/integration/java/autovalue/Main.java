@@ -41,6 +41,7 @@ public class Main {
     testUnusedTypeExtending();
     testClinit();
     testJsInterop();
+    testCrossLibrary();
   }
 
   private static void testComposite() {
@@ -241,6 +242,10 @@ public class Main {
       return field;
     }
 
+    public static int getStaticField() {
+      return field;
+    }
+
     static {
       field = 1;
     }
@@ -268,6 +273,7 @@ public class Main {
   private static void testClinit() {
     AutoValueWithBuilderAndClinit o = AutoValueWithBuilderAndClinit.Builder.create();
     assertEquals(1, o.getField());
+    assertEquals(1, AutoValueWithBuilderAndClinit.getStaticField());
   }
 
   @AutoValue
@@ -299,5 +305,10 @@ public class Main {
 
     assertEquals(0, autoValueJsType.getField());
     assertEquals(1, autoValueJsType.getField2());
+  }
+
+  private static void testCrossLibrary() {
+    AutoValueDependency dependency = AutoValueDependency.builder().value(1).build();
+    assertEquals(1, dependency.value());
   }
 }

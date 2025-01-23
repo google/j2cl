@@ -20,6 +20,7 @@ package autovalue
 
 import javaemul.lang.*
 import autovalue.AutoValue_DefaultConstructorAutoValue
+import javaemul.lang.annotations.WasAutoValue
 import kotlin.Boolean
 import kotlin.OptIn
 import kotlin.Suppress
@@ -28,6 +29,7 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktAutovalueDefaultConstructorAutoValue", exact = true)
+@WasAutoValue
 abstract class DefaultConstructorAutoValue {
  internal constructor()
 
@@ -43,6 +45,7 @@ abstract class DefaultConstructorAutoValue {
  }
 
  @ObjCName("J2ktAutovalueDefaultConstructorAutoValue_Builder", exact = true)
+ @javaemul.lang.annotations.WasAutoValue.Builder
  abstract class Builder {
   constructor()
 

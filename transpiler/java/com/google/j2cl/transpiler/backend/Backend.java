@@ -256,8 +256,8 @@ public enum Backend {
           // Compute bridge methods before optimizing autovalue, since inlining the autovalue
           // classes requires inlining the bridges as well.
           AddBridgeMethods::new,
-          () -> new OptimizeAutoValue(options.getOptimizeAutoValue()),
           OptimizeKotlinCompanions::new,
+          () -> new OptimizeAutoValue(options.getOptimizeAutoValue()),
 
           // Default constructors and explicit super calls should be synthesized first.
           CreateImplicitConstructors::new,

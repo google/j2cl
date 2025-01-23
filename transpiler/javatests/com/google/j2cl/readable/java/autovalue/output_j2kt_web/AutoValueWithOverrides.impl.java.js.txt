@@ -3,20 +3,26 @@ goog.module('autovalue.AutoValueWithOverrides$impl');
 const BaseClass = goog.require('autovalue.BaseClass$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-/**
- * @abstract
- */
 class AutoValueWithOverrides extends BaseClass {
  /** @protected @nodts */
  constructor() {
   super();
+  /**@type {number} @nodts*/
+  this.f_baseField__autovalue_AutoValue_AutoValueWithOverrides_ = 0;
+  /**@type {boolean} @nodts*/
+  this.f_booleanField__autovalue_AutoValue_AutoValueWithOverrides_ = false;
+ }
+ /** @nodts @return {!AutoValueWithOverrides} */
+ static $create__() {
+  AutoValueWithOverrides.$clinit();
+  let $instance = new AutoValueWithOverrides();
+  $instance.$ctor__autovalue_AutoValueWithOverrides__void();
+  return $instance;
  }
  /** @nodts */
  $ctor__autovalue_AutoValueWithOverrides__void() {
   this.$ctor__autovalue_BaseClass__void();
  }
- /** @abstract @nodts @return {boolean} */
- m_getBooleanField__boolean() {}
  /** @override @return {boolean} */
  equals(/** * */ o) {
   return false;
@@ -28,6 +34,27 @@ class AutoValueWithOverrides extends BaseClass {
  /** @override @return {string} */
  toString() {
   return 'x';
+ }
+ /** @nodts @return {!AutoValueWithOverrides} */
+ static $create__int__boolean(/** number */ baseField, /** boolean */ booleanField) {
+  AutoValueWithOverrides.$clinit();
+  let $instance = new AutoValueWithOverrides();
+  $instance.$ctor__autovalue_AutoValueWithOverrides__int__boolean__void(baseField, booleanField);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__autovalue_AutoValueWithOverrides__int__boolean__void(/** number */ baseField, /** boolean */ booleanField) {
+  this.$ctor__autovalue_AutoValueWithOverrides__void();
+  this.f_baseField__autovalue_AutoValue_AutoValueWithOverrides_ = baseField;
+  this.f_booleanField__autovalue_AutoValue_AutoValueWithOverrides_ = booleanField;
+ }
+ /** @override @nodts @return {number} */
+ m_getBaseField__int() {
+  return this.f_baseField__autovalue_AutoValue_AutoValueWithOverrides_;
+ }
+ /** @nodts @return {boolean} */
+ m_getBooleanField__boolean() {
+  return this.f_booleanField__autovalue_AutoValue_AutoValueWithOverrides_;
  }
  /** @nodts */
  static $clinit() {

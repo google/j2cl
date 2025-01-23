@@ -31,6 +31,7 @@ import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
+import com.google.j2cl.transpiler.ast.InitializerBlock;
 import com.google.j2cl.transpiler.ast.JsInfo;
 import com.google.j2cl.transpiler.ast.JsMemberType;
 import com.google.j2cl.transpiler.ast.Method;
@@ -377,8 +378,18 @@ public class OptimizeKotlinCompanions extends NormalizationPass {
                         return null;
                       }
                     }));
-    Statement initializer = Iterables.getOnlyElement(initializers);
 
+    // We may have emptied out an initializer block so we should clean those up. This doesn't
+    // guarantee that we're only cleaning up ones we actually touched, but if it's empty it
+    // shouldn't matter anyway.
+    enclosingType
+        .getMembers()
+        .removeIf(
+            m ->
+                m.isInitializerBlock()
+                    && ((InitializerBlock) m).getBody().getStatements().isEmpty());
+
+    Statement initializer = Iterables.getOnlyElement(initializers);
     companion.addStaticInitializerBlock(
         0,
         Block.newBuilder()

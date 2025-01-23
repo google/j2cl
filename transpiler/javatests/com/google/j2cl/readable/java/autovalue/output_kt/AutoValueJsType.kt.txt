@@ -19,6 +19,7 @@
 package autovalue
 
 import javaemul.lang.*
+import javaemul.lang.annotations.WasAutoValue
 import jsinterop.annotations.JsIgnore
 import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsType
@@ -30,6 +31,7 @@ import kotlin.native.ObjCName
 
 @ObjCName("J2ktAutovalueAutoValueJsType", exact = true)
 @JsType
+@WasAutoValue
 abstract class AutoValueJsType {
  @JsIgnore
  constructor()

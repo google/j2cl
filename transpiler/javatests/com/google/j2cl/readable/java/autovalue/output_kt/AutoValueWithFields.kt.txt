@@ -20,6 +20,7 @@ package autovalue
 
 import javaemul.lang.*
 import java.io.Serializable
+import javaemul.lang.annotations.WasAutoValue
 import kotlin.Int
 import kotlin.Long
 import kotlin.OptIn
@@ -29,6 +30,7 @@ import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktAutovalueAutoValueWithFields", exact = true)
+@WasAutoValue
 abstract class AutoValueWithFields internal constructor(): Parent(), Serializable {
  @JvmField
  internal var userField2_pp_autovalue: Int = 0

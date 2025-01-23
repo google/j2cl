@@ -3,15 +3,14 @@ goog.module('autovalue.SimpleAutoValue.GenericType$impl');
 const AbstractCollection = goog.require('java.util.AbstractCollection$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let AutoValue__SimpleAutoValue = goog.forwardDeclare('autovalue.AutoValue_SimpleAutoValue$impl');
-let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
+let SimpleAutoValue = goog.forwardDeclare('autovalue.SimpleAutoValue$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 /**
  * @abstract
- * @extends {AbstractCollection<AutoValue__SimpleAutoValue>}
+ * @extends {AbstractCollection<SimpleAutoValue>}
  */
 class GenericType extends AbstractCollection {
  /** @protected @nodts */
@@ -23,32 +22,32 @@ class GenericType extends AbstractCollection {
   this.$ctor__java_util_AbstractCollection__void();
  }
  /** @nodts @template T @return {T} */
- m_foo_pp_autovalue__java_util_List__java_util_List__autovalue_AutoValue_SimpleAutoValue(/** List<?> */ o1, /** List<AutoValue__SimpleAutoValue> */ o2) {
-  this.m_foo_pp_autovalue__java_util_List__java_util_List__autovalue_AutoValue_SimpleAutoValue(null, null).m_getArrayField__arrayOf_int();
-  let o = /**@type {AutoValue__SimpleAutoValue}*/ ($Casts.$to(o1.getAtIndex(0), AutoValue__SimpleAutoValue));
-  return /**@type {T}*/ (null);
+ m_foo_pp_autovalue__java_util_List__java_util_List__autovalue_SimpleAutoValue(/** List<?> */ o1, /** List<SimpleAutoValue> */ o2) {
+  this.m_foo_pp_autovalue__java_util_List__java_util_List__autovalue_SimpleAutoValue(null, null).m_getArrayField__arrayOf_int();
+  let o = /**@type {SimpleAutoValue}*/ ($Casts.$to(o1.getAtIndex(0), SimpleAutoValue));
+  return /**@type {?}*/ (null);
  }
  /** @nodts @return {boolean} */
- m_contains__autovalue_AutoValue_SimpleAutoValue__boolean(/** AutoValue__SimpleAutoValue */ o) {
+ m_contains__autovalue_SimpleAutoValue__boolean(/** SimpleAutoValue */ o) {
   return super.contains(o);
  }
  /** @final @override @return {boolean} */
  contains(/** * */ element) {
-  if (!($Equality.$same(element, null) || AutoValue__SimpleAutoValue.$isInstance(element))) {
+  if (!($Equality.$same(element, null) || SimpleAutoValue.$isInstance(element))) {
    return false;
   }
-  return this.m_contains__autovalue_AutoValue_SimpleAutoValue__boolean(/**@type {!AutoValue__SimpleAutoValue}*/ (element));
+  return this.m_contains__autovalue_SimpleAutoValue__boolean(/**@type {!SimpleAutoValue}*/ (element));
  }
  /** @nodts @return {boolean} */
- m_remove__autovalue_AutoValue_SimpleAutoValue__boolean(/** AutoValue__SimpleAutoValue */ o) {
+ m_remove__autovalue_SimpleAutoValue__boolean(/** SimpleAutoValue */ o) {
   return super.remove(o);
  }
  /** @final @override @return {boolean} */
  remove(/** * */ element) {
-  if (!($Equality.$same(element, null) || AutoValue__SimpleAutoValue.$isInstance(element))) {
+  if (!($Equality.$same(element, null) || SimpleAutoValue.$isInstance(element))) {
    return false;
   }
-  return this.m_remove__autovalue_AutoValue_SimpleAutoValue__boolean(/**@type {!AutoValue__SimpleAutoValue}*/ (element));
+  return this.m_remove__autovalue_SimpleAutoValue__boolean(/**@type {!SimpleAutoValue}*/ (element));
  }
  /** @nodts */
  static $clinit() {
@@ -60,14 +59,10 @@ class GenericType extends AbstractCollection {
  static $isInstance(/** ? */ instance) {
   return instance instanceof GenericType;
  }
- /** @abstract @override @nodts @suppress{visibility} @return {!Iterator<?>} */
- m_iterator__java_util_Iterator() {}
- /** @abstract @override @suppress{visibility} @return {number} */
- size() {}
  
  /** @nodts */
  static $loadModules() {
-  AutoValue__SimpleAutoValue = goog.module.get('autovalue.AutoValue_SimpleAutoValue$impl');
+  SimpleAutoValue = goog.module.get('autovalue.SimpleAutoValue$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
  }

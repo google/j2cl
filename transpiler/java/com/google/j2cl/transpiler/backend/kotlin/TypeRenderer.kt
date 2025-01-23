@@ -22,6 +22,7 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangEnum
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotation
 import com.google.j2cl.transpiler.backend.kotlin.objc.comment
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
@@ -65,6 +66,7 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
           newLineSeparated(
             objCNameRenderer.objCAnnotationSource(typeDeclaration),
             jsInteropAnnotationRenderer.jsInteropAnnotationsSource(typeDeclaration),
+            autoValueAnnotationsSource(typeDeclaration),
             spaceSeparated(
               inheritanceModifierSource(typeDeclaration),
               classModifiersSource(typeDeclaration),
@@ -155,6 +157,19 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
   private fun constructorInvocationSource(type: Type, method: Method): Source =
     getConstructorInvocation(method)?.let { expressionRenderer(type).invocationSource(it) }
       ?: inParentheses(Source.EMPTY)
+
+  private fun autoValueAnnotationsSource(typeDeclaration: TypeDeclaration): Source =
+    when {
+      typeDeclaration.isAnnotatedWithAutoValue ->
+        annotation(
+          nameRenderer.topLevelQualifiedNameSource("javaemul.lang.annotations.WasAutoValue")
+        )
+      typeDeclaration.isAnnotatedWithAutoValueBuilder ->
+        annotation(
+          nameRenderer.topLevelQualifiedNameSource("javaemul.lang.annotations.WasAutoValue.Builder")
+        )
+      else -> Source.EMPTY
+    }
 
   private companion object {
     fun classModifiersSource(typeDeclaration: TypeDeclaration): Source =

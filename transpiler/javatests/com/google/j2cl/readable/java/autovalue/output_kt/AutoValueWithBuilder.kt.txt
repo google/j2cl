@@ -20,6 +20,7 @@ package autovalue
 
 import javaemul.lang.*
 import autovalue.AutoValue_AutoValueWithBuilder
+import javaemul.lang.annotations.WasAutoValue
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.OptIn
@@ -29,6 +30,7 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktAutovalueAutoValueWithBuilder", exact = true)
+@WasAutoValue
 abstract class AutoValueWithBuilder {
  @ObjCName("getBooleanField")
  abstract fun getBooleanField(): Boolean
@@ -48,6 +50,7 @@ abstract class AutoValueWithBuilder {
  }
 
  @ObjCName("J2ktAutovalueAutoValueWithBuilder_Builder", exact = true)
+ @javaemul.lang.annotations.WasAutoValue.Builder
  abstract class Builder internal constructor() {
   @ObjCName("setBooleanField")
   abstract fun setBooleanField(

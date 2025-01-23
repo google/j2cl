@@ -20,6 +20,7 @@ package autovalue
 
 import javaemul.lang.*
 import autovalue.BaseClass
+import javaemul.lang.annotations.WasAutoValue
 import kotlin.Boolean
 import kotlin.OptIn
 import kotlin.String
@@ -28,6 +29,7 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktAutovalueExtendingAutoValue", exact = true)
+@WasAutoValue
 abstract class ExtendingAutoValue: BaseClass() {
  @ObjCName("getBooleanField")
  abstract fun getBooleanField(): Boolean

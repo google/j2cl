@@ -20,6 +20,7 @@ package autovalue
 
 import javaemul.lang.*
 import autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue
+import javaemul.lang.annotations.WasAutoValue
 import kotlin.Boolean
 import kotlin.Int
 import kotlin.OptIn
@@ -29,6 +30,7 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktAutovalueDefaultNonEmptyConstructorAutoValue", exact = true)
+@WasAutoValue
 abstract class DefaultNonEmptyConstructorAutoValue {
  private val field: Int
 
@@ -48,6 +50,7 @@ abstract class DefaultNonEmptyConstructorAutoValue {
  }
 
  @ObjCName("J2ktAutovalueDefaultNonEmptyConstructorAutoValue_Builder", exact = true)
+ @javaemul.lang.annotations.WasAutoValue.Builder
  abstract class Builder {
   private val field: Int
 

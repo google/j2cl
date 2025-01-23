@@ -219,10 +219,11 @@ public class JsInteropRestrictionsChecker {
   }
 
   private boolean checkAutoValueTypeName(TypeDeclaration typeDeclaration) {
-    // TODO(goktug): Replace with checking the generator name passed via @Generated when J2CL starts
-    // modeling annotations in the AST.
+    // TODO(b/221280581): Replace with checking the generator name passed via @Generated when J2CL
+    //  starts modeling annotations in the AST.
     return typeDeclaration != null
-        && typeDeclaration.getSimpleSourceName().matches("\\$*AutoValue_.+");
+        // Note: We normally expect the name to start with a $, but J2KT will replace that with __.
+        && typeDeclaration.getSimpleSourceName().matches("(\\$|_)*AutoValue_.+");
   }
 
   private void checkSystemProperties(Type type) {

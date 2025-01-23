@@ -23,6 +23,7 @@ import autovalue.AutoValue_EmptyAutoValue
 import autovalue.AutoValue_SimpleAutoValue
 import autovalue.EmptyAutoValue
 import java.util.AbstractCollection
+import javaemul.lang.annotations.WasAutoValue
 import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
@@ -39,6 +40,7 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktAutovalueSimpleAutoValue", exact = true)
+@WasAutoValue
 abstract class SimpleAutoValue {
  @ObjCName("getIntField")
  abstract fun getIntField(): Int

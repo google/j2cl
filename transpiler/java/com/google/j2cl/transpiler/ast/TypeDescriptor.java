@@ -343,6 +343,11 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
     return false;
   }
 
+  /** Returns true if the given type descriptor is a Kotlin companion object class. */
+  public boolean isKotlinCompanionClass() {
+    return false;
+  }
+
   /**
    * Returns true if the given type descriptor is a Kotlin companion object class that can be
    * optimized.
