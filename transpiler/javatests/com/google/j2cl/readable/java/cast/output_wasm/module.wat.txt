@@ -30,6 +30,7 @@
  (field $m_method__java_lang_Object__cast_CastGenerics_Empty1 (ref $function.m_method__java_lang_Object__cast_CastGenerics_Empty1))
  (field $m_outerGenericMethod__void (ref $function.m_outerGenericMethod__void))
  (field $m_testCastToMethodTypeVariable__void (ref $function.m_testCastToMethodTypeVariable__void))
+ (field $m_testCastToRawToGeneric__cast_CastGenerics_Foo__cast_CastGenerics_Foo (ref $function.m_testCastToRawToGeneric__cast_CastGenerics_Foo__cast_CastGenerics_Foo))
  (field $m_testCastToTypeVariable__void (ref $function.m_testCastToTypeVariable__void))
  ))
 )
@@ -480,6 +481,7 @@
   (ref.func $m_method__java_lang_Object__cast_CastGenerics_Empty1@cast.CastGenerics)
   (ref.func $m_outerGenericMethod__void@cast.CastGenerics)
   (ref.func $m_testCastToMethodTypeVariable__void@cast.CastGenerics)
+  (ref.func $m_testCastToRawToGeneric__cast_CastGenerics_Foo__cast_CastGenerics_Foo@cast.CastGenerics)
   (ref.func $m_testCastToTypeVariable__void@cast.CastGenerics)
  )
 )
@@ -692,16 +694,16 @@
 
 ;;; void Empty1.$clinit()
 (func $$clinit__void_<once>_@cast.CastGenerics.Empty1
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:161:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:165:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:161:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:165:12
   (if (global.get $$class-initialized@cast.CastGenerics.Empty1)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:161:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:165:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:161:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:165:12
   (global.set $$class-initialized@cast.CastGenerics.Empty1 (i32.const 1))
  )
 )
@@ -724,16 +726,16 @@
 
 ;;; void Empty2.$clinit()
 (func $$clinit__void_<once>_@cast.CastGenerics.Empty2
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:163:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:167:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:163:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:167:12
   (if (global.get $$class-initialized@cast.CastGenerics.Empty2)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:163:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:167:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:163:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:167:12
   (global.set $$class-initialized@cast.CastGenerics.Empty2 (i32.const 1))
  )
 )
@@ -1062,11 +1064,27 @@
 )
 (elem declare func $m_testCastToMethodTypeVariable__void@cast.CastGenerics)
 
+;;; Foo<String> CastGenerics.testCastToRawToGeneric(Foo<Object> foo)
+(func $m_testCastToRawToGeneric__cast_CastGenerics_Foo__cast_CastGenerics_Foo@cast.CastGenerics
+ (type $function.m_testCastToRawToGeneric__cast_CastGenerics_Foo__cast_CastGenerics_Foo)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $foo (ref null $cast.CastGenerics.Foo))
+ (result (ref null $cast.CastGenerics.Foo))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:149:21
+ (local $this (ref null $cast.CastGenerics))
+ (local.set $this (ref.cast (ref $cast.CastGenerics) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:150:4
+  (return (ref.cast (ref null $cast.CastGenerics.Foo) (ref.cast (ref null $cast.CastGenerics.Foo) (local.get $foo))))
+ )
+)
+(elem declare func $m_testCastToRawToGeneric__cast_CastGenerics_Foo__cast_CastGenerics_Foo@cast.CastGenerics)
+
 ;;; void CastGenerics.outerGenericMethod()
 (func $m_outerGenericMethod__void@cast.CastGenerics
  (type $function.m_outerGenericMethod__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:153:32
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:157:32
  (local $this (ref null $cast.CastGenerics))
  (local.set $this (ref.cast (ref $cast.CastGenerics) (local.get $this.untyped)))
  (block
@@ -1080,11 +1098,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $o (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:165:45
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:169:45
  (local $this (ref null $cast.CastGenerics))
  (local.set $this (ref.cast (ref $cast.CastGenerics) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:166:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:170:4
   (if (if (result i32) (ref.is_null (local.get $o))
     (then (i32.const 0))
     (else 
@@ -1093,12 +1111,12 @@
    )
    (then
     (block
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:167:6
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:171:6
      (return (local.get $o))
     )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:169:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:173:4
   (return (ref.null $java.lang.Object))
  )
 )
@@ -1107,11 +1125,11 @@
 ;;; Foo<T> CastGenerics.doSomething()
 (func $m_doSomething__cast_CastGenerics_Foo@cast.CastGenerics
  (result (ref null $cast.CastGenerics.Foo))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:173:27
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:177:27
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:173:41
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:177:41
   (call $$clinit__void_<once>_@cast.CastGenerics )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:174:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:178:4
   (return (call $$create__@cast.CastGenerics.1 ))
  )
 )
@@ -1517,16 +1535,16 @@
 ;;; Foo<V> Foo.$create()
 (func $$create__@cast.CastGenerics.Foo
  (result (ref null $cast.CastGenerics.Foo))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:177:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:181:22
  (local $$instance (ref null $cast.CastGenerics.Foo))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:177:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:181:22
   (call $$clinit__void_<once>_@cast.CastGenerics.Foo )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:177:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:181:22
   (local.set $$instance (struct.new $cast.CastGenerics.Foo (ref.as_non_null (global.get $cast.CastGenerics.Foo.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:177:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:181:22
   (call $$ctor__void_$p_cast_CastGenerics_Foo@cast.CastGenerics.Foo (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:177:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:181:22
   (return (local.get $$instance))
  )
 )
@@ -1534,27 +1552,27 @@
 ;;; void Foo.$ctor()
 (func $$ctor__void_$p_cast_CastGenerics_Foo@cast.CastGenerics.Foo
  (param $this (ref null $cast.CastGenerics.Foo))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:177:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:181:22
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:177:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:181:22
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void Foo.$clinit()
 (func $$clinit__void_<once>_@cast.CastGenerics.Foo
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:177:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:181:22
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:177:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:181:22
   (if (global.get $$class-initialized@cast.CastGenerics.Foo)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:177:22
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:181:22
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:177:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:181:22
   (global.set $$class-initialized@cast.CastGenerics.Foo (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:177:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:181:22
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -1592,16 +1610,16 @@
 (func $$create__cast_CastGenerics@cast.CastGenerics.1Nested
  (param $$outer_this (ref null $cast.CastGenerics))
  (result (ref null $cast.CastGenerics.1Nested))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:154:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:158:10
  (local $$instance (ref null $cast.CastGenerics.1Nested))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:154:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:158:10
   (call $$clinit__void_<once>_@cast.CastGenerics.1Nested )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:154:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:158:10
   (local.set $$instance (struct.new $cast.CastGenerics.1Nested (ref.as_non_null (global.get $cast.CastGenerics.1Nested.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $cast.CastGenerics)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:154:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:158:10
   (call $$ctor__cast_CastGenerics__void_$p_cast_CastGenerics_1Nested@cast.CastGenerics.1Nested (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:154:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:158:10
   (return (local.get $$instance))
  )
 )
@@ -1610,11 +1628,11 @@
 (func $$ctor__cast_CastGenerics__void_$p_cast_CastGenerics_1Nested@cast.CastGenerics.1Nested
  (param $this (ref null $cast.CastGenerics.1Nested))
  (param $$outer_this (ref null $cast.CastGenerics))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:154:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:158:10
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:154:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:158:10
   (struct.set $cast.CastGenerics.1Nested $$outer_this@cast.CastGenerics.1Nested (local.get $this) (local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:154:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:158:10
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -1623,28 +1641,28 @@
 (func $m_nestedGenericMethod__java_lang_Object__void_$p_cast_CastGenerics_1Nested@cast.CastGenerics.1Nested
  (param $this (ref null $cast.CastGenerics.1Nested))
  (param $o (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:155:19
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:159:19
  (local $t (ref null $java.lang.Enum))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:156:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:160:8
   (local.set $t (ref.cast (ref null $java.lang.Enum) (local.get $o)))
  )
 )
 
 ;;; void Nested.$clinit()
 (func $$clinit__void_<once>_@cast.CastGenerics.1Nested
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:154:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:158:10
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:154:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:158:10
   (if (global.get $$class-initialized@cast.CastGenerics.1Nested)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:154:10
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:158:10
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:154:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:158:10
   (global.set $$class-initialized@cast.CastGenerics.1Nested (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:154:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:158:10
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -2945,16 +2963,16 @@
 ;;; <anonymous> extends Foo<T><T> <anonymous> extends Foo<T>.$create()
 (func $$create__@cast.CastGenerics.1
  (result (ref null $cast.CastGenerics.1))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:174:24
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:178:24
  (local $$instance (ref null $cast.CastGenerics.1))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:174:24
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:178:24
   (call $$clinit__void_<once>_@cast.CastGenerics.1 )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:174:24
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:178:24
   (local.set $$instance (struct.new $cast.CastGenerics.1 (ref.as_non_null (global.get $cast.CastGenerics.1.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:174:24
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:178:24
   (call $$ctor__void_$p_cast_CastGenerics_1@cast.CastGenerics.1 (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:174:24
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:178:24
   (return (local.get $$instance))
  )
 )
@@ -2962,27 +2980,27 @@
 ;;; void <anonymous> extends Foo<T>.$ctor()
 (func $$ctor__void_$p_cast_CastGenerics_1@cast.CastGenerics.1
  (param $this (ref null $cast.CastGenerics.1))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:174:24
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:178:24
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:174:24
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:178:24
   (call $$ctor__void_$p_cast_CastGenerics_Foo@cast.CastGenerics.Foo (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void <anonymous> extends Foo<T>.$clinit()
 (func $$clinit__void_<once>_@cast.CastGenerics.1
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:174:24
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:178:24
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:174:24
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:178:24
   (if (global.get $$class-initialized@cast.CastGenerics.1)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:174:24
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:178:24
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:174:24
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:178:24
   (global.set $$class-initialized@cast.CastGenerics.1 (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:174:24
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:178:24
   (call $$clinit__void_<once>_@cast.CastGenerics.Foo )
  )
 )

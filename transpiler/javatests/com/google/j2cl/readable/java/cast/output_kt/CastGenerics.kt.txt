@@ -60,6 +60,13 @@ open class CastGenerics<T, E: Number?> {
   c = o as V?
  }
 
+ @ObjCName("testCastToRawToGeneric")
+ open fun testCastToRawToGeneric(
+  @ObjCName("withCastCastGenerics_Foo") foo: CastGenerics.Foo<Any?>?
+ ): CastGenerics.Foo<String?>? {
+  return foo as CastGenerics.Foo<Any?>? as CastGenerics.Foo<String?>?
+ }
+
  @ObjCName("outerGenericMethod")
  open fun <TT: Enum<*>> outerGenericMethod() {
   open class Nested<SS> internal constructor() {

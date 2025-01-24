@@ -146,6 +146,10 @@ public class CastGenerics<T, E extends Number> {
     c = (V) o;
   }
 
+  public Foo<String> testCastToRawToGeneric(Foo<Object> foo) {
+    return (Foo<String>) (Foo) foo;
+  }
+
   /**
    * This method tests that J2CL correctly sets the Generic to its bound inside a method since
    * closure compiler cannot handle it.

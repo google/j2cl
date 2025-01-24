@@ -118,6 +118,10 @@ class CastGenerics extends j_l_Object {
   c = (/**@type {Array<S>}*/ ($Arrays.$castTo(o, j_l_Object, 1)));
   c = (/**@type {V}*/ ($Casts.$to(o, Enum)));
  }
+ /** @nodts @return {Foo<?string>} */
+ m_testCastToRawToGeneric__cast_CastGenerics_Foo__cast_CastGenerics_Foo(/** Foo<*> */ foo) {
+  return /**@type {Foo<?string>}*/ (foo);
+ }
  /** @nodts @template TT */
  m_outerGenericMethod__void() {}
  /** @nodts @template EE @return {EE} */
