@@ -18,6 +18,7 @@ java_library(
     deps = [
         "//third_party:asm",
         "//third_party:auto_value",
+        "//third_party:error_prone_annotations",
         "//third_party:guava",
         "//third_party:j2objc_annotations",
         "//third_party:jsinterop-annotations",

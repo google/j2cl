@@ -117,6 +117,11 @@ alias(
 )
 
 alias(
+    name = "error_prone_annotations",
+    actual = "@com_google_errorprone_error_prone_annotations",
+)
+
+alias(
     name = "gson",
     actual = "@com_google_code_gson",
 )

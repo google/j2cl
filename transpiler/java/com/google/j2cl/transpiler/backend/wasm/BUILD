@@ -24,6 +24,7 @@ java_library(
     deps = [
         ":summary_java_proto",
         "//third_party:auto_value",
+        "//third_party:error_prone_annotations",
         "//third_party:gson",
         "//third_party:guava",
         "//third_party:jsr305_annotations",

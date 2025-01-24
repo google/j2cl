@@ -18,6 +18,7 @@ java_library(
     srcs = glob(["*.java"]),
     deps = [
         "//third_party:auto_value",
+        "//third_party:error_prone_annotations",
         "//third_party:guava",
         "//third_party:jdt-core",
         "//third_party:jsinterop-annotations",
