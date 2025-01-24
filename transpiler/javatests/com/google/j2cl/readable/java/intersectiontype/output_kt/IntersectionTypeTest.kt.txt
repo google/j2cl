@@ -175,7 +175,7 @@ open class IntersectionTypeTest<U> {
   private fun <T> m(): T where T: IntersectionTypeTest.A?, T: IntersectionTypeTest.EmptyA? {
    return IntersectionTypeTest.get<Any?>(
     Any(),
-   ) as T? as T
+   ) as T
   }
 
   @JvmStatic

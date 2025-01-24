@@ -174,6 +174,7 @@ import com.google.j2cl.transpiler.passes.RemoveNonreferencedNativeMethods;
 import com.google.j2cl.transpiler.passes.RemoveNoopStatements;
 import com.google.j2cl.transpiler.passes.RemoveUnnecessaryLabels;
 import com.google.j2cl.transpiler.passes.RemoveUnneededCasts;
+import com.google.j2cl.transpiler.passes.RemoveUnneededCastsJ2kt;
 import com.google.j2cl.transpiler.passes.RemoveUnneededJsDocCasts;
 import com.google.j2cl.transpiler.passes.RemoveUnneededNotNullChecks;
 import com.google.j2cl.transpiler.passes.RemoveUnreachableCode;
@@ -775,6 +776,7 @@ public enum Backend {
           () -> new RemoveUnnecessaryLabels(/* onlyLoopsAreBreakable= */ true),
           RemoveNestedBlocks::new,
           RemoveNoopStatements::new,
+          RemoveUnneededCastsJ2kt::new,
 
           // Passes that breaks the invariants for running ConversionContextVisitor related passes.
           NormalizeVarargInvocationsJ2kt::new,

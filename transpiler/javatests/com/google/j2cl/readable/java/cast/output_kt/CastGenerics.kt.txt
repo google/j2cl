@@ -64,7 +64,7 @@ open class CastGenerics<T, E: Number?> {
  open fun testCastToRawToGeneric(
   @ObjCName("withCastCastGenerics_Foo") foo: CastGenerics.Foo<Any?>?
  ): CastGenerics.Foo<String?>? {
-  return foo as CastGenerics.Foo<Any?>? as CastGenerics.Foo<String?>?
+  return foo as CastGenerics.Foo<String?>?
  }
 
  @ObjCName("outerGenericMethod")
@@ -81,7 +81,7 @@ open class CastGenerics<T, E: Number?> {
   @ObjCName("withId") o: Any?
  ): EE where EE: CastGenerics.Empty1?, EE: CastGenerics.Empty2<EE>? {
   if (o is CastGenerics.Empty1) {
-   return o as EE? as EE
+   return o as EE
   }
   return null as EE
  }
