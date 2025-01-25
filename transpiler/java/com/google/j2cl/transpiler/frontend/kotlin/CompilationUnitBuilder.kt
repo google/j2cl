@@ -177,7 +177,6 @@ import org.jetbrains.kotlin.ir.types.classOrFail
 import org.jetbrains.kotlin.ir.types.classOrNull
 import org.jetbrains.kotlin.ir.types.impl.makeTypeProjection
 import org.jetbrains.kotlin.ir.types.isNullable
-import org.jetbrains.kotlin.ir.types.isPrimitiveType
 import org.jetbrains.kotlin.ir.types.makeNotNull
 import org.jetbrains.kotlin.ir.types.makeNullable
 import org.jetbrains.kotlin.ir.types.typeWithArguments
@@ -763,13 +762,13 @@ class CompilationUnitBuilder(
     wrapPrimitives: Boolean,
   ): TypeLiteral {
     val typeDescriptor =
-      environment.getReferenceTypeDescriptor(irType).run {
+      environment.getTypeDescriptor(irType).run {
         // "Nothing" is a special case as we thread it through the J2CL AST as a stubbed type. In
         // the context of Nothing::class it should be treated Void.
         if (TypeDescriptors.isKotlinNothing(this)) {
           TypeDescriptors.get().javaLangVoid
-        } else if (TypeDescriptors.isBoxedType(this) && irType.isPrimitiveType(nullable = false)) {
-          if (wrapPrimitives) toBoxedType() else toUnboxedType()
+        } else if (wrapPrimitives) {
+          toBoxedType()
         } else {
           this
         }
