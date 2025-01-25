@@ -75,7 +75,7 @@ generate_primitive_type(
 
 filegroup(
     name = "primitives",
-    srcs = glob(["*.js"]) + [
+    srcs = [
         ":src_boolean",
         ":src_byte",
         ":src_char",
