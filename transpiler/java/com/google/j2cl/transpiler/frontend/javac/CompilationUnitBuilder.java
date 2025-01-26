@@ -22,7 +22,6 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.stream.Collectors.toCollection;
 
 import com.google.common.base.Predicates;
-import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.SourcePosition;
@@ -93,15 +92,12 @@ import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.WhileStatement;
 import com.google.j2cl.transpiler.ast.YieldStatement;
 import com.google.j2cl.transpiler.frontend.common.AbstractCompilationUnitBuilder;
-import com.google.j2cl.transpiler.frontend.common.Nullability;
-import com.google.j2cl.transpiler.frontend.common.PackageInfoCache;
 import com.sun.source.tree.CompilationUnitTree;
 import com.sun.source.tree.Tree.Kind;
 import com.sun.tools.javac.code.Flags;
 import com.sun.tools.javac.code.Symbol;
 import com.sun.tools.javac.code.Symbol.ClassSymbol;
 import com.sun.tools.javac.code.Symbol.MethodSymbol;
-import com.sun.tools.javac.code.Symbol.PackageSymbol;
 import com.sun.tools.javac.code.Symbol.VarSymbol;
 import com.sun.tools.javac.tree.JCTree;
 import com.sun.tools.javac.tree.JCTree.JCArrayAccess;
@@ -149,7 +145,6 @@ import com.sun.tools.javac.tree.JCTree.Tag;
 import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
@@ -1375,19 +1370,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
   private CompilationUnit build(JCCompilationUnit javacUnit) {
     this.javacUnit = javacUnit;
-    if (javacUnit.getSourceFile().getName().endsWith("package-info.java")
-        && javacUnit.getPackage() != null) {
-      String packageName = javacUnit.getPackageName().toString();
-      String packageJsNamespace = getPackageJsNamespace(javacUnit);
-      boolean isNullMarked = isNullMarked(javacUnit);
-      PackageInfoCache.get()
-          .setPackageProperties(
-              packageName,
-              packageJsNamespace,
-              // TODO(b/135123615): need to support ObjectiveCName extraction.
-              null,
-              isNullMarked);
-    }
     setCurrentCompilationUnit(
         CompilationUnit.createForFile(
             javacUnit.getSourceFile().getName(),
@@ -1402,54 +1384,11 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
   public static ImmutableList<CompilationUnit> build(
       List<CompilationUnitTree> compilationUnits, JavaEnvironment javaEnvironment) {
-
     CompilationUnitBuilder compilationUnitBuilder = new CompilationUnitBuilder(javaEnvironment);
-
-    // Ensure that all source package-info classes come before all other classes so that the
-    // freshness of the PackageInfoCache can be trusted.
-    sortPackageInfoFirst(compilationUnits);
-
     return compilationUnits.stream()
         .map(JCCompilationUnit.class::cast)
         .map(compilationUnitBuilder::build)
         .collect(toImmutableList());
-  }
-
-  @Nullable
-  private static String getPackageJsNamespace(JCCompilationUnit javacUnit) {
-    PackageSymbol packge = javacUnit.packge;
-    if (packge == null) {
-      return null;
-    }
-
-    return JsInteropAnnotationUtils.getJsNamespace(packge);
-  }
-
-  private static boolean isNullMarked(JCCompilationUnit javacUnit) {
-    PackageSymbol packge = javacUnit.packge;
-    if (packge == null) {
-      return false;
-    }
-
-    return packge.getAnnotationMirrors().stream()
-        .anyMatch(a -> Nullability.isNullMarkedAnnotation(AnnotationUtils.getAnnotationName(a)));
-  }
-
-  private static void sortPackageInfoFirst(List<CompilationUnitTree> compilationUnits) {
-    // Ensure that all source package-info classes come before all other classes so that the
-    // freshness of the PackageInfoCache can be trusted.
-    Collections.sort(
-        compilationUnits,
-        (thisCompilationUnit, thatCompilationUnit) -> {
-          String thisFilePath = thisCompilationUnit.getSourceFile().getName();
-          String thatFilePath = thatCompilationUnit.getSourceFile().getName();
-          boolean thisIsPackageInfo = thisFilePath.endsWith("package-info.java");
-          boolean thatIsPackageInfo = thatFilePath.endsWith("package-info.java");
-          return ComparisonChain.start()
-              .compareTrueFirst(thisIsPackageInfo, thatIsPackageInfo)
-              .compare(thisFilePath, thatFilePath)
-              .result();
-        });
   }
 
   private boolean inNullMarkedScope() {

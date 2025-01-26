@@ -26,7 +26,6 @@ import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.frontend.common.FrontendOptions;
-import com.google.j2cl.transpiler.frontend.common.PackageInfoCache;
 import com.sun.source.tree.CompilationUnitTree;
 import com.sun.tools.javac.api.JavacTaskImpl;
 import com.sun.tools.javac.file.JavacFileManager;
@@ -61,9 +60,6 @@ public class JavacParser {
   /** Returns a map from file paths to compilation units after Javac parsing. */
   @Nullable
   public Library parseFiles(FrontendOptions options) {
-    // Records information about package-info files supplied as byte code.
-    PackageInfoCache.init(options.getClasspaths(), problems);
-
     ImmutableList<FileInfo> filePaths = options.getSources();
     if (filePaths.isEmpty()) {
       return Library.newEmpty();
