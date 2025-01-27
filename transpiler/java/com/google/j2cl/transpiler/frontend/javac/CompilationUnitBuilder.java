@@ -99,6 +99,7 @@ import com.sun.tools.javac.code.Symbol;
 import com.sun.tools.javac.code.Symbol.ClassSymbol;
 import com.sun.tools.javac.code.Symbol.MethodSymbol;
 import com.sun.tools.javac.code.Symbol.VarSymbol;
+import com.sun.tools.javac.code.Type.MethodType;
 import com.sun.tools.javac.tree.JCTree;
 import com.sun.tools.javac.tree.JCTree.JCArrayAccess;
 import com.sun.tools.javac.tree.JCTree.JCAssert;
@@ -1010,6 +1011,18 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     MethodSymbol constructorElement = (MethodSymbol) expression.constructor;
     DeclaredTypeDescriptor targetType = environment.createDeclaredTypeDescriptor(expression.type);
     var typeArguments = convertTypeArguments(expression.getTypeArguments());
+
+    MethodType methodType = expression.constructor.type.asMethodType();
+    if (typeArguments.isEmpty() && !constructorElement.getTypeParameters().isEmpty()) {
+      // Retrieve the inferred type arguments
+      var mapping = JavaEnvironment.getTypeSubstitution(methodType, constructorElement);
+      typeArguments =
+          constructorElement.getTypeParameters().stream()
+              .map(t -> mapping.get(t).stream().findFirst().orElse(t.type))
+              .map(environment::createTypeDescriptor)
+              .collect(toImmutableList());
+    }
+
     MethodDescriptor constructorMethodDescriptor =
         environment.createMethodDescriptor(
             /* enclosingTypeDescriptor= */ targetType,
@@ -1058,6 +1071,17 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     // The type arguments for the method itself. For example `String` in `C.<String>m()`.
     var typeArguments = convertTypeArguments(methodInvocation.getTypeArguments());
 
+    MethodType methodType = methodInvocation.meth.type.asMethodType();
+    if (typeArguments.isEmpty() && !methodSymbol.getTypeParameters().isEmpty()) {
+      // Retrieve the inferred type arguments
+      var mapping = JavaEnvironment.getTypeSubstitution(methodType, methodSymbol);
+      typeArguments =
+          methodSymbol.getTypeParameters().stream()
+              .map(t -> mapping.get(t).stream().findFirst().orElse(t.type))
+              .map(environment::createTypeDescriptor)
+              .collect(toImmutableList());
+    }
+
     DeclaredTypeDescriptor enclosingTypeDescriptor =
         environment.createDeclaredTypeDescriptor(methodSymbol.getEnclosingElement().asType());
     if (!methodSymbol.isConstructor()) {
@@ -1067,7 +1091,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     MethodDescriptor methodDescriptor =
         environment.createMethodDescriptor(
             /* enclosingTypeDescriptor= */ enclosingTypeDescriptor,
-            /* methodType= */ methodInvocation.getMethodSelect().type.asMethodType(),
+            /* methodType= */ methodType,
             /* declarationMethodElement= */ methodSymbol,
             typeArguments);
 

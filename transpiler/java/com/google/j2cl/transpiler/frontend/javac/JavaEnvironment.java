@@ -31,6 +31,7 @@ import static com.google.j2cl.transpiler.frontend.javac.JsInteropAnnotationUtils
 import static com.google.j2cl.transpiler.frontend.javac.KtInteropUtils.getKtVariance;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableListMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Streams;
@@ -76,6 +77,7 @@ import com.sun.tools.javac.code.Type.CapturedType;
 import com.sun.tools.javac.code.Type.ClassType;
 import com.sun.tools.javac.code.Type.IntersectionClassType;
 import com.sun.tools.javac.code.Type.JCPrimitiveType;
+import com.sun.tools.javac.code.Type.TypeVar;
 import com.sun.tools.javac.code.Type.UnionClassType;
 import com.sun.tools.javac.code.TypeAnnotationPosition;
 import com.sun.tools.javac.code.TypeAnnotationPosition.TypePathEntry;
@@ -648,6 +650,8 @@ class JavaEnvironment {
     TypeMirror returnType = methodType.getReturnType();
     if (isSpecialized(enclosingTypeDescriptor, declarationMethodElement, parameters, returnType)) {
       declarationMethodDescriptor = createMethodDescriptor(declarationMethodElement);
+    } else {
+      typeArguments = ImmutableList.of();
     }
 
     TypeDescriptor returnTypeDescriptor =
@@ -1581,5 +1585,81 @@ class JavaEnvironment {
   private static boolean isTestClass(Element element) {
     return hasAnnotation(element, "org.junit.runner.RunWith")
         || hasAnnotation(element, "com.google.apps.xplat.testing.parameterized.RunParameterized");
+  }
+
+  // TODO(b/392124958): Remove this method that was copied from errorprone once we
+  // depend on errorprone.
+  /**
+   * Returns the mapping between type variables and their instantiations in the given type. For
+   * example, the instantiation of {@code Map<K, V>} as {@code Map<String, Integer>} would be
+   * represented as a {@code TypeSubstitution} from {@code [K, V]} to {@code [String, Integer]}.
+   */
+  public static ImmutableListMultimap<TypeVariableSymbol, Type> getTypeSubstitution(
+      Type type, Symbol sym) {
+    ImmutableListMultimap.Builder<Symbol.TypeVariableSymbol, Type> result =
+        ImmutableListMultimap.builder();
+    class Visitor extends Types.DefaultTypeVisitor<Void, Type> {
+
+      @Override
+      public Void visitMethodType(Type.MethodType t, Type other) {
+        scan(t.getParameterTypes(), other.getParameterTypes());
+        scan(t.getThrownTypes(), other.getThrownTypes());
+        scan(t.getReturnType(), other.getReturnType());
+        return null;
+      }
+
+      @Override
+      public Void visitClassType(ClassType t, Type other) {
+        scan(t.getTypeArguments(), other.getTypeArguments());
+        return null;
+      }
+
+      @Override
+      public Void visitTypeVar(TypeVar t, Type other) {
+        result.put((Symbol.TypeVariableSymbol) t.asElement(), other);
+        return null;
+      }
+
+      @Override
+      public Void visitForAll(Type.ForAll t, Type other) {
+        scan(t.getParameterTypes(), other.getParameterTypes());
+        scan(t.getThrownTypes(), other.getThrownTypes());
+        scan(t.getReturnType(), other.getReturnType());
+        return null;
+      }
+
+      @Override
+      public Void visitWildcardType(Type.WildcardType t, Type type) {
+        if (type instanceof Type.WildcardType) {
+          Type.WildcardType other = (Type.WildcardType) type;
+          scan(t.getExtendsBound(), other.getExtendsBound());
+          scan(t.getSuperBound(), other.getSuperBound());
+        }
+        return null;
+      }
+
+      @Override
+      public Void visitArrayType(Type.ArrayType t, Type type) {
+        scan(t.elemtype, ((Type.ArrayType) type).elemtype);
+        return null;
+      }
+
+      @Override
+      public Void visitType(Type t, Type other) {
+        return null;
+      }
+
+      private void scan(Collection<Type> from, Collection<Type> to) {
+        Streams.forEachPair(from.stream(), to.stream(), this::scan);
+      }
+
+      private void scan(Type from, Type to) {
+        if (from != null) {
+          from.accept(this, to);
+        }
+      }
+    }
+    sym.asType().accept(new Visitor(), type);
+    return result.build();
   }
 }
