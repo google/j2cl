@@ -19,6 +19,7 @@
 package j2kt
 
 import javaemul.lang.*
+import java.lang.RuntimeException
 import kotlin.Any
 import kotlin.OptIn
 import kotlin.Suppress
@@ -958,6 +959,84 @@ open class NullabilityConversion {
      }
     }
    }
+  }
+
+  @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Unions", exact = true)
+  open class Unions {
+   @ObjCName("J2ktJ2ktNullabilityConversion_Tests_UnionsCompanion", exact = true)
+   companion object {
+    @JvmStatic
+    @ObjCName("nonNullToNonNull")
+    fun nonNullToNonNull(): NullabilityConversion.Supplier<NullabilityConversion.Child> {
+     try {
+      throw RuntimeException()
+     } catch (e: NullabilityConversion.Tests.Unions.ExceptionNonNull1) {
+      return e
+     } catch (e: NullabilityConversion.Tests.Unions.ExceptionNonNull2) {
+      return e
+     }
+    }
+
+    @JvmStatic
+    @ObjCName("nullableToNullable")
+    fun nullableToNullable(): NullabilityConversion.Supplier<NullabilityConversion.Child?> {
+     try {
+      throw RuntimeException()
+     } catch (e: NullabilityConversion.Tests.Unions.ExceptionNullable1) {
+      return e
+     } catch (e: NullabilityConversion.Tests.Unions.ExceptionNullable2) {
+      return e
+     }
+    }
+
+    @JvmStatic
+    @ObjCName("typeArgumentMixedToNullable")
+    fun typeArgumentMixedToNullable(): NullabilityConversion.Child? {
+     try {
+      throw RuntimeException()
+     } catch (e: NullabilityConversion.Tests.Unions.ExceptionNonNull1) {
+      return e.get()
+     } catch (e: NullabilityConversion.Tests.Unions.ExceptionNullable1) {
+      return e.get()
+     }
+    }
+
+    @JvmStatic
+    @ObjCName("typeArgumentNonNullToNonNull")
+    fun typeArgumentNonNullToNonNull(): NullabilityConversion.Child {
+     try {
+      throw RuntimeException()
+     } catch (e: NullabilityConversion.Tests.Unions.ExceptionNonNull1) {
+      return e.get()
+     } catch (e: NullabilityConversion.Tests.Unions.ExceptionNonNull2) {
+      return e.get()
+     }
+    }
+
+    @JvmStatic
+    @ObjCName("typeArgumentNullableToNullable")
+    fun typeArgumentNullableToNullable(): NullabilityConversion.Child? {
+     try {
+      throw RuntimeException()
+     } catch (e: NullabilityConversion.Tests.Unions.ExceptionNullable1) {
+      return e.get()
+     } catch (e: NullabilityConversion.Tests.Unions.ExceptionNullable2) {
+      return e.get()
+     }
+    }
+   }
+
+   @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Unions_ExceptionNonNull1", exact = true)
+   abstract class ExceptionNonNull1: RuntimeException(), NullabilityConversion.Supplier<NullabilityConversion.Child>
+
+   @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Unions_ExceptionNonNull2", exact = true)
+   abstract class ExceptionNonNull2: RuntimeException(), NullabilityConversion.Supplier<NullabilityConversion.Child>
+
+   @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Unions_ExceptionNullable1", exact = true)
+   abstract class ExceptionNullable1: RuntimeException(), NullabilityConversion.Supplier<NullabilityConversion.Child?>
+
+   @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Unions_ExceptionNullable2", exact = true)
+   abstract class ExceptionNullable2: RuntimeException(), NullabilityConversion.Supplier<NullabilityConversion.Child?>
   }
  }
 }

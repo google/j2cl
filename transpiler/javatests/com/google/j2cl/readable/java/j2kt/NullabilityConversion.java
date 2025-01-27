@@ -655,5 +655,86 @@ public class NullabilityConversion {
         }
       }
     }
+
+    public static class Unions {
+      public abstract static class ExceptionNonNull1 extends RuntimeException
+          implements Supplier<Child> {}
+
+      public abstract static class ExceptionNonNull2 extends RuntimeException
+          implements Supplier<Child> {}
+
+      public abstract static class ExceptionNullable1 extends RuntimeException
+          implements Supplier<@Nullable Child> {}
+
+      public abstract static class ExceptionNullable2 extends RuntimeException
+          implements Supplier<@Nullable Child> {}
+
+      // TODO(b/361769898): Uncomment when fixed
+      // public static Supplier<Child> mixedToNonNull() {
+      //   try {
+      //     throw new RuntimeException();
+      //   } catch (ExceptionNonNull1 | ExceptionNullable1 e) {
+      //     return e;
+      //   }
+      // }
+
+      // TODO(b/361769898): Uncomment when fixed
+      // public static Supplier<@Nullable Child> mixedToNullable() {
+      //   try {
+      //     throw new RuntimeException();
+      //   } catch (ExceptionNonNull1 | ExceptionNullable1 e) {
+      //     return e;
+      //   }
+      // }
+
+      public static Supplier<Child> nonNullToNonNull() {
+        try {
+          throw new RuntimeException();
+        } catch (ExceptionNonNull1 | ExceptionNonNull2 e) {
+          return e;
+        }
+      }
+
+      public static Supplier<@Nullable Child> nullableToNullable() {
+        try {
+          throw new RuntimeException();
+        } catch (ExceptionNullable1 | ExceptionNullable2 e) {
+          return e;
+        }
+      }
+
+      // TODO(b/361769898): Uncomment when fixed
+      // public static Child typeArgumentMixedToNonNull() {
+      //   try {
+      //     throw new RuntimeException();
+      //   } catch (ExceptionNonNull1 | ExceptionNullable1 e) {
+      //     return e.get();
+      //   }
+      // }
+
+      public static @Nullable Child typeArgumentMixedToNullable() {
+        try {
+          throw new RuntimeException();
+        } catch (ExceptionNonNull1 | ExceptionNullable1 e) {
+          return e.get();
+        }
+      }
+
+      public static Child typeArgumentNonNullToNonNull() {
+        try {
+          throw new RuntimeException();
+        } catch (ExceptionNonNull1 | ExceptionNonNull2 e) {
+          return e.get();
+        }
+      }
+
+      public static @Nullable Child typeArgumentNullableToNullable() {
+        try {
+          throw new RuntimeException();
+        } catch (ExceptionNullable1 | ExceptionNullable2 e) {
+          return e.get();
+        }
+      }
+    }
   }
 }
