@@ -546,6 +546,10 @@ class JavaEnvironment {
             .contentEquals("java.lang.String");
   }
 
+  private static boolean isAnnotationMethod(ExecutableElement executableElement) {
+    return executableElement.getEnclosingElement().getKind() == ElementKind.ANNOTATION_TYPE;
+  }
+
   /**
    * Returns true if instances of this type capture its outer instances; i.e. if it is an non static
    * member class, or an anonymous or local class defined in an instance context.
@@ -647,32 +651,69 @@ class JavaEnvironment {
     }
 
     TypeDescriptor returnTypeDescriptor =
-        applyReturnTypeNullabilityAnnotations(
-            createTypeDescriptorWithNullability(
-                returnType,
-                declarationMethodElement.getAnnotationMirrors(),
-                enclosingTypeDescriptor.getTypeDeclaration().isNullMarked()),
-            declarationMethodElement);
+        adjustForSyntheticEnumOrAnnotationMethod(
+            declarationMethodElement,
+            applyReturnTypeNullabilityAnnotations(
+                createTypeDescriptorWithNullability(
+                    returnType,
+                    declarationMethodElement.getAnnotationMirrors(),
+                    enclosingTypeDescriptor.getTypeDeclaration().isNullMarked()),
+                declarationMethodElement));
 
-    ImmutableList.Builder<TypeDescriptor> parametersBuilder = ImmutableList.builder();
-    for (int i = 0; i < parameters.size(); i++) {
-      parametersBuilder.add(
-          applyParameterNullabilityAnnotations(
-              createTypeDescriptorWithNullability(
-                  parameters.get(i),
-                  declarationMethodElement.getParameters().get(i).getAnnotationMirrors(),
-                  enclosingTypeDescriptor.getTypeDeclaration().isNullMarked()),
-              declarationMethodElement,
-              i));
-    }
+    ImmutableList<ParameterDescriptor> parameterDescriptors =
+        convertParameterDescriptors(enclosingTypeDescriptor, declarationMethodElement, parameters);
 
     return createDeclaredMethodDescriptor(
         enclosingTypeDescriptor,
         declarationMethodElement,
         declarationMethodDescriptor,
-        parametersBuilder.build(),
+        parameterDescriptors,
         returnTypeDescriptor,
         typeArguments);
+  }
+
+  private ImmutableList<ParameterDescriptor> convertParameterDescriptors(
+      DeclaredTypeDescriptor enclosingTypeDescriptor,
+      ExecutableElement declarationMethodElement,
+      ImmutableList<TypeMirror> parameters) {
+    ImmutableList.Builder<ParameterDescriptor> parametersBuilder = ImmutableList.builder();
+    for (int i = 0; i < parameters.size(); i++) {
+      TypeDescriptor parameterType =
+          adjustForSyntheticEnumOrAnnotationMethod(
+              declarationMethodElement,
+              applyParameterNullabilityAnnotations(
+                  createTypeDescriptorWithNullability(
+                      parameters.get(i),
+                      declarationMethodElement.getParameters().get(i).getAnnotationMirrors(),
+                      enclosingTypeDescriptor.getTypeDeclaration().isNullMarked()),
+                  declarationMethodElement,
+                  i));
+      parametersBuilder.add(
+          ParameterDescriptor.newBuilder()
+              .setTypeDescriptor(parameterType)
+              .setJsOptional(JsInteropUtils.isJsOptional(declarationMethodElement, i))
+              .setVarargs(i == parameters.size() - 1 && declarationMethodElement.isVarArgs())
+              .setDoNotAutobox(JsInteropUtils.isDoNotAutobox(declarationMethodElement, i))
+              .build());
+    }
+    return parametersBuilder.build();
+  }
+
+  private TypeDescriptor adjustForSyntheticEnumOrAnnotationMethod(
+      ExecutableElement methodSymbol, TypeDescriptor typeDescriptor) {
+    if (!isEnumSyntheticMethod(methodSymbol) && !isAnnotationMethod(methodSymbol)) {
+      return typeDescriptor;
+    }
+
+    if (typeDescriptor.isArray()) {
+      ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
+      return ArrayTypeDescriptor.newBuilder()
+          .setComponentTypeDescriptor(
+              arrayTypeDescriptor.getComponentTypeDescriptor().toNonNullable())
+          .setNullable(false)
+          .build();
+    }
+    return typeDescriptor.toNonNullable();
   }
 
   /** Create a MethodDescriptor directly based on the given JavaC ExecutableElement. */
@@ -827,7 +868,7 @@ class JavaEnvironment {
       DeclaredTypeDescriptor enclosingTypeDescriptor,
       ExecutableElement declarationMethodElement,
       MethodDescriptor declarationMethodDescriptor,
-      List<TypeDescriptor> parameters,
+      List<ParameterDescriptor> parameterDescriptors,
       TypeDescriptor returnTypeDescriptor,
       List<TypeDescriptor> typeArguments) {
     ImmutableList<TypeVariable> typeParameterTypeDescriptors =
@@ -857,17 +898,6 @@ class JavaEnvironment {
     boolean isConstructor = declarationMethodElement.getKind() == ElementKind.CONSTRUCTOR;
     String methodName = declarationMethodElement.getSimpleName().toString();
 
-    ImmutableList.Builder<ParameterDescriptor> parameterDescriptorBuilder = ImmutableList.builder();
-    for (int i = 0; i < parameters.size(); i++) {
-      parameterDescriptorBuilder.add(
-          ParameterDescriptor.newBuilder()
-              .setTypeDescriptor(parameters.get(i))
-              .setJsOptional(JsInteropUtils.isJsOptional(declarationMethodElement, i))
-              .setVarargs(i == parameters.size() - 1 && declarationMethodElement.isVarArgs())
-              .setDoNotAutobox(JsInteropUtils.isDoNotAutobox(declarationMethodElement, i))
-              .build());
-    }
-
     var thrownExceptions =
         declarationMethodElement.getThrownTypes().stream()
             .map(this::createTypeDescriptor)
@@ -877,7 +907,7 @@ class JavaEnvironment {
     return MethodDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setName(isConstructor ? null : methodName)
-        .setParameterDescriptors(parameterDescriptorBuilder.build())
+        .setParameterDescriptors(parameterDescriptors)
         .setDeclarationDescriptor(declarationMethodDescriptor)
         .setReturnTypeDescriptor(isConstructor ? enclosingTypeDescriptor : returnTypeDescriptor)
         .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
