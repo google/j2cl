@@ -35,11 +35,13 @@ internal fun ModuleVisibilityManager.addEligibleFriends(configuration: CompilerC
   }
 }
 
-internal fun K2JVMCompilerArguments.setEligibleFriends(currentTarget: String?) {
+internal fun K2JVMCompilerArguments.setEligibleFriends(
+  packageInfoCache: PackageInfoCache,
+  currentTarget: String?,
+) {
   if (currentTarget == null) return
 
   val currentLabel = BzlLabel.parseOrThrow(currentTarget)
-  var packageInfoCache = PackageInfoCache.get()
   this.friendPaths =
     this.classpath
       .orEmpty()

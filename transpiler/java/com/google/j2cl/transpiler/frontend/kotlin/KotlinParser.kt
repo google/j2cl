@@ -88,14 +88,16 @@ class KotlinParser(private val problems: Problems) {
       return Library.newEmpty()
     }
 
-    PackageInfoCache.init(options.classpaths, problems)
+    val packageInfoCache = PackageInfoCache(options.classpaths, problems)
+    val packageAnnotationResolver = getPackageAnnotationResolver(options, packageInfoCache)
 
     val kotlincDisposable = Disposer.newDisposable("J2CL Root Disposable")
-    val compilerConfiguration = createCompilerConfiguration(options)
+    val compilerConfiguration = createCompilerConfiguration(options, packageInfoCache)
 
     check(compilerConfiguration.getBoolean(USE_FIR)) { "Kotlin/Closure only supports > K2" }
 
-    val compilationUnits = parseFiles(options, compilerConfiguration, kotlincDisposable)
+    val compilationUnits =
+      parseFiles(compilerConfiguration, kotlincDisposable, packageAnnotationResolver)
 
     return Library.newBuilder()
       .setCompilationUnits(compilationUnits)
@@ -104,9 +106,9 @@ class KotlinParser(private val problems: Problems) {
   }
 
   private fun parseFiles(
-    options: FrontendOptions,
     compilerConfiguration: CompilerConfiguration,
     disposable: Disposable,
+    packageAnnotationResolver: PackageAnnotationsResolver,
   ): List<CompilationUnit> {
     val messageCollector = compilerConfiguration.get(MESSAGE_COLLECTOR_KEY)!!
 
@@ -159,7 +161,7 @@ class KotlinParser(private val problems: Problems) {
         compilerConfiguration,
         projectEnvironment.project,
         state,
-        options,
+        packageAnnotationResolver,
       )
 
     val unused =
@@ -179,7 +181,7 @@ class KotlinParser(private val problems: Problems) {
     compilerConfiguration: CompilerConfiguration,
     project: Project,
     state: GenerationState,
-    options: FrontendOptions,
+    packageAnnotationResolver: PackageAnnotationsResolver,
   ): CompilationUnitBuilderExtension {
     // Lower the IR tree before to convert it to a j2cl ast
     val lowerings = LoweringPasses(state, compilerConfiguration)
@@ -194,7 +196,7 @@ class KotlinParser(private val problems: Problems) {
             CompilationUnitBuilder(
                 KotlinEnvironment(
                   pluginContext,
-                  getPackageAnnotationResolver(options),
+                  packageAnnotationResolver,
                   lowerings.jvmBackendContext,
                 ),
                 IntrinsicMethods(pluginContext.irBuiltIns),
@@ -207,7 +209,10 @@ class KotlinParser(private val problems: Problems) {
     return compilationUnitBuilderExtension
   }
 
-  private fun getPackageAnnotationResolver(options: FrontendOptions): PackageAnnotationsResolver {
+  private fun getPackageAnnotationResolver(
+    options: FrontendOptions,
+    packageInfoCache: PackageInfoCache,
+  ): PackageAnnotationsResolver {
     val packageInfoSources: List<FileInfo> =
       options.sources.filter { it.originalPath().endsWith("package-info.java") }
 
@@ -215,6 +220,7 @@ class KotlinParser(private val problems: Problems) {
       packageInfoSources,
       JdtParser(problems),
       options.directDeps,
+      packageInfoCache,
     )
   }
 
@@ -222,8 +228,11 @@ class KotlinParser(private val problems: Problems) {
     val compilationUnits: List<CompilationUnit>
   }
 
-  private fun createCompilerConfiguration(options: FrontendOptions): CompilerConfiguration {
-    val arguments = createCompilerArguments(options)
+  private fun createCompilerConfiguration(
+    options: FrontendOptions,
+    packageInfoCache: PackageInfoCache,
+  ): CompilerConfiguration {
+    val arguments = createCompilerArguments(options, packageInfoCache)
     val configuration = CompilerConfiguration()
 
     val messageCollector = ProblemsMessageCollector(problems)
@@ -258,7 +267,10 @@ class KotlinParser(private val problems: Problems) {
     return configuration
   }
 
-  private fun createCompilerArguments(options: FrontendOptions) =
+  private fun createCompilerArguments(
+    options: FrontendOptions,
+    packageInfoCache: PackageInfoCache,
+  ) =
     K2JVMCompilerArguments().also { arguments ->
       parseCommandLineArguments(options.kotlincOptions, arguments)
       arguments.classpath = options.classpaths.joinToString(File.pathSeparator)
@@ -269,7 +281,7 @@ class KotlinParser(private val problems: Problems) {
           .toTypedArray()
       arguments.freeArgs = options.sources.map(FileInfo::sourcePath)
 
-      arguments.setEligibleFriends(options.targetLabel)
+      arguments.setEligibleFriends(packageInfoCache, options.targetLabel)
     }
 
   private fun PendingDiagnosticsCollectorWithSuppress.maybeReportErrorsAndAbort(

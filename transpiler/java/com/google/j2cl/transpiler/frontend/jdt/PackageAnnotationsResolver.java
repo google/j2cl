@@ -30,16 +30,19 @@ public final class PackageAnnotationsResolver {
 
   /** Create a PackageAnnotationResolver with the source package-info CompilationUnits. */
   public static PackageAnnotationsResolver create(
-      Stream<CompilationUnit> packageInfoCompilationUnits) {
-    var packageAnnotationResolver = new PackageAnnotationsResolver();
+      Stream<CompilationUnit> packageInfoCompilationUnits, PackageInfoCache packageInfoCache) {
+    var packageAnnotationResolver = new PackageAnnotationsResolver(packageInfoCache);
     packageAnnotationResolver.populateFromCompilationUnits(packageInfoCompilationUnits);
     return packageAnnotationResolver;
   }
 
   /** Create a PackageAnnotationResolver with package infos in sources. */
   public static PackageAnnotationsResolver create(
-      List<FileInfo> sources, JdtParser parser, List<String> classpathEntries) {
-    return create(parsePackageInfoFiles(sources, parser, classpathEntries));
+      List<FileInfo> sources,
+      JdtParser parser,
+      List<String> classpathEntries,
+      PackageInfoCache packageInfoCache) {
+    return create(parsePackageInfoFiles(sources, parser, classpathEntries), packageInfoCache);
   }
 
   private final PackageInfoCache packageInfoCache;
@@ -82,7 +85,7 @@ public final class PackageAnnotationsResolver {
         });
   }
 
-  private PackageAnnotationsResolver() {
-    this.packageInfoCache = PackageInfoCache.get();
+  private PackageAnnotationsResolver(PackageInfoCache packageInfoCache) {
+    this.packageInfoCache = packageInfoCache;
   }
 }

@@ -15,9 +15,6 @@
  */
 package com.google.j2cl.transpiler.frontend.common;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.base.Preconditions.checkState;
-
 import com.google.auto.value.AutoValue;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
@@ -85,26 +82,11 @@ public class PackageInfoCache {
    */
   public static final PackageReport DEFAULT_PACKAGE_REPORT = PackageReport.newBuilder().build();
 
-  /** Allows for the initialization/retrieval of one shared PackageInfoCache instance per thread. */
-  private static final ThreadLocal<PackageInfoCache> packageInfoCacheStorage = new ThreadLocal<>();
-
-  public static PackageInfoCache get() {
-    return checkNotNull(packageInfoCacheStorage.get());
-  }
-
-  public static void init(List<String> classPathEntries, Problems problems) {
-    checkState(
-        packageInfoCacheStorage.get() == null,
-        "PackageInfoCache should only be initialized once per thread.");
-
-    packageInfoCacheStorage.set(new PackageInfoCache(classPathEntries, problems));
-  }
-
   private final Map<String, PackageReport> packageReportByTypeName = new HashMap<>();
   private final Map<String, Manifest> manifestByPath = new HashMap<>();
   private final Problems problems;
 
-  private PackageInfoCache(List<String> classPathEntries, Problems problems) {
+  public PackageInfoCache(List<String> classPathEntries, Problems problems) {
     this.problems = problems;
     indexPackageInfo(classPathEntries);
   }

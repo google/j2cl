@@ -67,7 +67,6 @@ public class JdtParser {
   }
 
   public Library parseFiles(FrontendOptions options) {
-    PackageInfoCache.init(options.getClasspaths(), problems);
     CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings =
         parseFiles(
             options.getSources(),
@@ -77,12 +76,13 @@ public class JdtParser {
             TypeDescriptors.getWellKnownTypeNames());
     problems.abortIfHasErrors();
 
-    JdtEnvironment environment =
-        new JdtEnvironment(
-            PackageAnnotationsResolver.create(
-                compilationUnitsAndTypeBindings.getCompilationUnitsByFilePath().entrySet().stream()
-                    .filter(e -> e.getKey().endsWith("package-info.java"))
-                    .map(Entry::getValue)));
+    var packageAnnotationsResolver =
+        PackageAnnotationsResolver.create(
+            compilationUnitsAndTypeBindings.getCompilationUnitsByFilePath().entrySet().stream()
+                .filter(e -> e.getKey().endsWith("package-info.java"))
+                .map(Entry::getValue),
+            new PackageInfoCache(options.getClasspaths(), problems));
+    JdtEnvironment environment = new JdtEnvironment(packageAnnotationsResolver);
 
     Map<String, CompilationUnit> jdtUnitsByFilePath =
         compilationUnitsAndTypeBindings.getCompilationUnitsByFilePath();

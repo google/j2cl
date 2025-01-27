@@ -110,8 +110,9 @@ public class JdtEnvironment {
       JdtParser jdtParser,
       List<String> classpathEntries,
       Collection<String> wellKnownTypesBinaryNames) {
-    PackageInfoCache.init(ImmutableList.of(), null);
-    this.packageAnnotationsResolver = PackageAnnotationsResolver.create(Stream.of());
+    this.packageAnnotationsResolver =
+        PackageAnnotationsResolver.create(
+            Stream.of(), new PackageInfoCache(ImmutableList.of(), null));
     this.initWellKnownTypes(jdtParser.resolveBindings(classpathEntries, wellKnownTypesBinaryNames));
   }
 
