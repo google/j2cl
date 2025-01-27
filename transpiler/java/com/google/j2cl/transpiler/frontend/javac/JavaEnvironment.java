@@ -1268,6 +1268,7 @@ class JavaEnvironment {
     return TypeDeclaration.newBuilder()
         .setClassComponents(getClassComponents(typeElement))
         .setEnclosingTypeDeclaration(createDeclarationForType(getEnclosingType(typeElement)))
+        .setEnclosingMethodDescriptorFactory(() -> getEnclosingMethodDescriptor(typeElement))
         .setSuperTypeDescriptorFactory(
             () ->
                 (DeclaredTypeDescriptor)
@@ -1325,6 +1326,18 @@ class JavaEnvironment {
         .setUnusableByJsSuppressed(JsInteropAnnotationUtils.isUnusableByJsSuppressed(typeElement))
         .setDeprecated(isDeprecated(typeElement))
         .build();
+  }
+
+  @Nullable
+  private MethodDescriptor getEnclosingMethodDescriptor(TypeElement typeElement) {
+    Element enclosingElement = typeElement.getEnclosingElement();
+    if (enclosingElement == null
+        || (enclosingElement.getKind() != ElementKind.METHOD
+            && enclosingElement.getKind() != ElementKind.CONSTRUCTOR)) {
+      return null;
+    }
+
+    return createMethodDescriptor((ExecutableElement) enclosingElement);
   }
 
   private static PackageDeclaration createPackageDeclaration(PackageElement packageElement) {
