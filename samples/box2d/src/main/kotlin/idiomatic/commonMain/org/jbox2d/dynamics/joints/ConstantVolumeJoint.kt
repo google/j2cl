@@ -45,10 +45,8 @@ class ConstantVolumeJoint(private val world: World, def: ConstantVolumeJointDef)
   }
 
   init {
-    if (def.bodies.size <= 2) {
-      throw IllegalArgumentException(
-        "You cannot create a constant volume joint with less than three bodies."
-      )
+    require(def.bodies.size > 2) {
+      "You cannot create a constant volume joint with less than three bodies."
     }
     targetLengths = FloatArray(bodies.size)
     for (i in targetLengths.indices) {
@@ -57,12 +55,8 @@ class ConstantVolumeJoint(private val world: World, def: ConstantVolumeJointDef)
       targetLengths[i] = dist
     }
     targetVolume = getBodyArea()
-    if (def.joints != null && def.joints!!.size != def.bodies.size) {
-      throw IllegalArgumentException(
-        "Incorrect joint definition.  Joints have to correspond to the bodies"
-      )
-    }
-    if (def.joints == null) {
+    val joints = def.joints
+    if (joints == null) {
       val djd = DistanceJointDef()
       distanceJoints = arrayOfNulls(bodies.size)
       for (i in targetLengths.indices) {
@@ -74,7 +68,10 @@ class ConstantVolumeJoint(private val world: World, def: ConstantVolumeJointDef)
         distanceJoints[i] = world.createJoint(djd) as DistanceJoint?
       }
     } else {
-      distanceJoints = def.joints!!.toTypedArray()
+      require(joints.size == def.bodies.size) {
+        "Incorrect joint definition.  Joints have to correspond to the bodies"
+      }
+      distanceJoints = joints.toTypedArray()
     }
   }
 
