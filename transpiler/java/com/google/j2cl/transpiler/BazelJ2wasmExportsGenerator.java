@@ -91,6 +91,7 @@ final class BazelJ2wasmExportsGenerator extends BazelWorker {
               // not be complete and cannot be fully resolved to descriptors.
               .filter(not(ITypeBinding::isAnnotation))
               .collect(toImmutableList());
+      // TODO(b/392756608): Avoid triggering another read of classpath for well-known types.
       var environment = new JdtEnvironment(parser, classPathEntries, wellKnownTypeNames);
 
       var typeDescriptors = environment.createDescriptorsFromBindings(bindings);
