@@ -2,6 +2,7 @@
 #  Implementation of RTA algorithm used to do fast method pruning.
 
 load("@rules_java//java:defs.bzl", "java_binary", "java_library")
+load("//transpiler/java/com/google/j2cl/common/bazel:jvm_flags.bzl", "JVM_FLAGS")
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],
@@ -24,6 +25,7 @@ java_proto_library(
 
 java_binary(
     name = "J2clRta_worker",
+    jvm_flags = JVM_FLAGS,
     main_class = "com.google.j2cl.tools.rta.BazelJ2clRta",
     visibility = ["//build_defs/internal_do_not_use:__pkg__"],
     runtime_deps = [":rta"],

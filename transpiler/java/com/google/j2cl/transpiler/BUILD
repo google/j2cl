@@ -1,4 +1,5 @@
 load("@rules_java//java:defs.bzl", "java_binary", "java_library")
+load("//transpiler/java/com/google/j2cl/common/bazel:jvm_flags.bzl", "JVM_FLAGS")
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],
@@ -100,13 +101,6 @@ java_library(
         "//transpiler/java/com/google/j2cl/transpiler/passes",
     ],
 )
-
-JVM_FLAGS = [
-    "-XX:+TieredCompilation",
-    "-Xss3M",
-    # Disable bytecode verification to save from class-loading time.
-    "-Xverify:none",
-]
 
 java_binary(
     name = "BazelJ2clBuilder",
