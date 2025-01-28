@@ -34,7 +34,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
-import javax.annotation.Nullable;
 import org.eclipse.jdt.core.BindingKey;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.compiler.IProblem;
@@ -172,13 +171,6 @@ public class JdtParser {
             /* forbiddenAnnotations= */ new ArrayList<>(),
             binaryNames)
         .getTypeBindings();
-  }
-
-  @Nullable
-  public ITypeBinding resolveBinding(List<String> classpathEntries, String qualifiedBinaryName) {
-    List<ITypeBinding> bindings =
-        resolveBindings(classpathEntries, ImmutableList.of(qualifiedBinaryName));
-    return Iterables.getOnlyElement(bindings, null);
   }
 
   private ASTParser newASTParser(List<String> classpathEntries) {
