@@ -49,22 +49,7 @@ package org.jbox2d.common
  *
  * @author ewjordan
  */
-class Color3f {
-  var x: Float
-  var y: Float
-  var z: Float
-
-  constructor() {
-    z = 0f
-    y = z
-    x = y
-  }
-
-  constructor(r: Float, g: Float, b: Float) {
-    x = r
-    y = g
-    z = b
-  }
+class Color3f(var x: Float = 0f, var y: Float = 0f, var z: Float = 0f) {
 
   fun set(r: Float, g: Float, b: Float) {
     x = r
