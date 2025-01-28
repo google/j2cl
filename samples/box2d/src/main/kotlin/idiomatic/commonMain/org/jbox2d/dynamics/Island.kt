@@ -552,9 +552,7 @@ class Island {
   }
 
   fun report(constraints: Array<ContactVelocityConstraint>) {
-    if (listener == null) {
-      return
-    }
+    val listener = this.listener ?: return
     for (i in 0 until contactCount) {
       val c = contacts[i]!!
       val vc = constraints[i]
@@ -563,7 +561,7 @@ class Island {
         impulse.normalImpulses[j] = vc.points[j].normalImpulse
         impulse.tangentImpulses[j] = vc.points[j].tangentImpulse
       }
-      listener!!.postSolve(c, impulse)
+      listener.postSolve(c, impulse)
     }
   }
 }

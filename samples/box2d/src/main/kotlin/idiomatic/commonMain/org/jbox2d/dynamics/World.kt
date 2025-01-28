@@ -186,7 +186,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
    */
   constructor(
     gravity: Vec2,
-    pool: IWorldPool = DefaultWorldPool(WORLD_POOL_SIZE, WORLD_POOL_CONTAINER_SIZE)
+    pool: IWorldPool = DefaultWorldPool(WORLD_POOL_SIZE, WORLD_POOL_CONTAINER_SIZE),
   ) : this(gravity, pool, DynamicTree()) {}
 
   init {
@@ -576,10 +576,8 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
 
   /** Call this to draw shapes and other debug draw data. */
   fun drawDebugData() {
-    if (debugDraw == null) {
-      return
-    }
-    val flags: Int = debugDraw!!.flags
+    val debugDraw = this.debugDraw ?: return
+    val flags: Int = debugDraw.flags
     if (flags and DebugDraw.E_SHAPE_BIT == DebugDraw.E_SHAPE_BIT) {
       var b = bodyList
       while (b != null) {
@@ -622,7 +620,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
         val fixtureB = c.fixtureB
         fixtureA.getAABB(c.indexA)!!.getCenterToOut(cA)
         fixtureB.getAABB(c.indexB)!!.getCenterToOut(cB)
-        debugDraw!!.drawSegment(cA, cB, color)
+        debugDraw.drawSegment(cA, cB, color)
         c = c.next
       }
     }
@@ -644,7 +642,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
             vs[1].set(aabb.upperBound.x, aabb.lowerBound.y)
             vs[2].set(aabb.upperBound.x, aabb.upperBound.y)
             vs[3].set(aabb.lowerBound.x, aabb.upperBound.y)
-            debugDraw!!.drawPolygon(vs, 4, color)
+            debugDraw.drawPolygon(vs, 4, color)
           }
           f = f.next
         }
@@ -656,12 +654,12 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
       while (b != null) {
         xf.set(b.xf)
         xf.p.set(b.sweep.c)
-        debugDraw!!.drawTransform(xf)
+        debugDraw.drawTransform(xf)
         b = b.next
       }
     }
     if (flags and DebugDraw.E_DYNAMIC_TREE_BIT == DebugDraw.E_DYNAMIC_TREE_BIT) {
-      contactManager.broadPhase.drawTree(debugDraw!!)
+      contactManager.broadPhase.drawTree(debugDraw)
     }
   }
 
@@ -726,7 +724,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
       bodyCount,
       contactManager.contactCount,
       jointCount,
-      contactManager.contactListener
+      contactManager.contactListener,
     )
 
     // Clear all the island flags.
@@ -905,7 +903,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
       2 * Settings.MAX_TOI_CONTACTS,
       Settings.MAX_TOI_CONTACTS,
       0,
-      contactManager.contactListener
+      contactManager.contactListener,
     )
     if (stepComplete) {
       var b = bodyList
