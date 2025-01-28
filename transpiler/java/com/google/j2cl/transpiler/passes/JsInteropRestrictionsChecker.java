@@ -1335,10 +1335,7 @@ public class JsInteropRestrictionsChecker {
         memberDescriptor.getEnclosingTypeDescriptor().getTypeDeclaration();
     return memberDescriptor.isFinal()
         || memberDescriptor.getVisibility().isPrivate()
-        || enclosingTypeDeclaration.isFinal()
-        // TODO(b/341721484) : Remove this once the bug is fixed.
-        || (enclosingTypeDeclaration.isEnum()
-            && enclosingTypeDeclaration.getMemberTypeDeclarations().isEmpty());
+        || enclosingTypeDeclaration.isFinal();
   }
 
   private boolean checkNativeJsType(Type type) {

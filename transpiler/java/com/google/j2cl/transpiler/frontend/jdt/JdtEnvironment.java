@@ -1142,9 +1142,7 @@ public class JdtEnvironment {
     // Compute these first since they're reused in other calculations.
     boolean isAbstract = isAbstract(typeBinding);
     Kind kind = getKindFromTypeBinding(typeBinding);
-    // TODO(b/341721484): Even though enums can not have the final modifier, turbine make them final
-    // in the header jars.
-    boolean isFinal = isFinal(typeBinding) && kind != Kind.ENUM;
+    boolean isFinal = isFinal(typeBinding);
 
     boolean isNullMarked = isNullMarked(typeBinding);
     IBinding declaringMemberBinding = getDeclaringMethodOrFieldBinding(typeBinding);
