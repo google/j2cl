@@ -156,8 +156,7 @@ data class Vec2 constructor(var x: Float = 0f, var y: Float = 0f) {
     }
 
     fun crossToOutUnsafe(a: Vec2, s: Float, out: Vec2) {
-      // assert is not supported in KMP.
-      // assert(out !== a)
+      assert(out !== a)
       out.x = s * a.y
       out.y = -s * a.x
     }
@@ -169,8 +168,7 @@ data class Vec2 constructor(var x: Float = 0f, var y: Float = 0f) {
     }
 
     fun crossToOutUnsafe(s: Float, a: Vec2, out: Vec2) {
-      // assert is not supported in KMP.
-      // assert(out !== a)
+      assert(out !== a)
       out.x = -s * a.y
       out.y = s * a.x
     }

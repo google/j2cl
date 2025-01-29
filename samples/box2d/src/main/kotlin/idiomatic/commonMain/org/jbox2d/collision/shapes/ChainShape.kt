@@ -52,8 +52,7 @@ class ChainShape : Shape(ShapeType.CHAIN) {
 
   /** Get a child edge. */
   fun getChildEdge(edge: EdgeShape, index: Int) {
-    // assert is not supported in KMP.
-    // assert(0 <= index && index < m_count - 1)
+    assert(0 <= index && index < count - 1)
     edge.radius = radius
     val nonNullVertices = vertices!!
     val v0 = nonNullVertices[index + 0]
@@ -92,8 +91,7 @@ class ChainShape : Shape(ShapeType.CHAIN) {
     transform: Transform,
     childIndex: Int,
   ): Boolean {
-    // assert is not supported in KMP.
-    // assert(childIndex < m_count)
+    assert(childIndex < count)
     val edgeShape = pool0
     var i2 = childIndex + 1
     if (i2 == count) {
@@ -110,8 +108,7 @@ class ChainShape : Shape(ShapeType.CHAIN) {
   }
 
   override fun computeAABB(aabb: AABB, xf: Transform, childIndex: Int) {
-    // assert is not supported in KMP.
-    // assert(childIndex < m_count)
+    assert(childIndex < count)
     val lower = aabb.lowerBound
     val upper = aabb.upperBound
     var i2 = childIndex + 1
@@ -156,9 +153,9 @@ class ChainShape : Shape(ShapeType.CHAIN) {
    * @param count the vertex count
    */
   fun createLoop(vertices: Array<Vec2>, count: Int) {
-    // assert is not supported in KMP.
-    // assert(m_vertices == null && m_count == 0)
-    // assert(count >= 3)
+    assert(this.vertices == null && this.count == 0)
+    assert(count >= 3)
+
     this.count = count + 1
     this.vertices = Array(this.count) { vertices[it].copy() }
     var nonNullVertices = this.vertices!!
@@ -184,9 +181,9 @@ class ChainShape : Shape(ShapeType.CHAIN) {
    * @param count the vertex count
    */
   fun createChain(vertices: Array<Vec2>, count: Int) {
-    // assert is not supported in KMP.
-    // assert(m_vertices == null && m_count == 0)
-    // assert(count >= 2)
+    assert(this.vertices == null && this.count == 0)
+    assert(count >= 2)
+
     this.count = count
     this.vertices = Array(this.count) { vertices[it].copy() }
     for (i in 1 until this.count) {
@@ -203,19 +200,13 @@ class ChainShape : Shape(ShapeType.CHAIN) {
 
   /**
    * Establish connectivity to a vertex that precedes the first vertex. Don't call this for loops.
-   *
-   * @param prevVertex
    */
   fun setPrevVertex(prevVertex: Vec2) {
     this.prevVertex.set(prevVertex)
     hasPrevVertex = true
   }
 
-  /**
-   * Establish connectivity to a vertex that follows the last vertex. Don't call this for loops.
-   *
-   * @param nextVertex
-   */
+  /** Establish connectivity to a vertex that follows the last vertex. Don't call this for loops. */
   fun setNextVertex(nextVertex: Vec2) {
     this.nextVertex.set(nextVertex)
     hasNextVertex = true

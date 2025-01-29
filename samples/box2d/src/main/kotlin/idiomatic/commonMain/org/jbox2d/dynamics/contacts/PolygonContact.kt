@@ -24,6 +24,7 @@ package org.jbox2d.dynamics.contacts
 
 import org.jbox2d.collision.Manifold
 import org.jbox2d.collision.shapes.PolygonShape
+import org.jbox2d.collision.shapes.ShapeType
 import org.jbox2d.common.Transform
 import org.jbox2d.dynamics.Fixture
 import org.jbox2d.pooling.IWorldPool
@@ -31,9 +32,8 @@ import org.jbox2d.pooling.IWorldPool
 class PolygonContact(argPool: IWorldPool) : Contact(argPool) {
   fun init(fixtureA: Fixture, fixtureB: Fixture) {
     super.init(fixtureA, 0, fixtureB, 0)
-    // assert is not supported in KMP.
-    // assert(m_fixtureA.type == ShapeType.POLYGON)
-    // assert(m_fixtureB.type == ShapeType.POLYGON)
+    assert(fixtureA.getType() == ShapeType.POLYGON)
+    assert(fixtureB.getType() == ShapeType.POLYGON)
   }
 
   override fun evaluate(manifold: Manifold, xfA: Transform, xfB: Transform) {
@@ -42,7 +42,7 @@ class PolygonContact(argPool: IWorldPool) : Contact(argPool) {
       fixtureA.shape as PolygonShape,
       xfA,
       fixtureB.shape as PolygonShape,
-      xfB
+      xfB,
     )
   }
 }

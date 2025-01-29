@@ -41,14 +41,16 @@ class PolygonShape : Shape(ShapeType.POLYGON) {
   val centroid: Vec2 = Vec2().apply { this.setZero() }
 
   /**
-   * The vertices of the shape. Note: use getVertexCount(), not m_vertices.length, to get number of
-   * active vertices.
+   * The vertices of the shape.
+   *
+   * Note: use [count], not [vertices.size], to get number of active vertices.
    */
   val vertices: Array<Vec2> = Array<Vec2>(Settings.MAX_POLYGON_VERTICES) { Vec2() }
 
   /**
-   * The normals of the shape. Note: use getVertexCount(), not m_normals.length, to get number of
-   * active normals.
+   * The normals of the shape.
+   *
+   * Note: use [count], not [normals.size], to get number of active normals.
    */
   val normals: Array<Vec2> = Array<Vec2>(Settings.MAX_POLYGON_VERTICES) { Vec2() }
 
@@ -80,9 +82,10 @@ class PolygonShape : Shape(ShapeType.POLYGON) {
    * Create a convex hull from the given array of points. The count must be in the range
    * [3, Settings.maxPolygonVertices].
    *
-   * @warning the points may be re-ordered, even if they form a convex polygon
-   * @warning collinear points are handled but not removed. Collinear points may lead to poor
-   *   stacking behavior.
+   * The points may be re-ordered, even if they form a convex polygon
+   *
+   * Collinear points are handled but not removed. Collinear points may lead to poor stacking
+   * behavior.
    */
   fun set(vertices: Array<Vec2>, count: Int) {
     set(vertices, count, null, null)
@@ -92,9 +95,10 @@ class PolygonShape : Shape(ShapeType.POLYGON) {
    * Create a convex hull from the given array of points. The count must be in the range
    * [3, Settings.maxPolygonVertices]. This method takes an arraypool for pooling
    *
-   * @warning the points may be re-ordered, even if they form a convex polygon
-   * @warning collinear points are handled but not removed. Collinear points may lead to poor
-   *   stacking behavior.
+   * The points may be re-ordered, even if they form a convex polygon
+   *
+   * Collinear points are handled but not removed. Collinear points may lead to poor stacking
+   * behavior.
    */
   fun set(
     verts: Array<Vec2>,
@@ -102,12 +106,12 @@ class PolygonShape : Shape(ShapeType.POLYGON) {
     vecPool: Vec2Array?,
     intPool: org.jbox2d.pooling.arrays.IntArray?,
   ) {
-    // assert is not supported in KMP.
-    // assert(3 <= num && num <= Settings.maxPolygonVertices)
+    assert(3 <= num && num <= Settings.MAX_POLYGON_VERTICES)
     if (num < 3) {
       setAsBox(1.0f, 1.0f)
       return
     }
+
     val n = MathUtils.min(num, Settings.MAX_POLYGON_VERTICES)
 
     // Copy the vertices into a local buffer
@@ -168,8 +172,7 @@ class PolygonShape : Shape(ShapeType.POLYGON) {
     for (i in 0 until count) {
       val i2 = if (i + 1 < count) i + 1 else 0
       edge.set(vertices[i2]).subLocal(vertices[i])
-      // assert is not supported in KMP.
-      // assert(edge.lengthSquared() > Settings.EPSILON * Settings.EPSILON)
+      assert(edge.lengthSquared() > Settings.EPSILON * Settings.EPSILON)
       Vec2.crossToOutUnsafe(edge, 1f, normals[i])
       normals[i].normalize()
     }
@@ -286,12 +289,7 @@ class PolygonShape : Shape(ShapeType.POLYGON) {
     upper.y += radius
   }
 
-  /**
-   * Get a vertex by index.
-   *
-   * @param index
-   * @return
-   */
+  /** Get a vertex by index. */
   fun getVertex(index: Int): Vec2 = vertices[index]
 
   override fun raycast(
@@ -354,8 +352,7 @@ class PolygonShape : Shape(ShapeType.POLYGON) {
         return false
       }
     }
-    // assert is not supported in KMP.
-    // assert(0.0f <= lower && lower <= input.maxFraction)
+    assert(0.0f <= lower && lower <= input.maxFraction)
     if (index >= 0) {
       output.fraction = lower
       // normal = Mul(xf.R, m_normals[index]);
@@ -369,8 +366,7 @@ class PolygonShape : Shape(ShapeType.POLYGON) {
   }
 
   fun computeCentroidToOut(vs: Array<Vec2>, count: Int, out: Vec2) {
-    // assert is not supported in KMP.
-    // assert(count >= 3)
+    assert(count >= 3)
     out.set(0.0f, 0.0f)
     var area = 0.0f
 
@@ -395,8 +391,7 @@ class PolygonShape : Shape(ShapeType.POLYGON) {
       e1.set(pRef).addLocal(p2).addLocal(p3).mulLocal(triangleArea * inv3)
       out.addLocal(e1)
     }
-    // assert is not supported in KMP.
-    // assert(area > Settings.EPSILON)
+    assert(area > Settings.EPSILON)
     out.mulLocal(1.0f / area)
   }
 
@@ -424,8 +419,7 @@ class PolygonShape : Shape(ShapeType.POLYGON) {
     // Simplification: triangle centroid = (1/3) * (p1 + p2 + p3)
     //
     // The rest of the derivation is handled by computer algebra.
-    // assert is not supported in KMP.
-    // assert(vertexCount >= 3)
+    assert(count >= 3)
     val center = pool1
     center.setZero()
     var area = 0.0f
@@ -465,8 +459,7 @@ class PolygonShape : Shape(ShapeType.POLYGON) {
 
     // Total mass
     massData.mass = density * area
-    // assert is not supported in KMP.
-    // assert(area > Settings.EPSILON)
+    assert(area > Settings.EPSILON)
     center.mulLocal(1.0f / area)
     massData.center.set(center).addLocal(s)
 

@@ -150,12 +150,12 @@ class Body(bd: BodyDef, world: World) {
   private val pxf = Transform()
 
   init {
-    // assert is not supported in KMP.
-    /* assert(bd.position.isValid)
+    assert(bd.position.isValid)
     assert(bd.linearVelocity.isValid)
     assert(bd.gravityScale >= 0.0f)
     assert(bd.angularDamping >= 0.0f)
-    assert(bd.linearDamping >= 0.0f) */
+    assert(bd.linearDamping >= 0.0f)
+
     if (bd.bullet) {
       flags = flags or BULLET_FLAG
     }
@@ -182,11 +182,11 @@ class Body(bd: BodyDef, world: World) {
   }
 
   fun setType(newType: BodyType) {
-    // assert is not supported in KMP.
-    // assert(world.isLocked == false)
+    assert(!world.isLocked)
     if (world.isLocked) {
       return
     }
+
     if (type == newType) {
       return
     }
@@ -230,15 +230,16 @@ class Body(bd: BodyDef, world: World) {
    * density is non-zero, this function automatically updates the mass of the body. Contacts are not
    * created until the next time step.
    *
+   * This function is locked during callbacks.
+   *
    * @param def the fixture definition.
-   * @warning This function is locked during callbacks.
    */
   fun createFixture(def: FixtureDef): Fixture? {
-    // assert is not supported in KMP.
-    // assert(world.isLocked == false)
+    assert(!world.isLocked)
     if (world.isLocked) {
       return null
     }
+
     val fixture = Fixture()
     fixture.create(this, def)
     if (flags and ACTIVE_FLAG == ACTIVE_FLAG) {
@@ -266,9 +267,10 @@ class Body(bd: BodyDef, world: World) {
    * FixtureDef if you need to set parameters like friction, restitution, user data, or filtering.
    * If the density is non-zero, this function automatically updates the mass of the body.
    *
+   * This function is locked during callbacks.
+   *
    * @param shape the shape to be cloned.
    * @param density the shape density (set to zero for static bodies).
-   * @warning This function is locked during callbacks.
    */
   fun createFixture(shape: Shape, density: Float): Fixture? {
     fixDef.shape = shape
@@ -282,35 +284,33 @@ class Body(bd: BodyDef, world: World) {
    * is dynamic and the fixture has positive density. All fixtures attached to a body are implicitly
    * destroyed when the body is destroyed.
    *
+   * This function is locked during callbacks.
+   *
    * @param fixture the fixture to be removed.
-   * @warning This function is locked during callbacks.
    */
   fun destroyFixture(fixture: Fixture?) {
     var tempFixture = fixture
-    // assert is not supported in KMP.
-    // assert(world.isLocked == false)
+    assert(!world.isLocked)
     if (world.isLocked) {
       return
     }
-    // assert is not supported in KMP.
-    // assert(fixture.m_body === this)
-    // assert(m_fixtureCount > 0)
+
+    assert(fixture!!.body === this)
+    assert(fixtureCount > 0)
     var node = fixtureList
     var last: Fixture? = null // java change
-    @Suppress("ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE") var found = false
+    var found = false
     while (node != null) {
       if (node == tempFixture) {
         @Suppress("UNUSED_VALUE")
         node = tempFixture.next
-        @Suppress("UNUSED_VALUE")
         found = true
         break
       }
       last = node
       node = node.next
     }
-    // assert is not supported in KMP.
-    // assert(found)
+    assert(found)
 
     // java change, remove it from the list
     if (last == null) {
@@ -355,11 +355,11 @@ class Body(bd: BodyDef, world: World) {
    * @param angle the world rotation in radians.
    */
   fun setTransform(position: Vec2, angle: Float) {
-    // assert is not supported in KMP.
-    // assert(world.isLocked == false)
+    assert(!world.isLocked)
     if (world.isLocked) {
       return
     }
+
     xf.q.set(angle)
     xf.p.set(position)
 
@@ -513,11 +513,11 @@ class Body(bd: BodyDef, world: World) {
    */
   fun setMassData(massData: MassData) {
     // TODO_ERIN adjust linear velocity and torque to account for movement of center.
-    // assert is not supported in KMP.
-    // assert(world.isLocked == false)
+    assert(!world.isLocked)
     if (world.isLocked) {
       return
     }
+
     if (type != BodyType.DYNAMIC) {
       return
     }
@@ -531,8 +531,7 @@ class Body(bd: BodyDef, world: World) {
     invMass = 1.0f / mass
     if (massData.I > 0.0f && flags and FIXED_ROTATION_FLAG == 0) {
       I = massData.I - mass * (massData.center dot massData.center)
-      // assert is not supported in KMP.
-      // assert(m_I > 0.0f)
+      assert(I > 0.0f)
       invI = 1.0f / I
     }
     val oldCenter = world.pool.popVec2()
@@ -573,8 +572,7 @@ class Body(bd: BodyDef, world: World) {
       sweep.a0 = sweep.a
       return
     }
-    // assert is not supported in KMP.
-    // assert(type == BodyType.DYNAMIC)
+    assert(type == BodyType.DYNAMIC)
 
     // Accumulate mass over all fixtures.
     val localCenter = world.pool.popVec2()
@@ -608,8 +606,7 @@ class Body(bd: BodyDef, world: World) {
     if (I > 0.0f && (flags and FIXED_ROTATION_FLAG) == 0) {
       // Center the inertia about the center of mass.
       I -= mass * (localCenter dot localCenter)
-      // assert is not supported in KMP.
-      // assert(m_I > 0.0f)
+      assert(I > 0.0f)
       invI = 1.0f / I
     } else {
       I = 0.0f
@@ -777,8 +774,7 @@ class Body(bd: BodyDef, world: World) {
    * @param flag
    */
   fun setIsActive(flag: Boolean) {
-    // assert is not supported in KMP.
-    // assert(world.isLocked == false)
+    assert(world.isLocked == false)
     if (flag == isActive) {
       return
     }

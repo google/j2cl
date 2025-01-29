@@ -72,8 +72,6 @@ class Sweep : Serializable {
    * @param t the normalized time in [0,1].
    */
   fun getTransform(xf: Transform, beta: Float) {
-    // assert is not supported in KMP.
-    // assert(xf != null)
     // if (xf == null)
     // xf = new XForm();
     // center = p + R * localCenter

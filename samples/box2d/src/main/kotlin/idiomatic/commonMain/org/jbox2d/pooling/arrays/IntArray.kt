@@ -33,13 +33,11 @@ class IntArray {
   private val map = mutableMapOf<Int, KTIntArray>()
 
   operator fun get(argLength: Int): KTIntArray {
-    // assert is not supported in KMP.
-    // assert(argLength > 0)
+    assert(argLength > 0)
     if (!map.containsKey(argLength)) {
       map[argLength] = getInitializedArray(argLength)
     }
-    // assert is not supported in KMP.
-    // assert(map[argLength]!!.size == argLength) { "Array not built of correct length" }
+    assert(map[argLength]!!.size == argLength) { "Array not built of correct length" }
     return map[argLength]!!
   }
 

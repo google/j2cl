@@ -23,6 +23,7 @@
 /** Created at 12:11:41 PM Jan 23, 2011 */
 package org.jbox2d.dynamics.joints
 
+import org.jbox2d.common.Settings
 import org.jbox2d.common.Vec2
 import org.jbox2d.dynamics.Body
 
@@ -70,7 +71,6 @@ class PulleyJointDef : JointDef() {
     val d2 = anchor2 - ga2
     lengthB = d2.length()
     ratio = r
-    // assert is not supported in KMP.
-    // assert(ratio > Settings.EPSILON)
+    assert(ratio > Settings.EPSILON)
   }
 }

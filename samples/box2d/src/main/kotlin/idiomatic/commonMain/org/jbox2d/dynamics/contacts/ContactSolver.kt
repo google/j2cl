@@ -110,8 +110,7 @@ class ContactSolver {
       val bodyB = fixtureB.body!!
       val manifold = contact.manifold
       val pointCount = manifold.pointCount
-      // assert is not supported in KMP.
-      // assert(pointCount > 0)
+      assert(pointCount > 0)
       val vc = velocityConstraints[i]
       vc.friction = contact.friction
       vc.restitution = contact.restitution
@@ -147,7 +146,7 @@ class ContactSolver {
         val cp = manifold.points[j]
         val vcp = vc.points[j]
         if (step.warmStarting) {
-          // assert(cp.normalImpulse == 0);
+          // assert(cp.normalImpulse == 0f)
           // System.out.println("contact normal impulse: " + cp.normalImpulse);
           vcp.normalImpulse = step.dtRatio * cp.normalImpulse
           vcp.tangentImpulse = step.dtRatio * cp.tangentImpulse
@@ -224,8 +223,7 @@ class ContactSolver {
       val aB = positions[indexB].a
       val vB = velocities[indexB].v
       val wB = velocities[indexB].w
-      // assert is not supported in KMP.
-      // assert(manifold!!.pointCount > 0)
+      assert(manifold!!.pointCount > 0)
       xfA.q.set(aA)
       xfB.q.set(aB)
       xfA.p.x = cA.x - (xfA.q.cos * localCenterA.x - xfA.q.sin * localCenterA.y)
@@ -303,8 +301,7 @@ class ContactSolver {
       tangent.x = 1.0f * vc.normal.y
       tangent.y = -1.0f * vc.normal.x
       val friction = vc.friction
-      // assert is not supported in KMP.
-      // assert(pointCount == 1 || pointCount == 2)
+      assert(pointCount == 1 || pointCount == 2)
 
       // Solve tangent constraints
       for (j in 0 until pointCount) {
@@ -414,8 +411,7 @@ class ContactSolver {
         val cp2 = vc.points[1]
         a.x = cp1.normalImpulse
         a.y = cp2.normalImpulse
-        // assert is not supported in KMP.
-        // assert(a.x >= 0.0f && a.y >= 0.0f)
+        assert(a.x >= 0.0f && a.y >= 0.0f)
         // Relative velocity at contact
         // Vec2 dv1 = vB + Cross(wB, cp1.rB) - vA - Cross(wA, cp1.rA);
         dv1.x = -wB * cp1.rB.y + vB.x - vA.x + wA * cp1.rA.y
@@ -498,13 +494,10 @@ class ContactSolver {
               val dv1 = vB + (wB cross cp1.rB).subLocal(vA).subLocal(wA cross cp1.rA)
               val dv2 = vB + (wB cross cp2.rB).subLocal(vA).subLocal(wA cross cp2.rA)
               // Compute normal velocity
-              @Suppress("UNUSED_VALUE")
               vn1 = dv1 dot normal
-              @Suppress("UNUSED_VALUE")
               vn2 = dv2 dot normal
-              // assert is not supported in KMP.
-              // assert(MathUtils.abs(vn1 - cp1.velocityBias) < k_errorTol)
-              // assert(MathUtils.abs(vn2 - cp2.velocityBias) < k_errorTol)
+              assert(MathUtils.abs(vn1 - cp1.velocityBias) < K_ERROR_TOL)
+              assert(MathUtils.abs(vn2 - cp2.velocityBias) < K_ERROR_TOL)
             }
             break
           }
@@ -561,10 +554,8 @@ class ContactSolver {
               // Postconditions
               val dv1 = vB + (wB cross cp1.rB).subLocal(vA).subLocal(wA cross cp1.rA)
               // Compute normal velocity
-              @Suppress("UNUSED_VALUE")
               vn1 = dv1 dot normal
-              // assert is not supported in KMP.
-              // assert(MathUtils.abs(vn1 - cp1.velocityBias) < k_errorTol)
+              assert(MathUtils.abs(vn1 - cp1.velocityBias) < K_ERROR_TOL)
             }
             break
           }
@@ -619,10 +610,8 @@ class ContactSolver {
               // Postconditions
               val dv2 = vB + (wB cross cp2.rB).subLocal(vA).subLocal(wA cross cp2.rA)
               // Compute normal velocity
-              @Suppress("UNUSED_VALUE")
               vn2 = dv2 dot normal
-              // assert is not supported in KMP.
-              // assert(MathUtils.abs(vn2 - cp2.velocityBias) < k_errorTol)
+              assert(MathUtils.abs(vn2 - cp2.velocityBias) < K_ERROR_TOL)
             }
             break
           }
@@ -908,8 +897,7 @@ internal class PositionSolverManifold {
   var separation = 0f
 
   fun initialize(pc: ContactPositionConstraint, xfA: Transform, xfB: Transform, index: Int) {
-    // assert is not supported in KMP.
-    // assert(pc!!.pointCount > 0)
+    assert(pc.pointCount > 0)
     val xfAq = xfA.q
     val xfBq = xfB.q
     val pcLocalPointsI = pc.localPoints[index]

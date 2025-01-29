@@ -34,12 +34,12 @@ abstract class CircleStack<E>(private val size: Int, argContainerSize: Int) : IO
     if (index >= size) {
       index = 0
     }
-    @Suppress("UNCHECKED_CAST") return pool[index] as E
+    @Suppress("UNCHECKED_CAST")
+    return pool[index] as E
   }
 
   override fun pop(argNum: Int): Array<E> {
-    // assert is not supported in KMP.
-    // assert(argNum <= container.size) { "Container array is too small" }
+    assert(argNum <= container.size) { "Container array is too small" }
     if (index + argNum < size) {
       pool.copyInto(container, 0, index, argNum)
       index += argNum
@@ -49,7 +49,8 @@ abstract class CircleStack<E>(private val size: Int, argContainerSize: Int) : IO
       pool.copyInto(container, argNum - overlap, 0, overlap)
       index = overlap
     }
-    @Suppress("UNCHECKED_CAST") return container as Array<E>
+    @Suppress("UNCHECKED_CAST")
+    return container as Array<E>
   }
 
   override fun push(argNum: Int) {}

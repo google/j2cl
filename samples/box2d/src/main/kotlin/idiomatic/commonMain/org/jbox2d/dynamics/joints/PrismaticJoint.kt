@@ -233,8 +233,7 @@ class PrismaticJoint(argWorld: IWorldPool, def: PrismaticJointDef) : Joint(argWo
    * @param upper
    */
   fun setLimits(lower: Float, upper: Float) {
-    // assert is not supported in KMP.
-    // assert(lower <= upper)
+    assert(lower <= upper)
     if (lower != lowerTranslation || upper != upperTranslation) {
       bodyA.setAwake(true)
       bodyB.setAwake(true)

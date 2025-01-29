@@ -26,6 +26,7 @@ import org.jbox2d.collision.Manifold
 import org.jbox2d.collision.shapes.ChainShape
 import org.jbox2d.collision.shapes.CircleShape
 import org.jbox2d.collision.shapes.EdgeShape
+import org.jbox2d.collision.shapes.ShapeType
 import org.jbox2d.common.Transform
 import org.jbox2d.dynamics.Fixture
 import org.jbox2d.pooling.IWorldPool
@@ -35,9 +36,8 @@ class ChainAndCircleContact(argPool: IWorldPool) : Contact(argPool) {
 
   override fun init(fA: Fixture, indexA: Int, fB: Fixture, newIndexB: Int) {
     super.init(fA, indexA, fB, newIndexB)
-    // assert is not supported in KMP.
-    // assert(m_fixtureA.type == ShapeType.CHAIN)
-    // assert(m_fixtureB.type == ShapeType.CIRCLE)
+    assert(fixtureA.getType() == ShapeType.CHAIN)
+    assert(fixtureB.getType() == ShapeType.CIRCLE)
   }
 
   override fun evaluate(manifold: Manifold, xfA: Transform, xfB: Transform) {

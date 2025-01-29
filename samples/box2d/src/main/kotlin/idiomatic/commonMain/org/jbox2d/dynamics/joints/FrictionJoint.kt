@@ -136,8 +136,7 @@ class FrictionJoint(argWorldPool: IWorldPool, def: FrictionJointDef) : Joint(arg
     }
     //    data.velocities[m_indexA].v.set(vA);
     if (data.velocities[indexA].w != wA) {
-      // assert is not supported in KMP.
-      // assert(data.velocities!![m_indexA].w != wA)
+      assert(data.velocities[indexA].w != wA)
     }
     data.velocities[indexA].w = wA
     //    data.velocities[m_indexB].v.set(vB);
@@ -199,8 +198,7 @@ class FrictionJoint(argWorldPool: IWorldPool, def: FrictionJointDef) : Joint(arg
 
     //    data.velocities[m_indexA].v.set(vA);
     if (data.velocities[indexA].w != wA) {
-      // assert is not supported in KMP.
-      // assert(data.velocities!![m_indexA].w != wA)
+      assert(data.velocities[indexA].w != wA)
     }
     data.velocities[indexA].w = wA
 

@@ -88,9 +88,8 @@ class Rot : Serializable {
     }
 
     fun mulUnsafe(q: Rot, r: Rot, out: Rot) {
-      // assert is not supported in KMP.
-      // assert(r !== out)
-      // assert(q !== out)
+      assert(r !== out)
+      assert(q !== out)
       // [qc -qs] * [rc -rs] = [qc*rc-qs*rs -qc*rs-qs*rc]
       // [qs qc] [rs rc] [qs*rc+qc*rs -qs*rs+qc*rc]
       // s = qs * rc + qc * rs

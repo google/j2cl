@@ -66,12 +66,7 @@ class Transform : Serializable {
     return this
   }
 
-  /**
-   * Set this based on the position and angle.
-   *
-   * @param p
-   * @param angle
-   */
+  /** Set this based on the position and angle. */
   fun set(p: Vec2, angle: Float) {
     this.p.set(p)
     q.set(angle)
@@ -106,8 +101,7 @@ class Transform : Serializable {
     }
 
     fun mulToOutUnsafe(transform: Transform, v: Vec2, out: Vec2) {
-      // assert is not supported in KMP.
-      // assert(v !== out)
+      assert(v !== out)
       out.x = transform.q.cos * v.x - transform.q.sin * v.y + transform.p.x
       out.y = transform.q.sin * v.x + transform.q.cos * v.y + transform.p.y
     }
@@ -130,8 +124,7 @@ class Transform : Serializable {
     }
 
     fun mulTransToOutUnsafe(transform: Transform, v: Vec2, out: Vec2) {
-      // assert is not supported in KMP.
-      // assert(v !== out)
+      assert(v !== out)
       val px = v.x - transform.p.x
       val py = v.y - transform.p.y
       out.x = transform.q.cos * px + transform.q.sin * py
@@ -147,17 +140,15 @@ class Transform : Serializable {
     }
 
     fun mulToOut(transformA: Transform, transformB: Transform, out: Transform) {
-      // assert is not supported in KMP.
-      // assert(out !== A)
+      assert(out !== transformA)
       mul(transformA.q, transformB.q, out.q)
       mulToOut(transformA.q, transformB.p, out.p)
       out.p.addLocal(transformA.p)
     }
 
     fun mulToOutUnsafe(transformA: Transform, transformB: Transform, out: Transform) {
-      // assert is not supported in KMP.
-      // assert(out !== B)
-      // assert(out !== A)
+      assert(out !== transformB)
+      assert(out !== transformA)
       mulUnsafe(transformA.q, transformB.q, out.q)
       mulToOutUnsafe(transformA.q, transformB.p, out.p)
       out.p.addLocal(transformA.p)
@@ -172,17 +163,15 @@ class Transform : Serializable {
     }
 
     fun mulTransToOut(transformA: Transform, transformB: Transform, out: Transform) {
-      // assert is not supported in KMP.
-      // assert(out !== A)
+      assert(out !== transformA)
       mulTrans(transformA.q, transformB.q, out.q)
       pool.set(transformB.p).subLocal(transformA.p)
       mulTrans(transformA.q, pool, out.p)
     }
 
     fun mulTransToOutUnsafe(transformA: Transform, transformB: Transform, out: Transform) {
-      // assert is not supported in KMP.
-      // assert(out !== A)
-      // assert(out !== B)
+      assert(out !== transformA)
+      assert(out !== transformB)
       mulTransUnsafe(transformA.q, transformB.q, out.q)
       pool.set(transformB.p).subLocal(transformA.p)
       mulTransUnsafe(transformA.q, pool, out.p)

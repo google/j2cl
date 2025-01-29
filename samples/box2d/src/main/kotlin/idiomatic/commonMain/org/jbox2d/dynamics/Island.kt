@@ -400,9 +400,8 @@ class Island {
   }
 
   fun solveTOI(subStep: TimeStep, toiIndexA: Int, toiIndexB: Int) {
-    // assert is not supported in KMP.
-    // assert(toiIndexA < m_bodyCount)
-    // assert(toiIndexB < m_bodyCount)
+    assert(toiIndexA < bodyCount)
+    assert(toiIndexB < bodyCount)
 
     // Initialize the body state.
     for (i in 0 until bodyCount) {
@@ -532,22 +531,19 @@ class Island {
   }
 
   fun add(body: Body) {
-    // assert is not supported in KMP.
-    // assert(m_bodyCount < m_bodyCapacity)
+    assert(bodyCount < bodyCapacity)
     body.islandIndex = bodyCount
     bodies[bodyCount] = body
     ++bodyCount
   }
 
   fun add(contact: Contact) {
-    // assert is not supported in KMP.
-    // assert(m_contactCount < m_contactCapacity)
+    assert(contactCount < contactCapacity)
     contacts[contactCount++] = contact
   }
 
   fun add(joint: Joint) {
-    // assert is not supported in KMP.
-    // assert(m_jointCount < m_jointCapacity)
+    assert(jointCount < jointCapacity)
     joints[jointCount++] = joint
   }
 

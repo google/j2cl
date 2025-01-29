@@ -276,8 +276,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
    * @warning This function is locked during callbacks.
    */
   fun createBody(def: BodyDef): Body? {
-    // assert is not supported in KMP.
-    // assert(isLocked == false)
+    assert(!isLocked)
     if (isLocked) {
       return null
     }
@@ -304,9 +303,8 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
    * @warning This function is locked during callbacks.
    */
   fun destroyBody(body: Body) {
-    // assert is not supported in KMP.
-    // assert(bodyCount > 0)
-    // assert(isLocked == false)
+    assert(bodyCount > 0)
+    assert(!isLocked)
     if (isLocked) {
       return
     }
@@ -366,16 +364,14 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
    * create a joint to constrain bodies together. No reference to the definition is retained. This
    * may cause the connected bodies to cease colliding.
    *
-   * @param def
-   * @return
-   * @warning This function is locked during callbacks.
+   * This function is locked during callbacks.
    */
   fun createJoint(def: JointDef): Joint? {
-    // assert is not supported in KMP.
-    // assert(isLocked == false)
+    assert(!isLocked)
     if (isLocked) {
       return null
     }
+
     val j = Joint.create(this, def)
 
     // Connect to the world list.
@@ -424,18 +420,13 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
     return j
   }
 
-  /**
-   * destroy a joint. This may cause the connected bodies to begin colliding.
-   *
-   * @param joint
-   * @warning This function is locked during callbacks.
-   */
+  /** Destroy a joint. This may cause the connected bodies to begin colliding. */
   fun destroyJoint(j: Joint) {
-    // assert is not supported in KMP.
-    // assert(isLocked == false)
+    assert(!isLocked)
     if (isLocked) {
       return
     }
+
     val collideConnected = j.collideConnected
 
     // Remove from the doubly linked list.
@@ -483,8 +474,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
     j.edgeB.prev = null
     j.edgeB.next = null
     Joint.destroy(j)
-    // assert is not supported in KMP.
-    // assert(jointCount > 0)
+    assert(jointCount > 0)
     --jointCount
 
     // If the joint prevents collisions, then flag any contacts for filtering.
@@ -777,9 +767,8 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
       while (stackCount > 0) {
         // Grab the next body off the stack and add it to the island.
         val b = stack[--stackCount]
-        // assert is not supported in KMP.
-        // assert(b!!.isActive == true)
-        island.add(b!!)
+        assert(b!!.isActive)
+        island.add(b)
 
         // Make sure the body is awake.
         b.setAwake(true)
@@ -823,8 +812,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
             ce = ce.next
             continue
           }
-          // assert is not supported in KMP.
-          // assert(stackCount < stackSize)
+          assert(stackCount < stackSize)
           stack[stackCount++] = other
           other.flags = other.flags or Body.Companion.IS_LAND_FLAG
           ce = ce.next
@@ -850,8 +838,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
             je = je.next
             continue
           }
-          // assert is not supported in KMP.
-          // assert(stackCount < stackSize)
+          assert(stackCount < stackSize)
           stack[stackCount++] = other
           other.flags = other.flags or Body.Companion.IS_LAND_FLAG
           je = je.next
@@ -943,7 +930,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
           c = c.next
           continue
         }
-        @Suppress("VARIABLE_WITH_REDUNDANT_INITIALIZER") var alpha = 1.0f
+        var alpha = 1.0f
         if (c.flags and Contact.TOI_FLAG != 0) {
           // This contact has a valid cached TOI.
           alpha = c.toi
@@ -960,8 +947,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
           val bB = fB.body!!
           val typeA = bA.type
           val typeB = bB.type
-          // assert is not supported in KMP.
-          // assert(typeA == BodyType.DYNAMIC || typeB == BodyType.DYNAMIC)
+          assert(typeA == BodyType.DYNAMIC || typeB == BodyType.DYNAMIC)
           val activeA = bA.isAwake && typeA != BodyType.STATIC
           val activeB = bB.isAwake && typeB != BodyType.STATIC
 
@@ -989,8 +975,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
             alpha0 = bA.sweep.alpha0
             bB.sweep.advance(alpha0)
           }
-          // assert is not supported in KMP.
-          // assert(alpha0 < 1.0f)
+          assert(alpha0 < 1.0f)
           val indexA = c.indexA
           val indexB = c.indexB
 
@@ -1247,8 +1232,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
       ShapeType.POLYGON -> {
         val poly = fixture.shape as PolygonShape
         val vertexCount = poly.count
-        // assert is not supported in KMP.
-        // assert(vertexCount <= Settings.maxPolygonVertices)
+        assert(vertexCount <= Settings.MAX_POLYGON_VERTICES)
         val vertices: Array<Vec2> = tlvertices[Settings.MAX_POLYGON_VERTICES]
         for (i: Int in 0 until vertexCount) {
 

@@ -49,12 +49,12 @@ abstract class MutableStack<E>(argInitSize: Int) : IDynamicStack<E> {
     if (index >= size) {
       extendStack(size * 2)
     }
-    @Suppress("UNCHECKED_CAST") return stack!![index++] as E
+    @Suppress("UNCHECKED_CAST")
+    return stack!![index++] as E
   }
 
   override fun push(argObject: E) {
-    // assert is not supported in KMP.
-    // assert(index > 0)
+    assert(index > 0)
     stack!![--index] = argObject
   }
 

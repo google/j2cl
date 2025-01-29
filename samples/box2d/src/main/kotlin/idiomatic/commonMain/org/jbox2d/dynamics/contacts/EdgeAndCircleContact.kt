@@ -25,6 +25,7 @@ package org.jbox2d.dynamics.contacts
 import org.jbox2d.collision.Manifold
 import org.jbox2d.collision.shapes.CircleShape
 import org.jbox2d.collision.shapes.EdgeShape
+import org.jbox2d.collision.shapes.ShapeType
 import org.jbox2d.common.Transform
 import org.jbox2d.dynamics.Fixture
 import org.jbox2d.pooling.IWorldPool
@@ -32,9 +33,8 @@ import org.jbox2d.pooling.IWorldPool
 class EdgeAndCircleContact(argPool: IWorldPool) : Contact(argPool) {
   override fun init(fA: Fixture, indexA: Int, fB: Fixture, newIndexB: Int) {
     super.init(fA, indexA, fB, newIndexB)
-    // assert is not supported in KMP.
-    // assert(m_fixtureA.type == ShapeType.EDGE)
-    // assert(m_fixtureB.type == ShapeType.CIRCLE)
+    assert(fixtureA.getType() == ShapeType.EDGE)
+    assert(fixtureB.getType() == ShapeType.CIRCLE)
   }
 
   override fun evaluate(manifold: Manifold, xfA: Transform, xfB: Transform) {
@@ -43,7 +43,7 @@ class EdgeAndCircleContact(argPool: IWorldPool) : Contact(argPool) {
       fixtureA.shape as EdgeShape,
       xfA,
       fixtureB.shape as CircleShape,
-      xfB
+      xfB,
     )
   }
 }

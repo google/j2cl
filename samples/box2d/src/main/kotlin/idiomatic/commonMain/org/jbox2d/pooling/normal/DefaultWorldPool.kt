@@ -188,8 +188,7 @@ class DefaultWorldPool(private val argSize: Int, private val argContainerSize: I
     if (!afloats.containsKey(argLength)) {
       afloats[argLength] = FloatArray(argLength)
     }
-    // assert is not supported in KMP.
-    // assert(afloats[argLength]!!.size == argLength) { "Array not built with correct length" }
+    assert(afloats[argLength]!!.size == argLength) { "Array not built with correct length" }
     return afloats[argLength]!!
   }
 
@@ -197,8 +196,7 @@ class DefaultWorldPool(private val argSize: Int, private val argContainerSize: I
     if (!aints.containsKey(argLength)) {
       aints[argLength] = IntArray(argLength)
     }
-    // assert is not supported in KMP.
-    // assert(aints[argLength]!!.size == argLength) { "Array not built with correct length" }
+    assert(aints[argLength]!!.size == argLength) { "Array not built with correct length" }
     return aints[argLength]!!
   }
 
@@ -207,8 +205,7 @@ class DefaultWorldPool(private val argSize: Int, private val argContainerSize: I
       val ray = Array<Vec2>(argLength) { Vec2() }
       avecs[argLength] = ray
     }
-    // assert is not supported in KMP.
-    // assert(avecs[argLength]!!.size == argLength) { "Array not built with correct length" }
+    assert(avecs[argLength]!!.size == argLength) { "Array not built with correct length" }
     return avecs[argLength]!!
   }
 }

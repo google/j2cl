@@ -32,18 +32,17 @@ abstract class OrderedStack<E>(private val size: Int, private val argContainerSi
   fun pop(): E = pool[index++]
 
   fun pop(argNum: Int): Array<E> {
-    // assert is not supported in KMP.
-    // assert(index + argNum < size) { "End of stack reached, there is probably a leak somewhere" }
-    // assert(argNum <= container.size) { "Container array is too small" }
+    assert(index + argNum < size) { "End of stack reached, there is probably a leak somewhere" }
+    assert(argNum <= container.size) { "Container array is too small" }
     pool.copyInto(container, 0, index, argNum)
     index += argNum
-    @Suppress("UNCHECKED_CAST") return container as Array<E>
+    @Suppress("UNCHECKED_CAST")
+    return container as Array<E>
   }
 
   fun push(argNum: Int) {
     index -= argNum
-    // assert is not supported in KMP.
-    // assert(index >= 0) { "Beginning of stack reached, push/pops are unmatched" }
+    assert(index >= 0) { "Beginning of stack reached, push/pops are unmatched" }
   }
 
   /** Creates a new instance of the object contained by this stack. */

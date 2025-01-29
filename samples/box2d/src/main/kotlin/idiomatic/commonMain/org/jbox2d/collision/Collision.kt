@@ -70,15 +70,7 @@ class Collision(private val pool: IWorldPool) {
 
   private val collider = EPCollider()
 
-  /**
-   * Determine if two generic shapes overlap.
-   *
-   * @param shapeA
-   * @param shapeB
-   * @param xfA
-   * @param xfB
-   * @return
-   */
+  /** Determine if two generic shapes overlap. */
   fun testOverlap(
     shapeA: Shape,
     indexA: Int,
@@ -98,15 +90,7 @@ class Collision(private val pool: IWorldPool) {
     return output.distance < 10.0f * Settings.EPSILON
   }
 
-  /**
-   * Compute the collision manifold between two circles.
-   *
-   * @param manifold
-   * @param circle1
-   * @param xfA
-   * @param circle2
-   * @param xfB
-   */
+  /** Compute the collision manifold between two circles. */
   fun collideCircles(
     manifold: Manifold,
     circle1: CircleShape,
@@ -145,15 +129,7 @@ class Collision(private val pool: IWorldPool) {
   }
 
   // djm pooling, and from above
-  /**
-   * Compute the collision manifold between a polygon and a circle.
-   *
-   * @param manifold
-   * @param polygon
-   * @param xfA
-   * @param circle
-   * @param xfB
-   */
+  /** Compute the collision manifold between a polygon and a circle. */
   fun collidePolygonAndCircle(
     manifold: Manifold,
     polygon: PolygonShape,
@@ -328,15 +304,7 @@ class Collision(private val pool: IWorldPool) {
     }
   }
 
-  /**
-   * Find the separation between poly1 and poly2 for a given edge normal on poly1.
-   *
-   * @param poly1
-   * @param xf1
-   * @param edge1
-   * @param poly2
-   * @param xf2
-   */
+  /** Find the separation between poly1 and poly2 for a given edge normal on poly1. */
   fun edgeSeparation(
     poly1: PolygonShape,
     xf1: Transform,
@@ -344,14 +312,13 @@ class Collision(private val pool: IWorldPool) {
     poly2: PolygonShape,
     xf2: Transform,
   ): Float {
-    @Suppress("UNUSED_VARIABLE") val count1 = poly1.count
+    val count1 = poly1.count
     val vertices1 = poly1.vertices
     val normals1 = poly1.normals
     val count2 = poly2.count
     val vertices2 = poly2.vertices
 
-    // assert is not supported in KMP.
-    // assert(0 <= edge1 && edge1 < count1)
+    assert(0 <= edge1 && edge1 < count1)
     // Convert normal from poly1's frame into poly2's frame.
     // before inline:
     // // Vec2 normal1World = Mul(xf1.R, normals1[edge1]);
@@ -404,16 +371,7 @@ class Collision(private val pool: IWorldPool) {
     // end inline
   }
 
-  /**
-   * Find the max separation between poly1 and poly2 using edge normals from poly1.
-   *
-   * @param edgeIndex
-   * @param poly1
-   * @param xf1
-   * @param poly2
-   * @param xf2
-   * @return
-   */
+  /** Find the max separation between poly1 and poly2 using edge normals from poly1. */
   fun findMaxSeparation(
     results: EdgeResults,
     poly1: PolygonShape,
@@ -518,8 +476,7 @@ class Collision(private val pool: IWorldPool) {
     val vertices2 = poly2.vertices
     val normals2 = poly2.normals
 
-    // assert is not supported in KMP.
-    // assert(0 <= edge1 && edge1 < count1)
+    assert(0 <= edge1 && edge1 < count1)
     val c0 = c[0]
     val c1 = c[1]
     val xf1q = xf1.q
@@ -576,15 +533,7 @@ class Collision(private val pool: IWorldPool) {
     c1.id.typeB = ContactID.Type.VERTEX.ordinal.toByte()
   }
 
-  /**
-   * Compute the collision manifold between two polygons.
-   *
-   * @param manifold
-   * @param polygon1
-   * @param xf1
-   * @param polygon2
-   * @param xf2
-   */
+  /** Compute the collision manifold between two polygons. */
   fun collidePolygons(
     manifold: Manifold,
     polyA: PolygonShape,
@@ -813,8 +762,7 @@ class Collision(private val pool: IWorldPool) {
 
     // Region AB
     val den = e dot e
-    // assert is not supported in KMP.
-    // assert(den > 0.0f)
+    assert(den > 0.0f)
 
     // Vec2 P = (1.0f / den) * (u * A + v * B);
     P.set(A).mulLocal(u).addLocal(temp.set(B).mulLocal(v))
@@ -1385,11 +1333,6 @@ class Collision(private val pool: IWorldPool) {
      * Compute the point states given two manifolds. The states pertain to the transition from
      * manifold1 to manifold2. So state1 is either persist or remove while state2 is either add or
      * persist.
-     *
-     * @param state1
-     * @param state2
-     * @param manifold1
-     * @param manifold2
      */
     fun getPointStates(
       state1: Array<PointState>,
@@ -1427,15 +1370,7 @@ class Collision(private val pool: IWorldPool) {
       }
     }
 
-    /**
-     * Clipping for contact manifolds. Sutherland-Hodgman clipping.
-     *
-     * @param vOut
-     * @param vIn
-     * @param normal
-     * @param offset
-     * @return
-     */
+    /** Clipping for contact manifolds. Sutherland-Hodgman clipping. */
     fun clipSegmentToLine(
       vOut: Array<ClipVertex>,
       vIn: Array<ClipVertex>,

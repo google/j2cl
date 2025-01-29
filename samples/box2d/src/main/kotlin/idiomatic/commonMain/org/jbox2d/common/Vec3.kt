@@ -97,9 +97,8 @@ data class Vec3(var x: Float = 0f, var y: Float = 0f, var z: Float = 0f) {
     }
 
     fun crossToOutUnsafe(a: Vec3, b: Vec3, out: Vec3) {
-      // assert is not supported in KMP.
-      // assert(out !== b)
-      // assert(out !== a)
+      assert(out !== b)
+      assert(out !== a)
       out.x = a.y * b.z - a.z * b.y
       out.y = a.z * b.x - a.x * b.z
       out.z = a.x * b.y - a.y * b.x

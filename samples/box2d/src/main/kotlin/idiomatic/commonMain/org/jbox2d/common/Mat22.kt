@@ -222,8 +222,7 @@ class Mat22 : Serializable {
   }
 
   fun mulToOutUnsafe(v: Vec2, out: Vec2) {
-    // assert is not supported in KMP.
-    // assert(v !== out)
+    assert(v !== out)
     out.x = ex.x * v.x + ey.x * v.y
     out.y = ex.y * v.x + ey.y * v.y
   }
@@ -264,9 +263,8 @@ class Mat22 : Serializable {
   }
 
   fun mulToOutUnsafe(R: Mat22, out: Mat22) {
-    // assert is not supported in KMP.
-    // assert(out !== R)
-    // assert(out !== this)
+    assert(out !== R)
+    assert(out !== this)
     out.ex.x = ex.x * R.ex.x + ey.x * R.ex.y
     out.ex.y = ex.y * R.ex.x + ey.y * R.ex.y
     out.ey.x = ex.x * R.ey.x + ey.x * R.ey.y
@@ -315,21 +313,15 @@ class Mat22 : Serializable {
   }
 
   fun mulTransToOutUnsafe(B: Mat22, out: Mat22) {
-    // assert is not supported in KMP.
-    // assert(B !== out)
-    // assert(this !== out)
+    assert(B !== out)
+    assert(this !== out)
     out.ex.x = ex.x * B.ex.x + ex.y * B.ex.y
     out.ey.x = ex.x * B.ey.x + ex.y * B.ey.y
     out.ex.y = ey.x * B.ex.x + ey.y * B.ex.y
     out.ey.y = ey.x * B.ey.x + ey.y * B.ey.y
   }
 
-  /**
-   * Multiply a vector by the transpose of this matrix.
-   *
-   * @param v
-   * @return
-   */
+  /** Multiply a vector by the transpose of this matrix. */
   fun mulTrans(v: Vec2): Vec2 = Vec2(v.x * ex.x + v.y * ex.y, v.x * ey.x + v.y * ey.y)
 
   /* djm added */
@@ -342,12 +334,7 @@ class Mat22 : Serializable {
     out.x = tempx
   }
 
-  /**
-   * Add this matrix to B, return the result.
-   *
-   * @param B
-   * @return
-   */
+  /** Add this matrix to B, return the result. */
   fun add(B: Mat22): Mat22 {
     // return new Mat22(ex.add(B.ex), col2.add(B.ey));
     val m = Mat22()
@@ -358,12 +345,7 @@ class Mat22 : Serializable {
     return m
   }
 
-  /**
-   * Add B to this matrix locally.
-   *
-   * @param B
-   * @return
-   */
+  /** Add B to this matrix locally. */
   fun addLocal(B: Mat22): Mat22 {
     // ex.addLocal(B.ex);
     // col2.addLocal(B.ey);
@@ -450,8 +432,7 @@ class Mat22 : Serializable {
     }
 
     fun mulToOutUnsafe(R: Mat22, v: Vec2, out: Vec2) {
-      // assert is not supported in KMP.
-      // assert(v !== out)
+      assert(v !== out)
       out.x = R.ex.x * v.x + R.ey.x * v.y
       out.y = R.ex.y * v.x + R.ey.y * v.y
     }
@@ -478,9 +459,8 @@ class Mat22 : Serializable {
     }
 
     fun mulToOutUnsafe(A: Mat22, B: Mat22, out: Mat22) {
-      // assert is not supported in KMP.
-      // assert(out !== A)
-      // assert(out !== B)
+      assert(out !== A)
+      assert(out !== B)
       out.ex.x = A.ex.x * B.ex.x + A.ey.x * B.ex.y
       out.ex.y = A.ex.y * B.ex.x + A.ey.y * B.ex.y
       out.ey.x = A.ex.x * B.ey.x + A.ey.x * B.ey.y
@@ -497,8 +477,7 @@ class Mat22 : Serializable {
     }
 
     fun mulTransToOutUnsafe(R: Mat22, v: Vec2, out: Vec2) {
-      // assert is not supported in KMP.
-      // assert(out !== v)
+      assert(out !== v)
       out.y = v.x * R.ey.x + v.y * R.ey.y
       out.x = v.x * R.ex.x + v.y * R.ex.y
     }
@@ -524,9 +503,8 @@ class Mat22 : Serializable {
     }
 
     fun mulTransToOutUnsafe(A: Mat22, B: Mat22, out: Mat22) {
-      // assert is not supported in KMP.
-      // assert(A !== out)
-      // assert(B !== out)
+      assert(A !== out)
+      assert(B !== out)
       out.ex.x = A.ex.x * B.ex.x + A.ex.y * B.ex.y
       out.ex.y = A.ey.x * B.ex.x + A.ey.y * B.ex.y
       out.ey.x = A.ex.x * B.ey.x + A.ex.y * B.ey.y

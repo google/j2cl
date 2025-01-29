@@ -444,8 +444,7 @@ class RevoluteJoint(argWorld: IWorldPool, def: RevoluteJointDef) : Joint(argWorl
   }
 
   fun setLimits(lower: Float, upper: Float) {
-    // assert is not supported in KMP.
-    // assert(lower <= upper)
+    assert(lower <= upper)
     if (lower != lowerAngle || upper != upperAngle) {
       bodyA.setAwake(true)
       bodyB.setAwake(true)

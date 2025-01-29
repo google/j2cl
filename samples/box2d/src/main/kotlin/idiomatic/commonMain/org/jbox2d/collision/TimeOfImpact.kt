@@ -87,10 +87,8 @@ class TimeOfImpact(private val pool: IWorldPool) {
    * Compute the upper bound on time before two shapes penetrate. Time is represented as a fraction
    * between [0,tMax]. This uses a swept separating axis and may miss some intermediate,
    * non-tunneling collision. If you change the time interval, you should call this function again.
-   * Note: use Distance to compute the contact point and normal at the time of impact.
    *
-   * @param output
-   * @param input
+   * Note: use Distance to compute the contact point and normal at the time of impact.
    */
   fun timeOfImpact(output: TOIOutput, input: TOIInput) {
     // CCD via the local separating axis method. This seeks progression
@@ -113,8 +111,7 @@ class TimeOfImpact(private val pool: IWorldPool) {
     val target = MathUtils.max(Settings.LINEAR_SLOP, totalRadius - 3.0f * Settings.LINEAR_SLOP)
     val tolerance = 0.25f * Settings.LINEAR_SLOP
 
-    // assert is not supported in KMP.
-    // assert(target > tolerance)
+    assert(target > tolerance)
     var t1 = 0f
     var iter = 0
     cache.count = 0
@@ -330,8 +327,7 @@ internal class SeparationFunction {
     this.proxyB = proxyB
     val count = cache.count
 
-    // assert is not supported in KMP.
-    // assert(0 < count && count < 3)
+    assert(0 < count && count < 3)
     this.sweepA = sweepA
     this.sweepB = sweepB
     this.sweepA!!.getTransform(xfa, t1)
@@ -443,8 +439,7 @@ internal class SeparationFunction {
         return pointA.subLocal(pointB) dot normal
       }
       else -> {
-        // assert is not supported in KMP.
-        // assert(false)
+        assert(false)
         indexes[0] = -1
         indexes[1] = -1
         return 0f
@@ -489,8 +484,7 @@ internal class SeparationFunction {
         pointA.subLocal(pointB) dot normal
       }
       else -> {
-        // assert is not supported in KMP.
-        // assert(false)
+        assert(false)
         0f
       }
     }

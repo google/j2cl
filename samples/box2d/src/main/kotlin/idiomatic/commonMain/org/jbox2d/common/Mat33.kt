@@ -88,9 +88,6 @@ class Mat33 : Serializable {
   /**
    * Solve A * x = b, where b is a column vector. This is more efficient than computing the inverse
    * in one-shot cases.
-   *
-   * @param b
-   * @return
    */
   fun solve33(b: Vec3): Vec3 {
     val x = Vec3()
@@ -101,13 +98,9 @@ class Mat33 : Serializable {
   /**
    * Solve A * x = b, where b is a column vector. This is more efficient than computing the inverse
    * in one-shot cases.
-   *
-   * @param b
-   * @param out the result
    */
   fun solve33ToOut(b: Vec3, out: Vec3) {
-    // assert is not supported in KMP.
-    // assert(b !== out)
+    assert(b !== out)
     Vec3.crossToOutUnsafe(ey, ez, out)
     var det = ex dot out
     if (det != 0.0f) {
@@ -211,8 +204,7 @@ class Mat33 : Serializable {
     }
 
     fun mul22ToOutUnsafe(A: Mat33, v: Vec2, out: Vec2) {
-      // assert is not supported in KMP.
-      // assert(v !== out)
+      assert(v !== out)
       out.y = A.ex.y * v.x + A.ey.y * v.y
       out.x = A.ex.x * v.x + A.ey.x * v.y
     }
@@ -226,8 +218,7 @@ class Mat33 : Serializable {
     }
 
     fun mulToOutUnsafe(A: Mat33, v: Vec3, out: Vec3) {
-      // assert is not supported in KMP.
-      // assert(out !== v)
+      assert(out !== v)
       out.x = v.x * A.ex.x + v.y * A.ey.x + v.z * A.ez.x
       out.y = v.x * A.ex.y + v.y * A.ey.y + v.z * A.ez.y
       out.z = v.x * A.ex.z + v.y * A.ey.z + v.z * A.ez.z

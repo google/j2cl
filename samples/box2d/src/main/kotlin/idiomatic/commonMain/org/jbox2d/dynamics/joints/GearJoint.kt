@@ -110,9 +110,8 @@ class GearJoint(argWorldPool: IWorldPool, def: GearJointDef) : Joint(argWorldPoo
   private var mass = 0f
 
   init {
-    // assert is not supported in KMP.
-    // assert(m_typeA == JointType.REVOLUTE || m_typeA == JointType.PRISMATIC)
-    // assert(m_typeB == JointType.REVOLUTE || m_typeB == JointType.PRISMATIC)
+    assert(typeA == JointType.REVOLUTE || typeA == JointType.PRISMATIC)
+    assert(typeB == JointType.REVOLUTE || typeB == JointType.PRISMATIC)
     val coordinateA: Float
     val coordinateB: Float
 

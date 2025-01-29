@@ -191,8 +191,7 @@ class Fixture {
 
   fun destroy() {
     // The proxies must be destroyed before calling this.
-    // assert is not supported in KMP.
-    // assert(m_proxyCount == 0)
+    assert(proxyCount == 0)
 
     // Free the child shape.
     shape = null
@@ -205,8 +204,7 @@ class Fixture {
 
   // These support body activation/deactivation.
   fun createProxies(broadPhase: BroadPhase, xf: Transform) {
-    // assert is not supported in KMP.
-    // assert(m_proxyCount == 0)
+    assert(proxyCount == 0)
 
     // Create proxies in the broad-phase.
     proxyCount = shape!!.getChildCount()
