@@ -29,25 +29,25 @@ class GenericType extends AbstractCollection {
  }
  /** @nodts @return {boolean} */
  m_contains__autovalue_SimpleAutoValue__boolean(/** SimpleAutoValue */ o) {
-  return super.contains(o);
+  return super.contains(/**@type {?}*/ (o));
  }
  /** @final @override @return {boolean} */
  contains(/** * */ element) {
   if (!($Equality.$same(element, null) || SimpleAutoValue.$isInstance(element))) {
    return false;
   }
-  return this.m_contains__autovalue_SimpleAutoValue__boolean(/**@type {!SimpleAutoValue}*/ (element));
+  return this.m_contains__autovalue_SimpleAutoValue__boolean(/**@type {SimpleAutoValue}*/ (element));
  }
  /** @nodts @return {boolean} */
  m_remove__autovalue_SimpleAutoValue__boolean(/** SimpleAutoValue */ o) {
-  return super.remove(o);
+  return super.remove(/**@type {?}*/ (o));
  }
  /** @final @override @return {boolean} */
  remove(/** * */ element) {
   if (!($Equality.$same(element, null) || SimpleAutoValue.$isInstance(element))) {
    return false;
   }
-  return this.m_remove__autovalue_SimpleAutoValue__boolean(/**@type {!SimpleAutoValue}*/ (element));
+  return this.m_remove__autovalue_SimpleAutoValue__boolean(/**@type {SimpleAutoValue}*/ (element));
  }
  /** @nodts */
  static $clinit() {

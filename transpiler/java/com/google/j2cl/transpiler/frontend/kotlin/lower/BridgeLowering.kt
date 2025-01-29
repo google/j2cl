@@ -756,7 +756,14 @@ internal class BridgeLowering(val context: JvmBackendContext) : ClassLoweringPas
                     val argument =
                       irGet(param).let { argument ->
                         if (param == bridge.dispatchReceiverParameter) argument
-                        else irCastIfNeeded(argument, targetParam.type.upperBound)
+                        // MODIFIED BY GOOGLE
+                        // Cast to the exact target parameter type to ensure we will generate a
+                        // correct JsDocCast. Casting to the upper bound would be sufficient for JVM
+                        // runtime behavior, but would generate imprecise JsDocCasts.
+                        // Original code:
+                        // else irCastIfNeeded(argument, targetParam.type.upperBound)
+                        else irCastIfNeeded(argument, targetParam.type)
+                        // END OF MODIFICATIONS
                       }
                     putArgument(targetParam, argument)
                   }
