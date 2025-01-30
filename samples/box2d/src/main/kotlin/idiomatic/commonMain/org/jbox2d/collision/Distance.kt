@@ -123,8 +123,7 @@ class Distance {
       proxyB: DistanceProxy,
       transformB: Transform,
     ) {
-      // assert is not supported in KMP.
-      // assert(cache.count <= 3)
+      assert(cache.count <= 3)
 
       // Copy data from cache.
       count = cache.count
@@ -193,8 +192,7 @@ class Distance {
           }
         }
         else -> {
-          // assert is not supported in KMP.
-          // assert(false)
+          assert(false)
           out.setZero()
         }
       }
@@ -208,8 +206,7 @@ class Distance {
     fun getClosestPoint(out: Vec2) {
       when (count) {
         0 -> {
-          // assert is not supported in KMP.
-          // assert(false)
+          assert(false)
           out.setZero()
         }
         1 -> {
@@ -224,8 +221,7 @@ class Distance {
           out.setZero()
         }
         else -> {
-          // assert is not supported in KMP.
-          // assert(false)
+          assert(false)
           out.setZero()
         }
       }
@@ -234,8 +230,7 @@ class Distance {
     fun getWitnessPoints(pA: Vec2, pB: Vec2) {
       when (count) {
         0 -> {
-          // assert is not supported in KMP.
-          // assert(false)
+          assert(false)
         }
         1 -> {
           pA.set(v1.wA)
@@ -257,8 +252,7 @@ class Distance {
           pB.set(pA)
         }
         else -> {
-          // assert is not supported in KMP.
-          // assert(false)
+          assert(false)
         }
       }
     }
@@ -267,8 +261,7 @@ class Distance {
     fun getMetric(): Float {
       when (count) {
         0 -> {
-          // assert is not supported in KMP.
-          // assert(false)
+          assert(false)
           return 0.0f
         }
         1 -> return 0.0f
@@ -280,8 +273,7 @@ class Distance {
           return case3 cross case33
         }
         else -> {
-          // assert is not supported in KMP.
-          // assert(false)
+          assert(false)
           return 0.0f
         }
       }
@@ -484,8 +476,7 @@ class Distance {
         }
         ShapeType.CHAIN -> {
           val chain = shape as ChainShape
-          // assert is not supported in KMP.
-          // assert(0 <= index && index < chain.m_count)
+          assert(0 <= index && index < chain.count)
           buffer[0] = chain.vertices!![index]
           if (index + 1 < chain.count) {
             buffer[1] = chain.vertices!![index + 1]
@@ -589,8 +580,7 @@ class Distance {
         2 -> simplex.solve2()
         3 -> simplex.solve3()
         else -> {
-          // assert is not supported in KMP.
-          // assert(false)
+          assert(false)
         }
       }
 

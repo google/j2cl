@@ -78,21 +78,17 @@ class DynamicTree : BroadPhaseStrategy {
   }
 
   override fun destroyProxy(proxyId: Int) {
-    // assert is not supported in KMP.
-    // assert(0 <= proxyId && proxyId < nodeCapacity)
+    assert(0 <= proxyId && proxyId < nodeCapacity)
     val node = treeNodes[proxyId]
-    // assert is not supported in KMP.
-    // assert(node.isLeaf())
+    assert(node.isLeaf())
     removeLeaf(node)
     freeNode(node)
   }
 
   override fun moveProxy(proxyId: Int, aabb: AABB, displacement: Vec2): Boolean {
-    // assert is not supported in KMP.
-    // assert(0 <= proxyId && proxyId < nodeCapacity)
+    assert(0 <= proxyId && proxyId < nodeCapacity)
     val node = treeNodes[proxyId]
-    // assert is not supported in KMP.
-    // assert(node.isLeaf())
+    assert(node.isLeaf())
     val nodeAABB = node.aabb
     // if (nodeAABB.contains(aabb)) {
     if (
@@ -170,8 +166,7 @@ class DynamicTree : BroadPhaseStrategy {
     var tempy: Float
     r.x = p2x - p1x
     r.y = p2y - p1y
-    // assert is not supported in KMP.
-    // assert(r.x * r.x + r.y * r.y > 0f)
+    assert(r.x * r.x + r.y * r.y > 0f)
     r.normalize()
     val rx: Float = r.x
     val ry: Float = r.y
@@ -257,8 +252,7 @@ class DynamicTree : BroadPhaseStrategy {
   override fun computeHeight(): Int = computeHeight(root!!)
 
   private fun computeHeight(node: DynamicTreeNode): Int {
-    // assert is not supported in KMP.
-    // assert(0 <= node!!.id && node.id < nodeCapacity)
+    assert(0 <= node.id && node.id < nodeCapacity)
     if (node.isLeaf()) {
       return 0
     }
@@ -274,15 +268,13 @@ class DynamicTree : BroadPhaseStrategy {
     var freeCount = 0
     var freeNode = if (freeList != NULL_NODE) treeNodes[freeList] else null
     while (freeNode != null) {
-      // assert is not supported in KMP.
-      // assert(0 <= freeNode.id && freeNode.id < nodeCapacity)
-      // assert(freeNode === treeNodes[freeNode.id])
+      assert(0 <= freeNode.id && freeNode.id < nodeCapacity)
+      assert(freeNode === treeNodes[freeNode.id])
       freeNode = freeNode.parent
       ++freeCount
     }
-    // assert is not supported in KMP.
-    // assert(getHeight() == computeHeight())
-    // assert(nodeCount + freeCount == nodeCapacity)
+    assert(getHeight() == computeHeight())
+    assert(nodeCount + freeCount == nodeCapacity)
   }
 
   override fun getHeight(): Int {
@@ -299,8 +291,7 @@ class DynamicTree : BroadPhaseStrategy {
       if (node.height <= 1) {
         continue
       }
-      // assert is not supported in KMP.
-      // assert(node.isLeaf() == false)
+      assert(!node.isLeaf())
       val child1 = node.child1
       val child2 = node.child2
       val balance = MathUtils.abs(child2!!.height - child1!!.height)
@@ -388,8 +379,7 @@ class DynamicTree : BroadPhaseStrategy {
 
   private fun allocateNode(): DynamicTreeNode {
     if (freeList == NULL_NODE) {
-      // assert is not supported in KMP.
-      // assert(nodeCount == nodeCapacity)
+      assert(nodeCount == nodeCapacity)
       val old = treeNodes
       nodeCapacity *= 2
       treeNodes = Array(nodeCapacity) { DynamicTreeNode(it) }
@@ -416,9 +406,7 @@ class DynamicTree : BroadPhaseStrategy {
 
   /** returns a node to the pool */
   private fun freeNode(node: DynamicTreeNode) {
-    // assert is not supported in KMP.
-    // assert(node != null)
-    // assert(0 < nodeCount)
+    assert(0 < nodeCount)
     node.parent = if (freeList != NULL_NODE) treeNodes[freeList] else null
     node.height = -1
     freeList = node.id
@@ -521,9 +509,8 @@ class DynamicTree : BroadPhaseStrategy {
       index = balance(index)
       val child1 = index.child1
       val child2 = index.child2
-      // assert is not supported in KMP.
-      // assert(child1 != null)
-      // assert(child2 != null)
+      assert(child1 != null)
+      assert(child2 != null)
       index.height = 1 + MathUtils.max(child1!!.height, child2!!.height)
       index.aabb.combine(child1.aabb, child2.aabb)
       index = index.parent
@@ -577,16 +564,13 @@ class DynamicTree : BroadPhaseStrategy {
   // Perform a left or right rotation if node A is imbalanced.
   // Returns the new root index.
   private fun balance(iA: DynamicTreeNode): DynamicTreeNode {
-    // assert is not supported in KMP.
-    // assert(iA != null)
     if (iA.isLeaf() || iA.height < 2) {
       return iA
     }
     val iB = iA.child1
     val iC = iA.child2
-    // assert is not supported in KMP.
-    // assert(0 <= iB!!.id && iB.id < nodeCapacity)
-    // assert(0 <= iC!!.id && iC.id < nodeCapacity)
+    assert(0 <= iB!!.id && iB.id < nodeCapacity)
+    assert(0 <= iC!!.id && iC.id < nodeCapacity)
     val balance = iC!!.height - iB!!.height
 
     // Rotate C up
@@ -594,11 +578,10 @@ class DynamicTree : BroadPhaseStrategy {
       val iF = iC.child1
       val iG = iC.child2
 
-      // assert is not supported in KMP.
-      // assert(iF != null)
-      // assert(iG != null)
-      // assert(0 <= iF!!.id && iF.id < nodeCapacity)
-      // assert(0 <= iG!!.id && iG.id < nodeCapacity)
+      assert(iF != null)
+      assert(iG != null)
+      assert(0 <= iF!!.id && iF.id < nodeCapacity)
+      assert(0 <= iG!!.id && iG.id < nodeCapacity)
 
       // Swap A and C
       iC.child1 = iA
@@ -610,8 +593,7 @@ class DynamicTree : BroadPhaseStrategy {
         if (iC.parent!!.child1 === iA) {
           iC.parent!!.child1 = iC
         } else {
-          // assert is not supported in KMP.
-          // assert(iC.parent!!.child2 === iA)
+          assert(iC.parent!!.child2 === iA)
           iC.parent!!.child2 = iC
         }
       } else {
@@ -643,9 +625,8 @@ class DynamicTree : BroadPhaseStrategy {
     if (balance < -1) {
       val iD = iB.child1
       val iE = iB.child2
-      // assert is not supported in KMP.
-      // assert(0 <= iD!!.id && iD.id < nodeCapacity)
-      // assert(0 <= iE!!.id && iE.id < nodeCapacity)
+      assert(0 <= iD!!.id && iD.id < nodeCapacity)
+      assert(0 <= iE!!.id && iE.id < nodeCapacity)
 
       // Swap A and B
       iB.child1 = iA
@@ -658,8 +639,7 @@ class DynamicTree : BroadPhaseStrategy {
           if (it.child1 === iA) {
             it.child1 = iB
           } else {
-            // assert is not supported in KMP.
-            // assert(iB.parent!!.child2 === iA)
+            assert(iB.parent!!.child2 === iA)
             it.child2 = iB
           }
         }
@@ -694,26 +674,23 @@ class DynamicTree : BroadPhaseStrategy {
     if (node == null) {
       return
     }
-    // assert is not supported in KMP.
-    // assert(node === treeNodes[node.id])
+    assert(node === treeNodes[node.id])
     // if (node === root) {
     //  assert(node.parent == null)
     // }
     val child1 = node.child1
     val child2 = node.child2
     if (node.isLeaf()) {
-      // assert is not supported in KMP.
-      // assert(child1 == null)
-      // assert(child2 == null)
-      // assert(node.height == 0)
+      assert(child1 == null)
+      assert(child2 == null)
+      assert(node.height == 0)
       return
     }
 
-    // assert is not supported in KMP.
-    // assert(child1 != null && 0 <= child1.id && child1.id < nodeCapacity)
-    // assert(child2 != null && 0 <= child2.id && child2.id < nodeCapacity)
-    // assert(child1!!.parent === node)
-    // assert(child2!!.parent === node)
+    assert(child1 != null && 0 <= child1.id && child1.id < nodeCapacity)
+    assert(child2 != null && 0 <= child2.id && child2.id < nodeCapacity)
+    assert(child1!!.parent === node)
+    assert(child2!!.parent === node)
     validateStructure(child1)
     validateStructure(child2)
   }
@@ -725,25 +702,21 @@ class DynamicTree : BroadPhaseStrategy {
     val child1 = node.child1
     val child2 = node.child2
     if (node.isLeaf()) {
-      // assert is not supported in KMP.
-      // assert(child1 == null)
-      // assert(child2 == null)
-      // assert(node.height == 0)
+      assert(child1 == null)
+      assert(child2 == null)
+      assert(node.height == 0)
       return
     }
-    // assert is not supported in KMP.
-    // assert(child1 != null && 0 <= child1.id && child1.id < nodeCapacity)
-    // assert(child2 != null && 0 <= child2.id && child2.id < nodeCapacity)
+    assert(child1 != null && 0 <= child1.id && child1.id < nodeCapacity)
+    assert(child2 != null && 0 <= child2.id && child2.id < nodeCapacity)
     val height1 = child1!!.height
     val height2 = child2!!.height
-    @Suppress("UNUSED_VARIABLE") val height: Int = 1 + MathUtils.max(height1, height2)
-    // assert is not supported in KMP.
-    // assert(node.height == height)
+    val height: Int = 1 + MathUtils.max(height1, height2)
+    assert(node.height == height)
     val aabb = AABB()
     aabb.combine(child1.aabb, child2.aabb)
-    // assert is not supported in KMP.
-    // assert(aabb.lowerBound == node.aabb.lowerBound)
-    // assert(aabb.upperBound == node.aabb.upperBound)
+    assert(aabb.lowerBound == node.aabb.lowerBound)
+    assert(aabb.upperBound == node.aabb.upperBound)
     validateMetrics(child1)
     validateMetrics(child2)
   }
@@ -765,7 +738,7 @@ class DynamicTree : BroadPhaseStrategy {
       textVec.x,
       textVec.y,
       node.id.toString() + "-" + (spot + 1) + "/" + height,
-      color
+      color,
     )
     if (node.child1 != null) {
       drawTree(argDraw, node.child1!!, spot + 1, height)
