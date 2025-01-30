@@ -62,7 +62,6 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsOptional
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsType
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isNativeJsField
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isUncheckedCast
-import com.google.j2cl.transpiler.frontend.kotlin.ir.j2clIsAnnotation
 import com.google.j2cl.transpiler.frontend.kotlin.ir.j2clKind
 import com.google.j2cl.transpiler.frontend.kotlin.ir.j2clVisibility
 import com.google.j2cl.transpiler.frontend.kotlin.ir.javaName
@@ -109,6 +108,7 @@ import org.jetbrains.kotlin.ir.util.defaultType
 import org.jetbrains.kotlin.ir.util.dump
 import org.jetbrains.kotlin.ir.util.file
 import org.jetbrains.kotlin.ir.util.hasAnnotation
+import org.jetbrains.kotlin.ir.util.isAnnotationClass
 import org.jetbrains.kotlin.ir.util.isAnonymousObject
 import org.jetbrains.kotlin.ir.util.isFakeOverride
 import org.jetbrains.kotlin.ir.util.isFromJava
@@ -203,7 +203,7 @@ class KotlinEnvironment(
       TypeDeclaration.newBuilder()
         .setClassComponents(irClass.getClassComponents())
         .setKind(irClass.j2clKind)
-        .setAnnotation(irClass.j2clIsAnnotation)
+        .setAnnotation(irClass.isAnnotationClass)
         .setSourceLanguage(if (irClass.isFromJava()) JAVA else KOTLIN)
         .setOriginalSimpleSourceName(irClass.simpleSourceName)
         .setPackage(createPackageDeclaration(irClass.packageFqName!!.asString()))

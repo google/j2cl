@@ -149,9 +149,6 @@ val IrClass.j2clKind: Kind
       ClassKind.ENUM_CLASS -> Kind.ENUM
     }
 
-val IrClass.j2clIsAnnotation: Boolean
-  get() = kind == ClassKind.ANNOTATION_CLASS
-
 val IrDeclarationWithVisibility.j2clVisibility: Visibility
   get() =
     when (visibility.delegate) {
