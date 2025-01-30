@@ -98,6 +98,7 @@ def j2kt_generate_unit_test(name, test_class, deps, platform = "J2KT-JVM", tags 
                 "//build_defs/internal_do_not_use:internal_junit_runtime-j2kt-native",
             ],
             tags = tags,
+            gen_by_xplat = True,
         )
 
 def _extract_kotlin_srcjar(ctx):
