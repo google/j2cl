@@ -37,7 +37,6 @@ import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.Invocation
 import com.google.j2cl.transpiler.ast.JsDocCastExpression
 import com.google.j2cl.transpiler.ast.JsDocExpression
-import com.google.j2cl.transpiler.ast.KtInfo.computePropertyName
 import com.google.j2cl.transpiler.ast.Literal
 import com.google.j2cl.transpiler.ast.MemberReference
 import com.google.j2cl.transpiler.ast.MethodCall
@@ -407,10 +406,12 @@ internal data class ExpressionRenderer(
     typeBindings: List<TypeBinding>,
     omitNonDenotable: Boolean = true,
   ): Source =
-    typeBindings
-      .takeIf { it.isNotEmpty() && (it.all(TypeBinding::isDenotable) || !omitNonDenotable) }
-      ?.let { nameRenderer.typeBindingsSource(it) }
-      .orEmpty()
+    Source.emptyIf(typeBindings.isEmpty()) {
+      val includeTypeBindings = typeBindings.all(TypeBinding::isDenotable) || !omitNonDenotable
+      nameRenderer
+        .typeBindingsSource(typeBindings, rendersCaptures = !includeTypeBindings)
+        .letIf(!includeTypeBindings, ::blockComment)
+    }
 
   internal fun invocationSource(invocation: Invocation) =
     inParentheses(argumentsSource(invocation.arguments))

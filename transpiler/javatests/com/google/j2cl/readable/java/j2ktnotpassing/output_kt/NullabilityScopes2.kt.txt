@@ -22,6 +22,7 @@ import javaemul.lang.*
 import java.lang.RuntimeException
 import java.util.function.Function
 import java.util.stream.Collector
+import java.util.stream.Stream
 import kotlin.Any
 import kotlin.OptIn
 import kotlin.Suppress
@@ -57,11 +58,11 @@ open class NullabilityScopes2 internal constructor() {
    @ObjCName("withJ2ktnotpassingNullabilityScopes2_NullMarkedScope_Recursive") recursive: NullabilityScopes2.NullMarkedScope.Recursive<T>?
   ): MutableList<Any?>? {
    return recursive!!.toList().stream().map<MutableList<Any>>(
-    Function { arg0: NullabilityScopes2.NullMarkedScope.Recursive<T> ->
+    Function/* <in NullabilityScopes2.NullMarkedScope.Recursive<T>?, out MutableList<Any?>?> */ { arg0: NullabilityScopes2.NullMarkedScope.Recursive<T> ->
      return@Function this.flatten(arg0)
     },
    ).flatMap<Any>(
-    Function { arg0_1: MutableList<Any> ->
+    Function/* <in MutableList<Any?>?, out Stream<*>?> */ { arg0_1: MutableList<Any> ->
      return@Function arg0_1.stream()
     },
    ).collect<MutableList<Any>, Any>(

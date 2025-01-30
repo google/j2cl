@@ -36,7 +36,7 @@ open class TypeWildCards {
    @ObjCName("withJ2ktnotpassingTypeWildCards_Observable") observable: T
   ) {
    (observable as TypeWildCards.Observable<Any?>?)!!.addObserver(
-    TypeWildCards.Observer { e /* capture#1-of * */ ->
+    TypeWildCards.Observer/* <*> */ { e /* capture#1-of * */ ->
     },
    )
   }
@@ -47,7 +47,7 @@ open class TypeWildCards {
    @ObjCName("withJ2ktnotpassingTypeWildCards_RecursiveObservable") observable: TypeWildCards.RecursiveObservable<*>?
   ) {
    (observable as TypeWildCards.RecursiveObservable<TypeWildCards.RecursiveObservable<E>?>?)!!.addObserver(
-    TypeWildCards.Observer { e /* capture#2-of out TypeWildCards.RecursiveObservable<*>? */ ->
+    TypeWildCards.Observer/* <capture#2-of out TypeWildCards.RecursiveObservable<*>?> */ { e /* capture#2-of out TypeWildCards.RecursiveObservable<*>? */ ->
     },
    )
   }

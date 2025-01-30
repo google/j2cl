@@ -35,7 +35,7 @@ open class UnboundWildcards {
   fun testNullable(
    @ObjCName("withJ2ktUnboundWildcards_Foo") foo: UnboundWildcards.Foo<*>
   ) {
-   UnboundWildcards.acceptNullable(foo)
+   UnboundWildcards.acceptNullable/* <*> */(foo)
   }
 
   @JvmStatic
@@ -43,8 +43,8 @@ open class UnboundWildcards {
   fun testNonNull(
    @ObjCName("withJ2ktUnboundWildcards_Foo") foo: UnboundWildcards.Foo<out Any>
   ) {
-   UnboundWildcards.acceptNonNull(foo)
-   UnboundWildcards.acceptNullable(foo)
+   UnboundWildcards.acceptNonNull/* <*> */(foo)
+   UnboundWildcards.acceptNullable/* <capture#1-of out Any> */(foo)
   }
 
   @JvmStatic

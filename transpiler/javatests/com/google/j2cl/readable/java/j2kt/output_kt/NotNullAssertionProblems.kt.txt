@@ -229,7 +229,7 @@ open class NotNullAssertionProblems {
    @ObjCName("withNSString") string: String,
    @ObjCName("withJ2ktNotNullAssertionProblems_Supplier") wildcardSupplier: NotNullAssertionProblems.Supplier<*>
   ) {
-   NotNullAssertionProblems.accept1(
+   NotNullAssertionProblems.accept1/* <capture#1-of out Any> */(
     wildcardSupplier.getValue(),
    )
    NotNullAssertionProblems.accept2<Any?>(
@@ -248,7 +248,7 @@ open class NotNullAssertionProblems {
    @ObjCName("withNSString") string: String,
    @ObjCName("withJ2ktNotNullAssertionProblems_Supplier") wildcardSupplier: NotNullAssertionProblems.Supplier<*>
   ) {
-   NotNullAssertionProblems.Consumer(
+   NotNullAssertionProblems.Consumer/* <capture#2-of out Any> */(
     wildcardSupplier.getValue(),
    )
    NotNullAssertionProblems.Consumer<Any?>(

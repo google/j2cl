@@ -67,8 +67,11 @@ internal fun NameRenderer.typeDescriptorSource(
     .source(typeDescriptor.withImplicitNullability)
 
 /** Returns source for the given list of type bindings. */
-internal fun NameRenderer.typeBindingsSource(typeBindings: List<TypeBinding>): Source =
-  TypeDescriptorRenderer(this).typeBindingsSource(typeBindings)
+internal fun NameRenderer.typeBindingsSource(
+  typeBindings: List<TypeBinding>,
+  rendersCaptures: Boolean = false,
+): Source =
+  TypeDescriptorRenderer(this, rendersCaptures = rendersCaptures).typeBindingsSource(typeBindings)
 
 /**
  * Type descriptor renderer, contains options for rendering type descriptor sources.

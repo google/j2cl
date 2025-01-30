@@ -214,7 +214,7 @@ open class Lambdas {
     return@BiFunction java.lang.Double.valueOf(3.0)
    },
   )
-  val f: Lambdas.Function<in T, *>? = Lambdas.Function { item: T ->
+  val f: Lambdas.Function<in T, *>? = Lambdas.Function/* <in T, *> */ { item: T ->
    return@Function Long.valueOf(1L)
   }
   val f2: Lambdas.Function<Lambdas.Wrapper<String?>?, String?>? = Lambdas.Function<Lambdas.Wrapper<String?>?, String?> { item_1: Lambdas.Wrapper<String?>? ->
@@ -283,7 +283,7 @@ open class Lambdas {
   @JvmStatic
   @ObjCName("testLambdaCallingStaticMethod")
   fun testLambdaCallingStaticMethod() {
-   val f: Lambdas.Function<Any?, *>? = Lambdas.Function { l: Any? ->
+   val f: Lambdas.Function<Any?, *>? = Lambdas.Function/* <Any?, *> */ { l: Any? ->
     return@Function Lambdas.m()
    }
   }

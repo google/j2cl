@@ -476,7 +476,7 @@ open class Collections {
 
   override fun addAll(c: Collection<T>): Boolean {
    var c_1: MutableCollection<out T> = c as MutableCollection<out T>
-   c_1 = Collections.convertCollection(c_1)
+   c_1 = Collections.convertCollection/* <capture#1-of out T> */(c_1)
    return super<AbstractCollection>.addAll(
     c_1 as Collection<T>,
    )
@@ -484,7 +484,7 @@ open class Collections {
 
   override fun containsAll(c: Collection<T>): Boolean {
    var c_1: MutableCollection<*> = c as MutableCollection<*>
-   c_1 = Collections.convertCollection(c_1)
+   c_1 = Collections.convertCollection/* <capture#2-of out Any> */(c_1)
    return super<AbstractCollection>.containsAll(
     c_1 as Collection<T>,
    )
@@ -492,7 +492,7 @@ open class Collections {
 
   override fun removeAll(c: Collection<T>): Boolean {
    var c_1: MutableCollection<*> = c as MutableCollection<*>
-   c_1 = Collections.convertCollection(c_1)
+   c_1 = Collections.convertCollection/* <capture#3-of out Any> */(c_1)
    return super<AbstractCollection>.removeAll(
     c_1 as Collection<T>,
    )
@@ -500,7 +500,7 @@ open class Collections {
 
   override fun retainAll(c: Collection<T>): Boolean {
    var c_1: MutableCollection<*> = c as MutableCollection<*>
-   c_1 = Collections.convertCollection(c_1)
+   c_1 = Collections.convertCollection/* <capture#4-of out Any> */(c_1)
    return super<AbstractCollection>.retainAll(
     c_1 as Collection<T>,
    )
@@ -535,7 +535,7 @@ open class Collections {
 
   override fun addAll(index: Int, c: Collection<T>): Boolean {
    var c_1: MutableCollection<out T> = c as MutableCollection<out T>
-   c_1 = Collections.convertCollection(c_1)
+   c_1 = Collections.convertCollection/* <capture#5-of out T> */(c_1)
    return super<AbstractList>.addAll(
     index,
     c_1 as Collection<T>,
@@ -629,7 +629,7 @@ open class Collections {
 
   override fun putAll(m: Map<out K, V>) {
    var m_1: MutableMap<out K, out V> = m as MutableMap<out K, out V>
-   m_1 = Collections.convertMap(m_1)
+   m_1 = Collections.convertMap/* <capture#6-of out K, capture#7-of out V> */(m_1)
    super<AbstractMap>.putAll(
     m_1 as Map<out K, V>,
    )
