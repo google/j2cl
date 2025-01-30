@@ -20,7 +20,6 @@ package com.google.j2cl.transpiler.frontend.kotlin.lower
 import com.google.j2cl.transpiler.frontend.kotlin.ir.IntrinsicMethods
 import com.google.j2cl.transpiler.frontend.kotlin.ir.IrProviderFromPublicSignature
 import com.google.j2cl.transpiler.frontend.kotlin.ir.JvmIrDeserializerImpl
-import com.google.j2cl.transpiler.frontend.kotlin.ir.fromQualifiedBinaryName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.populate
 import org.jetbrains.kotlin.backend.common.CompilationException
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
@@ -54,10 +53,6 @@ import org.jetbrains.kotlin.ir.backend.js.lower.inline.RemoveInlineDeclarationsW
 import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.util.SymbolTable
-import org.jetbrains.kotlin.name.CallableId
-import org.jetbrains.kotlin.name.ClassId
-import org.jetbrains.kotlin.name.FqName
-import org.jetbrains.kotlin.name.StandardClassIds
 
 /** The list of lowering passes to run in execution order. */
 private val loweringPassFactories: List<J2clLoweringPassFactory> = buildList {
