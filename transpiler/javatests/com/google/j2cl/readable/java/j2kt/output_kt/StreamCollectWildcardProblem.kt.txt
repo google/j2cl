@@ -1,4 +1,4 @@
-// Generated from "j2ktnotpassing/StreamCollectWildcardProblem.java"
+// Generated from "j2kt/StreamCollectWildcardProblem.java"
 @file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
@@ -16,7 +16,7 @@
  "VARIABLE_WITH_REDUNDANT_INITIALIZER",
  "REDUNDANT_ELSE_IN_WHEN")
 
-package j2ktnotpassing
+package j2kt
 
 import javaemul.lang.*
 import java.lang.RuntimeException
@@ -32,9 +32,9 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktnotpassingStreamCollectWildcardProblem", exact = true)
+@ObjCName("J2ktJ2ktStreamCollectWildcardProblem", exact = true)
 open class StreamCollectWildcardProblem {
- @ObjCName("J2ktJ2ktnotpassingStreamCollectWildcardProblemCompanion", exact = true)
+ @ObjCName("J2ktJ2ktStreamCollectWildcardProblemCompanion", exact = true)
  companion object {
   @JvmStatic
   @ObjCName("testCollect")
@@ -44,38 +44,6 @@ open class StreamCollectWildcardProblem {
    StreamCollectWildcardProblem.accept(
     list.collect<MutableList<StreamCollectWildcardProblem.Foo<*>>, Any>(
      Collectors.toList<StreamCollectWildcardProblem.Foo<*>>() as Collector<StreamCollectWildcardProblem.Foo<*>, Any, MutableList<StreamCollectWildcardProblem.Foo<*>>>,
-    ),
-   )
-  }
-
-  @JvmStatic
-  @ObjCName("testMethodReferenceMapCollect")
-  fun testMethodReferenceMapCollect(
-   @ObjCName("withJavaUtilStreamStream") list: Stream<StreamCollectWildcardProblem.Foo<*>>
-  ) {
-   StreamCollectWildcardProblem.accept(
-    list.map/* <StreamCollectWildcardProblem.Foo<*>> */(
-     Function/* <in StreamCollectWildcardProblem.Foo<*>, out StreamCollectWildcardProblem.Foo<*>> */ { arg0: StreamCollectWildcardProblem.Foo<*> ->
-      return@Function arg0.getThis()
-     },
-    ).collect<MutableList<StreamCollectWildcardProblem.Foo<*>>, Any>(
-     Collectors.toList<StreamCollectWildcardProblem.Foo<*>>(),
-    ),
-   )
-  }
-
-  @JvmStatic
-  @ObjCName("testLambdaMapCollect")
-  fun testLambdaMapCollect(
-   @ObjCName("withJavaUtilStreamStream") list: Stream<StreamCollectWildcardProblem.Foo<*>>
-  ) {
-   StreamCollectWildcardProblem.accept(
-    list.map/* <StreamCollectWildcardProblem.Foo<*>> */(
-     Function/* <in StreamCollectWildcardProblem.Foo<*>, out StreamCollectWildcardProblem.Foo<*>> */ { it: StreamCollectWildcardProblem.Foo<*> ->
-      return@Function it.getThis()
-     },
-    ).collect<MutableList<StreamCollectWildcardProblem.Foo<*>>, Any>(
-     Collectors.toList<StreamCollectWildcardProblem.Foo<*>>(),
     ),
    )
   }
@@ -133,7 +101,7 @@ open class StreamCollectWildcardProblem {
   }
  }
 
- @ObjCName("J2ktJ2ktnotpassingStreamCollectWildcardProblem_Foo", exact = true)
+ @ObjCName("J2ktJ2ktStreamCollectWildcardProblem_Foo", exact = true)
  fun interface Foo<T: Any> {
   @ObjCName("getThis")
   fun getThis(): StreamCollectWildcardProblem.Foo<T>

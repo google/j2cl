@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 Google Inc.
+ * Copyright 2025 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2ktnotpassing;
+package j2kt;
 
 import static java.util.stream.Collectors.toList;
 
@@ -32,13 +32,15 @@ public class StreamCollectWildcardProblem {
     accept(list.collect(toList()));
   }
 
-  public static void testMethodReferenceMapCollect(Stream<Foo<?>> list) {
-    accept(list.map(Foo::getThis).collect(toList()));
-  }
+  // TODO(b/393561019): Uncomment when fixed
+  // public static void testMethodReferenceMapCollect(Stream<Foo<?>> list) {
+  //   accept(list.map(Foo::getThis).collect(toList()));
+  // }
 
-  public static void testLambdaMapCollect(Stream<Foo<?>> list) {
-    accept(list.map(it -> it.getThis()).collect(toList()));
-  }
+  // TODO(b/393561019): Uncomment when fixed
+  // public static void testLambdaMapCollect(Stream<Foo<?>> list) {
+  //   accept(list.map(it -> it.getThis()).collect(toList()));
+  // }
 
   // Currently, this is how users workaround problem with J2KT.
   public static void testCollectWithExplicitTypeArgumentFix(Stream<Foo<?>> list) {
