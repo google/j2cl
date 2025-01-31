@@ -28,7 +28,7 @@ public final class Class<T> implements Type, Serializable {
   // TODO(b/183548819): Unify this with the closure version so that it does not need supersourcing.
 
   private static final boolean SIMPLE_METADATA =
-      "SIMPLE".equals(System.getProperty("jre.classMetadata"));
+      System.getProperty("jre.classMetadata") == "SIMPLE";
 
   private String nameOrNull;
   private final String primitiveShortName;

@@ -20,8 +20,7 @@ import jsinterop.annotations.JsPackage;
 
 final class RealToString {
 
-  private static final boolean JAVA_TOSTRING =
-      getProperty("jre.strictFpToString").equals("ENABLED");
+  private static final boolean JAVA_TOSTRING = getProperty("jre.strictFpToString") == "ENABLED";
 
   private RealToString() {}
 
