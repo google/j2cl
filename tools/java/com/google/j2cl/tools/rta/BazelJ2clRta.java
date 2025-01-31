@@ -24,10 +24,13 @@ import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.bazel.BazelWorker;
 import com.google.j2cl.common.bazel.FileCache;
 import com.google.j2cl.transpiler.backend.libraryinfo.LibraryInfo;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.List;
@@ -78,7 +81,8 @@ final class BazelJ2clRta extends BazelWorker {
   }
 
   private static LibraryInfo readLibraryInfo(Path libraryInfoPath) throws IOException {
-    try (InputStream inputStream = java.nio.file.Files.newInputStream(libraryInfoPath)) {
+    try (InputStream inputStream =
+        new BufferedInputStream(java.nio.file.Files.newInputStream(libraryInfoPath))) {
       return LibraryInfo.parseFrom(inputStream);
     }
   }
@@ -93,7 +97,7 @@ final class BazelJ2clRta extends BazelWorker {
   }
 
   private static void writeToFile(String filePath, CodeRemovalInfo results, Problems problems) {
-    try (FileOutputStream outputStream = new FileOutputStream(filePath)) {
+    try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(filePath))) {
       results.writeTo(outputStream);
     } catch (IOException e) {
       problems.fatal(FatalError.CANNOT_WRITE_FILE, e.toString());

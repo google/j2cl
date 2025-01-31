@@ -60,6 +60,7 @@ import com.google.j2cl.transpiler.backend.wasm.WasmGeneratorStage;
 import com.google.j2cl.transpiler.frontend.jdt.JdtEnvironment;
 import com.google.j2cl.transpiler.frontend.jdt.JdtParser;
 import com.google.j2cl.transpiler.passes.RewriteReferenceEqualityOperations;
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -579,7 +580,8 @@ final class BazelJ2wasmBundler extends BazelWorker {
   }
 
   private static Summary readSummary(Path summaryPath) throws IOException {
-    try (InputStream inputStream = java.nio.file.Files.newInputStream(summaryPath)) {
+    try (InputStream inputStream =
+        new BufferedInputStream(java.nio.file.Files.newInputStream(summaryPath))) {
       return Summary.parseFrom(inputStream);
     }
   }

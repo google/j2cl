@@ -25,6 +25,7 @@ import com.google.common.collect.Multiset;
 import com.google.j2cl.tools.rta.CodeRemovalInfo;
 import com.google.j2cl.tools.rta.LineRange;
 import com.google.j2cl.tools.rta.UnusedLines;
+import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -632,7 +633,8 @@ public class J2clMinifier {
       return null;
     }
 
-    try (InputStream inputStream = new FileInputStream(codeRemovalInfoFilePath)) {
+    try (InputStream inputStream =
+        new BufferedInputStream(new FileInputStream(codeRemovalInfoFilePath))) {
       return CodeRemovalInfo.parseFrom(inputStream);
     } catch (IOException e) {
       throw new RuntimeException(e);
