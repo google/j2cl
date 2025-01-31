@@ -97,16 +97,6 @@ public class JdtParser {
     return Library.newBuilder().setCompilationUnits(compilationUnits.build()).build();
   }
 
-  public Collection<CompilationUnit> parseFiles(
-      List<FileInfo> filePaths, List<String> classpathEntries) {
-    if (filePaths.isEmpty()) {
-      return ImmutableList.of();
-    }
-    return parseFiles(filePaths, classpathEntries, false, ImmutableList.of(), ImmutableList.of())
-        .getCompilationUnitsByFilePath()
-        .values();
-  }
-
   /** Returns a map from file paths to compilation units after JDT parsing. */
   private CompilationUnitsAndTypeBindings parseFiles(
       List<FileInfo> filePaths,

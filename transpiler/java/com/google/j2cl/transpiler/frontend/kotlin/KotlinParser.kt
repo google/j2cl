@@ -23,7 +23,6 @@ import com.google.j2cl.transpiler.ast.CompilationUnit
 import com.google.j2cl.transpiler.ast.Library
 import com.google.j2cl.transpiler.frontend.common.FrontendOptions
 import com.google.j2cl.transpiler.frontend.common.PackageInfoCache
-import com.google.j2cl.transpiler.frontend.jdt.JdtParser
 import com.google.j2cl.transpiler.frontend.jdt.PackageAnnotationsResolver
 import com.google.j2cl.transpiler.frontend.kotlin.ir.IntrinsicMethods
 import com.google.j2cl.transpiler.frontend.kotlin.ir.JvmIrDeserializerImpl
@@ -216,12 +215,7 @@ class KotlinParser(private val problems: Problems) {
     val packageInfoSources: List<FileInfo> =
       options.sources.filter { it.originalPath().endsWith("package-info.java") }
 
-    return PackageAnnotationsResolver.create(
-      packageInfoSources,
-      JdtParser(problems),
-      options.directDeps,
-      packageInfoCache,
-    )
+    return PackageAnnotationsResolver.create(packageInfoSources, packageInfoCache, problems)
   }
 
   interface CompilationUnitBuilderExtension {

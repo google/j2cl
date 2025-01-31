@@ -19,10 +19,18 @@ import static com.google.common.base.Preconditions.checkState;
 import static com.google.j2cl.transpiler.frontend.jdt.JsInteropAnnotationUtils.getJsNamespace;
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtObjectiveCName;
 
+import com.google.j2cl.common.Problems;
+import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.transpiler.frontend.common.PackageInfoCache;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
+import javax.annotation.Nullable;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 
 /** A utility class to resolve and cache package annotations. */
@@ -38,11 +46,10 @@ public final class PackageAnnotationsResolver {
 
   /** Create a PackageAnnotationResolver with package infos in sources. */
   public static PackageAnnotationsResolver create(
-      List<FileInfo> sources,
-      JdtParser parser,
-      List<String> classpathEntries,
-      PackageInfoCache packageInfoCache) {
-    return create(parsePackageInfoFiles(sources, parser, classpathEntries), packageInfoCache);
+      List<FileInfo> sources, PackageInfoCache packageInfoCache, Problems problems) {
+    var packageAnnotationResolver = new PackageAnnotationsResolver(packageInfoCache);
+    packageAnnotationResolver.populateFromSources(sources, problems);
+    return packageAnnotationResolver;
   }
 
   private final PackageInfoCache packageInfoCache;
@@ -57,12 +64,6 @@ public final class PackageAnnotationsResolver {
 
   public boolean isNullMarked(String packageName) {
     return packageInfoCache.isNullMarked(packageName);
-  }
-
-  /** Parse package-info files from sources. */
-  private static Stream<CompilationUnit> parsePackageInfoFiles(
-      List<FileInfo> sources, JdtParser parser, List<String> classpathEntries) {
-    return parser.parseFiles(sources, classpathEntries).stream();
   }
 
   /** Populates the cache for the annotations in package-info compilation units. */
@@ -83,6 +84,58 @@ public final class PackageAnnotationsResolver {
                 JdtAnnotationUtils.isNullMarked(packageDeclaration));
           }
         });
+  }
+
+  /** Populates the cache for the annotations in package-info compilation units. */
+  private void populateFromSources(List<FileInfo> packageInfoFiles, Problems problems) {
+    for (var packageInfoFile : packageInfoFiles) {
+      var content = readSource(packageInfoFile, problems);
+      var jsNamespace = extractJsNamespace(content);
+      if (jsNamespace != null) {
+        var packageName = extractPackageName(content);
+        packageInfoCache.setPackageProperties(packageName, jsNamespace, null, false);
+      }
+    }
+  }
+
+  @Nullable
+  private static String readSource(FileInfo file, Problems problems) {
+    try {
+      return Files.readString(Path.of(file.sourcePath()));
+    } catch (IOException e) {
+      problems.fatal(FatalError.CANNOT_OPEN_FILE, e.toString());
+      return null;
+    }
+  }
+
+  private static final Pattern JS_PACKAGE_NAMESPACE_PATTERN =
+      Pattern.compile(
+          "^\\s*@((?:jsinterop\\.annotations\\.)?JsPackage)\\s*\\(\\s*namespace\\s*=\\s*\"([^\"]*)\"\\s*\\)",
+          Pattern.MULTILINE);
+
+  @Nullable
+  private static String extractJsNamespace(String content) {
+    Matcher matcher = JS_PACKAGE_NAMESPACE_PATTERN.matcher(content);
+    if (!matcher.find()) {
+      return null;
+    }
+    // If short name is used, make sure that it is properly imported.
+    // Note that there could be also wildcard import but that's against to the style guide.
+    if (matcher.group(1).equals("JsPackage")
+        && !content.contains("import jsinterop.annotations.JsPackage;")) {
+      return null;
+    }
+
+    return matcher.group(2);
+  }
+
+  private static final Pattern PACKAGE_PATTERN =
+      Pattern.compile("^package ([\\w.]+);", Pattern.MULTILINE);
+
+  private static String extractPackageName(String content) {
+    Matcher matcher = PACKAGE_PATTERN.matcher(content);
+    checkState(matcher.find());
+    return matcher.group(1);
   }
 
   private PackageAnnotationsResolver(PackageInfoCache packageInfoCache) {
