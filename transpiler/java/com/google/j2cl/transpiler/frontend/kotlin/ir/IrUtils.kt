@@ -91,6 +91,7 @@ import org.jetbrains.kotlin.ir.types.isArray
 import org.jetbrains.kotlin.ir.types.isClassType
 import org.jetbrains.kotlin.ir.types.isNullableArray
 import org.jetbrains.kotlin.ir.types.isUnit
+import org.jetbrains.kotlin.ir.util.allOverridden
 import org.jetbrains.kotlin.ir.util.allTypeParameters
 import org.jetbrains.kotlin.ir.util.deepCopyWithSymbols
 import org.jetbrains.kotlin.ir.util.dump
@@ -122,6 +123,7 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.name.NameUtils
 import org.jetbrains.kotlin.types.Variance
 import org.jetbrains.kotlin.utils.addIfNotNull
+import org.jetbrains.org.objectweb.asm.commons.Method
 
 /** Returns the actual function expression from inside a nested type operator. */
 fun IrTypeOperatorCall.unfoldExpression(): IrExpression =
@@ -656,3 +658,37 @@ private val IrFunction.isDefaultPropertyAccessor: Boolean
   get() =
     origin == IrDeclarationOrigin.DEFAULT_PROPERTY_ACCESSOR &&
       (this is IrSimpleFunction && correspondingPropertySymbol != null)
+
+/**
+ * Computes the signatures of any bridge methods that are overridden by this function.
+ *
+ * Only overrides coming from Kotlin will be considered as only Kotlin supertypes will be injecting
+ * the bridges. While Java can override the specialized methods, that will only occur if it extends
+ * from a Kotlin class that already added the bridge.
+ *
+ * See: org.jetbrains.kotlin.backend.jvm.lower.BridgeLowering.kt
+ */
+fun overriddenSpecialBridgeSignatures(
+  context: JvmBackendContext,
+  function: IrSimpleFunction,
+): List<Method> =
+  function.allOverridden().flatMapTo(arrayListOf()) { computeSpecialBridgeSignatures(context, it) }
+
+private fun computeSpecialBridgeSignatures(
+  context: JvmBackendContext,
+  function: IrSimpleFunction,
+): List<Method> {
+  if (function.parentAsClass.isInterface || function.isFromJava()) return emptyList()
+  val signature = context.bridgeLoweringCache.computeJvmMethod(function)
+  val specialBridge =
+    context.bridgeLoweringCache.computeSpecialBridge(function) ?: return emptyList()
+  return buildList {
+    if (specialBridge.signature != signature) {
+      add(specialBridge.signature)
+    }
+    val unsubstitutedSpecialBridge = specialBridge.unsubstitutedSpecialBridge
+    if (unsubstitutedSpecialBridge != null && unsubstitutedSpecialBridge.signature != signature) {
+      add(unsubstitutedSpecialBridge.signature)
+    }
+  }
+}

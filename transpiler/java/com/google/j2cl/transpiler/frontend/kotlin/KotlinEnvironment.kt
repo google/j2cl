@@ -66,12 +66,17 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.j2clKind
 import com.google.j2cl.transpiler.frontend.kotlin.ir.j2clVisibility
 import com.google.j2cl.transpiler.frontend.kotlin.ir.javaName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.methods
+import com.google.j2cl.transpiler.frontend.kotlin.ir.overriddenSpecialBridgeSignatures
 import com.google.j2cl.transpiler.frontend.kotlin.ir.simpleSourceName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.singleAbstractMethod
 import com.google.j2cl.transpiler.frontend.kotlin.ir.typeSubstitutionMap
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
+import org.jetbrains.kotlin.backend.jvm.SpecialBridge
+import org.jetbrains.kotlin.backend.jvm.ir.collectVisibleTypeParameters
 import org.jetbrains.kotlin.backend.jvm.ir.constantValue
+import org.jetbrains.kotlin.backend.jvm.ir.eraseToScope
+import org.jetbrains.kotlin.backend.jvm.ir.eraseTypeParameters
 import org.jetbrains.kotlin.backend.jvm.lower.getFileClassInfo
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrConstructor
@@ -121,6 +126,7 @@ import org.jetbrains.kotlin.ir.util.isTypeParameter
 import org.jetbrains.kotlin.ir.util.isVararg
 import org.jetbrains.kotlin.ir.util.kotlinFqName
 import org.jetbrains.kotlin.ir.util.packageFqName
+import org.jetbrains.kotlin.ir.util.parentAsClass
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
 import org.jetbrains.kotlin.ir.util.resolveFakeOverrideMaybeAbstractOrFail
 import org.jetbrains.kotlin.ir.util.superTypes
@@ -486,11 +492,37 @@ class KotlinEnvironment(
     return cumulativeTypeArgumentsByTypeParameter
   }
 
+  /**
+   * For functions coming from Java, computes the specialized bridge needed to satisfy JRE types.
+   *
+   * This is useful for reverse mapping APIs from Kotlin standard library types to the types that
+   * actually exist in the JRE.
+   */
+  private fun computeSpecialBridgeIfNeeded(irFunction: IrFunction): SpecialBridge? {
+    if (irFunction !is IrSimpleFunction || !irFunction.isFromJava()) return null
+    val specialBridge =
+      jvmBackendContext.bridgeLoweringCache.computeSpecialBridge(irFunction) ?: return null
+
+    // If our signature matches one of the overridden signatures, we don't need a bridge.
+    if (
+      specialBridge.signature in overriddenSpecialBridgeSignatures(jvmBackendContext, irFunction)
+    ) {
+      return null
+    }
+
+    return specialBridge
+  }
+
   fun getDeclaredMethodDescriptor(irFunction: IrFunction): MethodDescriptor {
     return methodDescriptorByIrFunction.getOrPut(irFunction) {
       val resolvedSymbol = builtinsResolver.resolveFunctionSymbol(irFunction.symbol)
       if (resolvedSymbol != irFunction.symbol)
         return@getOrPut getDeclaredMethodDescriptor(resolvedSymbol.owner)
+
+      // Check if a bridge would be need for this special function if it's coming from Java. If so
+      // we'll use it to reverse compute the types that actually exist in the Java method.
+      val specialBridge = computeSpecialBridgeIfNeeded(irFunction)
+      val visibleTypeParameters = collectVisibleTypeParameters(irFunction)
 
       val enclosingTypeDescriptor =
         checkNotNull(getEnclosingTypeDescriptor(irFunction)) {
@@ -500,11 +532,20 @@ class KotlinEnvironment(
       val isConstructor = irFunction is IrConstructor
       val parameterDescriptors = ImmutableList.builder<MethodDescriptor.ParameterDescriptor>()
 
-      val parameters = irFunction.getParameters()
+      val parameters =
+        if (specialBridge == null) irFunction.getParameters()
+        else specialBridge.overridden.getParameters()
       parameters.withIndex().forEach { (index, param) ->
+        var type = param.type
+        if (specialBridge != null) {
+          // If there's a known type to use that, but erase be mindful of captured type parameters.
+          // Otherwise, erase all type parameters to match the original JRE types.
+          val substitutedType = specialBridge.substitutedParameterTypes?.get(index)
+          type = substitutedType?.eraseToScope(visibleTypeParameters) ?: type.eraseTypeParameters()
+        }
         parameterDescriptors.add(
           MethodDescriptor.ParameterDescriptor.newBuilder()
-            .setTypeDescriptor(getTypeDescriptor(param.type))
+            .setTypeDescriptor(getTypeDescriptor(type))
             .setJsOptional(param.isJsOptional)
             .setDoNotAutobox(param.isDoNotAutobox)
             .setVarargs(index == parameters.lastIndex && param.isVararg)
@@ -529,7 +570,15 @@ class KotlinEnvironment(
           if (irFunction.hasVoidReturn) {
             PrimitiveTypes.VOID
           } else {
-            getTypeDescriptor(irFunction.returnType)
+            var returnType = irFunction.returnType
+            if (specialBridge != null) {
+              // If there's a known type to use that, but erase be mindful of captured type
+              // parameters. Otherwise, erase all type parameters to match the original JRE types.
+              returnType =
+                specialBridge.substitutedReturnType?.eraseToScope(irFunction.parentAsClass)
+                  ?: specialBridge.overridden.returnType.eraseTypeParameters()
+            }
+            getTypeDescriptor(returnType)
           }
         )
         .setVisibility(visibility)
