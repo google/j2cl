@@ -15,7 +15,6 @@
  */
 package j2ktnotpassing;
 
-import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -25,145 +24,25 @@ public class NullabilityConversion {
 
   public interface Child extends Parent {}
 
-  public interface Generic<T extends @Nullable Parent> {}
-
-  public interface Consumer<T extends @Nullable Parent> {
-    void set(T t);
-  }
-
   public interface Supplier<T extends @Nullable Child> {
     T get();
   }
 
   public static class Tests {
-    public static class Types {
-      public static class SimpleUpperWildcardToLowerWildcard {
-        public static void nullableToNonNull(
-            Consumer<? super Parent> consumer, Supplier<? extends @Nullable Child> supplier) {
-          consumer.set(supplier.get());
-        }
-      }
 
-      public static class VariableToLowerWildcard {
-        public static <T extends @Nullable Child> void defaultToNonNull(
-            Consumer<? super @NonNull T> consumer, T t) {
-          consumer.set(t);
-        }
-      }
+    public static class Unions {
+      public abstract static class ExceptionNonNull1 extends RuntimeException
+          implements Supplier<Child> {}
 
-      public static class UpperWildcardToVariable {
-        public static <T extends @Nullable Child> @NonNull T defaultToNonNull(
-            Supplier<? extends T> supplier) {
-          return supplier.get();
-        }
+      public abstract static class ExceptionNullable1 extends RuntimeException
+          implements Supplier<@Nullable Child> {}
 
-        public static <T extends @Nullable Child> T nullableToDefault(
-            Supplier<? extends @Nullable T> supplier) {
-          return supplier.get();
-        }
-      }
-    }
-
-    public static class TypeArguments {
-
-      public static class SimpleToLowerWildcard {
-        public static Generic<? super @Nullable Child> nonNullToNullable(Generic<Parent> it) {
-          return it;
-        }
-      }
-
-      public static class SimpleUpperWildcardToUpperWildcard {
-        public static Generic<? extends Parent> nullableToNonNull(
-            Generic<? extends @Nullable Child> it) {
-          return it;
-        }
-      }
-
-      public static class SimpleLowerWildcardToUpperWildcard {
-        public static Generic<? extends Parent> nullableToNonNull(
-            Generic<? super @Nullable Child> it) {
-          return it;
-        }
-
-        public static Generic<? extends Parent> nonNullToNonNull(Generic<? super Child> it) {
-          return it;
-        }
-      }
-
-      public static class SimpleLowerWildcardToLowerWildcard {
-        public static Generic<? super @Nullable Child> nonNullToNullable(
-            Generic<? super Parent> it) {
-          return it;
-        }
-      }
-
-      public static class VariableToVariable {
-        public static <T extends @Nullable Parent> Generic<@NonNull T> defaultToNonNull(
-            Generic<T> it) {
-          return it;
-        }
-
-        public static <T extends @Nullable Parent> Generic<T> nonNullToDefault(
-            Generic<@NonNull T> it) {
-          return it;
-        }
-      }
-
-      public static class VariableToUpperWildcard {
-        public static <T extends @Nullable Parent> Generic<? extends @NonNull T> defaultToNonNull(
-            Generic<T> it) {
-          return it;
-        }
-      }
-
-      public static class VariableToLowerWildcard {
-        public static <T extends @Nullable Parent> Generic<? super @Nullable T> defaultToNullable(
-            Generic<T> it) {
-          return it;
-        }
-
-        public static <T extends @Nullable Parent> Generic<? super T> nonNullToDefault(
-            Generic<@NonNull T> it) {
-          return it;
-        }
-
-        public static <T extends @Nullable Parent> Generic<? super @Nullable T> nonNullToNullable(
-            Generic<@NonNull T> it) {
-          return it;
-        }
-      }
-
-      public static class VariableUpperWildcardToUpperWildcard {
-        public static <T extends @Nullable Parent> Generic<? extends @NonNull T> defaultToNonNull(
-            Generic<? extends T> it) {
-          return it;
-        }
-
-        public static <T extends @Nullable Parent> Generic<? extends T> nullableToDefault(
-            Generic<? extends @Nullable T> it) {
-          return it;
-        }
-
-        public static <T extends @Nullable Parent> Generic<? extends @NonNull T> nullableToNonNull(
-            Generic<? extends @Nullable T> it) {
-          return it;
-        }
-      }
-
-      public static class VariableLowerWildcardToLowerWildcard {
-        public static <T extends @Nullable Parent> Generic<? super @Nullable T> defaultToNullable(
-            Generic<? super T> it) {
-          return it;
-        }
-
-        public static <T extends @Nullable Parent> Generic<? super T> nonNullToDefault(
-            Generic<? super @NonNull T> it) {
-          return it;
-        }
-
-        public static <T extends @Nullable Parent> Generic<? super @Nullable T> nonNullToNullable(
-            Generic<? super @NonNull T> it) {
-          return it;
+      public static Child typeArgumentMixedToNonNull() {
+        try {
+          throw new RuntimeException();
+        } catch (ExceptionNonNull1 | ExceptionNullable1 e) {
+          // TODO(b/361769898): Missing cast.
+          return e.get();
         }
       }
     }

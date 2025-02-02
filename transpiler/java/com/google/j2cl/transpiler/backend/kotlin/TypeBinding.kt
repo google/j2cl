@@ -84,11 +84,17 @@ internal val MethodDescriptor.typeArgumentTypeBindings: List<TypeBinding>
 private fun typeBinding(typeParameter: TypeVariable, typeDescriptor: TypeDescriptor) =
   TypeBinding(typeParameter, typeDescriptor.withImplicitNullability)
     .withInferredNullability
+    .withValidNonNullableAnnotation
     .withFixedUnboundWildcard
     .updatedWithParameterVariance
 
 private val TypeBinding.withInferredNullability: TypeBinding
   get() = runIf(!typeParameterDescriptor.hasNullableBounds) { makeNonNull() }
+
+// Makes sure that type variables with non-null bounds are not annotated NON_NULLABLE.
+private val TypeBinding.withValidNonNullableAnnotation: TypeBinding
+  get() =
+    copy(typeArgumentDescriptor = typeArgumentDescriptor.withoutRedundantNullabilityAnnotation)
 
 private val TypeBinding.updatedWithParameterVariance: TypeBinding
   get() =
@@ -107,10 +113,21 @@ private val TypeBinding.withFixedUnboundWildcard: TypeBinding
 
 // TODO(b/245807463): Remove this fix when these bugs are fixed in the AST.
 // TODO(b/255722110): Remove this fix when these bugs are fixed in the AST.
-private val TypeBinding.isUnboundWildcardOrCapture
+private val TypeBinding.isUnboundWildcardOrCapture: Boolean
   get() =
     typeArgumentDescriptor is TypeVariable &&
       typeArgumentDescriptor.isWildcardOrCapture &&
       typeArgumentDescriptor.lowerBoundTypeDescriptor == null &&
-      typeArgumentDescriptor.upperBoundTypeDescriptor ==
+      typeArgumentDescriptor.upperBoundTypeDescriptorForTypeParameter(typeParameterDescriptor) ==
         typeParameterDescriptor.upperBoundTypeDescriptor
+
+private fun TypeVariable.upperBoundTypeDescriptorForTypeParameter(
+  typeParameter: TypeVariable
+): TypeDescriptor =
+  typeBinding(
+      typeParameter,
+      normalizedUpperBoundTypeDescriptor.withoutRedundantNullabilityAnnotation,
+    )
+    .withInferredNullability
+    .withValidNonNullableAnnotation
+    .typeArgumentDescriptor

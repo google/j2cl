@@ -1,4 +1,4 @@
-// Generated from "j2ktnotpassing/GenericClassLiteral.java"
+// Generated from "j2kt/GenericClassLiteral.java"
 @file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
@@ -16,7 +16,7 @@
  "VARIABLE_WITH_REDUNDANT_INITIALIZER",
  "REDUNDANT_ELSE_IN_WHEN")
 
-package j2ktnotpassing
+package j2kt
 
 import javaemul.lang.*
 import java.lang.Class
@@ -27,15 +27,15 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.javaObjectType
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktnotpassingGenericClassLiteral", exact = true)
+@ObjCName("J2ktJ2ktGenericClassLiteral", exact = true)
 open class GenericClassLiteral {
  @ObjCName("test")
  open fun test(
-  @ObjCName("withJ2ktnotpassingGenericClassLiteral_Generic") genericFoo: GenericClassLiteral.Generic<GenericClassLiteral.Foo>
+  @ObjCName("withJ2ktGenericClassLiteral_Generic") genericFoo: GenericClassLiteral.Generic<GenericClassLiteral.Foo>
  ) {
   this.accept<GenericClassLiteral.Generic<Any>>(
    genericFoo as GenericClassLiteral.Generic<Any>,
-   GenericClassLiteral.Generic::class.javaObjectType,
+   GenericClassLiteral.Generic::class.javaObjectType as Class<GenericClassLiteral.Generic<Any>>,
   )
  }
 
@@ -45,9 +45,9 @@ open class GenericClassLiteral {
   @ObjCName("withIOSClass") cls: Class<T>
  ) {}
 
- @ObjCName("J2ktJ2ktnotpassingGenericClassLiteral_Generic", exact = true)
+ @ObjCName("J2ktJ2ktGenericClassLiteral_Generic", exact = true)
  interface Generic<T: Any>
 
- @ObjCName("J2ktJ2ktnotpassingGenericClassLiteral_Foo", exact = true)
+ @ObjCName("J2ktJ2ktGenericClassLiteral_Foo", exact = true)
  interface Foo
 }

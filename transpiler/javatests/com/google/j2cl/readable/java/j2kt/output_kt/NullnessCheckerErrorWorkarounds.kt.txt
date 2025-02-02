@@ -31,12 +31,12 @@ open class NullnessCheckerErrorWorkarounds internal constructor() {
  companion object {
   @JvmStatic
   internal fun testNullableAnnotation_pp_j2kt(table: NullnessCheckerErrorWorkarounds.Table<out NullnessCheckerErrorWorkarounds.Cell<*>>) {
-   val cell: NullnessCheckerErrorWorkarounds.Cell<*>? = table.get()
+   val cell: NullnessCheckerErrorWorkarounds.Cell<*>? = table.get() as NullnessCheckerErrorWorkarounds.Cell<*>?
   }
 
   @JvmStatic
   internal fun testSuppressWarnings_pp_j2kt(table: NullnessCheckerErrorWorkarounds.Table<out NullnessCheckerErrorWorkarounds.Cell<*>>) {
-   val cell: NullnessCheckerErrorWorkarounds.Cell<*>? = table.get()
+   val cell: NullnessCheckerErrorWorkarounds.Cell<*>? = table.get() as NullnessCheckerErrorWorkarounds.Cell<*>?
   }
  }
 

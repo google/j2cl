@@ -60,11 +60,15 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  @Memoized
   public DeclaredTypeDescriptor toRawTypeDescriptor() {
+    return getClosestCommonSuperClass().toRawTypeDescriptor();
+  }
+
+  /** Returns the closest common super-type of all type descriptors in this union. */
+  @Memoized
+  public DeclaredTypeDescriptor getClosestCommonSuperClass() {
     DeclaredTypeDescriptor typeDescriptor =
-        (DeclaredTypeDescriptor) getUnionTypeDescriptors().get(0).toRawTypeDescriptor();
-    // Find the closest common ancestor of all the types in the union.
+        (DeclaredTypeDescriptor) getUnionTypeDescriptors().get(0);
     while (typeDescriptor != null && !isAssignableTo(typeDescriptor)) {
       typeDescriptor = typeDescriptor.getSuperTypeDescriptor();
     }

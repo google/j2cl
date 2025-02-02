@@ -36,9 +36,9 @@ open class NullabilityCasts {
    async,
    NullabilityCasts.AsyncFunction/* <in String?, out String?> */ { it: String? ->
     if (condition) {
-     return@AsyncFunction async as NullabilityCasts.Async<String?>
+     return@AsyncFunction async
     } else {
-     return@AsyncFunction async as NullabilityCasts.Async<String?>
+     return@AsyncFunction async
     }
     throw AssertionError("Unreachable")
    },

@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2ktnotpassing;
+package j2kt;
 
-import static j2ktnotpassing.NullabilityScopes2.NullMarkedScope.toList;
+import static j2kt.NullabilityScopes2.NullMarkedScope.toList;
 
-import j2ktnotpassing.NullabilityScopes2.NullMarkedScope.Recursive;
+import j2kt.NullabilityScopes2.NullMarkedScope.Recursive;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collector;

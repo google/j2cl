@@ -43,7 +43,39 @@ open class StreamCollectWildcardProblem {
   ) {
    StreamCollectWildcardProblem.accept(
     list.collect<MutableList<StreamCollectWildcardProblem.Foo<*>>, Any>(
-     Collectors.toList<StreamCollectWildcardProblem.Foo<*>>() as Collector<StreamCollectWildcardProblem.Foo<*>, Any, MutableList<StreamCollectWildcardProblem.Foo<*>>>,
+     Collectors.toList<StreamCollectWildcardProblem.Foo<*>>() as Collector<in StreamCollectWildcardProblem.Foo<*>, Any, MutableList<StreamCollectWildcardProblem.Foo<*>>>,
+    ),
+   )
+  }
+
+  @JvmStatic
+  @ObjCName("testMethodReferenceMapCollect")
+  fun testMethodReferenceMapCollect(
+   @ObjCName("withJavaUtilStreamStream") list: Stream<StreamCollectWildcardProblem.Foo<*>>
+  ) {
+   StreamCollectWildcardProblem.accept(
+    list.map/* <StreamCollectWildcardProblem.Foo<*>> */(
+     Function/* <in StreamCollectWildcardProblem.Foo<*>, out StreamCollectWildcardProblem.Foo<*>> */ { arg0: StreamCollectWildcardProblem.Foo<*> ->
+      return@Function arg0.getThis()
+     },
+    ).collect<MutableList<StreamCollectWildcardProblem.Foo<*>>, Any>(
+     Collectors.toList<StreamCollectWildcardProblem.Foo<*>>() as Collector<in StreamCollectWildcardProblem.Foo<*>, Any, MutableList<StreamCollectWildcardProblem.Foo<*>>>,
+    ),
+   )
+  }
+
+  @JvmStatic
+  @ObjCName("testLambdaMapCollect")
+  fun testLambdaMapCollect(
+   @ObjCName("withJavaUtilStreamStream") list: Stream<StreamCollectWildcardProblem.Foo<*>>
+  ) {
+   StreamCollectWildcardProblem.accept(
+    list.map/* <StreamCollectWildcardProblem.Foo<*>> */(
+     Function/* <in StreamCollectWildcardProblem.Foo<*>, out StreamCollectWildcardProblem.Foo<*>> */ { it: StreamCollectWildcardProblem.Foo<*> ->
+      return@Function it.getThis()
+     },
+    ).collect<MutableList<StreamCollectWildcardProblem.Foo<*>>, Any>(
+     Collectors.toList<StreamCollectWildcardProblem.Foo<*>>() as Collector<in StreamCollectWildcardProblem.Foo<*>, Any, MutableList<StreamCollectWildcardProblem.Foo<*>>>,
     ),
    )
   }
@@ -55,7 +87,7 @@ open class StreamCollectWildcardProblem {
   ) {
    StreamCollectWildcardProblem.accept(
     list.collect/* <MutableList<StreamCollectWildcardProblem.Foo<*>>, capture#1-of out Any> */(
-     Collectors.toList<StreamCollectWildcardProblem.Foo<*>>(),
+     Collectors.toList<StreamCollectWildcardProblem.Foo<*>>() as Collector<in StreamCollectWildcardProblem.Foo<*>, out Any, MutableList<StreamCollectWildcardProblem.Foo<*>>>,
     ),
    )
   }
@@ -71,7 +103,7 @@ open class StreamCollectWildcardProblem {
       return@Function arg0.getThis()
      },
     ).collect/* <MutableList<StreamCollectWildcardProblem.Foo<*>>, capture#2-of out Any> */(
-     Collectors.toList<StreamCollectWildcardProblem.Foo<*>>(),
+     Collectors.toList<StreamCollectWildcardProblem.Foo<*>>() as Collector<in StreamCollectWildcardProblem.Foo<*>, out Any, MutableList<StreamCollectWildcardProblem.Foo<*>>>,
     ),
    )
   }
@@ -87,7 +119,7 @@ open class StreamCollectWildcardProblem {
       return@Function it.getThis()
      },
     ).collect/* <MutableList<StreamCollectWildcardProblem.Foo<*>>, capture#3-of out Any> */(
-     Collectors.toList<StreamCollectWildcardProblem.Foo<*>>(),
+     Collectors.toList<StreamCollectWildcardProblem.Foo<*>>() as Collector<in StreamCollectWildcardProblem.Foo<*>, out Any, MutableList<StreamCollectWildcardProblem.Foo<*>>>,
     ),
    )
   }

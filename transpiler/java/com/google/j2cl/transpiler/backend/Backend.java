@@ -718,7 +718,6 @@ public enum Backend {
 
           // Must be run after AddDisambiguatingSuperMethodForwardingStubs
           FixJavaKotlinMethodOverrideMismatch::new,
-          FixJavaKotlinCollectionMethodsMismatch::new,
           AnnotateProtobufMethodsAsKtProperties::new,
           NormalizeNullLiterals::new,
           NormalizeMinValueIntegralLiterals::new,
@@ -784,6 +783,7 @@ public enum Backend {
           OptimizeImplicitSuperCalls::new,
           OptimizeImplicitConstructors::new,
           InsertUnreachableAssertionErrors::new,
+          FixJavaKotlinCollectionMethodsMismatch::new,
 
           // This needs to run after all passes that can potentially add casts.
           PreventSmartCasts::new,

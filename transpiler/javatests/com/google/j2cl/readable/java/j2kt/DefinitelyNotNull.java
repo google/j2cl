@@ -52,10 +52,17 @@ public class DefinitelyNotNull {
       throw new RuntimeException();
     }
 
-    @SuppressWarnings("nullness")
-    public static <E extends @Nullable Object> ImmutableList<E> copyOfNullable(
-        Iterable<E> iterable) {
-      return ImmutableList.copyOf((Iterable<@JsNonNull E>) iterable);
+    // TODO(b/324550390): Uncomment when fixed
+    // @SuppressWarnings("nullness")
+    // public static <E extends @Nullable Object> ImmutableList<E> copyOfNullableWithInvalidBounds(
+    //     Iterable<E> iterable) {
+    //   return ImmutableList.copyOf((Iterable<@JsNonNull E>) iterable);
+    // }
+
+    public static <E extends @Nullable Object>
+        ImmutableList<@JsNonNull E> copyOfNullableWithCorrectBounds(
+            Iterable<@JsNonNull E> iterable) {
+      return ImmutableList.copyOf(iterable);
     }
   }
 

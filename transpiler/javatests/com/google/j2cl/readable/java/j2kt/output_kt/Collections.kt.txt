@@ -459,50 +459,62 @@ open class Collections {
    }
 
   override fun contains(o: T): Boolean {
-   var o_1: Any? = o
-   o_1 = Collections.convert<Any?>(o_1)
+   val o_1: Any? = o
+   var o_2: Any? = o_1
+   o_2 = Collections.convert<Any?>(o_2)
    return super<AbstractCollection>.contains(
-    o_1 as T,
+    o_2 as T,
    )
   }
 
   override fun remove(o: T): Boolean {
-   var o_1: Any? = o
-   o_1 = Collections.convert<Any?>(o_1)
+   val o_1: Any? = o
+   var o_2: Any? = o_1
+   o_2 = Collections.convert<Any?>(o_2)
    return super<AbstractCollection>.remove(
-    o_1 as T,
+    o_2 as T,
    )
   }
 
   override fun addAll(c: Collection<T>): Boolean {
-   var c_1: MutableCollection<out T> = c as MutableCollection<out T>
-   c_1 = Collections.convertCollection/* <capture#1-of out T> */(c_1)
+   val c_1: MutableCollection<out T> = c as MutableCollection<out T>
+   var c_2: MutableCollection<out T> = c_1
+   c_2 = Collections.convertCollection/* <capture#1-of out T> */(c_2)
    return super<AbstractCollection>.addAll(
-    c_1 as Collection<T>,
+    c_2 as Collection<T>,
    )
   }
 
   override fun containsAll(c: Collection<T>): Boolean {
-   var c_1: MutableCollection<*> = c as MutableCollection<*>
-   c_1 = Collections.convertCollection/* <capture#2-of out Any> */(c_1)
+   val c_1: MutableCollection<*> = c as MutableCollection<*>
+   var c_2: MutableCollection<*> = c_1
+   c_2 = Collections.convertCollection/* <capture#2-of out Any> */(
+    c_2 as MutableCollection<out Any>,
+   )
    return super<AbstractCollection>.containsAll(
-    c_1 as Collection<T>,
+    c_2 as Collection<T>,
    )
   }
 
   override fun removeAll(c: Collection<T>): Boolean {
-   var c_1: MutableCollection<*> = c as MutableCollection<*>
-   c_1 = Collections.convertCollection/* <capture#3-of out Any> */(c_1)
+   val c_1: MutableCollection<*> = c as MutableCollection<*>
+   var c_2: MutableCollection<*> = c_1
+   c_2 = Collections.convertCollection/* <capture#3-of out Any> */(
+    c_2 as MutableCollection<out Any>,
+   )
    return super<AbstractCollection>.removeAll(
-    c_1 as Collection<T>,
+    c_2 as Collection<T>,
    )
   }
 
   override fun retainAll(c: Collection<T>): Boolean {
-   var c_1: MutableCollection<*> = c as MutableCollection<*>
-   c_1 = Collections.convertCollection/* <capture#4-of out Any> */(c_1)
+   val c_1: MutableCollection<*> = c as MutableCollection<*>
+   var c_2: MutableCollection<*> = c_1
+   c_2 = Collections.convertCollection/* <capture#4-of out Any> */(
+    c_2 as MutableCollection<out Any>,
+   )
    return super<AbstractCollection>.retainAll(
-    c_1 as Collection<T>,
+    c_2 as Collection<T>,
    )
   }
 
@@ -534,27 +546,30 @@ open class Collections {
    }
 
   override fun addAll(index: Int, c: Collection<T>): Boolean {
-   var c_1: MutableCollection<out T> = c as MutableCollection<out T>
-   c_1 = Collections.convertCollection/* <capture#5-of out T> */(c_1)
+   val c_1: MutableCollection<out T> = c as MutableCollection<out T>
+   var c_2: MutableCollection<out T> = c_1
+   c_2 = Collections.convertCollection/* <capture#5-of out T> */(c_2)
    return super<AbstractList>.addAll(
     index,
-    c_1 as Collection<T>,
+    c_2 as Collection<T>,
    )
   }
 
   override fun indexOf(o: T): Int {
-   var o_1: Any? = o
-   o_1 = Collections.convert<Any?>(o_1)
+   val o_1: Any? = o
+   var o_2: Any? = o_1
+   o_2 = Collections.convert<Any?>(o_2)
    return super<AbstractList>.indexOf(
-    o_1 as T,
+    o_2 as T,
    )
   }
 
   override fun lastIndexOf(o: T): Int {
-   var o_1: Any? = o
-   o_1 = Collections.convert<Any?>(o_1)
+   val o_1: Any? = o
+   var o_2: Any? = o_1
+   o_2 = Collections.convert<Any?>(o_2)
    return super<AbstractList>.lastIndexOf(
-    o_1 as T,
+    o_2 as T,
    )
   }
 
@@ -575,63 +590,71 @@ open class Collections {
    }
 
   override fun containsKey(key: K): Boolean {
-   var key_1: Any? = key
-   key_1 = Collections.convert<Any?>(key_1)
+   val key_1: Any? = key
+   var key_2: Any? = key_1
+   key_2 = Collections.convert<Any?>(key_2)
    return super<AbstractMap>.containsKey(
-    key_1 as K,
+    key_2 as K,
    )
   }
 
   override fun containsValue(value: V): Boolean {
-   var value_1: Any? = value
-   value_1 = Collections.convert<Any?>(value_1)
+   val value_1: Any? = value
+   var value_2: Any? = value_1
+   value_2 = Collections.convert<Any?>(value_2)
    return super<AbstractMap>.containsValue(
-    value_1 as V,
+    value_2 as V,
    )
   }
 
   override fun remove(key: K): V? {
-   var key_1: Any? = key
-   key_1 = Collections.convert<Any?>(key_1)
+   val key_1: Any? = key
+   var key_2: Any? = key_1
+   key_2 = Collections.convert<Any?>(key_2)
    return super<AbstractMap>.remove(
-    key_1 as K,
+    key_2 as K,
    )
   }
 
   override fun remove(key: K, value: V): Boolean {
-   var value_1: Any? = value
-   var key_1: Any? = key
-   key_1 = Collections.convert<Any?>(key_1)
-   value_1 = Collections.convert<Any?>(value_1)
+   val value_1: Any? = value
+   val key_1: Any? = key
+   var key_2: Any? = key_1
+   var value_2: Any? = value_1
+   key_2 = Collections.convert<Any?>(key_2)
+   value_2 = Collections.convert<Any?>(value_2)
    return super<AbstractMap>.remove(
-    key_1 as K,
-    value_1 as V,
+    key_2 as K,
+    value_2 as V,
    )
   }
 
   override fun get(key: K): V? {
-   var key_1: Any? = key
-   key_1 = Collections.convert<Any?>(key_1)
+   val key_1: Any? = key
+   var key_2: Any? = key_1
+   key_2 = Collections.convert<Any?>(key_2)
    return super<AbstractMap>.get(
-    key_1 as K,
+    key_2 as K,
    )
   }
 
   override fun getOrDefault(key: K, defaultValue: V): V {
    val defaultValue_1: V? = defaultValue
-   var key_1: Any? = key
-   key_1 = Collections.convert<Any?>(key_1)
+   val key_1: Any? = key
+   var key_2: Any? = key_1
+   key_2 = Collections.convert<Any?>(key_2)
    return super<AbstractMap>.getOrDefault(
-    key_1 as K,
+    key_2 as K,
     defaultValue_1 as V,
    ) as V
   }
 
   override fun putAll(m: Map<out K, V>) {
-   var m_1: MutableMap<out K, out V> = m as MutableMap<out K, out V>
-   m_1 = Collections.convertMap/* <capture#6-of out K, capture#7-of out V> */(m_1)
+   val m_1: MutableMap<out K, out V> = m as MutableMap<out K, out V>
+   var m_2: MutableMap<out K, out V> = m_1
+   m_2 = Collections.convertMap/* <capture#6-of out K, capture#7-of out V> */(m_2)
    super<AbstractMap>.putAll(
-    m_1 as Map<out K, V>,
+    m_2 as Map<out K, V>,
    )
   }
  }
@@ -673,7 +696,7 @@ open class Collections {
    @ObjCName("withJavaLangInteger") integer: Int
   ): Boolean {
    return super<Collections.CustomCollection>.remove(
-    integer as String,
+    integer as Any? as String,
    )
   }
 
@@ -682,7 +705,7 @@ open class Collections {
    @ObjCName("withJavaLangInteger") integer: Int
   ): Boolean {
    return super<Collections.CustomCollection>.remove(
-    integer as String,
+    integer as Any? as String,
    )
   }
  }
@@ -690,18 +713,20 @@ open class Collections {
  @ObjCName("J2ktJ2ktCollections_ListOfString", exact = true)
  open class ListOfString: Collections.CustomList<String>() {
   override fun indexOf(o: String): Int {
-   var o_1: Any? = o
-   o_1 = Collections.convert<Any?>(o_1)
+   val o_1: Any? = o
+   var o_2: Any? = o_1
+   o_2 = Collections.convert<Any?>(o_2)
    return super<Collections.CustomList>.indexOf(
-    o_1 as String,
+    o_2 as String,
    )
   }
 
   override fun lastIndexOf(o: String): Int {
-   var o_1: Any? = o
-   o_1 = Collections.convert<Any?>(o_1)
+   val o_1: Any? = o
+   var o_2: Any? = o_1
+   o_2 = Collections.convert<Any?>(o_2)
    return super<Collections.CustomList>.lastIndexOf(
-    o_1 as String,
+    o_2 as String,
    )
   }
  }
@@ -709,54 +734,61 @@ open class Collections {
  @ObjCName("J2ktJ2ktCollections_MapOfString", exact = true)
  open class MapOfString: Collections.CustomMap<String, String>() {
   override fun containsKey(key: String): Boolean {
-   var key_1: Any? = key
-   key_1 = Collections.convert<Any?>(key_1)
+   val key_1: Any? = key
+   var key_2: Any? = key_1
+   key_2 = Collections.convert<Any?>(key_2)
    return super<Collections.CustomMap>.containsKey(
-    key_1 as String,
+    key_2 as String,
    )
   }
 
   override fun containsValue(value: String): Boolean {
-   var value_1: Any? = value
-   value_1 = Collections.convert<Any?>(value_1)
+   val value_1: Any? = value
+   var value_2: Any? = value_1
+   value_2 = Collections.convert<Any?>(value_2)
    return super<Collections.CustomMap>.containsValue(
-    value_1 as String,
+    value_2 as String,
    )
   }
 
   override fun remove(key: String): String? {
-   var key_1: Any? = key
-   key_1 = Collections.convert<Any?>(key_1)
+   val key_1: Any? = key
+   var key_2: Any? = key_1
+   key_2 = Collections.convert<Any?>(key_2)
    return super<Collections.CustomMap>.remove(
-    key_1 as String,
+    key_2 as String,
    )
   }
 
   override fun remove(key: String, value: String): Boolean {
-   var value_1: Any? = value
-   var key_1: Any? = key
-   key_1 = Collections.convert<Any?>(key_1)
-   value_1 = Collections.convert<Any?>(value_1)
+   val value_1: Any? = value
+   val key_1: Any? = key
+   var key_2: Any? = key_1
+   var value_2: Any? = value_1
+   key_2 = Collections.convert<Any?>(key_2)
+   value_2 = Collections.convert<Any?>(value_2)
    return super<Collections.CustomMap>.remove(
-    key_1 as String,
-    value_1 as String,
+    key_2 as String,
+    value_2 as String,
    )
   }
 
   override fun get(key: String): String? {
-   var key_1: Any? = key
-   key_1 = Collections.convert<Any?>(key_1)
+   val key_1: Any? = key
+   var key_2: Any? = key_1
+   key_2 = Collections.convert<Any?>(key_2)
    return super<Collections.CustomMap>.get(
-    key_1 as String,
+    key_2 as String,
    )
   }
 
   override fun getOrDefault(key: String, defaultValue: String): String {
    val defaultValue_1: String? = defaultValue
-   var key_1: Any? = key
-   key_1 = Collections.convert<Any?>(key_1)
+   val key_1: Any? = key
+   var key_2: Any? = key_1
+   key_2 = Collections.convert<Any?>(key_2)
    return super<Collections.CustomMap>.getOrDefault(
-    key_1 as String,
+    key_2 as String,
     defaultValue_1 as String,
    ) as String
   }

@@ -32,15 +32,13 @@ public class StreamCollectWildcardProblem {
     accept(list.collect(toList()));
   }
 
-  // TODO(b/393561019): Uncomment when fixed
-  // public static void testMethodReferenceMapCollect(Stream<Foo<?>> list) {
-  //   accept(list.map(Foo::getThis).collect(toList()));
-  // }
+  public static void testMethodReferenceMapCollect(Stream<Foo<?>> list) {
+    accept(list.map(Foo::getThis).collect(toList()));
+  }
 
-  // TODO(b/393561019): Uncomment when fixed
-  // public static void testLambdaMapCollect(Stream<Foo<?>> list) {
-  //   accept(list.map(it -> it.getThis()).collect(toList()));
-  // }
+  public static void testLambdaMapCollect(Stream<Foo<?>> list) {
+    accept(list.map(it -> it.getThis()).collect(toList()));
+  }
 
   // Currently, this is how users workaround problem with J2KT.
   public static void testCollectWithExplicitTypeArgumentFix(Stream<Foo<?>> list) {

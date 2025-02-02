@@ -123,11 +123,10 @@ public class NullabilityConversion {
           consumer.set(supplier.get());
         }
 
-        // TODO(b/361769898): Uncomment when fixed
-        // public static void nullableToNonNull(
-        //     Consumer<? super Parent> consumer, Supplier<? extends @Nullable Child> supplier) {
-        //   consumer.set(supplier.get());
-        // }
+        public static void nullableToNonNull(
+            Consumer<? super Parent> consumer, Supplier<? extends @Nullable Child> supplier) {
+          consumer.set(supplier.get());
+        }
 
         public static void nonNullToNullable(
             Consumer<? super @Nullable Parent> consumer, Supplier<? extends Child> supplier) {
@@ -188,11 +187,10 @@ public class NullabilityConversion {
             consumer.set(t);
           }
 
-          // TODO(b/361769898): Uncomment when fixed
-          // public static <T extends @Nullable Child> void defaultToNonNull(
-          //     Consumer<? super @NonNull T> consumer, T t) {
-          //   consumer.set(t);
-          // }
+          public static <T extends @Nullable Child> void defaultToNonNull(
+              Consumer<? super @NonNull T> consumer, T t) {
+            consumer.set(t);
+          }
 
           public static <T extends @Nullable Child> void nullableToDefault(
               Consumer<? super T> consumer, @Nullable T t) {
@@ -236,17 +234,15 @@ public class NullabilityConversion {
             return supplier.get();
           }
 
-          // TODO(b/361769898): Uncomment when fixed
-          // public static <T extends @Nullable Child> @NonNull T defaultToNonNull(
-          //     Supplier<? extends T> supplier) {
-          //   return supplier.get();
-          // }
+          public static <T extends @Nullable Child> @NonNull T defaultToNonNull(
+              Supplier<? extends T> supplier) {
+            return supplier.get();
+          }
 
-          // TODO(b/361769898): Uncomment when fixed
-          // public static <T extends @Nullable Child> T nullableToDefault(
-          //     Supplier<? extends @Nullable T> supplier) {
-          //   return supplier.get();
-          // }
+          public static <T extends @Nullable Child> T nullableToDefault(
+              Supplier<? extends @Nullable T> supplier) {
+            return supplier.get();
+          }
 
           public static <T extends @Nullable Child> @Nullable T nullableToNullable(
               Supplier<? extends @Nullable T> supplier) {
@@ -324,10 +320,9 @@ public class NullabilityConversion {
             return it;
           }
 
-          // TODO(b/361769898): Uncomment when fixed
-          // public static Generic<? super @Nullable Child> nonNullToNullable(Generic<Parent> it) {
-          //   return it;
-          // }
+          public static Generic<? super @Nullable Child> nonNullToNullable(Generic<Parent> it) {
+            return it;
+          }
 
           public static Generic<? super Child> nonNullToNonNull(Generic<Parent> it) {
             return it;
@@ -340,11 +335,10 @@ public class NullabilityConversion {
             return it;
           }
 
-          // TODO(b/361769898): Uncomment when fixed
-          // public static Generic<? extends Parent> nullableToNonNull(
-          //     Generic<? extends @Nullable Child> it) {
-          //   return it;
-          // }
+          public static Generic<? extends Parent> nullableToNonNull(
+              Generic<? extends @Nullable Child> it) {
+            return it;
+          }
 
           public static Generic<? extends @Nullable Parent> nonNullToNullable(
               Generic<? extends Child> it) {
@@ -362,21 +356,19 @@ public class NullabilityConversion {
             return it;
           }
 
-          // TODO(b/361769898): Uncomment when fixed
-          // public static Generic<? extends Parent> nullableToNonNull(
-          //     Generic<? super @Nullable Child> it) {
-          //   return it;
-          // }
+          public static Generic<? extends Parent> nullableToNonNull(
+              Generic<? super @Nullable Child> it) {
+            return it;
+          }
 
           public static Generic<? extends @Nullable Parent> nonNullToNullable(
               Generic<? super Child> it) {
             return it;
           }
 
-          // TODO(b/361769898): Uncomment when fixed
-          // public static Generic<? extends Parent> nonNullToNonNull(Generic<? super Child> it) {
-          //   return it;
-          // }
+          public static Generic<? extends Parent> nonNullToNonNull(Generic<? super Child> it) {
+            return it;
+          }
         }
 
         public static class SimpleLowerWildcardToLowerWildcard {
@@ -390,11 +382,10 @@ public class NullabilityConversion {
             return it;
           }
 
-          // TODO(b/361769898): Uncomment when fixed
-          // public static Generic<? super @Nullable Child> nonNullToNullable(
-          //     Generic<? super Parent> it) {
-          //   return it;
-          // }
+          public static Generic<? super @Nullable Child> nonNullToNullable(
+              Generic<? super Parent> it) {
+            return it;
+          }
 
           public static Generic<? super Child> nonNullToNonNull(Generic<? super Parent> it) {
             return it;
@@ -411,11 +402,10 @@ public class NullabilityConversion {
             return it;
           }
 
-          // TODO(b/361769898): Uncomment when fixed
-          // public static <T extends @Nullable Parent> Generic<@NonNull T> defaultToNonNull(
-          //     Generic<T> it) {
-          //   return it;
-          // }
+          public static <T extends @Nullable Parent> Generic<@NonNull T> defaultToNonNull(
+              Generic<T> it) {
+            return it;
+          }
 
           public static <T extends @Nullable Parent> Generic<T> nullableToDefault(
               Generic<@Nullable T> it) {
@@ -432,11 +422,10 @@ public class NullabilityConversion {
             return it;
           }
 
-          // TODO(b/361769898): Uncomment when fixed
-          // public static <T extends @Nullable Parent> Generic<T> nonNullToDefault(
-          //     Generic<@NonNull T> it) {
-          //   return it;
-          // }
+          public static <T extends @Nullable Parent> Generic<T> nonNullToDefault(
+              Generic<@NonNull T> it) {
+            return it;
+          }
 
           public static <T extends @Nullable Parent> Generic<@Nullable T> nonNullToNullable(
               Generic<@NonNull T> it) {
@@ -460,12 +449,10 @@ public class NullabilityConversion {
             return it;
           }
 
-          // TODO(b/361769898): Uncomment when fixed
-          // public static <T extends @Nullable Parent> Generic<? extends @NonNull T>
-          // defaultToNonNull(
-          //     Generic<T> it) {
-          //   return it;
-          // }
+          public static <T extends @Nullable Parent> Generic<? extends @NonNull T> defaultToNonNull(
+              Generic<T> it) {
+            return it;
+          }
 
           public static <T extends @Nullable Parent> Generic<? extends T> nullableToDefault(
               Generic<@Nullable T> it) {
@@ -504,12 +491,10 @@ public class NullabilityConversion {
             return it;
           }
 
-          // TODO(b/361769898): Uncomment when fixed
-          // public static <T extends @Nullable Parent> Generic<? super @Nullable T>
-          // defaultToNullable(
-          //     Generic<T> it) {
-          //   return it;
-          // }
+          public static <T extends @Nullable Parent> Generic<? super @Nullable T> defaultToNullable(
+              Generic<T> it) {
+            return it;
+          }
 
           public static <T extends @Nullable Parent> Generic<? super @NonNull T> defaultToNonNull(
               Generic<T> it) {
@@ -531,18 +516,15 @@ public class NullabilityConversion {
             return it;
           }
 
-          // TODO(b/361769898): Uncomment when fixed
-          // public static <T extends @Nullable Parent> Generic<? super T> nonNullToDefault(
-          //     Generic<@NonNull T> it) {
-          //   return it;
-          // }
+          public static <T extends @Nullable Parent> Generic<? super T> nonNullToDefault(
+              Generic<@NonNull T> it) {
+            return it;
+          }
 
-          // TODO(b/361769898): Uncomment when fixed
-          // public static <T extends @Nullable Parent> Generic<? super @Nullable T>
-          // nonNullToNullable(
-          //     Generic<@NonNull T> it) {
-          //   return it;
-          // }
+          public static <T extends @Nullable Parent> Generic<? super @Nullable T> nonNullToNullable(
+              Generic<@NonNull T> it) {
+            return it;
+          }
 
           public static <T extends @Nullable Parent> Generic<? super @NonNull T> nonNullToNonNull(
               Generic<@NonNull T> it) {
@@ -561,30 +543,25 @@ public class NullabilityConversion {
             return it;
           }
 
-          // TODO(b/361769898): Uncomment when fixed
-          // public static <T extends @Nullable Parent> Generic<? extends @NonNull T>
-          // defaultToNonNull(
-          //     Generic<? extends T> it) {
-          //   return it;
-          // }
+          public static <T extends @Nullable Parent> Generic<? extends @NonNull T> defaultToNonNull(
+              Generic<? extends T> it) {
+            return it;
+          }
 
-          // TODO(b/361769898): Uncomment when fixed
-          // public static <T extends @Nullable Parent> Generic<? extends T> nullableToDefault(
-          //     Generic<? extends @Nullable T> it) {
-          //   return it;
-          // }
+          public static <T extends @Nullable Parent> Generic<? extends T> nullableToDefault(
+              Generic<? extends @Nullable T> it) {
+            return it;
+          }
 
           public static <T extends @Nullable Parent>
               Generic<? extends @Nullable T> nullableToNullable(Generic<? extends @Nullable T> it) {
             return it;
           }
 
-          // TODO(b/361769898): Uncomment when fixed
-          // public static <T extends @Nullable Parent> Generic<? extends @NonNull T>
-          // nullableToNonNull(
-          //     Generic<? extends @Nullable T> it) {
-          //   return it;
-          // }
+          public static <T extends @Nullable Parent>
+              Generic<? extends @NonNull T> nullableToNonNull(Generic<? extends @Nullable T> it) {
+            return it;
+          }
 
           public static <T extends @Nullable Parent> Generic<? extends T> nonNullToDefault(
               Generic<? extends @NonNull T> it) {
@@ -608,12 +585,10 @@ public class NullabilityConversion {
             return it;
           }
 
-          // TODO(b/361769898): Uncomment when fixed
-          // public static <T extends @Nullable Parent> Generic<? super @Nullable T>
-          // defaultToNullable(
-          //     Generic<? super T> it) {
-          //   return it;
-          // }
+          public static <T extends @Nullable Parent> Generic<? super @Nullable T> defaultToNullable(
+              Generic<? super T> it) {
+            return it;
+          }
 
           public static <T extends @Nullable Parent> Generic<? super @NonNull T> defaultToNonNull(
               Generic<? super T> it) {
@@ -635,18 +610,15 @@ public class NullabilityConversion {
             return it;
           }
 
-          // TODO(b/361769898): Uncomment when fixed
-          // public static <T extends @Nullable Parent> Generic<? super T> nonNullToDefault(
-          //     Generic<? super @NonNull T> it) {
-          //   return it;
-          // }
+          public static <T extends @Nullable Parent> Generic<? super T> nonNullToDefault(
+              Generic<? super @NonNull T> it) {
+            return it;
+          }
 
-          // TODO(b/361769898): Uncomment when fixed
-          // public static <T extends @Nullable Parent> Generic<? super @Nullable T>
-          // nonNullToNullable(
-          //     Generic<? super @NonNull T> it) {
-          //   return it;
-          // }
+          public static <T extends @Nullable Parent> Generic<? super @Nullable T> nonNullToNullable(
+              Generic<? super @NonNull T> it) {
+            return it;
+          }
 
           public static <T extends @Nullable Parent> Generic<? super @NonNull T> nonNullToNonNull(
               Generic<? super @NonNull T> it) {
@@ -669,23 +641,21 @@ public class NullabilityConversion {
       public abstract static class ExceptionNullable2 extends RuntimeException
           implements Supplier<@Nullable Child> {}
 
-      // TODO(b/361769898): Uncomment when fixed
-      // public static Supplier<Child> mixedToNonNull() {
-      //   try {
-      //     throw new RuntimeException();
-      //   } catch (ExceptionNonNull1 | ExceptionNullable1 e) {
-      //     return e;
-      //   }
-      // }
+      public static Supplier<Child> mixedToNonNull() {
+        try {
+          throw new RuntimeException();
+        } catch (ExceptionNonNull1 | ExceptionNullable1 e) {
+          return e;
+        }
+      }
 
-      // TODO(b/361769898): Uncomment when fixed
-      // public static Supplier<@Nullable Child> mixedToNullable() {
-      //   try {
-      //     throw new RuntimeException();
-      //   } catch (ExceptionNonNull1 | ExceptionNullable1 e) {
-      //     return e;
-      //   }
-      // }
+      public static Supplier<@Nullable Child> mixedToNullable() {
+        try {
+          throw new RuntimeException();
+        } catch (ExceptionNonNull1 | ExceptionNullable1 e) {
+          return e;
+        }
+      }
 
       public static Supplier<Child> nonNullToNonNull() {
         try {

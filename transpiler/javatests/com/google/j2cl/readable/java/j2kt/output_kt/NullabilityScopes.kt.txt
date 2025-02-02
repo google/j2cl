@@ -114,7 +114,7 @@ open class NullabilityScopes {
    @ObjCName("withJ2ktNullabilityScopes_NullMarkedScope_Foo") nullMarkedFoo: NullabilityScopes.NullMarkedScope.Foo<String?>?
   ) {
    NullabilityScopes.NullMarkedScope.Foo<String>(
-    nullMarkedFoo!! as NullabilityScopes.NullMarkedScope.Foo<String>,
+    nullMarkedFoo!! as NullabilityScopes.NullMarkedScope.Foo<out String>,
    )
   }
 
@@ -123,7 +123,7 @@ open class NullabilityScopes {
    @ObjCName("withJ2ktNullabilityScopes_NullMarkedScope_Foo") nullMarkedFoo: NullabilityScopes.NullMarkedScope.Foo<String?>?
   ) {
    NullabilityScopes.NullMarkedScope.Foo<String>(
-    nullMarkedFoo!! as NullabilityScopes.NullMarkedScope.Foo<String>,
+    nullMarkedFoo!! as NullabilityScopes.NullMarkedScope.Foo<out String>,
    )
   }
 
@@ -154,7 +154,7 @@ open class NullabilityScopes {
   open fun testRecursiveWildcardConversion(
    @ObjCName("withJ2ktNullabilityScopes_NullMarkedScope_Table") table: NullabilityScopes.NullMarkedScope.Table<out NullabilityScopes.NullMarkedScope.Cell<*>>?
   ): NullabilityScopes.NullMarkedScope.Array<out NullabilityScopes.NullMarkedScope.Cell<*>?>? {
-   return table!!.getNullableCells() as NullabilityScopes.NullMarkedScope.Array<NullabilityScopes.NullMarkedScope.Cell<*>?>?
+   return table!!.getNullableCells() as NullabilityScopes.NullMarkedScope.Array<out NullabilityScopes.NullMarkedScope.Cell<*>?>?
   }
 
   @ObjCName("J2ktJ2ktNullabilityScopes_NonNullMarkedScope_Foo", exact = true)
