@@ -260,7 +260,7 @@ def _strip_incompatible_annotation(ctx, name, java_srcs, mnemonic, strip_annotat
         arguments = [args],
         env = dict(LANG = "en_US.UTF-8"),
         execution_requirements = {"supports-workers": "1"},
-        mnemonic = mnemonic,
+        mnemonic = mnemonic + "Strip",
     )
 
     return output_file

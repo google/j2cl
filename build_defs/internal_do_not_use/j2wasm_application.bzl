@@ -124,7 +124,7 @@ def _impl_j2wasm_application(ctx):
             arguments = [args],
             env = dict(LANG = "en_US.UTF-8"),
             execution_requirements = {"supports-workers": "1"},
-            mnemonic = "J2wasmTranspile",
+            mnemonic = "J2wasmApp",
         )
 
         # Link the wat file for the named output
@@ -133,7 +133,7 @@ def _impl_j2wasm_application(ctx):
             outputs = [ctx.outputs.wat],
             # TODO(b/176105504): Link instead copying when Blaze native tree support lands.
             command = "cp %s/module.wat %s" % (transpile_out.path, ctx.outputs.wat.path),
-            mnemonic = "J2wasm",
+            mnemonic = "J2wasmApp",
         )
 
         # Link the imports JS file for the named output.
@@ -142,7 +142,7 @@ def _impl_j2wasm_application(ctx):
             outputs = [ctx.outputs.jsimports],
             # TODO(b/176105504): Link instead copying when Blaze native tree support lands.
             command = "cp %s/imports.txt %s" % (transpile_out.path, ctx.outputs.jsimports.path),
-            mnemonic = "J2wasm",
+            mnemonic = "J2wasmApp",
         )
     else:
         # Modular pipeline.
@@ -163,7 +163,7 @@ def _impl_j2wasm_application(ctx):
             arguments = [exporter_args],
             env = dict(LANG = "en_US.UTF-8"),
             execution_requirements = {"supports-workers": "1"},
-            mnemonic = "J2wasm",
+            mnemonic = "J2wasmApp",
         )
 
         all_modules = module_outputs.to_list() + [exports_module_output]
@@ -189,7 +189,7 @@ def _impl_j2wasm_application(ctx):
             arguments = [bundler_args],
             env = dict(LANG = "en_US.UTF-8"),
             execution_requirements = {"supports-workers": "1"},
-            mnemonic = "J2wasm",
+            mnemonic = "J2wasmApp",
         )
 
         ctx.actions.run_shell(
@@ -200,7 +200,7 @@ def _impl_j2wasm_application(ctx):
                 " ".join([m.path + "/namemap" for m in all_modules]),
                 transpile_out.path,
             ),
-            mnemonic = "J2wasm",
+            mnemonic = "J2wasmApp",
         )
 
     source_map_base_url = ctx.attr.source_map_base_url or "."
@@ -270,7 +270,7 @@ def _impl_j2wasm_application(ctx):
             arguments = [args],
             inputs = inputs,
             outputs = outputs,
-            mnemonic = "J2wasm",
+            mnemonic = "J2wasmApp",
             progress_message = "Compiling to Wasm %s (stage %s)" % (ctx.label, current_stage),
             # Binaryen can leverage 4 cores with some amount of parallelism.
             execution_requirements = {"cpu:4": ""},
@@ -311,7 +311,7 @@ def _impl_j2wasm_application(ctx):
                   "| sed -e 's/%%USE_MAGIC_STRING_IMPORTS%%/%s/g' " % use_magic_string_imports +
                   "| sed -e '/%%IMPORTS%%/r %s' -e '//d ' " % ctx.outputs.jsimports.path +
                   ">> %s" % js_module.path,
-        mnemonic = "J2wasm",
+        mnemonic = "J2wasmApp",
     )
 
     # Build a JS provider exposing the JS imports mapping.
@@ -381,7 +381,7 @@ def _remap_symbol_map(ctx, transpile_out, binaryen_symbolmap):
             } END {
                 for (i in symbols) print i":"symbols[i]
             }' %s/namemap %s > %s""" % (transpile_out.path, binaryen_symbolmap.path, ctx.outputs.symbolmap.path),
-        mnemonic = "J2wasm",
+        mnemonic = "J2wasmApp",
     )
 
 _J2WASM_APP_ATTRS = {
