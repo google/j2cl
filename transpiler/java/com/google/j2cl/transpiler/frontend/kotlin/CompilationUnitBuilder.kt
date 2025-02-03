@@ -183,7 +183,6 @@ import org.jetbrains.kotlin.ir.types.typeWithArguments
 import org.jetbrains.kotlin.ir.util.defaultType
 import org.jetbrains.kotlin.ir.util.dump
 import org.jetbrains.kotlin.ir.util.fqNameWhenAvailable
-import org.jetbrains.kotlin.ir.util.isAnnotationClass
 import org.jetbrains.kotlin.ir.util.isFunction
 import org.jetbrains.kotlin.ir.util.isKFunction
 import org.jetbrains.kotlin.ir.util.isPrimitiveArray
@@ -217,7 +216,6 @@ class CompilationUnitBuilder(
 
     irFile.declarations
       .filterIsInstance<IrClass>()
-      .filterNot(IrClass::isAnnotationClass)
       .map(::convertClass)
       .forEach(compilationUnit::addType)
 
@@ -239,11 +237,7 @@ class CompilationUnitBuilder(
         .mapNotNull(::convertDeclaration)
         .forEach(type::addMembers)
 
-      declarations
-        .filterIsInstance<IrClass>()
-        .filterNot(IrClass::isAnnotationClass)
-        .mapNotNull(::convertClass)
-        .forEach(type::addType)
+      declarations.filterIsInstance<IrClass>().mapNotNull(::convertClass).forEach(type::addType)
 
       declarations
         .find { it.isClinit }

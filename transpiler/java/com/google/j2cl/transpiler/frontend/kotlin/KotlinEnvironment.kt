@@ -113,6 +113,7 @@ import org.jetbrains.kotlin.ir.util.defaultType
 import org.jetbrains.kotlin.ir.util.dump
 import org.jetbrains.kotlin.ir.util.file
 import org.jetbrains.kotlin.ir.util.hasAnnotation
+import org.jetbrains.kotlin.ir.util.isAnnotation
 import org.jetbrains.kotlin.ir.util.isAnnotationClass
 import org.jetbrains.kotlin.ir.util.isAnonymousObject
 import org.jetbrains.kotlin.ir.util.isFakeOverride
@@ -679,7 +680,10 @@ class KotlinEnvironment(
       // Any is the root of the Kotlin class hierarchy and do not have super class.
       // As we currently map Any to j.l.Object, we need to special case j.l.Object to not have Any
       // as super type and avoid a loop in type hierarchy.
-      if (isInterface() || isAny() || isClassType(FqNameUnsafe("java.lang.Object"))) {
+      // Annotations are not interfaces in Kotlin but they are in our model.
+      if (
+        isInterface() || isAnnotation() || isAny() || isClassType(FqNameUnsafe("java.lang.Object"))
+      ) {
         return null
       }
       // As interfaces extend Any, a class implementing interfaces does not have Any in its direct

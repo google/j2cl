@@ -100,6 +100,7 @@ import org.jetbrains.kotlin.ir.util.functions
 import org.jetbrains.kotlin.ir.util.getAnnotation
 import org.jetbrains.kotlin.ir.util.getValueArgument
 import org.jetbrains.kotlin.ir.util.hasAnnotation
+import org.jetbrains.kotlin.ir.util.isAnnotationClass
 import org.jetbrains.kotlin.ir.util.isFakeOverride
 import org.jetbrains.kotlin.ir.util.isFileClass
 import org.jetbrains.kotlin.ir.util.isFromJava
@@ -145,7 +146,7 @@ val IrClass.j2clKind: Kind
       ClassKind.ENUM_ENTRY,
       ClassKind.CLASS,
       ClassKind.OBJECT -> Kind.CLASS
-      // Kotlin's annotation classes are represented as an @interface in Java.
+      // Kotlin's annotation classes are represented as interfaces in Java.
       ClassKind.ANNOTATION_CLASS,
       ClassKind.INTERFACE -> Kind.INTERFACE
       ClassKind.ENUM_CLASS -> Kind.ENUM
@@ -154,7 +155,7 @@ val IrClass.j2clKind: Kind
 val IrDeclarationWithVisibility.j2clVisibility: Visibility
   get() =
     when (visibility.delegate) {
-      // Internal means that the owner is visible inside the kotlin module. When you call       //
+      // Internal means that the owner is visible inside the kotlin module. When you call
       // kotlin members from java, they are considered as public.
       Visibilities.Public,
       Visibilities.Internal -> Visibility.PUBLIC
@@ -166,7 +167,17 @@ val IrDeclarationWithVisibility.j2clVisibility: Visibility
     }
 
 val IrDeclarationContainer.methods: List<IrFunction>
-  get() = declarations.filterIsInstance<IrFunction>().filter { it.isReal } + gettersAndSetters
+  get() {
+    val allMethods =
+      declarations.filterIsInstance<IrFunction>().filter { it.isReal } + gettersAndSetters
+    return if (this is IrClass && isAnnotationClass) {
+      // Annotations are transpiled to interfaces (like Kotlin/JVM does), we do not include the
+      // ctors in the result set.
+      allMethods.filterIsInstance<IrSimpleFunction>()
+    } else {
+      allMethods
+    }
+  }
 
 private val IrDeclarationContainer.gettersAndSetters: List<IrFunction>
   get() =

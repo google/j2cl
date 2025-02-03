@@ -213,6 +213,8 @@ private val loweringPassFactories: List<J2clLoweringPassFactory> = buildList {
   add(::CreateForLoopLowering)
   // Convert some `when` statements to a `switch` java-like statement.
   add(::CreateSwitchLowering)
+  // Lower Kotlin annotation in a Java-like format expected by the J2CL ast.
+  add(::AnnotationLowering)
   // Ensures that any top-level referenced members from another compilation unit have an enclosing
   // class. The inliner can introduce references to top-level members from another compilation unit
   // that were not referenced before.
