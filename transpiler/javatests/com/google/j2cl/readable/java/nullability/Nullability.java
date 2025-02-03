@@ -23,6 +23,7 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsNonNull;
+import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 public class Nullability {
@@ -252,6 +253,13 @@ public class Nullability {
   static <T extends RecursiveNullable<T> & Marker> void testRecursiveNullable() {
     RecursiveNullableParam<T> generic = new RecursiveNullableParam<>();
     RecursiveNullableParam<RecursiveNullableChild> parametrized = new RecursiveNullableParam<>();
+  }
+
+  @NullMarked
+  static void testMethodNullmarked() {
+    class ImplicitlyNullmarkedLocalClass {
+      void acceptsNonNullStrng(String i) {}
+    }
   }
 }
 

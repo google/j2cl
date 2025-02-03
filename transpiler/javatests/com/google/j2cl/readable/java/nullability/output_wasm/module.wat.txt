@@ -382,6 +382,22 @@
  ))
 )
 
+;;; Code for nullability.Nullability.1ImplicitlyNullmarkedLocalClass [type definition]
+(type $nullability.Nullability.1ImplicitlyNullmarkedLocalClass.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_acceptsNonNullStrng__java_lang_String__void_$pp_nullability (ref $function.m_acceptsNonNullStrng__java_lang_String__void_$pp_nullability))
+ ))
+)
+(type $nullability.Nullability.1ImplicitlyNullmarkedLocalClass (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.Nullability.1ImplicitlyNullmarkedLocalClass.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable [type definition]
 (type $nullability.defaultnotnullable.DefaultNotNullable.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
@@ -1362,6 +1378,8 @@
 
 ;;; Code for nullability.Nullability.RecursiveNullableParam [imports]
 
+;;; Code for nullability.Nullability.1ImplicitlyNullmarkedLocalClass [imports]
+
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable [imports]
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.Consumer.$LambdaAdaptor [imports]
@@ -1635,6 +1653,14 @@
  (i32.const 0)
 )
 (global $$class@nullability.Nullability.RecursiveNullableParam (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for nullability.Nullability.1ImplicitlyNullmarkedLocalClass [static fields]
+(global $$class-initialized@nullability.Nullability.1ImplicitlyNullmarkedLocalClass (mut i32)
+ (i32.const 0)
+)
+(global $$class@nullability.Nullability.1ImplicitlyNullmarkedLocalClass (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -2397,6 +2423,17 @@
  )
 )
 
+;;; Code for nullability.Nullability.1ImplicitlyNullmarkedLocalClass [vtable.init]
+(global $nullability.Nullability.1ImplicitlyNullmarkedLocalClass.vtable (ref $nullability.Nullability.1ImplicitlyNullmarkedLocalClass.vtable)
+ (struct.new $nullability.Nullability.1ImplicitlyNullmarkedLocalClass.vtable
+  (ref.func $$getClassImpl__java_lang_Class@nullability.Nullability.1ImplicitlyNullmarkedLocalClass)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_acceptsNonNullStrng__java_lang_String__void_$pp_nullability@nullability.Nullability.1ImplicitlyNullmarkedLocalClass)
+ )
+)
+
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable [vtable.init]
 (global $nullability.defaultnotnullable.DefaultNotNullable.vtable (ref $nullability.defaultnotnullable.DefaultNotNullable.vtable)
  (struct.new $nullability.defaultnotnullable.DefaultNotNullable.vtable
@@ -2850,16 +2887,16 @@
 
 ;;; void Marker.$clinit()
 (func $$clinit__void_<once>_@nullability.Marker
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:258:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:266:10
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:258:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:266:10
   (if (global.get $$class-initialized@nullability.Marker)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:258:10
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:266:10
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:258:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:266:10
   (global.set $$class-initialized@nullability.Marker (i32.const 1))
  )
 )
@@ -2882,16 +2919,16 @@
 
 ;;; void MyFunction.$clinit()
 (func $$clinit__void_<once>_@nullability.Nullability.MyFunction
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:82:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:83:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:82:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:83:12
   (if (global.get $$class-initialized@nullability.Nullability.MyFunction)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:82:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:83:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:82:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:83:12
   (global.set $$class-initialized@nullability.Nullability.MyFunction (i32.const 1))
  )
 )
@@ -2914,16 +2951,16 @@
 
 ;;; void NullableTemplatedReturn.$clinit()
 (func $$clinit__void_<once>_@nullability.Nullability.NullableTemplatedReturn
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:105:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:106:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:105:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:106:12
   (if (global.get $$class-initialized@nullability.Nullability.NullableTemplatedReturn)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:105:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:106:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:105:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:106:12
   (global.set $$class-initialized@nullability.Nullability.NullableTemplatedReturn (i32.const 1))
  )
 )
@@ -3460,16 +3497,16 @@
 (func $$create__java_lang_String@nullability.Nullability
  (param $a (ref null $java.lang.String))
  (result (ref null $nullability.Nullability))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:47:9
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:48:9
  (local $$instance (ref null $nullability.Nullability))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:47:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:48:9
   (call $$clinit__void_<once>_@nullability.Nullability )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:47:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:48:9
   (local.set $$instance (struct.new $nullability.Nullability (ref.as_non_null (global.get $nullability.Nullability.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:47:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:48:9
   (call $$ctor__java_lang_String__void_$p_nullability_Nullability@nullability.Nullability (ref.as_non_null (local.get $$instance))(local.get $a))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:47:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:48:9
   (return (local.get $$instance))
  )
 )
@@ -3478,13 +3515,13 @@
 (func $$ctor__java_lang_String__void_$p_nullability_Nullability@nullability.Nullability
  (param $this (ref null $nullability.Nullability))
  (param $a (ref null $java.lang.String))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:47:9
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:48:9
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:47:40
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:48:40
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:47:40
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:48:40
   (call $$init__void_$p_nullability_Nullability@nullability.Nullability (ref.as_non_null (local.get $this)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:48:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:49:4
   (struct.set $nullability.Nullability $f13@nullability.Nullability (local.get $this) (call $$create__@java.lang.Object ))
  )
 )
@@ -3497,11 +3534,11 @@
  (param $b (ref null $java.lang.Object))
  (param $c (ref null $java.lang.String))
  (result (ref null $java.lang.String))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:52:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:53:16
  (local $this (ref null $nullability.Nullability))
  (local.set $this (ref.cast (ref $nullability.Nullability) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:53:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:54:4
   (return (call $$getString_||__java_lang_String_<once>_@nullability.Nullability ))
  )
 )
@@ -3514,11 +3551,11 @@
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:56:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:57:16
  (local $this (ref null $nullability.Nullability))
  (local.set $this (ref.cast (ref $nullability.Nullability) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:57:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:58:4
   (return (call $$getString_||__java_lang_String_<once>_@nullability.Nullability ))
  )
 )
@@ -3531,11 +3568,11 @@
  (param $a (ref null $java.lang.String))
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  (result (ref null $java.lang.String))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:61:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:62:16
  (local $this (ref null $nullability.Nullability))
  (local.set $this (ref.cast (ref $nullability.Nullability) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:62:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:63:4
   (return (ref.null $java.lang.String))
  )
 )
@@ -3546,7 +3583,7 @@
  (type $function.m_m4__nullability_Nullability_MyFunction__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $f (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:65:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:66:14
  (local $this (ref null $nullability.Nullability))
  (local.set $this (ref.cast (ref $nullability.Nullability) (local.get $this.untyped)))
  (block
@@ -3557,15 +3594,15 @@
 ;;; void Nullability.testDefaultNullabilityBounds(ParameterizedDefaultNullability<T> defaultNullability)
 (func $m_testDefaultNullabilityBounds__nullability_Nullability_ParameterizedDefaultNullability__void@nullability.Nullability
  (param $defaultNullability (ref null $nullability.Nullability.ParameterizedDefaultNullability))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:167:33
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:168:33
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:168:61
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:169:61
   (call $$clinit__void_<once>_@nullability.Nullability )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:169:4
-  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNonNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $defaultNullability))(struct.get $nullability.Nullability.ParameterizedDefaultNullability.vtable $m_getNonNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedDefaultNullability $vtable(local.get $defaultNullability))))))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:170:4
-  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $defaultNullability))(struct.get $nullability.Nullability.ParameterizedDefaultNullability.vtable $m_getNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedDefaultNullability $vtable(local.get $defaultNullability))))))))
+  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNonNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $defaultNullability))(struct.get $nullability.Nullability.ParameterizedDefaultNullability.vtable $m_getNonNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedDefaultNullability $vtable(local.get $defaultNullability))))))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:171:4
+  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $defaultNullability))(struct.get $nullability.Nullability.ParameterizedDefaultNullability.vtable $m_getNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedDefaultNullability $vtable(local.get $defaultNullability))))))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:172:4
   (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getDefaultNullability__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $defaultNullability))(struct.get $nullability.Nullability.ParameterizedDefaultNullability.vtable $m_getDefaultNullability__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedDefaultNullability $vtable(local.get $defaultNullability))))))))
  )
 )
@@ -3573,15 +3610,15 @@
 ;;; void Nullability.testDefaultNullabilityBounds(ParameterizedNullable<T> nullable)
 (func $m_testDefaultNullabilityBounds__nullability_Nullability_ParameterizedNullable__void@nullability.Nullability
  (param $nullable (ref null $nullability.Nullability.ParameterizedNullable))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:174:33
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:175:33
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:174:97
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:175:97
   (call $$clinit__void_<once>_@nullability.Nullability )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:175:4
-  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNonNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nullable))(struct.get $nullability.Nullability.ParameterizedNullable.vtable $m_getNonNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNullable $vtable(local.get $nullable))))))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:176:4
-  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nullable))(struct.get $nullability.Nullability.ParameterizedNullable.vtable $m_getNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNullable $vtable(local.get $nullable))))))))
+  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNonNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nullable))(struct.get $nullability.Nullability.ParameterizedNullable.vtable $m_getNonNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNullable $vtable(local.get $nullable))))))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:177:4
+  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nullable))(struct.get $nullability.Nullability.ParameterizedNullable.vtable $m_getNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNullable $vtable(local.get $nullable))))))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:178:4
   (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getDefaultNullability__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nullable))(struct.get $nullability.Nullability.ParameterizedNullable.vtable $m_getDefaultNullability__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNullable $vtable(local.get $nullable))))))))
  )
 )
@@ -3589,15 +3626,15 @@
 ;;; void Nullability.testNullableBounds(ParameterizedDefaultNullability<T> defaultNullability)
 (func $m_testNullableBounds__nullability_Nullability_ParameterizedDefaultNullability__void@nullability.Nullability
  (param $defaultNullability (ref null $nullability.Nullability.ParameterizedDefaultNullability))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:180:43
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:181:43
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:181:61
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:182:61
   (call $$clinit__void_<once>_@nullability.Nullability )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:182:4
-  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNonNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $defaultNullability))(struct.get $nullability.Nullability.ParameterizedDefaultNullability.vtable $m_getNonNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedDefaultNullability $vtable(local.get $defaultNullability))))))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:183:4
-  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $defaultNullability))(struct.get $nullability.Nullability.ParameterizedDefaultNullability.vtable $m_getNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedDefaultNullability $vtable(local.get $defaultNullability))))))))
+  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNonNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $defaultNullability))(struct.get $nullability.Nullability.ParameterizedDefaultNullability.vtable $m_getNonNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedDefaultNullability $vtable(local.get $defaultNullability))))))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:184:4
+  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $defaultNullability))(struct.get $nullability.Nullability.ParameterizedDefaultNullability.vtable $m_getNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedDefaultNullability $vtable(local.get $defaultNullability))))))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:185:4
   (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getDefaultNullability__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $defaultNullability))(struct.get $nullability.Nullability.ParameterizedDefaultNullability.vtable $m_getDefaultNullability__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedDefaultNullability $vtable(local.get $defaultNullability))))))))
  )
 )
@@ -3605,15 +3642,15 @@
 ;;; void Nullability.testNullableBounds(ParameterizedNullable<T> nullable)
 (func $m_testNullableBounds__nullability_Nullability_ParameterizedNullable__void@nullability.Nullability
  (param $nullable (ref null $nullability.Nullability.ParameterizedNullable))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:187:43
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:188:43
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:187:97
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:188:97
   (call $$clinit__void_<once>_@nullability.Nullability )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:188:4
-  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNonNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nullable))(struct.get $nullability.Nullability.ParameterizedNullable.vtable $m_getNonNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNullable $vtable(local.get $nullable))))))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:189:4
-  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nullable))(struct.get $nullability.Nullability.ParameterizedNullable.vtable $m_getNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNullable $vtable(local.get $nullable))))))))
+  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNonNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nullable))(struct.get $nullability.Nullability.ParameterizedNullable.vtable $m_getNonNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNullable $vtable(local.get $nullable))))))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:190:4
+  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nullable))(struct.get $nullability.Nullability.ParameterizedNullable.vtable $m_getNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNullable $vtable(local.get $nullable))))))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:191:4
   (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getDefaultNullability__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nullable))(struct.get $nullability.Nullability.ParameterizedNullable.vtable $m_getDefaultNullability__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNullable $vtable(local.get $nullable))))))))
  )
 )
@@ -3621,15 +3658,15 @@
 ;;; void Nullability.testNonNullableBounds(ParameterizedDefaultNullability<T> defaultNullability)
 (func $m_testNonNullableBounds__nullability_Nullability_ParameterizedDefaultNullability__void@nullability.Nullability
  (param $defaultNullability (ref null $nullability.Nullability.ParameterizedDefaultNullability))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:193:44
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:194:44
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:194:61
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:195:61
   (call $$clinit__void_<once>_@nullability.Nullability )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:195:4
-  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNonNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $defaultNullability))(struct.get $nullability.Nullability.ParameterizedDefaultNullability.vtable $m_getNonNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedDefaultNullability $vtable(local.get $defaultNullability))))))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:196:4
-  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $defaultNullability))(struct.get $nullability.Nullability.ParameterizedDefaultNullability.vtable $m_getNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedDefaultNullability $vtable(local.get $defaultNullability))))))))
+  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNonNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $defaultNullability))(struct.get $nullability.Nullability.ParameterizedDefaultNullability.vtable $m_getNonNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedDefaultNullability $vtable(local.get $defaultNullability))))))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:197:4
+  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $defaultNullability))(struct.get $nullability.Nullability.ParameterizedDefaultNullability.vtable $m_getNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedDefaultNullability $vtable(local.get $defaultNullability))))))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:198:4
   (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getDefaultNullability__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $defaultNullability))(struct.get $nullability.Nullability.ParameterizedDefaultNullability.vtable $m_getDefaultNullability__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedDefaultNullability $vtable(local.get $defaultNullability))))))))
  )
 )
@@ -3637,15 +3674,15 @@
 ;;; void Nullability.testNonNullableBounds(ParameterizedNullable<T> nullable)
 (func $m_testNonNullableBounds__nullability_Nullability_ParameterizedNullable__void@nullability.Nullability
  (param $nullable (ref null $nullability.Nullability.ParameterizedNullable))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:200:44
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:201:44
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:201:41
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:202:41
   (call $$clinit__void_<once>_@nullability.Nullability )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:202:4
-  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNonNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nullable))(struct.get $nullability.Nullability.ParameterizedNullable.vtable $m_getNonNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNullable $vtable(local.get $nullable))))))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:203:4
-  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nullable))(struct.get $nullability.Nullability.ParameterizedNullable.vtable $m_getNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNullable $vtable(local.get $nullable))))))))
+  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNonNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nullable))(struct.get $nullability.Nullability.ParameterizedNullable.vtable $m_getNonNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNullable $vtable(local.get $nullable))))))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:204:4
+  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nullable))(struct.get $nullability.Nullability.ParameterizedNullable.vtable $m_getNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNullable $vtable(local.get $nullable))))))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:205:4
   (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getDefaultNullability__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nullable))(struct.get $nullability.Nullability.ParameterizedNullable.vtable $m_getDefaultNullability__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNullable $vtable(local.get $nullable))))))))
  )
 )
@@ -3653,15 +3690,15 @@
 ;;; void Nullability.testNonNullableBounds(ParameterizedNonNullable<T> nonNullable)
 (func $m_testNonNullableBounds__nullability_Nullability_ParameterizedNonNullable__void@nullability.Nullability
  (param $nonNullable (ref null $nullability.Nullability.ParameterizedNonNullable))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:207:44
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:208:44
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:208:47
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:209:47
   (call $$clinit__void_<once>_@nullability.Nullability )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:209:4
-  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNonNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedNonNullable.vtable $m_getNonNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNonNullable $vtable(local.get $nonNullable))))))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:210:4
-  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedNonNullable.vtable $m_getNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNonNullable $vtable(local.get $nonNullable))))))))
+  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNonNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedNonNullable.vtable $m_getNonNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNonNullable $vtable(local.get $nonNullable))))))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:211:4
+  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedNonNullable.vtable $m_getNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNonNullable $vtable(local.get $nonNullable))))))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:212:4
   (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getDefaultNullability__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedNonNullable.vtable $m_getDefaultNullability__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNonNullable $vtable(local.get $nonNullable))))))))
  )
 )
@@ -3669,15 +3706,15 @@
 ;;; void Nullability.testDefaultNullabilityWildcards(ParameterizedDefaultNullability<? extends String> nonNullable)
 (func $m_testDefaultNullabilityWildcards__nullability_Nullability_ParameterizedDefaultNullability__void@nullability.Nullability
  (param $nonNullable (ref null $nullability.Nullability.ParameterizedDefaultNullability))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:214:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:215:14
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:215:69
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:216:69
   (call $$clinit__void_<once>_@nullability.Nullability )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:216:4
-  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNonNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedDefaultNullability.vtable $m_getNonNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedDefaultNullability $vtable(local.get $nonNullable))))))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:217:4
-  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedDefaultNullability.vtable $m_getNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedDefaultNullability $vtable(local.get $nonNullable))))))))
+  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNonNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedDefaultNullability.vtable $m_getNonNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedDefaultNullability $vtable(local.get $nonNullable))))))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:218:4
+  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedDefaultNullability.vtable $m_getNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedDefaultNullability $vtable(local.get $nonNullable))))))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:219:4
   (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getDefaultNullability__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedDefaultNullability.vtable $m_getDefaultNullability__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedDefaultNullability $vtable(local.get $nonNullable))))))))
  )
 )
@@ -3685,15 +3722,15 @@
 ;;; void Nullability.testDefaultNullabilityWildcards(ParameterizedNullable<? extends String> nonNullable)
 (func $m_testDefaultNullabilityWildcards__nullability_Nullability_ParameterizedNullable__void@nullability.Nullability
  (param $nonNullable (ref null $nullability.Nullability.ParameterizedNullable))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:221:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:222:14
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:221:99
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:222:99
   (call $$clinit__void_<once>_@nullability.Nullability )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:222:4
-  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNonNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedNullable.vtable $m_getNonNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNullable $vtable(local.get $nonNullable))))))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:223:4
-  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedNullable.vtable $m_getNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNullable $vtable(local.get $nonNullable))))))))
+  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNonNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedNullable.vtable $m_getNonNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNullable $vtable(local.get $nonNullable))))))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:224:4
+  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedNullable.vtable $m_getNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNullable $vtable(local.get $nonNullable))))))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:225:4
   (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getDefaultNullability__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedNullable.vtable $m_getDefaultNullability__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNullable $vtable(local.get $nonNullable))))))))
  )
 )
@@ -3701,93 +3738,102 @@
 ;;; void Nullability.testDefaultNullabilityWildcards(ParameterizedNonNullable<? extends String> nonNullable)
 (func $m_testDefaultNullabilityWildcards__nullability_Nullability_ParameterizedNonNullable__void@nullability.Nullability
  (param $nonNullable (ref null $nullability.Nullability.ParameterizedNonNullable))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:227:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:228:14
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:228:62
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:229:62
   (call $$clinit__void_<once>_@nullability.Nullability )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:229:4
-  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNonNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedNonNullable.vtable $m_getNonNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNonNullable $vtable(local.get $nonNullable))))))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:230:4
-  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedNonNullable.vtable $m_getNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNonNullable $vtable(local.get $nonNullable))))))))
+  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNonNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedNonNullable.vtable $m_getNonNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNonNullable $vtable(local.get $nonNullable))))))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:231:4
+  (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getNullable__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedNonNullable.vtable $m_getNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNonNullable $vtable(local.get $nonNullable))))))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:232:4
   (drop (call $m_length__int@java.lang.String (ref.as_non_null (ref.cast (ref null $java.lang.String) (call_ref $function.m_getDefaultNullability__java_lang_Object_$pp_nullability (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedNonNullable.vtable $m_getDefaultNullability__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNonNullable $vtable(local.get $nonNullable))))))))
  )
 )
 
 ;;; void Nullability.testRecursive()
 (func $m_testRecursive__void@nullability.Nullability
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:247:48
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:248:48
  (local $generic (ref null $nullability.Nullability.RecursiveParam))
  (local $parametrized (ref null $nullability.Nullability.RecursiveParam))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:247:64
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:248:64
   (call $$clinit__void_<once>_@nullability.Nullability )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:248:4
-  (local.set $generic (call $$create__@nullability.Nullability.RecursiveParam ))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:249:4
+  (local.set $generic (call $$create__@nullability.Nullability.RecursiveParam ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:250:4
   (local.set $parametrized (call $$create__@nullability.Nullability.RecursiveParam ))
  )
 )
 
 ;;; void Nullability.testRecursiveNullable()
 (func $m_testRecursiveNullable__void@nullability.Nullability
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:252:56
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:253:56
  (local $generic (ref null $nullability.Nullability.RecursiveNullableParam))
  (local $parametrized (ref null $nullability.Nullability.RecursiveNullableParam))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:252:80
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:253:80
   (call $$clinit__void_<once>_@nullability.Nullability )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:253:4
-  (local.set $generic (call $$create__@nullability.Nullability.RecursiveNullableParam ))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:254:4
+  (local.set $generic (call $$create__@nullability.Nullability.RecursiveNullableParam ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:255:4
   (local.set $parametrized (call $$create__@nullability.Nullability.RecursiveNullableParam ))
+ )
+)
+
+;;; void Nullability.testMethodNullmarked()
+(func $m_testMethodNullmarked__void@nullability.Nullability
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:259:14
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:259:37
+  (call $$clinit__void_<once>_@nullability.Nullability )
  )
 )
 
 ;;; void Nullability.$init()
 (func $$init__void_$p_nullability_Nullability@nullability.Nullability
  (param $this (ref null $nullability.Nullability))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:28:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:29:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:29:2
-  (struct.set $nullability.Nullability $f1@nullability.Nullability (local.get $this) (call $$getString_|Hello|__java_lang_String_<once>_@nullability.Nullability ))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:30:2
-  (struct.set $nullability.Nullability $f2@nullability.Nullability (local.get $this) (ref.null $java.lang.String))
+  (struct.set $nullability.Nullability $f1@nullability.Nullability (local.get $this) (call $$getString_|Hello|__java_lang_String_<once>_@nullability.Nullability ))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:31:2
-  (struct.set $nullability.Nullability $f3@nullability.Nullability (local.get $this) (ref.null $java.lang.String))
+  (struct.set $nullability.Nullability $f2@nullability.Nullability (local.get $this) (ref.null $java.lang.String))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:32:2
-  (struct.set $nullability.Nullability $f4@nullability.Nullability (local.get $this) (call $$create__@java.util.ArrayList ))
+  (struct.set $nullability.Nullability $f3@nullability.Nullability (local.get $this) (ref.null $java.lang.String))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:33:2
-  (struct.set $nullability.Nullability $f5@nullability.Nullability (local.get $this) (call $$create__@java.util.ArrayList ))
+  (struct.set $nullability.Nullability $f4@nullability.Nullability (local.get $this) (call $$create__@java.util.ArrayList ))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:34:2
-  (struct.set $nullability.Nullability $f6@nullability.Nullability (local.get $this) (call $$create__@java.util.ArrayList ))
+  (struct.set $nullability.Nullability $f5@nullability.Nullability (local.get $this) (call $$create__@java.util.ArrayList ))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:35:2
-  (struct.set $nullability.Nullability $f7@nullability.Nullability (local.get $this) (ref.null $java.lang.Object))
+  (struct.set $nullability.Nullability $f6@nullability.Nullability (local.get $this) (call $$create__@java.util.ArrayList ))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:36:2
+  (struct.set $nullability.Nullability $f7@nullability.Nullability (local.get $this) (ref.null $java.lang.Object))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:37:2
   (struct.set $nullability.Nullability $f8@nullability.Nullability (local.get $this) (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 0 )))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:38:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:39:2
   (struct.set $nullability.Nullability $f9@nullability.Nullability (local.get $this) (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 0 )))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:40:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:41:2
   (struct.set $nullability.Nullability $f10@nullability.Nullability (local.get $this) (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 0 )))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:42:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:43:2
   (struct.set $nullability.Nullability $f12@nullability.Nullability (local.get $this) (call $$create__@java.util.ArrayList ))
  )
 )
 
 ;;; void Nullability.$clinit()
 (func $$clinit__void_<once>_@nullability.Nullability
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:28:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:29:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:28:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:29:13
   (if (global.get $$class-initialized@nullability.Nullability)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:28:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:29:13
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:28:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:29:13
   (global.set $$class-initialized@nullability.Nullability (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:28:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:29:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -3824,27 +3870,27 @@
 ;;; void $LambdaAdaptor.$ctor()
 (func $$ctor__void_$p_nullability_Nullability_MyFunction_$LambdaAdaptor@nullability.Nullability.MyFunction.$LambdaAdaptor
  (param $this (ref null $nullability.Nullability.MyFunction.$LambdaAdaptor))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:82:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:83:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:82:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:83:12
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void $LambdaAdaptor.$clinit()
 (func $$clinit__void_<once>_@nullability.Nullability.MyFunction.$LambdaAdaptor
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:82:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:83:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:82:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:83:12
   (if (global.get $$class-initialized@nullability.Nullability.MyFunction.$LambdaAdaptor)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:82:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:83:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:82:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:83:12
   (global.set $$class-initialized@nullability.Nullability.MyFunction.$LambdaAdaptor (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:82:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:83:12
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -3881,27 +3927,27 @@
 ;;; void $LambdaAdaptor.$ctor()
 (func $$ctor__void_$p_nullability_Nullability_NullableTemplatedReturn_$LambdaAdaptor@nullability.Nullability.NullableTemplatedReturn.$LambdaAdaptor
  (param $this (ref null $nullability.Nullability.NullableTemplatedReturn.$LambdaAdaptor))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:105:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:106:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:105:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:106:12
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void $LambdaAdaptor.$clinit()
 (func $$clinit__void_<once>_@nullability.Nullability.NullableTemplatedReturn.$LambdaAdaptor
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:105:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:106:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:105:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:106:12
   (if (global.get $$class-initialized@nullability.Nullability.NullableTemplatedReturn.$LambdaAdaptor)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:105:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:106:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:105:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:106:12
   (global.set $$class-initialized@nullability.Nullability.NullableTemplatedReturn.$LambdaAdaptor (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:105:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:106:12
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -3938,16 +3984,16 @@
 ;;; Foo<T> Foo.$create()
 (func $$create__@nullability.Nullability.Foo
  (result (ref null $nullability.Nullability.Foo))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:67:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:68:15
  (local $$instance (ref null $nullability.Nullability.Foo))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:67:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:68:15
   (call $$clinit__void_<once>_@nullability.Nullability.Foo )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:67:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:68:15
   (local.set $$instance (struct.new $nullability.Nullability.Foo (ref.as_non_null (global.get $nullability.Nullability.Foo.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:67:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:68:15
   (call $$ctor__void_$p_nullability_Nullability_Foo@nullability.Nullability.Foo (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:67:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:68:15
   (return (local.get $$instance))
  )
 )
@@ -3955,9 +4001,9 @@
 ;;; void Foo.$ctor()
 (func $$ctor__void_$p_nullability_Nullability_Foo@nullability.Nullability.Foo
  (param $this (ref null $nullability.Nullability.Foo))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:67:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:68:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:67:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:68:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -3967,7 +4013,7 @@
  (type $function.m_bar__java_lang_Object__void_$pp_nullability)
  (param $this.untyped (ref $java.lang.Object))
  (param $t (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:68:9
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:69:9
  (local $this (ref null $nullability.Nullability.Foo))
  (local.set $this (ref.cast (ref $nullability.Nullability.Foo) (local.get $this.untyped)))
  (block
@@ -3980,11 +4026,11 @@
  (type $function.m_baz__java_lang_Object_$pp_nullability)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:71:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:72:6
  (local $this (ref null $nullability.Nullability.Foo))
  (local.set $this (ref.cast (ref $nullability.Nullability.Foo) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:72:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:73:6
   (return (ref.null $java.lang.Object))
  )
 )
@@ -3995,11 +4041,11 @@
  (type $function.m_toString__java_lang_String)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.String))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:76:18
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:77:18
  (local $this (ref null $nullability.Nullability.Foo))
  (local.set $this (ref.cast (ref $nullability.Nullability.Foo) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:77:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:78:6
   (return (call $$getString_|Foo|__java_lang_String_<once>_@nullability.Nullability.Foo ))
  )
 )
@@ -4007,18 +4053,18 @@
 
 ;;; void Foo.$clinit()
 (func $$clinit__void_<once>_@nullability.Nullability.Foo
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:67:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:68:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:67:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:68:15
   (if (global.get $$class-initialized@nullability.Nullability.Foo)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:67:15
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:68:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:67:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:68:15
   (global.set $$class-initialized@nullability.Nullability.Foo (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:67:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:68:15
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -4055,16 +4101,16 @@
 ;;; StringComparator StringComparator.$create()
 (func $$create__@nullability.Nullability.StringComparator
  (result (ref null $nullability.Nullability.StringComparator))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:90:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
  (local $$instance (ref null $nullability.Nullability.StringComparator))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:90:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
   (call $$clinit__void_<once>_@nullability.Nullability.StringComparator )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:90:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
   (local.set $$instance (struct.new $nullability.Nullability.StringComparator (ref.as_non_null (global.get $nullability.Nullability.StringComparator.vtable)) (ref.as_non_null (global.get $nullability.Nullability.StringComparator.itable)) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:90:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
   (call $$ctor__void_$p_nullability_Nullability_StringComparator@nullability.Nullability.StringComparator (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:90:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
   (return (local.get $$instance))
  )
 )
@@ -4072,9 +4118,9 @@
 ;;; void StringComparator.$ctor()
 (func $$ctor__void_$p_nullability_Nullability_StringComparator@nullability.Nullability.StringComparator
  (param $this (ref null $nullability.Nullability.StringComparator))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:90:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:90:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -4086,11 +4132,11 @@
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.String))
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:92:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:93:15
  (local $this (ref null $nullability.Nullability.StringComparator))
  (local.set $this (ref.cast (ref $nullability.Nullability.StringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:93:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:94:6
   (return (i32.const 0))
  )
 )
@@ -4103,11 +4149,11 @@
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:90:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
  (local $this (ref null $nullability.Nullability.StringComparator))
  (local.set $this (ref.cast (ref $nullability.Nullability.StringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:90:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
   (return (call_ref $function.m_compare__java_lang_String__java_lang_String__int (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0))(ref.cast (ref null $java.lang.String) (local.get $arg1))(struct.get $nullability.Nullability.StringComparator.vtable $m_compare__java_lang_String__java_lang_String__int (struct.get $nullability.Nullability.StringComparator $vtable(local.get $this)))))
  )
 )
@@ -4118,11 +4164,11 @@
  (type $function.m_reversed__java_util_Comparator)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:90:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
  (local $this (ref null $nullability.Nullability.StringComparator))
  (local.set $this (ref.cast (ref $nullability.Nullability.StringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:90:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
   (return (call $m_reversed__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))))
  )
 )
@@ -4134,11 +4180,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:90:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
  (local $this (ref null $nullability.Nullability.StringComparator))
  (local.set $this (ref.cast (ref $nullability.Nullability.StringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:90:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
   (return (call $m_thenComparing__java_util_Comparator__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
 )
@@ -4150,11 +4196,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:90:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
  (local $this (ref null $nullability.Nullability.StringComparator))
  (local.set $this (ref.cast (ref $nullability.Nullability.StringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:90:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
   (return (call $m_thenComparing__java_util_function_Function__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
 )
@@ -4167,11 +4213,11 @@
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:90:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
  (local $this (ref null $nullability.Nullability.StringComparator))
  (local.set $this (ref.cast (ref $nullability.Nullability.StringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:90:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
   (return (call $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))(local.get $arg0)(local.get $arg1)))
  )
 )
@@ -4183,11 +4229,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:90:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
  (local $this (ref null $nullability.Nullability.StringComparator))
  (local.set $this (ref.cast (ref $nullability.Nullability.StringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:90:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
   (return (call $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
 )
@@ -4199,11 +4245,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:90:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
  (local $this (ref null $nullability.Nullability.StringComparator))
  (local.set $this (ref.cast (ref $nullability.Nullability.StringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:90:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
   (return (call $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
 )
@@ -4215,11 +4261,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:90:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
  (local $this (ref null $nullability.Nullability.StringComparator))
  (local.set $this (ref.cast (ref $nullability.Nullability.StringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:90:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
   (return (call $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
 )
@@ -4227,20 +4273,20 @@
 
 ;;; void StringComparator.$clinit()
 (func $$clinit__void_<once>_@nullability.Nullability.StringComparator
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:90:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:90:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
   (if (global.get $$class-initialized@nullability.Nullability.StringComparator)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:90:22
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:90:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
   (global.set $$class-initialized@nullability.Nullability.StringComparator (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:90:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
   (call $$clinit__void_<once>_@java.lang.Object )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:90:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
   (call $$clinit__void_<once>_@java.util.Comparator )
  )
 )
@@ -4277,16 +4323,16 @@
 ;;; NullableStringComparator NullableStringComparator.$create()
 (func $$create__@nullability.Nullability.NullableStringComparator
  (result (ref null $nullability.Nullability.NullableStringComparator))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:98:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
  (local $$instance (ref null $nullability.Nullability.NullableStringComparator))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:98:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
   (call $$clinit__void_<once>_@nullability.Nullability.NullableStringComparator )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:98:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
   (local.set $$instance (struct.new $nullability.Nullability.NullableStringComparator (ref.as_non_null (global.get $nullability.Nullability.NullableStringComparator.vtable)) (ref.as_non_null (global.get $nullability.Nullability.NullableStringComparator.itable)) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:98:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
   (call $$ctor__void_$p_nullability_Nullability_NullableStringComparator@nullability.Nullability.NullableStringComparator (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:98:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
   (return (local.get $$instance))
  )
 )
@@ -4294,9 +4340,9 @@
 ;;; void NullableStringComparator.$ctor()
 (func $$ctor__void_$p_nullability_Nullability_NullableStringComparator@nullability.Nullability.NullableStringComparator
  (param $this (ref null $nullability.Nullability.NullableStringComparator))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:98:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:98:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -4308,11 +4354,11 @@
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.String))
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:100:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:101:15
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
  (local.set $this (ref.cast (ref $nullability.Nullability.NullableStringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:101:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:102:6
   (return (i32.const 0))
  )
 )
@@ -4325,11 +4371,11 @@
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:98:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
  (local.set $this (ref.cast (ref $nullability.Nullability.NullableStringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:98:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
   (return (call_ref $function.m_compare__java_lang_String__java_lang_String__int (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0))(ref.cast (ref null $java.lang.String) (local.get $arg1))(struct.get $nullability.Nullability.NullableStringComparator.vtable $m_compare__java_lang_String__java_lang_String__int (struct.get $nullability.Nullability.NullableStringComparator $vtable(local.get $this)))))
  )
 )
@@ -4340,11 +4386,11 @@
  (type $function.m_reversed__java_util_Comparator)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:98:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
  (local.set $this (ref.cast (ref $nullability.Nullability.NullableStringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:98:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
   (return (call $m_reversed__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))))
  )
 )
@@ -4356,11 +4402,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:98:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
  (local.set $this (ref.cast (ref $nullability.Nullability.NullableStringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:98:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
   (return (call $m_thenComparing__java_util_Comparator__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
 )
@@ -4372,11 +4418,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:98:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
  (local.set $this (ref.cast (ref $nullability.Nullability.NullableStringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:98:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
   (return (call $m_thenComparing__java_util_function_Function__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
 )
@@ -4389,11 +4435,11 @@
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:98:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
  (local.set $this (ref.cast (ref $nullability.Nullability.NullableStringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:98:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
   (return (call $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))(local.get $arg0)(local.get $arg1)))
  )
 )
@@ -4405,11 +4451,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:98:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
  (local.set $this (ref.cast (ref $nullability.Nullability.NullableStringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:98:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
   (return (call $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
 )
@@ -4421,11 +4467,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:98:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
  (local.set $this (ref.cast (ref $nullability.Nullability.NullableStringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:98:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
   (return (call $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
 )
@@ -4437,11 +4483,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:98:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
  (local.set $this (ref.cast (ref $nullability.Nullability.NullableStringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:98:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
   (return (call $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
 )
@@ -4449,20 +4495,20 @@
 
 ;;; void NullableStringComparator.$clinit()
 (func $$clinit__void_<once>_@nullability.Nullability.NullableStringComparator
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:98:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:98:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
   (if (global.get $$class-initialized@nullability.Nullability.NullableStringComparator)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:98:22
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:98:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
   (global.set $$class-initialized@nullability.Nullability.NullableStringComparator (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:98:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
   (call $$clinit__void_<once>_@java.lang.Object )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:98:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
   (call $$clinit__void_<once>_@java.util.Comparator )
  )
 )
@@ -4499,16 +4545,16 @@
 ;;; NullableTemplatedReturnOverride NullableTemplatedReturnOverride.$create()
 (func $$create__@nullability.Nullability.NullableTemplatedReturnOverride
  (result (ref null $nullability.Nullability.NullableTemplatedReturnOverride))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:110:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:111:22
  (local $$instance (ref null $nullability.Nullability.NullableTemplatedReturnOverride))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:110:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:111:22
   (call $$clinit__void_<once>_@nullability.Nullability.NullableTemplatedReturnOverride )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:110:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:111:22
   (local.set $$instance (struct.new $nullability.Nullability.NullableTemplatedReturnOverride (ref.as_non_null (global.get $nullability.Nullability.NullableTemplatedReturnOverride.vtable)) (ref.as_non_null (global.get $nullability.Nullability.NullableTemplatedReturnOverride.itable)) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:110:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:111:22
   (call $$ctor__void_$p_nullability_Nullability_NullableTemplatedReturnOverride@nullability.Nullability.NullableTemplatedReturnOverride (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:110:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:111:22
   (return (local.get $$instance))
  )
 )
@@ -4516,9 +4562,9 @@
 ;;; void NullableTemplatedReturnOverride.$ctor()
 (func $$ctor__void_$p_nullability_Nullability_NullableTemplatedReturnOverride@nullability.Nullability.NullableTemplatedReturnOverride
  (param $this (ref null $nullability.Nullability.NullableTemplatedReturnOverride))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:110:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:111:22
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:110:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:111:22
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -4528,11 +4574,11 @@
  (type $function.m_foo__java_lang_String)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.String))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:113:18
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:114:18
  (local $this (ref null $nullability.Nullability.NullableTemplatedReturnOverride))
  (local.set $this (ref.cast (ref $nullability.Nullability.NullableTemplatedReturnOverride) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:114:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:115:6
   (return (call $$getString_|foo|__java_lang_String_<once>_@nullability.Nullability.NullableTemplatedReturnOverride ))
  )
 )
@@ -4543,11 +4589,11 @@
  (type $function.m_foo__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:110:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:111:22
  (local $this (ref null $nullability.Nullability.NullableTemplatedReturnOverride))
  (local.set $this (ref.cast (ref $nullability.Nullability.NullableTemplatedReturnOverride) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:110:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:111:22
   (return (call_ref $function.m_foo__java_lang_String (ref.as_non_null (local.get $this))(struct.get $nullability.Nullability.NullableTemplatedReturnOverride.vtable $m_foo__java_lang_String (struct.get $nullability.Nullability.NullableTemplatedReturnOverride $vtable(local.get $this)))))
  )
 )
@@ -4555,18 +4601,18 @@
 
 ;;; void NullableTemplatedReturnOverride.$clinit()
 (func $$clinit__void_<once>_@nullability.Nullability.NullableTemplatedReturnOverride
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:110:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:111:22
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:110:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:111:22
   (if (global.get $$class-initialized@nullability.Nullability.NullableTemplatedReturnOverride)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:110:22
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:111:22
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:110:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:111:22
   (global.set $$class-initialized@nullability.Nullability.NullableTemplatedReturnOverride (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:110:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:111:22
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -4603,16 +4649,16 @@
 ;;; ParameterizedDefaultNullability<N> ParameterizedDefaultNullability.$create()
 (func $$create__@nullability.Nullability.ParameterizedDefaultNullability
  (result (ref null $nullability.Nullability.ParameterizedDefaultNullability))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:118:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:119:15
  (local $$instance (ref null $nullability.Nullability.ParameterizedDefaultNullability))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:118:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:119:15
   (call $$clinit__void_<once>_@nullability.Nullability.ParameterizedDefaultNullability )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:118:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:119:15
   (local.set $$instance (struct.new $nullability.Nullability.ParameterizedDefaultNullability (ref.as_non_null (global.get $nullability.Nullability.ParameterizedDefaultNullability.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:118:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:119:15
   (call $$ctor__void_$p_nullability_Nullability_ParameterizedDefaultNullability@nullability.Nullability.ParameterizedDefaultNullability (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:118:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:119:15
   (return (local.get $$instance))
  )
 )
@@ -4620,9 +4666,9 @@
 ;;; void ParameterizedDefaultNullability.$ctor()
 (func $$ctor__void_$p_nullability_Nullability_ParameterizedDefaultNullability@nullability.Nullability.ParameterizedDefaultNullability
  (param $this (ref null $nullability.Nullability.ParameterizedDefaultNullability))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:118:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:119:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:118:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:119:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -4632,11 +4678,11 @@
  (type $function.m_getNullable__java_lang_Object_$pp_nullability)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:119:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:120:16
  (local $this (ref null $nullability.Nullability.ParameterizedDefaultNullability))
  (local.set $this (ref.cast (ref $nullability.Nullability.ParameterizedDefaultNullability) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:120:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:121:6
   (return (ref.null $java.lang.Object))
  )
 )
@@ -4647,11 +4693,11 @@
  (type $function.m_getNonNullable__java_lang_Object_$pp_nullability)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:124:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:125:6
  (local $this (ref null $nullability.Nullability.ParameterizedDefaultNullability))
  (local.set $this (ref.cast (ref $nullability.Nullability.ParameterizedDefaultNullability) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:125:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:126:6
   (throw $exception.event (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $$create__@java.lang.RuntimeException )))
  )
 )
@@ -4662,11 +4708,11 @@
  (type $function.m_getDefaultNullability__java_lang_Object_$pp_nullability)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:128:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:129:6
  (local $this (ref null $nullability.Nullability.ParameterizedDefaultNullability))
  (local.set $this (ref.cast (ref $nullability.Nullability.ParameterizedDefaultNullability) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:129:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:130:6
   (return (ref.null $java.lang.Object))
  )
 )
@@ -4674,18 +4720,18 @@
 
 ;;; void ParameterizedDefaultNullability.$clinit()
 (func $$clinit__void_<once>_@nullability.Nullability.ParameterizedDefaultNullability
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:118:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:119:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:118:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:119:15
   (if (global.get $$class-initialized@nullability.Nullability.ParameterizedDefaultNullability)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:118:15
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:119:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:118:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:119:15
   (global.set $$class-initialized@nullability.Nullability.ParameterizedDefaultNullability (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:118:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:119:15
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -4722,16 +4768,16 @@
 ;;; ParameterizedNullable<N> ParameterizedNullable.$create()
 (func $$create__@nullability.Nullability.ParameterizedNullable
  (result (ref null $nullability.Nullability.ParameterizedNullable))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:133:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:134:15
  (local $$instance (ref null $nullability.Nullability.ParameterizedNullable))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:133:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:134:15
   (call $$clinit__void_<once>_@nullability.Nullability.ParameterizedNullable )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:133:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:134:15
   (local.set $$instance (struct.new $nullability.Nullability.ParameterizedNullable (ref.as_non_null (global.get $nullability.Nullability.ParameterizedNullable.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:133:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:134:15
   (call $$ctor__void_$p_nullability_Nullability_ParameterizedNullable@nullability.Nullability.ParameterizedNullable (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:133:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:134:15
   (return (local.get $$instance))
  )
 )
@@ -4739,9 +4785,9 @@
 ;;; void ParameterizedNullable.$ctor()
 (func $$ctor__void_$p_nullability_Nullability_ParameterizedNullable@nullability.Nullability.ParameterizedNullable
  (param $this (ref null $nullability.Nullability.ParameterizedNullable))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:133:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:134:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:133:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:134:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -4751,11 +4797,11 @@
  (type $function.m_getNullable__java_lang_Object_$pp_nullability)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:134:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:135:16
  (local $this (ref null $nullability.Nullability.ParameterizedNullable))
  (local.set $this (ref.cast (ref $nullability.Nullability.ParameterizedNullable) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:135:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:136:6
   (return (ref.null $java.lang.Object))
  )
 )
@@ -4766,11 +4812,11 @@
  (type $function.m_getNonNullable__java_lang_Object_$pp_nullability)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:139:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:140:6
  (local $this (ref null $nullability.Nullability.ParameterizedNullable))
  (local.set $this (ref.cast (ref $nullability.Nullability.ParameterizedNullable) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:140:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:141:6
   (throw $exception.event (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $$create__@java.lang.RuntimeException )))
  )
 )
@@ -4781,11 +4827,11 @@
  (type $function.m_getDefaultNullability__java_lang_Object_$pp_nullability)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:143:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:144:6
  (local $this (ref null $nullability.Nullability.ParameterizedNullable))
  (local.set $this (ref.cast (ref $nullability.Nullability.ParameterizedNullable) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:144:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:145:6
   (return (ref.null $java.lang.Object))
  )
 )
@@ -4793,18 +4839,18 @@
 
 ;;; void ParameterizedNullable.$clinit()
 (func $$clinit__void_<once>_@nullability.Nullability.ParameterizedNullable
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:133:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:134:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:133:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:134:15
   (if (global.get $$class-initialized@nullability.Nullability.ParameterizedNullable)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:133:15
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:134:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:133:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:134:15
   (global.set $$class-initialized@nullability.Nullability.ParameterizedNullable (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:133:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:134:15
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -4841,16 +4887,16 @@
 ;;; ParameterizedNonNullable<N> ParameterizedNonNullable.$create()
 (func $$create__@nullability.Nullability.ParameterizedNonNullable
  (result (ref null $nullability.Nullability.ParameterizedNonNullable))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:148:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:149:15
  (local $$instance (ref null $nullability.Nullability.ParameterizedNonNullable))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:148:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:149:15
   (call $$clinit__void_<once>_@nullability.Nullability.ParameterizedNonNullable )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:148:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:149:15
   (local.set $$instance (struct.new $nullability.Nullability.ParameterizedNonNullable (ref.as_non_null (global.get $nullability.Nullability.ParameterizedNonNullable.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:148:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:149:15
   (call $$ctor__void_$p_nullability_Nullability_ParameterizedNonNullable@nullability.Nullability.ParameterizedNonNullable (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:148:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:149:15
   (return (local.get $$instance))
  )
 )
@@ -4858,9 +4904,9 @@
 ;;; void ParameterizedNonNullable.$ctor()
 (func $$ctor__void_$p_nullability_Nullability_ParameterizedNonNullable@nullability.Nullability.ParameterizedNonNullable
  (param $this (ref null $nullability.Nullability.ParameterizedNonNullable))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:148:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:149:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:148:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:149:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -4870,11 +4916,11 @@
  (type $function.m_getNullable__java_lang_Object_$pp_nullability)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:149:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:150:16
  (local $this (ref null $nullability.Nullability.ParameterizedNonNullable))
  (local.set $this (ref.cast (ref $nullability.Nullability.ParameterizedNonNullable) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:150:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:151:6
   (return (ref.null $java.lang.Object))
  )
 )
@@ -4885,11 +4931,11 @@
  (type $function.m_getNonNullable__java_lang_Object_$pp_nullability)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:154:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:155:6
  (local $this (ref null $nullability.Nullability.ParameterizedNonNullable))
  (local.set $this (ref.cast (ref $nullability.Nullability.ParameterizedNonNullable) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:155:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:156:6
   (throw $exception.event (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $$create__@java.lang.RuntimeException )))
  )
 )
@@ -4900,11 +4946,11 @@
  (type $function.m_getDefaultNullability__java_lang_Object_$pp_nullability)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:158:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:159:6
  (local $this (ref null $nullability.Nullability.ParameterizedNonNullable))
  (local.set $this (ref.cast (ref $nullability.Nullability.ParameterizedNonNullable) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:159:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:160:6
   (return (ref.null $java.lang.Object))
  )
 )
@@ -4912,18 +4958,18 @@
 
 ;;; void ParameterizedNonNullable.$clinit()
 (func $$clinit__void_<once>_@nullability.Nullability.ParameterizedNonNullable
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:148:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:149:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:148:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:149:15
   (if (global.get $$class-initialized@nullability.Nullability.ParameterizedNonNullable)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:148:15
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:149:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:148:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:149:15
   (global.set $$class-initialized@nullability.Nullability.ParameterizedNonNullable (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:148:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:149:15
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -4960,16 +5006,16 @@
 ;;; NonNullableInsideNullable<T> NonNullableInsideNullable.$create()
 (func $$create__@nullability.Nullability.NonNullableInsideNullable
  (result (ref null $nullability.Nullability.NonNullableInsideNullable))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:163:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:164:15
  (local $$instance (ref null $nullability.Nullability.NonNullableInsideNullable))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:163:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:164:15
   (call $$clinit__void_<once>_@nullability.Nullability.NonNullableInsideNullable )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:163:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:164:15
   (local.set $$instance (struct.new $nullability.Nullability.NonNullableInsideNullable (ref.as_non_null (global.get $nullability.Nullability.NonNullableInsideNullable.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:163:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:164:15
   (call $$ctor__void_$p_nullability_Nullability_NonNullableInsideNullable@nullability.Nullability.NonNullableInsideNullable (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:163:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:164:15
   (return (local.get $$instance))
  )
 )
@@ -4977,9 +5023,9 @@
 ;;; void NonNullableInsideNullable.$ctor()
 (func $$ctor__void_$p_nullability_Nullability_NonNullableInsideNullable@nullability.Nullability.NonNullableInsideNullable
  (param $this (ref null $nullability.Nullability.NonNullableInsideNullable))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:163:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:164:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:163:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:164:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -4989,7 +5035,7 @@
  (type $function.m_nonNullableTest__nullability_Nullability_ParameterizedNonNullable__void_$pp_nullability)
  (param $this.untyped (ref $java.lang.Object))
  (param $nonNullable (ref null $nullability.Nullability.ParameterizedNonNullable))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:164:9
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:165:9
  (local $this (ref null $nullability.Nullability.NonNullableInsideNullable))
  (local.set $this (ref.cast (ref $nullability.Nullability.NonNullableInsideNullable) (local.get $this.untyped)))
  (block
@@ -4999,18 +5045,18 @@
 
 ;;; void NonNullableInsideNullable.$clinit()
 (func $$clinit__void_<once>_@nullability.Nullability.NonNullableInsideNullable
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:163:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:164:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:163:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:164:15
   (if (global.get $$class-initialized@nullability.Nullability.NonNullableInsideNullable)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:163:15
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:164:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:163:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:164:15
   (global.set $$class-initialized@nullability.Nullability.NonNullableInsideNullable (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:163:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:164:15
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -5047,16 +5093,16 @@
 ;;; Recursive<T> Recursive.$create()
 (func $$create__@nullability.Nullability.Recursive
  (result (ref null $nullability.Nullability.Recursive))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:234:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:235:15
  (local $$instance (ref null $nullability.Nullability.Recursive))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:234:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:235:15
   (call $$clinit__void_<once>_@nullability.Nullability.Recursive )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:234:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:235:15
   (local.set $$instance (struct.new $nullability.Nullability.Recursive (ref.as_non_null (global.get $nullability.Nullability.Recursive.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:234:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:235:15
   (call $$ctor__void_$p_nullability_Nullability_Recursive@nullability.Nullability.Recursive (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:234:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:235:15
   (return (local.get $$instance))
  )
 )
@@ -5064,27 +5110,27 @@
 ;;; void Recursive.$ctor()
 (func $$ctor__void_$p_nullability_Nullability_Recursive@nullability.Nullability.Recursive
  (param $this (ref null $nullability.Nullability.Recursive))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:234:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:235:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:234:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:235:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void Recursive.$clinit()
 (func $$clinit__void_<once>_@nullability.Nullability.Recursive
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:234:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:235:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:234:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:235:15
   (if (global.get $$class-initialized@nullability.Nullability.Recursive)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:234:15
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:235:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:234:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:235:15
   (global.set $$class-initialized@nullability.Nullability.Recursive (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:234:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:235:15
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -5121,16 +5167,16 @@
 ;;; RecursiveNullable<T> RecursiveNullable.$create()
 (func $$create__@nullability.Nullability.RecursiveNullable
  (result (ref null $nullability.Nullability.RecursiveNullable))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:236:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:237:15
  (local $$instance (ref null $nullability.Nullability.RecursiveNullable))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:236:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:237:15
   (call $$clinit__void_<once>_@nullability.Nullability.RecursiveNullable )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:236:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:237:15
   (local.set $$instance (struct.new $nullability.Nullability.RecursiveNullable (ref.as_non_null (global.get $nullability.Nullability.RecursiveNullable.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:236:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:237:15
   (call $$ctor__void_$p_nullability_Nullability_RecursiveNullable@nullability.Nullability.RecursiveNullable (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:236:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:237:15
   (return (local.get $$instance))
  )
 )
@@ -5138,27 +5184,27 @@
 ;;; void RecursiveNullable.$ctor()
 (func $$ctor__void_$p_nullability_Nullability_RecursiveNullable@nullability.Nullability.RecursiveNullable
  (param $this (ref null $nullability.Nullability.RecursiveNullable))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:236:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:237:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:236:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:237:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void RecursiveNullable.$clinit()
 (func $$clinit__void_<once>_@nullability.Nullability.RecursiveNullable
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:236:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:237:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:236:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:237:15
   (if (global.get $$class-initialized@nullability.Nullability.RecursiveNullable)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:236:15
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:237:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:236:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:237:15
   (global.set $$class-initialized@nullability.Nullability.RecursiveNullable (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:236:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:237:15
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -5195,16 +5241,16 @@
 ;;; RecursiveParam<T> RecursiveParam.$create()
 (func $$create__@nullability.Nullability.RecursiveParam
  (result (ref null $nullability.Nullability.RecursiveParam))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:243:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:244:15
  (local $$instance (ref null $nullability.Nullability.RecursiveParam))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:243:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:244:15
   (call $$clinit__void_<once>_@nullability.Nullability.RecursiveParam )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:243:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:244:15
   (local.set $$instance (struct.new $nullability.Nullability.RecursiveParam (ref.as_non_null (global.get $nullability.Nullability.RecursiveParam.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:243:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:244:15
   (call $$ctor__void_$p_nullability_Nullability_RecursiveParam@nullability.Nullability.RecursiveParam (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:243:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:244:15
   (return (local.get $$instance))
  )
 )
@@ -5212,27 +5258,27 @@
 ;;; void RecursiveParam.$ctor()
 (func $$ctor__void_$p_nullability_Nullability_RecursiveParam@nullability.Nullability.RecursiveParam
  (param $this (ref null $nullability.Nullability.RecursiveParam))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:243:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:244:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:243:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:244:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void RecursiveParam.$clinit()
 (func $$clinit__void_<once>_@nullability.Nullability.RecursiveParam
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:243:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:244:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:243:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:244:15
   (if (global.get $$class-initialized@nullability.Nullability.RecursiveParam)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:243:15
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:244:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:243:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:244:15
   (global.set $$class-initialized@nullability.Nullability.RecursiveParam (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:243:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:244:15
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -5269,16 +5315,16 @@
 ;;; RecursiveNullableParam<T> RecursiveNullableParam.$create()
 (func $$create__@nullability.Nullability.RecursiveNullableParam
  (result (ref null $nullability.Nullability.RecursiveNullableParam))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:245:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:246:15
  (local $$instance (ref null $nullability.Nullability.RecursiveNullableParam))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:245:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:246:15
   (call $$clinit__void_<once>_@nullability.Nullability.RecursiveNullableParam )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:245:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:246:15
   (local.set $$instance (struct.new $nullability.Nullability.RecursiveNullableParam (ref.as_non_null (global.get $nullability.Nullability.RecursiveNullableParam.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:245:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:246:15
   (call $$ctor__void_$p_nullability_Nullability_RecursiveNullableParam@nullability.Nullability.RecursiveNullableParam (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:245:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:246:15
   (return (local.get $$instance))
  )
 )
@@ -5286,27 +5332,27 @@
 ;;; void RecursiveNullableParam.$ctor()
 (func $$ctor__void_$p_nullability_Nullability_RecursiveNullableParam@nullability.Nullability.RecursiveNullableParam
  (param $this (ref null $nullability.Nullability.RecursiveNullableParam))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:245:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:246:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:245:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:246:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void RecursiveNullableParam.$clinit()
 (func $$clinit__void_<once>_@nullability.Nullability.RecursiveNullableParam
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:245:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:246:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:245:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:246:15
   (if (global.get $$class-initialized@nullability.Nullability.RecursiveNullableParam)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:245:15
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:246:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:245:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:246:15
   (global.set $$class-initialized@nullability.Nullability.RecursiveNullableParam (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:245:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:246:15
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -5337,6 +5383,93 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nullability.Nullability.RecursiveNullableParam)
+
+;;; Code for nullability.Nullability.1ImplicitlyNullmarkedLocalClass [methods]
+
+;;; ImplicitlyNullmarkedLocalClass ImplicitlyNullmarkedLocalClass.$create()
+(func $$create__@nullability.Nullability.1ImplicitlyNullmarkedLocalClass
+ (result (ref null $nullability.Nullability.1ImplicitlyNullmarkedLocalClass))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:260:10
+ (local $$instance (ref null $nullability.Nullability.1ImplicitlyNullmarkedLocalClass))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:260:10
+  (call $$clinit__void_<once>_@nullability.Nullability.1ImplicitlyNullmarkedLocalClass )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:260:10
+  (local.set $$instance (struct.new $nullability.Nullability.1ImplicitlyNullmarkedLocalClass (ref.as_non_null (global.get $nullability.Nullability.1ImplicitlyNullmarkedLocalClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:260:10
+  (call $$ctor__void_$p_nullability_Nullability_1ImplicitlyNullmarkedLocalClass@nullability.Nullability.1ImplicitlyNullmarkedLocalClass (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:260:10
+  (return (local.get $$instance))
+ )
+)
+
+;;; void ImplicitlyNullmarkedLocalClass.$ctor()
+(func $$ctor__void_$p_nullability_Nullability_1ImplicitlyNullmarkedLocalClass@nullability.Nullability.1ImplicitlyNullmarkedLocalClass
+ (param $this (ref null $nullability.Nullability.1ImplicitlyNullmarkedLocalClass))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:260:10
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:260:10
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void ImplicitlyNullmarkedLocalClass.acceptsNonNullStrng(String i)
+(func $m_acceptsNonNullStrng__java_lang_String__void_$pp_nullability@nullability.Nullability.1ImplicitlyNullmarkedLocalClass
+ (type $function.m_acceptsNonNullStrng__java_lang_String__void_$pp_nullability)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $i (ref null $java.lang.String))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:261:11
+ (local $this (ref null $nullability.Nullability.1ImplicitlyNullmarkedLocalClass))
+ (local.set $this (ref.cast (ref $nullability.Nullability.1ImplicitlyNullmarkedLocalClass) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_acceptsNonNullStrng__java_lang_String__void_$pp_nullability@nullability.Nullability.1ImplicitlyNullmarkedLocalClass)
+
+;;; void ImplicitlyNullmarkedLocalClass.$clinit()
+(func $$clinit__void_<once>_@nullability.Nullability.1ImplicitlyNullmarkedLocalClass
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:260:10
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:260:10
+  (if (global.get $$class-initialized@nullability.Nullability.1ImplicitlyNullmarkedLocalClass)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:260:10
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:260:10
+  (global.set $$class-initialized@nullability.Nullability.1ImplicitlyNullmarkedLocalClass (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:260:10
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> ImplicitlyNullmarkedLocalClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nullability.Nullability.1ImplicitlyNullmarkedLocalClass
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nullability.Nullability.1ImplicitlyNullmarkedLocalClass)))
+   (then
+    (return (global.get $$class@nullability.Nullability.1ImplicitlyNullmarkedLocalClass))
+   )
+  )
+  (global.set $$class@nullability.Nullability.1ImplicitlyNullmarkedLocalClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nullability....|__java_lang_String_<once>_@nullability.Nullability.1ImplicitlyNullmarkedLocalClass )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@nullability.Nullability.1ImplicitlyNullmarkedLocalClass))
+ )
+)
+
+;;; Class<?> ImplicitlyNullmarkedLocalClass.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nullability.Nullability.1ImplicitlyNullmarkedLocalClass
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nullability.Nullability.1ImplicitlyNullmarkedLocalClass))
+ (local.set $this (ref.cast (ref $nullability.Nullability.1ImplicitlyNullmarkedLocalClass) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nullability.Nullability.1ImplicitlyNullmarkedLocalClass ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nullability.Nullability.1ImplicitlyNullmarkedLocalClass)
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable [methods]
 
@@ -10805,16 +10938,16 @@
 ;;; RecursiveChild RecursiveChild.$create()
 (func $$create__@nullability.Nullability.RecursiveChild
  (result (ref null $nullability.Nullability.RecursiveChild))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:238:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:239:15
  (local $$instance (ref null $nullability.Nullability.RecursiveChild))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:238:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:239:15
   (call $$clinit__void_<once>_@nullability.Nullability.RecursiveChild )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:238:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:239:15
   (local.set $$instance (struct.new $nullability.Nullability.RecursiveChild (ref.as_non_null (global.get $nullability.Nullability.RecursiveChild.vtable)) (ref.as_non_null (global.get $nullability.Nullability.RecursiveChild.itable)) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:238:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:239:15
   (call $$ctor__void_$p_nullability_Nullability_RecursiveChild@nullability.Nullability.RecursiveChild (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:238:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:239:15
   (return (local.get $$instance))
  )
 )
@@ -10822,27 +10955,27 @@
 ;;; void RecursiveChild.$ctor()
 (func $$ctor__void_$p_nullability_Nullability_RecursiveChild@nullability.Nullability.RecursiveChild
  (param $this (ref null $nullability.Nullability.RecursiveChild))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:238:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:239:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:238:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:239:15
   (call $$ctor__void_$p_nullability_Nullability_Recursive@nullability.Nullability.Recursive (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void RecursiveChild.$clinit()
 (func $$clinit__void_<once>_@nullability.Nullability.RecursiveChild
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:238:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:239:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:238:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:239:15
   (if (global.get $$class-initialized@nullability.Nullability.RecursiveChild)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:238:15
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:239:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:238:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:239:15
   (global.set $$class-initialized@nullability.Nullability.RecursiveChild (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:238:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:239:15
   (call $$clinit__void_<once>_@nullability.Nullability.Recursive )
  )
 )
@@ -10879,16 +11012,16 @@
 ;;; RecursiveNullableChild RecursiveNullableChild.$create()
 (func $$create__@nullability.Nullability.RecursiveNullableChild
  (result (ref null $nullability.Nullability.RecursiveNullableChild))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:240:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:241:15
  (local $$instance (ref null $nullability.Nullability.RecursiveNullableChild))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:240:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:241:15
   (call $$clinit__void_<once>_@nullability.Nullability.RecursiveNullableChild )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:240:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:241:15
   (local.set $$instance (struct.new $nullability.Nullability.RecursiveNullableChild (ref.as_non_null (global.get $nullability.Nullability.RecursiveNullableChild.vtable)) (ref.as_non_null (global.get $nullability.Nullability.RecursiveNullableChild.itable)) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:240:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:241:15
   (call $$ctor__void_$p_nullability_Nullability_RecursiveNullableChild@nullability.Nullability.RecursiveNullableChild (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:240:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:241:15
   (return (local.get $$instance))
  )
 )
@@ -10896,27 +11029,27 @@
 ;;; void RecursiveNullableChild.$ctor()
 (func $$ctor__void_$p_nullability_Nullability_RecursiveNullableChild@nullability.Nullability.RecursiveNullableChild
  (param $this (ref null $nullability.Nullability.RecursiveNullableChild))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:240:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:241:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:240:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:241:15
   (call $$ctor__void_$p_nullability_Nullability_RecursiveNullable@nullability.Nullability.RecursiveNullable (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void RecursiveNullableChild.$clinit()
 (func $$clinit__void_<once>_@nullability.Nullability.RecursiveNullableChild
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:240:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:241:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:240:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:241:15
   (if (global.get $$class-initialized@nullability.Nullability.RecursiveNullableChild)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:240:15
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:241:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:240:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:241:15
   (global.set $$class-initialized@nullability.Nullability.RecursiveNullableChild (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:240:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:241:15
   (call $$clinit__void_<once>_@nullability.Nullability.RecursiveNullable )
  )
 )
@@ -11914,18 +12047,18 @@
 
 ;;; void StringList.$clinit()
 (func $$clinit__void_<once>_@nullability.Nullability.StringList
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:87:19
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:88:19
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:87:19
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:88:19
   (if (global.get $$class-initialized@nullability.Nullability.StringList)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:87:19
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:88:19
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:87:19
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:88:19
   (global.set $$class-initialized@nullability.Nullability.StringList (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:87:19
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:88:19
   (call $$clinit__void_<once>_@java.util.List )
  )
 )

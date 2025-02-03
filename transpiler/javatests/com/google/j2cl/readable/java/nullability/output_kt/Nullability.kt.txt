@@ -189,6 +189,13 @@ open class Nullability {
    val generic: Nullability.RecursiveNullableParam<T>? = Nullability.RecursiveNullableParam<T>()
    val parametrized: Nullability.RecursiveNullableParam<Nullability.RecursiveNullableChild?>? = Nullability.RecursiveNullableParam<Nullability.RecursiveNullableChild?>()
   }
+
+  @JvmStatic
+  internal fun testMethodNullmarked_pp_nullability() {
+   open class ImplicitlyNullmarkedLocalClass internal constructor() {
+    internal open fun acceptsNonNullStrng_pp_nullability(i: String?) {}
+   }
+  }
  }
 
  @ObjCName("J2ktNullabilityNullability_Foo", exact = true)
