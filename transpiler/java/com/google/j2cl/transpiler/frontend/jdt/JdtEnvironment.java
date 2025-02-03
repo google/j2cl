@@ -49,6 +49,7 @@ import com.google.j2cl.transpiler.ast.PrefixOperator;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
+import com.google.j2cl.transpiler.ast.TypeDeclaration.SourceLanguage;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.TypeVariable;
@@ -1174,6 +1175,10 @@ public class JdtEnvironment {
             .setAnnotatedWithFunctionalInterface(isAnnotatedWithFunctionalInterface(typeBinding))
             .setAnnotatedWithAutoValue(isAnnotatedWithAutoValue(typeBinding))
             .setAnnotatedWithAutoValueBuilder(isAnnotatedWithAutoValueBuilder(typeBinding))
+            .setSourceLanguage(
+                isAnnotatedWithKotlinMetadata(typeBinding)
+                    ? SourceLanguage.KOTLIN
+                    : SourceLanguage.JAVA)
             .setTestClass(isTestClass(typeBinding))
             .setJsType(JsInteropUtils.isJsType(typeBinding))
             .setJsEnumInfo(JsInteropUtils.getJsEnumInfo(typeBinding))
@@ -1274,6 +1279,10 @@ public class JdtEnvironment {
 
   private static boolean isAnnotatedWithAutoValueBuilder(ITypeBinding typeBinding) {
     return JdtAnnotationUtils.hasAnnotation(typeBinding, "com.google.auto.value.AutoValue.Builder");
+  }
+
+  private static boolean isAnnotatedWithKotlinMetadata(ITypeBinding typeBinding) {
+    return JdtAnnotationUtils.hasAnnotation(typeBinding, "kotlin.Metadata");
   }
 
   private static boolean isTestClass(ITypeBinding typeBinding) {

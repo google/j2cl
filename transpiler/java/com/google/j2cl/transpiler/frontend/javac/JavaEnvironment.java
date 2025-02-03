@@ -57,6 +57,7 @@ import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.DescriptorFactory;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
+import com.google.j2cl.transpiler.ast.TypeDeclaration.SourceLanguage;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.TypeVariable;
@@ -1296,6 +1297,10 @@ class JavaEnvironment {
         .setAnnotatedWithFunctionalInterface(isAnnotatedWithFunctionalInterface(typeElement))
         .setAnnotatedWithAutoValue(isAnnotatedWithAutoValue(typeElement))
         .setAnnotatedWithAutoValueBuilder(isAnnotatedWithAutoValueBuilder(typeElement))
+        .setSourceLanguage(
+            isAnnotatedWithKotlinMetadata(typeElement)
+                ? SourceLanguage.KOTLIN
+                : SourceLanguage.JAVA)
         .setTestClass(isTestClass(typeElement))
         .setJsType(JsInteropUtils.isJsType(typeElement))
         .setJsEnumInfo(jsEnumInfo)
@@ -1578,6 +1583,10 @@ class JavaEnvironment {
 
   private static boolean isAnnotatedWithAutoValueBuilder(Element element) {
     return hasAnnotation(element, "com.google.auto.value.AutoValue.Builder");
+  }
+
+  private static boolean isAnnotatedWithKotlinMetadata(Element element) {
+    return hasAnnotation(element, "kotlin.Metadata");
   }
 
   private static boolean isTestClass(Element element) {
