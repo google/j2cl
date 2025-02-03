@@ -1086,6 +1086,16 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         environment.createDeclaredTypeDescriptor(methodSymbol.getEnclosingElement().asType());
     if (!methodSymbol.isConstructor()) {
       enclosingTypeDescriptor = getParameterizedEnclosingType(enclosingTypeDescriptor, qualifier);
+    } else {
+      // For constructor calls, make the enclosing type of the method either the current enclosing
+      // type or the super type as declared. Javac does not always provide enough information here
+      // to determine the correct type parameterization.
+      enclosingTypeDescriptor =
+          getCurrentType().getTypeDescriptor().isSameBaseType(enclosingTypeDescriptor)
+              // this()
+              ? getCurrentType().getTypeDescriptor()
+              // super()
+              : getCurrentType().getSuperTypeDescriptor();
     }
 
     MethodDescriptor methodDescriptor =
