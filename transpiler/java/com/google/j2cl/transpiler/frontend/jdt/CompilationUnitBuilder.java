@@ -1440,6 +1440,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       return new Type(getSourcePosition(sourcePositionNode), typeDeclaration);
     }
 
+    // TODO(b/394094907): Support for annotating methods as @NullMarked.
     private boolean inNullMarkedScope() {
       return getCurrentType().getDeclaration().isNullMarked();
     }

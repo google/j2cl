@@ -1425,6 +1425,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         .collect(toImmutableList());
   }
 
+  // TODO(b/394094907): Support for annotating methods as @NullMarked.
   private boolean inNullMarkedScope() {
     return getCurrentType().getDeclaration().isNullMarked();
   }
