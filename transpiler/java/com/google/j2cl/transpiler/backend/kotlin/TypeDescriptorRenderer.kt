@@ -80,7 +80,7 @@ internal fun NameRenderer.typeBindingsSource(
  * @property seenTypeVariables a set of seen type variables used to detect recursion
  * @property asSuperType whether to render a super-type, using bridge name if present
  * @property projectRawToWildcards whether to project raw types to wildcards, or bounds
- * @param rendersCaptures whether to render captures
+ * @property rendersCaptures whether to render captures
  */
 internal data class TypeDescriptorRenderer(
   private val nameRenderer: NameRenderer,
@@ -130,7 +130,7 @@ internal data class TypeDescriptorRenderer(
     val isStatic = !typeDeclaration.isCapturingEnclosingInstance
     return join(
       if (typeDeclaration.isLocal || enclosingTypeDescriptor == null || isStatic) {
-        nameRenderer.qualifiedNameSource(declaredTypeDescriptor, asSuperType)
+        nameRenderer.qualifiedNameSource(declaredTypeDescriptor, asSuperType = asSuperType)
       } else {
         dotSeparated(
           child.declaredSource(enclosingTypeDescriptor.toNonNullable()),

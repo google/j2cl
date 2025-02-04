@@ -59,6 +59,7 @@ internal object KotlinSource {
   val TIMES_OPERATOR = source("*")
 
   val ABSTRACT_KEYWORD = source("abstract")
+  val ANNOTATION_KEYWORD = source("annotation")
   val AS_KEYWORD = source("as")
   val BREAK_KEYWORD = source("break")
   val CAPTURE_KEYWORD = source("capture")

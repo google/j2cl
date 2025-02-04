@@ -20,6 +20,7 @@ import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptor
+import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangAnnotation
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangEnum
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotation
@@ -29,9 +30,13 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.colonSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.emptyLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inNewLine
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParentheses
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParenthesesIfNotEmpty
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.indented
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.join
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
@@ -103,6 +108,17 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
   private fun ktPrimaryConstructorSource(type: Type): Source {
     val ktPrimaryConstructor = type.ktPrimaryConstructor
     return when {
+      type.declaration.isAnnotation ->
+        // Render non-static annotation methods as constructor parameters.
+        memberRenderer(type).run {
+          inParenthesesIfNotEmpty(
+            indented(
+              commaSeparated(
+                type.methods.filter { !it.isStatic }.map { inNewLine(memberSource(it)) }
+              )
+            )
+          )
+        }
       ktPrimaryConstructor != null ->
         memberRenderer(type).run {
           objCNameRenderer.renderedObjCNames(ktPrimaryConstructor).let { objCNames ->
@@ -134,10 +150,13 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
 
   private fun superTypesSource(type: Type): Source =
     type.declaredSuperTypeDescriptors
-      .filter { !isJavaLangObject(it) && !isJavaLangEnum(it) }
-      .let { superTypeDescriptors ->
-        commaSeparated(superTypeDescriptors.map { superTypeSource(type, it) })
-      }
+      .asSequence()
+      .filter { !isJavaLangObject(it) }
+      .filter { !isJavaLangEnum(it) }
+      .filter { !isJavaLangAnnotation(it) || !type.declaration.isAnnotation }
+      .map { superTypeSource(type, it) }
+      .toList()
+      .let { commaSeparated(it) }
 
   private fun superTypeSource(type: Type, superTypeDescriptor: TypeDescriptor): Source =
     join(
@@ -197,7 +216,11 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
       when (typeDeclaration.kind!!) {
         TypeDeclaration.Kind.CLASS -> KotlinSource.CLASS_KEYWORD
         TypeDeclaration.Kind.INTERFACE ->
-          spaceSeparated(funModifierSource(typeDeclaration), KotlinSource.INTERFACE_KEYWORD)
+          if (typeDeclaration.isAnnotation) {
+            spaceSeparated(KotlinSource.ANNOTATION_KEYWORD, KotlinSource.CLASS_KEYWORD)
+          } else {
+            spaceSeparated(funModifierSource(typeDeclaration), KotlinSource.INTERFACE_KEYWORD)
+          }
         TypeDeclaration.Kind.ENUM ->
           spaceSeparated(KotlinSource.ENUM_KEYWORD, KotlinSource.CLASS_KEYWORD)
       }

@@ -70,6 +70,9 @@ public class TypeDescriptors {
   public DeclaredTypeDescriptor javaLangEnum;
   public DeclaredTypeDescriptor javaLangIterable;
 
+  @QualifiedBinaryName("java.lang.annotation.Annotation")
+  public DeclaredTypeDescriptor javaLangAnnotation;
+
   @QualifiedBinaryName("java.lang.NullPointerException")
   public DeclaredTypeDescriptor javaLangNullPointerException;
 
@@ -371,6 +374,10 @@ public class TypeDescriptors {
 
   public static boolean isJavaLangEnum(TypeDescriptor typeDescriptor) {
     return typeDescriptor.isSameBaseType(get().javaLangEnum);
+  }
+
+  public static boolean isJavaLangAnnotation(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.isSameBaseType(get().javaLangAnnotation);
   }
 
   public static boolean isJavaLangIterable(TypeDescriptor typeDescriptor) {

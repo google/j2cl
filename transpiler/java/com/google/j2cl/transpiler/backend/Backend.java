@@ -182,6 +182,7 @@ import com.google.j2cl.transpiler.passes.RemoveWasmAnnotatedMethodBodies;
 import com.google.j2cl.transpiler.passes.ResolveCaptures;
 import com.google.j2cl.transpiler.passes.ResolveImplicitInstanceQualifiers;
 import com.google.j2cl.transpiler.passes.ResolveImplicitStaticQualifiers;
+import com.google.j2cl.transpiler.passes.RewriteAnnotationTypesJ2kt;
 import com.google.j2cl.transpiler.passes.RewriteAssignmentExpressions;
 import com.google.j2cl.transpiler.passes.RewriteReferenceEqualityOperations;
 import com.google.j2cl.transpiler.passes.RewriteShortcutOperators;
@@ -719,6 +720,7 @@ public enum Backend {
           // Must be run after AddDisambiguatingSuperMethodForwardingStubs
           FixJavaKotlinMethodOverrideMismatch::new,
           AnnotateProtobufMethodsAsKtProperties::new,
+          RewriteAnnotationTypesJ2kt::new,
           NormalizeNullLiterals::new,
           NormalizeMinValueIntegralLiterals::new,
           CreateImplicitConstructors::new,

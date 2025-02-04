@@ -105,7 +105,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
       ),
     )
 
-  private fun memberSource(member: JavaMember): Source =
+  internal fun memberSource(member: JavaMember): Source =
     when (member) {
       is Method -> methodSource(member).withMapping(member.descriptor)
       is Field -> fieldSource(member).withMapping(member.descriptor)

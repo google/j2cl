@@ -19,7 +19,6 @@
 package annotation
 
 import javaemul.lang.*
-import java.lang.Class
 import kotlin.Annotation
 import kotlin.Array
 import kotlin.Boolean
@@ -32,6 +31,7 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
+import kotlin.reflect.KClass
 
 @ObjCName("J2ktAnnotationMain", exact = true)
 open class Main {
@@ -69,49 +69,35 @@ open class Main {
  }
 
  @ObjCName("J2ktAnnotationMain_Foo", exact = true)
- interface Foo: Annotation {
+ annotation class Foo (
   @ObjCName("booleanValue")
-  val booleanValue: Boolean
-
+  val booleanValue: Boolean,
   @ObjCName("intValue")
-  val intValue: Int
-
+  val intValue: Int,
   @ObjCName("stringValue")
-  val stringValue: String
-
+  val stringValue: String,
   @ObjCName("classValue")
-  val classValue: Class<*>
-
+  val classValue: KClass<*>,
   @ObjCName("stringClassValue")
-  val stringClassValue: Class<String>
-
+  val stringClassValue: KClass<String>,
   @ObjCName("wildcardClassValue")
-  val wildcardClassValue: Class<out Class<*>>
-
+  val wildcardClassValue: KClass<out KClass<*>>,
   @ObjCName("enumValue")
-  val enumValue: Main.SomeEnum
-
+  val enumValue: Main.SomeEnum,
   @ObjCName("annotationValue")
-  val annotationValue: Main.Zoo
-
+  val annotationValue: Main.Zoo,
   @ObjCName("booleanArray")
-  val booleanArray: BooleanArray
-
+  val booleanArray: BooleanArray,
   @ObjCName("intArray")
-  val intArray: IntArray
-
+  val intArray: IntArray,
   @ObjCName("stringArray")
-  val stringArray: Array<String>
-
+  val stringArray: Array<String>,
   @ObjCName("classArray")
-  val classArray: Array<Class<*>>
-
+  val classArray: Array<KClass<*>>,
   @ObjCName("enumArray")
-  val enumArray: Array<Main.SomeEnum>
-
+  val enumArray: Array<Main.SomeEnum>,
   @ObjCName("annotationArray")
-  val annotationArray: Array<Main.Zoo>
-
+  val annotationArray: Array<Main.Zoo>) {
   @ObjCName("J2ktAnnotationMain_FooCompanion", exact = true)
   companion object {
    @ObjCName("BOOLEAN_CONSTANT_")
@@ -134,7 +120,7 @@ open class Main {
  }
 
  @ObjCName("J2ktAnnotationMain_Zoo", exact = true)
- interface Zoo: Annotation
+ annotation class Zoo
 
  @ObjCName("J2ktAnnotationMain_ClassImplementingAnnotation", exact = true)
  abstract inner class ClassImplementingAnnotation internal constructor(): Annotation
