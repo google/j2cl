@@ -18,6 +18,7 @@ package j2kt;
 import static java.util.stream.Collectors.toList;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.jspecify.annotations.NullMarked;
@@ -26,6 +27,8 @@ import org.jspecify.annotations.NullMarked;
 public class StreamCollectWildcardProblem {
   interface Foo<T> {
     Foo<T> getThis();
+
+    String getString();
   }
 
   public static void testCollect(Stream<Foo<?>> list) {
@@ -57,5 +60,13 @@ public class StreamCollectWildcardProblem {
 
   public static void accept(List<Foo<?>> list) {
     throw new RuntimeException();
+  }
+
+  // Reproduces a problem from b/382742236
+  public static Stream<String> testNullabilityInference(
+      Stream<Foo> stream1, Stream<Foo> stream2, boolean b) {
+    return Stream.of(b ? stream1.map(Foo::getString) : null, b ? stream2.map(Foo::getString) : null)
+        .filter(Objects::nonNull)
+        .flatMap(stream -> stream);
   }
 }

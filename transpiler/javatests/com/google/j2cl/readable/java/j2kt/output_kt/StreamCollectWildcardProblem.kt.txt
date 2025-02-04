@@ -20,12 +20,16 @@ package j2kt
 
 import javaemul.lang.*
 import java.lang.RuntimeException
+import java.util.Objects
 import java.util.function.Function
+import java.util.function.Predicate
 import java.util.stream.Collector
 import java.util.stream.Collectors
 import java.util.stream.Stream
 import kotlin.Any
+import kotlin.Boolean
 import kotlin.OptIn
+import kotlin.String
 import kotlin.Suppress
 import kotlin.collections.MutableList
 import kotlin.experimental.ExperimentalObjCName
@@ -131,11 +135,43 @@ open class StreamCollectWildcardProblem {
   ) {
    throw RuntimeException()
   }
+
+  @JvmStatic
+  @ObjCName("testNullabilityInference")
+  fun testNullabilityInference(
+   @ObjCName("withJavaUtilStreamStream") stream1: Stream<StreamCollectWildcardProblem.Foo<Any>>,
+   @ObjCName("withJavaUtilStreamStream") stream2: Stream<StreamCollectWildcardProblem.Foo<Any>>,
+   @ObjCName("withBoolean") b: Boolean
+  ): Stream<String> {
+   return Stream.of<Stream<String>>(
+    (if (b) stream1.map<String>(
+     Function/* <in StreamCollectWildcardProblem.Foo<Any>, out String> */ { arg0: StreamCollectWildcardProblem.Foo<Any> ->
+      return@Function arg0.getString()
+     },
+    ) else null)!!,
+    (if (b) stream2.map<String>(
+     Function/* <in StreamCollectWildcardProblem.Foo<Any>, out String> */ { arg0_1: StreamCollectWildcardProblem.Foo<Any> ->
+      return@Function arg0_1.getString()
+     },
+    ) else null)!!,
+   ).filter(
+    Predicate/* <in Stream<String>> */ { arg0_2: Stream<String> ->
+     return@Predicate Objects.nonNull(arg0_2)
+    },
+   ).flatMap<String>(
+    Function/* <in Stream<String>, out Stream<out String>> */ { stream: Stream<String> ->
+     return@Function stream
+    },
+   )
+  }
  }
 
  @ObjCName("J2ktJ2ktStreamCollectWildcardProblem_Foo", exact = true)
- fun interface Foo<T: Any> {
+ interface Foo<T: Any> {
   @ObjCName("getThis")
   fun getThis(): StreamCollectWildcardProblem.Foo<T>
+
+  @ObjCName("getString")
+  fun getString(): String
  }
 }
