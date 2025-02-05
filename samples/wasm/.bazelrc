@@ -4,7 +4,15 @@
 build --watchfs
 
 build --spawn_strategy=local
+
 build --strategy=J2cl=worker
+build --strategy=J2clStrip=worker
+build --strategy=J2clRta=worker
+
+build --strategy=J2wasm=worker
+build --strategy=J2wasmStrip=worker
+build --strategy=J2wasmApp=local
+
 build --strategy=Closure=worker
 build --strategy=Javac=worker
 build --strategy=JavaIjar=local
