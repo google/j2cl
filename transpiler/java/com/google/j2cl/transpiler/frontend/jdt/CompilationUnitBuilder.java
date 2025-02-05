@@ -560,6 +560,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           return convert((org.eclipse.jdt.core.dom.TypeLiteral) expression);
         case ASTNode.VARIABLE_DECLARATION_EXPRESSION:
           return convert((org.eclipse.jdt.core.dom.VariableDeclarationExpression) expression);
+        case ASTNode.TEXT_BLOCK:
+          return convert((org.eclipse.jdt.core.dom.TextBlock) expression);
         default:
           throw internalCompilerError(
               "Unexpected type for Expression: %s", expression.getClass().getName());
@@ -790,13 +792,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       Expression e = convert(expression.getLeftOperand());
       TypeDescriptor typeDescriptor =
           environment.createTypeDescriptor(expression.getRightOperand().resolveBinding());
-      Variable patternVariable =
-          expression.getPatternVariable() == null ? null : convert(expression.getPatternVariable());
       return InstanceOfExpression.newBuilder()
           .setSourcePosition(getSourcePosition(expression))
           .setExpression(e)
           .setTestTypeDescriptor(typeDescriptor)
-          .setPatternVariable(patternVariable)
           .build();
     }
 
@@ -1268,6 +1267,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     private StringLiteral convert(org.eclipse.jdt.core.dom.StringLiteral literal) {
       return new StringLiteral(literal.getLiteralValue());
+    }
+
+    private StringLiteral convert(org.eclipse.jdt.core.dom.TextBlock expression) {
+      return new StringLiteral(expression.getLiteralValue());
     }
 
     private Expression convert(org.eclipse.jdt.core.dom.SwitchExpression expression) {
