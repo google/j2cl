@@ -277,12 +277,7 @@ class DynamicTree : BroadPhaseStrategy {
     assert(nodeCount + freeCount == nodeCapacity)
   }
 
-  override fun getHeight(): Int {
-    if (root == null) {
-      return 0
-    }
-    return root!!.height
-  }
+  override fun getHeight(): Int = root?.height ?: 0
 
   override fun getMaxBalance(): Int {
     var maxBalance = 0
@@ -302,11 +297,7 @@ class DynamicTree : BroadPhaseStrategy {
 
   // Free node in pool
   override fun getAreaRatio(): Float {
-    if (root == null) {
-      return 0.0f
-    }
-    val rootNode: DynamicTreeNode = root!!
-    val rootArea = rootNode.aabb.perimeter
+    val rootArea = root?.aabb?.perimeter ?: return 0.0f
     var totalArea = 0.0f
     for (i in 0 until nodeCapacity) {
       val node = treeNodes[i]
@@ -394,7 +385,7 @@ class DynamicTree : BroadPhaseStrategy {
     }
     val nodeId = freeList
     val treeNode = treeNodes[nodeId]
-    freeList = if (treeNode.parent != null) treeNode.parent!!.id else NULL_NODE
+    freeList = treeNode.parent?.id ?: NULL_NODE
     treeNode.parent = null
     treeNode.child1 = null
     treeNode.child2 = null
@@ -419,8 +410,7 @@ class DynamicTree : BroadPhaseStrategy {
     insertionCount++
     val leaf = treeNodes[leaf_index]
     if (root == null) {
-      root = leaf
-      root!!.parent = null
+      root = leaf.also { it.parent = null }
       return
     }
 
@@ -524,14 +514,16 @@ class DynamicTree : BroadPhaseStrategy {
       root = null
       return
     }
-    val parent = leaf.parent
-    val grandParent = parent!!.parent
-    val sibling: DynamicTreeNode? =
-      if (parent.child1 === leaf) {
-        parent.child2
-      } else {
-        parent.child1
-      }
+    val parent = checkNotNull(leaf.parent)
+    val grandParent = parent.parent
+    val sibling =
+      checkNotNull(
+        if (parent.child1 === leaf) {
+          parent.child2
+        } else {
+          parent.child1
+        }
+      )
     if (grandParent != null) {
       // Destroy parent and connect sibling to grandParent.
       if (grandParent.child1 === parent) {
@@ -539,7 +531,7 @@ class DynamicTree : BroadPhaseStrategy {
       } else {
         grandParent.child2 = sibling
       }
-      sibling!!.parent = grandParent
+      sibling.parent = grandParent
       freeNode(parent)
 
       // Adjust ancestor bounds.
@@ -554,7 +546,7 @@ class DynamicTree : BroadPhaseStrategy {
       }
     } else {
       root = sibling
-      sibling!!.parent = null
+      sibling.parent = null
       freeNode(parent)
     }
 
@@ -589,12 +581,13 @@ class DynamicTree : BroadPhaseStrategy {
       iA.parent = iC
 
       // A's old parent should point to C
-      if (iC.parent != null) {
-        if (iC.parent!!.child1 === iA) {
-          iC.parent!!.child1 = iC
+      val icParent = iC.parent
+      if (icParent != null) {
+        if (icParent.child1 === iA) {
+          icParent.child1 = iC
         } else {
-          assert(iC.parent!!.child2 === iA)
-          iC.parent!!.child2 = iC
+          assert(icParent.child2 === iA)
+          icParent.child2 = iC
         }
       } else {
         root = iC
@@ -634,14 +627,13 @@ class DynamicTree : BroadPhaseStrategy {
       iA.parent = iB
 
       // A's old parent should point to B
-      if (iB.parent != null) {
-        iB.parent!!.let {
-          if (it.child1 === iA) {
-            it.child1 = iB
-          } else {
-            assert(iB.parent!!.child2 === iA)
-            it.child2 = iB
-          }
+      val ibParent = iB.parent
+      if (ibParent != null) {
+        if (ibParent.child1 === iA) {
+          ibParent.child1 = iB
+        } else {
+          assert(ibParent.child2 === iA)
+          ibParent.child2 = iB
         }
       } else {
         root = iB
@@ -722,11 +714,9 @@ class DynamicTree : BroadPhaseStrategy {
   }
 
   override fun drawTree(draw: DebugDraw) {
-    if (root == null) {
-      return
-    }
+    val root = this.root ?: return
     val height = computeHeight()
-    drawTree(draw, root!!, 0, height)
+    drawTree(draw, root, 0, height)
   }
 
   fun drawTree(argDraw: DebugDraw, node: DynamicTreeNode, spot: Int, height: Int) {
@@ -740,12 +730,8 @@ class DynamicTree : BroadPhaseStrategy {
       node.id.toString() + "-" + (spot + 1) + "/" + height,
       color,
     )
-    if (node.child1 != null) {
-      drawTree(argDraw, node.child1!!, spot + 1, height)
-    }
-    if (node.child2 != null) {
-      drawTree(argDraw, node.child2!!, spot + 1, height)
-    }
+    node.child1?.let { drawTree(argDraw, it, spot + 1, height) }
+    node.child2?.let { drawTree(argDraw, it, spot + 1, height) }
   }
 
   inner class TreeNodeStack(private var size: Int) {

@@ -41,12 +41,7 @@ class ContactManager(private val pool: World, strategy: BroadPhaseStrategy) : Pa
   var contactFilter: ContactFilter = ContactFilter()
   var contactListener: ContactListener? = null
 
-  /**
-   * Broad-phase callback.
-   *
-   * @param userDataA
-   * @param userDataB
-   */
+  /** Broad-phase callback. */
   override fun addPair(userDataA: Any, userDataB: Any) {
     val proxyA = userDataA as FixtureProxy
     val proxyB = userDataB as FixtureProxy
@@ -107,9 +102,7 @@ class ContactManager(private val pool: World, strategy: BroadPhaseStrategy) : Pa
     // Insert into the world.
     c.prev = null
     c.next = contactList
-    if (contactList != null) {
-      contactList!!.prev = c
-    }
+    contactList?.prev = c
     contactList = c
 
     // Connect to island graph.
@@ -119,9 +112,7 @@ class ContactManager(private val pool: World, strategy: BroadPhaseStrategy) : Pa
     c.nodeA.other = bodyB
     c.nodeA.prev = null
     c.nodeA.next = bodyA.contactList
-    if (bodyA.contactList != null) {
-      bodyA.contactList!!.prev = c.nodeA
-    }
+    bodyA.contactList?.prev = c.nodeA
     bodyA.contactList = c.nodeA
 
     // Connect to body B
@@ -129,9 +120,7 @@ class ContactManager(private val pool: World, strategy: BroadPhaseStrategy) : Pa
     c.nodeB.other = bodyA
     c.nodeB.prev = null
     c.nodeB.next = bodyB.contactList
-    if (bodyB.contactList != null) {
-      bodyB.contactList!!.prev = c.nodeB
-    }
+    bodyB.contactList?.prev = c.nodeB
     bodyB.contactList = c.nodeB
 
     // wake up the bodies
@@ -156,34 +145,22 @@ class ContactManager(private val pool: World, strategy: BroadPhaseStrategy) : Pa
     }
 
     // Remove from the world.
-    if (c.prev != null) {
-      c.prev!!.next = c.next
-    }
-    if (c.next != null) {
-      c.next!!.prev = c.prev
-    }
+    c.prev?.next = c.next
+    c.next?.prev = c.prev
     if (c === contactList) {
       contactList = c.next
     }
 
     // Remove from body 1
-    if (c.nodeA.prev != null) {
-      c.nodeA.prev!!.next = c.nodeA.next
-    }
-    if (c.nodeA.next != null) {
-      c.nodeA.next!!.prev = c.nodeA.prev
-    }
+    c.nodeA.prev?.next = c.nodeA.next
+    c.nodeA.next?.prev = c.nodeA.prev
     if (c.nodeA === bodyA.contactList) {
       bodyA.contactList = c.nodeA.next
     }
 
     // Remove from body 2
-    if (c.nodeB.prev != null) {
-      c.nodeB.prev!!.next = c.nodeB.next
-    }
-    if (c.nodeB.next != null) {
-      c.nodeB.next!!.prev = c.nodeB.prev
-    }
+    c.nodeB.prev?.next = c.nodeB.next
+    c.nodeB.next?.prev = c.nodeB.prev
     if (c.nodeB === bodyB.contactList) {
       bodyB.contactList = c.nodeB.next
     }

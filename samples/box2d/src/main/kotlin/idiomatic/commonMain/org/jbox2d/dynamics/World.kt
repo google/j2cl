@@ -219,20 +219,14 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
   fun popContact(fixtureA: Fixture, indexA: Int, fixtureB: Fixture, indexB: Int): Contact? {
     val type1 = fixtureA.getType()
     val type2 = fixtureB.getType()
-    val reg = contactStacks[type1.ordinal][type2.ordinal]
-    val creator = reg!!.creator
-    return if (creator != null) {
+    val reg = checkNotNull(contactStacks[type1.ordinal][type2.ordinal])
+    val creator = reg.creator
+    return creator?.pop()?.apply {
       if (reg.primary) {
-        val c = creator.pop()
-        c.init(fixtureA, indexA, fixtureB, indexB)
-        c
+        init(fA = fixtureA, newIndexA = indexA, fB = fixtureB, newIndexB = indexB)
       } else {
-        val c = creator.pop()
-        c.init(fixtureB, indexB, fixtureA, indexA)
-        c
+        init(fA = fixtureB, newIndexA = indexB, fB = fixtureA, newIndexB = indexA)
       }
-    } else {
-      null
     }
   }
 
@@ -252,18 +246,12 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
   /**
    * Register a contact filter to provide specific control over collision. Otherwise the default
    * filter is used (_defaultFilter). The listener is owned by you and must remain in scope.
-   *
-   * @param filter
    */
   fun setContactFilter(filter: ContactFilter) {
     contactManager.contactFilter = filter
   }
 
-  /**
-   * Register a contact event listener. The listener is owned by you and must remain in scope.
-   *
-   * @param listener
-   */
+  /** Register a contact event listener. The listener is owned by you and must remain in scope. */
   fun setContactListener(listener: ContactListener) {
     contactManager.contactListener = listener
   }
@@ -271,9 +259,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
   /**
    * create a rigid body given a definition. No reference to the definition is retained.
    *
-   * @param def
-   * @return
-   * @warning This function is locked during callbacks.
+   * This function is locked during callbacks.
    */
   fun createBody(def: BodyDef): Body? {
     assert(!isLocked)
@@ -286,9 +272,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
     // add to world doubly linked list
     b.prev = null
     b.next = bodyList
-    if (bodyList != null) {
-      bodyList!!.prev = b
-    }
+    bodyList?.prev = b
     bodyList = b
     ++bodyCount
     return b
@@ -298,9 +282,9 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
    * destroy a rigid body given a definition. No reference to the definition is retained. This
    * function is locked during callbacks.
    *
-   * @param body
-   * @warning This automatically deletes all associated shapes and joints.
-   * @warning This function is locked during callbacks.
+   * This automatically deletes all associated shapes and joints.
+   *
+   * This function is locked during callbacks.
    */
   fun destroyBody(body: Body) {
     assert(bodyCount > 0)
@@ -314,9 +298,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
     while (je != null) {
       val je0 = je
       je = je.next
-      if (destructionListener != null) {
-        destructionListener!!.sayGoodbye(je0.joint!!)
-      }
+      destructionListener?.sayGoodbye(je0.joint!!)
       destroyJoint(je0.joint!!)
       body.jointList = je
     }
@@ -334,9 +316,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
     while (f != null) {
       val f0 = f
       f = f.next
-      if (destructionListener != null) {
-        destructionListener!!.sayGoodbye(f0)
-      }
+      destructionListener?.sayGoodbye(f0)
       f0.destroyProxies(contactManager.broadPhase)
       f0.destroy()
       // TODO djm recycle fixtures (here or in that destroy method)
@@ -347,12 +327,8 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
     body.fixtureCount = 0
 
     // Remove world body list.
-    if (body.prev != null) {
-      body.prev!!.next = body.next
-    }
-    if (body.next != null) {
-      body.next!!.prev = body.prev
-    }
+    body.prev?.next = body.next
+    body.next?.prev = body.prev
     if (body === bodyList) {
       bodyList = body.next
     }
@@ -372,34 +348,32 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
       return null
     }
 
-    val j = Joint.create(this, def)
+    val j = checkNotNull(Joint.create(this, def))
 
-    // Connect to the world list.
-    j!!.prev = null
-    j.next = jointList
-    if (jointList != null) {
-      jointList!!.prev = j
-    }
-    jointList = j
-    ++jointCount
+    with(j) {
+      // Connect to the world list.
+      prev = null
+      next = jointList
+      jointList?.prev = this
+      jointList = this
+      ++jointCount
 
-    // Connect to the bodies' doubly linked lists.
-    j.edgeA.joint = j
-    j.edgeA.other = j.bodyB
-    j.edgeA.prev = null
-    j.edgeA.next = j.bodyA.jointList
-    if (j.bodyA.jointList != null) {
-      j.bodyA.jointList!!.prev = j.edgeA
+      // Connect to the bodies' doubly linked lists.
+      edgeA.joint = this
+      edgeA.other = bodyB
+      edgeA.prev = null
+      edgeA.next = bodyA.jointList
+      bodyA.jointList?.prev = edgeA
+      bodyA.jointList = edgeA
+
+      edgeB.joint = this
+      edgeB.other = bodyA
+      edgeB.prev = null
+      edgeB.next = bodyB.jointList
+      bodyB.jointList?.prev = edgeB
+      bodyB.jointList = edgeB
     }
-    j.bodyA.jointList = j.edgeA
-    j.edgeB.joint = j
-    j.edgeB.other = j.bodyA
-    j.edgeB.prev = null
-    j.edgeB.next = j.bodyB.jointList
-    if (j.bodyB.jointList != null) {
-      j.bodyB.jointList!!.prev = j.edgeB
-    }
-    j.bodyB.jointList = j.edgeB
+
     val bodyA = def.bodyA
     val bodyB = def.bodyB
 
@@ -430,12 +404,8 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
     val collideConnected = j.collideConnected
 
     // Remove from the doubly linked list.
-    if (j.prev != null) {
-      j.prev!!.next = j.next
-    }
-    if (j.next != null) {
-      j.next!!.prev = j.prev
-    }
+    j.prev?.next = j.next
+    j.next?.prev = j.prev
     if (j === jointList) {
       jointList = j.next
     }
@@ -449,12 +419,8 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
     bodyB.setAwake(true)
 
     // Remove from body 1.
-    if (j.edgeA.prev != null) {
-      j.edgeA.prev!!.next = j.edgeA.next
-    }
-    if (j.edgeA.next != null) {
-      j.edgeA.next!!.prev = j.edgeA.prev
-    }
+    j.edgeA.prev?.next = j.edgeA.next
+    j.edgeA.next?.prev = j.edgeA.prev
     if (j.edgeA === bodyA.jointList) {
       bodyA.jointList = j.edgeA.next
     }
@@ -462,12 +428,8 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
     j.edgeA.next = null
 
     // Remove from body 2
-    if (j.edgeB.prev != null) {
-      j.edgeB.prev!!.next = j.edgeB.next
-    }
-    if (j.edgeB.next != null) {
-      j.edgeB.next!!.prev = j.edgeB.prev
-    }
+    j.edgeB.prev?.next = j.edgeB.next
+    j.edgeB.next?.prev = j.edgeB.prev
     if (j.edgeB === bodyB.jointList) {
       bodyB.jointList = j.edgeB.next
     }
@@ -511,11 +473,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
     step.dt = dt
     step.velocityIterations = velocityIterations
     step.positionIterations = positionIterations
-    if (dt > 0.0f) {
-      step.inv_dt = 1.0f / dt
-    } else {
-      step.inv_dt = 0.0f
-    }
+    step.inv_dt = if (dt > 0.0f) 1.0f / dt else 0.0f
     step.dtRatio = invDt0 * dt
     step.warmStarting = warmStarting
 
@@ -683,11 +641,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
     contactManager.broadPhase.raycast(wrcwrapper, input)
   }
 
-  /**
-   * Set flag to control automatic clearing of forces after each time step.
-   *
-   * @param flag
-   */
+  /** Set flag to control automatic clearing of forces after each time step. */
   fun setAutoClearForces(flag: Boolean) {
     flags =
       if (flag) {
@@ -697,11 +651,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
       }
   }
 
-  /**
-   * Get the flag that controls automatic clearing of forces after each time step.
-   *
-   * @return
-   */
+  /** Get the flag that controls automatic clearing of forces after each time step. */
   fun getAutoClearForces(): Boolean = flags and CLEAR_FORCES == CLEAR_FORCES
 
   private fun solve(step: TimeStep) {
@@ -711,10 +661,10 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
 
     // Size the island for the worst case.
     island.initialize(
-      bodyCount,
-      contactManager.contactCount,
-      jointCount,
-      contactManager.contactListener,
+      newBodyCapacity = bodyCount,
+      newContactCapacity = contactManager.contactCount,
+      newJointCapacity = jointCount,
+      newListener = contactManager.contactListener,
     )
 
     // Clear all the island flags.
@@ -887,10 +837,10 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
   private fun solveTOI(step: TimeStep) {
     val island = toiIsland
     island.initialize(
-      2 * Settings.MAX_TOI_CONTACTS,
-      Settings.MAX_TOI_CONTACTS,
-      0,
-      contactManager.contactListener,
+      newBodyCapacity = 2 * Settings.MAX_TOI_CONTACTS,
+      newContactCapacity = Settings.MAX_TOI_CONTACTS,
+      newJointCapacity = 0,
+      newListener = contactManager.contactListener,
     )
     if (stepComplete) {
       var b = bodyList
@@ -1227,7 +1177,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
           nonNullDebugDraw.drawSegment(center, circCenterMoved, liquidColor)
           return
         }
-        debugDraw!!.drawSolidCircle(center, radius, axis, color)
+        nonNullDebugDraw.drawSolidCircle(center, radius, axis, color)
       }
       ShapeType.POLYGON -> {
         val poly = fixture.shape as PolygonShape
@@ -1280,8 +1230,8 @@ internal class WorldQueryWrapper : TreeCallback {
   var callback: QueryCallback? = null
 
   override fun treeCallback(proxyId: Int): Boolean {
-    val proxy = broadPhase!!.getUserData(proxyId) as FixtureProxy?
-    return callback!!.reportFixture(proxy!!.fixture!!)
+    val proxy = broadPhase!!.getUserData(proxyId) as FixtureProxy
+    return callback!!.reportFixture(proxy.fixture!!)
   }
 }
 
@@ -1296,8 +1246,8 @@ internal class WorldRayCastWrapper : TreeRayCastCallback {
 
   override fun raycastCallback(input: RayCastInput, nodeId: Int): Float {
     val userData = broadPhase!!.getUserData(nodeId)
-    val proxy = userData as FixtureProxy?
-    val fixture = proxy!!.fixture
+    val proxy = userData as FixtureProxy
+    val fixture = proxy.fixture
     val index = proxy.childIndex
     val hit = fixture!!.raycast(output, input, index)
     if (hit) {
