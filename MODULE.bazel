@@ -37,6 +37,7 @@ bazel_dep(
 )
 
 python = use_extension("@rules_python//python/extensions:python.bzl", "python")
+
 python.toolchain(
     configure_coverage_tool = False,
     ignore_root_user_error = True,
@@ -55,7 +56,7 @@ git_override(
     remote = "https://github.com/bazelbuild/rules_webtesting",
 )
 
-# rules_scala is not available in BCR. 
+# rules_scala is not available in BCR.
 # The root module has to declare the same override as rules_webtesting.
 git_override(
     module_name = "rules_scala",
@@ -86,6 +87,26 @@ git_override(
 bazel_dep(
     name = "rules_java",
     version = "8.6.1",
+)
+
+bazel_dep(
+    name = "com_google_jsinterop_base",
+)
+
+git_override(
+    module_name = "com_google_jsinterop_base",
+    commit = "HEAD",
+    remote = "https://github.com/google/jsinterop-base",
+)
+
+bazel_dep(
+    name = "com_google_jsinterop_generator",
+)
+
+git_override(
+    module_name = "com_google_jsinterop_generator",
+    commit = "HEAD",
+    remote = "https://github.com/google/jsinterop-generator",
 )
 
 bazel_dep(
