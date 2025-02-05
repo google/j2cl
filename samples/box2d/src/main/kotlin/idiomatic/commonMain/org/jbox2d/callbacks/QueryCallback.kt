@@ -35,7 +35,6 @@ interface QueryCallback {
   /**
    * Called for each fixture found in the query AABB.
    *
-   * @param fixture
    * @return false to terminate the query.
    */
   fun reportFixture(fixture: Fixture): Boolean

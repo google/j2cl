@@ -74,11 +74,7 @@ class Manifold {
     pointCount = 0
   }
 
-  /**
-   * Creates this manifold as a copy of the other
-   *
-   * @param other
-   */
+  /** Creates this manifold as a copy of the other */
   constructor(other: Manifold) {
     points = Array<ManifoldPoint>(Settings.MAX_MANIFOLD_POINTS) { ManifoldPoint(other.points[it]) }
     localNormal = other.localNormal.copy()

@@ -37,11 +37,7 @@ abstract class Shape(val m_type: ShapeType) {
 
   open var radius = 0f
 
-  /**
-   * Get the number of child primitives
-   *
-   * @return
-   */
+  /** Get the number of child primitives */
   abstract fun getChildCount(): Int
 
   /**
@@ -65,7 +61,7 @@ abstract class Shape(val m_type: ShapeType) {
     output: RayCastOutput,
     input: RayCastInput,
     transform: Transform,
-    childIndex: Int
+    childIndex: Int,
   ): Boolean
 
   /**
@@ -85,20 +81,5 @@ abstract class Shape(val m_type: ShapeType) {
    */
   abstract fun computeMass(massData: MassData, density: Float)
 
-  /*
-   * Compute the volume and centroid of this shape intersected with a half plane
-   *
-   * @param normal the surface normal
-   *
-   * @param offset the surface offset along normal
-   *
-   * @param xf the shape transform
-   *
-   * @param c returns the centroid
-   *
-   * @return the total volume less than offset along normal
-   *
-   * public abstract float computeSubmergedArea(Vec2 normal, float offset, Transform xf, Vec2 c);
-   */
   abstract fun clone(): Shape
 }

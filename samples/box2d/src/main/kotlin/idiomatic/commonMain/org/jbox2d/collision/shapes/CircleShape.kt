@@ -45,36 +45,17 @@ class CircleShape : Shape(ShapeType.CIRCLE) {
 
   override fun getChildCount(): Int = 1
 
-  /**
-   * Get the supporting vertex index in the given direction.
-   *
-   * @param d
-   * @return
-   */
+  /** Get the supporting vertex index in the given direction. */
   fun getSupport(@Suppress("UNUSED_PARAMETER") d: Vec2): Int = 0
 
-  /**
-   * Get the supporting vertex in the given direction.
-   *
-   * @param d
-   * @return
-   */
+  /** Get the supporting vertex in the given direction. */
   fun getSupportVertex(@Suppress("UNUSED_PARAMETER") d: Vec2): Vec2 = p
 
-  /**
-   * Get the vertex count.
-   *
-   * @return
-   */
+  /** Get the vertex count. */
   val vertexCount: Int
     get() = 1
 
-  /**
-   * Get a vertex by index.
-   *
-   * @param index
-   * @return
-   */
+  /** Get a vertex by index. */
   fun getVertex(@Suppress("UNUSED_PARAMETER") index: Int): Vec2 = p
 
   override fun testPoint(xf: Transform, p: Vec2): Boolean {
@@ -98,7 +79,7 @@ class CircleShape : Shape(ShapeType.CIRCLE) {
     output: RayCastOutput,
     input: RayCastInput,
     transform: Transform,
-    childIndex: Int
+    childIndex: Int,
   ): Boolean {
     val inputp1 = input.p1
     val inputp2 = input.p2

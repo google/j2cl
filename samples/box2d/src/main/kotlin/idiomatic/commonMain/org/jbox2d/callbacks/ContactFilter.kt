@@ -37,10 +37,7 @@ class ContactFilter {
   /**
    * Return true if contact calculations should be performed between these two shapes.
    *
-   * @param fixtureA
-   * @param fixtureB
-   * @return
-   * @warning for performance reasons this is only called when the AABBs begin to overlap.
+   * For performance reasons this is only called when the AABBs begin to overlap.
    */
   fun shouldCollide(fixtureA: Fixture, fixtureB: Fixture): Boolean {
     val filterA: Filter = fixtureA.filterData

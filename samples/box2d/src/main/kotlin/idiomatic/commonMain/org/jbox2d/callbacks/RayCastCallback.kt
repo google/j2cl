@@ -41,12 +41,7 @@ interface RayCastCallback {
    * @param fixture the fixture hit by the ray
    * @param point the point of initial intersection
    * @param normal the normal vector at the point of intersection
-   * @param fixture
-   * @param point
-   * @param normal
-   * @param fraction
    * @return -1 to filter, 0 to terminate, fraction to clip the ray for closest hit, 1 to continue
-   * @return
    */
   fun reportFixture(fixture: Fixture, point: Vec2, normal: Vec2, fraction: Float): Float
 }

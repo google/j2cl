@@ -470,11 +470,7 @@ class PolygonShape : Shape(ShapeType.POLYGON) {
     massData.I += massData.mass * (massData.center dot massData.center)
   }
 
-  /**
-   * Validate convexity. This is a very time consuming operation.
-   *
-   * @return
-   */
+  /** Validate convexity. This is a very time consuming operation. */
   fun validate(): Boolean {
     for (i in 0 until count) {
       val i2 = if (i < count - 1) i + 1 else 0

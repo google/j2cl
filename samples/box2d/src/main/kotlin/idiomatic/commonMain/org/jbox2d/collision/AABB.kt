@@ -78,11 +78,7 @@ class AABB(lowerVertex: Vec2? = null, upperVertex: Vec2? = null) {
     return lowerBound.isValid && upperBound.isValid
   }
 
-  /**
-   * Get the center of the AABB
-   *
-   * @return
-   */
+  /** Get the center of the AABB */
   fun getCenter(): Vec2 {
     val center = lowerBound.copy()
     center.addLocal(upperBound)
@@ -95,11 +91,7 @@ class AABB(lowerVertex: Vec2? = null, upperVertex: Vec2? = null) {
     out.y = (lowerBound.y + upperBound.y) * .5f
   }
 
-  /**
-   * Get the extents of the AABB (half-widths).
-   *
-   * @return
-   */
+  /** Get the extents of the AABB (half-widths). */
   fun getExtents(): Vec2 {
     val center = upperBound.copy()
     center.subLocal(lowerBound)
@@ -121,12 +113,7 @@ class AABB(lowerVertex: Vec2? = null, upperVertex: Vec2? = null) {
     argRay[3].x -= upperBound.x - lowerBound.x
   }
 
-  /**
-   * Combine two AABBs into this one.
-   *
-   * @param aabb1
-   * @param aab
-   */
+  /** Combine two AABBs into this one. */
   fun combine(aabb1: AABB, aab: AABB) {
     lowerBound.x =
       if (aabb1.lowerBound.x < aab.lowerBound.x) aabb1.lowerBound.x else aab.lowerBound.x
@@ -138,11 +125,7 @@ class AABB(lowerVertex: Vec2? = null, upperVertex: Vec2? = null) {
       if (aabb1.upperBound.y > aab.upperBound.y) aabb1.upperBound.y else aab.upperBound.y
   }
 
-  /**
-   * Combines another aabb with this one
-   *
-   * @param aabb
-   */
+  /** Combines another aabb with this one */
   fun combine(aabb: AABB) {
     lowerBound.x = if (lowerBound.x < aabb.lowerBound.x) lowerBound.x else aabb.lowerBound.x
     lowerBound.y = if (lowerBound.y < aabb.lowerBound.y) lowerBound.y else aabb.lowerBound.y
@@ -150,22 +133,13 @@ class AABB(lowerVertex: Vec2? = null, upperVertex: Vec2? = null) {
     upperBound.y = if (upperBound.y > aabb.upperBound.y) upperBound.y else aabb.upperBound.y
   }
 
-  /**
-   * Does this aabb contain the provided AABB.
-   *
-   * @return
-   */
+  /** Does this aabb contain the provided AABB. */
   fun contains(aabb: AABB): Boolean =
     (lowerBound.x > aabb.lowerBound.x &&
       lowerBound.y > aabb.lowerBound.y &&
       aabb.upperBound.x > upperBound.x &&
       aabb.upperBound.y > upperBound.y)
 
-  /**
-   * @param output
-   * @param input
-   * @return
-   */
   @Deprecated(
     message =
       "please use {@link #raycast(RayCastOutput, RayCastInput, IWorldPool)} for better performance",
@@ -174,12 +148,7 @@ class AABB(lowerVertex: Vec2? = null, upperVertex: Vec2? = null) {
   fun raycast(output: RayCastOutput, input: RayCastInput): Boolean =
     raycast(output, input, DefaultWorldPool(4, 4))
 
-  /**
-   * From Real-time Collision Detection, p179.
-   *
-   * @param output
-   * @param input
-   */
+  /** From Real-time Collision Detection, p179. */
   fun raycast(output: RayCastOutput, input: RayCastInput, argPool: IWorldPool): Boolean {
     var tmin = -Float.MAX_VALUE
     var tmax = Float.MAX_VALUE

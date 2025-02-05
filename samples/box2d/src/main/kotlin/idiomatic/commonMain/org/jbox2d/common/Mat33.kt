@@ -54,9 +54,6 @@ class Mat33 : Serializable {
   /**
    * Solve A * x = b, where b is a column vector. This is more efficient than computing the inverse
    * in one-shot cases.
-   *
-   * @param b
-   * @return
    */
   fun solve22(b: Vec2): Vec2 {
     val x = Vec2()
@@ -67,9 +64,6 @@ class Mat33 : Serializable {
   /**
    * Solve A * x = b, where b is a column vector. This is more efficient than computing the inverse
    * in one-shot cases.
-   *
-   * @param b
-   * @return
    */
   fun solve22ToOut(b: Vec2, out: Vec2) {
     val a11 = ex.x

@@ -86,13 +86,7 @@ class RevoluteJointDef : JointDef() {
 
   override var type: JointType = JointType.REVOLUTE
 
-  /**
-   * Initialize the bodies, anchors, and reference angle using the world anchor.
-   *
-   * @param b1
-   * @param b2
-   * @param anchor
-   */
+  /** Initialize the bodies, anchors, and reference angle using the world anchor. */
   fun initialize(b1: Body, b2: Body, anchor: Vec2) {
     bodyA = b1
     bodyB = b2

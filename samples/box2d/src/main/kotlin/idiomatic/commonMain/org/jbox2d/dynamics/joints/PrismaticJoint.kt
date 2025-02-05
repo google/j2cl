@@ -212,11 +212,7 @@ class PrismaticJoint(argWorld: IWorldPool, def: PrismaticJointDef) : Joint(argWo
     return translation
   }
 
-  /**
-   * Enable/disable the joint limit.
-   *
-   * @param flag
-   */
+  /** Enable/disable the joint limit. */
   fun enableLimit(flag: Boolean) {
     if (flag != enableLimit) {
       bodyA.setAwake(true)
@@ -226,12 +222,7 @@ class PrismaticJoint(argWorld: IWorldPool, def: PrismaticJointDef) : Joint(argWo
     }
   }
 
-  /**
-   * Set the joint limits, usually in meters.
-   *
-   * @param lower
-   * @param upper
-   */
+  /** Set the joint limits, usually in meters. */
   fun setLimits(lower: Float, upper: Float) {
     assert(lower <= upper)
     if (lower != lowerTranslation || upper != upperTranslation) {
@@ -243,45 +234,28 @@ class PrismaticJoint(argWorld: IWorldPool, def: PrismaticJointDef) : Joint(argWo
     }
   }
 
-  /**
-   * Enable/disable the joint motor.
-   *
-   * @param flag
-   */
+  /** Enable/disable the joint motor. */
   fun enableMotor(flag: Boolean) {
     bodyA.setAwake(true)
     bodyB.setAwake(true)
     enableMotor = flag
   }
 
-  /**
-   * Set the motor speed, usually in meters per second.
-   *
-   * @param speed
-   */
+  /** Set the motor speed, usually in meters per second. */
   fun setMotorSpeed(speed: Float) {
     bodyA.setAwake(true)
     bodyB.setAwake(true)
     motorSpeed = speed
   }
 
-  /**
-   * Set the maximum motor force, usually in N.
-   *
-   * @param force
-   */
+  /** Set the maximum motor force, usually in N. */
   fun setMaxMotorForce(force: Float) {
     bodyA.setAwake(true)
     bodyB.setAwake(true)
     maxMotorForce = force
   }
 
-  /**
-   * Get the current motor force, usually in N.
-   *
-   * @param inv_dt
-   * @return
-   */
+  /** Get the current motor force, usually in N. */
   fun getMotorForce(inv_dt: Float): Float = motorImpulse * inv_dt
 
   override fun initVelocityConstraints(data: SolverData) {

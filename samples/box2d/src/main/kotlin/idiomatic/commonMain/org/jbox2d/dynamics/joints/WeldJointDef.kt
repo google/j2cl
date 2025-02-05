@@ -47,13 +47,7 @@ class WeldJointDef : JointDef() {
 
   override var type: JointType = JointType.WELD
 
-  /**
-   * Initialize the bodies, anchors, and reference angle using a world anchor point.
-   *
-   * @param bA
-   * @param bB
-   * @param anchor
-   */
+  /** Initialize the bodies, anchors, and reference angle using a world anchor point. */
   fun initialize(bA: Body, bB: Body, anchor: Vec2) {
     bodyA = bA
     bodyB = bB

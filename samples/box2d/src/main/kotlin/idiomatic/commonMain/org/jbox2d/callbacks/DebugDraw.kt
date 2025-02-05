@@ -49,10 +49,6 @@ abstract class DebugDraw(val viewportTransform: IViewportTransform) {
   /**
    * Draw a closed polygon provided in CCW order. This implementation uses [.drawSegment] to draw
    * each side of the polygon.
-   *
-   * @param vertices
-   * @param vertexCount
-   * @param color
    */
   fun drawPolygon(vertices: Array<Vec2>, vertexCount: Int, color: Color3f) {
     if (vertexCount == 1) {
@@ -69,156 +65,77 @@ abstract class DebugDraw(val viewportTransform: IViewportTransform) {
 
   abstract fun drawPoint(argPoint: Vec2, argRadiusOnScreen: Float, argColor: Color3f)
 
-  /**
-   * Draw a solid closed polygon provided in CCW order.
-   *
-   * @param vertices
-   * @param vertexCount
-   * @param color
-   */
+  /** Draw a solid closed polygon provided in CCW order. */
   abstract fun drawSolidPolygon(vertices: Array<Vec2>, vertexCount: Int, color: Color3f)
 
-  /**
-   * Draw a circle.
-   *
-   * @param center
-   * @param radius
-   * @param color
-   */
+  /** Draw a circle. */
   abstract fun drawCircle(center: Vec2, radius: Float, color: Color3f)
 
-  /**
-   * Draw a solid circle.
-   *
-   * @param center
-   * @param radius
-   * @param axis
-   * @param color
-   */
+  /** Draw a solid circle. */
   abstract fun drawSolidCircle(center: Vec2, radius: Float, axis: Vec2, color: Color3f)
 
-  /**
-   * Draw a line segment.
-   *
-   * @param p1
-   * @param p2
-   * @param color
-   */
+  /** Draw a line segment. */
   abstract fun drawSegment(p1: Vec2, p2: Vec2, color: Color3f)
 
-  /**
-   * Draw a transform. Choose your own length scale
-   *
-   * @param xf
-   */
+  /** Draw a transform. Choose your own length scale */
   abstract fun drawTransform(xf: Transform)
 
-  /**
-   * Draw a string.
-   *
-   * @param x
-   * @param y
-   * @param s
-   * @param color
-   */
+  /** Draw a string. */
   abstract fun drawString(x: Float, y: Float, s: String, color: Color3f)
 
   fun drawString(pos: Vec2, s: String, color: Color3f) {
     drawString(pos.x, pos.y, s, color)
   }
 
-  /**
-   * @param x
-   * @param y
-   * @param scale
-   * @see IViewportTransform.setCamera
-   */
+  /** @see IViewportTransform.setCamera */
   fun setCamera(x: Float, y: Float, scale: Float) {
     viewportTransform.setCamera(x, y, scale)
   }
 
-  /**
-   * @param argScreen
-   * @param argWorld
-   * @see org.jbox2d.common.IViewportTransform.getScreenToWorld
-   */
+  /** @see org.jbox2d.common.IViewportTransform.getScreenToWorld */
   fun getScreenToWorldToOut(argScreen: Vec2, argWorld: Vec2) {
     viewportTransform.getScreenToWorld(argScreen, argWorld)
   }
 
-  /**
-   * @param argWorld
-   * @param argScreen
-   * @see org.jbox2d.common.IViewportTransform.getWorldToScreen
-   */
+  /** @see org.jbox2d.common.IViewportTransform.getWorldToScreen */
   fun getWorldToScreenToOut(argWorld: Vec2, argScreen: Vec2) {
     viewportTransform.getWorldToScreen(argWorld, argScreen)
   }
 
-  /**
-   * Takes the world coordinates and puts the corresponding screen coordinates in argScreen.
-   *
-   * @param worldX
-   * @param worldY
-   * @param argScreen
-   */
+  /** Takes the world coordinates and puts the corresponding screen coordinates in argScreen. */
   fun getWorldToScreenToOut(worldX: Float, worldY: Float, argScreen: Vec2) {
     argScreen.set(worldX, worldY)
     viewportTransform.getWorldToScreen(argScreen, argScreen)
   }
 
-  /**
-   * takes the world coordinate (argWorld) and returns the screen coordinates.
-   *
-   * @param argWorld
-   */
+  /** takes the world coordinate (argWorld) and returns the screen coordinates. */
   fun getWorldToScreen(argWorld: Vec2): Vec2 {
     val screen = Vec2()
     viewportTransform.getWorldToScreen(argWorld, screen)
     return screen
   }
 
-  /**
-   * Takes the world coordinates and returns the screen coordinates.
-   *
-   * @param worldX
-   * @param worldY
-   */
+  /** Takes the world coordinates and returns the screen coordinates. */
   fun getWorldToScreen(worldX: Float, worldY: Float): Vec2 {
     val argScreen = Vec2(worldX, worldY)
     viewportTransform.getWorldToScreen(argScreen, argScreen)
     return argScreen
   }
 
-  /**
-   * takes the screen coordinates and puts the corresponding world coordinates in argWorld.
-   *
-   * @param screenX
-   * @param screenY
-   * @param argWorld
-   */
+  /** takes the screen coordinates and puts the corresponding world coordinates in argWorld. */
   fun getScreenToWorldToOut(screenX: Float, screenY: Float, argWorld: Vec2) {
     argWorld.set(screenX, screenY)
     viewportTransform.getScreenToWorld(argWorld, argWorld)
   }
 
-  /**
-   * takes the screen coordinates (argScreen) and returns the world coordinates
-   *
-   * @param argScreen
-   */
+  /** takes the screen coordinates (argScreen) and returns the world coordinates */
   fun getScreenToWorld(argScreen: Vec2): Vec2 {
     val world = Vec2()
     viewportTransform.getScreenToWorld(argScreen, world)
     return world
   }
 
-  /**
-   * takes the screen coordinates and returns the world coordinates.
-   *
-   * @param screenX
-   * @param screenY
-   */
+  /** takes the screen coordinates and returns the world coordinates. */
   fun getScreenToWorld(screenX: Float, screenY: Float): Vec2 {
     val screen = Vec2(screenX, screenY)
     viewportTransform.getScreenToWorld(screen, screen)

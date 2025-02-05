@@ -31,10 +31,6 @@ import org.jbox2d.collision.RayCastInput
  * @author Daniel Murphy
  */
 interface TreeRayCastCallback {
-  /**
-   * @param input
-   * @param nodeId
-   * @return the fraction to the node
-   */
+  /** @return the fraction to the node */
   fun raycastCallback(input: RayCastInput, nodeId: Int): Float
 }

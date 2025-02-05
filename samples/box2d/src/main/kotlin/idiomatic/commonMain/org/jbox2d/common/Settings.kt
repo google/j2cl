@@ -165,22 +165,10 @@ object Settings {
   /** A body cannot sleep if its angular velocity is above this tolerance. */
   const val ANGULAR_SLEEP_TOLERANCE = 2.0f / 180.0f * PI
 
-  /**
-   * Friction mixing law. Feel free to customize this. TODO djm: add customization
-   *
-   * @param friction1
-   * @param friction2
-   * @return
-   */
+  /** Friction mixing law. Feel free to customize this. TODO djm: add customization */
   fun mixFriction(friction1: Float, friction2: Float): Float = sqrt(friction1 * friction2)
 
-  /**
-   * Restitution mixing law. Feel free to customize this. TODO djm: add customization
-   *
-   * @param restitution1
-   * @param restitution2
-   * @return
-   */
+  /** Restitution mixing law. Feel free to customize this. TODO djm: add customization */
   fun mixRestitution(restitution1: Float, restitution2: Float): Float =
     if (restitution1 > restitution2) restitution1 else restitution2
 }

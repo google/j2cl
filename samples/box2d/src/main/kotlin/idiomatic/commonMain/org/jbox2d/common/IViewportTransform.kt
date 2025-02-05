@@ -40,90 +40,48 @@ interface IViewportTransform {
   /**
    * This is the half-width and half-height. This should be the actual half-width and half-height,
    * not anything transformed or scaled. Not a copy.
-   *
-   * @return
    */
   fun getExtents(): Vec2
 
   /**
    * This sets the half-width and half-height. This should be the actual half-width and half-height,
    * not anything transformed or scaled.
-   *
-   * @param argExtents
    */
   fun setExtents(argExtents: Vec2)
 
   /**
    * This sets the half-width and half-height of the viewport. This should be the actual half-width
    * and half-height, not anything transformed or scaled.
-   *
-   * @param argHalfWidth
-   * @param argHalfHeight
    */
   fun setExtents(argHalfWidth: Float, argHalfHeight: Float)
 
-  /**
-   * center of the viewport. Not a copy.
-   *
-   * @return
-   */
+  /** center of the viewport. Not a copy. */
   fun getCenter(): Vec2
 
-  /**
-   * sets the center of the viewport.
-   *
-   * @param argPos
-   */
+  /** sets the center of the viewport. */
   fun setCenter(argPos: Vec2)
 
-  /**
-   * sets the center of the viewport.
-   *
-   * @param x
-   * @param y
-   */
+  /** sets the center of the viewport. */
   fun setCenter(x: Float, y: Float)
 
-  /**
-   * Sets the transform's center to the given x and y coordinates, and using the given scale.
-   *
-   * @param x
-   * @param y
-   * @param scale
-   */
+  /** Sets the transform's center to the given x and y coordinates, and using the given scale. */
   fun setCamera(x: Float, y: Float, scale: Float)
 
-  /**
-   * Transforms the given directional vector by the viewport transform (not positional)
-   *
-   * @param argWorld
-   * @param argScreen
-   */
+  /** Transforms the given directional vector by the viewport transform (not positional) */
   fun getWorldVectorToScreen(argWorld: Vec2, argScreen: Vec2)
 
-  /**
-   * Transforms the given directional screen vector back to the world direction.
-   *
-   * @param argScreen
-   * @param argWorld
-   */
+  /** Transforms the given directional screen vector back to the world direction. */
   fun getScreenVectorToWorld(argScreen: Vec2, argWorld: Vec2)
 
   /**
    * takes the world coordinate (argWorld) puts the corresponding screen coordinate in argScreen. It
    * should be safe to give the same object as both parameters.
-   *
-   * @param argWorld
-   * @param argScreen
    */
   fun getWorldToScreen(argWorld: Vec2, argScreen: Vec2)
 
   /**
    * takes the screen coordinates (argScreen) and puts the corresponding world coordinates in
    * argWorld. It should be safe to give the same object as both parameters.
-   *
-   * @param argScreen
-   * @param argWorld
    */
   fun getScreenToWorld(argScreen: Vec2, argWorld: Vec2)
 }

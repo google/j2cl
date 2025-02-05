@@ -33,22 +33,15 @@ import org.jbox2d.dynamics.contacts.Contact
  * Additionally, you may receive multiple callbacks for the same contact in a single time step. You
  * should strive to make your callbacks efficient because there may be many callbacks per time step.
  *
+ * You cannot create/destroy Box2D entities inside these callbacks.
+ *
  * @author Daniel Murphy
- * @warning You cannot create/destroy Box2D entities inside these callbacks.
  */
 interface ContactListener {
-  /**
-   * Called when two fixtures begin to touch.
-   *
-   * @param contact
-   */
+  /** Called when two fixtures begin to touch. */
   fun beginContact(contact: Contact)
 
-  /**
-   * Called when two fixtures cease to touch.
-   *
-   * @param contact
-   */
+  /** Called when two fixtures cease to touch. */
   fun endContact(contact: Contact)
 
   /**
@@ -60,9 +53,6 @@ interface ContactListener {
    * you will not get an EndContact callback. However, you may get a BeginContact callback the next
    * step. Note: the oldManifold parameter is pooled, so it will be the same object for every
    * callback for each thread.
-   *
-   * @param contact
-   * @param oldManifold
    */
   fun preSolve(contact: Contact, oldManifold: Manifold)
 
@@ -73,7 +63,6 @@ interface ContactListener {
    * separate data structure. Note: this is only called for contacts that are touching, solid, and
    * awake.
    *
-   * @param contact
    * @param impulse this is usually a pooled variable, so it will be modified after this call
    */
   fun postSolve(contact: Contact, impulse: ContactImpulse)
