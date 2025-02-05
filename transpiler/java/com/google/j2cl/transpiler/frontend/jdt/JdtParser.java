@@ -49,8 +49,8 @@ import org.eclipse.jdt.core.dom.ITypeBinding;
  * into compilation unit.
  */
 public class JdtParser {
-  private static final String JAVA_VERSION = JavaCore.VERSION_14;
-  private static final int AST_JLS_VERSION = AST.JLS14;
+  private static final String JAVA_VERSION = JavaCore.VERSION_17;
+  private static final int AST_JLS_VERSION = AST.JLS17;
 
   private final Map<String, String> compilerOptions = new HashMap<>();
   private final Problems problems;
