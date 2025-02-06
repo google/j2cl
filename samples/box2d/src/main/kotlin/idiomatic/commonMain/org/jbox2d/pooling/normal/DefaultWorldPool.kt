@@ -184,28 +184,18 @@ class DefaultWorldPool(private val argSize: Int, private val argContainerSize: I
     rots.push(num)
   }
 
-  override fun getFloatArray(argLength: Int): FloatArray {
-    if (!afloats.containsKey(argLength)) {
-      afloats[argLength] = FloatArray(argLength)
-    }
-    assert(afloats[argLength]!!.size == argLength) { "Array not built with correct length" }
-    return afloats[argLength]!!
-  }
+  override fun getFloatArray(argLength: Int): FloatArray =
+    afloats
+      .getOrPut(argLength) { FloatArray(argLength) }
+      .also { assert(it.size == argLength) { "Array not built with correct length" } }
 
-  override fun getIntArray(argLength: Int): IntArray {
-    if (!aints.containsKey(argLength)) {
-      aints[argLength] = IntArray(argLength)
-    }
-    assert(aints[argLength]!!.size == argLength) { "Array not built with correct length" }
-    return aints[argLength]!!
-  }
+  override fun getIntArray(argLength: Int): IntArray =
+    aints
+      .getOrPut(argLength) { IntArray(argLength) }
+      .also { assert(it.size == argLength) { "Array not built with correct length" } }
 
-  override fun getVec2Array(argLength: Int): Array<Vec2> {
-    if (!avecs.containsKey(argLength)) {
-      val ray = Array<Vec2>(argLength) { Vec2() }
-      avecs[argLength] = ray
-    }
-    assert(avecs[argLength]!!.size == argLength) { "Array not built with correct length" }
-    return avecs[argLength]!!
-  }
+  override fun getVec2Array(argLength: Int): Array<Vec2> =
+    avecs
+      .getOrPut(argLength) { Array<Vec2>(argLength) { Vec2() } }
+      .also { assert(it.size == argLength) { "Array not built with correct length" } }
 }

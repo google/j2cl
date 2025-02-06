@@ -34,11 +34,9 @@ class IntArray {
 
   operator fun get(argLength: Int): KTIntArray {
     assert(argLength > 0)
-    if (!map.containsKey(argLength)) {
-      map[argLength] = getInitializedArray(argLength)
-    }
-    assert(map[argLength]!!.size == argLength) { "Array not built of correct length" }
-    return map[argLength]!!
+    return map
+      .getOrPut(argLength) { getInitializedArray(argLength) }
+      .also { assert(it.size == argLength) { "Array not built of correct length" } }
   }
 
   private fun getInitializedArray(argLength: Int): KTIntArray {
