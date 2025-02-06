@@ -11,6 +11,7 @@ java_library(
     visibility = [
         "@com_google_jsinterop_generator//:__subpackages__",
         "//transpiler:__subpackages__",
+        #         "//visibility:public"
     ],
     exports = [":visitor-internal"],
 )

@@ -1,0 +1,59 @@
+module(
+    name = "com_google_j2cl_samples_wasm",
+)
+
+bazel_dep(
+    name = "com_google_j2cl",
+    version = "v20250115",
+)
+
+local_path_override(
+    module_name = "com_google_j2cl",
+    path = "../..",
+)
+
+bazel_dep(
+    name = "io_bazel_rules_closure",
+)
+
+# io_bazel_rules_closure is not available in BCR.
+git_override(
+    module_name = "io_bazel_rules_closure",
+    commit = "a8f1d2d110b565f0cf47ed86a29ff1e94a826ab4",
+    remote = "https://github.com/bazelbuild/rules_closure",
+)
+
+# rules_webtesting is not available in BCR
+git_override(
+    module_name = "rules_webtesting",
+    commit = "46b744fa916b5cefce6f0f84252f4ec89128a01b",
+    remote = "https://github.com/bazelbuild/rules_webtesting",
+)
+
+# rules_scala is not available in BCR, needed for rules_webtesting..
+git_override(
+    module_name = "rules_scala",
+    commit = "031fb0d3a63467d87f25397eb8e23faa57d1d3a6",
+    remote = "https://github.com/mbland/rules_scala",
+)
+
+# google_bazel_common is not available in BCR.
+git_override(
+    module_name = "google_bazel_common",
+    commit = "34102e4cf748e2922697f28f629ecea687345254",
+    remote = "https://github.com/google/bazel-common",
+)
+
+# Works around https://github.com/bazelbuild/rules_python/issues/1169
+bazel_dep(
+    name = "rules_python",
+    version = "0.23.1",
+)
+
+python = use_extension("@rules_python//python/extensions:python.bzl", "python")
+
+python.toolchain(
+    configure_coverage_tool = False,
+    ignore_root_user_error = True,
+    python_version = "3.11",
+)
