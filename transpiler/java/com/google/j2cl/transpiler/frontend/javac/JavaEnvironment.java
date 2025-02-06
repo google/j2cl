@@ -286,11 +286,6 @@ class JavaEnvironment {
   }
 
   /** Creates a specific subclass of TypeDescriptor from a TypeMirror. */
-  <T extends TypeDescriptor> T createTypeDescriptor(TypeMirror typeMirror, Class<T> clazz) {
-    return createTypeDescriptor(typeMirror, /* inNullMarkedScope= */ false, clazz);
-  }
-
-  /** Creates a specific subclass of TypeDescriptor from a TypeMirror. */
   <T extends TypeDescriptor> T createTypeDescriptor(
       TypeMirror typeMirror, boolean inNullMarkedScope, Class<T> clazz) {
     return clazz.cast(createTypeDescriptor(typeMirror, inNullMarkedScope));
@@ -453,16 +448,6 @@ class JavaEnvironment {
   private static DeclaredTypeDescriptor withNullability(
       DeclaredTypeDescriptor typeDescriptor, boolean nullable) {
     return nullable ? typeDescriptor.toNullable() : typeDescriptor.toNonNullable();
-  }
-
-  /**
-   * In case the given type element is nested, return the outermost possible enclosing type element.
-   */
-  private static TypeElement toTopLevelTypeBinding(Element element) {
-    if (element.getEnclosingElement().getKind() == ElementKind.PACKAGE) {
-      return (TypeElement) element;
-    }
-    return toTopLevelTypeBinding(element.getEnclosingElement());
   }
 
   private ImmutableList<String> getClassComponents(
@@ -1048,7 +1033,7 @@ class JavaEnvironment {
 
     TypeElement typeElement = (TypeElement) classType.asElement();
     DeclaredTypeDescriptor typeDescriptor =
-        createDeclarationForType(typeElement)
+        createTypeDeclaration(typeElement)
             .toDescriptor(
                 createTypeArgumentDescriptors(
                     getTypeArguments(classType),
@@ -1198,7 +1183,7 @@ class JavaEnvironment {
   }
 
   @Nullable
-  TypeDeclaration createDeclarationForType(final TypeElement typeElement) {
+  TypeDeclaration createTypeDeclaration(final TypeElement typeElement) {
     if (typeElement == null) {
       return null;
     }
@@ -1270,7 +1255,7 @@ class JavaEnvironment {
     boolean isNullMarked = isNullMarked(typeElement);
     return TypeDeclaration.newBuilder()
         .setClassComponents(getClassComponents(typeElement))
-        .setEnclosingTypeDeclaration(createDeclarationForType(getEnclosingType(typeElement)))
+        .setEnclosingTypeDeclaration(createTypeDeclaration(getEnclosingType(typeElement)))
         .setEnclosingMethodDescriptorFactory(() -> getEnclosingMethodDescriptor(typeElement))
         .setSuperTypeDescriptorFactory(
             () ->
@@ -1330,6 +1315,13 @@ class JavaEnvironment {
         .setDeclaredMethodDescriptorsFactory(declaredMethods)
         .setSingleAbstractMethodDescriptorFactory(singleAbstractMethod)
         .setDeclaredFieldDescriptorsFactory(declaredFields)
+        .setMemberTypeDeclarationsFactory(
+            () ->
+                typeElement.getEnclosedElements().stream()
+                    .filter(TypeElement.class::isInstance)
+                    .map(TypeElement.class::cast)
+                    .map(this::createTypeDeclaration)
+                    .collect(toImmutableList()))
         .setUnusableByJsSuppressed(JsInteropAnnotationUtils.isUnusableByJsSuppressed(typeElement))
         .setDeprecated(isDeprecated(typeElement))
         .build();

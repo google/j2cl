@@ -195,7 +195,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     if (typeElement == null) {
       return null;
     }
-    TypeDeclaration typeDeclaration = environment.createDeclarationForType(typeElement);
+    TypeDeclaration typeDeclaration = environment.createTypeDeclaration(typeElement);
 
     return new Type(
         typeDeclaration.isAnonymous()
@@ -970,12 +970,12 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     if (fieldAccess.name.contentEquals("this")) {
       return new ThisReference(
-          environment.createDeclarationForType((ClassSymbol) expression.type.tsym).toDescriptor(),
+          environment.createTypeDeclaration((ClassSymbol) expression.type.tsym).toDescriptor(),
           /* isQualified= */ true);
     }
     if (fieldAccess.name.contentEquals("super")) {
       DeclaredTypeDescriptor typeDescriptor =
-          environment.createDeclarationForType((ClassSymbol) expression.type.tsym).toDescriptor();
+          environment.createTypeDeclaration((ClassSymbol) expression.type.tsym).toDescriptor();
 
       boolean isQualified = !typeDescriptor.isInterface();
       if (isQualified) {
@@ -1215,7 +1215,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     Symbol symbol = identifier.sym;
     if (symbol instanceof ClassSymbol) {
       return new JavaScriptConstructorReference(
-          environment.createDeclarationForType((ClassSymbol) identifier.sym));
+          environment.createTypeDeclaration((ClassSymbol) identifier.sym));
     }
     if (symbol instanceof MethodSymbol) {
       throw new AssertionError("Unexpected symbol class: " + symbol.getClass());
