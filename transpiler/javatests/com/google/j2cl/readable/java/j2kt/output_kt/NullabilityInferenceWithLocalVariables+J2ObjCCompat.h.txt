@@ -21,12 +21,20 @@ NS_INLINE J2ktJ2ktNullabilityInferenceWithLocalVariables_Foo* J2ktNullabilityInf
  return [J2ktJ2ktNullabilityInferenceWithLocalVariablesCompanion.shared testMethod];
 }
 
+NS_INLINE J2ktJ2ktNullabilityInferenceWithLocalVariables_Foo* J2ktNullabilityInferenceWithLocalVariables_testMethodChain(void) {
+ return [J2ktJ2ktNullabilityInferenceWithLocalVariablesCompanion.shared testMethodChain];
+}
+
 @compatibility_alias J2ktNullabilityInferenceWithLocalVariables_Foo J2ktJ2ktNullabilityInferenceWithLocalVariables_Foo;
 
 @compatibility_alias J2ktNullabilityInferenceWithLocalVariables_FooCompanion J2ktJ2ktNullabilityInferenceWithLocalVariables_FooCompanion;
 
-NS_INLINE J2ktJ2ktNullabilityInferenceWithLocalVariables_Foo* J2ktNullabilityInferenceWithLocalVariables_Foo_createWithId_withId_(id t1, id t2) {
- return [J2ktJ2ktNullabilityInferenceWithLocalVariables_FooCompanion.shared createWithId:t1 withId:t2];
+NS_INLINE J2ktJ2ktNullabilityInferenceWithLocalVariables_Foo* J2ktNullabilityInferenceWithLocalVariables_Foo_fooWithId_(id t) {
+ return [J2ktJ2ktNullabilityInferenceWithLocalVariables_FooCompanion.shared fooWithId:t];
+}
+
+NS_INLINE J2ktJ2ktNullabilityInferenceWithLocalVariables_Foo* J2ktNullabilityInferenceWithLocalVariables_Foo_fooWithId_withId_(id t1, id t2) {
+ return [J2ktJ2ktNullabilityInferenceWithLocalVariables_FooCompanion.shared fooWithId:t1 withId:t2];
 }
 
 NS_ASSUME_NONNULL_END

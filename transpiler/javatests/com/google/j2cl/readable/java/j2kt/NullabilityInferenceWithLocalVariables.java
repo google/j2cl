@@ -15,6 +15,8 @@
  */
 package j2kt;
 
+import static j2kt.NullabilityInferenceWithLocalVariables.Foo.foo;
+
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -32,13 +34,26 @@ public class NullabilityInferenceWithLocalVariables {
 
   public static Foo<String> testMethod() {
     String local = "";
-    return Foo.create(local, "");
+    return foo(local, "");
+  }
+
+  public static Foo<String> testMethodChain() {
+    String l1 = "";
+    return foo(l1).chain(foo(""));
   }
 
   public static class Foo<T extends @Nullable Object> {
     Foo(T t1, T t2) {}
 
-    public static <T extends @Nullable Object> Foo<T> create(T t1, T t2) {
+    public static <T extends @Nullable Object> Foo<T> foo(T t) {
+      throw new RuntimeException();
+    }
+
+    public static <T extends @Nullable Object> Foo<T> foo(T t1, T t2) {
+      throw new RuntimeException();
+    }
+
+    Foo<T> chain(Foo<T> foo) {
       throw new RuntimeException();
     }
   }
