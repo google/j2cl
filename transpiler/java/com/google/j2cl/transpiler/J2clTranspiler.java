@@ -81,16 +81,18 @@ class J2clTranspiler {
     }
 
     Library library = options.getFrontend().parse(options, problems);
-    problems.abortIfHasErrors();
-    if (!library.isEmpty()) {
-      desugarLibrary(library);
-      checkLibrary(library);
-      normalizeLibrary(library);
+    try {
+      problems.abortIfHasErrors();
+      if (!library.isEmpty()) {
+        desugarLibrary(library);
+        checkLibrary(library);
+        normalizeLibrary(library);
+      }
+      options.getBackend().generateOutputs(options, library, problems);
+    } finally {
+      // Now we are done, release resources from the frontend if needed.
+      library.dispose();
     }
-    options.getBackend().generateOutputs(options, library, problems);
-
-    // Now we are done, release resources from the frontend if needed.
-    library.dispose();
   }
 
   private void desugarLibrary(Library library) {
