@@ -90,26 +90,6 @@ bazel_dep(
 )
 
 bazel_dep(
-    name = "com_google_jsinterop_base",
-)
-
-git_override(
-    module_name = "com_google_jsinterop_base",
-    commit = "HEAD",
-    remote = "https://github.com/google/jsinterop-base",
-)
-
-bazel_dep(
-    name = "com_google_jsinterop_generator",
-)
-
-git_override(
-    module_name = "com_google_jsinterop_generator",
-    commit = "HEAD",
-    remote = "https://github.com/google/jsinterop-generator",
-)
-
-bazel_dep(
     name = "rules_jvm_external",
     version = "6.6",
 )

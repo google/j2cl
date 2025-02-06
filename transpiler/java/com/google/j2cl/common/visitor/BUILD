@@ -9,9 +9,7 @@ java_library(
     name = "visitor",
     exported_plugins = ["//transpiler/java/com/google/j2cl/common/visitor/generator:visitor-apt-processor"],
     visibility = [
-        "@com_google_jsinterop_generator//:__subpackages__",
-        "//transpiler:__subpackages__",
-        #         "//visibility:public"
+        "//visibility:public",
     ],
     exports = [":visitor-internal"],
 )

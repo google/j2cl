@@ -3,10 +3,10 @@
 #
 
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
+load("@rules_java//java:defs.bzl", "java_library")
 load("//build_defs:rules.bzl", "j2cl_import", "j2cl_library", "j2wasm_library")
 load("//build_defs/internal_do_not_use:j2cl_common.bzl", "DEFAULT_J2CL_JAVAC_OPTS")
 load("//build_defs/internal_do_not_use:j2wasm_common.bzl", "DEFAULT_J2WASM_JAVAC_OPTS")
-load("@rules_java//java:defs.bzl", "java_library")
 load(":j2cl_java_toolchain.bzl", "j2cl_java_toolchain")
 load(":package_sources.bzl", "package_sources")
 
@@ -37,10 +37,7 @@ java_library(
     name = "javaemul_internal_annotations",
     srcs = glob(["javaemul/internal/annotations/*.java"]),
     visibility = [
-        "//benchmarking/java:__subpackages__",
-        "//jre/javatests:__subpackages__",
-        "@com_google_jsinterop_base//:__subpackages__",
-        "//transpiler/javatests:__subpackages__",
+        "//visibility:public",
     ],
 )
 
@@ -48,12 +45,7 @@ j2cl_import(
     name = "javaemul_internal_annotations-j2cl",
     jar = ":javaemul_internal_annotations",
     visibility = [
-        "//benchmarking/java:__subpackages__",
-        "//jre/javatests:__subpackages__",
-        "//junit/generator/java/com/google/j2cl/junit/runtime:__pkg__",
-        "@com_google_j2cl_proto//java/com/google/protobuf/contrib/j2cl/runtime:__pkg__",
-        "@com_google_jsinterop_base//:__subpackages__",
-        "//transpiler/javatests:__subpackages__",
+        "//visibility:public",
     ],
 )
 
