@@ -37,10 +37,8 @@ java_library(
     name = "javaemul_internal_annotations",
     srcs = glob(["javaemul/internal/annotations/*.java"]),
     visibility = [
-        "//benchmarking/java:__subpackages__",
-        "//jre/javatests:__subpackages__",
-        "@com_google_jsinterop_base//:__subpackages__",
-        "//transpiler/javatests:__subpackages__",
+        # Do not use. Temporary visible to workaround https://github.com/bazelbuild/bazel/issues/25214.
+        "//visibility:public",
     ],
 )
 
@@ -48,12 +46,8 @@ j2cl_import(
     name = "javaemul_internal_annotations-j2cl",
     jar = ":javaemul_internal_annotations",
     visibility = [
-        "//benchmarking/java:__subpackages__",
-        "//jre/javatests:__subpackages__",
-        "//junit/generator/java/com/google/j2cl/junit/runtime:__pkg__",
-        "@com_google_j2cl_proto//java/com/google/protobuf/contrib/j2cl/runtime:__pkg__",
-        "@com_google_jsinterop_base//:__subpackages__",
-        "//transpiler/javatests:__subpackages__",
+        # Do not use. Temporary visible to workaround https://github.com/bazelbuild/bazel/issues/25214.
+        "//visibility:public",
     ],
 )
 

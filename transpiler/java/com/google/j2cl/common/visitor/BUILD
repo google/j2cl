@@ -9,8 +9,8 @@ java_library(
     name = "visitor",
     exported_plugins = ["//transpiler/java/com/google/j2cl/common/visitor/generator:visitor-apt-processor"],
     visibility = [
-        "@com_google_jsinterop_generator//:__subpackages__",
-        "//transpiler:__subpackages__",
+        # Do not use. Temporary visible to workaround https://github.com/bazelbuild/bazel/issues/25214.
+        "//visibility:public",
     ],
     exports = [":visitor-internal"],
 )
