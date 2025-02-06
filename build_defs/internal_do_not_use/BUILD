@@ -45,19 +45,6 @@ alias(
     actual = "//transpiler/java/com/google/j2cl/transpiler:BazelJ2clBuilder",
 )
 
-alias(
-    name = "BazelJ2clBuilderWithKotlinSupport",
-    actual = "//transpiler/java/com/google/j2cl/transpiler:BazelJ2clBuilderWithKotlinSupport",
-    visibility = ["//build_defs/internal_do_not_use:kotlin_allowlist"],
-)
-
-# WARNING: Don't increase the visibility without talking to Kotlin team.
-package_group(
-    name = "kotlin_allowlist",
-    packages = [
-    ],
-)
-
 # ***************************************************
 # Standard library related
 # ***************************************************

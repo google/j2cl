@@ -184,11 +184,6 @@ def j2cl_library(
     args["j2kt_web_experiment_enabled"] = False
 
     if has_kotlin_srcs:
-        # TODO(b/217287994): Replace with more traditional allow-listing.
-        args["j2cl_transpiler_override"] = (
-            "//build_defs/internal_do_not_use:BazelJ2clBuilderWithKotlinSupport"
-        )
-
         if target_name != "//ktstdlib:j2cl_kt_stdlib":
             args["deps"] = args.get("deps", []) + [_KOTLIN_STDLIB_TARGET]
 
@@ -200,14 +195,6 @@ def j2cl_library(
         })
 
         if has_srcs:
-            # If j2kt-web is enabled, the java files are first transpiled to Kotlin before being
-            # send to the J2CL transpiler. In that case, we need to use the j2cl transpiler binary
-            # embedding the Kotlin frontend.
-            args["j2cl_transpiler_override"] = select({
-                "//build_defs/internal_do_not_use:j2kt_web_enabled": "//build_defs/internal_do_not_use:BazelJ2clBuilderWithKotlinSupport",
-                "//conditions:default": None,
-            })
-
             # If j2kt-web is enabled, we need to add _JRE_J2KT_TARGET (to resolve calls added by
             # j2kt) and _KOTLIN_STDLIB_TARGET as dependencies.
             args["deps"] = args.get("deps", []) + select({

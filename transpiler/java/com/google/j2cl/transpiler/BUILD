@@ -107,7 +107,10 @@ java_binary(
     jvm_flags = JVM_FLAGS,
     main_class = "com.google.j2cl.transpiler.BazelJ2clBuilder",
     visibility = ["//build_defs/internal_do_not_use:__pkg__"],
-    runtime_deps = [":bazelbuilder_lib"],
+    runtime_deps = [
+        ":bazelbuilder_lib",
+        "//transpiler/java/com/google/j2cl/transpiler/frontend/kotlin",
+    ],
 )
 
 java_binary(
@@ -124,17 +127,4 @@ java_binary(
     main_class = "com.google.j2cl.transpiler.BazelJ2wasmBundler",
     visibility = ["//build_defs/internal_do_not_use:__pkg__"],
     runtime_deps = [":bazelj2wasmbundler_lib"],
-)
-
-# J2CL binary with Kotlin compiler dependency.
-# TODO(b/217287994): Remove after a regular dependency is allowed.
-java_binary(
-    name = "BazelJ2clBuilderWithKotlinSupport",
-    jvm_flags = JVM_FLAGS,
-    main_class = "com.google.j2cl.transpiler.BazelJ2clBuilder",
-    visibility = ["//build_defs/internal_do_not_use:__pkg__"],
-    runtime_deps = [
-        ":bazelbuilder_lib",
-        "//transpiler/java/com/google/j2cl/transpiler/frontend/kotlin",
-    ],
 )
