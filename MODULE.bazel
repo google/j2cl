@@ -1,0 +1,196 @@
+module(
+    name = "com_google_j2cl",
+    version = "v20250115",
+    bazel_compatibility = [">=8.0.1"],
+)
+
+bazel_dep(
+    name = "protobuf",
+    version = "29.0",
+    repo_name = "com_google_protobuf",
+)
+
+bazel_dep(
+    name = "bazel_skylib",
+    version = "1.7.1",
+)
+
+bazel_dep(
+    name = "platforms",
+    version = "0.0.5",
+)
+
+bazel_dep(
+    name = "rules_kotlin",
+    version = "1.9.6",
+)
+
+bazel_dep(
+    name = "rules_license",
+    version = "1.0.0",
+)
+
+# Works around https://github.com/bazelbuild/rules_python/issues/1169
+bazel_dep(
+    name = "rules_python",
+    version = "0.23.1",
+)
+
+python = use_extension("@rules_python//python/extensions:python.bzl", "python")
+python.toolchain(
+    configure_coverage_tool = False,
+    ignore_root_user_error = True,
+    python_version = "3.11",
+)
+
+# Override rules_webtesting dependencies
+bazel_dep(
+    name = "rules_webtesting",
+    repo_name = "io_bazel_rules_webtesting",
+)
+
+git_override(
+    module_name = "rules_webtesting",
+    commit = "46b744fa916b5cefce6f0f84252f4ec89128a01b",
+    remote = "https://github.com/bazelbuild/rules_webtesting",
+)
+
+# rules_scala is not available in BCR.
+# The root module has to declare the same override as rules_webtesting.
+git_override(
+    module_name = "rules_scala",
+    commit = "031fb0d3a63467d87f25397eb8e23faa57d1d3a6",
+    remote = "https://github.com/mbland/rules_scala",
+)
+
+bazel_dep(
+    name = "io_bazel_rules_closure",
+)
+
+# io_bazel_rules_closure is not available in BCR.
+git_override(
+    module_name = "io_bazel_rules_closure",
+    commit = "a8f1d2d110b565f0cf47ed86a29ff1e94a826ab4",
+    remote = "https://github.com/bazelbuild/rules_closure",
+)
+
+bazel_dep(name = "google_bazel_common")
+
+# google_bazel_common is not available in BCR.
+git_override(
+    module_name = "google_bazel_common",
+    commit = "34102e4cf748e2922697f28f629ecea687345254",
+    remote = "https://github.com/google/bazel-common",
+)
+
+bazel_dep(
+    name = "rules_java",
+    version = "8.6.1",
+)
+
+bazel_dep(
+    name = "rules_jvm_external",
+    version = "6.6",
+)
+
+maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
+
+maven.install(
+    artifacts = [
+        "args4j:args4j:2.33",
+        "com.google.j2objc:j2objc-annotations:1.3",
+        "com.google.escapevelocity:escapevelocity:jar:1.1",
+        "com.google.errorprone:javac:jar:9+181-r4173-1",
+        "com.google.code.gson:gson:2.10.1",
+    ],
+)
+
+use_repo(maven, "maven")
+
+http_jar = use_repo_rule("@rules_java//java:http_jar.bzl", "http_jar")
+
+http_jar(
+    name = "org_eclipse_jdt_content_type",
+    sha256 = "af418cced47512a7cad606ea9a1114267bc224387abcedd639bae8d3a7fb10b9",
+    url = "http://download.eclipse.org/eclipse/updates/4.16/R-4.16-202006040540/plugins/org.eclipse.core.contenttype_3.7.700.v20200517-1644.jar",
+)
+
+http_jar(
+    name = "org_eclipse_jdt_jobs",
+    sha256 = "4d0042425dcc3655c08654351c08b1645ccb309ab5de45743455bfce4849e917",
+    url = "http://download.eclipse.org/eclipse/updates/4.16/R-4.16-202006040540/plugins/org.eclipse.core.jobs_3.10.800.v20200421-0950.jar",
+)
+
+http_jar(
+    name = "org_eclipse_jdt_resources",
+    sha256 = "ce021447dbea30a4e5ddb3f52534cd2794fb52855071b8dcf257b936ab162168",
+    url = "http://download.eclipse.org/eclipse/updates/4.16/R-4.16-202006040540/plugins/org.eclipse.core.resources_3.13.700.v20200209-1624.jar",
+)
+
+http_jar(
+    name = "org_eclipse_jdt_runtime",
+    sha256 = "b5aebc31d480efff38f910a6eab791c2de7b126a47d260252e097b5a27bd0165",
+    url = "http://download.eclipse.org/eclipse/updates/4.16/R-4.16-202006040540/plugins/org.eclipse.core.runtime_3.18.0.v20200506-2143.jar",
+)
+
+http_jar(
+    name = "org_eclipse_jdt_equinox_common",
+    sha256 = "761f9175b9d294d122c1aa92048688f0b71dd81e808c64cbb245ca7539950716",
+    url = "http://download.eclipse.org/eclipse/updates/4.16/R-4.16-202006040540/plugins/org.eclipse.equinox.common_3.12.0.v20200504-1602.jar",
+)
+
+http_jar(
+    name = "org_eclipse_jdt_equinox_preferences",
+    sha256 = "ca62478a40cffdfe9a10dcfb9f8fada760a93644a7de2c2d1897235f67f57b42",
+    url = "http://download.eclipse.org/eclipse/updates/4.16/R-4.16-202006040540/plugins/org.eclipse.equinox.preferences_3.8.0.v20200422-1833.jar",
+)
+
+http_jar(
+    name = "org_eclipse_jdt_compiler_apt",
+    sha256 = "0559677c8d0528fbdfa3a82b4a16661894a9b64a342e418809c64945bb5d3ef1",
+    url = "http://download.eclipse.org/eclipse/updates/4.16/R-4.16-202006040540/plugins/org.eclipse.jdt.apt.core_3.6.600.v20200529-1546.jar",
+)
+
+http_jar(
+    name = "org_eclipse_jdt_core",
+    sha256 = "af89d348c24917506675767fc1534a0d673355d334fbfadd264b9e45ccd9c34c",
+    url = "http://download.eclipse.org/eclipse/updates/4.16/R-4.16-202006040540/plugins/org.eclipse.jdt.core_3.22.0.v20200530-2032.jar",
+)
+
+http_jar(
+    name = "org_eclipse_jdt_osgi",
+    sha256 = "a3544cde6924babf8aff8323f7452ace232d01d040e20d9f9f43027d7b945424",
+    url = "http://download.eclipse.org/eclipse/updates/4.16/R-4.16-202006040540/plugins/org.eclipse.osgi_3.15.300.v20200520-1959.jar",
+)
+
+http_jar(
+    name = "org_eclipse_jdt_text",
+    sha256 = "83ce07ec2058d8d629feb4e269216e286560b0e4587dea883f4e16b64ea51cad",
+    url = "http://download.eclipse.org/eclipse/updates/4.16/R-4.16-202006040540/plugins/org.eclipse.text_3.10.200.v20200428-0633.jar",
+)
+
+http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+http_archive(
+    name = "com_google_jsinterop_annotations-j2cl",
+    sha256 = "4164229681bcaf3d130b6c4f463bc345af69de5ad548120e9818f31c70142717",
+    strip_prefix = "jsinterop-annotations-d2b3aee14b617a81570b788f981926a829ac892c",
+    urls = ["https://github.com/google/jsinterop-annotations/archive/d2b3aee14b617a81570b788f981926a829ac892c.zip"],
+)
+
+http_archive(
+    name = "bazel_common_javadoc",
+    sha256 = "3f090bfb3c0c66e3c2d9ae229d184af1147e4c06223551aeb2ff292661371b9a",
+    strip_prefix = "bazel-common-ebce2af3f0de560b649dcf98ef732a56b80e829c/tools/javadoc",
+    urls = ["https://github.com/google/bazel-common/archive/ebce2af3f0de560b649dcf98ef732a56b80e829c.zip"],
+)
+
+http_archive(
+    name = "com_google_binaryen",
+    build_file = "@com_google_j2cl//build_defs/internal_do_not_use/binaryen:BUILD.binaryen",
+    patch_args = ["-p1"],
+    patches = ["@com_google_j2cl//build_defs/internal_do_not_use/binaryen:generate_intrinsics.patch"],
+    sha256 = "a3b0c6b4884cd147913088817f6e238e700394834a7cbd8610acd6b23bdd4860",
+    strip_prefix = "binaryen-6645f0c05b8e9268f35742bb6b0a67e0a9c40795",
+    url = "https://github.com/WebAssembly/binaryen/archive/6645f0c05b8e9268f35742bb6b0a67e0a9c40795.zip",
+)

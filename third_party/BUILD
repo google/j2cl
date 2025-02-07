@@ -10,17 +10,17 @@ package(
 
 alias(
     name = "asm",
-    actual = "@org_ow2_asm_asm",
+    actual = "@google_bazel_common//third_party/java/asm",
 )
 
 alias(
     name = "guava",
-    actual = "@com_google_guava",
+    actual = "@google_bazel_common//third_party/java/guava",
 )
 
 alias(
     name = "jsr305_annotations",
-    actual = "@com_google_code_findbugs_jsr305",
+    actual = "@google_bazel_common//third_party/java/jsr305_annotations",
 )
 
 j2cl_import(
@@ -30,7 +30,7 @@ j2cl_import(
 
 alias(
     name = "j2objc_annotations",
-    actual = "@com_google_j2objc_annotations",
+    actual = "@maven//:com_google_j2objc_j2objc_annotations",
 )
 
 j2cl_import(
@@ -40,7 +40,7 @@ j2cl_import(
 
 alias(
     name = "jspecify_annotations",
-    actual = "@org_jspecify",
+    actual = "@google_bazel_common//third_party/java/jspecify_annotations",
 )
 
 j2cl_import(
@@ -55,7 +55,7 @@ alias(
 
 alias(
     name = "args4j",
-    actual = "@args4j",
+    actual = "@maven//:args4j_args4j",
 )
 
 java_library(
@@ -76,7 +76,7 @@ java_library(
 
 alias(
     name = "javac",
-    actual = "@com_sun_tools_javac//jar",
+    actual = "@maven//:com_google_errorprone_javac",
 )
 
 alias(
@@ -86,7 +86,7 @@ alias(
 
 alias(
     name = "auto_value",
-    actual = "@com_google_auto_value",
+    actual = "@google_bazel_common//third_party/java/auto:value",
 )
 
 j2cl_import(
@@ -94,49 +94,37 @@ j2cl_import(
     jar = ":auto_value",
 )
 
-java_library(
+alias(
     name = "auto_service",
-    exported_plugins = [":auto_service_plugin"],
-    exports = ["@com_google_auto_service_annotations//jar"],
-)
-
-java_plugin(
-    name = "auto_service_plugin",
-    processor_class = "com.google.auto.service.processor.AutoServiceProcessor",
-    deps = [
-        ":auto_common",
-        ":guava",
-        "@com_google_auto_service//jar",
-        "@com_google_auto_service_annotations//jar",
-    ],
+    actual = "@google_bazel_common//third_party/java/auto:service",
 )
 
 alias(
     name = "auto_common",
-    actual = "@com_google_auto_common//jar",
+    actual = "@google_bazel_common//third_party/java/auto:common",
 )
 
 alias(
     name = "error_prone_annotations",
-    actual = "@com_google_errorprone_error_prone_annotations",
+    actual = "@google_bazel_common//third_party/java/error_prone:annotations",
 )
 
 alias(
     name = "gson",
-    actual = "@com_google_code_gson",
+    actual = "@maven//:com_google_code_gson_gson",
 )
 
 java_library(
     name = "escapevelocity",
     exports = [
-        "@com_google_escapevelocity//jar",
+        "@maven//:com_google_escapevelocity_escapevelocity",
     ],
 )
 
 java_library(
     name = "junit",
     testonly = 1,
-    exports = ["@org_junit//jar"],
+    exports = ["@google_bazel_common//third_party/java/junit"],
 )
 
 j2cl_library(
@@ -148,19 +136,19 @@ j2cl_library(
 java_library(
     name = "mockito",
     testonly = 1,
-    exports = ["@org_mockito//jar"],
+    exports = ["@google_bazel_common//third_party/java/mockito"],
 )
 
 java_library(
     name = "truth",
     testonly = 1,
-    exports = ["@com_google_truth//jar"],
+    exports = ["@google_bazel_common//third_party/java/truth"],
 )
 
 java_library(
     name = "compile_testing",
     testonly = 1,
-    exports = ["@com_google_testing_compile//jar"],
+    exports = ["@maven//:com_google_testing_compile_compile_testing"],
 )
 
 alias(
