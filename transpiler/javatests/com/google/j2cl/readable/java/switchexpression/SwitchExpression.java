@@ -15,6 +15,8 @@
  */
 package switchexpression;
 
+import javaemul.internal.annotations.Wasm;
+
 public class SwitchExpression {
   @SuppressWarnings("unused")
   private static void testBasicSwitchExpressions() {
@@ -69,6 +71,21 @@ public class SwitchExpression {
                     };
               };
           default -> a;
+        };
+  }
+
+  enum Enum {
+    A,
+    B;
+  }
+
+  // TODO(b/395108282): Remove nop once the bug is fixed.
+  @Wasm("nop")
+  private static void testExhaustiveSwitchExpression() {
+    long i =
+        switch (Enum.A) {
+          case A -> 0;
+          case B -> 1;
         };
   }
 }

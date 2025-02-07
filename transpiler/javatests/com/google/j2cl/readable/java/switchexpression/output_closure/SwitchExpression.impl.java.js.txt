@@ -6,6 +6,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
 let Short = goog.forwardDeclare('java.lang.Short$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
+let Enum = goog.forwardDeclare('switchexpression.SwitchExpression.Enum$impl');
 let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 
@@ -93,6 +94,17 @@ class SwitchExpression extends j_l_Object {
   })();
  }
  /** @nodts */
+ static m_testExhaustiveSwitchExpression__void() {
+  let i = (() =>{
+   switch (Enum.f_A__switchexpression_SwitchExpression_Enum.ordinal()) {
+    case Enum.$ordinal_A__switchexpression_SwitchExpression_Enum: 
+     return $Long.fromInt(0);
+    case Enum.$ordinal_B__switchexpression_SwitchExpression_Enum: 
+     return $Long.fromInt(1);
+   }
+  })();
+ }
+ /** @nodts */
  static $clinit() {
   SwitchExpression.$clinit = () =>{};
   SwitchExpression.$loadModules();
@@ -108,6 +120,7 @@ class SwitchExpression extends j_l_Object {
   RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
   Short = goog.module.get('java.lang.Short$impl');
   $Long = goog.module.get('nativebootstrap.Long$impl');
+  Enum = goog.module.get('switchexpression.SwitchExpression.Enum$impl');
   $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
   $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
  }

@@ -91,6 +91,20 @@ class Main extends j_l_Object {
   }));
  }
  /** @nodts */
+ static m_testExhaustiveJsEnumSwitchExpression__void() {
+  let comparableJsEnum = $Overlay.m_getValue__$devirt__jsenum_Main_ComparableJsEnum__int(ComparableJsEnum.ONE) == 1 ? ComparableJsEnum.TWO : /**@type {?ComparableJsEnum}*/ ($Enums.unbox(null, $Overlay));
+  let i = (() =>{
+   switch ((InternalPreconditions.m_checkNotNull__boolean__void(!$Equality.$same(comparableJsEnum, null)), comparableJsEnum)) {
+    case ComparableJsEnum.TWO: 
+     return 2;
+    case ComparableJsEnum.ONE: 
+     return 1;
+    case ComparableJsEnum.ZERO: 
+     return 0;
+   }
+  })();
+ }
+ /** @nodts */
  static m_testJsEnumAutoboxingSpecialMethods__void() {
   let stringJsEnum = StringJsEnum.ONE;
   let nullStringJsEnum = /**@type {?StringJsEnum}*/ ($Enums.unbox(null, StringJsEnum_$Overlay));

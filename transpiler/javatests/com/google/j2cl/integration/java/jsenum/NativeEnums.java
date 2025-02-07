@@ -67,5 +67,10 @@ class NativeEnums {
     }
   }
 
+  @JsEnum(isNative = true, namespace = "test", name = "NativeEnum")
+  enum NativeEnumWitMissingValues {
+    OK,
+  }
+
   private NativeEnums() {}
 }

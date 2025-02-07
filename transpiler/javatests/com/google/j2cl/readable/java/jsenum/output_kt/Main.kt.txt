@@ -41,6 +41,7 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
+import kotlin.run
 
 @ObjCName("J2ktJsenumMain", exact = true)
 open class Main {
@@ -95,6 +96,24 @@ open class Main {
      }
     },
    )
+  }
+
+  @JvmStatic
+  private fun testExhaustiveJsEnumSwitchExpression() {
+   val comparableJsEnum: Main.ComparableJsEnum? = if (Main.ComparableJsEnum.ONE.getValue() == 1) Main.ComparableJsEnum.TWO else null
+   val i: Int = run {
+    when (comparableJsEnum!!) {
+     Main.ComparableJsEnum.TWO -> {
+      return@run 2
+     }
+     Main.ComparableJsEnum.ONE -> {
+      return@run 1
+     }
+     Main.ComparableJsEnum.ZERO -> {
+      return@run 0
+     }
+    }
+   }
   }
 
   @JvmStatic

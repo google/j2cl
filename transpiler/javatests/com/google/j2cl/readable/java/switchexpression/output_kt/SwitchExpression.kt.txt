@@ -121,5 +121,27 @@ open class SwitchExpression {
     }
    }
   }
+
+  @JvmStatic
+  private fun testExhaustiveSwitchExpression() {
+   val i: Long = run {
+    when (SwitchExpression.Enum.A) {
+     SwitchExpression.Enum.A -> {
+      return@run 0L
+     }
+     SwitchExpression.Enum.B -> {
+      return@run 1L
+     }
+    }
+   }
+  }
+ }
+
+ @ObjCName("J2ktSwitchexpressionSwitchExpression_Enum", exact = true)
+ enum class Enum {
+  @ObjCName("A")
+  A,
+  @ObjCName("B")
+  B;
  }
 }

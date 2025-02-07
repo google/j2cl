@@ -14,4 +14,7 @@ readable_example(
         "-source 14",
         "-target 14",
     ],
+    deps = [
+        "//jre/java:javaemul_internal_annotations-j2cl",
+    ],
 )

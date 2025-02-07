@@ -1,0 +1,76 @@
+goog.module('switchexpression.SwitchExpression.Enum$impl');
+
+const j_l_Enum = goog.require('java.lang.Enum$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
+
+/**
+ * @final
+ * @extends {j_l_Enum<Enum>}
+ */
+class Enum extends j_l_Enum {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Enum} */
+ static $create__java_lang_String__int(/** ?string */ $name, /** number */ $ordinal) {
+  let $instance = new Enum();
+  $instance.$ctor__switchexpression_SwitchExpression_Enum__java_lang_String__int__void($name, $ordinal);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__switchexpression_SwitchExpression_Enum__java_lang_String__int__void(/** ?string */ $name, /** number */ $ordinal) {
+  this.f_name__java_lang_Enum_ = $name;
+  this.f_ordinal__java_lang_Enum_ = $ordinal;
+  this.$ctor__java_lang_Enum__java_lang_String__int__void($name, $ordinal);
+ }
+ /** @nodts @return {!Enum} */
+ static m_valueOf__java_lang_String__switchexpression_SwitchExpression_Enum(/** string */ name) {
+  Enum.$clinit();
+  if ($Equality.$same(Enum.f_namesToValuesMap__switchexpression_SwitchExpression_Enum_, null)) {
+   Enum.f_namesToValuesMap__switchexpression_SwitchExpression_Enum_ = (/**@type {Map<?string, !Enum>}*/ ($Enums.createMapFromValues(Enum.m_values__arrayOf_switchexpression_SwitchExpression_Enum())));
+  }
+  return /**@type {Enum}*/ ($Enums.getValueFromNameAndMap(name, Enum.f_namesToValuesMap__switchexpression_SwitchExpression_Enum_));
+ }
+ /** @nodts @return {!Array<!Enum>} */
+ static m_values__arrayOf_switchexpression_SwitchExpression_Enum() {
+  Enum.$clinit();
+  return /**@type {!Array<!Enum>}*/ ($Arrays.$stampType([Enum.f_A__switchexpression_SwitchExpression_Enum, Enum.f_B__switchexpression_SwitchExpression_Enum], Enum));
+ }
+ /** @nodts */
+ static $clinit() {
+  Enum.$clinit = () =>{};
+  Enum.$loadModules();
+  j_l_Enum.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Enum;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $Enums = goog.module.get('vmbootstrap.Enums$impl');
+ }
+}
+/**@const {number} @nodts*/
+Enum.$ordinal_A__switchexpression_SwitchExpression_Enum = 0;
+/**@const {number} @nodts*/
+Enum.$ordinal_B__switchexpression_SwitchExpression_Enum = 1;
+/**@const {!Enum} @nodts*/
+Enum.f_A__switchexpression_SwitchExpression_Enum = /**@pureOrBreakMyCode*/ Enum.$create__java_lang_String__int($Util.$makeEnumName('A'), Enum.$ordinal_A__switchexpression_SwitchExpression_Enum);
+/**@const {!Enum} @nodts*/
+Enum.f_B__switchexpression_SwitchExpression_Enum = /**@pureOrBreakMyCode*/ Enum.$create__java_lang_String__int($Util.$makeEnumName('B'), Enum.$ordinal_B__switchexpression_SwitchExpression_Enum);
+/**@type {Map<?string, !Enum>} @nodts*/
+Enum.f_namesToValuesMap__switchexpression_SwitchExpression_Enum_;
+$Util.$setClassMetadataForEnum(Enum, 'switchexpression.SwitchExpression$Enum');
+
+exports = Enum;
+
+//# sourceMappingURL=SwitchExpression$Enum.js.map

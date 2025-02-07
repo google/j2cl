@@ -20,7 +20,11 @@ j2wasm_library(
             "NativeEnums.java",
         ],
     ),
-    javacopts = ["-XepDisableAllChecks"],
+    javacopts = [
+        "-XepDisableAllChecks",
+        "-source 17",
+        "-target 17",
+    ],
     deps = [
         "//jre/java:javaemul_internal_annotations-j2wasm",
         "//third_party:jsinterop-annotations-j2wasm",
@@ -37,4 +41,8 @@ integration_test(
     # Contains JsInterop features which are only applicable for JS output.
     enable_jvm_test = False,
     enable_kt = False,
+    javacopts = [
+        "-source 17",
+        "-target 17",
+    ],
 )

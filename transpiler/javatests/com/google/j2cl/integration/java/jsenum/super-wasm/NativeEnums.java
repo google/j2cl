@@ -15,6 +15,7 @@
  */
 package jsenum;
 
+
 /** Placeholders for Wasm. TODO(b/288145698): Native JsEnum is not supported. */
 class NativeEnums {
 
@@ -51,6 +52,10 @@ class NativeEnums {
     String getValue() {
       return value;
     }
+  }
+
+  enum NativeEnumWitMissingValues {
+    OK,
   }
 
   private NativeEnums() {}
