@@ -180,7 +180,6 @@ def j2cl_library(
     is_j2kt_web_allowed = any([p for p in _J2KT_WEB_PACKAGES if native.package_name().startswith(p) and target_name not in _J2KT_WEB_DISABLED_TARGETS])
 
     # These arguments should not be set by the user.
-    args["j2cl_transpiler_override"] = None
     args["j2kt_web_experiment_enabled"] = False
 
     if has_kotlin_srcs:

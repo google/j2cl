@@ -327,11 +327,6 @@ def _j2cl_transpile(
     args.add("-forbiddenAnnotation", "GwtIncompatible")
     args.add_all(srcs)
 
-    #  TODO(b/217287994): Remove the ability to do transpiler override.
-    j2cl_transpiler_override = None
-    if hasattr(ctx.executable, "j2cl_transpiler_override"):
-        j2cl_transpiler_override = ctx.executable.j2cl_transpiler_override
-
     output_type = "JavaScript" if backend == "CLOSURE" else "Wasm (Modular)"
     ctx.actions.run(
         progress_message = "Transpiling to %s %s" % (output_type, ctx.label),
@@ -340,7 +335,7 @@ def _j2cl_transpile(
         # to be inputs in order to be properly expanded out into params.
         inputs = depset(srcs + kt_common_srcs + jdk_system, transitive = [classpath]),
         outputs = [output_dir, library_info_output],
-        executable = j2cl_transpiler_override or ctx.executable._j2cl_transpiler,
+        executable = ctx.executable._j2cl_transpiler,
         arguments = [args],
         env = dict(LANG = "en_US.UTF-8"),
         execution_requirements = {"supports-workers": "1"},

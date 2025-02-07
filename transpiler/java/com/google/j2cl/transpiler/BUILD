@@ -107,10 +107,7 @@ java_binary(
     jvm_flags = JVM_FLAGS,
     main_class = "com.google.j2cl.transpiler.BazelJ2clBuilder",
     visibility = ["//build_defs/internal_do_not_use:__pkg__"],
-    runtime_deps = [
-        ":bazelbuilder_lib",
-        "//transpiler/java/com/google/j2cl/transpiler/frontend/kotlin",
-    ],
+    runtime_deps = [":bazelbuilder_lib"],
 )
 
 java_binary(
