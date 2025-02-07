@@ -79,7 +79,8 @@ def _j2cl_import_external_common(repository_ctx, artifact_urls, additional_attrs
             "j2cl_library(",
             "    name = '%s'," % _extract_repo_name(repository_ctx.name),
             "    srcs = glob(['**/*.java', '**/*.js'],",
-            "        exclude = REPLACED_SRCS + ['**/*_CustomFieldSerializer*']",
+            "        exclude = REPLACED_SRCS + ['**/*_CustomFieldSerializer*'],",
+            "        allow_empty = True",
             "    ),",
             "    js_suppress = ['deprecated'],",
         ]
