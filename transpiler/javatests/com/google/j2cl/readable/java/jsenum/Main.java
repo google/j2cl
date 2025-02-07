@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsEnum;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
@@ -146,8 +145,6 @@ public class Main {
     acceptsSupplierOfSupplier(() -> (() -> ComparableJsEnum.ONE));
   }
 
-  // TODO(b/395108282): Remove nop once the bug is fixed.
-  @Wasm("nop")
   private static void testExhaustiveJsEnumSwitchExpression() {
     ComparableJsEnum comparableJsEnum =
         ComparableJsEnum.ONE.getValue() == 1 ? ComparableJsEnum.TWO : null;

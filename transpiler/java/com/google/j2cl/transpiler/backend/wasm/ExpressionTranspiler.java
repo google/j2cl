@@ -345,6 +345,14 @@ final class ExpressionTranspiler {
             " (result " + environment.getWasmType(embeddedStatement.getTypeDescriptor()) + ")");
 
         StatementTranspiler.render(statement, sourceBuilder, environment);
+        if (!TypeDescriptors.isPrimitiveVoid(embeddedStatement.getTypeDescriptor())) {
+          // If the embedded statement returns a value, it should have an explicit yield and never
+          // reach the end; we add an unreachable instruction at the end to make the code
+          // verifiable. This prevents wasm from rejecting exhaustive switch expressions that will
+          // never reach this point but wouldn't be verifiable in the resulting wasm.
+          sourceBuilder.newLine();
+          sourceBuilder.append("(unreachable)");
+        }
         sourceBuilder.closeParens();
         return false;
       }
