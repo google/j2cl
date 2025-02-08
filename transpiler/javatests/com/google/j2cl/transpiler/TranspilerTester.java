@@ -27,7 +27,6 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.Problems;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -480,24 +479,8 @@ public class TranspilerTester {
     }
   }
 
-  private static TranspileResult invokeTranspiler(List<String> args, Path outputPath) {
-    try {
-      return new TranspileResult(transpile(args), outputPath);
-    } catch (Exception e) {
-      e.printStackTrace();
-      Problems problems = new Problems();
-      problems.error("%s", e.toString());
-      return new TranspileResult(problems, outputPath);
-    }
-  }
-
-  private static Problems transpile(Iterable<String> args) throws Exception {
-    // J2clCommandLineRunner.run is hidden since we don't want it to be used as an entry point. As a
-    // result we use reflection here to invoke it.
-    Method transpileMethod =
-        J2clCommandLineRunner.class.getDeclaredMethod("runForTest", String[].class);
-    transpileMethod.setAccessible(true);
-    return (Problems) transpileMethod.invoke(null, (Object) Iterables.toArray(args, String.class));
+  private static Problems transpile(Iterable<String> args) {
+    return J2clCommandLineRunner.runForTest(Iterables.toArray(args, String.class));
   }
 
   private TranspileResult transpile() {
@@ -545,7 +528,7 @@ public class TranspilerTester {
       // Passthru explicitly defined args
       commandLineArgsBuilder.addAll(args);
 
-      return invokeTranspiler(commandLineArgsBuilder.build(), outputPath);
+      return new TranspileResult(transpile(commandLineArgsBuilder.build()), outputPath);
     } catch (IOException e) {
       throw new AssertionError(e);
     }
