@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 import static com.google.j2cl.common.StringUtils.capitalize;
 import static java.util.Arrays.asList;
 import static java.util.Arrays.stream;
@@ -689,7 +690,9 @@ public final class RuntimeMethods {
       Expression expression, DeclaredTypeDescriptor boxedType) {
 
     MethodDescriptor valueMethodDescriptor =
-        boxedType.getMethodDescriptor(boxedType.toUnboxedType().getSimpleSourceName() + "Value");
+        boxedType.getMethodDescriptorByName(
+            boxedType.toUnboxedType().getSimpleSourceName() + "Value");
+    checkState(valueMethodDescriptor.getEnclosingTypeDescriptor().isSameBaseType(boxedType));
 
     return MethodCall.Builder.from(valueMethodDescriptor).setQualifier(expression).build();
   }
