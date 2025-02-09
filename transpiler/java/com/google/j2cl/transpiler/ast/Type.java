@@ -49,7 +49,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   public Type(SourcePosition sourcePosition, TypeDeclaration typeDeclaration) {
     this.sourcePosition = checkNotNull(sourcePosition);
     checkArgument(
-        typeDeclaration.isInterface() || typeDeclaration.isClass() || typeDeclaration.isEnum());
+        typeDeclaration.isInterface() || typeDeclaration.isClass() || typeDeclaration.isEnum() || typeDeclaration.isRecord());
     this.typeDeclaration = typeDeclaration;
     this.isAbstract = typeDeclaration.isAbstract();
     this.superTypeDescriptor = typeDeclaration.getSuperTypeDescriptor();
@@ -98,6 +98,10 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
 
   public boolean isInterface() {
     return typeDeclaration.isInterface();
+  }
+
+  public boolean isRecord() {
+    return typeDeclaration.isRecord();
   }
 
   public boolean isClass() {

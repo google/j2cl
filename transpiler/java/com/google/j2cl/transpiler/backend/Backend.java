@@ -38,6 +38,7 @@ import com.google.j2cl.transpiler.passes.CreateImplicitConstructors;
 import com.google.j2cl.transpiler.passes.DesugarInstanceOfPatterns;
 import com.google.j2cl.transpiler.passes.DevirtualizeBoxedTypesAndJsFunctionImplementations;
 import com.google.j2cl.transpiler.passes.DevirtualizeMethodCalls;
+import com.google.j2cl.transpiler.passes.EnrichRecord;
 import com.google.j2cl.transpiler.passes.ExpandCompoundAssignments;
 import com.google.j2cl.transpiler.passes.ExtractNonIdempotentExpressions;
 import com.google.j2cl.transpiler.passes.FilloutMissingSourceMapInformation;
@@ -260,6 +261,9 @@ public enum Backend {
           AddBridgeMethods::new,
           OptimizeKotlinCompanions::new,
           () -> new OptimizeAutoValue(options.getOptimizeAutoValue()),
+
+          //Convert Record to the Java Class
+          EnrichRecord::new,
 
           // Default constructors and explicit super calls should be synthesized first.
           CreateImplicitConstructors::new,

@@ -71,6 +71,8 @@ import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PostfixExpression;
 import com.google.j2cl.transpiler.ast.PrefixExpression;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
+import com.google.j2cl.transpiler.ast.RecordConstructor;
+import com.google.j2cl.transpiler.ast.RecordField;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.StringLiteral;
@@ -92,6 +94,7 @@ import com.google.j2cl.transpiler.ast.UnionTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
+import com.google.j2cl.transpiler.ast.Visibility;
 import com.google.j2cl.transpiler.ast.WhileStatement;
 import com.google.j2cl.transpiler.ast.YieldStatement;
 import com.google.j2cl.transpiler.frontend.common.AbstractCompilationUnitBuilder;
@@ -123,6 +126,7 @@ import org.eclipse.jdt.core.dom.LambdaExpression;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.Name;
 import org.eclipse.jdt.core.dom.PackageDeclaration;
+import org.eclipse.jdt.core.dom.RecordDeclaration;
 import org.eclipse.jdt.core.dom.SimpleName;
 import org.eclipse.jdt.core.dom.SingleVariableDeclaration;
 import org.eclipse.jdt.core.dom.SuperMethodInvocation;
@@ -169,6 +173,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           return convertType(typeDeclaration);
         case ASTNode.ENUM_DECLARATION:
           return convert((EnumDeclaration) typeDeclaration);
+        case ASTNode.RECORD_DECLARATION:
+          return convert((org.eclipse.jdt.core.dom.RecordDeclaration) typeDeclaration);
         default:
           throw internalCompilerError(
               "Unexpected node type for AbstractTypeDeclaration: %s  type name: %s ",
@@ -194,6 +200,63 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           });
       return enumType;
     }
+
+    private Type convert(RecordDeclaration recordDeclaration) {
+      Type recordType = convertType(recordDeclaration);
+
+      List<TypeDescriptor> argAsTypes = new ArrayList<>();
+      List<Variable> argAsVars = new ArrayList<>();
+      for(Object obj: recordDeclaration.recordComponents()) {
+        if (obj instanceof SingleVariableDeclaration) {
+          SingleVariableDeclaration typeParam = (SingleVariableDeclaration) obj;
+          TypeDescriptor typeDescriptor = environment.createTypeDescriptor(typeParam.resolveBinding().getType());
+          argAsTypes.add(typeDescriptor);
+
+          Field field = Field.Builder.from(FieldDescriptor.newBuilder()
+                                     .setFinal(true)
+                                     .setVisibility(Visibility.PRIVATE)
+                                     .setName(typeParam.getName().getFullyQualifiedName())
+                                     .setTypeDescriptor(typeDescriptor)
+                                     .setEnclosingTypeDescriptor(recordType.getTypeDescriptor())
+                          .build())
+                  .setSourcePosition(getSourcePosition(recordDeclaration.getRoot()))
+                  .build();
+
+          recordType.addMember(new RecordField(field));
+
+          Variable variable = Variable.newBuilder()
+                  .setSourcePosition(getSourcePosition(recordDeclaration.getRoot()))
+                  .setName(typeParam.getName().getFullyQualifiedName())
+                  .setTypeDescriptor(typeDescriptor)
+                  .setParameter(true)
+                  .setFinal(true)
+                  .build();
+
+          argAsVars.add(variable);
+        }
+      }
+
+      MethodDescriptor methodDescriptor = MethodDescriptor.newBuilder()
+              .setConstructor(true)
+              .setName(recordType.getQualifiedJsName())
+              .setEnclosingTypeDescriptor(recordType.getTypeDescriptor())
+              .addParameterTypeDescriptors(0, argAsTypes)
+              .build();
+
+      Block block = Block.newBuilder()
+              .setSourcePosition(getSourcePosition(recordDeclaration.getRoot()))
+              .build();
+
+      Method constructor = newMethodBuilder(methodDescriptor)
+              .setSourcePosition(getSourcePosition(recordDeclaration.getRoot()))
+              .setParameters(argAsVars)
+              .setBody(block)
+              .build();
+
+      recordType.addMember(new RecordConstructor(constructor));
+      return recordType;
+    }
+
 
     private Type convertType(AbstractTypeDeclaration typeDeclaration) {
       return convertType(
@@ -554,14 +617,14 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           return convert((org.eclipse.jdt.core.dom.SuperMethodInvocation) expression);
         case ASTNode.SWITCH_EXPRESSION:
           return convert((org.eclipse.jdt.core.dom.SwitchExpression) expression);
+        case ASTNode.TEXT_BLOCK:
+          return convert((org.eclipse.jdt.core.dom.TextBlock) expression);
         case ASTNode.THIS_EXPRESSION:
           return convert((org.eclipse.jdt.core.dom.ThisExpression) expression);
         case ASTNode.TYPE_LITERAL:
           return convert((org.eclipse.jdt.core.dom.TypeLiteral) expression);
         case ASTNode.VARIABLE_DECLARATION_EXPRESSION:
           return convert((org.eclipse.jdt.core.dom.VariableDeclarationExpression) expression);
-        case ASTNode.TEXT_BLOCK:
-          return convert((org.eclipse.jdt.core.dom.TextBlock) expression);
         default:
           throw internalCompilerError(
               "Unexpected type for Expression: %s", expression.getClass().getName());
@@ -1256,6 +1319,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     private Variable createVariable(
         VariableDeclaration variableDeclaration, boolean inNullMarkedScope) {
       IVariableBinding variableBinding = variableDeclaration.resolveBinding();
+
       Variable variable =
           environment.createVariable(
               getSourcePosition(variableBinding.getName(), variableDeclaration.getName()),

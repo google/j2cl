@@ -102,6 +102,10 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
     return false;
   }
 
+  public boolean isRecord() {
+    return false;
+  }
+
   /** Returns whether the described type is an interface. */
   public boolean isIntersection() {
     return false;

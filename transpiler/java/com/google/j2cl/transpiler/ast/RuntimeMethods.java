@@ -631,6 +631,20 @@ public final class RuntimeMethods {
         .build();
   }
 
+  public static MethodCall createObjectsHashMethodCall(
+          Expression... expressions) {
+    MethodDescriptor hashMethodDescriptor =
+            TypeDescriptors.get()
+                    .javaUtilObjects
+                    .getMethodDescriptor(
+                            "hash",
+                            TypeDescriptors.get().javaLangObjectArray);
+
+    return MethodCall.Builder.from(hashMethodDescriptor)
+            .setArguments(expressions)
+            .build();
+  }
+
   /** Create a call to a Primitives method. */
   public static MethodCall createPrimitivesMethodCall(String methodName, Expression argument) {
     MethodDescriptor narrowMethodDescriptor =

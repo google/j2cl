@@ -130,6 +130,7 @@ public class ImplementClassMetadataViaConstructors extends NormalizationPass {
           return "$setClassMetadataForEnum";
         }
         // fallthrough for JsEnum
+      case RECORD:
       case CLASS:
         return "$setClassMetadata";
     }

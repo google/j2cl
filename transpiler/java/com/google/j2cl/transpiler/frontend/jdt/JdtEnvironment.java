@@ -1099,7 +1099,9 @@ public class JdtEnvironment {
   }
 
   private static Kind getKindFromTypeBinding(ITypeBinding typeBinding) {
-    if (typeBinding.isEnum() && !typeBinding.isAnonymous()) {
+    if(typeBinding.isRecord()) {
+      return Kind.RECORD;
+    } else if (typeBinding.isEnum() && !typeBinding.isAnonymous()) {
       // Do not consider the anonymous classes that constitute enum values as Enums, only the
       // enum "class" itself is considered Kind.ENUM.
       return Kind.ENUM;

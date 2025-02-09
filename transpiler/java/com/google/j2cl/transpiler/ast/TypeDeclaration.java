@@ -61,7 +61,8 @@ public abstract class TypeDeclaration
   public enum Kind {
     CLASS,
     ENUM,
-    INTERFACE
+    INTERFACE,
+    RECORD
   }
 
   /** Source language a type was written in. */
@@ -271,6 +272,10 @@ public abstract class TypeDeclaration
   /** Returns whether the described type is an enum. */
   public boolean isEnum() {
     return getKind() == Kind.ENUM;
+  }
+
+  public boolean isRecord() {
+    return getKind() == Kind.RECORD;
   }
 
   public boolean isAbstract() {

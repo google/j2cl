@@ -29,7 +29,7 @@ import com.google.j2cl.transpiler.ast.Type;
 public class CreateImplicitConstructors extends NormalizationPass {
   @Override
   public void applyTo(Type type) {
-    if (type.isInterface() || !type.getConstructors().isEmpty()) {
+    if (type.isInterface() || !type.getConstructors().isEmpty() || type.isRecord()) {
       return;
     }
 

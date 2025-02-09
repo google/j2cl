@@ -80,6 +80,10 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return getTypeDeclaration().isEnum();
   }
 
+  public boolean isRecord() {
+    return getTypeDeclaration().isRecord();
+  }
+
   @Override
   public boolean isFunctionalInterface() {
     return getTypeDeclaration().isFunctionalInterface();
@@ -1368,7 +1372,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
       DeclaredTypeDescriptor typeDescriptor = autoBuild();
 
       checkState(
-          typeDescriptor.isClass() || typeDescriptor.isInterface() || typeDescriptor.isEnum());
+          typeDescriptor.isClass() || typeDescriptor.isInterface() || typeDescriptor.isEnum() || typeDescriptor.isRecord());
 
       DeclaredTypeDescriptor internedTypeDescriptor = interner.intern(typeDescriptor);
 
