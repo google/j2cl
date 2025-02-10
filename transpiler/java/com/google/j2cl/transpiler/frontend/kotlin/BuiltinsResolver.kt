@@ -17,23 +17,15 @@
 
 package com.google.j2cl.transpiler.frontend.kotlin
 
-import com.google.j2cl.transpiler.frontend.kotlin.ir.fqnOrFail
 import com.google.j2cl.transpiler.frontend.kotlin.ir.fromQualifiedBinaryName
-import com.google.j2cl.transpiler.frontend.kotlin.ir.isArrayType
-import com.google.j2cl.transpiler.frontend.kotlin.ir.javaName
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
-import org.jetbrains.kotlin.backend.jvm.ir.erasedUpperBound
 import org.jetbrains.kotlin.builtins.functions.FunctionTypeKind.Function
 import org.jetbrains.kotlin.builtins.functions.FunctionTypeKind.SuspendFunction
 import org.jetbrains.kotlin.builtins.jvm.JavaToKotlinClassMap
 import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
 import org.jetbrains.kotlin.ir.symbols.IrFieldSymbol
 import org.jetbrains.kotlin.ir.symbols.IrFunctionSymbol
-import org.jetbrains.kotlin.ir.types.IrType
-import org.jetbrains.kotlin.ir.types.getArrayElementType
-import org.jetbrains.kotlin.ir.types.isPrimitiveType
-import org.jetbrains.kotlin.ir.types.makeNullable
 import org.jetbrains.kotlin.ir.util.fields
 import org.jetbrains.kotlin.ir.util.functions
 import org.jetbrains.kotlin.ir.util.kotlinFqName
@@ -44,19 +36,18 @@ import org.jetbrains.kotlin.name.FqNameUnsafe
 
 internal class BuiltinsResolver(
   private val pluginContext: IrPluginContext,
-  private val jvmbackendContext: JvmBackendContext,
+  private val jvmBackendContext: JvmBackendContext,
 ) {
   fun resolveFunctionSymbol(irFunctionSymbol: IrFunctionSymbol): IrFunctionSymbol {
     val resolvedClass =
       irFunctionSymbol.owner.parentClassOrNull?.symbol?.let(this::resolveClass)
         ?: return irFunctionSymbol
 
-    val functionJvmSignature = irFunctionSymbol.getJvmSignature(jvmbackendContext)
+    val functionJvmSignature = irFunctionSymbol.getJvmSignature(jvmBackendContext)
     val functions =
       resolvedClass.functions
-        .filterNot { it.owner.isFakeOverride }
-        .filter { javaFunction ->
-          functionJvmSignature == javaFunction.getJvmSignature(jvmbackendContext)
+        .filter {
+          !it.owner.isFakeOverride && functionJvmSignature == it.getJvmSignature(jvmBackendContext)
         }
         .toList()
 
@@ -70,29 +61,8 @@ internal class BuiltinsResolver(
     }
   }
 
-  private fun IrFunctionSymbol.getJvmSignature(jvmbackendContext: JvmBackendContext): String {
-    // Some builtin functions are mapped to jvm methods with a different name. Use the jvm name to
-    // match the function.
-    val functionName = owner.javaName(jvmbackendContext) ?: owner.name
-    val parameterTypeSignatures =
-      owner.valueParameters.map { it.type.getJvmTypeSignature() }.joinToString(separator = "")
-    return "$functionName(${parameterTypeSignatures})${owner.returnType.getJvmTypeSignature()}"
-  }
-
-  private fun IrType.getJvmTypeSignature(): String =
-    when {
-      isArrayType() -> "[${getArrayElementType(pluginContext.irBuiltIns).getJvmTypeSignature()}"
-      // Non-nullable kotlin primitives can match a java primitive or its boxed type. To simplify
-      // our matching, we consider all primitive type being nullable.
-      isPrimitiveType(nullable = false) -> makeNullable().getJvmTypeSignature()
-      else -> {
-        // `erasedUpperBound` returns the class of the upper bound if it's a type parameter,
-        // otherwise the class of the type.
-        val clazz = erasedUpperBound
-        val clazzSymbol = resolveClass(clazz.symbol) ?: clazz.symbol
-        "L${clazzSymbol.fqnOrFail};"
-      }
-    }
+  private fun IrFunctionSymbol.getJvmSignature(jvmBackendContext: JvmBackendContext): String =
+    jvmBackendContext.defaultMethodSignatureMapper.mapAsmMethod(owner).toString()
 
   fun resolveFieldSymbol(irFieldSymbol: IrFieldSymbol): IrFieldSymbol {
     val resolvedClass =
