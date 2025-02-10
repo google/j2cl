@@ -93,6 +93,7 @@ import com.google.j2cl.transpiler.ast.WhileStatement;
 import com.google.j2cl.transpiler.ast.YieldStatement;
 import com.google.j2cl.transpiler.frontend.common.AbstractCompilationUnitBuilder;
 import com.sun.source.tree.CompilationUnitTree;
+import com.sun.source.tree.Tree;
 import com.sun.source.tree.Tree.Kind;
 import com.sun.tools.javac.code.Flags;
 import com.sun.tools.javac.code.Symbol;
@@ -170,7 +171,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   private final Map<String, Deque<Label>> labelsInScope = new HashMap<>();
   private JCCompilationUnit javacUnit;
 
-  private CompilationUnitBuilder(JavaEnvironment environment) {
+  CompilationUnitBuilder(JavaEnvironment environment) {
     this.environment = environment;
   }
 
@@ -1402,27 +1403,18 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     return expressions.stream().map(this::convertExpression).collect(toCollection(ArrayList::new));
   }
 
-  private CompilationUnit build(JCCompilationUnit javacUnit) {
-    this.javacUnit = javacUnit;
+  public CompilationUnit buildCompilationUnit(CompilationUnitTree javacUnit) {
+    this.javacUnit = (JCCompilationUnit) javacUnit;
     setCurrentCompilationUnit(
         CompilationUnit.createForFile(
             javacUnit.getSourceFile().getName(),
             javacUnit.getPackageName() == null ? "" : javacUnit.getPackageName().toString()));
-    for (JCTree tree : javacUnit.getTypeDecls()) {
+    for (Tree tree : javacUnit.getTypeDecls()) {
       if (tree instanceof JCClassDecl) {
         getCurrentCompilationUnit().addType(convertClassDeclaration((JCClassDecl) tree));
       }
     }
     return getCurrentCompilationUnit();
-  }
-
-  public static ImmutableList<CompilationUnit> build(
-      List<CompilationUnitTree> compilationUnits, JavaEnvironment javaEnvironment) {
-    CompilationUnitBuilder compilationUnitBuilder = new CompilationUnitBuilder(javaEnvironment);
-    return compilationUnits.stream()
-        .map(JCCompilationUnit.class::cast)
-        .map(compilationUnitBuilder::build)
-        .collect(toImmutableList());
   }
 
   // TODO(b/394094907): Support for annotating methods as @NullMarked.

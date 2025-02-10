@@ -109,10 +109,13 @@ public class JavacParser {
 
       JavaEnvironment javaEnvironment =
           new JavaEnvironment(task.getContext(), TypeDescriptors.getWellKnownTypeNames());
+      CompilationUnitBuilder compilationUnitBuilder = new CompilationUnitBuilder(javaEnvironment);
 
-      ImmutableList<CompilationUnit> compilationUnits =
-          CompilationUnitBuilder.build(javacCompilationUnits, javaEnvironment);
-      return Library.newBuilder().setCompilationUnits(compilationUnits).build();
+      ImmutableList.Builder<CompilationUnit> compilationUnits = ImmutableList.builder();
+      for (var cu : javacCompilationUnits) {
+        compilationUnits.add(compilationUnitBuilder.buildCompilationUnit(cu));
+      }
+      return Library.newBuilder().setCompilationUnits(compilationUnits.build()).build();
     } catch (IOException e) {
       problems.fatal(FatalError.CANNOT_OPEN_FILE, e.toString());
       return null;
