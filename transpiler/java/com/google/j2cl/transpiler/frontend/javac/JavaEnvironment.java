@@ -333,10 +333,7 @@ class JavaEnvironment {
     }
 
     if (typeMirror.getKind() == TypeKind.WILDCARD) {
-      return createWildcardTypeVariable(
-          ((WildcardType) typeMirror).getExtendsBound(),
-          ((WildcardType) typeMirror).getSuperBound(),
-          inNullMarkedScope);
+      return createWildcardTypeVariable((WildcardType) typeMirror, inNullMarkedScope);
     }
 
     boolean isNullable = isNullable(typeMirror, elementAnnotations, inNullMarkedScope);
@@ -430,18 +427,30 @@ class JavaEnvironment {
         .build();
   }
 
+  private final Map<WildcardType, Integer> wildcardIdByWildcard = new HashMap<>();
+
   private TypeVariable createWildcardTypeVariable(
-      @Nullable TypeMirror upperBound, @Nullable TypeMirror lowerBound, boolean inNullMarkedScope) {
+      WildcardType wildcardType, boolean inNullMarkedScope) {
+    return createWildcardTypeVariable(
+        wildcardType,
+        wildcardType.getExtendsBound(),
+        wildcardType.getSuperBound(),
+        inNullMarkedScope);
+  }
+
+  private TypeVariable createWildcardTypeVariable(
+      WildcardType wildcardType,
+      @Nullable TypeMirror upperBound,
+      @Nullable TypeMirror lowerBound,
+      boolean inNullMarkedScope) {
+    int id = wildcardIdByWildcard.computeIfAbsent(wildcardType, w -> wildcardIdByWildcard.size());
     return TypeVariable.newBuilder()
         .setUpperBoundTypeDescriptorFactory(
             () -> lowerBound == null ? createTypeDescriptor(upperBound, inNullMarkedScope) : null)
         .setLowerBoundTypeDescriptor(createTypeDescriptor(lowerBound, inNullMarkedScope))
         .setWildcard(true)
         .setName("?")
-        .setUniqueKey(
-            (inNullMarkedScope ? "+" : "-")
-                + (upperBound != null ? "::^::" + upperBound : "")
-                + (lowerBound != null ? "::v::" + lowerBound : ""))
+        .setUniqueKey((inNullMarkedScope ? "+" : "-") + "wildcard#" + id)
         .build();
   }
 
@@ -1003,8 +1012,8 @@ class JavaEnvironment {
     return javacTypes.erasure(typeMirror);
   }
 
-  private PackageElement getPackageOf(TypeElement typeElement) {
-    return elements.getPackageOf(typeElement);
+  private PackageElement getPackageOf(Element element) {
+    return elements.getPackageOf(element);
   }
 
   private TypeDescriptor createIntersectionType(IntersectionClassType intersectionType) {
@@ -1061,7 +1070,10 @@ class JavaEnvironment {
                 // If this is a wildcard but the bound is not specified (or is Object), we might be
                 // able to get a tighter bound from the declaration.
                 return createWildcardTypeVariable(
-                    typeVariable.getUpperBound(), /* lowerBound= */ null, inNullMarkedScope);
+                    (WildcardType) typeMirror,
+                    typeVariable.getUpperBound(),
+                    /* lowerBound= */ null,
+                    inNullMarkedScope);
               }
               return createTypeDescriptor(typeMirror, inNullMarkedScope);
             })
