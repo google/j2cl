@@ -121,6 +121,7 @@ class J2clTranspiler {
       }
       for (CompilationUnit compilationUnit : library.getCompilationUnits()) {
         instantiatePass(passFactory).execute(compilationUnit);
+        problems.abortIfCancelled();
       }
       problems.abortIfHasErrors();
     }

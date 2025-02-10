@@ -132,6 +132,12 @@ java_test(
         ":libjre_native.jar",
         "//samples/box2d/src/main/kotlin/idiomatic:libbox2d_kt_library-j2cl-src.jar",
     ],
+    jvm_flags = [
+        # Configure JVM to provide more consistent performance since we rely on execution times.
+        "-XX:+TieredCompilation",
+        "-XX:TieredStopAtLevel=2",
+        "-XX:MaxGCPauseMillis=100",
+    ],
     shard_count = 2,
     deps = [
         ":TranspilerTester",

@@ -123,14 +123,13 @@ public final class J2clCommandLineRunner extends CommandLineTool {
   @Option(name = "-defineForWasm", handler = MapOptionHandler.class, hidden = true)
   Map<String, String> definesForWasm = new HashMap<>();
 
-  @VisibleForTesting
-  J2clCommandLineRunner() {
+  private J2clCommandLineRunner() {
     super("j2cl");
   }
 
   @VisibleForTesting
-  Problems getProblems() {
-    return problems;
+  J2clCommandLineRunner(Problems problems) {
+    super("j2cl", problems);
   }
 
   @VisibleForTesting

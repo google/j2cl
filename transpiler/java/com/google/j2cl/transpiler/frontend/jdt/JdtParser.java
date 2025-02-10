@@ -81,6 +81,7 @@ public class JdtParser {
                 .filter(e -> e.getKey().endsWith("package-info.java"))
                 .map(Entry::getValue),
             new PackageInfoCache(options.getClasspaths(), problems));
+    problems.abortIfCancelled();
     JdtEnvironment environment = new JdtEnvironment(packageAnnotationsResolver);
 
     Map<String, CompilationUnit> jdtUnitsByFilePath =
@@ -93,6 +94,7 @@ public class JdtParser {
         ImmutableList.builder();
     for (var e : jdtUnitsByFilePath.entrySet()) {
       compilationUnits.add(compilationUnitBuilder.buildCompilationUnit(e.getKey(), e.getValue()));
+      problems.abortIfCancelled();
     }
     return Library.newBuilder().setCompilationUnits(compilationUnits.build()).build();
   }

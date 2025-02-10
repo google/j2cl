@@ -18,6 +18,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicates;
+import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -479,10 +480,42 @@ public class TranspilerTester {
     }
   }
 
+  /** The maximum delay (in ms) that we allow for calls to #isCancelled(). */
+  private static final int MAX_DELAY = 200;
+
   private static Problems transpile(ImmutableList<String> args) {
-    J2clCommandLineRunner runner = new J2clCommandLineRunner();
+    List<String> delayedCalls = new ArrayList<>();
+    Problems problems =
+        new Problems() {
+          long lastCall = System.nanoTime();
+
+          @Override
+          public boolean isCancelled() {
+            long delay = (System.nanoTime() - lastCall) / 1_000_000;
+            if (delay > MAX_DELAY) {
+              delayedCalls.add(Throwables.getStackTraceAsString(new Throwable("Delay: " + delay)));
+            }
+            lastCall = System.nanoTime();
+            return false;
+          }
+        };
+
+    J2clCommandLineRunner runner = new J2clCommandLineRunner(problems);
     runner.executeForTesting(args);
-    return runner.getProblems();
+
+    final String[] knownDelayedCalls = {
+      "com.google.j2cl.transpiler.frontend.javac.JavacParser.parseFiles",
+      "com.google.j2cl.transpiler.frontend.jdt.JdtParser.parseFiles",
+      "com.google.j2cl.transpiler.frontend.kotlin.KotlinParser.parseFiles",
+      "com.google.j2cl.transpiler.J2clCommandLineRunner.createOptions",
+      "com.google.j2cl.transpiler.J2clTranspiler.checkLibrary",
+    };
+    for (String delayedCall : knownDelayedCalls) {
+      delayedCalls.removeIf(t -> t.contains(delayedCall));
+    }
+    assertThat(delayedCalls).isEmpty();
+
+    return problems;
   }
 
   private TranspileResult transpile() {

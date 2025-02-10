@@ -230,9 +230,23 @@ public class Problems {
   }
 
   public void abortIfHasErrors() {
-    if (hasErrors()) {
+    if (isCancelled() || hasErrors()) {
       abort();
     }
+  }
+
+  /**
+   * Alternative to abortIfHasErrors for cases where we want to keep accumulating errors but still
+   * abort when cancelled.
+   */
+  public void abortIfCancelled() {
+    if (isCancelled()) {
+      abort();
+    }
+  }
+
+  protected boolean isCancelled() {
+    return false;
   }
 
   private void abort() {

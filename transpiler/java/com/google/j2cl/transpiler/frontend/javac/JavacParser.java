@@ -114,6 +114,7 @@ public class JavacParser {
       ImmutableList.Builder<CompilationUnit> compilationUnits = ImmutableList.builder();
       for (var cu : javacCompilationUnits) {
         compilationUnits.add(compilationUnitBuilder.buildCompilationUnit(cu));
+        problems.abortIfCancelled();
       }
       return Library.newBuilder().setCompilationUnits(compilationUnits.build()).build();
     } catch (IOException e) {

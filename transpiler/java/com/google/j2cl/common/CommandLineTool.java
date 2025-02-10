@@ -28,11 +28,16 @@ public abstract class CommandLineTool {
   @Option(name = "-help", usage = "print this message")
   protected boolean help = false;
 
-  protected final Problems problems = new Problems();
   private final String toolName;
+  protected final Problems problems;
 
   protected CommandLineTool(String toolName) {
+    this(toolName, new Problems());
+  }
+
+  protected CommandLineTool(String toolName, Problems problems) {
     this.toolName = toolName;
+    this.problems = problems;
   }
 
   protected abstract void run();
