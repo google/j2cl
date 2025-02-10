@@ -17,6 +17,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Collection;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
@@ -27,17 +28,16 @@ public abstract class CommandLineTool {
   @Option(name = "-help", usage = "print this message")
   protected boolean help = false;
 
+  protected final Problems problems = new Problems();
   private final String toolName;
 
   protected CommandLineTool(String toolName) {
     this.toolName = toolName;
   }
 
-  protected abstract void run(Problems problems);
+  protected abstract void run();
 
-  // TODO(goktug): reduce visibility.
-  protected Problems processRequest(String[] args) {
-    Problems problems = new Problems();
+  protected final int execute(Collection<String> args, PrintStream pw) {
     CmdLineParser parser = new CmdLineParser(this);
 
     final String usage = "Usage: " + toolName + " <options> <source files>";
@@ -48,7 +48,7 @@ public abstract class CommandLineTool {
       if (!this.help) {
         String message = "%s\n%s\nuse -help for a list of possible options";
         problems.error(message, e.getMessage(), usage);
-        return problems;
+        return problems.reportAndGetExitCode(pw);
       }
     }
 
@@ -57,19 +57,14 @@ public abstract class CommandLineTool {
       ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
       parser.printUsage(new PrintStream(outputStream));
       problems.info(message, usage, new String(outputStream.toByteArray(), UTF_8));
-      return problems;
+      return problems.reportAndGetExitCode(pw);
     }
 
     try {
-      run(problems);
+      run();
     } catch (Problems.Exit e) {
       // Program aborted due to errors recorded in problems.
     }
-    return problems;
-  }
-
-  protected final int execute(String[] args) {
-    Problems problems = this.processRequest(args);
-    return problems.reportAndGetExitCode(System.err);
+    return problems.reportAndGetExitCode(pw);
   }
 }

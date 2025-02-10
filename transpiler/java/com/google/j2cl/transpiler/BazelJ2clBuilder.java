@@ -20,7 +20,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.OutputUtils.Output;
-import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourceUtils;
 import com.google.j2cl.common.SourceUtils.FileInfo;
@@ -145,13 +144,13 @@ final class BazelJ2clBuilder extends BazelWorker {
   Map<String, String> definesForWasm = new HashMap<>();
 
   @Override
-  protected void run(Problems problems) {
+  protected void run() {
     try (Output out = OutputUtils.initOutput(this.output, problems)) {
-      J2clTranspiler.transpile(createOptions(out, problems), problems);
+      J2clTranspiler.transpile(createOptions(out), problems);
     }
   }
 
-  private J2clTranspilerOptions createOptions(Output output, Problems problems) {
+  private J2clTranspilerOptions createOptions(Output output) {
 
     if (this.readableSourceMaps && this.generateKytheIndexingMetadata) {
       problems.warning(

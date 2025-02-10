@@ -16,6 +16,7 @@ package com.google.j2cl.transpiler;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.j2cl.common.SourceUtils.checkSourceFiles;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -28,9 +29,12 @@ import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.transpiler.backend.Backend;
 import com.google.j2cl.transpiler.frontend.Frontend;
 import java.io.File;
+import java.io.PrintStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -119,18 +123,29 @@ public final class J2clCommandLineRunner extends CommandLineTool {
   @Option(name = "-defineForWasm", handler = MapOptionHandler.class, hidden = true)
   Map<String, String> definesForWasm = new HashMap<>();
 
-  private J2clCommandLineRunner() {
+  @VisibleForTesting
+  J2clCommandLineRunner() {
     super("j2cl");
   }
 
+  @VisibleForTesting
+  Problems getProblems() {
+    return problems;
+  }
+
+  @VisibleForTesting
+  void executeForTesting(Collection<String> args) {
+    var unused = super.execute(args, System.out);
+  }
+
   @Override
-  protected void run(Problems problems) {
+  protected void run() {
     try (Output out = OutputUtils.initOutput(this.output, problems)) {
-      J2clTranspiler.transpile(createOptions(out, problems), problems);
+      J2clTranspiler.transpile(createOptions(out), problems);
     }
   }
 
-  private J2clTranspilerOptions createOptions(Output output, Problems problems) {
+  private J2clTranspilerOptions createOptions(Output output) {
     checkSourceFiles(problems, files, ".java", ".srcjar", ".jar", ".kt");
 
     if (this.readableSourceMaps && this.generateKytheIndexingMetadata) {
@@ -188,16 +203,11 @@ public final class J2clCommandLineRunner extends CommandLineTool {
     return entries;
   }
 
-  // Exists for testing, should be removed when tests stop using flags.
-  static Problems runForTest(String[] args) {
-    return new J2clCommandLineRunner().processRequest(args);
-  }
-
-  public static int run(String[] args) {
-    return new J2clCommandLineRunner().execute(args);
+  public static int run(Collection<String> args, PrintStream stdErr) {
+    return new J2clCommandLineRunner().execute(args, stdErr);
   }
 
   public static void main(String[] args) {
-    System.exit(run(args));
+    System.exit(run(Arrays.asList(args), System.err));
   }
 }

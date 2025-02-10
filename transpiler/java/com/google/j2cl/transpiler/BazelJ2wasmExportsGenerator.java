@@ -24,7 +24,6 @@ import com.google.common.reflect.ClassPath.ClassInfo;
 import com.google.j2cl.common.EntryPointPattern;
 import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.OutputUtils.Output;
-import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.bazel.BazelWorker;
 import com.google.j2cl.transpiler.ast.Method;
@@ -70,13 +69,13 @@ final class BazelJ2wasmExportsGenerator extends BazelWorker {
   private static final Splitter PATH_SPLITTER = Splitter.on(File.pathSeparatorChar);
 
   @Override
-  protected void run(Problems problems) {
+  protected void run() {
     try (Output out = OutputUtils.initOutput(this.output, problems)) {
       ImmutableList<EntryPointPattern> entryPointPatterns =
           this.wasmEntryPoints.stream().map(EntryPointPattern::from).collect(toImmutableList());
       List<String> binaryNames =
           getBinaryNamesOfClassesWithExports(
-              PATH_SPLITTER.split(this.classPath), entryPointPatterns, problems);
+              PATH_SPLITTER.split(this.classPath), entryPointPatterns);
       List<String> classPathEntries =
           Splitter.on(File.pathSeparatorChar).splitToList(this.classPath);
 
@@ -109,10 +108,8 @@ final class BazelJ2wasmExportsGenerator extends BazelWorker {
     }
   }
 
-  private static List<String> getBinaryNamesOfClassesWithExports(
-      Iterable<String> classPathEntries,
-      List<EntryPointPattern> wasmEntryPoints,
-      Problems problems) {
+  private List<String> getBinaryNamesOfClassesWithExports(
+      Iterable<String> classPathEntries, List<EntryPointPattern> wasmEntryPoints) {
 
     List<URL> classPathUrls = new ArrayList<>();
     List<String> binaryClassNames = new ArrayList<>();

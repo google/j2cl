@@ -70,7 +70,7 @@ final class BazelJ2clRta extends BazelWorker {
   List<String> inputs = null;
 
   @Override
-  protected void run(Problems problems) {
+  protected void run() {
     List<LibraryInfo> libraryInfos =
         inputs.parallelStream().map(libraryInfoCache::get).collect(toImmutableList());
 

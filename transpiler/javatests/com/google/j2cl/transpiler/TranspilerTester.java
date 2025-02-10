@@ -479,8 +479,10 @@ public class TranspilerTester {
     }
   }
 
-  private static Problems transpile(Iterable<String> args) {
-    return J2clCommandLineRunner.runForTest(Iterables.toArray(args, String.class));
+  private static Problems transpile(ImmutableList<String> args) {
+    J2clCommandLineRunner runner = new J2clCommandLineRunner();
+    runner.executeForTesting(args);
+    return runner.getProblems();
   }
 
   private TranspileResult transpile() {

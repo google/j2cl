@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.tools.gwtincompatible;
 
-import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.bazel.BazelWorker;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -42,7 +41,7 @@ final class BazelGwtIncompatibleStripper extends BazelWorker {
   List<String> annotations = new ArrayList<>();
 
   @Override
-  protected void run(Problems problems) {
+  protected void run() {
     if (annotations.isEmpty()) {
       annotations.add("GwtIncompatible");
     }

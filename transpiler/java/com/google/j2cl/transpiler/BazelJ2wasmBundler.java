@@ -119,16 +119,12 @@ final class BazelJ2wasmBundler extends BazelWorker {
   Map<String, String> defines = new HashMap<>();
 
   @Override
-  protected void run(Problems problems) {
-    createBundle(problems);
+  protected void run() {
+    emitModuleFile();
+    emitJsImportsFile();
   }
 
-  private void createBundle(Problems problems) {
-    emitModuleFile(problems);
-    emitJsImportsFile(problems);
-  }
-
-  private void emitModuleFile(Problems problems) {
+  private void emitModuleFile() {
     var typeGraph = new TypeGraph(getSummaries());
 
     // Create an environment to initialize the well known type descriptors to be able to synthesize
@@ -151,7 +147,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
             .values();
 
     // Synthesize globals and methods for string literals.
-    synthesizeStringLiteralGetters(referencedSystemProperties, problems);
+    synthesizeStringLiteralGetters(referencedSystemProperties);
 
     var generatorStage = new WasmGeneratorStage(library, problems);
 
@@ -199,7 +195,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
   }
 
   private void synthesizeStringLiteralGetters(
-      Collection<SystemPropertyInfo> referencedSystemProperties, Problems problems) {
+      Collection<SystemPropertyInfo> referencedSystemProperties) {
 
     var stringLiteralHolder =
         new com.google.j2cl.transpiler.ast.Type(
@@ -550,7 +546,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
     }
   }
 
-  private void emitJsImportsFile(Problems problems) {
+  private void emitJsImportsFile() {
     var requiredModules =
         getSummaries()
             .flatMap(s -> s.getJsImportRequiresList().stream())

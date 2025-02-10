@@ -41,7 +41,9 @@ import org.kohsuke.args4j.CmdLineParser;
  */
 public abstract class BazelWorker {
 
-  protected abstract void run(Problems problems);
+  protected final Problems problems = new Problems();
+
+  protected abstract void run();
 
   /**
    * Process the request described by the arguments. Note that you must output errors and warnings
@@ -49,7 +51,6 @@ public abstract class BazelWorker {
    */
   private int processRequest(List<String> args) {
     CmdLineParser parser = new CmdLineParser(this);
-    Problems problems = new Problems();
 
     try {
       parser.parseArgument(args);
@@ -59,7 +60,7 @@ public abstract class BazelWorker {
     }
 
     try {
-      run(problems);
+      run();
     } catch (Problems.Exit e) {
       // Program aborted due to errors recorded in problems.
     } catch (Throwable e) {
