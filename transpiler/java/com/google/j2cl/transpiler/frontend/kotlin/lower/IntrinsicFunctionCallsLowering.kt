@@ -21,6 +21,7 @@ import org.jetbrains.kotlin.backend.common.FileLoweringPass
 import org.jetbrains.kotlin.backend.jvm.functionByName
 import org.jetbrains.kotlin.backend.jvm.ir.createJvmIrBuilder
 import org.jetbrains.kotlin.backend.jvm.ir.findEnumValuesFunction
+import org.jetbrains.kotlin.builtins.PrimitiveType
 import org.jetbrains.kotlin.ir.backend.js.utils.typeArguments
 import org.jetbrains.kotlin.ir.backend.js.utils.valueArguments
 import org.jetbrains.kotlin.ir.builders.irCall
@@ -30,8 +31,15 @@ import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.types.IrSimpleType
+import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.ir.types.classOrFail
+import org.jetbrains.kotlin.ir.types.getPrimitiveType
 import org.jetbrains.kotlin.ir.types.isArray
+import org.jetbrains.kotlin.ir.types.isChar
+import org.jetbrains.kotlin.ir.types.isDouble
+import org.jetbrains.kotlin.ir.types.isFloat
+import org.jetbrains.kotlin.ir.types.isLong
+import org.jetbrains.kotlin.ir.types.isPrimitiveType
 import org.jetbrains.kotlin.ir.types.typeOrFail
 import org.jetbrains.kotlin.ir.types.typeWith
 import org.jetbrains.kotlin.ir.util.defaultType
@@ -59,6 +67,7 @@ class IntrinsicFunctionCallsLowering(j2clBackendContext: J2clBackendContext) :
       expression.isRangeUntilCall -> lowerRangeUntilCall(expression)
       expression.isArrayIteratorCall -> lowerArrayIteratorCall(expression)
       expression.isNoWhenBranchMatchedException -> lowerNoWhenBranchMatchedException(expression)
+      expression.isCompareTo -> lowerCompareToCall(expression)
       else -> super.visitCall(expression)
     }
   }
@@ -146,6 +155,83 @@ class IntrinsicFunctionCallsLowering(j2clBackendContext: J2clBackendContext) :
     }
   }
 
+  private fun lowerCompareToCall(expression: IrCall): IrExpression {
+    val callee = expression.symbol.owner
+    val calleeReceiver =
+      checkNotNull(callee.dispatchReceiverParameter ?: callee.extensionReceiverParameter)
+    val calleeParameter = callee.valueParameters.single()
+
+    val replacementSymbol =
+      when (comparisonType(calleeReceiver.type, calleeParameter.type)) {
+        PrimitiveType.DOUBLE -> javaLangDoubleClass
+        PrimitiveType.FLOAT -> javaLangFloatClass
+        PrimitiveType.LONG -> javaLangLongClass
+        PrimitiveType.CHAR -> javaLangCharacterClass
+        PrimitiveType.INT -> javaLangIntegerClass
+        PrimitiveType.BOOLEAN -> javaLangBooleanClass
+        PrimitiveType.BYTE -> javaLangByteClass
+        PrimitiveType.SHORT -> javaLangShortClass
+      }.functionByName("compare")
+
+    return context.createJvmIrBuilder(replacementSymbol, expression).run {
+      irCall(replacementSymbol).apply {
+        putValueArgument(
+          0,
+          checkNotNull(expression.dispatchReceiver ?: expression.extensionReceiver),
+        )
+        putValueArgument(1, expression.getValueArgument(0)!!)
+      }
+    }
+  }
+
+  private fun comparisonType(left: IrType, right: IrType): PrimitiveType {
+    check(left.isPrimitiveType() && right.isPrimitiveType())
+    return when {
+      left == right -> left.getPrimitiveType()!!
+      left.isDouble() || right.isDouble() -> PrimitiveType.DOUBLE
+      left.isFloat() || right.isFloat() -> PrimitiveType.FLOAT
+      left.isLong() || right.isLong() -> PrimitiveType.LONG
+      left.isChar() || right.isChar() -> PrimitiveType.CHAR
+      else -> PrimitiveType.INT
+    }
+  }
+
+  private val javaLangFqName = FqName("java.lang")
+
+  private val javaLangIntegerClass by lazy {
+    context.irPluginContext!!.referenceClass(ClassId(javaLangFqName, Name.identifier("Integer")))!!
+  }
+
+  private val javaLangLongClass by lazy {
+    context.irPluginContext!!.referenceClass(ClassId(javaLangFqName, Name.identifier("Long")))!!
+  }
+
+  private val javaLangDoubleClass by lazy {
+    context.irPluginContext!!.referenceClass(ClassId(javaLangFqName, Name.identifier("Double")))!!
+  }
+
+  private val javaLangFloatClass by lazy {
+    context.irPluginContext!!.referenceClass(ClassId(javaLangFqName, Name.identifier("Float")))!!
+  }
+
+  private val javaLangByteClass by lazy {
+    context.irPluginContext!!.referenceClass(ClassId(javaLangFqName, Name.identifier("Byte")))!!
+  }
+
+  private val javaLangShortClass by lazy {
+    context.irPluginContext!!.referenceClass(ClassId(javaLangFqName, Name.identifier("Short")))!!
+  }
+
+  private val javaLangBooleanClass by lazy {
+    context.irPluginContext!!.referenceClass(ClassId(javaLangFqName, Name.identifier("Boolean")))!!
+  }
+
+  private val javaLangCharacterClass by lazy {
+    context.irPluginContext!!.referenceClass(
+      ClassId(javaLangFqName, Name.identifier("Character"))
+    )!!
+  }
+
   private val jvmIntrinsicsClass by lazy {
     context.irPluginContext!!.referenceClass(
       ClassId.topLevel(FqName("kotlin.jvm.internal.Intrinsics"))
@@ -175,4 +261,7 @@ class IntrinsicFunctionCallsLowering(j2clBackendContext: J2clBackendContext) :
 
   private val IrCall.isNoWhenBranchMatchedException: Boolean
     get() = intrinsics.isNoWhenBranchMatchedException(this)
+
+  private val IrCall.isCompareTo: Boolean
+    get() = intrinsics.isCompareTo(this)
 }

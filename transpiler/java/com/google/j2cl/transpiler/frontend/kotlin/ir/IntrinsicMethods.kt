@@ -20,6 +20,7 @@ package com.google.j2cl.transpiler.frontend.kotlin.ir
 
 import com.google.j2cl.transpiler.ast.BinaryOperator
 import com.google.j2cl.transpiler.ast.PrefixOperator
+import org.jetbrains.kotlin.builtins.PrimitiveType
 import org.jetbrains.kotlin.builtins.StandardNames
 import org.jetbrains.kotlin.ir.IrBuiltIns
 import org.jetbrains.kotlin.ir.declarations.IrClass
@@ -124,6 +125,16 @@ class IntrinsicMethods(val irBuiltIns: IrBuiltIns) {
 
   fun isIeee754EqualsOperator(irCall: IrCall): Boolean =
     irCall.symbol.toKey() in ieee754EqualsSymbolKeys
+
+  private val compareToSymbolKeys by lazy {
+    PrimitiveType.entries
+      .flatMap { parameter ->
+        PrimitiveType.entries.map { Key(it.typeFqName, "compareTo", listOf(parameter.typeFqName)) }
+      }
+      .toSet()
+  }
+
+  fun isCompareTo(irCall: IrCall): Boolean = irCall.symbol.toKey() in compareToSymbolKeys
 
   fun getPrefixOperator(symbol: IrFunctionSymbol): PrefixOperator? =
     prefixOperatorByIntrinsicSymbolKey[symbol.toKey()]
