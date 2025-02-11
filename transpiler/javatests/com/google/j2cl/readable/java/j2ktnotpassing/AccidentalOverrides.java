@@ -15,6 +15,7 @@
  */
 package j2ktnotpassing;
 
+// TODO(b/395588204): Remove when fixed.
 interface Parent {
   <T extends String> void test(T t);
 }

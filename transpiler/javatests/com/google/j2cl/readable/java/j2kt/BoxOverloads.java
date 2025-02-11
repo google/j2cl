@@ -45,6 +45,25 @@ public class BoxOverloads {
     nullableBoxedOverload(1);
   }
 
+  // TODO(b/279936148): Uncomment when fixed.
+  // public static void boxedOverload(double d) {}
+  //
+  // public static void boxedOverload(Double d) {}
+  //
+  // public static void testBoxedOverload() {
+  //   // Dispatches boxedOverload(double)
+  //   boxedOverload(1.25);
+  //
+  //   // Dispatches boxedOverload(Double)
+  //   boxedOverload(Double.valueOf(1.25));
+  //
+  //   // Dispatches boxedOverload(Double)
+  //   boxedOverload(new Double(1.25));
+  //
+  //   // Dispatches boxedOverload(double)
+  //   boxedOverload(1);
+  // }
+
   public static void nullableNumberOverload(double d) {}
 
   public static void nullableNumberOverload(@Nullable Number n) {}
@@ -147,6 +166,28 @@ public class BoxOverloads {
     objectOverload("foo");
   }
 
+  public interface Generic<T extends @Nullable Object> {
+    void overload(double d);
+
+    void overload(T t);
+
+    void comparableOverload(double d);
+
+    void comparableOverload(Comparable<T> comparable);
+  }
+
+  // TODO(b/279936148): Uncomment when fixed.
+  // public static void testGenericBoxedOverload(Generic<Double> generic) {
+  //   // Dispatches overload(double)
+  //   generic.overload(1.25);
+  //
+  //   // Dispatches overload(T)
+  //   generic.overload(Double.valueOf(1.25));
+  //
+  //   // Dispatches overload(double)
+  //   generic.overload(1);
+  // }
+
   // A case from com.google.common.base.MoreObjects.
   public static <T> T firstNonNull(@Nullable T t1, T t2) {
     return t1 != null ? t1 : t2;
@@ -154,12 +195,6 @@ public class BoxOverloads {
 
   public static void testFirstNonNull(@Nullable Integer i) {
     firstNonNull(i, 0);
-  }
-
-  public interface Generic<T extends @Nullable Object> {
-    void comparableOverload(double d);
-
-    void comparableOverload(Comparable<T> comparable);
   }
 
   public static void testComparableOverload(Generic<Double> generic) {

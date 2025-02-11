@@ -44,6 +44,34 @@ public class DefinitelyNotNull {
       // See: b/268006049, b/272714235.
       return ordering.reverse();
     }
+
+    <S extends T> Ordering<@Nullable S> nullsLast() {
+      throw new RuntimeException();
+    }
+  }
+
+  final class NullsFirstOrdering<T extends @Nullable Object> extends Ordering<@Nullable T> {
+    @SuppressWarnings("nullness")
+    final Ordering<? super T> ordering;
+
+    NullsFirstOrdering(Ordering<? super T> ordering) {
+      this.ordering = ordering;
+    }
+
+    // TODO(b/268006049): Uncomment when fixed.
+    // @Override
+    // public <S extends @Nullable T> Ordering<S> reverse() {
+    //   // Type inference problem detected in Guava.
+    //   return ordering.reverse().nullsLast();
+    // }
+
+    // TODO(b/268006049): Uncomment when fixed.
+    // @Override
+    // @SuppressWarnings("nullness") // probably a bug in our checker?
+    // public <S extends @Nullable T> Ordering<@Nullable S> nullsLast() {
+    //   // Type inference problem detected in Guava.
+    //   return ordering.nullsLast();
+    // }
   }
 
   // Reproduction of Guava code with immutable lists.

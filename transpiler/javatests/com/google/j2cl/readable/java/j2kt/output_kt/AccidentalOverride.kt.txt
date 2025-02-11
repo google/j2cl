@@ -20,6 +20,7 @@ package j2kt
 
 import javaemul.lang.*
 import kotlin.OptIn
+import kotlin.String
 import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
@@ -79,3 +80,14 @@ open class AccidentalOverride {
   abstract override fun abstractAccidentalOverride()
  }
 }
+
+@ObjCName("J2ktJ2ktParent", exact = true)
+interface Parent {
+ @ObjCName("test")
+ fun <T: String?> test(
+  @ObjCName("withNSString") t: T
+ )
+}
+
+@ObjCName("J2ktJ2ktChild", exact = true)
+interface Child: Parent

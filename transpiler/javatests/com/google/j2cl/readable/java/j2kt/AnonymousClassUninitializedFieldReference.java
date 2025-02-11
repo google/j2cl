@@ -13,32 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2ktnotpassing;
+package j2kt;
 
-import javaemul.internal.annotations.KtProperty;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-public class InnerClassInsideAnonymousClassInitProblem {
-  static final Object obj =
+public class AnonymousClassUninitializedFieldReference {
+  private final Object obj;
+
+  private final Object anonymous =
       new Object() {
-        class InnerClassWithTwoConstructors {
-          final int i;
-
-          InnerClassWithTwoConstructors(int i) {
-            this.i = i;
-          }
-
-          InnerClassWithTwoConstructors(float i) {
-            this.i = (int) i;
-          }
-
-          @KtProperty
-          int property() {
-            // Kotlin compiler complains that "i" is not initialized.
-            // See: https://youtrack.jetbrains.com/issue/KT-65299
-            return i;
-          }
+        public Object getObj() {
+          return obj;
         }
       };
+
+  public AnonymousClassUninitializedFieldReference(Object obj) {
+    this.obj = obj;
+  }
 }

@@ -31,10 +31,26 @@ public class InnerClassInsideAnonymousClassInitProblem {
 
           @KtProperty
           int property() {
-            // To overcome the problem with Kotlin Compiler which complains that "i" is not
-            // initialized, J2KT renders the constructor as primary. The workaround does not work
-            // when there are two or more constructors.
-            // See: https://youtrack.jetbrains.com/issue/KT-65299
+            return i;
+          }
+        }
+      };
+
+  static final Object obj2 =
+      new Object() {
+        class InnerClassWithTwoConstructors {
+          final int i;
+
+          InnerClassWithTwoConstructors(int i) {
+            this.i = i;
+          }
+
+          InnerClassWithTwoConstructors(float i) {
+            this.i = (int) i;
+          }
+
+          @KtProperty
+          int property() {
             return i;
           }
         }

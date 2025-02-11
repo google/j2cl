@@ -240,6 +240,16 @@ open class BoxOverloads {
 
  @ObjCName("J2ktJ2ktBoxOverloads_Generic", exact = true)
  interface Generic<T> {
+  @ObjCName("overload")
+  fun overload(
+   @ObjCName("withDouble") d: Double
+  )
+
+  @ObjCName("overload")
+  fun overload(
+   @ObjCName("withId") t: T
+  )
+
   @ObjCName("comparableOverload")
   fun comparableOverload(
    @ObjCName("withDouble") d: Double

@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2ktnotpassing;
+package j2kt;
 
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-// TODO(b/395585494): Remove when fixed
 public class DefaultNullable {
-  static void testNonNullableLambdas() {
-    NotNullable.Consumer<String> methodReference = DefaultNullable::accept;
-  }
+  // TODO(b/395585494): Uncomment when fixed
+  // static void testNonNullableLambdas() {
+  //   NotNullable.Consumer<String> methodReference = DefaultNullable::accept;
+  // }
 
   static void accept(String s) {}
 }

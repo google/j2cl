@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 Google Inc.
+ * Copyright 2022 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,23 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2ktnotpassing;
+package j2kt;
 
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-public class AnonymousClassUninitializedFieldReference {
-  private final Object obj;
-
-  private final Object anonymous =
-      new Object() {
-        public Object getObj() {
-          // TODO(b/368275230): This line fails to compile with UNINITIALIZED_VARIABLE error.
-          return obj;
-        }
-      };
-
-  public AnonymousClassUninitializedFieldReference(Object obj) {
-    this.obj = obj;
+class UnsatisfiedTypeBounds {
+  interface Foo<T extends Foo<T>> {
+    T get();
   }
+
+  interface Command {}
+
+  static class FooCommand implements Foo<FooCommand>, Command {
+    @Override
+    public FooCommand get() {
+      return this;
+    }
+  }
+
+  static final class Helper<T> {}
+
+  // TODO(b/395578676): Uncomment when fixed.
+  // static <T> T methodWithTypeConstraints(Helper<T> helper, Foo<? extends T> foo) {
+  //   return foo.get();
+  // }
+
+  // static void test() {
+  //   Command command = methodWithTypeConstraints(new Helper<Command>(), new FooCommand());
+  // }
 }

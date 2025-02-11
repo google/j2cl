@@ -1,0 +1,62 @@
+// Generated from "j2kt/DefaultNullable.java"
+@file:OptIn(ExperimentalObjCName::class)
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN")
+
+package j2kt
+
+import javaemul.lang.*
+import kotlin.OptIn
+import kotlin.String
+import kotlin.Suppress
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
+
+@ObjCName("J2ktJ2ktDefaultNullable", exact = true)
+open class DefaultNullable {
+ @ObjCName("J2ktJ2ktDefaultNullableCompanion", exact = true)
+ companion object {
+  @JvmStatic
+  internal fun accept_pp_j2kt(s: String?) {}
+ }
+}
+
+@ObjCName("J2ktJ2ktNotNullable", exact = true)
+open class NotNullable internal constructor() {
+ @ObjCName("J2ktJ2ktNotNullable_Consumer", exact = true)
+ fun interface Consumer<T> {
+  @ObjCName("accept")
+  fun accept(
+   @ObjCName("withId") t: T
+  )
+ }
+}
+
+@ObjCName("J2ktJ2ktOrdering", exact = true)
+abstract class Ordering<T> internal constructor() {
+ internal open fun <S: T> reverse_pp_j2kt(): Ordering<S> {
+  return null!!
+ }
+
+ @ObjCName("J2ktJ2ktOrderingCompanion", exact = true)
+ companion object {
+  @JvmStatic
+  internal fun <E> reversed_pp_j2kt(ordering: Ordering<in E>): Ordering<in E> {
+   return ordering.reverse_pp_j2kt<E>()
+  }
+ }
+}

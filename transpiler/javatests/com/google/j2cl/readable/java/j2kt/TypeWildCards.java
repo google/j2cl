@@ -65,8 +65,7 @@ class TypeWildCards {
   }
 
   public static <T extends Observable<?>> void testObservableParameterized(T observable) {
-    // TODO(b/261839232): "Expected Nothing" issue, cast to Observable<@Nullable Object> would help
-    // observable.addObserver(e -> {});
+    observable.addObserver(e -> {});
   }
 
   public static void testSuperWildcardObservable(SuperWildcardObservable<?> observable) {

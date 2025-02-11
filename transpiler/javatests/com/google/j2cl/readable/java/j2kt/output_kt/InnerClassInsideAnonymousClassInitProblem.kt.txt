@@ -20,6 +20,7 @@ package j2kt
 
 import javaemul.lang.*
 import kotlin.Any
+import kotlin.Float
 import kotlin.Int
 import kotlin.OptIn
 import kotlin.Suppress
@@ -40,6 +41,28 @@ open class InnerClassInsideAnonymousClassInitProblem {
 
     init {
      this.i_pp_j2kt = i
+    }
+
+    internal open val property_pp_j2kt: Int
+     get() {
+      return this.i_pp_j2kt
+     }
+   }
+  }
+
+  @JvmField
+  internal val obj2_pp_j2kt: Any = object : Any() {
+   @ObjCName("J2ktJ2ktInnerClassInsideAnonymousClassInitProblem__2_InnerClassWithTwoConstructors", exact = true)
+   open inner class InnerClassWithTwoConstructors {
+    @JvmField
+    internal val i_pp_j2kt: Int
+
+    internal constructor(i: Int) {
+     this.i_pp_j2kt = i
+    }
+
+    internal constructor(i: Float) {
+     this.i_pp_j2kt = i.toInt()
     }
 
     internal open val property_pp_j2kt: Int

@@ -15,9 +15,11 @@
  */
 package j2ktnotpassing;
 
+import jsinterop.annotations.JsNonNull;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+// TODO(b/268006049): Remove when fixed.
 @NullMarked
 public class DefinitelyNotNull {
   static class Ordering<T extends @Nullable Object> {
@@ -63,6 +65,12 @@ public class DefinitelyNotNull {
         Iterable<E> iterable) {
       // "iterable" requires manual "as Iterable<E & Any>" unchecked cast in Kotlin.
       return ImmutableList.copyOf(iterable);
+    }
+
+    @SuppressWarnings("nullness")
+    public static <E extends @Nullable Object> ImmutableList<E> copyOfNullableWithInvalidBounds(
+        Iterable<E> iterable) {
+      return ImmutableList.copyOf((Iterable<@JsNonNull E>) iterable);
     }
   }
 }
