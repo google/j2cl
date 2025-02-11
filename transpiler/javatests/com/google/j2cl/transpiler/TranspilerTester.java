@@ -87,6 +87,8 @@ public class TranspilerTester {
   /** Creates a new transpiler tester initialized with WASM defaults. */
   public static TranspilerTester newTesterWithWasmDefaults() {
     return newTester()
+        // TODO(b/395921769): Remove this after the test are ported to modular WASM.
+        .disableCheckCancelationDelay()
         .addArgs("-backend", "WASM")
         .setClassPathArg(
             "transpiler/javatests/com/google/j2cl/transpiler/jre_bundle-j2wasm_deploy.jar")
@@ -199,6 +201,7 @@ public class TranspilerTester {
   private List<String> args = new ArrayList<>();
   private String temporaryDirectoryPrefix = "transpile_tester";
   private Path outputPath;
+  private boolean checkCancelationDelay = true;
 
   public TranspilerTester addCompilationUnit(String qualifiedCompilationUnitName, String... code) {
     List<String> content = Lists.newArrayList(code);
@@ -315,6 +318,12 @@ public class TranspilerTester {
 
   public TranspilerTester setOutputPath(Path outputPath) {
     this.outputPath = outputPath;
+    return this;
+  }
+
+  @CanIgnoreReturnValue
+  public TranspilerTester disableCheckCancelationDelay() {
+    this.checkCancelationDelay = false;
     return this;
   }
 
@@ -486,28 +495,31 @@ public class TranspilerTester {
    */
   private static final int MAX_DELAY = 250;
 
-  private static Problems transpile(ImmutableList<String> args) {
+  private static Problems transpile(ImmutableList<String> args, boolean checkDelayedCalls) {
     List<String> delayedCalls = new ArrayList<>();
     List<String> slightlyDelayedCalls = new ArrayList<>();
     Problems problems =
-        new Problems() {
-          long lastCall = System.nanoTime();
+        checkDelayedCalls
+            ? new Problems() {
+              long lastCall = System.nanoTime();
 
-          @Override
-          public boolean isCancelled() {
-            long delay = (System.nanoTime() - lastCall) / 1_000_000;
-            if (delay > MAX_DELAY) {
-              var stackTrace = Throwables.getStackTraceAsString(new Throwable("Delay: " + delay));
-              if (delay > MAX_DELAY * 2) {
-                delayedCalls.add(stackTrace);
-              } else {
-                slightlyDelayedCalls.add(stackTrace);
+              @Override
+              public boolean isCancelled() {
+                long delay = (System.nanoTime() - lastCall) / 1_000_000;
+                if (delay > MAX_DELAY) {
+                  var stackTrace =
+                      Throwables.getStackTraceAsString(new Throwable("Delay: " + delay));
+                  if (delay > MAX_DELAY * 2) {
+                    delayedCalls.add(stackTrace);
+                  } else {
+                    slightlyDelayedCalls.add(stackTrace);
+                  }
+                }
+                lastCall = System.nanoTime();
+                return false;
               }
             }
-            lastCall = System.nanoTime();
-            return false;
-          }
-        };
+            : new Problems();
 
     J2clCommandLineRunner runner = new J2clCommandLineRunner(problems);
     runner.executeForTesting(args);
@@ -582,7 +594,8 @@ public class TranspilerTester {
       // Passthru explicitly defined args
       commandLineArgsBuilder.addAll(args);
 
-      return new TranspileResult(transpile(commandLineArgsBuilder.build()), outputPath);
+      return new TranspileResult(
+          transpile(commandLineArgsBuilder.build(), checkCancelationDelay), outputPath);
     } catch (IOException e) {
       throw new AssertionError(e);
     }
