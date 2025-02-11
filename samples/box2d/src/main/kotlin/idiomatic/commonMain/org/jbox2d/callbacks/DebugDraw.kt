@@ -24,6 +24,7 @@
 package org.jbox2d.callbacks
 
 import org.jbox2d.common.Color3f
+import org.jbox2d.common.Flags
 import org.jbox2d.common.IViewportTransform
 import org.jbox2d.common.Transform
 import org.jbox2d.common.Vec2
@@ -36,14 +37,14 @@ import org.jbox2d.common.Vec2
  * @author Daniel Murphy
  */
 abstract class DebugDraw(val viewportTransform: IViewportTransform) {
-  var flags: Int = 0
+  var flags = Flags()
 
   fun appendFlags(flags: Int) {
-    this.flags = this.flags or flags
+    this.flags += flags
   }
 
   fun clearFlags(flags: Int) {
-    this.flags = this.flags and flags.inv()
+    this.flags -= flags
   }
 
   /**

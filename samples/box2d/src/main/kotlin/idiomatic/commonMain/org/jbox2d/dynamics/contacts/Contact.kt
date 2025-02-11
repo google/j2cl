@@ -25,6 +25,7 @@ package org.jbox2d.dynamics.contacts
 import org.jbox2d.callbacks.ContactListener
 import org.jbox2d.collision.Manifold
 import org.jbox2d.collision.WorldManifold
+import org.jbox2d.common.Flags
 import org.jbox2d.common.MathUtils
 import org.jbox2d.common.Transform
 import org.jbox2d.dynamics.Fixture
@@ -38,16 +39,12 @@ import org.jbox2d.pooling.IWorldPool
  * @author daniel
  */
 abstract class Contact protected constructor(protected val pool: IWorldPool) {
-  var flags = 0
+  var flags = Flags()
 
   // World pool and list pointers.
   var prev: Contact? = null
 
-  /**
-   * Get the next contact in the world's contact list.
-   *
-   * @return
-   */
+  /** The next contact in the world's contact list. */
   var next: Contact? = null
 
   // Nodes for connecting bodies.
@@ -66,17 +63,17 @@ abstract class Contact protected constructor(protected val pool: IWorldPool) {
   var restitution = 0f
   var tangentSpeed = 0f
   val isEnabled: Boolean
-    get() = (flags and ENABLED_FLAG) == ENABLED_FLAG
+    get() = ENABLED_FLAG in flags
 
   val isTouching: Boolean
-    get() = flags and TOUCHING_FLAG == TOUCHING_FLAG
+    get() = TOUCHING_FLAG in flags
 
   // djm pooling
   private val oldManifold = Manifold()
 
   /** initialization for pooling */
   open fun init(fA: Fixture, newIndexA: Int, fB: Fixture, newIndexB: Int) {
-    flags = 0
+    flags = Flags()
     fixtureA = fA
     fixtureB = fB
     indexA = newIndexA
@@ -110,16 +107,9 @@ abstract class Contact protected constructor(protected val pool: IWorldPool) {
   /**
    * Enable/disable this contact. This can be used inside the pre-solve contact listener. The
    * contact is only disabled for the current time step (or sub-step in continuous collisions).
-   *
-   * @param flag
    */
   fun setEnabled(flag: Boolean) {
-    flags =
-      if (flag) {
-        flags or ENABLED_FLAG
-      } else {
-        flags and ENABLED_FLAG.inv()
-      }
+    flags = flags.setOrRemove(ENABLED_FLAG, flag)
   }
 
   fun resetFriction() {
@@ -134,16 +124,16 @@ abstract class Contact protected constructor(protected val pool: IWorldPool) {
 
   /** Flag this contact for filtering. Filtering will occur the next time step. */
   fun flagForFiltering() {
-    flags = flags or FILTER_FLAG
+    flags += FILTER_FLAG
   }
 
   fun update(listener: ContactListener?) {
     oldManifold.set(manifold)
 
     // Re-enable this contact.
-    flags = flags or ENABLED_FLAG
+    flags += ENABLED_FLAG
     var touching: Boolean
-    val wasTouching = (flags and TOUCHING_FLAG) == TOUCHING_FLAG
+    val wasTouching = TOUCHING_FLAG in flags
     val sensorA = fixtureA.isSensor
     val sensorB = fixtureB.isSensor
     val sensor = sensorA || sensorB
@@ -185,12 +175,7 @@ abstract class Contact protected constructor(protected val pool: IWorldPool) {
         bodyB.setAwake(true)
       }
     }
-    flags =
-      if (touching) {
-        flags or TOUCHING_FLAG
-      } else {
-        flags and TOUCHING_FLAG.inv()
-      }
+    flags = flags.setOrRemove(TOUCHING_FLAG, touching)
     if (listener == null) {
       return
     }
@@ -226,10 +211,6 @@ abstract class Contact protected constructor(protected val pool: IWorldPool) {
     /**
      * Friction mixing law. The idea is to allow either fixture to drive the restitution to zero.
      * For example, anything slides on ice.
-     *
-     * @param friction1
-     * @param friction2
-     * @return
      */
     fun mixFriction(friction1: Float, friction2: Float): Float =
       MathUtils.sqrt(friction1 * friction2)
@@ -237,10 +218,6 @@ abstract class Contact protected constructor(protected val pool: IWorldPool) {
     /**
      * Restitution mixing law. The idea is allow for anything to bounce off an inelastic surface.
      * For example, a superball bounces on anything.
-     *
-     * @param restitution1
-     * @param restitution2
-     * @return
      */
     fun mixRestitution(restitution1: Float, restitution2: Float): Float =
       if (restitution1 > restitution2) restitution1 else restitution2

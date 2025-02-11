@@ -379,7 +379,7 @@ class Island {
           continue
         }
         if (
-          b.flags and Body.Companion.AUTO_SLEEP_FLAG == 0 ||
+          Body.AUTO_SLEEP_FLAG !in b.flags ||
             b.angularVelocity * b.angularVelocity > angTolSqr ||
             (b.linearVelocity dot b.linearVelocity) > linTolSqr
         ) {

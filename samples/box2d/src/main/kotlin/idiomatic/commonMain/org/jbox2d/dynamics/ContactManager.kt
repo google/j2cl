@@ -186,7 +186,7 @@ class ContactManager(private val pool: World, strategy: BroadPhaseStrategy) : Pa
       val bodyB = fixtureB.body!!
 
       // is this contact flagged for filtering?
-      if (c.flags and Contact.FILTER_FLAG == Contact.FILTER_FLAG) {
+      if (Contact.FILTER_FLAG in c.flags) {
         // Should these bodies collide?
         if (!bodyB.shouldCollide(bodyA)) {
           val cNuke: Contact = c
@@ -204,7 +204,7 @@ class ContactManager(private val pool: World, strategy: BroadPhaseStrategy) : Pa
         }
 
         // Clear the filtering flag.
-        c.flags = c.flags and Contact.FILTER_FLAG.inv()
+        c.flags -= Contact.FILTER_FLAG
       }
       val activeA = bodyA.isAwake && bodyA.type != BodyType.STATIC
       val activeB = bodyB.isAwake && bodyB.type != BodyType.STATIC

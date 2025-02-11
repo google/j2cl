@@ -43,6 +43,7 @@ import org.jbox2d.collision.shapes.EdgeShape
 import org.jbox2d.collision.shapes.PolygonShape
 import org.jbox2d.collision.shapes.ShapeType
 import org.jbox2d.common.Color3f
+import org.jbox2d.common.Flags
 import org.jbox2d.common.MathUtils
 import org.jbox2d.common.Settings
 import org.jbox2d.common.Sweep
@@ -70,7 +71,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
   // statistics gathering
   var activeContacts = 0
   var contactPoolCount = 0
-  var flags: Int = CLEAR_FORCES
+  var flags = Flags(CLEAR_FORCES)
 
   var contactManager: ContactManager = ContactManager(this, broadPhaseStrategy)
   var bodyList: Body? = null
@@ -133,7 +134,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
     get() = contactManager.broadPhase.getTreeQuality()
 
   val isLocked: Boolean
-    get() = (flags and LOCKED) == LOCKED
+    get() = LOCKED in flags
 
   private var stepComplete = true
   private var invDt0: Float = 0f
@@ -464,12 +465,12 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
     stepTimer.reset()
     // log.debug("Starting step");
     // If new fixtures were added, we need to find the new contacts.
-    if (flags and NEW_FIXTURE == NEW_FIXTURE) {
+    if (NEW_FIXTURE in flags) {
       // log.debug("There's a new fixture, lets look for new contacts");
       contactManager.findNewContacts()
-      flags = flags and NEW_FIXTURE.inv()
+      flags -= NEW_FIXTURE
     }
-    flags = flags or LOCKED
+    flags += LOCKED
     step.dt = dt
     step.velocityIterations = velocityIterations
     step.positionIterations = positionIterations
@@ -498,10 +499,10 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
     if (step.dt > 0.0f) {
       invDt0 = step.inv_dt
     }
-    if (flags and CLEAR_FORCES == CLEAR_FORCES) {
+    if (CLEAR_FORCES in flags) {
       clearForces()
     }
-    flags = flags and LOCKED.inv()
+    flags -= LOCKED
     // log.debug("ending step");
     profile.step = stepTimer.milliseconds
   }
@@ -525,8 +526,8 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
   /** Call this to draw shapes and other debug draw data. */
   fun drawDebugData() {
     val debugDraw = this.debugDraw ?: return
-    val flags: Int = debugDraw.flags
-    if (flags and DebugDraw.E_SHAPE_BIT == DebugDraw.E_SHAPE_BIT) {
+    val flags = debugDraw.flags
+    if (DebugDraw.E_SHAPE_BIT in flags) {
       var b = bodyList
       while (b != null) {
         xf.set(b.xf)
@@ -553,14 +554,14 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
         b = b.next
       }
     }
-    if (flags and DebugDraw.E_JOINT_BIT == DebugDraw.E_JOINT_BIT) {
+    if (DebugDraw.E_JOINT_BIT in flags) {
       var j = jointList
       while (j != null) {
         drawJoint(j)
         j = j.next
       }
     }
-    if (flags and DebugDraw.E_PAIR_BIT == DebugDraw.E_PAIR_BIT) {
+    if (DebugDraw.E_PAIR_BIT in flags) {
       color.set(0.3f, 0.9f, 0.9f)
       var c = contactManager.contactList
       while (c != null) {
@@ -572,7 +573,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
         c = c.next
       }
     }
-    if (flags and DebugDraw.E_AABB_BIT == DebugDraw.E_AABB_BIT) {
+    if (DebugDraw.E_AABB_BIT in flags) {
       color.set(0.9f, 0.3f, 0.9f)
       var b = bodyList
       while (b != null) {
@@ -597,7 +598,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
         b = b.next
       }
     }
-    if (flags and DebugDraw.E_CENTER_OF_MASS_BIT == DebugDraw.E_CENTER_OF_MASS_BIT) {
+    if (DebugDraw.E_CENTER_OF_MASS_BIT in flags) {
       var b = bodyList
       while (b != null) {
         xf.set(b.xf)
@@ -606,7 +607,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
         b = b.next
       }
     }
-    if (flags and DebugDraw.E_DYNAMIC_TREE_BIT == DebugDraw.E_DYNAMIC_TREE_BIT) {
+    if (DebugDraw.E_DYNAMIC_TREE_BIT in flags) {
       contactManager.broadPhase.drawTree(debugDraw)
     }
   }
@@ -643,16 +644,11 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
 
   /** Set flag to control automatic clearing of forces after each time step. */
   fun setAutoClearForces(flag: Boolean) {
-    flags =
-      if (flag) {
-        flags or CLEAR_FORCES
-      } else {
-        flags and CLEAR_FORCES.inv()
-      }
+    flags = flags.setOrRemove(CLEAR_FORCES, flag)
   }
 
   /** Get the flag that controls automatic clearing of forces after each time step. */
-  fun getAutoClearForces(): Boolean = flags and CLEAR_FORCES == CLEAR_FORCES
+  fun getAutoClearForces(): Boolean = CLEAR_FORCES in flags
 
   private fun solve(step: TimeStep) {
     profile.solveInit = 0f
@@ -670,13 +666,13 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
     // Clear all the island flags.
     var body: Body? = bodyList
     while (body != null) {
-      body.flags = body.flags and Body.Companion.IS_LAND_FLAG.inv()
+      body.flags -= Body.IS_LAND_FLAG
       body = body.next
     }
 
     var c = contactManager.contactList
     while (c != null) {
-      c.flags = c.flags and Contact.ISLAND_FLAG.inv()
+      c.flags -= Contact.ISLAND_FLAG
       c = c.next
     }
     var j = jointList
@@ -692,7 +688,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
     }
     var seed = bodyList
     while (seed != null) {
-      if (seed.flags and Body.Companion.IS_LAND_FLAG == Body.Companion.IS_LAND_FLAG) {
+      if (Body.IS_LAND_FLAG in seed.flags) {
         seed = seed.next
         continue
       }
@@ -711,7 +707,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
       island.clear()
       var stackCount = 0
       stack[stackCount++] = seed
-      seed.flags = seed.flags or Body.Companion.IS_LAND_FLAG
+      seed.flags += Body.IS_LAND_FLAG
 
       // Perform a depth first search (DFS) on the constraint graph.
       while (stackCount > 0) {
@@ -735,7 +731,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
           val contact = ce.contact!!
 
           // Has this contact already been added to an island?
-          if (contact.flags and Contact.ISLAND_FLAG == Contact.ISLAND_FLAG) {
+          if (Contact.ISLAND_FLAG in contact.flags) {
             ce = ce.next
             continue
           }
@@ -754,17 +750,17 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
             continue
           }
           island.add(contact)
-          contact.flags = contact.flags or Contact.ISLAND_FLAG
+          contact.flags += Contact.ISLAND_FLAG
           val other = ce.other
 
           // Was the other body already added to this island?
-          if (other!!.flags and Body.Companion.IS_LAND_FLAG == Body.Companion.IS_LAND_FLAG) {
+          if (Body.IS_LAND_FLAG in other!!.flags) {
             ce = ce.next
             continue
           }
           assert(stackCount < stackSize)
           stack[stackCount++] = other
-          other.flags = other.flags or Body.Companion.IS_LAND_FLAG
+          other.flags += Body.IS_LAND_FLAG
           ce = ce.next
         }
 
@@ -784,13 +780,13 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
           }
           island.add(je.joint!!)
           je.joint!!.islandFlag = true
-          if (other.flags and Body.Companion.IS_LAND_FLAG == Body.Companion.IS_LAND_FLAG) {
+          if (Body.IS_LAND_FLAG in other.flags) {
             je = je.next
             continue
           }
           assert(stackCount < stackSize)
           stack[stackCount++] = other
-          other.flags = other.flags or Body.Companion.IS_LAND_FLAG
+          other.flags += Body.IS_LAND_FLAG
           je = je.next
         }
       }
@@ -804,7 +800,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
         // Allow static bodies to participate in other islands.
         val b = island.bodies[i]!!
         if (b.type == BodyType.STATIC) {
-          b.flags = b.flags and Body.Companion.IS_LAND_FLAG.inv()
+          b.flags -= Body.IS_LAND_FLAG
         }
       }
       seed = seed.next
@@ -815,7 +811,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
     while (b != null) {
 
       // If a body was not in an island then it did not move.
-      if (b.flags and Body.Companion.IS_LAND_FLAG == 0) {
+      if (Body.IS_LAND_FLAG !in b.flags) {
         b = b.next
         continue
       }
@@ -845,7 +841,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
     if (stepComplete) {
       var b = bodyList
       while (b != null) {
-        b.flags = b.flags and Body.Companion.IS_LAND_FLAG.inv()
+        b.flags -= Body.IS_LAND_FLAG
         b.sweep.alpha0 = 0.0f
         b = b.next
       }
@@ -853,7 +849,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
       while (c != null) {
 
         // Invalidate TOI
-        c.flags = c.flags and (Contact.TOI_FLAG or Contact.ISLAND_FLAG).inv()
+        c.flags -= Contact.TOI_FLAG or Contact.ISLAND_FLAG
         c.toiCount = 0f
         c.toi = 1.0f
         c = c.next
@@ -881,7 +877,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
           continue
         }
         var alpha = 1.0f
-        if (c.flags and Contact.TOI_FLAG != 0) {
+        if (Contact.TOI_FLAG in c.flags) {
           // This contact has a valid cached TOI.
           alpha = c.toi
         } else {
@@ -947,7 +943,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
               1.0f
             }
           c.toi = alpha
-          c.flags = c.flags or Contact.TOI_FLAG
+          c.flags += Contact.TOI_FLAG
         }
         if (alpha < minAlpha) {
           // This is the minimum TOI found so far.
@@ -974,7 +970,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
 
       // The TOI contact likely has some new contact points.
       minContact.update(contactManager.contactListener)
-      minContact.flags = minContact.flags and Contact.TOI_FLAG.inv()
+      minContact.flags -= Contact.TOI_FLAG
       ++minContact.toiCount
 
       // Is the contact solid?
@@ -995,9 +991,9 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
       island.add(bA)
       island.add(bB)
       island.add(minContact)
-      bA.flags = bA.flags or Body.Companion.IS_LAND_FLAG
-      bB.flags = bB.flags or Body.Companion.IS_LAND_FLAG
-      minContact.flags = minContact.flags or Contact.ISLAND_FLAG
+      bA.flags += Body.IS_LAND_FLAG
+      bB.flags += Body.IS_LAND_FLAG
+      minContact.flags += Contact.ISLAND_FLAG
 
       // Get contacts on bodyA and bodyB.
       tempBodies[0] = bA
@@ -1016,7 +1012,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
             val contact = ce.contact!!
 
             // Has this contact already been added to the island?
-            if (contact.flags and Contact.ISLAND_FLAG != 0) {
+            if (Contact.ISLAND_FLAG in contact.flags) {
               ce = ce.next
               continue
             }
@@ -1038,7 +1034,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
 
             // Tentatively advance the body to the TOI.
             backup1.set(other.sweep)
-            if (other.flags and Body.Companion.IS_LAND_FLAG == 0) {
+            if (Body.IS_LAND_FLAG !in other.flags) {
               other.advance(minAlpha)
             }
 
@@ -1062,17 +1058,17 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
             }
 
             // Add the contact to the island
-            contact.flags = contact.flags or Contact.ISLAND_FLAG
+            contact.flags += Contact.ISLAND_FLAG
             island.add(contact)
 
             // Has the other body already been added to the island?
-            if (other.flags and Body.Companion.IS_LAND_FLAG != 0) {
+            if (Body.IS_LAND_FLAG !in other.flags) {
               ce = ce.next
               continue
             }
 
             // Add the other body to the island.
-            other.flags = other.flags or Body.Companion.IS_LAND_FLAG
+            other.flags += Body.IS_LAND_FLAG
             if (other.type != BodyType.STATIC) {
               other.setAwake(true)
             }
@@ -1092,7 +1088,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
       // Reset island flags and synchronize broad-phase proxies.
       for (i in 0 until island.bodyCount) {
         val body = island.bodies[i]!!
-        body.flags = body.flags and Body.Companion.IS_LAND_FLAG.inv()
+        body.flags -= Body.IS_LAND_FLAG
         if (body.type != BodyType.DYNAMIC) {
           continue
         }
@@ -1101,8 +1097,7 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
         // Invalidate all contact TOIs on this displaced body.
         var ce = body.contactList
         while (ce != null) {
-          ce.contact!!.flags =
-            ce.contact!!.flags and (Contact.TOI_FLAG or Contact.ISLAND_FLAG).inv()
+          ce.contact!!.flags -= Contact.TOI_FLAG or Contact.ISLAND_FLAG
           ce = ce.next
         }
       }

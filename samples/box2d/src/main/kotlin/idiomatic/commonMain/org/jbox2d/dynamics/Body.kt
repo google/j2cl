@@ -24,6 +24,7 @@ package org.jbox2d.dynamics
 
 import org.jbox2d.collision.shapes.MassData
 import org.jbox2d.collision.shapes.Shape
+import org.jbox2d.common.Flags
 import org.jbox2d.common.MathUtils
 import org.jbox2d.common.Rot
 import org.jbox2d.common.Sweep
@@ -41,7 +42,15 @@ class Body(bd: BodyDef, world: World) {
   var type: BodyType = bd.type
     private set
 
-  var flags: Int = 0
+  var flags =
+    Flags(
+      if (bd.bullet) BULLET_FLAG else 0,
+      if (bd.fixedRotation) FIXED_ROTATION_FLAG else 0,
+      if (bd.allowSleep) AUTO_SLEEP_FLAG else 0,
+      if (bd.awake) AWAKE_FLAG else 0,
+      if (bd.active) ACTIVE_FLAG else 0,
+    )
+
   var islandIndex = 0
   /** The body origin transform. */
   val xf =
@@ -102,8 +111,8 @@ class Body(bd: BodyDef, world: World) {
 
   var contactList: ContactEdge? = null
 
-  var mass = 0f
-  var invMass = 0f
+  var mass = if (type == BodyType.DYNAMIC) 1f else 0f
+  var invMass = if (type == BodyType.DYNAMIC) 1f else 0f
 
   // Rotational inertia about the center of mass.
   var I: Float = 0.0f
@@ -130,19 +139,19 @@ class Body(bd: BodyDef, world: World) {
     get() = sweep.localCenter
 
   val isAwake: Boolean
-    get() = (flags and AWAKE_FLAG) == AWAKE_FLAG
+    get() = AWAKE_FLAG in flags
 
   val isSleepingAllowed: Boolean
-    get() = (flags and AUTO_SLEEP_FLAG) == AUTO_SLEEP_FLAG
+    get() = AUTO_SLEEP_FLAG in flags
 
   val isBullet: Boolean
-    get() = flags and BULLET_FLAG == BULLET_FLAG
+    get() = BULLET_FLAG in flags
 
   val isActive: Boolean
-    get() = (flags and ACTIVE_FLAG) == ACTIVE_FLAG
+    get() = ACTIVE_FLAG in flags
 
   val isFixedRotation: Boolean
-    get() = flags and Body.FIXED_ROTATION_FLAG == Body.FIXED_ROTATION_FLAG
+    get() = FIXED_ROTATION_FLAG in flags
 
   private val fixDef = FixtureDef()
   private val pmd = MassData()
@@ -155,30 +164,6 @@ class Body(bd: BodyDef, world: World) {
     assert(bd.gravityScale >= 0.0f)
     assert(bd.angularDamping >= 0.0f)
     assert(bd.linearDamping >= 0.0f)
-
-    if (bd.bullet) {
-      flags = flags or BULLET_FLAG
-    }
-    if (bd.fixedRotation) {
-      flags = flags or FIXED_ROTATION_FLAG
-    }
-    if (bd.allowSleep) {
-      flags = flags or AUTO_SLEEP_FLAG
-    }
-    if (bd.awake) {
-      flags = flags or AWAKE_FLAG
-    }
-    if (bd.active) {
-      flags = flags or ACTIVE_FLAG
-    }
-
-    if (type == BodyType.DYNAMIC) {
-      mass = 1f
-      invMass = 1f
-    } else {
-      mass = 0f
-      invMass = 0f
-    }
   }
 
   fun setType(newType: BodyType) {
@@ -242,7 +227,7 @@ class Body(bd: BodyDef, world: World) {
 
     val fixture = Fixture()
     fixture.create(this, def)
-    if (flags and ACTIVE_FLAG == ACTIVE_FLAG) {
+    if (ACTIVE_FLAG in flags) {
       val broadPhase = world.contactManager.broadPhase
       fixture.createProxies(broadPhase, this.xf)
     }
@@ -258,7 +243,7 @@ class Body(bd: BodyDef, world: World) {
 
     // Let the world know we have a new fixture. This will cause new contacts
     // to be created at the beginning of the next time step.
-    world.flags = world.flags or World.Companion.NEW_FIXTURE
+    world.flags += World.NEW_FIXTURE
     return fixture
   }
 
@@ -332,7 +317,7 @@ class Body(bd: BodyDef, world: World) {
         world.contactManager.destroy(c)
       }
     }
-    if (flags and ACTIVE_FLAG == ACTIVE_FLAG) {
+    if (ACTIVE_FLAG in flags) {
       val broadPhase = world.contactManager.broadPhase
       tempFixture.destroyProxies(broadPhase)
     }
@@ -529,7 +514,7 @@ class Body(bd: BodyDef, world: World) {
       mass = 1f
     }
     invMass = 1.0f / mass
-    if (massData.I > 0.0f && flags and FIXED_ROTATION_FLAG == 0) {
+    if (massData.I > 0.0f && FIXED_ROTATION_FLAG !in flags) {
       I = massData.I - mass * (massData.center dot massData.center)
       assert(I > 0.0f)
       invI = 1.0f / I
@@ -603,7 +588,7 @@ class Body(bd: BodyDef, world: World) {
       mass = 1.0f
       invMass = 1.0f
     }
-    if (I > 0.0f && (flags and FIXED_ROTATION_FLAG) == 0) {
+    if (I > 0.0f && FIXED_ROTATION_FLAG !in flags) {
       // Center the inertia about the center of mass.
       I -= mass * (localCenter dot localCenter)
       assert(I > 0.0f)
@@ -717,24 +702,13 @@ class Body(bd: BodyDef, world: World) {
 
   /** Should this body be treated like a bullet for continuous collision detection? */
   fun setBullent(flag: Boolean) {
-    flags =
-      if (flag) {
-        flags or BULLET_FLAG
-      } else {
-        flags and BULLET_FLAG.inv()
-      }
+    flags = flags.setOrRemove(BULLET_FLAG, flag)
   }
 
-  /**
-   * You can disable sleeping on this body. If you disable sleeping, the body will be woken.
-   *
-   * @param flag
-   */
+  /** You can disable sleeping on this body. If you disable sleeping, the body will be woken. */
   fun setSleepingAllowed(flag: Boolean) {
-    if (flag) {
-      flags = flags or AUTO_SLEEP_FLAG
-    } else {
-      flags = flags and AUTO_SLEEP_FLAG.inv()
+    flags = flags.setOrRemove(AUTO_SLEEP_FLAG, flag)
+    if (!flag) {
       setAwake(true)
     }
   }
@@ -743,16 +717,15 @@ class Body(bd: BodyDef, world: World) {
    * Set the sleep state of the body. A sleeping body has very low CPU cost.
    *
    * @param flag set to true to put body to sleep, false to wake it.
-   * @param flag
    */
   fun setAwake(flag: Boolean) {
     if (flag) {
-      if (flags and AWAKE_FLAG == 0) {
-        flags = flags or AWAKE_FLAG
+      if (AWAKE_FLAG !in flags) {
+        flags += AWAKE_FLAG
         userData = 0.0f
       }
     } else {
-      flags = flags and AWAKE_FLAG.inv()
+      flags -= AWAKE_FLAG
       userData = 0.0f
       linearVelocity.setZero()
       angularVelocity = 0.0f
@@ -770,8 +743,6 @@ class Body(bd: BodyDef, world: World) {
    * and will not participate in collisions, ray-casts, or queries. Joints connected to an inactive
    * body are implicitly inactive. An inactive body is still owned by a World object and remains in
    * the body list.
-   *
-   * @param flag
    */
   fun setIsActive(flag: Boolean) {
     assert(world.isLocked == false)
@@ -779,7 +750,7 @@ class Body(bd: BodyDef, world: World) {
       return
     }
     if (flag) {
-      flags = flags or ACTIVE_FLAG
+      flags += ACTIVE_FLAG
 
       // Create all proxies.
       val broadPhase = world.contactManager.broadPhase
@@ -791,7 +762,7 @@ class Body(bd: BodyDef, world: World) {
 
       // Contacts are created the next time step.
     } else {
-      flags = flags and ACTIVE_FLAG.inv()
+      flags -= ACTIVE_FLAG
 
       // Destroy all proxies.
       val broadPhase = world.contactManager.broadPhase
@@ -812,18 +783,9 @@ class Body(bd: BodyDef, world: World) {
     }
   }
 
-  /**
-   * Set this body to have fixed rotation. This causes the mass to be reset.
-   *
-   * @param flag
-   */
+  /** Set this body to have fixed rotation. This causes the mass to be reset. */
   fun setFixedRotation(flag: Boolean) {
-    flags =
-      if (flag) {
-        flags or FIXED_ROTATION_FLAG
-      } else {
-        flags and FIXED_ROTATION_FLAG.inv()
-      }
+    flags = flags.setOrRemove(FIXED_ROTATION_FLAG, flag)
     resetMassData()
   }
 
@@ -865,9 +827,6 @@ class Body(bd: BodyDef, world: World) {
   /**
    * This is used to prevent connected bodies from colliding. It may lie, depending on the
    * collideConnected flag.
-   *
-   * @param other
-   * @return
    */
   fun shouldCollide(other: Body): Boolean {
     // At least one body should be dynamic.
