@@ -19,13 +19,11 @@ import java.util.function.Supplier;
 import javaemul.internal.Platform;
 
 /**
- * See <a
- * href="http://docs.oracle.com/javase/8/docs/api/java/util/Objects.html">the
- * official Java API doc</a> for details.
+ * See <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Objects.html">the official Java
+ * API doc</a> for details.
  */
 public final class Objects {
-  private Objects() {
-  }
+  private Objects() {}
 
   public static <T> int compare(T a, T b, Comparator<? super T> c) {
     return a == b ? 0 : c.compare(a, b);
@@ -125,6 +123,20 @@ public final class Objects {
   public static <T> T requireNonNull(T obj, Supplier<String> messageSupplier) {
     if (obj == null) {
       throw new NullPointerException(messageSupplier.get());
+    }
+    return obj;
+  }
+
+  public static <T> T requireNonNullElse(T obj, T defaultValue) {
+    if (obj == null) {
+      return requireNonNull(defaultValue, "defaultObj");
+    }
+    return obj;
+  }
+
+  public static <T> T requireNonNullElseGet(T obj, Supplier<T> defaultValueSupplier) {
+    if (obj == null) {
+      return requireNonNull(defaultValueSupplier.get());
     }
     return obj;
   }

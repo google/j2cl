@@ -17,6 +17,7 @@ package com.google.j2cl.jre;
 
 import com.google.j2cl.jre.java9.util.ListTest;
 import com.google.j2cl.jre.java9.util.MapTest;
+import com.google.j2cl.jre.java9.util.ObjectsTest;
 import com.google.j2cl.jre.java9.util.OptionalDoubleTest;
 import com.google.j2cl.jre.java9.util.OptionalIntTest;
 import com.google.j2cl.jre.java9.util.OptionalLongTest;
@@ -31,6 +32,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
   ListTest.class,
   MapTest.class,
+  ObjectsTest.class,
   OptionalDoubleTest.class,
   OptionalIntTest.class,
   OptionalLongTest.class,
