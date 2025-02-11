@@ -480,8 +480,11 @@ public class TranspilerTester {
     }
   }
 
-  /** The maximum delay (in ms) that we allow for calls to #isCancelled(). */
-  private static final int MAX_DELAY = 200;
+  /**
+   * The maximum delay (in ms) that we allow for calls to #isCancelled(). Note that we have a much
+   * lower delay but this number should be high enough to cover random GC events.
+   */
+  private static final int MAX_DELAY = 250;
 
   private static Problems transpile(ImmutableList<String> args) {
     List<String> delayedCalls = new ArrayList<>();
