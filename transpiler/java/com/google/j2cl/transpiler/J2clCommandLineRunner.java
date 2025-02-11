@@ -19,7 +19,6 @@ import static com.google.j2cl.common.SourceUtils.checkSourceFiles;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.common.CommandLineTool;
 import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.OutputUtils.Output;
@@ -178,17 +177,17 @@ public final class J2clCommandLineRunner extends CommandLineTool {
                 .collect(toImmutableList()))
         .setClasspaths(getPathEntries(this.classPath))
         .setOutput(output)
-        .setEmitReadableSourceMap(this.readableSourceMaps)
         .setEmitReadableLibraryInfo(false)
+        .setEmitReadableSourceMap(this.readableSourceMaps)
         .setOptimizeAutoValue(this.optimizeAutoValue)
         .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)
         .setFrontend(this.frontEnd)
-        .setNullMarkedSupported(this.enableJSpecifySupport)
-        .setKotlincOptions(ImmutableList.copyOf(kotlincOptions))
         .setBackend(this.backend)
-        .setWasmEntryPointStrings(ImmutableList.copyOf(wasmEntryPoints))
-        .setDefinesForWasm(ImmutableMap.copyOf(definesForWasm))
-        .setForbiddenAnnotations(ImmutableList.copyOf(forbiddenAnnotations))
+        .setWasmEntryPointStrings(wasmEntryPoints)
+        .setDefinesForWasm(definesForWasm)
+        .setNullMarkedSupported(this.enableJSpecifySupport)
+        .setKotlincOptions(kotlincOptions)
+        .setForbiddenAnnotations(forbiddenAnnotations)
         .build(problems);
   }
 

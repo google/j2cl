@@ -17,7 +17,6 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems.FatalError;
@@ -210,15 +209,15 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setEmitReadableLibraryInfo(readableLibraryInfo)
         .setEmitReadableSourceMap(this.readableSourceMaps)
         .setSourceMappingPathPrefix(this.sourceMappingPathPrefix)
-        .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)
         .setOptimizeAutoValue(this.optimizeAutoValue)
+        .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)
         .setFrontend(allKotlinSources.isEmpty() ? javaFrontend : Frontend.KOTLIN)
         .setBackend(this.backend)
-        .setWasmEntryPointStrings(ImmutableList.copyOf(this.wasmEntryPoints))
-        .setDefinesForWasm(ImmutableMap.copyOf(definesForWasm))
+        .setWasmEntryPointStrings(this.wasmEntryPoints)
+        .setDefinesForWasm(definesForWasm)
         .setNullMarkedSupported(this.enableJSpecifySupport)
-        .setKotlincOptions(ImmutableList.copyOf(kotlincOptions))
-        .setForbiddenAnnotations(ImmutableList.copyOf(forbiddenAnnotations))
+        .setKotlincOptions(kotlincOptions)
+        .setForbiddenAnnotations(forbiddenAnnotations)
         .build(problems);
   }
 
