@@ -26,6 +26,7 @@ import static java.util.stream.Collectors.toList;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.common.FilePosition;
+import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.ArrayAccess;
 import com.google.j2cl.transpiler.ast.ArrayCreationReference;
@@ -134,6 +135,7 @@ import org.eclipse.jdt.core.dom.VariableDeclaration;
 public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
   private final JdtEnvironment environment;
+  private final Problems problems;
 
   private class ASTConverter {
     private org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit;
@@ -224,6 +226,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     private void convertTypeBody(Type type, List<BodyDeclaration> bodyDeclarations) {
       for (BodyDeclaration bodyDeclaration : bodyDeclarations) {
+        problems.abortIfCancelled();
         if (bodyDeclaration instanceof FieldDeclaration) {
           FieldDeclaration fieldDeclaration = (FieldDeclaration) bodyDeclaration;
           type.addMembers(convert(fieldDeclaration));
@@ -252,6 +255,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
               bodyDeclaration.getClass().getName(), type.getDeclaration().getQualifiedSourceName());
         }
       }
+      problems.abortIfCancelled();
     }
 
     private Field convert(EnumConstantDeclaration enumConstantDeclaration) {
@@ -1452,8 +1456,11 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     return converter.convert(sourceFilePath, compilationUnit);
   }
 
-  CompilationUnitBuilder(List<ITypeBinding> wellKnownTypeBindings, JdtEnvironment environment) {
+  CompilationUnitBuilder(
+      List<ITypeBinding> wellKnownTypeBindings, JdtEnvironment environment, Problems problems) {
     this.environment = environment;
+    this.problems = problems;
     environment.initWellKnownTypes(wellKnownTypeBindings);
+    this.problems.abortIfCancelled();
   }
 }

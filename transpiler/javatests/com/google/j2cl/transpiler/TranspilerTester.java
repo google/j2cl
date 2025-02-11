@@ -488,6 +488,7 @@ public class TranspilerTester {
 
   private static Problems transpile(ImmutableList<String> args) {
     List<String> delayedCalls = new ArrayList<>();
+    List<String> slightlyDelayedCalls = new ArrayList<>();
     Problems problems =
         new Problems() {
           long lastCall = System.nanoTime();
@@ -496,7 +497,12 @@ public class TranspilerTester {
           public boolean isCancelled() {
             long delay = (System.nanoTime() - lastCall) / 1_000_000;
             if (delay > MAX_DELAY) {
-              delayedCalls.add(Throwables.getStackTraceAsString(new Throwable("Delay: " + delay)));
+              var stackTrace = Throwables.getStackTraceAsString(new Throwable("Delay: " + delay));
+              if (delay > MAX_DELAY * 2) {
+                delayedCalls.add(stackTrace);
+              } else {
+                slightlyDelayedCalls.add(stackTrace);
+              }
             }
             lastCall = System.nanoTime();
             return false;
@@ -508,15 +514,25 @@ public class TranspilerTester {
 
     final String[] knownDelayedCalls = {
       "com.google.j2cl.transpiler.frontend.javac.JavacParser.parseFiles",
-      "com.google.j2cl.transpiler.frontend.jdt.JdtParser.parseFiles",
       "com.google.j2cl.transpiler.frontend.kotlin.KotlinParser.parseFiles",
       "com.google.j2cl.transpiler.J2clCommandLineRunner.createOptions",
       "com.google.j2cl.transpiler.J2clTranspiler.checkLibrary",
     };
-    for (String delayedCall : knownDelayedCalls) {
-      delayedCalls.removeIf(t -> t.contains(delayedCall));
+    for (String knownDelayedCall : knownDelayedCalls) {
+      delayedCalls.removeIf(t -> t.contains(knownDelayedCall));
+      // Remove from slightly delayed calls as well since they are a subset.
+      slightlyDelayedCalls.removeIf(t -> t.contains(knownDelayedCall));
     }
     assertThat(delayedCalls).isEmpty();
+
+    final String[] knownSlightlyDelayedCalls = {
+      // Jdt is slow to do the check and we can't do much about it.
+      "org.eclipse.core.runtime.SubMonitor.isCanceled",
+    };
+    for (String knownSlightlyDelayedCall : knownSlightlyDelayedCalls) {
+      slightlyDelayedCalls.removeIf(t -> t.contains(knownSlightlyDelayedCall));
+    }
+    assertThat(slightlyDelayedCalls).isEmpty();
 
     return problems;
   }

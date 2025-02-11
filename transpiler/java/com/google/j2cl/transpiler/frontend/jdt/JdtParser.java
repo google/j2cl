@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.BindingKey;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.compiler.IProblem;
@@ -88,13 +89,12 @@ public class JdtParser {
         compilationUnitsAndTypeBindings.getCompilationUnitsByFilePath();
     List<ITypeBinding> wellKnownTypeBindings = compilationUnitsAndTypeBindings.getTypeBindings();
     CompilationUnitBuilder compilationUnitBuilder =
-        new CompilationUnitBuilder(wellKnownTypeBindings, environment);
+        new CompilationUnitBuilder(wellKnownTypeBindings, environment, problems);
 
     ImmutableList.Builder<com.google.j2cl.transpiler.ast.CompilationUnit> compilationUnits =
         ImmutableList.builder();
     for (var e : jdtUnitsByFilePath.entrySet()) {
       compilationUnits.add(compilationUnitBuilder.buildCompilationUnit(e.getKey(), e.getValue()));
-      problems.abortIfCancelled();
     }
     return Library.newBuilder().setCompilationUnits(compilationUnits.build()).build();
   }
@@ -109,6 +109,17 @@ public class JdtParser {
 
     // Parse and create a compilation unit for every file.
     ASTParser parser = newASTParser(classpathEntries);
+    problems.abortIfCancelled();
+
+    var sources =
+        filePaths.stream()
+            .map(FileInfo::sourcePath)
+            // Skip module-info in JDT to avoid NPEs. They are not used regardless...
+            .filter(f -> !f.endsWith("module-info.java"))
+            .toArray(String[]::new);
+    var encodings = getEncodings(sources.length);
+    var bindingKeys =
+        binaryNamesToResolve.stream().map(BindingKey::createTypeBindingKey).toArray(String[]::new);
 
     // The map must be ordered because it will be iterated over later and if it was not ordered then
     // our output would be unstable
@@ -140,16 +151,23 @@ public class JdtParser {
             wellKnownTypeBindings.add((ITypeBinding) binding);
           }
         };
+
+    // We don't know how soon JDT will be able to check for cancellation, so we check here too.
+    problems.abortIfCancelled();
+
     parser.createASTs(
-        filePaths.stream()
-            .map(FileInfo::sourcePath)
-            // Skip module-info in JDT to avoid NPEs. They are not used regardless...
-            .filter(f -> !f.endsWith("module-info.java"))
-            .toArray(String[]::new),
-        getEncodings(filePaths.size()),
-        binaryNamesToResolve.stream().map(BindingKey::createTypeBindingKey).toArray(String[]::new),
+        sources,
+        encodings,
+        bindingKeys,
         astRequestor,
-        null);
+        new NullProgressMonitor() {
+          @Override
+          public boolean isCanceled() {
+            problems.abortIfCancelled();
+            return false;
+          }
+        });
+
     return new CompilationUnitsAndTypeBindings(compilationUnitsByFilePath, wellKnownTypeBindings);
   }
 
