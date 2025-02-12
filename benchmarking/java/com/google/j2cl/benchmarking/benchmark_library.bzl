@@ -9,6 +9,8 @@ def benchmark_library(
         srcs,
         deps = [],
         tags = [],
+        data = [],
+        jvm_only = False,
         j2cl_srcs = None,
         j2cl_deps = None,
         j2wasm_srcs = None,
@@ -23,13 +25,19 @@ def benchmark_library(
     java_library(
         name = name,
         srcs = srcs,
+        testonly = 1,
+        data = data,
         deps = deps,
         tags = tags,
     )
 
+    if jvm_only:
+        return
+
     j2wasm_library(
         name = name + "-j2wasm",
         srcs = j2wasm_srcs,
+        testonly = 1,
         deps = j2wasm_deps,
         tags = tags,
     )
@@ -37,6 +45,7 @@ def benchmark_library(
     j2cl_library(
         name = name + "-j2cl",
         srcs = j2cl_srcs,
+        testonly = 1,
         deps = j2cl_deps,
         tags = tags,
     )

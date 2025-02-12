@@ -20,14 +20,21 @@ import repo_util
 
 
 def main(argv):
-  bench_names = [] if argv.bench_names == ["all"] else argv.bench_names
-
-  if subprocess.call("v8 -e ''", shell=True):
+  if subprocess.call("v8 -e ''", shell=True) and argv.platforms != ["JVM"]:
     print("Make sure d8 is installed via jsvu")
     sys.exit(1)
 
-  bench_map = _get_bench_map()
-  bench_names = bench_names or bench_map.keys()
+  if argv.bench_names == ["all"]:
+    bench_map = _get_bench_map()
+    bench_names = bench_map.keys()
+  elif argv.bench_names == ["transpiler"]:
+    assert argv.platforms == ["JVM"], "Transpiler benchmarks only support JVM"
+    bench_map = _get_transpiler_bench_map()
+    bench_names = bench_map.keys()
+  else:
+    bench_map = _get_bench_map() | _get_transpiler_bench_map()
+    bench_names = argv.bench_names
+
   # Benchs as list of (name1, {j2cl: target1, j2wasm: target1}) pairs
   benchs = [
       (n, repo_util.get_benchmarks(bench_map[n] + "_local", argv.platforms))
@@ -59,6 +66,7 @@ def main(argv):
 
 _JRE_BENCHMARK_LIST_FILE = "benchmarking/java/com/google/j2cl/benchmarks/jre/benchmark_list.txt"
 _OCTANE_BENCHMARK_LIST_FILE = "benchmarking/java/com/google/j2cl/benchmarks/octane/benchmark_list.txt"
+_TRANSPILER_BENCHMARK_LIST_FILE = "benchmarking/java/com/google/j2cl/benchmarks/transpiler/benchmark_list.txt"
 
 
 def _get_bench_map():
@@ -69,6 +77,16 @@ def _get_bench_map():
     bench_names[bench_name] = "jre/" + bench_name
   for bench_name in _read_gen_file(_OCTANE_BENCHMARK_LIST_FILE):
     bench_names[bench_name] = "octane/" + bench_name
+
+  return bench_names
+
+
+def _get_transpiler_bench_map():
+  repo_util.build([_TRANSPILER_BENCHMARK_LIST_FILE])
+
+  bench_names = {}
+  for bench_name in _read_gen_file(_TRANSPILER_BENCHMARK_LIST_FILE):
+    bench_names[bench_name] = "transpiler/" + bench_name
 
   return bench_names
 

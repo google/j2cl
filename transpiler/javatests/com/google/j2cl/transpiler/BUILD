@@ -175,7 +175,9 @@ java_library(
     name = "tester_lib",
     testonly = 1,
     srcs = ["TranspilerTester.java"],
+    javacopts = ["-Xep:BetaApi:OFF"],
     deps = [
+        "//third_party:error_prone_annotations",
         "//third_party:guava",
         "//third_party:junit",
         "//third_party:runfiles",
@@ -183,4 +185,14 @@ java_library(
         "//transpiler/java/com/google/j2cl/common",
         "//transpiler/java/com/google/j2cl/transpiler:commandlinerunner_lib",
     ],
+)
+
+java_library(
+    name = "tester_lib_public",
+    testonly = 1,
+    data = [
+        ":jre_bundle_deploy.jar",
+    ],
+    visibility = ["//benchmarking/java/com/google/j2cl/benchmarks/transpiler:__pkg__"],
+    exports = [":tester_lib"],
 )

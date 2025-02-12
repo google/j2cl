@@ -14,7 +14,7 @@ load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
 
 _BENCHMARK_LIST_RULE_NAME = "benchmark_list"
 
-def benchmark(name, deps = []):
+def benchmark(name, deps = [], data = [], jvm_only = False, perfgate_test_tags = []):
     """Defines a benchmark that can be run on the jvw, web and wasm.
 
     Args:
@@ -39,7 +39,9 @@ def benchmark(name, deps = []):
             "%s.java" % name,
             create_launcher(name, benchmark_java_package),
         ],
+        data = data,
         deps = deps,
+        jvm_only = jvm_only,
     )
 
     # JVM Benchmark
@@ -49,14 +51,19 @@ def benchmark(name, deps = []):
     )
     java_binary(
         name = "%s_local" % name,
+        testonly = 1,
         runtime_deps = [":%s_lib" % name],
         main_class = "%s.%sLauncher" % (benchmark_java_package, name),
     )
+
+    if jvm_only:
+        return
 
     # J2CL benchmark
     closure_js_library(
         name = "%s-j2cl_glue" % name,
         srcs = [create_j2cl_glue(name, benchmark_java_package)],
+        testonly = 1,
         deps = [
             ":%s_lib-j2cl" % name,
         ],
@@ -64,6 +71,7 @@ def benchmark(name, deps = []):
 
     j2cl_application(
         name = "%s_j2cl_entry" % name,
+        testonly = 1,
         deps = [":%s-j2cl_glue" % name],
         jre_checks_check_level = "MINIMAL",
         entry_points = ["%s_launcher" % name],
@@ -78,6 +86,7 @@ def benchmark(name, deps = []):
     # J2WASM Benchmark
     j2wasm_application(
         name = "%s_j2wasm_binary" % name,
+        testonly = 1,
         deps = [":%s_lib-j2wasm" % name],
         entry_points = [
             "%s.%sLauncher#execute" % (benchmark_java_package, name),
@@ -91,6 +100,7 @@ def benchmark(name, deps = []):
     closure_js_library(
         name = "%s_j2wasm_glue" % name,
         srcs = [create_j2wasm_glue(name, wasm_url, wasm_module_name)],
+        testonly = 1,
         lenient = True,
         deps = [
             ":%s_j2wasm_binary" % name,
@@ -98,6 +108,7 @@ def benchmark(name, deps = []):
     )
     j2cl_application(
         name = "%s_j2wasm_entry" % name,
+        testonly = 1,
         deps = [":%s_j2wasm_glue" % name],
         entry_points = ["%s_launcher" % name],
     )
