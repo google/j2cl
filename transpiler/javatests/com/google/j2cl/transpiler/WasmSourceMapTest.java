@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.j2cl.transpiler.TranspilerTester.resolvePathToRunfiles;
 
 import com.google.debugging.sourcemap.SourceMapConsumerV3;
 import com.google.debugging.sourcemap.SourceMapParseException;
@@ -44,16 +45,6 @@ public class WasmSourceMapTest {
 
     for (String sourceFilePath : consumer.getOriginalSources()) {
       assertThat(Files.exists(resolvePathToRunfiles(basePath + sourceFilePath))).isTrue();
-    }
-  }
-
-  private static Path resolvePathToRunfiles(String path) {
-    try {
-      return Paths.get(
-          com.google.devtools.build.runfiles.Runfiles.create().rlocation(
-              "com_google_j2cl/" + path));
-    } catch (IOException e) {
-      throw new RuntimeException(e);
     }
   }
 }

@@ -44,7 +44,7 @@ java_test(
     srcs = ["CommandLineInvocationTest.java"],
     data = [":jre_bundle_deploy.jar"],
     deps = [
-        ":TranspilerTester",
+        ":tester_lib",
         "//third_party:junit",
     ],
 )
@@ -54,7 +54,7 @@ java_test(
     srcs = ["SourceMapsIntegrationTest.java"],
     data = [":jre_bundle_deploy.jar"],
     deps = [
-        ":TranspilerTester",
+        ":tester_lib",
         "//third_party:junit",
     ],
 )
@@ -64,7 +64,7 @@ java_test(
     srcs = ["KytheIndexingMetadataTest.java"],
     data = [":jre_bundle_deploy.jar"],
     deps = [
-        ":TranspilerTester",
+        ":tester_lib",
         "//third_party:junit",
     ],
 )
@@ -74,7 +74,7 @@ java_test(
     srcs = ["JsInteropRestrictionsCheckerTest.java"],
     data = [":jre_bundle_deploy.jar"],
     deps = [
-        ":TranspilerTester",
+        ":tester_lib",
         "//third_party:junit",
     ],
 )
@@ -87,7 +87,7 @@ java_test(
         ":jre_bundle-j2wasm_deploy-src.jar",
     ],
     deps = [
-        ":TranspilerTester",
+        ":tester_lib",
         "//third_party:junit",
     ],
 )
@@ -97,7 +97,7 @@ java_test(
     srcs = ["J2ktRestrictionsCheckerTest.java"],
     data = [":jre_bundle-j2kt_deploy.jar"],
     deps = [
-        ":TranspilerTester",
+        ":tester_lib",
         "//third_party:junit",
     ],
 )
@@ -110,7 +110,7 @@ java_test(
         ":jre_bundle-j2wasm_deploy-src.jar",
     ],
     deps = [
-        ":TranspilerTester",
+        ":tester_lib",
         "//third_party:guava",
         "//third_party:junit",
     ],
@@ -140,7 +140,7 @@ java_test(
     ],
     shard_count = 2,
     deps = [
-        ":TranspilerTester",
+        ":tester_lib",
         "//third_party:junit",
     ],
 )
@@ -164,22 +164,21 @@ java_test(
     ],
     tags = ["j2wasm"],
     deps = [
+        ":tester_lib",
         "//third_party:jscomp",
         "//third_party:junit",
-        "//third_party:runfiles",
         "//third_party/java/truth",
     ],
 )
 
 java_library(
-    name = "TranspilerTester",
+    name = "tester_lib",
     testonly = 1,
-    srcs = [
-        "TranspilerTester.java",
-    ],
+    srcs = ["TranspilerTester.java"],
     deps = [
         "//third_party:guava",
         "//third_party:junit",
+        "//third_party:runfiles",
         "//third_party:truth",
         "//transpiler/java/com/google/j2cl/common",
         "//transpiler/java/com/google/j2cl/transpiler:commandlinerunner_lib",

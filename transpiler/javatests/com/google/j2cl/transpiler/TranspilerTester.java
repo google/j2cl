@@ -294,7 +294,17 @@ public class TranspilerTester {
   }
 
   private static String toTestPath(String path) {
-    return "" + path;
+    return resolvePathToRunfiles(path).toString();
+  }
+
+  public static Path resolvePathToRunfiles(String path) {
+    try {
+      return Paths.get(
+          com.google.devtools.build.runfiles.Runfiles.create().rlocation(
+              "com_google_j2cl/" + path));
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   public TranspilerTester setArgs(String... args) {
