@@ -130,7 +130,7 @@ java_test(
         ":jre_bundle_deploy-src.jar",
         ":ktstdlib_bundle_deploy.jar",
         ":libjre_native.jar",
-        "//samples/box2d/src/main/kotlin/idiomatic:libbox2d_kt_library-j2cl-src.jar",
+        "//samples/box2d/src/main/kotlin/idiomatic:libbox2d_library-j2cl-src.jar",
     ],
     jvm_flags = [
         # Configure JVM to provide more consistent performance since we rely on execution times.

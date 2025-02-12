@@ -46,8 +46,7 @@ public class RerunningJ2clTranspilerTest extends TestCase {
 
   private static TranspileResult compileKotlinBox2D() throws Exception {
     return newTesterWithKotlinDefaults()
-        .addSourcePathArg(
-            "samples/box2d/src/main/kotlin/idiomatic/libbox2d_kt_library-j2cl-src.jar")
+        .addSourcePathArg("samples/box2d/src/main/kotlin/idiomatic/libbox2d_library-j2cl-src.jar")
         .assertTranspileSucceeds()
         .assertNoWarnings();
   }
