@@ -31,6 +31,7 @@ import com.google.j2cl.transpiler.passes.AddEnumImplicitMethods;
 import com.google.j2cl.transpiler.passes.AddInterfaceConstructorCasts;
 import com.google.j2cl.transpiler.passes.AddJavaLangObjectForwardingMethods;
 import com.google.j2cl.transpiler.passes.AddNothingReturnStatements;
+import com.google.j2cl.transpiler.passes.AddSwitchExpressionsExhaustivenessCheck;
 import com.google.j2cl.transpiler.passes.AddVisibilityMethodBridgesJ2kt;
 import com.google.j2cl.transpiler.passes.AnnotateProtobufMethodsAsKtProperties;
 import com.google.j2cl.transpiler.passes.ConvertMethodReferencesToLambdas;
@@ -312,6 +313,7 @@ public enum Backend {
           // Java semantic conversions.
           InsertJsEnumBoxingAndUnboxingConversions::new,
           RemoveUnneededCasts::new,
+          AddSwitchExpressionsExhaustivenessCheck::new,
           ImplementSwitchExpressionsViaIifes::new,
           NormalizeSwitchConstructs::new,
           NormalizeArrayAccesses::new,
@@ -470,6 +472,7 @@ public enum Backend {
           () -> new ExpandCompoundAssignments(/* expandAll= */ true),
           InsertErasureTypeSafetyCasts::new,
           RewriteUnaryExpressions::new,
+          AddSwitchExpressionsExhaustivenessCheck::new,
           NormalizeSwitchConstructs::new,
           // Propagate constants needs to run after NormalizeSwitchStatements since it introduces
           // field references to constant fields.
@@ -618,6 +621,7 @@ public enum Backend {
           () -> new ExpandCompoundAssignments(/* expandAll= */ true),
           InsertErasureTypeSafetyCasts::new,
           RewriteUnaryExpressions::new,
+          AddSwitchExpressionsExhaustivenessCheck::new,
           NormalizeSwitchConstructs::new,
           // Propagate constants needs to run after NormalizeSwitchStatements since it introduces
           // field references to constant fields.

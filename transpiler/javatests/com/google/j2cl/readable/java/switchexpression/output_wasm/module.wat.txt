@@ -323,18 +323,23 @@
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:82:8
     (block
      (block
-      (block ;; evaluate expression and jump
-       (br_table 0 1 2 (local.get $$expression))
+      (block
+       (block ;; evaluate expression and jump
+        (br_table 0 1 2 (local.get $$expression))
+       )
+       ;; case 0:
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:83:20
+       (i64.const 0)
+       (br $SWITCH)
       )
-      ;; case 0:
-      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:83:20
-      (i64.const 0)
+      ;; case 1:
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:84:20
+      (i64.const 1)
       (br $SWITCH)
      )
-     ;; case 1:
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:84:20
-     (i64.const 1)
-     (br $SWITCH)
+     ;; default:
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:82:8
+     (call $m_checkExhaustive__void@javaemul.internal.InternalPreconditions )
     )
    )
    (unreachable)

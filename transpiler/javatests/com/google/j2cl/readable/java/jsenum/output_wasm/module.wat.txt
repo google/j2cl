@@ -1485,23 +1485,28 @@
     (block
      (block
       (block
-       (block ;; evaluate expression and jump
-        (br_table 2 1 0 3 (local.get $$expression))
+       (block
+        (block ;; evaluate expression and jump
+         (br_table 2 1 0 3 (local.get $$expression))
+        )
+        ;; case 2:
+        ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:153:22
+        (i32.const 2)
+        (br $SWITCH)
        )
-       ;; case 2:
-       ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:153:22
-       (i32.const 2)
+       ;; case 1:
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:154:22
+       (i32.const 1)
        (br $SWITCH)
       )
-      ;; case 1:
-      ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:154:22
-      (i32.const 1)
+      ;; case 0:
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:155:23
+      (i32.const 0)
       (br $SWITCH)
      )
-     ;; case 0:
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:155:23
-     (i32.const 0)
-     (br $SWITCH)
+     ;; default:
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:152:8
+     (call $m_checkExhaustive__void@javaemul.internal.InternalPreconditions )
     )
    )
    (unreachable)

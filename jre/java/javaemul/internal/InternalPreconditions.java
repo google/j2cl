@@ -650,6 +650,28 @@ public final class InternalPreconditions {
       throw new ConcurrentModificationException();
     }
   }
+
+  /**
+   * Throws a MatchException for exhaustive switch expressions on unexpected values.
+   *
+   * @throws MatchException
+   */
+  public static void checkCriticalExhaustive() {
+    throw new MatchException();
+  }
+
+  public static void checkExhaustive() {
+    if (IS_API_CHECKED) {
+      checkCriticalExhaustive();
+    } else if (IS_ASSERTED) {
+      try {
+        checkCriticalExhaustive();
+      } catch (Exception e) {
+        throw new AssertionError(e);
+      }
+    }
+  }
+
   // Hides the constructor for this static utility class.
   private InternalPreconditions() { }
 }

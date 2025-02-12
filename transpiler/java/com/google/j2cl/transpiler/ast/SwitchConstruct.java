@@ -34,6 +34,11 @@ public interface SwitchConstruct<T extends SwitchConstruct<T>> extends HasSource
     return PrimitiveTypes.VOID;
   }
 
+  /** Returns true if the switch construct has a default case. */
+  default boolean hasDefaultCase() {
+    return getCases().stream().anyMatch(SwitchCase::isDefault);
+  }
+
   Builder<T> toBuilder();
 
   /** An interface for builders of switch constructs. */

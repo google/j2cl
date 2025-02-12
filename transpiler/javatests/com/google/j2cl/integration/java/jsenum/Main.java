@@ -56,8 +56,7 @@ public class Main {
 
   public static void main(String... args) {
     testNativeJsEnum();
-    // TODO(b/380878051): Enable once bug is fixed.
-    // testNativeJsEnumWithMissingValues();
+    testNativeJsEnumWithMissingValues();
     testStringNativeJsEnum();
     testCastOnNative();
     testComparableJsEnum();
@@ -170,7 +169,7 @@ public class Main {
             case OK -> 1;
           };
       fail();
-    } catch (MatchException | IncompatibleClassChangeError expected) {
+    } catch (MatchException expected) {
       // Expected behavior.
     }
   }

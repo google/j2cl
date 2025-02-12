@@ -5,6 +5,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
 let Short = goog.forwardDeclare('java.lang.Short$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let Enum = goog.forwardDeclare('switchexpression.SwitchExpression.Enum$impl');
 let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
@@ -101,6 +102,8 @@ class SwitchExpression extends j_l_Object {
      return $Long.fromInt(0);
     case Enum.$ordinal_B__switchexpression_SwitchExpression_Enum: 
      return $Long.fromInt(1);
+    default: 
+     InternalPreconditions.m_checkExhaustive__void();
    }
   })();
  }
@@ -119,6 +122,7 @@ class SwitchExpression extends j_l_Object {
  static $loadModules() {
   RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
   Short = goog.module.get('java.lang.Short$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   $Long = goog.module.get('nativebootstrap.Long$impl');
   Enum = goog.module.get('switchexpression.SwitchExpression.Enum$impl');
   $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');

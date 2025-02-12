@@ -531,6 +531,22 @@ public final class RuntimeMethods {
         .build();
   }
 
+  /** Creates a call to handling of unexpected values on exhaustive switch expressions. */
+  public static Expression createCheckCriticalExhaustiveCall(boolean isCritical) {
+    if (isCritical) {
+      return MethodCall.Builder.from(
+              TypeDescriptors.get()
+                  .javaemulInternalPreconditions
+                  .getMethodDescriptor("checkCriticalExhaustive"))
+          .build();
+    }
+    return MethodCall.Builder.from(
+            TypeDescriptors.get()
+                .javaemulInternalPreconditions
+                .getMethodDescriptor("checkExhaustive"))
+        .build();
+  }
+
   /** Create a call to an LongUtils method. */
   public static MethodCall createLongUtilsMethodCall(String methodName, Expression... arguments) {
     return createLongUtilsMethodCall(methodName, asList(arguments));
