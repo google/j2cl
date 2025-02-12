@@ -27,9 +27,13 @@ public final class BenchmarkExecutor {
   }
 
   public static BenchmarkResult execute(AbstractBenchmark benchmark) {
-    // Run the benchmark with 5 warm-up rounds of 1 second each and then with 5 measurement rounds
-    // of 1 second each.
-    return execute(benchmark, Clock.DEFAULT, 10, 5, 1000);
+    if (benchmark.isLongRunning()) {
+      // Run the benchmark with 5 warm-up / 5 measurement rounds 10 second each.
+      return execute(benchmark, Clock.DEFAULT, 10, 5, 10000);
+    } else {
+      // Run the benchmark with 5 warm-up / 5 measurement rounds 1 second each.
+      return execute(benchmark, Clock.DEFAULT, 10, 5, 1000);
+    }
   }
 
   public static void prepareForRunOnce(AbstractBenchmark benchmark) {
@@ -100,7 +104,11 @@ public final class BenchmarkExecutor {
     benchmark.tearDownOneTime();
 
     BenchmarkResult benchmarkResult = BenchmarkResult.from(throughputs);
-    log("Throughput: %s ops/ms", benchmarkResult.getAverageThroughput());
+    if (benchmark.isLongRunning()) {
+      log("Throughput: %s ops/s", benchmarkResult.getAverageThroughput() * 1000);
+    } else {
+      log("Throughput: %s ops/ms", benchmarkResult.getAverageThroughput());
+    }
     return benchmarkResult;
   }
 

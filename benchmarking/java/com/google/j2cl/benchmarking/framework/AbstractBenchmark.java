@@ -52,4 +52,13 @@ public abstract class AbstractBenchmark {
    * Called one time after the benchmark is executed.
    */
   public void tearDownOneTime() {}
+
+  /**
+   * Returns whether the benchmark is long running.
+   *
+   * <p>If the benchmark is long running, the framework uses a longer warmup and measurement time.
+   */
+  public boolean isLongRunning() {
+    return false;
+  }
 }
