@@ -102,72 +102,12 @@ maven.install(
         "com.google.escapevelocity:escapevelocity:jar:1.1",
         "com.google.errorprone:javac:jar:9+181-r4173-1",
         "com.google.code.gson:gson:2.10.1",
+        "org.eclipse.jdt:org.eclipse.jdt.core:jar:3.22.0",
+        "org.eclipse.platform:org.eclipse.equinox.common:jar:3.12.0",
     ],
 )
 
 use_repo(maven, "maven")
-
-http_jar = use_repo_rule("@rules_java//java:http_jar.bzl", "http_jar")
-
-http_jar(
-    name = "org_eclipse_jdt_content_type",
-    sha256 = "af418cced47512a7cad606ea9a1114267bc224387abcedd639bae8d3a7fb10b9",
-    url = "http://download.eclipse.org/eclipse/updates/4.16/R-4.16-202006040540/plugins/org.eclipse.core.contenttype_3.7.700.v20200517-1644.jar",
-)
-
-http_jar(
-    name = "org_eclipse_jdt_jobs",
-    sha256 = "4d0042425dcc3655c08654351c08b1645ccb309ab5de45743455bfce4849e917",
-    url = "http://download.eclipse.org/eclipse/updates/4.16/R-4.16-202006040540/plugins/org.eclipse.core.jobs_3.10.800.v20200421-0950.jar",
-)
-
-http_jar(
-    name = "org_eclipse_jdt_resources",
-    sha256 = "ce021447dbea30a4e5ddb3f52534cd2794fb52855071b8dcf257b936ab162168",
-    url = "http://download.eclipse.org/eclipse/updates/4.16/R-4.16-202006040540/plugins/org.eclipse.core.resources_3.13.700.v20200209-1624.jar",
-)
-
-http_jar(
-    name = "org_eclipse_jdt_runtime",
-    sha256 = "b5aebc31d480efff38f910a6eab791c2de7b126a47d260252e097b5a27bd0165",
-    url = "http://download.eclipse.org/eclipse/updates/4.16/R-4.16-202006040540/plugins/org.eclipse.core.runtime_3.18.0.v20200506-2143.jar",
-)
-
-http_jar(
-    name = "org_eclipse_jdt_equinox_common",
-    sha256 = "761f9175b9d294d122c1aa92048688f0b71dd81e808c64cbb245ca7539950716",
-    url = "http://download.eclipse.org/eclipse/updates/4.16/R-4.16-202006040540/plugins/org.eclipse.equinox.common_3.12.0.v20200504-1602.jar",
-)
-
-http_jar(
-    name = "org_eclipse_jdt_equinox_preferences",
-    sha256 = "ca62478a40cffdfe9a10dcfb9f8fada760a93644a7de2c2d1897235f67f57b42",
-    url = "http://download.eclipse.org/eclipse/updates/4.16/R-4.16-202006040540/plugins/org.eclipse.equinox.preferences_3.8.0.v20200422-1833.jar",
-)
-
-http_jar(
-    name = "org_eclipse_jdt_compiler_apt",
-    sha256 = "0559677c8d0528fbdfa3a82b4a16661894a9b64a342e418809c64945bb5d3ef1",
-    url = "http://download.eclipse.org/eclipse/updates/4.16/R-4.16-202006040540/plugins/org.eclipse.jdt.apt.core_3.6.600.v20200529-1546.jar",
-)
-
-http_jar(
-    name = "org_eclipse_jdt_core",
-    sha256 = "af89d348c24917506675767fc1534a0d673355d334fbfadd264b9e45ccd9c34c",
-    url = "http://download.eclipse.org/eclipse/updates/4.16/R-4.16-202006040540/plugins/org.eclipse.jdt.core_3.22.0.v20200530-2032.jar",
-)
-
-http_jar(
-    name = "org_eclipse_jdt_osgi",
-    sha256 = "a3544cde6924babf8aff8323f7452ace232d01d040e20d9f9f43027d7b945424",
-    url = "http://download.eclipse.org/eclipse/updates/4.16/R-4.16-202006040540/plugins/org.eclipse.osgi_3.15.300.v20200520-1959.jar",
-)
-
-http_jar(
-    name = "org_eclipse_jdt_text",
-    sha256 = "83ce07ec2058d8d629feb4e269216e286560b0e4587dea883f4e16b64ea51cad",
-    url = "http://download.eclipse.org/eclipse/updates/4.16/R-4.16-202006040540/plugins/org.eclipse.text_3.10.200.v20200428-0633.jar",
-)
 
 http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 

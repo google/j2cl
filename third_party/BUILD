@@ -61,16 +61,8 @@ alias(
 java_library(
     name = "jdt-core",
     exports = [
-        "@org_eclipse_jdt_compiler_apt//jar",
-        "@org_eclipse_jdt_content_type//jar",
-        "@org_eclipse_jdt_core//jar",
-        "@org_eclipse_jdt_equinox_common//jar",
-        "@org_eclipse_jdt_equinox_preferences//jar",
-        "@org_eclipse_jdt_jobs//jar",
-        "@org_eclipse_jdt_osgi//jar",
-        "@org_eclipse_jdt_resources//jar",
-        "@org_eclipse_jdt_runtime//jar",
-        "@org_eclipse_jdt_text//jar",
+        "@maven//:org_eclipse_jdt_org_eclipse_jdt_core",
+        "@maven//:org_eclipse_platform_org_eclipse_equinox_common",
     ],
 )
 
