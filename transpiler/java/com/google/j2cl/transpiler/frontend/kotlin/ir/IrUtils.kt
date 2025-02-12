@@ -17,7 +17,6 @@
 
 package com.google.j2cl.transpiler.frontend.kotlin.ir
 
-import com.google.common.base.CaseFormat
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind
 import com.google.j2cl.transpiler.ast.Visibility
 import com.google.j2cl.transpiler.frontend.common.FrontendConstants.DO_NOT_AUTOBOX_ANNOTATION_NAME
@@ -28,9 +27,7 @@ import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
 import org.jetbrains.kotlin.backend.jvm.JvmLoweredDeclarationOrigin
 import org.jetbrains.kotlin.backend.jvm.fullValueParameterList
 import org.jetbrains.kotlin.backend.jvm.getRequiresMangling
-import org.jetbrains.kotlin.backend.jvm.ir.getJvmNameFromAnnotation
 import org.jetbrains.kotlin.backend.jvm.ir.getSingleAbstractMethod
-import org.jetbrains.kotlin.descriptors.CallableMemberDescriptor
 import org.jetbrains.kotlin.descriptors.ClassKind
 import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
 import org.jetbrains.kotlin.descriptors.Modality
@@ -38,7 +35,6 @@ import org.jetbrains.kotlin.descriptors.SourceFile
 import org.jetbrains.kotlin.descriptors.Visibilities
 import org.jetbrains.kotlin.descriptors.java.JavaVisibilities
 import org.jetbrains.kotlin.ir.IrElement
-import org.jetbrains.kotlin.ir.ObsoleteDescriptorBasedAPI
 import org.jetbrains.kotlin.ir.declarations.IrAnnotationContainer
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrConstructor
@@ -75,7 +71,6 @@ import org.jetbrains.kotlin.ir.expressions.IrStatementOrigin
 import org.jetbrains.kotlin.ir.expressions.IrTypeOperator
 import org.jetbrains.kotlin.ir.expressions.IrTypeOperatorCall
 import org.jetbrains.kotlin.ir.symbols.IrClassifierSymbol
-import org.jetbrains.kotlin.ir.symbols.IrFunctionSymbol
 import org.jetbrains.kotlin.ir.symbols.IrTypeParameterSymbol
 import org.jetbrains.kotlin.ir.types.IrSimpleType
 import org.jetbrains.kotlin.ir.types.IrStarProjection
@@ -116,8 +111,6 @@ import org.jetbrains.kotlin.ir.util.parentAsClass
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
 import org.jetbrains.kotlin.ir.util.properties
 import org.jetbrains.kotlin.load.java.JvmAbi
-import org.jetbrains.kotlin.load.java.getJvmMethodNameIfSpecial
-import org.jetbrains.kotlin.load.java.getOverriddenBuiltinWithDifferentJvmName
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.FqNameUnsafe
 import org.jetbrains.kotlin.name.Name
@@ -557,15 +550,20 @@ fun IrFunction.javaName(jvmBackendContext: JvmBackendContext): String? =
   }
 
 fun IrSimpleFunction.javaName(jvmBackendContext: JvmBackendContext): String {
-  // Always prefer the @JvmName, if present.
-  getJvmNameFromAnnotation()?.let {
-    return sanitizeJvmName(it)
+  val javaName = name.asJavaName()
+
+  // Pretend the function is public when mapping the signature. We want to avoid internal name
+  // mangling for now.
+  // TODO(b/236236685): Revisit this if we decide to mangle internal names.
+  val resolvedName = runAsIfNonInternalFunction {
+    // We don't use resolveFunctionName directly here as that doesn't first resolve special builtins
+    // to their original JVM function. Instead we'll map the entire signature and then take the
+    // name.
+    sanitizeJvmName(jvmBackendContext.defaultMethodSignatureMapper.mapAsmMethod(this).name)
   }
 
-  // If this function is a builtin function using a different name on the jvm or an override of
-  // such a function, use the jvm name.
-  getBuiltinFunctionJvmName(this.symbol)?.let {
-    return it
+  if (javaName != resolvedName) {
+    return resolvedName
   }
 
   // TODO(b/317553886): Signature mangling should be applied during inline class lowering.
@@ -578,35 +576,19 @@ fun IrSimpleFunction.javaName(jvmBackendContext: JvmBackendContext): String {
       )
       .asJavaName()
   }
-  val correspondingProperty = correspondingPropertySymbol?.owner ?: return name.asJavaName()
-  val propertyName =
-    CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, correspondingProperty.name.asJavaName())
-  return if (valueParameters.isEmpty()) "get$propertyName" else "set$propertyName"
+  return javaName
 }
 
-/**
- * Returns the name to use on the jvm for builtin functions and their overrides.
- *
- * Some builtin functions are mapped to jvm methods with a different name. We need to use the name
- * used on jvm when transpiling these functions and their overrides to keep Java interoperability
- * working.
- */
-@OptIn(ObsoleteDescriptorBasedAPI::class)
-fun getBuiltinFunctionJvmName(irFunctionSymbol: IrFunctionSymbol): String? {
-  val descriptor = irFunctionSymbol.descriptor as? CallableMemberDescriptor ?: return null
-
-  // if this method is directly mapped to a method with a different name, return this name
-  getJvmMethodNameIfSpecial(descriptor)?.let { jvmName ->
-    return jvmName
+private fun <R> IrSimpleFunction.runAsIfNonInternalFunction(block: IrSimpleFunction.() -> R): R {
+  val originalVisibility = visibility
+  if (visibility == DescriptorVisibilities.INTERNAL) {
+    visibility = DescriptorVisibilities.PUBLIC
   }
-
-  // Look if this is an override of a builtin function mapped to method with a different name. In
-  // this case returns the jvm name of the overridden function.
-  descriptor.getOverriddenBuiltinWithDifferentJvmName()?.let {
-    return getJvmMethodNameIfSpecial(it)
+  try {
+    return block()
+  } finally {
+    visibility = originalVisibility
   }
-
-  return null
 }
 
 /**
@@ -621,11 +603,19 @@ val IrFunctionReference.isAdaptedFunctionReference: Boolean
 val IrValueDeclaration.javaName: String
   get() = NameUtils.sanitizeAsJavaIdentifier(name.asStringStripSpecialMarkers())
 
-private fun Name.asJavaName() = sanitizeJvmName(asStringStripSpecialMarkers())
+private fun Name.asJavaName() = sanitizeJvmName(asString())
 
 // TODO(b/228454104): There are many more characters that kotlin allows that need to be sanitized.
 //  We should also give IrValueDeclarations the same treatment.
-private fun sanitizeJvmName(name: String) = name.replace('-', '$')
+private fun sanitizeJvmName(name: String) =
+  with(name) {
+    if (name.startsWith('<') && name.endsWith('>')) {
+        substring(1, length - 1)
+      } else {
+        this
+      }
+      .replace('-', '$')
+  }
 
 val IrExpression.isUnitInstanceReference: Boolean
   // There is only one object instance field of type Unit, it's the unique instance of Unit.

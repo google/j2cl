@@ -219,11 +219,7 @@ internal class BridgeLowering(val context: JvmBackendContext) : ClassLoweringPas
 
     // Generate special bridges
 
-    // MODIFIED BY GOOGLE
-    // Only generate bridges for special overrides, code that is involved in generating regular
-    // Java bridges is commented out.
-    // val specialBridge = irFunction.specialBridgeOrNull
-    val specialBridge = irFunction.specialBridgeOrNull ?: return
+    val specialBridge = irFunction.specialBridgeOrNull
     var bridgeTarget = irFunction
     if (specialBridge != null) {
       // If the current function overrides a special bridge then it's possible that we already
@@ -324,7 +320,7 @@ internal class BridgeLowering(val context: JvmBackendContext) : ClassLoweringPas
         // ) {
         //   blacklist += unsubstitutedSpecialBridge.signature
         //   // TODO what should be the special bridge target if we CAN NOT add a substituted
-        // special bridge
+        //   // special bridge
         //   //  (below, clashes with existing method),
         //   //  but CAN add an unsubstituted special bridge (here)?
         //   irClass.addSpecialBridge(unsubstitutedSpecialBridge, bridgeTarget)
@@ -409,17 +405,22 @@ internal class BridgeLowering(val context: JvmBackendContext) : ClassLoweringPas
       }
     }
 
-    // MODIFIED BY GOOGLE
-    // Only generate bridges for special overrides, code that is involved in generating regular
-    // Java bridges is commented out.
-    //
-    // if (generated.isEmpty())
-    //   return
-    //
-    // generated.values
-    //   .filter { it.signature !in blacklist }
-    //   .forEach { irClass.addBridge(it, bridgeTarget) }
-    //
+    if (generated.isEmpty()) return
+
+    generated.values
+      .filter { it.signature !in blacklist }
+      // MODIFIED BY GOOGLE
+      // Avoid adding generic bridges, instead only add bridges that are resolving a name mismatch.
+      // This would cover cases where the JVM builtin name is different (ex. getSize() vs size()) or
+      // cases where Kotlin mangled a name (ex. default functions, internal functions).
+      // TODO(b/236236685): Revisit skipping bridges for internal functions.
+      .filter {
+        it.signature.name != bridgeTarget.jvmMethod.name &&
+          it.overridden.visibility != DescriptorVisibilities.INTERNAL
+      }
+      .distinctBy { it.signature.name }
+      // END OF MODIFICATIONS
+      .forEach { irClass.addBridge(it, bridgeTarget) }
   }
 
   private fun IrSimpleFunction.isClashingWithPotentialBridge(
@@ -433,17 +434,19 @@ internal class BridgeLowering(val context: JvmBackendContext) : ClassLoweringPas
   // Returns the special bridge overridden by the current methods if it exists.
   private val IrSimpleFunction.specialBridgeOrNull: SpecialBridge?
     // MODIFIED BY GOOGLE
-    // Only generate bridges for the subset of special overrides that need the code prelude.
+    // Skip generating the special bridge for remove/removeAt. The bridge collides with the existing
+    // remove() method and would add an overload that only differs on return type.
     //
+    // Original Code:
     // get() = context.bridgeLoweringCache.computeSpecialBridge(this)
     //
-    get(): SpecialBridge? {
-      val bridge = context.bridgeLoweringCache.computeSpecialBridge(this)
-      if (bridge?.methodInfo == null) {
-        return null
+    get() =
+      context.bridgeLoweringCache.computeSpecialBridge(this)?.takeIf {
+        // TODO(b/372484266): remove special case for removeAt.
+        it.overridden.name.asString() != "removeAt"
       }
-      return bridge
-    }
+
+  // END OF MODIFICATIONS
 
   private fun IrSimpleFunction.getSpecialBridgeSignatures(): List<Method> {
     // Ignore special bridges in interfaces or Java classes. While we never generate special bridges
@@ -514,6 +517,14 @@ internal class BridgeLowering(val context: JvmBackendContext) : ClassLoweringPas
       .apply {
         copyAttributes(target)
         copyParametersWithErasure(this@addBridge, bridge.overridden)
+        // MODIFIED BY GOOGLE
+        // In the case of remove/removeAt, the signatures actually match, it just needs to be
+        // specialized. Instead of erasing the return type, copy it from the target function.
+        // TODO(b/372484266): try to avoid special-case resolving this.
+        if (bridge.signature.name == "remove" && target.jvmMethod.name == "removeAt") {
+          returnType = target.returnType
+        }
+        // END OF MODIFICATIONS
         context.remapMultiFieldValueClassStructure(
           bridge.overridden,
           this,

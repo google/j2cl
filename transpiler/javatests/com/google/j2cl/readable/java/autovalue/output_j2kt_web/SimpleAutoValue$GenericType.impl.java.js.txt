@@ -49,6 +49,12 @@ class GenericType extends AbstractCollection {
   }
   return this.m_remove__autovalue_SimpleAutoValue__boolean(/**@type {SimpleAutoValue}*/ (element));
  }
+ /** @abstract @nodts @return {number} */
+ m_getSize__int() {}
+ /** @final @override @return {number} */
+ size() {
+  return this.m_getSize__int();
+ }
  /** @nodts */
  static $clinit() {
   GenericType.$clinit = () =>{};
