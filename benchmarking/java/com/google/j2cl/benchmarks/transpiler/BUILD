@@ -15,6 +15,7 @@ benchmark(
     perfgate_test_tags = [
         "manual",
         "notap",
+        "guitar",
     ],
     deps = [
         "//transpiler/javatests/com/google/j2cl/transpiler:tester_lib_public",
