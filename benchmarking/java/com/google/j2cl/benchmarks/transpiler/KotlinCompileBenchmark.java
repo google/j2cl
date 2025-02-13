@@ -24,6 +24,11 @@ import com.google.j2cl.transpiler.TranspilerTester.TranspileResult;
 public class KotlinCompileBenchmark extends AbstractBenchmark {
 
   @Override
+  public boolean isLongRunning() {
+    return true;
+  }
+
+  @Override
   public Object run() {
     try {
       return compile();
