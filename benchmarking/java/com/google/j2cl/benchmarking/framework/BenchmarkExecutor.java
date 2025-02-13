@@ -73,6 +73,8 @@ public final class BenchmarkExecutor {
       boolean isWarmup = iteration < warmupIterations;
       long iterationTimeInNanos = 0;
       int runs = 0;
+
+      useResult(null); // Clear the result from the previous iteration to help GC.
       Platform.forceGc();
 
       while (iterationTimeInNanos < timePerIterationInNanos) {
