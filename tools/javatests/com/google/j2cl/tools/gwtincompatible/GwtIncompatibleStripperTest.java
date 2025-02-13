@@ -192,6 +192,13 @@ public class GwtIncompatibleStripperTest {
   }
 
   @Test
+  public void testProcessEnumType() {
+    String before = "@GwtIncompatible public enum Foo {}";
+    String after = stripped("@GwtIncompatible public enum Foo {}");
+    assertEquals(after, GwtIncompatibleStripper.strip(before, ImmutableList.of("GwtIncompatible")));
+  }
+
+  @Test
   public void testProcessEnumConstant() {
     String before = lines("public enum Foo {", "  A,", "  @GwtIncompatible", "  B,", "  C;", "}");
     String after =
@@ -202,6 +209,13 @@ public class GwtIncompatibleStripperTest {
             stripped("  B,"),
             "  C;",
             "}");
+    assertEquals(after, GwtIncompatibleStripper.strip(before, ImmutableList.of("GwtIncompatible")));
+  }
+
+  @Test
+  public void testProcessAnnotationType() {
+    String before = "@GwtIncompatible public @interface Foo {}";
+    String after = stripped("@GwtIncompatible public @interface Foo {}");
     assertEquals(after, GwtIncompatibleStripper.strip(before, ImmutableList.of("GwtIncompatible")));
   }
 
