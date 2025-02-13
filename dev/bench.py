@@ -20,8 +20,10 @@ import repo_util
 
 
 def main(argv):
-  if subprocess.call("v8 -e ''", shell=True) and argv.platforms != ["JVM"]:
-    print("Make sure d8 is installed via jsvu")
+  if argv.platforms != ["JVM"] and subprocess.call(
+      "v8 -e '' && sm -e ''", shell=True
+  ):
+    print("Make sure V8 and SpiderMonkey is installed via jsvu")
     sys.exit(1)
 
   if argv.bench_names == ["all"]:
