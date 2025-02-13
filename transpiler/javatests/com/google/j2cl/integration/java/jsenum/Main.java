@@ -104,6 +104,7 @@ public class Main {
         () -> {
           NativeEnum nullJsEnum = null;
           switch (nullJsEnum) {
+            default:
           }
         });
 
@@ -162,16 +163,13 @@ public class Main {
 
   @Wasm("nop") // TODO(b/288145698): Support native JsEnum.
   private static void testNativeJsEnumWithMissingValues() {
-    try {
-      NativeEnumWitMissingValues e = (NativeEnumWitMissingValues) (Object) NativeEnum.CANCEL;
-      int i =
-          switch (e) {
-            case OK -> 1;
-          };
-      fail();
-    } catch (MatchException expected) {
-      // Expected behavior.
-    }
+    NativeEnumWitMissingValues e = (NativeEnumWitMissingValues) (Object) NativeEnum.CANCEL;
+    int i =
+        switch (e) {
+          case OK -> 1;
+          default -> -1;
+        };
+    assertEquals(-1, i);
   }
 
   @JsMethod(name = "passThrough")
@@ -197,6 +195,7 @@ public class Main {
         () -> {
           StringNativeEnum nullJsEnum = null;
           switch (nullJsEnum) {
+            default:
           }
         });
 

@@ -379,10 +379,12 @@ public class TranspilerTester {
       return Files.readAllLines(outputFilePath);
     }
 
+    @CanIgnoreReturnValue
     public TranspileResult assertNoWarnings() {
       return assertWarningsWithoutSourcePosition();
     }
 
+    @CanIgnoreReturnValue
     public TranspileResult assertWarningsWithoutSourcePosition(String... expectedWarnings) {
       assertThat(getProblems().getWarnings())
           .comparingElementsUsing(ERROR_WITHOUT_SOURCE_POSITION_COMPARATOR)
@@ -390,22 +392,26 @@ public class TranspilerTester {
       return this;
     }
 
+    @CanIgnoreReturnValue
     public TranspileResult assertWarningsWithSourcePosition(String... expectedWarnings) {
       assertThat(getProblems().getWarnings())
           .containsExactlyElementsIn(Arrays.asList(expectedWarnings));
       return this;
     }
 
+    @CanIgnoreReturnValue
     public TranspileResult assertNoErrors() {
       assertThat(getProblems().getErrors()).isEmpty();
       return this;
     }
 
+    @CanIgnoreReturnValue
     public TranspileResult assertHasErrors() {
       assertThat(getProblems().getErrors()).isNotEmpty();
       return this;
     }
 
+    @CanIgnoreReturnValue
     public TranspileResult assertErrorsWithoutSourcePosition(String... expectedErrors) {
       assertThat(getProblems().getErrors())
           .comparingElementsUsing(ERROR_WITHOUT_SOURCE_POSITION_COMPARATOR)
@@ -413,11 +419,13 @@ public class TranspilerTester {
       return this;
     }
 
+    @CanIgnoreReturnValue
     public TranspileResult assertErrorsWithSourcePosition(String... expectedErrors) {
       assertThat(getProblems().getErrors()).containsExactlyElementsIn(expectedErrors);
       return this;
     }
 
+    @CanIgnoreReturnValue
     public TranspileResult assertLastMessage(String expectedMessage) {
       List<String> allMsgs = getProblems().getMessages();
       String lastMessage = Iterables.getLast(allMsgs, "");
@@ -425,14 +433,17 @@ public class TranspilerTester {
       return this;
     }
 
+    @CanIgnoreReturnValue
     public TranspileResult assertErrorsContainsSnippets(String... snippets) {
       return assertContainsSnippets(getProblems().getErrors(), snippets);
     }
 
+    @CanIgnoreReturnValue
     public TranspileResult assertInfoMessagesContainsSnippets(String... snippets) {
       return assertContainsSnippets(getProblems().getInfoMessages(), snippets);
     }
 
+    @CanIgnoreReturnValue
     private TranspileResult assertContainsSnippets(List<String> problems, String... snippets) {
       assertThat(problems)
           .comparingElementsUsing(Correspondence.from(String::contains, "contained within"))
@@ -440,18 +451,21 @@ public class TranspilerTester {
       return this;
     }
 
+    @CanIgnoreReturnValue
     public TranspileResult assertOutputFilesExist(String... fileNames) {
       Arrays.stream(fileNames)
           .forEach(fileName -> Assert.assertTrue(Files.exists(outputPath.resolve(fileName))));
       return this;
     }
 
+    @CanIgnoreReturnValue
     public TranspileResult assertOutputFilesDoNotExist(String... fileNames) {
       Arrays.stream(fileNames)
           .forEach(fileName -> Assert.assertFalse(Files.exists(outputPath.resolve(fileName))));
       return this;
     }
 
+    @CanIgnoreReturnValue
     public TranspileResult assertOutputFilesAreSame(TranspileResult other) throws IOException {
       List<Path> actualPaths =
           ImmutableList.copyOf(MoreFiles.fileTraverser().depthFirstPreOrder(outputPath));

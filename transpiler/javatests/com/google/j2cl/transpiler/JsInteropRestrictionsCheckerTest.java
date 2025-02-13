@@ -2545,6 +2545,155 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         .assertNoWarnings();
   }
 
+  public void testJsEnumSwitchStatementSucceeds() {
+    assertTranspileSucceeds(
+            "test.Main",
+            "import jsinterop.annotations.*;",
+            "public class Main {",
+            "  @JsEnum enum NonNativeEnum { A, B }",
+            "  @JsEnum(isNative = true) enum NativeEnum { A, B }",
+            "  public static void test(NonNativeEnum nonNativeEnum, NativeEnum nativeEnum) {",
+            "    switch (nonNativeEnum) {",
+            "      case A:",
+            "      case B:",
+            "        break;",
+            "    }",
+            "    switch (nonNativeEnum) {",
+            "      case A:",
+            "        break;",
+            "    }",
+            "    switch (nonNativeEnum) {",
+            "      default:",
+            "        break;",
+            "    }",
+            "    switch (nativeEnum) {",
+            "      case A:",
+            "      case B:",
+            "        break;",
+            "      default:",
+            "    }",
+            "    switch (nativeEnum) {",
+            "      case A:",
+            "        break;",
+            "      default:",
+            "    }",
+            "  }",
+            "}")
+        .assertNoWarnings();
+  }
+
+  public void testJsEnumSwitchStatementFails() {
+    // TODO(b/395953418): This will eventually become an error and fail compilation.
+    assertTranspileSucceeds(
+            "test.Main",
+            "import jsinterop.annotations.*;",
+            "public class Main {",
+            "  @JsEnum(isNative = true) enum NativeEnum { A, B }",
+            "  public static void test(NativeEnum nativeEnum) {",
+            "    switch (nativeEnum) {",
+            "      case A:",
+            "      case B:",
+            "        break;",
+            "    }",
+            "    switch (nativeEnum) {",
+            "      case A:",
+            "        break;",
+            "    }",
+            "    switch (getNativeEnum()) {",
+            "      case A:",
+            "      case B:",
+            "        break;",
+            "    }",
+            "    switch (getTemplatedNativeEnum()) {",
+            "      case A:",
+            "      case B:",
+            "        break;",
+            "    }",
+            "  }",
+            "  public static NativeEnum getNativeEnum() {",
+            "    return NativeEnum.A;",
+            "  }",
+            "  public static <T extends NativeEnum> T getTemplatedNativeEnum() {",
+            "    return (T) NativeEnum.A;",
+            "  }",
+            "}")
+        .assertWarningsWithSourcePosition(
+            "Warning:Main.java:6: Switch on native JsEnum 'NativeEnum' should have an explicit"
+                + " default branch.",
+            "Warning:Main.java:11: Switch on native JsEnum 'NativeEnum' should have an explicit"
+                + " default branch.",
+            "Warning:Main.java:15: Switch on native JsEnum 'NativeEnum' should have an explicit"
+                + " default branch.",
+            "Warning:Main.java:20: Switch on native JsEnum 'NativeEnum' should have an explicit"
+                + " default branch.");
+  }
+
+  public void testJsEnumSwitchExpressionSucceeds() {
+    assertTranspileSucceeds(
+            "test.Main",
+            "import jsinterop.annotations.*;",
+            "public class Main {",
+            "  @JsEnum enum NonNativeEnum { A, B }",
+            "  @JsEnum(isNative = true) enum NativeEnum { A, B }",
+            "  public static void test(NonNativeEnum nonNativeEnum, NativeEnum nativeEnum) {",
+            "    boolean b;",
+            "    b = switch (nonNativeEnum) {",
+            "      case A, B -> true;",
+            "    };",
+            "    b = switch (nonNativeEnum) {",
+            "      case A -> true;",
+            "      default -> false;",
+            "    };",
+            "    b = switch (nonNativeEnum) {",
+            "      default -> false;",
+            "    };",
+            "    b = switch (nativeEnum) {",
+            "      case A, B -> true;",
+            "      default -> false;",
+            "    };",
+            "    b = switch (nativeEnum) {",
+            "      case A -> true;",
+            "      default -> false;",
+            "    };",
+            "  }",
+            "}")
+        .assertNoWarnings();
+  }
+
+  public void testJsEnumSwitchExpressionFails() {
+    assertTranspileFails(
+            "test.Main",
+            "import jsinterop.annotations.*;",
+            "public class Main {",
+            "  @JsEnum(isNative = true) enum NativeEnum { A, B }",
+            "  public static void test(NativeEnum nativeEnum) {",
+            "    boolean b;",
+            "    b = switch (nativeEnum) {",
+            "      case A, B -> true;",
+            "    };",
+            "    b = switch (getNativeEnum()) {",
+            "      case A, B -> true;",
+            "    };",
+            "    b = switch (getTemplatedNativeEnum()) {",
+            "      case A, B -> true;",
+            "    };",
+            "  }",
+            "  public static NativeEnum getNativeEnum() {",
+            "    return NativeEnum.A;",
+            "  }",
+            "  public static <T extends NativeEnum> T getTemplatedNativeEnum() {",
+            "    return (T) NativeEnum.A;",
+            "  }",
+            "}")
+        .assertErrorsWithSourcePosition(
+            "Error:Main.java:7: Switch on native JsEnum 'NativeEnum' should have an explicit"
+                + " default branch.",
+            "Error:Main.java:10: Switch on native JsEnum 'NativeEnum' should have an explicit"
+                + " default branch.",
+            "Error:Main.java:13: Switch on native JsEnum 'NativeEnum' should have an explicit"
+                + " default branch.");
+  }
+
   public void testInnerNativeJsTypeFails() {
     assertTranspileFails(
             "EntryPoint",

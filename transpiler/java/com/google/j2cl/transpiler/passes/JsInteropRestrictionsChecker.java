@@ -66,6 +66,9 @@ import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.SuperReference;
+import com.google.j2cl.transpiler.ast.SwitchConstruct;
+import com.google.j2cl.transpiler.ast.SwitchExpression;
+import com.google.j2cl.transpiler.ast.SwitchStatement;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
@@ -646,6 +649,7 @@ public class JsInteropRestrictionsChecker {
     checkJsEnumAssignments(type);
     checkJsEnumArrays(type);
     checkJsEnumValueFieldAssignment(type);
+    checkJsEnumSwitchUsage(type);
 
     checkOverrides(
         type,
@@ -836,6 +840,44 @@ public class JsInteropRestrictionsChecker {
             AstUtils::isNonNativeJsEnumArray,
             /* onlyCheckTypeSpecialization= */ false,
             /* checkArrayComponent= */ true);
+  }
+
+  private void checkJsEnumSwitchUsage(Type type) {
+    type.accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitSwitchExpression(SwitchExpression switchExpression) {
+            checkSwitchOnNativeJsEnumHasDefault(switchExpression);
+          }
+
+          @Override
+          public void exitSwitchStatement(SwitchStatement switchStatement) {
+            checkSwitchOnNativeJsEnumHasDefault(switchStatement);
+          }
+
+          private void checkSwitchOnNativeJsEnumHasDefault(SwitchConstruct<?> switchConstruct) {
+            TypeDescriptor switchOnType =
+                switchConstruct.getExpression().getTypeDescriptor().toRawTypeDescriptor();
+            if (!switchOnType.isJsEnum()
+                || !switchOnType.isNative()
+                || switchConstruct.hasDefaultCase()) {
+              return;
+            }
+            String message = "Switch on native JsEnum '%s' should have an explicit default branch.";
+            if (switchConstruct instanceof SwitchStatement) {
+              // TODO(b/395953418): Elevate this to an error.
+              problems.warning(
+                  switchConstruct.getSourcePosition(),
+                  message,
+                  switchOnType.getReadableDescription());
+            } else {
+              problems.error(
+                  switchConstruct.getSourcePosition(),
+                  message,
+                  switchOnType.getReadableDescription());
+            }
+          }
+        });
   }
 
   private void checkOverrides(
