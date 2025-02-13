@@ -555,12 +555,15 @@ fun IrSimpleFunction.javaName(jvmBackendContext: JvmBackendContext): String {
   // Pretend the function is public when mapping the signature. We want to avoid internal name
   // mangling for now.
   // TODO(b/236236685): Revisit this if we decide to mangle internal names.
-  val resolvedName = runAsIfNonInternalFunction {
-    // We don't use resolveFunctionName directly here as that doesn't first resolve special builtins
-    // to their original JVM function. Instead we'll map the entire signature and then take the
-    // name.
-    sanitizeJvmName(jvmBackendContext.defaultMethodSignatureMapper.mapAsmMethod(this).name)
-  }
+  val resolvedName =
+    runAsIfNonInternalFunction {
+        // We don't use resolveFunctionName directly here as that doesn't first resolve special
+        // builtins
+        // to their original JVM function. Instead we'll map the entire signature and then take the
+        // name.
+        jvmBackendContext.defaultMethodSignatureMapper.mapAsmMethod(this).name
+      }
+      .sanitizeJvmName()
 
   if (javaName != resolvedName) {
     return resolvedName
@@ -603,19 +606,17 @@ val IrFunctionReference.isAdaptedFunctionReference: Boolean
 val IrValueDeclaration.javaName: String
   get() = NameUtils.sanitizeAsJavaIdentifier(name.asStringStripSpecialMarkers())
 
-private fun Name.asJavaName() = sanitizeJvmName(asString())
+private fun Name.asJavaName() = asString().sanitizeJvmName()
 
 // TODO(b/228454104): There are many more characters that kotlin allows that need to be sanitized.
 //  We should also give IrValueDeclarations the same treatment.
-private fun sanitizeJvmName(name: String) =
-  with(name) {
-    if (name.startsWith('<') && name.endsWith('>')) {
-        substring(1, length - 1)
-      } else {
-        this
-      }
-      .replace('-', '$')
-  }
+private fun String.sanitizeJvmName() =
+  if (startsWith('<') && endsWith('>')) {
+      substring(1, length - 1)
+    } else {
+      this
+    }
+    .replace('-', '$')
 
 val IrExpression.isUnitInstanceReference: Boolean
   // There is only one object instance field of type Unit, it's the unique instance of Unit.
