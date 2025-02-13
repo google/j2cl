@@ -5,7 +5,7 @@
 ## Running a benchmark for local changes
 
 You can run benchmarks locally with
-[`j2`](http://google3/CONTRIBUTING.md;l=41;rcl=381386450)
+[`j2`](https://github.com/google/j2cl/blob/master/CONTRIBUTING.md#shell-aliasing-and-running-j2-script)
 tool:
 
 ```
