@@ -102,7 +102,7 @@ public class SourceUtils {
   private static ImmutableList<FileInfo> extractZip(
       String zipPath, Path sourcesDir, Problems problems) {
     try {
-      return ZipFiles.unzipFile(new File(zipPath), sourcesDir.toFile());
+      return ZipFiles.unzipFile(new File(zipPath), sourcesDir.toFile(), problems);
     } catch (IOException e) {
       problems.fatal(FatalError.CANNOT_EXTRACT_ZIP, zipPath);
       return null;

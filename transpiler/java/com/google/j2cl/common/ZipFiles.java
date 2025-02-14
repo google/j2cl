@@ -56,8 +56,8 @@ public class ZipFiles {
     }
   }
 
-  public static ImmutableList<FileInfo> unzipFile(File zipFile, File targetDirectory)
-      throws IOException {
+  public static ImmutableList<FileInfo> unzipFile(
+      File zipFile, File targetDirectory, Problems problems) throws IOException {
     checkNotNull(zipFile);
     checkNotNull(targetDirectory);
     checkArgument(
@@ -68,6 +68,7 @@ public class ZipFiles {
     final ZipFile zipFileObj = new ZipFile(zipFile);
     try {
       for (ZipEntry entry : entries(zipFileObj)) {
+        problems.abortIfCancelled();
         checkName(entry.getName());
         File targetFile = new File(targetDirectory, entry.getName());
         if (entry.isDirectory()) {

@@ -138,7 +138,9 @@ public final class J2clCommandLineRunner extends CommandLineTool {
 
   @Override
   protected void run() {
+    problems.abortIfCancelled();
     try (Output out = OutputUtils.initOutput(this.output, problems)) {
+      problems.abortIfCancelled();
       J2clTranspiler.transpile(createOptions(out), problems);
     }
   }
@@ -154,6 +156,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
 
     ImmutableList<FileInfo> allSources =
         SourceUtils.getAllSources(this.files, problems).collect(toImmutableList());
+    problems.abortIfCancelled();
 
     ImmutableList<FileInfo> allJavaSources =
         allSources.stream()
@@ -169,12 +172,15 @@ public final class J2clCommandLineRunner extends CommandLineTool {
           "Transpilation of Java and Kotlin files together is not supported yet.");
     }
 
+    ImmutableList<FileInfo> allNativeSources =
+        SourceUtils.getAllSources(getPathEntries(this.nativeSourcePath), problems)
+            .filter(p -> p.sourcePath().endsWith(".native.js"))
+            .collect(toImmutableList());
+    problems.abortIfCancelled();
+
     return J2clTranspilerOptions.newBuilder()
         .setSources(allKotlinSources.isEmpty() ? allJavaSources : allKotlinSources)
-        .setNativeSources(
-            SourceUtils.getAllSources(getPathEntries(this.nativeSourcePath), problems)
-                .filter(p -> p.sourcePath().endsWith(".native.js"))
-                .collect(toImmutableList()))
+        .setNativeSources(allNativeSources)
         .setClasspaths(getPathEntries(this.classPath))
         .setOutput(output)
         .setEmitReadableLibraryInfo(false)

@@ -144,7 +144,9 @@ final class BazelJ2clBuilder extends BazelWorker {
 
   @Override
   protected void run() {
+    problems.abortIfCancelled();
     try (Output out = OutputUtils.initOutput(this.output, problems)) {
+      problems.abortIfCancelled();
       J2clTranspiler.transpile(createOptions(out), problems);
     }
   }
@@ -167,6 +169,7 @@ final class BazelJ2clBuilder extends BazelWorker {
 
     ImmutableList<FileInfo> allSources =
         SourceUtils.getAllSources(this.sources, problems).collect(toImmutableList());
+    problems.abortIfCancelled();
 
     ImmutableList<FileInfo> allJavaSources =
         allSources.stream()
@@ -192,6 +195,7 @@ final class BazelJ2clBuilder extends BazelWorker {
     allSources.stream()
         .filter(p -> p.sourcePath().endsWith(".js") && !p.sourcePath().endsWith("native.js"))
         .forEach(f -> output.copyFile(f.sourcePath(), f.targetPath()));
+    problems.abortIfCancelled();
 
     return J2clTranspilerOptions.newBuilder()
         .setSources(
