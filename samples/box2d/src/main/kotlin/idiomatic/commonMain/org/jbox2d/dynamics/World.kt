@@ -191,30 +191,30 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
   ) : this(gravity, pool, DynamicTree()) {}
 
   init {
-    initializeRegisters()
-  }
+    fun initializeRegisters() {
+      fun addType(creator: IDynamicStack<Contact>, type1: ShapeType, type2: ShapeType) {
+        val register = ContactRegister()
+        register.creator = creator
+        register.primary = true
+        contactStacks[type1.ordinal][type2.ordinal] = register
+        if (type1 != type2) {
+          val register2 = ContactRegister()
+          register2.creator = creator
+          register2.primary = false
+          contactStacks[type2.ordinal][type1.ordinal] = register2
+        }
+      }
 
-  private fun addType(creator: IDynamicStack<Contact>, type1: ShapeType, type2: ShapeType) {
-    val register = ContactRegister()
-    register.creator = creator
-    register.primary = true
-    contactStacks[type1.ordinal][type2.ordinal] = register
-    if (type1 != type2) {
-      val register2 = ContactRegister()
-      register2.creator = creator
-      register2.primary = false
-      contactStacks[type2.ordinal][type1.ordinal] = register2
+      addType(pool.circleContactStack, ShapeType.CIRCLE, ShapeType.CIRCLE)
+      addType(pool.polyCircleContactStack, ShapeType.POLYGON, ShapeType.CIRCLE)
+      addType(pool.polyContactStack, ShapeType.POLYGON, ShapeType.POLYGON)
+      addType(pool.edgeCircleContactStack, ShapeType.EDGE, ShapeType.CIRCLE)
+      addType(pool.edgePolyContactStack, ShapeType.EDGE, ShapeType.POLYGON)
+      addType(pool.chainCircleContactStack, ShapeType.CHAIN, ShapeType.CIRCLE)
+      addType(pool.chainPolyContactStack, ShapeType.CHAIN, ShapeType.POLYGON)
     }
-  }
 
-  private fun initializeRegisters() {
-    addType(pool.circleContactStack, ShapeType.CIRCLE, ShapeType.CIRCLE)
-    addType(pool.polyCircleContactStack, ShapeType.POLYGON, ShapeType.CIRCLE)
-    addType(pool.polyContactStack, ShapeType.POLYGON, ShapeType.POLYGON)
-    addType(pool.edgeCircleContactStack, ShapeType.EDGE, ShapeType.CIRCLE)
-    addType(pool.edgePolyContactStack, ShapeType.EDGE, ShapeType.POLYGON)
-    addType(pool.chainCircleContactStack, ShapeType.CHAIN, ShapeType.CIRCLE)
-    addType(pool.chainPolyContactStack, ShapeType.CHAIN, ShapeType.POLYGON)
+    initializeRegisters()
   }
 
   fun popContact(fixtureA: Fixture, indexA: Int, fixtureB: Fixture, indexB: Int): Contact? {
@@ -525,6 +525,101 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
 
   /** Call this to draw shapes and other debug draw data. */
   fun drawDebugData() {
+    fun drawJoint(joint: Joint) {
+      val bodyA = joint.bodyA
+      val bodyB = joint.bodyB
+      val xf1 = bodyA.xf
+      val xf2 = bodyB.xf
+      val x1 = xf1.p
+      val x2 = xf2.p
+      val p1 = pool.popVec2()
+      val p2 = pool.popVec2()
+      joint.getAnchorA(p1)
+      joint.getAnchorB(p2)
+      color.set(0.5f, 0.8f, 0.8f)
+      val nonNullDebugDrew = debugDraw!!
+      when (joint.type) {
+        JointType.DISTANCE -> nonNullDebugDrew.drawSegment(p1, p2, color)
+        JointType.PULLEY -> {
+          val pulley = joint as PulleyJoint
+          val s1 = pulley.groundAnchorA
+          val s2 = pulley.groundAnchorB
+          nonNullDebugDrew.drawSegment(s1, p1, color)
+          nonNullDebugDrew.drawSegment(s2, p2, color)
+          nonNullDebugDrew.drawSegment(s1, s2, color)
+        }
+        JointType.CONSTANT_VOLUME,
+        JointType.MOUSE -> {}
+        else -> {
+          nonNullDebugDrew.drawSegment(x1, p1, color)
+          nonNullDebugDrew.drawSegment(p1, p2, color)
+          nonNullDebugDrew.drawSegment(x2, p2, color)
+        }
+      }
+      pool.pushVec2(2)
+    }
+
+    fun drawShape(fixture: Fixture, xf: Transform, color: Color3f) {
+      val nonNullDebugDraw = debugDraw!!
+      when (fixture.getType()) {
+        ShapeType.CIRCLE -> {
+          val circle = fixture.shape as CircleShape
+
+          // Vec2 center = Mul(xf, circle.m_p);
+          Transform.mulToOutUnsafe(xf, circle.p, center)
+          val radius = circle.radius
+          xf.q.getXAxis(axis)
+          if (fixture.userData != null && fixture.userData == LIQUID_INT) {
+            val b = fixture.body
+            liquidOffset.set(b!!.linearVelocity)
+            val linVelLength = b.linearVelocity.length()
+            averageLinearVel =
+              if (averageLinearVel == -1f) {
+                linVelLength
+              } else {
+                .98f * averageLinearVel + .02f * linVelLength
+              }
+            liquidOffset.mulLocal(liquidLength / averageLinearVel / 2)
+            circCenterMoved.set(center).addLocal(liquidOffset)
+            center.subLocal(liquidOffset)
+            nonNullDebugDraw.drawSegment(center, circCenterMoved, liquidColor)
+            return
+          }
+          nonNullDebugDraw.drawSolidCircle(center, radius, axis, color)
+        }
+        ShapeType.POLYGON -> {
+          val poly = fixture.shape as PolygonShape
+          val vertexCount = poly.count
+          assert(vertexCount <= Settings.MAX_POLYGON_VERTICES)
+          val vertices: Array<Vec2> = tlvertices[Settings.MAX_POLYGON_VERTICES]
+          for (i: Int in 0 until vertexCount) {
+
+            // vertices[i] = Mul(xf, poly.m_vertices[i]);
+            Transform.mulToOutUnsafe(xf, poly.vertices[i], vertices[i])
+          }
+          nonNullDebugDraw.drawSolidPolygon(vertices, vertexCount, color)
+        }
+        ShapeType.EDGE -> {
+          val edge = fixture.shape as EdgeShape
+          Transform.mulToOutUnsafe(xf, edge.vertex1, v1)
+          Transform.mulToOutUnsafe(xf, edge.vertex2, v2)
+          nonNullDebugDraw.drawSegment(v1, v2, color)
+        }
+        ShapeType.CHAIN -> {
+          val chain = fixture.shape as ChainShape
+          val count = chain.count
+          val vertices = chain.vertices
+          Transform.mulToOutUnsafe(xf, vertices!![0], v1)
+          for (i: Int in 1 until count) {
+            Transform.mulToOutUnsafe(xf, vertices[i], v2)
+            nonNullDebugDraw.drawSegment(v1, v2, color)
+            nonNullDebugDraw.drawCircle(v1, 0.05f, color)
+            v1.set(v2)
+          }
+        }
+      }
+    }
+
     val debugDraw = this.debugDraw ?: return
     val flags = debugDraw.flags
     if (DebugDraw.E_SHAPE_BIT in flags) {
@@ -1108,101 +1203,6 @@ class World(gravity: Vec2, val pool: IWorldPool, broadPhaseStrategy: BroadPhaseS
       if (subStepping) {
         stepComplete = false
         break
-      }
-    }
-  }
-
-  private fun drawJoint(joint: Joint) {
-    val bodyA = joint.bodyA
-    val bodyB = joint.bodyB
-    val xf1 = bodyA.xf
-    val xf2 = bodyB.xf
-    val x1 = xf1.p
-    val x2 = xf2.p
-    val p1 = pool.popVec2()
-    val p2 = pool.popVec2()
-    joint.getAnchorA(p1)
-    joint.getAnchorB(p2)
-    color.set(0.5f, 0.8f, 0.8f)
-    val nonNullDebugDrew = debugDraw!!
-    when (joint.type) {
-      JointType.DISTANCE -> nonNullDebugDrew.drawSegment(p1, p2, color)
-      JointType.PULLEY -> {
-        val pulley = joint as PulleyJoint
-        val s1 = pulley.groundAnchorA
-        val s2 = pulley.groundAnchorB
-        nonNullDebugDrew.drawSegment(s1, p1, color)
-        nonNullDebugDrew.drawSegment(s2, p2, color)
-        nonNullDebugDrew.drawSegment(s1, s2, color)
-      }
-      JointType.CONSTANT_VOLUME,
-      JointType.MOUSE -> {}
-      else -> {
-        nonNullDebugDrew.drawSegment(x1, p1, color)
-        nonNullDebugDrew.drawSegment(p1, p2, color)
-        nonNullDebugDrew.drawSegment(x2, p2, color)
-      }
-    }
-    pool.pushVec2(2)
-  }
-
-  private fun drawShape(fixture: Fixture, xf: Transform, color: Color3f) {
-    val nonNullDebugDraw = debugDraw!!
-    when (fixture.getType()) {
-      ShapeType.CIRCLE -> {
-        val circle = fixture.shape as CircleShape
-
-        // Vec2 center = Mul(xf, circle.m_p);
-        Transform.mulToOutUnsafe(xf, circle.p, center)
-        val radius = circle.radius
-        xf.q.getXAxis(axis)
-        if (fixture.userData != null && fixture.userData == LIQUID_INT) {
-          val b = fixture.body
-          liquidOffset.set(b!!.linearVelocity)
-          val linVelLength = b.linearVelocity.length()
-          averageLinearVel =
-            if (averageLinearVel == -1f) {
-              linVelLength
-            } else {
-              .98f * averageLinearVel + .02f * linVelLength
-            }
-          liquidOffset.mulLocal(liquidLength / averageLinearVel / 2)
-          circCenterMoved.set(center).addLocal(liquidOffset)
-          center.subLocal(liquidOffset)
-          nonNullDebugDraw.drawSegment(center, circCenterMoved, liquidColor)
-          return
-        }
-        nonNullDebugDraw.drawSolidCircle(center, radius, axis, color)
-      }
-      ShapeType.POLYGON -> {
-        val poly = fixture.shape as PolygonShape
-        val vertexCount = poly.count
-        assert(vertexCount <= Settings.MAX_POLYGON_VERTICES)
-        val vertices: Array<Vec2> = tlvertices[Settings.MAX_POLYGON_VERTICES]
-        for (i: Int in 0 until vertexCount) {
-
-          // vertices[i] = Mul(xf, poly.m_vertices[i]);
-          Transform.mulToOutUnsafe(xf, poly.vertices[i], vertices[i])
-        }
-        nonNullDebugDraw.drawSolidPolygon(vertices, vertexCount, color)
-      }
-      ShapeType.EDGE -> {
-        val edge = fixture.shape as EdgeShape
-        Transform.mulToOutUnsafe(xf, edge.vertex1, v1)
-        Transform.mulToOutUnsafe(xf, edge.vertex2, v2)
-        nonNullDebugDraw.drawSegment(v1, v2, color)
-      }
-      ShapeType.CHAIN -> {
-        val chain = fixture.shape as ChainShape
-        val count = chain.count
-        val vertices = chain.vertices
-        Transform.mulToOutUnsafe(xf, vertices!![0], v1)
-        for (i: Int in 1 until count) {
-          Transform.mulToOutUnsafe(xf, vertices[i], v2)
-          nonNullDebugDraw.drawSegment(v1, v2, color)
-          nonNullDebugDraw.drawCircle(v1, 0.05f, color)
-          v1.set(v2)
-        }
       }
     }
   }

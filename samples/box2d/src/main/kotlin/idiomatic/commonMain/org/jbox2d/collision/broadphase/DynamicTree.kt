@@ -249,20 +249,73 @@ class DynamicTree : BroadPhaseStrategy {
     }
   }
 
-  override fun computeHeight(): Int = computeHeight(root!!)
-
-  private fun computeHeight(node: DynamicTreeNode): Int {
-    assert(0 <= node.id && node.id < nodeCapacity)
-    if (node.isLeaf()) {
-      return 0
+  override fun computeHeight(): Int {
+    fun computeHeight(node: DynamicTreeNode): Int {
+      assert(0 <= node.id && node.id < nodeCapacity)
+      if (node.isLeaf()) {
+        return 0
+      }
+      val height1 = computeHeight(node.child1!!)
+      val height2 = computeHeight(node.child2!!)
+      return 1 + MathUtils.max(height1, height2)
     }
-    val height1 = computeHeight(node.child1!!)
-    val height2 = computeHeight(node.child2!!)
-    return 1 + MathUtils.max(height1, height2)
+
+    return computeHeight(root!!)
   }
 
   /** Validate this tree. For testing. */
   fun validate() {
+    fun validateStructure(node: DynamicTreeNode?) {
+      if (node == null) {
+        return
+      }
+      assert(node === treeNodes[node.id])
+      // if (node === root) {
+      //  assert(node.parent == null)
+      // }
+      val child1 = node.child1
+      val child2 = node.child2
+      if (node.isLeaf()) {
+        assert(child1 == null)
+        assert(child2 == null)
+        assert(node.height == 0)
+        return
+      }
+
+      assert(child1 != null && 0 <= child1.id && child1.id < nodeCapacity)
+      assert(child2 != null && 0 <= child2.id && child2.id < nodeCapacity)
+      assert(child1!!.parent === node)
+      assert(child2!!.parent === node)
+      validateStructure(child1)
+      validateStructure(child2)
+    }
+
+    fun validateMetrics(node: DynamicTreeNode?) {
+      if (node == null) {
+        return
+      }
+      val child1 = node.child1
+      val child2 = node.child2
+      if (node.isLeaf()) {
+        assert(child1 == null)
+        assert(child2 == null)
+        assert(node.height == 0)
+        return
+      }
+      assert(child1 != null && 0 <= child1.id && child1.id < nodeCapacity)
+      assert(child2 != null && 0 <= child2.id && child2.id < nodeCapacity)
+      val height1 = child1!!.height
+      val height2 = child2!!.height
+      val height: Int = 1 + MathUtils.max(height1, height2)
+      assert(node.height == height)
+      val aabb = AABB()
+      aabb.combine(child1.aabb, child2.aabb)
+      assert(aabb.lowerBound == node.aabb.lowerBound)
+      assert(aabb.upperBound == node.aabb.upperBound)
+      validateMetrics(child1)
+      validateMetrics(child2)
+    }
+
     validateStructure(root)
     validateMetrics(root)
     var freeCount = 0
@@ -660,57 +713,6 @@ class DynamicTree : BroadPhaseStrategy {
       return iB
     }
     return iA
-  }
-
-  private fun validateStructure(node: DynamicTreeNode?) {
-    if (node == null) {
-      return
-    }
-    assert(node === treeNodes[node.id])
-    // if (node === root) {
-    //  assert(node.parent == null)
-    // }
-    val child1 = node.child1
-    val child2 = node.child2
-    if (node.isLeaf()) {
-      assert(child1 == null)
-      assert(child2 == null)
-      assert(node.height == 0)
-      return
-    }
-
-    assert(child1 != null && 0 <= child1.id && child1.id < nodeCapacity)
-    assert(child2 != null && 0 <= child2.id && child2.id < nodeCapacity)
-    assert(child1!!.parent === node)
-    assert(child2!!.parent === node)
-    validateStructure(child1)
-    validateStructure(child2)
-  }
-
-  private fun validateMetrics(node: DynamicTreeNode?) {
-    if (node == null) {
-      return
-    }
-    val child1 = node.child1
-    val child2 = node.child2
-    if (node.isLeaf()) {
-      assert(child1 == null)
-      assert(child2 == null)
-      assert(node.height == 0)
-      return
-    }
-    assert(child1 != null && 0 <= child1.id && child1.id < nodeCapacity)
-    assert(child2 != null && 0 <= child2.id && child2.id < nodeCapacity)
-    val height1 = child1!!.height
-    val height2 = child2!!.height
-    val height: Int = 1 + MathUtils.max(height1, height2)
-    assert(node.height == height)
-    val aabb = AABB()
-    aabb.combine(child1.aabb, child2.aabb)
-    assert(aabb.lowerBound == node.aabb.lowerBound)
-    assert(aabb.upperBound == node.aabb.upperBound)
-    validateMetrics(child1)
-    validateMetrics(child2)
   }
 
   override fun drawTree(draw: DebugDraw) {
