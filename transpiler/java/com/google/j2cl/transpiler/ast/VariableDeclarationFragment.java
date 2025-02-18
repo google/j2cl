@@ -39,7 +39,7 @@ public class VariableDeclarationFragment extends Node
 
   /** Returns true if the variable declaration needs to be JsDoc annotated on output. */
   public boolean needsTypeDeclaration() {
-    return initializer == null;
+    return initializer == null || initializer instanceof NullLiteral;
   }
 
   public Variable getVariable() {

@@ -83,9 +83,9 @@ class TryCatch extends j_l_Object {
  /** @nodts */
  m_testTryWithResource__void() {
   try {
-   let $primaryExc = null;
-   let thing = null;
-   let thing2 = null;
+   let /** Throwable */ $primaryExc = null;
+   let /** ClosableThing */ thing = null;
+   let /** ClosableThing */ thing2 = null;
    try {
     thing = ClosableThing.$create__();
     thing2 = ClosableThing.$create__();
@@ -116,9 +116,9 @@ class TryCatch extends j_l_Object {
   let thing = ClosableThing.$create__();
   let thing2 = ClosableThing.$create__();
   try {
-   let $primaryExc = null;
-   let $resource = null;
-   let $resource_1 = null;
+   let /** Throwable */ $primaryExc = null;
+   let /** ClosableThing */ $resource = null;
+   let /** ClosableThing */ $resource_1 = null;
    try {
     $resource = thing;
     $resource_1 = thing2;
@@ -147,8 +147,8 @@ class TryCatch extends j_l_Object {
  /** @nodts */
  m_testTryWithResouceOnStaticField__void() {
   try {
-   let $primaryExc = null;
-   let $resource = null;
+   let /** Throwable */ $primaryExc = null;
+   let /** ClosableThing */ $resource = null;
    try {
     $resource = TryCatch.f_closableThing__trycatch_TryCatch_;
     throw $Exceptions.toJs(Exception.$create__());

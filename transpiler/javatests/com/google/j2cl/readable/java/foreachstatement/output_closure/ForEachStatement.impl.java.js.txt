@@ -7,6 +7,7 @@ let Exception1 = goog.forwardDeclare('foreachstatement.ForEachStatement.Exceptio
 let Exception2 = goog.forwardDeclare('foreachstatement.ForEachStatement.Exception2$impl');
 let Exception3 = goog.forwardDeclare('foreachstatement.ForEachStatement.Exception3$impl');
 let Exception4 = goog.forwardDeclare('foreachstatement.ForEachStatement.Exception4$impl');
+let IterableReturningTypeVariable = goog.forwardDeclare('foreachstatement.ForEachStatement.IterableReturningTypeVariable$impl');
 let StringIterable = goog.forwardDeclare('foreachstatement.ForEachStatement.StringIterable$impl');
 let Character = goog.forwardDeclare('java.lang.Character$impl');
 let Exception = goog.forwardDeclare('java.lang.Exception$impl');
@@ -88,30 +89,30 @@ class ForEachStatement extends j_l_Object {
  }
  /** @nodts @template T, U, V */
  m_testTypeVariable__void_$p_foreachstatement_ForEachStatement() {
-  let iterable = null;
+  let /** U */ iterable = null;
   for (let $iterator = (/**@type {!Iterable<?string>}*/ ($Casts.$to(iterable, /**@type {Function}*/ (Iterable)))).m_iterator__java_util_Iterator(); $iterator.m_hasNext__boolean(); ) {
    let s = /**@type {?string}*/ ($Casts.$to($iterator.m_next__java_lang_Object(), j_l_String));
   }
-  let anotherIterable = null;
+  let /** IterableReturningTypeVariable<?, ?> */ anotherIterable = null;
   for (let $iterator_1 = anotherIterable.m_iterator__java_util_Iterator(); (/**@type {!Iterator<Integer>}*/ ($iterator_1)).m_hasNext__boolean(); ) {
    let s_1 = (/**@type {Integer}*/ ($Casts.$to((/**@type {!Iterator<Integer>}*/ ($iterator_1)).m_next__java_lang_Object(), Integer))).m_intValue__int();
   }
-  let integerIterable = null;
+  let /** V */ integerIterable = null;
   for (let $iterator_2 = (/**@type {!Iterable<Integer>}*/ ($Casts.$to(integerIterable, /**@type {Function}*/ (Iterable)))).m_iterator__java_util_Iterator(); $iterator_2.m_hasNext__boolean(); ) {
    let i = (/**@type {Integer}*/ ($Casts.$to($iterator_2.m_next__java_lang_Object(), Integer))).m_intValue__int();
   }
   for (let $iterator_3 = (/**@type {!Iterable<Integer>}*/ ($Casts.$to(integerIterable, /**@type {Function}*/ (Iterable)))).m_iterator__java_util_Iterator(); $iterator_3.m_hasNext__boolean(); ) {
    let i_1 = $Primitives.widenIntToLong((/**@type {Integer}*/ ($Casts.$to($iterator_3.m_next__java_lang_Object(), Integer))).m_intValue__int());
   }
-  let charIterable = null;
+  let /** Iterable<Character> */ charIterable = null;
   for (let $iterator_4 = charIterable.m_iterator__java_util_Iterator(); $iterator_4.m_hasNext__boolean(); ) {
    let c = (/**@type {Character}*/ ($Casts.$to($iterator_4.m_next__java_lang_Object(), Character))).m_charValue__char();
   }
  }
  /** @nodts */
  m_testSideEffects__void_$p_foreachstatement_ForEachStatement() {
-  let iterable = null;
-  let primitiveArray = null;
+  let /** Iterable<Integer> */ iterable = null;
+  let /** Array<number> */ primitiveArray = null;
   for (let $iterator = iterable.m_iterator__java_util_Iterator(); $iterator.m_hasNext__boolean(); ) {
    let i = /**@type {Integer}*/ ($Casts.$to($iterator.m_next__java_lang_Object(), Integer));
    {

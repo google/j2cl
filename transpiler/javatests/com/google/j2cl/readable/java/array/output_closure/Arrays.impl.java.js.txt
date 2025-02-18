@@ -3,6 +3,7 @@ goog.module('array.Arrays$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let ArrayContainer = goog.forwardDeclare('array.Arrays.ArrayContainer$impl');
 let SomeObject = goog.forwardDeclare('array.Arrays.SomeObject$impl');
 let Serializable = goog.forwardDeclare('java.io.Serializable$impl');
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
@@ -138,13 +139,13 @@ class Arrays extends j_l_Object {
  }
  /** @nodts */
  m_testErasureCastsOnArrayAccess__void() {
-  let container = null;
+  let /** ArrayContainer<?string> */ container = null;
   let s = (/**@type {!Array<?string>}*/ ($Arrays.$castTo(container.f_data__array_Arrays_ArrayContainer, j_l_String, 1)))[0];
  }
  /** @nodts */
  m_testCovariance__void() {
-  let objectArray = null;
-  let stringArray = null;
+  let /** Array<*> */ objectArray = null;
+  let /** Array<?string> */ stringArray = null;
   objectArray = stringArray;
  }
  /** @nodts */

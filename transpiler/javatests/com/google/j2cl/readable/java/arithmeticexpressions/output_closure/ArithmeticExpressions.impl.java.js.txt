@@ -4,6 +4,7 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Long = goog.require('nativebootstrap.Long$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $1Ref = goog.forwardDeclare('arithmeticexpressions.ArithmeticExpressions.$1Ref$impl');
 let Byte = goog.forwardDeclare('java.lang.Byte$impl');
 let Character = goog.forwardDeclare('java.lang.Character$impl');
 let Double = goog.forwardDeclare('java.lang.Double$impl');
@@ -76,7 +77,7 @@ class ArithmeticExpressions extends j_l_Object {
  }
  /** @nodts */
  m_testCompoundArray__void() {
-  let ints = null;
+  let /** Array<number> */ ints = null;
   $Arrays.$set(ints, 0, ints[0] + 1 | 0);
   $Arrays.$set(ints, 0, ints[0] - 1 | 0);
   $Arrays.$set(ints, 0, Math.imul(ints[0], 1));
@@ -105,7 +106,7 @@ class ArithmeticExpressions extends j_l_Object {
    let $array_2 = ints, $index_2 = ($value_1 = i, i = i + 1 | 0, $value_1);
    $Arrays.$set($array_2, $index_2, $Primitives.coerceDivision($array_2[$index_2] / 1));
   }
-  let longs = null;
+  let /** Array<!$Long> */ longs = null;
   $Arrays.$set(longs, 0, $LongUtils.plus(longs[0], $Long.fromInt(1)));
   $Arrays.$set(longs, 0, $LongUtils.minus(longs[0], $Long.fromInt(1)));
   $Arrays.$set(longs, 0, $LongUtils.minus(longs[0], $Long.fromInt(1)));
@@ -113,11 +114,11 @@ class ArithmeticExpressions extends j_l_Object {
    let $array_3 = ArithmeticExpressions.m_getLongArray__arrayOf_long(), $index_3 = 0;
    $Arrays.$set($array_3, $index_3, $LongUtils.plus($array_3[$index_3], $Long.fromInt(1)));
   }
-  let booleans = null;
+  let /** Array<boolean> */ booleans = null;
   $Arrays.$set(booleans, 0, !!(+ booleans[0] | + true));
-  let strings = null;
+  let /** Array<?string> */ strings = null;
   $Arrays.$set(strings, 0, j_l_String.m_valueOf__java_lang_Object__java_lang_String(strings[0]) + j_l_String.m_valueOf__java_lang_Object__java_lang_String(null));
-  let shorts = null;
+  let /** Array<number> */ shorts = null;
   let b = $Arrays.$set(shorts, 0, $Primitives.narrowIntToShort(shorts[0] + 1 | 0)) == 10;
  }
  /** @nodts @return {Array<!$Long>} */
@@ -146,7 +147,7 @@ class ArithmeticExpressions extends j_l_Object {
   ch = Character.m_valueOf__char__java_lang_Character($Primitives.narrowIntToChar(ch.m_charValue__char() + 1 /* '\u0001' */ | 0));
   (f = Integer.m_valueOf__int__java_lang_Integer(f.m_intValue__int() + 1 | 0)).m_intValue__int();
   ($value_2 = f, f = Integer.m_valueOf__int__java_lang_Integer(f.m_intValue__int() - 1 | 0), $value_2).m_intValue__int();
-  let ref = null;
+  let /** $1Ref<Byte> */ ref = null;
   ref.f_field__arithmeticexpressions_ArithmeticExpressions_1Ref = Byte.m_valueOf__byte__java_lang_Byte($Primitives.narrowIntToByte((/**@type {Byte}*/ ($Casts.$to(ref.f_field__arithmeticexpressions_ArithmeticExpressions_1Ref, Byte))).m_byteValue__byte() + 1 | 0));
   let n = 1 + (/**@type {Byte}*/ ($Casts.$to(ref.f_field__arithmeticexpressions_ArithmeticExpressions_1Ref, Byte))).m_byteValue__byte() | 0;
  }

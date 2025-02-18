@@ -11,11 +11,13 @@ let GenericType = goog.forwardDeclare('typewildcards.GenericType$impl');
 let List = goog.forwardDeclare('typewildcards.List$impl');
 let RecursiveType = goog.forwardDeclare('typewildcards.RecursiveType$impl');
 let A = goog.forwardDeclare('typewildcards.TypeWildCards.A$impl');
+let Element = goog.forwardDeclare('typewildcards.TypeWildCards.Element$impl');
 let Foo = goog.forwardDeclare('typewildcards.TypeWildCards.Foo$impl');
 let HasKey = goog.forwardDeclare('typewildcards.TypeWildCards.HasKey$impl');
 let IntegerSupplier = goog.forwardDeclare('typewildcards.TypeWildCards.IntegerSupplier$impl');
 let MultipleGenerics = goog.forwardDeclare('typewildcards.TypeWildCards.MultipleGenerics$impl');
 let RecursiveInterface = goog.forwardDeclare('typewildcards.TypeWildCards.RecursiveInterface$impl');
+let SubOtherElement = goog.forwardDeclare('typewildcards.TypeWildCards.SubOtherElement$impl');
 let Y = goog.forwardDeclare('typewildcards.TypeWildCards.Y$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
@@ -84,8 +86,8 @@ class TypeWildCards extends j_l_Object {
  }
  /** @nodts */
  m_testInferredGenericIntersection__void() {
-  let elements = null;
-  let otherElements = null;
+  let /** List<Element> */ elements = null;
+  let /** List<SubOtherElement> */ otherElements = null;
   let integers = /**@type {List<Integer>}*/ (TypeWildCards.m_transform__typewildcards_List__typewildcards_Function__typewildcards_List(/**@type {List<*>}*/ (TypeWildCards.m_concat__typewildcards_List__typewildcards_List__typewildcards_List(elements, otherElements)), typewildcards_Function.$adapt((/** ? */ a) =>{
    (/**@type {!HasKey}*/ ($Casts.$to(a, /**@type {Function}*/ (HasKey)))).m_getKey__java_lang_String();
    return (/**@type {!IntegerSupplier}*/ ($Casts.$to(a, /**@type {Function}*/ (IntegerSupplier)))).m_get__java_lang_Integer();
