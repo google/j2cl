@@ -55,11 +55,6 @@ Let's run the development server to see our application in action:
 ```
 -   Navigate to 'http://localhost:6006/jsapp_dev.html" in your browser.
 
-NOTE: J2CL currently uses experimental Wasm String functionality which might not be enabled
-yet. If you see an
-error message like: `Failed to load wasm: CompileError: WebAssembly.instantiateStreaming(): Unknown type code...`
-, you can enable it via chrome://flags/#enable-experimental-webassembly-features
-
 Please take the time to play with the code and get a better feeling of how
 things are working.
 
