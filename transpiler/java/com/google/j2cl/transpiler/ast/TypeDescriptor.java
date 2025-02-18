@@ -97,6 +97,11 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
     return false;
   }
 
+  /** Returns whether the described type is an annotation. */
+  public boolean isAnnotation() {
+    return false;
+  }
+
   /** Returns whether the described type is an enum type. */
   public boolean isEnum() {
     return false;

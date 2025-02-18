@@ -76,6 +76,11 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   }
 
   @Override
+  public boolean isAnnotation() {
+    return getTypeDeclaration().isAnnotation();
+  }
+
+  @Override
   public boolean isEnum() {
     return getTypeDeclaration().isEnum();
   }

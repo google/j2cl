@@ -45,10 +45,7 @@ public class RewriteAnnotationTypesJ2kt extends NormalizationPass {
           @Override
           public Node rewriteMethod(Method method) {
             MethodDescriptor methodDescriptor = method.getDescriptor();
-            if (!methodDescriptor
-                .getEnclosingTypeDescriptor()
-                .getTypeDeclaration()
-                .isAnnotation()) {
+            if (!methodDescriptor.getEnclosingTypeDescriptor().isAnnotation()) {
               return method;
             }
 

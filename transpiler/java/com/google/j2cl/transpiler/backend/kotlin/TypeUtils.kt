@@ -47,7 +47,7 @@ internal val Type.ktMembers: List<KtMember>
     members
       .asSequence()
       .filter { !it.isStatic }
-      .filter { !it.descriptor.enclosingTypeDescriptor.typeDeclaration.isAnnotation }
+      .filter { !it.descriptor.enclosingTypeDescriptor.isAnnotation }
       .filter { !declaration.isAnonymous || !it.isConstructor }
       .filter { it !is Method || it != ktPrimaryConstructor || it.renderedStatements.isNotEmpty() }
       .map { KtMember.WithJavaMember(it) }
