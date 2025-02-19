@@ -117,7 +117,7 @@ To setup your first project you can use the sample as template:
 ```shell
       $ cp -R <j2cl-repo>/samples/helloworld <my-repo>/<app-name>
       $ mv <my-repo>/<app-name>/WORKSPACE.remote <my-repo>/<app-name>/WORKSPACE
-      $ echo 7.4.1 > <my-repo>/<app-name>/.bazelversion
+      $ echo 5.4.1 > <my-repo>/<app-name>/.bazelversion
 ```
 
 and you are done.
