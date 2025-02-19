@@ -53,6 +53,7 @@ import org.jetbrains.kotlin.ir.backend.js.lower.inline.RemoveInlineDeclarationsW
 import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.util.SymbolTable
+import org.jetbrains.kotlin.progress.ProgressIndicatorAndCompilationCanceledStatus
 
 /** The list of lowering passes to run in execution order. */
 private val loweringPassFactories: List<J2clLoweringPassFactory> = buildList {
@@ -262,6 +263,7 @@ private fun IrModuleFragment.lower(
 ) {
   for (f in files) {
     try {
+      ProgressIndicatorAndCompilationCanceledStatus.checkCanceled()
       loweringFactory(context).lower(f)
     } catch (e: CompilationException) {
       e.initializeFileDetails(f)

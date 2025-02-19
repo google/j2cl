@@ -77,6 +77,8 @@ import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
 import org.jetbrains.kotlin.metadata.jvm.deserialization.JvmMetadataVersion
 import org.jetbrains.kotlin.metadata.jvm.deserialization.JvmProtoBufUtil
 import org.jetbrains.kotlin.modules.TargetId
+import org.jetbrains.kotlin.progress.CompilationCanceledStatus
+import org.jetbrains.kotlin.progress.ProgressIndicatorAndCompilationCanceledStatus
 
 /** A parser for Kotlin sources that builds {@code CompilationtUnit}s. */
 class KotlinParser(private val problems: Problems) {
@@ -84,20 +86,37 @@ class KotlinParser(private val problems: Problems) {
   /** Returns a list of compilation units after Kotlinc parsing. */
   fun parseFiles(options: FrontendOptions): Library {
     val packageInfoCache = PackageInfoCache(options.classpaths, problems)
+    problems.abortIfCancelled()
     val packageAnnotationResolver = getPackageAnnotationResolver(options, packageInfoCache)
+    problems.abortIfCancelled()
 
     val kotlincDisposable = Disposer.newDisposable("J2CL Root Disposable")
     val compilerConfiguration = createCompilerConfiguration(options, packageInfoCache)
+    problems.abortIfCancelled()
 
     check(compilerConfiguration.getBoolean(USE_FIR)) { "Kotlin/Closure only supports > K2" }
 
-    val compilationUnits =
-      parseFiles(compilerConfiguration, kotlincDisposable, packageAnnotationResolver)
+    try {
+      // TODO(b/148292139): This assumes single worker for given time and doesn't work with
+      // multiplex workers.
+      ProgressIndicatorAndCompilationCanceledStatus.setCompilationCanceledStatus(
+        object : CompilationCanceledStatus {
+          override fun checkCanceled() {
+            problems.abortIfCancelled()
+          }
+        }
+      )
 
-    return Library.newBuilder()
-      .setCompilationUnits(compilationUnits)
-      .setDisposableListener { Disposer.dispose(kotlincDisposable) }
-      .build()
+      val compilationUnits =
+        parseFiles(compilerConfiguration, kotlincDisposable, packageAnnotationResolver)
+
+      return Library.newBuilder()
+        .setCompilationUnits(compilationUnits)
+        .setDisposableListener { Disposer.dispose(kotlincDisposable) }
+        .build()
+    } finally {
+      ProgressIndicatorAndCompilationCanceledStatus.setCompilationCanceledStatus(null)
+    }
   }
 
   private fun parseFiles(
@@ -114,9 +133,12 @@ class KotlinParser(private val problems: Problems) {
         EnvironmentConfigFiles.JVM_CONFIG_FILES,
         messageCollector,
       )
+    problems.abortIfCancelled()
 
     val module = compilerConfiguration.get(MODULES)!![0]
     val diagnosticsReporter = DiagnosticReporterFactory.createPendingReporter(messageCollector)
+    val sources = collectSources(compilerConfiguration, projectEnvironment, messageCollector)
+    problems.abortIfCancelled()
 
     val analysisResults =
       @OptIn(IncrementalCompilationApi::class)
@@ -124,11 +146,7 @@ class KotlinParser(private val problems: Problems) {
         projectEnvironment,
         messageCollector,
         compilerConfiguration,
-        ModuleCompilerInput(
-          TargetId(module),
-          collectSources(compilerConfiguration, projectEnvironment, messageCollector),
-          compilerConfiguration,
-        ),
+        ModuleCompilerInput(TargetId(module), sources, compilerConfiguration),
         diagnosticsReporter,
         incrementalExcludesScope = null,
       )
@@ -150,6 +168,7 @@ class KotlinParser(private val problems: Problems) {
         .isIrBackend(true)
         .diagnosticReporter(diagnosticsReporter)
         .build()
+    problems.abortIfCancelled()
 
     val compilationUnitBuilderExtension =
       createAndRegisterCompilationUnitBuilder(
@@ -158,6 +177,7 @@ class KotlinParser(private val problems: Problems) {
         state,
         packageAnnotationResolver,
       )
+    problems.abortIfCancelled()
 
     val unused =
       analysisResults.convertToIrAndActualizeForJvm(

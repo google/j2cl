@@ -550,6 +550,7 @@ public class TranspilerTester {
 
     final String[] knownDelayedCalls = {
       "com.google.j2cl.transpiler.frontend.javac.JavacParser.parseFiles",
+      // Kotlin frontend is currently missing a lot of checks in between large chunks of works.
       "com.google.j2cl.transpiler.frontend.kotlin.KotlinParser.parseFiles",
     };
     for (String knownDelayedCall : knownDelayedCalls) {

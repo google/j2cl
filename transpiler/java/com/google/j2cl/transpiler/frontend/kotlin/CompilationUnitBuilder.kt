@@ -189,6 +189,7 @@ import org.jetbrains.kotlin.ir.util.parentAsClass
 import org.jetbrains.kotlin.ir.util.render
 import org.jetbrains.kotlin.ir.util.statements
 import org.jetbrains.kotlin.name.SpecialNames
+import org.jetbrains.kotlin.progress.ProgressIndicatorAndCompilationCanceledStatus
 
 /** Creates a J2CL Java AST from Kotlin IR. */
 class CompilationUnitBuilder(
@@ -224,6 +225,8 @@ class CompilationUnitBuilder(
   private fun convertClass(irClass: IrClass): Type {
     val type = Type(getNameSourcePosition(irClass), environment.getDeclarationForType(irClass))
     processEnclosedBy(type) {
+      ProgressIndicatorAndCompilationCanceledStatus.checkCanceled()
+
       // Skip synthetic declarations. Kotlinc adds synthetic declarations like (fake) override
       // members
       // to help with bridge synthesis and the resolution phase.
@@ -245,8 +248,9 @@ class CompilationUnitBuilder(
     return type
   }
 
-  private fun convertDeclaration(irDeclaration: IrDeclaration): List<Member> =
-    when (irDeclaration) {
+  private fun convertDeclaration(irDeclaration: IrDeclaration): List<Member> {
+    ProgressIndicatorAndCompilationCanceledStatus.checkCanceled()
+    return when (irDeclaration) {
       is IrEnumEntry -> listOf(convertEnumEntry(irDeclaration))
       is IrProperty -> convertProperty(irDeclaration)
       // Lowering passes can add field on object classes.
@@ -255,6 +259,7 @@ class CompilationUnitBuilder(
       is IrAnonymousInitializer -> listOf(convertAnonymousInitializer(irDeclaration))
       else -> throw NotImplementedError("Declaration not yet supported: $irDeclaration")
     }
+  }
 
   private fun convertEnumEntry(irEnumEntry: IrEnumEntry): Field {
     val initializerExpression = requireNotNull(irEnumEntry.initializerExpression).expression
