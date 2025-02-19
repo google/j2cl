@@ -80,7 +80,10 @@ class J2clTranspiler {
       MemberDescriptor.setClosureManglingPatterns();
     }
 
-    Library library = options.getFrontend().parse(options, problems);
+    Library library =
+        options.getSources().isEmpty()
+            ? Library.newEmpty()
+            : options.getFrontend().parse(options, problems);
     try {
       problems.abortIfHasErrors();
       if (!library.isEmpty()) {

@@ -60,15 +60,11 @@ public class JavacParser {
   /** Returns a map from file paths to compilation units after Javac parsing. */
   @Nullable
   public Library parseFiles(FrontendOptions options) {
-    ImmutableList<FileInfo> filePaths = options.getSources();
-    if (filePaths.isEmpty()) {
-      return Library.newEmpty();
-    }
-
     // The map must be ordered because it will be iterated over later and if it was not ordered then
     // our output would be unstable
     final Map<String, String> targetPathBySourcePath =
-        filePaths.stream().collect(Collectors.toMap(FileInfo::sourcePath, FileInfo::targetPath));
+        options.getSources().stream()
+            .collect(Collectors.toMap(FileInfo::sourcePath, FileInfo::targetPath));
 
     try {
       JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();

@@ -83,10 +83,6 @@ class KotlinParser(private val problems: Problems) {
 
   /** Returns a list of compilation units after Kotlinc parsing. */
   fun parseFiles(options: FrontendOptions): Library {
-    if (options.sources.isEmpty()) {
-      return Library.newEmpty()
-    }
-
     val packageInfoCache = PackageInfoCache(options.classpaths, problems)
     val packageAnnotationResolver = getPackageAnnotationResolver(options, packageInfoCache)
 
