@@ -233,10 +233,10 @@ class CompilationUnitBuilder(
 
       declarations
         .filter { it !is IrClass && !it.isClinit }
-        .mapNotNull(::convertDeclaration)
+        .map(::convertDeclaration)
         .forEach(type::addMembers)
 
-      declarations.filterIsInstance<IrClass>().mapNotNull(::convertClass).forEach(type::addType)
+      declarations.filterIsInstance<IrClass>().map(::convertClass).forEach(type::addType)
 
       declarations
         .find { it.isClinit }

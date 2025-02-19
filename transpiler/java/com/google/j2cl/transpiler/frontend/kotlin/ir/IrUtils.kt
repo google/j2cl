@@ -643,9 +643,7 @@ val IrElement.isTemporaryVariable: Boolean
 fun IrAnnotationContainer.copyAnnotationsWhen(
   filter: IrConstructorCall.() -> Boolean
 ): List<IrConstructorCall> {
-  return annotations.mapNotNull {
-    if (it.filter()) it.deepCopyWithSymbols(this as? IrDeclarationParent) else null
-  }
+  return annotations.filter(filter).map { it.deepCopyWithSymbols(this as? IrDeclarationParent) }
 }
 
 val IrProperty.hasAccessors: Boolean
