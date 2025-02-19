@@ -856,8 +856,8 @@ class Collision(private val pool: IWorldPool) {
 
   /** This holds polygon B expressed in frame A. */
   internal class TempPolygon {
-    val vertices = Array<Vec2>(Settings.MAX_POLYGON_VERTICES) { Vec2() }
-    val normals = Array<Vec2>(Settings.MAX_POLYGON_VERTICES) { Vec2() }
+    val vertices: Array<Vec2> by lazy { Array<Vec2>(Settings.MAX_POLYGON_VERTICES) { Vec2() } }
+    val normals: Array<Vec2> by lazy { Array<Vec2>(Settings.MAX_POLYGON_VERTICES) { Vec2() } }
     var count = 0
   }
 

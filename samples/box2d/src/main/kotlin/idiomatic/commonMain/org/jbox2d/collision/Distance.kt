@@ -198,11 +198,7 @@ class Distance {
       }
     }
 
-    /**
-     * this returns pooled objects. don't keep or modify them
-     *
-     * @return
-     */
+    /** this returns pooled objects. don't keep or modify them */
     fun getClosestPoint(out: Vec2) {
       when (count) {
         0 -> {
@@ -448,7 +444,7 @@ class Distance {
    * @author daniel
    */
   class DistanceProxy {
-    val vertices: Array<Vec2> = Array<Vec2>(Settings.MAX_POLYGON_VERTICES) { Vec2() }
+    val vertices: Array<Vec2> by lazy { Array<Vec2>(Settings.MAX_POLYGON_VERTICES) { Vec2() } }
 
     var count: Int = 0
     var radius: Float = 0f
@@ -498,12 +494,7 @@ class Distance {
       }
     }
 
-    /**
-     * Get the supporting vertex index in the given direction.
-     *
-     * @param d
-     * @return
-     */
+    /** Get the supporting vertex index in the given direction. */
     fun getSupport(d: Vec2): Int {
       var bestIndex = 0
       var bestValue = vertices[0] dot d
@@ -517,12 +508,7 @@ class Distance {
       return bestIndex
     }
 
-    /**
-     * Get the supporting vertex in the given direction.
-     *
-     * @param d
-     * @return
-     */
+    /** Get the supporting vertex in the given direction. */
     fun getSupportVertex(d: Vec2): Vec2 {
       var bestIndex = 0
       var bestValue = vertices[0] dot d
@@ -541,10 +527,6 @@ class Distance {
    * Compute the closest points between two shapes. Supports any combination of: CircleShape and
    * PolygonShape. The simplex cache is input/output. On the first call set SimplexCache.count to
    * zero.
-   *
-   * @param output
-   * @param cache
-   * @param input
    */
   fun distance(output: DistanceOutput, cache: SimplexCache, input: DistanceInput) {
     GJK_CALLS++

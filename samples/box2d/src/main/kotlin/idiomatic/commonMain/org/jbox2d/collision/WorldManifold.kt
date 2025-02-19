@@ -39,7 +39,7 @@ class WorldManifold {
   val normal: Vec2 = Vec2()
 
   /** World contact point (point of intersection) */
-  val points: Array<Vec2> = Array<Vec2>(Settings.MAX_MANIFOLD_POINTS) { Vec2() }
+  val points: Array<Vec2> by lazy { Array<Vec2>(Settings.MAX_MANIFOLD_POINTS) { Vec2() } }
   private val pool3 = Vec2()
   private val pool4 = Vec2()
 
@@ -48,7 +48,7 @@ class WorldManifold {
     xfA: Transform,
     radiusA: Float,
     xfB: Transform,
-    radiusB: Float
+    radiusB: Float,
   ) {
     if (manifold.pointCount == 0) {
       return
