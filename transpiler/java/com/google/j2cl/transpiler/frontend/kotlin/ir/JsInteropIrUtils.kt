@@ -146,9 +146,6 @@ val IrClass.isJsFunction: Boolean
 val IrClass.isJsType: Boolean
   get() = findJsinteropAnnotation(JS_TYPE_ANNOTATION_FQ_NAME) != null
 
-val IrFunction.isJsAsync: Boolean
-  get() = findJsinteropAnnotation(JS_ASYNC_ANNOTATION_FQ_NAME) != null
-
 val IrClass.isJsEnum: Boolean
   get() = findJsinteropAnnotation(JS_ENUM_ANNOTATION_FQ_NAME) != null
 
@@ -174,6 +171,9 @@ val IrValueParameter.isJsOptional: Boolean
   get() =
     findJsinteropAnnotation(JS_OPTIONAL_ANNOTATION_FQ_NAME) != null &&
       (parent as? IrDeclaration)?.isCompanionMember == false
+
+private val IrFunction.isJsAsync: Boolean
+  get() = findJsinteropAnnotation(JS_ASYNC_ANNOTATION_FQ_NAME) != null
 
 private val IrDeclaration.isJsOverlay: Boolean
   get() =
