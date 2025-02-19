@@ -726,12 +726,7 @@ class DynamicTree : BroadPhaseStrategy {
     color.set(1f, (height - spot) * 1f / height, (height - spot) * 1f / height)
     argDraw.drawPolygon(drawVecs, 4, color)
     argDraw.viewportTransform.getWorldToScreen(node.aabb.upperBound, textVec)
-    argDraw.drawString(
-      textVec.x,
-      textVec.y,
-      node.id.toString() + "-" + (spot + 1) + "/" + height,
-      color,
-    )
+    argDraw.drawString(textVec.x, textVec.y, "${node.id}-${spot + 1}/$height", color)
     node.child1?.let { drawTree(argDraw, it, spot + 1, height) }
     node.child2?.let { drawTree(argDraw, it, spot + 1, height) }
   }

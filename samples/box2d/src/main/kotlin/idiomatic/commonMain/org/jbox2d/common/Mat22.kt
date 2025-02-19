@@ -29,12 +29,7 @@ class Mat22 : Serializable {
   val ey: Vec2
 
   /** Convert the matrix to printable format. */
-  override fun toString(): String {
-    var s = ""
-    s += "[" + ex.x + "," + ey.x + "]\n"
-    s += "[" + ex.y + "," + ey.y + "]"
-    return s
-  }
+  override fun toString(): String = "[${ex.x},${ey.x}]\n[${ex.y},${ey.y}]"
 
   /**
    * Construct zero matrix. Note: this is NOT an identity matrix! djm fixed double allocation
@@ -56,14 +51,7 @@ class Mat22 : Serializable {
     ey = c2.copy()
   }
 
-  /**
-   * Create a matrix from four floats.
-   *
-   * @param exx
-   * @param col2x
-   * @param exy
-   * @param col2y
-   */
+  /** Create a matrix from four floats. */
   constructor(exx: Float, col2x: Float, exy: Float, col2y: Float) {
     ex = Vec2(exx, exy)
     ey = Vec2(col2x, col2y)
@@ -124,11 +112,7 @@ class Mat22 : Serializable {
     ey.y = 0.0f
   }
 
-  /**
-   * Extract the angle from this matrix (assumed to be a rotation matrix).
-   *
-   * @return
-   */
+  /** Extract the angle from this matrix (assumed to be a rotation matrix). */
   val angle: Float
     get() = MathUtils.atan2(ex.y, ex.x)
 
@@ -274,9 +258,6 @@ class Mat22 : Serializable {
   /**
    * Multiply another matrix by the transpose of this one (transpose of this one on left). djm:
    * optimized
-   *
-   * @param B
-   * @return
    */
   fun mulTrans(B: Mat22): Mat22 {
     /*
