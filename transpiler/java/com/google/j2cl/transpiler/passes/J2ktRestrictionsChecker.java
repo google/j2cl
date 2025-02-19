@@ -60,6 +60,7 @@ public final class J2ktRestrictionsChecker {
 
           @Override
           public void exitType(Type type) {
+            problems.abortIfCancelled();
             checkNullMarked(type);
             checkSuperTypeVisibilities(type);
             checkInterfaceTypeVisibilities(type);

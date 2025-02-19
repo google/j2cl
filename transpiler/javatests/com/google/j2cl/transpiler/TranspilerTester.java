@@ -551,7 +551,6 @@ public class TranspilerTester {
     final String[] knownDelayedCalls = {
       "com.google.j2cl.transpiler.frontend.javac.JavacParser.parseFiles",
       "com.google.j2cl.transpiler.frontend.kotlin.KotlinParser.parseFiles",
-      "com.google.j2cl.transpiler.J2clTranspiler.checkLibrary",
     };
     for (String knownDelayedCall : knownDelayedCalls) {
       delayedCalls.removeIf(t -> t.contains(knownDelayedCall));

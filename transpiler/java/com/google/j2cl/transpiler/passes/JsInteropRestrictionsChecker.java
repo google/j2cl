@@ -133,6 +133,7 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkType(Type type) {
+    problems.abortIfCancelled();
     TypeDeclaration typeDeclaration = type.getDeclaration();
 
     if (!checkWasmRestrictions && !isNullMarkedSupported) {
@@ -166,6 +167,7 @@ public class JsInteropRestrictionsChecker {
     if (typeDeclaration.isJsEnum() || typeDeclaration.isJsType()) {
       checkQualifiedJsName(type);
     }
+    problems.abortIfCancelled();
 
     if (typeDeclaration.isJsFunctionInterface()) {
       checkJsFunction(type);
@@ -179,11 +181,14 @@ public class JsInteropRestrictionsChecker {
     }
 
     checkTypeVariables(type);
-
     checkNameCollisions(type);
+    problems.abortIfCancelled();
+
     for (Member member : type.getMembers()) {
       checkMember(member);
     }
+    problems.abortIfCancelled();
+
     checkTypeLiteralsAndInstanceOfs(type);
     checkJsEnumUsages(type);
     checkJsFunctionLambdas(type);
