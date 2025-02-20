@@ -903,6 +903,15 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             qualifier);
 
     List<TypeDescriptor> typeArguments = convertTypeArguments(memberReference.getTypeArguments());
+    if (typeArguments.isEmpty() && !methodSymbol.getTypeParameters().isEmpty()) {
+      // Retrieve the inferred type arguments
+      var mapping = JavaEnvironment.getTypeSubstitution(memberReference.referentType, methodSymbol);
+      typeArguments =
+          methodSymbol.getTypeParameters().stream()
+              .map(t -> mapping.get(t).stream().findFirst().orElse(t.type.getUpperBound()))
+              .map(environment::createTypeDescriptor)
+              .collect(toImmutableList());
+    }
     MethodDescriptor targetMethodDescriptor =
         environment.createMethodDescriptor(
             enclosingTypeDescriptor,
