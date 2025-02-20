@@ -394,7 +394,7 @@ _J2WASM_APP_ATTRS = {
     # TODO(b/296477606): Remove when symbol map file can be linked from the binary for debugging.
     "enable_debug_info": attr.bool(default = False),
     "use_modular_pipeline": attr.bool(default = True),
-    "use_magic_string_imports": attr.bool(),
+    "use_magic_string_imports": attr.bool(default = False),
     "_jre": attr.label(default = Label("//build_defs/internal_do_not_use:j2wasm_jre")),
     "_j2cl_transpiler": attr.label(
         cfg = "exec",
