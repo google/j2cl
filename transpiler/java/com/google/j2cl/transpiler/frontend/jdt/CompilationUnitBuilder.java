@@ -225,8 +225,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
 
     private void convertTypeBody(Type type, List<BodyDeclaration> bodyDeclarations) {
+      problems.abortIfCancelled();
       for (BodyDeclaration bodyDeclaration : bodyDeclarations) {
-        problems.abortIfCancelled();
         if (bodyDeclaration instanceof FieldDeclaration) {
           FieldDeclaration fieldDeclaration = (FieldDeclaration) bodyDeclaration;
           type.addMembers(convert(fieldDeclaration));
@@ -254,8 +254,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
               "Unexpected type for BodyDeclaration: %s, in type: %s",
               bodyDeclaration.getClass().getName(), type.getDeclaration().getQualifiedSourceName());
         }
+        problems.abortIfCancelled();
       }
-      problems.abortIfCancelled();
     }
 
     private Field convert(EnumConstantDeclaration enumConstantDeclaration) {
