@@ -90,12 +90,12 @@ class KotlinParser(private val problems: Problems) {
     val packageAnnotationResolver = getPackageAnnotationResolver(options, packageInfoCache)
     problems.abortIfCancelled()
 
-    val kotlincDisposable = Disposer.newDisposable("J2CL Root Disposable")
     val compilerConfiguration = createCompilerConfiguration(options, packageInfoCache)
     problems.abortIfCancelled()
 
     check(compilerConfiguration.getBoolean(USE_FIR)) { "Kotlin/Closure only supports > K2" }
 
+    val kotlincDisposable = Disposer.newDisposable("J2CL Root Disposable")
     try {
       // TODO(b/148292139): This assumes single worker for given time and doesn't work with
       // multiplex workers.
@@ -114,6 +114,10 @@ class KotlinParser(private val problems: Problems) {
         .setCompilationUnits(compilationUnits)
         .setDisposableListener { Disposer.dispose(kotlincDisposable) }
         .build()
+    } catch (e: Throwable) {
+      // Clean up disposable if we are not properly exiting to avoid memory leaks.
+      Disposer.dispose(kotlincDisposable)
+      throw e
     } finally {
       ProgressIndicatorAndCompilationCanceledStatus.setCompilationCanceledStatus(null)
     }
