@@ -77,6 +77,7 @@ import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
 import org.jetbrains.kotlin.metadata.jvm.deserialization.JvmMetadataVersion
 import org.jetbrains.kotlin.metadata.jvm.deserialization.JvmProtoBufUtil
 import org.jetbrains.kotlin.modules.TargetId
+import org.jetbrains.kotlin.progress.CompilationCanceledException
 import org.jetbrains.kotlin.progress.CompilationCanceledStatus
 import org.jetbrains.kotlin.progress.ProgressIndicatorAndCompilationCanceledStatus
 
@@ -102,7 +103,9 @@ class KotlinParser(private val problems: Problems) {
       ProgressIndicatorAndCompilationCanceledStatus.setCompilationCanceledStatus(
         object : CompilationCanceledStatus {
           override fun checkCanceled() {
-            problems.abortIfCancelled()
+            // throw CompilationCanceledException instead of our own which is properly handled by
+            // kotlinc to gracefully exit from the compilation.
+            if (problems.isCancelled) throw CompilationCanceledException()
           }
         }
       )

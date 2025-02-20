@@ -245,7 +245,7 @@ public class Problems {
     }
   }
 
-  protected boolean isCancelled() {
+  public boolean isCancelled() {
     return false;
   }
 
