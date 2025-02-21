@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.ast;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import com.google.common.base.Ascii;
+import com.google.common.base.Splitter;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
@@ -61,11 +62,21 @@ public class StringLiteralGettersCreator {
     return getLiteralMethod;
   }
 
-  private MethodCall createStringFromLiteral(String value) {
+  // See https://webassembly.github.io/gc/js-api/index.html#limits
+  private static final int ARRAY_LITERAL_SIZE_LIMIT = 10000;
+
+  private Expression createStringFromLiteral(String value) {
     if (!isValidUtf8String(value)) {
       // Strings represented natively in the wasm as string.const need to be valid UTF8 strings. In
-      // the case it is not, emit it by initializing from a char array.
-      return RuntimeMethods.createStringFromWasmArrayMethodCall(value.toCharArray());
+      // the case it is not, emit it by initializing from a char array. Such char array is
+      // represented as an array literal and since array literals of constants are initialized using
+      // `array.new_fixed` they are subject to a size limit by the spec.
+      return Splitter.fixedLength(ARRAY_LITERAL_SIZE_LIMIT)
+          .splitToStream(value)
+          .map(String::toCharArray)
+          .map(RuntimeMethods::createStringFromWasmArrayMethodCall)
+          .reduce(RuntimeMethods::createStringConcatMethodCall)
+          .get();
     }
     return RuntimeMethods.createStringFromJsStringMethodCall(new StringLiteral(value));
   }
