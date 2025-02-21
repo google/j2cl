@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2kt;
+package j2ktnotpassing;
 
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-// TODO(b/397636459): Uncomment test cases when fixed.
+// TODO(b/397636459): Remove when all test cases in the corresponding `j2kt` readable are passing.
 @NullMarked
 public class UnboundWildcards {
   interface Foo<T extends @Nullable Object> {}
@@ -29,47 +29,47 @@ public class UnboundWildcards {
   }
 
   public static void test112(Foo<? extends @Nullable Object> extendsNullableObject) {
-    // acceptTExtendsObject(extendsNullableObject);
+    acceptTExtendsObject(extendsNullableObject);
   }
 
   public static void test113(Foo<? extends @Nullable Object> extendsNullableObject) {
-    // acceptTExtendsNonNullObject(extendsNullableObject);
+    acceptTExtendsNonNullObject(extendsNullableObject);
   }
 
   public static void test114(Foo<? extends @Nullable Object> extendsNullableObject) {
-    // acceptT(extendsNullableObject);
+    acceptT(extendsNullableObject);
   }
 
   public static void test121(Foo<? extends @Nullable Object> extendsNullableObject) {
-    // acceptNullableTExtendsNullableObject(extendsNullableObject);
+    acceptNullableTExtendsNullableObject(extendsNullableObject);
   }
 
   public static void test122(Foo<? extends @Nullable Object> extendsNullableObject) {
-    // acceptNullableTExtendsObject(extendsNullableObject);
+    acceptNullableTExtendsObject(extendsNullableObject);
   }
 
   public static void test123(Foo<? extends @Nullable Object> extendsNullableObject) {
-    // acceptNullableTExtendsNonNullObject(extendsNullableObject);
+    acceptNullableTExtendsNonNullObject(extendsNullableObject);
   }
 
   public static void test124(Foo<? extends @Nullable Object> extendsNullableObject) {
-    // acceptNullableT(extendsNullableObject);
+    acceptNullableT(extendsNullableObject);
   }
 
   public static void test131(Foo<? extends @Nullable Object> extendsNullableObject) {
-    // acceptNonNullTExtendsNullableObject(extendsNullableObject);
+    acceptNonNullTExtendsNullableObject(extendsNullableObject);
   }
 
   public static void test132(Foo<? extends @Nullable Object> extendsNullableObject) {
-    // acceptNonNullTExtendsObject(extendsNullableObject);
+    acceptNonNullTExtendsObject(extendsNullableObject);
   }
 
   public static void test133(Foo<? extends @Nullable Object> extendsNullableObject) {
-    // acceptNonNullTExtendsNonNullObject(extendsNullableObject);
+    acceptNonNullTExtendsNonNullObject(extendsNullableObject);
   }
 
   public static void test134(Foo<? extends @Nullable Object> extendsNullableObject) {
-    // acceptNonNullT(extendsNullableObject);
+    acceptNonNullT(extendsNullableObject);
   }
 
   public static void test211(Foo<? extends Object> extendsObject) {
@@ -89,19 +89,19 @@ public class UnboundWildcards {
   }
 
   public static void test221(Foo<? extends Object> extendsObject) {
-    // acceptNullableTExtendsNullableObject(extendsObject);
+    acceptNullableTExtendsNullableObject(extendsObject);
   }
 
   public static void test222(Foo<? extends Object> extendsObject) {
-    // acceptNullableTExtendsObject(extendsObject);
+    acceptNullableTExtendsObject(extendsObject);
   }
 
   public static void test223(Foo<? extends Object> extendsObject) {
-    // acceptNullableTExtendsNonNullObject(extendsObject);
+    acceptNullableTExtendsNonNullObject(extendsObject);
   }
 
   public static void test224(Foo<? extends Object> extendsObject) {
-    // acceptNullableT(extendsObject);
+    acceptNullableT(extendsObject);
   }
 
   public static void test231(Foo<? extends Object> extendsObject) {
@@ -137,19 +137,19 @@ public class UnboundWildcards {
   }
 
   public static void test321(Foo<? extends @NonNull Object> extendsNonNullObject) {
-    // acceptNullableTExtendsNullableObject(extendsNonNullObject);
+    acceptNullableTExtendsNullableObject(extendsNonNullObject);
   }
 
   public static void test322(Foo<? extends @NonNull Object> extendsNonNullObject) {
-    // acceptNullableTExtendsObject(extendsNonNullObject);
+    acceptNullableTExtendsObject(extendsNonNullObject);
   }
 
   public static void test323(Foo<? extends @NonNull Object> extendsNonNullObject) {
-    // acceptNullableTExtendsNonNullObject(extendsNonNullObject);
+    acceptNullableTExtendsNonNullObject(extendsNonNullObject);
   }
 
   public static void test324(Foo<? extends @NonNull Object> extendsNonNullObject) {
-    // acceptNullableT(extendsNonNullObject);
+    acceptNullableT(extendsNonNullObject);
   }
 
   public static void test331(Foo<? extends @NonNull Object> extendsNonNullObject) {
@@ -185,19 +185,19 @@ public class UnboundWildcards {
   }
 
   public static void test421(Foo<?> unbound) {
-    // acceptNullableTExtendsNullableObject(unbound);
+    acceptNullableTExtendsNullableObject(unbound);
   }
 
   public static void test422(Foo<?> unbound) {
-    // acceptNullableTExtendsObject(unbound);
+    acceptNullableTExtendsObject(unbound);
   }
 
   public static void test423(Foo<?> unbound) {
-    // acceptNullableTExtendsNonNullObject(unbound);
+    acceptNullableTExtendsNonNullObject(unbound);
   }
 
   public static void test424(Foo<?> unbound) {
-    // acceptNullableT(unbound);
+    acceptNullableT(unbound);
   }
 
   public static void test431(Foo<?> unbound) {
