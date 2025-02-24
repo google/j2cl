@@ -72,7 +72,7 @@ import com.google.j2cl.transpiler.ast.UnionTypeDescriptor;
  * }
  * }</pre>
  */
-public final class InsertQualifierProjectionCasts extends NormalizationPass {
+public final class InsertQualifierProjectionCasts extends AbstractJ2ktNormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     // TODO(b/362477320): Consider switching to ConversionContextVisitor, once
@@ -98,6 +98,12 @@ public final class InsertQualifierProjectionCasts extends NormalizationPass {
             if (typeDescriptor.equals(projectedTypeDescriptor)) {
               return expression;
             }
+
+            debug(
+                getSourcePosition(this),
+                "Inserting qualifier projection cast from %s to %s",
+                getDescription(typeDescriptor),
+                getDescription(projectedTypeDescriptor));
 
             return CastExpression.newBuilder()
                 .setExpression(expression)

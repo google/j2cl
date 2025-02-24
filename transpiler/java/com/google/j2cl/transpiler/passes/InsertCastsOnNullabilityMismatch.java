@@ -85,15 +85,13 @@ public final class InsertCastsOnNullabilityMismatch extends AbstractJ2ktNormaliz
                   return expression;
                 }
 
-                Describer describer = new Describer();
-                getProblems()
-                    .debug(
-                        getSourcePosition(),
-                        "Inserted nullability mismatch cast to '%s' because of assignment from '%s'"
-                            + " to '%s'",
-                        describer.getDescription(castTypeDescriptor),
-                        describer.getDescription(expression.getTypeDescriptor()),
-                        describer.getDescription(inferredTypeDescriptor));
+                debug(
+                    getSourcePosition(),
+                    "Inserted nullability mismatch cast to '%s' because of assignment from '%s'"
+                        + " to '%s'",
+                    getDescription(castTypeDescriptor),
+                    getDescription(expression.getTypeDescriptor()),
+                    getDescription(inferredTypeDescriptor));
 
                 return CastExpression.newBuilder()
                     .setExpression(expression)
