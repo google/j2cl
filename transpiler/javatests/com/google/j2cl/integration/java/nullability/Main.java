@@ -43,6 +43,8 @@ public class Main {
     testRawConstructorTypeArgumentsWithWildcards();
 
     testImplicitConstructorTypeArgumentsWithInference();
+
+    testLambdaReturnTypeInference();
   }
 
   private static final String STRING = "foo";
@@ -230,11 +232,20 @@ public class Main {
     }
   }
 
+  private static void testLambdaReturnTypeInference() {
+    // TODO(b/324550390): Remove the condition when the bug is fixed.
+    if (!isJ2Kt()) {
+      acceptSupplier(() -> null);
+    }
+  }
+
   private static <T extends @Nullable Object> void accept1(T unused) {}
 
   private static <T extends @Nullable Object> void accept2(T unused1, T unused2) {}
 
   private static <T extends @Nullable Object> void acceptVarargs(T... unused) {}
+
+  private static <V extends @Nullable Object> void acceptSupplier(Supplier<V> unused) {}
 
   private interface Supplier<V extends @Nullable Object> {
     V getValue();
