@@ -30,6 +30,11 @@ package org.jbox2d.collision.broadphase
 class Pair : Comparable<Pair> {
   internal var proxyIdA = 0
   internal var proxyIdB = 0
+
+  internal operator fun component1() = proxyIdA
+
+  internal operator fun component2() = proxyIdB
+
   override fun compareTo(other: Pair): Int {
     if (proxyIdA < other.proxyIdA) {
       return -1

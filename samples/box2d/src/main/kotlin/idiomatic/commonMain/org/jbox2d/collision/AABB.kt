@@ -57,12 +57,12 @@ class AABB(lowerVertex: Vec2? = null, upperVertex: Vec2? = null) {
    * @param aabb the object to copy from
    */
   fun set(aabb: AABB) {
-    val v: Vec2 = aabb.lowerBound
-    lowerBound.x = v.x
-    lowerBound.y = v.y
-    val v1: Vec2 = aabb.upperBound
-    upperBound.x = v1.x
-    upperBound.y = v1.y
+    val (lx, ly) = aabb.lowerBound
+    lowerBound.x = lx
+    lowerBound.y = ly
+    val (ux, uy) = aabb.upperBound
+    upperBound.x = ux
+    upperBound.y = uy
   }
 
   /** Verify that the bounds are sorted */

@@ -68,12 +68,12 @@ class EdgeShape : Shape(ShapeType.EDGE) {
     output: RayCastOutput,
     input: RayCastInput,
     transform: Transform,
-    childIndex: Int
+    childIndex: Int,
   ): Boolean {
     var tempx: Float
     var tempy: Float
-    val v1 = vertex1
-    val v2 = vertex2
+    val (v1x, v1y) = vertex1
+    val (v2x, v2y) = vertex2
     val xfq = transform.q
     val xfp = transform.p
 
@@ -93,17 +93,16 @@ class EdgeShape : Shape(ShapeType.EDGE) {
 
     // final Vec2 normal = pool2.set(v2).subLocal(v1);
     // normal.set(normal.y, -normal.x);
-    normal.x = v2.y - v1.y
-    normal.y = v1.x - v2.x
+    normal.x = v2y - v1y
+    normal.y = v1x - v2x
     normal.normalize()
-    val normalx = normal.x
-    val normaly = normal.y
+    val (normalx, normaly) = normal
 
     // q = p1 + t * d
     // dot(normal, q - v1) = 0
     // dot(normal, p1 - v1) + t * dot(normal, d) = 0
-    tempx = v1.x - p1x
-    tempy = v1.y - p1y
+    tempx = v1x - p1x
+    tempy = v1y - p1y
     val numerator = normalx * tempx + normaly * tempy
     val denominator = normalx * dx + normaly * dy
     if (denominator == 0.0f) {
@@ -121,14 +120,14 @@ class EdgeShape : Shape(ShapeType.EDGE) {
     // q = v1 + s * r
     // s = dot(q - v1, r) / dot(r, r)
     // Vec2 r = v2 - v1;
-    val rx = v2.x - v1.x
-    val ry = v2.y - v1.y
+    val rx = v2x - v1x
+    val ry = v2y - v1y
     val rr = rx * rx + ry * ry
     if (rr == 0.0f) {
       return false
     }
-    tempx = qx - v1.x
-    tempy = qy - v1.y
+    tempx = qx - v1x
+    tempy = qy - v1y
     // float s = Vec2.dot(pool5, r) / rr;
     val s = (tempx * rx + tempy * ry) / rr
     if (s < 0.0f || 1.0f < s) {

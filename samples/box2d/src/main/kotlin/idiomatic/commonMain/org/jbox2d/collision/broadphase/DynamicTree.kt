@@ -152,10 +152,8 @@ class DynamicTree : BroadPhaseStrategy {
   override fun raycast(callback: TreeRayCastCallback, input: RayCastInput) {
     val p1 = input.p1
     val p2 = input.p2
-    val p1x = p1.x
-    val p2x = p2.x
-    val p1y = p1.y
-    val p2y = p2.y
+    val (p1x, p1y) = p1
+    val (p2x, p2y) = p2
     val vx: Float
     val vy: Float
     var cx: Float

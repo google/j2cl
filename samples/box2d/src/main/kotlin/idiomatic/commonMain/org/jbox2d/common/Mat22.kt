@@ -131,10 +131,8 @@ class Mat22 : Serializable {
 
   /** Returns the inverted Mat22 - does NOT invert the matrix locally! */
   fun invert(): Mat22 {
-    val a = ex.x
-    val b = ey.x
-    val c = ex.y
-    val d = ey.y
+    val (a, c) = ex
+    val (b, d) = ey
     val B = Mat22()
     var det = a * d - b * c
     if (det != 0f) {
@@ -148,10 +146,8 @@ class Mat22 : Serializable {
   }
 
   fun invertLocal(): Mat22 {
-    val a = ex.x
-    val b = ey.x
-    val c = ex.y
-    val d = ey.y
+    val (a, c) = ex
+    val (b, d) = ey
     var det = a * d - b * c
     if (det != 0f) {
       det = 1.0f / det
@@ -164,10 +160,8 @@ class Mat22 : Serializable {
   }
 
   fun invertToOut(out: Mat22) {
-    val a = ex.x
-    val b = ey.x
-    val c = ex.y
-    val d = ey.y
+    val (a, c) = ex
+    val (b, d) = ey
     var det = a * d - b * c
     // b2Assert(det != 0.0f);
     det = 1.0f / det
@@ -211,12 +205,7 @@ class Mat22 : Serializable {
     out.y = ex.y * v.x + ey.y * v.y
   }
 
-  /**
-   * Multiply another matrix by this one (this one on left). djm optimized
-   *
-   * @param R
-   * @return
-   */
+  /** Multiply another matrix by this one (this one on left). djm optimized */
   fun mul(R: Mat22): Mat22 {
     /*
      * Mat22 C = new Mat22();C.set(this.mul(R.ex), this.mul(R.ey));return C;

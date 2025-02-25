@@ -66,10 +66,8 @@ class Mat33 : Serializable {
    * in one-shot cases.
    */
   fun solve22ToOut(b: Vec2, out: Vec2) {
-    val a11 = ex.x
-    val a12 = ey.x
-    val a21 = ex.y
-    val a22 = ey.y
+    val (a11, a21) = ex
+    val (a12, a22) = ey
     var det = a11 * a22 - a12 * a21
     if (det != 0.0f) {
       det = 1.0f / det
@@ -112,10 +110,8 @@ class Mat33 : Serializable {
   }
 
   fun getInverse22(M: Mat33) {
-    val a = ex.x
-    val b = ey.x
-    val c = ex.y
-    val d = ey.y
+    val (a, c) = ex
+    val (b, d) = ey
     var det = a * d - b * c
     if (det != 0.0f) {
       det = 1.0f / det
@@ -140,12 +136,9 @@ class Mat33 : Serializable {
     if (det != 0.0f) {
       det = 1.0f / det
     }
-    val a11 = ex.x
-    val a12 = ey.x
-    val a13 = ez.x
-    val a22 = ey.y
-    val a23 = ez.y
-    val a33 = ez.z
+    val (a11) = ex
+    val (a12, a22) = ey
+    val (a13, a23, a33) = ez
     M.ex.x = det * (a22 * a33 - a23 * a23)
     M.ex.y = det * (a13 * a23 - a12 * a33)
     M.ex.z = det * (a12 * a23 - a13 * a22)

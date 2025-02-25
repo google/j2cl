@@ -130,9 +130,9 @@ class BroadPhase(private val tree: BroadPhaseStrategy) : TreeCallback {
     // Send the pairs back to the client.
     var i = 0
     while (i < pairCount) {
-      val primaryPair = pairBuffer[i]
-      val userDataA = tree.getUserData(primaryPair.proxyIdA)
-      val userDataB = tree.getUserData(primaryPair.proxyIdB)
+      val (primaryPairA, primaryPairB) = pairBuffer[i]
+      val userDataA = tree.getUserData(primaryPairA)
+      val userDataB = tree.getUserData(primaryPairB)
 
       // log.debug("returning pair: "+userDataA+", "+userDataB);
       callback.addPair(userDataA, userDataB)
@@ -141,7 +141,7 @@ class BroadPhase(private val tree: BroadPhaseStrategy) : TreeCallback {
       // Skip any duplicate pairs.
       while (i < pairCount) {
         val pair = pairBuffer[i]
-        if (pair.proxyIdA != primaryPair.proxyIdA || pair.proxyIdB != primaryPair.proxyIdB) {
+        if (pair.proxyIdA != primaryPairA || pair.proxyIdB != primaryPairB) {
           break
         }
         // log.debug("skipping duplicate");
