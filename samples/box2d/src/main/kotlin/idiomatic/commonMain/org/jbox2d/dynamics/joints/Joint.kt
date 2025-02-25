@@ -62,62 +62,38 @@ abstract class Joint protected constructor(protected var pool: IWorldPool, def: 
 
   var bodyB: Body = def.bodyB
     protected set
+
   var islandFlag: Boolean = false
 
   // / Get collide connected.
   // / Note: modifying the collide connect flag won't work correctly because
   // / the flag is only checked when fixture AABBs begin to overlap.
   val collideConnected: Boolean = def.collideConnected
+
   /** get the user data pointer. */
   /** Set the user data pointer. */
   var userData: Any = def.userData
 
-  /**
-   * get the anchor point on bodyA in world coordinates.
-   *
-   * @return
-   */
+  /** get the anchor point on bodyA in world coordinates. */
   abstract fun getAnchorA(out: Vec2)
 
-  /**
-   * get the anchor point on bodyB in world coordinates.
-   *
-   * @return
-   */
+  /** get the anchor point on bodyB in world coordinates. */
   abstract fun getAnchorB(out: Vec2)
 
-  /**
-   * get the reaction force on body2 at the joint anchor in Newtons.
-   *
-   * @param inv_dt
-   * @return
-   */
+  /** get the reaction force on body2 at the joint anchor in Newtons. */
   abstract fun getReactionForce(inv_dt: Float, out: Vec2)
 
-  /**
-   * get the reaction torque on body2 in N*m.
-   *
-   * @param inv_dt
-   * @return
-   */
+  /** get the reaction torque on body2 in N*m. */
   abstract fun getReactionTorque(inv_dt: Float): Float
 
-  /**
-   * Short-cut function to determine if either body is inactive.
-   *
-   * @return
-   */
+  /** Short-cut function to determine if either body is inactive. */
   fun isActive(): Boolean = bodyA.isActive && bodyB.isActive
 
   abstract fun initVelocityConstraints(data: SolverData)
+
   abstract fun solveVelocityConstraints(data: SolverData)
 
-  /**
-   * This returns true if the position errors are within tolerance.
-   *
-   * @param baumgarte
-   * @return
-   */
+  /** This returns true if the position errors are within tolerance. */
   abstract fun solvePositionConstraints(data: SolverData): Boolean
 
   /** Override to handle destruction of joint */
