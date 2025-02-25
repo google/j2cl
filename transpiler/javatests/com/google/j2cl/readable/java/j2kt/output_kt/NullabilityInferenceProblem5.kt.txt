@@ -44,11 +44,9 @@ open class NullabilityInferenceProblem5 {
 
   @JvmStatic
   internal fun testVoid_pp_j2kt(foo: NullabilityInferenceProblem5.Foo<*>): NullabilityInferenceProblem5.Future<Void?> {
-   return NullabilityInferenceProblem5.transform_pp_j2kt/* <NullabilityInferenceProblem5.Foo<capture#1-of out Any>, Void?> */(
-    NullabilityInferenceProblem5.nullableFuture_pp_j2kt/* <NullabilityInferenceProblem5.Foo<capture#1-of out Any>> */(
-     foo as NullabilityInferenceProblem5.Foo<out Any>,
-    ),
-    NullabilityInferenceProblem5.Function/* <in NullabilityInferenceProblem5.Foo<capture#1-of out Any>, out Void?> */ { it /* NullabilityInferenceProblem5.Foo<capture#1-of out Any> */ ->
+   return NullabilityInferenceProblem5.transform_pp_j2kt/* <NullabilityInferenceProblem5.Foo<*>, Void?> */(
+    NullabilityInferenceProblem5.nullableFuture_pp_j2kt/* <NullabilityInferenceProblem5.Foo<*>> */(foo),
+    NullabilityInferenceProblem5.Function/* <in NullabilityInferenceProblem5.Foo<*>, out Void?> */ { it /* NullabilityInferenceProblem5.Foo<*> */ ->
      return@Function null as Void?
     },
    )

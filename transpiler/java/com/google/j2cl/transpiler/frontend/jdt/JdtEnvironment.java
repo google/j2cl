@@ -422,7 +422,8 @@ public class JdtEnvironment {
 
   private TypeDescriptor getUpperBoundTypeDescriptor(
       ITypeBinding typeBinding, boolean inNullMarkedScope) {
-    if (typeBinding.isWildcardType()) {
+    if (typeBinding.isWildcardType() || typeBinding.isCapture()) {
+      // If the wildcard or capture is unbound, it is necessarily nullable.
       if (isUnbounded(typeBinding)) {
         return TypeDescriptors.get().javaLangObject;
       }
@@ -478,10 +479,13 @@ public class JdtEnvironment {
       return true;
     }
 
-    if (typeBounds.length == 1 && typeBounds[0].getQualifiedName().equals("java.lang.Object")) {
-      // This is fragile, but the observation is that in these cases .getBound() is null and
-      // there is only one type bound in .getTypeBounds() and that is j.l.Object.
-      return true;
+    // This is fragile, but the observation is that in these cases .getBound() is null and
+    // there is only one type bound in .getTypeBounds() and that is j.l.Object.
+    if (typeBounds.length == 1) {
+      ITypeBinding typeBound = typeBounds[0];
+      return typeBound.getQualifiedName().equals("java.lang.Object")
+          && getNullabilityAnnotation(typeBound, typeBound.getAnnotations())
+              == NullabilityAnnotation.NONE;
     }
 
     return false;

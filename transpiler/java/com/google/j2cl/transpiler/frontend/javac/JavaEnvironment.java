@@ -1069,6 +1069,7 @@ class JavaEnvironment {
                   && !isNullOrJavaLangObject(typeVariable.getUpperBound())) {
                 // If this is a wildcard but the bound is not specified (or is Object), we might be
                 // able to get a tighter bound from the declaration.
+                // TODO(b/398164480): Fix handling of unbound wildcards and captures.
                 return createWildcardTypeVariable(
                     (WildcardType) typeMirror,
                     typeVariable.getUpperBound(),

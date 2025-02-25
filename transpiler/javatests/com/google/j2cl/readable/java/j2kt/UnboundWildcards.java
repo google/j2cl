@@ -29,46 +29,57 @@ public class UnboundWildcards {
   }
 
   public static void test112(Foo<? extends @Nullable Object> extendsNullableObject) {
+    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
     // acceptTExtendsObject(extendsNullableObject);
   }
 
   public static void test113(Foo<? extends @Nullable Object> extendsNullableObject) {
+    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
     // acceptTExtendsNonNullObject(extendsNullableObject);
   }
 
   public static void test114(Foo<? extends @Nullable Object> extendsNullableObject) {
+    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
     // acceptT(extendsNullableObject);
   }
 
   public static void test121(Foo<? extends @Nullable Object> extendsNullableObject) {
+    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
     // acceptNullableTExtendsNullableObject(extendsNullableObject);
   }
 
   public static void test122(Foo<? extends @Nullable Object> extendsNullableObject) {
+    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
     // acceptNullableTExtendsObject(extendsNullableObject);
   }
 
   public static void test123(Foo<? extends @Nullable Object> extendsNullableObject) {
+    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
     // acceptNullableTExtendsNonNullObject(extendsNullableObject);
   }
 
   public static void test124(Foo<? extends @Nullable Object> extendsNullableObject) {
+    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
     // acceptNullableT(extendsNullableObject);
   }
 
   public static void test131(Foo<? extends @Nullable Object> extendsNullableObject) {
+    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
     // acceptNonNullTExtendsNullableObject(extendsNullableObject);
   }
 
   public static void test132(Foo<? extends @Nullable Object> extendsNullableObject) {
+    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
     // acceptNonNullTExtendsObject(extendsNullableObject);
   }
 
   public static void test133(Foo<? extends @Nullable Object> extendsNullableObject) {
+    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
     // acceptNonNullTExtendsNonNullObject(extendsNullableObject);
   }
 
   public static void test134(Foo<? extends @Nullable Object> extendsNullableObject) {
+    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
     // acceptNonNullT(extendsNullableObject);
   }
 
@@ -89,18 +100,22 @@ public class UnboundWildcards {
   }
 
   public static void test221(Foo<? extends Object> extendsObject) {
+    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
     // acceptNullableTExtendsNullableObject(extendsObject);
   }
 
   public static void test222(Foo<? extends Object> extendsObject) {
+    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
     // acceptNullableTExtendsObject(extendsObject);
   }
 
   public static void test223(Foo<? extends Object> extendsObject) {
+    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
     // acceptNullableTExtendsNonNullObject(extendsObject);
   }
 
   public static void test224(Foo<? extends Object> extendsObject) {
+    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
     // acceptNullableT(extendsObject);
   }
 
@@ -137,18 +152,22 @@ public class UnboundWildcards {
   }
 
   public static void test321(Foo<? extends @NonNull Object> extendsNonNullObject) {
+    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
     // acceptNullableTExtendsNullableObject(extendsNonNullObject);
   }
 
   public static void test322(Foo<? extends @NonNull Object> extendsNonNullObject) {
+    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
     // acceptNullableTExtendsObject(extendsNonNullObject);
   }
 
   public static void test323(Foo<? extends @NonNull Object> extendsNonNullObject) {
+    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
     // acceptNullableTExtendsNonNullObject(extendsNonNullObject);
   }
 
   public static void test324(Foo<? extends @NonNull Object> extendsNonNullObject) {
+    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
     // acceptNullableT(extendsNonNullObject);
   }
 
@@ -173,47 +192,58 @@ public class UnboundWildcards {
   }
 
   public static void test412(Foo<?> unbound) {
-    acceptTExtendsObject(unbound);
+    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
+    // acceptTExtendsObject(unbound);
   }
 
   public static void test413(Foo<?> unbound) {
-    acceptTExtendsNonNullObject(unbound);
+    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
+    // acceptTExtendsNonNullObject(unbound);
   }
 
   public static void test414(Foo<?> unbound) {
-    acceptT(unbound);
+    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
+    // acceptT(unbound);
   }
 
   public static void test421(Foo<?> unbound) {
+    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
     // acceptNullableTExtendsNullableObject(unbound);
   }
 
   public static void test422(Foo<?> unbound) {
+    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
     // acceptNullableTExtendsObject(unbound);
   }
 
   public static void test423(Foo<?> unbound) {
+    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
     // acceptNullableTExtendsNonNullObject(unbound);
   }
 
   public static void test424(Foo<?> unbound) {
+    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
     // acceptNullableT(unbound);
   }
 
   public static void test431(Foo<?> unbound) {
-    acceptNonNullTExtendsNullableObject(unbound);
+    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
+    // acceptNonNullTExtendsNullableObject(unbound);
   }
 
   public static void test432(Foo<?> unbound) {
-    acceptNonNullTExtendsObject(unbound);
+    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
+    // acceptNonNullTExtendsObject(unbound);
   }
 
   public static void test433(Foo<?> unbound) {
-    acceptNonNullTExtendsNonNullObject(unbound);
+    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
+    // acceptNonNullTExtendsNonNullObject(unbound);
   }
 
   public static void test434(Foo<?> unbound) {
-    acceptNonNullT(unbound);
+    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
+    // acceptNonNullT(unbound);
   }
 
   public static <T extends @Nullable Object> void acceptTExtendsNullableObject(Foo<T> foo) {}

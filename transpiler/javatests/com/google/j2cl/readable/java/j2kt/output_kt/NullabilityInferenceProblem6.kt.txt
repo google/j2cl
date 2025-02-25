@@ -33,7 +33,7 @@ open class NullabilityInferenceProblem6 {
   @JvmStatic
   internal fun testLambda_pp_j2kt(from: NullabilityInferenceProblem6.Container<*>, to: NullabilityInferenceProblem6.Container<in Any?>) {
    (from as NullabilityInferenceProblem6.Container<Any?>).forEach(
-    NullabilityInferenceProblem6.Consumer/* <capture#1-of out Any> */ { it /* capture#1-of out Any */ ->
+    NullabilityInferenceProblem6.Consumer/* <*> */ { it /* capture#1-of * */ ->
      to.add(it)
     },
    )
@@ -42,7 +42,7 @@ open class NullabilityInferenceProblem6 {
   @JvmStatic
   internal fun testMethodReference_pp_j2kt(from: NullabilityInferenceProblem6.Container<*>, to: NullabilityInferenceProblem6.Container<in Any?>) {
    (from as NullabilityInferenceProblem6.Container<Any?>).forEach(
-    NullabilityInferenceProblem6.Consumer/* <capture#2-of out Any> */ { arg0 /* capture#2-of out Any */ ->
+    NullabilityInferenceProblem6.Consumer/* <*> */ { arg0 /* capture#2-of * */ ->
      to.add(arg0)
     },
    )
