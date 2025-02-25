@@ -25,15 +25,15 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktMarkimplementornativetypesMyNativeInterface", exact = true)
+@ObjCName(name = "J2ktMarkimplementornativetypesMyNativeInterface", swiftName = "MarkimplementornativetypesMyNativeInterface", exact = true)
 @JsType(namespace = "test.foo", isNative = true)
 interface MyNativeInterface
 
-@ObjCName("J2ktMarkimplementornativetypesRegularInterface", exact = true)
+@ObjCName(name = "J2ktMarkimplementornativetypesRegularInterface", swiftName = "MarkimplementornativetypesRegularInterface", exact = true)
 interface RegularInterface
 
-@ObjCName("J2ktMarkimplementornativetypesSubNativeInterface", exact = true)
+@ObjCName(name = "J2ktMarkimplementornativetypesSubNativeInterface", swiftName = "MarkimplementornativetypesSubNativeInterface", exact = true)
 interface SubNativeInterface: MyNativeInterface, RegularInterface
 
-@ObjCName("J2ktMarkimplementornativetypesFoo", exact = true)
+@ObjCName(name = "J2ktMarkimplementornativetypesFoo", swiftName = "MarkimplementornativetypesFoo", exact = true)
 open class Foo: MyNativeInterface, RegularInterface

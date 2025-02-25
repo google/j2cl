@@ -25,19 +25,19 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktNullabilityInferenceProblem2", exact = true)
+@ObjCName(name = "J2ktJ2ktNullabilityInferenceProblem2", swiftName = "J2ktNullabilityInferenceProblem2", exact = true)
 open class NullabilityInferenceProblem2 {
- @ObjCName("J2ktJ2ktNullabilityInferenceProblem2_Supplier", exact = true)
+ @ObjCName(name = "J2ktJ2ktNullabilityInferenceProblem2_Supplier", swiftName = "J2ktNullabilityInferenceProblem2_Supplier", exact = true)
  fun interface Supplier<T> {
-  @ObjCName("get")
+  @ObjCName(name = "get")
   fun get(): T
  }
 
- @ObjCName("J2ktJ2ktNullabilityInferenceProblem2_Test", exact = true)
+ @ObjCName(name = "J2ktJ2ktNullabilityInferenceProblem2_Test", swiftName = "J2ktNullabilityInferenceProblem2_Test", exact = true)
  abstract inner class Test<T> {
-  @ObjCName("foo")
+  @ObjCName(name = "foo")
   open fun <E: T> foo(
-   @ObjCName("withJ2ktNullabilityInferenceProblem2_Supplier") supplier: NullabilityInferenceProblem2.Supplier<E>
+   @ObjCName(name = "withJ2ktNullabilityInferenceProblem2_Supplier") supplier: NullabilityInferenceProblem2.Supplier<E>
   ): E {
    val local: E? = supplier.get()
    return this.foo<E>(
@@ -46,10 +46,10 @@ open class NullabilityInferenceProblem2 {
    )
   }
 
-  @ObjCName("foo")
+  @ObjCName(name = "foo")
   open fun <E: T> foo(
-   @ObjCName("withId") a: E,
-   @ObjCName("withId") b: E
+   @ObjCName(name = "withId") a: E,
+   @ObjCName(name = "withId") b: E
   ): E {
    throw RuntimeException()
   }

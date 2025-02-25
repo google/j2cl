@@ -26,9 +26,9 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktNullabilityInferenceProblem7", exact = true)
+@ObjCName(name = "J2ktJ2ktNullabilityInferenceProblem7", swiftName = "J2ktNullabilityInferenceProblem7", exact = true)
 open class NullabilityInferenceProblem7 {
- @ObjCName("J2ktJ2ktNullabilityInferenceProblem7Companion", exact = true)
+ @ObjCName(name = "J2ktJ2ktNullabilityInferenceProblem7Companion", swiftName = "J2ktNullabilityInferenceProblem7Companion", exact = true)
  companion object {
   @JvmStatic
   internal fun <T: Any> test1_pp_j2kt(ordering: NullabilityInferenceProblem7.Ordering<T>, t1: T, t2: T): T {
@@ -61,18 +61,18 @@ open class NullabilityInferenceProblem7 {
   }
  }
 
- @ObjCName("J2ktJ2ktNullabilityInferenceProblem7_Foo", exact = true)
+ @ObjCName(name = "J2ktJ2ktNullabilityInferenceProblem7_Foo", swiftName = "J2ktNullabilityInferenceProblem7_Foo", exact = true)
  interface Foo
 
- @ObjCName("J2ktJ2ktNullabilityInferenceProblem7_Ordering", exact = true)
+ @ObjCName(name = "J2ktJ2ktNullabilityInferenceProblem7_Ordering", swiftName = "J2ktNullabilityInferenceProblem7_Ordering", exact = true)
  interface Ordering<V> {
-  @ObjCName("max")
+  @ObjCName(name = "max")
   fun <T: V> max(
-   @ObjCName("withId") v1: T,
-   @ObjCName("withId") v2: T
+   @ObjCName(name = "withId") v1: T,
+   @ObjCName(name = "withId") v2: T
   ): T
  }
 
- @ObjCName("J2ktJ2ktNullabilityInferenceProblem7_FooOrdering", exact = true)
+ @ObjCName(name = "J2ktJ2ktNullabilityInferenceProblem7_FooOrdering", swiftName = "J2ktNullabilityInferenceProblem7_FooOrdering", exact = true)
  interface FooOrdering: NullabilityInferenceProblem7.Ordering<NullabilityInferenceProblem7.Foo>
 }

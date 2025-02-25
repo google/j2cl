@@ -26,78 +26,78 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktnotpassingUnboundWildcards", exact = true)
+@ObjCName(name = "J2ktJ2ktnotpassingUnboundWildcards", swiftName = "J2ktnotpassingUnboundWildcards", exact = true)
 open class UnboundWildcards {
- @ObjCName("J2ktJ2ktnotpassingUnboundWildcardsCompanion", exact = true)
+ @ObjCName(name = "J2ktJ2ktnotpassingUnboundWildcardsCompanion", swiftName = "J2ktnotpassingUnboundWildcardsCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("test111")
+  @ObjCName(name = "test111")
   fun test111(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsNullableObject: UnboundWildcards.Foo<*>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsNullableObject: UnboundWildcards.Foo<*>
   ) {
    UnboundWildcards.acceptTExtendsNullableObject/* <*> */(extendsNullableObject)
   }
 
   @JvmStatic
-  @ObjCName("test112")
+  @ObjCName(name = "test112")
   fun test112(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsNullableObject: UnboundWildcards.Foo<*>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsNullableObject: UnboundWildcards.Foo<*>
   ) {
    UnboundWildcards.acceptTExtendsObject/* <*> */(extendsNullableObject)
   }
 
   @JvmStatic
-  @ObjCName("test113")
+  @ObjCName(name = "test113")
   fun test113(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsNullableObject: UnboundWildcards.Foo<*>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsNullableObject: UnboundWildcards.Foo<*>
   ) {
    UnboundWildcards.acceptTExtendsNonNullObject/* <*> */(extendsNullableObject)
   }
 
   @JvmStatic
-  @ObjCName("test114")
+  @ObjCName(name = "test114")
   fun test114(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsNullableObject: UnboundWildcards.Foo<*>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsNullableObject: UnboundWildcards.Foo<*>
   ) {
    UnboundWildcards.acceptT/* <*> */(extendsNullableObject)
   }
 
   @JvmStatic
-  @ObjCName("test121")
+  @ObjCName(name = "test121")
   fun test121(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsNullableObject: UnboundWildcards.Foo<*>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsNullableObject: UnboundWildcards.Foo<*>
   ) {
    UnboundWildcards.acceptNullableTExtendsNullableObject/* <*> */(extendsNullableObject)
   }
 
   @JvmStatic
-  @ObjCName("test122")
+  @ObjCName(name = "test122")
   fun test122(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsNullableObject: UnboundWildcards.Foo<*>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsNullableObject: UnboundWildcards.Foo<*>
   ) {
    UnboundWildcards.acceptNullableTExtendsObject/* <*> */(extendsNullableObject)
   }
 
   @JvmStatic
-  @ObjCName("test123")
+  @ObjCName(name = "test123")
   fun test123(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsNullableObject: UnboundWildcards.Foo<*>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsNullableObject: UnboundWildcards.Foo<*>
   ) {
    UnboundWildcards.acceptNullableTExtendsNonNullObject/* <*> */(extendsNullableObject)
   }
 
   @JvmStatic
-  @ObjCName("test124")
+  @ObjCName(name = "test124")
   fun test124(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsNullableObject: UnboundWildcards.Foo<*>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsNullableObject: UnboundWildcards.Foo<*>
   ) {
    UnboundWildcards.acceptNullableT/* <*> */(extendsNullableObject)
   }
 
   @JvmStatic
-  @ObjCName("test131")
+  @ObjCName(name = "test131")
   fun test131(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsNullableObject: UnboundWildcards.Foo<*>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsNullableObject: UnboundWildcards.Foo<*>
   ) {
    UnboundWildcards.acceptNonNullTExtendsNullableObject/* <*> */(
     extendsNullableObject as UnboundWildcards.Foo<*>,
@@ -105,9 +105,9 @@ open class UnboundWildcards {
   }
 
   @JvmStatic
-  @ObjCName("test132")
+  @ObjCName(name = "test132")
   fun test132(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsNullableObject: UnboundWildcards.Foo<*>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsNullableObject: UnboundWildcards.Foo<*>
   ) {
    UnboundWildcards.acceptNonNullTExtendsObject/* <*> */(
     extendsNullableObject as UnboundWildcards.Foo<*>,
@@ -115,9 +115,9 @@ open class UnboundWildcards {
   }
 
   @JvmStatic
-  @ObjCName("test133")
+  @ObjCName(name = "test133")
   fun test133(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsNullableObject: UnboundWildcards.Foo<*>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsNullableObject: UnboundWildcards.Foo<*>
   ) {
    UnboundWildcards.acceptNonNullTExtendsNonNullObject/* <*> */(
     extendsNullableObject as UnboundWildcards.Foo<*>,
@@ -125,9 +125,9 @@ open class UnboundWildcards {
   }
 
   @JvmStatic
-  @ObjCName("test134")
+  @ObjCName(name = "test134")
   fun test134(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsNullableObject: UnboundWildcards.Foo<*>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsNullableObject: UnboundWildcards.Foo<*>
   ) {
    UnboundWildcards.acceptNonNullT/* <*> */(
     extendsNullableObject as UnboundWildcards.Foo<*>,
@@ -135,265 +135,265 @@ open class UnboundWildcards {
   }
 
   @JvmStatic
-  @ObjCName("test211")
+  @ObjCName(name = "test211")
   fun test211(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsObject: UnboundWildcards.Foo<out Any>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsObject: UnboundWildcards.Foo<out Any>
   ) {
    UnboundWildcards.acceptTExtendsNullableObject/* <*> */(extendsObject)
   }
 
   @JvmStatic
-  @ObjCName("test212")
+  @ObjCName(name = "test212")
   fun test212(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsObject: UnboundWildcards.Foo<out Any>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsObject: UnboundWildcards.Foo<out Any>
   ) {
    UnboundWildcards.acceptTExtendsObject/* <*> */(extendsObject)
   }
 
   @JvmStatic
-  @ObjCName("test213")
+  @ObjCName(name = "test213")
   fun test213(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsObject: UnboundWildcards.Foo<out Any>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsObject: UnboundWildcards.Foo<out Any>
   ) {
    UnboundWildcards.acceptTExtendsNonNullObject/* <*> */(extendsObject)
   }
 
   @JvmStatic
-  @ObjCName("test214")
+  @ObjCName(name = "test214")
   fun test214(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsObject: UnboundWildcards.Foo<out Any>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsObject: UnboundWildcards.Foo<out Any>
   ) {
    UnboundWildcards.acceptT/* <*> */(extendsObject)
   }
 
   @JvmStatic
-  @ObjCName("test221")
+  @ObjCName(name = "test221")
   fun test221(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsObject: UnboundWildcards.Foo<out Any>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsObject: UnboundWildcards.Foo<out Any>
   ) {
    UnboundWildcards.acceptNullableTExtendsNullableObject/* <*> */(extendsObject)
   }
 
   @JvmStatic
-  @ObjCName("test222")
+  @ObjCName(name = "test222")
   fun test222(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsObject: UnboundWildcards.Foo<out Any>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsObject: UnboundWildcards.Foo<out Any>
   ) {
    UnboundWildcards.acceptNullableTExtendsObject/* <*> */(extendsObject)
   }
 
   @JvmStatic
-  @ObjCName("test223")
+  @ObjCName(name = "test223")
   fun test223(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsObject: UnboundWildcards.Foo<out Any>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsObject: UnboundWildcards.Foo<out Any>
   ) {
    UnboundWildcards.acceptNullableTExtendsNonNullObject/* <*> */(extendsObject)
   }
 
   @JvmStatic
-  @ObjCName("test224")
+  @ObjCName(name = "test224")
   fun test224(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsObject: UnboundWildcards.Foo<out Any>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsObject: UnboundWildcards.Foo<out Any>
   ) {
    UnboundWildcards.acceptNullableT/* <*> */(extendsObject)
   }
 
   @JvmStatic
-  @ObjCName("test231")
+  @ObjCName(name = "test231")
   fun test231(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsObject: UnboundWildcards.Foo<out Any>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsObject: UnboundWildcards.Foo<out Any>
   ) {
    UnboundWildcards.acceptNonNullTExtendsNullableObject/* <*> */(extendsObject)
   }
 
   @JvmStatic
-  @ObjCName("test232")
+  @ObjCName(name = "test232")
   fun test232(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsObject: UnboundWildcards.Foo<out Any>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsObject: UnboundWildcards.Foo<out Any>
   ) {
    UnboundWildcards.acceptNonNullTExtendsObject/* <*> */(extendsObject)
   }
 
   @JvmStatic
-  @ObjCName("test233")
+  @ObjCName(name = "test233")
   fun test233(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsObject: UnboundWildcards.Foo<out Any>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsObject: UnboundWildcards.Foo<out Any>
   ) {
    UnboundWildcards.acceptNonNullTExtendsNonNullObject/* <*> */(extendsObject)
   }
 
   @JvmStatic
-  @ObjCName("test234")
+  @ObjCName(name = "test234")
   fun test234(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsObject: UnboundWildcards.Foo<out Any>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsObject: UnboundWildcards.Foo<out Any>
   ) {
    UnboundWildcards.acceptNonNullT/* <*> */(extendsObject)
   }
 
   @JvmStatic
-  @ObjCName("test311")
+  @ObjCName(name = "test311")
   fun test311(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsNonNullObject: UnboundWildcards.Foo<out Any>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsNonNullObject: UnboundWildcards.Foo<out Any>
   ) {
    UnboundWildcards.acceptTExtendsNullableObject/* <capture#1-of out Any> */(extendsNonNullObject)
   }
 
   @JvmStatic
-  @ObjCName("test312")
+  @ObjCName(name = "test312")
   fun test312(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsNonNullObject: UnboundWildcards.Foo<out Any>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsNonNullObject: UnboundWildcards.Foo<out Any>
   ) {
    UnboundWildcards.acceptTExtendsObject/* <*> */(extendsNonNullObject)
   }
 
   @JvmStatic
-  @ObjCName("test313")
+  @ObjCName(name = "test313")
   fun test313(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsNonNullObject: UnboundWildcards.Foo<out Any>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsNonNullObject: UnboundWildcards.Foo<out Any>
   ) {
    UnboundWildcards.acceptTExtendsNonNullObject/* <*> */(extendsNonNullObject)
   }
 
   @JvmStatic
-  @ObjCName("test314")
+  @ObjCName(name = "test314")
   fun test314(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsNonNullObject: UnboundWildcards.Foo<out Any>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsNonNullObject: UnboundWildcards.Foo<out Any>
   ) {
    UnboundWildcards.acceptT/* <*> */(extendsNonNullObject)
   }
 
   @JvmStatic
-  @ObjCName("test321")
+  @ObjCName(name = "test321")
   fun test321(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsNonNullObject: UnboundWildcards.Foo<out Any>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsNonNullObject: UnboundWildcards.Foo<out Any>
   ) {
    UnboundWildcards.acceptNullableTExtendsNullableObject/* <capture#2-of out Any> */(extendsNonNullObject)
   }
 
   @JvmStatic
-  @ObjCName("test322")
+  @ObjCName(name = "test322")
   fun test322(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsNonNullObject: UnboundWildcards.Foo<out Any>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsNonNullObject: UnboundWildcards.Foo<out Any>
   ) {
    UnboundWildcards.acceptNullableTExtendsObject/* <*> */(extendsNonNullObject)
   }
 
   @JvmStatic
-  @ObjCName("test323")
+  @ObjCName(name = "test323")
   fun test323(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsNonNullObject: UnboundWildcards.Foo<out Any>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsNonNullObject: UnboundWildcards.Foo<out Any>
   ) {
    UnboundWildcards.acceptNullableTExtendsNonNullObject/* <*> */(extendsNonNullObject)
   }
 
   @JvmStatic
-  @ObjCName("test324")
+  @ObjCName(name = "test324")
   fun test324(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsNonNullObject: UnboundWildcards.Foo<out Any>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsNonNullObject: UnboundWildcards.Foo<out Any>
   ) {
    UnboundWildcards.acceptNullableT/* <*> */(extendsNonNullObject)
   }
 
   @JvmStatic
-  @ObjCName("test331")
+  @ObjCName(name = "test331")
   fun test331(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsNonNullObject: UnboundWildcards.Foo<out Any>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsNonNullObject: UnboundWildcards.Foo<out Any>
   ) {
    UnboundWildcards.acceptNonNullTExtendsNullableObject/* <capture#3-of out Any> */(extendsNonNullObject)
   }
 
   @JvmStatic
-  @ObjCName("test332")
+  @ObjCName(name = "test332")
   fun test332(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsNonNullObject: UnboundWildcards.Foo<out Any>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsNonNullObject: UnboundWildcards.Foo<out Any>
   ) {
    UnboundWildcards.acceptNonNullTExtendsObject/* <*> */(extendsNonNullObject)
   }
 
   @JvmStatic
-  @ObjCName("test333")
+  @ObjCName(name = "test333")
   fun test333(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsNonNullObject: UnboundWildcards.Foo<out Any>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsNonNullObject: UnboundWildcards.Foo<out Any>
   ) {
    UnboundWildcards.acceptNonNullTExtendsNonNullObject/* <*> */(extendsNonNullObject)
   }
 
   @JvmStatic
-  @ObjCName("test334")
+  @ObjCName(name = "test334")
   fun test334(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") extendsNonNullObject: UnboundWildcards.Foo<out Any>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") extendsNonNullObject: UnboundWildcards.Foo<out Any>
   ) {
    UnboundWildcards.acceptNonNullT/* <*> */(extendsNonNullObject)
   }
 
   @JvmStatic
-  @ObjCName("test411")
+  @ObjCName(name = "test411")
   fun test411(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") unbound: UnboundWildcards.Foo<*>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") unbound: UnboundWildcards.Foo<*>
   ) {
    UnboundWildcards.acceptTExtendsNullableObject/* <*> */(unbound)
   }
 
   @JvmStatic
-  @ObjCName("test412")
+  @ObjCName(name = "test412")
   fun test412(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") unbound: UnboundWildcards.Foo<*>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") unbound: UnboundWildcards.Foo<*>
   ) {
    UnboundWildcards.acceptTExtendsObject/* <*> */(unbound)
   }
 
   @JvmStatic
-  @ObjCName("test413")
+  @ObjCName(name = "test413")
   fun test413(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") unbound: UnboundWildcards.Foo<*>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") unbound: UnboundWildcards.Foo<*>
   ) {
    UnboundWildcards.acceptTExtendsNonNullObject/* <*> */(unbound)
   }
 
   @JvmStatic
-  @ObjCName("test414")
+  @ObjCName(name = "test414")
   fun test414(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") unbound: UnboundWildcards.Foo<*>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") unbound: UnboundWildcards.Foo<*>
   ) {
    UnboundWildcards.acceptT/* <*> */(unbound)
   }
 
   @JvmStatic
-  @ObjCName("test421")
+  @ObjCName(name = "test421")
   fun test421(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") unbound: UnboundWildcards.Foo<*>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") unbound: UnboundWildcards.Foo<*>
   ) {
    UnboundWildcards.acceptNullableTExtendsNullableObject/* <*> */(unbound)
   }
 
   @JvmStatic
-  @ObjCName("test422")
+  @ObjCName(name = "test422")
   fun test422(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") unbound: UnboundWildcards.Foo<*>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") unbound: UnboundWildcards.Foo<*>
   ) {
    UnboundWildcards.acceptNullableTExtendsObject/* <*> */(unbound)
   }
 
   @JvmStatic
-  @ObjCName("test423")
+  @ObjCName(name = "test423")
   fun test423(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") unbound: UnboundWildcards.Foo<*>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") unbound: UnboundWildcards.Foo<*>
   ) {
    UnboundWildcards.acceptNullableTExtendsNonNullObject/* <*> */(unbound)
   }
 
   @JvmStatic
-  @ObjCName("test424")
+  @ObjCName(name = "test424")
   fun test424(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") unbound: UnboundWildcards.Foo<*>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") unbound: UnboundWildcards.Foo<*>
   ) {
    UnboundWildcards.acceptNullableT/* <*> */(unbound)
   }
 
   @JvmStatic
-  @ObjCName("test431")
+  @ObjCName(name = "test431")
   fun test431(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") unbound: UnboundWildcards.Foo<*>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") unbound: UnboundWildcards.Foo<*>
   ) {
    UnboundWildcards.acceptNonNullTExtendsNullableObject/* <*> */(
     unbound as UnboundWildcards.Foo<*>,
@@ -401,9 +401,9 @@ open class UnboundWildcards {
   }
 
   @JvmStatic
-  @ObjCName("test432")
+  @ObjCName(name = "test432")
   fun test432(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") unbound: UnboundWildcards.Foo<*>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") unbound: UnboundWildcards.Foo<*>
   ) {
    UnboundWildcards.acceptNonNullTExtendsObject/* <*> */(
     unbound as UnboundWildcards.Foo<*>,
@@ -411,9 +411,9 @@ open class UnboundWildcards {
   }
 
   @JvmStatic
-  @ObjCName("test433")
+  @ObjCName(name = "test433")
   fun test433(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") unbound: UnboundWildcards.Foo<*>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") unbound: UnboundWildcards.Foo<*>
   ) {
    UnboundWildcards.acceptNonNullTExtendsNonNullObject/* <*> */(
     unbound as UnboundWildcards.Foo<*>,
@@ -421,9 +421,9 @@ open class UnboundWildcards {
   }
 
   @JvmStatic
-  @ObjCName("test434")
+  @ObjCName(name = "test434")
   fun test434(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") unbound: UnboundWildcards.Foo<*>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") unbound: UnboundWildcards.Foo<*>
   ) {
    UnboundWildcards.acceptNonNullT/* <*> */(
     unbound as UnboundWildcards.Foo<*>,
@@ -431,78 +431,78 @@ open class UnboundWildcards {
   }
 
   @JvmStatic
-  @ObjCName("acceptTExtendsNullableObject")
+  @ObjCName(name = "acceptTExtendsNullableObject")
   fun <T> acceptTExtendsNullableObject(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") foo: UnboundWildcards.Foo<T>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") foo: UnboundWildcards.Foo<T>
   ) {}
 
   @JvmStatic
-  @ObjCName("acceptTExtendsObject")
+  @ObjCName(name = "acceptTExtendsObject")
   fun <T: Any> acceptTExtendsObject(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") foo: UnboundWildcards.Foo<T>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") foo: UnboundWildcards.Foo<T>
   ) {}
 
   @JvmStatic
-  @ObjCName("acceptTExtendsNonNullObject")
+  @ObjCName(name = "acceptTExtendsNonNullObject")
   fun <T: Any> acceptTExtendsNonNullObject(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") foo: UnboundWildcards.Foo<T>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") foo: UnboundWildcards.Foo<T>
   ) {}
 
   @JvmStatic
-  @ObjCName("acceptT")
+  @ObjCName(name = "acceptT")
   fun <T: Any> acceptT(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") foo: UnboundWildcards.Foo<T>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") foo: UnboundWildcards.Foo<T>
   ) {}
 
   @JvmStatic
-  @ObjCName("acceptNullableTExtendsNullableObject")
+  @ObjCName(name = "acceptNullableTExtendsNullableObject")
   fun <T> acceptNullableTExtendsNullableObject(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") foo: UnboundWildcards.Foo<T?>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") foo: UnboundWildcards.Foo<T?>
   ) {}
 
   @JvmStatic
-  @ObjCName("acceptNullableTExtendsObject")
+  @ObjCName(name = "acceptNullableTExtendsObject")
   fun <T: Any> acceptNullableTExtendsObject(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") foo: UnboundWildcards.Foo<T?>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") foo: UnboundWildcards.Foo<T?>
   ) {}
 
   @JvmStatic
-  @ObjCName("acceptNullableTExtendsNonNullObject")
+  @ObjCName(name = "acceptNullableTExtendsNonNullObject")
   fun <T: Any> acceptNullableTExtendsNonNullObject(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") foo: UnboundWildcards.Foo<T?>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") foo: UnboundWildcards.Foo<T?>
   ) {}
 
   @JvmStatic
-  @ObjCName("acceptNullableT")
+  @ObjCName(name = "acceptNullableT")
   fun <T: Any> acceptNullableT(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") foo: UnboundWildcards.Foo<T?>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") foo: UnboundWildcards.Foo<T?>
   ) {}
 
   @JvmStatic
-  @ObjCName("acceptNonNullTExtendsNullableObject")
+  @ObjCName(name = "acceptNonNullTExtendsNullableObject")
   fun <T> acceptNonNullTExtendsNullableObject(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") foo: UnboundWildcards.Foo<T & Any>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") foo: UnboundWildcards.Foo<T & Any>
   ) {}
 
   @JvmStatic
-  @ObjCName("acceptNonNullTExtendsObject")
+  @ObjCName(name = "acceptNonNullTExtendsObject")
   fun <T: Any> acceptNonNullTExtendsObject(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") foo: UnboundWildcards.Foo<T>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") foo: UnboundWildcards.Foo<T>
   ) {}
 
   @JvmStatic
-  @ObjCName("acceptNonNullTExtendsNonNullObject")
+  @ObjCName(name = "acceptNonNullTExtendsNonNullObject")
   fun <T: Any> acceptNonNullTExtendsNonNullObject(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") foo: UnboundWildcards.Foo<T>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") foo: UnboundWildcards.Foo<T>
   ) {}
 
   @JvmStatic
-  @ObjCName("acceptNonNullT")
+  @ObjCName(name = "acceptNonNullT")
   fun <T: Any> acceptNonNullT(
-   @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo") foo: UnboundWildcards.Foo<T>
+   @ObjCName(name = "withJ2ktnotpassingUnboundWildcards_Foo") foo: UnboundWildcards.Foo<T>
   ) {}
  }
 
- @ObjCName("J2ktJ2ktnotpassingUnboundWildcards_Foo", exact = true)
+ @ObjCName(name = "J2ktJ2ktnotpassingUnboundWildcards_Foo", swiftName = "J2ktnotpassingUnboundWildcards_Foo", exact = true)
  interface Foo<T>
 }

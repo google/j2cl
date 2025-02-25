@@ -27,11 +27,11 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.javaObjectType
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktGenericClassLiteral", exact = true)
+@ObjCName(name = "J2ktJ2ktGenericClassLiteral", swiftName = "J2ktGenericClassLiteral", exact = true)
 open class GenericClassLiteral {
- @ObjCName("test")
+ @ObjCName(name = "test")
  open fun test(
-  @ObjCName("withJ2ktGenericClassLiteral_Generic") genericFoo: GenericClassLiteral.Generic<GenericClassLiteral.Foo>
+  @ObjCName(name = "withJ2ktGenericClassLiteral_Generic") genericFoo: GenericClassLiteral.Generic<GenericClassLiteral.Foo>
  ) {
   this.accept<GenericClassLiteral.Generic<Any>>(
    genericFoo as GenericClassLiteral.Generic<Any>,
@@ -39,15 +39,15 @@ open class GenericClassLiteral {
   )
  }
 
- @ObjCName("accept")
+ @ObjCName(name = "accept")
  open fun <T: Any> accept(
-  @ObjCName("withId") foo: T,
-  @ObjCName("withIOSClass") cls: Class<T>
+  @ObjCName(name = "withId") foo: T,
+  @ObjCName(name = "withIOSClass") cls: Class<T>
  ) {}
 
- @ObjCName("J2ktJ2ktGenericClassLiteral_Generic", exact = true)
+ @ObjCName(name = "J2ktJ2ktGenericClassLiteral_Generic", swiftName = "J2ktGenericClassLiteral_Generic", exact = true)
  interface Generic<T: Any>
 
- @ObjCName("J2ktJ2ktGenericClassLiteral_Foo", exact = true)
+ @ObjCName(name = "J2ktJ2ktGenericClassLiteral_Foo", swiftName = "J2ktGenericClassLiteral_Foo", exact = true)
  interface Foo
 }

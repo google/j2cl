@@ -27,13 +27,13 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.intArrayOf
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktJsvarargsQualifiedSuperMethodCall", exact = true)
+@ObjCName(name = "J2ktJsvarargsQualifiedSuperMethodCall", swiftName = "JsvarargsQualifiedSuperMethodCall", exact = true)
 open class QualifiedSuperMethodCall: Main {
  constructor(): super(0)
 
- @ObjCName("J2ktJsvarargsQualifiedSuperMethodCall_InnerClass", exact = true)
+ @ObjCName(name = "J2ktJsvarargsQualifiedSuperMethodCall_InnerClass", swiftName = "JsvarargsQualifiedSuperMethodCall_InnerClass", exact = true)
  open inner class InnerClass {
-  @ObjCName("test")
+  @ObjCName(name = "test")
   open fun test() {
    super<Main>@QualifiedSuperMethodCall.f3(1, 1, 2)
    super<Main>@QualifiedSuperMethodCall.f3(1)

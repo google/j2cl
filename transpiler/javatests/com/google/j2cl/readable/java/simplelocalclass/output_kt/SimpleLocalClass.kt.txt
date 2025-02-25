@@ -26,11 +26,11 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktSimplelocalclassSimpleLocalClass", exact = true)
+@ObjCName(name = "J2ktSimplelocalclassSimpleLocalClass", swiftName = "SimplelocalclassSimpleLocalClass", exact = true)
 open class SimpleLocalClass {
- @ObjCName("test")
+ @ObjCName(name = "test")
  open fun test(
-  @ObjCName("withInt") p: Int
+  @ObjCName(name = "withInt") p: Int
  ) {
   val localVar: Int = 1
   open class InnerClass internal constructor() {
@@ -43,7 +43,7 @@ open class SimpleLocalClass {
   InnerClassWithoutCaptures()
  }
 
- @ObjCName("fun")
+ @ObjCName(name = "fun")
  open fun `fun`() {
   val localVar: Int = 1
   open class InnerClass internal constructor() {
@@ -52,7 +52,7 @@ open class SimpleLocalClass {
   }
  }
 
- @ObjCName("foo")
+ @ObjCName(name = "foo")
  open fun foo() {
   open class Abc___InnerClass internal constructor()
   open class Klm___InnerClass internal constructor()

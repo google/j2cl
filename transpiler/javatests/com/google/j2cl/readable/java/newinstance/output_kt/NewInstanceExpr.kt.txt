@@ -27,14 +27,14 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktNewinstanceNewInstanceExpr", exact = true)
+@ObjCName(name = "J2ktNewinstanceNewInstanceExpr", swiftName = "NewinstanceNewInstanceExpr", exact = true)
 open class NewInstanceExpr {
- @ObjCName("J2ktNewinstanceNewInstanceExprCompanion", exact = true)
+ @ObjCName(name = "J2ktNewinstanceNewInstanceExprCompanion", swiftName = "NewinstanceNewInstanceExprCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("main")
+  @ObjCName(name = "main")
   fun main(
-   @ObjCName("withNSStringArray") args: Array<String?>?
+   @ObjCName(name = "withNSStringArray") args: Array<String?>?
   ) {
    val a: NewInstanceExpr? = NewInstanceExpr()
   }

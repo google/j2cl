@@ -32,14 +32,14 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktTransitivejsoverlayimportImmediate", exact = true)
+@ObjCName(name = "J2ktTransitivejsoverlayimportImmediate", swiftName = "TransitivejsoverlayimportImmediate", exact = true)
 @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
 open class Immediate internal constructor(): Transitive() {
  @JsOverlay
  internal fun doImmediateInstanceMethod_pp_transitivejsoverlayimport() {}
 }
 
-@ObjCName("J2ktTransitivejsoverlayimportNonNativeUpper", exact = true)
+@ObjCName(name = "J2ktTransitivejsoverlayimportNonNativeUpper", swiftName = "TransitivejsoverlayimportNonNativeUpper", exact = true)
 open class NonNativeUpper: Immediate {
  @JsConstructor
  constructor()
@@ -47,7 +47,7 @@ open class NonNativeUpper: Immediate {
  internal open fun doNonNativeUpperInstanceMethod_pp_transitivejsoverlayimport() {}
 }
 
-@ObjCName("J2ktTransitivejsoverlayimportNonNativeLower", exact = true)
+@ObjCName(name = "J2ktTransitivejsoverlayimportNonNativeLower", swiftName = "TransitivejsoverlayimportNonNativeLower", exact = true)
 open class NonNativeLower: NonNativeUpper {
  @JsConstructor
  constructor()
@@ -55,7 +55,7 @@ open class NonNativeLower: NonNativeUpper {
  internal open fun doNonNativeLowerInstanceMethod_pp_transitivejsoverlayimport() {}
 }
 
-@ObjCName("J2ktTransitivejsoverlayimportTransitive", exact = true)
+@ObjCName(name = "J2ktTransitivejsoverlayimportTransitive", swiftName = "TransitivejsoverlayimportTransitive", exact = true)
 @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
 open class Transitive internal constructor() {
  @JsProperty(name = "constructor")
@@ -65,12 +65,12 @@ open class Transitive internal constructor() {
  internal fun doTransitiveInstanceMethod_pp_transitivejsoverlayimport(arg1: String?) {}
 }
 
-@ObjCName("J2ktTransitivejsoverlayimportMain", exact = true)
+@ObjCName(name = "J2ktTransitivejsoverlayimportMain", swiftName = "TransitivejsoverlayimportMain", exact = true)
 open class Main {
- @ObjCName("J2ktTransitivejsoverlayimportMainCompanion", exact = true)
+ @ObjCName(name = "J2ktTransitivejsoverlayimportMainCompanion", swiftName = "TransitivejsoverlayimportMainCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("main")
+  @ObjCName(name = "main")
   fun main() {
    val transitive: Transitive? = Transitive()
    transitive!!.doTransitiveInstanceMethod_pp_transitivejsoverlayimport("arg1")

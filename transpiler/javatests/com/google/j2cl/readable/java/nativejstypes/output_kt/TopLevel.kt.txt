@@ -27,31 +27,31 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktNativejstypesTopLevel", exact = true)
+@ObjCName(name = "J2ktNativejstypesTopLevel", swiftName = "NativejstypesTopLevel", exact = true)
 @JsType(name = "toplevel", namespace = "", isNative = true)
 open class TopLevel {
  private constructor()
 
- @ObjCName("J2ktNativejstypesTopLevelCompanion", exact = true)
+ @ObjCName(name = "J2ktNativejstypesTopLevelCompanion", swiftName = "NativejstypesTopLevelCompanion", exact = true)
  companion object {
   @JvmField
-  @ObjCName("x_")
+  @ObjCName(name = "x_")
   var x: Int = 0
  }
 
- @ObjCName("J2ktNativejstypesTopLevel_Nested", exact = true)
+ @ObjCName(name = "J2ktNativejstypesTopLevel_Nested", swiftName = "NativejstypesTopLevel_Nested", exact = true)
  @JsType(isNative = true)
  open class Nested internal constructor() {
   @JvmField
-  @ObjCName("x_")
+  @ObjCName(name = "x_")
   var x: Int = 0
  }
 }
 
-@ObjCName("J2ktNativejstypesTopLevelNestedReference", exact = true)
+@ObjCName(name = "J2ktNativejstypesTopLevelNestedReference", swiftName = "NativejstypesTopLevelNestedReference", exact = true)
 @JsType(name = "toplevel.Nested", namespace = "", isNative = true)
 open class TopLevelNestedReference internal constructor() {
  @JvmField
- @ObjCName("x_")
+ @ObjCName(name = "x_")
  var x: Int = 0
 }

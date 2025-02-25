@@ -44,9 +44,9 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 import kotlin.run
 
-@ObjCName("J2ktArithmeticexpressionsArithmeticExpressions", exact = true)
+@ObjCName(name = "J2ktArithmeticexpressionsArithmeticExpressions", swiftName = "ArithmeticexpressionsArithmeticExpressions", exact = true)
 open class ArithmeticExpressions {
- @ObjCName("testCoercions")
+ @ObjCName(name = "testCoercions")
  open fun testCoercions() {
   var b: Byte = 1L.toByte()
   var c: Char = 1L.toInt().toChar()
@@ -64,7 +64,7 @@ open class ArithmeticExpressions {
   s = (o as Char).code.toShort()
  }
 
- @ObjCName("testPrimitives")
+ @ObjCName(name = "testPrimitives")
  open fun testPrimitives() {
   var a: Int = 10
   val b: Int = run {
@@ -124,14 +124,14 @@ open class ArithmeticExpressions {
  }
 
  @JvmField
- @ObjCName("bar_")
+ @ObjCName(name = "bar_")
  var bar: kotlin.Long = run {
   val ___value: kotlin.Long = ArithmeticExpressions.foo
   ArithmeticExpressions.foo = ArithmeticExpressions.foo + 1L
   ___value
  }
 
- @ObjCName("testCompoundArray")
+ @ObjCName(name = "testCompoundArray")
  open fun testCompoundArray() {
   val ints: IntArray? = null
   ints!![0] = ints!![0] + 1
@@ -201,7 +201,7 @@ open class ArithmeticExpressions {
   }.toInt() == 10
  }
 
- @ObjCName("testCompoundBoxedTypes")
+ @ObjCName(name = "testCompoundBoxedTypes")
  open fun testCompoundBoxedTypes() {
   var c: Int? = Integer.valueOf(1000)
   var d: Int? = Integer.valueOf(10000)
@@ -283,7 +283,7 @@ open class ArithmeticExpressions {
  @JvmField
  internal var intField_pp_arithmeticexpressions: kotlin.Long = 0L
 
- @ObjCName("testExtendedOperands")
+ @ObjCName(name = "testExtendedOperands")
  open fun testExtendedOperands() {
   var boxedInteger: Int? = Integer.valueOf(3)
   var i: Int = 0
@@ -315,9 +315,9 @@ open class ArithmeticExpressions {
   d = (20.toLong() + l).toDouble() + d
  }
 
- @ObjCName("testEffectivelyFinalVariableInAssignmentExpression")
+ @ObjCName(name = "testEffectivelyFinalVariableInAssignmentExpression")
  open fun testEffectivelyFinalVariableInAssignmentExpression(
-  @ObjCName("withBoolean") condition: Boolean
+  @ObjCName(name = "withBoolean") condition: Boolean
  ) {
   var effectivelyFinal: kotlin.Long = 0L
   if (condition && run {
@@ -328,7 +328,7 @@ open class ArithmeticExpressions {
   }
  }
 
- @ObjCName("J2ktArithmeticexpressionsArithmeticExpressionsCompanion", exact = true)
+ @ObjCName(name = "J2ktArithmeticexpressionsArithmeticExpressionsCompanion", swiftName = "ArithmeticexpressionsArithmeticExpressionsCompanion", exact = true)
  companion object {
   private const val FLOAT_CONSTANT: Float = 1.1f
 
@@ -337,11 +337,11 @@ open class ArithmeticExpressions {
   private const val DOUBLE_CONSTANT_WITH_ARITHMETIC: Double = 2.200000047683716
 
   @JvmField
-  @ObjCName("one_")
+  @ObjCName(name = "one_")
   var one: kotlin.Long = 1L
 
   @JvmField
-  @ObjCName("foo_")
+  @ObjCName(name = "foo_")
   var foo: kotlin.Long = run {
    val ___value: kotlin.Long = ArithmeticExpressions.one
    ArithmeticExpressions.one = ArithmeticExpressions.one + 1L

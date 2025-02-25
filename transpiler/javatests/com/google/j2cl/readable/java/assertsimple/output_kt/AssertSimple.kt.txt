@@ -30,14 +30,14 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 import kotlin.run
 
-@ObjCName("J2ktAssertsimpleAssertSimple", exact = true)
+@ObjCName(name = "J2ktAssertsimpleAssertSimple", swiftName = "AssertsimpleAssertSimple", exact = true)
 open class AssertSimple {
- @ObjCName("J2ktAssertsimpleAssertSimpleCompanion", exact = true)
+ @ObjCName(name = "J2ktAssertsimpleAssertSimpleCompanion", swiftName = "AssertsimpleAssertSimpleCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("main")
+  @ObjCName(name = "main")
   fun main(
-   @ObjCName("withNSStringArray") args: Array<String?>?
+   @ObjCName(name = "withNSStringArray") args: Array<String?>?
   ) {
    assert(1 + 2 == 3)
    assert(1 + 2 == 3) {

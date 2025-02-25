@@ -26,26 +26,26 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktBridgemethodsBridgeMethodShadowedSignature", exact = true)
+@ObjCName(name = "J2ktBridgemethodsBridgeMethodShadowedSignature", swiftName = "BridgemethodsBridgeMethodShadowedSignature", exact = true)
 open class BridgeMethodShadowedSignature {
- @ObjCName("J2ktBridgemethodsBridgeMethodShadowedSignature_I", exact = true)
+ @ObjCName(name = "J2ktBridgemethodsBridgeMethodShadowedSignature_I", swiftName = "BridgemethodsBridgeMethodShadowedSignature_I", exact = true)
  fun interface I<I1> {
-  @ObjCName("get")
+  @ObjCName(name = "get")
   fun get(
-   @ObjCName("withJavaUtilFunctionConsumer") consumer: Consumer<in I1>?
+   @ObjCName(name = "withJavaUtilFunctionConsumer") consumer: Consumer<in I1>?
   ): String?
  }
 
- @ObjCName("J2ktBridgemethodsBridgeMethodShadowedSignature_B", exact = true)
+ @ObjCName(name = "J2ktBridgemethodsBridgeMethodShadowedSignature_B", swiftName = "BridgemethodsBridgeMethodShadowedSignature_B", exact = true)
  abstract class B<B1, B2> internal constructor(): BridgeMethodShadowedSignature.I<B1> {
-  @ObjCName("get")
+  @ObjCName(name = "get")
   open fun get(
-   @ObjCName("withId") consumer: B2
+   @ObjCName(name = "withId") consumer: B2
   ): String? {
    return "B get B2"
   }
  }
 
- @ObjCName("J2ktBridgemethodsBridgeMethodShadowedSignature_C", exact = true)
+ @ObjCName(name = "J2ktBridgemethodsBridgeMethodShadowedSignature_C", swiftName = "BridgemethodsBridgeMethodShadowedSignature_C", exact = true)
  open class C<C1> internal constructor(): BridgeMethodShadowedSignature.B<C1, Consumer<in C1>?>(), BridgeMethodShadowedSignature.I<C1>
 }

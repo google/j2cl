@@ -30,15 +30,15 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 import kotlin.run
 
-@ObjCName("J2ktImplicitparenthesisImplicitParenthesis", exact = true)
+@ObjCName(name = "J2ktImplicitparenthesisImplicitParenthesis", swiftName = "ImplicitparenthesisImplicitParenthesis", exact = true)
 open class ImplicitParenthesis {
- @ObjCName("test")
+ @ObjCName(name = "test")
  open fun test() {
   ImplicitParenthesis.examples()
   ImplicitParenthesis.nonExamples()
  }
 
- @ObjCName("J2ktImplicitparenthesisImplicitParenthesisCompanion", exact = true)
+ @ObjCName(name = "J2ktImplicitparenthesisImplicitParenthesisCompanion", swiftName = "ImplicitparenthesisImplicitParenthesisCompanion", exact = true)
  companion object {
   @JvmStatic
   private fun examples() {

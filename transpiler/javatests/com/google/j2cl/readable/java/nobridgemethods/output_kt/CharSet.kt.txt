@@ -27,35 +27,35 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktNobridgemethodsEntry", exact = true)
+@ObjCName(name = "J2ktNobridgemethodsEntry", swiftName = "NobridgemethodsEntry", exact = true)
 interface Entry<K>
 
-@ObjCName("J2ktNobridgemethodsMap", exact = true)
+@ObjCName(name = "J2ktNobridgemethodsMap", swiftName = "NobridgemethodsMap", exact = true)
 abstract class Map<K> internal constructor() {
- @ObjCName("getCeilingEntry")
+ @ObjCName(name = "getCeilingEntry")
  abstract fun getCeilingEntry(
-  @ObjCName("withId") key: K
+  @ObjCName(name = "withId") key: K
  ): Entry<K>?
 }
 
-@ObjCName("J2ktNobridgemethodsTreeMap", exact = true)
+@ObjCName(name = "J2ktNobridgemethodsTreeMap", swiftName = "NobridgemethodsTreeMap", exact = true)
 open class TreeMap<K> internal constructor(): Map<K>() {
  override fun getCeilingEntry(key: K): TreeMap.InnerEntry<K>? {
   return TreeMap.InnerEntry<K>()
  }
 
- @ObjCName("J2ktNobridgemethodsTreeMap_InnerEntry", exact = true)
+ @ObjCName(name = "J2ktNobridgemethodsTreeMap_InnerEntry", swiftName = "NobridgemethodsTreeMap_InnerEntry", exact = true)
  open class InnerEntry<K> internal constructor(): Entry<K>
 }
 
-@ObjCName("J2ktNobridgemethodsCharSet", exact = true)
+@ObjCName(name = "J2ktNobridgemethodsCharSet", swiftName = "NobridgemethodsCharSet", exact = true)
 open class CharSet {
- @ObjCName("J2ktNobridgemethodsCharSetCompanion", exact = true)
+ @ObjCName(name = "J2ktNobridgemethodsCharSetCompanion", swiftName = "NobridgemethodsCharSetCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("main")
+  @ObjCName(name = "main")
   fun main(
-   vararg @ObjCName("withNSStringArray") args: String?
+   vararg @ObjCName(name = "withNSStringArray") args: String?
   ) {
    val args_1: Array<String?>? = args as Array<String?>?
    val treeMap: TreeMap<String?>? = object : TreeMap<String?>() {}

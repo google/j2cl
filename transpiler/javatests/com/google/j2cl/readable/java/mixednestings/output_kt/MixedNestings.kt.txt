@@ -25,30 +25,30 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktMixednestingsMyInterface", exact = true)
+@ObjCName(name = "J2ktMixednestingsMyInterface", swiftName = "MixednestingsMyInterface", exact = true)
 fun interface MyInterface {
- @ObjCName("fun")
+ @ObjCName(name = "fun")
  fun `fun`(
-  @ObjCName("withInt") a: Int
+  @ObjCName(name = "withInt") a: Int
  ): Int
 }
 
-@ObjCName("J2ktMixednestingsMixedNestings", exact = true)
+@ObjCName(name = "J2ktMixednestingsMixedNestings", swiftName = "MixednestingsMixedNestings", exact = true)
 open class MixedNestings {
- @ObjCName("mm")
+ @ObjCName(name = "mm")
  open fun mm() {}
 
- @ObjCName("test")
+ @ObjCName(name = "test")
  open fun test() {
   A().a()
  }
 
- @ObjCName("J2ktMixednestingsMixedNestings_A", exact = true)
+ @ObjCName(name = "J2ktMixednestingsMixedNestings_A", swiftName = "MixednestingsMixedNestings_A", exact = true)
  open inner class A internal constructor() {
-  @ObjCName("aa")
+  @ObjCName(name = "aa")
   open fun aa() {}
 
-  @ObjCName("a")
+  @ObjCName(name = "a")
   open fun a() {
    open class B internal constructor() {
     open fun bb() {}

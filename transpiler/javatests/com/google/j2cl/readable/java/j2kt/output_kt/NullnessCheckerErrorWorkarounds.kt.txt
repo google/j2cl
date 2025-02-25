@@ -25,9 +25,9 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktNullnessCheckerErrorWorkarounds", exact = true)
+@ObjCName(name = "J2ktJ2ktNullnessCheckerErrorWorkarounds", swiftName = "J2ktNullnessCheckerErrorWorkarounds", exact = true)
 open class NullnessCheckerErrorWorkarounds internal constructor() {
- @ObjCName("J2ktJ2ktNullnessCheckerErrorWorkaroundsCompanion", exact = true)
+ @ObjCName(name = "J2ktJ2ktNullnessCheckerErrorWorkaroundsCompanion", swiftName = "J2ktNullnessCheckerErrorWorkaroundsCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun testNullableAnnotation_pp_j2kt(table: NullnessCheckerErrorWorkarounds.Table<out NullnessCheckerErrorWorkarounds.Cell<*>>) {
@@ -40,15 +40,15 @@ open class NullnessCheckerErrorWorkarounds internal constructor() {
   }
  }
 
- @ObjCName("J2ktJ2ktNullnessCheckerErrorWorkarounds_Array", exact = true)
+ @ObjCName(name = "J2ktJ2ktNullnessCheckerErrorWorkarounds_Array", swiftName = "J2ktNullnessCheckerErrorWorkarounds_Array", exact = true)
  fun interface Array<T> {
-  @ObjCName("get")
+  @ObjCName(name = "get")
   fun get(): T?
  }
 
- @ObjCName("J2ktJ2ktNullnessCheckerErrorWorkarounds_Cell", exact = true)
+ @ObjCName(name = "J2ktJ2ktNullnessCheckerErrorWorkarounds_Cell", swiftName = "J2ktNullnessCheckerErrorWorkarounds_Cell", exact = true)
  interface Cell<C: NullnessCheckerErrorWorkarounds.Cell<C>>
 
- @ObjCName("J2ktJ2ktNullnessCheckerErrorWorkarounds_Table", exact = true)
+ @ObjCName(name = "J2ktJ2ktNullnessCheckerErrorWorkarounds_Table", swiftName = "J2ktNullnessCheckerErrorWorkarounds_Table", exact = true)
  fun interface Table<C: NullnessCheckerErrorWorkarounds.Cell<C>>: NullnessCheckerErrorWorkarounds.Array<C>
 }

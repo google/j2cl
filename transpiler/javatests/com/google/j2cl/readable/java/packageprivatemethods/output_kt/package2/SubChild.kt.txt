@@ -26,7 +26,7 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 import packageprivatemethods.package1.Child
 
-@ObjCName("J2ktPackageprivatemethodsPackage2SubChild", exact = true)
+@ObjCName(name = "J2ktPackageprivatemethodsPackage2SubChild", swiftName = "PackageprivatemethodsPackage2SubChild", exact = true)
 open class SubChild: Child() {
  override fun overrideInParentExposedInChild(a: Int): Int {
   return a + 3

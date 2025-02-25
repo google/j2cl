@@ -28,16 +28,16 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktLocalclassinstaticcontextLocalClassInStaticContext", exact = true)
+@ObjCName(name = "J2ktLocalclassinstaticcontextLocalClassInStaticContext", swiftName = "LocalclassinstaticcontextLocalClassInStaticContext", exact = true)
 open class LocalClassInStaticContext {
- @ObjCName("J2ktLocalclassinstaticcontextLocalClassInStaticContextCompanion", exact = true)
+ @ObjCName(name = "J2ktLocalclassinstaticcontextLocalClassInStaticContextCompanion", swiftName = "LocalclassinstaticcontextLocalClassInStaticContextCompanion", exact = true)
  companion object {
   @JvmField
-  @ObjCName("f_")
+  @ObjCName(name = "f_")
   var f: Any? = object : Any() {}
 
   @JvmStatic
-  @ObjCName("test")
+  @ObjCName(name = "test")
   fun test() {
    open class A internal constructor()
    A()
@@ -55,13 +55,13 @@ open class LocalClassInStaticContext {
   }
  }
 
- @ObjCName("J2ktLocalclassinstaticcontextLocalClassInStaticContext_C", exact = true)
+ @ObjCName(name = "J2ktLocalclassinstaticcontextLocalClassInStaticContext_C", swiftName = "LocalclassinstaticcontextLocalClassInStaticContext_C", exact = true)
  open class C {
   @JvmField
-  @ObjCName("f_")
+  @ObjCName(name = "f_")
   var f: Int = 1
 
-  @ObjCName("test")
+  @ObjCName(name = "test")
   open fun test() {
    open class D internal constructor() {
     open fun `fun`(): Int {

@@ -32,59 +32,59 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktDeprecatedDeprecatedExample", exact = true)
+@ObjCName(name = "J2ktDeprecatedDeprecatedExample", swiftName = "DeprecatedDeprecatedExample", exact = true)
 @JsType
 open class DeprecatedExample {
  @JvmField
- @ObjCName("deprecatedInstanceField_")
+ @ObjCName(name = "deprecatedInstanceField_")
  var deprecatedInstanceField: String? = "deprecated field"
 
- @ObjCName("deprecatedInstanceMethod")
+ @ObjCName(name = "deprecatedInstanceMethod")
  open fun deprecatedInstanceMethod(
-  @ObjCName("withNSString") someArg: String?
+  @ObjCName(name = "withNSString") someArg: String?
  ) {}
 
- @ObjCName("J2ktDeprecatedDeprecatedExampleCompanion", exact = true)
+ @ObjCName(name = "J2ktDeprecatedDeprecatedExampleCompanion", swiftName = "DeprecatedDeprecatedExampleCompanion", exact = true)
  companion object {
-  @ObjCName("DEPRECATED_STATIC_FIELD_")
+  @ObjCName(name = "DEPRECATED_STATIC_FIELD_")
   const val DEPRECATED_STATIC_FIELD: String = "deprecated field"
 
   @JvmStatic
-  @ObjCName("deprecatedStaticMethod")
+  @ObjCName(name = "deprecatedStaticMethod")
   fun deprecatedStaticMethod(
-   @ObjCName("withId") someObject: Any?
+   @ObjCName(name = "withId") someObject: Any?
   ) {}
  }
 
- @ObjCName("J2ktDeprecatedDeprecatedExample_DeprecatedInterface", exact = true)
+ @ObjCName(name = "J2ktDeprecatedDeprecatedExample_DeprecatedInterface", swiftName = "DeprecatedDeprecatedExample_DeprecatedInterface", exact = true)
  @JsType
  fun interface DeprecatedInterface {
-  @ObjCName("doAThing")
+  @ObjCName(name = "doAThing")
   fun doAThing(
-   @ObjCName("withInt") anInt: Int
+   @ObjCName(name = "withInt") anInt: Int
   )
  }
 
- @ObjCName("J2ktDeprecatedDeprecatedExample_DeprecatedJsFunction", exact = true)
+ @ObjCName(name = "J2ktDeprecatedDeprecatedExample_DeprecatedJsFunction", swiftName = "DeprecatedDeprecatedExample_DeprecatedJsFunction", exact = true)
  @JsFunction
  fun interface DeprecatedJsFunction {
-  @ObjCName("doAThing")
+  @ObjCName(name = "doAThing")
   fun doAThing(
-   @ObjCName("withId") aThing: Any?
+   @ObjCName(name = "withId") aThing: Any?
   )
  }
 
- @ObjCName("J2ktDeprecatedDeprecatedExample_DeprecatedEnum", exact = true)
+ @ObjCName(name = "J2ktDeprecatedDeprecatedExample_DeprecatedEnum", swiftName = "DeprecatedDeprecatedExample_DeprecatedEnum", exact = true)
  @JsType
  enum class DeprecatedEnum {
-  @ObjCName("A_VALUE")
+  @ObjCName(name = "A_VALUE")
   A_VALUE;
  }
 
- @ObjCName("J2ktDeprecatedDeprecatedExample_DeprecatedJsEnum", exact = true)
+ @ObjCName(name = "J2ktDeprecatedDeprecatedExample_DeprecatedJsEnum", swiftName = "DeprecatedDeprecatedExample_DeprecatedJsEnum", exact = true)
  @JsEnum
  enum class DeprecatedJsEnum {
-  @ObjCName("A_VALUE")
+  @ObjCName(name = "A_VALUE")
   A_VALUE;
  }
 }

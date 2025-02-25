@@ -26,7 +26,7 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktRawtypeRawType", exact = true)
+@ObjCName(name = "J2ktRawtypeRawType", swiftName = "RawtypeRawType", exact = true)
 open class RawType internal constructor() {
  @JvmField
  internal var rawUnbound_pp_rawtype: RawType.Unbound<Any?>? = RawType.Unbound<Any?>()
@@ -43,41 +43,41 @@ open class RawType internal constructor() {
  @JvmField
  internal var rawBoundDependentIndirect_pp_rawtype: RawType.BoundDependentIndirect<Any?, RawType.Unbound<Any?>?>? = RawType.BoundDependentIndirect<Any?, RawType.Unbound<Any?>?>()
 
- @ObjCName("J2ktRawtypeRawType_Unbound", exact = true)
+ @ObjCName(name = "J2ktRawtypeRawType_Unbound", swiftName = "RawtypeRawType_Unbound", exact = true)
  open class Unbound<T> internal constructor() {
   internal open fun method_pp_rawtype(t: T): T {
    return t
   }
  }
 
- @ObjCName("J2ktRawtypeRawType_Bound", exact = true)
+ @ObjCName(name = "J2ktRawtypeRawType_Bound", swiftName = "RawtypeRawType_Bound", exact = true)
  open class Bound<T: RawType?> internal constructor()
 
- @ObjCName("J2ktRawtypeRawType_BoundRecursively", exact = true)
+ @ObjCName(name = "J2ktRawtypeRawType_BoundRecursively", swiftName = "RawtypeRawType_BoundRecursively", exact = true)
  open class BoundRecursively<T: RawType.BoundRecursively<T>?> internal constructor()
 
- @ObjCName("J2ktRawtypeRawType_BoundDependentDirect", exact = true)
+ @ObjCName(name = "J2ktRawtypeRawType_BoundDependentDirect", swiftName = "RawtypeRawType_BoundDependentDirect", exact = true)
  open class BoundDependentDirect<A, B: A> internal constructor()
 
- @ObjCName("J2ktRawtypeRawType_BoundDependentIndirect", exact = true)
+ @ObjCName(name = "J2ktRawtypeRawType_BoundDependentIndirect", swiftName = "RawtypeRawType_BoundDependentIndirect", exact = true)
  open class BoundDependentIndirect<A, B: RawType.Unbound<A>?> internal constructor()
 
- @ObjCName("J2ktRawtypeRawType_RawUnboundChild", exact = true)
+ @ObjCName(name = "J2ktRawtypeRawType_RawUnboundChild", swiftName = "RawtypeRawType_RawUnboundChild", exact = true)
  open class RawUnboundChild internal constructor(): RawType.Unbound<Any?>() {
   override fun method_pp_rawtype(o: Any?): Any? {
    return super<RawType.Unbound>.method_pp_rawtype(o)
   }
  }
 
- @ObjCName("J2ktRawtypeRawType_GenericSuperclass", exact = true)
+ @ObjCName(name = "J2ktRawtypeRawType_GenericSuperclass", swiftName = "RawtypeRawType_GenericSuperclass", exact = true)
  interface GenericSuperclass<T: RawType?> {
-  @ObjCName("f")
+  @ObjCName(name = "f")
   fun f(
-   @ObjCName("withRawtypeRawType") t: T
+   @ObjCName(name = "withRawtypeRawType") t: T
   ) {}
  }
 
- @ObjCName("J2ktRawtypeRawType_RawSubclass", exact = true)
+ @ObjCName(name = "J2ktRawtypeRawType_RawSubclass", swiftName = "RawtypeRawType_RawSubclass", exact = true)
  open class RawSubclass internal constructor(): RawType.GenericSuperclass<RawType?> {
   override fun f(t: RawType?) {}
  }

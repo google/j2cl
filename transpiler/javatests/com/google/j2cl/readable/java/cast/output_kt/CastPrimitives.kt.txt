@@ -35,9 +35,9 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktCastCastPrimitives", exact = true)
+@ObjCName(name = "J2ktCastCastPrimitives", swiftName = "CastCastPrimitives", exact = true)
 open class CastPrimitives {
- @ObjCName("testPrimitiveCasts")
+ @ObjCName(name = "testPrimitiveCasts")
  open fun testPrimitiveCasts() {
   var b: Byte = 1.toByte()
   var c: Char = '\u0001'
@@ -97,7 +97,7 @@ open class CastPrimitives {
   d = d
  }
 
- @ObjCName("testReferenceToPrimitive")
+ @ObjCName(name = "testReferenceToPrimitive")
  open fun testReferenceToPrimitive() {
   val o: Any? = Any()
   val bool: Boolean = o as Boolean
@@ -110,7 +110,7 @@ open class CastPrimitives {
   val d: Double = o as Double
  }
 
- @ObjCName("testLiteralToPrimitive")
+ @ObjCName(name = "testLiteralToPrimitive")
  open fun testLiteralToPrimitive() {
   var b: Byte = 0.toByte()
   var c: Char = '\u0000'
@@ -156,7 +156,7 @@ open class CastPrimitives {
   d = 'a'.code.toDouble()
  }
 
- @ObjCName("testUnboxAndWiden")
+ @ObjCName(name = "testUnboxAndWiden")
  open fun testUnboxAndWiden() {
   val boxedByte: Byte? = java.lang.Byte.valueOf(
    0.toByte(),
@@ -168,7 +168,7 @@ open class CastPrimitives {
   val d: Double = boxedByte!!.toByte().toDouble()
  }
 
- @ObjCName("testImplicitArgumentCasts")
+ @ObjCName(name = "testImplicitArgumentCasts")
  open fun testImplicitArgumentCasts() {
   val b: Byte = 127.toByte()
   val c: Char = '\uFFFF'
@@ -221,9 +221,9 @@ open class CastPrimitives {
   )
  }
 
- @ObjCName("testImplicitArrayIndexCasts")
+ @ObjCName(name = "testImplicitArrayIndexCasts")
  open fun testImplicitArrayIndexCasts(
-  @ObjCName("withByteArray") array: ByteArray?
+  @ObjCName(name = "withByteArray") array: ByteArray?
  ) {
   val b: Byte = 127.toByte()
   val c: Char = '\uFFFF'
@@ -238,7 +238,7 @@ open class CastPrimitives {
   result = array!!['a'.code]
  }
 
- @ObjCName("testImplicitLongAssignmentCasts")
+ @ObjCName(name = "testImplicitLongAssignmentCasts")
  open fun testImplicitLongAssignmentCasts() {
   val fbyte: Byte = 11.toByte()
   val fchar: Char = '\u000C'
@@ -269,7 +269,7 @@ open class CastPrimitives {
   tlong = (0 + 1).toLong() + 2L
  }
 
- @ObjCName("J2ktCastCastPrimitivesCompanion", exact = true)
+ @ObjCName(name = "J2ktCastCastPrimitivesCompanion", swiftName = "CastCastPrimitivesCompanion", exact = true)
  companion object {
   @JvmStatic
   private fun getShort(value: Short): Short {
@@ -297,12 +297,12 @@ open class CastPrimitives {
   }
  }
 
- @ObjCName("J2ktCastCastPrimitives_IntValueHolder", exact = true)
+ @ObjCName(name = "J2ktCastCastPrimitives_IntValueHolder", swiftName = "CastCastPrimitives_IntValueHolder", exact = true)
  open class IntValueHolder {
   internal constructor(value: Int)
  }
 
- @ObjCName("J2ktCastCastPrimitives_LongValueHolder", exact = true)
+ @ObjCName(name = "J2ktCastCastPrimitives_LongValueHolder", swiftName = "CastCastPrimitives_LongValueHolder", exact = true)
  open class LongValueHolder {
   internal constructor(value: Long)
  }

@@ -26,34 +26,34 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktAccidentaloverrideParent", exact = true)
+@ObjCName(name = "J2ktAccidentaloverrideParent", swiftName = "AccidentaloverrideParent", exact = true)
 open class Parent<T: Error?> internal constructor() {
- @ObjCName("foo")
+ @ObjCName(name = "foo")
  open fun foo(
-  @ObjCName("withJavaLangError") e: T
+  @ObjCName(name = "withJavaLangError") e: T
  ) {}
 
- @ObjCName("bar")
+ @ObjCName(name = "bar")
  fun bar(
-  @ObjCName("withJavaLangError") e: T
+  @ObjCName(name = "withJavaLangError") e: T
  ) {}
 }
 
-@ObjCName("J2ktAccidentaloverrideSuperInterface", exact = true)
+@ObjCName(name = "J2ktAccidentaloverrideSuperInterface", swiftName = "AccidentaloverrideSuperInterface", exact = true)
 interface SuperInterface<T> {
- @ObjCName("foo")
+ @ObjCName(name = "foo")
  fun foo(
-  @ObjCName("withId") t: T
+  @ObjCName(name = "withId") t: T
  )
 
- @ObjCName("bar")
+ @ObjCName(name = "bar")
  fun bar(
-  @ObjCName("withId") e: T
+  @ObjCName(name = "withId") e: T
  )
 }
 
-@ObjCName("J2ktAccidentaloverrideAnotherAccidentalOverride", exact = true)
+@ObjCName(name = "J2ktAccidentaloverrideAnotherAccidentalOverride", swiftName = "AccidentaloverrideAnotherAccidentalOverride", exact = true)
 open class AnotherAccidentalOverride internal constructor(): Parent<AssertionError?>(), SuperInterface<AssertionError?>
 
-@ObjCName("J2ktAccidentaloverrideAccidentalOverride", exact = true)
+@ObjCName(name = "J2ktAccidentaloverrideAccidentalOverride", swiftName = "AccidentaloverrideAccidentalOverride", exact = true)
 open class AccidentalOverride: Parent<Error?>(), SuperInterface<Error?>

@@ -27,167 +27,167 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktNullabilityConversion", exact = true)
+@ObjCName(name = "J2ktJ2ktNullabilityConversion", swiftName = "J2ktNullabilityConversion", exact = true)
 open class NullabilityConversion {
- @ObjCName("J2ktJ2ktNullabilityConversion_Parent", exact = true)
+ @ObjCName(name = "J2ktJ2ktNullabilityConversion_Parent", swiftName = "J2ktNullabilityConversion_Parent", exact = true)
  interface Parent
 
- @ObjCName("J2ktJ2ktNullabilityConversion_Child", exact = true)
+ @ObjCName(name = "J2ktJ2ktNullabilityConversion_Child", swiftName = "J2ktNullabilityConversion_Child", exact = true)
  interface Child: NullabilityConversion.Parent
 
- @ObjCName("J2ktJ2ktNullabilityConversion_Generic", exact = true)
+ @ObjCName(name = "J2ktJ2ktNullabilityConversion_Generic", swiftName = "J2ktNullabilityConversion_Generic", exact = true)
  interface Generic<T: NullabilityConversion.Parent?>
 
- @ObjCName("J2ktJ2ktNullabilityConversion_Consumer", exact = true)
+ @ObjCName(name = "J2ktJ2ktNullabilityConversion_Consumer", swiftName = "J2ktNullabilityConversion_Consumer", exact = true)
  fun interface Consumer<T: NullabilityConversion.Parent?> {
-  @ObjCName("set")
+  @ObjCName(name = "set")
   fun set(
-   @ObjCName("withJ2ktNullabilityConversion_Parent") t: T
+   @ObjCName(name = "withJ2ktNullabilityConversion_Parent") t: T
   )
  }
 
- @ObjCName("J2ktJ2ktNullabilityConversion_Supplier", exact = true)
+ @ObjCName(name = "J2ktJ2ktNullabilityConversion_Supplier", swiftName = "J2ktNullabilityConversion_Supplier", exact = true)
  fun interface Supplier<T: NullabilityConversion.Child?> {
-  @ObjCName("get")
+  @ObjCName(name = "get")
   fun get(): T
  }
 
- @ObjCName("J2ktJ2ktNullabilityConversion_Tests", exact = true)
+ @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests", swiftName = "J2ktNullabilityConversion_Tests", exact = true)
  open class Tests {
-  @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types", exact = true)
+  @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types", swiftName = "J2ktNullabilityConversion_Tests_Types", exact = true)
   open class Types {
-   @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_SimpleToSimple", exact = true)
+   @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_SimpleToSimple", swiftName = "J2ktNullabilityConversion_Tests_Types_SimpleToSimple", exact = true)
    open class SimpleToSimple {
-    @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_SimpleToSimpleCompanion", exact = true)
+    @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_SimpleToSimpleCompanion", swiftName = "J2ktNullabilityConversion_Tests_Types_SimpleToSimpleCompanion", exact = true)
     companion object {
      @JvmStatic
-     @ObjCName("nullableToNullable")
+     @ObjCName(name = "nullableToNullable")
      fun nullableToNullable(
-      @ObjCName("withJ2ktNullabilityConversion_Child") it: NullabilityConversion.Child?
+      @ObjCName(name = "withJ2ktNullabilityConversion_Child") it: NullabilityConversion.Child?
      ): NullabilityConversion.Parent? {
       return it
      }
 
      @JvmStatic
-     @ObjCName("nullableToNonNull")
+     @ObjCName(name = "nullableToNonNull")
      fun nullableToNonNull(
-      @ObjCName("withJ2ktNullabilityConversion_Child") it: NullabilityConversion.Child?
+      @ObjCName(name = "withJ2ktNullabilityConversion_Child") it: NullabilityConversion.Child?
      ): NullabilityConversion.Parent {
       return it!!
      }
 
      @JvmStatic
-     @ObjCName("nonNullToNullable")
+     @ObjCName(name = "nonNullToNullable")
      fun nonNullToNullable(
-      @ObjCName("withJ2ktNullabilityConversion_Child") it: NullabilityConversion.Child
+      @ObjCName(name = "withJ2ktNullabilityConversion_Child") it: NullabilityConversion.Child
      ): NullabilityConversion.Parent? {
       return it
      }
 
      @JvmStatic
-     @ObjCName("nonNullToNonNull")
+     @ObjCName(name = "nonNullToNonNull")
      fun nonNullToNonNull(
-      @ObjCName("withJ2ktNullabilityConversion_Child") it: NullabilityConversion.Child
+      @ObjCName(name = "withJ2ktNullabilityConversion_Child") it: NullabilityConversion.Child
      ): NullabilityConversion.Parent {
       return it
      }
     }
    }
 
-   @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_UpperWildcardToSimple", exact = true)
+   @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_UpperWildcardToSimple", swiftName = "J2ktNullabilityConversion_Tests_Types_UpperWildcardToSimple", exact = true)
    open class UpperWildcardToSimple {
-    @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_UpperWildcardToSimpleCompanion", exact = true)
+    @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_UpperWildcardToSimpleCompanion", swiftName = "J2ktNullabilityConversion_Tests_Types_UpperWildcardToSimpleCompanion", exact = true)
     companion object {
      @JvmStatic
-     @ObjCName("nullableToNullable")
+     @ObjCName(name = "nullableToNullable")
      fun nullableToNullable(
-      @ObjCName("withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<*>
+      @ObjCName(name = "withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<*>
      ): NullabilityConversion.Parent? {
       return supplier.get()
      }
 
      @JvmStatic
-     @ObjCName("nullableToNonNull")
+     @ObjCName(name = "nullableToNonNull")
      fun nullableToNonNull(
-      @ObjCName("withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<*>
+      @ObjCName(name = "withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<*>
      ): NullabilityConversion.Parent {
       return supplier.get()!!
      }
 
      @JvmStatic
-     @ObjCName("nonNullToNullable")
+     @ObjCName(name = "nonNullToNullable")
      fun nonNullToNullable(
-      @ObjCName("withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<out NullabilityConversion.Child>
+      @ObjCName(name = "withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<out NullabilityConversion.Child>
      ): NullabilityConversion.Parent? {
       return supplier.get()
      }
 
      @JvmStatic
-     @ObjCName("nonNullToNonNull")
+     @ObjCName(name = "nonNullToNonNull")
      fun nonNullToNonNull(
-      @ObjCName("withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<out NullabilityConversion.Child>
+      @ObjCName(name = "withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<out NullabilityConversion.Child>
      ): NullabilityConversion.Parent {
       return supplier.get()
      }
     }
    }
 
-   @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_LowerWildcardToSimple", exact = true)
+   @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_LowerWildcardToSimple", swiftName = "J2ktNullabilityConversion_Tests_Types_LowerWildcardToSimple", exact = true)
    open class LowerWildcardToSimple {
-    @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_LowerWildcardToSimpleCompanion", exact = true)
+    @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_LowerWildcardToSimpleCompanion", swiftName = "J2ktNullabilityConversion_Tests_Types_LowerWildcardToSimpleCompanion", exact = true)
     companion object {
      @JvmStatic
-     @ObjCName("nullableToNullable")
+     @ObjCName(name = "nullableToNullable")
      fun nullableToNullable(
-      @ObjCName("withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<in NullabilityConversion.Child?>
+      @ObjCName(name = "withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<in NullabilityConversion.Child?>
      ): NullabilityConversion.Parent? {
       return supplier.get() as NullabilityConversion.Parent?
      }
 
      @JvmStatic
-     @ObjCName("nullableToNonNull")
+     @ObjCName(name = "nullableToNonNull")
      fun nullableToNonNull(
-      @ObjCName("withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<in NullabilityConversion.Child?>
+      @ObjCName(name = "withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<in NullabilityConversion.Child?>
      ): NullabilityConversion.Parent {
       return supplier.get()!! as NullabilityConversion.Parent
      }
 
      @JvmStatic
-     @ObjCName("nonNullToNullable")
+     @ObjCName(name = "nonNullToNullable")
      fun nonNullToNullable(
-      @ObjCName("withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<in NullabilityConversion.Child>
+      @ObjCName(name = "withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<in NullabilityConversion.Child>
      ): NullabilityConversion.Parent? {
       return supplier.get() as NullabilityConversion.Parent?
      }
 
      @JvmStatic
-     @ObjCName("nonNullToNonNull")
+     @ObjCName(name = "nonNullToNonNull")
      fun nonNullToNonNull(
-      @ObjCName("withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<in NullabilityConversion.Child>
+      @ObjCName(name = "withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<in NullabilityConversion.Child>
      ): NullabilityConversion.Parent {
       return supplier.get()!! as NullabilityConversion.Parent
      }
     }
    }
 
-   @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_SimpleToLowerWildcard", exact = true)
+   @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_SimpleToLowerWildcard", swiftName = "J2ktNullabilityConversion_Tests_Types_SimpleToLowerWildcard", exact = true)
    open class SimpleToLowerWildcard {
-    @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_SimpleToLowerWildcardCompanion", exact = true)
+    @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_SimpleToLowerWildcardCompanion", swiftName = "J2ktNullabilityConversion_Tests_Types_SimpleToLowerWildcardCompanion", exact = true)
     companion object {
      @JvmStatic
-     @ObjCName("nullableToNullable")
+     @ObjCName(name = "nullableToNullable")
      fun nullableToNullable(
-      @ObjCName("withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in NullabilityConversion.Parent?>,
-      @ObjCName("withJ2ktNullabilityConversion_Child") it: NullabilityConversion.Child?
+      @ObjCName(name = "withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in NullabilityConversion.Parent?>,
+      @ObjCName(name = "withJ2ktNullabilityConversion_Child") it: NullabilityConversion.Child?
      ) {
       consumer.set(it)
      }
 
      @JvmStatic
-     @ObjCName("nullableToNonNull")
+     @ObjCName(name = "nullableToNonNull")
      fun nullableToNonNull(
-      @ObjCName("withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in NullabilityConversion.Parent>,
-      @ObjCName("withJ2ktNullabilityConversion_Child") it: NullabilityConversion.Child?
+      @ObjCName(name = "withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in NullabilityConversion.Parent>,
+      @ObjCName(name = "withJ2ktNullabilityConversion_Child") it: NullabilityConversion.Child?
      ) {
       consumer.set(
        it as NullabilityConversion.Parent,
@@ -195,34 +195,34 @@ open class NullabilityConversion {
      }
 
      @JvmStatic
-     @ObjCName("nonNullToNullable")
+     @ObjCName(name = "nonNullToNullable")
      fun nonNullToNullable(
-      @ObjCName("withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in NullabilityConversion.Parent?>,
-      @ObjCName("withJ2ktNullabilityConversion_Child") it: NullabilityConversion.Child
+      @ObjCName(name = "withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in NullabilityConversion.Parent?>,
+      @ObjCName(name = "withJ2ktNullabilityConversion_Child") it: NullabilityConversion.Child
      ) {
       consumer.set(it)
      }
 
      @JvmStatic
-     @ObjCName("nonNullToNonNull")
+     @ObjCName(name = "nonNullToNonNull")
      fun nonNullToNonNull(
-      @ObjCName("withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in NullabilityConversion.Parent>,
-      @ObjCName("withJ2ktNullabilityConversion_Child") it: NullabilityConversion.Child
+      @ObjCName(name = "withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in NullabilityConversion.Parent>,
+      @ObjCName(name = "withJ2ktNullabilityConversion_Child") it: NullabilityConversion.Child
      ) {
       consumer.set(it)
      }
     }
    }
 
-   @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_SimpleUpperWildcardToLowerWildcard", exact = true)
+   @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_SimpleUpperWildcardToLowerWildcard", swiftName = "J2ktNullabilityConversion_Tests_Types_SimpleUpperWildcardToLowerWildcard", exact = true)
    open class SimpleUpperWildcardToLowerWildcard {
-    @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_SimpleUpperWildcardToLowerWildcardCompanion", exact = true)
+    @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_SimpleUpperWildcardToLowerWildcardCompanion", swiftName = "J2ktNullabilityConversion_Tests_Types_SimpleUpperWildcardToLowerWildcardCompanion", exact = true)
     companion object {
      @JvmStatic
-     @ObjCName("nullableToNullable")
+     @ObjCName(name = "nullableToNullable")
      fun nullableToNullable(
-      @ObjCName("withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in NullabilityConversion.Parent?>,
-      @ObjCName("withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<*>
+      @ObjCName(name = "withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in NullabilityConversion.Parent?>,
+      @ObjCName(name = "withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<*>
      ) {
       consumer.set(
        supplier.get(),
@@ -230,10 +230,10 @@ open class NullabilityConversion {
      }
 
      @JvmStatic
-     @ObjCName("nullableToNonNull")
+     @ObjCName(name = "nullableToNonNull")
      fun nullableToNonNull(
-      @ObjCName("withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in NullabilityConversion.Parent>,
-      @ObjCName("withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<*>
+      @ObjCName(name = "withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in NullabilityConversion.Parent>,
+      @ObjCName(name = "withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<*>
      ) {
       consumer.set(
        supplier.get() as NullabilityConversion.Parent,
@@ -241,10 +241,10 @@ open class NullabilityConversion {
      }
 
      @JvmStatic
-     @ObjCName("nonNullToNullable")
+     @ObjCName(name = "nonNullToNullable")
      fun nonNullToNullable(
-      @ObjCName("withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in NullabilityConversion.Parent?>,
-      @ObjCName("withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<out NullabilityConversion.Child>
+      @ObjCName(name = "withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in NullabilityConversion.Parent?>,
+      @ObjCName(name = "withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<out NullabilityConversion.Child>
      ) {
       consumer.set(
        supplier.get(),
@@ -252,10 +252,10 @@ open class NullabilityConversion {
      }
 
      @JvmStatic
-     @ObjCName("nonNullToNonNull")
+     @ObjCName(name = "nonNullToNonNull")
      fun nonNullToNonNull(
-      @ObjCName("withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in NullabilityConversion.Parent>,
-      @ObjCName("withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<out NullabilityConversion.Child>
+      @ObjCName(name = "withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in NullabilityConversion.Parent>,
+      @ObjCName(name = "withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<out NullabilityConversion.Child>
      ) {
       consumer.set(
        supplier.get(),
@@ -264,110 +264,110 @@ open class NullabilityConversion {
     }
    }
 
-   @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_VariableToVariable", exact = true)
+   @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_VariableToVariable", swiftName = "J2ktNullabilityConversion_Tests_Types_VariableToVariable", exact = true)
    open class VariableToVariable {
-    @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_VariableToVariableCompanion", exact = true)
+    @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_VariableToVariableCompanion", swiftName = "J2ktNullabilityConversion_Tests_Types_VariableToVariableCompanion", exact = true)
     companion object {
      @JvmStatic
-     @ObjCName("defaultToDefault")
+     @ObjCName(name = "defaultToDefault")
      fun <T: NullabilityConversion.Parent?> defaultToDefault(
-      @ObjCName("withJ2ktNullabilityConversion_Parent") it: T
+      @ObjCName(name = "withJ2ktNullabilityConversion_Parent") it: T
      ): T {
       return it
      }
 
      @JvmStatic
-     @ObjCName("defaultToNullable")
+     @ObjCName(name = "defaultToNullable")
      fun <T: NullabilityConversion.Parent?> defaultToNullable(
-      @ObjCName("withJ2ktNullabilityConversion_Parent") it: T
+      @ObjCName(name = "withJ2ktNullabilityConversion_Parent") it: T
      ): T? {
       return it
      }
 
      @JvmStatic
-     @ObjCName("defaultToNonNull")
+     @ObjCName(name = "defaultToNonNull")
      fun <T: NullabilityConversion.Parent?> defaultToNonNull(
-      @ObjCName("withJ2ktNullabilityConversion_Parent") it: T
+      @ObjCName(name = "withJ2ktNullabilityConversion_Parent") it: T
      ): T & Any {
       return it!!
      }
 
      @JvmStatic
-     @ObjCName("nullableToDefault")
+     @ObjCName(name = "nullableToDefault")
      fun <T: NullabilityConversion.Parent?> nullableToDefault(
-      @ObjCName("withJ2ktNullabilityConversion_Parent") it: T?
+      @ObjCName(name = "withJ2ktNullabilityConversion_Parent") it: T?
      ): T {
       return it as T
      }
 
      @JvmStatic
-     @ObjCName("nullableToNullable")
+     @ObjCName(name = "nullableToNullable")
      fun <T: NullabilityConversion.Parent?> nullableToNullable(
-      @ObjCName("withJ2ktNullabilityConversion_Parent") it: T?
+      @ObjCName(name = "withJ2ktNullabilityConversion_Parent") it: T?
      ): T? {
       return it
      }
 
      @JvmStatic
-     @ObjCName("nullableToNonNull")
+     @ObjCName(name = "nullableToNonNull")
      fun <T: NullabilityConversion.Parent?> nullableToNonNull(
-      @ObjCName("withJ2ktNullabilityConversion_Parent") it: T?
+      @ObjCName(name = "withJ2ktNullabilityConversion_Parent") it: T?
      ): T & Any {
       return it!!
      }
 
      @JvmStatic
-     @ObjCName("nonNullToDefault")
+     @ObjCName(name = "nonNullToDefault")
      fun <T: NullabilityConversion.Parent?> nonNullToDefault(
-      @ObjCName("withJ2ktNullabilityConversion_Parent") it: T & Any
+      @ObjCName(name = "withJ2ktNullabilityConversion_Parent") it: T & Any
      ): T {
       return it
      }
 
      @JvmStatic
-     @ObjCName("nonNullToNullable")
+     @ObjCName(name = "nonNullToNullable")
      fun <T: NullabilityConversion.Parent?> nonNullToNullable(
-      @ObjCName("withJ2ktNullabilityConversion_Parent") it: T & Any
+      @ObjCName(name = "withJ2ktNullabilityConversion_Parent") it: T & Any
      ): T? {
       return it
      }
 
      @JvmStatic
-     @ObjCName("nonNullToNonNull")
+     @ObjCName(name = "nonNullToNonNull")
      fun <T: NullabilityConversion.Parent?> nonNullToNonNull(
-      @ObjCName("withJ2ktNullabilityConversion_Parent") it: T & Any
+      @ObjCName(name = "withJ2ktNullabilityConversion_Parent") it: T & Any
      ): T & Any {
       return it
      }
     }
 
-    @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_VariableToVariable_VariableToLowerWildcard", exact = true)
+    @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_VariableToVariable_VariableToLowerWildcard", swiftName = "J2ktNullabilityConversion_Tests_Types_VariableToVariable_VariableToLowerWildcard", exact = true)
     open class VariableToLowerWildcard {
-     @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_VariableToVariable_VariableToLowerWildcardCompanion", exact = true)
+     @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_VariableToVariable_VariableToLowerWildcardCompanion", swiftName = "J2ktNullabilityConversion_Tests_Types_VariableToVariable_VariableToLowerWildcardCompanion", exact = true)
      companion object {
       @JvmStatic
-      @ObjCName("defaultToDefault")
+      @ObjCName(name = "defaultToDefault")
       fun <T: NullabilityConversion.Child?> defaultToDefault(
-       @ObjCName("withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in T>,
-       @ObjCName("withJ2ktNullabilityConversion_Child") t: T
+       @ObjCName(name = "withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in T>,
+       @ObjCName(name = "withJ2ktNullabilityConversion_Child") t: T
       ) {
        consumer.set(t)
       }
 
       @JvmStatic
-      @ObjCName("defaultToNullable")
+      @ObjCName(name = "defaultToNullable")
       fun <T: NullabilityConversion.Child?> defaultToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in T?>,
-       @ObjCName("withJ2ktNullabilityConversion_Child") t: T
+       @ObjCName(name = "withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in T?>,
+       @ObjCName(name = "withJ2ktNullabilityConversion_Child") t: T
       ) {
        consumer.set(t)
       }
 
       @JvmStatic
-      @ObjCName("defaultToNonNull")
+      @ObjCName(name = "defaultToNonNull")
       fun <T: NullabilityConversion.Child?> defaultToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in T & Any>,
-       @ObjCName("withJ2ktNullabilityConversion_Child") t: T
+       @ObjCName(name = "withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in T & Any>,
+       @ObjCName(name = "withJ2ktNullabilityConversion_Child") t: T
       ) {
        consumer.set(
         t as (T & Any),
@@ -375,10 +375,10 @@ open class NullabilityConversion {
       }
 
       @JvmStatic
-      @ObjCName("nullableToDefault")
+      @ObjCName(name = "nullableToDefault")
       fun <T: NullabilityConversion.Child?> nullableToDefault(
-       @ObjCName("withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in T>,
-       @ObjCName("withJ2ktNullabilityConversion_Child") t: T?
+       @ObjCName(name = "withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in T>,
+       @ObjCName(name = "withJ2ktNullabilityConversion_Child") t: T?
       ) {
        consumer.set(
         t as T,
@@ -386,19 +386,19 @@ open class NullabilityConversion {
       }
 
       @JvmStatic
-      @ObjCName("nullableToNullable")
+      @ObjCName(name = "nullableToNullable")
       fun <T: NullabilityConversion.Child?> nullableToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in T?>,
-       @ObjCName("withJ2ktNullabilityConversion_Child") t: T?
+       @ObjCName(name = "withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in T?>,
+       @ObjCName(name = "withJ2ktNullabilityConversion_Child") t: T?
       ) {
        consumer.set(t)
       }
 
       @JvmStatic
-      @ObjCName("nullableToNonNull")
+      @ObjCName(name = "nullableToNonNull")
       fun <T: NullabilityConversion.Child?> nullableToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in T & Any>,
-       @ObjCName("withJ2ktNullabilityConversion_Child") t: T?
+       @ObjCName(name = "withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in T & Any>,
+       @ObjCName(name = "withJ2ktNullabilityConversion_Child") t: T?
       ) {
        consumer.set(
         t as (T & Any),
@@ -406,106 +406,106 @@ open class NullabilityConversion {
       }
 
       @JvmStatic
-      @ObjCName("nonNullToDefault")
+      @ObjCName(name = "nonNullToDefault")
       fun <T: NullabilityConversion.Child?> nonNullToDefault(
-       @ObjCName("withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in T>,
-       @ObjCName("withJ2ktNullabilityConversion_Child") t: T & Any
+       @ObjCName(name = "withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in T>,
+       @ObjCName(name = "withJ2ktNullabilityConversion_Child") t: T & Any
       ) {
        consumer.set(t)
       }
 
       @JvmStatic
-      @ObjCName("nonNullToNullable")
+      @ObjCName(name = "nonNullToNullable")
       fun <T: NullabilityConversion.Child?> nonNullToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in T?>,
-       @ObjCName("withJ2ktNullabilityConversion_Child") t: T & Any
+       @ObjCName(name = "withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in T?>,
+       @ObjCName(name = "withJ2ktNullabilityConversion_Child") t: T & Any
       ) {
        consumer.set(t)
       }
 
       @JvmStatic
-      @ObjCName("nonNullToNonNull")
+      @ObjCName(name = "nonNullToNonNull")
       fun <T: NullabilityConversion.Child?> nonNullToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in T & Any>,
-       @ObjCName("withJ2ktNullabilityConversion_Child") t: T & Any
+       @ObjCName(name = "withJ2ktNullabilityConversion_Consumer") consumer: NullabilityConversion.Consumer<in T & Any>,
+       @ObjCName(name = "withJ2ktNullabilityConversion_Child") t: T & Any
       ) {
        consumer.set(t)
       }
      }
     }
 
-    @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_VariableToVariable_UpperWildcardToVariable", exact = true)
+    @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_VariableToVariable_UpperWildcardToVariable", swiftName = "J2ktNullabilityConversion_Tests_Types_VariableToVariable_UpperWildcardToVariable", exact = true)
     open class UpperWildcardToVariable {
-     @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_VariableToVariable_UpperWildcardToVariableCompanion", exact = true)
+     @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_VariableToVariable_UpperWildcardToVariableCompanion", swiftName = "J2ktNullabilityConversion_Tests_Types_VariableToVariable_UpperWildcardToVariableCompanion", exact = true)
      companion object {
       @JvmStatic
-      @ObjCName("defaultToDefault")
+      @ObjCName(name = "defaultToDefault")
       fun <T: NullabilityConversion.Child?> defaultToDefault(
-       @ObjCName("withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<out T>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<out T>
       ): T {
        return supplier.get()
       }
 
       @JvmStatic
-      @ObjCName("defaultToNullable")
+      @ObjCName(name = "defaultToNullable")
       fun <T: NullabilityConversion.Child?> defaultToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<out T>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<out T>
       ): T? {
        return supplier.get()
       }
 
       @JvmStatic
-      @ObjCName("defaultToNonNull")
+      @ObjCName(name = "defaultToNonNull")
       fun <T: NullabilityConversion.Child?> defaultToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<out T>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<out T>
       ): T & Any {
        return supplier.get() as (T & Any)
       }
 
       @JvmStatic
-      @ObjCName("nullableToDefault")
+      @ObjCName(name = "nullableToDefault")
       fun <T: NullabilityConversion.Child?> nullableToDefault(
-       @ObjCName("withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<out T?>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<out T?>
       ): T {
        return supplier.get() as T
       }
 
       @JvmStatic
-      @ObjCName("nullableToNullable")
+      @ObjCName(name = "nullableToNullable")
       fun <T: NullabilityConversion.Child?> nullableToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<out T?>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<out T?>
       ): T? {
        return supplier.get()
       }
 
       @JvmStatic
-      @ObjCName("nullableToNonNull")
+      @ObjCName(name = "nullableToNonNull")
       fun <T: NullabilityConversion.Child?> nullableToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<out T?>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<out T?>
       ): T & Any {
        return supplier.get()!!
       }
 
       @JvmStatic
-      @ObjCName("nonNullToDefault")
+      @ObjCName(name = "nonNullToDefault")
       fun <T: NullabilityConversion.Child?> nonNullToDefault(
-       @ObjCName("withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<out T & Any>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<out T & Any>
       ): T {
        return supplier.get()
       }
 
       @JvmStatic
-      @ObjCName("nonNullToNullable")
+      @ObjCName(name = "nonNullToNullable")
       fun <T: NullabilityConversion.Child?> nonNullToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<out T & Any>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<out T & Any>
       ): T? {
        return supplier.get()
       }
 
       @JvmStatic
-      @ObjCName("nonNullToNonNull")
+      @ObjCName(name = "nonNullToNonNull")
       fun <T: NullabilityConversion.Child?> nonNullToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<out T & Any>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Supplier") supplier: NullabilityConversion.Supplier<out T & Any>
       ): T & Any {
        return supplier.get()
       }
@@ -513,620 +513,620 @@ open class NullabilityConversion {
     }
    }
 
-   @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments", exact = true)
+   @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments", swiftName = "J2ktNullabilityConversion_Tests_Types_TypeArguments", exact = true)
    open class TypeArguments {
-    @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleToSimple", exact = true)
+    @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleToSimple", swiftName = "J2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleToSimple", exact = true)
     open class SimpleToSimple {
-     @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleToSimpleCompanion", exact = true)
+     @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleToSimpleCompanion", swiftName = "J2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleToSimpleCompanion", exact = true)
      companion object {
       @JvmStatic
-      @ObjCName("nullableToNullable")
+      @ObjCName(name = "nullableToNullable")
       fun nullableToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<NullabilityConversion.Parent?>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<NullabilityConversion.Parent?>
       ): NullabilityConversion.Generic<NullabilityConversion.Parent?> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("nullableToNonNull")
+      @ObjCName(name = "nullableToNonNull")
       fun nullableToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<NullabilityConversion.Parent?>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<NullabilityConversion.Parent?>
       ): NullabilityConversion.Generic<NullabilityConversion.Parent> {
        return it as NullabilityConversion.Generic<NullabilityConversion.Parent>
       }
 
       @JvmStatic
-      @ObjCName("nonNullToNullable")
+      @ObjCName(name = "nonNullToNullable")
       fun nonNullToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<NullabilityConversion.Parent>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<NullabilityConversion.Parent>
       ): NullabilityConversion.Generic<NullabilityConversion.Parent?> {
        return it as NullabilityConversion.Generic<NullabilityConversion.Parent?>
       }
 
       @JvmStatic
-      @ObjCName("nonNullToNonNull")
+      @ObjCName(name = "nonNullToNonNull")
       fun nonNullToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<NullabilityConversion.Parent>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<NullabilityConversion.Parent>
       ): NullabilityConversion.Generic<NullabilityConversion.Parent> {
        return it
       }
      }
     }
 
-    @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleToUpperWildcard", exact = true)
+    @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleToUpperWildcard", swiftName = "J2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleToUpperWildcard", exact = true)
     open class SimpleToUpperWildcard {
-     @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleToUpperWildcardCompanion", exact = true)
+     @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleToUpperWildcardCompanion", swiftName = "J2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleToUpperWildcardCompanion", exact = true)
      companion object {
       @JvmStatic
-      @ObjCName("nullableToNullable")
+      @ObjCName(name = "nullableToNullable")
       fun nullableToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<NullabilityConversion.Child?>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<NullabilityConversion.Child?>
       ): NullabilityConversion.Generic<*> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("nullableToNonNull")
+      @ObjCName(name = "nullableToNonNull")
       fun nullableToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<NullabilityConversion.Child?>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<NullabilityConversion.Child?>
       ): NullabilityConversion.Generic<out NullabilityConversion.Parent> {
        return it as NullabilityConversion.Generic<out NullabilityConversion.Parent>
       }
 
       @JvmStatic
-      @ObjCName("nonNullToNullable")
+      @ObjCName(name = "nonNullToNullable")
       fun nonNullToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<NullabilityConversion.Child>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<NullabilityConversion.Child>
       ): NullabilityConversion.Generic<*> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("nonNullToNonNull")
+      @ObjCName(name = "nonNullToNonNull")
       fun nonNullToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<NullabilityConversion.Child>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<NullabilityConversion.Child>
       ): NullabilityConversion.Generic<out NullabilityConversion.Parent> {
        return it
       }
      }
     }
 
-    @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleToLowerWildcard", exact = true)
+    @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleToLowerWildcard", swiftName = "J2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleToLowerWildcard", exact = true)
     open class SimpleToLowerWildcard {
-     @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleToLowerWildcardCompanion", exact = true)
+     @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleToLowerWildcardCompanion", swiftName = "J2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleToLowerWildcardCompanion", exact = true)
      companion object {
       @JvmStatic
-      @ObjCName("nullableToNullable")
+      @ObjCName(name = "nullableToNullable")
       fun nullableToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<NullabilityConversion.Parent?>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<NullabilityConversion.Parent?>
       ): NullabilityConversion.Generic<in NullabilityConversion.Child?> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("nullableToNonNull")
+      @ObjCName(name = "nullableToNonNull")
       fun nullableToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<NullabilityConversion.Parent?>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<NullabilityConversion.Parent?>
       ): NullabilityConversion.Generic<in NullabilityConversion.Child> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("nonNullToNullable")
+      @ObjCName(name = "nonNullToNullable")
       fun nonNullToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<NullabilityConversion.Parent>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<NullabilityConversion.Parent>
       ): NullabilityConversion.Generic<in NullabilityConversion.Child?> {
        return it as NullabilityConversion.Generic<in NullabilityConversion.Child?>
       }
 
       @JvmStatic
-      @ObjCName("nonNullToNonNull")
+      @ObjCName(name = "nonNullToNonNull")
       fun nonNullToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<NullabilityConversion.Parent>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<NullabilityConversion.Parent>
       ): NullabilityConversion.Generic<in NullabilityConversion.Child> {
        return it
       }
      }
     }
 
-    @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleUpperWildcardToUpperWildcard", exact = true)
+    @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleUpperWildcardToUpperWildcard", swiftName = "J2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleUpperWildcardToUpperWildcard", exact = true)
     open class SimpleUpperWildcardToUpperWildcard {
-     @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleUpperWildcardToUpperWildcardCompanion", exact = true)
+     @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleUpperWildcardToUpperWildcardCompanion", swiftName = "J2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleUpperWildcardToUpperWildcardCompanion", exact = true)
      companion object {
       @JvmStatic
-      @ObjCName("nullableToNullable")
+      @ObjCName(name = "nullableToNullable")
       fun nullableToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<out NullabilityConversion.Child?>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<out NullabilityConversion.Child?>
       ): NullabilityConversion.Generic<*> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("nullableToNonNull")
+      @ObjCName(name = "nullableToNonNull")
       fun nullableToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<out NullabilityConversion.Child?>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<out NullabilityConversion.Child?>
       ): NullabilityConversion.Generic<out NullabilityConversion.Parent> {
        return it as NullabilityConversion.Generic<out NullabilityConversion.Parent>
       }
 
       @JvmStatic
-      @ObjCName("nonNullToNullable")
+      @ObjCName(name = "nonNullToNullable")
       fun nonNullToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<out NullabilityConversion.Child>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<out NullabilityConversion.Child>
       ): NullabilityConversion.Generic<*> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("nonNullToNonNull")
+      @ObjCName(name = "nonNullToNonNull")
       fun nonNullToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<out NullabilityConversion.Child>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<out NullabilityConversion.Child>
       ): NullabilityConversion.Generic<out NullabilityConversion.Parent> {
        return it
       }
      }
     }
 
-    @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleLowerWildcardToUpperWildcard", exact = true)
+    @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleLowerWildcardToUpperWildcard", swiftName = "J2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleLowerWildcardToUpperWildcard", exact = true)
     open class SimpleLowerWildcardToUpperWildcard {
-     @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleLowerWildcardToUpperWildcardCompanion", exact = true)
+     @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleLowerWildcardToUpperWildcardCompanion", swiftName = "J2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleLowerWildcardToUpperWildcardCompanion", exact = true)
      companion object {
       @JvmStatic
-      @ObjCName("nullableToNullable")
+      @ObjCName(name = "nullableToNullable")
       fun nullableToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in NullabilityConversion.Child?>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in NullabilityConversion.Child?>
       ): NullabilityConversion.Generic<*> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("nullableToNonNull")
+      @ObjCName(name = "nullableToNonNull")
       fun nullableToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in NullabilityConversion.Child?>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in NullabilityConversion.Child?>
       ): NullabilityConversion.Generic<out NullabilityConversion.Parent> {
        return it as NullabilityConversion.Generic<out NullabilityConversion.Parent>
       }
 
       @JvmStatic
-      @ObjCName("nonNullToNullable")
+      @ObjCName(name = "nonNullToNullable")
       fun nonNullToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in NullabilityConversion.Child>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in NullabilityConversion.Child>
       ): NullabilityConversion.Generic<*> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("nonNullToNonNull")
+      @ObjCName(name = "nonNullToNonNull")
       fun nonNullToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in NullabilityConversion.Child>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in NullabilityConversion.Child>
       ): NullabilityConversion.Generic<out NullabilityConversion.Parent> {
        return it as NullabilityConversion.Generic<out NullabilityConversion.Parent>
       }
      }
     }
 
-    @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleLowerWildcardToLowerWildcard", exact = true)
+    @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleLowerWildcardToLowerWildcard", swiftName = "J2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleLowerWildcardToLowerWildcard", exact = true)
     open class SimpleLowerWildcardToLowerWildcard {
-     @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleLowerWildcardToLowerWildcardCompanion", exact = true)
+     @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleLowerWildcardToLowerWildcardCompanion", swiftName = "J2ktNullabilityConversion_Tests_Types_TypeArguments_SimpleLowerWildcardToLowerWildcardCompanion", exact = true)
      companion object {
       @JvmStatic
-      @ObjCName("nullableToNullable")
+      @ObjCName(name = "nullableToNullable")
       fun nullableToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in NullabilityConversion.Parent?>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in NullabilityConversion.Parent?>
       ): NullabilityConversion.Generic<in NullabilityConversion.Child?> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("nullableToNonNull")
+      @ObjCName(name = "nullableToNonNull")
       fun nullableToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in NullabilityConversion.Parent?>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in NullabilityConversion.Parent?>
       ): NullabilityConversion.Generic<in NullabilityConversion.Child> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("nonNullToNullable")
+      @ObjCName(name = "nonNullToNullable")
       fun nonNullToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in NullabilityConversion.Parent>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in NullabilityConversion.Parent>
       ): NullabilityConversion.Generic<in NullabilityConversion.Child?> {
        return it as NullabilityConversion.Generic<in NullabilityConversion.Child?>
       }
 
       @JvmStatic
-      @ObjCName("nonNullToNonNull")
+      @ObjCName(name = "nonNullToNonNull")
       fun nonNullToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in NullabilityConversion.Parent>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in NullabilityConversion.Parent>
       ): NullabilityConversion.Generic<in NullabilityConversion.Child> {
        return it
       }
      }
     }
 
-    @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_VariableToVariable", exact = true)
+    @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_VariableToVariable", swiftName = "J2ktNullabilityConversion_Tests_Types_TypeArguments_VariableToVariable", exact = true)
     open class VariableToVariable {
-     @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_VariableToVariableCompanion", exact = true)
+     @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_VariableToVariableCompanion", swiftName = "J2ktNullabilityConversion_Tests_Types_TypeArguments_VariableToVariableCompanion", exact = true)
      companion object {
       @JvmStatic
-      @ObjCName("defaultToDefault")
+      @ObjCName(name = "defaultToDefault")
       fun <T: NullabilityConversion.Parent?> defaultToDefault(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T>
       ): NullabilityConversion.Generic<T> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("defaultToNullable")
+      @ObjCName(name = "defaultToNullable")
       fun <T: NullabilityConversion.Parent?> defaultToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T>
       ): NullabilityConversion.Generic<T?> {
        return it as NullabilityConversion.Generic<T?>
       }
 
       @JvmStatic
-      @ObjCName("defaultToNonNull")
+      @ObjCName(name = "defaultToNonNull")
       fun <T: NullabilityConversion.Parent?> defaultToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T>
       ): NullabilityConversion.Generic<T & Any> {
        return it as NullabilityConversion.Generic<T & Any>
       }
 
       @JvmStatic
-      @ObjCName("nullableToDefault")
+      @ObjCName(name = "nullableToDefault")
       fun <T: NullabilityConversion.Parent?> nullableToDefault(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T?>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T?>
       ): NullabilityConversion.Generic<T> {
        return it as NullabilityConversion.Generic<T>
       }
 
       @JvmStatic
-      @ObjCName("nullableToNullable")
+      @ObjCName(name = "nullableToNullable")
       fun <T: NullabilityConversion.Parent?> nullableToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T?>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T?>
       ): NullabilityConversion.Generic<T?> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("nullableToNonNull")
+      @ObjCName(name = "nullableToNonNull")
       fun <T: NullabilityConversion.Parent?> nullableToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T?>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T?>
       ): NullabilityConversion.Generic<T & Any> {
        return it as NullabilityConversion.Generic<T & Any>
       }
 
       @JvmStatic
-      @ObjCName("nonNullToDefault")
+      @ObjCName(name = "nonNullToDefault")
       fun <T: NullabilityConversion.Parent?> nonNullToDefault(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T & Any>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T & Any>
       ): NullabilityConversion.Generic<T> {
        return it as NullabilityConversion.Generic<T>
       }
 
       @JvmStatic
-      @ObjCName("nonNullToNullable")
+      @ObjCName(name = "nonNullToNullable")
       fun <T: NullabilityConversion.Parent?> nonNullToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T & Any>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T & Any>
       ): NullabilityConversion.Generic<T?> {
        return it as NullabilityConversion.Generic<T?>
       }
 
       @JvmStatic
-      @ObjCName("nonNullToNonNull")
+      @ObjCName(name = "nonNullToNonNull")
       fun <T: NullabilityConversion.Parent?> nonNullToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T & Any>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T & Any>
       ): NullabilityConversion.Generic<T & Any> {
        return it
       }
      }
     }
 
-    @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_VariableToUpperWildcard", exact = true)
+    @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_VariableToUpperWildcard", swiftName = "J2ktNullabilityConversion_Tests_Types_TypeArguments_VariableToUpperWildcard", exact = true)
     open class VariableToUpperWildcard {
-     @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_VariableToUpperWildcardCompanion", exact = true)
+     @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_VariableToUpperWildcardCompanion", swiftName = "J2ktNullabilityConversion_Tests_Types_TypeArguments_VariableToUpperWildcardCompanion", exact = true)
      companion object {
       @JvmStatic
-      @ObjCName("defaultToDefault")
+      @ObjCName(name = "defaultToDefault")
       fun <T: NullabilityConversion.Parent?> defaultToDefault(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T>
       ): NullabilityConversion.Generic<out T> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("defaultToNullable")
+      @ObjCName(name = "defaultToNullable")
       fun <T: NullabilityConversion.Parent?> defaultToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T>
       ): NullabilityConversion.Generic<out T?> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("defaultToNonNull")
+      @ObjCName(name = "defaultToNonNull")
       fun <T: NullabilityConversion.Parent?> defaultToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T>
       ): NullabilityConversion.Generic<out T & Any> {
        return it as NullabilityConversion.Generic<out T & Any>
       }
 
       @JvmStatic
-      @ObjCName("nullableToDefault")
+      @ObjCName(name = "nullableToDefault")
       fun <T: NullabilityConversion.Parent?> nullableToDefault(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T?>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T?>
       ): NullabilityConversion.Generic<out T> {
        return it as NullabilityConversion.Generic<out T>
       }
 
       @JvmStatic
-      @ObjCName("nullableToNullable")
+      @ObjCName(name = "nullableToNullable")
       fun <T: NullabilityConversion.Parent?> nullableToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T?>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T?>
       ): NullabilityConversion.Generic<out T?> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("nullableToNonNull")
+      @ObjCName(name = "nullableToNonNull")
       fun <T: NullabilityConversion.Parent?> nullableToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T?>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T?>
       ): NullabilityConversion.Generic<out T & Any> {
        return it as NullabilityConversion.Generic<out T & Any>
       }
 
       @JvmStatic
-      @ObjCName("nonNullToDefault")
+      @ObjCName(name = "nonNullToDefault")
       fun <T: NullabilityConversion.Parent?> nonNullToDefault(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T & Any>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T & Any>
       ): NullabilityConversion.Generic<out T> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("nonNullToNullable")
+      @ObjCName(name = "nonNullToNullable")
       fun <T: NullabilityConversion.Parent?> nonNullToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T & Any>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T & Any>
       ): NullabilityConversion.Generic<out T?> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("nonNullToNonNull")
+      @ObjCName(name = "nonNullToNonNull")
       fun <T: NullabilityConversion.Parent?> nonNullToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T & Any>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T & Any>
       ): NullabilityConversion.Generic<out T & Any> {
        return it
       }
      }
     }
 
-    @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_VariableToLowerWildcard", exact = true)
+    @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_VariableToLowerWildcard", swiftName = "J2ktNullabilityConversion_Tests_Types_TypeArguments_VariableToLowerWildcard", exact = true)
     open class VariableToLowerWildcard {
-     @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_VariableToLowerWildcardCompanion", exact = true)
+     @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_VariableToLowerWildcardCompanion", swiftName = "J2ktNullabilityConversion_Tests_Types_TypeArguments_VariableToLowerWildcardCompanion", exact = true)
      companion object {
       @JvmStatic
-      @ObjCName("defaultToDefault")
+      @ObjCName(name = "defaultToDefault")
       fun <T: NullabilityConversion.Parent?> defaultToDefault(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T>
       ): NullabilityConversion.Generic<in T> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("defaultToNullable")
+      @ObjCName(name = "defaultToNullable")
       fun <T: NullabilityConversion.Parent?> defaultToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T>
       ): NullabilityConversion.Generic<in T?> {
        return it as NullabilityConversion.Generic<in T?>
       }
 
       @JvmStatic
-      @ObjCName("defaultToNonNull")
+      @ObjCName(name = "defaultToNonNull")
       fun <T: NullabilityConversion.Parent?> defaultToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T>
       ): NullabilityConversion.Generic<in T & Any> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("nullableToDefault")
+      @ObjCName(name = "nullableToDefault")
       fun <T: NullabilityConversion.Parent?> nullableToDefault(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T?>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T?>
       ): NullabilityConversion.Generic<in T> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("nullableToNullable")
+      @ObjCName(name = "nullableToNullable")
       fun <T: NullabilityConversion.Parent?> nullableToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T?>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T?>
       ): NullabilityConversion.Generic<in T?> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("nullableToNonNull")
+      @ObjCName(name = "nullableToNonNull")
       fun <T: NullabilityConversion.Parent?> nullableToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T?>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T?>
       ): NullabilityConversion.Generic<in T & Any> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("nonNullToDefault")
+      @ObjCName(name = "nonNullToDefault")
       fun <T: NullabilityConversion.Parent?> nonNullToDefault(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T & Any>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T & Any>
       ): NullabilityConversion.Generic<in T> {
        return it as NullabilityConversion.Generic<in T>
       }
 
       @JvmStatic
-      @ObjCName("nonNullToNullable")
+      @ObjCName(name = "nonNullToNullable")
       fun <T: NullabilityConversion.Parent?> nonNullToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T & Any>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T & Any>
       ): NullabilityConversion.Generic<in T?> {
        return it as NullabilityConversion.Generic<in T?>
       }
 
       @JvmStatic
-      @ObjCName("nonNullToNonNull")
+      @ObjCName(name = "nonNullToNonNull")
       fun <T: NullabilityConversion.Parent?> nonNullToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T & Any>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<T & Any>
       ): NullabilityConversion.Generic<in T & Any> {
        return it
       }
      }
     }
 
-    @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_VariableUpperWildcardToUpperWildcard", exact = true)
+    @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_VariableUpperWildcardToUpperWildcard", swiftName = "J2ktNullabilityConversion_Tests_Types_TypeArguments_VariableUpperWildcardToUpperWildcard", exact = true)
     open class VariableUpperWildcardToUpperWildcard {
-     @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_VariableUpperWildcardToUpperWildcardCompanion", exact = true)
+     @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_VariableUpperWildcardToUpperWildcardCompanion", swiftName = "J2ktNullabilityConversion_Tests_Types_TypeArguments_VariableUpperWildcardToUpperWildcardCompanion", exact = true)
      companion object {
       @JvmStatic
-      @ObjCName("defaultToDefault")
+      @ObjCName(name = "defaultToDefault")
       fun <T: NullabilityConversion.Parent?> defaultToDefault(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<out T>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<out T>
       ): NullabilityConversion.Generic<out T> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("defaultToNullable")
+      @ObjCName(name = "defaultToNullable")
       fun <T: NullabilityConversion.Parent?> defaultToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<out T>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<out T>
       ): NullabilityConversion.Generic<out T?> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("defaultToNonNull")
+      @ObjCName(name = "defaultToNonNull")
       fun <T: NullabilityConversion.Parent?> defaultToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<out T>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<out T>
       ): NullabilityConversion.Generic<out T & Any> {
        return it as NullabilityConversion.Generic<out T & Any>
       }
 
       @JvmStatic
-      @ObjCName("nullableToDefault")
+      @ObjCName(name = "nullableToDefault")
       fun <T: NullabilityConversion.Parent?> nullableToDefault(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<out T?>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<out T?>
       ): NullabilityConversion.Generic<out T> {
        return it as NullabilityConversion.Generic<out T>
       }
 
       @JvmStatic
-      @ObjCName("nullableToNullable")
+      @ObjCName(name = "nullableToNullable")
       fun <T: NullabilityConversion.Parent?> nullableToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<out T?>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<out T?>
       ): NullabilityConversion.Generic<out T?> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("nullableToNonNull")
+      @ObjCName(name = "nullableToNonNull")
       fun <T: NullabilityConversion.Parent?> nullableToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<out T?>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<out T?>
       ): NullabilityConversion.Generic<out T & Any> {
        return it as NullabilityConversion.Generic<out T & Any>
       }
 
       @JvmStatic
-      @ObjCName("nonNullToDefault")
+      @ObjCName(name = "nonNullToDefault")
       fun <T: NullabilityConversion.Parent?> nonNullToDefault(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<out T & Any>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<out T & Any>
       ): NullabilityConversion.Generic<out T> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("nonNullToNullable")
+      @ObjCName(name = "nonNullToNullable")
       fun <T: NullabilityConversion.Parent?> nonNullToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<out T & Any>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<out T & Any>
       ): NullabilityConversion.Generic<out T?> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("nonNullToNonNull")
+      @ObjCName(name = "nonNullToNonNull")
       fun <T: NullabilityConversion.Parent?> nonNullToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<out T & Any>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<out T & Any>
       ): NullabilityConversion.Generic<out T & Any> {
        return it
       }
      }
     }
 
-    @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_VariableLowerWildcardToLowerWildcard", exact = true)
+    @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_VariableLowerWildcardToLowerWildcard", swiftName = "J2ktNullabilityConversion_Tests_Types_TypeArguments_VariableLowerWildcardToLowerWildcard", exact = true)
     open class VariableLowerWildcardToLowerWildcard {
-     @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_VariableLowerWildcardToLowerWildcardCompanion", exact = true)
+     @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Types_TypeArguments_VariableLowerWildcardToLowerWildcardCompanion", swiftName = "J2ktNullabilityConversion_Tests_Types_TypeArguments_VariableLowerWildcardToLowerWildcardCompanion", exact = true)
      companion object {
       @JvmStatic
-      @ObjCName("defaultToDefault")
+      @ObjCName(name = "defaultToDefault")
       fun <T: NullabilityConversion.Parent?> defaultToDefault(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in T>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in T>
       ): NullabilityConversion.Generic<in T> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("defaultToNullable")
+      @ObjCName(name = "defaultToNullable")
       fun <T: NullabilityConversion.Parent?> defaultToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in T>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in T>
       ): NullabilityConversion.Generic<in T?> {
        return it as NullabilityConversion.Generic<in T?>
       }
 
       @JvmStatic
-      @ObjCName("defaultToNonNull")
+      @ObjCName(name = "defaultToNonNull")
       fun <T: NullabilityConversion.Parent?> defaultToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in T>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in T>
       ): NullabilityConversion.Generic<in T & Any> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("nullableToDefault")
+      @ObjCName(name = "nullableToDefault")
       fun <T: NullabilityConversion.Parent?> nullableToDefault(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in T?>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in T?>
       ): NullabilityConversion.Generic<in T> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("nullableToNullable")
+      @ObjCName(name = "nullableToNullable")
       fun <T: NullabilityConversion.Parent?> nullableToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in T?>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in T?>
       ): NullabilityConversion.Generic<in T?> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("nullableToNonNull")
+      @ObjCName(name = "nullableToNonNull")
       fun <T: NullabilityConversion.Parent?> nullableToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in T?>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in T?>
       ): NullabilityConversion.Generic<in T & Any> {
        return it
       }
 
       @JvmStatic
-      @ObjCName("nonNullToDefault")
+      @ObjCName(name = "nonNullToDefault")
       fun <T: NullabilityConversion.Parent?> nonNullToDefault(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in T & Any>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in T & Any>
       ): NullabilityConversion.Generic<in T> {
        return it as NullabilityConversion.Generic<in T>
       }
 
       @JvmStatic
-      @ObjCName("nonNullToNullable")
+      @ObjCName(name = "nonNullToNullable")
       fun <T: NullabilityConversion.Parent?> nonNullToNullable(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in T & Any>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in T & Any>
       ): NullabilityConversion.Generic<in T?> {
        return it as NullabilityConversion.Generic<in T?>
       }
 
       @JvmStatic
-      @ObjCName("nonNullToNonNull")
+      @ObjCName(name = "nonNullToNonNull")
       fun <T: NullabilityConversion.Parent?> nonNullToNonNull(
-       @ObjCName("withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in T & Any>
+       @ObjCName(name = "withJ2ktNullabilityConversion_Generic") it: NullabilityConversion.Generic<in T & Any>
       ): NullabilityConversion.Generic<in T & Any> {
        return it
       }
@@ -1135,12 +1135,12 @@ open class NullabilityConversion {
    }
   }
 
-  @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Unions", exact = true)
+  @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Unions", swiftName = "J2ktNullabilityConversion_Tests_Unions", exact = true)
   open class Unions {
-   @ObjCName("J2ktJ2ktNullabilityConversion_Tests_UnionsCompanion", exact = true)
+   @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_UnionsCompanion", swiftName = "J2ktNullabilityConversion_Tests_UnionsCompanion", exact = true)
    companion object {
     @JvmStatic
-    @ObjCName("mixedToNonNull")
+    @ObjCName(name = "mixedToNonNull")
     fun mixedToNonNull(): NullabilityConversion.Supplier<NullabilityConversion.Child> {
      try {
       throw RuntimeException()
@@ -1152,7 +1152,7 @@ open class NullabilityConversion {
     }
 
     @JvmStatic
-    @ObjCName("mixedToNullable")
+    @ObjCName(name = "mixedToNullable")
     fun mixedToNullable(): NullabilityConversion.Supplier<NullabilityConversion.Child?> {
      try {
       throw RuntimeException()
@@ -1164,7 +1164,7 @@ open class NullabilityConversion {
     }
 
     @JvmStatic
-    @ObjCName("nonNullToNonNull")
+    @ObjCName(name = "nonNullToNonNull")
     fun nonNullToNonNull(): NullabilityConversion.Supplier<NullabilityConversion.Child> {
      try {
       throw RuntimeException()
@@ -1176,7 +1176,7 @@ open class NullabilityConversion {
     }
 
     @JvmStatic
-    @ObjCName("nullableToNullable")
+    @ObjCName(name = "nullableToNullable")
     fun nullableToNullable(): NullabilityConversion.Supplier<NullabilityConversion.Child?> {
      try {
       throw RuntimeException()
@@ -1188,7 +1188,7 @@ open class NullabilityConversion {
     }
 
     @JvmStatic
-    @ObjCName("typeArgumentMixedToNullable")
+    @ObjCName(name = "typeArgumentMixedToNullable")
     fun typeArgumentMixedToNullable(): NullabilityConversion.Child? {
      try {
       throw RuntimeException()
@@ -1200,7 +1200,7 @@ open class NullabilityConversion {
     }
 
     @JvmStatic
-    @ObjCName("typeArgumentNonNullToNonNull")
+    @ObjCName(name = "typeArgumentNonNullToNonNull")
     fun typeArgumentNonNullToNonNull(): NullabilityConversion.Child {
      try {
       throw RuntimeException()
@@ -1212,7 +1212,7 @@ open class NullabilityConversion {
     }
 
     @JvmStatic
-    @ObjCName("typeArgumentNullableToNullable")
+    @ObjCName(name = "typeArgumentNullableToNullable")
     fun typeArgumentNullableToNullable(): NullabilityConversion.Child? {
      try {
       throw RuntimeException()
@@ -1224,16 +1224,16 @@ open class NullabilityConversion {
     }
    }
 
-   @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Unions_ExceptionNonNull1", exact = true)
+   @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Unions_ExceptionNonNull1", swiftName = "J2ktNullabilityConversion_Tests_Unions_ExceptionNonNull1", exact = true)
    abstract class ExceptionNonNull1: RuntimeException(), NullabilityConversion.Supplier<NullabilityConversion.Child>
 
-   @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Unions_ExceptionNonNull2", exact = true)
+   @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Unions_ExceptionNonNull2", swiftName = "J2ktNullabilityConversion_Tests_Unions_ExceptionNonNull2", exact = true)
    abstract class ExceptionNonNull2: RuntimeException(), NullabilityConversion.Supplier<NullabilityConversion.Child>
 
-   @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Unions_ExceptionNullable1", exact = true)
+   @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Unions_ExceptionNullable1", swiftName = "J2ktNullabilityConversion_Tests_Unions_ExceptionNullable1", exact = true)
    abstract class ExceptionNullable1: RuntimeException(), NullabilityConversion.Supplier<NullabilityConversion.Child?>
 
-   @ObjCName("J2ktJ2ktNullabilityConversion_Tests_Unions_ExceptionNullable2", exact = true)
+   @ObjCName(name = "J2ktJ2ktNullabilityConversion_Tests_Unions_ExceptionNullable2", swiftName = "J2ktNullabilityConversion_Tests_Unions_ExceptionNullable2", exact = true)
    abstract class ExceptionNullable2: RuntimeException(), NullabilityConversion.Supplier<NullabilityConversion.Child?>
   }
  }

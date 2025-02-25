@@ -24,10 +24,10 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktSimplegenericinterfaceSimpleGenericInterface", exact = true)
+@ObjCName(name = "J2ktSimplegenericinterfaceSimpleGenericInterface", swiftName = "SimplegenericinterfaceSimpleGenericInterface", exact = true)
 fun interface SimpleGenericInterface<T> {
- @ObjCName("fun")
+ @ObjCName(name = "fun")
  fun `fun`(
-  @ObjCName("withId") t: T
+  @ObjCName(name = "withId") t: T
  ): T
 }

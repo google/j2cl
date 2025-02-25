@@ -27,25 +27,25 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktSimplegenerictypeSimpleGenericType", exact = true)
+@ObjCName(name = "J2ktSimplegenerictypeSimpleGenericType", swiftName = "SimplegenerictypeSimpleGenericType", exact = true)
 open class SimpleGenericType<T, S> {
  @JvmField
- @ObjCName("first_")
+ @ObjCName(name = "first_")
  var first: T
 
  @JvmField
- @ObjCName("second_")
+ @ObjCName(name = "second_")
  var second: S
 
  constructor(
-  @ObjCName("Id") t: T,
-  @ObjCName("withId") s: S
+  @ObjCName(name = "Id") t: T,
+  @ObjCName(name = "withId") s: S
  ) {
   this.first = t
   this.second = s
  }
 
- @ObjCName("test")
+ @ObjCName(name = "test")
  open fun test() {
   val g: SimpleGenericType<Any?, Error?>? = SimpleGenericType<Any?, Error?>(
    Any(),

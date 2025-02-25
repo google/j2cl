@@ -31,34 +31,34 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktBoxOverloads", exact = true)
+@ObjCName(name = "J2ktJ2ktBoxOverloads", swiftName = "J2ktBoxOverloads", exact = true)
 open class BoxOverloads {
  constructor(
-  @ObjCName("Double") d: Double
+  @ObjCName(name = "Double") d: Double
  ): this(
   java.lang.Double.valueOf(d) as Double?,
  )
 
  constructor(
-  @ObjCName("JavaLangDouble") d: Double?
+  @ObjCName(name = "JavaLangDouble") d: Double?
  )
 
- @ObjCName("J2ktJ2ktBoxOverloadsCompanion", exact = true)
+ @ObjCName(name = "J2ktJ2ktBoxOverloadsCompanion", swiftName = "J2ktBoxOverloadsCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("nullableBoxedOverload")
+  @ObjCName(name = "nullableBoxedOverload")
   fun nullableBoxedOverload(
-   @ObjCName("withDouble") d: Double
+   @ObjCName(name = "withDouble") d: Double
   ) {}
 
   @JvmStatic
-  @ObjCName("nullableBoxedOverload")
+  @ObjCName(name = "nullableBoxedOverload")
   fun nullableBoxedOverload(
-   @ObjCName("withJavaLangDouble") d: Double?
+   @ObjCName(name = "withJavaLangDouble") d: Double?
   ) {}
 
   @JvmStatic
-  @ObjCName("testNullableBoxedOverload")
+  @ObjCName(name = "testNullableBoxedOverload")
   fun testNullableBoxedOverload() {
    BoxOverloads.nullableBoxedOverload(1.25)
    BoxOverloads.nullableBoxedOverload(
@@ -73,19 +73,19 @@ open class BoxOverloads {
   }
 
   @JvmStatic
-  @ObjCName("nullableNumberOverload")
+  @ObjCName(name = "nullableNumberOverload")
   fun nullableNumberOverload(
-   @ObjCName("withDouble") d: Double
+   @ObjCName(name = "withDouble") d: Double
   ) {}
 
   @JvmStatic
-  @ObjCName("nullableNumberOverload")
+  @ObjCName(name = "nullableNumberOverload")
   fun nullableNumberOverload(
-   @ObjCName("withNSNumber") n: Number?
+   @ObjCName(name = "withNSNumber") n: Number?
   ) {}
 
   @JvmStatic
-  @ObjCName("testNullableNumberOverload")
+  @ObjCName(name = "testNullableNumberOverload")
   fun testNullableNumberOverload() {
    BoxOverloads.nullableNumberOverload(1.25)
    BoxOverloads.nullableNumberOverload(
@@ -106,19 +106,19 @@ open class BoxOverloads {
   }
 
   @JvmStatic
-  @ObjCName("numberOverload")
+  @ObjCName(name = "numberOverload")
   fun numberOverload(
-   @ObjCName("withDouble") d: Double
+   @ObjCName(name = "withDouble") d: Double
   ) {}
 
   @JvmStatic
-  @ObjCName("numberOverload")
+  @ObjCName(name = "numberOverload")
   fun numberOverload(
-   @ObjCName("withNSNumber") n: Number
+   @ObjCName(name = "withNSNumber") n: Number
   ) {}
 
   @JvmStatic
-  @ObjCName("testNumberOverload")
+  @ObjCName(name = "testNumberOverload")
   fun testNumberOverload() {
    BoxOverloads.numberOverload(1.25)
    BoxOverloads.numberOverload(
@@ -139,19 +139,19 @@ open class BoxOverloads {
   }
 
   @JvmStatic
-  @ObjCName("nullableObjectOverload")
+  @ObjCName(name = "nullableObjectOverload")
   fun nullableObjectOverload(
-   @ObjCName("withDouble") d: Double
+   @ObjCName(name = "withDouble") d: Double
   ) {}
 
   @JvmStatic
-  @ObjCName("nullableObjectOverload")
+  @ObjCName(name = "nullableObjectOverload")
   fun nullableObjectOverload(
-   @ObjCName("withId") o: Any?
+   @ObjCName(name = "withId") o: Any?
   ) {}
 
   @JvmStatic
-  @ObjCName("testNullableObjectOverload")
+  @ObjCName(name = "testNullableObjectOverload")
   fun testNullableObjectOverload() {
    BoxOverloads.nullableObjectOverload(1.25)
    BoxOverloads.nullableObjectOverload(
@@ -173,19 +173,19 @@ open class BoxOverloads {
   }
 
   @JvmStatic
-  @ObjCName("objectOverload")
+  @ObjCName(name = "objectOverload")
   fun objectOverload(
-   @ObjCName("withDouble") d: Double
+   @ObjCName(name = "withDouble") d: Double
   ) {}
 
   @JvmStatic
-  @ObjCName("objectOverload")
+  @ObjCName(name = "objectOverload")
   fun objectOverload(
-   @ObjCName("withId") o: Any
+   @ObjCName(name = "withId") o: Any
   ) {}
 
   @JvmStatic
-  @ObjCName("testObjectOverload")
+  @ObjCName(name = "testObjectOverload")
   fun testObjectOverload() {
    BoxOverloads.objectOverload(1.25)
    BoxOverloads.objectOverload(
@@ -207,18 +207,18 @@ open class BoxOverloads {
   }
 
   @JvmStatic
-  @ObjCName("firstNonNull")
+  @ObjCName(name = "firstNonNull")
   fun <T: Any> firstNonNull(
-   @ObjCName("withId") t1: T?,
-   @ObjCName("withId") t2: T
+   @ObjCName(name = "withId") t1: T?,
+   @ObjCName(name = "withId") t2: T
   ): T {
    return (if (t1 != null) t1 else t2)!!
   }
 
   @JvmStatic
-  @ObjCName("testFirstNonNull")
+  @ObjCName(name = "testFirstNonNull")
   fun testFirstNonNull(
-   @ObjCName("withJavaLangInteger") i: Int?
+   @ObjCName(name = "withJavaLangInteger") i: Int?
   ) {
    BoxOverloads.firstNonNull<Int>(
     i,
@@ -227,9 +227,9 @@ open class BoxOverloads {
   }
 
   @JvmStatic
-  @ObjCName("testComparableOverload")
+  @ObjCName(name = "testComparableOverload")
   fun testComparableOverload(
-   @ObjCName("withJ2ktBoxOverloads_Generic") generic: BoxOverloads.Generic<Double>
+   @ObjCName(name = "withJ2ktBoxOverloads_Generic") generic: BoxOverloads.Generic<Double>
   ) {
    generic.comparableOverload(1.25)
    generic.comparableOverload(
@@ -238,26 +238,26 @@ open class BoxOverloads {
   }
  }
 
- @ObjCName("J2ktJ2ktBoxOverloads_Generic", exact = true)
+ @ObjCName(name = "J2ktJ2ktBoxOverloads_Generic", swiftName = "J2ktBoxOverloads_Generic", exact = true)
  interface Generic<T> {
-  @ObjCName("overload")
+  @ObjCName(name = "overload")
   fun overload(
-   @ObjCName("withDouble") d: Double
+   @ObjCName(name = "withDouble") d: Double
   )
 
-  @ObjCName("overload")
+  @ObjCName(name = "overload")
   fun overload(
-   @ObjCName("withId") t: T
+   @ObjCName(name = "withId") t: T
   )
 
-  @ObjCName("comparableOverload")
+  @ObjCName(name = "comparableOverload")
   fun comparableOverload(
-   @ObjCName("withDouble") d: Double
+   @ObjCName(name = "withDouble") d: Double
   )
 
-  @ObjCName("comparableOverload")
+  @ObjCName(name = "comparableOverload")
   fun comparableOverload(
-   @ObjCName("withJavaLangComparable") comparable: Comparable<T & Any>
+   @ObjCName(name = "withJavaLangComparable") comparable: Comparable<T & Any>
   )
  }
 }

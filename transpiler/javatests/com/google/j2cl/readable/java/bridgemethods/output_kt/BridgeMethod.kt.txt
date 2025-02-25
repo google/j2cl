@@ -32,179 +32,179 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktBridgemethodsSomeInterface", exact = true)
+@ObjCName(name = "J2ktBridgemethodsSomeInterface", swiftName = "BridgemethodsSomeInterface", exact = true)
 interface SomeInterface<T, S> {
- @ObjCName("foo")
+ @ObjCName(name = "foo")
  fun foo(
-  @ObjCName("withId") t: T,
-  @ObjCName("withId") s: S
+  @ObjCName(name = "withId") t: T,
+  @ObjCName(name = "withId") s: S
  )
 
- @ObjCName("foo")
+ @ObjCName(name = "foo")
  fun foo(
-  @ObjCName("withId") t: T,
-  @ObjCName("withNSNumber") n: Number?
+  @ObjCName(name = "withId") t: T,
+  @ObjCName(name = "withNSNumber") n: Number?
  )
 }
 
-@ObjCName("J2ktBridgemethodsSuperParent", exact = true)
+@ObjCName(name = "J2ktBridgemethodsSuperParent", swiftName = "BridgemethodsSuperParent", exact = true)
 open class SuperParent<T, S> internal constructor() {
- @ObjCName("foo")
+ @ObjCName(name = "foo")
  open fun foo(
-  @ObjCName("withId") t: T,
-  @ObjCName("withId") s: S
+  @ObjCName(name = "withId") t: T,
+  @ObjCName(name = "withId") s: S
  ) {}
 }
 
-@ObjCName("J2ktBridgemethodsParent", exact = true)
+@ObjCName(name = "J2ktBridgemethodsParent", swiftName = "BridgemethodsParent", exact = true)
 open class Parent<T: Error?> internal constructor(): SuperParent<T, Number?>() {
  override fun foo(t: T, s: Number?) {}
 
- @ObjCName("bar")
+ @ObjCName(name = "bar")
  open fun <T_1: Number?> bar(
-  @ObjCName("withNSNumber") t: T_1
+  @ObjCName(name = "withNSNumber") t: T_1
  ) {}
 
- @ObjCName("fun")
+ @ObjCName(name = "fun")
  open fun <T_1> `fun`(
-  @ObjCName("withId") t: T_1
+  @ObjCName(name = "withId") t: T_1
  ) {}
 }
 
-@ObjCName("J2ktBridgemethodsBridgeMethod", exact = true)
+@ObjCName(name = "J2ktBridgemethodsBridgeMethod", swiftName = "BridgemethodsBridgeMethod", exact = true)
 open class BridgeMethod: Parent<AssertionError?>(), SomeInterface<AssertionError?, Number?> {
  override fun foo(a: AssertionError?, n: Number?) {}
 
- @ObjCName("fun")
+ @ObjCName(name = "fun")
  open fun `fun`(
-  @ObjCName("withNSNumber") t: Number?
+  @ObjCName(name = "withNSNumber") t: Number?
  ) {}
 }
 
-@ObjCName("J2ktBridgemethodsSomeOtherFooInterface", exact = true)
+@ObjCName(name = "J2ktBridgemethodsSomeOtherFooInterface", swiftName = "BridgemethodsSomeOtherFooInterface", exact = true)
 fun interface SomeOtherFooInterface<T> {
- @ObjCName("foo")
+ @ObjCName(name = "foo")
  fun foo(
-  @ObjCName("withId") t: T,
-  @ObjCName("withJavaLangDouble") s: Double?
+  @ObjCName(name = "withId") t: T,
+  @ObjCName(name = "withJavaLangDouble") s: Double?
  )
 }
 
-@ObjCName("J2ktBridgemethodsDualUnrelatedBridges", exact = true)
+@ObjCName(name = "J2ktBridgemethodsDualUnrelatedBridges", swiftName = "BridgemethodsDualUnrelatedBridges", exact = true)
 open class DualUnrelatedBridges internal constructor(): SomeInterface<String?, Double?>, SomeOtherFooInterface<String?> {
  override fun foo(s: String?, n: Double?) {}
 
  override fun foo(s: String?, n: Number?) {}
 }
 
-@ObjCName("J2ktBridgemethodsSuperDualUnrelatedAccidentalBridges", exact = true)
+@ObjCName(name = "J2ktBridgemethodsSuperDualUnrelatedAccidentalBridges", swiftName = "BridgemethodsSuperDualUnrelatedAccidentalBridges", exact = true)
 open class SuperDualUnrelatedAccidentalBridges internal constructor() {
- @ObjCName("foo")
+ @ObjCName(name = "foo")
  open fun foo(
-  @ObjCName("withNSString") s: String?,
-  @ObjCName("withJavaLangDouble") n: Double?
+  @ObjCName(name = "withNSString") s: String?,
+  @ObjCName(name = "withJavaLangDouble") n: Double?
  ) {}
 
- @ObjCName("foo")
+ @ObjCName(name = "foo")
  open fun foo(
-  @ObjCName("withNSString") s: String?,
-  @ObjCName("withNSNumber") n: Number?
+  @ObjCName(name = "withNSString") s: String?,
+  @ObjCName(name = "withNSNumber") n: Number?
  ) {}
 }
 
-@ObjCName("J2ktBridgemethodsDualUnrelatedAccidentalBridges", exact = true)
+@ObjCName(name = "J2ktBridgemethodsDualUnrelatedAccidentalBridges", swiftName = "BridgemethodsDualUnrelatedAccidentalBridges", exact = true)
 open class DualUnrelatedAccidentalBridges internal constructor(): SuperDualUnrelatedAccidentalBridges(), SomeInterface<String?, Double?>, SomeOtherFooInterface<String?>
 
-@ObjCName("J2ktBridgemethodsGetter", exact = true)
+@ObjCName(name = "J2ktBridgemethodsGetter", swiftName = "BridgemethodsGetter", exact = true)
 fun interface Getter {
- @ObjCName("get")
+ @ObjCName(name = "get")
  fun get(
-  @ObjCName("withNSString") s: String?
+  @ObjCName(name = "withNSString") s: String?
  ): String?
 }
 
-@ObjCName("J2ktBridgemethodsClassWithParameterizedGet", exact = true)
+@ObjCName(name = "J2ktBridgemethodsClassWithParameterizedGet", swiftName = "BridgemethodsClassWithParameterizedGet", exact = true)
 open class ClassWithParameterizedGet<T> internal constructor() {
- @ObjCName("get")
+ @ObjCName(name = "get")
  open fun get(
-  @ObjCName("withId") t: T
+  @ObjCName(name = "withId") t: T
  ): T {
   return null as T
  }
 }
 
-@ObjCName("J2ktBridgemethodsAccidentalOverrideBridge", exact = true)
+@ObjCName(name = "J2ktBridgemethodsAccidentalOverrideBridge", swiftName = "BridgemethodsAccidentalOverrideBridge", exact = true)
 open class AccidentalOverrideBridge internal constructor(): ClassWithParameterizedGet<String?>(), Getter {
- @ObjCName("test")
+ @ObjCName(name = "test")
  open fun test() {
   val g: Getter? = AccidentalOverrideBridge()
   g!!.get("")
  }
 }
 
-@ObjCName("J2ktBridgemethodsTestCase10036", exact = true)
+@ObjCName(name = "J2ktBridgemethodsTestCase10036", swiftName = "BridgemethodsTestCase10036", exact = true)
 open class TestCase10036 internal constructor() {
- @ObjCName("J2ktBridgemethodsTestCase10036_BI3", exact = true)
+ @ObjCName(name = "J2ktBridgemethodsTestCase10036_BI3", swiftName = "BridgemethodsTestCase10036_BI3", exact = true)
  @JsType
  interface BI3 {
-  @ObjCName("get")
+  @ObjCName(name = "get")
   fun get(
-   @ObjCName("withNSString") value: String?
+   @ObjCName(name = "withNSString") value: String?
   ): String? {
    return "BI3 get String"
   }
  }
 
- @ObjCName("J2ktBridgemethodsTestCase10036_BI2", exact = true)
+ @ObjCName(name = "J2ktBridgemethodsTestCase10036_BI2", swiftName = "BridgemethodsTestCase10036_BI2", exact = true)
  fun interface BI2 {
-  @ObjCName("get")
+  @ObjCName(name = "get")
   fun get(
-   @ObjCName("withNSString") value: String?
+   @ObjCName(name = "withNSString") value: String?
   ): String?
  }
 
- @ObjCName("J2ktBridgemethodsTestCase10036_BI1", exact = true)
+ @ObjCName(name = "J2ktBridgemethodsTestCase10036_BI1", swiftName = "BridgemethodsTestCase10036_BI1", exact = true)
  fun interface BI1: TestCase10036.BI3 {
   override fun get(value: String?): String?
  }
 
- @ObjCName("J2ktBridgemethodsTestCase10036_B", exact = true)
+ @ObjCName(name = "J2ktBridgemethodsTestCase10036_B", swiftName = "BridgemethodsTestCase10036_B", exact = true)
  abstract class B<B1: Comparable<*>?> internal constructor(): TestCase10036.BI1, TestCase10036.BI2 {
-  @ObjCName("get")
+  @ObjCName(name = "get")
   abstract fun get(
-   @ObjCName("withJavaLangComparable") value: B1
+   @ObjCName(name = "withJavaLangComparable") value: B1
   ): String?
  }
 }
 
-@ObjCName("J2ktBridgemethodsTestCase102", exact = true)
+@ObjCName(name = "J2ktBridgemethodsTestCase102", swiftName = "BridgemethodsTestCase102", exact = true)
 open class TestCase102 internal constructor() {
- @ObjCName("J2ktBridgemethodsTestCase102_BI2", exact = true)
+ @ObjCName(name = "J2ktBridgemethodsTestCase102_BI2", swiftName = "BridgemethodsTestCase102_BI2", exact = true)
  @JsType
  fun interface BI2 {
-  @ObjCName("set")
+  @ObjCName(name = "set")
   fun set(
-   @ObjCName("withNSString") value: String?
+   @ObjCName(name = "withNSString") value: String?
   )
  }
 
- @ObjCName("J2ktBridgemethodsTestCase102_BI1", exact = true)
+ @ObjCName(name = "J2ktBridgemethodsTestCase102_BI1", swiftName = "BridgemethodsTestCase102_BI1", exact = true)
  fun interface BI1 {
-  @ObjCName("set")
+  @ObjCName(name = "set")
   fun set(
-   @ObjCName("withNSString") value: String?
+   @ObjCName(name = "withNSString") value: String?
   )
  }
 
- @ObjCName("J2ktBridgemethodsTestCase102_B", exact = true)
+ @ObjCName(name = "J2ktBridgemethodsTestCase102_B", swiftName = "BridgemethodsTestCase102_B", exact = true)
  abstract class B<B1> internal constructor(): TestCase102.BI1, TestCase102.BI2 {
-  @ObjCName("set")
+  @ObjCName(name = "set")
   abstract fun set(
-   @ObjCName("withId") value: B1
+   @ObjCName(name = "withId") value: B1
   )
  }
 
- @ObjCName("J2ktBridgemethodsTestCase102_C", exact = true)
+ @ObjCName(name = "J2ktBridgemethodsTestCase102_C", swiftName = "BridgemethodsTestCase102_C", exact = true)
  open inner class C<B1> internal constructor(): TestCase102.B<B1>() {
   override fun set(value: String?) {}
 
@@ -212,89 +212,89 @@ open class TestCase102 internal constructor() {
  }
 }
 
-@ObjCName("J2ktBridgemethodsParameterizedParent", exact = true)
+@ObjCName(name = "J2ktBridgemethodsParameterizedParent", swiftName = "BridgemethodsParameterizedParent", exact = true)
 open class ParameterizedParent<T: ParameterizedParent<T>?> internal constructor() {
  internal open fun <Q: T> m_pp_bridgemethods(t: Q): Q {
   return null as Q
  }
 }
 
-@ObjCName("J2ktBridgemethodsReparametrerizedChild", exact = true)
+@ObjCName(name = "J2ktBridgemethodsReparametrerizedChild", swiftName = "BridgemethodsReparametrerizedChild", exact = true)
 open class ReparametrerizedChild<E: ReparametrerizedChild<E>?> internal constructor(): ParameterizedParent<E>() {
  override fun <S: E> m_pp_bridgemethods(t: S): S {
   return null as S
  }
 }
 
-@ObjCName("J2ktBridgemethodsLeafChild", exact = true)
+@ObjCName(name = "J2ktBridgemethodsLeafChild", swiftName = "BridgemethodsLeafChild", exact = true)
 open class LeafChild internal constructor(): ReparametrerizedChild<LeafChild?>()
 
-@ObjCName("J2ktBridgemethodsStringConsumer", exact = true)
+@ObjCName(name = "J2ktBridgemethodsStringConsumer", swiftName = "BridgemethodsStringConsumer", exact = true)
 fun interface StringConsumer {
- @ObjCName("accept")
+ @ObjCName(name = "accept")
  fun accept(
-  @ObjCName("withNSString") s: String?
+  @ObjCName(name = "withNSString") s: String?
  )
 }
 
-@ObjCName("J2ktBridgemethodsConsumer", exact = true)
+@ObjCName(name = "J2ktBridgemethodsConsumer", swiftName = "BridgemethodsConsumer", exact = true)
 open class Consumer<T> internal constructor() {
- @ObjCName("accept")
+ @ObjCName(name = "accept")
  fun accept(
-  @ObjCName("withId") t: T
+  @ObjCName(name = "withId") t: T
  ) {}
 }
 
-@ObjCName("J2ktBridgemethodsStringConsumerImpl", exact = true)
+@ObjCName(name = "J2ktBridgemethodsStringConsumerImpl", swiftName = "BridgemethodsStringConsumerImpl", exact = true)
 open class StringConsumerImpl internal constructor(): Consumer<String?>(), StringConsumer
 
-@ObjCName("J2ktBridgemethodsSpecializingReturnAbstractClass", exact = true)
+@ObjCName(name = "J2ktBridgemethodsSpecializingReturnAbstractClass", swiftName = "BridgemethodsSpecializingReturnAbstractClass", exact = true)
 abstract class SpecializingReturnAbstractClass internal constructor() {
- @ObjCName("foo")
+ @ObjCName(name = "foo")
  abstract fun foo(): Any?
 }
 
-@ObjCName("J2ktBridgemethodsSpecializingReturnInterface", exact = true)
+@ObjCName(name = "J2ktBridgemethodsSpecializingReturnInterface", swiftName = "BridgemethodsSpecializingReturnInterface", exact = true)
 fun interface SpecializingReturnInterface {
- @ObjCName("foo")
+ @ObjCName(name = "foo")
  fun foo(): String?
 }
 
-@ObjCName("J2ktBridgemethodsSpecializingReturnAbstractSubclass", exact = true)
+@ObjCName(name = "J2ktBridgemethodsSpecializingReturnAbstractSubclass", swiftName = "BridgemethodsSpecializingReturnAbstractSubclass", exact = true)
 abstract class SpecializingReturnAbstractSubclass internal constructor(): SpecializingReturnAbstractClass(), SpecializingReturnInterface
 
-@ObjCName("J2ktBridgemethodsInterfaceWithDefaultMethod", exact = true)
+@ObjCName(name = "J2ktBridgemethodsInterfaceWithDefaultMethod", swiftName = "BridgemethodsInterfaceWithDefaultMethod", exact = true)
 interface InterfaceWithDefaultMethod {
- @ObjCName("foo")
+ @ObjCName(name = "foo")
  fun foo(): Any? {
   return "A"
  }
 }
 
-@ObjCName("J2ktBridgemethodsInterfaceOverridingDefaultMethod", exact = true)
+@ObjCName(name = "J2ktBridgemethodsInterfaceOverridingDefaultMethod", swiftName = "BridgemethodsInterfaceOverridingDefaultMethod", exact = true)
 fun interface InterfaceOverridingDefaultMethod: InterfaceWithDefaultMethod {
  override fun foo(): String?
 }
 
-@ObjCName("J2ktBridgemethodsDoesNotInheritDefaultMethod1", exact = true)
+@ObjCName(name = "J2ktBridgemethodsDoesNotInheritDefaultMethod1", swiftName = "BridgemethodsDoesNotInheritDefaultMethod1", exact = true)
 abstract class DoesNotInheritDefaultMethod1 internal constructor(): InterfaceWithDefaultMethod, InterfaceOverridingDefaultMethod
 
-@ObjCName("J2ktBridgemethodsDoesNotInheritDefaultMethod2", exact = true)
+@ObjCName(name = "J2ktBridgemethodsDoesNotInheritDefaultMethod2", swiftName = "BridgemethodsDoesNotInheritDefaultMethod2", exact = true)
 abstract class DoesNotInheritDefaultMethod2 internal constructor(): InterfaceOverridingDefaultMethod, InterfaceWithDefaultMethod
 
-@ObjCName("J2ktBridgemethodsPackagePrivateBridgeSuper", exact = true)
+@ObjCName(name = "J2ktBridgemethodsPackagePrivateBridgeSuper", swiftName = "BridgemethodsPackagePrivateBridgeSuper", exact = true)
 open class PackagePrivateBridgeSuper<T, U> internal constructor() {
  internal open fun <S: T, R: PackagePrivateBridgeSuper<S, R>?> m_pp_bridgemethods(r: R, s: S, t: T, u: U) {}
 }
 
-@ObjCName("J2ktBridgemethodsPackagePrivateBridge", exact = true)
+@ObjCName(name = "J2ktBridgemethodsPackagePrivateBridge", swiftName = "BridgemethodsPackagePrivateBridge", exact = true)
 class PackagePrivateBridge<V, W> internal constructor(): PackagePrivateBridgeSuper<V, W>() {
- @ObjCName("m")
+ @ObjCName(name = "m")
  public fun <S: V, R: PackagePrivateBridgeSuper<S, R>?> m(
-  @ObjCName("withBridgemethodsPackagePrivateBridgeSuper") r: R,
-  @ObjCName("withId") s: S,
-  @ObjCName("withId") v: V,
-  @ObjCName("withId") w: W
+  @ObjCName(name = "withBridgemethodsPackagePrivateBridgeSuper") r: R,
+  @ObjCName(name = "withId") s: S,
+  @ObjCName(name = "withId") v: V,
+  @ObjCName(name = "withId") w: W
  ) {}
 
  override fun <S: V, R: PackagePrivateBridgeSuper<S, R>?> m_pp_bridgemethods(arg0: R, arg1: S, arg2: V, arg3: W) {

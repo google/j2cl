@@ -27,39 +27,39 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktPrivateVisibility", exact = true)
+@ObjCName(name = "J2ktJ2ktPrivateVisibility", swiftName = "J2ktPrivateVisibility", exact = true)
 class PrivateVisibility {
- @ObjCName("J2ktJ2ktPrivateVisibilityCompanion", exact = true)
+ @ObjCName(name = "J2ktJ2ktPrivateVisibilityCompanion", swiftName = "J2ktPrivateVisibilityCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("testOuterConstructorReference")
+  @ObjCName(name = "testOuterConstructorReference")
   fun testOuterConstructorReference(): PrivateVisibility.OuterConstructorReference? {
    return PrivateVisibility.OuterConstructorReference()
   }
  }
 
- @ObjCName("J2ktJ2ktPrivateVisibility_InnerConstructorReference", exact = true)
+ @ObjCName(name = "J2ktJ2ktPrivateVisibility_InnerConstructorReference", swiftName = "J2ktPrivateVisibility_InnerConstructorReference", exact = true)
  class InnerConstructorReference {
   private constructor()
 
-  @ObjCName("J2ktJ2ktPrivateVisibility_InnerConstructorReferenceCompanion", exact = true)
+  @ObjCName(name = "J2ktJ2ktPrivateVisibility_InnerConstructorReferenceCompanion", swiftName = "J2ktPrivateVisibility_InnerConstructorReferenceCompanion", exact = true)
   companion object {
    @JvmStatic
-   @ObjCName("testInnerConstructorReference")
+   @ObjCName(name = "testInnerConstructorReference")
    fun testInnerConstructorReference(): PrivateVisibility.InnerConstructorReference? {
     return PrivateVisibility.InnerConstructorReference()
    }
   }
  }
 
- @ObjCName("J2ktJ2ktPrivateVisibility_OuterConstructorReference", exact = true)
+ @ObjCName(name = "J2ktJ2ktPrivateVisibility_OuterConstructorReference", swiftName = "J2ktPrivateVisibility_OuterConstructorReference", exact = true)
  class OuterConstructorReference {
   internal constructor()
  }
 
- @ObjCName("J2ktJ2ktPrivateVisibility_Outer", exact = true)
+ @ObjCName(name = "J2ktJ2ktPrivateVisibility_Outer", swiftName = "J2ktPrivateVisibility_Outer", exact = true)
  class Outer {
-  @ObjCName("testMemberReference")
+  @ObjCName(name = "testMemberReference")
   fun testMemberReference() {
    PrivateVisibility.Outer.outerField = 0
    PrivateVisibility.Outer.outerMethod()
@@ -67,7 +67,7 @@ class PrivateVisibility {
    PrivateVisibility.Outer.Inner.innerMethod_outerReference_private_2()
   }
 
-  @ObjCName("J2ktJ2ktPrivateVisibility_OuterCompanion", exact = true)
+  @ObjCName(name = "J2ktJ2ktPrivateVisibility_OuterCompanion", swiftName = "J2ktPrivateVisibility_OuterCompanion", exact = true)
   companion object {
    private var outerField: Int = 0
 
@@ -75,9 +75,9 @@ class PrivateVisibility {
    private fun outerMethod() {}
   }
 
-  @ObjCName("J2ktJ2ktPrivateVisibility_Outer_Inner", exact = true)
+  @ObjCName(name = "J2ktJ2ktPrivateVisibility_Outer_Inner", swiftName = "J2ktPrivateVisibility_Outer_Inner", exact = true)
   class Inner {
-   @ObjCName("testMemberReference")
+   @ObjCName(name = "testMemberReference")
    fun testMemberReference() {
     PrivateVisibility.Outer.outerField = 0
     PrivateVisibility.Outer.outerMethod()
@@ -85,7 +85,7 @@ class PrivateVisibility {
     PrivateVisibility.Outer.Inner.innerMethod_innerReference()
    }
 
-   @ObjCName("J2ktJ2ktPrivateVisibility_Outer_InnerCompanion", exact = true)
+   @ObjCName(name = "J2ktJ2ktPrivateVisibility_Outer_InnerCompanion", swiftName = "J2ktPrivateVisibility_Outer_InnerCompanion", exact = true)
    companion object {
     private var innerField_innerReference: Int = 0
 

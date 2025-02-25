@@ -30,34 +30,34 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 import kotlin.run
 
-@ObjCName("J2ktInstancequalifieronstaticfieldInstanceQualifiers", exact = true)
+@ObjCName(name = "J2ktInstancequalifieronstaticfieldInstanceQualifiers", swiftName = "InstancequalifieronstaticfieldInstanceQualifiers", exact = true)
 open class InstanceQualifiers {
- @ObjCName("J2ktInstancequalifieronstaticfieldInstanceQualifiersCompanion", exact = true)
+ @ObjCName(name = "J2ktInstancequalifieronstaticfieldInstanceQualifiersCompanion", swiftName = "InstancequalifieronstaticfieldInstanceQualifiersCompanion", exact = true)
  companion object {
   @JvmField
-  @ObjCName("staticField_")
+  @ObjCName(name = "staticField_")
   var staticField: Int = 100
 
   @JvmField
-  @ObjCName("sideEffectCount_")
+  @ObjCName(name = "sideEffectCount_")
   var sideEffectCount: Int = 0
 
   @JvmStatic
-  @ObjCName("getStaticValue")
+  @ObjCName(name = "getStaticValue")
   fun getStaticValue(): Int {
    return InstanceQualifiers.staticField
   }
 
   @JvmStatic
-  @ObjCName("getStaticInstanceQualifiers")
+  @ObjCName(name = "getStaticInstanceQualifiers")
   fun getStaticInstanceQualifiers(): InstanceQualifiers? {
    return null
   }
 
   @JvmStatic
-  @ObjCName("main")
+  @ObjCName(name = "main")
   fun main(
-   vararg @ObjCName("withNSStringArray") args: String?
+   vararg @ObjCName(name = "withNSStringArray") args: String?
   ) {
    val args_1: Array<String?>? = args as Array<String?>?
    val main: InstanceQualifiers? = InstanceQualifiers()

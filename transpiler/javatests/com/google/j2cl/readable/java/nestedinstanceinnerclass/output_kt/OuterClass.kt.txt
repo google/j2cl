@@ -25,23 +25,23 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktNestedinstanceinnerclassOuterClass", exact = true)
+@ObjCName(name = "J2ktNestedinstanceinnerclassOuterClass", swiftName = "NestedinstanceinnerclassOuterClass", exact = true)
 open class OuterClass {
- @ObjCName("test")
+ @ObjCName(name = "test")
  open fun test() {
   OuterClass().InnerClass().InnerInnerClass()
  }
 
- @ObjCName("J2ktNestedinstanceinnerclassOuterClass_InnerClass", exact = true)
+ @ObjCName(name = "J2ktNestedinstanceinnerclassOuterClass_InnerClass", swiftName = "NestedinstanceinnerclassOuterClass_InnerClass", exact = true)
  open inner class InnerClass {
-  @ObjCName("J2ktNestedinstanceinnerclassOuterClass_InnerClass_InnerInnerClass", exact = true)
+  @ObjCName(name = "J2ktNestedinstanceinnerclassOuterClass_InnerClass_InnerInnerClass", swiftName = "NestedinstanceinnerclassOuterClass_InnerClass_InnerInnerClass", exact = true)
   open inner class InnerInnerClass {
    @JvmField
-   @ObjCName("x_")
+   @ObjCName(name = "x_")
    var x: OuterClass.InnerClass? = this@InnerClass
 
    @JvmField
-   @ObjCName("y_")
+   @ObjCName(name = "y_")
    var y: OuterClass? = this@OuterClass
   }
  }

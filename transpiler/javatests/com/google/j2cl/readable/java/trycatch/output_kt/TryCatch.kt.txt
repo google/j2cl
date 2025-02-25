@@ -34,9 +34,9 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.Throws
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktTrycatchTryCatch", exact = true)
+@ObjCName(name = "J2ktTrycatchTryCatch", swiftName = "TrycatchTryCatch", exact = true)
 open class TryCatch {
- @ObjCName("testMultiCatch")
+ @ObjCName(name = "testMultiCatch")
  open fun testMultiCatch() {
   try {
    throw ClassCastException()
@@ -50,7 +50,7 @@ open class TryCatch {
   }
  }
 
- @ObjCName("testEmptyThrowableCatch")
+ @ObjCName(name = "testEmptyThrowableCatch")
  @Throws(Throwable::class)
  open fun testEmptyThrowableCatch() {
   try {
@@ -61,7 +61,7 @@ open class TryCatch {
   } catch (e_1: Exception) {} catch (e_2: Throwable) {}
  }
 
- @ObjCName("testEmptyThrowableRethrow")
+ @ObjCName(name = "testEmptyThrowableRethrow")
  @Throws(Throwable::class)
  open fun testEmptyThrowableRethrow() {
   try {
@@ -71,14 +71,14 @@ open class TryCatch {
   }
  }
 
- @ObjCName("testFinally")
+ @ObjCName(name = "testFinally")
  open fun testFinally() {
   try {
    assert(true)
   } finally {}
  }
 
- @ObjCName("testTryWithResource")
+ @ObjCName(name = "testTryWithResource")
  open fun testTryWithResource() {
   try {
    var ___primaryExc: Throwable? = null
@@ -99,7 +99,7 @@ open class TryCatch {
   } catch (e: Exception) {}
  }
 
- @ObjCName("testTryWithResourceJava9")
+ @ObjCName(name = "testTryWithResourceJava9")
  open fun testTryWithResourceJava9() {
   val thing: TryCatch.ClosableThing? = TryCatch.ClosableThing()
   val thing2: TryCatch.ClosableThing? = TryCatch.ClosableThing()
@@ -122,7 +122,7 @@ open class TryCatch {
   } catch (e: Exception) {}
  }
 
- @ObjCName("testTryWithResouceOnStaticField")
+ @ObjCName(name = "testTryWithResouceOnStaticField")
  open fun testTryWithResouceOnStaticField() {
   try {
    var ___primaryExc: Throwable? = null
@@ -140,7 +140,7 @@ open class TryCatch {
   } catch (e: Exception) {}
  }
 
- @ObjCName("testNestedTryCatch")
+ @ObjCName(name = "testNestedTryCatch")
  open fun testNestedTryCatch() {
   try {
    throw java.lang.Exception()
@@ -151,7 +151,7 @@ open class TryCatch {
   }
  }
 
- @ObjCName("testThrowGenerics")
+ @ObjCName(name = "testThrowGenerics")
  @Throws(Throwable::class)
  open fun testThrowGenerics() {
   throw this.getT<Exception?>(
@@ -163,7 +163,7 @@ open class TryCatch {
   return t
  }
 
- @ObjCName("testThrowBoundGenerics")
+ @ObjCName(name = "testThrowBoundGenerics")
  @Throws(Throwable::class)
  open fun testThrowBoundGenerics() {
   throw this.getThrowable<Throwable?>()!!
@@ -173,15 +173,15 @@ open class TryCatch {
   return null as T
  }
 
- @ObjCName("testThrowsParameterized")
+ @ObjCName(name = "testThrowsParameterized")
  @Throws(Throwable::class)
  open fun <T: Throwable?> testThrowsParameterized(
-  @ObjCName("withJavaLangThrowable") throwable: T
+  @ObjCName(name = "withJavaLangThrowable") throwable: T
  ) {
   throw throwable!!
  }
 
- @ObjCName("testMultiCatchParameterizedException")
+ @ObjCName(name = "testMultiCatchParameterizedException")
  open fun testMultiCatchParameterizedException() {
   try {
    throw Exception1()
@@ -192,27 +192,27 @@ open class TryCatch {
   }
  }
 
- @ObjCName("J2ktTrycatchTryCatchCompanion", exact = true)
+ @ObjCName(name = "J2ktTrycatchTryCatchCompanion", swiftName = "TrycatchTryCatchCompanion", exact = true)
  companion object {
   private val closableThing: TryCatch.ClosableThing? = TryCatch.ClosableThing()
  }
 
- @ObjCName("J2ktTrycatchTryCatch_ClosableThing", exact = true)
+ @ObjCName(name = "J2ktTrycatchTryCatch_ClosableThing", swiftName = "TrycatchTryCatch_ClosableThing", exact = true)
  open class ClosableThing internal constructor(): AutoCloseable {
   override fun close() {}
  }
 
- @ObjCName("J2ktTrycatchTryCatch_GenericInterface", exact = true)
+ @ObjCName(name = "J2ktTrycatchTryCatch_GenericInterface", swiftName = "TrycatchTryCatch_GenericInterface", exact = true)
  interface GenericInterface<T> {
-  @ObjCName("f")
+  @ObjCName(name = "f")
   fun f(
-   @ObjCName("withId") t: T
+   @ObjCName(name = "withId") t: T
   ) {}
  }
 
- @ObjCName("J2ktTrycatchTryCatch_Exception1", exact = true)
+ @ObjCName(name = "J2ktTrycatchTryCatch_Exception1", swiftName = "TrycatchTryCatch_Exception1", exact = true)
  open inner class Exception1 internal constructor(): java.lang.RuntimeException(), TryCatch.GenericInterface<String?>
 
- @ObjCName("J2ktTrycatchTryCatch_Exception2", exact = true)
+ @ObjCName(name = "J2ktTrycatchTryCatch_Exception2", swiftName = "TrycatchTryCatch_Exception2", exact = true)
  open inner class Exception2 internal constructor(): java.lang.RuntimeException(), TryCatch.GenericInterface<String?>
 }

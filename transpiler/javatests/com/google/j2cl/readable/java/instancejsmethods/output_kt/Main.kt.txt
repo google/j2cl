@@ -27,32 +27,32 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktInstancejsmethodsMyInterface", exact = true)
+@ObjCName(name = "J2ktInstancejsmethodsMyInterface", swiftName = "InstancejsmethodsMyInterface", exact = true)
 fun interface MyInterface {
- @ObjCName("intfFoo")
+ @ObjCName(name = "intfFoo")
  fun intfFoo(): Int
 }
 
-@ObjCName("J2ktInstancejsmethodsSuperParent", exact = true)
+@ObjCName(name = "J2ktInstancejsmethodsSuperParent", swiftName = "InstancejsmethodsSuperParent", exact = true)
 open class SuperParent internal constructor() {
- @ObjCName("fun")
+ @ObjCName(name = "fun")
  open fun `fun`(
-  @ObjCName("withInt") a: Int,
-  @ObjCName("withInt") b: Int
+  @ObjCName(name = "withInt") a: Int,
+  @ObjCName(name = "withInt") b: Int
  ): Int {
   return a + b + 111
  }
 
- @ObjCName("bar")
+ @ObjCName(name = "bar")
  open fun bar(
-  @ObjCName("withInt") a: Int,
-  @ObjCName("withInt") b: Int
+  @ObjCName(name = "withInt") a: Int,
+  @ObjCName(name = "withInt") b: Int
  ): Int {
   return a * b + 222
  }
 }
 
-@ObjCName("J2ktInstancejsmethodsParent", exact = true)
+@ObjCName(name = "J2ktInstancejsmethodsParent", swiftName = "InstancejsmethodsParent", exact = true)
 open class Parent internal constructor(): SuperParent() {
  @JsMethod(name = "sum")
  override fun `fun`(a: Int, b: Int): Int {
@@ -64,16 +64,16 @@ open class Parent internal constructor(): SuperParent() {
   return a * b
  }
 
- @ObjCName("foo")
+ @ObjCName(name = "foo")
  @JsMethod(name = "myFoo")
  open fun foo(
-  @ObjCName("withInt") a: Int
+  @ObjCName(name = "withInt") a: Int
  ): Int {
   return a
  }
 }
 
-@ObjCName("J2ktInstancejsmethodsChild", exact = true)
+@ObjCName(name = "J2ktInstancejsmethodsChild", swiftName = "InstancejsmethodsChild", exact = true)
 open class Child internal constructor(): Parent(), MyInterface {
  override fun `fun`(a: Int, b: Int): Int {
   return a + b + 1
@@ -94,9 +94,9 @@ open class Child internal constructor(): Parent(), MyInterface {
  }
 }
 
-@ObjCName("J2ktInstancejsmethodsMain", exact = true)
+@ObjCName(name = "J2ktInstancejsmethodsMain", swiftName = "InstancejsmethodsMain", exact = true)
 open class Main {
- @ObjCName("testCallBySuperParent")
+ @ObjCName(name = "testCallBySuperParent")
  open fun testCallBySuperParent() {
   val sp: SuperParent? = SuperParent()
   val p: SuperParent? = Parent()
@@ -115,10 +115,10 @@ open class Main {
   intf!!.intfFoo()
  }
 
- @ObjCName("J2ktInstancejsmethodsMainCompanion", exact = true)
+ @ObjCName(name = "J2ktInstancejsmethodsMainCompanion", swiftName = "InstancejsmethodsMainCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("testCallByConcreteType")
+  @ObjCName(name = "testCallByConcreteType")
   fun testCallByConcreteType() {
    val sp: SuperParent? = SuperParent()
    val p: Parent? = Parent()

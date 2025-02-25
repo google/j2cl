@@ -26,9 +26,9 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktnotpassingUnsatisfiedTypeBounds", exact = true)
+@ObjCName(name = "J2ktJ2ktnotpassingUnsatisfiedTypeBounds", swiftName = "J2ktnotpassingUnsatisfiedTypeBounds", exact = true)
 open class UnsatisfiedTypeBounds internal constructor() {
- @ObjCName("J2ktJ2ktnotpassingUnsatisfiedTypeBoundsCompanion", exact = true)
+ @ObjCName(name = "J2ktJ2ktnotpassingUnsatisfiedTypeBoundsCompanion", swiftName = "J2ktnotpassingUnsatisfiedTypeBoundsCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun <T: Any> methodWithTypeConstraints_pp_j2ktnotpassing(helper: UnsatisfiedTypeBounds.Helper<T>, foo: UnsatisfiedTypeBounds.Foo<out T>): T {
@@ -44,22 +44,22 @@ open class UnsatisfiedTypeBounds internal constructor() {
   }
  }
 
- @ObjCName("J2ktJ2ktnotpassingUnsatisfiedTypeBounds_Foo", exact = true)
+ @ObjCName(name = "J2ktJ2ktnotpassingUnsatisfiedTypeBounds_Foo", swiftName = "J2ktnotpassingUnsatisfiedTypeBounds_Foo", exact = true)
  fun interface Foo<T: UnsatisfiedTypeBounds.Foo<T>> {
-  @ObjCName("get")
+  @ObjCName(name = "get")
   fun get(): T
  }
 
- @ObjCName("J2ktJ2ktnotpassingUnsatisfiedTypeBounds_Command", exact = true)
+ @ObjCName(name = "J2ktJ2ktnotpassingUnsatisfiedTypeBounds_Command", swiftName = "J2ktnotpassingUnsatisfiedTypeBounds_Command", exact = true)
  interface Command
 
- @ObjCName("J2ktJ2ktnotpassingUnsatisfiedTypeBounds_FooCommand", exact = true)
+ @ObjCName(name = "J2ktJ2ktnotpassingUnsatisfiedTypeBounds_FooCommand", swiftName = "J2ktnotpassingUnsatisfiedTypeBounds_FooCommand", exact = true)
  open class FooCommand internal constructor(): UnsatisfiedTypeBounds.Foo<UnsatisfiedTypeBounds.FooCommand>, UnsatisfiedTypeBounds.Command {
   override fun get(): UnsatisfiedTypeBounds.FooCommand {
    return this
   }
  }
 
- @ObjCName("J2ktJ2ktnotpassingUnsatisfiedTypeBounds_Helper", exact = true)
+ @ObjCName(name = "J2ktJ2ktnotpassingUnsatisfiedTypeBounds_Helper", swiftName = "J2ktnotpassingUnsatisfiedTypeBounds_Helper", exact = true)
  class Helper<T: Any> internal constructor()
 }

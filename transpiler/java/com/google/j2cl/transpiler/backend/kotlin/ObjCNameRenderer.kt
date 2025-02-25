@@ -38,23 +38,36 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
   private val environment: Environment
     get() = nameRenderer.environment
 
-  fun objCNameAnnotationSource(name: String, exact: Boolean? = null): Source =
+  fun objCNameAnnotationSource(
+    name: String,
+    swiftName: String? = null,
+    exact: Boolean? = null,
+  ): Source =
     annotation(
       nameRenderer.sourceWithOptInQualifiedName("kotlin.experimental.ExperimentalObjCName") {
         topLevelQualifiedNameSource("kotlin.native.ObjCName")
       },
-      literal(name),
+      parameterSource("name", literal(name)),
+      swiftName?.let { parameterSource("swiftName", literal(it)) }.orEmpty(),
       exact?.let { parameterSource("exact", literal(it)) }.orEmpty(),
     )
 
   fun objCAnnotationSource(typeDeclaration: TypeDeclaration): Source =
     Source.emptyUnless(needsObjCNameAnnotation(typeDeclaration)) {
-      objCNameAnnotationSource(typeDeclaration.objCName, exact = true)
+      objCNameAnnotationSource(
+        typeDeclaration.objCName,
+        swiftName = typeDeclaration.objCNameWithoutPrefix,
+        exact = true,
+      )
     }
 
   fun objCAnnotationSource(companionObject: CompanionObject): Source =
     Source.emptyUnless(needsObjCNameAnnotation(companionObject)) {
-      objCNameAnnotationSource(companionObject.declaration.objCName, exact = true)
+      objCNameAnnotationSource(
+        companionObject.declaration.objCName,
+        swiftName = companionObject.declaration.objCNameWithoutPrefix,
+        exact = true,
+      )
     }
 
   fun objCAnnotationSource(

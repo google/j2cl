@@ -27,36 +27,36 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktInnerclassinheritanceParentOuter", exact = true)
+@ObjCName(name = "J2ktInnerclassinheritanceParentOuter", swiftName = "InnerclassinheritanceParentOuter", exact = true)
 open class ParentOuter internal constructor() {
  @JvmField
- @ObjCName("fieldInParentOuter_")
+ @ObjCName(name = "fieldInParentOuter_")
  var fieldInParentOuter: Int = 0
 
- @ObjCName("funInParentOuter")
+ @ObjCName(name = "funInParentOuter")
  open fun funInParentOuter() {}
 }
 
-@ObjCName("J2ktInnerclassinheritanceParentInner", exact = true)
+@ObjCName(name = "J2ktInnerclassinheritanceParentInner", swiftName = "InnerclassinheritanceParentInner", exact = true)
 open class ParentInner internal constructor() {
  @JvmField
- @ObjCName("fieldInParentInner_")
+ @ObjCName(name = "fieldInParentInner_")
  var fieldInParentInner: Int = 0
 
- @ObjCName("funInParentInner")
+ @ObjCName(name = "funInParentInner")
  open fun funInParentInner() {}
 }
 
-@ObjCName("J2ktInnerclassinheritanceChildClass", exact = true)
+@ObjCName(name = "J2ktInnerclassinheritanceChildClass", swiftName = "InnerclassinheritanceChildClass", exact = true)
 open class ChildClass: ParentOuter() {
  @JvmField
- @ObjCName("fieldInOuter_")
+ @ObjCName(name = "fieldInOuter_")
  var fieldInOuter: Int = 0
 
- @ObjCName("funInOuter")
+ @ObjCName(name = "funInOuter")
  open fun funInOuter() {}
 
- @ObjCName("testLocalClass")
+ @ObjCName(name = "testLocalClass")
  open fun testLocalClass() {
   open class LocalClass internal constructor(): ChildClass() {
    @JvmField
@@ -75,16 +75,16 @@ open class ChildClass: ParentOuter() {
   LocalClass().test()
  }
 
- @ObjCName("J2ktInnerclassinheritanceChildClass_InnerClass", exact = true)
+ @ObjCName(name = "J2ktInnerclassinheritanceChildClass_InnerClass", swiftName = "InnerclassinheritanceChildClass_InnerClass", exact = true)
  open inner class InnerClass internal constructor(): ParentInner() {
   @JvmField
-  @ObjCName("fieldInInner_")
+  @ObjCName(name = "fieldInInner_")
   var fieldInInner: Int = 0
 
-  @ObjCName("funInInner")
+  @ObjCName(name = "funInInner")
   open fun funInInner() {}
 
-  @ObjCName("testInnerClass")
+  @ObjCName(name = "testInnerClass")
   open fun testInnerClass(): Int {
    this@ChildClass.funInParentOuter()
    this@ChildClass.funInParentOuter()

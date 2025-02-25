@@ -28,87 +28,87 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktNativejstypesBar", exact = true)
+@ObjCName(name = "J2ktNativejstypesBar", swiftName = "NativejstypesBar", exact = true)
 @JsType(isNative = true)
 open class Bar {
  @JvmField
- @ObjCName("x_")
+ @ObjCName(name = "x_")
  var x: Int = 0
 
  @JvmField
- @ObjCName("y_")
+ @ObjCName(name = "y_")
  var y: Int = 0
 
  constructor(
-  @ObjCName("Int") x: Int,
-  @ObjCName("withInt") y: Int
+  @ObjCName(name = "Int") x: Int,
+  @ObjCName(name = "withInt") y: Int
  )
 
- @ObjCName("product")
+ @ObjCName(name = "product")
  external open fun product(): Int
 
- @ObjCName("J2ktNativejstypesBarCompanion", exact = true)
+ @ObjCName(name = "J2ktNativejstypesBarCompanion", swiftName = "NativejstypesBarCompanion", exact = true)
  companion object {
   @JvmField
-  @ObjCName("f_")
+  @ObjCName(name = "f_")
   var f: Int = 0
 
   @JvmStatic
-  @ObjCName("getStatic")
+  @ObjCName(name = "getStatic")
   external fun getStatic(): Int
  }
 
- @ObjCName("J2ktNativejstypesBar_Inner", exact = true)
+ @ObjCName(name = "J2ktNativejstypesBar_Inner", swiftName = "NativejstypesBar_Inner", exact = true)
  @JsType(isNative = true)
  open class Inner {
   constructor(
-   @ObjCName("Int") n: Int
+   @ObjCName(name = "Int") n: Int
   )
 
-  @ObjCName("square")
+  @ObjCName(name = "square")
   external open fun square(): Int
 
-  @ObjCName("J2ktNativejstypesBar_InnerCompanion", exact = true)
+  @ObjCName(name = "J2ktNativejstypesBar_InnerCompanion", swiftName = "NativejstypesBar_InnerCompanion", exact = true)
   companion object {
    @JvmStatic
-   @ObjCName("getInnerStatic")
+   @ObjCName(name = "getInnerStatic")
    external fun getInnerStatic(): Int
   }
  }
 }
 
-@ObjCName("J2ktNativejstypesBarInnerWithDotInName", exact = true)
+@ObjCName(name = "J2ktNativejstypesBarInnerWithDotInName", swiftName = "NativejstypesBarInnerWithDotInName", exact = true)
 @JsType(name = "Bar.Inner", isNative = true)
 open class BarInnerWithDotInName {
  constructor(
-  @ObjCName("Int") n: Int
+  @ObjCName(name = "Int") n: Int
  )
 
- @ObjCName("square")
+ @ObjCName(name = "square")
  external open fun square(): Int
 
- @ObjCName("J2ktNativejstypesBarInnerWithDotInNameCompanion", exact = true)
+ @ObjCName(name = "J2ktNativejstypesBarInnerWithDotInNameCompanion", swiftName = "NativejstypesBarInnerWithDotInNameCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("getInnerStatic")
+  @ObjCName(name = "getInnerStatic")
   external fun getInnerStatic(): Int
  }
 }
 
-@ObjCName("J2ktNativejstypesBarInnerWithDotInNameAndHasNamespace", exact = true)
+@ObjCName(name = "J2ktNativejstypesBarInnerWithDotInNameAndHasNamespace", swiftName = "NativejstypesBarInnerWithDotInNameAndHasNamespace", exact = true)
 @JsType(name = "Bar.Inner", namespace = "nativejstypes", isNative = true)
 open class BarInnerWithDotInNameAndHasNamespace {
  constructor(
-  @ObjCName("Int") n: Int
+  @ObjCName(name = "Int") n: Int
  )
 
- @ObjCName("square")
+ @ObjCName(name = "square")
  external open fun square(): Int
 
- @ObjCName("J2ktNativejstypesBarInnerWithDotInNameAndHasNamespaceCompanion", exact = true)
+ @ObjCName(name = "J2ktNativejstypesBarInnerWithDotInNameAndHasNamespaceCompanion", swiftName = "NativejstypesBarInnerWithDotInNameAndHasNamespaceCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("getInnerStatic")
+  @ObjCName(name = "getInnerStatic")
   external fun getInnerStatic(): Int
  }
 }

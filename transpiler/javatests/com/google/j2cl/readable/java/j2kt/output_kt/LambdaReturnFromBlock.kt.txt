@@ -31,16 +31,16 @@ import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 import kotlin.synchronized
 
-@ObjCName("J2ktJ2ktLambdaReturnFromBlock", exact = true)
+@ObjCName(name = "J2ktJ2ktLambdaReturnFromBlock", swiftName = "J2ktLambdaReturnFromBlock", exact = true)
 open class LambdaReturnFromBlock {
- @ObjCName("testDoWhile")
+ @ObjCName(name = "testDoWhile")
  open fun testDoWhile() {
   val fn: LambdaReturnFromBlock.Function<Void?>? = LambdaReturnFromBlock.Function<Void?> {
    return@Function null
   }
  }
 
- @ObjCName("testSynchronized")
+ @ObjCName(name = "testSynchronized")
  open fun testSynchronized() {
   val fn: LambdaReturnFromBlock.Function<Void?>? = LambdaReturnFromBlock.Function<Void?> {
    synchronized<Unit>(LambdaReturnFromBlock.lock!!) {
@@ -53,7 +53,7 @@ open class LambdaReturnFromBlock {
  @JvmField
  internal var x_pp_j2kt: Int = 1
 
- @ObjCName("testSwitchInLambda")
+ @ObjCName(name = "testSwitchInLambda")
  open fun testSwitchInLambda() {
   val fn: LambdaReturnFromBlock.Function<Void?>? = LambdaReturnFromBlock.Function<Void?> {
    when (this.x_pp_j2kt) {
@@ -68,14 +68,14 @@ open class LambdaReturnFromBlock {
   }
  }
 
- @ObjCName("J2ktJ2ktLambdaReturnFromBlockCompanion", exact = true)
+ @ObjCName(name = "J2ktJ2ktLambdaReturnFromBlockCompanion", swiftName = "J2ktLambdaReturnFromBlockCompanion", exact = true)
  companion object {
   private val lock: J2ktMonitor? = J2ktMonitor()
  }
 
- @ObjCName("J2ktJ2ktLambdaReturnFromBlock_Function", exact = true)
+ @ObjCName(name = "J2ktJ2ktLambdaReturnFromBlock_Function", swiftName = "J2ktLambdaReturnFromBlock_Function", exact = true)
  fun interface Function<O> {
-  @ObjCName("apply")
+  @ObjCName(name = "apply")
   fun apply(): O
  }
 }

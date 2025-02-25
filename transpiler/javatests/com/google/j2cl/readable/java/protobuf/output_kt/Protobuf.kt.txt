@@ -29,9 +29,9 @@ import kotlin.native.ObjCName
 import protobuf.MyEnum
 import protobuf.MyMessage
 
-@ObjCName("J2ktProtobufProtobuf", exact = true)
+@ObjCName(name = "J2ktProtobufProtobuf", swiftName = "ProtobufProtobuf", exact = true)
 open class Protobuf {
- @ObjCName("test")
+ @ObjCName(name = "test")
  open fun test() {
   val builder: MyMessage.Builder? = MyMessage.newBuilder()
   builder!!.foo

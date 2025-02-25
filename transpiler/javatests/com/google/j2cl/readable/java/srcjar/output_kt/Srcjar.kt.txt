@@ -26,12 +26,12 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 import srcjar.Foo
 
-@ObjCName("J2ktSrcjarSrcjar", exact = true)
+@ObjCName(name = "J2ktSrcjarSrcjar", swiftName = "SrcjarSrcjar", exact = true)
 open class Srcjar {
- @ObjCName("J2ktSrcjarSrcjarCompanion", exact = true)
+ @ObjCName(name = "J2ktSrcjarSrcjarCompanion", swiftName = "SrcjarSrcjarCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("test")
+  @ObjCName(name = "test")
   fun test() {
    val foo: Foo? = Foo()
   }

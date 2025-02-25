@@ -29,19 +29,19 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktAutovalueAutoValueWithBuilder", exact = true)
+@ObjCName(name = "J2ktAutovalueAutoValueWithBuilder", swiftName = "AutovalueAutoValueWithBuilder", exact = true)
 @WasAutoValue
 abstract class AutoValueWithBuilder {
- @ObjCName("getBooleanField")
+ @ObjCName(name = "getBooleanField")
  abstract fun getBooleanField(): Boolean
 
- @ObjCName("getNullableField")
+ @ObjCName(name = "getNullableField")
  abstract fun getNullableField(): Double?
 
- @ObjCName("toBuilder")
+ @ObjCName(name = "toBuilder")
  abstract fun toBuilder(): AutoValueWithBuilder.Builder?
 
- @ObjCName("J2ktAutovalueAutoValueWithBuilderCompanion", exact = true)
+ @ObjCName(name = "J2ktAutovalueAutoValueWithBuilderCompanion", swiftName = "AutovalueAutoValueWithBuilderCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun create_pp_autovalue(): AutoValueWithBuilder? {
@@ -49,20 +49,20 @@ abstract class AutoValueWithBuilder {
   }
  }
 
- @ObjCName("J2ktAutovalueAutoValueWithBuilder_Builder", exact = true)
+ @ObjCName(name = "J2ktAutovalueAutoValueWithBuilder_Builder", swiftName = "AutovalueAutoValueWithBuilder_Builder", exact = true)
  @javaemul.lang.annotations.WasAutoValue.Builder
  abstract class Builder internal constructor() {
-  @ObjCName("setBooleanField")
+  @ObjCName(name = "setBooleanField")
   abstract fun setBooleanField(
-   @ObjCName("withBoolean") x: Boolean
+   @ObjCName(name = "withBoolean") x: Boolean
   ): AutoValueWithBuilder.Builder?
 
-  @ObjCName("setNullableField")
+  @ObjCName(name = "setNullableField")
   abstract fun setNullableField(
-   @ObjCName("withJavaLangDouble") x: Double?
+   @ObjCName(name = "withJavaLangDouble") x: Double?
   ): AutoValueWithBuilder.Builder?
 
-  @ObjCName("build")
+  @ObjCName(name = "build")
   abstract fun build(): AutoValueWithBuilder?
  }
 }

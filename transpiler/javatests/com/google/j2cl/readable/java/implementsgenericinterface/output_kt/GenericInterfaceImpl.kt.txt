@@ -25,14 +25,14 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktImplementsgenericinterfaceGenericInterface", exact = true)
+@ObjCName(name = "J2ktImplementsgenericinterfaceGenericInterface", swiftName = "ImplementsgenericinterfaceGenericInterface", exact = true)
 interface GenericInterface<T>
 
-@ObjCName("J2ktImplementsgenericinterfaceGenericSubInterface", exact = true)
+@ObjCName(name = "J2ktImplementsgenericinterfaceGenericSubInterface", swiftName = "ImplementsgenericinterfaceGenericSubInterface", exact = true)
 interface GenericSubInterface<T>: GenericInterface<T>
 
-@ObjCName("J2ktImplementsgenericinterfaceGenericInterfaceGenericImpl", exact = true)
+@ObjCName(name = "J2ktImplementsgenericinterfaceGenericInterfaceGenericImpl", swiftName = "ImplementsgenericinterfaceGenericInterfaceGenericImpl", exact = true)
 open class GenericInterfaceGenericImpl<T> internal constructor(): GenericInterface<T>
 
-@ObjCName("J2ktImplementsgenericinterfaceGenericInterfaceImpl", exact = true)
+@ObjCName(name = "J2ktImplementsgenericinterfaceGenericInterfaceImpl", swiftName = "ImplementsgenericinterfaceGenericInterfaceImpl", exact = true)
 open class GenericInterfaceImpl: GenericInterface<Number?>

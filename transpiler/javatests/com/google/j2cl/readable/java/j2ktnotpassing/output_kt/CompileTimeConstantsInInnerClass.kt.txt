@@ -26,16 +26,16 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktnotpassingCompileTimeConstantsInInnerClass", exact = true)
+@ObjCName(name = "J2ktJ2ktnotpassingCompileTimeConstantsInInnerClass", swiftName = "J2ktnotpassingCompileTimeConstantsInInnerClass", exact = true)
 open class CompileTimeConstantsInInnerClass {
- @ObjCName("J2ktJ2ktnotpassingCompileTimeConstantsInInnerClass_Inner", exact = true)
+ @ObjCName(name = "J2ktJ2ktnotpassingCompileTimeConstantsInInnerClass_Inner", swiftName = "J2ktnotpassingCompileTimeConstantsInInnerClass_Inner", exact = true)
  open inner class Inner {
-  @ObjCName("J2ktJ2ktnotpassingCompileTimeConstantsInInnerClass_InnerCompanion", exact = true)
+  @ObjCName(name = "J2ktJ2ktnotpassingCompileTimeConstantsInInnerClass_InnerCompanion", swiftName = "J2ktnotpassingCompileTimeConstantsInInnerClass_InnerCompanion", exact = true)
   companion object {
-   @ObjCName("i_")
+   @ObjCName(name = "i_")
    const val i: Int = 0
 
-   @ObjCName("s_")
+   @ObjCName(name = "s_")
    const val s: String = ""
   }
  }

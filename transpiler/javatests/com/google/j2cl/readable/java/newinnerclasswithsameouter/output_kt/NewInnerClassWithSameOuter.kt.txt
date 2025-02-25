@@ -24,20 +24,20 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktNewinnerclasswithsameouterNewInnerClassWithSameOuter", exact = true)
+@ObjCName(name = "J2ktNewinnerclasswithsameouterNewInnerClassWithSameOuter", swiftName = "NewinnerclasswithsameouterNewInnerClassWithSameOuter", exact = true)
 open class NewInnerClassWithSameOuter {
- @ObjCName("J2ktNewinnerclasswithsameouterNewInnerClassWithSameOuter_A", exact = true)
+ @ObjCName(name = "J2ktNewinnerclasswithsameouterNewInnerClassWithSameOuter_A", swiftName = "NewinnerclasswithsameouterNewInnerClassWithSameOuter_A", exact = true)
  open inner class A {
-  @ObjCName("test")
+  @ObjCName(name = "test")
   open fun test() {
    this@NewInnerClassWithSameOuter.B()
    this@NewInnerClassWithSameOuter.C()
   }
  }
 
- @ObjCName("J2ktNewinnerclasswithsameouterNewInnerClassWithSameOuter_B", exact = true)
+ @ObjCName(name = "J2ktNewinnerclasswithsameouterNewInnerClassWithSameOuter_B", swiftName = "NewinnerclasswithsameouterNewInnerClassWithSameOuter_B", exact = true)
  open inner class B
 
- @ObjCName("J2ktNewinnerclasswithsameouterNewInnerClassWithSameOuter_C", exact = true)
+ @ObjCName(name = "J2ktNewinnerclasswithsameouterNewInnerClassWithSameOuter_C", swiftName = "NewinnerclasswithsameouterNewInnerClassWithSameOuter_C", exact = true)
  open inner class C internal constructor()
 }

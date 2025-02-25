@@ -28,13 +28,13 @@ import kotlin.Throwable
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktExceptionMyJsException", exact = true)
+@ObjCName(name = "J2ktExceptionMyJsException", swiftName = "ExceptionMyJsException", exact = true)
 @JsType
 class MyJsException: Exception {
  constructor()
 
  @JsIgnore
  constructor(
-  @ObjCName("JavaLangThrowable") cause: Throwable?
+  @ObjCName(name = "JavaLangThrowable") cause: Throwable?
  ): this()
 }

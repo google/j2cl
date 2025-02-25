@@ -31,9 +31,9 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 import localnamecollision.Class
 
-@ObjCName("J2ktLocalnamecollisionLocalNameCollision", exact = true)
+@ObjCName(name = "J2ktLocalnamecollisionLocalNameCollision", swiftName = "LocalnamecollisionLocalNameCollision", exact = true)
 open class LocalNameCollision {
- @ObjCName("testClassLocalVarCollision")
+ @ObjCName(name = "testClassLocalVarCollision")
  open fun testClassLocalVarCollision() {
   var LocalNameCollision: Boolean = false
   val RuntimeException: Any? = null
@@ -48,31 +48,31 @@ open class LocalNameCollision {
   assert(localnamecollision.Asserts().n_pp_localnamecollision() == 5)
  }
 
- @ObjCName("testClassParameterCollision")
+ @ObjCName(name = "testClassParameterCollision")
  open fun testClassParameterCollision(
-  @ObjCName("withBoolean") LocalNameCollision: Boolean,
-  @ObjCName("withId") Asserts: Any?,
-  @ObjCName("withId") ___Asserts: Any?,
-  @ObjCName("withInt") l_Asserts: Int,
-  @ObjCName("withInt") A: Int
+  @ObjCName(name = "withBoolean") LocalNameCollision: Boolean,
+  @ObjCName(name = "withId") Asserts: Any?,
+  @ObjCName(name = "withId") ___Asserts: Any?,
+  @ObjCName(name = "withInt") l_Asserts: Int,
+  @ObjCName(name = "withInt") A: Int
  ): Boolean {
   return LocalNameCollision && Asserts is localnamecollision.LocalNameCollision && ___Asserts is localnamecollision.Asserts && l_Asserts == A
  }
 
  constructor(
-  @ObjCName("Boolean") LocalNameCollision: Boolean,
-  @ObjCName("withId") Asserts: Any?,
-  @ObjCName("withId") ___Asserts: Any?,
-  @ObjCName("withInt") l_Asserts: Int,
-  @ObjCName("withInt") A: Int
+  @ObjCName(name = "Boolean") LocalNameCollision: Boolean,
+  @ObjCName(name = "withId") Asserts: Any?,
+  @ObjCName(name = "withId") ___Asserts: Any?,
+  @ObjCName(name = "withInt") l_Asserts: Int,
+  @ObjCName(name = "withInt") A: Int
  ) {
   val result: Boolean = LocalNameCollision && Asserts is localnamecollision.LocalNameCollision && ___Asserts is localnamecollision.Asserts && l_Asserts == A
  }
 }
 
-@ObjCName("J2ktLocalnamecollisionA", exact = true)
+@ObjCName(name = "J2ktLocalnamecollisionA", swiftName = "LocalnamecollisionA", exact = true)
 open class A internal constructor() {
- @ObjCName("J2ktLocalnamecollisionACompanion", exact = true)
+ @ObjCName(name = "J2ktLocalnamecollisionACompanion", swiftName = "LocalnamecollisionACompanion", exact = true)
  companion object {
   @JvmField
   internal var A_pp_localnamecollision: localnamecollision.A? = null
@@ -89,6 +89,6 @@ open class A internal constructor() {
   }
  }
 
- @ObjCName("J2ktLocalnamecollisionA_B", exact = true)
+ @ObjCName(name = "J2ktLocalnamecollisionA_B", swiftName = "LocalnamecollisionA_B", exact = true)
  open class B internal constructor()
 }

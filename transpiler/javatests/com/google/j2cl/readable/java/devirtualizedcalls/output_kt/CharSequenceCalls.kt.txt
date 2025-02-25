@@ -26,16 +26,16 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktDevirtualizedcallsCharSequenceCalls", exact = true)
+@ObjCName(name = "J2ktDevirtualizedcallsCharSequenceCalls", swiftName = "DevirtualizedcallsCharSequenceCalls", exact = true)
 open class CharSequenceCalls {
- @ObjCName("test")
+ @ObjCName(name = "test")
  open fun test(
-  @ObjCName("withJavaLangCharSequence") cs: CharSequence?
+  @ObjCName(name = "withJavaLangCharSequence") cs: CharSequence?
  ) {
   cs!!.get(0)
  }
 
- @ObjCName("main")
+ @ObjCName(name = "main")
  open fun main() {
   val s: String? = "s"
   this.test(s)

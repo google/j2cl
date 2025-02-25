@@ -28,15 +28,15 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktAutovalueDefaultConstructorAutoValue", exact = true)
+@ObjCName(name = "J2ktAutovalueDefaultConstructorAutoValue", swiftName = "AutovalueDefaultConstructorAutoValue", exact = true)
 @WasAutoValue
 abstract class DefaultConstructorAutoValue {
  internal constructor()
 
- @ObjCName("getBooleanField")
+ @ObjCName(name = "getBooleanField")
  abstract fun getBooleanField(): Boolean
 
- @ObjCName("J2ktAutovalueDefaultConstructorAutoValueCompanion", exact = true)
+ @ObjCName(name = "J2ktAutovalueDefaultConstructorAutoValueCompanion", swiftName = "AutovalueDefaultConstructorAutoValueCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun create_pp_autovalue(): DefaultConstructorAutoValue? {
@@ -44,14 +44,14 @@ abstract class DefaultConstructorAutoValue {
   }
  }
 
- @ObjCName("J2ktAutovalueDefaultConstructorAutoValue_Builder", exact = true)
+ @ObjCName(name = "J2ktAutovalueDefaultConstructorAutoValue_Builder", swiftName = "AutovalueDefaultConstructorAutoValue_Builder", exact = true)
  @javaemul.lang.annotations.WasAutoValue.Builder
  abstract class Builder {
   constructor()
 
   internal abstract fun setBooleanField_pp_autovalue(x: Boolean): DefaultConstructorAutoValue.Builder?
 
-  @ObjCName("build")
+  @ObjCName(name = "build")
   abstract fun build(): DefaultConstructorAutoValue?
  }
 }

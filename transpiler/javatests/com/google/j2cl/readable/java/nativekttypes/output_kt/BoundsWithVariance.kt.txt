@@ -38,13 +38,13 @@ import kotlin.collections.MutableSet
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktNativekttypesFnWithoutVariance", exact = true)
+@ObjCName(name = "J2ktNativekttypesFnWithoutVariance", swiftName = "NativekttypesFnWithoutVariance", exact = true)
 interface FnWithoutVariance<I, O>
 
-@ObjCName("J2ktNativekttypesFnWithVariance", exact = true)
+@ObjCName(name = "J2ktNativekttypesFnWithVariance", swiftName = "NativekttypesFnWithVariance", exact = true)
 interface FnWithVariance<in I, out O>
 
-@ObjCName("J2ktNativekttypesBoundsWithVariance", exact = true)
+@ObjCName(name = "J2ktNativekttypesBoundsWithVariance", swiftName = "NativekttypesBoundsWithVariance", exact = true)
 class BoundsWithVariance internal constructor() {
  internal fun <I: Any, O: Any> accept_pp_nativekttypes(o: FnWithoutVariance<in I, out O>) {}
 

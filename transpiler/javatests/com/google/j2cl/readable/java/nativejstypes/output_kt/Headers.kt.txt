@@ -27,17 +27,17 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktNativejstypesHeaders", exact = true)
+@ObjCName(name = "J2ktNativejstypesHeaders", swiftName = "NativejstypesHeaders", exact = true)
 @JsType(namespace = JsPackage.GLOBAL, isNative = true)
 open class Headers {
- @ObjCName("append")
+ @ObjCName(name = "append")
  external open fun append(
-  @ObjCName("withNSString") name: String?,
-  @ObjCName("withNSString") value: String?
+  @ObjCName(name = "withNSString") name: String?,
+  @ObjCName(name = "withNSString") value: String?
  )
 
- @ObjCName("get")
+ @ObjCName(name = "get")
  external open fun get(
-  @ObjCName("withNSString") name: String?
+  @ObjCName(name = "withNSString") name: String?
  ): String?
 }

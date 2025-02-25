@@ -25,9 +25,9 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktExplicitNotNullable", exact = true)
+@ObjCName(name = "J2ktJ2ktExplicitNotNullable", swiftName = "J2ktExplicitNotNullable", exact = true)
 open class ExplicitNotNullable {
- @ObjCName("J2ktJ2ktExplicitNotNullable_DependentTypeParameters", exact = true)
+ @ObjCName(name = "J2ktJ2ktExplicitNotNullable_DependentTypeParameters", swiftName = "J2ktExplicitNotNullable_DependentTypeParameters", exact = true)
  open class DependentTypeParameters<E: Any, T: E?> internal constructor() {
   internal open fun getThis_pp_j2kt(): ExplicitNotNullable.DependentTypeParameters<E, T> {
    return this

@@ -28,22 +28,22 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktNativeinjectionQualifiedNativeMatch", exact = true)
+@ObjCName(name = "J2ktNativeinjectionQualifiedNativeMatch", swiftName = "NativeinjectionQualifiedNativeMatch", exact = true)
 @JsType(name = "SomeOtherName", namespace = "some.other.pkg")
 class QualifiedNativeMatch {
- @ObjCName("J2ktNativeinjectionQualifiedNativeMatchCompanion", exact = true)
+ @ObjCName(name = "J2ktNativeinjectionQualifiedNativeMatchCompanion", swiftName = "NativeinjectionQualifiedNativeMatchCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("getValue")
+  @ObjCName(name = "getValue")
   external fun getValue(): Int
  }
 
- @ObjCName("J2ktNativeinjectionQualifiedNativeMatch_InnerClass", exact = true)
+ @ObjCName(name = "J2ktNativeinjectionQualifiedNativeMatch_InnerClass", swiftName = "NativeinjectionQualifiedNativeMatch_InnerClass", exact = true)
  class InnerClass {
-  @ObjCName("J2ktNativeinjectionQualifiedNativeMatch_InnerClassCompanion", exact = true)
+  @ObjCName(name = "J2ktNativeinjectionQualifiedNativeMatch_InnerClassCompanion", swiftName = "NativeinjectionQualifiedNativeMatch_InnerClassCompanion", exact = true)
   companion object {
    @JvmStatic
-   @ObjCName("getOtherValue")
+   @ObjCName(name = "getOtherValue")
    @JsMethod
    external fun getOtherValue(): Int
   }

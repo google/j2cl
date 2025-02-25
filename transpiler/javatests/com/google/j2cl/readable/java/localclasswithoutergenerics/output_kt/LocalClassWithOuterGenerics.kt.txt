@@ -27,12 +27,12 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktLocalclasswithoutergenericsLocalClassWithOuterGenerics", exact = true)
+@ObjCName(name = "J2ktLocalclasswithoutergenericsLocalClassWithOuterGenerics", swiftName = "LocalclasswithoutergenericsLocalClassWithOuterGenerics", exact = true)
 open class LocalClassWithOuterGenerics<A> {
- @ObjCName("J2ktLocalclasswithoutergenericsLocalClassWithOuterGenericsCompanion", exact = true)
+ @ObjCName(name = "J2ktLocalclasswithoutergenericsLocalClassWithOuterGenericsCompanion", swiftName = "LocalclasswithoutergenericsLocalClassWithOuterGenericsCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("foo")
+  @ObjCName(name = "foo")
   fun <T> foo() {
    open class Bar internal constructor() {
     internal open fun baz_pp_localclasswithoutergenerics(other: Bar?) {}

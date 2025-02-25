@@ -26,15 +26,15 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktObjCNameInterface", exact = true)
+@ObjCName(name = "J2ktJ2ktObjCNameInterface", swiftName = "J2ktObjCNameInterface", exact = true)
 interface ObjCNameInterface {
- @ObjCName("J2ktJ2ktObjCNameInterfaceCompanion", exact = true)
+ @ObjCName(name = "J2ktJ2ktObjCNameInterfaceCompanion", swiftName = "J2ktObjCNameInterfaceCompanion", exact = true)
  companion object {
-  @ObjCName("FIELD_")
+  @ObjCName(name = "FIELD_")
   const val FIELD: Int = 0
 
   @JvmStatic
-  @ObjCName("staticMethod")
+  @ObjCName(name = "staticMethod")
   fun staticMethod() {}
  }
 }

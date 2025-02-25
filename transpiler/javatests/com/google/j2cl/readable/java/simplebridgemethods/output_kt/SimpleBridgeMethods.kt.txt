@@ -26,39 +26,39 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktSimplebridgemethodsSuperclass", exact = true)
+@ObjCName(name = "J2ktSimplebridgemethodsSuperclass", swiftName = "SimplebridgemethodsSuperclass", exact = true)
 open class Superclass<T: Error?> internal constructor() {
- @ObjCName("m1")
+ @ObjCName(name = "m1")
  open fun m1(
-  @ObjCName("withJavaLangError") t: T
+  @ObjCName(name = "withJavaLangError") t: T
  ) {}
 }
 
-@ObjCName("J2ktSimplebridgemethodsSubclass", exact = true)
+@ObjCName(name = "J2ktSimplebridgemethodsSubclass", swiftName = "SimplebridgemethodsSubclass", exact = true)
 open class Subclass internal constructor(): Superclass<AssertionError?>() {
  override fun m1(a: AssertionError?) {}
 }
 
-@ObjCName("J2ktSimplebridgemethodsAnotherSubclass", exact = true)
+@ObjCName(name = "J2ktSimplebridgemethodsAnotherSubclass", swiftName = "SimplebridgemethodsAnotherSubclass", exact = true)
 open class AnotherSubclass internal constructor(): Superclass<AssertionError?>()
 
-@ObjCName("J2ktSimplebridgemethodsCallable", exact = true)
+@ObjCName(name = "J2ktSimplebridgemethodsCallable", swiftName = "SimplebridgemethodsCallable", exact = true)
 fun interface Callable<V> {
- @ObjCName("call")
+ @ObjCName(name = "call")
  fun call(
-  @ObjCName("withId") v: V
+  @ObjCName(name = "withId") v: V
  )
 }
 
-@ObjCName("J2ktSimplebridgemethodsTask", exact = true)
+@ObjCName(name = "J2ktSimplebridgemethodsTask", swiftName = "SimplebridgemethodsTask", exact = true)
 open class Task<T> internal constructor(): Callable<T> {
  override fun call(t: T) {}
 }
 
-@ObjCName("J2ktSimplebridgemethodsAnotherTask", exact = true)
+@ObjCName(name = "J2ktSimplebridgemethodsAnotherTask", swiftName = "SimplebridgemethodsAnotherTask", exact = true)
 open class AnotherTask<T: AssertionError?> internal constructor(): Callable<Superclass<T>?> {
  override fun call(t: Superclass<T>?) {}
 }
 
-@ObjCName("J2ktSimplebridgemethodsSimpleBridgeMethods", exact = true)
+@ObjCName(name = "J2ktSimplebridgemethodsSimpleBridgeMethods", swiftName = "SimplebridgemethodsSimpleBridgeMethods", exact = true)
 open class SimpleBridgeMethods

@@ -34,10 +34,10 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktExternsMain", exact = true)
+@ObjCName(name = "J2ktExternsMain", swiftName = "ExternsMain", exact = true)
 open class Main {
  @JvmField
- @ObjCName("aFoo_")
+ @ObjCName(name = "aFoo_")
  var aFoo: Main.FooOverlay? = null
 
  @JvmField
@@ -46,7 +46,7 @@ open class Main {
  @JvmField
  internal var inner_pp_externs: Main.TopLevelExtern.Inner? = null
 
- @ObjCName("J2ktExternsMainCompanion", exact = true)
+ @ObjCName(name = "J2ktExternsMainCompanion", swiftName = "ExternsMainCompanion", exact = true)
  companion object {
   @JvmStatic
   private fun testFooOverlay(fooOverlay: Main.FooOverlay?): Boolean {
@@ -58,9 +58,9 @@ open class Main {
   private external fun useDirectlyAsFoo(fooOverlay: Any?)
 
   @JvmStatic
-  @ObjCName("main")
+  @ObjCName(name = "main")
   fun main(
-   vararg @ObjCName("withNSStringArray") args: String?
+   vararg @ObjCName(name = "withNSStringArray") args: String?
   ) {
    val args_1: Array<String?>? = args as Array<String?>?
    Main.testFooOverlay(
@@ -72,29 +72,29 @@ open class Main {
   }
  }
 
- @ObjCName("J2ktExternsMain_FooImpl", exact = true)
+ @ObjCName(name = "J2ktExternsMain_FooImpl", swiftName = "ExternsMain_FooImpl", exact = true)
  open class FooImpl internal constructor() {
   @JvmField
   @JsProperty(name = "foo")
   internal var foo_pp_externs: String? = null
  }
 
- @ObjCName("J2ktExternsMain_FooOverlay", exact = true)
+ @ObjCName(name = "J2ktExternsMain_FooOverlay", swiftName = "ExternsMain_FooOverlay", exact = true)
  @JsType(name = "Foo", namespace = JsPackage.GLOBAL, isNative = true)
  fun interface FooOverlay {
-  @ObjCName("getFoo")
+  @ObjCName(name = "getFoo")
   @JsProperty
   fun getFoo(): String?
  }
 
- @ObjCName("J2ktExternsMain_TopLevelExtern", exact = true)
+ @ObjCName(name = "J2ktExternsMain_TopLevelExtern", swiftName = "ExternsMain_TopLevelExtern", exact = true)
  @JsType(namespace = JsPackage.GLOBAL, isNative = true)
  open class TopLevelExtern {
-  @ObjCName("J2ktExternsMain_TopLevelExtern_InnerExtern", exact = true)
+  @ObjCName(name = "J2ktExternsMain_TopLevelExtern_InnerExtern", swiftName = "ExternsMain_TopLevelExtern_InnerExtern", exact = true)
   @JsType(isNative = true)
   open class InnerExtern
 
-  @ObjCName("J2ktExternsMain_TopLevelExtern_Inner", exact = true)
+  @ObjCName(name = "J2ktExternsMain_TopLevelExtern_Inner", swiftName = "ExternsMain_TopLevelExtern_Inner", exact = true)
   @JsType(name = "FooImpl", namespace = "externs.Main", isNative = true)
   open class Inner
  }

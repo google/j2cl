@@ -27,28 +27,28 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktUnimplementedbridgemethodI", exact = true)
+@ObjCName(name = "J2ktUnimplementedbridgemethodI", swiftName = "UnimplementedbridgemethodI", exact = true)
 fun interface I<T> {
- @ObjCName("foo")
+ @ObjCName(name = "foo")
  fun foo(
-  @ObjCName("withId") t: T
+  @ObjCName(name = "withId") t: T
  ): Int
 
- @ObjCName("J2ktUnimplementedbridgemethodICompanion", exact = true)
+ @ObjCName(name = "J2ktUnimplementedbridgemethodICompanion", swiftName = "UnimplementedbridgemethodICompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("staticFoo")
+  @ObjCName(name = "staticFoo")
   fun staticFoo(): Int {
    return 0
   }
  }
 }
 
-@ObjCName("J2ktUnimplementedbridgemethodJ", exact = true)
+@ObjCName(name = "J2ktUnimplementedbridgemethodJ", swiftName = "UnimplementedbridgemethodJ", exact = true)
 fun interface J: I<String?>
 
-@ObjCName("J2ktUnimplementedbridgemethodBar", exact = true)
+@ObjCName(name = "J2ktUnimplementedbridgemethodBar", swiftName = "UnimplementedbridgemethodBar", exact = true)
 abstract class Bar internal constructor(): J
 
-@ObjCName("J2ktUnimplementedbridgemethodFoo", exact = true)
+@ObjCName(name = "J2ktUnimplementedbridgemethodFoo", swiftName = "UnimplementedbridgemethodFoo", exact = true)
 abstract class Foo: I<String?>

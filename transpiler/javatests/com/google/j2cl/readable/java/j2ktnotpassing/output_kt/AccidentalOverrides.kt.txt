@@ -25,18 +25,18 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktnotpassingParent", exact = true)
+@ObjCName(name = "J2ktJ2ktnotpassingParent", swiftName = "J2ktnotpassingParent", exact = true)
 interface Parent {
- @ObjCName("test")
+ @ObjCName(name = "test")
  fun <T: String?> test(
-  @ObjCName("withNSString") t: T
+  @ObjCName(name = "withNSString") t: T
  )
 }
 
-@ObjCName("J2ktJ2ktnotpassingChild", exact = true)
+@ObjCName(name = "J2ktJ2ktnotpassingChild", swiftName = "J2ktnotpassingChild", exact = true)
 fun interface Child: Parent {
  override fun test(s: String?)
 }
 
-@ObjCName("J2ktJ2ktnotpassingAccidentalOverrides", exact = true)
+@ObjCName(name = "J2ktJ2ktnotpassingAccidentalOverrides", swiftName = "J2ktnotpassingAccidentalOverrides", exact = true)
 open class AccidentalOverrides internal constructor()

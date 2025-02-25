@@ -27,27 +27,27 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktStaticjsmethodswithclassnamespaceStaticJsMethodsWithClassNamespace", exact = true)
+@ObjCName(name = "J2ktStaticjsmethodswithclassnamespaceStaticJsMethodsWithClassNamespace", swiftName = "StaticjsmethodswithclassnamespaceStaticJsMethodsWithClassNamespace", exact = true)
 @JsType(namespace = "woo")
 open class StaticJsMethodsWithClassNamespace {
- @ObjCName("test")
+ @ObjCName(name = "test")
  open fun test() {
   StaticJsMethodsWithClassNamespace.originalName()
   StaticJsMethodsWithClassNamespace.originalName()
  }
 
- @ObjCName("J2ktStaticjsmethodswithclassnamespaceStaticJsMethodsWithClassNamespaceCompanion", exact = true)
+ @ObjCName(name = "J2ktStaticjsmethodswithclassnamespaceStaticJsMethodsWithClassNamespaceCompanion", swiftName = "StaticjsmethodswithclassnamespaceStaticJsMethodsWithClassNamespaceCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("originalName")
+  @ObjCName(name = "originalName")
   @JsMethod(name = "replacedName")
   fun originalName() {}
  }
 }
 
-@ObjCName("J2ktStaticjsmethodswithclassnamespaceExternalCaller", exact = true)
+@ObjCName(name = "J2ktStaticjsmethodswithclassnamespaceExternalCaller", swiftName = "StaticjsmethodswithclassnamespaceExternalCaller", exact = true)
 open class ExternalCaller internal constructor() {
- @ObjCName("test")
+ @ObjCName(name = "test")
  open fun test() {
   StaticJsMethodsWithClassNamespace.originalName()
  }

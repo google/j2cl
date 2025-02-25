@@ -33,28 +33,28 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktImportglobaljstypesNumber", exact = true)
+@ObjCName(name = "J2ktImportglobaljstypesNumber", swiftName = "ImportglobaljstypesNumber", exact = true)
 open class Number {
- @ObjCName("testJsDocForLiteralType")
+ @ObjCName(name = "testJsDocForLiteralType")
  open fun testJsDocForLiteralType(
-  @ObjCName("withImportglobaljstypesNumber_MyLiteralType") a: Number.MyLiteralType?
+  @ObjCName(name = "withImportglobaljstypesNumber_MyLiteralType") a: Number.MyLiteralType?
  ): Number.MyLiteralType? {
   return a
  }
 
- @ObjCName("J2ktImportglobaljstypesNumberCompanion", exact = true)
+ @ObjCName(name = "J2ktImportglobaljstypesNumberCompanion", swiftName = "ImportglobaljstypesNumberCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("f")
+  @ObjCName(name = "f")
   @JsMethod(name = "Number.isInteger", namespace = JsPackage.GLOBAL)
   external fun f(
-   @ObjCName("withDouble") x: Double
+   @ObjCName(name = "withDouble") x: Double
   ): Boolean
 
   @JvmStatic
-  @ObjCName("test")
+  @ObjCName(name = "test")
   fun test(
-   @ObjCName("withDouble") x: Double
+   @ObjCName(name = "withDouble") x: Double
   ): Boolean {
    return Number.f(x)
   }
@@ -74,20 +74,20 @@ open class Number {
   }
  }
 
- @ObjCName("J2ktImportglobaljstypesNumber_NativeArray", exact = true)
+ @ObjCName(name = "J2ktImportglobaljstypesNumber_NativeArray", swiftName = "ImportglobaljstypesNumber_NativeArray", exact = true)
  @JsType(name = "Array", namespace = JsPackage.GLOBAL, isNative = true)
  interface NativeArray<T> {
-  @ObjCName("getLength")
+  @ObjCName(name = "getLength")
   @JsProperty
   fun getLength(): Int
 
-  @ObjCName("at")
+  @ObjCName(name = "at")
   fun at(
-   @ObjCName("withInt") index: Int
+   @ObjCName(name = "withInt") index: Int
   ): T
  }
 
- @ObjCName("J2ktImportglobaljstypesNumber_MyLiteralType", exact = true)
+ @ObjCName(name = "J2ktImportglobaljstypesNumber_MyLiteralType", swiftName = "ImportglobaljstypesNumber_MyLiteralType", exact = true)
  @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
  interface MyLiteralType
 }

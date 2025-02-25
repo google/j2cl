@@ -28,12 +28,12 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktArrayLiteralPrimitiveNarrowing", exact = true)
+@ObjCName(name = "J2ktJ2ktArrayLiteralPrimitiveNarrowing", swiftName = "J2ktArrayLiteralPrimitiveNarrowing", exact = true)
 open class ArrayLiteralPrimitiveNarrowing {
- @ObjCName("J2ktJ2ktArrayLiteralPrimitiveNarrowingCompanion", exact = true)
+ @ObjCName(name = "J2ktJ2ktArrayLiteralPrimitiveNarrowingCompanion", swiftName = "J2ktArrayLiteralPrimitiveNarrowingCompanion", exact = true)
  companion object {
   @JvmField
-  @ObjCName("byteArray_")
+  @ObjCName(name = "byteArray_")
   var byteArray: ByteArray = byteArrayOf((Byte.MAX_VALUE.toInt() - 1).toByte())
  }
 }

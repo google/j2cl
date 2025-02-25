@@ -29,18 +29,18 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktSystemgetpropertyMain", exact = true)
+@ObjCName(name = "J2ktSystemgetpropertyMain", swiftName = "SystemgetpropertyMain", exact = true)
 open class Main {
- @ObjCName("J2ktSystemgetpropertyMainCompanion", exact = true)
+ @ObjCName(name = "J2ktSystemgetpropertyMainCompanion", swiftName = "SystemgetpropertyMainCompanion", exact = true)
  companion object {
   private val property: String? = System.getProperty("jre.classMetadata")
 
   private val propertyWithDefault: String? = System.getProperty("jre.classMetadata", "default")
 
   @JvmStatic
-  @ObjCName("main")
+  @ObjCName(name = "main")
   fun main(
-   @ObjCName("withNSStringArray") args: Array<String?>?
+   @ObjCName(name = "withNSStringArray") args: Array<String?>?
   ) {
    var x: Boolean = false
    x = Main.property === "SIMPLE"

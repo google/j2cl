@@ -25,23 +25,23 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktBridgemethodsMap", exact = true)
+@ObjCName(name = "J2ktBridgemethodsMap", swiftName = "BridgemethodsMap", exact = true)
 fun interface Map<K, V> {
- @ObjCName("put")
+ @ObjCName(name = "put")
  fun put(
-  @ObjCName("withId") key: K,
-  @ObjCName("withId") value: V
+  @ObjCName(name = "withId") key: K,
+  @ObjCName(name = "withId") value: V
  ): V
 }
 
-@ObjCName("J2ktBridgemethodsAbstractMap", exact = true)
+@ObjCName(name = "J2ktBridgemethodsAbstractMap", swiftName = "BridgemethodsAbstractMap", exact = true)
 open class AbstractMap<K, V> internal constructor(): Map<K, V> {
  override fun put(key: K, value: V): V {
   return value
  }
 }
 
-@ObjCName("J2ktBridgemethodsEnumMap", exact = true)
+@ObjCName(name = "J2ktBridgemethodsEnumMap", swiftName = "BridgemethodsEnumMap", exact = true)
 open class EnumMap<K: Enum<K>, V>: AbstractMap<K, V>() {
  override fun put(key: K, value: V): V {
   return value

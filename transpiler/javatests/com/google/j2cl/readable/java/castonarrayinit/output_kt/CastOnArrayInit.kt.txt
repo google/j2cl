@@ -26,20 +26,20 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktCastonarrayinitCastOnArrayInit", exact = true)
+@ObjCName(name = "J2ktCastonarrayinitCastOnArrayInit", swiftName = "CastonarrayinitCastOnArrayInit", exact = true)
 open class CastOnArrayInit {
- @ObjCName("J2ktCastonarrayinitCastOnArrayInitCompanion", exact = true)
+ @ObjCName(name = "J2ktCastonarrayinitCastOnArrayInitCompanion", swiftName = "CastonarrayinitCastOnArrayInitCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("fun")
+  @ObjCName(name = "fun")
   fun <E> `fun`(
-   vararg @ObjCName("withCastonarrayinitCastOnArrayInit_FooArray") args: CastOnArrayInit.Foo<E>?
+   vararg @ObjCName(name = "withCastonarrayinitCastOnArrayInit_FooArray") args: CastOnArrayInit.Foo<E>?
   ) {
    val args_1: Array<CastOnArrayInit.Foo<E>?>? = args as Array<CastOnArrayInit.Foo<E>?>?
   }
 
   @JvmStatic
-  @ObjCName("test")
+  @ObjCName(name = "test")
   fun <E> test() {
    val f1: CastOnArrayInit.Foo<E>? = CastOnArrayInit.Foo<E>()
    val f2: CastOnArrayInit.Foo<E>? = CastOnArrayInit.Foo<E>()
@@ -47,6 +47,6 @@ open class CastOnArrayInit {
   }
  }
 
- @ObjCName("J2ktCastonarrayinitCastOnArrayInit_Foo", exact = true)
+ @ObjCName(name = "J2ktCastonarrayinitCastOnArrayInit_Foo", swiftName = "CastonarrayinitCastOnArrayInit_Foo", exact = true)
  open class Foo<T>
 }

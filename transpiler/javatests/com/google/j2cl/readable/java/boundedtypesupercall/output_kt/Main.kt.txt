@@ -25,26 +25,26 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktBoundedtypesupercallMain", exact = true)
+@ObjCName(name = "J2ktBoundedtypesupercallMain", swiftName = "BoundedtypesupercallMain", exact = true)
 open class Main {
- @ObjCName("J2ktBoundedtypesupercallMain_Foo", exact = true)
+ @ObjCName(name = "J2ktBoundedtypesupercallMain_Foo", swiftName = "BoundedtypesupercallMain_Foo", exact = true)
  abstract class Foo<T> {
   constructor(
-   @ObjCName("Id") foo: T
+   @ObjCName(name = "Id") foo: T
   )
 
-  @ObjCName("foo")
+  @ObjCName(name = "foo")
   abstract fun foo()
  }
 
- @ObjCName("J2ktBoundedtypesupercallMain_Bar", exact = true)
+ @ObjCName(name = "J2ktBoundedtypesupercallMain_Bar", swiftName = "BoundedtypesupercallMain_Bar", exact = true)
  open class Bar<T: Comparable<*>?> {
-  @ObjCName("getSomething")
+  @ObjCName(name = "getSomething")
   open fun getSomething(): T {
    return null as T
   }
 
-  @ObjCName("doSomething")
+  @ObjCName(name = "doSomething")
   open fun doSomething(): Main.Foo<T>? {
    return object : Main.Foo<T>(
     this@Bar.getSomething(),

@@ -29,18 +29,18 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktAutovalueAutoValueWithExtensions", exact = true)
+@ObjCName(name = "J2ktAutovalueAutoValueWithExtensions", swiftName = "AutovalueAutoValueWithExtensions", exact = true)
 @WasAutoValue
 abstract class AutoValueWithExtensions internal constructor() {
- @ObjCName("getIntField")
+ @ObjCName(name = "getIntField")
  abstract fun getIntField(): Int
 
- @ObjCName("getStringField")
+ @ObjCName(name = "getStringField")
  abstract fun getStringField(): String?
 
  internal abstract fun toPrettyString_pp_autovalue(): String?
 
- @ObjCName("J2ktAutovalueAutoValueWithExtensionsCompanion", exact = true)
+ @ObjCName(name = "J2ktAutovalueAutoValueWithExtensionsCompanion", swiftName = "AutovalueAutoValueWithExtensionsCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun create_pp_autovalue(): AutoValueWithExtensions? {

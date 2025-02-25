@@ -26,26 +26,26 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktNullabilityDefaultnotnullableTypeArgumentsInference", exact = true)
+@ObjCName(name = "J2ktNullabilityDefaultnotnullableTypeArgumentsInference", swiftName = "NullabilityDefaultnotnullableTypeArgumentsInference", exact = true)
 open class TypeArgumentsInference {
- @ObjCName("J2ktNullabilityDefaultnotnullableTypeArgumentsInferenceCompanion", exact = true)
+ @ObjCName(name = "J2ktNullabilityDefaultnotnullableTypeArgumentsInferenceCompanion", swiftName = "NullabilityDefaultnotnullableTypeArgumentsInferenceCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("wildcardPair")
+  @ObjCName(name = "wildcardPair")
   fun <K> wildcardPair(): TypeArgumentsInference.Pair<K, *> {
    return TypeArgumentsInference.Pair<K, Any>()
   }
 
   @JvmStatic
-  @ObjCName("pairIdentity")
+  @ObjCName(name = "pairIdentity")
   fun <K, V> pairIdentity(
-   @ObjCName("withNullabilityDefaultnotnullableTypeArgumentsInference_Pair") pair: TypeArgumentsInference.Pair<K, V>
+   @ObjCName(name = "withNullabilityDefaultnotnullableTypeArgumentsInference_Pair") pair: TypeArgumentsInference.Pair<K, V>
   ): TypeArgumentsInference.Pair<K, V> {
    return pair
   }
 
   @JvmStatic
-  @ObjCName("wildcardPairAndIdentity")
+  @ObjCName(name = "wildcardPairAndIdentity")
   fun <K> wildcardPairAndIdentity(): TypeArgumentsInference.Pair<K, *> {
    return TypeArgumentsInference.pairIdentity<K, Any>(
     TypeArgumentsInference.wildcardPair<K>() as TypeArgumentsInference.Pair<K, Any>,
@@ -53,6 +53,6 @@ open class TypeArgumentsInference {
   }
  }
 
- @ObjCName("J2ktNullabilityDefaultnotnullableTypeArgumentsInference_Pair", exact = true)
+ @ObjCName(name = "J2ktNullabilityDefaultnotnullableTypeArgumentsInference_Pair", swiftName = "NullabilityDefaultnotnullableTypeArgumentsInference_Pair", exact = true)
  class Pair<K, V>
 }

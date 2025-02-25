@@ -27,14 +27,14 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktEmptymethodEmptyMethod", exact = true)
+@ObjCName(name = "J2ktEmptymethodEmptyMethod", swiftName = "EmptymethodEmptyMethod", exact = true)
 open class EmptyMethod {
- @ObjCName("J2ktEmptymethodEmptyMethodCompanion", exact = true)
+ @ObjCName(name = "J2ktEmptymethodEmptyMethodCompanion", swiftName = "EmptymethodEmptyMethodCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("main")
+  @ObjCName(name = "main")
   fun main(
-   @ObjCName("withNSStringArray") args: Array<String?>?
+   @ObjCName(name = "withNSStringArray") args: Array<String?>?
   ) {}
  }
 }

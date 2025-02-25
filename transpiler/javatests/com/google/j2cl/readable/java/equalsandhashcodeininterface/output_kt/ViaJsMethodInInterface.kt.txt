@@ -27,14 +27,14 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktEqualsandhashcodeininterfaceViaJsMethodInInterface", exact = true)
+@ObjCName(name = "J2ktEqualsandhashcodeininterfaceViaJsMethodInInterface", swiftName = "EqualsandhashcodeininterfaceViaJsMethodInInterface", exact = true)
 @JsType(name = "?", namespace = JsPackage.GLOBAL, isNative = true)
 interface ViaJsMethodInInterface {
- @ObjCName("notEquals")
+ @ObjCName(name = "notEquals")
  @JsMethod(name = "equals")
  fun notEquals()
 
- @ObjCName("notHashCode")
+ @ObjCName(name = "notHashCode")
  @JsMethod(name = "hashCode")
  fun notHashCode()
 }

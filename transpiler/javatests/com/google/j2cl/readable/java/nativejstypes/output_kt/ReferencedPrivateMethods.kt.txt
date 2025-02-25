@@ -30,18 +30,18 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktNativejstypesReferencedPrivateMethods", exact = true)
+@ObjCName(name = "J2ktNativejstypesReferencedPrivateMethods", swiftName = "NativejstypesReferencedPrivateMethods", exact = true)
 open class ReferencedPrivateMethods internal constructor() {
- @ObjCName("J2ktNativejstypesReferencedPrivateMethods_Inner", exact = true)
+ @ObjCName(name = "J2ktNativejstypesReferencedPrivateMethods_Inner", swiftName = "NativejstypesReferencedPrivateMethods_Inner", exact = true)
  open class Inner {
-  @ObjCName("getInstance")
+  @ObjCName(name = "getInstance")
   open fun getInstance(): Int {
    val t: ReferencedPrivateMethods.NativeReferencedPrivateMethods? = ReferencedPrivateMethods.NativeReferencedPrivateMethods()
    return t!!.x_private_2 + ReferencedPrivateMethods.NativeReferencedPrivateMethods.s_private_2 + t!!.getInstance_private_2() + ReferencedPrivateMethods.NativeReferencedPrivateMethods.getStatic_private_2()
   }
  }
 
- @ObjCName("J2ktNativejstypesReferencedPrivateMethods_NativeReferencedPrivateMethods", exact = true)
+ @ObjCName(name = "J2ktNativejstypesReferencedPrivateMethods_NativeReferencedPrivateMethods", swiftName = "NativejstypesReferencedPrivateMethods_NativeReferencedPrivateMethods", exact = true)
  @JsType(namespace = "nativejstypes", isNative = true)
  open class NativeReferencedPrivateMethods internal constructor() {
   @JvmField
@@ -51,7 +51,7 @@ open class ReferencedPrivateMethods internal constructor() {
   @JsMethod(name = "getInstance")
   internal external fun getInstance_private_2(): Int
 
-  @ObjCName("J2ktNativejstypesReferencedPrivateMethods_NativeReferencedPrivateMethodsCompanion", exact = true)
+  @ObjCName(name = "J2ktNativejstypesReferencedPrivateMethods_NativeReferencedPrivateMethodsCompanion", swiftName = "NativejstypesReferencedPrivateMethods_NativeReferencedPrivateMethodsCompanion", exact = true)
   companion object {
    @JvmField
    @JsProperty(name = "s")

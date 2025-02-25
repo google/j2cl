@@ -24,32 +24,32 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktAbstractmethodoverridedefaultAbstractMethodOverrideDefault", exact = true)
+@ObjCName(name = "J2ktAbstractmethodoverridedefaultAbstractMethodOverrideDefault", swiftName = "AbstractmethodoverridedefaultAbstractMethodOverrideDefault", exact = true)
 open class AbstractMethodOverrideDefault {
- @ObjCName("J2ktAbstractmethodoverridedefaultAbstractMethodOverrideDefault_I", exact = true)
+ @ObjCName(name = "J2ktAbstractmethodoverridedefaultAbstractMethodOverrideDefault_I", swiftName = "AbstractmethodoverridedefaultAbstractMethodOverrideDefault_I", exact = true)
  fun interface I {
-  @ObjCName("foo")
+  @ObjCName(name = "foo")
   fun foo()
 
-  @ObjCName("bar")
+  @ObjCName(name = "bar")
   fun bar() {}
  }
 
- @ObjCName("J2ktAbstractmethodoverridedefaultAbstractMethodOverrideDefault_J", exact = true)
+ @ObjCName(name = "J2ktAbstractmethodoverridedefaultAbstractMethodOverrideDefault_J", swiftName = "AbstractmethodoverridedefaultAbstractMethodOverrideDefault_J", exact = true)
  fun interface J {
-  @ObjCName("foo")
+  @ObjCName(name = "foo")
   fun foo() {}
 
-  @ObjCName("bar")
+  @ObjCName(name = "bar")
   fun bar()
  }
 
- @ObjCName("J2ktAbstractmethodoverridedefaultAbstractMethodOverrideDefault_A", exact = true)
+ @ObjCName(name = "J2ktAbstractmethodoverridedefaultAbstractMethodOverrideDefault_A", swiftName = "AbstractmethodoverridedefaultAbstractMethodOverrideDefault_A", exact = true)
  abstract class A internal constructor(): AbstractMethodOverrideDefault.I {
   abstract override fun foo()
  }
 
- @ObjCName("J2ktAbstractmethodoverridedefaultAbstractMethodOverrideDefault_B", exact = true)
+ @ObjCName(name = "J2ktAbstractmethodoverridedefaultAbstractMethodOverrideDefault_B", swiftName = "AbstractmethodoverridedefaultAbstractMethodOverrideDefault_B", exact = true)
  abstract class B internal constructor(): AbstractMethodOverrideDefault.A(), AbstractMethodOverrideDefault.J {
   override fun bar() {
    if (false) {
@@ -60,7 +60,7 @@ open class AbstractMethodOverrideDefault {
   abstract override fun foo()
  }
 
- @ObjCName("J2ktAbstractmethodoverridedefaultAbstractMethodOverrideDefault_C", exact = true)
+ @ObjCName(name = "J2ktAbstractmethodoverridedefaultAbstractMethodOverrideDefault_C", swiftName = "AbstractmethodoverridedefaultAbstractMethodOverrideDefault_C", exact = true)
  open class C internal constructor(): AbstractMethodOverrideDefault.A() {
   override fun foo() {}
 

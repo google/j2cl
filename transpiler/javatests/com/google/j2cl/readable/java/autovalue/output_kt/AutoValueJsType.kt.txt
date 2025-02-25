@@ -29,14 +29,14 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktAutovalueAutoValueJsType", exact = true)
+@ObjCName(name = "J2ktAutovalueAutoValueJsType", swiftName = "AutovalueAutoValueJsType", exact = true)
 @JsType
 @WasAutoValue
 abstract class AutoValueJsType {
  @JsIgnore
  constructor()
 
- @ObjCName("getField")
+ @ObjCName(name = "getField")
  abstract fun getField(): Int
 
  @JsMethod(name = "getField2")

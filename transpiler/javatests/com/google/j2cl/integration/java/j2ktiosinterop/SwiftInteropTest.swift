@@ -18,11 +18,11 @@ import third_party_java_src_j2cl_transpiler_javatests_com_google_j2cl_integratio
 
 final class SwiftInteropTest: XCTestCase {
   func testDefaultNames() {
-    var obj: J2ktJ2ktiosinteropDefaultNames
+    var obj: J2ktiosinteropDefaultNames
 
-    obj = J2ktJ2ktiosinteropDefaultNames()
-    obj = J2ktJ2ktiosinteropDefaultNames(Int: 1)
-    obj = J2ktJ2ktiosinteropDefaultNames(Int: 1, withNSString: "")
+    obj = J2ktiosinteropDefaultNames()
+    obj = J2ktiosinteropDefaultNames(Int: 1)
+    obj = J2ktiosinteropDefaultNames(Int: 1, withNSString: "")
 
     obj.method()
     obj.method(withBoolean: true)
@@ -47,23 +47,23 @@ final class SwiftInteropTest: XCTestCase {
     obj.genericMethod(withNSString: nil)
 
     obj.field_ = obj.field_
-    J2ktJ2ktiosinteropDefaultNamesCompanion.shared.staticField_ =
-      J2ktJ2ktiosinteropDefaultNamesCompanion.shared.staticField_
+    J2ktiosinteropDefaultNamesCompanion.shared.staticField_ =
+      J2ktiosinteropDefaultNamesCompanion.shared.staticField_
 
-    J2ktJ2ktiosinteropDefaultNamesCompanion.shared.staticMethod()
-    J2ktJ2ktiosinteropDefaultNamesCompanion.shared.staticMethod(withInt: 1)
-    J2ktJ2ktiosinteropDefaultNamesCompanion.shared.staticMethod(withInt: 1, withNSString: "")
+    J2ktiosinteropDefaultNamesCompanion.shared.staticMethod()
+    J2ktiosinteropDefaultNamesCompanion.shared.staticMethod(withInt: 1)
+    J2ktiosinteropDefaultNamesCompanion.shared.staticMethod(withInt: 1, withNSString: "")
   }
 
   func testCustomNames() {
-    var obj: J2ktCustom
+    var obj: Custom
 
-    obj = J2ktCustom(Index: 1)
-    obj = J2ktCustom(Index: 1, name: "")
+    obj = Custom(Index: 1)
+    obj = Custom(Index: 1, name: "")
 
-    obj = J2ktCustom()
-    obj = J2ktCustom(Long: 1)
-    obj = J2ktCustom(Long: 1, withNSString: "")
+    obj = Custom()
+    obj = Custom(Long: 1)
+    obj = Custom(Long: 1, withNSString: "")
 
     obj.custom()
     obj.custom(WithIndex: 1)
@@ -72,17 +72,17 @@ final class SwiftInteropTest: XCTestCase {
     obj.custom(withLong: 1)
     obj.custom(withLong: 1, withNSString: "")
 
-    J2ktCustomCompanion.shared.staticCustom()
-    J2ktCustomCompanion.shared.staticCustom(WithIndex: 1)
-    J2ktCustomCompanion.shared.staticCustom(WithIndex: 1, name: "")
+    CustomCompanion.shared.staticCustom()
+    CustomCompanion.shared.staticCustom(WithIndex: 1)
+    CustomCompanion.shared.staticCustom(WithIndex: 1, name: "")
 
-    J2ktCustomCompanion.shared.staticCustom2(withLong: 1)
-    J2ktCustomCompanion.shared.staticCustom3(withLong: 1, withNSString: "")
+    CustomCompanion.shared.staticCustom2(withLong: 1)
+    CustomCompanion.shared.staticCustom3(withLong: 1, withNSString: "")
   }
 
   func testEnumNames() {
-    var e: J2ktJ2ktiosinteropEnumNames
-    e = J2ktJ2ktiosinteropEnumNames.ONE
-    e = J2ktJ2ktiosinteropEnumNames.TWO
+    var e: J2ktiosinteropEnumNames
+    e = J2ktiosinteropEnumNames.ONE
+    e = J2ktiosinteropEnumNames.TWO
   }
 }

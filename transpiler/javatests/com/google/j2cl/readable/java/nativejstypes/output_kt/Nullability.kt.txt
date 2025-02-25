@@ -26,30 +26,30 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktNativejstypesNullability", exact = true)
+@ObjCName(name = "J2ktNativejstypesNullability", swiftName = "NativejstypesNullability", exact = true)
 @JsType(isNative = true)
 open class Nullability {
- @ObjCName("acceptsNull")
+ @ObjCName(name = "acceptsNull")
  external open fun acceptsNull(
-  @ObjCName("withNSString") arg: String?
+  @ObjCName(name = "withNSString") arg: String?
  )
 
- @ObjCName("doesNotAcceptNull")
+ @ObjCName(name = "doesNotAcceptNull")
  external open fun doesNotAcceptNull(
-  @ObjCName("withNSString") arg: String
+  @ObjCName(name = "withNSString") arg: String
  )
 }
 
-@ObjCName("J2ktNativejstypesNullabilityNullMarked", exact = true)
+@ObjCName(name = "J2ktNativejstypesNullabilityNullMarked", swiftName = "NativejstypesNullabilityNullMarked", exact = true)
 @JsType(name = "Nullability", isNative = true)
 open class NullabilityNullMarked internal constructor() {
- @ObjCName("acceptsNull")
+ @ObjCName(name = "acceptsNull")
  external open fun acceptsNull(
-  @ObjCName("withNSString") arg: String?
+  @ObjCName(name = "withNSString") arg: String?
  )
 
- @ObjCName("doesNotAcceptNull")
+ @ObjCName(name = "doesNotAcceptNull")
  external open fun doesNotAcceptNull(
-  @ObjCName("withNSString") arg: String
+  @ObjCName(name = "withNSString") arg: String
  )
 }

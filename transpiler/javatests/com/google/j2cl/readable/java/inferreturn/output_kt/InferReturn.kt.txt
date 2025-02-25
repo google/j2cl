@@ -30,22 +30,22 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktInferreturnInferReturn", exact = true)
+@ObjCName(name = "J2ktInferreturnInferReturn", swiftName = "InferreturnInferReturn", exact = true)
 open class InferReturn<T> {
- @ObjCName("J2ktInferreturnInferReturnCompanion", exact = true)
+ @ObjCName(name = "J2ktInferreturnInferReturnCompanion", swiftName = "InferreturnInferReturnCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("inferGeneric")
+  @ObjCName(name = "inferGeneric")
   fun <T_1> inferGeneric(
-   @ObjCName("withId") foo: T_1
+   @ObjCName(name = "withId") foo: T_1
   ): InferReturn<T_1>? {
    return InferReturn<T_1>()
   }
 
   @JvmStatic
-  @ObjCName("tightenType")
+  @ObjCName(name = "tightenType")
   fun tightenType(
-   @ObjCName("withInferreturnInferReturn") foo: InferReturn<String?>?
+   @ObjCName(name = "withInferreturnInferReturn") foo: InferReturn<String?>?
   ): InferReturn<InferReturn<String?>?>? {
    if (foo != null) {
     return InferReturn.inferGeneric<InferReturn<String?>?>(foo)
@@ -54,7 +54,7 @@ open class InferReturn<T> {
   }
 
   @JvmStatic
-  @ObjCName("main")
+  @ObjCName(name = "main")
   fun main() {
    val list: ArrayList<Any?>? = InferReturn.newArrayList<Any?>("foo")
    InferReturn.acceptsArrayListOfObject(list)
@@ -63,31 +63,31 @@ open class InferReturn<T> {
   }
 
   @JvmStatic
-  @ObjCName("newArrayList")
+  @ObjCName(name = "newArrayList")
   fun <V> newArrayList(
-   @ObjCName("withId") foo: V
+   @ObjCName(name = "withId") foo: V
   ): ArrayList<V>? {
    return ArrayList<V>()
   }
 
   @JvmStatic
-  @ObjCName("newArray")
+  @ObjCName(name = "newArray")
   fun <V> newArray(
-   @ObjCName("withId") foo: V
+   @ObjCName(name = "withId") foo: V
   ): Array<V>? {
    return arrayOfNulls<Any>(0) as Array<V>
   }
 
   @JvmStatic
-  @ObjCName("acceptsArrayListOfObject")
+  @ObjCName(name = "acceptsArrayListOfObject")
   fun acceptsArrayListOfObject(
-   @ObjCName("withJavaUtilArrayList") foo: ArrayList<Any?>?
+   @ObjCName(name = "withJavaUtilArrayList") foo: ArrayList<Any?>?
   ) {}
 
   @JvmStatic
-  @ObjCName("acceptsArrayOfObject")
+  @ObjCName(name = "acceptsArrayOfObject")
   fun acceptsArrayOfObject(
-   @ObjCName("withNSObjectArray") foo: Array<Any?>?
+   @ObjCName(name = "withNSObjectArray") foo: Array<Any?>?
   ) {}
  }
 }

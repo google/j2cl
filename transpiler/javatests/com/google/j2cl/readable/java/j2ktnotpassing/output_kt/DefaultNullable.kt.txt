@@ -26,9 +26,9 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktnotpassingDefaultNullable", exact = true)
+@ObjCName(name = "J2ktJ2ktnotpassingDefaultNullable", swiftName = "J2ktnotpassingDefaultNullable", exact = true)
 open class DefaultNullable {
- @ObjCName("J2ktJ2ktnotpassingDefaultNullableCompanion", exact = true)
+ @ObjCName(name = "J2ktJ2ktnotpassingDefaultNullableCompanion", swiftName = "J2ktnotpassingDefaultNullableCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun testNonNullableLambdas_pp_j2ktnotpassing() {
@@ -42,24 +42,24 @@ open class DefaultNullable {
  }
 }
 
-@ObjCName("J2ktJ2ktnotpassingNotNullable", exact = true)
+@ObjCName(name = "J2ktJ2ktnotpassingNotNullable", swiftName = "J2ktnotpassingNotNullable", exact = true)
 open class NotNullable internal constructor() {
- @ObjCName("J2ktJ2ktnotpassingNotNullable_Consumer", exact = true)
+ @ObjCName(name = "J2ktJ2ktnotpassingNotNullable_Consumer", swiftName = "J2ktnotpassingNotNullable_Consumer", exact = true)
  fun interface Consumer<T> {
-  @ObjCName("accept")
+  @ObjCName(name = "accept")
   fun accept(
-   @ObjCName("withId") t: T
+   @ObjCName(name = "withId") t: T
   )
  }
 }
 
-@ObjCName("J2ktJ2ktnotpassingOrdering", exact = true)
+@ObjCName(name = "J2ktJ2ktnotpassingOrdering", swiftName = "J2ktnotpassingOrdering", exact = true)
 abstract class Ordering<T> internal constructor() {
  internal open fun <S: T> reverse_pp_j2ktnotpassing(): Ordering<S> {
   return null!!
  }
 
- @ObjCName("J2ktJ2ktnotpassingOrderingCompanion", exact = true)
+ @ObjCName(name = "J2ktJ2ktnotpassingOrderingCompanion", swiftName = "J2ktnotpassingOrderingCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun <E> reversed_pp_j2ktnotpassing(ordering: Ordering<in E>): Ordering<in E> {

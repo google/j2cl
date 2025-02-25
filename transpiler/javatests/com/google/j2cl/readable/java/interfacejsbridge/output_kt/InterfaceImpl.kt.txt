@@ -26,29 +26,29 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktInterfacejsbridgeMyJsInterface", exact = true)
+@ObjCName(name = "J2ktInterfacejsbridgeMyJsInterface", swiftName = "InterfacejsbridgeMyJsInterface", exact = true)
 @JsType
 fun interface MyJsInterface {
- @ObjCName("foo")
+ @ObjCName(name = "foo")
  fun foo(
-  @ObjCName("withInt") a: Int
+  @ObjCName(name = "withInt") a: Int
  ): Int
 }
 
-@ObjCName("J2ktInterfacejsbridgeMyInterface", exact = true)
+@ObjCName(name = "J2ktInterfacejsbridgeMyInterface", swiftName = "InterfacejsbridgeMyInterface", exact = true)
 fun interface MyInterface {
- @ObjCName("foo")
+ @ObjCName(name = "foo")
  fun foo(
-  @ObjCName("withInt") a: Int
+  @ObjCName(name = "withInt") a: Int
  ): Int
 }
 
-@ObjCName("J2ktInterfacejsbridgeSubInterface", exact = true)
+@ObjCName(name = "J2ktInterfacejsbridgeSubInterface", swiftName = "InterfacejsbridgeSubInterface", exact = true)
 fun interface SubInterface: MyJsInterface, MyInterface {
  override fun foo(a: Int): Int
 }
 
-@ObjCName("J2ktInterfacejsbridgeInterfaceImpl", exact = true)
+@ObjCName(name = "J2ktInterfacejsbridgeInterfaceImpl", swiftName = "InterfacejsbridgeInterfaceImpl", exact = true)
 open class InterfaceImpl: SubInterface {
  override fun foo(a: Int): Int {
   return 0

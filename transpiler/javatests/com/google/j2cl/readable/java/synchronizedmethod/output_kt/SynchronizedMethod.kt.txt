@@ -33,13 +33,13 @@ import kotlin.native.ObjCName
 import kotlin.run
 import kotlin.synchronized
 
-@ObjCName("J2ktSynchronizedmethodSynchronizedMethod", exact = true)
+@ObjCName(name = "J2ktSynchronizedmethodSynchronizedMethod", swiftName = "SynchronizedmethodSynchronizedMethod", exact = true)
 open class SynchronizedMethod: J2ktMonitor() {
  private var a: Int = 0
 
  private var b: Int = 0
 
- @ObjCName("testNonStatic")
+ @ObjCName(name = "testNonStatic")
  open fun testNonStatic() {
   synchronized<Unit>(this) {
    this.a = this.a + 1
@@ -47,9 +47,9 @@ open class SynchronizedMethod: J2ktMonitor() {
   }
  }
 
- @ObjCName("testReturn")
+ @ObjCName(name = "testReturn")
  open fun testReturn(
-  @ObjCName("withBoolean") bool: Boolean
+  @ObjCName(name = "withBoolean") bool: Boolean
  ): Int {
   synchronized<Unit>(this) {
    if (bool) {
@@ -67,10 +67,10 @@ open class SynchronizedMethod: J2ktMonitor() {
   }
  }
 
- @ObjCName("testIfStatementWithNonVoidBodyWithoutElse")
+ @ObjCName(name = "testIfStatementWithNonVoidBodyWithoutElse")
  open fun testIfStatementWithNonVoidBodyWithoutElse(
-  @ObjCName("withBoolean") b1: Boolean,
-  @ObjCName("withBoolean") b2: Boolean
+  @ObjCName(name = "withBoolean") b1: Boolean,
+  @ObjCName(name = "withBoolean") b2: Boolean
  ) {
   synchronized<Unit>(this) {
    if (b1) {
@@ -85,14 +85,14 @@ open class SynchronizedMethod: J2ktMonitor() {
   return string
  }
 
- @ObjCName("J2ktSynchronizedmethodSynchronizedMethodCompanion", exact = true)
+ @ObjCName(name = "J2ktSynchronizedmethodSynchronizedMethodCompanion", swiftName = "SynchronizedmethodSynchronizedMethodCompanion", exact = true)
  companion object {
   private var sa: Int = 0
 
   private var sb: Int = 0
 
   @JvmStatic
-  @ObjCName("testStatic")
+  @ObjCName(name = "testStatic")
   fun testStatic() {
    synchronized<Unit>(SynchronizedMethod::class.javaObjectType) {
     SynchronizedMethod.sa = SynchronizedMethod.sa + 1

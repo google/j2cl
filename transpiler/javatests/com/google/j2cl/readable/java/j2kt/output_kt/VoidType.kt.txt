@@ -28,9 +28,9 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktVoidType", exact = true)
+@ObjCName(name = "J2ktJ2ktVoidType", swiftName = "J2ktVoidType", exact = true)
 open class VoidType {
- @ObjCName("J2ktJ2ktVoidTypeCompanion", exact = true)
+ @ObjCName(name = "J2ktJ2ktVoidTypeCompanion", swiftName = "J2ktVoidTypeCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun testVoid_pp_j2kt() {
@@ -43,9 +43,9 @@ open class VoidType {
   }
  }
 
- @ObjCName("J2ktJ2ktVoidType_NullableBounds", exact = true)
+ @ObjCName(name = "J2ktJ2ktVoidType_NullableBounds", swiftName = "J2ktVoidType_NullableBounds", exact = true)
  interface NullableBounds<T>
 
- @ObjCName("J2ktJ2ktVoidType_NonNullBounds", exact = true)
+ @ObjCName(name = "J2ktJ2ktVoidType_NonNullBounds", swiftName = "J2ktVoidType_NonNullBounds", exact = true)
  interface NonNullBounds<T: Any>
 }

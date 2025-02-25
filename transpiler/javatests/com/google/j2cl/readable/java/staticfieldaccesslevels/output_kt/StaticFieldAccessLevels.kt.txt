@@ -28,23 +28,23 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktStaticfieldaccesslevelsStaticFieldAccessLevels", exact = true)
+@ObjCName(name = "J2ktStaticfieldaccesslevelsStaticFieldAccessLevels", swiftName = "StaticfieldaccesslevelsStaticFieldAccessLevels", exact = true)
 open class StaticFieldAccessLevels {
- @ObjCName("test")
+ @ObjCName(name = "test")
  open fun test(): Int {
   return if (StaticFieldAccessLevels.b) StaticFieldAccessLevels.a else StaticFieldAccessLevels.d_pp_staticfieldaccesslevels
  }
 
- @ObjCName("J2ktStaticfieldaccesslevelsStaticFieldAccessLevelsCompanion", exact = true)
+ @ObjCName(name = "J2ktStaticfieldaccesslevelsStaticFieldAccessLevelsCompanion", swiftName = "StaticfieldaccesslevelsStaticFieldAccessLevelsCompanion", exact = true)
  companion object {
   @JvmField
-  @ObjCName("a_")
+  @ObjCName(name = "a_")
   var a: Int = 0
 
   private var b: Boolean = false
 
   @JvmField
-  @ObjCName("c_")
+  @ObjCName(name = "c_")
   var c: Any? = null
 
   @JvmField

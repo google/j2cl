@@ -29,12 +29,12 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktImportglobaljstypesRegExp", exact = true)
+@ObjCName(name = "J2ktImportglobaljstypesRegExp", swiftName = "ImportglobaljstypesRegExp", exact = true)
 class RegExp internal constructor() {
- @ObjCName("J2ktImportglobaljstypesRegExpCompanion", exact = true)
+ @ObjCName(name = "J2ktImportglobaljstypesRegExpCompanion", swiftName = "ImportglobaljstypesRegExpCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("test")
+  @ObjCName(name = "test")
   fun test() {
    val regExp: RegExp.NativeRegExp? = RegExp.NativeRegExp("teststring")
    regExp!!.test("restString")
@@ -42,16 +42,16 @@ class RegExp internal constructor() {
   }
  }
 
- @ObjCName("J2ktImportglobaljstypesRegExp_NativeRegExp", exact = true)
+ @ObjCName(name = "J2ktImportglobaljstypesRegExp_NativeRegExp", swiftName = "ImportglobaljstypesRegExp_NativeRegExp", exact = true)
  @JsType(name = "RegExp", namespace = JsPackage.GLOBAL, isNative = true)
  open class NativeRegExp {
   constructor(
-   @ObjCName("NSString") pattern: String?
+   @ObjCName(name = "NSString") pattern: String?
   )
 
-  @ObjCName("test")
+  @ObjCName(name = "test")
   external open fun test(
-   @ObjCName("withNSString") value: String?
+   @ObjCName(name = "withNSString") value: String?
   ): Boolean
 
   external override fun toString(): String

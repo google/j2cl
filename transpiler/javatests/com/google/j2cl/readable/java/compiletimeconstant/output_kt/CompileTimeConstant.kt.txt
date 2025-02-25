@@ -35,42 +35,42 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.javaObjectType
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktCompiletimeconstantCompileTimeConstant", exact = true)
+@ObjCName(name = "J2ktCompiletimeconstantCompileTimeConstant", swiftName = "CompiletimeconstantCompileTimeConstant", exact = true)
 open class CompileTimeConstant<T> {
  @JvmField
- @ObjCName("A2_")
+ @ObjCName(name = "A2_")
  val A2: Int = 10
 
  @JvmField
- @ObjCName("B2_")
+ @ObjCName(name = "B2_")
  val B2: Int = 20
 
  @JvmField
- @ObjCName("C2_")
+ @ObjCName(name = "C2_")
  val C2: Int = 200
 
  @JvmField
- @ObjCName("D2_")
+ @ObjCName(name = "D2_")
  val D2: String = "Tur\"tle"
 
  @JvmField
- @ObjCName("E2_")
+ @ObjCName(name = "E2_")
  val E2: String = "Do\"ve"
 
  @JvmField
- @ObjCName("F2_")
+ @ObjCName(name = "F2_")
  val F2: String = "Tur\"tleDo\"ve"
 
  @JvmField
- @ObjCName("G2_")
+ @ObjCName(name = "G2_")
  val G2: Long = 10000L
 
  @JvmField
- @ObjCName("H2_")
+ @ObjCName(name = "H2_")
  val H2: Char = 'A'
 
  @JvmField
- @ObjCName("I2_")
+ @ObjCName(name = "I2_")
  val I2: Boolean = true
 
  init {
@@ -91,78 +91,78 @@ open class CompileTimeConstant<T> {
   val intShlOverflow: Int = 2147483647.shl(2)
  }
 
- @ObjCName("J2ktCompiletimeconstantCompileTimeConstantCompanion", exact = true)
+ @ObjCName(name = "J2ktCompiletimeconstantCompileTimeConstantCompanion", swiftName = "CompiletimeconstantCompileTimeConstantCompanion", exact = true)
  companion object {
   @JvmField
-  @ObjCName("OBJ_")
+  @ObjCName(name = "OBJ_")
   val OBJ: Any? = null
 
-  @ObjCName("DEFAULT_")
+  @ObjCName(name = "DEFAULT_")
   const val DEFAULT: Int = 0
 
-  @ObjCName("A_")
+  @ObjCName(name = "A_")
   const val A: Int = 10
 
-  @ObjCName("B_")
+  @ObjCName(name = "B_")
   const val B: Int = 20
 
-  @ObjCName("C_")
+  @ObjCName(name = "C_")
   const val C: Int = 200
 
-  @ObjCName("D_")
+  @ObjCName(name = "D_")
   const val D: String = "Tur\"tle"
 
-  @ObjCName("E_")
+  @ObjCName(name = "E_")
   const val E: String = "Do\'ve"
 
-  @ObjCName("F_")
+  @ObjCName(name = "F_")
   const val F: String = "Tur\"tleDo\'ve"
 
-  @ObjCName("J_")
+  @ObjCName(name = "J_")
   const val J: String = "Tur\"tleDo\'veTur\"tleDo\'ve"
 
   @JvmField
-  @ObjCName("K_")
+  @ObjCName(name = "K_")
   val K: String? = null
 
-  @ObjCName("L_")
+  @ObjCName(name = "L_")
   const val L: String = "ThisIsALongString"
 
-  @ObjCName("M_")
+  @ObjCName(name = "M_")
   const val M: String = "ThisIsALongStringAlso"
 
-  @ObjCName("N_")
+  @ObjCName(name = "N_")
   const val N: String = "ThisIsALongStringAlsoButLonger"
 
-  @ObjCName("G_")
+  @ObjCName(name = "G_")
   const val G: Long = 10000L
 
-  @ObjCName("H_")
+  @ObjCName(name = "H_")
   const val H: Char = 'A'
 
-  @ObjCName("I_")
+  @ObjCName(name = "I_")
   const val I: Boolean = true
 
-  @ObjCName("MIN_BYTE_")
+  @ObjCName(name = "MIN_BYTE_")
   const val MIN_BYTE: Byte = (-128).toByte()
 
-  @ObjCName("MIN_SHORT_")
+  @ObjCName(name = "MIN_SHORT_")
   const val MIN_SHORT: Short = (-32768).toShort()
 
-  @ObjCName("MIN_INT_")
+  @ObjCName(name = "MIN_INT_")
   const val MIN_INT: Int = -2147483647 - 1
 
-  @ObjCName("MIN_LONG_")
+  @ObjCName(name = "MIN_LONG_")
   const val MIN_LONG: Long = -9223372036854775807L - 1L
 
-  @ObjCName("MIN_BYTE_WITH_CAST_")
+  @ObjCName(name = "MIN_BYTE_WITH_CAST_")
   const val MIN_BYTE_WITH_CAST: Byte = (-128).toByte()
 
-  @ObjCName("MIN_SHORT_WITH_CAST_")
+  @ObjCName(name = "MIN_SHORT_WITH_CAST_")
   const val MIN_SHORT_WITH_CAST: Short = (-32768).toShort()
 
   @JvmField
-  @ObjCName("classLiteral_")
+  @ObjCName(name = "classLiteral_")
   val classLiteral: Class<*>? = CompileTimeConstant::class.javaObjectType
  }
 }

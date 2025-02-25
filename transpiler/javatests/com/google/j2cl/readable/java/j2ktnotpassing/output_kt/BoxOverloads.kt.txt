@@ -26,24 +26,24 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktnotpassingBoxOverloads", exact = true)
+@ObjCName(name = "J2ktJ2ktnotpassingBoxOverloads", swiftName = "J2ktnotpassingBoxOverloads", exact = true)
 open class BoxOverloads {
- @ObjCName("J2ktJ2ktnotpassingBoxOverloadsCompanion", exact = true)
+ @ObjCName(name = "J2ktJ2ktnotpassingBoxOverloadsCompanion", swiftName = "J2ktnotpassingBoxOverloadsCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("boxedOverload")
+  @ObjCName(name = "boxedOverload")
   fun boxedOverload(
-   @ObjCName("withDouble") d: Double
+   @ObjCName(name = "withDouble") d: Double
   ) {}
 
   @JvmStatic
-  @ObjCName("boxedOverload")
+  @ObjCName(name = "boxedOverload")
   fun boxedOverload(
-   @ObjCName("withJavaLangDouble") d: Double
+   @ObjCName(name = "withJavaLangDouble") d: Double
   ) {}
 
   @JvmStatic
-  @ObjCName("testBoxedOverload")
+  @ObjCName(name = "testBoxedOverload")
   fun testBoxedOverload() {
    BoxOverloads.boxedOverload(1.25)
    BoxOverloads.boxedOverload(
@@ -58,9 +58,9 @@ open class BoxOverloads {
   }
 
   @JvmStatic
-  @ObjCName("testGenericBoxedOverload")
+  @ObjCName(name = "testGenericBoxedOverload")
   fun testGenericBoxedOverload(
-   @ObjCName("withJ2ktnotpassingBoxOverloads_Generic") generic: BoxOverloads.Generic<Double>
+   @ObjCName(name = "withJ2ktnotpassingBoxOverloads_Generic") generic: BoxOverloads.Generic<Double>
   ) {
    generic.overload(1.25)
    generic.overload(
@@ -72,16 +72,16 @@ open class BoxOverloads {
   }
  }
 
- @ObjCName("J2ktJ2ktnotpassingBoxOverloads_Generic", exact = true)
+ @ObjCName(name = "J2ktJ2ktnotpassingBoxOverloads_Generic", swiftName = "J2ktnotpassingBoxOverloads_Generic", exact = true)
  interface Generic<T> {
-  @ObjCName("overload")
+  @ObjCName(name = "overload")
   fun overload(
-   @ObjCName("withDouble") d: Double
+   @ObjCName(name = "withDouble") d: Double
   )
 
-  @ObjCName("overload")
+  @ObjCName(name = "overload")
   fun overload(
-   @ObjCName("withId") t: T
+   @ObjCName(name = "withId") t: T
   )
  }
 }

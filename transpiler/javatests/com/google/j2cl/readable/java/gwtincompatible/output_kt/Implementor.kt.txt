@@ -26,7 +26,7 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktGwtincompatibleImplementor", exact = true)
+@ObjCName(name = "J2ktGwtincompatibleImplementor", swiftName = "GwtincompatibleImplementor", exact = true)
 open class Implementor: Interface.ClassWithAbstractMethod(), Interface, Interface.NestedInterface {
  override fun incompatible() {}
 
@@ -34,18 +34,18 @@ open class Implementor: Interface.ClassWithAbstractMethod(), Interface, Interfac
 
  override fun incompatibleFromClass() {}
 
- @ObjCName("compatibleMethod")
+ @ObjCName(name = "compatibleMethod")
  open fun compatibleMethod() {
   val a: Int = 4
  }
 
- @ObjCName("J2ktGwtincompatibleImplementor_SomeEnum", exact = true)
+ @ObjCName(name = "J2ktGwtincompatibleImplementor_SomeEnum", swiftName = "GwtincompatibleImplementor_SomeEnum", exact = true)
  enum class SomeEnum {
-  @ObjCName("COMPATIBLE")
+  @ObjCName(name = "COMPATIBLE")
   COMPATIBLE {
    override fun method_pp_gwtincompatible() {}
   },
-  @ObjCName("INCOMPATIBLE")
+  @ObjCName(name = "INCOMPATIBLE")
   INCOMPATIBLE {
    override fun method_pp_gwtincompatible() {}
   };

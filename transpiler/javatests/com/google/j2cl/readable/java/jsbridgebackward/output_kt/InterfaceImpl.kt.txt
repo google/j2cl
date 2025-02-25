@@ -26,29 +26,29 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktJsbridgebackwardMyJsInterface", exact = true)
+@ObjCName(name = "J2ktJsbridgebackwardMyJsInterface", swiftName = "JsbridgebackwardMyJsInterface", exact = true)
 @JsType
 fun interface MyJsInterface {
- @ObjCName("foo")
+ @ObjCName(name = "foo")
  fun foo(
-  @ObjCName("withInt") a: Int
+  @ObjCName(name = "withInt") a: Int
  ): Int
 }
 
-@ObjCName("J2ktJsbridgebackwardA", exact = true)
+@ObjCName(name = "J2ktJsbridgebackwardA", swiftName = "JsbridgebackwardA", exact = true)
 open class A internal constructor() {
- @ObjCName("foo")
+ @ObjCName(name = "foo")
  open fun foo(
-  @ObjCName("withInt") a: Int
+  @ObjCName(name = "withInt") a: Int
  ): Int {
   return a
  }
 }
 
-@ObjCName("J2ktJsbridgebackwardInterfaceImpl", exact = true)
+@ObjCName(name = "J2ktJsbridgebackwardInterfaceImpl", swiftName = "JsbridgebackwardInterfaceImpl", exact = true)
 open class InterfaceImpl: A(), MyJsInterface
 
-@ObjCName("J2ktJsbridgebackwardSubInterfaceImpl", exact = true)
+@ObjCName(name = "J2ktJsbridgebackwardSubInterfaceImpl", swiftName = "JsbridgebackwardSubInterfaceImpl", exact = true)
 open class SubInterfaceImpl internal constructor(): InterfaceImpl() {
  override fun foo(a: Int): Int {
   return 0

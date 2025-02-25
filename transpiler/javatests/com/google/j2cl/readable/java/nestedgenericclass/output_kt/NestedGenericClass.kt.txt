@@ -29,11 +29,11 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktNestedgenericclassNestedGenericClass", exact = true)
+@ObjCName(name = "J2ktNestedgenericclassNestedGenericClass", swiftName = "NestedgenericclassNestedGenericClass", exact = true)
 open class NestedGenericClass<T> {
- @ObjCName("fun")
+ @ObjCName(name = "fun")
  open fun <S> `fun`(
-  @ObjCName("withId") t: S
+  @ObjCName(name = "withId") t: S
  ) {
   open class E<S> internal constructor()
   open class F internal constructor() {
@@ -44,7 +44,7 @@ open class NestedGenericClass<T> {
   F()
  }
 
- @ObjCName("bar")
+ @ObjCName(name = "bar")
  open fun <T_1> bar() {
   open class G<T> internal constructor() {
    open fun <T_1> bar() {
@@ -55,7 +55,7 @@ open class NestedGenericClass<T> {
   G<Error?>().bar<Any?>()
  }
 
- @ObjCName("test")
+ @ObjCName(name = "test")
  open fun test() {
   val n: NestedGenericClass<Number?>? = NestedGenericClass<Number?>()
   val a: NestedGenericClass<Number?>.A<Error?>? = n!!.A<Error?>()
@@ -64,33 +64,33 @@ open class NestedGenericClass<T> {
   n!!.C().D()
  }
 
- @ObjCName("J2ktNestedgenericclassNestedGenericClass_A", exact = true)
+ @ObjCName(name = "J2ktNestedgenericclassNestedGenericClass_A", swiftName = "NestedgenericclassNestedGenericClass_A", exact = true)
  open inner class A<T> {
-  @ObjCName("J2ktNestedgenericclassNestedGenericClass_A_B", exact = true)
+  @ObjCName(name = "J2ktNestedgenericclassNestedGenericClass_A_B", swiftName = "NestedgenericclassNestedGenericClass_A_B", exact = true)
   open inner class B<T> constructor()
  }
 
- @ObjCName("J2ktNestedgenericclassNestedGenericClass_C", exact = true)
+ @ObjCName(name = "J2ktNestedgenericclassNestedGenericClass_C", swiftName = "NestedgenericclassNestedGenericClass_C", exact = true)
  open inner class C {
   @JvmField
-  @ObjCName("c_")
+  @ObjCName(name = "c_")
   var c: T? = null
 
-  @ObjCName("J2ktNestedgenericclassNestedGenericClass_C_D", exact = true)
+  @ObjCName(name = "J2ktNestedgenericclassNestedGenericClass_C_D", swiftName = "NestedgenericclassNestedGenericClass_C_D", exact = true)
   open inner class D {
    @JvmField
-   @ObjCName("d_")
+   @ObjCName(name = "d_")
    var d: T? = null
   }
  }
 
- @ObjCName("J2ktNestedgenericclassNestedGenericClass_RecursiveTypeVariable", exact = true)
+ @ObjCName(name = "J2ktNestedgenericclassNestedGenericClass_RecursiveTypeVariable", swiftName = "NestedgenericclassNestedGenericClass_RecursiveTypeVariable", exact = true)
  open inner class RecursiveTypeVariable<T: NestedGenericClass<T>.RecursiveTypeVariable<T>?> internal constructor() {
   internal open fun test_pp_nestedgenericclass(t: T) {
    t!!.Inner()
   }
 
-  @ObjCName("J2ktNestedgenericclassNestedGenericClass_RecursiveTypeVariable_Inner", exact = true)
+  @ObjCName(name = "J2ktNestedgenericclassNestedGenericClass_RecursiveTypeVariable_Inner", swiftName = "NestedgenericclassNestedGenericClass_RecursiveTypeVariable_Inner", exact = true)
   open inner class Inner internal constructor()
  }
 }

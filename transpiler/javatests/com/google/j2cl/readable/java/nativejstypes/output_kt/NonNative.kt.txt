@@ -25,15 +25,15 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktNativejstypesNonNative", exact = true)
+@ObjCName(name = "J2ktNativejstypesNonNative", swiftName = "NativejstypesNonNative", exact = true)
 open class NonNative {
- @ObjCName("J2ktNativejstypesNonNative_Inner1Inner2", exact = true)
+ @ObjCName(name = "J2ktNativejstypesNonNative_Inner1Inner2", swiftName = "NativejstypesNonNative_Inner1Inner2", exact = true)
  @JsType(name = "Inner1.Inner2", isNative = true)
  open class Inner1Inner2 internal constructor() {
-  @ObjCName("J2ktNativejstypesNonNative_Inner1Inner2_Inner3Inner4", exact = true)
+  @ObjCName(name = "J2ktNativejstypesNonNative_Inner1Inner2_Inner3Inner4", swiftName = "NativejstypesNonNative_Inner1Inner2_Inner3Inner4", exact = true)
   @JsType(name = "Inner3.Inner4", isNative = true)
   open class Inner3Inner4 internal constructor() {
-   @ObjCName("J2ktNativejstypesNonNative_Inner1Inner2_Inner3Inner4_Inner5", exact = true)
+   @ObjCName(name = "J2ktNativejstypesNonNative_Inner1Inner2_Inner3Inner4_Inner5", swiftName = "NativejstypesNonNative_Inner1Inner2_Inner3Inner4_Inner5", exact = true)
    @JsType(isNative = true)
    open class Inner5 internal constructor()
   }

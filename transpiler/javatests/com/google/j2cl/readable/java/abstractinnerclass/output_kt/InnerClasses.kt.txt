@@ -24,22 +24,22 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktAbstractinnerclassInnerClasses", exact = true)
+@ObjCName(name = "J2ktAbstractinnerclassInnerClasses", swiftName = "AbstractinnerclassInnerClasses", exact = true)
 open class InnerClasses {
- @ObjCName("J2ktAbstractinnerclassInnerClasses_A", exact = true)
+ @ObjCName(name = "J2ktAbstractinnerclassInnerClasses_A", swiftName = "AbstractinnerclassInnerClasses_A", exact = true)
  fun interface A {
-  @ObjCName("foo")
+  @ObjCName(name = "foo")
   fun foo()
  }
 
- @ObjCName("J2ktAbstractinnerclassInnerClasses_B", exact = true)
+ @ObjCName(name = "J2ktAbstractinnerclassInnerClasses_B", swiftName = "AbstractinnerclassInnerClasses_B", exact = true)
  abstract class B internal constructor(): InnerClasses.A {
   internal open fun bar_pp_abstractinnerclass() {
    this.foo()
   }
  }
 
- @ObjCName("J2ktAbstractinnerclassInnerClasses_C", exact = true)
+ @ObjCName(name = "J2ktAbstractinnerclassInnerClasses_C", swiftName = "AbstractinnerclassInnerClasses_C", exact = true)
  abstract inner class C internal constructor(): InnerClasses.A {
   internal open fun bar_pp_abstractinnerclass() {
    this.foo()

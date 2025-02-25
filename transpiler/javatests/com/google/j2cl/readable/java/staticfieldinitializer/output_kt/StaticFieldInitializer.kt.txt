@@ -26,16 +26,16 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktStaticfieldinitializerStaticFieldInitializer", exact = true)
+@ObjCName(name = "J2ktStaticfieldinitializerStaticFieldInitializer", swiftName = "StaticfieldinitializerStaticFieldInitializer", exact = true)
 open class StaticFieldInitializer {
- @ObjCName("J2ktStaticfieldinitializerStaticFieldInitializerCompanion", exact = true)
+ @ObjCName(name = "J2ktStaticfieldinitializerStaticFieldInitializerCompanion", swiftName = "StaticfieldinitializerStaticFieldInitializerCompanion", exact = true)
  companion object {
   @JvmField
-  @ObjCName("a_")
+  @ObjCName(name = "a_")
   var a: Int = 2
 
   @JvmField
-  @ObjCName("b_")
+  @ObjCName(name = "b_")
   var b: Int = StaticFieldInitializer.a * 4
  }
 }

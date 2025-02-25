@@ -28,13 +28,13 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktAutovalueAutoValueWithGenerics", exact = true)
+@ObjCName(name = "J2ktAutovalueAutoValueWithGenerics", swiftName = "AutovalueAutoValueWithGenerics", exact = true)
 @WasAutoValue
 abstract class AutoValueWithGenerics<T> {
- @ObjCName("getBooleanField")
+ @ObjCName(name = "getBooleanField")
  abstract fun getBooleanField(): Boolean
 
- @ObjCName("J2ktAutovalueAutoValueWithGenericsCompanion", exact = true)
+ @ObjCName(name = "J2ktAutovalueAutoValueWithGenericsCompanion", swiftName = "AutovalueAutoValueWithGenericsCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun <T_1> create_pp_autovalue(): AutoValueWithGenerics<T_1>? {

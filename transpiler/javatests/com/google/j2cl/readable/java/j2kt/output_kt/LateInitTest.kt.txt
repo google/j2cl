@@ -26,16 +26,16 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 import org.junit.Assert
 
-@ObjCName("J2ktJ2ktLateInitTest", exact = true)
+@ObjCName(name = "J2ktJ2ktLateInitTest", swiftName = "J2ktLateInitTest", exact = true)
 class LateInitTest {
  private lateinit var uninitialized: String
 
- @ObjCName("setup")
+ @ObjCName(name = "setup")
  fun setup() {
   this.uninitialized = "I have been initialized"
  }
 
- @ObjCName("behaviorBeingTested_expectedResult")
+ @ObjCName(name = "behaviorBeingTested_expectedResult")
  fun behaviorBeingTested_expectedResult() {
   Assert.assertEquals(
    this.uninitialized,

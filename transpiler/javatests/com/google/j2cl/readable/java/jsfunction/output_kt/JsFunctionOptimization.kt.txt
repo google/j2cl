@@ -30,11 +30,11 @@ import kotlin.arrayOf
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktJsfunctionJsFunctionOptimization", exact = true)
+@ObjCName(name = "J2ktJsfunctionJsFunctionOptimization", swiftName = "JsfunctionJsFunctionOptimization", exact = true)
 open class JsFunctionOptimization {
- @ObjCName("main")
+ @ObjCName(name = "main")
  open fun main(
-  @ObjCName("withInt") r: Int
+  @ObjCName(name = "withInt") r: Int
  ) {
   object : Any() {
    internal fun m_pp_jsfunction() {
@@ -97,16 +97,16 @@ open class JsFunctionOptimization {
   )
  }
 
- @ObjCName("J2ktJsfunctionJsFunctionOptimization_F", exact = true)
+ @ObjCName(name = "J2ktJsfunctionJsFunctionOptimization_F", swiftName = "JsfunctionJsFunctionOptimization_F", exact = true)
  @JsFunction
  fun interface F {
-  @ObjCName("m")
+  @ObjCName(name = "m")
   fun m(
-   @ObjCName("withNSString") s: String?
+   @ObjCName(name = "withNSString") s: String?
   ): String?
  }
 
- @ObjCName("J2ktJsfunctionJsFunctionOptimization_Holder", exact = true)
+ @ObjCName(name = "J2ktJsfunctionJsFunctionOptimization_Holder", swiftName = "JsfunctionJsFunctionOptimization_Holder", exact = true)
  open inner class Holder<T> {
   internal constructor(value: T)
 

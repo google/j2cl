@@ -28,9 +28,9 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktNullabilityInferenceProblem5", exact = true)
+@ObjCName(name = "J2ktJ2ktNullabilityInferenceProblem5", swiftName = "J2ktNullabilityInferenceProblem5", exact = true)
 open class NullabilityInferenceProblem5 {
- @ObjCName("J2ktJ2ktNullabilityInferenceProblem5Companion", exact = true)
+ @ObjCName(name = "J2ktJ2ktNullabilityInferenceProblem5Companion", swiftName = "J2ktNullabilityInferenceProblem5Companion", exact = true)
  companion object {
   @JvmStatic
   internal fun <I, O> transform_pp_j2kt(future: NullabilityInferenceProblem5.Future<I>, fn: NullabilityInferenceProblem5.Function<in I, out O>): NullabilityInferenceProblem5.Future<O> {
@@ -53,17 +53,17 @@ open class NullabilityInferenceProblem5 {
   }
  }
 
- @ObjCName("J2ktJ2ktNullabilityInferenceProblem5_Future", exact = true)
+ @ObjCName(name = "J2ktJ2ktNullabilityInferenceProblem5_Future", swiftName = "J2ktNullabilityInferenceProblem5_Future", exact = true)
  interface Future<V>
 
- @ObjCName("J2ktJ2ktNullabilityInferenceProblem5_Function", exact = true)
+ @ObjCName(name = "J2ktJ2ktNullabilityInferenceProblem5_Function", swiftName = "J2ktNullabilityInferenceProblem5_Function", exact = true)
  fun interface Function<I, O> {
-  @ObjCName("apply")
+  @ObjCName(name = "apply")
   fun apply(
-   @ObjCName("withId") i: I
+   @ObjCName(name = "withId") i: I
   ): O
  }
 
- @ObjCName("J2ktJ2ktNullabilityInferenceProblem5_Foo", exact = true)
+ @ObjCName(name = "J2ktJ2ktNullabilityInferenceProblem5_Foo", swiftName = "J2ktNullabilityInferenceProblem5_Foo", exact = true)
  interface Foo<V>
 }

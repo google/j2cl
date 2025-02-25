@@ -31,7 +31,7 @@ import kotlin.native.ObjCName
 import kotlin.run
 import kotlin.synchronized
 
-@ObjCName("J2ktSynchronizedstatementSynchronizedStatement", exact = true)
+@ObjCName(name = "J2ktSynchronizedstatementSynchronizedStatement", swiftName = "SynchronizedstatementSynchronizedStatement", exact = true)
 open class SynchronizedStatement: J2ktMonitor() {
  private var a: Int = 0
 
@@ -41,7 +41,7 @@ open class SynchronizedStatement: J2ktMonitor() {
 
  private val customMonitor: J2ktMonitor? = SynchronizedStatement.CustomMonitor()
 
- @ObjCName("testSynchronizedOnThis")
+ @ObjCName(name = "testSynchronizedOnThis")
  open fun testSynchronizedOnThis() {
   synchronized<Unit>(this) {
    this.a = this.a + 1
@@ -49,7 +49,7 @@ open class SynchronizedStatement: J2ktMonitor() {
   }
  }
 
- @ObjCName("testSynchronizedOnJ2ktMonitor")
+ @ObjCName(name = "testSynchronizedOnJ2ktMonitor")
  open fun testSynchronizedOnJ2ktMonitor() {
   synchronized<Unit>(this.j2ktMonitor!!) {
    this.a = this.a + 1
@@ -57,7 +57,7 @@ open class SynchronizedStatement: J2ktMonitor() {
   }
  }
 
- @ObjCName("testSynchronizedOnCustomMonitor")
+ @ObjCName(name = "testSynchronizedOnCustomMonitor")
  open fun testSynchronizedOnCustomMonitor() {
   synchronized<Unit>(this.customMonitor!!) {
    this.a = this.a + 1
@@ -65,7 +65,7 @@ open class SynchronizedStatement: J2ktMonitor() {
   }
  }
 
- @ObjCName("testSynchronizedMethod")
+ @ObjCName(name = "testSynchronizedMethod")
  open fun testSynchronizedMethod() {
   synchronized<Unit>(this) {
    this.a = this.a + 1
@@ -73,7 +73,7 @@ open class SynchronizedStatement: J2ktMonitor() {
   }
  }
 
- @ObjCName("testReturn")
+ @ObjCName(name = "testReturn")
  open fun testReturn(): Int {
   synchronized<Unit>(this) {
    if (this.a < 10) {
@@ -91,10 +91,10 @@ open class SynchronizedStatement: J2ktMonitor() {
   }
  }
 
- @ObjCName("testBreakAndContinue")
+ @ObjCName(name = "testBreakAndContinue")
  open fun testBreakAndContinue() {}
 
- @ObjCName("testInitialization")
+ @ObjCName(name = "testInitialization")
  open fun testInitialization(): Int {
   var a: Int = 0
   synchronized<Unit>(this) {
@@ -103,7 +103,7 @@ open class SynchronizedStatement: J2ktMonitor() {
   return a
  }
 
- @ObjCName("testIfStatementWithNonVoidBodyWithoutElse")
+ @ObjCName(name = "testIfStatementWithNonVoidBodyWithoutElse")
  open fun testIfStatementWithNonVoidBodyWithoutElse() {
   synchronized<Unit>(this) {
    if (this.a < 10) {
@@ -118,14 +118,14 @@ open class SynchronizedStatement: J2ktMonitor() {
   return 0
  }
 
- @ObjCName("J2ktSynchronizedstatementSynchronizedStatementCompanion", exact = true)
+ @ObjCName(name = "J2ktSynchronizedstatementSynchronizedStatementCompanion", swiftName = "SynchronizedstatementSynchronizedStatementCompanion", exact = true)
  companion object {
   private var staticA: Int = 0
 
   private var staticB: Int = 0
 
   @JvmStatic
-  @ObjCName("testSynchronizedOnClass")
+  @ObjCName(name = "testSynchronizedOnClass")
   fun testSynchronizedOnClass() {
    synchronized<Unit>(SynchronizedStatement::class.javaObjectType) {
     SynchronizedStatement.staticA = SynchronizedStatement.staticA + 1
@@ -134,7 +134,7 @@ open class SynchronizedStatement: J2ktMonitor() {
   }
 
   @JvmStatic
-  @ObjCName("testSynchronizedStaticMethod")
+  @ObjCName(name = "testSynchronizedStaticMethod")
   fun testSynchronizedStaticMethod() {
    synchronized<Unit>(SynchronizedStatement::class.javaObjectType) {
     SynchronizedStatement.staticA = SynchronizedStatement.staticA + 1
@@ -143,13 +143,13 @@ open class SynchronizedStatement: J2ktMonitor() {
   }
  }
 
- @ObjCName("J2ktSynchronizedstatementSynchronizedStatement_ExtendsSynchronized", exact = true)
+ @ObjCName(name = "J2ktSynchronizedstatementSynchronizedStatement_ExtendsSynchronized", swiftName = "SynchronizedstatementSynchronizedStatement_ExtendsSynchronized", exact = true)
  open class ExtendsSynchronized: SynchronizedStatement() {
   internal open fun foo_pp_synchronizedstatement() {
    synchronized<Unit>(this) {}
   }
  }
 
- @ObjCName("J2ktSynchronizedstatementSynchronizedStatement_CustomMonitor", exact = true)
+ @ObjCName(name = "J2ktSynchronizedstatementSynchronizedStatement_CustomMonitor", swiftName = "SynchronizedstatementSynchronizedStatement_CustomMonitor", exact = true)
  open class CustomMonitor: J2ktMonitor()
 }

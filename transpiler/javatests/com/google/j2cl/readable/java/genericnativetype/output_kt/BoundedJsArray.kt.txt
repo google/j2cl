@@ -29,15 +29,15 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktGenericnativetypeBoundedJsArray", exact = true)
+@ObjCName(name = "J2ktGenericnativetypeBoundedJsArray", swiftName = "GenericnativetypeBoundedJsArray", exact = true)
 @JsType(name = "Array", namespace = JsPackage.GLOBAL, isNative = true)
 open class BoundedJsArray<V> {
  private constructor(size: Int)
 
- @ObjCName("J2ktGenericnativetypeBoundedJsArrayCompanion", exact = true)
+ @ObjCName(name = "J2ktGenericnativetypeBoundedJsArrayCompanion", swiftName = "GenericnativetypeBoundedJsArrayCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("create")
+  @ObjCName(name = "create")
   @JsOverlay
   fun <V_1> create(): BoundedJsArray<V_1>? {
    val array: BoundedJsArray<V_1>? = null
@@ -45,10 +45,10 @@ open class BoundedJsArray<V> {
   }
 
   @JvmStatic
-  @ObjCName("create")
+  @ObjCName(name = "create")
   @JsOverlay
   fun <V_1> create(
-   @ObjCName("withInt") size: Int
+   @ObjCName(name = "withInt") size: Int
   ): BoundedJsArray<V_1>? {
    val array: BoundedJsArray<V_1>? = BoundedJsArray<V_1>(size)
    return array

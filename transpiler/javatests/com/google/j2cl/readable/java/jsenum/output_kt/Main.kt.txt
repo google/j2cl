@@ -43,12 +43,12 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 import kotlin.run
 
-@ObjCName("J2ktJsenumMain", exact = true)
+@ObjCName(name = "J2ktJsenumMain", swiftName = "JsenumMain", exact = true)
 open class Main {
- @ObjCName("J2ktJsenumMainCompanion", exact = true)
+ @ObjCName(name = "J2ktJsenumMainCompanion", swiftName = "JsenumMainCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("testJsEnumSwitch")
+  @ObjCName(name = "testJsEnumSwitch")
   fun testJsEnumSwitch() {
    var comparableJsEnum: Main.ComparableJsEnum? = if (Main.ComparableJsEnum.ONE.getValue() == 1) Main.ComparableJsEnum.TWO else null
    when (comparableJsEnum!!) {
@@ -316,49 +316,49 @@ open class Main {
   }
  }
 
- @ObjCName("J2ktJsenumMain_Supplier", exact = true)
+ @ObjCName(name = "J2ktJsenumMain_Supplier", swiftName = "JsenumMain_Supplier", exact = true)
  fun interface Supplier<T> {
-  @ObjCName("get")
+  @ObjCName(name = "get")
   fun get(): T
  }
 
- @ObjCName("J2ktJsenumMain_Consumer", exact = true)
+ @ObjCName(name = "J2ktJsenumMain_Consumer", swiftName = "JsenumMain_Consumer", exact = true)
  fun interface Consumer<T> {
-  @ObjCName("accept")
+  @ObjCName(name = "accept")
   fun accept(
-   @ObjCName("withId") t: T
+   @ObjCName(name = "withId") t: T
   )
  }
 
- @ObjCName("J2ktJsenumMain_ComparableJsEnum", exact = true)
+ @ObjCName(name = "J2ktJsenumMain_ComparableJsEnum", swiftName = "JsenumMain_ComparableJsEnum", exact = true)
  @JsEnum
  enum class ComparableJsEnum {
-  @ObjCName("ZERO")
+  @ObjCName(name = "ZERO")
   ZERO,
-  @ObjCName("ONE")
+  @ObjCName(name = "ONE")
   ONE,
-  @ObjCName("TWO")
+  @ObjCName(name = "TWO")
   TWO;
 
-  @ObjCName("getValue")
+  @ObjCName(name = "getValue")
   fun getValue(): Int {
    return this.ordinal
   }
  }
 
- @ObjCName("J2ktJsenumMain_IntJsEnum", exact = true)
+ @ObjCName(name = "J2ktJsenumMain_IntJsEnum", swiftName = "JsenumMain_IntJsEnum", exact = true)
  @JsEnum(hasCustomValue = true)
  enum class IntJsEnum {
-  @ObjCName("MINUSONE")
+  @ObjCName(name = "MINUSONE")
   MINUSONE(-1),
-  @ObjCName("TWENTY")
+  @ObjCName(name = "TWENTY")
   TWENTY(20),
-  @ObjCName("ELEVEN")
+  @ObjCName(name = "ELEVEN")
   ELEVEN(11);
 
   private var value: Int = 0
 
-  @ObjCName("getValue")
+  @ObjCName(name = "getValue")
   fun getValue(): Int {
    return this.value
   }
@@ -368,17 +368,17 @@ open class Main {
   }
  }
 
- @ObjCName("J2ktJsenumMain_StringJsEnum", exact = true)
+ @ObjCName(name = "J2ktJsenumMain_StringJsEnum", swiftName = "JsenumMain_StringJsEnum", exact = true)
  @JsEnum(hasCustomValue = true)
  enum class StringJsEnum {
-  @ObjCName("ONE")
+  @ObjCName(name = "ONE")
   ONE("ONE"),
-  @ObjCName("THREE")
+  @ObjCName(name = "THREE")
   THREE("THREE");
 
   private var value: String? = null
 
-  @ObjCName("getValue")
+  @ObjCName(name = "getValue")
   fun getValue(): String? {
    return this.value
   }
@@ -388,17 +388,17 @@ open class Main {
   }
  }
 
- @ObjCName("J2ktJsenumMain_NonNullableStringJsEnum", exact = true)
+ @ObjCName(name = "J2ktJsenumMain_NonNullableStringJsEnum", swiftName = "JsenumMain_NonNullableStringJsEnum", exact = true)
  @JsEnum(hasCustomValue = true)
  enum class NonNullableStringJsEnum {
-  @ObjCName("ONE")
+  @ObjCName(name = "ONE")
   ONE("ONE"),
-  @ObjCName("THREE")
+  @ObjCName(name = "THREE")
   THREE("THREE");
 
   private var value: String
 
-  @ObjCName("getValue")
+  @ObjCName(name = "getValue")
   fun getValue(): String? {
    return this.value
   }
@@ -408,23 +408,23 @@ open class Main {
   }
  }
 
- @ObjCName("J2ktJsenumMain_NativeStringEnum", exact = true)
+ @ObjCName(name = "J2ktJsenumMain_NativeStringEnum", swiftName = "JsenumMain_NativeStringEnum", exact = true)
  @JsEnum(name = "NonNullableStringJsEnum", namespace = "jsenum.Main", isNative = true)
  enum class NativeStringEnum {
-  @ObjCName("ONE")
+  @ObjCName(name = "ONE")
   ONE,
-  @ObjCName("THREE")
+  @ObjCName(name = "THREE")
   THREE;
  }
 
- @ObjCName("J2ktJsenumMain_JsFunctionSuppiler", exact = true)
+ @ObjCName(name = "J2ktJsenumMain_JsFunctionSuppiler", swiftName = "JsenumMain_JsFunctionSuppiler", exact = true)
  @JsFunction
  fun interface JsFunctionSuppiler<T> {
-  @ObjCName("get")
+  @ObjCName(name = "get")
   fun get(): T
  }
 
- @ObjCName("J2ktJsenumMain_TemplatedField", exact = true)
+ @ObjCName(name = "J2ktJsenumMain_TemplatedField", swiftName = "JsenumMain_TemplatedField", exact = true)
  open class TemplatedField<T> {
   @JvmField
   internal var value_pp_jsenum: T
@@ -438,29 +438,29 @@ open class Main {
   }
  }
 
- @ObjCName("J2ktJsenumMain_Foo", exact = true)
+ @ObjCName(name = "J2ktJsenumMain_Foo", swiftName = "JsenumMain_Foo", exact = true)
  open class Foo<T> {
   internal constructor(c: Optional<Main.IntJsEnum>?)
  }
 
- @ObjCName("J2ktJsenumMain_JsEnumWithRenamedProperties", exact = true)
+ @ObjCName(name = "J2ktJsenumMain_JsEnumWithRenamedProperties", swiftName = "JsenumMain_JsEnumWithRenamedProperties", exact = true)
  @JsEnum
  enum class JsEnumWithRenamedProperties {
-  @ObjCName("ZERO")
+  @ObjCName(name = "ZERO")
   @JsProperty(name = "NAUGHT")
   ZERO,
-  @ObjCName("ONE")
+  @ObjCName(name = "ONE")
   ONE,
-  @ObjCName("TWO")
+  @ObjCName(name = "TWO")
   TWO;
 
-  @ObjCName("getValue")
+  @ObjCName(name = "getValue")
   fun getValue(): Int {
    return this.ordinal
   }
  }
 
- @ObjCName("J2ktJsenumMain_SupplierConsumerImpl", exact = true)
+ @ObjCName(name = "J2ktJsenumMain_SupplierConsumerImpl", swiftName = "JsenumMain_SupplierConsumerImpl", exact = true)
  open class SupplierConsumerImpl<T> internal constructor(): Main.Supplier<T>, Main.Consumer<T> {
   override fun accept(t: T) {}
 
@@ -469,7 +469,7 @@ open class Main {
   }
  }
 
- @ObjCName("J2ktJsenumMain_ComparableJsEnumSupplierConsumer", exact = true)
+ @ObjCName(name = "J2ktJsenumMain_ComparableJsEnumSupplierConsumer", swiftName = "JsenumMain_ComparableJsEnumSupplierConsumer", exact = true)
  interface ComparableJsEnumSupplierConsumer: Main.Supplier<Main.ComparableJsEnum?>, Main.Consumer<Main.ComparableJsEnum?> {
   @JsMethod
   override fun get(): Main.ComparableJsEnum?
@@ -477,10 +477,10 @@ open class Main {
   override fun accept(e: Main.ComparableJsEnum?)
  }
 
- @ObjCName("J2ktJsenumMain_ComparableJsEnumSupplierConsumerImpl", exact = true)
+ @ObjCName(name = "J2ktJsenumMain_ComparableJsEnumSupplierConsumerImpl", swiftName = "JsenumMain_ComparableJsEnumSupplierConsumerImpl", exact = true)
  open class ComparableJsEnumSupplierConsumerImpl internal constructor(): Main.SupplierConsumerImpl<Main.ComparableJsEnum?>(), Main.ComparableJsEnumSupplierConsumer
 
- @ObjCName("J2ktJsenumMain_ComparableJsEnumSupplierConsumerImplWithOverrides", exact = true)
+ @ObjCName(name = "J2ktJsenumMain_ComparableJsEnumSupplierConsumerImplWithOverrides", swiftName = "JsenumMain_ComparableJsEnumSupplierConsumerImplWithOverrides", exact = true)
  open class ComparableJsEnumSupplierConsumerImplWithOverrides internal constructor(): Main.SupplierConsumerImpl<Main.ComparableJsEnum?>(), Main.ComparableJsEnumSupplierConsumer {
   override fun accept(t: Main.ComparableJsEnum?) {}
 
@@ -489,21 +489,21 @@ open class Main {
   }
  }
 
- @ObjCName("J2ktJsenumMain_SomeJsEnum", exact = true)
+ @ObjCName(name = "J2ktJsenumMain_SomeJsEnum", swiftName = "JsenumMain_SomeJsEnum", exact = true)
  @JsEnum
  enum class SomeJsEnum {
-  @ObjCName("A")
+  @ObjCName(name = "A")
   A;
  }
 
- @ObjCName("J2ktJsenumMain_BaseVarargs", exact = true)
+ @ObjCName(name = "J2ktJsenumMain_BaseVarargs", swiftName = "JsenumMain_BaseVarargs", exact = true)
  open class BaseVarargs<T> {
   internal constructor(vararg args: T) {
    val args_1: Array<T>? = args as Array<T>?
   }
  }
 
- @ObjCName("J2ktJsenumMain_SubtypeVarargs", exact = true)
+ @ObjCName(name = "J2ktJsenumMain_SubtypeVarargs", swiftName = "JsenumMain_SubtypeVarargs", exact = true)
  open class SubtypeVarargs: Main.BaseVarargs<Main.SomeJsEnum?> {
   internal constructor(): super(
    Main.SomeJsEnum.A,
@@ -511,6 +511,6 @@ open class Main {
   )
  }
 
- @ObjCName("J2ktJsenumMain_SubtypeImplicitVarargs", exact = true)
+ @ObjCName(name = "J2ktJsenumMain_SubtypeImplicitVarargs", swiftName = "JsenumMain_SubtypeImplicitVarargs", exact = true)
  open class SubtypeImplicitVarargs internal constructor(): Main.BaseVarargs<Main.SomeJsEnum?>()
 }
