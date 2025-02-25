@@ -20,8 +20,14 @@ import org.jspecify.annotations.Nullable;
 
 @NullMarked
 public class NullabilityInferenceInLambdaReturnTypes {
+  interface Foo<V extends @Nullable Object> {}
+
   interface Supplier<V extends @Nullable Object> {
     V get();
+  }
+
+  interface Operator<V extends @Nullable Object> {
+    V apply(V v);
   }
 
   static <V extends @Nullable Object> void accept(Supplier<V> supplier) {
@@ -38,5 +44,27 @@ public class NullabilityInferenceInLambdaReturnTypes {
 
   private void testTransformAndAccept() {
     accept(transform(() -> null));
+  }
+
+  private <V extends @Nullable Object> Operator<Foo<V>> testReturnArgument_expliciParameterType() {
+    return (Foo<V> foo) -> foo;
+  }
+
+  private <V extends @Nullable Object> Operator<Foo<V>> testReturnArgument_inferredParameterType() {
+    return foo -> foo;
+  }
+
+  private <V extends @Nullable Object> Operator<Foo<V>> testReturnLocal_explicitParameterType() {
+    return (Foo<V> foo) -> {
+      Foo<V> localFoo = foo;
+      return localFoo;
+    };
+  }
+
+  private <V extends @Nullable Object> Operator<Foo<V>> testReturnLocal_inferredParameterType() {
+    return foo -> {
+      Foo<V> localFoo = foo;
+      return localFoo;
+    };
   }
 }

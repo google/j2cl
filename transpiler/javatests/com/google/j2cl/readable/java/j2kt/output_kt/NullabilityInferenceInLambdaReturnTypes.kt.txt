@@ -47,6 +47,32 @@ open class NullabilityInferenceInLambdaReturnTypes {
   )
  }
 
+ private fun <V> testReturnArgument_expliciParameterType(): NullabilityInferenceInLambdaReturnTypes.Operator<NullabilityInferenceInLambdaReturnTypes.Foo<V>> {
+  return NullabilityInferenceInLambdaReturnTypes.Operator<NullabilityInferenceInLambdaReturnTypes.Foo<V>> { foo: NullabilityInferenceInLambdaReturnTypes.Foo<V> ->
+   return@Operator foo
+  }
+ }
+
+ private fun <V> testReturnArgument_inferredParameterType(): NullabilityInferenceInLambdaReturnTypes.Operator<NullabilityInferenceInLambdaReturnTypes.Foo<V>> {
+  return NullabilityInferenceInLambdaReturnTypes.Operator<NullabilityInferenceInLambdaReturnTypes.Foo<V>> { foo: NullabilityInferenceInLambdaReturnTypes.Foo<V> ->
+   return@Operator foo
+  }
+ }
+
+ private fun <V> testReturnLocal_explicitParameterType(): NullabilityInferenceInLambdaReturnTypes.Operator<NullabilityInferenceInLambdaReturnTypes.Foo<V>> {
+  return NullabilityInferenceInLambdaReturnTypes.Operator<NullabilityInferenceInLambdaReturnTypes.Foo<V>> { foo: NullabilityInferenceInLambdaReturnTypes.Foo<V> ->
+   val localFoo: NullabilityInferenceInLambdaReturnTypes.Foo<V>? = foo
+   return@Operator localFoo!!
+  }
+ }
+
+ private fun <V> testReturnLocal_inferredParameterType(): NullabilityInferenceInLambdaReturnTypes.Operator<NullabilityInferenceInLambdaReturnTypes.Foo<V>> {
+  return NullabilityInferenceInLambdaReturnTypes.Operator<NullabilityInferenceInLambdaReturnTypes.Foo<V>> { foo: NullabilityInferenceInLambdaReturnTypes.Foo<V> ->
+   val localFoo: NullabilityInferenceInLambdaReturnTypes.Foo<V>? = foo
+   return@Operator localFoo!!
+  }
+ }
+
  @ObjCName("J2ktJ2ktNullabilityInferenceInLambdaReturnTypesCompanion", exact = true)
  companion object {
   @JvmStatic
@@ -60,9 +86,20 @@ open class NullabilityInferenceInLambdaReturnTypes {
   }
  }
 
+ @ObjCName("J2ktJ2ktNullabilityInferenceInLambdaReturnTypes_Foo", exact = true)
+ interface Foo<V>
+
  @ObjCName("J2ktJ2ktNullabilityInferenceInLambdaReturnTypes_Supplier", exact = true)
  fun interface Supplier<V> {
   @ObjCName("get")
   fun get(): V
+ }
+
+ @ObjCName("J2ktJ2ktNullabilityInferenceInLambdaReturnTypes_Operator", exact = true)
+ fun interface Operator<V> {
+  @ObjCName("apply")
+  fun apply(
+   @ObjCName("withId") v: V
+  ): V
  }
 }
