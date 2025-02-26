@@ -111,6 +111,10 @@ public class OutputUtils {
 
     protected void onFileCreation(Path outputPath) throws IOException {}
 
+    public void cancel() {
+      fileService.shutdownNow();
+    }
+
     @Override
     public void close() {
       try {

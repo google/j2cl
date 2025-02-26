@@ -76,6 +76,8 @@ public class OutputGeneratorStage {
     LibraryInfoBuilder libraryInfoBuilder = new LibraryInfoBuilder();
 
     for (CompilationUnit compilationUnit : library.getCompilationUnits()) {
+      problems.abortIfCancelled();
+
       for (Type type : compilationUnit.getTypes()) {
         List<Import> imports = ImportGatherer.gatherImports(type);
         JavaScriptImplGenerator jsImplGenerator =
@@ -162,6 +164,7 @@ public class OutputGeneratorStage {
         output.copyFile(compilationUnit.getFilePath(), compilationUnit.getPackageRelativePath());
       }
     }
+    problems.abortIfCancelled();
 
     if (shouldGenerateReadableLibraryInfo) {
       output.write("library_info_debug.json", libraryInfoBuilder.toJson(problems));

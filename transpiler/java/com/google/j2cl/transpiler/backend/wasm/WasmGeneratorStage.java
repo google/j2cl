@@ -45,6 +45,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 
+// TODO(goktug): Support cancellation for this backend..
 /** Generates all the outputs for Wasm compilation. */
 public class WasmGeneratorStage {
 
@@ -99,12 +100,15 @@ public class WasmGeneratorStage {
     environment =
         new WasmGenerationEnvironment(
             library, jsImports, sourceMappingPathPrefix, /* isModular= */ true);
+    problems.abortIfCancelled();
+
     SummaryBuilder summaryBuilder = new SummaryBuilder(library, environment, problems);
 
     JsImportsGenerator.collectImportSnippets(jsImports)
         .forEach((key, value) -> summaryBuilder.addSharedJsImportSnippet(key, value));
 
     jsImports.getModuleImports().forEach(summaryBuilder::addSharedJsImportRequireSnippet);
+    problems.abortIfCancelled();
 
     collectUsedNativeArrayTypes(library)
         .forEach(
@@ -115,6 +119,7 @@ public class WasmGeneratorStage {
                   environment.getWasmEmptyArrayGlobalName(t),
                   emitToString(g -> g.emitEmptyArraySingleton(t)));
             });
+    problems.abortIfCancelled();
 
     environment
         .collectMethodsThatNeedTypeDeclarations()
@@ -122,6 +127,8 @@ public class WasmGeneratorStage {
             (k, m) ->
                 summaryBuilder.addSharedTypeSnippet(
                     k, emitToString(g -> g.emitFunctionType(k, m))));
+    problems.abortIfCancelled();
+
     environment
         .collectMethodsNeedingIntrinsicDeclarations()
         .forEach(
@@ -130,6 +137,7 @@ public class WasmGeneratorStage {
                     k, emitToString(g -> g.emitBinaryenIntrinsicImport(k, m))));
 
     output.write("summary.binpb", summaryBuilder.toByteArray());
+    problems.abortIfCancelled();
 
     copyJavaSources(library);
 
@@ -168,6 +176,7 @@ public class WasmGeneratorStage {
   }
 
   private void emitToFile(String filename, Consumer<WasmConstructsGenerator> emitter) {
+    problems.abortIfCancelled();
     String content = emitToString(emitter);
     if (content.isEmpty()) {
       return;

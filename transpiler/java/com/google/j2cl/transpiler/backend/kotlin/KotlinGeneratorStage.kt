@@ -43,6 +43,7 @@ class KotlinGeneratorStage(private val output: OutputUtils.Output, private val p
 
   /** Generate all outputs for a compilation unit. */
   private fun generateOutputs(compilationUnit: CompilationUnit) {
+    problems.abortIfCancelled()
     generateKtOutputs(compilationUnit)
     generateObjCOutputs(compilationUnit)
   }
