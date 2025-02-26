@@ -141,6 +141,7 @@ public class PackageInfoCache {
             manifestByPath.put(classPathEntry, new Manifest(zipFile.getInputStream(entry)));
           }
         }
+        problems.abortIfCancelled();
       } catch (IOException e) {
         problems.fatal(FatalError.CANNOT_OPEN_FILE, e.toString());
       }
