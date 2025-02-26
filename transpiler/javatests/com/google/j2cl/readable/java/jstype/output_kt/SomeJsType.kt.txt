@@ -69,8 +69,8 @@ open class SomeJsType<T> {
  }
 
  private fun testStarAndWildCard(s: SomeJsType.Star?, w: SomeJsType.Wildcard?): SomeJsType.Wildcard? {
-  val `object`: Any? = Any()
-  val star: SomeJsType.Star? = Double.valueOf(3.0) as SomeJsType.Star
+  val `object`: Any = Any()
+  val star: SomeJsType.Star = Double.valueOf(3.0) as SomeJsType.Star
   return star as SomeJsType.Wildcard?
  }
 

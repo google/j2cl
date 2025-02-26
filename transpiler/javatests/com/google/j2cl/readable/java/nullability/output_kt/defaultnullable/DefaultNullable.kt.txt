@@ -281,14 +281,14 @@ open class DefaultNullable {
 
   @JvmStatic
   internal fun testNonNullableLambdas_pp_nullability_defaultnullable() {
-   val lambda: DefaultNullable.NullMarkedConsumer<String?>? = DefaultNullable.NullMarkedConsumer<String?> { s: String? ->
+   val lambda: DefaultNullable.NullMarkedConsumer<String?> = DefaultNullable.NullMarkedConsumer<String?> { s: String? ->
    }
-   val constructorReference: DefaultNullable.NullMarkedSupplier<String?>? = DefaultNullable.NullMarkedSupplier<String> {
+   val constructorReference: DefaultNullable.NullMarkedSupplier<String?> = DefaultNullable.NullMarkedSupplier<String> {
     return@NullMarkedSupplier String()
-   } as DefaultNullable.NullMarkedSupplier<String?>?
-   val newArrayReference: DefaultNullable.NullMarkedIntFunction<Array<String?>?>? = DefaultNullable.NullMarkedIntFunction<Array<String>> { arg0: Int ->
+   } as DefaultNullable.NullMarkedSupplier<String?>
+   val newArrayReference: DefaultNullable.NullMarkedIntFunction<Array<String?>?> = DefaultNullable.NullMarkedIntFunction<Array<String>> { arg0: Int ->
     return@NullMarkedIntFunction arrayOfNulls<String>(arg0) as Array<String>
-   } as DefaultNullable.NullMarkedIntFunction<Array<String?>?>?
+   } as DefaultNullable.NullMarkedIntFunction<Array<String?>?>
   }
 
   @JvmStatic

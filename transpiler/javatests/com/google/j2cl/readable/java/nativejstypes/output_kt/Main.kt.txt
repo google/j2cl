@@ -44,42 +44,42 @@ open class Main {
   @JvmStatic
   @ObjCName(name = "testNativeJsTypeWithNamespace")
   fun testNativeJsTypeWithNamespace(): Int {
-   val foo: Foo? = Foo()
-   return foo!!.sum()
+   val foo: Foo = Foo()
+   return foo.sum()
   }
 
   @JvmStatic
   @ObjCName(name = "testNativeJsTypeWithNamespaceJsProperties")
   fun testNativeJsTypeWithNamespaceJsProperties() {
-   val foo: Foo? = Foo()
-   foo!!.x = 50
-   foo!!.y = 5
+   val foo: Foo = Foo()
+   foo.x = 50
+   foo.y = 5
   }
 
   @JvmStatic
   @ObjCName(name = "testNativeJsTypeWithoutNamespace")
   fun testNativeJsTypeWithoutNamespace(): Int {
-   val bar: Bar? = Bar(6, 7)
+   val bar: Bar = Bar(6, 7)
    val unused: Int = Bar.getStatic()
-   return bar!!.product()
+   return bar.product()
   }
 
   @JvmStatic
   @ObjCName(name = "testNativeJsTypeWithoutNamespaceJsProperties")
   fun testNativeJsTypeWithoutNamespaceJsProperties() {
-   val bar: Bar? = Bar(6, 7)
-   bar!!.x = 50
-   bar!!.y = 5
+   val bar: Bar = Bar(6, 7)
+   bar.x = 50
+   bar.y = 5
    Bar.f = 10
   }
 
   @JvmStatic
   @ObjCName(name = "testInnerNativeJsType")
   fun testInnerNativeJsType() {
-   val barInner: Bar.Inner? = Bar.Inner(1)
-   val barInnerWithDotInName: BarInnerWithDotInName? = BarInnerWithDotInName(2)
-   barInner!!.square()
-   barInnerWithDotInName!!.square()
+   val barInner: Bar.Inner = Bar.Inner(1)
+   val barInnerWithDotInName: BarInnerWithDotInName = BarInnerWithDotInName(2)
+   barInner.square()
+   barInnerWithDotInName.square()
    Bar.Inner.getInnerStatic()
    BarInnerWithDotInName.getInnerStatic()
   }
@@ -87,24 +87,24 @@ open class Main {
   @JvmStatic
   @ObjCName(name = "testGlobalNativeJsType")
   fun testGlobalNativeJsType() {
-   val header: Headers? = Headers()
-   header!!.append("Content-Type", "text/xml")
+   val header: Headers = Headers()
+   header.append("Content-Type", "text/xml")
   }
 
   @JvmStatic
   @ObjCName(name = "testNativeTypeClassLiteral")
   fun testNativeTypeClassLiteral() {
-   var o1: Any? = Bar::class.javaObjectType
+   var o1: Any = Bar::class.javaObjectType
    o1 = Array::class.javaObjectType
   }
 
   @JvmStatic
   @ObjCName(name = "testNativeTypeObjectMethods")
   fun testNativeTypeObjectMethods() {
-   val bar: Bar? = Bar(6, 7)
-   val unusedStr: String? = bar!!.toString()
-   val unusedHash: Int = bar!!.hashCode()
-   val unusedEq: Boolean = bar!!.equals(
+   val bar: Bar = Bar(6, 7)
+   val unusedStr: String = bar.toString()
+   val unusedHash: Int = bar.hashCode()
+   val unusedEq: Boolean = bar.equals(
     Any(),
    )
   }
@@ -113,10 +113,10 @@ open class Main {
   @ObjCName(name = "testTopLevel")
   fun testTopLevel() {
    TopLevel.x = 2
-   val nested: TopLevel.Nested? = TopLevel.Nested()
-   nested!!.x = 3
-   val topLevelNestedReference: TopLevelNestedReference? = TopLevelNestedReference()
-   topLevelNestedReference!!.x = 4
+   val nested: TopLevel.Nested = TopLevel.Nested()
+   nested.x = 3
+   val topLevelNestedReference: TopLevelNestedReference = TopLevelNestedReference()
+   topLevelNestedReference.x = 4
   }
  }
 }

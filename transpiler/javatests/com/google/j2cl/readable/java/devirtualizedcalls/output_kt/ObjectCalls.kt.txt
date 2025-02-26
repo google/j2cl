@@ -32,16 +32,16 @@ import kotlin.native.ObjCName
 open class ObjectCalls {
  @ObjCName(name = "main")
  open fun main() {
-  val `object`: Any? = Any()
-  `object`!!.equals(`object`)
-  `object`!!.hashCode()
-  `object`!!.toString()
-  `object`!!.getClass()
-  val objectCalls: Array<ObjectCalls?>? = arrayOfNulls<ObjectCalls>(1)
-  objectCalls!!.equals(objectCalls)
-  objectCalls!!.hashCode()
-  objectCalls!!.toString()
-  objectCalls!!.getClass()
+  val `object`: Any = Any()
+  `object`.equals(`object`)
+  `object`.hashCode()
+  `object`.toString()
+  `object`.getClass()
+  val objectCalls: Array<ObjectCalls?> = arrayOfNulls<ObjectCalls>(1)
+  objectCalls.equals(objectCalls)
+  objectCalls.hashCode()
+  objectCalls.toString()
+  objectCalls.getClass()
  }
 
  @ObjCName(name = "test")

@@ -41,7 +41,7 @@ open class LocalClassInStaticContext {
   fun test() {
    open class A internal constructor()
    A()
-   val a: Any? = object : Any() {
+   val a: Any = object : Any() {
     internal fun m_pp_localclassinstaticcontext() {
      A()
     }
@@ -51,7 +51,7 @@ open class LocalClassInStaticContext {
   init {
    open class B internal constructor()
    B()
-   val b: Any? = object : Any() {}
+   val b: Any = object : Any() {}
   }
  }
 

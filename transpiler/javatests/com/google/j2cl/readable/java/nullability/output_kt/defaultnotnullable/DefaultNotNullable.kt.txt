@@ -284,44 +284,36 @@ open class DefaultNotNullable {
 
   @JvmStatic
   internal fun testParametrizedTypeNullabilityCast_pp_nullability_defaultnotnullable(c: DefaultNotNullable.Consumer<String>, string: String) {
-   val localString: String? = string
-   c.accept(
-    localString!!,
-   )
+   val localString: String = string
+   c.accept(localString)
   }
 
   @JvmStatic
   internal fun <T: Any> testGenericTypeNullabilityCast_pp_nullability_defaultnotnullable(c: DefaultNotNullable.Consumer<T>, element: T) {
-   val localElement: T? = element
-   c.accept(
-    localElement!!,
-   )
+   val localElement: T = element
+   c.accept(localElement)
   }
 
   @JvmStatic
   internal fun testParametrizedWildcardNullabilityCast_pp_nullability_defaultnotnullable(c: DefaultNotNullable.Consumer<in String>, string: String) {
-   val localString: String? = string
-   c.accept(
-    localString as String,
-   )
+   val localString: String = string
+   c.accept(localString)
   }
 
   @JvmStatic
   internal fun <T: Any> testGenericWildcardNullabilityCast_pp_nullability_defaultnotnullable(c: DefaultNotNullable.Consumer<in T>, element: T) {
-   val localElement: T? = element
-   c.accept(
-    localElement as T,
-   )
+   val localElement: T = element
+   c.accept(localElement)
   }
 
   @JvmStatic
   internal fun testParametrizedArrayNullabilityCast_pp_nullability_defaultnotnullable(array: Array<String>) {
-   val localArray: Array<String>? = array
+   val localArray: Array<String> = array
   }
 
   @JvmStatic
   internal fun <T: Any> testGenericArrayNullabilityCast_pp_nullability_defaultnotnullable(array: Array<T>) {
-   val localArray: Array<T>? = array
+   val localArray: Array<T> = array
   }
 
   @JvmStatic
@@ -336,7 +328,7 @@ open class DefaultNotNullable {
   internal fun testCodeFragments_pp_nullability_defaultnotnullable() {
    val b: Boolean = true
    val c: DefaultNotNullable.Consumer<String>? = if (b) null as DefaultNotNullable.Consumer<String>? else null
-   val s: Array<String>? = arrayOf<String>("1", "2")
+   val s: Array<String> = arrayOf<String>("1", "2")
   }
  }
 

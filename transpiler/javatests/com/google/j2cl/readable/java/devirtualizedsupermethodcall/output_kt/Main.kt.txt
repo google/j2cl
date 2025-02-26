@@ -59,13 +59,13 @@ open class FooCallsSuperObjectMethod internal constructor() {
 open class Main {
  @ObjCName(name = "main")
  open fun main() {
-  val fooCallsSuperObjectMethods: FooCallsSuperObjectMethod? = FooCallsSuperObjectMethod()
-  fooCallsSuperObjectMethods!!.hashCode()
-  val sn: SubNumber? = SubNumber()
-  sn!!.toByte()
-  sn!!.toDouble()
-  sn!!.toFloat()
-  sn!!.toInt()
-  sn!!.toShort()
+  val fooCallsSuperObjectMethods: FooCallsSuperObjectMethod = FooCallsSuperObjectMethod()
+  fooCallsSuperObjectMethods.hashCode()
+  val sn: SubNumber = SubNumber()
+  sn.toByte()
+  sn.toDouble()
+  sn.toFloat()
+  sn.toInt()
+  sn.toShort()
  }
 }

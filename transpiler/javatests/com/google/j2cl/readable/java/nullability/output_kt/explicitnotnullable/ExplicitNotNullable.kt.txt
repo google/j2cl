@@ -326,18 +326,18 @@ open class ExplicitNotNullable {
 
   @JvmStatic
   internal fun testLambdaNullability_pp_nullability_explicitnotnullable() {
-   val lambda: ExplicitNotNullable.Consumer<String>? = ExplicitNotNullable.Consumer<String> { s: String ->
+   val lambda: ExplicitNotNullable.Consumer<String> = ExplicitNotNullable.Consumer<String> { s: String ->
    }
-   val nullable: ExplicitNotNullable.Consumer<String>? = ExplicitNotNullable.Consumer<String> { arg0: String ->
+   val nullable: ExplicitNotNullable.Consumer<String> = ExplicitNotNullable.Consumer<String> { arg0: String ->
     DefaultNullable.nullableAccept_pp_nullability_explicitnotnullable(arg0)
    }
-   val nonNullable: ExplicitNotNullable.Consumer<String>? = ExplicitNotNullable.Consumer<String> { arg0_1: String ->
+   val nonNullable: ExplicitNotNullable.Consumer<String> = ExplicitNotNullable.Consumer<String> { arg0_1: String ->
     ExplicitNotNullable.nonNullableAccept_pp_nullability_explicitnotnullable(arg0_1)
    }
-   val newObject: ExplicitNotNullable.Supplier<Any>? = ExplicitNotNullable.Supplier<Any> {
+   val newObject: ExplicitNotNullable.Supplier<Any> = ExplicitNotNullable.Supplier<Any> {
     return@Supplier Any()
    }
-   val newArray: ExplicitNotNullable.IntFunction<Array<Any>>? = ExplicitNotNullable.IntFunction<Array<Any>> { arg0_2: Int ->
+   val newArray: ExplicitNotNullable.IntFunction<Array<Any>> = ExplicitNotNullable.IntFunction<Array<Any>> { arg0_2: Int ->
     return@IntFunction arrayOfNulls<Any>(arg0_2) as Array<Any>
    }
   }
@@ -363,10 +363,8 @@ open class ExplicitNotNullable {
 
   @JvmStatic
   internal fun testParametrizedMethod_pp_nullability_explicitnotnullable(f: ExplicitNotNullable.Function<in String, out String>, string: String): String {
-   val localString: String? = string
-   return f.apply(
-    localString as String,
-   )
+   val localString: String = string
+   return f.apply(localString)
   }
 
   @JvmStatic

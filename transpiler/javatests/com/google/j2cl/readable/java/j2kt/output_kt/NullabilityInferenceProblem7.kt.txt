@@ -32,32 +32,23 @@ open class NullabilityInferenceProblem7 {
  companion object {
   @JvmStatic
   internal fun <T: Any> test1_pp_j2kt(ordering: NullabilityInferenceProblem7.Ordering<T>, t1: T, t2: T): T {
-   val local1: T? = t1
-   val local2: T? = t2
-   return ordering.max<T>(
-    local1!!,
-    local2!!,
-   )
+   val local1: T = t1
+   val local2: T = t2
+   return ordering.max<T>(local1, local2)
   }
 
   @JvmStatic
   internal fun test2_pp_j2kt(ordering: NullabilityInferenceProblem7.Ordering<NullabilityInferenceProblem7.Foo>, foo1: NullabilityInferenceProblem7.Foo, foo2: NullabilityInferenceProblem7.Foo): NullabilityInferenceProblem7.Foo {
-   val localFoo1: NullabilityInferenceProblem7.Foo? = foo1
-   val localFoo2: NullabilityInferenceProblem7.Foo? = foo2
-   return ordering.max<NullabilityInferenceProblem7.Foo>(
-    localFoo1!!,
-    localFoo2!!,
-   )
+   val localFoo1: NullabilityInferenceProblem7.Foo = foo1
+   val localFoo2: NullabilityInferenceProblem7.Foo = foo2
+   return ordering.max<NullabilityInferenceProblem7.Foo>(localFoo1, localFoo2)
   }
 
   @JvmStatic
   internal fun test3_pp_j2kt(ordering: NullabilityInferenceProblem7.FooOrdering, foo1: NullabilityInferenceProblem7.Foo, foo2: NullabilityInferenceProblem7.Foo): NullabilityInferenceProblem7.Foo {
-   val localFoo1: NullabilityInferenceProblem7.Foo? = foo1
-   val localFoo2: NullabilityInferenceProblem7.Foo? = foo2
-   return ordering.max<NullabilityInferenceProblem7.Foo>(
-    localFoo1!!,
-    localFoo2!!,
-   )
+   val localFoo1: NullabilityInferenceProblem7.Foo = foo1
+   val localFoo2: NullabilityInferenceProblem7.Foo = foo2
+   return ordering.max<NullabilityInferenceProblem7.Foo>(localFoo1, localFoo2)
   }
  }
 

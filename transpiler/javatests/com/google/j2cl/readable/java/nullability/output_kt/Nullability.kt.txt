@@ -180,14 +180,14 @@ open class Nullability {
 
   @JvmStatic
   internal fun <T> testRecursive_pp_nullability() where T: Nullability.Recursive<T>, T: Marker? {
-   val generic: Nullability.RecursiveParam<T>? = Nullability.RecursiveParam<T>()
-   val parametrized: Nullability.RecursiveParam<Nullability.RecursiveChild>? = Nullability.RecursiveParam<Nullability.RecursiveChild>()
+   val generic: Nullability.RecursiveParam<T> = Nullability.RecursiveParam<T>()
+   val parametrized: Nullability.RecursiveParam<Nullability.RecursiveChild> = Nullability.RecursiveParam<Nullability.RecursiveChild>()
   }
 
   @JvmStatic
   internal fun <T> testRecursiveNullable_pp_nullability() where T: Nullability.RecursiveNullable<T>?, T: Marker? {
-   val generic: Nullability.RecursiveNullableParam<T>? = Nullability.RecursiveNullableParam<T>()
-   val parametrized: Nullability.RecursiveNullableParam<Nullability.RecursiveNullableChild?>? = Nullability.RecursiveNullableParam<Nullability.RecursiveNullableChild?>()
+   val generic: Nullability.RecursiveNullableParam<T> = Nullability.RecursiveNullableParam<T>()
+   val parametrized: Nullability.RecursiveNullableParam<Nullability.RecursiveNullableChild?> = Nullability.RecursiveNullableParam<Nullability.RecursiveNullableChild?>()
   }
 
   @JvmStatic

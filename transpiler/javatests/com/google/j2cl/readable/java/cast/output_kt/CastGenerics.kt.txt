@@ -44,7 +44,7 @@ open class CastGenerics<T, E: Number?> {
 
  @ObjCName(name = "testCastToTypeVariable")
  open fun testCastToTypeVariable() {
-  val o: Any? = Int(1)
+  val o: Any = Int(1)
   val e: E? = o as E?
   val t: T? = o as T?
   val es: Array<E>? = o as Array<E>?
@@ -53,7 +53,7 @@ open class CastGenerics<T, E: Number?> {
 
  @ObjCName(name = "testCastToMethodTypeVariable")
  open fun <S, V: Enum<V>> testCastToMethodTypeVariable() {
-  val o: Any? = Int(1)
+  val o: Any = Int(1)
   val s: S? = o as S?
   var c: Any? = o as CastGenerics<S, Number?>?
   c = o as Array<S>?
@@ -136,14 +136,14 @@ open class CastGenerics<T, E: Number?> {
   @JvmStatic
   @ObjCName(name = "testErasureCastInNullMarkedCode")
   fun testErasureCastInNullMarkedCode() {
-   val container: CastGenerics.NullMarkedContainer<out String>? = CastGenerics.NullMarkedContainer<String>("abc")
-   val s: String? = container!!.get_pp_cast()
+   val container: CastGenerics.NullMarkedContainer<out String> = CastGenerics.NullMarkedContainer<String>("abc")
+   val s: String = container.get_pp_cast()
   }
 
   @JvmStatic
   @ObjCName(name = "testCastToParamterizedType")
   fun testCastToParamterizedType() {
-   val o: Any? = Int(1)
+   val o: Any = Int(1)
    var cc: CastGenerics<Error?, Number?>? = o as CastGenerics<Error?, Number?>?
    cc = o as CastGenerics<Error?, Number?>?
   }

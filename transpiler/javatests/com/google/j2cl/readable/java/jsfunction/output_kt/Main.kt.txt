@@ -49,14 +49,14 @@ import kotlin.native.ObjCName
 open class Main {
  @ObjCName(name = "testJsFunction")
  open fun testJsFunction() {
-  val func: Main.JsFunctionImplementation? = Main.JsFunctionImplementation()
-  func!!.foo(10)
+  val func: Main.JsFunctionImplementation = Main.JsFunctionImplementation()
+  func.foo(10)
   Main.callFn(
    Main.createNativeFunction(),
    10,
   )
-  val a: Int = func!!.field
-  func!!.bar()
+  val a: Int = func.field
+  func.bar()
  }
 
  @ObjCName(name = "testJsFunctionsCapturingLocal")
@@ -98,14 +98,14 @@ open class Main {
 
  @ObjCName(name = "testJsFunctionErasureCasts")
  open fun testJsFunctionErasureCasts() {
-  val list: MutableList<Main.Function<String?, String?>?>? = ArrayList<Main.Function<String, String>>() as MutableList<Main.Function<String?, String?>?>?
+  val list: MutableList<Main.Function<String?, String?>?> = ArrayList<Main.Function<String, String>>() as MutableList<Main.Function<String?, String?>?>
   Main.acceptsJsFunction(
-   list!!.get(0) as Main.Function<String?, String?>?,
+   list.get(0) as Main.Function<String?, String?>?,
   )
  }
 
  internal open fun testJsFunctionVarargs_pp_jsfunction(): Main.JsFunctionVarargs? {
-  val f: Main.JsFunctionVarargs? = Main.JsFunctionVarargs { i: Int, numbers: IntArray? ->
+  val f: Main.JsFunctionVarargs = Main.JsFunctionVarargs { i: Int, numbers: IntArray? ->
    var sum: Int = i
    for (number in numbers!!) {
     val number_1: Int = number
@@ -131,7 +131,7 @@ open class Main {
 
  @ObjCName(name = "testVarArgsMethodReferenceToJsFuncion")
  open fun testVarArgsMethodReferenceToJsFuncion() {
-  val c: Main.ForEachCallBack<Main.ElementalJsFunction?>? = Main.ForEachCallBack<Main.ElementalJsFunction?> { arg0: Main.ElementalJsFunction?, arg1: Int, arg2: Array<Main.ElementalJsFunction?>? ->
+  val c: Main.ForEachCallBack<Main.ElementalJsFunction?> = Main.ForEachCallBack<Main.ElementalJsFunction?> { arg0: Main.ElementalJsFunction?, arg1: Int, arg2: Array<Main.ElementalJsFunction?>? ->
    return@ForEachCallBack arg0!!.call(
     Integer.valueOf(arg1),
     arg2,
@@ -159,13 +159,13 @@ open class Main {
  }
 
  internal open fun testJsFunctionClassLiterals_pp_jsfunction() {
-  val array: Array<Main.SimpleJsFunction?>? = arrayOf<Main.SimpleJsFunction?>()
-  var o: Any? = Main.SimpleJsFunction::class.javaObjectType
+  val array: Array<Main.SimpleJsFunction?> = arrayOf<Main.SimpleJsFunction?>()
+  var o: Any = Main.SimpleJsFunction::class.javaObjectType
   o = Array::class.javaObjectType
  }
 
  internal open fun testJsFunctionOptional_pp_jsfunction() {
-  val f: Main.JsFunctionOptional? = Main.JsFunctionOptional { i: Int, n: Double? ->
+  val f: Main.JsFunctionOptional = Main.JsFunctionOptional { i: Int, n: Double? ->
    return@JsFunctionOptional (i.toDouble() + n!!.toDouble()).toInt()
   }
  }
@@ -179,20 +179,20 @@ open class Main {
  }
 
  internal open fun testFunctionExpressionTypeReplacement_pp_jsfunction() {
-  val f: Main.ParametricJsFunction<String?>? = Main.ParametricJsFunction<String?> { unused: String? ->
-   val l: MutableList<MutableList<*>?>? = ArrayList<MutableList<*>>() as MutableList<MutableList<*>?>?
-   l!!.add(
+  val f: Main.ParametricJsFunction<String?> = Main.ParametricJsFunction<String?> { unused: String? ->
+   val l: MutableList<MutableList<*>?> = ArrayList<MutableList<*>>() as MutableList<MutableList<*>?>
+   l.add(
     ArrayList<String>(),
    )
   }
  }
 
  internal open fun testJsFunctionPropertyCall_pp_jsfunction() {
-  val c: Main.ClassWithJsFunctionProperty? = Main.ClassWithJsFunctionProperty()
-  c!!.function_pp_jsfunction!!.call("")
-  c!!.getFunction_pp_jsfunction()!!.call("")
-  c!!.function_pp_jsfunction!!.call("")
-  (if (c != null) c!!.function_pp_jsfunction else null)!!.call("")
+  val c: Main.ClassWithJsFunctionProperty = Main.ClassWithJsFunctionProperty()
+  c.function_pp_jsfunction!!.call("")
+  c.getFunction_pp_jsfunction()!!.call("")
+  c.function_pp_jsfunction!!.call("")
+  (if (c != null) c.function_pp_jsfunction else null)!!.call("")
  }
 
  @ObjCName(name = "J2ktJsfunctionMainCompanion", swiftName = "JsfunctionMainCompanion", exact = true)
@@ -286,8 +286,8 @@ open class Main {
   @JvmStatic
   @ObjCName(name = "testParameterTypes")
   fun testParameterTypes() {
-   val tIntegerJsBiFunction: Main.JsBiFunction<Any?, Number?>? = Main.TIntegerJsBiFunction<String?>() as Main.JsBiFunction<Any?, Number?>?
-   val doubleDoubleJsBiFunction: Main.JsBiFunction<Any?, Number?>? = Main.DoubleDoubleJsBiFunction() as Main.JsBiFunction<Any?, Number?>?
+   val tIntegerJsBiFunction: Main.JsBiFunction<Any?, Number?> = Main.TIntegerJsBiFunction<String?>() as Main.JsBiFunction<Any?, Number?>
+   val doubleDoubleJsBiFunction: Main.JsBiFunction<Any?, Number?> = Main.DoubleDoubleJsBiFunction() as Main.JsBiFunction<Any?, Number?>
    Main.callInterfaceRaw(
     tIntegerJsBiFunction,
     "a",
@@ -321,11 +321,11 @@ open class Main {
     Main.TIntegerJsBiFunction<String?>(),
     "",
    )
-   tIntegerJsBiFunction!!.apply(
+   tIntegerJsBiFunction.apply(
     "a",
     Integer.valueOf(1),
    )
-   doubleDoubleJsBiFunction!!.apply(
+   doubleDoubleJsBiFunction.apply(
     java.lang.Double.valueOf(1.1),
     java.lang.Double.valueOf(1.1),
    )
@@ -346,7 +346,7 @@ open class Main {
   @JvmStatic
   @ObjCName(name = "testCast")
   fun testCast() {
-   val o: Any? = Main.TIntegerJsBiFunction<String?>()
+   val o: Any = Main.TIntegerJsBiFunction<String?>()
    val rawTIntegerJsBiFunction: Main.TIntegerJsBiFunction<Any?>? = o as Main.TIntegerJsBiFunction<Any?>?
    val parameterizedTIntegerJsBiFunction: Main.TIntegerJsBiFunction<String?>? = o as Main.TIntegerJsBiFunction<String?>?
    val anotherRawJsBiFunction: Main.JsBiFunction<Any?, Number?>? = o as Main.JsBiFunction<Any?, Number?>?
@@ -357,9 +357,9 @@ open class Main {
   @JvmStatic
   @ObjCName(name = "testNewInstance")
   fun testNewInstance() {
-   val rawTIntegerJsBiFunction: Main.TIntegerJsBiFunction<Any?>? = Main.TIntegerJsBiFunction<Any?>()
-   val parameterizedTIntegerJsBiFunction: Main.TIntegerJsBiFunction<String?>? = Main.TIntegerJsBiFunction<String?>() as Main.TIntegerJsBiFunction<String?>?
-   val rawJsBiFunction: Main.JsBiFunction<Any?, Number?>? = Main.DoubleDoubleJsBiFunction() as Main.JsBiFunction<Any?, Number?>?
+   val rawTIntegerJsBiFunction: Main.TIntegerJsBiFunction<Any?> = Main.TIntegerJsBiFunction<Any?>()
+   val parameterizedTIntegerJsBiFunction: Main.TIntegerJsBiFunction<String?> = Main.TIntegerJsBiFunction<String?>() as Main.TIntegerJsBiFunction<String?>
+   val rawJsBiFunction: Main.JsBiFunction<Any?, Number?> = Main.DoubleDoubleJsBiFunction() as Main.JsBiFunction<Any?, Number?>
   }
  }
 
@@ -426,7 +426,7 @@ open class Main {
  open class TestCaptureOuterParametricClass<T> internal constructor() {
   @ObjCName(name = "test")
   open fun test() {
-   val f: Main.Function<Any?, Any?>? = Main.Function<Any?, Any?> { `object`: Any? ->
+   val f: Main.Function<Any?, Any?> = Main.Function<Any?, Any?> { `object`: Any? ->
     return@Function ArrayList<T>()
    }
   }

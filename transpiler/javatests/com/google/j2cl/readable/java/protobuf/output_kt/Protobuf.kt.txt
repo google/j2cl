@@ -33,32 +33,32 @@ import protobuf.MyMessage
 open class Protobuf {
  @ObjCName(name = "test")
  open fun test() {
-  val builder: MyMessage.Builder? = MyMessage.newBuilder()
-  builder!!.foo
-  builder!!.setFoo(1)
-  builder!!.fooBar
-  builder!!.setFooBar(2)
-  builder!!.x
-  builder!!.setX(3)
-  builder!!.xValue
-  builder!!.setXValue(4)
-  builder!!.xyz
-  builder!!.setXYZ(5)
-  builder!!.xyzValues
-  builder!!.setXYZValues(6)
-  val message: MyMessage? = builder!!.build()
-  message!!.foo
-  message!!.fooBar
-  message!!.x
-  message!!.xValue
-  message!!.xyz
-  message!!.xyzValues
-  val chainedMessage: MyMessage? = MyMessage.newBuilder().setFoo(1).setFooBar(2).setX(3).setXValue(4).setXYZ(5).setXYZValues(6).build()
-  val defaultMessage: MyMessage? = MyMessage.getDefaultInstance()
-  defaultMessage!!.foo
-  val parser: Parser<*>? = message!!.parserForType
-  val generatedMessageParser: Parser<out GeneratedMessage>? = (message as GeneratedMessage?)!!.parserForType
-  val enumOne: MyEnum? = MyEnum.ONE
+  val builder: MyMessage.Builder = MyMessage.newBuilder()
+  builder.foo
+  builder.setFoo(1)
+  builder.fooBar
+  builder.setFooBar(2)
+  builder.x
+  builder.setX(3)
+  builder.xValue
+  builder.setXValue(4)
+  builder.xyz
+  builder.setXYZ(5)
+  builder.xyzValues
+  builder.setXYZValues(6)
+  val message: MyMessage = builder.build()
+  message.foo
+  message.fooBar
+  message.x
+  message.xValue
+  message.xyz
+  message.xyzValues
+  val chainedMessage: MyMessage = MyMessage.newBuilder().setFoo(1).setFooBar(2).setX(3).setXValue(4).setXYZ(5).setXYZValues(6).build()
+  val defaultMessage: MyMessage = MyMessage.getDefaultInstance()
+  defaultMessage.foo
+  val parser: Parser<*> = message.parserForType
+  val generatedMessageParser: Parser<out GeneratedMessage> = (message as GeneratedMessage?)!!.parserForType
+  val enumOne: MyEnum = MyEnum.ONE
   val enumOneNumber: Int = MyEnum.ONE.number
  }
 }

@@ -31,22 +31,22 @@ import kotlin.run
 @ObjCName(name = "J2ktInterfacesMain", swiftName = "InterfacesMain", exact = true)
 open class Main {
  internal open fun testInterfaceMembers_pp_interfaces() {
-  val i: Main.Interface<String?>? = Implementor()
-  i!!.interfaceMethod()
-  i!!.defaultMethod(null)
-  i!!.toString()
-  val impl: Main.Implementor? = Implementor()
-  impl!!.defaultMethod(null)
-  val enumImpl: Main.EnumImplementor? = Main.EnumImplementor.ONE
-  enumImpl!!.defaultMethod(null)
+  val i: Main.Interface<String?> = Implementor()
+  i.interfaceMethod()
+  i.defaultMethod(null)
+  i.toString()
+  val impl: Main.Implementor = Implementor()
+  impl.defaultMethod(null)
+  val enumImpl: Main.EnumImplementor = Main.EnumImplementor.ONE
+  enumImpl.defaultMethod(null)
   Main.Interface.staticInterfaceMethod()
   val x: Int = run {
    Implementor()
    Main.Interface.a
   } + Main.Interface.b
-  val si: Main.SubInterface? = Implementor()
-  si!!.interfaceMethod()
-  si!!.defaultMethod(null)
+  val si: Main.SubInterface = Implementor()
+  si.interfaceMethod()
+  si.defaultMethod(null)
  }
 
  @ObjCName(name = "J2ktInterfacesMain_Interface", swiftName = "InterfacesMain_Interface", exact = true)

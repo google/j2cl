@@ -137,8 +137,8 @@ open class ClassWithParameterizedGet<T> internal constructor() {
 open class AccidentalOverrideBridge internal constructor(): ClassWithParameterizedGet<String?>(), Getter {
  @ObjCName(name = "test")
  open fun test() {
-  val g: Getter? = AccidentalOverrideBridge()
-  g!!.get("")
+  val g: Getter = AccidentalOverrideBridge()
+  g.get("")
  }
 }
 

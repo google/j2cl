@@ -82,12 +82,12 @@ open class SmartCasts {
   fun <T: Any> testFinalVariableReference(
    @ObjCName(name = "withJ2ktSmartCasts_Foo") foo: SmartCasts.Foo<T>
   ) {
-   val localFoo: SmartCasts.Foo<T>? = foo
+   val localFoo: SmartCasts.Foo<T> = foo
    SmartCasts.acceptFooOfObject(
     (localFoo as SmartCasts.Foo<Any>?)!!,
    )
    SmartCasts.acceptFooOfT<T>(
-    (localFoo as SmartCasts.Foo<T>?)!!,
+    localFoo as SmartCasts.Foo<T>,
    )
   }
 
@@ -97,13 +97,13 @@ open class SmartCasts {
    @ObjCName(name = "withJ2ktSmartCasts_Foo") foo: SmartCasts.Foo<T>,
    @ObjCName(name = "withJ2ktSmartCasts_Foo") foo2: SmartCasts.Foo<T>
   ) {
-   var localFoo: SmartCasts.Foo<T>? = foo
+   var localFoo: SmartCasts.Foo<T> = foo
    localFoo = foo2
    SmartCasts.acceptFooOfObject(
     (localFoo as SmartCasts.Foo<Any>?)!!,
    )
    SmartCasts.acceptFooOfT<T>(
-    (localFoo as SmartCasts.Foo<T>?)!!,
+    localFoo as SmartCasts.Foo<T>,
    )
   }
 

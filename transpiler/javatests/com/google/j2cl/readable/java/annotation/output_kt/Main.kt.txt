@@ -41,17 +41,17 @@ open class Main {
   internal fun test_pp_annotation(foo: Main.Foo?) {
    val booleanConstant: Boolean = Main.Foo.BOOLEAN_CONSTANT
    val intConstant: Int = Main.Foo.INT_CONSTANT
-   val stringConstant: String? = Main.Foo.STRING_CONSTANT
+   val stringConstant: String = Main.Foo.STRING_CONSTANT
    val booleanValue: Boolean = foo!!.booleanValue
    val intValue: Int = foo!!.intValue
-   val stringValue: String? = foo!!.stringValue
-   val enumValue: Main.SomeEnum? = foo!!.enumValue
-   val annotationValue: Main.Zoo? = foo!!.annotationValue
-   val booleanArray: BooleanArray? = foo!!.booleanArray
-   val intArray: IntArray? = foo!!.intArray
-   val stringArray: Array<String?>? = foo!!.stringArray as Array<String?>?
-   val enumArray: Array<Main.SomeEnum?>? = foo!!.enumArray as Array<Main.SomeEnum?>?
-   val annotationArray: Array<Main.Zoo?>? = foo!!.annotationArray as Array<Main.Zoo?>?
+   val stringValue: String = foo!!.stringValue
+   val enumValue: Main.SomeEnum = foo!!.enumValue
+   val annotationValue: Main.Zoo = foo!!.annotationValue
+   val booleanArray: BooleanArray = foo!!.booleanArray
+   val intArray: IntArray = foo!!.intArray
+   val stringArray: Array<String?> = foo!!.stringArray as Array<String?>
+   val enumArray: Array<Main.SomeEnum?> = foo!!.enumArray as Array<Main.SomeEnum?>
+   val annotationArray: Array<Main.Zoo?> = foo!!.annotationArray as Array<Main.Zoo?>
   }
 
   @JvmStatic

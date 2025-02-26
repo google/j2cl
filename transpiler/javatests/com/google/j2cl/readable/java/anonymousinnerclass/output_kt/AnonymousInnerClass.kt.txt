@@ -38,14 +38,14 @@ open class AnonymousInnerClass {
  open fun test(
   @ObjCName(name = "withInt") arg: Int
  ) {
-  val ic: AnonymousInnerClass.InnerClass? = object : InnerClass() {}
-  val a: A? = A()
-  val b: A.B? = object : B() {}
+  val ic: AnonymousInnerClass.InnerClass = object : InnerClass() {}
+  val a: A = A()
+  val b: A.B = object : B() {}
   open class C internal constructor() {
    @JvmField
    var fInC: Int = arg
   }
-  val c: C? = object : C() {}
+  val c: C = object : C() {}
  }
 
  @ObjCName(name = "J2ktAnonymousinnerclassAnonymousInnerClass_InnerClass", swiftName = "AnonymousinnerclassAnonymousInnerClass_InnerClass", exact = true)

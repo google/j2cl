@@ -57,11 +57,11 @@ open class NestedGenericClass<T> {
 
  @ObjCName(name = "test")
  open fun test() {
-  val n: NestedGenericClass<Number?>? = NestedGenericClass<Number?>()
-  val a: NestedGenericClass<Number?>.A<Error?>? = n!!.A<Error?>()
-  val b: NestedGenericClass<Number?>.A<Error?>.B<Exception?>? = a!!.B<Exception?>()
-  n!!.C()
-  n!!.C().D()
+  val n: NestedGenericClass<Number?> = NestedGenericClass<Number?>()
+  val a: NestedGenericClass<Number?>.A<Error?> = n.A<Error?>()
+  val b: NestedGenericClass<Number?>.A<Error?>.B<Exception?> = a.B<Exception?>()
+  n.C()
+  n.C().D()
  }
 
  @ObjCName(name = "J2ktNestedgenericclassNestedGenericClass_A", swiftName = "NestedgenericclassNestedGenericClass_A", exact = true)

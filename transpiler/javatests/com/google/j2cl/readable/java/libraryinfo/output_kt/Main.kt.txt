@@ -65,11 +65,11 @@ open class Main {
   @JsMethod
   fun entryPoint() {
    Main().execute()
-   var jsFunction: Main.Function? = Main.FunctionImpl()
+   var jsFunction: Main.Function = Main.FunctionImpl()
    jsFunction = Main.Function { s: String? ->
     Main.log(42)
    }
-   jsFunction!!.apply("foo")
+   jsFunction.apply("foo")
    Main.MyJsType()
    object : Any() {
     @JsMethod(name = "foo")
@@ -90,7 +90,7 @@ open class Main {
   fun main() {
    val foo: Main.Foo? = null
    foo!!.instanceMethod_pp_libraryinfo()
-   val clazz: Class<*>? = Main.Foo::class.javaObjectType
+   val clazz: Class<*> = Main.Foo::class.javaObjectType
   }
  }
 

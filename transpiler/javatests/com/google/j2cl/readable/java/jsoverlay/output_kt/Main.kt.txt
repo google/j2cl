@@ -37,17 +37,17 @@ import kotlin.native.ObjCName
 open class Main {
  @ObjCName(name = "test")
  open fun test() {
-  val n: Main.NativeJsTypeWithOverlay? = Main.NativeJsTypeWithOverlay()
-  n!!.callM()
+  val n: Main.NativeJsTypeWithOverlay = Main.NativeJsTypeWithOverlay()
+  n.callM()
   Main.NativeJsTypeWithOverlay.`fun`()
   Main.NativeJsTypeWithOverlay.n()
   Main.NativeJsTypeWithOverlay.bar_private_2()
-  n!!.foo_private_2()
+  n.foo_private_2()
   val a: Int = Main.NativeJsTypeWithOverlayConstant.COMPILE_TIME_CONSTANT + Main.NativeJsTypeWithOverlay.nonJsOverlayField
   Main.NativeJsTypeWithOverlay.staticField = null
   Main.NativeJsTypeWithOverlay.varargs(1, 2, 3)
-  n!!.baz_private_2()
-  val b: String? = Main.NativeJsTypeWithOverlayConstant.STRING_COMPILE_TIME_CONSTANT + Main.NativeJsTypeInterfaceWithOverlay.staticField
+  n.baz_private_2()
+  val b: String = Main.NativeJsTypeWithOverlayConstant.STRING_COMPILE_TIME_CONSTANT + Main.NativeJsTypeInterfaceWithOverlay.staticField
  }
 
  @ObjCName(name = "testOverlayInterface")
@@ -63,9 +63,9 @@ open class Main {
   @JvmStatic
   @ObjCName(name = "testOverlayInterfaceImpl")
   fun testOverlayInterfaceImpl() {
-   val foo: Main.NativeJsTypeInterfaceWithOverlay? = Main.NativeJsTypeInterfaceWithOverlayImpl()
-   foo!!.m()
-   foo!!.callM()
+   val foo: Main.NativeJsTypeInterfaceWithOverlay = Main.NativeJsTypeInterfaceWithOverlayImpl()
+   foo.m()
+   foo.callM()
   }
  }
 

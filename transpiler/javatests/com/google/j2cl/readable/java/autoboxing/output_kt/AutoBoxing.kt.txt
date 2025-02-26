@@ -632,8 +632,8 @@ open class AutoBoxing {
     return null as T
    }
   }
-  val supplier: Supplier<Int?>? = Supplier<Int?>()
-  val i: Int = supplier!!.get_pp_autoboxing()!!.toInt()
+  val supplier: Supplier<Int?> = Supplier<Int?>()
+  val i: Int = supplier.get_pp_autoboxing()!!.toInt()
  }
 
  @ObjCName(name = "J2ktAutoboxingAutoBoxingCompanion", swiftName = "AutoboxingAutoBoxingCompanion", exact = true)

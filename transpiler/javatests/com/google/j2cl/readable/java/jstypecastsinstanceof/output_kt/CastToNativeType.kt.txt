@@ -34,7 +34,7 @@ import kotlin.native.ObjCName
 open class CastToNativeType {
  @ObjCName(name = "test")
  open fun test() {
-  val a: Any? = CastToNativeType.NativeJsType()
+  val a: Any = CastToNativeType.NativeJsType()
   val b: CastToNativeType.NativeJsType? = a as CastToNativeType.NativeJsType?
   var c: Boolean = a is CastToNativeType.NativeJsType
   val d: Array<CastToNativeType.NativeJsType?>? = a as Array<CastToNativeType.NativeJsType?>?

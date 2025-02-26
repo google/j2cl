@@ -40,7 +40,7 @@ open class CastToTypeVariable<T: CastToTypeVariable<T>?> {
   @ObjCName(name = "withInt") index: Int,
   @ObjCName(name = "withBoolean") value: Boolean
  ): T {
-  val o: Any? = Any()
+  val o: Any = Any()
   val a: Array<T>? = o as Array<T>?
   return this as (T & Any)
  }

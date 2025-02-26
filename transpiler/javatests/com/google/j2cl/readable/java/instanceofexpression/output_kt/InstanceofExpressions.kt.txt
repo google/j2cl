@@ -51,7 +51,7 @@ import kotlin.run
 open class InstanceofExpressions {
  @ObjCName(name = "testInstanceofClass")
  open fun testInstanceofClass() {
-  val `object`: Any? = InstanceofExpressions()
+  val `object`: Any = InstanceofExpressions()
   var b: Boolean = false
   b = `object` is Any
   b = `object` is InstanceofExpressions
@@ -60,7 +60,7 @@ open class InstanceofExpressions {
 
  @ObjCName(name = "testInstanceofInterface")
  open fun testInstanceofInterface() {
-  val o: Any? = Any()
+  val o: Any = Any()
   var b: Boolean = false
   b = o is Serializable
   b = object : Serializable {} is Serializable
@@ -68,7 +68,7 @@ open class InstanceofExpressions {
 
  @ObjCName(name = "testInstanceofBoxedType")
  open fun testInstanceofBoxedType() {
-  val b: Any? = Int(1)
+  val b: Any = Int(1)
   var a: Boolean = b is Byte
   a = b is Double
   a = b is Float
@@ -86,10 +86,10 @@ open class InstanceofExpressions {
 
  @ObjCName(name = "testInstanceOfArray")
  open fun testInstanceOfArray() {
-  val `object`: Any? = Any()
-  val objectArray: Array<Any?>? = arrayOfNulls<Any>(0)
-  val objectDoubleArray: Array<Array<Any?>?>? = arrayOfNulls<Array<Any?>>(0)
-  val stringArray: Array<String?>? = arrayOfNulls<String>(0)
+  val `object`: Any = Any()
+  val objectArray: Array<Any?> = arrayOfNulls<Any>(0)
+  val objectDoubleArray: Array<Array<Any?>?> = arrayOfNulls<Array<Any?>>(0)
+  val stringArray: Array<String?> = arrayOfNulls<String>(0)
   var a: Boolean = false
   a = `object` is Array<*>
   a = `object` is Array<*>

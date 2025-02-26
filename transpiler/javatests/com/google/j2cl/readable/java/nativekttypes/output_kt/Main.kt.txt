@@ -71,49 +71,49 @@ open class Main {
 
  @ObjCName(name = "memberAccess")
  open fun memberAccess() {
-  val topLevel: KTopLevel<String?>? = KTopLevel<String?>("foo")
-  val fooInstanceMethod: String? = topLevel!!.instanceMethod("foo")
+  val topLevel: KTopLevel<String?> = KTopLevel<String?>("foo")
+  val fooInstanceMethod: String? = topLevel.instanceMethod("foo")
   val fooStaticMethod: String? = KTopLevel.staticMethod<String?>("foo")
-  val fooInstanceField: String? = topLevel!!.instanceField
-  topLevel!!.instanceField = "foo"
+  val fooInstanceField: String? = topLevel.instanceField
+  topLevel.instanceField = "foo"
   val fooStaticField: Any? = KTopLevel.staticField
   KTopLevel.staticField = "foo"
-  topLevel!!.nonPublicField = 0
-  val fieldToRename: Int = topLevel!!.renamedField
-  val methodToRename: Int = topLevel!!.renamedMethod()
-  val methodAsProperty: Int = topLevel!!.methodAsProperty
-  val uppercaseprefixMethodAsProperty: Int = topLevel!!.uppercaseprefixMethodAsProperty
-  val uppercasemethodasproperty: Int = topLevel!!.uppercasemethodasproperty
-  val nonGetMethodAsProperty: Int = topLevel!!.nonGetMethodAsProperty
-  val methodToRenameAsProperty: Int = topLevel!!.renamedMethodAsProperty
-  val isFieldToRename: Boolean = topLevel!!.isRenamedField
-  val isMethodAsProperty: Boolean = topLevel!!.isMethodAsProperty
-  val getstartingmethodAsProperty: Int = topLevel!!.getstartingmethodAsProperty
-  topLevel!!.nonPublicMethod()
-  val nested: KNested<String?>? = KNested<String?>("foo")
-  val nestedInstanceMethod: String? = nested!!.instanceMethod("foo")
+  topLevel.nonPublicField = 0
+  val fieldToRename: Int = topLevel.renamedField
+  val methodToRename: Int = topLevel.renamedMethod()
+  val methodAsProperty: Int = topLevel.methodAsProperty
+  val uppercaseprefixMethodAsProperty: Int = topLevel.uppercaseprefixMethodAsProperty
+  val uppercasemethodasproperty: Int = topLevel.uppercasemethodasproperty
+  val nonGetMethodAsProperty: Int = topLevel.nonGetMethodAsProperty
+  val methodToRenameAsProperty: Int = topLevel.renamedMethodAsProperty
+  val isFieldToRename: Boolean = topLevel.isRenamedField
+  val isMethodAsProperty: Boolean = topLevel.isMethodAsProperty
+  val getstartingmethodAsProperty: Int = topLevel.getstartingmethodAsProperty
+  topLevel.nonPublicMethod()
+  val nested: KNested<String?> = KNested<String?>("foo")
+  val nestedInstanceMethod: String? = nested.instanceMethod("foo")
   val nestedStaticMethod: String? = KNested.staticMethod<String?>("foo")
-  val nestedInstanceField: String? = nested!!.instanceField
-  nested!!.instanceField = "foo"
+  val nestedInstanceField: String? = nested.instanceField
+  nested.instanceField = "foo"
   val nestedStaticField: Any? = KNested.staticField
   KNested.staticField = "foo"
-  val nestedAnonynous: KNested<String?>? = object : KNested<String?>("foo") {}
-  val inner: KTopLevel<String?>.KInner<String?>? = topLevel!!.KInner<String?>("foo")
-  val subclass: Subclass<String?>? = Subclass<String?>("foo")
-  val subclassMethodToRename: Int = subclass!!.renamedMethod()
-  val subclassInterfaceMethod: Int = subclass!!.interfaceMethod("foo")
-  val subclassInterfaceMethodToRename: Int = subclass!!.renamedInterfaceMethod("foo")
-  val interfaceAnonymousSubclass: KFunctionalInterface? = object : KFunctionalInterface {
+  val nestedAnonynous: KNested<String?> = object : KNested<String?>("foo") {}
+  val inner: KTopLevel<String?>.KInner<String?> = topLevel.KInner<String?>("foo")
+  val subclass: Subclass<String?> = Subclass<String?>("foo")
+  val subclassMethodToRename: Int = subclass.renamedMethod()
+  val subclassInterfaceMethod: Int = subclass.interfaceMethod("foo")
+  val subclassInterfaceMethodToRename: Int = subclass.renamedInterfaceMethod("foo")
+  val interfaceAnonymousSubclass: KFunctionalInterface = object : KFunctionalInterface {
    override fun run() {}
   }
-  val interfaceExpression: KFunctionalInterface? = KFunctionalInterface {
+  val interfaceExpression: KFunctionalInterface = KFunctionalInterface {
    return@KFunctionalInterface
   }
  }
 
  @ObjCName(name = "bridges")
  open fun bridges() {
-  var o: KRequiringBridge? = KBridge()
+  var o: KRequiringBridge = KBridge()
   o = object : KBridge() {}
   o = BridgeSubclass()
   var fi: KFunctionalInterfaceRequiringBridge<String?>? = null
@@ -138,9 +138,9 @@ open class Main {
 
  @ObjCName(name = "companionObject")
  open fun companionObject() {
-  val o: KWithCompanionObject? = KWithCompanionObject()
-  val i1: Int = o!!.instanceField
-  o!!.instanceMethod()
+  val o: KWithCompanionObject = KWithCompanionObject()
+  val i1: Int = o.instanceField
+  o.instanceMethod()
   KCompanionObject.staticMethod()
   val i2: Int = KCompanionObject.staticField
   KCompanionObject.staticField = i2
@@ -148,9 +148,9 @@ open class Main {
 
  @ObjCName(name = "typeLiterals")
  open fun typeLiterals() {
-  val c1: Class<*>? = KTopLevel::class.javaObjectType
-  val c2: Class<*>? = KNested::class.javaObjectType
-  val c3: Class<*>? = KInner::class.javaObjectType
+  val c1: Class<*> = KTopLevel::class.javaObjectType
+  val c2: Class<*> = KNested::class.javaObjectType
+  val c3: Class<*> = KInner::class.javaObjectType
  }
 
  @ObjCName(name = "disabledVoidMethod")

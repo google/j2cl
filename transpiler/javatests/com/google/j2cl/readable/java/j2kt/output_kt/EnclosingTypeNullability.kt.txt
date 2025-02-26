@@ -29,7 +29,7 @@ import kotlin.native.ObjCName
 @ObjCName(name = "J2ktJ2ktEnclosingTypeNullability", swiftName = "J2ktEnclosingTypeNullability", exact = true)
 open class EnclosingTypeNullability internal constructor() {
  internal open fun test_pp_j2kt(foo: EnclosingTypeNullability.Outer<String>) {
-  val value: EnclosingTypeNullability.Outer<String>.Inner? = foo.getInner_pp_j2kt()
+  val value: EnclosingTypeNullability.Outer<String>.Inner = foo.getInner_pp_j2kt()
  }
 
  @ObjCName(name = "J2ktJ2ktEnclosingTypeNullability_Outer", swiftName = "J2ktEnclosingTypeNullability_Outer", exact = true)

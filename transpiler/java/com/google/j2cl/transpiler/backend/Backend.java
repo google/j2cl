@@ -98,6 +98,7 @@ import com.google.j2cl.transpiler.passes.InsertWideningPrimitiveConversionsJ2kt;
 import com.google.j2cl.transpiler.passes.J2ktRestrictionsChecker;
 import com.google.j2cl.transpiler.passes.JsInteropRestrictionsChecker;
 import com.google.j2cl.transpiler.passes.MakeVariablesFinal;
+import com.google.j2cl.transpiler.passes.MakeVariablesNonNull;
 import com.google.j2cl.transpiler.passes.MoveNestedClassesToTop;
 import com.google.j2cl.transpiler.passes.NormalizationPass;
 import com.google.j2cl.transpiler.passes.NormalizeArrayAccesses;
@@ -756,6 +757,7 @@ public enum Backend {
           MakeVariablesFinal::new,
           // Needs to run after NormalizeVarargParametersJ2kt and MakeVariablesFinal.
           NormalizeMethodParametersJ2kt::new,
+          MakeVariablesNonNull::new,
           NormalizeLabels::new,
           NormalizeForStatements::new,
           NormalizeSwitchStatementsJ2kt::new,

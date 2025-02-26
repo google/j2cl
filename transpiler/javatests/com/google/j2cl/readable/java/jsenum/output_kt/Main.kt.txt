@@ -78,10 +78,10 @@ open class Main {
    Main.NativeStringEnum.ONE.equals(
     Main.NativeStringEnum.THREE,
    )
-   val supplier: Main.Supplier<Main.ComparableJsEnum?>? = Main.Supplier<Main.ComparableJsEnum?> {
+   val supplier: Main.Supplier<Main.ComparableJsEnum?> = Main.Supplier<Main.ComparableJsEnum?> {
     return@Supplier Main.ComparableJsEnum.ONE
    }
-   val consummer: Main.Consumer<Main.ComparableJsEnum?>? = Main.Consumer<Main.ComparableJsEnum?> { e: Main.ComparableJsEnum? ->
+   val consummer: Main.Consumer<Main.ComparableJsEnum?> = Main.Consumer<Main.ComparableJsEnum?> { e: Main.ComparableJsEnum? ->
     e!!.ordinal
    }
    Main.acceptsJsFunctionSupplier(
@@ -118,11 +118,11 @@ open class Main {
 
   @JvmStatic
   private fun testJsEnumAutoboxingSpecialMethods() {
-   val stringJsEnum: Main.StringJsEnum? = Main.StringJsEnum.ONE
+   val stringJsEnum: Main.StringJsEnum = Main.StringJsEnum.ONE
    val nullStringJsEnum: Main.StringJsEnum? = null
-   val jsEnum: Main.ComparableJsEnum? = Main.ComparableJsEnum.ONE
+   val jsEnum: Main.ComparableJsEnum = Main.ComparableJsEnum.ONE
    val nullJsEnum: Main.ComparableJsEnum? = null
-   val o: Any? = Main.ComparableJsEnum.ONE
+   val o: Any = Main.ComparableJsEnum.ONE
    Main.StringJsEnum.ONE.equals(
     Main.StringJsEnum.THREE,
    )
@@ -130,7 +130,7 @@ open class Main {
    Main.StringJsEnum.ONE.equals(nullStringJsEnum)
    Main.StringJsEnum.ONE.equals(null)
    Main.StringJsEnum.ONE.equals(o)
-   o!!.equals(
+   o.equals(
     Main.StringJsEnum.THREE,
    )
    Main.ComparableJsEnum.ONE.compareTo(
@@ -146,7 +146,7 @@ open class Main {
    Main.ComparableJsEnum.ONE.equals(nullJsEnum)
    Main.ComparableJsEnum.ONE.equals(null)
    Main.ComparableJsEnum.ONE.equals(o)
-   o!!.equals(
+   o.equals(
     Main.ComparableJsEnum.ZERO,
    )
    Main.StringJsEnum.ONE.equals(jsEnum)
@@ -196,16 +196,16 @@ open class Main {
 
   @JvmStatic
   private fun testBoxUnboxWithTypeInference() {
-   val templatedField: Main.TemplatedField<Main.ComparableJsEnum?>? = Main.TemplatedField<Main.ComparableJsEnum?>(
+   val templatedField: Main.TemplatedField<Main.ComparableJsEnum?> = Main.TemplatedField<Main.ComparableJsEnum?>(
     Main.ComparableJsEnum.ONE,
    )
-   var unboxed: Main.ComparableJsEnum? = templatedField!!.getValue_pp_jsenum()
-   unboxed = templatedField!!.value_pp_jsenum
-   templatedField!!.value_pp_jsenum = Main.ComparableJsEnum.ONE
+   var unboxed: Main.ComparableJsEnum? = templatedField.getValue_pp_jsenum()
+   unboxed = templatedField.value_pp_jsenum
+   templatedField.value_pp_jsenum = Main.ComparableJsEnum.ONE
    Arrays.asList<Main.ComparableJsEnum>(
     Main.ComparableJsEnum.ONE,
    )
-   templatedField!!.getValue_pp_jsenum()!!.ordinal
+   templatedField.getValue_pp_jsenum()!!.ordinal
    val b: Boolean = Main.ComparableJsEnum.ONE === Main.boxingPassthrough<Main.ComparableJsEnum?>(
     Main.ComparableJsEnum.ONE,
    )
@@ -237,27 +237,27 @@ open class Main {
     Main.SomeJsEnum.A,
     Main.SomeJsEnum.A,
    )
-   val consumer: Main.Consumer<Main.SomeJsEnum?>? = Main.Consumer<Main.SomeJsEnum?> { arg0: Main.SomeJsEnum? ->
+   val consumer: Main.Consumer<Main.SomeJsEnum?> = Main.Consumer<Main.SomeJsEnum?> { arg0: Main.SomeJsEnum? ->
     Main.varargsConsumer<Main.SomeJsEnum?>(arg0)
    }
   }
 
   @JvmStatic
   private fun testNonNativeJsEnumArrays() {
-   val arr: Array<Main.IntJsEnum?>? = arrayOf<Main.IntJsEnum?>(Main.IntJsEnum.MINUSONE, Main.IntJsEnum.TWENTY)
-   val b1: Boolean = arr!![0] === Main.IntJsEnum.MINUSONE
-   val b2: Boolean = arr!![1] === Main.IntJsEnum.TWENTY
-   var obj: Any? = arr!![0]
-   val v: Main.IntJsEnum? = arr!![0]
-   val arr2: Array<Main.IntJsEnum?>? = arrayOfNulls<Main.IntJsEnum>(2)
-   arr2!![0] = Main.IntJsEnum.MINUSONE
-   arr2!![1] = Main.IntJsEnum.TWENTY
-   val nestedArr: Array<Array<Main.IntJsEnum?>?>? = arrayOf<Array<Main.IntJsEnum?>?>(arrayOf<Main.IntJsEnum?>(Main.IntJsEnum.MINUSONE))
-   nestedArr!![0] = arrayOf<Main.IntJsEnum?>(Main.IntJsEnum.TWENTY)
-   val arrayWithNull: Array<Main.IntJsEnum?>? = arrayOf<Main.IntJsEnum?>(null)
-   arrayWithNull!![0] = null
-   val list: MutableList<Main.IntJsEnum?>? = ArrayList<Main.IntJsEnum>() as MutableList<Main.IntJsEnum?>?
-   obj = list!!.toArray()
+   val arr: Array<Main.IntJsEnum?> = arrayOf<Main.IntJsEnum?>(Main.IntJsEnum.MINUSONE, Main.IntJsEnum.TWENTY)
+   val b1: Boolean = arr[0] === Main.IntJsEnum.MINUSONE
+   val b2: Boolean = arr[1] === Main.IntJsEnum.TWENTY
+   var obj: Any? = arr[0]
+   val v: Main.IntJsEnum? = arr[0]
+   val arr2: Array<Main.IntJsEnum?> = arrayOfNulls<Main.IntJsEnum>(2)
+   arr2[0] = Main.IntJsEnum.MINUSONE
+   arr2[1] = Main.IntJsEnum.TWENTY
+   val nestedArr: Array<Array<Main.IntJsEnum?>?> = arrayOf<Array<Main.IntJsEnum?>?>(arrayOf<Main.IntJsEnum?>(Main.IntJsEnum.MINUSONE))
+   nestedArr[0] = arrayOf<Main.IntJsEnum?>(Main.IntJsEnum.TWENTY)
+   val arrayWithNull: Array<Main.IntJsEnum?> = arrayOf<Main.IntJsEnum?>(null)
+   arrayWithNull[0] = null
+   val list: MutableList<Main.IntJsEnum?> = ArrayList<Main.IntJsEnum>() as MutableList<Main.IntJsEnum?>
+   obj = list.toArray()
    Main.nonNativeJsEnumVarargs(
     Main.IntJsEnum.MINUSONE,
     Main.IntJsEnum.TWENTY,
@@ -292,27 +292,27 @@ open class Main {
 
   @JvmStatic
   private fun testNonNativeStringJsEnumArrays() {
-   val arr: Array<Main.StringJsEnum?>? = arrayOf<Main.StringJsEnum?>(Main.StringJsEnum.ONE, Main.StringJsEnum.THREE)
-   val b1: Boolean = arr!![0] === Main.StringJsEnum.ONE
-   val obj: Any? = arr!![0]
-   val v: Main.StringJsEnum? = arr!![0]
-   val arr2: Array<Main.StringJsEnum?>? = arrayOfNulls<Main.StringJsEnum>(2)
-   arr2!![0] = Main.StringJsEnum.ONE
-   val nestedArr: Array<Array<Main.StringJsEnum?>?>? = arrayOf<Array<Main.StringJsEnum?>?>(arrayOf<Main.StringJsEnum?>(Main.StringJsEnum.ONE))
-   val arrayWithNull: Array<Main.StringJsEnum?>? = arrayOf<Main.StringJsEnum?>(null)
-   arrayWithNull!![0] = null
+   val arr: Array<Main.StringJsEnum?> = arrayOf<Main.StringJsEnum?>(Main.StringJsEnum.ONE, Main.StringJsEnum.THREE)
+   val b1: Boolean = arr[0] === Main.StringJsEnum.ONE
+   val obj: Any? = arr[0]
+   val v: Main.StringJsEnum? = arr[0]
+   val arr2: Array<Main.StringJsEnum?> = arrayOfNulls<Main.StringJsEnum>(2)
+   arr2[0] = Main.StringJsEnum.ONE
+   val nestedArr: Array<Array<Main.StringJsEnum?>?> = arrayOf<Array<Main.StringJsEnum?>?>(arrayOf<Main.StringJsEnum?>(Main.StringJsEnum.ONE))
+   val arrayWithNull: Array<Main.StringJsEnum?> = arrayOf<Main.StringJsEnum?>(null)
+   arrayWithNull[0] = null
   }
 
   @JvmStatic
   private fun testNativeJsEnumArrays() {
-   val arr: Array<Main.NativeStringEnum?>? = arrayOf<Main.NativeStringEnum?>(Main.NativeStringEnum.ONE, Main.NativeStringEnum.THREE)
-   val b1: Boolean = arr!![0] === Main.NativeStringEnum.ONE
-   val arr2: Array<Main.NativeStringEnum?>? = arrayOfNulls<Main.NativeStringEnum>(2)
-   arr2!![0] = Main.NativeStringEnum.ONE
-   val nestedArr: Array<Array<Main.NativeStringEnum?>?>? = arrayOf<Array<Main.NativeStringEnum?>?>(arrayOf<Main.NativeStringEnum?>(Main.NativeStringEnum.ONE))
-   nestedArr!![0] = arrayOf<Main.NativeStringEnum?>(Main.NativeStringEnum.THREE)
-   val arrayWithNull: Array<Main.NativeStringEnum?>? = arrayOf<Main.NativeStringEnum?>(null)
-   arrayWithNull!![0] = null
+   val arr: Array<Main.NativeStringEnum?> = arrayOf<Main.NativeStringEnum?>(Main.NativeStringEnum.ONE, Main.NativeStringEnum.THREE)
+   val b1: Boolean = arr[0] === Main.NativeStringEnum.ONE
+   val arr2: Array<Main.NativeStringEnum?> = arrayOfNulls<Main.NativeStringEnum>(2)
+   arr2[0] = Main.NativeStringEnum.ONE
+   val nestedArr: Array<Array<Main.NativeStringEnum?>?> = arrayOf<Array<Main.NativeStringEnum?>?>(arrayOf<Main.NativeStringEnum?>(Main.NativeStringEnum.ONE))
+   nestedArr[0] = arrayOf<Main.NativeStringEnum?>(Main.NativeStringEnum.THREE)
+   val arrayWithNull: Array<Main.NativeStringEnum?> = arrayOf<Main.NativeStringEnum?>(null)
+   arrayWithNull[0] = null
   }
  }
 

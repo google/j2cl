@@ -89,7 +89,7 @@ open class Main {
    1,
    *intArrayOf()!!,
   )
-  val ints: IntArray? = intArrayOf(1, 2)
+  val ints: IntArray = intArrayOf(1, 2)
   Main.f1(
    1,
    *ints!!,
@@ -142,8 +142,8 @@ open class Main {
   Main.generics<IntArray?>(
    intArrayOf(),
   )
-  val ints: IntArray? = intArrayOf(1, 2)
-  val integers: Array<Int?>? = arrayOf<Int?>(Integer.valueOf(1), Integer.valueOf(2))
+  val ints: IntArray = intArrayOf(1, 2)
+  val integers: Array<Int?> = arrayOf<Int?>(Integer.valueOf(1), Integer.valueOf(2))
   Main.f2(
    *ints!!,
   )
@@ -157,19 +157,19 @@ open class Main {
 
  @ObjCName(name = "testInstanceMethodNotFirst")
  open fun testInstanceMethodNotFirst() {
-  val m: Main? = Main(1)
-  m!!.f3(1, 1, 2)
-  m!!.f3(1)
-  m!!.f3(
+  val m: Main = Main(1)
+  m.f3(1, 1, 2)
+  m.f3(1)
+  m.f3(
    1,
    *intArrayOf(1, 2)!!,
   )
-  m!!.f3(
+  m.f3(
    1,
    *intArrayOf()!!,
   )
-  val ints: IntArray? = intArrayOf(1, 2)
-  m!!.f3(
+  val ints: IntArray = intArrayOf(1, 2)
+  m.f3(
    1,
    *ints!!,
   )
@@ -177,38 +177,38 @@ open class Main {
 
  @ObjCName(name = "testInstanceMethodFirst")
  open fun testInstanceMethodFirst() {
-  val m: Main? = Main(1)
-  m!!.f4(1, 2)
-  m!!.f4()
-  m!!.f4(
+  val m: Main = Main(1)
+  m.f4(1, 2)
+  m.f4()
+  m.f4(
    *intArrayOf(1, 2)!!,
   )
-  m!!.f4(
+  m.f4(
    *intArrayOf()!!,
   )
-  val ints: IntArray? = intArrayOf(1, 2)
-  m!!.f4(
+  val ints: IntArray = intArrayOf(1, 2)
+  m.f4(
    *ints!!,
   )
  }
 
  @ObjCName(name = "testJsFunction")
  open fun testJsFunction() {
-  val a: Main.AFunction? = Main.AFunction()
-  val o1: Any? = Any()
-  val o2: Any? = Any()
-  a!!.f1(0, o1, o2)
-  a!!.f1(0)
-  a!!.f1(
+  val a: Main.AFunction = Main.AFunction()
+  val o1: Any = Any()
+  val o2: Any = Any()
+  a.f1(0, o1, o2)
+  a.f1(0)
+  a.f1(
    0,
    *arrayOf<Any?>(o1, o2)!!,
   )
-  a!!.f1(
+  a.f1(
    0,
    *arrayOf<Any?>()!!,
   )
-  val os: Array<Any?>? = arrayOf<Any?>(o1, o2)
-  a!!.f1(
+  val os: Array<Any?> = arrayOf<Any?>(o1, o2)
+  a.f1(
    0,
    *os!!,
   )
@@ -216,7 +216,7 @@ open class Main {
 
  @ObjCName(name = "testSideEffect")
  open fun testSideEffect() {
-  val ints: IntArray? = intArrayOf(1, 2)
+  val ints: IntArray = intArrayOf(1, 2)
   Main(1).f3(
    1,
    *ints!!,
@@ -233,7 +233,7 @@ open class Main {
 
  @ObjCName(name = "testGenericJsFunctionWithVarags")
  open fun <U> testGenericJsFunctionWithVarags() {
-  val function: Main.GenericFunction<U>? = Main.GenericFunction<U> { n: U, param: Array<out U>? ->
+  val function: Main.GenericFunction<U> = Main.GenericFunction<U> { n: U, param: Array<out U>? ->
    val param_1: Array<U>? = param as Array<U>?
    return@GenericFunction param_1
   }
@@ -367,7 +367,7 @@ open class Main {
     1,
     *intArrayOf()!!,
    )
-   val ints: IntArray? = intArrayOf(1, 2)
+   val ints: IntArray = intArrayOf(1, 2)
    a = a + super<Main>.f3(
     1,
     *ints!!,

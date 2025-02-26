@@ -35,14 +35,14 @@ import kotlin.synchronized
 open class LambdaReturnFromBlock {
  @ObjCName(name = "testDoWhile")
  open fun testDoWhile() {
-  val fn: LambdaReturnFromBlock.Function<Void?>? = LambdaReturnFromBlock.Function<Void?> {
+  val fn: LambdaReturnFromBlock.Function<Void?> = LambdaReturnFromBlock.Function<Void?> {
    return@Function null
   }
  }
 
  @ObjCName(name = "testSynchronized")
  open fun testSynchronized() {
-  val fn: LambdaReturnFromBlock.Function<Void?>? = LambdaReturnFromBlock.Function<Void?> {
+  val fn: LambdaReturnFromBlock.Function<Void?> = LambdaReturnFromBlock.Function<Void?> {
    synchronized<Unit>(LambdaReturnFromBlock.lock!!) {
     return@Function null
    }
@@ -55,7 +55,7 @@ open class LambdaReturnFromBlock {
 
  @ObjCName(name = "testSwitchInLambda")
  open fun testSwitchInLambda() {
-  val fn: LambdaReturnFromBlock.Function<Void?>? = LambdaReturnFromBlock.Function<Void?> {
+  val fn: LambdaReturnFromBlock.Function<Void?> = LambdaReturnFromBlock.Function<Void?> {
    when (this.x_pp_j2kt) {
     1 -> {
      return@Function null

@@ -39,39 +39,39 @@ open class Main {
   @JvmStatic
   @ObjCName(name = "test")
   fun test() {
-   val a: Main.A<Any?>? = Main.A<Int?>() as Main.A<Any?>?
-   a!!.`fun`(
+   val a: Main.A<Any?> = Main.A<Int?>() as Main.A<Any?>
+   a.`fun`(
     Integer.valueOf(1),
    )
-   a!!.bar(
+   a.bar(
     Integer.valueOf(1),
    )
-   val b: Main.B? = Main.B()
-   b!!.`fun`("abc")
-   b!!.bar("abc")
-   val c: Main.C? = Main.C()
-   c!!.`fun`(
+   val b: Main.B = Main.B()
+   b.`fun`("abc")
+   b.bar("abc")
+   val c: Main.C = Main.C()
+   c.`fun`(
     Integer.valueOf(1) as Int?,
    )
-   c!!.bar(
+   c.bar(
     Integer.valueOf(1),
    )
-   val d: Main.D? = Main.D()
-   d!!.`fun`(
+   val d: Main.D = Main.D()
+   d.`fun`(
     Integer.valueOf(1) as Int?,
    )
-   d!!.bar(
+   d.bar(
     Integer.valueOf(1),
    )
-   val e: Main.E? = Main.E()
-   e!!.`fun`("abc")
-   e!!.bar("abc")
-   val h: Main.H<Int?>? = Main.H<Int?>()
-   h!!.enclose(
+   val e: Main.E = Main.E()
+   e.`fun`("abc")
+   e.bar("abc")
+   val h: Main.H<Int?> = Main.H<Int?>()
+   h.enclose(
     Integer.valueOf(1),
    )
-   val l: Main.L<Int?>? = Main.L<Int?>()
-   l!!.fun_pp_bridgejsmethod(
+   val l: Main.L<Int?> = Main.L<Int?>()
+   l.fun_pp_bridgejsmethod(
     "foo",
     Integer.valueOf(1),
    )

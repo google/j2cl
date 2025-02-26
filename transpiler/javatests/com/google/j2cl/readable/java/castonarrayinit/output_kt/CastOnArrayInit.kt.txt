@@ -41,8 +41,8 @@ open class CastOnArrayInit {
   @JvmStatic
   @ObjCName(name = "test")
   fun <E> test() {
-   val f1: CastOnArrayInit.Foo<E>? = CastOnArrayInit.Foo<E>()
-   val f2: CastOnArrayInit.Foo<E>? = CastOnArrayInit.Foo<E>()
+   val f1: CastOnArrayInit.Foo<E> = CastOnArrayInit.Foo<E>()
+   val f2: CastOnArrayInit.Foo<E> = CastOnArrayInit.Foo<E>()
    CastOnArrayInit.`fun`<E>(f1, f2)
   }
  }

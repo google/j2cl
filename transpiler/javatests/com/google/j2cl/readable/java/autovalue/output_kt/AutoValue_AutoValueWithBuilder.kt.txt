@@ -116,7 +116,7 @@ class AutoValue_AutoValueWithBuilder: AutoValueWithBuilder {
 
   override fun build(): AutoValueWithBuilder? {
    if (this.set___0.toInt() != 1) {
-    val missing: String? = " booleanField"
+    val missing: String = " booleanField"
     throw IllegalStateException(
      "Missing required properties:" + missing,
     )

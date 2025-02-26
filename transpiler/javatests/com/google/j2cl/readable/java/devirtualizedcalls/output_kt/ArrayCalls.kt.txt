@@ -32,10 +32,10 @@ import kotlin.native.ObjCName
 open class ArrayCalls {
  @ObjCName(name = "main")
  open fun main() {
-  val array2d: Array<Array<Any?>?>? = Array<Array<Any?>?>(1) {
+  val array2d: Array<Array<Any?>?> = Array<Array<Any?>?>(1) {
    arrayOfNulls<Any>(1)
   }
-  val length1: Int = array2d!![0]!!.size
-  val length2: Int = array2d!!.size
+  val length1: Int = array2d[0]!!.size
+  val length2: Int = array2d.size
  }
 }

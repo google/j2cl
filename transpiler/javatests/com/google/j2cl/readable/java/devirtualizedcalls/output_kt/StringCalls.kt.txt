@@ -29,10 +29,10 @@ import kotlin.native.ObjCName
 open class StringCalls {
  @ObjCName(name = "main")
  open fun main() {
-  val literal: String? = "String"
-  val sub: String? = literal!!.substring(1)
-  val sub2: String? = literal!!.substring(2, 3)
-  val trimmed: String? = literal!!.java_trim()
-  val newString: String? = literal!!.toString()
+  val literal: String = "String"
+  val sub: String = literal.substring(1)
+  val sub2: String = literal.substring(2, 3)
+  val trimmed: String = literal.java_trim()
+  val newString: String = literal.toString()
  }
 }

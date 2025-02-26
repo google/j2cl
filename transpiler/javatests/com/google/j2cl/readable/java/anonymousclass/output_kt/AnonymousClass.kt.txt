@@ -79,7 +79,7 @@ open class AnonymousClass {
 
  @ObjCName(name = "main")
  open fun main() {
-  val instance: SomeClass? = object : SomeClass(
+  val instance: SomeClass = object : SomeClass(
    this@AnonymousClass.i_pp_anonymousclass,
   ) {
    @JvmField
@@ -92,7 +92,7 @@ open class AnonymousClass {
     return "a"
    }
   }
-  val instanceWithStaticMembers: SomeClassWithStaticMembers? = object : SomeClassWithStaticMembers(
+  val instanceWithStaticMembers: SomeClassWithStaticMembers = object : SomeClassWithStaticMembers(
    this@AnonymousClass.i_pp_anonymousclass,
   ) {
    @JvmField

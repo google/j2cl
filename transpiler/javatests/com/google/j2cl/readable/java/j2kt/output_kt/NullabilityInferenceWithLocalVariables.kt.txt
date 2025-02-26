@@ -37,34 +37,29 @@ open class NullabilityInferenceWithLocalVariables {
   @JvmStatic
   @ObjCName(name = "testArray")
   fun testArray(): Array<String> {
-   val local: String? = ""
-   return arrayOf<String>(local!!, "")
+   val local: String = ""
+   return arrayOf<String>(local, "")
   }
 
   @JvmStatic
   @ObjCName(name = "testConstructor")
   fun testConstructor(): NullabilityInferenceWithLocalVariables.Foo<String> {
-   val local: String? = ""
+   val local: String = ""
    return NullabilityInferenceWithLocalVariables.Foo<Any?>(local, "") as NullabilityInferenceWithLocalVariables.Foo<String>
   }
 
   @JvmStatic
   @ObjCName(name = "testMethod")
   fun testMethod(): NullabilityInferenceWithLocalVariables.Foo<String> {
-   val local: String? = ""
-   return NullabilityInferenceWithLocalVariables.Foo.foo<String>(
-    local!!,
-    "",
-   )
+   val local: String = ""
+   return NullabilityInferenceWithLocalVariables.Foo.foo<String>(local, "")
   }
 
   @JvmStatic
   @ObjCName(name = "testMethodChain")
   fun testMethodChain(): NullabilityInferenceWithLocalVariables.Foo<String> {
-   val l1: String? = ""
-   return NullabilityInferenceWithLocalVariables.Foo.foo<String>(
-    l1!!,
-   ).chain_pp_j2kt(
+   val l1: String = ""
+   return NullabilityInferenceWithLocalVariables.Foo.foo<String>(l1).chain_pp_j2kt(
     NullabilityInferenceWithLocalVariables.Foo.foo<String>(""),
    )
   }

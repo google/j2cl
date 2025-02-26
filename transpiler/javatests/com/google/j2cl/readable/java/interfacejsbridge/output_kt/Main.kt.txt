@@ -32,13 +32,13 @@ import kotlin.native.ObjCName
 open class Main {
  @ObjCName(name = "test")
  open fun test() {
-  val a: MyJsInterface? = InterfaceImpl()
-  val b: MyInterface? = InterfaceImpl()
-  val c: SubInterface? = InterfaceImpl()
-  val d: InterfaceImpl? = InterfaceImpl()
-  a!!.foo(1)
-  b!!.foo(1)
-  c!!.foo(1)
-  d!!.foo(1)
+  val a: MyJsInterface = InterfaceImpl()
+  val b: MyInterface = InterfaceImpl()
+  val c: SubInterface = InterfaceImpl()
+  val d: InterfaceImpl = InterfaceImpl()
+  a.foo(1)
+  b.foo(1)
+  c.foo(1)
+  d.foo(1)
  }
 }

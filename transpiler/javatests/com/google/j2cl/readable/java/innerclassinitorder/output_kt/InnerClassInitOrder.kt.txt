@@ -52,32 +52,32 @@ open class InnerClassInitOrder {
 
  @ObjCName(name = "testExtendsNested")
  open fun testExtendsNested() {
-  val o: InnerClassInitOrder.ESOuter? = InnerClassInitOrder.ESOuter()
-  assert(1 == o!!.ESInner().value)
-  assert(2 == o!!.ESInner(2).value)
+  val o: InnerClassInitOrder.ESOuter = InnerClassInitOrder.ESOuter()
+  assert(1 == o.ESInner().value)
+  assert(2 == o.ESInner(2).value)
   assert(1 == InnerClassInitOrder.ESInnerSubclass(o).value)
   assert(2 == InnerClassInitOrder.ESInnerSubclass(2, o).value)
  }
 
  @ObjCName(name = "testExtendsNestedWithGenerics")
  open fun testExtendsNestedWithGenerics() {
-  val o: InnerClassInitOrder.ESWGOuter<String?>? = InnerClassInitOrder.ESWGOuter<String?>()
-  assert(1 == o!!.ESWGInner().value)
-  assert(2 == o!!.ESWGInner(2).value)
+  val o: InnerClassInitOrder.ESWGOuter<String?> = InnerClassInitOrder.ESWGOuter<String?>()
+  assert(1 == o.ESWGInner().value)
+  assert(2 == o.ESWGInner(2).value)
   assert(1 == InnerClassInitOrder.ESWGInnerSubclass(o).value)
   assert(2 == InnerClassInitOrder.ESWGInnerSubclass(2, o).value)
  }
 
  @ObjCName(name = "testInnerClassCtors")
  open fun testInnerClassCtors() {
-  val p1: InnerClassInitOrder.P1<*>? = InnerClassInitOrder.P1<Any?>()
-  assert(1 == p1!!.value_pp_innerclassinitorder)
+  val p1: InnerClassInitOrder.P1<*> = InnerClassInitOrder.P1<Any?>()
+  assert(1 == p1.value_pp_innerclassinitorder)
   assert(2 == InnerClassInitOrder.P1<Any?>(2).value_pp_innerclassinitorder)
-  val p2: InnerClassInitOrder.P1<*>.P2<*>? = p1!!.P2<Any?>()
-  assert(1 == p2!!.value_pp_innerclassinitorder)
-  assert(2 == p1!!.P2<Any?>(2).value_pp_innerclassinitorder)
-  assert(1 == p2!!.P3<Any?>().value_pp_innerclassinitorder)
-  assert(2 == p2!!.P3<Any?>(2).value_pp_innerclassinitorder)
+  val p2: InnerClassInitOrder.P1<*>.P2<*> = p1.P2<Any?>()
+  assert(1 == p2.value_pp_innerclassinitorder)
+  assert(2 == p1.P2<Any?>(2).value_pp_innerclassinitorder)
+  assert(1 == p2.P3<Any?>().value_pp_innerclassinitorder)
+  assert(2 == p2.P3<Any?>(2).value_pp_innerclassinitorder)
  }
 
  @ObjCName(name = "testInnerClassInitialization")
@@ -98,18 +98,18 @@ open class InnerClassInitOrder {
 
    abstract fun act()
   }
-  val results: Array<AddNumber?>? = arrayOfNulls<AddNumber>(10)
+  val results: Array<AddNumber?> = arrayOfNulls<AddNumber>(10)
   var i: Int = 0
   while (i < 10) {
-   val ap: AddNumber? = object : AddNumber(i) {
+   val ap: AddNumber = object : AddNumber(i) {
     override fun act() {
      this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + num_pp_innerclassinitorder
     }
    }
-   results!![i] = ap
+   results[i] = ap
    i = i + 1
   }
-  for (theAp in results!!) {
+  for (theAp in results) {
    theAp!!.act()
   }
   assert(this.number == 1156)
@@ -121,26 +121,26 @@ open class InnerClassInitOrder {
 
  @ObjCName(name = "testOuterIsNotSuper")
  open fun testOuterIsNotSuper() {
-  val x: InnerClassInitOrder.Outer.OuterIsNotSuper? = this.outerIsSuper!!.OuterIsNotSuper()
-  assert(2 == x!!.getValue())
+  val x: InnerClassInitOrder.Outer.OuterIsNotSuper = this.outerIsSuper!!.OuterIsNotSuper()
+  assert(2 == x.getValue())
  }
 
  @ObjCName(name = "testOuterIsNotSuperAnon")
  open fun testOuterIsNotSuperAnon() {
-  val x: InnerClassInitOrder.Outer.OuterIsNotSuper? = object : OuterIsNotSuper() {}
-  assert(2 == x!!.getValue())
+  val x: InnerClassInitOrder.Outer.OuterIsNotSuper = object : OuterIsNotSuper() {}
+  assert(2 == x.getValue())
  }
 
  @ObjCName(name = "testQualifiedSuperCall")
  open fun testQualifiedSuperCall() {
-  val x: InnerClassInitOrder.Outer.TestQualifiedSuperCall? = InnerClassInitOrder.Outer.TestQualifiedSuperCall()
-  assert(2 == x!!.getValue())
+  val x: InnerClassInitOrder.Outer.TestQualifiedSuperCall = InnerClassInitOrder.Outer.TestQualifiedSuperCall()
+  assert(2 == x.getValue())
  }
 
  @ObjCName(name = "testQualifiedSuperCallAnon")
  open fun testQualifiedSuperCallAnon() {
-  val x: InnerClassInitOrder.Outer.TestQualifiedSuperCall? = object : InnerClassInitOrder.Outer.TestQualifiedSuperCall() {}
-  assert(2 == x!!.getValue())
+  val x: InnerClassInitOrder.Outer.TestQualifiedSuperCall = object : InnerClassInitOrder.Outer.TestQualifiedSuperCall() {}
+  assert(2 == x.getValue())
  }
 
  @ObjCName(name = "testSuperDispatch")
@@ -157,14 +157,14 @@ open class InnerClassInitOrder {
 
  @ObjCName(name = "testUnqualifiedSuperCall")
  open fun testUnqualifiedSuperCall() {
-  val x: InnerClassInitOrder.Outer.TestUnqualifiedSuperCall? = this.outerIsSuper!!.TestUnqualifiedSuperCall()
-  assert(2 == x!!.getValue())
+  val x: InnerClassInitOrder.Outer.TestUnqualifiedSuperCall = this.outerIsSuper!!.TestUnqualifiedSuperCall()
+  assert(2 == x.getValue())
  }
 
  @ObjCName(name = "testUnqualifiedSuperCallAnon")
  open fun testUnqualifiedSuperCallAnon() {
-  val x: InnerClassInitOrder.Outer.TestUnqualifiedSuperCall? = object : TestUnqualifiedSuperCall() {}
-  assert(2 == x!!.getValue())
+  val x: InnerClassInitOrder.Outer.TestUnqualifiedSuperCall = object : TestUnqualifiedSuperCall() {}
+  assert(2 == x.getValue())
  }
 
  @ObjCName(name = "J2ktInnerclassinitorderInnerClassInitOrderCompanion", swiftName = "InnerclassinitorderInnerClassInitOrderCompanion", exact = true)
@@ -175,22 +175,22 @@ open class InnerClassInitOrder {
    vararg @ObjCName(name = "withNSStringArray") args: String?
   ) {
    val args_1: Array<String?>? = args as Array<String?>?
-   val m: InnerClassInitOrder? = InnerClassInitOrder()
-   m!!.testOuterThisFromSuperCall()
-   m!!.testOuterThisFromThisCall()
-   m!!.testExtendsNested()
-   m!!.testExtendsNestedWithGenerics()
-   m!!.testInnerClassCtors()
-   m!!.testInnerClassInitialization()
-   m!!.testInnerClassLoop()
-   m!!.testOuterIsNotSuper()
-   m!!.testOuterIsNotSuperAnon()
-   m!!.testQualifiedSuperCall()
-   m!!.testQualifiedSuperCallAnon()
-   m!!.testSuperDispatch()
-   m!!.testUnqualifiedAlloc()
-   m!!.testUnqualifiedSuperCall()
-   m!!.testUnqualifiedSuperCallAnon()
+   val m: InnerClassInitOrder = InnerClassInitOrder()
+   m.testOuterThisFromSuperCall()
+   m.testOuterThisFromThisCall()
+   m.testExtendsNested()
+   m.testExtendsNestedWithGenerics()
+   m.testInnerClassCtors()
+   m.testInnerClassInitialization()
+   m.testInnerClassLoop()
+   m.testOuterIsNotSuper()
+   m.testOuterIsNotSuperAnon()
+   m.testQualifiedSuperCall()
+   m.testQualifiedSuperCallAnon()
+   m.testSuperDispatch()
+   m.testUnqualifiedAlloc()
+   m.testUnqualifiedSuperCall()
+   m.testUnqualifiedSuperCallAnon()
   }
  }
 

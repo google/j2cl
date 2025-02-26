@@ -56,13 +56,13 @@ class AutoValue_AutoValueWithExtensions: ___AutoValue_AutoValueWithExtensions {
 
   @JvmStatic
   private fun ___indent(level: Int): String? {
-   val builder: StringBuilder? = StringBuilder()
+   val builder: StringBuilder = StringBuilder()
    var i: Int = 0
    while (i < level) {
-    builder!!.append("  ")
+    builder.append("  ")
     i = i + 1
    }
-   return builder!!.toString()
+   return builder.toString()
   }
  }
 }

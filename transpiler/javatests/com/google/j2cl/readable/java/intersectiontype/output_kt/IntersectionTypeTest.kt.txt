@@ -200,9 +200,9 @@ open class IntersectionTypeTest<U> {
 
   @JvmStatic
   private fun callOnIntersectionTypeWithRawType() {
-   val t /* IntersectionTypeTest.GenericType<Any?>? & Getable<Any?>? */ = IntersectionTypeTest.GenericType<String?>().let { it as IntersectionTypeTest.GenericType<Any?>; it as Getable<Any?>; it }
-   (t!! as IntersectionTypeTest.GenericType<Any?>).doSomething_pp_intersectiontype("")
-   (t!! as Getable<Any?>).get()
+   val t /* IntersectionTypeTest.GenericType<Any?> & Getable<Any?> */ = IntersectionTypeTest.GenericType<String?>().let { it as IntersectionTypeTest.GenericType<Any?>; it as Getable<Any?>; it }
+   (t as IntersectionTypeTest.GenericType<Any?>).doSomething_pp_intersectiontype("")
+   (t as Getable<Any?>).get()
   }
  }
 

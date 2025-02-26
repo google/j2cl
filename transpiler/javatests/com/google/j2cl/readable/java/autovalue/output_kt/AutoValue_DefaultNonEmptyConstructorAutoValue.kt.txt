@@ -83,7 +83,7 @@ class AutoValue_DefaultNonEmptyConstructorAutoValue: DefaultNonEmptyConstructorA
 
   override fun build(): DefaultNonEmptyConstructorAutoValue? {
    if (this.set___0.toInt() != 1) {
-    val missing: String? = " booleanField"
+    val missing: String = " booleanField"
     throw IllegalStateException(
      "Missing required properties:" + missing,
     )

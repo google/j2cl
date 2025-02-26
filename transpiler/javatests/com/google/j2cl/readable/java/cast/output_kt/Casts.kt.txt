@@ -43,19 +43,19 @@ import kotlin.native.ObjCName
 open class Casts {
  @ObjCName(name = "testCastToClass")
  open fun testCastToClass() {
-  val o: Any? = Any()
+  val o: Any = Any()
   val c: Casts? = o as Casts?
  }
 
  @ObjCName(name = "testCasToInterface")
  open fun testCasToInterface() {
-  val o: Any? = Any()
+  val o: Any = Any()
   val s: Serializable? = o as Serializable?
  }
 
  @ObjCName(name = "testCastToBoxedType")
  open fun testCastToBoxedType() {
-  val o: Any? = Int(1)
+  val o: Any = Int(1)
   val b: Byte? = o as Byte?
   val d: Double? = o as Double?
   val f: Float? = o as Float?
@@ -77,7 +77,7 @@ open class Casts {
 
  @ObjCName(name = "testCastVariableAfterInstanceOf")
  open fun testCastVariableAfterInstanceOf() {
-  var o: Any? = Any()
+  var o: Any = Any()
   if (o is Casts) {
    val c: Casts? = o as Casts?
   }
@@ -106,44 +106,44 @@ open class Casts {
 
  @ObjCName(name = "testCastFieldAfterInstanceOf")
  open fun testCastFieldAfterInstanceOf() {
-  var foo: Casts.Foo? = Foo()
-  if (foo!!.field is Casts) {
-   val c: Casts? = foo!!.field as Casts?
+  var foo: Casts.Foo = Foo()
+  if (foo.field is Casts) {
+   val c: Casts? = foo.field as Casts?
   }
-  if (foo!!.field is Casts) {
-   val cAvoidsCastsTo: Casts? = foo!!.field as Casts?
-   foo!!.field = Any()
-   val cNotAvoidCastsTo: Casts? = foo!!.field as Casts?
+  if (foo.field is Casts) {
+   val cAvoidsCastsTo: Casts? = foo.field as Casts?
+   foo.field = Any()
+   val cNotAvoidCastsTo: Casts? = foo.field as Casts?
   }
-  if (foo!!.field is Casts) {
-   val cAvoidsCastsTo_1: Casts? = foo!!.field as Casts?
+  if (foo.field is Casts) {
+   val cAvoidsCastsTo_1: Casts? = foo.field as Casts?
    foo = Foo()
-   val cNotAvoidCastsTo_1: Casts? = foo!!.field as Casts?
+   val cNotAvoidCastsTo_1: Casts? = foo.field as Casts?
   }
-  if (foo!!.field is Casts) {
-   val cAvoidsCastsTo_2: Casts? = foo!!.field as Casts?
+  if (foo.field is Casts) {
+   val cAvoidsCastsTo_2: Casts? = foo.field as Casts?
    this.functionForInstanceofTest()
-   val cNotAvoidCastsTo_2: Casts? = foo!!.field as Casts?
+   val cNotAvoidCastsTo_2: Casts? = foo.field as Casts?
   }
-  val c_1: Casts? = if (foo!!.field is Casts) foo!!.field as Casts? else null
+  val c_1: Casts? = if (foo.field is Casts) foo.field as Casts? else null
  }
 
  @ObjCName(name = "testCaseMethodAfterInstanceOf")
  open fun testCaseMethodAfterInstanceOf() {
-  val foo: Casts.Foo? = Foo()
-  if (foo!!.method() is Casts) {
-   val cNotAvoidCastsTo: Casts? = foo!!.method() as Casts?
+  val foo: Casts.Foo = Foo()
+  if (foo.method() is Casts) {
+   val cNotAvoidCastsTo: Casts? = foo.method() as Casts?
   }
-  val c: Casts? = if (foo!!.method() is Casts) foo!!.method() as Casts? else null
+  val c: Casts? = if (foo.method() is Casts) foo.method() as Casts? else null
  }
 
  @ObjCName(name = "testPrecedence")
  open fun testPrecedence() {
-  val foo: Any? = "foo"
-  val bar: Any? = "bar"
+  val foo: Any = "foo"
+  val bar: Any = "bar"
   val notString: Int? = Integer.valueOf(123)
   val s1: String? = (if (false) foo else bar) as String?
-  val s2: String? = ("foo" + notString) as String
+  val s2: String = ("foo" + notString) as String
  }
 
  @ObjCName(name = "J2ktCastCasts_Foo", swiftName = "CastCasts_Foo", exact = true)

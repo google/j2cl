@@ -38,15 +38,15 @@ open class JsFunctionOptimization {
  ) {
   object : Any() {
    internal fun m_pp_jsfunction() {
-    val x: String? = ""
+    val x: String = ""
     object : Any() {
      internal fun m_pp_jsfunction() {
       val `var`: Int = 1
-      val f: JsFunctionOptimization.F? = object : JsFunctionOptimization.F {
+      val f: JsFunctionOptimization.F = object : JsFunctionOptimization.F {
        override fun m(s: String?): String? {
         val r1: Int = r
         val var1: Int = `var`
-        val x1: String? = x
+        val x1: String = x
         return java.lang.String.valueOf(r) + s + x + `var` + object : JsFunctionOptimization.F {
          override fun m(s: String?): String? {
           return "" + s + r1 + x1 + var1
@@ -54,11 +54,11 @@ open class JsFunctionOptimization {
         }.m("hello")
        }
       }
-      val f2: JsFunctionOptimization.F? = object : JsFunctionOptimization.F {
+      val f2: JsFunctionOptimization.F = object : JsFunctionOptimization.F {
        override fun m(s: String?): String? {
         val r1: Int = r
         val var1: Int = `var`
-        val x1: String? = x
+        val x1: String = x
         return java.lang.String.valueOf(r) + s + x + `var` + object : Any() {
          fun sayHey(): String? {
           return "Hey"
@@ -70,12 +70,12 @@ open class JsFunctionOptimization {
     }
    }
   }
-  val f /* ___EMPTY___? */ = object : JsFunctionOptimization.F {
+  val f /* ___EMPTY___ */ = object : JsFunctionOptimization.F {
    override fun m(s: String?): String? {
     return ""
    }
   }
-  val array: Array<Any?>? = arrayOf<Any?>(object : JsFunctionOptimization.F {
+  val array: Array<Any?> = arrayOf<Any?>(object : JsFunctionOptimization.F {
    override fun m(s: String?): String? {
     return ""
    }

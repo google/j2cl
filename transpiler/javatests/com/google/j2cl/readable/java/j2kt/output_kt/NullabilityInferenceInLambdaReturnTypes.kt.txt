@@ -61,15 +61,15 @@ open class NullabilityInferenceInLambdaReturnTypes {
 
  private fun <V> testReturnLocal_explicitParameterType(): NullabilityInferenceInLambdaReturnTypes.Operator<NullabilityInferenceInLambdaReturnTypes.Foo<V>> {
   return NullabilityInferenceInLambdaReturnTypes.Operator<NullabilityInferenceInLambdaReturnTypes.Foo<V>> { foo: NullabilityInferenceInLambdaReturnTypes.Foo<V> ->
-   val localFoo: NullabilityInferenceInLambdaReturnTypes.Foo<V>? = foo
-   return@Operator localFoo!!
+   val localFoo: NullabilityInferenceInLambdaReturnTypes.Foo<V> = foo
+   return@Operator localFoo
   }
  }
 
  private fun <V> testReturnLocal_inferredParameterType(): NullabilityInferenceInLambdaReturnTypes.Operator<NullabilityInferenceInLambdaReturnTypes.Foo<V>> {
   return NullabilityInferenceInLambdaReturnTypes.Operator<NullabilityInferenceInLambdaReturnTypes.Foo<V>> { foo: NullabilityInferenceInLambdaReturnTypes.Foo<V> ->
-   val localFoo: NullabilityInferenceInLambdaReturnTypes.Foo<V>? = foo
-   return@Operator localFoo!!
+   val localFoo: NullabilityInferenceInLambdaReturnTypes.Foo<V> = foo
+   return@Operator localFoo
   }
  }
 
