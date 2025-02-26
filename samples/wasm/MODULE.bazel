@@ -19,7 +19,7 @@ bazel_dep(
 # io_bazel_rules_closure is not available in BCR.
 git_override(
     module_name = "io_bazel_rules_closure",
-    commit = "6ddf3dffe709555eb5be0eb4530337db10305974",
+    commit = "39aefd7a0a355e8b93c85bf275f3c119454e6830",
     remote = "https://github.com/bazelbuild/rules_closure",
 )
 
@@ -35,13 +35,6 @@ git_override(
     module_name = "rules_scala",
     commit = "219e63983e8e483e66ebf70372969ba227382001",
     remote = "https://github.com/mbland/rules_scala",
-)
-
-# google_bazel_common is not available in BCR.
-git_override(
-    module_name = "google_bazel_common",
-    commit = "1a0839806501e7f7e8dd7663644895dbc593827e",
-    remote = "https://github.com/google/bazel-common",
 )
 
 # Works around https://github.com/bazelbuild/rules_python/issues/1169
