@@ -320,6 +320,12 @@ public abstract class TypeDeclaration
   /** Returns whether the described type has the @AutoValue.Builder annotation. */
   public abstract boolean isAnnotatedWithAutoValueBuilder();
 
+  /** Gets a list of annotations present on the declaration. */
+  @Memoized
+  public ImmutableList<Annotation> getAnnotations() {
+    return getAnnotationsFactory().get();
+  }
+
   /**
    * Returns whether the described type is a test class, i.e. has the JUnit @RunWith annotation
    * or @RunParameterized annotation.
@@ -807,6 +813,8 @@ public abstract class TypeDeclaration
   @Nullable
   abstract Supplier<ImmutableList<TypeDeclaration>> getMemberTypeDeclarationsFactory();
 
+  abstract Supplier<ImmutableList<Annotation>> getAnnotationsFactory();
+
   abstract Builder toBuilder();
 
   public static Builder newBuilder() {
@@ -825,6 +833,7 @@ public abstract class TypeDeclaration
         .setAnnotatedWithFunctionalInterface(false)
         .setAnnotatedWithAutoValue(false)
         .setAnnotatedWithAutoValueBuilder(false)
+        .setAnnotationsFactory(ImmutableList::of)
         .setTestClass(false)
         .setJsFunctionInterface(false)
         .setJsType(false)
@@ -904,6 +913,9 @@ public abstract class TypeDeclaration
     public abstract Builder setAnnotatedWithAutoValue(boolean annotatedWithAutoValue);
 
     public abstract Builder setAnnotatedWithAutoValueBuilder(boolean annotatedWithAutoValueBuilder);
+
+    public abstract Builder setAnnotationsFactory(
+        Supplier<ImmutableList<Annotation>> annotationsFactory);
 
     public abstract Builder setTestClass(boolean isTestClass);
 

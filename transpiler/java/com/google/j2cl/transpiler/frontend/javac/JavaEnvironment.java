@@ -22,6 +22,7 @@ import static com.google.common.collect.MoreCollectors.onlyElement;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.HAS_NO_SIDE_EFFECTS_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.UNCHECKED_CAST_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.WASM_ANNOTATION_NAME;
+import static com.google.j2cl.transpiler.frontend.common.SupportedAnnotations.isSupportedAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.findAnnotationByName;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.getAnnotationName;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.getAnnotationParameterString;
@@ -37,6 +38,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Streams;
 import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.common.SourcePosition;
+import com.google.j2cl.transpiler.ast.Annotation;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
@@ -98,6 +100,7 @@ import java.util.function.Supplier;
 import javax.annotation.Nullable;
 import javax.lang.model.AnnotatedConstruct;
 import javax.lang.model.element.AnnotationMirror;
+import javax.lang.model.element.AnnotationValue;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
@@ -1295,6 +1298,7 @@ class JavaEnvironment {
         .setAnnotatedWithFunctionalInterface(isAnnotatedWithFunctionalInterface(typeElement))
         .setAnnotatedWithAutoValue(isAnnotatedWithAutoValue(typeElement))
         .setAnnotatedWithAutoValueBuilder(isAnnotatedWithAutoValueBuilder(typeElement))
+        .setAnnotationsFactory(() -> createAnnotations(typeElement, isNullMarked))
         .setSourceLanguage(
             isAnnotatedWithKotlinMetadata(typeElement)
                 ? SourceLanguage.KOTLIN
@@ -1592,6 +1596,35 @@ class JavaEnvironment {
 
   private static boolean isAnnotatedWithKotlinMetadata(Element element) {
     return hasAnnotation(element, "kotlin.Metadata");
+  }
+
+  private ImmutableList<Annotation> createAnnotations(Element element, boolean inNullMarkedScope) {
+    return element.getAnnotationMirrors().stream()
+        .filter(annotationMirror -> isSupportedAnnotation(getAnnotationName(annotationMirror)))
+        .map(
+            annotationMirror ->
+                newAnnotationBuilder(annotationMirror.getElementValues())
+                    .setTypeDescriptor(
+                        createDeclaredType(annotationMirror.getAnnotationType(), inNullMarkedScope))
+                    .build())
+        .collect(toImmutableList());
+  }
+
+  private Annotation.Builder newAnnotationBuilder(
+      Map<? extends ExecutableElement, ? extends AnnotationValue> values) {
+    Annotation.Builder annotationBuilder = Annotation.newBuilder();
+    for (var valuePair : values.entrySet()) {
+      TypeDescriptor elementType = createTypeDescriptor(valuePair.getKey().getReturnType());
+      if (!TypeDescriptors.isBoxedOrPrimitiveType(elementType)
+          && !TypeDescriptors.isJavaLangString(elementType)) {
+        // TODO(b/395717310, b/397460318, b/395716783, b/395716773): Implement various
+        // member value types, then throw an exception here if unhandled.
+        continue;
+      }
+      Literal translatedValue = Literal.fromValue(valuePair.getValue().getValue(), elementType);
+      annotationBuilder.addValue(valuePair.getKey().getSimpleName().toString(), translatedValue);
+    }
+    return annotationBuilder;
   }
 
   private static boolean isTestClass(Element element) {

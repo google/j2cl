@@ -18,6 +18,7 @@
 package com.google.j2cl.transpiler.frontend.kotlin
 
 import com.google.common.collect.ImmutableList
+import com.google.j2cl.transpiler.ast.Annotation
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.FieldDescriptor
@@ -35,6 +36,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors
 import com.google.j2cl.transpiler.ast.TypeDescriptors.SingletonBuilder
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.Visibility
+import com.google.j2cl.transpiler.frontend.common.SupportedAnnotations
 import com.google.j2cl.transpiler.frontend.jdt.PackageAnnotationsResolver
 import com.google.j2cl.transpiler.frontend.kotlin.ir.enumEntries
 import com.google.j2cl.transpiler.frontend.kotlin.ir.fqnOrFail
@@ -78,6 +80,7 @@ import org.jetbrains.kotlin.backend.jvm.ir.constantValue
 import org.jetbrains.kotlin.backend.jvm.ir.eraseToScope
 import org.jetbrains.kotlin.backend.jvm.ir.eraseTypeParameters
 import org.jetbrains.kotlin.backend.jvm.lower.getFileClassInfo
+import org.jetbrains.kotlin.ir.declarations.IrAnnotationContainer
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrConstructor
 import org.jetbrains.kotlin.ir.declarations.IrDeclaration
@@ -89,6 +92,8 @@ import org.jetbrains.kotlin.ir.declarations.IrFunction
 import org.jetbrains.kotlin.ir.declarations.IrPackageFragment
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.declarations.IrTypeParameter
+import org.jetbrains.kotlin.ir.expressions.IrConst
+import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
 import org.jetbrains.kotlin.ir.symbols.IrTypeParameterSymbol
 import org.jetbrains.kotlin.ir.types.IrSimpleType
 import org.jetbrains.kotlin.ir.types.IrStarProjection
@@ -267,8 +272,48 @@ class KotlinEnvironment(
           setSimpleJsName(jsMemberAnnotation?.name)
           setNative(jsMemberAnnotation?.isNative ?: false)
         }
+        .setAnnotationsFactory { createAnnotations(irClass) }
         .build()
     }
+  }
+
+  private fun createAnnotations(irAnnotationContainer: IrAnnotationContainer) =
+    ImmutableList.Builder<Annotation>()
+      .apply {
+        for (annotationCtorCall in irAnnotationContainer.annotations) {
+          val ctor = annotationCtorCall.symbol.owner
+          val typeDescriptor =
+            checkNotNull(getEnclosingTypeDescriptor(ctor)) {
+              "No enclosing type for ${ctor.dump()}"
+            }
+          if (!SupportedAnnotations.isSupportedAnnotation(typeDescriptor.qualifiedSourceName)) {
+            continue
+          }
+          add(
+            Annotation.newBuilder()
+              .setTypeDescriptor(typeDescriptor)
+              .addAnnotationValues(annotationCtorCall)
+              .build()
+          )
+        }
+      }
+      .build()
+
+  private fun Annotation.Builder.addAnnotationValues(
+    annotationCtorCall: IrConstructorCall
+  ): Annotation.Builder {
+    for (i in 0 until annotationCtorCall.valueArgumentsCount) {
+      val value = annotationCtorCall.getValueArgument(i)
+      if (value !is IrConst) {
+        // TODO(b/395717310, b/397460318, b/395716783, b/395716773): Implement various member
+        // value types, then throw an exception here if unhandled.
+        continue
+      }
+      val name = annotationCtorCall.symbol.owner.valueParameters[i].name.asString()
+      val translatedValue = Literal.fromValue(value.value, getTypeDescriptor(value.type))
+      addValue(name, translatedValue)
+    }
+    return this
   }
 
   private fun createPackageDeclaration(packageName: String) =

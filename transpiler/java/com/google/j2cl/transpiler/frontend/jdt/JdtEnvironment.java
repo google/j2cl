@@ -21,6 +21,7 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.HAS_NO_SIDE_EFFECTS_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.UNCHECKED_CAST_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.WASM_ANNOTATION_NAME;
+import static com.google.j2cl.transpiler.frontend.common.SupportedAnnotations.isSupportedAnnotation;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.FluentIterable;
@@ -29,6 +30,7 @@ import com.google.common.collect.Iterables;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.common.SourcePosition;
+import com.google.j2cl.transpiler.ast.Annotation;
 import com.google.j2cl.transpiler.ast.ArrayLength;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
@@ -71,6 +73,7 @@ import org.eclipse.jdt.core.dom.Assignment;
 import org.eclipse.jdt.core.dom.BodyDeclaration;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IBinding;
+import org.eclipse.jdt.core.dom.IMemberValuePairBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.IPackageBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
@@ -1179,6 +1182,7 @@ public class JdtEnvironment {
             .setAnnotatedWithFunctionalInterface(isAnnotatedWithFunctionalInterface(typeBinding))
             .setAnnotatedWithAutoValue(isAnnotatedWithAutoValue(typeBinding))
             .setAnnotatedWithAutoValueBuilder(isAnnotatedWithAutoValueBuilder(typeBinding))
+            .setAnnotationsFactory(() -> createAnnotations(typeBinding, isNullMarked))
             .setSourceLanguage(
                 isAnnotatedWithKotlinMetadata(typeBinding)
                     ? SourceLanguage.KOTLIN
@@ -1287,6 +1291,38 @@ public class JdtEnvironment {
 
   private static boolean isAnnotatedWithKotlinMetadata(ITypeBinding typeBinding) {
     return JdtAnnotationUtils.hasAnnotation(typeBinding, "kotlin.Metadata");
+  }
+
+  private ImmutableList<Annotation> createAnnotations(IBinding binding, boolean inNullMarkedScope) {
+    return Arrays.stream(binding.getAnnotations())
+        .filter(
+            annotationBinding ->
+                isSupportedAnnotation(annotationBinding.getAnnotationType().getQualifiedName()))
+        .map(
+            annotationBinding ->
+                newAnnotationBuilder(annotationBinding.getDeclaredMemberValuePairs())
+                    .setTypeDescriptor(
+                        createDeclaredType(
+                            annotationBinding.getAnnotationType(), inNullMarkedScope))
+                    .build())
+        .collect(toImmutableList());
+  }
+
+  private Annotation.Builder newAnnotationBuilder(IMemberValuePairBinding[] valuePairs) {
+    Annotation.Builder annotationBuilder = Annotation.newBuilder();
+    for (IMemberValuePairBinding valuePair : valuePairs) {
+      TypeDescriptor elementType =
+          createTypeDescriptor(valuePair.getMethodBinding().getReturnType());
+      if (!TypeDescriptors.isBoxedOrPrimitiveType(elementType)
+          && !TypeDescriptors.isJavaLangString(elementType)) {
+        // TODO(b/395717310, b/397460318, b/395716783, b/395716773): Implement various
+        // member value types, then throw an exception here if unhandled.
+        continue;
+      }
+      Literal translatedValue = Literal.fromValue(valuePair.getValue(), elementType);
+      annotationBuilder.addValue(valuePair.getName(), translatedValue);
+    }
+    return annotationBuilder;
   }
 
   private static boolean isTestClass(ITypeBinding typeBinding) {
