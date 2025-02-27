@@ -44,6 +44,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
@@ -206,8 +207,10 @@ public final class LibraryInfoBuilder {
     // so when collecting references for the current member, a member info might already have
     // been constructed for the corresponding accessor and its information is passed in the
     // memberInfoBuilder.
-    Set<MethodInvocation> invokedMethods =
-        new LinkedHashSet<>(memberInfoBuilder.getInvokedMethodsList());
+    Map<String, MethodInvocation> invokedMethods = new LinkedHashMap<>();
+    for (MethodInvocation methodInvocation : memberInfoBuilder.getInvokedMethodsList()) {
+      invokedMethods.put(toKey(methodInvocation), methodInvocation);
+    }
 
     // The set of types that are explicitly referenced in this member; these come from
     // JavaScriptConstructorReferences that appear in the AST from type literals, casts,
@@ -228,7 +231,7 @@ public final class LibraryInfoBuilder {
           @Override
           public void exitJavaScriptConstructorReference(JavaScriptConstructorReference node) {
             DeclaredTypeDescriptor referencedType =
-                node.getReferencedTypeDeclaration().toRawTypeDescriptor();
+                node.getReferencedTypeDeclaration().toDescriptor();
 
             if (!isPrunableType(referencedType)) {
               return;
@@ -308,7 +311,8 @@ public final class LibraryInfoBuilder {
           }
 
           private void addInvokedMethod(MemberDescriptor target) {
-            invokedMethods.add(createMethodInvocation(target));
+            MethodInvocation methodInvocation = createMethodInvocation(target);
+            invokedMethods.put(toKey(methodInvocation), methodInvocation);
             if (!target.isInstanceMember()) {
               typesReferencedViaStaticMemberReferences.add(
                   getTypeId(target.getEnclosingTypeDescriptor()));
@@ -319,10 +323,14 @@ public final class LibraryInfoBuilder {
     memberInfoBuilder
         .clearReferencedTypes()
         .clearInvokedMethods()
-        .addAllInvokedMethods(invokedMethods)
+        .addAllInvokedMethods(invokedMethods.values())
         // Record only the explicit type references without the implicit ones which are redundant.
         .addAllReferencedTypes(
             Sets.difference(explicitlyReferencedTypes, typesReferencedViaStaticMemberReferences));
+  }
+
+  private static String toKey(MethodInvocation methodInvocation) {
+    return methodInvocation.getMethod() + "@" + methodInvocation.getEnclosingType();
   }
 
   private MethodInvocation createMethodInvocation(MemberDescriptor memberDescriptor) {
