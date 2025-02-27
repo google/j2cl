@@ -33,9 +33,9 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktStaticjsmembersStaticJsMembers", swiftName = "StaticjsmembersStaticJsMembers", exact = true)
+@ObjCName("J2ktStaticjsmembersStaticJsMembers", swiftName = "StaticjsmembersStaticJsMembers", exact = true)
 open class StaticJsMembers {
- @ObjCName(name = "test")
+ @ObjCName("test")
  open fun test() {
   StaticJsMembers.f1(1)
   StaticJsMembers.f1(1)
@@ -63,110 +63,110 @@ open class StaticJsMembers {
   StaticJsMembers.Extern()
  }
 
- @ObjCName(name = "J2ktStaticjsmembersStaticJsMembersCompanion", swiftName = "StaticjsmembersStaticJsMembersCompanion", exact = true)
+ @ObjCName("J2ktStaticjsmembersStaticJsMembersCompanion", swiftName = "StaticjsmembersStaticJsMembersCompanion", exact = true)
  companion object {
   @JvmField
-  @ObjCName(name = "field1_")
+  @ObjCName("field1_")
   @JsProperty(name = "field")
   var field1: Int = 0
 
   @JvmField
-  @ObjCName(name = "field2_")
+  @ObjCName("field2_")
   @JsProperty
   var field2: Int = 0
 
   @JvmStatic
-  @ObjCName(name = "f1")
+  @ObjCName("f1")
   @JsMethod(name = "fun")
   fun f1(
-   @ObjCName(name = "withInt") a: Int
+   @ObjCName("withInt") a: Int
   ) {}
 
   @JvmStatic
-  @ObjCName(name = "f2")
+  @ObjCName("f2")
   @JsMethod
   fun f2(
-   @ObjCName(name = "withInt") a: Int
+   @ObjCName("withInt") a: Int
   ) {}
 
   @JvmStatic
-  @ObjCName(name = "f3")
+  @ObjCName("f3")
   @JsMethod(name = "Math.floor", namespace = JsPackage.GLOBAL)
   external fun f3(
-   @ObjCName(name = "withDouble") a: Double
+   @ObjCName("withDouble") a: Double
   )
 
   @JvmStatic
-  @ObjCName(name = "f4")
+  @ObjCName("f4")
   @JsMethod(name = "isFinite", namespace = JsPackage.GLOBAL)
   external fun f4(
-   @ObjCName(name = "withDouble") a: Double
+   @ObjCName("withDouble") a: Double
   ): Boolean
 
   @JvmStatic
-  @ObjCName(name = "f5")
+  @ObjCName("f5")
   @JsMethod(name = "baz", namespace = "foo.Bar")
   external fun f5(): Boolean
 
   @JvmStatic
-  @ObjCName(name = "f6")
+  @ObjCName("f6")
   @JsMethod(name = "baz", namespace = "foo.Baz")
   external fun f6(): Boolean
 
   @JvmStatic
-  @ObjCName(name = "max")
+  @ObjCName("max")
   @JsMethod(name = "Math.max", namespace = JsPackage.GLOBAL)
   external fun max(
-   @ObjCName(name = "withInt") a: Int,
-   @ObjCName(name = "withInt") b: Int
+   @ObjCName("withInt") a: Int,
+   @ObjCName("withInt") b: Int
   ): Int
 
   @JvmStatic
-  @ObjCName(name = "max")
+  @ObjCName("max")
   @JsMethod(name = "Math.max", namespace = JsPackage.GLOBAL)
   external fun max(
-   @ObjCName(name = "withInt") a: Int,
-   @ObjCName(name = "withInt") b: Int,
-   @ObjCName(name = "withInt") c: Int
+   @ObjCName("withInt") a: Int,
+   @ObjCName("withInt") b: Int,
+   @ObjCName("withInt") c: Int
   ): Int
 
   @JvmStatic
-  @ObjCName(name = "max")
+  @ObjCName("max")
   @JsMethod(name = "Math.max", namespace = JsPackage.GLOBAL)
   external fun max(
-   @ObjCName(name = "withDouble") a: Double,
-   @ObjCName(name = "withDouble") b: Double
+   @ObjCName("withDouble") a: Double,
+   @ObjCName("withDouble") b: Double
   ): Double
  }
 
- @ObjCName(name = "J2ktStaticjsmembersStaticJsMembers_Native", swiftName = "StaticjsmembersStaticJsMembers_Native", exact = true)
+ @ObjCName("J2ktStaticjsmembersStaticJsMembers_Native", swiftName = "StaticjsmembersStaticJsMembers_Native", exact = true)
  @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
  open class Native {
-  @ObjCName(name = "J2ktStaticjsmembersStaticJsMembers_NativeCompanion", swiftName = "StaticjsmembersStaticJsMembers_NativeCompanion", exact = true)
+  @ObjCName("J2ktStaticjsmembersStaticJsMembers_NativeCompanion", swiftName = "StaticjsmembersStaticJsMembers_NativeCompanion", exact = true)
   companion object {
    @JvmField
-   @ObjCName(name = "field3_")
+   @ObjCName("field3_")
    @JsProperty(name = "Math.PI", namespace = JsPackage.GLOBAL)
    var field3: Int = 0
 
    @JvmField
-   @ObjCName(name = "field4_")
+   @ObjCName("field4_")
    @JsProperty(name = "top", namespace = JsPackage.GLOBAL)
    var field4: Int = 0
 
    @JvmField
-   @ObjCName(name = "field5_")
+   @ObjCName("field5_")
    @JsProperty(name = "field", namespace = "foo.Bar")
    var field5: Int = 0
 
    @JvmField
-   @ObjCName(name = "field6_")
+   @ObjCName("field6_")
    @JsProperty(name = "window.top", namespace = JsPackage.GLOBAL)
    var field6: Int = 0
   }
  }
 
- @ObjCName(name = "J2ktStaticjsmembersStaticJsMembers_Extern", swiftName = "StaticjsmembersStaticJsMembers_Extern", exact = true)
+ @ObjCName("J2ktStaticjsmembersStaticJsMembers_Extern", swiftName = "StaticjsmembersStaticJsMembers_Extern", exact = true)
  @JsType(name = "window.Object", namespace = JsPackage.GLOBAL, isNative = true)
  open class Extern
 }

@@ -33,28 +33,28 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktImportglobaljstypesNumber", swiftName = "ImportglobaljstypesNumber", exact = true)
+@ObjCName("J2ktImportglobaljstypesNumber", swiftName = "ImportglobaljstypesNumber", exact = true)
 open class Number {
- @ObjCName(name = "testJsDocForLiteralType")
+ @ObjCName("testJsDocForLiteralType")
  open fun testJsDocForLiteralType(
-  @ObjCName(name = "withImportglobaljstypesNumber_MyLiteralType") a: Number.MyLiteralType?
+  @ObjCName("withImportglobaljstypesNumber_MyLiteralType") a: Number.MyLiteralType?
  ): Number.MyLiteralType? {
   return a
  }
 
- @ObjCName(name = "J2ktImportglobaljstypesNumberCompanion", swiftName = "ImportglobaljstypesNumberCompanion", exact = true)
+ @ObjCName("J2ktImportglobaljstypesNumberCompanion", swiftName = "ImportglobaljstypesNumberCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName(name = "f")
+  @ObjCName("f")
   @JsMethod(name = "Number.isInteger", namespace = JsPackage.GLOBAL)
   external fun f(
-   @ObjCName(name = "withDouble") x: Double
+   @ObjCName("withDouble") x: Double
   ): Boolean
 
   @JvmStatic
-  @ObjCName(name = "test")
+  @ObjCName("test")
   fun test(
-   @ObjCName(name = "withDouble") x: Double
+   @ObjCName("withDouble") x: Double
   ): Boolean {
    return Number.f(x)
   }
@@ -74,20 +74,20 @@ open class Number {
   }
  }
 
- @ObjCName(name = "J2ktImportglobaljstypesNumber_NativeArray", swiftName = "ImportglobaljstypesNumber_NativeArray", exact = true)
+ @ObjCName("J2ktImportglobaljstypesNumber_NativeArray", swiftName = "ImportglobaljstypesNumber_NativeArray", exact = true)
  @JsType(name = "Array", namespace = JsPackage.GLOBAL, isNative = true)
  interface NativeArray<T> {
-  @ObjCName(name = "getLength")
+  @ObjCName("getLength")
   @JsProperty
   fun getLength(): Int
 
-  @ObjCName(name = "at")
+  @ObjCName("at")
   fun at(
-   @ObjCName(name = "withInt") index: Int
+   @ObjCName("withInt") index: Int
   ): T
  }
 
- @ObjCName(name = "J2ktImportglobaljstypesNumber_MyLiteralType", swiftName = "ImportglobaljstypesNumber_MyLiteralType", exact = true)
+ @ObjCName("J2ktImportglobaljstypesNumber_MyLiteralType", swiftName = "ImportglobaljstypesNumber_MyLiteralType", exact = true)
  @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
  interface MyLiteralType
 }

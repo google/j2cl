@@ -27,23 +27,23 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktOverwrittentypevariablesMyFunction", swiftName = "OverwrittentypevariablesMyFunction", exact = true)
+@ObjCName("J2ktOverwrittentypevariablesMyFunction", swiftName = "OverwrittentypevariablesMyFunction", exact = true)
 fun interface MyFunction<F, T> {
- @ObjCName(name = "apply")
+ @ObjCName("apply")
  fun apply(
-  @ObjCName(name = "withId") input: F
+  @ObjCName("withId") input: F
  ): T
 }
 
-@ObjCName(name = "J2ktOverwrittentypevariablesHashFunction", swiftName = "OverwrittentypevariablesHashFunction", exact = true)
+@ObjCName("J2ktOverwrittentypevariablesHashFunction", swiftName = "OverwrittentypevariablesHashFunction", exact = true)
 fun interface HashFunction<T>: MyFunction<T, String?>
 
-@ObjCName(name = "J2ktOverwrittentypevariablesHashFunctions", swiftName = "OverwrittentypevariablesHashFunctions", exact = true)
+@ObjCName("J2ktOverwrittentypevariablesHashFunctions", swiftName = "OverwrittentypevariablesHashFunctions", exact = true)
 open class HashFunctions {
- @ObjCName(name = "J2ktOverwrittentypevariablesHashFunctionsCompanion", swiftName = "OverwrittentypevariablesHashFunctionsCompanion", exact = true)
+ @ObjCName("J2ktOverwrittentypevariablesHashFunctionsCompanion", swiftName = "OverwrittentypevariablesHashFunctionsCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName(name = "hashFunction")
+  @ObjCName("hashFunction")
   fun <T> hashFunction(): HashFunction<T>? {
    return object : HashFunction<T> {
     override fun apply(input: T): String? {
@@ -53,7 +53,7 @@ open class HashFunctions {
   }
 
   @JvmStatic
-  @ObjCName(name = "enumHashFunction")
+  @ObjCName("enumHashFunction")
   fun <T: Enum<T>> enumHashFunction(): HashFunction<T>? {
    return object : HashFunction<T> {
     override fun apply(input: T): String? {

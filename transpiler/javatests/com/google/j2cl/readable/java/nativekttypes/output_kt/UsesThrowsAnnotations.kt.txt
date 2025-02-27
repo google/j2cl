@@ -28,13 +28,13 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.Throws
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktNativekttypesUsesThrowsAnnotations", swiftName = "NativekttypesUsesThrowsAnnotations", exact = true)
+@ObjCName("J2ktNativekttypesUsesThrowsAnnotations", swiftName = "NativekttypesUsesThrowsAnnotations", exact = true)
 open class UsesThrowsAnnotations {
- @ObjCName(name = "j2ktThrows")
+ @ObjCName("j2ktThrows")
  @NativeThrows(Throwable::class)
  open fun j2ktThrows() {}
 
- @ObjCName(name = "j2ktThrowsAndJavaThrows")
+ @ObjCName("j2ktThrowsAndJavaThrows")
  @Throws(RuntimeException::class)
  @NativeThrows(Throwable::class)
  open fun j2ktThrowsAndJavaThrows() {}

@@ -27,22 +27,22 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktGenericnativetypeBoundedJsArrays", swiftName = "GenericnativetypeBoundedJsArrays", exact = true)
+@ObjCName("J2ktGenericnativetypeBoundedJsArrays", swiftName = "GenericnativetypeBoundedJsArrays", exact = true)
 open class BoundedJsArrays {
  private constructor()
 
- @ObjCName(name = "J2ktGenericnativetypeBoundedJsArraysCompanion", swiftName = "GenericnativetypeBoundedJsArraysCompanion", exact = true)
+ @ObjCName("J2ktGenericnativetypeBoundedJsArraysCompanion", swiftName = "GenericnativetypeBoundedJsArraysCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName(name = "create")
+  @ObjCName("create")
   fun <V> create(): BoundedJsArray<V>? {
    return BoundedJsArray.create<V>()
   }
 
   @JvmStatic
-  @ObjCName(name = "createWithSize")
+  @ObjCName("createWithSize")
   fun <V> createWithSize(
-   @ObjCName(name = "withInt") size: Int
+   @ObjCName("withInt") size: Int
   ): BoundedJsArray<V>? {
    return BoundedJsArray.create<V>(size)
   }

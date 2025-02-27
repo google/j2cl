@@ -31,31 +31,31 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktJsinnerclassMain", swiftName = "JsinnerclassMain", exact = true)
+@ObjCName("J2ktJsinnerclassMain", swiftName = "JsinnerclassMain", exact = true)
 open class Main {
- @ObjCName(name = "J2ktJsinnerclassMainCompanion", swiftName = "JsinnerclassMainCompanion", exact = true)
+ @ObjCName("J2ktJsinnerclassMainCompanion", swiftName = "JsinnerclassMainCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName(name = "main")
+  @ObjCName("main")
   fun main(
-   vararg @ObjCName(name = "withNSStringArray") args: String?
+   vararg @ObjCName("withNSStringArray") args: String?
   ) {
    val args_1: Array<String?>? = args as Array<String?>?
    assert(Main.Outer().method() == 5)
   }
  }
 
- @ObjCName(name = "J2ktJsinnerclassMain_Outer", swiftName = "JsinnerclassMain_Outer", exact = true)
+ @ObjCName("J2ktJsinnerclassMain_Outer", swiftName = "JsinnerclassMain_Outer", exact = true)
  open class Outer internal constructor() {
   @JvmField
   internal var a_pp_jsinnerclass: Int = 2
 
-  @ObjCName(name = "method")
+  @ObjCName("method")
   open fun method(): Int {
    return Inner().getB() + this.a_pp_jsinnerclass
   }
 
-  @ObjCName(name = "J2ktJsinnerclassMain_Outer_Inner", swiftName = "JsinnerclassMain_Outer_Inner", exact = true)
+  @ObjCName("J2ktJsinnerclassMain_Outer_Inner", swiftName = "JsinnerclassMain_Outer_Inner", exact = true)
   @JsType(namespace = "com.google.test")
   open inner class Inner constructor() {
    private var b: Int = 0
@@ -64,7 +64,7 @@ open class Main {
     this.b = this@Outer.a_pp_jsinnerclass + 1
    }
 
-   @ObjCName(name = "getB")
+   @ObjCName("getB")
    open fun getB(): Int {
     return this.b
    }

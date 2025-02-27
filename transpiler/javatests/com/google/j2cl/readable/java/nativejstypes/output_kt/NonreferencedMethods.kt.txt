@@ -28,9 +28,9 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktNativejstypesNonreferencedMethods", swiftName = "NativejstypesNonreferencedMethods", exact = true)
+@ObjCName("J2ktNativejstypesNonreferencedMethods", swiftName = "NativejstypesNonreferencedMethods", exact = true)
 open class NonreferencedMethods {
- @ObjCName(name = "J2ktNativejstypesNonreferencedMethods_NativePrivateMembersOnPublicClass", swiftName = "NativejstypesNonreferencedMethods_NativePrivateMembersOnPublicClass", exact = true)
+ @ObjCName("J2ktNativejstypesNonreferencedMethods_NativePrivateMembersOnPublicClass", swiftName = "NativejstypesNonreferencedMethods_NativePrivateMembersOnPublicClass", exact = true)
  @JsType(name = "NativeNonreferencedMethods", namespace = "nativejstypes", isNative = true)
  open class NativePrivateMembersOnPublicClass {
   private var x: Int = 0
@@ -39,7 +39,7 @@ open class NonreferencedMethods {
 
   private external fun getInstance1(): Int
 
-  @ObjCName(name = "J2ktNativejstypesNonreferencedMethods_NativePrivateMembersOnPublicClassCompanion", swiftName = "NativejstypesNonreferencedMethods_NativePrivateMembersOnPublicClassCompanion", exact = true)
+  @ObjCName("J2ktNativejstypesNonreferencedMethods_NativePrivateMembersOnPublicClassCompanion", swiftName = "NativejstypesNonreferencedMethods_NativePrivateMembersOnPublicClassCompanion", exact = true)
   companion object {
    private var s: Int = 0
 
@@ -48,24 +48,24 @@ open class NonreferencedMethods {
   }
  }
 
- @ObjCName(name = "J2ktNativejstypesNonreferencedMethods_NativeMembersOnPrivateClass", swiftName = "NativejstypesNonreferencedMethods_NativeMembersOnPrivateClass", exact = true)
+ @ObjCName("J2ktNativejstypesNonreferencedMethods_NativeMembersOnPrivateClass", swiftName = "NativejstypesNonreferencedMethods_NativeMembersOnPrivateClass", exact = true)
  @JsType(name = "NativeNonreferencedMethods", namespace = "nativejstypes", isNative = true)
  open class NativeMembersOnPrivateClass {
   constructor(
-   @ObjCName(name = "Int") x: Int
+   @ObjCName("Int") x: Int
   )
 
-  @ObjCName(name = "getInstance2")
+  @ObjCName("getInstance2")
   external open fun getInstance2(): Int
 
-  @ObjCName(name = "J2ktNativejstypesNonreferencedMethods_NativeMembersOnPrivateClassCompanion", swiftName = "NativejstypesNonreferencedMethods_NativeMembersOnPrivateClassCompanion", exact = true)
+  @ObjCName("J2ktNativejstypesNonreferencedMethods_NativeMembersOnPrivateClassCompanion", swiftName = "NativejstypesNonreferencedMethods_NativeMembersOnPrivateClassCompanion", exact = true)
   companion object {
    @JvmField
-   @ObjCName(name = "s_")
+   @ObjCName("s_")
    var s: Int = 0
 
    @JvmStatic
-   @ObjCName(name = "getStatic")
+   @ObjCName("getStatic")
    external fun getStatic(): Int
   }
  }

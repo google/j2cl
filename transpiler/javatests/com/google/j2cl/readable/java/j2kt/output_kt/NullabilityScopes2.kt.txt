@@ -31,31 +31,31 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktJ2ktNullabilityScopes2", swiftName = "J2ktNullabilityScopes2", exact = true)
+@ObjCName("J2ktJ2ktNullabilityScopes2", swiftName = "J2ktNullabilityScopes2", exact = true)
 open class NullabilityScopes2 internal constructor() {
- @ObjCName(name = "J2ktJ2ktNullabilityScopes2_NullMarkedScope", swiftName = "J2ktNullabilityScopes2_NullMarkedScope", exact = true)
+ @ObjCName("J2ktJ2ktNullabilityScopes2_NullMarkedScope", swiftName = "J2ktNullabilityScopes2_NullMarkedScope", exact = true)
  open class NullMarkedScope internal constructor() {
-  @ObjCName(name = "J2ktJ2ktNullabilityScopes2_NullMarkedScopeCompanion", swiftName = "J2ktNullabilityScopes2_NullMarkedScopeCompanion", exact = true)
+  @ObjCName("J2ktJ2ktNullabilityScopes2_NullMarkedScopeCompanion", swiftName = "J2ktNullabilityScopes2_NullMarkedScopeCompanion", exact = true)
   companion object {
    @JvmStatic
-   @ObjCName(name = "toList")
+   @ObjCName("toList")
    fun <E> toList(): Collector<E, *, MutableList<E>> {
     throw RuntimeException()
    }
   }
 
-  @ObjCName(name = "J2ktJ2ktNullabilityScopes2_NullMarkedScope_Recursive", swiftName = "J2ktNullabilityScopes2_NullMarkedScope_Recursive", exact = true)
+  @ObjCName("J2ktJ2ktNullabilityScopes2_NullMarkedScope_Recursive", swiftName = "J2ktNullabilityScopes2_NullMarkedScope_Recursive", exact = true)
   fun interface Recursive<M: NullabilityScopes2.NullMarkedScope.Recursive<M>> {
-   @ObjCName(name = "toList")
+   @ObjCName("toList")
    fun toList(): MutableList<NullabilityScopes2.NullMarkedScope.Recursive<M>>
   }
  }
 
- @ObjCName(name = "J2ktJ2ktNullabilityScopes2_NonNullMarkedScope", swiftName = "J2ktNullabilityScopes2_NonNullMarkedScope", exact = true)
+ @ObjCName("J2ktJ2ktNullabilityScopes2_NonNullMarkedScope", swiftName = "J2ktNullabilityScopes2_NonNullMarkedScope", exact = true)
  open class NonNullMarkedScope<T: NullabilityScopes2.NullMarkedScope.Recursive<T>> internal constructor() {
-  @ObjCName(name = "flatten")
+  @ObjCName("flatten")
   open fun flatten(
-   @ObjCName(name = "withJ2ktNullabilityScopes2_NullMarkedScope_Recursive") recursive: NullabilityScopes2.NullMarkedScope.Recursive<T>?
+   @ObjCName("withJ2ktNullabilityScopes2_NullMarkedScope_Recursive") recursive: NullabilityScopes2.NullMarkedScope.Recursive<T>?
   ): MutableList<Any?>? {
    return recursive!!.toList().stream().map<MutableList<Any>>(
     Function/* <in NullabilityScopes2.NullMarkedScope.Recursive<T>?, out MutableList<Any?>?> */ { arg0: NullabilityScopes2.NullMarkedScope.Recursive<T> ->

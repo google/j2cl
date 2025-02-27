@@ -29,28 +29,28 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktJsmethodJsMethodExample", swiftName = "JsmethodJsMethodExample", exact = true)
+@ObjCName("J2ktJsmethodJsMethodExample", swiftName = "JsmethodJsMethodExample", exact = true)
 open class JsMethodExample {
- @ObjCName(name = "testMethod")
+ @ObjCName("testMethod")
  @JsMethod
  external open fun <T: ArrayList<String?>?> testMethod(): T
 
- @ObjCName(name = "J2ktJsmethodJsMethodExample_Base", swiftName = "JsmethodJsMethodExample_Base", exact = true)
+ @ObjCName("J2ktJsmethodJsMethodExample_Base", swiftName = "JsmethodJsMethodExample_Base", exact = true)
  abstract class Base<T> internal constructor() {
   @JsMethod(name = "m")
   internal open fun m_pp_jsmethod(t: T) {}
  }
 
- @ObjCName(name = "J2ktJsmethodJsMethodExample_I", swiftName = "JsmethodJsMethodExample_I", exact = true)
+ @ObjCName("J2ktJsmethodJsMethodExample_I", swiftName = "JsmethodJsMethodExample_I", exact = true)
  fun interface I {
-  @ObjCName(name = "m")
+  @ObjCName("m")
   @JsMethod(name = "mString")
   fun m(
-   @ObjCName(name = "withNSString") s: String?
+   @ObjCName("withNSString") s: String?
   )
  }
 
- @ObjCName(name = "J2ktJsmethodJsMethodExample_Sub", swiftName = "JsmethodJsMethodExample_Sub", exact = true)
+ @ObjCName("J2ktJsmethodJsMethodExample_Sub", swiftName = "JsmethodJsMethodExample_Sub", exact = true)
  open class Sub internal constructor(): JsMethodExample.Base<String?>(), JsMethodExample.I {
   override fun m(s: String?) {}
 
@@ -59,31 +59,31 @@ open class JsMethodExample {
   }
  }
 
- @ObjCName(name = "J2ktJsmethodJsMethodExample_SubJsType", swiftName = "JsmethodJsMethodExample_SubJsType", exact = true)
+ @ObjCName("J2ktJsmethodJsMethodExample_SubJsType", swiftName = "JsmethodJsMethodExample_SubJsType", exact = true)
  @JsType
  open class SubJsType internal constructor(): JsMethodExample.Base<String?>() {
-  @ObjCName(name = "m")
+  @ObjCName("m")
   public open fun m(
-   @ObjCName(name = "withNSString") s: String?
+   @ObjCName("withNSString") s: String?
   ) {}
 
   override fun m_pp_jsmethod(arg0: String?) {
    this.m(arg0)
   }
 
-  @ObjCName(name = "J2ktJsmethodJsMethodExample_SubJsTypeCompanion", swiftName = "JsmethodJsMethodExample_SubJsTypeCompanion", exact = true)
+  @ObjCName("J2ktJsmethodJsMethodExample_SubJsTypeCompanion", swiftName = "JsmethodJsMethodExample_SubJsTypeCompanion", exact = true)
   companion object {
    @JvmStatic
    internal fun n_pp_jsmethod() {}
   }
  }
 
- @ObjCName(name = "J2ktJsmethodJsMethodExample_SubGenericsJsType", swiftName = "JsmethodJsMethodExample_SubGenericsJsType", exact = true)
+ @ObjCName("J2ktJsmethodJsMethodExample_SubGenericsJsType", swiftName = "JsmethodJsMethodExample_SubGenericsJsType", exact = true)
  @JsType
  open class SubGenericsJsType<T> internal constructor(): JsMethodExample.Base<T>() {
-  @ObjCName(name = "m")
+  @ObjCName("m")
   public open fun m(
-   @ObjCName(name = "withId") s: T
+   @ObjCName("withId") s: T
   ) {}
 
   override fun m_pp_jsmethod(arg0: T) {
@@ -91,13 +91,13 @@ open class JsMethodExample {
   }
  }
 
- @ObjCName(name = "J2ktJsmethodJsMethodExample_SubJsTypeWithRenamedJsMethod", swiftName = "JsmethodJsMethodExample_SubJsTypeWithRenamedJsMethod", exact = true)
+ @ObjCName("J2ktJsmethodJsMethodExample_SubJsTypeWithRenamedJsMethod", swiftName = "JsmethodJsMethodExample_SubJsTypeWithRenamedJsMethod", exact = true)
  @JsType
  open class SubJsTypeWithRenamedJsMethod internal constructor(): JsMethodExample.Base<String?>() {
-  @ObjCName(name = "m")
+  @ObjCName("m")
   @JsMethod(name = "renamedM")
   public open fun m(
-   @ObjCName(name = "withNSString") s: String?
+   @ObjCName("withNSString") s: String?
   ) {}
 
   override fun m_pp_jsmethod(arg0: String?) {
@@ -105,16 +105,16 @@ open class JsMethodExample {
   }
  }
 
- @ObjCName(name = "J2ktJsmethodJsMethodExample_InterfaceWithMethod", swiftName = "JsmethodJsMethodExample_InterfaceWithMethod", exact = true)
+ @ObjCName("J2ktJsmethodJsMethodExample_InterfaceWithMethod", swiftName = "JsmethodJsMethodExample_InterfaceWithMethod", exact = true)
  interface InterfaceWithMethod {
-  @ObjCName(name = "m")
+  @ObjCName("m")
   fun m()
 
-  @ObjCName(name = "n")
+  @ObjCName("n")
   fun n()
  }
 
- @ObjCName(name = "J2ktJsmethodJsMethodExample_InterfaceExposingJsMethods", swiftName = "JsmethodJsMethodExample_InterfaceExposingJsMethods", exact = true)
+ @ObjCName("J2ktJsmethodJsMethodExample_InterfaceExposingJsMethods", swiftName = "JsmethodJsMethodExample_InterfaceExposingJsMethods", exact = true)
  fun interface InterfaceExposingJsMethods: JsMethodExample.InterfaceWithMethod {
   @JsMethod
   override fun m() {}
@@ -123,12 +123,12 @@ open class JsMethodExample {
   override fun n()
  }
 
- @ObjCName(name = "J2ktJsmethodJsMethodExample_SuperClassWithFinalMethod", swiftName = "JsmethodJsMethodExample_SuperClassWithFinalMethod", exact = true)
+ @ObjCName("J2ktJsmethodJsMethodExample_SuperClassWithFinalMethod", swiftName = "JsmethodJsMethodExample_SuperClassWithFinalMethod", exact = true)
  open class SuperClassWithFinalMethod internal constructor() {
-  @ObjCName(name = "n")
+  @ObjCName("n")
   fun n() {}
  }
 
- @ObjCName(name = "J2ktJsmethodJsMethodExample_ExposesOverrideableJsMethod", swiftName = "JsmethodJsMethodExample_ExposesOverrideableJsMethod", exact = true)
+ @ObjCName("J2ktJsmethodJsMethodExample_ExposesOverrideableJsMethod", swiftName = "JsmethodJsMethodExample_ExposesOverrideableJsMethod", exact = true)
  open class ExposesOverrideableJsMethod internal constructor(): JsMethodExample.SuperClassWithFinalMethod(), JsMethodExample.InterfaceExposingJsMethods
 }

@@ -25,24 +25,24 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktJ2ktUnsatisfiedTypeBounds", swiftName = "J2ktUnsatisfiedTypeBounds", exact = true)
+@ObjCName("J2ktJ2ktUnsatisfiedTypeBounds", swiftName = "J2ktUnsatisfiedTypeBounds", exact = true)
 open class UnsatisfiedTypeBounds internal constructor() {
- @ObjCName(name = "J2ktJ2ktUnsatisfiedTypeBounds_Foo", swiftName = "J2ktUnsatisfiedTypeBounds_Foo", exact = true)
+ @ObjCName("J2ktJ2ktUnsatisfiedTypeBounds_Foo", swiftName = "J2ktUnsatisfiedTypeBounds_Foo", exact = true)
  fun interface Foo<T: UnsatisfiedTypeBounds.Foo<T>> {
-  @ObjCName(name = "get")
+  @ObjCName("get")
   fun get(): T
  }
 
- @ObjCName(name = "J2ktJ2ktUnsatisfiedTypeBounds_Command", swiftName = "J2ktUnsatisfiedTypeBounds_Command", exact = true)
+ @ObjCName("J2ktJ2ktUnsatisfiedTypeBounds_Command", swiftName = "J2ktUnsatisfiedTypeBounds_Command", exact = true)
  interface Command
 
- @ObjCName(name = "J2ktJ2ktUnsatisfiedTypeBounds_FooCommand", swiftName = "J2ktUnsatisfiedTypeBounds_FooCommand", exact = true)
+ @ObjCName("J2ktJ2ktUnsatisfiedTypeBounds_FooCommand", swiftName = "J2ktUnsatisfiedTypeBounds_FooCommand", exact = true)
  open class FooCommand internal constructor(): UnsatisfiedTypeBounds.Foo<UnsatisfiedTypeBounds.FooCommand>, UnsatisfiedTypeBounds.Command {
   override fun get(): UnsatisfiedTypeBounds.FooCommand {
    return this
   }
  }
 
- @ObjCName(name = "J2ktJ2ktUnsatisfiedTypeBounds_Helper", swiftName = "J2ktUnsatisfiedTypeBounds_Helper", exact = true)
+ @ObjCName("J2ktJ2ktUnsatisfiedTypeBounds_Helper", swiftName = "J2ktUnsatisfiedTypeBounds_Helper", exact = true)
  class Helper<T: Any> internal constructor()
 }

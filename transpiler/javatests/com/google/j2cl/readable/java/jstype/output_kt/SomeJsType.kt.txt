@@ -31,11 +31,11 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktJstypeSomeJsType", swiftName = "JstypeSomeJsType", exact = true)
+@ObjCName("J2ktJstypeSomeJsType", swiftName = "JstypeSomeJsType", exact = true)
 @JsType
 open class SomeJsType<T> {
  @JvmField
- @ObjCName(name = "publicField_")
+ @ObjCName("publicField_")
  var publicField: Int = 0
 
  private var privateField: Int = 0
@@ -44,22 +44,22 @@ open class SomeJsType<T> {
  internal var packageField_pp_jstype: Int = 0
 
  @JvmField
- @ObjCName(name = "protectedField_")
+ @ObjCName("protectedField_")
  @JsIgnore
  var protectedField: Int = 0
 
- @ObjCName(name = "publicMethod")
+ @ObjCName("publicMethod")
  open fun publicMethod() {}
 
  private fun privateMethod() {}
 
  internal open fun packageMethod_pp_jstype() {}
 
- @ObjCName(name = "protectedMethod")
+ @ObjCName("protectedMethod")
  @JsIgnore
  open fun protectedMethod() {}
 
- @ObjCName(name = "useFieldsAndMethods")
+ @ObjCName("useFieldsAndMethods")
  open fun useFieldsAndMethods() {
   val value: Int = this.publicField + this.privateField + this.packageField_pp_jstype + this.protectedField
   this.publicMethod()
@@ -74,11 +74,11 @@ open class SomeJsType<T> {
   return star as SomeJsType.Wildcard?
  }
 
- @ObjCName(name = "J2ktJstypeSomeJsType_Star", swiftName = "JstypeSomeJsType_Star", exact = true)
+ @ObjCName("J2ktJstypeSomeJsType_Star", swiftName = "JstypeSomeJsType_Star", exact = true)
  @JsType(name = "*", namespace = JsPackage.GLOBAL, isNative = true)
  interface Star
 
- @ObjCName(name = "J2ktJstypeSomeJsType_Wildcard", swiftName = "JstypeSomeJsType_Wildcard", exact = true)
+ @ObjCName("J2ktJstypeSomeJsType_Wildcard", swiftName = "JstypeSomeJsType_Wildcard", exact = true)
  @JsType(name = "?", namespace = JsPackage.GLOBAL, isNative = true)
  interface Wildcard
 }

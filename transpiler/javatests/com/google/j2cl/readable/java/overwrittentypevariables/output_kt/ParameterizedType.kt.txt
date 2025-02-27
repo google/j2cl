@@ -27,12 +27,12 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktOverwrittentypevariablesParameterizedType", swiftName = "OverwrittentypevariablesParameterizedType", exact = true)
+@ObjCName("J2ktOverwrittentypevariablesParameterizedType", swiftName = "OverwrittentypevariablesParameterizedType", exact = true)
 fun interface ParameterizedType<F, T>: overwrittentypevariables.otherpkg.ParameterizedType<F, T> {
  override fun accept(value: F): T
 }
 
-@ObjCName(name = "J2ktOverwrittentypevariablesParameterizedTypeImpl", swiftName = "OverwrittentypevariablesParameterizedTypeImpl", exact = true)
+@ObjCName("J2ktOverwrittentypevariablesParameterizedTypeImpl", swiftName = "OverwrittentypevariablesParameterizedTypeImpl", exact = true)
 open class ParameterizedTypeImpl internal constructor(): ParameterizedType<String?, Int?> {
  override fun accept(value: String?): Int? {
   return Integer.valueOf(1)

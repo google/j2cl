@@ -29,7 +29,7 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktJ2ktNullabilityCasts", swiftName = "J2ktNullabilityCasts", exact = true)
+@ObjCName("J2ktJ2ktNullabilityCasts", swiftName = "J2ktNullabilityCasts", exact = true)
 open class NullabilityCasts {
  internal open fun testCapturesInLambdas_pp_j2kt(condition: Boolean, async: NullabilityCasts.Async<String?>) {
   NullabilityCasts.tranformAsync_pp_j2kt<String?, String?>(
@@ -45,7 +45,7 @@ open class NullabilityCasts {
   )
  }
 
- @ObjCName(name = "J2ktJ2ktNullabilityCastsCompanion", swiftName = "J2ktNullabilityCastsCompanion", exact = true)
+ @ObjCName("J2ktJ2ktNullabilityCastsCompanion", swiftName = "J2ktNullabilityCastsCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun <I, O> tranformAsync_pp_j2kt(async: NullabilityCasts.Async<I>, function: NullabilityCasts.AsyncFunction<in I, out O>): NullabilityCasts.Async<O> {
@@ -53,14 +53,14 @@ open class NullabilityCasts {
   }
  }
 
- @ObjCName(name = "J2ktJ2ktNullabilityCasts_AsyncFunction", swiftName = "J2ktNullabilityCasts_AsyncFunction", exact = true)
+ @ObjCName("J2ktJ2ktNullabilityCasts_AsyncFunction", swiftName = "J2ktNullabilityCasts_AsyncFunction", exact = true)
  fun interface AsyncFunction<I, O> {
-  @ObjCName(name = "apply")
+  @ObjCName("apply")
   fun apply(
-   @ObjCName(name = "withId") i: I
+   @ObjCName("withId") i: I
   ): NullabilityCasts.Async<O>
  }
 
- @ObjCName(name = "J2ktJ2ktNullabilityCasts_Async", swiftName = "J2ktNullabilityCasts_Async", exact = true)
+ @ObjCName("J2ktJ2ktNullabilityCasts_Async", swiftName = "J2ktNullabilityCasts_Async", exact = true)
  interface Async<V>
 }

@@ -26,63 +26,63 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktFunctionalinterfaceFunctionalInterfaces", swiftName = "FunctionalinterfaceFunctionalInterfaces", exact = true)
+@ObjCName("J2ktFunctionalinterfaceFunctionalInterfaces", swiftName = "FunctionalinterfaceFunctionalInterfaces", exact = true)
 open class FunctionalInterfaces {
- @ObjCName(name = "J2ktFunctionalinterfaceFunctionalInterfaces_NonParametrized", swiftName = "FunctionalinterfaceFunctionalInterfaces_NonParametrized", exact = true)
+ @ObjCName("J2ktFunctionalinterfaceFunctionalInterfaces_NonParametrized", swiftName = "FunctionalinterfaceFunctionalInterfaces_NonParametrized", exact = true)
  fun interface NonParametrized {
-  @ObjCName(name = "apply")
+  @ObjCName("apply")
   fun apply(
-   @ObjCName(name = "withNSString") string: String?
+   @ObjCName("withNSString") string: String?
   ): String?
  }
 
- @ObjCName(name = "J2ktFunctionalinterfaceFunctionalInterfaces_Parametrized", swiftName = "FunctionalinterfaceFunctionalInterfaces_Parametrized", exact = true)
+ @ObjCName("J2ktFunctionalinterfaceFunctionalInterfaces_Parametrized", swiftName = "FunctionalinterfaceFunctionalInterfaces_Parametrized", exact = true)
  fun interface Parametrized<T> {
-  @ObjCName(name = "apply")
+  @ObjCName("apply")
   fun apply(
-   @ObjCName(name = "withId") t: T
+   @ObjCName("withId") t: T
   ): T
  }
 
- @ObjCName(name = "J2ktFunctionalinterfaceFunctionalInterfaces_Specialized", swiftName = "FunctionalinterfaceFunctionalInterfaces_Specialized", exact = true)
+ @ObjCName("J2ktFunctionalinterfaceFunctionalInterfaces_Specialized", swiftName = "FunctionalinterfaceFunctionalInterfaces_Specialized", exact = true)
  fun interface Specialized: FunctionalInterfaces.Parametrized<String?> {
   override fun apply(string: String?): String?
  }
 
- @ObjCName(name = "J2ktFunctionalinterfaceFunctionalInterfaces_WithDefaultMethod", swiftName = "FunctionalinterfaceFunctionalInterfaces_WithDefaultMethod", exact = true)
+ @ObjCName("J2ktFunctionalinterfaceFunctionalInterfaces_WithDefaultMethod", swiftName = "FunctionalinterfaceFunctionalInterfaces_WithDefaultMethod", exact = true)
  fun interface WithDefaultMethod {
-  @ObjCName(name = "apply")
+  @ObjCName("apply")
   fun apply(
-   @ObjCName(name = "withNSString") string: String?
+   @ObjCName("withNSString") string: String?
   ): String?
 
-  @ObjCName(name = "defaultApply")
+  @ObjCName("defaultApply")
   fun defaultApply(
-   @ObjCName(name = "withNSString") string: String?
+   @ObjCName("withNSString") string: String?
   ): String? {
    return this@WithDefaultMethod.apply(string)
   }
  }
 
- @ObjCName(name = "J2ktFunctionalinterfaceFunctionalInterfaces_WithObjectMethods", swiftName = "FunctionalinterfaceFunctionalInterfaces_WithObjectMethods", exact = true)
+ @ObjCName("J2ktFunctionalinterfaceFunctionalInterfaces_WithObjectMethods", swiftName = "FunctionalinterfaceFunctionalInterfaces_WithObjectMethods", exact = true)
  fun interface WithObjectMethods {
-  @ObjCName(name = "apply")
+  @ObjCName("apply")
   fun apply(
-   @ObjCName(name = "withNSString") string: String?
+   @ObjCName("withNSString") string: String?
   ): String?
  }
 
- @ObjCName(name = "J2ktFunctionalinterfaceFunctionalInterfaces_WithParametrizedMethod", swiftName = "FunctionalinterfaceFunctionalInterfaces_WithParametrizedMethod", exact = true)
+ @ObjCName("J2ktFunctionalinterfaceFunctionalInterfaces_WithParametrizedMethod", swiftName = "FunctionalinterfaceFunctionalInterfaces_WithParametrizedMethod", exact = true)
  interface WithParametrizedMethod {
-  @ObjCName(name = "apply")
+  @ObjCName("apply")
   fun <T> apply(
-   @ObjCName(name = "withId") t: T
+   @ObjCName("withId") t: T
   ): T
  }
 
- @ObjCName(name = "J2ktFunctionalinterfaceFunctionalInterfaces_WithKtProperty", swiftName = "FunctionalinterfaceFunctionalInterfaces_WithKtProperty", exact = true)
+ @ObjCName("J2ktFunctionalinterfaceFunctionalInterfaces_WithKtProperty", swiftName = "FunctionalinterfaceFunctionalInterfaces_WithKtProperty", exact = true)
  interface WithKtProperty {
-  @ObjCName(name = "size")
+  @ObjCName("size")
   val size: Int
  }
 }

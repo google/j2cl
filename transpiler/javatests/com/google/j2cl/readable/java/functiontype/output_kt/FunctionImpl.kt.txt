@@ -24,13 +24,13 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktFunctiontypeFunction", swiftName = "FunctiontypeFunction", exact = true)
+@ObjCName("J2ktFunctiontypeFunction", swiftName = "FunctiontypeFunction", exact = true)
 interface Function
 
-@ObjCName(name = "J2ktFunctiontypeFunctionImpl", swiftName = "FunctiontypeFunctionImpl", exact = true)
+@ObjCName("J2ktFunctiontypeFunctionImpl", swiftName = "FunctiontypeFunctionImpl", exact = true)
 open class FunctionImpl: Function {
- @ObjCName(name = "test")
+ @ObjCName("test")
  open fun test(
-  @ObjCName(name = "withFunctiontypeFunction") f: Function?
+  @ObjCName("withFunctiontypeFunction") f: Function?
  ) {}
 }

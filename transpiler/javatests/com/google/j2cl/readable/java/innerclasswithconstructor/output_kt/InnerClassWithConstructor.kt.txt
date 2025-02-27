@@ -26,20 +26,20 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktInnerclasswithconstructorInnerClassWithConstructor", swiftName = "InnerclasswithconstructorInnerClassWithConstructor", exact = true)
+@ObjCName("J2ktInnerclasswithconstructorInnerClassWithConstructor", swiftName = "InnerclasswithconstructorInnerClassWithConstructor", exact = true)
 open class InnerClassWithConstructor {
  @JvmField
- @ObjCName(name = "a_")
+ @ObjCName("a_")
  var a: Int = 0
 
- @ObjCName(name = "J2ktInnerclasswithconstructorInnerClassWithConstructor_InnerClass", swiftName = "InnerclasswithconstructorInnerClassWithConstructor_InnerClass", exact = true)
+ @ObjCName("J2ktInnerclasswithconstructorInnerClassWithConstructor_InnerClass", swiftName = "InnerclasswithconstructorInnerClassWithConstructor_InnerClass", exact = true)
  open inner class InnerClass {
   @JvmField
-  @ObjCName(name = "b_")
+  @ObjCName("b_")
   var b: Int = 0
 
   constructor(
-   @ObjCName(name = "Int") b: Int
+   @ObjCName("Int") b: Int
   ) {
    this.b = this@InnerClassWithConstructor.a + b
   }
@@ -49,12 +49,12 @@ open class InnerClassWithConstructor {
   )
  }
 
- @ObjCName(name = "J2ktInnerclasswithconstructorInnerClassWithConstructor_InnerClassWithSingleConstructor", swiftName = "InnerclasswithconstructorInnerClassWithConstructor_InnerClassWithSingleConstructor", exact = true)
+ @ObjCName("J2ktInnerclasswithconstructorInnerClassWithConstructor_InnerClassWithSingleConstructor", swiftName = "InnerclasswithconstructorInnerClassWithConstructor_InnerClassWithSingleConstructor", exact = true)
  open inner class InnerClassWithSingleConstructor constructor(
-  @ObjCName(name = "Int") b: Int
+  @ObjCName("Int") b: Int
  ) {
   @JvmField
-  @ObjCName(name = "b_")
+  @ObjCName("b_")
   var b: Int = 0
 
   init {

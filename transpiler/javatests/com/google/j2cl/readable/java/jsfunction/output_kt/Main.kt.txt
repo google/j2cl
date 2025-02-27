@@ -45,9 +45,9 @@ import kotlin.jvm.JvmStatic
 import kotlin.jvm.javaObjectType
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktJsfunctionMain", swiftName = "JsfunctionMain", exact = true)
+@ObjCName("J2ktJsfunctionMain", swiftName = "JsfunctionMain", exact = true)
 open class Main {
- @ObjCName(name = "testJsFunction")
+ @ObjCName("testJsFunction")
  open fun testJsFunction() {
   val func: Main.JsFunctionImplementation = Main.JsFunctionImplementation()
   func.foo(10)
@@ -59,7 +59,7 @@ open class Main {
   func.bar()
  }
 
- @ObjCName(name = "testJsFunctionsCapturingLocal")
+ @ObjCName("testJsFunctionsCapturingLocal")
  open fun testJsFunctionsCapturingLocal() {
   val n: Int = 4
   Main.callFn(
@@ -84,7 +84,7 @@ open class Main {
   }.foo(3)
  }
 
- @ObjCName(name = "testJsFunctionThis")
+ @ObjCName("testJsFunctionThis")
  open fun testJsFunctionThis() {
   object : Main.JsFunctionInterface {
    override fun foo(a: Int): Int {
@@ -96,7 +96,7 @@ open class Main {
 
  private fun instanceMethod() {}
 
- @ObjCName(name = "testJsFunctionErasureCasts")
+ @ObjCName("testJsFunctionErasureCasts")
  open fun testJsFunctionErasureCasts() {
   val list: MutableList<Main.Function<String?, String?>?> = ArrayList<Main.Function<String, String>>() as MutableList<Main.Function<String?, String?>?>
   Main.acceptsJsFunction(
@@ -129,7 +129,7 @@ open class Main {
   }
  }
 
- @ObjCName(name = "testVarArgsMethodReferenceToJsFuncion")
+ @ObjCName("testVarArgsMethodReferenceToJsFuncion")
  open fun testVarArgsMethodReferenceToJsFuncion() {
   val c: Main.ForEachCallBack<Main.ElementalJsFunction?> = Main.ForEachCallBack<Main.ElementalJsFunction?> { arg0: Main.ElementalJsFunction?, arg1: Int, arg2: Array<Main.ElementalJsFunction?>? ->
    return@ForEachCallBack arg0!!.call(
@@ -195,28 +195,28 @@ open class Main {
   (if (c != null) c.function_pp_jsfunction else null)!!.call("")
  }
 
- @ObjCName(name = "J2ktJsfunctionMainCompanion", swiftName = "JsfunctionMainCompanion", exact = true)
+ @ObjCName("J2ktJsfunctionMainCompanion", swiftName = "JsfunctionMainCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName(name = "createNativeFunction")
+  @ObjCName("createNativeFunction")
   @JsMethod
   fun createNativeFunction(): Main.JsFunctionInterface? {
    return null
   }
 
   @JvmStatic
-  @ObjCName(name = "callFn")
+  @ObjCName("callFn")
   fun callFn(
-   @ObjCName(name = "withJsfunctionMain_JsFunctionInterface") fn: Main.JsFunctionInterface?,
-   @ObjCName(name = "withInt") a: Int
+   @ObjCName("withJsfunctionMain_JsFunctionInterface") fn: Main.JsFunctionInterface?,
+   @ObjCName("withInt") a: Int
   ): Int {
    return fn!!.foo(a)
   }
 
   @JvmStatic
-  @ObjCName(name = "acceptsJsFunction")
+  @ObjCName("acceptsJsFunction")
   fun acceptsJsFunction(
-   @ObjCName(name = "withJsfunctionMain_Function") f: Main.Function<String?, String?>?
+   @ObjCName("withJsfunctionMain_Function") f: Main.Function<String?, String?>?
   ) {}
 
   @JvmStatic
@@ -230,20 +230,20 @@ open class Main {
   }
 
   @JvmStatic
-  @ObjCName(name = "callInterfaceRaw")
+  @ObjCName("callInterfaceRaw")
   fun callInterfaceRaw(
-   @ObjCName(name = "withJsfunctionMain_JsBiFunction") f: Main.JsBiFunction<Any?, Number?>?,
-   @ObjCName(name = "withId") o: Any?,
-   @ObjCName(name = "withNSNumber") n: Number?
+   @ObjCName("withJsfunctionMain_JsBiFunction") f: Main.JsBiFunction<Any?, Number?>?,
+   @ObjCName("withId") o: Any?,
+   @ObjCName("withNSNumber") n: Number?
   ): Any? {
    return f!!.apply(o, n)
   }
 
   @JvmStatic
-  @ObjCName(name = "callInterfaceParameterized")
+  @ObjCName("callInterfaceParameterized")
   fun callInterfaceParameterized(
-   @ObjCName(name = "withJsfunctionMain_JsBiFunction") f: Main.JsBiFunction<String?, Int?>?,
-   @ObjCName(name = "withNSString") s: String?
+   @ObjCName("withJsfunctionMain_JsBiFunction") f: Main.JsBiFunction<String?, Int?>?,
+   @ObjCName("withNSString") s: String?
   ): String? {
    return f!!.apply(
     s,
@@ -252,30 +252,30 @@ open class Main {
   }
 
   @JvmStatic
-  @ObjCName(name = "callInterfaceUnparameterized")
+  @ObjCName("callInterfaceUnparameterized")
   fun <U, V: Number?> callInterfaceUnparameterized(
-   @ObjCName(name = "withJsfunctionMain_JsBiFunction") f: Main.JsBiFunction<U, V>?,
-   @ObjCName(name = "withId") u: U,
-   @ObjCName(name = "withNSNumber") v: V
+   @ObjCName("withJsfunctionMain_JsBiFunction") f: Main.JsBiFunction<U, V>?,
+   @ObjCName("withId") u: U,
+   @ObjCName("withNSNumber") v: V
   ): U {
    return f!!.apply(u, v)
   }
 
   @JvmStatic
-  @ObjCName(name = "callImplementorRaw")
+  @ObjCName("callImplementorRaw")
   fun callImplementorRaw(
-   @ObjCName(name = "withJsfunctionMain_TIntegerJsBiFunction") f: Main.TIntegerJsBiFunction<Any?>?,
-   @ObjCName(name = "withId") o: Any?,
-   @ObjCName(name = "withJavaLangInteger") n: Int?
+   @ObjCName("withJsfunctionMain_TIntegerJsBiFunction") f: Main.TIntegerJsBiFunction<Any?>?,
+   @ObjCName("withId") o: Any?,
+   @ObjCName("withJavaLangInteger") n: Int?
   ): Any? {
    return f!!.apply(o, n)
   }
 
   @JvmStatic
-  @ObjCName(name = "callImplementorParameterized")
+  @ObjCName("callImplementorParameterized")
   fun callImplementorParameterized(
-   @ObjCName(name = "withJsfunctionMain_TIntegerJsBiFunction") f: Main.TIntegerJsBiFunction<String?>?,
-   @ObjCName(name = "withNSString") s: String?
+   @ObjCName("withJsfunctionMain_TIntegerJsBiFunction") f: Main.TIntegerJsBiFunction<String?>?,
+   @ObjCName("withNSString") s: String?
   ): String? {
    return f!!.apply(
     s,
@@ -284,7 +284,7 @@ open class Main {
   }
 
   @JvmStatic
-  @ObjCName(name = "testParameterTypes")
+  @ObjCName("testParameterTypes")
   fun testParameterTypes() {
    val tIntegerJsBiFunction: Main.JsBiFunction<Any?, Number?> = Main.TIntegerJsBiFunction<String?>() as Main.JsBiFunction<Any?, Number?>
    val doubleDoubleJsBiFunction: Main.JsBiFunction<Any?, Number?> = Main.DoubleDoubleJsBiFunction() as Main.JsBiFunction<Any?, Number?>
@@ -335,16 +335,16 @@ open class Main {
   }
 
   @JvmStatic
-  @ObjCName(name = "callOnFunction")
+  @ObjCName("callOnFunction")
   @JsMethod
   fun callOnFunction(
-   @ObjCName(name = "withJsfunctionMain_JsBiFunction") f: Main.JsBiFunction<Double?, Double?>?
+   @ObjCName("withJsfunctionMain_JsBiFunction") f: Main.JsBiFunction<Double?, Double?>?
   ): Double {
    return 0.0
   }
 
   @JvmStatic
-  @ObjCName(name = "testCast")
+  @ObjCName("testCast")
   fun testCast() {
    val o: Any = Main.TIntegerJsBiFunction<String?>()
    val rawTIntegerJsBiFunction: Main.TIntegerJsBiFunction<Any?>? = o as Main.TIntegerJsBiFunction<Any?>?
@@ -355,7 +355,7 @@ open class Main {
   }
 
   @JvmStatic
-  @ObjCName(name = "testNewInstance")
+  @ObjCName("testNewInstance")
   fun testNewInstance() {
    val rawTIntegerJsBiFunction: Main.TIntegerJsBiFunction<Any?> = Main.TIntegerJsBiFunction<Any?>()
    val parameterizedTIntegerJsBiFunction: Main.TIntegerJsBiFunction<String?> = Main.TIntegerJsBiFunction<String?>() as Main.TIntegerJsBiFunction<String?>
@@ -363,42 +363,42 @@ open class Main {
   }
  }
 
- @ObjCName(name = "J2ktJsfunctionMain_Function", swiftName = "JsfunctionMain_Function", exact = true)
+ @ObjCName("J2ktJsfunctionMain_Function", swiftName = "JsfunctionMain_Function", exact = true)
  @JsFunction
  fun interface Function<T, U> {
-  @ObjCName(name = "apply")
+  @ObjCName("apply")
   fun apply(
-   @ObjCName(name = "withId") u: U
+   @ObjCName("withId") u: U
   ): T
  }
 
- @ObjCName(name = "J2ktJsfunctionMain_JsFunctionInterface", swiftName = "JsfunctionMain_JsFunctionInterface", exact = true)
+ @ObjCName("J2ktJsfunctionMain_JsFunctionInterface", swiftName = "JsfunctionMain_JsFunctionInterface", exact = true)
  @JsFunction
  fun interface JsFunctionInterface {
-  @ObjCName(name = "foo")
+  @ObjCName("foo")
   fun foo(
-   @ObjCName(name = "withInt") a: Int
+   @ObjCName("withInt") a: Int
   ): Int
 
-  @ObjCName(name = "overlayMethod")
+  @ObjCName("overlayMethod")
   @JsOverlay
   fun overlayMethod(): Int {
    return this@JsFunctionInterface.foo(42)
   }
  }
 
- @ObjCName(name = "J2ktJsfunctionMain_JsFunctionImplementation", swiftName = "JsfunctionMain_JsFunctionImplementation", exact = true)
+ @ObjCName("J2ktJsfunctionMain_JsFunctionImplementation", swiftName = "JsfunctionMain_JsFunctionImplementation", exact = true)
  class JsFunctionImplementation: Main.JsFunctionInterface {
   @JvmField
-  @ObjCName(name = "field_")
+  @ObjCName("field_")
   var field: Int = 0
 
   @JvmField
-  @ObjCName(name = "storedThis_")
+  @ObjCName("storedThis_")
   var storedThis: Main.JsFunctionImplementation? = null
 
   @JvmField
-  @ObjCName(name = "anotherStoredThis_")
+  @ObjCName("anotherStoredThis_")
   var anotherStoredThis: Main.JsFunctionImplementation? = null
 
   internal constructor() {
@@ -406,12 +406,12 @@ open class Main {
    this.anotherStoredThis = this as Main.JsFunctionImplementation
   }
 
-  @ObjCName(name = "bar")
+  @ObjCName("bar")
   fun bar(): Int {
    return 0
   }
 
-  @ObjCName(name = "fun")
+  @ObjCName("fun")
   fun `fun`(): Int {
    this.field = 1
    return this.bar() + this.foo(1)
@@ -422,9 +422,9 @@ open class Main {
   }
  }
 
- @ObjCName(name = "J2ktJsfunctionMain_TestCaptureOuterParametricClass", swiftName = "JsfunctionMain_TestCaptureOuterParametricClass", exact = true)
+ @ObjCName("J2ktJsfunctionMain_TestCaptureOuterParametricClass", swiftName = "JsfunctionMain_TestCaptureOuterParametricClass", exact = true)
  open class TestCaptureOuterParametricClass<T> internal constructor() {
-  @ObjCName(name = "test")
+  @ObjCName("test")
   open fun test() {
    val f: Main.Function<Any?, Any?> = Main.Function<Any?, Any?> { `object`: Any? ->
     return@Function ArrayList<T>()
@@ -432,86 +432,86 @@ open class Main {
   }
  }
 
- @ObjCName(name = "J2ktJsfunctionMain_JsFunctionVarargs", swiftName = "JsfunctionMain_JsFunctionVarargs", exact = true)
+ @ObjCName("J2ktJsfunctionMain_JsFunctionVarargs", swiftName = "JsfunctionMain_JsFunctionVarargs", exact = true)
  @JsFunction
  fun interface JsFunctionVarargs {
-  @ObjCName(name = "m")
+  @ObjCName("m")
   fun m(
-   @ObjCName(name = "withInt") i: Int,
-   vararg @ObjCName(name = "withIntArray") numbers: Int
+   @ObjCName("withInt") i: Int,
+   vararg @ObjCName("withIntArray") numbers: Int
   ): Int
  }
 
- @ObjCName(name = "J2ktJsfunctionMain_ForEachCallBack", swiftName = "JsfunctionMain_ForEachCallBack", exact = true)
+ @ObjCName("J2ktJsfunctionMain_ForEachCallBack", swiftName = "JsfunctionMain_ForEachCallBack", exact = true)
  @JsFunction
  fun interface ForEachCallBack<T> {
-  @ObjCName(name = "onInvoke")
+  @ObjCName("onInvoke")
   fun onInvoke(
-   @ObjCName(name = "withId") p0: T,
-   @ObjCName(name = "withInt") p1: Int,
-   @ObjCName(name = "withNSObjectArray") p2: Array<T>?
+   @ObjCName("withId") p0: T,
+   @ObjCName("withInt") p1: Int,
+   @ObjCName("withNSObjectArray") p2: Array<T>?
   ): Any?
  }
 
- @ObjCName(name = "J2ktJsfunctionMain_ElementalJsFunction", swiftName = "JsfunctionMain_ElementalJsFunction", exact = true)
+ @ObjCName("J2ktJsfunctionMain_ElementalJsFunction", swiftName = "JsfunctionMain_ElementalJsFunction", exact = true)
  @JsFunction
  fun interface ElementalJsFunction {
-  @ObjCName(name = "call")
+  @ObjCName("call")
   fun call(
-   vararg @ObjCName(name = "withNSObjectArray") args: Any?
+   vararg @ObjCName("withNSObjectArray") args: Any?
   ): Any?
  }
 
- @ObjCName(name = "J2ktJsfunctionMain_JsFunctionVarargsGenerics", swiftName = "JsfunctionMain_JsFunctionVarargsGenerics", exact = true)
+ @ObjCName("J2ktJsfunctionMain_JsFunctionVarargsGenerics", swiftName = "JsfunctionMain_JsFunctionVarargsGenerics", exact = true)
  @JsFunction
  fun interface JsFunctionVarargsGenerics<T> {
-  @ObjCName(name = "m")
+  @ObjCName("m")
   fun m(
-   @ObjCName(name = "withInt") i: Int,
-   vararg @ObjCName(name = "withNSObjectArray") numbers: T
+   @ObjCName("withInt") i: Int,
+   vararg @ObjCName("withNSObjectArray") numbers: T
   ): Int
  }
 
- @ObjCName(name = "J2ktJsfunctionMain_SimpleJsFunction", swiftName = "JsfunctionMain_SimpleJsFunction", exact = true)
+ @ObjCName("J2ktJsfunctionMain_SimpleJsFunction", swiftName = "JsfunctionMain_SimpleJsFunction", exact = true)
  @JsFunction
  fun interface SimpleJsFunction {
-  @ObjCName(name = "m")
+  @ObjCName("m")
   fun m()
  }
 
- @ObjCName(name = "J2ktJsfunctionMain_JsFunctionOptional", swiftName = "JsfunctionMain_JsFunctionOptional", exact = true)
+ @ObjCName("J2ktJsfunctionMain_JsFunctionOptional", swiftName = "JsfunctionMain_JsFunctionOptional", exact = true)
  @JsFunction
  fun interface JsFunctionOptional {
-  @ObjCName(name = "m")
+  @ObjCName("m")
   fun m(
-   @ObjCName(name = "withInt") i: Int,
-   @ObjCName(name = "withJavaLangDouble") @JsOptional number: Double?
+   @ObjCName("withInt") i: Int,
+   @ObjCName("withJavaLangDouble") @JsOptional number: Double?
   ): Int
  }
 
- @ObjCName(name = "J2ktJsfunctionMain_JsFunctionOptionalImpl", swiftName = "JsfunctionMain_JsFunctionOptionalImpl", exact = true)
+ @ObjCName("J2ktJsfunctionMain_JsFunctionOptionalImpl", swiftName = "JsfunctionMain_JsFunctionOptionalImpl", exact = true)
  class JsFunctionOptionalImpl internal constructor(): Main.JsFunctionOptional {
   override fun m(i: Int, @JsOptional number: Double?): Int {
    return (i.toDouble() + number!!.toDouble()).toInt()
   }
  }
 
- @ObjCName(name = "J2ktJsfunctionMain_ParametricJsFunction", swiftName = "JsfunctionMain_ParametricJsFunction", exact = true)
+ @ObjCName("J2ktJsfunctionMain_ParametricJsFunction", swiftName = "JsfunctionMain_ParametricJsFunction", exact = true)
  @JsFunction
  fun interface ParametricJsFunction<E> {
-  @ObjCName(name = "call")
+  @ObjCName("call")
   fun call(
-   @ObjCName(name = "withId") event: E
+   @ObjCName("withId") event: E
   )
  }
 
- @ObjCName(name = "J2ktJsfunctionMain_ApiWithMethodReturningParametricJsFunction", swiftName = "JsfunctionMain_ApiWithMethodReturningParametricJsFunction", exact = true)
+ @ObjCName("J2ktJsfunctionMain_ApiWithMethodReturningParametricJsFunction", swiftName = "JsfunctionMain_ApiWithMethodReturningParametricJsFunction", exact = true)
  interface ApiWithMethodReturningParametricJsFunction {
-  @ObjCName(name = "anApi")
+  @ObjCName("anApi")
   fun <T> anApi(): Main.ParametricJsFunction<T>?
  }
 
- @ObjCName(name = "J2ktJsfunctionMain_Implementor", swiftName = "JsfunctionMain_Implementor", exact = true)
+ @ObjCName("J2ktJsfunctionMain_Implementor", swiftName = "JsfunctionMain_Implementor", exact = true)
  open class Implementor internal constructor(): Main.ApiWithMethodReturningParametricJsFunction {
   @JsMethod
   override fun <T> anApi(): Main.ParametricJsFunction<T>? {
@@ -519,14 +519,14 @@ open class Main {
   }
  }
 
- @ObjCName(name = "J2ktJsfunctionMain_ParamtericImplementation", swiftName = "JsfunctionMain_ParamtericImplementation", exact = true)
+ @ObjCName("J2ktJsfunctionMain_ParamtericImplementation", swiftName = "JsfunctionMain_ParamtericImplementation", exact = true)
  class ParamtericImplementation<T> internal constructor(): Main.ParametricJsFunction<T> {
   override fun call(t: T) {
    val o: Any? = t as T
   }
  }
 
- @ObjCName(name = "J2ktJsfunctionMain_ClassWithJsFunctionProperty", swiftName = "JsfunctionMain_ClassWithJsFunctionProperty", exact = true)
+ @ObjCName("J2ktJsfunctionMain_ClassWithJsFunctionProperty", swiftName = "JsfunctionMain_ClassWithJsFunctionProperty", exact = true)
  open class ClassWithJsFunctionProperty internal constructor() {
   @JvmField
   internal var function_pp_jsfunction: Main.ParametricJsFunction<String?>? = null
@@ -537,31 +537,31 @@ open class Main {
   }
  }
 
- @ObjCName(name = "J2ktJsfunctionMain_JsBiFunction", swiftName = "JsfunctionMain_JsBiFunction", exact = true)
+ @ObjCName("J2ktJsfunctionMain_JsBiFunction", swiftName = "JsfunctionMain_JsBiFunction", exact = true)
  @JsFunction
  fun interface JsBiFunction<T, S: Number?> {
-  @ObjCName(name = "apply")
+  @ObjCName("apply")
   fun apply(
-   @ObjCName(name = "withId") t: T,
-   @ObjCName(name = "withNSNumber") s: S
+   @ObjCName("withId") t: T,
+   @ObjCName("withNSNumber") s: S
   ): T
  }
 
- @ObjCName(name = "J2ktJsfunctionMain_DoubleDoubleJsBiFunction", swiftName = "JsfunctionMain_DoubleDoubleJsBiFunction", exact = true)
+ @ObjCName("J2ktJsfunctionMain_DoubleDoubleJsBiFunction", swiftName = "JsfunctionMain_DoubleDoubleJsBiFunction", exact = true)
  class DoubleDoubleJsBiFunction: Main.JsBiFunction<Double?, Double?> {
   override fun apply(d: Double?, i: Double?): Double? {
    return d
   }
  }
 
- @ObjCName(name = "J2ktJsfunctionMain_TIntegerJsBiFunction", swiftName = "JsfunctionMain_TIntegerJsBiFunction", exact = true)
+ @ObjCName("J2ktJsfunctionMain_TIntegerJsBiFunction", swiftName = "JsfunctionMain_TIntegerJsBiFunction", exact = true)
  class TIntegerJsBiFunction<T>: Main.JsBiFunction<T, Int?> {
   override fun apply(element: T, i: Int?): T {
    return null as T
   }
  }
 
- @ObjCName(name = "J2ktJsfunctionMain_TestJsFunctionInJsOverlayCapturingOuter", swiftName = "JsfunctionMain_TestJsFunctionInJsOverlayCapturingOuter", exact = true)
+ @ObjCName("J2ktJsfunctionMain_TestJsFunctionInJsOverlayCapturingOuter", swiftName = "JsfunctionMain_TestJsFunctionInJsOverlayCapturingOuter", exact = true)
  @JsType(name = "Array", namespace = JsPackage.GLOBAL, isNative = true)
  open class TestJsFunctionInJsOverlayCapturingOuter internal constructor() {
   @JsOverlay
@@ -577,12 +577,12 @@ open class Main {
   internal fun sort_pp_jsfunction(func: Main.JsFunctionInterface?) {}
  }
 
- @ObjCName(name = "J2ktJsfunctionMain_RecursiveParametricJsFunctionImplementation", swiftName = "JsfunctionMain_RecursiveParametricJsFunctionImplementation", exact = true)
+ @ObjCName("J2ktJsfunctionMain_RecursiveParametricJsFunctionImplementation", swiftName = "JsfunctionMain_RecursiveParametricJsFunctionImplementation", exact = true)
  class RecursiveParametricJsFunctionImplementation<T: Main.ParametricJsFunction<T>?> internal constructor(): Main.ParametricJsFunction<T> {
   override fun call(t: T) {}
  }
 
- @ObjCName(name = "J2ktJsfunctionMain_RecursiveJsFunctionImplementation", swiftName = "JsfunctionMain_RecursiveJsFunctionImplementation", exact = true)
+ @ObjCName("J2ktJsfunctionMain_RecursiveJsFunctionImplementation", swiftName = "JsfunctionMain_RecursiveJsFunctionImplementation", exact = true)
  class RecursiveJsFunctionImplementation internal constructor(): Main.ParametricJsFunction<Main.RecursiveJsFunctionImplementation?> {
   override fun call(t: Main.RecursiveJsFunctionImplementation?) {}
  }

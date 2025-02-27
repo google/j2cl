@@ -26,31 +26,31 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktJ2ktLambdaParameterTypeInference", swiftName = "J2ktLambdaParameterTypeInference", exact = true)
+@ObjCName("J2ktJ2ktLambdaParameterTypeInference", swiftName = "J2ktLambdaParameterTypeInference", exact = true)
 open class LambdaParameterTypeInference {
- @ObjCName(name = "J2ktJ2ktLambdaParameterTypeInferenceCompanion", swiftName = "J2ktLambdaParameterTypeInferenceCompanion", exact = true)
+ @ObjCName("J2ktJ2ktLambdaParameterTypeInferenceCompanion", swiftName = "J2ktLambdaParameterTypeInferenceCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName(name = "wrap")
+  @ObjCName("wrap")
   fun <T> wrap(
-   @ObjCName(name = "withJ2ktLambdaParameterTypeInference_Consumer") consumer: LambdaParameterTypeInference.Consumer<T>?
+   @ObjCName("withJ2ktLambdaParameterTypeInference_Consumer") consumer: LambdaParameterTypeInference.Consumer<T>?
   ): LambdaParameterTypeInference.Consumer<T>? {
    throw RuntimeException()
   }
 
   @JvmStatic
-  @ObjCName(name = "add")
+  @ObjCName("add")
   fun <T> add(
-   @ObjCName(name = "withJ2ktLambdaParameterTypeInference_Supplier") supplier: LambdaParameterTypeInference.Supplier<T>?,
-   @ObjCName(name = "withJ2ktLambdaParameterTypeInference_Consumer") consumer: LambdaParameterTypeInference.Consumer<in T>?
+   @ObjCName("withJ2ktLambdaParameterTypeInference_Supplier") supplier: LambdaParameterTypeInference.Supplier<T>?,
+   @ObjCName("withJ2ktLambdaParameterTypeInference_Consumer") consumer: LambdaParameterTypeInference.Consumer<in T>?
   ) {
    throw RuntimeException()
   }
 
   @JvmStatic
-  @ObjCName(name = "test")
+  @ObjCName("test")
   fun <T> test(
-   @ObjCName(name = "withJ2ktLambdaParameterTypeInference_Supplier") supplier: LambdaParameterTypeInference.Supplier<out T>?
+   @ObjCName("withJ2ktLambdaParameterTypeInference_Supplier") supplier: LambdaParameterTypeInference.Supplier<out T>?
   ) {
    LambdaParameterTypeInference.add/* <capture#1-of out T> */(
     supplier,
@@ -62,17 +62,17 @@ open class LambdaParameterTypeInference {
   }
  }
 
- @ObjCName(name = "J2ktJ2ktLambdaParameterTypeInference_Supplier", swiftName = "J2ktLambdaParameterTypeInference_Supplier", exact = true)
+ @ObjCName("J2ktJ2ktLambdaParameterTypeInference_Supplier", swiftName = "J2ktLambdaParameterTypeInference_Supplier", exact = true)
  fun interface Supplier<T> {
-  @ObjCName(name = "get")
+  @ObjCName("get")
   fun get(): T
  }
 
- @ObjCName(name = "J2ktJ2ktLambdaParameterTypeInference_Consumer", swiftName = "J2ktLambdaParameterTypeInference_Consumer", exact = true)
+ @ObjCName("J2ktJ2ktLambdaParameterTypeInference_Consumer", swiftName = "J2ktLambdaParameterTypeInference_Consumer", exact = true)
  fun interface Consumer<T> {
-  @ObjCName(name = "accept")
+  @ObjCName("accept")
   fun accept(
-   @ObjCName(name = "withId") t: T
+   @ObjCName("withId") t: T
   )
  }
 }

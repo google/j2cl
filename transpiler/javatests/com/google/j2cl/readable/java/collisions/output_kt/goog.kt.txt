@@ -28,14 +28,14 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktCollisionsgoog", swiftName = "Collisionsgoog", exact = true)
+@ObjCName("J2ktCollisionsgoog", swiftName = "Collisionsgoog", exact = true)
 open class goog
 
 // native class KtBlah
 
-@ObjCName(name = "J2ktCollisionsKtBlah", swiftName = "CollisionsKtBlah", exact = true)
+@ObjCName("J2ktCollisionsKtBlah", swiftName = "CollisionsKtBlah", exact = true)
 open class KtBlah internal constructor() {
- @ObjCName(name = "J2ktCollisionsKtBlahCompanion", swiftName = "CollisionsKtBlahCompanion", exact = true)
+ @ObjCName("J2ktCollisionsKtBlahCompanion", swiftName = "CollisionsKtBlahCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun m() {}
@@ -47,10 +47,10 @@ open class KtBlah internal constructor() {
  }
 }
 
-@ObjCName(name = "J2ktCollisionsfoo", swiftName = "Collisionsfoo", exact = true)
+@ObjCName("J2ktCollisionsfoo", swiftName = "Collisionsfoo", exact = true)
 open class foo internal constructor()
 
-@ObjCName(name = "J2ktCollisionsbar", swiftName = "Collisionsbar", exact = true)
+@ObjCName("J2ktCollisionsbar", swiftName = "Collisionsbar", exact = true)
 open class bar internal constructor() {
  init {
   val foo: Int = 0
@@ -68,7 +68,7 @@ open class bar internal constructor() {
  }
 }
 
-@ObjCName(name = "J2ktCollisionsOther", swiftName = "CollisionsOther", exact = true)
+@ObjCName("J2ktCollisionsOther", swiftName = "CollisionsOther", exact = true)
 open class Other<T> internal constructor() {
  init {
   val T_1: Int = 3
@@ -82,7 +82,7 @@ open class Other<T> internal constructor() {
  }
 }
 
-@ObjCName(name = "J2ktCollisionsT", swiftName = "CollisionsT", exact = true)
+@ObjCName("J2ktCollisionsT", swiftName = "CollisionsT", exact = true)
 open class T<T: Number?> internal constructor() {
  internal open fun m_pp_collisions(): T {
   return null as T

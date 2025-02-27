@@ -24,17 +24,17 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktQualifiedsupercallParent", swiftName = "QualifiedsupercallParent", exact = true)
+@ObjCName("J2ktQualifiedsupercallParent", swiftName = "QualifiedsupercallParent", exact = true)
 open class Parent internal constructor() {
- @ObjCName(name = "fun")
+ @ObjCName("fun")
  open fun `fun`() {}
 }
 
-@ObjCName(name = "J2ktQualifiedsupercallQualifiedSuperCall", swiftName = "QualifiedsupercallQualifiedSuperCall", exact = true)
+@ObjCName("J2ktQualifiedsupercallQualifiedSuperCall", swiftName = "QualifiedsupercallQualifiedSuperCall", exact = true)
 open class QualifiedSuperCall: Parent() {
- @ObjCName(name = "J2ktQualifiedsupercallQualifiedSuperCall_InnerClass", swiftName = "QualifiedsupercallQualifiedSuperCall_InnerClass", exact = true)
+ @ObjCName("J2ktQualifiedsupercallQualifiedSuperCall_InnerClass", swiftName = "QualifiedsupercallQualifiedSuperCall_InnerClass", exact = true)
  open inner class InnerClass {
-  @ObjCName(name = "test")
+  @ObjCName("test")
   open fun test() {
    super<Parent>@QualifiedSuperCall.`fun`()
   }

@@ -29,22 +29,22 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 import packageinfo.thirdpartylib.Bar
 
-@ObjCName(name = "J2ktPackageinfoOuter", swiftName = "PackageinfoOuter", exact = true)
+@ObjCName("J2ktPackageinfoOuter", swiftName = "PackageinfoOuter", exact = true)
 @JsType
 open class Outer {
- @ObjCName(name = "J2ktPackageinfoOuterCompanion", swiftName = "PackageinfoOuterCompanion", exact = true)
+ @ObjCName("J2ktPackageinfoOuterCompanion", swiftName = "PackageinfoOuterCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName(name = "main")
+  @ObjCName("main")
   fun main(
-   vararg @ObjCName(name = "withNSStringArray") args: String?
+   vararg @ObjCName("withNSStringArray") args: String?
   ) {
    val args_1: Array<String?>? = args as Array<String?>?
    Bar.bar()
   }
  }
 
- @ObjCName(name = "J2ktPackageinfoOuter_Inner", swiftName = "PackageinfoOuter_Inner", exact = true)
+ @ObjCName("J2ktPackageinfoOuter_Inner", swiftName = "PackageinfoOuter_Inner", exact = true)
  @JsType
  open inner class Inner
 }

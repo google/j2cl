@@ -25,9 +25,9 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktLabelstatementLabeledStatement", swiftName = "LabelstatementLabeledStatement", exact = true)
+@ObjCName("J2ktLabelstatementLabeledStatement", swiftName = "LabelstatementLabeledStatement", exact = true)
 open class LabeledStatement {
- @ObjCName(name = "loopStatements")
+ @ObjCName("loopStatements")
  open fun loopStatements() {
   while (true) {
    break
@@ -42,7 +42,7 @@ open class LabeledStatement {
   }
  }
 
- @ObjCName(name = "simpleStatement")
+ @ObjCName("simpleStatement")
  open fun simpleStatement() {
   this.foo()
   do {
@@ -60,15 +60,15 @@ open class LabeledStatement {
   return
  }
 
- @ObjCName(name = "block")
+ @ObjCName("block")
  open fun block() {}
 
- @ObjCName(name = "ifStatement")
+ @ObjCName("ifStatement")
  open fun ifStatement() {
   if (true) {}
  }
 
- @ObjCName(name = "switchStatement")
+ @ObjCName("switchStatement")
  open fun switchStatement() {
   LABEL@ do {
    CASE@ do {
@@ -90,7 +90,7 @@ open class LabeledStatement {
   } while (false)
  }
 
- @ObjCName(name = "nestedScopes")
+ @ObjCName("nestedScopes")
  open fun nestedScopes() {
   object : Any() {
    internal fun m_pp_labelstatement() {}

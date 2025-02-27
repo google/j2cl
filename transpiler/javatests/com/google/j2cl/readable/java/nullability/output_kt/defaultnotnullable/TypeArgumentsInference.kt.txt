@@ -26,26 +26,26 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktNullabilityDefaultnotnullableTypeArgumentsInference", swiftName = "NullabilityDefaultnotnullableTypeArgumentsInference", exact = true)
+@ObjCName("J2ktNullabilityDefaultnotnullableTypeArgumentsInference", swiftName = "NullabilityDefaultnotnullableTypeArgumentsInference", exact = true)
 open class TypeArgumentsInference {
- @ObjCName(name = "J2ktNullabilityDefaultnotnullableTypeArgumentsInferenceCompanion", swiftName = "NullabilityDefaultnotnullableTypeArgumentsInferenceCompanion", exact = true)
+ @ObjCName("J2ktNullabilityDefaultnotnullableTypeArgumentsInferenceCompanion", swiftName = "NullabilityDefaultnotnullableTypeArgumentsInferenceCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName(name = "wildcardPair")
+  @ObjCName("wildcardPair")
   fun <K> wildcardPair(): TypeArgumentsInference.Pair<K, *> {
    return TypeArgumentsInference.Pair<K, Any>()
   }
 
   @JvmStatic
-  @ObjCName(name = "pairIdentity")
+  @ObjCName("pairIdentity")
   fun <K, V> pairIdentity(
-   @ObjCName(name = "withNullabilityDefaultnotnullableTypeArgumentsInference_Pair") pair: TypeArgumentsInference.Pair<K, V>
+   @ObjCName("withNullabilityDefaultnotnullableTypeArgumentsInference_Pair") pair: TypeArgumentsInference.Pair<K, V>
   ): TypeArgumentsInference.Pair<K, V> {
    return pair
   }
 
   @JvmStatic
-  @ObjCName(name = "wildcardPairAndIdentity")
+  @ObjCName("wildcardPairAndIdentity")
   fun <K> wildcardPairAndIdentity(): TypeArgumentsInference.Pair<K, *> {
    return TypeArgumentsInference.pairIdentity<K, Any>(
     TypeArgumentsInference.wildcardPair<K>() as TypeArgumentsInference.Pair<K, Any>,
@@ -53,6 +53,6 @@ open class TypeArgumentsInference {
   }
  }
 
- @ObjCName(name = "J2ktNullabilityDefaultnotnullableTypeArgumentsInference_Pair", swiftName = "NullabilityDefaultnotnullableTypeArgumentsInference_Pair", exact = true)
+ @ObjCName("J2ktNullabilityDefaultnotnullableTypeArgumentsInference_Pair", swiftName = "NullabilityDefaultnotnullableTypeArgumentsInference_Pair", exact = true)
  class Pair<K, V>
 }

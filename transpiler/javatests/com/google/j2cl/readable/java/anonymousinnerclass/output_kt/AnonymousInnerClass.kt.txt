@@ -26,17 +26,17 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktAnonymousinnerclassA", swiftName = "AnonymousinnerclassA", exact = true)
+@ObjCName("J2ktAnonymousinnerclassA", swiftName = "AnonymousinnerclassA", exact = true)
 open class A internal constructor() {
- @ObjCName(name = "J2ktAnonymousinnerclassA_B", swiftName = "AnonymousinnerclassA_B", exact = true)
+ @ObjCName("J2ktAnonymousinnerclassA_B", swiftName = "AnonymousinnerclassA_B", exact = true)
  open inner class B internal constructor()
 }
 
-@ObjCName(name = "J2ktAnonymousinnerclassAnonymousInnerClass", swiftName = "AnonymousinnerclassAnonymousInnerClass", exact = true)
+@ObjCName("J2ktAnonymousinnerclassAnonymousInnerClass", swiftName = "AnonymousinnerclassAnonymousInnerClass", exact = true)
 open class AnonymousInnerClass {
- @ObjCName(name = "test")
+ @ObjCName("test")
  open fun test(
-  @ObjCName(name = "withInt") arg: Int
+  @ObjCName("withInt") arg: Int
  ) {
   val ic: AnonymousInnerClass.InnerClass = object : InnerClass() {}
   val a: A = A()
@@ -48,6 +48,6 @@ open class AnonymousInnerClass {
   val c: C = object : C() {}
  }
 
- @ObjCName(name = "J2ktAnonymousinnerclassAnonymousInnerClass_InnerClass", swiftName = "AnonymousinnerclassAnonymousInnerClass_InnerClass", exact = true)
+ @ObjCName("J2ktAnonymousinnerclassAnonymousInnerClass_InnerClass", swiftName = "AnonymousinnerclassAnonymousInnerClass_InnerClass", exact = true)
  open inner class InnerClass
 }

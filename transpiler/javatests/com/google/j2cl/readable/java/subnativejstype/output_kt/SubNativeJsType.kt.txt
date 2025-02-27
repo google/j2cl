@@ -27,19 +27,19 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktSubnativejstypeMyNativeJsType", swiftName = "SubnativejstypeMyNativeJsType", exact = true)
+@ObjCName("J2ktSubnativejstypeMyNativeJsType", swiftName = "SubnativejstypeMyNativeJsType", exact = true)
 @JsType(namespace = "test.foo", isNative = true)
 open class MyNativeJsType {
  constructor(
-  @ObjCName(name = "Int") x: Int
+  @ObjCName("Int") x: Int
  )
 }
 
-@ObjCName(name = "J2ktSubnativejstypeSubNativeJsType", swiftName = "SubnativejstypeSubNativeJsType", exact = true)
+@ObjCName("J2ktSubnativejstypeSubNativeJsType", swiftName = "SubnativejstypeSubNativeJsType", exact = true)
 open class SubNativeJsType: MyNativeJsType {
  @JsConstructor
  constructor(
-  @ObjCName(name = "Int") x: Int
+  @ObjCName("Int") x: Int
  ): super(
   x + 1,
  )

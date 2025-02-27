@@ -28,21 +28,21 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktNativetypeMyTypedArray", swiftName = "NativetypeMyTypedArray", exact = true)
+@ObjCName("J2ktNativetypeMyTypedArray", swiftName = "NativetypeMyTypedArray", exact = true)
 @JsType(name = "Array", namespace = JsPackage.GLOBAL, isNative = true)
 open class MyTypedArray<T> {
  private var length: Int = 0
 
- @ObjCName(name = "size")
+ @ObjCName("size")
  @JsOverlay
  fun size(): Int {
   return this.length
  }
 
- @ObjCName(name = "get")
+ @ObjCName("get")
  @JsOverlay
  fun get(
-  @ObjCName(name = "withInt") index: Int
+  @ObjCName("withInt") index: Int
  ): T {
   return null as T
  }

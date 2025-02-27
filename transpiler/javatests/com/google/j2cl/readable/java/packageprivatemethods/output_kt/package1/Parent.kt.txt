@@ -26,17 +26,17 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 import packageprivatemethods.package1.SuperParent
 
-@ObjCName(name = "J2ktPackageprivatemethodsPackage1Parent", swiftName = "PackageprivatemethodsPackage1Parent", exact = true)
+@ObjCName("J2ktPackageprivatemethodsPackage1Parent", swiftName = "PackageprivatemethodsPackage1Parent", exact = true)
 abstract class Parent: SuperParent() {
  override fun overrideInParentExposedInChild_pp_packageprivatemethods_package1(a: Int): Int {
   return a
  }
 
- @ObjCName(name = "exposedAbstractInParent")
+ @ObjCName("exposedAbstractInParent")
  public abstract fun exposedAbstractInParent(
-  @ObjCName(name = "withInt") a: Int,
-  @ObjCName(name = "withInt") b: Int,
-  @ObjCName(name = "withInt") c: Int
+  @ObjCName("withInt") a: Int,
+  @ObjCName("withInt") b: Int,
+  @ObjCName("withInt") c: Int
  ): Int
 
  override fun exposedAbstractInParent_pp_packageprivatemethods_package1(arg0: Int, arg1: Int, arg2: Int): Int {

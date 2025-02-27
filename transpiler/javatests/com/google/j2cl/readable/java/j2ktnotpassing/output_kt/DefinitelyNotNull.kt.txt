@@ -29,9 +29,9 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktJ2ktnotpassingDefinitelyNotNull", swiftName = "J2ktnotpassingDefinitelyNotNull", exact = true)
+@ObjCName("J2ktJ2ktnotpassingDefinitelyNotNull", swiftName = "J2ktnotpassingDefinitelyNotNull", exact = true)
 open class DefinitelyNotNull {
- @ObjCName(name = "J2ktJ2ktnotpassingDefinitelyNotNull_Ordering", swiftName = "J2ktnotpassingDefinitelyNotNull_Ordering", exact = true)
+ @ObjCName("J2ktJ2ktnotpassingDefinitelyNotNull_Ordering", swiftName = "J2ktnotpassingDefinitelyNotNull_Ordering", exact = true)
  open class Ordering<T> internal constructor() {
   internal open fun <S: T> reverse_pp_j2ktnotpassing(): DefinitelyNotNull.Ordering<S> {
    throw RuntimeException()
@@ -42,7 +42,7 @@ open class DefinitelyNotNull {
   }
  }
 
- @ObjCName(name = "J2ktJ2ktnotpassingDefinitelyNotNull_NullsFirstOrdering", swiftName = "J2ktnotpassingDefinitelyNotNull_NullsFirstOrdering", exact = true)
+ @ObjCName("J2ktJ2ktnotpassingDefinitelyNotNull_NullsFirstOrdering", swiftName = "J2ktnotpassingDefinitelyNotNull_NullsFirstOrdering", exact = true)
  inner class NullsFirstOrdering<T> constructor(ordering: DefinitelyNotNull.Ordering<in T>): DefinitelyNotNull.Ordering<T?>() {
   @JvmField
   internal val ordering_pp_j2ktnotpassing: DefinitelyNotNull.Ordering<in T>
@@ -51,12 +51,12 @@ open class DefinitelyNotNull {
    this.ordering_pp_j2ktnotpassing = ordering
   }
 
-  @ObjCName(name = "reverse")
+  @ObjCName("reverse")
   public fun <S: T?> reverse(): DefinitelyNotNull.Ordering<S> {
    return this.ordering_pp_j2ktnotpassing.reverse_pp_j2ktnotpassing/* <capture#1-of in T> */().nullsLast_pp_j2ktnotpassing<S>() as DefinitelyNotNull.Ordering<S>
   }
 
-  @ObjCName(name = "nullsLast")
+  @ObjCName("nullsLast")
   public fun <S: T?> nullsLast(): DefinitelyNotNull.Ordering<S?> {
    return this.ordering_pp_j2ktnotpassing.nullsLast_pp_j2ktnotpassing<S?>()
   }
@@ -70,30 +70,30 @@ open class DefinitelyNotNull {
   }
  }
 
- @ObjCName(name = "J2ktJ2ktnotpassingDefinitelyNotNull_ImmutableList", swiftName = "J2ktnotpassingDefinitelyNotNull_ImmutableList", exact = true)
+ @ObjCName("J2ktJ2ktnotpassingDefinitelyNotNull_ImmutableList", swiftName = "J2ktnotpassingDefinitelyNotNull_ImmutableList", exact = true)
  open class ImmutableList<E: Any> {
-  @ObjCName(name = "J2ktJ2ktnotpassingDefinitelyNotNull_ImmutableListCompanion", swiftName = "J2ktnotpassingDefinitelyNotNull_ImmutableListCompanion", exact = true)
+  @ObjCName("J2ktJ2ktnotpassingDefinitelyNotNull_ImmutableListCompanion", swiftName = "J2ktnotpassingDefinitelyNotNull_ImmutableListCompanion", exact = true)
   companion object {
    @JvmStatic
-   @ObjCName(name = "copyOf")
+   @ObjCName("copyOf")
    fun <E: Any> copyOf(
-    @ObjCName(name = "withJavaLangIterable") iterable: MutableIterable<E>
+    @ObjCName("withJavaLangIterable") iterable: MutableIterable<E>
    ): DefinitelyNotNull.ImmutableList<E> {
     throw RuntimeException()
    }
 
    @JvmStatic
-   @ObjCName(name = "copyOfNullable")
+   @ObjCName("copyOfNullable")
    fun <E> copyOfNullable(
-    @ObjCName(name = "withJavaLangIterable") iterable: MutableIterable<E>
+    @ObjCName("withJavaLangIterable") iterable: MutableIterable<E>
    ): DefinitelyNotNull.ImmutableList<E & Any> {
     return DefinitelyNotNull.ImmutableList.copyOf<E & Any>(iterable)
    }
 
    @JvmStatic
-   @ObjCName(name = "copyOfNullableWithInvalidBounds")
+   @ObjCName("copyOfNullableWithInvalidBounds")
    fun <E> copyOfNullableWithInvalidBounds(
-    @ObjCName(name = "withJavaLangIterable") iterable: MutableIterable<E>
+    @ObjCName("withJavaLangIterable") iterable: MutableIterable<E>
    ): DefinitelyNotNull.ImmutableList<E & Any> {
     return DefinitelyNotNull.ImmutableList.copyOf<E & Any>(
      iterable as MutableIterable<E>,

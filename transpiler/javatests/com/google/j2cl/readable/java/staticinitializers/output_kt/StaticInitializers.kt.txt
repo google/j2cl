@@ -26,20 +26,20 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktStaticinitializersStaticInitializers", swiftName = "StaticinitializersStaticInitializers", exact = true)
+@ObjCName("J2ktStaticinitializersStaticInitializers", swiftName = "StaticinitializersStaticInitializers", exact = true)
 open class StaticInitializers {
- @ObjCName(name = "J2ktStaticinitializersStaticInitializersCompanion", swiftName = "StaticinitializersStaticInitializersCompanion", exact = true)
+ @ObjCName("J2ktStaticinitializersStaticInitializersCompanion", swiftName = "StaticinitializersStaticInitializersCompanion", exact = true)
  companion object {
   @JvmField
-  @ObjCName(name = "a_")
+  @ObjCName("a_")
   var a: Int = 5
 
   @JvmField
-  @ObjCName(name = "b_")
+  @ObjCName("b_")
   var b: Int = StaticInitializers.a * 2
 
   @JvmField
-  @ObjCName(name = "c_")
+  @ObjCName("c_")
   val c: Int
 
   init {

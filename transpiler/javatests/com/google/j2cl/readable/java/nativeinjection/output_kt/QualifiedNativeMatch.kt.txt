@@ -28,22 +28,22 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktNativeinjectionQualifiedNativeMatch", swiftName = "NativeinjectionQualifiedNativeMatch", exact = true)
+@ObjCName("J2ktNativeinjectionQualifiedNativeMatch", swiftName = "NativeinjectionQualifiedNativeMatch", exact = true)
 @JsType(name = "SomeOtherName", namespace = "some.other.pkg")
 class QualifiedNativeMatch {
- @ObjCName(name = "J2ktNativeinjectionQualifiedNativeMatchCompanion", swiftName = "NativeinjectionQualifiedNativeMatchCompanion", exact = true)
+ @ObjCName("J2ktNativeinjectionQualifiedNativeMatchCompanion", swiftName = "NativeinjectionQualifiedNativeMatchCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName(name = "getValue")
+  @ObjCName("getValue")
   external fun getValue(): Int
  }
 
- @ObjCName(name = "J2ktNativeinjectionQualifiedNativeMatch_InnerClass", swiftName = "NativeinjectionQualifiedNativeMatch_InnerClass", exact = true)
+ @ObjCName("J2ktNativeinjectionQualifiedNativeMatch_InnerClass", swiftName = "NativeinjectionQualifiedNativeMatch_InnerClass", exact = true)
  class InnerClass {
-  @ObjCName(name = "J2ktNativeinjectionQualifiedNativeMatch_InnerClassCompanion", swiftName = "NativeinjectionQualifiedNativeMatch_InnerClassCompanion", exact = true)
+  @ObjCName("J2ktNativeinjectionQualifiedNativeMatch_InnerClassCompanion", swiftName = "NativeinjectionQualifiedNativeMatch_InnerClassCompanion", exact = true)
   companion object {
    @JvmStatic
-   @ObjCName(name = "getOtherValue")
+   @ObjCName("getOtherValue")
    @JsMethod
    external fun getOtherValue(): Int
   }

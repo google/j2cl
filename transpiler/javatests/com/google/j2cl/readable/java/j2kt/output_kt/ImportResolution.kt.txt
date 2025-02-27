@@ -24,9 +24,9 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktJ2ktImportResolution", swiftName = "J2ktImportResolution", exact = true)
+@ObjCName("J2ktJ2ktImportResolution", swiftName = "J2ktImportResolution", exact = true)
 open class ImportResolution {
- @ObjCName(name = "J2ktJ2ktImportResolution_Parent", swiftName = "J2ktImportResolution_Parent", exact = true)
+ @ObjCName("J2ktJ2ktImportResolution_Parent", swiftName = "J2ktImportResolution_Parent", exact = true)
  open class Parent internal constructor() {
   internal open fun testJavaLang_pp_j2kt(string: kotlin.String?) {
    string!!.java_trim()
@@ -36,7 +36,7 @@ open class ImportResolution {
    string!!.local_pp_j2kt()
   }
 
-  @ObjCName(name = "J2ktJ2ktImportResolution_Parent_String", swiftName = "J2ktImportResolution_Parent_String", exact = true)
+  @ObjCName("J2ktJ2ktImportResolution_Parent_String", swiftName = "J2ktImportResolution_Parent_String", exact = true)
   open inner class String internal constructor() {
    internal open fun local_pp_j2kt() {}
 
@@ -50,7 +50,7 @@ open class ImportResolution {
   }
  }
 
- @ObjCName(name = "J2ktJ2ktImportResolution_Child", swiftName = "J2ktImportResolution_Child", exact = true)
+ @ObjCName("J2ktJ2ktImportResolution_Child", swiftName = "J2ktImportResolution_Child", exact = true)
  open class Child internal constructor(): ImportResolution.Parent() {
   override fun testJavaLang_pp_j2kt(string: kotlin.String?) {
    string!!.java_trim()
@@ -61,7 +61,7 @@ open class ImportResolution {
   }
  }
 
- @ObjCName(name = "J2ktJ2ktImportResolution_GrandChild", swiftName = "J2ktImportResolution_GrandChild", exact = true)
+ @ObjCName("J2ktJ2ktImportResolution_GrandChild", swiftName = "J2ktImportResolution_GrandChild", exact = true)
  open class GrandChild internal constructor(): ImportResolution.Child() {
   override fun testJavaLang_pp_j2kt(string: kotlin.String?) {
    string!!.java_trim()

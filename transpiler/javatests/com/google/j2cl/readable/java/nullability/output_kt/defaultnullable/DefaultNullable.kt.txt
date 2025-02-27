@@ -39,7 +39,7 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktNullabilityDefaultnullableDefaultNullable", swiftName = "NullabilityDefaultnullableDefaultNullable", exact = true)
+@ObjCName("J2ktNullabilityDefaultnullableDefaultNullable", swiftName = "NullabilityDefaultnullableDefaultNullable", exact = true)
 open class DefaultNullable {
  private var f1: String? = "Hello"
 
@@ -65,10 +65,10 @@ open class DefaultNullable {
 
  private var f12: Any = Any()
 
- @ObjCName(name = "m1")
+ @ObjCName("m1")
  open fun m1(
-  @ObjCName(name = "withNSString") a: String?,
-  @ObjCName(name = "withJavaUtilList") b: MutableList<Double?>?
+  @ObjCName("withNSString") a: String?,
+  @ObjCName("withJavaUtilList") b: MutableList<Double?>?
  ): String? {
   return ""
  }
@@ -81,18 +81,18 @@ open class DefaultNullable {
   this.f13 = Any()
  }
 
- @ObjCName(name = "m2")
+ @ObjCName("m2")
  open fun m2(
-  @ObjCName(name = "withNSString") a: String?,
-  @ObjCName(name = "withJavaUtilList") b: MutableList<Double?>?
+  @ObjCName("withNSString") a: String?,
+  @ObjCName("withJavaUtilList") b: MutableList<Double?>?
  ): String? {
   return null
  }
 
- @ObjCName(name = "m3")
+ @ObjCName("m3")
  @JsMethod
  open fun m3(
-  vararg @ObjCName(name = "withNSStringArray") args: String?
+  vararg @ObjCName("withNSStringArray") args: String?
  ) {
   val args_1: Array<String?>? = args as Array<String?>?
  }
@@ -101,7 +101,7 @@ open class DefaultNullable {
 
  internal open fun <T: DefaultNullable.NonNullableBound<T>> methodWithNonNullableBound_pp_nullability_defaultnullable() {}
 
- @ObjCName(name = "casts")
+ @ObjCName("casts")
  open fun casts() {
   val listOfString: MutableList<String?>? = null as MutableList<String?>?
   val nullableListOfString: MutableList<String?>? = null as MutableList<String?>?
@@ -112,7 +112,7 @@ open class DefaultNullable {
   val nonNullListOfNonNullString: MutableList<String>? = null as MutableList<String>?
  }
 
- @ObjCName(name = "J2ktNullabilityDefaultnullableDefaultNullableCompanion", swiftName = "NullabilityDefaultnullableDefaultNullableCompanion", exact = true)
+ @ObjCName("J2ktNullabilityDefaultnullableDefaultNullableCompanion", swiftName = "NullabilityDefaultnullableDefaultNullableCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun <N> genericNullableMethod_pp_nullability_defaultnullable(o: DefaultNullable.ParameterizedNullable<N>?, n: N?) {
@@ -295,25 +295,25 @@ open class DefaultNullable {
   internal fun accept_pp_nullability_defaultnullable(s: String?) {}
  }
 
- @ObjCName(name = "J2ktNullabilityDefaultnullableDefaultNullable_NullableBound", swiftName = "NullabilityDefaultnullableDefaultNullable_NullableBound", exact = true)
+ @ObjCName("J2ktNullabilityDefaultnullableDefaultNullable_NullableBound", swiftName = "NullabilityDefaultnullableDefaultNullable_NullableBound", exact = true)
  interface NullableBound<T: DefaultNullable.NullableBound<T>?>
 
- @ObjCName(name = "J2ktNullabilityDefaultnullableDefaultNullable_NonNullableBound", swiftName = "NullabilityDefaultnullableDefaultNullable_NonNullableBound", exact = true)
+ @ObjCName("J2ktNullabilityDefaultnullableDefaultNullable_NonNullableBound", swiftName = "NullabilityDefaultnullableDefaultNullable_NonNullableBound", exact = true)
  interface NonNullableBound<T: DefaultNullable.NonNullableBound<T>>
 
- @ObjCName(name = "J2ktNullabilityDefaultnullableDefaultNullable_NullableBoundWithNonNullArgument", swiftName = "NullabilityDefaultnullableDefaultNullable_NullableBoundWithNonNullArgument", exact = true)
+ @ObjCName("J2ktNullabilityDefaultnullableDefaultNullable_NullableBoundWithNonNullArgument", swiftName = "NullabilityDefaultnullableDefaultNullable_NullableBoundWithNonNullArgument", exact = true)
  interface NullableBoundWithNonNullArgument: DefaultNullable.NullableBound<DefaultNullable.NullableBoundWithNonNullArgument>
 
- @ObjCName(name = "J2ktNullabilityDefaultnullableDefaultNullable_NullableBoundWithNullableArgument", swiftName = "NullabilityDefaultnullableDefaultNullable_NullableBoundWithNullableArgument", exact = true)
+ @ObjCName("J2ktNullabilityDefaultnullableDefaultNullable_NullableBoundWithNullableArgument", swiftName = "NullabilityDefaultnullableDefaultNullable_NullableBoundWithNullableArgument", exact = true)
  interface NullableBoundWithNullableArgument: DefaultNullable.NullableBound<DefaultNullable.NullableBoundWithNullableArgument?>
 
- @ObjCName(name = "J2ktNullabilityDefaultnullableDefaultNullable_NonNullBoundWithNonNullArgument", swiftName = "NullabilityDefaultnullableDefaultNullable_NonNullBoundWithNonNullArgument", exact = true)
+ @ObjCName("J2ktNullabilityDefaultnullableDefaultNullable_NonNullBoundWithNonNullArgument", swiftName = "NullabilityDefaultnullableDefaultNullable_NonNullBoundWithNonNullArgument", exact = true)
  interface NonNullBoundWithNonNullArgument: DefaultNullable.NonNullableBound<DefaultNullable.NonNullBoundWithNonNullArgument>
 
- @ObjCName(name = "J2ktNullabilityDefaultnullableDefaultNullable_NonNullBoundWithNullableArgument", swiftName = "NullabilityDefaultnullableDefaultNullable_NonNullBoundWithNullableArgument", exact = true)
+ @ObjCName("J2ktNullabilityDefaultnullableDefaultNullable_NonNullBoundWithNullableArgument", swiftName = "NullabilityDefaultnullableDefaultNullable_NonNullBoundWithNullableArgument", exact = true)
  interface NonNullBoundWithNullableArgument: DefaultNullable.NonNullableBound<DefaultNullable.NonNullBoundWithNullableArgument>
 
- @ObjCName(name = "J2ktNullabilityDefaultnullableDefaultNullable_ParameterizedDefaultNullability", swiftName = "NullabilityDefaultnullableDefaultNullable_ParameterizedDefaultNullability", exact = true)
+ @ObjCName("J2ktNullabilityDefaultnullableDefaultNullable_ParameterizedDefaultNullability", swiftName = "NullabilityDefaultnullableDefaultNullable_ParameterizedDefaultNullability", exact = true)
  open class ParameterizedDefaultNullability<N> {
   @JvmField
   internal var nullable_pp_nullability_defaultnullable: N? = null
@@ -348,7 +348,7 @@ open class DefaultNullable {
   internal open fun setDefaultNullability_pp_nullability_defaultnullable(n: N) {}
  }
 
- @ObjCName(name = "J2ktNullabilityDefaultnullableDefaultNullable_ParameterizedNullable", swiftName = "NullabilityDefaultnullableDefaultNullable_ParameterizedNullable", exact = true)
+ @ObjCName("J2ktNullabilityDefaultnullableDefaultNullable_ParameterizedNullable", swiftName = "NullabilityDefaultnullableDefaultNullable_ParameterizedNullable", exact = true)
  open class ParameterizedNullable<N> {
   @JvmField
   internal var nullable_pp_nullability_defaultnullable: N? = null
@@ -383,7 +383,7 @@ open class DefaultNullable {
   internal open fun setDefaultNullability_pp_nullability_defaultnullable(n: N) {}
  }
 
- @ObjCName(name = "J2ktNullabilityDefaultnullableDefaultNullable_ParameterizedNonNullable", swiftName = "NullabilityDefaultnullableDefaultNullable_ParameterizedNonNullable", exact = true)
+ @ObjCName("J2ktNullabilityDefaultnullableDefaultNullable_ParameterizedNonNullable", swiftName = "NullabilityDefaultnullableDefaultNullable_ParameterizedNonNullable", exact = true)
  open class ParameterizedNonNullable<N: Any> {
   @JvmField
   internal var nullable_pp_nullability_defaultnullable: N? = null
@@ -418,33 +418,33 @@ open class DefaultNullable {
   internal open fun setDefaultNullability_pp_nullability_defaultnullable(n: N) {}
  }
 
- @ObjCName(name = "J2ktNullabilityDefaultnullableDefaultNullable_Consumer", swiftName = "NullabilityDefaultnullableDefaultNullable_Consumer", exact = true)
+ @ObjCName("J2ktNullabilityDefaultnullableDefaultNullable_Consumer", swiftName = "NullabilityDefaultnullableDefaultNullable_Consumer", exact = true)
  fun interface Consumer<T> {
-  @ObjCName(name = "accept")
+  @ObjCName("accept")
   fun accept(
-   @ObjCName(name = "withId") t: T
+   @ObjCName("withId") t: T
   )
  }
 
- @ObjCName(name = "J2ktNullabilityDefaultnullableDefaultNullable_NullMarkedSupplier", swiftName = "NullabilityDefaultnullableDefaultNullable_NullMarkedSupplier", exact = true)
+ @ObjCName("J2ktNullabilityDefaultnullableDefaultNullable_NullMarkedSupplier", swiftName = "NullabilityDefaultnullableDefaultNullable_NullMarkedSupplier", exact = true)
  fun interface NullMarkedSupplier<T> {
-  @ObjCName(name = "get")
+  @ObjCName("get")
   fun get(): T
  }
 
- @ObjCName(name = "J2ktNullabilityDefaultnullableDefaultNullable_NullMarkedConsumer", swiftName = "NullabilityDefaultnullableDefaultNullable_NullMarkedConsumer", exact = true)
+ @ObjCName("J2ktNullabilityDefaultnullableDefaultNullable_NullMarkedConsumer", swiftName = "NullabilityDefaultnullableDefaultNullable_NullMarkedConsumer", exact = true)
  fun interface NullMarkedConsumer<T> {
-  @ObjCName(name = "accept")
+  @ObjCName("accept")
   fun accept(
-   @ObjCName(name = "withId") t: T
+   @ObjCName("withId") t: T
   )
  }
 
- @ObjCName(name = "J2ktNullabilityDefaultnullableDefaultNullable_NullMarkedIntFunction", swiftName = "NullabilityDefaultnullableDefaultNullable_NullMarkedIntFunction", exact = true)
+ @ObjCName("J2ktNullabilityDefaultnullableDefaultNullable_NullMarkedIntFunction", swiftName = "NullabilityDefaultnullableDefaultNullable_NullMarkedIntFunction", exact = true)
  fun interface NullMarkedIntFunction<T> {
-  @ObjCName(name = "accept")
+  @ObjCName("accept")
   fun accept(
-   @ObjCName(name = "withInt") i: Int
+   @ObjCName("withInt") i: Int
   ): T
  }
 }

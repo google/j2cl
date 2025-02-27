@@ -39,35 +39,35 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktJsvarargsMain", swiftName = "JsvarargsMain", exact = true)
+@ObjCName("J2ktJsvarargsMain", swiftName = "JsvarargsMain", exact = true)
 open class Main {
  @JvmField
  internal var field_pp_jsvarargs: Int = 0
 
  constructor(
-  @ObjCName(name = "Int") f: Int
+  @ObjCName("Int") f: Int
  ) {
   this.field_pp_jsvarargs = f
  }
 
- @ObjCName(name = "f3")
+ @ObjCName("f3")
  @JsMethod
  open fun f3(
-  @ObjCName(name = "withInt") m: Int,
-  vararg @ObjCName(name = "withIntArray") numbers: Int
+  @ObjCName("withInt") m: Int,
+  vararg @ObjCName("withIntArray") numbers: Int
  ): Int {
   return this.field_pp_jsvarargs + m + numbers!![1]
  }
 
- @ObjCName(name = "f4")
+ @ObjCName("f4")
  @JsMethod
  open fun f4(
-  vararg @ObjCName(name = "withIntArray") numbers: Int
+  vararg @ObjCName("withIntArray") numbers: Int
  ): Int {
   return this.field_pp_jsvarargs + numbers!![1]
  }
 
- @ObjCName(name = "testStaticMethodNotFirst")
+ @ObjCName("testStaticMethodNotFirst")
  open fun testStaticMethodNotFirst() {
   Main.f1(1, 1, 2)
   Main.f1(1, 1, 2)
@@ -104,7 +104,7 @@ open class Main {
   )
  }
 
- @ObjCName(name = "testStaticMethodFirst")
+ @ObjCName("testStaticMethodFirst")
  open fun testStaticMethodFirst() {
   Main.f2(1, 2)
   Main.generics<Int?>(
@@ -155,7 +155,7 @@ open class Main {
   )
  }
 
- @ObjCName(name = "testInstanceMethodNotFirst")
+ @ObjCName("testInstanceMethodNotFirst")
  open fun testInstanceMethodNotFirst() {
   val m: Main = Main(1)
   m.f3(1, 1, 2)
@@ -175,7 +175,7 @@ open class Main {
   )
  }
 
- @ObjCName(name = "testInstanceMethodFirst")
+ @ObjCName("testInstanceMethodFirst")
  open fun testInstanceMethodFirst() {
   val m: Main = Main(1)
   m.f4(1, 2)
@@ -192,7 +192,7 @@ open class Main {
   )
  }
 
- @ObjCName(name = "testJsFunction")
+ @ObjCName("testJsFunction")
  open fun testJsFunction() {
   val a: Main.AFunction = Main.AFunction()
   val o1: Any = Any()
@@ -214,7 +214,7 @@ open class Main {
   )
  }
 
- @ObjCName(name = "testSideEffect")
+ @ObjCName("testSideEffect")
  open fun testSideEffect() {
   val ints: IntArray = intArrayOf(1, 2)
   Main(1).f3(
@@ -223,7 +223,7 @@ open class Main {
   )
  }
 
- @ObjCName(name = "testNullJsVarargs")
+ @ObjCName("testNullJsVarargs")
  open fun testNullJsVarargs() {
   val ints: IntArray? = null
   Main.f2(
@@ -231,7 +231,7 @@ open class Main {
   )
  }
 
- @ObjCName(name = "testGenericJsFunctionWithVarags")
+ @ObjCName("testGenericJsFunctionWithVarags")
  open fun <U> testGenericJsFunctionWithVarags() {
   val function: Main.GenericFunction<U> = Main.GenericFunction<U> { n: U, param: Array<out U>? ->
    val param_1: Array<U>? = param as Array<U>?
@@ -239,72 +239,72 @@ open class Main {
   }
  }
 
- @ObjCName(name = "J2ktJsvarargsMainCompanion", swiftName = "JsvarargsMainCompanion", exact = true)
+ @ObjCName("J2ktJsvarargsMainCompanion", swiftName = "JsvarargsMainCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName(name = "f1")
+  @ObjCName("f1")
   @JsMethod
   fun f1(
-   @ObjCName(name = "withInt") multiplier: Int,
-   vararg @ObjCName(name = "withIntArray") numbers: Int
+   @ObjCName("withInt") multiplier: Int,
+   vararg @ObjCName("withIntArray") numbers: Int
   ): Int {
    return numbers!!.size + numbers!![0] + multiplier
   }
 
   @JvmStatic
-  @ObjCName(name = "f2")
+  @ObjCName("f2")
   @JsMethod
   fun f2(
-   vararg @ObjCName(name = "withIntArray") numbers: Int
+   vararg @ObjCName("withIntArray") numbers: Int
   ): Int {
    return numbers!!.size + numbers!![0]
   }
 
   @JvmStatic
-  @ObjCName(name = "generics")
+  @ObjCName("generics")
   @JsMethod
   fun <T> generics(
-   vararg @ObjCName(name = "withNSObjectArray") elements: T
+   vararg @ObjCName("withNSObjectArray") elements: T
   ): T {
    val elements_1: Array<T>? = elements as Array<T>?
    return elements_1!![0]
   }
 
   @JvmStatic
-  @ObjCName(name = "parameterizedType")
+  @ObjCName("parameterizedType")
   @JsMethod
   fun parameterizedType(
-   vararg @ObjCName(name = "withJavaUtilListArray") elements: MutableList<Main?>?
+   vararg @ObjCName("withJavaUtilListArray") elements: MutableList<Main?>?
   ): Main? {
    val elements_1: Array<MutableList<Main?>?>? = elements as Array<MutableList<Main?>?>?
    return elements_1!![0]!!.get(0)
   }
 
   @JvmStatic
-  @ObjCName(name = "parameterizedByT")
+  @ObjCName("parameterizedByT")
   @JsMethod
   fun <T> parameterizedByT(
-   vararg @ObjCName(name = "withJavaUtilListArray") elements: MutableList<T>?
+   vararg @ObjCName("withJavaUtilListArray") elements: MutableList<T>?
   ): T {
    val elements_1: Array<MutableList<T>?>? = elements as Array<MutableList<T>?>?
    return elements_1!![0]!!.get(0)
   }
  }
 
- @ObjCName(name = "J2ktJsvarargsMain_NativeObject", swiftName = "JsvarargsMain_NativeObject", exact = true)
+ @ObjCName("J2ktJsvarargsMain_NativeObject", swiftName = "JsvarargsMain_NativeObject", exact = true)
  @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
  open class NativeObject {
   constructor(
-   vararg @ObjCName(name = "NSObjectArray") pars: Any?
+   vararg @ObjCName("NSObjectArray") pars: Any?
   )
  }
 
- @ObjCName(name = "J2ktJsvarargsMain_SubVarargsConstructorClass", swiftName = "JsvarargsMain_SubVarargsConstructorClass", exact = true)
+ @ObjCName("J2ktJsvarargsMain_SubVarargsConstructorClass", swiftName = "JsvarargsMain_SubVarargsConstructorClass", exact = true)
  open class SubVarargsConstructorClass: Main.NativeObject {
   @JsConstructor
   constructor(
-   @ObjCName(name = "Int") i: Int,
-   vararg @ObjCName(name = "withNSObjectArray") args: Any?
+   @ObjCName("Int") i: Int,
+   vararg @ObjCName("withNSObjectArray") args: Any?
   ): super(
    *(args as Array<Any?>?)!!,
   ) {
@@ -312,39 +312,39 @@ open class Main {
   }
  }
 
- @ObjCName(name = "J2ktJsvarargsMain_Function", swiftName = "JsvarargsMain_Function", exact = true)
+ @ObjCName("J2ktJsvarargsMain_Function", swiftName = "JsvarargsMain_Function", exact = true)
  @JsFunction
  fun interface Function {
-  @ObjCName(name = "f1")
+  @ObjCName("f1")
   fun f1(
-   @ObjCName(name = "withInt") i: Int,
-   vararg @ObjCName(name = "withNSObjectArray") args: Any?
+   @ObjCName("withInt") i: Int,
+   vararg @ObjCName("withNSObjectArray") args: Any?
   ): Any?
  }
 
- @ObjCName(name = "J2ktJsvarargsMain_AbstractMethodWithVarargs", swiftName = "JsvarargsMain_AbstractMethodWithVarargs", exact = true)
+ @ObjCName("J2ktJsvarargsMain_AbstractMethodWithVarargs", swiftName = "JsvarargsMain_AbstractMethodWithVarargs", exact = true)
  @JsType
  abstract class AbstractMethodWithVarargs {
-  @ObjCName(name = "abstractMethod")
+  @ObjCName("abstractMethod")
   abstract fun abstractMethod(
-   vararg @ObjCName(name = "withIntArray") args: Int
+   vararg @ObjCName("withIntArray") args: Int
   )
  }
 
- @ObjCName(name = "J2ktJsvarargsMain_StaticInterfaceMethodWithVarargs", swiftName = "JsvarargsMain_StaticInterfaceMethodWithVarargs", exact = true)
+ @ObjCName("J2ktJsvarargsMain_StaticInterfaceMethodWithVarargs", swiftName = "JsvarargsMain_StaticInterfaceMethodWithVarargs", exact = true)
  @JsType
  interface StaticInterfaceMethodWithVarargs {
-  @ObjCName(name = "J2ktJsvarargsMain_StaticInterfaceMethodWithVarargsCompanion", swiftName = "JsvarargsMain_StaticInterfaceMethodWithVarargsCompanion", exact = true)
+  @ObjCName("J2ktJsvarargsMain_StaticInterfaceMethodWithVarargsCompanion", swiftName = "JsvarargsMain_StaticInterfaceMethodWithVarargsCompanion", exact = true)
   companion object {
    @JvmStatic
-   @ObjCName(name = "staticMethod")
+   @ObjCName("staticMethod")
    fun staticMethod(
-    vararg @ObjCName(name = "withIntArray") args: Int
+    vararg @ObjCName("withIntArray") args: Int
    ) {}
   }
  }
 
- @ObjCName(name = "J2ktJsvarargsMain_AFunction", swiftName = "JsvarargsMain_AFunction", exact = true)
+ @ObjCName("J2ktJsvarargsMain_AFunction", swiftName = "JsvarargsMain_AFunction", exact = true)
  class AFunction internal constructor(): Main.Function {
   override fun f1(i: Int, vararg args: Any?): Any? {
    val args_1: Array<Any?>? = args as Array<Any?>?
@@ -352,7 +352,7 @@ open class Main {
   }
  }
 
- @ObjCName(name = "J2ktJsvarargsMain_SubMain", swiftName = "JsvarargsMain_SubMain", exact = true)
+ @ObjCName("J2ktJsvarargsMain_SubMain", swiftName = "JsvarargsMain_SubMain", exact = true)
  open class SubMain: Main {
   constructor(): super(10)
 
@@ -376,13 +376,13 @@ open class Main {
   }
  }
 
- @ObjCName(name = "J2ktJsvarargsMain_GenericFunction", swiftName = "JsvarargsMain_GenericFunction", exact = true)
+ @ObjCName("J2ktJsvarargsMain_GenericFunction", swiftName = "JsvarargsMain_GenericFunction", exact = true)
  @JsFunction
  fun interface GenericFunction<T> {
-  @ObjCName(name = "m")
+  @ObjCName("m")
   fun m(
-   @ObjCName(name = "withId") i: T,
-   vararg @ObjCName(name = "withNSObjectArray") args: T
+   @ObjCName("withId") i: T,
+   vararg @ObjCName("withNSObjectArray") args: T
   ): Any?
  }
 }

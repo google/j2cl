@@ -28,30 +28,30 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktWasmentrypointsWasmEntryPoints", swiftName = "WasmentrypointsWasmEntryPoints", exact = true)
+@ObjCName("J2ktWasmentrypointsWasmEntryPoints", swiftName = "WasmentrypointsWasmEntryPoints", exact = true)
 open class WasmEntryPoints {
- @ObjCName(name = "J2ktWasmentrypointsWasmEntryPointsCompanion", swiftName = "WasmentrypointsWasmEntryPointsCompanion", exact = true)
+ @ObjCName("J2ktWasmentrypointsWasmEntryPointsCompanion", swiftName = "WasmentrypointsWasmEntryPointsCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName(name = "singleMatchedEntryPoint")
+  @ObjCName("singleMatchedEntryPoint")
   fun singleMatchedEntryPoint() {}
 
   @JvmStatic
-  @ObjCName(name = "matchedEntryPointPattern1")
+  @ObjCName("matchedEntryPointPattern1")
   fun matchedEntryPointPattern1(
-   @ObjCName(name = "withInt") x: Int
+   @ObjCName("withInt") x: Int
   ) {}
 
   @JvmStatic
-  @ObjCName(name = "matchedEntryPointPattern2")
+  @ObjCName("matchedEntryPointPattern2")
   fun matchedEntryPointPattern2(
-   @ObjCName(name = "withFloat") y: Float
+   @ObjCName("withFloat") y: Float
   ) {}
 
   @JvmStatic
-  @ObjCName(name = "stringConversionEntryPoint")
+  @ObjCName("stringConversionEntryPoint")
   fun stringConversionEntryPoint(
-   @ObjCName(name = "withNSString") arg: String?
+   @ObjCName("withNSString") arg: String?
   ): String? {
    return ""
   }

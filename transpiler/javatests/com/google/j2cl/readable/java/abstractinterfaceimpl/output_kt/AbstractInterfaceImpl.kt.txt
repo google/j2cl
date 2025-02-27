@@ -25,11 +25,11 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktAbstractinterfaceimplMyInterface", swiftName = "AbstractinterfaceimplMyInterface", exact = true)
+@ObjCName("J2ktAbstractinterfaceimplMyInterface", swiftName = "AbstractinterfaceimplMyInterface", exact = true)
 fun interface MyInterface {
- @ObjCName(name = "foo")
+ @ObjCName("foo")
  fun foo(): Int
 }
 
-@ObjCName(name = "J2ktAbstractinterfaceimplAbstractInterfaceImpl", swiftName = "AbstractinterfaceimplAbstractInterfaceImpl", exact = true)
+@ObjCName("J2ktAbstractinterfaceimplAbstractInterfaceImpl", swiftName = "AbstractinterfaceimplAbstractInterfaceImpl", exact = true)
 abstract class AbstractInterfaceImpl: MyInterface

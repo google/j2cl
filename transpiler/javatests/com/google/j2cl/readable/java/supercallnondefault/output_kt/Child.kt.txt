@@ -26,22 +26,22 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktSupercallnondefaultParent", swiftName = "SupercallnondefaultParent", exact = true)
+@ObjCName("J2ktSupercallnondefaultParent", swiftName = "SupercallnondefaultParent", exact = true)
 open class Parent {
  @JvmField
- @ObjCName(name = "field_")
+ @ObjCName("field_")
  var field: Int = 0
 
  constructor(
-  @ObjCName(name = "Int") f: Int
+  @ObjCName("Int") f: Int
  ) {
   this.field = f
  }
 }
 
-@ObjCName(name = "J2ktSupercallnondefaultChild", swiftName = "SupercallnondefaultChild", exact = true)
+@ObjCName("J2ktSupercallnondefaultChild", swiftName = "SupercallnondefaultChild", exact = true)
 open class Child: Parent {
  constructor(
-  @ObjCName(name = "Int") a: Int
+  @ObjCName("Int") a: Int
  ): super(a)
 }

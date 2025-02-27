@@ -27,51 +27,51 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktSupermethodcallGrandParentInterface", swiftName = "SupermethodcallGrandParentInterface", exact = true)
+@ObjCName("J2ktSupermethodcallGrandParentInterface", swiftName = "SupermethodcallGrandParentInterface", exact = true)
 interface GrandParentInterface {
- @ObjCName(name = "defaultGrandParent")
+ @ObjCName("defaultGrandParent")
  fun defaultGrandParent() {}
 }
 
-@ObjCName(name = "J2ktSupermethodcallParentInterface", swiftName = "SupermethodcallParentInterface", exact = true)
+@ObjCName("J2ktSupermethodcallParentInterface", swiftName = "SupermethodcallParentInterface", exact = true)
 interface ParentInterface {
- @ObjCName(name = "defaultParent")
+ @ObjCName("defaultParent")
  fun defaultParent() {}
 }
 
-@ObjCName(name = "J2ktSupermethodcallGrandParent", swiftName = "SupermethodcallGrandParent", exact = true)
+@ObjCName("J2ktSupermethodcallGrandParent", swiftName = "SupermethodcallGrandParent", exact = true)
 open class GrandParent internal constructor() {
- @ObjCName(name = "grandParentSimplest")
+ @ObjCName("grandParentSimplest")
  open fun grandParentSimplest() {}
 
- @ObjCName(name = "grandParentWithParams")
+ @ObjCName("grandParentWithParams")
  open fun grandParentWithParams(
-  @ObjCName(name = "withInt") foo: Int
+  @ObjCName("withInt") foo: Int
  ) {}
 
- @ObjCName(name = "grandParentWithChangingReturn")
+ @ObjCName("grandParentWithChangingReturn")
  open fun grandParentWithChangingReturn(): Any? {
   return null
  }
 
- @ObjCName(name = "defaultParent")
+ @ObjCName("defaultParent")
  open fun defaultParent() {}
 
- @ObjCName(name = "defaultGrandParent")
+ @ObjCName("defaultGrandParent")
  open fun defaultGrandParent() {}
 }
 
-@ObjCName(name = "J2ktSupermethodcallParent", swiftName = "SupermethodcallParent", exact = true)
+@ObjCName("J2ktSupermethodcallParent", swiftName = "SupermethodcallParent", exact = true)
 open class Parent internal constructor(): GrandParent(), ParentInterface {
- @ObjCName(name = "parentSimplest")
+ @ObjCName("parentSimplest")
  open fun parentSimplest() {}
 
- @ObjCName(name = "parentWithParams")
+ @ObjCName("parentWithParams")
  open fun parentWithParams(
-  @ObjCName(name = "withInt") foo: Int
+  @ObjCName("withInt") foo: Int
  ) {}
 
- @ObjCName(name = "parentWithChangingReturn")
+ @ObjCName("parentWithChangingReturn")
  open fun parentWithChangingReturn(): Any? {
   return null
  }
@@ -82,7 +82,7 @@ open class Parent internal constructor(): GrandParent(), ParentInterface {
  }
 }
 
-@ObjCName(name = "J2ktSupermethodcallChild", swiftName = "SupermethodcallChild", exact = true)
+@ObjCName("J2ktSupermethodcallChild", swiftName = "SupermethodcallChild", exact = true)
 open class Child: Parent(), GrandParentInterface {
  override fun parentSimplest() {
   super<Parent>.parentSimplest()
@@ -116,35 +116,35 @@ open class Child: Parent(), GrandParentInterface {
  }
 }
 
-@ObjCName(name = "J2ktSupermethodcallI1", swiftName = "SupermethodcallI1", exact = true)
+@ObjCName("J2ktSupermethodcallI1", swiftName = "SupermethodcallI1", exact = true)
 interface I1 {
- @ObjCName(name = "m")
+ @ObjCName("m")
  fun m() {}
 }
 
-@ObjCName(name = "J2ktSupermethodcallI2", swiftName = "SupermethodcallI2", exact = true)
+@ObjCName("J2ktSupermethodcallI2", swiftName = "SupermethodcallI2", exact = true)
 fun interface I2 {
- @ObjCName(name = "m")
+ @ObjCName("m")
  fun m()
 }
 
-@ObjCName(name = "J2ktSupermethodcallI3", swiftName = "SupermethodcallI3", exact = true)
+@ObjCName("J2ktSupermethodcallI3", swiftName = "SupermethodcallI3", exact = true)
 interface I3: I1
 
-@ObjCName(name = "J2ktSupermethodcallSuper", swiftName = "SupermethodcallSuper", exact = true)
+@ObjCName("J2ktSupermethodcallSuper", swiftName = "SupermethodcallSuper", exact = true)
 open class Super internal constructor() {
- @ObjCName(name = "m")
+ @ObjCName("m")
  open fun m() {}
 }
 
-@ObjCName(name = "J2ktSupermethodcallSub", swiftName = "SupermethodcallSub", exact = true)
+@ObjCName("J2ktSupermethodcallSub", swiftName = "SupermethodcallSub", exact = true)
 open class Sub internal constructor(): Super(), I2, I3 {
  override fun m() {
   super<I3>.m()
  }
 }
 
-@ObjCName(name = "J2ktSupermethodcallSuperToStringTest", swiftName = "SupermethodcallSuperToStringTest", exact = true)
+@ObjCName("J2ktSupermethodcallSuperToStringTest", swiftName = "SupermethodcallSuperToStringTest", exact = true)
 abstract class SuperToStringTest internal constructor(): I1 {
  override fun toString(): String {
   return super.toString()

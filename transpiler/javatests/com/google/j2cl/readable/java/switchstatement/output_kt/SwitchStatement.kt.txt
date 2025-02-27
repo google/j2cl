@@ -31,19 +31,19 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktSwitchstatementNumbers", swiftName = "SwitchstatementNumbers", exact = true)
+@ObjCName("J2ktSwitchstatementNumbers", swiftName = "SwitchstatementNumbers", exact = true)
 enum class Numbers {
- @ObjCName(name = "ONE")
+ @ObjCName("ONE")
  ONE,
- @ObjCName(name = "TWO")
+ @ObjCName("TWO")
  TWO,
- @ObjCName(name = "THREE")
+ @ObjCName("THREE")
  THREE;
 }
 
-@ObjCName(name = "J2ktSwitchstatementSwitchStatement", swiftName = "SwitchstatementSwitchStatement", exact = true)
+@ObjCName("J2ktSwitchstatementSwitchStatement", swiftName = "SwitchstatementSwitchStatement", exact = true)
 open class SwitchStatement {
- @ObjCName(name = "main")
+ @ObjCName("main")
  open fun main() {
   when ("one") {
    "one", "two" -> {}
@@ -511,7 +511,7 @@ open class SwitchStatement {
 
  private fun foo(i: Int) {}
 
- @ObjCName(name = "J2ktSwitchstatementSwitchStatementCompanion", swiftName = "SwitchstatementSwitchStatementCompanion", exact = true)
+ @ObjCName("J2ktSwitchstatementSwitchStatementCompanion", swiftName = "SwitchstatementSwitchStatementCompanion", exact = true)
  companion object {
   @JvmStatic
   private fun testSwitchVariableDeclarations() {

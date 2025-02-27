@@ -26,15 +26,15 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktJavapkgPackageWithJavaPrefix", swiftName = "JavapkgPackageWithJavaPrefix", exact = true)
+@ObjCName("J2ktJavapkgPackageWithJavaPrefix", swiftName = "JavapkgPackageWithJavaPrefix", exact = true)
 open class PackageWithJavaPrefix {
- @ObjCName(name = "J2ktJavapkgPackageWithJavaPrefixCompanion", swiftName = "JavapkgPackageWithJavaPrefixCompanion", exact = true)
+ @ObjCName("J2ktJavapkgPackageWithJavaPrefixCompanion", swiftName = "JavapkgPackageWithJavaPrefixCompanion", exact = true)
  companion object {
-  @ObjCName(name = "VALUE_")
+  @ObjCName("VALUE_")
   const val VALUE: Int = 128
 
   @JvmStatic
-  @ObjCName(name = "value")
+  @ObjCName("value")
   fun value(): Int {
    return PackageWithJavaPrefix.VALUE
   }

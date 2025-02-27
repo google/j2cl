@@ -48,14 +48,14 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktJ2ktCollections", swiftName = "J2ktCollections", exact = true)
+@ObjCName("J2ktJ2ktCollections", swiftName = "J2ktCollections", exact = true)
 open class Collections {
- @ObjCName(name = "J2ktJ2ktCollectionsCompanion", swiftName = "J2ktCollectionsCompanion", exact = true)
+ @ObjCName("J2ktJ2ktCollectionsCompanion", swiftName = "J2ktCollectionsCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName(name = "testCollection_generic")
+  @ObjCName("testCollection_generic")
   fun <T> testCollection_generic(
-   @ObjCName(name = "withJavaUtilCollection") collection: MutableCollection<T>
+   @ObjCName("withJavaUtilCollection") collection: MutableCollection<T>
   ) {
    collection.java_contains(
     Collections.generic<T>(),
@@ -93,9 +93,9 @@ open class Collections {
   }
 
   @JvmStatic
-  @ObjCName(name = "testCollection_parameterized")
+  @ObjCName("testCollection_parameterized")
   fun testCollection_parameterized(
-   @ObjCName(name = "withJavaUtilCollection") collection: MutableCollection<String>
+   @ObjCName("withJavaUtilCollection") collection: MutableCollection<String>
   ) {
    collection.java_contains(
     Collections.string(),
@@ -133,9 +133,9 @@ open class Collections {
   }
 
   @JvmStatic
-  @ObjCName(name = "testCollection_specialized")
+  @ObjCName("testCollection_specialized")
   fun testCollection_specialized(
-   @ObjCName(name = "withJ2ktCollections_CollectionOfString") collection: Collections.CollectionOfString
+   @ObjCName("withJ2ktCollections_CollectionOfString") collection: Collections.CollectionOfString
   ) {
    collection.java_contains(
     Collections.string(),
@@ -173,9 +173,9 @@ open class Collections {
   }
 
   @JvmStatic
-  @ObjCName(name = "testList_generic")
+  @ObjCName("testList_generic")
   fun <T> testList_generic(
-   @ObjCName(name = "withJavaUtilList") list: MutableList<T>
+   @ObjCName("withJavaUtilList") list: MutableList<T>
   ) {
    list.java_addAll(
     0,
@@ -196,9 +196,9 @@ open class Collections {
   }
 
   @JvmStatic
-  @ObjCName(name = "testList_parameterized")
+  @ObjCName("testList_parameterized")
   fun testList_parameterized(
-   @ObjCName(name = "withJavaUtilList") list: MutableList<String>
+   @ObjCName("withJavaUtilList") list: MutableList<String>
   ) {
    list.java_addAll(
     0,
@@ -219,9 +219,9 @@ open class Collections {
   }
 
   @JvmStatic
-  @ObjCName(name = "testList_specialized")
+  @ObjCName("testList_specialized")
   fun testList_specialized(
-   @ObjCName(name = "withJ2ktCollections_ListOfString") list: Collections.ListOfString
+   @ObjCName("withJ2ktCollections_ListOfString") list: Collections.ListOfString
   ) {
    list.java_addAll(
     0,
@@ -242,9 +242,9 @@ open class Collections {
   }
 
   @JvmStatic
-  @ObjCName(name = "testMap_generic")
+  @ObjCName("testMap_generic")
   fun <K, V> testMap_generic(
-   @ObjCName(name = "withJavaUtilMap") map: MutableMap<K, V>
+   @ObjCName("withJavaUtilMap") map: MutableMap<K, V>
   ) {
    map.java_get(
     Collections.generic<K>(),
@@ -292,9 +292,9 @@ open class Collections {
   }
 
   @JvmStatic
-  @ObjCName(name = "testMap_parameterized")
+  @ObjCName("testMap_parameterized")
   fun testMap_parameterized(
-   @ObjCName(name = "withJavaUtilMap") map: MutableMap<String, String>
+   @ObjCName("withJavaUtilMap") map: MutableMap<String, String>
   ) {
    map.java_get(
     Collections.string(),
@@ -342,9 +342,9 @@ open class Collections {
   }
 
   @JvmStatic
-  @ObjCName(name = "testMap_specialized")
+  @ObjCName("testMap_specialized")
   fun testMap_specialized(
-   @ObjCName(name = "withJ2ktCollections_MapOfString") map: Collections.MapOfString
+   @ObjCName("withJ2ktCollections_MapOfString") map: Collections.MapOfString
   ) {
    map.java_get(
     Collections.string(),
@@ -447,7 +447,7 @@ open class Collections {
   }
  }
 
- @ObjCName(name = "J2ktJ2ktCollections_CustomCollection", swiftName = "J2ktCollections_CustomCollection", exact = true)
+ @ObjCName("J2ktJ2ktCollections_CustomCollection", swiftName = "J2ktCollections_CustomCollection", exact = true)
  open class CustomCollection<T>: AbstractCollection<T>() {
   override fun iterator(): MutableIterator<T> {
    throw RuntimeException()
@@ -521,14 +521,14 @@ open class Collections {
   }
  }
 
- @ObjCName(name = "J2ktJ2ktCollections_CustomCollectionDisambiguatingOverrides", swiftName = "J2ktCollections_CustomCollectionDisambiguatingOverrides", exact = true)
+ @ObjCName("J2ktJ2ktCollections_CustomCollectionDisambiguatingOverrides", swiftName = "J2ktCollections_CustomCollectionDisambiguatingOverrides", exact = true)
  open class CustomCollectionDisambiguatingOverrides<T>: Collections.CustomCollection<T>(), MutableCollectionJvm<T> {
   override fun spliterator(): Spliterator<T> {
    return super<Collections.CustomCollection>.spliterator()
   }
  }
 
- @ObjCName(name = "J2ktJ2ktCollections_CustomList", swiftName = "J2ktCollections_CustomList", exact = true)
+ @ObjCName("J2ktJ2ktCollections_CustomList", swiftName = "J2ktCollections_CustomList", exact = true)
  open class CustomList<T>: AbstractList<T>() {
   override fun get(index: Int): T {
    throw IndexOutOfBoundsException()
@@ -576,7 +576,7 @@ open class Collections {
   }
  }
 
- @ObjCName(name = "J2ktJ2ktCollections_CustomMap", swiftName = "J2ktCollections_CustomMap", exact = true)
+ @ObjCName("J2ktJ2ktCollections_CustomMap", swiftName = "J2ktCollections_CustomMap", exact = true)
  open class CustomMap<K, V>: AbstractMap<K, V>() {
   override val entries: MutableSet<MutableEntry<K, V>>
    get() {
@@ -653,7 +653,7 @@ open class Collections {
   }
  }
 
- @ObjCName(name = "J2ktJ2ktCollections_CustomMapDisambiguatingOverrides", swiftName = "J2ktCollections_CustomMapDisambiguatingOverrides", exact = true)
+ @ObjCName("J2ktJ2ktCollections_CustomMapDisambiguatingOverrides", swiftName = "J2ktCollections_CustomMapDisambiguatingOverrides", exact = true)
  abstract class CustomMapDisambiguatingOverrides<K, V>: Collections.CustomMap<K, V>(), MutableMapJvm<K, V> {
   override fun getOrDefault(arg0: K, arg1: V): V {
    val arg1_1: V? = arg1
@@ -674,7 +674,7 @@ open class Collections {
   }
  }
 
- @ObjCName(name = "J2ktJ2ktCollections_CustomMapReturnTypes", swiftName = "J2ktCollections_CustomMapReturnTypes", exact = true)
+ @ObjCName("J2ktJ2ktCollections_CustomMapReturnTypes", swiftName = "J2ktCollections_CustomMapReturnTypes", exact = true)
  open class CustomMapReturnTypes<K, V>: Collections.CustomMap<K, V>() {
   override fun getOrDefault(key: K, defaultValue: V): V {
    val defaultValue_1: V? = defaultValue
@@ -683,20 +683,20 @@ open class Collections {
   }
  }
 
- @ObjCName(name = "J2ktJ2ktCollections_CollectionOfString", swiftName = "J2ktCollections_CollectionOfString", exact = true)
+ @ObjCName("J2ktJ2ktCollections_CollectionOfString", swiftName = "J2ktCollections_CollectionOfString", exact = true)
  open class CollectionOfString: Collections.CustomCollection<String>() {
-  @ObjCName(name = "containsInteger")
+  @ObjCName("containsInteger")
   open fun containsInteger(
-   @ObjCName(name = "withJavaLangInteger") integer: Int
+   @ObjCName("withJavaLangInteger") integer: Int
   ): Boolean {
    return super<Collections.CustomCollection>.remove(
     integer as Any? as String,
    )
   }
 
-  @ObjCName(name = "removeInteger")
+  @ObjCName("removeInteger")
   open fun removeInteger(
-   @ObjCName(name = "withJavaLangInteger") integer: Int
+   @ObjCName("withJavaLangInteger") integer: Int
   ): Boolean {
    return super<Collections.CustomCollection>.remove(
     integer as Any? as String,
@@ -704,7 +704,7 @@ open class Collections {
   }
  }
 
- @ObjCName(name = "J2ktJ2ktCollections_ListOfString", swiftName = "J2ktCollections_ListOfString", exact = true)
+ @ObjCName("J2ktJ2ktCollections_ListOfString", swiftName = "J2ktCollections_ListOfString", exact = true)
  open class ListOfString: Collections.CustomList<String>() {
   override fun indexOf(o: String): Int {
    val o_1: Any? = o
@@ -725,7 +725,7 @@ open class Collections {
   }
  }
 
- @ObjCName(name = "J2ktJ2ktCollections_MapOfString", swiftName = "J2ktCollections_MapOfString", exact = true)
+ @ObjCName("J2ktJ2ktCollections_MapOfString", swiftName = "J2ktCollections_MapOfString", exact = true)
  open class MapOfString: Collections.CustomMap<String, String>() {
   override fun containsKey(key: String): Boolean {
    val key_1: Any? = key
@@ -788,7 +788,7 @@ open class Collections {
   }
  }
 
- @ObjCName(name = "J2ktJ2ktCollections_AbstractCollectionWithToArrayOverride", swiftName = "J2ktCollections_AbstractCollectionWithToArrayOverride", exact = true)
+ @ObjCName("J2ktJ2ktCollections_AbstractCollectionWithToArrayOverride", swiftName = "J2ktCollections_AbstractCollectionWithToArrayOverride", exact = true)
  abstract class AbstractCollectionWithToArrayOverride<E>: MutableCollectionJvm<E> {
   @Suppress("NOTHING_TO_OVERRIDE")
   override fun toArray(): Array<Any?> {
@@ -801,7 +801,7 @@ open class Collections {
   }
  }
 
- @ObjCName(name = "J2ktJ2ktCollections_CollectionInterfaceWithToArrayOverride", swiftName = "J2ktCollections_CollectionInterfaceWithToArrayOverride", exact = true)
+ @ObjCName("J2ktJ2ktCollections_CollectionInterfaceWithToArrayOverride", swiftName = "J2ktCollections_CollectionInterfaceWithToArrayOverride", exact = true)
  interface CollectionInterfaceWithToArrayOverride<E>: MutableListJvm<E> {
   @Suppress("NOTHING_TO_OVERRIDE")
   override fun toArray(): Array<Any?>

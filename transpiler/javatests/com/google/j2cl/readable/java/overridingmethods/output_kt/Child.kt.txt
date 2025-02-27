@@ -24,25 +24,25 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktOverridingmethodsSomeInterface", swiftName = "OverridingmethodsSomeInterface", exact = true)
+@ObjCName("J2ktOverridingmethodsSomeInterface", swiftName = "OverridingmethodsSomeInterface", exact = true)
 fun interface SomeInterface {
- @ObjCName(name = "interfaceMethod")
+ @ObjCName("interfaceMethod")
  fun interfaceMethod()
 }
 
-@ObjCName(name = "J2ktOverridingmethodsParent", swiftName = "OverridingmethodsParent", exact = true)
+@ObjCName("J2ktOverridingmethodsParent", swiftName = "OverridingmethodsParent", exact = true)
 open class Parent internal constructor() {
- @ObjCName(name = "nonFinal")
+ @ObjCName("nonFinal")
  open fun nonFinal() {}
 
- @ObjCName(name = "finalInChild")
+ @ObjCName("finalInChild")
  open fun finalInChild() {}
 
- @ObjCName(name = "finalInParent")
+ @ObjCName("finalInParent")
  fun finalInParent() {}
 }
 
-@ObjCName(name = "J2ktOverridingmethodsChild", swiftName = "OverridingmethodsChild", exact = true)
+@ObjCName("J2ktOverridingmethodsChild", swiftName = "OverridingmethodsChild", exact = true)
 open class Child internal constructor(): Parent(), SomeInterface {
  override fun nonFinal() {}
 
@@ -51,7 +51,7 @@ open class Child internal constructor(): Parent(), SomeInterface {
  override fun interfaceMethod() {}
 }
 
-@ObjCName(name = "J2ktOverridingmethodsFinalChild", swiftName = "OverridingmethodsFinalChild", exact = true)
+@ObjCName("J2ktOverridingmethodsFinalChild", swiftName = "OverridingmethodsFinalChild", exact = true)
 class FinalChild internal constructor(): Parent(), SomeInterface {
  override fun nonFinal() {}
 

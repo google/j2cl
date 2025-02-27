@@ -27,9 +27,9 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktJ2ktLateInit", swiftName = "J2ktLateInit", exact = true)
+@ObjCName("J2ktJ2ktLateInit", swiftName = "J2ktLateInit", exact = true)
 open class LateInit<T: Any> {
- @ObjCName(name = "publicField_")
+ @ObjCName("publicField_")
  lateinit var publicField: String
 
  private lateinit var privateField: String
@@ -45,7 +45,7 @@ open class LateInit<T: Any> {
  private lateinit var genericField: T
 
  constructor(
-  @ObjCName(name = "Id") genericValue: T
+  @ObjCName("Id") genericValue: T
  ) {
   this.init(genericValue)
  }
@@ -56,16 +56,16 @@ open class LateInit<T: Any> {
   this.genericField = genericValue
  }
 
- @ObjCName(name = "test")
+ @ObjCName("test")
  open fun test(): Int {
   return this.publicField.length + this.privateField.length + this.initializedField.length + this.nullableField!!.length + this.finalField.length + this.primitiveField + this.genericField.hashCode()
  }
 
- @ObjCName(name = "J2ktJ2ktLateInit_Inner", swiftName = "J2ktLateInit_Inner", exact = true)
+ @ObjCName("J2ktJ2ktLateInit_Inner", swiftName = "J2ktLateInit_Inner", exact = true)
  open inner class Inner internal constructor() {
   private lateinit var unmarkedInnerField: String
 
-  @ObjCName(name = "J2ktJ2ktLateInit_Inner_InnerInner", swiftName = "J2ktLateInit_Inner_InnerInner", exact = true)
+  @ObjCName("J2ktJ2ktLateInit_Inner_InnerInner", swiftName = "J2ktLateInit_Inner_InnerInner", exact = true)
   open inner class InnerInner internal constructor() {
    private lateinit var unmarkedInnerInnerField: String
   }

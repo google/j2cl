@@ -33,9 +33,9 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 import kotlin.reflect.KClass
 
-@ObjCName(name = "J2ktAnnotationMain", swiftName = "AnnotationMain", exact = true)
+@ObjCName("J2ktAnnotationMain", swiftName = "AnnotationMain", exact = true)
 open class Main {
- @ObjCName(name = "J2ktAnnotationMainCompanion", swiftName = "AnnotationMainCompanion", exact = true)
+ @ObjCName("J2ktAnnotationMainCompanion", swiftName = "AnnotationMainCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun test_pp_annotation(foo: Main.Foo?) {
@@ -68,63 +68,63 @@ open class Main {
   }
  }
 
- @ObjCName(name = "J2ktAnnotationMain_Foo", swiftName = "AnnotationMain_Foo", exact = true)
+ @ObjCName("J2ktAnnotationMain_Foo", swiftName = "AnnotationMain_Foo", exact = true)
  annotation class Foo (
-  @ObjCName(name = "booleanValue")
+  @ObjCName("booleanValue")
   val booleanValue: Boolean,
-  @ObjCName(name = "intValue")
+  @ObjCName("intValue")
   val intValue: Int,
-  @ObjCName(name = "stringValue")
+  @ObjCName("stringValue")
   val stringValue: String,
-  @ObjCName(name = "classValue")
+  @ObjCName("classValue")
   val classValue: KClass<*>,
-  @ObjCName(name = "stringClassValue")
+  @ObjCName("stringClassValue")
   val stringClassValue: KClass<String>,
-  @ObjCName(name = "wildcardClassValue")
+  @ObjCName("wildcardClassValue")
   val wildcardClassValue: KClass<out KClass<*>>,
-  @ObjCName(name = "enumValue")
+  @ObjCName("enumValue")
   val enumValue: Main.SomeEnum,
-  @ObjCName(name = "annotationValue")
+  @ObjCName("annotationValue")
   val annotationValue: Main.Zoo,
-  @ObjCName(name = "booleanArray")
+  @ObjCName("booleanArray")
   val booleanArray: BooleanArray,
-  @ObjCName(name = "intArray")
+  @ObjCName("intArray")
   val intArray: IntArray,
-  @ObjCName(name = "stringArray")
+  @ObjCName("stringArray")
   val stringArray: Array<String>,
-  @ObjCName(name = "classArray")
+  @ObjCName("classArray")
   val classArray: Array<KClass<*>>,
-  @ObjCName(name = "enumArray")
+  @ObjCName("enumArray")
   val enumArray: Array<Main.SomeEnum>,
-  @ObjCName(name = "annotationArray")
+  @ObjCName("annotationArray")
   val annotationArray: Array<Main.Zoo>) {
-  @ObjCName(name = "J2ktAnnotationMain_FooCompanion", swiftName = "AnnotationMain_FooCompanion", exact = true)
+  @ObjCName("J2ktAnnotationMain_FooCompanion", swiftName = "AnnotationMain_FooCompanion", exact = true)
   companion object {
-   @ObjCName(name = "BOOLEAN_CONSTANT_")
+   @ObjCName("BOOLEAN_CONSTANT_")
    const val BOOLEAN_CONSTANT: Boolean = false
 
-   @ObjCName(name = "INT_CONSTANT_")
+   @ObjCName("INT_CONSTANT_")
    const val INT_CONSTANT: Int = 123
 
-   @ObjCName(name = "STRING_CONSTANT_")
+   @ObjCName("STRING_CONSTANT_")
    const val STRING_CONSTANT: String = "foo"
   }
  }
 
- @ObjCName(name = "J2ktAnnotationMain_SomeEnum", swiftName = "AnnotationMain_SomeEnum", exact = true)
+ @ObjCName("J2ktAnnotationMain_SomeEnum", swiftName = "AnnotationMain_SomeEnum", exact = true)
  enum class SomeEnum {
-  @ObjCName(name = "ZERO")
+  @ObjCName("ZERO")
   ZERO,
-  @ObjCName(name = "ONE")
+  @ObjCName("ONE")
   ONE;
  }
 
- @ObjCName(name = "J2ktAnnotationMain_Zoo", swiftName = "AnnotationMain_Zoo", exact = true)
+ @ObjCName("J2ktAnnotationMain_Zoo", swiftName = "AnnotationMain_Zoo", exact = true)
  annotation class Zoo
 
- @ObjCName(name = "J2ktAnnotationMain_ClassImplementingAnnotation", swiftName = "AnnotationMain_ClassImplementingAnnotation", exact = true)
+ @ObjCName("J2ktAnnotationMain_ClassImplementingAnnotation", swiftName = "AnnotationMain_ClassImplementingAnnotation", exact = true)
  abstract inner class ClassImplementingAnnotation internal constructor(): Annotation
 
- @ObjCName(name = "J2ktAnnotationMain_InterfaceExtendingAnnotation", swiftName = "AnnotationMain_InterfaceExtendingAnnotation", exact = true)
+ @ObjCName("J2ktAnnotationMain_InterfaceExtendingAnnotation", swiftName = "AnnotationMain_InterfaceExtendingAnnotation", exact = true)
  interface InterfaceExtendingAnnotation: Annotation
 }

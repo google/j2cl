@@ -47,7 +47,7 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
       nameRenderer.sourceWithOptInQualifiedName("kotlin.experimental.ExperimentalObjCName") {
         topLevelQualifiedNameSource("kotlin.native.ObjCName")
       },
-      parameterSource("name", literal(name)),
+      literal(name),
       swiftName?.let { parameterSource("swiftName", literal(it)) }.orEmpty(),
       exact?.let { parameterSource("exact", literal(it)) }.orEmpty(),
     )

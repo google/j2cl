@@ -27,16 +27,16 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktNativeinjectionNativeClass", swiftName = "NativeinjectionNativeClass", exact = true)
+@ObjCName("J2ktNativeinjectionNativeClass", swiftName = "NativeinjectionNativeClass", exact = true)
 open class NativeClass {
- @ObjCName(name = "nativeInstanceMethod")
+ @ObjCName("nativeInstanceMethod")
  @JsMethod
  external open fun nativeInstanceMethod(): String?
 
- @ObjCName(name = "J2ktNativeinjectionNativeClassCompanion", swiftName = "NativeinjectionNativeClassCompanion", exact = true)
+ @ObjCName("J2ktNativeinjectionNativeClassCompanion", swiftName = "NativeinjectionNativeClassCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName(name = "nativeStaticMethod")
+  @ObjCName("nativeStaticMethod")
   @JsMethod
   external fun nativeStaticMethod(): NativeClass?
 
@@ -45,9 +45,9 @@ open class NativeClass {
   internal external fun notPublicNativeStaticMethod_pp_nativeinjection(): NativeClass?
  }
 
- @ObjCName(name = "J2ktNativeinjectionNativeClass_InnerClass", swiftName = "NativeinjectionNativeClass_InnerClass", exact = true)
+ @ObjCName("J2ktNativeinjectionNativeClass_InnerClass", swiftName = "NativeinjectionNativeClass_InnerClass", exact = true)
  open class InnerClass {
-  @ObjCName(name = "nativeInstanceMethod")
+  @ObjCName("nativeInstanceMethod")
   @JsMethod
   external open fun nativeInstanceMethod(): String?
  }

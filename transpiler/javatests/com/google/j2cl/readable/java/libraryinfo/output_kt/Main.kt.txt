@@ -37,7 +37,7 @@ import kotlin.jvm.JvmStatic
 import kotlin.jvm.javaObjectType
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktLibraryinfoMain", swiftName = "LibraryinfoMain", exact = true)
+@ObjCName("J2ktLibraryinfoMain", swiftName = "LibraryinfoMain", exact = true)
 open class Main {
  private fun execute() {
   Main.log(42)
@@ -47,21 +47,21 @@ open class Main {
   return super.toString()
  }
 
- @ObjCName(name = "J2ktLibraryinfoMainCompanion", swiftName = "LibraryinfoMainCompanion", exact = true)
+ @ObjCName("J2ktLibraryinfoMainCompanion", swiftName = "LibraryinfoMainCompanion", exact = true)
  companion object {
   @JvmField
-  @ObjCName(name = "STATIC_FIELD_")
+  @ObjCName("STATIC_FIELD_")
   var STATIC_FIELD: String? = "STATIC_FIELD"
 
-  @ObjCName(name = "CONSTANT_")
+  @ObjCName("CONSTANT_")
   const val CONSTANT: String = "STATIC_FIELD"
 
-  @ObjCName(name = "JS_CONSTANT_")
+  @ObjCName("JS_CONSTANT_")
   @JsProperty
   const val JS_CONSTANT: String = "STATIC_FIELD"
 
   @JvmStatic
-  @ObjCName(name = "entryPoint")
+  @ObjCName("entryPoint")
   @JsMethod
   fun entryPoint() {
    Main().execute()
@@ -78,14 +78,14 @@ open class Main {
   }
 
   @JvmStatic
-  @ObjCName(name = "log")
+  @ObjCName("log")
   @JsMethod(name = "console.log", namespace = JsPackage.GLOBAL)
   external fun log(
-   @ObjCName(name = "withInt") o: Int
+   @ObjCName("withInt") o: Int
   )
 
   @JvmStatic
-  @ObjCName(name = "main")
+  @ObjCName("main")
   @JsMethod
   fun main() {
    val foo: Main.Foo? = null
@@ -94,63 +94,63 @@ open class Main {
   }
  }
 
- @ObjCName(name = "J2ktLibraryinfoMain_JsTypeInterface", swiftName = "LibraryinfoMain_JsTypeInterface", exact = true)
+ @ObjCName("J2ktLibraryinfoMain_JsTypeInterface", swiftName = "LibraryinfoMain_JsTypeInterface", exact = true)
  @JsType
  interface JsTypeInterface {
-  @ObjCName(name = "foo")
+  @ObjCName("foo")
   fun foo()
 
-  @ObjCName(name = "bar")
+  @ObjCName("bar")
   fun bar()
  }
 
- @ObjCName(name = "J2ktLibraryinfoMain_FunctionnalInterface", swiftName = "LibraryinfoMain_FunctionnalInterface", exact = true)
+ @ObjCName("J2ktLibraryinfoMain_FunctionnalInterface", swiftName = "LibraryinfoMain_FunctionnalInterface", exact = true)
  fun interface FunctionnalInterface {
-  @ObjCName(name = "foo")
+  @ObjCName("foo")
   fun foo()
  }
 
- @ObjCName(name = "J2ktLibraryinfoMain_JsAccessibleFunctionnalInterface", swiftName = "LibraryinfoMain_JsAccessibleFunctionnalInterface", exact = true)
+ @ObjCName("J2ktLibraryinfoMain_JsAccessibleFunctionnalInterface", swiftName = "LibraryinfoMain_JsAccessibleFunctionnalInterface", exact = true)
  fun interface JsAccessibleFunctionnalInterface {
-  @ObjCName(name = "accessibleFunctionalInterfaceMethod")
+  @ObjCName("accessibleFunctionalInterfaceMethod")
   @JsMethod
   fun accessibleFunctionalInterfaceMethod()
  }
 
- @ObjCName(name = "J2ktLibraryinfoMain_Function", swiftName = "LibraryinfoMain_Function", exact = true)
+ @ObjCName("J2ktLibraryinfoMain_Function", swiftName = "LibraryinfoMain_Function", exact = true)
  @JsFunction
  fun interface Function {
-  @ObjCName(name = "apply")
+  @ObjCName("apply")
   fun apply(
-   @ObjCName(name = "withNSString") s: String?
+   @ObjCName("withNSString") s: String?
   )
  }
 
- @ObjCName(name = "J2ktLibraryinfoMain_FunctionImpl", swiftName = "LibraryinfoMain_FunctionImpl", exact = true)
+ @ObjCName("J2ktLibraryinfoMain_FunctionImpl", swiftName = "LibraryinfoMain_FunctionImpl", exact = true)
  class FunctionImpl internal constructor(): Main.Function {
   override fun apply(s: String?) {}
  }
 
- @ObjCName(name = "J2ktLibraryinfoMain_MyJsEnum", swiftName = "LibraryinfoMain_MyJsEnum", exact = true)
+ @ObjCName("J2ktLibraryinfoMain_MyJsEnum", swiftName = "LibraryinfoMain_MyJsEnum", exact = true)
  @JsEnum
  enum class MyJsEnum {
-  @ObjCName(name = "A")
+  @ObjCName("A")
   A,
-  @ObjCName(name = "B")
+  @ObjCName("B")
   B,
-  @ObjCName(name = "C")
+  @ObjCName("C")
   C;
  }
 
- @ObjCName(name = "J2ktLibraryinfoMain_MyEnum", swiftName = "LibraryinfoMain_MyEnum", exact = true)
+ @ObjCName("J2ktLibraryinfoMain_MyEnum", swiftName = "LibraryinfoMain_MyEnum", exact = true)
  enum class MyEnum {
-  @ObjCName(name = "FOO")
+  @ObjCName("FOO")
   FOO,
-  @ObjCName(name = "BAR")
+  @ObjCName("BAR")
   BAR;
  }
 
- @ObjCName(name = "J2ktLibraryinfoMain_MyJsType", swiftName = "LibraryinfoMain_MyJsType", exact = true)
+ @ObjCName("J2ktLibraryinfoMain_MyJsType", swiftName = "LibraryinfoMain_MyJsType", exact = true)
  @JsType
  open class MyJsType {
   @JvmField
@@ -161,7 +161,7 @@ open class Main {
   }
  }
 
- @ObjCName(name = "J2ktLibraryinfoMain_Foo", swiftName = "LibraryinfoMain_Foo", exact = true)
+ @ObjCName("J2ktLibraryinfoMain_Foo", swiftName = "LibraryinfoMain_Foo", exact = true)
  open inner class Foo {
   internal open fun instanceMethod_pp_libraryinfo() {}
  }

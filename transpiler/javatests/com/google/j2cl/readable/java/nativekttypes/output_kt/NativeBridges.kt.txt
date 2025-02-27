@@ -26,15 +26,15 @@ import kotlin.native.ObjCName
 import nativekttypes.nativekt.KRequiringBridge
 import nativekttypes.nativekt.KRequiringBridge.Inner
 
-@ObjCName(name = "J2ktNativekttypesNativeBridges", swiftName = "NativekttypesNativeBridges", exact = true)
+@ObjCName("J2ktNativekttypesNativeBridges", swiftName = "NativekttypesNativeBridges", exact = true)
 open class NativeBridges {
- @ObjCName(name = "test")
+ @ObjCName("test")
  open fun test(
-  @ObjCName(name = "withNativekttypesNativeRequiringBridge") o: KRequiringBridge?
+  @ObjCName("withNativekttypesNativeRequiringBridge") o: KRequiringBridge?
  ) {}
 
- @ObjCName(name = "test")
+ @ObjCName("test")
  open fun test(
-  @ObjCName(name = "withNativekttypesNativeRequiringBridge_Inner") o: Inner?
+  @ObjCName("withNativekttypesNativeRequiringBridge_Inner") o: Inner?
  ) {}
 }

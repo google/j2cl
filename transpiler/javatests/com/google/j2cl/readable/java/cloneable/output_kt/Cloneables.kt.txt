@@ -28,18 +28,18 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.Throws
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktCloneableCloneables", swiftName = "CloneableCloneables", exact = true)
+@ObjCName("J2ktCloneableCloneables", swiftName = "CloneableCloneables", exact = true)
 open class Cloneables {
- @ObjCName(name = "J2ktCloneableCloneables_WithoutCloneable", swiftName = "CloneableCloneables_WithoutCloneable", exact = true)
+ @ObjCName("J2ktCloneableCloneables_WithoutCloneable", swiftName = "CloneableCloneables_WithoutCloneable", exact = true)
  open class WithoutCloneable {
-  @ObjCName(name = "clone")
+  @ObjCName("clone")
   @Throws(CloneNotSupportedException::class)
   open fun clone(): Any {
    return Cloneables.WithoutCloneable()
   }
  }
 
- @ObjCName(name = "J2ktCloneableCloneables_WithCloneable", swiftName = "CloneableCloneables_WithCloneable", exact = true)
+ @ObjCName("J2ktCloneableCloneables_WithCloneable", swiftName = "CloneableCloneables_WithCloneable", exact = true)
  open class WithCloneable: Cloneable {
   @Throws(CloneNotSupportedException::class)
   override fun clone(): Any {
@@ -47,7 +47,7 @@ open class Cloneables {
   }
  }
 
- @ObjCName(name = "J2ktCloneableCloneables_WithoutCloneableChild", swiftName = "CloneableCloneables_WithoutCloneableChild", exact = true)
+ @ObjCName("J2ktCloneableCloneables_WithoutCloneableChild", swiftName = "CloneableCloneables_WithoutCloneableChild", exact = true)
  class WithoutCloneableChild: Cloneables.WithoutCloneable() {
   @Throws(CloneNotSupportedException::class)
   override fun clone(): Any {
@@ -55,7 +55,7 @@ open class Cloneables {
   }
  }
 
- @ObjCName(name = "J2ktCloneableCloneables_WithCloneableChild", swiftName = "CloneableCloneables_WithCloneableChild", exact = true)
+ @ObjCName("J2ktCloneableCloneables_WithCloneableChild", swiftName = "CloneableCloneables_WithCloneableChild", exact = true)
  class WithCloneableChild: Cloneables.WithCloneable() {
   @Throws(CloneNotSupportedException::class)
   override fun clone(): Any {

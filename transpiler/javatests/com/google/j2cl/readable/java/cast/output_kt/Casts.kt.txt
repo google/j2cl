@@ -39,21 +39,21 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktCastCasts", swiftName = "CastCasts", exact = true)
+@ObjCName("J2ktCastCasts", swiftName = "CastCasts", exact = true)
 open class Casts {
- @ObjCName(name = "testCastToClass")
+ @ObjCName("testCastToClass")
  open fun testCastToClass() {
   val o: Any = Any()
   val c: Casts? = o as Casts?
  }
 
- @ObjCName(name = "testCasToInterface")
+ @ObjCName("testCasToInterface")
  open fun testCasToInterface() {
   val o: Any = Any()
   val s: Serializable? = o as Serializable?
  }
 
- @ObjCName(name = "testCastToBoxedType")
+ @ObjCName("testCastToBoxedType")
  open fun testCastToBoxedType() {
   val o: Any = Int(1)
   val b: Byte? = o as Byte?
@@ -67,7 +67,7 @@ open class Casts {
   val bool: Boolean? = o as Boolean?
  }
 
- @ObjCName(name = "testCastToArray")
+ @ObjCName("testCastToArray")
  open fun testCastToArray() {
   val foo: Any? = null as Array<Any?>?
   val bar: Any? = null as Array<Array<Any?>?>?
@@ -75,7 +75,7 @@ open class Casts {
 
  private fun functionForInstanceofTest() {}
 
- @ObjCName(name = "testCastVariableAfterInstanceOf")
+ @ObjCName("testCastVariableAfterInstanceOf")
  open fun testCastVariableAfterInstanceOf() {
   var o: Any = Any()
   if (o is Casts) {
@@ -104,7 +104,7 @@ open class Casts {
   val c_1: Casts? = if (o is Casts) o as Casts? else null
  }
 
- @ObjCName(name = "testCastFieldAfterInstanceOf")
+ @ObjCName("testCastFieldAfterInstanceOf")
  open fun testCastFieldAfterInstanceOf() {
   var foo: Casts.Foo = Foo()
   if (foo.field is Casts) {
@@ -128,7 +128,7 @@ open class Casts {
   val c_1: Casts? = if (foo.field is Casts) foo.field as Casts? else null
  }
 
- @ObjCName(name = "testCaseMethodAfterInstanceOf")
+ @ObjCName("testCaseMethodAfterInstanceOf")
  open fun testCaseMethodAfterInstanceOf() {
   val foo: Casts.Foo = Foo()
   if (foo.method() is Casts) {
@@ -137,7 +137,7 @@ open class Casts {
   val c: Casts? = if (foo.method() is Casts) foo.method() as Casts? else null
  }
 
- @ObjCName(name = "testPrecedence")
+ @ObjCName("testPrecedence")
  open fun testPrecedence() {
   val foo: Any = "foo"
   val bar: Any = "bar"
@@ -146,13 +146,13 @@ open class Casts {
   val s2: String = ("foo" + notString) as String
  }
 
- @ObjCName(name = "J2ktCastCasts_Foo", swiftName = "CastCasts_Foo", exact = true)
+ @ObjCName("J2ktCastCasts_Foo", swiftName = "CastCasts_Foo", exact = true)
  open inner class Foo internal constructor() {
   @JvmField
-  @ObjCName(name = "field_")
+  @ObjCName("field_")
   var field: Any? = Any()
 
-  @ObjCName(name = "method")
+  @ObjCName("method")
   open fun method(): Any? {
    return Any()
   }

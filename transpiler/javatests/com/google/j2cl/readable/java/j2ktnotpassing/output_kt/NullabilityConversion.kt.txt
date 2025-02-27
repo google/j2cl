@@ -26,28 +26,28 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktJ2ktnotpassingNullabilityConversion", swiftName = "J2ktnotpassingNullabilityConversion", exact = true)
+@ObjCName("J2ktJ2ktnotpassingNullabilityConversion", swiftName = "J2ktnotpassingNullabilityConversion", exact = true)
 open class NullabilityConversion {
- @ObjCName(name = "J2ktJ2ktnotpassingNullabilityConversion_Parent", swiftName = "J2ktnotpassingNullabilityConversion_Parent", exact = true)
+ @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Parent", swiftName = "J2ktnotpassingNullabilityConversion_Parent", exact = true)
  interface Parent
 
- @ObjCName(name = "J2ktJ2ktnotpassingNullabilityConversion_Child", swiftName = "J2ktnotpassingNullabilityConversion_Child", exact = true)
+ @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Child", swiftName = "J2ktnotpassingNullabilityConversion_Child", exact = true)
  interface Child: NullabilityConversion.Parent
 
- @ObjCName(name = "J2ktJ2ktnotpassingNullabilityConversion_Supplier", swiftName = "J2ktnotpassingNullabilityConversion_Supplier", exact = true)
+ @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Supplier", swiftName = "J2ktnotpassingNullabilityConversion_Supplier", exact = true)
  fun interface Supplier<T: NullabilityConversion.Child?> {
-  @ObjCName(name = "get")
+  @ObjCName("get")
   fun get(): T
  }
 
- @ObjCName(name = "J2ktJ2ktnotpassingNullabilityConversion_Tests", swiftName = "J2ktnotpassingNullabilityConversion_Tests", exact = true)
+ @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests", swiftName = "J2ktnotpassingNullabilityConversion_Tests", exact = true)
  open class Tests {
-  @ObjCName(name = "J2ktJ2ktnotpassingNullabilityConversion_Tests_Unions", swiftName = "J2ktnotpassingNullabilityConversion_Tests_Unions", exact = true)
+  @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Unions", swiftName = "J2ktnotpassingNullabilityConversion_Tests_Unions", exact = true)
   open class Unions {
-   @ObjCName(name = "J2ktJ2ktnotpassingNullabilityConversion_Tests_UnionsCompanion", swiftName = "J2ktnotpassingNullabilityConversion_Tests_UnionsCompanion", exact = true)
+   @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_UnionsCompanion", swiftName = "J2ktnotpassingNullabilityConversion_Tests_UnionsCompanion", exact = true)
    companion object {
     @JvmStatic
-    @ObjCName(name = "typeArgumentMixedToNonNull")
+    @ObjCName("typeArgumentMixedToNonNull")
     fun typeArgumentMixedToNonNull(): NullabilityConversion.Child {
      try {
       throw RuntimeException()
@@ -59,10 +59,10 @@ open class NullabilityConversion {
     }
    }
 
-   @ObjCName(name = "J2ktJ2ktnotpassingNullabilityConversion_Tests_Unions_ExceptionNonNull1", swiftName = "J2ktnotpassingNullabilityConversion_Tests_Unions_ExceptionNonNull1", exact = true)
+   @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Unions_ExceptionNonNull1", swiftName = "J2ktnotpassingNullabilityConversion_Tests_Unions_ExceptionNonNull1", exact = true)
    abstract class ExceptionNonNull1: RuntimeException(), NullabilityConversion.Supplier<NullabilityConversion.Child>
 
-   @ObjCName(name = "J2ktJ2ktnotpassingNullabilityConversion_Tests_Unions_ExceptionNullable1", swiftName = "J2ktnotpassingNullabilityConversion_Tests_Unions_ExceptionNullable1", exact = true)
+   @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Unions_ExceptionNullable1", swiftName = "J2ktnotpassingNullabilityConversion_Tests_Unions_ExceptionNullable1", exact = true)
    abstract class ExceptionNullable1: RuntimeException(), NullabilityConversion.Supplier<NullabilityConversion.Child?>
   }
  }

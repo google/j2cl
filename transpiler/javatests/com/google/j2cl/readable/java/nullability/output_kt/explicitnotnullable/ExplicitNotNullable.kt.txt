@@ -42,7 +42,7 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktNullabilityExplicitnotnullableExplicitNotNullable", swiftName = "NullabilityExplicitnotnullableExplicitNotNullable", exact = true)
+@ObjCName("J2ktNullabilityExplicitnotnullableExplicitNotNullable", swiftName = "NullabilityExplicitnotnullableExplicitNotNullable", exact = true)
 open class ExplicitNotNullable {
  private var f1: String = "Hello"
 
@@ -108,26 +108,26 @@ open class ExplicitNotNullable {
   this.f13 = Any()
  }
 
- @ObjCName(name = "m1")
+ @ObjCName("m1")
  open fun m1(
-  @ObjCName(name = "withNSString") a: String,
-  @ObjCName(name = "withJavaUtilList") b: MutableList<Double>
+  @ObjCName("withNSString") a: String,
+  @ObjCName("withJavaUtilList") b: MutableList<Double>
  ): String {
   return ""
  }
 
- @ObjCName(name = "m2")
+ @ObjCName("m2")
  open fun m2(
-  @ObjCName(name = "withNSString") a: String?,
-  @ObjCName(name = "withJavaUtilList") b: MutableList<Double?>
+  @ObjCName("withNSString") a: String?,
+  @ObjCName("withJavaUtilList") b: MutableList<Double?>
  ): String? {
   return null
  }
 
- @ObjCName(name = "m3")
+ @ObjCName("m3")
  @JsMethod
  open fun m3(
-  vararg @ObjCName(name = "withNSStringArray") args: String
+  vararg @ObjCName("withNSStringArray") args: String
  ) {
   val args_1: Array<String> = args as Array<String>
  }
@@ -136,7 +136,7 @@ open class ExplicitNotNullable {
 
  internal open fun <T: ExplicitNotNullable.NonNullableBound<T>> methodWithNonNullableBound_pp_nullability_explicitnotnullable() {}
 
- @ObjCName(name = "casts")
+ @ObjCName("casts")
  open fun casts() {
   val listOfString: MutableList<String>? = null as MutableList<String>?
   val nullableListOfString: MutableList<String>? = null as MutableList<String>?
@@ -169,7 +169,7 @@ open class ExplicitNotNullable {
   return x
  }
 
- @ObjCName(name = "J2ktNullabilityExplicitnotnullableExplicitNotNullableCompanion", swiftName = "NullabilityExplicitnotnullableExplicitNotNullableCompanion", exact = true)
+ @ObjCName("J2ktNullabilityExplicitnotnullableExplicitNotNullableCompanion", swiftName = "NullabilityExplicitnotnullableExplicitNotNullableCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun <N> genericNullableMethod_pp_nullability_explicitnotnullable(o: ExplicitNotNullable.ParameterizedNullable<N>, n: N?) {
@@ -391,25 +391,25 @@ open class ExplicitNotNullable {
   }
  }
 
- @ObjCName(name = "J2ktNullabilityExplicitnotnullableExplicitNotNullable_NullableBound", swiftName = "NullabilityExplicitnotnullableExplicitNotNullable_NullableBound", exact = true)
+ @ObjCName("J2ktNullabilityExplicitnotnullableExplicitNotNullable_NullableBound", swiftName = "NullabilityExplicitnotnullableExplicitNotNullable_NullableBound", exact = true)
  interface NullableBound<T: ExplicitNotNullable.NullableBound<T>?>
 
- @ObjCName(name = "J2ktNullabilityExplicitnotnullableExplicitNotNullable_NonNullableBound", swiftName = "NullabilityExplicitnotnullableExplicitNotNullable_NonNullableBound", exact = true)
+ @ObjCName("J2ktNullabilityExplicitnotnullableExplicitNotNullable_NonNullableBound", swiftName = "NullabilityExplicitnotnullableExplicitNotNullable_NonNullableBound", exact = true)
  interface NonNullableBound<T: ExplicitNotNullable.NonNullableBound<T>>
 
- @ObjCName(name = "J2ktNullabilityExplicitnotnullableExplicitNotNullable_NullableBoundWithNonNullArgument", swiftName = "NullabilityExplicitnotnullableExplicitNotNullable_NullableBoundWithNonNullArgument", exact = true)
+ @ObjCName("J2ktNullabilityExplicitnotnullableExplicitNotNullable_NullableBoundWithNonNullArgument", swiftName = "NullabilityExplicitnotnullableExplicitNotNullable_NullableBoundWithNonNullArgument", exact = true)
  interface NullableBoundWithNonNullArgument: ExplicitNotNullable.NullableBound<ExplicitNotNullable.NullableBoundWithNonNullArgument>
 
- @ObjCName(name = "J2ktNullabilityExplicitnotnullableExplicitNotNullable_NullableBoundWithNullableArgument", swiftName = "NullabilityExplicitnotnullableExplicitNotNullable_NullableBoundWithNullableArgument", exact = true)
+ @ObjCName("J2ktNullabilityExplicitnotnullableExplicitNotNullable_NullableBoundWithNullableArgument", swiftName = "NullabilityExplicitnotnullableExplicitNotNullable_NullableBoundWithNullableArgument", exact = true)
  interface NullableBoundWithNullableArgument: ExplicitNotNullable.NullableBound<ExplicitNotNullable.NullableBoundWithNullableArgument?>
 
- @ObjCName(name = "J2ktNullabilityExplicitnotnullableExplicitNotNullable_NonNullBoundWithNonNullArgument", swiftName = "NullabilityExplicitnotnullableExplicitNotNullable_NonNullBoundWithNonNullArgument", exact = true)
+ @ObjCName("J2ktNullabilityExplicitnotnullableExplicitNotNullable_NonNullBoundWithNonNullArgument", swiftName = "NullabilityExplicitnotnullableExplicitNotNullable_NonNullBoundWithNonNullArgument", exact = true)
  interface NonNullBoundWithNonNullArgument: ExplicitNotNullable.NonNullableBound<ExplicitNotNullable.NonNullBoundWithNonNullArgument>
 
- @ObjCName(name = "J2ktNullabilityExplicitnotnullableExplicitNotNullable_NonNullBoundWithNullableArgument", swiftName = "NullabilityExplicitnotnullableExplicitNotNullable_NonNullBoundWithNullableArgument", exact = true)
+ @ObjCName("J2ktNullabilityExplicitnotnullableExplicitNotNullable_NonNullBoundWithNullableArgument", swiftName = "NullabilityExplicitnotnullableExplicitNotNullable_NonNullBoundWithNullableArgument", exact = true)
  interface NonNullBoundWithNullableArgument: ExplicitNotNullable.NonNullableBound<ExplicitNotNullable.NonNullBoundWithNullableArgument>
 
- @ObjCName(name = "J2ktNullabilityExplicitnotnullableExplicitNotNullable_ParameterizedDefaultNullability", swiftName = "NullabilityExplicitnotnullableExplicitNotNullable_ParameterizedDefaultNullability", exact = true)
+ @ObjCName("J2ktNullabilityExplicitnotnullableExplicitNotNullable_ParameterizedDefaultNullability", swiftName = "NullabilityExplicitnotnullableExplicitNotNullable_ParameterizedDefaultNullability", exact = true)
  open class ParameterizedDefaultNullability<N: Any> {
   @JvmField
   internal var nullable_pp_nullability_explicitnotnullable: N? = null
@@ -444,7 +444,7 @@ open class ExplicitNotNullable {
   internal open fun setDefaultNullability_pp_nullability_explicitnotnullable(n: N) {}
  }
 
- @ObjCName(name = "J2ktNullabilityExplicitnotnullableExplicitNotNullable_ParameterizedNullable", swiftName = "NullabilityExplicitnotnullableExplicitNotNullable_ParameterizedNullable", exact = true)
+ @ObjCName("J2ktNullabilityExplicitnotnullableExplicitNotNullable_ParameterizedNullable", swiftName = "NullabilityExplicitnotnullableExplicitNotNullable_ParameterizedNullable", exact = true)
  open class ParameterizedNullable<N> {
   @JvmField
   internal var nullable_pp_nullability_explicitnotnullable: N? = null
@@ -479,7 +479,7 @@ open class ExplicitNotNullable {
   internal open fun setDefaultNullability_pp_nullability_explicitnotnullable(n: N) {}
  }
 
- @ObjCName(name = "J2ktNullabilityExplicitnotnullableExplicitNotNullable_ParameterizedNonNullable", swiftName = "NullabilityExplicitnotnullableExplicitNotNullable_ParameterizedNonNullable", exact = true)
+ @ObjCName("J2ktNullabilityExplicitnotnullableExplicitNotNullable_ParameterizedNonNullable", swiftName = "NullabilityExplicitnotnullableExplicitNotNullable_ParameterizedNonNullable", exact = true)
  open class ParameterizedNonNullable<N: Any> {
   @JvmField
   internal var nullable_pp_nullability_explicitnotnullable: N? = null
@@ -514,37 +514,37 @@ open class ExplicitNotNullable {
   internal open fun setDefaultNullability_pp_nullability_explicitnotnullable(n: N) {}
  }
 
- @ObjCName(name = "J2ktNullabilityExplicitnotnullableExplicitNotNullable_Consumer", swiftName = "NullabilityExplicitnotnullableExplicitNotNullable_Consumer", exact = true)
+ @ObjCName("J2ktNullabilityExplicitnotnullableExplicitNotNullable_Consumer", swiftName = "NullabilityExplicitnotnullableExplicitNotNullable_Consumer", exact = true)
  fun interface Consumer<T> {
-  @ObjCName(name = "accept")
+  @ObjCName("accept")
   fun accept(
-   @ObjCName(name = "withId") t: T
+   @ObjCName("withId") t: T
   )
  }
 
- @ObjCName(name = "J2ktNullabilityExplicitnotnullableExplicitNotNullable_Supplier", swiftName = "NullabilityExplicitnotnullableExplicitNotNullable_Supplier", exact = true)
+ @ObjCName("J2ktNullabilityExplicitnotnullableExplicitNotNullable_Supplier", swiftName = "NullabilityExplicitnotnullableExplicitNotNullable_Supplier", exact = true)
  fun interface Supplier<T> {
-  @ObjCName(name = "get")
+  @ObjCName("get")
   fun get(): T
  }
 
- @ObjCName(name = "J2ktNullabilityExplicitnotnullableExplicitNotNullable_IntFunction", swiftName = "NullabilityExplicitnotnullableExplicitNotNullable_IntFunction", exact = true)
+ @ObjCName("J2ktNullabilityExplicitnotnullableExplicitNotNullable_IntFunction", swiftName = "NullabilityExplicitnotnullableExplicitNotNullable_IntFunction", exact = true)
  fun interface IntFunction<T> {
-  @ObjCName(name = "accept")
+  @ObjCName("accept")
   fun accept(
-   @ObjCName(name = "withInt") i: Int
+   @ObjCName("withInt") i: Int
   ): T
  }
 
- @ObjCName(name = "J2ktNullabilityExplicitnotnullableExplicitNotNullable_Function", swiftName = "NullabilityExplicitnotnullableExplicitNotNullable_Function", exact = true)
+ @ObjCName("J2ktNullabilityExplicitnotnullableExplicitNotNullable_Function", swiftName = "NullabilityExplicitnotnullableExplicitNotNullable_Function", exact = true)
  fun interface Function<I, O> {
-  @ObjCName(name = "apply")
+  @ObjCName("apply")
   fun apply(
-   @ObjCName(name = "withId") i: I
+   @ObjCName("withId") i: I
   ): O
  }
 
- @ObjCName(name = "J2ktNullabilityExplicitnotnullableExplicitNotNullable_DependentTypeParameters", swiftName = "NullabilityExplicitnotnullableExplicitNotNullable_DependentTypeParameters", exact = true)
+ @ObjCName("J2ktNullabilityExplicitnotnullableExplicitNotNullable_DependentTypeParameters", swiftName = "NullabilityExplicitnotnullableExplicitNotNullable_DependentTypeParameters", exact = true)
  open class DependentTypeParameters<E: Any, T: E?> internal constructor() {
   internal open fun getThis_pp_nullability_explicitnotnullable(): ExplicitNotNullable.DependentTypeParameters<E, T> {
    return this
@@ -552,22 +552,22 @@ open class ExplicitNotNullable {
  }
 }
 
-@ObjCName(name = "J2ktNullabilityExplicitnotnullableDefaultNullable", swiftName = "NullabilityExplicitnotnullableDefaultNullable", exact = true)
+@ObjCName("J2ktNullabilityExplicitnotnullableDefaultNullable", swiftName = "NullabilityExplicitnotnullableDefaultNullable", exact = true)
 open class DefaultNullable internal constructor() {
- @ObjCName(name = "J2ktNullabilityExplicitnotnullableDefaultNullableCompanion", swiftName = "NullabilityExplicitnotnullableDefaultNullableCompanion", exact = true)
+ @ObjCName("J2ktNullabilityExplicitnotnullableDefaultNullableCompanion", swiftName = "NullabilityExplicitnotnullableDefaultNullableCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun nullableAccept_pp_nullability_explicitnotnullable(s: String?) {}
  }
 }
 
-@ObjCName(name = "J2ktNullabilityExplicitnotnullableOuterClass", swiftName = "NullabilityExplicitnotnullableOuterClass", exact = true)
+@ObjCName("J2ktNullabilityExplicitnotnullableOuterClass", swiftName = "NullabilityExplicitnotnullableOuterClass", exact = true)
 open class OuterClass<E: Any> internal constructor() {
  init {
   object : InnerClass<E>() {}
   object : InnerClass<String>() {}
  }
 
- @ObjCName(name = "J2ktNullabilityExplicitnotnullableOuterClass_InnerClass", swiftName = "NullabilityExplicitnotnullableOuterClass_InnerClass", exact = true)
+ @ObjCName("J2ktNullabilityExplicitnotnullableOuterClass_InnerClass", swiftName = "NullabilityExplicitnotnullableOuterClass_InnerClass", exact = true)
  open inner class InnerClass<E: Any> internal constructor()
 }

@@ -26,22 +26,22 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktGenericequalsGenericEquals", swiftName = "GenericequalsGenericEquals", exact = true)
+@ObjCName("J2ktGenericequalsGenericEquals", swiftName = "GenericequalsGenericEquals", exact = true)
 open class GenericEquals<T> {
  private val value: T
 
  private val value2: GenericEquals<T>?
 
  constructor(
-  @ObjCName(name = "Id") value: T
+  @ObjCName("Id") value: T
  ) {
   this.value = value
   this.value2 = null
  }
 
- @ObjCName(name = "foo")
+ @ObjCName("foo")
  open fun foo(
-  @ObjCName(name = "withGenericequalsGenericEquals") other: GenericEquals<*>?
+  @ObjCName("withGenericequalsGenericEquals") other: GenericEquals<*>?
  ): Any? {
   return other!!.value2!!.value
  }

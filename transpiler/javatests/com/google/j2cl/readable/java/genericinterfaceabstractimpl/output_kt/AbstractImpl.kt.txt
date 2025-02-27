@@ -25,18 +25,18 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktGenericinterfaceabstractimplMyInterface", swiftName = "GenericinterfaceabstractimplMyInterface", exact = true)
+@ObjCName("J2ktGenericinterfaceabstractimplMyInterface", swiftName = "GenericinterfaceabstractimplMyInterface", exact = true)
 interface MyInterface<T> {
- @ObjCName(name = "fun")
+ @ObjCName("fun")
  fun `fun`(
-  @ObjCName(name = "withId") t: T
+  @ObjCName("withId") t: T
  ): T
 
- @ObjCName(name = "g")
+ @ObjCName("g")
  fun <T_1> g(
-  @ObjCName(name = "withId") t: T_1
+  @ObjCName("withId") t: T_1
  )
 }
 
-@ObjCName(name = "J2ktGenericinterfaceabstractimplAbstractImpl", swiftName = "GenericinterfaceabstractimplAbstractImpl", exact = true)
+@ObjCName("J2ktGenericinterfaceabstractimplAbstractImpl", swiftName = "GenericinterfaceabstractimplAbstractImpl", exact = true)
 abstract class AbstractImpl: MyInterface<Int?>

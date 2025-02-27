@@ -30,124 +30,124 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktJspropertiesFoo", swiftName = "JspropertiesFoo", exact = true)
+@ObjCName("J2ktJspropertiesFoo", swiftName = "JspropertiesFoo", exact = true)
 open class Foo internal constructor() {
- @ObjCName(name = "J2ktJspropertiesFooCompanion", swiftName = "JspropertiesFooCompanion", exact = true)
+ @ObjCName("J2ktJspropertiesFooCompanion", swiftName = "JspropertiesFooCompanion", exact = true)
  companion object {
   private var f: Int = 0
 
   @JvmStatic
-  @ObjCName(name = "getA")
+  @ObjCName("getA")
   @JsProperty
   fun getA(): Int {
    return Foo.f + 1
   }
 
   @JvmStatic
-  @ObjCName(name = "setA")
+  @ObjCName("setA")
   @JsProperty
   fun setA(
-   @ObjCName(name = "withInt") x: Int
+   @ObjCName("withInt") x: Int
   ) {
    Foo.f = x + 2
   }
 
   @JvmStatic
-  @ObjCName(name = "getB")
+  @ObjCName("getB")
   @JsProperty(name = "abc")
   fun getB(): Int {
    return Foo.f + 3
   }
 
   @JvmStatic
-  @ObjCName(name = "setB")
+  @ObjCName("setB")
   @JsProperty(name = "abc")
   fun setB(
-   @ObjCName(name = "withInt") x: Int
+   @ObjCName("withInt") x: Int
   ) {
    Foo.f = x + 4
   }
  }
 }
 
-@ObjCName(name = "J2ktJspropertiesBar", swiftName = "JspropertiesBar", exact = true)
+@ObjCName("J2ktJspropertiesBar", swiftName = "JspropertiesBar", exact = true)
 open class Bar internal constructor() {
  private var f: Int = 0
 
  @JsProperty
  private var privateField: Int = - 1
 
- @ObjCName(name = "getA")
+ @ObjCName("getA")
  @JsProperty
  open fun getA(): Int {
   return this.f + 1
  }
 
- @ObjCName(name = "setA")
+ @ObjCName("setA")
  @JsProperty
  open fun setA(
-  @ObjCName(name = "withInt") x: Int
+  @ObjCName("withInt") x: Int
  ) {
   this.f = x + 2
  }
 
- @ObjCName(name = "getB")
+ @ObjCName("getB")
  @JsProperty(name = "abc")
  open fun getB(): Int {
   return this.f + 3
  }
 
- @ObjCName(name = "setB")
+ @ObjCName("setB")
  @JsProperty(name = "abc")
  open fun setB(
-  @ObjCName(name = "withInt") x: Int
+  @ObjCName("withInt") x: Int
  ) {
   this.f = x + 4
  }
 }
 
-@ObjCName(name = "J2ktJspropertiesNativeFoo", swiftName = "JspropertiesNativeFoo", exact = true)
+@ObjCName("J2ktJspropertiesNativeFoo", swiftName = "JspropertiesNativeFoo", exact = true)
 open class NativeFoo internal constructor() {
- @ObjCName(name = "getA")
+ @ObjCName("getA")
  @JsProperty(name = "hasOwnProperty")
  external open fun getA(): Any?
 
- @ObjCName(name = "J2ktJspropertiesNativeFooCompanion", swiftName = "JspropertiesNativeFooCompanion", exact = true)
+ @ObjCName("J2ktJspropertiesNativeFooCompanion", swiftName = "JspropertiesNativeFooCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName(name = "getB")
+  @ObjCName("getB")
   @JsProperty(name = "Math.PI", namespace = JsPackage.GLOBAL)
   external fun getB(): Double
  }
 }
 
-@ObjCName(name = "J2ktJspropertiesInterfaceWithDefaultJsProperties", swiftName = "JspropertiesInterfaceWithDefaultJsProperties", exact = true)
+@ObjCName("J2ktJspropertiesInterfaceWithDefaultJsProperties", swiftName = "JspropertiesInterfaceWithDefaultJsProperties", exact = true)
 interface InterfaceWithDefaultJsProperties {
- @ObjCName(name = "getM")
+ @ObjCName("getM")
  @JsProperty
  fun getM(): Int {
   return 3
  }
 
- @ObjCName(name = "setM")
+ @ObjCName("setM")
  @JsProperty
  fun setM(
-  @ObjCName(name = "withInt") value: Int
+  @ObjCName("withInt") value: Int
  ) {}
 }
 
-@ObjCName(name = "J2ktJspropertiesImplementsInterfaceWithDefaultJsProperties", swiftName = "JspropertiesImplementsInterfaceWithDefaultJsProperties", exact = true)
+@ObjCName("J2ktJspropertiesImplementsInterfaceWithDefaultJsProperties", swiftName = "JspropertiesImplementsInterfaceWithDefaultJsProperties", exact = true)
 open class ImplementsInterfaceWithDefaultJsProperties internal constructor(): InterfaceWithDefaultJsProperties
 
-@ObjCName(name = "J2ktJspropertiesMain", swiftName = "JspropertiesMain", exact = true)
+@ObjCName("J2ktJspropertiesMain", swiftName = "JspropertiesMain", exact = true)
 open class Main {
- @ObjCName(name = "testNativeJsProperty")
+ @ObjCName("testNativeJsProperty")
  open fun testNativeJsProperty() {
   NativeFoo().getA()
   NativeFoo.getB()
  }
 
- @ObjCName(name = "testStaticJsProperty")
+ @ObjCName("testStaticJsProperty")
  open fun testStaticJsProperty() {
   Foo.getA()
   Foo.setA(10)
@@ -155,7 +155,7 @@ open class Main {
   Foo.setB(10)
  }
 
- @ObjCName(name = "testInstanceJsProperty")
+ @ObjCName("testInstanceJsProperty")
  open fun testInstanceJsProperty() {
   val bar: Bar = Bar()
   bar.getA()

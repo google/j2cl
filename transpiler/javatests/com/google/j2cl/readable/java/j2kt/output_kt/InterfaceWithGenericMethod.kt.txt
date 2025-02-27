@@ -24,10 +24,10 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktJ2ktInterfaceWithGenericMethod", swiftName = "J2ktInterfaceWithGenericMethod", exact = true)
+@ObjCName("J2ktJ2ktInterfaceWithGenericMethod", swiftName = "J2ktInterfaceWithGenericMethod", exact = true)
 interface InterfaceWithGenericMethod {
- @ObjCName(name = "apply")
+ @ObjCName("apply")
  fun <T> apply(
-  @ObjCName(name = "withId") t: T
+  @ObjCName("withId") t: T
  ): T
 }

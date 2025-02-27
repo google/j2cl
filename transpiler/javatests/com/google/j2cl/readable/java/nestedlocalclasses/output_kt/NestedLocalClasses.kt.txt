@@ -26,11 +26,11 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktNestedlocalclassesNestedLocalClasses", swiftName = "NestedlocalclassesNestedLocalClasses", exact = true)
+@ObjCName("J2ktNestedlocalclassesNestedLocalClasses", swiftName = "NestedlocalclassesNestedLocalClasses", exact = true)
 open class NestedLocalClasses {
- @ObjCName(name = "test")
+ @ObjCName("test")
  open fun test(
-  @ObjCName(name = "withInt") p: Int
+  @ObjCName("withInt") p: Int
  ) {
   val localVar: Int = 1
   open class InnerClass internal constructor() {
@@ -50,9 +50,9 @@ open class NestedLocalClasses {
   }
  }
 
- @ObjCName(name = "J2ktNestedlocalclassesNestedLocalClasses_InterfaceWithThisReference", swiftName = "NestedlocalclassesNestedLocalClasses_InterfaceWithThisReference", exact = true)
+ @ObjCName("J2ktNestedlocalclassesNestedLocalClasses_InterfaceWithThisReference", swiftName = "NestedlocalclassesNestedLocalClasses_InterfaceWithThisReference", exact = true)
  interface InterfaceWithThisReference {
-  @ObjCName(name = "foo")
+  @ObjCName("foo")
   fun foo() {
    open class Super internal constructor(): NestedLocalClasses.InterfaceWithThisReference
    object : Super() {}

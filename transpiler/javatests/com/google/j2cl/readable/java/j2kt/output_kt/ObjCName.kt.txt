@@ -48,14 +48,14 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 
-@kotlin.native.ObjCName(name = "J2ktNewObjCName", swiftName = "NewObjCName", exact = true)
+@kotlin.native.ObjCName("J2ktNewObjCName", swiftName = "NewObjCName", exact = true)
 open class ObjCName {
  @JvmField
- @kotlin.native.ObjCName(name = "publicField_")
+ @kotlin.native.ObjCName("publicField_")
  var publicField: Int = 0
 
  @JvmField
- @kotlin.native.ObjCName(name = "protectedField_")
+ @kotlin.native.ObjCName("protectedField_")
  var protectedField: Int = 0
 
  @JvmField
@@ -66,22 +66,22 @@ open class ObjCName {
  constructor()
 
  constructor(
-  @kotlin.native.ObjCName(name = "Integer") i: Int
+  @kotlin.native.ObjCName("Integer") i: Int
  )
 
  constructor(
-  @kotlin.native.ObjCName(name = "Int") i: Int,
-  @kotlin.native.ObjCName(name = "withNSString") s: String?
+  @kotlin.native.ObjCName("Int") i: Int,
+  @kotlin.native.ObjCName("withNSString") s: String?
  )
 
- @kotlin.native.ObjCName(name = "J2ktNewObjCNameCompanion", swiftName = "NewObjCNameCompanion", exact = true)
+ @kotlin.native.ObjCName("J2ktNewObjCNameCompanion", swiftName = "NewObjCNameCompanion", exact = true)
  companion object {
   @JvmField
-  @kotlin.native.ObjCName(name = "publicStaticField_")
+  @kotlin.native.ObjCName("publicStaticField_")
   var publicStaticField: Int = 0
 
   @JvmField
-  @kotlin.native.ObjCName(name = "protectedStaticField_")
+  @kotlin.native.ObjCName("protectedStaticField_")
   var protectedStaticField: Int = 0
 
   @JvmField
@@ -90,451 +90,451 @@ open class ObjCName {
   private var privateStaticField: Int = 0
 
   @JvmField
-  @kotlin.native.ObjCName(name = "objectField_")
+  @kotlin.native.ObjCName("objectField_")
   var objectField: Any? = null
 
   @JvmField
-  @kotlin.native.ObjCName(name = "stringField_")
+  @kotlin.native.ObjCName("stringField_")
   var stringField: String? = null
 
   @JvmField
-  @kotlin.native.ObjCName(name = "selfField_")
+  @kotlin.native.ObjCName("selfField_")
   var selfField: ObjCName? = null
 
   @JvmField
-  @kotlin.native.ObjCName(name = "iterable_")
+  @kotlin.native.ObjCName("iterable_")
   var iterable: MutableIterable<String?>? = null
 
   @JvmField
-  @kotlin.native.ObjCName(name = "iterator_")
+  @kotlin.native.ObjCName("iterator_")
   var iterator: MutableIterator<String?>? = null
 
   @JvmField
-  @kotlin.native.ObjCName(name = "collection_")
+  @kotlin.native.ObjCName("collection_")
   var collection: MutableCollection<Any?>? = null
 
   @JvmField
-  @kotlin.native.ObjCName(name = "val_")
+  @kotlin.native.ObjCName("val_")
   var `val`: Int = 0
 
   @JvmField
-  @kotlin.native.ObjCName(name = "var_")
+  @kotlin.native.ObjCName("var_")
   var `var`: Int = 0
 
   @JvmField
-  @kotlin.native.ObjCName(name = "fun_")
+  @kotlin.native.ObjCName("fun_")
   var `fun`: Int = 0
 
   @JvmField
-  @kotlin.native.ObjCName(name = "alloc___")
+  @kotlin.native.ObjCName("alloc___")
   var alloc: Int = 0
 
   @JvmField
-  @kotlin.native.ObjCName(name = "init___")
+  @kotlin.native.ObjCName("init___")
   var init: Int = 0
 
   @JvmField
-  @kotlin.native.ObjCName(name = "extern___")
+  @kotlin.native.ObjCName("extern___")
   var extern: Int = 0
 
   @JvmField
-  @kotlin.native.ObjCName(name = "inline___")
+  @kotlin.native.ObjCName("inline___")
   var inline: Int = 0
 
   @JvmField
-  @kotlin.native.ObjCName(name = "NULL___")
+  @kotlin.native.ObjCName("NULL___")
   var NULL: Int = 0
 
   @JvmField
-  @kotlin.native.ObjCName(name = "allocFoo_")
+  @kotlin.native.ObjCName("allocFoo_")
   var allocFoo: Int = 0
 
   @JvmField
-  @kotlin.native.ObjCName(name = "initFoo_")
+  @kotlin.native.ObjCName("initFoo_")
   var initFoo: Int = 0
 
   @JvmField
-  @kotlin.native.ObjCName(name = "newFoo_")
+  @kotlin.native.ObjCName("newFoo_")
   var newFoo: Int = 0
 
-  @kotlin.native.ObjCName(name = "BOOLEAN_FALSE_")
+  @kotlin.native.ObjCName("BOOLEAN_FALSE_")
   const val BOOLEAN_FALSE: Boolean = false
 
-  @kotlin.native.ObjCName(name = "BOOLEAN_TRUE_")
+  @kotlin.native.ObjCName("BOOLEAN_TRUE_")
   const val BOOLEAN_TRUE: Boolean = true
 
-  @kotlin.native.ObjCName(name = "CHAR_")
+  @kotlin.native.ObjCName("CHAR_")
   const val CHAR: Char = 'a'
 
-  @kotlin.native.ObjCName(name = "CHAR_APOSTROPHE_")
+  @kotlin.native.ObjCName("CHAR_APOSTROPHE_")
   const val CHAR_APOSTROPHE: Char = '\''
 
-  @kotlin.native.ObjCName(name = "CHAR_BACKSLASH_")
+  @kotlin.native.ObjCName("CHAR_BACKSLASH_")
   const val CHAR_BACKSLASH: Char = '\\'
 
-  @kotlin.native.ObjCName(name = "CHAR_UNICODE_")
+  @kotlin.native.ObjCName("CHAR_UNICODE_")
   const val CHAR_UNICODE: Char = '\u1231'
 
-  @kotlin.native.ObjCName(name = "BYTE_")
+  @kotlin.native.ObjCName("BYTE_")
   const val BYTE: Byte = 123.toByte()
 
-  @kotlin.native.ObjCName(name = "SHORT_")
+  @kotlin.native.ObjCName("SHORT_")
   const val SHORT: Short = 123.toShort()
 
-  @kotlin.native.ObjCName(name = "INT_")
+  @kotlin.native.ObjCName("INT_")
   const val INT: Int = 123
 
-  @kotlin.native.ObjCName(name = "INT_MIN_VALUE_")
+  @kotlin.native.ObjCName("INT_MIN_VALUE_")
   const val INT_MIN_VALUE: Int = -2147483647 - 1
 
-  @kotlin.native.ObjCName(name = "INT_MAX_VALUE_")
+  @kotlin.native.ObjCName("INT_MAX_VALUE_")
   const val INT_MAX_VALUE: Int = 2147483647
 
-  @kotlin.native.ObjCName(name = "LONG_")
+  @kotlin.native.ObjCName("LONG_")
   const val LONG: Long = 123L
 
-  @kotlin.native.ObjCName(name = "LONG_MIN_VALUE_")
+  @kotlin.native.ObjCName("LONG_MIN_VALUE_")
   const val LONG_MIN_VALUE: Long = -9223372036854775807L - 1L
 
-  @kotlin.native.ObjCName(name = "LONG_MAX_VALUE_")
+  @kotlin.native.ObjCName("LONG_MAX_VALUE_")
   const val LONG_MAX_VALUE: Long = 9223372036854775807L
 
-  @kotlin.native.ObjCName(name = "FLOAT_")
+  @kotlin.native.ObjCName("FLOAT_")
   const val FLOAT: Float = 123.0f
 
-  @kotlin.native.ObjCName(name = "FLOAT_ZER0_")
+  @kotlin.native.ObjCName("FLOAT_ZER0_")
   const val FLOAT_ZER0: Float = 0.0f
 
-  @kotlin.native.ObjCName(name = "FLOAT_NEGATIVE_ZERO_")
+  @kotlin.native.ObjCName("FLOAT_NEGATIVE_ZERO_")
   const val FLOAT_NEGATIVE_ZERO: Float = -0.0f
 
-  @kotlin.native.ObjCName(name = "FLOAT_NAN_")
+  @kotlin.native.ObjCName("FLOAT_NAN_")
   const val FLOAT_NAN: Float = (0.0f / 0.0f)
 
-  @kotlin.native.ObjCName(name = "FLOAT_NEGATIVE_INFINITY_")
+  @kotlin.native.ObjCName("FLOAT_NEGATIVE_INFINITY_")
   const val FLOAT_NEGATIVE_INFINITY: Float = (-1.0f / 0.0f)
 
-  @kotlin.native.ObjCName(name = "FLOAT_POSITIVE_INFINITY_")
+  @kotlin.native.ObjCName("FLOAT_POSITIVE_INFINITY_")
   const val FLOAT_POSITIVE_INFINITY: Float = (1.0f / 0.0f)
 
-  @kotlin.native.ObjCName(name = "FLOAT_MIN_VALUE_")
+  @kotlin.native.ObjCName("FLOAT_MIN_VALUE_")
   const val FLOAT_MIN_VALUE: Float = 1.4E-45f
 
-  @kotlin.native.ObjCName(name = "FLOAT_MIN_NORMAL_")
+  @kotlin.native.ObjCName("FLOAT_MIN_NORMAL_")
   const val FLOAT_MIN_NORMAL: Float = 1.1754944E-38f
 
-  @kotlin.native.ObjCName(name = "FLOAT_MIN_EXPONENT_")
+  @kotlin.native.ObjCName("FLOAT_MIN_EXPONENT_")
   const val FLOAT_MIN_EXPONENT: Float = -126.0f
 
-  @kotlin.native.ObjCName(name = "FLOAT_MAX_VALUE_")
+  @kotlin.native.ObjCName("FLOAT_MAX_VALUE_")
   const val FLOAT_MAX_VALUE: Float = 3.4028235E38f
 
-  @kotlin.native.ObjCName(name = "FLOAT_MAX_EXPONENT_")
+  @kotlin.native.ObjCName("FLOAT_MAX_EXPONENT_")
   const val FLOAT_MAX_EXPONENT: Float = 127.0f
 
-  @kotlin.native.ObjCName(name = "DOUBLE_")
+  @kotlin.native.ObjCName("DOUBLE_")
   const val DOUBLE: Double = 123.0
 
-  @kotlin.native.ObjCName(name = "DOUBLE_ZER0_")
+  @kotlin.native.ObjCName("DOUBLE_ZER0_")
   const val DOUBLE_ZER0: Double = 0.0
 
-  @kotlin.native.ObjCName(name = "DOUBLE_NEGATIVE_ZERO_")
+  @kotlin.native.ObjCName("DOUBLE_NEGATIVE_ZERO_")
   const val DOUBLE_NEGATIVE_ZERO: Double = -0.0
 
-  @kotlin.native.ObjCName(name = "DOUBLE_NAN_")
+  @kotlin.native.ObjCName("DOUBLE_NAN_")
   const val DOUBLE_NAN: Double = (0.0 / 0.0)
 
-  @kotlin.native.ObjCName(name = "DOUBLE_NEGATIVE_INFINITY_")
+  @kotlin.native.ObjCName("DOUBLE_NEGATIVE_INFINITY_")
   const val DOUBLE_NEGATIVE_INFINITY: Double = (-1.0 / 0.0)
 
-  @kotlin.native.ObjCName(name = "DOUBLE_POSITIVE_INFINITY_")
+  @kotlin.native.ObjCName("DOUBLE_POSITIVE_INFINITY_")
   const val DOUBLE_POSITIVE_INFINITY: Double = (1.0 / 0.0)
 
-  @kotlin.native.ObjCName(name = "DOUBLE_MIN_VALUE_")
+  @kotlin.native.ObjCName("DOUBLE_MIN_VALUE_")
   const val DOUBLE_MIN_VALUE: Double = 4.9E-324
 
-  @kotlin.native.ObjCName(name = "DOUBLE_MIN_NORMAL_")
+  @kotlin.native.ObjCName("DOUBLE_MIN_NORMAL_")
   const val DOUBLE_MIN_NORMAL: Double = 2.2250738585072014E-308
 
-  @kotlin.native.ObjCName(name = "DOUBLE_MIN_EXPONENT_")
+  @kotlin.native.ObjCName("DOUBLE_MIN_EXPONENT_")
   const val DOUBLE_MIN_EXPONENT: Double = -1022.0
 
-  @kotlin.native.ObjCName(name = "DOUBLE_MAX_VALUE_")
+  @kotlin.native.ObjCName("DOUBLE_MAX_VALUE_")
   const val DOUBLE_MAX_VALUE: Double = 1.7976931348623157E308
 
-  @kotlin.native.ObjCName(name = "DOUBLE_MAX_EXPONENT_")
+  @kotlin.native.ObjCName("DOUBLE_MAX_EXPONENT_")
   const val DOUBLE_MAX_EXPONENT: Double = 1023.0
 
-  @kotlin.native.ObjCName(name = "STRING_")
+  @kotlin.native.ObjCName("STRING_")
   const val STRING: String = "foo"
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "newFoo")
+  @kotlin.native.ObjCName("newFoo")
   fun foo() {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "newProtectedFoo")
+  @kotlin.native.ObjCName("newProtectedFoo")
   fun protectedFoo() {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "newFooFrom")
+  @kotlin.native.ObjCName("newFooFrom")
   fun newFoo(
-   @kotlin.native.ObjCName(name = "Int") i: Int
+   @kotlin.native.ObjCName("Int") i: Int
   ) {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "newFooFrom")
+  @kotlin.native.ObjCName("newFooFrom")
   fun foo(
-   @kotlin.native.ObjCName(name = "Int") s: String?,
-   @kotlin.native.ObjCName(name = "withInteger") i: Int
+   @kotlin.native.ObjCName("Int") s: String?,
+   @kotlin.native.ObjCName("withInteger") i: Int
   ) {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "foo")
+  @kotlin.native.ObjCName("foo")
   fun foo(
-   @kotlin.native.ObjCName(name = "withNSString") s: String?,
-   @kotlin.native.ObjCName(name = "withNSString") i: String?
+   @kotlin.native.ObjCName("withNSString") s: String?,
+   @kotlin.native.ObjCName("withNSString") i: String?
   ) {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "val")
+  @kotlin.native.ObjCName("val")
   fun `val`() {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "var")
+  @kotlin.native.ObjCName("var")
   fun `var`() {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "fun")
+  @kotlin.native.ObjCName("fun")
   fun `fun`() {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "alloc__")
+  @kotlin.native.ObjCName("alloc__")
   fun alloc() {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "allocBar")
+  @kotlin.native.ObjCName("allocBar")
   fun allocBar() {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "allocatedBar")
+  @kotlin.native.ObjCName("allocatedBar")
   fun allocatedBar() {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "init__")
+  @kotlin.native.ObjCName("init__")
   fun init() {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "initialize__")
+  @kotlin.native.ObjCName("initialize__")
   fun initialize() {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "initBar")
+  @kotlin.native.ObjCName("initBar")
   fun initBar() {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "newBar")
+  @kotlin.native.ObjCName("newBar")
   fun newBar() {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "copyBar")
+  @kotlin.native.ObjCName("copyBar")
   fun copyBar() {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "mutableCopyBar")
+  @kotlin.native.ObjCName("mutableCopyBar")
   fun mutableCopyBar() {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "reservedParamNames")
+  @kotlin.native.ObjCName("reservedParamNames")
   fun reservedParamNames(
-   @kotlin.native.ObjCName(name = "withInt") extern: Int,
-   @kotlin.native.ObjCName(name = "withInt") struct: Int,
-   @kotlin.native.ObjCName(name = "withInt") register: Int,
-   @kotlin.native.ObjCName(name = "withInt") inline: Int
+   @kotlin.native.ObjCName("withInt") extern: Int,
+   @kotlin.native.ObjCName("withInt") struct: Int,
+   @kotlin.native.ObjCName("withInt") register: Int,
+   @kotlin.native.ObjCName("withInt") inline: Int
   ) {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "nativeTypes")
+  @kotlin.native.ObjCName("nativeTypes")
   fun nativeTypes(
-   @kotlin.native.ObjCName(name = "withNSString") s: String?,
-   @kotlin.native.ObjCName(name = "withId") o: Any?,
-   @kotlin.native.ObjCName(name = "withNSNumber") n: Number?
+   @kotlin.native.ObjCName("withNSString") s: String?,
+   @kotlin.native.ObjCName("withId") o: Any?,
+   @kotlin.native.ObjCName("withNSNumber") n: Number?
   ): String? {
    return s
   }
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "numberType")
+  @kotlin.native.ObjCName("numberType")
   fun numberType(
-   @kotlin.native.ObjCName(name = "withNSNumber") l: Number?
+   @kotlin.native.ObjCName("withNSNumber") l: Number?
   ) {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "booleanType")
+  @kotlin.native.ObjCName("booleanType")
   fun booleanType(
-   @kotlin.native.ObjCName(name = "withJavaLangBoolean") l: Boolean?
+   @kotlin.native.ObjCName("withJavaLangBoolean") l: Boolean?
   ) {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "characterType")
+  @kotlin.native.ObjCName("characterType")
   fun characterType(
-   @kotlin.native.ObjCName(name = "withJavaLangCharacter") l: Char?
+   @kotlin.native.ObjCName("withJavaLangCharacter") l: Char?
   ) {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "byteType")
+  @kotlin.native.ObjCName("byteType")
   fun byteType(
-   @kotlin.native.ObjCName(name = "withJavaLangByte") l: Byte?
+   @kotlin.native.ObjCName("withJavaLangByte") l: Byte?
   ) {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "shortType")
+  @kotlin.native.ObjCName("shortType")
   fun shortType(
-   @kotlin.native.ObjCName(name = "withJavaLangShort") l: Short?
+   @kotlin.native.ObjCName("withJavaLangShort") l: Short?
   ) {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "integerType")
+  @kotlin.native.ObjCName("integerType")
   fun integerType(
-   @kotlin.native.ObjCName(name = "withJavaLangInteger") l: Int?
+   @kotlin.native.ObjCName("withJavaLangInteger") l: Int?
   ) {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "longType")
+  @kotlin.native.ObjCName("longType")
   fun longType(
-   @kotlin.native.ObjCName(name = "withJavaLangLong") l: Long?
+   @kotlin.native.ObjCName("withJavaLangLong") l: Long?
   ) {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "floatType")
+  @kotlin.native.ObjCName("floatType")
   fun floatType(
-   @kotlin.native.ObjCName(name = "withJavaLangFloat") l: Float?
+   @kotlin.native.ObjCName("withJavaLangFloat") l: Float?
   ) {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "doubleType")
+  @kotlin.native.ObjCName("doubleType")
   fun doubleType(
-   @kotlin.native.ObjCName(name = "withJavaLangDouble") l: Double?
+   @kotlin.native.ObjCName("withJavaLangDouble") l: Double?
   ) {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "iterableType")
+  @kotlin.native.ObjCName("iterableType")
   fun iterableType(
-   @kotlin.native.ObjCName(name = "withJavaLangIterable") l: MutableIterable<String?>?
+   @kotlin.native.ObjCName("withJavaLangIterable") l: MutableIterable<String?>?
   ) {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "iteratorType")
+  @kotlin.native.ObjCName("iteratorType")
   fun iteratorType(
-   @kotlin.native.ObjCName(name = "withJavaUtilIterator") l: MutableIterator<String?>?
+   @kotlin.native.ObjCName("withJavaUtilIterator") l: MutableIterator<String?>?
   ) {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "listIteratorType")
+  @kotlin.native.ObjCName("listIteratorType")
   fun listIteratorType(
-   @kotlin.native.ObjCName(name = "withJavaUtilListIterator") l: MutableListIterator<String?>?
+   @kotlin.native.ObjCName("withJavaUtilListIterator") l: MutableListIterator<String?>?
   ) {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "collectionType")
+  @kotlin.native.ObjCName("collectionType")
   fun collectionType(
-   @kotlin.native.ObjCName(name = "withJavaUtilCollection") l: MutableCollection<String?>?
+   @kotlin.native.ObjCName("withJavaUtilCollection") l: MutableCollection<String?>?
   ) {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "listType")
+  @kotlin.native.ObjCName("listType")
   fun listType(
-   @kotlin.native.ObjCName(name = "withJavaUtilList") l: MutableList<String?>?
+   @kotlin.native.ObjCName("withJavaUtilList") l: MutableList<String?>?
   ) {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "setType")
+  @kotlin.native.ObjCName("setType")
   fun setType(
-   @kotlin.native.ObjCName(name = "withJavaUtilSet") l: MutableSet<String?>?
+   @kotlin.native.ObjCName("withJavaUtilSet") l: MutableSet<String?>?
   ) {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "mapType")
+  @kotlin.native.ObjCName("mapType")
   fun mapType(
-   @kotlin.native.ObjCName(name = "withJavaUtilMap") l: MutableMap<String?, String?>?
+   @kotlin.native.ObjCName("withJavaUtilMap") l: MutableMap<String?, String?>?
   ) {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "linkedListType")
+  @kotlin.native.ObjCName("linkedListType")
   fun linkedListType(
-   @kotlin.native.ObjCName(name = "withJavaUtilLinkedList") l: LinkedList<String?>?
+   @kotlin.native.ObjCName("withJavaUtilLinkedList") l: LinkedList<String?>?
   ) {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "hashSetType")
+  @kotlin.native.ObjCName("hashSetType")
   fun hashSetType(
-   @kotlin.native.ObjCName(name = "withJavaUtilHashSet") l: HashSet<String?>?
+   @kotlin.native.ObjCName("withJavaUtilHashSet") l: HashSet<String?>?
   ) {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "hashMapType")
+  @kotlin.native.ObjCName("hashMapType")
   fun hashMapType(
-   @kotlin.native.ObjCName(name = "withJavaUtilHashMap") l: HashMap<String?, String?>?
+   @kotlin.native.ObjCName("withJavaUtilHashMap") l: HashMap<String?, String?>?
   ) {}
 
   @JvmStatic
-  @kotlin.native.ObjCName(name = "nonNativeJavaType")
+  @kotlin.native.ObjCName("nonNativeJavaType")
   fun nonNativeJavaType(
-   @kotlin.native.ObjCName(name = "withJavaUtilStringJoiner") l: StringJoiner?
+   @kotlin.native.ObjCName("withJavaUtilStringJoiner") l: StringJoiner?
   ) {}
  }
 
- @kotlin.native.ObjCName(name = "J2ktInnerClassNewName", swiftName = "InnerClassNewName", exact = true)
+ @kotlin.native.ObjCName("J2ktInnerClassNewName", swiftName = "InnerClassNewName", exact = true)
  open inner class InnerClassOldName
 
- @kotlin.native.ObjCName(name = "J2ktNewObjCName_Foo", swiftName = "NewObjCName_Foo", exact = true)
+ @kotlin.native.ObjCName("J2ktNewObjCName_Foo", swiftName = "NewObjCName_Foo", exact = true)
  enum class Foo {
-  @kotlin.native.ObjCName(name = "val")
+  @kotlin.native.ObjCName("val")
   `val`,
-  @kotlin.native.ObjCName(name = "var")
+  @kotlin.native.ObjCName("var")
   `var`,
-  @kotlin.native.ObjCName(name = "fun")
+  @kotlin.native.ObjCName("fun")
   `fun`,
-  @kotlin.native.ObjCName(name = "alloc__")
+  @kotlin.native.ObjCName("alloc__")
   alloc,
-  @kotlin.native.ObjCName(name = "init__")
+  @kotlin.native.ObjCName("init__")
   `init`,
-  @kotlin.native.ObjCName(name = "initialize__")
+  @kotlin.native.ObjCName("initialize__")
   initialize,
-  @kotlin.native.ObjCName(name = "allocFoo")
+  @kotlin.native.ObjCName("allocFoo")
   allocFoo,
-  @kotlin.native.ObjCName(name = "initFoo")
+  @kotlin.native.ObjCName("initFoo")
   initFoo,
-  @kotlin.native.ObjCName(name = "newFoo")
+  @kotlin.native.ObjCName("newFoo")
   newFoo,
-  @kotlin.native.ObjCName(name = "copyFoo")
+  @kotlin.native.ObjCName("copyFoo")
   copyFoo,
-  @kotlin.native.ObjCName(name = "mutableCopyFoo")
+  @kotlin.native.ObjCName("mutableCopyFoo")
   mutableCopyFoo,
-  @kotlin.native.ObjCName(name = "register__")
+  @kotlin.native.ObjCName("register__")
   register,
-  @kotlin.native.ObjCName(name = "struct__")
+  @kotlin.native.ObjCName("struct__")
   struct,
-  @kotlin.native.ObjCName(name = "NULL__")
+  @kotlin.native.ObjCName("NULL__")
   NULL,
-  @kotlin.native.ObjCName(name = "YES__")
+  @kotlin.native.ObjCName("YES__")
   YES,
-  @kotlin.native.ObjCName(name = "NO__")
+  @kotlin.native.ObjCName("NO__")
   NO;
 
-  @kotlin.native.ObjCName(name = "J2ktNewObjCName_FooCompanion", swiftName = "NewObjCName_FooCompanion", exact = true)
+  @kotlin.native.ObjCName("J2ktNewObjCName_FooCompanion", swiftName = "NewObjCName_FooCompanion", exact = true)
   companion object {
    @JvmStatic
-   @kotlin.native.ObjCName(name = "withOrdinal")
+   @kotlin.native.ObjCName("withOrdinal")
    fun withOrdinal(
-    @kotlin.native.ObjCName(name = "withInt") ordinal: Int
+    @kotlin.native.ObjCName("withInt") ordinal: Int
    ): ObjCName.Foo? {
     return ObjCName.Foo.values()[ordinal]
    }
   }
  }
 
- @kotlin.native.ObjCName(name = "J2ktNewObjCName_SubCollection", swiftName = "NewObjCName_SubCollection", exact = true)
+ @kotlin.native.ObjCName("J2ktNewObjCName_SubCollection", swiftName = "NewObjCName_SubCollection", exact = true)
  open class SubCollection<E>: AbstractList<E>() {
   override fun get(index: Int): E {
    return null as E
@@ -545,30 +545,30 @@ open class ObjCName {
     return 0
    }
 
-  @kotlin.native.ObjCName(name = "J2ktNewObjCName_SubCollectionCompanion", swiftName = "NewObjCName_SubCollectionCompanion", exact = true)
+  @kotlin.native.ObjCName("J2ktNewObjCName_SubCollectionCompanion", swiftName = "NewObjCName_SubCollectionCompanion", exact = true)
   companion object {
    @JvmStatic
-   @kotlin.native.ObjCName(name = "staticMethod")
+   @kotlin.native.ObjCName("staticMethod")
    fun staticMethod() {}
   }
 
-  @kotlin.native.ObjCName(name = "J2ktNewObjCName_SubCollection_InnerClass", swiftName = "NewObjCName_SubCollection_InnerClass", exact = true)
+  @kotlin.native.ObjCName("J2ktNewObjCName_SubCollection_InnerClass", swiftName = "NewObjCName_SubCollection_InnerClass", exact = true)
   open class InnerClass {
-   @kotlin.native.ObjCName(name = "J2ktNewObjCName_SubCollection_InnerClassCompanion", swiftName = "NewObjCName_SubCollection_InnerClassCompanion", exact = true)
+   @kotlin.native.ObjCName("J2ktNewObjCName_SubCollection_InnerClassCompanion", swiftName = "NewObjCName_SubCollection_InnerClassCompanion", exact = true)
    companion object {
     @JvmStatic
-    @kotlin.native.ObjCName(name = "staticMethod")
+    @kotlin.native.ObjCName("staticMethod")
     fun staticMethod() {}
    }
   }
  }
 
- @kotlin.native.ObjCName(name = "J2ktNewObjCName_NonCollection", swiftName = "NewObjCName_NonCollection", exact = true)
+ @kotlin.native.ObjCName("J2ktNewObjCName_NonCollection", swiftName = "NewObjCName_NonCollection", exact = true)
  open class NonCollection {
-  @kotlin.native.ObjCName(name = "J2ktNewObjCName_NonCollectionCompanion", swiftName = "NewObjCName_NonCollectionCompanion", exact = true)
+  @kotlin.native.ObjCName("J2ktNewObjCName_NonCollectionCompanion", swiftName = "NewObjCName_NonCollectionCompanion", exact = true)
   companion object {
    @JvmStatic
-   @kotlin.native.ObjCName(name = "staticMethod")
+   @kotlin.native.ObjCName("staticMethod")
    fun staticMethod() {}
   }
  }

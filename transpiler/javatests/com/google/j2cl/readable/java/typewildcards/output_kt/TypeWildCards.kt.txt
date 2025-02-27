@@ -29,88 +29,88 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktTypewildcardsFunction", swiftName = "TypewildcardsFunction", exact = true)
+@ObjCName("J2ktTypewildcardsFunction", swiftName = "TypewildcardsFunction", exact = true)
 fun interface Function<I, O> {
- @ObjCName(name = "apply")
+ @ObjCName("apply")
  fun apply(
-  @ObjCName(name = "withId") i: I
+  @ObjCName("withId") i: I
  ): O
 }
 
-@ObjCName(name = "J2ktTypewildcardsList", swiftName = "TypewildcardsList", exact = true)
+@ObjCName("J2ktTypewildcardsList", swiftName = "TypewildcardsList", exact = true)
 interface List<I>
 
-@ObjCName(name = "J2ktTypewildcardsGenericType", swiftName = "TypewildcardsGenericType", exact = true)
+@ObjCName("J2ktTypewildcardsGenericType", swiftName = "TypewildcardsGenericType", exact = true)
 open class GenericType<T> internal constructor() {
  internal open fun get_pp_typewildcards(): T {
   return null as T
  }
 }
 
-@ObjCName(name = "J2ktTypewildcardsBar", swiftName = "TypewildcardsBar", exact = true)
+@ObjCName("J2ktTypewildcardsBar", swiftName = "TypewildcardsBar", exact = true)
 open class Bar internal constructor()
 
-@ObjCName(name = "J2ktTypewildcardsRecursiveType", swiftName = "TypewildcardsRecursiveType", exact = true)
+@ObjCName("J2ktTypewildcardsRecursiveType", swiftName = "TypewildcardsRecursiveType", exact = true)
 open class RecursiveType<T: RecursiveType<T>?> {
  constructor(
-  @ObjCName(name = "TypewildcardsRecursiveType") wildcardParameter: RecursiveType<*>?
+  @ObjCName("TypewildcardsRecursiveType") wildcardParameter: RecursiveType<*>?
  )
 }
 
-@ObjCName(name = "J2ktTypewildcardsDeepRecursiveType", swiftName = "TypewildcardsDeepRecursiveType", exact = true)
+@ObjCName("J2ktTypewildcardsDeepRecursiveType", swiftName = "TypewildcardsDeepRecursiveType", exact = true)
 interface DeepRecursiveType<T: GenericType<in T>?>
 
-@ObjCName(name = "J2ktTypewildcardsRecursiveSubtype", swiftName = "TypewildcardsRecursiveSubtype", exact = true)
+@ObjCName("J2ktTypewildcardsRecursiveSubtype", swiftName = "TypewildcardsRecursiveSubtype", exact = true)
 open class RecursiveSubtype: RecursiveType<RecursiveSubtype?> {
  constructor(
-  @ObjCName(name = "TypewildcardsRecursiveType") wildcardParameter: RecursiveType<*>?
+  @ObjCName("TypewildcardsRecursiveType") wildcardParameter: RecursiveType<*>?
  ): super(wildcardParameter)
 }
 
-@ObjCName(name = "J2ktTypewildcardsTypeWildCards", swiftName = "TypewildcardsTypeWildCards", exact = true)
+@ObjCName("J2ktTypewildcardsTypeWildCards", swiftName = "TypewildcardsTypeWildCards", exact = true)
 open class TypeWildCards {
- @ObjCName(name = "unbounded")
+ @ObjCName("unbounded")
  open fun unbounded(
-  @ObjCName(name = "withTypewildcardsGenericType") g: GenericType<*>?
+  @ObjCName("withTypewildcardsGenericType") g: GenericType<*>?
  ): Any? {
   return g!!.get_pp_typewildcards()
  }
 
- @ObjCName(name = "upperBound")
+ @ObjCName("upperBound")
  open fun upperBound(
-  @ObjCName(name = "withTypewildcardsGenericType") g: GenericType<out Bar?>?
+  @ObjCName("withTypewildcardsGenericType") g: GenericType<out Bar?>?
  ): Bar? {
   return g!!.get_pp_typewildcards()
  }
 
- @ObjCName(name = "lowerBound")
+ @ObjCName("lowerBound")
  open fun lowerBound(
-  @ObjCName(name = "withTypewildcardsGenericType") g: GenericType<in Bar?>?
+  @ObjCName("withTypewildcardsGenericType") g: GenericType<in Bar?>?
  ): Any? {
   return g!!.get_pp_typewildcards()
  }
 
- @ObjCName(name = "unboundedRecursive")
+ @ObjCName("unboundedRecursive")
  open fun unboundedRecursive(
-  @ObjCName(name = "withTypewildcardsRecursiveType") g: RecursiveType<*>?
+  @ObjCName("withTypewildcardsRecursiveType") g: RecursiveType<*>?
  ) {}
 
- @ObjCName(name = "upperBoundRecursive")
+ @ObjCName("upperBoundRecursive")
  open fun upperBoundRecursive(
-  @ObjCName(name = "withTypewildcardsGenericType") g: GenericType<out RecursiveType<*>?>?
+  @ObjCName("withTypewildcardsGenericType") g: GenericType<out RecursiveType<*>?>?
  ) {}
 
- @ObjCName(name = "lowerBoundRecursive")
+ @ObjCName("lowerBoundRecursive")
  open fun lowerBoundRecursive(
-  @ObjCName(name = "withTypewildcardsGenericType") g: GenericType<in RecursiveType<*>?>?
+  @ObjCName("withTypewildcardsGenericType") g: GenericType<in RecursiveType<*>?>?
  ) {}
 
- @ObjCName(name = "deepRecursiveType")
+ @ObjCName("deepRecursiveType")
  open fun deepRecursiveType(
-  @ObjCName(name = "withTypewildcardsDeepRecursiveType") t: DeepRecursiveType<*>?
+  @ObjCName("withTypewildcardsDeepRecursiveType") t: DeepRecursiveType<*>?
  ) {}
 
- @ObjCName(name = "test")
+ @ObjCName("test")
  open fun test() {
   this.unbounded(
    GenericType<Bar?>(),
@@ -123,7 +123,7 @@ open class TypeWildCards {
   )
  }
 
- @ObjCName(name = "testInferredGenericIntersection")
+ @ObjCName("testInferredGenericIntersection")
  open fun testInferredGenericIntersection() {
   val elements: List<TypeWildCards.Element?>? = null
   val otherElements: List<TypeWildCards.SubOtherElement?>? = null
@@ -136,28 +136,28 @@ open class TypeWildCards {
   )
  }
 
- @ObjCName(name = "testRecursiveGeneric")
+ @ObjCName("testRecursiveGeneric")
  open fun testRecursiveGeneric() {
   TypeWildCards.takesRecursiveGeneric(
    Foo(),
   )
  }
 
- @ObjCName(name = "J2ktTypewildcardsTypeWildCardsCompanion", swiftName = "TypewildcardsTypeWildCardsCompanion", exact = true)
+ @ObjCName("J2ktTypewildcardsTypeWildCardsCompanion", swiftName = "TypewildcardsTypeWildCardsCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName(name = "testBoundedTypeMemberAccess")
+  @ObjCName("testBoundedTypeMemberAccess")
   fun <T: TypeWildCards.A?> testBoundedTypeMemberAccess(
-   @ObjCName(name = "withTypewildcardsTypeWildCards_A") t: T
+   @ObjCName("withTypewildcardsTypeWildCards_A") t: T
   ) {
    val i: Int = t!!.f_pp_typewildcards
    t!!.m()
   }
 
   @JvmStatic
-  @ObjCName(name = "testIntersectionBoundedTypeMemberAccess")
+  @ObjCName("testIntersectionBoundedTypeMemberAccess")
   fun <T> testIntersectionBoundedTypeMemberAccess(
-   @ObjCName(name = "withId") t: T
+   @ObjCName("withId") t: T
   ) where T: TypeWildCards.A?, T: TypeWildCards.Y? {
    val i: Int = t!!.f_pp_typewildcards
    t!!.m()
@@ -178,9 +178,9 @@ open class TypeWildCards {
   private fun takesRecursiveGeneric(foo: GenericType<TypeWildCards.Foo?>?) {}
 
   @JvmStatic
-  @ObjCName(name = "testInferredIntersectionWithTypeVariable")
+  @ObjCName("testInferredIntersectionWithTypeVariable")
   fun <C> testInferredIntersectionWithTypeVariable(
-   @ObjCName(name = "withTypewildcardsTypeWildCards_RecursiveInterface") ri: TypeWildCards.RecursiveInterface<out C, C>?
+   @ObjCName("withTypewildcardsTypeWildCards_RecursiveInterface") ri: TypeWildCards.RecursiveInterface<out C, C>?
   ): C {
    return ri!!.m()
   }
@@ -199,19 +199,19 @@ open class TypeWildCards {
   )
  }
 
- @ObjCName(name = "J2ktTypewildcardsTypeWildCards_X", swiftName = "TypewildcardsTypeWildCards_X", exact = true)
+ @ObjCName("J2ktTypewildcardsTypeWildCards_X", swiftName = "TypewildcardsTypeWildCards_X", exact = true)
  fun interface X {
-  @ObjCName(name = "m")
+  @ObjCName("m")
   fun m()
  }
 
- @ObjCName(name = "J2ktTypewildcardsTypeWildCards_Y", swiftName = "TypewildcardsTypeWildCards_Y", exact = true)
+ @ObjCName("J2ktTypewildcardsTypeWildCards_Y", swiftName = "TypewildcardsTypeWildCards_Y", exact = true)
  fun interface Y {
-  @ObjCName(name = "n")
+  @ObjCName("n")
   fun n()
  }
 
- @ObjCName(name = "J2ktTypewildcardsTypeWildCards_A", swiftName = "TypewildcardsTypeWildCards_A", exact = true)
+ @ObjCName("J2ktTypewildcardsTypeWildCards_A", swiftName = "TypewildcardsTypeWildCards_A", exact = true)
  open class A internal constructor(): TypeWildCards.X {
   @JvmField
   internal var f_pp_typewildcards: Int = 0
@@ -219,36 +219,36 @@ open class TypeWildCards {
   override fun m() {}
  }
 
- @ObjCName(name = "J2ktTypewildcardsTypeWildCards_IntegerSupplier", swiftName = "TypewildcardsTypeWildCards_IntegerSupplier", exact = true)
+ @ObjCName("J2ktTypewildcardsTypeWildCards_IntegerSupplier", swiftName = "TypewildcardsTypeWildCards_IntegerSupplier", exact = true)
  fun interface IntegerSupplier {
-  @ObjCName(name = "get")
+  @ObjCName("get")
   fun get(): Int?
  }
 
- @ObjCName(name = "J2ktTypewildcardsTypeWildCards_HasKey", swiftName = "TypewildcardsTypeWildCards_HasKey", exact = true)
+ @ObjCName("J2ktTypewildcardsTypeWildCards_HasKey", swiftName = "TypewildcardsTypeWildCards_HasKey", exact = true)
  fun interface HasKey {
-  @ObjCName(name = "getKey")
+  @ObjCName("getKey")
   fun getKey(): String?
  }
 
- @ObjCName(name = "J2ktTypewildcardsTypeWildCards_Element", swiftName = "TypewildcardsTypeWildCards_Element", exact = true)
+ @ObjCName("J2ktTypewildcardsTypeWildCards_Element", swiftName = "TypewildcardsTypeWildCards_Element", exact = true)
  abstract inner class Element: TypeWildCards.HasKey, TypeWildCards.IntegerSupplier
 
- @ObjCName(name = "J2ktTypewildcardsTypeWildCards_OtherElement", swiftName = "TypewildcardsTypeWildCards_OtherElement", exact = true)
+ @ObjCName("J2ktTypewildcardsTypeWildCards_OtherElement", swiftName = "TypewildcardsTypeWildCards_OtherElement", exact = true)
  abstract inner class OtherElement: TypeWildCards.IntegerSupplier, TypeWildCards.HasKey
 
- @ObjCName(name = "J2ktTypewildcardsTypeWildCards_SubOtherElement", swiftName = "TypewildcardsTypeWildCards_SubOtherElement", exact = true)
+ @ObjCName("J2ktTypewildcardsTypeWildCards_SubOtherElement", swiftName = "TypewildcardsTypeWildCards_SubOtherElement", exact = true)
  abstract inner class SubOtherElement: TypeWildCards.OtherElement(), TypeWildCards.HasKey
 
- @ObjCName(name = "J2ktTypewildcardsTypeWildCards_Foo", swiftName = "TypewildcardsTypeWildCards_Foo", exact = true)
+ @ObjCName("J2ktTypewildcardsTypeWildCards_Foo", swiftName = "TypewildcardsTypeWildCards_Foo", exact = true)
  open inner class Foo internal constructor(): GenericType<TypeWildCards.Foo?>()
 
- @ObjCName(name = "J2ktTypewildcardsTypeWildCards_RecursiveInterface", swiftName = "TypewildcardsTypeWildCards_RecursiveInterface", exact = true)
+ @ObjCName("J2ktTypewildcardsTypeWildCards_RecursiveInterface", swiftName = "TypewildcardsTypeWildCards_RecursiveInterface", exact = true)
  fun interface RecursiveInterface<T: TypeWildCards.RecursiveInterface<T, C>?, C> {
-  @ObjCName(name = "m")
+  @ObjCName("m")
   fun m(): T
  }
 
- @ObjCName(name = "J2ktTypewildcardsTypeWildCards_MultipleGenerics", swiftName = "TypewildcardsTypeWildCards_MultipleGenerics", exact = true)
+ @ObjCName("J2ktTypewildcardsTypeWildCards_MultipleGenerics", swiftName = "TypewildcardsTypeWildCards_MultipleGenerics", exact = true)
  open class MultipleGenerics<A, B, C> internal constructor()
 }

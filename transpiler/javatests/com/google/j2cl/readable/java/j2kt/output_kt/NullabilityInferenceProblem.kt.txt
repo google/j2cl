@@ -33,9 +33,9 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktJ2ktNullabilityInferenceProblem", swiftName = "J2ktNullabilityInferenceProblem", exact = true)
+@ObjCName("J2ktJ2ktNullabilityInferenceProblem", swiftName = "J2ktNullabilityInferenceProblem", exact = true)
 open class NullabilityInferenceProblem internal constructor() {
- @ObjCName(name = "J2ktJ2ktNullabilityInferenceProblemCompanion", swiftName = "J2ktNullabilityInferenceProblemCompanion", exact = true)
+ @ObjCName("J2ktJ2ktNullabilityInferenceProblemCompanion", swiftName = "J2ktNullabilityInferenceProblemCompanion", exact = true)
  companion object {
   @JvmStatic
   private fun <E: Any> sortedCopyOf(comparator: Comparator<in E>, elements: MutableIterable<E>): NullabilityInferenceProblem.ImmutableList<E> {
@@ -86,12 +86,12 @@ open class NullabilityInferenceProblem internal constructor() {
   }
  }
 
- @ObjCName(name = "J2ktJ2ktNullabilityInferenceProblem_ImmutableList", swiftName = "J2ktNullabilityInferenceProblem_ImmutableList", exact = true)
+ @ObjCName("J2ktJ2ktNullabilityInferenceProblem_ImmutableList", swiftName = "J2ktNullabilityInferenceProblem_ImmutableList", exact = true)
  interface ImmutableList<T: Any>: MutableListJvm<T>
 
- @ObjCName(name = "J2ktJ2ktNullabilityInferenceProblem_User", swiftName = "J2ktNullabilityInferenceProblem_User", exact = true)
+ @ObjCName("J2ktJ2ktNullabilityInferenceProblem_User", swiftName = "J2ktNullabilityInferenceProblem_User", exact = true)
  fun interface User {
-  @ObjCName(name = "getName")
+  @ObjCName("getName")
   fun getName(): Optional<String>
  }
 }

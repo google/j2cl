@@ -25,29 +25,29 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktJ2ktNullabilityInferenceProblem3", swiftName = "J2ktNullabilityInferenceProblem3", exact = true)
+@ObjCName("J2ktJ2ktNullabilityInferenceProblem3", swiftName = "J2ktNullabilityInferenceProblem3", exact = true)
 open class NullabilityInferenceProblem3 {
- @ObjCName(name = "J2ktJ2ktNullabilityInferenceProblem3_Generic", swiftName = "J2ktNullabilityInferenceProblem3_Generic", exact = true)
+ @ObjCName("J2ktJ2ktNullabilityInferenceProblem3_Generic", swiftName = "J2ktNullabilityInferenceProblem3_Generic", exact = true)
  abstract class Generic<T: NullabilityInferenceProblem3.Generic<T>> {
-  @ObjCName(name = "concat")
+  @ObjCName("concat")
   open fun concat(
-   @ObjCName(name = "withJ2ktNullabilityInferenceProblem3_Generic") generic: NullabilityInferenceProblem3.Generic<*>
+   @ObjCName("withJ2ktNullabilityInferenceProblem3_Generic") generic: NullabilityInferenceProblem3.Generic<*>
   ): T {
    throw RuntimeException()
   }
 
-  @ObjCName(name = "toConcrete")
+  @ObjCName("toConcrete")
   open fun toConcrete(): NullabilityInferenceProblem3.Concrete {
    throw RuntimeException()
   }
  }
 
- @ObjCName(name = "J2ktJ2ktNullabilityInferenceProblem3_Concrete", swiftName = "J2ktNullabilityInferenceProblem3_Concrete", exact = true)
+ @ObjCName("J2ktJ2ktNullabilityInferenceProblem3_Concrete", swiftName = "J2ktNullabilityInferenceProblem3_Concrete", exact = true)
  class Concrete: NullabilityInferenceProblem3.Generic<NullabilityInferenceProblem3.Concrete> {
   private val delegate: NullabilityInferenceProblem3.Generic<*>
 
   constructor(
-   @ObjCName(name = "J2ktNullabilityInferenceProblem3_Generic") delegate: NullabilityInferenceProblem3.Generic<*>
+   @ObjCName("J2ktNullabilityInferenceProblem3_Generic") delegate: NullabilityInferenceProblem3.Generic<*>
   ) {
    this.delegate = delegate
   }

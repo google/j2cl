@@ -30,31 +30,31 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktJsignoreJsIgnoreExample", swiftName = "JsignoreJsIgnoreExample", exact = true)
+@ObjCName("J2ktJsignoreJsIgnoreExample", swiftName = "JsignoreJsIgnoreExample", exact = true)
 @JsType
 open class JsIgnoreExample {
- @ObjCName(name = "J2ktJsignoreJsIgnoreExampleCompanion", swiftName = "JsignoreJsIgnoreExampleCompanion", exact = true)
+ @ObjCName("J2ktJsignoreJsIgnoreExampleCompanion", swiftName = "JsignoreJsIgnoreExampleCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName(name = "exportedFunction")
+  @ObjCName("exportedFunction")
   fun exportedFunction() {}
 
   @JvmStatic
-  @ObjCName(name = "notExportedFunction")
+  @ObjCName("notExportedFunction")
   @JsIgnore
   fun notExportedFunction() {}
 
   @JvmField
-  @ObjCName(name = "exportedField_")
+  @ObjCName("exportedField_")
   var exportedField: Int = 10
 
   @JvmField
-  @ObjCName(name = "notExportedField_")
+  @ObjCName("notExportedField_")
   @JsIgnore
   var notExportedField: Int = 20
 
   @JvmField
-  @ObjCName(name = "CONSTNAME_")
+  @ObjCName("CONSTNAME_")
   val CONSTNAME: Any? = Any()
  }
 }

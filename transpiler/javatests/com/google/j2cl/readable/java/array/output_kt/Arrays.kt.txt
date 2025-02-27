@@ -43,9 +43,9 @@ import kotlin.jvm.JvmField
 import kotlin.longArrayOf
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktArrayArrays", swiftName = "ArrayArrays", exact = true)
+@ObjCName("J2ktArrayArrays", swiftName = "ArrayArrays", exact = true)
 open class Arrays {
- @ObjCName(name = "testObjectArray")
+ @ObjCName("testObjectArray")
  open fun testObjectArray() {
   var objects: Array<Any?> = arrayOfNulls<Any>(100)
   objects = arrayOfNulls<Any>(0)
@@ -62,7 +62,7 @@ open class Arrays {
   objects2d[0]!![1] = null
  }
 
- @ObjCName(name = "testJavaTypeArray")
+ @ObjCName("testJavaTypeArray")
  open fun testJavaTypeArray() {
   var objects: Array<Arrays.SomeObject?> = arrayOfNulls<Arrays.SomeObject>(100)
   objects = arrayOfNulls<Arrays.SomeObject>(0)
@@ -167,40 +167,40 @@ open class Arrays {
   nativeObjects2d[0]!![1] = null
  }
 
- @ObjCName(name = "testErasureCastsOnArrayAccess")
+ @ObjCName("testErasureCastsOnArrayAccess")
  open fun testErasureCastsOnArrayAccess() {
   val container: Arrays.ArrayContainer<String?>? = null
   val s: String? = container!!.data_pp_array!![0]
  }
 
- @ObjCName(name = "testCovariance")
+ @ObjCName("testCovariance")
  open fun testCovariance() {
   var objectArray: Array<Any?>? = null
   val stringArray: Array<String?>? = null
   objectArray = stringArray as Array<Any?>?
  }
 
- @ObjCName(name = "testArraysSupertypeClosureTypes")
+ @ObjCName("testArraysSupertypeClosureTypes")
  open fun testArraysSupertypeClosureTypes() {}
 
- @ObjCName(name = "consumesCloneable")
+ @ObjCName("consumesCloneable")
  open fun consumesCloneable(
-  @ObjCName(name = "withNSCopying") cloneable: Cloneable?
+  @ObjCName("withNSCopying") cloneable: Cloneable?
  ) {}
 
- @ObjCName(name = "consumesSerializable")
+ @ObjCName("consumesSerializable")
  open fun consumesSerializable(
-  @ObjCName(name = "withJavaIoSerializable") serializable: Serializable?
+  @ObjCName("withJavaIoSerializable") serializable: Serializable?
  ) {}
 
- @ObjCName(name = "J2ktArrayArrays_SomeObject", swiftName = "ArrayArrays_SomeObject", exact = true)
+ @ObjCName("J2ktArrayArrays_SomeObject", swiftName = "ArrayArrays_SomeObject", exact = true)
  open inner class SomeObject internal constructor()
 
- @ObjCName(name = "J2ktArrayArrays_NativeType", swiftName = "ArrayArrays_NativeType", exact = true)
+ @ObjCName("J2ktArrayArrays_NativeType", swiftName = "ArrayArrays_NativeType", exact = true)
  @JsType(name = "String", namespace = JsPackage.GLOBAL, isNative = true)
  open class NativeType internal constructor()
 
- @ObjCName(name = "J2ktArrayArrays_ArrayContainer", swiftName = "ArrayArrays_ArrayContainer", exact = true)
+ @ObjCName("J2ktArrayArrays_ArrayContainer", swiftName = "ArrayArrays_ArrayContainer", exact = true)
  open class ArrayContainer<T> internal constructor() {
   @JvmField
   internal var data_pp_array: Array<T>? = null

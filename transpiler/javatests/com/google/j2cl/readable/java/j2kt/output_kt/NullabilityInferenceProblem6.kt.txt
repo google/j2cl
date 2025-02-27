@@ -26,9 +26,9 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktJ2ktNullabilityInferenceProblem6", swiftName = "J2ktNullabilityInferenceProblem6", exact = true)
+@ObjCName("J2ktJ2ktNullabilityInferenceProblem6", swiftName = "J2ktNullabilityInferenceProblem6", exact = true)
 open class NullabilityInferenceProblem6 {
- @ObjCName(name = "J2ktJ2ktNullabilityInferenceProblem6Companion", swiftName = "J2ktNullabilityInferenceProblem6Companion", exact = true)
+ @ObjCName("J2ktJ2ktNullabilityInferenceProblem6Companion", swiftName = "J2ktNullabilityInferenceProblem6Companion", exact = true)
  companion object {
   @JvmStatic
   internal fun testLambda_pp_j2kt(from: NullabilityInferenceProblem6.Container<*>, to: NullabilityInferenceProblem6.Container<in Any?>) {
@@ -67,48 +67,48 @@ open class NullabilityInferenceProblem6 {
   }
  }
 
- @ObjCName(name = "J2ktJ2ktNullabilityInferenceProblem6_Consumer", swiftName = "J2ktNullabilityInferenceProblem6_Consumer", exact = true)
+ @ObjCName("J2ktJ2ktNullabilityInferenceProblem6_Consumer", swiftName = "J2ktNullabilityInferenceProblem6_Consumer", exact = true)
  fun interface Consumer<V> {
-  @ObjCName(name = "accept")
+  @ObjCName("accept")
   fun accept(
-   @ObjCName(name = "withId") v: V
+   @ObjCName("withId") v: V
   )
  }
 
- @ObjCName(name = "J2ktJ2ktNullabilityInferenceProblem6_Container", swiftName = "J2ktNullabilityInferenceProblem6_Container", exact = true)
+ @ObjCName("J2ktJ2ktNullabilityInferenceProblem6_Container", swiftName = "J2ktNullabilityInferenceProblem6_Container", exact = true)
  interface Container<V> {
-  @ObjCName(name = "forEach")
+  @ObjCName("forEach")
   fun forEach(
-   @ObjCName(name = "withJ2ktNullabilityInferenceProblem6_Consumer") consumer: NullabilityInferenceProblem6.Consumer<V>
+   @ObjCName("withJ2ktNullabilityInferenceProblem6_Consumer") consumer: NullabilityInferenceProblem6.Consumer<V>
   )
 
-  @ObjCName(name = "add")
+  @ObjCName("add")
   fun add(
-   @ObjCName(name = "withId") v: V
+   @ObjCName("withId") v: V
   )
  }
 
- @ObjCName(name = "J2ktJ2ktNullabilityInferenceProblem6_Foo", swiftName = "J2ktNullabilityInferenceProblem6_Foo", exact = true)
+ @ObjCName("J2ktJ2ktNullabilityInferenceProblem6_Foo", swiftName = "J2ktNullabilityInferenceProblem6_Foo", exact = true)
  interface Foo
 
- @ObjCName(name = "J2ktJ2ktNullabilityInferenceProblem6_FooConsumer", swiftName = "J2ktNullabilityInferenceProblem6_FooConsumer", exact = true)
+ @ObjCName("J2ktJ2ktNullabilityInferenceProblem6_FooConsumer", swiftName = "J2ktNullabilityInferenceProblem6_FooConsumer", exact = true)
  fun interface FooConsumer<V: NullabilityInferenceProblem6.Foo?> {
-  @ObjCName(name = "accept")
+  @ObjCName("accept")
   fun accept(
-   @ObjCName(name = "withJ2ktNullabilityInferenceProblem6_Foo") v: V
+   @ObjCName("withJ2ktNullabilityInferenceProblem6_Foo") v: V
   )
  }
 
- @ObjCName(name = "J2ktJ2ktNullabilityInferenceProblem6_FooContainer", swiftName = "J2ktNullabilityInferenceProblem6_FooContainer", exact = true)
+ @ObjCName("J2ktJ2ktNullabilityInferenceProblem6_FooContainer", swiftName = "J2ktNullabilityInferenceProblem6_FooContainer", exact = true)
  interface FooContainer<V: NullabilityInferenceProblem6.Foo?> {
-  @ObjCName(name = "forEach")
+  @ObjCName("forEach")
   fun forEach(
-   @ObjCName(name = "withJ2ktNullabilityInferenceProblem6_Consumer") consumer: NullabilityInferenceProblem6.Consumer<V>
+   @ObjCName("withJ2ktNullabilityInferenceProblem6_Consumer") consumer: NullabilityInferenceProblem6.Consumer<V>
   )
 
-  @ObjCName(name = "add")
+  @ObjCName("add")
   fun add(
-   @ObjCName(name = "withJ2ktNullabilityInferenceProblem6_Foo") v: V
+   @ObjCName("withJ2ktNullabilityInferenceProblem6_Foo") v: V
   )
  }
 }

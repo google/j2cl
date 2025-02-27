@@ -31,9 +31,9 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktJ2ktDefinitelyNotNull", swiftName = "J2ktDefinitelyNotNull", exact = true)
+@ObjCName("J2ktJ2ktDefinitelyNotNull", swiftName = "J2ktDefinitelyNotNull", exact = true)
 open class DefinitelyNotNull {
- @ObjCName(name = "J2ktJ2ktDefinitelyNotNullCompanion", swiftName = "J2ktDefinitelyNotNullCompanion", exact = true)
+ @ObjCName("J2ktJ2ktDefinitelyNotNullCompanion", swiftName = "J2ktDefinitelyNotNullCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun testNotNullSupplier_pp_j2kt(supplier: DefinitelyNotNull.NotNullSupplier<out String?>): String {
@@ -41,23 +41,23 @@ open class DefinitelyNotNull {
   }
 
   @JvmStatic
-  @ObjCName(name = "testEquivalence")
+  @ObjCName("testEquivalence")
   fun <T> testEquivalence(
-   @ObjCName(name = "withJ2ktDefinitelyNotNull_Equivalence") equivalence: DefinitelyNotNull.Equivalence<in T & Any>,
-   @ObjCName(name = "withId") a: T?,
-   @ObjCName(name = "withId") b: T?
+   @ObjCName("withJ2ktDefinitelyNotNull_Equivalence") equivalence: DefinitelyNotNull.Equivalence<in T & Any>,
+   @ObjCName("withId") a: T?,
+   @ObjCName("withId") b: T?
   ): Boolean {
    return equivalence.equivalent(a, b)
   }
  }
 
- @ObjCName(name = "J2ktJ2ktDefinitelyNotNull_NotNullSupplier", swiftName = "J2ktDefinitelyNotNull_NotNullSupplier", exact = true)
+ @ObjCName("J2ktJ2ktDefinitelyNotNull_NotNullSupplier", swiftName = "J2ktDefinitelyNotNull_NotNullSupplier", exact = true)
  fun interface NotNullSupplier<T> {
-  @ObjCName(name = "getNotNull")
+  @ObjCName("getNotNull")
   fun getNotNull(): T & Any
  }
 
- @ObjCName(name = "J2ktJ2ktDefinitelyNotNull_Ordering", swiftName = "J2ktDefinitelyNotNull_Ordering", exact = true)
+ @ObjCName("J2ktJ2ktDefinitelyNotNull_Ordering", swiftName = "J2ktDefinitelyNotNull_Ordering", exact = true)
  open class Ordering<T> internal constructor() {
   internal open fun <S: T> reverse_pp_j2kt(): DefinitelyNotNull.Ordering<S> {
    throw RuntimeException()
@@ -67,7 +67,7 @@ open class DefinitelyNotNull {
    throw RuntimeException()
   }
 
-  @ObjCName(name = "J2ktJ2ktDefinitelyNotNull_OrderingCompanion", swiftName = "J2ktDefinitelyNotNull_OrderingCompanion", exact = true)
+  @ObjCName("J2ktJ2ktDefinitelyNotNull_OrderingCompanion", swiftName = "J2ktDefinitelyNotNull_OrderingCompanion", exact = true)
   companion object {
    @JvmStatic
    internal fun <E> reversed_pp_j2kt(ordering: DefinitelyNotNull.Ordering<in E>): DefinitelyNotNull.Ordering<in E> {
@@ -76,7 +76,7 @@ open class DefinitelyNotNull {
   }
  }
 
- @ObjCName(name = "J2ktJ2ktDefinitelyNotNull_NullsFirstOrdering", swiftName = "J2ktDefinitelyNotNull_NullsFirstOrdering", exact = true)
+ @ObjCName("J2ktJ2ktDefinitelyNotNull_NullsFirstOrdering", swiftName = "J2ktDefinitelyNotNull_NullsFirstOrdering", exact = true)
  inner class NullsFirstOrdering<T> constructor(ordering: DefinitelyNotNull.Ordering<in T>): DefinitelyNotNull.Ordering<T?>() {
   @JvmField
   internal val ordering_pp_j2kt: DefinitelyNotNull.Ordering<in T>
@@ -86,34 +86,34 @@ open class DefinitelyNotNull {
   }
  }
 
- @ObjCName(name = "J2ktJ2ktDefinitelyNotNull_ImmutableList", swiftName = "J2ktDefinitelyNotNull_ImmutableList", exact = true)
+ @ObjCName("J2ktJ2ktDefinitelyNotNull_ImmutableList", swiftName = "J2ktDefinitelyNotNull_ImmutableList", exact = true)
  open class ImmutableList<E: Any> {
-  @ObjCName(name = "J2ktJ2ktDefinitelyNotNull_ImmutableListCompanion", swiftName = "J2ktDefinitelyNotNull_ImmutableListCompanion", exact = true)
+  @ObjCName("J2ktJ2ktDefinitelyNotNull_ImmutableListCompanion", swiftName = "J2ktDefinitelyNotNull_ImmutableListCompanion", exact = true)
   companion object {
    @JvmStatic
-   @ObjCName(name = "copyOf")
+   @ObjCName("copyOf")
    fun <E: Any> copyOf(
-    @ObjCName(name = "withJavaLangIterable") iterable: MutableIterable<E>
+    @ObjCName("withJavaLangIterable") iterable: MutableIterable<E>
    ): DefinitelyNotNull.ImmutableList<E> {
     throw RuntimeException()
    }
 
    @JvmStatic
-   @ObjCName(name = "copyOfNullableWithCorrectBounds")
+   @ObjCName("copyOfNullableWithCorrectBounds")
    fun <E> copyOfNullableWithCorrectBounds(
-    @ObjCName(name = "withJavaLangIterable") iterable: MutableIterable<E & Any>
+    @ObjCName("withJavaLangIterable") iterable: MutableIterable<E & Any>
    ): DefinitelyNotNull.ImmutableList<E & Any> {
     return DefinitelyNotNull.ImmutableList.copyOf<E & Any>(iterable)
    }
   }
  }
 
- @ObjCName(name = "J2ktJ2ktDefinitelyNotNull_Equivalence", swiftName = "J2ktDefinitelyNotNull_Equivalence", exact = true)
+ @ObjCName("J2ktJ2ktDefinitelyNotNull_Equivalence", swiftName = "J2ktDefinitelyNotNull_Equivalence", exact = true)
  fun interface Equivalence<T: Any> {
-  @ObjCName(name = "equivalent")
+  @ObjCName("equivalent")
   fun equivalent(
-   @ObjCName(name = "withId") a: T?,
-   @ObjCName(name = "withId") b: T?
+   @ObjCName("withId") a: T?,
+   @ObjCName("withId") b: T?
   ): Boolean
  }
 }

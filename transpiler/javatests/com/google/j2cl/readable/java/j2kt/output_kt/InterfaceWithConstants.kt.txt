@@ -26,14 +26,14 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktJ2ktInterfaceWithConstants", swiftName = "J2ktInterfaceWithConstants", exact = true)
+@ObjCName("J2ktJ2ktInterfaceWithConstants", swiftName = "J2ktInterfaceWithConstants", exact = true)
 interface InterfaceWithConstants {
- @ObjCName(name = "J2ktJ2ktInterfaceWithConstantsCompanion", swiftName = "J2ktInterfaceWithConstantsCompanion", exact = true)
+ @ObjCName("J2ktJ2ktInterfaceWithConstantsCompanion", swiftName = "J2ktInterfaceWithConstantsCompanion", exact = true)
  companion object {
-  @ObjCName(name = "compileTimeConstant_")
+  @ObjCName("compileTimeConstant_")
   const val compileTimeConstant: String = "constant"
 
-  @ObjCName(name = "nonCompileTimeConstant_")
+  @ObjCName("nonCompileTimeConstant_")
   val nonCompileTimeConstant: Any? = "non-constant"
  }
 }

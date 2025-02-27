@@ -29,16 +29,16 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktAutovalueAutoValueWithFields", swiftName = "AutovalueAutoValueWithFields", exact = true)
+@ObjCName("J2ktAutovalueAutoValueWithFields", swiftName = "AutovalueAutoValueWithFields", exact = true)
 @WasAutoValue
 abstract class AutoValueWithFields internal constructor(): Parent(), Serializable {
  @JvmField
  internal var userField2_pp_autovalue: Int = 0
 
- @ObjCName(name = "getIntField")
+ @ObjCName("getIntField")
  abstract fun getIntField(): Int
 
- @ObjCName(name = "J2ktAutovalueAutoValueWithFieldsCompanion", swiftName = "AutovalueAutoValueWithFieldsCompanion", exact = true)
+ @ObjCName("J2ktAutovalueAutoValueWithFieldsCompanion", swiftName = "AutovalueAutoValueWithFieldsCompanion", exact = true)
  companion object {
   private const val serialVersionUID: Long = 42L
 
@@ -46,12 +46,12 @@ abstract class AutoValueWithFields internal constructor(): Parent(), Serializabl
  }
 }
 
-@ObjCName(name = "J2ktAutovalueParent", swiftName = "AutovalueParent", exact = true)
+@ObjCName("J2ktAutovalueParent", swiftName = "AutovalueParent", exact = true)
 open class Parent internal constructor() {
  @JvmField
  internal var userField1_pp_autovalue: Int = 0
 
- @ObjCName(name = "J2ktAutovalueParentCompanion", swiftName = "AutovalueParentCompanion", exact = true)
+ @ObjCName("J2ktAutovalueParentCompanion", swiftName = "AutovalueParentCompanion", exact = true)
  companion object {
   private const val staticField: Long = 42L
  }

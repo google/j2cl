@@ -28,12 +28,12 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktNativejstypeobjectmethodsMain", swiftName = "NativejstypeobjectmethodsMain", exact = true)
+@ObjCName("J2ktNativejstypeobjectmethodsMain", swiftName = "NativejstypeobjectmethodsMain", exact = true)
 open class Main {
- @ObjCName(name = "J2ktNativejstypeobjectmethodsMainCompanion", swiftName = "NativejstypeobjectmethodsMainCompanion", exact = true)
+ @ObjCName("J2ktNativejstypeobjectmethodsMainCompanion", swiftName = "NativejstypeobjectmethodsMainCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName(name = "test")
+  @ObjCName("test")
   fun test() {
    val n1: Main.NativeJsTypeWithToString = Main.NativeJsTypeWithToString()
    n1.toString()
@@ -46,13 +46,13 @@ open class Main {
   }
  }
 
- @ObjCName(name = "J2ktNativejstypeobjectmethodsMain_NativeJsTypeWithToString", swiftName = "NativejstypeobjectmethodsMain_NativeJsTypeWithToString", exact = true)
+ @ObjCName("J2ktNativejstypeobjectmethodsMain_NativeJsTypeWithToString", swiftName = "NativejstypeobjectmethodsMain_NativeJsTypeWithToString", exact = true)
  @JsType(namespace = "test.foo", isNative = true)
  open class NativeJsTypeWithToString {
   external override fun toString(): String
  }
 
- @ObjCName(name = "J2ktNativejstypeobjectmethodsMain_NativeJsTypeWithoutToString", swiftName = "NativejstypeobjectmethodsMain_NativeJsTypeWithoutToString", exact = true)
+ @ObjCName("J2ktNativejstypeobjectmethodsMain_NativeJsTypeWithoutToString", swiftName = "NativejstypeobjectmethodsMain_NativeJsTypeWithoutToString", exact = true)
  @JsType(namespace = "test.foo", isNative = true)
  open class NativeJsTypeWithoutToString
 }

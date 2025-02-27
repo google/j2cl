@@ -27,7 +27,7 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktJ2ktNullabilityInferenceInLambdaReturnTypes", swiftName = "J2ktNullabilityInferenceInLambdaReturnTypes", exact = true)
+@ObjCName("J2ktJ2ktNullabilityInferenceInLambdaReturnTypes", swiftName = "J2ktNullabilityInferenceInLambdaReturnTypes", exact = true)
 open class NullabilityInferenceInLambdaReturnTypes {
  private fun testAccept() {
   NullabilityInferenceInLambdaReturnTypes.accept_pp_j2kt<Any>(
@@ -73,7 +73,7 @@ open class NullabilityInferenceInLambdaReturnTypes {
   }
  }
 
- @ObjCName(name = "J2ktJ2ktNullabilityInferenceInLambdaReturnTypesCompanion", swiftName = "J2ktNullabilityInferenceInLambdaReturnTypesCompanion", exact = true)
+ @ObjCName("J2ktJ2ktNullabilityInferenceInLambdaReturnTypesCompanion", swiftName = "J2ktNullabilityInferenceInLambdaReturnTypesCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun <V> accept_pp_j2kt(supplier: NullabilityInferenceInLambdaReturnTypes.Supplier<V>) {
@@ -86,20 +86,20 @@ open class NullabilityInferenceInLambdaReturnTypes {
   }
  }
 
- @ObjCName(name = "J2ktJ2ktNullabilityInferenceInLambdaReturnTypes_Foo", swiftName = "J2ktNullabilityInferenceInLambdaReturnTypes_Foo", exact = true)
+ @ObjCName("J2ktJ2ktNullabilityInferenceInLambdaReturnTypes_Foo", swiftName = "J2ktNullabilityInferenceInLambdaReturnTypes_Foo", exact = true)
  interface Foo<V>
 
- @ObjCName(name = "J2ktJ2ktNullabilityInferenceInLambdaReturnTypes_Supplier", swiftName = "J2ktNullabilityInferenceInLambdaReturnTypes_Supplier", exact = true)
+ @ObjCName("J2ktJ2ktNullabilityInferenceInLambdaReturnTypes_Supplier", swiftName = "J2ktNullabilityInferenceInLambdaReturnTypes_Supplier", exact = true)
  fun interface Supplier<V> {
-  @ObjCName(name = "get")
+  @ObjCName("get")
   fun get(): V
  }
 
- @ObjCName(name = "J2ktJ2ktNullabilityInferenceInLambdaReturnTypes_Operator", swiftName = "J2ktNullabilityInferenceInLambdaReturnTypes_Operator", exact = true)
+ @ObjCName("J2ktJ2ktNullabilityInferenceInLambdaReturnTypes_Operator", swiftName = "J2ktNullabilityInferenceInLambdaReturnTypes_Operator", exact = true)
  fun interface Operator<V> {
-  @ObjCName(name = "apply")
+  @ObjCName("apply")
   fun apply(
-   @ObjCName(name = "withId") v: V
+   @ObjCName("withId") v: V
   ): V
  }
 }

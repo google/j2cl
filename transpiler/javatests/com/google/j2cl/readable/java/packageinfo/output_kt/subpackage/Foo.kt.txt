@@ -26,9 +26,9 @@ import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 import packageinfo.Outer
 
-@ObjCName(name = "J2ktPackageinfoSubpackageFoo", swiftName = "PackageinfoSubpackageFoo", exact = true)
+@ObjCName("J2ktPackageinfoSubpackageFoo", swiftName = "PackageinfoSubpackageFoo", exact = true)
 open class Foo {
  @JvmField
- @ObjCName(name = "outer_")
+ @ObjCName("outer_")
  var outer: Outer? = Outer()
 }

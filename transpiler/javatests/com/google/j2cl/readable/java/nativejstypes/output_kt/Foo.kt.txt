@@ -27,17 +27,17 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktNativejstypesFoo", swiftName = "NativejstypesFoo", exact = true)
+@ObjCName("J2ktNativejstypesFoo", swiftName = "NativejstypesFoo", exact = true)
 @JsType(name = "MyFoo", namespace = "com.acme", isNative = true)
 open class Foo {
  @JvmField
- @ObjCName(name = "x_")
+ @ObjCName("x_")
  var x: Int = 0
 
  @JvmField
- @ObjCName(name = "y_")
+ @ObjCName("y_")
  var y: Int = 0
 
- @ObjCName(name = "sum")
+ @ObjCName("sum")
  external open fun sum(): Int
 }

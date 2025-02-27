@@ -28,30 +28,30 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktJ2ktNullabilityInferenceProblem8", swiftName = "J2ktNullabilityInferenceProblem8", exact = true)
+@ObjCName("J2ktJ2ktNullabilityInferenceProblem8", swiftName = "J2ktNullabilityInferenceProblem8", exact = true)
 open class NullabilityInferenceProblem8 {
- @ObjCName(name = "J2ktJ2ktNullabilityInferenceProblem8Companion", swiftName = "J2ktNullabilityInferenceProblem8Companion", exact = true)
+ @ObjCName("J2ktJ2ktNullabilityInferenceProblem8Companion", swiftName = "J2ktNullabilityInferenceProblem8Companion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName(name = "nonNullWithLowerBound")
+  @ObjCName("nonNullWithLowerBound")
   fun <I: Any, O: Any> nonNullWithLowerBound(
-   @ObjCName(name = "withJ2ktNullabilityInferenceProblem8_Function") fn: NullabilityInferenceProblem8.Function<in I, O>
+   @ObjCName("withJ2ktNullabilityInferenceProblem8_Function") fn: NullabilityInferenceProblem8.Function<in I, O>
   ): NullabilityInferenceProblem8.Function<I, O> {
    throw RuntimeException()
   }
 
   @JvmStatic
-  @ObjCName(name = "acceptParameterized")
+  @ObjCName("acceptParameterized")
   fun acceptParameterized(
-   @ObjCName(name = "withJ2ktNullabilityInferenceProblem8_Function") fn: NullabilityInferenceProblem8.Function<String, Any>
+   @ObjCName("withJ2ktNullabilityInferenceProblem8_Function") fn: NullabilityInferenceProblem8.Function<String, Any>
   ) {
    throw RuntimeException()
   }
 
   @JvmStatic
-  @ObjCName(name = "test")
+  @ObjCName("test")
   fun test(
-   @ObjCName(name = "withJ2ktNullabilityInferenceProblem8_NullableSupplier") supplier: NullabilityInferenceProblem8.NullableSupplier<Any>
+   @ObjCName("withJ2ktNullabilityInferenceProblem8_NullableSupplier") supplier: NullabilityInferenceProblem8.NullableSupplier<Any>
   ) {
    NullabilityInferenceProblem8.acceptParameterized(
     NullabilityInferenceProblem8.nonNullWithLowerBound<String, Any>(
@@ -63,19 +63,19 @@ open class NullabilityInferenceProblem8 {
   }
  }
 
- @ObjCName(name = "J2ktJ2ktNullabilityInferenceProblem8_NullableSupplier", swiftName = "J2ktNullabilityInferenceProblem8_NullableSupplier", exact = true)
+ @ObjCName("J2ktJ2ktNullabilityInferenceProblem8_NullableSupplier", swiftName = "J2ktNullabilityInferenceProblem8_NullableSupplier", exact = true)
  fun interface NullableSupplier<V> {
-  @ObjCName(name = "get")
+  @ObjCName("get")
   fun get(
-   @ObjCName(name = "withNSString") key: String
+   @ObjCName("withNSString") key: String
   ): V?
  }
 
- @ObjCName(name = "J2ktJ2ktNullabilityInferenceProblem8_Function", swiftName = "J2ktNullabilityInferenceProblem8_Function", exact = true)
+ @ObjCName("J2ktJ2ktNullabilityInferenceProblem8_Function", swiftName = "J2ktNullabilityInferenceProblem8_Function", exact = true)
  fun interface Function<I, O> {
-  @ObjCName(name = "apply")
+  @ObjCName("apply")
   fun apply(
-   @ObjCName(name = "withId") i: I
+   @ObjCName("withId") i: I
   ): O
  }
 }

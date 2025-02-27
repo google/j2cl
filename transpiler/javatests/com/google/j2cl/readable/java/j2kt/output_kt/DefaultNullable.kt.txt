@@ -26,33 +26,33 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktJ2ktDefaultNullable", swiftName = "J2ktDefaultNullable", exact = true)
+@ObjCName("J2ktJ2ktDefaultNullable", swiftName = "J2ktDefaultNullable", exact = true)
 open class DefaultNullable {
- @ObjCName(name = "J2ktJ2ktDefaultNullableCompanion", swiftName = "J2ktDefaultNullableCompanion", exact = true)
+ @ObjCName("J2ktJ2ktDefaultNullableCompanion", swiftName = "J2ktDefaultNullableCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun accept_pp_j2kt(s: String?) {}
  }
 }
 
-@ObjCName(name = "J2ktJ2ktNotNullable", swiftName = "J2ktNotNullable", exact = true)
+@ObjCName("J2ktJ2ktNotNullable", swiftName = "J2ktNotNullable", exact = true)
 open class NotNullable internal constructor() {
- @ObjCName(name = "J2ktJ2ktNotNullable_Consumer", swiftName = "J2ktNotNullable_Consumer", exact = true)
+ @ObjCName("J2ktJ2ktNotNullable_Consumer", swiftName = "J2ktNotNullable_Consumer", exact = true)
  fun interface Consumer<T> {
-  @ObjCName(name = "accept")
+  @ObjCName("accept")
   fun accept(
-   @ObjCName(name = "withId") t: T
+   @ObjCName("withId") t: T
   )
  }
 }
 
-@ObjCName(name = "J2ktJ2ktOrdering", swiftName = "J2ktOrdering", exact = true)
+@ObjCName("J2ktJ2ktOrdering", swiftName = "J2ktOrdering", exact = true)
 abstract class Ordering<T> internal constructor() {
  internal open fun <S: T> reverse_pp_j2kt(): Ordering<S> {
   return null!!
  }
 
- @ObjCName(name = "J2ktJ2ktOrderingCompanion", swiftName = "J2ktOrderingCompanion", exact = true)
+ @ObjCName("J2ktJ2ktOrderingCompanion", swiftName = "J2ktOrderingCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun <E> reversed_pp_j2kt(ordering: Ordering<in E>): Ordering<in E> {

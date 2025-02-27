@@ -28,7 +28,7 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 import kotlin.run
 
-@ObjCName(name = "J2ktInterfacesMain", swiftName = "InterfacesMain", exact = true)
+@ObjCName("J2ktInterfacesMain", swiftName = "InterfacesMain", exact = true)
 open class Main {
  internal open fun testInterfaceMembers_pp_interfaces() {
   val i: Main.Interface<String?> = Implementor()
@@ -49,55 +49,55 @@ open class Main {
   si.defaultMethod(null)
  }
 
- @ObjCName(name = "J2ktInterfacesMain_Interface", swiftName = "InterfacesMain_Interface", exact = true)
+ @ObjCName("J2ktInterfacesMain_Interface", swiftName = "InterfacesMain_Interface", exact = true)
  fun interface Interface<T> {
-  @ObjCName(name = "interfaceMethod")
+  @ObjCName("interfaceMethod")
   fun interfaceMethod()
 
-  @ObjCName(name = "defaultMethod")
+  @ObjCName("defaultMethod")
   fun defaultMethod(
-   @ObjCName(name = "withId") t: T
+   @ObjCName("withId") t: T
   ) {
    this.privateMethod_private_interfaces_Main_Interface(t)
   }
 
-  @ObjCName(name = "privateMethod")
+  @ObjCName("privateMethod")
   fun privateMethod_private_interfaces_Main_Interface(
-   @ObjCName(name = "withId") t: T
+   @ObjCName("withId") t: T
   ) {}
 
-  @ObjCName(name = "J2ktInterfacesMain_InterfaceCompanion", swiftName = "InterfacesMain_InterfaceCompanion", exact = true)
+  @ObjCName("J2ktInterfacesMain_InterfaceCompanion", swiftName = "InterfacesMain_InterfaceCompanion", exact = true)
   companion object {
-   @ObjCName(name = "a_")
+   @ObjCName("a_")
    const val a: Int = 1
 
-   @ObjCName(name = "b_")
+   @ObjCName("b_")
    const val b: Int = 2
 
    @JvmStatic
-   @ObjCName(name = "staticInterfaceMethod")
+   @ObjCName("staticInterfaceMethod")
    fun staticInterfaceMethod() {}
   }
  }
 
- @ObjCName(name = "J2ktInterfacesMain_SubInterface", swiftName = "InterfacesMain_SubInterface", exact = true)
+ @ObjCName("J2ktInterfacesMain_SubInterface", swiftName = "InterfacesMain_SubInterface", exact = true)
  fun interface SubInterface: Main.Interface<String?> {
   override fun defaultMethod(s: String?) {
    super<Main.Interface>.defaultMethod(s)
   }
  }
 
- @ObjCName(name = "J2ktInterfacesMain_Implementor", swiftName = "InterfacesMain_Implementor", exact = true)
+ @ObjCName("J2ktInterfacesMain_Implementor", swiftName = "InterfacesMain_Implementor", exact = true)
  open inner class Implementor internal constructor(): Main.SubInterface, Main.Interface<String?> {
   override fun interfaceMethod() {}
  }
 
- @ObjCName(name = "J2ktInterfacesMain_AbstractImplementor", swiftName = "InterfacesMain_AbstractImplementor", exact = true)
+ @ObjCName("J2ktInterfacesMain_AbstractImplementor", swiftName = "InterfacesMain_AbstractImplementor", exact = true)
  abstract inner class AbstractImplementor internal constructor(): Main.SubInterface
 
- @ObjCName(name = "J2ktInterfacesMain_EnumImplementor", swiftName = "InterfacesMain_EnumImplementor", exact = true)
+ @ObjCName("J2ktInterfacesMain_EnumImplementor", swiftName = "InterfacesMain_EnumImplementor", exact = true)
  enum class EnumImplementor: Main.SubInterface {
-  @ObjCName(name = "ONE")
+  @ObjCName("ONE")
   ONE;
 
   override fun interfaceMethod() {}

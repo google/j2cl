@@ -28,15 +28,15 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktJ2ktNullabilityInferenceProblem4", swiftName = "J2ktNullabilityInferenceProblem4", exact = true)
+@ObjCName("J2ktJ2ktNullabilityInferenceProblem4", swiftName = "J2ktNullabilityInferenceProblem4", exact = true)
 open class NullabilityInferenceProblem4 {
- @ObjCName(name = "J2ktJ2ktNullabilityInferenceProblem4Companion", swiftName = "J2ktNullabilityInferenceProblem4Companion", exact = true)
+ @ObjCName("J2ktJ2ktNullabilityInferenceProblem4Companion", swiftName = "J2ktNullabilityInferenceProblem4Companion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName(name = "compareOrThrow")
+  @ObjCName("compareOrThrow")
   fun compareOrThrow(
-   @ObjCName(name = "withJavaLangComparable") left: Comparable<Any>,
-   @ObjCName(name = "withJavaLangComparable") right: Comparable<Any>
+   @ObjCName("withJavaLangComparable") left: Comparable<Any>,
+   @ObjCName("withJavaLangComparable") right: Comparable<Any>
   ): Int {
    return left.compareTo(
     right as Any,

@@ -31,14 +31,14 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktJstypecastsinstanceofCastToTypeVariable", swiftName = "JstypecastsinstanceofCastToTypeVariable", exact = true)
+@ObjCName("J2ktJstypecastsinstanceofCastToTypeVariable", swiftName = "JstypecastsinstanceofCastToTypeVariable", exact = true)
 @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
 open class CastToTypeVariable<T: CastToTypeVariable<T>?> {
- @ObjCName(name = "setField")
+ @ObjCName("setField")
  @JsOverlay
  fun setField(
-  @ObjCName(name = "withInt") index: Int,
-  @ObjCName(name = "withBoolean") value: Boolean
+  @ObjCName("withInt") index: Int,
+  @ObjCName("withBoolean") value: Boolean
  ): T {
   val o: Any = Any()
   val a: Array<T>? = o as Array<T>?

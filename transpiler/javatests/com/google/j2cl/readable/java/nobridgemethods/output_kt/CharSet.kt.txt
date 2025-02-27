@@ -27,35 +27,35 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktNobridgemethodsEntry", swiftName = "NobridgemethodsEntry", exact = true)
+@ObjCName("J2ktNobridgemethodsEntry", swiftName = "NobridgemethodsEntry", exact = true)
 interface Entry<K>
 
-@ObjCName(name = "J2ktNobridgemethodsMap", swiftName = "NobridgemethodsMap", exact = true)
+@ObjCName("J2ktNobridgemethodsMap", swiftName = "NobridgemethodsMap", exact = true)
 abstract class Map<K> internal constructor() {
- @ObjCName(name = "getCeilingEntry")
+ @ObjCName("getCeilingEntry")
  abstract fun getCeilingEntry(
-  @ObjCName(name = "withId") key: K
+  @ObjCName("withId") key: K
  ): Entry<K>?
 }
 
-@ObjCName(name = "J2ktNobridgemethodsTreeMap", swiftName = "NobridgemethodsTreeMap", exact = true)
+@ObjCName("J2ktNobridgemethodsTreeMap", swiftName = "NobridgemethodsTreeMap", exact = true)
 open class TreeMap<K> internal constructor(): Map<K>() {
  override fun getCeilingEntry(key: K): TreeMap.InnerEntry<K>? {
   return TreeMap.InnerEntry<K>()
  }
 
- @ObjCName(name = "J2ktNobridgemethodsTreeMap_InnerEntry", swiftName = "NobridgemethodsTreeMap_InnerEntry", exact = true)
+ @ObjCName("J2ktNobridgemethodsTreeMap_InnerEntry", swiftName = "NobridgemethodsTreeMap_InnerEntry", exact = true)
  open class InnerEntry<K> internal constructor(): Entry<K>
 }
 
-@ObjCName(name = "J2ktNobridgemethodsCharSet", swiftName = "NobridgemethodsCharSet", exact = true)
+@ObjCName("J2ktNobridgemethodsCharSet", swiftName = "NobridgemethodsCharSet", exact = true)
 open class CharSet {
- @ObjCName(name = "J2ktNobridgemethodsCharSetCompanion", swiftName = "NobridgemethodsCharSetCompanion", exact = true)
+ @ObjCName("J2ktNobridgemethodsCharSetCompanion", swiftName = "NobridgemethodsCharSetCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName(name = "main")
+  @ObjCName("main")
   fun main(
-   vararg @ObjCName(name = "withNSStringArray") args: String?
+   vararg @ObjCName("withNSStringArray") args: String?
   ) {
    val args_1: Array<String?>? = args as Array<String?>?
    val treeMap: TreeMap<String?> = object : TreeMap<String?>() {}

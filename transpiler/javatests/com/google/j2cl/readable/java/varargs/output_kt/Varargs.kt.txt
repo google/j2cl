@@ -34,76 +34,76 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktVarargsVarargs", swiftName = "VarargsVarargs", exact = true)
+@ObjCName("J2ktVarargsVarargs", swiftName = "VarargsVarargs", exact = true)
 open class Varargs {
  private var args: Array<Any?>? = null
 
  constructor(
-  vararg @ObjCName(name = "IntArray") args: Int
+  vararg @ObjCName("IntArray") args: Int
  )
 
  constructor(): this(1)
 
- @ObjCName(name = "test")
+ @ObjCName("test")
  open fun test(
-  @ObjCName(name = "withInt") a: Int,
-  vararg @ObjCName(name = "withNSObjectArray") args: Any?
+  @ObjCName("withInt") a: Int,
+  vararg @ObjCName("withNSObjectArray") args: Any?
  ) {
   val args_1: Array<Any?>? = args as Array<Any?>?
  }
 
- @ObjCName(name = "testCloneable")
+ @ObjCName("testCloneable")
  open fun testCloneable(
-  vararg @ObjCName(name = "withNSCopyingArray") args: Cloneable?
+  vararg @ObjCName("withNSCopyingArray") args: Cloneable?
  ) {
   val args_1: Array<Cloneable?>? = args as Array<Cloneable?>?
  }
 
- @ObjCName(name = "testSerializable")
+ @ObjCName("testSerializable")
  open fun testSerializable(
-  vararg @ObjCName(name = "withJavaIoSerializableArray") args: Serializable?
+  vararg @ObjCName("withJavaIoSerializableArray") args: Serializable?
  ) {
   val args_1: Array<Serializable?>? = args as Array<Serializable?>?
  }
 
- @ObjCName(name = "testAssignment")
+ @ObjCName("testAssignment")
  open fun testAssignment(
-  vararg @ObjCName(name = "withNSObjectArray") args: Any?
+  vararg @ObjCName("withNSObjectArray") args: Any?
  ) {
   val args_1: Array<Any?>? = args as Array<Any?>?
   this.args = args_1
  }
 
- @ObjCName(name = "testLambda")
+ @ObjCName("testLambda")
  open fun testLambda(
-  @ObjCName(name = "withVarargsVarargs_FunctionalInterface") functionalInterface: Varargs.FunctionalInterface?
+  @ObjCName("withVarargsVarargs_FunctionalInterface") functionalInterface: Varargs.FunctionalInterface?
  ) {}
 
- @ObjCName(name = "testOverloaded")
+ @ObjCName("testOverloaded")
  open fun testOverloaded(
-  @ObjCName(name = "withId") o: Any?
+  @ObjCName("withId") o: Any?
  ) {}
 
- @ObjCName(name = "testOverloaded")
+ @ObjCName("testOverloaded")
  open fun testOverloaded(
-  @ObjCName(name = "withNSString") o: String?,
-  vararg @ObjCName(name = "withNSObjectArray") rest: Any?
+  @ObjCName("withNSString") o: String?,
+  vararg @ObjCName("withNSObjectArray") rest: Any?
  ) {
   val rest_1: Array<Any?>? = rest as Array<Any?>?
  }
 
- @ObjCName(name = "testOverloaded")
+ @ObjCName("testOverloaded")
  open fun testOverloaded(
-  @ObjCName(name = "withLong") l: Long
+  @ObjCName("withLong") l: Long
  ) {}
 
- @ObjCName(name = "testOverloaded")
+ @ObjCName("testOverloaded")
  open fun testOverloaded(
-  @ObjCName(name = "withLong") l: Long,
-  vararg @ObjCName(name = "withLongArray") rest: Long
+  @ObjCName("withLong") l: Long,
+  vararg @ObjCName("withLongArray") rest: Long
  ) {}
 
- @ObjCName(name = "main")
+ @ObjCName("main")
  open fun main() {
   val v: Varargs = Varargs()
   v.test(1)
@@ -167,44 +167,44 @@ open class Varargs {
   )
  }
 
- @ObjCName(name = "J2ktVarargsVarargsCompanion", swiftName = "VarargsVarargsCompanion", exact = true)
+ @ObjCName("J2ktVarargsVarargsCompanion", swiftName = "VarargsVarargsCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName(name = "fun")
+  @ObjCName("fun")
   fun <T: Number?> `fun`(
-   vararg @ObjCName(name = "withNSNumberArray") elements: T
+   vararg @ObjCName("withNSNumberArray") elements: T
   ) {
    val elements_1: Array<T>? = elements as Array<T>?
   }
 
   @JvmStatic
-  @ObjCName(name = "bar")
+  @ObjCName("bar")
   fun <E: Number?> bar(
-   @ObjCName(name = "withNSNumber") a: E,
-   @ObjCName(name = "withNSNumber") b: E
+   @ObjCName("withNSNumber") a: E,
+   @ObjCName("withNSNumber") b: E
   ) {
    Varargs.`fun`<E>(a, b)
   }
 
   @JvmStatic
-  @ObjCName(name = "passthrough")
+  @ObjCName("passthrough")
   fun <T> passthrough(
-   @ObjCName(name = "withId") o: T
+   @ObjCName("withId") o: T
   ): T {
    return o
   }
  }
 
- @ObjCName(name = "J2ktVarargsVarargs_FunctionalInterface", swiftName = "VarargsVarargs_FunctionalInterface", exact = true)
+ @ObjCName("J2ktVarargsVarargs_FunctionalInterface", swiftName = "VarargsVarargs_FunctionalInterface", exact = true)
  fun interface FunctionalInterface {
-  @ObjCName(name = "apply")
+  @ObjCName("apply")
   fun apply(
-   vararg @ObjCName(name = "withNSStringArray") strings: String?
+   vararg @ObjCName("withNSStringArray") strings: String?
   )
  }
 }
 
-@ObjCName(name = "J2ktVarargsChild", swiftName = "VarargsChild", exact = true)
+@ObjCName("J2ktVarargsChild", swiftName = "VarargsChild", exact = true)
 open class Child: Varargs {
  constructor(): super(1)
 }

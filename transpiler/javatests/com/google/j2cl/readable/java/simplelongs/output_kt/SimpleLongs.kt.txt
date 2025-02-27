@@ -28,26 +28,26 @@ import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 import kotlin.run
 
-@ObjCName(name = "J2ktSimplelongsSimpleLongs", swiftName = "SimplelongsSimpleLongs", exact = true)
+@ObjCName("J2ktSimplelongsSimpleLongs", swiftName = "SimplelongsSimpleLongs", exact = true)
 open class SimpleLongs {
  @JvmField
- @ObjCName(name = "foo_")
+ @ObjCName("foo_")
  var foo: Long = 0L
 
- @ObjCName(name = "getBar")
+ @ObjCName("getBar")
  open fun getBar(): Long {
   return 0L
  }
 
  private var sideEffect: Int = 0
 
- @ObjCName(name = "getWithSideEffect")
+ @ObjCName("getWithSideEffect")
  open fun getWithSideEffect(): SimpleLongs? {
   this.sideEffect = this.sideEffect + 1
   return this
  }
 
- @ObjCName(name = "main")
+ @ObjCName("main")
  open fun main() {
   var a: Long = 0L
   a = - 100000L

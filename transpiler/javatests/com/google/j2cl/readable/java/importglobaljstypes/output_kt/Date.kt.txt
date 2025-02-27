@@ -29,36 +29,36 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktImportglobaljstypesDate", swiftName = "ImportglobaljstypesDate", exact = true)
+@ObjCName("J2ktImportglobaljstypesDate", swiftName = "ImportglobaljstypesDate", exact = true)
 open class Date {
- @ObjCName(name = "copy__")
+ @ObjCName("copy__")
  open fun copy(
-  @ObjCName(name = "withImportglobaljstypesDate_NativeDate") d: Date.NativeDate?
+  @ObjCName("withImportglobaljstypesDate_NativeDate") d: Date.NativeDate?
  ): Date.NativeDate? {
   return d
  }
 
- @ObjCName(name = "J2ktImportglobaljstypesDateCompanion", swiftName = "ImportglobaljstypesDateCompanion", exact = true)
+ @ObjCName("J2ktImportglobaljstypesDateCompanion", swiftName = "ImportglobaljstypesDateCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName(name = "now")
+  @ObjCName("now")
   fun now(
-   @ObjCName(name = "withDouble") x: Double
+   @ObjCName("withDouble") x: Double
   ): Double {
    return Date.NativeDate.now()
   }
  }
 
- @ObjCName(name = "J2ktImportglobaljstypesDate_NativeDate", swiftName = "ImportglobaljstypesDate_NativeDate", exact = true)
+ @ObjCName("J2ktImportglobaljstypesDate_NativeDate", swiftName = "ImportglobaljstypesDate_NativeDate", exact = true)
  @JsType(name = "Date", namespace = JsPackage.GLOBAL, isNative = true)
  open class NativeDate {
-  @ObjCName(name = "getSeconds")
+  @ObjCName("getSeconds")
   external open fun getSeconds(): Int
 
-  @ObjCName(name = "J2ktImportglobaljstypesDate_NativeDateCompanion", swiftName = "ImportglobaljstypesDate_NativeDateCompanion", exact = true)
+  @ObjCName("J2ktImportglobaljstypesDate_NativeDateCompanion", swiftName = "ImportglobaljstypesDate_NativeDateCompanion", exact = true)
   companion object {
    @JvmStatic
-   @ObjCName(name = "now")
+   @ObjCName("now")
    external fun now(): Double
   }
  }

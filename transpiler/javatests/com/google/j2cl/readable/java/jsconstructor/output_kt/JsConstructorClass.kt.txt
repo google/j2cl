@@ -30,16 +30,16 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktJsconstructorJsConstructorClass", swiftName = "JsconstructorJsConstructorClass", exact = true)
+@ObjCName("J2ktJsconstructorJsConstructorClass", swiftName = "JsconstructorJsConstructorClass", exact = true)
 open class JsConstructorClass {
- @ObjCName(name = "J2ktJsconstructorJsConstructorClass_A", swiftName = "JsconstructorJsConstructorClass_A", exact = true)
+ @ObjCName("J2ktJsconstructorJsConstructorClass_A", swiftName = "JsconstructorJsConstructorClass_A", exact = true)
  open class A {
   @JvmField
-  @ObjCName(name = "fA_")
+  @ObjCName("fA_")
   var fA: Int = 1
 
   constructor(
-   @ObjCName(name = "Int") x: Int
+   @ObjCName("Int") x: Int
   ) {
    this.fA = x
   }
@@ -47,15 +47,15 @@ open class JsConstructorClass {
   constructor()
  }
 
- @ObjCName(name = "J2ktJsconstructorJsConstructorClass_B", swiftName = "JsconstructorJsConstructorClass_B", exact = true)
+ @ObjCName("J2ktJsconstructorJsConstructorClass_B", swiftName = "JsconstructorJsConstructorClass_B", exact = true)
  open class B: JsConstructorClass.A {
   @JvmField
-  @ObjCName(name = "fB_")
+  @ObjCName("fB_")
   var fB: Int = 2
 
   @JsConstructor
   constructor(
-   @ObjCName(name = "Int") x: Int
+   @ObjCName("Int") x: Int
   ): super(
    x + 1,
   ) {
@@ -67,8 +67,8 @@ open class JsConstructorClass {
   }
 
   constructor(
-   @ObjCName(name = "Int") x: Int,
-   @ObjCName(name = "withInt") y: Int
+   @ObjCName("Int") x: Int,
+   @ObjCName("withInt") y: Int
   ): this(
    x + y,
   ) {
@@ -76,15 +76,15 @@ open class JsConstructorClass {
   }
  }
 
- @ObjCName(name = "J2ktJsconstructorJsConstructorClass_C", swiftName = "JsconstructorJsConstructorClass_C", exact = true)
+ @ObjCName("J2ktJsconstructorJsConstructorClass_C", swiftName = "JsconstructorJsConstructorClass_C", exact = true)
  open class C: JsConstructorClass.B {
   @JvmField
-  @ObjCName(name = "fC_")
+  @ObjCName("fC_")
   var fC: Int = 1
 
   @JsConstructor
   constructor(
-   @ObjCName(name = "Int") x: Int
+   @ObjCName("Int") x: Int
   ): super(
    x * 2,
   ) {
@@ -92,8 +92,8 @@ open class JsConstructorClass {
   }
 
   constructor(
-   @ObjCName(name = "Int") x: Int,
-   @ObjCName(name = "withInt") y: Int
+   @ObjCName("Int") x: Int,
+   @ObjCName("withInt") y: Int
   ): this(
    x + y,
   ) {
@@ -101,10 +101,10 @@ open class JsConstructorClass {
   }
  }
 
- @ObjCName(name = "J2ktJsconstructorJsConstructorClass_D", swiftName = "JsconstructorJsConstructorClass_D", exact = true)
+ @ObjCName("J2ktJsconstructorJsConstructorClass_D", swiftName = "JsconstructorJsConstructorClass_D", exact = true)
  open class D: JsConstructorClass.B {
   @JvmField
-  @ObjCName(name = "fD_")
+  @ObjCName("fD_")
   var fD: Int = 8
 
   @JsConstructor
@@ -113,16 +113,16 @@ open class JsConstructorClass {
   }
 
   constructor(
-   @ObjCName(name = "Int") x: Int
+   @ObjCName("Int") x: Int
   ): this() {
    this.fD = x
   }
  }
 
- @ObjCName(name = "J2ktJsconstructorJsConstructorClass_E", swiftName = "JsconstructorJsConstructorClass_E", exact = true)
+ @ObjCName("J2ktJsconstructorJsConstructorClass_E", swiftName = "JsconstructorJsConstructorClass_E", exact = true)
  open class E: JsConstructorClass.C {
   @JvmField
-  @ObjCName(name = "fE_")
+  @ObjCName("fE_")
   var fE: Int = 11
 
   @JsConstructor
@@ -131,15 +131,15 @@ open class JsConstructorClass {
   }
  }
 
- @ObjCName(name = "J2ktJsconstructorJsConstructorClass_F", swiftName = "JsconstructorJsConstructorClass_F", exact = true)
+ @ObjCName("J2ktJsconstructorJsConstructorClass_F", swiftName = "JsconstructorJsConstructorClass_F", exact = true)
  open class F: JsConstructorClass.C {
   @JvmField
-  @ObjCName(name = "fF_")
+  @ObjCName("fF_")
   var fF: Int = 13
 
   @JsConstructor
   constructor(
-   @ObjCName(name = "Int") x: Int
+   @ObjCName("Int") x: Int
   ): super(
    x + 2,
   ) {
@@ -147,50 +147,50 @@ open class JsConstructorClass {
   }
  }
 
- @ObjCName(name = "J2ktJsconstructorJsConstructorClass_G", swiftName = "JsconstructorJsConstructorClass_G", exact = true)
+ @ObjCName("J2ktJsconstructorJsConstructorClass_G", swiftName = "JsconstructorJsConstructorClass_G", exact = true)
  @JsType
  open class G
 
- @ObjCName(name = "J2ktJsconstructorJsConstructorClass_H", swiftName = "JsconstructorJsConstructorClass_H", exact = true)
+ @ObjCName("J2ktJsconstructorJsConstructorClass_H", swiftName = "JsconstructorJsConstructorClass_H", exact = true)
  open class H: JsConstructorClass.G {
   @JsConstructor
   constructor()
  }
 
- @ObjCName(name = "J2ktJsconstructorJsConstructorClass_Outer", swiftName = "JsconstructorJsConstructorClass_Outer", exact = true)
+ @ObjCName("J2ktJsconstructorJsConstructorClass_Outer", swiftName = "JsconstructorJsConstructorClass_Outer", exact = true)
  open class Outer {
-  @ObjCName(name = "J2ktJsconstructorJsConstructorClass_Outer_I", swiftName = "JsconstructorJsConstructorClass_Outer_I", exact = true)
+  @ObjCName("J2ktJsconstructorJsConstructorClass_Outer_I", swiftName = "JsconstructorJsConstructorClass_Outer_I", exact = true)
   open inner class I @JsConstructor constructor(): JsConstructorClass.G()
  }
 
- @ObjCName(name = "J2ktJsconstructorJsConstructorClass_Varargs", swiftName = "JsconstructorJsConstructorClass_Varargs", exact = true)
+ @ObjCName("J2ktJsconstructorJsConstructorClass_Varargs", swiftName = "JsconstructorJsConstructorClass_Varargs", exact = true)
  open class Varargs: JsConstructorClass.A {
   @JsConstructor
   constructor(
-   vararg @ObjCName(name = "IntArray") args: Int
+   vararg @ObjCName("IntArray") args: Int
   ): super(
    args!![1],
   )
  }
 
- @ObjCName(name = "J2ktJsconstructorJsConstructorClass_SubVarargs", swiftName = "JsconstructorJsConstructorClass_SubVarargs", exact = true)
+ @ObjCName("J2ktJsconstructorJsConstructorClass_SubVarargs", swiftName = "JsconstructorJsConstructorClass_SubVarargs", exact = true)
  open class SubVarargs: JsConstructorClass.Varargs {
   @JsConstructor
   constructor(
-   @ObjCName(name = "Id") i: Any?,
-   vararg @ObjCName(name = "withIntArray") args: Int
+   @ObjCName("Id") i: Any?,
+   vararg @ObjCName("withIntArray") args: Int
   ): super(
    *args!!,
   )
 
   constructor(
-   @ObjCName(name = "Int") j: Int
+   @ObjCName("Int") j: Int
   ): this(
    Any(),
    j,
   )
 
-  @ObjCName(name = "J2ktJsconstructorJsConstructorClass_SubVarargsCompanion", swiftName = "JsconstructorJsConstructorClass_SubVarargsCompanion", exact = true)
+  @ObjCName("J2ktJsconstructorJsConstructorClass_SubVarargsCompanion", swiftName = "JsconstructorJsConstructorClass_SubVarargsCompanion", exact = true)
   companion object {
    @JvmStatic
    internal fun subNativeInvocation_pp_jsconstructor() {
@@ -205,25 +205,25 @@ open class JsConstructorClass {
   }
  }
 
- @ObjCName(name = "J2ktJsconstructorJsConstructorClass_InstanceVarargs", swiftName = "JsconstructorJsConstructorClass_InstanceVarargs", exact = true)
+ @ObjCName("J2ktJsconstructorJsConstructorClass_InstanceVarargs", swiftName = "JsconstructorJsConstructorClass_InstanceVarargs", exact = true)
  open inner class InstanceVarargs @JsConstructor constructor(
-  vararg @ObjCName(name = "IntArray") args: Int
+  vararg @ObjCName("IntArray") args: Int
  ): JsConstructorClass.A(
   args!![1],
  )
 
- @ObjCName(name = "J2ktJsconstructorJsConstructorClass_RegularType", swiftName = "JsconstructorJsConstructorClass_RegularType", exact = true)
+ @ObjCName("J2ktJsconstructorJsConstructorClass_RegularType", swiftName = "JsconstructorJsConstructorClass_RegularType", exact = true)
  open class RegularType {
   constructor(
-   @ObjCName(name = "Id") b: Any?
+   @ObjCName("Id") b: Any?
   )
  }
 
- @ObjCName(name = "J2ktJsconstructorJsConstructorClass_JsConstructorSubtypeOfRegularType", swiftName = "JsconstructorJsConstructorClass_JsConstructorSubtypeOfRegularType", exact = true)
+ @ObjCName("J2ktJsconstructorJsConstructorClass_JsConstructorSubtypeOfRegularType", swiftName = "JsconstructorJsConstructorClass_JsConstructorSubtypeOfRegularType", exact = true)
  open class JsConstructorSubtypeOfRegularType: JsConstructorClass.RegularType {
   @JsConstructor
   constructor(
-   @ObjCName(name = "Id") `object`: Any?
+   @ObjCName("Id") `object`: Any?
   ): super(`object`)
 
   constructor(): this(
@@ -231,10 +231,10 @@ open class JsConstructorClass {
   )
  }
 
- @ObjCName(name = "J2ktJsconstructorJsConstructorClass_JsConstructorClassWithExplicitConstructor", swiftName = "JsconstructorJsConstructorClass_JsConstructorClassWithExplicitConstructor", exact = true)
+ @ObjCName("J2ktJsconstructorJsConstructorClass_JsConstructorClassWithExplicitConstructor", swiftName = "JsconstructorJsConstructorClass_JsConstructorClassWithExplicitConstructor", exact = true)
  open inner class JsConstructorClassWithExplicitConstructor @JsConstructor constructor(i: Int)
 
- @ObjCName(name = "J2ktJsconstructorJsConstructorClass_JsConstructorSubclass", swiftName = "JsconstructorJsConstructorClass_JsConstructorSubclass", exact = true)
+ @ObjCName("J2ktJsconstructorJsConstructorClass_JsConstructorSubclass", swiftName = "JsconstructorJsConstructorClass_JsConstructorSubclass", exact = true)
  open inner class JsConstructorSubclass @JsConstructor constructor(): JsConstructorClass.JsConstructorClassWithExplicitConstructor(1) {
   init {
    var i: Int = 0

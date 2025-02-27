@@ -30,33 +30,33 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktJ2ktNullabilityInferenceWithLocalVariables", swiftName = "J2ktNullabilityInferenceWithLocalVariables", exact = true)
+@ObjCName("J2ktJ2ktNullabilityInferenceWithLocalVariables", swiftName = "J2ktNullabilityInferenceWithLocalVariables", exact = true)
 open class NullabilityInferenceWithLocalVariables {
- @ObjCName(name = "J2ktJ2ktNullabilityInferenceWithLocalVariablesCompanion", swiftName = "J2ktNullabilityInferenceWithLocalVariablesCompanion", exact = true)
+ @ObjCName("J2ktJ2ktNullabilityInferenceWithLocalVariablesCompanion", swiftName = "J2ktNullabilityInferenceWithLocalVariablesCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName(name = "testArray")
+  @ObjCName("testArray")
   fun testArray(): Array<String> {
    val local: String = ""
    return arrayOf<String>(local, "")
   }
 
   @JvmStatic
-  @ObjCName(name = "testConstructor")
+  @ObjCName("testConstructor")
   fun testConstructor(): NullabilityInferenceWithLocalVariables.Foo<String> {
    val local: String = ""
    return NullabilityInferenceWithLocalVariables.Foo<Any?>(local, "") as NullabilityInferenceWithLocalVariables.Foo<String>
   }
 
   @JvmStatic
-  @ObjCName(name = "testMethod")
+  @ObjCName("testMethod")
   fun testMethod(): NullabilityInferenceWithLocalVariables.Foo<String> {
    val local: String = ""
    return NullabilityInferenceWithLocalVariables.Foo.foo<String>(local, "")
   }
 
   @JvmStatic
-  @ObjCName(name = "testMethodChain")
+  @ObjCName("testMethodChain")
   fun testMethodChain(): NullabilityInferenceWithLocalVariables.Foo<String> {
    val l1: String = ""
    return NullabilityInferenceWithLocalVariables.Foo.foo<String>(l1).chain_pp_j2kt(
@@ -65,7 +65,7 @@ open class NullabilityInferenceWithLocalVariables {
   }
  }
 
- @ObjCName(name = "J2ktJ2ktNullabilityInferenceWithLocalVariables_Foo", swiftName = "J2ktNullabilityInferenceWithLocalVariables_Foo", exact = true)
+ @ObjCName("J2ktJ2ktNullabilityInferenceWithLocalVariables_Foo", swiftName = "J2ktNullabilityInferenceWithLocalVariables_Foo", exact = true)
  open class Foo<T> {
   internal constructor(t1: T, t2: T)
 
@@ -73,21 +73,21 @@ open class NullabilityInferenceWithLocalVariables {
    throw RuntimeException()
   }
 
-  @ObjCName(name = "J2ktJ2ktNullabilityInferenceWithLocalVariables_FooCompanion", swiftName = "J2ktNullabilityInferenceWithLocalVariables_FooCompanion", exact = true)
+  @ObjCName("J2ktJ2ktNullabilityInferenceWithLocalVariables_FooCompanion", swiftName = "J2ktNullabilityInferenceWithLocalVariables_FooCompanion", exact = true)
   companion object {
    @JvmStatic
-   @ObjCName(name = "foo")
+   @ObjCName("foo")
    fun <T> foo(
-    @ObjCName(name = "withId") t: T
+    @ObjCName("withId") t: T
    ): NullabilityInferenceWithLocalVariables.Foo<T> {
     throw RuntimeException()
    }
 
    @JvmStatic
-   @ObjCName(name = "foo")
+   @ObjCName("foo")
    fun <T> foo(
-    @ObjCName(name = "withId") t1: T,
-    @ObjCName(name = "withId") t2: T
+    @ObjCName("withId") t1: T,
+    @ObjCName("withId") t2: T
    ): NullabilityInferenceWithLocalVariables.Foo<T> {
     throw RuntimeException()
    }

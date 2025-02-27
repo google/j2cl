@@ -29,14 +29,14 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktCircularimportuseMain", swiftName = "CircularimportuseMain", exact = true)
+@ObjCName("J2ktCircularimportuseMain", swiftName = "CircularimportuseMain", exact = true)
 open class Main {
- @ObjCName(name = "J2ktCircularimportuseMainCompanion", swiftName = "CircularimportuseMainCompanion", exact = true)
+ @ObjCName("J2ktCircularimportuseMainCompanion", swiftName = "CircularimportuseMainCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName(name = "main")
+  @ObjCName("main")
   fun main(
-   vararg @ObjCName(name = "withNSStringArray") args: String?
+   vararg @ObjCName("withNSStringArray") args: String?
   ) {
    val args_1: Array<String?>? = args as Array<String?>?
    val left: Left = Left()

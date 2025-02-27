@@ -43,151 +43,151 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 import kotlin.run
 
-@ObjCName(name = "J2ktAutoboxingAutoBoxing", swiftName = "AutoboxingAutoBoxing", exact = true)
+@ObjCName("J2ktAutoboxingAutoBoxing", swiftName = "AutoboxingAutoBoxing", exact = true)
 open class AutoBoxing {
- @ObjCName(name = "box")
+ @ObjCName("box")
  open fun box(
-  @ObjCName(name = "withBoolean") b: Boolean
+  @ObjCName("withBoolean") b: Boolean
  ): Boolean? {
   return java.lang.Boolean.valueOf(b)
  }
 
- @ObjCName(name = "box")
+ @ObjCName("box")
  open fun box(
-  @ObjCName(name = "withDouble") d: Double
+  @ObjCName("withDouble") d: Double
  ): Double? {
   return java.lang.Double.valueOf(d)
  }
 
- @ObjCName(name = "box")
+ @ObjCName("box")
  open fun box(
-  @ObjCName(name = "withByte") b: Byte
+  @ObjCName("withByte") b: Byte
  ): Byte? {
   return java.lang.Byte.valueOf(b)
  }
 
- @ObjCName(name = "box")
+ @ObjCName("box")
  open fun box(
-  @ObjCName(name = "withFloat") f: Float
+  @ObjCName("withFloat") f: Float
  ): Float? {
   return java.lang.Float.valueOf(f)
  }
 
- @ObjCName(name = "box")
+ @ObjCName("box")
  open fun box(
-  @ObjCName(name = "withInt") i: Int
+  @ObjCName("withInt") i: Int
  ): Int? {
   return Integer.valueOf(i)
  }
 
- @ObjCName(name = "box")
+ @ObjCName("box")
  open fun box(
-  @ObjCName(name = "withLong") l: Long
+  @ObjCName("withLong") l: Long
  ): Long? {
   return java.lang.Long.valueOf(l)
  }
 
- @ObjCName(name = "box")
+ @ObjCName("box")
  open fun box(
-  @ObjCName(name = "withShort") s: Short
+  @ObjCName("withShort") s: Short
  ): Short? {
   return java.lang.Short.valueOf(s)
  }
 
- @ObjCName(name = "box")
+ @ObjCName("box")
  open fun box(
-  @ObjCName(name = "withChar") c: Char
+  @ObjCName("withChar") c: Char
  ): Char? {
   return Character.valueOf(c)
  }
 
- @ObjCName(name = "unbox")
+ @ObjCName("unbox")
  open fun unbox(
-  @ObjCName(name = "withJavaLangBoolean") b: Boolean?
+  @ObjCName("withJavaLangBoolean") b: Boolean?
  ): Boolean {
   return b!!.booleanValue()
  }
 
- @ObjCName(name = "unbox")
+ @ObjCName("unbox")
  open fun unbox(
-  @ObjCName(name = "withJavaLangDouble") d: Double?
+  @ObjCName("withJavaLangDouble") d: Double?
  ): Double {
   return d!!.toDouble()
  }
 
- @ObjCName(name = "unbox")
+ @ObjCName("unbox")
  open fun unbox(
-  @ObjCName(name = "withJavaLangByte") b: Byte?
+  @ObjCName("withJavaLangByte") b: Byte?
  ): Byte {
   return b!!.toByte()
  }
 
- @ObjCName(name = "unbox")
+ @ObjCName("unbox")
  open fun unbox(
-  @ObjCName(name = "withJavaLangFloat") f: Float?
+  @ObjCName("withJavaLangFloat") f: Float?
  ): Float {
   return f!!.toFloat()
  }
 
- @ObjCName(name = "unbox")
+ @ObjCName("unbox")
  open fun unbox(
-  @ObjCName(name = "withJavaLangInteger") i: Int?
+  @ObjCName("withJavaLangInteger") i: Int?
  ): Int {
   return i!!.toInt()
  }
 
- @ObjCName(name = "unbox")
+ @ObjCName("unbox")
  open fun unbox(
-  @ObjCName(name = "withJavaLangLong") l: Long?
+  @ObjCName("withJavaLangLong") l: Long?
  ): Long {
   return l!!.toLong()
  }
 
- @ObjCName(name = "unbox")
+ @ObjCName("unbox")
  open fun unbox(
-  @ObjCName(name = "withJavaLangShort") s: Short?
+  @ObjCName("withJavaLangShort") s: Short?
  ): Short {
   return s!!.toShort()
  }
 
- @ObjCName(name = "unbox")
+ @ObjCName("unbox")
  open fun unbox(
-  @ObjCName(name = "withJavaLangCharacter") c: Char?
+  @ObjCName("withJavaLangCharacter") c: Char?
  ): Char {
   return c!!.toChar()
  }
 
- @ObjCName(name = "takesAndReturnsPrimitiveDouble")
+ @ObjCName("takesAndReturnsPrimitiveDouble")
  open fun takesAndReturnsPrimitiveDouble(
-  @ObjCName(name = "withDouble") d: Double
+  @ObjCName("withDouble") d: Double
  ): Double {
   return d
  }
 
- @ObjCName(name = "takesAndReturnsVoid")
+ @ObjCName("takesAndReturnsVoid")
  open fun takesAndReturnsVoid(
-  @ObjCName(name = "withJavaLangVoid") v: Void?
+  @ObjCName("withJavaLangVoid") v: Void?
  ): Void? {
   return null
  }
 
- @ObjCName(name = "takesFloatVarArgs")
+ @ObjCName("takesFloatVarArgs")
  open fun takesFloatVarArgs(
-  vararg @ObjCName(name = "withJavaLangFloatArray") elements: Float?
+  vararg @ObjCName("withJavaLangFloatArray") elements: Float?
  ) {
   val elements_1: Array<Float?>? = elements as Array<Float?>?
  }
 
- @ObjCName(name = "takesObjectAndReturnsPrimitiveDouble")
+ @ObjCName("takesObjectAndReturnsPrimitiveDouble")
  open fun takesObjectAndReturnsPrimitiveDouble(
-  @ObjCName(name = "withId") o: Any?
+  @ObjCName("withId") o: Any?
  ): Double {
   return o as Double
  }
 
- @ObjCName(name = "sumWithoutBoxing")
+ @ObjCName("sumWithoutBoxing")
  open fun sumWithoutBoxing(
-  vararg @ObjCName(name = "withNSObjectArray") numbers: Any?
+  vararg @ObjCName("withNSObjectArray") numbers: Any?
  ): Double {
   val numbers_1: Array<Any?>? = numbers as Array<Any?>?
   var sum: Double = 0.0
@@ -197,10 +197,10 @@ open class AutoBoxing {
   return sum
  }
 
- @ObjCName(name = "sumWithoutBoxingJsVarargs")
+ @ObjCName("sumWithoutBoxingJsVarargs")
  @JsMethod
  open fun sumWithoutBoxingJsVarargs(
-  vararg @ObjCName(name = "withNSObjectArray") numbers: Any?
+  vararg @ObjCName("withNSObjectArray") numbers: Any?
  ): Double {
   val numbers_1: Array<Any?>? = numbers as Array<Any?>?
   var sum: Double = 0.0
@@ -210,9 +210,9 @@ open class AutoBoxing {
   return sum
  }
 
- @ObjCName(name = "sumWithUnboxing")
+ @ObjCName("sumWithUnboxing")
  open fun sumWithUnboxing(
-  @ObjCName(name = "withJavaLangIterable") boxedDoubles: MutableIterable<Double?>?
+  @ObjCName("withJavaLangIterable") boxedDoubles: MutableIterable<Double?>?
  ): Double {
   var sum: Double = 0.0
   for (d in boxedDoubles!!) {
@@ -222,7 +222,7 @@ open class AutoBoxing {
   return sum
  }
 
- @ObjCName(name = "testBoxing")
+ @ObjCName("testBoxing")
  open fun testBoxing() {
   var bool: Boolean = true
   var d: Double = 2.2
@@ -350,7 +350,7 @@ open class AutoBoxing {
   o = Integer.valueOf(15)
  }
 
- @ObjCName(name = "testUnboxing")
+ @ObjCName("testUnboxing")
  open fun testUnboxing() {
   var boxBool: Boolean? = Boolean(true)
   var boxD: Double? = Double(2.2)
@@ -464,7 +464,7 @@ open class AutoBoxing {
   )
  }
 
- @ObjCName(name = "testUnboxingBoolean")
+ @ObjCName("testUnboxingBoolean")
  open fun testUnboxingBoolean() {
   var boxB1: Boolean? = Boolean(true)
   val boxB2: Boolean? = Boolean(false)
@@ -601,7 +601,7 @@ open class AutoBoxing {
   )
  }
 
- @ObjCName(name = "testUnboxingEquality")
+ @ObjCName("testUnboxingEquality")
  open fun testUnboxingEquality() {
   val boxB: Boolean? = Boolean(true)
   val b: Boolean = false
@@ -617,7 +617,7 @@ open class AutoBoxing {
   assert(i != boxI!!.toInt())
  }
 
- @ObjCName(name = "testAssertStatement")
+ @ObjCName("testAssertStatement")
  open fun testAssertStatement() {
   val boxB: Boolean? = Boolean(true)
   val b: Boolean = true
@@ -625,7 +625,7 @@ open class AutoBoxing {
   assert(b)
  }
 
- @ObjCName(name = "testUnbox_withCast")
+ @ObjCName("testUnbox_withCast")
  open fun testUnbox_withCast() {
   open class Supplier<T> internal constructor() {
    internal open fun get_pp_autoboxing(): T {
@@ -636,13 +636,13 @@ open class AutoBoxing {
   val i: Int = supplier.get_pp_autoboxing()!!.toInt()
  }
 
- @ObjCName(name = "J2ktAutoboxingAutoBoxingCompanion", swiftName = "AutoboxingAutoBoxingCompanion", exact = true)
+ @ObjCName("J2ktAutoboxingAutoBoxingCompanion", swiftName = "AutoboxingAutoBoxingCompanion", exact = true)
  companion object {
-  @ObjCName(name = "COMPILE_TIME_CONSTANT_")
+  @ObjCName("COMPILE_TIME_CONSTANT_")
   const val COMPILE_TIME_CONSTANT: Float = 1.1f
 
   @JvmStatic
-  @ObjCName(name = "testUnboxingFromTypeVariable")
+  @ObjCName("testUnboxingFromTypeVariable")
   fun <T: Long?> testUnboxingFromTypeVariable() {
    var n: T? = java.lang.Long.valueOf(10L) as (T & Any)
    var l: Long = n!!.toLong()
@@ -681,7 +681,7 @@ open class AutoBoxing {
   }
 
   @JvmStatic
-  @ObjCName(name = "testUnboxingFromIntersectionType")
+  @ObjCName("testUnboxingFromIntersectionType")
   fun <T> testUnboxingFromIntersectionType() where T: Long?, T: Comparable<Long>? {
    var n: T? = java.lang.Long.valueOf(10L) as (T & Any)
    var l: Long = n!!.toLong()

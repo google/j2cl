@@ -32,7 +32,7 @@ import kotlin.intArrayOf
 import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktParameterassignmentsMain", swiftName = "ParameterassignmentsMain", exact = true)
+@ObjCName("J2ktParameterassignmentsMain", swiftName = "ParameterassignmentsMain", exact = true)
 open class Main {
  internal constructor(nonFinal: Int, explicitFinal: Int, implicitFinal: Int): this(nonFinal, explicitFinal, implicitFinal, true) {
   var nonFinal_1: Int = nonFinal
@@ -78,39 +78,39 @@ open class Main {
   os_1!![0] = os_1!![1]
  }
 
- @ObjCName(name = "J2ktParameterassignmentsMain_Fn", swiftName = "ParameterassignmentsMain_Fn", exact = true)
+ @ObjCName("J2ktParameterassignmentsMain_Fn", swiftName = "ParameterassignmentsMain_Fn", exact = true)
  fun interface Fn {
-  @ObjCName(name = "test")
+  @ObjCName("test")
   fun test(
-   @ObjCName(name = "withInt") nonFinal: Int,
-   @ObjCName(name = "withInt") implicitFinal: Int
+   @ObjCName("withInt") nonFinal: Int,
+   @ObjCName("withInt") implicitFinal: Int
   ): Int
  }
 
- @ObjCName(name = "J2ktParameterassignmentsMain_FnPrimitiveVarargs", swiftName = "ParameterassignmentsMain_FnPrimitiveVarargs", exact = true)
+ @ObjCName("J2ktParameterassignmentsMain_FnPrimitiveVarargs", swiftName = "ParameterassignmentsMain_FnPrimitiveVarargs", exact = true)
  fun interface FnPrimitiveVarargs {
-  @ObjCName(name = "test")
+  @ObjCName("test")
   fun test(
-   @ObjCName(name = "withInt") i: Int,
-   vararg @ObjCName(name = "withIntArray") `is`: Int
+   @ObjCName("withInt") i: Int,
+   vararg @ObjCName("withIntArray") `is`: Int
   )
  }
 
- @ObjCName(name = "J2ktParameterassignmentsMain_FnObjectVarargs", swiftName = "ParameterassignmentsMain_FnObjectVarargs", exact = true)
+ @ObjCName("J2ktParameterassignmentsMain_FnObjectVarargs", swiftName = "ParameterassignmentsMain_FnObjectVarargs", exact = true)
  fun interface FnObjectVarargs {
-  @ObjCName(name = "test")
+  @ObjCName("test")
   fun test(
-   @ObjCName(name = "withId") o: Any?,
-   vararg @ObjCName(name = "withNSObjectArray") os: Any?
+   @ObjCName("withId") o: Any?,
+   vararg @ObjCName("withNSObjectArray") os: Any?
   )
  }
 
- @ObjCName(name = "J2ktParameterassignmentsMain_SubMain", swiftName = "ParameterassignmentsMain_SubMain", exact = true)
+ @ObjCName("J2ktParameterassignmentsMain_SubMain", swiftName = "ParameterassignmentsMain_SubMain", exact = true)
  open class SubMain: Main {
   constructor(
-   @ObjCName(name = "Int") nonFinal: Int,
-   @ObjCName(name = "withInt") explicitFinal: Int,
-   @ObjCName(name = "withInt") implicitFinal: Int
+   @ObjCName("Int") nonFinal: Int,
+   @ObjCName("withInt") explicitFinal: Int,
+   @ObjCName("withInt") implicitFinal: Int
   ): super(nonFinal, explicitFinal, implicitFinal) {
    var nonFinal_1: Int = nonFinal
    nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal

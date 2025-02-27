@@ -37,19 +37,19 @@ import nativejstypes.Headers
 import nativejstypes.TopLevel
 import nativejstypes.TopLevelNestedReference
 
-@ObjCName(name = "J2ktNativejstypesMain", swiftName = "NativejstypesMain", exact = true)
+@ObjCName("J2ktNativejstypesMain", swiftName = "NativejstypesMain", exact = true)
 open class Main {
- @ObjCName(name = "J2ktNativejstypesMainCompanion", swiftName = "NativejstypesMainCompanion", exact = true)
+ @ObjCName("J2ktNativejstypesMainCompanion", swiftName = "NativejstypesMainCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName(name = "testNativeJsTypeWithNamespace")
+  @ObjCName("testNativeJsTypeWithNamespace")
   fun testNativeJsTypeWithNamespace(): Int {
    val foo: Foo = Foo()
    return foo.sum()
   }
 
   @JvmStatic
-  @ObjCName(name = "testNativeJsTypeWithNamespaceJsProperties")
+  @ObjCName("testNativeJsTypeWithNamespaceJsProperties")
   fun testNativeJsTypeWithNamespaceJsProperties() {
    val foo: Foo = Foo()
    foo.x = 50
@@ -57,7 +57,7 @@ open class Main {
   }
 
   @JvmStatic
-  @ObjCName(name = "testNativeJsTypeWithoutNamespace")
+  @ObjCName("testNativeJsTypeWithoutNamespace")
   fun testNativeJsTypeWithoutNamespace(): Int {
    val bar: Bar = Bar(6, 7)
    val unused: Int = Bar.getStatic()
@@ -65,7 +65,7 @@ open class Main {
   }
 
   @JvmStatic
-  @ObjCName(name = "testNativeJsTypeWithoutNamespaceJsProperties")
+  @ObjCName("testNativeJsTypeWithoutNamespaceJsProperties")
   fun testNativeJsTypeWithoutNamespaceJsProperties() {
    val bar: Bar = Bar(6, 7)
    bar.x = 50
@@ -74,7 +74,7 @@ open class Main {
   }
 
   @JvmStatic
-  @ObjCName(name = "testInnerNativeJsType")
+  @ObjCName("testInnerNativeJsType")
   fun testInnerNativeJsType() {
    val barInner: Bar.Inner = Bar.Inner(1)
    val barInnerWithDotInName: BarInnerWithDotInName = BarInnerWithDotInName(2)
@@ -85,21 +85,21 @@ open class Main {
   }
 
   @JvmStatic
-  @ObjCName(name = "testGlobalNativeJsType")
+  @ObjCName("testGlobalNativeJsType")
   fun testGlobalNativeJsType() {
    val header: Headers = Headers()
    header.append("Content-Type", "text/xml")
   }
 
   @JvmStatic
-  @ObjCName(name = "testNativeTypeClassLiteral")
+  @ObjCName("testNativeTypeClassLiteral")
   fun testNativeTypeClassLiteral() {
    var o1: Any = Bar::class.javaObjectType
    o1 = Array::class.javaObjectType
   }
 
   @JvmStatic
-  @ObjCName(name = "testNativeTypeObjectMethods")
+  @ObjCName("testNativeTypeObjectMethods")
   fun testNativeTypeObjectMethods() {
    val bar: Bar = Bar(6, 7)
    val unusedStr: String = bar.toString()
@@ -110,7 +110,7 @@ open class Main {
   }
 
   @JvmStatic
-  @ObjCName(name = "testTopLevel")
+  @ObjCName("testTopLevel")
   fun testTopLevel() {
    TopLevel.x = 2
    val nested: TopLevel.Nested = TopLevel.Nested()

@@ -27,46 +27,46 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktBridgemethodsI", swiftName = "BridgemethodsI", exact = true)
+@ObjCName("J2ktBridgemethodsI", swiftName = "BridgemethodsI", exact = true)
 fun interface I<T, S> {
- @ObjCName(name = "fun")
+ @ObjCName("fun")
  fun `fun`(
-  @ObjCName(name = "withId") s: S
+  @ObjCName("withId") s: S
  ): T
 }
 
-@ObjCName(name = "J2ktBridgemethodsA", swiftName = "BridgemethodsA", exact = true)
+@ObjCName("J2ktBridgemethodsA", swiftName = "BridgemethodsA", exact = true)
 open class A<T, S> internal constructor() {
- @ObjCName(name = "fun")
+ @ObjCName("fun")
  open fun `fun`(
-  @ObjCName(name = "withId") s: S
+  @ObjCName("withId") s: S
  ): T {
   return null as T
  }
 
- @ObjCName(name = "get")
+ @ObjCName("get")
  open fun get(): T {
   return null as T
  }
 }
 
-@ObjCName(name = "J2ktBridgemethodsB", swiftName = "BridgemethodsB", exact = true)
+@ObjCName("J2ktBridgemethodsB", swiftName = "BridgemethodsB", exact = true)
 open class B internal constructor(): A<Number?, String?>(), I<Int?, String?> {
  override fun `fun`(s: String?): Int? {
   return Int(1)
  }
 }
 
-@ObjCName(name = "J2ktBridgemethodsSpecializedInterface", swiftName = "BridgemethodsSpecializedInterface", exact = true)
+@ObjCName("J2ktBridgemethodsSpecializedInterface", swiftName = "BridgemethodsSpecializedInterface", exact = true)
 interface SpecializedInterface {
- @ObjCName(name = "fun")
+ @ObjCName("fun")
  fun `fun`(
-  @ObjCName(name = "withNSString") s: String?
+  @ObjCName("withNSString") s: String?
  ): String?
 
- @ObjCName(name = "get")
+ @ObjCName("get")
  fun get(): String?
 }
 
-@ObjCName(name = "J2ktBridgemethodsAccidentalOverride", swiftName = "BridgemethodsAccidentalOverride", exact = true)
+@ObjCName("J2ktBridgemethodsAccidentalOverride", swiftName = "BridgemethodsAccidentalOverride", exact = true)
 open class AccidentalOverride internal constructor(): A<String?, String?>(), SpecializedInterface

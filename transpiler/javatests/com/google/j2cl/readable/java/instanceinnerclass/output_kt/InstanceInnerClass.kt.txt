@@ -26,31 +26,31 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktInstanceinnerclassInstanceInnerClass", swiftName = "InstanceinnerclassInstanceInnerClass", exact = true)
+@ObjCName("J2ktInstanceinnerclassInstanceInnerClass", swiftName = "InstanceinnerclassInstanceInnerClass", exact = true)
 open class InstanceInnerClass {
  @JvmField
- @ObjCName(name = "instanceField_")
+ @ObjCName("instanceField_")
  var instanceField: Int = 0
 
- @ObjCName(name = "funOuter")
+ @ObjCName("funOuter")
  open fun funOuter() {}
 
- @ObjCName(name = "test")
+ @ObjCName("test")
  open fun test() {
   InstanceInnerClass().InnerClass()
  }
 
- @ObjCName(name = "J2ktInstanceinnerclassInstanceInnerClass_InnerClass", swiftName = "InstanceinnerclassInstanceInnerClass_InnerClass", exact = true)
+ @ObjCName("J2ktInstanceinnerclassInstanceInnerClass_InnerClass", swiftName = "InstanceinnerclassInstanceInnerClass_InnerClass", exact = true)
  open inner class InnerClass {
   @JvmField
-  @ObjCName(name = "field_")
+  @ObjCName("field_")
   var field: Int = this@InstanceInnerClass.instanceField + this@InstanceInnerClass.instanceField
 
   @JvmField
-  @ObjCName(name = "enclosingInstance_")
+  @ObjCName("enclosingInstance_")
   var enclosingInstance: InstanceInnerClass? = this@InstanceInnerClass
 
-  @ObjCName(name = "funInner")
+  @ObjCName("funInner")
   open fun funInner() {
    this@InstanceInnerClass.funOuter()
    this@InstanceInnerClass.funOuter()

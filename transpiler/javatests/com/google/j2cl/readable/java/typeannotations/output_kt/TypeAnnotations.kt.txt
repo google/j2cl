@@ -29,43 +29,43 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 import typeannotations.ParametricType
 
-@ObjCName(name = "J2ktTypeannotationsAbstractType", swiftName = "TypeannotationsAbstractType", exact = true)
+@ObjCName("J2ktTypeannotationsAbstractType", swiftName = "TypeannotationsAbstractType", exact = true)
 abstract class AbstractType internal constructor(): ParametricType<AbstractType?>
 
-@ObjCName(name = "J2ktTypeannotationsAbstractTypeNonNull", swiftName = "TypeannotationsAbstractTypeNonNull", exact = true)
+@ObjCName("J2ktTypeannotationsAbstractTypeNonNull", swiftName = "TypeannotationsAbstractTypeNonNull", exact = true)
 abstract class AbstractTypeNonNull internal constructor(): ParametricType<AbstractType>
 
-@ObjCName(name = "J2ktTypeannotationsParent", swiftName = "TypeannotationsParent", exact = true)
+@ObjCName("J2ktTypeannotationsParent", swiftName = "TypeannotationsParent", exact = true)
 open class Parent internal constructor() {
- @ObjCName(name = "m")
+ @ObjCName("m")
  open fun m(
-  @ObjCName(name = "withNSString") s: String,
-  @ObjCName(name = "withTypeannotationsParent") c: Parent?
+  @ObjCName("withNSString") s: String,
+  @ObjCName("withTypeannotationsParent") c: Parent?
  ): Parent? {
   return c
  }
 
- @ObjCName(name = "m")
+ @ObjCName("m")
  open fun m(
-  @ObjCName(name = "withJavaUtilList") l: MutableList<String>?,
-  @ObjCName(name = "withTypeannotationsParent") c: Parent?
+  @ObjCName("withJavaUtilList") l: MutableList<String>?,
+  @ObjCName("withTypeannotationsParent") c: Parent?
  ): MutableList<Parent>? {
   return ArrayList<Parent>()
  }
 }
 
-@ObjCName(name = "J2ktTypeannotationsChildWithNullableParent", swiftName = "TypeannotationsChildWithNullableParent", exact = true)
+@ObjCName("J2ktTypeannotationsChildWithNullableParent", swiftName = "TypeannotationsChildWithNullableParent", exact = true)
 open class ChildWithNullableParent internal constructor(): Parent(), ParametricType<Parent?>
 
-@ObjCName(name = "J2ktTypeannotationsChildWithNonNullableParent", swiftName = "TypeannotationsChildWithNonNullableParent", exact = true)
+@ObjCName("J2ktTypeannotationsChildWithNonNullableParent", swiftName = "TypeannotationsChildWithNonNullableParent", exact = true)
 open class ChildWithNonNullableParent internal constructor(): Parent(), ParametricType<Parent>
 
-@ObjCName(name = "J2ktTypeannotationsTypeAnnotations", swiftName = "TypeannotationsTypeAnnotations", exact = true)
+@ObjCName("J2ktTypeannotationsTypeAnnotations", swiftName = "TypeannotationsTypeAnnotations", exact = true)
 open class TypeAnnotations {
- @ObjCName(name = "J2ktTypeannotationsTypeAnnotationsCompanion", swiftName = "TypeannotationsTypeAnnotationsCompanion", exact = true)
+ @ObjCName("J2ktTypeannotationsTypeAnnotationsCompanion", swiftName = "TypeannotationsTypeAnnotationsCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName(name = "main")
+  @ObjCName("main")
   fun main() {
    val list: MutableList<String> = ArrayList<String>()
   }

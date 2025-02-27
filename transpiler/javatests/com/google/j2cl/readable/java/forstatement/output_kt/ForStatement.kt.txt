@@ -29,9 +29,9 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 import kotlin.run
 
-@ObjCName(name = "J2ktForstatementForStatement", swiftName = "ForstatementForStatement", exact = true)
+@ObjCName("J2ktForstatementForStatement", swiftName = "ForstatementForStatement", exact = true)
 open class ForStatement {
- @ObjCName(name = "test")
+ @ObjCName("test")
  open fun test() {
   var i: Int = 0
   var count: Int = 0
@@ -62,7 +62,7 @@ open class ForStatement {
   }
  }
 
- @ObjCName(name = "testContinue")
+ @ObjCName("testContinue")
  open fun testContinue() {
   var i: Int = 0
   var j: Int = 0
@@ -86,7 +86,7 @@ open class ForStatement {
   }
  }
 
- @ObjCName(name = "testInitializeInForCondition")
+ @ObjCName("testInitializeInForCondition")
  open fun testInitializeInForCondition() {
   var i: Int = 0
   var x: Int = 0
@@ -100,7 +100,7 @@ open class ForStatement {
   }
  }
 
- @ObjCName(name = "testForStatementInsideDeadCode")
+ @ObjCName("testForStatementInsideDeadCode")
  open fun testForStatementInsideDeadCode() {
   if (false) {
    var i: Int = 0
@@ -110,7 +110,7 @@ open class ForStatement {
   }
  }
 
- @ObjCName(name = "J2ktForstatementForStatementCompanion", swiftName = "ForstatementForStatementCompanion", exact = true)
+ @ObjCName("J2ktForstatementForStatementCompanion", swiftName = "ForstatementForStatementCompanion", exact = true)
  companion object {
   @JvmStatic
   private fun returnsValue(): Int {

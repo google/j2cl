@@ -27,19 +27,19 @@ import kotlin.native.ObjCName
 import packageprivatemethods.package1.Interface
 import packageprivatemethods.package1.Parent
 
-@ObjCName(name = "J2ktPackageprivatemethodsPackage1Child", swiftName = "PackageprivatemethodsPackage1Child", exact = true)
+@ObjCName("J2ktPackageprivatemethodsPackage1Child", swiftName = "PackageprivatemethodsPackage1Child", exact = true)
 open class Child: Parent(), Interface {
- @ObjCName(name = "overrideInParentExposedInChild")
+ @ObjCName("overrideInParentExposedInChild")
  public open fun overrideInParentExposedInChild(
-  @ObjCName(name = "withInt") a: Int
+  @ObjCName("withInt") a: Int
  ): Int {
   return a + 1
  }
 
- @ObjCName(name = "exposedInChild")
+ @ObjCName("exposedInChild")
  public open fun exposedInChild(
-  @ObjCName(name = "withInt") a: Int,
-  @ObjCName(name = "withInt") b: Int
+  @ObjCName("withInt") a: Int,
+  @ObjCName("withInt") b: Int
  ): Int {
   return a + b + 1
  }

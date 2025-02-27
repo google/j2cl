@@ -28,10 +28,10 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName(name = "J2ktNestednativetypeNativeArray", swiftName = "NestednativetypeNativeArray", exact = true)
+@ObjCName("J2ktNestednativetypeNativeArray", swiftName = "NestednativetypeNativeArray", exact = true)
 @JsType(name = "Array", namespace = JsPackage.GLOBAL, isNative = true)
 class NativeArray {
- @ObjCName(name = "a")
+ @ObjCName("a")
  @JsOverlay
  fun a(): Any? {
   return object : Any() {}
