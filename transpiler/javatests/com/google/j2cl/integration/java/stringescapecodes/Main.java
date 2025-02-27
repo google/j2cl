@@ -111,6 +111,10 @@ public class Main {
     String fai = "\uD800";
     String hu = "\uDF46";
     assertTrue(faihu.equals(fai + hu));
+
+    // Substring splits codepoints.
+    assertTrue(fai.equals(faihu.substring(0, 1)));
+    assertTrue(hu.equals(faihu.substring(1, 2)));
   }
 
   // 140x80 + 1 = 11201 chars. Note that the first two characters makes the string have an
