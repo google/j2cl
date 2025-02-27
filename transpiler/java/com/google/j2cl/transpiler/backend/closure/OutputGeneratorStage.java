@@ -150,12 +150,15 @@ public class OutputGeneratorStage {
         String headerRelativePath = typeRelativePath + jsHeaderGenerator.getSuffix();
         output.write(headerRelativePath, javaScriptHeaderSource);
 
+        problems.abortIfCancelled();
+
         if (libraryInfoOutputPath != null || shouldGenerateReadableLibraryInfo) {
           libraryInfoBuilder.addType(
               type,
               headerRelativePath,
               implRelativePath,
               jsImplGenerator.getOutputSourceInfoByMember());
+          problems.abortIfCancelled();
         }
       }
 

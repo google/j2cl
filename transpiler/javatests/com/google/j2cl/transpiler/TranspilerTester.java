@@ -584,7 +584,8 @@ public class TranspilerTester {
       ImmutableList.Builder<String> commandLineArgsBuilder =
           ImmutableList.<String>builder()
               // Output dir
-              .add("-d", outputPath.toAbsolutePath().toString());
+              .add("-d", outputPath.toAbsolutePath().toString())
+              .add("-libraryinfooutput", Files.createTempFile("libraryinfo", ".bin").toString());
 
       if (!filesByPath.isEmpty()) {
         // 1. Create an input directory

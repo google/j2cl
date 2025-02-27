@@ -66,6 +66,12 @@ public final class J2clCommandLineRunner extends CommandLineTool {
       usage = "Directory or zip into which to place compiled output.")
   Path output = Paths.get(".");
 
+  @Option(
+      name = "-libraryinfooutput",
+      metaVar = "<path>",
+      usage = "Specifies the file into which to place the call graph.")
+  Path libraryInfoOutput;
+
   @Option(name = "-optimizeautovalue", usage = "Enables optimizations of AutoValue types.")
   boolean optimizeAutoValue = true;
 
@@ -183,6 +189,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
         .setNativeSources(allNativeSources)
         .setClasspaths(getPathEntries(this.classPath))
         .setOutput(output)
+        .setLibraryInfoOutput(this.libraryInfoOutput)
         .setEmitReadableLibraryInfo(false)
         .setEmitReadableSourceMap(this.readableSourceMaps)
         .setOptimizeAutoValue(this.optimizeAutoValue)
