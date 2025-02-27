@@ -15,10 +15,8 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangVoid;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Streams;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
@@ -31,11 +29,9 @@ import com.google.j2cl.transpiler.ast.NullabilityAnnotation;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
-import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor;
 import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewriter;
-import javax.annotation.Nullable;
 
 /** Inserts casts in places where necessary due to nullability differences in type arguments. */
 // TODO(b/392084555): Clean-up this pass, as right now it's quite messy.
@@ -71,7 +67,7 @@ public final class InsertCastsOnNullabilityMismatch extends AbstractJ2ktNormaliz
                   return expression;
                 }
 
-                TypeDescriptor castTypeDescriptor = project(inferredTypeDescriptor);
+                TypeDescriptor castTypeDescriptor = projectCaptures(inferredTypeDescriptor);
                 // Reject non-denotable
                 // TODO(b/392084555): Maybe projection should project captures?
                 if (!castTypeDescriptor.isDenotable()) {
@@ -234,7 +230,7 @@ public final class InsertCastsOnNullabilityMismatch extends AbstractJ2ktNormaliz
     fromTypeDescriptor = removeRedundantNullabilityAnnotation(fromTypeDescriptor);
     toTypeDescriptor = removeRedundantNullabilityAnnotation(toTypeDescriptor);
 
-    if (!isWildcardOrCapture(toTypeDescriptor)) {
+    if (!toTypeDescriptor.isWildcardOrCapture()) {
       return fromTypeDescriptor.equals(toTypeDescriptor);
     } else {
       TypeVariable toVariable = (TypeVariable) toTypeDescriptor;
@@ -244,7 +240,7 @@ public final class InsertCastsOnNullabilityMismatch extends AbstractJ2ktNormaliz
 
       TypeDescriptor toLowerBound = getNormalizedLowerBoundTypeDescriptor(toVariable);
       if (toLowerBound != null) {
-        if (!isWildcardOrCapture(fromTypeDescriptor)) {
+        if (!fromTypeDescriptor.isWildcardOrCapture()) {
           // T -> ? super V
           return isNullabilityAssignableTo(toLowerBound, fromTypeDescriptor, seenTo);
         } else {
@@ -263,7 +259,7 @@ public final class InsertCastsOnNullabilityMismatch extends AbstractJ2ktNormaliz
         ImmutableSet<TypeVariable> newSeenTo =
             ImmutableSet.<TypeVariable>builder().addAll(seenTo).add(toVariable).build();
 
-        if (!isWildcardOrCapture(fromTypeDescriptor)) {
+        if (!fromTypeDescriptor.isWildcardOrCapture()) {
           // T -> ? extends V
           return isNullabilityAssignableTo(fromTypeDescriptor, toUpperBound, newSeenTo);
         } else {
@@ -308,200 +304,6 @@ public final class InsertCastsOnNullabilityMismatch extends AbstractJ2ktNormaliz
     } else {
       throw new AssertionError();
     }
-  }
-
-  private static boolean isWildcardOrCapture(TypeDescriptor typeDescriptor) {
-    if (typeDescriptor instanceof TypeVariable) {
-      TypeVariable typeVariable = (TypeVariable) typeDescriptor;
-      return typeVariable.isWildcardOrCapture();
-    }
-
-    return false;
-  }
-
-  /** Projects captures and wildcards appearing at the top-level to bounds. */
-  private static TypeDescriptor project(TypeDescriptor typeDescriptor) {
-    return project(typeDescriptor, /* isTypeArgument= */ false, ImmutableSet.of());
-  }
-
-  private static TypeDescriptor project(
-      TypeDescriptor typeDescriptor, boolean isTypeArgument, ImmutableSet<TypeVariable> seen) {
-    if (typeDescriptor instanceof PrimitiveTypeDescriptor) {
-      return typeDescriptor;
-    } else if (typeDescriptor instanceof ArrayTypeDescriptor) {
-      ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
-      return ArrayTypeDescriptor.Builder.from(arrayTypeDescriptor)
-          .setComponentTypeDescriptor(
-              projectArgument(
-                  arrayTypeDescriptor.getComponentTypeDescriptor(),
-                  getArrayComponentTypeParameterDescriptor(),
-                  seen))
-          .build();
-    } else if (typeDescriptor instanceof DeclaredTypeDescriptor) {
-      DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
-      return declaredTypeDescriptor.withTypeArguments(
-          Streams.zip(
-                  declaredTypeDescriptor
-                      .getTypeDeclaration()
-                      .getTypeParameterDescriptors()
-                      .stream(),
-                  declaredTypeDescriptor.getTypeArgumentDescriptors().stream(),
-                  (typeParameter, typeArgument) ->
-                      projectArgument(typeArgument, typeParameter, seen))
-              .collect(toImmutableList()));
-    } else if (typeDescriptor instanceof TypeVariable) {
-      TypeVariable typeVariable = (TypeVariable) typeDescriptor;
-      if (!typeVariable.isWildcardOrCapture()) {
-        return typeVariable;
-      } else {
-        if (seen.contains(typeVariable)) {
-          return typeVariable;
-        }
-        ImmutableSet<TypeVariable> newSeen =
-            ImmutableSet.<TypeVariable>builder().addAll(seen).add(typeVariable).build();
-
-        if (!isTypeArgument) {
-          // Captures and wildcards appearing at the top level (non type arguments) are projected to
-          // bounds.
-          TypeDescriptor lowerBound = getNormalizedLowerBoundTypeDescriptor(typeVariable);
-          if (lowerBound != null) {
-            return project(lowerBound, /* isTypeArgument= */ false, newSeen);
-          } else {
-            TypeDescriptor upperBound = getNormalizedUpperBoundTypeDescriptor(typeVariable);
-            return project(upperBound, /* isTypeArgument= */ false, newSeen);
-          }
-        } else {
-          return typeVariable
-              .toWildcard()
-              .withRewrittenBounds(it -> project(it, /* isTypeArgument= */ false, newSeen));
-        }
-      }
-    } else if (typeDescriptor instanceof IntersectionTypeDescriptor) {
-      IntersectionTypeDescriptor intersectionTypeDescriptor =
-          (IntersectionTypeDescriptor) typeDescriptor;
-      return IntersectionTypeDescriptor.newBuilder()
-          .setIntersectionTypeDescriptors(
-              intersectionTypeDescriptor.getIntersectionTypeDescriptors().stream()
-                  .map(it -> project(it, /* isTypeArgument= */ false, seen))
-                  .collect(toImmutableList()))
-          .build();
-    } else if (typeDescriptor instanceof UnionTypeDescriptor) {
-      UnionTypeDescriptor unionTypeDescriptor = (UnionTypeDescriptor) typeDescriptor;
-      return UnionTypeDescriptor.newBuilder()
-          .setUnionTypeDescriptors(
-              unionTypeDescriptor.getUnionTypeDescriptors().stream()
-                  .map(it -> project(it, /* isTypeArgument= */ false, seen))
-                  .collect(toImmutableList()))
-          .build();
-    } else {
-      throw new AssertionError();
-    }
-  }
-
-  private static TypeDescriptor projectArgument(
-      TypeDescriptor argumentTypeDescriptor,
-      TypeVariable typeParameter,
-      ImmutableSet<TypeVariable> seen) {
-    argumentTypeDescriptor =
-        getTypeArgumentDescriptorWithValidNullability(argumentTypeDescriptor, typeParameter);
-
-    // Don't project unbound wildcards with recursive declaration, as it'll result in recursive type
-    // parameter appearing in the projection. Without this check, given the
-    // {@code Foo<T extends Foo<T>>} declaration, the projection of {@code Foo<?>} would appear as
-    // {@code Foo<Foo<T>>}.
-    if (isUnboundWildcardWithRecursiveDeclaration(argumentTypeDescriptor, typeParameter)) {
-      return argumentTypeDescriptor;
-    }
-
-    return isWildcardOrCapture(argumentTypeDescriptor)
-        ? project(argumentTypeDescriptor, /* isTypeArgument= */ true, seen)
-        : argumentTypeDescriptor;
-  }
-
-  private static boolean isUnboundWildcardWithRecursiveDeclaration(
-      TypeDescriptor typeDescriptor, TypeVariable typeParameter) {
-    if (typeDescriptor instanceof TypeVariable) {
-      TypeVariable typeVariable = (TypeVariable) typeDescriptor;
-      return typeParameter.hasRecursiveDefinition()
-          && typeVariable.isWildcardOrCapture()
-          && typeVariable
-              .getUpperBoundTypeDescriptor()
-              .toNullable()
-              .equals(typeParameter.getUpperBoundTypeDescriptor().toNullable());
-    }
-    return false;
-  }
-
-  /** Returns synthetic type parameter for kotlin.Array class. */
-  private static TypeVariable getArrayComponentTypeParameterDescriptor() {
-    return TypeVariable.newBuilder()
-        .setName("T")
-        .setUniqueKey("kotlin.Array:T")
-        .setUpperBoundTypeDescriptorFactory(() -> TypeDescriptors.get().javaLangObject)
-        .build();
-  }
-
-  /** Returns type argument descriptors with nullability which satisfy their declarations. */
-  private static ImmutableList<TypeDescriptor> getTypeArgumentDescriptorsWithValidNullability(
-      DeclaredTypeDescriptor typeArgumentDescriptor) {
-    return Streams.zip(
-            typeArgumentDescriptor.getTypeArgumentDescriptors().stream(),
-            typeArgumentDescriptor.getTypeDeclaration().getTypeParameterDescriptors().stream(),
-            InsertCastsOnNullabilityMismatch::getTypeArgumentDescriptorWithValidNullability)
-        .collect(toImmutableList());
-  }
-
-  /** Returns type argument descriptor with nullability which satisfies its declaration. */
-  private static TypeDescriptor getTypeArgumentDescriptorWithValidNullability(
-      TypeDescriptor typeArgumentDescriptor, TypeVariable typeParameterDescriptor) {
-    return !typeParameterDescriptor.canBeNull() && typeArgumentDescriptor.canBeNull()
-        ? typeArgumentDescriptor.toNonNullable()
-        : typeArgumentDescriptor;
-  }
-
-  /**
-   * Returns type descriptor with removed redundant nullability annotation - in Kotlin, NOT_NULLABLE
-   * is valid only for type variables with nullable bounds.
-   */
-  private static TypeDescriptor removeRedundantNullabilityAnnotation(
-      TypeDescriptor typeDescriptor) {
-    if (typeDescriptor instanceof TypeVariable) {
-      TypeVariable typeVariable = (TypeVariable) typeDescriptor;
-      if (typeVariable.getNullabilityAnnotation() == NullabilityAnnotation.NOT_NULLABLE
-          && !typeVariable.getUpperBoundTypeDescriptor().canBeNull()) {
-        return TypeVariable.Builder.from(typeVariable)
-            .setNullabilityAnnotation(NullabilityAnnotation.NONE)
-            .build();
-      }
-    }
-    return typeDescriptor;
-  }
-
-  private static TypeDescriptor getNormalizedUpperBoundTypeDescriptor(TypeVariable typeVariable) {
-    return typeVariable
-        .getUpperBoundTypeDescriptor()
-        .withNullabilityAnnotation(typeVariable.getNullabilityAnnotation());
-  }
-
-  @Nullable
-  private static TypeDescriptor getNormalizedLowerBoundTypeDescriptor(TypeVariable typeVariable) {
-    TypeDescriptor lowerBound = typeVariable.getLowerBoundTypeDescriptor();
-    if (lowerBound != null) {
-      return lowerBound.withNullabilityAnnotation(typeVariable.getNullabilityAnnotation());
-    }
-    return null;
-  }
-
-  @Nullable
-  private static TypeDescriptor getNormalizedLowerBoundTypeDescriptor(
-      TypeDescriptor typeDescriptor) {
-    if (typeDescriptor instanceof TypeVariable) {
-      TypeVariable typeVariable = (TypeVariable) typeDescriptor;
-      if (typeVariable.isWildcardOrCapture()) {
-        return getNormalizedLowerBoundTypeDescriptor(typeVariable);
-      }
-    }
-    return null;
   }
 
   private static boolean isNullableAssignableTo(boolean fromIsNullable, boolean toIsNullable) {
