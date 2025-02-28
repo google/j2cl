@@ -572,6 +572,7 @@ public class TranspilerTester {
     } finally {
       MoreExecutors.shutdownAndAwaitTermination(executorService, 30, SECONDS);
     }
+    assertThat(Thread.currentThread().isInterrupted()).isFalse();
 
     final String[] knownDelayedCalls = {
       "com.google.j2cl.transpiler.frontend.javac.JavacParser.parseFiles",
