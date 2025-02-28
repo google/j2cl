@@ -401,7 +401,7 @@ public class JdtEnvironment {
         .setCapture(typeBinding.isCapture())
         .setUniqueKey(uniqueKey)
         .setName(typeBinding.getName())
-        .setKtVariance(KtInteropUtils.getKtVariance(typeBinding.getTypeAnnotations()))
+        .setKtVariance(KtInteropUtils.getKtVariance(typeBinding))
         .setNullabilityAnnotation(nullabilityAnnotation)
         .build();
   }
@@ -1001,18 +1001,10 @@ public class JdtEnvironment {
         .collect(toImmutableList());
   }
 
-  private static String getWasmInfo(ITypeBinding binding) {
+  @Nullable
+  private static String getWasmInfo(IBinding binding) {
     return JdtAnnotationUtils.getStringAttribute(
-        JdtAnnotationUtils.findAnnotationBindingByName(
-            binding.getAnnotations(), WASM_ANNOTATION_NAME),
-        "value");
-  }
-
-  private static String getWasmInfo(IMethodBinding binding) {
-    return JdtAnnotationUtils.getStringAttribute(
-        JdtAnnotationUtils.findAnnotationBindingByName(
-            binding.getAnnotations(), WASM_ANNOTATION_NAME),
-        "value");
+        JdtAnnotationUtils.findAnnotationBindingByName(binding, WASM_ANNOTATION_NAME), "value");
   }
 
   private static boolean isLocal(ITypeBinding typeBinding) {
@@ -1294,6 +1286,9 @@ public class JdtEnvironment {
   }
 
   private ImmutableList<Annotation> createAnnotations(IBinding binding, boolean inNullMarkedScope) {
+    if (!JdtAnnotationUtils.shouldReadAnnotations(binding)) {
+      return ImmutableList.of();
+    }
     return Arrays.stream(binding.getAnnotations())
         .filter(
             annotationBinding ->

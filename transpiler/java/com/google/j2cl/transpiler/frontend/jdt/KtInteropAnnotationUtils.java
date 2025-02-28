@@ -28,7 +28,9 @@ import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.findAnn
 import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.getAnnotationBinding;
 import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.getStringAttribute;
 
+import javax.annotation.Nullable;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
+import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.PackageDeclaration;
 
@@ -36,33 +38,38 @@ import org.eclipse.jdt.core.dom.PackageDeclaration;
 public class KtInteropAnnotationUtils {
   private KtInteropAnnotationUtils() {}
 
-  public static IAnnotationBinding getKtNameAnnotation(IAnnotationBinding[] annotationBindings) {
-    return findAnnotationBindingByName(annotationBindings, KT_NAME_ANNOTATION_NAME);
+  @Nullable
+  public static IAnnotationBinding getKtNameAnnotation(IBinding binding) {
+    return findAnnotationBindingByName(binding, KT_NAME_ANNOTATION_NAME);
   }
 
-  public static IAnnotationBinding getKtNativeAnnotation(IAnnotationBinding[] annotationBindings) {
-    return findAnnotationBindingByName(annotationBindings, KT_NATIVE_ANNOTATION_NAME);
+  @Nullable
+  public static IAnnotationBinding getKtNativeAnnotation(IBinding binding) {
+    return findAnnotationBindingByName(binding, KT_NATIVE_ANNOTATION_NAME);
   }
 
-  public static IAnnotationBinding getKtPropertyAnnotation(
-      IAnnotationBinding[] annotationBindings) {
-    return findAnnotationBindingByName(annotationBindings, KT_PROPERTY_ANNOTATION_NAME);
+  @Nullable
+  public static IAnnotationBinding getKtPropertyAnnotation(IBinding binding) {
+    return findAnnotationBindingByName(binding, KT_PROPERTY_ANNOTATION_NAME);
   }
 
-  public static IAnnotationBinding getKtDisabledAnnotation(
-      IAnnotationBinding[] annotationBindings) {
-    return findAnnotationBindingByName(annotationBindings, KT_DISABLED_ANNOTATION_NAME);
+  @Nullable
+  public static IAnnotationBinding getKtDisabledAnnotation(IBinding binding) {
+    return findAnnotationBindingByName(binding, KT_DISABLED_ANNOTATION_NAME);
   }
 
   /** The namespace specified on a package, type, method or field. */
+  @Nullable
   public static String getKtObjectiveCName(ITypeBinding typeBinding) {
-    return getKtObjectiveCName(getKtObjectiveCNameAnnotation(typeBinding.getAnnotations()));
+    return getKtObjectiveCName(getKtObjectiveCNameAnnotation(typeBinding));
   }
 
+  @Nullable
   public static String getKtObjectiveCName(IAnnotationBinding annotationBinding) {
     return getStringAttribute(annotationBinding, "value");
   }
 
+  @Nullable
   public static String getKtObjectiveCName(PackageDeclaration packageDeclaration) {
     return getKtObjectiveCName(
         getAnnotationBinding(packageDeclaration, KtInteropAnnotationUtils::isKtObjectiveCName));
@@ -72,26 +79,34 @@ public class KtInteropAnnotationUtils {
     return annotationBinding.getAnnotationType().getQualifiedName().equals(KT_OBJECTIVE_C_NAME);
   }
 
-  public static IAnnotationBinding getKtObjectiveCNameAnnotation(
-      IAnnotationBinding[] annotationBindings) {
-    return findAnnotationBindingByName(annotationBindings, KT_OBJECTIVE_C_NAME);
+  @Nullable
+  public static IAnnotationBinding getKtObjectiveCNameAnnotation(IBinding binding) {
+    return findAnnotationBindingByName(binding, KT_OBJECTIVE_C_NAME);
   }
 
-  public static IAnnotationBinding getKtInAnnotation(IAnnotationBinding[] annotationBindings) {
-    return findAnnotationBindingByName(annotationBindings, KT_IN_ANNOTATION_NAME);
+  @Nullable
+  public static IAnnotationBinding getKtInAnnotation(ITypeBinding typeVariableBinding) {
+    // TODO(b/399932181): Double check the logic and comment here why we're using
+    // ITypeBinding.getTypeAnnotations() instead of IBinding.getAnnotations().
+    return findAnnotationBindingByName(
+        typeVariableBinding.getTypeAnnotations(), KT_IN_ANNOTATION_NAME);
   }
 
-  public static IAnnotationBinding getKtOutAnnotation(IAnnotationBinding[] annotationBindings) {
-    return findAnnotationBindingByName(annotationBindings, KT_OUT_ANNOTATION_NAME);
+  @Nullable
+  public static IAnnotationBinding getKtOutAnnotation(ITypeBinding typeVariableBinding) {
+    // TODO(b/399932181): Double check the logic and comment here why we're using
+    // ITypeBinding.getTypeAnnotations() instead of IBinding.getAnnotations().
+    return findAnnotationBindingByName(
+        typeVariableBinding.getTypeAnnotations(), KT_OUT_ANNOTATION_NAME);
   }
 
-  public static IAnnotationBinding getJ2ktThrowsAnnotation(
-      IAnnotationBinding[] annotationBindings) {
-    return findAnnotationBindingByName(annotationBindings, J2KT_THROWS_ANNOTATION_NAME);
+  @Nullable
+  public static IAnnotationBinding getJ2ktThrowsAnnotation(IBinding binding) {
+    return findAnnotationBindingByName(binding, J2KT_THROWS_ANNOTATION_NAME);
   }
 
-  public static IAnnotationBinding getJ2ktNativeAnnotation(
-      IAnnotationBinding[] annotationBindings) {
-    return findAnnotationBindingByName(annotationBindings, J2KT_NATIVE_ANNOTATION_NAME);
+  @Nullable
+  public static IAnnotationBinding getJ2ktNativeAnnotation(IBinding binding) {
+    return findAnnotationBindingByName(binding, J2KT_NATIVE_ANNOTATION_NAME);
   }
 }

@@ -33,6 +33,7 @@ import com.google.j2cl.transpiler.ast.KtTypeInfo;
 import com.google.j2cl.transpiler.ast.KtVariance;
 import javax.annotation.Nullable;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
+import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.IVariableBinding;
@@ -41,17 +42,9 @@ import org.eclipse.jdt.core.dom.IVariableBinding;
 public class KtInteropUtils {
   private KtInteropUtils() {}
 
-  public static KtObjcInfo getKtObjcInfo(ITypeBinding typeBinding) {
-    return getKtObjcInfo(typeBinding.getAnnotations());
-  }
-
-  public static KtObjcInfo getKtObjcInfo(IMethodBinding typeBinding) {
-    return getKtObjcInfo(typeBinding.getAnnotations());
-  }
-
   @Nullable
-  private static KtObjcInfo getKtObjcInfo(IAnnotationBinding[] annotationBindings) {
-    IAnnotationBinding annotationBinding = getKtObjectiveCNameAnnotation(annotationBindings);
+  public static KtObjcInfo getKtObjcInfo(IBinding binding) {
+    IAnnotationBinding annotationBinding = getKtObjectiveCNameAnnotation(binding);
     if (annotationBinding == null) {
       return null;
     }
@@ -60,13 +53,9 @@ public class KtInteropUtils {
         .build();
   }
 
-  public static KtTypeInfo getKtTypeInfo(ITypeBinding typeBinding) {
-    return getKtTypeInfo(typeBinding.getAnnotations());
-  }
-
   @Nullable
-  private static KtTypeInfo getKtTypeInfo(IAnnotationBinding[] annotationBindings) {
-    IAnnotationBinding annotationBinding = getKtNativeAnnotation(annotationBindings);
+  public static KtTypeInfo getKtTypeInfo(IBinding binding) {
+    IAnnotationBinding annotationBinding = getKtNativeAnnotation(binding);
     if (annotationBinding != null) {
       String qualifiedName = getStringAttribute(annotationBinding, "name");
       String bridgeQualifiedName = getStringAttribute(annotationBinding, "bridgeName");
@@ -78,7 +67,7 @@ public class KtInteropUtils {
           .build();
     }
 
-    annotationBinding = getJ2ktNativeAnnotation(annotationBindings);
+    annotationBinding = getJ2ktNativeAnnotation(binding);
     if (annotationBinding != null) {
       return KtTypeInfo.newBuilder().build();
     }
@@ -87,61 +76,58 @@ public class KtInteropUtils {
   }
 
   public static KtInfo getKtInfo(IMethodBinding methodBinding) {
-    return getKtInfo(methodBinding.getAnnotations(), /* isUninitializedWarningSuppressed= */ false);
+    return getKtInfo(methodBinding, /* isUninitializedWarningSuppressed= */ false);
   }
 
   public static KtInfo getKtInfo(IVariableBinding variableBinding) {
     // Checking for both property annotations and enclosing class annotations for uninitialized
     // warning suppressions.
-    boolean isUninitializedWarningSuppressed =
-        isUninitializedWarningSuppressed(variableBinding.getAnnotations());
+    boolean isUninitializedWarningSuppressed = isUninitializedWarningSuppressed(variableBinding);
     @Nullable ITypeBinding declaringClass = variableBinding.getDeclaringClass();
     while (declaringClass != null && !isUninitializedWarningSuppressed) {
-      isUninitializedWarningSuppressed =
-          isUninitializedWarningSuppressed(declaringClass.getAnnotations());
+      isUninitializedWarningSuppressed = isUninitializedWarningSuppressed(declaringClass);
       declaringClass = declaringClass.getDeclaringClass();
     }
-    return getKtInfo(variableBinding.getAnnotations(), isUninitializedWarningSuppressed);
+    return getKtInfo(variableBinding, isUninitializedWarningSuppressed);
   }
 
-  private static KtInfo getKtInfo(
-      IAnnotationBinding[] annotationBindings, boolean isUninitializedWarningSuppressed) {
+  private static KtInfo getKtInfo(IBinding binding, boolean isUninitializedWarningSuppressed) {
     return KtInfo.newBuilder()
-        .setProperty(isKtProperty(annotationBindings))
-        .setName(getKtName(annotationBindings))
-        .setDisabled(isKtDisabled(annotationBindings))
+        .setProperty(isKtProperty(binding))
+        .setName(getKtName(binding))
+        .setDisabled(isKtDisabled(binding))
         .setUninitializedWarningSuppressed(isUninitializedWarningSuppressed)
-        .setThrows(isThrows(annotationBindings))
+        .setThrows(isThrows(binding))
         .build();
   }
 
   @Nullable
-  private static String getKtName(IAnnotationBinding[] annotationBindings) {
-    IAnnotationBinding annotationBinding = getKtNameAnnotation(annotationBindings);
+  private static String getKtName(IBinding binding) {
+    IAnnotationBinding annotationBinding = getKtNameAnnotation(binding);
     return annotationBinding != null ? getStringAttribute(annotationBinding, "value") : null;
   }
 
-  private static boolean isKtProperty(IAnnotationBinding[] annotationBindings) {
-    return getKtPropertyAnnotation(annotationBindings) != null;
+  private static boolean isKtProperty(IBinding binding) {
+    return getKtPropertyAnnotation(binding) != null;
   }
 
-  public static boolean isKtDisabled(IAnnotationBinding[] annotationBindings) {
-    return getKtDisabledAnnotation(annotationBindings) != null;
+  public static boolean isKtDisabled(IBinding binding) {
+    return getKtDisabledAnnotation(binding) != null;
   }
 
-  private static boolean isThrows(IAnnotationBinding[] annotationBindings) {
-    return getJ2ktThrowsAnnotation(annotationBindings) != null;
+  private static boolean isThrows(IBinding binding) {
+    return getJ2ktThrowsAnnotation(binding) != null;
   }
 
-  public static boolean isUninitializedWarningSuppressed(IAnnotationBinding[] annotationBindings) {
-    return isWarningSuppressed(annotationBindings, "nullness:initialization.field.uninitialized");
+  public static boolean isUninitializedWarningSuppressed(IBinding binding) {
+    return isWarningSuppressed(binding, "nullness:initialization.field.uninitialized");
   }
 
   @Nullable
-  public static KtVariance getKtVariance(IAnnotationBinding[] annotationBindings) {
-    if (getKtInAnnotation(annotationBindings) != null) {
+  public static KtVariance getKtVariance(ITypeBinding typeVariableBinding) {
+    if (getKtInAnnotation(typeVariableBinding) != null) {
       return KtVariance.IN;
-    } else if (getKtOutAnnotation(annotationBindings) != null) {
+    } else if (getKtOutAnnotation(typeVariableBinding) != null) {
       return KtVariance.OUT;
     } else {
       return null;
