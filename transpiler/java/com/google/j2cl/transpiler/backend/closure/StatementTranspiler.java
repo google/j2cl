@@ -257,12 +257,12 @@ public class StatementTranspiler {
       @Override
       public boolean enterSwitchCase(SwitchCase switchCase) {
         if (switchCase.isDefault()) {
-          builder.append("default: ");
+          builder.append("default:");
         } else {
           for (Expression expression : switchCase.getCaseExpressions()) {
             builder.append("case ");
             renderExpression(expression);
-            builder.append(": ");
+            builder.append(":");
           }
         }
         builder.indent();

@@ -32,11 +32,11 @@ class SwitchExpression extends j_l_Object {
   let a = 0;
   let i = (() =>{
    switch (3) {
-    case 1: 
+    case 1:
      return $Long.fromInt(5);
-    case 3: case 4: 
+    case 3:case 4:
      throw $Exceptions.toJs(RuntimeException.$create__());
-    default: 
+    default:
      {
       let /** number */ $value;
       let j = Short.m_valueOf__short__java_lang_Short($Primitives.narrowIntToShort(($value = a, a = a + 1 | 0, $value)));
@@ -50,11 +50,11 @@ class SwitchExpression extends j_l_Object {
   let a = 0;
   let i = (() =>{
    switch (3) {
-    case 1: 
+    case 1:
      return $Long.fromInt(5);
-    case 3: case 4: 
+    case 3:case 4:
      throw $Exceptions.toJs(RuntimeException.$create__());
-    default: 
+    default:
      {
       let /** number */ $value;
       let j = Short.m_valueOf__short__java_lang_Short($Primitives.narrowIntToShort(($value = a, a = a + 1 | 0, $value)));
@@ -73,23 +73,23 @@ class SwitchExpression extends j_l_Object {
   let a = 0;
   let i = (() =>{
    switch (3) {
-    case 1: 
+    case 1:
      return (() =>{
       switch (5) {
-       case 1: 
+       case 1:
         return $Long.fromInt(10);
-       default: 
+       default:
         return (() =>{
          switch (6) {
-          case 1: 
+          case 1:
            throw $Exceptions.toJs(RuntimeException.$create__());
-          default: 
+          default:
            return $Long.fromInt(5);
          }
         })();
       }
      })();
-    default: 
+    default:
      return $Primitives.widenIntToLong(a);
    }
   })();
@@ -98,11 +98,11 @@ class SwitchExpression extends j_l_Object {
  static m_testExhaustiveSwitchExpression__void() {
   let i = (() =>{
    switch (Enum.f_A__switchexpression_SwitchExpression_Enum.ordinal()) {
-    case Enum.$ordinal_A__switchexpression_SwitchExpression_Enum: 
+    case Enum.$ordinal_A__switchexpression_SwitchExpression_Enum:
      return $Long.fromInt(0);
-    case Enum.$ordinal_B__switchexpression_SwitchExpression_Enum: 
+    case Enum.$ordinal_B__switchexpression_SwitchExpression_Enum:
      return $Long.fromInt(1);
-    default: 
+    default:
      InternalPreconditions.m_checkExhaustive__void();
    }
   })();
