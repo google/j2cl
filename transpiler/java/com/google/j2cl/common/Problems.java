@@ -245,8 +245,14 @@ public class Problems {
     }
   }
 
+  private volatile boolean cancelled = false;
+
   public boolean isCancelled() {
-    return false;
+    return cancelled;
+  }
+
+  public void requestCancellation() {
+    cancelled = true;
   }
 
   private void abort() {

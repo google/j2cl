@@ -138,7 +138,7 @@ java_test(
         "-XX:TieredStopAtLevel=2",
         "-XX:MaxGCPauseMillis=100",
     ],
-    shard_count = 2,
+    shard_count = 4,
     deps = [
         ":tester_lib",
         "//third_party:junit",

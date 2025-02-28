@@ -15,6 +15,8 @@ package com.google.j2cl.transpiler;
 
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.truth.Truth.assertThat;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicates;
@@ -24,6 +26,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.io.MoreFiles;
 import com.google.common.truth.Correspondence;
+import com.google.common.util.concurrent.MoreExecutors;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.Problems;
 import java.io.FileOutputStream;
@@ -39,6 +42,8 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
@@ -88,7 +93,7 @@ public class TranspilerTester {
   public static TranspilerTester newTesterWithWasmDefaults() {
     return newTester()
         // TODO(b/395921769): Remove this after the test are ported to modular WASM.
-        .disableCheckCancelationDelay()
+        .noAssertDelayedCancelChecks()
         .addArgs("-backend", "WASM")
         .setClassPathArg(
             "transpiler/javatests/com/google/j2cl/transpiler/jre_bundle-j2wasm_deploy.jar")
@@ -201,7 +206,7 @@ public class TranspilerTester {
   private List<String> args = new ArrayList<>();
   private String temporaryDirectoryPrefix = "transpile_tester";
   private Path outputPath;
-  private boolean checkCancelationDelay = true;
+  private boolean assertDelayedCancelChecks = true;
 
   public TranspilerTester addCompilationUnit(String qualifiedCompilationUnitName, String... code) {
     List<String> content = Lists.newArrayList(code);
@@ -332,8 +337,8 @@ public class TranspilerTester {
   }
 
   @CanIgnoreReturnValue
-  public TranspilerTester disableCheckCancelationDelay() {
-    this.checkCancelationDelay = false;
+  public TranspilerTester noAssertDelayedCancelChecks() {
+    this.assertDelayedCancelChecks = false;
     return this;
   }
 
@@ -353,6 +358,13 @@ public class TranspilerTester {
 
   public TranspileResult assertTranspileFails() {
     return transpile().assertHasErrors();
+  }
+
+  public void assertTranspileWithCancellation(int cancelDelayMs) throws IOException {
+    noAssertDelayedCancelChecks(); // Not compatible.
+    var result = transpile(cancelDelayMs);
+    result.assertNoErrors();
+    assertThat(MoreFiles.listFiles(result.getOutputPath())).isEmpty();
   }
 
   /** A bundle of data recording the results of a transpile operation. */
@@ -513,17 +525,22 @@ public class TranspilerTester {
     }
   }
 
+  /** Do not automatically cancel the transpiler. */
+  private static final int NO_CANCEL = -1;
+
   /**
    * The maximum delay (in ms) that we allow for calls to #isCancelled(). Note that we have a much
    * lower delay but this number should be high enough to cover random GC events.
    */
   private static final int MAX_DELAY = 250;
 
-  private static Problems transpile(ImmutableList<String> args, boolean checkDelayedCalls) {
+  @SuppressWarnings("FutureReturnValueIgnored")
+  private static Problems transpile(
+      ImmutableList<String> args, boolean assertDelayedCancelChecks, int cancelDelayMs) {
     List<String> delayedCalls = new ArrayList<>();
     List<String> slightlyDelayedCalls = new ArrayList<>();
     Problems problems =
-        checkDelayedCalls
+        assertDelayedCancelChecks
             ? new Problems() {
               long lastCall = System.nanoTime();
 
@@ -546,7 +563,15 @@ public class TranspilerTester {
             : new Problems();
 
     J2clCommandLineRunner runner = new J2clCommandLineRunner(problems);
-    runner.executeForTesting(args);
+    ScheduledExecutorService executorService = Executors.newScheduledThreadPool(2);
+    try {
+      executorService.execute(() -> runner.executeForTesting(args));
+      if (cancelDelayMs != NO_CANCEL) {
+        executorService.schedule(problems::requestCancellation, cancelDelayMs, MILLISECONDS);
+      }
+    } finally {
+      MoreExecutors.shutdownAndAwaitTermination(executorService, 30, SECONDS);
+    }
 
     final String[] knownDelayedCalls = {
       "com.google.j2cl.transpiler.frontend.javac.JavacParser.parseFiles",
@@ -573,6 +598,10 @@ public class TranspilerTester {
   }
 
   private TranspileResult transpile() {
+    return transpile(NO_CANCEL);
+  }
+
+  private TranspileResult transpile(int cancelDelayMs) {
     try {
       Path tempDir = Files.createTempDirectory(temporaryDirectoryPrefix);
 
@@ -619,7 +648,8 @@ public class TranspilerTester {
       commandLineArgsBuilder.addAll(args);
 
       return new TranspileResult(
-          transpile(commandLineArgsBuilder.build(), checkCancelationDelay), outputPath);
+          transpile(commandLineArgsBuilder.build(), assertDelayedCancelChecks, cancelDelayMs),
+          outputPath);
     } catch (IOException e) {
       throw new AssertionError(e);
     }
