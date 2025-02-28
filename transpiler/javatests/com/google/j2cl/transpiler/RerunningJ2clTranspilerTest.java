@@ -16,34 +16,22 @@ package com.google.j2cl.transpiler;
 import static com.google.j2cl.transpiler.TranspilerTester.newTesterWithDefaults;
 import static com.google.j2cl.transpiler.TranspilerTester.newTesterWithKotlinDefaults;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.transpiler.TranspilerTester.TranspileResult;
 import java.util.Random;
+import java.util.function.Supplier;
 import junit.framework.TestCase;
 
 /** Test to run the transpiler twice and possibly uncover static state within the transpiler. */
 public class RerunningJ2clTranspilerTest extends TestCase {
 
   public void testCompileJreTwice() throws Exception {
-    compileJre().assertOutputFilesAreSame(compileJre());
-  }
-
-  private static final int JAVA_CONSERVATIVE_COMPILATION_TIME_MS = 1000;
-
-  private static int getJavaCancelDelay() {
-    // Random to introduce more variance in the timing instead of always targeting beginning.
-    return new Random().nextInt(JAVA_CONSERVATIVE_COMPILATION_TIME_MS);
+    compileTwiceInSequence(RerunningJ2clTranspilerTest::createJreCompile);
   }
 
   public void testCompileJreWithCancelation() throws Exception {
-    createJreCompile().assertTranspileWithCancellation(getJavaCancelDelay());
-    // Ensure compilation succeed after cancellation.
-    compileJre().assertOutputFilesAreSame(compileJre());
-    // Ensure compilation can be cancelled again.
-    createJreCompile().assertTranspileWithCancellation(getJavaCancelDelay());
-  }
-
-  private static TranspileResult compileJre() throws Exception {
-    return createJreCompile().assertTranspileSucceeds().assertNoWarnings();
+    compileWithCancelation(
+        RerunningJ2clTranspilerTest::createJreCompile, /* conservativeCompilationTimeMs= */ 1000);
   }
 
   private static TranspilerTester createJreCompile() {
@@ -54,26 +42,13 @@ public class RerunningJ2clTranspilerTest extends TestCase {
   }
 
   public void testCompileKotlinBox2DTwice() throws Exception {
-    compileKotlinBox2D().assertOutputFilesAreSame(compileKotlinBox2D());
-  }
-
-  private static final int KOTLIN_CONSERVATIVE_COMPILATION_TIME_MS = 1000;
-
-  private static int getKotlinCancelDelay() {
-    // Random to introduce more variance in the timing instead of always targeting beginning.
-    return new Random().nextInt(KOTLIN_CONSERVATIVE_COMPILATION_TIME_MS);
+    compileTwiceInSequence(RerunningJ2clTranspilerTest::createKotlinBox2DCompile);
   }
 
   public void testCompileKotlinBox2DWithCancelation() throws Exception {
-    createKotlinBox2DCompile().assertTranspileWithCancellation(getKotlinCancelDelay());
-    // Ensure compilation succeed after cancellation.
-    compileKotlinBox2D().assertOutputFilesAreSame(compileKotlinBox2D());
-    // Ensure compilation can be cancelled again.
-    createKotlinBox2DCompile().assertTranspileWithCancellation(getKotlinCancelDelay());
-  }
-
-  private static TranspileResult compileKotlinBox2D() throws Exception {
-    return createKotlinBox2DCompile().assertTranspileSucceeds().assertNoWarnings();
+    compileWithCancelation(
+        RerunningJ2clTranspilerTest::createKotlinBox2DCompile,
+        /* conservativeCompilationTimeMs= */ 4000);
   }
 
   private static TranspilerTester createKotlinBox2DCompile() {
@@ -84,5 +59,30 @@ public class RerunningJ2clTranspilerTest extends TestCase {
     // We decided to use box2d instead that is complex enough for the purpose of this test.
     return newTesterWithKotlinDefaults()
         .addSourcePathArg("samples/box2d/src/main/kotlin/idiomatic/libbox2d_library-j2cl-src.jar");
+  }
+
+  private static void compileTwiceInSequence(Supplier<TranspilerTester> transpile)
+      throws Exception {
+    compile(transpile.get()).assertOutputFilesAreSame(compile(transpile.get()));
+  }
+
+  private static void compileWithCancelation(
+      Supplier<TranspilerTester> transpileTester, int conservativeCompilationTimeMs)
+      throws Exception {
+    transpileTester.get().assertTranspileWithCancellation(getDelay(conservativeCompilationTimeMs));
+    // Ensure compilation succeed after cancellation.
+    compile(transpileTester.get());
+    // Ensure compilation can be cancelled again.
+    transpileTester.get().assertTranspileWithCancellation(getDelay(conservativeCompilationTimeMs));
+  }
+
+  @CanIgnoreReturnValue
+  private static TranspileResult compile(TranspilerTester tester) {
+    return tester.assertTranspileSucceeds().assertNoWarnings();
+  }
+
+  private static int getDelay(int conservativeCompilationTimeMs) {
+    // Random to introduce more variance in the timing instead of always targeting beginning.
+    return new Random().nextInt(conservativeCompilationTimeMs);
   }
 }
