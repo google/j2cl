@@ -15,8 +15,6 @@
  */
 package com.google.j2cl.transpiler.ast;
 
-import static com.google.common.base.Preconditions.checkState;
-
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableMap;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
@@ -56,7 +54,9 @@ public abstract class Annotation {
     abstract ImmutableMap.Builder<String, Literal> valuesBuilder();
 
     public Annotation build() {
-      checkState(getTypeDescriptor().isAnnotation(), "Annotation must be an annotation type.");
+      // TODO(b/399477543): Some annotations are not recognized as annotations by javac. Fix this,
+      // then throw an exception here if the type is not an annotation.
+      // checkState(getTypeDescriptor().isAnnotation(), "Annotation must be an annotation type.");
       return autoBuild();
     }
 
