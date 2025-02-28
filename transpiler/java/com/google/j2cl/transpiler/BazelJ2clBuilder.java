@@ -166,10 +166,6 @@ final class BazelJ2clBuilder extends BazelWorker {
       this.readableSourceMaps = false;
     }
 
-    if (backend == Backend.CLOSURE && libraryInfoOutput == null) {
-      problems.fatal(FatalError.LIBRARY_INFO_OUTPUT_ARG_MISSING);
-    }
-
     if (!javaFrontend.isJavaFrontend()) {
       problems.fatal(FatalError.INVALID_JAVA_FRONTEND, javaFrontend);
     }
