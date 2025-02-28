@@ -13,6 +13,8 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+@file:OptIn(UnsafeDuringIrConstructionAPI::class)
+
 package com.google.j2cl.transpiler.frontend.kotlin.ir
 
 import java.lang.IllegalArgumentException
@@ -39,12 +41,15 @@ import org.jetbrains.kotlin.ir.util.fileOrNull
 import org.jetbrains.kotlin.types.expressions.OperatorConventions
 
 // TODO(b/374966022): Remove this file once we don't rely on IR serialization anymore for inlining.
-@OptIn(DelicateDeclarationStorageApi::class, UnsafeDuringIrConstructionAPI::class)
+@OptIn(DelicateDeclarationStorageApi::class)
 fun SymbolTable.populate(irBuiltIns: IrBuiltIns) {
+  val irSignaturer = PublicIdSignatureComputer(JvmIrMangler)
   // collects all existing bound symbols in componentStorage.
   val componentsStorage = irBuiltIns.anyClass.owner as Fir2IrComponents
-  componentsStorage.classifierStorage.forEachCachedDeclarationSymbol(::addSymbol)
-  componentsStorage.declarationStorage.forEachCachedDeclarationSymbol(::addSymbol)
+  componentsStorage.classifierStorage.forEachCachedDeclarationSymbol { addSymbol(it, irSignaturer) }
+  componentsStorage.declarationStorage.forEachCachedDeclarationSymbol {
+    addSymbol(it, irSignaturer)
+  }
 
   // add the builtins so the IrDeserializer does not create new symbol for them.
   with(irBuiltIns) {
@@ -80,23 +85,21 @@ fun SymbolTable.populate(irBuiltIns: IrBuiltIns) {
         add(checkNotNullSymbol)
         addAll(getNumericConversionsFunctionSymbols())
       }
-      .forEach(::addSymbol)
+      .forEach { addSymbol(it, irSignaturer) }
   }
 }
 
-fun SymbolTable.addSymbolsRecursively(symbol: IrSymbol) {
-  addSymbol(symbol)
+fun SymbolTable.addSymbolsRecursively(symbol: IrSymbol, irSignaturer: PublicIdSignatureComputer) {
+  addSymbol(symbol, irSignaturer)
 
   val children = (symbol.owner as? IrDeclarationContainer)?.declarations ?: emptyList()
   for (declaration in children) {
-    addSymbolsRecursively(declaration.symbol)
+    addSymbolsRecursively(declaration.symbol, irSignaturer)
   }
 }
 
-private val irSignaturer = PublicIdSignatureComputer(JvmIrMangler)
-
 @Suppress("IMPLICIT_CAST_TO_ANY")
-fun SymbolTable.addSymbol(symbol: IrSymbol) {
+private fun SymbolTable.addSymbol(symbol: IrSymbol, irSignaturer: PublicIdSignatureComputer) {
   if (!symbol.isBound) {
     return
   }

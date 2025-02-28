@@ -17,6 +17,7 @@ import org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression as P
 import org.jetbrains.kotlin.backend.common.serialization.proto.IrStatement as ProtoStatement
 import org.jetbrains.kotlin.backend.common.serialization.proto.IrType as ProtoType
 import org.jetbrains.kotlin.backend.common.serialization.signature.IdSignatureFactory
+import org.jetbrains.kotlin.backend.common.serialization.signature.PublicIdSignatureComputer
 import org.jetbrains.kotlin.backend.jvm.JvmGeneratorExtensions
 import org.jetbrains.kotlin.backend.jvm.JvmIrDeserializer
 import org.jetbrains.kotlin.backend.jvm.JvmIrTypeSystemContext
@@ -92,7 +93,7 @@ fun deserializeFromByteArray(
   // MODIFIED BY GOOGLE
   // Ensure symbols of all class declarations are populated in the symbol table to avoid the
   // deserializer to create new IR nodes instead of modifying the existing ones.
-  symbolTable.addSymbolsRecursively(toplevelParent.symbol)
+  symbolTable.addSymbolsRecursively(toplevelParent.symbol, PublicIdSignatureComputer(JvmIrMangler))
   // END OF MODIFICATIONS
 
   val irInterner = IrInterningService()
