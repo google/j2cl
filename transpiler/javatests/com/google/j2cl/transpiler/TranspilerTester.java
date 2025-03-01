@@ -570,7 +570,7 @@ public class TranspilerTester {
         executorService.schedule(problems::requestCancellation, cancelDelayMs, MILLISECONDS);
       }
     } finally {
-      MoreExecutors.shutdownAndAwaitTermination(executorService, 30, SECONDS);
+      MoreExecutors.shutdownAndAwaitTermination(executorService, 60, SECONDS);
     }
     assertThat(Thread.currentThread().isInterrupted()).isFalse();
 

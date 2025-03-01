@@ -138,9 +138,10 @@ java_test(
         "-XX:TieredStopAtLevel=2",
         "-XX:MaxGCPauseMillis=100",
     ],
-    shard_count = 4,
+    shard_count = 6,
     deps = [
         ":tester_lib",
+        "//java/com/google/common/util/concurrent",
         "//third_party:junit",
     ],
 )

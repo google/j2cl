@@ -15,10 +15,15 @@ package com.google.j2cl.transpiler;
 
 import static com.google.j2cl.transpiler.TranspilerTester.newTesterWithDefaults;
 import static com.google.j2cl.transpiler.TranspilerTester.newTesterWithKotlinDefaults;
+import static java.util.concurrent.TimeUnit.SECONDS;
 
+import com.google.common.util.concurrent.MoreExecutors;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.transpiler.TranspilerTester.TranspileResult;
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.function.Supplier;
 import junit.framework.TestCase;
 
@@ -27,6 +32,10 @@ public class RerunningJ2clTranspilerTest extends TestCase {
 
   public void testCompileJreTwice() throws Exception {
     compileTwiceInSequence(RerunningJ2clTranspilerTest::createJreCompile);
+  }
+
+  public void testCompileJreInParallel() throws Exception {
+    compileTwiceInParallel(RerunningJ2clTranspilerTest::createJreCompile);
   }
 
   public void testCompileJreWithCancelation() throws Exception {
@@ -43,6 +52,10 @@ public class RerunningJ2clTranspilerTest extends TestCase {
 
   public void testCompileKotlinBox2DTwice() throws Exception {
     compileTwiceInSequence(RerunningJ2clTranspilerTest::createKotlinBox2DCompile);
+  }
+
+  public void testCompileKotlinBox2DInParallel() throws Exception {
+    compileTwiceInParallel(RerunningJ2clTranspilerTest::createKotlinBox2DCompile);
   }
 
   public void testCompileKotlinBox2DWithCancelation() throws Exception {
@@ -64,6 +77,20 @@ public class RerunningJ2clTranspilerTest extends TestCase {
   private static void compileTwiceInSequence(Supplier<TranspilerTester> transpile)
       throws Exception {
     compile(transpile.get()).assertOutputFilesAreSame(compile(transpile.get()));
+  }
+
+  private static void compileTwiceInParallel(Supplier<TranspilerTester> transpile)
+      throws Exception {
+    Future<TranspileResult> result1;
+    Future<TranspileResult> result2;
+    ExecutorService executor = Executors.newFixedThreadPool(2);
+    try {
+      result1 = executor.submit(() -> compile(transpile.get()));
+      result2 = executor.submit(() -> compile(transpile.get()));
+    } finally {
+      MoreExecutors.shutdownAndAwaitTermination(executor, 120, SECONDS);
+    }
+    result1.get().assertOutputFilesAreSame(result2.get());
   }
 
   private static void compileWithCancelation(
