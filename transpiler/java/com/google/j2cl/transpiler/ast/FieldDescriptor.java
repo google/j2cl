@@ -20,10 +20,12 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
+import com.google.common.collect.ImmutableList;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.ThreadLocalInterner;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -234,6 +236,7 @@ public abstract class FieldDescriptor extends MemberDescriptor {
         .setVisibility(Visibility.PUBLIC)
         .setOriginalJsInfo(JsInfo.NONE)
         .setOriginalKtInfo(KtInfo.NONE)
+        .setAnnotations(ImmutableList.of())
         .setCompileTimeConstant(false)
         .setStatic(false)
         .setFinal(false)
@@ -284,6 +287,8 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     public abstract Builder setOriginalJsInfo(JsInfo jsInfo);
 
     public abstract Builder setOriginalKtInfo(KtInfo ktInfo);
+
+    public abstract Builder setAnnotations(List<Annotation> annotations);
 
     public abstract Builder setUnusableByJsSuppressed(boolean isUnusableByJsSuppressed);
 

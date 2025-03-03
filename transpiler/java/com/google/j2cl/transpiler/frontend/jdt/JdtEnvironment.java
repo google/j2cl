@@ -816,6 +816,7 @@ public class JdtEnvironment {
             .setVisibility(visibility)
             .setOriginalJsInfo(JsInteropUtils.getJsInfo(variableBinding))
             .setOriginalKtInfo(KtInteropUtils.getKtInfo(variableBinding))
+            .setAnnotations(createAnnotations(variableBinding, inNullMarkedScope))
             .setFinal(isFinal)
             .setCompileTimeConstant(isCompileTimeConstant)
             .setConstantValue(
@@ -921,6 +922,7 @@ public class JdtEnvironment {
             .setOriginalKtInfo(ktInfo)
             .setKtObjcInfo(KtInteropUtils.getKtObjcInfo(methodBinding))
             .setWasmInfo(getWasmInfo(methodBinding))
+            .setAnnotations(createAnnotations(methodBinding, inNullMarkedScope))
             .setVisibility(visibility)
             .setStatic(isStatic)
             .setConstructor(isConstructor)

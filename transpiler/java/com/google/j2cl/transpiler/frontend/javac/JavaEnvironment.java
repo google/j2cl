@@ -573,11 +573,10 @@ class JavaEnvironment {
         createDeclaredTypeDescriptor(getEnclosingType(variableElement).asType());
     String fieldName = variableElement.getSimpleName().toString();
 
+    boolean inNullMarkedScope = enclosingTypeDescriptor.getTypeDeclaration().isNullMarked();
     TypeDescriptor thisTypeDescriptor =
         createTypeDescriptorWithNullability(
-            type,
-            variableElement.getAnnotationMirrors(),
-            enclosingTypeDescriptor.getTypeDeclaration().isNullMarked());
+            type, variableElement.getAnnotationMirrors(), inNullMarkedScope);
 
     boolean isEnumConstant = ((VarSymbol) variableElement).isEnum();
     if (isEnumConstant) {
@@ -609,6 +608,7 @@ class JavaEnvironment {
         .setOriginalJsInfo(jsInfo)
         .setOriginalKtInfo(ktInfo)
         .setFinal(isFinal)
+        .setAnnotations(createAnnotations(variableElement, inNullMarkedScope))
         .setCompileTimeConstant(isCompileTimeConstant)
         .setConstantValue(
             constantValue != null ? Literal.fromValue(constantValue, thisTypeDescriptor) : null)
@@ -873,16 +873,12 @@ class JavaEnvironment {
       List<ParameterDescriptor> parameterDescriptors,
       TypeDescriptor returnTypeDescriptor,
       List<TypeDescriptor> typeArguments) {
+    boolean inNullMarkedScope = enclosingTypeDescriptor.getTypeDeclaration().isNullMarked();
     ImmutableList<TypeVariable> typeParameterTypeDescriptors =
         declarationMethodElement.getTypeParameters().stream()
             .map(TypeParameterElement::asType)
             .map(javax.lang.model.type.TypeVariable.class::cast)
-            .map(
-                tv ->
-                    createTypeVariable(
-                        tv,
-                        ImmutableList.of(),
-                        enclosingTypeDescriptor.getTypeDeclaration().isNullMarked()))
+            .map(tv -> createTypeVariable(tv, ImmutableList.of(), inNullMarkedScope))
             .collect(toImmutableList());
 
     boolean isStatic = isStatic(declarationMethodElement);
@@ -922,6 +918,7 @@ class JavaEnvironment {
         .setConstructor(isConstructor)
         .setNative(isNative)
         .setWasmInfo(getWasmInfo(declarationMethodElement))
+        .setAnnotations(createAnnotations(declarationMethodElement, inNullMarkedScope))
         .setFinal(isFinal(declarationMethodElement))
         .setDefaultMethod(isDefault)
         .setAbstract(isAbstract(declarationMethodElement))

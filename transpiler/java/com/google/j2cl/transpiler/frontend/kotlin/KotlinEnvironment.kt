@@ -644,6 +644,7 @@ class KotlinEnvironment(
         .setOriginalJsInfo(irFunction.getJsInfo())
         .setUncheckedCast(irFunction.isUncheckedCast)
         .setWasmInfo(irFunction.getWasmInfo())
+        .setAnnotations(createAnnotations(irFunction))
         .build()
     }
   }
@@ -697,6 +698,7 @@ class KotlinEnvironment(
         .setStatic(irField.isStatic || irField.parent !is IrDeclaration)
         .setDeprecated(irField.isDeprecated)
         .setOriginalJsInfo(irField.getJsInfo())
+        .setAnnotations(createAnnotations(irField))
         .build()
     }
   }
@@ -712,6 +714,7 @@ class KotlinEnvironment(
       .setEnumConstant(true)
       .setDeprecated(irEnumEntry.isDeprecated)
       .setOriginalJsInfo(irEnumEntry.getJsInfo())
+      .setAnnotations(createAnnotations(irEnumEntry))
       .build()
 
   private fun getEnclosingTypeDescriptor(irDeclaration: IrDeclaration): DeclaredTypeDescriptor? =

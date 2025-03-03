@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.common.visitor.Processor;
@@ -182,6 +183,9 @@ public abstract class MemberDescriptor
         || (getEnclosingTypeDescriptor().getTypeDeclaration().isExtern()
             && getJsNamespace().equals(getEnclosingTypeDescriptor().getQualifiedJsName()));
   }
+
+  /** Gets a list of annotations present on the declaration of this member. */
+  public abstract ImmutableList<Annotation> getAnnotations();
 
   /** Returns true if this is a user written $isInstance method. */
   public boolean isCustomIsInstanceMethod() {
