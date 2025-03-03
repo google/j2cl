@@ -15,6 +15,7 @@ java_library(
     deps = [
         ":worker_protocol_java_proto",
         "//third_party:args4j",
+        "//third_party:error_prone_annotations",
         "//third_party:guava",
         "//transpiler/java/com/google/j2cl/common",
     ],

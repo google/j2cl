@@ -21,13 +21,10 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.io.Files;
-import com.google.devtools.build.lib.worker.WorkerProtocol.WorkRequest;
-import com.google.devtools.build.lib.worker.WorkerProtocol.WorkResponse;
 import com.google.j2cl.common.Problems;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.function.Supplier;
 import org.kohsuke.args4j.CmdLineException;
@@ -49,26 +46,22 @@ public abstract class BazelWorker {
    * Process the request described by the arguments. Note that you must output errors and warnings
    * via {@link Problems} to avoid interrupting the worker protocol which occurs over stdout.
    */
-  private int processRequest(List<String> args) {
+  private int processRequest(List<String> args, PrintWriter pw) {
     CmdLineParser parser = new CmdLineParser(this);
 
     try {
       parser.parseArgument(args);
     } catch (CmdLineException e) {
       problems.error("%s", e.getMessage());
-      return problems.reportAndGetExitCode(System.err);
+      return problems.reportAndGetExitCode(pw);
     }
 
     try {
       run();
     } catch (Problems.Exit e) {
       // Program aborted due to errors recorded in problems.
-    } catch (Throwable e) {
-      // Program crash.
-      e.printStackTrace(System.err);
-      return 1;
     }
-    return problems.reportAndGetExitCode(System.err);
+    return problems.reportAndGetExitCode(pw);
   }
 
   public static final void start(String[] args, Supplier<BazelWorker> workerSupplier)
@@ -83,35 +76,23 @@ public abstract class BazelWorker {
   @SuppressWarnings("SystemExitOutsideMain")
   private static void runStandaloneWorker(Supplier<BazelWorker> workerSupplier, List<String> args) {
     // This is a single invocation of builder that exits after it processed the request.
-    int exitCode = workerSupplier.get().processRequest(args);
+    int exitCode =
+        workerSupplier
+            .get()
+            .processRequest(args, new PrintWriter(System.err, /* autoFlush= */ true));
     System.exit(exitCode);
   }
 
   private static void runPersistentWorker(Supplier<BazelWorker> workerSupplier) throws IOException {
-    PrintStream realStdOut = System.out;
-
-    // Ensure we capture stdout/sterr for potential debug/error messages.
-    ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-    PrintStream ps = new PrintStream(buffer, true);
-    System.setOut(ps);
-    System.setErr(ps);
-
-    while (true) {
-      WorkRequest request = WorkRequest.parseDelimitedFrom(System.in);
-
-      if (request == null) {
-        break;
-      }
-
-      int exitCode = workerSupplier.get().processRequest(request.getArgumentsList());
-      WorkResponse.newBuilder()
-          .setOutput(buffer.toString())
-          .setExitCode(exitCode)
-          .build()
-          .writeDelimitedTo(realStdOut);
-      realStdOut.flush();
-      buffer.reset();
-    }
+    WorkRequestHandler workerHandler =
+        new WorkRequestHandler.WorkRequestHandlerBuilder(
+                new WorkRequestHandler.WorkRequestCallback(
+                    (request, pw) ->
+                        workerSupplier.get().processRequest(request.getArgumentsList(), pw)),
+                System.err,
+                new ProtoWorkerMessageProcessor(System.in, System.out))
+            .build();
+    workerHandler.processRequests();
   }
 
   /**
