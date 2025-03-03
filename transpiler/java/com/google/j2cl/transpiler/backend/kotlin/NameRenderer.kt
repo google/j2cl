@@ -29,11 +29,23 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source
  * @property localTypeNameMap a map from local names to qualified names
  * @property localFieldNames a set of local field names
  */
-internal data class NameRenderer(
+internal data class NameRenderer
+private constructor(
   val environment: Environment,
-  val localTypeNameMap: Map<String, String> = mapOf(),
-  val localFieldNames: Set<String> = setOf(),
+  val withJ2ktPrefix: Boolean,
+  private val localTypeNameMap: Map<String, String>,
+  private val localFieldNames: Set<String>,
 ) {
+  constructor(
+    environment: Environment,
+    withJ2ktPrefix: Boolean,
+  ) : this(
+    environment,
+    withJ2ktPrefix = withJ2ktPrefix,
+    localTypeNameMap = mapOf(),
+    localFieldNames = setOf(),
+  )
+
   fun plusLocalNames(type: Type): NameRenderer =
     plusLocalTypeNameMap(type.localTypeNameMap).plusLocalFieldNames(type.localFieldNames)
 

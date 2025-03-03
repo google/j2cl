@@ -35,7 +35,11 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source
  * @property output output for generated sources
  * @property problems problems collected during generation
  */
-class KotlinGeneratorStage(private val output: OutputUtils.Output, private val problems: Problems) {
+class KotlinGeneratorStage(
+  private val output: OutputUtils.Output,
+  private val problems: Problems,
+  private val withJ2ktPrefix: Boolean,
+) {
   /** Generate outputs for a library. */
   fun generateOutputs(library: Library) {
     library.compilationUnits.forEach { generateOutputs(it) }
@@ -57,7 +61,7 @@ class KotlinGeneratorStage(private val output: OutputUtils.Output, private val p
 
   /** Generate ObjC outputs for a compilation unit. */
   private fun generateObjCOutputs(compilationUnit: CompilationUnit) {
-    val source = J2ObjCCompatRenderer.source(compilationUnit)
+    val source = J2ObjCCompatRenderer(withJ2ktPrefix).source(compilationUnit)
     if (source.isNotEmpty()) {
       val path = compilationUnit.packageRelativePath.replace(".java", "+J2ObjCCompat.h")
       output.write(path, source.buildString())
@@ -77,7 +81,7 @@ class KotlinGeneratorStage(private val output: OutputUtils.Output, private val p
       )
 
     val nameRenderer =
-      NameRenderer(environment).plusLocalTypeNameMap(compilationUnit.localTypeNames)
+      NameRenderer(environment, withJ2ktPrefix).plusLocalTypeNameMap(compilationUnit.localTypeNames)
 
     val compilationUnitRenderer = CompilationUnitRenderer(nameRenderer)
 

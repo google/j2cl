@@ -115,8 +115,8 @@ private val String.objCMethodParameterNames: List<String>
 
 private const val OBJC_TYPE_NAME_PREFIX: String = "J2kt"
 
-internal val TypeDeclaration.objCName: String
-  get() = OBJC_TYPE_NAME_PREFIX + objCNameWithoutPrefix
+internal fun TypeDeclaration.objCName(withPrefix: Boolean): String =
+  objCNameWithoutPrefix.letIf(withPrefix) { OBJC_TYPE_NAME_PREFIX + it }
 
 internal val TypeDeclaration.objCNameWithoutPrefix: String
   get() = mappedObjCName ?: nonMappedObjCName
@@ -124,8 +124,8 @@ internal val TypeDeclaration.objCNameWithoutPrefix: String
 private val String.objCCompanionTypeName: String
   get() = this + "Companion"
 
-internal val CompanionDeclaration.objCName
-  get() = enclosingTypeDeclaration.objCName.objCCompanionTypeName
+internal fun CompanionDeclaration.objCName(withPrefix: Boolean) =
+  enclosingTypeDeclaration.objCName(withPrefix).objCCompanionTypeName
 
 internal val CompanionDeclaration.objCNameWithoutPrefix
   get() = enclosingTypeDeclaration.objCNameWithoutPrefix.objCCompanionTypeName

@@ -86,7 +86,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.join
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
 
-internal object J2ObjCCompatRenderer {
+internal class J2ObjCCompatRenderer(private val withJ2ktPrefix: Boolean) {
   internal fun source(compilationUnit: CompilationUnit): Source =
     dependenciesAndDeclarationsSource(compilationUnit).ifNotEmpty {
       emptyLineSeparated(fileCommentSource(compilationUnit), it) + Source.NEW_LINE
@@ -388,7 +388,7 @@ internal object J2ObjCCompatRenderer {
     rendererOf(source(variable.name.objCName.escapeObjCKeyword))
 
   private fun objCNameRenderer(companionDeclaration: CompanionDeclaration): Renderer<Source> =
-    className(companionDeclaration.objCName)
+    className(companionDeclaration.objCName(withJ2ktPrefix))
 
   private fun sharedRenderer(companionDeclaration: CompanionDeclaration): Renderer<Source> =
     getProperty(objCNameRenderer(companionDeclaration), "shared")
@@ -412,7 +412,7 @@ internal object J2ObjCCompatRenderer {
     }
 
   private fun nonMappedObjCNameRenderer(typeDeclaration: TypeDeclaration): Renderer<Source> =
-    objCNameRenderer(typeDeclaration.kind, typeDeclaration.objCName)
+    objCNameRenderer(typeDeclaration.kind, typeDeclaration.objCName(withPrefix = withJ2ktPrefix))
 
   private fun objCNameRenderer(kind: TypeDeclaration.Kind, name: String): Renderer<Source> =
     when (kind) {

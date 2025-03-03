@@ -55,7 +55,7 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
   fun objCAnnotationSource(typeDeclaration: TypeDeclaration): Source =
     Source.emptyUnless(needsObjCNameAnnotation(typeDeclaration)) {
       objCNameAnnotationSource(
-        typeDeclaration.objCName,
+        typeDeclaration.objCName(nameRenderer.withJ2ktPrefix),
         swiftName = typeDeclaration.objCNameWithoutPrefix,
         exact = true,
       )
@@ -64,7 +64,7 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
   fun objCAnnotationSource(companionObject: CompanionObject): Source =
     Source.emptyUnless(needsObjCNameAnnotation(companionObject)) {
       objCNameAnnotationSource(
-        companionObject.declaration.objCName,
+        companionObject.declaration.objCName(nameRenderer.withJ2ktPrefix),
         swiftName = companionObject.declaration.objCNameWithoutPrefix,
         exact = true,
       )
