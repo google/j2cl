@@ -4,16 +4,17 @@
 #import "transpiler/javatests/com/google/j2cl/integration/java/j2ktiosinterop/DefaultNames.h"
 #import "transpiler/javatests/com/google/j2cl/integration/java/j2ktiosinterop/EnumNames.h"
 
-@interface ObjCInteropTest : XCTestCase
+/** J2ObjC interop test for ObjC. */
+@interface J2ObjCObjCInteropTest : XCTestCase
 @end
 
-@implementation ObjCInteropTest
+@implementation J2ObjCObjCInteropTest
 
 - (void)testDefaultNames {
-  J2ktJ2ktiosinteropDefaultNames *obj;
-  obj = [[J2ktJ2ktiosinteropDefaultNames alloc] init];
-  obj = [[J2ktJ2ktiosinteropDefaultNames alloc] initWithInt:1];
-  obj = [[J2ktJ2ktiosinteropDefaultNames alloc] initWithInt:1 withNSString:@""];
+  J2ktiosinteropDefaultNames *obj;
+  obj = [[J2ktiosinteropDefaultNames alloc] init];
+  obj = [[J2ktiosinteropDefaultNames alloc] initWithInt:1];
+  obj = [[J2ktiosinteropDefaultNames alloc] initWithInt:1 withNSString:@""];
 
   obj = create_J2ktiosinteropDefaultNames_init();
   obj = create_J2ktiosinteropDefaultNames_initWithInt_(1);
@@ -45,14 +46,7 @@
   [obj genericMethodWithId:NULL];
   [obj genericMethodWithNSString:NULL];
 
-  obj.field_ = obj.field_;
-
-  J2ktJ2ktiosinteropDefaultNamesCompanion.shared.staticField_ =
-      J2ktJ2ktiosinteropDefaultNamesCompanion.shared.staticField_;
-
-  [J2ktJ2ktiosinteropDefaultNamesCompanion.shared staticMethod];
-  [J2ktJ2ktiosinteropDefaultNamesCompanion.shared staticMethodWithInt:1];
-  [J2ktJ2ktiosinteropDefaultNamesCompanion.shared staticMethodWithInt:1 withNSString:@""];
+  obj->field_ = obj->field_ + 1;
 
   J2ktiosinteropDefaultNames_staticMethod();
   J2ktiosinteropDefaultNames_staticMethodWithInt_(1);
@@ -60,27 +54,27 @@
 }
 
 - (void)testCustomNames {
-  J2ktCustom *obj;
-  obj = [[J2ktCustom alloc] initWithIndex:1];
-  obj = [[J2ktCustom alloc] initWithIndex:1 name:@""];
+  Custom *obj;
+  obj = [[Custom alloc] initWithIndex:1];
+  obj = [[Custom alloc] initWithIndex:1 name:@""];
 
-  obj = [[J2ktCustom alloc] init];
-  obj = [[J2ktCustom alloc] initWithLong:1];
-  obj = [[J2ktCustom alloc] initWithLong:1 withNSString:@""];
+  obj = [[Custom alloc] init];
+  obj = [[Custom alloc] init2WithLong:1];
+  obj = [[Custom alloc] init3WithLong:1 withNSString:@""];
 
   obj = create_Custom_initWithIndex_(1);
   obj = create_Custom_initWithIndex_name_(1, @"");
 
   obj = create_Custom_init();
-  obj = create_Custom_initWithLong_(1);
-  obj = create_Custom_initWithLong_withNSString_(1, @"");
+  obj = create_Custom_init2(1);
+  obj = create_Custom_init3(1, @"");
 
   obj = new_Custom_initWithIndex_(1);
   obj = new_Custom_initWithIndex_name_(1, @"");
 
   obj = new_Custom_init();
-  obj = new_Custom_initWithLong_(1);
-  obj = new_Custom_initWithLong_withNSString_(1, @"");
+  obj = new_Custom_init2(1);
+  obj = new_Custom_init3(1, @"");
 
   [obj custom];
   [obj customWithIndex:1];
@@ -89,26 +83,16 @@
   [obj customWithLong:1];
   [obj customWithLong:1 withNSString:@""];
 
-  [CustomCompanion.shared staticCustom];
-  [CustomCompanion.shared staticCustomWithIndex:1];
-  [CustomCompanion.shared staticCustomWithIndex:1 name:@""];
-
-  [CustomCompanion.shared staticCustom2WithLong:1];
-  [CustomCompanion.shared staticCustom3WithLong:1 withNSString:@""];
-
   Custom_staticCustom();
   Custom_staticCustomWithIndex_(1);
   Custom_staticCustomWithIndex_name_(1, @"");
 
-  Custom_staticCustom2WithLong_(1);
-  Custom_staticCustom3WithLong_withNSString_(2, @"");
+  Custom_staticCustom2(1);
+  Custom_staticCustom3(2, @"");
 }
 
 - (void)testEnumNames {
-  J2ktJ2ktiosinteropEnumNames *e;
-  e = J2ktJ2ktiosinteropEnumNames.ONE;
-  e = J2ktJ2ktiosinteropEnumNames.TWO;
-
+  J2ktiosinteropEnumNames *e;
   e = J2ktiosinteropEnumNames_get_ONE();
   e = J2ktiosinteropEnumNames_get_TWO();
 

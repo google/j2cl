@@ -14,14 +14,17 @@
  * the License.
  */
 import XCTest
-import third_party_java_src_j2cl_transpiler_javatests_com_google_j2cl_integration_java_j2ktiosinterop_SwiftInteropFramework
+import third_party_java_src_j2cl_transpiler_javatests_com_google_j2cl_integration_java_j2ktiosinterop_J2ktSwiftInteropFramework
 
-final class SwiftInteropTest: XCTestCase {
+/// J2KT interop test for Swift.
+final class J2ktSwiftInteropTest: XCTestCase {
   func testDefaultNames() {
     var obj: J2ktiosinteropDefaultNames
 
     obj = J2ktiosinteropDefaultNames()
+    // TODO(b/374280337): Should be J2ktiosinteropDefaultNames(int:)
     obj = J2ktiosinteropDefaultNames(Int: 1)
+    // TODO(b/374280337): Should be J2ktiosinteropDefaultNames(int:with:)
     obj = J2ktiosinteropDefaultNames(Int: 1, withNSString: "")
 
     obj.method()

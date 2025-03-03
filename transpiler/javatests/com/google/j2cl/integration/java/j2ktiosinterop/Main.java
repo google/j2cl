@@ -17,6 +17,6 @@ package j2ktiosinterop;
 
 public class Main {
   public static void main(String... args) {
-    // The actual interop tests are "ObjCInteropTest.m" and "SwiftInteropTest.swift".
+    // The actual interop tests are "J2ktObjCInteropTest.m" and "J2ktSwiftInteropTest.swift".
   }
 }
