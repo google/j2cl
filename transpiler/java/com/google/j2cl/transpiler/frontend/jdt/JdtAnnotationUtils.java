@@ -143,6 +143,7 @@ public final class JdtAnnotationUtils {
     }
   }
 
+  @Nullable
   public static IAnnotationBinding getAnnotationBinding(
       PackageDeclaration packageDeclaration, Predicate<IAnnotationBinding> whichAnnotation) {
     List<Annotation> packageAnnotations =
@@ -160,6 +161,15 @@ public final class JdtAnnotationUtils {
     return annotationBinding.orElse(null);
   }
 
+  @Nullable
+  public static IAnnotationBinding getAnnotationBinding(
+      ITypeBinding binding, Predicate<IAnnotationBinding> whichAnnotation) {
+    if (!shouldReadAnnotations(binding)) {
+      return null;
+    }
+    return Arrays.stream(binding.getAnnotations()).filter(whichAnnotation).findFirst().orElse(null);
+  }
+
   public static boolean isWarningSuppressed(IBinding binding, String warning) {
     IAnnotationBinding annotationBinding = getSuppressWarningsAnnotation(binding);
     if (annotationBinding == null) {
@@ -174,9 +184,16 @@ public final class JdtAnnotationUtils {
     return findAnnotationBindingByName(binding, SUPPRESS_WARNINGS_ANNOTATION_NAME);
   }
 
-  public static boolean isNullMarked(PackageDeclaration packageDeclaration) {
+  public static boolean hasNullMarkedAnnotation(PackageDeclaration packageDeclaration) {
     return getAnnotationBinding(
             packageDeclaration,
+            (a) -> Nullability.isNullMarkedAnnotation(a.getAnnotationType().getQualifiedName()))
+        != null;
+  }
+
+  public static boolean hasNullMarkedAnnotation(ITypeBinding typeBinding) {
+    return getAnnotationBinding(
+            typeBinding,
             (a) -> Nullability.isNullMarkedAnnotation(a.getAnnotationType().getQualifiedName()))
         != null;
   }

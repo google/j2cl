@@ -1248,25 +1248,20 @@ public class JdtEnvironment {
         .collect(ImmutableList.toImmutableList());
   }
 
-  private boolean isNullMarked(ITypeBinding typeBinding) {
-    return hasNullMarkedAnnotation(typeBinding)
-        || packageAnnotationsResolver.isNullMarked(typeBinding.getPackage().getName());
-  }
-
   /**
-   * Returns true if {@code typeBinding} or one of its enclosing types has a @NullMarked annotation.
+   * Returns true if {@code typeBinding}, one of its enclosing types, or its package has
+   * a @NullMarked annotation
    */
-  private static boolean hasNullMarkedAnnotation(ITypeBinding typeBinding) {
-    if (hasNullMarkedAnnotation(Arrays.stream(typeBinding.getAnnotations()))) {
+  private boolean isNullMarked(ITypeBinding typeBinding) {
+    if (JdtAnnotationUtils.hasNullMarkedAnnotation(typeBinding)) {
       return true;
     }
-    return typeBinding.getDeclaringClass() != null
-        && hasNullMarkedAnnotation(typeBinding.getDeclaringClass());
-  }
 
-  private static boolean hasNullMarkedAnnotation(Stream<IAnnotationBinding> annotations) {
-    return annotations.anyMatch(
-        a -> Nullability.isNullMarkedAnnotation(a.getAnnotationType().getQualifiedName()));
+    if (typeBinding.getDeclaringClass() != null) {
+      return isNullMarked(typeBinding.getDeclaringClass());
+    }
+
+    return packageAnnotationsResolver.isNullMarked(typeBinding.getPackage().getName());
   }
 
   private static boolean isAnnotatedWithFunctionalInterface(ITypeBinding typeBinding) {

@@ -81,7 +81,7 @@ public final class PackageAnnotationsResolver {
                 packageDeclaration.getName().getFullyQualifiedName(),
                 getJsNamespace(packageDeclaration),
                 getKtObjectiveCName(packageDeclaration),
-                JdtAnnotationUtils.isNullMarked(packageDeclaration));
+                JdtAnnotationUtils.hasNullMarkedAnnotation(packageDeclaration));
           }
         });
   }
