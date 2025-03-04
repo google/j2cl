@@ -70,6 +70,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public abstract boolean isVarargs();
 
+    public abstract ImmutableList<Annotation> getAnnotations();
+
     public abstract boolean isJsOptional();
 
     public abstract boolean isDoNotAutobox();
@@ -84,6 +86,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public static Builder newBuilder() {
       return new AutoValue_MethodDescriptor_ParameterDescriptor.Builder()
           .setVarargs(false)
+          .setAnnotations(ImmutableList.of())
           .setJsOptional(false)
           .setDoNotAutobox(false);
     }
@@ -97,6 +100,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       public abstract Builder setTypeDescriptor(TypeDescriptor typeDescriptor);
 
       public abstract Builder setVarargs(boolean isVarargs);
+
+      public abstract Builder setAnnotations(List<Annotation> annotations);
 
       public abstract Builder setJsOptional(boolean isJsOptional);
 

@@ -955,11 +955,13 @@ public class JdtEnvironment {
         parameterTypes.length - methodBinding.getMethodDeclaration().getParameterTypes().length;
 
     for (int i = firstNonSyntheticParameter; i < parameterTypes.length; i++) {
+      IAnnotationBinding[] parameterAnnotations = methodBinding.getParameterAnnotations(i);
+
       TypeDescriptor parameterTypeDescriptor =
           adjustForSyntheticEnumOrAnnotationMethod(
               methodBinding,
               createTypeDescriptorWithNullability(
-                  parameterTypes[i], methodBinding.getParameterAnnotations(i), inNullMarkedScope));
+                  parameterTypes[i], parameterAnnotations, inNullMarkedScope));
 
       parameterDescriptorBuilder.add(
           ParameterDescriptor.newBuilder()
@@ -967,6 +969,7 @@ public class JdtEnvironment {
               .setJsOptional(JsInteropUtils.isJsOptional(methodBinding, i))
               .setVarargs(i == parameterTypes.length - 1 && methodBinding.isVarargs())
               .setDoNotAutobox(JsInteropUtils.isDoNotAutobox(methodBinding, i))
+              .setAnnotations(createAnnotations(parameterAnnotations, inNullMarkedScope))
               .build());
     }
     return parameterDescriptorBuilder.build();
@@ -1286,7 +1289,12 @@ public class JdtEnvironment {
     if (!JdtAnnotationUtils.shouldReadAnnotations(binding)) {
       return ImmutableList.of();
     }
-    return Arrays.stream(binding.getAnnotations())
+    return createAnnotations(binding.getAnnotations(), inNullMarkedScope);
+  }
+
+  private ImmutableList<Annotation> createAnnotations(
+      IAnnotationBinding[] annotations, boolean inNullMarkedScope) {
+    return Arrays.stream(annotations)
         .filter(
             annotationBinding ->
                 isSupportedAnnotation(annotationBinding.getAnnotationType().getQualifiedName()))

@@ -581,6 +581,7 @@ class KotlinEnvironment(
       val parameters =
         if (specialBridge == null) irFunction.getParameters()
         else specialBridge.overridden.getParameters()
+
       parameters.withIndex().forEach { (index, param) ->
         var type = param.type
         if (specialBridge != null) {
@@ -594,6 +595,7 @@ class KotlinEnvironment(
             .setTypeDescriptor(getTypeDescriptor(type))
             .setJsOptional(param.isJsOptional)
             .setDoNotAutobox(param.isDoNotAutobox)
+            .setAnnotations(createAnnotations(param))
             .setVarargs(index == parameters.lastIndex && param.isVararg)
             .build()
         )

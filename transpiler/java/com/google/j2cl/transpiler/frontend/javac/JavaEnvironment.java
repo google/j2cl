@@ -678,24 +678,29 @@ class JavaEnvironment {
       DeclaredTypeDescriptor enclosingTypeDescriptor,
       ExecutableElement declarationMethodElement,
       ImmutableList<TypeMirror> parameters) {
+    boolean inNullMarkedScope = enclosingTypeDescriptor.getTypeDeclaration().isNullMarked();
     ImmutableList.Builder<ParameterDescriptor> parametersBuilder = ImmutableList.builder();
+
     for (int i = 0; i < parameters.size(); i++) {
+      var parameterAnnotations =
+          declarationMethodElement.getParameters().get(i).getAnnotationMirrors();
+
       TypeDescriptor parameterType =
           adjustForSyntheticEnumOrAnnotationMethod(
               declarationMethodElement,
               applyParameterNullabilityAnnotations(
                   createTypeDescriptorWithNullability(
-                      parameters.get(i),
-                      declarationMethodElement.getParameters().get(i).getAnnotationMirrors(),
-                      enclosingTypeDescriptor.getTypeDeclaration().isNullMarked()),
+                      parameters.get(i), parameterAnnotations, inNullMarkedScope),
                   declarationMethodElement,
                   i));
+
       parametersBuilder.add(
           ParameterDescriptor.newBuilder()
               .setTypeDescriptor(parameterType)
               .setJsOptional(JsInteropUtils.isJsOptional(declarationMethodElement, i))
               .setVarargs(i == parameters.size() - 1 && declarationMethodElement.isVarArgs())
               .setDoNotAutobox(JsInteropUtils.isDoNotAutobox(declarationMethodElement, i))
+              .setAnnotations(createAnnotations(parameterAnnotations, inNullMarkedScope))
               .build());
     }
     return parametersBuilder.build();
@@ -1596,7 +1601,12 @@ class JavaEnvironment {
   }
 
   private ImmutableList<Annotation> createAnnotations(Element element, boolean inNullMarkedScope) {
-    return element.getAnnotationMirrors().stream()
+    return createAnnotations(element.getAnnotationMirrors(), inNullMarkedScope);
+  }
+
+  private ImmutableList<Annotation> createAnnotations(
+      List<? extends AnnotationMirror> annotations, boolean inNullMarkedScope) {
+    return annotations.stream()
         .filter(annotationMirror -> isSupportedAnnotation(getAnnotationName(annotationMirror)))
         .map(
             annotationMirror ->
