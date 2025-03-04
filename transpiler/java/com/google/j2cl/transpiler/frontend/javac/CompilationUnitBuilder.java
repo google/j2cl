@@ -852,7 +852,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
    */
   private List<Statement> getBodyAsStatements(
       JCTree body, Function<Expression, Statement> toStatementFunction) {
-    if (body.getKind() == Kind.BLOCK) {
+    if (body instanceof JCBlock) {
       return convertBlock((JCBlock) body).getStatements();
     }
     // Handling for lambda and switch cases that have an expression or a single statement instead of
