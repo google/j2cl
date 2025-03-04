@@ -563,6 +563,8 @@ public class TranspilerTester {
             : new Problems();
 
     J2clCommandLineRunner runner = new J2clCommandLineRunner(problems);
+    // Make sure a new thread is spawned to run the transpiler for Thread locals. See
+    // J2clCommandLineRunner.run for the details.
     ScheduledExecutorService executorService = Executors.newScheduledThreadPool(2);
     try {
       executorService.execute(() -> runner.executeForTesting(args));

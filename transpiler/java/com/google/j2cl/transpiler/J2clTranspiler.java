@@ -13,9 +13,7 @@
  */
 package com.google.j2cl.transpiler;
 
-import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
-import com.google.common.util.concurrent.Uninterruptibles;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
@@ -25,10 +23,6 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.passes.LibraryNormalizationPass;
 import com.google.j2cl.transpiler.passes.NormalizationPass;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.function.Supplier;
 
 /** Translation tool for generating JavaScript source files from Java sources. */
@@ -36,25 +30,7 @@ class J2clTranspiler {
 
   /** Runs the entire J2CL pipeline. */
   static void transpile(J2clTranspilerOptions options, Problems problems) {
-    // Compiler has no static state, but rather uses thread local variables.
-    // Because of this, we invoke the compiler on a different thread each time.
-    ExecutorService executorService = Executors.newSingleThreadExecutor();
-    Future<?> result =
-        executorService.submit(() -> new J2clTranspiler(options, problems).transpileImpl());
-    // Shutdown the executor service since it will only run a single transpilation. If not shutdown
-    // it prevents the JVM from ending the process (see Executors.newFixedThreadPool()). This is not
-    // normally observed since the transpiler in normal circumstances ends with System.exit() which
-    // ends all threads. But when the transpilation throws an exception, the exception propagates
-    // out of main() and the process lingers due the live threads from these executors.
-    executorService.shutdown();
-
-    try {
-      Uninterruptibles.getUninterruptibly(result);
-    } catch (ExecutionException e) {
-      // Try unwrapping the cause...
-      Throwables.throwIfUnchecked(e.getCause());
-      throw new AssertionError(e.getCause());
-    }
+    new J2clTranspiler(options, problems).transpileImpl();
   }
 
   private final J2clTranspilerOptions options;

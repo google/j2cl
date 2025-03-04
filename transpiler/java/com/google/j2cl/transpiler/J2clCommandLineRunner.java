@@ -214,6 +214,12 @@ public final class J2clCommandLineRunner extends CommandLineTool {
     return entries;
   }
 
+  /**
+   * Entry point to programmatically run the transpiler.
+   *
+   * <p>Note: J2CL has no static state, but rather uses thread local variables. Because of this, the
+   * compiler should be invoked on a different thread each time called from the same process.
+   */
   public static int run(Collection<String> args, PrintStream stdErr) {
     return new J2clCommandLineRunner().execute(args, stdErr);
   }
