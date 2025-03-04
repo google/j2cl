@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid;
 import static java.util.stream.Collectors.toCollection;
 
 import com.google.common.base.Predicates;
@@ -68,6 +69,7 @@ import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PostfixExpression;
 import com.google.j2cl.transpiler.ast.PrefixExpression;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
+import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.Statement;
@@ -151,7 +153,6 @@ import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 import javax.annotation.Nullable;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
@@ -463,22 +464,19 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         .setExpression(convertExpressionOrNull(switchStatement.getExpression()))
         .setCases(
             switchStatement.getCases().stream()
-                .map(
-                    caseClause ->
-                        SwitchCase.newBuilder()
-                            .setCaseExpressions(convertCaseExpressions(caseClause))
-                            .setStatements(convertStatements(caseClause.getStatements()))
-                            .build())
+                .map(c -> convertSwitchCase(c, PrimitiveTypes.VOID))
                 .collect(toImmutableList()))
         .build();
   }
 
   // TODO(b/380880096): Remove the stripping once opensource has the proper dependency.
-  private List<Expression> convertCaseExpressions(JCCase caseClause) {
-    if (caseClause.getExpression() == null) {
-      return ImmutableList.of();
-    }
-    return ImmutableList.of(convertExpression(caseClause.getExpression()));
+  private SwitchCase convertSwitchCase(JCCase caseClause, TypeDescriptor resultType) {
+    var caseExpression = convertExpressionOrNull(caseClause.getExpression());
+    return SwitchCase.newBuilder()
+        .setCaseExpressions(
+            caseExpression == null ? ImmutableList.of() : ImmutableList.of(caseExpression))
+        .setStatements(convertStatements(caseClause.getStatements()))
+        .build();
   }
 
   private ThrowStatement convertThrow(JCThrow statement) {
@@ -831,37 +829,39 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
                 .map(variable -> createVariable((JCVariableDecl) variable, true))
                 .collect(toImmutableList()))
         .setStatements(
-            getBodyAsStatements(
-                expression.getBody(),
-                (e) ->
-                    TypeDescriptors.isPrimitiveVoid(
-                            functionalMethodDescriptor.getReturnTypeDescriptor())
-                        ? e.makeStatement(getSourcePosition(expression.getBody()))
-                        : ReturnStatement.newBuilder()
-                            .setExpression(e)
-                            .setSourcePosition(getSourcePosition(expression.getBody()))
-                            .build()))
+            convertLambdaBody(
+                expression.getBody(), functionalMethodDescriptor.getReturnTypeDescriptor()))
         .setSourcePosition(getSourcePosition(expression))
         .build();
   }
 
-  /**
-   * Converts a body of a lambda expression or a switch expression case.
-   *
-   * <p>These bodies can consist of a single expression or a statement.
-   */
-  private List<Statement> getBodyAsStatements(
-      JCTree body, Function<Expression, Statement> toStatementFunction) {
+  /** Converts a body of a lambda expression. */
+  private List<Statement> convertLambdaBody(JCTree body, TypeDescriptor returnTypeDescriptor) {
+    SourcePosition sourcePosition = getSourcePosition(body);
+    if (body instanceof JCExpression) {
+      // The lambda body is just an expression; convert it to statements. If the lambda function
+      // is not void, then it needs to make the implicit return explicit.
+      Expression expression = convertExpression((JCExpression) body);
+      Statement statement =
+          isPrimitiveVoid(returnTypeDescriptor)
+              ? expression.makeStatement(sourcePosition)
+              : ReturnStatement.newBuilder()
+                  .setExpression(expression)
+                  .setSourcePosition(sourcePosition)
+                  .build();
+      return ImmutableList.of(statement);
+    }
+
     if (body instanceof JCBlock) {
       return convertBlock((JCBlock) body).getStatements();
     }
-    // Handling for lambda and switch cases that have an expression or a single statement instead of
-    // a body.
-    return ImmutableList.of(
-        body instanceof JCExpression
-            ? toStatementFunction.apply(convertExpression((JCExpression) body))
-            : convertStatement((JCStatement) body));
+
+    if (body instanceof JCStatement) {
+      return ImmutableList.of(convertStatement((JCStatement) body));
+    }
+    throw new AssertionError("Unexpected node type in lambda body: " + body.getKind());
   }
+
 
   /**
    * Converts method reference expressions of the form:

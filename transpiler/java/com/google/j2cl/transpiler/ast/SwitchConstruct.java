@@ -39,6 +39,11 @@ public interface SwitchConstruct<T extends SwitchConstruct<T>> extends HasSource
     return getCases().stream().anyMatch(SwitchCase::isDefault);
   }
 
+  /** Returns true if the switch construct has a case that might fallthrough the next. */
+  default boolean canFallthrough() {
+    return getCases().stream().anyMatch(SwitchCase::canFallthrough);
+  }
+
   Builder<T> toBuilder();
 
   /** An interface for builders of switch constructs. */

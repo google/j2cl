@@ -20,7 +20,6 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import com.google.auto.value.AutoValue;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Streams;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
@@ -29,7 +28,6 @@ import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.BreakOrContinueStatement;
 import com.google.j2cl.transpiler.ast.BreakStatement;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
-import com.google.j2cl.transpiler.ast.ContinueStatement;
 import com.google.j2cl.transpiler.ast.DoWhileStatement;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionStatement;
@@ -40,12 +38,10 @@ import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
-import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SwitchCase;
 import com.google.j2cl.transpiler.ast.SwitchExpression;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
-import com.google.j2cl.transpiler.ast.ThrowStatement;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import java.util.List;
 
@@ -303,52 +299,7 @@ public class NormalizeSwitchStatementsJ2kt extends NormalizationPass {
     List<SwitchCase> cases = switchStatement.getCases();
     List<SwitchCase> casesExceptLast = cases.isEmpty() ? cases : cases.subList(0, cases.size() - 1);
     return casesExceptLast.stream()
-        .allMatch(
-            switchCase ->
-                !switchCase.isDefault()
-                    && (switchCase.getStatements().isEmpty()
-                        || breaksOutOfSwitchStatement(switchCase.getStatements())));
-  }
-
-  /**
-   * A conservative approximation of when a statement is guaranteed to exit the switch clause
-   * without falling through the next case clause. In particular labeled statements are completely
-   * skipped to avoid reasoning about local jumps in control flow.
-   */
-  private static boolean breaksOutOfSwitchStatement(Statement statement) {
-    if (statement instanceof ReturnStatement) {
-      return true;
-    }
-
-    if (statement instanceof ThrowStatement) {
-      return true;
-    }
-
-    if (statement instanceof BreakStatement || statement instanceof ContinueStatement) {
-      // Since we are not entering labeled statements, loop statements and other switch statements,
-      // these break and continue statement are guaranteed to target outside switch statement.
-      return true;
-    }
-
-    if (statement instanceof Block) {
-      Block block = (Block) statement;
-      return breaksOutOfSwitchStatement(block.getStatements());
-    }
-
-    if (statement instanceof IfStatement) {
-      IfStatement ifStatement = (IfStatement) statement;
-      Statement elseStatement = ifStatement.getElseStatement();
-      return breaksOutOfSwitchStatement(ifStatement.getThenStatement())
-          && elseStatement != null
-          && breaksOutOfSwitchStatement(elseStatement);
-    }
-
-    return false;
-  }
-
-  private static boolean breaksOutOfSwitchStatement(List<Statement> statements) {
-    Statement lastStatement = Iterables.getLast(statements, null);
-    return lastStatement != null && breaksOutOfSwitchStatement(lastStatement);
+        .allMatch(switchCase -> !switchCase.isDefault() && !switchCase.canFallthrough());
   }
 
   /** Moves the default case to the end. */

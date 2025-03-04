@@ -210,6 +210,16 @@ public class Main {
     assertEquals(10, testDefaultNotLast_fallThroughDefault(1));
     assertEquals(100, testDefaultNotLast_fallThroughDefault(2));
     assertEquals(100, testDefaultNotLast_fallThroughDefault(3));
+
+    assertEquals(1, testDefaultNotLast_withRules(1, true));
+    assertEquals(2, testDefaultNotLast_withRules(1, false));
+    assertEquals(0, testDefaultNotLast_withRules(2, false));
+    assertEquals(3, testDefaultNotLast_withRules(3, false));
+    assertEquals(0, sideEffects);
+    assertEquals(0, testDefaultNotLast_withRules(4, false));
+    assertEquals(1, sideEffects);
+    assertEquals(0, testDefaultNotLast_withRules(5, false));
+    assertEquals(1, sideEffects);
   }
 
   private static int testCascade_allFallThrough(int i) {
@@ -312,6 +322,32 @@ public class Main {
         break;
     }
     return result;
+  }
+
+  private static int testDefaultNotLast_withRules(int i, boolean doBreak) {
+    int result = 0;
+    switch (i) {
+      case 1 -> {
+        result = 1;
+        if (doBreak) {
+          break;
+        }
+        result = 2;
+      }
+      case 2 -> {}
+      default -> {}
+      case 3 -> {
+        result = 3;
+      }
+      case 4 -> performSideEffect(); // an expression of type void.
+    }
+    return result;
+  }
+
+  private static int sideEffects = 0;
+
+  private static int performSideEffect() {
+    return sideEffects++;
   }
 
   private static void testStringSwitch() {

@@ -429,5 +429,51 @@ public class SwitchStatement {
     }
   }
 
+  private void testNonExhaustive_foldableFallThrough(int i) {
+    switch (i) {
+      case 1: // can fold into 3;
+      case 2:
+      case 3:
+        break;
+      case 4: // can fold into default;
+      default:
+        break;
+      case 5: // can be dropped;
+      case 6: // can be dropped;
+    }
+  }
+
+  private static void testSwitchStatement_withRules() {
+    int o = 0;
+    switch (1) {
+      default -> {}
+      case 2 -> {}
+    }
+  }
+
+  private static int testDefaultNotLast_withRules(int i, boolean doBreak) {
+    int result = 0;
+    switch (i) {
+      case 1 -> {
+        result = 1;
+        if (doBreak) {
+          break;
+        }
+        result = 2;
+      }
+      case 2 -> {}
+      default -> {}
+      case 3 -> {
+        result = 3;
+      }
+      case 4 -> foo();
+    }
+    return result;
+  }
+
+  private static int foo() {
+    return 1;
+  }
+
   private void foo(int i) {}
 }

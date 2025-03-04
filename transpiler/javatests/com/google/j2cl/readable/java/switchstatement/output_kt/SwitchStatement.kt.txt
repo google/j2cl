@@ -20,6 +20,7 @@ package switchstatement
 
 import javaemul.lang.*
 import java.lang.RuntimeException
+import kotlin.Boolean
 import kotlin.Byte
 import kotlin.Char
 import kotlin.Int
@@ -509,6 +510,13 @@ open class SwitchStatement {
   } while (false)
  }
 
+ private fun testNonExhaustive_foldableFallThrough(i: Int) {
+  when (i) {
+   1, 2, 3 -> {}
+   else -> {}
+  }
+ }
+
  private fun foo(i: Int) {}
 
  @ObjCName("J2ktSwitchstatementSwitchStatementCompanion", swiftName = "SwitchstatementSwitchStatementCompanion", exact = true)
@@ -538,6 +546,79 @@ open class SwitchStatement {
     else -> {}
    }
    assert(false)
+  }
+
+  @JvmStatic
+  private fun testSwitchStatement_withRules() {
+   val o: Int = 0
+   SWITCH@ do {
+    CASE@ do {
+     do {
+      when (1) {
+       2 -> {
+        break@CASE
+       }
+       else -> {
+        break
+       }
+      }
+      break@SWITCH
+     } while (false)
+     break@SWITCH
+    } while (false)
+   } while (false)
+  }
+
+  @JvmStatic
+  private fun testDefaultNotLast_withRules(i: Int, doBreak: Boolean): Int {
+   var result: Int = 0
+   SWITCH@ do {
+    CASE@ do {
+     CASE_1@ do {
+      CASE_2@ do {
+       CASE_3@ do {
+        do {
+         when (i) {
+          1 -> {
+           break
+          }
+          2 -> {
+           break@CASE_3
+          }
+          3 -> {
+           break@CASE_1
+          }
+          4 -> {
+           break@CASE
+          }
+          else -> {
+           break@CASE_2
+          }
+         }
+         break@SWITCH
+        } while (false)
+        result = 1
+        if (doBreak) {
+         break@SWITCH
+        }
+        result = 2
+        break@SWITCH
+       } while (false)
+       break@SWITCH
+      } while (false)
+      break@SWITCH
+     } while (false)
+     result = 3
+     break@SWITCH
+    } while (false)
+    SwitchStatement.foo()
+   } while (false)
+   return result
+  }
+
+  @JvmStatic
+  private fun foo(): Int {
+   return 1
   }
  }
 }

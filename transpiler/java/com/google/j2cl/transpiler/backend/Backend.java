@@ -99,6 +99,7 @@ import com.google.j2cl.transpiler.passes.J2ktRestrictionsChecker;
 import com.google.j2cl.transpiler.passes.JsInteropRestrictionsChecker;
 import com.google.j2cl.transpiler.passes.MakeVariablesFinal;
 import com.google.j2cl.transpiler.passes.MakeVariablesNonNull;
+import com.google.j2cl.transpiler.passes.MarkNoFallthroughSwitchCases;
 import com.google.j2cl.transpiler.passes.MoveNestedClassesToTop;
 import com.google.j2cl.transpiler.passes.NormalizationPass;
 import com.google.j2cl.transpiler.passes.NormalizeArrayAccesses;
@@ -761,6 +762,7 @@ public enum Backend {
           MakeVariablesNonNull::new,
           NormalizeLabels::new,
           NormalizeForStatements::new,
+          MarkNoFallthroughSwitchCases::new,
           NormalizeSwitchStatementsJ2kt::new,
           NormalizeLabeledStatements::new,
           () -> new NormalizeShifts(/* narrowAllToInt= */ true),

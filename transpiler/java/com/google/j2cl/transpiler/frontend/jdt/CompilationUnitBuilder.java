@@ -1215,10 +1215,24 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           .build();
     }
 
-    private YieldStatement convert(org.eclipse.jdt.core.dom.YieldStatement statement) {
+    private Statement convert(org.eclipse.jdt.core.dom.YieldStatement statement) {
+      Expression expression = convert(statement.getExpression());
+      SourcePosition sourcePosition = getSourcePosition(statement);
+      if (statement.isImplicit()
+          && statement.getParent() instanceof org.eclipse.jdt.core.dom.SwitchStatement) {
+        // In switch statements, a case rule with a single expression is desugared to
+        // as a yield.
+        return Block.newBuilder()
+            .setStatements(
+                expression.makeStatement(sourcePosition),
+                BreakStatement.newBuilder().setSourcePosition(sourcePosition).build())
+            .setSourcePosition(sourcePosition)
+            .build();
+      }
+
       return YieldStatement.newBuilder()
-          .setSourcePosition(getSourcePosition(statement))
-          .setExpression(convert(statement.getExpression()))
+          .setSourcePosition(sourcePosition)
+          .setExpression(expression)
           .build();
     }
 
@@ -1315,7 +1329,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
                   // Wasm backend relies on switch case constant for switch on integral values to be
                   // literals.
                   .map(this::convertAndFoldExpression)
-                  .collect(toImmutableList()));
+                  .collect(toImmutableList()))
+          .setCanFallthrough(!switchCase.isSwitchLabeledRule());
     }
 
     private SynchronizedStatement convert(

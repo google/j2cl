@@ -397,6 +397,72 @@ class SwitchStatement extends j_l_Object {
   }
  }
  /** @nodts */
+ m_testNonExhaustive_foldableFallThrough__int__void_$p_switchstatement_SwitchStatement(/** number */ i) {
+  switch (i) {
+   case 1:
+   case 2:
+   case 3:
+    break;
+   case 4:
+   default:
+    break;
+   case 5:
+   case 6:
+  }
+ }
+ /** @nodts */
+ static m_testSwitchStatement_withRules__void() {
+  let o = 0;
+  switch (1) {
+   default:
+    {
+     break;
+    }
+   case 2:
+    {
+     break;
+    }
+  }
+ }
+ /** @nodts @return {number} */
+ static m_testDefaultNotLast_withRules__int__boolean__int(/** number */ i, /** boolean */ doBreak) {
+  let result = 0;
+  switch (i) {
+   case 1:
+    {
+     result = 1;
+     if (doBreak) {
+      break;
+     }
+     result = 2;
+     break;
+    }
+   case 2:
+    {
+     break;
+    }
+   default:
+    {
+     break;
+    }
+   case 3:
+    {
+     result = 3;
+     break;
+    }
+   case 4:
+    {
+     SwitchStatement.m_foo__int();
+     break;
+    }
+  }
+  return result;
+ }
+ /** @nodts @return {number} */
+ static m_foo__int() {
+  return 1;
+ }
+ /** @nodts */
  m_foo__int__void_$p_switchstatement_SwitchStatement(/** number */ i) {}
  /** @nodts */
  static $clinit() {

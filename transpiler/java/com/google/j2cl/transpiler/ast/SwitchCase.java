@@ -28,14 +28,23 @@ import java.util.List;
 public class SwitchCase extends Node implements Cloneable<SwitchCase> {
   @Visitable List<Expression> caseExpressions;
   @Visitable List<Statement> statements;
+  private final boolean canFallthrough;
 
-  private SwitchCase(Collection<Expression> caseExpressions, Collection<Statement> statements) {
+  private SwitchCase(
+      Collection<Expression> caseExpressions,
+      Collection<Statement> statements,
+      boolean canFallthrough) {
     this.caseExpressions = new ArrayList<>(caseExpressions);
     this.statements = new ArrayList<>(statements);
+    this.canFallthrough = canFallthrough;
   }
 
   public boolean isDefault() {
     return caseExpressions.isEmpty();
+  }
+
+  public boolean canFallthrough() {
+    return canFallthrough;
   }
 
   public List<Expression> getCaseExpressions() {
@@ -51,6 +60,7 @@ public class SwitchCase extends Node implements Cloneable<SwitchCase> {
     return newBuilder()
         .setCaseExpressions(AstUtils.clone(caseExpressions))
         .setStatements(AstUtils.clone(statements))
+        .setCanFallthrough(canFallthrough)
         .build();
   }
 
@@ -67,11 +77,14 @@ public class SwitchCase extends Node implements Cloneable<SwitchCase> {
   public static class Builder {
     private List<Expression> caseExpressions = new ArrayList<>();
     private List<Statement> statements = new ArrayList<>();
+    // Switch cases may fallthrough by default.
+    private boolean canFallthrough = true;
 
     public static Builder from(SwitchCase switchCase) {
       return newBuilder()
           .setCaseExpressions(switchCase.getCaseExpressions())
-          .setStatements(switchCase.getStatements());
+          .setStatements(switchCase.getStatements())
+          .setCanFallthrough(switchCase.canFallthrough);
     }
 
     @CanIgnoreReturnValue
@@ -80,22 +93,37 @@ public class SwitchCase extends Node implements Cloneable<SwitchCase> {
       return this;
     }
 
+    @CanIgnoreReturnValue
+    public Builder addCaseExpressions(List<Expression> caseExpressions) {
+      this.caseExpressions.addAll(caseExpressions);
+      return this;
+    }
+
+    @CanIgnoreReturnValue
     public Builder setStatements(Collection<Statement> statements) {
       this.statements = new ArrayList<>(statements);
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder setStatements(Statement... statements) {
       return setStatements(Arrays.asList(statements));
     }
 
+    @CanIgnoreReturnValue
     public Builder addStatement(Statement statement) {
       this.statements.add(statement);
       return this;
     }
 
+    @CanIgnoreReturnValue
+    public Builder setCanFallthrough(boolean canFallthrough) {
+      this.canFallthrough = canFallthrough;
+      return this;
+    }
+
     public SwitchCase build() {
-      return new SwitchCase(caseExpressions, statements);
+      return new SwitchCase(caseExpressions, statements, canFallthrough);
     }
   }
 }
