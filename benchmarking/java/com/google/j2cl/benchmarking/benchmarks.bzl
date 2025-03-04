@@ -54,6 +54,7 @@ def benchmark(name, deps = [], data = [], jvm_only = False, perfgate_test_tags =
         name = "%s_local" % name,
         testonly = 1,
         main_class = "%s.%sLauncher" % (benchmark_java_package, name),
+        use_launcher = False,
         runtime_deps = [":%s_lib" % name],
         jvm_flags = JVM_FLAGS,
     )

@@ -46,6 +46,7 @@ java_binary(
         "-XX:+TieredCompilation",
     ],
     main_class = "com.google.j2cl.transpiler.J2clCommandLineRunner",
+    use_launcher = False,
     runtime_deps = [":commandlinerunner_lib"],
 )
 
@@ -106,6 +107,7 @@ java_binary(
     name = "BazelJ2clBuilder",
     jvm_flags = JVM_FLAGS,
     main_class = "com.google.j2cl.transpiler.BazelJ2clBuilder",
+    use_launcher = False,
     visibility = ["//build_defs/internal_do_not_use:__pkg__"],
     runtime_deps = [":bazelbuilder_lib"],
 )
@@ -114,6 +116,7 @@ java_binary(
     name = "BazelJ2wasmExportGenerator",
     jvm_flags = JVM_FLAGS,
     main_class = "com.google.j2cl.transpiler.BazelJ2wasmExportsGenerator",
+    use_launcher = False,
     visibility = ["//build_defs/internal_do_not_use:__pkg__"],
     runtime_deps = [":bazelwasmexportgenerator_lib"],
 )
@@ -122,6 +125,7 @@ java_binary(
     name = "BazelJ2wasmBundler",
     jvm_flags = JVM_FLAGS,
     main_class = "com.google.j2cl.transpiler.BazelJ2wasmBundler",
+    use_launcher = False,
     visibility = ["//build_defs/internal_do_not_use:__pkg__"],
     runtime_deps = [":bazelj2wasmbundler_lib"],
 )
