@@ -91,7 +91,7 @@ public final class ReadableSourceMapGenerator {
           new File(j2clUnitFilePath).getName(),
           java.nio.file.Files.readAllLines(Paths.get(j2clUnitFilePath)));
     } catch (IOException e) {
-      problems.fatal(FatalError.CANNOT_OPEN_FILE, e.toString());
+      problems.fatal(FatalError.CANNOT_OPEN_FILE, e.getMessage());
     }
     return contentsByFileNameBuilder.build();
   }

@@ -103,7 +103,7 @@ public final class PackageAnnotationsResolver {
     try {
       return Files.readString(Path.of(file.sourcePath()));
     } catch (IOException e) {
-      problems.fatal(FatalError.CANNOT_OPEN_FILE, e.toString());
+      problems.fatal(FatalError.CANNOT_OPEN_FILE, e.getMessage());
       return null;
     }
   }

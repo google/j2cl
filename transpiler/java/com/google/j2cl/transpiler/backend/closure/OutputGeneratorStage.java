@@ -215,7 +215,7 @@ public class OutputGeneratorStage {
       return SourceMapGeneratorStage.generateSourceMaps(
           type, javaSourcePositionByOutputSourcePosition);
     } catch (IOException e) {
-      problems.fatal(FatalError.CANNOT_WRITE_FILE, e.toString());
+      problems.fatal(FatalError.CANNOT_WRITE_FILE, e.getMessage());
       return null;
     }
   }

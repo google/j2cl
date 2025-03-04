@@ -114,7 +114,7 @@ public class JavacParser {
       }
       return Library.newBuilder().setCompilationUnits(compilationUnits.build()).build();
     } catch (IOException e) {
-      problems.fatal(FatalError.CANNOT_OPEN_FILE, e.toString());
+      problems.fatal(FatalError.CANNOT_OPEN_FILE, e.getMessage());
       return null;
     }
   }

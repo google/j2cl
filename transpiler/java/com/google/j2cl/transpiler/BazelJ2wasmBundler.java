@@ -590,7 +590,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
     try {
       Files.asCharSink(new File(filePath), UTF_8).writeLines(contents);
     } catch (IOException e) {
-      problems.fatal(FatalError.CANNOT_WRITE_FILE, e.toString());
+      problems.fatal(FatalError.CANNOT_WRITE_FILE, e.getMessage());
     }
   }
 

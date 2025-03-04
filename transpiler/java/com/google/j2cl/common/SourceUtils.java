@@ -26,6 +26,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
+import java.util.zip.ZipException;
 import javax.annotation.Nullable;
 
 /** Utilities for tools to process source files. */
@@ -103,8 +104,11 @@ public class SourceUtils {
       String zipPath, Path sourcesDir, Problems problems) {
     try {
       return ZipFiles.unzipFile(new File(zipPath), sourcesDir.toFile(), problems);
+    } catch (ZipException e) {
+      problems.fatal(FatalError.CANNOT_EXTRACT_ZIP, zipPath, e.getMessage());
+      return null;
     } catch (IOException e) {
-      problems.fatal(FatalError.CANNOT_EXTRACT_ZIP, zipPath);
+      problems.fatal(FatalError.CANNOT_OPEN_FILE, e.getMessage());
       return null;
     }
   }

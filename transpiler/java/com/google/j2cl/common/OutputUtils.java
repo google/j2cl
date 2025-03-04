@@ -70,7 +70,7 @@ public class OutputUtils {
         Files.write(outputPath, content);
         onFileCreation(outputPath);
       } catch (IOException e) {
-        problems.fatal(FatalError.CANNOT_WRITE_FILE, e.toString());
+        problems.fatal(FatalError.CANNOT_WRITE_FILE, e.getMessage());
       }
     }
 
@@ -84,7 +84,7 @@ public class OutputUtils {
         }
         onFileCreation(outputPath);
       } catch (IOException e) {
-        problems.fatal(FatalError.CANNOT_WRITE_FILE, e.toString());
+        problems.fatal(FatalError.CANNOT_WRITE_FILE, e.getMessage());
       }
     }
 
@@ -101,7 +101,7 @@ public class OutputUtils {
             from, to, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.COPY_ATTRIBUTES);
         onFileCreation(to);
       } catch (IOException e) {
-        problems.fatal(FatalError.CANNOT_COPY_FILE, e.toString());
+        problems.fatal(FatalError.CANNOT_COPY_FILE, e.getMessage());
       }
     }
 
@@ -202,7 +202,7 @@ public class OutputUtils {
       Files.createDirectories(outputPath.getParent());
       Files.write(outputPath, content);
     } catch (IOException e) {
-      problems.fatal(FatalError.CANNOT_WRITE_FILE, e.toString());
+      problems.fatal(FatalError.CANNOT_WRITE_FILE, e.getMessage());
     }
   }
 

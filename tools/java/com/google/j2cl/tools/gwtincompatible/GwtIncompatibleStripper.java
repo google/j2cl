@@ -70,7 +70,7 @@ public final class GwtIncompatibleStripper {
         String fileContent = MoreFiles.asCharSource(Paths.get(fileInfo.sourcePath()), UTF_8).read();
         processedFileContent = strip(fileContent, annotationNames);
       } catch (IOException e) {
-        problems.fatal(FatalError.CANNOT_OPEN_FILE, e.toString());
+        problems.fatal(FatalError.CANNOT_OPEN_FILE, e.getMessage());
         return;
       }
 

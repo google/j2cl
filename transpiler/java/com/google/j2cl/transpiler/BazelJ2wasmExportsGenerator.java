@@ -117,7 +117,7 @@ final class BazelJ2wasmExportsGenerator extends BazelWorker {
       try {
         classPathUrls.add(new File(classPathEntry).toURI().toURL());
       } catch (MalformedURLException e) {
-        problems.fatal(FatalError.CANNOT_OPEN_FILE, e.toString());
+        problems.fatal(FatalError.CANNOT_OPEN_FILE, e.getMessage());
       }
     }
 

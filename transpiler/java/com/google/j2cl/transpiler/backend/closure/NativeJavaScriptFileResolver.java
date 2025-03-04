@@ -60,7 +60,7 @@ final class NativeJavaScriptFileResolver {
           byFullyQualifiedName.put(nativeFile.getFullyQualifiedName(), nativeFile);
         }
       } catch (IOException e) {
-        problems.fatal(FatalError.CANNOT_OPEN_FILE, e.toString());
+        problems.fatal(FatalError.CANNOT_OPEN_FILE, e.getMessage());
       }
     }
 

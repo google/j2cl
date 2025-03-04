@@ -28,6 +28,7 @@ import java.util.Map;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 import java.util.zip.ZipEntry;
+import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 import javax.annotation.Nullable;
 import jsinterop.annotations.JsPackage;
@@ -142,8 +143,10 @@ public class PackageInfoCache {
           }
         }
         problems.abortIfCancelled();
+      } catch (ZipException e) {
+        problems.fatal(FatalError.CANNOT_EXTRACT_ZIP, classPathEntry, e.getMessage());
       } catch (IOException e) {
-        problems.fatal(FatalError.CANNOT_OPEN_FILE, e.toString());
+        problems.fatal(FatalError.CANNOT_OPEN_FILE, e.getMessage());
       }
     }
   }
@@ -189,7 +192,7 @@ public class PackageInfoCache {
               .setNullMarked(getAnnotation(annotations, NullMarked.class) != null)
               .build());
     } catch (IOException e) {
-      problems.fatal(FatalError.CANNOT_OPEN_FILE, e.toString());
+      problems.fatal(FatalError.CANNOT_OPEN_FILE, e.getMessage());
     }
   }
 

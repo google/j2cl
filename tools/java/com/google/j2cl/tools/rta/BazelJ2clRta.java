@@ -92,7 +92,7 @@ final class BazelJ2clRta extends BazelWorker {
     try {
       outputSink.writeLines(lines);
     } catch (IOException e) {
-      problems.fatal(FatalError.CANNOT_WRITE_FILE, e.toString());
+      problems.fatal(FatalError.CANNOT_WRITE_FILE, e.getMessage());
     }
   }
 
@@ -100,7 +100,7 @@ final class BazelJ2clRta extends BazelWorker {
     try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(filePath))) {
       results.writeTo(outputStream);
     } catch (IOException e) {
-      problems.fatal(FatalError.CANNOT_WRITE_FILE, e.toString());
+      problems.fatal(FatalError.CANNOT_WRITE_FILE, e.getMessage());
     }
   }
 

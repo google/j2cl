@@ -195,7 +195,7 @@ public final class SummaryBuilder {
     try {
       return JsonFormat.printer().print(build());
     } catch (IOException e) {
-      problems.fatal(FatalError.CANNOT_WRITE_FILE, e.toString());
+      problems.fatal(FatalError.CANNOT_WRITE_FILE, e.getMessage());
       return null;
     }
   }
