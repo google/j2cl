@@ -160,14 +160,7 @@ class Mat33 : Serializable {
   }
 
   override fun equals(other: Any?): Boolean {
-    if (this === other) return true
-    if (other == null) return false
-    if (this::class != other::class) return false
-    if (other !is Mat33) return false
-    if (ex != other.ex) return false
-    if (ey != other.ey) return false
-    if (ez != other.ez) return false
-    return true
+    return equalsOther(other) { ex == it.ex && ey == it.ey && ez == it.ez }
   }
 
   companion object {

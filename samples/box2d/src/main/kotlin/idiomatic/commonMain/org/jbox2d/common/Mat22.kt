@@ -366,13 +366,7 @@ class Mat22 : Serializable {
   }
 
   override fun equals(other: Any?): Boolean {
-    if (this === other) return true
-    if (other == null) return false
-    if (this::class != other::class) return false
-    if (other !is Mat22) return false
-    if (ex != other.ex) return false
-    if (ey != other.ey) return false
-    return true
+    return equalsOther(other) { ex == it.ex && ey == it.ey }
   }
 
   companion object {
