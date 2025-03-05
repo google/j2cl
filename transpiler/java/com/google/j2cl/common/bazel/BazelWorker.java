@@ -25,6 +25,7 @@ import com.google.j2cl.common.Problems;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.Duration;
 import java.util.List;
 import java.util.function.Supplier;
 import org.kohsuke.args4j.CmdLineException;
@@ -91,6 +92,7 @@ public abstract class BazelWorker {
                         workerSupplier.get().processRequest(request.getArgumentsList(), pw)),
                 System.err,
                 new ProtoWorkerMessageProcessor(System.in, System.out))
+            .setIdleTimeBeforeGc(Duration.ofSeconds(4))
             .build();
     workerHandler.processRequests();
   }
