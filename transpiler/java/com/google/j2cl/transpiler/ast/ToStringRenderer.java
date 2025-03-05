@@ -192,6 +192,12 @@ class ToStringRenderer {
       }
 
       @Override
+      public boolean enterEmbeddedStatement(EmbeddedStatement embeddedStatement) {
+        accept(embeddedStatement.getStatement());
+        return false;
+      }
+
+      @Override
       public boolean enterExpression(Expression expression) {
         print("<expr>");
         return false;
@@ -421,6 +427,10 @@ class ToStringRenderer {
       @Override
       public boolean enterYieldStatement(YieldStatement yieldStatement) {
         print("yield");
+        if (yieldStatement.getLabelReference() != null) {
+          print("@");
+          accept(yieldStatement.getLabelReference());
+        }
         if (yieldStatement.getExpression() != null) {
           print(" ");
           accept(yieldStatement.getExpression());
@@ -453,7 +463,7 @@ class ToStringRenderer {
           print("case ");
           printSeparated(", ", switchCase.getCaseExpressions());
         }
-        print(getParent() instanceof SwitchExpression ? " ->" : ":");
+        print(switchCase.canFallthrough() ? ":" : " ->");
         indent();
         for (Statement statement : switchCase.getStatements()) {
           newLine();
