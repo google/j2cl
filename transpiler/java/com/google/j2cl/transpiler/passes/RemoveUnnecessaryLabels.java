@@ -31,6 +31,7 @@ import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.LoopStatement;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.Statement;
+import com.google.j2cl.transpiler.ast.YieldStatement;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -224,6 +225,23 @@ public class RemoveUnnecessaryLabels extends NormalizationPass {
             }
 
             return breakOrContinueStatement.toBuilder()
+                .setLabelReference(replacementLabel.createReference())
+                .build();
+          }
+
+          @Override
+          public Node rewriteYieldStatement(YieldStatement yieldStatement) {
+            if (yieldStatement.getLabelReference() == null) {
+              return yieldStatement;
+            }
+
+            Label replacementLabel =
+                labelReplacementMap.get(yieldStatement.getLabelReference().getTarget());
+            if (replacementLabel == null) {
+              return yieldStatement;
+            }
+
+            return YieldStatement.Builder.from(yieldStatement)
                 .setLabelReference(replacementLabel.createReference())
                 .build();
           }

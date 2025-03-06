@@ -87,15 +87,14 @@ public class SwitchExpression {
 
   private static void testFallthroughSwitchExpression() {
     int o = 0;
-    // TODO(b/399886374): Uncomment when fixed.
-    // long i =
-    //     switch (1) {
-    //       default:
-    //         o = 1;
-    //       case 2:
-    //         yield 1;
-    //       case 1:
-    //         yield 2;
-    //     };
+    long i =
+        switch (1) {
+          default:
+            o = 1;
+          case 2:
+            yield 1;
+          case 1:
+            yield 2;
+        };
   }
 }

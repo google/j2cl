@@ -27,6 +27,7 @@ import com.google.j2cl.transpiler.ast.BooleanLiteral
 import com.google.j2cl.transpiler.ast.CastExpression
 import com.google.j2cl.transpiler.ast.ConditionalExpression
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
+import com.google.j2cl.transpiler.ast.EmbeddedStatement
 import com.google.j2cl.transpiler.ast.Expression
 import com.google.j2cl.transpiler.ast.Expression.Precedence
 import com.google.j2cl.transpiler.ast.ExpressionWithComment
@@ -168,6 +169,7 @@ internal data class ExpressionRenderer(
       is BinaryExpression -> binaryExpressionSource(expression)
       is CastExpression -> castExpressionSource(expression)
       is ConditionalExpression -> conditionalExpressionSource(expression)
+      is EmbeddedStatement -> embeddedStatementSource(expression)
       is ExpressionWithComment -> expressionWithCommentSource(expression)
       is FieldAccess -> fieldAccessSource(expression)
       is FunctionExpression -> functionExpressionSource(expression)
@@ -290,6 +292,20 @@ internal data class ExpressionRenderer(
       expressionSource(conditionalExpression.trueExpression),
       ELSE_KEYWORD,
       expressionSource(conditionalExpression.falseExpression),
+    )
+
+  private fun embeddedStatementSource(embeddedStatement: EmbeddedStatement): Source =
+    // Render embedded statements as:
+    // run {
+    //        ...stmts...
+    //        return@run ...  // We render `YieldStatements` like `ReturnStatement` where
+    //                        // the label is passed in the context here.
+    // }
+    spaceSeparated(
+      nameRenderer.extensionMemberQualifiedNameSource("kotlin.run"),
+      statementRenderer
+        .copy(currentReturnLabelIdentifier = "run")
+        .statementsSource(listOf(embeddedStatement.statement)),
     )
 
   private fun expressionWithCommentSource(expressionWithComment: ExpressionWithComment): Source =

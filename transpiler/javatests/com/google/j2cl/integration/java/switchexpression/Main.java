@@ -233,33 +233,32 @@ public class Main {
   }
 
   private static void testFallthroughSwitchExpression() {
-    // TODO(b/399886374): Enable once the bug is fixed.
-    // int i = 0;
-    // int sideeffect = 0;
-    // int result =
-    //     switch (0) {
-    //       default:
-    //         sideeffect = 1;
-    //       case 1:
-    //         yield 1;
-    //       case 2:
-    //         yield 2;
-    //     };
-    // assertTrue(1 == result);
-    // assertTrue(1 == sideeffect);
-    //
-    // sideeffect = 0;
-    // result =
-    //     switch (2) {
-    //       default:
-    //         sideeffect = 1;
-    //       case 1:
-    //         yield 1;
-    //       case 2:
-    //         yield 2;
-    //     };
-    // assertTrue(2 == result);
-    // assertTrue(0 == sideeffect);
+    int i = 0;
+    int sideeffect = 0;
+    int result =
+        switch (0) {
+          default:
+            sideeffect = 1;
+          case 1:
+            yield 1;
+          case 2:
+            yield 2;
+        };
+    assertTrue(1 == result);
+    assertTrue(1 == sideeffect);
+
+    sideeffect = 0;
+    result =
+        switch (2) {
+          default:
+            sideeffect = 1;
+          case 1:
+            yield 1;
+          case 2:
+            yield 2;
+        };
+    assertTrue(2 == result);
+    assertTrue(0 == sideeffect);
   }
 
   private static void testAutoboxing() {

@@ -110,6 +110,16 @@ class SwitchExpression extends j_l_Object {
  /** @nodts */
  static m_testFallthroughSwitchExpression__void() {
   let o = 0;
+  let i = (() =>{
+   switch (1) {
+    default:
+     o = 1;
+    case 2:
+     return $Long.fromInt(1);
+    case 1:
+     return $Long.fromInt(2);
+   }
+  })();
  }
  /** @nodts */
  static $clinit() {

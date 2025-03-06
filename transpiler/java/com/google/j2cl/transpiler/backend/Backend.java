@@ -149,7 +149,7 @@ import com.google.j2cl.transpiler.passes.NormalizeStaticMemberQualifiers;
 import com.google.j2cl.transpiler.passes.NormalizeStaticNativeMemberReferences;
 import com.google.j2cl.transpiler.passes.NormalizeSuperMemberReferences;
 import com.google.j2cl.transpiler.passes.NormalizeSwitchConstructs;
-import com.google.j2cl.transpiler.passes.NormalizeSwitchStatementsJ2kt;
+import com.google.j2cl.transpiler.passes.NormalizeSwitchConstructsJ2kt;
 import com.google.j2cl.transpiler.passes.NormalizeSynchronizedConstructs;
 import com.google.j2cl.transpiler.passes.NormalizeSystemGetPropertyCalls;
 import com.google.j2cl.transpiler.passes.NormalizeTryWithResources;
@@ -763,7 +763,7 @@ public enum Backend {
           NormalizeLabels::new,
           NormalizeForStatements::new,
           MarkNoFallthroughSwitchCases::new,
-          NormalizeSwitchStatementsJ2kt::new,
+          NormalizeSwitchConstructsJ2kt::new,
           NormalizeLabeledStatements::new,
           () -> new NormalizeShifts(/* narrowAllToInt= */ true),
           NormalizeNumberLiterals::new,

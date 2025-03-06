@@ -351,9 +351,36 @@
 (func $m_testFallthroughSwitchExpression__void@switchexpression.SwitchExpression
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:88:22
  (local $o i32)
+ (local $i i64)
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:89:4
   (local.set $o (i32.const 0))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:90:4
+  (local.set $i 
+  (block $SWITCH (result i64)
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:91:8
+   (block
+    (block
+     (block
+      (block ;; evaluate expression and jump
+       (br_table 2 1 0 (i32.sub (i32.const 1) (i32.const 1)))
+      )
+      ;; default:
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:93:12
+      (local.set $o (i32.const 1))
+     )
+     ;; case 2:
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:95:12
+     (i64.const 1)
+     (br $SWITCH)
+    )
+    ;; case 1:
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchexpression/readable-j2wasm.js/switchexpression/SwitchExpression.java:97:12
+    (i64.const 2)
+    (br $SWITCH)
+   )
+   (unreachable)
+  ))
  )
 )
 

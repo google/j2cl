@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.auto.value.AutoValue;
@@ -29,11 +30,13 @@ import com.google.j2cl.transpiler.ast.BreakOrContinueStatement;
 import com.google.j2cl.transpiler.ast.BreakStatement;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DoWhileStatement;
+import com.google.j2cl.transpiler.ast.EmbeddedStatement;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.IfStatement;
 import com.google.j2cl.transpiler.ast.Label;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
+import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
@@ -42,8 +45,13 @@ import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SwitchCase;
 import com.google.j2cl.transpiler.ast.SwitchExpression;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
+import com.google.j2cl.transpiler.ast.ThrowStatement;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.ast.YieldStatement;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Normalizes switch statement for Kotlin, into cascading labeled blocks.
@@ -85,7 +93,7 @@ import java.util.List;
  * }
  * }</pre>
  */
-public class NormalizeSwitchStatementsJ2kt extends NormalizationPass {
+public class NormalizeSwitchConstructsJ2kt extends NormalizationPass {
   /** Case/label pair. */
   @AutoValue
   abstract static class SwitchCaseWithLabel {
@@ -96,10 +104,82 @@ public class NormalizeSwitchStatementsJ2kt extends NormalizationPass {
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
+    convertFallThroughSwitchExpressionsToSwitchStatements(compilationUnit);
     normalizeSwitchStatements(compilationUnit);
     convertToSwitchExpression(compilationUnit);
     reorderSwitchCases(compilationUnit);
     removeTrailingBreaks(compilationUnit);
+  }
+
+  /** Converts switch expressions that have non fallthrough cases into switch statements. */
+  private void convertFallThroughSwitchExpressionsToSwitchStatements(
+      CompilationUnit compilationUnit) {
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          final Map<SwitchExpression, Label> assignedLabelBySwitchExpression = new HashMap<>();
+
+          @Override
+          public Expression rewriteSwitchExpression(SwitchExpression switchExpression) {
+            if (!switchExpression.canFallthrough()) {
+              // Can be left as a switch expression, since those are rendered directly as `when`
+              // expressions.
+              return switchExpression;
+            }
+
+            // Since it has fallthroughs and can not be converted directly to a `when` expression,
+            // lower it into a `switch` statement with a label (which is necessary since at this
+            // point all potential targets of breaks are assumed labeled). At the end it will be
+            // enclosed into an embedded statement to handle the return value.
+            var switchStatement =
+                SwitchStatement.Builder.from(switchExpression)
+                    .build()
+                    .encloseWithLabel(getLabel(switchExpression));
+
+            // Switch expressions are always exhaustive, but in some situations the kotlin compiler
+            // can not determine that statically and might fail to compile the generated code.
+            // To avoid the issue add `throw new AssertionError();` after the `switch statement`
+            // to help kotlinc to determine that all the exits are within the switch statement.
+            var throwStatement =
+                ThrowStatement.newBuilder()
+                    .setExpression(
+                        NewInstance.newBuilder()
+                            .setTarget(
+                                TypeDescriptors.get()
+                                    .javaLangAssertionError
+                                    .getDefaultConstructorMethodDescriptor())
+                            .build())
+                    .setSourcePosition(switchExpression.getSourcePosition())
+                    .build();
+
+            return EmbeddedStatement.newBuilder()
+                .setStatement(
+                    Block.newBuilder().setStatements(switchStatement, throwStatement).build())
+                .setTypeDescriptor(switchExpression.getTypeDescriptor())
+                .build();
+          }
+
+          @Override
+          public Node rewriteYieldStatement(YieldStatement yieldStatement) {
+            SwitchExpression enclosingSwitchExpression =
+                (SwitchExpression) getParent(SwitchExpression.class::isInstance);
+            if (!enclosingSwitchExpression.canFallthrough()) {
+              return yieldStatement;
+            }
+
+            // TODO(b/391582571): the actual target of the yield is the enclosing embedded statement
+            // but the label is on the switch.
+
+            // Add the target label for correctness.
+            return YieldStatement.Builder.from(yieldStatement)
+                .setLabelReference(getLabel(enclosingSwitchExpression).createReference())
+                .build();
+          }
+
+          private Label getLabel(SwitchExpression switchExpression) {
+            return assignedLabelBySwitchExpression.computeIfAbsent(
+                checkNotNull(switchExpression), s -> Label.newBuilder().setName("SWITCH").build());
+          }
+        });
   }
 
   /** Normalizes switch statements to simplify the conversion to switch expressions . */
@@ -185,7 +265,7 @@ public class NormalizeSwitchStatementsJ2kt extends NormalizationPass {
     return switchCases.stream()
         .map(
             switchCase ->
-                new AutoValue_NormalizeSwitchStatementsJ2kt_SwitchCaseWithLabel(
+                new AutoValue_NormalizeSwitchConstructsJ2kt_SwitchCaseWithLabel(
                     switchCase, Label.newBuilder().setName("CASE").build()))
         .collect(toImmutableList());
   }

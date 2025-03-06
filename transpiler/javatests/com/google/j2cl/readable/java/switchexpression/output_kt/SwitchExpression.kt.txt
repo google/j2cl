@@ -19,6 +19,7 @@
 package switchexpression
 
 import javaemul.lang.*
+import java.lang.AssertionError
 import java.lang.RuntimeException
 import kotlin.Int
 import kotlin.Long
@@ -138,7 +139,33 @@ open class SwitchExpression {
 
   @JvmStatic
   private fun testFallthroughSwitchExpression() {
-   val o: Int = 0
+   var o: Int = 0
+   val i: Long = run {
+    SWITCH@ do {
+     CASE@ do {
+      CASE_1@ do {
+       do {
+        when (1) {
+         2 -> {
+          break@CASE_1
+         }
+         1 -> {
+          break@CASE
+         }
+         else -> {
+          break
+         }
+        }
+        break@SWITCH
+       } while (false)
+       o = 1
+      } while (false)
+      return@run 1L
+     } while (false)
+     return@run 2L
+    } while (false)
+    throw AssertionError()
+   }
   }
  }
 
