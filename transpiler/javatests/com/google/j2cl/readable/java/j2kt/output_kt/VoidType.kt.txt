@@ -40,6 +40,18 @@ open class VoidType {
    val nullableBoundsWithNullableVoid: VoidType.NullableBounds<Void?>? = null
    val nonNullBoundsWithNonNullVoid: VoidType.NonNullBounds<Void>? = null
    val voidClass: Class<Void>? = null
+   val nonNullVoidConsumer: VoidType.Consumer<Void?> = VoidType.Consumer<Void?> { v: Void? ->
+    v.hashCode()
+   }
+   val nullableVoidConsumer: VoidType.Consumer<Void?> = VoidType.Consumer<Void?> { v_1: Void? ->
+    v_1!!.hashCode()
+   }
+   val nonNullVoidConsumerWildcard: VoidType.Consumer<*> = VoidType.Consumer<Void?> { v_2: Void? ->
+    v_2.hashCode()
+   }
+   val nullableVoidConsumerWildcard: VoidType.Consumer<*> = VoidType.Consumer<Void?> { v_3: Void? ->
+    v_3!!.hashCode()
+   }
   }
  }
 
@@ -48,4 +60,12 @@ open class VoidType {
 
  @ObjCName("J2ktJ2ktVoidType_NonNullBounds", swiftName = "J2ktVoidType_NonNullBounds", exact = true)
  interface NonNullBounds<T: Any>
+
+ @ObjCName("J2ktJ2ktVoidType_Consumer", swiftName = "J2ktVoidType_Consumer", exact = true)
+ fun interface Consumer<V: Void?> {
+  @ObjCName("accept")
+  fun accept(
+   @ObjCName("withJavaLangVoid") v: V
+  )
+ }
 }

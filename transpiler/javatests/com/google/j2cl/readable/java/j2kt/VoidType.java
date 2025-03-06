@@ -24,6 +24,10 @@ public class VoidType {
 
   interface NonNullBounds<T> {}
 
+  interface Consumer<V extends @Nullable Void> {
+    void accept(V v);
+  }
+
   static void testVoid() {
     Void nonNullVoid;
     @Nullable Void nullableVoid;
@@ -31,5 +35,9 @@ public class VoidType {
     NullableBounds<@Nullable Void> nullableBoundsWithNullableVoid;
     NonNullBounds<Void> nonNullBoundsWithNonNullVoid;
     Class<Void> voidClass;
+    Consumer<Void> nonNullVoidConsumer = v -> v.hashCode();
+    Consumer<@Nullable Void> nullableVoidConsumer = v -> v.hashCode();
+    Consumer<?> nonNullVoidConsumerWildcard = (Void v) -> v.hashCode();
+    Consumer<?> nullableVoidConsumerWildcard = (@Nullable Void v) -> v.hashCode();
   }
 }
