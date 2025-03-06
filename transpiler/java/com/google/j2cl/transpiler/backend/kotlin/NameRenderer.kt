@@ -32,16 +32,16 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source
 internal data class NameRenderer
 private constructor(
   val environment: Environment,
-  val withJ2ktPrefix: Boolean,
+  val objCNamePrefix: String,
   private val localTypeNameMap: Map<String, String>,
   private val localFieldNames: Set<String>,
 ) {
   constructor(
     environment: Environment,
-    withJ2ktPrefix: Boolean,
+    objCNamePrefix: String,
   ) : this(
     environment,
-    withJ2ktPrefix = withJ2ktPrefix,
+    objCNamePrefix = objCNamePrefix,
     localTypeNameMap = mapOf(),
     localFieldNames = setOf(),
   )

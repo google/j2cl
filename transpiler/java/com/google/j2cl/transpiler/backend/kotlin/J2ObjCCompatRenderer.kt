@@ -86,7 +86,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.join
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
 
-internal class J2ObjCCompatRenderer(private val withJ2ktPrefix: Boolean) {
+internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
   internal fun source(compilationUnit: CompilationUnit): Source =
     dependenciesAndDeclarationsSource(compilationUnit).ifNotEmpty {
       emptyLineSeparated(fileCommentSource(compilationUnit), it) + Source.NEW_LINE
@@ -113,9 +113,11 @@ internal class J2ObjCCompatRenderer(private val withJ2ktPrefix: Boolean) {
   private fun shouldRender(type: Type): Boolean = shouldRender(type.declaration)
 
   private fun declarationsRenderers(type: Type): List<Renderer<Source>> = buildList {
-    add(aliasDeclarationRenderer(type.declaration))
-
-    type.toCompanionObjectOrNull()?.let { add(aliasDeclarationRenderer(it.declaration)) }
+    // Don't render compatibility aliases if ObjC name prefix is empty.
+    if (objCNamePrefix.isNotEmpty()) {
+      add(aliasDeclarationRenderer(type.declaration))
+      type.toCompanionObjectOrNull()?.let { add(aliasDeclarationRenderer(it.declaration)) }
+    }
 
     if (type.isEnum) {
       add(nsEnumTypedefRenderer(type))
@@ -388,7 +390,7 @@ internal class J2ObjCCompatRenderer(private val withJ2ktPrefix: Boolean) {
     rendererOf(source(variable.name.objCName.escapeObjCKeyword))
 
   private fun objCNameRenderer(companionDeclaration: CompanionDeclaration): Renderer<Source> =
-    className(companionDeclaration.objCName(withJ2ktPrefix))
+    className(companionDeclaration.objCName(objCNamePrefix))
 
   private fun sharedRenderer(companionDeclaration: CompanionDeclaration): Renderer<Source> =
     getProperty(objCNameRenderer(companionDeclaration), "shared")
@@ -412,7 +414,7 @@ internal class J2ObjCCompatRenderer(private val withJ2ktPrefix: Boolean) {
     }
 
   private fun nonMappedObjCNameRenderer(typeDeclaration: TypeDeclaration): Renderer<Source> =
-    objCNameRenderer(typeDeclaration.kind, typeDeclaration.objCName(withPrefix = withJ2ktPrefix))
+    objCNameRenderer(typeDeclaration.kind, typeDeclaration.objCName(prefix = objCNamePrefix))
 
   private fun objCNameRenderer(kind: TypeDeclaration.Kind, name: String): Renderer<Source> =
     when (kind) {

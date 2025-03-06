@@ -143,6 +143,9 @@ final class BazelJ2clBuilder extends BazelWorker {
   @Option(name = "-experimentalDefineForWasm", handler = MapOptionHandler.class, hidden = true)
   Map<String, String> definesForWasm = new HashMap<>();
 
+  @Option(name = "-objCNamePrefix", hidden = true)
+  String objCNamePrefix = "J2kt";
+
   @Override
   protected void run() {
     problems.abortIfCancelled();
@@ -225,6 +228,7 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setNullMarkedSupported(this.enableJSpecifySupport)
         .setKotlincOptions(kotlincOptions)
         .setForbiddenAnnotations(forbiddenAnnotations)
+        .setObjCNamePrefix(objCNamePrefix)
         .build(problems);
   }
 

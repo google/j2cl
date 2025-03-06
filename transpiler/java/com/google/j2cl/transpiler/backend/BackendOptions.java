@@ -50,4 +50,6 @@ public interface BackendOptions {
   boolean getGenerateKytheIndexingMetadata();
 
   boolean isNullMarkedSupported();
+
+  String getObjCNamePrefix();
 }

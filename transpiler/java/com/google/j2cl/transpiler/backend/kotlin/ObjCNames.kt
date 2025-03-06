@@ -113,10 +113,7 @@ internal fun Method.toNonConstructorObjCNames(): MethodObjCNames =
 private val String.objCMethodParameterNames: List<String>
   get() = letIf(lastOrNull() == ':') { dropLast(1) }.split(":")
 
-private const val OBJC_TYPE_NAME_PREFIX: String = "J2kt"
-
-internal fun TypeDeclaration.objCName(withPrefix: Boolean): String =
-  objCNameWithoutPrefix.letIf(withPrefix) { OBJC_TYPE_NAME_PREFIX + it }
+internal fun TypeDeclaration.objCName(prefix: String): String = prefix + objCNameWithoutPrefix
 
 internal val TypeDeclaration.objCNameWithoutPrefix: String
   get() = mappedObjCName ?: nonMappedObjCName
@@ -124,8 +121,8 @@ internal val TypeDeclaration.objCNameWithoutPrefix: String
 private val String.objCCompanionTypeName: String
   get() = this + "Companion"
 
-internal fun CompanionDeclaration.objCName(withPrefix: Boolean) =
-  enclosingTypeDeclaration.objCName(withPrefix).objCCompanionTypeName
+internal fun CompanionDeclaration.objCName(prefix: String) =
+  enclosingTypeDeclaration.objCName(prefix).objCCompanionTypeName
 
 internal val CompanionDeclaration.objCNameWithoutPrefix
   get() = enclosingTypeDeclaration.objCNameWithoutPrefix.objCCompanionTypeName

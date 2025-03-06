@@ -104,6 +104,8 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
 
     public abstract Builder setForbiddenAnnotations(List<String> forbiddenAnnotations);
 
+    public abstract Builder setObjCNamePrefix(String objCNamePrefix);
+
     abstract J2clTranspilerOptions autoBuild();
 
     public J2clTranspilerOptions build(Problems problems) {

@@ -128,6 +128,9 @@ public final class J2clCommandLineRunner extends CommandLineTool {
   @Option(name = "-defineForWasm", handler = MapOptionHandler.class, hidden = true)
   Map<String, String> definesForWasm = new HashMap<>();
 
+  @Option(name = "-objCNamePrefix", hidden = true)
+  String objCNamePrefix = "J2kt";
+
   private J2clCommandLineRunner() {
     super("j2cl");
   }
@@ -201,6 +204,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
         .setNullMarkedSupported(this.enableJSpecifySupport)
         .setKotlincOptions(kotlincOptions)
         .setForbiddenAnnotations(forbiddenAnnotations)
+        .setObjCNamePrefix("J2kt")
         .build(problems);
   }
 

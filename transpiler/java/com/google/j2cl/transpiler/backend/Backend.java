@@ -694,7 +694,7 @@ public enum Backend {
   KOTLIN {
     @Override
     public void generateOutputs(BackendOptions options, Library library, Problems problems) {
-      new KotlinGeneratorStage(options.getOutput(), problems, /* withJ2ktPrefix= */ true)
+      new KotlinGeneratorStage(options.getOutput(), problems, options.getObjCNamePrefix())
           .generateOutputs(library);
     }
 
