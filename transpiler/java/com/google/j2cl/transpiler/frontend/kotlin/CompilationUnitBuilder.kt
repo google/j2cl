@@ -75,7 +75,6 @@ import com.google.j2cl.transpiler.ast.TryStatement
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors
-import com.google.j2cl.transpiler.ast.TypeLiteral
 import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment
@@ -727,7 +726,7 @@ class CompilationUnitBuilder(
     return when (receiver) {
       // CLASS_REFERENCE is a literal class reference on a type, ex: Foo::class.
       is IrClassReference ->
-        toTypeLiteral(receiver.classType, getSourcePosition(irCall), wrapPrimitives)
+        environment.createTypeLiteral(receiver.classType, getSourcePosition(irCall), wrapPrimitives)
       // GET_CLASS is a literal class reference on an instance, ex: Foo()::class.
       is IrGetClass ->
         convertToGetClass(receiver.argument, getSourcePosition(irCall), wrapPrimitives)
@@ -747,37 +746,17 @@ class CompilationUnitBuilder(
       return MultiExpression.newBuilder()
         .addExpressions(
           convertedReceiver,
-          toTypeLiteral(receiver.type, sourcePosition, wrapPrimitives),
+          environment.createTypeLiteral(receiver.type, sourcePosition, wrapPrimitives),
         )
         .build()
     }
     return RuntimeMethods.createGetClassMethodCall(convertedReceiver)
   }
 
-  private fun toTypeLiteral(
-    irType: IrType,
-    sourcePosition: SourcePosition,
-    wrapPrimitives: Boolean,
-  ): TypeLiteral {
-    val typeDescriptor =
-      environment.getTypeDescriptor(irType).run {
-        // "Nothing" is a special case as we thread it through the J2CL AST as a stubbed type. In
-        // the context of Nothing::class it should be treated Void.
-        if (TypeDescriptors.isKotlinNothing(this)) {
-          TypeDescriptors.get().javaLangVoid
-        } else if (wrapPrimitives) {
-          toBoxedType()
-        } else {
-          this
-        }
-      }
-    return TypeLiteral(sourcePosition, typeDescriptor)
-  }
-
   private fun convertClassReference(expression: IrClassReference): Expression {
     val sourcePosition = getSourcePosition(expression)
     return RuntimeMethods.createKClassCall(
-      toTypeLiteral(expression.classType, sourcePosition, wrapPrimitives = false)
+      environment.createTypeLiteral(expression.classType, sourcePosition, wrapPrimitives = false)
     )
   }
 
@@ -790,7 +769,11 @@ class CompilationUnitBuilder(
     if (argument.typeDescriptor.isPrimitive) {
       val createKClassCall =
         RuntimeMethods.createKClassCall(
-          toTypeLiteral(expression.argument.type, sourcePosition, wrapPrimitives = false)
+          environment.createTypeLiteral(
+            expression.argument.type,
+            sourcePosition,
+            wrapPrimitives = false,
+          )
         )
       // Since we're not getting the class from the result of the argument, construct a
       // MultiExpression that executes the argument. This is to ensure any side effects still occur.

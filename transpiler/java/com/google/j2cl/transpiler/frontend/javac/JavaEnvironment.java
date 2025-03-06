@@ -62,6 +62,7 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.SourceLanguage;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.ast.TypeLiteral;
 import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Variable;
@@ -1610,7 +1611,7 @@ class JavaEnvironment {
         .filter(annotationMirror -> isSupportedAnnotation(getAnnotationName(annotationMirror)))
         .map(
             annotationMirror ->
-                newAnnotationBuilder(annotationMirror.getElementValues())
+                newAnnotationBuilder(annotationMirror.getElementValues(), inNullMarkedScope)
                     .setTypeDescriptor(
                         createDeclaredType(annotationMirror.getAnnotationType(), inNullMarkedScope))
                     .build())
@@ -1618,17 +1619,27 @@ class JavaEnvironment {
   }
 
   private Annotation.Builder newAnnotationBuilder(
-      Map<? extends ExecutableElement, ? extends AnnotationValue> values) {
+      Map<? extends ExecutableElement, ? extends AnnotationValue> values,
+      boolean inNullMarkedScope) {
     Annotation.Builder annotationBuilder = Annotation.newBuilder();
     for (var valuePair : values.entrySet()) {
-      TypeDescriptor elementType = createTypeDescriptor(valuePair.getKey().getReturnType());
-      if (!TypeDescriptors.isBoxedOrPrimitiveType(elementType)
-          && !TypeDescriptors.isJavaLangString(elementType)) {
-        // TODO(b/395717310, b/397460318, b/395716783, b/395716773): Implement various
-        // member value types, then throw an exception here if unhandled.
+      TypeDescriptor elementType =
+          createTypeDescriptor(valuePair.getKey().getReturnType(), inNullMarkedScope);
+      Literal translatedValue;
+      if (TypeDescriptors.isBoxedOrPrimitiveType(elementType)
+          || TypeDescriptors.isJavaLangString(elementType)) {
+        translatedValue = Literal.fromValue(valuePair.getValue().getValue(), elementType);
+      } else if (TypeDescriptors.isJavaLangClass(elementType)) {
+        translatedValue =
+            new TypeLiteral(
+                SourcePosition.NONE,
+                createTypeDescriptor(
+                    (TypeMirror) valuePair.getValue().getValue(), inNullMarkedScope));
+      } else {
+        // TODO(b/397460318, b/395716783, b/395716773): Implement various member value types, then
+        // throw an exception here if unhandled.
         continue;
       }
-      Literal translatedValue = Literal.fromValue(valuePair.getValue().getValue(), elementType);
       annotationBuilder.addValue(valuePair.getKey().getSimpleName().toString(), translatedValue);
     }
     return annotationBuilder;

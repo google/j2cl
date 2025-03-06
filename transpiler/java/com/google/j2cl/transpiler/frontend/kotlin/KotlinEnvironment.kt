@@ -18,6 +18,7 @@
 package com.google.j2cl.transpiler.frontend.kotlin
 
 import com.google.common.collect.ImmutableList
+import com.google.j2cl.common.SourcePosition
 import com.google.j2cl.transpiler.ast.Annotation
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
@@ -34,6 +35,7 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration.SourceLanguage.KOTLIN
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors
 import com.google.j2cl.transpiler.ast.TypeDescriptors.SingletonBuilder
+import com.google.j2cl.transpiler.ast.TypeLiteral
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.Visibility
 import com.google.j2cl.transpiler.frontend.common.SupportedAnnotations
@@ -92,6 +94,7 @@ import org.jetbrains.kotlin.ir.declarations.IrFunction
 import org.jetbrains.kotlin.ir.declarations.IrPackageFragment
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.declarations.IrTypeParameter
+import org.jetbrains.kotlin.ir.expressions.IrClassReference
 import org.jetbrains.kotlin.ir.expressions.IrConst
 import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
 import org.jetbrains.kotlin.ir.symbols.IrTypeParameterSymbol
@@ -303,14 +306,17 @@ class KotlinEnvironment(
     annotationCtorCall: IrConstructorCall
   ): Annotation.Builder {
     for (i in 0 until annotationCtorCall.valueArgumentsCount) {
-      val value = annotationCtorCall.getValueArgument(i)
-      if (value !is IrConst) {
-        // TODO(b/395717310, b/397460318, b/395716783, b/395716773): Implement various member
-        // value types, then throw an exception here if unhandled.
-        continue
-      }
       val name = annotationCtorCall.symbol.owner.valueParameters[i].name.asString()
-      val translatedValue = Literal.fromValue(value.value, getTypeDescriptor(value.type))
+      val value = annotationCtorCall.getValueArgument(i)
+      val translatedValue =
+        when (value) {
+          is IrConst -> Literal.fromValue(value.value, getTypeDescriptor(value.type))
+          is IrClassReference ->
+            createTypeLiteral(value.classType, SourcePosition.NONE, wrapPrimitives = false)
+          // TODO(b/397460318, b/395716783, b/395716773): Implement various member value types, then
+          // throw an exception here if unhandled.
+          else -> continue
+        }
       addValue(name, translatedValue)
     }
     return this
@@ -723,6 +729,26 @@ class KotlinEnvironment(
     irDeclaration.parentClassOrNull?.let {
       getDeclaredTypeDescriptor(it.defaultType.makeNullable())
     }
+
+  fun createTypeLiteral(
+    irType: IrType,
+    sourcePosition: SourcePosition,
+    wrapPrimitives: Boolean,
+  ): TypeLiteral {
+    val typeDescriptor =
+      getTypeDescriptor(irType).run {
+        // "Nothing" is a special case as we thread it through the J2CL AST as a stubbed type. In
+        // the context of Nothing::class it should be treated Void.
+        if (TypeDescriptors.isKotlinNothing(this)) {
+          TypeDescriptors.get().javaLangVoid
+        } else if (wrapPrimitives) {
+          toBoxedType()
+        } else {
+          this
+        }
+      }
+    return TypeLiteral(sourcePosition, typeDescriptor)
+  }
 
   private val IrType.superClass: IrType?
     get() {

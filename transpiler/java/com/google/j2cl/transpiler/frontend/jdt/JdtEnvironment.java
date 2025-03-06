@@ -54,6 +54,7 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.SourceLanguage;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.ast.TypeLiteral;
 import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.Visibility;
@@ -1300,7 +1301,8 @@ public class JdtEnvironment {
                 isSupportedAnnotation(annotationBinding.getAnnotationType().getQualifiedName()))
         .map(
             annotationBinding ->
-                newAnnotationBuilder(annotationBinding.getDeclaredMemberValuePairs())
+                newAnnotationBuilder(
+                        annotationBinding.getDeclaredMemberValuePairs(), inNullMarkedScope)
                     .setTypeDescriptor(
                         createDeclaredType(
                             annotationBinding.getAnnotationType(), inNullMarkedScope))
@@ -1308,18 +1310,26 @@ public class JdtEnvironment {
         .collect(toImmutableList());
   }
 
-  private Annotation.Builder newAnnotationBuilder(IMemberValuePairBinding[] valuePairs) {
+  private Annotation.Builder newAnnotationBuilder(
+      IMemberValuePairBinding[] valuePairs, boolean inNullMarkedScope) {
     Annotation.Builder annotationBuilder = Annotation.newBuilder();
     for (IMemberValuePairBinding valuePair : valuePairs) {
       TypeDescriptor elementType =
-          createTypeDescriptor(valuePair.getMethodBinding().getReturnType());
-      if (!TypeDescriptors.isBoxedOrPrimitiveType(elementType)
-          && !TypeDescriptors.isJavaLangString(elementType)) {
-        // TODO(b/395717310, b/397460318, b/395716783, b/395716773): Implement various
-        // member value types, then throw an exception here if unhandled.
+          createTypeDescriptor(valuePair.getMethodBinding().getReturnType(), inNullMarkedScope);
+      Literal translatedValue;
+      if (TypeDescriptors.isBoxedOrPrimitiveType(elementType)
+          || TypeDescriptors.isJavaLangString(elementType)) {
+        translatedValue = Literal.fromValue(valuePair.getValue(), elementType);
+      } else if (TypeDescriptors.isJavaLangClass(elementType)) {
+        translatedValue =
+            new TypeLiteral(
+                SourcePosition.NONE,
+                createTypeDescriptor((ITypeBinding) valuePair.getValue(), inNullMarkedScope));
+      } else {
+        // TODO(b/397460318, b/395716783, b/395716773): Implement various member value types, then
+        // throw an exception here if unhandled.
         continue;
       }
-      Literal translatedValue = Literal.fromValue(valuePair.getValue(), elementType);
       annotationBuilder.addValue(valuePair.getName(), translatedValue);
     }
     return annotationBuilder;
