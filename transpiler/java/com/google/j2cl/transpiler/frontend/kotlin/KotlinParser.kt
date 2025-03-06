@@ -84,6 +84,23 @@ import org.jetbrains.kotlin.progress.ProgressIndicatorAndCompilationCanceledStat
 /** A parser for Kotlin sources that builds {@code CompilationtUnit}s. */
 class KotlinParser(private val problems: Problems) {
 
+  companion object {
+    // Track problems on a thread local so a cancelation doesn't effect other compilation threads.
+    private val globalProblems = ThreadLocal<Problems>()
+
+    init {
+      ProgressIndicatorAndCompilationCanceledStatus.setCompilationCanceledStatus(
+        object : CompilationCanceledStatus {
+          override fun checkCanceled() {
+            // throw CompilationCanceledException instead of our own which is properly handled by
+            // kotlinc to gracefully exit from the compilation.
+            if (globalProblems.get().isCancelled) throw CompilationCanceledException()
+          }
+        }
+      )
+    }
+  }
+
   /** Returns a list of compilation units after Kotlinc parsing. */
   fun parseFiles(options: FrontendOptions): Library {
     val packageInfoCache = PackageInfoCache(options.classpaths, problems)
@@ -98,17 +115,7 @@ class KotlinParser(private val problems: Problems) {
 
     val kotlincDisposable = Disposer.newDisposable("J2CL Root Disposable")
     try {
-      // TODO(b/148292139): This assumes single worker for given time and doesn't work with
-      // multiplex workers.
-      ProgressIndicatorAndCompilationCanceledStatus.setCompilationCanceledStatus(
-        object : CompilationCanceledStatus {
-          override fun checkCanceled() {
-            // throw CompilationCanceledException instead of our own which is properly handled by
-            // kotlinc to gracefully exit from the compilation.
-            if (problems.isCancelled) throw CompilationCanceledException()
-          }
-        }
-      )
+      globalProblems.set(problems)
 
       val compilationUnits =
         parseFiles(compilerConfiguration, kotlincDisposable, packageAnnotationResolver)
@@ -121,8 +128,6 @@ class KotlinParser(private val problems: Problems) {
       // Clean up disposable if we are not properly exiting to avoid memory leaks.
       Disposer.dispose(kotlincDisposable)
       throw e
-    } finally {
-      ProgressIndicatorAndCompilationCanceledStatus.setCompilationCanceledStatus(null)
     }
   }
 
