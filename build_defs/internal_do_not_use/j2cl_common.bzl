@@ -338,7 +338,10 @@ def _j2cl_transpile(
         executable = ctx.executable._j2cl_transpiler,
         arguments = [args],
         env = dict(LANG = "en_US.UTF-8"),
-        execution_requirements = {"supports-workers": "1"},
+        execution_requirements = {
+            "supports-workers": "1",
+            "supports-worker-cancellation": "1",
+        },
         mnemonic = "J2cl" if backend == "CLOSURE" else "J2wasm",
     )
 

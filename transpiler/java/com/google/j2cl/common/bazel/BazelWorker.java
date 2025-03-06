@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.Duration;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
@@ -65,6 +66,10 @@ public abstract class BazelWorker {
     return problems.reportAndGetExitCode(pw);
   }
 
+  private void cancel() {
+    problems.requestCancellation();
+  }
+
   public static final void start(String[] args, Supplier<BazelWorker> workerSupplier)
       throws Exception {
     if (args.length == 1 && args[0].equals("--persistent_worker")) {
@@ -85,13 +90,28 @@ public abstract class BazelWorker {
   }
 
   private static void runPersistentWorker(Supplier<BazelWorker> workerSupplier) throws IOException {
+    var activeWorkers = new ConcurrentHashMap<Integer, BazelWorker>();
     WorkRequestHandler workerHandler =
         new WorkRequestHandler.WorkRequestHandlerBuilder(
                 new WorkRequestHandler.WorkRequestCallback(
-                    (request, pw) ->
-                        workerSupplier.get().processRequest(request.getArgumentsList(), pw)),
+                    (request, pw) -> {
+                      BazelWorker worker = workerSupplier.get();
+                      activeWorkers.put(request.getRequestId(), worker);
+                      try {
+                        return worker.processRequest(request.getArgumentsList(), pw);
+                      } finally {
+                        activeWorkers.remove(request.getRequestId());
+                      }
+                    }),
                 System.err,
                 new ProtoWorkerMessageProcessor(System.in, System.out))
+            .setCancelCallback(
+                (requestId, thread) -> {
+                  BazelWorker worker = activeWorkers.get(requestId);
+                  if (worker != null) {
+                    worker.cancel();
+                  }
+                })
             .setIdleTimeBeforeGc(Duration.ofSeconds(4))
             .build();
     workerHandler.processRequests();
