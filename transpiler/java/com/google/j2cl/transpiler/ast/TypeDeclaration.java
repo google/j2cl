@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.ast;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableSet.toImmutableSet;
+import static com.google.common.collect.MoreCollectors.toOptional;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
@@ -326,11 +327,27 @@ public abstract class TypeDeclaration
     return getAnnotationsFactory().get();
   }
 
+  /** Returns whether the declaration has an annotation with the given qualified name. */
+  public boolean hasAnnotation(String qualifiedName) {
+    return getAnnotations().stream()
+        .anyMatch(
+            annotation ->
+                annotation.getTypeDescriptor().getQualifiedSourceName().equals(qualifiedName));
+  }
+
   /**
-   * Returns whether the described type is a test class, i.e. has the JUnit @RunWith annotation
-   * or @RunParameterized annotation.
+   * Returns the annotation on this declaration with the given qualified name, or {@code null} if
+   * not found. Throws an exception if more than one is found.
    */
-  public abstract boolean isTestClass();
+  @Nullable
+  public Annotation getAnnotation(String qualifiedName) {
+    return getAnnotations().stream()
+        .filter(
+            annotation ->
+                annotation.getTypeDescriptor().getQualifiedSourceName().equals(qualifiedName))
+        .collect(toOptional())
+        .orElse(null);
+  }
 
   @Memoized
   public boolean isJsFunctionImplementation() {
@@ -834,7 +851,6 @@ public abstract class TypeDeclaration
         .setAnnotatedWithAutoValue(false)
         .setAnnotatedWithAutoValueBuilder(false)
         .setAnnotationsFactory(ImmutableList::of)
-        .setTestClass(false)
         .setJsFunctionInterface(false)
         .setJsType(false)
         .setLocal(false)
@@ -916,8 +932,6 @@ public abstract class TypeDeclaration
 
     public abstract Builder setAnnotationsFactory(
         Supplier<ImmutableList<Annotation>> annotationsFactory);
-
-    public abstract Builder setTestClass(boolean isTestClass);
 
     public abstract Builder setJsFunctionInterface(boolean isJsFunctionInterface);
 

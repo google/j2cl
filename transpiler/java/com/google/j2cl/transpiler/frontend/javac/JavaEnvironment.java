@@ -1306,7 +1306,6 @@ class JavaEnvironment {
             isAnnotatedWithKotlinMetadata(typeElement)
                 ? SourceLanguage.KOTLIN
                 : SourceLanguage.JAVA)
-        .setTestClass(isTestClass(typeElement))
         .setJsType(JsInteropUtils.isJsType(typeElement))
         .setJsEnumInfo(jsEnumInfo)
         .setNative(JsInteropUtils.isJsNativeType(typeElement))
@@ -1643,11 +1642,6 @@ class JavaEnvironment {
       annotationBuilder.addValue(valuePair.getKey().getSimpleName().toString(), translatedValue);
     }
     return annotationBuilder;
-  }
-
-  private static boolean isTestClass(Element element) {
-    return hasAnnotation(element, "org.junit.runner.RunWith")
-        || hasAnnotation(element, "com.google.apps.xplat.testing.parameterized.RunParameterized");
   }
 
   // TODO(b/392124958): Remove this method that was copied from errorprone once we

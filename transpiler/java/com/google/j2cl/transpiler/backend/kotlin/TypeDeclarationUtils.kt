@@ -66,6 +66,15 @@ internal val MethodDescriptor.isOpen: Boolean
       !isStatic &&
       !visibility.isPrivate
 
+/**
+ * Returns whether the described type is a test class, i.e. has the JUnit `@RunWith` annotation or
+ * `@RunParameterized` annotation.
+ */
+internal val TypeDeclaration.isTestClass: Boolean
+  get() =
+    hasAnnotation("org.junit.runner.RunWith") ||
+      hasAnnotation("com.google.apps.xplat.testing.parameterized.RunParameterized")
+
 internal val Visibility.defaultMemberKtVisibility: KtVisibility
   get() =
     when (this) {

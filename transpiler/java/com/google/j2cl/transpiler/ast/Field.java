@@ -20,7 +20,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
-import java.util.Objects;
 import javax.annotation.Nullable;
 
 /** Field declaration node. */
@@ -62,26 +61,6 @@ public class Field extends Member {
 
   public boolean isCompileTimeConstant() {
     return fieldDescriptor.isCompileTimeConstant();
-  }
-
-  public boolean isKtLateInit() {
-    FieldDescriptor descriptor = getDescriptor();
-    boolean isTestProperty =
-        descriptor.getEnclosingTypeDescriptor().getTypeDeclaration().isTestClass()
-            || descriptor
-                .getEnclosingTypeDescriptor()
-                .getTypeDeclaration()
-                .getAllSuperTypesIncludingSelf()
-                .stream()
-                .anyMatch(
-                    type ->
-                        Objects.equals(type.getQualifiedSourceName(), "junit.framework.TestCase")
-                            || Objects.equals(type.getQualifiedSourceName(), "org.junit.TestCase"));
-
-    return (descriptor.getKtInfo().isUninitializedWarningSuppressed() || isTestProperty)
-        && !descriptor.isFinal()
-        && !descriptor.getTypeDescriptor().isNullable()
-        && !hasInitializer();
   }
 
   @Override

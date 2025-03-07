@@ -34,6 +34,9 @@ public class SupportedAnnotations {
           FrontendConstants.JS_PACKAGE_ANNOTATION_NAME,
           FrontendConstants.JS_PROPERTY_ANNOTATION_NAME,
           FrontendConstants.JS_TYPE_ANNOTATION_NAME,
+          // Test annotations
+          "org.junit.runner.RunWith",
+          "com.google.apps.xplat.testing.parameterized.RunParameterized",
           // Other
           FrontendConstants.KT_OBJECTIVE_C_NAME,
           FrontendConstants.J2KT_THROWS_ANNOTATION_NAME,

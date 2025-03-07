@@ -1185,7 +1185,6 @@ public class JdtEnvironment {
                 isAnnotatedWithKotlinMetadata(typeBinding)
                     ? SourceLanguage.KOTLIN
                     : SourceLanguage.JAVA)
-            .setTestClass(isTestClass(typeBinding))
             .setJsType(JsInteropUtils.isJsType(typeBinding))
             .setJsEnumInfo(JsInteropUtils.getJsEnumInfo(typeBinding))
             .setWasmInfo(getWasmInfo(typeBinding))
@@ -1333,12 +1332,6 @@ public class JdtEnvironment {
       annotationBuilder.addValue(valuePair.getName(), translatedValue);
     }
     return annotationBuilder;
-  }
-
-  private static boolean isTestClass(ITypeBinding typeBinding) {
-    return JdtAnnotationUtils.hasAnnotation(typeBinding, "org.junit.runner.RunWith")
-        || JdtAnnotationUtils.hasAnnotation(
-            typeBinding, "com.google.apps.xplat.testing.parameterized.RunParameterized");
   }
 
   private static boolean isAnnotatedWithHasNoSideEffects(IMethodBinding methodBinding) {
