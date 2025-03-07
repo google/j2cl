@@ -166,7 +166,7 @@ import com.google.j2cl.transpiler.passes.OptimizeXplatForEach;
 import com.google.j2cl.transpiler.passes.PreventSmartCasts;
 import com.google.j2cl.transpiler.passes.PropagateCompileTimeConstants;
 import com.google.j2cl.transpiler.passes.PropagateConstants;
-import com.google.j2cl.transpiler.passes.PropagateNullabilityJ2kt;
+import com.google.j2cl.transpiler.passes.PropagateNullabilityInOverrides;
 import com.google.j2cl.transpiler.passes.RecoverShortcutBooleanOperator;
 import com.google.j2cl.transpiler.passes.RemoveCustomIsInstanceMethods;
 import com.google.j2cl.transpiler.passes.RemoveEmptyFallthroughSwitchCases;
@@ -737,7 +737,7 @@ public enum Backend {
           AddDisambiguatingOverloadResolutionCastsJ2kt::new,
           AddVisibilityMethodBridgesJ2kt::new,
           NormalizeSynchronizedConstructs::new,
-          PropagateNullabilityJ2kt::new,
+          PropagateNullabilityInOverrides::new,
           NormalizeInterfaces::new,
           NormalizeTryWithResources::new,
           NormalizeForEachIterable::new,
