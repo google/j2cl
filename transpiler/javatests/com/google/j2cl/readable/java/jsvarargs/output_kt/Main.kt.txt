@@ -75,28 +75,28 @@ open class Main {
   Main.f1(1)
   Main.f1(
    1,
-   *intArrayOf(1, 2)!!,
+   *intArrayOf(1, 2),
   )
   Main.f1(
    1,
-   *intArrayOf(1, 2)!!,
+   *intArrayOf(1, 2),
   )
   Main.f1(
    1,
-   *intArrayOf()!!,
+   *intArrayOf(),
   )
   Main.f1(
    1,
-   *intArrayOf()!!,
+   *intArrayOf(),
   )
   val ints: IntArray = intArrayOf(1, 2)
   Main.f1(
    1,
-   *ints!!,
+   *ints,
   )
   Main.f1(
    1,
-   *ints!!,
+   *ints,
   )
   Main.f1(
    1,
@@ -122,22 +122,22 @@ open class Main {
   Main.generics<Any?>()
   Main.generics<Int?>()
   Main.f2(
-   *intArrayOf(1, 2)!!,
+   *intArrayOf(1, 2),
   )
   Main.f2(
-   *intArrayOf(1, 2)!!,
+   *intArrayOf(1, 2),
   )
   Main.generics<IntArray?>(
    intArrayOf(1, 2),
   )
   Main.generics<Int?>(
-   *arrayOf<Int?>(Integer.valueOf(1), Integer.valueOf(2))!!,
+   *arrayOf<Int?>(Integer.valueOf(1), Integer.valueOf(2)),
   )
   Main.f2(
-   *intArrayOf()!!,
+   *intArrayOf(),
   )
   Main.f2(
-   *intArrayOf()!!,
+   *intArrayOf(),
   )
   Main.generics<IntArray?>(
    intArrayOf(),
@@ -145,13 +145,13 @@ open class Main {
   val ints: IntArray = intArrayOf(1, 2)
   val integers: Array<Int?> = arrayOf<Int?>(Integer.valueOf(1), Integer.valueOf(2))
   Main.f2(
-   *ints!!,
+   *ints,
   )
   Main.f2(
-   *ints!!,
+   *ints,
   )
   Main.generics<Int?>(
-   *integers!!,
+   *integers,
   )
  }
 
@@ -162,16 +162,16 @@ open class Main {
   m.f3(1)
   m.f3(
    1,
-   *intArrayOf(1, 2)!!,
+   *intArrayOf(1, 2),
   )
   m.f3(
    1,
-   *intArrayOf()!!,
+   *intArrayOf(),
   )
   val ints: IntArray = intArrayOf(1, 2)
   m.f3(
    1,
-   *ints!!,
+   *ints,
   )
  }
 
@@ -181,14 +181,14 @@ open class Main {
   m.f4(1, 2)
   m.f4()
   m.f4(
-   *intArrayOf(1, 2)!!,
+   *intArrayOf(1, 2),
   )
   m.f4(
-   *intArrayOf()!!,
+   *intArrayOf(),
   )
   val ints: IntArray = intArrayOf(1, 2)
   m.f4(
-   *ints!!,
+   *ints,
   )
  }
 
@@ -201,16 +201,16 @@ open class Main {
   a.f1(0)
   a.f1(
    0,
-   *arrayOf<Any?>(o1, o2)!!,
+   *arrayOf<Any?>(o1, o2),
   )
   a.f1(
    0,
-   *arrayOf<Any?>()!!,
+   *arrayOf<Any?>(),
   )
   val os: Array<Any?> = arrayOf<Any?>(o1, o2)
   a.f1(
    0,
-   *os!!,
+   *os,
   )
  }
 
@@ -219,7 +219,7 @@ open class Main {
   val ints: IntArray = intArrayOf(1, 2)
   Main(1).f3(
    1,
-   *ints!!,
+   *ints,
   )
  }
 
@@ -361,16 +361,16 @@ open class Main {
    a = a + super<Main>.f3(1)
    a = a + super<Main>.f3(
     1,
-    *intArrayOf(1, 2)!!,
+    *intArrayOf(1, 2),
    )
    a = a + super<Main>.f3(
     1,
-    *intArrayOf()!!,
+    *intArrayOf(),
    )
    val ints: IntArray = intArrayOf(1, 2)
    a = a + super<Main>.f3(
     1,
-    *ints!!,
+    *ints,
    )
    return a
   }

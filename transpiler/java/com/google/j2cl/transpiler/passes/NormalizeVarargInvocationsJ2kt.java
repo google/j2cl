@@ -55,8 +55,14 @@ public class NormalizeVarargInvocationsJ2kt extends NormalizationPass {
             }
 
             // Otherwise, apply spread operator to the array.
+            // When an expression of an array type is passed explicitly to a varargs method it might
+            // be null, so not-null assertion is necessary.
+            if (arrayExpression.canBeNull()) {
+              arrayExpression = arrayExpression.postfixNotNullAssertion();
+            }
+
             return MethodCall.Builder.from(invocation)
-                .replaceVarargsArgument(arrayExpression.postfixNotNullAssertion().prefixSpread())
+                .replaceVarargsArgument(arrayExpression.prefixSpread())
                 .build();
           }
         });

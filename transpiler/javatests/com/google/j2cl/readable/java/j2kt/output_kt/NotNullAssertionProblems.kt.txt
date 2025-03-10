@@ -104,13 +104,13 @@ open class NotNullAssertionProblems {
   )
   NotNullAssertionProblems.accept2<String?>(nullableString, string)
   NotNullAssertionProblems.acceptVararg<String>(
-   *(arrayOf<String?>(string, null) as Array<String>)!!,
+   *(arrayOf<String?>(string, null) as Array<String>),
   )
   NotNullAssertionProblems.acceptVararg<String>(
-   *(arrayOf<String?>(string, nullableString) as Array<String>)!!,
+   *(arrayOf<String?>(string, nullableString) as Array<String>),
   )
   NotNullAssertionProblems.acceptVararg<String>(
-   *(arrayOf<String?>(null, string) as Array<String>)!!,
+   *(arrayOf<String?>(null, string) as Array<String>),
   )
   NotNullAssertionProblems.acceptVararg<String?>(nullableString, string)
   NotNullAssertionProblems.acceptGeneric<String>(
@@ -171,13 +171,13 @@ open class NotNullAssertionProblems {
   )
   NotNullAssertionProblems.Consumer<String?>(nullableString, string)
   NotNullAssertionProblems.VarargConsumer<String>(
-   *(arrayOf<String?>(string, null) as Array<String>)!!,
+   *(arrayOf<String?>(string, null) as Array<String>),
   )
   NotNullAssertionProblems.VarargConsumer<String>(
-   *(arrayOf<String?>(string, nullableString) as Array<String>)!!,
+   *(arrayOf<String?>(string, nullableString) as Array<String>),
   )
   NotNullAssertionProblems.VarargConsumer<String>(
-   *(arrayOf<String?>(null, string) as Array<String>)!!,
+   *(arrayOf<String?>(null, string) as Array<String>),
   )
   NotNullAssertionProblems.VarargConsumer<String?>(nullableString, string)
   NotNullAssertionProblems.GenericConsumer<String>(
@@ -286,7 +286,7 @@ open class NotNullAssertionProblems {
     null!!,
    )
    NotNullAssertionProblems.VarargConsumer<String>(
-    *(arrayOf<String?>(string, null) as Array<String>)!!,
+    *(arrayOf<String?>(string, null) as Array<String>),
    ).accept(
     null!!,
    )
