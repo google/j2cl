@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.ast;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
@@ -28,22 +29,16 @@ public class FieldDeclarationStatement extends Statement {
   @Visitable Expression expression;
   @Visitable FieldDescriptor fieldDescriptor;
   private final boolean isPublic;
-  private final boolean isConst;
-  private final boolean isDeprecated;
 
   private FieldDeclarationStatement(
       SourcePosition sourcePosition,
       Expression expression,
       FieldDescriptor fieldDescriptor,
-      boolean isPublic,
-      boolean isConst,
-      boolean isDeprecated) {
+      boolean isPublic) {
     super(sourcePosition);
     this.expression = checkNotNull(expression);
     this.fieldDescriptor = checkNotNull(fieldDescriptor);
     this.isPublic = isPublic;
-    this.isConst = isConst;
-    this.isDeprecated = isDeprecated;
     checkArgument(
         expression instanceof FieldAccess || expression.isSimpleAssignment(),
         "Declaration annotations can only applied to assignments and field references.");
@@ -62,11 +57,11 @@ public class FieldDeclarationStatement extends Statement {
   }
 
   public boolean isConst() {
-    return isConst;
+    return fieldDescriptor.isCompileTimeConstant();
   }
 
   public boolean isDeprecated() {
-    return isDeprecated;
+    return fieldDescriptor.isDeprecated();
   }
 
   @Override
@@ -77,7 +72,7 @@ public class FieldDeclarationStatement extends Statement {
   @Override
   public FieldDeclarationStatement clone() {
     return new FieldDeclarationStatement(
-        getSourcePosition(), expression.clone(), fieldDescriptor, isPublic, isConst, isDeprecated);
+        getSourcePosition(), expression.clone(), fieldDescriptor, isPublic);
   }
 
   public static Builder newBuilder() {
@@ -89,8 +84,6 @@ public class FieldDeclarationStatement extends Statement {
     private Expression expression;
     private FieldDescriptor fieldDescriptor;
     private boolean isPublic;
-    private boolean isConst;
-    private Boolean isDeprecated;
     private SourcePosition sourcePosition;
 
     public static Builder from(FieldDeclarationStatement fieldDeclaration) {
@@ -98,46 +91,37 @@ public class FieldDeclarationStatement extends Statement {
       builder.expression = fieldDeclaration.getExpression();
       builder.fieldDescriptor = fieldDeclaration.getFieldDescriptor();
       builder.isPublic = fieldDeclaration.isPublic();
-      builder.isConst = fieldDeclaration.isConst();
-      builder.isDeprecated = fieldDeclaration.isDeprecated();
       builder.sourcePosition = fieldDeclaration.getSourcePosition();
 
       return builder;
     }
 
+    @CanIgnoreReturnValue
     public Builder setExpression(Expression initializer) {
       this.expression = initializer;
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder setFieldDescriptor(FieldDescriptor fieldDescriptor) {
       this.fieldDescriptor = fieldDescriptor;
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder setPublic(boolean isPublic) {
       this.isPublic = isPublic;
       return this;
     }
 
-    public Builder setConst(boolean isConst) {
-      this.isConst = isConst;
-      return this;
-    }
-
-    public Builder setDeprecated(boolean isDeprecated) {
-      this.isDeprecated = isDeprecated;
-      return this;
-    }
-
+    @CanIgnoreReturnValue
     public Builder setSourcePosition(SourcePosition sourcePosition) {
       this.sourcePosition = sourcePosition;
       return this;
     }
 
     public FieldDeclarationStatement build() {
-      return new FieldDeclarationStatement(
-          sourcePosition, expression, fieldDescriptor, isPublic, isConst, isDeprecated);
+      return new FieldDeclarationStatement(sourcePosition, expression, fieldDescriptor, isPublic);
     }
   }
 }

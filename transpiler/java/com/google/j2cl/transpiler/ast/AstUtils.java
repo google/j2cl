@@ -508,8 +508,6 @@ public final class AstUtils {
         .setExpression(declarationExpression)
         .setFieldDescriptor(fieldDescriptor)
         .setPublic(isPublic)
-        .setConst(field.isCompileTimeConstant())
-        .setDeprecated(fieldDescriptor.isDeprecated())
         .setSourcePosition(
             field.isCompileTimeConstant() ? field.getSourcePosition() : sourcePosition)
         .build();
