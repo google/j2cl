@@ -38,7 +38,7 @@ open class NullabilityInferenceWithLocalVariables {
   @ObjCName("testArray")
   fun testArray(): Array<String> {
    val local: String = ""
-   return arrayOf<String>(local, "")
+   return arrayOf<String?>(local, "") as Array<String>
   }
 
   @JvmStatic

@@ -166,6 +166,7 @@ import com.google.j2cl.transpiler.passes.OptimizeXplatForEach;
 import com.google.j2cl.transpiler.passes.PreventSmartCasts;
 import com.google.j2cl.transpiler.passes.PropagateCompileTimeConstants;
 import com.google.j2cl.transpiler.passes.PropagateConstants;
+import com.google.j2cl.transpiler.passes.PropagateNullability;
 import com.google.j2cl.transpiler.passes.PropagateNullabilityInOverrides;
 import com.google.j2cl.transpiler.passes.RecoverShortcutBooleanOperator;
 import com.google.j2cl.transpiler.passes.RemoveCustomIsInstanceMethods;
@@ -728,6 +729,7 @@ public enum Backend {
           FixJavaKotlinMethodOverrideMismatch::new,
           AnnotateProtobufMethodsAsKtProperties::new,
           RewriteAnnotationTypesJ2kt::new,
+          PropagateNullability::new,
           NormalizeNullLiterals::new,
           NormalizeMinValueIntegralLiterals::new,
           CreateImplicitConstructors::new,

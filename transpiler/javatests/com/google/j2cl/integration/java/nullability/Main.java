@@ -89,23 +89,17 @@ public class Main {
   }
 
   private static void testArrayLiteral() {
-    // TODO(b/324550390): Remove the condition when the bug is fixed.
-    if (!isJ2Kt()) {
-      @Nullable String[] unusedArray1 = {STRING, NULL_STRING};
-      @Nullable String[] unusedArray2 = {NULL_STRING, STRING};
-    }
+    @Nullable String[] unusedArray1 = {STRING, NULL_STRING};
+    @Nullable String[] unusedArray2 = {NULL_STRING, STRING};
   }
 
   private static void testNewArray() {
     @Nullable String[] unusedArray1 = new @Nullable String[] {STRING, NULL_STRING};
     @Nullable String[] unusedArray2 = new @Nullable String[] {NULL_STRING, STRING};
 
-    // TODO(b/324550390): Remove the condition when the bug is fixed.
-    if (!isJ2Kt()) {
-      // Lack of @Nullable annotation in array creation expression should not cause NULL_STRING!!
-      @Nullable String[] unusedArray3 = new String[] {STRING, NULL_STRING};
-      @Nullable String[] unusedArray4 = new String[] {NULL_STRING, STRING};
-    }
+    // Lack of @Nullable annotation in array creation expression should not cause NULL_STRING!!
+    @Nullable String[] unusedArray3 = new String[] {STRING, NULL_STRING};
+    @Nullable String[] unusedArray4 = new String[] {NULL_STRING, STRING};
   }
 
   private static void testExplicitInvocationTypeArguments() {

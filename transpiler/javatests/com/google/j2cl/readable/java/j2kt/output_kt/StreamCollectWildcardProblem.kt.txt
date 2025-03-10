@@ -27,10 +27,12 @@ import java.util.stream.Collector
 import java.util.stream.Collectors
 import java.util.stream.Stream
 import kotlin.Any
+import kotlin.Array
 import kotlin.Boolean
 import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
+import kotlin.arrayOf
 import kotlin.collections.MutableList
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
@@ -144,16 +146,15 @@ open class StreamCollectWildcardProblem {
    @ObjCName("withBoolean") b: Boolean
   ): Stream<String> {
    return Stream.of<Stream<String>>(
-    (if (b) stream1.map<String>(
+    *(arrayOf<Stream<String>?>(if (b) stream1.map<String>(
      Function/* <in StreamCollectWildcardProblem.Foo<Any>, out String> */ { arg0: StreamCollectWildcardProblem.Foo<Any> ->
       return@Function arg0.getString()
      },
-    ) else null)!!,
-    (if (b) stream2.map<String>(
+    ) else null, if (b) stream2.map<String>(
      Function/* <in StreamCollectWildcardProblem.Foo<Any>, out String> */ { arg0_1: StreamCollectWildcardProblem.Foo<Any> ->
       return@Function arg0_1.getString()
      },
-    ) else null)!!,
+    ) else null) as Array<Stream<String>>)!!,
    ).filter(
     Predicate/* <in Stream<String>> */ { arg0_2: Stream<String> ->
      return@Predicate Objects.nonNull(arg0_2)
