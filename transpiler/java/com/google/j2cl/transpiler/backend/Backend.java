@@ -729,6 +729,7 @@ public enum Backend {
           FixJavaKotlinMethodOverrideMismatch::new,
           AnnotateProtobufMethodsAsKtProperties::new,
           RewriteAnnotationTypesJ2kt::new,
+          MakeVariablesNonNull::new,
           PropagateNullability::new,
           NormalizeNullLiterals::new,
           NormalizeMinValueIntegralLiterals::new,

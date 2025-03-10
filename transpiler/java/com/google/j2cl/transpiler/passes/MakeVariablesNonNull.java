@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.common.base.Preconditions.checkState;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isBoxedType;
 
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
@@ -94,8 +95,17 @@ public class MakeVariablesNonNull extends NormalizationPass {
 
             private void exitAssignment(Variable variable, Expression expression) {
               TypeDescriptor typeDescriptor = variable.getTypeDescriptor();
+
+              if (typeDescriptor.isPrimitive()) {
+                // Variables of primitve types can never be assigned nullable values, but when this
+                // pass is run, unboxing passes might not have run yet and we might see a
+                // potentially nullable expression.
+                return;
+              }
+
               if (!typeDescriptor.isNullable() && expression.canBeNull()) {
                 variable.setTypeDescriptor(typeDescriptor.toNullable());
+                checkState(variable.getTypeDescriptor().isNullable());
                 propagateChanges[0] = true;
               }
             }
