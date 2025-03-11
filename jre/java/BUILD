@@ -106,10 +106,7 @@ j2wasm_library(
         ":jre_java_files-j2wasm",
     ] + glob(["super-wasm/*.js"]),
     javacopts = JRE_JAVAC_OPTS,
-    visibility = [
-        "//build_defs/internal_do_not_use:__pkg__",
-        "//transpiler/javatests/com/google/j2cl/transpiler:__pkg__",
-    ],
+    visibility = ["//build_defs/internal_do_not_use:__pkg__"],
     deps = [
         ":javaemul_internal_annotations-j2wasm",
         "//third_party:jsinterop-annotations-j2wasm",
@@ -123,10 +120,7 @@ j2cl_library(
         ":jre_native_files",
     ],
     javacopts = JRE_JAVAC_OPTS,
-    visibility = [
-        "//:__pkg__",
-        "//transpiler/javatests/com/google/j2cl/transpiler:__pkg__",
-    ],
+    visibility = ["//:__pkg__"],
     exports = [
         # J2CL transpiler optimizations to AutoValue may add this dependency.
         "//third_party:closure_reflect",
