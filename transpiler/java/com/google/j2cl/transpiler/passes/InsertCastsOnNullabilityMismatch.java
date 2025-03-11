@@ -15,8 +15,6 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangVoid;
-
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Streams;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
@@ -56,11 +54,6 @@ public final class InsertCastsOnNullabilityMismatch extends AbstractJ2ktNormaliz
                   TypeDescriptor declaredTypeDescriptor,
                   Expression expression) {
                 TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
-
-                // A hack for Void?.
-                if (isJavaLangVoid(inferredTypeDescriptor)) {
-                  return expression;
-                }
 
                 if (isNullabilityAssignableTo(
                     fromTypeDescriptor, inferredTypeDescriptor, ImmutableSet.of())) {

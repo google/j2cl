@@ -53,12 +53,10 @@ public class Main {
   // Currently, both non-null and nullable Void are translated to nullable type in Kotlin, which is
   // consistent with checker framework, but inconsistent with JSpecify.
   private static void testVoid() {
-    assertNull(getVoid());
-
-    Box<Void> voidBox = new Box<>(null);
+    Box<@Nullable Void> voidBox = new Box<>(null);
     assertNull(voidBox.value);
 
-    Void v = (Void) null;
+    @Nullable Void v = null;
     assertNull(v);
   }
 
@@ -70,10 +68,6 @@ public class Main {
 
     @Nullable Void v = (@Nullable Void) null;
     assertNull(v);
-  }
-
-  private static Void getVoid() {
-    return null;
   }
 
   private static @Nullable Void getNullableVoid() {

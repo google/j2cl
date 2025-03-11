@@ -63,9 +63,7 @@ public final class InsertNotNullAssertionsOnNullabilityMismatch extends Normaliz
                   return expression;
                 }
 
-                return !TypeDescriptors.isJavaLangVoid(inferredTypeDescriptor)
-                        && (!inferredTypeDescriptor.canBeNull()
-                            || !declaredTypeDescriptor.canBeNull())
+                return !inferredTypeDescriptor.canBeNull() || !declaredTypeDescriptor.canBeNull()
                     ? insertNotNullAssertionIfNeeded(getSourcePosition(), expression)
                     : expression;
               }

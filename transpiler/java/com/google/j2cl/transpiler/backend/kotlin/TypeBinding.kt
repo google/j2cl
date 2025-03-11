@@ -82,7 +82,7 @@ internal val MethodDescriptor.typeArgumentTypeBindings: List<TypeBinding>
     )
 
 private fun typeBinding(typeParameter: TypeVariable, typeDescriptor: TypeDescriptor) =
-  TypeBinding(typeParameter, typeDescriptor.withImplicitNullability)
+  TypeBinding(typeParameter, typeDescriptor)
     .withInferredNullability
     .withValidNonNullableAnnotation
     .withFixedUnboundWildcard

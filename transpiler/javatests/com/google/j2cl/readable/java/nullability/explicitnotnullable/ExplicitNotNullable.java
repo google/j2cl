@@ -37,7 +37,7 @@ public class ExplicitNotNullable {
   @Nullable private String[] f9 = {};
   // Nullable array of non-nullable strings.
   private String @Nullable [] f10 = {};
-  private Void f11 = null;
+  private @Nullable Void f11 = null;
   @Nonnull private Object f12 = new Object();
   private Object f13;
   @Nullable private Object f14;

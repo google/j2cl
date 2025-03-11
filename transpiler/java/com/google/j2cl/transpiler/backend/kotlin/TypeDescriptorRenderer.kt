@@ -64,7 +64,7 @@ internal fun NameRenderer.typeDescriptorSource(
       projectRawToWildcards = projectRawToWildcards,
       rendersCaptures = rendersCaptures,
     )
-    .source(typeDescriptor.withImplicitNullability)
+    .source(typeDescriptor)
 
 /** Returns source for the given list of type bindings. */
 internal fun NameRenderer.typeBindingsSource(

@@ -36,20 +36,20 @@ open class VoidType {
   internal fun testVoid_pp_j2kt() {
    val nonNullVoid: Void? = null
    val nullableVoid: Void? = null
-   val nullableBoundsWithNonNullVoid: VoidType.NullableBounds<Void?>? = null
+   val nullableBoundsWithNonNullVoid: VoidType.NullableBounds<Void>? = null
    val nullableBoundsWithNullableVoid: VoidType.NullableBounds<Void?>? = null
    val nonNullBoundsWithNonNullVoid: VoidType.NonNullBounds<Void>? = null
    val voidClass: Class<Void>? = null
-   val nonNullVoidConsumer: VoidType.Consumer<Void?> = VoidType.Consumer<Void?> { v: Void? ->
+   val nonNullVoidConsumer: VoidType.Consumer<Void> = VoidType.Consumer<Void> { v: Void ->
     v.hashCode()
    }
    val nullableVoidConsumer: VoidType.Consumer<Void?> = VoidType.Consumer<Void?> { v_1: Void? ->
     v_1!!.hashCode()
    }
-   val nonNullVoidConsumerWildcard: VoidType.Consumer<*> = VoidType.Consumer<Void?> { v_2: Void? ->
+   val nonNullVoidConsumerWildcard: VoidType.Consumer<*> = VoidType.Consumer<Void> { v_2: Void ->
     v_2.hashCode()
    }
-   val nullableVoidConsumerWildcard: VoidType.Consumer<*> = VoidType.Consumer<Void?> { v_3: Void? ->
+   val nullableVoidConsumerWildcard: VoidType.Consumer<*> = VoidType.Consumer<Void> { v_3: Void? ->
     v_3!!.hashCode()
    }
   }
