@@ -964,6 +964,18 @@ class CompilationUnitBuilder(
 
     val operand = convertQualifier(irCall) ?: convertExpression(irCall.getValueArgument(0)!!)
 
+    // Kotlin will always represent !== and != as !(===) and !(==), respectively. The origin will
+    // tell us if Kotlin internally did this and if so, we can rewrite the operand directly to be
+    // !=.
+    if (
+      (irCall.origin == IrStatementOrigin.EXCLEQEQ || irCall.origin == IrStatementOrigin.EXCLEQ) &&
+        operand is BinaryExpression &&
+        operand.operator == BinaryOperator.EQUALS
+    ) {
+      check(prefixOperator == PrefixOperator.NOT)
+      return operand.leftOperand.infixNotEquals(operand.rightOperand)
+    }
+
     // Create the appropriate expression with the same semantic of the intrinsic call.
     if (prefixOperator.hasSideEffect()) {
       // Side effect operators needs to be converted as their side-effect free versions to be
