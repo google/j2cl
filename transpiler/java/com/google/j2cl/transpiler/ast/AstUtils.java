@@ -476,7 +476,6 @@ public final class AstUtils {
                     .setName("$copy")
                     .setTypeDescriptor(TypeDescriptors.get().nativeFunction)
                     .setOriginalJsInfo(JsInfo.RAW_FIELD)
-                    .setDeprecated(lambdaType.isDeprecated())
                     .build())
             .setQualifier(new JavaScriptConstructorReference(lambdaType.getTypeDeclaration()))
             .build();
