@@ -122,8 +122,6 @@ private val loweringPhase = loweringPhase {
   perFileLowering(::ForLoopsLowering)
   // Replace null varargs with empty array calls.
   perFileLowering(::EmptyVarargLowering)
-  // Replace constant property accessors with a direct reference to the constant value.
-  perFileLowering(::ConstLowering)
   // Lowers unsigned const values to be instantiations of their boxed value types.
   perFileLowering(::UnsignedConstLowering)
   // Move and/or copy companion object fields to static fields of companion's owner.
