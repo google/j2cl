@@ -1,0 +1,79 @@
+// Generated from "j2kt/NullabilityInferenceProblem10.java"
+@file:OptIn(ExperimentalObjCName::class)
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN")
+
+package j2kt
+
+import javaemul.lang.*
+import java.lang.RuntimeException
+import java.lang.Void
+import kotlin.OptIn
+import kotlin.Suppress
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
+
+@ObjCName("J2ktJ2ktNullabilityInferenceProblem10", swiftName = "J2ktNullabilityInferenceProblem10", exact = true)
+open class NullabilityInferenceProblem10 {
+ @ObjCName("J2ktJ2ktNullabilityInferenceProblem10_Lazy", swiftName = "J2ktNullabilityInferenceProblem10_Lazy", exact = true)
+ fun interface Lazy<V> {
+  @ObjCName("get")
+  fun get(): V
+ }
+
+ @ObjCName("J2ktJ2ktNullabilityInferenceProblem10_InNullMarked", swiftName = "J2ktNullabilityInferenceProblem10_InNullMarked", exact = true)
+ open class InNullMarked internal constructor() {
+  @ObjCName("J2ktJ2ktNullabilityInferenceProblem10_InNullMarkedCompanion", swiftName = "J2ktNullabilityInferenceProblem10_InNullMarkedCompanion", exact = true)
+  companion object {
+   @JvmStatic
+   internal fun observeNullable_pp_j2kt(foo: NullabilityInferenceProblem10.InNullMarked.Foo?): NullabilityInferenceProblem10.InNullMarked.Future<Void?> {
+    throw RuntimeException()
+   }
+
+   @JvmStatic
+   internal fun test_pp_j2kt(lazyObservable: NullabilityInferenceProblem10.Lazy<NullabilityInferenceProblem10.InNullMarked.Observable<NullabilityInferenceProblem10.InNullMarked.Foo>>) {
+    lazyObservable.get()!!.addObserver(
+     NullabilityInferenceProblem10.InNullMarked.Observer<NullabilityInferenceProblem10.InNullMarked.Foo> { arg0: NullabilityInferenceProblem10.InNullMarked.Foo ->
+      return@Observer NullabilityInferenceProblem10.InNullMarked.observeNullable_pp_j2kt(arg0)
+     },
+    )
+   }
+  }
+
+  @ObjCName("J2ktJ2ktNullabilityInferenceProblem10_InNullMarked_Foo", swiftName = "J2ktNullabilityInferenceProblem10_InNullMarked_Foo", exact = true)
+  interface Foo
+
+  @ObjCName("J2ktJ2ktNullabilityInferenceProblem10_InNullMarked_Future", swiftName = "J2ktNullabilityInferenceProblem10_InNullMarked_Future", exact = true)
+  interface Future<V>
+
+  @ObjCName("J2ktJ2ktNullabilityInferenceProblem10_InNullMarked_Observable", swiftName = "J2ktNullabilityInferenceProblem10_InNullMarked_Observable", exact = true)
+  fun interface Observable<V> {
+   @ObjCName("addObserver")
+   fun addObserver(
+    @ObjCName("withJ2ktNullabilityInferenceProblem10_InNullMarked_Observer") observer: NullabilityInferenceProblem10.InNullMarked.Observer<V>
+   )
+  }
+
+  @ObjCName("J2ktJ2ktNullabilityInferenceProblem10_InNullMarked_Observer", swiftName = "J2ktNullabilityInferenceProblem10_InNullMarked_Observer", exact = true)
+  fun interface Observer<V> {
+   @ObjCName("observe")
+   fun observe(
+    @ObjCName("withId") v: V
+   ): NullabilityInferenceProblem10.InNullMarked.Future<Void?>
+  }
+ }
+}
