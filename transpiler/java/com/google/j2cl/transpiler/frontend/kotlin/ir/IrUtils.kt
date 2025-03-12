@@ -92,9 +92,9 @@ import org.jetbrains.kotlin.ir.util.deepCopyWithSymbols
 import org.jetbrains.kotlin.ir.util.dump
 import org.jetbrains.kotlin.ir.util.fqNameWhenAvailable
 import org.jetbrains.kotlin.ir.util.functions
-import org.jetbrains.kotlin.ir.util.getAnnotation
 import org.jetbrains.kotlin.ir.util.getValueArgument
 import org.jetbrains.kotlin.ir.util.hasAnnotation
+import org.jetbrains.kotlin.ir.util.isAnnotation
 import org.jetbrains.kotlin.ir.util.isAnnotationClass
 import org.jetbrains.kotlin.ir.util.isFakeOverride
 import org.jetbrains.kotlin.ir.util.isFileClass
@@ -509,13 +509,24 @@ private fun IrDeclaration.getWasmInfo(): String? =
 private val WASM_ANNOTATION_FQ_NAME: FqName = FqName(WASM_ANNOTATION_NAME)
 private val WASM_ANNOTATION_VALUE_NAME = Name.identifier("value")
 
-private fun IrDeclaration.findAnnotation(name: FqName): IrConstructorCall? {
-  val annotation = getAnnotation(name)
-  if (annotation != null) return annotation
-  return when (this) {
-    is IrSimpleFunction -> correspondingPropertySymbol?.owner?.findAnnotation(name)
-    is IrField -> correspondingPropertySymbol?.owner?.findAnnotation(name)
-    else -> null
+private fun IrDeclaration.findAnnotation(name: FqName): IrConstructorCall? =
+  getAllAnnotations().firstOrNull { it.isAnnotation(name) }
+
+/**
+ * Sequence of annotations on this declaration. This includes property annotations for getters,
+ * setters, and backing fields.
+ */
+fun IrAnnotationContainer.getAllAnnotations(): Sequence<IrConstructorCall> = sequence {
+  yieldAll(annotations)
+
+  val correspondingProperty =
+    when (this@getAllAnnotations) {
+      is IrSimpleFunction -> correspondingPropertySymbol?.owner
+      is IrField -> correspondingPropertySymbol?.owner
+      else -> null
+    }
+  if (correspondingProperty != null) {
+    yieldAll(correspondingProperty.getAllAnnotations())
   }
 }
 

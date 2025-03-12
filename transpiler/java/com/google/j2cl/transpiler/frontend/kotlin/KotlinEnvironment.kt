@@ -43,6 +43,7 @@ import com.google.j2cl.transpiler.frontend.jdt.PackageAnnotationsResolver
 import com.google.j2cl.transpiler.frontend.kotlin.ir.enumEntries
 import com.google.j2cl.transpiler.frontend.kotlin.ir.fqnOrFail
 import com.google.j2cl.transpiler.frontend.kotlin.ir.fromQualifiedBinaryName
+import com.google.j2cl.transpiler.frontend.kotlin.ir.getAllAnnotations
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getAllTypeParameters
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getJsEnumInfo
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getJsInfo
@@ -283,7 +284,7 @@ class KotlinEnvironment(
   private fun createAnnotations(irAnnotationContainer: IrAnnotationContainer) =
     ImmutableList.Builder<Annotation>()
       .apply {
-        for (annotationCtorCall in irAnnotationContainer.annotations) {
+        for (annotationCtorCall in irAnnotationContainer.getAllAnnotations()) {
           val ctor = annotationCtorCall.symbol.owner
           val typeDescriptor =
             checkNotNull(getEnclosingTypeDescriptor(ctor)) {
