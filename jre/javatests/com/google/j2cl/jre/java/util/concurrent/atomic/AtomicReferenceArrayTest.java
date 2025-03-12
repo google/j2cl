@@ -18,6 +18,7 @@ package com.google.j2cl.jre.java.util.concurrent.atomic;
 import com.google.j2cl.jre.java.util.EmulTestBase;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReferenceArray;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Tests for {@link java.util.concurrent.atomic.AtomicReferenceArray}.
@@ -34,7 +35,7 @@ public class AtomicReferenceArrayTest extends EmulTestBase {
   }
 
   public void testLengthConstructor() {
-    AtomicReferenceArray<Object> refArray = new AtomicReferenceArray<>(1);
+    AtomicReferenceArray<@Nullable Object> refArray = new AtomicReferenceArray<>(1);
 
     assertNull(refArray.get(0));
     assertSame(1, refArray.length());
