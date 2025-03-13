@@ -113,8 +113,7 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
   private fun shouldRender(type: Type): Boolean = shouldRender(type.declaration)
 
   private fun declarationsRenderers(type: Type): List<Renderer<Source>> = buildList {
-    // Don't render compatibility aliases if ObjC name prefix is empty.
-    if (objCNamePrefix.isNotEmpty()) {
+    if (objCNamePrefix.isNotEmpty() && !nameIsMappedInObjC(type.declaration)) {
       add(aliasDeclarationRenderer(type.declaration))
       type.toCompanionObjectOrNull()?.let { add(aliasDeclarationRenderer(it.declaration)) }
     }
@@ -400,6 +399,9 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
 
   private fun objCNameRenderer(typeDeclaration: TypeDeclaration): Renderer<Source> =
     mappedObjCNameRenderer(typeDeclaration) ?: nonMappedObjCNameRenderer(typeDeclaration)
+
+  private fun nameIsMappedInObjC(typeDeclaration: TypeDeclaration): Boolean =
+    mappedObjCNameRenderer(typeDeclaration) != null
 
   private fun mappedObjCNameRenderer(typeDeclaration: TypeDeclaration): Renderer<Source>? =
     when (typeDeclaration.qualifiedBinaryName) {
