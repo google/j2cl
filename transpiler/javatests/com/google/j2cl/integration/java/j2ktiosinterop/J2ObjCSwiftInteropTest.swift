@@ -26,36 +26,36 @@ final class J2ObjCSwiftInteropTest: XCTestCase {
     obj = J2ktiosinteropDefaultNames(int: 1, with: "")
 
     obj.method()
-    obj.method(withBoolean: true as jboolean)
-    obj.method(withChar: 65 as jchar)
-    obj.method(withByte: 1 as jbyte)
-    obj.method(withShort: 1 as jshort)
-    obj.method(with:1 as jint)
-    obj.method(withLong: 1 as jlong)
-    obj.method(with:1.0 as jfloat)
-    obj.method(with:1.0 as jdouble)
-    obj.method(withId: nil)
-    obj.method(with: nil as String?)
-    obj.method(withNSStringArray: nil)
-    obj.method(withNSStringArray2: nil)
-    //obj.methodWith(nil as NSCopying?)
-    obj.method(with: 1 as NSNumber)
-    obj.method(with: nil as IOSClass?)
-    obj.method(with: nil as JavaLangIterable?)
-    obj.method(with: 1, with: nil)
+    obj.booleanMethod(withBoolean: true)
+    obj.charMethod(withChar: 65)
+    obj.byteMethod(withByte: 1)
+    obj.shortMethod(withShort: 1)
+    obj.intMethod(with: 1)
+    obj.longMethod(withLong: 1)
+    obj.floatMethod(with: 1.0)
+    obj.doubleMethod(with: 1.0)
+    obj.objectMethod(withId: nil)
+    obj.stringMethod(with: "")
+    obj.stringArrayMethod(withNSStringArray: nil)
+    obj.stringArrayArrayMethod(withNSStringArray2: nil)
+    obj.cloneableMethod(with: nil)
+    obj.numberMethod(with: nil)
+    obj.classMethod(with: nil)
+    obj.stringIterableMethod(with: nil)
+    obj.intStringMethod(with: 1, with: "")
 
-    obj.genericMethod(withId: nil as Any?)
-    obj.genericMethod(with: nil as String?)
+    obj.genericMethod(withId: nil)
+    obj.genericStringMethod(with: "")
 
     // Not exposed in Swift
-    //obj.field_ = obj.field_
+    //obj.intField_ = obj.intField_
   }
 
   func testCustomNames() {
     var obj: Custom
 
     obj = Custom(index: 1 as jint)
-    obj = Custom(index: 1 as jint, name: "")
+    obj = Custom(index: 1 as jint, name: nil)
 
     obj = Custom()
     // Not exposed on Swift
@@ -71,13 +71,11 @@ final class J2ObjCSwiftInteropTest: XCTestCase {
   }
 
   func testEnumNames() {
-    var e: J2ktiosinteropEnumNames
-    e = J2ktiosinteropEnumNames_get_ONE()
-    e = J2ktiosinteropEnumNames_get_TWO()
+    let _ = J2ktiosinteropEnumNames_get_ONE()
+    let _ = J2ktiosinteropEnumNames_get_TWO()
 
-    var e2: J2ktiosinteropEnumNames_Enum
     // Not exposed on Swift
-    //e2 = J2ktiosinteropEnumNames_Enum_ONE;
-    //e2 = J2ktiosinteropEnumNames_Enum_TWO;
+    // let _ = J2ktiosinteropEnumNames_Enum_ONE
+    // let _ = J2ktiosinteropEnumNames_Enum_TWO
   }
 }

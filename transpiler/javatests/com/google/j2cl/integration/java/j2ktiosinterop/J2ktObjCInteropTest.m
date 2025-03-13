@@ -25,39 +25,39 @@
   obj = new_J2ktiosinteropDefaultNames_initWithInt_withNSString_(1, @"");
 
   [obj method];
-  [obj methodWithBoolean:YES];
-  [obj methodWithChar:'a'];
-  [obj methodWithByte:1];
-  [obj methodWithShort:1];
-  [obj methodWithInt:1];
-  [obj methodWithLong:1];
-  [obj methodWithFloat:1];
-  [obj methodWithDouble:1];
-  [obj methodWithId:NULL];
-  [obj methodWithNSString:NULL];
-  [obj methodWithNSStringArray:NULL];
-  [obj methodWithNSStringArray2:NULL];
-  [obj methodWithNSCopying:NULL];
-  [obj methodWithNSNumber:NULL];
-  [obj methodWithIOSClass:NULL];
-  [obj methodWithJavaLangIterable:NULL];
-  [obj methodWithInt:1 withNSString:NULL];
+  [obj booleanMethodWithBoolean:YES];
+  [obj charMethodWithChar:'a'];
+  [obj byteMethodWithByte:1];
+  [obj shortMethodWithShort:1];
+  [obj intMethodWithInt:1];
+  [obj longMethodWithLong:1];
+  [obj floatMethodWithFloat:1];
+  [obj doubleMethodWithDouble:1];
+  [obj objectMethodWithId:NULL];
+  [obj stringMethodWithNSString:@""];
+  [obj stringArrayMethodWithNSStringArray:NULL];
+  [obj stringArrayArrayMethodWithNSStringArray2:NULL];
+  [obj cloneableMethodWithNSCopying:NULL];
+  [obj numberMethodWithNSNumber:NULL];
+  [obj classMethodWithIOSClass:NULL];
+  [obj stringIterableMethodWithJavaLangIterable:NULL];
+  [obj intStringMethodWithInt:1 withNSString:@""];
 
   [obj genericMethodWithId:NULL];
-  [obj genericMethodWithNSString:NULL];
+  [obj genericStringMethodWithNSString:@""];
 
-  obj.field_ = obj.field_;
+  obj.intField_ = obj.intField_;
 
-  J2ktJ2ktiosinteropDefaultNamesCompanion.shared.staticField_ =
-      J2ktJ2ktiosinteropDefaultNamesCompanion.shared.staticField_;
+  J2ktJ2ktiosinteropDefaultNamesCompanion.shared.staticIntField_ =
+      J2ktJ2ktiosinteropDefaultNamesCompanion.shared.staticIntField_;
 
   [J2ktJ2ktiosinteropDefaultNamesCompanion.shared staticMethod];
-  [J2ktJ2ktiosinteropDefaultNamesCompanion.shared staticMethodWithInt:1];
-  [J2ktJ2ktiosinteropDefaultNamesCompanion.shared staticMethodWithInt:1 withNSString:@""];
+  [J2ktJ2ktiosinteropDefaultNamesCompanion.shared staticIntMethodWithInt:1];
+  [J2ktJ2ktiosinteropDefaultNamesCompanion.shared staticIntStringMethodWithInt:1 withNSString:@""];
 
   J2ktiosinteropDefaultNames_staticMethod();
-  J2ktiosinteropDefaultNames_staticMethodWithInt_(1);
-  J2ktiosinteropDefaultNames_staticMethodWithInt_withNSString_(1, @"");
+  J2ktiosinteropDefaultNames_staticIntMethodWithInt_(1);
+  J2ktiosinteropDefaultNames_staticIntStringMethodWithInt_withNSString_(1, @"");
 }
 
 - (void)testCustomNames {

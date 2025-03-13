@@ -28,34 +28,34 @@ final class J2ktSwiftInteropTest: XCTestCase {
     obj = J2ktiosinteropDefaultNames(Int: 1, withNSString: "")
 
     obj.method()
-    obj.method(withBoolean: true)
-    obj.method(withChar: 65)
-    obj.method(withByte: 1)
-    obj.method(withShort: 1)
-    obj.method(withInt: 1)
-    obj.method(withLong: 1)
-    obj.method(withFloat: 1)
-    obj.method(withDouble: 1)
-    obj.method(withId: nil)
-    obj.method(withNSString: nil)
-    obj.method(withNSStringArray: nil)
-    obj.method(withNSStringArray2: nil)
-    obj.method(withNSCopying: nil)
-    obj.method(withNSNumber: 1)
-    obj.method(withIOSClass: nil)
-    obj.method(withJavaLangIterable: nil)
-    obj.method(withInt: 1, withNSString: nil)
+    obj.booleanMethod(withBoolean: true)
+    obj.charMethod(withChar: 65)
+    obj.byteMethod(withByte: 1)
+    obj.shortMethod(withShort: 1)
+    obj.intMethod(withInt: 1)
+    obj.longMethod(withLong: 1)
+    obj.floatMethod(withFloat: 1)
+    obj.doubleMethod(withDouble: 1)
+    obj.objectMethod(withId: nil)
+    obj.stringMethod(withNSString: "")
+    obj.stringArrayMethod(withNSStringArray: nil)
+    obj.stringArrayArrayMethod(withNSStringArray2: nil)
+    obj.cloneableMethod(withNSCopying: nil)
+    obj.numberMethod(withNSNumber: 1)
+    obj.classMethod(withIOSClass: nil)
+    obj.stringIterableMethod(withJavaLangIterable: nil)
+    obj.intStringMethod(withInt: 1, withNSString: "")
 
     obj.genericMethod(withId: nil)
-    obj.genericMethod(withNSString: nil)
+    obj.genericStringMethod(withNSString: "")
 
-    obj.field_ = obj.field_
-    J2ktiosinteropDefaultNamesCompanion.shared.staticField_ =
-      J2ktiosinteropDefaultNamesCompanion.shared.staticField_
+    obj.intField_ = obj.intField_
+    J2ktiosinteropDefaultNamesCompanion.shared.staticIntField_ =
+      J2ktiosinteropDefaultNamesCompanion.shared.staticIntField_
 
     J2ktiosinteropDefaultNamesCompanion.shared.staticMethod()
-    J2ktiosinteropDefaultNamesCompanion.shared.staticMethod(withInt: 1)
-    J2ktiosinteropDefaultNamesCompanion.shared.staticMethod(withInt: 1, withNSString: "")
+    J2ktiosinteropDefaultNamesCompanion.shared.staticIntMethod(withInt: 1)
+    J2ktiosinteropDefaultNamesCompanion.shared.staticIntStringMethod(withInt: 1, withNSString: "")
   }
 
   func testCustomNames() {
@@ -84,8 +84,7 @@ final class J2ktSwiftInteropTest: XCTestCase {
   }
 
   func testEnumNames() {
-    var e: J2ktiosinteropEnumNames
-    e = J2ktiosinteropEnumNames.ONE
-    e = J2ktiosinteropEnumNames.TWO
+    let _ = J2ktiosinteropEnumNames.ONE
+    let _ = J2ktiosinteropEnumNames.TWO
   }
 }

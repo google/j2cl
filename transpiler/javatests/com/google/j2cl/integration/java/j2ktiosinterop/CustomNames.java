@@ -38,29 +38,29 @@ public final class CustomNames {
   public void method() {}
 
   @ObjectiveCName("customWithIndex:")
-  public void method(int i) {}
+  public void intMethod(int i) {}
 
   @ObjectiveCName("customWithIndex:name:")
-  public void method(int i, String s) {}
+  public void intStringMethod(int i, String s) {}
 
   @ObjectiveCName("custom")
-  public void method(long i) {}
+  public void longMethod(long i) {}
 
   @ObjectiveCName("custom")
-  public void method(long i, String s) {}
+  public void longStringMethod(long i, String s) {}
 
   @ObjectiveCName("staticCustom")
   public static void staticMethod() {}
 
   @ObjectiveCName("staticCustomWithIndex:")
-  public static void staticMethod(int i) {}
+  public static void intStaticMethod(int i) {}
 
   @ObjectiveCName("staticCustomWithIndex:name:")
-  public static void staticMethod(int i, String s) {}
+  public static void intStringStaticMethod(int i, String s) {}
 
   @ObjectiveCName("staticCustom2")
-  public static void staticMethod(long i) {}
+  public static void longStaticMethod(long i) {}
 
   @ObjectiveCName("staticCustom3")
-  public static void staticMethod(long i, String s) {}
+  public static void longStringStaticMethod(long i, String s) {}
 }
