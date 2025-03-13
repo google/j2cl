@@ -110,10 +110,11 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
   private fun includedTypes(type: Type): List<Type> =
     type.types.filter(::shouldRender).flatMap { listOf(it) + includedTypes(it) }
 
-  private fun shouldRender(type: Type): Boolean = shouldRender(type.declaration)
+  private fun shouldRender(type: Type): Boolean =
+    !nameIsMappedInObjC(type.declaration) && shouldRender(type.declaration)
 
   private fun declarationsRenderers(type: Type): List<Renderer<Source>> = buildList {
-    if (objCNamePrefix.isNotEmpty() && !nameIsMappedInObjC(type.declaration)) {
+    if (objCNamePrefix.isNotEmpty()) {
       add(aliasDeclarationRenderer(type.declaration))
       type.toCompanionObjectOrNull()?.let { add(aliasDeclarationRenderer(it.declaration)) }
     }
