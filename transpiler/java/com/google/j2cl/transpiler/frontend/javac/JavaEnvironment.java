@@ -1311,7 +1311,8 @@ class JavaEnvironment {
         .setAnnotatedWithAutoValue(isAnnotatedWithAutoValue(typeElement))
         .setAnnotatedWithAutoValueBuilder(isAnnotatedWithAutoValueBuilder(typeElement))
         .setAnonymous(isAnonymous(typeElement))
-        .setLocal(isLocal(typeElement))
+        // Keep parity with jdt where anonymous classes are also considered local.
+        .setLocal(isLocal(typeElement) || isAnonymous(typeElement))
         .setSimpleJsName(JsInteropAnnotationUtils.getJsName(typeElement))
         .setCustomizedJsNamespace(getJsNamespace(typeElement))
         .setObjectiveCNamePrefix(getObjectiveCNamePrefix(typeElement))
