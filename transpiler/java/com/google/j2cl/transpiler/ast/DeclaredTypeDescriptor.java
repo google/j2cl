@@ -180,10 +180,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return getTypeDeclaration().isUnusableByJsSuppressed();
   }
 
-  public boolean isDeprecated() {
-    return getTypeDeclaration().isDeprecated();
-  }
-
   @Override
   public JsEnumInfo getJsEnumInfo() {
     return getTypeDeclaration().getJsEnumInfo();

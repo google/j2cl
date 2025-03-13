@@ -30,7 +30,7 @@ import javax.annotation.Nullable;
 /** Abstract base class for member descriptors. */
 @Visitable
 public abstract class MemberDescriptor
-    implements HasJsNameInfo, HasReadableDescription, HasUnusableByJsSuppression {
+    implements HasJsNameInfo, HasReadableDescription, HasUnusableByJsSuppression, HasAnnotations {
 
   /** Represents the origin of a specific member */
   public interface Origin {
@@ -111,8 +111,6 @@ public abstract class MemberDescriptor
 
   public abstract boolean isSynthetic();
 
-  public abstract boolean isDeprecated();
-
   public abstract Origin getOrigin();
 
   public boolean isMethod() {
@@ -184,7 +182,7 @@ public abstract class MemberDescriptor
             && getJsNamespace().equals(getEnclosingTypeDescriptor().getQualifiedJsName()));
   }
 
-  /** Gets a list of annotations present on the declaration of this member. */
+  @Override
   public abstract ImmutableList<Annotation> getAnnotations();
 
   /** Returns true if this is a user written $isInstance method. */

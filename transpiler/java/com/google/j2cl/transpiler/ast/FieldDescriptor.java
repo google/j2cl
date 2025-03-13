@@ -57,9 +57,6 @@ public abstract class FieldDescriptor extends MemberDescriptor {
   public abstract boolean isEnumConstant();
 
   @Override
-  public abstract boolean isDeprecated();
-
-  @Override
   public abstract FieldOrigin getOrigin();
 
   /** Whether this field originates in the source code or is synthetic. */
@@ -242,7 +239,6 @@ public abstract class FieldDescriptor extends MemberDescriptor {
         .setFinal(false)
         .setSynthetic(false)
         .setUnusableByJsSuppressed(false)
-        .setDeprecated(false)
         .setEnumConstant(false)
         .setOrigin(FieldOrigin.SOURCE);
   }
@@ -291,8 +287,6 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     public abstract Builder setAnnotations(List<Annotation> annotations);
 
     public abstract Builder setUnusableByJsSuppressed(boolean isUnusableByJsSuppressed);
-
-    public abstract Builder setDeprecated(boolean isDeprecated);
 
     public abstract Builder setOrigin(FieldOrigin fieldOrigin);
 

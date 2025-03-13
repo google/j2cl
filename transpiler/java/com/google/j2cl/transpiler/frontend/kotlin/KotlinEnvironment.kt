@@ -58,7 +58,6 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.isAutoValue
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isAutoValueBuilder
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isCapturingEnclosingInstance
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isClassType
-import com.google.j2cl.transpiler.frontend.kotlin.ir.isDeprecated
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isDoNotAutobox
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isFinal
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isFunctionalInterface
@@ -263,7 +262,6 @@ class KotlinEnvironment(
         .setFinal(irClass.isFinal)
         .setLocal(irClass.isLocal && !irClass.isAnonymousObject)
         .setAnonymous(irClass.isAnonymousObject)
-        .setDeprecated(irClass.isDeprecated)
         .setJsType(irClass.isJsType)
         .setJsFunctionInterface(irClass.isJsFunction)
         .setJsEnumInfo(irClass.getJsEnumInfo())
@@ -649,7 +647,6 @@ class KotlinEnvironment(
             !isStatic
         )
         .setTypeParameterTypeDescriptors(irFunction.typeParameters.map(::getTypeVariable))
-        .setDeprecated(irFunction.isDeprecated)
         .setOriginalJsInfo(irFunction.getJsInfo())
         .setUncheckedCast(irFunction.isUncheckedCast)
         .setWasmInfo(irFunction.getWasmInfo())
@@ -705,7 +702,6 @@ class KotlinEnvironment(
         // already enforced the final semantics.
         .setFinal(irField.isFinal && !irField.isNativeJsField)
         .setStatic(irField.isStatic || irField.parent !is IrDeclaration)
-        .setDeprecated(irField.isDeprecated)
         .setOriginalJsInfo(irField.getJsInfo())
         .setAnnotations(createAnnotations(irField))
         .build()
@@ -721,7 +717,6 @@ class KotlinEnvironment(
       .setFinal(true)
       .setStatic(true)
       .setEnumConstant(true)
-      .setDeprecated(irEnumEntry.isDeprecated)
       .setOriginalJsInfo(irEnumEntry.getJsInfo())
       .setAnnotations(createAnnotations(irEnumEntry))
       .build()

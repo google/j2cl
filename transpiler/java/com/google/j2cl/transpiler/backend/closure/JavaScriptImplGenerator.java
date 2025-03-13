@@ -30,6 +30,7 @@ import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Field;
+import com.google.j2cl.transpiler.ast.HasAnnotations;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodLike;
@@ -140,7 +141,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
             + closureTypesGenerator.getClosureTypeString(
                 AstUtils.getJsEnumValueFieldType(typeDeclaration))
             + "}");
-    if (type.getDeclaration().isDeprecated()) {
+    if (isDeprecated(type.getDeclaration())) {
       sourceBuilder.append(" @deprecated");
     }
     sourceBuilder.appendln(" */");
@@ -155,7 +156,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       sourceBuilder.emitWithMemberMapping(
           field.getDescriptor(),
           () -> {
-            if (field.getDescriptor().isDeprecated()) {
+            if (isDeprecated(field.getDescriptor())) {
               sourceBuilder.appendln(" /** @deprecated */");
             }
             sourceBuilder.emitWithMapping(
@@ -249,7 +250,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     type.getSuperInterfaceTypeDescriptors()
         .forEach(t -> renderClauseIfTypeExistsInJavaScript(extendsOrImplementsString, t, sb));
 
-    if (type.getDeclaration().isDeprecated()) {
+    if (isDeprecated(type.getDeclaration())) {
       appendWithNewLine(sb, " * @deprecated");
     }
 
@@ -404,7 +405,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       jsDocBuilder.append(" @return {").append(returnTypeName).append("}");
     }
 
-    if (methodDescriptor.isDeprecated()) {
+    if (isDeprecated(methodDescriptor)) {
       jsDocBuilder.append(" @deprecated");
     }
 
@@ -512,6 +513,12 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         typeDescriptors.stream()
             .map(closureTypesGenerator::getClosureTypeString)
             .collect(joining(", ")));
+  }
+
+  /** Returns true if the given node is annotated with @Deprecated. */
+  private static boolean isDeprecated(HasAnnotations hasAnnotations) {
+    return hasAnnotations.hasAnnotation("java.lang.Deprecated")
+        || hasAnnotations.hasAnnotation("kotlin.Deprecated");
   }
 
   private static void appendWithNewLine(StringBuilder sb, String string) {

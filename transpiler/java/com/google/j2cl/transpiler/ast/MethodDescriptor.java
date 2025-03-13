@@ -999,7 +999,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setSynthetic(false)
         .setEnumSyntheticMethod(false)
         .setUnusableByJsSuppressed(false)
-        .setDeprecated(false)
         .setUncheckedCast(false)
         .setSideEffectFree(false)
         .setOrigin(MethodOrigin.SOURCE)
@@ -1446,8 +1445,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public abstract Builder setEnumSyntheticMethod(boolean isEnumSyntheticMethod);
 
     public abstract Builder setUnusableByJsSuppressed(boolean isUnusableByJsSuppressed);
-
-    public abstract Builder setDeprecated(boolean isDeprecated);
 
     public abstract Builder setUncheckedCast(boolean isUncheckedCast);
 

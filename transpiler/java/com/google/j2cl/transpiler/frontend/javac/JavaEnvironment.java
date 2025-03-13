@@ -617,7 +617,6 @@ class JavaEnvironment {
         .setEnumConstant(isEnumConstant)
         .setUnusableByJsSuppressed(
             JsInteropAnnotationUtils.isUnusableByJsSuppressed(variableElement))
-        .setDeprecated(isDeprecated(variableElement))
         .build();
   }
 
@@ -934,7 +933,6 @@ class JavaEnvironment {
         .setSideEffectFree(isAnnotatedWithHasNoSideEffects(declarationMethodElement))
         .setUnusableByJsSuppressed(
             JsInteropAnnotationUtils.isUnusableByJsSuppressed(declarationMethodElement))
-        .setDeprecated(isDeprecated(declarationMethodElement))
         .setUncheckedCast(hasUncheckedCast)
         .build();
   }
@@ -1342,7 +1340,6 @@ class JavaEnvironment {
                     .map(this::createTypeDeclaration)
                     .collect(toImmutableList()))
         .setUnusableByJsSuppressed(JsInteropAnnotationUtils.isUnusableByJsSuppressed(typeElement))
-        .setDeprecated(isDeprecated(typeElement))
         .build();
   }
 
@@ -1539,10 +1536,6 @@ class JavaEnvironment {
       return null;
     }
     return getAnnotationParameterString(wasmAnnotation, "value");
-  }
-
-  private static boolean isDeprecated(AnnotatedConstruct binding) {
-    return hasAnnotation(binding, Deprecated.class.getName());
   }
 
   private static boolean isDefaultMethod(Element element) {

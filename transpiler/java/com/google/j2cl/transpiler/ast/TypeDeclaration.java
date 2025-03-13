@@ -18,7 +18,6 @@ package com.google.j2cl.transpiler.ast;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableSet.toImmutableSet;
-import static com.google.common.collect.MoreCollectors.toOptional;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
@@ -56,7 +55,7 @@ import javax.annotation.Nullable;
 @Visitable
 @AutoValue
 public abstract class TypeDeclaration
-    implements HasJsNameInfo, HasReadableDescription, HasUnusableByJsSuppression {
+    implements HasJsNameInfo, HasReadableDescription, HasUnusableByJsSuppression, HasAnnotations {
 
   /** Kind of type declaration. */
   public enum Kind {
@@ -322,31 +321,10 @@ public abstract class TypeDeclaration
   public abstract boolean isAnnotatedWithAutoValueBuilder();
 
   /** Gets a list of annotations present on the declaration. */
+  @Override
   @Memoized
   public ImmutableList<Annotation> getAnnotations() {
     return getAnnotationsFactory().get();
-  }
-
-  /** Returns whether the declaration has an annotation with the given qualified name. */
-  public boolean hasAnnotation(String qualifiedName) {
-    return getAnnotations().stream()
-        .anyMatch(
-            annotation ->
-                annotation.getTypeDescriptor().getQualifiedSourceName().equals(qualifiedName));
-  }
-
-  /**
-   * Returns the annotation on this declaration with the given qualified name, or {@code null} if
-   * not found. Throws an exception if more than one is found.
-   */
-  @Nullable
-  public Annotation getAnnotation(String qualifiedName) {
-    return getAnnotations().stream()
-        .filter(
-            annotation ->
-                annotation.getTypeDescriptor().getQualifiedSourceName().equals(qualifiedName))
-        .collect(toOptional())
-        .orElse(null);
   }
 
   @Memoized
@@ -392,8 +370,6 @@ public abstract class TypeDeclaration
 
   @Nullable
   abstract KtObjcInfo getKtObjcInfo();
-
-  public abstract boolean isDeprecated();
 
   public boolean isProtobuf() {
     return getAllSuperTypesIncludingSelf().stream()
@@ -855,7 +831,6 @@ public abstract class TypeDeclaration
         .setJsType(false)
         .setLocal(false)
         .setUnusableByJsSuppressed(false)
-        .setDeprecated(false)
         .setNullMarked(false)
         .setTypeParameterDescriptors(ImmutableList.of())
         .setDeclaredMethodDescriptorsFactory(() -> ImmutableList.of())
@@ -942,8 +917,6 @@ public abstract class TypeDeclaration
     public abstract Builder setWasmInfo(String wasmInfo);
 
     public abstract Builder setUnusableByJsSuppressed(boolean isUnusableByJsSuppressed);
-
-    public abstract Builder setDeprecated(boolean isDeprecated);
 
     public abstract Builder setLocal(boolean local);
 

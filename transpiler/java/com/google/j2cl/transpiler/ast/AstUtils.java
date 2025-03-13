@@ -984,8 +984,17 @@ public final class AstUtils {
         .setName(fieldDescriptor.getName())
         .setVisibility(fieldDescriptor.getVisibility())
         .setStatic(fieldDescriptor.isStatic())
-        .setDeprecated(fieldDescriptor.isDeprecated())
+        // TODO(b/402181063): Determine if we need to propagate annotations here.
+        .setAnnotations(
+            fieldDescriptor.getAnnotations().stream()
+                .filter(AstUtils::isDeprecatedAnnotation)
+                .collect(toImmutableList()))
         .setNative(fieldDescriptor.isNative());
+  }
+
+  private static boolean isDeprecatedAnnotation(Annotation annotation) {
+    return annotation.getTypeDescriptor().getQualifiedSourceName().equals("java.lang.Deprecated")
+        || annotation.getTypeDescriptor().getQualifiedSourceName().equals("kotlin.Deprecated");
   }
 
   /** Returns the field descriptor for the const field that holds the ordinal value. */

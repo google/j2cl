@@ -663,10 +663,6 @@ public class JdtEnvironment {
     }
   }
 
-  private static boolean isDeprecated(IBinding binding) {
-    return JdtAnnotationUtils.hasAnnotation(binding, Deprecated.class.getName());
-  }
-
   private static boolean isDefaultMethod(IMethodBinding binding) {
     return Modifier.isDefault(binding.getModifiers());
   }
@@ -826,7 +822,6 @@ public class JdtEnvironment {
             .setEnumConstant(variableBinding.isEnumConstant())
             .setUnusableByJsSuppressed(
                 JsInteropAnnotationUtils.isUnusableByJsSuppressed(variableBinding))
-            .setDeprecated(isDeprecated(variableBinding))
             .build();
     cachedFieldDescriptorByVariableBinding.put(variableBinding, fieldDescriptor);
     return fieldDescriptor;
@@ -937,7 +932,6 @@ public class JdtEnvironment {
             .setUnusableByJsSuppressed(
                 JsInteropAnnotationUtils.isUnusableByJsSuppressed(methodBinding))
             .setSideEffectFree(isAnnotatedWithHasNoSideEffects(methodBinding))
-            .setDeprecated(isDeprecated(methodBinding))
             .setUncheckedCast(hasUncheckedCastAnnotation(methodBinding))
             .build();
     cachedMethodDescriptorByMethodBinding.put(methodBinding, methodDescriptor);
@@ -1215,7 +1209,6 @@ public class JdtEnvironment {
                 () -> createTypeDeclarations(typeBinding.getDeclaredTypes()))
             .setUnusableByJsSuppressed(
                 JsInteropAnnotationUtils.isUnusableByJsSuppressed(typeBinding))
-            .setDeprecated(isDeprecated(typeBinding))
             .build();
     cachedTypeDeclarationByTypeBinding.put(typeBinding, typeDeclaration);
     return typeDeclaration;

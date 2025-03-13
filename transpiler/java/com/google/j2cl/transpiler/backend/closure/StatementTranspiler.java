@@ -200,7 +200,8 @@ public class StatementTranspiler {
           jsDocs.add("@type");
         }
         jsDocs.add("{" + typeJsDoc + "}");
-        if (declaration.isDeprecated()) {
+        if (declaration.getFieldDescriptor().hasAnnotation("java.lang.Deprecated")
+            || declaration.getFieldDescriptor().hasAnnotation("kotlin.Deprecated")) {
           jsDocs.add("@deprecated");
         }
         if (!declaration.getFieldDescriptor().canBeReferencedExternally()) {

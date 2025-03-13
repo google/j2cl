@@ -60,10 +60,6 @@ public class FieldDeclarationStatement extends Statement {
     return fieldDescriptor.isCompileTimeConstant();
   }
 
-  public boolean isDeprecated() {
-    return fieldDescriptor.isDeprecated();
-  }
-
   @Override
   Node acceptInternal(Processor processor) {
     return Visitor_FieldDeclarationStatement.visit(processor, this);
