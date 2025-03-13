@@ -36,7 +36,6 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParen
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.indented
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.join
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLineSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
@@ -126,7 +125,7 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
               annotationsSource(ktPrimaryConstructor, objCNames),
               join(
                 KotlinSource.CONSTRUCTOR_KEYWORD,
-                methodParametersSource(ktPrimaryConstructor, objCNames?.parameterNames),
+                methodParametersSource(ktPrimaryConstructor, objCNames?.parameterObjCNames),
               ),
             )
           }

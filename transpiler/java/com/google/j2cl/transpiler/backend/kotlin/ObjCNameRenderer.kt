@@ -75,7 +75,10 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
     methodObjCNames: MethodObjCNames?,
   ): Source =
     Source.emptyUnless(!methodDescriptor.isConstructor) {
-      methodObjCNames?.methodName?.let { objCNameAnnotationSource(it) }.orEmpty()
+      methodObjCNames
+        ?.objCName
+        ?.let { objCNameAnnotationSource(it.string, swiftName = it.swiftString) }
+        .orEmpty()
     }
 
   fun objCAnnotationSource(fieldDescriptor: FieldDescriptor): Source =

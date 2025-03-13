@@ -49,7 +49,6 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.colonSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.emptyLineSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.emptyUnless
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inNewLine
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParentheses
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.indented
@@ -198,7 +197,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
           colonSeparated(
             join(
               memberDescriptorRenderer.methodKindAndNameSource(methodDescriptor),
-              methodParametersSource(method, methodObjCNames?.parameterNames),
+              methodParametersSource(method, methodObjCNames?.parameterObjCNames),
             ),
             if (methodDescriptor.isConstructor) {
               constructorInvocationSource(method)
@@ -233,14 +232,17 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
     )
 
   private fun suppressNothingToOverrideSource(method: Method): Source =
-    emptyUnless(method.hasSuppressNothingToOverrideAnnotation()) {
+    Source.emptyUnless(method.hasSuppressNothingToOverrideAnnotation()) {
       return annotation(
         memberDescriptorRenderer.nameRenderer.topLevelQualifiedNameSource("kotlin.Suppress"),
         KotlinSource.literal("NOTHING_TO_OVERRIDE"),
       )
     }
 
-  fun methodParametersSource(method: MethodLike, objCParameterNames: List<String>? = null): Source {
+  fun methodParametersSource(
+    method: MethodLike,
+    objCParameterNames: List<ObjCName>? = null,
+  ): Source {
     val methodDescriptor = method.descriptor
     val parameterDescriptors = methodDescriptor.parameterDescriptors
     val parameters = method.parameters
@@ -273,7 +275,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
   private fun parameterSource(
     parameterDescriptor: ParameterDescriptor,
     parameter: Variable,
-    objCParameterName: String? = null,
+    objCParameterName: ObjCName? = null,
   ): Source {
     val parameterTypeDescriptor = parameterDescriptor.typeDescriptor
     val renderedTypeDescriptor =
@@ -284,7 +286,9 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
       }
     return spaceSeparated(
       Source.emptyUnless(parameterDescriptor.isVarargs) { VARARG_KEYWORD },
-      objCParameterName?.let { objCNameRenderer.objCNameAnnotationSource(it) }.orEmpty(),
+      objCParameterName
+        ?.let { objCNameRenderer.objCNameAnnotationSource(it.string, swiftName = it.swiftString) }
+        .orEmpty(),
       jsInteropAnnotationRenderer.jsInteropAnnotationsSource(parameterDescriptor),
       colonSeparated(
         nameRenderer.nameSource(parameter),

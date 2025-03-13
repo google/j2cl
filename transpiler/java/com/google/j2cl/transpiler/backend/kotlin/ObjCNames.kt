@@ -35,7 +35,10 @@ import com.google.j2cl.transpiler.backend.kotlin.common.mapFirst
 import com.google.j2cl.transpiler.backend.kotlin.common.titleCased
 
 /** The names are mangled according to J2ObjC rules. */
-internal data class MethodObjCNames(val methodName: String, val parameterNames: List<String>)
+internal data class MethodObjCNames(val objCName: ObjCName, val parameterObjCNames: List<ObjCName>)
+
+/** ObjC name, together with its Swift counterpart. */
+internal data class ObjCName(val string: String, val swiftString: String? = null)
 
 internal val String.escapeObjCKeyword
   get() = letIf(objCKeywords.contains(this)) { it + "_" }
@@ -61,24 +64,25 @@ internal fun Method.toObjCNames(): MethodObjCNames? =
 internal fun Method.toConstructorObjCNames(): MethodObjCNames =
   descriptor.objectiveCName.let { objectiveCName ->
     MethodObjCNames(
-      "init",
+      ObjCName(string = "init"),
       if (
-        objectiveCName != null &&
-          (objectiveCName.contains(":") || objectiveCName.startsWith("initWith"))
-      ) {
-        objectiveCName.objCMethodParameterNames.mapFirst {
-          val prefix = "initWith"
-          if (it.startsWith(prefix)) {
-            it.substring(prefix.length)
-          } else {
-            parameters.first().objCName
+          objectiveCName != null &&
+            (objectiveCName.contains(":") || objectiveCName.startsWith("initWith"))
+        ) {
+          objectiveCName.objCMethodParameterNames.mapFirst {
+            val prefix = "initWith"
+            if (it.startsWith(prefix)) {
+              it.substring(prefix.length)
+            } else {
+              parameters.first().objCName
+            }
+          }
+        } else {
+          parameters.mapIndexed { index, parameter ->
+            parameter.objCName.letIf(index != 0) { "with$it" }
           }
         }
-      } else {
-        parameters.mapIndexed { index, parameter ->
-          parameter.objCName.letIf(index != 0) { "with$it" }
-        }
-      },
+        .map { ObjCName(string = it) },
     )
   }
 
@@ -86,8 +90,8 @@ internal fun Method.toNonConstructorObjCNames(): MethodObjCNames =
   descriptor.objectiveCName.let { objectiveCName ->
     if (objectiveCName == null || !objectiveCName.contains(":")) {
       MethodObjCNames(
-        objectiveCName ?: descriptor.ktName.escapeJ2ObjCKeyword,
-        parameters.map { "with${it.objCName}" },
+        ObjCName(string = objectiveCName ?: descriptor.ktName.escapeJ2ObjCKeyword),
+        parameters.map { ObjCName(string = it.objCParamName, swiftString = it.swiftParamName) },
       )
     } else {
       val objCParameterNames = objectiveCName.objCMethodParameterNames
@@ -104,8 +108,8 @@ internal fun Method.toNonConstructorObjCNames(): MethodObjCNames =
           ?: firstObjCParameterName.indexOfLast { it.isUpperCase() }.takeIf { it > 0 }
           ?: firstObjCParameterName.length.div(2)
       MethodObjCNames(
-        firstObjCParameterName.substring(0, splitIndex),
-        objCParameterNames.mapFirst { it.substring(splitIndex) },
+        ObjCName(string = firstObjCParameterName.substring(0, splitIndex)),
+        objCParameterNames.mapFirst { it.substring(splitIndex) }.map { ObjCName(string = it) },
       )
     }
   }
@@ -214,16 +218,29 @@ private fun TypeVariable.variableObjCName(useId: Boolean): String =
 private val Variable.objCName: String
   get() = typeDescriptor.objCName(useId = true).titleCased
 
+private val Variable.objCParamName: String
+  get() = "with$objCName"
+
+// TODO(b/374280337): Implement
+private val Variable.swiftParamName: String?
+  get() = null
+
 internal val FieldDescriptor.objCName: String
   get() = name!!.objCName.escapeJ2ObjCKeyword.letIf(!isEnumConstant) { it + "_" }
 
 internal fun MethodObjCNames.escapeObjCMethod(isConstructor: Boolean): MethodObjCNames =
   copy(
-    methodName =
-      methodName
-        .letIf(parameterNames.isEmpty()) { it.escapeObjCKeyword }
-        .letIf(!isConstructor) { it.escapeReservedObjCPrefixWith("do") },
-    parameterNames = parameterNames.letIf(isConstructor) { it.mapFirst { "With$it" } },
+    objCName =
+      ObjCName(
+        string =
+          objCName.string
+            .letIf(parameterObjCNames.isEmpty()) { it.escapeObjCKeyword }
+            .letIf(!isConstructor) { it.escapeReservedObjCPrefixWith("do") }
+      ),
+    parameterObjCNames =
+      parameterObjCNames.letIf(isConstructor) {
+        it.mapFirst { ObjCName(string = "With${it.string}") }
+      },
   )
 
 // Taken from GitHub:

@@ -332,12 +332,12 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
       .objCName(useId = true)
       .let { "$prefix$it" }
       .plus("_")
-      .plus(objCNames.methodName)
-      .letIf(objCNames.parameterNames.isNotEmpty()) { parameterName ->
+      .plus(objCNames.objCName.string)
+      .letIf(objCNames.parameterObjCNames.isNotEmpty()) { parameterName ->
         parameterName.plus(
-          objCNames.parameterNames
+          objCNames.parameterObjCNames
             .mapIndexed { index, name ->
-              name
+              name.string
                 .letIf(index == 0) {
                   it.titleCased.letIf(methodDescriptor.isConstructor) { "With$it" }
                 }
@@ -373,9 +373,9 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
     }
 
   private fun objCSelector(methodObjCNames: MethodObjCNames): String =
-    methodObjCNames.methodName.plus(
-      methodObjCNames.parameterNames
-        .mapIndexed { index, name -> name.letIf(index == 0) { it.titleCased } + ":" }
+    methodObjCNames.objCName.string.plus(
+      methodObjCNames.parameterObjCNames
+        .mapIndexed { index, name -> name.string.letIf(index == 0) { it.titleCased } + ":" }
         .joinToString("")
     )
 
