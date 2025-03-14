@@ -38,8 +38,8 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors.SingletonBuilder
 import com.google.j2cl.transpiler.ast.TypeLiteral
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.Visibility
+import com.google.j2cl.transpiler.frontend.common.PackageInfoCache
 import com.google.j2cl.transpiler.frontend.common.SupportedAnnotations
-import com.google.j2cl.transpiler.frontend.jdt.PackageAnnotationsResolver
 import com.google.j2cl.transpiler.frontend.kotlin.ir.enumEntries
 import com.google.j2cl.transpiler.frontend.kotlin.ir.fqnOrFail
 import com.google.j2cl.transpiler.frontend.kotlin.ir.fromQualifiedBinaryName
@@ -148,7 +148,7 @@ import org.jetbrains.kotlin.types.Variance
 /** Utility functions to interact with the Kotlin compiler internal representations. */
 class KotlinEnvironment(
   private val pluginContext: IrPluginContext,
-  private val packageAnnotationsResolver: PackageAnnotationsResolver,
+  private val packageInfoCache: PackageInfoCache,
   private val jvmBackendContext: JvmBackendContext,
 ) {
   private val builtinsResolver = BuiltinsResolver(pluginContext, jvmBackendContext)
@@ -325,7 +325,7 @@ class KotlinEnvironment(
     // Caching is left to PackageDeclaration.Builder since construction is trivial.
     PackageDeclaration.newBuilder()
       .setName(packageName)
-      .setCustomizedJsNamespace(packageAnnotationsResolver.getJsNameSpace(packageName))
+      .setCustomizedJsNamespace(packageInfoCache.getJsNamespace(packageName))
       .build()
 
   /**

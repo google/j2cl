@@ -23,7 +23,6 @@ import com.google.j2cl.transpiler.ast.CompilationUnit
 import com.google.j2cl.transpiler.ast.Library
 import com.google.j2cl.transpiler.frontend.common.FrontendOptions
 import com.google.j2cl.transpiler.frontend.common.PackageInfoCache
-import com.google.j2cl.transpiler.frontend.jdt.PackageAnnotationsResolver
 import com.google.j2cl.transpiler.frontend.kotlin.ir.IntrinsicMethods
 import com.google.j2cl.transpiler.frontend.kotlin.ir.JvmIrDeserializerImpl
 import com.google.j2cl.transpiler.frontend.kotlin.lower.LoweringPasses
@@ -105,7 +104,7 @@ class KotlinParser(private val problems: Problems) {
   fun parseFiles(options: FrontendOptions): Library {
     val packageInfoCache = PackageInfoCache(options.classpaths, problems)
     problems.abortIfCancelled()
-    val packageAnnotationResolver = getPackageAnnotationResolver(options, packageInfoCache)
+    packageInfoCache.populateFromSources(options, problems)
     problems.abortIfCancelled()
 
     val compilerConfiguration = createCompilerConfiguration(options, packageInfoCache)
@@ -117,8 +116,7 @@ class KotlinParser(private val problems: Problems) {
     try {
       globalProblems.set(problems)
 
-      val compilationUnits =
-        parseFiles(compilerConfiguration, kotlincDisposable, packageAnnotationResolver)
+      val compilationUnits = parseFiles(compilerConfiguration, kotlincDisposable, packageInfoCache)
 
       return Library.newBuilder()
         .setCompilationUnits(compilationUnits)
@@ -134,7 +132,7 @@ class KotlinParser(private val problems: Problems) {
   private fun parseFiles(
     compilerConfiguration: CompilerConfiguration,
     disposable: Disposable,
-    packageAnnotationResolver: PackageAnnotationsResolver,
+    packageInfoCache: PackageInfoCache,
   ): List<CompilationUnit> {
     val messageCollector = compilerConfiguration.get(MESSAGE_COLLECTOR_KEY)!!
 
@@ -187,7 +185,7 @@ class KotlinParser(private val problems: Problems) {
         compilerConfiguration,
         projectEnvironment.project,
         state,
-        packageAnnotationResolver,
+        packageInfoCache,
       )
     problems.abortIfCancelled()
 
@@ -208,7 +206,7 @@ class KotlinParser(private val problems: Problems) {
     compilerConfiguration: CompilerConfiguration,
     project: Project,
     state: GenerationState,
-    packageAnnotationResolver: PackageAnnotationsResolver,
+    packageInfoCache: PackageInfoCache,
   ): CompilationUnitBuilderExtension {
     // Lower the IR tree before to convert it to a j2cl ast
     val lowerings = LoweringPasses(state, compilerConfiguration)
@@ -221,11 +219,7 @@ class KotlinParser(private val problems: Problems) {
         override fun generate(moduleFragment: IrModuleFragment, pluginContext: IrPluginContext) {
           compilationUnits =
             CompilationUnitBuilder(
-                KotlinEnvironment(
-                  pluginContext,
-                  packageAnnotationResolver,
-                  lowerings.jvmBackendContext,
-                ),
+                KotlinEnvironment(pluginContext, packageInfoCache, lowerings.jvmBackendContext),
                 IntrinsicMethods(pluginContext.irBuiltIns),
               )
               .convert(moduleFragment)
@@ -234,16 +228,6 @@ class KotlinParser(private val problems: Problems) {
 
     IrGenerationExtension.registerExtension(project, compilationUnitBuilderExtension)
     return compilationUnitBuilderExtension
-  }
-
-  private fun getPackageAnnotationResolver(
-    options: FrontendOptions,
-    packageInfoCache: PackageInfoCache,
-  ): PackageAnnotationsResolver {
-    val packageInfoSources: List<FileInfo> =
-      options.sources.filter { it.originalPath().endsWith("package-info.java") }
-
-    return PackageAnnotationsResolver.create(packageInfoSources, packageInfoCache, problems)
   }
 
   interface CompilationUnitBuilderExtension {
