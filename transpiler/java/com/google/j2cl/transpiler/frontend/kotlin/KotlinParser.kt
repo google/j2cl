@@ -104,8 +104,6 @@ class KotlinParser(private val problems: Problems) {
   fun parseFiles(options: FrontendOptions): Library {
     val packageInfoCache = PackageInfoCache(options.classpaths, problems)
     problems.abortIfCancelled()
-    packageInfoCache.populateFromSources(options, problems)
-    problems.abortIfCancelled()
 
     val compilerConfiguration = createCompilerConfiguration(options, packageInfoCache)
     problems.abortIfCancelled()

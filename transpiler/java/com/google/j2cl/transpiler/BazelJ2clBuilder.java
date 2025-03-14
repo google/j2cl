@@ -185,9 +185,7 @@ final class BazelJ2clBuilder extends BazelWorker {
     ImmutableList<FileInfo> allKotlinSources =
         allSources.stream().filter(p -> p.sourcePath().endsWith(".kt")).collect(toImmutableList());
 
-    // For now, only package-info.java files are allowed with Kotlin sources.
-    if (allJavaSources.stream().anyMatch(f -> !f.sourcePath().endsWith("package-info.java"))
-        && !allKotlinSources.isEmpty()) {
+    if (!allJavaSources.isEmpty() && !allKotlinSources.isEmpty()) {
       throw new AssertionError(
           "Transpilation of Java and Kotlin files together is not supported yet.");
     }
