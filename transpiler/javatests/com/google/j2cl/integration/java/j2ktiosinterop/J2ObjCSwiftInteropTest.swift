@@ -54,20 +54,20 @@ final class J2ObjCSwiftInteropTest: XCTestCase {
   func testCustomNames() {
     var obj: Custom
 
-    obj = Custom(index: 1 as jint)
-    obj = Custom(index: 1 as jint, name: nil)
+    obj = Custom(index: 1)
+    obj = Custom(index: 1, name: "")
 
     obj = Custom()
     // Not exposed on Swift
-    //obj = Custom(long: 1 as jlong)
-    //obj = Custom(long: 1 as jlong, withNSString: "")
+    //obj = Custom(long: 1)
+    //obj = Custom(long: 1, withNSString: "")
 
     obj.custom()
-    obj.custom(with: 1 as jint)
-    obj.custom(with: 1 as jint, name: "")
+    obj.custom(with: 1)
+    obj.custom(with: 1, name: "")
 
-    obj.custom(withLong: 1 as jlong)
-    obj.custom(withLong: 1 as jlong, with: "")
+    obj.custom(withLong: 1)
+    obj.custom(withLong: 1, with: "")
   }
 
   func testEnumNames() {
