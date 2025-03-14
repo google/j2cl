@@ -33,8 +33,9 @@ public class NewInstance extends Invocation {
       Expression qualifier,
       MethodDescriptor constructorMethodDescriptor,
       List<Expression> arguments,
+      List<TypeDescriptor> typeArguments,
       Type anonymousInnerClass) {
-    super(qualifier, constructorMethodDescriptor, arguments);
+    super(qualifier, constructorMethodDescriptor, arguments, typeArguments);
     this.anonymousInnerClass = anonymousInnerClass;
   }
 
@@ -62,7 +63,11 @@ public class NewInstance extends Invocation {
     // so.
     checkState(anonymousInnerClass == null);
     return new NewInstance(
-        AstUtils.clone(qualifier), getTarget(), AstUtils.clone(arguments), anonymousInnerClass);
+        AstUtils.clone(qualifier),
+        getTarget(),
+        AstUtils.clone(arguments),
+        typeArguments,
+        anonymousInnerClass);
   }
 
   @Override
@@ -105,7 +110,8 @@ public class NewInstance extends Invocation {
 
     @Override
     public NewInstance build() {
-      return new NewInstance(getQualifier(), getTarget(), getArguments(), anonymousInnerClass);
+      return new NewInstance(
+          getQualifier(), getTarget(), getArguments(), getTypeArguments(), anonymousInnerClass);
     }
 
     private Builder(NewInstance newInstance) {

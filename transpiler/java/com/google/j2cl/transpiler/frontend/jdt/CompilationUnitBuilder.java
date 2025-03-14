@@ -19,9 +19,9 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.MoreCollectors.onlyElement;
+import static com.google.j2cl.transpiler.frontend.jdt.JdtEnvironment.asTypedList;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toCollection;
-import static java.util.stream.Collectors.toList;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -200,7 +200,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     private Type convertType(AbstractTypeDeclaration typeDeclaration) {
       return convertType(
           typeDeclaration.resolveBinding(),
-          JdtEnvironment.asTypedList(typeDeclaration.bodyDeclarations()),
+          asTypedList(typeDeclaration.bodyDeclarations()),
           typeDeclaration.getName());
     }
 
@@ -283,7 +283,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
               .setArguments(
                   convertArguments(
                       enumConstructorBinding,
-                      JdtEnvironment.asTypedList(enumConstantDeclaration.arguments()),
+                      asTypedList(enumConstantDeclaration.arguments()),
                       foldConstantArguments))
               .setAnonymousInnerClass(anonymousInnerClass)
               .build();
@@ -371,7 +371,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       ArrayType arrayType = expression.getType();
 
       List<Expression> dimensionExpressions =
-          convertExpressions(JdtEnvironment.asTypedList(expression.dimensions()));
+          convertExpressions(asTypedList(expression.dimensions()));
       // Pad the dimension expressions with null values to denote omitted dimensions.
       AstUtils.addNullPadding(dimensionExpressions, arrayType.getDimensions());
 
@@ -395,8 +395,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
               (ArrayTypeDescriptor)
                   environment.createTypeDescriptor(
                       expression.resolveTypeBinding(), inNullMarkedScope()))
-          .setValueExpressions(
-              convertExpressions(JdtEnvironment.asTypedList(expression.expressions())))
+          .setValueExpressions(convertExpressions(asTypedList(expression.expressions())))
           .build();
     }
 
@@ -435,7 +434,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
       Expression qualifier = convertOrNull(expression.getExpression());
       List<Expression> arguments =
-          convertArguments(constructorBinding, JdtEnvironment.asTypedList(expression.arguments()));
+          convertArguments(constructorBinding, asTypedList(expression.arguments()));
 
       MethodDescriptor constructorDescriptor =
           environment.createMethodDescriptor(constructorBinding);
@@ -453,6 +452,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       return NewInstance.Builder.from(constructorDescriptor)
           .setQualifier(qualifier)
           .setArguments(arguments)
+          .setTypeArguments(convertTypeArguments(asTypedList(expression.typeArguments())))
           .setAnonymousInnerClass(anonymousInnerClass)
           .build();
     }
@@ -465,7 +465,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       Type type =
           convertType(
               typeDeclaration.resolveBinding(),
-              JdtEnvironment.asTypedList(typeDeclaration.bodyDeclarations()),
+              asTypedList(typeDeclaration.bodyDeclarations()),
               typeDeclaration);
       // The initial constructor descriptor does not include the super call qualifier.
       MethodDescriptor constructorDescriptor =
@@ -573,7 +573,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     private VariableDeclarationExpression convert(
         org.eclipse.jdt.core.dom.VariableDeclarationExpression expression) {
       List<org.eclipse.jdt.core.dom.VariableDeclarationFragment> fragments =
-          JdtEnvironment.asTypedList(expression.fragments());
+          asTypedList(expression.fragments());
 
       return VariableDeclarationExpression.newBuilder()
           .setVariableDeclarationFragments(
@@ -737,13 +737,13 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           // The order here is important since initializers can define new variables
           // These can be used in the expression, updaters or the body
           // This is why we need to process initializers first
-          .setInitializers(convertExpressions(JdtEnvironment.asTypedList(statement.initializers())))
+          .setInitializers(convertExpressions(asTypedList(statement.initializers())))
           .setConditionExpression(
               statement.getExpression() == null
                   ? BooleanLiteral.get(true)
                   : convert(statement.getExpression()))
           .setBody(convert(statement.getBody()))
-          .setUpdates(convertExpressions(JdtEnvironment.asTypedList(statement.updaters())))
+          .setUpdates(convertExpressions(asTypedList(statement.updaters())))
           .setSourcePosition(getSourcePosition(statement))
           .build();
     }
@@ -879,6 +879,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           .setReferencedMethodDescriptor(referencedMethodDescriptor)
           .setInterfaceMethodDescriptor(functionalMethodDescriptor)
           .setQualifier(qualifier)
+          .setTypeArguments(convertTypeArguments(asTypedList(expression.typeArguments())))
           .setSourcePosition(sourcePosition)
           .build();
     }
@@ -1032,8 +1033,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
 
     private Block convert(org.eclipse.jdt.core.dom.Block block) {
-      List<org.eclipse.jdt.core.dom.Statement> statements =
-          JdtEnvironment.asTypedList(block.statements());
+      List<org.eclipse.jdt.core.dom.Statement> statements = asTypedList(block.statements());
 
       return Block.newBuilder()
           .setSourcePosition(getSourcePosition(block))
@@ -1057,9 +1057,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       IMethodBinding constructorBinding = statement.resolveConstructorBinding();
       MethodDescriptor methodDescriptor = environment.createMethodDescriptor(constructorBinding);
       return MethodCall.Builder.from(methodDescriptor)
-          .setArguments(
-              convertArguments(
-                  constructorBinding, JdtEnvironment.asTypedList(statement.arguments())))
+          .setArguments(convertArguments(constructorBinding, asTypedList(statement.arguments())))
+          .setTypeArguments(convertTypeArguments(asTypedList(statement.typeArguments())))
           .setSourcePosition(getSourcePosition(statement))
           .build()
           .makeStatement(getSourcePosition(statement));
@@ -1121,10 +1120,11 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       IMethodBinding methodBinding = methodInvocation.resolveMethodBinding();
       MethodDescriptor methodDescriptor = environment.createMethodDescriptor(methodBinding);
       List<Expression> arguments =
-          convertArguments(methodBinding, JdtEnvironment.asTypedList(methodInvocation.arguments()));
+          convertArguments(methodBinding, asTypedList(methodInvocation.arguments()));
       return MethodCall.Builder.from(methodDescriptor)
           .setQualifier(qualifier)
           .setArguments(arguments)
+          .setTypeArguments(convertTypeArguments(asTypedList(methodInvocation.typeArguments())))
           .setSourcePosition(getSourcePosition(methodInvocation))
           .build();
     }
@@ -1136,8 +1136,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
       return MethodCall.Builder.from(methodDescriptor)
           .setQualifier(createSuperReference(expression.getQualifier()))
-          .setArguments(
-              convertArguments(methodBinding, JdtEnvironment.asTypedList(expression.arguments())))
+          .setArguments(convertArguments(methodBinding, asTypedList(expression.arguments())))
+          .setTypeArguments(convertTypeArguments(asTypedList(expression.typeArguments())))
           .setSourcePosition(getSourcePosition(expression))
           .build();
     }
@@ -1158,8 +1158,15 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
               .map(
                   expression ->
                       foldConstants ? convertAndFoldExpression(expression) : convert(expression))
-              .collect(toList());
+              .collect(toCollection(ArrayList::new));
       return AstUtils.maybePackageVarargs(methodDescriptor, arguments);
+    }
+
+    private List<TypeDescriptor> convertTypeArguments(
+        List<org.eclipse.jdt.core.dom.Type> typeArguments) {
+      return typeArguments.stream()
+          .map(type -> environment.createTypeDescriptor(type.resolveBinding(), inNullMarkedScope()))
+          .collect(toCollection(ArrayList::new));
     }
 
     private NumberLiteral convert(org.eclipse.jdt.core.dom.NumberLiteral literal) {
@@ -1292,7 +1299,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       return SwitchExpression.newBuilder()
           .setTypeDescriptor(environment.createTypeDescriptor(expression.resolveTypeBinding()))
           .setExpression(convert(expression.getExpression()))
-          .setCases(createSwitchCases(JdtEnvironment.asTypedList(expression.statements())))
+          .setCases(createSwitchCases(asTypedList(expression.statements())))
           .setSourcePosition(getSourcePosition(expression))
           .build();
     }
@@ -1301,7 +1308,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       return SwitchStatement.newBuilder()
           .setSourcePosition(getSourcePosition(switchStatement))
           .setExpression(convert(switchStatement.getExpression()))
-          .setCases(createSwitchCases(JdtEnvironment.asTypedList(switchStatement.statements())))
+          .setCases(createSwitchCases(asTypedList(switchStatement.statements())))
           .build();
     }
 
@@ -1351,8 +1358,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       return MethodCall.Builder.from(methodDescriptor)
           .setQualifier(convertOrNull(expression.getExpression()))
           .setArguments(
-              convertArguments(
-                  superConstructorBinding, JdtEnvironment.asTypedList(expression.arguments())))
+              convertArguments(superConstructorBinding, asTypedList(expression.arguments())))
+          .setTypeArguments(convertTypeArguments(asTypedList(expression.typeArguments())))
           .setSourcePosition(getSourcePosition(expression))
           .build()
           .makeStatement(getSourcePosition(expression));
@@ -1383,10 +1390,9 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
 
     private TryStatement convert(org.eclipse.jdt.core.dom.TryStatement statement) {
-      List<org.eclipse.jdt.core.dom.Expression> resources =
-          JdtEnvironment.asTypedList(statement.resources());
+      List<org.eclipse.jdt.core.dom.Expression> resources = asTypedList(statement.resources());
       List<org.eclipse.jdt.core.dom.CatchClause> catchClauses =
-          JdtEnvironment.asTypedList(statement.catchClauses());
+          asTypedList(statement.catchClauses());
 
       return TryStatement.newBuilder()
           .setSourcePosition(getSourcePosition(statement))
@@ -1433,7 +1439,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     private ExpressionStatement convert(
         org.eclipse.jdt.core.dom.VariableDeclarationStatement statement) {
       List<org.eclipse.jdt.core.dom.VariableDeclarationFragment> fragments =
-          JdtEnvironment.asTypedList(statement.fragments());
+          asTypedList(statement.fragments());
       return VariableDeclarationExpression.newBuilder()
           .setVariableDeclarationFragments(
               fragments.stream().map(this::convert).collect(toImmutableList()))

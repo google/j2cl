@@ -22,6 +22,8 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.Nullable;
 
 /** Class for a method reference. */
@@ -31,6 +33,7 @@ public class MethodReference extends Expression {
   private final MethodDescriptor referencedMethodDescriptor;
   private final MethodDescriptor interfaceMethodDescriptor;
   @Nullable @Visitable protected Expression qualifier;
+  @Visitable List<TypeDescriptor> typeArguments = new ArrayList<>();
   private final SourcePosition sourcePosition;
 
   private MethodReference(
@@ -38,11 +41,13 @@ public class MethodReference extends Expression {
       TypeDescriptor typeDescriptor,
       MethodDescriptor referencedMethodDescriptor,
       MethodDescriptor interfaceMethodDescriptor,
-      Expression qualifier) {
+      Expression qualifier,
+      List<TypeDescriptor> typeArguments) {
     this.typeDescriptor = checkNotNull(typeDescriptor);
     this.referencedMethodDescriptor = checkNotNull(referencedMethodDescriptor);
     this.interfaceMethodDescriptor = checkNotNull(interfaceMethodDescriptor);
     this.qualifier = qualifier;
+    this.typeArguments.addAll(typeArguments);
     this.sourcePosition = checkNotNull(sourcePosition);
     checkArgument(interfaceMethodDescriptor.getEnclosingTypeDescriptor().isFunctionalInterface());
   }
@@ -62,6 +67,11 @@ public class MethodReference extends Expression {
 
   public Expression getQualifier() {
     return this.qualifier;
+  }
+
+  /** Type arguments that are explicitly provided (as opposed to inferred). */
+  public List<TypeDescriptor> getTypeArguments() {
+    return typeArguments;
   }
 
   public SourcePosition getSourcePosition() {
@@ -104,6 +114,7 @@ public class MethodReference extends Expression {
     private MethodDescriptor referencedMethodDescriptor;
     private MethodDescriptor interfaceMethodDescriptor;
     private Expression qualifier;
+    private final List<TypeDescriptor> typeArguments = new ArrayList<>();
     private SourcePosition sourcePosition;
 
     public static Builder from(MethodReference expression) {
@@ -112,6 +123,7 @@ public class MethodReference extends Expression {
           .setReferencedMethodDescriptor(expression.getReferencedMethodDescriptor())
           .setInterfaceMethodDescriptor(expression.getInterfacedMethodDescriptor())
           .setQualifier(expression.getQualifier())
+          .setTypeArguments(expression.getTypeArguments())
           .setSourcePosition(expression.getSourcePosition());
     }
 
@@ -140,6 +152,13 @@ public class MethodReference extends Expression {
     }
 
     @CanIgnoreReturnValue
+    public final Builder setTypeArguments(List<TypeDescriptor> typeArguments) {
+      this.typeArguments.clear();
+      this.typeArguments.addAll(typeArguments);
+      return this;
+    }
+
+    @CanIgnoreReturnValue
     public Builder setSourcePosition(SourcePosition sourcePosition) {
       this.sourcePosition = sourcePosition;
       return this;
@@ -151,7 +170,8 @@ public class MethodReference extends Expression {
           typeDescriptor,
           referencedMethodDescriptor,
           interfaceMethodDescriptor,
-          qualifier);
+          qualifier,
+          typeArguments);
     }
   }
 }

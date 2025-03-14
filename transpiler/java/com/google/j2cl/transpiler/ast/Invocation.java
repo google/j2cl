@@ -30,14 +30,25 @@ import java.util.List;
 @Visitable
 public abstract class Invocation extends MemberReference {
   @Visitable List<Expression> arguments = new ArrayList<>();
+  @Visitable List<TypeDescriptor> typeArguments = new ArrayList<>();
 
-  Invocation(Expression qualifier, MethodDescriptor target, List<Expression> arguments) {
+  Invocation(
+      Expression qualifier,
+      MethodDescriptor target,
+      List<Expression> arguments,
+      List<TypeDescriptor> typeArguments) {
     super(qualifier, target);
     this.arguments.addAll(arguments);
+    this.typeArguments.addAll(typeArguments);
   }
 
   public final List<Expression> getArguments() {
     return arguments;
+  }
+
+  /** Type arguments that are explicitly provided (as opposed to inferred). */
+  public List<TypeDescriptor> getTypeArguments() {
+    return typeArguments;
   }
 
   @Override
@@ -64,6 +75,7 @@ public abstract class Invocation extends MemberReference {
       extends MemberReference.Builder<T, I, MethodDescriptor> {
 
     private List<Expression> arguments = new ArrayList<>();
+    private List<TypeDescriptor> typeArguments = new ArrayList<>();
 
     public static Builder<?, ?> from(Invocation invocation) {
       return invocation.createBuilder();
@@ -136,9 +148,21 @@ public abstract class Invocation extends MemberReference {
       return arguments;
     }
 
+    @CanIgnoreReturnValue
+    public final T setTypeArguments(List<TypeDescriptor> typeArguments) {
+      this.typeArguments.clear();
+      this.typeArguments.addAll(typeArguments);
+      return getThis();
+    }
+
+    protected final List<TypeDescriptor> getTypeArguments() {
+      return typeArguments;
+    }
+
     Builder(Invocation invocation) {
       super(invocation);
       this.arguments = Lists.newArrayList(invocation.getArguments());
+      this.typeArguments = Lists.newArrayList(invocation.getTypeArguments());
     }
 
     Builder() {}

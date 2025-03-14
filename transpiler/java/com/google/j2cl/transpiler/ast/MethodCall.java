@@ -37,8 +37,9 @@ public class MethodCall extends Invocation {
       Expression qualifier,
       MethodDescriptor target,
       List<Expression> arguments,
+      List<TypeDescriptor> typeArguments,
       boolean isStaticDispatch) {
-    super(qualifier, target, arguments);
+    super(qualifier, target, arguments, typeArguments);
 
     this.isStaticDispatch = isStaticDispatch;
     this.sourcePosition = checkNotNull(sourcePosition);
@@ -78,6 +79,7 @@ public class MethodCall extends Invocation {
         AstUtils.clone(qualifier),
         getTarget(),
         AstUtils.clone(arguments),
+        typeArguments,
         isStaticDispatch);
   }
 
@@ -124,7 +126,12 @@ public class MethodCall extends Invocation {
     @Override
     public MethodCall build() {
       return new MethodCall(
-          sourcePosition, getQualifier(), getTarget(), getArguments(), isStaticDispatch);
+          sourcePosition,
+          getQualifier(),
+          getTarget(),
+          getArguments(),
+          getTypeArguments(),
+          isStaticDispatch);
     }
 
     private Builder(MethodCall methodCall) {
