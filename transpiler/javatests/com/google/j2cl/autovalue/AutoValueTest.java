@@ -63,7 +63,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 @RunWith(JUnit4.class)
-@SuppressWarnings("ArrayToString")
+@SuppressWarnings({"ArrayToString", "SelfAssertion"})
 public class AutoValueTest {
 
   @AutoValue
