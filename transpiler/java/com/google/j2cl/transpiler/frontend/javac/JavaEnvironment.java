@@ -1307,9 +1307,6 @@ class JavaEnvironment {
         .setJsType(JsInteropUtils.isJsType(typeElement))
         .setJsEnumInfo(jsEnumInfo)
         .setNative(JsInteropUtils.isJsNativeType(typeElement))
-        .setAnnotatedWithFunctionalInterface(isAnnotatedWithFunctionalInterface(typeElement))
-        .setAnnotatedWithAutoValue(isAnnotatedWithAutoValue(typeElement))
-        .setAnnotatedWithAutoValueBuilder(isAnnotatedWithAutoValueBuilder(typeElement))
         .setAnonymous(isAnonymous(typeElement))
         // Keep parity with jdt where anonymous classes are also considered local.
         .setLocal(isLocal(typeElement) || isAnonymous(typeElement))
