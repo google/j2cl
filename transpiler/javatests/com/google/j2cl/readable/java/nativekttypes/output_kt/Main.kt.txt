@@ -64,9 +64,9 @@ open class Main {
 
  @ObjCName("methodArguments")
  open fun methodArguments(
-  @ObjCName("withNativekttypesNativeTopLevel") foo: KTopLevel<String?>?,
-  @ObjCName("withNativekttypesNativeTopLevel_Nested") nested: KNested<String?>?,
-  @ObjCName("withNativekttypesNativeTopLevel_Inner") inner: KTopLevel<String?>.KInner<String?>?
+  @ObjCName("withNativekttypesNativeTopLevel", swiftName = "with") foo: KTopLevel<String?>?,
+  @ObjCName("withNativekttypesNativeTopLevel_Nested", swiftName = "with") nested: KNested<String?>?,
+  @ObjCName("withNativekttypesNativeTopLevel_Inner", swiftName = "with") inner: KTopLevel<String?>.KInner<String?>?
  ) {}
 
  @ObjCName("memberAccess")
@@ -163,7 +163,7 @@ open class Main {
 
  @ObjCName("acceptFn_generic")
  open fun <I, O> acceptFn_generic(
-  @ObjCName("withNativekttypesFn") f: Fn<I, O>?,
+  @ObjCName("withNativekttypesFn", swiftName = "with") f: Fn<I, O>?,
   @ObjCName("withId") i: I
  ): O {
   return f!!.apply(i)
@@ -171,15 +171,15 @@ open class Main {
 
  @ObjCName("acceptFn_parametrized")
  open fun acceptFn_parametrized(
-  @ObjCName("withNativekttypesFn") f: Fn<String?, String?>?,
-  @ObjCName("withNSString") i: String?
+  @ObjCName("withNativekttypesFn", swiftName = "with") f: Fn<String?, String?>?,
+  @ObjCName("withNSString", swiftName = "with") i: String?
  ): String? {
   return f!!.apply(i)
  }
 
  @ObjCName("acceptFn_genericWildcard")
  open fun <I, O> acceptFn_genericWildcard(
-  @ObjCName("withNativekttypesFn") f: Fn<I, O>?,
+  @ObjCName("withNativekttypesFn", swiftName = "with") f: Fn<I, O>?,
   @ObjCName("withId") i: I
  ): O {
   return f!!.apply(i)
@@ -187,15 +187,15 @@ open class Main {
 
  @ObjCName("acceptFn_parametrizedWildcard")
  open fun acceptFn_parametrizedWildcard(
-  @ObjCName("withNativekttypesFn") f: Fn<String?, String?>?,
-  @ObjCName("withNSString") i: String?
+  @ObjCName("withNativekttypesFn", swiftName = "with") f: Fn<String?, String?>?,
+  @ObjCName("withNSString", swiftName = "with") i: String?
  ): String? {
   return f!!.apply(i)
  }
 
  @ObjCName("acceptFn_unboundWildcard")
  open fun acceptFn_unboundWildcard(
-  @ObjCName("withNativekttypesFn") f: Fn<*, *>?,
+  @ObjCName("withNativekttypesFn", swiftName = "with") f: Fn<*, *>?,
   @ObjCName("withId") i: Any?
  ): Any? {
   return (f as Fn<Any?, Any?>?)!!.apply(i)
@@ -203,7 +203,7 @@ open class Main {
 
  @ObjCName("acceptFn_raw")
  open fun acceptFn_raw(
-  @ObjCName("withNativekttypesFn") f: Fn<Any?, Any?>?,
+  @ObjCName("withNativekttypesFn", swiftName = "with") f: Fn<Any?, Any?>?,
   @ObjCName("withId") i: Any?
  ): Any? {
   return f!!.apply(i)

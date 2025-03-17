@@ -185,12 +185,12 @@ open class Arrays {
 
  @ObjCName("consumesCloneable")
  open fun consumesCloneable(
-  @ObjCName("withNSCopying") cloneable: Cloneable?
+  @ObjCName("withNSCopying", swiftName = "with") cloneable: Cloneable?
  ) {}
 
  @ObjCName("consumesSerializable")
  open fun consumesSerializable(
-  @ObjCName("withJavaIoSerializable") serializable: Serializable?
+  @ObjCName("withJavaIoSerializable", swiftName = "with") serializable: Serializable?
  ) {}
 
  @ObjCName("J2ktArrayArrays_SomeObject", swiftName = "ArrayArrays_SomeObject", exact = true)

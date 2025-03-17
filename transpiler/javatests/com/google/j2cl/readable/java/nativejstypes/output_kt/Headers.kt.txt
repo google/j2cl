@@ -32,12 +32,12 @@ import kotlin.native.ObjCName
 open class Headers {
  @ObjCName("append")
  external open fun append(
-  @ObjCName("withNSString") name: String?,
-  @ObjCName("withNSString") value: String?
+  @ObjCName("withNSString", swiftName = "with") name: String?,
+  @ObjCName("withNSString", swiftName = "with") value: String?
  )
 
  @ObjCName("get")
  external open fun get(
-  @ObjCName("withNSString") name: String?
+  @ObjCName("withNSString", swiftName = "with") name: String?
  ): String?
 }

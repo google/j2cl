@@ -31,15 +31,15 @@ import packageprivatemethods.package1.Parent
 open class Child: Parent(), Interface {
  @ObjCName("overrideInParentExposedInChild")
  public open fun overrideInParentExposedInChild(
-  @ObjCName("withInt") a: Int
+  @ObjCName("withInt", swiftName = "with") a: Int
  ): Int {
   return a + 1
  }
 
  @ObjCName("exposedInChild")
  public open fun exposedInChild(
-  @ObjCName("withInt") a: Int,
-  @ObjCName("withInt") b: Int
+  @ObjCName("withInt", swiftName = "with") a: Int,
+  @ObjCName("withInt", swiftName = "with") b: Int
  ): Int {
   return a + b + 1
  }

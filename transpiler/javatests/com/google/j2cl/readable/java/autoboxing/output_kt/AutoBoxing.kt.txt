@@ -54,7 +54,7 @@ open class AutoBoxing {
 
  @ObjCName("box")
  open fun box(
-  @ObjCName("withDouble") d: Double
+  @ObjCName("withDouble", swiftName = "with") d: Double
  ): Double? {
   return java.lang.Double.valueOf(d)
  }
@@ -68,14 +68,14 @@ open class AutoBoxing {
 
  @ObjCName("box")
  open fun box(
-  @ObjCName("withFloat") f: Float
+  @ObjCName("withFloat", swiftName = "with") f: Float
  ): Float? {
   return java.lang.Float.valueOf(f)
  }
 
  @ObjCName("box")
  open fun box(
-  @ObjCName("withInt") i: Int
+  @ObjCName("withInt", swiftName = "with") i: Int
  ): Int? {
   return Integer.valueOf(i)
  }
@@ -103,70 +103,70 @@ open class AutoBoxing {
 
  @ObjCName("unbox")
  open fun unbox(
-  @ObjCName("withJavaLangBoolean") b: Boolean?
+  @ObjCName("withJavaLangBoolean", swiftName = "with") b: Boolean?
  ): Boolean {
   return b!!.booleanValue()
  }
 
  @ObjCName("unbox")
  open fun unbox(
-  @ObjCName("withJavaLangDouble") d: Double?
+  @ObjCName("withJavaLangDouble", swiftName = "with") d: Double?
  ): Double {
   return d!!.toDouble()
  }
 
  @ObjCName("unbox")
  open fun unbox(
-  @ObjCName("withJavaLangByte") b: Byte?
+  @ObjCName("withJavaLangByte", swiftName = "with") b: Byte?
  ): Byte {
   return b!!.toByte()
  }
 
  @ObjCName("unbox")
  open fun unbox(
-  @ObjCName("withJavaLangFloat") f: Float?
+  @ObjCName("withJavaLangFloat", swiftName = "with") f: Float?
  ): Float {
   return f!!.toFloat()
  }
 
  @ObjCName("unbox")
  open fun unbox(
-  @ObjCName("withJavaLangInteger") i: Int?
+  @ObjCName("withJavaLangInteger", swiftName = "with") i: Int?
  ): Int {
   return i!!.toInt()
  }
 
  @ObjCName("unbox")
  open fun unbox(
-  @ObjCName("withJavaLangLong") l: Long?
+  @ObjCName("withJavaLangLong", swiftName = "with") l: Long?
  ): Long {
   return l!!.toLong()
  }
 
  @ObjCName("unbox")
  open fun unbox(
-  @ObjCName("withJavaLangShort") s: Short?
+  @ObjCName("withJavaLangShort", swiftName = "with") s: Short?
  ): Short {
   return s!!.toShort()
  }
 
  @ObjCName("unbox")
  open fun unbox(
-  @ObjCName("withJavaLangCharacter") c: Char?
+  @ObjCName("withJavaLangCharacter", swiftName = "with") c: Char?
  ): Char {
   return c!!.toChar()
  }
 
  @ObjCName("takesAndReturnsPrimitiveDouble")
  open fun takesAndReturnsPrimitiveDouble(
-  @ObjCName("withDouble") d: Double
+  @ObjCName("withDouble", swiftName = "with") d: Double
  ): Double {
   return d
  }
 
  @ObjCName("takesAndReturnsVoid")
  open fun takesAndReturnsVoid(
-  @ObjCName("withJavaLangVoid") v: Void?
+  @ObjCName("withJavaLangVoid", swiftName = "with") v: Void?
  ): Void? {
   return null
  }
@@ -212,7 +212,7 @@ open class AutoBoxing {
 
  @ObjCName("sumWithUnboxing")
  open fun sumWithUnboxing(
-  @ObjCName("withJavaLangIterable") boxedDoubles: MutableIterable<Double?>?
+  @ObjCName("withJavaLangIterable", swiftName = "with") boxedDoubles: MutableIterable<Double?>?
  ): Double {
   var sum: Double = 0.0
   for (d in boxedDoubles!!) {

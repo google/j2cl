@@ -46,7 +46,7 @@ open class JsMethodExample {
   @ObjCName("m")
   @JsMethod(name = "mString")
   fun m(
-   @ObjCName("withNSString") s: String?
+   @ObjCName("withNSString", swiftName = "with") s: String?
   )
  }
 
@@ -64,7 +64,7 @@ open class JsMethodExample {
  open class SubJsType internal constructor(): JsMethodExample.Base<String?>() {
   @ObjCName("m")
   public open fun m(
-   @ObjCName("withNSString") s: String?
+   @ObjCName("withNSString", swiftName = "with") s: String?
   ) {}
 
   override fun m_pp_jsmethod(arg0: String?) {
@@ -97,7 +97,7 @@ open class JsMethodExample {
   @ObjCName("m")
   @JsMethod(name = "renamedM")
   public open fun m(
-   @ObjCName("withNSString") s: String?
+   @ObjCName("withNSString", swiftName = "with") s: String?
   ) {}
 
   override fun m_pp_jsmethod(arg0: String?) {

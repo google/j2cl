@@ -53,8 +53,8 @@ open class LocalNameCollision {
   @ObjCName("withBoolean") LocalNameCollision: Boolean,
   @ObjCName("withId") Asserts: Any?,
   @ObjCName("withId") ___Asserts: Any?,
-  @ObjCName("withInt") l_Asserts: Int,
-  @ObjCName("withInt") A: Int
+  @ObjCName("withInt", swiftName = "with") l_Asserts: Int,
+  @ObjCName("withInt", swiftName = "with") A: Int
  ): Boolean {
   return LocalNameCollision && Asserts is localnamecollision.LocalNameCollision && ___Asserts is localnamecollision.Asserts && l_Asserts == A
  }

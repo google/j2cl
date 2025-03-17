@@ -29,7 +29,7 @@ import kotlin.native.ObjCName
 fun interface Interface {
  @ObjCName("exposedInChildWithInterface")
  fun exposedInChildWithInterface(
-  @ObjCName("withInt") a: Int,
-  @ObjCName("withInt") b: Int
+  @ObjCName("withInt", swiftName = "with") a: Int,
+  @ObjCName("withInt", swiftName = "with") b: Int
  ): Int
 }

@@ -33,22 +33,22 @@ class NullabilityPropagation {
  interface NullabilityToPropagate<ExtendsNullable, ExtendsNonNull: Any> {
   @ObjCName("nullableString1")
   fun nullableString1(
-   @ObjCName("withNSString") s: String?
+   @ObjCName("withNSString", swiftName = "with") s: String?
   ): String?
 
   @ObjCName("nullableString2")
   fun nullableString2(
-   @ObjCName("withNSString") s: String?
+   @ObjCName("withNSString", swiftName = "with") s: String?
   ): String?
 
   @ObjCName("nonNullString1")
   fun nonNullString1(
-   @ObjCName("withNSString") s: String
+   @ObjCName("withNSString", swiftName = "with") s: String
   ): String
 
   @ObjCName("nonNullString2")
   fun nonNullString2(
-   @ObjCName("withNSString") s: String
+   @ObjCName("withNSString", swiftName = "with") s: String
   ): String
 
   @ObjCName("nullableExtendsNullable1")
@@ -93,17 +93,17 @@ class NullabilityPropagation {
 
   @ObjCName("nonNullStringTransitive")
   fun nonNullStringTransitive(
-   @ObjCName("withNSString") s: String
+   @ObjCName("withNSString", swiftName = "with") s: String
   ): String
 
   @ObjCName("nonNullStringDoubleOverride")
   fun nonNullStringDoubleOverride(
-   @ObjCName("withNSString") s: String
+   @ObjCName("withNSString", swiftName = "with") s: String
   ): String
 
   @ObjCName("jsOptionalParameter")
   fun jsOptionalParameter(
-   @ObjCName("withNSString") @JsOptional s: String?
+   @ObjCName("withNSString", swiftName = "with") @JsOptional s: String?
   ): String
  }
 
@@ -111,7 +111,7 @@ class NullabilityPropagation {
  fun interface Interface {
   @ObjCName("nonNullStringDoubleOverride")
   fun nonNullStringDoubleOverride(
-   @ObjCName("withNSString") s: String
+   @ObjCName("withNSString", swiftName = "with") s: String
   ): String
  }
 

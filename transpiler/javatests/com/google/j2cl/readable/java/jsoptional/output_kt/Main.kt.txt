@@ -42,16 +42,16 @@ open class Main {
  @ObjCName("method1")
  @JsMethod
  open fun method1(
-  @ObjCName("withInt") i1: Int,
-  @ObjCName("withJavaLangDouble") @JsOptional d: Double?,
-  @ObjCName("withJavaLangInteger") @JsOptional i: Int?
+  @ObjCName("withInt", swiftName = "with") i1: Int,
+  @ObjCName("withJavaLangDouble", swiftName = "with") @JsOptional d: Double?,
+  @ObjCName("withJavaLangInteger", swiftName = "with") @JsOptional i: Int?
  ) {}
 
  @ObjCName("method2")
  @JsMethod
  open fun method2(
-  @ObjCName("withNSString") s1: String?,
-  @ObjCName("withJavaLangDouble") @JsOptional d: Double?,
+  @ObjCName("withNSString", swiftName = "with") s1: String?,
+  @ObjCName("withJavaLangDouble", swiftName = "with") @JsOptional d: Double?,
   vararg @ObjCName("withJavaLangBooleanArray") i: Boolean?
  ) {
   val i_1: Array<Boolean?>? = i as Array<Boolean?>?
@@ -70,13 +70,13 @@ open class Main {
 
  @ObjCName("testFunction")
  open fun testFunction(
-  @ObjCName("withJsoptionalMain_Function") f: Main.Function?
+  @ObjCName("withJsoptionalMain_Function", swiftName = "with") f: Main.Function?
  ) {}
 
  @ObjCName("testOptionalFunction")
  @JsMethod
  open fun testOptionalFunction(
-  @ObjCName("withJsoptionalMain_Function") @JsOptional f: Main.Function?
+  @ObjCName("withJsoptionalMain_Function", swiftName = "with") @JsOptional f: Main.Function?
  ) {}
 
  @ObjCName("J2ktJsoptionalMainCompanion", swiftName = "JsoptionalMainCompanion", exact = true)
@@ -85,17 +85,17 @@ open class Main {
   @ObjCName("staticMethod1")
   @JsMethod
   fun staticMethod1(
-   @ObjCName("withInt") i1: Int,
-   @ObjCName("withJavaLangDouble") @JsOptional d: Double?,
-   @ObjCName("withJavaLangInteger") @JsOptional i: Int?
+   @ObjCName("withInt", swiftName = "with") i1: Int,
+   @ObjCName("withJavaLangDouble", swiftName = "with") @JsOptional d: Double?,
+   @ObjCName("withJavaLangInteger", swiftName = "with") @JsOptional i: Int?
   ) {}
 
   @JvmStatic
   @ObjCName("staticMethod2")
   @JsMethod
   fun staticMethod2(
-   @ObjCName("withNSString") s1: String?,
-   @ObjCName("withJavaLangDouble") @JsOptional d: Double?,
+   @ObjCName("withNSString", swiftName = "with") s1: String?,
+   @ObjCName("withJavaLangDouble", swiftName = "with") @JsOptional d: Double?,
    vararg @ObjCName("withJavaLangBooleanArray") i: Boolean?
   ) {
    val i_1: Array<Boolean?>? = i as Array<Boolean?>?
@@ -107,7 +107,7 @@ open class Main {
  fun interface Function {
   @ObjCName("f1")
   fun f1(
-   @ObjCName("withNSString") @JsOptional s: String?,
+   @ObjCName("withNSString", swiftName = "with") @JsOptional s: String?,
    vararg @ObjCName("withNSObjectArray") args: Any?
   ): Any?
  }

@@ -45,7 +45,7 @@ open class StreamCollectWildcardProblem {
   @JvmStatic
   @ObjCName("testCollect")
   fun testCollect(
-   @ObjCName("withJavaUtilStreamStream") list: Stream<StreamCollectWildcardProblem.Foo<*>>
+   @ObjCName("withJavaUtilStreamStream", swiftName = "with") list: Stream<StreamCollectWildcardProblem.Foo<*>>
   ) {
    StreamCollectWildcardProblem.accept(
     list.collect<MutableList<StreamCollectWildcardProblem.Foo<*>>, Any>(
@@ -57,7 +57,7 @@ open class StreamCollectWildcardProblem {
   @JvmStatic
   @ObjCName("testMethodReferenceMapCollect")
   fun testMethodReferenceMapCollect(
-   @ObjCName("withJavaUtilStreamStream") list: Stream<StreamCollectWildcardProblem.Foo<*>>
+   @ObjCName("withJavaUtilStreamStream", swiftName = "with") list: Stream<StreamCollectWildcardProblem.Foo<*>>
   ) {
    StreamCollectWildcardProblem.accept(
     list.map/* <StreamCollectWildcardProblem.Foo<*>> */(
@@ -73,7 +73,7 @@ open class StreamCollectWildcardProblem {
   @JvmStatic
   @ObjCName("testLambdaMapCollect")
   fun testLambdaMapCollect(
-   @ObjCName("withJavaUtilStreamStream") list: Stream<StreamCollectWildcardProblem.Foo<*>>
+   @ObjCName("withJavaUtilStreamStream", swiftName = "with") list: Stream<StreamCollectWildcardProblem.Foo<*>>
   ) {
    StreamCollectWildcardProblem.accept(
     list.map/* <StreamCollectWildcardProblem.Foo<*>> */(
@@ -89,7 +89,7 @@ open class StreamCollectWildcardProblem {
   @JvmStatic
   @ObjCName("testCollectWithExplicitTypeArgumentFix")
   fun testCollectWithExplicitTypeArgumentFix(
-   @ObjCName("withJavaUtilStreamStream") list: Stream<StreamCollectWildcardProblem.Foo<*>>
+   @ObjCName("withJavaUtilStreamStream", swiftName = "with") list: Stream<StreamCollectWildcardProblem.Foo<*>>
   ) {
    StreamCollectWildcardProblem.accept(
     list.collect/* <MutableList<StreamCollectWildcardProblem.Foo<*>>, *> */(
@@ -101,7 +101,7 @@ open class StreamCollectWildcardProblem {
   @JvmStatic
   @ObjCName("testMethodReferenceMapCollectWithExplicitTypeArgumentFix")
   fun testMethodReferenceMapCollectWithExplicitTypeArgumentFix(
-   @ObjCName("withJavaUtilStreamStream") list: Stream<StreamCollectWildcardProblem.Foo<*>>
+   @ObjCName("withJavaUtilStreamStream", swiftName = "with") list: Stream<StreamCollectWildcardProblem.Foo<*>>
   ) {
    StreamCollectWildcardProblem.accept(
     list.map/* <StreamCollectWildcardProblem.Foo<*>> */(
@@ -117,7 +117,7 @@ open class StreamCollectWildcardProblem {
   @JvmStatic
   @ObjCName("testLambdaMapCollectWithExplicitTypeArgumentFix")
   fun testLambdaMapCollectWithExplicitTypeArgumentFix(
-   @ObjCName("withJavaUtilStreamStream") list: Stream<StreamCollectWildcardProblem.Foo<*>>
+   @ObjCName("withJavaUtilStreamStream", swiftName = "with") list: Stream<StreamCollectWildcardProblem.Foo<*>>
   ) {
    StreamCollectWildcardProblem.accept(
     list.map/* <StreamCollectWildcardProblem.Foo<*>> */(
@@ -133,7 +133,7 @@ open class StreamCollectWildcardProblem {
   @JvmStatic
   @ObjCName("accept")
   fun accept(
-   @ObjCName("withJavaUtilList") list: MutableList<StreamCollectWildcardProblem.Foo<*>>
+   @ObjCName("withJavaUtilList", swiftName = "with") list: MutableList<StreamCollectWildcardProblem.Foo<*>>
   ) {
    throw RuntimeException()
   }
@@ -141,8 +141,8 @@ open class StreamCollectWildcardProblem {
   @JvmStatic
   @ObjCName("testNullabilityInference")
   fun testNullabilityInference(
-   @ObjCName("withJavaUtilStreamStream") stream1: Stream<StreamCollectWildcardProblem.Foo<Any>>,
-   @ObjCName("withJavaUtilStreamStream") stream2: Stream<StreamCollectWildcardProblem.Foo<Any>>,
+   @ObjCName("withJavaUtilStreamStream", swiftName = "with") stream1: Stream<StreamCollectWildcardProblem.Foo<Any>>,
+   @ObjCName("withJavaUtilStreamStream", swiftName = "with") stream2: Stream<StreamCollectWildcardProblem.Foo<Any>>,
    @ObjCName("withBoolean") b: Boolean
   ): Stream<String> {
    return Stream.of<Stream<String>>(

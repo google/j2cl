@@ -76,17 +76,17 @@ open class Nullability {
 
  @ObjCName("m1")
  open fun m1(
-  @ObjCName("withNSString") a: String,
-  @ObjCName("withJavaUtilList") b: MutableList<Double>,
-  @ObjCName("withNSString") c: String?
+  @ObjCName("withNSString", swiftName = "with") a: String,
+  @ObjCName("withJavaUtilList", swiftName = "with") b: MutableList<Double>,
+  @ObjCName("withNSString", swiftName = "with") c: String?
  ): String {
   return ""
  }
 
  @ObjCName("m2")
  open fun m2(
-  @ObjCName("withNSString") a: String?,
-  @ObjCName("withJavaUtilList") b: MutableList<Double?>
+  @ObjCName("withNSString", swiftName = "with") a: String?,
+  @ObjCName("withJavaUtilList", swiftName = "with") b: MutableList<Double?>
  ): String? {
   return ""
  }
@@ -94,7 +94,7 @@ open class Nullability {
  @ObjCName("m3")
  @JsMethod
  open fun m3(
-  @ObjCName("withNSString") a: String,
+  @ObjCName("withNSString", swiftName = "with") a: String,
   vararg @ObjCName("withNSStringArray") args: String
  ): String? {
   val args_1: Array<String>? = args as Array<String>?
@@ -103,7 +103,7 @@ open class Nullability {
 
  @ObjCName("m4")
  open fun m4(
-  @ObjCName("withNullabilityNullability_MyFunction") f: Nullability.MyFunction
+  @ObjCName("withNullabilityNullability_MyFunction", swiftName = "with") f: Nullability.MyFunction
  ) {}
 
  @ObjCName("J2ktNullabilityNullabilityCompanion", swiftName = "NullabilityNullabilityCompanion", exact = true)
@@ -216,7 +216,7 @@ open class Nullability {
  fun interface MyFunction {
   @ObjCName("x")
   fun x(
-   @ObjCName("withNSString") a: String
+   @ObjCName("withNSString", swiftName = "with") a: String
   ): String
  }
 

@@ -36,7 +36,7 @@ open class A internal constructor() {
 open class AnonymousInnerClass {
  @ObjCName("test")
  open fun test(
-  @ObjCName("withInt") arg: Int
+  @ObjCName("withInt", swiftName = "with") arg: Int
  ) {
   val ic: AnonymousInnerClass.InnerClass = object : InnerClass() {}
   val a: A = A()

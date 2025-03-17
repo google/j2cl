@@ -31,7 +31,7 @@ import kotlin.native.ObjCName
 open class GenericClassLiteral {
  @ObjCName("test")
  open fun test(
-  @ObjCName("withJ2ktGenericClassLiteral_Generic") genericFoo: GenericClassLiteral.Generic<GenericClassLiteral.Foo>
+  @ObjCName("withJ2ktGenericClassLiteral_Generic", swiftName = "with") genericFoo: GenericClassLiteral.Generic<GenericClassLiteral.Foo>
  ) {
   this.accept<GenericClassLiteral.Generic<Any>>(
    genericFoo as GenericClassLiteral.Generic<Any>,
@@ -42,7 +42,7 @@ open class GenericClassLiteral {
  @ObjCName("accept")
  open fun <T: Any> accept(
   @ObjCName("withId") foo: T,
-  @ObjCName("withIOSClass") cls: Class<T>
+  @ObjCName("withIOSClass", swiftName = "with") cls: Class<T>
  ) {}
 
  @ObjCName("J2ktJ2ktGenericClassLiteral_Generic", swiftName = "J2ktGenericClassLiteral_Generic", exact = true)

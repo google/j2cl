@@ -130,7 +130,7 @@ open class NonNullVariables {
 
  @ObjCName("testGenericNullable")
  open fun <T: String?> testGenericNullable(
-  @ObjCName("withJ2ktNonNullVariables_Supplier") supplier: NonNullVariables.Supplier<T>
+  @ObjCName("withJ2ktNonNullVariables_Supplier", swiftName = "with") supplier: NonNullVariables.Supplier<T>
  ) {
   val value: T? = supplier.get()
   value!!.hashCode()
@@ -138,7 +138,7 @@ open class NonNullVariables {
 
  @ObjCName("testGenericNonNull")
  open fun <T: String> testGenericNonNull(
-  @ObjCName("withJ2ktNonNullVariables_Supplier") supplier: NonNullVariables.Supplier<T>
+  @ObjCName("withJ2ktNonNullVariables_Supplier", swiftName = "with") supplier: NonNullVariables.Supplier<T>
  ) {
   val value: T? = supplier.get()
   value!!.hashCode()
@@ -146,7 +146,7 @@ open class NonNullVariables {
 
  @ObjCName("testGenericNonNullParameterNullable")
  open fun <T: String> testGenericNonNullParameterNullable(
-  @ObjCName("withJ2ktNonNullVariables_Supplier") supplier: NonNullVariables.Supplier<T?>
+  @ObjCName("withJ2ktNonNullVariables_Supplier", swiftName = "with") supplier: NonNullVariables.Supplier<T?>
  ) {
   val value: T? = supplier.get()
   value!!.hashCode()
@@ -154,7 +154,7 @@ open class NonNullVariables {
 
  @ObjCName("testParameterizedNullable")
  open fun testParameterizedNullable(
-  @ObjCName("withJ2ktNonNullVariables_Supplier") supplier: NonNullVariables.Supplier<String?>
+  @ObjCName("withJ2ktNonNullVariables_Supplier", swiftName = "with") supplier: NonNullVariables.Supplier<String?>
  ) {
   val value: String? = supplier.get()
   value!!.hashCode()
@@ -162,7 +162,7 @@ open class NonNullVariables {
 
  @ObjCName("testParameterizedNonNull")
  open fun testParameterizedNonNull(
-  @ObjCName("withJ2ktNonNullVariables_Supplier") supplier: NonNullVariables.Supplier<String>
+  @ObjCName("withJ2ktNonNullVariables_Supplier", swiftName = "with") supplier: NonNullVariables.Supplier<String>
  ) {
   val value: String? = supplier.get()
   value!!.hashCode()
@@ -170,7 +170,7 @@ open class NonNullVariables {
 
  @ObjCName("testWildcardNullable")
  open fun testWildcardNullable(
-  @ObjCName("withJ2ktNonNullVariables_Supplier") supplier: NonNullVariables.Supplier<out String?>
+  @ObjCName("withJ2ktNonNullVariables_Supplier", swiftName = "with") supplier: NonNullVariables.Supplier<out String?>
  ) {
   val value: String? = supplier.get()
   value!!.hashCode()
@@ -178,7 +178,7 @@ open class NonNullVariables {
 
  @ObjCName("testWildcardNonNull")
  open fun testWildcardNonNull(
-  @ObjCName("withJ2ktNonNullVariables_Supplier") supplier: NonNullVariables.Supplier<out String>
+  @ObjCName("withJ2ktNonNullVariables_Supplier", swiftName = "with") supplier: NonNullVariables.Supplier<out String>
  ) {
   val value: String? = supplier.get()
   value!!.hashCode()
@@ -186,14 +186,14 @@ open class NonNullVariables {
 
  @ObjCName("testBoxed")
  open fun testBoxed(
-  @ObjCName("withJavaLangByte") b: Byte,
+  @ObjCName("withJavaLangByte", swiftName = "with") b: Byte,
   @ObjCName("withShort") o: Short,
-  @ObjCName("withJavaLangInteger") i: Int,
-  @ObjCName("withJavaLangLong") l: Long,
-  @ObjCName("withJavaLangFloat") f: Float,
-  @ObjCName("withJavaLangDouble") d: Double,
-  @ObjCName("withJavaLangBoolean") bool: Boolean,
-  @ObjCName("withJavaLangCharacter") ch: Char
+  @ObjCName("withJavaLangInteger", swiftName = "with") i: Int,
+  @ObjCName("withJavaLangLong", swiftName = "with") l: Long,
+  @ObjCName("withJavaLangFloat", swiftName = "with") f: Float,
+  @ObjCName("withJavaLangDouble", swiftName = "with") d: Double,
+  @ObjCName("withJavaLangBoolean", swiftName = "with") bool: Boolean,
+  @ObjCName("withJavaLangCharacter", swiftName = "with") ch: Char
  ) {
   val b1: Byte? = b
   val o1: Short = o

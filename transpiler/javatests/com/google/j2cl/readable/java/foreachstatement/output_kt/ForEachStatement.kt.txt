@@ -44,7 +44,7 @@ import kotlin.native.ObjCName
 open class ForEachStatement {
  @ObjCName("test")
  open fun test(
-  @ObjCName("withJavaLangIterable") iterable: MutableIterable<Throwable?>?
+  @ObjCName("withJavaLangIterable", swiftName = "with") iterable: MutableIterable<Throwable?>?
  ) {
   for (t in iterable!!) {
    t!!.toString()

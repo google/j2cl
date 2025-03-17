@@ -53,8 +53,8 @@ open class Lambdas {
 
  @ObjCName("call")
  open fun call(
-  @ObjCName("withLambdasLambdas_FunctionalInterface") intf: Lambdas.FunctionalInterface?,
-  @ObjCName("withInt") n: Int
+  @ObjCName("withLambdasLambdas_FunctionalInterface", swiftName = "with") intf: Lambdas.FunctionalInterface?,
+  @ObjCName("withInt", swiftName = "with") n: Int
  ): Int {
   return this.field + intf!!.m(n)
  }
@@ -166,7 +166,7 @@ open class Lambdas {
 
  @ObjCName("callWithTypeVariable")
  open fun <T> callWithTypeVariable(
-  @ObjCName("withLambdasLambdas_GenericFunctionalInterface") intf: Lambdas.GenericFunctionalInterface<T>?,
+  @ObjCName("withLambdasLambdas_GenericFunctionalInterface", swiftName = "with") intf: Lambdas.GenericFunctionalInterface<T>?,
   @ObjCName("withId") e: T
  ): T {
   return intf!!.m(e)
@@ -174,8 +174,8 @@ open class Lambdas {
 
  @ObjCName("callParameterized")
  open fun callParameterized(
-  @ObjCName("withLambdasLambdas_GenericFunctionalInterface") intf: Lambdas.GenericFunctionalInterface<Error?>?,
-  @ObjCName("withJavaLangError") e: Error?
+  @ObjCName("withLambdasLambdas_GenericFunctionalInterface", swiftName = "with") intf: Lambdas.GenericFunctionalInterface<Error?>?,
+  @ObjCName("withJavaLangError", swiftName = "with") e: Error?
  ): Error? {
   return intf!!.m(e)
  }
@@ -268,8 +268,8 @@ open class Lambdas {
   @JvmStatic
   @ObjCName("callTypeVariableWithBounds")
   fun <T: Enum<T>> callTypeVariableWithBounds(
-   @ObjCName("withLambdasLambdas_GenericFunctionalInterface") intf: Lambdas.GenericFunctionalInterface<Enum<T>?>?,
-   @ObjCName("withJavaLangEnum") e: Enum<T>?
+   @ObjCName("withLambdasLambdas_GenericFunctionalInterface", swiftName = "with") intf: Lambdas.GenericFunctionalInterface<Enum<T>?>?,
+   @ObjCName("withJavaLangEnum", swiftName = "with") e: Enum<T>?
   ): Enum<T>? {
    return intf!!.m(e)
   }
@@ -334,7 +334,7 @@ open class Lambdas {
   @JvmStatic
   @ObjCName("testIterable")
   fun <T> testIterable(
-   @ObjCName("withJavaLangIterable") iterable: MutableIterable<T>?
+   @ObjCName("withJavaLangIterable", swiftName = "with") iterable: MutableIterable<T>?
   ) {
    val lambda: MutableIterable<T> = MutableIterableJvm<T> {
     return@MutableIterableJvm iterable!!.iterator()
@@ -346,7 +346,7 @@ open class Lambdas {
  fun interface FunctionalInterface {
   @ObjCName("m")
   fun m(
-   @ObjCName("withInt") i: Int
+   @ObjCName("withInt", swiftName = "with") i: Int
   ): Int
  }
 
@@ -354,7 +354,7 @@ open class Lambdas {
  fun interface Functional<T> {
   @ObjCName("wrap")
   fun wrap(
-   @ObjCName("withLambdasLambdas_Functional") f: Lambdas.Functional<T>?
+   @ObjCName("withLambdasLambdas_Functional", swiftName = "with") f: Lambdas.Functional<T>?
   ): Lambdas.Functional<T>?
  }
 
@@ -376,7 +376,7 @@ open class Lambdas {
 
   @ObjCName("andThen")
   fun <V> andThen(
-   @ObjCName("withLambdasLambdas_Function") after: Lambdas.Function<in R, out V>?
+   @ObjCName("withLambdasLambdas_Function", swiftName = "with") after: Lambdas.Function<in R, out V>?
   ): Lambdas.BiFunction<T, U, V>? {
    return Lambdas.BiFunction<T, U, V> { t: T, u: U ->
     return@BiFunction after!!.apply(
@@ -457,8 +457,8 @@ open class Lambdas {
  fun interface Thenable<T> {
   @ObjCName("then")
   fun then(
-   @ObjCName("withLambdasLambdas_GenericJsFunction") f1: Lambdas.GenericJsFunction<Void?, T>?,
-   @ObjCName("withLambdasLambdas_GenericJsFunction") f2: Lambdas.GenericJsFunction<Void?, Throwable?>?
+   @ObjCName("withLambdasLambdas_GenericJsFunction", swiftName = "with") f1: Lambdas.GenericJsFunction<Void?, T>?,
+   @ObjCName("withLambdasLambdas_GenericJsFunction", swiftName = "with") f2: Lambdas.GenericJsFunction<Void?, Throwable?>?
   )
  }
 
@@ -467,8 +467,8 @@ open class Lambdas {
  fun interface AnotherThenable<T> {
   @ObjCName("then")
   fun then(
-   @ObjCName("withLambdasLambdas_GenericJsFunction") f1: Lambdas.GenericJsFunction<Void?, T>?,
-   @ObjCName("withLambdasLambdas_GenericJsFunction") f2: Lambdas.GenericJsFunction<Void?, Throwable?>?
+   @ObjCName("withLambdasLambdas_GenericJsFunction", swiftName = "with") f1: Lambdas.GenericJsFunction<Void?, T>?,
+   @ObjCName("withLambdasLambdas_GenericJsFunction", swiftName = "with") f2: Lambdas.GenericJsFunction<Void?, Throwable?>?
   )
  }
 

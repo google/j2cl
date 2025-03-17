@@ -30,12 +30,12 @@ import kotlin.native.ObjCName
 open class Parent<T: Error?> internal constructor() {
  @ObjCName("foo")
  open fun foo(
-  @ObjCName("withJavaLangError") e: T
+  @ObjCName("withJavaLangError", swiftName = "with") e: T
  ) {}
 
  @ObjCName("bar")
  fun bar(
-  @ObjCName("withJavaLangError") e: T
+  @ObjCName("withJavaLangError", swiftName = "with") e: T
  ) {}
 }
 

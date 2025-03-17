@@ -39,16 +39,16 @@ abstract class AbstractTypeNonNull internal constructor(): ParametricType<Abstra
 open class Parent internal constructor() {
  @ObjCName("m")
  open fun m(
-  @ObjCName("withNSString") s: String,
-  @ObjCName("withTypeannotationsParent") c: Parent?
+  @ObjCName("withNSString", swiftName = "with") s: String,
+  @ObjCName("withTypeannotationsParent", swiftName = "with") c: Parent?
  ): Parent? {
   return c
  }
 
  @ObjCName("m")
  open fun m(
-  @ObjCName("withJavaUtilList") l: MutableList<String>?,
-  @ObjCName("withTypeannotationsParent") c: Parent?
+  @ObjCName("withJavaUtilList", swiftName = "with") l: MutableList<String>?,
+  @ObjCName("withTypeannotationsParent", swiftName = "with") c: Parent?
  ): MutableList<Parent>? {
   return ArrayList<Parent>()
  }

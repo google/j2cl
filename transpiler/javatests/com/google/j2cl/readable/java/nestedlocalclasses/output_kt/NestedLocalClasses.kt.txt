@@ -30,7 +30,7 @@ import kotlin.native.ObjCName
 open class NestedLocalClasses {
  @ObjCName("test")
  open fun test(
-  @ObjCName("withInt") p: Int
+  @ObjCName("withInt", swiftName = "with") p: Int
  ) {
   val localVar: Int = 1
   open class InnerClass internal constructor() {

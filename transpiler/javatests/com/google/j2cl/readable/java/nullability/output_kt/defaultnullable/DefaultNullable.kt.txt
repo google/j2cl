@@ -67,8 +67,8 @@ open class DefaultNullable {
 
  @ObjCName("m1")
  open fun m1(
-  @ObjCName("withNSString") a: String?,
-  @ObjCName("withJavaUtilList") b: MutableList<Double?>?
+  @ObjCName("withNSString", swiftName = "with") a: String?,
+  @ObjCName("withJavaUtilList", swiftName = "with") b: MutableList<Double?>?
  ): String? {
   return ""
  }
@@ -83,8 +83,8 @@ open class DefaultNullable {
 
  @ObjCName("m2")
  open fun m2(
-  @ObjCName("withNSString") a: String?,
-  @ObjCName("withJavaUtilList") b: MutableList<Double?>?
+  @ObjCName("withNSString", swiftName = "with") a: String?,
+  @ObjCName("withJavaUtilList", swiftName = "with") b: MutableList<Double?>?
  ): String? {
   return null
  }
@@ -444,7 +444,7 @@ open class DefaultNullable {
  fun interface NullMarkedIntFunction<T> {
   @ObjCName("accept")
   fun accept(
-   @ObjCName("withInt") i: Int
+   @ObjCName("withInt", swiftName = "with") i: Int
   ): T
  }
 }

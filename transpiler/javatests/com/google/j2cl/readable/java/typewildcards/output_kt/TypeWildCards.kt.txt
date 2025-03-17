@@ -71,43 +71,43 @@ open class RecursiveSubtype: RecursiveType<RecursiveSubtype?> {
 open class TypeWildCards {
  @ObjCName("unbounded")
  open fun unbounded(
-  @ObjCName("withTypewildcardsGenericType") g: GenericType<*>?
+  @ObjCName("withTypewildcardsGenericType", swiftName = "with") g: GenericType<*>?
  ): Any? {
   return g!!.get_pp_typewildcards()
  }
 
  @ObjCName("upperBound")
  open fun upperBound(
-  @ObjCName("withTypewildcardsGenericType") g: GenericType<out Bar?>?
+  @ObjCName("withTypewildcardsGenericType", swiftName = "with") g: GenericType<out Bar?>?
  ): Bar? {
   return g!!.get_pp_typewildcards()
  }
 
  @ObjCName("lowerBound")
  open fun lowerBound(
-  @ObjCName("withTypewildcardsGenericType") g: GenericType<in Bar?>?
+  @ObjCName("withTypewildcardsGenericType", swiftName = "with") g: GenericType<in Bar?>?
  ): Any? {
   return g!!.get_pp_typewildcards()
  }
 
  @ObjCName("unboundedRecursive")
  open fun unboundedRecursive(
-  @ObjCName("withTypewildcardsRecursiveType") g: RecursiveType<*>?
+  @ObjCName("withTypewildcardsRecursiveType", swiftName = "with") g: RecursiveType<*>?
  ) {}
 
  @ObjCName("upperBoundRecursive")
  open fun upperBoundRecursive(
-  @ObjCName("withTypewildcardsGenericType") g: GenericType<out RecursiveType<*>?>?
+  @ObjCName("withTypewildcardsGenericType", swiftName = "with") g: GenericType<out RecursiveType<*>?>?
  ) {}
 
  @ObjCName("lowerBoundRecursive")
  open fun lowerBoundRecursive(
-  @ObjCName("withTypewildcardsGenericType") g: GenericType<in RecursiveType<*>?>?
+  @ObjCName("withTypewildcardsGenericType", swiftName = "with") g: GenericType<in RecursiveType<*>?>?
  ) {}
 
  @ObjCName("deepRecursiveType")
  open fun deepRecursiveType(
-  @ObjCName("withTypewildcardsDeepRecursiveType") t: DeepRecursiveType<*>?
+  @ObjCName("withTypewildcardsDeepRecursiveType", swiftName = "with") t: DeepRecursiveType<*>?
  ) {}
 
  @ObjCName("test")
@@ -148,7 +148,7 @@ open class TypeWildCards {
   @JvmStatic
   @ObjCName("testBoundedTypeMemberAccess")
   fun <T: TypeWildCards.A?> testBoundedTypeMemberAccess(
-   @ObjCName("withTypewildcardsTypeWildCards_A") t: T
+   @ObjCName("withTypewildcardsTypeWildCards_A", swiftName = "with") t: T
   ) {
    val i: Int = t!!.f_pp_typewildcards
    t!!.m()
@@ -180,7 +180,7 @@ open class TypeWildCards {
   @JvmStatic
   @ObjCName("testInferredIntersectionWithTypeVariable")
   fun <C> testInferredIntersectionWithTypeVariable(
-   @ObjCName("withTypewildcardsTypeWildCards_RecursiveInterface") ri: TypeWildCards.RecursiveInterface<out C, C>?
+   @ObjCName("withTypewildcardsTypeWildCards_RecursiveInterface", swiftName = "with") ri: TypeWildCards.RecursiveInterface<out C, C>?
   ): C {
    return ri!!.m()
   }

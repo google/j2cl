@@ -30,7 +30,7 @@ import kotlin.native.ObjCName
 open class Superclass<T: Error?> internal constructor() {
  @ObjCName("m1")
  open fun m1(
-  @ObjCName("withJavaLangError") t: T
+  @ObjCName("withJavaLangError", swiftName = "with") t: T
  ) {}
 }
 

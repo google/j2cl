@@ -32,7 +32,7 @@ open class BridgeMethodShadowedSignature {
  fun interface I<I1> {
   @ObjCName("get")
   fun get(
-   @ObjCName("withJavaUtilFunctionConsumer") consumer: Consumer<in I1>?
+   @ObjCName("withJavaUtilFunctionConsumer", swiftName = "with") consumer: Consumer<in I1>?
   ): String?
  }
 

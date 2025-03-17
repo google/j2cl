@@ -49,12 +49,12 @@ open class GenericMethod<T> {
 
  @ObjCName("fun")
  open fun <T_1: Exception?> `fun`(
-  @ObjCName("withJavaLangException") t: T_1
+  @ObjCName("withJavaLangException", swiftName = "with") t: T_1
  ) {}
 
  @ObjCName("fun")
  open fun <T_1: Error?> `fun`(
-  @ObjCName("withJavaLangError") t: T_1
+  @ObjCName("withJavaLangError", swiftName = "with") t: T_1
  ) {
   object : GenericMethod<T_1>() {
    fun fun2(t: T_1) {}
@@ -122,13 +122,13 @@ open class GenericMethod<T> {
   @JvmStatic
   @ObjCName("acceptsContent")
   fun acceptsContent(
-   @ObjCName("withGenericmethodGenericMethod_Content") content: GenericMethod.Content?
+   @ObjCName("withGenericmethodGenericMethod_Content", swiftName = "with") content: GenericMethod.Content?
   ) {}
 
   @JvmStatic
   @ObjCName("acceptsString")
   fun acceptsString(
-   @ObjCName("withNSString") string: String?
+   @ObjCName("withNSString", swiftName = "with") string: String?
   ) {}
 
   @JvmStatic

@@ -37,7 +37,7 @@ open class CastToTypeVariable<T: CastToTypeVariable<T>?> {
  @ObjCName("setField")
  @JsOverlay
  fun setField(
-  @ObjCName("withInt") index: Int,
+  @ObjCName("withInt", swiftName = "with") index: Int,
   @ObjCName("withBoolean") value: Boolean
  ): T {
   val o: Any = Any()

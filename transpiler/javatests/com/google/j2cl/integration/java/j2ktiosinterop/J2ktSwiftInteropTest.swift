@@ -32,30 +32,30 @@ final class J2ktSwiftInteropTest: XCTestCase {
     obj.charMethod(withChar: 65)
     obj.byteMethod(withByte: 1)
     obj.shortMethod(withShort: 1)
-    obj.intMethod(withInt: 1)
+    obj.intMethod(with: 1)
     obj.longMethod(withLong: 1)
-    obj.floatMethod(withFloat: 1)
-    obj.doubleMethod(withDouble: 1)
+    obj.floatMethod(with: 1)
+    obj.doubleMethod(with: 1)
     obj.objectMethod(withId: nil)
-    obj.stringMethod(withNSString: "")
+    obj.stringMethod(with: "")
     obj.stringArrayMethod(withNSStringArray: nil)
     obj.stringArrayArrayMethod(withNSStringArray2: nil)
-    obj.cloneableMethod(withNSCopying: nil)
-    obj.numberMethod(withNSNumber: 1)
-    obj.classMethod(withIOSClass: nil)
-    obj.stringIterableMethod(withJavaLangIterable: nil)
-    obj.intStringMethod(withInt: 1, withNSString: "")
+    obj.cloneableMethod(with: nil)
+    obj.numberMethod(with: 1)
+    obj.classMethod(with: nil)
+    obj.stringIterableMethod(with: nil)
+    obj.intStringMethod(with: 1, with: "")
 
     obj.genericMethod(withId: nil)
-    obj.genericStringMethod(withNSString: "")
+    obj.genericStringMethod(with: "")
 
     obj.intField_ = obj.intField_
     J2ktiosinteropDefaultNamesCompanion.shared.staticIntField_ =
       J2ktiosinteropDefaultNamesCompanion.shared.staticIntField_
 
     J2ktiosinteropDefaultNamesCompanion.shared.staticMethod()
-    J2ktiosinteropDefaultNamesCompanion.shared.staticIntMethod(withInt: 1)
-    J2ktiosinteropDefaultNamesCompanion.shared.staticIntStringMethod(withInt: 1, withNSString: "")
+    J2ktiosinteropDefaultNamesCompanion.shared.staticIntMethod(with: 1)
+    J2ktiosinteropDefaultNamesCompanion.shared.staticIntStringMethod(with: 1, with: "")
   }
 
   func testCustomNames() {
@@ -73,14 +73,14 @@ final class J2ktSwiftInteropTest: XCTestCase {
     obj.custom(WithIndex: 1, name: "")
 
     obj.custom(withLong: 1)
-    obj.custom(withLong: 1, withNSString: "")
+    obj.custom(withLong: 1, with: "")
 
     CustomCompanion.shared.staticCustom()
     CustomCompanion.shared.staticCustom(WithIndex: 1)
     CustomCompanion.shared.staticCustom(WithIndex: 1, name: "")
 
     CustomCompanion.shared.staticCustom2(withLong: 1)
-    CustomCompanion.shared.staticCustom3(withLong: 1, withNSString: "")
+    CustomCompanion.shared.staticCustom3(withLong: 1, with: "")
   }
 
   func testEnumNames() {

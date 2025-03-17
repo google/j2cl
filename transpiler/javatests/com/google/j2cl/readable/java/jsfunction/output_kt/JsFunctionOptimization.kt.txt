@@ -34,7 +34,7 @@ import kotlin.native.ObjCName
 open class JsFunctionOptimization {
  @ObjCName("main")
  open fun main(
-  @ObjCName("withInt") r: Int
+  @ObjCName("withInt", swiftName = "with") r: Int
  ) {
   object : Any() {
    internal fun m_pp_jsfunction() {
@@ -102,7 +102,7 @@ open class JsFunctionOptimization {
  fun interface F {
   @ObjCName("m")
   fun m(
-   @ObjCName("withNSString") s: String?
+   @ObjCName("withNSString", swiftName = "with") s: String?
   ): String?
  }
 

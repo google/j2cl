@@ -82,8 +82,8 @@ open class Main {
  fun interface Fn {
   @ObjCName("test")
   fun test(
-   @ObjCName("withInt") nonFinal: Int,
-   @ObjCName("withInt") implicitFinal: Int
+   @ObjCName("withInt", swiftName = "with") nonFinal: Int,
+   @ObjCName("withInt", swiftName = "with") implicitFinal: Int
   ): Int
  }
 
@@ -91,7 +91,7 @@ open class Main {
  fun interface FnPrimitiveVarargs {
   @ObjCName("test")
   fun test(
-   @ObjCName("withInt") i: Int,
+   @ObjCName("withInt", swiftName = "with") i: Int,
    vararg @ObjCName("withIntArray") `is`: Int
   )
  }

@@ -55,7 +55,7 @@ open class Collections {
   @JvmStatic
   @ObjCName("testCollection_generic")
   fun <T> testCollection_generic(
-   @ObjCName("withJavaUtilCollection") collection: MutableCollection<T>
+   @ObjCName("withJavaUtilCollection", swiftName = "with") collection: MutableCollection<T>
   ) {
    collection.java_contains(
     Collections.generic<T>(),
@@ -95,7 +95,7 @@ open class Collections {
   @JvmStatic
   @ObjCName("testCollection_parameterized")
   fun testCollection_parameterized(
-   @ObjCName("withJavaUtilCollection") collection: MutableCollection<String>
+   @ObjCName("withJavaUtilCollection", swiftName = "with") collection: MutableCollection<String>
   ) {
    collection.java_contains(
     Collections.string(),
@@ -135,7 +135,7 @@ open class Collections {
   @JvmStatic
   @ObjCName("testCollection_specialized")
   fun testCollection_specialized(
-   @ObjCName("withJ2ktCollections_CollectionOfString") collection: Collections.CollectionOfString
+   @ObjCName("withJ2ktCollections_CollectionOfString", swiftName = "with") collection: Collections.CollectionOfString
   ) {
    collection.java_contains(
     Collections.string(),
@@ -175,7 +175,7 @@ open class Collections {
   @JvmStatic
   @ObjCName("testList_generic")
   fun <T> testList_generic(
-   @ObjCName("withJavaUtilList") list: MutableList<T>
+   @ObjCName("withJavaUtilList", swiftName = "with") list: MutableList<T>
   ) {
    list.java_addAll(
     0,
@@ -198,7 +198,7 @@ open class Collections {
   @JvmStatic
   @ObjCName("testList_parameterized")
   fun testList_parameterized(
-   @ObjCName("withJavaUtilList") list: MutableList<String>
+   @ObjCName("withJavaUtilList", swiftName = "with") list: MutableList<String>
   ) {
    list.java_addAll(
     0,
@@ -221,7 +221,7 @@ open class Collections {
   @JvmStatic
   @ObjCName("testList_specialized")
   fun testList_specialized(
-   @ObjCName("withJ2ktCollections_ListOfString") list: Collections.ListOfString
+   @ObjCName("withJ2ktCollections_ListOfString", swiftName = "with") list: Collections.ListOfString
   ) {
    list.java_addAll(
     0,
@@ -244,7 +244,7 @@ open class Collections {
   @JvmStatic
   @ObjCName("testMap_generic")
   fun <K, V> testMap_generic(
-   @ObjCName("withJavaUtilMap") map: MutableMap<K, V>
+   @ObjCName("withJavaUtilMap", swiftName = "with") map: MutableMap<K, V>
   ) {
    map.java_get(
     Collections.generic<K>(),
@@ -294,7 +294,7 @@ open class Collections {
   @JvmStatic
   @ObjCName("testMap_parameterized")
   fun testMap_parameterized(
-   @ObjCName("withJavaUtilMap") map: MutableMap<String, String>
+   @ObjCName("withJavaUtilMap", swiftName = "with") map: MutableMap<String, String>
   ) {
    map.java_get(
     Collections.string(),
@@ -344,7 +344,7 @@ open class Collections {
   @JvmStatic
   @ObjCName("testMap_specialized")
   fun testMap_specialized(
-   @ObjCName("withJ2ktCollections_MapOfString") map: Collections.MapOfString
+   @ObjCName("withJ2ktCollections_MapOfString", swiftName = "with") map: Collections.MapOfString
   ) {
    map.java_get(
     Collections.string(),
@@ -687,7 +687,7 @@ open class Collections {
  open class CollectionOfString: Collections.CustomCollection<String>() {
   @ObjCName("containsInteger")
   open fun containsInteger(
-   @ObjCName("withJavaLangInteger") integer: Int
+   @ObjCName("withJavaLangInteger", swiftName = "with") integer: Int
   ): Boolean {
    return super<Collections.CustomCollection>.remove(
     integer as Any? as String,
@@ -696,7 +696,7 @@ open class Collections {
 
   @ObjCName("removeInteger")
   open fun removeInteger(
-   @ObjCName("withJavaLangInteger") integer: Int
+   @ObjCName("withJavaLangInteger", swiftName = "with") integer: Int
   ): Boolean {
    return super<Collections.CustomCollection>.remove(
     integer as Any? as String,

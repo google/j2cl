@@ -33,7 +33,7 @@ import kotlin.native.ObjCName
 open class Date {
  @ObjCName("copy__")
  open fun copy(
-  @ObjCName("withImportglobaljstypesDate_NativeDate") d: Date.NativeDate?
+  @ObjCName("withImportglobaljstypesDate_NativeDate", swiftName = "with") d: Date.NativeDate?
  ): Date.NativeDate? {
   return d
  }
@@ -43,7 +43,7 @@ open class Date {
   @JvmStatic
   @ObjCName("now")
   fun now(
-   @ObjCName("withDouble") x: Double
+   @ObjCName("withDouble", swiftName = "with") x: Double
   ): Double {
    return Date.NativeDate.now()
   }

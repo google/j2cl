@@ -33,7 +33,7 @@ import kotlin.native.ObjCName
 open class InterfaceDevirtualize {
  @ObjCName("compare0")
  open fun <T> compare0(
-  @ObjCName("withJavaLangComparable") c: Comparable<T & Any>?,
+  @ObjCName("withJavaLangComparable", swiftName = "with") c: Comparable<T & Any>?,
   @ObjCName("withId") t: T
  ): Int {
   return c!!.compareTo(
@@ -43,7 +43,7 @@ open class InterfaceDevirtualize {
 
  @ObjCName("compare1")
  open fun compare1(
-  @ObjCName("withJavaLangComparable") c: Comparable<Any>?,
+  @ObjCName("withJavaLangComparable", swiftName = "with") c: Comparable<Any>?,
   @ObjCName("withId") o: Any?
  ): Int {
   return c!!.compareTo(
@@ -53,8 +53,8 @@ open class InterfaceDevirtualize {
 
  @ObjCName("compare2")
  open fun compare2(
-  @ObjCName("withJavaLangComparable") c: Comparable<Double>?,
-  @ObjCName("withJavaLangDouble") d: Double?
+  @ObjCName("withJavaLangComparable", swiftName = "with") c: Comparable<Double>?,
+  @ObjCName("withJavaLangDouble", swiftName = "with") d: Double?
  ): Int {
   return c!!.compareTo(
    d!!,
@@ -63,8 +63,8 @@ open class InterfaceDevirtualize {
 
  @ObjCName("compare3")
  open fun compare3(
-  @ObjCName("withJavaLangDouble") d1: Double?,
-  @ObjCName("withJavaLangDouble") d2: Double?
+  @ObjCName("withJavaLangDouble", swiftName = "with") d1: Double?,
+  @ObjCName("withJavaLangDouble", swiftName = "with") d2: Double?
  ): Int {
   return d1!!.compareTo(
    d2!!,
@@ -73,8 +73,8 @@ open class InterfaceDevirtualize {
 
  @ObjCName("compare2")
  open fun compare2(
-  @ObjCName("withJavaLangComparable") c: Comparable<Boolean>?,
-  @ObjCName("withJavaLangBoolean") d: Boolean?
+  @ObjCName("withJavaLangComparable", swiftName = "with") c: Comparable<Boolean>?,
+  @ObjCName("withJavaLangBoolean", swiftName = "with") d: Boolean?
  ): Int {
   return c!!.compareTo(
    d!!,
@@ -83,8 +83,8 @@ open class InterfaceDevirtualize {
 
  @ObjCName("compare3")
  open fun compare3(
-  @ObjCName("withJavaLangBoolean") d1: Boolean?,
-  @ObjCName("withJavaLangBoolean") d2: Boolean?
+  @ObjCName("withJavaLangBoolean", swiftName = "with") d1: Boolean?,
+  @ObjCName("withJavaLangBoolean", swiftName = "with") d2: Boolean?
  ): Int {
   return d1!!.compareTo(
    d2!!,
@@ -93,8 +93,8 @@ open class InterfaceDevirtualize {
 
  @ObjCName("compare2")
  open fun compare2(
-  @ObjCName("withJavaLangComparable") c: Comparable<Int>?,
-  @ObjCName("withJavaLangInteger") d: Int?
+  @ObjCName("withJavaLangComparable", swiftName = "with") c: Comparable<Int>?,
+  @ObjCName("withJavaLangInteger", swiftName = "with") d: Int?
  ): Int {
   return c!!.compareTo(
    d!!,
@@ -103,8 +103,8 @@ open class InterfaceDevirtualize {
 
  @ObjCName("compare3")
  open fun compare3(
-  @ObjCName("withJavaLangInteger") d1: Int?,
-  @ObjCName("withJavaLangInteger") d2: Int?
+  @ObjCName("withJavaLangInteger", swiftName = "with") d1: Int?,
+  @ObjCName("withJavaLangInteger", swiftName = "with") d2: Int?
  ): Int {
   return d1!!.compareTo(
    d2!!,

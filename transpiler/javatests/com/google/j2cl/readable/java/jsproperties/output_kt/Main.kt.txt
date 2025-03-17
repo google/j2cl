@@ -47,7 +47,7 @@ open class Foo internal constructor() {
   @ObjCName("setA")
   @JsProperty
   fun setA(
-   @ObjCName("withInt") x: Int
+   @ObjCName("withInt", swiftName = "with") x: Int
   ) {
    Foo.f = x + 2
   }
@@ -63,7 +63,7 @@ open class Foo internal constructor() {
   @ObjCName("setB")
   @JsProperty(name = "abc")
   fun setB(
-   @ObjCName("withInt") x: Int
+   @ObjCName("withInt", swiftName = "with") x: Int
   ) {
    Foo.f = x + 4
   }
@@ -86,7 +86,7 @@ open class Bar internal constructor() {
  @ObjCName("setA")
  @JsProperty
  open fun setA(
-  @ObjCName("withInt") x: Int
+  @ObjCName("withInt", swiftName = "with") x: Int
  ) {
   this.f = x + 2
  }
@@ -100,7 +100,7 @@ open class Bar internal constructor() {
  @ObjCName("setB")
  @JsProperty(name = "abc")
  open fun setB(
-  @ObjCName("withInt") x: Int
+  @ObjCName("withInt", swiftName = "with") x: Int
  ) {
   this.f = x + 4
  }
@@ -132,7 +132,7 @@ interface InterfaceWithDefaultJsProperties {
  @ObjCName("setM")
  @JsProperty
  fun setM(
-  @ObjCName("withInt") value: Int
+  @ObjCName("withInt", swiftName = "with") value: Int
  ) {}
 }
 

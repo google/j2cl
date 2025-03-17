@@ -110,16 +110,16 @@ open class ExplicitNotNullable {
 
  @ObjCName("m1")
  open fun m1(
-  @ObjCName("withNSString") a: String,
-  @ObjCName("withJavaUtilList") b: MutableList<Double>
+  @ObjCName("withNSString", swiftName = "with") a: String,
+  @ObjCName("withJavaUtilList", swiftName = "with") b: MutableList<Double>
  ): String {
   return ""
  }
 
  @ObjCName("m2")
  open fun m2(
-  @ObjCName("withNSString") a: String?,
-  @ObjCName("withJavaUtilList") b: MutableList<Double?>
+  @ObjCName("withNSString", swiftName = "with") a: String?,
+  @ObjCName("withJavaUtilList", swiftName = "with") b: MutableList<Double?>
  ): String? {
   return null
  }
@@ -532,7 +532,7 @@ open class ExplicitNotNullable {
  fun interface IntFunction<T> {
   @ObjCName("accept")
   fun accept(
-   @ObjCName("withInt") i: Int
+   @ObjCName("withInt", swiftName = "with") i: Int
   ): T
  }
 

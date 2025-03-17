@@ -30,7 +30,7 @@ import kotlin.native.ObjCName
 interface InterfaceWithDefault {
  @ObjCName("foo")
  fun foo(
-  @ObjCName("withNSString") value: String?
+  @ObjCName("withNSString", swiftName = "with") value: String?
  ) {
   System.out.println("in InterfaceWithDefault")
  }

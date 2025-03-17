@@ -43,7 +43,7 @@ open class DefinitelyNotNull {
   @JvmStatic
   @ObjCName("testEquivalence")
   fun <T> testEquivalence(
-   @ObjCName("withJ2ktDefinitelyNotNull_Equivalence") equivalence: DefinitelyNotNull.Equivalence<in T & Any>,
+   @ObjCName("withJ2ktDefinitelyNotNull_Equivalence", swiftName = "with") equivalence: DefinitelyNotNull.Equivalence<in T & Any>,
    @ObjCName("withId") a: T?,
    @ObjCName("withId") b: T?
   ): Boolean {
@@ -93,7 +93,7 @@ open class DefinitelyNotNull {
    @JvmStatic
    @ObjCName("copyOf")
    fun <E: Any> copyOf(
-    @ObjCName("withJavaLangIterable") iterable: MutableIterable<E>
+    @ObjCName("withJavaLangIterable", swiftName = "with") iterable: MutableIterable<E>
    ): DefinitelyNotNull.ImmutableList<E> {
     throw RuntimeException()
    }
@@ -101,7 +101,7 @@ open class DefinitelyNotNull {
    @JvmStatic
    @ObjCName("copyOfNullableWithCorrectBounds")
    fun <E> copyOfNullableWithCorrectBounds(
-    @ObjCName("withJavaLangIterable") iterable: MutableIterable<E & Any>
+    @ObjCName("withJavaLangIterable", swiftName = "with") iterable: MutableIterable<E & Any>
    ): DefinitelyNotNull.ImmutableList<E & Any> {
     return DefinitelyNotNull.ImmutableList.copyOf<E & Any>(iterable)
    }

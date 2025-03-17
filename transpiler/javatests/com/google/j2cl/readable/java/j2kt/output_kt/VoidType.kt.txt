@@ -65,7 +65,7 @@ open class VoidType {
  fun interface Consumer<V: Void?> {
   @ObjCName("accept")
   fun accept(
-   @ObjCName("withJavaLangVoid") v: V
+   @ObjCName("withJavaLangVoid", swiftName = "with") v: V
   )
  }
 }

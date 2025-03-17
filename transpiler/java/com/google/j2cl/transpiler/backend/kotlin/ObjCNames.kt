@@ -91,7 +91,9 @@ internal fun Method.toNonConstructorObjCNames(): MethodObjCNames =
     if (objectiveCName == null || !objectiveCName.contains(":")) {
       MethodObjCNames(
         ObjCName(string = objectiveCName ?: descriptor.ktName.escapeJ2ObjCKeyword),
-        parameters.map { ObjCName(string = it.objCParamName, swiftString = it.swiftParamName) },
+        parameters.map {
+          ObjCName(string = it.objCParameterName, swiftString = it.swiftParameterName)
+        },
       )
     } else {
       val objCParameterNames = objectiveCName.objCMethodParameterNames
@@ -215,15 +217,11 @@ private val ArrayTypeDescriptor.dimensionsSuffix: String
 private fun TypeVariable.variableObjCName(useId: Boolean): String =
   upperBoundTypeDescriptor.objCName(useId = useId)
 
-private val Variable.objCName: String
+internal val Variable.objCName: String
   get() = typeDescriptor.objCName(useId = true).titleCased
 
-private val Variable.objCParamName: String
+internal val Variable.objCParameterName: String
   get() = "with$objCName"
-
-// TODO(b/374280337): Implement
-private val Variable.swiftParamName: String?
-  get() = null
 
 internal val FieldDescriptor.objCName: String
   get() = name!!.objCName.escapeJ2ObjCKeyword.letIf(!isEnumConstant) { it + "_" }

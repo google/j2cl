@@ -176,7 +176,7 @@ open class TryCatch {
  @ObjCName("testThrowsParameterized")
  @Throws(Throwable::class)
  open fun <T: Throwable?> testThrowsParameterized(
-  @ObjCName("withJavaLangThrowable") throwable: T
+  @ObjCName("withJavaLangThrowable", swiftName = "with") throwable: T
  ) {
   throw throwable!!
  }

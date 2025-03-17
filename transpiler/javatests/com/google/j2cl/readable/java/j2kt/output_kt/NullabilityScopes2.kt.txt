@@ -55,7 +55,7 @@ open class NullabilityScopes2 internal constructor() {
  open class NonNullMarkedScope<T: NullabilityScopes2.NullMarkedScope.Recursive<T>> internal constructor() {
   @ObjCName("flatten")
   open fun flatten(
-   @ObjCName("withJ2ktNullabilityScopes2_NullMarkedScope_Recursive") recursive: NullabilityScopes2.NullMarkedScope.Recursive<T>?
+   @ObjCName("withJ2ktNullabilityScopes2_NullMarkedScope_Recursive", swiftName = "with") recursive: NullabilityScopes2.NullMarkedScope.Recursive<T>?
   ): MutableList<Any?>? {
    return recursive!!.toList().stream().map<MutableList<Any>>(
     Function/* <in NullabilityScopes2.NullMarkedScope.Recursive<T>?, out MutableList<Any?>?> */ { arg0: NullabilityScopes2.NullMarkedScope.Recursive<T> ->

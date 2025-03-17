@@ -33,13 +33,13 @@ open class BoxOverloads {
   @JvmStatic
   @ObjCName("boxedOverload")
   fun boxedOverload(
-   @ObjCName("withDouble") d: Double
+   @ObjCName("withDouble", swiftName = "with") d: Double
   ) {}
 
   @JvmStatic
   @ObjCName("boxedOverload")
   fun boxedOverload(
-   @ObjCName("withJavaLangDouble") d: Double
+   @ObjCName("withJavaLangDouble", swiftName = "with") d: Double
   ) {}
 
   @JvmStatic
@@ -60,7 +60,7 @@ open class BoxOverloads {
   @JvmStatic
   @ObjCName("testGenericBoxedOverload")
   fun testGenericBoxedOverload(
-   @ObjCName("withJ2ktnotpassingBoxOverloads_Generic") generic: BoxOverloads.Generic<Double>
+   @ObjCName("withJ2ktnotpassingBoxOverloads_Generic", swiftName = "with") generic: BoxOverloads.Generic<Double>
   ) {
    generic.overload(1.25)
    generic.overload(
@@ -76,7 +76,7 @@ open class BoxOverloads {
  interface Generic<T> {
   @ObjCName("overload")
   fun overload(
-   @ObjCName("withDouble") d: Double
+   @ObjCName("withDouble", swiftName = "with") d: Double
   )
 
   @ObjCName("overload")

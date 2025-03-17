@@ -46,7 +46,7 @@ open class GrandParent internal constructor() {
 
  @ObjCName("grandParentWithParams")
  open fun grandParentWithParams(
-  @ObjCName("withInt") foo: Int
+  @ObjCName("withInt", swiftName = "with") foo: Int
  ) {}
 
  @ObjCName("grandParentWithChangingReturn")
@@ -68,7 +68,7 @@ open class Parent internal constructor(): GrandParent(), ParentInterface {
 
  @ObjCName("parentWithParams")
  open fun parentWithParams(
-  @ObjCName("withInt") foo: Int
+  @ObjCName("withInt", swiftName = "with") foo: Int
  ) {}
 
  @ObjCName("parentWithChangingReturn")

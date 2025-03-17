@@ -37,7 +37,7 @@ import kotlin.native.ObjCName
 open class Number {
  @ObjCName("testJsDocForLiteralType")
  open fun testJsDocForLiteralType(
-  @ObjCName("withImportglobaljstypesNumber_MyLiteralType") a: Number.MyLiteralType?
+  @ObjCName("withImportglobaljstypesNumber_MyLiteralType", swiftName = "with") a: Number.MyLiteralType?
  ): Number.MyLiteralType? {
   return a
  }
@@ -48,13 +48,13 @@ open class Number {
   @ObjCName("f")
   @JsMethod(name = "Number.isInteger", namespace = JsPackage.GLOBAL)
   external fun f(
-   @ObjCName("withDouble") x: Double
+   @ObjCName("withDouble", swiftName = "with") x: Double
   ): Boolean
 
   @JvmStatic
   @ObjCName("test")
   fun test(
-   @ObjCName("withDouble") x: Double
+   @ObjCName("withDouble", swiftName = "with") x: Double
   ): Boolean {
    return Number.f(x)
   }
@@ -83,7 +83,7 @@ open class Number {
 
   @ObjCName("at")
   fun at(
-   @ObjCName("withInt") index: Int
+   @ObjCName("withInt", swiftName = "with") index: Int
   ): T
  }
 

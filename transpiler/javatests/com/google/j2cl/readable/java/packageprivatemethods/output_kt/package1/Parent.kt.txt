@@ -34,9 +34,9 @@ abstract class Parent: SuperParent() {
 
  @ObjCName("exposedAbstractInParent")
  public abstract fun exposedAbstractInParent(
-  @ObjCName("withInt") a: Int,
-  @ObjCName("withInt") b: Int,
-  @ObjCName("withInt") c: Int
+  @ObjCName("withInt", swiftName = "with") a: Int,
+  @ObjCName("withInt", swiftName = "with") b: Int,
+  @ObjCName("withInt", swiftName = "with") c: Int
  ): Int
 
  override fun exposedAbstractInParent_pp_packageprivatemethods_package1(arg0: Int, arg1: Int, arg2: Int): Int {

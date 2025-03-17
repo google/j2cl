@@ -29,7 +29,7 @@ import kotlin.native.ObjCName
 fun interface MyInterface {
  @ObjCName("fun")
  fun `fun`(
-  @ObjCName("withInt") a: Int
+  @ObjCName("withInt", swiftName = "with") a: Int
  ): Int
 }
 

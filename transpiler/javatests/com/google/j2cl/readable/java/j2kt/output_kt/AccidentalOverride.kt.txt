@@ -85,7 +85,7 @@ open class AccidentalOverride {
 interface Parent {
  @ObjCName("test")
  fun <T: String?> test(
-  @ObjCName("withNSString") t: T
+  @ObjCName("withNSString", swiftName = "with") t: T
  )
 }
 

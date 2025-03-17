@@ -37,16 +37,16 @@ fun interface MyInterface {
 open class SuperParent internal constructor() {
  @ObjCName("fun")
  open fun `fun`(
-  @ObjCName("withInt") a: Int,
-  @ObjCName("withInt") b: Int
+  @ObjCName("withInt", swiftName = "with") a: Int,
+  @ObjCName("withInt", swiftName = "with") b: Int
  ): Int {
   return a + b + 111
  }
 
  @ObjCName("bar")
  open fun bar(
-  @ObjCName("withInt") a: Int,
-  @ObjCName("withInt") b: Int
+  @ObjCName("withInt", swiftName = "with") a: Int,
+  @ObjCName("withInt", swiftName = "with") b: Int
  ): Int {
   return a * b + 222
  }
@@ -67,7 +67,7 @@ open class Parent internal constructor(): SuperParent() {
  @ObjCName("foo")
  @JsMethod(name = "myFoo")
  open fun foo(
-  @ObjCName("withInt") a: Int
+  @ObjCName("withInt", swiftName = "with") a: Int
  ): Int {
   return a
  }

@@ -33,7 +33,7 @@ open class LambdaParameterTypeInference {
   @JvmStatic
   @ObjCName("wrap")
   fun <T> wrap(
-   @ObjCName("withJ2ktLambdaParameterTypeInference_Consumer") consumer: LambdaParameterTypeInference.Consumer<T>?
+   @ObjCName("withJ2ktLambdaParameterTypeInference_Consumer", swiftName = "with") consumer: LambdaParameterTypeInference.Consumer<T>?
   ): LambdaParameterTypeInference.Consumer<T>? {
    throw RuntimeException()
   }
@@ -41,8 +41,8 @@ open class LambdaParameterTypeInference {
   @JvmStatic
   @ObjCName("add")
   fun <T> add(
-   @ObjCName("withJ2ktLambdaParameterTypeInference_Supplier") supplier: LambdaParameterTypeInference.Supplier<T>?,
-   @ObjCName("withJ2ktLambdaParameterTypeInference_Consumer") consumer: LambdaParameterTypeInference.Consumer<in T>?
+   @ObjCName("withJ2ktLambdaParameterTypeInference_Supplier", swiftName = "with") supplier: LambdaParameterTypeInference.Supplier<T>?,
+   @ObjCName("withJ2ktLambdaParameterTypeInference_Consumer", swiftName = "with") consumer: LambdaParameterTypeInference.Consumer<in T>?
   ) {
    throw RuntimeException()
   }
@@ -50,7 +50,7 @@ open class LambdaParameterTypeInference {
   @JvmStatic
   @ObjCName("test")
   fun <T> test(
-   @ObjCName("withJ2ktLambdaParameterTypeInference_Supplier") supplier: LambdaParameterTypeInference.Supplier<out T>?
+   @ObjCName("withJ2ktLambdaParameterTypeInference_Supplier", swiftName = "with") supplier: LambdaParameterTypeInference.Supplier<out T>?
   ) {
    LambdaParameterTypeInference.add/* <capture#1-of out T> */(
     supplier,

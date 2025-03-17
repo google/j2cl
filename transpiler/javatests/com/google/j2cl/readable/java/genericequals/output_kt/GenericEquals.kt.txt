@@ -41,7 +41,7 @@ open class GenericEquals<T> {
 
  @ObjCName("foo")
  open fun foo(
-  @ObjCName("withGenericequalsGenericEquals") other: GenericEquals<*>?
+  @ObjCName("withGenericequalsGenericEquals", swiftName = "with") other: GenericEquals<*>?
  ): Any? {
   return other!!.value2!!.value
  }

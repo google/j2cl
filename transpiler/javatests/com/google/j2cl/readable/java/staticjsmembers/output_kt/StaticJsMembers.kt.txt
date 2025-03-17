@@ -79,28 +79,28 @@ open class StaticJsMembers {
   @ObjCName("f1")
   @JsMethod(name = "fun")
   fun f1(
-   @ObjCName("withInt") a: Int
+   @ObjCName("withInt", swiftName = "with") a: Int
   ) {}
 
   @JvmStatic
   @ObjCName("f2")
   @JsMethod
   fun f2(
-   @ObjCName("withInt") a: Int
+   @ObjCName("withInt", swiftName = "with") a: Int
   ) {}
 
   @JvmStatic
   @ObjCName("f3")
   @JsMethod(name = "Math.floor", namespace = JsPackage.GLOBAL)
   external fun f3(
-   @ObjCName("withDouble") a: Double
+   @ObjCName("withDouble", swiftName = "with") a: Double
   )
 
   @JvmStatic
   @ObjCName("f4")
   @JsMethod(name = "isFinite", namespace = JsPackage.GLOBAL)
   external fun f4(
-   @ObjCName("withDouble") a: Double
+   @ObjCName("withDouble", swiftName = "with") a: Double
   ): Boolean
 
   @JvmStatic
@@ -117,25 +117,25 @@ open class StaticJsMembers {
   @ObjCName("max")
   @JsMethod(name = "Math.max", namespace = JsPackage.GLOBAL)
   external fun max(
-   @ObjCName("withInt") a: Int,
-   @ObjCName("withInt") b: Int
+   @ObjCName("withInt", swiftName = "with") a: Int,
+   @ObjCName("withInt", swiftName = "with") b: Int
   ): Int
 
   @JvmStatic
   @ObjCName("max")
   @JsMethod(name = "Math.max", namespace = JsPackage.GLOBAL)
   external fun max(
-   @ObjCName("withInt") a: Int,
-   @ObjCName("withInt") b: Int,
-   @ObjCName("withInt") c: Int
+   @ObjCName("withInt", swiftName = "with") a: Int,
+   @ObjCName("withInt", swiftName = "with") b: Int,
+   @ObjCName("withInt", swiftName = "with") c: Int
   ): Int
 
   @JvmStatic
   @ObjCName("max")
   @JsMethod(name = "Math.max", namespace = JsPackage.GLOBAL)
   external fun max(
-   @ObjCName("withDouble") a: Double,
-   @ObjCName("withDouble") b: Double
+   @ObjCName("withDouble", swiftName = "with") a: Double,
+   @ObjCName("withDouble", swiftName = "with") b: Double
   ): Double
  }
 

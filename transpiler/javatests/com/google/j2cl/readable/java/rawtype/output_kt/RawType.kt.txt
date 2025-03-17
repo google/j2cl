@@ -73,7 +73,7 @@ open class RawType internal constructor() {
  interface GenericSuperclass<T: RawType?> {
   @ObjCName("f")
   fun f(
-   @ObjCName("withRawtypeRawType") t: T
+   @ObjCName("withRawtypeRawType", swiftName = "with") t: T
   ) {}
  }
 

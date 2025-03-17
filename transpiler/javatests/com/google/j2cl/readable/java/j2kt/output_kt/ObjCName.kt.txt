@@ -292,8 +292,8 @@ open class ObjCName {
   @JvmStatic
   @kotlin.native.ObjCName("foo")
   fun foo(
-   @kotlin.native.ObjCName("withNSString") s: String?,
-   @kotlin.native.ObjCName("withNSString") i: String?
+   @kotlin.native.ObjCName("withNSString", swiftName = "with") s: String?,
+   @kotlin.native.ObjCName("withNSString", swiftName = "with") i: String?
   ) {}
 
   @JvmStatic
@@ -347,18 +347,18 @@ open class ObjCName {
   @JvmStatic
   @kotlin.native.ObjCName("reservedParamNames")
   fun reservedParamNames(
-   @kotlin.native.ObjCName("withInt") extern: Int,
-   @kotlin.native.ObjCName("withInt") struct: Int,
-   @kotlin.native.ObjCName("withInt") register: Int,
-   @kotlin.native.ObjCName("withInt") inline: Int
+   @kotlin.native.ObjCName("withInt", swiftName = "with") extern: Int,
+   @kotlin.native.ObjCName("withInt", swiftName = "with") struct: Int,
+   @kotlin.native.ObjCName("withInt", swiftName = "with") register: Int,
+   @kotlin.native.ObjCName("withInt", swiftName = "with") inline: Int
   ) {}
 
   @JvmStatic
   @kotlin.native.ObjCName("nativeTypes")
   fun nativeTypes(
-   @kotlin.native.ObjCName("withNSString") s: String?,
+   @kotlin.native.ObjCName("withNSString", swiftName = "with") s: String?,
    @kotlin.native.ObjCName("withId") o: Any?,
-   @kotlin.native.ObjCName("withNSNumber") n: Number?
+   @kotlin.native.ObjCName("withNSNumber", swiftName = "with") n: Number?
   ): String? {
    return s
   }
@@ -366,121 +366,121 @@ open class ObjCName {
   @JvmStatic
   @kotlin.native.ObjCName("numberType")
   fun numberType(
-   @kotlin.native.ObjCName("withNSNumber") l: Number?
+   @kotlin.native.ObjCName("withNSNumber", swiftName = "with") l: Number?
   ) {}
 
   @JvmStatic
   @kotlin.native.ObjCName("booleanType")
   fun booleanType(
-   @kotlin.native.ObjCName("withJavaLangBoolean") l: Boolean?
+   @kotlin.native.ObjCName("withJavaLangBoolean", swiftName = "with") l: Boolean?
   ) {}
 
   @JvmStatic
   @kotlin.native.ObjCName("characterType")
   fun characterType(
-   @kotlin.native.ObjCName("withJavaLangCharacter") l: Char?
+   @kotlin.native.ObjCName("withJavaLangCharacter", swiftName = "with") l: Char?
   ) {}
 
   @JvmStatic
   @kotlin.native.ObjCName("byteType")
   fun byteType(
-   @kotlin.native.ObjCName("withJavaLangByte") l: Byte?
+   @kotlin.native.ObjCName("withJavaLangByte", swiftName = "with") l: Byte?
   ) {}
 
   @JvmStatic
   @kotlin.native.ObjCName("shortType")
   fun shortType(
-   @kotlin.native.ObjCName("withJavaLangShort") l: Short?
+   @kotlin.native.ObjCName("withJavaLangShort", swiftName = "with") l: Short?
   ) {}
 
   @JvmStatic
   @kotlin.native.ObjCName("integerType")
   fun integerType(
-   @kotlin.native.ObjCName("withJavaLangInteger") l: Int?
+   @kotlin.native.ObjCName("withJavaLangInteger", swiftName = "with") l: Int?
   ) {}
 
   @JvmStatic
   @kotlin.native.ObjCName("longType")
   fun longType(
-   @kotlin.native.ObjCName("withJavaLangLong") l: Long?
+   @kotlin.native.ObjCName("withJavaLangLong", swiftName = "with") l: Long?
   ) {}
 
   @JvmStatic
   @kotlin.native.ObjCName("floatType")
   fun floatType(
-   @kotlin.native.ObjCName("withJavaLangFloat") l: Float?
+   @kotlin.native.ObjCName("withJavaLangFloat", swiftName = "with") l: Float?
   ) {}
 
   @JvmStatic
   @kotlin.native.ObjCName("doubleType")
   fun doubleType(
-   @kotlin.native.ObjCName("withJavaLangDouble") l: Double?
+   @kotlin.native.ObjCName("withJavaLangDouble", swiftName = "with") l: Double?
   ) {}
 
   @JvmStatic
   @kotlin.native.ObjCName("iterableType")
   fun iterableType(
-   @kotlin.native.ObjCName("withJavaLangIterable") l: MutableIterable<String?>?
+   @kotlin.native.ObjCName("withJavaLangIterable", swiftName = "with") l: MutableIterable<String?>?
   ) {}
 
   @JvmStatic
   @kotlin.native.ObjCName("iteratorType")
   fun iteratorType(
-   @kotlin.native.ObjCName("withJavaUtilIterator") l: MutableIterator<String?>?
+   @kotlin.native.ObjCName("withJavaUtilIterator", swiftName = "with") l: MutableIterator<String?>?
   ) {}
 
   @JvmStatic
   @kotlin.native.ObjCName("listIteratorType")
   fun listIteratorType(
-   @kotlin.native.ObjCName("withJavaUtilListIterator") l: MutableListIterator<String?>?
+   @kotlin.native.ObjCName("withJavaUtilListIterator", swiftName = "with") l: MutableListIterator<String?>?
   ) {}
 
   @JvmStatic
   @kotlin.native.ObjCName("collectionType")
   fun collectionType(
-   @kotlin.native.ObjCName("withJavaUtilCollection") l: MutableCollection<String?>?
+   @kotlin.native.ObjCName("withJavaUtilCollection", swiftName = "with") l: MutableCollection<String?>?
   ) {}
 
   @JvmStatic
   @kotlin.native.ObjCName("listType")
   fun listType(
-   @kotlin.native.ObjCName("withJavaUtilList") l: MutableList<String?>?
+   @kotlin.native.ObjCName("withJavaUtilList", swiftName = "with") l: MutableList<String?>?
   ) {}
 
   @JvmStatic
   @kotlin.native.ObjCName("setType")
   fun setType(
-   @kotlin.native.ObjCName("withJavaUtilSet") l: MutableSet<String?>?
+   @kotlin.native.ObjCName("withJavaUtilSet", swiftName = "with") l: MutableSet<String?>?
   ) {}
 
   @JvmStatic
   @kotlin.native.ObjCName("mapType")
   fun mapType(
-   @kotlin.native.ObjCName("withJavaUtilMap") l: MutableMap<String?, String?>?
+   @kotlin.native.ObjCName("withJavaUtilMap", swiftName = "with") l: MutableMap<String?, String?>?
   ) {}
 
   @JvmStatic
   @kotlin.native.ObjCName("linkedListType")
   fun linkedListType(
-   @kotlin.native.ObjCName("withJavaUtilLinkedList") l: LinkedList<String?>?
+   @kotlin.native.ObjCName("withJavaUtilLinkedList", swiftName = "with") l: LinkedList<String?>?
   ) {}
 
   @JvmStatic
   @kotlin.native.ObjCName("hashSetType")
   fun hashSetType(
-   @kotlin.native.ObjCName("withJavaUtilHashSet") l: HashSet<String?>?
+   @kotlin.native.ObjCName("withJavaUtilHashSet", swiftName = "with") l: HashSet<String?>?
   ) {}
 
   @JvmStatic
   @kotlin.native.ObjCName("hashMapType")
   fun hashMapType(
-   @kotlin.native.ObjCName("withJavaUtilHashMap") l: HashMap<String?, String?>?
+   @kotlin.native.ObjCName("withJavaUtilHashMap", swiftName = "with") l: HashMap<String?, String?>?
   ) {}
 
   @JvmStatic
   @kotlin.native.ObjCName("nonNativeJavaType")
   fun nonNativeJavaType(
-   @kotlin.native.ObjCName("withJavaUtilStringJoiner") l: StringJoiner?
+   @kotlin.native.ObjCName("withJavaUtilStringJoiner", swiftName = "with") l: StringJoiner?
   ) {}
  }
 
@@ -527,7 +527,7 @@ open class ObjCName {
    @JvmStatic
    @kotlin.native.ObjCName("withOrdinal")
    fun withOrdinal(
-    @kotlin.native.ObjCName("withInt") ordinal: Int
+    @kotlin.native.ObjCName("withInt", swiftName = "with") ordinal: Int
    ): ObjCName.Foo? {
     return ObjCName.Foo.values()[ordinal]
    }

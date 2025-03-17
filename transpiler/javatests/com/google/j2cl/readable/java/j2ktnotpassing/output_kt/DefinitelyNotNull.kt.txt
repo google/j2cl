@@ -77,7 +77,7 @@ open class DefinitelyNotNull {
    @JvmStatic
    @ObjCName("copyOf")
    fun <E: Any> copyOf(
-    @ObjCName("withJavaLangIterable") iterable: MutableIterable<E>
+    @ObjCName("withJavaLangIterable", swiftName = "with") iterable: MutableIterable<E>
    ): DefinitelyNotNull.ImmutableList<E> {
     throw RuntimeException()
    }
@@ -85,7 +85,7 @@ open class DefinitelyNotNull {
    @JvmStatic
    @ObjCName("copyOfNullable")
    fun <E> copyOfNullable(
-    @ObjCName("withJavaLangIterable") iterable: MutableIterable<E>
+    @ObjCName("withJavaLangIterable", swiftName = "with") iterable: MutableIterable<E>
    ): DefinitelyNotNull.ImmutableList<E & Any> {
     return DefinitelyNotNull.ImmutableList.copyOf<E & Any>(iterable)
    }
@@ -93,7 +93,7 @@ open class DefinitelyNotNull {
    @JvmStatic
    @ObjCName("copyOfNullableWithInvalidBounds")
    fun <E> copyOfNullableWithInvalidBounds(
-    @ObjCName("withJavaLangIterable") iterable: MutableIterable<E>
+    @ObjCName("withJavaLangIterable", swiftName = "with") iterable: MutableIterable<E>
    ): DefinitelyNotNull.ImmutableList<E & Any> {
     return DefinitelyNotNull.ImmutableList.copyOf<E & Any>(
      iterable as MutableIterable<E>,

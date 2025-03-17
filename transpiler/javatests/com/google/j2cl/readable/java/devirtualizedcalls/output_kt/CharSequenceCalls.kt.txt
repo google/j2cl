@@ -30,7 +30,7 @@ import kotlin.native.ObjCName
 open class CharSequenceCalls {
  @ObjCName("test")
  open fun test(
-  @ObjCName("withJavaLangCharSequence") cs: CharSequence?
+  @ObjCName("withJavaLangCharSequence", swiftName = "with") cs: CharSequence?
  ) {
   cs!!.get(0)
  }

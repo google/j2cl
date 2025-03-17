@@ -31,12 +31,12 @@ import kotlin.native.ObjCName
 open class Nullability {
  @ObjCName("acceptsNull")
  external open fun acceptsNull(
-  @ObjCName("withNSString") arg: String?
+  @ObjCName("withNSString", swiftName = "with") arg: String?
  )
 
  @ObjCName("doesNotAcceptNull")
  external open fun doesNotAcceptNull(
-  @ObjCName("withNSString") arg: String
+  @ObjCName("withNSString", swiftName = "with") arg: String
  )
 }
 
@@ -45,11 +45,11 @@ open class Nullability {
 open class NullabilityNullMarked internal constructor() {
  @ObjCName("acceptsNull")
  external open fun acceptsNull(
-  @ObjCName("withNSString") arg: String?
+  @ObjCName("withNSString", swiftName = "with") arg: String?
  )
 
  @ObjCName("doesNotAcceptNull")
  external open fun doesNotAcceptNull(
-  @ObjCName("withNSString") arg: String
+  @ObjCName("withNSString", swiftName = "with") arg: String
  )
 }

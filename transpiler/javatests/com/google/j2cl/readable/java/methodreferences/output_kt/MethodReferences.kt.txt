@@ -176,7 +176,7 @@ open class MethodReferences<T> {
  fun interface ArrayProducer<T> {
   @ObjCName("produce")
   fun produce(
-   @ObjCName("withInt") size: Int
+   @ObjCName("withInt", swiftName = "with") size: Int
   ): Array<T>?
  }
 

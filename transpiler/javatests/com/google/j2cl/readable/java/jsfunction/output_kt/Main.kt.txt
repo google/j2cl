@@ -207,8 +207,8 @@ open class Main {
   @JvmStatic
   @ObjCName("callFn")
   fun callFn(
-   @ObjCName("withJsfunctionMain_JsFunctionInterface") fn: Main.JsFunctionInterface?,
-   @ObjCName("withInt") a: Int
+   @ObjCName("withJsfunctionMain_JsFunctionInterface", swiftName = "with") fn: Main.JsFunctionInterface?,
+   @ObjCName("withInt", swiftName = "with") a: Int
   ): Int {
    return fn!!.foo(a)
   }
@@ -216,7 +216,7 @@ open class Main {
   @JvmStatic
   @ObjCName("acceptsJsFunction")
   fun acceptsJsFunction(
-   @ObjCName("withJsfunctionMain_Function") f: Main.Function<String?, String?>?
+   @ObjCName("withJsfunctionMain_Function", swiftName = "with") f: Main.Function<String?, String?>?
   ) {}
 
   @JvmStatic
@@ -232,9 +232,9 @@ open class Main {
   @JvmStatic
   @ObjCName("callInterfaceRaw")
   fun callInterfaceRaw(
-   @ObjCName("withJsfunctionMain_JsBiFunction") f: Main.JsBiFunction<Any?, Number?>?,
+   @ObjCName("withJsfunctionMain_JsBiFunction", swiftName = "with") f: Main.JsBiFunction<Any?, Number?>?,
    @ObjCName("withId") o: Any?,
-   @ObjCName("withNSNumber") n: Number?
+   @ObjCName("withNSNumber", swiftName = "with") n: Number?
   ): Any? {
    return f!!.apply(o, n)
   }
@@ -242,8 +242,8 @@ open class Main {
   @JvmStatic
   @ObjCName("callInterfaceParameterized")
   fun callInterfaceParameterized(
-   @ObjCName("withJsfunctionMain_JsBiFunction") f: Main.JsBiFunction<String?, Int?>?,
-   @ObjCName("withNSString") s: String?
+   @ObjCName("withJsfunctionMain_JsBiFunction", swiftName = "with") f: Main.JsBiFunction<String?, Int?>?,
+   @ObjCName("withNSString", swiftName = "with") s: String?
   ): String? {
    return f!!.apply(
     s,
@@ -254,9 +254,9 @@ open class Main {
   @JvmStatic
   @ObjCName("callInterfaceUnparameterized")
   fun <U, V: Number?> callInterfaceUnparameterized(
-   @ObjCName("withJsfunctionMain_JsBiFunction") f: Main.JsBiFunction<U, V>?,
+   @ObjCName("withJsfunctionMain_JsBiFunction", swiftName = "with") f: Main.JsBiFunction<U, V>?,
    @ObjCName("withId") u: U,
-   @ObjCName("withNSNumber") v: V
+   @ObjCName("withNSNumber", swiftName = "with") v: V
   ): U {
    return f!!.apply(u, v)
   }
@@ -264,9 +264,9 @@ open class Main {
   @JvmStatic
   @ObjCName("callImplementorRaw")
   fun callImplementorRaw(
-   @ObjCName("withJsfunctionMain_TIntegerJsBiFunction") f: Main.TIntegerJsBiFunction<Any?>?,
+   @ObjCName("withJsfunctionMain_TIntegerJsBiFunction", swiftName = "with") f: Main.TIntegerJsBiFunction<Any?>?,
    @ObjCName("withId") o: Any?,
-   @ObjCName("withJavaLangInteger") n: Int?
+   @ObjCName("withJavaLangInteger", swiftName = "with") n: Int?
   ): Any? {
    return f!!.apply(o, n)
   }
@@ -274,8 +274,8 @@ open class Main {
   @JvmStatic
   @ObjCName("callImplementorParameterized")
   fun callImplementorParameterized(
-   @ObjCName("withJsfunctionMain_TIntegerJsBiFunction") f: Main.TIntegerJsBiFunction<String?>?,
-   @ObjCName("withNSString") s: String?
+   @ObjCName("withJsfunctionMain_TIntegerJsBiFunction", swiftName = "with") f: Main.TIntegerJsBiFunction<String?>?,
+   @ObjCName("withNSString", swiftName = "with") s: String?
   ): String? {
    return f!!.apply(
     s,
@@ -338,7 +338,7 @@ open class Main {
   @ObjCName("callOnFunction")
   @JsMethod
   fun callOnFunction(
-   @ObjCName("withJsfunctionMain_JsBiFunction") f: Main.JsBiFunction<Double?, Double?>?
+   @ObjCName("withJsfunctionMain_JsBiFunction", swiftName = "with") f: Main.JsBiFunction<Double?, Double?>?
   ): Double {
    return 0.0
   }
@@ -377,7 +377,7 @@ open class Main {
  fun interface JsFunctionInterface {
   @ObjCName("foo")
   fun foo(
-   @ObjCName("withInt") a: Int
+   @ObjCName("withInt", swiftName = "with") a: Int
   ): Int
 
   @ObjCName("overlayMethod")
@@ -437,7 +437,7 @@ open class Main {
  fun interface JsFunctionVarargs {
   @ObjCName("m")
   fun m(
-   @ObjCName("withInt") i: Int,
+   @ObjCName("withInt", swiftName = "with") i: Int,
    vararg @ObjCName("withIntArray") numbers: Int
   ): Int
  }
@@ -448,7 +448,7 @@ open class Main {
   @ObjCName("onInvoke")
   fun onInvoke(
    @ObjCName("withId") p0: T,
-   @ObjCName("withInt") p1: Int,
+   @ObjCName("withInt", swiftName = "with") p1: Int,
    @ObjCName("withNSObjectArray") p2: Array<T>?
   ): Any?
  }
@@ -467,7 +467,7 @@ open class Main {
  fun interface JsFunctionVarargsGenerics<T> {
   @ObjCName("m")
   fun m(
-   @ObjCName("withInt") i: Int,
+   @ObjCName("withInt", swiftName = "with") i: Int,
    vararg @ObjCName("withNSObjectArray") numbers: T
   ): Int
  }
@@ -484,8 +484,8 @@ open class Main {
  fun interface JsFunctionOptional {
   @ObjCName("m")
   fun m(
-   @ObjCName("withInt") i: Int,
-   @ObjCName("withJavaLangDouble") @JsOptional number: Double?
+   @ObjCName("withInt", swiftName = "with") i: Int,
+   @ObjCName("withJavaLangDouble", swiftName = "with") @JsOptional number: Double?
   ): Int
  }
 
@@ -543,7 +543,7 @@ open class Main {
   @ObjCName("apply")
   fun apply(
    @ObjCName("withId") t: T,
-   @ObjCName("withNSNumber") s: S
+   @ObjCName("withNSNumber", swiftName = "with") s: S
   ): T
  }
 

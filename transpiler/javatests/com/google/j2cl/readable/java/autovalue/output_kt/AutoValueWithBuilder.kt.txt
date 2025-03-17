@@ -59,7 +59,7 @@ abstract class AutoValueWithBuilder {
 
   @ObjCName("setNullableField")
   abstract fun setNullableField(
-   @ObjCName("withJavaLangDouble") x: Double?
+   @ObjCName("withJavaLangDouble", swiftName = "with") x: Double?
   ): AutoValueWithBuilder.Builder?
 
   @ObjCName("build")

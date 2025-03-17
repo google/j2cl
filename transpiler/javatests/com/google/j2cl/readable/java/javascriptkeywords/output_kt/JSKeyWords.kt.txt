@@ -29,7 +29,7 @@ import kotlin.native.ObjCName
 open class JSKeyWords {
  @ObjCName("test")
  open fun test(
-  @ObjCName("withInt") `in`: Int
+  @ObjCName("withInt", swiftName = "with") `in`: Int
  ): Int {
   val let: Int = 0
   return let + `in`

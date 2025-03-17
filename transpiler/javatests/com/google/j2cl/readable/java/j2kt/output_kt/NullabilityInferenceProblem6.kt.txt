@@ -79,7 +79,7 @@ open class NullabilityInferenceProblem6 {
  interface Container<V> {
   @ObjCName("forEach")
   fun forEach(
-   @ObjCName("withJ2ktNullabilityInferenceProblem6_Consumer") consumer: NullabilityInferenceProblem6.Consumer<V>
+   @ObjCName("withJ2ktNullabilityInferenceProblem6_Consumer", swiftName = "with") consumer: NullabilityInferenceProblem6.Consumer<V>
   )
 
   @ObjCName("add")
@@ -95,7 +95,7 @@ open class NullabilityInferenceProblem6 {
  fun interface FooConsumer<V: NullabilityInferenceProblem6.Foo?> {
   @ObjCName("accept")
   fun accept(
-   @ObjCName("withJ2ktNullabilityInferenceProblem6_Foo") v: V
+   @ObjCName("withJ2ktNullabilityInferenceProblem6_Foo", swiftName = "with") v: V
   )
  }
 
@@ -103,12 +103,12 @@ open class NullabilityInferenceProblem6 {
  interface FooContainer<V: NullabilityInferenceProblem6.Foo?> {
   @ObjCName("forEach")
   fun forEach(
-   @ObjCName("withJ2ktNullabilityInferenceProblem6_Consumer") consumer: NullabilityInferenceProblem6.Consumer<V>
+   @ObjCName("withJ2ktNullabilityInferenceProblem6_Consumer", swiftName = "with") consumer: NullabilityInferenceProblem6.Consumer<V>
   )
 
   @ObjCName("add")
   fun add(
-   @ObjCName("withJ2ktNullabilityInferenceProblem6_Foo") v: V
+   @ObjCName("withJ2ktNullabilityInferenceProblem6_Foo", swiftName = "with") v: V
   )
  }
 }

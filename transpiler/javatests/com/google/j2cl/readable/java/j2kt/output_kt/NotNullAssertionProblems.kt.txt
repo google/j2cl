@@ -34,8 +34,8 @@ import kotlin.native.ObjCName
 open class NotNullAssertionProblems {
  @ObjCName("testArrayLiteral")
  open fun testArrayLiteral(
-  @ObjCName("withNSString") string: String,
-  @ObjCName("withNSString") nullableString: String?
+  @ObjCName("withNSString", swiftName = "with") string: String,
+  @ObjCName("withNSString", swiftName = "with") nullableString: String?
  ) {
   val array0: Array<String?> = arrayOf<String?>(null)
   val array1: Array<String?> = arrayOf<String?>(string, null)
@@ -46,8 +46,8 @@ open class NotNullAssertionProblems {
 
  @ObjCName("testNewArray")
  open fun testNewArray(
-  @ObjCName("withNSString") string: String,
-  @ObjCName("withNSString") nullableString: String?
+  @ObjCName("withNSString", swiftName = "with") string: String,
+  @ObjCName("withNSString", swiftName = "with") nullableString: String?
  ) {
   val array0: Array<String?> = arrayOf<String?>(null)
   val array1: Array<String?> = arrayOf<String?>(string, null)
@@ -58,9 +58,9 @@ open class NotNullAssertionProblems {
 
  @ObjCName("testExplicitInvocationTypeArguments")
  open fun testExplicitInvocationTypeArguments(
-  @ObjCName("withNSString") string: String,
-  @ObjCName("withJ2ktNotNullAssertionProblems_Supplier") supplier: NotNullAssertionProblems.Supplier<String>,
-  @ObjCName("withNSString") nullableString: String?
+  @ObjCName("withNSString", swiftName = "with") string: String,
+  @ObjCName("withJ2ktNotNullAssertionProblems_Supplier", swiftName = "with") supplier: NotNullAssertionProblems.Supplier<String>,
+  @ObjCName("withNSString", swiftName = "with") nullableString: String?
  ) {
   NotNullAssertionProblems.accept1<String?>(null)
   NotNullAssertionProblems.accept2<String?>(string, null)
@@ -83,9 +83,9 @@ open class NotNullAssertionProblems {
 
  @ObjCName("testImplicitInvocationTypeArguments")
  open fun testImplicitInvocationTypeArguments(
-  @ObjCName("withNSString") string: String,
-  @ObjCName("withJ2ktNotNullAssertionProblems_Supplier") supplier: NotNullAssertionProblems.Supplier<String>,
-  @ObjCName("withNSString") nullableString: String?
+  @ObjCName("withNSString", swiftName = "with") string: String,
+  @ObjCName("withJ2ktNotNullAssertionProblems_Supplier", swiftName = "with") supplier: NotNullAssertionProblems.Supplier<String>,
+  @ObjCName("withNSString", swiftName = "with") nullableString: String?
  ) {
   NotNullAssertionProblems.accept1<Any>(
    null!!,
@@ -125,9 +125,9 @@ open class NotNullAssertionProblems {
 
  @ObjCName("testExplicitConstructorTypeArguments")
  open fun testExplicitConstructorTypeArguments(
-  @ObjCName("withNSString") string: String,
-  @ObjCName("withJ2ktNotNullAssertionProblems_Supplier") supplier: NotNullAssertionProblems.Supplier<String>,
-  @ObjCName("withNSString") nullableString: String?
+  @ObjCName("withNSString", swiftName = "with") string: String,
+  @ObjCName("withJ2ktNotNullAssertionProblems_Supplier", swiftName = "with") supplier: NotNullAssertionProblems.Supplier<String>,
+  @ObjCName("withNSString", swiftName = "with") nullableString: String?
  ) {
   NotNullAssertionProblems.Consumer<String?>(null)
   NotNullAssertionProblems.Consumer<String?>(string, null)
@@ -150,9 +150,9 @@ open class NotNullAssertionProblems {
 
  @ObjCName("testImplicitConstructorTypeArguments")
  open fun testImplicitConstructorTypeArguments(
-  @ObjCName("withNSString") string: String,
-  @ObjCName("withJ2ktNotNullAssertionProblems_Supplier") supplier: NotNullAssertionProblems.Supplier<String>,
-  @ObjCName("withNSString") nullableString: String?
+  @ObjCName("withNSString", swiftName = "with") string: String,
+  @ObjCName("withJ2ktNotNullAssertionProblems_Supplier", swiftName = "with") supplier: NotNullAssertionProblems.Supplier<String>,
+  @ObjCName("withNSString", swiftName = "with") nullableString: String?
  ) {
   NotNullAssertionProblems.Consumer<Any>(
    null!!,
@@ -192,9 +192,9 @@ open class NotNullAssertionProblems {
 
  @ObjCName("testImplicitRawConstructorTypeArguments")
  open fun testImplicitRawConstructorTypeArguments(
-  @ObjCName("withNSString") string: String,
-  @ObjCName("withJ2ktNotNullAssertionProblems_Supplier") supplier: NotNullAssertionProblems.Supplier<String>,
-  @ObjCName("withNSString") nullableString: String?
+  @ObjCName("withNSString", swiftName = "with") string: String,
+  @ObjCName("withJ2ktNotNullAssertionProblems_Supplier", swiftName = "with") supplier: NotNullAssertionProblems.Supplier<String>,
+  @ObjCName("withNSString", swiftName = "with") nullableString: String?
  ) {
   NotNullAssertionProblems.Consumer<Any?>(null)
   NotNullAssertionProblems.Consumer<Any?>(string, null)
@@ -220,8 +220,8 @@ open class NotNullAssertionProblems {
   @JvmStatic
   @ObjCName("testImplicitInvocationTypeArguments_wildcards")
   fun testImplicitInvocationTypeArguments_wildcards(
-   @ObjCName("withNSString") string: String,
-   @ObjCName("withJ2ktNotNullAssertionProblems_Supplier") wildcardSupplier: NotNullAssertionProblems.Supplier<*>
+   @ObjCName("withNSString", swiftName = "with") string: String,
+   @ObjCName("withJ2ktNotNullAssertionProblems_Supplier", swiftName = "with") wildcardSupplier: NotNullAssertionProblems.Supplier<*>
   ) {
    NotNullAssertionProblems.accept1/* <*> */(
     wildcardSupplier.getValue(),
@@ -239,8 +239,8 @@ open class NotNullAssertionProblems {
   @JvmStatic
   @ObjCName("testImplicitConstructorTypeArguments_wildcards")
   fun testImplicitConstructorTypeArguments_wildcards(
-   @ObjCName("withNSString") string: String,
-   @ObjCName("withJ2ktNotNullAssertionProblems_Supplier") wildcardSupplier: NotNullAssertionProblems.Supplier<*>
+   @ObjCName("withNSString", swiftName = "with") string: String,
+   @ObjCName("withJ2ktNotNullAssertionProblems_Supplier", swiftName = "with") wildcardSupplier: NotNullAssertionProblems.Supplier<*>
   ) {
    NotNullAssertionProblems.Consumer/* <*> */(
     wildcardSupplier.getValue(),
@@ -258,8 +258,8 @@ open class NotNullAssertionProblems {
   @JvmStatic
   @ObjCName("testRawConstructorTypeArguments_wildcards")
   fun testRawConstructorTypeArguments_wildcards(
-   @ObjCName("withNSString") string: String,
-   @ObjCName("withJ2ktNotNullAssertionProblems_Supplier") wildcardSupplier: NotNullAssertionProblems.Supplier<*>
+   @ObjCName("withNSString", swiftName = "with") string: String,
+   @ObjCName("withJ2ktNotNullAssertionProblems_Supplier", swiftName = "with") wildcardSupplier: NotNullAssertionProblems.Supplier<*>
   ) {
    NotNullAssertionProblems.Consumer<Any?>(
     wildcardSupplier.getValue(),
@@ -277,7 +277,7 @@ open class NotNullAssertionProblems {
   @JvmStatic
   @ObjCName("testImplicitConstructorTypeArguments_inference")
   fun testImplicitConstructorTypeArguments_inference(
-   @ObjCName("withNSString") string: String
+   @ObjCName("withNSString", swiftName = "with") string: String
   ) {
    NotNullAssertionProblems.Consumer<String>(
     string,
@@ -308,14 +308,14 @@ open class NotNullAssertionProblems {
   @JvmStatic
   @ObjCName("acceptUpperBound")
   fun <T> acceptUpperBound(
-   @ObjCName("withJ2ktNotNullAssertionProblems_Supplier") t1: NotNullAssertionProblems.Supplier<out T>,
+   @ObjCName("withJ2ktNotNullAssertionProblems_Supplier", swiftName = "with") t1: NotNullAssertionProblems.Supplier<out T>,
    @ObjCName("withId") t2: T
   ) {}
 
   @JvmStatic
   @ObjCName("acceptGeneric")
   fun <T> acceptGeneric(
-   @ObjCName("withJ2ktNotNullAssertionProblems_Supplier") t1: NotNullAssertionProblems.Supplier<T>,
+   @ObjCName("withJ2ktNotNullAssertionProblems_Supplier", swiftName = "with") t1: NotNullAssertionProblems.Supplier<T>,
    @ObjCName("withId") t2: T
   ) {}
 

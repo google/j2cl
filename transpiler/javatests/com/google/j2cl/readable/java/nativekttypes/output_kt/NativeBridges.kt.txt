@@ -30,11 +30,11 @@ import nativekttypes.nativekt.KRequiringBridge.Inner
 open class NativeBridges {
  @ObjCName("test")
  open fun test(
-  @ObjCName("withNativekttypesNativeRequiringBridge") o: KRequiringBridge?
+  @ObjCName("withNativekttypesNativeRequiringBridge", swiftName = "with") o: KRequiringBridge?
  ) {}
 
  @ObjCName("test")
  open fun test(
-  @ObjCName("withNativekttypesNativeRequiringBridge_Inner") o: Inner?
+  @ObjCName("withNativekttypesNativeRequiringBridge_Inner", swiftName = "with") o: Inner?
  ) {}
 }

@@ -31,7 +31,7 @@ import kotlin.native.ObjCName
 fun interface MyJsInterface {
  @ObjCName("foo")
  fun foo(
-  @ObjCName("withInt") a: Int
+  @ObjCName("withInt", swiftName = "with") a: Int
  ): Int
 }
 
@@ -39,7 +39,7 @@ fun interface MyJsInterface {
 fun interface MyInterface {
  @ObjCName("foo")
  fun foo(
-  @ObjCName("withInt") a: Int
+  @ObjCName("withInt", swiftName = "with") a: Int
  ): Int
 }
 

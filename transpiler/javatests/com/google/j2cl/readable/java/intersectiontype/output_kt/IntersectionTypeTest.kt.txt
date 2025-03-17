@@ -40,7 +40,7 @@ fun interface Getable<T> {
 fun interface Setable {
  @ObjCName("set")
  fun set(
-  @ObjCName("withInt") i: Int
+  @ObjCName("withInt", swiftName = "with") i: Int
  )
 }
 
@@ -62,7 +62,7 @@ fun interface Cmp {
 fun interface Cmp2<T> {
  @ObjCName("cmp")
  fun cmp(
-  @ObjCName("withInt") a: Int
+  @ObjCName("withInt", swiftName = "with") a: Int
  ): Int
 }
 

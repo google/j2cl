@@ -46,7 +46,7 @@ open class Varargs {
 
  @ObjCName("test")
  open fun test(
-  @ObjCName("withInt") a: Int,
+  @ObjCName("withInt", swiftName = "with") a: Int,
   vararg @ObjCName("withNSObjectArray") args: Any?
  ) {
   val args_1: Array<Any?>? = args as Array<Any?>?
@@ -76,7 +76,7 @@ open class Varargs {
 
  @ObjCName("testLambda")
  open fun testLambda(
-  @ObjCName("withVarargsVarargs_FunctionalInterface") functionalInterface: Varargs.FunctionalInterface?
+  @ObjCName("withVarargsVarargs_FunctionalInterface", swiftName = "with") functionalInterface: Varargs.FunctionalInterface?
  ) {}
 
  @ObjCName("testOverloaded")
@@ -86,7 +86,7 @@ open class Varargs {
 
  @ObjCName("testOverloaded")
  open fun testOverloaded(
-  @ObjCName("withNSString") o: String?,
+  @ObjCName("withNSString", swiftName = "with") o: String?,
   vararg @ObjCName("withNSObjectArray") rest: Any?
  ) {
   val rest_1: Array<Any?>? = rest as Array<Any?>?
@@ -180,8 +180,8 @@ open class Varargs {
   @JvmStatic
   @ObjCName("bar")
   fun <E: Number?> bar(
-   @ObjCName("withNSNumber") a: E,
-   @ObjCName("withNSNumber") b: E
+   @ObjCName("withNSNumber", swiftName = "with") a: E,
+   @ObjCName("withNSNumber", swiftName = "with") b: E
   ) {
    Varargs.`fun`<E>(a, b)
   }

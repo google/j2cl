@@ -35,7 +35,7 @@ open class NullabilityInferenceProblem8 {
   @JvmStatic
   @ObjCName("nonNullWithLowerBound")
   fun <I: Any, O: Any> nonNullWithLowerBound(
-   @ObjCName("withJ2ktNullabilityInferenceProblem8_Function") fn: NullabilityInferenceProblem8.Function<in I, O>
+   @ObjCName("withJ2ktNullabilityInferenceProblem8_Function", swiftName = "with") fn: NullabilityInferenceProblem8.Function<in I, O>
   ): NullabilityInferenceProblem8.Function<I, O> {
    throw RuntimeException()
   }
@@ -43,7 +43,7 @@ open class NullabilityInferenceProblem8 {
   @JvmStatic
   @ObjCName("acceptParameterized")
   fun acceptParameterized(
-   @ObjCName("withJ2ktNullabilityInferenceProblem8_Function") fn: NullabilityInferenceProblem8.Function<String, Any>
+   @ObjCName("withJ2ktNullabilityInferenceProblem8_Function", swiftName = "with") fn: NullabilityInferenceProblem8.Function<String, Any>
   ) {
    throw RuntimeException()
   }
@@ -51,7 +51,7 @@ open class NullabilityInferenceProblem8 {
   @JvmStatic
   @ObjCName("test")
   fun test(
-   @ObjCName("withJ2ktNullabilityInferenceProblem8_NullableSupplier") supplier: NullabilityInferenceProblem8.NullableSupplier<Any>
+   @ObjCName("withJ2ktNullabilityInferenceProblem8_NullableSupplier", swiftName = "with") supplier: NullabilityInferenceProblem8.NullableSupplier<Any>
   ) {
    NullabilityInferenceProblem8.acceptParameterized(
     NullabilityInferenceProblem8.nonNullWithLowerBound<String, Any>(
@@ -67,7 +67,7 @@ open class NullabilityInferenceProblem8 {
  fun interface NullableSupplier<V> {
   @ObjCName("get")
   fun get(
-   @ObjCName("withNSString") key: String
+   @ObjCName("withNSString", swiftName = "with") key: String
   ): V?
  }
 

@@ -81,7 +81,7 @@ open class Main {
   @ObjCName("log")
   @JsMethod(name = "console.log", namespace = JsPackage.GLOBAL)
   external fun log(
-   @ObjCName("withInt") o: Int
+   @ObjCName("withInt", swiftName = "with") o: Int
   )
 
   @JvmStatic
@@ -122,7 +122,7 @@ open class Main {
  fun interface Function {
   @ObjCName("apply")
   fun apply(
-   @ObjCName("withNSString") s: String?
+   @ObjCName("withNSString", swiftName = "with") s: String?
   )
  }
 

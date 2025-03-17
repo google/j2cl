@@ -65,17 +65,17 @@ open class Main {
 
  @ObjCName("m1")
  open fun m1(
-  @ObjCName("withNSString") a: String,
-  @ObjCName("withJavaUtilList") b: MutableList<Double>,
-  @ObjCName("withNSString") c: String?
+  @ObjCName("withNSString", swiftName = "with") a: String,
+  @ObjCName("withJavaUtilList", swiftName = "with") b: MutableList<Double>,
+  @ObjCName("withNSString", swiftName = "with") c: String?
  ): String {
   return ""
  }
 
  @ObjCName("m2")
  open fun m2(
-  @ObjCName("withNSString") a: String?,
-  @ObjCName("withJavaUtilList") b: MutableList<Double>
+  @ObjCName("withNSString", swiftName = "with") a: String?,
+  @ObjCName("withJavaUtilList", swiftName = "with") b: MutableList<Double>
  ): String? {
   return ""
  }
@@ -83,7 +83,7 @@ open class Main {
  @ObjCName("m3")
  @JsMethod
  open fun m3(
-  @ObjCName("withNSString") a: String,
+  @ObjCName("withNSString", swiftName = "with") a: String,
   vararg @ObjCName("withNSStringArray") args: String
  ): String? {
   val args_1: Array<String>? = args as Array<String>?
@@ -92,7 +92,7 @@ open class Main {
 
  @ObjCName("m4")
  open fun m4(
-  @ObjCName("withJsnonnullMain_MyFunction") f: Main.MyFunction
+  @ObjCName("withJsnonnullMain_MyFunction", swiftName = "with") f: Main.MyFunction
  ) {}
 
  @ObjCName("J2ktJsnonnullMain_MyFunction", swiftName = "JsnonnullMain_MyFunction", exact = true)
@@ -100,7 +100,7 @@ open class Main {
  fun interface MyFunction {
   @ObjCName("x")
   fun x(
-   @ObjCName("withNSString") a: String
+   @ObjCName("withNSString", swiftName = "with") a: String
   ): String
  }
 

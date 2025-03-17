@@ -31,7 +31,7 @@ open class NullabilityInferenceProblem3 {
  abstract class Generic<T: NullabilityInferenceProblem3.Generic<T>> {
   @ObjCName("concat")
   open fun concat(
-   @ObjCName("withJ2ktNullabilityInferenceProblem3_Generic") generic: NullabilityInferenceProblem3.Generic<*>
+   @ObjCName("withJ2ktNullabilityInferenceProblem3_Generic", swiftName = "with") generic: NullabilityInferenceProblem3.Generic<*>
   ): T {
    throw RuntimeException()
   }

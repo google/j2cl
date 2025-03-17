@@ -32,7 +32,7 @@ open class FunctionalInterfaces {
  fun interface NonParametrized {
   @ObjCName("apply")
   fun apply(
-   @ObjCName("withNSString") string: String?
+   @ObjCName("withNSString", swiftName = "with") string: String?
   ): String?
  }
 
@@ -53,12 +53,12 @@ open class FunctionalInterfaces {
  fun interface WithDefaultMethod {
   @ObjCName("apply")
   fun apply(
-   @ObjCName("withNSString") string: String?
+   @ObjCName("withNSString", swiftName = "with") string: String?
   ): String?
 
   @ObjCName("defaultApply")
   fun defaultApply(
-   @ObjCName("withNSString") string: String?
+   @ObjCName("withNSString", swiftName = "with") string: String?
   ): String? {
    return this@WithDefaultMethod.apply(string)
   }
@@ -68,7 +68,7 @@ open class FunctionalInterfaces {
  fun interface WithObjectMethods {
   @ObjCName("apply")
   fun apply(
-   @ObjCName("withNSString") string: String?
+   @ObjCName("withNSString", swiftName = "with") string: String?
   ): String?
  }
 

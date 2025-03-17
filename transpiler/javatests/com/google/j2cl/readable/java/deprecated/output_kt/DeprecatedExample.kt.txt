@@ -41,7 +41,7 @@ open class DeprecatedExample {
 
  @ObjCName("deprecatedInstanceMethod")
  open fun deprecatedInstanceMethod(
-  @ObjCName("withNSString") someArg: String?
+  @ObjCName("withNSString", swiftName = "with") someArg: String?
  ) {}
 
  @ObjCName("J2ktDeprecatedDeprecatedExampleCompanion", swiftName = "DeprecatedDeprecatedExampleCompanion", exact = true)
@@ -61,7 +61,7 @@ open class DeprecatedExample {
  fun interface DeprecatedInterface {
   @ObjCName("doAThing")
   fun doAThing(
-   @ObjCName("withInt") anInt: Int
+   @ObjCName("withInt", swiftName = "with") anInt: Int
   )
  }
 

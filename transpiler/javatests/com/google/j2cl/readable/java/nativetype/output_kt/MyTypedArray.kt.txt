@@ -42,7 +42,7 @@ open class MyTypedArray<T> {
  @ObjCName("get")
  @JsOverlay
  fun get(
-  @ObjCName("withInt") index: Int
+  @ObjCName("withInt", swiftName = "with") index: Int
  ): T {
   return null as T
  }

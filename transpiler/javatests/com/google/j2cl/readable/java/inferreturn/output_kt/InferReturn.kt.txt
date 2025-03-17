@@ -45,7 +45,7 @@ open class InferReturn<T> {
   @JvmStatic
   @ObjCName("tightenType")
   fun tightenType(
-   @ObjCName("withInferreturnInferReturn") foo: InferReturn<String?>?
+   @ObjCName("withInferreturnInferReturn", swiftName = "with") foo: InferReturn<String?>?
   ): InferReturn<InferReturn<String?>?>? {
    if (foo != null) {
     return InferReturn.inferGeneric<InferReturn<String?>?>(foo)
@@ -81,7 +81,7 @@ open class InferReturn<T> {
   @JvmStatic
   @ObjCName("acceptsArrayListOfObject")
   fun acceptsArrayListOfObject(
-   @ObjCName("withJavaUtilArrayList") foo: ArrayList<Any?>?
+   @ObjCName("withJavaUtilArrayList", swiftName = "with") foo: ArrayList<Any?>?
   ) {}
 
   @JvmStatic

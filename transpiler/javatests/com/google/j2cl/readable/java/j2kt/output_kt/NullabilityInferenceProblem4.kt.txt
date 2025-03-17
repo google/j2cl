@@ -35,8 +35,8 @@ open class NullabilityInferenceProblem4 {
   @JvmStatic
   @ObjCName("compareOrThrow")
   fun compareOrThrow(
-   @ObjCName("withJavaLangComparable") left: Comparable<Any>,
-   @ObjCName("withJavaLangComparable") right: Comparable<Any>
+   @ObjCName("withJavaLangComparable", swiftName = "with") left: Comparable<Any>,
+   @ObjCName("withJavaLangComparable", swiftName = "with") right: Comparable<Any>
   ): Int {
    return left.compareTo(
     right as Any,

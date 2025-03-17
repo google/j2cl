@@ -39,19 +39,19 @@ open class WasmEntryPoints {
   @JvmStatic
   @ObjCName("matchedEntryPointPattern1")
   fun matchedEntryPointPattern1(
-   @ObjCName("withInt") x: Int
+   @ObjCName("withInt", swiftName = "with") x: Int
   ) {}
 
   @JvmStatic
   @ObjCName("matchedEntryPointPattern2")
   fun matchedEntryPointPattern2(
-   @ObjCName("withFloat") y: Float
+   @ObjCName("withFloat", swiftName = "with") y: Float
   ) {}
 
   @JvmStatic
   @ObjCName("stringConversionEntryPoint")
   fun stringConversionEntryPoint(
-   @ObjCName("withNSString") arg: String?
+   @ObjCName("withNSString", swiftName = "with") arg: String?
   ): String? {
    return ""
   }

@@ -61,7 +61,7 @@ open class B internal constructor(): A<Number?, String?>(), I<Int?, String?> {
 interface SpecializedInterface {
  @ObjCName("fun")
  fun `fun`(
-  @ObjCName("withNSString") s: String?
+  @ObjCName("withNSString", swiftName = "with") s: String?
  ): String?
 
  @ObjCName("get")

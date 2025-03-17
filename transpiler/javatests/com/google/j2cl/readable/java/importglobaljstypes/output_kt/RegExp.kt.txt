@@ -51,7 +51,7 @@ class RegExp internal constructor() {
 
   @ObjCName("test")
   external open fun test(
-   @ObjCName("withNSString") value: String?
+   @ObjCName("withNSString", swiftName = "with") value: String?
   ): Boolean
 
   external override fun toString(): String

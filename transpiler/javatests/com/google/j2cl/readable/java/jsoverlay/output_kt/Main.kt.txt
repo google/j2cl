@@ -52,7 +52,7 @@ open class Main {
 
  @ObjCName("testOverlayInterface")
  open fun testOverlayInterface(
-  @ObjCName("withJsoverlayMain_NativeJsTypeInterfaceWithOverlay") foo: Main.NativeJsTypeInterfaceWithOverlay?
+  @ObjCName("withJsoverlayMain_NativeJsTypeInterfaceWithOverlay", swiftName = "with") foo: Main.NativeJsTypeInterfaceWithOverlay?
  ) {
   foo!!.m()
   foo!!.callM()
@@ -172,7 +172,7 @@ open class Main {
    @ObjCName("overlay")
    @JsOverlay
    fun overlay(
-    @ObjCName("withJsoverlayMain_NativeJsTypeWithOverlay") o: Main.NativeJsTypeWithOverlay?
+    @ObjCName("withJsoverlayMain_NativeJsTypeWithOverlay", swiftName = "with") o: Main.NativeJsTypeWithOverlay?
    ) {}
   }
  }
@@ -214,6 +214,6 @@ interface ParameterizedNativeInterface<T> {
  @JsOverlay
  fun <T_1, S> shadowsTypeVariable(
   @ObjCName("withId") param1: T_1,
-  @ObjCName("withInt") param2: Int
+  @ObjCName("withInt", swiftName = "with") param2: Int
  ) {}
 }
