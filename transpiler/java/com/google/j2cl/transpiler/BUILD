@@ -123,7 +123,11 @@ java_binary(
 
 java_binary(
     name = "BazelJ2wasmBundler",
-    jvm_flags = JVM_FLAGS,
+    jvm_flags = JVM_FLAGS + [
+        # TODO(b/404243318): Remove this flag once a better solution is found.
+        # Limit the heap size to 11GB to avoid OOMs.
+        "-Xmx10g",
+    ],
     main_class = "com.google.j2cl.transpiler.BazelJ2wasmBundler",
     use_launcher = False,
     visibility = ["//build_defs/internal_do_not_use:__pkg__"],
