@@ -89,28 +89,32 @@
   // TODO(b/400390599): Should be `new_Custom_init3`
   obj = new_Custom_initWithLong_withNSString_(1, @"");
 
-  [obj custom];
-  [obj customWithIndex:1];
-  [obj customWithIndex:1 name:@""];
+  [obj customMethod];
+  [obj customIntMethodWithInt:1];
+  [obj customIndexMethodWithIndex:1];
+  [obj customCountMethodWithCount:1];
+  [obj customStringMethodWithString:@""];
+  [obj customNameMethodWithName:@""];
+  [obj customIntStringMethodWithIndex:1 name:@""];
 
-  [obj customWithLong:1];
-  [obj customWithLong:1 withNSString:@""];
+  [obj customLongMethodWithLong:1];
+  [obj customLongStringMethodWithLong:1 withNSString:@""];
 
-  [CustomCompanion.shared staticCustom];
-  [CustomCompanion.shared staticCustomWithIndex:1];
-  [CustomCompanion.shared staticCustomWithIndex:1 name:@""];
+  [CustomCompanion.shared customStaticMethod];
+  [CustomCompanion.shared customStaticIntMethodWithIndex:1];
+  [CustomCompanion.shared customStaticIntStringMethodWithIndex:1 name:@""];
 
-  [CustomCompanion.shared staticCustom2WithLong:1];
-  [CustomCompanion.shared staticCustom3WithLong:1 withNSString:@""];
+  [CustomCompanion.shared customStaticLongMethodWithLong:1];
+  [CustomCompanion.shared customStaticLongStringMethodWithLong:1 withNSString:@""];
 
-  Custom_staticCustom();
-  Custom_staticCustomWithIndex_(1);
-  Custom_staticCustomWithIndex_name_(1, @"");
+  Custom_customStaticMethod();
+  Custom_customStaticIntMethodWithIndex_(1);
+  Custom_customStaticIntStringMethodWithIndex_name_(1, @"");
 
-  // TODO(b/400390599): Should be `Custom_staticCustom2`
-  Custom_staticCustom2WithLong_(1);
-  // TODO(b/400390599): Should be `Custom_staticCustom3`
-  Custom_staticCustom3WithLong_withNSString_(2, @"");
+  // TODO(b/400390599): Should be `Custom_customStaticLongMethod`
+  Custom_customStaticLongMethodWithLong_(1);
+  // TODO(b/400390599): Should be `Custom_customStaticLongStringMethod`
+  Custom_customStaticLongStringMethodWithLong_withNSString_(2, @"");
 }
 
 - (void)testEnumNames {

@@ -62,12 +62,15 @@ final class J2ObjCSwiftInteropTest: XCTestCase {
     //obj = Custom(long: 1)
     //obj = Custom(long: 1, withNSString: "")
 
-    obj.custom()
-    obj.custom(with: 1)
-    obj.custom(with: 1, name: "")
+    obj.customIntMethod(with: 1)
+    obj.customIndexMethod(with: 1)
+    obj.customCountMethod(withCount: 1)
+    obj.customStringMethod(with: "")
+    obj.customNameMethod(withName: "")
+    obj.customIntStringMethod(with: 1, name: "")
 
-    obj.custom(withLong: 1)
-    obj.custom(withLong: 1, with: "")
+    obj.customLongMethod(withLong: 1)
+    obj.customLongStringMethod(withLong: 1, with: "")
   }
 
   func testEnumNames() {

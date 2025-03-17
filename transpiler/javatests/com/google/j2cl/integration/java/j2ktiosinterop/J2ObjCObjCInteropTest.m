@@ -76,19 +76,23 @@
   obj = new_Custom_init2(1);
   obj = new_Custom_init3(1, @"");
 
-  [obj custom];
-  [obj customWithIndex:1];
-  [obj customWithIndex:1 name:@""];
+  [obj customMethod];
+  [obj customIntMethodWithInt:1];
+  [obj customIndexMethodWithIndex:1];
+  [obj customCountMethodWithCount:1];
+  [obj customStringMethodWithString:@""];
+  [obj customNameMethodWithName:@""];
+  [obj customIntStringMethodWithIndex:1 name:@""];
 
-  [obj customWithLong:1];
-  [obj customWithLong:1 withNSString:@""];
+  [obj customLongMethodWithLong:1];
+  [obj customLongStringMethodWithLong:1 withNSString:@""];
 
-  Custom_staticCustom();
-  Custom_staticCustomWithIndex_(1);
-  Custom_staticCustomWithIndex_name_(1, @"");
+  Custom_customStaticMethod();
+  Custom_customStaticIntMethodWithIndex_(1);
+  Custom_customStaticIntStringMethodWithIndex_name_(1, @"");
 
-  Custom_staticCustom2(1);
-  Custom_staticCustom3(2, @"");
+  Custom_customStaticLongMethod(1);
+  Custom_customStaticLongStringMethod(2, @"");
 }
 
 - (void)testEnumNames {

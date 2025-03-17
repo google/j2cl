@@ -68,19 +68,23 @@ final class J2ktSwiftInteropTest: XCTestCase {
     obj = Custom(Long: 1)
     obj = Custom(Long: 1, withNSString: "")
 
-    obj.custom()
-    obj.custom(WithIndex: 1)
-    obj.custom(WithIndex: 1, name: "")
+    obj.customMethod()
+    obj.customIntMethod(WithInt: 1)
+    obj.customIndexMethod(WithIndex: 1)
+    obj.customCountMethod(WithCount: 1)
+    obj.customStringMethod(WithString: "")
+    obj.customNameMethod(WithName: "")
+    obj.customIntStringMethod(WithIndex: 1, name: "")
 
-    obj.custom(withLong: 1)
-    obj.custom(withLong: 1, with: "")
+    obj.customLongMethod(withLong: 1)
+    obj.customLongStringMethod(withLong: 1, with: "")
 
-    CustomCompanion.shared.staticCustom()
-    CustomCompanion.shared.staticCustom(WithIndex: 1)
-    CustomCompanion.shared.staticCustom(WithIndex: 1, name: "")
+    CustomCompanion.shared.customStaticMethod()
+    CustomCompanion.shared.customStaticIntMethod(WithIndex: 1)
+    CustomCompanion.shared.customStaticIntStringMethod(WithIndex: 1, name: "")
 
-    CustomCompanion.shared.staticCustom2(withLong: 1)
-    CustomCompanion.shared.staticCustom3(withLong: 1, with: "")
+    CustomCompanion.shared.customStaticLongMethod(withLong: 1)
+    CustomCompanion.shared.customStaticLongStringMethod(withLong: 1, with: "")
   }
 
   func testEnumNames() {

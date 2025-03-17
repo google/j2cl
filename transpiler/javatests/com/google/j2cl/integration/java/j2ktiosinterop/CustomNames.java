@@ -34,33 +34,45 @@ public final class CustomNames {
   @ObjectiveCName("init3")
   public CustomNames(long i, String s) {}
 
-  @ObjectiveCName("custom")
+  @ObjectiveCName("customMethod")
   public void method() {}
 
-  @ObjectiveCName("customWithIndex:")
+  @ObjectiveCName("customIntMethodWithInt:")
   public void intMethod(int i) {}
 
-  @ObjectiveCName("customWithIndex:name:")
+  @ObjectiveCName("customIndexMethodWithIndex:")
+  public void indexMethod(int i) {}
+
+  @ObjectiveCName("customCountMethodWithCount:")
+  public void countMethod(int i) {}
+
+  @ObjectiveCName("customStringMethodWithString:")
+  public void stringMethod(String s) {}
+
+  @ObjectiveCName("customNameMethodWithName:")
+  public void nameMethod(String s) {}
+
+  @ObjectiveCName("customIntStringMethodWithIndex:name:")
   public void intStringMethod(int i, String s) {}
 
-  @ObjectiveCName("custom")
+  @ObjectiveCName("customLongMethod")
   public void longMethod(long i) {}
 
-  @ObjectiveCName("custom")
+  @ObjectiveCName("customLongStringMethod")
   public void longStringMethod(long i, String s) {}
 
-  @ObjectiveCName("staticCustom")
+  @ObjectiveCName("customStaticMethod")
   public static void staticMethod() {}
 
-  @ObjectiveCName("staticCustomWithIndex:")
-  public static void intStaticMethod(int i) {}
+  @ObjectiveCName("customStaticIntMethodWithIndex:")
+  public static void staticIntMethod(int i) {}
 
-  @ObjectiveCName("staticCustomWithIndex:name:")
-  public static void intStringStaticMethod(int i, String s) {}
+  @ObjectiveCName("customStaticIntStringMethodWithIndex:name:")
+  public static void staticIntStringMethod(int i, String s) {}
 
-  @ObjectiveCName("staticCustom2")
-  public static void longStaticMethod(long i) {}
+  @ObjectiveCName("customStaticLongMethod")
+  public static void staticLongMethod(long i) {}
 
-  @ObjectiveCName("staticCustom3")
-  public static void longStringStaticMethod(long i, String s) {}
+  @ObjectiveCName("customStaticLongStringMethod")
+  public static void staticLongStringMethod(long i, String s) {}
 }
