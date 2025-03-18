@@ -91,11 +91,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   }
 
   @Override
-  public boolean isAnnotatedWithFunctionalInterface() {
-    return getTypeDeclaration().isAnnotatedWithFunctionalInterface();
-  }
-
-  @Override
   public boolean isJsType() {
     return getTypeDeclaration().isJsType();
   }

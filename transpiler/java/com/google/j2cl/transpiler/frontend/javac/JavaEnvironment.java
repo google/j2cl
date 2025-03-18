@@ -1296,7 +1296,6 @@ class JavaEnvironment {
         .setFinal(isFinal)
         .setFunctionalInterface(isFunctionalInterface(typeElement.asType()))
         .setJsFunctionInterface(JsInteropUtils.isJsFunction(typeElement))
-        .setAnnotatedWithFunctionalInterface(isAnnotatedWithFunctionalInterface(typeElement))
         .setAnnotatedWithAutoValue(isAnnotatedWithAutoValue(typeElement))
         .setAnnotatedWithAutoValueBuilder(isAnnotatedWithAutoValueBuilder(typeElement))
         .setAnnotationsFactory(() -> createAnnotations(typeElement, isNullMarked))
@@ -1572,11 +1571,6 @@ class JavaEnvironment {
   /** Returns true if the element is annotated with @HasNoSideEffects. */
   private static boolean isAnnotatedWithHasNoSideEffects(Element element) {
     return hasAnnotation(element, HAS_NO_SIDE_EFFECTS_ANNOTATION_NAME);
-  }
-
-  /** Returns true if the element is annotated with @FunctionalInterface. */
-  private static boolean isAnnotatedWithFunctionalInterface(Element element) {
-    return hasAnnotation(element, FunctionalInterface.class.getName());
   }
 
   private static boolean isAnnotatedWithAutoValue(Element element) {

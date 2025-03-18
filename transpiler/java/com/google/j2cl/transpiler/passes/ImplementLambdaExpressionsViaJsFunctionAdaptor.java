@@ -150,7 +150,7 @@ public class ImplementLambdaExpressionsViaJsFunctionAdaptor extends Normalizatio
       return false;
     }
 
-    if (typeDescriptor.isNative() && !typeDescriptor.isAnnotatedWithFunctionalInterface()) {
+    if (typeDescriptor.isNative() && !isAnnotatedWithFunctionalInterface(typeDescriptor)) {
       // A native contract might be defined with a single method and an interface but that doesn't
       // guarantee that its JavaScript definition is an interface nor that it has single method. So
       // J2CL cannot generate lambda adaptor blindly in such cases as these well end up being
@@ -163,6 +163,17 @@ public class ImplementLambdaExpressionsViaJsFunctionAdaptor extends Normalizatio
     }
 
     return typeDescriptor.isFunctionalInterface();
+  }
+
+  /**
+   * Returns {@code true} if the declaration (not type annotation) of the specified type is
+   * annotated with {@code @FunctionalInterface}.
+   */
+  private static boolean isAnnotatedWithFunctionalInterface(TypeDescriptor typeDescriptor) {
+    return typeDescriptor instanceof DeclaredTypeDescriptor
+        && ((DeclaredTypeDescriptor) typeDescriptor)
+            .getTypeDeclaration()
+            .hasAnnotation("java.lang.FunctionalInterface");
   }
 
   /** Adds the $adapt method to the functional interface. */

@@ -127,11 +127,6 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
     return false;
   }
 
-  /** Returns whether the described type has the @FunctionalInterface annotation. */
-  public boolean isAnnotatedWithFunctionalInterface() {
-    return false;
-  }
-
   /** Returns whether the described type is a wasm native array. */
   public boolean isNativeWasmArray() {
     return false;

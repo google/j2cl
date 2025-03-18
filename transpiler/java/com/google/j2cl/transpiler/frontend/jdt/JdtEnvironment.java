@@ -1171,7 +1171,6 @@ public class JdtEnvironment {
             .setFunctionalInterface(
                 !typeBinding.isAnnotation() && typeBinding.getFunctionalInterfaceMethod() != null)
             .setJsFunctionInterface(JsInteropUtils.isJsFunction(typeBinding))
-            .setAnnotatedWithFunctionalInterface(isAnnotatedWithFunctionalInterface(typeBinding))
             .setAnnotatedWithAutoValue(isAnnotatedWithAutoValue(typeBinding))
             .setAnnotatedWithAutoValueBuilder(isAnnotatedWithAutoValueBuilder(typeBinding))
             .setAnnotationsFactory(() -> createAnnotations(typeBinding, isNullMarked))
@@ -1260,10 +1259,6 @@ public class JdtEnvironment {
     }
 
     return packageAnnotationsResolver.isNullMarked(typeBinding.getPackage().getName());
-  }
-
-  private static boolean isAnnotatedWithFunctionalInterface(ITypeBinding typeBinding) {
-    return JdtAnnotationUtils.hasAnnotation(typeBinding, FunctionalInterface.class.getName());
   }
 
   private static boolean isAnnotatedWithAutoValue(ITypeBinding typeBinding) {

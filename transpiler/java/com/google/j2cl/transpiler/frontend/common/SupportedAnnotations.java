@@ -39,6 +39,7 @@ public class SupportedAnnotations {
           "com.google.apps.xplat.testing.parameterized.RunParameterized",
           // Other
           "java.lang.Deprecated",
+          "java.lang.FunctionalInterface",
           "kotlin.Deprecated",
           FrontendConstants.KT_OBJECTIVE_C_NAME,
           FrontendConstants.J2KT_THROWS_ANNOTATION_NAME,
