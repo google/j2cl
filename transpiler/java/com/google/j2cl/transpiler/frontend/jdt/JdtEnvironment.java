@@ -18,8 +18,6 @@ package com.google.j2cl.transpiler.frontend.jdt;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.HAS_NO_SIDE_EFFECTS_ANNOTATION_NAME;
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.UNCHECKED_CAST_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.WASM_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.SupportedAnnotations.isSupportedAnnotation;
 
@@ -274,11 +272,6 @@ public class JdtEnvironment {
     return variableBinding.getName().equals("length")
         && variableBinding.isField()
         && variableBinding.getDeclaringClass() == null;
-  }
-
-  /** Returns true if the binding is annotated with @UncheckedCast. */
-  public static boolean hasUncheckedCastAnnotation(IBinding binding) {
-    return JdtAnnotationUtils.hasAnnotation(binding, UNCHECKED_CAST_ANNOTATION_NAME);
   }
 
   /** Helper method to work around JDT habit of returning raw collections. */
@@ -931,8 +924,6 @@ public class JdtEnvironment {
             .setEnumSyntheticMethod(isEnumSyntheticMethod(methodBinding))
             .setUnusableByJsSuppressed(
                 JsInteropAnnotationUtils.isUnusableByJsSuppressed(methodBinding))
-            .setSideEffectFree(isAnnotatedWithHasNoSideEffects(methodBinding))
-            .setUncheckedCast(hasUncheckedCastAnnotation(methodBinding))
             .build();
     cachedMethodDescriptorByMethodBinding.put(methodBinding, methodDescriptor);
     return methodDescriptor;
@@ -1320,9 +1311,5 @@ public class JdtEnvironment {
       annotationBuilder.addValue(valuePair.getName(), translatedValue);
     }
     return annotationBuilder;
-  }
-
-  private static boolean isAnnotatedWithHasNoSideEffects(IMethodBinding methodBinding) {
-    return JdtAnnotationUtils.hasAnnotation(methodBinding, HAS_NO_SIDE_EFFECTS_ANNOTATION_NAME);
   }
 }

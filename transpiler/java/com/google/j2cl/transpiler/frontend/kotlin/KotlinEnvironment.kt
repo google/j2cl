@@ -65,7 +65,6 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsFunction
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsOptional
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsType
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isNativeJsField
-import com.google.j2cl.transpiler.frontend.kotlin.ir.isUncheckedCast
 import com.google.j2cl.transpiler.frontend.kotlin.ir.j2clKind
 import com.google.j2cl.transpiler.frontend.kotlin.ir.j2clVisibility
 import com.google.j2cl.transpiler.frontend.kotlin.ir.javaName
@@ -648,7 +647,6 @@ class KotlinEnvironment(
         )
         .setTypeParameterTypeDescriptors(irFunction.typeParameters.map(::getTypeVariable))
         .setOriginalJsInfo(irFunction.getJsInfo())
-        .setUncheckedCast(irFunction.isUncheckedCast)
         .setWasmInfo(irFunction.getWasmInfo())
         .setAnnotations(createAnnotations(irFunction))
         .build()

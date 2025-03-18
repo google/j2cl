@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.passes;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
+import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AstUtils;
@@ -215,10 +216,13 @@ public class NormalizeInstantiationThroughFactoryMethods extends NormalizationPa
                 // be called by a subclass though)
                 .setVisibility(Visibility.PRIVATE)
                 .setOriginalJsInfo(JsInfo.NONE)
-                // Clear side effect free flag since the ctor method does not return a value and
-                // would be pruned incorrectly.
-                // The factory method still preserves the side effect free flags if it was present.
-                .setSideEffectFree(false));
+                // Make sure the @HasNoSideEffects annotation as removed since the method does not
+                // return a value and would be pruned incorrectly.
+                // The factory method still preserves the side effect free annotation if it was
+                // present.
+                // TODO(b/402181063): We may not want to clear all annotations. Determine proper
+                // annotation propagation.
+                .setAnnotations(ImmutableList.of()));
   }
 
   /** Method descriptor for $create methods. */

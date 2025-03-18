@@ -346,11 +346,11 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return getOrigin() == MethodOrigin.DEFAULT_METHOD_BRIDGE;
   }
 
-  /** Returns {@code true} if the method is annotated with {@code UncheckedCast}. */
-  public abstract boolean isUncheckedCast();
-
   /** Returns {@code true} if the method is annotated with {@code HasNoSideEffect}. */
-  public abstract boolean isSideEffectFree();
+  @Memoized
+  public boolean isSideEffectFree() {
+    return hasAnnotation("javaemul.internal.annotations.HasNoSideEffects");
+  }
 
   /** Returns true if the bridge was build with {@code candidateTarget} as its target. */
   boolean isBridgeTarget(MethodDescriptor candidateTarget) {
@@ -999,8 +999,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setSynthetic(false)
         .setEnumSyntheticMethod(false)
         .setUnusableByJsSuppressed(false)
-        .setUncheckedCast(false)
-        .setSideEffectFree(false)
         .setOrigin(MethodOrigin.SOURCE)
         .setParameterDescriptors(ImmutableList.of())
         .setReturnTypeDescriptor(PrimitiveTypes.VOID)
@@ -1390,8 +1388,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
           // descriptor from an existing one.
           .setDefaultMethod(false)
           .setAbstract(true)
-          .setNative(false)
-          .setUncheckedCast(false);
+          .setNative(false);
     }
 
     public Builder makeBridge(
@@ -1407,8 +1404,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
           // descriptor from an existing one.
           .setDefaultMethod(false)
           .setAbstract(false)
-          .setNative(false)
-          .setUncheckedCast(false);
+          .setNative(false);
     }
 
     public Builder makeDeclaration() {
@@ -1445,10 +1441,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public abstract Builder setEnumSyntheticMethod(boolean isEnumSyntheticMethod);
 
     public abstract Builder setUnusableByJsSuppressed(boolean isUnusableByJsSuppressed);
-
-    public abstract Builder setUncheckedCast(boolean isUncheckedCast);
-
-    public abstract Builder setSideEffectFree(boolean isSideEffectFree);
 
     public abstract Builder setEnclosingTypeDescriptor(
         DeclaredTypeDescriptor enclosingTypeDescriptor);

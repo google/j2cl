@@ -40,6 +40,8 @@ public class SupportedAnnotations {
           // Other
           "java.lang.Deprecated",
           "java.lang.FunctionalInterface",
+          "javaemul.internal.annotations.HasNoSideEffects",
+          "javaemul.internal.annotations.UncheckedCast",
           "kotlin.Deprecated",
           FrontendConstants.KT_OBJECTIVE_C_NAME,
           FrontendConstants.J2KT_THROWS_ANNOTATION_NAME,

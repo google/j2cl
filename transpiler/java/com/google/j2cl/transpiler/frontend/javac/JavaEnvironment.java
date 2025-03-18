@@ -19,8 +19,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.MoreCollectors.onlyElement;
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.HAS_NO_SIDE_EFFECTS_ANNOTATION_NAME;
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.UNCHECKED_CAST_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.WASM_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.SupportedAnnotations.isSupportedAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.findAnnotationByName;
@@ -906,7 +904,6 @@ class JavaEnvironment {
             .map(this::createTypeDescriptor)
             .collect(toImmutableList());
 
-    boolean hasUncheckedCast = hasUncheckedCastAnnotation(declarationMethodElement);
     return MethodDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setName(isConstructor ? null : methodName)
@@ -930,10 +927,8 @@ class JavaEnvironment {
         .setSynchronized(isSynchronized(declarationMethodElement))
         .setSynthetic(isSynthetic(declarationMethodElement))
         .setEnumSyntheticMethod(isEnumSyntheticMethod(declarationMethodElement))
-        .setSideEffectFree(isAnnotatedWithHasNoSideEffects(declarationMethodElement))
         .setUnusableByJsSuppressed(
             JsInteropAnnotationUtils.isUnusableByJsSuppressed(declarationMethodElement))
-        .setUncheckedCast(hasUncheckedCast)
         .build();
   }
 
@@ -1561,16 +1556,6 @@ class JavaEnvironment {
 
   private static boolean isSynthetic(Element element) {
     return element instanceof Symbol && (((Symbol) element).flags() & Flags.SYNTHETIC) != 0;
-  }
-
-  /** Returns true if the element is annotated with @UncheckedCast. */
-  private static boolean hasUncheckedCastAnnotation(Element element) {
-    return hasAnnotation(element, UNCHECKED_CAST_ANNOTATION_NAME);
-  }
-
-  /** Returns true if the element is annotated with @HasNoSideEffects. */
-  private static boolean isAnnotatedWithHasNoSideEffects(Element element) {
-    return hasAnnotation(element, HAS_NO_SIDE_EFFECTS_ANNOTATION_NAME);
   }
 
   private static boolean isAnnotatedWithAutoValue(Element element) {
