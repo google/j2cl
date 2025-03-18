@@ -1,0 +1,62 @@
+goog.module('protobuf.Protobuf.Test$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
+let MyMessage = goog.forwardDeclare('protobuf.MyMessage$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+
+class Test extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Test} */
+ static $create__protobuf_MyMessage(/** !MyMessage */ myMessage) {
+  Test.$clinit();
+  let $instance = new Test();
+  $instance.$ctor__protobuf_Protobuf_Test__protobuf_MyMessage__void(myMessage);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__protobuf_Protobuf_Test__protobuf_MyMessage__void(/** !MyMessage */ myMessage) {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ m_accept__protobuf_MyMessage__void(/** !MyMessage */ myMessage) {}
+ /** @nodts */
+ static m_acceptStatic__protobuf_MyMessage__void(/** !MyMessage */ myMessage) {
+  Test.$clinit();
+ }
+ /** @nodts @return {!MyMessage} */
+ m_get__protobuf_MyMessage() {
+  throw $Exceptions.toJs(RuntimeException.$create__());
+ }
+ /** @nodts @return {!MyMessage} */
+ static m_getStatic__protobuf_MyMessage__protobuf_MyMessage(/** !MyMessage */ myMessage) {
+  Test.$clinit();
+  throw $Exceptions.toJs(RuntimeException.$create__());
+ }
+ /** @nodts */
+ static $clinit() {
+  Test.$clinit = () =>{};
+  Test.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Test;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+ }
+}
+$Util.$setClassMetadata(Test, 'protobuf.Protobuf$Test');
+
+exports = Test;
+
+//# sourceMappingURL=Protobuf$Test.js.map

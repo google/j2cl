@@ -70,4 +70,20 @@ public class Protobuf {
     MyEnum enumOne = MyEnum.ONE;
     int enumOneNumber = MyEnum.ONE.getNumber();
   }
+
+  public static class Test {
+    public Test(MyMessage myMessage) {}
+
+    public void accept(MyMessage myMessage) {}
+
+    public static void acceptStatic(MyMessage myMessage) {}
+
+    public MyMessage get() {
+      throw new RuntimeException();
+    }
+
+    public static MyMessage getStatic(MyMessage myMessage) {
+      throw new RuntimeException();
+    }
+  }
 }

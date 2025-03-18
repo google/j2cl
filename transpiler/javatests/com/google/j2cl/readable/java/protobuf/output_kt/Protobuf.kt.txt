@@ -21,10 +21,12 @@ package protobuf
 import javaemul.lang.*
 import com.google.protobuf.GeneratedMessage
 import com.google.protobuf.Parser
+import java.lang.RuntimeException
 import kotlin.Int
 import kotlin.OptIn
 import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 import protobuf.MyEnum
 import protobuf.MyMessage
@@ -60,5 +62,39 @@ open class Protobuf {
   val generatedMessageParser: Parser<out GeneratedMessage> = (message as GeneratedMessage?)!!.parserForType
   val enumOne: MyEnum = MyEnum.ONE
   val enumOneNumber: Int = MyEnum.ONE.number
+ }
+
+ @ObjCName("J2ktProtobufProtobuf_Test", swiftName = "ProtobufProtobuf_Test", exact = true)
+ open class Test {
+  constructor(
+   @ObjCName("ProtobufMyMessage") myMessage: MyMessage
+  )
+
+  @ObjCName("accept")
+  open fun accept(
+   @ObjCName("withProtobufMyMessage", swiftName = "with") myMessage: MyMessage
+  ) {}
+
+  @ObjCName("get")
+  open fun get(): MyMessage {
+   throw RuntimeException()
+  }
+
+  @ObjCName("J2ktProtobufProtobuf_TestCompanion", swiftName = "ProtobufProtobuf_TestCompanion", exact = true)
+  companion object {
+   @JvmStatic
+   @ObjCName("acceptStatic")
+   fun acceptStatic(
+    @ObjCName("withProtobufMyMessage", swiftName = "with") myMessage: MyMessage
+   ) {}
+
+   @JvmStatic
+   @ObjCName("getStatic")
+   fun getStatic(
+    @ObjCName("withProtobufMyMessage", swiftName = "with") myMessage: MyMessage
+   ): MyMessage {
+    throw RuntimeException()
+   }
+  }
  }
 }
