@@ -22,36 +22,16 @@ public class SupportedAnnotations {
 
   private static final ImmutableSet<String> RECOGNIZED_ANNOTATIONS_QUALIFIED_NAMES =
       ImmutableSet.of(
-          // JsInterop annotations.
-          FrontendConstants.JS_CONSTRUCTOR_ANNOTATION_NAME,
-          FrontendConstants.JS_ASYNC_ANNOTATION_NAME,
-          FrontendConstants.JS_ENUM_ANNOTATION_NAME,
-          FrontendConstants.JS_FUNCTION_ANNOTATION_NAME,
-          FrontendConstants.JS_IGNORE_ANNOTATION_NAME,
-          FrontendConstants.JS_METHOD_ANNOTATION_NAME,
-          FrontendConstants.JS_OPTIONAL_ANNOTATION_NAME,
-          FrontendConstants.JS_OVERLAY_ANNOTATION_NAME,
-          FrontendConstants.JS_PACKAGE_ANNOTATION_NAME,
-          FrontendConstants.JS_PROPERTY_ANNOTATION_NAME,
-          FrontendConstants.JS_TYPE_ANNOTATION_NAME,
-          // Test annotations
-          "org.junit.runner.RunWith",
           "com.google.apps.xplat.testing.parameterized.RunParameterized",
-          // Other
           "java.lang.Deprecated",
           "java.lang.FunctionalInterface",
           "javaemul.internal.annotations.HasNoSideEffects",
           "javaemul.internal.annotations.UncheckedCast",
           "kotlin.Deprecated",
-          FrontendConstants.KT_OBJECTIVE_C_NAME,
-          FrontendConstants.J2KT_THROWS_ANNOTATION_NAME,
-          FrontendConstants.J2KT_NATIVE_ANNOTATION_NAME);
+          "org.junit.runner.RunWith");
 
   public static boolean isSupportedAnnotation(String qualifiedName) {
-    return Nullability.isNullableAnnotation(qualifiedName)
-        || Nullability.isNonNullAnnotation(qualifiedName)
-        || Nullability.isNullMarkedAnnotation(qualifiedName)
-        || RECOGNIZED_ANNOTATIONS_QUALIFIED_NAMES.contains(qualifiedName);
+    return RECOGNIZED_ANNOTATIONS_QUALIFIED_NAMES.contains(qualifiedName);
   }
 
   private SupportedAnnotations() {}
