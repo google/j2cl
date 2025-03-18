@@ -333,20 +333,35 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
       .objCName(useId = true)
       .let { "$prefix$it" }
       .plus("_")
-      .plus(objCNames.objCName.string)
-      .letIf(objCNames.parameterObjCNames.isNotEmpty()) { parameterName ->
-        parameterName.plus(
-          objCNames.parameterObjCNames
-            .mapIndexed { index, name ->
-              name.string
-                .letIf(index == 0) {
-                  it.titleCased.letIf(methodDescriptor.isConstructor) { "With$it" }
-                }
-                .plus("_")
-            }
-            .joinToString("")
-        )
+      .plus(functionBaseName(methodDescriptor, objCNames))
+      .runIf(functionNameContainsParameterNames(methodDescriptor)) {
+        plus(functionParameterNames(methodDescriptor, objCNames))
       }
+
+  private fun functionBaseName(
+    methodDescriptor: MethodDescriptor,
+    objCNames: MethodObjCNames,
+  ): String =
+    if (methodDescriptor.isConstructor && !functionNameContainsParameterNames(methodDescriptor)) {
+      methodDescriptor.objectiveCName ?: objCNames.objCName.string
+    } else {
+      objCNames.objCName.string
+    }
+
+  private fun functionNameContainsParameterNames(methodDescriptor: MethodDescriptor): Boolean =
+    methodDescriptor.objectiveCName.let { it == null || it.contains(":") }
+
+  private fun functionParameterNames(
+    methodDescriptor: MethodDescriptor,
+    objCNames: MethodObjCNames,
+  ) =
+    objCNames.parameterObjCNames
+      .mapIndexed { index, name ->
+        name.string
+          .letIf(index == 0) { it.titleCased.letIf(methodDescriptor.isConstructor) { "With$it" } }
+          .plus("_")
+      }
+      .joinToString("")
 
   private fun statementRenderers(
     method: Method,

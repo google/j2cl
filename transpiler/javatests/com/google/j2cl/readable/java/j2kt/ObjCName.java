@@ -113,7 +113,7 @@ public class ObjCName {
 
   public ObjCName() {}
 
-  @ObjectiveCName("initWithInteger")
+  @ObjectiveCName("initWithInteger:")
   public ObjCName(int i) {}
 
   public ObjCName(int i, String s) {}

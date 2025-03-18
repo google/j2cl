@@ -75,19 +75,15 @@
   obj = create_Custom_initWithIndex_name_(1, @"");
 
   obj = create_Custom_init();
-  // TODO(b/400390599): Should be `create_Custom_init2`
-  obj = create_Custom_initWithLong_(1);
-  // TODO(b/400390599): Should be `create_Custom_init3`
-  obj = create_Custom_initWithLong_withNSString_(1, @"");
+  obj = create_Custom_init2(1);
+  obj = create_Custom_init3(1, @"");
 
   obj = new_Custom_initWithIndex_(1);
   obj = new_Custom_initWithIndex_name_(1, @"");
 
   obj = new_Custom_init();
-  // TODO(b/400390599): Should be `new_Custom_init2`
-  obj = new_Custom_initWithLong_(1);
-  // TODO(b/400390599): Should be `new_Custom_init3`
-  obj = new_Custom_initWithLong_withNSString_(1, @"");
+  obj = new_Custom_init2(1);
+  obj = new_Custom_init3(1, @"");
 
   [obj customMethod];
   [obj customIntMethodWithInt:1];
@@ -111,10 +107,8 @@
   Custom_customStaticIntMethodWithIndex_(1);
   Custom_customStaticIntStringMethodWithIndex_name_(1, @"");
 
-  // TODO(b/400390599): Should be `Custom_customStaticLongMethod`
-  Custom_customStaticLongMethodWithLong_(1);
-  // TODO(b/400390599): Should be `Custom_customStaticLongStringMethod`
-  Custom_customStaticLongStringMethodWithLong_withNSString_(2, @"");
+  Custom_customStaticLongMethod(1);
+  Custom_customStaticLongStringMethod(2, @"");
 }
 
 - (void)testEnumNames {
