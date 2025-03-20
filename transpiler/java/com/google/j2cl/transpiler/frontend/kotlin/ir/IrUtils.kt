@@ -443,16 +443,6 @@ val IrClass.isFinal: Boolean
 val IrClass.isFromSource: Boolean
   get() = source.containingFile != SourceFile.NO_SOURCE_FILE
 
-val IrClass.isAutoValue: Boolean
-  get() =
-    hasAnnotation(FqName("com.google.auto.value.AutoValue")) ||
-      hasAnnotation(FqName("javaemul.lang.annotations.WasAutoValue"))
-
-val IrClass.isAutoValueBuilder: Boolean
-  get() =
-    hasAnnotation(FqName("com.google.auto.value.AutoValue.Builder")) ||
-      hasAnnotation(FqName("javaemul.lang.annotations.WasAutoValue.Builder"))
-
 fun IrDeclaration.getTopLevelEnclosingClass(): IrClass {
   if (this is IrClass && isTopLevel) {
     return this

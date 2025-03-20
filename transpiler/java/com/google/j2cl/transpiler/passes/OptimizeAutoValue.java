@@ -130,8 +130,8 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
 
   private static boolean isAutoValueOrBuilderSubclass(TypeDeclaration type) {
     return type != null
-        && (type.isAnnotatedWithAutoValue()
-            || type.isAnnotatedWithAutoValueBuilder()
+        && (AstUtils.isAnnotatedWithAutoValue(type)
+            || AstUtils.isAnnotatedWithAutoValueBuilder(type)
             || isAutoValueOrBuilderSubclass(type.getSuperTypeDeclaration()));
   }
 
@@ -188,7 +188,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
   }
 
   private static boolean canBeInlinedTo(Type type) {
-    if (type.getDeclaration().isAnnotatedWithAutoValueBuilder()) {
+    if (AstUtils.isAnnotatedWithAutoValueBuilder(type.getDeclaration())) {
       // Note that AutoValue.Builder will generate default ctor so would be only safe to inline
       // the implementation if user didn't declare non-empty one.
       // Most complete logic for safety here would be cross-checking all generated ctors against
@@ -197,7 +197,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
       Method method = type.getDefaultConstructor();
       return method == null || method.isEmpty();
     }
-    return type.getDeclaration().isAnnotatedWithAutoValue();
+    return AstUtils.isAnnotatedWithAutoValue(type.getDeclaration());
   }
 
   private static void inlineMembers(Type from, Type to) {
@@ -207,7 +207,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
 
     // Validate our assumption that AutoValue only generates single non-default constructor.
     checkState(
-        !to.getDeclaration().isAnnotatedWithAutoValue()
+        !AstUtils.isAnnotatedWithAutoValue(to.getDeclaration())
             || (from.getConstructors().size() == 1 && from.getDefaultConstructor() == null));
 
     // We need to make sure inlined constructors explicitly call this() otherwise they would
@@ -370,13 +370,13 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
         library
             .streamTypes()
             .map(Type::getDeclaration)
-            .filter(TypeDeclaration::isAnnotatedWithAutoValue)
+            .filter(AstUtils::isAnnotatedWithAutoValue)
             .map(t -> getAutoValueExcludedFields(t, autoValueToSubTypes.get(t)))
             .collect(ArrayListMultimap::create, Multimap::putAll, Multimap::putAll);
 
     library
         .streamTypes()
-        .filter(t -> t.getDeclaration().isAnnotatedWithAutoValue())
+        .filter(t -> AstUtils.isAnnotatedWithAutoValue(t.getDeclaration()))
         .forEach(
             autoValue -> {
               int mask = removeJavaLangObjectMethods(autoValue);
@@ -412,7 +412,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
   private static TypeDeclaration getAutoValueParent(TypeDeclaration type) {
     return type == null
         ? null
-        : type.isAnnotatedWithAutoValue()
+        : AstUtils.isAnnotatedWithAutoValue(type)
             ? type
             : getAutoValueParent(type.getSuperTypeDeclaration());
   }
@@ -423,7 +423,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
 
     // None of the user declared fields in AutoValue and its parents are included in AutoValue
     // generated equals/hashCode/toString.
-    if (type.isAnnotatedWithAutoValue()) {
+    if (AstUtils.isAnnotatedWithAutoValue(type)) {
       for (TypeDeclaration t = type;
           !TypeDescriptors.isJavaLangObject(t.toRawTypeDescriptor());
           t = t.getSuperTypeDeclaration()) {
@@ -436,7 +436,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
     subtypes.stream()
         .map(Type::getDeclaration)
         // Skip the AutoValue impl.
-        .filter(t -> !t.getSuperTypeDeclaration().isAnnotatedWithAutoValue())
+        .filter(t -> !AstUtils.isAnnotatedWithAutoValue(t.getSuperTypeDeclaration()))
         .forEach(t -> excludedFields.putAll(type, getInstanceFields(t)));
 
     return excludedFields;

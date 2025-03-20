@@ -23,10 +23,14 @@ public class SupportedAnnotations {
   private static final ImmutableSet<String> RECOGNIZED_ANNOTATIONS_QUALIFIED_NAMES =
       ImmutableSet.of(
           "com.google.apps.xplat.testing.parameterized.RunParameterized",
+          "com.google.auto.value.AutoValue",
+          "com.google.auto.value.AutoValue.Builder",
           "java.lang.Deprecated",
           "java.lang.FunctionalInterface",
           "javaemul.internal.annotations.HasNoSideEffects",
           "javaemul.internal.annotations.UncheckedCast",
+          "javaemul.lang.annotations.WasAutoValue",
+          "javaemul.lang.annotations.WasAutoValue.Builder",
           "kotlin.Deprecated",
           "org.junit.runner.RunWith");
 

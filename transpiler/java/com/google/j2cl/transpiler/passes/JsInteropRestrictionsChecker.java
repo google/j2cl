@@ -212,8 +212,8 @@ public class JsInteropRestrictionsChecker {
       return true;
     }
 
-    if ((!superType.isAnnotatedWithAutoValue() || checkAutoValueTypeName(typeDeclaration))
-        && (!superType.isAnnotatedWithAutoValueBuilder()
+    if ((!AstUtils.isAnnotatedWithAutoValue(superType) || checkAutoValueTypeName(typeDeclaration))
+        && (!AstUtils.isAnnotatedWithAutoValueBuilder(superType)
             || checkAutoValueTypeName(typeDeclaration.getEnclosingTypeDeclaration()))) {
       return true;
     }

@@ -1291,8 +1291,6 @@ class JavaEnvironment {
         .setFinal(isFinal)
         .setFunctionalInterface(isFunctionalInterface(typeElement.asType()))
         .setJsFunctionInterface(JsInteropUtils.isJsFunction(typeElement))
-        .setAnnotatedWithAutoValue(isAnnotatedWithAutoValue(typeElement))
-        .setAnnotatedWithAutoValueBuilder(isAnnotatedWithAutoValueBuilder(typeElement))
         .setAnnotationsFactory(() -> createAnnotations(typeElement, isNullMarked))
         .setSourceLanguage(
             isAnnotatedWithKotlinMetadata(typeElement)
@@ -1556,14 +1554,6 @@ class JavaEnvironment {
 
   private static boolean isSynthetic(Element element) {
     return element instanceof Symbol && (((Symbol) element).flags() & Flags.SYNTHETIC) != 0;
-  }
-
-  private static boolean isAnnotatedWithAutoValue(Element element) {
-    return hasAnnotation(element, "com.google.auto.value.AutoValue");
-  }
-
-  private static boolean isAnnotatedWithAutoValueBuilder(Element element) {
-    return hasAnnotation(element, "com.google.auto.value.AutoValue.Builder");
   }
 
   private static boolean isAnnotatedWithKotlinMetadata(Element element) {

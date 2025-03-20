@@ -311,12 +311,6 @@ public abstract class TypeDeclaration
   /** Returns whether the described type is a functional interface (JLS 9.8). */
   public abstract boolean isFunctionalInterface();
 
-  /** Returns whether the described type has the @AutoValue annotation. */
-  public abstract boolean isAnnotatedWithAutoValue();
-
-  /** Returns whether the described type has the @AutoValue.Builder annotation. */
-  public abstract boolean isAnnotatedWithAutoValueBuilder();
-
   /** Gets a list of annotations present on the declaration. */
   @Override
   @Memoized
@@ -820,8 +814,6 @@ public abstract class TypeDeclaration
         .setCapturingEnclosingInstance(false)
         .setFinal(false)
         .setFunctionalInterface(false)
-        .setAnnotatedWithAutoValue(false)
-        .setAnnotatedWithAutoValueBuilder(false)
         .setAnnotationsFactory(ImmutableList::of)
         .setJsFunctionInterface(false)
         .setJsType(false)
@@ -894,10 +886,6 @@ public abstract class TypeDeclaration
     public abstract Builder setFunctionalInterface(boolean isFunctionalInterface);
 
     public abstract Builder setOrigin(Origin origin);
-
-    public abstract Builder setAnnotatedWithAutoValue(boolean annotatedWithAutoValue);
-
-    public abstract Builder setAnnotatedWithAutoValueBuilder(boolean annotatedWithAutoValueBuilder);
 
     public abstract Builder setAnnotationsFactory(
         Supplier<ImmutableList<Annotation>> annotationsFactory);

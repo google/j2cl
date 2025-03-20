@@ -178,11 +178,11 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
 
   private fun autoValueAnnotationsSource(typeDeclaration: TypeDeclaration): Source =
     when {
-      typeDeclaration.isAnnotatedWithAutoValue ->
+      typeDeclaration.hasAnnotation("com.google.auto.value.AutoValue") ->
         annotation(
           nameRenderer.topLevelQualifiedNameSource("javaemul.lang.annotations.WasAutoValue")
         )
-      typeDeclaration.isAnnotatedWithAutoValueBuilder ->
+      typeDeclaration.hasAnnotation("com.google.auto.value.AutoValue.Builder") ->
         annotation(
           nameRenderer.topLevelQualifiedNameSource("javaemul.lang.annotations.WasAutoValue.Builder")
         )

@@ -1162,8 +1162,6 @@ public class JdtEnvironment {
             .setFunctionalInterface(
                 !typeBinding.isAnnotation() && typeBinding.getFunctionalInterfaceMethod() != null)
             .setJsFunctionInterface(JsInteropUtils.isJsFunction(typeBinding))
-            .setAnnotatedWithAutoValue(isAnnotatedWithAutoValue(typeBinding))
-            .setAnnotatedWithAutoValueBuilder(isAnnotatedWithAutoValueBuilder(typeBinding))
             .setAnnotationsFactory(() -> createAnnotations(typeBinding, isNullMarked))
             .setSourceLanguage(
                 isAnnotatedWithKotlinMetadata(typeBinding)
@@ -1250,14 +1248,6 @@ public class JdtEnvironment {
     }
 
     return packageAnnotationsResolver.isNullMarked(typeBinding.getPackage().getName());
-  }
-
-  private static boolean isAnnotatedWithAutoValue(ITypeBinding typeBinding) {
-    return JdtAnnotationUtils.hasAnnotation(typeBinding, "com.google.auto.value.AutoValue");
-  }
-
-  private static boolean isAnnotatedWithAutoValueBuilder(ITypeBinding typeBinding) {
-    return JdtAnnotationUtils.hasAnnotation(typeBinding, "com.google.auto.value.AutoValue.Builder");
   }
 
   private static boolean isAnnotatedWithKotlinMetadata(ITypeBinding typeBinding) {

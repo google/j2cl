@@ -1275,13 +1275,25 @@ public final class AstUtils {
     // optimizations that alter the class hierarchy are not reflected in the type model.
     TypeDeclaration contextTypeDeclaration = contextTypeDescriptor.getTypeDeclaration();
     if (contextTypeDeclaration.isJsEnum()
-        || contextTypeDeclaration.isAnnotatedWithAutoValue()
-        || contextTypeDeclaration.isAnnotatedWithAutoValueBuilder()) {
+        || isAnnotatedWithAutoValue(contextTypeDeclaration)
+        || isAnnotatedWithAutoValueBuilder(contextTypeDeclaration)) {
       return new ThisReference(contextTypeDescriptor);
     }
     // TODO(b/241300930): Remove when anonymous classes defined in inline functions are not marked
     //  as inner classes.
     return NullLiteral.get(targetTypeDescriptor);
+  }
+
+  /** Returns true if the specified type is annotated with AutoValue. */
+  public static boolean isAnnotatedWithAutoValue(TypeDeclaration type) {
+    return type.hasAnnotation("com.google.auto.value.AutoValue")
+        || type.hasAnnotation("javaemul.lang.annotations.WasAutoValue");
+  }
+
+  /** Returns true if the specified type is annotated with AutoValue.Builder. */
+  public static boolean isAnnotatedWithAutoValueBuilder(TypeDeclaration type) {
+    return type.hasAnnotation("com.google.auto.value.AutoValue.Builder")
+        || type.hasAnnotation("javaemul.lang.annotations.WasAutoValue.Builder");
   }
 
   /** Returns a list of statements in {@code body} which may be a block or a single statement. */
