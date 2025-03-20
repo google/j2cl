@@ -36,7 +36,7 @@ class RegExp internal constructor() {
   @JvmStatic
   @ObjCName("test")
   fun test() {
-   val regExp: RegExp.NativeRegExp = RegExp.NativeRegExp("teststring")
+   val regExp: NativeRegExp = NativeRegExp("teststring")
    regExp.test("restString")
    val str: String? = regExp.toString()
   }

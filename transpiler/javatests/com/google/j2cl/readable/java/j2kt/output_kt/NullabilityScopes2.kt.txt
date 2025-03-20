@@ -19,6 +19,7 @@
 package j2kt
 
 import javaemul.lang.*
+import j2kt.NullabilityScopes2.NullMarkedScope.Recursive
 import java.lang.RuntimeException
 import java.util.function.Function
 import java.util.stream.Collector
@@ -45,28 +46,28 @@ open class NullabilityScopes2 internal constructor() {
   }
 
   @ObjCName("J2ktJ2ktNullabilityScopes2_NullMarkedScope_Recursive", swiftName = "J2ktNullabilityScopes2_NullMarkedScope_Recursive", exact = true)
-  fun interface Recursive<M: NullabilityScopes2.NullMarkedScope.Recursive<M>> {
+  fun interface Recursive<M: Recursive<M>> {
    @ObjCName("toList")
-   fun toList(): MutableList<NullabilityScopes2.NullMarkedScope.Recursive<M>>
+   fun toList(): MutableList<Recursive<M>>
   }
  }
 
  @ObjCName("J2ktJ2ktNullabilityScopes2_NonNullMarkedScope", swiftName = "J2ktNullabilityScopes2_NonNullMarkedScope", exact = true)
- open class NonNullMarkedScope<T: NullabilityScopes2.NullMarkedScope.Recursive<T>> internal constructor() {
+ open class NonNullMarkedScope<T: Recursive<T>> internal constructor() {
   @ObjCName("flatten")
   open fun flatten(
-   @ObjCName("withJ2ktNullabilityScopes2_NullMarkedScope_Recursive", swiftName = "with") recursive: NullabilityScopes2.NullMarkedScope.Recursive<T>?
+   @ObjCName("withJ2ktNullabilityScopes2_NullMarkedScope_Recursive", swiftName = "with") recursive: Recursive<T>?
   ): MutableList<Any?>? {
    return recursive!!.toList().stream().map<MutableList<Any>>(
-    Function/* <in NullabilityScopes2.NullMarkedScope.Recursive<T>?, out MutableList<Any?>?> */ { arg0: NullabilityScopes2.NullMarkedScope.Recursive<T> ->
+    Function/* <in Recursive<T>?, out MutableList<Any?>?> */ { arg0: Recursive<T> ->
      return@Function this.flatten(arg0)
-    } as Function<in NullabilityScopes2.NullMarkedScope.Recursive<T>, out MutableList<Any>>,
+    } as Function<in Recursive<T>, out MutableList<Any>>,
    ).flatMap<Any>(
     Function/* <in MutableList<Any?>?, out Stream<*>?> */ { arg0_1: MutableList<Any> ->
      return@Function arg0_1.stream()
     } as Function<in MutableList<Any>, out Stream<out Any>>,
    ).collect<MutableList<Any>, Any>(
-    NullabilityScopes2.NullMarkedScope.toList<Any>() as Collector<in Any, Any, MutableList<Any>>,
+    NullMarkedScope.toList<Any>() as Collector<in Any, Any, MutableList<Any>>,
    ) as MutableList<Any?>?
   }
  }

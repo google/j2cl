@@ -76,7 +76,7 @@ open class Varargs {
 
  @ObjCName("testLambda")
  open fun testLambda(
-  @ObjCName("withVarargsVarargs_FunctionalInterface", swiftName = "with") functionalInterface: Varargs.FunctionalInterface?
+  @ObjCName("withVarargsVarargs_FunctionalInterface", swiftName = "with") functionalInterface: FunctionalInterface?
  ) {}
 
  @ObjCName("testOverloaded")
@@ -140,7 +140,7 @@ open class Varargs {
    *(arrayOf<Array<Any?>?>() as Array<Serializable?>?)!!,
   )
   v.testLambda(
-   Varargs.FunctionalInterface { it: Array<out String?>? ->
+   FunctionalInterface { it: Array<out String?>? ->
     val it_1: Array<String?>? = it as Array<String?>?
     this.args = it_1 as Array<Any?>?
    },

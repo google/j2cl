@@ -29,19 +29,19 @@ import kotlin.native.ObjCName
 @ObjCName("J2ktRawtypeRawType", swiftName = "RawtypeRawType", exact = true)
 open class RawType internal constructor() {
  @JvmField
- internal var rawUnbound_pp_rawtype: RawType.Unbound<Any?>? = RawType.Unbound<Any?>()
+ internal var rawUnbound_pp_rawtype: Unbound<Any?>? = Unbound<Any?>()
 
  @JvmField
- internal var rawBound_pp_rawtype: RawType.Bound<RawType?>? = RawType.Bound<RawType?>()
+ internal var rawBound_pp_rawtype: Bound<RawType?>? = Bound<RawType?>()
 
  @JvmField
- internal var rawBoundRecursively_pp_rawtype: RawType.BoundRecursively<*>? = RawType.BoundRecursively/* <*> */()
+ internal var rawBoundRecursively_pp_rawtype: BoundRecursively<*>? = BoundRecursively/* <*> */()
 
  @JvmField
- internal var rawBoundDependentDirect_pp_rawtype: RawType.BoundDependentDirect<Any?, Any?>? = RawType.BoundDependentDirect<Any?, Any?>()
+ internal var rawBoundDependentDirect_pp_rawtype: BoundDependentDirect<Any?, Any?>? = BoundDependentDirect<Any?, Any?>()
 
  @JvmField
- internal var rawBoundDependentIndirect_pp_rawtype: RawType.BoundDependentIndirect<Any?, RawType.Unbound<Any?>?>? = RawType.BoundDependentIndirect<Any?, RawType.Unbound<Any?>?>()
+ internal var rawBoundDependentIndirect_pp_rawtype: BoundDependentIndirect<Any?, Unbound<Any?>?>? = BoundDependentIndirect<Any?, Unbound<Any?>?>()
 
  @ObjCName("J2ktRawtypeRawType_Unbound", swiftName = "RawtypeRawType_Unbound", exact = true)
  open class Unbound<T> internal constructor() {
@@ -54,18 +54,18 @@ open class RawType internal constructor() {
  open class Bound<T: RawType?> internal constructor()
 
  @ObjCName("J2ktRawtypeRawType_BoundRecursively", swiftName = "RawtypeRawType_BoundRecursively", exact = true)
- open class BoundRecursively<T: RawType.BoundRecursively<T>?> internal constructor()
+ open class BoundRecursively<T: BoundRecursively<T>?> internal constructor()
 
  @ObjCName("J2ktRawtypeRawType_BoundDependentDirect", swiftName = "RawtypeRawType_BoundDependentDirect", exact = true)
  open class BoundDependentDirect<A, B: A> internal constructor()
 
  @ObjCName("J2ktRawtypeRawType_BoundDependentIndirect", swiftName = "RawtypeRawType_BoundDependentIndirect", exact = true)
- open class BoundDependentIndirect<A, B: RawType.Unbound<A>?> internal constructor()
+ open class BoundDependentIndirect<A, B: Unbound<A>?> internal constructor()
 
  @ObjCName("J2ktRawtypeRawType_RawUnboundChild", swiftName = "RawtypeRawType_RawUnboundChild", exact = true)
- open class RawUnboundChild internal constructor(): RawType.Unbound<Any?>() {
+ open class RawUnboundChild internal constructor(): Unbound<Any?>() {
   override fun method_pp_rawtype(o: Any?): Any? {
-   return super<RawType.Unbound>.method_pp_rawtype(o)
+   return super<Unbound>.method_pp_rawtype(o)
   }
  }
 
@@ -78,7 +78,7 @@ open class RawType internal constructor() {
  }
 
  @ObjCName("J2ktRawtypeRawType_RawSubclass", swiftName = "RawtypeRawType_RawSubclass", exact = true)
- open class RawSubclass internal constructor(): RawType.GenericSuperclass<RawType?> {
+ open class RawSubclass internal constructor(): GenericSuperclass<RawType?> {
   override fun f(t: RawType?) {}
  }
 }

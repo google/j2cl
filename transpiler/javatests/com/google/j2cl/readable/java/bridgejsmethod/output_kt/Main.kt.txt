@@ -39,38 +39,38 @@ open class Main {
   @JvmStatic
   @ObjCName("test")
   fun test() {
-   val a: Main.A<Any?> = Main.A<Int?>() as Main.A<Any?>
+   val a: A<Any?> = A<Int?>() as A<Any?>
    a.`fun`(
     Integer.valueOf(1),
    )
    a.bar(
     Integer.valueOf(1),
    )
-   val b: Main.B = Main.B()
+   val b: B = B()
    b.`fun`("abc")
    b.bar("abc")
-   val c: Main.C = Main.C()
+   val c: C = C()
    c.`fun`(
     Integer.valueOf(1) as Int?,
    )
    c.bar(
     Integer.valueOf(1),
    )
-   val d: Main.D = Main.D()
+   val d: D = D()
    d.`fun`(
     Integer.valueOf(1) as Int?,
    )
    d.bar(
     Integer.valueOf(1),
    )
-   val e: Main.E = Main.E()
+   val e: E = E()
    e.`fun`("abc")
    e.bar("abc")
-   val h: Main.H<Int?> = Main.H<Int?>()
+   val h: H<Int?> = H<Int?>()
    h.enclose(
     Integer.valueOf(1),
    )
-   val l: Main.L<Int?> = Main.L<Int?>()
+   val l: L<Int?> = L<Int?>()
    l.fun_pp_bridgejsmethod(
     "foo",
     Integer.valueOf(1),
@@ -112,7 +112,7 @@ open class Main {
  }
 
  @ObjCName("J2ktBridgejsmethodMain_B", swiftName = "BridgejsmethodMain_B", exact = true)
- open class B: Main.A<String?>() {
+ open class B: A<String?>() {
   override fun `fun`(s: String?): String? {
    return s
   }
@@ -122,24 +122,24 @@ open class Main {
  }
 
  @ObjCName("J2ktBridgejsmethodMain_C", swiftName = "BridgejsmethodMain_C", exact = true)
- open class C: Main.A<Int?>() {
+ open class C: A<Int?>() {
   override fun `fun`(i: Int?): Int? {
    return i
   }
  }
 
  @ObjCName("J2ktBridgejsmethodMain_D", swiftName = "BridgejsmethodMain_D", exact = true)
- open class D: Main.A<Int?>(), Main.I<Int?> {
+ open class D: A<Int?>(), I<Int?> {
   override fun `fun`(i: Int?): Int? {
    return i
   }
  }
 
  @ObjCName("J2ktBridgejsmethodMain_E", swiftName = "BridgejsmethodMain_E", exact = true)
- open class E: Main.B(), Main.J<String?>
+ open class E: B(), J<String?>
 
  @ObjCName("J2ktBridgejsmethodMain_F", swiftName = "BridgejsmethodMain_F", exact = true)
- open class F: Main.A<Int?>(), Main.I<Int?>
+ open class F: A<Int?>(), I<Int?>
 
  @ObjCName("J2ktBridgejsmethodMain_G", swiftName = "BridgejsmethodMain_G", exact = true)
  fun interface G<V> {
@@ -150,7 +150,7 @@ open class Main {
  }
 
  @ObjCName("J2ktBridgejsmethodMain_H", swiftName = "BridgejsmethodMain_H", exact = true)
- open class H<V>: Main.G<V> {
+ open class H<V>: G<V> {
   @JsMethod
   override fun enclose(value: V): V {
    return null as V
@@ -163,7 +163,7 @@ open class Main {
  }
 
  @ObjCName("J2ktBridgejsmethodMain_L", swiftName = "BridgejsmethodMain_L", exact = true)
- open class L<L1>: Main.K<String?, L1>() {
+ open class L<L1>: K<String?, L1>() {
   @JsMethod(name = "fun")
   override fun fun_pp_bridgejsmethod(string: String?, l1: L1) {}
  }
@@ -171,20 +171,20 @@ open class Main {
  @ObjCName("J2ktBridgejsmethodMain_M", swiftName = "BridgejsmethodMain_M", exact = true)
  fun interface M {
   @ObjCName("getB")
-  fun getB(): Main.B?
+  fun getB(): B?
  }
 
  @ObjCName("J2ktBridgejsmethodMain_N", swiftName = "BridgejsmethodMain_N", exact = true)
  @JsType
- abstract inner class N internal constructor(): Main.M {
-  abstract override fun getB(): Main.B?
+ abstract inner class N internal constructor(): M {
+  abstract override fun getB(): B?
  }
 
  @ObjCName("J2ktBridgejsmethodMain_O", swiftName = "BridgejsmethodMain_O", exact = true)
  open inner class O internal constructor(): Main.N() {
-  private var b: Main.B? = null
+  private var b: B? = null
 
-  override fun getB(): Main.B? {
+  override fun getB(): B? {
    return this.b
   }
  }
@@ -197,7 +197,7 @@ open class Main {
 
  @ObjCName("J2ktBridgejsmethodMain_Q", swiftName = "BridgejsmethodMain_Q", exact = true)
  @JsType
- abstract inner class Q internal constructor(): Main.P {
+ abstract inner class Q internal constructor(): P {
   abstract override fun getKey(): String?
  }
 

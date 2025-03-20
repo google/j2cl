@@ -36,14 +36,14 @@ open class DefinitelyNotNull {
  @ObjCName("J2ktJ2ktDefinitelyNotNullCompanion", swiftName = "J2ktDefinitelyNotNullCompanion", exact = true)
  companion object {
   @JvmStatic
-  internal fun testNotNullSupplier_pp_j2kt(supplier: DefinitelyNotNull.NotNullSupplier<out String?>): String {
+  internal fun testNotNullSupplier_pp_j2kt(supplier: NotNullSupplier<out String?>): String {
    return supplier.getNotNull()!!
   }
 
   @JvmStatic
   @ObjCName("testEquivalence")
   fun <T> testEquivalence(
-   @ObjCName("withJ2ktDefinitelyNotNull_Equivalence", swiftName = "with") equivalence: DefinitelyNotNull.Equivalence<in T & Any>,
+   @ObjCName("withJ2ktDefinitelyNotNull_Equivalence", swiftName = "with") equivalence: Equivalence<in T & Any>,
    @ObjCName("withId") a: T?,
    @ObjCName("withId") b: T?
   ): Boolean {
@@ -59,27 +59,27 @@ open class DefinitelyNotNull {
 
  @ObjCName("J2ktJ2ktDefinitelyNotNull_Ordering", swiftName = "J2ktDefinitelyNotNull_Ordering", exact = true)
  open class Ordering<T> internal constructor() {
-  internal open fun <S: T> reverse_pp_j2kt(): DefinitelyNotNull.Ordering<S> {
+  internal open fun <S: T> reverse_pp_j2kt(): Ordering<S> {
    throw RuntimeException()
   }
 
-  internal open fun <S: T> nullsLast_pp_j2kt(): DefinitelyNotNull.Ordering<S?> {
+  internal open fun <S: T> nullsLast_pp_j2kt(): Ordering<S?> {
    throw RuntimeException()
   }
 
   @ObjCName("J2ktJ2ktDefinitelyNotNull_OrderingCompanion", swiftName = "J2ktDefinitelyNotNull_OrderingCompanion", exact = true)
   companion object {
    @JvmStatic
-   internal fun <E> reversed_pp_j2kt(ordering: DefinitelyNotNull.Ordering<in E>): DefinitelyNotNull.Ordering<in E> {
+   internal fun <E> reversed_pp_j2kt(ordering: Ordering<in E>): Ordering<in E> {
     return ordering.reverse_pp_j2kt<E>()
    }
   }
  }
 
  @ObjCName("J2ktJ2ktDefinitelyNotNull_NullsFirstOrdering", swiftName = "J2ktDefinitelyNotNull_NullsFirstOrdering", exact = true)
- inner class NullsFirstOrdering<T> constructor(ordering: DefinitelyNotNull.Ordering<in T>): DefinitelyNotNull.Ordering<T?>() {
+ inner class NullsFirstOrdering<T> constructor(ordering: Ordering<in T>): Ordering<T?>() {
   @JvmField
-  internal val ordering_pp_j2kt: DefinitelyNotNull.Ordering<in T>
+  internal val ordering_pp_j2kt: Ordering<in T>
 
   init {
    this.ordering_pp_j2kt = ordering
@@ -94,7 +94,7 @@ open class DefinitelyNotNull {
    @ObjCName("copyOf")
    fun <E: Any> copyOf(
     @ObjCName("withJavaLangIterable", swiftName = "with") iterable: MutableIterable<E>
-   ): DefinitelyNotNull.ImmutableList<E> {
+   ): ImmutableList<E> {
     throw RuntimeException()
    }
 
@@ -102,8 +102,8 @@ open class DefinitelyNotNull {
    @ObjCName("copyOfNullableWithCorrectBounds")
    fun <E> copyOfNullableWithCorrectBounds(
     @ObjCName("withJavaLangIterable", swiftName = "with") iterable: MutableIterable<E & Any>
-   ): DefinitelyNotNull.ImmutableList<E & Any> {
-    return DefinitelyNotNull.ImmutableList.copyOf<E & Any>(iterable)
+   ): ImmutableList<E & Any> {
+    return ImmutableList.copyOf<E & Any>(iterable)
    }
   }
  }

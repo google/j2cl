@@ -35,15 +35,15 @@ open class NullabilityInferenceProblem8 {
   @JvmStatic
   @ObjCName("nonNullWithLowerBound")
   fun <I: Any, O: Any> nonNullWithLowerBound(
-   @ObjCName("withJ2ktNullabilityInferenceProblem8_Function", swiftName = "with") fn: NullabilityInferenceProblem8.Function<in I, O>
-  ): NullabilityInferenceProblem8.Function<I, O> {
+   @ObjCName("withJ2ktNullabilityInferenceProblem8_Function", swiftName = "with") fn: Function<in I, O>
+  ): Function<I, O> {
    throw RuntimeException()
   }
 
   @JvmStatic
   @ObjCName("acceptParameterized")
   fun acceptParameterized(
-   @ObjCName("withJ2ktNullabilityInferenceProblem8_Function", swiftName = "with") fn: NullabilityInferenceProblem8.Function<String, Any>
+   @ObjCName("withJ2ktNullabilityInferenceProblem8_Function", swiftName = "with") fn: Function<String, Any>
   ) {
    throw RuntimeException()
   }
@@ -51,11 +51,11 @@ open class NullabilityInferenceProblem8 {
   @JvmStatic
   @ObjCName("test")
   fun test(
-   @ObjCName("withJ2ktNullabilityInferenceProblem8_NullableSupplier", swiftName = "with") supplier: NullabilityInferenceProblem8.NullableSupplier<Any>
+   @ObjCName("withJ2ktNullabilityInferenceProblem8_NullableSupplier", swiftName = "with") supplier: NullableSupplier<Any>
   ) {
    NullabilityInferenceProblem8.acceptParameterized(
     NullabilityInferenceProblem8.nonNullWithLowerBound<String, Any>(
-     NullabilityInferenceProblem8.Function/* <in String, Any> */ { arg0: String ->
+     Function/* <in String, Any> */ { arg0: String ->
       return@Function supplier.get(arg0)!!
      },
     ),

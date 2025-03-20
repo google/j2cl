@@ -194,7 +194,7 @@ open class Main {
 
  @ObjCName("testJsFunction")
  open fun testJsFunction() {
-  val a: Main.AFunction = Main.AFunction()
+  val a: AFunction = AFunction()
   val o1: Any = Any()
   val o2: Any = Any()
   a.f1(0, o1, o2)
@@ -233,7 +233,7 @@ open class Main {
 
  @ObjCName("testGenericJsFunctionWithVarags")
  open fun <U> testGenericJsFunctionWithVarags() {
-  val function: Main.GenericFunction<U> = Main.GenericFunction<U> { n: U, param: Array<out U>? ->
+  val function: GenericFunction<U> = GenericFunction<U> { n: U, param: Array<out U>? ->
    val param_1: Array<U>? = param as Array<U>?
    return@GenericFunction param_1
   }
@@ -300,7 +300,7 @@ open class Main {
  }
 
  @ObjCName("J2ktJsvarargsMain_SubVarargsConstructorClass", swiftName = "JsvarargsMain_SubVarargsConstructorClass", exact = true)
- open class SubVarargsConstructorClass: Main.NativeObject {
+ open class SubVarargsConstructorClass: NativeObject {
   @JsConstructor
   constructor(
    @ObjCName("Int") i: Int,
@@ -345,7 +345,7 @@ open class Main {
  }
 
  @ObjCName("J2ktJsvarargsMain_AFunction", swiftName = "JsvarargsMain_AFunction", exact = true)
- class AFunction internal constructor(): Main.Function {
+ class AFunction internal constructor(): Function {
   override fun f1(i: Int, vararg args: Any?): Any? {
    val args_1: Array<Any?>? = args as Array<Any?>?
    return args_1!![i]

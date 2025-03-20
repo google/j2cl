@@ -135,7 +135,7 @@ open class Collections {
   @JvmStatic
   @ObjCName("testCollection_specialized")
   fun testCollection_specialized(
-   @ObjCName("withJ2ktCollections_CollectionOfString", swiftName = "with") collection: Collections.CollectionOfString
+   @ObjCName("withJ2ktCollections_CollectionOfString", swiftName = "with") collection: CollectionOfString
   ) {
    collection.java_contains(
     Collections.string(),
@@ -221,7 +221,7 @@ open class Collections {
   @JvmStatic
   @ObjCName("testList_specialized")
   fun testList_specialized(
-   @ObjCName("withJ2ktCollections_ListOfString", swiftName = "with") list: Collections.ListOfString
+   @ObjCName("withJ2ktCollections_ListOfString", swiftName = "with") list: ListOfString
   ) {
    list.java_addAll(
     0,
@@ -344,7 +344,7 @@ open class Collections {
   @JvmStatic
   @ObjCName("testMap_specialized")
   fun testMap_specialized(
-   @ObjCName("withJ2ktCollections_MapOfString", swiftName = "with") map: Collections.MapOfString
+   @ObjCName("withJ2ktCollections_MapOfString", swiftName = "with") map: MapOfString
   ) {
    map.java_get(
     Collections.string(),
@@ -522,9 +522,9 @@ open class Collections {
  }
 
  @ObjCName("J2ktJ2ktCollections_CustomCollectionDisambiguatingOverrides", swiftName = "J2ktCollections_CustomCollectionDisambiguatingOverrides", exact = true)
- open class CustomCollectionDisambiguatingOverrides<T>: Collections.CustomCollection<T>(), MutableCollectionJvm<T> {
+ open class CustomCollectionDisambiguatingOverrides<T>: CustomCollection<T>(), MutableCollectionJvm<T> {
   override fun spliterator(): Spliterator<T> {
-   return super<Collections.CustomCollection>.spliterator()
+   return super<CustomCollection>.spliterator()
   }
  }
 
@@ -654,11 +654,11 @@ open class Collections {
  }
 
  @ObjCName("J2ktJ2ktCollections_CustomMapDisambiguatingOverrides", swiftName = "J2ktCollections_CustomMapDisambiguatingOverrides", exact = true)
- abstract class CustomMapDisambiguatingOverrides<K, V>: Collections.CustomMap<K, V>(), MutableMapJvm<K, V> {
+ abstract class CustomMapDisambiguatingOverrides<K, V>: CustomMap<K, V>(), MutableMapJvm<K, V> {
   override fun getOrDefault(arg0: K, arg1: V): V {
    val arg1_1: V? = arg1
    val arg0_1: Any? = arg0
-   return super<Collections.CustomMap>.getOrDefault(
+   return super<CustomMap>.getOrDefault(
     arg0_1 as K,
     arg1_1 as V,
    ) as V
@@ -667,7 +667,7 @@ open class Collections {
   override fun remove(arg0: K, arg1: V): Boolean {
    val arg1_1: Any? = arg1
    val arg0_1: Any? = arg0
-   return super<Collections.CustomMap>.remove(
+   return super<CustomMap>.remove(
     arg0_1 as K,
     arg1_1 as V,
    )
@@ -675,7 +675,7 @@ open class Collections {
  }
 
  @ObjCName("J2ktJ2ktCollections_CustomMapReturnTypes", swiftName = "J2ktCollections_CustomMapReturnTypes", exact = true)
- open class CustomMapReturnTypes<K, V>: Collections.CustomMap<K, V>() {
+ open class CustomMapReturnTypes<K, V>: CustomMap<K, V>() {
   override fun getOrDefault(key: K, defaultValue: V): V {
    val defaultValue_1: V? = defaultValue
    val key_1: Any? = key
@@ -684,12 +684,12 @@ open class Collections {
  }
 
  @ObjCName("J2ktJ2ktCollections_CollectionOfString", swiftName = "J2ktCollections_CollectionOfString", exact = true)
- open class CollectionOfString: Collections.CustomCollection<String>() {
+ open class CollectionOfString: CustomCollection<String>() {
   @ObjCName("containsInteger")
   open fun containsInteger(
    @ObjCName("withJavaLangInteger", swiftName = "with") integer: Int
   ): Boolean {
-   return super<Collections.CustomCollection>.remove(
+   return super<CustomCollection>.remove(
     integer as Any? as String,
    )
   }
@@ -698,19 +698,19 @@ open class Collections {
   open fun removeInteger(
    @ObjCName("withJavaLangInteger", swiftName = "with") integer: Int
   ): Boolean {
-   return super<Collections.CustomCollection>.remove(
+   return super<CustomCollection>.remove(
     integer as Any? as String,
    )
   }
  }
 
  @ObjCName("J2ktJ2ktCollections_ListOfString", swiftName = "J2ktCollections_ListOfString", exact = true)
- open class ListOfString: Collections.CustomList<String>() {
+ open class ListOfString: CustomList<String>() {
   override fun indexOf(o: String): Int {
    val o_1: Any? = o
    var o_2: Any? = o_1
    o_2 = Collections.convert<Any?>(o_2)
-   return super<Collections.CustomList>.indexOf(
+   return super<CustomList>.indexOf(
     o_2 as String,
    )
   }
@@ -719,19 +719,19 @@ open class Collections {
    val o_1: Any? = o
    var o_2: Any? = o_1
    o_2 = Collections.convert<Any?>(o_2)
-   return super<Collections.CustomList>.lastIndexOf(
+   return super<CustomList>.lastIndexOf(
     o_2 as String,
    )
   }
  }
 
  @ObjCName("J2ktJ2ktCollections_MapOfString", swiftName = "J2ktCollections_MapOfString", exact = true)
- open class MapOfString: Collections.CustomMap<String, String>() {
+ open class MapOfString: CustomMap<String, String>() {
   override fun containsKey(key: String): Boolean {
    val key_1: Any? = key
    var key_2: Any? = key_1
    key_2 = Collections.convert<Any?>(key_2)
-   return super<Collections.CustomMap>.containsKey(
+   return super<CustomMap>.containsKey(
     key_2 as String,
    )
   }
@@ -740,7 +740,7 @@ open class Collections {
    val value_1: Any? = value
    var value_2: Any? = value_1
    value_2 = Collections.convert<Any?>(value_2)
-   return super<Collections.CustomMap>.containsValue(
+   return super<CustomMap>.containsValue(
     value_2 as String,
    )
   }
@@ -749,7 +749,7 @@ open class Collections {
    val key_1: Any? = key
    var key_2: Any? = key_1
    key_2 = Collections.convert<Any?>(key_2)
-   return super<Collections.CustomMap>.remove(
+   return super<CustomMap>.remove(
     key_2 as String,
    )
   }
@@ -761,7 +761,7 @@ open class Collections {
    var value_2: Any? = value_1
    key_2 = Collections.convert<Any?>(key_2)
    value_2 = Collections.convert<Any?>(value_2)
-   return super<Collections.CustomMap>.remove(
+   return super<CustomMap>.remove(
     key_2 as String,
     value_2 as String,
    )
@@ -771,7 +771,7 @@ open class Collections {
    val key_1: Any? = key
    var key_2: Any? = key_1
    key_2 = Collections.convert<Any?>(key_2)
-   return super<Collections.CustomMap>.get(
+   return super<CustomMap>.get(
     key_2 as String,
    )
   }
@@ -781,7 +781,7 @@ open class Collections {
    val key_1: Any? = key
    var key_2: Any? = key_1
    key_2 = Collections.convert<Any?>(key_2)
-   return super<Collections.CustomMap>.getOrDefault(
+   return super<CustomMap>.getOrDefault(
     key_2 as String,
     defaultValue_1 as String,
    ) as String

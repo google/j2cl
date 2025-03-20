@@ -30,11 +30,11 @@ import kotlin.native.ObjCName
 @ObjCName("J2ktBridgemethodsBridgeMethodDefault", swiftName = "BridgemethodsBridgeMethodDefault", exact = true)
 open class BridgeMethodDefault internal constructor() {
  init {
-  val jj: BridgeMethodDefault.JJ = BridgeMethodDefault.C()
+  val jj: JJ = C()
   jj.m(
    Any(),
   )
-  val i: BridgeMethodDefault.I<Any?> = jj
+  val i: I<Any?> = jj
   i.m(
    Any(),
   )
@@ -49,24 +49,24 @@ open class BridgeMethodDefault internal constructor() {
  }
 
  @ObjCName("J2ktBridgemethodsBridgeMethodDefault_II", swiftName = "BridgemethodsBridgeMethodDefault_II", exact = true)
- interface II: BridgeMethodDefault.I<String?> {
+ interface II: I<String?> {
   override fun m(s: String?) {}
  }
 
  @ObjCName("J2ktBridgemethodsBridgeMethodDefault_A", swiftName = "BridgemethodsBridgeMethodDefault_A", exact = true)
- open class A internal constructor(): BridgeMethodDefault.II
+ open class A internal constructor(): II
 
  @ObjCName("J2ktBridgemethodsBridgeMethodDefault_JJ", swiftName = "BridgemethodsBridgeMethodDefault_JJ", exact = true)
- interface JJ: BridgeMethodDefault.I<Any?> {
+ interface JJ: I<Any?> {
   @JsMethod
   override fun m(o: Any?) {}
  }
 
  @ObjCName("J2ktBridgemethodsBridgeMethodDefault_B", swiftName = "BridgemethodsBridgeMethodDefault_B", exact = true)
- open class B internal constructor(): BridgeMethodDefault.JJ
+ open class B internal constructor(): JJ
 
  @ObjCName("J2ktBridgemethodsBridgeMethodDefault_C", swiftName = "BridgemethodsBridgeMethodDefault_C", exact = true)
- open class C internal constructor(): BridgeMethodDefault.B() {
+ open class C internal constructor(): B() {
   override fun m(o: Any?) {}
  }
 }

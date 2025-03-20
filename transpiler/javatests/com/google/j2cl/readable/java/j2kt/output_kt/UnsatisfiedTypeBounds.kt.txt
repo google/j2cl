@@ -28,7 +28,7 @@ import kotlin.native.ObjCName
 @ObjCName("J2ktJ2ktUnsatisfiedTypeBounds", swiftName = "J2ktUnsatisfiedTypeBounds", exact = true)
 open class UnsatisfiedTypeBounds internal constructor() {
  @ObjCName("J2ktJ2ktUnsatisfiedTypeBounds_Foo", swiftName = "J2ktUnsatisfiedTypeBounds_Foo", exact = true)
- fun interface Foo<T: UnsatisfiedTypeBounds.Foo<T>> {
+ fun interface Foo<T: Foo<T>> {
   @ObjCName("get")
   fun get(): T
  }
@@ -37,8 +37,8 @@ open class UnsatisfiedTypeBounds internal constructor() {
  interface Command
 
  @ObjCName("J2ktJ2ktUnsatisfiedTypeBounds_FooCommand", swiftName = "J2ktUnsatisfiedTypeBounds_FooCommand", exact = true)
- open class FooCommand internal constructor(): UnsatisfiedTypeBounds.Foo<UnsatisfiedTypeBounds.FooCommand>, UnsatisfiedTypeBounds.Command {
-  override fun get(): UnsatisfiedTypeBounds.FooCommand {
+ open class FooCommand internal constructor(): Foo<FooCommand>, Command {
+  override fun get(): FooCommand {
    return this
   }
  }

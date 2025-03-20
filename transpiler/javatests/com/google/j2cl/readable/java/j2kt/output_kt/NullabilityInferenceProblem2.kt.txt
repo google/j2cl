@@ -37,7 +37,7 @@ open class NullabilityInferenceProblem2 {
  abstract inner class Test<T> {
   @ObjCName("foo")
   open fun <E: T> foo(
-   @ObjCName("withJ2ktNullabilityInferenceProblem2_Supplier", swiftName = "with") supplier: NullabilityInferenceProblem2.Supplier<E>
+   @ObjCName("withJ2ktNullabilityInferenceProblem2_Supplier", swiftName = "with") supplier: Supplier<E>
   ): E {
    val local: E? = supplier.get()
    return this.foo<E>(

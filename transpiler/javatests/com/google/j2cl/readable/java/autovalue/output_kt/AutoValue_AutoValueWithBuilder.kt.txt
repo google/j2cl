@@ -81,12 +81,12 @@ class AutoValue_AutoValueWithBuilder: AutoValueWithBuilder {
   return h___
  }
 
- override fun toBuilder(): AutoValueWithBuilder.Builder? {
-  return AutoValue_AutoValueWithBuilder.Builder(this@AutoValue_AutoValueWithBuilder)
+ override fun toBuilder(): autovalue.AutoValueWithBuilder.Builder? {
+  return Builder(this@AutoValue_AutoValueWithBuilder)
  }
 
  @ObjCName("J2ktAutovalueAutoValue_AutoValueWithBuilder_Builder", swiftName = "AutovalueAutoValue_AutoValueWithBuilder_Builder", exact = true)
- class Builder: AutoValueWithBuilder.Builder {
+ class Builder: autovalue.AutoValueWithBuilder.Builder {
   private var booleanField: Boolean = false
 
   private var nullableField: Double? = null
@@ -101,7 +101,7 @@ class AutoValue_AutoValueWithBuilder: AutoValueWithBuilder {
    this.set___0 = 1.toByte()
   }
 
-  override fun setBooleanField(booleanField: Boolean): AutoValueWithBuilder.Builder? {
+  override fun setBooleanField(booleanField: Boolean): autovalue.AutoValueWithBuilder.Builder? {
    this.booleanField = booleanField
    this.set___0 = this.set___0.toInt().or(
     1.toByte().toInt(),
@@ -109,7 +109,7 @@ class AutoValue_AutoValueWithBuilder: AutoValueWithBuilder {
    return this
   }
 
-  override fun setNullableField(nullableField: Double?): AutoValueWithBuilder.Builder? {
+  override fun setNullableField(nullableField: Double?): autovalue.AutoValueWithBuilder.Builder? {
    this.nullableField = nullableField
    return this
   }

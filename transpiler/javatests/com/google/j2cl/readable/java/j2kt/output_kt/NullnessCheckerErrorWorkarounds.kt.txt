@@ -30,13 +30,13 @@ open class NullnessCheckerErrorWorkarounds internal constructor() {
  @ObjCName("J2ktJ2ktNullnessCheckerErrorWorkaroundsCompanion", swiftName = "J2ktNullnessCheckerErrorWorkaroundsCompanion", exact = true)
  companion object {
   @JvmStatic
-  internal fun testNullableAnnotation_pp_j2kt(table: NullnessCheckerErrorWorkarounds.Table<out NullnessCheckerErrorWorkarounds.Cell<*>>) {
-   val cell: NullnessCheckerErrorWorkarounds.Cell<*>? = table.get() as NullnessCheckerErrorWorkarounds.Cell<*>?
+  internal fun testNullableAnnotation_pp_j2kt(table: Table<out Cell<*>>) {
+   val cell: Cell<*>? = table.get() as Cell<*>?
   }
 
   @JvmStatic
-  internal fun testSuppressWarnings_pp_j2kt(table: NullnessCheckerErrorWorkarounds.Table<out NullnessCheckerErrorWorkarounds.Cell<*>>) {
-   val cell: NullnessCheckerErrorWorkarounds.Cell<*>? = table.get() as NullnessCheckerErrorWorkarounds.Cell<*>?
+  internal fun testSuppressWarnings_pp_j2kt(table: Table<out Cell<*>>) {
+   val cell: Cell<*>? = table.get() as Cell<*>?
   }
  }
 
@@ -47,8 +47,8 @@ open class NullnessCheckerErrorWorkarounds internal constructor() {
  }
 
  @ObjCName("J2ktJ2ktNullnessCheckerErrorWorkarounds_Cell", swiftName = "J2ktNullnessCheckerErrorWorkarounds_Cell", exact = true)
- interface Cell<C: NullnessCheckerErrorWorkarounds.Cell<C>>
+ interface Cell<C: Cell<C>>
 
  @ObjCName("J2ktJ2ktNullnessCheckerErrorWorkarounds_Table", swiftName = "J2ktNullnessCheckerErrorWorkarounds_Table", exact = true)
- fun interface Table<C: NullnessCheckerErrorWorkarounds.Cell<C>>: NullnessCheckerErrorWorkarounds.Array<C>
+ fun interface Table<C: Cell<C>>: Array<C>
 }

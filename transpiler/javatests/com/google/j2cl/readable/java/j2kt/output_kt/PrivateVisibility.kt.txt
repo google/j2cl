@@ -33,8 +33,8 @@ class PrivateVisibility {
  companion object {
   @JvmStatic
   @ObjCName("testOuterConstructorReference")
-  fun testOuterConstructorReference(): PrivateVisibility.OuterConstructorReference? {
-   return PrivateVisibility.OuterConstructorReference()
+  fun testOuterConstructorReference(): OuterConstructorReference? {
+   return OuterConstructorReference()
   }
  }
 
@@ -46,8 +46,8 @@ class PrivateVisibility {
   companion object {
    @JvmStatic
    @ObjCName("testInnerConstructorReference")
-   fun testInnerConstructorReference(): PrivateVisibility.InnerConstructorReference? {
-    return PrivateVisibility.InnerConstructorReference()
+   fun testInnerConstructorReference(): InnerConstructorReference? {
+    return InnerConstructorReference()
    }
   }
  }
@@ -61,10 +61,10 @@ class PrivateVisibility {
  class Outer {
   @ObjCName("testMemberReference")
   fun testMemberReference() {
-   PrivateVisibility.Outer.outerField = 0
-   PrivateVisibility.Outer.outerMethod()
-   PrivateVisibility.Outer.Inner.innerField_outerReference_private_2 = 0
-   PrivateVisibility.Outer.Inner.innerMethod_outerReference_private_2()
+   Outer.outerField = 0
+   Outer.outerMethod()
+   Inner.innerField_outerReference_private_2 = 0
+   Inner.innerMethod_outerReference_private_2()
   }
 
   @ObjCName("J2ktJ2ktPrivateVisibility_OuterCompanion", swiftName = "J2ktPrivateVisibility_OuterCompanion", exact = true)
@@ -79,10 +79,10 @@ class PrivateVisibility {
   class Inner {
    @ObjCName("testMemberReference")
    fun testMemberReference() {
-    PrivateVisibility.Outer.outerField = 0
-    PrivateVisibility.Outer.outerMethod()
-    PrivateVisibility.Outer.Inner.innerField_innerReference = 0
-    PrivateVisibility.Outer.Inner.innerMethod_innerReference()
+    Outer.outerField = 0
+    Outer.outerMethod()
+    Inner.innerField_innerReference = 0
+    Inner.innerMethod_innerReference()
    }
 
    @ObjCName("J2ktJ2ktPrivateVisibility_Outer_InnerCompanion", swiftName = "J2ktPrivateVisibility_Outer_InnerCompanion", exact = true)

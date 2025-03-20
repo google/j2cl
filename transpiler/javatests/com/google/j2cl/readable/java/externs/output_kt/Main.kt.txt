@@ -19,6 +19,8 @@
 package externs
 
 import javaemul.lang.*
+import externs.Main.TopLevelExtern.Inner
+import externs.Main.TopLevelExtern.InnerExtern
 import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsPackage
 import jsinterop.annotations.JsProperty
@@ -38,18 +40,18 @@ import kotlin.native.ObjCName
 open class Main {
  @JvmField
  @ObjCName("aFoo_")
- var aFoo: Main.FooOverlay? = null
+ var aFoo: FooOverlay? = null
 
  @JvmField
- internal var innerExtern_pp_externs: Main.TopLevelExtern.InnerExtern? = null
+ internal var innerExtern_pp_externs: InnerExtern? = null
 
  @JvmField
- internal var inner_pp_externs: Main.TopLevelExtern.Inner? = null
+ internal var inner_pp_externs: Inner? = null
 
  @ObjCName("J2ktExternsMainCompanion", swiftName = "ExternsMainCompanion", exact = true)
  companion object {
   @JvmStatic
-  private fun testFooOverlay(fooOverlay: Main.FooOverlay?): Boolean {
+  private fun testFooOverlay(fooOverlay: FooOverlay?): Boolean {
    return fooOverlay!!.getFoo()!!.equals("Hello")
   }
 
@@ -64,10 +66,10 @@ open class Main {
   ) {
    val args_1: Array<String?>? = args as Array<String?>?
    Main.testFooOverlay(
-    Main.FooImpl() as Any as Main.FooOverlay,
+    FooImpl() as Any as FooOverlay,
    )
    Main.useDirectlyAsFoo(
-    Main.FooImpl(),
+    FooImpl(),
    )
   }
  }

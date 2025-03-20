@@ -92,7 +92,7 @@ open class Main {
 
  @ObjCName("m4")
  open fun m4(
-  @ObjCName("withJsnonnullMain_MyFunction", swiftName = "with") f: Main.MyFunction
+  @ObjCName("withJsnonnullMain_MyFunction", swiftName = "with") f: MyFunction
  ) {}
 
  @ObjCName("J2ktJsnonnullMain_MyFunction", swiftName = "JsnonnullMain_MyFunction", exact = true)
@@ -119,7 +119,7 @@ open class Main {
  }
 
  @ObjCName("J2ktJsnonnullMain_NonNullableStringSubNullableComparator", swiftName = "JsnonnullMain_NonNullableStringSubNullableComparator", exact = true)
- open class NonNullableStringSubNullableComparator: Main.NullableStringComparator() {
+ open class NonNullableStringSubNullableComparator: NullableStringComparator() {
   override fun compare(a: String?, b: String?): Int {
    return 0
   }

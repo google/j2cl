@@ -58,22 +58,22 @@ open class ForEachStatement {
  private fun testMulticatch() {
   try {
    throw java.lang.Exception()
-  } catch (e: ForEachStatement.Exception1) {
+  } catch (e: Exception1) {
    for (o in (e as MutableIterable<Number?>?)!!) {}
-  } catch (e: ForEachStatement.Exception2) {
+  } catch (e: Exception2) {
    for (o in (e as MutableIterable<Number?>?)!!) {}
-  } catch (e_1: ForEachStatement.Exception3) {
+  } catch (e_1: Exception3) {
    for (o_1 in (e_1 as MutableIterable<Any?>?)!!) {}
-  } catch (e_1: ForEachStatement.Exception4) {
+  } catch (e_1: Exception4) {
    for (o_1 in (e_1 as MutableIterable<Any?>?)!!) {}
   }
   try {
    throw java.lang.Exception()
-  } catch (e_2: ForEachStatement.Exception2) {
+  } catch (e_2: Exception2) {
    for (o_2 in (e_2 as MutableIterable<Int?>?)!!) {
     val o_3: Long = o_2!!.toInt().toLong()
    }
-  } catch (e_2: ForEachStatement.Exception3) {
+  } catch (e_2: Exception3) {
    for (o_2 in (e_2 as MutableIterable<Int?>?)!!) {
     val o_3: Long = o_2!!.toInt().toLong()
    }
@@ -83,7 +83,7 @@ open class ForEachStatement {
  private fun <T: MutableIterable<String?>?, U: T, V: MutableIterable<Int?>?> testTypeVariable() {
   val iterable: U? = null
   for (s in iterable!!) {}
-  val anotherIterable: ForEachStatement.IterableReturningTypeVariable<*, *>? = null
+  val anotherIterable: IterableReturningTypeVariable<*, *>? = null
   for (s_1 in anotherIterable!!) {
    val s_2: Int = s_1!!.toInt()
   }
@@ -121,7 +121,7 @@ open class ForEachStatement {
   }
  }
 
- private fun testOverriddenIterator(i: ForEachStatement.StringIterable?) {
+ private fun testOverriddenIterator(i: StringIterable?) {
   for (s in i!!) {}
  }
 
@@ -162,7 +162,7 @@ open class ForEachStatement {
 
  @ObjCName("J2ktForeachstatementForEachStatement_StringIterable", swiftName = "ForeachstatementForEachStatement_StringIterable", exact = true)
  fun interface StringIterable: MutableIterableJvm<String?> {
-  override fun iterator(): ForEachStatement.StringIterator
+  override fun iterator(): StringIterator
  }
 
  @ObjCName("J2ktForeachstatementForEachStatement_StringIterator", swiftName = "ForeachstatementForEachStatement_StringIterator", exact = true)

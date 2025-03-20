@@ -45,12 +45,12 @@ open class AbstractMethodOverrideDefault {
  }
 
  @ObjCName("J2ktAbstractmethodoverridedefaultAbstractMethodOverrideDefault_A", swiftName = "AbstractmethodoverridedefaultAbstractMethodOverrideDefault_A", exact = true)
- abstract class A internal constructor(): AbstractMethodOverrideDefault.I {
+ abstract class A internal constructor(): I {
   abstract override fun foo()
  }
 
  @ObjCName("J2ktAbstractmethodoverridedefaultAbstractMethodOverrideDefault_B", swiftName = "AbstractmethodoverridedefaultAbstractMethodOverrideDefault_B", exact = true)
- abstract class B internal constructor(): AbstractMethodOverrideDefault.A(), AbstractMethodOverrideDefault.J {
+ abstract class B internal constructor(): A(), J {
   override fun bar() {
    if (false) {
     this.bar()
@@ -61,11 +61,11 @@ open class AbstractMethodOverrideDefault {
  }
 
  @ObjCName("J2ktAbstractmethodoverridedefaultAbstractMethodOverrideDefault_C", swiftName = "AbstractmethodoverridedefaultAbstractMethodOverrideDefault_C", exact = true)
- open class C internal constructor(): AbstractMethodOverrideDefault.A() {
+ open class C internal constructor(): A() {
   override fun foo() {}
 
   override fun bar() {
-   super<AbstractMethodOverrideDefault.A>.bar()
+   super<A>.bar()
   }
  }
 }

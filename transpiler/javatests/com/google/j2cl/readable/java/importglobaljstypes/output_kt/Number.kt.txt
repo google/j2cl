@@ -37,8 +37,8 @@ import kotlin.native.ObjCName
 open class Number {
  @ObjCName("testJsDocForLiteralType")
  open fun testJsDocForLiteralType(
-  @ObjCName("withImportglobaljstypesNumber_MyLiteralType", swiftName = "with") a: Number.MyLiteralType?
- ): Number.MyLiteralType? {
+  @ObjCName("withImportglobaljstypesNumber_MyLiteralType", swiftName = "with") a: MyLiteralType?
+ ): MyLiteralType? {
   return a
  }
 
@@ -61,7 +61,7 @@ open class Number {
 
   @JvmStatic
   @JsMethod(name = "Array", namespace = JsPackage.GLOBAL)
-  private external fun <T> createArray(): Number.NativeArray<T>?
+  private external fun <T> createArray(): NativeArray<T>?
 
   @JvmStatic
   private fun getStringAt(index: Int): String? {
@@ -69,7 +69,7 @@ open class Number {
   }
 
   @JvmStatic
-  private fun getArrayLength(array: Number.NativeArray<*>?): Int {
+  private fun getArrayLength(array: NativeArray<*>?): Int {
    return array!!.getLength()
   }
  }

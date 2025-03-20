@@ -40,15 +40,15 @@ open class NullabilityInferenceProblem10 {
   @ObjCName("J2ktJ2ktNullabilityInferenceProblem10_InNullMarkedCompanion", swiftName = "J2ktNullabilityInferenceProblem10_InNullMarkedCompanion", exact = true)
   companion object {
    @JvmStatic
-   internal fun observeNullable_pp_j2kt(foo: NullabilityInferenceProblem10.InNullMarked.Foo?): NullabilityInferenceProblem10.InNullMarked.Future<Void?> {
+   internal fun observeNullable_pp_j2kt(foo: Foo?): Future<Void?> {
     throw RuntimeException()
    }
 
    @JvmStatic
-   internal fun test_pp_j2kt(lazyObservable: NullabilityInferenceProblem10.Lazy<NullabilityInferenceProblem10.InNullMarked.Observable<NullabilityInferenceProblem10.InNullMarked.Foo>>) {
+   internal fun test_pp_j2kt(lazyObservable: Lazy<Observable<Foo>>) {
     lazyObservable.get()!!.addObserver(
-     NullabilityInferenceProblem10.InNullMarked.Observer<NullabilityInferenceProblem10.InNullMarked.Foo> { arg0: NullabilityInferenceProblem10.InNullMarked.Foo ->
-      return@Observer NullabilityInferenceProblem10.InNullMarked.observeNullable_pp_j2kt(arg0)
+     Observer<Foo> { arg0: Foo ->
+      return@Observer InNullMarked.observeNullable_pp_j2kt(arg0)
      },
     )
    }
@@ -64,7 +64,7 @@ open class NullabilityInferenceProblem10 {
   fun interface Observable<V> {
    @ObjCName("addObserver")
    fun addObserver(
-    @ObjCName("withJ2ktNullabilityInferenceProblem10_InNullMarked_Observer", swiftName = "with") observer: NullabilityInferenceProblem10.InNullMarked.Observer<V>
+    @ObjCName("withJ2ktNullabilityInferenceProblem10_InNullMarked_Observer", swiftName = "with") observer: Observer<V>
    )
   }
 
@@ -73,7 +73,7 @@ open class NullabilityInferenceProblem10 {
    @ObjCName("observe")
    fun observe(
     @ObjCName("withId") v: V
-   ): NullabilityInferenceProblem10.InNullMarked.Future<Void?>
+   ): Future<Void?>
   }
  }
 }

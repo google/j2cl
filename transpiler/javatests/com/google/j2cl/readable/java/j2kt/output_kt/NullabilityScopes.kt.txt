@@ -19,6 +19,9 @@
 package j2kt
 
 import javaemul.lang.*
+import j2kt.NullabilityScopes.NullMarkedScope.Array
+import j2kt.NullabilityScopes.NullMarkedScope.Cell
+import j2kt.NullabilityScopes.NullMarkedScope.Table
 import kotlin.Any
 import kotlin.OptIn
 import kotlin.String
@@ -32,48 +35,48 @@ open class NullabilityScopes {
  open class NullMarkedScope {
   @ObjCName("testNullMarkedWildcardConstructorRaw")
   open fun testNullMarkedWildcardConstructorRaw(
-   @ObjCName("withJ2ktNullabilityScopes_NullMarkedScope_Foo", swiftName = "with") nullMarkedFoo: NullabilityScopes.NullMarkedScope.Foo<String>
+   @ObjCName("withJ2ktNullabilityScopes_NullMarkedScope_Foo", swiftName = "with") nullMarkedFoo: Foo<String>
   ) {
-   NullabilityScopes.NullMarkedScope.Foo<Any?>(
-    nullMarkedFoo as NullabilityScopes.NullMarkedScope.Foo<Any?>,
+   Foo<Any?>(
+    nullMarkedFoo as Foo<Any?>,
    )
   }
 
   @ObjCName("testNullMarkedWildcardConstructorImplicitTypeArguments")
   open fun testNullMarkedWildcardConstructorImplicitTypeArguments(
-   @ObjCName("withJ2ktNullabilityScopes_NullMarkedScope_Foo", swiftName = "with") nullMarkedFoo: NullabilityScopes.NullMarkedScope.Foo<String>
+   @ObjCName("withJ2ktNullabilityScopes_NullMarkedScope_Foo", swiftName = "with") nullMarkedFoo: Foo<String>
   ) {
-   NullabilityScopes.NullMarkedScope.Foo<String>(nullMarkedFoo)
+   Foo<String>(nullMarkedFoo)
   }
 
   @ObjCName("testNullMarkedWildcardConstructorExplicitTypeArguments")
   open fun testNullMarkedWildcardConstructorExplicitTypeArguments(
-   @ObjCName("withJ2ktNullabilityScopes_NullMarkedScope_Foo", swiftName = "with") nullMarkedFoo: NullabilityScopes.NullMarkedScope.Foo<String>
+   @ObjCName("withJ2ktNullabilityScopes_NullMarkedScope_Foo", swiftName = "with") nullMarkedFoo: Foo<String>
   ) {
-   NullabilityScopes.NullMarkedScope.Foo<String>(nullMarkedFoo)
+   Foo<String>(nullMarkedFoo)
   }
 
   @ObjCName("testNonNullMarkedWildcardConstructorRaw")
   open fun testNonNullMarkedWildcardConstructorRaw(
-   @ObjCName("withJ2ktNullabilityScopes_NonNullMarkedScope_Foo", swiftName = "with") nonNullMarkedFoo: NullabilityScopes.NonNullMarkedScope.Foo<String>
+   @ObjCName("withJ2ktNullabilityScopes_NonNullMarkedScope_Foo", swiftName = "with") nonNullMarkedFoo: j2kt.NullabilityScopes.NonNullMarkedScope.Foo<String>
   ) {
-   NullabilityScopes.NonNullMarkedScope.Foo<Any?>(
-    nonNullMarkedFoo as NullabilityScopes.NonNullMarkedScope.Foo<Any?>?,
+   j2kt.NullabilityScopes.NonNullMarkedScope.Foo<Any?>(
+    nonNullMarkedFoo as j2kt.NullabilityScopes.NonNullMarkedScope.Foo<Any?>?,
    )
   }
 
   @ObjCName("testNonNullMarkedWildcardConstructorImplicitTypeArguemnts")
   open fun testNonNullMarkedWildcardConstructorImplicitTypeArguemnts(
-   @ObjCName("withJ2ktNullabilityScopes_NonNullMarkedScope_Foo", swiftName = "with") nonNullMarkedFoo: NullabilityScopes.NonNullMarkedScope.Foo<String>
+   @ObjCName("withJ2ktNullabilityScopes_NonNullMarkedScope_Foo", swiftName = "with") nonNullMarkedFoo: j2kt.NullabilityScopes.NonNullMarkedScope.Foo<String>
   ) {
-   NullabilityScopes.NonNullMarkedScope.Foo<String?>(nonNullMarkedFoo)
+   j2kt.NullabilityScopes.NonNullMarkedScope.Foo<String?>(nonNullMarkedFoo)
   }
 
   @ObjCName("testNonNullMarkedWildcardConstructorExplicitTypeArguments")
   open fun testNonNullMarkedWildcardConstructorExplicitTypeArguments(
-   @ObjCName("withJ2ktNullabilityScopes_NonNullMarkedScope_Foo", swiftName = "with") nonNullMarkedFoo: NullabilityScopes.NonNullMarkedScope.Foo<String>
+   @ObjCName("withJ2ktNullabilityScopes_NonNullMarkedScope_Foo", swiftName = "with") nonNullMarkedFoo: j2kt.NullabilityScopes.NonNullMarkedScope.Foo<String>
   ) {
-   NullabilityScopes.NonNullMarkedScope.Foo<String?>(nonNullMarkedFoo)
+   j2kt.NullabilityScopes.NonNullMarkedScope.Foo<String?>(nonNullMarkedFoo)
   }
 
   @ObjCName("J2ktJ2ktNullabilityScopes_NullMarkedScope_Foo", swiftName = "J2ktNullabilityScopes_NullMarkedScope_Foo", exact = true)
@@ -81,7 +84,7 @@ open class NullabilityScopes {
    constructor()
 
    constructor(
-    @ObjCName("J2ktNullabilityScopes_NullMarkedScope_Foo") foo: NullabilityScopes.NullMarkedScope.Foo<out K>
+    @ObjCName("J2ktNullabilityScopes_NullMarkedScope_Foo") foo: Foo<out K>
    )
   }
 
@@ -89,12 +92,12 @@ open class NullabilityScopes {
   interface Array<T>
 
   @ObjCName("J2ktJ2ktNullabilityScopes_NullMarkedScope_Cell", swiftName = "J2ktNullabilityScopes_NullMarkedScope_Cell", exact = true)
-  interface Cell<T: NullabilityScopes.NullMarkedScope.Cell<T>>
+  interface Cell<T: Cell<T>>
 
   @ObjCName("J2ktJ2ktNullabilityScopes_NullMarkedScope_Table", swiftName = "J2ktNullabilityScopes_NullMarkedScope_Table", exact = true)
-  fun interface Table<T: NullabilityScopes.NullMarkedScope.Cell<T>> {
+  fun interface Table<T: Cell<T>> {
    @ObjCName("getNullableCells")
-   fun getNullableCells(): NullabilityScopes.NullMarkedScope.Array<T?>
+   fun getNullableCells(): Array<T?>
   }
  }
 
@@ -102,59 +105,59 @@ open class NullabilityScopes {
  open class NonNullMarkedScope {
   @ObjCName("testNullMarkedWildcardConstructorRaw")
   open fun testNullMarkedWildcardConstructorRaw(
-   @ObjCName("withJ2ktNullabilityScopes_NullMarkedScope_Foo", swiftName = "with") nullMarkedFoo: NullabilityScopes.NullMarkedScope.Foo<String?>?
+   @ObjCName("withJ2ktNullabilityScopes_NullMarkedScope_Foo", swiftName = "with") nullMarkedFoo: j2kt.NullabilityScopes.NullMarkedScope.Foo<String?>?
   ) {
-   NullabilityScopes.NullMarkedScope.Foo<Any?>(
-    nullMarkedFoo!! as NullabilityScopes.NullMarkedScope.Foo<Any?>,
+   j2kt.NullabilityScopes.NullMarkedScope.Foo<Any?>(
+    nullMarkedFoo!! as j2kt.NullabilityScopes.NullMarkedScope.Foo<Any?>,
    )
   }
 
   @ObjCName("testNullMarkedWildcardConstructorImplicitTypeArguments")
   open fun testNullMarkedWildcardConstructorImplicitTypeArguments(
-   @ObjCName("withJ2ktNullabilityScopes_NullMarkedScope_Foo", swiftName = "with") nullMarkedFoo: NullabilityScopes.NullMarkedScope.Foo<String?>?
+   @ObjCName("withJ2ktNullabilityScopes_NullMarkedScope_Foo", swiftName = "with") nullMarkedFoo: j2kt.NullabilityScopes.NullMarkedScope.Foo<String?>?
   ) {
-   NullabilityScopes.NullMarkedScope.Foo<String>(
-    nullMarkedFoo!! as NullabilityScopes.NullMarkedScope.Foo<out String>,
+   j2kt.NullabilityScopes.NullMarkedScope.Foo<String>(
+    nullMarkedFoo!! as j2kt.NullabilityScopes.NullMarkedScope.Foo<out String>,
    )
   }
 
   @ObjCName("testNullMarkedWildcardConstructorExplicitTypeArguments")
   open fun testNullMarkedWildcardConstructorExplicitTypeArguments(
-   @ObjCName("withJ2ktNullabilityScopes_NullMarkedScope_Foo", swiftName = "with") nullMarkedFoo: NullabilityScopes.NullMarkedScope.Foo<String?>?
+   @ObjCName("withJ2ktNullabilityScopes_NullMarkedScope_Foo", swiftName = "with") nullMarkedFoo: j2kt.NullabilityScopes.NullMarkedScope.Foo<String?>?
   ) {
-   NullabilityScopes.NullMarkedScope.Foo<String>(
-    nullMarkedFoo!! as NullabilityScopes.NullMarkedScope.Foo<out String>,
+   j2kt.NullabilityScopes.NullMarkedScope.Foo<String>(
+    nullMarkedFoo!! as j2kt.NullabilityScopes.NullMarkedScope.Foo<out String>,
    )
   }
 
   @ObjCName("testNonNullMarkedWildcardConstructorRaw")
   open fun testNonNullMarkedWildcardConstructorRaw(
-   @ObjCName("withJ2ktNullabilityScopes_NonNullMarkedScope_Foo", swiftName = "with") nonNullMarkedFoo: NullabilityScopes.NonNullMarkedScope.Foo<String?>?
+   @ObjCName("withJ2ktNullabilityScopes_NonNullMarkedScope_Foo", swiftName = "with") nonNullMarkedFoo: Foo<String?>?
   ) {
-   NullabilityScopes.NonNullMarkedScope.Foo<Any?>(
-    nonNullMarkedFoo as NullabilityScopes.NonNullMarkedScope.Foo<Any?>?,
+   Foo<Any?>(
+    nonNullMarkedFoo as Foo<Any?>?,
    )
   }
 
   @ObjCName("testNonNullMarkedWildcardConstructorImplicitTypeArguments")
   open fun testNonNullMarkedWildcardConstructorImplicitTypeArguments(
-   @ObjCName("withJ2ktNullabilityScopes_NonNullMarkedScope_Foo", swiftName = "with") nonNullMarkedFoo: NullabilityScopes.NonNullMarkedScope.Foo<String?>?
+   @ObjCName("withJ2ktNullabilityScopes_NonNullMarkedScope_Foo", swiftName = "with") nonNullMarkedFoo: Foo<String?>?
   ) {
-   NullabilityScopes.NonNullMarkedScope.Foo<String?>(nonNullMarkedFoo)
+   Foo<String?>(nonNullMarkedFoo)
   }
 
   @ObjCName("testNonNullMarkedWildcardConstructorExplicitTypeArguments")
   open fun testNonNullMarkedWildcardConstructorExplicitTypeArguments(
-   @ObjCName("withJ2ktNullabilityScopes_NonNullMarkedScope_Foo", swiftName = "with") nonNullMarkedFoo: NullabilityScopes.NonNullMarkedScope.Foo<String?>?
+   @ObjCName("withJ2ktNullabilityScopes_NonNullMarkedScope_Foo", swiftName = "with") nonNullMarkedFoo: Foo<String?>?
   ) {
-   NullabilityScopes.NonNullMarkedScope.Foo<String?>(nonNullMarkedFoo)
+   Foo<String?>(nonNullMarkedFoo)
   }
 
   @ObjCName("testRecursiveWildcardConversion")
   open fun testRecursiveWildcardConversion(
-   @ObjCName("withJ2ktNullabilityScopes_NullMarkedScope_Table", swiftName = "with") table: NullabilityScopes.NullMarkedScope.Table<out NullabilityScopes.NullMarkedScope.Cell<*>>?
-  ): NullabilityScopes.NullMarkedScope.Array<out NullabilityScopes.NullMarkedScope.Cell<*>?>? {
-   return table!!.getNullableCells() as NullabilityScopes.NullMarkedScope.Array<out NullabilityScopes.NullMarkedScope.Cell<*>?>?
+   @ObjCName("withJ2ktNullabilityScopes_NullMarkedScope_Table", swiftName = "with") table: Table<out Cell<*>>?
+  ): Array<out Cell<*>?>? {
+   return table!!.getNullableCells() as Array<out Cell<*>?>?
   }
 
   @ObjCName("J2ktJ2ktNullabilityScopes_NonNullMarkedScope_Foo", swiftName = "J2ktNullabilityScopes_NonNullMarkedScope_Foo", exact = true)
@@ -162,7 +165,7 @@ open class NullabilityScopes {
    constructor()
 
    constructor(
-    @ObjCName("J2ktNullabilityScopes_NonNullMarkedScope_Foo") foo: NullabilityScopes.NonNullMarkedScope.Foo<out K>?
+    @ObjCName("J2ktNullabilityScopes_NonNullMarkedScope_Foo") foo: Foo<out K>?
    )
   }
  }

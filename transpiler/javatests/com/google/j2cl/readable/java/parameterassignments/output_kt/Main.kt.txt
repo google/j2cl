@@ -61,19 +61,19 @@ open class Main {
  }
 
  @JvmField
- internal val fn_pp_parameterassignments: Main.Fn? = Main.Fn { nonFinal: Int, implicitFinal: Int ->
+ internal val fn_pp_parameterassignments: Fn? = Fn { nonFinal: Int, implicitFinal: Int ->
   var nonFinal_1: Int = nonFinal
   nonFinal_1 = nonFinal_1 + implicitFinal
   return@Fn nonFinal_1
  }
 
  @JvmField
- internal val fnPrimitiveVarargs_pp_parameterassignments: Main.FnPrimitiveVarargs? = Main.FnPrimitiveVarargs { i: Int, `is`: IntArray? ->
+ internal val fnPrimitiveVarargs_pp_parameterassignments: FnPrimitiveVarargs? = FnPrimitiveVarargs { i: Int, `is`: IntArray? ->
   `is`!![0] = `is`!![1]
  }
 
  @JvmField
- internal val fnObjectVarargs_pp_parameterassignments: Main.FnObjectVarargs? = Main.FnObjectVarargs { o: Any?, os: Array<*>? ->
+ internal val fnObjectVarargs_pp_parameterassignments: FnObjectVarargs? = FnObjectVarargs { o: Any?, os: Array<*>? ->
   val os_1: Array<Any?>? = os as Array<Any?>?
   os_1!![0] = os_1!![1]
  }

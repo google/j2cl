@@ -32,23 +32,23 @@ open class TypeArgumentsInference {
  companion object {
   @JvmStatic
   @ObjCName("wildcardPair")
-  fun <K> wildcardPair(): TypeArgumentsInference.Pair<K, *> {
-   return TypeArgumentsInference.Pair<K, Any>()
+  fun <K> wildcardPair(): Pair<K, *> {
+   return Pair<K, Any>()
   }
 
   @JvmStatic
   @ObjCName("pairIdentity")
   fun <K, V> pairIdentity(
-   @ObjCName("withNullabilityDefaultnotnullableTypeArgumentsInference_Pair", swiftName = "with") pair: TypeArgumentsInference.Pair<K, V>
-  ): TypeArgumentsInference.Pair<K, V> {
+   @ObjCName("withNullabilityDefaultnotnullableTypeArgumentsInference_Pair", swiftName = "with") pair: Pair<K, V>
+  ): Pair<K, V> {
    return pair
   }
 
   @JvmStatic
   @ObjCName("wildcardPairAndIdentity")
-  fun <K> wildcardPairAndIdentity(): TypeArgumentsInference.Pair<K, *> {
+  fun <K> wildcardPairAndIdentity(): Pair<K, *> {
    return TypeArgumentsInference.pairIdentity<K, Any>(
-    TypeArgumentsInference.wildcardPair<K>() as TypeArgumentsInference.Pair<K, Any>,
+    TypeArgumentsInference.wildcardPair<K>() as Pair<K, Any>,
    )
   }
  }

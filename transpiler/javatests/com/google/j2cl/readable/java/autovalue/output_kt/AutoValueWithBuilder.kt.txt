@@ -19,7 +19,6 @@
 package autovalue
 
 import javaemul.lang.*
-import autovalue.AutoValue_AutoValueWithBuilder
 import javaemul.lang.annotations.WasAutoValue
 import kotlin.Boolean
 import kotlin.Double
@@ -39,13 +38,13 @@ abstract class AutoValueWithBuilder {
  abstract fun getNullableField(): Double?
 
  @ObjCName("toBuilder")
- abstract fun toBuilder(): AutoValueWithBuilder.Builder?
+ abstract fun toBuilder(): Builder?
 
  @ObjCName("J2ktAutovalueAutoValueWithBuilderCompanion", swiftName = "AutovalueAutoValueWithBuilderCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun create_pp_autovalue(): AutoValueWithBuilder? {
-   return AutoValue_AutoValueWithBuilder.Builder().setBooleanField(true)!!.build()
+   return autovalue.AutoValue_AutoValueWithBuilder.Builder().setBooleanField(true)!!.build()
   }
  }
 
@@ -55,12 +54,12 @@ abstract class AutoValueWithBuilder {
   @ObjCName("setBooleanField")
   abstract fun setBooleanField(
    @ObjCName("withBoolean") x: Boolean
-  ): AutoValueWithBuilder.Builder?
+  ): Builder?
 
   @ObjCName("setNullableField")
   abstract fun setNullableField(
    @ObjCName("withJavaLangDouble", swiftName = "with") x: Double?
-  ): AutoValueWithBuilder.Builder?
+  ): Builder?
 
   @ObjCName("build")
   abstract fun build(): AutoValueWithBuilder?

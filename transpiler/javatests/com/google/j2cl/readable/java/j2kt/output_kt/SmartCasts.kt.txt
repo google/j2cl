@@ -67,119 +67,119 @@ open class SmartCasts {
   @JvmStatic
   @ObjCName("testParameterReference")
   fun <T: Any> testParameterReference(
-   @ObjCName("withJ2ktSmartCasts_Foo", swiftName = "with") foo: SmartCasts.Foo<T>
+   @ObjCName("withJ2ktSmartCasts_Foo", swiftName = "with") foo: Foo<T>
   ) {
    SmartCasts.acceptFooOfObject(
-    foo as SmartCasts.Foo<Any>,
+    foo as Foo<Any>,
    )
    SmartCasts.acceptFooOfT<T>(
-    foo as SmartCasts.Foo<T>,
+    foo as Foo<T>,
    )
   }
 
   @JvmStatic
   @ObjCName("testFinalVariableReference")
   fun <T: Any> testFinalVariableReference(
-   @ObjCName("withJ2ktSmartCasts_Foo", swiftName = "with") foo: SmartCasts.Foo<T>
+   @ObjCName("withJ2ktSmartCasts_Foo", swiftName = "with") foo: Foo<T>
   ) {
-   val localFoo: SmartCasts.Foo<T> = foo
+   val localFoo: Foo<T> = foo
    SmartCasts.acceptFooOfObject(
-    (localFoo as SmartCasts.Foo<Any>?)!!,
+    (localFoo as Foo<Any>?)!!,
    )
    SmartCasts.acceptFooOfT<T>(
-    localFoo as SmartCasts.Foo<T>,
+    localFoo as Foo<T>,
    )
   }
 
   @JvmStatic
   @ObjCName("testNonFinalVariableReference")
   fun <T: Any> testNonFinalVariableReference(
-   @ObjCName("withJ2ktSmartCasts_Foo", swiftName = "with") foo: SmartCasts.Foo<T>,
-   @ObjCName("withJ2ktSmartCasts_Foo", swiftName = "with") foo2: SmartCasts.Foo<T>
+   @ObjCName("withJ2ktSmartCasts_Foo", swiftName = "with") foo: Foo<T>,
+   @ObjCName("withJ2ktSmartCasts_Foo", swiftName = "with") foo2: Foo<T>
   ) {
-   var localFoo: SmartCasts.Foo<T> = foo
+   var localFoo: Foo<T> = foo
    localFoo = foo2
    SmartCasts.acceptFooOfObject(
-    (localFoo as SmartCasts.Foo<Any>?)!!,
+    (localFoo as Foo<Any>?)!!,
    )
    SmartCasts.acceptFooOfT<T>(
-    localFoo as SmartCasts.Foo<T>,
+    localFoo as Foo<T>,
    )
   }
 
   @JvmStatic
   @ObjCName("testArguments")
   fun <T: Any> testArguments(
-   @ObjCName("withJ2ktSmartCasts_Foo", swiftName = "with") foo: SmartCasts.Foo<T>
+   @ObjCName("withJ2ktSmartCasts_Foo", swiftName = "with") foo: Foo<T>
   ) {
    SmartCasts.acceptFooOfObjectAndT<T>(
-    foo as SmartCasts.Foo<Any>,
-    foo as SmartCasts.Foo<T>,
+    foo as Foo<Any>,
+    foo as Foo<T>,
    )
   }
 
   @JvmStatic
   @ObjCName("testIfStatement")
   fun <T: Any> testIfStatement(
-   @ObjCName("withJ2ktSmartCasts_Foo", swiftName = "with") foo: SmartCasts.Foo<T>,
+   @ObjCName("withJ2ktSmartCasts_Foo", swiftName = "with") foo: Foo<T>,
    @ObjCName("withBoolean") condition: Boolean
   ) {
    if (condition) {
-    SmartCasts.acceptT<SmartCasts.Foo<Any>>(
-     foo as SmartCasts.Foo<Any>,
+    SmartCasts.acceptT<Foo<Any>>(
+     foo as Foo<Any>,
     )
    }
    SmartCasts.acceptFooOfT<T>(
-    foo as SmartCasts.Foo<T>,
+    foo as Foo<T>,
    )
   }
 
   @JvmStatic
   @ObjCName("testFinalFieldAccess")
   fun <T: Any> testFinalFieldAccess(
-   @ObjCName("withJ2ktSmartCasts_Container", swiftName = "with") container: SmartCasts.Container<T>
+   @ObjCName("withJ2ktSmartCasts_Container", swiftName = "with") container: Container<T>
   ) {
    SmartCasts.acceptFooOfObject(
-    container.foo as SmartCasts.Foo<Any>,
+    container.foo as Foo<Any>,
    )
    SmartCasts.acceptFooOfT<T>(
-    container.foo as SmartCasts.Foo<T>,
+    container.foo as Foo<T>,
    )
   }
 
   @JvmStatic
   @ObjCName("testFinalFieldAccessThroughCastVariable")
   fun <T: Any> testFinalFieldAccessThroughCastVariable(
-   @ObjCName("withJ2ktSmartCasts_Container", swiftName = "with") container: SmartCasts.Container<T>
+   @ObjCName("withJ2ktSmartCasts_Container", swiftName = "with") container: Container<T>
   ) {
    SmartCasts.acceptFooOfObject(
-    (container as SmartCasts.Container<Any>).foo,
+    (container as Container<Any>).foo,
    )
    SmartCasts.acceptFooOfT<T>(
-    (container as SmartCasts.Container<T>).foo,
+    (container as Container<T>).foo,
    )
   }
 
   @JvmStatic
   @ObjCName("testNonFinalFieldAccess")
   fun <T: Any> testNonFinalFieldAccess(
-   @ObjCName("withJ2ktSmartCasts_Container", swiftName = "with") container: SmartCasts.Container<T>
+   @ObjCName("withJ2ktSmartCasts_Container", swiftName = "with") container: Container<T>
   ) {
    SmartCasts.acceptFooOfObject(
-    container.nonFinalFoo as SmartCasts.Foo<Any>,
+    container.nonFinalFoo as Foo<Any>,
    )
    SmartCasts.acceptFooOfT<T>(
-    container.nonFinalFoo as SmartCasts.Foo<T>,
+    container.nonFinalFoo as Foo<T>,
    )
   }
 
   @JvmStatic
   @ObjCName("testInvocation")
   fun <T: Any> testInvocation(
-   @ObjCName("withJ2ktSmartCasts_Container", swiftName = "with") container: SmartCasts.Container<T>
+   @ObjCName("withJ2ktSmartCasts_Container", swiftName = "with") container: Container<T>
   ) {
    SmartCasts.acceptFooOfObject(
-    container.getFoo() as SmartCasts.Foo<Any>,
+    container.getFoo() as Foo<Any>,
    )
    SmartCasts.acceptFooOfT<T>(
     container.getFoo(),
@@ -189,13 +189,13 @@ open class SmartCasts {
   @JvmStatic
   @ObjCName("testTypeArgumentInference")
   fun <T: Any> testTypeArgumentInference(
-   @ObjCName("withJ2ktSmartCasts_Foo", swiftName = "with") foo: SmartCasts.Foo<T>
+   @ObjCName("withJ2ktSmartCasts_Foo", swiftName = "with") foo: Foo<T>
   ) {
    SmartCasts.acceptFooOfObject(
-    foo as SmartCasts.Foo<Any>,
+    foo as Foo<Any>,
    )
    SmartCasts.acceptT<T>(
-    (foo as SmartCasts.Foo<T>).get(),
+    (foo as Foo<T>).get(),
    )
   }
 
@@ -229,20 +229,20 @@ open class SmartCasts {
   @JvmStatic
   @ObjCName("acceptFooOfObject")
   fun acceptFooOfObject(
-   @ObjCName("withJ2ktSmartCasts_Foo", swiftName = "with") foo: SmartCasts.Foo<Any>
+   @ObjCName("withJ2ktSmartCasts_Foo", swiftName = "with") foo: Foo<Any>
   ) {}
 
   @JvmStatic
   @ObjCName("acceptFooOfT")
   fun <T: Any> acceptFooOfT(
-   @ObjCName("withJ2ktSmartCasts_Foo", swiftName = "with") foo: SmartCasts.Foo<T>
+   @ObjCName("withJ2ktSmartCasts_Foo", swiftName = "with") foo: Foo<T>
   ) {}
 
   @JvmStatic
   @ObjCName("acceptFooOfObjectAndT")
   fun <T: Any> acceptFooOfObjectAndT(
-   @ObjCName("withJ2ktSmartCasts_Foo", swiftName = "with") foo: SmartCasts.Foo<Any>,
-   @ObjCName("withJ2ktSmartCasts_Foo", swiftName = "with") foo2: SmartCasts.Foo<T>
+   @ObjCName("withJ2ktSmartCasts_Foo", swiftName = "with") foo: Foo<Any>,
+   @ObjCName("withJ2ktSmartCasts_Foo", swiftName = "with") foo2: Foo<T>
   ) {}
 
   @JvmStatic
@@ -272,10 +272,10 @@ open class SmartCasts {
   @ObjCName("testThisReference")
   fun testThisReference() {
    SmartCasts.acceptFooOfObject(
-    this as SmartCasts.Foo<Any>,
+    this as Foo<Any>,
    )
    SmartCasts.acceptFooOfT<T>(
-    this as SmartCasts.Foo<T>,
+    this as Foo<T>,
    )
   }
  }
@@ -284,75 +284,75 @@ open class SmartCasts {
  open class Container<T: Any> {
   @JvmField
   @ObjCName("foo_")
-  val foo: SmartCasts.Foo<T>
+  val foo: Foo<T>
 
   @JvmField
   @ObjCName("nonFinalFoo_")
-  var nonFinalFoo: SmartCasts.Foo<T>
+  var nonFinalFoo: Foo<T>
 
   constructor(
-   @ObjCName("J2ktSmartCasts_Foo") foo: SmartCasts.Foo<T>
+   @ObjCName("J2ktSmartCasts_Foo") foo: Foo<T>
   ) {
    this.foo = foo
    this.nonFinalFoo = foo
   }
 
   @ObjCName("getFoo")
-  open fun getFoo(): SmartCasts.Foo<T> {
+  open fun getFoo(): Foo<T> {
    return this.foo
   }
 
   @ObjCName("testImplicitThisReference")
   open fun testImplicitThisReference() {
    SmartCasts.acceptFooOfObject(
-    this.foo as SmartCasts.Foo<Any>,
+    this.foo as Foo<Any>,
    )
    SmartCasts.acceptFooOfT<T>(
-    this.foo as SmartCasts.Foo<T>,
+    this.foo as Foo<T>,
    )
   }
 
   @ObjCName("testExplicitThisReference")
   open fun testExplicitThisReference() {
    SmartCasts.acceptFooOfObject(
-    this.foo as SmartCasts.Foo<Any>,
+    this.foo as Foo<Any>,
    )
    SmartCasts.acceptFooOfT<T>(
-    this.foo as SmartCasts.Foo<T>,
+    this.foo as Foo<T>,
    )
   }
 
   @ObjCName("testMixedThisReference")
   open fun testMixedThisReference() {
    SmartCasts.acceptFooOfObject(
-    this.foo as SmartCasts.Foo<Any>,
+    this.foo as Foo<Any>,
    )
    SmartCasts.acceptFooOfT<T>(
-    this.foo as SmartCasts.Foo<T>,
+    this.foo as Foo<T>,
    )
   }
 
   @ObjCName("J2ktJ2ktSmartCasts_Container_SubContainer", swiftName = "J2ktSmartCasts_Container_SubContainer", exact = true)
-  open class SubContainer<T: Any>: SmartCasts.Container<T> {
-   internal constructor(foo: SmartCasts.Foo<T>): super(foo)
+  open class SubContainer<T: Any>: Container<T> {
+   internal constructor(foo: Foo<T>): super(foo)
 
    @ObjCName("testSuperReference")
    open fun testSuperReference() {
     SmartCasts.acceptFooOfObject(
-     super.foo as SmartCasts.Foo<Any>,
+     super.foo as Foo<Any>,
     )
     SmartCasts.acceptFooOfT<T>(
-     super.foo as SmartCasts.Foo<T>,
+     super.foo as Foo<T>,
     )
    }
 
    @ObjCName("testSuperAndThisReference")
    open fun testSuperAndThisReference() {
     SmartCasts.acceptFooOfObject(
-     super.foo as SmartCasts.Foo<Any>,
+     super.foo as Foo<Any>,
     )
     SmartCasts.acceptFooOfT<T>(
-     this.foo as SmartCasts.Foo<T>,
+     this.foo as Foo<T>,
     )
    }
   }

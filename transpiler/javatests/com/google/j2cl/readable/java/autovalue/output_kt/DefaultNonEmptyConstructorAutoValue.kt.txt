@@ -19,7 +19,6 @@
 package autovalue
 
 import javaemul.lang.*
-import autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue
 import javaemul.lang.annotations.WasAutoValue
 import kotlin.Boolean
 import kotlin.Int
@@ -45,7 +44,7 @@ abstract class DefaultNonEmptyConstructorAutoValue {
  companion object {
   @JvmStatic
   internal fun create_pp_autovalue(): DefaultNonEmptyConstructorAutoValue? {
-   return AutoValue_DefaultNonEmptyConstructorAutoValue.Builder().setBooleanField(true)!!.build()
+   return autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder().setBooleanField(true)!!.build()
   }
  }
 
@@ -61,7 +60,7 @@ abstract class DefaultNonEmptyConstructorAutoValue {
   @ObjCName("setBooleanField")
   abstract fun setBooleanField(
    @ObjCName("withBoolean") x: Boolean
-  ): DefaultNonEmptyConstructorAutoValue.Builder?
+  ): Builder?
 
   @ObjCName("build")
   abstract fun build(): DefaultNonEmptyConstructorAutoValue?

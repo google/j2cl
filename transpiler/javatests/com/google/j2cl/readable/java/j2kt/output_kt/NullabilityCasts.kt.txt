@@ -31,10 +31,10 @@ import kotlin.native.ObjCName
 
 @ObjCName("J2ktJ2ktNullabilityCasts", swiftName = "J2ktNullabilityCasts", exact = true)
 open class NullabilityCasts {
- internal open fun testCapturesInLambdas_pp_j2kt(condition: Boolean, async: NullabilityCasts.Async<String?>) {
+ internal open fun testCapturesInLambdas_pp_j2kt(condition: Boolean, async: Async<String?>) {
   NullabilityCasts.tranformAsync_pp_j2kt<String?, String?>(
    async,
-   NullabilityCasts.AsyncFunction/* <in String?, out String?> */ { it: String? ->
+   AsyncFunction/* <in String?, out String?> */ { it: String? ->
     if (condition) {
      return@AsyncFunction async
     } else {
@@ -48,7 +48,7 @@ open class NullabilityCasts {
  @ObjCName("J2ktJ2ktNullabilityCastsCompanion", swiftName = "J2ktNullabilityCastsCompanion", exact = true)
  companion object {
   @JvmStatic
-  internal fun <I, O> tranformAsync_pp_j2kt(async: NullabilityCasts.Async<I>, function: NullabilityCasts.AsyncFunction<in I, out O>): NullabilityCasts.Async<O> {
+  internal fun <I, O> tranformAsync_pp_j2kt(async: Async<I>, function: AsyncFunction<in I, out O>): Async<O> {
    throw RuntimeException()
   }
  }
@@ -58,7 +58,7 @@ open class NullabilityCasts {
   @ObjCName("apply")
   fun apply(
    @ObjCName("withId") i: I
-  ): NullabilityCasts.Async<O>
+  ): Async<O>
  }
 
  @ObjCName("J2ktJ2ktNullabilityCasts_Async", swiftName = "J2ktNullabilityCasts_Async", exact = true)

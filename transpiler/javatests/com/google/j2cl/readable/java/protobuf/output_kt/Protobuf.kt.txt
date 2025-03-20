@@ -30,12 +30,13 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 import protobuf.MyEnum
 import protobuf.MyMessage
+import protobuf.MyMessage.Builder
 
 @ObjCName("J2ktProtobufProtobuf", swiftName = "ProtobufProtobuf", exact = true)
 open class Protobuf {
  @ObjCName("test")
  open fun test() {
-  val builder: MyMessage.Builder = MyMessage.newBuilder()
+  val builder: Builder = MyMessage.newBuilder()
   builder.foo
   builder.setFoo(1)
   builder.fooBar

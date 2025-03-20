@@ -28,31 +28,31 @@ import kotlin.native.ObjCName
 @ObjCName("J2ktJ2ktNullabilityInferenceProblem3", swiftName = "J2ktNullabilityInferenceProblem3", exact = true)
 open class NullabilityInferenceProblem3 {
  @ObjCName("J2ktJ2ktNullabilityInferenceProblem3_Generic", swiftName = "J2ktNullabilityInferenceProblem3_Generic", exact = true)
- abstract class Generic<T: NullabilityInferenceProblem3.Generic<T>> {
+ abstract class Generic<T: Generic<T>> {
   @ObjCName("concat")
   open fun concat(
-   @ObjCName("withJ2ktNullabilityInferenceProblem3_Generic", swiftName = "with") generic: NullabilityInferenceProblem3.Generic<*>
+   @ObjCName("withJ2ktNullabilityInferenceProblem3_Generic", swiftName = "with") generic: Generic<*>
   ): T {
    throw RuntimeException()
   }
 
   @ObjCName("toConcrete")
-  open fun toConcrete(): NullabilityInferenceProblem3.Concrete {
+  open fun toConcrete(): Concrete {
    throw RuntimeException()
   }
  }
 
  @ObjCName("J2ktJ2ktNullabilityInferenceProblem3_Concrete", swiftName = "J2ktNullabilityInferenceProblem3_Concrete", exact = true)
- class Concrete: NullabilityInferenceProblem3.Generic<NullabilityInferenceProblem3.Concrete> {
-  private val delegate: NullabilityInferenceProblem3.Generic<*>
+ class Concrete: Generic<Concrete> {
+  private val delegate: Generic<*>
 
   constructor(
-   @ObjCName("J2ktNullabilityInferenceProblem3_Generic") delegate: NullabilityInferenceProblem3.Generic<*>
+   @ObjCName("J2ktNullabilityInferenceProblem3_Generic") delegate: Generic<*>
   ) {
    this.delegate = delegate
   }
 
-  override fun concat(generic: NullabilityInferenceProblem3.Generic<*>): NullabilityInferenceProblem3.Concrete {
+  override fun concat(generic: Generic<*>): Concrete {
    return this.delegate.concat(generic).toConcrete()
   }
  }

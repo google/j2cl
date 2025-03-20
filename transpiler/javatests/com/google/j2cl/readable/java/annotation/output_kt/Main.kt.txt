@@ -38,24 +38,24 @@ open class Main {
  @ObjCName("J2ktAnnotationMainCompanion", swiftName = "AnnotationMainCompanion", exact = true)
  companion object {
   @JvmStatic
-  internal fun test_pp_annotation(foo: Main.Foo?) {
-   val booleanConstant: Boolean = Main.Foo.BOOLEAN_CONSTANT
-   val intConstant: Int = Main.Foo.INT_CONSTANT
-   val stringConstant: String = Main.Foo.STRING_CONSTANT
+  internal fun test_pp_annotation(foo: Foo?) {
+   val booleanConstant: Boolean = Foo.BOOLEAN_CONSTANT
+   val intConstant: Int = Foo.INT_CONSTANT
+   val stringConstant: String = Foo.STRING_CONSTANT
    val booleanValue: Boolean = foo!!.booleanValue
    val intValue: Int = foo!!.intValue
    val stringValue: String = foo!!.stringValue
-   val enumValue: Main.SomeEnum = foo!!.enumValue
-   val annotationValue: Main.Zoo = foo!!.annotationValue
+   val enumValue: SomeEnum = foo!!.enumValue
+   val annotationValue: Zoo = foo!!.annotationValue
    val booleanArray: BooleanArray = foo!!.booleanArray
    val intArray: IntArray = foo!!.intArray
    val stringArray: Array<String?> = foo!!.stringArray as Array<String?>
-   val enumArray: Array<Main.SomeEnum?> = foo!!.enumArray as Array<Main.SomeEnum?>
-   val annotationArray: Array<Main.Zoo?> = foo!!.annotationArray as Array<Main.Zoo?>
+   val enumArray: Array<SomeEnum?> = foo!!.enumArray as Array<SomeEnum?>
+   val annotationArray: Array<Zoo?> = foo!!.annotationArray as Array<Zoo?>
   }
 
   @JvmStatic
-  internal fun testClassValues_pp_annotation(foo: Main.Foo?) {}
+  internal fun testClassValues_pp_annotation(foo: Foo?) {}
 
   @JvmStatic
   internal fun test_pp_annotation(classImplementingAnnotation: Main.ClassImplementingAnnotation?): Annotation? {
@@ -63,7 +63,7 @@ open class Main {
   }
 
   @JvmStatic
-  internal fun test_pp_annotation(interfaceExtendingAnnotation: Main.InterfaceExtendingAnnotation?): Annotation? {
+  internal fun test_pp_annotation(interfaceExtendingAnnotation: InterfaceExtendingAnnotation?): Annotation? {
    return interfaceExtendingAnnotation
   }
  }
@@ -83,9 +83,9 @@ open class Main {
   @ObjCName("wildcardClassValue")
   val wildcardClassValue: KClass<out KClass<*>>,
   @ObjCName("enumValue")
-  val enumValue: Main.SomeEnum,
+  val enumValue: SomeEnum,
   @ObjCName("annotationValue")
-  val annotationValue: Main.Zoo,
+  val annotationValue: Zoo,
   @ObjCName("booleanArray")
   val booleanArray: BooleanArray,
   @ObjCName("intArray")
@@ -95,9 +95,9 @@ open class Main {
   @ObjCName("classArray")
   val classArray: Array<KClass<*>>,
   @ObjCName("enumArray")
-  val enumArray: Array<Main.SomeEnum>,
+  val enumArray: Array<SomeEnum>,
   @ObjCName("annotationArray")
-  val annotationArray: Array<Main.Zoo>) {
+  val annotationArray: Array<Zoo>) {
   @ObjCName("J2ktAnnotationMain_FooCompanion", swiftName = "AnnotationMain_FooCompanion", exact = true)
   companion object {
    @ObjCName("BOOLEAN_CONSTANT_")

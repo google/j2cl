@@ -18,47 +18,177 @@ package j2kt;
 public class ImportResolution {
   static class Parent {
     class String {
-      void local() {}
+      void parentStringMethod() {}
+
+      void testJavaLangString(java.lang.String string) {
+        string.trim();
+      }
+
+      void testParentString(String string) {
+        string.parentStringMethod();
+      }
+
+      void testChildString(Child.String string) {
+        string.childStringMethod();
+      }
+
+      void testSiblingParentString(SiblingParent.String string) {
+        string.siblingParentStringMethod();
+      }
+
+      void testGenericString(Generic<?>.String string) {
+        string.genericMethod();
+      }
+    }
+
+    void testJavaLangString(java.lang.String string) {
+      string.trim();
+    }
+
+    void testParentString(String string) {
+      string.parentStringMethod();
+    }
+
+    void testChildString(Child.String string) {
+      string.childStringMethod();
+    }
+
+    void testSiblingParentString(SiblingParent.String string) {
+      string.siblingParentStringMethod();
+    }
+
+    void testGenericString(Generic<?>.String string) {
+      string.genericMethod();
+    }
+  }
+
+  static class Child extends Parent {
+    class String {
+      void childStringMethod() {}
 
       void testJavaLang(java.lang.String string) {
         string.trim();
       }
 
-      void testLocal(String string) {
-        string.local();
+      void testParentString(Parent.String string) {
+        string.parentStringMethod();
+      }
+
+      void testChildString(String string) {
+        string.childStringMethod();
+      }
+
+      void testSiblingParentString(SiblingParent.String string) {
+        string.siblingParentStringMethod();
+      }
+
+      void testGenericString(Generic<?>.String string) {
+        string.genericMethod();
       }
     }
 
-    void testJavaLang(java.lang.String string) {
-      string.trim();
-    }
-
-    void testLocal(String string) {
-      string.local();
-    }
-  }
-
-  static class Child extends Parent {
     @Override
-    void testJavaLang(java.lang.String string) {
+    void testJavaLangString(java.lang.String string) {
       string.trim();
     }
 
     @Override
-    void testLocal(String string) {
-      string.local();
+    void testParentString(Parent.String string) {
+      string.parentStringMethod();
+    }
+
+    @Override
+    void testChildString(String string) {
+      string.childStringMethod();
+    }
+
+    @Override
+    void testSiblingParentString(SiblingParent.String string) {
+      string.siblingParentStringMethod();
+    }
+
+    @Override
+    void testGenericString(Generic<?>.String string) {
+      string.genericMethod();
     }
   }
 
   static class GrandChild extends Child {
     @Override
-    void testJavaLang(java.lang.String string) {
+    void testJavaLangString(java.lang.String string) {
       string.trim();
     }
 
     @Override
-    void testLocal(String string) {
-      string.local();
+    void testParentString(Parent.String string) {
+      string.parentStringMethod();
+    }
+
+    @Override
+    void testChildString(Child.String string) {
+      string.childStringMethod();
+    }
+
+    @Override
+    void testSiblingParentString(SiblingParent.String string) {
+      string.siblingParentStringMethod();
+    }
+
+    @Override
+    void testGenericString(Generic<?>.String string) {
+      string.genericMethod();
+    }
+  }
+
+  static class SiblingParent {
+    class String {
+      void siblingParentStringMethod() {}
+    }
+
+    void testJavaLangString(java.lang.String string) {
+      string.trim();
+    }
+
+    void testParentString(Parent.String string) {
+      string.parentStringMethod();
+    }
+
+    void testChildString(Child.String string) {
+      string.childStringMethod();
+    }
+
+    void testSiblingParentString(String string) {
+      string.siblingParentStringMethod();
+    }
+
+    void testGenericString(Generic<?>.String string) {
+      string.genericMethod();
+    }
+  }
+
+  static class Generic<Parent> {
+    class String {
+      void genericMethod() {}
+    }
+
+    void testJavaLangString(java.lang.String string) {
+      string.trim();
+    }
+
+    void testParentString(ImportResolution.Parent.String string) {
+      string.parentStringMethod();
+    }
+
+    void testChildString(Child.String string) {
+      string.childStringMethod();
+    }
+
+    void testSiblingParentString(SiblingParent.String string) {
+      string.siblingParentStringMethod();
+    }
+
+    void testGenericString(String string) {
+      string.genericMethod();
     }
   }
 }

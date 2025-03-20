@@ -35,7 +35,7 @@ open class Cloneables {
   @ObjCName("clone")
   @Throws(CloneNotSupportedException::class)
   open fun clone(): Any {
-   return Cloneables.WithoutCloneable()
+   return WithoutCloneable()
   }
  }
 
@@ -43,23 +43,23 @@ open class Cloneables {
  open class WithCloneable: Cloneable {
   @Throws(CloneNotSupportedException::class)
   override fun clone(): Any {
-   return Cloneables.WithCloneable()
+   return WithCloneable()
   }
  }
 
  @ObjCName("J2ktCloneableCloneables_WithoutCloneableChild", swiftName = "CloneableCloneables_WithoutCloneableChild", exact = true)
- class WithoutCloneableChild: Cloneables.WithoutCloneable() {
+ class WithoutCloneableChild: WithoutCloneable() {
   @Throws(CloneNotSupportedException::class)
   override fun clone(): Any {
-   return Cloneables.WithoutCloneableChild()
+   return WithoutCloneableChild()
   }
  }
 
  @ObjCName("J2ktCloneableCloneables_WithCloneableChild", swiftName = "CloneableCloneables_WithCloneableChild", exact = true)
- class WithCloneableChild: Cloneables.WithCloneable() {
+ class WithCloneableChild: WithCloneable() {
   @Throws(CloneNotSupportedException::class)
   override fun clone(): Any {
-   return Cloneables.WithCloneableChild()
+   return WithCloneableChild()
   }
  }
 }

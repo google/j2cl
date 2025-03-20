@@ -58,7 +58,7 @@ open class Main {
  }
 
  @JvmField
- internal var f_pp_jsoptional: Main.Function? = Main.Function { s: String?, varargs: Array<*>? ->
+ internal var f_pp_jsoptional: Function? = Function { s: String?, varargs: Array<*>? ->
   val varargs_1: Array<Any?>? = varargs as Array<Any?>?
   return@Function s
  }
@@ -70,13 +70,13 @@ open class Main {
 
  @ObjCName("testFunction")
  open fun testFunction(
-  @ObjCName("withJsoptionalMain_Function", swiftName = "with") f: Main.Function?
+  @ObjCName("withJsoptionalMain_Function", swiftName = "with") f: Function?
  ) {}
 
  @ObjCName("testOptionalFunction")
  @JsMethod
  open fun testOptionalFunction(
-  @ObjCName("withJsoptionalMain_Function", swiftName = "with") @JsOptional f: Main.Function?
+  @ObjCName("withJsoptionalMain_Function", swiftName = "with") @JsOptional f: Function?
  ) {}
 
  @ObjCName("J2ktJsoptionalMainCompanion", swiftName = "JsoptionalMainCompanion", exact = true)
@@ -113,7 +113,7 @@ open class Main {
  }
 
  @ObjCName("J2ktJsoptionalMain_AFunction", swiftName = "JsoptionalMain_AFunction", exact = true)
- class AFunction internal constructor(): Main.Function {
+ class AFunction internal constructor(): Function {
   override fun f1(@JsOptional i: String?, vararg args: Any?): Any? {
    val args_1: Array<Any?>? = args as Array<Any?>?
    return args_1!![0]
@@ -132,7 +132,7 @@ open class Main {
 
  @ObjCName("J2ktJsoptionalMain_TemplatedSubtype", swiftName = "JsoptionalMain_TemplatedSubtype", exact = true)
  @JsType
- open class TemplatedSubtype<T: String?> internal constructor(): Main.I<T> {
+ open class TemplatedSubtype<T: String?> internal constructor(): I<T> {
   override fun m(t: T, @JsOptional o: Any?) {}
  }
 
@@ -140,12 +140,12 @@ open class Main {
  @JsType
  open inner class SpecializedSubtype constructor(
   @ObjCName("Id") @JsOptional a: Any?
- ): Main.I<String?> {
+ ): I<String?> {
   override fun m(t: String?, @JsOptional o: Any?) {}
  }
 
  @ObjCName("J2ktJsoptionalMain_NonJsTypeSubtype", swiftName = "JsoptionalMain_NonJsTypeSubtype", exact = true)
- open class NonJsTypeSubtype internal constructor(): Main.I<String?> {
+ open class NonJsTypeSubtype internal constructor(): I<String?> {
   override fun m(t: String?, @JsOptional o: Any?) {}
  }
 }

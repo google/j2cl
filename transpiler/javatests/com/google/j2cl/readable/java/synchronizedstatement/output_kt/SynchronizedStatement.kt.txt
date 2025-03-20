@@ -39,7 +39,7 @@ open class SynchronizedStatement: J2ktMonitor() {
 
  private val j2ktMonitor: J2ktMonitor? = J2ktMonitor()
 
- private val customMonitor: J2ktMonitor? = SynchronizedStatement.CustomMonitor()
+ private val customMonitor: J2ktMonitor? = CustomMonitor()
 
  @ObjCName("testSynchronizedOnThis")
  open fun testSynchronizedOnThis() {

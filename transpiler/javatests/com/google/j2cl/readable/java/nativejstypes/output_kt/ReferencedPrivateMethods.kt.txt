@@ -36,8 +36,8 @@ open class ReferencedPrivateMethods internal constructor() {
  open class Inner {
   @ObjCName("getInstance")
   open fun getInstance(): Int {
-   val t: ReferencedPrivateMethods.NativeReferencedPrivateMethods = ReferencedPrivateMethods.NativeReferencedPrivateMethods()
-   return t.x_private_2 + ReferencedPrivateMethods.NativeReferencedPrivateMethods.s_private_2 + t.getInstance_private_2() + ReferencedPrivateMethods.NativeReferencedPrivateMethods.getStatic_private_2()
+   val t: NativeReferencedPrivateMethods = NativeReferencedPrivateMethods()
+   return t.x_private_2 + NativeReferencedPrivateMethods.s_private_2 + t.getInstance_private_2() + NativeReferencedPrivateMethods.getStatic_private_2()
   }
  }
 

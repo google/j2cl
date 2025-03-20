@@ -82,11 +82,11 @@ open class TryCatch {
  open fun testTryWithResource() {
   try {
    var ___primaryExc: Throwable? = null
-   var thing: TryCatch.ClosableThing? = null
-   var thing2: TryCatch.ClosableThing? = null
+   var thing: ClosableThing? = null
+   var thing2: ClosableThing? = null
    try {
-    thing = TryCatch.ClosableThing()
-    thing2 = TryCatch.ClosableThing()
+    thing = ClosableThing()
+    thing2 = ClosableThing()
     throw java.lang.Exception()
    } catch (___exceptionFromTry: Throwable) {
     ___primaryExc = ___exceptionFromTry
@@ -101,12 +101,12 @@ open class TryCatch {
 
  @ObjCName("testTryWithResourceJava9")
  open fun testTryWithResourceJava9() {
-  val thing: TryCatch.ClosableThing = TryCatch.ClosableThing()
-  val thing2: TryCatch.ClosableThing = TryCatch.ClosableThing()
+  val thing: ClosableThing = ClosableThing()
+  val thing2: ClosableThing = ClosableThing()
   try {
    var ___primaryExc: Throwable? = null
-   var ___resource: TryCatch.ClosableThing? = null
-   var ___resource_1: TryCatch.ClosableThing? = null
+   var ___resource: ClosableThing? = null
+   var ___resource_1: ClosableThing? = null
    try {
     ___resource = thing
     ___resource_1 = thing2
@@ -126,7 +126,7 @@ open class TryCatch {
  open fun testTryWithResouceOnStaticField() {
   try {
    var ___primaryExc: Throwable? = null
-   var ___resource: TryCatch.ClosableThing? = null
+   var ___resource: ClosableThing? = null
    try {
     ___resource = TryCatch.closableThing
     throw java.lang.Exception()
@@ -194,7 +194,7 @@ open class TryCatch {
 
  @ObjCName("J2ktTrycatchTryCatchCompanion", swiftName = "TrycatchTryCatchCompanion", exact = true)
  companion object {
-  private val closableThing: TryCatch.ClosableThing? = TryCatch.ClosableThing()
+  private val closableThing: ClosableThing? = ClosableThing()
  }
 
  @ObjCName("J2ktTrycatchTryCatch_ClosableThing", swiftName = "TrycatchTryCatch_ClosableThing", exact = true)
@@ -211,8 +211,8 @@ open class TryCatch {
  }
 
  @ObjCName("J2ktTrycatchTryCatch_Exception1", swiftName = "TrycatchTryCatch_Exception1", exact = true)
- open inner class Exception1 internal constructor(): java.lang.RuntimeException(), TryCatch.GenericInterface<String?>
+ open inner class Exception1 internal constructor(): java.lang.RuntimeException(), GenericInterface<String?>
 
  @ObjCName("J2ktTrycatchTryCatch_Exception2", swiftName = "TrycatchTryCatch_Exception2", exact = true)
- open inner class Exception2 internal constructor(): java.lang.RuntimeException(), TryCatch.GenericInterface<String?>
+ open inner class Exception2 internal constructor(): java.lang.RuntimeException(), GenericInterface<String?>
 }

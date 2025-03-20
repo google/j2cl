@@ -32,10 +32,10 @@ open class NullabilityConversion {
  interface Parent
 
  @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Child", swiftName = "J2ktnotpassingNullabilityConversion_Child", exact = true)
- interface Child: NullabilityConversion.Parent
+ interface Child: Parent
 
  @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Supplier", swiftName = "J2ktnotpassingNullabilityConversion_Supplier", exact = true)
- fun interface Supplier<T: NullabilityConversion.Child?> {
+ fun interface Supplier<T: Child?> {
   @ObjCName("get")
   fun get(): T
  }
@@ -48,22 +48,22 @@ open class NullabilityConversion {
    companion object {
     @JvmStatic
     @ObjCName("typeArgumentMixedToNonNull")
-    fun typeArgumentMixedToNonNull(): NullabilityConversion.Child {
+    fun typeArgumentMixedToNonNull(): Child {
      try {
       throw RuntimeException()
-     } catch (e: NullabilityConversion.Tests.Unions.ExceptionNonNull1) {
+     } catch (e: ExceptionNonNull1) {
       return e.get()
-     } catch (e: NullabilityConversion.Tests.Unions.ExceptionNullable1) {
+     } catch (e: ExceptionNullable1) {
       return e.get()
      }
     }
    }
 
    @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Unions_ExceptionNonNull1", swiftName = "J2ktnotpassingNullabilityConversion_Tests_Unions_ExceptionNonNull1", exact = true)
-   abstract class ExceptionNonNull1: RuntimeException(), NullabilityConversion.Supplier<NullabilityConversion.Child>
+   abstract class ExceptionNonNull1: RuntimeException(), Supplier<Child>
 
    @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Unions_ExceptionNullable1", swiftName = "J2ktnotpassingNullabilityConversion_Tests_Unions_ExceptionNullable1", exact = true)
-   abstract class ExceptionNullable1: RuntimeException(), NullabilityConversion.Supplier<NullabilityConversion.Child?>
+   abstract class ExceptionNullable1: RuntimeException(), Supplier<Child?>
   }
  }
 }

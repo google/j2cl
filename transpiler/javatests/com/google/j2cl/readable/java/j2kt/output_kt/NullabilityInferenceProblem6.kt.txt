@@ -31,36 +31,36 @@ open class NullabilityInferenceProblem6 {
  @ObjCName("J2ktJ2ktNullabilityInferenceProblem6Companion", swiftName = "J2ktNullabilityInferenceProblem6Companion", exact = true)
  companion object {
   @JvmStatic
-  internal fun testLambda_pp_j2kt(from: NullabilityInferenceProblem6.Container<*>, to: NullabilityInferenceProblem6.Container<in Any?>) {
-   (from as NullabilityInferenceProblem6.Container<Any?>).forEach(
-    NullabilityInferenceProblem6.Consumer/* <*> */ { it /* capture#1-of * */ ->
+  internal fun testLambda_pp_j2kt(from: Container<*>, to: Container<in Any?>) {
+   (from as Container<Any?>).forEach(
+    Consumer/* <*> */ { it /* capture#1-of * */ ->
      to.add(it)
     },
    )
   }
 
   @JvmStatic
-  internal fun testMethodReference_pp_j2kt(from: NullabilityInferenceProblem6.Container<*>, to: NullabilityInferenceProblem6.Container<in Any?>) {
-   (from as NullabilityInferenceProblem6.Container<Any?>).forEach(
-    NullabilityInferenceProblem6.Consumer/* <*> */ { arg0 /* capture#2-of * */ ->
+  internal fun testMethodReference_pp_j2kt(from: Container<*>, to: Container<in Any?>) {
+   (from as Container<Any?>).forEach(
+    Consumer/* <*> */ { arg0 /* capture#2-of * */ ->
      to.add(arg0)
     },
    )
   }
 
   @JvmStatic
-  internal fun testLambda_pp_j2kt(from: NullabilityInferenceProblem6.FooContainer<*>, to: NullabilityInferenceProblem6.FooContainer<in NullabilityInferenceProblem6.Foo?>) {
-   (from as NullabilityInferenceProblem6.FooContainer<NullabilityInferenceProblem6.Foo?>).forEach(
-    NullabilityInferenceProblem6.Consumer/* <capture#3-of out NullabilityInferenceProblem6.Foo?> */ { it /* capture#3-of out NullabilityInferenceProblem6.Foo? */ ->
+  internal fun testLambda_pp_j2kt(from: FooContainer<*>, to: FooContainer<in Foo?>) {
+   (from as FooContainer<Foo?>).forEach(
+    Consumer/* <capture#3-of out Foo?> */ { it /* capture#3-of out Foo? */ ->
      to.add(it)
     },
    )
   }
 
   @JvmStatic
-  internal fun testMethodReference_pp_j2kt(from: NullabilityInferenceProblem6.FooContainer<*>, to: NullabilityInferenceProblem6.FooContainer<in NullabilityInferenceProblem6.Foo?>) {
-   (from as NullabilityInferenceProblem6.FooContainer<NullabilityInferenceProblem6.Foo?>).forEach(
-    NullabilityInferenceProblem6.Consumer/* <capture#4-of out NullabilityInferenceProblem6.Foo?> */ { arg0 /* capture#4-of out NullabilityInferenceProblem6.Foo? */ ->
+  internal fun testMethodReference_pp_j2kt(from: FooContainer<*>, to: FooContainer<in Foo?>) {
+   (from as FooContainer<Foo?>).forEach(
+    Consumer/* <capture#4-of out Foo?> */ { arg0 /* capture#4-of out Foo? */ ->
      to.add(arg0)
     },
    )
@@ -79,7 +79,7 @@ open class NullabilityInferenceProblem6 {
  interface Container<V> {
   @ObjCName("forEach")
   fun forEach(
-   @ObjCName("withJ2ktNullabilityInferenceProblem6_Consumer", swiftName = "with") consumer: NullabilityInferenceProblem6.Consumer<V>
+   @ObjCName("withJ2ktNullabilityInferenceProblem6_Consumer", swiftName = "with") consumer: Consumer<V>
   )
 
   @ObjCName("add")
@@ -92,7 +92,7 @@ open class NullabilityInferenceProblem6 {
  interface Foo
 
  @ObjCName("J2ktJ2ktNullabilityInferenceProblem6_FooConsumer", swiftName = "J2ktNullabilityInferenceProblem6_FooConsumer", exact = true)
- fun interface FooConsumer<V: NullabilityInferenceProblem6.Foo?> {
+ fun interface FooConsumer<V: Foo?> {
   @ObjCName("accept")
   fun accept(
    @ObjCName("withJ2ktNullabilityInferenceProblem6_Foo", swiftName = "with") v: V
@@ -100,10 +100,10 @@ open class NullabilityInferenceProblem6 {
  }
 
  @ObjCName("J2ktJ2ktNullabilityInferenceProblem6_FooContainer", swiftName = "J2ktNullabilityInferenceProblem6_FooContainer", exact = true)
- interface FooContainer<V: NullabilityInferenceProblem6.Foo?> {
+ interface FooContainer<V: Foo?> {
   @ObjCName("forEach")
   fun forEach(
-   @ObjCName("withJ2ktNullabilityInferenceProblem6_Consumer", swiftName = "with") consumer: NullabilityInferenceProblem6.Consumer<V>
+   @ObjCName("withJ2ktNullabilityInferenceProblem6_Consumer", swiftName = "with") consumer: Consumer<V>
   )
 
   @ObjCName("add")

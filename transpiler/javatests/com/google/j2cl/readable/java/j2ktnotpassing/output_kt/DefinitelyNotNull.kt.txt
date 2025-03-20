@@ -33,39 +33,39 @@ import kotlin.native.ObjCName
 open class DefinitelyNotNull {
  @ObjCName("J2ktJ2ktnotpassingDefinitelyNotNull_Ordering", swiftName = "J2ktnotpassingDefinitelyNotNull_Ordering", exact = true)
  open class Ordering<T> internal constructor() {
-  internal open fun <S: T> reverse_pp_j2ktnotpassing(): DefinitelyNotNull.Ordering<S> {
+  internal open fun <S: T> reverse_pp_j2ktnotpassing(): Ordering<S> {
    throw RuntimeException()
   }
 
-  internal open fun <S: T> nullsLast_pp_j2ktnotpassing(): DefinitelyNotNull.Ordering<S?> {
+  internal open fun <S: T> nullsLast_pp_j2ktnotpassing(): Ordering<S?> {
    throw RuntimeException()
   }
  }
 
  @ObjCName("J2ktJ2ktnotpassingDefinitelyNotNull_NullsFirstOrdering", swiftName = "J2ktnotpassingDefinitelyNotNull_NullsFirstOrdering", exact = true)
- inner class NullsFirstOrdering<T> constructor(ordering: DefinitelyNotNull.Ordering<in T>): DefinitelyNotNull.Ordering<T?>() {
+ inner class NullsFirstOrdering<T> constructor(ordering: Ordering<in T>): Ordering<T?>() {
   @JvmField
-  internal val ordering_pp_j2ktnotpassing: DefinitelyNotNull.Ordering<in T>
+  internal val ordering_pp_j2ktnotpassing: Ordering<in T>
 
   init {
    this.ordering_pp_j2ktnotpassing = ordering
   }
 
   @ObjCName("reverse")
-  public fun <S: T?> reverse(): DefinitelyNotNull.Ordering<S> {
-   return this.ordering_pp_j2ktnotpassing.reverse_pp_j2ktnotpassing/* <capture#1-of in T> */().nullsLast_pp_j2ktnotpassing<S>() as DefinitelyNotNull.Ordering<S>
+  public fun <S: T?> reverse(): Ordering<S> {
+   return this.ordering_pp_j2ktnotpassing.reverse_pp_j2ktnotpassing/* <capture#1-of in T> */().nullsLast_pp_j2ktnotpassing<S>() as Ordering<S>
   }
 
   @ObjCName("nullsLast")
-  public fun <S: T?> nullsLast(): DefinitelyNotNull.Ordering<S?> {
+  public fun <S: T?> nullsLast(): Ordering<S?> {
    return this.ordering_pp_j2ktnotpassing.nullsLast_pp_j2ktnotpassing<S?>()
   }
 
-  override fun <S: T?> reverse_pp_j2ktnotpassing(): DefinitelyNotNull.Ordering<S> {
+  override fun <S: T?> reverse_pp_j2ktnotpassing(): Ordering<S> {
    return this.reverse()
   }
 
-  override fun <S: T?> nullsLast_pp_j2ktnotpassing(): DefinitelyNotNull.Ordering<S?> {
+  override fun <S: T?> nullsLast_pp_j2ktnotpassing(): Ordering<S?> {
    return this.nullsLast()
   }
  }
@@ -78,7 +78,7 @@ open class DefinitelyNotNull {
    @ObjCName("copyOf")
    fun <E: Any> copyOf(
     @ObjCName("withJavaLangIterable", swiftName = "with") iterable: MutableIterable<E>
-   ): DefinitelyNotNull.ImmutableList<E> {
+   ): ImmutableList<E> {
     throw RuntimeException()
    }
 
@@ -86,16 +86,16 @@ open class DefinitelyNotNull {
    @ObjCName("copyOfNullable")
    fun <E> copyOfNullable(
     @ObjCName("withJavaLangIterable", swiftName = "with") iterable: MutableIterable<E>
-   ): DefinitelyNotNull.ImmutableList<E & Any> {
-    return DefinitelyNotNull.ImmutableList.copyOf<E & Any>(iterable)
+   ): ImmutableList<E & Any> {
+    return ImmutableList.copyOf<E & Any>(iterable)
    }
 
    @JvmStatic
    @ObjCName("copyOfNullableWithInvalidBounds")
    fun <E> copyOfNullableWithInvalidBounds(
     @ObjCName("withJavaLangIterable", swiftName = "with") iterable: MutableIterable<E>
-   ): DefinitelyNotNull.ImmutableList<E & Any> {
-    return DefinitelyNotNull.ImmutableList.copyOf<E & Any>(
+   ): ImmutableList<E & Any> {
+    return ImmutableList.copyOf<E & Any>(
      iterable as MutableIterable<E>,
     )
    }

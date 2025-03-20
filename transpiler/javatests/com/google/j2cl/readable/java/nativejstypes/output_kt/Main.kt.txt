@@ -31,10 +31,12 @@ import kotlin.jvm.JvmStatic
 import kotlin.jvm.javaObjectType
 import kotlin.native.ObjCName
 import nativejstypes.Bar
+import nativejstypes.Bar.Inner
 import nativejstypes.BarInnerWithDotInName
 import nativejstypes.Foo
 import nativejstypes.Headers
 import nativejstypes.TopLevel
+import nativejstypes.TopLevel.Nested
 import nativejstypes.TopLevelNestedReference
 
 @ObjCName("J2ktNativejstypesMain", swiftName = "NativejstypesMain", exact = true)
@@ -76,11 +78,11 @@ open class Main {
   @JvmStatic
   @ObjCName("testInnerNativeJsType")
   fun testInnerNativeJsType() {
-   val barInner: Bar.Inner = Bar.Inner(1)
+   val barInner: Inner = Inner(1)
    val barInnerWithDotInName: BarInnerWithDotInName = BarInnerWithDotInName(2)
    barInner.square()
    barInnerWithDotInName.square()
-   Bar.Inner.getInnerStatic()
+   Inner.getInnerStatic()
    BarInnerWithDotInName.getInnerStatic()
   }
 
@@ -113,7 +115,7 @@ open class Main {
   @ObjCName("testTopLevel")
   fun testTopLevel() {
    TopLevel.x = 2
-   val nested: TopLevel.Nested = TopLevel.Nested()
+   val nested: Nested = Nested()
    nested.x = 3
    val topLevelNestedReference: TopLevelNestedReference = TopLevelNestedReference()
    topLevelNestedReference.x = 4

@@ -84,22 +84,22 @@ open class IntersectionTypeTest<U> {
 
  @ObjCName("testMethodCall")
  open fun testMethodCall() {
-  val o: Any? = IntersectionTypeTest.m/* <IntersectionTypeTest.A? & IntersectionTypeTest.EmptyA?> */()
-  IntersectionTypeTest.set/* <IntersectionTypeTest.A? & IntersectionTypeTest.EmptyA?> */(
-   o.let { it as IntersectionTypeTest.A?; it as IntersectionTypeTest.EmptyA?; it },
+  val o: Any? = IntersectionTypeTest.m/* <A? & EmptyA?> */()
+  IntersectionTypeTest.set/* <A? & EmptyA?> */(
+   o.let { it as A?; it as EmptyA?; it },
   )
-  IntersectionTypeTest.set/* <IntersectionTypeTest.A? & IntersectionTypeTest.EmptyA?> */(
-   IntersectionTypeTest.m/* <IntersectionTypeTest.A? & IntersectionTypeTest.EmptyA?> */(),
+  IntersectionTypeTest.set/* <A? & EmptyA?> */(
+   IntersectionTypeTest.m/* <A? & EmptyA?> */(),
   )
-  val g: Getable<*>? = IntersectionTypeTest.n/* <IntersectionTypeTest.A? & IntersectionTypeTest.EmptyA?> */()
+  val g: Getable<*>? = IntersectionTypeTest.n/* <A? & EmptyA?> */()
  }
 
  @ObjCName("testDefaultMethodCall")
  open fun testDefaultMethodCall(
   @ObjCName("withId") o: Any?
  ) {
-  o.let { it as Cmp?; it as IntersectionTypeTest.EmptyA?; it }!!.defaultM()
-  o.let { it as CmpImpl?; it as IntersectionTypeTest.EmptyA?; it }!!.defaultM()
+  o.let { it as Cmp?; it as EmptyA?; it }!!.defaultM()
+  o.let { it as CmpImpl?; it as EmptyA?; it }!!.defaultM()
  }
 
  @ObjCName("J2ktIntersectiontypeIntersectionTypeTestCompanion", swiftName = "IntersectiontypeIntersectionTypeTestCompanion", exact = true)
@@ -161,9 +161,9 @@ open class IntersectionTypeTest<U> {
   fun testClosureAssignment(
    @ObjCName("withId") o: Any?
   ) {
-   val e: IntersectionTypeTest.A? = o.let { it as IntersectionTypeTest.A?; it as IntersectionTypeTest.EmptyA?; it as IntersectionTypeTest.EmptyB?; it }
-   val g: IntersectionTypeTest.EmptyA? = o.let { it as IntersectionTypeTest.A?; it as IntersectionTypeTest.EmptyA?; it as IntersectionTypeTest.EmptyB?; it }
-   val s: IntersectionTypeTest.EmptyB? = o.let { it as IntersectionTypeTest.A?; it as IntersectionTypeTest.EmptyA?; it as IntersectionTypeTest.EmptyB?; it }
+   val e: A? = o.let { it as A?; it as EmptyA?; it as EmptyB?; it }
+   val g: EmptyA? = o.let { it as A?; it as EmptyA?; it as EmptyB?; it }
+   val s: EmptyB? = o.let { it as A?; it as EmptyA?; it as EmptyB?; it }
   }
 
   @JvmStatic
@@ -172,36 +172,36 @@ open class IntersectionTypeTest<U> {
   }
 
   @JvmStatic
-  private fun <T> m(): T where T: IntersectionTypeTest.A?, T: IntersectionTypeTest.EmptyA? {
+  private fun <T> m(): T where T: A?, T: EmptyA? {
    return IntersectionTypeTest.get<Any?>(
     Any(),
    ) as T
   }
 
   @JvmStatic
-  private fun <T> n(): Getable<T>? where T: IntersectionTypeTest.A?, T: IntersectionTypeTest.EmptyA? {
+  private fun <T> n(): Getable<T>? where T: A?, T: EmptyA? {
    return null
   }
 
   @JvmStatic
-  private fun <T> set(t: T) where T: IntersectionTypeTest.A?, T: IntersectionTypeTest.EmptyA? {}
+  private fun <T> set(t: T) where T: A?, T: EmptyA? {}
 
   @JvmStatic
-  private fun <T> callOnIntersetionTypes(t: T) where T: IntersectionTypeTest.SomeConcreteType?, T: Cmp? {
+  private fun <T> callOnIntersetionTypes(t: T) where T: SomeConcreteType?, T: Cmp? {
    t!!.cmp()
-   null.let { it as IntersectionTypeTest.SomeConcreteType?; it as Cmp?; it }!!.cmp()
+   null.let { it as SomeConcreteType?; it as Cmp?; it }!!.cmp()
   }
 
   @JvmStatic
-  private fun <T> callOnIntersectionTypeWithParameterizedType(t: T) where T: IntersectionTypeTest.GenericType<String?>?, T: Getable<Int?>? {
+  private fun <T> callOnIntersectionTypeWithParameterizedType(t: T) where T: GenericType<String?>?, T: Getable<Int?>? {
    t!!.doSomething_pp_intersectiontype("")
    t!!.get()
   }
 
   @JvmStatic
   private fun callOnIntersectionTypeWithRawType() {
-   val t /* IntersectionTypeTest.GenericType<Any?> & Getable<Any?> */ = IntersectionTypeTest.GenericType<String?>().let { it as IntersectionTypeTest.GenericType<Any?>; it as Getable<Any?>; it }
-   (t as IntersectionTypeTest.GenericType<Any?>).doSomething_pp_intersectiontype("")
+   val t /* GenericType<Any?> & Getable<Any?> */ = GenericType<String?>().let { it as GenericType<Any?>; it as Getable<Any?>; it }
+   (t as GenericType<Any?>).doSomething_pp_intersectiontype("")
    (t as Getable<Any?>).get()
   }
  }

@@ -38,7 +38,7 @@ open class NullabilityInferenceProblem internal constructor() {
  @ObjCName("J2ktJ2ktNullabilityInferenceProblemCompanion", swiftName = "J2ktNullabilityInferenceProblemCompanion", exact = true)
  companion object {
   @JvmStatic
-  private fun <E: Any> sortedCopyOf(comparator: Comparator<in E>, elements: MutableIterable<E>): NullabilityInferenceProblem.ImmutableList<E> {
+  private fun <E: Any> sortedCopyOf(comparator: Comparator<in E>, elements: MutableIterable<E>): ImmutableList<E> {
    throw RuntimeException()
   }
 
@@ -48,10 +48,10 @@ open class NullabilityInferenceProblem internal constructor() {
   }
 
   @JvmStatic
-  private fun testImplicitTypeArguments(users: MutableIterable<NullabilityInferenceProblem.User>): NullabilityInferenceProblem.ImmutableList<NullabilityInferenceProblem.User> {
-   return NullabilityInferenceProblem.sortedCopyOf<NullabilityInferenceProblem.User>(
-    java.util.Comparator.comparing<NullabilityInferenceProblem.User, String>(
-     Function/* <in NullabilityInferenceProblem.User, out String?> */ { user: NullabilityInferenceProblem.User ->
+  private fun testImplicitTypeArguments(users: MutableIterable<User>): ImmutableList<User> {
+   return NullabilityInferenceProblem.sortedCopyOf<User>(
+    java.util.Comparator.comparing<User, String>(
+     Function/* <in User, out String?> */ { user: User ->
       return@Function user.getName().orElse("")!!
      },
     ),
@@ -60,10 +60,10 @@ open class NullabilityInferenceProblem internal constructor() {
   }
 
   @JvmStatic
-  private fun testExplicitTypeArguments(users: MutableIterable<NullabilityInferenceProblem.User>): NullabilityInferenceProblem.ImmutableList<NullabilityInferenceProblem.User> {
-   return NullabilityInferenceProblem.sortedCopyOf<NullabilityInferenceProblem.User>(
-    java.util.Comparator.comparing<NullabilityInferenceProblem.User, String>(
-     Function/* <in NullabilityInferenceProblem.User, out String> */ { user: NullabilityInferenceProblem.User ->
+  private fun testExplicitTypeArguments(users: MutableIterable<User>): ImmutableList<User> {
+   return NullabilityInferenceProblem.sortedCopyOf<User>(
+    java.util.Comparator.comparing<User, String>(
+     Function/* <in User, out String> */ { user: User ->
       return@Function user.getName().orElse("")!!
      },
     ),
@@ -72,10 +72,10 @@ open class NullabilityInferenceProblem internal constructor() {
   }
 
   @JvmStatic
-  private fun testCheckNotNull(users: MutableIterable<NullabilityInferenceProblem.User>): NullabilityInferenceProblem.ImmutableList<NullabilityInferenceProblem.User> {
-   return NullabilityInferenceProblem.sortedCopyOf<NullabilityInferenceProblem.User>(
-    java.util.Comparator.comparing<NullabilityInferenceProblem.User, String>(
-     Function/* <in NullabilityInferenceProblem.User, out String?> */ { user: NullabilityInferenceProblem.User ->
+  private fun testCheckNotNull(users: MutableIterable<User>): ImmutableList<User> {
+   return NullabilityInferenceProblem.sortedCopyOf<User>(
+    java.util.Comparator.comparing<User, String>(
+     Function/* <in User, out String?> */ { user: User ->
       return@Function NullabilityInferenceProblem.checkNotNull<String>(
        user.getName().orElse("")!!,
       )

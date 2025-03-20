@@ -34,16 +34,16 @@ import kotlin.native.ObjCName
 open class CastToNativeType {
  @ObjCName("test")
  open fun test() {
-  val a: Any = CastToNativeType.NativeJsType()
-  val b: CastToNativeType.NativeJsType? = a as CastToNativeType.NativeJsType?
-  var c: Boolean = a is CastToNativeType.NativeJsType
-  val d: Array<CastToNativeType.NativeJsType?>? = a as Array<CastToNativeType.NativeJsType?>?
+  val a: Any = NativeJsType()
+  val b: NativeJsType? = a as NativeJsType?
+  var c: Boolean = a is NativeJsType
+  val d: Array<NativeJsType?>? = a as Array<NativeJsType?>?
   c = a is Array<*>
-  val e: CastToNativeType.NativeObject<Any?, Any?>? = a as CastToNativeType.NativeObject<Any?, Any?>?
-  val f: CastToNativeType.NativeObject<String?, Any?>? = a as CastToNativeType.NativeObject<String?, Any?>?
-  c = a is CastToNativeType.NativeObject<*, *>
-  val g: Array<CastToNativeType.NativeObject<Any?, Any?>?>? = a as Array<CastToNativeType.NativeObject<Any?, Any?>?>?
-  val h: Array<CastToNativeType.NativeObject<String?, Any?>?>? = a as Array<CastToNativeType.NativeObject<String?, Any?>?>?
+  val e: NativeObject<Any?, Any?>? = a as NativeObject<Any?, Any?>?
+  val f: NativeObject<String?, Any?>? = a as NativeObject<String?, Any?>?
+  c = a is NativeObject<*, *>
+  val g: Array<NativeObject<Any?, Any?>?>? = a as Array<NativeObject<Any?, Any?>?>?
+  val h: Array<NativeObject<String?, Any?>?>? = a as Array<NativeObject<String?, Any?>?>?
   c = a is Array<*>
  }
 

@@ -31,21 +31,21 @@ open class UnsatisfiedTypeBounds internal constructor() {
  @ObjCName("J2ktJ2ktnotpassingUnsatisfiedTypeBoundsCompanion", swiftName = "J2ktnotpassingUnsatisfiedTypeBoundsCompanion", exact = true)
  companion object {
   @JvmStatic
-  internal fun <T: Any> methodWithTypeConstraints_pp_j2ktnotpassing(helper: UnsatisfiedTypeBounds.Helper<T>, foo: UnsatisfiedTypeBounds.Foo<out T>): T {
+  internal fun <T: Any> methodWithTypeConstraints_pp_j2ktnotpassing(helper: Helper<T>, foo: Foo<out T>): T {
    return foo.get()
   }
 
   @JvmStatic
   internal fun test_pp_j2ktnotpassing() {
-   val command: UnsatisfiedTypeBounds.Command = UnsatisfiedTypeBounds.methodWithTypeConstraints_pp_j2ktnotpassing<UnsatisfiedTypeBounds.Command>(
-    UnsatisfiedTypeBounds.Helper<UnsatisfiedTypeBounds.Command>(),
-    UnsatisfiedTypeBounds.FooCommand(),
+   val command: Command = UnsatisfiedTypeBounds.methodWithTypeConstraints_pp_j2ktnotpassing<Command>(
+    Helper<Command>(),
+    FooCommand(),
    )
   }
  }
 
  @ObjCName("J2ktJ2ktnotpassingUnsatisfiedTypeBounds_Foo", swiftName = "J2ktnotpassingUnsatisfiedTypeBounds_Foo", exact = true)
- fun interface Foo<T: UnsatisfiedTypeBounds.Foo<T>> {
+ fun interface Foo<T: Foo<T>> {
   @ObjCName("get")
   fun get(): T
  }
@@ -54,8 +54,8 @@ open class UnsatisfiedTypeBounds internal constructor() {
  interface Command
 
  @ObjCName("J2ktJ2ktnotpassingUnsatisfiedTypeBounds_FooCommand", swiftName = "J2ktnotpassingUnsatisfiedTypeBounds_FooCommand", exact = true)
- open class FooCommand internal constructor(): UnsatisfiedTypeBounds.Foo<UnsatisfiedTypeBounds.FooCommand>, UnsatisfiedTypeBounds.Command {
-  override fun get(): UnsatisfiedTypeBounds.FooCommand {
+ open class FooCommand internal constructor(): Foo<FooCommand>, Command {
+  override fun get(): FooCommand {
    return this
   }
  }

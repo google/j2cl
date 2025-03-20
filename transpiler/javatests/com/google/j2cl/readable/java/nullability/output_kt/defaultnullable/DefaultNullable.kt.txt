@@ -97,9 +97,9 @@ open class DefaultNullable {
   val args_1: Array<String?>? = args as Array<String?>?
  }
 
- internal open fun <T: DefaultNullable.NullableBound<T>?> methodWithNullableBound_pp_nullability_defaultnullable() {}
+ internal open fun <T: NullableBound<T>?> methodWithNullableBound_pp_nullability_defaultnullable() {}
 
- internal open fun <T: DefaultNullable.NonNullableBound<T>> methodWithNonNullableBound_pp_nullability_defaultnullable() {}
+ internal open fun <T: NonNullableBound<T>> methodWithNonNullableBound_pp_nullability_defaultnullable() {}
 
  @ObjCName("casts")
  open fun casts() {
@@ -115,7 +115,7 @@ open class DefaultNullable {
  @ObjCName("J2ktNullabilityDefaultnullableDefaultNullableCompanion", swiftName = "NullabilityDefaultnullableDefaultNullableCompanion", exact = true)
  companion object {
   @JvmStatic
-  internal fun <N> genericNullableMethod_pp_nullability_defaultnullable(o: DefaultNullable.ParameterizedNullable<N>?, n: N?) {
+  internal fun <N> genericNullableMethod_pp_nullability_defaultnullable(o: ParameterizedNullable<N>?, n: N?) {
    o!!.setNullable_pp_nullability_defaultnullable(n)
    o!!.setNonNull_pp_nullability_defaultnullable(
     n!!,
@@ -135,7 +135,7 @@ open class DefaultNullable {
   }
 
   @JvmStatic
-  internal fun <N: Any> genericNonNullMethod_pp_nullability_defaultnullable(o: DefaultNullable.ParameterizedNonNullable<N>?, n: N) {
+  internal fun <N: Any> genericNonNullMethod_pp_nullability_defaultnullable(o: ParameterizedNonNullable<N>?, n: N) {
    o!!.setNullable_pp_nullability_defaultnullable(n)
    o!!.setNonNull_pp_nullability_defaultnullable(n)
    o!!.setDefaultNullability_pp_nullability_defaultnullable(n)
@@ -151,7 +151,7 @@ open class DefaultNullable {
   }
 
   @JvmStatic
-  internal fun <N> genericDefaultNullabilityMethod_pp_nullability_defaultnullable(o: DefaultNullable.ParameterizedDefaultNullability<N>?, n: N) {
+  internal fun <N> genericDefaultNullabilityMethod_pp_nullability_defaultnullable(o: ParameterizedDefaultNullability<N>?, n: N) {
    o!!.setNullable_pp_nullability_defaultnullable(n)
    o!!.setNonNull_pp_nullability_defaultnullable(
     n!!,
@@ -169,7 +169,7 @@ open class DefaultNullable {
   }
 
   @JvmStatic
-  internal fun parametrizedNullableMethod_pp_nullability_defaultnullable(o: DefaultNullable.ParameterizedNullable<String?>?, s: String?) {
+  internal fun parametrizedNullableMethod_pp_nullability_defaultnullable(o: ParameterizedNullable<String?>?, s: String?) {
    o!!.setNullable_pp_nullability_defaultnullable(s)
    o!!.setNonNull_pp_nullability_defaultnullable(
     s!!,
@@ -187,7 +187,7 @@ open class DefaultNullable {
   }
 
   @JvmStatic
-  internal fun parametrizedNonNullMethod_pp_nullability_defaultnullable(o: DefaultNullable.ParameterizedNonNullable<String>?, s: String) {
+  internal fun parametrizedNonNullMethod_pp_nullability_defaultnullable(o: ParameterizedNonNullable<String>?, s: String) {
    o!!.setNullable_pp_nullability_defaultnullable(s)
    o!!.setNonNull_pp_nullability_defaultnullable(s)
    o!!.setDefaultNullability_pp_nullability_defaultnullable(s)
@@ -203,7 +203,7 @@ open class DefaultNullable {
   }
 
   @JvmStatic
-  internal fun parametrizedDefaultNullabilityMethod_pp_nullability_defaultnullable(o: DefaultNullable.ParameterizedDefaultNullability<String?>?, s: String?) {
+  internal fun parametrizedDefaultNullabilityMethod_pp_nullability_defaultnullable(o: ParameterizedDefaultNullability<String?>?, s: String?) {
    o!!.setNullable_pp_nullability_defaultnullable(s)
    o!!.setNonNull_pp_nullability_defaultnullable(
     s!!,
@@ -273,22 +273,22 @@ open class DefaultNullable {
 
   @JvmStatic
   internal fun testLocalNullability_pp_nullability_defaultnullable() {
-   val stringConsumer: DefaultNullable.Consumer<String?>? = null as DefaultNullable.Consumer<String?>?
-   val nullableStringConsumer: DefaultNullable.Consumer<String?>? = null as DefaultNullable.Consumer<String?>?
-   val nonNullStringConsumer: DefaultNullable.Consumer<String>? = null as DefaultNullable.Consumer<String>?
-   val b: Boolean = null is DefaultNullable.Consumer<*>
+   val stringConsumer: Consumer<String?>? = null as Consumer<String?>?
+   val nullableStringConsumer: Consumer<String?>? = null as Consumer<String?>?
+   val nonNullStringConsumer: Consumer<String>? = null as Consumer<String>?
+   val b: Boolean = null is Consumer<*>
   }
 
   @JvmStatic
   internal fun testNonNullableLambdas_pp_nullability_defaultnullable() {
-   val lambda: DefaultNullable.NullMarkedConsumer<String?> = DefaultNullable.NullMarkedConsumer<String?> { s: String? ->
+   val lambda: NullMarkedConsumer<String?> = NullMarkedConsumer<String?> { s: String? ->
    }
-   val constructorReference: DefaultNullable.NullMarkedSupplier<String?> = DefaultNullable.NullMarkedSupplier<String> {
+   val constructorReference: NullMarkedSupplier<String?> = NullMarkedSupplier<String> {
     return@NullMarkedSupplier String()
-   } as DefaultNullable.NullMarkedSupplier<String?>
-   val newArrayReference: DefaultNullable.NullMarkedIntFunction<Array<String?>?> = DefaultNullable.NullMarkedIntFunction<Array<String>> { arg0: Int ->
+   } as NullMarkedSupplier<String?>
+   val newArrayReference: NullMarkedIntFunction<Array<String?>?> = NullMarkedIntFunction<Array<String>> { arg0: Int ->
     return@NullMarkedIntFunction arrayOfNulls<String>(arg0) as Array<String>
-   } as DefaultNullable.NullMarkedIntFunction<Array<String?>?>
+   } as NullMarkedIntFunction<Array<String?>?>
   }
 
   @JvmStatic
@@ -296,22 +296,22 @@ open class DefaultNullable {
  }
 
  @ObjCName("J2ktNullabilityDefaultnullableDefaultNullable_NullableBound", swiftName = "NullabilityDefaultnullableDefaultNullable_NullableBound", exact = true)
- interface NullableBound<T: DefaultNullable.NullableBound<T>?>
+ interface NullableBound<T: NullableBound<T>?>
 
  @ObjCName("J2ktNullabilityDefaultnullableDefaultNullable_NonNullableBound", swiftName = "NullabilityDefaultnullableDefaultNullable_NonNullableBound", exact = true)
- interface NonNullableBound<T: DefaultNullable.NonNullableBound<T>>
+ interface NonNullableBound<T: NonNullableBound<T>>
 
  @ObjCName("J2ktNullabilityDefaultnullableDefaultNullable_NullableBoundWithNonNullArgument", swiftName = "NullabilityDefaultnullableDefaultNullable_NullableBoundWithNonNullArgument", exact = true)
- interface NullableBoundWithNonNullArgument: DefaultNullable.NullableBound<DefaultNullable.NullableBoundWithNonNullArgument>
+ interface NullableBoundWithNonNullArgument: NullableBound<NullableBoundWithNonNullArgument>
 
  @ObjCName("J2ktNullabilityDefaultnullableDefaultNullable_NullableBoundWithNullableArgument", swiftName = "NullabilityDefaultnullableDefaultNullable_NullableBoundWithNullableArgument", exact = true)
- interface NullableBoundWithNullableArgument: DefaultNullable.NullableBound<DefaultNullable.NullableBoundWithNullableArgument?>
+ interface NullableBoundWithNullableArgument: NullableBound<NullableBoundWithNullableArgument?>
 
  @ObjCName("J2ktNullabilityDefaultnullableDefaultNullable_NonNullBoundWithNonNullArgument", swiftName = "NullabilityDefaultnullableDefaultNullable_NonNullBoundWithNonNullArgument", exact = true)
- interface NonNullBoundWithNonNullArgument: DefaultNullable.NonNullableBound<DefaultNullable.NonNullBoundWithNonNullArgument>
+ interface NonNullBoundWithNonNullArgument: NonNullableBound<NonNullBoundWithNonNullArgument>
 
  @ObjCName("J2ktNullabilityDefaultnullableDefaultNullable_NonNullBoundWithNullableArgument", swiftName = "NullabilityDefaultnullableDefaultNullable_NonNullBoundWithNullableArgument", exact = true)
- interface NonNullBoundWithNullableArgument: DefaultNullable.NonNullableBound<DefaultNullable.NonNullBoundWithNullableArgument>
+ interface NonNullBoundWithNullableArgument: NonNullableBound<NonNullBoundWithNullableArgument>
 
  @ObjCName("J2ktNullabilityDefaultnullableDefaultNullable_ParameterizedDefaultNullability", swiftName = "NullabilityDefaultnullableDefaultNullable_ParameterizedDefaultNullability", exact = true)
  open class ParameterizedDefaultNullability<N> {

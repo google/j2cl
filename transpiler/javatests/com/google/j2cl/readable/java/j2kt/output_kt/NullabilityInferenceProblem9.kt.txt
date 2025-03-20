@@ -31,22 +31,22 @@ open class NullabilityInferenceProblem9 {
  @ObjCName("J2ktJ2ktNullabilityInferenceProblem9Companion", swiftName = "J2ktNullabilityInferenceProblem9Companion", exact = true)
  companion object {
   @JvmStatic
-  internal fun <V> future_pp_j2kt(v: V): NullabilityInferenceProblem9.Future<V> {
+  internal fun <V> future_pp_j2kt(v: V): Future<V> {
    throw RuntimeException()
   }
 
   @JvmStatic
-  internal fun <I, O> transformFuture_pp_j2kt(future: NullabilityInferenceProblem9.Future<I>, fn: NullabilityInferenceProblem9.FutureFunction<in I, out O>): NullabilityInferenceProblem9.Future<O> {
+  internal fun <I, O> transformFuture_pp_j2kt(future: Future<I>, fn: FutureFunction<in I, out O>): Future<O> {
    throw RuntimeException()
   }
 
   @JvmStatic
-  internal fun test_pp_j2kt(nullableFooFuture: NullabilityInferenceProblem9.Future<NullabilityInferenceProblem9.Foo?>, fooFuture: NullabilityInferenceProblem9.Future<NullabilityInferenceProblem9.Foo>): NullabilityInferenceProblem9.Future<NullabilityInferenceProblem9.Foo> {
-   return NullabilityInferenceProblem9.transformFuture_pp_j2kt<NullabilityInferenceProblem9.Foo?, NullabilityInferenceProblem9.Foo>(
+  internal fun test_pp_j2kt(nullableFooFuture: Future<Foo?>, fooFuture: Future<Foo>): Future<Foo> {
+   return NullabilityInferenceProblem9.transformFuture_pp_j2kt<Foo?, Foo>(
     nullableFooFuture,
-    NullabilityInferenceProblem9.FutureFunction/* <in NullabilityInferenceProblem9.Foo?, out NullabilityInferenceProblem9.Foo> */ { nullableFoo: NullabilityInferenceProblem9.Foo? ->
+    FutureFunction/* <in Foo?, out Foo> */ { nullableFoo: Foo? ->
      if (nullableFoo != null) {
-      return@FutureFunction NullabilityInferenceProblem9.future_pp_j2kt<NullabilityInferenceProblem9.Foo>(
+      return@FutureFunction NullabilityInferenceProblem9.future_pp_j2kt<Foo>(
        nullableFoo!!,
       )
      }
@@ -67,6 +67,6 @@ open class NullabilityInferenceProblem9 {
   @ObjCName("apply")
   fun apply(
    @ObjCName("withId") i: I
-  ): NullabilityInferenceProblem9.Future<O>
+  ): Future<O>
  }
 }

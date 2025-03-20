@@ -51,7 +51,7 @@ open class JsMethodExample {
  }
 
  @ObjCName("J2ktJsmethodJsMethodExample_Sub", swiftName = "JsmethodJsMethodExample_Sub", exact = true)
- open class Sub internal constructor(): JsMethodExample.Base<String?>(), JsMethodExample.I {
+ open class Sub internal constructor(): Base<String?>(), I {
   override fun m(s: String?) {}
 
   internal override fun m_pp_jsmethod(arg0: String?) {
@@ -61,7 +61,7 @@ open class JsMethodExample {
 
  @ObjCName("J2ktJsmethodJsMethodExample_SubJsType", swiftName = "JsmethodJsMethodExample_SubJsType", exact = true)
  @JsType
- open class SubJsType internal constructor(): JsMethodExample.Base<String?>() {
+ open class SubJsType internal constructor(): Base<String?>() {
   @ObjCName("m")
   public open fun m(
    @ObjCName("withNSString", swiftName = "with") s: String?
@@ -80,7 +80,7 @@ open class JsMethodExample {
 
  @ObjCName("J2ktJsmethodJsMethodExample_SubGenericsJsType", swiftName = "JsmethodJsMethodExample_SubGenericsJsType", exact = true)
  @JsType
- open class SubGenericsJsType<T> internal constructor(): JsMethodExample.Base<T>() {
+ open class SubGenericsJsType<T> internal constructor(): Base<T>() {
   @ObjCName("m")
   public open fun m(
    @ObjCName("withId") s: T
@@ -93,7 +93,7 @@ open class JsMethodExample {
 
  @ObjCName("J2ktJsmethodJsMethodExample_SubJsTypeWithRenamedJsMethod", swiftName = "JsmethodJsMethodExample_SubJsTypeWithRenamedJsMethod", exact = true)
  @JsType
- open class SubJsTypeWithRenamedJsMethod internal constructor(): JsMethodExample.Base<String?>() {
+ open class SubJsTypeWithRenamedJsMethod internal constructor(): Base<String?>() {
   @ObjCName("m")
   @JsMethod(name = "renamedM")
   public open fun m(
@@ -115,7 +115,7 @@ open class JsMethodExample {
  }
 
  @ObjCName("J2ktJsmethodJsMethodExample_InterfaceExposingJsMethods", swiftName = "JsmethodJsMethodExample_InterfaceExposingJsMethods", exact = true)
- fun interface InterfaceExposingJsMethods: JsMethodExample.InterfaceWithMethod {
+ fun interface InterfaceExposingJsMethods: InterfaceWithMethod {
   @JsMethod
   override fun m() {}
 
@@ -130,5 +130,5 @@ open class JsMethodExample {
  }
 
  @ObjCName("J2ktJsmethodJsMethodExample_ExposesOverrideableJsMethod", swiftName = "JsmethodJsMethodExample_ExposesOverrideableJsMethod", exact = true)
- open class ExposesOverrideableJsMethod internal constructor(): JsMethodExample.SuperClassWithFinalMethod(), JsMethodExample.InterfaceExposingJsMethods
+ open class ExposesOverrideableJsMethod internal constructor(): SuperClassWithFinalMethod(), InterfaceExposingJsMethods
 }

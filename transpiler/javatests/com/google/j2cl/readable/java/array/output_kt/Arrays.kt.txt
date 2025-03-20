@@ -153,15 +153,15 @@ open class Arrays {
  }
 
  private fun testNativeArray() {
-  var nativeObjects: Array<Arrays.NativeType?> = arrayOfNulls<Arrays.NativeType>(100)
-  nativeObjects = arrayOfNulls<Arrays.NativeType>(0)
-  nativeObjects = arrayOf<Arrays.NativeType?>(null, null)
-  var nativeObjects2d: Array<Array<Arrays.NativeType?>?> = Array<Array<Arrays.NativeType?>?>(5) {
-   arrayOfNulls<Arrays.NativeType>(10)
+  var nativeObjects: Array<NativeType?> = arrayOfNulls<NativeType>(100)
+  nativeObjects = arrayOfNulls<NativeType>(0)
+  nativeObjects = arrayOf<NativeType?>(null, null)
+  var nativeObjects2d: Array<Array<NativeType?>?> = Array<Array<NativeType?>?>(5) {
+   arrayOfNulls<NativeType>(10)
   }
-  nativeObjects2d = arrayOf<Array<Arrays.NativeType?>?>(arrayOf<Arrays.NativeType?>(null, null), null)
-  nativeObjects2d = arrayOfNulls<Array<Arrays.NativeType?>>(20)
-  var nativeObject: Arrays.NativeType? = nativeObjects[0]
+  nativeObjects2d = arrayOf<Array<NativeType?>?>(arrayOf<NativeType?>(null, null), null)
+  nativeObjects2d = arrayOfNulls<Array<NativeType?>>(20)
+  var nativeObject: NativeType? = nativeObjects[0]
   nativeObject = nativeObjects2d[0]!![1]
   nativeObjects[0] = null
   nativeObjects2d[0]!![1] = null
@@ -169,7 +169,7 @@ open class Arrays {
 
  @ObjCName("testErasureCastsOnArrayAccess")
  open fun testErasureCastsOnArrayAccess() {
-  val container: Arrays.ArrayContainer<String?>? = null
+  val container: ArrayContainer<String?>? = null
   val s: String? = container!!.data_pp_array!![0]
  }
 

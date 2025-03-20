@@ -31,8 +31,8 @@ import kotlin.native.ObjCName
 @ObjCName("J2ktJ2ktNullabilityScopes3", swiftName = "J2ktNullabilityScopes3", exact = true)
 open class NullabilityScopes3 {
  internal open fun testNonNullMarked_pp_j2kt() {
-  NullabilityScopes3.Optional.of_pp_j2kt<NullabilityScopes3.List<String>>(
-   NullabilityScopes3.ImmutableList.of_pp_j2kt<String>(),
+  Optional.of_pp_j2kt<List<String>>(
+   ImmutableList.of_pp_j2kt<String>(),
   )
  }
 
@@ -41,7 +41,7 @@ open class NullabilityScopes3 {
   @ObjCName("J2ktJ2ktNullabilityScopes3_OptionalCompanion", swiftName = "J2ktNullabilityScopes3_OptionalCompanion", exact = true)
   companion object {
    @JvmStatic
-   internal fun <T: Any> of_pp_j2kt(value: T): NullabilityScopes3.Optional<T> {
+   internal fun <T: Any> of_pp_j2kt(value: T): Optional<T> {
     throw RuntimeException()
    }
   }
@@ -51,11 +51,11 @@ open class NullabilityScopes3 {
  interface List<T>
 
  @ObjCName("J2ktJ2ktNullabilityScopes3_ImmutableList", swiftName = "J2ktNullabilityScopes3_ImmutableList", exact = true)
- open class ImmutableList<T: Any> internal constructor(): NullabilityScopes3.List<T> {
+ open class ImmutableList<T: Any> internal constructor(): List<T> {
   @ObjCName("J2ktJ2ktNullabilityScopes3_ImmutableListCompanion", swiftName = "J2ktNullabilityScopes3_ImmutableListCompanion", exact = true)
   companion object {
    @JvmStatic
-   internal fun <T: Any> of_pp_j2kt(): NullabilityScopes3.ImmutableList<T> {
+   internal fun <T: Any> of_pp_j2kt(): ImmutableList<T> {
     throw RuntimeException()
    }
   }

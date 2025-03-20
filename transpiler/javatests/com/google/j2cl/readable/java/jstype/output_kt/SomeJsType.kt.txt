@@ -68,10 +68,10 @@ open class SomeJsType<T> {
   this.protectedMethod()
  }
 
- private fun testStarAndWildCard(s: SomeJsType.Star?, w: SomeJsType.Wildcard?): SomeJsType.Wildcard? {
+ private fun testStarAndWildCard(s: Star?, w: Wildcard?): Wildcard? {
   val `object`: Any = Any()
-  val star: SomeJsType.Star = Double.valueOf(3.0) as SomeJsType.Star
-  return star as SomeJsType.Wildcard?
+  val star: Star = Double.valueOf(3.0) as Star
+  return star as Wildcard?
  }
 
  @ObjCName("J2ktJstypeSomeJsType_Star", swiftName = "JstypeSomeJsType_Star", exact = true)

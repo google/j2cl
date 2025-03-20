@@ -33,20 +33,20 @@ open class NullabilityInferenceProblem5 {
  @ObjCName("J2ktJ2ktNullabilityInferenceProblem5Companion", swiftName = "J2ktNullabilityInferenceProblem5Companion", exact = true)
  companion object {
   @JvmStatic
-  internal fun <I, O> transform_pp_j2kt(future: NullabilityInferenceProblem5.Future<I>, fn: NullabilityInferenceProblem5.Function<in I, out O>): NullabilityInferenceProblem5.Future<O> {
+  internal fun <I, O> transform_pp_j2kt(future: Future<I>, fn: Function<in I, out O>): Future<O> {
    throw RuntimeException()
   }
 
   @JvmStatic
-  internal fun <V: Any> nullableFuture_pp_j2kt(v: V): NullabilityInferenceProblem5.Future<V?> {
+  internal fun <V: Any> nullableFuture_pp_j2kt(v: V): Future<V?> {
    throw RuntimeException()
   }
 
   @JvmStatic
-  internal fun testVoid_pp_j2kt(foo: NullabilityInferenceProblem5.Foo<*>): NullabilityInferenceProblem5.Future<Void?> {
-   return NullabilityInferenceProblem5.transform_pp_j2kt/* <NullabilityInferenceProblem5.Foo<*>, Void?> */(
-    NullabilityInferenceProblem5.nullableFuture_pp_j2kt/* <NullabilityInferenceProblem5.Foo<*>> */(foo),
-    NullabilityInferenceProblem5.Function/* <in NullabilityInferenceProblem5.Foo<*>, out Void?> */ { it /* NullabilityInferenceProblem5.Foo<*> */ ->
+  internal fun testVoid_pp_j2kt(foo: Foo<*>): Future<Void?> {
+   return NullabilityInferenceProblem5.transform_pp_j2kt/* <Foo<*>, Void?> */(
+    NullabilityInferenceProblem5.nullableFuture_pp_j2kt/* <Foo<*>> */(foo),
+    Function/* <in Foo<*>, out Void?> */ { it /* Foo<*> */ ->
      return@Function null as Void?
     },
    )

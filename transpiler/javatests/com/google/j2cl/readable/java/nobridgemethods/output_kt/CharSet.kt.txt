@@ -40,8 +40,8 @@ abstract class Map<K> internal constructor() {
 
 @ObjCName("J2ktNobridgemethodsTreeMap", swiftName = "NobridgemethodsTreeMap", exact = true)
 open class TreeMap<K> internal constructor(): Map<K>() {
- override fun getCeilingEntry(key: K): TreeMap.InnerEntry<K>? {
-  return TreeMap.InnerEntry<K>()
+ override fun getCeilingEntry(key: K): InnerEntry<K>? {
+  return InnerEntry<K>()
  }
 
  @ObjCName("J2ktNobridgemethodsTreeMap_InnerEntry", swiftName = "NobridgemethodsTreeMap_InnerEntry", exact = true)

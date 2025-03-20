@@ -121,7 +121,6 @@ private constructor(
   fun qualifiedNameSource(typeDescriptor: TypeDescriptor, asSuperType: Boolean = false): Source =
     if (typeDescriptor is DeclaredTypeDescriptor) {
       val typeDeclaration = typeDescriptor.typeDeclaration
-      val enclosingTypeDescriptor = typeDescriptor.enclosingTypeDescriptor
       val nativeQualifiedName = typeDeclaration.ktNativeQualifiedName
       val bridgeQualifiedName = typeDeclaration.ktBridgeQualifiedName
       when {
@@ -135,12 +134,6 @@ private constructor(
         nativeQualifiedName != null ->
           // Use fully-qualified native name if present
           topLevelQualifiedNameSource(nativeQualifiedName)
-        enclosingTypeDescriptor != null ->
-          // Use fully-qualified name for top-level type, and simple name for inner types
-          Source.dotSeparated(
-            qualifiedNameSource(enclosingTypeDescriptor),
-            identifierSource(typeDeclaration.ktSimpleName()),
-          )
         else -> topLevelQualifiedNameSource(typeDescriptor.ktQualifiedName)
       }
     } else {

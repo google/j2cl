@@ -65,12 +65,12 @@ open class Main {
   @JsMethod
   fun entryPoint() {
    Main().execute()
-   var jsFunction: Main.Function = Main.FunctionImpl()
-   jsFunction = Main.Function { s: String? ->
+   var jsFunction: Function = FunctionImpl()
+   jsFunction = Function { s: String? ->
     Main.log(42)
    }
    jsFunction.apply("foo")
-   Main.MyJsType()
+   MyJsType()
    object : Any() {
     @JsMethod(name = "foo")
     internal fun foo_pp_libraryinfo() {}
@@ -90,7 +90,7 @@ open class Main {
   fun main() {
    val foo: Main.Foo? = null
    foo!!.instanceMethod_pp_libraryinfo()
-   val clazz: Class<*> = Main.Foo::class.javaObjectType
+   val clazz: Class<*> = Foo::class.javaObjectType
   }
  }
 
@@ -127,7 +127,7 @@ open class Main {
  }
 
  @ObjCName("J2ktLibraryinfoMain_FunctionImpl", swiftName = "LibraryinfoMain_FunctionImpl", exact = true)
- class FunctionImpl internal constructor(): Main.Function {
+ class FunctionImpl internal constructor(): Function {
   override fun apply(s: String?) {}
  }
 

@@ -30,12 +30,12 @@ class MethodReference internal constructor() {
  @ObjCName("J2ktJ2ktMethodReferenceCompanion", swiftName = "J2ktMethodReferenceCompanion", exact = true)
  companion object {
   @JvmStatic
-  internal fun <T> foo_pp_j2kt(inputs: MethodReference.Foo<out MethodReference.Foo<out T>?>?) {
-   MethodReference.transform_pp_j2kt/* <capture#1-of out MethodReference.Foo<out T>?, MethodReference.Foo<capture#2-of out T>?> */(
+  internal fun <T> foo_pp_j2kt(inputs: Foo<out Foo<out T>?>?) {
+   MethodReference.transform_pp_j2kt/* <capture#1-of out Foo<out T>?, Foo<capture#2-of out T>?> */(
     inputs,
-    object : MethodReference.Function<MethodReference.Foo<out T>?, MethodReference.Foo<out T>?> {
-     override fun <H> apply(arg0: MethodReference.Foo<out T>?): MethodReference.Foo<out T>? {
-      val arg0_1 /* capture#3-of out MethodReference.Foo<out T>? */ = arg0 as MethodReference.Foo<out T>?
+    object : Function<Foo<out T>?, Foo<out T>?> {
+     override fun <H> apply(arg0: Foo<out T>?): Foo<out T>? {
+      val arg0_1 /* capture#3-of out Foo<out T>? */ = arg0 as Foo<out T>?
       return arg0_1!!.bar()
      }
     },
@@ -43,7 +43,7 @@ class MethodReference internal constructor() {
   }
 
   @JvmStatic
-  internal fun <F, T> transform_pp_j2kt(foo: MethodReference.Foo<F>?, function: MethodReference.Function<in F, out T>?) {}
+  internal fun <F, T> transform_pp_j2kt(foo: Foo<F>?, function: Function<in F, out T>?) {}
  }
 
  @ObjCName("J2ktJ2ktMethodReference_Function", swiftName = "J2ktMethodReference_Function", exact = true)
@@ -57,6 +57,6 @@ class MethodReference internal constructor() {
  @ObjCName("J2ktJ2ktMethodReference_Foo", swiftName = "J2ktMethodReference_Foo", exact = true)
  fun interface Foo<T> {
   @ObjCName("bar")
-  fun bar(): MethodReference.Foo<T>?
+  fun bar(): Foo<T>?
  }
 }

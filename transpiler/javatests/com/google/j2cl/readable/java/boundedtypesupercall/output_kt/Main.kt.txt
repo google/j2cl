@@ -45,8 +45,8 @@ open class Main {
   }
 
   @ObjCName("doSomething")
-  open fun doSomething(): Main.Foo<T>? {
-   return object : Main.Foo<T>(
+  open fun doSomething(): Foo<T>? {
+   return object : Foo<T>(
     this@Bar.getSomething(),
    ) {
     override fun foo() {}

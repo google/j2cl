@@ -50,49 +50,49 @@ open class Main {
   @JvmStatic
   @ObjCName("testJsEnumSwitch")
   fun testJsEnumSwitch() {
-   var comparableJsEnum: Main.ComparableJsEnum? = if (Main.ComparableJsEnum.ONE.getValue() == 1) Main.ComparableJsEnum.TWO else null
+   var comparableJsEnum: ComparableJsEnum? = if (ComparableJsEnum.ONE.getValue() == 1) ComparableJsEnum.TWO else null
    when (comparableJsEnum!!) {
-    Main.ComparableJsEnum.TWO -> {}
+    ComparableJsEnum.TWO -> {}
     else -> {}
    }
    val comparable: Comparable<Any>? = comparableJsEnum as Comparable<Any>?
-   comparableJsEnum = comparable as Main.ComparableJsEnum?
-   var intJsEnum: Main.IntJsEnum? = if (Main.IntJsEnum.ELEVEN.getValue() == 10) Main.IntJsEnum.ELEVEN else null
+   comparableJsEnum = comparable as ComparableJsEnum?
+   var intJsEnum: IntJsEnum? = if (IntJsEnum.ELEVEN.getValue() == 10) IntJsEnum.ELEVEN else null
    when (intJsEnum!!) {
-    Main.IntJsEnum.TWENTY -> {}
+    IntJsEnum.TWENTY -> {}
     else -> {}
    }
    val o: Any? = intJsEnum
-   intJsEnum = o as Main.IntJsEnum?
-   val equal: Boolean = intJsEnum === Main.IntJsEnum.TWENTY
-   var isInstance: Boolean = intJsEnum is Main.IntJsEnum
+   intJsEnum = o as IntJsEnum?
+   val equal: Boolean = intJsEnum === IntJsEnum.TWENTY
+   var isInstance: Boolean = intJsEnum is IntJsEnum
    isInstance = intJsEnum is Comparable<*>
-   val stringJsEnum: Main.StringJsEnum? = if (Main.StringJsEnum.ONE.getValue() === "10") Main.StringJsEnum.THREE else null
+   val stringJsEnum: StringJsEnum? = if (StringJsEnum.ONE.getValue() === "10") StringJsEnum.THREE else null
    when (stringJsEnum!!) {
-    Main.StringJsEnum.ONE -> {}
+    StringJsEnum.ONE -> {}
     else -> {}
    }
-   Main.NativeStringEnum.ONE.compareTo(
-    Main.NativeStringEnum.THREE,
+   NativeStringEnum.ONE.compareTo(
+    NativeStringEnum.THREE,
    )
-   Main.NativeStringEnum.ONE.equals(
-    Main.NativeStringEnum.THREE,
+   NativeStringEnum.ONE.equals(
+    NativeStringEnum.THREE,
    )
-   val supplier: Main.Supplier<Main.ComparableJsEnum?> = Main.Supplier<Main.ComparableJsEnum?> {
-    return@Supplier Main.ComparableJsEnum.ONE
+   val supplier: Supplier<ComparableJsEnum?> = Supplier<ComparableJsEnum?> {
+    return@Supplier ComparableJsEnum.ONE
    }
-   val consummer: Main.Consumer<Main.ComparableJsEnum?> = Main.Consumer<Main.ComparableJsEnum?> { e: Main.ComparableJsEnum? ->
+   val consummer: Consumer<ComparableJsEnum?> = Consumer<ComparableJsEnum?> { e: ComparableJsEnum? ->
     e!!.ordinal
    }
    Main.acceptsJsFunctionSupplier(
-    Main.JsFunctionSuppiler<Main.ComparableJsEnum?> {
-     return@JsFunctionSuppiler Main.ComparableJsEnum.ONE
+    JsFunctionSuppiler<ComparableJsEnum?> {
+     return@JsFunctionSuppiler ComparableJsEnum.ONE
     },
    )
    Main.acceptsSupplierOfSupplier(
-    Main.Supplier<Main.Supplier<Main.ComparableJsEnum?>?> {
-     return@Supplier Main.Supplier<Main.ComparableJsEnum?> {
-      return@Supplier Main.ComparableJsEnum.ONE
+    Supplier<Supplier<ComparableJsEnum?>?> {
+     return@Supplier Supplier<ComparableJsEnum?> {
+      return@Supplier ComparableJsEnum.ONE
      }
     },
    )
@@ -100,16 +100,16 @@ open class Main {
 
   @JvmStatic
   private fun testExhaustiveJsEnumSwitchExpression() {
-   val comparableJsEnum: Main.ComparableJsEnum? = if (Main.ComparableJsEnum.ONE.getValue() == 1) Main.ComparableJsEnum.TWO else null
+   val comparableJsEnum: ComparableJsEnum? = if (ComparableJsEnum.ONE.getValue() == 1) ComparableJsEnum.TWO else null
    val i: Int = run {
     when (comparableJsEnum!!) {
-     Main.ComparableJsEnum.TWO -> {
+     ComparableJsEnum.TWO -> {
       return@run 2
      }
-     Main.ComparableJsEnum.ONE -> {
+     ComparableJsEnum.ONE -> {
       return@run 1
      }
-     Main.ComparableJsEnum.ZERO -> {
+     ComparableJsEnum.ZERO -> {
       return@run 0
      }
     }
@@ -118,96 +118,96 @@ open class Main {
 
   @JvmStatic
   private fun testJsEnumAutoboxingSpecialMethods() {
-   val stringJsEnum: Main.StringJsEnum = Main.StringJsEnum.ONE
-   val nullStringJsEnum: Main.StringJsEnum? = null
-   val jsEnum: Main.ComparableJsEnum = Main.ComparableJsEnum.ONE
-   val nullJsEnum: Main.ComparableJsEnum? = null
-   val o: Any = Main.ComparableJsEnum.ONE
-   Main.StringJsEnum.ONE.equals(
-    Main.StringJsEnum.THREE,
+   val stringJsEnum: StringJsEnum = StringJsEnum.ONE
+   val nullStringJsEnum: StringJsEnum? = null
+   val jsEnum: ComparableJsEnum = ComparableJsEnum.ONE
+   val nullJsEnum: ComparableJsEnum? = null
+   val o: Any = ComparableJsEnum.ONE
+   StringJsEnum.ONE.equals(
+    StringJsEnum.THREE,
    )
-   Main.StringJsEnum.ONE.equals(stringJsEnum)
-   Main.StringJsEnum.ONE.equals(nullStringJsEnum)
-   Main.StringJsEnum.ONE.equals(null)
-   Main.StringJsEnum.ONE.equals(o)
+   StringJsEnum.ONE.equals(stringJsEnum)
+   StringJsEnum.ONE.equals(nullStringJsEnum)
+   StringJsEnum.ONE.equals(null)
+   StringJsEnum.ONE.equals(o)
    o.equals(
-    Main.StringJsEnum.THREE,
+    StringJsEnum.THREE,
    )
-   Main.ComparableJsEnum.ONE.compareTo(
-    Main.ComparableJsEnum.ZERO,
+   ComparableJsEnum.ONE.compareTo(
+    ComparableJsEnum.ZERO,
    )
-   Main.ComparableJsEnum.ONE.compareTo(
+   ComparableJsEnum.ONE.compareTo(
     null!!,
    )
-   Main.ComparableJsEnum.ONE.equals(
-    Main.ComparableJsEnum.ZERO,
+   ComparableJsEnum.ONE.equals(
+    ComparableJsEnum.ZERO,
    )
-   Main.ComparableJsEnum.ONE.equals(jsEnum)
-   Main.ComparableJsEnum.ONE.equals(nullJsEnum)
-   Main.ComparableJsEnum.ONE.equals(null)
-   Main.ComparableJsEnum.ONE.equals(o)
+   ComparableJsEnum.ONE.equals(jsEnum)
+   ComparableJsEnum.ONE.equals(nullJsEnum)
+   ComparableJsEnum.ONE.equals(null)
+   ComparableJsEnum.ONE.equals(o)
    o.equals(
-    Main.ComparableJsEnum.ZERO,
+    ComparableJsEnum.ZERO,
    )
-   Main.StringJsEnum.ONE.equals(jsEnum)
-   Main.boxingPassthrough<Main.ComparableJsEnum?>(
-    Main.ComparableJsEnum.ONE,
+   StringJsEnum.ONE.equals(jsEnum)
+   Main.boxingPassthrough<ComparableJsEnum?>(
+    ComparableJsEnum.ONE,
    )!!.equals(
-    Main.boxingPassthrough<Main.ComparableJsEnum?>(
-     Main.ComparableJsEnum.ONE,
+    Main.boxingPassthrough<ComparableJsEnum?>(
+     ComparableJsEnum.ONE,
     ),
    )
-   Main.boxingPassthrough<Main.ComparableJsEnum?>(
-    Main.ComparableJsEnum.ONE,
+   Main.boxingPassthrough<ComparableJsEnum?>(
+    ComparableJsEnum.ONE,
    )!!.equals(
-    Main.boxingPassthrough<Main.StringJsEnum?>(
-     Main.StringJsEnum.ONE,
+    Main.boxingPassthrough<StringJsEnum?>(
+     StringJsEnum.ONE,
     ),
    )
   }
 
   @JvmStatic
-  private fun acceptsJsFunctionSupplier(supplier: Main.JsFunctionSuppiler<Main.ComparableJsEnum?>?) {}
+  private fun acceptsJsFunctionSupplier(supplier: JsFunctionSuppiler<ComparableJsEnum?>?) {}
 
   @JvmStatic
-  private fun acceptsSupplierOfSupplier(supplier: Main.Supplier<Main.Supplier<Main.ComparableJsEnum?>?>?) {}
+  private fun acceptsSupplierOfSupplier(supplier: Supplier<Supplier<ComparableJsEnum?>?>?) {}
 
   @JvmStatic
   private fun testReturnsAndParameters() {
-   val returnedValue: Main.ComparableJsEnum? = Main.returnsJsEnum()
-   val returnedNullValue: Main.ComparableJsEnum? = Main.returnsNullJsEnum()
+   val returnedValue: ComparableJsEnum? = Main.returnsJsEnum()
+   val returnedNullValue: ComparableJsEnum? = Main.returnsNullJsEnum()
    Main.takesJsEnum(
-    Main.ComparableJsEnum.ONE,
+    ComparableJsEnum.ONE,
    )
   }
 
   @JvmStatic
-  private fun returnsJsEnum(): Main.ComparableJsEnum? {
-   return Main.ComparableJsEnum.ONE
+  private fun returnsJsEnum(): ComparableJsEnum? {
+   return ComparableJsEnum.ONE
   }
 
   @JvmStatic
-  private fun returnsNullJsEnum(): Main.ComparableJsEnum? {
+  private fun returnsNullJsEnum(): ComparableJsEnum? {
    return null
   }
 
   @JvmStatic
-  private fun takesJsEnum(value: Main.ComparableJsEnum?) {}
+  private fun takesJsEnum(value: ComparableJsEnum?) {}
 
   @JvmStatic
   private fun testBoxUnboxWithTypeInference() {
-   val templatedField: Main.TemplatedField<Main.ComparableJsEnum?> = Main.TemplatedField<Main.ComparableJsEnum?>(
-    Main.ComparableJsEnum.ONE,
+   val templatedField: TemplatedField<ComparableJsEnum?> = TemplatedField<ComparableJsEnum?>(
+    ComparableJsEnum.ONE,
    )
-   var unboxed: Main.ComparableJsEnum? = templatedField.getValue_pp_jsenum()
+   var unboxed: ComparableJsEnum? = templatedField.getValue_pp_jsenum()
    unboxed = templatedField.value_pp_jsenum
-   templatedField.value_pp_jsenum = Main.ComparableJsEnum.ONE
-   Arrays.asList<Main.ComparableJsEnum>(
-    Main.ComparableJsEnum.ONE,
+   templatedField.value_pp_jsenum = ComparableJsEnum.ONE
+   Arrays.asList<ComparableJsEnum>(
+    ComparableJsEnum.ONE,
    )
    templatedField.getValue_pp_jsenum()!!.ordinal
-   val b: Boolean = Main.ComparableJsEnum.ONE === Main.boxingPassthrough<Main.ComparableJsEnum?>(
-    Main.ComparableJsEnum.ONE,
+   val b: Boolean = ComparableJsEnum.ONE === Main.boxingPassthrough<ComparableJsEnum?>(
+    ComparableJsEnum.ONE,
    )
   }
 
@@ -218,9 +218,9 @@ open class Main {
 
   @JvmStatic
   internal fun boxingWithGenerics_pp_jsenum() {
-   Main.Foo<Any?>(
-    Optional.of<Main.IntJsEnum>(
-     Main.IntJsEnum.MINUSONE,
+   Foo<Any?>(
+    Optional.of<IntJsEnum>(
+     IntJsEnum.MINUSONE,
     ),
    )
   }
@@ -233,55 +233,55 @@ open class Main {
 
   @JvmStatic
   private fun testVarargs() {
-   Main.varargsConsumer<Main.SomeJsEnum?>(
-    Main.SomeJsEnum.A,
-    Main.SomeJsEnum.A,
+   Main.varargsConsumer<SomeJsEnum?>(
+    SomeJsEnum.A,
+    SomeJsEnum.A,
    )
-   val consumer: Main.Consumer<Main.SomeJsEnum?> = Main.Consumer<Main.SomeJsEnum?> { arg0: Main.SomeJsEnum? ->
-    Main.varargsConsumer<Main.SomeJsEnum?>(arg0)
+   val consumer: Consumer<SomeJsEnum?> = Consumer<SomeJsEnum?> { arg0: SomeJsEnum? ->
+    Main.varargsConsumer<SomeJsEnum?>(arg0)
    }
   }
 
   @JvmStatic
   private fun testNonNativeJsEnumArrays() {
-   val arr: Array<Main.IntJsEnum?> = arrayOf<Main.IntJsEnum?>(Main.IntJsEnum.MINUSONE, Main.IntJsEnum.TWENTY)
-   val b1: Boolean = arr[0] === Main.IntJsEnum.MINUSONE
-   val b2: Boolean = arr[1] === Main.IntJsEnum.TWENTY
+   val arr: Array<IntJsEnum?> = arrayOf<IntJsEnum?>(IntJsEnum.MINUSONE, IntJsEnum.TWENTY)
+   val b1: Boolean = arr[0] === IntJsEnum.MINUSONE
+   val b2: Boolean = arr[1] === IntJsEnum.TWENTY
    var obj: Any? = arr[0]
-   val v: Main.IntJsEnum? = arr[0]
-   val arr2: Array<Main.IntJsEnum?> = arrayOfNulls<Main.IntJsEnum>(2)
-   arr2[0] = Main.IntJsEnum.MINUSONE
-   arr2[1] = Main.IntJsEnum.TWENTY
-   val nestedArr: Array<Array<Main.IntJsEnum?>?> = arrayOf<Array<Main.IntJsEnum?>?>(arrayOf<Main.IntJsEnum?>(Main.IntJsEnum.MINUSONE))
-   nestedArr[0] = arrayOf<Main.IntJsEnum?>(Main.IntJsEnum.TWENTY)
-   val arrayWithNull: Array<Main.IntJsEnum?> = arrayOf<Main.IntJsEnum?>(null)
+   val v: IntJsEnum? = arr[0]
+   val arr2: Array<IntJsEnum?> = arrayOfNulls<IntJsEnum>(2)
+   arr2[0] = IntJsEnum.MINUSONE
+   arr2[1] = IntJsEnum.TWENTY
+   val nestedArr: Array<Array<IntJsEnum?>?> = arrayOf<Array<IntJsEnum?>?>(arrayOf<IntJsEnum?>(IntJsEnum.MINUSONE))
+   nestedArr[0] = arrayOf<IntJsEnum?>(IntJsEnum.TWENTY)
+   val arrayWithNull: Array<IntJsEnum?> = arrayOf<IntJsEnum?>(null)
    arrayWithNull[0] = null
-   val list: MutableList<Main.IntJsEnum?> = ArrayList<Main.IntJsEnum>() as MutableList<Main.IntJsEnum?>
+   val list: MutableList<IntJsEnum?> = ArrayList<IntJsEnum>() as MutableList<IntJsEnum?>
    obj = list.toArray()
    Main.nonNativeJsEnumVarargs(
-    Main.IntJsEnum.MINUSONE,
-    Main.IntJsEnum.TWENTY,
+    IntJsEnum.MINUSONE,
+    IntJsEnum.TWENTY,
    )
    Main.nonNativeJsEnumArrayVarargs(
-    arrayOf<Main.IntJsEnum?>(Main.IntJsEnum.MINUSONE),
-    arrayOf<Main.IntJsEnum?>(Main.IntJsEnum.TWENTY),
+    arrayOf<IntJsEnum?>(IntJsEnum.MINUSONE),
+    arrayOf<IntJsEnum?>(IntJsEnum.TWENTY),
    )
-   Main.tVarargs<Main.IntJsEnum?>(
-    Main.IntJsEnum.MINUSONE,
-    Main.IntJsEnum.TWENTY,
+   Main.tVarargs<IntJsEnum?>(
+    IntJsEnum.MINUSONE,
+    IntJsEnum.TWENTY,
    )
   }
 
   @JvmStatic
-  private fun nonNativeJsEnumVarargs(vararg values: Main.IntJsEnum?) {
-   val values_1: Array<Main.IntJsEnum?>? = values as Array<Main.IntJsEnum?>?
-   val v: Main.IntJsEnum? = values_1!![0]
+  private fun nonNativeJsEnumVarargs(vararg values: IntJsEnum?) {
+   val values_1: Array<IntJsEnum?>? = values as Array<IntJsEnum?>?
+   val v: IntJsEnum? = values_1!![0]
   }
 
   @JvmStatic
-  private fun nonNativeJsEnumArrayVarargs(vararg values: Array<Main.IntJsEnum?>?) {
-   val values_1: Array<Array<Main.IntJsEnum?>?>? = values as Array<Array<Main.IntJsEnum?>?>?
-   val v: Array<Main.IntJsEnum?>? = values_1!![0]
+  private fun nonNativeJsEnumArrayVarargs(vararg values: Array<IntJsEnum?>?) {
+   val values_1: Array<Array<IntJsEnum?>?>? = values as Array<Array<IntJsEnum?>?>?
+   val v: Array<IntJsEnum?>? = values_1!![0]
   }
 
   @JvmStatic
@@ -292,26 +292,26 @@ open class Main {
 
   @JvmStatic
   private fun testNonNativeStringJsEnumArrays() {
-   val arr: Array<Main.StringJsEnum?> = arrayOf<Main.StringJsEnum?>(Main.StringJsEnum.ONE, Main.StringJsEnum.THREE)
-   val b1: Boolean = arr[0] === Main.StringJsEnum.ONE
+   val arr: Array<StringJsEnum?> = arrayOf<StringJsEnum?>(StringJsEnum.ONE, StringJsEnum.THREE)
+   val b1: Boolean = arr[0] === StringJsEnum.ONE
    val obj: Any? = arr[0]
-   val v: Main.StringJsEnum? = arr[0]
-   val arr2: Array<Main.StringJsEnum?> = arrayOfNulls<Main.StringJsEnum>(2)
-   arr2[0] = Main.StringJsEnum.ONE
-   val nestedArr: Array<Array<Main.StringJsEnum?>?> = arrayOf<Array<Main.StringJsEnum?>?>(arrayOf<Main.StringJsEnum?>(Main.StringJsEnum.ONE))
-   val arrayWithNull: Array<Main.StringJsEnum?> = arrayOf<Main.StringJsEnum?>(null)
+   val v: StringJsEnum? = arr[0]
+   val arr2: Array<StringJsEnum?> = arrayOfNulls<StringJsEnum>(2)
+   arr2[0] = StringJsEnum.ONE
+   val nestedArr: Array<Array<StringJsEnum?>?> = arrayOf<Array<StringJsEnum?>?>(arrayOf<StringJsEnum?>(StringJsEnum.ONE))
+   val arrayWithNull: Array<StringJsEnum?> = arrayOf<StringJsEnum?>(null)
    arrayWithNull[0] = null
   }
 
   @JvmStatic
   private fun testNativeJsEnumArrays() {
-   val arr: Array<Main.NativeStringEnum?> = arrayOf<Main.NativeStringEnum?>(Main.NativeStringEnum.ONE, Main.NativeStringEnum.THREE)
-   val b1: Boolean = arr[0] === Main.NativeStringEnum.ONE
-   val arr2: Array<Main.NativeStringEnum?> = arrayOfNulls<Main.NativeStringEnum>(2)
-   arr2[0] = Main.NativeStringEnum.ONE
-   val nestedArr: Array<Array<Main.NativeStringEnum?>?> = arrayOf<Array<Main.NativeStringEnum?>?>(arrayOf<Main.NativeStringEnum?>(Main.NativeStringEnum.ONE))
-   nestedArr[0] = arrayOf<Main.NativeStringEnum?>(Main.NativeStringEnum.THREE)
-   val arrayWithNull: Array<Main.NativeStringEnum?> = arrayOf<Main.NativeStringEnum?>(null)
+   val arr: Array<NativeStringEnum?> = arrayOf<NativeStringEnum?>(NativeStringEnum.ONE, NativeStringEnum.THREE)
+   val b1: Boolean = arr[0] === NativeStringEnum.ONE
+   val arr2: Array<NativeStringEnum?> = arrayOfNulls<NativeStringEnum>(2)
+   arr2[0] = NativeStringEnum.ONE
+   val nestedArr: Array<Array<NativeStringEnum?>?> = arrayOf<Array<NativeStringEnum?>?>(arrayOf<NativeStringEnum?>(NativeStringEnum.ONE))
+   nestedArr[0] = arrayOf<NativeStringEnum?>(NativeStringEnum.THREE)
+   val arrayWithNull: Array<NativeStringEnum?> = arrayOf<NativeStringEnum?>(null)
    arrayWithNull[0] = null
   }
  }
@@ -440,7 +440,7 @@ open class Main {
 
  @ObjCName("J2ktJsenumMain_Foo", swiftName = "JsenumMain_Foo", exact = true)
  open class Foo<T> {
-  internal constructor(c: Optional<Main.IntJsEnum>?)
+  internal constructor(c: Optional<IntJsEnum>?)
  }
 
  @ObjCName("J2ktJsenumMain_JsEnumWithRenamedProperties", swiftName = "JsenumMain_JsEnumWithRenamedProperties", exact = true)
@@ -461,7 +461,7 @@ open class Main {
  }
 
  @ObjCName("J2ktJsenumMain_SupplierConsumerImpl", swiftName = "JsenumMain_SupplierConsumerImpl", exact = true)
- open class SupplierConsumerImpl<T> internal constructor(): Main.Supplier<T>, Main.Consumer<T> {
+ open class SupplierConsumerImpl<T> internal constructor(): Supplier<T>, Consumer<T> {
   override fun accept(t: T) {}
 
   override fun get(): T {
@@ -470,21 +470,21 @@ open class Main {
  }
 
  @ObjCName("J2ktJsenumMain_ComparableJsEnumSupplierConsumer", swiftName = "JsenumMain_ComparableJsEnumSupplierConsumer", exact = true)
- interface ComparableJsEnumSupplierConsumer: Main.Supplier<Main.ComparableJsEnum?>, Main.Consumer<Main.ComparableJsEnum?> {
+ interface ComparableJsEnumSupplierConsumer: Supplier<ComparableJsEnum?>, Consumer<ComparableJsEnum?> {
   @JsMethod
-  override fun get(): Main.ComparableJsEnum?
+  override fun get(): ComparableJsEnum?
 
-  override fun accept(e: Main.ComparableJsEnum?)
+  override fun accept(e: ComparableJsEnum?)
  }
 
  @ObjCName("J2ktJsenumMain_ComparableJsEnumSupplierConsumerImpl", swiftName = "JsenumMain_ComparableJsEnumSupplierConsumerImpl", exact = true)
- open class ComparableJsEnumSupplierConsumerImpl internal constructor(): Main.SupplierConsumerImpl<Main.ComparableJsEnum?>(), Main.ComparableJsEnumSupplierConsumer
+ open class ComparableJsEnumSupplierConsumerImpl internal constructor(): SupplierConsumerImpl<ComparableJsEnum?>(), ComparableJsEnumSupplierConsumer
 
  @ObjCName("J2ktJsenumMain_ComparableJsEnumSupplierConsumerImplWithOverrides", swiftName = "JsenumMain_ComparableJsEnumSupplierConsumerImplWithOverrides", exact = true)
- open class ComparableJsEnumSupplierConsumerImplWithOverrides internal constructor(): Main.SupplierConsumerImpl<Main.ComparableJsEnum?>(), Main.ComparableJsEnumSupplierConsumer {
-  override fun accept(t: Main.ComparableJsEnum?) {}
+ open class ComparableJsEnumSupplierConsumerImplWithOverrides internal constructor(): SupplierConsumerImpl<ComparableJsEnum?>(), ComparableJsEnumSupplierConsumer {
+  override fun accept(t: ComparableJsEnum?) {}
 
-  override fun get(): Main.ComparableJsEnum? {
+  override fun get(): ComparableJsEnum? {
    return null
   }
  }
@@ -504,13 +504,13 @@ open class Main {
  }
 
  @ObjCName("J2ktJsenumMain_SubtypeVarargs", swiftName = "JsenumMain_SubtypeVarargs", exact = true)
- open class SubtypeVarargs: Main.BaseVarargs<Main.SomeJsEnum?> {
+ open class SubtypeVarargs: BaseVarargs<SomeJsEnum?> {
   internal constructor(): super(
-   Main.SomeJsEnum.A,
-   Main.SomeJsEnum.A,
+   SomeJsEnum.A,
+   SomeJsEnum.A,
   )
  }
 
  @ObjCName("J2ktJsenumMain_SubtypeImplicitVarargs", swiftName = "JsenumMain_SubtypeImplicitVarargs", exact = true)
- open class SubtypeImplicitVarargs internal constructor(): Main.BaseVarargs<Main.SomeJsEnum?>()
+ open class SubtypeImplicitVarargs internal constructor(): BaseVarargs<SomeJsEnum?>()
 }

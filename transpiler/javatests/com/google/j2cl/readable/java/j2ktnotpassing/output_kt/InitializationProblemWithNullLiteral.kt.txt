@@ -34,7 +34,7 @@ open class InitializationProblemWithNullLiteral {
  internal val completelyNormalFinalField_pp_j2ktnotpassing: Int
 
  @JvmField
- internal var problematicFoo_pp_j2ktnotpassing: InitializationProblemWithNullLiteral.Foo<*> = InitializationProblemWithNullLiteral.Foo.with_pp_j2ktnotpassing<Any>(
+ internal var problematicFoo_pp_j2ktnotpassing: Foo<*> = Foo.with_pp_j2ktnotpassing<Any>(
   null!!,
  )
 
@@ -47,8 +47,8 @@ open class InitializationProblemWithNullLiteral {
   @ObjCName("J2ktJ2ktnotpassingInitializationProblemWithNullLiteral_FooCompanion", swiftName = "J2ktnotpassingInitializationProblemWithNullLiteral_FooCompanion", exact = true)
   companion object {
    @JvmStatic
-   internal fun <V> with_pp_j2ktnotpassing(v: V): InitializationProblemWithNullLiteral.Foo<V> {
-    return InitializationProblemWithNullLiteral.Foo<V>()
+   internal fun <V> with_pp_j2ktnotpassing(v: V): Foo<V> {
+    return Foo<V>()
    }
   }
  }

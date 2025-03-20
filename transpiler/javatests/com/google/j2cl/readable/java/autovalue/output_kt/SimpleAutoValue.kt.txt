@@ -19,7 +19,7 @@
 package autovalue
 
 import javaemul.lang.*
-import autovalue.AutoValue_EmptyAutoValue
+import autovalue.AutoValue_EmptyAutoValue.Builder
 import autovalue.AutoValue_SimpleAutoValue
 import autovalue.EmptyAutoValue
 import java.util.AbstractCollection
@@ -64,7 +64,7 @@ abstract class SimpleAutoValue {
 
  private var field1: EmptyAutoValue? = null
 
- private var field2: EmptyAutoValue = AutoValue_EmptyAutoValue.Builder().build()!!
+ private var field2: EmptyAutoValue = Builder().build()!!
 
  @ObjCName("J2ktAutovalueSimpleAutoValueCompanion", swiftName = "AutovalueSimpleAutoValueCompanion", exact = true)
  companion object {

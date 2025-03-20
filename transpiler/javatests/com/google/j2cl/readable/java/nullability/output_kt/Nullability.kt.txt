@@ -103,91 +103,91 @@ open class Nullability {
 
  @ObjCName("m4")
  open fun m4(
-  @ObjCName("withNullabilityNullability_MyFunction", swiftName = "with") f: Nullability.MyFunction
+  @ObjCName("withNullabilityNullability_MyFunction", swiftName = "with") f: MyFunction
  ) {}
 
  @ObjCName("J2ktNullabilityNullabilityCompanion", swiftName = "NullabilityNullabilityCompanion", exact = true)
  companion object {
   @JvmStatic
-  internal fun <T: String?> testDefaultNullabilityBounds_pp_nullability(defaultNullability: Nullability.ParameterizedDefaultNullability<T>?) {
+  internal fun <T: String?> testDefaultNullabilityBounds_pp_nullability(defaultNullability: ParameterizedDefaultNullability<T>?) {
    defaultNullability!!.getNonNullable_pp_nullability().length
    defaultNullability!!.getNullable_pp_nullability()!!.length
    defaultNullability!!.getDefaultNullability_pp_nullability()!!.length
   }
 
   @JvmStatic
-  internal fun <T: String?> testDefaultNullabilityBounds_pp_nullability(nullable: Nullability.ParameterizedNullable<T>?) {
+  internal fun <T: String?> testDefaultNullabilityBounds_pp_nullability(nullable: ParameterizedNullable<T>?) {
    nullable!!.getNonNullable_pp_nullability().length
    nullable!!.getNullable_pp_nullability()!!.length
    nullable!!.getDefaultNullability_pp_nullability()!!.length
   }
 
   @JvmStatic
-  internal fun <T: String?> testNullableBounds_pp_nullability(defaultNullability: Nullability.ParameterizedDefaultNullability<T>?) {
+  internal fun <T: String?> testNullableBounds_pp_nullability(defaultNullability: ParameterizedDefaultNullability<T>?) {
    defaultNullability!!.getNonNullable_pp_nullability().length
    defaultNullability!!.getNullable_pp_nullability()!!.length
    defaultNullability!!.getDefaultNullability_pp_nullability()!!.length
   }
 
   @JvmStatic
-  internal fun <T: String?> testNullableBounds_pp_nullability(nullable: Nullability.ParameterizedNullable<T>?) {
+  internal fun <T: String?> testNullableBounds_pp_nullability(nullable: ParameterizedNullable<T>?) {
    nullable!!.getNonNullable_pp_nullability().length
    nullable!!.getNullable_pp_nullability()!!.length
    nullable!!.getDefaultNullability_pp_nullability()!!.length
   }
 
   @JvmStatic
-  internal fun <T: String> testNonNullableBounds_pp_nullability(defaultNullability: Nullability.ParameterizedDefaultNullability<T>?) {
+  internal fun <T: String> testNonNullableBounds_pp_nullability(defaultNullability: ParameterizedDefaultNullability<T>?) {
    defaultNullability!!.getNonNullable_pp_nullability().length
    defaultNullability!!.getNullable_pp_nullability()!!.length
    defaultNullability!!.getDefaultNullability_pp_nullability()!!.length
   }
 
   @JvmStatic
-  internal fun <T: String> testNonNullableBounds_pp_nullability(nullable: Nullability.ParameterizedNullable<T>?) {
+  internal fun <T: String> testNonNullableBounds_pp_nullability(nullable: ParameterizedNullable<T>?) {
    nullable!!.getNonNullable_pp_nullability().length
    nullable!!.getNullable_pp_nullability()!!.length
    nullable!!.getDefaultNullability_pp_nullability()!!.length
   }
 
   @JvmStatic
-  internal fun <T: String> testNonNullableBounds_pp_nullability(nonNullable: Nullability.ParameterizedNonNullable<T>?) {
+  internal fun <T: String> testNonNullableBounds_pp_nullability(nonNullable: ParameterizedNonNullable<T>?) {
    nonNullable!!.getNonNullable_pp_nullability().length
    nonNullable!!.getNullable_pp_nullability()!!.length
    nonNullable!!.getDefaultNullability_pp_nullability().length
   }
 
   @JvmStatic
-  internal fun testDefaultNullabilityWildcards_pp_nullability(nonNullable: Nullability.ParameterizedDefaultNullability<out String?>?) {
+  internal fun testDefaultNullabilityWildcards_pp_nullability(nonNullable: ParameterizedDefaultNullability<out String?>?) {
    nonNullable!!.getNonNullable_pp_nullability()!!.length
    nonNullable!!.getNullable_pp_nullability()!!.length
    nonNullable!!.getDefaultNullability_pp_nullability()!!.length
   }
 
   @JvmStatic
-  internal fun testDefaultNullabilityWildcards_pp_nullability(nonNullable: Nullability.ParameterizedNullable<out String?>?) {
+  internal fun testDefaultNullabilityWildcards_pp_nullability(nonNullable: ParameterizedNullable<out String?>?) {
    nonNullable!!.getNonNullable_pp_nullability()!!.length
    nonNullable!!.getNullable_pp_nullability()!!.length
    nonNullable!!.getDefaultNullability_pp_nullability()!!.length
   }
 
   @JvmStatic
-  internal fun testDefaultNullabilityWildcards_pp_nullability(nonNullable: Nullability.ParameterizedNonNullable<out String>?) {
+  internal fun testDefaultNullabilityWildcards_pp_nullability(nonNullable: ParameterizedNonNullable<out String>?) {
    nonNullable!!.getNonNullable_pp_nullability()!!.length
    nonNullable!!.getNullable_pp_nullability()!!.length
    nonNullable!!.getDefaultNullability_pp_nullability()!!.length
   }
 
   @JvmStatic
-  internal fun <T> testRecursive_pp_nullability() where T: Nullability.Recursive<T>, T: Marker? {
-   val generic: Nullability.RecursiveParam<T> = Nullability.RecursiveParam<T>()
-   val parametrized: Nullability.RecursiveParam<Nullability.RecursiveChild> = Nullability.RecursiveParam<Nullability.RecursiveChild>()
+  internal fun <T> testRecursive_pp_nullability() where T: Recursive<T>, T: Marker? {
+   val generic: RecursiveParam<T> = RecursiveParam<T>()
+   val parametrized: RecursiveParam<RecursiveChild> = RecursiveParam<RecursiveChild>()
   }
 
   @JvmStatic
-  internal fun <T> testRecursiveNullable_pp_nullability() where T: Nullability.RecursiveNullable<T>?, T: Marker? {
-   val generic: Nullability.RecursiveNullableParam<T> = Nullability.RecursiveNullableParam<T>()
-   val parametrized: Nullability.RecursiveNullableParam<Nullability.RecursiveNullableChild?> = Nullability.RecursiveNullableParam<Nullability.RecursiveNullableChild?>()
+  internal fun <T> testRecursiveNullable_pp_nullability() where T: RecursiveNullable<T>?, T: Marker? {
+   val generic: RecursiveNullableParam<T> = RecursiveNullableParam<T>()
+   val parametrized: RecursiveNullableParam<RecursiveNullableChild?> = RecursiveNullableParam<RecursiveNullableChild?>()
   }
 
   @JvmStatic
@@ -244,7 +244,7 @@ open class Nullability {
  }
 
  @ObjCName("J2ktNullabilityNullability_NullableTemplatedReturnOverride", swiftName = "NullabilityNullability_NullableTemplatedReturnOverride", exact = true)
- open class NullableTemplatedReturnOverride: Nullability.NullableTemplatedReturn<String?> {
+ open class NullableTemplatedReturnOverride: NullableTemplatedReturn<String?> {
   override fun foo(): String? {
    return "foo"
   }
@@ -297,26 +297,26 @@ open class Nullability {
 
  @ObjCName("J2ktNullabilityNullability_NonNullableInsideNullable", swiftName = "NullabilityNullability_NonNullableInsideNullable", exact = true)
  open class NonNullableInsideNullable<T> internal constructor() {
-  internal open fun nonNullableTest_pp_nullability(nonNullable: Nullability.ParameterizedNonNullable<T & Any>?) {}
+  internal open fun nonNullableTest_pp_nullability(nonNullable: ParameterizedNonNullable<T & Any>?) {}
  }
 
  @ObjCName("J2ktNullabilityNullability_Recursive", swiftName = "NullabilityNullability_Recursive", exact = true)
- open class Recursive<T> internal constructor() where T: Nullability.Recursive<T>, T: Marker?
+ open class Recursive<T> internal constructor() where T: Recursive<T>, T: Marker?
 
  @ObjCName("J2ktNullabilityNullability_RecursiveNullable", swiftName = "NullabilityNullability_RecursiveNullable", exact = true)
- open class RecursiveNullable<T> internal constructor() where T: Nullability.RecursiveNullable<T>?, T: Marker?
+ open class RecursiveNullable<T> internal constructor() where T: RecursiveNullable<T>?, T: Marker?
 
  @ObjCName("J2ktNullabilityNullability_RecursiveChild", swiftName = "NullabilityNullability_RecursiveChild", exact = true)
- open class RecursiveChild internal constructor(): Nullability.Recursive<Nullability.RecursiveChild>(), Marker
+ open class RecursiveChild internal constructor(): Recursive<RecursiveChild>(), Marker
 
  @ObjCName("J2ktNullabilityNullability_RecursiveNullableChild", swiftName = "NullabilityNullability_RecursiveNullableChild", exact = true)
- open class RecursiveNullableChild internal constructor(): Nullability.RecursiveNullable<Nullability.RecursiveNullableChild?>(), Marker
+ open class RecursiveNullableChild internal constructor(): RecursiveNullable<RecursiveNullableChild?>(), Marker
 
  @ObjCName("J2ktNullabilityNullability_RecursiveParam", swiftName = "NullabilityNullability_RecursiveParam", exact = true)
- open class RecursiveParam<T> internal constructor() where T: Nullability.Recursive<T>, T: Marker?
+ open class RecursiveParam<T> internal constructor() where T: Recursive<T>, T: Marker?
 
  @ObjCName("J2ktNullabilityNullability_RecursiveNullableParam", swiftName = "NullabilityNullability_RecursiveNullableParam", exact = true)
- open class RecursiveNullableParam<T> internal constructor() where T: Nullability.RecursiveNullable<T>?, T: Marker?
+ open class RecursiveNullableParam<T> internal constructor() where T: RecursiveNullable<T>?, T: Marker?
 }
 
 @ObjCName("J2ktNullabilityMarker", swiftName = "NullabilityMarker", exact = true)

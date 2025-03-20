@@ -31,11 +31,11 @@ import kotlin.native.ObjCName
 open class GenericClassLiteral {
  @ObjCName("test")
  open fun test(
-  @ObjCName("withJ2ktGenericClassLiteral_Generic", swiftName = "with") genericFoo: GenericClassLiteral.Generic<GenericClassLiteral.Foo>
+  @ObjCName("withJ2ktGenericClassLiteral_Generic", swiftName = "with") genericFoo: Generic<Foo>
  ) {
-  this.accept<GenericClassLiteral.Generic<Any>>(
-   genericFoo as GenericClassLiteral.Generic<Any>,
-   GenericClassLiteral.Generic::class.javaObjectType as Class<GenericClassLiteral.Generic<Any>>,
+  this.accept<Generic<Any>>(
+   genericFoo as Generic<Any>,
+   Generic::class.javaObjectType as Class<Generic<Any>>,
   )
  }
 

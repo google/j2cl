@@ -19,7 +19,6 @@
 package autovalue
 
 import javaemul.lang.*
-import autovalue.AutoValue_DefaultConstructorAutoValue
 import javaemul.lang.annotations.WasAutoValue
 import kotlin.Boolean
 import kotlin.OptIn
@@ -40,7 +39,7 @@ abstract class DefaultConstructorAutoValue {
  companion object {
   @JvmStatic
   internal fun create_pp_autovalue(): DefaultConstructorAutoValue? {
-   return AutoValue_DefaultConstructorAutoValue.Builder().setBooleanField_pp_autovalue(true)!!.build()
+   return autovalue.AutoValue_DefaultConstructorAutoValue.Builder().setBooleanField_pp_autovalue(true)!!.build()
   }
  }
 
@@ -49,7 +48,7 @@ abstract class DefaultConstructorAutoValue {
  abstract class Builder {
   constructor()
 
-  internal abstract fun setBooleanField_pp_autovalue(x: Boolean): DefaultConstructorAutoValue.Builder?
+  internal abstract fun setBooleanField_pp_autovalue(x: Boolean): Builder?
 
   @ObjCName("build")
   abstract fun build(): DefaultConstructorAutoValue?

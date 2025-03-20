@@ -43,16 +43,16 @@ open class AccidentalOverride {
  }
 
  @ObjCName("J2ktJ2ktAccidentalOverride_TestImplicitOverride", swiftName = "J2ktAccidentalOverride_TestImplicitOverride", exact = true)
- open inner class TestImplicitOverride internal constructor(): AccidentalOverride.SuperClass(), AccidentalOverride.Interface {
+ open inner class TestImplicitOverride internal constructor(): AccidentalOverride.SuperClass(), Interface {
   override fun accidentalOverride() {
-   super<AccidentalOverride.SuperClass>.accidentalOverride()
+   super<SuperClass>.accidentalOverride()
   }
  }
 
  @ObjCName("J2ktJ2ktAccidentalOverride_TestExplicitOverride", swiftName = "J2ktAccidentalOverride_TestExplicitOverride", exact = true)
- open inner class TestExplicitOverride internal constructor(): AccidentalOverride.SuperClass(), AccidentalOverride.Interface {
+ open inner class TestExplicitOverride internal constructor(): AccidentalOverride.SuperClass(), Interface {
   override fun accidentalOverride() {
-   super<AccidentalOverride.SuperClass>.accidentalOverride()
+   super<SuperClass>.accidentalOverride()
   }
  }
 
@@ -63,18 +63,18 @@ open class AccidentalOverride {
  }
 
  @ObjCName("J2ktJ2ktAccidentalOverride_TestImplicitOverrideInAbstractClass", swiftName = "J2ktAccidentalOverride_TestImplicitOverrideInAbstractClass", exact = true)
- abstract inner class TestImplicitOverrideInAbstractClass internal constructor(): AccidentalOverride.SubClass(), AccidentalOverride.Interface {
+ abstract inner class TestImplicitOverrideInAbstractClass internal constructor(): AccidentalOverride.SubClass(), Interface {
   abstract override fun abstractAccidentalOverride()
 
   override fun accidentalOverride() {
-   super<AccidentalOverride.SubClass>.accidentalOverride()
+   super<SubClass>.accidentalOverride()
   }
  }
 
  @ObjCName("J2ktJ2ktAccidentalOverride_TestExplicitOverrideInAbstractClass", swiftName = "J2ktAccidentalOverride_TestExplicitOverrideInAbstractClass", exact = true)
- abstract inner class TestExplicitOverrideInAbstractClass internal constructor(): AccidentalOverride.SubClass(), AccidentalOverride.Interface {
+ abstract inner class TestExplicitOverrideInAbstractClass internal constructor(): AccidentalOverride.SubClass(), Interface {
   override fun accidentalOverride() {
-   super<AccidentalOverride.SubClass>.accidentalOverride()
+   super<SubClass>.accidentalOverride()
   }
 
   abstract override fun abstractAccidentalOverride()

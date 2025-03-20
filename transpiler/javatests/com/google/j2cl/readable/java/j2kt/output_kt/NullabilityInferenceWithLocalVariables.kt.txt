@@ -43,24 +43,24 @@ open class NullabilityInferenceWithLocalVariables {
 
   @JvmStatic
   @ObjCName("testConstructor")
-  fun testConstructor(): NullabilityInferenceWithLocalVariables.Foo<String> {
+  fun testConstructor(): Foo<String> {
    val local: String = ""
-   return NullabilityInferenceWithLocalVariables.Foo<Any?>(local, "") as NullabilityInferenceWithLocalVariables.Foo<String>
+   return Foo<Any?>(local, "") as Foo<String>
   }
 
   @JvmStatic
   @ObjCName("testMethod")
-  fun testMethod(): NullabilityInferenceWithLocalVariables.Foo<String> {
+  fun testMethod(): Foo<String> {
    val local: String = ""
-   return NullabilityInferenceWithLocalVariables.Foo.foo<String>(local, "")
+   return Foo.foo<String>(local, "")
   }
 
   @JvmStatic
   @ObjCName("testMethodChain")
-  fun testMethodChain(): NullabilityInferenceWithLocalVariables.Foo<String> {
+  fun testMethodChain(): Foo<String> {
    val l1: String = ""
-   return NullabilityInferenceWithLocalVariables.Foo.foo<String>(l1).chain_pp_j2kt(
-    NullabilityInferenceWithLocalVariables.Foo.foo<String>(""),
+   return Foo.foo<String>(l1).chain_pp_j2kt(
+    Foo.foo<String>(""),
    )
   }
  }
@@ -69,7 +69,7 @@ open class NullabilityInferenceWithLocalVariables {
  open class Foo<T> {
   internal constructor(t1: T, t2: T)
 
-  internal open fun chain_pp_j2kt(foo: NullabilityInferenceWithLocalVariables.Foo<T>): NullabilityInferenceWithLocalVariables.Foo<T> {
+  internal open fun chain_pp_j2kt(foo: Foo<T>): Foo<T> {
    throw RuntimeException()
   }
 
@@ -79,7 +79,7 @@ open class NullabilityInferenceWithLocalVariables {
    @ObjCName("foo")
    fun <T> foo(
     @ObjCName("withId") t: T
-   ): NullabilityInferenceWithLocalVariables.Foo<T> {
+   ): Foo<T> {
     throw RuntimeException()
    }
 
@@ -88,7 +88,7 @@ open class NullabilityInferenceWithLocalVariables {
    fun <T> foo(
     @ObjCName("withId") t1: T,
     @ObjCName("withId") t2: T
-   ): NullabilityInferenceWithLocalVariables.Foo<T> {
+   ): Foo<T> {
     throw RuntimeException()
    }
   }
