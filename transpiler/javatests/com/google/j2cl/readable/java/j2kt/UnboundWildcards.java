@@ -64,18 +64,15 @@ public class UnboundWildcards {
   }
 
   public static void test131(Foo<? extends @Nullable Object> extendsNullableObject) {
-    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
-    // acceptNonNullTExtendsNullableObject(extendsNullableObject);
+    acceptNonNullTExtendsNullableObject(extendsNullableObject);
   }
 
   public static void test132(Foo<? extends @Nullable Object> extendsNullableObject) {
-    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
-    // acceptNonNullTExtendsObject(extendsNullableObject);
+    acceptNonNullTExtendsObject(extendsNullableObject);
   }
 
   public static void test133(Foo<? extends @Nullable Object> extendsNullableObject) {
-    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
-    // acceptNonNullTExtendsNonNullObject(extendsNullableObject);
+    acceptNonNullTExtendsNonNullObject(extendsNullableObject);
   }
 
   public static void test134(Foo<? extends @Nullable Object> extendsNullableObject) {
@@ -227,23 +224,19 @@ public class UnboundWildcards {
   }
 
   public static void test431(Foo<?> unbound) {
-    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
-    // acceptNonNullTExtendsNullableObject(unbound);
+    acceptNonNullTExtendsNullableObject(unbound);
   }
 
   public static void test432(Foo<?> unbound) {
-    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
-    // acceptNonNullTExtendsObject(unbound);
+    acceptNonNullTExtendsObject(unbound);
   }
 
   public static void test433(Foo<?> unbound) {
-    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
-    // acceptNonNullTExtendsNonNullObject(unbound);
+    acceptNonNullTExtendsNonNullObject(unbound);
   }
 
   public static void test434(Foo<?> unbound) {
-    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
-    // acceptNonNullT(unbound);
+    acceptNonNullT(unbound);
   }
 
   public static <T extends @Nullable Object> void acceptTExtendsNullableObject(Foo<T> foo) {}

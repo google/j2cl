@@ -94,14 +94,17 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
   }
 
   /**
-   * Converts captures to wildcards if they appear as a type argument, or project them to bounds if
-   * they appear at the top-level (non as type argument).
+   * Projects captures and non-type argument wildcards to bounds.
    *
    * <ul>
-   *   <li>{@code Foo<capture-of ? extends V>} -> {@code Foo<? extends V>}
-   *   <li>{@code Foo<capture-of ? super V>} -> {@code Foo<? super V>}
+   *   <li>{@code Foo<capture-of ? extends V>} -> {@code Foo<V>}
+   *   <li>{@code Foo<capture-of ? super V>} -> {@code Foo<V>}
    *   <li>{@code capture-of ? extends V} -> {@code V}
    *   <li>{@code capture-of ? super V} -> {@code V}
+   *   <li>{@code Foo<? extends V>} -> {@code Foo<? extends V>}
+   *   <li>{@code Foo<? super V>} -> {@code Foo<? super V>}
+   *   <li>{@code ? extends V} -> {@code V}
+   *   <li>{@code ? super V} -> {@code V}
    * </ul>
    */
   static TypeDescriptor projectCaptures(TypeDescriptor typeDescriptor) {
@@ -144,9 +147,7 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
         ImmutableSet<TypeVariable> newSeen =
             ImmutableSet.<TypeVariable>builder().addAll(seen).add(typeVariable).build();
 
-        if (!isTypeArgument) {
-          // Captures and wildcards appearing at the top level (non type arguments) are projected to
-          // bounds.
+        if (!isTypeArgument || typeVariable.isCapture()) {
           TypeDescriptor lowerBound = getNormalizedLowerBoundTypeDescriptor(typeVariable);
           if (lowerBound != null) {
             return projectCaptures(lowerBound, /* isTypeArgument= */ false, newSeen);

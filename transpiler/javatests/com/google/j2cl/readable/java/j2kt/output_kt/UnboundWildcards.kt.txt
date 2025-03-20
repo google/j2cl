@@ -84,19 +84,31 @@ open class UnboundWildcards {
   @ObjCName("test131")
   fun test131(
    @ObjCName("withJ2ktUnboundWildcards_Foo", swiftName = "with") extendsNullableObject: UnboundWildcards.Foo<*>
-  ) {}
+  ) {
+   UnboundWildcards.acceptNonNullTExtendsNullableObject/* <*> */(
+    extendsNullableObject as UnboundWildcards.Foo<Any>,
+   )
+  }
 
   @JvmStatic
   @ObjCName("test132")
   fun test132(
    @ObjCName("withJ2ktUnboundWildcards_Foo", swiftName = "with") extendsNullableObject: UnboundWildcards.Foo<*>
-  ) {}
+  ) {
+   UnboundWildcards.acceptNonNullTExtendsObject/* <*> */(
+    extendsNullableObject as UnboundWildcards.Foo<Any>,
+   )
+  }
 
   @JvmStatic
   @ObjCName("test133")
   fun test133(
    @ObjCName("withJ2ktUnboundWildcards_Foo", swiftName = "with") extendsNullableObject: UnboundWildcards.Foo<*>
-  ) {}
+  ) {
+   UnboundWildcards.acceptNonNullTExtendsNonNullObject/* <*> */(
+    extendsNullableObject as UnboundWildcards.Foo<Any>,
+   )
+  }
 
   @JvmStatic
   @ObjCName("test134")
@@ -334,25 +346,41 @@ open class UnboundWildcards {
   @ObjCName("test431")
   fun test431(
    @ObjCName("withJ2ktUnboundWildcards_Foo", swiftName = "with") unbound: UnboundWildcards.Foo<*>
-  ) {}
+  ) {
+   UnboundWildcards.acceptNonNullTExtendsNullableObject/* <*> */(
+    unbound as UnboundWildcards.Foo<Any>,
+   )
+  }
 
   @JvmStatic
   @ObjCName("test432")
   fun test432(
    @ObjCName("withJ2ktUnboundWildcards_Foo", swiftName = "with") unbound: UnboundWildcards.Foo<*>
-  ) {}
+  ) {
+   UnboundWildcards.acceptNonNullTExtendsObject/* <*> */(
+    unbound as UnboundWildcards.Foo<Any>,
+   )
+  }
 
   @JvmStatic
   @ObjCName("test433")
   fun test433(
    @ObjCName("withJ2ktUnboundWildcards_Foo", swiftName = "with") unbound: UnboundWildcards.Foo<*>
-  ) {}
+  ) {
+   UnboundWildcards.acceptNonNullTExtendsNonNullObject/* <*> */(
+    unbound as UnboundWildcards.Foo<Any>,
+   )
+  }
 
   @JvmStatic
   @ObjCName("test434")
   fun test434(
    @ObjCName("withJ2ktUnboundWildcards_Foo", swiftName = "with") unbound: UnboundWildcards.Foo<*>
-  ) {}
+  ) {
+   UnboundWildcards.acceptNonNullT/* <*> */(
+    unbound as UnboundWildcards.Foo<Any>,
+   )
+  }
 
   @JvmStatic
   @ObjCName("acceptTExtendsNullableObject")
