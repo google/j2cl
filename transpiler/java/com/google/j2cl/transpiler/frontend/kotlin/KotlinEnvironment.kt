@@ -20,6 +20,7 @@ package com.google.j2cl.transpiler.frontend.kotlin
 import com.google.common.collect.ImmutableList
 import com.google.j2cl.common.SourcePosition
 import com.google.j2cl.transpiler.ast.Annotation
+import com.google.j2cl.transpiler.ast.ArrayConstant
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.FieldDescriptor
@@ -93,7 +94,10 @@ import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.declarations.IrTypeParameter
 import org.jetbrains.kotlin.ir.expressions.IrClassReference
 import org.jetbrains.kotlin.ir.expressions.IrConst
+import org.jetbrains.kotlin.ir.expressions.IrConstantArray
 import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
+import org.jetbrains.kotlin.ir.expressions.IrExpression
+import org.jetbrains.kotlin.ir.expressions.IrVararg
 import org.jetbrains.kotlin.ir.symbols.IrTypeParameterSymbol
 import org.jetbrains.kotlin.ir.types.IrSimpleType
 import org.jetbrains.kotlin.ir.types.IrStarProjection
@@ -299,18 +303,43 @@ class KotlinEnvironment(
   private fun Annotation.Builder.addAnnotationValues(
     annotationCtorCall: IrConstructorCall
   ): Annotation.Builder {
+    fun IrExpression?.toAnnotationValue(): Literal? {
+      fun createArrayConstant(type: IrType, values: List<IrExpression>): ArrayConstant? {
+        val translatedValues = values.map { it.toAnnotationValue() }
+        // TODO(b/397460318, b/395716783): Remove this null check once we handle all member value
+        // types. We don't expect null unless it's an unhandled value type.
+        if (translatedValues.contains(null)) {
+          return null
+        }
+        return ArrayConstant.newBuilder()
+          .setTypeDescriptor(createArrayTypeDescriptor(type))
+          .setValueExpressions(translatedValues)
+          .build()
+      }
+
+      return when (this) {
+        is IrConst -> Literal.fromValue(value, getTypeDescriptor(type))
+        is IrClassReference ->
+          createTypeLiteral(classType, SourcePosition.NONE, wrapPrimitives = false)
+        is IrConstantArray -> createArrayConstant(type, elements)
+        is IrVararg ->
+          createArrayConstant(
+            type,
+            elements.map {
+              // Spread operator should be lowered by this point since only compile-time constants
+              // are allowed, so we will only see IrExpression here.
+              it as IrExpression
+            },
+          )
+        // TODO(b/397460318, b/395716783): Implement various member value types, then throw an
+        // exception here if unhandled.
+        else -> null
+      }
+    }
+
     for (i in 0 until annotationCtorCall.valueArgumentsCount) {
       val name = annotationCtorCall.symbol.owner.valueParameters[i].name.asString()
-      val value = annotationCtorCall.getValueArgument(i)
-      val translatedValue =
-        when (value) {
-          is IrConst -> Literal.fromValue(value.value, getTypeDescriptor(value.type))
-          is IrClassReference ->
-            createTypeLiteral(value.classType, SourcePosition.NONE, wrapPrimitives = false)
-          // TODO(b/397460318, b/395716783, b/395716773): Implement various member value types, then
-          // throw an exception here if unhandled.
-          else -> continue
-        }
+      val translatedValue = annotationCtorCall.getValueArgument(i).toAnnotationValue() ?: continue
       addValue(name, translatedValue)
     }
     return this

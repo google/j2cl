@@ -20,6 +20,7 @@ import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.WASM_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.SupportedAnnotations.isSupportedAnnotation;
+import static java.util.stream.Collectors.toCollection;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.FluentIterable;
@@ -29,6 +30,7 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.Annotation;
+import com.google.j2cl.transpiler.ast.ArrayConstant;
 import com.google.j2cl.transpiler.ast.ArrayLength;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
@@ -1284,22 +1286,53 @@ public class JdtEnvironment {
     for (IMemberValuePairBinding valuePair : valuePairs) {
       TypeDescriptor elementType =
           createTypeDescriptor(valuePair.getMethodBinding().getReturnType(), inNullMarkedScope);
-      Literal translatedValue;
-      if (TypeDescriptors.isBoxedOrPrimitiveType(elementType)
-          || TypeDescriptors.isJavaLangString(elementType)) {
-        translatedValue = Literal.fromValue(valuePair.getValue(), elementType);
-      } else if (TypeDescriptors.isJavaLangClass(elementType)) {
-        translatedValue =
-            new TypeLiteral(
-                SourcePosition.NONE,
-                createTypeDescriptor((ITypeBinding) valuePair.getValue(), inNullMarkedScope));
-      } else {
-        // TODO(b/397460318, b/395716783, b/395716773): Implement various member value types, then
-        // throw an exception here if unhandled.
+      Literal translatedValue =
+          createAnnotationValue(elementType, valuePair.getValue(), inNullMarkedScope);
+      if (translatedValue == null) {
         continue;
       }
       annotationBuilder.addValue(valuePair.getName(), translatedValue);
     }
     return annotationBuilder;
+  }
+
+  /**
+   * Creates a literal for the given annotation member value.
+   *
+   * <p>If the value type is not supported, returns {@code null}. TODO(b/397460318, b/395716783):
+   * Remove the null return once we handle all member value types.
+   */
+  @Nullable
+  private Literal createAnnotationValue(
+      TypeDescriptor elementType, Object value, boolean inNullMarkedScope) {
+    if (TypeDescriptors.isBoxedOrPrimitiveType(elementType)
+        || TypeDescriptors.isJavaLangString(elementType)) {
+      return Literal.fromValue(value, elementType);
+    } else if (TypeDescriptors.isJavaLangClass(elementType)) {
+      return new TypeLiteral(
+          SourcePosition.NONE, createTypeDescriptor((ITypeBinding) value, inNullMarkedScope));
+    } else if (elementType.isArray()) {
+      List<Literal> values =
+          Arrays.stream((Object[]) value)
+              .map(
+                  v ->
+                      createAnnotationValue(
+                          ((ArrayTypeDescriptor) elementType).getComponentTypeDescriptor(),
+                          v,
+                          inNullMarkedScope))
+              .collect(toCollection(ArrayList::new));
+      // TODO(b/397460318, b/395716783): Remove this null check once we handle all member value
+      // types. We don't expect null unless it's an unhandled value type.
+      if (values.contains(null)) {
+        return null;
+      }
+      return ArrayConstant.newBuilder()
+          .setTypeDescriptor((ArrayTypeDescriptor) elementType)
+          .setValueExpressions(values)
+          .build();
+    }
+    // TODO(b/397460318, b/395716783): Implement various member value types, then throw an exception
+    // here if unhandled.
+    return null;
   }
 }

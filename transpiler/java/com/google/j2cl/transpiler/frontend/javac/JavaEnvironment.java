@@ -28,6 +28,7 @@ import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.hasAnnot
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.hasNullMarkedAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.JsInteropAnnotationUtils.getJsNamespace;
 import static com.google.j2cl.transpiler.frontend.javac.KtInteropUtils.getKtVariance;
+import static java.util.stream.Collectors.toCollection;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableListMultimap;
@@ -37,6 +38,7 @@ import com.google.common.collect.Streams;
 import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.Annotation;
+import com.google.j2cl.transpiler.ast.ArrayConstant;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
@@ -1584,24 +1586,55 @@ class JavaEnvironment {
     for (var valuePair : values.entrySet()) {
       TypeDescriptor elementType =
           createTypeDescriptor(valuePair.getKey().getReturnType(), inNullMarkedScope);
-      Literal translatedValue;
-      if (TypeDescriptors.isBoxedOrPrimitiveType(elementType)
-          || TypeDescriptors.isJavaLangString(elementType)) {
-        translatedValue = Literal.fromValue(valuePair.getValue().getValue(), elementType);
-      } else if (TypeDescriptors.isJavaLangClass(elementType)) {
-        translatedValue =
-            new TypeLiteral(
-                SourcePosition.NONE,
-                createTypeDescriptor(
-                    (TypeMirror) valuePair.getValue().getValue(), inNullMarkedScope));
-      } else {
-        // TODO(b/397460318, b/395716783, b/395716773): Implement various member value types, then
-        // throw an exception here if unhandled.
+      Literal translatedValue =
+          createAnnotationValue(elementType, valuePair.getValue().getValue(), inNullMarkedScope);
+      if (translatedValue == null) {
         continue;
       }
       annotationBuilder.addValue(valuePair.getKey().getSimpleName().toString(), translatedValue);
     }
     return annotationBuilder;
+  }
+
+  /**
+   * Creates a literal for the given annotation member value.
+   *
+   * <p>If the value type is not supported, returns {@code null}. TODO(b/397460318, b/395716783):
+   * Remove the null return once we handle all member value types.
+   */
+  @Nullable
+  private Literal createAnnotationValue(
+      TypeDescriptor elementType, Object value, boolean inNullMarkedScope) {
+    if (TypeDescriptors.isBoxedOrPrimitiveType(elementType)
+        || TypeDescriptors.isJavaLangString(elementType)) {
+      return Literal.fromValue(value, elementType);
+    } else if (TypeDescriptors.isJavaLangClass(elementType)) {
+      return new TypeLiteral(
+          SourcePosition.NONE, createTypeDescriptor((TypeMirror) value, inNullMarkedScope));
+    } else if (elementType.isArray()) {
+      List<Literal> values =
+          ((List<?>) value)
+              .stream()
+                  .map(
+                      v ->
+                          createAnnotationValue(
+                              ((ArrayTypeDescriptor) elementType).getComponentTypeDescriptor(),
+                              ((AnnotationValue) v).getValue(),
+                              inNullMarkedScope))
+                  .collect(toCollection(ArrayList::new));
+      // TODO(b/397460318, b/395716783): Remove this null check once we handle all member value
+      // types. We don't expect null unless it's an unhandled value type.
+      if (values.contains(null)) {
+        return null;
+      }
+      return ArrayConstant.newBuilder()
+          .setTypeDescriptor((ArrayTypeDescriptor) elementType)
+          .setValueExpressions(values)
+          .build();
+    }
+    // TODO(b/397460318, b/395716783): Implement various member value types, then throw an exception
+    // here if unhandled.
+    return null;
   }
 
   // TODO(b/392124958): Remove this method that was copied from errorprone once we
