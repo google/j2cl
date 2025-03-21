@@ -32,9 +32,9 @@ open class GenericMethodReferences {
   return t
  }
 
- internal open fun accept_pp_j2kt(fn: InterfaceWithGenericMethod?) {}
+ internal open fun accept_pp_j2kt(fn: InterfaceWithGenericMethod) {}
 
- internal open fun test_pp_j2kt(instance: GenericMethodReferences?) {
+ internal open fun test_pp_j2kt(instance: GenericMethodReferences) {
   this.accept_pp_j2kt(
    object : InterfaceWithGenericMethod {
     override fun <T> apply(arg0: T): T {
@@ -52,7 +52,7 @@ open class GenericMethodReferences {
   this.accept_pp_j2kt(
    object : InterfaceWithGenericMethod {
     override fun <T> apply(arg0: T): T {
-     return instance!!.instanceGenericMethod_pp_j2kt<T>(arg0)
+     return instance.instanceGenericMethod_pp_j2kt<T>(arg0)
     }
    },
   )

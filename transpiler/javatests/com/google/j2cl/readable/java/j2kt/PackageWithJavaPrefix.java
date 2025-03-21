@@ -15,7 +15,10 @@
  */
 package javapkg;
 
+import org.jspecify.annotations.NullMarked;
+
 // Checks that b/289049603 is fixed.
+@NullMarked
 public class PackageWithJavaPrefix {
   public static final int VALUE = 128;
 

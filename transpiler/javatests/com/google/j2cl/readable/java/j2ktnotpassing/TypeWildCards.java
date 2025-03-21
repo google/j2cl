@@ -15,12 +15,16 @@
  */
 package j2ktnotpassing;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
+@NullMarked
 public class TypeWildCards {
-  interface Observer<E> {
+  interface Observer<E extends @Nullable Object> {
     void on(E event);
   }
 
-  interface Observable<E> {
+  interface Observable<E extends @Nullable Object> {
     void addObserver(Observer<E> observer);
   }
 

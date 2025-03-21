@@ -15,8 +15,12 @@
  */
 package j2kt;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
+@NullMarked
 public class Overrides {
-  public interface Parent<T> {
+  public interface Parent<T extends @Nullable Object> {
     <E extends T> void foo(E e);
   }
 

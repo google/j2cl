@@ -15,6 +15,9 @@
  */
 package j2kt;
 
+import org.jspecify.annotations.NullMarked;
+
+@NullMarked
 public class KotlinKeywords {
   public static int BIG_ENDIAN = 7;
   public static int LITTLE_ENDIAN = -7;

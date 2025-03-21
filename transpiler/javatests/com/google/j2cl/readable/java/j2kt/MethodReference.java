@@ -16,18 +16,23 @@
 // TODO(b/319346347): Move to j2kt when the bug is fixed.
 package j2kt;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
+@NullMarked
 final class MethodReference {
-  static <T> void foo(final Foo<? extends Foo<? extends T>> inputs) {
+  static <T extends @Nullable Object> void foo(final Foo<? extends Foo<? extends T>> inputs) {
     transform(inputs, Foo::bar);
   }
 
-  static <F, T> void transform(Foo<F> foo, Function<? super F, ? extends T> function) {}
+  static <F extends @Nullable Object, T extends @Nullable Object> void transform(
+      Foo<F> foo, Function<? super F, ? extends T> function) {}
 
-  interface Function<T, R> {
-    <H> R apply(T t);
+  interface Function<T extends @Nullable Object, R extends @Nullable Object> {
+    <H extends @Nullable Object> R apply(T t);
   }
 
-  interface Foo<T> {
+  interface Foo<T extends @Nullable Object> {
     Foo<T> bar();
   }
 }

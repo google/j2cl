@@ -16,7 +16,10 @@
 package j2kt;
 
 import javaemul.lang.J2ktMonitor;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
+@NullMarked
 public class LambdaReturnFromBlock {
 
   public void testDoWhile() {
@@ -53,7 +56,7 @@ public class LambdaReturnFromBlock {
         };
   }
 
-  interface Function<O> {
+  interface Function<O extends @Nullable Object> {
     O apply();
   }
 }

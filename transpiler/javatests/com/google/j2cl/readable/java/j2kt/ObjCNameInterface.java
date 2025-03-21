@@ -15,6 +15,9 @@
  */
 package j2kt;
 
+import org.jspecify.annotations.NullMarked;
+
+@NullMarked
 public interface ObjCNameInterface {
   int FIELD = 0;
 

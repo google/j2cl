@@ -27,8 +27,11 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringJoiner;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 @ObjectiveCName("NewObjCName")
+@NullMarked
 public class ObjCName {
 
   // Instance fields.
@@ -44,12 +47,12 @@ public class ObjCName {
   private static int privateStaticField;
 
   // Fields with reference types.
-  public static Object objectField;
-  public static String stringField;
-  public static ObjCName selfField;
-  public static Iterable<String> iterable;
-  public static Iterator<String> iterator;
-  public static Collection collection;
+  public static @Nullable Object objectField;
+  public static @Nullable String stringField;
+  public static @Nullable ObjCName selfField;
+  public static @Nullable Iterable<String> iterable;
+  public static @Nullable Iterator<String> iterator;
+  public static @Nullable Collection collection;
 
   // Fields with reserved names.
   public static int val;
@@ -228,7 +231,7 @@ public class ObjCName {
     }
   }
 
-  public static class SubCollection<E> extends AbstractList<E> {
+  public static class SubCollection<E extends @Nullable Object> extends AbstractList<E> {
     @Override
     public E get(int index) {
       return null;

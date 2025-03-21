@@ -15,9 +15,10 @@
  */
 package j2kt;
 
+import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-@Nullable
+@NullMarked
 public class LambdaParameterTypeInference {
   public interface Supplier<T extends @Nullable Object> {
     T get();

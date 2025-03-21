@@ -15,15 +15,20 @@
  */
 package j2ktnotpassing;
 
+import org.jspecify.annotations.NullMarked;
+
 // TODO(b/395588204): Remove when fixed.
+@NullMarked
 interface Parent {
   <T extends String> void test(T t);
 }
 
+@NullMarked
 interface Child extends Parent {
   // This method is valid override in Java, but in Kotlin it's accidental override.
   @Override
   void test(String s);
 }
 
+@NullMarked
 class AccidentalOverrides {}

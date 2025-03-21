@@ -15,13 +15,17 @@
  */
 package j2kt;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
+@NullMarked
 public class GenericMethodReferences {
 
-  static <T> T staticGenericMethod(T t) {
+  static <T extends @Nullable Object> T staticGenericMethod(T t) {
     return t;
   }
 
-  <T> T instanceGenericMethod(T t) {
+  <T extends @Nullable Object> T instanceGenericMethod(T t) {
     return t;
   }
 

@@ -15,8 +15,11 @@
  */
 package j2kt;
 
+import org.jspecify.annotations.NullMarked;
+
 // TODO(b/319620723): Move to j2kt readable when the bug is fixed.
 // Kotlin requires explicit overload conflict resolution for method calls with empty varargs.
+@NullMarked
 class VarargOverloads {
   static class NewInstanceOverload {
     NewInstanceOverload(int foo, Object... objects) {}

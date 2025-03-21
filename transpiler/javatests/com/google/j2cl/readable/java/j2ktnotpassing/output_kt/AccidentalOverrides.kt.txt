@@ -28,14 +28,14 @@ import kotlin.native.ObjCName
 @ObjCName("J2ktJ2ktnotpassingParent", swiftName = "J2ktnotpassingParent", exact = true)
 interface Parent {
  @ObjCName("test")
- fun <T: String?> test(
+ fun <T: String> test(
   @ObjCName("withNSString", swiftName = "with") t: T
  )
 }
 
 @ObjCName("J2ktJ2ktnotpassingChild", swiftName = "J2ktnotpassingChild", exact = true)
 fun interface Child: Parent {
- override fun test(s: String?)
+ override fun test(s: String)
 }
 
 @ObjCName("J2ktJ2ktnotpassingAccidentalOverrides", swiftName = "J2ktnotpassingAccidentalOverrides", exact = true)

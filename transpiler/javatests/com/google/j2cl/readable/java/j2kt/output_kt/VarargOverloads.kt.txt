@@ -34,12 +34,12 @@ import kotlin.native.ObjCName
 open class VarargOverloads internal constructor() {
  @ObjCName("J2ktJ2ktVarargOverloads_NewInstanceOverload", swiftName = "J2ktVarargOverloads_NewInstanceOverload", exact = true)
  open class NewInstanceOverload {
-  internal constructor(foo: Int, vararg objects: Any?) {
-   val objects_1: Array<Any?>? = objects as Array<Any?>?
+  internal constructor(foo: Int, vararg objects: Any) {
+   val objects_1: Array<Any> = objects as Array<Any>
   }
 
-  internal constructor(foo: Int, vararg strings: String?) {
-   val strings_1: Array<String?>? = strings as Array<String?>?
+  internal constructor(foo: Int, vararg strings: String) {
+   val strings_1: Array<String> = strings as Array<String>
   }
 
   @ObjCName("J2ktJ2ktVarargOverloads_NewInstanceOverloadCompanion", swiftName = "J2ktVarargOverloads_NewInstanceOverloadCompanion", exact = true)
@@ -48,7 +48,7 @@ open class VarargOverloads internal constructor() {
    internal fun test_pp_j2kt() {
     NewInstanceOverload(
      0,
-     *arrayOf<String?>(),
+     *arrayOf<String>(),
     )
    }
   }
@@ -56,83 +56,83 @@ open class VarargOverloads internal constructor() {
 
  @ObjCName("J2ktJ2ktVarargOverloads_ThisConstructorCallOverload", swiftName = "J2ktVarargOverloads_ThisConstructorCallOverload", exact = true)
  open class ThisConstructorCallOverload {
-  internal constructor(vararg objects: Any?) {
-   val objects_1: Array<Any?>? = objects as Array<Any?>?
+  internal constructor(vararg objects: Any) {
+   val objects_1: Array<Any> = objects as Array<Any>
   }
 
-  internal constructor(vararg strings: String?) {
-   val strings_1: Array<String?>? = strings as Array<String?>?
+  internal constructor(vararg strings: String) {
+   val strings_1: Array<String> = strings as Array<String>
   }
 
   internal constructor(foo: Int): this(
-   *arrayOf<String?>(),
+   *arrayOf<String>(),
   )
  }
 
  @ObjCName("J2ktJ2ktVarargOverloads_SuperConstructorCallOverload", swiftName = "J2ktVarargOverloads_SuperConstructorCallOverload", exact = true)
  open class SuperConstructorCallOverload {
-  internal constructor(vararg objects: Any?) {
-   val objects_1: Array<Any?>? = objects as Array<Any?>?
+  internal constructor(vararg objects: Any) {
+   val objects_1: Array<Any> = objects as Array<Any>
   }
 
-  internal constructor(vararg strings: String?) {
-   val strings_1: Array<String?>? = strings as Array<String?>?
+  internal constructor(vararg strings: String) {
+   val strings_1: Array<String> = strings as Array<String>
   }
 
   @ObjCName("J2ktJ2ktVarargOverloads_SuperConstructorCallOverload_Explicit", swiftName = "J2ktVarargOverloads_SuperConstructorCallOverload_Explicit", exact = true)
   open class Explicit: SuperConstructorCallOverload {
    internal constructor(): super(
-    *arrayOf<String?>(),
+    *arrayOf<String>(),
    )
   }
 
   @ObjCName("J2ktJ2ktVarargOverloads_SuperConstructorCallOverload_Implicit", swiftName = "J2ktVarargOverloads_SuperConstructorCallOverload_Implicit", exact = true)
   open class Implicit: SuperConstructorCallOverload {
    internal constructor(): super(
-    *arrayOf<String?>(),
+    *arrayOf<String>(),
    )
   }
 
   @ObjCName("J2ktJ2ktVarargOverloads_SuperConstructorCallOverload_FromImplicitConstructor", swiftName = "J2ktVarargOverloads_SuperConstructorCallOverload_FromImplicitConstructor", exact = true)
   open class FromImplicitConstructor: SuperConstructorCallOverload {
    internal constructor(): super(
-    *arrayOf<String?>(),
+    *arrayOf<String>(),
    )
   }
  }
 
  @ObjCName("J2ktJ2ktVarargOverloads_MethodCallOverload", swiftName = "J2ktVarargOverloads_MethodCallOverload", exact = true)
  open class MethodCallOverload internal constructor() {
-  internal open fun method_pp_j2kt(vararg objects: Any?) {
-   val objects_1: Array<Any?>? = objects as Array<Any?>?
+  internal open fun method_pp_j2kt(vararg objects: Any) {
+   val objects_1: Array<Any> = objects as Array<Any>
   }
 
-  internal open fun method_pp_j2kt(vararg strings: String?) {
-   val strings_1: Array<String?>? = strings as Array<String?>?
+  internal open fun method_pp_j2kt(vararg strings: String) {
+   val strings_1: Array<String> = strings as Array<String>
   }
 
   internal open fun test_pp_j2kt() {
    this.method_pp_j2kt(
-    *arrayOf<String?>(),
+    *arrayOf<String>(),
    )
   }
  }
 
  @ObjCName("J2ktJ2ktVarargOverloads_MethodCallOverloadInSubtype", swiftName = "J2ktVarargOverloads_MethodCallOverloadInSubtype", exact = true)
  open class MethodCallOverloadInSubtype internal constructor() {
-  internal open fun method_pp_j2kt(vararg objects: Any?) {
-   val objects_1: Array<Any?>? = objects as Array<Any?>?
+  internal open fun method_pp_j2kt(vararg objects: Any) {
+   val objects_1: Array<Any> = objects as Array<Any>
   }
 
   @ObjCName("J2ktJ2ktVarargOverloads_MethodCallOverloadInSubtype_Subtype", swiftName = "J2ktVarargOverloads_MethodCallOverloadInSubtype_Subtype", exact = true)
   open class Subtype internal constructor(): MethodCallOverloadInSubtype() {
-   internal open fun method_pp_j2kt(vararg strings: String?) {
-    val strings_1: Array<String?>? = strings as Array<String?>?
+   internal open fun method_pp_j2kt(vararg strings: String) {
+    val strings_1: Array<String> = strings as Array<String>
    }
 
    internal open fun test_pp_j2kt() {
     this.method_pp_j2kt(
-     *arrayOf<String?>(),
+     *arrayOf<String>(),
     )
    }
   }
@@ -140,11 +140,11 @@ open class VarargOverloads internal constructor() {
 
  @ObjCName("J2ktJ2ktVarargOverloads_MethodCallVarargAndArrayArgs", swiftName = "J2ktVarargOverloads_MethodCallVarargAndArrayArgs", exact = true)
  open class MethodCallVarargAndArrayArgs internal constructor() {
-  internal open fun method_pp_j2kt(vararg objects: Any?) {
-   val objects_1: Array<Any?>? = objects as Array<Any?>?
+  internal open fun method_pp_j2kt(vararg objects: Any) {
+   val objects_1: Array<Any> = objects as Array<Any>
   }
 
-  internal open fun method_pp_j2kt(strings: Array<String?>?) {}
+  internal open fun method_pp_j2kt(strings: Array<String>) {}
 
   internal open fun test_pp_j2kt() {
    this.method_pp_j2kt()
@@ -161,16 +161,16 @@ open class VarargOverloads internal constructor() {
   @ObjCName("J2ktJ2ktVarargOverloads_StaticMethodOverloadSubtypeCallTargetCompanion", swiftName = "J2ktVarargOverloads_StaticMethodOverloadSubtypeCallTargetCompanion", exact = true)
   companion object {
    @JvmStatic
-   internal fun method_pp_j2kt(vararg objects: Any?) {
-    val objects_1: Array<Any?>? = objects as Array<Any?>?
+   internal fun method_pp_j2kt(vararg objects: Any) {
+    val objects_1: Array<Any> = objects as Array<Any>
    }
 
    @JvmStatic
-   internal fun method_pp_j2kt(strings: Array<String?>?) {}
+   internal fun method_pp_j2kt(strings: Array<String>) {}
 
    @JvmStatic
-   internal fun generalizedInSubtype_pp_j2kt(vararg strings: String?) {
-    val strings_1: Array<String?>? = strings as Array<String?>?
+   internal fun generalizedInSubtype_pp_j2kt(vararg strings: String) {
+    val strings_1: Array<String> = strings as Array<String>
    }
   }
 
@@ -179,8 +179,8 @@ open class VarargOverloads internal constructor() {
    @ObjCName("J2ktJ2ktVarargOverloads_StaticMethodOverloadSubtypeCallTarget_SubtypeCompanion", swiftName = "J2ktVarargOverloads_StaticMethodOverloadSubtypeCallTarget_SubtypeCompanion", exact = true)
    companion object {
     @JvmStatic
-    internal fun generalizedInSubtype_pp_j2kt(vararg objects: Any?) {
-     val objects_1: Array<Any?>? = objects as Array<Any?>?
+    internal fun generalizedInSubtype_pp_j2kt(vararg objects: Any) {
+     val objects_1: Array<Any> = objects as Array<Any>
     }
    }
   }
@@ -190,19 +190,19 @@ open class VarargOverloads internal constructor() {
  enum class EnumWithOverloadedConstructors {
   @ObjCName("CONSTRUCTOR_OVERLOAD")
   CONSTRUCTOR_OVERLOAD(
-   *arrayOf<String?>(),
+   *arrayOf<String>(),
   ),
   @ObjCName("SUPER_CONSTRUCTOR_OVERLOAD")
   SUPER_CONSTRUCTOR_OVERLOAD(
-   *arrayOf<String?>(),
+   *arrayOf<String>(),
   );
 
-  constructor(vararg objects: Any?) {
-   val objects_1: Array<Any?>? = objects as Array<Any?>?
+  constructor(vararg objects: Any) {
+   val objects_1: Array<Any> = objects as Array<Any>
   }
 
-  constructor(vararg strings: String?) {
-   val strings_1: Array<String?>? = strings as Array<String?>?
+  constructor(vararg strings: String) {
+   val strings_1: Array<String> = strings as Array<String>
   }
  }
 }

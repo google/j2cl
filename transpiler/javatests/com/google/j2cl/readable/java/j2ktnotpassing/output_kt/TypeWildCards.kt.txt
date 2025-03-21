@@ -32,10 +32,10 @@ open class TypeWildCards {
  companion object {
   @JvmStatic
   @ObjCName("testObservableParameterized")
-  fun <T: Observable<*>?> testObservableParameterized(
+  fun <T: Observable<*>> testObservableParameterized(
    @ObjCName("withJ2ktnotpassingTypeWildCards_Observable", swiftName = "with") observable: T
   ) {
-   (observable as Observable<Any?>?)!!.addObserver(
+   (observable as Observable<Any?>).addObserver(
     Observer/* <*> */ { e /* capture#1-of * */ ->
     },
    )
@@ -44,10 +44,10 @@ open class TypeWildCards {
   @JvmStatic
   @ObjCName("testRecursiveObservable")
   fun testRecursiveObservable(
-   @ObjCName("withJ2ktnotpassingTypeWildCards_RecursiveObservable", swiftName = "with") observable: RecursiveObservable<*>?
+   @ObjCName("withJ2ktnotpassingTypeWildCards_RecursiveObservable", swiftName = "with") observable: RecursiveObservable<*>
   ) {
-   (observable as RecursiveObservable<RecursiveObservable<E>?>?)!!.addObserver(
-    Observer/* <capture#2-of out RecursiveObservable<*>?> */ { e /* capture#2-of out RecursiveObservable<*>? */ ->
+   (observable as RecursiveObservable<RecursiveObservable<E>>).addObserver(
+    Observer/* <capture#2-of out RecursiveObservable<*>> */ { e /* capture#2-of out RecursiveObservable<*> */ ->
     },
    )
   }
@@ -65,15 +65,15 @@ open class TypeWildCards {
  fun interface Observable<E> {
   @ObjCName("addObserver")
   fun addObserver(
-   @ObjCName("withJ2ktnotpassingTypeWildCards_Observer", swiftName = "with") observer: Observer<E>?
+   @ObjCName("withJ2ktnotpassingTypeWildCards_Observer", swiftName = "with") observer: Observer<E>
   )
  }
 
  @ObjCName("J2ktJ2ktnotpassingTypeWildCards_RecursiveObservable", swiftName = "J2ktnotpassingTypeWildCards_RecursiveObservable", exact = true)
- fun interface RecursiveObservable<E: RecursiveObservable<E>?> {
+ fun interface RecursiveObservable<E: RecursiveObservable<E>> {
   @ObjCName("addObserver")
   fun addObserver(
-   @ObjCName("withJ2ktnotpassingTypeWildCards_Observer", swiftName = "with") observer: Observer<E>?
+   @ObjCName("withJ2ktnotpassingTypeWildCards_Observer", swiftName = "with") observer: Observer<E>
   )
  }
 }

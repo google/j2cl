@@ -377,11 +377,11 @@ NS_INLINE J2ktNewObjCName* new_NewObjCName_initWithInteger_(jint i) {
  return [[J2ktNewObjCName alloc] initWithInteger:i];
 }
 
-NS_INLINE J2ktNewObjCName* create_NewObjCName_initWithInt_withNSString_(jint i, NSString* _Nullable s) {
+NS_INLINE J2ktNewObjCName* create_NewObjCName_initWithInt_withNSString_(jint i, NSString* s) {
  return [[J2ktNewObjCName alloc] initWithInt:i withNSString:s];
 }
 
-NS_INLINE J2ktNewObjCName* new_NewObjCName_initWithInt_withNSString_(jint i, NSString* _Nullable s) {
+NS_INLINE J2ktNewObjCName* new_NewObjCName_initWithInt_withNSString_(jint i, NSString* s) {
  return [[J2ktNewObjCName alloc] initWithInt:i withNSString:s];
 }
 
@@ -393,11 +393,11 @@ NS_INLINE void NewObjCName_newFooFromInt_(jint i) {
  [J2ktNewObjCNameCompanion.shared doNewFooFromInt:i];
 }
 
-NS_INLINE void NewObjCName_newFooFromInt_withInteger_(NSString* _Nullable s, jint i) {
+NS_INLINE void NewObjCName_newFooFromInt_withInteger_(NSString* s, jint i) {
  [J2ktNewObjCNameCompanion.shared doNewFooFromInt:s withInteger:i];
 }
 
-NS_INLINE void NewObjCName_fooWithNSString_withNSString_(NSString* _Nullable s, NSString* _Nullable i) {
+NS_INLINE void NewObjCName_fooWithNSString_withNSString_(NSString* s, NSString* i) {
  [J2ktNewObjCNameCompanion.shared fooWithNSString:s withNSString:i];
 }
 
@@ -453,15 +453,15 @@ NS_INLINE void NewObjCName_reservedParamNamesWithInt_withInt_withInt_withInt_(ji
  [J2ktNewObjCNameCompanion.shared reservedParamNamesWithInt:extern_ withInt:struct_ withInt:register_ withInt:inline_];
 }
 
-NS_INLINE NSString* _Nullable NewObjCName_nativeTypesWithNSString_withId_withNSNumber_(NSString* _Nullable s, id _Nullable o, NSNumber* _Nullable n) {
+NS_INLINE NSString* NewObjCName_nativeTypesWithNSString_withId_withNSNumber_(NSString* s, id o, NSNumber* n) {
  return [J2ktNewObjCNameCompanion.shared nativeTypesWithNSString:s withId:o withNSNumber:n];
 }
 
-NS_INLINE void NewObjCName_numberTypeWithNSNumber_(NSNumber* _Nullable l) {
+NS_INLINE void NewObjCName_numberTypeWithNSNumber_(NSNumber* l) {
  [J2ktNewObjCNameCompanion.shared numberTypeWithNSNumber:l];
 }
 
-NS_INLINE void NewObjCName_nonNativeJavaTypeWithJavaUtilStringJoiner_(J2ktJavaUtilStringJoiner* _Nullable l) {
+NS_INLINE void NewObjCName_nonNativeJavaTypeWithJavaUtilStringJoiner_(J2ktJavaUtilStringJoiner* l) {
  [J2ktNewObjCNameCompanion.shared nonNativeJavaTypeWithJavaUtilStringJoiner:l];
 }
 
@@ -554,7 +554,7 @@ NS_INLINE J2ktNewObjCName_Foo* NewObjCName_Foo_get_NO(void) {
  return J2ktNewObjCName_Foo.NO__;
 }
 
-NS_INLINE J2ktNewObjCName_Foo* _Nullable NewObjCName_Foo_withOrdinalWithInt_(jint ordinal) {
+NS_INLINE J2ktNewObjCName_Foo* NewObjCName_Foo_withOrdinalWithInt_(jint ordinal) {
  return [J2ktNewObjCName_FooCompanion.shared withOrdinalWithInt:ordinal];
 }
 

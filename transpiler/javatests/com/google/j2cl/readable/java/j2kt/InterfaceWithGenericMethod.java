@@ -15,6 +15,10 @@
  */
 package j2kt;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
+@NullMarked
 interface InterfaceWithGenericMethod {
-  <T> T apply(T t);
+  <T extends @Nullable Object> T apply(T t);
 }
