@@ -118,12 +118,6 @@ closure_js_binary(
     deps = ["//:jre"],
 )
 
-genrule(
-    name = "file_empty_check",
-    outs = ["file_empty_check.sh"],
-    cmd = "echo '[ ! -s $$1 ]' > $@",
-)
-
 sh_test(
     name = "opensource_stderr_empty_test",
     srcs = ["file_empty_check.sh"],
