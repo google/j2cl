@@ -47,17 +47,6 @@ jre.addSystemPropertyFromGoogDefine = function(
   }
 };
 
-if (!COMPILED) {
-  /** @private */
-  jre.UninitializedSystemPropertyReadError_ =
-      class UninitializedSystemPropertyReadError extends Error {
-    constructor(/** string */ propertyName) {
-      super(`System property "${
-          propertyName}" read before being registered by jre.addSystemPropertyFromGoogDefine.`);
-    }
-  };
-}
-
 /**
  * Returns the value of a system property.
  * @param {string} name
