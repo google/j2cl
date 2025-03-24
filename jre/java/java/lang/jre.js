@@ -20,7 +20,7 @@
 
 goog.provide('jre');
 
-/** @private @const {!Object<string, ?string>} */
+/** @private @const {!Object<string, *>} */
 jre.systemProperties_ = Object.create(null);
 
 /**
@@ -36,13 +36,27 @@ jre.addSystemPropertyFromGoogDefine = function(
   // Values from goog.define are well-known to the compiler and will be
   // statically substituted. Therefore this method can be a no-op when compiled.
   if (!COMPILED) {
-    if (googDefineName in jre.systemProperties_) {
+    const existingValue = jre.systemProperties_[googDefineName];
+    if (existingValue instanceof Error) {
+      throw existingValue;
+    } else if (existingValue !== undefined) {
       throw new Error(
           `Attempting to redeclare system property '${googDefineName}'.`);
     }
     jre.systemProperties_[googDefineName] = googDefineValue;
   }
 };
+
+if (!COMPILED) {
+  /** @private */
+  jre.UninitializedSystemPropertyReadError_ =
+      class UninitializedSystemPropertyReadError extends Error {
+    constructor(/** string */ propertyName) {
+      super(`System property "${
+          propertyName}" read before being registered by jre.addSystemPropertyFromGoogDefine.`);
+    }
+  };
+}
 
 /**
  * Returns the value of a system property.
@@ -51,9 +65,21 @@ jre.addSystemPropertyFromGoogDefine = function(
  * @return {?string}
  */
 jre.getSystemProperty = function(name, defaultValue = null) {
+  let rv = jre.systemProperties_[name];
+  if (!COMPILED && (rv === undefined || rv instanceof Error)) {
+    if (rv === undefined) {
+      // Stash an error that will later be thrown if anyone tries to register
+      // the property. We intentionally only stash the first occurrence as this
+      // is the earliest point that the registration call needs to move before.
+      jre.systemProperties_[name] = new Error(`System property "${
+          name}" read before registration via jre.addSystemPropertyFromGoogDefine.`);
+    }
+    // Make sure fallback doesn't see a recorded Error instance.
+    rv = undefined;
+  }
   // For backwards compatibility, fallback to goog.getObjectByName if it's not
   // in the registry.
-  const rv = jre.systemProperties_[name] ?? goog.getObjectByName(name);
+  rv = rv ?? goog.getObjectByName(name);
   return rv == null ? defaultValue : String(rv);
 };
 

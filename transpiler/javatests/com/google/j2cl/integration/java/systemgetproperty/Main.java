@@ -15,7 +15,12 @@
  */
 package systemgetproperty;
 
+import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.Asserts.fail;
+
+import javaemul.internal.annotations.Wasm;
+import jsinterop.annotations.JsMethod;
 
 public class Main {
 
@@ -30,10 +35,35 @@ public class Main {
         System.getProperty("jre.classMetadata", getDefaultWithSideEffect()).equals("SIMPLE"));
     // Side effect should not be lost.
     assertTrue(counter == 1);
+
+    testReadingPropertyBeforeRegistration();
+  }
+
+  @Wasm("nop")
+  private static void testReadingPropertyBeforeRegistration() {
+    // If the code is compiled we'll inline
+    if ("true".equals(System.getProperty("COMPILED"))) {
+      return;
+    }
+
+    // Reading bazz and then registering it should yield a runtime error.
+    assertTrue(System.getProperty("bazz", "default").equals("default"));
+    try {
+      registerBazz();
+      fail();
+    } catch (Exception ex) {
+      assertEquals(
+          "Error: System property \"bazz\" read before registration via"
+              + " jre.addSystemPropertyFromGoogDefine.",
+          ex.getMessage());
+    }
   }
 
   private static String getDefaultWithSideEffect() {
     counter++;
     return "Foo";
   }
+
+  @JsMethod
+  private static native void registerBazz();
 }
