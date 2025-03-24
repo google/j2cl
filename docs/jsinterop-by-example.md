@@ -39,7 +39,7 @@ Linkify.findFirstEmail("this is an email: aaa@gmail.com");
 
 ### `@JsType` - Interface with a Closure type. {#closure_type}
 
-Note that `@JsType` is just syntactical sugar for applying `@JsConstructor`,
+Note: that `@JsType` is just syntactic sugar for applying `@JsConstructor`,
 `@JsMethod` or`@JsProperty` to all public constructors, methods and properties
 respectively.
 
@@ -256,6 +256,10 @@ class Main {
 Note: It is generally a good practice to mark `@JsOptional` explicitly `@Nullable` to catch potential problems with Java nullabilty checkers.
 
 ### `@JsType` - Expose an entire class to JavaScript
+
+Note: that `@JsType` is just syntactic sugar for applying `@JsConstructor`,
+`@JsMethod` or`@JsProperty` to all public constructors, methods and properties
+respectively.
 
 ```java
 // Exported.java
