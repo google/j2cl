@@ -278,7 +278,7 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
 
   private fun shouldRender(typeDescriptor: TypeDescriptor): Boolean =
     when (typeDescriptor) {
-      is DeclaredTypeDescriptor -> shouldRender(typeDescriptor.typeDeclaration)
+      is DeclaredTypeDescriptor -> shouldRenderDescriptor(typeDescriptor.typeDeclaration)
       is ArrayTypeDescriptor -> false
       else -> true
     }
@@ -290,10 +290,12 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
     typeDeclaration.toDescriptor().run { collectionTypeDescriptors.any { isAssignableTo(it) } }
 
   private fun shouldRender(typeDeclaration: TypeDeclaration): Boolean =
+    shouldRenderDescriptor(typeDeclaration) && !typeDeclaration.isProtobuf
+
+  private fun shouldRenderDescriptor(typeDeclaration: TypeDeclaration): Boolean =
     typeDeclaration.visibility.isPublic &&
       existsInObjC(typeDeclaration) &&
-      !isCollection(typeDeclaration) &&
-      !typeDeclaration.isProtobuf
+      !isCollection(typeDeclaration)
 
   private fun existsInObjC(typeDeclaration: TypeDeclaration): Boolean =
     !typeDeclaration.isKtNative || mappedObjCNameRenderer(typeDeclaration) != null
@@ -442,9 +444,10 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
     }
 
   private fun objCRenderer(typeDescriptor: TypeDescriptor): Renderer<Source> =
-    when (typeDescriptor) {
-      is PrimitiveTypeDescriptor -> primitiveObjCRenderer(typeDescriptor)
-      is DeclaredTypeDescriptor -> declaredObjCRenderer(typeDescriptor)
+    when {
+      typeDescriptor is PrimitiveTypeDescriptor -> primitiveObjCRenderer(typeDescriptor)
+      typeDescriptor is DeclaredTypeDescriptor && !typeDescriptor.typeDeclaration.isProtobuf ->
+        declaredObjCRenderer(typeDescriptor)
       // TODO: Handle TypeVariable and Array
       else -> id
     }.runIf(typeDescriptor.isNullable) { toNullable() }

@@ -14,4 +14,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @compatibility_alias ProtobufProtobuf_TestCompanion J2ktProtobufProtobuf_TestCompanion;
 
+NS_INLINE J2ktProtobufProtobuf_Test* create_ProtobufProtobuf_Test_initWithProtobufMyMessage_(id myMessage) {
+ return [[J2ktProtobufProtobuf_Test alloc] initWithProtobufMyMessage:myMessage];
+}
+
+NS_INLINE J2ktProtobufProtobuf_Test* new_ProtobufProtobuf_Test_initWithProtobufMyMessage_(id myMessage) {
+ return [[J2ktProtobufProtobuf_Test alloc] initWithProtobufMyMessage:myMessage];
+}
+
+NS_INLINE void ProtobufProtobuf_Test_acceptStaticWithProtobufMyMessage_(id myMessage) {
+ [J2ktProtobufProtobuf_TestCompanion.shared acceptStaticWithProtobufMyMessage:myMessage];
+}
+
+NS_INLINE id ProtobufProtobuf_Test_getStaticWithProtobufMyMessage_(id myMessage) {
+ return [J2ktProtobufProtobuf_TestCompanion.shared getStaticWithProtobufMyMessage:myMessage];
+}
+
 NS_ASSUME_NONNULL_END
