@@ -16,48 +16,52 @@
 package methodreferences;
 
 import jsinterop.annotations.JsFunction;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
-public class MethodReferences<T> {
+@NullMarked
+public class MethodReferences<T extends @Nullable Object> {
 
-  interface Producer<T> {
+  interface Producer<T extends @Nullable Object> {
     T produce();
   }
 
-  interface Predicate<T> {
+  interface Predicate<T extends @Nullable Object> {
     boolean apply(T parameter);
   }
 
-  interface ArrayProducer<T> {
+  interface ArrayProducer<T extends @Nullable Object> {
     T[] produce(int size);
   }
 
   class ObjectCapturingOuter {
-
     MethodReferences<T> getMain() {
       return MethodReferences.this;
     }
   }
 
-  interface Function<T, U> {
+  interface Function<T extends @Nullable Object, U extends @Nullable Object> {
     U apply(T t);
   }
 
-  interface BiFunction<T, U, V> {
+  interface BiFunction<
+      T extends @Nullable Object, U extends @Nullable Object, V extends @Nullable Object> {
     V apply(T t, U u);
   }
 
   @JsFunction
-  interface JsProducer<T> {
+  interface JsProducer<T extends @Nullable Object> {
     T produce();
   }
 
   @JsFunction
-  interface JsFunctionInterface<T, U> {
+  interface JsFunctionInterface<T extends @Nullable Object, U extends @Nullable Object> {
     U apply(T t);
   }
 
   @JsFunction
-  interface JsBiFunction<T, U, V> {
+  interface JsBiFunction<
+      T extends @Nullable Object, U extends @Nullable Object, V extends @Nullable Object> {
     V apply(T t, U u);
   }
 
@@ -83,7 +87,8 @@ public class MethodReferences<T> {
     return false;
   }
 
-  private static <U, V> void acceptFunctionSuperVariance(Function<? super U, V> f) {}
+  private static <U extends @Nullable Object, V extends @Nullable Object>
+      void acceptFunctionSuperVariance(Function<? super U, V> f) {}
 
   void main() {
     Producer<Object> objectFactory = Object::new;
@@ -111,7 +116,29 @@ public class MethodReferences<T> {
 
     Function<MethodReferences<T>, Object> function = MethodReferences::self;
 
-    Function<Integer, Object[]> arrayFactory = Object[]::new;
+    Function<Integer, boolean[]> booleanArrayFactory = boolean[]::new;
+
+    Function<Integer, char[]> charArrayFactory = char[]::new;
+
+    Function<Integer, byte[]> byteArrayFactory = byte[]::new;
+
+    Function<Integer, short[]> shortArrayFactory = short[]::new;
+
+    Function<Integer, int[]> intArrayFactory = int[]::new;
+
+    Function<Integer, long[]> longArrayFactory = long[]::new;
+
+    Function<Integer, float[]> floatArrayFactory = float[]::new;
+
+    Function<Integer, double[]> doubleArrayFactory = double[]::new;
+
+    Function<Integer, Object[]> objectArrayFactory = Object[]::new;
+
+    Function<Integer, @Nullable Object[]> nullableObjectArrayFactory = Object[]::new;
+
+    Function<Integer, String[]> stringArrayFactory = String[]::new;
+
+    Function<Integer, @Nullable String[]> nullableStringArrayFactory = String[]::new;
 
     Producer<String> superToStringProducer = super::toString;
 
