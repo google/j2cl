@@ -54,6 +54,20 @@
   J2ktiosinteropDefaultNames_staticIntStringMethodWithInt_withNSString_(1, @"");
 }
 
+- (void)testSpecialNames {
+  [[[J2ktiosinteropSpecialNames_WithBoolean alloc] init] getWithBoolean:YES];
+  [[[J2ktiosinteropSpecialNames_WithChar alloc] init] getWithChar:'a'];
+  [[[J2ktiosinteropSpecialNames_WithByte alloc] init] getWithByte:1];
+  [[[J2ktiosinteropSpecialNames_WithShort alloc] init] getWithShort:1];
+  [[[J2ktiosinteropSpecialNames_WithInt alloc] init] getWithInt:1];
+  [[[J2ktiosinteropSpecialNames_WithLong alloc] init] getWithLong:1];
+  [[[J2ktiosinteropSpecialNames_WithFloat alloc] init] getWithFloat:1];
+  [[[J2ktiosinteropSpecialNames_WithDouble alloc] init] getWithDouble:1];
+  [[[J2ktiosinteropSpecialNames_WithObject alloc] init] getWithId:NULL];
+  [[[J2ktiosinteropSpecialNames_WithString alloc] init] getWithNSString:@""];
+  [[[J2ktiosinteropSpecialNames_WithFoo alloc] init] getWithJ2ktiosinteropSpecialNames_Foo:NULL];
+}
+
 - (void)testCustomNames {
   Custom *obj;
   obj = [[Custom alloc] initWithIndex:1];
