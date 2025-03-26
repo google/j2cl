@@ -49,6 +49,9 @@ final class J2ktSwiftInteropTest: XCTestCase {
     obj.genericMethod(withId: nil)
     obj.genericStringMethod(with: "")
 
+    // TODO(b/374280337): Should be obj.getWith(1)
+    obj.get(with: 1)
+
     obj.intField_ = obj.intField_
     J2ktiosinteropDefaultNamesCompanion.shared.staticIntField_ =
       J2ktiosinteropDefaultNamesCompanion.shared.staticIntField_

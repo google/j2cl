@@ -46,6 +46,8 @@
   [obj genericMethodWithId:NULL];
   [obj genericStringMethodWithNSString:@""];
 
+  [obj getWithInt:1];
+
   obj->intField_ = obj->intField_ + 1;
 
   J2ktiosinteropDefaultNames_staticMethod();

@@ -47,6 +47,8 @@ final class J2ObjCSwiftInteropTest: XCTestCase {
     obj.genericMethod(withId: nil)
     obj.genericStringMethod(with: "")
 
+    obj.getWith(1)
+
     // Not exposed in Swift
     //obj.intField_ = obj.intField_
   }
