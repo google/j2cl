@@ -17,6 +17,7 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems;
@@ -149,7 +150,7 @@ final class BazelJ2clBuilder extends BazelWorker {
   @Override
   protected void run() {
     problems.abortIfCancelled();
-    try (Output out = OutputUtils.initOutput(this.output, problems)) {
+    try (Output out = OutputUtils.initOutput(workdir.resolve(output), problems)) {
       problems.abortIfCancelled();
       try {
         J2clTranspiler.transpile(createOptions(out), problems);
@@ -174,7 +175,8 @@ final class BazelJ2clBuilder extends BazelWorker {
     }
 
     ImmutableList<FileInfo> allSources =
-        SourceUtils.getAllSources(this.sources, problems).collect(toImmutableList());
+        SourceUtils.getAllSourcesFromPaths(sources.stream().map(workdir::resolve), problems)
+            .collect(toImmutableList());
     problems.abortIfCancelled();
 
     ImmutableList<FileInfo> allJavaSources =
@@ -201,6 +203,10 @@ final class BazelJ2clBuilder extends BazelWorker {
         .forEach(f -> output.copyFile(f.sourcePath(), f.targetPath()));
     problems.abortIfCancelled();
 
+    if (libraryInfoOutput != null) {
+      libraryInfoOutput = workdir.resolve(libraryInfoOutput);
+    }
+
     return J2clTranspilerOptions.newBuilder()
         .setSources(
             ImmutableList.<FileInfo>builder()
@@ -213,7 +219,7 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setSystem(this.system)
         .setOutput(output)
         .setTargetLabel(targetLabel)
-        .setLibraryInfoOutput(this.libraryInfoOutput)
+        .setLibraryInfoOutput(libraryInfoOutput)
         .setEmitReadableLibraryInfo(readableLibraryInfo)
         .setEmitReadableSourceMap(this.readableSourceMaps)
         .setSourceMappingPathPrefix(this.sourceMappingPathPrefix)
@@ -230,8 +236,10 @@ final class BazelJ2clBuilder extends BazelWorker {
         .build(problems);
   }
 
-  private static List<String> getPathEntries(String path) {
-    return Splitter.on(File.pathSeparatorChar).omitEmptyStrings().splitToList(path);
+  private List<String> getPathEntries(String path) {
+    return Lists.transform(
+        Splitter.on(File.pathSeparatorChar).omitEmptyStrings().splitToList(path),
+        s -> workdir.resolve(s).toString());
   }
 
   public static void main(String[] workerArgs) throws Exception {

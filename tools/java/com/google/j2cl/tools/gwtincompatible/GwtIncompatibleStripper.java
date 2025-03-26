@@ -35,6 +35,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Stream;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTNode;
@@ -51,7 +52,7 @@ import org.eclipse.jdt.core.dom.ImportDeclaration;
 public final class GwtIncompatibleStripper {
 
   static void strip(
-      List<String> files, Path outputPath, Problems problems, List<String> annotationNames) {
+      Stream<String> files, Path outputPath, Problems problems, List<String> annotationNames) {
     try (Output out = OutputUtils.initOutput(outputPath, problems)) {
       List<FileInfo> allPaths =
           SourceUtils.getAllSources(files, problems)

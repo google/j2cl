@@ -25,6 +25,7 @@ import com.google.j2cl.common.Problems;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Path;
 import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -41,6 +42,7 @@ import org.kohsuke.args4j.CmdLineParser;
 public abstract class BazelWorker {
 
   protected final Problems problems = new Problems();
+  protected Path workdir;
 
   protected abstract void run();
 
@@ -48,7 +50,7 @@ public abstract class BazelWorker {
    * Process the request described by the arguments. Note that you must output errors and warnings
    * via {@link Problems} to avoid interrupting the worker protocol which occurs over stdout.
    */
-  private int processRequest(List<String> args, PrintWriter pw) {
+  private int processRequest(List<String> args, PrintWriter pw, String sandboxDir) {
     CmdLineParser parser = new CmdLineParser(this);
 
     try {
@@ -57,6 +59,7 @@ public abstract class BazelWorker {
       problems.error("%s", e.getMessage());
       return problems.reportAndGetExitCode(pw);
     }
+    this.workdir = Path.of(sandboxDir);
 
     try {
       run();
@@ -85,7 +88,7 @@ public abstract class BazelWorker {
     int exitCode =
         workerSupplier
             .get()
-            .processRequest(args, new PrintWriter(System.err, /* autoFlush= */ true));
+            .processRequest(args, new PrintWriter(System.err, /* autoFlush= */ true), ".");
     System.exit(exitCode);
   }
 
@@ -98,7 +101,8 @@ public abstract class BazelWorker {
                       BazelWorker worker = workerSupplier.get();
                       activeWorkers.put(request.getRequestId(), worker);
                       try {
-                        return worker.processRequest(request.getArgumentsList(), pw);
+                        return worker.processRequest(
+                            request.getArgumentsList(), pw, request.getSandboxDir());
                       } finally {
                         activeWorkers.remove(request.getRequestId());
                       }

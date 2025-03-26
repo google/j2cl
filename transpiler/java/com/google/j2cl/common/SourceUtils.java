@@ -71,7 +71,13 @@ public class SourceUtils {
 
   /** Returns all individual sources where source jars extracted and flattened. */
   @Nullable
-  public static Stream<FileInfo> getAllSources(List<String> sources, Problems problems) {
+  public static Stream<FileInfo> getAllSourcesFromPaths(Stream<Path> sources, Problems problems) {
+    return getAllSources(sources.map(Path::toString), problems);
+  }
+
+  /** Returns all individual sources where source jars extracted and flattened. */
+  @Nullable
+  public static Stream<FileInfo> getAllSources(Stream<String> sources, Problems problems) {
     // Make sure to extract all of the Jars into a single temp dir so that when later sorting
     // sourceFilePaths there is no instability introduced by differences in randomly generated
     // temp dir prefixes.
@@ -89,12 +95,12 @@ public class SourceUtils {
     // and you can't trust the input to have been provided already in a stable order then the result
     // is that you will create an output Foo.js.zip with randomly ordered entries, and this will
     // cause unstable optimization in JSCompiler.
-    return sources.stream()
+    return sources
         .flatMap(
             f ->
                 f.endsWith("jar") || f.endsWith("zip")
                     ? extractZip(f, sourcesDir, problems).stream()
-                    : Stream.of(FileInfo.create(f, f, getJavaPath(f))))
+                    : Stream.of(FileInfo.create(f, f.toString(), getJavaPath(f.toString()))))
         .sorted()
         .distinct();
   }
