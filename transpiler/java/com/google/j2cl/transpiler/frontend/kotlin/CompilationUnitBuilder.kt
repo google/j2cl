@@ -61,6 +61,7 @@ import com.google.j2cl.transpiler.ast.NullLiteral
 import com.google.j2cl.transpiler.ast.NumberLiteral
 import com.google.j2cl.transpiler.ast.PrefixExpression
 import com.google.j2cl.transpiler.ast.PrefixOperator
+import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.ReturnStatement
 import com.google.j2cl.transpiler.ast.RuntimeMethods
 import com.google.j2cl.transpiler.ast.Statement
@@ -897,23 +898,38 @@ class CompilationUnitBuilder(
     var lhs = convertExpression(irCall.getValueArgument(0)!!)
     var rhs = convertExpression(irCall.getValueArgument(1)!!)
 
-    val floatToNumberMethodDescriptor =
-      TypeDescriptors.get()
-        .javaLangFloat
-        .getMethodDescriptor("toDouble", TypeDescriptors.get().javaLangFloat)
-    // This operation is only applicable to floats and doubles, and we take advantage that
-    // float, double and Double have exactly the same representation as a number. Therefore, it is
-    // only necessary to handle Float, and for that we use a utility method that returns its
-    // floating point value or null.
-    if (TypeDescriptors.isJavaLangFloat(lhs.typeDescriptor)) {
-      lhs = MethodCall.Builder.from(floatToNumberMethodDescriptor).setArguments(lhs).build()
-    }
+    // This operation is only applicable to floats and doubles, convert floats to doubles if
+    // necessary.
+    return RuntimeMethods.createEqualityMethodCall(
+      "\$sameNumber",
+      convertToDouble(lhs),
+      convertToDouble(rhs),
+    )
+  }
 
-    if (TypeDescriptors.isJavaLangFloat(rhs.typeDescriptor)) {
-      rhs = MethodCall.Builder.from(floatToNumberMethodDescriptor).setArguments(rhs).build()
+  private fun convertToDouble(expression: Expression): Expression {
+    val typeDescriptor = expression.typeDescriptor
+    when {
+      // Handle j.l.Float using a utility method that returns its floating point value or null.
+      TypeDescriptors.isJavaLangFloat(typeDescriptor) -> {
+        val floatToNumberMethodDescriptor =
+          TypeDescriptors.get()
+            .javaLangFloat
+            .getMethodDescriptor("toDouble", TypeDescriptors.get().javaLangFloat)
+        return MethodCall.Builder.from(floatToNumberMethodDescriptor)
+          .setArguments(expression)
+          .build()
+      }
+      // Cast primitive float to double to keep the AST consistent since their representations are
+      // the same.
+      TypeDescriptors.isPrimitiveFloat(typeDescriptor) ->
+        return CastExpression.newBuilder()
+          .setExpression(expression)
+          .setCastTypeDescriptor(PrimitiveTypes.DOUBLE)
+          .build()
+      // j.l.Double and primitive double also have the same representation in JS.
+      else -> return expression
     }
-
-    return RuntimeMethods.createEqualityMethodCall("\$sameNumber", lhs, rhs)
   }
 
   private fun convertReferenceEqualsOperator(irCall: IrCall): Expression {

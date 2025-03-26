@@ -882,12 +882,10 @@ public final class RuntimeMethods {
                                           ParameterDescriptor.newBuilder()
                                               .setTypeDescriptor(
                                                   TypeDescriptors.get().javaLangDouble)
-                                              .setDoNotAutobox(true)
                                               .build(),
                                           ParameterDescriptor.newBuilder()
                                               .setTypeDescriptor(
                                                   TypeDescriptors.get().javaLangDouble)
-                                              .setDoNotAutobox(true)
                                               .build())
                                       .build())
                               .build())
