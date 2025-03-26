@@ -30,17 +30,17 @@ import kotlin.native.ObjCName
 open class BridgeMethodShadowedSignature {
  @ObjCName("J2ktBridgemethodsBridgeMethodShadowedSignature_I", swiftName = "BridgemethodsBridgeMethodShadowedSignature_I", exact = true)
  fun interface I<I1> {
-  @ObjCName("get")
+  @ObjCName("get", swiftName = "getWith")
   fun get(
-   @ObjCName("withJavaUtilFunctionConsumer", swiftName = "with") consumer: Consumer<in I1>?
+   @ObjCName("withJavaUtilFunctionConsumer", swiftName = "_") consumer: Consumer<in I1>?
   ): String?
  }
 
  @ObjCName("J2ktBridgemethodsBridgeMethodShadowedSignature_B", swiftName = "BridgemethodsBridgeMethodShadowedSignature_B", exact = true)
  abstract class B<B1, B2> internal constructor(): I<B1> {
-  @ObjCName("get")
+  @ObjCName("get", swiftName = "getWithId")
   open fun get(
-   @ObjCName("withId") consumer: B2
+   @ObjCName("withId", swiftName = "_") consumer: B2
   ): String? {
    return "B get B2"
   }

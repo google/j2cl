@@ -36,8 +36,8 @@ open class Headers {
   @ObjCName("withNSString", swiftName = "with") value: String?
  )
 
- @ObjCName("get")
+ @ObjCName("get", swiftName = "getWith")
  external open fun get(
-  @ObjCName("withNSString", swiftName = "with") name: String?
+  @ObjCName("withNSString", swiftName = "_") name: String?
  ): String?
 }

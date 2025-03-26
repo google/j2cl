@@ -16,16 +16,30 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
+import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.Variable
+import com.google.j2cl.transpiler.backend.kotlin.common.runIf
 
-internal val Variable.swiftParameterName: String?
-  get() = if (typeDescriptor.useWithParameterSwiftName) "with" else null
+private val Method.singleGetParameter: Variable?
+  get() =
+    descriptor
+      .takeIf { parameters.size == 1 }
+      ?.ktName
+      ?.takeIf { it == "get" }
+      ?.let { parameters.first() }
 
-private val TypeDescriptor.useWithParameterSwiftName: Boolean
+internal fun Method.swiftParameterName(parameter: Variable): String? =
+  when {
+    singleGetParameter != null -> "_"
+    parameter.typeDescriptor.useWithParameterSwiftName -> "with"
+    else -> null
+  }
+
+internal val TypeDescriptor.useWithParameterSwiftName: Boolean
   get() =
     when (this) {
       PrimitiveTypes.INT,
@@ -34,4 +48,13 @@ private val TypeDescriptor.useWithParameterSwiftName: Boolean
       is DeclaredTypeDescriptor -> !isJavaLangObject(this)
       is TypeVariable -> upperBoundTypeDescriptor.useWithParameterSwiftName
       else -> false
+    }
+
+internal val Method.swiftName: String?
+  get() =
+    singleGetParameter?.let { singleGetParameter ->
+      "getWith"
+        .runIf(!singleGetParameter.typeDescriptor.useWithParameterSwiftName) {
+          plus(singleGetParameter.objCName)
+        }
     }

@@ -65,9 +65,9 @@ open class NullabilityInferenceProblem8 {
 
  @ObjCName("J2ktJ2ktNullabilityInferenceProblem8_NullableSupplier", swiftName = "J2ktNullabilityInferenceProblem8_NullableSupplier", exact = true)
  fun interface NullableSupplier<V> {
-  @ObjCName("get")
+  @ObjCName("get", swiftName = "getWith")
   fun get(
-   @ObjCName("withNSString", swiftName = "with") key: String
+   @ObjCName("withNSString", swiftName = "_") key: String
   ): V?
  }
 

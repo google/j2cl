@@ -90,9 +90,12 @@ internal fun Method.toNonConstructorObjCNames(): MethodObjCNames =
   descriptor.objectiveCName.let { objectiveCName ->
     if (objectiveCName == null || !objectiveCName.contains(":")) {
       MethodObjCNames(
-        ObjCName(string = objectiveCName ?: descriptor.ktName.escapeJ2ObjCKeyword),
+        ObjCName(
+          string = objectiveCName ?: descriptor.ktName.escapeJ2ObjCKeyword,
+          swiftString = swiftName,
+        ),
         parameters.map {
-          ObjCName(string = it.objCParameterName, swiftString = it.swiftParameterName)
+          ObjCName(string = it.objCParameterName, swiftString = swiftParameterName(it))
         },
       )
     } else {
