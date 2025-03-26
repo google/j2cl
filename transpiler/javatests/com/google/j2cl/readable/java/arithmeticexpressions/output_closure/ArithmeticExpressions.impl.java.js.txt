@@ -76,6 +76,15 @@ class ArithmeticExpressions extends j_l_Object {
   k = $LongUtils.equals($Primitives.widenCharToLong(y), z.m_longValue__long());
  }
  /** @nodts */
+ m_testDoubleAssignments__void() {
+  let a = 1;
+  a += 2;
+  a -= 3;
+  a *= 4;
+  a /= 5;
+  a %= 6;
+ }
+ /** @nodts */
  m_testCompoundArray__void() {
   let /** Array<number> */ ints = null;
   $Arrays.$set(ints, 0, ints[0] + 1 | 0);

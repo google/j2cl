@@ -7,6 +7,7 @@
  (field $m_testCoercions__void (ref $function.m_testCoercions__void))
  (field $m_testCompoundArray__void (ref $function.m_testCompoundArray__void))
  (field $m_testCompoundBoxedTypes__void (ref $function.m_testCompoundBoxedTypes__void))
+ (field $m_testDoubleAssignments__void (ref $function.m_testDoubleAssignments__void))
  (field $m_testEffectivelyFinalVariableInAssignmentExpression__boolean__void (ref $function.m_testEffectivelyFinalVariableInAssignmentExpression__boolean__void))
  (field $m_testExtendedOperands__void (ref $function.m_testExtendedOperands__void))
  (field $m_testPrimitives__void (ref $function.m_testPrimitives__void))
@@ -77,6 +78,7 @@
   (ref.func $m_testCoercions__void@arithmeticexpressions.ArithmeticExpressions)
   (ref.func $m_testCompoundArray__void@arithmeticexpressions.ArithmeticExpressions)
   (ref.func $m_testCompoundBoxedTypes__void@arithmeticexpressions.ArithmeticExpressions)
+  (ref.func $m_testDoubleAssignments__void@arithmeticexpressions.ArithmeticExpressions)
   (ref.func $m_testEffectivelyFinalVariableInAssignmentExpression__boolean__void@arithmeticexpressions.ArithmeticExpressions)
   (ref.func $m_testExtendedOperands__void@arithmeticexpressions.ArithmeticExpressions)
   (ref.func $m_testPrimitives__void@arithmeticexpressions.ArithmeticExpressions)
@@ -278,11 +280,36 @@
 )
 (elem declare func $m_testPrimitives__void@arithmeticexpressions.ArithmeticExpressions)
 
+;;; void ArithmeticExpressions.testDoubleAssignments()
+(func $m_testDoubleAssignments__void@arithmeticexpressions.ArithmeticExpressions
+ (type $function.m_testDoubleAssignments__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:83:14
+ (local $a f64)
+ (local $this (ref null $arithmeticexpressions.ArithmeticExpressions))
+ (local.set $this (ref.cast (ref $arithmeticexpressions.ArithmeticExpressions) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:84:4
+  (local.set $a (f64.const 1.0))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:85:4
+  (local.set $a (f64.add (local.get $a) (f64.const 2.0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:86:4
+  (local.set $a (f64.sub (local.get $a) (f64.const 3.0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:87:4
+  (local.set $a (f64.mul (local.get $a) (f64.const 4.0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:88:4
+  (local.set $a (f64.div (local.get $a) (f64.const 5.0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:89:4
+  (local.set $a (call $m_dmod__double__double__double@javaemul.internal.Primitives (local.get $a)(f64.const 6.0)))
+ )
+)
+(elem declare func $m_testDoubleAssignments__void@arithmeticexpressions.ArithmeticExpressions)
+
 ;;; void ArithmeticExpressions.testCompoundArray()
 (func $m_testCompoundArray__void@arithmeticexpressions.ArithmeticExpressions
  (type $function.m_testCompoundArray__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:88:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:97:14
  (local $ints (ref null $javaemul.internal.WasmArray.OfInt))
  (local $i i32)
  (local $$array (ref null $javaemul.internal.WasmArray.OfInt))
@@ -306,94 +333,94 @@
  (local $this (ref null $arithmeticexpressions.ArithmeticExpressions))
  (local.set $this (ref.cast (ref $arithmeticexpressions.ArithmeticExpressions) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:89:4
-  (local.set $ints (ref.null $javaemul.internal.WasmArray.OfInt))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:90:4
-  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0) (i32.add (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0)) (i32.const 1)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:91:4
-  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0) (i32.sub (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0)) (i32.const 1)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:92:4
-  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0) (i32.mul (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0)) (i32.const 1)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:93:4
-  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0) (call $m_safeDivision__int__int__int@javaemul.internal.Primitives (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0))(i32.const 1)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:94:4
-  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0) (i32.and (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0)) (i32.const 1)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:95:4
-  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0) (i32.xor (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0)) (i32.const 1)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:96:4
-  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0) (i32.or (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0)) (i32.const 1)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:97:4
-  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0) (i32.rem_s (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0)) (i32.const 1)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:98:4
-  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0) (i32.shl (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0)) (i32.const 1)))
+  (local.set $ints (ref.null $javaemul.internal.WasmArray.OfInt))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:99:4
-  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0) (i32.shr_s (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0)) (i32.const 1)))
+  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0) (i32.add (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0)) (i32.const 1)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:100:4
-  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0) (i32.shr_u (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0)) (i32.const 1)))
+  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0) (i32.sub (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0)) (i32.const 1)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:101:4
-  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0) (i32.add (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0)) (i32.const 1)))
+  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0) (i32.mul (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0)) (i32.const 1)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:102:4
-  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0) (i32.add (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0)) (i32.const 1)))
+  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0) (call $m_safeDivision__int__int__int@javaemul.internal.Primitives (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0))(i32.const 1)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:103:4
+  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0) (i32.and (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0)) (i32.const 1)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:104:4
+  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0) (i32.xor (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0)) (i32.const 1)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:105:4
+  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0) (i32.or (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0)) (i32.const 1)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:106:4
+  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0) (i32.rem_s (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0)) (i32.const 1)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:107:4
+  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0) (i32.shl (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0)) (i32.const 1)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:108:4
+  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0) (i32.shr_s (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0)) (i32.const 1)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:109:4
+  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0) (i32.shr_u (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0)) (i32.const 1)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:110:4
+  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0) (i32.add (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0)) (i32.const 1)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:111:4
+  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0) (i32.add (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $ints)) (i32.const 0)) (i32.const 1)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:112:4
   (local.set $i (i32.const 0))
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:104:4
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:113:4
    (local.set $$array (local.get $ints))
    (local.set $$index (block (result i32)
     (local.set $$value (local.get $i))
     (local.set $i (i32.add (local.get $i) (i32.const 1)))
     (local.get $$value)
    ))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:104:4
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:113:4
    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $$array)) (local.get $$index) (i32.add (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $$array)) (local.get $$index)) (i32.const 1)))
   )
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:105:4
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:114:4
    (local.set $$array_1 (local.get $ints))
    (local.set $$index_1 (block (result i32)
     (local.set $i (i32.add (local.get $i) (i32.const 1)))
     (local.get $i)
    ))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:105:4
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:114:4
    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $$array_1)) (local.get $$index_1) (i32.add (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $$array_1)) (local.get $$index_1)) (i32.const 1)))
   )
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:106:4
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:115:4
    (local.set $$array_2 (local.get $ints))
    (local.set $$index_2 (block (result i32)
     (local.set $$value_1 (local.get $i))
     (local.set $i (i32.add (local.get $i) (i32.const 1)))
     (local.get $$value_1)
    ))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:106:4
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:115:4
    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $$array_2)) (local.get $$index_2) (call $m_safeDivision__int__int__int@javaemul.internal.Primitives (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $elements@javaemul.internal.WasmArray.OfInt (local.get $$array_2)) (local.get $$index_2))(i32.const 1)))
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:108:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:117:4
   (local.set $longs (ref.null $javaemul.internal.WasmArray.OfLong))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:109:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:118:4
   (array.set $long.array (struct.get $javaemul.internal.WasmArray.OfLong $elements@javaemul.internal.WasmArray.OfLong (local.get $longs)) (i32.const 0) (i64.add (array.get $long.array (struct.get $javaemul.internal.WasmArray.OfLong $elements@javaemul.internal.WasmArray.OfLong (local.get $longs)) (i32.const 0)) (i64.const 1)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:110:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:119:4
   (array.set $long.array (struct.get $javaemul.internal.WasmArray.OfLong $elements@javaemul.internal.WasmArray.OfLong (local.get $longs)) (i32.const 0) (i64.sub (array.get $long.array (struct.get $javaemul.internal.WasmArray.OfLong $elements@javaemul.internal.WasmArray.OfLong (local.get $longs)) (i32.const 0)) (i64.const 1)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:111:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:120:4
   (array.set $long.array (struct.get $javaemul.internal.WasmArray.OfLong $elements@javaemul.internal.WasmArray.OfLong (local.get $longs)) (i32.const 0) (i64.sub (array.get $long.array (struct.get $javaemul.internal.WasmArray.OfLong $elements@javaemul.internal.WasmArray.OfLong (local.get $longs)) (i32.const 0)) (i64.const 1)))
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:112:4
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:121:4
    (local.set $$array_3 (call $m_getLongArray__arrayOf_long@arithmeticexpressions.ArithmeticExpressions ))
    (local.set $$index_3 (i32.const 0))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:112:4
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:121:4
    (array.set $long.array (struct.get $javaemul.internal.WasmArray.OfLong $elements@javaemul.internal.WasmArray.OfLong (local.get $$array_3)) (local.get $$index_3) (i64.add (array.get $long.array (struct.get $javaemul.internal.WasmArray.OfLong $elements@javaemul.internal.WasmArray.OfLong (local.get $$array_3)) (local.get $$index_3)) (i64.const 1)))
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:114:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:123:4
   (local.set $booleans (ref.null $javaemul.internal.WasmArray.OfBoolean))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:115:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:124:4
   (array.set $boolean.array (struct.get $javaemul.internal.WasmArray.OfBoolean $elements@javaemul.internal.WasmArray.OfBoolean (local.get $booleans)) (i32.const 0) (i32.or (array.get_s $boolean.array (struct.get $javaemul.internal.WasmArray.OfBoolean $elements@javaemul.internal.WasmArray.OfBoolean (local.get $booleans)) (i32.const 0)) (i32.const 1)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:117:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:126:4
   (local.set $strings (ref.null $javaemul.internal.WasmArray.OfObject))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:118:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:127:4
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $strings)) (i32.const 0) (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (ref.cast (ref null $java.lang.String) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $strings)) (i32.const 0))))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (ref.null $java.lang.Object))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:120:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:129:4
   (local.set $shorts (ref.null $javaemul.internal.WasmArray.OfShort))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:121:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:130:4
   (local.set $b (i32.eq (block (result i32)
    (local.set $$array_4 (local.get $shorts))
    (local.set $$index_4 (i32.const 0))
@@ -408,9 +435,9 @@
 ;;; long[] ArithmeticExpressions.getLongArray()
 (func $m_getLongArray__arrayOf_long@arithmeticexpressions.ArithmeticExpressions
  (result (ref null $javaemul.internal.WasmArray.OfLong))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:124:24
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:133:24
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:125:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:134:4
   (return (ref.null $javaemul.internal.WasmArray.OfLong))
  )
 )
@@ -419,7 +446,7 @@
 (func $m_testCompoundBoxedTypes__void@arithmeticexpressions.ArithmeticExpressions
  (type $function.m_testCompoundBoxedTypes__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:128:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:137:14
  (local $c (ref null $java.lang.Integer))
  (local $d (ref null $java.lang.Integer))
  (local $i i32)
@@ -436,70 +463,70 @@
  (local $this (ref null $arithmeticexpressions.ArithmeticExpressions))
  (local.set $this (ref.cast (ref $arithmeticexpressions.ArithmeticExpressions) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:129:4
-  (local.set $c (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1000)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:132:4
-  (local.set $d (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 10000)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:133:4
-  (local.set $d (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $d))) (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $c))))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:135:4
-  (local.set $i (i32.const 43))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:136:4
-  (local.set $d (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $d))) (local.get $i))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:137:4
-  (local.set $d (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.shl (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $d))) (local.get $i))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:138:4
-  (local.set $i (i32.add (local.get $i) (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $c)))))
+  (local.set $c (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1000)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:141:4
-  (local.set $e (block (result (ref null $java.lang.Integer))
-   (local.set $c (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $c))) (i32.const 1))))
-   (local.get $c)
-  ))
+  (local.set $d (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 10000)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:142:4
+  (local.set $d (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $d))) (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $c))))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:144:4
+  (local.set $i (i32.const 43))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:145:4
+  (local.set $d (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $d))) (local.get $i))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:146:4
+  (local.set $d (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.shl (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $d))) (local.get $i))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:147:4
+  (local.set $i (i32.add (local.get $i) (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $c)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:150:4
   (local.set $e (block (result (ref null $java.lang.Integer))
    (local.set $c (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $c))) (i32.const 1))))
    (local.get $c)
   ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:143:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:151:4
+  (local.set $e (block (result (ref null $java.lang.Integer))
+   (local.set $c (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $c))) (i32.const 1))))
+   (local.get $c)
+  ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:152:4
   (local.set $e2 (call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 100.0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:144:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:153:4
   (local.set $e2 (call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.add (call $m_doubleValue__double@java.lang.Double (ref.as_non_null (local.get $e2))) (f64.const 1.0))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:147:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:156:4
   (local.set $f (block (result (ref null $java.lang.Integer))
    (local.set $$value (local.get $c))
    (local.set $c (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $c))) (i32.const 1))))
    (local.get $$value)
   ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:148:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:157:4
   (local.set $f (block (result (ref null $java.lang.Integer))
    (local.set $$value_1 (local.get $c))
    (local.set $c (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $c))) (i32.const 1))))
    (local.get $$value_1)
   ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:149:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:158:4
   (local.set $b (call $m_valueOf__byte__java_lang_Byte@java.lang.Byte (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:150:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:159:4
   (local.set $b (call $m_valueOf__byte__java_lang_Byte@java.lang.Byte (i32.extend8_s (i32.add (call $m_byteValue__byte@java.lang.Byte (ref.as_non_null (local.get $b))) (i32.const 1)))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:151:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:160:4
   (local.set $ch (call $m_valueOf__char__java_lang_Character@java.lang.Character (i32.const 99)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:152:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:161:4
   (local.set $ch (call $m_valueOf__char__java_lang_Character@java.lang.Character (call $m_narrowIntToChar__int__int@javaemul.internal.Primitives (i32.add (call $m_charValue__char@java.lang.Character (ref.as_non_null (local.get $ch))) (i32.const 1)))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:155:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:164:4
   (drop (call $m_intValue__int@java.lang.Integer (ref.as_non_null (block (result (ref null $java.lang.Integer))
    (local.set $f (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $f))) (i32.const 1))))
    (local.get $f)
   ))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:156:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:165:4
   (drop (call $m_intValue__int@java.lang.Integer (ref.as_non_null (block (result (ref null $java.lang.Integer))
    (local.set $$value_2 (local.get $f))
    (local.set $f (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.sub (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $f))) (i32.const 1))))
    (local.get $$value_2)
   ))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:162:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:171:4
   (local.set $ref (ref.null $arithmeticexpressions.ArithmeticExpressions.1Ref))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:163:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:172:4
   (struct.set $arithmeticexpressions.ArithmeticExpressions.1Ref $field@arithmeticexpressions.ArithmeticExpressions.1Ref (local.get $ref) (call $m_valueOf__byte__java_lang_Byte@java.lang.Byte (i32.extend8_s (i32.add (call $m_byteValue__byte@java.lang.Byte (ref.as_non_null (ref.cast (ref null $java.lang.Byte) (struct.get $arithmeticexpressions.ArithmeticExpressions.1Ref $field@arithmeticexpressions.ArithmeticExpressions.1Ref (local.get $ref))))) (i32.const 1)))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:164:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:173:4
   (local.set $n (i32.add (i32.const 1) (call $m_byteValue__byte@java.lang.Byte (ref.as_non_null (ref.cast (ref null $java.lang.Byte) (struct.get $arithmeticexpressions.ArithmeticExpressions.1Ref $field@arithmeticexpressions.ArithmeticExpressions.1Ref (local.get $ref)))))))
  )
 )
@@ -508,22 +535,22 @@
 ;;; Integer ArithmeticExpressions.getInteger()
 (func $m_getInteger__java_lang_Integer@arithmeticexpressions.ArithmeticExpressions
  (result (ref null $java.lang.Integer))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:167:25
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:176:25
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:168:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:177:4
   (return (ref.null $java.lang.Integer))
  )
 )
 
 ;;; void ArithmeticExpressions.testSideEffect()
 (func $m_testSideEffect__void@arithmeticexpressions.ArithmeticExpressions
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:173:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:182:22
  (local $$qualifier (ref null $arithmeticexpressions.ArithmeticExpressions))
  (block
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:174:4
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:183:4
    (local.set $$qualifier (call $m_getWithSideEffect__arithmeticexpressions_ArithmeticExpressions@arithmeticexpressions.ArithmeticExpressions ))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:174:4
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:183:4
    (struct.set $arithmeticexpressions.ArithmeticExpressions $intField@arithmeticexpressions.ArithmeticExpressions (local.get $$qualifier) (i64.add (struct.get $arithmeticexpressions.ArithmeticExpressions $intField@arithmeticexpressions.ArithmeticExpressions (local.get $$qualifier)) (i64.const 5)))
   )
  )
@@ -532,9 +559,9 @@
 ;;; ArithmeticExpressions ArithmeticExpressions.getWithSideEffect()
 (func $m_getWithSideEffect__arithmeticexpressions_ArithmeticExpressions@arithmeticexpressions.ArithmeticExpressions
  (result (ref null $arithmeticexpressions.ArithmeticExpressions))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:177:39
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:186:39
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:178:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:187:4
   (return (ref.null $arithmeticexpressions.ArithmeticExpressions))
  )
 )
@@ -543,7 +570,7 @@
 (func $m_testExtendedOperands__void@arithmeticexpressions.ArithmeticExpressions
  (type $function.m_testExtendedOperands__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:184:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:193:14
  (local $boxedInteger (ref null $java.lang.Integer))
  (local $i i32)
  (local $l i64)
@@ -551,23 +578,23 @@
  (local $this (ref null $arithmeticexpressions.ArithmeticExpressions))
  (local.set $this (ref.cast (ref $arithmeticexpressions.ArithmeticExpressions) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:185:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:194:4
   (local.set $boxedInteger (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 3)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:186:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:195:4
   
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:187:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:196:4
   
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:188:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:197:4
   
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:189:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:198:4
   (local.set $l (i64.sub (i64.extend_i32_s (i32.sub (i32.const 2) (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $boxedInteger))))) (i64.const 2)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:190:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:199:4
   (local.set $l (i64.or (i64.extend_i32_s (i32.or (i32.const 2) (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $boxedInteger))))) (i64.const 2)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:191:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:200:4
   (local.set $l (i64.mul (i64.mul (i64.mul (i64.mul (i64.const 1000000) (local.get $l)) (i64.const 60)) (i64.const 60)) (i64.const 24)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:192:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:201:4
   (local.set $l (i64.mul (i64.mul (i64.extend_i32_s (i32.mul (i32.mul (i32.const 24) (i32.const 60)) (i32.const 60))) (local.get $l)) (i64.const 1000000)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:193:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:202:4
   (local.set $d (f64.convert_i64_s (block (result i64)
    (local.set $l (i64.extend_i32_s (block (result i32)
     (local.set $i (i32.const 20))
@@ -575,7 +602,7 @@
    )))
    (local.get $l)
   )))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:194:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:203:4
   (local.set $l (i64.extend_i32_s (call $m_intValue__int@java.lang.Integer (ref.as_non_null (block (result (ref null $java.lang.Integer))
    (local.set $boxedInteger (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (block (result i32)
     (local.set $i (i32.const 20))
@@ -583,9 +610,9 @@
    )))
    (local.get $boxedInteger)
   )))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:195:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:204:4
   (local.set $l (i64.add (i64.add (i64.extend_i32_s (i32.add (local.get $i) (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $boxedInteger))))) (local.get $l)) (i64.const 20)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:196:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:205:4
   (local.set $d (f64.add (f64.convert_i64_s (i64.add (i64.const 20) (local.get $l))) (local.get $d)))
  )
 )
@@ -596,22 +623,22 @@
  (type $function.m_testEffectivelyFinalVariableInAssignmentExpression__boolean__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $condition i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:199:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:208:14
  (local $effectivelyFinal i64)
  (local $unused i64)
  (local $this (ref null $arithmeticexpressions.ArithmeticExpressions))
  (local.set $this (ref.cast (ref $arithmeticexpressions.ArithmeticExpressions) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:200:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:209:4
   
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:202:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:211:4
   (if (if (result i32) (local.get $condition) (then (i64.ne (block (result i64)
     (local.set $effectivelyFinal (struct.get $arithmeticexpressions.ArithmeticExpressions $bar@arithmeticexpressions.ArithmeticExpressions (local.get $this)))
     (local.get $effectivelyFinal)
    ) (i64.const 0))) (else (i32.const 0)))
    (then
     (block
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:203:6
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:212:6
      (local.set $unused (local.get $effectivelyFinal))
     )
    )
@@ -623,10 +650,10 @@
 ;;; long ArithmeticExpressions.incrementCounter()
 (func $m_incrementCounter__long@arithmeticexpressions.ArithmeticExpressions
  (result i64)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:209:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:218:22
  (local $$value i64)
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:210:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:219:4
   (return (block (result i64)
    (local.set $$value (i64.add (global.get $counter@arithmeticexpressions.ArithmeticExpressions) (i64.const 1)))
    (global.set $counter@arithmeticexpressions.ArithmeticExpressions (local.get $$value))
@@ -641,7 +668,7 @@
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:20:13
  (local $$value i64)
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:86:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:95:2
   (struct.set $arithmeticexpressions.ArithmeticExpressions $bar@arithmeticexpressions.ArithmeticExpressions (local.get $this) (block (result i64)
    (local.set $$value (global.get $foo@arithmeticexpressions.ArithmeticExpressions))
    (global.set $foo@arithmeticexpressions.ArithmeticExpressions (i64.add (global.get $foo@arithmeticexpressions.ArithmeticExpressions) (i64.const 1)))
@@ -666,15 +693,15 @@
   (global.set $$class-initialized@arithmeticexpressions.ArithmeticExpressions (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:20:13
   (call $$clinit__void_<once>_@java.lang.Object )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:84:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:93:2
   (global.set $one@arithmeticexpressions.ArithmeticExpressions (i64.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:85:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:94:2
   (global.set $foo@arithmeticexpressions.ArithmeticExpressions (block (result i64)
    (local.set $$value (global.get $one@arithmeticexpressions.ArithmeticExpressions))
    (global.set $one@arithmeticexpressions.ArithmeticExpressions (i64.add (global.get $one@arithmeticexpressions.ArithmeticExpressions) (i64.const 1)))
    (local.get $$value)
   ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:207:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:216:2
   (global.set $counter@arithmeticexpressions.ArithmeticExpressions (i64.const 0))
  )
 )
@@ -712,16 +739,16 @@
 (func $$create__arithmeticexpressions_ArithmeticExpressions@arithmeticexpressions.ArithmeticExpressions.1Ref
  (param $$outer_this (ref null $arithmeticexpressions.ArithmeticExpressions))
  (result (ref null $arithmeticexpressions.ArithmeticExpressions.1Ref))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:158:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:167:10
  (local $$instance (ref null $arithmeticexpressions.ArithmeticExpressions.1Ref))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:158:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:167:10
   (call $$clinit__void_<once>_@arithmeticexpressions.ArithmeticExpressions.1Ref )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:158:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:167:10
   (local.set $$instance (struct.new $arithmeticexpressions.ArithmeticExpressions.1Ref (ref.as_non_null (global.get $arithmeticexpressions.ArithmeticExpressions.1Ref.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $arithmeticexpressions.ArithmeticExpressions) (ref.null $java.lang.Object)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:158:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:167:10
   (call $$ctor__arithmeticexpressions_ArithmeticExpressions__void_$p_arithmeticexpressions_ArithmeticExpressions_1Ref@arithmeticexpressions.ArithmeticExpressions.1Ref (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:158:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:167:10
   (return (local.get $$instance))
  )
 )
@@ -730,29 +757,29 @@
 (func $$ctor__arithmeticexpressions_ArithmeticExpressions__void_$p_arithmeticexpressions_ArithmeticExpressions_1Ref@arithmeticexpressions.ArithmeticExpressions.1Ref
  (param $this (ref null $arithmeticexpressions.ArithmeticExpressions.1Ref))
  (param $$outer_this (ref null $arithmeticexpressions.ArithmeticExpressions))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:158:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:167:10
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:158:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:167:10
   (struct.set $arithmeticexpressions.ArithmeticExpressions.1Ref $$outer_this@arithmeticexpressions.ArithmeticExpressions.1Ref (local.get $this) (local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:158:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:167:10
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void Ref.$clinit()
 (func $$clinit__void_<once>_@arithmeticexpressions.ArithmeticExpressions.1Ref
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:158:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:167:10
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:158:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:167:10
   (if (global.get $$class-initialized@arithmeticexpressions.ArithmeticExpressions.1Ref)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:158:10
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:167:10
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:158:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:167:10
   (global.set $$class-initialized@arithmeticexpressions.ArithmeticExpressions.1Ref (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:158:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:167:10
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

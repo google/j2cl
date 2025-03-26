@@ -123,6 +123,16 @@ open class ArithmeticExpressions {
   k = y.code.toLong() == z!!.toLong()
  }
 
+ @ObjCName("testDoubleAssignments")
+ open fun testDoubleAssignments() {
+  var a: Double = 1.0
+  a = a + 2.0
+  a = a - 3.0
+  a = a * 4.0
+  a = a / 5.0
+  a = a % 6.0
+ }
+
  @JvmField
  @ObjCName("bar_")
  var bar: kotlin.Long = run {

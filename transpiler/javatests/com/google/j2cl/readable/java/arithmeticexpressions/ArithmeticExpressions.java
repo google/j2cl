@@ -80,6 +80,15 @@ public class ArithmeticExpressions {
     k = y == z;
   }
 
+  public void testDoubleAssignments() {
+    double a = 1.0;
+    a += 2.0;
+    a -= 3.0;
+    a *= 4.0;
+    a /= 5.0;
+    a %= 6.0;
+  }
+
   // Compount assignments in static fields
   public static long one = 1;
   public static long foo = one++;
