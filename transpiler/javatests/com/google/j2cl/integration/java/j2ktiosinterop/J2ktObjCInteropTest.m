@@ -46,8 +46,6 @@
   [obj genericMethodWithId:NULL];
   [obj genericStringMethodWithNSString:@""];
 
-  [obj getWithInt:1];
-
   obj.intField_ = obj.intField_;
 
   J2ktJ2ktiosinteropDefaultNamesCompanion.shared.staticIntField_ =
@@ -60,6 +58,21 @@
   J2ktiosinteropDefaultNames_staticMethod();
   J2ktiosinteropDefaultNames_staticIntMethodWithInt_(1);
   J2ktiosinteropDefaultNames_staticIntStringMethodWithInt_withNSString_(1, @"");
+}
+
+- (void)testSpecialNames {
+  [[[J2ktJ2ktiosinteropSpecialNames_WithBoolean alloc] init] getWithBoolean:YES];
+  [[[J2ktJ2ktiosinteropSpecialNames_WithChar alloc] init] getWithChar:'a'];
+  [[[J2ktJ2ktiosinteropSpecialNames_WithByte alloc] init] getWithByte:1];
+  [[[J2ktJ2ktiosinteropSpecialNames_WithShort alloc] init] getWithShort:1];
+  [[[J2ktJ2ktiosinteropSpecialNames_WithInt alloc] init] getWithInt:1];
+  [[[J2ktJ2ktiosinteropSpecialNames_WithLong alloc] init] getWithLong:1];
+  [[[J2ktJ2ktiosinteropSpecialNames_WithFloat alloc] init] getWithFloat:1];
+  [[[J2ktJ2ktiosinteropSpecialNames_WithDouble alloc] init] getWithDouble:1];
+  [[[J2ktJ2ktiosinteropSpecialNames_WithObject alloc] init] getWithId:NULL];
+  [[[J2ktJ2ktiosinteropSpecialNames_WithString alloc] init] getWithNSString:@""];
+  [[[J2ktJ2ktiosinteropSpecialNames_WithFoo alloc] init]
+      getWithJ2ktiosinteropSpecialNames_Foo:NULL];
 }
 
 - (void)testCustomNames {

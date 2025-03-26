@@ -3,6 +3,7 @@
 #import "transpiler/javatests/com/google/j2cl/integration/java/j2ktiosinterop/CustomNames.h"
 #import "transpiler/javatests/com/google/j2cl/integration/java/j2ktiosinterop/DefaultNames.h"
 #import "transpiler/javatests/com/google/j2cl/integration/java/j2ktiosinterop/EnumNames.h"
+#import "transpiler/javatests/com/google/j2cl/integration/java/j2ktiosinterop/SpecialNames.h"
 
 /** J2ObjC interop test for ObjC. */
 @interface J2ObjCObjCInteropTest : XCTestCase
@@ -45,8 +46,6 @@
 
   [obj genericMethodWithId:NULL];
   [obj genericStringMethodWithNSString:@""];
-
-  [obj getWithInt:1];
 
   obj->intField_ = obj->intField_ + 1;
 

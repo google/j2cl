@@ -49,9 +49,6 @@ final class J2ktSwiftInteropTest: XCTestCase {
     obj.genericMethod(withId: nil)
     obj.genericStringMethod(with: "")
 
-    // TODO(b/374280337): Should be obj.getWith(1)
-    obj.get(with: 1)
-
     obj.intField_ = obj.intField_
     J2ktiosinteropDefaultNamesCompanion.shared.staticIntField_ =
       J2ktiosinteropDefaultNamesCompanion.shared.staticIntField_
@@ -59,6 +56,31 @@ final class J2ktSwiftInteropTest: XCTestCase {
     J2ktiosinteropDefaultNamesCompanion.shared.staticMethod()
     J2ktiosinteropDefaultNamesCompanion.shared.staticIntMethod(with: 1)
     J2ktiosinteropDefaultNamesCompanion.shared.staticIntStringMethod(with: 1, with: "")
+  }
+
+  func testSpecialNames() {
+    // TODO(b/374280337): Should be getWithBoolean(true)
+    J2ktiosinteropSpecialNames_WithBoolean().get(withBoolean: true)
+    // TODO(b/374280337): Should be getWithChar(65)
+    J2ktiosinteropSpecialNames_WithChar().get(withChar: 65)
+    // TODO(b/374280337): Should be getWithByte(1)
+    J2ktiosinteropSpecialNames_WithByte().get(withByte: 1)
+    // TODO(b/374280337): Should be getWithShort(1)
+    J2ktiosinteropSpecialNames_WithShort().get(withShort: 1)
+    // TODO(b/374280337): Should be getWith(1)
+    J2ktiosinteropSpecialNames_WithInt().get(with: 1)
+    // TODO(b/374280337): Should be getWithLong(1)
+    J2ktiosinteropSpecialNames_WithLong().get(withLong: 1)
+    // TODO(b/374280337): Should be getWith(1.0)
+    J2ktiosinteropSpecialNames_WithFloat().get(with: 1.0)
+    // TODO(b/374280337): Should be getWith(1.0)
+    J2ktiosinteropSpecialNames_WithDouble().get(with: 1.0)
+    // TODO(b/374280337): Should be getWithId(nil)
+    J2ktiosinteropSpecialNames_WithObject().get(withId: nil)
+    // TODO(b/374280337): Should be getWith("")
+    J2ktiosinteropSpecialNames_WithString().get(with: "")
+    // TODO(b/374280337): Should be getWith(nil)
+    J2ktiosinteropSpecialNames_WithFoo().get(with: nil)
   }
 
   func testCustomNames() {

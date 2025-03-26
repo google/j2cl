@@ -64,8 +64,6 @@ public final class DefaultNames {
 
   public <T extends String> void genericStringMethod(T t) {}
 
-  public void get(int i) {}
-
   public int intField;
 
   @SuppressWarnings("NonFinalStaticField")

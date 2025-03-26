@@ -47,10 +47,22 @@ final class J2ObjCSwiftInteropTest: XCTestCase {
     obj.genericMethod(withId: nil)
     obj.genericStringMethod(with: "")
 
-    obj.getWith(1)
-
     // Not exposed in Swift
     //obj.intField_ = obj.intField_
+  }
+
+  func testSpecialNames() {
+    J2ktiosinteropSpecialNames_WithBoolean().getWithBoolean(true)
+    J2ktiosinteropSpecialNames_WithChar().getWithChar(65)
+    J2ktiosinteropSpecialNames_WithByte().getWithByte(1)
+    J2ktiosinteropSpecialNames_WithShort().getWithShort(1)
+    J2ktiosinteropSpecialNames_WithInt().getWith(1)
+    J2ktiosinteropSpecialNames_WithLong().getWithLong(1)
+    J2ktiosinteropSpecialNames_WithFloat().getWith(1.0)
+    J2ktiosinteropSpecialNames_WithDouble().getWith(1.0)
+    J2ktiosinteropSpecialNames_WithObject().getWithId(nil)
+    J2ktiosinteropSpecialNames_WithString().getWith("")
+    J2ktiosinteropSpecialNames_WithFoo().getWith(nil)
   }
 
   func testCustomNames() {
