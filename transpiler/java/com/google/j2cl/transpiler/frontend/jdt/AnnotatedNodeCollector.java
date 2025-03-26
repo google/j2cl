@@ -15,8 +15,10 @@
  */
 package com.google.j2cl.transpiler.frontend.jdt;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.MultimapBuilder;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.Annotation;
@@ -32,15 +34,20 @@ import org.eclipse.jdt.core.dom.QualifiedName;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
 
 /**
- * A visitor that finds all the classes, methods and fields marked with a given annotation, e.g.
+ * A visitor that finds all the classes, methods and fields marked with given annotation(s), e.g.
  * {@code GwtIncompatible}.
  */
 public class AnnotatedNodeCollector extends ASTVisitor {
-  private final List<ASTNode> nodes = new ArrayList<>();
-  private final String annotationName;
+  private final Multimap<String, ASTNode> nodes;
+  private final ImmutableSet<String> annotationNames;
 
-  public AnnotatedNodeCollector(String annotationName) {
-    this.annotationName = annotationName;
+  private final boolean stopTraversalOnMatch;
+
+  public AnnotatedNodeCollector(
+      ImmutableSet<String> annotationNames, boolean stopTraversalOnMatch) {
+    this.annotationNames = annotationNames;
+    nodes = MultimapBuilder.hashKeys(annotationNames.size()).arrayListValues().build();
+    this.stopTraversalOnMatch = stopTraversalOnMatch;
   }
 
   @Override
@@ -83,32 +90,31 @@ public class AnnotatedNodeCollector extends ASTVisitor {
    * the constructor. The nodes are returned in order based on the position on the file and won't
    * overlap.
    */
-  public List<ASTNode> getNodes() {
-    return nodes;
+  public ImmutableSet<ASTNode> getNodes() {
+    return ImmutableSet.copyOf(nodes.values());
+  }
+
+  public ImmutableList<ASTNode> getNodesAnnotatedWith(String annotationName) {
+    return ImmutableList.copyOf(nodes.get(annotationName));
   }
 
   private boolean visitBodyDeclaration(BodyDeclaration bodyDeclaration) {
-    if (hasGwtIncompatibleAnnotation(bodyDeclaration, annotationName)) {
-      nodes.add(bodyDeclaration);
-      return false;
-    }
-    return true;
-  }
-
-  private static boolean hasGwtIncompatibleAnnotation(
-      BodyDeclaration declaration, String annotationName) {
-    for (Object modifier : declaration.modifiers()) {
+    boolean foundAnnotation = false;
+    for (Object modifier : bodyDeclaration.modifiers()) {
       if (modifier instanceof Annotation) {
         Name name = ((Annotation) modifier).getTypeName();
+
         // Get the name of the class without package, since the {@code GwtIncompatible} annotation
         // can be defined anywhere.
         String simpleName =
             name.isSimpleName() ? name.toString() : ((QualifiedName) name).getName().toString();
-        if (simpleName.equals(annotationName)) {
-          return true;
+        if (annotationNames.contains(simpleName)) {
+          nodes.put(simpleName, bodyDeclaration);
+          foundAnnotation = true;
         }
       }
     }
-    return false;
+    boolean stopTraversal = stopTraversalOnMatch && foundAnnotation;
+    return !stopTraversal;
   }
 }

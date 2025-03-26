@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.frontend.jdt;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
@@ -205,14 +206,17 @@ public class JdtParser {
   private boolean compilationHasErrors(
       String filename, CompilationUnit unit, List<String> forbiddenAnnotations) {
     boolean hasErrors = false;
-    // Here we check for instances of @GwtIncompatible in the ast. If that is the case, we throw an
-    // error since these should have been stripped by the build system already.
+    // Here we check for instances of forbidden annotations in the ast. If that is the case, we
+    // throw an error since these should have been stripped by the build system already.
+    AnnotatedNodeCollector collector =
+        new AnnotatedNodeCollector(
+            ImmutableSet.copyOf(forbiddenAnnotations), /* stopTraversalOnMatch= */ false);
+    unit.accept(collector);
     for (String forbiddenAnnotation : forbiddenAnnotations) {
-      AnnotatedNodeCollector collector = new AnnotatedNodeCollector(forbiddenAnnotation);
-      unit.accept(collector);
-      if (!collector.getNodes().isEmpty()) {
+      var nodes = collector.getNodesAnnotatedWith(forbiddenAnnotation);
+      if (!nodes.isEmpty()) {
         problems.fatal(
-            unit.getLineNumber(collector.getNodes().get(0).getStartPosition()),
+            unit.getLineNumber(Iterables.getFirst(nodes, null).getStartPosition()),
             filename,
             FatalError.INCOMPATIBLE_ANNOTATION_FOUND_IN_COMPILE,
             forbiddenAnnotation);

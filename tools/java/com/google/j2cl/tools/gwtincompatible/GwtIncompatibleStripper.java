@@ -17,6 +17,7 @@ import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.io.MoreFiles;
 import com.google.j2cl.common.OutputUtils;
@@ -31,10 +32,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Stream;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.dom.AST;
@@ -99,12 +98,14 @@ public final class GwtIncompatibleStripper {
     CompilationUnit compilationUnit = (CompilationUnit) parser.createAST(null);
 
     // Find all the declarations with the annotation name
-    Set<ASTNode> nodesToRemove = new HashSet<>();
-    for (String annotationName : annotationNames) {
-      AnnotatedNodeCollector gwtIncompatibleVisitor = new AnnotatedNodeCollector(annotationName);
-      compilationUnit.accept(gwtIncompatibleVisitor);
-      nodesToRemove.addAll(gwtIncompatibleVisitor.getNodes());
-    }
+    AnnotatedNodeCollector gwtIncompatibleVisitor =
+        new AnnotatedNodeCollector(
+            ImmutableSet.copyOf(annotationNames),
+            // Stop traversing on the first matching scope. Since we're deleting that entire scope
+            // there's no need to traverse within it.
+            /* stopTraversalOnMatch= */ true);
+    compilationUnit.accept(gwtIncompatibleVisitor);
+    ImmutableSet<ASTNode> nodesToRemove = gwtIncompatibleVisitor.getNodes();
 
     // Delete the gwtIncompatible nodes.
     for (ASTNode gwtIncompatibleNode : nodesToRemove) {
