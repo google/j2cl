@@ -20,6 +20,7 @@ package forstatement
 
 import javaemul.lang.*
 import kotlin.Boolean
+import kotlin.Char
 import kotlin.Int
 import kotlin.Long
 import kotlin.OptIn
@@ -45,6 +46,10 @@ open class ForStatement {
    count_1 = count_1 + 1L
    l = l + 1L
    l = l + 1L
+  }
+  var c: Char = 'a'
+  while (c.code < 'z'.code) {
+   c = (c.code + '\u0001'.code).toChar()
   }
   var a: Boolean = false
   while (run {

@@ -25,6 +25,8 @@ public class ForStatement {
       count++;
     }
 
+    for (char c = 'a'; c < 'z'; c++) {}
+
     boolean a = false;
     for (; a |= true; ) {}
 
