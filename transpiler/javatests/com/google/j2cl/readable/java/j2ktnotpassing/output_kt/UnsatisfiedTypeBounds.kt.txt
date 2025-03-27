@@ -37,7 +37,7 @@ open class UnsatisfiedTypeBounds internal constructor() {
 
   @JvmStatic
   internal fun test_pp_j2ktnotpassing() {
-   val command: Command = UnsatisfiedTypeBounds.methodWithTypeConstraints_pp_j2ktnotpassing<Command>(
+   val command: Command? = UnsatisfiedTypeBounds.methodWithTypeConstraints_pp_j2ktnotpassing<Command>(
     Helper<Command>(),
     FooCommand(),
    )

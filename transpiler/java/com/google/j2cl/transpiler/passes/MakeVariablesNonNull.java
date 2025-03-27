@@ -25,6 +25,7 @@ import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.Operator;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.UnaryExpression;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
@@ -103,7 +104,7 @@ public class MakeVariablesNonNull extends NormalizationPass {
                 return;
               }
 
-              if (!typeDescriptor.isNullable() && expression.canBeNull()) {
+              if (!typeDescriptor.isNullable() && canBeNull(expression)) {
                 variable.setTypeDescriptor(typeDescriptor.toNullable());
                 checkState(variable.getTypeDescriptor().isNullable());
                 propagateChanges[0] = true;
@@ -111,6 +112,41 @@ public class MakeVariablesNonNull extends NormalizationPass {
             }
           });
     } while (propagateChanges[0]);
+  }
+
+  private static boolean canBeNull(Expression expression) {
+    // Assume that expressions which are declared to return type variable can be null, regardless of
+    // declared bounds.
+    //
+    // Example:
+    //
+    // Assume we have methods like below (example taken from J2KT Mockito):
+    //
+    // <T extends @Nullable Object> T unsafeNull() { return null; }
+    // <T> T defaultValue(Class<T> foo) { ... return false or 0 or null ... }
+    //
+    // Assume that V is a type variable declared with non-null bound. Calling this method in Java
+    // does not immediately throw NPE:
+    //
+    // Object x = defaultValue(someClass);
+    //
+    // But without special handling it may be translated in Kotlin as below and throw NPE:
+    //
+    // val x: Any = defaultValue(someClass)!!
+    //
+    // The special handling of type variables makes sure that the line is translated like below,
+    // and does not throw NPE, because the variable would remain nullable:
+    //
+    // val x: Any? = defaultValue(someClass)
+    //
+    // NPE should be thrown only when trying to deference the variable in non-null context:
+    //
+    // x.hashCode();
+    if (expression.getDeclaredTypeDescriptor() instanceof TypeVariable) {
+      return true;
+    }
+
+    return expression.canBeNull();
   }
 
   private static void makeNonNullable(Variable variable) {

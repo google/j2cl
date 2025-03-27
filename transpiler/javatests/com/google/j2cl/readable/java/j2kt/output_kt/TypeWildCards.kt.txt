@@ -33,7 +33,7 @@ open class TypeWildCards internal constructor() {
  companion object {
   @JvmStatic
   internal fun testSupplierWithUpperAndLowerBounds_pp_j2kt(supplier: SupplierWithUpperBound<in Child>) {
-   val parent: Parent = supplier.get() as Parent
+   val parent: Parent? = supplier.get() as Parent?
   }
 
   @JvmStatic

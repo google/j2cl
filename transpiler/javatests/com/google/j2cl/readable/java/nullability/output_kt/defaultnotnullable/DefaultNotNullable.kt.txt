@@ -290,8 +290,10 @@ open class DefaultNotNullable {
 
   @JvmStatic
   internal fun <T: Any> testGenericTypeNullabilityCast_pp_nullability_defaultnotnullable(c: Consumer<T>, element: T) {
-   val localElement: T = element
-   c.accept(localElement)
+   val localElement: T? = element
+   c.accept(
+    localElement!!,
+   )
   }
 
   @JvmStatic
@@ -302,8 +304,10 @@ open class DefaultNotNullable {
 
   @JvmStatic
   internal fun <T: Any> testGenericWildcardNullabilityCast_pp_nullability_defaultnotnullable(c: Consumer<in T>, element: T) {
-   val localElement: T = element
-   c.accept(localElement)
+   val localElement: T? = element
+   c.accept(
+    localElement as T,
+   )
   }
 
   @JvmStatic

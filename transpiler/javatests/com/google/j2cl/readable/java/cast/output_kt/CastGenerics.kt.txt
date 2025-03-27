@@ -137,7 +137,7 @@ open class CastGenerics<T, E: Number?> {
   @ObjCName("testErasureCastInNullMarkedCode")
   fun testErasureCastInNullMarkedCode() {
    val container: NullMarkedContainer<out String> = NullMarkedContainer<String>("abc")
-   val s: String = container.get_pp_cast()
+   val s: String? = container.get_pp_cast()
   }
 
   @JvmStatic
