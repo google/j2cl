@@ -157,6 +157,36 @@ public class NotNullAssertionProblems {
     new VarargConsumer<>(string, null).accept(null);
   }
 
+  public static <T> void testUnsafeNull() {
+    // This line should not throw NPE, as the bound is nullable.
+    Object x = getUnsafeNull();
+
+    if (x != null) {
+      // It should be safe to use `x` since there's explicit null-check.
+      accept1(x.hashCode());
+    }
+  }
+
+  public static <T extends @Nullable Object> T getUnsafeNull() {
+    return null;
+  }
+
+  public static <T> void testDefaultValue(@Nullable Object value) {
+    if (value != null) {
+      // This line should not throw NPE, even though the return type has non-null bound.
+      Object x = getDefaultValue(value.getClass());
+
+      if (x != null) {
+        // It should be safe to use `x` since there's explicit null-check.
+        accept1(x.hashCode());
+      }
+    }
+  }
+
+  public static <T> T getDefaultValue(Class<T> cls) {
+    return getUnsafeNull();
+  }
+
   public static <T extends @Nullable Object> void accept1(T t) {}
 
   public static <T extends @Nullable Object> void accept2(T t1, T t2) {}

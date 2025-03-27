@@ -19,8 +19,11 @@
 package j2kt
 
 import javaemul.lang.*
+import java.lang.Class
+import java.lang.Integer
 import kotlin.Any
 import kotlin.Array
+import kotlin.Int
 import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
@@ -290,6 +293,52 @@ open class NotNullAssertionProblems {
    ).accept(
     null!!,
    )
+  }
+
+  @JvmStatic
+  @ObjCName("testUnsafeNull")
+  fun <T: Any> testUnsafeNull() {
+   val x: Any? = NotNullAssertionProblems.getUnsafeNull<Any>()
+   if (x != null) {
+    NotNullAssertionProblems.accept1<Int>(
+     Integer.valueOf(
+      x!!.hashCode(),
+     ),
+    )
+   }
+  }
+
+  @JvmStatic
+  @ObjCName("getUnsafeNull")
+  fun <T> getUnsafeNull(): T {
+   return null as T
+  }
+
+  @JvmStatic
+  @ObjCName("testDefaultValue")
+  fun <T: Any> testDefaultValue(
+   @ObjCName("withId") value: Any?
+  ) {
+   if (value != null) {
+    val x: Any? = NotNullAssertionProblems.getDefaultValue/* <*> */(
+     value!!.getClass() as Class<Any>,
+    )
+    if (x != null) {
+     NotNullAssertionProblems.accept1<Int>(
+      Integer.valueOf(
+       x!!.hashCode(),
+      ),
+     )
+    }
+   }
+  }
+
+  @JvmStatic
+  @ObjCName("getDefaultValue")
+  fun <T: Any> getDefaultValue(
+   @ObjCName("withIOSClass", swiftName = "with") cls: Class<T>
+  ): T {
+   return NotNullAssertionProblems.getUnsafeNull<T>()
   }
 
   @JvmStatic

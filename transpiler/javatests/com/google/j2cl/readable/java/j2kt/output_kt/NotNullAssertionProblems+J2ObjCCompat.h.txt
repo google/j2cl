@@ -34,6 +34,18 @@ NS_INLINE void J2ktNotNullAssertionProblems_testImplicitConstructorTypeArguments
  [J2ktJ2ktNotNullAssertionProblemsCompanion.shared testImplicitConstructorTypeArguments_inferenceWithNSString:string];
 }
 
+NS_INLINE void J2ktNotNullAssertionProblems_testUnsafeNull(void) {
+ [J2ktJ2ktNotNullAssertionProblemsCompanion.shared testUnsafeNull];
+}
+
+NS_INLINE id J2ktNotNullAssertionProblems_getUnsafeNull(void) {
+ return [J2ktJ2ktNotNullAssertionProblemsCompanion.shared getUnsafeNull];
+}
+
+NS_INLINE void J2ktNotNullAssertionProblems_testDefaultValueWithId_(id _Nullable value) {
+ [J2ktJ2ktNotNullAssertionProblemsCompanion.shared testDefaultValueWithId:value];
+}
+
 NS_INLINE void J2ktNotNullAssertionProblems_accept1WithId_(id t) {
  [J2ktJ2ktNotNullAssertionProblemsCompanion.shared accept1WithId:t];
 }
