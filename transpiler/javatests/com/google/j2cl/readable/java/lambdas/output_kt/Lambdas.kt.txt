@@ -155,7 +155,7 @@ open class Lambdas {
 
  @ObjCName("testInstanceMethodTypeVariableThroughLambda")
  open fun <T> testInstanceMethodTypeVariableThroughLambda() {
-  val wrapped: Functional<T> = Functional<T> { f: Functional<T>? ->
+  val wrapped: Functional<T> = Functional/* <T> */ { f: Functional<T>? ->
    return@Functional object : Functional<T> {
     override fun wrap(f: Functional<T>?): Functional<T>? {
      return null
@@ -187,37 +187,37 @@ open class Lambdas {
  @ObjCName("testLambdaWithGenerics")
  open fun <T: Enum<T>> testLambdaWithGenerics() {
   this.callWithTypeVariable<Error?>(
-   GenericFunctionalInterface<Error?> { i: Error? ->
+   GenericFunctionalInterface/* <Error?> */ { i: Error? ->
     return@GenericFunctionalInterface i
    },
    java.lang.Error(),
   )
   this.callParameterized(
-   GenericFunctionalInterface<Error?> { i_1: Error? ->
+   GenericFunctionalInterface/* <Error?> */ { i_1: Error? ->
     return@GenericFunctionalInterface i_1
    },
    java.lang.Error(),
   )
   Lambdas.callTypeVariableWithBounds<T>(
-   GenericFunctionalInterface<Enum<T>?> { i_2: Enum<T>? ->
+   GenericFunctionalInterface/* <Enum<T>?> */ { i_2: Enum<T>? ->
     return@GenericFunctionalInterface i_2
    },
    null as Enum<T>?,
   )
   this.callWithBiFunction_pp_lambdas<Any?>(
-   BiFunction<Any?, String?, Double?> { x: Any?, y: String? ->
+   BiFunction/* <Any?, String?, Double?> */ { x: Any?, y: String? ->
     throw RuntimeException()
    },
   )
   this.callWithBiFunction_pp_lambdas<Any?>(
-   BiFunction<Any?, String?, Double?> { x_1: Any?, y_1: String? ->
+   BiFunction/* <Any?, String?, Double?> */ { x_1: Any?, y_1: String? ->
     return@BiFunction java.lang.Double.valueOf(3.0)
    },
   )
   val f: Function<in T, *> = Function/* <in T, *> */ { item: T ->
    return@Function Long.valueOf(1L)
   }
-  val f2: Function<Wrapper<String?>?, String?> = Function<Wrapper<String?>?, String?> { item_1: Wrapper<String?>? ->
+  val f2: Function<Wrapper<String?>?, String?> = Function/* <Wrapper<String?>?, String?> */ { item_1: Wrapper<String?>? ->
    return@Function item_1!!.wrapped_pp_lambdas
   }
  }
@@ -238,7 +238,7 @@ open class Lambdas {
 
  @ObjCName("testDefaultMethodsInIntersectionAdaptor")
  open fun testDefaultMethodsInIntersectionAdaptor() {
-  val o: Any = (BiFunction<String?, String?, String?> { t: String?, u: String? ->
+  val o: Any = (BiFunction/* <String?, String?, String?> */ { t: String?, u: String? ->
    return@BiFunction null
   }).let { it as BiFunction<String?, String?, String?>; it as MarkerWithDefaultMethod; it }
  }
@@ -256,7 +256,7 @@ open class Lambdas {
   @JvmStatic
   @ObjCName("testStaticMethodTypeVariableThroughLambda")
   fun <T> testStaticMethodTypeVariableThroughLambda() {
-   val wrapped: Functional<T> = Functional<T> { f: Functional<T>? ->
+   val wrapped: Functional<T> = Functional/* <T> */ { f: Functional<T>? ->
     return@Functional object : Functional<T> {
      override fun wrap(f: Functional<T>?): Functional<T>? {
       return null
@@ -302,13 +302,13 @@ open class Lambdas {
   @JvmStatic
   @ObjCName("testJsInteropLambdas")
   fun testJsInteropLambdas() {
-   val thenable: Thenable<String?> = Thenable<String?> { f1: GenericJsFunction<Void?, String?>?, f2: GenericJsFunction<Void?, Throwable?>? ->
+   val thenable: Thenable<String?> = Thenable/* <String?> */ { f1: GenericJsFunction<Void?, String?>?, f2: GenericJsFunction<Void?, Throwable?>? ->
     f1!!.apply(null)
    }
-   val otherThenable: AnotherThenable<String?> = AnotherThenable<String?> { f1_1: GenericJsFunction<Void?, String?>?, f2_1: GenericJsFunction<Void?, Throwable?>? ->
+   val otherThenable: AnotherThenable<String?> = AnotherThenable/* <String?> */ { f1_1: GenericJsFunction<Void?, String?>?, f2_1: GenericJsFunction<Void?, Throwable?>? ->
     f1_1!!.apply(null)
    }
-   val stringJsSupplier: JsSupplier<Int?> = JsSupplier<Int?> {
+   val stringJsSupplier: JsSupplier<Int?> = JsSupplier/* <Int?> */ {
     return@JsSupplier Integer.valueOf(1)
    }
    stringJsSupplier.get()
@@ -320,13 +320,13 @@ open class Lambdas {
   @JvmStatic
   @ObjCName("testIntersectionTyping")
   fun <U, V> testIntersectionTyping() {
-   var o: Any = (GenericFunctionalInterface<String?> { x: String? ->
+   var o: Any = (GenericFunctionalInterface/* <String?> */ { x: String? ->
     return@GenericFunctionalInterface x
    }).let { it as GenericFunctionalInterface<String?>; it as JustADefaultT<Number?>; it }
-   o = (GenericFunctionalInterface<String?> { x_1: String? ->
+   o = (GenericFunctionalInterface/* <String?> */ { x_1: String? ->
     return@GenericFunctionalInterface x_1
    }).let { it as GenericFunctionalInterface<String?>; it as JustADefaultS<Number?>; it }
-   o = (GenericFunctionalInterface<U> { x_2: U ->
+   o = (GenericFunctionalInterface/* <U> */ { x_2: U ->
     return@GenericFunctionalInterface x_2
    }).let { it as GenericFunctionalInterface<U>; it as JustADefaultS<V>; it }
   }
@@ -336,7 +336,7 @@ open class Lambdas {
   fun <T> testIterable(
    @ObjCName("withJavaLangIterable", swiftName = "with") iterable: MutableIterable<T>?
   ) {
-   val lambda: MutableIterable<T> = MutableIterableJvm<T> {
+   val lambda: MutableIterable<T> = MutableIterableJvm/* <T> */ {
     return@MutableIterableJvm iterable!!.iterator()
    }
   }
@@ -378,7 +378,7 @@ open class Lambdas {
   fun <V> andThen(
    @ObjCName("withLambdasLambdas_Function", swiftName = "with") after: Function<in R, out V>?
   ): BiFunction<T, U, V>? {
-   return BiFunction<T, U, V> { t: T, u: U ->
+   return BiFunction/* <T, U, V> */ { t: T, u: U ->
     return@BiFunction after!!.apply(
      this.apply(t, u),
     )
@@ -398,7 +398,7 @@ open class Lambdas {
    @JvmStatic
    @ObjCName("identity")
    fun <T> identity(): Function<T, T>? {
-    return Function<T, T> { t: T ->
+    return Function/* <T, T> */ { t: T ->
      return@Function t
     }
    }

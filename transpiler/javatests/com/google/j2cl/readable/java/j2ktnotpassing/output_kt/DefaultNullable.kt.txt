@@ -33,7 +33,7 @@ open class DefaultNullable {
  companion object {
   @JvmStatic
   internal fun testNonNullableLambdas_pp_j2ktnotpassing() {
-   val methodReference: Consumer<String?> = Consumer<String?> { arg0: String ->
+   val methodReference: Consumer<String?> = Consumer/* <String?> */ { arg0: String ->
     DefaultNullable.accept_pp_j2ktnotpassing(arg0)
    }
   }

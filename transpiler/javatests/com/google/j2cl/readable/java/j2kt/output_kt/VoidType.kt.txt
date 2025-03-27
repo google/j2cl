@@ -40,16 +40,16 @@ open class VoidType {
    val nullableBoundsWithNullableVoid: NullableBounds<Void?>? = null
    val nonNullBoundsWithNonNullVoid: NonNullBounds<Void>? = null
    val voidClass: Class<Void>? = null
-   val nonNullVoidConsumer: Consumer<Void> = Consumer<Void> { v: Void ->
+   val nonNullVoidConsumer: Consumer<Void> = Consumer/* <Void> */ { v: Void ->
     v.hashCode()
    }
-   val nullableVoidConsumer: Consumer<Void?> = Consumer<Void?> { v_1: Void? ->
+   val nullableVoidConsumer: Consumer<Void?> = Consumer/* <Void?> */ { v_1: Void? ->
     v_1!!.hashCode()
    }
-   val nonNullVoidConsumerWildcard: Consumer<*> = Consumer<Void> { v_2: Void ->
+   val nonNullVoidConsumerWildcard: Consumer<*> = Consumer/* <Void> */ { v_2: Void ->
     v_2.hashCode()
    }
-   val nullableVoidConsumerWildcard: Consumer<*> = Consumer<Void> { v_3: Void? ->
+   val nullableVoidConsumerWildcard: Consumer<*> = Consumer/* <Void> */ { v_3: Void? ->
     v_3!!.hashCode()
    }
   }

@@ -131,7 +131,7 @@ open class Main {
 
  @ObjCName("testVarArgsMethodReferenceToJsFuncion")
  open fun testVarArgsMethodReferenceToJsFuncion() {
-  val c: ForEachCallBack<ElementalJsFunction?> = ForEachCallBack<ElementalJsFunction?> { arg0: ElementalJsFunction?, arg1: Int, arg2: Array<ElementalJsFunction?>? ->
+  val c: ForEachCallBack<ElementalJsFunction?> = ForEachCallBack/* <ElementalJsFunction?> */ { arg0: ElementalJsFunction?, arg1: Int, arg2: Array<ElementalJsFunction?>? ->
    return@ForEachCallBack arg0!!.call(
     Integer.valueOf(arg1),
     arg2,
@@ -175,11 +175,11 @@ open class Main {
  }
 
  @JvmField
- internal var jsFunctionFieldParameterized_pp_jsfunction: ParametricJsFunction<String?>? = ParametricJsFunction<String?> { event: String? ->
+ internal var jsFunctionFieldParameterized_pp_jsfunction: ParametricJsFunction<String?>? = ParametricJsFunction/* <String?> */ { event: String? ->
  }
 
  internal open fun testFunctionExpressionTypeReplacement_pp_jsfunction() {
-  val f: ParametricJsFunction<String?> = ParametricJsFunction<String?> { unused: String? ->
+  val f: ParametricJsFunction<String?> = ParametricJsFunction/* <String?> */ { unused: String? ->
    val l: MutableList<MutableList<*>?> = ArrayList<MutableList<*>>() as MutableList<MutableList<*>?>
    l.add(
     ArrayList<String>(),
@@ -426,7 +426,7 @@ open class Main {
  open class TestCaptureOuterParametricClass<T> internal constructor() {
   @ObjCName("test")
   open fun test() {
-   val f: Function<Any?, Any?> = Function<Any?, Any?> { `object`: Any? ->
+   val f: Function<Any?, Any?> = Function/* <Any?, Any?> */ { `object`: Any? ->
     return@Function ArrayList<T>()
    }
   }

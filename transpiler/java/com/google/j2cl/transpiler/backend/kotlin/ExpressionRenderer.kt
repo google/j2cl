@@ -322,7 +322,10 @@ internal data class ExpressionRenderer(
 
   private fun functionExpressionLambdaSource(functionExpression: FunctionExpression): Source =
     spaceSeparated(
-      newInstanceTypeDescriptorSource(functionExpression.typeDescriptor.functionalInterface!!),
+      newInstanceTypeDescriptorSource(
+        functionExpression.typeDescriptor.functionalInterface!!,
+        omitTypeArguments = true,
+      ),
       block(parametersSource(functionExpression), lambdaBodySource(functionExpression)),
     )
 
@@ -421,9 +424,11 @@ internal data class ExpressionRenderer(
   private fun invocationTypeArgumentsSource(
     typeBindings: List<TypeBinding>,
     omitNonDenotable: Boolean = true,
+    emitAsComment: Boolean = false,
   ): Source =
     Source.emptyIf(typeBindings.isEmpty()) {
-      val includeTypeBindings = typeBindings.all(TypeBinding::isDenotable) || !omitNonDenotable
+      val includeTypeBindings =
+        !emitAsComment && (typeBindings.all(TypeBinding::isDenotable) || !omitNonDenotable)
       nameRenderer
         .typeBindingsSource(typeBindings, rendersCaptures = !includeTypeBindings)
         .letIf(!includeTypeBindings, ::blockComment)
@@ -554,6 +559,7 @@ internal data class ExpressionRenderer(
   private fun newInstanceTypeDescriptorSource(
     typeDescriptor: DeclaredTypeDescriptor,
     omitNonDenotable: Boolean = true,
+    omitTypeArguments: Boolean = false,
   ): Source =
     // Render qualified name if there's no qualifier, otherwise render simple name.
     typeDescriptor.typeDeclaration.let { typeDeclaration ->
@@ -563,7 +569,11 @@ internal data class ExpressionRenderer(
         } else {
           nameRenderer.qualifiedNameSource(typeDescriptor, asSuperType = true)
         },
-        invocationTypeArgumentsSource(typeDescriptor.typeArgumentTypeBindings(), omitNonDenotable),
+        invocationTypeArgumentsSource(
+          typeDescriptor.typeArgumentTypeBindings(),
+          omitNonDenotable,
+          emitAsComment = omitTypeArguments,
+        ),
       )
     }
 

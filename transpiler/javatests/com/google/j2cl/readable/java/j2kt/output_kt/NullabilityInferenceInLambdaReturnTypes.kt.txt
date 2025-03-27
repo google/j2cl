@@ -31,7 +31,7 @@ import kotlin.native.ObjCName
 open class NullabilityInferenceInLambdaReturnTypes {
  private fun testAccept() {
   NullabilityInferenceInLambdaReturnTypes.accept_pp_j2kt<Any>(
-   Supplier<Any> {
+   Supplier/* <Any> */ {
     return@Supplier null!!
    },
   )
@@ -40,7 +40,7 @@ open class NullabilityInferenceInLambdaReturnTypes {
  private fun testTransformAndAccept() {
   NullabilityInferenceInLambdaReturnTypes.accept_pp_j2kt<Any>(
    NullabilityInferenceInLambdaReturnTypes.transform_pp_j2kt<Any>(
-    Supplier<Any> {
+    Supplier/* <Any> */ {
      return@Supplier null!!
     },
    ),
@@ -48,26 +48,26 @@ open class NullabilityInferenceInLambdaReturnTypes {
  }
 
  private fun <V> testReturnArgument_expliciParameterType(): Operator<Foo<V>> {
-  return Operator<Foo<V>> { foo: Foo<V> ->
+  return Operator/* <Foo<V>> */ { foo: Foo<V> ->
    return@Operator foo
   }
  }
 
  private fun <V> testReturnArgument_inferredParameterType(): Operator<Foo<V>> {
-  return Operator<Foo<V>> { foo: Foo<V> ->
+  return Operator/* <Foo<V>> */ { foo: Foo<V> ->
    return@Operator foo
   }
  }
 
  private fun <V> testReturnLocal_explicitParameterType(): Operator<Foo<V>> {
-  return Operator<Foo<V>> { foo: Foo<V> ->
+  return Operator/* <Foo<V>> */ { foo: Foo<V> ->
    val localFoo: Foo<V> = foo
    return@Operator localFoo
   }
  }
 
  private fun <V> testReturnLocal_inferredParameterType(): Operator<Foo<V>> {
-  return Operator<Foo<V>> { foo: Foo<V> ->
+  return Operator/* <Foo<V>> */ { foo: Foo<V> ->
    val localFoo: Foo<V> = foo
    return@Operator localFoo
   }
