@@ -259,10 +259,7 @@ def _strip_incompatible_annotation(ctx, name, java_srcs, mnemonic, strip_annotat
         executable = ctx.executable._j2cl_stripper,
         arguments = [args],
         env = dict(LANG = "en_US.UTF-8"),
-        execution_requirements = {
-            "supports-multiplex-workers": "1",
-            "supports-multiplex-sandboxing": "1",
-        },
+        execution_requirements = {"supports-workers": "1"},
         mnemonic = mnemonic + "Strip",
     )
 
@@ -342,8 +339,7 @@ def _j2cl_transpile(
         arguments = [args],
         env = dict(LANG = "en_US.UTF-8"),
         execution_requirements = {
-            "supports-multiplex-workers": "1",
-            "supports-multiplex-sandboxing": "1",
+            "supports-workers": "1",
             "supports-worker-cancellation": "1",
         },
         mnemonic = "J2cl" if backend == "CLOSURE" else "J2wasm",
