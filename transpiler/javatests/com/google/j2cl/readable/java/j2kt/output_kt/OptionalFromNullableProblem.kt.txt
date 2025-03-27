@@ -32,7 +32,9 @@ open class OptionalFromNullableProblem {
  @ObjCName("J2ktJ2ktOptionalFromNullableProblemCompanion", swiftName = "J2ktOptionalFromNullableProblemCompanion", exact = true)
  companion object {
   @JvmStatic
-  internal fun <T> test_pp_j2kt(value: T) {}
+  internal fun <T> test_pp_j2kt(value: T) {
+   Optional.fromNullable_pp_j2kt<T & Any>(value)
+  }
  }
 
  @ObjCName("J2ktJ2ktOptionalFromNullableProblem_Optional", swiftName = "J2ktOptionalFromNullableProblem_Optional", exact = true)

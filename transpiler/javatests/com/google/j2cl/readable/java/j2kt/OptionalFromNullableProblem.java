@@ -27,10 +27,6 @@ public class OptionalFromNullableProblem {
   }
 
   static <T extends @Nullable Object> void test(T value) {
-    // TODO(b/404225677): Uncomment when fixed.
-    // Kotlin/Native compiler fails with error: type mismatch: inferred type is T but T & Any was
-    // expected
-    // Kotlin/JVM compiles without errors
-    // Optional.fromNullable(value);
+    Optional.fromNullable(value);
   }
 }
