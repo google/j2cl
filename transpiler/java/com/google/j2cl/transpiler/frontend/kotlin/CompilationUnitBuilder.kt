@@ -62,6 +62,7 @@ import com.google.j2cl.transpiler.ast.NumberLiteral
 import com.google.j2cl.transpiler.ast.PrefixExpression
 import com.google.j2cl.transpiler.ast.PrefixOperator
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
+import com.google.j2cl.transpiler.ast.Reference
 import com.google.j2cl.transpiler.ast.ReturnStatement
 import com.google.j2cl.transpiler.ast.RuntimeMethods
 import com.google.j2cl.transpiler.ast.Statement
@@ -1190,12 +1191,41 @@ class CompilationUnitBuilder(
     convertValueAccessExpression(irGetValue)
 
   private fun convertSetValue(irSetValue: IrSetValue): Expression {
-    val variableReference = convertValueAccessExpression(irSetValue)
+    val lhs = convertValueAccessExpression(irSetValue)
+    var rhs = convertExpression(irSetValue.value)
+    var operator = BinaryOperator.ASSIGN
+
+    fun hasSameTarget(left: Expression, right: Expression) =
+      left is Reference<*> && right is Reference<*> && left.target == right.target
+
+    // If the LHS and RHS are primitives, try to reconstruct the original binary assignment
+    // operation. We also require that the LHS and RHS be a reference to the same target, which can
+    // skew from inlining.
+    if (
+      lhs.typeDescriptor.isPrimitive &&
+        rhs.typeDescriptor.isPrimitive &&
+        rhs is BinaryExpression &&
+        hasSameTarget(lhs, rhs.leftOperand)
+    ) {
+      val newOperator =
+        when (irSetValue.origin) {
+          IrStatementOrigin.PLUSEQ -> BinaryOperator.PLUS_ASSIGN
+          IrStatementOrigin.MINUSEQ -> BinaryOperator.MINUS_ASSIGN
+          IrStatementOrigin.PERCEQ -> BinaryOperator.REMAINDER_ASSIGN
+          IrStatementOrigin.DIVEQ -> BinaryOperator.DIVIDE_ASSIGN
+          IrStatementOrigin.MULTEQ -> BinaryOperator.TIMES_ASSIGN
+          else -> null
+        }
+      if (newOperator != null) {
+        operator = newOperator
+        rhs = rhs.rightOperand
+      }
+    }
 
     return BinaryExpression.newBuilder()
-      .setOperator(BinaryOperator.ASSIGN)
-      .setLeftOperand(variableReference)
-      .setRightOperand(convertExpression(irSetValue.value))
+      .setOperator(operator)
+      .setLeftOperand(lhs)
+      .setRightOperand(rhs)
       .build()
   }
 
