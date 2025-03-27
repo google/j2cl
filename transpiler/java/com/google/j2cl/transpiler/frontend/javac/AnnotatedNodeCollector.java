@@ -15,6 +15,10 @@
  */
 package com.google.j2cl.transpiler.frontend.javac;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.MultimapBuilder;
 import com.sun.source.tree.AnnotatedTypeTree;
 import com.sun.source.tree.AnnotationTree;
 import com.sun.source.tree.ClassTree;
@@ -25,67 +29,85 @@ import com.sun.source.tree.MethodTree;
 import com.sun.source.tree.Tree;
 import com.sun.source.tree.VariableTree;
 import com.sun.source.util.TreeScanner;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
- * A visitor that finds all the classes, methods and fields marked with a given annotation, e.g.
- * {@code GwtIncompatible}
+ * A visitor that finds all the classes, methods and fields marked with the given annotation(s),
+ * e.g. {@code GwtIncompatible}
  */
-public final class AnnotatedNodeCollector {
+public final class AnnotatedNodeCollector extends TreeScanner<Void, Void> {
 
-  /**
-   * Returns all the class, method or field nodes that are marked with a the given annotation. The
-   * nodes are returned in order based on the position on the file and won't overlap.
-   */
-  public static Set<String> filesWithAnnotation(
-      List<CompilationUnitTree> compilationUnits, String annotationName) {
-    Set<String> filenames = new LinkedHashSet<>();
-    for (CompilationUnitTree compilationUnit : compilationUnits) {
-      compilationUnit.accept(
-          new TreeScanner<Void, Void>() {
-            @Override
-            public Void visitCompilationUnit(CompilationUnitTree unit, Void unused) {
-              scan(unit.getTypeDecls(), null);
-              return null;
-            }
+  private final ImmutableList<String> annotationNames;
+  private final boolean stopTraversalOnMatch;
+  private final Multimap<String, Tree> nodes;
 
-            @Override
-            public Void visitAnnotatedType(AnnotatedTypeTree node, Void unused) {
-              checkGwtIncompatibleAnnotations(node.getAnnotations());
-              return null;
-            }
+  public AnnotatedNodeCollector(
+      ImmutableList<String> annotationNames, boolean stopTraversalOnMatch) {
+    this.annotationNames = annotationNames;
+    this.stopTraversalOnMatch = stopTraversalOnMatch;
+    nodes = MultimapBuilder.hashKeys(annotationNames.size()).arrayListValues().build();
+  }
 
-            @Override
-            public Void visitClass(ClassTree node, Void unused) {
-              checkGwtIncompatibleAnnotations(node.getModifiers().getAnnotations());
-              return null;
-            }
+  public ImmutableSet<Tree> getNodes() {
+    return ImmutableSet.copyOf(nodes.values());
+  }
 
-            @Override
-            public Void visitMethod(MethodTree node, Void unused) {
-              checkGwtIncompatibleAnnotations(node.getModifiers().getAnnotations());
-              return null;
-            }
+  public ImmutableSet<Tree> getNodesWithAnnotation(String annotationName) {
+    return ImmutableSet.copyOf(nodes.get(annotationName));
+  }
 
-            @Override
-            public Void visitVariable(VariableTree node, Void unused) {
-              checkGwtIncompatibleAnnotations(node.getModifiers().getAnnotations());
-              return null;
-            }
+  @Override
+  public Void visitCompilationUnit(CompilationUnitTree unit, Void unused) {
+    return scan(unit.getTypeDecls(), null);
+  }
 
-            private void checkGwtIncompatibleAnnotations(
-                List<? extends AnnotationTree> annotations) {
-              if (annotations.stream()
-                  .anyMatch(a -> getLastComponent(a.getAnnotationType()).equals(annotationName))) {
-                filenames.add(compilationUnit.getSourceFile().getName());
-              }
-            }
-          },
-          null);
+  @Override
+  public Void visitAnnotatedType(AnnotatedTypeTree node, Void unused) {
+    boolean foundMatch = checkForMatchingAnnotations(node, node.getAnnotations());
+    if (stopTraversalOnMatch && foundMatch) {
+      return null;
     }
-    return filenames;
+    return super.visitAnnotatedType(node, null);
+  }
+
+  @Override
+  public Void visitClass(ClassTree node, Void unused) {
+    boolean foundMatch = checkForMatchingAnnotations(node, node.getModifiers().getAnnotations());
+    if (stopTraversalOnMatch && foundMatch) {
+      return null;
+    }
+    return super.visitClass(node, null);
+  }
+
+  @Override
+  public Void visitMethod(MethodTree node, Void unused) {
+    boolean foundMatch = checkForMatchingAnnotations(node, node.getModifiers().getAnnotations());
+    if (stopTraversalOnMatch && foundMatch) {
+      return null;
+    }
+    return super.visitMethod(node, null);
+  }
+
+  @Override
+  public Void visitVariable(VariableTree node, Void unused) {
+    boolean foundMatch = checkForMatchingAnnotations(node, node.getModifiers().getAnnotations());
+    if (stopTraversalOnMatch && foundMatch) {
+      return null;
+    }
+    return super.visitVariable(node, null);
+  }
+
+  private boolean checkForMatchingAnnotations(
+      Tree node, List<? extends AnnotationTree> annotations) {
+    boolean foundMatch = false;
+    for (var annotation : annotations) {
+      String annotationName = getLastComponent(annotation.getAnnotationType());
+      if (annotationNames.contains(annotationName)) {
+        nodes.put(annotationName, node);
+        foundMatch = true;
+      }
+    }
+    return foundMatch;
   }
 
   private static String getLastComponent(Tree name) {
@@ -98,6 +120,4 @@ public final class AnnotatedNodeCollector {
         return "";
     }
   }
-
-  private AnnotatedNodeCollector() {}
 }

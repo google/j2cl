@@ -18,6 +18,8 @@ package com.google.j2cl.transpiler.frontend.javac;
 import static java.util.stream.Collectors.toList;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
@@ -27,15 +29,16 @@ import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.frontend.common.FrontendOptions;
 import com.sun.source.tree.CompilationUnitTree;
+import com.sun.source.tree.Tree;
 import com.sun.tools.javac.api.JavacTaskImpl;
 import com.sun.tools.javac.file.JavacFileManager;
+import com.sun.tools.javac.tree.JCTree;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import javax.tools.Diagnostic;
@@ -123,20 +126,26 @@ public class JavacParser {
       DiagnosticCollector<JavaFileObject> diagnosticCollector,
       List<CompilationUnitTree> javacCompilationUnits,
       ImmutableList<String> forbiddenAnnotations) {
-    // Here we check for instances of @GwtIncompatible in the ast. If that is the case, we throw an
-    // error since these should have been stripped by the build system already.
-    for (String forbiddenAnnotation : forbiddenAnnotations) {
-      Set<String> filesWithGwtIncompatible =
-          AnnotatedNodeCollector.filesWithAnnotation(javacCompilationUnits, forbiddenAnnotation);
-      if (!filesWithGwtIncompatible.isEmpty()) {
-        // TODO(rluble): retrieve the line number where the annotation is found.
-        problems.fatal(
-            -1,
-            filesWithGwtIncompatible.iterator().next(),
-            FatalError.INCOMPATIBLE_ANNOTATION_FOUND_IN_COMPILE,
-            forbiddenAnnotation);
+    // Here we check for instances of forbidden annotations in the ast. If that is the case, we
+    // throw an error since these should have been stripped by the build system already.
+    for (var compilationUnit : javacCompilationUnits) {
+      AnnotatedNodeCollector annotatedNodeCollector =
+          new AnnotatedNodeCollector(forbiddenAnnotations, /* stopTraversalOnMatch= */ false);
+      annotatedNodeCollector.visitCompilationUnit(compilationUnit, null);
+      for (var forbiddenAnnotation : forbiddenAnnotations) {
+        ImmutableSet<Tree> nodesWithForbiddenAnnotations =
+            annotatedNodeCollector.getNodesWithAnnotation(forbiddenAnnotation);
+        if (!nodesWithForbiddenAnnotations.isEmpty()) {
+          JCTree sampleNode = ((JCTree) Iterables.getFirst(nodesWithForbiddenAnnotations, null));
+          problems.fatal(
+              (int) (compilationUnit.getLineMap().getLineNumber(sampleNode.getStartPosition()) - 1),
+              compilationUnit.getSourceFile().getName(),
+              FatalError.INCOMPATIBLE_ANNOTATION_FOUND_IN_COMPILE,
+              forbiddenAnnotation);
+        }
       }
     }
+
     for (Diagnostic<? extends JavaFileObject> diagnostic : diagnosticCollector.getDiagnostics()) {
       if (diagnostic.getKind() == Kind.ERROR) {
         String errorMessage = diagnostic.getMessage(Locale.US);
