@@ -93,7 +93,8 @@ class KotlinParser(private val problems: Problems) {
           override fun checkCanceled() {
             // throw CompilationCanceledException instead of our own which is properly handled by
             // kotlinc to gracefully exit from the compilation.
-            if (globalProblems.get().isCancelled) throw CompilationCanceledException()
+            if (globalProblems.get().isCancelled)
+              throw CompilationCanceledException().initCause(Problems.Exit())
           }
         }
       )
