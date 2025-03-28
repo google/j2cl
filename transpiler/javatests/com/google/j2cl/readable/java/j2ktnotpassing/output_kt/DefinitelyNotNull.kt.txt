@@ -20,13 +20,10 @@ package j2ktnotpassing
 
 import javaemul.lang.*
 import java.lang.RuntimeException
-import kotlin.Any
 import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.collections.MutableIterable
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
-import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
 @ObjCName("J2ktJ2ktnotpassingDefinitelyNotNull", swiftName = "J2ktnotpassingDefinitelyNotNull", exact = true)
@@ -67,40 +64,6 @@ open class DefinitelyNotNull {
 
   override fun <S: T?> nullsLast_pp_j2ktnotpassing(): Ordering<S?> {
    return this.nullsLast()
-  }
- }
-
- @ObjCName("J2ktJ2ktnotpassingDefinitelyNotNull_ImmutableList", swiftName = "J2ktnotpassingDefinitelyNotNull_ImmutableList", exact = true)
- open class ImmutableList<E: Any> {
-  @ObjCName("J2ktJ2ktnotpassingDefinitelyNotNull_ImmutableListCompanion", swiftName = "J2ktnotpassingDefinitelyNotNull_ImmutableListCompanion", exact = true)
-  companion object {
-   @JvmStatic
-   @ObjCName("copyOf")
-   fun <E: Any> copyOf(
-    @ObjCName("withJavaLangIterable", swiftName = "with") iterable: MutableIterable<E>
-   ): ImmutableList<E> {
-    throw RuntimeException()
-   }
-
-   @JvmStatic
-   @ObjCName("copyOfNullable")
-   fun <E> copyOfNullable(
-    @ObjCName("withJavaLangIterable", swiftName = "with") iterable: MutableIterable<E>
-   ): ImmutableList<E & Any> {
-    return ImmutableList.copyOf<E & Any>(
-     iterable as MutableIterable<E & Any>,
-    )
-   }
-
-   @JvmStatic
-   @ObjCName("copyOfNullableWithInvalidBounds")
-   fun <E> copyOfNullableWithInvalidBounds(
-    @ObjCName("withJavaLangIterable", swiftName = "with") iterable: MutableIterable<E>
-   ): ImmutableList<E & Any> {
-    return ImmutableList.copyOf<E & Any>(
-     iterable as MutableIterable<E & Any>,
-    )
-   }
   }
  }
 }

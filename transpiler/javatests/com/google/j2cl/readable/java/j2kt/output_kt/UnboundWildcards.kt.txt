@@ -42,19 +42,31 @@ open class UnboundWildcards {
   @ObjCName("test112")
   fun test112(
    @ObjCName("withJ2ktUnboundWildcards_Foo", swiftName = "with") extendsNullableObject: Foo<*>
-  ) {}
+  ) {
+   UnboundWildcards.acceptTExtendsObject/* <*> */(
+    extendsNullableObject as Foo<out Any>,
+   )
+  }
 
   @JvmStatic
   @ObjCName("test113")
   fun test113(
    @ObjCName("withJ2ktUnboundWildcards_Foo", swiftName = "with") extendsNullableObject: Foo<*>
-  ) {}
+  ) {
+   UnboundWildcards.acceptTExtendsNonNullObject/* <*> */(
+    extendsNullableObject as Foo<out Any>,
+   )
+  }
 
   @JvmStatic
   @ObjCName("test114")
   fun test114(
    @ObjCName("withJ2ktUnboundWildcards_Foo", swiftName = "with") extendsNullableObject: Foo<*>
-  ) {}
+  ) {
+   UnboundWildcards.acceptT/* <*> */(
+    extendsNullableObject as Foo<out Any>,
+   )
+  }
 
   @JvmStatic
   @ObjCName("test121")
@@ -114,7 +126,11 @@ open class UnboundWildcards {
   @ObjCName("test134")
   fun test134(
    @ObjCName("withJ2ktUnboundWildcards_Foo", swiftName = "with") extendsNullableObject: Foo<*>
-  ) {}
+  ) {
+   UnboundWildcards.acceptNonNullT/* <*> */(
+    extendsNullableObject as Foo<out Any>,
+   )
+  }
 
   @JvmStatic
   @ObjCName("test211")
@@ -304,19 +320,31 @@ open class UnboundWildcards {
   @ObjCName("test412")
   fun test412(
    @ObjCName("withJ2ktUnboundWildcards_Foo", swiftName = "with") unbound: Foo<*>
-  ) {}
+  ) {
+   UnboundWildcards.acceptTExtendsObject/* <*> */(
+    unbound as Foo<out Any>,
+   )
+  }
 
   @JvmStatic
   @ObjCName("test413")
   fun test413(
    @ObjCName("withJ2ktUnboundWildcards_Foo", swiftName = "with") unbound: Foo<*>
-  ) {}
+  ) {
+   UnboundWildcards.acceptTExtendsNonNullObject/* <*> */(
+    unbound as Foo<out Any>,
+   )
+  }
 
   @JvmStatic
   @ObjCName("test414")
   fun test414(
    @ObjCName("withJ2ktUnboundWildcards_Foo", swiftName = "with") unbound: Foo<*>
-  ) {}
+  ) {
+   UnboundWildcards.acceptT/* <*> */(
+    unbound as Foo<out Any>,
+   )
+  }
 
   @JvmStatic
   @ObjCName("test421")

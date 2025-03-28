@@ -29,18 +29,15 @@ public class UnboundWildcards {
   }
 
   public static void test112(Foo<? extends @Nullable Object> extendsNullableObject) {
-    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
-    // acceptTExtendsObject(extendsNullableObject);
+    acceptTExtendsObject(extendsNullableObject);
   }
 
   public static void test113(Foo<? extends @Nullable Object> extendsNullableObject) {
-    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
-    // acceptTExtendsNonNullObject(extendsNullableObject);
+    acceptTExtendsNonNullObject(extendsNullableObject);
   }
 
   public static void test114(Foo<? extends @Nullable Object> extendsNullableObject) {
-    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
-    // acceptT(extendsNullableObject);
+    acceptT(extendsNullableObject);
   }
 
   public static void test121(Foo<? extends @Nullable Object> extendsNullableObject) {
@@ -76,8 +73,7 @@ public class UnboundWildcards {
   }
 
   public static void test134(Foo<? extends @Nullable Object> extendsNullableObject) {
-    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
-    // acceptNonNullT(extendsNullableObject);
+    acceptNonNullT(extendsNullableObject);
   }
 
   public static void test211(Foo<? extends Object> extendsObject) {
@@ -189,18 +185,15 @@ public class UnboundWildcards {
   }
 
   public static void test412(Foo<?> unbound) {
-    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
-    // acceptTExtendsObject(unbound);
+    acceptTExtendsObject(unbound);
   }
 
   public static void test413(Foo<?> unbound) {
-    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
-    // acceptTExtendsNonNullObject(unbound);
+    acceptTExtendsNonNullObject(unbound);
   }
 
   public static void test414(Foo<?> unbound) {
-    // Incompatible due to nullability differences that cannot be solved with casts in Kotlin.
-    // acceptT(unbound);
+    acceptT(unbound);
   }
 
   public static void test421(Foo<?> unbound) {

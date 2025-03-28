@@ -99,6 +99,16 @@ open class DefinitelyNotNull {
    }
 
    @JvmStatic
+   @ObjCName("copyOfNullableWithInvalidBounds")
+   fun <E> copyOfNullableWithInvalidBounds(
+    @ObjCName("withJavaLangIterable", swiftName = "with") iterable: MutableIterable<E>
+   ): ImmutableList<E & Any> {
+    return ImmutableList.copyOf<E & Any>(
+     iterable as MutableIterable<E & Any>,
+    )
+   }
+
+   @JvmStatic
    @ObjCName("copyOfNullableWithCorrectBounds")
    fun <E> copyOfNullableWithCorrectBounds(
     @ObjCName("withJavaLangIterable", swiftName = "with") iterable: MutableIterable<E & Any>

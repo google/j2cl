@@ -15,7 +15,6 @@
  */
 package j2ktnotpassing;
 
-import jsinterop.annotations.JsNonNull;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -51,26 +50,6 @@ public class DefinitelyNotNull {
     public <S extends @Nullable T> Ordering<@Nullable S> nullsLast() {
       // Type inference problem detected in Guava.
       return ordering.nullsLast();
-    }
-  }
-
-  // Reproduction of Guava code with immutable lists.
-  public static class ImmutableList<E> {
-    public static <E> ImmutableList<E> copyOf(Iterable<E> iterable) {
-      throw new RuntimeException();
-    }
-
-    @SuppressWarnings("nullness")
-    public static <E extends @Nullable Object> ImmutableList<E> copyOfNullable(
-        Iterable<E> iterable) {
-      // "iterable" requires manual "as Iterable<E & Any>" unchecked cast in Kotlin.
-      return ImmutableList.copyOf(iterable);
-    }
-
-    @SuppressWarnings("nullness")
-    public static <E extends @Nullable Object> ImmutableList<E> copyOfNullableWithInvalidBounds(
-        Iterable<E> iterable) {
-      return ImmutableList.copyOf((Iterable<@JsNonNull E>) iterable);
     }
   }
 }
