@@ -19,6 +19,7 @@
 package j2kt
 
 import javaemul.lang.*
+import kotlin.Any
 import kotlin.Int
 import kotlin.OptIn
 import kotlin.Suppress
@@ -31,6 +32,9 @@ import kotlin.native.ObjCName
 open class InitializationProblemWithNullLiteral {
  @JvmField
  internal val completelyNormalFinalField_pp_j2kt: Int
+
+ @JvmField
+ internal var problematicFoo_pp_j2kt: Foo<*> = Foo.with_pp_j2kt<Any?>(null)
 
  internal constructor() {
   this.completelyNormalFinalField_pp_j2kt = 0

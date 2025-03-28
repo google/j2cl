@@ -43,7 +43,9 @@ open class UnboundWildcards {
   fun test112(
    @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo", swiftName = "with") extendsNullableObject: Foo<*>
   ) {
-   UnboundWildcards.acceptTExtendsObject/* <*> */(extendsNullableObject)
+   UnboundWildcards.acceptTExtendsObject/* <*> */(
+    extendsNullableObject as Foo<out Any>,
+   )
   }
 
   @JvmStatic
@@ -51,7 +53,9 @@ open class UnboundWildcards {
   fun test113(
    @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo", swiftName = "with") extendsNullableObject: Foo<*>
   ) {
-   UnboundWildcards.acceptTExtendsNonNullObject/* <*> */(extendsNullableObject)
+   UnboundWildcards.acceptTExtendsNonNullObject/* <*> */(
+    extendsNullableObject as Foo<out Any>,
+   )
   }
 
   @JvmStatic
@@ -59,7 +63,9 @@ open class UnboundWildcards {
   fun test114(
    @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo", swiftName = "with") extendsNullableObject: Foo<*>
   ) {
-   UnboundWildcards.acceptT/* <*> */(extendsNullableObject)
+   UnboundWildcards.acceptT/* <*> */(
+    extendsNullableObject as Foo<out Any>,
+   )
   }
 
   @JvmStatic
@@ -100,7 +106,7 @@ open class UnboundWildcards {
    @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo", swiftName = "with") extendsNullableObject: Foo<*>
   ) {
    UnboundWildcards.acceptNonNullTExtendsNullableObject/* <*> */(
-    extendsNullableObject as Foo<Any>,
+    extendsNullableObject as Foo<out Any>,
    )
   }
 
@@ -110,7 +116,7 @@ open class UnboundWildcards {
    @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo", swiftName = "with") extendsNullableObject: Foo<*>
   ) {
    UnboundWildcards.acceptNonNullTExtendsObject/* <*> */(
-    extendsNullableObject as Foo<Any>,
+    extendsNullableObject as Foo<out Any>,
    )
   }
 
@@ -120,7 +126,7 @@ open class UnboundWildcards {
    @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo", swiftName = "with") extendsNullableObject: Foo<*>
   ) {
    UnboundWildcards.acceptNonNullTExtendsNonNullObject/* <*> */(
-    extendsNullableObject as Foo<Any>,
+    extendsNullableObject as Foo<out Any>,
    )
   }
 
@@ -130,7 +136,7 @@ open class UnboundWildcards {
    @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo", swiftName = "with") extendsNullableObject: Foo<*>
   ) {
    UnboundWildcards.acceptNonNullT/* <*> */(
-    extendsNullableObject as Foo<Any>,
+    extendsNullableObject as Foo<out Any>,
    )
   }
 
@@ -339,7 +345,9 @@ open class UnboundWildcards {
   fun test412(
    @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo", swiftName = "with") unbound: Foo<*>
   ) {
-   UnboundWildcards.acceptTExtendsObject/* <*> */(unbound)
+   UnboundWildcards.acceptTExtendsObject/* <*> */(
+    unbound as Foo<out Any>,
+   )
   }
 
   @JvmStatic
@@ -347,7 +355,9 @@ open class UnboundWildcards {
   fun test413(
    @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo", swiftName = "with") unbound: Foo<*>
   ) {
-   UnboundWildcards.acceptTExtendsNonNullObject/* <*> */(unbound)
+   UnboundWildcards.acceptTExtendsNonNullObject/* <*> */(
+    unbound as Foo<out Any>,
+   )
   }
 
   @JvmStatic
@@ -355,7 +365,9 @@ open class UnboundWildcards {
   fun test414(
    @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo", swiftName = "with") unbound: Foo<*>
   ) {
-   UnboundWildcards.acceptT/* <*> */(unbound)
+   UnboundWildcards.acceptT/* <*> */(
+    unbound as Foo<out Any>,
+   )
   }
 
   @JvmStatic
@@ -396,7 +408,7 @@ open class UnboundWildcards {
    @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo", swiftName = "with") unbound: Foo<*>
   ) {
    UnboundWildcards.acceptNonNullTExtendsNullableObject/* <*> */(
-    unbound as Foo<Any>,
+    unbound as Foo<out Any>,
    )
   }
 
@@ -406,7 +418,7 @@ open class UnboundWildcards {
    @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo", swiftName = "with") unbound: Foo<*>
   ) {
    UnboundWildcards.acceptNonNullTExtendsObject/* <*> */(
-    unbound as Foo<Any>,
+    unbound as Foo<out Any>,
    )
   }
 
@@ -416,7 +428,7 @@ open class UnboundWildcards {
    @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo", swiftName = "with") unbound: Foo<*>
   ) {
    UnboundWildcards.acceptNonNullTExtendsNonNullObject/* <*> */(
-    unbound as Foo<Any>,
+    unbound as Foo<out Any>,
    )
   }
 
@@ -426,7 +438,7 @@ open class UnboundWildcards {
    @ObjCName("withJ2ktnotpassingUnboundWildcards_Foo", swiftName = "with") unbound: Foo<*>
   ) {
    UnboundWildcards.acceptNonNullT/* <*> */(
-    unbound as Foo<Any>,
+    unbound as Foo<out Any>,
    )
   }
 

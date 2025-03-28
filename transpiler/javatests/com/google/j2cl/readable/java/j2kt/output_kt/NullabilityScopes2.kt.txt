@@ -66,8 +66,8 @@ open class NullabilityScopes2 internal constructor() {
     Function/* <in MutableList<Any?>?, out Stream<*>?> */ { arg0_1: MutableList<Any> ->
      return@Function arg0_1.stream()
     } as Function<in MutableList<Any>, out Stream<out Any>>,
-   ).collect<MutableList<Any>, Any>(
-    NullMarkedScope.toList<Any>() as Collector<in Any, Any, MutableList<Any>>,
+   ).collect<MutableList<Any>, Any?>(
+    NullMarkedScope.toList<Any>() as Collector<in Any, Any?, MutableList<Any>>,
    ) as MutableList<Any?>?
   }
  }

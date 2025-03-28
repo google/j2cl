@@ -164,6 +164,7 @@ import com.google.j2cl.transpiler.passes.OptimizeImplicitSuperCalls;
 import com.google.j2cl.transpiler.passes.OptimizeKotlinCompanions;
 import com.google.j2cl.transpiler.passes.OptimizeXplatForEach;
 import com.google.j2cl.transpiler.passes.PreventSmartCasts;
+import com.google.j2cl.transpiler.passes.ProjectCapturesInLambdaParameters;
 import com.google.j2cl.transpiler.passes.PropagateCompileTimeConstants;
 import com.google.j2cl.transpiler.passes.PropagateConstants;
 import com.google.j2cl.transpiler.passes.PropagateNullability;
@@ -704,6 +705,9 @@ public enum Backend {
       return ImmutableList.of(
           MakeVariablesFinal::new,
           DesugarInstanceOfPatterns::new,
+          MakeVariablesNonNull::new,
+          PropagateNullability::new,
+          ProjectCapturesInLambdaParameters::new,
           ConvertMethodReferencesToLambdas::new,
           ResolveImplicitInstanceQualifiers::new);
     }
@@ -729,8 +733,6 @@ public enum Backend {
           FixJavaKotlinMethodOverrideMismatch::new,
           AnnotateProtobufMethodsAsKtProperties::new,
           RewriteAnnotationTypesJ2kt::new,
-          MakeVariablesNonNull::new,
-          PropagateNullability::new,
           NormalizeNullLiterals::new,
           NormalizeMinValueIntegralLiterals::new,
           CreateImplicitConstructors::new,

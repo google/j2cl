@@ -94,11 +94,12 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
   }
 
   /**
-   * Projects captures and non-type argument wildcards to bounds.
+   * Converts captures to wildcards if they appear as a type argument, or project them to bounds if
+   * they appear at the top-level (non as type argument).
    *
    * <ul>
-   *   <li>{@code Foo<capture-of ? extends V>} -> {@code Foo<V>}
-   *   <li>{@code Foo<capture-of ? super V>} -> {@code Foo<V>}
+   *   <li>{@code Foo<capture-of ? extends V>} -> {@code Foo<? extends V>}
+   *   <li>{@code Foo<capture-of ? super V>} -> {@code Foo<? extends V>}
    *   <li>{@code capture-of ? extends V} -> {@code V}
    *   <li>{@code capture-of ? super V} -> {@code V}
    *   <li>{@code Foo<? extends V>} -> {@code Foo<? extends V>}
@@ -147,7 +148,7 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
         ImmutableSet<TypeVariable> newSeen =
             ImmutableSet.<TypeVariable>builder().addAll(seen).add(typeVariable).build();
 
-        if (!isTypeArgument || typeVariable.isCapture()) {
+        if (!isTypeArgument) {
           TypeDescriptor lowerBound = getNormalizedLowerBoundTypeDescriptor(typeVariable);
           if (lowerBound != null) {
             return projectCaptures(lowerBound, /* isTypeArgument= */ false, newSeen);
@@ -158,7 +159,15 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
         } else {
           return typeVariable
               .toWildcard()
-              .withRewrittenBounds(it -> projectCaptures(it, /* isTypeArgument= */ false, newSeen));
+              .withRewrittenBounds(
+                  it -> {
+                    TypeDescriptor projectedBound =
+                        projectCaptures(it, /* isTypeArgument= */ false, newSeen);
+                    // Preserve the nullability of the type variable.
+                    return !typeVariable.canBeNull()
+                        ? projectedBound.toNonNullable()
+                        : projectedBound;
+                  });
         }
       }
     } else if (typeDescriptor instanceof IntersectionTypeDescriptor) {

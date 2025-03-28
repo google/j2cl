@@ -16,7 +16,6 @@
 package nullability;
 
 import static com.google.j2cl.integration.testing.Asserts.assertNull;
-import static com.google.j2cl.integration.testing.TestUtils.isJ2Kt;
 
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -134,20 +133,16 @@ public class Main {
     acceptVarargs(STRING);
     acceptVarargs(NULL_STRING);
 
-    // TODO(b/324940602): Use TestUtils.isJ2ktWeb() when it's implemented, or...
-    // TODO(b/324550390): Remove the condition when the bug is fixed.
-    if (!isJ2Kt()) {
-      // T inferred as Any, instead of Any?
-      accept1(null);
+    // T inferred as Any, instead of Any?
+    accept1(null);
 
-      // T inferred as String, instead of String?
-      accept2(NULL_STRING, STRING);
-      accept2(STRING, NULL_STRING);
+    // T inferred as String, instead of String?
+    accept2(NULL_STRING, STRING);
+    accept2(STRING, NULL_STRING);
 
-      // T inferred as String, instead of String?
-      acceptVarargs(STRING, NULL_STRING);
-      acceptVarargs(NULL_STRING, STRING);
-    }
+    // T inferred as String, instead of String?
+    acceptVarargs(STRING, NULL_STRING);
+    acceptVarargs(NULL_STRING, STRING);
   }
 
   private static void testImplicitConstructorTypeArguments() {
@@ -158,20 +153,16 @@ public class Main {
     new VarargConsumer<>(STRING);
     new VarargConsumer<>(NULL_STRING);
 
-    // TODO(b/324940602): Use TestUtils.isJ2ktWeb() when it's implemented, or...
-    // TODO(b/324550390): Remove the condition when the bug is fixed.
-    if (!isJ2Kt()) {
-      // T inferred as Any, instead of Any?
-      new Consumer<>(null);
+    // T inferred as Any, instead of Any?
+    new Consumer<>(null);
 
-      // T inferred as String, instead of String?
-      new Consumer<>(NULL_STRING, STRING);
-      new Consumer<>(STRING, NULL_STRING);
+    // T inferred as String, instead of String?
+    new Consumer<>(NULL_STRING, STRING);
+    new Consumer<>(STRING, NULL_STRING);
 
-      // T inferred as String, instead of String?
-      new VarargConsumer<>(STRING, NULL_STRING);
-      new VarargConsumer<>(NULL_STRING, STRING);
-    }
+    // T inferred as String, instead of String?
+    new VarargConsumer<>(STRING, NULL_STRING);
+    new VarargConsumer<>(NULL_STRING, STRING);
   }
 
   @SuppressWarnings({"rawtypes", "unchecked"})
@@ -215,18 +206,12 @@ public class Main {
   }
 
   private static void testImplicitConstructorTypeArgumentsWithInference() {
-    // TODO(b/324550390): Non-null assertion inserted in accept(null!!).
-    if (!isJ2Kt()) {
-      new Consumer<>(STRING, null).accept(NULL_STRING);
-      new VarargConsumer<>(STRING, null).accept(NULL_STRING);
-    }
+    new Consumer<>(STRING, null).accept(NULL_STRING);
+    new VarargConsumer<>(STRING, null).accept(NULL_STRING);
   }
 
   private static void testLambdaReturnTypeInference() {
-    // TODO(b/324550390): Remove the condition when the bug is fixed.
-    if (!isJ2Kt()) {
-      acceptSupplier(() -> null);
-    }
+    acceptSupplier(() -> null);
   }
 
   private static <T> void testUnsafeNull() {

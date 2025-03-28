@@ -35,19 +35,19 @@ import kotlin.synchronized
 open class LambdaReturnFromBlock {
  @ObjCName("testDoWhile")
  open fun testDoWhile() {
-  val fn: Function<Void> = Function/* <Void> */ {
-   return@Function null!!
-  }
+  val fn: Function<Void> = Function/* <Void?> */ {
+   return@Function null
+  } as Function<Void>
  }
 
  @ObjCName("testSynchronized")
  open fun testSynchronized() {
-  val fn: Function<Void> = Function/* <Void> */ {
+  val fn: Function<Void> = Function/* <Void?> */ {
    synchronized<Unit>(LambdaReturnFromBlock.lock) {
-    return@Function null!!
+    return@Function null
    }
    throw AssertionError("Unreachable")
-  }
+  } as Function<Void>
  }
 
  @JvmField
@@ -55,17 +55,17 @@ open class LambdaReturnFromBlock {
 
  @ObjCName("testSwitchInLambda")
  open fun testSwitchInLambda() {
-  val fn: Function<Void> = Function/* <Void> */ {
+  val fn: Function<Void> = Function/* <Void?> */ {
    when (this.x_pp_j2kt) {
     1 -> {
-     return@Function null!!
+     return@Function null
     }
     else -> {
-     return@Function null!!
+     return@Function null
     }
    }
    throw AssertionError("Unreachable")
-  }
+  } as Function<Void>
  }
 
  @ObjCName("J2ktJ2ktLambdaReturnFromBlockCompanion", swiftName = "J2ktLambdaReturnFromBlockCompanion", exact = true)

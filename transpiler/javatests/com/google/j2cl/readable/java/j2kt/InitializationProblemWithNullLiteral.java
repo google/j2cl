@@ -33,8 +33,7 @@ public class InitializationProblemWithNullLiteral {
 
   // The workaround for this problem specifying explicit type argument:
   // {@code Foo.<@Nullable Void>.with(null)}
-  // TODO(b/372305346): Uncomment when fixed
-  // Foo<?> problematicFoo = Foo.with(null);
+  Foo<?> problematicFoo = Foo.with(null);
 
   InitializationProblemWithNullLiteral() {
     this.completelyNormalFinalField = 0;

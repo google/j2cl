@@ -30,18 +30,18 @@ import kotlin.native.ObjCName
 @ObjCName("J2ktJ2ktNullabilityInferenceInLambdaReturnTypes", swiftName = "J2ktNullabilityInferenceInLambdaReturnTypes", exact = true)
 open class NullabilityInferenceInLambdaReturnTypes {
  private fun testAccept() {
-  NullabilityInferenceInLambdaReturnTypes.accept_pp_j2kt<Any>(
-   Supplier/* <Any> */ {
-    return@Supplier null!!
+  NullabilityInferenceInLambdaReturnTypes.accept_pp_j2kt<Any?>(
+   Supplier/* <Any?> */ {
+    return@Supplier null
    },
   )
  }
 
  private fun testTransformAndAccept() {
-  NullabilityInferenceInLambdaReturnTypes.accept_pp_j2kt<Any>(
-   NullabilityInferenceInLambdaReturnTypes.transform_pp_j2kt<Any>(
-    Supplier/* <Any> */ {
-     return@Supplier null!!
+  NullabilityInferenceInLambdaReturnTypes.accept_pp_j2kt<Any?>(
+   NullabilityInferenceInLambdaReturnTypes.transform_pp_j2kt<Any?>(
+    Supplier/* <Any?> */ {
+     return@Supplier null
     },
    ),
   )

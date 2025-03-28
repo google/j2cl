@@ -45,13 +45,7 @@ open class NullabilityInferenceProblem10 {
    }
 
    @JvmStatic
-   internal fun test_pp_j2kt(lazyObservable: Lazy<Observable<Foo>>) {
-    lazyObservable.get()!!.addObserver(
-     Observer/* <Foo> */ { arg0: Foo ->
-      return@Observer InNullMarked.observeNullable_pp_j2kt(arg0)
-     },
-    )
-   }
+   internal fun test_pp_j2kt(lazyObservable: Lazy<Observable<Foo>>) {}
   }
 
   @ObjCName("J2ktJ2ktNullabilityInferenceProblem10_InNullMarked_Foo", swiftName = "J2ktNullabilityInferenceProblem10_InNullMarked_Foo", exact = true)

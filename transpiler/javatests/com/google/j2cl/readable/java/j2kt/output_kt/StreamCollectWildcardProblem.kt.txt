@@ -27,12 +27,10 @@ import java.util.stream.Collector
 import java.util.stream.Collectors
 import java.util.stream.Stream
 import kotlin.Any
-import kotlin.Array
 import kotlin.Boolean
 import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
-import kotlin.arrayOf
 import kotlin.collections.MutableList
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
@@ -48,8 +46,8 @@ open class StreamCollectWildcardProblem {
    @ObjCName("withJavaUtilStreamStream", swiftName = "with") list: Stream<Foo<*>>
   ) {
    StreamCollectWildcardProblem.accept(
-    list.collect<MutableList<Foo<*>>, Any>(
-     Collectors.toList<Foo<*>>() as Collector<in Foo<*>, Any, MutableList<Foo<*>>>,
+    list.collect<MutableList<Foo<*>>, Any?>(
+     Collectors.toList<Foo<*>>() as Collector<in Foo<*>, Any?, MutableList<Foo<*>>>,
     ),
    )
   }
@@ -62,10 +60,10 @@ open class StreamCollectWildcardProblem {
    StreamCollectWildcardProblem.accept(
     list.map/* <Foo<*>> */(
      Function/* <in Foo<*>, out Foo<*>> */ { arg0: Foo<*> ->
-      return@Function arg0.getThis() as Foo<Any>
+      return@Function arg0.getThis() as Foo<*>
      },
-    ).collect<MutableList<Foo<*>>, Any>(
-     Collectors.toList<Foo<*>>() as Collector<in Foo<Any>, Any, MutableList<Foo<*>>>,
+    ).collect<MutableList<Foo<*>>, Any?>(
+     Collectors.toList<Foo<*>>() as Collector<in Foo<*>, Any?, MutableList<Foo<*>>>,
     ),
    )
   }
@@ -77,11 +75,11 @@ open class StreamCollectWildcardProblem {
   ) {
    StreamCollectWildcardProblem.accept(
     list.map/* <Foo<*>> */(
-     Function/* <in Foo<*>, out Foo<*>> */ { it: Foo<*> ->
-      return@Function it.getThis() as Foo<Any>
-     },
-    ).collect<MutableList<Foo<*>>, Any>(
-     Collectors.toList<Foo<*>>() as Collector<in Foo<Any>, Any, MutableList<Foo<*>>>,
+     Function/* <Foo<*>, Foo<*>> */ { it: Foo<*> ->
+      return@Function it.getThis() as Foo<*>
+     } as Function<in Foo<*>, out Foo<*>>,
+    ).collect<MutableList<Foo<*>>, Any?>(
+     Collectors.toList<Foo<*>>() as Collector<in Foo<*>, Any?, MutableList<Foo<*>>>,
     ),
    )
   }
@@ -106,10 +104,10 @@ open class StreamCollectWildcardProblem {
    StreamCollectWildcardProblem.accept(
     list.map/* <Foo<*>> */(
      Function/* <in Foo<*>, out Foo<*>> */ { arg0: Foo<*> ->
-      return@Function arg0.getThis() as Foo<Any>
+      return@Function arg0.getThis() as Foo<*>
      },
     ).collect/* <MutableList<Foo<*>>, *> */(
-     Collectors.toList<Foo<*>>() as Collector<in Foo<Any>, Any?, MutableList<Foo<*>>>,
+     Collectors.toList<Foo<*>>() as Collector<in Foo<*>, *, MutableList<Foo<*>>>,
     ),
    )
   }
@@ -121,11 +119,11 @@ open class StreamCollectWildcardProblem {
   ) {
    StreamCollectWildcardProblem.accept(
     list.map/* <Foo<*>> */(
-     Function/* <in Foo<*>, out Foo<*>> */ { it: Foo<*> ->
-      return@Function it.getThis() as Foo<Any>
-     },
+     Function/* <Foo<*>, Foo<*>> */ { it: Foo<*> ->
+      return@Function it.getThis() as Foo<*>
+     } as Function<in Foo<*>, out Foo<*>>,
     ).collect/* <MutableList<Foo<*>>, *> */(
-     Collectors.toList<Foo<*>>() as Collector<in Foo<Any>, Any?, MutableList<Foo<*>>>,
+     Collectors.toList<Foo<*>>() as Collector<in Foo<*>, *, MutableList<Foo<*>>>,
     ),
    )
   }
@@ -145,24 +143,25 @@ open class StreamCollectWildcardProblem {
    @ObjCName("withJavaUtilStreamStream", swiftName = "with") stream2: Stream<Foo<Any>>,
    @ObjCName("withBoolean") b: Boolean
   ): Stream<String> {
-   return Stream.of<Stream<String>>(
-    *(arrayOf<Stream<String>?>(if (b) stream1.map<String>(
+   return Stream.of<Stream<String>?>(
+    if (b) stream1.map<String>(
      Function/* <in Foo<Any>, out String> */ { arg0: Foo<Any> ->
       return@Function arg0.getString()
      },
-    ) else null, if (b) stream2.map<String>(
+    ) else null,
+    if (b) stream2.map<String>(
      Function/* <in Foo<Any>, out String> */ { arg0_1: Foo<Any> ->
       return@Function arg0_1.getString()
      },
-    ) else null) as Array<Stream<String>>),
+    ) else null,
    ).filter(
     Predicate/* <in Stream<String>> */ { arg0_2: Stream<String> ->
      return@Predicate Objects.nonNull(arg0_2)
-    },
+    } as Predicate<in Stream<String>?>,
    ).flatMap<String>(
-    Function/* <in Stream<String>, out Stream<out String>> */ { stream: Stream<String> ->
+    Function/* <Stream<String>, Stream<out String>> */ { stream: Stream<String> ->
      return@Function stream
-    },
+    } as Function<in Stream<String>?, out Stream<out String>>,
    )
   }
  }

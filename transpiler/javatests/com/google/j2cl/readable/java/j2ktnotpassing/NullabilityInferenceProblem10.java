@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2kt;
+package j2ktnotpassing;
 
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -43,8 +43,7 @@ public class NullabilityInferenceProblem10 {
     }
 
     static void test(Lazy<Observable<Foo>> lazyObservable) {
-      // TODO(b/...): Uncomment when fixed
-      // lazyObservable.get().addObserver(InNullMarked::observeNullable);
+      lazyObservable.get().addObserver(InNullMarked::observeNullable);
     }
   }
 }

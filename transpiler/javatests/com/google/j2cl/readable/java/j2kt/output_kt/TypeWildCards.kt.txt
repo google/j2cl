@@ -49,7 +49,7 @@ open class TypeWildCards internal constructor() {
    @ObjCName("withJ2ktTypeWildCards_Observable", swiftName = "with") observable: Observable<*>
   ) {
    (observable as Observable<Any?>).addObserver(
-    Observer/* <*> */ { e /* capture#1-of * */ ->
+    Observer/* <Any?> */ { e: Any? ->
     },
    )
   }
@@ -60,7 +60,7 @@ open class TypeWildCards internal constructor() {
    @ObjCName("withJ2ktTypeWildCards_Observable", swiftName = "with") observable: T
   ) {
    (observable as Observable<Any?>).addObserver(
-    Observer/* <*> */ { e /* capture#2-of * */ ->
+    Observer/* <Any?> */ { e: Any? ->
     },
    )
   }
@@ -71,7 +71,7 @@ open class TypeWildCards internal constructor() {
    @ObjCName("withJ2ktTypeWildCards_SuperWildcardObservable", swiftName = "with") observable: SuperWildcardObservable<*>
   ) {
    (observable as SuperWildcardObservable<Any?>).addObserver(
-    Observer/* <in capture#3-of *> */ { e /* capture#3-of * */ ->
+    Observer/* <Any?> */ { e: Any? ->
     },
    )
   }
@@ -82,7 +82,7 @@ open class TypeWildCards internal constructor() {
    @ObjCName("withJ2ktTypeWildCards_KtInObservable", swiftName = "with") observable: KtInObservable<*>
   ) {
    (observable as KtInObservable<Any?>).addObserver(
-    KtInObserver/* <*> */ { e /* capture#4-of * */ ->
+    KtInObserver/* <Any?> */ { e: Any? ->
     },
    )
   }
@@ -163,7 +163,7 @@ open class TypeWildCards internal constructor() {
    fun testSetField(
     @ObjCName("withJ2ktTypeWildCards_WithoutBounds_Holder", swiftName = "with") holder: Holder<*>
    ) {
-    (holder as Holder<Any?>).observer_pp_j2kt = Observer/* <*> */ { e /* capture#5-of * */ ->
+    (holder as Holder<Any?>).observer_pp_j2kt = Observer/* <Any?> */ { e: Any? ->
     }
    }
 
@@ -173,7 +173,7 @@ open class TypeWildCards internal constructor() {
     @ObjCName("withJ2ktTypeWildCards_WithoutBounds_Holder", swiftName = "with") holder: Holder<*>
    ) {
     (holder as Holder<Any?>).set_pp_j2kt(
-     Observer/* <*> */ { e /* capture#6-of * */ ->
+     Observer/* <Any?> */ { e: Any? ->
      },
     )
    }
@@ -185,7 +185,7 @@ open class TypeWildCards internal constructor() {
    ) {
     Holder.setStatic_pp_j2kt/* <*> */(
      holder,
-     Observer/* <*> */ { e /* capture#7-of * */ ->
+     Observer/* <Any?> */ { e: Any? ->
      },
     )
    }
@@ -223,7 +223,7 @@ open class TypeWildCards internal constructor() {
    fun testSetField(
     @ObjCName("withJ2ktTypeWildCards_WithBounds_Holder", swiftName = "with") holder: Holder<*>
    ) {
-    (holder as Holder<Event>).observer_pp_j2kt = Observer/* <*> */ { e /* capture#8-of out Event */ ->
+    (holder as Holder<Event>).observer_pp_j2kt = Observer/* <Event> */ { e: Event ->
     }
    }
 
@@ -233,7 +233,7 @@ open class TypeWildCards internal constructor() {
     @ObjCName("withJ2ktTypeWildCards_WithBounds_Holder", swiftName = "with") holder: Holder<*>
    ) {
     (holder as Holder<Event>).set_pp_j2kt(
-     Observer/* <*> */ { e /* capture#9-of out Event */ ->
+     Observer/* <Event> */ { e: Event ->
      },
     )
    }
@@ -245,7 +245,7 @@ open class TypeWildCards internal constructor() {
    ) {
     Holder.setStatic_pp_j2kt/* <*> */(
      holder,
-     Observer/* <*> */ { e /* capture#10-of out Event */ ->
+     Observer/* <Event> */ { e: Event ->
      },
     )
    }
@@ -286,7 +286,7 @@ open class TypeWildCards internal constructor() {
    fun testSetField(
     @ObjCName("withJ2ktTypeWildCards_WithDependentBounds_Holder", swiftName = "with") holder: Holder<*, *>
    ) {
-    (holder as Holder<Event, Collection<Event>>).observer_pp_j2kt = Observer/* <*, capture#11-of out Collection<capture#12-of out Event>> */ { e /* capture#11-of out Collection<capture#12-of out Event> */ ->
+    (holder as Holder<Event, Collection<Event>>).observer_pp_j2kt = Observer/* <Event, Collection<out Event>> */ { e: Collection<out Event> ->
     }
    }
 
@@ -296,7 +296,7 @@ open class TypeWildCards internal constructor() {
     @ObjCName("withJ2ktTypeWildCards_WithDependentBounds_Holder", swiftName = "with") holder: Holder<*, *>
    ) {
     (holder as Holder<Event, Collection<Event>>).set_pp_j2kt(
-     Observer/* <*, capture#13-of out Collection<capture#14-of out Event>> */ { e /* capture#13-of out Collection<capture#14-of out Event> */ ->
+     Observer/* <Event, Collection<out Event>> */ { e: Collection<out Event> ->
      },
     )
    }
@@ -306,9 +306,9 @@ open class TypeWildCards internal constructor() {
    fun testSetStaticMethod(
     @ObjCName("withJ2ktTypeWildCards_WithDependentBounds_Holder", swiftName = "with") holder: Holder<*, *>
    ) {
-    Holder.setStatic_pp_j2kt/* <*, capture#15-of out Collection<capture#16-of out Event>> */(
+    Holder.setStatic_pp_j2kt/* <*, capture#1-of out Collection<capture#2-of out Event>> */(
      holder,
-     Observer/* <*, capture#15-of out Collection<capture#16-of out Event>> */ { e /* capture#15-of out Collection<capture#16-of out Event> */ ->
+     Observer/* <Event, Collection<out Event>> */ { e: Collection<out Event> ->
      },
     )
    }

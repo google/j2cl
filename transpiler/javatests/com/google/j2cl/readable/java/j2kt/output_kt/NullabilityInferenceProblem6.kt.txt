@@ -33,7 +33,7 @@ open class NullabilityInferenceProblem6 {
   @JvmStatic
   internal fun testLambda_pp_j2kt(from: Container<*>, to: Container<in Any?>) {
    (from as Container<Any?>).forEach(
-    Consumer/* <*> */ { it /* capture#1-of * */ ->
+    Consumer/* <Any?> */ { it: Any? ->
      to.add(it)
     },
    )
@@ -42,7 +42,7 @@ open class NullabilityInferenceProblem6 {
   @JvmStatic
   internal fun testMethodReference_pp_j2kt(from: Container<*>, to: Container<in Any?>) {
    (from as Container<Any?>).forEach(
-    Consumer/* <*> */ { arg0 /* capture#2-of * */ ->
+    Consumer/* <*> */ { arg0 /* capture#1-of * */ ->
      to.add(arg0)
     },
    )
@@ -51,7 +51,7 @@ open class NullabilityInferenceProblem6 {
   @JvmStatic
   internal fun testLambda_pp_j2kt(from: FooContainer<*>, to: FooContainer<in Foo?>) {
    (from as FooContainer<Foo?>).forEach(
-    Consumer/* <capture#3-of out Foo?> */ { it /* capture#3-of out Foo? */ ->
+    Consumer/* <Foo?> */ { it: Foo? ->
      to.add(it)
     },
    )
@@ -60,7 +60,7 @@ open class NullabilityInferenceProblem6 {
   @JvmStatic
   internal fun testMethodReference_pp_j2kt(from: FooContainer<*>, to: FooContainer<in Foo?>) {
    (from as FooContainer<Foo?>).forEach(
-    Consumer/* <capture#4-of out Foo?> */ { arg0 /* capture#4-of out Foo? */ ->
+    Consumer/* <capture#2-of out Foo?> */ { arg0 /* capture#2-of out Foo? */ ->
      to.add(arg0)
     },
    )

@@ -90,39 +90,22 @@ open class NotNullAssertionProblems {
   @ObjCName("withJ2ktNotNullAssertionProblems_Supplier", swiftName = "with") supplier: Supplier<String>,
   @ObjCName("withNSString", swiftName = "with") nullableString: String?
  ) {
-  NotNullAssertionProblems.accept1<Any>(
-   null!!,
-  )
-  NotNullAssertionProblems.accept2<String>(
-   string,
-   null!!,
-  )
-  NotNullAssertionProblems.accept2<String>(
-   string,
-   nullableString!!,
-  )
-  NotNullAssertionProblems.accept2<String>(
-   null!!,
-   string,
-  )
+  NotNullAssertionProblems.accept1<Any?>(null)
+  NotNullAssertionProblems.accept2<String?>(string, null)
+  NotNullAssertionProblems.accept2<String?>(string, nullableString)
+  NotNullAssertionProblems.accept2<String?>(null, string)
   NotNullAssertionProblems.accept2<String?>(nullableString, string)
-  NotNullAssertionProblems.acceptVararg<String>(
-   *(arrayOf<String?>(string, null) as Array<String>),
-  )
-  NotNullAssertionProblems.acceptVararg<String>(
-   *(arrayOf<String?>(string, nullableString) as Array<String>),
-  )
-  NotNullAssertionProblems.acceptVararg<String>(
-   *(arrayOf<String?>(null, string) as Array<String>),
-  )
+  NotNullAssertionProblems.acceptVararg<String?>(string, null)
+  NotNullAssertionProblems.acceptVararg<String?>(string, nullableString)
+  NotNullAssertionProblems.acceptVararg<String?>(null, string)
   NotNullAssertionProblems.acceptVararg<String?>(nullableString, string)
-  NotNullAssertionProblems.acceptGeneric<String>(
-   supplier,
-   nullableString!!,
+  NotNullAssertionProblems.acceptGeneric<String?>(
+   supplier as Supplier<String?>,
+   nullableString,
   )
-  NotNullAssertionProblems.acceptUpperBound<String>(
-   supplier,
-   nullableString!!,
+  NotNullAssertionProblems.acceptUpperBound<String?>(
+   supplier as Supplier<String>,
+   nullableString,
   )
  }
 
@@ -157,39 +140,22 @@ open class NotNullAssertionProblems {
   @ObjCName("withJ2ktNotNullAssertionProblems_Supplier", swiftName = "with") supplier: Supplier<String>,
   @ObjCName("withNSString", swiftName = "with") nullableString: String?
  ) {
-  Consumer<Any>(
-   null!!,
-  )
-  Consumer<String>(
-   string,
-   null!!,
-  )
-  Consumer<String>(
-   string,
-   nullableString!!,
-  )
-  Consumer<String>(
-   null!!,
-   string,
-  )
+  Consumer<Any?>(null)
+  Consumer<String?>(string, null)
+  Consumer<String?>(string, nullableString)
+  Consumer<String?>(null, string)
   Consumer<String?>(nullableString, string)
-  VarargConsumer<String>(
-   *(arrayOf<String?>(string, null) as Array<String>),
-  )
-  VarargConsumer<String>(
-   *(arrayOf<String?>(string, nullableString) as Array<String>),
-  )
-  VarargConsumer<String>(
-   *(arrayOf<String?>(null, string) as Array<String>),
-  )
+  VarargConsumer<String?>(string, null)
+  VarargConsumer<String?>(string, nullableString)
+  VarargConsumer<String?>(null, string)
   VarargConsumer<String?>(nullableString, string)
-  GenericConsumer<String>(
-   supplier,
-   nullableString!!,
+  GenericConsumer<String?>(
+   supplier as Supplier<String?>,
+   nullableString,
   )
-  UpperWildcardConsumer<String>(
-   supplier,
-   nullableString!!,
+  UpperWildcardConsumer<String?>(
+   supplier as Supplier<String>,
+   nullableString,
   )
  }
 
@@ -282,17 +248,8 @@ open class NotNullAssertionProblems {
   fun testImplicitConstructorTypeArguments_inference(
    @ObjCName("withNSString", swiftName = "with") string: String
   ) {
-   Consumer<String>(
-    string,
-    null!!,
-   ).accept(
-    null!!,
-   )
-   VarargConsumer<String>(
-    *(arrayOf<String?>(string, null) as Array<String>),
-   ).accept(
-    null!!,
-   )
+   Consumer<String?>(string, null).accept(null)
+   VarargConsumer<String?>(string, null).accept(null)
   }
 
   @JvmStatic
@@ -321,7 +278,7 @@ open class NotNullAssertionProblems {
   ) {
    if (value != null) {
     val x: Any? = NotNullAssertionProblems.getDefaultValue/* <*> */(
-     value!!.getClass() as Class<Any>,
+     value!!.getClass() as Class<*>,
     )
     if (x != null) {
      NotNullAssertionProblems.accept1<Int>(
