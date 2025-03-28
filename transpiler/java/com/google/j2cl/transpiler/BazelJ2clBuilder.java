@@ -20,7 +20,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.OutputUtils.Output;
-import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourceUtils;
 import com.google.j2cl.common.SourceUtils.FileInfo;
@@ -154,7 +153,7 @@ final class BazelJ2clBuilder extends BazelWorker {
       problems.abortIfCancelled();
       try {
         J2clTranspiler.transpile(createOptions(out), problems);
-      } catch (Problems.Exit e) {
+      } catch (RuntimeException | Error e) {
         // Cancel the writing of the output files since we don't need them anymore.
         out.cancel();
         throw e;
