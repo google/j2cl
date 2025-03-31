@@ -20,7 +20,11 @@ import static com.google.common.base.Preconditions.checkState;
 import com.google.common.collect.ImmutableList;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.util.List;
+import java.util.Objects;
 
+// Do not mark ArrayConstant as @Visitable. Currently ArrayConstant is never present in the tree.
+// Before making it @Visitable, we need to ensure that {@link #clone()} is implemented correctly or
+// the class is unmodifiable.
 /** Class for array literals whose values are all literals. */
 public class ArrayConstant extends Literal {
 
@@ -52,6 +56,24 @@ public class ArrayConstant extends Literal {
   @Override
   public ArrayConstant clone() {
     return this;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (o == this) {
+      return true;
+    }
+    if (!(o instanceof ArrayConstant)) {
+      return false;
+    }
+    ArrayConstant other = (ArrayConstant) o;
+    return typeDescriptor.equals(other.typeDescriptor)
+        && valueExpressions.equals(other.valueExpressions);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(typeDescriptor, valueExpressions);
   }
 
   public static Builder newBuilder() {

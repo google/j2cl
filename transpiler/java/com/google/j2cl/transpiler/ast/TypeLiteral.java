@@ -54,8 +54,20 @@ public class TypeLiteral extends Literal implements HasSourcePosition {
 
   @Override
   public TypeLiteral clone() {
-    // Type literals are value types do not need to actually clone.
-    return this;
+    return new TypeLiteral(sourcePosition, referencedTypeDescriptor);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    return this == o;
+    // return o == this
+    //     || (o instanceof TypeLiteral
+    //         && referencedTypeDescriptor.equals(((TypeLiteral) o).referencedTypeDescriptor));
+  }
+
+  @Override
+  public int hashCode() {
+    return referencedTypeDescriptor.hashCode();
   }
 
   @Override

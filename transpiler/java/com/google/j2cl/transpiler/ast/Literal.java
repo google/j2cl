@@ -74,6 +74,12 @@ public abstract class Literal extends Expression {
   }
 
   @Override
+  public abstract boolean equals(Object o);
+
+  @Override
+  public abstract int hashCode();
+
+  @Override
   Node acceptInternal(Processor processor) {
     return Visitor_Literal.visit(processor, this);
   }

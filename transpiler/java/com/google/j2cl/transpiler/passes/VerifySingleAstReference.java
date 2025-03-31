@@ -29,8 +29,7 @@ import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.VariableReference;
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.IdentityHashMap;
 
 /**
  * Verifies that nodes only appear once in the AST. AST nodes with mutable state need to appear only
@@ -48,7 +47,9 @@ public class VerifySingleAstReference extends NormalizationPass {
   public void applyTo(CompilationUnit compilationUnit) {
     // This map keeps track of the nodes that have been found so far in the AST as well as the
     // context of their first appearance for better error reporting.
-    Map<Node, Node> contextByNode = new HashMap<>();
+    // Using identity hash map for referential equality. Some nodes implement `equals` but we still
+    // check there is only one reference.
+    IdentityHashMap<Node, Node> contextByNode = new IdentityHashMap<>();
 
     Deque<Statement> statementStack = new ArrayDeque<>();
 

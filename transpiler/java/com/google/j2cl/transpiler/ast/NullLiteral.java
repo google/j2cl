@@ -54,7 +54,19 @@ public class NullLiteral extends Literal {
   }
 
   @Override
+  public boolean equals(Object o) {
+    return o == this
+        || (o instanceof NullLiteral && ((NullLiteral) o).typeDescriptor.equals(typeDescriptor));
+  }
+
+  @Override
+  public int hashCode() {
+    return typeDescriptor.hashCode();
+  }
+
+  @Override
   Node acceptInternal(Processor processor) {
     return Visitor_NullLiteral.visit(processor, this);
   }
 }
+
