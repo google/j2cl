@@ -295,13 +295,16 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
 
   /** Creates a wildcard type variable with a specific upper bound. */
   public static TypeVariable createWildcardWithUpperBound(TypeDescriptor bound) {
-    return createWildcard(/* upperBound= */ bound, /* lowerBound= */ null);
+    return createWildcard(
+        /* upperBound= */ bound, /* lowerBound= */ null, NullabilityAnnotation.NONE);
   }
 
   /** Creates a wildcard type variable with a specific lower bound. */
   public static TypeVariable createWildcardWithLowerBound(TypeDescriptor bound) {
     return createWildcard(
-        /* upperBound= */ TypeDescriptors.get().javaLangObject, /* lowerBound= */ bound);
+        /* upperBound= */ TypeDescriptors.get().javaLangObject,
+        /* lowerBound= */ bound,
+        NullabilityAnnotation.NONE);
   }
 
   /** Creates wildcard type variable with no bound. */
@@ -310,7 +313,9 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
   }
 
   private static TypeVariable createWildcard(
-      TypeDescriptor upperBound, @Nullable TypeDescriptor lowerBound) {
+      TypeDescriptor upperBound,
+      @Nullable TypeDescriptor lowerBound,
+      NullabilityAnnotation nullabilityAnnotation) {
     String upperBoundKey = "<??_^_>" + upperBound.getUniqueId();
     String lowerBoundKey = lowerBound == null ? "" : "<??_v_>" + lowerBound.getUniqueId();
 
@@ -323,7 +328,9 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
 
     return TypeVariable.newBuilder()
         .setWildcard(true)
-        .setNullabilityAnnotation(NullabilityAnnotation.NONE)
+        // TODO(b/407362826): Reconsider whether the nullability annotation is kept in the wildcard
+        // or whether it needs to be applied to the bounds and disallowed here.
+        .setNullabilityAnnotation(nullabilityAnnotation)
         .setUpperBoundTypeDescriptorFactory(() -> upperBound)
         .setLowerBoundTypeDescriptor(lowerBound)
         // Create an unique key that does not conflict with the keys used for other types nor for
@@ -339,7 +346,9 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
     if (isWildcard()) {
       return this;
     }
-    return createWildcard(getUpperBoundTypeDescriptor(), getLowerBoundTypeDescriptor());
+
+    return createWildcard(
+        getUpperBoundTypeDescriptor(), getLowerBoundTypeDescriptor(), getNullabilityAnnotation());
   }
 
   /**
@@ -368,7 +377,7 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
       return this;
     }
 
-    return createWildcard(updatedUpperBound, updatedLowerBound);
+    return createWildcard(updatedUpperBound, updatedLowerBound, getNullabilityAnnotation());
   }
 
   @Override

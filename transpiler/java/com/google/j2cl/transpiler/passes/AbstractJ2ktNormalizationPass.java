@@ -159,15 +159,7 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
         } else {
           return typeVariable
               .toWildcard()
-              .withRewrittenBounds(
-                  it -> {
-                    TypeDescriptor projectedBound =
-                        projectCaptures(it, /* isTypeArgument= */ false, newSeen);
-                    // Preserve the nullability of the type variable.
-                    return !typeVariable.canBeNull()
-                        ? projectedBound.toNonNullable()
-                        : projectedBound;
-                  });
+              .withRewrittenBounds(it -> projectCaptures(it, /* isTypeArgument= */ false, newSeen));
         }
       }
     } else if (typeDescriptor instanceof IntersectionTypeDescriptor) {
