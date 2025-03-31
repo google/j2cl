@@ -479,7 +479,7 @@ open class Collections {
   override fun addAll(c: Collection<T>): Boolean {
    val c_1: MutableCollection<out T> = c as MutableCollection<out T>
    var c_2: MutableCollection<out T> = c_1
-   c_2 = Collections.convertCollection/* <capture#1-of out T> */(c_2)
+   c_2 = Collections.convertCollection(c_2)
    return super<AbstractCollection>.addAll(
     c_2 as Collection<T>,
    )
@@ -488,7 +488,7 @@ open class Collections {
   override fun containsAll(c: Collection<T>): Boolean {
    val c_1: MutableCollection<*> = c as MutableCollection<*>
    var c_2: MutableCollection<*> = c_1
-   c_2 = Collections.convertCollection/* <*> */(c_2)
+   c_2 = Collections.convertCollection(c_2)
    return super<AbstractCollection>.containsAll(
     c_2 as Collection<T>,
    )
@@ -497,7 +497,7 @@ open class Collections {
   override fun removeAll(c: Collection<T>): Boolean {
    val c_1: MutableCollection<*> = c as MutableCollection<*>
    var c_2: MutableCollection<*> = c_1
-   c_2 = Collections.convertCollection/* <*> */(c_2)
+   c_2 = Collections.convertCollection(c_2)
    return super<AbstractCollection>.removeAll(
     c_2 as Collection<T>,
    )
@@ -506,7 +506,7 @@ open class Collections {
   override fun retainAll(c: Collection<T>): Boolean {
    val c_1: MutableCollection<*> = c as MutableCollection<*>
    var c_2: MutableCollection<*> = c_1
-   c_2 = Collections.convertCollection/* <*> */(c_2)
+   c_2 = Collections.convertCollection(c_2)
    return super<AbstractCollection>.retainAll(
     c_2 as Collection<T>,
    )
@@ -542,7 +542,7 @@ open class Collections {
   override fun addAll(index: Int, c: Collection<T>): Boolean {
    val c_1: MutableCollection<out T> = c as MutableCollection<out T>
    var c_2: MutableCollection<out T> = c_1
-   c_2 = Collections.convertCollection/* <capture#2-of out T> */(c_2)
+   c_2 = Collections.convertCollection(c_2)
    return super<AbstractList>.addAll(
     index,
     c_2 as Collection<T>,
@@ -646,7 +646,7 @@ open class Collections {
   override fun putAll(m: Map<out K, V>) {
    val m_1: MutableMap<out K, out V> = m as MutableMap<out K, out V>
    var m_2: MutableMap<out K, out V> = m_1
-   m_2 = Collections.convertMap/* <capture#3-of out K, capture#4-of out V> */(m_2)
+   m_2 = Collections.convertMap(m_2)
    super<AbstractMap>.putAll(
     m_2 as Map<out K, V>,
    )

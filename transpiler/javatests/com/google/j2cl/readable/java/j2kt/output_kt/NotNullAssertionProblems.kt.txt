@@ -192,7 +192,7 @@ open class NotNullAssertionProblems {
    @ObjCName("withNSString", swiftName = "with") string: String,
    @ObjCName("withJ2ktNotNullAssertionProblems_Supplier", swiftName = "with") wildcardSupplier: Supplier<*>
   ) {
-   NotNullAssertionProblems.accept1/* <*> */(
+   NotNullAssertionProblems.accept1(
     wildcardSupplier.getValue(),
    )
    NotNullAssertionProblems.accept2<Any?>(
@@ -211,7 +211,7 @@ open class NotNullAssertionProblems {
    @ObjCName("withNSString", swiftName = "with") string: String,
    @ObjCName("withJ2ktNotNullAssertionProblems_Supplier", swiftName = "with") wildcardSupplier: Supplier<*>
   ) {
-   Consumer/* <*> */(
+   Consumer(
     wildcardSupplier.getValue(),
    )
    Consumer<Any?>(
@@ -277,7 +277,7 @@ open class NotNullAssertionProblems {
    @ObjCName("withId") value: Any?
   ) {
    if (value != null) {
-    val x: Any? = NotNullAssertionProblems.getDefaultValue/* <*> */(
+    val x: Any? = NotNullAssertionProblems.getDefaultValue(
      value!!.getClass() as Class<*>,
     )
     if (x != null) {

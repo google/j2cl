@@ -233,7 +233,7 @@ open class Main {
 
  @ObjCName("testGenericJsFunctionWithVarags")
  open fun <U> testGenericJsFunctionWithVarags() {
-  val function: GenericFunction<U> = GenericFunction/* <U> */ { n: U, param: Array<out U>? ->
+  val function: GenericFunction<U> = GenericFunction { n: U, param: Array<out U>? ->
    val param_1: Array<U>? = param as Array<U>?
    return@GenericFunction param_1
   }

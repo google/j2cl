@@ -44,7 +44,7 @@ open class NullabilityInferenceProblem9 {
   internal fun test_pp_j2kt(nullableFooFuture: Future<Foo?>, fooFuture: Future<Foo>): Future<Foo> {
    return NullabilityInferenceProblem9.transformFuture_pp_j2kt<Foo?, Foo>(
     nullableFooFuture,
-    FutureFunction/* <Foo?, Foo> */ { nullableFoo: Foo? ->
+    FutureFunction { nullableFoo: Foo? ->
      if (nullableFoo != null) {
       return@FutureFunction NullabilityInferenceProblem9.future_pp_j2kt<Foo?>(nullableFoo) as Future<Foo>
      }

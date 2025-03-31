@@ -51,7 +51,7 @@ open class NullabilityInferenceProblem internal constructor() {
   private fun testImplicitTypeArguments(users: MutableIterable<User>): ImmutableList<User> {
    return NullabilityInferenceProblem.sortedCopyOf<User>(
     java.util.Comparator.comparing<User, String>(
-     Function/* <User, String?> */ { user: User ->
+     Function { user: User ->
       return@Function user.getName().orElse("")!!
      } as Function<in User, out String>,
     ),
@@ -63,7 +63,7 @@ open class NullabilityInferenceProblem internal constructor() {
   private fun testExplicitTypeArguments(users: MutableIterable<User>): ImmutableList<User> {
    return NullabilityInferenceProblem.sortedCopyOf<User>(
     java.util.Comparator.comparing<User, String>(
-     Function/* <User, String> */ { user: User ->
+     Function { user: User ->
       return@Function user.getName().orElse("")!!
      },
     ),
@@ -75,7 +75,7 @@ open class NullabilityInferenceProblem internal constructor() {
   private fun testCheckNotNull(users: MutableIterable<User>): ImmutableList<User> {
    return NullabilityInferenceProblem.sortedCopyOf<User>(
     java.util.Comparator.comparing<User, String>(
-     Function/* <User, String?> */ { user: User ->
+     Function { user: User ->
       return@Function NullabilityInferenceProblem.checkNotNull<String>(
        user.getName().orElse("")!!,
       )

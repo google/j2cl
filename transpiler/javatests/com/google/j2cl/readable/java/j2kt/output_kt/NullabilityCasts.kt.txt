@@ -34,7 +34,7 @@ open class NullabilityCasts {
  internal open fun testCapturesInLambdas_pp_j2kt(condition: Boolean, async: Async<String?>) {
   NullabilityCasts.tranformAsync_pp_j2kt<String?, String?>(
    async,
-   AsyncFunction/* <String?, String?> */ { it: String? ->
+   AsyncFunction { it: String? ->
     if (condition) {
      return@AsyncFunction async
     } else {

@@ -31,11 +31,11 @@ class MethodReference internal constructor() {
  companion object {
   @JvmStatic
   internal fun <T> foo_pp_j2kt(inputs: Foo<out Foo<out T>>) {
-   MethodReference.transform_pp_j2kt/* <capture#1-of out Foo<out T>, Foo<capture#2-of out T>> */(
+   MethodReference.transform_pp_j2kt(
     inputs,
     object : Function<Foo<out T>, Foo<out T>> {
      override fun <H> apply(arg0: Foo<out T>): Foo<out T> {
-      val arg0_1 /* capture#1-of out Foo<out T> */ = arg0 as Foo<out T>
+      val arg0_1 = arg0 as Foo<out T>
       return arg0_1.bar()
      }
     },

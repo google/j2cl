@@ -326,18 +326,18 @@ open class ExplicitNotNullable {
 
   @JvmStatic
   internal fun testLambdaNullability_pp_nullability_explicitnotnullable() {
-   val lambda: Consumer<String> = Consumer/* <String> */ { s: String ->
+   val lambda: Consumer<String> = Consumer { s: String ->
    }
-   val nullable: Consumer<String> = Consumer/* <String> */ { arg0: String ->
+   val nullable: Consumer<String> = Consumer { arg0: String ->
     DefaultNullable.nullableAccept_pp_nullability_explicitnotnullable(arg0)
    }
-   val nonNullable: Consumer<String> = Consumer/* <String> */ { arg0_1: String ->
+   val nonNullable: Consumer<String> = Consumer { arg0_1: String ->
     ExplicitNotNullable.nonNullableAccept_pp_nullability_explicitnotnullable(arg0_1)
    }
-   val newObject: Supplier<Any> = Supplier/* <Any> */ {
+   val newObject: Supplier<Any> = Supplier {
     return@Supplier Any()
    }
-   val newArray: IntFunction<Array<Any>> = IntFunction/* <Array<Any>> */ { arg0_2: Int ->
+   val newArray: IntFunction<Array<Any>> = IntFunction { arg0_2: Int ->
     return@IntFunction arrayOfNulls<Any>(arg0_2) as Array<Any>
    }
   }
@@ -350,7 +350,7 @@ open class ExplicitNotNullable {
 
   @JvmStatic
   internal fun testUnboundWildcardTypeArgumentInference_pp_nullability_explicitnotnullable(c: Consumer<*>) {
-   ExplicitNotNullable.consume_pp_nullability_explicitnotnullable/* <Consumer<*>> */(c)
+   ExplicitNotNullable.consume_pp_nullability_explicitnotnullable(c)
   }
 
   @JvmStatic

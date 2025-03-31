@@ -36,7 +36,7 @@ open class TypeWildCards {
    @ObjCName("withJ2ktnotpassingTypeWildCards_Observable", swiftName = "with") observable: T
   ) {
    (observable as Observable<Any?>).addObserver(
-    Observer/* <Any?> */ { e: Any? ->
+    Observer { e: Any? ->
     },
    )
   }
@@ -47,7 +47,7 @@ open class TypeWildCards {
    @ObjCName("withJ2ktnotpassingTypeWildCards_RecursiveObservable", swiftName = "with") observable: RecursiveObservable<*>
   ) {
    (observable as RecursiveObservable<RecursiveObservable<E>>).addObserver(
-    Observer/* <RecursiveObservable<capture#1-of out RecursiveObservable<*>>> */ { e /* RecursiveObservable<capture#1-of out RecursiveObservable<*>> */ ->
+    Observer { e ->
     },
    )
   }

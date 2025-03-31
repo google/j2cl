@@ -78,20 +78,20 @@ open class Main {
    NativeStringEnum.ONE.equals(
     NativeStringEnum.THREE,
    )
-   val supplier: Supplier<ComparableJsEnum?> = Supplier/* <ComparableJsEnum?> */ {
+   val supplier: Supplier<ComparableJsEnum?> = Supplier {
     return@Supplier ComparableJsEnum.ONE
    }
-   val consummer: Consumer<ComparableJsEnum?> = Consumer/* <ComparableJsEnum?> */ { e: ComparableJsEnum? ->
+   val consummer: Consumer<ComparableJsEnum?> = Consumer { e: ComparableJsEnum? ->
     e!!.ordinal
    }
    Main.acceptsJsFunctionSupplier(
-    JsFunctionSuppiler/* <ComparableJsEnum?> */ {
+    JsFunctionSuppiler {
      return@JsFunctionSuppiler ComparableJsEnum.ONE
     },
    )
    Main.acceptsSupplierOfSupplier(
-    Supplier/* <Supplier<ComparableJsEnum?>?> */ {
-     return@Supplier Supplier/* <ComparableJsEnum?> */ {
+    Supplier {
+     return@Supplier Supplier {
       return@Supplier ComparableJsEnum.ONE
      }
     },
@@ -237,7 +237,7 @@ open class Main {
     SomeJsEnum.A,
     SomeJsEnum.A,
    )
-   val consumer: Consumer<SomeJsEnum?> = Consumer/* <SomeJsEnum?> */ { arg0: SomeJsEnum? ->
+   val consumer: Consumer<SomeJsEnum?> = Consumer { arg0: SomeJsEnum? ->
     Main.varargsConsumer<SomeJsEnum?>(arg0)
    }
   }

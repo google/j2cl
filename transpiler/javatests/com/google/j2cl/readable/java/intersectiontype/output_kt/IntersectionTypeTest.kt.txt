@@ -84,14 +84,14 @@ open class IntersectionTypeTest<U> {
 
  @ObjCName("testMethodCall")
  open fun testMethodCall() {
-  val o: Any? = IntersectionTypeTest.m/* <A? & EmptyA?> */()
-  IntersectionTypeTest.set/* <A? & EmptyA?> */(
+  val o: Any? = IntersectionTypeTest.m()
+  IntersectionTypeTest.set(
    o.let { it as A?; it as EmptyA?; it },
   )
-  IntersectionTypeTest.set/* <A? & EmptyA?> */(
-   IntersectionTypeTest.m/* <A? & EmptyA?> */(),
+  IntersectionTypeTest.set(
+   IntersectionTypeTest.m(),
   )
-  val g: Getable<*>? = IntersectionTypeTest.n/* <A? & EmptyA?> */()
+  val g: Getable<*>? = IntersectionTypeTest.n()
  }
 
  @ObjCName("testDefaultMethodCall")
@@ -151,7 +151,7 @@ open class IntersectionTypeTest<U> {
   @JvmStatic
   @ObjCName("method2")
   fun method2(): Cmp2<Any?>? {
-   return Cmp2/* <Any?> */ { a: Int ->
+   return Cmp2 { a: Int ->
     return@Cmp2 1
    } as Cmp2<Any?>?
   }
@@ -200,7 +200,7 @@ open class IntersectionTypeTest<U> {
 
   @JvmStatic
   private fun callOnIntersectionTypeWithRawType() {
-   val t /* GenericType<Any?> & Getable<Any?> */ = GenericType<String?>().let { it as GenericType<Any?>; it as Getable<Any?>; it }
+   val t = GenericType<String?>().let { it as GenericType<Any?>; it as Getable<Any?>; it }
    (t as GenericType<Any?>).doSomething_pp_intersectiontype("")
    (t as Getable<Any?>).get()
   }

@@ -429,9 +429,21 @@ internal data class ExpressionRenderer(
     Source.emptyIf(typeBindings.isEmpty()) {
       val includeTypeBindings =
         !emitAsComment && (typeBindings.all(TypeBinding::isDenotable) || !omitNonDenotable)
-      nameRenderer
-        .typeBindingsSource(typeBindings, rendersCaptures = !includeTypeBindings)
-        .letIf(!includeTypeBindings, ::blockComment)
+      Source.emptyIf(!includeTypeBindings && !TYPE_COMMENTS_ENABLED) {
+        nameRenderer
+          .typeBindingsSource(typeBindings, rendersCaptures = !includeTypeBindings)
+          .letIf(!includeTypeBindings, ::blockComment)
+      }
+    }
+
+  private fun invocationTypeArgumentsSource(
+    typeBindings: List<TypeBinding>,
+    omitNonDenotable: Boolean = true,
+  ): Source =
+    Source.emptyIf(typeBindings.isEmpty()) {
+      Source.emptyUnless(typeBindings.all(TypeBinding::isDenotable) || !omitNonDenotable) {
+        nameRenderer.typeBindingsSource(typeBindings)
+      }
     }
 
   internal fun invocationSource(invocation: Invocation) =
@@ -690,10 +702,12 @@ internal data class ExpressionRenderer(
     if (typeDescriptor.isDenotableNonWildcard) {
       spaceSeparated(COLON, nameRenderer.typeDescriptorSource(typeDescriptor))
     } else {
-      join(
-        SPACE,
-        blockComment(nameRenderer.typeDescriptorSource(typeDescriptor, rendersCaptures = true)),
-      )
+      Source.emptyUnless(TYPE_COMMENTS_ENABLED) {
+        join(
+          SPACE,
+          blockComment(nameRenderer.typeDescriptorSource(typeDescriptor, rendersCaptures = true)),
+        )
+      }
     }
 
   private fun leftSubExpressionSource(precedence: Precedence, operand: Expression) =
@@ -752,6 +766,9 @@ internal data class ExpressionRenderer(
     }
 
   companion object {
+    // TODO(b/407498527): Remove when no longer useful during debugging.
+    private const val TYPE_COMMENTS_ENABLED = false
+
     private fun shouldRenderArgumentInNewLine(argument: Expression): Boolean =
       // This is a heuristic which gives good enough results.
       argument.hasSideEffects()

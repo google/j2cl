@@ -127,9 +127,9 @@ open class TypeWildCards {
  open fun testInferredGenericIntersection() {
   val elements: List<TypeWildCards.Element?>? = null
   val otherElements: List<TypeWildCards.SubOtherElement?>? = null
-  val integers: List<Int?>? = TypeWildCards.transform/* <Any? & HasKey? & IntegerSupplier?, Int?> */(
-   TypeWildCards.concat/* <Any? & HasKey? & IntegerSupplier?> */(elements, otherElements),
-   Function/* <Any? & HasKey? & IntegerSupplier?, Int?> */ { a /* Any? & HasKey? & IntegerSupplier? */ ->
+  val integers: List<Int?>? = TypeWildCards.transform(
+   TypeWildCards.concat(elements, otherElements),
+   Function { a ->
     a!!.getKey()
     return@Function a!!.get()
    },
@@ -194,7 +194,7 @@ open class TypeWildCards {
   internal var listWithWildcard_pp_typewildcards: List<*>? = null
 
   @JvmField
-  internal var valMultipleGenerics_pp_typewildcards: MultipleGenerics<*, String?, *>? = TypeWildCards.createMultipleGenerics_pp_typewildcards/* <*> */(
+  internal var valMultipleGenerics_pp_typewildcards: MultipleGenerics<*, String?, *>? = TypeWildCards.createMultipleGenerics_pp_typewildcards(
    TypeWildCards.listWithWildcard_pp_typewildcards,
   )
  }
