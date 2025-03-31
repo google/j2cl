@@ -23,6 +23,7 @@ import org.jetbrains.kotlin.backend.common.ir.asInlinable
 import org.jetbrains.kotlin.backend.common.ir.inline
 import org.jetbrains.kotlin.backend.common.lower.createIrBuilder
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
+import org.jetbrains.kotlin.ir.InternalSymbolFinderAPI
 import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.builders.createTmpVariable
 import org.jetbrains.kotlin.ir.builders.irBlock
@@ -82,6 +83,7 @@ import org.jetbrains.kotlin.util.OperatorNameConventions
  * Semantically it doesn't make sense for user-code to do this, so it should be incredibly rare that
  * this fallback operation is ever used.
  */
+@OptIn(InternalSymbolFinderAPI::class)
 class ArrayConstructorLowering(private val context: JvmBackendContext) :
   BodyLoweringPass, IrElementTransformerVoidWithContext() {
 
@@ -172,7 +174,9 @@ class ArrayConstructorLowering(private val context: JvmBackendContext) :
         context.irBuiltIns.floatArray -> Name.identifier("FloatArrayInitializer")
         else -> Name.identifier("ArrayInitializer")
       }
-    return checkNotNull(context.irBuiltIns.findClass(name, FqName("kotlin.jvm.internal")))
+    return checkNotNull(
+      context.irBuiltIns.symbolFinder.findClass(name, FqName("kotlin.jvm.internal"))
+    )
   }
 
   private fun adapterInitializerFor(arrayClass: IrClassSymbol): IrSimpleFunctionSymbol {
@@ -188,7 +192,9 @@ class ArrayConstructorLowering(private val context: JvmBackendContext) :
         context.irBuiltIns.floatArray -> Name.identifier("toFloatArrayInitializer")
         else -> Name.identifier("toArrayInitializer")
       }
-    return context.irBuiltIns.findFunctions(name, FqName("kotlin.jvm.internal")).single()
+    return context.irBuiltIns.symbolFinder
+      .findFunctions(name, FqName("kotlin.jvm.internal"))
+      .single()
   }
 
   private val IrClassSymbol.isArrayClass: Boolean

@@ -1,28 +1,16 @@
 /*
- * Copyright 2010-2021 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
  */
 
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
 import org.jetbrains.kotlin.backend.common.BodyLoweringPass
-import org.jetbrains.kotlin.backend.common.CommonBackendContext
+import org.jetbrains.kotlin.backend.common.LoweringContext
 import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
 import org.jetbrains.kotlin.ir.IrElement
-import org.jetbrains.kotlin.ir.declarations.IrAnonymousInitializer
-import org.jetbrains.kotlin.ir.declarations.IrConstructor
-import org.jetbrains.kotlin.ir.declarations.IrDeclaration
-import org.jetbrains.kotlin.ir.declarations.IrFile
-import org.jetbrains.kotlin.ir.declarations.IrProperty
-import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
-import org.jetbrains.kotlin.ir.declarations.createBlockBody
-import org.jetbrains.kotlin.ir.declarations.name
-import org.jetbrains.kotlin.ir.expressions.IrBody
-import org.jetbrains.kotlin.ir.expressions.IrCall
-import org.jetbrains.kotlin.ir.expressions.IrExpression
-import org.jetbrains.kotlin.ir.expressions.IrFunctionReference
-import org.jetbrains.kotlin.ir.expressions.IrMemberAccessExpression
-import org.jetbrains.kotlin.ir.expressions.copyTypeArgumentsFrom
+import org.jetbrains.kotlin.ir.declarations.*
+import org.jetbrains.kotlin.ir.expressions.*
 import org.jetbrains.kotlin.ir.expressions.impl.IrCallImpl
 import org.jetbrains.kotlin.ir.expressions.impl.IrFunctionReferenceImpl
 import org.jetbrains.kotlin.ir.expressions.impl.IrGetValueImpl
@@ -33,21 +21,18 @@ import org.jetbrains.kotlin.ir.util.DeepCopyIrTreeWithSymbols
 import org.jetbrains.kotlin.ir.util.DeepCopySymbolRemapper
 import org.jetbrains.kotlin.ir.util.SimpleTypeRemapper
 import org.jetbrains.kotlin.ir.util.withinScope
-import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
-import org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid
-import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
-import org.jetbrains.kotlin.ir.visitors.acceptVoid
-import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
+import org.jetbrains.kotlin.ir.visitors.*
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.name.NameUtils
+import org.jetbrains.kotlin.utils.memoryOptimizedMap
 
 /**
- * Create public bridge for private top level functions called from inline functions.
+ * Wraps top level inline function to access through them from inline functions (legacy lowering).
  *
  * Copied and modified from
  * org.jetbrains.kotlin.ir.backend.js.lower.inline.LegacySyntheticAccessorLowering.kt
  */
-class SyntheticAccessorLowering(private val context: CommonBackendContext) : BodyLoweringPass {
+class SyntheticAccessorLowering(private val context: LoweringContext) : BodyLoweringPass {
 
   private class CandidatesCollector(val candidates: MutableCollection<IrSimpleFunction>) :
     IrElementVisitorVoid {
@@ -126,7 +111,7 @@ class SyntheticAccessorLowering(private val context: CommonBackendContext) : Bod
             .createSimpleFunction(
               startOffset = declaration.startOffset,
               endOffset = declaration.endOffset,
-              origin = mapDeclarationOrigin(declaration.origin),
+              origin = declaration.origin,
               name = newName,
               visibility = DescriptorVisibilities.INTERNAL,
               isInline = declaration.isInline,
@@ -151,7 +136,7 @@ class SyntheticAccessorLowering(private val context: CommonBackendContext) : Bod
         }
 
         private fun IrSimpleFunction.transformFunctionChildren(declaration: IrSimpleFunction) {
-          copyTypeParametersFrom(declaration)
+          typeParameters = declaration.typeParameters.memoryOptimizedMap { it.transform() }
           typeRemapper.withinScope(this) {
             assert(declaration.dispatchReceiverParameter == null) {
               "Top level functions do not have dispatch receiver"
@@ -159,7 +144,7 @@ class SyntheticAccessorLowering(private val context: CommonBackendContext) : Bod
             extensionReceiverParameter =
               declaration.extensionReceiverParameter?.transform()?.also { it.parent = this }
             returnType = typeRemapper.remapType(declaration.returnType)
-            valueParameters = declaration.valueParameters.transform()
+            valueParameters = declaration.valueParameters.memoryOptimizedMap { it.transform() }
             valueParameters.forEach { it.parent = this }
             typeParameters.forEach { it.parent = this }
           }
@@ -174,7 +159,7 @@ class SyntheticAccessorLowering(private val context: CommonBackendContext) : Bod
     val irCall =
       IrCallImpl(startOffset, endOffset, newFunction.returnType, symbol, typeParameters.size)
 
-    newFunction.typeParameters.forEachIndexed { i, tp -> irCall.putTypeArgument(i, tp.defaultType) }
+    newFunction.typeParameters.forEachIndexed { i, tp -> irCall.typeArguments[i] = tp.defaultType }
 
     newFunction.valueParameters.forEachIndexed { i, vp ->
       irCall.putValueArgument(i, IrGetValueImpl(startOffset, endOffset, vp.type, vp.symbol))
@@ -209,7 +194,7 @@ class SyntheticAccessorLowering(private val context: CommonBackendContext) : Bod
       functionMap[callee]?.let { newFunction ->
         val newExpression =
           expression.run {
-            IrCallImpl(startOffset, endOffset, type, newFunction.symbol, typeArgumentsCount, origin)
+            IrCallImpl(startOffset, endOffset, type, newFunction.symbol, typeArguments.size, origin)
           }
 
         newExpression.copyTypeArgumentsFrom(expression)
@@ -238,7 +223,7 @@ class SyntheticAccessorLowering(private val context: CommonBackendContext) : Bod
               endOffset,
               type,
               newFunction.symbol,
-              typeArgumentsCount,
+              typeArguments.size,
             )
           }
 

@@ -78,7 +78,6 @@ import org.jetbrains.kotlin.backend.jvm.SpecialBridge
 import org.jetbrains.kotlin.backend.jvm.ir.collectVisibleTypeParameters
 import org.jetbrains.kotlin.backend.jvm.ir.constantValue
 import org.jetbrains.kotlin.backend.jvm.ir.eraseToScope
-import org.jetbrains.kotlin.backend.jvm.ir.eraseTypeParameters
 import org.jetbrains.kotlin.backend.jvm.lower.getFileClassInfo
 import org.jetbrains.kotlin.ir.declarations.IrAnnotationContainer
 import org.jetbrains.kotlin.ir.declarations.IrClass
@@ -120,6 +119,7 @@ import org.jetbrains.kotlin.ir.types.typeOrNull
 import org.jetbrains.kotlin.ir.util.classId
 import org.jetbrains.kotlin.ir.util.defaultType
 import org.jetbrains.kotlin.ir.util.dump
+import org.jetbrains.kotlin.ir.util.eraseTypeParameters
 import org.jetbrains.kotlin.ir.util.file
 import org.jetbrains.kotlin.ir.util.hasAnnotation
 import org.jetbrains.kotlin.ir.util.isAnnotation
@@ -616,7 +616,8 @@ class KotlinEnvironment(
         if (specialBridge != null) {
           // If there's a known type to use that, but erase be mindful of captured type parameters.
           // Otherwise, erase all type parameters to match the original JRE types.
-          val substitutedType = specialBridge.substitutedParameterTypes?.get(index)
+          val substitutedType =
+            specialBridge.substitutedParameterTypes?.get(param.indexInParameters)
           type = substitutedType?.eraseToScope(visibleTypeParameters) ?: type.eraseTypeParameters()
         }
         parameterDescriptors.add(

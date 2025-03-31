@@ -35,7 +35,6 @@ class IrForInLoop(
   override var origin: IrStatementOrigin? = IrStatementOrigin.FOR_LOOP
   override var body: IrExpression? = null
   override var attributeOwnerId: IrAttributeContainer = this
-  override var originalBeforeInline: IrAttributeContainer? = null
   override var label: String? = null
 
   override fun <R, D> accept(visitor: IrElementVisitor<R, D>, data: D): R =

@@ -35,6 +35,7 @@ import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.builtins.DefaultBuiltIns
 import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys.ORIGINAL_MESSAGE_COLLECTOR_KEY
 import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys.RENDER_DIAGNOSTIC_INTERNAL_NAME
+import org.jetbrains.kotlin.cli.common.LegacyK2CliPipeline
 import org.jetbrains.kotlin.cli.common.arguments.K2JVMCompilerArguments
 import org.jetbrains.kotlin.cli.common.arguments.parseCommandLineArguments
 import org.jetbrains.kotlin.cli.common.collectSources
@@ -45,14 +46,12 @@ import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSourceLocation
 import org.jetbrains.kotlin.cli.common.messages.MessageCollector
 import org.jetbrains.kotlin.cli.common.setupCommonArguments
 import org.jetbrains.kotlin.cli.jvm.compiler.EnvironmentConfigFiles
-import org.jetbrains.kotlin.cli.jvm.compiler.NoScopeRecordCliBindingTrace
 import org.jetbrains.kotlin.cli.jvm.compiler.configureSourceRoots
-import org.jetbrains.kotlin.cli.jvm.compiler.pipeline.IncrementalCompilationApi
-import org.jetbrains.kotlin.cli.jvm.compiler.pipeline.ModuleCompilerInput
-import org.jetbrains.kotlin.cli.jvm.compiler.pipeline.compileModuleToAnalyzedFirViaLightTreeIncrementally
-import org.jetbrains.kotlin.cli.jvm.compiler.pipeline.convertToIrAndActualizeForJvm
-import org.jetbrains.kotlin.cli.jvm.compiler.pipeline.createProjectEnvironment
-import org.jetbrains.kotlin.cli.jvm.compiler.withModule
+import org.jetbrains.kotlin.cli.jvm.compiler.legacy.pipeline.IncrementalCompilationApi
+import org.jetbrains.kotlin.cli.jvm.compiler.legacy.pipeline.ModuleCompilerInput
+import org.jetbrains.kotlin.cli.jvm.compiler.legacy.pipeline.compileModuleToAnalyzedFirViaLightTreeIncrementally
+import org.jetbrains.kotlin.cli.jvm.compiler.legacy.pipeline.convertToIrAndActualizeForJvm
+import org.jetbrains.kotlin.cli.jvm.compiler.legacy.pipeline.createProjectEnvironment
 import org.jetbrains.kotlin.cli.jvm.config.configureJdkClasspathRoots
 import org.jetbrains.kotlin.cli.jvm.configureAdvancedJvmOptions
 import org.jetbrains.kotlin.cli.jvm.configureJavaModulesContentRoots
@@ -61,7 +60,6 @@ import org.jetbrains.kotlin.cli.jvm.configureKlibPaths
 import org.jetbrains.kotlin.cli.jvm.configureModuleChunk
 import org.jetbrains.kotlin.cli.jvm.configureStandardLibs
 import org.jetbrains.kotlin.cli.jvm.setupJvmSpecificArguments
-import org.jetbrains.kotlin.codegen.ClassBuilderFactories
 import org.jetbrains.kotlin.codegen.state.GenerationState
 import org.jetbrains.kotlin.config.CommonConfigurationKeys.MESSAGE_COLLECTOR_KEY
 import org.jetbrains.kotlin.config.CommonConfigurationKeys.MODULE_NAME
@@ -73,7 +71,7 @@ import org.jetbrains.kotlin.diagnostics.impl.PendingDiagnosticsCollectorWithSupp
 import org.jetbrains.kotlin.fir.backend.jvm.JvmFir2IrExtensions
 import org.jetbrains.kotlin.fir.descriptors.FirModuleDescriptor
 import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
-import org.jetbrains.kotlin.metadata.jvm.deserialization.JvmMetadataVersion
+import org.jetbrains.kotlin.metadata.deserialization.MetadataVersion
 import org.jetbrains.kotlin.metadata.jvm.deserialization.JvmProtoBufUtil
 import org.jetbrains.kotlin.modules.TargetId
 import org.jetbrains.kotlin.progress.CompilationCanceledException
@@ -150,7 +148,7 @@ class KotlinParser(private val problems: Problems) {
     problems.abortIfCancelled()
 
     val analysisResults =
-      @OptIn(IncrementalCompilationApi::class)
+      @OptIn(IncrementalCompilationApi::class, LegacyK2CliPipeline::class)
       compileModuleToAnalyzedFirViaLightTreeIncrementally(
         projectEnvironment,
         messageCollector,
@@ -163,20 +161,17 @@ class KotlinParser(private val problems: Problems) {
     diagnosticsReporter.maybeReportErrorsAndAbort(messageCollector, compilerConfiguration)
 
     val state =
-      GenerationState.Builder(
-          projectEnvironment.project,
-          ClassBuilderFactories.THROW_EXCEPTION,
-          FirModuleDescriptor.createSourceModuleDescriptor(
-            analysisResults.outputs[0].session,
-            DefaultBuiltIns.Instance,
-          ),
-          NoScopeRecordCliBindingTrace(projectEnvironment.project).bindingContext,
-          compilerConfiguration,
-        )
-        .withModule(module)
-        .isIrBackend(true)
-        .diagnosticReporter(diagnosticsReporter)
-        .build()
+      GenerationState(
+        projectEnvironment.project,
+        FirModuleDescriptor.createSourceModuleDescriptor(
+          analysisResults.outputs[0].session,
+          DefaultBuiltIns.Instance,
+        ),
+        compilerConfiguration,
+        targetId = TargetId(module),
+        diagnosticReporter = diagnosticsReporter,
+      )
+
     problems.abortIfCancelled()
 
     val compilationUnitBuilderExtension =
@@ -249,9 +244,7 @@ class KotlinParser(private val problems: Problems) {
     // for others libraries we use the Kotlinc default name `main`
     configuration.put(MODULE_NAME, arguments.moduleName ?: JvmProtoBufUtil.DEFAULT_MODULE_NAME)
 
-    configuration.setupCommonArguments(arguments) { versionArray ->
-      JvmMetadataVersion(*versionArray)
-    }
+    configuration.setupCommonArguments(arguments) { versionArray -> MetadataVersion(*versionArray) }
     configuration.setupJvmSpecificArguments(arguments)
     configuration.configureJdkHome(arguments)
     configuration.configureJavaModulesContentRoots(arguments)

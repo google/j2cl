@@ -12,30 +12,36 @@ import org.jetbrains.kotlin.backend.common.lower.IrBuildingTransformer
 import org.jetbrains.kotlin.backend.common.lower.at
 import org.jetbrains.kotlin.backend.common.lower.irNot
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
-import org.jetbrains.kotlin.backend.jvm.ir.* // ktlint-disable
+import org.jetbrains.kotlin.backend.jvm.ir.*
 import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.UNDEFINED_OFFSET
-import org.jetbrains.kotlin.ir.builders.* // ktlint-disable
-import org.jetbrains.kotlin.ir.declarations.* // ktlint-disable
-import org.jetbrains.kotlin.ir.expressions.* // ktlint-disable
+import org.jetbrains.kotlin.ir.builders.*
+import org.jetbrains.kotlin.ir.declarations.*
+import org.jetbrains.kotlin.ir.expressions.*
 import org.jetbrains.kotlin.ir.expressions.impl.IrCompositeImpl
 import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
-import org.jetbrains.kotlin.ir.types.* // ktlint-disable
-import org.jetbrains.kotlin.ir.util.* // ktlint-disable
+import org.jetbrains.kotlin.ir.types.*
+import org.jetbrains.kotlin.ir.util.*
+import org.jetbrains.kotlin.ir.util.getArrayElementType
+import org.jetbrains.kotlin.ir.util.isBoxedArray
+import org.jetbrains.kotlin.ir.util.isNullable
+import org.jetbrains.kotlin.ir.util.isSubtypeOf
+import org.jetbrains.kotlin.ir.util.isSubtypeOfClass
 import org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid
 import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 import org.jetbrains.kotlin.ir.visitors.acceptVoid
+import org.jetbrains.kotlin.types.Variance
 
 /**
- * Transforms IrTypeOperatorCalls to (implicit) casts and instanceof checks.
+ * Lowers [IrTypeOperatorCall]s to (implicit) casts and instanceof checks.
  *
- * After this pass runs there are only four kinds of IrTypeOperatorCalls left:
- * - IMPLICIT_CAST
- * - SAFE_CAST with reified type parameters
- * - INSTANCEOF with non-nullable type operand or reified type parameters
- * - CAST with non-nullable argument, nullable type operand, or reified type parameters
+ * After this pass runs, there are only four kinds of [IrTypeOperatorCall]s left:
+ * - `IMPLICIT_CAST`
+ * - `SAFE_CAST` with reified type parameters
+ * - `INSTANCEOF` with non-nullable type operand or reified type parameters
+ * - `CAST` with non-nullable argument, nullable type operand, or reified type parameters
  *
- * The latter two correspond to the instanceof/checkcast instructions on the JVM, except for the
+ * The latter two correspond to the `instanceof`/`checkcast` instructions on the JVM, except for the
  * presence of reified type parameters.
  *
  * Based on org/jetbrains/kotlin/backend/jvm/lower/TypeOperatorLowering.kt. We removed everything
@@ -90,6 +96,7 @@ internal class TypeOperatorLowering(private val backendContext: JvmBackendContex
       type.isReifiedTypeParameter -> builder.irAs(argument, type)
       argument.type.isInlineClassType() &&
         argument.type.isSubtypeOfClass(type.erasedUpperBound.symbol) -> argument
+      isCompatibleArrayType(argument.type, type) -> argument
       type.isNullable() || argument.isDefinitelyNotNull() -> builder.irAs(argument, type)
       // var f: Foo?
       // f as Bar
@@ -141,6 +148,29 @@ internal class TypeOperatorLowering(private val backendContext: JvmBackendContex
           // END OF MODIFICATIONS
         }
     }
+
+  private fun isCompatibleArrayType(actualType: IrType, expectedType: IrType): Boolean {
+    var actual = actualType
+    var expected = expectedType
+    while (
+      (actual.isArray() || actual.isNullableArray()) &&
+        (expected.isArray() || expected.isNullableArray())
+    ) {
+      actual = actual.getArrayElementLowerType()
+      expected = expected.getArrayElementLowerType()
+    }
+    if (actual == actualType || expected == expectedType) return false
+    return actual.isSubtypeOfClass(expected.erasedUpperBound.symbol)
+  }
+
+  private fun IrType.getArrayElementLowerType(): IrType =
+    if (
+      isBoxedArray &&
+        this is IrSimpleType &&
+        (arguments.singleOrNull() as? IrTypeProjection)?.variance == Variance.IN_VARIANCE
+    )
+      backendContext.irBuiltIns.anyNType
+    else getArrayElementType(backendContext.irBuiltIns)
 
   // TODO extract null check elimination on IR somewhere?
   private fun IrExpression.isDefinitelyNotNull(): Boolean =
@@ -218,10 +248,13 @@ internal class TypeOperatorLowering(private val backendContext: JvmBackendContex
               )
             }
           }
+
         IrTypeOperator.INSTANCEOF ->
           lowerInstanceOf(expression.argument.transformVoid(), expression.typeOperand)
+
         IrTypeOperator.NOT_INSTANCEOF ->
           irNot(lowerInstanceOf(expression.argument.transformVoid(), expression.typeOperand))
+
         IrTypeOperator.IMPLICIT_NOTNULL -> {
           // MODIFIED BY GOOGLE:
           // The original implementation lowered these into a composite which applies a null check

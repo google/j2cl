@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.frontend.kotlin.lower
 
 import org.jetbrains.kotlin.ir.IrElementBase
 import org.jetbrains.kotlin.ir.IrStatement
+import org.jetbrains.kotlin.ir.declarations.IrAttributeContainer
 import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
 
@@ -27,6 +28,8 @@ class IrSwitch(
   override val startOffset: Int,
   override val endOffset: Int,
 ) : IrElementBase(), IrStatement {
+  override var attributeOwnerId: IrAttributeContainer = this
+
   override fun <R, D> accept(visitor: IrElementVisitor<R, D>, data: D): R {
     return visitor.visitElement(this, data)
   }
@@ -44,6 +47,8 @@ class IrSwitchCase(
   override val startOffset: Int,
   override val endOffset: Int,
 ) : IrElementBase() {
+  override var attributeOwnerId: IrAttributeContainer = this
+
   override fun <R, D> accept(visitor: IrElementVisitor<R, D>, data: D): R {
     return visitor.visitElement(this, data)
   }
@@ -62,6 +67,7 @@ class IrSwitchBreak : IrElementBase(), IrStatement {
   // IrSwitchBreak are synthetic node that does not represent anything in the source code.
   override val endOffset: Int = -1
   override val startOffset: Int = -1
+  override var attributeOwnerId: IrAttributeContainer = this
 
   override fun <R, D> accept(visitor: IrElementVisitor<R, D>, data: D): R {
     return visitor.visitElement(this, data)

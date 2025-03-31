@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
 import com.google.common.collect.ImmutableList
-import org.jetbrains.kotlin.backend.common.BackendContext
 import org.jetbrains.kotlin.backend.common.CommonBackendContext
 import org.jetbrains.kotlin.backend.common.CompilationException
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
@@ -81,7 +80,7 @@ private constructor(
 internal fun loweringPhase(builder: LoweringPhase.Builder.() -> Unit): LoweringPhase =
   LoweringPhase.Builder().apply(builder).build()
 
-private class PerFileLowering<T : BackendContext>(
+private class PerFileLowering<T : CommonBackendContext>(
   private val context: T,
   private val fileLoweringFactory: (T) -> FileLoweringPass,
 ) : ModuleLoweringPass {
@@ -100,9 +99,10 @@ private class PerFileLowering<T : BackendContext>(
   }
 }
 
-private fun <T : BackendContext> ((T) -> FileLoweringPass).asPerFileLowering() = { context: T ->
-  PerFileLowering(context, this@asPerFileLowering)
-}
+private fun <T : CommonBackendContext> ((T) -> FileLoweringPass).asPerFileLowering() =
+  { context: T ->
+    PerFileLowering(context, this@asPerFileLowering)
+  }
 
 private fun ((JvmBackendContext) -> ModuleLoweringPass).withJ2clContext():
   (J2clBackendContext) -> ModuleLoweringPass = { context -> this.invoke(context.jvmBackendContext) }

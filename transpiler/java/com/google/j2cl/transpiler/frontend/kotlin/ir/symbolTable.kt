@@ -22,6 +22,7 @@ import org.jetbrains.kotlin.backend.common.serialization.signature.PublicIdSigna
 import org.jetbrains.kotlin.builtins.PrimitiveType
 import org.jetbrains.kotlin.fir.backend.DelicateDeclarationStorageApi
 import org.jetbrains.kotlin.fir.backend.Fir2IrComponents
+import org.jetbrains.kotlin.ir.InternalSymbolFinderAPI
 import org.jetbrains.kotlin.ir.IrBuiltIns
 import org.jetbrains.kotlin.ir.backend.jvm.serialization.JvmIrMangler
 import org.jetbrains.kotlin.ir.backend.jvm.serialization.JvmIrMangler.isExported
@@ -41,7 +42,7 @@ import org.jetbrains.kotlin.ir.util.fileOrNull
 import org.jetbrains.kotlin.types.expressions.OperatorConventions
 
 // TODO(b/374966022): Remove this file once we don't rely on IR serialization anymore for inlining.
-@OptIn(DelicateDeclarationStorageApi::class)
+@OptIn(DelicateDeclarationStorageApi::class, InternalSymbolFinderAPI::class)
 fun SymbolTable.populate(irBuiltIns: IrBuiltIns) {
   val irSignaturer = PublicIdSignatureComputer(JvmIrMangler)
   // collects all existing bound symbols in componentStorage.
@@ -58,9 +59,11 @@ fun SymbolTable.populate(irBuiltIns: IrBuiltIns) {
     fun getNumericConversionsFunctionSymbols(): List<IrSymbol> {
       val symbols = arrayListOf<IrSymbol>()
       for (type in PrimitiveType.NUMBER_TYPES) {
-        val typeClass = findClass(type.typeName)!!
+        val typeClass = symbolFinder.findClass(type.typeName)!!
         for (name in OperatorConventions.NUMBER_CONVERSIONS) {
-          findBuiltInClassMemberFunctions(typeClass, name).singleOrNull()?.let { symbols.add(it) }
+          symbolFinder.findBuiltInClassMemberFunctions(typeClass, name).singleOrNull()?.let {
+            symbols.add(it)
+          }
         }
       }
       return symbols

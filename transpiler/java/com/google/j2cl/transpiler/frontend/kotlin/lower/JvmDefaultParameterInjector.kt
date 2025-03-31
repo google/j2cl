@@ -20,7 +20,6 @@ import org.jetbrains.kotlin.ir.expressions.IrStatementOrigin
 import org.jetbrains.kotlin.ir.expressions.impl.IrCompositeImpl
 import org.jetbrains.kotlin.ir.expressions.impl.IrConstImpl
 import org.jetbrains.kotlin.ir.types.IrType
-import org.jetbrains.kotlin.ir.util.explicitParametersCount
 import org.jetbrains.kotlin.ir.util.render
 
 // Copied from org.jetbrains.kotlin.backend.jvm.lower.JvmDefaultParameterInjector to change the
@@ -101,11 +100,9 @@ internal class JvmDefaultParameterInjector(context: JvmBackendContext) :
             )
         }
 
-    assert(
-      stubFunction.explicitParametersCount - mainArguments.size - maskValues.size in listOf(0, 1)
-    ) {
+    assert(stubFunction.parameters.size - mainArguments.size - maskValues.size in listOf(0, 1)) {
       "argument count mismatch: expected $realArgumentsNumber arguments + ${maskValues.size} masks + optional handler/marker, " +
-        "got ${stubFunction.explicitParametersCount} total in ${stubFunction.render()}"
+        "got ${stubFunction.parameters.size} total in ${stubFunction.render()}"
     }
 
     return buildMap {

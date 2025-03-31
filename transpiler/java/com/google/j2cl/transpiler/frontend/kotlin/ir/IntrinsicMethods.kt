@@ -22,6 +22,7 @@ import com.google.j2cl.transpiler.ast.BinaryOperator
 import com.google.j2cl.transpiler.ast.PrefixOperator
 import org.jetbrains.kotlin.builtins.PrimitiveType
 import org.jetbrains.kotlin.builtins.StandardNames
+import org.jetbrains.kotlin.ir.InternalSymbolFinderAPI
 import org.jetbrains.kotlin.ir.IrBuiltIns
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrPackageFragment
@@ -148,9 +149,10 @@ class IntrinsicMethods(val irBuiltIns: IrBuiltIns) {
   fun isBinaryOperation(irCall: IrCall): Boolean =
     irCall.symbol.toKey() in binaryOperatorByIntrinsicSymbolKey
 
+  @OptIn(InternalSymbolFinderAPI::class)
   fun getRangeToConstructor(irCall: IrCall): IrConstructorSymbol {
     val fqName = irCall.type.classFqName!!
-    val classSymbol = irBuiltIns.findClass(fqName.shortName(), fqName.parent())!!
+    val classSymbol = irBuiltIns.symbolFinder.findClass(fqName.shortName(), fqName.parent())!!
     return classSymbol.constructors.single { it.owner.valueParameters.size == 2 }
   }
 

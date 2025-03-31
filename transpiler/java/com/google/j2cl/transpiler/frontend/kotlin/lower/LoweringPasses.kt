@@ -31,16 +31,11 @@ import org.jetbrains.kotlin.backend.common.lower.ExpectDeclarationsRemoveLowerin
 import org.jetbrains.kotlin.backend.common.lower.ExpressionBodyTransformer
 import org.jetbrains.kotlin.backend.common.lower.InitializersCleanupLowering
 import org.jetbrains.kotlin.backend.common.lower.InitializersLowering
-import org.jetbrains.kotlin.backend.common.lower.ReturnableBlockLowering
 import org.jetbrains.kotlin.backend.common.lower.StripTypeAliasDeclarationsLowering
 import org.jetbrains.kotlin.backend.common.lower.WrapInlineDeclarationsWithReifiedTypeParametersLowering
 import org.jetbrains.kotlin.backend.common.lower.inline.LocalClassesInInlineFunctionsLowering
 import org.jetbrains.kotlin.backend.common.lower.inline.LocalClassesInInlineLambdasLowering
 import org.jetbrains.kotlin.backend.common.lower.loops.ForLoopsLowering
-import org.jetbrains.kotlin.backend.common.phaser.CompilerPhase
-import org.jetbrains.kotlin.backend.common.phaser.PhaseConfig
-import org.jetbrains.kotlin.backend.common.phaser.PhaseConfigurationService
-import org.jetbrains.kotlin.backend.common.phaser.PhaserState
 import org.jetbrains.kotlin.backend.common.runOnFilePostfix
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
 import org.jetbrains.kotlin.backend.jvm.JvmBackendExtension
@@ -117,7 +112,7 @@ private val loweringPhase = loweringPhase {
   // Inline function bodies are inlined in a IrReturnableBlock that can contain a return
   // statement. Lower IrReturnableBlocks as labelled blocks, introduce a temporary variable for
   // keeping the returned value and lower return statements inside the block to break statement.
-  perFileLowering(::ReturnableBlockLowering)
+  perFileLowering(::J2CLReturnableBlockLowering)
   // Optimize for loops on arrays and integer like progressions.
   perFileLowering(::ForLoopsLowering)
   // Replace null varargs with empty array calls.
@@ -234,8 +229,7 @@ class LoweringPasses(
   lateinit var intrinsics: IntrinsicMethods
 
   override fun generate(moduleFragment: IrModuleFragment, pluginContext: IrPluginContext) {
-    jvmBackendContext =
-      createJvmBackendContext(state, compilerConfiguration, moduleFragment, pluginContext)
+    jvmBackendContext = createJvmBackendContext(state, compilerConfiguration, pluginContext)
     intrinsics = IntrinsicMethods(pluginContext.irBuiltIns)
 
     val j2clBackendContext = J2clBackendContext(jvmBackendContext, intrinsics)
@@ -248,7 +242,6 @@ class LoweringPasses(
 private fun createJvmBackendContext(
   state: GenerationState,
   compilerConfiguration: CompilerConfiguration,
-  moduleFragment: IrModuleFragment,
   pluginContext: IrPluginContext,
 ): JvmBackendContext {
   var symbolTable = pluginContext.symbolTable as SymbolTable
@@ -267,18 +260,8 @@ private fun createJvmBackendContext(
 
   return JvmBackendContext(
     state,
-    moduleFragment.irBuiltins,
+    pluginContext.irBuiltIns,
     symbolTable,
-    PhaseConfig(
-      object : CompilerPhase<JvmBackendContext, Unit, Unit> {
-        override fun invoke(
-          phaseConfig: PhaseConfigurationService,
-          phaserState: PhaserState<Unit>,
-          context: JvmBackendContext,
-          input: Unit,
-        ) {}
-      }
-    ),
     JvmGeneratorExtensionsImpl(compilerConfiguration),
     JvmBackendExtension.Default,
     irSerializer = null,

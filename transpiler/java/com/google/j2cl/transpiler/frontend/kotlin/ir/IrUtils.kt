@@ -24,7 +24,6 @@ import com.google.j2cl.transpiler.frontend.common.FrontendConstants.WASM_ANNOTAT
 import org.jetbrains.kotlin.backend.jvm.InlineClassAbi
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
 import org.jetbrains.kotlin.backend.jvm.JvmLoweredDeclarationOrigin
-import org.jetbrains.kotlin.backend.jvm.fullValueParameterList
 import org.jetbrains.kotlin.backend.jvm.getRequiresMangling
 import org.jetbrains.kotlin.backend.jvm.ir.getSingleAbstractMethod
 import org.jetbrains.kotlin.descriptors.ClassKind
@@ -105,6 +104,7 @@ import org.jetbrains.kotlin.ir.util.isPrimitiveArray
 import org.jetbrains.kotlin.ir.util.isReal
 import org.jetbrains.kotlin.ir.util.isStatic
 import org.jetbrains.kotlin.ir.util.isTopLevel
+import org.jetbrains.kotlin.ir.util.nonDispatchParameters
 import org.jetbrains.kotlin.ir.util.packageFqName
 import org.jetbrains.kotlin.ir.util.parentAsClass
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
@@ -622,7 +622,7 @@ val IrExpression.isUnitInstanceReference: Boolean
 
 val IrSimpleFunction.signatureRequiresMangling
   get() =
-    (fullValueParameterList.any { it.type.getRequiresMangling() } ||
+    (nonDispatchParameters.any { it.type.getRequiresMangling() } ||
       returnType.getRequiresMangling()) &&
       // TODO(b/228143153): Bridge methods should be created for overrides as part of lowering.
       !isOverridableOrOverrides

@@ -19,7 +19,7 @@ package com.google.j2cl.transpiler.frontend.kotlin.lower
 import org.jetbrains.kotlin.backend.common.ClassLoweringPass
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
 import org.jetbrains.kotlin.backend.common.ModuleLoweringPass
-import org.jetbrains.kotlin.backend.common.lower.LoweredDeclarationOrigins
+import org.jetbrains.kotlin.backend.common.defaultArgumentsOriginalFunction
 import org.jetbrains.kotlin.backend.common.lower.createIrBuilder
 import org.jetbrains.kotlin.backend.jvm.*
 import org.jetbrains.kotlin.backend.jvm.ir.fileParent
@@ -50,7 +50,20 @@ import org.jetbrains.kotlin.name.JvmStandardClassIds.JVM_SYNTHETIC_ANNOTATION_FQ
 import org.jetbrains.kotlin.resolve.jvm.diagnostics.JvmBackendErrors
 
 /**
- * Generates [JvmMultifileClass] facades, based on the information provided by [FileClassLowering].
+ * Generates [JvmMultifileClass] facades:
+ * - Before this phase runs, all files annotated with `@JvmMultifileClass` are grouped by their JVM
+ *   name (value of the `@JvmName` annotation on the file). This part is done by [FileClassLowering]
+ *   and stored in [JvmBackendContext.multifileFacadesToAdd].
+ * - For each group, this phase generates a facade class, which "combines" methods from all
+ *   multi-file parts.
+ *     - If `-Xmultifile-parts-inherit` is enabled, multi-file parts are made to inherit from each
+ *       other, and the facade class inherits from the bottommost multi-file part. In this case, all
+ *       top-level functions and properties are available from the facade class just by inheritance.
+ *       The parts are then made synthetic. This mode is used in kotlin-stdlib.
+ *     - Otherwise, for each function in the multi-file part, a new function in the facade class is
+ *       generated that calls it.
+ * - Finally, it updates call sites of functions from parts to point to the corresponding function
+ *   from the facade.
  *
  * Copied and modified from org.jetbrains.kotlin.backend.jvm.lower.GenerateMultifileFacades.kt.
  */
@@ -115,7 +128,7 @@ private fun generateMultifileFacades(
         .buildClass { name = jvmClassName.fqNameForTopLevelClassMaybeWithDollars.shortName() }
         .apply {
           parent = file
-          createImplicitParameterDeclarationWithWrappedDescriptor()
+          createThisReceiverParameter()
           origin = IrDeclarationOrigin.JVM_MULTIFILE_CLASS
           if (jvmClassName.packageFqName != kotlinPackageFqName) {
             this.classNameOverride = jvmClassName
@@ -264,14 +277,13 @@ private fun IrSimpleFunction.createMultifileDelegateIfNeeded(
 ): IrSimpleFunction? {
   val target = this
 
-  val originalVisibility =
-    context.mapping.defaultArgumentsOriginalFunction[this]?.visibility ?: visibility
+  val originalVisibility = defaultArgumentsOriginalFunction?.visibility ?: visibility
 
   if (
     DescriptorVisibilities.isPrivate(originalVisibility) ||
       name == StaticInitializersLowering.clinitName ||
       origin == IrDeclarationOrigin.SYNTHETIC_ACCESSOR ||
-      origin == LoweredDeclarationOrigins.INLINE_LAMBDA ||
+      origin == IrDeclarationOrigin.INLINE_LAMBDA ||
       origin == IrDeclarationOrigin.LOCAL_FUNCTION_FOR_LAMBDA ||
       origin == IrDeclarationOrigin.PROPERTY_DELEGATE ||
       origin == IrDeclarationOrigin.ADAPTER_FOR_FUN_INTERFACE_CONSTRUCTOR ||
@@ -301,7 +313,7 @@ private fun IrSimpleFunction.createMultifileDelegateIfNeeded(
 
   function.copyAttributes(target)
   function.copyAnnotationsFrom(target)
-  function.copyParameterDeclarationsFrom(target)
+  function.copyValueAndTypeParametersFrom(target)
   function.returnType =
     target.returnType.substitute(
       target.typeParameters,
@@ -324,7 +336,7 @@ private fun IrSimpleFunction.createMultifileDelegateIfNeeded(
               call.extensionReceiver = irGet(parameter)
             }
             for (parameter in function.valueParameters) {
-              call.putValueArgument(parameter.index, irGet(parameter))
+              call.putValueArgument(parameter.indexInOldValueParameters, irGet(parameter))
             }
           }
         )

@@ -38,7 +38,6 @@ class IrForLoop(
   lateinit var updates: MutableList<IrExpression>
   override var label: String? = null
   override var attributeOwnerId: IrAttributeContainer = this
-  override var originalBeforeInline: IrAttributeContainer? = null
 
   override fun <R, D> accept(visitor: IrElementVisitor<R, D>, data: D): R =
     visitor.visitLoop(this, data)
