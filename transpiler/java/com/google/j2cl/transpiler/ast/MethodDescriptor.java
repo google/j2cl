@@ -55,7 +55,7 @@ import javax.annotation.Nullable;
 public abstract class MethodDescriptor extends MemberDescriptor {
   /** A method parameter descriptor */
   @AutoValue
-  public abstract static class ParameterDescriptor {
+  public abstract static class ParameterDescriptor implements HasAnnotations {
 
     // TODO(b/182341814): This is a temporary hack to be able to disable DoNotAutobox annotations
     //   on wasm
@@ -70,6 +70,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public abstract boolean isVarargs();
 
+    @Override
     public abstract ImmutableList<Annotation> getAnnotations();
 
     public abstract boolean isJsOptional();
@@ -998,7 +999,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setFinal(false)
         .setSynthetic(false)
         .setEnumSyntheticMethod(false)
-        .setUnusableByJsSuppressed(false)
         .setOrigin(MethodOrigin.SOURCE)
         .setParameterDescriptors(ImmutableList.of())
         .setReturnTypeDescriptor(PrimitiveTypes.VOID)
@@ -1439,8 +1439,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public abstract Builder setWasmInfo(String value);
 
     public abstract Builder setEnumSyntheticMethod(boolean isEnumSyntheticMethod);
-
-    public abstract Builder setUnusableByJsSuppressed(boolean isUnusableByJsSuppressed);
 
     public abstract Builder setEnclosingTypeDescriptor(
         DeclaredTypeDescriptor enclosingTypeDescriptor);

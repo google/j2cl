@@ -55,7 +55,7 @@ import javax.annotation.Nullable;
 @Visitable
 @AutoValue
 public abstract class TypeDeclaration
-    implements HasJsNameInfo, HasReadableDescription, HasUnusableByJsSuppression, HasAnnotations {
+    implements HasJsNameInfo, HasReadableDescription, HasAnnotations {
 
   /** Kind of type declaration. */
   public enum Kind {
@@ -818,7 +818,6 @@ public abstract class TypeDeclaration
         .setJsFunctionInterface(false)
         .setJsType(false)
         .setLocal(false)
-        .setUnusableByJsSuppressed(false)
         .setNullMarked(false)
         .setTypeParameterDescriptors(ImmutableList.of())
         .setDeclaredMethodDescriptorsFactory(() -> ImmutableList.of())
@@ -897,8 +896,6 @@ public abstract class TypeDeclaration
     public abstract Builder setJsEnumInfo(JsEnumInfo jsEnumInfo);
 
     public abstract Builder setWasmInfo(String wasmInfo);
-
-    public abstract Builder setUnusableByJsSuppressed(boolean isUnusableByJsSuppressed);
 
     public abstract Builder setLocal(boolean local);
 

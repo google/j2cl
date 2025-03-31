@@ -27,6 +27,7 @@ public class SupportedAnnotations {
           "com.google.auto.value.AutoValue.Builder",
           "java.lang.Deprecated",
           "java.lang.FunctionalInterface",
+          "java.lang.SuppressWarnings",
           "javaemul.internal.annotations.HasNoSideEffects",
           "javaemul.internal.annotations.UncheckedCast",
           "javaemul.lang.annotations.WasAutoValue",

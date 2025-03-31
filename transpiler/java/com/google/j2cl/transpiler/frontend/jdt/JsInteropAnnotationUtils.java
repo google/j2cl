@@ -27,9 +27,7 @@ import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_OV
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_PACKAGE_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_PROPERTY_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_TYPE_ANNOTATION_NAME;
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.SUPPRESS_WARNINGS_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.getAnnotationBinding;
-import static java.util.Arrays.stream;
 
 import java.util.Optional;
 import javax.annotation.Nullable;
@@ -121,16 +119,6 @@ public class JsInteropAnnotationUtils {
 
   private static boolean isJsNative(IAnnotationBinding annotationBinding) {
     return JdtAnnotationUtils.getBooleanAttribute(annotationBinding, "isNative", false);
-  }
-
-  public static boolean isUnusableByJsSuppressed(IBinding binding) {
-    IAnnotationBinding suppressWarningsBinding =
-        JdtAnnotationUtils.findAnnotationBindingByName(binding, SUPPRESS_WARNINGS_ANNOTATION_NAME);
-    if (suppressWarningsBinding == null) {
-      return false;
-    }
-    Object[] suppressions = JdtAnnotationUtils.getArrayAttribute(suppressWarningsBinding, "value");
-    return stream(suppressions).anyMatch("unusable-by-js"::equals);
   }
 
   public static String getJsNamespace(PackageDeclaration packageDeclaration) {

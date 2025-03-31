@@ -28,10 +28,13 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Streams;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
+import com.google.j2cl.transpiler.ast.Annotation;
+import com.google.j2cl.transpiler.ast.ArrayConstant;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
@@ -43,6 +46,7 @@ import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
+import com.google.j2cl.transpiler.ast.HasAnnotations;
 import com.google.j2cl.transpiler.ast.HasJsNameInfo;
 import com.google.j2cl.transpiler.ast.HasReadableDescription;
 import com.google.j2cl.transpiler.ast.HasSourcePosition;
@@ -2375,36 +2379,51 @@ public class JsInteropRestrictionsChecker {
       warnIfUnusableByJs(returnTypeDescriptor, "Return type of", member);
 
       Variable varargsParameter = method.getJsVarargsParameter();
-      for (Variable parameter : method.getParameters()) {
-        if (!parameter.isUnusableByJsSuppressed()) {
-          TypeDescriptor parameterTypeDescriptor =
-              parameter == varargsParameter
-                  ? ((ArrayTypeDescriptor) parameter.getTypeDescriptor())
-                      .getComponentTypeDescriptor()
-                  : parameter.getTypeDescriptor();
-          String prefix = String.format("Type of parameter '%s' in", parameter.getName());
-          warnIfUnusableByJs(parameterTypeDescriptor, prefix, member);
-        }
-      }
+      Streams.forEachPair(
+          method.getParameters().stream(),
+          method.getDescriptor().getParameterDescriptors().stream(),
+          (parameter, parameterDescriptor) -> {
+            if (!isUnusableByJsSuppressed(parameterDescriptor)) {
+              TypeDescriptor parameterTypeDescriptor =
+                  parameter == varargsParameter
+                      ? ((ArrayTypeDescriptor) parameter.getTypeDescriptor())
+                          .getComponentTypeDescriptor()
+                      : parameter.getTypeDescriptor();
+              String prefix = String.format("Type of parameter '%s' in", parameter.getName());
+              warnIfUnusableByJs(parameterTypeDescriptor, prefix, member);
+            }
+          });
     }
   }
 
   private static boolean isUnusableByJsSuppressed(MemberDescriptor memberDescriptor) {
     // TODO(b/36227943): Abide by standard rules regarding suppression annotations in
     // enclosing elements.
-    return memberDescriptor.isUnusableByJsSuppressed()
-        || isUnusableByJsSuppressed(memberDescriptor.getEnclosingTypeDescriptor());
+    return isUnusableByJsSuppressed((HasAnnotations) memberDescriptor)
+        || isUnusableByJsSuppressed(
+            memberDescriptor.getEnclosingTypeDescriptor().getTypeDeclaration());
   }
 
-  private static boolean isUnusableByJsSuppressed(DeclaredTypeDescriptor typeDescriptor) {
+  private static boolean isUnusableByJsSuppressed(TypeDeclaration typeDeclaration) {
     // TODO(b/36227943): Abide by standard rules regarding suppression annotations in
     // enclosing elements.
-    if (typeDescriptor.isUnusableByJsSuppressed()) {
+    if (isUnusableByJsSuppressed((HasAnnotations) typeDeclaration)) {
       return true;
     }
 
-    DeclaredTypeDescriptor enclosingTypeDescriptor = typeDescriptor.getEnclosingTypeDescriptor();
-    return enclosingTypeDescriptor != null && isUnusableByJsSuppressed(enclosingTypeDescriptor);
+    // TODO(b/406060774): Handle the annotation on enclosing member descriptor for anonymous and
+    // local classes and add a test.
+
+    TypeDeclaration enclosingTypeDeclaration = typeDeclaration.getEnclosingTypeDeclaration();
+    return enclosingTypeDeclaration != null && isUnusableByJsSuppressed(enclosingTypeDeclaration);
+  }
+
+  private static boolean isUnusableByJsSuppressed(HasAnnotations node) {
+    Annotation suppressWarningsAnnotation = node.getAnnotation("java.lang.SuppressWarnings");
+    return suppressWarningsAnnotation != null
+        && ((ArrayConstant) suppressWarningsAnnotation.getValues().get("value"))
+            .getValueExpressions().stream()
+                .anyMatch(v -> ((StringLiteral) v).getValue().equals("unusable-by-js"));
   }
 
   private void warnIfUnusableByJs(TypeDescriptor typeDescriptor, String prefix, Member member) {

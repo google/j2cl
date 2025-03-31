@@ -238,7 +238,6 @@ public abstract class FieldDescriptor extends MemberDescriptor {
         .setStatic(false)
         .setFinal(false)
         .setSynthetic(false)
-        .setUnusableByJsSuppressed(false)
         .setEnumConstant(false)
         .setOrigin(FieldOrigin.SOURCE);
   }
@@ -285,8 +284,6 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     public abstract Builder setOriginalKtInfo(KtInfo ktInfo);
 
     public abstract Builder setAnnotations(List<Annotation> annotations);
-
-    public abstract Builder setUnusableByJsSuppressed(boolean isUnusableByJsSuppressed);
 
     public abstract Builder setOrigin(FieldOrigin fieldOrigin);
 

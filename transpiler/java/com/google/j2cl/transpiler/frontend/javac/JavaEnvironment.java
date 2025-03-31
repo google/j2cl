@@ -268,14 +268,11 @@ class JavaEnvironment {
       typeDescriptor = typeDescriptor.toNullable();
     }
     boolean isFinal = isFinal(variableElement);
-    boolean isUnusableByJsSuppressed =
-        JsInteropAnnotationUtils.isUnusableByJsSuppressed(variableElement);
     return Variable.newBuilder()
         .setName(name)
         .setTypeDescriptor(typeDescriptor)
         .setFinal(isFinal)
         .setParameter(isParameter)
-        .setUnusableByJsSuppressed(isUnusableByJsSuppressed)
         .setSourcePosition(sourcePosition)
         .build();
   }
@@ -615,8 +612,6 @@ class JavaEnvironment {
             constantValue != null ? Literal.fromValue(constantValue, thisTypeDescriptor) : null)
         .setDeclarationDescriptor(declarationFieldDescriptor)
         .setEnumConstant(isEnumConstant)
-        .setUnusableByJsSuppressed(
-            JsInteropAnnotationUtils.isUnusableByJsSuppressed(variableElement))
         .build();
   }
 
@@ -929,8 +924,6 @@ class JavaEnvironment {
         .setSynchronized(isSynchronized(declarationMethodElement))
         .setSynthetic(isSynthetic(declarationMethodElement))
         .setEnumSyntheticMethod(isEnumSyntheticMethod(declarationMethodElement))
-        .setUnusableByJsSuppressed(
-            JsInteropAnnotationUtils.isUnusableByJsSuppressed(declarationMethodElement))
         .build();
   }
 
@@ -1331,7 +1324,6 @@ class JavaEnvironment {
                     .map(TypeElement.class::cast)
                     .map(this::createTypeDeclaration)
                     .collect(toImmutableList()))
-        .setUnusableByJsSuppressed(JsInteropAnnotationUtils.isUnusableByJsSuppressed(typeElement))
         .build();
   }
 

@@ -56,8 +56,7 @@ import javax.annotation.Nullable;
 /** A usage-site reference to a declared type, i.e. a class, an interface or an enum. */
 @Visitable
 @AutoValue
-public abstract class DeclaredTypeDescriptor extends TypeDescriptor
-    implements HasUnusableByJsSuppression {
+public abstract class DeclaredTypeDescriptor extends TypeDescriptor {
 
   /** The actual type declaration this descriptor is referencing. */
   public abstract TypeDeclaration getTypeDeclaration();
@@ -168,11 +167,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return isKotlinCompanionClass()
         && TypeDescriptors.isJavaLangObject(getSuperTypeDescriptor())
         && getInterfaceTypeDescriptors().isEmpty();
-  }
-
-  @Override
-  public boolean isUnusableByJsSuppressed() {
-    return getTypeDeclaration().isUnusableByJsSuppressed();
   }
 
   @Override

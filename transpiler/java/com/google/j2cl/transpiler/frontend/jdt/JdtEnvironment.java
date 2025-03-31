@@ -248,14 +248,11 @@ public class JdtEnvironment {
     }
     boolean isFinal = isFinal(variableBinding);
     boolean isParameter = variableBinding.isParameter();
-    boolean isUnusableByJsSuppressed =
-        JsInteropAnnotationUtils.isUnusableByJsSuppressed(variableBinding);
     return Variable.newBuilder()
         .setName(name)
         .setTypeDescriptor(typeDescriptor)
         .setFinal(isFinal)
         .setParameter(isParameter)
-        .setUnusableByJsSuppressed(isUnusableByJsSuppressed)
         .setSourcePosition(sourcePosition)
         .build();
   }
@@ -815,8 +812,6 @@ public class JdtEnvironment {
                 constantValue != null ? Literal.fromValue(constantValue, thisTypeDescriptor) : null)
             .setDeclarationDescriptor(declarationFieldDescriptor)
             .setEnumConstant(variableBinding.isEnumConstant())
-            .setUnusableByJsSuppressed(
-                JsInteropAnnotationUtils.isUnusableByJsSuppressed(variableBinding))
             .build();
     cachedFieldDescriptorByVariableBinding.put(variableBinding, fieldDescriptor);
     return fieldDescriptor;
@@ -924,8 +919,6 @@ public class JdtEnvironment {
             .setSynchronized(Modifier.isSynchronized(methodBinding.getModifiers()))
             .setSynthetic(methodBinding.isSynthetic())
             .setEnumSyntheticMethod(isEnumSyntheticMethod(methodBinding))
-            .setUnusableByJsSuppressed(
-                JsInteropAnnotationUtils.isUnusableByJsSuppressed(methodBinding))
             .build();
     cachedMethodDescriptorByMethodBinding.put(methodBinding, methodDescriptor);
     return methodDescriptor;
@@ -1197,8 +1190,6 @@ public class JdtEnvironment {
                 () -> createFieldDescriptorsOrderedById(typeBinding.getDeclaredFields()))
             .setMemberTypeDeclarationsFactory(
                 () -> createTypeDeclarations(typeBinding.getDeclaredTypes()))
-            .setUnusableByJsSuppressed(
-                JsInteropAnnotationUtils.isUnusableByJsSuppressed(typeBinding))
             .build();
     cachedTypeDeclarationByTypeBinding.put(typeBinding, typeDeclaration);
     return typeDeclaration;

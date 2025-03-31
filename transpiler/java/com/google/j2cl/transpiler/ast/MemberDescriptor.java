@@ -30,7 +30,7 @@ import javax.annotation.Nullable;
 /** Abstract base class for member descriptors. */
 @Visitable
 public abstract class MemberDescriptor
-    implements HasJsNameInfo, HasReadableDescription, HasUnusableByJsSuppression, HasAnnotations {
+    implements HasJsNameInfo, HasReadableDescription, HasAnnotations {
 
   /** Represents the origin of a specific member */
   public interface Origin {

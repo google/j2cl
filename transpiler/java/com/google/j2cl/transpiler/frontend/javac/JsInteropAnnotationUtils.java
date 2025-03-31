@@ -27,12 +27,10 @@ import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_OV
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_PACKAGE_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_PROPERTY_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_TYPE_ANNOTATION_NAME;
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.SUPPRESS_WARNINGS_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.findAnnotationByName;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.getAnnotationParameterBoolean;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.getAnnotationParameterString;
 
-import java.util.List;
 import java.util.Optional;
 import javax.lang.model.AnnotatedConstruct;
 import javax.lang.model.element.AnnotationMirror;
@@ -101,17 +99,6 @@ public class JsInteropAnnotationUtils {
 
   private static boolean isJsNative(AnnotationMirror annotation) {
     return getAnnotationParameterBoolean(annotation, "isNative", false);
-  }
-
-  public static boolean isUnusableByJsSuppressed(AnnotatedConstruct annotatedConstruct) {
-    AnnotationMirror suppressWarningsAnnotation =
-        findAnnotationByName(annotatedConstruct, SUPPRESS_WARNINGS_ANNOTATION_NAME);
-    if (suppressWarningsAnnotation == null) {
-      return false;
-    }
-    List<?> suppressions =
-        AnnotationUtils.getAnnotationParameterArray(suppressWarningsAnnotation, "value");
-    return suppressions.stream().map(Object::toString).anyMatch("\"unusable-by-js\""::equals);
   }
 
   /** The namespace specified on a package, type, method or field. */
