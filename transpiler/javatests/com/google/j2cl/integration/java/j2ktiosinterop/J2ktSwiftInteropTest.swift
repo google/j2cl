@@ -49,6 +49,15 @@ final class J2ktSwiftInteropTest: XCTestCase {
     obj.genericMethod(withId: nil)
     obj.genericStringMethod(with: "")
 
+    obj.overloadedMethod(withId: nil)
+    obj.overloadedMethod(with: 1 as jint)
+    obj.overloadedMethod(withLong: 1 as jlong)
+
+    // TODO(b/407559122): Uncomment together with original Java sources.
+    // obj.overloadedMethod(with: 1 as jfloat)
+    // obj.overloadedMethod(with: 1 as jdouble)
+    // obj.overloadedMethod(with: "")
+
     obj.intField_ = obj.intField_
     J2ktiosinteropDefaultNamesCompanion.shared.staticIntField_ =
       J2ktiosinteropDefaultNamesCompanion.shared.staticIntField_
