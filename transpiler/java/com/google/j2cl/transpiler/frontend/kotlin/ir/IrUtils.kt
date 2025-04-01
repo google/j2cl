@@ -19,7 +19,6 @@ package com.google.j2cl.transpiler.frontend.kotlin.ir
 
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind
 import com.google.j2cl.transpiler.ast.Visibility
-import com.google.j2cl.transpiler.frontend.common.FrontendConstants.DO_NOT_AUTOBOX_ANNOTATION_NAME
 import com.google.j2cl.transpiler.frontend.common.FrontendConstants.WASM_ANNOTATION_NAME
 import org.jetbrains.kotlin.backend.jvm.InlineClassAbi
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
@@ -476,11 +475,6 @@ val IrDeclaration.isDeprecated: Boolean
 
 private val KOTLIN_DEPRECATED_ANNOTATION_FQ_NAME: FqName = FqName("kotlin.Deprecated")
 private val JAVA_DEPRECATED_ANNOTATION_FQ_NAME: FqName = FqName("java.lang.Deprecated")
-
-val IrValueParameter.isDoNotAutobox: Boolean
-  get() = findAnnotation(DO_NOT_AUTOBOX_ANNOTATION_FQ_NAME) != null
-
-private val DO_NOT_AUTOBOX_ANNOTATION_FQ_NAME: FqName = FqName(DO_NOT_AUTOBOX_ANNOTATION_NAME)
 
 fun IrFunction.getWasmInfo(): String? = (this as IrDeclaration).getWasmInfo()
 

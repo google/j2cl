@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.frontend.javac;
 
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.DO_NOT_AUTOBOX_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_ASYNC_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_CONSTRUCTOR_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_ENUM_ANNOTATION_NAME;
@@ -81,12 +80,6 @@ public class JsInteropAnnotationUtils {
       ExecutableElement method, int parameterIndex) {
     return findAnnotationByName(
         method.getParameters().get(parameterIndex), JS_OPTIONAL_ANNOTATION_NAME);
-  }
-
-  public static AnnotationMirror getDoNotAutoboxAnnotation(
-      ExecutableElement method, int parameterIndex) {
-    return findAnnotationByName(
-        method.getParameters().get(parameterIndex), DO_NOT_AUTOBOX_ANNOTATION_NAME);
   }
 
   public static AnnotationMirror getJsOverlayAnnotation(AnnotatedConstruct annotatedConstruct) {

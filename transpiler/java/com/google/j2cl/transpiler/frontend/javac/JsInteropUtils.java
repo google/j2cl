@@ -164,10 +164,6 @@ public final class JsInteropUtils {
     return JsInteropAnnotationUtils.getJsOptionalAnnotation(method, i) != null;
   }
 
-  public static boolean isDoNotAutobox(ExecutableElement method, int i) {
-    return JsInteropAnnotationUtils.getDoNotAutoboxAnnotation(method, i) != null;
-  }
-
   public static boolean isJsType(AnnotatedConstruct annotatedConstruct) {
     return JsInteropAnnotationUtils.getJsTypeAnnotation(annotatedConstruct) != null;
   }

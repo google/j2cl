@@ -15,6 +15,7 @@ package com.google.j2cl.transpiler;
 
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.Problems;
+import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.Library;
@@ -51,7 +52,7 @@ class J2clTranspiler {
       // TODO(b/340930928): This is a temporary hack since JsFunction is not supported in Wasm.
       TypeDeclaration.setIgnoreJsFunctionAnnotations();
       // TODO(b/178738483): Remove hack that makes it possible to ignore DoNotAutobox in Wasm.
-      MethodDescriptor.ParameterDescriptor.setIgnoreDoNotAutoboxAnnotations();
+      AstUtils.setIgnoreDoNotAutoboxAnnotations();
     } else if (options.getBackend().isClosure()) {
       MemberDescriptor.setClosureManglingPatterns();
     }

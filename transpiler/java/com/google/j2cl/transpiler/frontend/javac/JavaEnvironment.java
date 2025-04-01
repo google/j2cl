@@ -694,7 +694,6 @@ class JavaEnvironment {
               .setTypeDescriptor(parameterType)
               .setJsOptional(JsInteropUtils.isJsOptional(declarationMethodElement, i))
               .setVarargs(i == parameters.size() - 1 && declarationMethodElement.isVarArgs())
-              .setDoNotAutobox(JsInteropUtils.isDoNotAutobox(declarationMethodElement, i))
               .setAnnotations(createAnnotations(parameterAnnotations, inNullMarkedScope))
               .build());
     }

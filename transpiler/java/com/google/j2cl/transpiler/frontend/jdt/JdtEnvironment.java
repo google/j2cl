@@ -949,7 +949,6 @@ public class JdtEnvironment {
               .setTypeDescriptor(parameterTypeDescriptor)
               .setJsOptional(JsInteropUtils.isJsOptional(methodBinding, i))
               .setVarargs(i == parameterTypes.length - 1 && methodBinding.isVarargs())
-              .setDoNotAutobox(JsInteropUtils.isDoNotAutobox(methodBinding, i))
               .setAnnotations(createAnnotations(parameterAnnotations, inNullMarkedScope))
               .build());
     }

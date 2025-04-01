@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.frontend.jdt;
 
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.DO_NOT_AUTOBOX_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_ASYNC_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_CONSTRUCTOR_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_ENUM_ANNOTATION_NAME;
@@ -88,13 +87,6 @@ public class JsInteropAnnotationUtils {
       IMethodBinding methodBinding, int parameterIndex) {
     return JdtAnnotationUtils.findAnnotationBindingByName(
         methodBinding.getParameterAnnotations(parameterIndex), JS_OPTIONAL_ANNOTATION_NAME);
-  }
-
-  @Nullable
-  public static IAnnotationBinding getDoNotAutoboxAnnotation(
-      IMethodBinding methodBinding, int parameterIndex) {
-    return JdtAnnotationUtils.findAnnotationBindingByName(
-        methodBinding.getParameterAnnotations(parameterIndex), DO_NOT_AUTOBOX_ANNOTATION_NAME);
   }
 
   @Nullable

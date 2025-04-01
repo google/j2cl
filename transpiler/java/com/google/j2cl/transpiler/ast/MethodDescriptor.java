@@ -57,15 +57,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   @AutoValue
   public abstract static class ParameterDescriptor implements HasAnnotations {
 
-    // TODO(b/182341814): This is a temporary hack to be able to disable DoNotAutobox annotations
-    //   on wasm
-    private static final ThreadLocal<Boolean> ignoreDoNotAutoboxAnnotations =
-        ThreadLocal.withInitial(() -> false);
-
-    public static void setIgnoreDoNotAutoboxAnnotations() {
-      ignoreDoNotAutoboxAnnotations.set(true);
-    }
-
     public abstract TypeDescriptor getTypeDescriptor();
 
     public abstract boolean isVarargs();
@@ -74,8 +65,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public abstract ImmutableList<Annotation> getAnnotations();
 
     public abstract boolean isJsOptional();
-
-    public abstract boolean isDoNotAutobox();
 
     @Memoized
     public ParameterDescriptor toRawParameterDescriptor() {
@@ -88,8 +77,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return new AutoValue_MethodDescriptor_ParameterDescriptor.Builder()
           .setVarargs(false)
           .setAnnotations(ImmutableList.of())
-          .setJsOptional(false)
-          .setDoNotAutobox(false);
+          .setJsOptional(false);
     }
 
     private static final ThreadLocalInterner<ParameterDescriptor> interner =
@@ -106,14 +94,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
       public abstract Builder setJsOptional(boolean isJsOptional);
 
-      public abstract Builder setDoNotAutobox(boolean isDoNotAutobox);
-
       abstract ParameterDescriptor autoBuild();
 
       public ParameterDescriptor build() {
-        if (ignoreDoNotAutoboxAnnotations.get()) {
-          setDoNotAutobox(false);
-        }
         return interner.intern(autoBuild());
       }
     }

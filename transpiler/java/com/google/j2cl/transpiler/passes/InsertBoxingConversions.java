@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.j2cl.transpiler.ast.AstUtils.isAnnotatedWithDoNotAutobox;
 import static com.google.j2cl.transpiler.ast.AstUtils.isBoxableJsEnumType;
 
 import com.google.j2cl.transpiler.ast.CastExpression;
@@ -88,7 +89,7 @@ public class InsertBoxingConversions extends NormalizationPass {
           ParameterDescriptor inferredParameterDescriptor,
           ParameterDescriptor declaredParameterDescriptor,
           Expression argument) {
-        if (inferredParameterDescriptor.isDoNotAutobox()) {
+        if (isAnnotatedWithDoNotAutobox(inferredParameterDescriptor)) {
           return argument;
         }
         return maybeBox(inferredParameterDescriptor.getTypeDescriptor(), argument);

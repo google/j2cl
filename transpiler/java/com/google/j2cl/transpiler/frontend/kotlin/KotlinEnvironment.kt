@@ -57,7 +57,6 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.isAbstract
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isArrayType
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isCapturingEnclosingInstance
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isClassType
-import com.google.j2cl.transpiler.frontend.kotlin.ir.isDoNotAutobox
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isFinal
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isFunctionalInterface
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsFunction
@@ -624,7 +623,6 @@ class KotlinEnvironment(
           MethodDescriptor.ParameterDescriptor.newBuilder()
             .setTypeDescriptor(getTypeDescriptor(type))
             .setJsOptional(param.isJsOptional)
-            .setDoNotAutobox(param.isDoNotAutobox)
             .setAnnotations(createAnnotations(param))
             .setVarargs(index == parameters.lastIndex && param.isVararg)
             .build()

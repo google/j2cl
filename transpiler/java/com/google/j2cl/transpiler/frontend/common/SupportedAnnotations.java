@@ -28,6 +28,7 @@ public class SupportedAnnotations {
           "java.lang.Deprecated",
           "java.lang.FunctionalInterface",
           "java.lang.SuppressWarnings",
+          "javaemul.internal.annotations.DoNotAutobox",
           "javaemul.internal.annotations.HasNoSideEffects",
           "javaemul.internal.annotations.UncheckedCast",
           "javaemul.lang.annotations.WasAutoValue",

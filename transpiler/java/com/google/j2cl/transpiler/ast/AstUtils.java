@@ -916,9 +916,9 @@ public final class AstUtils {
     if (arguments.size() >= parametersLength) {
       for (int i = parametersLength - 1; i < arguments.size(); i++) {
         arrayLiteralBuilder.addValueExpressions(
-            // Wrap isDoNotAutobox arguments in a JsDocCastExpression so that they don't get
+            // Wrap @DoNotAutobox arguments in a JsDocCastExpression so that they don't get
             // converted by passes based on ContextRewriter.
-            varargsParameterDescriptor.isDoNotAutobox()
+            isAnnotatedWithDoNotAutobox(varargsParameterDescriptor)
                 ? JsDocCastExpression.newBuilder()
                     .setCastTypeDescriptor(varargsTypeDescriptor.getComponentTypeDescriptor())
                     .setExpression(arguments.get(i))
@@ -927,6 +927,24 @@ public final class AstUtils {
       }
     }
     return arrayLiteralBuilder.build();
+  }
+
+  // TODO(b/182341814): This is a temporary hack to be able to disable DoNotAutobox annotations
+  // on wasm
+  private static final ThreadLocal<Boolean> ignoreDoNotAutoboxAnnotations =
+      ThreadLocal.withInitial(() -> false);
+
+  public static void setIgnoreDoNotAutoboxAnnotations() {
+    ignoreDoNotAutoboxAnnotations.set(true);
+  }
+
+  /** Returns whether the parameter is annotated with {@code @DoNotAutobox}. */
+  public static boolean isAnnotatedWithDoNotAutobox(
+      MethodDescriptor.ParameterDescriptor parameter) {
+    if (ignoreDoNotAutoboxAnnotations.get()) {
+      return false;
+    }
+    return parameter.hasAnnotation("javaemul.internal.annotations.DoNotAutobox");
   }
 
   /** Whether the function is the identity function. */

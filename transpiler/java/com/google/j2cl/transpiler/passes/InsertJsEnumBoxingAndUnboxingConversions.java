@@ -66,7 +66,7 @@ public class InsertJsEnumBoxingAndUnboxingConversions extends NormalizationPass 
                   ParameterDescriptor inferredParameterDescriptor,
                   ParameterDescriptor declaredParameterDescriptor,
                   Expression argument) {
-                if (inferredParameterDescriptor.isDoNotAutobox()) {
+                if (AstUtils.isAnnotatedWithDoNotAutobox(inferredParameterDescriptor)) {
                   return argument;
                 }
                 return rewriteTypeConversionContext(
