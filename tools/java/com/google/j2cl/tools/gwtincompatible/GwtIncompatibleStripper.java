@@ -51,10 +51,14 @@ import org.eclipse.jdt.core.dom.ImportDeclaration;
 public final class GwtIncompatibleStripper {
 
   static void strip(
-      Stream<String> files, Path outputPath, Problems problems, List<String> annotationNames) {
+      Stream<String> files,
+      Path outputPath,
+      Path tempDir,
+      Problems problems,
+      List<String> annotationNames) {
     try (Output out = OutputUtils.initOutput(outputPath, problems)) {
       List<FileInfo> allPaths =
-          SourceUtils.getAllSources(files, problems)
+          SourceUtils.getAllSources(files, tempDir, problems)
               .filter(f -> f.targetPath().endsWith(".java"))
               .collect(toImmutableList());
       preprocessFiles(allPaths, out, problems, annotationNames);

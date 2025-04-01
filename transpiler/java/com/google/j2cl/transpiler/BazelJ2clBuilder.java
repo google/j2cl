@@ -173,8 +173,10 @@ final class BazelJ2clBuilder extends BazelWorker {
       problems.fatal(FatalError.INVALID_JAVA_FRONTEND, javaFrontend);
     }
 
+    Path sourceJarDir = SourceUtils.deriveDirectory(this.output, "_source_jars");
     ImmutableList<FileInfo> allSources =
-        SourceUtils.getAllSourcesFromPaths(sources.stream().map(workdir::resolve), problems)
+        SourceUtils.getAllSourcesFromPaths(
+                sources.stream().map(workdir::resolve), sourceJarDir, problems)
             .collect(toImmutableList());
     problems.abortIfCancelled();
 

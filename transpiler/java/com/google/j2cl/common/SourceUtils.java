@@ -17,6 +17,8 @@ package com.google.j2cl.common;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
+import com.google.common.io.MoreFiles;
+import com.google.common.io.RecursiveDeleteOption;
 import com.google.j2cl.common.Problems.FatalError;
 import java.io.File;
 import java.io.IOException;
@@ -67,25 +69,37 @@ public class SourceUtils {
     }
   }
 
-  private static final String TEMP_ROOT = "j2cl_sources";
+  private static final String J2CL_TEMP_ROOT = "_j2cl";
+
+  public static Path deriveDirectory(Path output, String suffix) {
+    String name = MoreFiles.getNameWithoutExtension(output);
+    return output.resolveSibling(J2CL_TEMP_ROOT).resolve(name + suffix);
+  }
+
+  private static final String ARCHIVE_ROOT = "j2cl_sources";
 
   /** Returns all individual sources where source jars extracted and flattened. */
   @Nullable
-  public static Stream<FileInfo> getAllSourcesFromPaths(Stream<Path> sources, Problems problems) {
-    return getAllSources(sources.map(Path::toString), problems);
+  public static Stream<FileInfo> getAllSourcesFromPaths(
+      Stream<Path> sources, Path sourceJarDir, Problems problems) {
+    return getAllSources(sources.map(Path::toString), sourceJarDir, problems);
   }
 
   /** Returns all individual sources where source jars extracted and flattened. */
   @Nullable
-  public static Stream<FileInfo> getAllSources(Stream<String> sources, Problems problems) {
+  public static Stream<FileInfo> getAllSources(
+      Stream<String> sources, Path sourceJarDir, Problems problems) {
+    // Make sure the directory is empty. For Bazel workers, we reuse the directory between runs for
+    // same targets (predictable directory helps with debugging). However, requires cleaning up
+    // before each run.
+    cleanupDirectory(sourceJarDir, problems);
     // Make sure to extract all of the Jars into a single temp dir so that when later sorting
     // sourceFilePaths there is no instability introduced by differences in randomly generated
     // temp dir prefixes.
     Path sourcesDir;
     try {
-      Path tempDir = Files.createTempDirectory(null);
       // Make sure we create a root so getJavaPath is still reasonable in case of no Java root.
-      sourcesDir = Files.createDirectory(tempDir.resolve(TEMP_ROOT));
+      sourcesDir = Files.createDirectory(sourceJarDir.resolve(ARCHIVE_ROOT));
     } catch (IOException e) {
       problems.fatal(FatalError.CANNOT_CREATE_TEMP_DIR, e.getMessage());
       return null;
@@ -103,6 +117,17 @@ public class SourceUtils {
                     : Stream.of(FileInfo.create(f, f.toString(), getJavaPath(f.toString()))))
         .sorted()
         .distinct();
+  }
+
+  private static void cleanupDirectory(Path directory, Problems problems) {
+    try {
+      if (Files.exists(directory)) {
+        MoreFiles.deleteRecursively(directory, RecursiveDeleteOption.ALLOW_INSECURE);
+      }
+      Files.createDirectories(directory);
+    } catch (IOException e) {
+      problems.fatal(FatalError.CANNOT_CREATE_TEMP_DIR, e.getMessage());
+    }
   }
 
   @Nullable
@@ -128,11 +153,14 @@ public class SourceUtils {
    * considered Java source root.
    */
   public static String getJavaPath(String path) {
-    String javaRelativePath = getRelativePath(path, "java", "javatests");
+    // Remove the J2CL temp root to avoid its parents affecting the java root detection.
+    String javaRelativePath = getRelativePath(path, J2CL_TEMP_ROOT);
+
+    javaRelativePath = getRelativePath(javaRelativePath, "java", "javatests");
     if (javaRelativePath.equals(path)) {
       // No regular root found. If the file was part of an archive and unzipped in a
       // temp directory, consider the temp directory as source root.
-      javaRelativePath = getRelativePath(path, TEMP_ROOT);
+      javaRelativePath = getRelativePath(path, ARCHIVE_ROOT);
     }
 
     // For super sources consider as the root for super sources.

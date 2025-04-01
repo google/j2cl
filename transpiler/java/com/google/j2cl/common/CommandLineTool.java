@@ -15,8 +15,13 @@ package com.google.j2cl.common;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import com.google.common.io.MoreFiles;
+import com.google.j2cl.common.Problems.FatalError;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Collection;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
@@ -30,6 +35,7 @@ public abstract class CommandLineTool {
 
   private final String toolName;
   protected final Problems problems;
+  protected Path tempDir;
 
   protected CommandLineTool(String toolName) {
     this(toolName, new Problems());
@@ -66,10 +72,29 @@ public abstract class CommandLineTool {
     }
 
     try {
+      setupTempDir();
       run();
     } catch (Problems.Exit e) {
       // Program aborted due to errors recorded in problems.
+    } finally {
+      cleanupTempDir();
     }
     return problems.reportAndGetExitCode(pw);
+  }
+
+  private void setupTempDir() {
+    try {
+      tempDir = Files.createTempDirectory(toolName);
+    } catch (IOException e) {
+      problems.fatal(FatalError.CANNOT_CREATE_TEMP_DIR, e.getMessage());
+    }
+  }
+
+  private void cleanupTempDir() {
+    try {
+      MoreFiles.deleteRecursively(tempDir);
+    } catch (IOException e) {
+      problems.error("Failed to clean up temp directory: %s", e.getMessage());
+    }
   }
 }

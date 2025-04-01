@@ -164,7 +164,8 @@ public final class J2clCommandLineRunner extends CommandLineTool {
     }
 
     ImmutableList<FileInfo> allSources =
-        SourceUtils.getAllSources(this.files.stream(), problems).collect(toImmutableList());
+        SourceUtils.getAllSources(this.files.stream(), tempDir.resolve("_source_jars"), problems)
+            .collect(toImmutableList());
     problems.abortIfCancelled();
 
     ImmutableList<FileInfo> allJavaSources =
@@ -182,7 +183,10 @@ public final class J2clCommandLineRunner extends CommandLineTool {
     }
 
     ImmutableList<FileInfo> allNativeSources =
-        SourceUtils.getAllSources(getPathEntries(this.nativeSourcePath).stream(), problems)
+        SourceUtils.getAllSources(
+                getPathEntries(this.nativeSourcePath).stream(),
+                tempDir.resolve("_naitve_sources"),
+                problems)
             .filter(p -> p.sourcePath().endsWith(".native.js"))
             .collect(toImmutableList());
     problems.abortIfCancelled();

@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.tools.gwtincompatible;
 
+import com.google.j2cl.common.SourceUtils;
 import com.google.j2cl.common.bazel.BazelWorker;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -45,9 +46,11 @@ final class BazelGwtIncompatibleStripper extends BazelWorker {
     if (annotations.isEmpty()) {
       annotations.add("GwtIncompatible");
     }
+    Path sourceJarDir = SourceUtils.deriveDirectory(this.outputPath, "_source_jars");
     GwtIncompatibleStripper.strip(
         files.stream().map(workdir::resolve).map(Path::toString),
         workdir.resolve(outputPath),
+        sourceJarDir,
         problems,
         annotations);
   }
