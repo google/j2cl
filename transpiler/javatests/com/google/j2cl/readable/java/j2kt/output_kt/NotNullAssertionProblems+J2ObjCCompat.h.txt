@@ -62,6 +62,14 @@ NS_INLINE void J2ktNotNullAssertionProblems_acceptGenericWithJ2ktNotNullAssertio
  [J2ktJ2ktNotNullAssertionProblemsCompanion.shared acceptGenericWithJ2ktNotNullAssertionProblems_Supplier:t1 withId:t2];
 }
 
+NS_INLINE void J2ktNotNullAssertionProblems_testNullWildcardInLambda(void) {
+ [J2ktJ2ktNotNullAssertionProblemsCompanion.shared testNullWildcardInLambda];
+}
+
+NS_INLINE id<J2ktJ2ktNotNullAssertionProblems_Supplier> J2ktNotNullAssertionProblems_wrapWithJ2ktNotNullAssertionProblems_Supplier_(id<J2ktJ2ktNotNullAssertionProblems_Supplier> supplier) {
+ return [J2ktJ2ktNotNullAssertionProblemsCompanion.shared wrapWithJ2ktNotNullAssertionProblems_Supplier:supplier];
+}
+
 @compatibility_alias J2ktNotNullAssertionProblems_Consumer J2ktJ2ktNotNullAssertionProblems_Consumer;
 
 NS_INLINE J2ktJ2ktNotNullAssertionProblems_Consumer* create_J2ktNotNullAssertionProblems_Consumer_initWithId_(id t) {

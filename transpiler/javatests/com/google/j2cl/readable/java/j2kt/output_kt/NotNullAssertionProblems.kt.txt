@@ -332,6 +332,27 @@ open class NotNullAssertionProblems {
   ) {
    val varargs_1: Array<T> = varargs as Array<T>
   }
+
+  @JvmStatic
+  @ObjCName("testNullWildcardInLambda")
+  fun testNullWildcardInLambda() {
+   val supplier: Supplier<*> = NotNullAssertionProblems.wrap<Any>(
+    Supplier {
+     return@Supplier null!!
+    },
+   )
+   supplier.getValue()
+  }
+
+  @JvmStatic
+  @ObjCName("wrap")
+  fun <T> wrap(
+   @ObjCName("withJ2ktNotNullAssertionProblems_Supplier", swiftName = "with") supplier: Supplier<out T>
+  ): Supplier<T> {
+   return Supplier {
+    return@Supplier supplier.getValue()
+   }
+  }
  }
 
  @ObjCName("J2ktJ2ktNotNullAssertionProblems_Consumer", swiftName = "J2ktNotNullAssertionProblems_Consumer", exact = true)

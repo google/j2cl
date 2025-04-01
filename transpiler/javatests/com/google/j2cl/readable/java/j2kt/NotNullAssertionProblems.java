@@ -235,4 +235,13 @@ public class NotNullAssertionProblems {
   public interface Supplier<V extends @Nullable Object> {
     V getValue();
   }
+
+  public static void testNullWildcardInLambda() {
+    Supplier<?> supplier = wrap(() -> null);
+    supplier.getValue();
+  }
+
+  public static <T extends @Nullable Object> Supplier<T> wrap(Supplier<? extends T> supplier) {
+    return () -> supplier.getValue();
+  }
 }
