@@ -290,7 +290,9 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
     typeDeclaration.toDescriptor().run { collectionTypeDescriptors.any { isAssignableTo(it) } }
 
   private fun shouldRender(typeDeclaration: TypeDeclaration): Boolean =
-    shouldRenderDescriptor(typeDeclaration) && !typeDeclaration.isProtobuf
+    shouldRenderDescriptor(typeDeclaration) &&
+      !typeDeclaration.isProtobuf &&
+      !typeDeclaration.isAnnotation
 
   private fun shouldRenderDescriptor(typeDeclaration: TypeDeclaration): Boolean =
     typeDeclaration.visibility.isPublic &&
