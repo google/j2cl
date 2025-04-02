@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangVoid;
+
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AssertStatement;
@@ -64,7 +66,8 @@ public final class InsertNotNullAssertionsOnNullabilityMismatch extends Normaliz
                 }
 
                 return !inferredTypeDescriptor.canBeNull() || !declaredTypeDescriptor.canBeNull()
-                    ? insertNotNullAssertionIfNeeded(getSourcePosition(), expression)
+                    ? insertNotNullAssertionIfNeeded(
+                        getSourcePosition(), expression, inferredTypeDescriptor)
                     : expression;
               }
 
@@ -78,7 +81,8 @@ public final class InsertNotNullAssertionsOnNullabilityMismatch extends Normaliz
                   TypeDescriptor inferredTypeDescriptor,
                   TypeDescriptor declaredTypeDescriptor,
                   Expression expression) {
-                return insertNotNullAssertionIfNeeded(getSourcePosition(), expression);
+                return insertNotNullAssertionIfNeeded(
+                    getSourcePosition(), expression, inferredTypeDescriptor);
               }
             }));
 
@@ -99,13 +103,23 @@ public final class InsertNotNullAssertionsOnNullabilityMismatch extends Normaliz
   }
 
   private Expression insertNotNullAssertionIfNeeded(
-      SourcePosition sourcePosition, Expression expression) {
+      SourcePosition sourcePosition, Expression expression, TypeDescriptor inferredTypeDescriptor) {
     if (isInferredAsNonNullInKotlin(expression)) {
       // Don't insert null-check for expressions which are known to be non-null, regardless of
       // nullability annotations.
       return expression;
     }
-    if (expression instanceof NullLiteral) {
+
+    if (isJavaLangVoid(inferredTypeDescriptor)) {
+      getProblems()
+          .error(
+              sourcePosition,
+              "Non-null assertion applied to java.lang.Void expression. Make sure that Void types"
+                  + " appearing in the surrounding code are annotated @Nullable. If Void type is"
+                  + " not specified explicitly (in example in method type arguments), try"
+                  + " specifying it explicitly, e.g.: Futures.<@Nullable Void, @Nullable"
+                  + " Void>transform(...).");
+    } else if (expression instanceof NullLiteral) {
       getProblems().warning(sourcePosition, "Non-null assertion applied to null.");
     }
 
