@@ -57,7 +57,7 @@ if [[ -z "$lib_version" ]]; then
   exit 1
 fi
 
-if [ ! -f "WORKSPACE" ]; then
+if [ ! -f "MODULE.bazel" ]; then
   echo "Error: should be run from the root of the Bazel repository"
   exit 1
 fi
