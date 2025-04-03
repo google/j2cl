@@ -24,7 +24,7 @@ fun String.camelCaseStartsWith(prefix: String): Boolean =
 
 /** Returns title-cased version of this string. */
 val String.titleCased: String
-  get() = replaceFirstChar { it.toUpperCase() }
+  get() = replaceFirstChar { it.uppercase() }
 
 /** Returns this string in single quotes. */
 val String.inSingleQuotes: String
