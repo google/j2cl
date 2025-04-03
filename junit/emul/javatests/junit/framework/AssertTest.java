@@ -21,7 +21,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 @RunWith(JUnit4.class)
-@SuppressWarnings("SelfAssertion")
+@SuppressWarnings({"SelfAssertion", "TestExceptionChecker"})
 public class AssertTest {
 
   private final Object obj1 = Collections.nCopies(1, "data");

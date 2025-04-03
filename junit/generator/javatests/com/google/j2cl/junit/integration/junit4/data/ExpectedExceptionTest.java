@@ -24,6 +24,7 @@ import org.junit.runners.MethodSorters;
 
 /** TestCase used for integration testing for j2cl JUnit support. */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@SuppressWarnings("TestExceptionChecker")
 @RunWith(JUnit4.class)
 public class ExpectedExceptionTest {
 

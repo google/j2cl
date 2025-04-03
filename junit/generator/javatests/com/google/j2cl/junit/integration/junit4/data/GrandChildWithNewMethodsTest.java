@@ -58,6 +58,7 @@ public class GrandChildWithNewMethodsTest extends ChildWithNewMethodsTest {
   }
 
   @Override
+  @SuppressWarnings("TestExceptionChecker")
   @Test(expected = NullPointerException.class)
   public void testChild2() {
     TestCaseLogger.log("testGrandChild");

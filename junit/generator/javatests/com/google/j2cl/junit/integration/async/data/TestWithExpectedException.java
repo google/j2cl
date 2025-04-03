@@ -24,6 +24,7 @@ import org.junit.runner.RunWith;
 @RunWith(AsyncTestRunner.class)
 public class TestWithExpectedException {
 
+  @SuppressWarnings("TestExceptionChecker")
   @Test(timeout = 200, expected = Exception.class)
   public Thenable test() {
     return null;
