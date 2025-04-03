@@ -51,10 +51,9 @@ final class J2ObjCSwiftInteropTest: XCTestCase {
     obj.overloadedMethod(with: 1 as jint)
     obj.overloadedMethod(withLong: 1 as jlong)
 
-    // TODO(b/407559122): Uncomment together with original Java sources.
-    // obj.overloadedMethod(with: 1 as jfloat)
-    // obj.overloadedMethod(with: 1 as jdouble)
-    // obj.overloadedMethod(with: "")
+    obj.overloadedMethod(with: 1 as jfloat)
+    obj.overloadedMethod(with: 1 as jdouble)
+    obj.overloadedMethod(with: "")
 
     // Not exposed in Swift
     //obj.intField_ = obj.intField_

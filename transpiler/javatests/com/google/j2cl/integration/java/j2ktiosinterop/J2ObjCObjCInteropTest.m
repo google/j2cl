@@ -51,10 +51,9 @@
   [obj overloadedMethodWithInt:1];
   [obj overloadedMethodWithLong:1];
 
-  // TODO(b/407559122): Uncomment together with original Java sources.
-  // [obj overloadedMethodWithFloat:1];
-  // [obj overloadedMethodWithDouble:1];
-  // [obj overloadedMethodWithNSString:@""];
+  [obj overloadedMethodWithFloat:1];
+  [obj overloadedMethodWithDouble:1];
+  [obj overloadedMethodWithNSString:@""];
 
   obj->intField_ = obj->intField_ + 1;
 

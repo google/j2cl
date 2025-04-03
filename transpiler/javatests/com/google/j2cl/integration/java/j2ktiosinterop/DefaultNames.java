@@ -70,12 +70,11 @@ public final class DefaultNames {
 
   public void overloadedMethod(long l) {}
 
-  // TODO(b/407559122): Uncomment when fixed.
-  // The overloads below fail when building with J2KT:
-  //  error: name is mangled when generating Objective-C header
-  // public void overloadedMethod(float f) {}
-  // public void overloadedMethod(double d) {}
-  // public void overloadedMethod(String s) {}
+  public void overloadedMethod(float f) {}
+
+  public void overloadedMethod(double d) {}
+
+  public void overloadedMethod(String s) {}
 
   public int intField;
 
