@@ -78,13 +78,13 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
   }
 
   public void testNonNullMarkedWarnings() {
-    newTranspilerTester("test.Main", "class Main {}")
+    newTranspilerTester("test.Main", "class Main { void m() {} }")
         .assertTranspileSucceeds()
         .assertWarningsWithSourcePosition(
             "Warning:Main.java:2: Type 'test.Main' must be directly or indirectly @NullMarked.");
 
-    newTranspilerTester("foo.A", "class A {}")
-        .addCompilationUnit("bar.B", "class B {}")
+    newTranspilerTester("foo.A", "class A { void m() {} }")
+        .addCompilationUnit("bar.B", "class B { void m() {} }")
         .addNullMarkPackageInfo("foo")
         .assertTranspileSucceeds()
         .assertWarningsWithSourcePosition(
@@ -96,13 +96,23 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
     // Annotations are tolerated as not being NullMarked.
     newTranspilerTester("foo.A", "@interface A {}").assertTranspileSucceeds();
 
+    // Empty classes are tolerated as not being NullMarked.
+    newTranspilerTester("foo.A", "class A {}").assertTranspileSucceeds();
+
+    // But the empty class cannot have a supertype.
+    newTranspilerTester("foo.A", "class A {}")
+        .addCompilationUnit("foo.B", "class B extends A {}")
+        .assertTranspileSucceeds()
+        .assertWarningsWithSourcePosition(
+            "Warning:B.java:2: Type 'foo.B' must be directly or indirectly @NullMarked.");
+
     newTranspilerTester(
             "test.Main",
             "class Outer {",
             "  @org.jspecify.annotations.NullMarked",
-            "  class Inner {}",
+            "  class Inner { void m() {} }",
             "  @org.jspecify.annotations.NullMarked",
-            "  static class StaticInner {}",
+            "  static class StaticInner { void m() {} }",
             "}")
         .addCompilationUnit(
             "org.jspecify.annotations.NullMarked", "public @interface NullMarked {}")

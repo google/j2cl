@@ -139,17 +139,40 @@ public final class J2ktRestrictionsChecker {
             if (isFromJ2clReadableOrIntegrationTest(type)) {
               return;
             }
-            // Allow tolerance of some types not being null marked:
-            //   - Annotations are not propagated by J2KT anyway.
-            //   - Enums
-            if (!type.getDeclaration().isNullMarked()
-                && !type.getDeclaration().isAnnotation()
-                && !type.isEnum()) {
+
+            if (!type.getDeclaration().isNullMarked() && !isExemptFromNullMarked(type)) {
               problems.warning(
                   type.getSourcePosition(),
                   "Type '%s' must be directly or indirectly @NullMarked.",
                   type.getDeclaration().getQualifiedSourceName());
             }
+          }
+
+          private boolean isExemptFromNullMarked(Type type) {
+            // Annotations are not propagated by J2KT anyway.
+            if (type.getDeclaration().isAnnotation()) {
+              return true;
+            }
+
+            // We're pretty relaxed about enums as they generally don't have nullness issues.
+            if (type.getDeclaration().isEnum()) {
+              return true;
+            }
+
+            // Exclude empty marker classes. These generally only exist to drive code generation
+            // and don't have any practical use on their own.
+            if (type.getMembers().isEmpty()
+                && type.getTypes().isEmpty()
+                && hasNoExplicitSuperType(type)) {
+              return true;
+            }
+
+            return false;
+          }
+
+          private boolean hasNoExplicitSuperType(Type type) {
+            return type.getSuperTypeDescriptor() == null
+                || TypeDescriptors.isJavaLangObject(type.getSuperTypeDescriptor());
           }
 
           private void checkSuperTypeVisibilities(Type type) {
