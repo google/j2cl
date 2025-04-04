@@ -38,6 +38,18 @@ NS_INLINE void J2ktNotNullAssertionProblems_testUnsafeNull(void) {
  [J2ktJ2ktNotNullAssertionProblemsCompanion.shared testUnsafeNull];
 }
 
+NS_INLINE void J2ktNotNullAssertionProblems_testNullableAcceptNullable2VarargWithId_(id nonNull) {
+ [J2ktJ2ktNotNullAssertionProblemsCompanion.shared testNullableAcceptNullable2VarargWithId:nonNull];
+}
+
+NS_INLINE void J2ktNotNullAssertionProblems_testNonNullAcceptNullable2VarargWithId_(id nonNull) {
+ [J2ktJ2ktNotNullAssertionProblemsCompanion.shared testNonNullAcceptNullable2VarargWithId:nonNull];
+}
+
+NS_INLINE void J2ktNotNullAssertionProblems_testNonNullAcceptNonNull2VarargWithId_(id nonNull) {
+ [J2ktJ2ktNotNullAssertionProblemsCompanion.shared testNonNullAcceptNonNull2VarargWithId:nonNull];
+}
+
 NS_INLINE id J2ktNotNullAssertionProblems_getUnsafeNull(void) {
  return [J2ktJ2ktNotNullAssertionProblemsCompanion.shared getUnsafeNull];
 }

@@ -167,6 +167,21 @@ public class NotNullAssertionProblems {
     }
   }
 
+  public static <C extends @Nullable Object> void testNullableAcceptNullable2Vararg(C nonNull) {
+    C localNonNull = nonNull;
+    acceptNullable2Vararg(localNonNull, nonNull, nonNull);
+  }
+
+  public static <C> void testNonNullAcceptNullable2Vararg(C nonNull) {
+    C localNonNull = nonNull;
+    acceptNullable2Vararg(localNonNull, nonNull, nonNull);
+  }
+
+  public static <C> void testNonNullAcceptNonNull2Vararg(C nonNull) {
+    C localNonNull = nonNull;
+    acceptNonNull2Vararg(localNonNull, nonNull, nonNull);
+  }
+
   public static <T extends @Nullable Object> T getUnsafeNull() {
     return null;
   }
@@ -197,6 +212,10 @@ public class NotNullAssertionProblems {
   public static <T extends @Nullable Object> void acceptGeneric(Supplier<T> t1, T t2) {}
 
   public static <T extends @Nullable Object> void acceptVararg(T... varargs) {}
+
+  public static <T extends @Nullable Object> void acceptNullable2Vararg(T t1, T t2, T... varargs) {}
+
+  public static <T> void acceptNonNull2Vararg(T t1, T t2, T... varargs) {}
 
   public static class Consumer<T extends @Nullable Object> {
     public Consumer(T t) {}

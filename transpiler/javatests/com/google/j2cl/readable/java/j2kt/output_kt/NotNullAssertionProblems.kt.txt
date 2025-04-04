@@ -266,6 +266,45 @@ open class NotNullAssertionProblems {
   }
 
   @JvmStatic
+  @ObjCName("testNullableAcceptNullable2Vararg")
+  fun <C> testNullableAcceptNullable2Vararg(
+   @ObjCName("withId") nonNull: C
+  ) {
+   val localNonNull: C? = nonNull
+   NotNullAssertionProblems.acceptNullable2Vararg<C>(
+    localNonNull as C,
+    nonNull,
+    nonNull,
+   )
+  }
+
+  @JvmStatic
+  @ObjCName("testNonNullAcceptNullable2Vararg")
+  fun <C: Any> testNonNullAcceptNullable2Vararg(
+   @ObjCName("withId") nonNull: C
+  ) {
+   val localNonNull: C? = nonNull
+   NotNullAssertionProblems.acceptNullable2Vararg<C>(
+    localNonNull!!,
+    nonNull,
+    nonNull,
+   )
+  }
+
+  @JvmStatic
+  @ObjCName("testNonNullAcceptNonNull2Vararg")
+  fun <C: Any> testNonNullAcceptNonNull2Vararg(
+   @ObjCName("withId") nonNull: C
+  ) {
+   val localNonNull: C? = nonNull
+   NotNullAssertionProblems.acceptNonNull2Vararg<C>(
+    localNonNull!!,
+    nonNull,
+    nonNull,
+   )
+  }
+
+  @JvmStatic
   @ObjCName("getUnsafeNull")
   fun <T> getUnsafeNull(): T {
    return null as T
@@ -328,6 +367,26 @@ open class NotNullAssertionProblems {
   @JvmStatic
   @ObjCName("acceptVararg")
   fun <T> acceptVararg(
+   vararg @ObjCName("withNSObjectArray") varargs: T
+  ) {
+   val varargs_1: Array<T> = varargs as Array<T>
+  }
+
+  @JvmStatic
+  @ObjCName("acceptNullable2Vararg")
+  fun <T> acceptNullable2Vararg(
+   @ObjCName("withId") t1: T,
+   @ObjCName("withId") t2: T,
+   vararg @ObjCName("withNSObjectArray") varargs: T
+  ) {
+   val varargs_1: Array<T> = varargs as Array<T>
+  }
+
+  @JvmStatic
+  @ObjCName("acceptNonNull2Vararg")
+  fun <T: Any> acceptNonNull2Vararg(
+   @ObjCName("withId") t1: T,
+   @ObjCName("withId") t2: T,
    vararg @ObjCName("withNSObjectArray") varargs: T
   ) {
    val varargs_1: Array<T> = varargs as Array<T>

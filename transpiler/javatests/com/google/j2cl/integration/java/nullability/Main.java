@@ -247,11 +247,31 @@ public class Main {
     return getUnsafeNull();
   }
 
+  public static <C extends @Nullable Object> void testNullableAcceptNullable2Vararg(C nonNull) {
+    C localNonNull = nonNull;
+    acceptNullable2Varargs(localNonNull, nonNull, nonNull);
+  }
+
+  public static <C> void testNonNullAcceptNullable2Vararg(C nonNull) {
+    C localNonNull = nonNull;
+    acceptNullable2Varargs(localNonNull, nonNull, nonNull);
+  }
+
+  public static <C> void testNonNullAcceptNonNull2Vararg(C nonNull) {
+    C localNonNull = nonNull;
+    acceptNonNull2Varargs(localNonNull, nonNull, nonNull);
+  }
+
   private static <T extends @Nullable Object> void accept1(T unused) {}
 
   private static <T extends @Nullable Object> void accept2(T unused1, T unused2) {}
 
   private static <T extends @Nullable Object> void acceptVarargs(T... unused) {}
+
+  private static <T extends @Nullable Object> void acceptNullable2Varargs(
+      T unused1, T unused2, T... unused) {}
+
+  private static <T> void acceptNonNull2Varargs(T unused1, T unused2, T... unused) {}
 
   private static <V extends @Nullable Object> void acceptSupplier(Supplier<V> unused) {}
 
