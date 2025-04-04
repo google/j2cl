@@ -82,10 +82,8 @@ public class RewriteAnnotationTypesJ2kt extends NormalizationPass {
       }
     } else if (typeDescriptor instanceof ArrayTypeDescriptor) {
       ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
-      return ArrayTypeDescriptor.Builder.from(arrayTypeDescriptor)
-          .setComponentTypeDescriptor(
-              rewriteAnnotationTypeDescriptor(arrayTypeDescriptor.getComponentTypeDescriptor()))
-          .build();
+      return arrayTypeDescriptor.withComponentTypeDescriptor(
+          rewriteAnnotationTypeDescriptor(arrayTypeDescriptor.getComponentTypeDescriptor()));
     } else if (typeDescriptor instanceof TypeVariable) {
       TypeVariable typeVariable = (TypeVariable) typeDescriptor;
       if (typeVariable.isWildcard()) {

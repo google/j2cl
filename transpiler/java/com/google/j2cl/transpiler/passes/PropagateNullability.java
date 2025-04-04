@@ -374,10 +374,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
             arrayTypeDescriptor.getComponentTypeDescriptor(),
             arrayLiteral.getValueExpressions().stream().map(Expression::getTypeDescriptor));
     return arrayLiteral.toBuilder()
-        .setTypeDescriptor(
-            ArrayTypeDescriptor.Builder.from(arrayTypeDescriptor)
-                .setComponentTypeDescriptor(componentTypeDescriptor)
-                .build())
+        .setTypeDescriptor(arrayTypeDescriptor.withComponentTypeDescriptor(componentTypeDescriptor))
         .build();
   }
 
@@ -639,15 +636,13 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
       ArrayTypeDescriptor declarationArrayTypeDescriptor =
           (ArrayTypeDescriptor) declarationTypeDescriptor;
       ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
-      return ArrayTypeDescriptor.Builder.from(arrayTypeDescriptor)
-          .setComponentTypeDescriptor(
-              reparameterize(
-                  declarationArrayTypeDescriptor.getComponentTypeDescriptor(),
-                  arrayTypeDescriptor.getComponentTypeDescriptor(),
-                  typeParameterDescriptor,
-                  typeArgumentDescriptor,
-                  seen))
-          .build();
+      return arrayTypeDescriptor.withComponentTypeDescriptor(
+          reparameterize(
+              declarationArrayTypeDescriptor.getComponentTypeDescriptor(),
+              arrayTypeDescriptor.getComponentTypeDescriptor(),
+              typeParameterDescriptor,
+              typeArgumentDescriptor,
+              seen));
     } else if (declarationTypeDescriptor instanceof DeclaredTypeDescriptor) {
       DeclaredTypeDescriptor declarationDeclaredTypeDescriptor =
           (DeclaredTypeDescriptor) declarationTypeDescriptor;

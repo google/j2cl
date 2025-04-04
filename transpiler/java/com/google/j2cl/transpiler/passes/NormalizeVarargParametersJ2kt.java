@@ -55,11 +55,9 @@ public class NormalizeVarargParametersJ2kt extends NormalizationPass {
             }
 
             varargParameter.setTypeDescriptor(
-                ArrayTypeDescriptor.Builder.from(varargTypeDescriptor)
-                    .setComponentTypeDescriptor(
-                        TypeVariable.createWildcardWithUpperBound(
-                            varargTypeDescriptor.getComponentTypeDescriptor()))
-                    .build());
+                varargTypeDescriptor.withComponentTypeDescriptor(
+                    TypeVariable.createWildcardWithUpperBound(
+                        varargTypeDescriptor.getComponentTypeDescriptor())));
           }
         });
   }

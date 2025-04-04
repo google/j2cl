@@ -118,13 +118,11 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
       return typeDescriptor;
     } else if (typeDescriptor instanceof ArrayTypeDescriptor) {
       ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
-      return ArrayTypeDescriptor.Builder.from(arrayTypeDescriptor)
-          .setComponentTypeDescriptor(
-              projectArgumentCaptures(
-                  arrayTypeDescriptor.getComponentTypeDescriptor(),
-                  getArrayComponentTypeParameterDescriptor(),
-                  seen))
-          .build();
+      return arrayTypeDescriptor.withComponentTypeDescriptor(
+          projectArgumentCaptures(
+              arrayTypeDescriptor.getComponentTypeDescriptor(),
+              getArrayComponentTypeParameterDescriptor(),
+              seen));
     } else if (typeDescriptor instanceof DeclaredTypeDescriptor) {
       DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
       return declaredTypeDescriptor.withTypeArguments(

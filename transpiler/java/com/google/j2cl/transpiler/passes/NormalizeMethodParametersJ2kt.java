@@ -238,10 +238,8 @@ public class NormalizeMethodParametersJ2kt extends NormalizationPass {
 
     // At this point, component type descriptor is assumed to be "out X".
     TypeDescriptor rewrittenTypeDescriptor =
-        ArrayTypeDescriptor.Builder.from(arrayTypeDescriptor)
-            .setComponentTypeDescriptor(
-                ((TypeVariable) componentTypeDescriptor).getUpperBoundTypeDescriptor())
-            .build();
+        arrayTypeDescriptor.withComponentTypeDescriptor(
+            ((TypeVariable) componentTypeDescriptor).getUpperBoundTypeDescriptor());
 
     return new RewriteItem(varargVariable, rewrittenTypeDescriptor);
   }

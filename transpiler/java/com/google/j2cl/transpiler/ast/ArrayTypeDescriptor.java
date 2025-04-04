@@ -209,7 +209,7 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
     TypeDescriptor component = getComponentTypeDescriptor();
     TypeDescriptor newComponent = replaceTypeDescriptors(component, fn, seen);
     if (component != newComponent) {
-      return Builder.from(this).setComponentTypeDescriptor(newComponent).build();
+      return withComponentTypeDescriptor(newComponent);
     }
     return this;
   }
@@ -221,11 +221,9 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
     if (AstUtils.isIdentityFunction(replacementTypeArgumentByTypeVariable)) {
       return this;
     }
-    return toBuilder()
-        .setComponentTypeDescriptor(
-            getComponentTypeDescriptor()
-                .specializeTypeVariables(replacementTypeArgumentByTypeVariable, seen))
-        .build();
+    return withComponentTypeDescriptor(
+        getComponentTypeDescriptor()
+            .specializeTypeVariables(replacementTypeArgumentByTypeVariable, seen));
   }
 
   @Override
@@ -254,6 +252,12 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
   @Override
   boolean hasReferenceTo(TypeVariable typeVariable, ImmutableSet<TypeVariable> seen) {
     return getComponentTypeDescriptor().hasReferenceTo(typeVariable, seen);
+  }
+
+  public ArrayTypeDescriptor withComponentTypeDescriptor(TypeDescriptor typeDescriptor) {
+    return ArrayTypeDescriptor.Builder.from(this)
+        .setComponentTypeDescriptor(typeDescriptor)
+        .build();
   }
 
   @Override
