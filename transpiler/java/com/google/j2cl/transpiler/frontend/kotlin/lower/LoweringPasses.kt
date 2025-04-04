@@ -21,6 +21,7 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.IntrinsicMethods
 import com.google.j2cl.transpiler.frontend.kotlin.ir.IrProviderFromPublicSignature
 import com.google.j2cl.transpiler.frontend.kotlin.ir.JvmIrDeserializerImpl
 import com.google.j2cl.transpiler.frontend.kotlin.ir.populate
+import com.google.j2cl.transpiler.frontend.kotlin.lower.SmuggledJvmLoweringPasses.*
 import org.jetbrains.kotlin.backend.common.BodyLoweringPass
 import org.jetbrains.kotlin.backend.common.CommonBackendContext
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
@@ -61,7 +62,7 @@ private val loweringPhase = loweringPhase {
   // members into it. This is needed to ensure the serialized IR for top-level inline functions
   // can be deserialized correctly. (The serialized IR being part of the metadata of the enclosing
   // class after Kotlin/JVM compilation.)
-  moduleLowering(::ExternalPackageParentPatcherLowering)
+  moduleLowering(externalPackageParentPatcherLoweringFactory)
   // Remove assignments to definedExternally.
   moduleLowering(::DefinedExternallyLowering)
   // Remove typealias declarations from the IR.
@@ -70,7 +71,7 @@ private val loweringPhase = loweringPhase {
   moduleLowering(::FileClassLowering)
   // Invent names for local classes and anonymous objects. Later passes may require all classes
   // to have a name for computing function signature.
-  perFileLowering(::JvmInventNamesForLocalClasses)
+  perFileLowering(jvmInventNamesForLocalClassesFactory)
   // Transform all callable reference (including defaults) to inline lambdas, mark inline lambdas
   // for later passes.
   perFileLowering(::J2clInlineCallableReferenceToLambdaPhase)
@@ -78,7 +79,7 @@ private val loweringPhase = loweringPhase {
   perFileLowering(::ArrayConstructorLowering)
   // Create nullable backing fields and insert nullability checks for lateinit properties and
   // variables.
-  perFileLowering(::JvmLateinitLowering)
+  perFileLowering(jvmLateinitLoweringFactory)
   // Patch calls to `throwUninitializedPropertyAccessException()` to match our definition of this
   // function.
   perFileLowering(::PatchThrowUninitializedPropertyExceptionCalls)
@@ -123,13 +124,13 @@ private val loweringPhase = loweringPhase {
   perFileLowering(::MoveOrCopyCompanionObjectFieldsLowering)
   // Inline property accessors where the field can be referenced directly
   // (ex. private properties).
-  perFileLowering(::JvmPropertiesLowering)
+  perFileLowering(jvmPropertiesLoweringFactory)
   // Make IrGetField/IrSetField to objects' fields point to the static versions
   perFileLowering(::RemapObjectFieldAccesses)
   // Extract local functions and move them up to the closest enclosing type. Rewrite local
   // function calls accordingly.
   perFileLowering(::LocalFunctionLowering)
-  perFileLowering(::JvmLocalClassPopupLowering)
+  perFileLowering(jvmLocalClassPopupLoweringFactory)
   // Adds stub methods to the implementations of the read-only collection types to properly
   // implement the Java collection APIs.
   perFileLowering(::CollectionStubMethodLowering)
@@ -141,7 +142,7 @@ private val loweringPhase = loweringPhase {
   // Drops field initializers when they initialize the field to it's default value.
   perFileLowering(::RemoveFieldInitializerToDefault)
   // Move code from object init blocks and static field initializers to a new <clinit> function.
-  perFileLowering(::StaticInitializersLowering)
+  perFileLowering(staticInitializersLoweringFactory)
   // Lower field/block initializers into the primary kotlin constructor.
   // TODO(b/233909092): Only lower classes that contain primary ctors to avoid duplicating
   // code in secondary ctors.
@@ -159,7 +160,7 @@ private val loweringPhase = loweringPhase {
   // Generate synthetic stubs for functions with default parameter values
   perFileLowering(::JvmDefaultArgumentStubGenerator)
   // Transform calls with default arguments into calls to stubs
-  perFileLowering(::JvmDefaultParameterInjector)
+  perFileLowering(jvmDefaultParameterInjectorFactory)
   // Replace default values arguments with stubs
   perFileLowering { j2clBackendContext: J2clBackendContext ->
     DefaultParameterCleaner(
@@ -213,7 +214,7 @@ private val loweringPhase = loweringPhase {
   // Ensures that any top-level referenced members from another compilation unit have an enclosing
   // class. The inliner can introduce references to top-level members from another compilation unit
   // that were not referenced before.
-  moduleLowering(::ExternalPackageParentPatcherLowering)
+  moduleLowering(externalPackageParentPatcherLoweringFactory)
   // Cleanup the unreachable code that exist after the statement-like-expression
   // transformation to make the IrTree valid.
   perFileLowering(::CleanupLowering)

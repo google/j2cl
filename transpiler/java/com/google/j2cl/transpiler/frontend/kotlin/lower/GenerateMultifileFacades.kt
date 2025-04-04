@@ -47,6 +47,7 @@ import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 import org.jetbrains.kotlin.load.java.JavaDescriptorVisibilities
 import org.jetbrains.kotlin.name.JvmStandardClassIds
 import org.jetbrains.kotlin.name.JvmStandardClassIds.JVM_SYNTHETIC_ANNOTATION_FQ_NAME
+import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.resolve.jvm.diagnostics.JvmBackendErrors
 
 /**
@@ -281,7 +282,12 @@ private fun IrSimpleFunction.createMultifileDelegateIfNeeded(
 
   if (
     DescriptorVisibilities.isPrivate(originalVisibility) ||
-      name == StaticInitializersLowering.clinitName ||
+      // MODIFIED BY GOOGLE
+      // Inline the value as we don't have visibility to it.
+      // Original code:
+      // name == StaticInitializersLowering.clinitName ||
+      name == Name.special("<clinit>") ||
+      // END OF MODIFICATIONS
       origin == IrDeclarationOrigin.SYNTHETIC_ACCESSOR ||
       origin == IrDeclarationOrigin.INLINE_LAMBDA ||
       origin == IrDeclarationOrigin.LOCAL_FUNCTION_FOR_LAMBDA ||
