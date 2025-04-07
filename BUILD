@@ -78,3 +78,12 @@ bool_flag(
     name = "experimental_enable_j2kt_web",
     build_setting_default = False,
 )
+
+# Flag to enable profiling for particular targets.
+# Example usage:
+#   blaze build <my_binary> --//:profiling_filter=<target_pattern>
+#   pprof --flame blaze-bin/<target>.profile
+string_flag(
+    name = "profiling_filter",
+    build_setting_default = "<disabled>",
+)

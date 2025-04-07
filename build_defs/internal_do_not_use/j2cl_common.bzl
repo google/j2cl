@@ -298,6 +298,8 @@ def _j2cl_transpile(
 
     classpath = depset(transitive = [bootclasspath] + compilation_classpath)
 
+    outputs = [output_dir, library_info_output]
+
     args = ctx.actions.args()
     args.use_param_file("@%s", use_always = True)
     args.set_param_file_format("multiline")
@@ -312,6 +314,11 @@ def _j2cl_transpile(
     args.add("-libraryinfooutput", library_info_output)
     args.add("-experimentalJavaFrontend", ctx.attr._java_frontend[BuildSettingInfo].value)
     args.add("-experimentalBackend", backend)
+
+    if ctx.attr._profiling_filter[BuildSettingInfo].value in str(ctx.label):
+        profile_output = ctx.actions.declare_file(ctx.label.name + ".profile")
+        outputs.append(profile_output)
+        args.add("-profileOutput", profile_output)
 
     if backend == "WASM_MODULAR":
         # Add a prefix to where the Java source files will be located relative to the source map.
@@ -337,7 +344,7 @@ def _j2cl_transpile(
         # included in the srcjars of srcs. However, params.add_all requires them
         # to be inputs in order to be properly expanded out into params.
         inputs = depset(srcs + kt_common_srcs + jdk_system, transitive = [classpath]),
-        outputs = [output_dir, library_info_output],
+        outputs = outputs,
         executable = ctx.executable._j2cl_transpiler,
         arguments = [args],
         env = dict(LANG = "en_US.UTF-8"),
@@ -400,6 +407,9 @@ J2CL_TOOLCHAIN_ATTRS = {
     ),
     "_java_frontend": attr.label(
         default = Label("//:experimental_java_frontend"),
+    ),
+    "_profiling_filter": attr.label(
+        default = Label("//:profiling_filter"),
     ),
     "_zip": attr.label(
         executable = True,

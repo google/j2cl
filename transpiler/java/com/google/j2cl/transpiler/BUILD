@@ -1,5 +1,5 @@
 load("@rules_java//java:defs.bzl", "java_binary", "java_library")
-load("//transpiler/java/com/google/j2cl/common/bazel:jvm_flags.bzl", "JVM_FLAGS")
+load(":compiler_java_binary.bzl", "compiler_java_binary")
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],
@@ -103,33 +103,30 @@ java_library(
     ],
 )
 
-java_binary(
+compiler_java_binary(
     name = "BazelJ2clBuilder",
-    jvm_flags = JVM_FLAGS,
     main_class = "com.google.j2cl.transpiler.BazelJ2clBuilder",
-    use_launcher = False,
-    visibility = ["//build_defs:toolchain_users"],
     runtime_deps = [":bazelbuilder_lib"],
 )
 
-java_binary(
+compiler_java_binary(
     name = "BazelJ2wasmExportGenerator",
-    jvm_flags = JVM_FLAGS,
     main_class = "com.google.j2cl.transpiler.BazelJ2wasmExportsGenerator",
-    use_launcher = False,
-    visibility = ["//build_defs:toolchain_users"],
     runtime_deps = [":bazelwasmexportgenerator_lib"],
 )
 
-java_binary(
+compiler_java_binary(
     name = "BazelJ2wasmBundler",
-    jvm_flags = JVM_FLAGS + [
+    extra_jvm_flags = [
         # TODO(b/404243318): Remove this flag once a better solution is found.
         # Limit the heap size to 11GB to avoid OOMs.
         "-Xmx10g",
     ],
     main_class = "com.google.j2cl.transpiler.BazelJ2wasmBundler",
-    use_launcher = False,
-    visibility = ["//build_defs:toolchain_users"],
     runtime_deps = [":bazelj2wasmbundler_lib"],
+)
+
+config_setting(
+    name = "profiling_disabled",
+    flag_values = {"//:profiling_filter": "<disabled>"},
 )

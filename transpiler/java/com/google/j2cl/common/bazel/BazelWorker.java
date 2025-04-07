@@ -23,6 +23,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.io.Files;
 import com.google.j2cl.common.Problems;
+import com.google.j2cl.common.bazel.profiler.Profiler;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -33,6 +34,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
+import org.kohsuke.args4j.Option;
 
 /**
  * A base class for running processes as blaze workers. Used for both the transpiler
@@ -44,6 +46,9 @@ public abstract class BazelWorker {
 
   protected final Problems problems = new Problems();
   protected Path workdir;
+
+  @Option(name = "-profileOutput", hidden = true)
+  Path profileOutput = null;
 
   protected abstract void run();
 
@@ -62,6 +67,7 @@ public abstract class BazelWorker {
     }
     this.workdir = Path.of(sandboxDir);
 
+    var profiler = Profiler.create(workdir, profileOutput);
     try {
       run();
     } catch (RuntimeException | Error e) {
@@ -72,6 +78,8 @@ public abstract class BazelWorker {
       if (!(Throwables.getRootCause(e) instanceof Problems.Exit)) {
         throw e;
       }
+    } finally {
+      profiler.stopProfile();
     }
     return problems.reportAndGetExitCode(pw);
   }
