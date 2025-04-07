@@ -91,6 +91,6 @@ J2WASM_TOOLCHAIN_ATTRS = {}
 J2WASM_TOOLCHAIN_ATTRS.update(J2CL_TOOLCHAIN_ATTRS)
 J2WASM_TOOLCHAIN_ATTRS.update({
     "_j2cl_java_toolchain": attr.label(
-        default = Label("//build_defs/internal_do_not_use:j2wasm_java_toolchain"),
+        default = Label("//jre/java:j2wasm_java_toolchain"),
     ),
 })

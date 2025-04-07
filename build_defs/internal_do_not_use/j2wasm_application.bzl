@@ -400,28 +400,28 @@ _J2WASM_APP_ATTRS = {
         cfg = "exec",
         executable = True,
         default = Label(
-            "//build_defs/internal_do_not_use:BazelJ2clBuilder",
+            "//transpiler/java/com/google/j2cl/transpiler:BazelJ2clBuilder",
         ),
     ),
     "_binaryen": attr.label(
         cfg = "exec",
         executable = True,
         default = Label(
-            "//build_defs/internal_do_not_use:binaryen",
+            "//third_party:binaryen",
         ),
     ),
     "_bundler": attr.label(
         cfg = "exec",
         executable = True,
         default = Label(
-            "//build_defs/internal_do_not_use:J2wasmBundler",
+            "//transpiler/java/com/google/j2cl/transpiler:BazelJ2wasmBundler",
         ),
     ),
     "_export_generator": attr.label(
         cfg = "exec",
         executable = True,
         default = Label(
-            "//build_defs/internal_do_not_use:J2wasmExportGenerator",
+            "//transpiler/java/com/google/j2cl/transpiler:BazelJ2wasmExportGenerator",
         ),
     ),
 }

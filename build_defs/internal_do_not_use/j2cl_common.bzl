@@ -383,10 +383,10 @@ KOTLIN_SERIALIZE_IR_FLAGS = [
 
 J2CL_JAVA_TOOLCHAIN_ATTRS = {
     "_j2cl_java_toolchain": attr.label(
-        default = Label("//build_defs/internal_do_not_use:j2cl_java_toolchain"),
+        default = Label("//jre/java:j2cl_java_toolchain"),
     ),
     "_j2cl_stripper": attr.label(
-        default = Label("//build_defs/internal_do_not_use:GwtIncompatibleStripper"),
+        default = Label("//tools/java/com/google/j2cl/tools/gwtincompatible:GwtIncompatibleStripper_worker"),
         cfg = "exec",
         executable = True,
     ),
@@ -394,7 +394,7 @@ J2CL_JAVA_TOOLCHAIN_ATTRS = {
 
 J2CL_TOOLCHAIN_ATTRS = {
     "_j2cl_transpiler": attr.label(
-        default = Label("//build_defs/internal_do_not_use:BazelJ2clBuilder"),
+        default = Label("//transpiler/java/com/google/j2cl/transpiler:BazelJ2clBuilder"),
         cfg = "exec",
         executable = True,
     ),

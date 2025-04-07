@@ -39,25 +39,9 @@ config_setting(
     },
 )
 
-# Main J2CL transpiler binary.
-alias(
-    name = "BazelJ2clBuilder",
-    actual = "//transpiler/java/com/google/j2cl/transpiler:BazelJ2clBuilder",
-)
-
 # ***************************************************
 # Standard library related
 # ***************************************************
-
-alias(
-    name = "j2cl_java_toolchain",
-    actual = "//jre/java:j2cl_java_toolchain",
-)
-
-alias(
-    name = "j2wasm_java_toolchain",
-    actual = "//jre/java:j2wasm_java_toolchain",
-)
 
 alias(
     name = "j2wasm_jre",
@@ -129,33 +113,3 @@ alias(
     name = "closure_testsuite",
     actual = "//third_party:closure_testsuite",
 )
-
-# ***************************************************
-# Tools related
-# **************************************************
-
-alias(
-    name = "GwtIncompatibleStripper",
-    actual = "//tools/java/com/google/j2cl/tools/gwtincompatible:GwtIncompatibleStripper_worker",
-)
-
-alias(
-    name = "J2clRta",
-    actual = "//tools/java/com/google/j2cl/tools/rta:J2clRta_worker",
-)
-
-alias(
-    name = "J2wasmExportGenerator",
-    actual = "//transpiler/java/com/google/j2cl/transpiler:BazelJ2wasmExportGenerator",
-)
-
-alias(
-    name = "J2wasmBundler",
-    actual = "//transpiler/java/com/google/j2cl/transpiler:BazelJ2wasmBundler",
-)
-
-alias(
-    name = "binaryen",
-    actual = "//third_party:binaryen",
-)
-# bzl_librarys

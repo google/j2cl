@@ -28,7 +28,7 @@ java_binary(
     jvm_flags = JVM_FLAGS,
     main_class = "com.google.j2cl.tools.rta.BazelJ2clRta",
     use_launcher = False,
-    visibility = ["//build_defs/internal_do_not_use:__pkg__"],
+    visibility = ["//build_defs:toolchain_users"],
     runtime_deps = [":rta"],
 )
 

@@ -161,11 +161,11 @@ java_library(
 j2cl_java_toolchain(
     name = "j2cl_java_toolchain",
     bootclasspath = ":jre_bootclasspath",
-    visibility = ["//build_defs/internal_do_not_use:__pkg__"],
+    visibility = ["//build_defs:toolchain_users"],
 )
 
 j2cl_java_toolchain(
     name = "j2wasm_java_toolchain",
     bootclasspath = ":jre_bootclasspath-j2wasm",
-    visibility = ["//build_defs/internal_do_not_use:__pkg__"],
+    visibility = ["//build_defs:toolchain_users"],
 )
