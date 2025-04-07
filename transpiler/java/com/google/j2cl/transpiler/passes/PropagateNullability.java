@@ -383,14 +383,6 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
       @Nullable TypeVariable typeParameterDescriptor,
       TypeDescriptor typeDescriptor,
       TypeDescriptor fromTypeDescriptor) {
-    debug(
-        "propagateNullability(%s, %s, %s) ->",
-        typeParameterDescriptor != null
-            ? getTypeParameterDescription(typeParameterDescriptor)
-            : "null",
-        getDescription(typeDescriptor),
-        getDescription(fromTypeDescriptor));
-
     // Infer nullability only on concrete types, because only these suffer from `!!`.
     return typeDescriptor instanceof TypeVariable
             || (typeParameterDescriptor != null

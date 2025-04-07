@@ -50,19 +50,13 @@ import javax.annotation.Nullable;
  * </ul>
  */
 public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
-  private final Describer describer = new Describer();
-
   // Prevent overriding and force using {@code applyTo(CompilationUnit)}.
   @Override
   public final void applyTo(Type type) {}
 
-  final Describer getDescriber() {
-    return describer;
-  }
-
   @FormatMethod
   final void debug(SourcePosition sourcePosition, String detailMessage, Object... args) {
-    getProblems().debug(sourcePosition, detailMessage, args);
+    getProblems().info(sourcePosition, detailMessage, args);
   }
 
   @FormatMethod
@@ -77,20 +71,24 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
     return hasSourcePosition != null ? hasSourcePosition.getSourcePosition() : SourcePosition.NONE;
   }
 
-  final String getDescription(TypeDescriptor typeDescriptor) {
-    return describer.getDescription(typeDescriptor, ImmutableList.of());
+  private static Describer newDescriber() {
+    return new Describer();
   }
 
-  final String getDescription(TypeDeclaration typeDeclaration) {
-    return describer.getDescription(typeDeclaration);
+  static String getDescription(TypeDescriptor typeDescriptor) {
+    return newDescriber().getDescription(typeDescriptor, ImmutableList.of());
   }
 
-  final String getDescription(MethodDescriptor methodDescriptor) {
-    return describer.getDescription(methodDescriptor);
+  static String getDescription(TypeDeclaration typeDeclaration) {
+    return newDescriber().getDescription(typeDeclaration);
   }
 
-  final String getTypeParameterDescription(TypeVariable typeVariable) {
-    return describer.getTypeParameterDescription(typeVariable);
+  static String getDescription(MethodDescriptor methodDescriptor) {
+    return newDescriber().getDescription(methodDescriptor);
+  }
+
+  static String getTypeParameterDescription(TypeVariable typeVariable) {
+    return newDescriber().getTypeParameterDescription(typeVariable);
   }
 
   /**
