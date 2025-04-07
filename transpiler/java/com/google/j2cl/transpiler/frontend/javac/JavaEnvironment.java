@@ -389,6 +389,8 @@ class JavaEnvironment {
         annotationType.asElement().getQualifiedName().toString());
   }
 
+  // TODO(b/408478800): Cleanup unique keys for type variables and provide a more meaningful
+  // toString().
   private TypeVariable createTypeVariable(
       javax.lang.model.type.TypeVariable typeVariable,
       List<? extends AnnotationMirror> elementAnnotations,
@@ -405,30 +407,32 @@ class JavaEnvironment {
             : null;
 
     List<String> classComponents = getClassComponents(typeVariable);
-    KtVariance ktVariance =
-        getKtVariance(((TypeVariableSymbol) typeVariable.asElement()).baseSymbol());
-
+    Symbol baseSymbol = ((TypeVariableSymbol) typeVariable.asElement()).baseSymbol();
+    KtVariance ktVariance = getKtVariance(baseSymbol);
+    Type baseSymbolType = baseSymbol.asType();
+    int id = getTypeVariableId(baseSymbolType);
     return TypeVariable.newBuilder()
         .setUpperBoundTypeDescriptorFactory(boundTypeDescriptorFactory)
         .setLowerBoundTypeDescriptor(lowerBound)
         .setUniqueKey(
-            (isCapture ? "capture of " : "")
+            "#"
+                + id
+                + ":"
+                + (isCapture ? "capture of " : "")
                 + String.join("::", classComponents)
-                + (typeVariable.getUpperBound() != null
-                    ? "::^::" + typeVariable.getUpperBound()
+                + (baseSymbolType.getUpperBound() != null
+                    ? "::^::" + baseSymbolType.getUpperBound()
                     : "")
-                + (typeVariable.getLowerBound() != null
-                    ? "::v::" + typeVariable.getLowerBound()
+                + (baseSymbolType.getLowerBound() != null
+                    ? "::v::" + baseSymbolType.getLowerBound()
                     : ""))
         .setKtVariance(ktVariance)
-        .setName(
-            ((TypeVariableSymbol) typeVariable.asElement()).baseSymbol().getSimpleName().toString())
+        .setName(baseSymbol.getSimpleName().toString())
         .setCapture(isCapture)
         .setNullabilityAnnotation(getNullabilityAnnotation(typeVariable, elementAnnotations))
         .build();
   }
 
-  private final Map<WildcardType, Integer> wildcardIdByWildcard = new HashMap<>();
 
   private TypeVariable createWildcardTypeVariable(
       WildcardType wildcardType, boolean inNullMarkedScope) {
@@ -444,15 +448,24 @@ class JavaEnvironment {
       @Nullable TypeMirror upperBound,
       @Nullable TypeMirror lowerBound,
       boolean inNullMarkedScope) {
-    int id = wildcardIdByWildcard.computeIfAbsent(wildcardType, w -> wildcardIdByWildcard.size());
+    int id = getTypeVariableId(wildcardType);
     return TypeVariable.newBuilder()
         .setUpperBoundTypeDescriptorFactory(
             () -> lowerBound == null ? createTypeDescriptor(upperBound, inNullMarkedScope) : null)
         .setLowerBoundTypeDescriptor(createTypeDescriptor(lowerBound, inNullMarkedScope))
         .setWildcard(true)
         .setName("?")
-        .setUniqueKey((inNullMarkedScope ? "+" : "-") + "wildcard#" + id)
+        .setUniqueKey("#" + id + ":" + (inNullMarkedScope ? "+" : "-"))
         .build();
+  }
+
+  private final Map<TypeMirror, Integer> typeVariableIdByTypeVariable = new HashMap<>();
+
+  private int getTypeVariableId(TypeMirror typeVariable) {
+    checkState(
+        typeVariable.getKind() == TypeKind.TYPEVAR || typeVariable.getKind() == TypeKind.WILDCARD);
+    return typeVariableIdByTypeVariable.computeIfAbsent(
+        typeVariable, w -> typeVariableIdByTypeVariable.size());
   }
 
   private static DeclaredTypeDescriptor withNullability(
