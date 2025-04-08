@@ -258,7 +258,7 @@ public class ImplementLambdaExpressionsViaJsFunctionAdaptor extends Normalizatio
     // an the declaration version of the type descriptor since the creation of the adaptor is driven
     // from the declaration of the functional interface and not from a usage.
     // In the cases where the adaptor is not shared and driven from a usage (e.g. intersection
-    // types) the adaptor class could either use the paramterization found in the usage
+    // types) the adaptor class could either use the parametrization found in the usage
     // or use the more general parameterization from the declaration (e.g. if it is an intersection
     // that should come from the declarations of all types in the intersection).
     // The choice made here is to have the more general adaptor and that results in an inference
