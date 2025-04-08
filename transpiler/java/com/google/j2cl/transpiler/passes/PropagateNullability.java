@@ -348,10 +348,24 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
                       || !declarationTypeVariable.canBeNull()
                   ? typeDescriptor.toNonNullable()
                   : typeDescriptor);
+        } else {
+          return Stream.of();
         }
+      } else {
+        if (typeDescriptor instanceof TypeVariable) {
+          TypeVariable typeVariable = (TypeVariable) typeDescriptor;
+          if (typeVariable.isWildcardOrCapture()) {
+            return getParameterizationsIn(
+                getNormalizedUpperBoundTypeDescriptor(declarationTypeVariable),
+                typeParameter,
+                getNormalizedUpperBoundTypeDescriptor(typeVariable));
+          }
+        }
+        return getParameterizationsIn(
+            getNormalizedUpperBoundTypeDescriptor(declarationTypeVariable),
+            typeParameter,
+            typeDescriptor);
       }
-      // TODO(b/406815802): Handle wildcards.
-      return Stream.of();
     } else if (declarationTypeDescriptor instanceof IntersectionTypeDescriptor) {
       IntersectionTypeDescriptor declarationIntersectionTypeDescriptor =
           (IntersectionTypeDescriptor) declarationTypeDescriptor;

@@ -116,8 +116,8 @@ open class NullabilityScopes {
   open fun testNullMarkedWildcardConstructorImplicitTypeArguments(
    @ObjCName("withJ2ktNullabilityScopes_NullMarkedScope_Foo", swiftName = "with") nullMarkedFoo: j2kt.NullabilityScopes.NullMarkedScope.Foo<String?>?
   ) {
-   j2kt.NullabilityScopes.NullMarkedScope.Foo<String>(
-    nullMarkedFoo!! as j2kt.NullabilityScopes.NullMarkedScope.Foo<out String>,
+   j2kt.NullabilityScopes.NullMarkedScope.Foo<String?>(
+    nullMarkedFoo!!,
    )
   }
 
@@ -125,8 +125,8 @@ open class NullabilityScopes {
   open fun testNullMarkedWildcardConstructorExplicitTypeArguments(
    @ObjCName("withJ2ktNullabilityScopes_NullMarkedScope_Foo", swiftName = "with") nullMarkedFoo: j2kt.NullabilityScopes.NullMarkedScope.Foo<String?>?
   ) {
-   j2kt.NullabilityScopes.NullMarkedScope.Foo<String>(
-    nullMarkedFoo!! as j2kt.NullabilityScopes.NullMarkedScope.Foo<out String>,
+   j2kt.NullabilityScopes.NullMarkedScope.Foo<String?>(
+    nullMarkedFoo!!,
    )
   }
 
