@@ -1070,11 +1070,13 @@ class JavaEnvironment {
             (typeMirror, typeParameter) -> {
               javax.lang.model.type.TypeVariable typeVariable =
                   (javax.lang.model.type.TypeVariable) typeParameter.asType();
-              if (typeMirror.getKind() == TypeKind.WILDCARD
-                  && isNullOrJavaLangObject(((WildcardType) typeMirror).getExtendsBound())
-                  && !isNullOrJavaLangObject(typeVariable.getUpperBound())) {
-                // If this is a wildcard but the bound is not specified (or is Object), we might be
-                // able to get a tighter bound from the declaration.
+              boolean isUnbound =
+                  typeMirror.getKind() == TypeKind.WILDCARD
+                      && isNullOrJavaLangObject(((WildcardType) typeMirror).getExtendsBound())
+                      && ((WildcardType) typeMirror).getSuperBound() == null;
+              if (isUnbound && !isNullOrJavaLangObject(typeVariable.getUpperBound())) {
+                // Unbounded wildcards in the source inherit the bound from the declaration of
+                // of the variable they replace.
                 // TODO(b/398164480): Fix handling of unbound wildcards and captures.
                 return createWildcardTypeVariable(
                     (WildcardType) typeMirror,
