@@ -10,6 +10,9 @@
 @class J2ktJ2ktNotNullAssertionProblems_VarargConsumer;
 @class NSString;
 
+@protocol J2ktJ2ktNotNullAssertionProblems_Class1;
+@protocol J2ktJ2ktNotNullAssertionProblems_Interface1;
+@protocol J2ktJ2ktNotNullAssertionProblems_Interface2;
 @protocol J2ktJ2ktNotNullAssertionProblems_Supplier;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -38,16 +41,28 @@ NS_INLINE void J2ktNotNullAssertionProblems_testUnsafeNull(void) {
  [J2ktJ2ktNotNullAssertionProblemsCompanion.shared testUnsafeNull];
 }
 
-NS_INLINE void J2ktNotNullAssertionProblems_testNullableAcceptNullable2VarargWithId_(id nonNull) {
- [J2ktJ2ktNotNullAssertionProblemsCompanion.shared testNullableAcceptNullable2VarargWithId:nonNull];
+NS_INLINE void J2ktNotNullAssertionProblems_testNullableAcceptNullable2VarargWithNSString_(id nonNull) {
+ [J2ktJ2ktNotNullAssertionProblemsCompanion.shared testNullableAcceptNullable2VarargWithNSString:nonNull];
 }
 
-NS_INLINE void J2ktNotNullAssertionProblems_testNonNullAcceptNullable2VarargWithId_(id nonNull) {
- [J2ktJ2ktNotNullAssertionProblemsCompanion.shared testNonNullAcceptNullable2VarargWithId:nonNull];
+NS_INLINE void J2ktNotNullAssertionProblems_testNonNullAcceptNullable2VarargWithNSString_(id nonNull) {
+ [J2ktJ2ktNotNullAssertionProblemsCompanion.shared testNonNullAcceptNullable2VarargWithNSString:nonNull];
 }
 
-NS_INLINE void J2ktNotNullAssertionProblems_testNonNullAcceptNonNull2VarargWithId_(id nonNull) {
- [J2ktJ2ktNotNullAssertionProblemsCompanion.shared testNonNullAcceptNonNull2VarargWithId:nonNull];
+NS_INLINE void J2ktNotNullAssertionProblems_testNonNullAcceptNonNull2VarargWithNSString_(id nonNull) {
+ [J2ktJ2ktNotNullAssertionProblemsCompanion.shared testNonNullAcceptNonNull2VarargWithNSString:nonNull];
+}
+
+NS_INLINE void J2ktNotNullAssertionProblems_testNonNullParametericBoundAcceptNullable2VarargWithNSString_(id nonNull) {
+ [J2ktJ2ktNotNullAssertionProblemsCompanion.shared testNonNullParametericBoundAcceptNullable2VarargWithNSString:nonNull];
+}
+
+NS_INLINE void J2ktNotNullAssertionProblems_testNonNullClassInterfaceIntersectionAcceptNullable2VarargWithId_(id nonNull) {
+ [J2ktJ2ktNotNullAssertionProblemsCompanion.shared testNonNullClassInterfaceIntersectionAcceptNullable2VarargWithId:nonNull];
+}
+
+NS_INLINE void J2ktNotNullAssertionProblems_testNonNullInterfaceInterfaceIntersectionAcceptNullable2VarargWithId_(id nonNull) {
+ [J2ktJ2ktNotNullAssertionProblemsCompanion.shared testNonNullInterfaceInterfaceIntersectionAcceptNullable2VarargWithId:nonNull];
 }
 
 NS_INLINE id J2ktNotNullAssertionProblems_getUnsafeNull(void) {
@@ -81,6 +96,12 @@ NS_INLINE void J2ktNotNullAssertionProblems_testNullWildcardInLambda(void) {
 NS_INLINE id<J2ktJ2ktNotNullAssertionProblems_Supplier> J2ktNotNullAssertionProblems_wrapWithJ2ktNotNullAssertionProblems_Supplier_(id<J2ktJ2ktNotNullAssertionProblems_Supplier> supplier) {
  return [J2ktJ2ktNotNullAssertionProblemsCompanion.shared wrapWithJ2ktNotNullAssertionProblems_Supplier:supplier];
 }
+
+#define J2ktNotNullAssertionProblems_Class1 J2ktJ2ktNotNullAssertionProblems_Class1
+
+#define J2ktNotNullAssertionProblems_Interface1 J2ktJ2ktNotNullAssertionProblems_Interface1
+
+#define J2ktNotNullAssertionProblems_Interface2 J2ktJ2ktNotNullAssertionProblems_Interface2
 
 @compatibility_alias J2ktNotNullAssertionProblems_Consumer J2ktJ2ktNotNullAssertionProblems_Consumer;
 

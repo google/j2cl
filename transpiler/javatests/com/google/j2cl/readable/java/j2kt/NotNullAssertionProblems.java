@@ -167,19 +167,43 @@ public class NotNullAssertionProblems {
     }
   }
 
-  public static <C extends @Nullable Object> void testNullableAcceptNullable2Vararg(C nonNull) {
+  public static <C extends @Nullable String> void testNullableAcceptNullable2Vararg(C nonNull) {
     C localNonNull = nonNull;
     acceptNullable2Vararg(localNonNull, nonNull, nonNull);
   }
 
-  public static <C> void testNonNullAcceptNullable2Vararg(C nonNull) {
+  public static <C extends String> void testNonNullAcceptNullable2Vararg(C nonNull) {
     C localNonNull = nonNull;
     acceptNullable2Vararg(localNonNull, nonNull, nonNull);
   }
 
-  public static <C> void testNonNullAcceptNonNull2Vararg(C nonNull) {
+  public static <C extends String> void testNonNullAcceptNonNull2Vararg(C nonNull) {
     C localNonNull = nonNull;
     acceptNonNull2Vararg(localNonNull, nonNull, nonNull);
+  }
+
+  public static <U extends String, C extends U>
+      void testNonNullParametericBoundAcceptNullable2Vararg(C nonNull) {
+    C localNonNull = nonNull;
+    acceptNullable2Vararg(localNonNull, nonNull, nonNull);
+  }
+
+  public interface Class1 {}
+
+  public interface Interface1 {}
+
+  public interface Interface2 {}
+
+  public static <C extends Class1 & Interface1>
+      void testNonNullClassInterfaceIntersectionAcceptNullable2Vararg(C nonNull) {
+    C localNonNull = nonNull;
+    acceptNullable2Vararg(localNonNull, nonNull, nonNull);
+  }
+
+  public static <C extends Interface1 & Interface2>
+      void testNonNullInterfaceInterfaceIntersectionAcceptNullable2Vararg(C nonNull) {
+    C localNonNull = nonNull;
+    acceptNullable2Vararg(localNonNull, nonNull, nonNull);
   }
 
   public static <T extends @Nullable Object> T getUnsafeNull() {

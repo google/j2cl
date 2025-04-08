@@ -267,8 +267,8 @@ open class NotNullAssertionProblems {
 
   @JvmStatic
   @ObjCName("testNullableAcceptNullable2Vararg")
-  fun <C> testNullableAcceptNullable2Vararg(
-   @ObjCName("withId") nonNull: C
+  fun <C: String?> testNullableAcceptNullable2Vararg(
+   @ObjCName("withNSString", swiftName = "with") nonNull: C
   ) {
    val localNonNull: C? = nonNull
    NotNullAssertionProblems.acceptNullable2Vararg<C>(
@@ -280,8 +280,8 @@ open class NotNullAssertionProblems {
 
   @JvmStatic
   @ObjCName("testNonNullAcceptNullable2Vararg")
-  fun <C: Any> testNonNullAcceptNullable2Vararg(
-   @ObjCName("withId") nonNull: C
+  fun <C: String> testNonNullAcceptNullable2Vararg(
+   @ObjCName("withNSString", swiftName = "with") nonNull: C
   ) {
    val localNonNull: C? = nonNull
    NotNullAssertionProblems.acceptNullable2Vararg<C>(
@@ -293,11 +293,50 @@ open class NotNullAssertionProblems {
 
   @JvmStatic
   @ObjCName("testNonNullAcceptNonNull2Vararg")
-  fun <C: Any> testNonNullAcceptNonNull2Vararg(
-   @ObjCName("withId") nonNull: C
+  fun <C: String> testNonNullAcceptNonNull2Vararg(
+   @ObjCName("withNSString", swiftName = "with") nonNull: C
   ) {
    val localNonNull: C? = nonNull
    NotNullAssertionProblems.acceptNonNull2Vararg<C>(
+    localNonNull!!,
+    nonNull,
+    nonNull,
+   )
+  }
+
+  @JvmStatic
+  @ObjCName("testNonNullParametericBoundAcceptNullable2Vararg")
+  fun <U: String, C: U> testNonNullParametericBoundAcceptNullable2Vararg(
+   @ObjCName("withNSString", swiftName = "with") nonNull: C
+  ) {
+   val localNonNull: C? = nonNull
+   NotNullAssertionProblems.acceptNullable2Vararg<C>(
+    localNonNull!!,
+    nonNull,
+    nonNull,
+   )
+  }
+
+  @JvmStatic
+  @ObjCName("testNonNullClassInterfaceIntersectionAcceptNullable2Vararg")
+  fun <C> testNonNullClassInterfaceIntersectionAcceptNullable2Vararg(
+   @ObjCName("withId") nonNull: C
+  ) where C: Class1, C: Interface1 {
+   val localNonNull: C? = nonNull
+   NotNullAssertionProblems.acceptNullable2Vararg<C>(
+    localNonNull!!,
+    nonNull,
+    nonNull,
+   )
+  }
+
+  @JvmStatic
+  @ObjCName("testNonNullInterfaceInterfaceIntersectionAcceptNullable2Vararg")
+  fun <C> testNonNullInterfaceInterfaceIntersectionAcceptNullable2Vararg(
+   @ObjCName("withId") nonNull: C
+  ) where C: Interface1, C: Interface2 {
+   val localNonNull: C? = nonNull
+   NotNullAssertionProblems.acceptNullable2Vararg<C>(
     localNonNull!!,
     nonNull,
     nonNull,
@@ -413,6 +452,15 @@ open class NotNullAssertionProblems {
    }
   }
  }
+
+ @ObjCName("J2ktJ2ktNotNullAssertionProblems_Class1", swiftName = "J2ktNotNullAssertionProblems_Class1", exact = true)
+ interface Class1
+
+ @ObjCName("J2ktJ2ktNotNullAssertionProblems_Interface1", swiftName = "J2ktNotNullAssertionProblems_Interface1", exact = true)
+ interface Interface1
+
+ @ObjCName("J2ktJ2ktNotNullAssertionProblems_Interface2", swiftName = "J2ktNotNullAssertionProblems_Interface2", exact = true)
+ interface Interface2
 
  @ObjCName("J2ktJ2ktNotNullAssertionProblems_Consumer", swiftName = "J2ktNotNullAssertionProblems_Consumer", exact = true)
  open class Consumer<T> {
