@@ -104,7 +104,6 @@ import org.jetbrains.kotlin.ir.util.isReal
 import org.jetbrains.kotlin.ir.util.isStatic
 import org.jetbrains.kotlin.ir.util.isTopLevel
 import org.jetbrains.kotlin.ir.util.nonDispatchParameters
-import org.jetbrains.kotlin.ir.util.packageFqName
 import org.jetbrains.kotlin.ir.util.parentAsClass
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
 import org.jetbrains.kotlin.ir.util.properties
@@ -410,13 +409,7 @@ val IrClass.singleAbstractMethod: IrFunction?
     if (!isInterface) return null
 
     // For kotlin code we'll only consider a SAM if it's a fun interface.
-    if (
-      !isFromJava() &&
-        !isFun &&
-        // TODO(b/258302640): remove this hack when the interfaces in this package are defined as
-        //  fun interfaces
-        packageFqName != FqName("kotlin.jvm.functions")
-    ) {
+    if (!isFromJava() && !isFun) {
       return null
     }
 
