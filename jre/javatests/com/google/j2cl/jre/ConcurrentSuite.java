@@ -17,7 +17,9 @@ package com.google.j2cl.jre;
 
 import com.google.j2cl.jre.java.util.concurrent.ConcurrentHashMapTest;
 import com.google.j2cl.jre.java.util.concurrent.TimeUnitTest;
+import com.google.j2cl.jre.java.util.concurrent.atomic.AtomicIntegerArrayTest;
 import com.google.j2cl.jre.java.util.concurrent.atomic.AtomicIntegerTest;
+import com.google.j2cl.jre.java.util.concurrent.atomic.AtomicLongArrayTest;
 import com.google.j2cl.jre.java.util.concurrent.atomic.AtomicLongTest;
 import com.google.j2cl.jre.java.util.concurrent.atomic.AtomicReferenceArrayTest;
 import org.junit.runner.RunWith;
@@ -30,7 +32,9 @@ import org.junit.runners.Suite.SuiteClasses;
   ConcurrentHashMapTest.class,
   TimeUnitTest.class,
   AtomicIntegerTest.class,
+  AtomicIntegerArrayTest.class,
   AtomicLongTest.class,
+  AtomicLongArrayTest.class,
   AtomicReferenceArrayTest.class,
 })
-public class ConcurrentSuite { }
+public class ConcurrentSuite {}
