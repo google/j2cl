@@ -101,7 +101,7 @@ class SourceTest {
         Dependency.of(Import.local("local_1.h")),
         Dependency.of(Import.system("system_1.h")),
         Dependency.of(ForwardDeclaration.ofClass("Class1")),
-        Dependency.of(ForwardDeclaration.ofProtocol("Protocol1"))
+        Dependency.of(ForwardDeclaration.ofProtocol("Protocol1")),
       )
 
     dependenciesSource(dependencies)
@@ -126,7 +126,7 @@ class SourceTest {
   @Test
   fun rendererSourceWithDependencies() {
     rendererOf(source("void main() {}"))
-      .plus(Dependency.of(Import.system("std.h")))
+      .with(Dependency.of(Import.system("std.h")))
       .sourceWithDependencies
       .assertBuilds(
         """

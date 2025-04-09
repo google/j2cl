@@ -19,7 +19,7 @@ package com.google.j2cl.transpiler.backend.kotlin.objc
  * Renderer of [V] and its dependencies.
  *
  * Renderers are designed to be combined using [map], [bind], [combine] and [flatten] functions.
- * Dependencies can be added with [plus] operator.
+ * Dependencies can be added using [with] function.
  *
  * The final rendering can be executed using [renderWithDependencies] function, which will return
  * the rendered [V] and a set containing all its dependencies.
@@ -35,7 +35,7 @@ class Renderer<out V>(
     }
 
   /** Returns renderer of the same value including the given dependency. */
-  operator fun plus(dependency: Dependency): Renderer<V> = Renderer { dependencies ->
+  infix fun with(dependency: Dependency): Renderer<V> = Renderer { dependencies ->
     renderAddingDependenciesTo(dependencies).also { dependencies.add(dependency) }
   }
 

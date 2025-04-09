@@ -30,21 +30,24 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLine
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
 
+fun sourceRenderer(string: String): Renderer<Source> = rendererOf(source(string))
+
+fun nsObjCRuntimeSourceRenderer(string: String): Renderer<Source> =
+  sourceRenderer(string) with nsObjCRuntimeDependency
+
 val nsObjCRuntimeDependency = Dependency.of(Import.system("Foundation/NSObjCRuntime.h"))
 
-val nsEnum: Renderer<Source> = rendererOf(source("NS_ENUM")) + nsObjCRuntimeDependency
+val nsEnum: Renderer<Source> = nsObjCRuntimeSourceRenderer("NS_ENUM")
 
-val nsInline: Renderer<Source> = rendererOf(source("NS_INLINE")) + nsObjCRuntimeDependency
+val nsInline: Renderer<Source> = nsObjCRuntimeSourceRenderer("NS_INLINE")
 
-val nsAssumeNonnullBegin: Renderer<Source> =
-  rendererOf(source("NS_ASSUME_NONNULL_BEGIN")) + nsObjCRuntimeDependency
+val nsAssumeNonnullBegin: Renderer<Source> = nsObjCRuntimeSourceRenderer("NS_ASSUME_NONNULL_BEGIN")
 
-val nsAssumeNonnullEnd: Renderer<Source> =
-  rendererOf(source("NS_ASSUME_NONNULL_END")) + nsObjCRuntimeDependency
+val nsAssumeNonnullEnd: Renderer<Source> = nsObjCRuntimeSourceRenderer("NS_ASSUME_NONNULL_END")
 
-val nullable: Renderer<Source> = rendererOf(source("_Nullable")) // clang/gcc attribute
+val nullable: Renderer<Source> = sourceRenderer("_Nullable") // clang/gcc attribute
 
-val id: Renderer<Source> = rendererOf(source("id")) + nsObjCRuntimeDependency
+val id: Renderer<Source> = nsObjCRuntimeSourceRenderer("id")
 
 val nsCopying: Renderer<Source> = ForwardDeclaration.ofProtocol("NSCopying").nameRenderer
 
@@ -62,7 +65,7 @@ val nsMutableDictionary: Renderer<Source> =
   ForwardDeclaration.ofClass("NSMutableDictionary").nameRenderer
 
 private val ForwardDeclaration.nameRenderer: Renderer<Source>
-  get() = rendererOf(source(name)) + Dependency.of(this)
+  get() = sourceRenderer(name) with Dependency.of(this)
 
 fun className(name: String): Renderer<Source> = ForwardDeclaration.ofClass(name).nameRenderer
 

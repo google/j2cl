@@ -32,17 +32,17 @@ class RendererTest {
 
   @Test
   fun rendererPlus() {
-    rendererOf("foo").plus(DEPENDENCY_1).assertRenders("foo" to setOf(DEPENDENCY_1))
+    rendererOf("foo").with(DEPENDENCY_1).assertRenders("foo" to setOf(DEPENDENCY_1))
     rendererOf("foo")
-      .plus(DEPENDENCY_1)
-      .plus(DEPENDENCY_2)
+      .with(DEPENDENCY_1)
+      .with(DEPENDENCY_2)
       .assertRenders("foo" to setOf(DEPENDENCY_1, DEPENDENCY_2))
   }
 
   @Test
   fun rendererMap() {
     rendererOf("foo")
-      .plus(DEPENDENCY_1)
+      .with(DEPENDENCY_1)
       .map { it.length }
       .assertRenders("foo".length to setOf(DEPENDENCY_1))
   }
@@ -50,34 +50,30 @@ class RendererTest {
   @Test
   fun rendererBind() {
     rendererOf("foo")
-      .plus(DEPENDENCY_1)
-      .bind { rendererOf(it.length).plus(DEPENDENCY_2) }
+      .with(DEPENDENCY_1)
+      .bind { rendererOf(it.length) with DEPENDENCY_2 }
       .assertRenders("foo".length to setOf(DEPENDENCY_1, DEPENDENCY_2))
   }
 
   @Test
   fun rendererCombine() {
-    combine(
-        rendererOf("foo").plus(DEPENDENCY_1),
-        rendererOf("bar").plus(DEPENDENCY_2),
-        String::plus
-      )
+    combine(rendererOf("foo") with DEPENDENCY_1, rendererOf("bar") with DEPENDENCY_2, String::plus)
       .assertRenders("foobar" to setOf(DEPENDENCY_1, DEPENDENCY_2))
 
     combine(
-        rendererOf("foo").plus(DEPENDENCY_1),
-        rendererOf("bar").plus(DEPENDENCY_2),
-        rendererOf("!").plus(DEPENDENCY_3)
+        rendererOf("foo") with DEPENDENCY_1,
+        rendererOf("bar") with DEPENDENCY_2,
+        rendererOf("!") with DEPENDENCY_3,
       ) { a, b, c ->
         a + b + c
       }
       .assertRenders("foobar!" to setOf(DEPENDENCY_1, DEPENDENCY_2, DEPENDENCY_3))
 
     combine(
-        rendererOf("foo").plus(DEPENDENCY_1),
-        rendererOf("bar").plus(DEPENDENCY_2),
-        rendererOf("!").plus(DEPENDENCY_3),
-        rendererOf("?").plus(DEPENDENCY_4)
+        rendererOf("foo") with DEPENDENCY_1,
+        rendererOf("bar") with DEPENDENCY_2,
+        rendererOf("!") with DEPENDENCY_3,
+        rendererOf("?") with DEPENDENCY_4,
       ) { a, b, c, d ->
         a + b + c + d
       }
@@ -86,7 +82,7 @@ class RendererTest {
 
   @Test
   fun rendererFlatten() {
-    listOf(rendererOf("foo").plus(DEPENDENCY_1), rendererOf("bar").plus(DEPENDENCY_2))
+    listOf(rendererOf("foo") with DEPENDENCY_1, rendererOf("bar") with DEPENDENCY_2)
       .flatten()
       .assertRenders(listOf("foo", "bar") to setOf(DEPENDENCY_1, DEPENDENCY_2))
   }

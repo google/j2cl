@@ -68,12 +68,14 @@ import com.google.j2cl.transpiler.backend.kotlin.objc.nsMutableArray
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsMutableDictionary
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsMutableSet
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsNumber
+import com.google.j2cl.transpiler.backend.kotlin.objc.nsObjCRuntimeSourceRenderer
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsObject
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsString
 import com.google.j2cl.transpiler.backend.kotlin.objc.pointer
 import com.google.j2cl.transpiler.backend.kotlin.objc.protocolName
 import com.google.j2cl.transpiler.backend.kotlin.objc.returnStatement
 import com.google.j2cl.transpiler.backend.kotlin.objc.semicolonEnded
+import com.google.j2cl.transpiler.backend.kotlin.objc.sourceRenderer
 import com.google.j2cl.transpiler.backend.kotlin.objc.sourceWithDependencies
 import com.google.j2cl.transpiler.backend.kotlin.objc.toNullable
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
@@ -406,7 +408,7 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
     }
 
   private fun nameRenderer(variable: Variable): Renderer<Source> =
-    rendererOf(source(variable.name.objCName.escapeObjCKeyword))
+    sourceRenderer(variable.name.objCName.escapeObjCKeyword)
 
   private fun objCNameRenderer(companionDeclaration: CompanionDeclaration): Renderer<Source> =
     className(companionDeclaration.objCName(objCNamePrefix))
@@ -458,7 +460,7 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
     primitiveTypeDescriptor: PrimitiveTypeDescriptor
   ): Renderer<Source> =
     when (primitiveTypeDescriptor) {
-      PrimitiveTypes.VOID -> rendererOf(source("void"))
+      PrimitiveTypes.VOID -> sourceRenderer("void")
       PrimitiveTypes.BOOLEAN -> jbooleanTypeRenderer
       PrimitiveTypes.CHAR -> jcharTypeRenderer
       PrimitiveTypes.BYTE -> jbyteTypeRenderer
@@ -493,7 +495,7 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
     get() = Dependency.of(j2ObjCTypesImport)
 
   private fun j2ObjCTypeRenderer(name: String): Renderer<Source> =
-    rendererOf(source(name)) + j2ObjCTypesDependency
+    sourceRenderer(name) with j2ObjCTypesDependency
 
   private val jbooleanTypeRenderer: Renderer<Source>
     get() = j2ObjCTypeRenderer("jboolean")
@@ -551,28 +553,26 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
     }
 
   private fun literalRenderer(boolean: Boolean): Renderer<Source> =
-    rendererOf(source(if (boolean) "true" else "false"))
+    nsObjCRuntimeSourceRenderer(if (boolean) "true" else "false")
 
   private fun literalRenderer(char: Char): Renderer<Source> =
-    rendererOf(
-      source(
-        char.code.let { code ->
-          if (code in 0x20..0x7E) {
-            when (char) {
-              '\'',
-              '\\' -> char.backslashEscapedString
-              else -> char.toString()
-            }.inSingleQuotes
-          } else {
-            String.format("0x%04x", code)
-          }
+    sourceRenderer(
+      char.code.let { code ->
+        if (code in 0x20..0x7E) {
+          when (char) {
+            '\'',
+            '\\' -> char.backslashEscapedString
+            else -> char.toString()
+          }.inSingleQuotes
+        } else {
+          String.format("0x%04x", code)
         }
-      )
+      }
     )
 
-  private fun literalRenderer(byte: Byte): Renderer<Source> = rendererOf(source("$byte"))
+  private fun literalRenderer(byte: Byte): Renderer<Source> = sourceRenderer("$byte")
 
-  private fun literalRenderer(short: Short): Renderer<Source> = rendererOf(source("$short"))
+  private fun literalRenderer(short: Short): Renderer<Source> = sourceRenderer("$short")
 
   private fun literalRenderer(int: Int): Renderer<Source> =
     when (int) {
@@ -580,7 +580,7 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
         jintTypeRenderer.map {
           inParentheses(spaceSeparated(inParentheses(it), source("0x80000000")))
         }
-      else -> rendererOf(source("$int"))
+      else -> sourceRenderer("$int")
     }
 
   private fun literalRenderer(long: Long): Renderer<Source> =
@@ -589,26 +589,26 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
         jlongTypeRenderer.map {
           inParentheses(spaceSeparated(inParentheses(it), source("0x8000000000000000LL")))
         }
-      else -> rendererOf(source("${long}LL"))
+      else -> sourceRenderer("${long}LL")
     }
 
   private fun literalRenderer(float: Float): Renderer<Source> =
-    if (float.isNaN()) rendererOf(source("NAN"))
+    if (float.isNaN()) nsObjCRuntimeSourceRenderer("NAN")
     else
       when (float) {
-        Float.POSITIVE_INFINITY -> rendererOf(source("INFINITY"))
-        Float.NEGATIVE_INFINITY -> rendererOf(source("-INFINITY"))
-        Float.MAX_VALUE -> rendererOf(source("__FLT_MAX__"))
-        else -> rendererOf(source("${float}f"))
+        Float.POSITIVE_INFINITY -> nsObjCRuntimeSourceRenderer("INFINITY")
+        Float.NEGATIVE_INFINITY -> nsObjCRuntimeSourceRenderer("-INFINITY")
+        Float.MAX_VALUE -> nsObjCRuntimeSourceRenderer("__FLT_MAX__")
+        else -> sourceRenderer("${float}f")
       }
 
   private fun literalRenderer(double: Double): Renderer<Source> =
-    if (double.isNaN()) rendererOf(source("NAN"))
+    if (double.isNaN()) nsObjCRuntimeSourceRenderer("NAN")
     else
       when (double) {
-        Double.POSITIVE_INFINITY -> rendererOf(source("INFINITY"))
-        Double.NEGATIVE_INFINITY -> rendererOf(source("-INFINITY"))
-        Double.MAX_VALUE -> rendererOf(source("__DLB_MAX__"))
-        else -> rendererOf(source("$double"))
+        Double.POSITIVE_INFINITY -> nsObjCRuntimeSourceRenderer("INFINITY")
+        Double.NEGATIVE_INFINITY -> nsObjCRuntimeSourceRenderer("-INFINITY")
+        Double.MAX_VALUE -> nsObjCRuntimeSourceRenderer("__DLB_MAX__")
+        else -> sourceRenderer("$double")
       }
 }
