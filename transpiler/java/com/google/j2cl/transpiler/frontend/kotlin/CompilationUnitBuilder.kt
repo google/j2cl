@@ -92,6 +92,8 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.getTypeSubstitutionMap
 import com.google.j2cl.transpiler.frontend.kotlin.ir.hasVoidReturn
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isAdaptedFunctionReference
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isClinit
+import com.google.j2cl.transpiler.frontend.kotlin.ir.isFunctionOrSuspendFunction
+import com.google.j2cl.transpiler.frontend.kotlin.ir.isKFunctionOrKSuspendFunction
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isSuperCall
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isSynthetic
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isUnitInstanceReference
@@ -184,7 +186,6 @@ import org.jetbrains.kotlin.ir.util.defaultType
 import org.jetbrains.kotlin.ir.util.dump
 import org.jetbrains.kotlin.ir.util.fqNameWhenAvailable
 import org.jetbrains.kotlin.ir.util.isFunction
-import org.jetbrains.kotlin.ir.util.isKFunction
 import org.jetbrains.kotlin.ir.util.isPrimitiveArray
 import org.jetbrains.kotlin.ir.util.parentAsClass
 import org.jetbrains.kotlin.ir.util.render
@@ -1441,21 +1442,24 @@ class CompilationUnitBuilder(
     }
 
   private fun convertFunctionReference(irExpression: IrFunctionReference): Expression {
-    // Function references are resolved in the IR as fictitious `KFunction{N}` interfaces that do
-    // not exist at runtime (`N` being the arity of the referenced function). Kotlin/JVM maps any
-    // `KFunction{N}` type to the existing interface `KFunction`. Then it introduces a cast to
-    // `Function{N}` at `invoke()` function call sites as this function is specific to that
-    // interface.  For more information, please refer to
+    // Function references are resolved in the IR as fictitious `KFunction{N}` or
+    // `KSuspendFunction{N}` interfaces that do not exist at runtime (`N` being the arity of the
+    // referenced function). Kotlin/JVM maps any `KFunction{N}` or `KSuspendFunction{N}` type to the
+    // existing interfaces `KFunction` or `KSuspendFunction`. Then it introduces a cast to
+    // `kotlin.Function{N}` or `kotlin.coroutines.SuspendFunction{N}` at `invoke()` function call
+    // sites as this function is specific to those interfaces.  For more information, please refer
+    // to:
     // https://github.com/JetBrains/kotlin/blob/master/spec-docs/function-types.md#how-this-will-help-reflection
     //
-    // In J2CL, we are only supporting the api of `Function{N}` for now. To avoid casts at invoke()
-    // function call sites, we will type our MethodReference as `Function{N}`. Any call to the
-    // `KFunction` API will be rejected by the compiler.
+    // In J2CL, we are only supporting the api of `Function{N}` and `SuspendFunction{N}`for now. To
+    // avoid casts at `invoke()` function call sites, we will type our MethodReference as
+    // `Function{N}` or `SuspendFunction{N}`. Any call to the `KFunction` or `KSuspendFunction` API
+    // will be rejected by the compiler.
     //
     // Note about varargs and function reference: A function with varargs can be used in a context
     // of a function type without varargs. In this case, Kotlin compiler creates an extra function
     // adapter and the reference we see here is the reference to the adapter function. The type
-    // of the `IrFunctionReference` is directly `Function{N}`
+    // of the `IrFunctionReference` is directly `Function{N}` or `SuspendFunction{N}`
     // ex:
     // ```
     //  fun foo(varargs String s): String = s.joinToString()
@@ -1468,14 +1472,15 @@ class CompilationUnitBuilder(
       check(irExpression.type.isFunction())
       functionNType = irExpression.type as IrSimpleType
     } else {
-      check(irExpression.type.isKFunction())
+      check(irExpression.type.isKFunctionOrKSuspendFunction())
       val kFunctionNType = irExpression.type as IrSimpleType
 
-      // In the Kotlin type system, `KFunction{N}` does not directly extend `Function{N}` but the
+      // In the Kotlin type system, `KFunction{N}`  does not directly extend `Function{N}` but the
       // `KFunction{N}.invoke()` is declared as overriding `Function{N}.invoke()`. This is possible
       // because `KFunction{N}` is a synthetic interfaces.
       // The simplest way to find the Function{N} type is to look at the enclosing class of the
       // single overridden function of `KFunction{N}.invoke` that must be `Function{N}.invoke`.
+      // Same comment applies for `KSuspendFunction{N}` and `SuspendFunction{N}`
       functionNType =
         checkNotNull(kFunctionNType.classOrNull)
           .owner
@@ -1485,9 +1490,8 @@ class CompilationUnitBuilder(
           .owner
           .parentAsClass
           .symbol
-          // specialize Function{N} with the arguments of KFunction{N}
           .typeWithArguments(kFunctionNType.arguments)
-      check(functionNType.isFunction())
+      check(functionNType.isFunctionOrSuspendFunction())
     }
 
     val functionNTypeDescriptor =

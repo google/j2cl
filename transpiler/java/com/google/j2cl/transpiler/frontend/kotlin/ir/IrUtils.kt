@@ -96,12 +96,16 @@ import org.jetbrains.kotlin.ir.util.isAnnotationClass
 import org.jetbrains.kotlin.ir.util.isFakeOverride
 import org.jetbrains.kotlin.ir.util.isFileClass
 import org.jetbrains.kotlin.ir.util.isFromJava
+import org.jetbrains.kotlin.ir.util.isFunction
 import org.jetbrains.kotlin.ir.util.isInterface
+import org.jetbrains.kotlin.ir.util.isKFunction
+import org.jetbrains.kotlin.ir.util.isKSuspendFunction
 import org.jetbrains.kotlin.ir.util.isLocal
 import org.jetbrains.kotlin.ir.util.isOverridableOrOverrides
 import org.jetbrains.kotlin.ir.util.isPrimitiveArray
 import org.jetbrains.kotlin.ir.util.isReal
 import org.jetbrains.kotlin.ir.util.isStatic
+import org.jetbrains.kotlin.ir.util.isSuspendFunction
 import org.jetbrains.kotlin.ir.util.isTopLevel
 import org.jetbrains.kotlin.ir.util.nonDispatchParameters
 import org.jetbrains.kotlin.ir.util.parentAsClass
@@ -380,6 +384,10 @@ fun IrType.isArrayType(): Boolean = isArray() || isNullableArray() || isPrimitiv
 
 fun IrType.isClassType(fqName: FqNameUnsafe): Boolean =
   isClassType(fqName, false) || isClassType(fqName, true)
+
+fun IrType.isKFunctionOrKSuspendFunction() = isKFunction() || isKSuspendFunction()
+
+fun IrType.isFunctionOrSuspendFunction() = isFunction() || isSuspendFunction()
 
 val IrClass.simpleSourceName: String?
   get() = if (NameUtils.hasName(name)) name.toString() else null
