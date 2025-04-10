@@ -44,8 +44,6 @@ import com.google.j2cl.transpiler.backend.kotlin.common.inSingleQuotes
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.common.runIf
 import com.google.j2cl.transpiler.backend.kotlin.common.titleCased
-import com.google.j2cl.transpiler.backend.kotlin.objc.Dependency
-import com.google.j2cl.transpiler.backend.kotlin.objc.Import
 import com.google.j2cl.transpiler.backend.kotlin.objc.Renderer
 import com.google.j2cl.transpiler.backend.kotlin.objc.Renderer.Companion.combine
 import com.google.j2cl.transpiler.backend.kotlin.objc.Renderer.Companion.flatten
@@ -156,7 +154,7 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
   private fun nsEnumTypedefRenderer(type: Type): Renderer<Source> =
     nsEnumTypedef(
       name = objCEnumName(type.declaration),
-      type = jintTypeRenderer,
+      type = intTypeRenderer,
       values = type.enumFields.map { objCEnumName(it.descriptor) },
     )
 
@@ -461,14 +459,14 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
   ): Renderer<Source> =
     when (primitiveTypeDescriptor) {
       PrimitiveTypes.VOID -> sourceRenderer("void")
-      PrimitiveTypes.BOOLEAN -> jbooleanTypeRenderer
-      PrimitiveTypes.CHAR -> jcharTypeRenderer
-      PrimitiveTypes.BYTE -> jbyteTypeRenderer
-      PrimitiveTypes.SHORT -> jshortTypeRenderer
-      PrimitiveTypes.INT -> jintTypeRenderer
-      PrimitiveTypes.LONG -> jlongTypeRenderer
-      PrimitiveTypes.FLOAT -> jfloatTypeRenderer
-      PrimitiveTypes.DOUBLE -> jdoubleTypeRenderer
+      PrimitiveTypes.BOOLEAN -> booleanTypeRenderer
+      PrimitiveTypes.CHAR -> charTypeRenderer
+      PrimitiveTypes.BYTE -> byteTypeRenderer
+      PrimitiveTypes.SHORT -> shortTypeRenderer
+      PrimitiveTypes.INT -> intTypeRenderer
+      PrimitiveTypes.LONG -> longTypeRenderer
+      PrimitiveTypes.FLOAT -> floatTypeRenderer
+      PrimitiveTypes.DOUBLE -> doubleTypeRenderer
       else -> error("$this.primitiveObjCRenderer")
     }
 
@@ -488,38 +486,29 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
       join(idSource, inAngleBrackets(typeSource))
     }
 
-  private val j2ObjCTypesImport: Import
-    get() = Import.local("third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h")
+  private val booleanTypeRenderer: Renderer<Source>
+    get() = nsObjCRuntimeSourceRenderer("BOOL")
 
-  private val j2ObjCTypesDependency: Dependency
-    get() = Dependency.of(j2ObjCTypesImport)
+  private val charTypeRenderer: Renderer<Source>
+    get() = nsObjCRuntimeSourceRenderer("uint16_t")
 
-  private fun j2ObjCTypeRenderer(name: String): Renderer<Source> =
-    sourceRenderer(name) with j2ObjCTypesDependency
+  private val byteTypeRenderer: Renderer<Source>
+    get() = nsObjCRuntimeSourceRenderer("int8_t")
 
-  private val jbooleanTypeRenderer: Renderer<Source>
-    get() = j2ObjCTypeRenderer("jboolean")
+  private val shortTypeRenderer: Renderer<Source>
+    get() = nsObjCRuntimeSourceRenderer("int16_t")
 
-  private val jcharTypeRenderer: Renderer<Source>
-    get() = j2ObjCTypeRenderer("jchar")
+  private val intTypeRenderer: Renderer<Source>
+    get() = nsObjCRuntimeSourceRenderer("int32_t")
 
-  private val jbyteTypeRenderer: Renderer<Source>
-    get() = j2ObjCTypeRenderer("jbyte")
+  private val longTypeRenderer: Renderer<Source>
+    get() = nsObjCRuntimeSourceRenderer("int64_t")
 
-  private val jshortTypeRenderer: Renderer<Source>
-    get() = j2ObjCTypeRenderer("jshort")
+  private val floatTypeRenderer: Renderer<Source>
+    get() = sourceRenderer("float")
 
-  private val jintTypeRenderer: Renderer<Source>
-    get() = j2ObjCTypeRenderer("jint")
-
-  private val jlongTypeRenderer: Renderer<Source>
-    get() = j2ObjCTypeRenderer("jlong")
-
-  private val jfloatTypeRenderer: Renderer<Source>
-    get() = j2ObjCTypeRenderer("jfloat")
-
-  private val jdoubleTypeRenderer: Renderer<Source>
-    get() = j2ObjCTypeRenderer("jdouble")
+  private val doubleTypeRenderer: Renderer<Source>
+    get() = sourceRenderer("double")
 
   private fun objCEnumName(typeDeclaration: TypeDeclaration): String =
     "${typeDeclaration.objCNameWithoutPrefix}_Enum"
@@ -577,7 +566,7 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
   private fun literalRenderer(int: Int): Renderer<Source> =
     when (int) {
       Int.MIN_VALUE ->
-        jintTypeRenderer.map {
+        intTypeRenderer.map {
           inParentheses(spaceSeparated(inParentheses(it), source("0x80000000")))
         }
       else -> sourceRenderer("$int")
@@ -586,7 +575,7 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
   private fun literalRenderer(long: Long): Renderer<Source> =
     when (long) {
       Long.MIN_VALUE ->
-        jlongTypeRenderer.map {
+        longTypeRenderer.map {
           inParentheses(spaceSeparated(inParentheses(it), source("0x8000000000000000LL")))
         }
       else -> sourceRenderer("${long}LL")
@@ -598,7 +587,7 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
       when (float) {
         Float.POSITIVE_INFINITY -> nsObjCRuntimeSourceRenderer("INFINITY")
         Float.NEGATIVE_INFINITY -> nsObjCRuntimeSourceRenderer("-INFINITY")
-        Float.MAX_VALUE -> nsObjCRuntimeSourceRenderer("__FLT_MAX__")
+        Float.MAX_VALUE -> nsObjCRuntimeSourceRenderer("FLT_MAX")
         else -> sourceRenderer("${float}f")
       }
 
@@ -608,7 +597,7 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
       when (double) {
         Double.POSITIVE_INFINITY -> nsObjCRuntimeSourceRenderer("INFINITY")
         Double.NEGATIVE_INFINITY -> nsObjCRuntimeSourceRenderer("-INFINITY")
-        Double.MAX_VALUE -> nsObjCRuntimeSourceRenderer("__DLB_MAX__")
+        Double.MAX_VALUE -> nsObjCRuntimeSourceRenderer("DBL_MAX")
         else -> sourceRenderer("$double")
       }
 }

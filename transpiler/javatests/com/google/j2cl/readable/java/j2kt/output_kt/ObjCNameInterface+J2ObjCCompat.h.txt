@@ -2,8 +2,6 @@
 
 #import <Foundation/NSObjCRuntime.h>
 
-#import "third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h"
-
 @class J2ktJ2ktObjCNameInterfaceCompanion;
 
 @protocol J2ktJ2ktObjCNameInterface;
@@ -16,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #define J2ktObjCNameInterface_FIELD 0
 
-NS_INLINE jint J2ktObjCNameInterface_get_FIELD(void) {
+NS_INLINE int32_t J2ktObjCNameInterface_get_FIELD(void) {
  return J2ktJ2ktObjCNameInterfaceCompanion.shared.FIELD_;
 }
 

@@ -2,8 +2,6 @@
 
 #import <Foundation/NSObjCRuntime.h>
 
-#import "third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h"
-
 @class J2ktInnerClassNewName;
 @class J2ktJavaUtilStringJoiner;
 @class J2ktNewObjCName;
@@ -39,13 +37,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 #define NewObjCName_INT 123
 
-#define NewObjCName_INT_MIN_VALUE ((jint) 0x80000000)
+#define NewObjCName_INT_MIN_VALUE ((int32_t) 0x80000000)
 
 #define NewObjCName_INT_MAX_VALUE 2147483647
 
 #define NewObjCName_LONG 123LL
 
-#define NewObjCName_LONG_MIN_VALUE ((jlong) 0x8000000000000000LL)
+#define NewObjCName_LONG_MIN_VALUE ((int64_t) 0x8000000000000000LL)
 
 #define NewObjCName_LONG_MAX_VALUE 9223372036854775807LL
 
@@ -67,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #define NewObjCName_FLOAT_MIN_EXPONENT -126.0f
 
-#define NewObjCName_FLOAT_MAX_VALUE __FLT_MAX__
+#define NewObjCName_FLOAT_MAX_VALUE FLT_MAX
 
 #define NewObjCName_FLOAT_MAX_EXPONENT 127.0f
 
@@ -89,15 +87,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 #define NewObjCName_DOUBLE_MIN_EXPONENT -1022.0
 
-#define NewObjCName_DOUBLE_MAX_VALUE __DLB_MAX__
+#define NewObjCName_DOUBLE_MAX_VALUE DBL_MAX
 
 #define NewObjCName_DOUBLE_MAX_EXPONENT 1023.0
 
-NS_INLINE jint NewObjCName_get_publicStaticField(void) {
+NS_INLINE int32_t NewObjCName_get_publicStaticField(void) {
  return J2ktNewObjCNameCompanion.shared.publicStaticField_;
 }
 
-NS_INLINE void NewObjCName_set_publicStaticField(jint value) {
+NS_INLINE void NewObjCName_set_publicStaticField(int32_t value) {
  J2ktNewObjCNameCompanion.shared.publicStaticField_ = value;
 }
 
@@ -125,235 +123,235 @@ NS_INLINE void NewObjCName_set_selfField(J2ktNewObjCName* _Nullable value) {
  J2ktNewObjCNameCompanion.shared.selfField_ = value;
 }
 
-NS_INLINE jint NewObjCName_get_val(void) {
+NS_INLINE int32_t NewObjCName_get_val(void) {
  return J2ktNewObjCNameCompanion.shared.val_;
 }
 
-NS_INLINE void NewObjCName_set_val(jint value) {
+NS_INLINE void NewObjCName_set_val(int32_t value) {
  J2ktNewObjCNameCompanion.shared.val_ = value;
 }
 
-NS_INLINE jint NewObjCName_get_var(void) {
+NS_INLINE int32_t NewObjCName_get_var(void) {
  return J2ktNewObjCNameCompanion.shared.var_;
 }
 
-NS_INLINE void NewObjCName_set_var(jint value) {
+NS_INLINE void NewObjCName_set_var(int32_t value) {
  J2ktNewObjCNameCompanion.shared.var_ = value;
 }
 
-NS_INLINE jint NewObjCName_get_fun(void) {
+NS_INLINE int32_t NewObjCName_get_fun(void) {
  return J2ktNewObjCNameCompanion.shared.fun_;
 }
 
-NS_INLINE void NewObjCName_set_fun(jint value) {
+NS_INLINE void NewObjCName_set_fun(int32_t value) {
  J2ktNewObjCNameCompanion.shared.fun_ = value;
 }
 
-NS_INLINE jint NewObjCName_get_alloc(void) {
+NS_INLINE int32_t NewObjCName_get_alloc(void) {
  return J2ktNewObjCNameCompanion.shared.doAlloc___;
 }
 
-NS_INLINE void NewObjCName_set_alloc(jint value) {
+NS_INLINE void NewObjCName_set_alloc(int32_t value) {
  J2ktNewObjCNameCompanion.shared.alloc___ = value;
 }
 
-NS_INLINE jint NewObjCName_get_init(void) {
+NS_INLINE int32_t NewObjCName_get_init(void) {
  return J2ktNewObjCNameCompanion.shared.doInit___;
 }
 
-NS_INLINE void NewObjCName_set_init(jint value) {
+NS_INLINE void NewObjCName_set_init(int32_t value) {
  J2ktNewObjCNameCompanion.shared.init___ = value;
 }
 
-NS_INLINE jint NewObjCName_get_extern(void) {
+NS_INLINE int32_t NewObjCName_get_extern(void) {
  return J2ktNewObjCNameCompanion.shared.extern___;
 }
 
-NS_INLINE void NewObjCName_set_extern(jint value) {
+NS_INLINE void NewObjCName_set_extern(int32_t value) {
  J2ktNewObjCNameCompanion.shared.extern___ = value;
 }
 
-NS_INLINE jint NewObjCName_get_inline(void) {
+NS_INLINE int32_t NewObjCName_get_inline(void) {
  return J2ktNewObjCNameCompanion.shared.inline___;
 }
 
-NS_INLINE void NewObjCName_set_inline(jint value) {
+NS_INLINE void NewObjCName_set_inline(int32_t value) {
  J2ktNewObjCNameCompanion.shared.inline___ = value;
 }
 
-NS_INLINE jint NewObjCName_get_NULL(void) {
+NS_INLINE int32_t NewObjCName_get_NULL(void) {
  return J2ktNewObjCNameCompanion.shared.NULL___;
 }
 
-NS_INLINE void NewObjCName_set_NULL(jint value) {
+NS_INLINE void NewObjCName_set_NULL(int32_t value) {
  J2ktNewObjCNameCompanion.shared.NULL___ = value;
 }
 
-NS_INLINE jint NewObjCName_get_allocFoo(void) {
+NS_INLINE int32_t NewObjCName_get_allocFoo(void) {
  return J2ktNewObjCNameCompanion.shared.doAllocFoo_;
 }
 
-NS_INLINE void NewObjCName_set_allocFoo(jint value) {
+NS_INLINE void NewObjCName_set_allocFoo(int32_t value) {
  J2ktNewObjCNameCompanion.shared.allocFoo_ = value;
 }
 
-NS_INLINE jint NewObjCName_get_initFoo(void) {
+NS_INLINE int32_t NewObjCName_get_initFoo(void) {
  return J2ktNewObjCNameCompanion.shared.doInitFoo_;
 }
 
-NS_INLINE void NewObjCName_set_initFoo(jint value) {
+NS_INLINE void NewObjCName_set_initFoo(int32_t value) {
  J2ktNewObjCNameCompanion.shared.initFoo_ = value;
 }
 
-NS_INLINE jint NewObjCName_get_newFoo(void) {
+NS_INLINE int32_t NewObjCName_get_newFoo(void) {
  return J2ktNewObjCNameCompanion.shared.doNewFoo_;
 }
 
-NS_INLINE void NewObjCName_set_newFoo(jint value) {
+NS_INLINE void NewObjCName_set_newFoo(int32_t value) {
  J2ktNewObjCNameCompanion.shared.newFoo_ = value;
 }
 
-NS_INLINE jboolean NewObjCName_get_BOOLEAN_FALSE(void) {
+NS_INLINE BOOL NewObjCName_get_BOOLEAN_FALSE(void) {
  return J2ktNewObjCNameCompanion.shared.BOOLEAN_FALSE_;
 }
 
-NS_INLINE jboolean NewObjCName_get_BOOLEAN_TRUE(void) {
+NS_INLINE BOOL NewObjCName_get_BOOLEAN_TRUE(void) {
  return J2ktNewObjCNameCompanion.shared.BOOLEAN_TRUE_;
 }
 
-NS_INLINE jchar NewObjCName_get_CHAR(void) {
+NS_INLINE uint16_t NewObjCName_get_CHAR(void) {
  return J2ktNewObjCNameCompanion.shared.CHAR_;
 }
 
-NS_INLINE jchar NewObjCName_get_CHAR_APOSTROPHE(void) {
+NS_INLINE uint16_t NewObjCName_get_CHAR_APOSTROPHE(void) {
  return J2ktNewObjCNameCompanion.shared.CHAR_APOSTROPHE_;
 }
 
-NS_INLINE jchar NewObjCName_get_CHAR_BACKSLASH(void) {
+NS_INLINE uint16_t NewObjCName_get_CHAR_BACKSLASH(void) {
  return J2ktNewObjCNameCompanion.shared.CHAR_BACKSLASH_;
 }
 
-NS_INLINE jchar NewObjCName_get_CHAR_UNICODE(void) {
+NS_INLINE uint16_t NewObjCName_get_CHAR_UNICODE(void) {
  return J2ktNewObjCNameCompanion.shared.CHAR_UNICODE_;
 }
 
-NS_INLINE jbyte NewObjCName_get_BYTE(void) {
+NS_INLINE int8_t NewObjCName_get_BYTE(void) {
  return J2ktNewObjCNameCompanion.shared.BYTE_;
 }
 
-NS_INLINE jshort NewObjCName_get_SHORT(void) {
+NS_INLINE int16_t NewObjCName_get_SHORT(void) {
  return J2ktNewObjCNameCompanion.shared.SHORT_;
 }
 
-NS_INLINE jint NewObjCName_get_INT(void) {
+NS_INLINE int32_t NewObjCName_get_INT(void) {
  return J2ktNewObjCNameCompanion.shared.INT_;
 }
 
-NS_INLINE jint NewObjCName_get_INT_MIN_VALUE(void) {
+NS_INLINE int32_t NewObjCName_get_INT_MIN_VALUE(void) {
  return J2ktNewObjCNameCompanion.shared.INT_MIN_VALUE_;
 }
 
-NS_INLINE jint NewObjCName_get_INT_MAX_VALUE(void) {
+NS_INLINE int32_t NewObjCName_get_INT_MAX_VALUE(void) {
  return J2ktNewObjCNameCompanion.shared.INT_MAX_VALUE_;
 }
 
-NS_INLINE jlong NewObjCName_get_LONG(void) {
+NS_INLINE int64_t NewObjCName_get_LONG(void) {
  return J2ktNewObjCNameCompanion.shared.LONG_;
 }
 
-NS_INLINE jlong NewObjCName_get_LONG_MIN_VALUE(void) {
+NS_INLINE int64_t NewObjCName_get_LONG_MIN_VALUE(void) {
  return J2ktNewObjCNameCompanion.shared.LONG_MIN_VALUE_;
 }
 
-NS_INLINE jlong NewObjCName_get_LONG_MAX_VALUE(void) {
+NS_INLINE int64_t NewObjCName_get_LONG_MAX_VALUE(void) {
  return J2ktNewObjCNameCompanion.shared.LONG_MAX_VALUE_;
 }
 
-NS_INLINE jfloat NewObjCName_get_FLOAT(void) {
+NS_INLINE float NewObjCName_get_FLOAT(void) {
  return J2ktNewObjCNameCompanion.shared.FLOAT_;
 }
 
-NS_INLINE jfloat NewObjCName_get_FLOAT_ZER0(void) {
+NS_INLINE float NewObjCName_get_FLOAT_ZER0(void) {
  return J2ktNewObjCNameCompanion.shared.FLOAT_ZER0_;
 }
 
-NS_INLINE jfloat NewObjCName_get_FLOAT_NEGATIVE_ZERO(void) {
+NS_INLINE float NewObjCName_get_FLOAT_NEGATIVE_ZERO(void) {
  return J2ktNewObjCNameCompanion.shared.FLOAT_NEGATIVE_ZERO_;
 }
 
-NS_INLINE jfloat NewObjCName_get_FLOAT_NAN(void) {
+NS_INLINE float NewObjCName_get_FLOAT_NAN(void) {
  return J2ktNewObjCNameCompanion.shared.FLOAT_NAN_;
 }
 
-NS_INLINE jfloat NewObjCName_get_FLOAT_NEGATIVE_INFINITY(void) {
+NS_INLINE float NewObjCName_get_FLOAT_NEGATIVE_INFINITY(void) {
  return J2ktNewObjCNameCompanion.shared.FLOAT_NEGATIVE_INFINITY_;
 }
 
-NS_INLINE jfloat NewObjCName_get_FLOAT_POSITIVE_INFINITY(void) {
+NS_INLINE float NewObjCName_get_FLOAT_POSITIVE_INFINITY(void) {
  return J2ktNewObjCNameCompanion.shared.FLOAT_POSITIVE_INFINITY_;
 }
 
-NS_INLINE jfloat NewObjCName_get_FLOAT_MIN_VALUE(void) {
+NS_INLINE float NewObjCName_get_FLOAT_MIN_VALUE(void) {
  return J2ktNewObjCNameCompanion.shared.FLOAT_MIN_VALUE_;
 }
 
-NS_INLINE jfloat NewObjCName_get_FLOAT_MIN_NORMAL(void) {
+NS_INLINE float NewObjCName_get_FLOAT_MIN_NORMAL(void) {
  return J2ktNewObjCNameCompanion.shared.FLOAT_MIN_NORMAL_;
 }
 
-NS_INLINE jfloat NewObjCName_get_FLOAT_MIN_EXPONENT(void) {
+NS_INLINE float NewObjCName_get_FLOAT_MIN_EXPONENT(void) {
  return J2ktNewObjCNameCompanion.shared.FLOAT_MIN_EXPONENT_;
 }
 
-NS_INLINE jfloat NewObjCName_get_FLOAT_MAX_VALUE(void) {
+NS_INLINE float NewObjCName_get_FLOAT_MAX_VALUE(void) {
  return J2ktNewObjCNameCompanion.shared.FLOAT_MAX_VALUE_;
 }
 
-NS_INLINE jfloat NewObjCName_get_FLOAT_MAX_EXPONENT(void) {
+NS_INLINE float NewObjCName_get_FLOAT_MAX_EXPONENT(void) {
  return J2ktNewObjCNameCompanion.shared.FLOAT_MAX_EXPONENT_;
 }
 
-NS_INLINE jdouble NewObjCName_get_DOUBLE(void) {
+NS_INLINE double NewObjCName_get_DOUBLE(void) {
  return J2ktNewObjCNameCompanion.shared.DOUBLE_;
 }
 
-NS_INLINE jdouble NewObjCName_get_DOUBLE_ZER0(void) {
+NS_INLINE double NewObjCName_get_DOUBLE_ZER0(void) {
  return J2ktNewObjCNameCompanion.shared.DOUBLE_ZER0_;
 }
 
-NS_INLINE jdouble NewObjCName_get_DOUBLE_NEGATIVE_ZERO(void) {
+NS_INLINE double NewObjCName_get_DOUBLE_NEGATIVE_ZERO(void) {
  return J2ktNewObjCNameCompanion.shared.DOUBLE_NEGATIVE_ZERO_;
 }
 
-NS_INLINE jdouble NewObjCName_get_DOUBLE_NAN(void) {
+NS_INLINE double NewObjCName_get_DOUBLE_NAN(void) {
  return J2ktNewObjCNameCompanion.shared.DOUBLE_NAN_;
 }
 
-NS_INLINE jdouble NewObjCName_get_DOUBLE_NEGATIVE_INFINITY(void) {
+NS_INLINE double NewObjCName_get_DOUBLE_NEGATIVE_INFINITY(void) {
  return J2ktNewObjCNameCompanion.shared.DOUBLE_NEGATIVE_INFINITY_;
 }
 
-NS_INLINE jdouble NewObjCName_get_DOUBLE_POSITIVE_INFINITY(void) {
+NS_INLINE double NewObjCName_get_DOUBLE_POSITIVE_INFINITY(void) {
  return J2ktNewObjCNameCompanion.shared.DOUBLE_POSITIVE_INFINITY_;
 }
 
-NS_INLINE jdouble NewObjCName_get_DOUBLE_MIN_VALUE(void) {
+NS_INLINE double NewObjCName_get_DOUBLE_MIN_VALUE(void) {
  return J2ktNewObjCNameCompanion.shared.DOUBLE_MIN_VALUE_;
 }
 
-NS_INLINE jdouble NewObjCName_get_DOUBLE_MIN_NORMAL(void) {
+NS_INLINE double NewObjCName_get_DOUBLE_MIN_NORMAL(void) {
  return J2ktNewObjCNameCompanion.shared.DOUBLE_MIN_NORMAL_;
 }
 
-NS_INLINE jdouble NewObjCName_get_DOUBLE_MIN_EXPONENT(void) {
+NS_INLINE double NewObjCName_get_DOUBLE_MIN_EXPONENT(void) {
  return J2ktNewObjCNameCompanion.shared.DOUBLE_MIN_EXPONENT_;
 }
 
-NS_INLINE jdouble NewObjCName_get_DOUBLE_MAX_VALUE(void) {
+NS_INLINE double NewObjCName_get_DOUBLE_MAX_VALUE(void) {
  return J2ktNewObjCNameCompanion.shared.DOUBLE_MAX_VALUE_;
 }
 
-NS_INLINE jdouble NewObjCName_get_DOUBLE_MAX_EXPONENT(void) {
+NS_INLINE double NewObjCName_get_DOUBLE_MAX_EXPONENT(void) {
  return J2ktNewObjCNameCompanion.shared.DOUBLE_MAX_EXPONENT_;
 }
 
@@ -369,19 +367,19 @@ NS_INLINE J2ktNewObjCName* new_NewObjCName_init(void) {
  return [[J2ktNewObjCName alloc] init];
 }
 
-NS_INLINE J2ktNewObjCName* create_NewObjCName_initWithInteger_(jint i) {
+NS_INLINE J2ktNewObjCName* create_NewObjCName_initWithInteger_(int32_t i) {
  return [[J2ktNewObjCName alloc] initWithInteger:i];
 }
 
-NS_INLINE J2ktNewObjCName* new_NewObjCName_initWithInteger_(jint i) {
+NS_INLINE J2ktNewObjCName* new_NewObjCName_initWithInteger_(int32_t i) {
  return [[J2ktNewObjCName alloc] initWithInteger:i];
 }
 
-NS_INLINE J2ktNewObjCName* create_NewObjCName_initWithInt_withNSString_(jint i, NSString* s) {
+NS_INLINE J2ktNewObjCName* create_NewObjCName_initWithInt_withNSString_(int32_t i, NSString* s) {
  return [[J2ktNewObjCName alloc] initWithInt:i withNSString:s];
 }
 
-NS_INLINE J2ktNewObjCName* new_NewObjCName_initWithInt_withNSString_(jint i, NSString* s) {
+NS_INLINE J2ktNewObjCName* new_NewObjCName_initWithInt_withNSString_(int32_t i, NSString* s) {
  return [[J2ktNewObjCName alloc] initWithInt:i withNSString:s];
 }
 
@@ -389,11 +387,11 @@ NS_INLINE void NewObjCName_newFoo(void) {
  [J2ktNewObjCNameCompanion.shared doNewFoo];
 }
 
-NS_INLINE void NewObjCName_newFooFromInt_(jint i) {
+NS_INLINE void NewObjCName_newFooFromInt_(int32_t i) {
  [J2ktNewObjCNameCompanion.shared doNewFooFromInt:i];
 }
 
-NS_INLINE void NewObjCName_newFooFromInt_withInteger_(NSString* s, jint i) {
+NS_INLINE void NewObjCName_newFooFromInt_withInteger_(NSString* s, int32_t i) {
  [J2ktNewObjCNameCompanion.shared doNewFooFromInt:s withInteger:i];
 }
 
@@ -449,7 +447,7 @@ NS_INLINE void NewObjCName_mutableCopyBar(void) {
  [J2ktNewObjCNameCompanion.shared doMutableCopyBar];
 }
 
-NS_INLINE void NewObjCName_reservedParamNamesWithInt_withInt_withInt_withInt_(jint extern_, jint struct_, jint register_, jint inline_) {
+NS_INLINE void NewObjCName_reservedParamNamesWithInt_withInt_withInt_withInt_(int32_t extern_, int32_t struct_, int32_t register_, int32_t inline_) {
  [J2ktNewObjCNameCompanion.shared reservedParamNamesWithInt:extern_ withInt:struct_ withInt:register_ withInt:inline_];
 }
 
@@ -471,7 +469,7 @@ NS_INLINE void NewObjCName_nonNativeJavaTypeWithJavaUtilStringJoiner_(J2ktJavaUt
 
 @compatibility_alias NewObjCName_FooCompanion J2ktNewObjCName_FooCompanion;
 
-typedef NS_ENUM(jint, NewObjCName_Foo_Enum) {
+typedef NS_ENUM(int32_t, NewObjCName_Foo_Enum) {
  NewObjCName_Foo_Enum_val = 0,
  NewObjCName_Foo_Enum_var = 1,
  NewObjCName_Foo_Enum_fun = 2,
@@ -554,7 +552,7 @@ NS_INLINE J2ktNewObjCName_Foo* NewObjCName_Foo_get_NO(void) {
  return J2ktNewObjCName_Foo.NO__;
 }
 
-NS_INLINE J2ktNewObjCName_Foo* NewObjCName_Foo_withOrdinalWithInt_(jint ordinal) {
+NS_INLINE J2ktNewObjCName_Foo* NewObjCName_Foo_withOrdinalWithInt_(int32_t ordinal) {
  return [J2ktNewObjCName_FooCompanion.shared withOrdinalWithInt:ordinal];
 }
 

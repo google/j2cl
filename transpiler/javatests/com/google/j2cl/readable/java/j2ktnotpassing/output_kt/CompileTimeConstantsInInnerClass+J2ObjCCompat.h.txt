@@ -2,8 +2,6 @@
 
 #import <Foundation/NSObjCRuntime.h>
 
-#import "third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h"
-
 @class J2ktJ2ktnotpassingCompileTimeConstantsInInnerClass;
 @class J2ktJ2ktnotpassingCompileTimeConstantsInInnerClass_Inner;
 @class J2ktJ2ktnotpassingCompileTimeConstantsInInnerClass_InnerCompanion;
@@ -19,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #define J2ktnotpassingCompileTimeConstantsInInnerClass_Inner_i 0
 
-NS_INLINE jint J2ktnotpassingCompileTimeConstantsInInnerClass_Inner_get_i(void) {
+NS_INLINE int32_t J2ktnotpassingCompileTimeConstantsInInnerClass_Inner_get_i(void) {
  return J2ktJ2ktnotpassingCompileTimeConstantsInInnerClass_InnerCompanion.shared.i_;
 }
 

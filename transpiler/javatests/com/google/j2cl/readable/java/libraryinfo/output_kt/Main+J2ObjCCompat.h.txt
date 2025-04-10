@@ -2,8 +2,6 @@
 
 #import <Foundation/NSObjCRuntime.h>
 
-#import "third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h"
-
 @class J2ktLibraryinfoMain;
 @class J2ktLibraryinfoMainCompanion;
 @class J2ktLibraryinfoMain_Foo;
@@ -36,7 +34,7 @@ NS_INLINE void LibraryinfoMain_entryPoint(void) {
  [J2ktLibraryinfoMainCompanion.shared entryPoint];
 }
 
-NS_INLINE void LibraryinfoMain_logWithInt_(jint o) {
+NS_INLINE void LibraryinfoMain_logWithInt_(int32_t o) {
  [J2ktLibraryinfoMainCompanion.shared logWithInt:o];
 }
 

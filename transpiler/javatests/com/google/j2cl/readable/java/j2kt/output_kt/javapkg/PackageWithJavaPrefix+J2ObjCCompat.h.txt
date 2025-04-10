@@ -2,8 +2,6 @@
 
 #import <Foundation/NSObjCRuntime.h>
 
-#import "third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h"
-
 @class J2ktJavapkgPackageWithJavaPrefix;
 @class J2ktJavapkgPackageWithJavaPrefixCompanion;
 
@@ -15,11 +13,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 #define JavapkgPackageWithJavaPrefix_VALUE 128
 
-NS_INLINE jint JavapkgPackageWithJavaPrefix_get_VALUE(void) {
+NS_INLINE int32_t JavapkgPackageWithJavaPrefix_get_VALUE(void) {
  return J2ktJavapkgPackageWithJavaPrefixCompanion.shared.VALUE_;
 }
 
-NS_INLINE jint JavapkgPackageWithJavaPrefix_value(void) {
+NS_INLINE int32_t JavapkgPackageWithJavaPrefix_value(void) {
  return [J2ktJavapkgPackageWithJavaPrefixCompanion.shared value];
 }
 

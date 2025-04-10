@@ -2,8 +2,6 @@
 
 #import <Foundation/NSObjCRuntime.h>
 
-#import "third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h"
-
 @class J2ktNativejstypesMain;
 @class J2ktNativejstypesMainCompanion;
 
@@ -13,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @compatibility_alias NativejstypesMainCompanion J2ktNativejstypesMainCompanion;
 
-NS_INLINE jint NativejstypesMain_testNativeJsTypeWithNamespace(void) {
+NS_INLINE int32_t NativejstypesMain_testNativeJsTypeWithNamespace(void) {
  return [J2ktNativejstypesMainCompanion.shared testNativeJsTypeWithNamespace];
 }
 
@@ -21,7 +19,7 @@ NS_INLINE void NativejstypesMain_testNativeJsTypeWithNamespaceJsProperties(void)
  [J2ktNativejstypesMainCompanion.shared testNativeJsTypeWithNamespaceJsProperties];
 }
 
-NS_INLINE jint NativejstypesMain_testNativeJsTypeWithoutNamespace(void) {
+NS_INLINE int32_t NativejstypesMain_testNativeJsTypeWithoutNamespace(void) {
  return [J2ktNativejstypesMainCompanion.shared testNativeJsTypeWithoutNamespace];
 }
 

@@ -2,8 +2,6 @@
 
 #import <Foundation/NSObjCRuntime.h>
 
-#import "third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h"
-
 @class J2ktJsignoreJsIgnoreExample;
 @class J2ktJsignoreJsIgnoreExampleCompanion;
 
@@ -21,19 +19,19 @@ NS_INLINE void JsignoreJsIgnoreExample_notExportedFunction(void) {
  [J2ktJsignoreJsIgnoreExampleCompanion.shared notExportedFunction];
 }
 
-NS_INLINE jint JsignoreJsIgnoreExample_get_exportedField(void) {
+NS_INLINE int32_t JsignoreJsIgnoreExample_get_exportedField(void) {
  return J2ktJsignoreJsIgnoreExampleCompanion.shared.exportedField_;
 }
 
-NS_INLINE void JsignoreJsIgnoreExample_set_exportedField(jint value) {
+NS_INLINE void JsignoreJsIgnoreExample_set_exportedField(int32_t value) {
  J2ktJsignoreJsIgnoreExampleCompanion.shared.exportedField_ = value;
 }
 
-NS_INLINE jint JsignoreJsIgnoreExample_get_notExportedField(void) {
+NS_INLINE int32_t JsignoreJsIgnoreExample_get_notExportedField(void) {
  return J2ktJsignoreJsIgnoreExampleCompanion.shared.notExportedField_;
 }
 
-NS_INLINE void JsignoreJsIgnoreExample_set_notExportedField(jint value) {
+NS_INLINE void JsignoreJsIgnoreExample_set_notExportedField(int32_t value) {
  J2ktJsignoreJsIgnoreExampleCompanion.shared.notExportedField_ = value;
 }
 

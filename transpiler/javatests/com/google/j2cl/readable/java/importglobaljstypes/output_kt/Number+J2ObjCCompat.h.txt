@@ -2,8 +2,6 @@
 
 #import <Foundation/NSObjCRuntime.h>
 
-#import "third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h"
-
 @class J2ktImportglobaljstypesNumber;
 @class J2ktImportglobaljstypesNumberCompanion;
 
@@ -15,11 +13,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @compatibility_alias ImportglobaljstypesNumberCompanion J2ktImportglobaljstypesNumberCompanion;
 
-NS_INLINE jboolean ImportglobaljstypesNumber_fWithDouble_(jdouble x) {
+NS_INLINE BOOL ImportglobaljstypesNumber_fWithDouble_(double x) {
  return [J2ktImportglobaljstypesNumberCompanion.shared fWithDouble:x];
 }
 
-NS_INLINE jboolean ImportglobaljstypesNumber_testWithDouble_(jdouble x) {
+NS_INLINE BOOL ImportglobaljstypesNumber_testWithDouble_(double x) {
  return [J2ktImportglobaljstypesNumberCompanion.shared testWithDouble:x];
 }
 

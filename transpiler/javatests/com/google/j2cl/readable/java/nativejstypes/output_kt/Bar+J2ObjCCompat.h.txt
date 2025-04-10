@@ -2,8 +2,6 @@
 
 #import <Foundation/NSObjCRuntime.h>
 
-#import "third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h"
-
 @class J2ktNativejstypesBar;
 @class J2ktNativejstypesBarCompanion;
 
@@ -13,23 +11,23 @@ NS_ASSUME_NONNULL_BEGIN
 
 @compatibility_alias NativejstypesBarCompanion J2ktNativejstypesBarCompanion;
 
-NS_INLINE jint NativejstypesBar_get_f(void) {
+NS_INLINE int32_t NativejstypesBar_get_f(void) {
  return J2ktNativejstypesBarCompanion.shared.f_;
 }
 
-NS_INLINE void NativejstypesBar_set_f(jint value) {
+NS_INLINE void NativejstypesBar_set_f(int32_t value) {
  J2ktNativejstypesBarCompanion.shared.f_ = value;
 }
 
-NS_INLINE J2ktNativejstypesBar* create_NativejstypesBar_initWithInt_withInt_(jint x, jint y) {
+NS_INLINE J2ktNativejstypesBar* create_NativejstypesBar_initWithInt_withInt_(int32_t x, int32_t y) {
  return [[J2ktNativejstypesBar alloc] initWithInt:x withInt:y];
 }
 
-NS_INLINE J2ktNativejstypesBar* new_NativejstypesBar_initWithInt_withInt_(jint x, jint y) {
+NS_INLINE J2ktNativejstypesBar* new_NativejstypesBar_initWithInt_withInt_(int32_t x, int32_t y) {
  return [[J2ktNativejstypesBar alloc] initWithInt:x withInt:y];
 }
 
-NS_INLINE jint NativejstypesBar_getStatic(void) {
+NS_INLINE int32_t NativejstypesBar_getStatic(void) {
  return [J2ktNativejstypesBarCompanion.shared getStatic];
 }
 

@@ -2,8 +2,6 @@
 
 #import <Foundation/NSObjCRuntime.h>
 
-#import "third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h"
-
 @class J2ktJ2ktSmartCasts;
 @class J2ktJ2ktSmartCastsCompanion;
 @class J2ktJ2ktSmartCasts_Container;
@@ -33,7 +31,7 @@ NS_INLINE void J2ktSmartCasts_testArgumentsWithJ2ktSmartCasts_Foo_(id<J2ktJ2ktSm
  [J2ktJ2ktSmartCastsCompanion.shared testArgumentsWithJ2ktSmartCasts_Foo:foo];
 }
 
-NS_INLINE void J2ktSmartCasts_testIfStatementWithJ2ktSmartCasts_Foo_withBoolean_(id<J2ktJ2ktSmartCasts_Foo> foo, jboolean condition) {
+NS_INLINE void J2ktSmartCasts_testIfStatementWithJ2ktSmartCasts_Foo_withBoolean_(id<J2ktJ2ktSmartCasts_Foo> foo, BOOL condition) {
  [J2ktJ2ktSmartCastsCompanion.shared testIfStatementWithJ2ktSmartCasts_Foo:foo withBoolean:condition];
 }
 

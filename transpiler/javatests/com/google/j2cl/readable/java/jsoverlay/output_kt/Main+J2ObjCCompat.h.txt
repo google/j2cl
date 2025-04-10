@@ -2,8 +2,6 @@
 
 #import <Foundation/NSObjCRuntime.h>
 
-#import "third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h"
-
 @class J2ktJsoverlayMain;
 @class J2ktJsoverlayMainCompanion;
 @class J2ktJsoverlayMain_NativeJsTypeInterfaceWithOverlayCompanion;
@@ -34,11 +32,11 @@ NS_INLINE id _Nullable JsoverlayMain_NativeJsTypeInterfaceWithOverlay_get_static
 
 @compatibility_alias JsoverlayMain_NativeJsTypeWithOverlayCompanion J2ktJsoverlayMain_NativeJsTypeWithOverlayCompanion;
 
-NS_INLINE jint JsoverlayMain_NativeJsTypeWithOverlay_get_nonJsOverlayField(void) {
+NS_INLINE int32_t JsoverlayMain_NativeJsTypeWithOverlay_get_nonJsOverlayField(void) {
  return J2ktJsoverlayMain_NativeJsTypeWithOverlayCompanion.shared.nonJsOverlayField_;
 }
 
-NS_INLINE void JsoverlayMain_NativeJsTypeWithOverlay_set_nonJsOverlayField(jint value) {
+NS_INLINE void JsoverlayMain_NativeJsTypeWithOverlay_set_nonJsOverlayField(int32_t value) {
  J2ktJsoverlayMain_NativeJsTypeWithOverlayCompanion.shared.nonJsOverlayField_ = value;
 }
 
@@ -54,7 +52,7 @@ NS_INLINE void JsoverlayMain_NativeJsTypeWithOverlay_n(void) {
  [J2ktJsoverlayMain_NativeJsTypeWithOverlayCompanion.shared n];
 }
 
-NS_INLINE jint JsoverlayMain_NativeJsTypeWithOverlay_fun(void) {
+NS_INLINE int32_t JsoverlayMain_NativeJsTypeWithOverlay_fun(void) {
  return [J2ktJsoverlayMain_NativeJsTypeWithOverlayCompanion.shared fun];
 }
 

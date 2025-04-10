@@ -2,8 +2,6 @@
 
 #import <Foundation/NSObjCRuntime.h>
 
-#import "third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h"
-
 @class J2ktImportglobaljstypesDate;
 @class J2ktImportglobaljstypesDateCompanion;
 @class J2ktImportglobaljstypesDate_NativeDate;
@@ -15,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @compatibility_alias ImportglobaljstypesDateCompanion J2ktImportglobaljstypesDateCompanion;
 
-NS_INLINE jdouble ImportglobaljstypesDate_nowWithDouble_(jdouble x) {
+NS_INLINE double ImportglobaljstypesDate_nowWithDouble_(double x) {
  return [J2ktImportglobaljstypesDateCompanion.shared nowWithDouble:x];
 }
 
@@ -23,7 +21,7 @@ NS_INLINE jdouble ImportglobaljstypesDate_nowWithDouble_(jdouble x) {
 
 @compatibility_alias ImportglobaljstypesDate_NativeDateCompanion J2ktImportglobaljstypesDate_NativeDateCompanion;
 
-NS_INLINE jdouble ImportglobaljstypesDate_NativeDate_now(void) {
+NS_INLINE double ImportglobaljstypesDate_NativeDate_now(void) {
  return [J2ktImportglobaljstypesDate_NativeDateCompanion.shared now];
 }
 
