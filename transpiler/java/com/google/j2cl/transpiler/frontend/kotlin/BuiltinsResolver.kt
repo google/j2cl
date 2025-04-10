@@ -20,8 +20,7 @@ package com.google.j2cl.transpiler.frontend.kotlin
 import com.google.j2cl.transpiler.frontend.kotlin.ir.fromQualifiedBinaryName
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
-import org.jetbrains.kotlin.builtins.functions.FunctionTypeKind.Function
-import org.jetbrains.kotlin.builtins.functions.FunctionTypeKind.SuspendFunction
+import org.jetbrains.kotlin.builtins.functions.BuiltInFunctionArity
 import org.jetbrains.kotlin.builtins.jvm.JavaToKotlinClassMap
 import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
 import org.jetbrains.kotlin.ir.symbols.IrFieldSymbol
@@ -77,7 +76,9 @@ internal class BuiltinsResolver(
   fun resolveClass(irClassSymbol: IrClassSymbol): IrClassSymbol? {
     val fqName = irClassSymbol.owner.kotlinFqName.toUnsafe()
     val mappedClassId =
-      mapToIntrinsicImplementation(fqName) ?: mapKotlinToJava(fqName) ?: return null
+      mapToIntrinsicImplementation(fqName)
+        ?: JavaToKotlinClassMap.mapKotlinToJava(fqName)
+        ?: return null
     val resolvedClass = pluginContext.referenceClass(mappedClassId) ?: return null
     check(resolvedClass.isBound) {
       "Resolved class to unbound symbol, originally: ${irClassSymbol.owner.render()}"
@@ -86,31 +87,20 @@ internal class BuiltinsResolver(
   }
 }
 
-private val suspendedFunctionFqnPrefix =
-  "${SuspendFunction.packageFqName}.${SuspendFunction.classNamePrefix}"
-private val functionFqnNamePrefix = "${Function.packageFqName}.${Function.classNamePrefix}"
+private val intrinsicImplementations = buildMap {
+  put("kotlin.Nothing", ClassId.fromQualifiedBinaryName("kotlin.jvm.internal.NothingStub"))
 
-private fun mapKotlinToJava(kotlinFqName: FqNameUnsafe): ClassId? {
-  var mappingFqName = kotlinFqName
-
-  // TODO(b/245558138): suspended functions are normally converted to a function type with an extra
-  //  parameter that can be used to resume the coroutine with the return value (or exception if an
-  //  error occurs).
-  //  e.g.: kotlin.coroutines.SuspendFunction3 is mapped to kotlin.jvm.functions.Function4
-  //  As we do not support coroutine right now, we are missing this extra parameter and
-  //  the transpilation fails. For now, we will just consider suspended functions as normal
-  //  functions.
-  if (kotlinFqName.asString().startsWith(suspendedFunctionFqnPrefix)) {
-    mappingFqName =
-      FqNameUnsafe(
-        kotlinFqName.asString().replace(suspendedFunctionFqnPrefix, functionFqnNamePrefix)
-      )
+  // TODO(b/258286507): Add support for suspend function with arity > 22
+  for (i in 0 until BuiltInFunctionArity.BIG_ARITY) {
+    // `kotlin.coroutines.SuspendFunction{N}` are fictitious interfaces used by the Kotlin compiler
+    // to type a suspend lambda. In J2CL, we need to convert to physical interfaces in order to make
+    // our lambda machinery working.
+    put(
+      "kotlin.coroutines.SuspendFunction$i",
+      ClassId.fromQualifiedBinaryName("kotlin.internal.j2cl.SuspendFunction$i"),
+    )
   }
-  return JavaToKotlinClassMap.mapKotlinToJava(mappingFqName)
 }
-
-private val intrinsicImplementations =
-  mapOf("kotlin.Nothing" to ClassId.fromQualifiedBinaryName("kotlin.jvm.internal.NothingStub"))
 
 private fun mapToIntrinsicImplementation(kotlinFqName: FqNameUnsafe): ClassId? =
   intrinsicImplementations[kotlinFqName.asString()]
