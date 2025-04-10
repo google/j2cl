@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.function.Predicate.isEqual;
 
 import com.google.common.collect.Streams;
@@ -56,7 +55,7 @@ import java.util.stream.Stream;
  * of the target method that Java resolved to. For the previous example this would become: {@code
  * m((Object) "m")}.
  */
-public class AddDisambiguatingOverloadResolutionCastsJ2kt extends NormalizationPass {
+public class AddDisambiguatingOverloadResolutionCastsJ2kt extends AbstractJ2ktNormalizationPass {
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
@@ -72,12 +71,10 @@ public class AddDisambiguatingOverloadResolutionCastsJ2kt extends NormalizationP
             return Invocation.Builder.from(invocation)
                 .setArguments(invocation)
                 .setArguments(
-                    Streams.zip(
-                            invocation.getTarget().getParameterTypeDescriptors().stream(),
-                            invocation.getArguments().stream(),
-                            AddDisambiguatingOverloadResolutionCastsJ2kt
-                                ::castArgumentToParameterType)
-                        .collect(toImmutableList()))
+                    zip(
+                        invocation.getTarget().getParameterTypeDescriptors(),
+                        invocation.getArguments(),
+                        AddDisambiguatingOverloadResolutionCastsJ2kt::castArgumentToParameterType))
                 .build();
           }
         });

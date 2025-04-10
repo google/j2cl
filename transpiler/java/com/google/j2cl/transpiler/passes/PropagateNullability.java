@@ -228,20 +228,20 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
           public Node rewriteFunctionExpression(FunctionExpression functionExpression) {
             DeclaredTypeDescriptor functionalInterface =
                 functionExpression.getTypeDescriptor().getFunctionalInterface();
+            if (functionalInterface.isRaw()) {
+              return functionExpression;
+            }
             ImmutableList<TypeVariable> typeParameterDescriptors =
                 functionalInterface.getTypeDeclaration().getTypeParameterDescriptors();
             ImmutableList<TypeDescriptor> typeArgumentDescriptors =
                 functionalInterface.getTypeArgumentDescriptors();
             ImmutableList<TypeDescriptor> inferredTypeArgumentDescriptors =
-                Streams.zip(
-                        typeParameterDescriptors.stream(),
-                        typeArgumentDescriptors.stream(),
-                        (typeParameterDescriptor, typeArgumentDescriptor) ->
-                            propagateTypeArgumentNullabilityFromReturnExpressions(
-                                typeParameterDescriptor,
-                                typeArgumentDescriptor,
-                                functionExpression))
-                    .collect(toImmutableList());
+                zip(
+                    typeParameterDescriptors,
+                    typeArgumentDescriptors,
+                    (typeParameterDescriptor, typeArgumentDescriptor) ->
+                        propagateTypeArgumentNullabilityFromReturnExpressions(
+                            typeParameterDescriptor, typeArgumentDescriptor, functionExpression));
             DeclaredTypeDescriptor inferredFunctionalInterface =
                 functionalInterface.withTypeArguments(inferredTypeArgumentDescriptors);
             if (inferredFunctionalInterface.equals(functionalInterface)) {
@@ -402,16 +402,15 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
     ImmutableList<TypeDescriptor> inferredTypeDescriptors =
         arguments.stream().map(Expression::getTypeDescriptor).collect(toImmutableList());
     ImmutableList<TypeDescriptor> inferredTypeArgumentDescriptors =
-        Streams.zip(
-                typeParameterDescriptors.stream(),
-                typeArgumentDescriptors.stream(),
-                (typeParameterDescriptor, typeArgumentDescriptor) ->
-                    propagateTypeArgumentNullabilityFrom(
-                        typeParameterDescriptor,
-                        typeArgumentDescriptor,
-                        parameterTypeDescriptors,
-                        inferredTypeDescriptors))
-            .collect(toImmutableList());
+        zip(
+            typeParameterDescriptors,
+            typeArgumentDescriptors,
+            (typeParameterDescriptor, typeArgumentDescriptor) ->
+                propagateTypeArgumentNullabilityFrom(
+                    typeParameterDescriptor,
+                    typeArgumentDescriptor,
+                    parameterTypeDescriptors,
+                    inferredTypeDescriptors));
 
     return reparameterize(
         methodDescriptor, typeParameterDescriptors, inferredTypeArgumentDescriptors);
@@ -427,16 +426,15 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
         methodDescriptor.getDeclarationDescriptor().getEnclosingTypeDescriptor();
     TypeDescriptor inferredTypeDescriptor = qualifier.getTypeDescriptor();
     ImmutableList<TypeDescriptor> inferredTypeArgumentDescriptors =
-        Streams.zip(
-                typeParameterDescriptors.stream(),
-                typeArgumentDescriptors.stream(),
-                (typeParameterDescriptor, typeArgumentDescriptor) ->
-                    propagateTypeArgumentNullabilityFrom(
-                        typeParameterDescriptor,
-                        typeArgumentDescriptor,
-                        declaredTypeDescriptor,
-                        inferredTypeDescriptor))
-            .collect(toImmutableList());
+        zip(
+            typeParameterDescriptors,
+            typeArgumentDescriptors,
+            (typeParameterDescriptor, typeArgumentDescriptor) ->
+                propagateTypeArgumentNullabilityFrom(
+                    typeParameterDescriptor,
+                    typeArgumentDescriptor,
+                    declaredTypeDescriptor,
+                    inferredTypeDescriptor));
 
     return reparameterize(
         methodDescriptor, typeParameterDescriptors, inferredTypeArgumentDescriptors);
@@ -548,17 +546,16 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
                 typeArgumentDescriptor,
                 ImmutableSet.of()))
         .updateParameterTypeDescriptors(
-            Streams.zip(
-                    methodDescriptor.getParameterTypeDescriptors().stream(),
-                    declarationDescriptor.getParameterTypeDescriptors().stream(),
-                    (parameterTypeDescriptor, declarationParameterTypeDescriptor) ->
-                        reparameterize(
-                            declarationParameterTypeDescriptor,
-                            parameterTypeDescriptor,
-                            typeParameterDescriptor,
-                            typeArgumentDescriptor,
-                            ImmutableSet.of()))
-                .collect(toImmutableList()))
+            zip(
+                methodDescriptor.getParameterTypeDescriptors(),
+                declarationDescriptor.getParameterTypeDescriptors(),
+                (parameterTypeDescriptor, declarationParameterTypeDescriptor) ->
+                    reparameterize(
+                        declarationParameterTypeDescriptor,
+                        parameterTypeDescriptor,
+                        typeParameterDescriptor,
+                        typeArgumentDescriptor,
+                        ImmutableSet.of())))
         .setEnclosingTypeDescriptor(
             methodDescriptor.isStatic()
                 ? methodDescriptor.getEnclosingTypeDescriptor()
@@ -570,14 +567,13 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
                         typeArgumentDescriptor,
                         ImmutableSet.of()))
         .setTypeArgumentTypeDescriptors(
-            Streams.zip(
-                    declarationDescriptor.getTypeParameterTypeDescriptors().stream(),
-                    methodDescriptor.getTypeArgumentTypeDescriptors().stream(),
-                    (typeParameter, typeArgument) ->
-                        typeParameter.equals(typeParameterDescriptor)
-                            ? typeArgumentDescriptor
-                            : typeArgument)
-                .collect(toImmutableList()))
+            zip(
+                declarationDescriptor.getTypeParameterTypeDescriptors(),
+                methodDescriptor.getTypeArgumentTypeDescriptors(),
+                (typeParameter, typeArgument) ->
+                    typeParameter.equals(typeParameterDescriptor)
+                        ? typeArgumentDescriptor
+                        : typeArgument))
         .build();
   }
 
@@ -639,18 +635,20 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
       DeclaredTypeDescriptor declarationDeclaredTypeDescriptor =
           (DeclaredTypeDescriptor) declarationTypeDescriptor;
       DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
+      if (declaredTypeDescriptor.isRaw()) {
+        return typeDescriptor;
+      }
       return declaredTypeDescriptor.withTypeArguments(
-          Streams.zip(
-                  declarationDeclaredTypeDescriptor.getTypeArgumentDescriptors().stream(),
-                  declaredTypeDescriptor.getTypeArgumentDescriptors().stream(),
-                  (declaration, specialized) ->
-                      reparameterize(
-                          declaration,
-                          specialized,
-                          typeParameterDescriptor,
-                          typeArgumentDescriptor,
-                          seen))
-              .collect(toImmutableList()));
+          zip(
+              declarationDeclaredTypeDescriptor.getTypeArgumentDescriptors(),
+              declaredTypeDescriptor.getTypeArgumentDescriptors(),
+              (declaration, specialized) ->
+                  reparameterize(
+                      declaration,
+                      specialized,
+                      typeParameterDescriptor,
+                      typeArgumentDescriptor,
+                      seen)));
     } else if (declarationTypeDescriptor instanceof TypeVariable) {
       TypeVariable declarationTypeVariable = (TypeVariable) declarationTypeDescriptor;
       if (typeDescriptor.equals(typeParameterDescriptor)) {
@@ -700,19 +698,16 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
           (IntersectionTypeDescriptor) typeDescriptor;
       return IntersectionTypeDescriptor.newBuilder()
           .setIntersectionTypeDescriptors(
-              Streams.zip(
-                      declarationIntersectionTypeDescriptor
-                          .getIntersectionTypeDescriptors()
-                          .stream(),
-                      intersectionTypeDescriptor.getIntersectionTypeDescriptors().stream(),
-                      (declaration, specialized) ->
-                          reparameterize(
-                              declaration,
-                              specialized,
-                              typeParameterDescriptor,
-                              typeArgumentDescriptor,
-                              seen))
-                  .collect(toImmutableList()))
+              zip(
+                  declarationIntersectionTypeDescriptor.getIntersectionTypeDescriptors(),
+                  intersectionTypeDescriptor.getIntersectionTypeDescriptors(),
+                  (declaration, specialized) ->
+                      reparameterize(
+                          declaration,
+                          specialized,
+                          typeParameterDescriptor,
+                          typeArgumentDescriptor,
+                          seen)))
           .build();
     } else if (declarationTypeDescriptor instanceof UnionTypeDescriptor) {
       UnionTypeDescriptor declarationUnionTypeDescriptor =
@@ -720,17 +715,16 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
       UnionTypeDescriptor unionTypeDescriptor = (UnionTypeDescriptor) typeDescriptor;
       return UnionTypeDescriptor.newBuilder()
           .setUnionTypeDescriptors(
-              Streams.zip(
-                      declarationUnionTypeDescriptor.getUnionTypeDescriptors().stream(),
-                      unionTypeDescriptor.getUnionTypeDescriptors().stream(),
-                      (declaration, specialized) ->
-                          reparameterize(
-                              declaration,
-                              specialized,
-                              typeParameterDescriptor,
-                              typeArgumentDescriptor,
-                              seen))
-                  .collect(toImmutableList()))
+              zip(
+                  declarationUnionTypeDescriptor.getUnionTypeDescriptors(),
+                  unionTypeDescriptor.getUnionTypeDescriptors(),
+                  (declaration, specialized) ->
+                      reparameterize(
+                          declaration,
+                          specialized,
+                          typeParameterDescriptor,
+                          typeArgumentDescriptor,
+                          seen)))
           .build();
 
     } else {

@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.Streams;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
@@ -29,7 +28,7 @@ import com.google.j2cl.transpiler.ast.TypeVariable;
 import java.util.Map;
 
 /** Propagates nullability in overrides in non-null-marked types. */
-public class PropagateNullabilityInOverrides extends NormalizationPass {
+public class PropagateNullabilityInOverrides extends AbstractJ2ktNormalizationPass {
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
@@ -76,12 +75,11 @@ public class PropagateNullabilityInOverrides extends NormalizationPass {
                 specialize(parametrization, from.getReturnTypeDescriptor()),
                 to.getReturnTypeDescriptor()))
         .setParameterDescriptors(
-            Streams.zip(
-                    from.getParameterTypeDescriptors().stream(),
-                    to.getParameterDescriptors().stream(),
-                    (fromTd, toPd) ->
-                        propagateParameterNullability(specialize(parametrization, fromTd), toPd))
-                .collect(toImmutableList()))
+            zip(
+                from.getParameterTypeDescriptors(),
+                to.getParameterDescriptors(),
+                (fromTd, toPd) ->
+                    propagateParameterNullability(specialize(parametrization, fromTd), toPd)))
         .build();
   }
 

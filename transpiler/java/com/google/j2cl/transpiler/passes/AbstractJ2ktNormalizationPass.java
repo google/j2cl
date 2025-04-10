@@ -15,12 +15,12 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.stream.Collectors.joining;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Streams;
 import com.google.errorprone.annotations.FormatMethod;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
@@ -40,6 +40,7 @@ import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiFunction;
 import javax.annotation.Nullable;
 
 /**
@@ -124,15 +125,11 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
     } else if (typeDescriptor instanceof DeclaredTypeDescriptor) {
       DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
       return declaredTypeDescriptor.withTypeArguments(
-          Streams.zip(
-                  declaredTypeDescriptor
-                      .getTypeDeclaration()
-                      .getTypeParameterDescriptors()
-                      .stream(),
-                  declaredTypeDescriptor.getTypeArgumentDescriptors().stream(),
-                  (typeParameter, typeArgument) ->
-                      projectArgumentCaptures(typeArgument, typeParameter, seen))
-              .collect(toImmutableList()));
+          zip(
+              declaredTypeDescriptor.getTypeDeclaration().getTypeParameterDescriptors(),
+              declaredTypeDescriptor.getTypeArgumentDescriptors(),
+              (typeParameter, typeArgument) ->
+                  projectArgumentCaptures(typeArgument, typeParameter, seen)));
     } else if (typeDescriptor instanceof TypeVariable) {
       TypeVariable typeVariable = (TypeVariable) typeDescriptor;
       if (!typeVariable.isWildcardOrCapture()) {
@@ -226,11 +223,12 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
   /** Returns type argument descriptors with nullability which satisfy their declarations. */
   static ImmutableList<TypeDescriptor> getTypeArgumentDescriptorsWithValidNullability(
       DeclaredTypeDescriptor typeArgumentDescriptor) {
-    return Streams.zip(
-            typeArgumentDescriptor.getTypeArgumentDescriptors().stream(),
-            typeArgumentDescriptor.getTypeDeclaration().getTypeParameterDescriptors().stream(),
-            AbstractJ2ktNormalizationPass::getTypeArgumentDescriptorWithValidNullability)
-        .collect(toImmutableList());
+    return typeArgumentDescriptor.isRaw()
+        ? ImmutableList.of()
+        : zip(
+            typeArgumentDescriptor.getTypeArgumentDescriptors(),
+            typeArgumentDescriptor.getTypeDeclaration().getTypeParameterDescriptors(),
+            AbstractJ2ktNormalizationPass::getTypeArgumentDescriptorWithValidNullability);
   }
 
   /** Returns type argument descriptor with nullability which satisfies its declaration. */
@@ -479,5 +477,19 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
 
   private static String inAngleBracketsIfNotEmpty(String string) {
     return string.isEmpty() ? string : "<" + string + ">";
+  }
+
+  static <A, B, R> ImmutableList<R> zip(
+      List<A> listA, List<B> listB, BiFunction<? super A, ? super B, ? extends R> function) {
+    checkArgument(
+        listA.size() == listB.size(),
+        "Lists are of different sizes (%s, %s)",
+        listA.size(),
+        listB.size());
+    ImmutableList.Builder<R> builder = ImmutableList.builder();
+    for (int i = 0; i < listA.size(); i++) {
+      builder.add(function.apply(listA.get(i), listB.get(i)));
+    }
+    return builder.build();
   }
 }
