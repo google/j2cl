@@ -39,6 +39,7 @@ import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NullabilityAnnotation;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
+import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor;
@@ -274,23 +275,14 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
    * </ul>
    *
    * @param declarationTypeDescriptor declaration (unparameterized) type descriptor
-   * @param typeParameterTypeDescriptor type parameter to get parameterizations for
+   * @param typeParameter type parameter to get parameterizations for
    * @param typeDescriptor type descriptor to look for parameterizations in
    * @return a stream with parameterizations
    */
   private Stream<TypeDescriptor> getParameterizationsIn(
       TypeDescriptor declarationTypeDescriptor,
-      TypeVariable typeParameterTypeDescriptor,
-      TypeDescriptor typeDescriptor) {
-    return getParameterizationsIn(
-        declarationTypeDescriptor, typeParameterTypeDescriptor, typeDescriptor, ImmutableSet.of());
-  }
-
-  private Stream<TypeDescriptor> getParameterizationsIn(
-      TypeDescriptor declarationTypeDescriptor,
       TypeVariable typeParameter,
-      TypeDescriptor typeDescriptor,
-      ImmutableSet<TypeVariable> seen) {
+      TypeDescriptor typeDescriptor) {
     if (declarationTypeDescriptor instanceof PrimitiveTypeDescriptor) {
       // Primitive type descriptors are never parameterized.
       return Stream.of();
@@ -302,8 +294,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
         return getParameterizationsIn(
             declarationArrayTypeDescriptor.getComponentTypeDescriptor(),
             typeParameter,
-            arrayTypeDescriptor.getComponentTypeDescriptor(),
-            seen);
+            arrayTypeDescriptor.getComponentTypeDescriptor());
       }
       // TODO(b/406815802): parameter and arguments are not structurally similar, see
       // if there are cases that have to be handled.
@@ -320,13 +311,8 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
       DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
       // Look for the parameterized instance of the declared parameter type
       DeclaredTypeDescriptor target =
-          declaredTypeDescriptor.getAllSuperTypesIncludingSelf().stream()
-              .filter(
-                  it ->
-                      it.getTypeDeclaration()
-                          .equals(declarationDeclaredTypeDescriptor.getTypeDeclaration()))
-              .findFirst()
-              .orElse(null);
+          getParameterizedSupertype(
+              declaredTypeDescriptor, declarationDeclaredTypeDescriptor.getTypeDeclaration());
       if (target == null) {
         // TODO(b/406815802): parameter and arguments are not structurally similar, see
         // if there are cases that have to be handled.
@@ -337,7 +323,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
               declarationDeclaredTypeDescriptor.getTypeArgumentDescriptors().stream(),
               target.getTypeArgumentDescriptors().stream(),
               (typeArgument, targetTypeArgument) ->
-                  getParameterizationsIn(typeArgument, typeParameter, targetTypeArgument, seen))
+                  getParameterizationsIn(typeArgument, typeParameter, targetTypeArgument))
           .flatMap(it -> it);
     } else if (declarationTypeDescriptor instanceof TypeVariable) {
       TypeVariable declarationTypeVariable = (TypeVariable) declarationTypeDescriptor;
@@ -370,12 +356,12 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
       IntersectionTypeDescriptor declarationIntersectionTypeDescriptor =
           (IntersectionTypeDescriptor) declarationTypeDescriptor;
       return declarationIntersectionTypeDescriptor.getIntersectionTypeDescriptors().stream()
-          .flatMap(it -> getParameterizationsIn(it, typeParameter, typeDescriptor, seen));
+          .flatMap(it -> getParameterizationsIn(it, typeParameter, typeDescriptor));
     } else if (declarationTypeDescriptor instanceof UnionTypeDescriptor) {
       UnionTypeDescriptor declarationUnionTypeDescriptor =
           (UnionTypeDescriptor) declarationTypeDescriptor;
       return declarationUnionTypeDescriptor.getUnionTypeDescriptors().stream()
-          .flatMap(it -> getParameterizationsIn(it, typeParameter, typeDescriptor, seen));
+          .flatMap(it -> getParameterizationsIn(it, typeParameter, typeDescriptor));
     } else {
       throw new AssertionError();
     }
@@ -750,5 +736,18 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
     } else {
       throw new AssertionError();
     }
+  }
+
+  /**
+   * Given a type descriptor and a declaration, find the parameterization of the declaration that is
+   * a supertype of type descriptor.
+   */
+  @Nullable
+  private static DeclaredTypeDescriptor getParameterizedSupertype(
+      DeclaredTypeDescriptor declaredTypeDescriptor, TypeDeclaration typeDeclaration) {
+    return declaredTypeDescriptor.getAllSuperTypesIncludingSelf().stream()
+        .filter(it -> it.getTypeDeclaration().equals(typeDeclaration))
+        .findFirst()
+        .orElse(null);
   }
 }
