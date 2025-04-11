@@ -468,15 +468,6 @@ val IrFunction.isAbstract: Boolean
 val IrFunction.isFinal: Boolean
   get() = this is IrOverridableMember && modality == Modality.FINAL
 
-val IrDeclaration.isDeprecated: Boolean
-  get() {
-    return findAnnotation(KOTLIN_DEPRECATED_ANNOTATION_FQ_NAME) != null ||
-      findAnnotation(JAVA_DEPRECATED_ANNOTATION_FQ_NAME) != null
-  }
-
-private val KOTLIN_DEPRECATED_ANNOTATION_FQ_NAME: FqName = FqName("kotlin.Deprecated")
-private val JAVA_DEPRECATED_ANNOTATION_FQ_NAME: FqName = FqName("java.lang.Deprecated")
-
 fun IrFunction.getWasmInfo(): String? = (this as IrDeclaration).getWasmInfo()
 
 fun IrClass.getWasmInfo(): String? = (this as IrDeclaration).getWasmInfo()
