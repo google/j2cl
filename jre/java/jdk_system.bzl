@@ -39,10 +39,16 @@ def _jdk_system(ctx):
         ]),
     )
 
+    # Collect the dependency jars for bootclasspath, skipping the first element which is the
+    # bootclasspath jar itself.
+    # Bootclasspath deps are needed downstream to resolve annotations.
+    deps = ctx.attr.bootclasspath[JavaInfo].transitive_compile_time_jars.to_list()[1:]
+
     return [
         java_common.BootClassPathInfo(
             system = system,
             bootclasspath = [bootclasspath],
+            auxiliary = deps,
         ),
         DefaultInfo(files = depset([system, bootclasspath])),
     ]

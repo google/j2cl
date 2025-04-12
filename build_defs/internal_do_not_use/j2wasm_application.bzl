@@ -4,7 +4,9 @@ Takes Java source, translates it into Wasm.
 This is an experimental tool and should not be used.
 """
 
+load(":j2cl_common.bzl", "get_bootclasspath", "get_bootclasspath_deps")
 load(":j2cl_js_common.bzl", "J2CL_JS_TOOLCHAIN_ATTRS", "j2cl_js_provider")
+load(":j2wasm_common.bzl", "J2WASM_TOOLCHAIN_ATTRS")
 load(":provider.bzl", "J2wasmInfo")
 
 # Template for the generated JS imports file.
@@ -167,7 +169,7 @@ def _impl_j2wasm_application(ctx):
         )
 
         all_modules = module_outputs.to_list() + [exports_module_output]
-        jre_jars = ctx.attr._jre[J2wasmInfo]._private_.java_info.compile_jars.to_list()
+        jre_jars = get_bootclasspath(ctx).to_list() + get_bootclasspath_deps(ctx).to_list()
 
         # Bundle the module outputs.
         bundler_args = ctx.actions.args()
@@ -426,6 +428,7 @@ _J2WASM_APP_ATTRS = {
     ),
 }
 _J2WASM_APP_ATTRS.update(J2CL_JS_TOOLCHAIN_ATTRS)
+_J2WASM_APP_ATTRS.update(J2WASM_TOOLCHAIN_ATTRS)
 
 _j2wasm_application = rule(
     implementation = _impl_j2wasm_application,
