@@ -292,7 +292,6 @@ public enum Backend {
           // End of class structure normalization.
 
           // Statement/Expression normalizations
-          NormalizeArrayLiterals::new,
           NormalizeShifts::new,
           NormalizeStaticMemberQualifiers::new,
           // Runs after NormalizeStaticMemberQualifiersPass.
@@ -316,6 +315,7 @@ public enum Backend {
           // Run before other passes that normalize JsEnum expressions, but after all the normal
           // Java semantic conversions.
           InsertJsEnumBoxingAndUnboxingConversions::new,
+          NormalizeArrayLiterals::new, // Needs to run after conversions and coercions.
           RemoveUnneededCasts::new,
           AddSwitchExpressionsExhaustivenessCheck::new,
           ImplementSwitchExpressionsViaIifes::new,

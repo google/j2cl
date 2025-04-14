@@ -19,6 +19,7 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.j2cl.transpiler.ast.AstUtils.isBoxableJsEnumType;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayAccess;
@@ -218,6 +219,19 @@ public final class ConversionContextVisitor extends AbstractRewriter {
           argument);
     }
 
+    /**
+     * An {@code argument} that is passed to a method as the array containing the vararg arguments.
+     */
+    protected Expression rewriteVarargsParameterContext(
+        ParameterDescriptor inferredParameterDescriptor,
+        ParameterDescriptor declaredParameterDescriptor,
+        Expression argument) {
+      // The varargs argument has special handling to mimic directly passing the varargs arguments
+      // as any other argument. The behavior can be overridden by overriding this method.
+      return visitor.rewriteVarargsArgument(
+          inferredParameterDescriptor, declaredParameterDescriptor, argument);
+    }
+
     /** An {@code expression} that is used as a string. */
     protected Expression rewriteStringContext(Expression expression) {
       return expression;
@@ -286,6 +300,15 @@ public final class ConversionContextVisitor extends AbstractRewriter {
 
   @Override
   public ArrayLiteral rewriteArrayLiteral(ArrayLiteral arrayLiteral) {
+    if (getParent() instanceof Invocation) {
+      Invocation invocation = (Invocation) getParent();
+      if (arrayLiteral == Iterables.getLast(invocation.getArguments(), null)
+          && invocation.getTarget().isVarargs()) {
+        // The expressions in the array literals encapsulating the vararg parameters are handled
+        // as invocation parameters so they are skipped here.
+        return arrayLiteral;
+      }
+    }
     // assignment context
     ArrayTypeDescriptor typeDescriptor = arrayLiteral.getTypeDescriptor();
     ImmutableList<Expression> valueExpressions =
@@ -826,10 +849,58 @@ public final class ConversionContextVisitor extends AbstractRewriter {
       ParameterDescriptor inferredParameterDescriptor = inferredParameterDescriptors.get(argIndex);
       ParameterDescriptor declaredParameterDescriptor = declaredParameterDescriptors.get(argIndex);
       Expression argumentExpression = argumentExpressions.get(argIndex);
+
       newArgumentExpressions.add(
-          contextRewriter.rewriteMethodInvocationContext(
-              inferredParameterDescriptor, declaredParameterDescriptor, argumentExpression));
+          declaredParameterDescriptor.isVarargs()
+              // Handle vararg parameters that at this point are inside vararg literals by
+              // delegating explicitly to an overrideable handler.
+              ? contextRewriter.rewriteVarargsParameterContext(
+                  inferredParameterDescriptor, declaredParameterDescriptor, argumentExpression)
+              : contextRewriter.rewriteMethodInvocationContext(
+                  inferredParameterDescriptor, declaredParameterDescriptor, argumentExpression));
     }
     return newArgumentExpressions;
+  }
+
+  /** Implements the rewriting of varargs arguments. */
+  private Expression rewriteVarargsArgument(
+      ParameterDescriptor inferredParameterDescriptor,
+      ParameterDescriptor declaredParameterDescriptor,
+      Expression expression) {
+    if (!(expression instanceof ArrayLiteral)) {
+      // The vararg was passed directly as an array, not as separate arguments. Process it as one
+      // argument.
+      return contextRewriter.rewriteMethodInvocationContext(
+          inferredParameterDescriptor, declaredParameterDescriptor, expression);
+    }
+
+    ArrayLiteral arrayLiteral = (ArrayLiteral) expression;
+    return arrayLiteral.toBuilder()
+        .setValueExpressions(
+            arrayLiteral.getValueExpressions().stream()
+                .map(
+                    // Process each element of the array literal the same way a single argument is
+                    // processed argument.
+                    e ->
+                        contextRewriter.rewriteMethodInvocationContext(
+                            toComponentParameterDescriptor(inferredParameterDescriptor),
+                            toComponentParameterDescriptor(declaredParameterDescriptor),
+                            e))
+                .collect(toImmutableList()))
+        .build();
+  }
+
+  /**
+   * Converts the varargs ParameterDescriptor into the equivalent ParameterDescriptor for each
+   * individual argument.
+   */
+  private static ParameterDescriptor toComponentParameterDescriptor(
+      ParameterDescriptor parameterDescriptor) {
+    return parameterDescriptor.toBuilder()
+        .setVarargs(false)
+        .setTypeDescriptor(
+            ((ArrayTypeDescriptor) parameterDescriptor.getTypeDescriptor())
+                .getComponentTypeDescriptor())
+        .build();
   }
 }

@@ -906,27 +906,13 @@ public final class AstUtils {
   private static Expression getPackagedVarargs(
       MethodDescriptor methodDescriptor, List<Expression> arguments) {
     checkArgument(methodDescriptor.isVarargs());
-    int parametersLength = methodDescriptor.getParameterDescriptors().size();
-    ParameterDescriptor varargsParameterDescriptor =
-        Iterables.getLast(methodDescriptor.getParameterDescriptors());
-    ArrayTypeDescriptor varargsTypeDescriptor =
-        (ArrayTypeDescriptor) varargsParameterDescriptor.getTypeDescriptor();
-    ArrayLiteral.Builder arrayLiteralBuilder =
-        ArrayLiteral.newBuilder().setTypeDescriptor(varargsTypeDescriptor);
-    if (arguments.size() >= parametersLength) {
-      for (int i = parametersLength - 1; i < arguments.size(); i++) {
-        arrayLiteralBuilder.addValueExpressions(
-            // Wrap @DoNotAutobox arguments in a JsDocCastExpression so that they don't get
-            // converted by passes based on ContextRewriter.
-            isAnnotatedWithDoNotAutobox(varargsParameterDescriptor)
-                ? JsDocCastExpression.newBuilder()
-                    .setCastTypeDescriptor(varargsTypeDescriptor.getComponentTypeDescriptor())
-                    .setExpression(arguments.get(i))
-                    .build()
-                : arguments.get(i));
-      }
-    }
-    return arrayLiteralBuilder.build();
+    int varargsParameterIndex = methodDescriptor.getParameterDescriptors().size() - 1;
+    TypeDescriptor varargsTypeDescriptor =
+        methodDescriptor.getParameterTypeDescriptors().get(varargsParameterIndex);
+    return ArrayLiteral.newBuilder()
+        .setTypeDescriptor((ArrayTypeDescriptor) varargsTypeDescriptor)
+        .setValueExpressions(arguments.subList(varargsParameterIndex, arguments.size()))
+        .build();
   }
 
   // TODO(b/182341814): This is a temporary hack to be able to disable DoNotAutobox annotations
