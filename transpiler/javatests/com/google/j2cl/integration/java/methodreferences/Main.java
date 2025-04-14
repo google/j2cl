@@ -60,7 +60,7 @@ public class Main {
         return someObjectInstanceNumber == 2;
       }
 
-      public Boolean isInstanceNumber3() {
+      public boolean isInstanceNumber3() {
         return someObjectInstanceNumber == 3;
       }
     }
