@@ -49,8 +49,8 @@ open class NullabilityInferenceProblem8 {
   }
 
   @JvmStatic
-  @ObjCName("test")
-  fun test(
+  @ObjCName("testMethodReference")
+  fun testMethodReference(
    @ObjCName("withJ2ktNullabilityInferenceProblem8_NullableSupplier", swiftName = "with") supplier: NullableSupplier<Any>
   ) {
    NullabilityInferenceProblem8.acceptParameterized(
@@ -58,6 +58,20 @@ open class NullabilityInferenceProblem8 {
      Function { arg0: String ->
       return@Function supplier.get(arg0)!!
      },
+    ),
+   )
+  }
+
+  @JvmStatic
+  @ObjCName("testLambda")
+  fun testLambda(
+   @ObjCName("withJ2ktNullabilityInferenceProblem8_NullableSupplier", swiftName = "with") supplier: NullableSupplier<Any>
+  ) {
+   NullabilityInferenceProblem8.acceptParameterized(
+    NullabilityInferenceProblem8.nonNullWithLowerBound<String, Any>(
+     Function { key: String ->
+      return@Function supplier.get(key)
+     } as Function<in String, Any>,
     ),
    )
   }

@@ -36,7 +36,11 @@ public class NullabilityInferenceProblem8 {
     throw new RuntimeException();
   }
 
-  public static void test(NullableSupplier<Object> supplier) {
+  public static void testMethodReference(NullableSupplier<Object> supplier) {
     acceptParameterized(nonNullWithLowerBound(supplier::get));
+  }
+
+  public static void testLambda(NullableSupplier<Object> supplier) {
+    acceptParameterized(nonNullWithLowerBound(key -> supplier.get(key)));
   }
 }
