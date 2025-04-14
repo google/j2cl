@@ -703,6 +703,7 @@ public enum Backend {
     @Override
     public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
       return ImmutableList.of(
+          NormalizeNullLiterals::new,
           MakeVariablesFinal::new,
           DesugarInstanceOfPatterns::new,
           MakeVariablesNonNull::new,
@@ -733,7 +734,6 @@ public enum Backend {
           FixJavaKotlinMethodOverrideMismatch::new,
           AnnotateProtobufMethodsAsKtProperties::new,
           RewriteAnnotationTypesJ2kt::new,
-          NormalizeNullLiterals::new,
           NormalizeMinValueIntegralLiterals::new,
           CreateImplicitConstructors::new,
           InsertExplicitSuperCalls::new,
