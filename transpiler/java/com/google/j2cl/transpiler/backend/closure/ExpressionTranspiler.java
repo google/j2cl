@@ -278,8 +278,7 @@ public final class ExpressionTranspiler {
         } else if (expression.getTarget().isJsPropertySetter()) {
           renderJsPropertySetter(expression);
         } else {
-          renderMethodCallHeader(expression);
-          renderDelimitedAndCommaSeparated("(", ")", expression.getArguments());
+          renderMethodCall(expression);
         }
         return false;
       }
@@ -349,7 +348,7 @@ public final class ExpressionTranspiler {
         renderNoParens(expression.getArguments().get(0));
       }
 
-      private void renderMethodCallHeader(MethodCall expression) {
+      private void renderMethodCall(MethodCall expression) {
         checkArgument(!expression.isStaticDispatch());
         MethodDescriptor target = expression.getTarget();
         if (target.isConstructor()) {
@@ -360,6 +359,7 @@ public final class ExpressionTranspiler {
         } else {
           renderQualifiedName(expression, target.getMangledName());
         }
+        renderDelimitedAndCommaSeparated("(", ")", expression.getArguments());
       }
 
       @Override
