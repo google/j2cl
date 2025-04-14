@@ -82,9 +82,11 @@ class TypeGraphBuilder {
           member.addReferencedMember(
               checkNotNull(
                   enclosingType.getMemberByName(methodName),
-                  "Missing %s.%s",
+                  "Missing %s.%s. Referenced in %s.%s",
                   enclosingTypeName,
-                  methodName));
+                  methodName,
+                  type.getName(),
+                  member.getName()));
         }
       }
     }
