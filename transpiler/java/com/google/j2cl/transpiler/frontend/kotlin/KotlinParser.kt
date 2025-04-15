@@ -174,18 +174,21 @@ class KotlinParser(private val problems: Problems) {
 
     problems.abortIfCancelled()
 
+    val jvmIrDeserializer = JvmIrDeserializerImpl()
+
     val compilationUnitBuilderExtension =
       createAndRegisterCompilationUnitBuilder(
         compilerConfiguration,
         projectEnvironment.project,
         state,
         packageInfoCache,
+        jvmIrDeserializer,
       )
     problems.abortIfCancelled()
 
     val unused =
       analysisResults.convertToIrAndActualizeForJvm(
-        JvmFir2IrExtensions(compilerConfiguration, JvmIrDeserializerImpl()),
+        JvmFir2IrExtensions(compilerConfiguration, jvmIrDeserializer),
         compilerConfiguration,
         diagnosticsReporter,
         IrGenerationExtension.getInstances(projectEnvironment.project),
@@ -201,9 +204,10 @@ class KotlinParser(private val problems: Problems) {
     project: Project,
     state: GenerationState,
     packageInfoCache: PackageInfoCache,
+    jvmIrDeserializerImpl: JvmIrDeserializerImpl,
   ): CompilationUnitBuilderExtension {
     // Lower the IR tree before to convert it to a j2cl ast
-    val lowerings = LoweringPasses(state, compilerConfiguration)
+    val lowerings = LoweringPasses(state, compilerConfiguration, jvmIrDeserializerImpl)
     IrGenerationExtension.registerExtension(project, lowerings)
 
     val compilationUnitBuilderExtension =

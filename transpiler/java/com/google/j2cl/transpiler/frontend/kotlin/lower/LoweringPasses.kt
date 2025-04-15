@@ -225,12 +225,14 @@ private val loweringPhase = loweringPhase {
 class LoweringPasses(
   private val state: GenerationState,
   private val compilerConfiguration: CompilerConfiguration,
+  private val jvmIrDeserializerImpl: JvmIrDeserializerImpl,
 ) : IrGenerationExtension {
   lateinit var jvmBackendContext: JvmBackendContext
   lateinit var intrinsics: IntrinsicMethods
 
   override fun generate(moduleFragment: IrModuleFragment, pluginContext: IrPluginContext) {
-    jvmBackendContext = createJvmBackendContext(state, compilerConfiguration, pluginContext)
+    jvmBackendContext =
+      createJvmBackendContext(state, compilerConfiguration, pluginContext, jvmIrDeserializerImpl)
     intrinsics = IntrinsicMethods(pluginContext.irBuiltIns)
 
     val j2clBackendContext = J2clBackendContext(jvmBackendContext, intrinsics)
@@ -244,6 +246,7 @@ private fun createJvmBackendContext(
   state: GenerationState,
   compilerConfiguration: CompilerConfiguration,
   pluginContext: IrPluginContext,
+  jvmIrDeserializerImpl: JvmIrDeserializerImpl,
 ): JvmBackendContext {
   var symbolTable = pluginContext.symbolTable as SymbolTable
 
@@ -257,7 +260,7 @@ private fun createJvmBackendContext(
   // removal of the descriptor API. Therefore, we utilize this custom IrProvider, which rely on
   // the public signature of the nbound symbols and the IR plugin API to resolve IR nodes linked
   // to the symbols.
-  val irProviders = listOf(IrProviderFromPublicSignature(pluginContext))
+  jvmIrDeserializerImpl.defaultIrProvider = IrProviderFromPublicSignature(pluginContext)
 
   return JvmBackendContext(
     state,
@@ -266,8 +269,8 @@ private fun createJvmBackendContext(
     JvmGeneratorExtensionsImpl(compilerConfiguration),
     JvmBackendExtension.Default,
     irSerializer = null,
-    irDeserializer = JvmIrDeserializerImpl(),
-    irProviders = irProviders,
+    irDeserializer = jvmIrDeserializerImpl,
+    irProviders = listOf(),
     irPluginContext = pluginContext,
   )
 }

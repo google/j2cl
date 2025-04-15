@@ -50,6 +50,8 @@ import org.jetbrains.kotlin.types.error.ErrorModuleDescriptor
 // Copied and modified from org.jetbrains.kotlin.backend.jvm.JvmIrDeserializerImpl and
 // org.jetbrains.kotlin.backend.jvm.serialization.deserializeLazyDeclarations.kt
 class JvmIrDeserializerImpl : JvmIrDeserializer {
+  lateinit var defaultIrProvider: IrProvider
+
   override fun deserializeTopLevelClass(
     irClass: IrClass,
     irBuiltIns: IrBuiltIns,
@@ -57,6 +59,8 @@ class JvmIrDeserializerImpl : JvmIrDeserializer {
     irProviders: List<IrProvider>,
     extensions: JvmGeneratorExtensions,
   ): Boolean {
+    check(::defaultIrProvider.isInitialized)
+
     val serializedIr =
       when (val source = irClass.source) {
         is KotlinJvmBinarySourceElement -> source.binaryClass.classHeader.serializedIr
@@ -67,7 +71,7 @@ class JvmIrDeserializerImpl : JvmIrDeserializer {
       serializedIr,
       irBuiltIns,
       symbolTable,
-      irProviders,
+      listOf(defaultIrProvider) + irProviders,
       irClass,
       JvmIrTypeSystemContext(irBuiltIns),
     )
