@@ -11,7 +11,9 @@ package(
 integration_test(
     name = "j2ktiosinterop",
     srcs = glob(["*.java"]),
+    enable_nullability = True,
     deps = [
         "//third_party:j2objc_annotations",
+        "//third_party:jspecify_annotations",
     ],
 )
