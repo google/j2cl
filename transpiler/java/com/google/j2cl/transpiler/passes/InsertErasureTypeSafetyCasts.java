@@ -16,14 +16,12 @@
 package com.google.j2cl.transpiler.passes;
 
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
-import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.MethodCall;
-import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 
@@ -102,25 +100,6 @@ public class InsertErasureTypeSafetyCasts extends NormalizationPass {
               .build();
         }
         return castExpression;
-      }
-
-      @Override
-      public Expression rewriteMethodInvocationContext(
-          ParameterDescriptor toParameterDescriptor,
-          ParameterDescriptor declaredParameterDescriptor,
-          Expression argument) {
-        TypeDescriptor toTypeDescriptor = toParameterDescriptor.getTypeDescriptor();
-        TypeDescriptor declaredTypeDescriptor = declaredParameterDescriptor.getTypeDescriptor();
-        if (toParameterDescriptor.isVarargs()
-            && AstUtils.isNonNativeJsEnumArray(toTypeDescriptor)) {
-          // TODO(b/118299062): Remove special casing when non native JsEnum arrays are allowed.
-          //
-          // Since the packaging of varargs (see AstUtils.getPackagedVarargs() for the motivation)
-          // creates an array of type DeclaredType[] instead of a JsEnum[] this pass would normally
-          // insert an erasure cast to JsEnum[], which needs to be avoided.
-          return argument;
-        }
-        return rewriteTypeConversionContext(toTypeDescriptor, declaredTypeDescriptor, argument);
       }
 
       @Override
