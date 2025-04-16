@@ -20,16 +20,20 @@ import java.io.Writer;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-// Test for type and members which should be hidden from ObjC because of b/407538927
+// Contains types and members which should be hidden from ObjC because of b/407538927
 @NullMarked
 public final class HiddenFromObjCTypes {
+  public interface Supplier<T extends @Nullable Object> {
+    T get();
+  }
+
   public static @Nullable Appendable appendable;
   public static @Nullable StringBuilder stringBuilder;
   public static @Nullable Writer writer;
 
-  public interface Generic<T extends @Nullable Object> {}
-
-  public interface GenericWithStringBuilder<T extends @Nullable StringBuilder> {}
+  public interface GenericWithStringBuilder<T extends StringBuilder> {
+    T get();
+  }
 
   public static StringBuilder returnsStringBuilder(int i) {
     throw new RuntimeException();
@@ -43,12 +47,12 @@ public final class HiddenFromObjCTypes {
     throw new RuntimeException();
   }
 
-  public static void hasStringBuilderTypeVariable(int i, Generic<StringBuilder> stringBuilder) {
+  public static void hasStringBuilderTypeVariable(int i, Supplier<StringBuilder> stringBuilder) {
     throw new RuntimeException();
   }
 
   public static void hasStringBuilderWildcard(
-      int i, Generic<? extends StringBuilder> stringBuilder) {
+      int i, Supplier<? extends StringBuilder> stringBuilder) {
     throw new RuntimeException();
   }
 
@@ -66,6 +70,13 @@ public final class HiddenFromObjCTypes {
     @Override
     public Appendable append(char c) throws IOException {
       throw new IOException();
+    }
+  }
+
+  public static final class StringBuilderSupplier implements Supplier<StringBuilder> {
+    @Override
+    public StringBuilder get() {
+      throw new AssertionError();
     }
   }
 }

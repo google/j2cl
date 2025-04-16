@@ -21,6 +21,7 @@ package j2kt
 import javaemul.lang.*
 import java.io.IOException
 import java.io.Writer
+import java.lang.AssertionError
 import java.lang.RuntimeException
 import kotlin.Char
 import kotlin.CharSequence
@@ -81,7 +82,7 @@ class HiddenFromObjCTypes {
   @ObjCName("hasStringBuilderTypeVariable")
   fun hasStringBuilderTypeVariable(
    @ObjCName("withInt", swiftName = "with") i: Int,
-   @ObjCName("withJ2ktHiddenFromObjCTypes_Generic", swiftName = "with") stringBuilder: Generic<StringBuilder>
+   @ObjCName("withJ2ktHiddenFromObjCTypes_Supplier", swiftName = "with") stringBuilder: Supplier<StringBuilder>
   ) {
    throw RuntimeException()
   }
@@ -90,17 +91,23 @@ class HiddenFromObjCTypes {
   @ObjCName("hasStringBuilderWildcard")
   fun hasStringBuilderWildcard(
    @ObjCName("withInt", swiftName = "with") i: Int,
-   @ObjCName("withJ2ktHiddenFromObjCTypes_Generic", swiftName = "with") stringBuilder: Generic<out StringBuilder>
+   @ObjCName("withJ2ktHiddenFromObjCTypes_Supplier", swiftName = "with") stringBuilder: Supplier<out StringBuilder>
   ) {
    throw RuntimeException()
   }
  }
 
- @ObjCName("J2ktJ2ktHiddenFromObjCTypes_Generic", swiftName = "J2ktHiddenFromObjCTypes_Generic", exact = true)
- interface Generic<T>
+ @ObjCName("J2ktJ2ktHiddenFromObjCTypes_Supplier", swiftName = "J2ktHiddenFromObjCTypes_Supplier", exact = true)
+ fun interface Supplier<T> {
+  @ObjCName("get")
+  fun get(): T
+ }
 
  @ObjCName("J2ktJ2ktHiddenFromObjCTypes_GenericWithStringBuilder", swiftName = "J2ktHiddenFromObjCTypes_GenericWithStringBuilder", exact = true)
- interface GenericWithStringBuilder<T: StringBuilder?>
+ fun interface GenericWithStringBuilder<T: StringBuilder> {
+  @ObjCName("get")
+  fun get(): T
+ }
 
  @ObjCName("J2ktJ2ktHiddenFromObjCTypes_CustomAppendable", swiftName = "J2ktHiddenFromObjCTypes_CustomAppendable", exact = true)
  class CustomAppendable: Appendable {
@@ -117,6 +124,13 @@ class HiddenFromObjCTypes {
   @Throws(IOException::class)
   override fun append(c: Char): Appendable {
    throw IOException()
+  }
+ }
+
+ @ObjCName("J2ktJ2ktHiddenFromObjCTypes_StringBuilderSupplier", swiftName = "J2ktHiddenFromObjCTypes_StringBuilderSupplier", exact = true)
+ class StringBuilderSupplier: Supplier<StringBuilder> {
+  override fun get(): StringBuilder {
+   throw AssertionError()
   }
  }
 }
