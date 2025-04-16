@@ -15,21 +15,15 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
-import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
-import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.FieldDescriptor
 import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.MethodDescriptor
-import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDeclaration
-import com.google.j2cl.transpiler.ast.TypeDescriptor
-import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotation
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.assignment
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.literal
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionObject
 import com.google.j2cl.transpiler.backend.kotlin.ast.declaration
-import com.google.j2cl.transpiler.backend.kotlin.common.orIfNull
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
@@ -43,13 +37,6 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
 
   private val environment: Environment
     get() = nameRenderer.environment
-
-  fun hiddenFromObjCAnnotationSource(): Source =
-    annotation(
-      nameRenderer.sourceWithOptInQualifiedName("kotlin.experimental.ExperimentalObjCRefinement") {
-        topLevelQualifiedNameSource("kotlin.native.HiddenFromObjC")
-      }
-    )
 
   fun objCNameAnnotationSource(
     name: String,
@@ -66,15 +53,12 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
     )
 
   fun objCAnnotationSource(typeDeclaration: TypeDeclaration): Source =
-    when {
-      referencesHiddenFromObjC(typeDeclaration) -> hiddenFromObjCAnnotationSource()
-      needsObjCNameAnnotation(typeDeclaration) ->
-        objCNameAnnotationSource(
-          typeDeclaration.objCName(nameRenderer.objCNamePrefix),
-          swiftName = typeDeclaration.objCNameWithoutPrefix,
-          exact = true,
-        )
-      else -> Source.EMPTY
+    Source.emptyUnless(needsObjCNameAnnotation(typeDeclaration)) {
+      objCNameAnnotationSource(
+        typeDeclaration.objCName(nameRenderer.objCNamePrefix),
+        swiftName = typeDeclaration.objCNameWithoutPrefix,
+        exact = true,
+      )
     }
 
   fun objCAnnotationSource(companionObject: CompanionObject): Source =
@@ -90,30 +74,16 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
     methodDescriptor: MethodDescriptor,
     methodObjCNames: MethodObjCNames?,
   ): Source =
-    Source.emptyIf(
-      methodDescriptor.isConstructor ||
-        referencesHiddenFromObjC(methodDescriptor.enclosingTypeDescriptor)
-    ) {
-      when {
-        referencesHiddenFromObjC(methodDescriptor) -> hiddenFromObjCAnnotationSource()
-        else -> objCNameAnnotationSource(methodObjCNames)
-      }
+    Source.emptyUnless(!methodDescriptor.isConstructor) {
+      methodObjCNames
+        ?.objCName
+        ?.let { objCNameAnnotationSource(it.string, swiftName = it.swiftString) }
+        .orEmpty()
     }
 
-  fun objCNameAnnotationSource(methodObjCNames: MethodObjCNames?): Source =
-    methodObjCNames
-      ?.objCName
-      ?.let { objCNameAnnotationSource(it.string, swiftName = it.swiftString) }
-      .orEmpty()
-
   fun objCAnnotationSource(fieldDescriptor: FieldDescriptor): Source =
-    Source.emptyIf(referencesHiddenFromObjC(fieldDescriptor.enclosingTypeDescriptor)) {
-      when {
-        referencesHiddenFromObjC(fieldDescriptor) -> hiddenFromObjCAnnotationSource()
-        needsObjCNameAnnotation(fieldDescriptor) ->
-          objCNameAnnotationSource(fieldDescriptor.objCName)
-        else -> Source.EMPTY
-      }
+    Source.emptyUnless(needsObjCNameAnnotation(fieldDescriptor)) {
+      objCNameAnnotationSource(fieldDescriptor.objCName)
     }
 
   private fun needsObjCNameAnnotation(typeDeclaration: TypeDeclaration): Boolean =
@@ -125,22 +95,20 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
     needsObjCNameAnnotation(companionObject.enclosingTypeDeclaration)
 
   private fun needsObjCNameAnnotation(method: Method): Boolean =
-    !referencesHiddenFromObjC(method.descriptor) &&
-      method.descriptor.enclosingTypeDescriptor.typeDeclaration.let { enclosingTypeDeclaration ->
-        !enclosingTypeDeclaration.isLocal &&
-          !enclosingTypeDeclaration.isAnonymous &&
-          environment.ktVisibility(method.descriptor).needsObjCNameAnnotation &&
-          !method.isJavaOverride
-      }
+    method.descriptor.enclosingTypeDescriptor.typeDeclaration.let { enclosingTypeDeclaration ->
+      !enclosingTypeDeclaration.isLocal &&
+        !enclosingTypeDeclaration.isAnonymous &&
+        environment.ktVisibility(method.descriptor).needsObjCNameAnnotation &&
+        !method.isJavaOverride
+    }
 
   private fun needsObjCNameAnnotation(fieldDescriptor: FieldDescriptor): Boolean =
-    !referencesHiddenFromObjC(fieldDescriptor) &&
-      fieldDescriptor.enclosingTypeDescriptor.typeDeclaration.let { enclosingTypeDeclaration ->
-        needsObjCNameAnnotation(enclosingTypeDeclaration) &&
-          !enclosingTypeDeclaration.isLocal &&
-          !enclosingTypeDeclaration.isAnonymous &&
-          environment.ktVisibility(fieldDescriptor).needsObjCNameAnnotation
-      }
+    fieldDescriptor.enclosingTypeDescriptor.typeDeclaration.let { enclosingTypeDeclaration ->
+      needsObjCNameAnnotation(enclosingTypeDeclaration) &&
+        !enclosingTypeDeclaration.isLocal &&
+        !enclosingTypeDeclaration.isAnonymous &&
+        environment.ktVisibility(fieldDescriptor).needsObjCNameAnnotation
+    }
 
   internal fun renderedObjCNames(method: Method): MethodObjCNames? =
     when {
@@ -149,49 +117,6 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
     }
 
   companion object {
-    // TODO(b/407538927): Remove this workaround when no longer necessary.
-    private val HIDDEN_FROM_OBJC_TYPE_NAMES = setOf("java.lang.Appendable")
-
-    private fun isHiddenFromObjC(typeDeclaration: TypeDeclaration): Boolean =
-      HIDDEN_FROM_OBJC_TYPE_NAMES.contains(typeDeclaration.qualifiedSourceName)
-
-    internal fun referencesHiddenFromObjC(
-      typeDeclaration: TypeDeclaration,
-      seen: Set<TypeVariable> = setOf(),
-    ): Boolean =
-      typeDeclaration.allSuperTypesIncludingSelf.any(::isHiddenFromObjC) ||
-        typeDeclaration.typeParameterDescriptors.any { referencesHiddenFromObjC(it, seen) }
-
-    internal fun referencesHiddenFromObjC(methodDescriptor: MethodDescriptor): Boolean =
-      methodDescriptor.typeParameterTypeDescriptors.any(::referencesHiddenFromObjC) ||
-        referencesHiddenFromObjC(methodDescriptor.returnTypeDescriptor) ||
-        methodDescriptor.parameterTypeDescriptors.any(::referencesHiddenFromObjC)
-
-    internal fun referencesHiddenFromObjC(fieldDescriptor: FieldDescriptor): Boolean =
-      referencesHiddenFromObjC(fieldDescriptor.typeDescriptor)
-
-    internal fun referencesHiddenFromObjC(
-      typeDescriptor: TypeDescriptor,
-      seen: Set<TypeVariable> = setOf(),
-    ): Boolean =
-      when (typeDescriptor) {
-        is PrimitiveTypeDescriptor -> false
-        is ArrayTypeDescriptor ->
-          referencesHiddenFromObjC(typeDescriptor.componentTypeDescriptor, seen)
-        is DeclaredTypeDescriptor ->
-          referencesHiddenFromObjC(typeDescriptor.typeDeclaration, seen) ||
-            typeDescriptor.typeArgumentDescriptors.any { referencesHiddenFromObjC(it, seen) }
-        is TypeVariable ->
-          !seen.contains(typeDescriptor) &&
-            seen.plus(typeDescriptor).let { seen ->
-              referencesHiddenFromObjC(typeDescriptor.upperBoundTypeDescriptor, seen) ||
-                typeDescriptor.lowerBoundTypeDescriptor
-                  ?.let { referencesHiddenFromObjC(it, seen) }
-                  .orIfNull { false }
-            }
-        else -> false
-      }
-
     private fun parameterSource(name: String, valueSource: Source): Source =
       assignment(source(name), valueSource)
   }
