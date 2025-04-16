@@ -90,7 +90,7 @@ public class VerifyReferenceScoping extends NormalizationPass {
                 parent instanceof Statement || parent instanceof MultiExpression,
                 "Variable declaration expressions `%s` can only appear directly under a"
                     + " Statement or a MultiExpression",
-                variableDeclarationExpression.toString());
+                variableDeclarationExpression);
           }
 
           @Override
