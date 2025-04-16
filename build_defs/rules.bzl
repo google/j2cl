@@ -23,6 +23,7 @@ load(
     "//build_defs/internal_do_not_use:j2kt_library.bzl",
     _j2kt_apple_framework = "j2kt_apple_framework",
     _j2kt_jvm_library = "j2kt_jvm_library",
+    _j2kt_min_native_library = "j2kt_min_native_library",
     _j2kt_minimal_apple_framework = "j2kt_minimal_apple_framework",
     _j2kt_native_library = "j2kt_native_library",
     _j2kt_precompilied_apple_framework = "j2kt_precompilied_apple_framework",
@@ -61,6 +62,8 @@ j2kt_precompiled_apple_framework = _j2kt_precompilied_apple_framework
 j2kt_minimal_apple_framework = _j2kt_minimal_apple_framework
 
 j2kt_native_library = _j2kt_native_library
+
+j2kt_min_native_library = _j2kt_min_native_library
 
 j2kt_jvm_library = _j2kt_jvm_library
 

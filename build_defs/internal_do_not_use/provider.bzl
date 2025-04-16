@@ -17,3 +17,9 @@ J2ktInfo = provider(
     "NOTE: Data under '_private_' is considered private internal data so do not use.",
     fields = ["_private_"],
 )
+
+J2ktNativeInfo = provider(
+    "Provides extra information for j2kt native libraries. \n" +
+    "NOTE: Data under '_private_' is considered private internal data so do not use.",
+    fields = ["_private_"],
+)
