@@ -15,6 +15,8 @@
  */
 package j2ktiosinterop;
 
+import java.io.IOException;
+import java.io.Writer;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -23,49 +25,47 @@ import org.jspecify.annotations.Nullable;
 public final class HiddenFromObjCTypes {
   public interface Generic<T extends @Nullable Object> {}
 
-  // TODO(b/407538927): Uncomment when the bug is fixed.
-  // public static @Nullable Appendable appendable;
-  // public static @Nullable StringBuilder stringBuilder;
-  // public static @Nullable Writer writer;
-  //
-  // public interface GenericWithStringBuilder<T extends @Nullable StringBuilder> {}
-  //
-  // public static StringBuilder returnsStringBuilder(int i) {
-  //   throw new RuntimeException();
-  // }
-  //
-  // public static void takesStringBuilder(int i, StringBuilder stringBuilder) {
-  //   throw new RuntimeException();
-  // }
-  //
-  // public static <T extends StringBuilder> void hasStringBuilderParameter(int i, T stringBuilder)
-  // {
-  //   throw new RuntimeException();
-  // }
-  //
-  // public static void hasStringBuilderTypeVariable(int i, Generic<StringBuilder> stringBuilder) {
-  //   throw new RuntimeException();
-  // }
-  //
-  // public static void hasStringBuilderWildcard(
-  //     int i, Generic<? extends StringBuilder> stringBuilder) {
-  //   throw new RuntimeException();
-  // }
-  //
-  // public static final class CustomAppendable implements Appendable {
-  //   @Override
-  //   public Appendable append(@Nullable CharSequence csq) throws IOException {
-  //     throw new IOException();
-  //   }
-  //
-  //   @Override
-  //   public Appendable append(@Nullable CharSequence csq, int start, int end) throws IOException {
-  //     throw new IOException();
-  //   }
-  //
-  //   @Override
-  //   public Appendable append(char c) throws IOException {
-  //     throw new IOException();
-  //   }
-  // }
+  public static @Nullable Appendable appendable;
+  public static @Nullable StringBuilder stringBuilder;
+  public static @Nullable Writer writer;
+
+  public interface GenericWithStringBuilder<T extends @Nullable StringBuilder> {}
+
+  public static StringBuilder returnsStringBuilder(int i) {
+    throw new RuntimeException();
+  }
+
+  public static void takesStringBuilder(int i, StringBuilder stringBuilder) {
+    throw new RuntimeException();
+  }
+
+  public static <T extends StringBuilder> void hasStringBuilderParameter(int i, T stringBuilder) {
+    throw new RuntimeException();
+  }
+
+  public static void hasStringBuilderTypeVariable(int i, Generic<StringBuilder> stringBuilder) {
+    throw new RuntimeException();
+  }
+
+  public static void hasStringBuilderWildcard(
+      int i, Generic<? extends StringBuilder> stringBuilder) {
+    throw new RuntimeException();
+  }
+
+  public static final class CustomAppendable implements Appendable {
+    @Override
+    public Appendable append(@Nullable CharSequence csq) throws IOException {
+      throw new IOException();
+    }
+
+    @Override
+    public Appendable append(@Nullable CharSequence csq, int start, int end) throws IOException {
+      throw new IOException();
+    }
+
+    @Override
+    public Appendable append(char c) throws IOException {
+      throw new IOException();
+    }
+  }
 }

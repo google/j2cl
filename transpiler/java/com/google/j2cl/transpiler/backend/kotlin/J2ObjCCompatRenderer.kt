@@ -35,6 +35,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid
 import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.assignment
+import com.google.j2cl.transpiler.backend.kotlin.ObjCNameRenderer.Companion.referencesHiddenFromObjC
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.ast.companionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.ast.declaration
@@ -277,11 +278,12 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
       shouldRender(fieldDescriptor.typeDescriptor)
 
   private fun shouldRender(typeDescriptor: TypeDescriptor): Boolean =
-    when (typeDescriptor) {
-      is DeclaredTypeDescriptor -> shouldRenderDescriptor(typeDescriptor.typeDeclaration)
-      is ArrayTypeDescriptor -> false
-      else -> true
-    }
+    !referencesHiddenFromObjC(typeDescriptor) &&
+      when (typeDescriptor) {
+        is DeclaredTypeDescriptor -> shouldRenderDescriptor(typeDescriptor.typeDeclaration)
+        is ArrayTypeDescriptor -> false
+        else -> true
+      }
 
   private val collectionTypeDescriptors: Set<TypeDescriptor>
     get() = setOf(typeDescriptors.javaUtilCollection, typeDescriptors.javaUtilMap)
@@ -297,7 +299,8 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
   private fun shouldRenderDescriptor(typeDeclaration: TypeDeclaration): Boolean =
     typeDeclaration.visibility.isPublic &&
       existsInObjC(typeDeclaration) &&
-      !isCollection(typeDeclaration)
+      !isCollection(typeDeclaration) &&
+      !referencesHiddenFromObjC(typeDeclaration)
 
   private fun existsInObjC(typeDeclaration: TypeDeclaration): Boolean =
     !typeDeclaration.isKtNative || mappedObjCNameRenderer(typeDeclaration) != null
