@@ -65,7 +65,7 @@ open class NullabilityInferenceProblem internal constructor() {
     java.util.Comparator.comparing<User, String>(
      Function { user: User ->
       return@Function user.getName().orElse("")!!
-     },
+     } as Function<in User, out String>,
     ),
     users,
    )

@@ -100,7 +100,7 @@ open class Main {
  open fun testJsFunctionErasureCasts() {
   val list: MutableList<Function<String?, String?>?> = ArrayList<Function<String, String>>() as MutableList<Function<String?, String?>?>
   Main.acceptsJsFunction(
-   list.get(0) as Function<String?, String?>?,
+   list.get(0),
   )
  }
 

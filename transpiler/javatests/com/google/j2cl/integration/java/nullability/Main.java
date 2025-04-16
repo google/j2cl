@@ -16,7 +16,6 @@
 package nullability;
 
 import static com.google.j2cl.integration.testing.Asserts.assertNull;
-import static com.google.j2cl.integration.testing.TestUtils.isJ2Kt;
 
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -298,13 +297,8 @@ public class Main {
   }
 
   private static void testNullWildcardInLambda() {
-    // TODO(b/407688032): Enable for J2KT when the bug is fixed.
-    if (!isJ2Kt()) {
-      // Lambda is rendered as `Supplier { return null!! }`
-      Supplier<?> supplier = wrap(() -> null);
-      // It causes `getValue()` to throw NPE.
-      supplier.getValue();
-    }
+    Supplier<?> supplier = wrap(() -> null);
+    supplier.getValue();
   }
 
   private static <T extends @Nullable Object> Supplier<T> wrap(Supplier<? extends T> supplier) {

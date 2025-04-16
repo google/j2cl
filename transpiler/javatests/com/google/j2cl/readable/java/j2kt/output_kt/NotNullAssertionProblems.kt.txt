@@ -271,11 +271,7 @@ open class NotNullAssertionProblems {
    @ObjCName("withNSString", swiftName = "with") nonNull: C
   ) {
    val localNonNull: C? = nonNull
-   NotNullAssertionProblems.acceptNullable2Vararg<C>(
-    localNonNull as C,
-    nonNull,
-    nonNull,
-   )
+   NotNullAssertionProblems.acceptNullable2Vararg<C?>(localNonNull, nonNull, nonNull)
   }
 
   @JvmStatic
@@ -284,11 +280,7 @@ open class NotNullAssertionProblems {
    @ObjCName("withNSString", swiftName = "with") nonNull: C
   ) {
    val localNonNull: C? = nonNull
-   NotNullAssertionProblems.acceptNullable2Vararg<C>(
-    localNonNull!!,
-    nonNull,
-    nonNull,
-   )
+   NotNullAssertionProblems.acceptNullable2Vararg<C?>(localNonNull, nonNull, nonNull)
   }
 
   @JvmStatic
@@ -310,11 +302,7 @@ open class NotNullAssertionProblems {
    @ObjCName("withNSString", swiftName = "with") nonNull: C
   ) {
    val localNonNull: C? = nonNull
-   NotNullAssertionProblems.acceptNullable2Vararg<C>(
-    localNonNull!!,
-    nonNull,
-    nonNull,
-   )
+   NotNullAssertionProblems.acceptNullable2Vararg<C?>(localNonNull, nonNull, nonNull)
   }
 
   @JvmStatic
@@ -323,11 +311,7 @@ open class NotNullAssertionProblems {
    @ObjCName("withId") nonNull: C
   ) where C: Class1, C: Interface1 {
    val localNonNull: C? = nonNull
-   NotNullAssertionProblems.acceptNullable2Vararg<C>(
-    localNonNull!!,
-    nonNull,
-    nonNull,
-   )
+   NotNullAssertionProblems.acceptNullable2Vararg<C?>(localNonNull, nonNull, nonNull)
   }
 
   @JvmStatic
@@ -336,11 +320,7 @@ open class NotNullAssertionProblems {
    @ObjCName("withId") nonNull: C
   ) where C: Interface1, C: Interface2 {
    val localNonNull: C? = nonNull
-   NotNullAssertionProblems.acceptNullable2Vararg<C>(
-    localNonNull!!,
-    nonNull,
-    nonNull,
-   )
+   NotNullAssertionProblems.acceptNullable2Vararg<C?>(localNonNull, nonNull, nonNull)
   }
 
   @JvmStatic
@@ -434,9 +414,9 @@ open class NotNullAssertionProblems {
   @JvmStatic
   @ObjCName("testNullWildcardInLambda")
   fun testNullWildcardInLambda() {
-   val supplier: Supplier<*> = NotNullAssertionProblems.wrap<Any>(
+   val supplier: Supplier<*> = NotNullAssertionProblems.wrap<Any?>(
     Supplier {
-     return@Supplier null!!
+     return@Supplier null
     },
    )
    supplier.getValue()

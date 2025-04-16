@@ -492,4 +492,26 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
     }
     return builder.build();
   }
+
+  static <A, B, C, R> ImmutableList<R> zip(
+      List<A> listA,
+      List<B> listB,
+      List<C> listC,
+      TriFunction<? super A, ? super B, ? super C, ? extends R> function) {
+    checkArgument(
+        listA.size() == listB.size() && listA.size() == listC.size(),
+        "Lists are of different sizes (%s, %s, %s)",
+        listA.size(),
+        listB.size(),
+        listC.size());
+    ImmutableList.Builder<R> builder = ImmutableList.builder();
+    for (int i = 0; i < listA.size(); i++) {
+      builder.add(function.apply(listA.get(i), listB.get(i), listC.get(i)));
+    }
+    return builder.build();
+  }
+
+  interface TriFunction<A, B, C, R> {
+    R apply(A a, B b, C c);
+  }
 }

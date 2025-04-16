@@ -19,6 +19,7 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Ordering;
 import com.google.common.collect.Streams;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
@@ -311,7 +312,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
       DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
       // Look for the parameterized instance of the declared parameter type
       DeclaredTypeDescriptor target =
-          getParameterizedSupertype(
+          getParameterizedSuperType(
               declaredTypeDescriptor, declarationDeclaredTypeDescriptor.getTypeDeclaration());
       if (target == null) {
         // TODO(b/406815802): parameter and arguments are not structurally similar, see
@@ -378,20 +379,18 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
         .build();
   }
 
-  // TODO(b/406815802): Add JavaDoc
-  private TypeDescriptor propagateNullabilityFrom(
-      @Nullable TypeVariable typeParameterDescriptor,
+  /** Propagate nullability from one type argument to another, respecting parameter nullability. */
+  private static TypeDescriptor propagateTypeArgumentNullabilityFrom(
+      TypeVariable typeParameterDescriptor,
       TypeDescriptor typeDescriptor,
-      TypeDescriptor fromTypeDescriptor) {
-    // Infer nullability only on concrete types, because only these suffer from `!!`.
-    return typeDescriptor instanceof TypeVariable
-            || (typeParameterDescriptor != null
-                && typeParameterDescriptor.getUpperBoundTypeDescriptor() instanceof TypeVariable)
+      TypeDescriptor fromTypeDescriptor,
+      ImmutableSet<TypeVariable> seen) {
+    return !typeParameterDescriptor.getUpperBoundTypeDescriptor().isNullable()
         ? typeDescriptor
-        : propagateNullabilityFrom(typeDescriptor, fromTypeDescriptor);
+        : propagateNullabilityTo(typeDescriptor, fromTypeDescriptor, seen);
   }
 
-  // TODO(b/406815802): Add JavaDoc
+  /** Propagate nullability from all type arguments to another, respecting parameter nullability. */
   private MethodDescriptor propagateNullabilityFromArguments(
       MethodDescriptor methodDescriptor,
       ImmutableList<TypeVariable> typeParameterDescriptors,
@@ -406,7 +405,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
             typeParameterDescriptors,
             typeArgumentDescriptors,
             (typeParameterDescriptor, typeArgumentDescriptor) ->
-                propagateTypeArgumentNullabilityFrom(
+                propagateTypeArgumentNullabilityFromInferredTypes(
                     typeParameterDescriptor,
                     typeArgumentDescriptor,
                     parameterTypeDescriptors,
@@ -430,7 +429,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
             typeParameterDescriptors,
             typeArgumentDescriptors,
             (typeParameterDescriptor, typeArgumentDescriptor) ->
-                propagateTypeArgumentNullabilityFrom(
+                propagateTypeArgumentNullabilityFromInferredType(
                     typeParameterDescriptor,
                     typeArgumentDescriptor,
                     declaredTypeDescriptor,
@@ -462,7 +461,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
                 }
 
                 propagatedTypeArgumentDescriptorRef[0] =
-                    propagateTypeArgumentNullabilityFrom(
+                    propagateTypeArgumentNullabilityFromInferredType(
                         typeParameterDescriptor,
                         propagatedTypeArgumentDescriptorRef[0],
                         methodLike
@@ -476,14 +475,14 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
   }
 
   // TODO(b/406815802): Add JavaDoc
-  private TypeDescriptor propagateTypeArgumentNullabilityFrom(
+  private TypeDescriptor propagateTypeArgumentNullabilityFromInferredTypes(
       TypeVariable typeParameterDescriptor,
       TypeDescriptor typeArgumentDescriptor,
       List<TypeDescriptor> declarationTypeDescriptors,
       List<TypeDescriptor> inferredTypeDescriptors) {
     for (int i = 0; i < declarationTypeDescriptors.size(); i++) {
       typeArgumentDescriptor =
-          propagateTypeArgumentNullabilityFrom(
+          propagateTypeArgumentNullabilityFromInferredType(
               typeParameterDescriptor,
               typeArgumentDescriptor,
               declarationTypeDescriptors.get(i),
@@ -493,7 +492,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
   }
 
   // TODO(b/406815802): Add JavaDoc comment.
-  private TypeDescriptor propagateTypeArgumentNullabilityFrom(
+  private TypeDescriptor propagateTypeArgumentNullabilityFromInferredType(
       TypeVariable typeParameterDescriptor,
       TypeDescriptor typeArgumentDescriptor,
       TypeDescriptor declarationTypeDescriptor,
@@ -503,7 +502,8 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
         .reduce(
             propagateTypeArgument(typeParameterDescriptor, typeArgumentDescriptor),
             (typeArgument, typeDescriptor) ->
-                propagateNullabilityFrom(typeParameterDescriptor, typeArgument, typeDescriptor),
+                propagateTypeArgumentNullabilityFrom(
+                    typeParameterDescriptor, typeArgument, typeDescriptor, ImmutableSet.of()),
             (a, b) -> a);
   }
 
@@ -513,19 +513,129 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
     return typeParameter.canBeNull() ? typeArgument : typeArgument.toNonNullable();
   }
 
-  // TODO(b/406815802): Add JavaDoc comment.
-  private static TypeDescriptor propagateNullabilityFrom(
-      TypeDescriptor typeDescriptor, TypeDescriptor from) {
-    return !from.equals(typeDescriptor) && from.canBeNull()
-        ? typeDescriptor.toNullable()
-        : typeDescriptor;
+  /**
+   * Propagates nullability from {@code fromTypeDescriptor} to {@code toTypeDescriptor} assuming
+   * that {@code fromTypeDescriptor} is assignable to {@code toTypeDescriptor}.
+   */
+  private static TypeDescriptor propagateNullabilityTo(
+      TypeDescriptor to, TypeDescriptor from, ImmutableSet<TypeVariable> seen) {
+    if (to.equals(from)) {
+      return to;
+    }
+
+    if (to instanceof DeclaredTypeDescriptor) {
+      return propagateNullabilityToDeclared((DeclaredTypeDescriptor) to, from, seen);
+    } else if (to instanceof ArrayTypeDescriptor) {
+      return propagateNullabilityToArray((ArrayTypeDescriptor) to, from, seen);
+    } else if (to instanceof TypeVariable) {
+      return propagateNullabilityToVariable((TypeVariable) to, from, seen);
+    } else {
+      // TODO(b/407688032): Handle intersection and union type descriptors, if necessary.
+      return to;
+    }
   }
 
-  // TODO(b/406815802): Add JavaDoc comment.
+  private static TypeDescriptor propagateNullabilityToDeclared(
+      DeclaredTypeDescriptor toDeclared, TypeDescriptor from, ImmutableSet<TypeVariable> seen) {
+    if (from instanceof DeclaredTypeDescriptor) {
+      DeclaredTypeDescriptor fromDeclared = (DeclaredTypeDescriptor) from;
+      DeclaredTypeDescriptor fromDeclaredSuper =
+          fromDeclared = getParameterizedSuperType(fromDeclared, toDeclared.getTypeDeclaration());
+      if (fromDeclaredSuper == null) {
+        return toDeclared.toNullable(toDeclared.isNullable() || from.isNullable());
+      } else {
+        if (toDeclared.isRaw()) {
+          return toDeclared.toNullable(toDeclared.isNullable() || fromDeclared.isNullable());
+        }
+
+        return toDeclared
+            .withTypeArguments(
+                zip(
+                    toDeclared.getTypeDeclaration().getTypeParameterDescriptors(),
+                    toDeclared.getTypeArgumentDescriptors(),
+                    fromDeclaredSuper.getTypeArgumentDescriptors(),
+                    (a, b, c) -> propagateTypeArgumentNullabilityFrom(a, b, c, seen)))
+            .toNullable(toDeclared.isNullable() || fromDeclared.isNullable());
+      }
+    } else if (from instanceof TypeVariable) {
+      TypeVariable fromVariable = (TypeVariable) from;
+      return PropagateNullability.propagateNullabilityToDeclared(
+          toDeclared, getNormalizedUpperBoundTypeDescriptor(fromVariable), seen);
+    } else {
+      return toDeclared;
+    }
+  }
+
+  private static TypeDescriptor propagateNullabilityToArray(
+      ArrayTypeDescriptor toArray, TypeDescriptor from, ImmutableSet<TypeVariable> seen) {
+    if (from instanceof ArrayTypeDescriptor) {
+      ArrayTypeDescriptor fromArray = (ArrayTypeDescriptor) from;
+      return toArray
+          .withComponentTypeDescriptor(
+              propagateNullabilityTo(
+                  toArray.getComponentTypeDescriptor(),
+                  fromArray.getComponentTypeDescriptor(),
+                  seen))
+          .toNullable(toArray.isNullable() || fromArray.isNullable());
+    } else if (from instanceof TypeVariable) {
+      TypeVariable fromVariable = (TypeVariable) from;
+      return PropagateNullability.propagateNullabilityToArray(
+          toArray, getNormalizedUpperBoundTypeDescriptor(fromVariable), seen);
+    } else {
+      return toArray;
+    }
+  }
+
+  private static TypeDescriptor propagateNullabilityToVariable(
+      TypeVariable toVariable, TypeDescriptor from, ImmutableSet<TypeVariable> seen) {
+    if (seen.contains(toVariable)) {
+      return toVariable;
+    }
+
+    ImmutableSet<TypeVariable> newSeen =
+        ImmutableSet.<TypeVariable>builder().addAll(seen).add(toVariable).build();
+
+    if (from instanceof TypeVariable) {
+      TypeVariable fromVariable = (TypeVariable) from;
+      if (toVariable.isWildcard()) {
+        return propagateNullabilityAnnotationFrom(
+            toVariable.withRewrittenBounds(
+                upperBound ->
+                    propagateNullabilityTo(
+                        upperBound, fromVariable.getUpperBoundTypeDescriptor(), newSeen),
+                lowerBound -> lowerBound),
+            fromVariable);
+      }
+      return propagateNullabilityAnnotationFrom(toVariable, fromVariable);
+    }
+
+    if (toVariable.isWildcard()) {
+      // Propagate wildcard upper bounds only.
+      // TODO(b/407688032): Do we care about lower bounds?
+      return toVariable.withRewrittenBounds(
+          upperBound -> propagateNullabilityTo(upperBound, from, newSeen),
+          lowerBound -> lowerBound);
+    }
+
+    return toVariable.toNullable(toVariable.isNullable() || from.isNullable());
+  }
+
+  private static TypeDescriptor propagateNullabilityAnnotationFrom(
+      TypeVariable toTypeVariable, TypeVariable fromTypeVariable) {
+    return toTypeVariable.withNullabilityAnnotation(
+        mostNullableOf(
+            toTypeVariable.getNullabilityAnnotation(),
+            fromTypeVariable.getNullabilityAnnotation()));
+  }
+
+  /**
+   * Propagate nullability from all types to the given type, assuming they are already assignable
+   * without nullability annotations.
+   */
   private static TypeDescriptor propagateNullabilityFrom(
       TypeDescriptor typeDescriptor, Stream<TypeDescriptor> fromTypeDescriptors) {
     return fromTypeDescriptors.reduce(
-        typeDescriptor, PropagateNullability::propagateNullabilityFrom, (a, b) -> a);
+        typeDescriptor, (a, b) -> propagateNullabilityTo(a, b, ImmutableSet.of()));
   }
 
   /**
@@ -737,11 +847,22 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
    * a supertype of type descriptor.
    */
   @Nullable
-  private static DeclaredTypeDescriptor getParameterizedSupertype(
+  private static DeclaredTypeDescriptor getParameterizedSuperType(
       DeclaredTypeDescriptor declaredTypeDescriptor, TypeDeclaration typeDeclaration) {
     return declaredTypeDescriptor.getAllSuperTypesIncludingSelf().stream()
         .filter(it -> it.getTypeDeclaration().equals(typeDeclaration))
         .findFirst()
         .orElse(null);
+  }
+
+  private static final Ordering<NullabilityAnnotation> NULLABILITY_ANNOTATION_ORDERING =
+      Ordering.explicit(
+          NullabilityAnnotation.NOT_NULLABLE,
+          NullabilityAnnotation.NONE,
+          NullabilityAnnotation.NULLABLE);
+
+  private static NullabilityAnnotation mostNullableOf(
+      NullabilityAnnotation first, NullabilityAnnotation second) {
+    return NULLABILITY_ANNOTATION_ORDERING.max(first, second);
   }
 }
