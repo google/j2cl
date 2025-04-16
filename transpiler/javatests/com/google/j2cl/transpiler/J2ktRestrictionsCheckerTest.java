@@ -77,18 +77,18 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
                 + " super type 'Pkg' (default).");
   }
 
-  public void testNonNullMarkedWarnings() {
+  public void testNonNullMarkedErrors() {
     newTranspilerTester("test.Main", "class Main { void m() {} }")
-        .assertTranspileSucceeds()
-        .assertWarningsWithSourcePosition(
-            "Warning:Main.java:2: Type 'test.Main' must be directly or indirectly @NullMarked.");
+        .assertTranspileFails()
+        .assertErrorsWithSourcePosition(
+            "Error:Main.java:2: Type 'test.Main' must be directly or indirectly @NullMarked.");
 
     newTranspilerTester("foo.A", "class A { void m() {} }")
         .addCompilationUnit("bar.B", "class B { void m() {} }")
         .addNullMarkPackageInfo("foo")
-        .assertTranspileSucceeds()
-        .assertWarningsWithSourcePosition(
-            "Warning:B.java:2: Type 'bar.B' must be directly or indirectly @NullMarked.");
+        .assertTranspileFails()
+        .assertErrorsWithSourcePosition(
+            "Error:B.java:2: Type 'bar.B' must be directly or indirectly @NullMarked.");
 
     // Enums are tolerated as not being NullMarked.
     newTranspilerTester("foo.A", "enum A {}").assertTranspileSucceeds();
@@ -102,9 +102,9 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
     // But the empty class cannot have a supertype.
     newTranspilerTester("foo.A", "class A {}")
         .addCompilationUnit("foo.B", "class B extends A {}")
-        .assertTranspileSucceeds()
-        .assertWarningsWithSourcePosition(
-            "Warning:B.java:2: Type 'foo.B' must be directly or indirectly @NullMarked.");
+        .assertTranspileFails()
+        .assertErrorsWithSourcePosition(
+            "Error:B.java:2: Type 'foo.B' must be directly or indirectly @NullMarked.");
 
     newTranspilerTester(
             "test.Main",
@@ -116,9 +116,9 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
             "}")
         .addCompilationUnit(
             "org.jspecify.annotations.NullMarked", "public @interface NullMarked {}")
-        .assertTranspileSucceeds()
-        .assertWarningsWithSourcePosition(
-            "Warning:Main.java:2: Type 'test.Outer' must be directly or indirectly @NullMarked.");
+        .assertTranspileFails()
+        .assertErrorsWithSourcePosition(
+            "Error:Main.java:2: Type 'test.Outer' must be directly or indirectly @NullMarked.");
   }
 
   public void testKtPropertyNonEmptyParametersFails() {
@@ -128,6 +128,7 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
             "  @javaemul.internal.annotations.KtProperty",
             "  abstract int method(int foo);",
             "}")
+        .addNullMarkPackageInfo("test")
         .addCompilationUnit(
             "javaemul.internal.annotations.KtProperty", "public @interface KtProperty {}")
         .assertTranspileFails()
@@ -143,6 +144,7 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
             "  @javaemul.internal.annotations.KtProperty",
             "  abstract void method();",
             "}")
+        .addNullMarkPackageInfo("test")
         .addCompilationUnit(
             "javaemul.internal.annotations.KtProperty", "public @interface KtProperty {}")
         .assertTranspileFails()
@@ -158,6 +160,7 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
             "  @javaemul.internal.annotations.KtProperty",
             "  Main() {}",
             "}")
+        .addNullMarkPackageInfo("test")
         .addCompilationUnit(
             "javaemul.internal.annotations.KtProperty", "public @interface KtProperty {}")
         .assertTranspileFails()
@@ -172,6 +175,7 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
             "class Child extends Parent {",
             "  synchronized void method() {}",
             "}")
+        .addNullMarkPackageInfo("test")
         .assertTranspileFails()
         .assertErrorsWithSourcePosition(
             "Error:Child.java:3: Type 'Child' does not support synchronized methods as it does not "
@@ -186,6 +190,7 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
             "    synchronized (this) {}",
             "  }",
             "}")
+        .addNullMarkPackageInfo("test")
         .assertTranspileFails()
         .assertErrorsWithSourcePosition(
             "Error:Main.java:4: Synchronized statement is valid only on instances of 'Class' or"

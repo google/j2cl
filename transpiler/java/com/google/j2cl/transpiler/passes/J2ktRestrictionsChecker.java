@@ -141,10 +141,18 @@ public final class J2ktRestrictionsChecker {
             }
 
             if (!type.getDeclaration().isNullMarked() && !isExemptFromNullMarked(type)) {
-              problems.warning(
-                  type.getSourcePosition(),
-                  "Type '%s' must be directly or indirectly @NullMarked.",
-                  type.getDeclaration().getQualifiedSourceName());
+              if (Boolean.getBoolean(
+                  "com.google.j2cl.transpiler.passes.J2ktRestrictionsChecker.treatMissingNullMarkedAsWarning")) {
+                problems.warning(
+                    type.getSourcePosition(),
+                    "Type '%s' must be directly or indirectly @NullMarked.",
+                    type.getDeclaration().getQualifiedSourceName());
+              } else {
+                problems.error(
+                    type.getSourcePosition(),
+                    "Type '%s' must be directly or indirectly @NullMarked.",
+                    type.getDeclaration().getQualifiedSourceName());
+              }
             }
           }
 
