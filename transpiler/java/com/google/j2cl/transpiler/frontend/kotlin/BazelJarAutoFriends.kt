@@ -21,16 +21,6 @@ import com.google.devtools.kotlin.common.KtManifest
 import com.google.j2cl.transpiler.frontend.common.PackageInfoCache
 import java.util.jar.Manifest
 import org.jetbrains.kotlin.cli.common.arguments.K2JVMCompilerArguments
-import org.jetbrains.kotlin.config.CompilerConfiguration
-import org.jetbrains.kotlin.config.JVMConfigurationKeys
-import org.jetbrains.kotlin.load.kotlin.ModuleVisibilityManager
-
-internal fun ModuleVisibilityManager.addEligibleFriends(configuration: CompilerConfiguration) {
-  val friendPaths = configuration.getList(JVMConfigurationKeys.FRIEND_PATHS)
-  for (path in friendPaths) {
-    this.addFriendPath(path)
-  }
-}
 
 internal fun K2JVMCompilerArguments.setEligibleFriends(
   packageInfoCache: PackageInfoCache,
