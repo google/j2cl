@@ -49,6 +49,7 @@ import java.util.function.Function;
 import javax.annotation.Nullable;
 
 /** Utility class holding type descriptors that need to be referenced directly. */
+@SuppressWarnings("ReferenceEquality")
 public class TypeDescriptors {
   // Boxed types.
   public DeclaredTypeDescriptor javaLangBoolean;
@@ -261,23 +262,23 @@ public class TypeDescriptors {
   }
 
   public static boolean isPrimitiveBoolean(TypeDescriptor typeDescriptor) {
-    return PrimitiveTypes.BOOLEAN.equals(typeDescriptor);
+    return typeDescriptor == PrimitiveTypes.BOOLEAN;
   }
 
   public static boolean isPrimitiveByte(TypeDescriptor typeDescriptor) {
-    return PrimitiveTypes.BYTE.equals(typeDescriptor);
+    return typeDescriptor == PrimitiveTypes.BYTE;
   }
 
   public static boolean isPrimitiveChar(TypeDescriptor typeDescriptor) {
-    return PrimitiveTypes.CHAR.equals(typeDescriptor);
+    return typeDescriptor == PrimitiveTypes.CHAR;
   }
 
   public static boolean isPrimitiveDouble(TypeDescriptor typeDescriptor) {
-    return PrimitiveTypes.DOUBLE.equals(typeDescriptor);
+    return typeDescriptor == PrimitiveTypes.DOUBLE;
   }
 
   public static boolean isPrimitiveFloat(TypeDescriptor typeDescriptor) {
-    return PrimitiveTypes.FLOAT.equals(typeDescriptor);
+    return typeDescriptor == PrimitiveTypes.FLOAT;
   }
 
   public static boolean isPrimitiveFloatOrDouble(TypeDescriptor typeDescriptor) {
@@ -285,19 +286,19 @@ public class TypeDescriptors {
   }
 
   public static boolean isPrimitiveInt(TypeDescriptor typeDescriptor) {
-    return PrimitiveTypes.INT.equals(typeDescriptor);
+    return typeDescriptor == PrimitiveTypes.INT;
   }
 
   public static boolean isPrimitiveLong(TypeDescriptor typeDescriptor) {
-    return PrimitiveTypes.LONG.equals(typeDescriptor);
+    return typeDescriptor == PrimitiveTypes.LONG;
   }
 
   public static boolean isPrimitiveShort(TypeDescriptor typeDescriptor) {
-    return PrimitiveTypes.SHORT.equals(typeDescriptor);
+    return typeDescriptor == PrimitiveTypes.SHORT;
   }
 
   public static boolean isPrimitiveVoid(TypeDescriptor typeDescriptor) {
-    return PrimitiveTypes.VOID.equals(typeDescriptor);
+    return typeDescriptor == PrimitiveTypes.VOID;
   }
 
   public static boolean isPrimitiveBooleanOrDouble(TypeDescriptor typeDescriptor) {
