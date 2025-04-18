@@ -28,9 +28,10 @@ build:macos --experimental_inprocess_symlink_creation
 
 test --test_output=errors
 
-# Enable Java 11
-build --java_language_version=11
-build --java_runtime_version=11
+# Enable Java 21. Note this doesn't control whether J2CL accepts Java 21 inputs,
+# that is controlled in build_defs/internal_do_not_use/j2cl_common.bzl.
+build --java_language_version=21
+build --java_runtime_version=21
 
 # Enable Java 21 for J2CL compiler itself
 build --tool_java_language_version=21
