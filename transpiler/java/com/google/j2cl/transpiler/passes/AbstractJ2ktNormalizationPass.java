@@ -57,7 +57,7 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
 
   @FormatMethod
   final void debug(SourcePosition sourcePosition, String detailMessage, Object... args) {
-    getProblems().info(sourcePosition, detailMessage, args);
+    getProblems().debug(sourcePosition, detailMessage, args);
   }
 
   @FormatMethod
