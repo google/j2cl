@@ -18,12 +18,10 @@ import static com.google.common.truth.Truth.assertThat;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
-import com.google.common.base.Joiner;
 import com.google.common.base.Predicates;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.io.MoreFiles;
 import com.google.common.truth.Correspondence;
 import com.google.common.util.concurrent.MoreExecutors;
@@ -208,38 +206,35 @@ public class TranspilerTester {
   private Path outputPath;
   private boolean assertDelayedCancelChecks = true;
 
-  public TranspilerTester addCompilationUnit(String qualifiedCompilationUnitName, String... code) {
-    List<String> content = Lists.newArrayList(code);
-
+  @CanIgnoreReturnValue
+  public TranspilerTester addCompilationUnit(String qualifiedCompilationUnitName, String code) {
     String packageName = getPackageName(qualifiedCompilationUnitName);
     if (!packageName.isEmpty()) {
-      content.add(0, "package " + packageName + ";");
+      code = "package " + packageName + ";\n" + code;
     }
-
-    return addFileUsingQualifiedName(
-        qualifiedCompilationUnitName, ".java", content.toArray(new String[0]));
+    return addFileUsingQualifiedName(qualifiedCompilationUnitName, ".java", code);
   }
 
+  @CanIgnoreReturnValue
   public TranspilerTester addKotlinCompilationUnit(
-      String qualifiedCompilationUnitName, String... code) {
-    List<String> content = Lists.newArrayList(code);
-
+      String qualifiedCompilationUnitName, String code) {
     String packageName = getPackageName(qualifiedCompilationUnitName);
     if (!packageName.isEmpty()) {
-      content.add(0, "package " + packageName + "");
+      code = "package " + packageName + "\n" + code;
     }
 
-    return addFileUsingQualifiedName(
-        qualifiedCompilationUnitName, ".kt", content.toArray(new String[0]));
+    return addFileUsingQualifiedName(qualifiedCompilationUnitName, ".kt", code);
   }
 
+  @CanIgnoreReturnValue
   public TranspilerTester addNativeJsForCompilationUnit(
-      String qualifiedCompilationUnitName, String... code) {
+      String qualifiedCompilationUnitName, String code) {
     return addFileUsingQualifiedName(qualifiedCompilationUnitName, ".native.js", code);
   }
 
+  @CanIgnoreReturnValue
   private TranspilerTester addFileUsingQualifiedName(
-      String qualifiedCompilationUnitName, String ext, String... code) {
+      String qualifiedCompilationUnitName, String ext, String code) {
     return addFile(
         getPackageRelativePath(qualifiedCompilationUnitName)
             .resolve(getSimpleUnitName(qualifiedCompilationUnitName) + ext),
@@ -263,26 +258,29 @@ public class TranspilerTester {
         qualifiedCompilationUnitName.lastIndexOf('.') + 1);
   }
 
-  public TranspilerTester addFile(String filename, String... code) {
+  @CanIgnoreReturnValue
+  public TranspilerTester addFile(String filename, String code) {
     return addFile(Paths.get(filename), code);
   }
 
-  public TranspilerTester addFile(Path path, String... code) {
-    this.filesByPath.put(path, new SourceFile(path, Joiner.on('\n').join(code)));
+  @CanIgnoreReturnValue
+  public TranspilerTester addFile(Path path, String code) {
+    this.filesByPath.put(path, new SourceFile(path, code));
     return this;
   }
 
-  public TranspilerTester addFileToZipFile(String zipfilename, String filename, String... code) {
+  @CanIgnoreReturnValue
+  public TranspilerTester addFileToZipFile(String zipfilename, String filename, String code) {
     addFileToZipFile(Paths.get(zipfilename), Paths.get(filename), code);
     return this;
   }
 
-  public TranspilerTester addFileToZipFile(Path zipfilePath, Path filePath, String... code) {
+  @CanIgnoreReturnValue
+  public TranspilerTester addFileToZipFile(Path zipfilePath, Path filePath, String code) {
     if (!filesByPath.containsKey(zipfilePath)) {
       filesByPath.put(zipfilePath, new ZipFile(zipfilePath));
     }
-    ((ZipFile) filesByPath.get(zipfilePath))
-        .addFile(new SourceFile(filePath, Joiner.on('\n').join(code)));
+    ((ZipFile) filesByPath.get(zipfilePath)).addFile(new SourceFile(filePath, code));
     return this;
   }
 
@@ -348,8 +346,11 @@ public class TranspilerTester {
             "org.jspecify.annotations.NullMarked", "public @interface NullMarked {}");
     return addFile(
         Path.of(pkg.replace('.', '/'), "package-info.java"),
-        "@org.jspecify.annotations.NullMarked",
-        "package " + pkg + ";");
+        """
+        @org.jspecify.annotations.NullMarked
+        package %s;
+        """
+            .formatted(pkg));
   }
 
   public TranspileResult assertTranspileSucceeds() {

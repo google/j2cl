@@ -27,7 +27,13 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
   }
 
   public void testGenericConstructorFails() {
-    newTranspilerTester("test.Main", "class Main {", "  <T> Main(T t) {}", "}")
+    newTranspilerTester(
+            "test.Main",
+            """
+            class Main {
+              <T> Main(T t) {}
+            }
+            """)
         .addNullMarkPackageInfo("test")
         .assertTranspileFails()
         .assertErrorsWithSourcePosition(
@@ -37,17 +43,19 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
   public void testMemberVisibilityWarnings() {
     newTranspilerTester(
             "test.Public",
-            "class Pkg {}",
-            "public class Public {",
-            "  public void pkgParam(Pkg pkg) {}",
-            "  public Pkg pkgReturnType() { return new Pkg(); }",
-            "  public Pkg pkgField;",
-            "  static class InnerPkg {",
-            "    public InnerPkg() {}",
-            "    public Pkg pkgReturnType() { return new Pkg(); }",
-            "    public Pkg pkgField;",
-            "  }",
-            "}")
+            """
+            class Pkg {}
+            public class Public {
+              public void pkgParam(Pkg pkg) {}
+              public Pkg pkgReturnType() { return new Pkg(); }
+              public Pkg pkgField;
+              static class InnerPkg {
+                public InnerPkg() {}
+                public Pkg pkgReturnType() { return new Pkg(); }
+                public Pkg pkgField;
+              }
+            }
+            """)
         .addNullMarkPackageInfo("test")
         .assertTranspileSucceeds()
         .assertWarningsWithSourcePosition(
@@ -60,7 +68,12 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
   }
 
   public void testClassVisibilityWarnings() {
-    newTranspilerTester("test.Main", "class Pkg {}", "public class Main extends Pkg {}")
+    newTranspilerTester(
+            "test.Main",
+            """
+            class Pkg {}
+            public class Main extends Pkg {}
+            """)
         .addNullMarkPackageInfo("test")
         .assertTranspileSucceeds()
         .assertWarningsWithSourcePosition(
@@ -69,7 +82,12 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
   }
 
   public void testInterfaceVisibilityWarnings() {
-    newTranspilerTester("test.Main", "interface Pkg {}", "public interface Main extends Pkg {}")
+    newTranspilerTester(
+            "test.Main",
+            """
+            interface Pkg {}
+            public interface Main extends Pkg {}
+            """)
         .addNullMarkPackageInfo("test")
         .assertTranspileSucceeds()
         .assertWarningsWithSourcePosition(
@@ -108,12 +126,14 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
 
     newTranspilerTester(
             "test.Main",
-            "class Outer {",
-            "  @org.jspecify.annotations.NullMarked",
-            "  class Inner { void m() {} }",
-            "  @org.jspecify.annotations.NullMarked",
-            "  static class StaticInner { void m() {} }",
-            "}")
+            """
+            class Outer {
+              @org.jspecify.annotations.NullMarked
+              class Inner { void m() {} }
+              @org.jspecify.annotations.NullMarked
+              static class StaticInner { void m() {} }
+            }
+            """)
         .addCompilationUnit(
             "org.jspecify.annotations.NullMarked", "public @interface NullMarked {}")
         .assertTranspileFails()
@@ -124,10 +144,12 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
   public void testKtPropertyNonEmptyParametersFails() {
     newTranspilerTester(
             "test.Main",
-            "abstract class Main {",
-            "  @javaemul.internal.annotations.KtProperty",
-            "  abstract int method(int foo);",
-            "}")
+            """
+            abstract class Main {
+              @javaemul.internal.annotations.KtProperty
+              abstract int method(int foo);
+            }
+            """)
         .addNullMarkPackageInfo("test")
         .addCompilationUnit(
             "javaemul.internal.annotations.KtProperty", "public @interface KtProperty {}")
@@ -140,10 +162,12 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
   public void testKtPropertyVoidReturnTypeFails() {
     newTranspilerTester(
             "test.Main",
-            "abstract class Main {",
-            "  @javaemul.internal.annotations.KtProperty",
-            "  abstract void method();",
-            "}")
+            """
+            abstract class Main {
+              @javaemul.internal.annotations.KtProperty
+              abstract void method();
+            }
+            """)
         .addNullMarkPackageInfo("test")
         .addCompilationUnit(
             "javaemul.internal.annotations.KtProperty", "public @interface KtProperty {}")
@@ -156,10 +180,12 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
   public void testKtPropertyConstructorFails() {
     newTranspilerTester(
             "test.Main",
-            "class Main {",
-            "  @javaemul.internal.annotations.KtProperty",
-            "  Main() {}",
-            "}")
+            """
+            class Main {
+              @javaemul.internal.annotations.KtProperty
+              Main() {}
+            }
+            """)
         .addNullMarkPackageInfo("test")
         .addCompilationUnit(
             "javaemul.internal.annotations.KtProperty", "public @interface KtProperty {}")
@@ -171,10 +197,12 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
   public void testSynchronizedMethodInUnsupportedTypeFails() {
     newTranspilerTester(
             "test.Child",
-            "class Parent {}",
-            "class Child extends Parent {",
-            "  synchronized void method() {}",
-            "}")
+            """
+            class Parent {}
+            class Child extends Parent {
+              synchronized void method() {}
+            }
+            """)
         .addNullMarkPackageInfo("test")
         .assertTranspileFails()
         .assertErrorsWithSourcePosition(
@@ -185,11 +213,13 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
   public void testUnsupportedSynchronizedStatementFails() {
     newTranspilerTester(
             "test.Main",
-            "class Main {",
-            "  void method() {",
-            "    synchronized (this) {}",
-            "  }",
-            "}")
+            """
+            class Main {
+              void method() {
+                synchronized (this) {}
+              }
+            }
+            """)
         .addNullMarkPackageInfo("test")
         .assertTranspileFails()
         .assertErrorsWithSourcePosition(
@@ -197,7 +227,7 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
                 + " 'J2ktMonitor'.");
   }
 
-  private TranspilerTester newTranspilerTester(String compilationUnitName, String... code) {
+  private TranspilerTester newTranspilerTester(String compilationUnitName, String code) {
     return TranspilerTester.newTesterWithJ2ktDefaults()
         .addCompilationUnit(compilationUnitName, code);
   }
