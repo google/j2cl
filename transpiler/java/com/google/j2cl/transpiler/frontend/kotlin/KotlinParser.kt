@@ -22,7 +22,6 @@ import com.google.j2cl.common.SourceUtils.FileInfo
 import com.google.j2cl.transpiler.ast.CompilationUnit
 import com.google.j2cl.transpiler.ast.Library
 import com.google.j2cl.transpiler.frontend.common.FrontendOptions
-import com.google.j2cl.transpiler.frontend.common.PackageInfoCache
 import com.google.j2cl.transpiler.frontend.kotlin.ir.IntrinsicMethods
 import com.google.j2cl.transpiler.frontend.kotlin.ir.JvmIrDeserializerImpl
 import com.google.j2cl.transpiler.frontend.kotlin.lower.LoweringPasses
@@ -141,15 +140,16 @@ class KotlinParser(private val problems: Problems) {
       )
     problems.abortIfCancelled()
 
+    // Create VirtualFile list of classpaths backed by Kotlin's fast jar file system.
     val classpath =
       compilerConfiguration.getList(CONTENT_ROOTS).filterIsInstance<JvmClasspathRoot>().map {
-        it.file.toString()
+        environment.projectEnvironment.jarFileSystem.findFileByPath("${it.file}!/")!!
       }
 
-    val packageInfoCache = PackageInfoCache(classpath, problems)
+    val packageInfoCache = PackageInfoCache(classpath)
     problems.abortIfCancelled()
 
-    environment.setEligibleFriends(classpath, packageInfoCache, currentTarget)
+    environment.setEligibleFriends(classpath, currentTarget)
     problems.abortIfCancelled()
 
     val module = compilerConfiguration.get(MODULES)!![0]

@@ -39,7 +39,6 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors.SingletonBuilder
 import com.google.j2cl.transpiler.ast.TypeLiteral
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.Visibility
-import com.google.j2cl.transpiler.frontend.common.PackageInfoCache
 import com.google.j2cl.transpiler.frontend.common.SupportedAnnotations
 import com.google.j2cl.transpiler.frontend.kotlin.ir.enumEntries
 import com.google.j2cl.transpiler.frontend.kotlin.ir.fqnOrFail

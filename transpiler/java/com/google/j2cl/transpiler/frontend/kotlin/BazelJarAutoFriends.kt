@@ -18,14 +18,14 @@ package com.google.j2cl.transpiler.frontend.kotlin
 import com.google.devtools.kotlin.common.AutoFriends
 import com.google.devtools.kotlin.common.BzlLabel
 import com.google.devtools.kotlin.common.KtManifest
-import com.google.j2cl.transpiler.frontend.common.PackageInfoCache
+import com.intellij.openapi.vfs.VirtualFile
+import java.util.jar.JarFile
 import java.util.jar.Manifest
 import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
 import org.jetbrains.kotlin.config.JVMConfigurationKeys
 
 internal fun KotlinCoreEnvironment.setEligibleFriends(
-  classpath: List<String>,
-  packageInfoCache: PackageInfoCache,
+  classpath: List<VirtualFile>,
   currentTarget: String?,
 ) {
   if (currentTarget == null) return
@@ -33,10 +33,13 @@ internal fun KotlinCoreEnvironment.setEligibleFriends(
   val currentLabel = BzlLabel.parseOrThrow(currentTarget)
   this.configuration.put(
     JVMConfigurationKeys.FRIEND_PATHS,
-    classpath.filter {
-      val depLabel = packageInfoCache.getManifest(it)?.targetLabel ?: return@filter false
-      AutoFriends.isEligibleFriend(currentLabel, depLabel)
-    },
+    classpath
+      .filter {
+        val mf = it.findFileByRelativePath(JarFile.MANIFEST_NAME)
+        val depLabel = mf?.let { Manifest(mf.inputStream).targetLabel } ?: return@filter false
+        AutoFriends.isEligibleFriend(currentLabel, depLabel)
+      }
+      .map { it.path.substringBefore("!/") },
   )
 }
 
