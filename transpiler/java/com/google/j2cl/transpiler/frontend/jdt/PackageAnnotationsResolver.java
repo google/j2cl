@@ -16,8 +16,8 @@
 package com.google.j2cl.transpiler.frontend.jdt;
 
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktObjectiveCName;
 import static com.google.j2cl.transpiler.frontend.jdt.JsInteropAnnotationUtils.getJsNamespace;
-import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtObjectiveCName;
 
 import com.google.j2cl.transpiler.frontend.common.PackageInfoCache;
 import java.util.stream.Stream;
@@ -62,7 +62,7 @@ public final class PackageAnnotationsResolver {
             packageInfoCache.setPackageProperties(
                 packageDeclaration.getName().getFullyQualifiedName(),
                 getJsNamespace(packageDeclaration),
-                getKtObjectiveCName(packageDeclaration),
+                getJ2ktObjectiveCName(packageDeclaration),
                 JdtAnnotationUtils.hasNullMarkedAnnotation(packageDeclaration));
           }
         });

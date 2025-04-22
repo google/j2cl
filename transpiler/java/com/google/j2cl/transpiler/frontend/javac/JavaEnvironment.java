@@ -26,8 +26,8 @@ import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.getAnnot
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.getAnnotationParameterString;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.hasAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.hasNullMarkedAnnotation;
+import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropUtils.getJ2ktVariance;
 import static com.google.j2cl.transpiler.frontend.javac.JsInteropAnnotationUtils.getJsNamespace;
-import static com.google.j2cl.transpiler.frontend.javac.KtInteropUtils.getKtVariance;
 import static java.util.stream.Collectors.toCollection;
 
 import com.google.common.collect.ImmutableList;
@@ -408,7 +408,7 @@ class JavaEnvironment {
 
     List<String> classComponents = getClassComponents(typeVariable);
     Symbol baseSymbol = ((TypeVariableSymbol) typeVariable.asElement()).baseSymbol();
-    KtVariance ktVariance = getKtVariance(baseSymbol);
+    KtVariance ktVariance = getJ2ktVariance(baseSymbol);
     Type baseSymbolType = baseSymbol.asType();
     int id = getTypeVariableId(baseSymbolType);
     return TypeVariable.newBuilder()
@@ -603,7 +603,7 @@ class JavaEnvironment {
     }
 
     JsInfo jsInfo = JsInteropUtils.getJsInfo(variableElement);
-    KtInfo ktInfo = KtInteropUtils.getKtInfo(variableElement);
+    KtInfo ktInfo = J2ktInteropUtils.getJ2ktInfo(variableElement);
     Object constantValue = variableElement.getConstantValue();
     boolean isCompileTimeConstant = constantValue != null;
     if (isCompileTimeConstant) {
@@ -897,7 +897,7 @@ class JavaEnvironment {
     Visibility visibility = getVisibility(declarationMethodElement);
     boolean isDefault = isDefaultMethod(declarationMethodElement);
     JsInfo jsInfo = JsInteropUtils.getJsInfo(declarationMethodElement);
-    KtInfo ktInfo = KtInteropUtils.getKtInfo(declarationMethodElement);
+    KtInfo ktInfo = J2ktInteropUtils.getJ2ktInfo(declarationMethodElement);
 
     boolean isNative =
         isNative(declarationMethodElement)
@@ -1314,8 +1314,8 @@ class JavaEnvironment {
         .setSimpleJsName(JsInteropAnnotationUtils.getJsName(typeElement))
         .setCustomizedJsNamespace(getJsNamespace(typeElement))
         .setObjectiveCNamePrefix(getObjectiveCNamePrefix(typeElement))
-        .setKtTypeInfo(KtInteropUtils.getKtTypeInfo(typeElement))
-        .setKtObjcInfo(KtInteropUtils.getKtObjcInfo(typeElement))
+        .setKtTypeInfo(J2ktInteropUtils.getJ2ktTypeInfo(typeElement))
+        .setKtObjcInfo(J2ktInteropUtils.getJ2ktObjcInfo(typeElement))
         .setWasmInfo(getWasmInfo(typeElement))
         .setNullMarked(isNullMarked)
         .setOriginalSimpleSourceName(
@@ -1454,14 +1454,14 @@ class JavaEnvironment {
   @Nullable
   private String getObjectiveCNamePrefix(TypeElement typeElement) {
     // checkArgument(!typeElement.isPrimitive());
-    String objectiveCNamePrefix = KtInteropAnnotationUtils.getKtObjectiveCName(typeElement);
+    String objectiveCNamePrefix = J2ktInteropAnnotationUtils.getJ2ktObjectiveCName(typeElement);
     boolean isTopLevelType =
         typeElement.getEnclosingElement() == null
             || typeElement.getEnclosingElement() instanceof PackageElement;
 
     return objectiveCNamePrefix != null || !isTopLevelType
         ? objectiveCNamePrefix
-        : KtInteropAnnotationUtils.getKtObjectiveCName(getPackageOf(typeElement));
+        : J2ktInteropAnnotationUtils.getJ2ktObjectiveCName(getPackageOf(typeElement));
   }
 
   /** Return whether a type is annotated for nullablility and which type of annotation it has. */

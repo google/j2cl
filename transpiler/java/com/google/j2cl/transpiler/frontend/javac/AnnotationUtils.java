@@ -16,7 +16,7 @@
 package com.google.j2cl.transpiler.frontend.javac;
 
 import static com.google.common.collect.MoreCollectors.toOptional;
-import static com.google.j2cl.transpiler.frontend.javac.KtInteropAnnotationUtils.getSuppressWarningsAnnotation;
+import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUtils.getSuppressWarningsAnnotation;
 
 import com.google.common.base.Predicate;
 import com.google.j2cl.transpiler.frontend.common.Nullability;

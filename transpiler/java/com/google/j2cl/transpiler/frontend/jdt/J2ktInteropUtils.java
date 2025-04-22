@@ -15,17 +15,17 @@
  */
 package com.google.j2cl.transpiler.frontend.jdt;
 
+import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktDisabledAnnotation;
+import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktInAnnotation;
+import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktNameAnnotation;
+import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktNativeAnnotation;
+import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktObjectiveCNameAnnotation;
+import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktOutAnnotation;
+import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktPropertyAnnotation;
+import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktPublicNativeAnnotation;
+import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktThrowsAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.getStringAttribute;
 import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.isWarningSuppressed;
-import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getJ2ktNativeAnnotation;
-import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getJ2ktThrowsAnnotation;
-import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtDisabledAnnotation;
-import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtInAnnotation;
-import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtNameAnnotation;
-import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtNativeAnnotation;
-import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtObjectiveCNameAnnotation;
-import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtOutAnnotation;
-import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtPropertyAnnotation;
 
 import com.google.j2cl.transpiler.ast.KtInfo;
 import com.google.j2cl.transpiler.ast.KtObjcInfo;
@@ -39,12 +39,12 @@ import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.IVariableBinding;
 
 /** Utility functions for Kotlin Interop properties. */
-public class KtInteropUtils {
-  private KtInteropUtils() {}
+public class J2ktInteropUtils {
+  private J2ktInteropUtils() {}
 
   @Nullable
-  public static KtObjcInfo getKtObjcInfo(IBinding binding) {
-    IAnnotationBinding annotationBinding = getKtObjectiveCNameAnnotation(binding);
+  public static KtObjcInfo getJ2ktObjcInfo(IBinding binding) {
+    IAnnotationBinding annotationBinding = getJ2ktObjectiveCNameAnnotation(binding);
     if (annotationBinding == null) {
       return null;
     }
@@ -54,8 +54,8 @@ public class KtInteropUtils {
   }
 
   @Nullable
-  public static KtTypeInfo getKtTypeInfo(IBinding binding) {
-    IAnnotationBinding annotationBinding = getKtNativeAnnotation(binding);
+  public static KtTypeInfo getJ2ktTypeInfo(IBinding binding) {
+    IAnnotationBinding annotationBinding = getJ2ktNativeAnnotation(binding);
     if (annotationBinding != null) {
       String qualifiedName = getStringAttribute(annotationBinding, "name");
       String bridgeQualifiedName = getStringAttribute(annotationBinding, "bridgeName");
@@ -67,7 +67,7 @@ public class KtInteropUtils {
           .build();
     }
 
-    annotationBinding = getJ2ktNativeAnnotation(binding);
+    annotationBinding = getJ2ktPublicNativeAnnotation(binding);
     if (annotationBinding != null) {
       return KtTypeInfo.newBuilder().build();
     }
@@ -75,11 +75,11 @@ public class KtInteropUtils {
     return null;
   }
 
-  public static KtInfo getKtInfo(IMethodBinding methodBinding) {
-    return getKtInfo(methodBinding, /* isUninitializedWarningSuppressed= */ false);
+  public static KtInfo getJ2ktInfo(IMethodBinding methodBinding) {
+    return getJ2ktInfo(methodBinding, /* isUninitializedWarningSuppressed= */ false);
   }
 
-  public static KtInfo getKtInfo(IVariableBinding variableBinding) {
+  public static KtInfo getJ2ktInfo(IVariableBinding variableBinding) {
     // Checking for both property annotations and enclosing class annotations for uninitialized
     // warning suppressions.
     boolean isUninitializedWarningSuppressed = isUninitializedWarningSuppressed(variableBinding);
@@ -88,13 +88,13 @@ public class KtInteropUtils {
       isUninitializedWarningSuppressed = isUninitializedWarningSuppressed(declaringClass);
       declaringClass = declaringClass.getDeclaringClass();
     }
-    return getKtInfo(variableBinding, isUninitializedWarningSuppressed);
+    return getJ2ktInfo(variableBinding, isUninitializedWarningSuppressed);
   }
 
-  private static KtInfo getKtInfo(IBinding binding, boolean isUninitializedWarningSuppressed) {
+  private static KtInfo getJ2ktInfo(IBinding binding, boolean isUninitializedWarningSuppressed) {
     return KtInfo.newBuilder()
         .setProperty(isKtProperty(binding))
-        .setName(getKtName(binding))
+        .setName(getJ2ktName(binding))
         .setDisabled(isKtDisabled(binding))
         .setUninitializedWarningSuppressed(isUninitializedWarningSuppressed)
         .setThrows(isThrows(binding))
@@ -102,17 +102,17 @@ public class KtInteropUtils {
   }
 
   @Nullable
-  private static String getKtName(IBinding binding) {
-    IAnnotationBinding annotationBinding = getKtNameAnnotation(binding);
+  private static String getJ2ktName(IBinding binding) {
+    IAnnotationBinding annotationBinding = getJ2ktNameAnnotation(binding);
     return annotationBinding != null ? getStringAttribute(annotationBinding, "value") : null;
   }
 
   private static boolean isKtProperty(IBinding binding) {
-    return getKtPropertyAnnotation(binding) != null;
+    return getJ2ktPropertyAnnotation(binding) != null;
   }
 
   public static boolean isKtDisabled(IBinding binding) {
-    return getKtDisabledAnnotation(binding) != null;
+    return getJ2ktDisabledAnnotation(binding) != null;
   }
 
   private static boolean isThrows(IBinding binding) {
@@ -124,10 +124,10 @@ public class KtInteropUtils {
   }
 
   @Nullable
-  public static KtVariance getKtVariance(ITypeBinding typeVariableBinding) {
-    if (getKtInAnnotation(typeVariableBinding) != null) {
+  public static KtVariance getJ2ktVariance(ITypeBinding typeVariableBinding) {
+    if (getJ2ktInAnnotation(typeVariableBinding) != null) {
       return KtVariance.IN;
-    } else if (getKtOutAnnotation(typeVariableBinding) != null) {
+    } else if (getJ2ktOutAnnotation(typeVariableBinding) != null) {
       return KtVariance.OUT;
     } else {
       return null;

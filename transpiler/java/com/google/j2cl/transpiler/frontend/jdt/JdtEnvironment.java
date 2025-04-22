@@ -394,7 +394,7 @@ public class JdtEnvironment {
         .setCapture(typeBinding.isCapture())
         .setUniqueKey(uniqueKey)
         .setName(typeBinding.getName())
-        .setKtVariance(KtInteropUtils.getKtVariance(typeBinding))
+        .setKtVariance(J2ktInteropUtils.getJ2ktVariance(typeBinding))
         .setNullabilityAnnotation(nullabilityAnnotation)
         .build();
   }
@@ -804,7 +804,7 @@ public class JdtEnvironment {
             .setStatic(isStatic)
             .setVisibility(visibility)
             .setOriginalJsInfo(JsInteropUtils.getJsInfo(variableBinding))
-            .setOriginalKtInfo(KtInteropUtils.getKtInfo(variableBinding))
+            .setOriginalKtInfo(J2ktInteropUtils.getJ2ktInfo(variableBinding))
             .setAnnotations(createAnnotations(variableBinding, inNullMarkedScope))
             .setFinal(isFinal)
             .setCompileTimeConstant(isCompileTimeConstant)
@@ -842,7 +842,7 @@ public class JdtEnvironment {
     Visibility visibility = getVisibility(methodBinding);
     boolean isDefault = isDefaultMethod(methodBinding);
     JsInfo jsInfo = JsInteropUtils.getJsInfo(methodBinding);
-    KtInfo ktInfo = KtInteropUtils.getKtInfo(methodBinding);
+    KtInfo ktInfo = J2ktInteropUtils.getJ2ktInfo(methodBinding);
 
     boolean isNative =
         Modifier.isNative(methodBinding.getModifiers())
@@ -906,7 +906,7 @@ public class JdtEnvironment {
             .setTypeArgumentTypeDescriptors(typeArgumentTypeDescriptors)
             .setOriginalJsInfo(jsInfo)
             .setOriginalKtInfo(ktInfo)
-            .setKtObjcInfo(KtInteropUtils.getKtObjcInfo(methodBinding))
+            .setKtObjcInfo(J2ktInteropUtils.getJ2ktObjcInfo(methodBinding))
             .setWasmInfo(getWasmInfo(methodBinding))
             .setAnnotations(createAnnotations(methodBinding, inNullMarkedScope))
             .setVisibility(visibility)
@@ -1098,7 +1098,7 @@ public class JdtEnvironment {
   @Nullable
   private String getObjectiveCNamePrefix(ITypeBinding typeBinding) {
     checkArgument(!typeBinding.isPrimitive());
-    String objectiveCNamePrefix = KtInteropAnnotationUtils.getKtObjectiveCName(typeBinding);
+    String objectiveCNamePrefix = J2ktInteropAnnotationUtils.getJ2ktObjectiveCName(typeBinding);
     boolean isTopLevelType = typeBinding.getDeclaringClass() == null;
 
     return objectiveCNamePrefix != null || !isTopLevelType
@@ -1170,8 +1170,8 @@ public class JdtEnvironment {
             .setSimpleJsName(JsInteropAnnotationUtils.getJsName(typeBinding))
             .setCustomizedJsNamespace(JsInteropAnnotationUtils.getJsNamespace(typeBinding))
             .setObjectiveCNamePrefix(getObjectiveCNamePrefix(typeBinding))
-            .setKtTypeInfo(KtInteropUtils.getKtTypeInfo(typeBinding))
-            .setKtObjcInfo(KtInteropUtils.getKtObjcInfo(typeBinding))
+            .setKtTypeInfo(J2ktInteropUtils.getJ2ktTypeInfo(typeBinding))
+            .setKtObjcInfo(J2ktInteropUtils.getJ2ktObjcInfo(typeBinding))
             .setNullMarked(isNullMarked)
             .setOriginalSimpleSourceName(typeBinding.getName())
             .setPackage(createPackageDeclaration(typeBinding.getPackage()))
