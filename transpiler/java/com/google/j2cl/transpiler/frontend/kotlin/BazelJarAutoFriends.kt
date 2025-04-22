@@ -20,24 +20,24 @@ import com.google.devtools.kotlin.common.BzlLabel
 import com.google.devtools.kotlin.common.KtManifest
 import com.google.j2cl.transpiler.frontend.common.PackageInfoCache
 import java.util.jar.Manifest
-import org.jetbrains.kotlin.cli.common.arguments.K2JVMCompilerArguments
+import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
+import org.jetbrains.kotlin.config.JVMConfigurationKeys
 
-internal fun K2JVMCompilerArguments.setEligibleFriends(
+internal fun KotlinCoreEnvironment.setEligibleFriends(
+  classpath: List<String>,
   packageInfoCache: PackageInfoCache,
   currentTarget: String?,
 ) {
   if (currentTarget == null) return
 
   val currentLabel = BzlLabel.parseOrThrow(currentTarget)
-  this.friendPaths =
-    this.classpath
-      .orEmpty()
-      .split(":")
-      .filter {
-        val depLabel = packageInfoCache.getManifest(it)?.targetLabel ?: return@filter false
-        AutoFriends.isEligibleFriend(currentLabel, depLabel)
-      }
-      .toTypedArray()
+  this.configuration.put(
+    JVMConfigurationKeys.FRIEND_PATHS,
+    classpath.filter {
+      val depLabel = packageInfoCache.getManifest(it)?.targetLabel ?: return@filter false
+      AutoFriends.isEligibleFriend(currentLabel, depLabel)
+    },
+  )
 }
 
 private val Manifest.targetLabel: BzlLabel?

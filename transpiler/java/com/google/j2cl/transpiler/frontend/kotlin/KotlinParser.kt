@@ -33,6 +33,7 @@ import java.io.File
 import org.jetbrains.kotlin.backend.common.extensions.IrGenerationExtension
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.builtins.DefaultBuiltIns
+import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys.CONTENT_ROOTS
 import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys.ORIGINAL_MESSAGE_COLLECTOR_KEY
 import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys.RENDER_DIAGNOSTIC_INTERNAL_NAME
 import org.jetbrains.kotlin.cli.common.LegacyK2CliPipeline
@@ -46,12 +47,14 @@ import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSourceLocation
 import org.jetbrains.kotlin.cli.common.messages.MessageCollector
 import org.jetbrains.kotlin.cli.common.setupCommonArguments
 import org.jetbrains.kotlin.cli.jvm.compiler.EnvironmentConfigFiles
+import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
 import org.jetbrains.kotlin.cli.jvm.compiler.configureSourceRoots
 import org.jetbrains.kotlin.cli.jvm.compiler.legacy.pipeline.IncrementalCompilationApi
 import org.jetbrains.kotlin.cli.jvm.compiler.legacy.pipeline.ModuleCompilerInput
 import org.jetbrains.kotlin.cli.jvm.compiler.legacy.pipeline.compileModuleToAnalyzedFirViaLightTreeIncrementally
 import org.jetbrains.kotlin.cli.jvm.compiler.legacy.pipeline.convertToIrAndActualizeForJvm
-import org.jetbrains.kotlin.cli.jvm.compiler.legacy.pipeline.createProjectEnvironment
+import org.jetbrains.kotlin.cli.jvm.compiler.toVfsBasedProjectEnvironment
+import org.jetbrains.kotlin.cli.jvm.config.JvmClasspathRoot
 import org.jetbrains.kotlin.cli.jvm.config.configureJdkClasspathRoots
 import org.jetbrains.kotlin.cli.jvm.configureAdvancedJvmOptions
 import org.jetbrains.kotlin.cli.jvm.configureJavaModulesContentRoots
@@ -101,10 +104,7 @@ class KotlinParser(private val problems: Problems) {
 
   /** Returns a list of compilation units after Kotlinc parsing. */
   fun parseFiles(options: FrontendOptions): Library {
-    val packageInfoCache = PackageInfoCache(options.classpaths, problems)
-    problems.abortIfCancelled()
-
-    val compilerConfiguration = createCompilerConfiguration(options, packageInfoCache)
+    val compilerConfiguration = createCompilerConfiguration(options)
     problems.abortIfCancelled()
 
     check(compilerConfiguration.getBoolean(USE_FIR)) { "Kotlin/Closure only supports > K2" }
@@ -113,7 +113,8 @@ class KotlinParser(private val problems: Problems) {
     try {
       globalProblems.set(problems)
 
-      val compilationUnits = parseFiles(compilerConfiguration, kotlincDisposable, packageInfoCache)
+      val compilationUnits =
+        parseFiles(compilerConfiguration, kotlincDisposable, options.targetLabel)
 
       return Library.newBuilder()
         .setCompilationUnits(compilationUnits)
@@ -129,28 +130,38 @@ class KotlinParser(private val problems: Problems) {
   private fun parseFiles(
     compilerConfiguration: CompilerConfiguration,
     disposable: Disposable,
-    packageInfoCache: PackageInfoCache,
+    currentTarget: String?,
   ): List<CompilationUnit> {
-    val messageCollector = compilerConfiguration.get(MESSAGE_COLLECTOR_KEY)!!
 
-    val projectEnvironment =
-      createProjectEnvironment(
-        compilerConfiguration,
+    val environment =
+      KotlinCoreEnvironment.createForProduction(
         disposable,
+        compilerConfiguration,
         EnvironmentConfigFiles.JVM_CONFIG_FILES,
-        messageCollector,
       )
     problems.abortIfCancelled()
 
+    val classpath =
+      compilerConfiguration.getList(CONTENT_ROOTS).filterIsInstance<JvmClasspathRoot>().map {
+        it.file.toString()
+      }
+
+    val packageInfoCache = PackageInfoCache(classpath, problems)
+    problems.abortIfCancelled()
+
+    environment.setEligibleFriends(classpath, packageInfoCache, currentTarget)
+    problems.abortIfCancelled()
+
     val module = compilerConfiguration.get(MODULES)!![0]
+    val messageCollector = compilerConfiguration.get(MESSAGE_COLLECTOR_KEY)!!
     val diagnosticsReporter = DiagnosticReporterFactory.createPendingReporter(messageCollector)
-    val sources = collectSources(compilerConfiguration, projectEnvironment, messageCollector)
+    val sources = collectSources(compilerConfiguration, environment.project, messageCollector)
     problems.abortIfCancelled()
 
     val analysisResults =
       @OptIn(IncrementalCompilationApi::class, LegacyK2CliPipeline::class)
       compileModuleToAnalyzedFirViaLightTreeIncrementally(
-        projectEnvironment,
+        environment.toVfsBasedProjectEnvironment(),
         messageCollector,
         compilerConfiguration,
         ModuleCompilerInput(TargetId(module), sources, compilerConfiguration),
@@ -162,7 +173,7 @@ class KotlinParser(private val problems: Problems) {
 
     val state =
       GenerationState(
-        projectEnvironment.project,
+        environment.project,
         FirModuleDescriptor.createSourceModuleDescriptor(
           analysisResults.outputs[0].session,
           DefaultBuiltIns.Instance,
@@ -179,7 +190,7 @@ class KotlinParser(private val problems: Problems) {
     val compilationUnitBuilderExtension =
       createAndRegisterCompilationUnitBuilder(
         compilerConfiguration,
-        projectEnvironment.project,
+        environment.project,
         state,
         packageInfoCache,
         jvmIrDeserializer,
@@ -191,7 +202,7 @@ class KotlinParser(private val problems: Problems) {
         JvmFir2IrExtensions(compilerConfiguration, jvmIrDeserializer),
         compilerConfiguration,
         diagnosticsReporter,
-        IrGenerationExtension.getInstances(projectEnvironment.project),
+        IrGenerationExtension.getInstances(environment.project),
       )
 
     diagnosticsReporter.maybeReportErrorsAndAbort(messageCollector, compilerConfiguration)
@@ -232,11 +243,8 @@ class KotlinParser(private val problems: Problems) {
     val compilationUnits: List<CompilationUnit>
   }
 
-  private fun createCompilerConfiguration(
-    options: FrontendOptions,
-    packageInfoCache: PackageInfoCache,
-  ): CompilerConfiguration {
-    val arguments = createCompilerArguments(options, packageInfoCache)
+  private fun createCompilerConfiguration(options: FrontendOptions): CompilerConfiguration {
+    val arguments = createCompilerArguments(options)
     val configuration = CompilerConfiguration()
 
     val messageCollector = ProblemsMessageCollector(problems)
@@ -269,10 +277,7 @@ class KotlinParser(private val problems: Problems) {
     return configuration
   }
 
-  private fun createCompilerArguments(
-    options: FrontendOptions,
-    packageInfoCache: PackageInfoCache,
-  ) =
+  private fun createCompilerArguments(options: FrontendOptions) =
     K2JVMCompilerArguments().also { arguments ->
       parseCommandLineArguments(options.kotlincOptions, arguments)
       arguments.classpath = options.classpaths.joinToString(File.pathSeparator)
@@ -282,8 +287,6 @@ class KotlinParser(private val problems: Problems) {
           .map(FileInfo::sourcePath)
           .toTypedArray()
       arguments.freeArgs = options.sources.map(FileInfo::sourcePath)
-
-      arguments.setEligibleFriends(packageInfoCache, options.targetLabel)
     }
 
   private fun PendingDiagnosticsCollectorWithSuppress.maybeReportErrorsAndAbort(
