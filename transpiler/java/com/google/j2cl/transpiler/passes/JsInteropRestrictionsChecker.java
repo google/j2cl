@@ -30,6 +30,8 @@ import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Streams;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import com.google.errorprone.annotations.FormatMethod;
+import com.google.errorprone.annotations.FormatString;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
@@ -2578,8 +2580,6 @@ public class JsInteropRestrictionsChecker {
             if (superTypeDescriptor == null) {
               return;
             }
-            String messagePrefix =
-                String.format("Supertype of '%s'", nestedType.getReadableDescription());
             errorIfDisallowedType(
                 superTypeDescriptor,
                 superTypeDescriptor,
@@ -2587,8 +2587,9 @@ public class JsInteropRestrictionsChecker {
                 onlyCheckTypeSpecialization,
                 checkArrayComponent,
                 nestedType.getSourcePosition(),
-                messagePrefix,
-                messageSuffix);
+                messageSuffix,
+                "Supertype of '%s'",
+                nestedType.getReadableDescription());
           }
 
           @Override
@@ -2598,7 +2599,6 @@ public class JsInteropRestrictionsChecker {
               return;
             }
             TypeDescriptor variableTypeDescriptor = variable.getTypeDescriptor();
-            String messagePrefix = String.format("Variable '%s'", variable.getName());
             SourcePosition sourcePosition = variable.getSourcePosition();
             errorIfDisallowedType(
                 variableTypeDescriptor,
@@ -2609,8 +2609,9 @@ public class JsInteropRestrictionsChecker {
                 sourcePosition == SourcePosition.NONE
                     ? getCurrentMember().getSourcePosition()
                     : sourcePosition,
-                messagePrefix,
-                messageSuffix);
+                messageSuffix,
+                "Variable '%s'",
+                variable.getName());
           }
 
           @Override
@@ -2647,7 +2648,6 @@ public class JsInteropRestrictionsChecker {
           public void exitField(Field field) {
             FieldDescriptor fieldDescriptor = field.getDescriptor();
             TypeDescriptor fieldTypeDescriptor = fieldDescriptor.getTypeDescriptor();
-            String messagePrefix = String.format("Field '%s'", field.getReadableDescription());
             errorIfDisallowedType(
                 fieldTypeDescriptor,
                 fieldTypeDescriptor,
@@ -2655,8 +2655,9 @@ public class JsInteropRestrictionsChecker {
                 onlyCheckTypeSpecialization,
                 checkArrayComponent,
                 field.getSourcePosition(),
-                messagePrefix,
-                messageSuffix);
+                messageSuffix,
+                "Field '%s'",
+                field.getReadableDescription());
           }
 
           @Override
@@ -2668,9 +2669,6 @@ public class JsInteropRestrictionsChecker {
               // No inference, the error will be given at declaration if needed.
               return;
             }
-            String messagePrefix =
-                String.format(
-                    "Reference to field '%s'", fieldAccess.getTarget().getReadableDescription());
             errorIfDisallowedType(
                 inferredTypeDescriptor,
                 declaredTypeDescriptor,
@@ -2678,8 +2676,9 @@ public class JsInteropRestrictionsChecker {
                 onlyCheckTypeSpecialization,
                 checkArrayComponent,
                 getCurrentMember().getSourcePosition(),
-                messagePrefix,
-                messageSuffix);
+                messageSuffix,
+                "Reference to field '%s'",
+                fieldAccess.getTarget().getReadableDescription());
           }
 
           @Override
@@ -2692,10 +2691,6 @@ public class JsInteropRestrictionsChecker {
               // No inference, the error will be given at declaration if needed.
               return;
             }
-            String messagePrefix =
-                String.format(
-                    "Returned type in call to method '%s'",
-                    methodCall.getTarget().getReadableDescription());
             errorIfDisallowedType(
                 inferredTypeDescriptor,
                 declaredTypeDescriptor,
@@ -2703,16 +2698,14 @@ public class JsInteropRestrictionsChecker {
                 onlyCheckTypeSpecialization,
                 checkArrayComponent,
                 getCurrentMember().getSourcePosition(),
-                messagePrefix,
-                messageSuffix);
+                messageSuffix,
+                "Returned type in call to method '%s'",
+                methodCall.getTarget().getReadableDescription());
           }
 
           @Override
           public void exitNewArray(NewArray newArray) {
             ArrayTypeDescriptor newArrayTypeDescriptor = newArray.getTypeDescriptor();
-            // TODO(b/65465035): Emit the expression source position when it is tracked, and avoid
-            // toString() in an AST nodes.
-            String messagePrefix = String.format("Array creation '%s'", newArray);
             errorIfDisallowedType(
                 newArrayTypeDescriptor,
                 newArrayTypeDescriptor,
@@ -2720,14 +2713,16 @@ public class JsInteropRestrictionsChecker {
                 onlyCheckTypeSpecialization,
                 checkArrayComponent,
                 getCurrentMember().getSourcePosition(),
-                messagePrefix,
-                messageSuffix);
+                messageSuffix,
+                "Array creation '%s'",
+                // TODO(b/65465035): Emit the expression source position when it is tracked, and
+                // avoid toString() in an AST nodes.
+                newArray);
           }
 
           @Override
           public void exitNewInstance(NewInstance newInstance) {
             TypeDescriptor instanceTypeDescriptor = newInstance.getTypeDescriptor();
-            String messagePrefix = String.format("Object creation '%s'", newInstance);
             errorIfDisallowedType(
                 instanceTypeDescriptor,
                 instanceTypeDescriptor,
@@ -2735,8 +2730,11 @@ public class JsInteropRestrictionsChecker {
                 onlyCheckTypeSpecialization,
                 checkArrayComponent,
                 getCurrentMember().getSourcePosition(),
-                messagePrefix,
-                messageSuffix);
+                messageSuffix,
+                "Object creation '%s'",
+                // TODO(b/65465035): Emit the expression source position when it is tracked, and
+                // avoid toString() in an AST nodes.
+                newInstance);
           }
 
           @Override
@@ -2778,6 +2776,7 @@ public class JsInteropRestrictionsChecker {
         });
   }
 
+  @FormatMethod
   private void errorIfDisallowedType(
       TypeDescriptor inferredTypeDescriptor,
       TypeDescriptor declaredTypeDescriptor,
@@ -2785,8 +2784,9 @@ public class JsInteropRestrictionsChecker {
       boolean onlyCheckTypeSpecialization,
       boolean checkArrayComponent,
       SourcePosition sourcePosition,
-      String messagePrefix,
-      String messageSuffix) {
+      String messageSuffix,
+      @FormatString String messagePrefixFormat,
+      Object... messagePrefixArgs) {
     if (hasDisallowedType(
         inferredTypeDescriptor,
         declaredTypeDescriptor,
@@ -2796,7 +2796,7 @@ public class JsInteropRestrictionsChecker {
       problems.error(
           sourcePosition,
           "%s cannot be of type '%s'.%s",
-          messagePrefix,
+          String.format(messagePrefixFormat, messagePrefixArgs),
           inferredTypeDescriptor.getReadableDescription(),
           messageSuffix);
     }
