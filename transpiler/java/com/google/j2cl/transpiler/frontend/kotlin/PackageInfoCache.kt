@@ -23,7 +23,7 @@ import com.intellij.openapi.vfs.VirtualFile
  * A cache for information on package-info files that are needed for transpilation, like JsInterop
  * annotations.
  */
-class PackageInfoCache(private val classpath: List<VirtualFile>) {
+internal class PackageInfoCache(private val classpath: List<VirtualFile>) {
 
   private val packageInfoByName: Map<String, PackageInfo?> = buildMap {
     for (cp in classpath) {

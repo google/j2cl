@@ -145,7 +145,7 @@ import org.jetbrains.kotlin.name.FqNameUnsafe
 import org.jetbrains.kotlin.types.Variance
 
 /** Utility functions to interact with the Kotlin compiler internal representations. */
-class KotlinEnvironment(
+internal class KotlinEnvironment(
   private val pluginContext: IrPluginContext,
   private val packageInfoCache: PackageInfoCache,
   private val jvmBackendContext: JvmBackendContext,

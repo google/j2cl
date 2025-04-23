@@ -194,7 +194,7 @@ import org.jetbrains.kotlin.name.SpecialNames
 import org.jetbrains.kotlin.progress.ProgressIndicatorAndCompilationCanceledStatus
 
 /** Creates a J2CL Java AST from Kotlin IR. */
-class CompilationUnitBuilder(
+internal class CompilationUnitBuilder(
   private val environment: KotlinEnvironment,
   private val intrinsicMethods: IntrinsicMethods,
 ) : AbstractCompilationUnitBuilder() {
