@@ -57,9 +57,10 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
 
   @Override
   public boolean isSameBaseType(TypeDescriptor other) {
-    return other instanceof ArrayTypeDescriptor otherArrayType
-        && getDimensions() == otherArrayType.getDimensions()
-        && getLeafTypeDescriptor().isSameBaseType(otherArrayType.getLeafTypeDescriptor());
+    return this == other
+        || (other instanceof ArrayTypeDescriptor otherArrayType
+            && getDimensions() == otherArrayType.getDimensions()
+            && getLeafTypeDescriptor().isSameBaseType(otherArrayType.getLeafTypeDescriptor()));
   }
 
   /** Returns true for arrays where raw JavaScript array representation is enough. */
@@ -86,13 +87,10 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
 
   @Override
   public boolean isNativeWasmArray() {
-    if (isMarkedAsNativeWasmArray()) {
-      return true;
-    }
-
-    return getComponentTypeDescriptor().toRawTypeDescriptor()
-            instanceof DeclaredTypeDescriptor componentTypeDescriptor
-        && componentTypeDescriptor.getTypeDeclaration().getWasmInfo() != null;
+    return isMarkedAsNativeWasmArray()
+        || (getComponentTypeDescriptor().toRawTypeDescriptor()
+                instanceof DeclaredTypeDescriptor componentTypeDescriptor
+            && componentTypeDescriptor.getTypeDeclaration().getWasmInfo() != null);
   }
 
   @Override
