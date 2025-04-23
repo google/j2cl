@@ -366,18 +366,8 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
 
   @Override
   public final boolean equals(Object o) {
-    if (o == null) {
-      return false;
-    }
-
-    if (o == this) {
-      return true;
-    }
-
-    if (o instanceof TypeDescriptor) {
-      return getUniqueId().equals(((TypeDescriptor) o).getUniqueId());
-    }
-    return false;
+    return o == this
+        || (o instanceof TypeDescriptor other && getUniqueId().equals(other.getUniqueId()));
   }
 
   @Override
@@ -387,8 +377,10 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
 
   @Override
   public final String toString() {
-    return getUniqueId();
+    return toStringInternal(ImmutableSet.of());
   }
+
+  abstract String toStringInternal(ImmutableSet<TypeVariable> seen);
 
   public final boolean isDenotable() {
     return isDenotable(/* seen= */ ImmutableSet.of());

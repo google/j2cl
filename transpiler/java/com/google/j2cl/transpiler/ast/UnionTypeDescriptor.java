@@ -218,6 +218,13 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
+  String toStringInternal(ImmutableSet<TypeVariable> seen) {
+    return getUnionTypeDescriptors().stream()
+        .map(t -> t.toStringInternal(seen))
+        .collect(joining(" | ", "(", ")"));
+  }
+
+  @Override
   TypeDescriptor acceptInternal(Processor processor) {
     return Visitor_UnionTypeDescriptor.visit(processor, this);
   }

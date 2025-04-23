@@ -233,6 +233,11 @@ public class PrimitiveTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
+  String toStringInternal(ImmutableSet<TypeVariable> seen) {
+    return getSimpleSourceName();
+  }
+
+  @Override
   TypeDescriptor acceptInternal(Processor processor) {
     return Visitor_PrimitiveTypeDescriptor.visit(processor, this);
   }

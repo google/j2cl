@@ -57,11 +57,8 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
 
   @Override
   public boolean isSameBaseType(TypeDescriptor other) {
-    if (!(other instanceof ArrayTypeDescriptor)) {
-      return false;
-    }
-    ArrayTypeDescriptor otherArrayType = (ArrayTypeDescriptor) other;
-    return getDimensions() == otherArrayType.getDimensions()
+    return other instanceof ArrayTypeDescriptor otherArrayType
+        && getDimensions() == otherArrayType.getDimensions()
         && getLeafTypeDescriptor().isSameBaseType(otherArrayType.getLeafTypeDescriptor());
   }
 
@@ -93,13 +90,9 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
       return true;
     }
 
-    if (getComponentTypeDescriptor().toRawTypeDescriptor() instanceof DeclaredTypeDescriptor) {
-      DeclaredTypeDescriptor componentTypeDescriptor =
-          (DeclaredTypeDescriptor) getComponentTypeDescriptor().toRawTypeDescriptor();
-      return componentTypeDescriptor.getTypeDeclaration().getWasmInfo() != null;
-    }
-
-    return false;
+    return getComponentTypeDescriptor().toRawTypeDescriptor()
+            instanceof DeclaredTypeDescriptor componentTypeDescriptor
+        && componentTypeDescriptor.getTypeDeclaration().getWasmInfo() != null;
   }
 
   @Override
@@ -258,6 +251,14 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
     return ArrayTypeDescriptor.Builder.from(this)
         .setComponentTypeDescriptor(typeDescriptor)
         .build();
+  }
+
+  @Override
+  String toStringInternal(ImmutableSet<TypeVariable> seen) {
+    return getComponentTypeDescriptor().toStringInternal(seen)
+        + "[]"
+        + (isNullable() ? "?" : "")
+        + (isMarkedAsNativeWasmArray() ? "(native)" : "");
   }
 
   @Override

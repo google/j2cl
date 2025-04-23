@@ -266,18 +266,7 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
 
   @Override
   public String getUniqueId() {
-    String prefix;
-    switch (getNullabilityAnnotation()) {
-      case NOT_NULLABLE:
-        prefix = "!";
-        break;
-      case NULLABLE:
-        prefix = "?";
-        break;
-      default:
-        prefix = "";
-    }
-    return prefix + getUniqueKey();
+    return getNullabilityAnnotation().toTypeModifierString() + getUniqueKey();
   }
 
   public final boolean hasRecursiveDefinition() {
@@ -424,6 +413,59 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
     }
 
     return getUpperBoundTypeDescriptor().hasReferenceTo(typeVariable, seen);
+  }
+
+  @Override
+  String toStringInternal(ImmutableSet<TypeVariable> seen) {
+    // TODO(b/246332093): Make type variable unique identifiers compact so that when printed make it
+    // easier to see the actual type variable they are referencing.
+    // Ideally references just print the annotated variable name (when they are not captures or
+    // wildcards) and print the full definition when printing a the class or method declaration
+    // that declares them.
+    String referenceText =
+        getName()
+            + getNullabilityAnnotation().toTypeModifierString()
+            + (isCapture() ? "(capture) " : "");
+    if (seen.contains(this.withoutNullabilityAnnotations())) {
+      // We are in the definition of this type variable, don't print the bounds since they might
+      // be recursive.
+      return referenceText;
+    }
+    return referenceText
+        + getBoundString(
+            ImmutableSet.<TypeVariable>builder()
+                .addAll(seen)
+                .add(this.withoutNullabilityAnnotations())
+                .build());
+  }
+
+  private String getBoundString(ImmutableSet<TypeVariable> seen) {
+    TypeDescriptor upperBoundTypeDescriptor = getUpperBoundTypeDescriptor();
+    TypeDescriptor lowerBoundTypeDescriptor = getLowerBoundTypeDescriptor();
+    // TODO(b/246332093): Compute correctly if the bound can be omitted.
+    boolean isDefaultUpperbound =
+        upperBoundTypeDescriptor == null
+            || TypeDescriptors.isJavaLangObject(upperBoundTypeDescriptor);
+    boolean isUnbound = isDefaultUpperbound && lowerBoundTypeDescriptor == null;
+
+    if (isUnbound) {
+      return "";
+    }
+
+    if (isDefaultUpperbound) {
+      return " super " + lowerBoundTypeDescriptor.toStringInternal(seen);
+    }
+
+    if (lowerBoundTypeDescriptor != null) {
+      // bounded both ways ony in captures.
+      return " extends "
+          + upperBoundTypeDescriptor.toStringInternal(seen)
+          + "( super "
+          + lowerBoundTypeDescriptor.toStringInternal(seen)
+          + ")";
+    }
+
+    return " extends " + upperBoundTypeDescriptor.toStringInternal(seen);
   }
 
   /** Builder for a TypeVariableDeclaration. */

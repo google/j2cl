@@ -19,5 +19,13 @@ package com.google.j2cl.transpiler.ast;
 public enum NullabilityAnnotation {
   NONE,
   NULLABLE,
-  NOT_NULLABLE,
+  NOT_NULLABLE;
+
+  public final String toTypeModifierString() {
+    return switch (this) {
+      case NULLABLE -> "?";
+      case NOT_NULLABLE -> "!";
+      case NONE -> "";
+    };
+  }
 }

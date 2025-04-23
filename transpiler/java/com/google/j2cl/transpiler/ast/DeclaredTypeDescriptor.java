@@ -286,18 +286,14 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor {
           || isSameBaseType(that)
           || (getJsEnumInfo().supportsComparable() && TypeDescriptors.isJavaLangComparable(that));
     }
-    TypeDescriptor thatRawTypeDescriptor = that.toRawTypeDescriptor();
-    return thatRawTypeDescriptor instanceof DeclaredTypeDescriptor
-        && isSubtypeOf((DeclaredTypeDescriptor) thatRawTypeDescriptor);
+    return that.toRawTypeDescriptor() instanceof DeclaredTypeDescriptor thatRawTypeDescriptor
+        && isSubtypeOf(thatRawTypeDescriptor);
   }
 
   @Override
   public boolean isSameBaseType(TypeDescriptor other) {
-    if (!(other instanceof DeclaredTypeDescriptor)) {
-      return false;
-    }
-    DeclaredTypeDescriptor otherDeclaredType = (DeclaredTypeDescriptor) other;
-    return getTypeDeclaration().equals(otherDeclaredType.getTypeDeclaration());
+    return other instanceof DeclaredTypeDescriptor otherDeclaredType
+        && getTypeDeclaration().equals(otherDeclaredType.getTypeDeclaration());
   }
 
   public boolean isSubtypeOf(DeclaredTypeDescriptor that) {
@@ -1153,11 +1149,9 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor {
       if (AstUtils.isNonNativeJsEnum(typeArgument)) {
         return true;
       }
-      if (typeArgument instanceof DeclaredTypeDescriptor) {
-        DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeArgument;
-        if (declaredTypeDescriptor.isParameterizedByNonNativeJsEnum()) {
+      if (typeArgument instanceof DeclaredTypeDescriptor declaredTypeDescriptor
+          && declaredTypeDescriptor.isParameterizedByNonNativeJsEnum()) {
           return true;
-        }
       }
     }
     return false;
@@ -1324,6 +1318,17 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor {
   boolean hasReferenceTo(TypeVariable typeVariable, ImmutableSet<TypeVariable> seen) {
     return getTypeArgumentDescriptors().stream()
         .anyMatch(it -> it.hasReferenceTo(typeVariable, seen));
+  }
+
+  @Override
+  String toStringInternal(ImmutableSet<TypeVariable> seen) {
+    return getQualifiedSourceName()
+        + (getTypeArgumentDescriptors().isEmpty()
+            ? ""
+            : getTypeArgumentDescriptors().stream()
+                .map(t -> t.toStringInternal(seen))
+                .collect(joining(",", "<", ">")))
+        + (isNullable() ? "?" : "");
   }
 
   @Override

@@ -231,6 +231,13 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
+  String toStringInternal(ImmutableSet<TypeVariable> seen) {
+    return getIntersectionTypeDescriptors().stream()
+        .map(t -> t.toStringInternal(seen))
+        .collect(joining(" & ", "(", ")"));
+  }
+
+  @Override
   TypeDescriptor acceptInternal(Processor processor) {
     return Visitor_IntersectionTypeDescriptor.visit(processor, this);
   }
