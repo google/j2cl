@@ -104,8 +104,8 @@ public final class ConversionContextVisitor extends AbstractRewriter {
           (HasSourcePosition)
               visitor.getParent(
                   p ->
-                      p instanceof HasSourcePosition
-                          && ((HasSourcePosition) p).getSourcePosition() != SourcePosition.NONE);
+                      p instanceof HasSourcePosition hs
+                          && hs.getSourcePosition() != SourcePosition.NONE);
       return hasSourcePosition != null
           ? hasSourcePosition.getSourcePosition()
           : SourcePosition.NONE;
@@ -300,8 +300,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
 
   @Override
   public ArrayLiteral rewriteArrayLiteral(ArrayLiteral arrayLiteral) {
-    if (getParent() instanceof Invocation) {
-      Invocation invocation = (Invocation) getParent();
+    if (getParent() instanceof Invocation invocation) {
       if (arrayLiteral == Iterables.getLast(invocation.getArguments(), null)
           && invocation.getTarget().isVarargs()) {
         // The expressions in the array literals encapsulating the vararg parameters are handled
@@ -867,14 +866,13 @@ public final class ConversionContextVisitor extends AbstractRewriter {
       ParameterDescriptor inferredParameterDescriptor,
       ParameterDescriptor declaredParameterDescriptor,
       Expression expression) {
-    if (!(expression instanceof ArrayLiteral)) {
+    if (!(expression instanceof ArrayLiteral arrayLiteral)) {
       // The vararg was passed directly as an array, not as separate arguments. Process it as one
       // argument.
       return contextRewriter.rewriteMethodInvocationContext(
           inferredParameterDescriptor, declaredParameterDescriptor, expression);
     }
 
-    ArrayLiteral arrayLiteral = (ArrayLiteral) expression;
     return arrayLiteral.toBuilder()
         .setValueExpressions(
             arrayLiteral.getValueExpressions().stream()

@@ -438,9 +438,8 @@ public class TypeDescriptors {
   }
 
   public static boolean isWasmArraySubtype(TypeDescriptor typeDescriptor) {
-    if (typeDescriptor instanceof DeclaredTypeDescriptor) {
-      DeclaredTypeDescriptor superTypeDescriptor =
-          ((DeclaredTypeDescriptor) typeDescriptor).getSuperTypeDescriptor();
+    if (typeDescriptor instanceof DeclaredTypeDescriptor descriptor) {
+      DeclaredTypeDescriptor superTypeDescriptor = descriptor.getSuperTypeDescriptor();
       return get().javaemulInternalWasmArray.isSameBaseType(superTypeDescriptor);
     }
     return false;

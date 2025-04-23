@@ -621,10 +621,9 @@ public class JdtEnvironment {
     // enclosing it when the declaration is inside a lambda. If the declaring method declares a
     // type variable, it would get lost.
     IBinding declarationBinding = getDeclaringMethodOrFieldBinding(typeBinding);
-    if (declarationBinding instanceof IMethodBinding) {
+    if (declarationBinding instanceof IMethodBinding methodBinding) {
       typeArgumentDescriptorsBuilder.addAll(
-          createTypeDescriptors(
-              ((IMethodBinding) declarationBinding).getTypeParameters(), inNullMarkedScope, clazz));
+          createTypeDescriptors(methodBinding.getTypeParameters(), inNullMarkedScope, clazz));
     }
 
     if (capturesEnclosingInstance(typeBinding.getTypeDeclaration())) {
@@ -668,8 +667,7 @@ public class JdtEnvironment {
   }
 
   public static boolean isStatic(IBinding binding) {
-    if (binding instanceof IVariableBinding) {
-      IVariableBinding variableBinding = (IVariableBinding) binding;
+    if (binding instanceof IVariableBinding variableBinding) {
       if (!variableBinding.isField() || variableBinding.getDeclaringClass().isInterface()) {
         // Interface fields and variables are implicitly static.
         return true;
@@ -751,8 +749,8 @@ public class JdtEnvironment {
   }
 
   private static boolean isLambdaBinding(IBinding binding) {
-    return binding instanceof IMethodBinding
-        && ((IMethodBinding) binding).getDeclaringMember() != null;
+    return binding instanceof IMethodBinding methodBinding
+        && methodBinding.getDeclaringMember() != null;
   }
 
   /** Create a FieldDescriptor directly based on the given JDT field variable binding. */

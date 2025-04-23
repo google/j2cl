@@ -55,21 +55,9 @@ public class J2ktAstUtils {
   /** Returns whether given type descriptor is allowed in synchronized statement expression. */
   public static boolean isValidSynchronizedStatementExpressionTypeDescriptor(
       TypeDescriptor typeDescriptor) {
-    if (!(typeDescriptor instanceof DeclaredTypeDescriptor)) {
-      return false;
-    }
-
-    DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
-
-    if (declaredTypeDescriptor.isSubtypeOf(TypeDescriptors.get().javaLangClass)) {
-      return true;
-    }
-
-    if (isSubtypeOfJ2ktMonitor(declaredTypeDescriptor)) {
-      return true;
-    }
-
-    return false;
+    return typeDescriptor instanceof DeclaredTypeDescriptor descriptor
+        && (descriptor.isSubtypeOf(TypeDescriptors.get().javaLangClass)
+            || isSubtypeOfJ2ktMonitor(descriptor));
   }
 
   private J2ktAstUtils() {}

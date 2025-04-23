@@ -237,16 +237,14 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   }
 
   private static String getSignatureStringForParameter(TypeDescriptor typeDescriptor) {
-    if (typeDescriptor instanceof DeclaredTypeDescriptor) {
-      return ((DeclaredTypeDescriptor) typeDescriptor).getQualifiedBinaryName();
+    if (typeDescriptor instanceof DeclaredTypeDescriptor descriptor) {
+      return descriptor.getQualifiedBinaryName();
     }
-    if (typeDescriptor instanceof PrimitiveTypeDescriptor) {
-      return ((PrimitiveTypeDescriptor) typeDescriptor).getSimpleSourceName();
+    if (typeDescriptor instanceof PrimitiveTypeDescriptor descriptor) {
+      return descriptor.getSimpleSourceName();
     }
-    if (typeDescriptor instanceof ArrayTypeDescriptor) {
-      return getSignatureStringForParameter(
-              ((ArrayTypeDescriptor) typeDescriptor).getComponentTypeDescriptor())
-          + "[]";
+    if (typeDescriptor instanceof ArrayTypeDescriptor descriptor) {
+      return getSignatureStringForParameter(descriptor.getComponentTypeDescriptor()) + "[]";
     }
     return getSignatureStringForParameter(typeDescriptor.toRawTypeDescriptor());
   }

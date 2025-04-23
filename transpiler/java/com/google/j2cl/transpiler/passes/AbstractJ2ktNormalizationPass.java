@@ -115,23 +115,20 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
       TypeDescriptor typeDescriptor, boolean isTypeArgument, ImmutableSet<TypeVariable> seen) {
     if (typeDescriptor instanceof PrimitiveTypeDescriptor) {
       return typeDescriptor;
-    } else if (typeDescriptor instanceof ArrayTypeDescriptor) {
-      ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
-      return arrayTypeDescriptor.withComponentTypeDescriptor(
+    } else if (typeDescriptor instanceof ArrayTypeDescriptor descriptor) {
+      return descriptor.withComponentTypeDescriptor(
           projectArgumentCaptures(
-              arrayTypeDescriptor.getComponentTypeDescriptor(),
+              descriptor.getComponentTypeDescriptor(),
               getArrayComponentTypeParameterDescriptor(),
               seen));
-    } else if (typeDescriptor instanceof DeclaredTypeDescriptor) {
-      DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
-      return declaredTypeDescriptor.withTypeArguments(
+    } else if (typeDescriptor instanceof DeclaredTypeDescriptor descriptor) {
+      return descriptor.withTypeArguments(
           zip(
-              declaredTypeDescriptor.getTypeDeclaration().getTypeParameterDescriptors(),
-              declaredTypeDescriptor.getTypeArgumentDescriptors(),
+              descriptor.getTypeDeclaration().getTypeParameterDescriptors(),
+              descriptor.getTypeArgumentDescriptors(),
               (typeParameter, typeArgument) ->
                   projectArgumentCaptures(typeArgument, typeParameter, seen)));
-    } else if (typeDescriptor instanceof TypeVariable) {
-      TypeVariable typeVariable = (TypeVariable) typeDescriptor;
+    } else if (typeDescriptor instanceof TypeVariable typeVariable) {
       if (!typeVariable.isWildcardOrCapture()) {
         return typeVariable;
       } else {
@@ -155,20 +152,17 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
               .withRewrittenBounds(it -> projectCaptures(it, /* isTypeArgument= */ false, newSeen));
         }
       }
-    } else if (typeDescriptor instanceof IntersectionTypeDescriptor) {
-      IntersectionTypeDescriptor intersectionTypeDescriptor =
-          (IntersectionTypeDescriptor) typeDescriptor;
+    } else if (typeDescriptor instanceof IntersectionTypeDescriptor descriptor) {
       return IntersectionTypeDescriptor.newBuilder()
           .setIntersectionTypeDescriptors(
-              intersectionTypeDescriptor.getIntersectionTypeDescriptors().stream()
+              descriptor.getIntersectionTypeDescriptors().stream()
                   .map(it -> projectCaptures(it, /* isTypeArgument= */ false, seen))
                   .collect(toImmutableList()))
           .build();
-    } else if (typeDescriptor instanceof UnionTypeDescriptor) {
-      UnionTypeDescriptor unionTypeDescriptor = (UnionTypeDescriptor) typeDescriptor;
+    } else if (typeDescriptor instanceof UnionTypeDescriptor descriptor) {
       return UnionTypeDescriptor.newBuilder()
           .setUnionTypeDescriptors(
-              unionTypeDescriptor.getUnionTypeDescriptors().stream()
+              descriptor.getUnionTypeDescriptors().stream()
                   .map(it -> projectCaptures(it, /* isTypeArgument= */ false, seen))
                   .collect(toImmutableList()))
           .build();
@@ -199,8 +193,7 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
 
   static boolean isUnboundWildcardWithRecursiveDeclaration(
       TypeDescriptor typeDescriptor, TypeVariable typeParameter) {
-    if (typeDescriptor instanceof TypeVariable) {
-      TypeVariable typeVariable = (TypeVariable) typeDescriptor;
+    if (typeDescriptor instanceof TypeVariable typeVariable) {
       return typeParameter.hasRecursiveDefinition()
           && typeVariable.isWildcardOrCapture()
           && typeVariable
@@ -244,8 +237,7 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
    * is valid only for type variables with nullable bounds.
    */
   static TypeDescriptor removeRedundantNullabilityAnnotation(TypeDescriptor typeDescriptor) {
-    if (typeDescriptor instanceof TypeVariable) {
-      TypeVariable typeVariable = (TypeVariable) typeDescriptor;
+    if (typeDescriptor instanceof TypeVariable typeVariable) {
       if (typeVariable.getNullabilityAnnotation() == NullabilityAnnotation.NOT_NULLABLE
           && !typeVariable.getUpperBoundTypeDescriptor().canBeNull()) {
         return TypeVariable.Builder.from(typeVariable)
@@ -273,8 +265,7 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
 
   @Nullable
   static TypeDescriptor getNormalizedLowerBoundTypeDescriptor(TypeDescriptor typeDescriptor) {
-    if (typeDescriptor instanceof TypeVariable) {
-      TypeVariable typeVariable = (TypeVariable) typeDescriptor;
+    if (typeDescriptor instanceof TypeVariable typeVariable) {
       if (typeVariable.isWildcardOrCapture()) {
         return getNormalizedLowerBoundTypeDescriptor(typeVariable);
       }
@@ -338,33 +329,25 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
 
     private String getDescription(
         TypeDescriptor typeDescriptor, ImmutableList<TypeVariable> enclosingWildcardOrCaptures) {
-      if (typeDescriptor instanceof PrimitiveTypeDescriptor) {
-        PrimitiveTypeDescriptor primitiveTypeDescriptor = (PrimitiveTypeDescriptor) typeDescriptor;
-        return primitiveTypeDescriptor.getSimpleSourceName();
-      } else if (typeDescriptor instanceof ArrayTypeDescriptor) {
-        ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
-        return getDescription(
-                arrayTypeDescriptor.getComponentTypeDescriptor(), enclosingWildcardOrCaptures)
+      if (typeDescriptor instanceof PrimitiveTypeDescriptor descriptor) {
+        return descriptor.getSimpleSourceName();
+      } else if (typeDescriptor instanceof ArrayTypeDescriptor descriptor) {
+        return getDescription(descriptor.getComponentTypeDescriptor(), enclosingWildcardOrCaptures)
             + getDescriptionInfix(getNullabilityAnnotation(typeDescriptor))
             + "[]";
-      } else if (typeDescriptor instanceof DeclaredTypeDescriptor) {
-        DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
+      } else if (typeDescriptor instanceof DeclaredTypeDescriptor descriptor) {
         return getDescriptionPrefix(getNullabilityAnnotation(typeDescriptor))
-            + declaredTypeDescriptor.getTypeDeclaration().getReadableDescription()
-            + getTypeArgumentsDescription(declaredTypeDescriptor, enclosingWildcardOrCaptures);
-      } else if (typeDescriptor instanceof TypeVariable) {
-        TypeVariable typeVariable = (TypeVariable) typeDescriptor;
+            + descriptor.getTypeDeclaration().getReadableDescription()
+            + getTypeArgumentsDescription(descriptor, enclosingWildcardOrCaptures);
+      } else if (typeDescriptor instanceof TypeVariable typeVariable) {
         return getDescriptionPrefix(getNullabilityAnnotation(typeDescriptor))
             + getDescriptionWithoutNullabilityAnnotation(typeVariable, enclosingWildcardOrCaptures);
-      } else if (typeDescriptor instanceof IntersectionTypeDescriptor) {
-        IntersectionTypeDescriptor intersectionTypeDescriptor =
-            (IntersectionTypeDescriptor) typeDescriptor;
-        return intersectionTypeDescriptor.getIntersectionTypeDescriptors().stream()
+      } else if (typeDescriptor instanceof IntersectionTypeDescriptor descriptor) {
+        return descriptor.getIntersectionTypeDescriptors().stream()
             .map(it -> getDescription(it, enclosingWildcardOrCaptures))
             .collect(joining(" & ", "(", ")"));
-      } else if (typeDescriptor instanceof UnionTypeDescriptor) {
-        UnionTypeDescriptor unionTypeDescriptor = (UnionTypeDescriptor) typeDescriptor;
-        return unionTypeDescriptor.getUnionTypeDescriptors().stream()
+      } else if (typeDescriptor instanceof UnionTypeDescriptor descriptor) {
+        return descriptor.getUnionTypeDescriptors().stream()
             .map(it -> getDescription(it, enclosingWildcardOrCaptures))
             .collect(joining(" | ", "(", ")"));
       } else {
@@ -450,8 +433,7 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
     }
 
     private static NullabilityAnnotation getNullabilityAnnotation(TypeDescriptor typeDescriptor) {
-      if (typeDescriptor instanceof TypeVariable) {
-        TypeVariable typeVariable = (TypeVariable) typeDescriptor;
+      if (typeDescriptor instanceof TypeVariable typeVariable) {
         return typeVariable.getNullabilityAnnotation();
       } else {
         return typeDescriptor.isNullable()

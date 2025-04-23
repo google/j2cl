@@ -60,15 +60,10 @@ public class ArrayConstant extends Literal {
 
   @Override
   public boolean equals(Object o) {
-    if (o == this) {
-      return true;
-    }
-    if (!(o instanceof ArrayConstant)) {
-      return false;
-    }
-    ArrayConstant other = (ArrayConstant) o;
-    return typeDescriptor.equals(other.typeDescriptor)
-        && valueExpressions.equals(other.valueExpressions);
+    return o == this
+        || (o instanceof ArrayConstant other
+            && typeDescriptor.equals(other.typeDescriptor)
+            && valueExpressions.equals(other.valueExpressions));
   }
 
   @Override

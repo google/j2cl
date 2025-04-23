@@ -56,7 +56,7 @@ public class NullLiteral extends Literal {
   @Override
   public boolean equals(Object o) {
     return o == this
-        || (o instanceof NullLiteral && ((NullLiteral) o).typeDescriptor.equals(typeDescriptor));
+        || (o instanceof NullLiteral other && other.typeDescriptor.equals(typeDescriptor));
   }
 
   @Override

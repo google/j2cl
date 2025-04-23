@@ -94,8 +94,8 @@ class J2clTranspiler {
       Library library, ImmutableList<Supplier<NormalizationPass>> passFactories) {
     for (Supplier<NormalizationPass> passFactory : passFactories) {
       NormalizationPass pass = instantiatePass(passFactory);
-      if (pass instanceof LibraryNormalizationPass) {
-        ((LibraryNormalizationPass) pass).execute(library);
+      if (pass instanceof LibraryNormalizationPass libraryNormalizationPass) {
+        libraryNormalizationPass.execute(library);
         problems.abortIfHasErrors();
         continue;
       }

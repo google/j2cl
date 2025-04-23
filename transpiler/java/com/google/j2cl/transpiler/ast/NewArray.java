@@ -143,8 +143,8 @@ public class NewArray extends Expression {
 
   private static boolean isValidInitializer(
       Expression initializer, ArrayTypeDescriptor typeDescriptor) {
-    if (initializer instanceof ArrayLiteral) {
-      return ((ArrayLiteral) initializer).getTypeDescriptor().hasSameRawType(typeDescriptor);
+    if (initializer instanceof ArrayLiteral literal) {
+      return literal.getTypeDescriptor().hasSameRawType(typeDescriptor);
     }
 
     DeclaredTypeDescriptor functionalInterface =

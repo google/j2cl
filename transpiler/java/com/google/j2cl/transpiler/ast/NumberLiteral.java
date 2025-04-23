@@ -90,14 +90,10 @@ public class NumberLiteral extends Literal {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (!(o instanceof NumberLiteral)) {
-      return false;
-    }
-    NumberLiteral that = (NumberLiteral) o;
-    return Objects.equals(typeDescriptor, that.typeDescriptor) && Objects.equals(value, that.value);
+    return this == o
+        || (o instanceof NumberLiteral other
+            && Objects.equals(typeDescriptor, other.typeDescriptor)
+            && Objects.equals(value, other.value));
   }
 
   @Override

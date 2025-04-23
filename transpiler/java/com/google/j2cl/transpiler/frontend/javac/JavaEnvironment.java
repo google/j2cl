@@ -499,10 +499,9 @@ class JavaEnvironment {
   }
 
   private ImmutableList<String> getClassComponents(Element element) {
-    if (!(element instanceof TypeElement)) {
+    if (!(element instanceof TypeElement typeElement)) {
       return ImmutableList.of();
     }
-    TypeElement typeElement = (TypeElement) element;
     List<String> classComponents = new ArrayList<>();
     TypeElement currentType = typeElement;
     while (currentType != null) {
@@ -1001,11 +1000,11 @@ class JavaEnvironment {
   }
 
   private Element asElement(TypeMirror typeMirror) {
-    if (typeMirror instanceof JCPrimitiveType) {
-      return ((JCPrimitiveType) typeMirror).asElement();
+    if (typeMirror instanceof JCPrimitiveType primitiveType) {
+      return primitiveType.asElement();
     }
-    if (typeMirror instanceof Type) {
-      return ((Type) typeMirror).tsym;
+    if (typeMirror instanceof Type type) {
+      return type.tsym;
     }
     return javacTypes.asElement(typeMirror);
   }
@@ -1094,8 +1093,8 @@ class JavaEnvironment {
       return true;
     }
     Element element = asElement(typeMirror);
-    return element instanceof TypeElement
-        && ((TypeElement) element).getQualifiedName().contentEquals("java.lang.Object");
+    return element instanceof TypeElement typeElement
+        && typeElement.getQualifiedName().contentEquals("java.lang.Object");
   }
 
   private final Map<DeclaredType, DeclaredTypeDescriptor>
@@ -1134,10 +1133,7 @@ class JavaEnvironment {
             ((Parameterizable) enclosingElement)
                 .getTypeParameters().stream().map(Element::asType).collect(toImmutableList()));
       }
-      currentType =
-          currentType.getEnclosingType() instanceof DeclaredType
-              ? (DeclaredType) currentType.getEnclosingType()
-              : null;
+      currentType = currentType.getEnclosingType() instanceof DeclaredType type ? type : null;
     } while (currentType != null);
     return typeArguments;
   }
@@ -1390,10 +1386,10 @@ class JavaEnvironment {
 
       if (enclosingElement.getKind() != ElementKind.STATIC_INIT
           && enclosingElement.getKind() != ElementKind.INSTANCE_INIT
-          && enclosingElement instanceof Parameterizable) {
+          && enclosingElement instanceof Parameterizable parameterizable) {
         // Add the enclosing element type variables, skip STATIC_INIT and INSTANCE_INIT since they
         // never define type variables, and throw NPE if getTypeParameters is called on them.
-        typeParameterElements.addAll(((Parameterizable) enclosingElement).getTypeParameters());
+        typeParameterElements.addAll(parameterizable.getTypeParameters());
       }
       currentElement = enclosingElement;
       enclosingElement = enclosingElement.getEnclosingElement();
@@ -1430,12 +1426,11 @@ class JavaEnvironment {
     if (!internalTypes.isFunctionalInterface(type)) {
       return null;
     }
-    if (type.isIntersection()) {
-      return ((IntersectionType) type)
-          .getBounds().stream()
-              .filter(this::isFunctionalInterface)
-              .map(this::getFunctionalInterfaceMethodPair)
-              .collect(onlyElement());
+    if (type instanceof IntersectionType intersectionType) {
+      return intersectionType.getBounds().stream()
+          .filter(this::isFunctionalInterface)
+          .map(this::getFunctionalInterfaceMethodPair)
+          .collect(onlyElement());
     }
     return getMethods((ClassType) type).stream()
         .filter(
@@ -1464,7 +1459,7 @@ class JavaEnvironment {
         : J2ktInteropAnnotationUtils.getJ2ktObjectiveCName(getPackageOf(typeElement));
   }
 
-  /** Return whether a type is annotated for nullablility and which type of annotation it has. */
+  /** Return whether a type is annotated for nullability and which type of annotation it has. */
   private static NullabilityAnnotation getNullabilityAnnotation(
       AnnotatedConstruct annotatedConstruct, List<? extends AnnotationMirror> elementAnnotations) {
 
@@ -1561,7 +1556,7 @@ class JavaEnvironment {
   }
 
   private static boolean isSynthetic(Element element) {
-    return element instanceof Symbol && (((Symbol) element).flags() & Flags.SYNTHETIC) != 0;
+    return element instanceof Symbol s && (s.flags() & Flags.SYNTHETIC) != 0;
   }
 
   private static boolean isAnnotatedWithKotlinMetadata(Element element) {
@@ -1686,8 +1681,7 @@ class JavaEnvironment {
 
       @Override
       public Void visitWildcardType(Type.WildcardType t, Type type) {
-        if (type instanceof Type.WildcardType) {
-          Type.WildcardType other = (Type.WildcardType) type;
+        if (type instanceof Type.WildcardType other) {
           scan(t.getExtendsBound(), other.getExtendsBound());
           scan(t.getSuperBound(), other.getSuperBound());
         }

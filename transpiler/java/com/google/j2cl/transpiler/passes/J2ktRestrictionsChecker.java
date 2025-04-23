@@ -279,15 +279,13 @@ public final class J2ktRestrictionsChecker {
 
   private static Iterable<TypeDescriptor> getReferencedTypeDescriptors(
       MemberDescriptor memberDescriptor) {
-    if (memberDescriptor instanceof MethodDescriptor) {
-      MethodDescriptor methodDescriptor = (MethodDescriptor) memberDescriptor;
+    if (memberDescriptor instanceof MethodDescriptor methodDescriptor) {
       return Iterables.concat(
           methodDescriptor.getParameterTypeDescriptors(),
           ImmutableList.of(methodDescriptor.getReturnTypeDescriptor()));
     }
 
-    if (memberDescriptor instanceof FieldDescriptor) {
-      FieldDescriptor fieldDescriptor = (FieldDescriptor) memberDescriptor;
+    if (memberDescriptor instanceof FieldDescriptor fieldDescriptor) {
       return ImmutableList.of(fieldDescriptor.getTypeDescriptor());
     }
 
@@ -331,11 +329,9 @@ public final class J2ktRestrictionsChecker {
    * the inferred visibility of its enclosing type (if present).
    */
   private static Visibility getRequiredVisibility(TypeDescriptor typeDescriptor) {
-    if (typeDescriptor instanceof DeclaredTypeDescriptor) {
-      DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
-      Visibility typeVisibility = declaredTypeDescriptor.getTypeDeclaration().getVisibility();
-      DeclaredTypeDescriptor enclosingTypeDescriptor =
-          declaredTypeDescriptor.getEnclosingTypeDescriptor();
+    if (typeDescriptor instanceof DeclaredTypeDescriptor descriptor) {
+      Visibility typeVisibility = descriptor.getTypeDeclaration().getVisibility();
+      DeclaredTypeDescriptor enclosingTypeDescriptor = descriptor.getEnclosingTypeDescriptor();
       return enclosingTypeDescriptor == null
           ? typeVisibility
           : getNarrowestOf(typeVisibility, getRequiredVisibility(enclosingTypeDescriptor));
@@ -352,9 +348,8 @@ public final class J2ktRestrictionsChecker {
   }
 
   private static boolean isInstanceOf(TypeDescriptor typeDescriptor, String qualifiedSourceName) {
-    if (typeDescriptor instanceof DeclaredTypeDescriptor) {
-      DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
-      return declaredTypeDescriptor.getTypeDeclaration().getAllSuperTypesIncludingSelf().stream()
+    if (typeDescriptor instanceof DeclaredTypeDescriptor descriptor) {
+      return descriptor.getTypeDeclaration().getAllSuperTypesIncludingSelf().stream()
           .map(TypeDeclaration::getQualifiedSourceName)
           .anyMatch(it -> it.equals(qualifiedSourceName));
     }

@@ -120,12 +120,10 @@ public final class InsertCastsOnNullabilityMismatch extends AbstractJ2ktNormaliz
 
     if (from instanceof PrimitiveTypeDescriptor) {
       return true;
-    } else if (from instanceof ArrayTypeDescriptor) {
-      ArrayTypeDescriptor fromArray = (ArrayTypeDescriptor) from;
+    } else if (from instanceof ArrayTypeDescriptor fromArray) {
       TypeDescriptor toTarget = getAssignableTarget(to);
 
-      if (toTarget instanceof ArrayTypeDescriptor) {
-        ArrayTypeDescriptor toArray = (ArrayTypeDescriptor) toTarget;
+      if (toTarget instanceof ArrayTypeDescriptor toArray) {
         return isNullableAssignableTo(from.isNullable(), toArray.isNullable())
             && isArgumentNullabilityAssignableTo(
                 fromArray.getComponentTypeDescriptor(),
@@ -137,11 +135,9 @@ public final class InsertCastsOnNullabilityMismatch extends AbstractJ2ktNormaliz
       } else {
         return false;
       }
-    } else if (from instanceof DeclaredTypeDescriptor) {
-      DeclaredTypeDescriptor fromDeclared = (DeclaredTypeDescriptor) from;
+    } else if (from instanceof DeclaredTypeDescriptor fromDeclared) {
       TypeDescriptor toTarget = getAssignableTarget(to);
-      if (toTarget instanceof DeclaredTypeDescriptor) {
-        DeclaredTypeDescriptor toDeclared = (DeclaredTypeDescriptor) toTarget;
+      if (toTarget instanceof DeclaredTypeDescriptor toDeclared) {
         TypeDeclaration toDeclaration = toDeclared.getTypeDeclaration();
         if (!isNullableAssignableTo(fromDeclared.isNullable(), toDeclared.isNullable())) {
           return false;
@@ -171,11 +167,9 @@ public final class InsertCastsOnNullabilityMismatch extends AbstractJ2ktNormaliz
       } else {
         return false;
       }
-    } else if (from instanceof TypeVariable) {
-      TypeVariable fromVariable = (TypeVariable) from;
-      if (to instanceof TypeVariable) {
+    } else if (from instanceof TypeVariable fromVariable) {
+      if (to instanceof TypeVariable toVariable) {
         // TypeVariable -> TypeVariable
-        TypeVariable toVariable = (TypeVariable) to;
         if (!toVariable.isWildcardOrCapture()) {
           // TypeVariable -> T
           if (!fromVariable.isWildcardOrCapture()
@@ -197,13 +191,11 @@ public final class InsertCastsOnNullabilityMismatch extends AbstractJ2ktNormaliz
         return isNullabilityAssignableTo(
             getNormalizedUpperBoundTypeDescriptor(fromVariable), to, seenTo);
       }
-    } else if (from instanceof IntersectionTypeDescriptor) {
-      IntersectionTypeDescriptor fromIntersection = (IntersectionTypeDescriptor) from;
+    } else if (from instanceof IntersectionTypeDescriptor fromIntersection) {
       TypeDescriptor toTarget = getAssignableTarget(to);
       return fromIntersection.getIntersectionTypeDescriptors().stream()
           .anyMatch(it -> isNullabilityAssignableTo(it, toTarget, seenTo));
-    } else if (from instanceof UnionTypeDescriptor) {
-      UnionTypeDescriptor fromUnion = (UnionTypeDescriptor) from;
+    } else if (from instanceof UnionTypeDescriptor fromUnion) {
       TypeDescriptor toTarget = getAssignableTarget(to);
       return fromUnion.getUnionTypeDescriptors().stream()
           .allMatch(it -> isNullabilityAssignableTo(it, toTarget, seenTo));
@@ -280,19 +272,15 @@ public final class InsertCastsOnNullabilityMismatch extends AbstractJ2ktNormaliz
       return typeDescriptor;
     } else if (typeDescriptor instanceof DeclaredTypeDescriptor) {
       return typeDescriptor;
-    } else if (typeDescriptor instanceof TypeVariable) {
-      TypeVariable typeVariable = (TypeVariable) typeDescriptor;
+    } else if (typeDescriptor instanceof TypeVariable typeVariable) {
       if (typeVariable.isWildcardOrCapture()) {
         return getAssignableTarget(getNormalizedUpperBoundTypeDescriptor(typeVariable));
       } else {
         return typeVariable;
       }
-    } else if (typeDescriptor instanceof IntersectionTypeDescriptor) {
-      IntersectionTypeDescriptor intersectionTypeDescriptor =
-          (IntersectionTypeDescriptor) typeDescriptor;
+    } else if (typeDescriptor instanceof IntersectionTypeDescriptor intersectionTypeDescriptor) {
       return getAssignableTarget(intersectionTypeDescriptor.getFirstType());
-    } else if (typeDescriptor instanceof UnionTypeDescriptor) {
-      UnionTypeDescriptor unionTypeDescriptor = (UnionTypeDescriptor) typeDescriptor;
+    } else if (typeDescriptor instanceof UnionTypeDescriptor unionTypeDescriptor) {
       return getAssignableTarget(unionTypeDescriptor.getClosestCommonSuperClass());
     } else {
       throw new AssertionError();

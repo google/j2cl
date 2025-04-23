@@ -98,16 +98,9 @@ public final class AstUtils {
 
   /** Returns true if {@code statement} is a constructor invocation statement. */
   public static boolean isConstructorInvocationStatement(Statement statement) {
-    if (!(statement instanceof ExpressionStatement)) {
-      return false;
-    }
-    ExpressionStatement expressionStatement = (ExpressionStatement) statement;
-    Expression expression = expressionStatement.getExpression();
-    if (!(expression instanceof MethodCall)) {
-      return false;
-    }
-    MethodCall methodCall = (MethodCall) expression;
-    return methodCall.getTarget().isConstructor();
+    return statement instanceof ExpressionStatement expressionStatement
+        && expressionStatement.getExpression() instanceof MethodCall methodCall
+        && methodCall.getTarget().isConstructor();
   }
 
   /**
@@ -255,15 +248,14 @@ public final class AstUtils {
       return false;
     } else if (parent instanceof TryStatement) {
       return false;
-    } else if (parent instanceof MultiExpression) {
-      return expression == Iterables.getLast(((MultiExpression) parent).getExpressions());
-    } else if (parent instanceof ForStatement) {
-      return expression == ((ForStatement) parent).getConditionExpression();
-    } else if (parent instanceof BinaryExpression) {
+    } else if (parent instanceof MultiExpression multiExpression) {
+      return expression == Iterables.getLast(multiExpression.getExpressions());
+    } else if (parent instanceof ForStatement forStatement) {
+      return expression == forStatement.getConditionExpression();
+    } else if (parent instanceof BinaryExpression binaryExpression) {
       // The value of the lhs of an assignment is overwritten and not used.
-      BinaryExpression parentBinaryExpression = (BinaryExpression) parent;
-      return !parentBinaryExpression.isSimpleAssignment()
-          || expression == parentBinaryExpression.getRightOperand();
+      return !binaryExpression.isSimpleAssignment()
+          || expression == binaryExpression.getRightOperand();
     } else {
       return true;
     }
@@ -640,8 +632,8 @@ public final class AstUtils {
   }
 
   public static Expression removeJsDocCastIfPresent(Expression expression) {
-    if (expression instanceof JsDocCastExpression) {
-      return ((JsDocCastExpression) expression).getExpression();
+    if (expression instanceof JsDocCastExpression jsDocCastExpression) {
+      return jsDocCastExpression.getExpression();
     }
     return expression;
   }
@@ -814,12 +806,11 @@ public final class AstUtils {
             methodCall.getTarget(), targetTypeDescriptor, Optional.ofNullable(postfix));
 
     Expression qualifier = checkNotNull(methodCall.getQualifier());
-    if (qualifier instanceof SuperReference) {
+    if (qualifier instanceof SuperReference superReference) {
       // A 'super' qualifier is used to resolve to the correct method to dispatch, once the method
       // is devirutalized and receives the qualifier as its first parameter, 'super' must be turned
-      // into 'this' since both evaluate to the implicit instance parameter but 'super'is not
+      // into 'this' since both evaluate to the implicit instance parameter but 'super' is not
       // valid as a general expression.
-      SuperReference superReference = (SuperReference) qualifier;
       qualifier = new ThisReference(superReference.getTypeDescriptor());
     }
     // Call the method like Objects.foo(instance, ...)
@@ -1302,7 +1293,7 @@ public final class AstUtils {
 
   /** Returns a list of statements in {@code body} which may be a block or a single statement. */
   public static List<Statement> getBodyStatements(Statement body) {
-    return body instanceof Block ? ((Block) body).getStatements() : ImmutableList.of(body);
+    return body instanceof Block block ? block.getStatements() : ImmutableList.of(body);
   }
 
   public static boolean needsVisibilityBridge(MethodDescriptor methodDescriptor) {

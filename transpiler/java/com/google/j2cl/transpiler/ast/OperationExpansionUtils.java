@@ -69,8 +69,8 @@ public class OperationExpansionUtils {
       return lhs;
     }
 
-    if (lhs instanceof ArrayAccess) {
-      return decomposeArrayAccess((ArrayAccess) lhs, temporaryVariableDeclarations);
+    if (lhs instanceof ArrayAccess arrayAccess) {
+      return decomposeArrayAccess(arrayAccess, temporaryVariableDeclarations);
     }
     checkState(lhs instanceof FieldAccess);
     return decomposeFieldAccess((FieldAccess) lhs, temporaryVariableDeclarations);
@@ -207,10 +207,10 @@ public class OperationExpansionUtils {
 
     Variable returnedVariable;
     Expression newRhs = binaryExpression.getRightOperand();
-    if (newLhs instanceof VariableReference) {
+    if (newLhs instanceof VariableReference variableReference) {
       // No need to introduce a temporary variable for the result since even if the rhs modifies it,
       // it will be overwritten by the assignment operation itself.
-      returnedVariable = ((VariableReference) newLhs).getTarget();
+      returnedVariable = variableReference.getTarget();
     } else {
       returnedVariable =
           createTemporaryVariableDeclaration(

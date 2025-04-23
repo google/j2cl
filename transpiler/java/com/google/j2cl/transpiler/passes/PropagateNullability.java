@@ -287,11 +287,9 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
     if (declarationTypeDescriptor instanceof PrimitiveTypeDescriptor) {
       // Primitive type descriptors are never parameterized.
       return Stream.of();
-    } else if (declarationTypeDescriptor instanceof ArrayTypeDescriptor) {
-      ArrayTypeDescriptor declarationArrayTypeDescriptor =
-          (ArrayTypeDescriptor) declarationTypeDescriptor;
-      if (typeDescriptor instanceof ArrayTypeDescriptor) {
-        ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
+    } else if (declarationTypeDescriptor
+        instanceof ArrayTypeDescriptor declarationArrayTypeDescriptor) {
+      if (typeDescriptor instanceof ArrayTypeDescriptor arrayTypeDescriptor) {
         return getParameterizationsIn(
             declarationArrayTypeDescriptor.getComponentTypeDescriptor(),
             typeParameter,
@@ -300,9 +298,8 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
       // TODO(b/406815802): parameter and arguments are not structurally similar, see
       // if there are cases that have to be handled.
       return Stream.of();
-    } else if (declarationTypeDescriptor instanceof DeclaredTypeDescriptor) {
-      DeclaredTypeDescriptor declarationDeclaredTypeDescriptor =
-          (DeclaredTypeDescriptor) declarationTypeDescriptor;
+    } else if (declarationTypeDescriptor
+        instanceof DeclaredTypeDescriptor declarationDeclaredTypeDescriptor) {
       if (!(typeDescriptor instanceof DeclaredTypeDescriptor)) {
         // TODO(b/406815802): parameter and arguments are not structurally similar, see
         // if there are cases that have to be handled.
@@ -326,8 +323,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
               (typeArgument, targetTypeArgument) ->
                   getParameterizationsIn(typeArgument, typeParameter, targetTypeArgument))
           .flatMap(it -> it);
-    } else if (declarationTypeDescriptor instanceof TypeVariable) {
-      TypeVariable declarationTypeVariable = (TypeVariable) declarationTypeDescriptor;
+    } else if (declarationTypeDescriptor instanceof TypeVariable declarationTypeVariable) {
       if (!declarationTypeVariable.isWildcardOrCapture()) {
         if (declarationTypeVariable.toDeclaration().equals(typeParameter)) {
           return Stream.of(
@@ -339,8 +335,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
           return Stream.of();
         }
       } else {
-        if (typeDescriptor instanceof TypeVariable) {
-          TypeVariable typeVariable = (TypeVariable) typeDescriptor;
+        if (typeDescriptor instanceof TypeVariable typeVariable) {
           if (typeVariable.isWildcardOrCapture()) {
             return getParameterizationsIn(
                 getNormalizedUpperBoundTypeDescriptor(declarationTypeVariable),
@@ -353,14 +348,12 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
             typeParameter,
             typeDescriptor);
       }
-    } else if (declarationTypeDescriptor instanceof IntersectionTypeDescriptor) {
-      IntersectionTypeDescriptor declarationIntersectionTypeDescriptor =
-          (IntersectionTypeDescriptor) declarationTypeDescriptor;
+    } else if (declarationTypeDescriptor
+        instanceof IntersectionTypeDescriptor declarationIntersectionTypeDescriptor) {
       return declarationIntersectionTypeDescriptor.getIntersectionTypeDescriptors().stream()
           .flatMap(it -> getParameterizationsIn(it, typeParameter, typeDescriptor));
-    } else if (declarationTypeDescriptor instanceof UnionTypeDescriptor) {
-      UnionTypeDescriptor declarationUnionTypeDescriptor =
-          (UnionTypeDescriptor) declarationTypeDescriptor;
+    } else if (declarationTypeDescriptor
+        instanceof UnionTypeDescriptor declarationUnionTypeDescriptor) {
       return declarationUnionTypeDescriptor.getUnionTypeDescriptors().stream()
           .flatMap(it -> getParameterizationsIn(it, typeParameter, typeDescriptor));
     } else {
@@ -523,12 +516,12 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
       return to;
     }
 
-    if (to instanceof DeclaredTypeDescriptor) {
-      return propagateNullabilityToDeclared((DeclaredTypeDescriptor) to, from, seen);
-    } else if (to instanceof ArrayTypeDescriptor) {
-      return propagateNullabilityToArray((ArrayTypeDescriptor) to, from, seen);
-    } else if (to instanceof TypeVariable) {
-      return propagateNullabilityToVariable((TypeVariable) to, from, seen);
+    if (to instanceof DeclaredTypeDescriptor descriptor) {
+      return propagateNullabilityToDeclared(descriptor, from, seen);
+    } else if (to instanceof ArrayTypeDescriptor descriptor) {
+      return propagateNullabilityToArray(descriptor, from, seen);
+    } else if (to instanceof TypeVariable typeVariable) {
+      return propagateNullabilityToVariable(typeVariable, from, seen);
     } else {
       // TODO(b/407688032): Handle intersection and union type descriptors, if necessary.
       return to;

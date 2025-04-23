@@ -50,8 +50,8 @@ public abstract class UnaryExpression extends Expression {
     if (getOperator() == PrefixOperator.SPREAD) {
       // Not a Java operation on primitives.
       var operandTypeDescriptor = operand.getTypeDescriptor();
-      if (operandTypeDescriptor instanceof ArrayTypeDescriptor) {
-        return ((ArrayTypeDescriptor) operandTypeDescriptor).getComponentTypeDescriptor();
+      if (operandTypeDescriptor instanceof ArrayTypeDescriptor descriptor) {
+        return descriptor.getComponentTypeDescriptor();
       }
       // There's some edge cases where a spread can be applied to a non-array type. For example,
       // Kotlin allows `*null!!` which will always fail, but does compile. In this case the only

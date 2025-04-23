@@ -57,14 +57,7 @@ public class StringLiteral extends Literal {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (!(o instanceof StringLiteral)) {
-      return false;
-    }
-    StringLiteral that = (StringLiteral) o;
-    return value.equals(that.value);
+    return this == o || (o instanceof StringLiteral other && value.equals(other.value));
   }
 
   @Override

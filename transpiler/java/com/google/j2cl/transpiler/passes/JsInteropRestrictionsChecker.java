@@ -496,8 +496,8 @@ public class JsInteropRestrictionsChecker {
       // Integer.MIN_VALUE is considered null in Wasm for int-valued JsEnums.
       // We can check for NumberLiteral here because constant expressions are folded in the
       // frontend.
-      if (enumFieldValue instanceof NumberLiteral
-          && ((NumberLiteral) enumFieldValue).getValue().intValue() == Integer.MIN_VALUE) {
+      if (enumFieldValue instanceof NumberLiteral literal
+          && literal.getValue().intValue() == Integer.MIN_VALUE) {
         problems.error(
             field.getSourcePosition(),
             "Custom-valued JsEnum constant '%s' cannot be equal to Integer.MIN_VALUE.",
@@ -632,23 +632,21 @@ public class JsInteropRestrictionsChecker {
    */
   private static boolean checkJsEnumConstructorStatement(
       DeclaredTypeDescriptor typeDescriptor, Statement statement, Variable valueParameter) {
-    if (!(statement instanceof ExpressionStatement)) {
+    if (!(statement instanceof ExpressionStatement expressionStatement)) {
       return false;
     }
-    Expression expression = ((ExpressionStatement) statement).getExpression();
-    if (!(expression instanceof BinaryExpression)) {
+    Expression expression = expressionStatement.getExpression();
+    if (!(expression instanceof BinaryExpression binaryExpression)) {
       return false;
     }
 
-    BinaryExpression binaryExpression = (BinaryExpression) expression;
     if (!binaryExpression.isSimpleAssignment()
-        || !(binaryExpression.getRightOperand() instanceof VariableReference)
-        || !(binaryExpression.getLeftOperand() instanceof FieldAccess)) {
+        || !(binaryExpression.getRightOperand() instanceof VariableReference variableReference)
+        || !(binaryExpression.getLeftOperand() instanceof FieldAccess lhs)) {
       return false;
     }
-    FieldAccess lhs = (FieldAccess) binaryExpression.getLeftOperand();
-    Variable variable = ((VariableReference) binaryExpression.getRightOperand()).getTarget();
 
+    Variable variable = variableReference.getTarget();
     return (lhs.getQualifier() == null || lhs.getQualifier() instanceof ThisReference)
         && lhs.getTarget().isMemberOf(typeDescriptor)
         && AstUtils.isJsEnumCustomValueField(lhs.getTarget())
@@ -960,11 +958,10 @@ public class JsInteropRestrictionsChecker {
               return;
             }
             Expression lhs = binaryExpression.getLeftOperand();
-            if (!(lhs instanceof FieldAccess)) {
+            if (!(lhs instanceof FieldAccess fieldAccess)) {
               return;
             }
 
-            FieldAccess fieldAccess = (FieldAccess) lhs;
             FieldDescriptor fieldDescriptor = fieldAccess.getTarget();
             if (!AstUtils.isJsEnumCustomValueField(fieldDescriptor)) {
               return;
@@ -2851,9 +2848,8 @@ public class JsInteropRestrictionsChecker {
               : inferredArrayTypeDescriptor.getLeafTypeDescriptor();
     }
 
-    if (inferredTypeDescriptor instanceof DeclaredTypeDescriptor) {
-      List<TypeDescriptor> inferredTypeArguments =
-          ((DeclaredTypeDescriptor) inferredTypeDescriptor).getTypeArgumentDescriptors();
+    if (inferredTypeDescriptor instanceof DeclaredTypeDescriptor descriptor) {
+      List<TypeDescriptor> inferredTypeArguments = descriptor.getTypeArgumentDescriptors();
       List<TypeDescriptor> declaredTypeArguments =
           declaredTypeDescriptor instanceof DeclaredTypeDescriptor
               ? ((DeclaredTypeDescriptor) declaredTypeDescriptor).getTypeArgumentDescriptors()

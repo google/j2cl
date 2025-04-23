@@ -89,10 +89,7 @@ public abstract class TypeDeclaration
 
   @Override
   public final boolean equals(Object o) {
-    if (o instanceof TypeDeclaration) {
-      return getUniqueId().equals(((TypeDeclaration) o).getUniqueId());
-    }
-    return false;
+    return o instanceof TypeDeclaration other && getUniqueId().equals(other.getUniqueId());
   }
 
   @Memoized
