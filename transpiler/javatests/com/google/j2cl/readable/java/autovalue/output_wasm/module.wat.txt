@@ -4,6 +4,12 @@
  ))
 )
 
+;;; Code for autovalue.SomeInterface [type definition]
+(type $autovalue.SomeInterface.vtable (sub (struct
+ (field $m_getFoo__java_lang_String (ref $function.m_getFoo__java_lang_String))
+ ))
+)
+
 ;;; Code for autovalue.AutoValueJsType [type definition]
 (type $autovalue.AutoValueJsType.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
@@ -219,6 +225,38 @@
 (type $autovalue.EmptyAutoValue.Builder (sub $java.lang.Object (struct
  (field $vtable (ref $autovalue.EmptyAutoValue.Builder.vtable))
  (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
+;;; Code for autovalue.ImplementingAutoValue [type definition]
+(type $autovalue.ImplementingAutoValue.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getFoo__java_lang_String (ref $function.m_getFoo__java_lang_String))
+ ))
+)
+(type $autovalue.ImplementingAutoValue (sub $java.lang.Object (struct
+ (field $vtable (ref $autovalue.ImplementingAutoValue.vtable))
+ (field $itable (ref $autovalue.ImplementingAutoValue.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
+;;; Code for autovalue.SomeInterface.$LambdaAdaptor [type definition]
+(type $autovalue.SomeInterface.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getFoo__java_lang_String (ref $function.m_getFoo__java_lang_String))
+ ))
+)
+(type $autovalue.SomeInterface.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $autovalue.SomeInterface.$LambdaAdaptor.vtable))
+ (field $itable (ref $autovalue.SomeInterface.$LambdaAdaptor.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
@@ -447,6 +485,23 @@
  (field $vtable (ref $autovalue.AutoValue_EmptyAutoValue.Builder.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
+;;; Code for autovalue.AutoValue_ImplementingAutoValue [type definition]
+(type $autovalue.AutoValue_ImplementingAutoValue.vtable (sub $autovalue.ImplementingAutoValue.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getFoo__java_lang_String (ref $function.m_getFoo__java_lang_String))
+ ))
+)
+(type $autovalue.AutoValue_ImplementingAutoValue (sub $autovalue.ImplementingAutoValue (struct
+ (field $vtable (ref $autovalue.AutoValue_ImplementingAutoValue.vtable))
+ (field $itable (ref $autovalue.AutoValue_ImplementingAutoValue.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $foo@autovalue.AutoValue_ImplementingAutoValue (mut (ref null $java.lang.String)))
  ))
 )
 
@@ -697,6 +752,8 @@
 
 ;;; Code for autovalue.J2ktIncompatible [imports]
 
+;;; Code for autovalue.SomeInterface [imports]
+
 ;;; Code for autovalue.AutoValueJsType [imports]
 
 ;;; Code for autovalue.AutoValueWithBuilder [imports]
@@ -723,6 +780,10 @@
 
 ;;; Code for autovalue.EmptyAutoValue.Builder [imports]
 
+;;; Code for autovalue.ImplementingAutoValue [imports]
+
+;;; Code for autovalue.SomeInterface.$LambdaAdaptor [imports]
+
 ;;; Code for autovalue.SimpleAutoValue [imports]
 
 ;;; Code for autovalue.$$AutoValue_AutoValueWithExtensions [imports]
@@ -746,6 +807,8 @@
 ;;; Code for autovalue.AutoValue_EmptyAutoValue [imports]
 
 ;;; Code for autovalue.AutoValue_EmptyAutoValue.Builder [imports]
+
+;;; Code for autovalue.AutoValue_ImplementingAutoValue [imports]
 
 ;;; Code for autovalue.AutoValue_SimpleAutoValue [imports]
 
@@ -945,6 +1008,14 @@
  (ref.null $java.lang.Class)
 )
 
+;;; Code for autovalue.AutoValue_ImplementingAutoValue [static fields]
+(global $$class-initialized@autovalue.AutoValue_ImplementingAutoValue (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.AutoValue_ImplementingAutoValue (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
 ;;; Code for autovalue.AutoValue_SimpleAutoValue [static fields]
 (global $$class-initialized@autovalue.AutoValue_SimpleAutoValue (mut i32)
  (i32.const 0)
@@ -1078,6 +1149,30 @@
  (i32.const 0)
 )
 (global $$class@autovalue.ExtendingAutoValue (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.ImplementingAutoValue [static fields]
+(global $$class-initialized@autovalue.ImplementingAutoValue (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.ImplementingAutoValue (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.SomeInterface [static fields]
+(global $$class-initialized@autovalue.SomeInterface (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.SomeInterface (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for autovalue.SomeInterface.$LambdaAdaptor [static fields]
+(global $$class-initialized@autovalue.SomeInterface.$LambdaAdaptor (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.SomeInterface.$LambdaAdaptor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -1268,6 +1363,22 @@
  )
 )
 
+;;; Code for autovalue.AutoValue_ImplementingAutoValue [vtable.init]
+(global $autovalue.AutoValue_ImplementingAutoValue.vtable (ref $autovalue.AutoValue_ImplementingAutoValue.vtable)
+ (struct.new $autovalue.AutoValue_ImplementingAutoValue.vtable
+  (ref.func $$getClassImpl__java_lang_Class@autovalue.AutoValue_ImplementingAutoValue)
+  (ref.func $m_equals__java_lang_Object__boolean@autovalue.AutoValue_ImplementingAutoValue)
+  (ref.func $m_hashCode__int@autovalue.AutoValue_ImplementingAutoValue)
+  (ref.func $m_toString__java_lang_String@autovalue.AutoValue_ImplementingAutoValue)
+  (ref.func $m_getFoo__java_lang_String@autovalue.AutoValue_ImplementingAutoValue)
+ )
+)
+(global $autovalue.SomeInterface.vtable@$autovalue.AutoValue_ImplementingAutoValue (ref $autovalue.SomeInterface.vtable)
+ (struct.new $autovalue.SomeInterface.vtable
+  (ref.func $m_getFoo__java_lang_String@autovalue.AutoValue_ImplementingAutoValue)
+ )
+)
+
 ;;; Code for autovalue.AutoValue_SimpleAutoValue [vtable.init]
 (global $autovalue.AutoValue_SimpleAutoValue.vtable (ref $autovalue.AutoValue_SimpleAutoValue.vtable)
  (struct.new $autovalue.AutoValue_SimpleAutoValue.vtable
@@ -1291,6 +1402,38 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+
+;;; Code for autovalue.SomeInterface [methods]
+
+;;; void SomeInterface.$clinit()
+(func $$clinit__void_<once>_@autovalue.SomeInterface
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/ImplementingAutoValue.java:25:10
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/ImplementingAutoValue.java:25:10
+  (if (global.get $$class-initialized@autovalue.SomeInterface)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/ImplementingAutoValue.java:25:10
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/ImplementingAutoValue.java:25:10
+  (global.set $$class-initialized@autovalue.SomeInterface (i32.const 1))
+ )
+)
+
+;;; Class<T> SomeInterface.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.SomeInterface
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.SomeInterface)))
+   (then
+    (return (global.get $$class@autovalue.SomeInterface))
+   )
+  )
+  (global.set $$class@autovalue.SomeInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|autovalue.So...|__java_lang_String_<once>_@autovalue.SomeInterface )))
+  (return (global.get $$class@autovalue.SomeInterface))
  )
 )
 
@@ -2142,6 +2285,120 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.EmptyAutoValue.Builder)
+
+;;; Code for autovalue.ImplementingAutoValue [methods]
+
+;;; void ImplementingAutoValue.$ctor()
+(func $$ctor__void_$p_autovalue_ImplementingAutoValue@autovalue.ImplementingAutoValue
+ (param $this (ref null $autovalue.ImplementingAutoValue))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/ImplementingAutoValue.java:22:15
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/ImplementingAutoValue.java:22:15
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void ImplementingAutoValue.$clinit()
+(func $$clinit__void_<once>_@autovalue.ImplementingAutoValue
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/ImplementingAutoValue.java:22:15
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/ImplementingAutoValue.java:22:15
+  (if (global.get $$class-initialized@autovalue.ImplementingAutoValue)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/ImplementingAutoValue.java:22:15
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/ImplementingAutoValue.java:22:15
+  (global.set $$class-initialized@autovalue.ImplementingAutoValue (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/ImplementingAutoValue.java:22:15
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> ImplementingAutoValue.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.ImplementingAutoValue
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.ImplementingAutoValue)))
+   (then
+    (return (global.get $$class@autovalue.ImplementingAutoValue))
+   )
+  )
+  (global.set $$class@autovalue.ImplementingAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Im...|__java_lang_String_<once>_@autovalue.ImplementingAutoValue )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@autovalue.ImplementingAutoValue))
+ )
+)
+
+;;; Class<?> ImplementingAutoValue.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@autovalue.ImplementingAutoValue
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $autovalue.ImplementingAutoValue))
+ (local.set $this (ref.cast (ref $autovalue.ImplementingAutoValue) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@autovalue.ImplementingAutoValue ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@autovalue.ImplementingAutoValue)
+
+;;; Code for autovalue.SomeInterface.$LambdaAdaptor [methods]
+
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_autovalue_SomeInterface_$LambdaAdaptor@autovalue.SomeInterface.$LambdaAdaptor
+ (param $this (ref null $autovalue.SomeInterface.$LambdaAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/ImplementingAutoValue.java:25:10
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/ImplementingAutoValue.java:25:10
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@autovalue.SomeInterface.$LambdaAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/ImplementingAutoValue.java:25:10
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/ImplementingAutoValue.java:25:10
+  (if (global.get $$class-initialized@autovalue.SomeInterface.$LambdaAdaptor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/ImplementingAutoValue.java:25:10
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/ImplementingAutoValue.java:25:10
+  (global.set $$class-initialized@autovalue.SomeInterface.$LambdaAdaptor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/ImplementingAutoValue.java:25:10
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.SomeInterface.$LambdaAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.SomeInterface.$LambdaAdaptor)))
+   (then
+    (return (global.get $$class@autovalue.SomeInterface.$LambdaAdaptor))
+   )
+  )
+  (global.set $$class@autovalue.SomeInterface.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.So...|__java_lang_String_<once>_@autovalue.SomeInterface.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@autovalue.SomeInterface.$LambdaAdaptor))
+ )
+)
+
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@autovalue.SomeInterface.$LambdaAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $autovalue.SomeInterface.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $autovalue.SomeInterface.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@autovalue.SomeInterface.$LambdaAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@autovalue.SomeInterface.$LambdaAdaptor)
 
 ;;; Code for autovalue.SimpleAutoValue [methods]
 
@@ -3942,6 +4199,175 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_EmptyAutoValue.Builder)
+
+;;; Code for autovalue.AutoValue_ImplementingAutoValue [methods]
+
+;;; AutoValue_ImplementingAutoValue AutoValue_ImplementingAutoValue.$create(String foo)
+(func $$create__java_lang_String@autovalue.AutoValue_ImplementingAutoValue
+ (param $foo (ref null $java.lang.String))
+ (result (ref null $autovalue.AutoValue_ImplementingAutoValue))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:12:2
+ (local $$instance (ref null $autovalue.AutoValue_ImplementingAutoValue))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:12:2
+  (call $$clinit__void_<once>_@autovalue.AutoValue_ImplementingAutoValue )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:12:2
+  (local.set $$instance (struct.new $autovalue.AutoValue_ImplementingAutoValue (ref.as_non_null (global.get $autovalue.AutoValue_ImplementingAutoValue.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_ImplementingAutoValue.itable)) (i32.const 0) (ref.null $java.lang.String)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:12:2
+  (call $$ctor__java_lang_String__void_$p_autovalue_AutoValue_ImplementingAutoValue@autovalue.AutoValue_ImplementingAutoValue (ref.as_non_null (local.get $$instance))(local.get $foo))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:12:2
+  (return (local.get $$instance))
+ )
+)
+
+;;; void AutoValue_ImplementingAutoValue.$ctor(String foo)
+(func $$ctor__java_lang_String__void_$p_autovalue_AutoValue_ImplementingAutoValue@autovalue.AutoValue_ImplementingAutoValue
+ (param $this (ref null $autovalue.AutoValue_ImplementingAutoValue))
+ (param $foo (ref null $java.lang.String))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:12:2
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:13:18
+  (call $$ctor__void_$p_autovalue_ImplementingAutoValue@autovalue.ImplementingAutoValue (ref.as_non_null (local.get $this)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:14:4
+  (drop (call $m_requireNonNull__java_lang_Object__java_lang_Object@java.util.Objects (local.get $foo)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:15:4
+  (struct.set $autovalue.AutoValue_ImplementingAutoValue $foo@autovalue.AutoValue_ImplementingAutoValue (local.get $this) (local.get $foo))
+ )
+)
+
+;;; String AutoValue_ImplementingAutoValue.getFoo()
+(func $m_getFoo__java_lang_String@autovalue.AutoValue_ImplementingAutoValue
+ (type $function.m_getFoo__java_lang_String)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.String))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:19:16
+ (local $this (ref null $autovalue.AutoValue_ImplementingAutoValue))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_ImplementingAutoValue) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:20:4
+  (return (struct.get $autovalue.AutoValue_ImplementingAutoValue $foo@autovalue.AutoValue_ImplementingAutoValue (local.get $this)))
+ )
+)
+(elem declare func $m_getFoo__java_lang_String@autovalue.AutoValue_ImplementingAutoValue)
+
+;;; String AutoValue_ImplementingAutoValue.toString()
+(func $m_toString__java_lang_String@autovalue.AutoValue_ImplementingAutoValue
+ (type $function.m_toString__java_lang_String)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.String))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:24:16
+ (local $this (ref null $autovalue.AutoValue_ImplementingAutoValue))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_ImplementingAutoValue) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:25:4
+  (return (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $$getString_|_|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (struct.get $autovalue.AutoValue_ImplementingAutoValue $foo@autovalue.AutoValue_ImplementingAutoValue (local.get $this))))(call $$getString_|_|_1__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )))
+ )
+)
+(elem declare func $m_toString__java_lang_String@autovalue.AutoValue_ImplementingAutoValue)
+
+;;; boolean AutoValue_ImplementingAutoValue.equals(Object o)
+(func $m_equals__java_lang_Object__boolean@autovalue.AutoValue_ImplementingAutoValue
+ (type $function.m_equals__java_lang_Object__boolean)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $o (ref null $java.lang.Object))
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:31:17
+ (local $that (ref null $autovalue.ImplementingAutoValue))
+ (local $this (ref null $autovalue.AutoValue_ImplementingAutoValue))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_ImplementingAutoValue) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:32:4
+  (if (ref.eq (local.get $o) (local.get $this))
+   (then
+    (block
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:33:6
+     (return (i32.const 1))
+    )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:35:4
+  (if (ref.test (ref $autovalue.ImplementingAutoValue) (local.get $o))
+   (then
+    (block
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:36:6
+     (local.set $that (ref.cast (ref null $autovalue.ImplementingAutoValue) (local.get $o)))
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:37:6
+     (return (call $m_equals__java_lang_Object__boolean@java.lang.String (ref.as_non_null (struct.get $autovalue.AutoValue_ImplementingAutoValue $foo@autovalue.AutoValue_ImplementingAutoValue (local.get $this)))(call_ref $function.m_getFoo__java_lang_String (ref.as_non_null (local.get $that))(struct.get $autovalue.ImplementingAutoValue.vtable $m_getFoo__java_lang_String (struct.get $autovalue.ImplementingAutoValue $vtable(local.get $that))))))
+    )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:39:4
+  (return (i32.const 0))
+ )
+)
+(elem declare func $m_equals__java_lang_Object__boolean@autovalue.AutoValue_ImplementingAutoValue)
+
+;;; int AutoValue_ImplementingAutoValue.hashCode()
+(func $m_hashCode__int@autovalue.AutoValue_ImplementingAutoValue
+ (type $function.m_hashCode__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:43:13
+ (local $h$ i32)
+ (local $this (ref null $autovalue.AutoValue_ImplementingAutoValue))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_ImplementingAutoValue) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:44:4
+  (local.set $h$ (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:45:4
+  (local.set $h$ (i32.mul (local.get $h$) (i32.const 1000003)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:46:4
+  (local.set $h$ (i32.xor (local.get $h$) (call $m_hashCode__int@java.lang.String (ref.as_non_null (struct.get $autovalue.AutoValue_ImplementingAutoValue $foo@autovalue.AutoValue_ImplementingAutoValue (local.get $this))))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:47:4
+  (return (local.get $h$))
+ )
+)
+(elem declare func $m_hashCode__int@autovalue.AutoValue_ImplementingAutoValue)
+
+;;; void AutoValue_ImplementingAutoValue.$clinit()
+(func $$clinit__void_<once>_@autovalue.AutoValue_ImplementingAutoValue
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:8:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:8:12
+  (if (global.get $$class-initialized@autovalue.AutoValue_ImplementingAutoValue)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:8:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:8:12
+  (global.set $$class-initialized@autovalue.AutoValue_ImplementingAutoValue (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:8:12
+  (call $$clinit__void_<once>_@autovalue.ImplementingAutoValue )
+ )
+)
+
+;;; Class<T> AutoValue_ImplementingAutoValue.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_ImplementingAutoValue
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.AutoValue_ImplementingAutoValue)))
+   (then
+    (return (global.get $$class@autovalue.AutoValue_ImplementingAutoValue))
+   )
+  )
+  (global.set $$class@autovalue.AutoValue_ImplementingAutoValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_ImplementingAutoValue )(call $$getClassMetadata__java_lang_Class_<once>_@autovalue.ImplementingAutoValue )))
+  (return (global.get $$class@autovalue.AutoValue_ImplementingAutoValue))
+ )
+)
+
+;;; Class<?> AutoValue_ImplementingAutoValue.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@autovalue.AutoValue_ImplementingAutoValue
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $autovalue.AutoValue_ImplementingAutoValue))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_ImplementingAutoValue) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_ImplementingAutoValue ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_ImplementingAutoValue)
 
 ;;; Code for autovalue.AutoValue_SimpleAutoValue [methods]
 
