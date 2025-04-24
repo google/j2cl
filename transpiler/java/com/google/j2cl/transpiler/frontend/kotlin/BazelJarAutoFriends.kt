@@ -21,17 +21,17 @@ import com.google.devtools.kotlin.common.KtManifest
 import com.intellij.openapi.vfs.VirtualFile
 import java.util.jar.JarFile
 import java.util.jar.Manifest
-import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
+import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.config.JVMConfigurationKeys
 
-internal fun KotlinCoreEnvironment.setEligibleFriends(
+internal fun CompilerConfiguration.setEligibleFriends(
   classpath: List<VirtualFile>,
   currentTarget: String?,
 ) {
   if (currentTarget == null) return
 
   val currentLabel = BzlLabel.parseOrThrow(currentTarget)
-  this.configuration.put(
+  this.put(
     JVMConfigurationKeys.FRIEND_PATHS,
     classpath
       .filter {

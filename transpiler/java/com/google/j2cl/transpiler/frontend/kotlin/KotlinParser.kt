@@ -32,7 +32,6 @@ import java.io.File
 import org.jetbrains.kotlin.backend.common.extensions.IrGenerationExtension
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.builtins.DefaultBuiltIns
-import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys.CONTENT_ROOTS
 import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys.ORIGINAL_MESSAGE_COLLECTOR_KEY
 import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys.RENDER_DIAGNOSTIC_INTERNAL_NAME
 import org.jetbrains.kotlin.cli.common.LegacyK2CliPipeline
@@ -53,8 +52,8 @@ import org.jetbrains.kotlin.cli.jvm.compiler.legacy.pipeline.ModuleCompilerInput
 import org.jetbrains.kotlin.cli.jvm.compiler.legacy.pipeline.compileModuleToAnalyzedFirViaLightTreeIncrementally
 import org.jetbrains.kotlin.cli.jvm.compiler.legacy.pipeline.convertToIrAndActualizeForJvm
 import org.jetbrains.kotlin.cli.jvm.compiler.toVfsBasedProjectEnvironment
-import org.jetbrains.kotlin.cli.jvm.config.JvmClasspathRoot
 import org.jetbrains.kotlin.cli.jvm.config.configureJdkClasspathRoots
+import org.jetbrains.kotlin.cli.jvm.config.jvmClasspathRoots
 import org.jetbrains.kotlin.cli.jvm.configureAdvancedJvmOptions
 import org.jetbrains.kotlin.cli.jvm.configureJavaModulesContentRoots
 import org.jetbrains.kotlin.cli.jvm.configureJdkHome
@@ -142,14 +141,14 @@ class KotlinParser(private val problems: Problems) {
 
     // Create VirtualFile list of classpaths backed by Kotlin's fast jar file system.
     val classpath =
-      compilerConfiguration.getList(CONTENT_ROOTS).filterIsInstance<JvmClasspathRoot>().map {
-        environment.projectEnvironment.jarFileSystem.findFileByPath("${it.file}!/")!!
+      compilerConfiguration.jvmClasspathRoots.map {
+        environment.projectEnvironment.jarFileSystem.findFileByPath("$it!/")!!
       }
 
     val packageInfoCache = PackageInfoCache(classpath)
     problems.abortIfCancelled()
 
-    environment.setEligibleFriends(classpath, currentTarget)
+    compilerConfiguration.setEligibleFriends(classpath, currentTarget)
     problems.abortIfCancelled()
 
     val module = compilerConfiguration.get(MODULES)!![0]
