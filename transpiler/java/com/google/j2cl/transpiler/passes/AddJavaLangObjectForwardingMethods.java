@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.common.base.Preconditions.checkState;
+
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
@@ -51,6 +53,13 @@ public class AddJavaLangObjectForwardingMethods extends NormalizationPass {
     // Note that we are also handling abstract classes. Even they do not require the redeclarations,
     // implementing such interface nullifies inherited methods from abstract class. So the class
     // that extend from them can no longer do super.equals etc. unless they are redeclared.
+
+    // In the case of AutoValue classes (which are abstract) there is no risk of super.equals etc.
+    // Skip them, otherwise it will break assumptions of J2CL's AutoValue optimization.
+    if (AstUtils.isAnnotatedWithAutoValue(type.getDeclaration())) {
+      checkState(type.isAbstract());
+      return;
+    }
 
     Map<String, MethodDescriptor> requiredJavaLangObjectMethods =
         type.getDeclaration().getInterfaceTypeDescriptors().stream()
