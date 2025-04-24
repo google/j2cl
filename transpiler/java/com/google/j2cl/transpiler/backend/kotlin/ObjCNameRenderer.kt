@@ -38,6 +38,16 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
   private val environment: Environment
     get() = nameRenderer.environment
 
+  private val hiddenFromObjCMapping: HiddenFromObjCMapping
+    get() = environment.hiddenFromObjCMapping
+
+  fun hiddenFromObjCAnnotationSource(): Source =
+    annotation(
+      nameRenderer.sourceWithOptInQualifiedName("kotlin.experimental.ExperimentalObjCRefinement") {
+        topLevelQualifiedNameSource("kotlin.native.HiddenFromObjC")
+      }
+    )
+
   fun objCNameAnnotationSource(
     name: String,
     swiftName: String? = null,
@@ -53,12 +63,15 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
     )
 
   fun objCAnnotationSource(typeDeclaration: TypeDeclaration): Source =
-    Source.emptyUnless(needsObjCNameAnnotation(typeDeclaration)) {
-      objCNameAnnotationSource(
-        typeDeclaration.objCName(nameRenderer.objCNamePrefix),
-        swiftName = typeDeclaration.objCNameWithoutPrefix,
-        exact = true,
-      )
+    when {
+      hiddenFromObjCMapping.contains(typeDeclaration) -> hiddenFromObjCAnnotationSource()
+      needsObjCNameAnnotation(typeDeclaration) ->
+        objCNameAnnotationSource(
+          typeDeclaration.objCName(nameRenderer.objCNamePrefix),
+          swiftName = typeDeclaration.objCNameWithoutPrefix,
+          exact = true,
+        )
+      else -> Source.EMPTY
     }
 
   fun objCAnnotationSource(companionObject: CompanionObject): Source =
@@ -74,16 +87,30 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
     methodDescriptor: MethodDescriptor,
     methodObjCNames: MethodObjCNames?,
   ): Source =
-    Source.emptyUnless(!methodDescriptor.isConstructor) {
-      methodObjCNames
-        ?.objCName
-        ?.let { objCNameAnnotationSource(it.string, swiftName = it.swiftString) }
-        .orEmpty()
+    Source.emptyIf(
+      methodDescriptor.isConstructor ||
+        hiddenFromObjCMapping.contains(methodDescriptor.enclosingTypeDescriptor)
+    ) {
+      when {
+        hiddenFromObjCMapping.contains(methodDescriptor) -> hiddenFromObjCAnnotationSource()
+        else -> objCNameAnnotationSource(methodObjCNames)
+      }
     }
 
+  fun objCNameAnnotationSource(methodObjCNames: MethodObjCNames?): Source =
+    methodObjCNames
+      ?.objCName
+      ?.let { objCNameAnnotationSource(it.string, swiftName = it.swiftString) }
+      .orEmpty()
+
   fun objCAnnotationSource(fieldDescriptor: FieldDescriptor): Source =
-    Source.emptyUnless(needsObjCNameAnnotation(fieldDescriptor)) {
-      objCNameAnnotationSource(fieldDescriptor.objCName)
+    Source.emptyIf(hiddenFromObjCMapping.contains(fieldDescriptor.enclosingTypeDescriptor)) {
+      when {
+        hiddenFromObjCMapping.contains(fieldDescriptor) -> hiddenFromObjCAnnotationSource()
+        needsObjCNameAnnotation(fieldDescriptor) ->
+          objCNameAnnotationSource(fieldDescriptor.objCName)
+        else -> Source.EMPTY
+      }
     }
 
   private fun needsObjCNameAnnotation(typeDeclaration: TypeDeclaration): Boolean =
@@ -95,20 +122,22 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
     needsObjCNameAnnotation(companionObject.enclosingTypeDeclaration)
 
   private fun needsObjCNameAnnotation(method: Method): Boolean =
-    method.descriptor.enclosingTypeDescriptor.typeDeclaration.let { enclosingTypeDeclaration ->
-      !enclosingTypeDeclaration.isLocal &&
-        !enclosingTypeDeclaration.isAnonymous &&
-        environment.ktVisibility(method.descriptor).needsObjCNameAnnotation &&
-        !method.isJavaOverride
-    }
+    !hiddenFromObjCMapping.contains(method.descriptor) &&
+      method.descriptor.enclosingTypeDescriptor.typeDeclaration.let { enclosingTypeDeclaration ->
+        !enclosingTypeDeclaration.isLocal &&
+          !enclosingTypeDeclaration.isAnonymous &&
+          environment.ktVisibility(method.descriptor).needsObjCNameAnnotation &&
+          !method.isJavaOverride
+      }
 
   private fun needsObjCNameAnnotation(fieldDescriptor: FieldDescriptor): Boolean =
-    fieldDescriptor.enclosingTypeDescriptor.typeDeclaration.let { enclosingTypeDeclaration ->
-      needsObjCNameAnnotation(enclosingTypeDeclaration) &&
-        !enclosingTypeDeclaration.isLocal &&
-        !enclosingTypeDeclaration.isAnonymous &&
-        environment.ktVisibility(fieldDescriptor).needsObjCNameAnnotation
-    }
+    !hiddenFromObjCMapping.contains(fieldDescriptor) &&
+      fieldDescriptor.enclosingTypeDescriptor.typeDeclaration.let { enclosingTypeDeclaration ->
+        needsObjCNameAnnotation(enclosingTypeDeclaration) &&
+          !enclosingTypeDeclaration.isLocal &&
+          !enclosingTypeDeclaration.isAnonymous &&
+          environment.ktVisibility(fieldDescriptor).needsObjCNameAnnotation
+      }
 
   internal fun renderedObjCNames(method: Method): MethodObjCNames? =
     when {

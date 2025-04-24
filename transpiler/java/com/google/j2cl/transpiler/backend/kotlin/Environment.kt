@@ -42,6 +42,7 @@ import com.google.j2cl.transpiler.backend.kotlin.ast.withWidestScopeOrNull
  *   descriptors which should be rendered as internal in Kotlin.
  */
 internal data class Environment(
+  val hiddenFromObjCMapping: HiddenFromObjCMapping,
   private val nameToIdentifierMap: Map<HasName, String> = emptyMap(),
   private val identifierSet: Set<String> = emptySet(),
   private val importedSimpleNameToQualifiedNameMutableMap: MutableMap<String, String> =

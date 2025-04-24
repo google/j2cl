@@ -86,7 +86,10 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.join
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
 
-internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
+internal class J2ObjCCompatRenderer(
+  private val objCNamePrefix: String,
+  private val hiddenFromObjCMapping: HiddenFromObjCMapping,
+) {
   internal fun source(compilationUnit: CompilationUnit): Source =
     dependenciesAndDeclarationsSource(compilationUnit).ifNotEmpty {
       emptyLineSeparated(fileCommentSource(compilationUnit), it) + Source.NEW_LINE
@@ -277,11 +280,12 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
       shouldRender(fieldDescriptor.typeDescriptor)
 
   private fun shouldRender(typeDescriptor: TypeDescriptor): Boolean =
-    when (typeDescriptor) {
-      is DeclaredTypeDescriptor -> shouldRenderDescriptor(typeDescriptor.typeDeclaration)
-      is ArrayTypeDescriptor -> false
-      else -> true
-    }
+    !hiddenFromObjCMapping.contains(typeDescriptor) &&
+      when (typeDescriptor) {
+        is DeclaredTypeDescriptor -> shouldRenderDescriptor(typeDescriptor.typeDeclaration)
+        is ArrayTypeDescriptor -> false
+        else -> true
+      }
 
   private val collectionTypeDescriptors: Set<TypeDescriptor>
     get() = setOf(typeDescriptors.javaUtilCollection, typeDescriptors.javaUtilMap)
@@ -297,7 +301,8 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
   private fun shouldRenderDescriptor(typeDeclaration: TypeDeclaration): Boolean =
     typeDeclaration.visibility.isPublic &&
       existsInObjC(typeDeclaration) &&
-      !isCollection(typeDeclaration)
+      !isCollection(typeDeclaration) &&
+      !hiddenFromObjCMapping.contains(typeDeclaration)
 
   private fun existsInObjC(typeDeclaration: TypeDeclaration): Boolean =
     !typeDeclaration.isKtNative || mappedObjCNameRenderer(typeDeclaration) != null
