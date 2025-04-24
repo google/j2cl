@@ -1,0 +1,73 @@
+// Generated from "j2ktnewobjcname/J2ObjCWeakExample.java"
+@file:OptIn(ExperimentalObjCName::class)
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN")
+
+package j2ktnewobjcname
+
+import javaemul.lang.*
+import kotlin.OptIn
+import kotlin.Suppress
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
+
+@ObjCName("J2ktJ2ktnewobjcnameJ2ObjCWeakExample", swiftName = "J2ktnewobjcnameJ2ObjCWeakExample", exact = true)
+class J2ObjCWeakExample {
+ private val finalFoo: Foo?
+
+ private val finalNonNullFoo: Foo
+
+ private var fooWithoutInitializer: Foo? = null
+
+ private var fooWithInitializer: Foo? = Foo()
+
+ private var nonNullFooWithoutInitializer: Foo
+
+ private var nonNullFooWithInitializer: Foo = Foo()
+
+ constructor() {
+  this.finalFoo = null
+  this.finalNonNullFoo = Foo()
+  this.nonNullFooWithoutInitializer = Foo()
+ }
+
+ constructor(
+  @ObjCName("J2ktnewobjcnameJ2ObjCWeakExample_Foo") foo: Foo?
+ ) {
+  this.finalFoo = foo
+  this.finalNonNullFoo = foo!!
+  this.fooWithoutInitializer = foo
+  this.nonNullFooWithoutInitializer = foo!!
+ }
+
+ @ObjCName("setFoo")
+ fun setFoo(
+  @ObjCName("withJ2ktnewobjcnameJ2ObjCWeakExample_Foo", swiftName = "with") foo: Foo?
+ ) {
+  this.fooWithoutInitializer = foo
+  this.fooWithInitializer = foo
+  this.nonNullFooWithoutInitializer = foo!!
+  this.nonNullFooWithInitializer = foo!!
+ }
+
+ @ObjCName("getFoo")
+ fun getFoo(): Foo? {
+  return this.fooWithoutInitializer
+ }
+
+ @ObjCName("J2ktJ2ktnewobjcnameJ2ObjCWeakExample_Foo", swiftName = "J2ktnewobjcnameJ2ObjCWeakExample_Foo", exact = true)
+ class Foo
+}
