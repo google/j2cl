@@ -16,13 +16,10 @@
 package com.google.j2cl.transpiler.frontend.common;
 
 import com.google.auto.value.AutoValue;
-import com.google.j2objc.annotations.ObjectiveCName;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import javax.annotation.Nullable;
-import jsinterop.annotations.JsPackage;
-import org.jspecify.annotations.NullMarked;
 import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -41,9 +38,9 @@ public abstract class PackageInfo {
   public static PackageInfo read(InputStream packageInfoStream) throws IOException {
     var annotations = new HashMap<String, String>();
     // Prefill with known annotations so we can use it to avoid traversing unrelated annotations.
-    annotations.put(JsPackage.class.getName(), null);
-    annotations.put(ObjectiveCName.class.getName(), null);
-    annotations.put(NullMarked.class.getName(), null);
+    annotations.put(FrontendConstants.JS_PACKAGE_ANNOTATION_NAME, null);
+    annotations.put(FrontendConstants.J2KT_OBJECTIVE_C_ANNOTATION_NAME, null);
+    annotations.put(FrontendConstants.NULL_MARKED_ANNOTATION_NAME, null);
 
     final int opcode = org.objectweb.asm.Opcodes.ASM9;
     var visitor =
@@ -72,9 +69,9 @@ public abstract class PackageInfo {
     var packageName = reader.getClassName().replace("/package-info", "").replace('/', '.');
     return PackageInfo.newBuilder()
         .setPackageName(packageName)
-        .setJsNamespace(annotations.get(JsPackage.class.getName()))
-        .setObjectiveCName(annotations.get(ObjectiveCName.class.getName()))
-        .setNullMarked(annotations.get(NullMarked.class.getName()) != null)
+        .setJsNamespace(annotations.get(FrontendConstants.JS_PACKAGE_ANNOTATION_NAME))
+        .setObjectiveCName(annotations.get(FrontendConstants.J2KT_OBJECTIVE_C_ANNOTATION_NAME))
+        .setNullMarked(annotations.get(FrontendConstants.NULL_MARKED_ANNOTATION_NAME) != null)
         .build();
   }
 

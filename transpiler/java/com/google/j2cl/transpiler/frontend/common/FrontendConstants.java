@@ -46,6 +46,7 @@ public final class FrontendConstants {
   public static final String J2KT_PUBLIC_NATIVE_ANNOTATION_NAME =
       "com.google.j2kt.annotations.KtNative";
 
+  public static final String NULL_MARKED_ANNOTATION_NAME = "org.jspecify.annotations.NullMarked";
   public static final String SUPPRESS_WARNINGS_ANNOTATION_NAME = "java.lang.SuppressWarnings";
 
   public static final String WASM_ANNOTATION_NAME = "javaemul.internal.annotations.Wasm";
