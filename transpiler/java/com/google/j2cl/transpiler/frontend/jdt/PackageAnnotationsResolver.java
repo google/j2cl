@@ -19,7 +19,6 @@ import static com.google.common.base.Preconditions.checkState;
 import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktObjectiveCName;
 import static com.google.j2cl.transpiler.frontend.jdt.JsInteropAnnotationUtils.getJsNamespace;
 
-import com.google.j2cl.transpiler.frontend.common.PackageInfoCache;
 import java.util.stream.Stream;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 

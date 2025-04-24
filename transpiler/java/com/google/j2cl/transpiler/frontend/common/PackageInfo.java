@@ -104,6 +104,6 @@ public abstract class PackageInfo {
 
     public abstract Builder setNullMarked(boolean isNullMarked);
 
-    abstract PackageInfo build();
+    public abstract PackageInfo build();
   }
 }

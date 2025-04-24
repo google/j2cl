@@ -13,17 +13,16 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.transpiler.frontend.common;
+package com.google.j2cl.transpiler.frontend.jdt;
 
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.ZipFiles;
+import com.google.j2cl.transpiler.frontend.common.PackageInfo;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.jar.JarFile;
-import java.util.jar.Manifest;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
@@ -35,7 +34,6 @@ import java.util.zip.ZipFile;
 public class PackageInfoCache {
 
   private final Map<String, PackageInfo> packageReportByTypeName = new HashMap<>();
-  private final Map<String, Manifest> manifestByPath = new HashMap<>();
   private final Problems problems;
 
   public PackageInfoCache(List<String> classPathEntries, Problems problems) {
@@ -63,10 +61,6 @@ public class PackageInfoCache {
     return getPackageReport(topLevelTypeSourceName).isNullMarked();
   }
 
-  public Manifest getManifest(String path) {
-    return manifestByPath.get(path);
-  }
-
   public void setPackageProperties(
       String packageName, String packageJsNamespace, String objectiveCName, boolean isNullMarked) {
     packageReportByTypeName.put(
@@ -90,9 +84,6 @@ public class PackageInfoCache {
           if (entry.getName().endsWith("package-info.class")) {
             var packageInfo = PackageInfo.read(zipFile.getInputStream(entry));
             packageReportByTypeName.put(packageInfo.getPackageName(), packageInfo);
-          }
-          if (entry.getName().equals(JarFile.MANIFEST_NAME)) {
-            manifestByPath.put(classPathEntry, new Manifest(zipFile.getInputStream(entry)));
           }
         }
         problems.abortIfCancelled();
