@@ -1,5 +1,4 @@
 // Generated from "staticfieldaccesslevels/StaticFieldAccessLevels.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -22,29 +21,21 @@ import javaemul.lang.*
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Int
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktStaticfieldaccesslevelsStaticFieldAccessLevels", swiftName = "StaticfieldaccesslevelsStaticFieldAccessLevels", exact = true)
 open class StaticFieldAccessLevels {
- @ObjCName("test")
  open fun test(): Int {
   return if (StaticFieldAccessLevels.b) StaticFieldAccessLevels.a else StaticFieldAccessLevels.d_pp_staticfieldaccesslevels
  }
 
- @ObjCName("J2ktStaticfieldaccesslevelsStaticFieldAccessLevelsCompanion", swiftName = "StaticfieldaccesslevelsStaticFieldAccessLevelsCompanion", exact = true)
  companion object {
   @JvmField
-  @ObjCName("a_")
   var a: Int = 0
 
   private var b: Boolean = false
 
   @JvmField
-  @ObjCName("c_")
   var c: Any? = null
 
   @JvmField

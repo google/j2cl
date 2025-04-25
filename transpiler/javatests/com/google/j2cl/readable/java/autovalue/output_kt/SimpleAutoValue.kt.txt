@@ -1,5 +1,4 @@
 // Generated from "autovalue/SimpleAutoValue.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -30,34 +29,24 @@ import kotlin.Boolean
 import kotlin.Double
 import kotlin.Int
 import kotlin.IntArray
-import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
 import kotlin.collections.MutableList
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.intArrayOf
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktAutovalueSimpleAutoValue", swiftName = "AutovalueSimpleAutoValue", exact = true)
 @WasAutoValue
 abstract class SimpleAutoValue {
- @ObjCName("getIntField")
  abstract fun getIntField(): Int
 
- @ObjCName("getBooleanField")
  abstract fun getBooleanField(): Boolean
 
- @ObjCName("getStringField")
  abstract fun getStringField(): String?
 
- @ObjCName("getDoubleField")
  abstract fun getDoubleField(): Double?
 
- @ObjCName("getNullableField")
  abstract fun getNullableField(): Double?
 
- @ObjCName("getArrayField")
  abstract fun getArrayField(): IntArray?
 
  private var intField: Int = 0
@@ -66,7 +55,6 @@ abstract class SimpleAutoValue {
 
  private var field2: EmptyAutoValue = Builder().build()!!
 
- @ObjCName("J2ktAutovalueSimpleAutoValueCompanion", swiftName = "AutovalueSimpleAutoValueCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun create_pp_autovalue(): SimpleAutoValue? {
@@ -86,7 +74,6 @@ abstract class SimpleAutoValue {
   }
  }
 
- @ObjCName("J2ktAutovalueSimpleAutoValue_GenericType", swiftName = "AutovalueSimpleAutoValue_GenericType", exact = true)
  abstract class GenericType internal constructor(): AbstractCollection<AutoValue_SimpleAutoValue?>() {
   internal open fun <T: AutoValue_SimpleAutoValue?> foo_pp_autovalue(o1: MutableList<out AutoValue_SimpleAutoValue?>?, o2: MutableList<AutoValue_SimpleAutoValue?>?): T {
    this.foo_pp_autovalue<AutoValue_SimpleAutoValue?>(null, null)!!.getArrayField()

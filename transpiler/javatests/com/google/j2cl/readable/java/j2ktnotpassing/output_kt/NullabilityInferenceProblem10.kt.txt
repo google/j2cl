@@ -1,5 +1,4 @@
 // Generated from "j2ktnotpassing/NullabilityInferenceProblem10.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -21,23 +20,15 @@ package j2ktnotpassing
 import javaemul.lang.*
 import java.lang.RuntimeException
 import java.lang.Void
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktnotpassingNullabilityInferenceProblem10", swiftName = "J2ktnotpassingNullabilityInferenceProblem10", exact = true)
 open class NullabilityInferenceProblem10 {
- @ObjCName("J2ktJ2ktnotpassingNullabilityInferenceProblem10_Lazy", swiftName = "J2ktnotpassingNullabilityInferenceProblem10_Lazy", exact = true)
  fun interface Lazy<V> {
-  @ObjCName("get")
   fun get(): V
  }
 
- @ObjCName("J2ktJ2ktnotpassingNullabilityInferenceProblem10_InNullMarked", swiftName = "J2ktnotpassingNullabilityInferenceProblem10_InNullMarked", exact = true)
  open class InNullMarked internal constructor() {
-  @ObjCName("J2ktJ2ktnotpassingNullabilityInferenceProblem10_InNullMarkedCompanion", swiftName = "J2ktnotpassingNullabilityInferenceProblem10_InNullMarkedCompanion", exact = true)
   companion object {
    @JvmStatic
    internal fun observeNullable_pp_j2ktnotpassing(foo: Foo?): Future<Void?> {
@@ -54,26 +45,16 @@ open class NullabilityInferenceProblem10 {
    }
   }
 
-  @ObjCName("J2ktJ2ktnotpassingNullabilityInferenceProblem10_InNullMarked_Foo", swiftName = "J2ktnotpassingNullabilityInferenceProblem10_InNullMarked_Foo", exact = true)
   interface Foo
 
-  @ObjCName("J2ktJ2ktnotpassingNullabilityInferenceProblem10_InNullMarked_Future", swiftName = "J2ktnotpassingNullabilityInferenceProblem10_InNullMarked_Future", exact = true)
   interface Future<V>
 
-  @ObjCName("J2ktJ2ktnotpassingNullabilityInferenceProblem10_InNullMarked_Observable", swiftName = "J2ktnotpassingNullabilityInferenceProblem10_InNullMarked_Observable", exact = true)
   fun interface Observable<V> {
-   @ObjCName("addObserver")
-   fun addObserver(
-    @ObjCName("withJ2ktnotpassingNullabilityInferenceProblem10_InNullMarked_Observer", swiftName = "with") observer: Observer<V>
-   )
+   fun addObserver(observer: Observer<V>)
   }
 
-  @ObjCName("J2ktJ2ktnotpassingNullabilityInferenceProblem10_InNullMarked_Observer", swiftName = "J2ktnotpassingNullabilityInferenceProblem10_InNullMarked_Observer", exact = true)
   fun interface Observer<V> {
-   @ObjCName("observe")
-   fun observe(
-    @ObjCName("withId") v: V
-   ): Future<Void?>
+   fun observe(v: V): Future<Void?>
   }
  }
 }

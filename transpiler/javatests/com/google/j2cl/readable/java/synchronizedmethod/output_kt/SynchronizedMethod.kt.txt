@@ -1,5 +1,4 @@
 // Generated from "synchronizedmethod/SynchronizedMethod.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -22,24 +21,19 @@ import javaemul.lang.*
 import javaemul.lang.J2ktMonitor
 import kotlin.Boolean
 import kotlin.Int
-import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
 import kotlin.Unit
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.javaObjectType
-import kotlin.native.ObjCName
 import kotlin.run
 import kotlin.synchronized
 
-@ObjCName("J2ktSynchronizedmethodSynchronizedMethod", swiftName = "SynchronizedmethodSynchronizedMethod", exact = true)
 open class SynchronizedMethod: J2ktMonitor() {
  private var a: Int = 0
 
  private var b: Int = 0
 
- @ObjCName("testNonStatic")
  open fun testNonStatic() {
   synchronized<Unit>(this) {
    this.a = this.a + 1
@@ -47,10 +41,7 @@ open class SynchronizedMethod: J2ktMonitor() {
   }
  }
 
- @ObjCName("testReturn")
- open fun testReturn(
-  @ObjCName("withBoolean") bool: Boolean
- ): Int {
+ open fun testReturn(bool: Boolean): Int {
   synchronized<Unit>(this) {
    if (bool) {
     return run {
@@ -67,11 +58,7 @@ open class SynchronizedMethod: J2ktMonitor() {
   }
  }
 
- @ObjCName("testIfStatementWithNonVoidBodyWithoutElse")
- open fun testIfStatementWithNonVoidBodyWithoutElse(
-  @ObjCName("withBoolean") b1: Boolean,
-  @ObjCName("withBoolean") b2: Boolean
- ) {
+ open fun testIfStatementWithNonVoidBodyWithoutElse(b1: Boolean, b2: Boolean) {
   synchronized<Unit>(this) {
    if (b1) {
     this.apply("foo")
@@ -85,14 +72,12 @@ open class SynchronizedMethod: J2ktMonitor() {
   return string
  }
 
- @ObjCName("J2ktSynchronizedmethodSynchronizedMethodCompanion", swiftName = "SynchronizedmethodSynchronizedMethodCompanion", exact = true)
  companion object {
   private var sa: Int = 0
 
   private var sb: Int = 0
 
   @JvmStatic
-  @ObjCName("testStatic")
   fun testStatic() {
    synchronized<Unit>(SynchronizedMethod::class.javaObjectType) {
     SynchronizedMethod.sa = SynchronizedMethod.sa + 1

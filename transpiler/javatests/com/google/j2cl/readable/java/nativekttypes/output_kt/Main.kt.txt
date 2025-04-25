@@ -1,5 +1,4 @@
 // Generated from "nativekttypes/Main.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -23,13 +22,10 @@ import java.lang.Class
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Int
-import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.javaObjectType
-import kotlin.native.ObjCName
 import nativekttypes.Fn
 import nativekttypes.NativeDefaultName
 import nativekttypes.nativekt.KBridge
@@ -44,32 +40,21 @@ import nativekttypes.nativekt.KTopLevel.KInner
 import nativekttypes.nativekt.KTopLevel.KNested
 import nativekttypes.nativekt.KWithCompanionObject
 
-@ObjCName("J2ktNativekttypesMain", swiftName = "NativekttypesMain", exact = true)
 open class Main {
  @JvmField
- @ObjCName("nativeDefaultName_")
  var nativeDefaultName: NativeDefaultName? = null
 
  @JvmField
- @ObjCName("topLevelField_")
  var topLevelField: KTopLevel<String?>? = null
 
  @JvmField
- @ObjCName("nestedField_")
  var nestedField: KNested<String?>? = null
 
  @JvmField
- @ObjCName("innerField_")
  var innerField: KTopLevel<String?>.KInner<String?>? = null
 
- @ObjCName("methodArguments")
- open fun methodArguments(
-  @ObjCName("withNativekttypesNativeTopLevel", swiftName = "with") foo: KTopLevel<String?>?,
-  @ObjCName("withNativekttypesNativeTopLevel_Nested", swiftName = "with") nested: KNested<String?>?,
-  @ObjCName("withNativekttypesNativeTopLevel_Inner", swiftName = "with") inner: KTopLevel<String?>.KInner<String?>?
- ) {}
+ open fun methodArguments(foo: KTopLevel<String?>?, nested: KNested<String?>?, inner: KTopLevel<String?>.KInner<String?>?) {}
 
- @ObjCName("memberAccess")
  open fun memberAccess() {
   val topLevel: KTopLevel<String?> = KTopLevel<String?>("foo")
   val fooInstanceMethod: String? = topLevel.instanceMethod("foo")
@@ -111,7 +96,6 @@ open class Main {
   }
  }
 
- @ObjCName("bridges")
  open fun bridges() {
   var o: KRequiringBridge = KBridge()
   o = object : KBridge() {}
@@ -129,14 +113,12 @@ open class Main {
   val instanceofCheck: Boolean = o is KRequiringBridge
  }
 
- @ObjCName("casts")
  open fun casts() {
   val o1: KTopLevel<String?>? = null as KTopLevel<String?>?
   val o2: KNested<String?>? = null as KNested<String?>?
   val o3: KTopLevel<String?>.KInner<String?>? = null as KTopLevel<String?>.KInner<String?>?
  }
 
- @ObjCName("companionObject")
  open fun companionObject() {
   val o: KWithCompanionObject = KWithCompanionObject()
   val i1: Int = o.instanceField
@@ -146,71 +128,43 @@ open class Main {
   KCompanionObject.staticField = i2
  }
 
- @ObjCName("typeLiterals")
  open fun typeLiterals() {
   val c1: Class<*> = KTopLevel::class.javaObjectType
   val c2: Class<*> = KNested::class.javaObjectType
   val c3: Class<*> = KInner::class.javaObjectType
  }
 
- @ObjCName("disabledVoidMethod")
  open fun disabledVoidMethod() {}
 
- @ObjCName("disabledNonVoidMethod")
  open fun disabledNonVoidMethod(): Boolean {
   return false
  }
 
- @ObjCName("acceptFn_generic")
- open fun <I, O> acceptFn_generic(
-  @ObjCName("withNativekttypesFn", swiftName = "with") f: Fn<I, O>?,
-  @ObjCName("withId") i: I
- ): O {
+ open fun <I, O> acceptFn_generic(f: Fn<I, O>?, i: I): O {
   return f!!.apply(i)
  }
 
- @ObjCName("acceptFn_parametrized")
- open fun acceptFn_parametrized(
-  @ObjCName("withNativekttypesFn", swiftName = "with") f: Fn<String?, String?>?,
-  @ObjCName("withNSString", swiftName = "with") i: String?
- ): String? {
+ open fun acceptFn_parametrized(f: Fn<String?, String?>?, i: String?): String? {
   return f!!.apply(i)
  }
 
- @ObjCName("acceptFn_genericWildcard")
- open fun <I, O> acceptFn_genericWildcard(
-  @ObjCName("withNativekttypesFn", swiftName = "with") f: Fn<I, O>?,
-  @ObjCName("withId") i: I
- ): O {
+ open fun <I, O> acceptFn_genericWildcard(f: Fn<I, O>?, i: I): O {
   return f!!.apply(i)
  }
 
- @ObjCName("acceptFn_parametrizedWildcard")
- open fun acceptFn_parametrizedWildcard(
-  @ObjCName("withNativekttypesFn", swiftName = "with") f: Fn<String?, String?>?,
-  @ObjCName("withNSString", swiftName = "with") i: String?
- ): String? {
+ open fun acceptFn_parametrizedWildcard(f: Fn<String?, String?>?, i: String?): String? {
   return f!!.apply(i)
  }
 
- @ObjCName("acceptFn_unboundWildcard")
- open fun acceptFn_unboundWildcard(
-  @ObjCName("withNativekttypesFn", swiftName = "with") f: Fn<*, *>?,
-  @ObjCName("withId") i: Any?
- ): Any? {
+ open fun acceptFn_unboundWildcard(f: Fn<*, *>?, i: Any?): Any? {
   return (f as Fn<Any?, Any?>?)!!.apply(i)
  }
 
- @ObjCName("acceptFn_raw")
- open fun acceptFn_raw(
-  @ObjCName("withNativekttypesFn", swiftName = "with") f: Fn<Any?, Any?>?,
-  @ObjCName("withId") i: Any?
- ): Any? {
+ open fun acceptFn_raw(f: Fn<Any?, Any?>?, i: Any?): Any? {
   return f!!.apply(i)
  }
 }
 
-@ObjCName("J2ktNativekttypesSubclass", swiftName = "NativekttypesSubclass", exact = true)
 open class Subclass<V>: KTopLevel<V>, KInterface<V> {
  internal constructor(v: V): super(v)
 
@@ -277,7 +231,6 @@ open class Subclass<V>: KTopLevel<V>, KInterface<V> {
   }
 }
 
-@ObjCName("J2ktNativekttypesSubsubclass", swiftName = "NativekttypesSubsubclass", exact = true)
 open class Subsubclass<V>: Subclass<V> {
  internal constructor(v: V): super(v)
 
@@ -344,7 +297,6 @@ open class Subsubclass<V>: Subclass<V> {
   }
 }
 
-@ObjCName("J2ktNativekttypesBridgeSubclass", swiftName = "NativekttypesBridgeSubclass", exact = true)
 open class BridgeSubclass internal constructor(): KBridge() {
  override fun method() {
   super<KBridge>.method()

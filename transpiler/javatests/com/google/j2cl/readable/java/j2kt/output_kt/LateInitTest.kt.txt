@@ -1,5 +1,4 @@
 // Generated from "j2kt/LateInitTest.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -19,23 +18,17 @@
 package j2kt
 
 import javaemul.lang.*
-import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
-import kotlin.native.ObjCName
 import org.junit.Assert
 
-@ObjCName("J2ktJ2ktLateInitTest", swiftName = "J2ktLateInitTest", exact = true)
 class LateInitTest {
  private lateinit var uninitialized: String
 
- @ObjCName("setup")
  fun setup() {
   this.uninitialized = "I have been initialized"
  }
 
- @ObjCName("behaviorBeingTested_expectedResult")
  fun behaviorBeingTested_expectedResult() {
   Assert.assertEquals(
    this.uninitialized,

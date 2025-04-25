@@ -1,5 +1,4 @@
 // Generated from "cast/CastGenerics.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -25,15 +24,11 @@ import kotlin.Enum
 import kotlin.Error
 import kotlin.Int
 import kotlin.Number
-import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktCastCastGenerics", swiftName = "CastCastGenerics", exact = true)
 open class CastGenerics<T, E: Number?> {
  @JvmField
  internal var field_pp_cast: T? = null
@@ -42,7 +37,6 @@ open class CastGenerics<T, E: Number?> {
   return null as T
  }
 
- @ObjCName("testCastToTypeVariable")
  open fun testCastToTypeVariable() {
   val o: Any = Int(1)
   val e: E? = o as E?
@@ -51,7 +45,6 @@ open class CastGenerics<T, E: Number?> {
   val ts: Array<T>? = o as Array<T>?
  }
 
- @ObjCName("testCastToMethodTypeVariable")
  open fun <S, V: Enum<V>> testCastToMethodTypeVariable() {
   val o: Any = Int(1)
   val s: S? = o as S?
@@ -60,14 +53,10 @@ open class CastGenerics<T, E: Number?> {
   c = o as V?
  }
 
- @ObjCName("testCastToRawToGeneric")
- open fun testCastToRawToGeneric(
-  @ObjCName("withCastCastGenerics_Foo", swiftName = "with") foo: Foo<Any?>?
- ): Foo<String?>? {
+ open fun testCastToRawToGeneric(foo: Foo<Any?>?): Foo<String?>? {
   return foo as Foo<String?>?
  }
 
- @ObjCName("outerGenericMethod")
  open fun <TT: Enum<*>> outerGenericMethod() {
   open class Nested<SS> internal constructor() {
    private fun nestedGenericMethod(o: Any?) {
@@ -76,20 +65,15 @@ open class CastGenerics<T, E: Number?> {
   }
  }
 
- @ObjCName("method")
- open fun <EE> method(
-  @ObjCName("withId") o: Any?
- ): EE where EE: Empty1?, EE: Empty2<EE>? {
+ open fun <EE> method(o: Any?): EE where EE: Empty1?, EE: Empty2<EE>? {
   if (o is Empty1) {
    return o as EE
   }
   return null as EE
  }
 
- @ObjCName("J2ktCastCastGenericsCompanion", swiftName = "CastCastGenericsCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("testErasureCast")
   fun <T_1, U: T_1> testErasureCast() where T_1: A?, T_1: B? {
    var str: String? = CastGenerics<String?, Number?>().field_pp_cast
    str = CastGenerics<String?, Number?>().method_pp_cast()
@@ -134,14 +118,12 @@ open class CastGenerics<T, E: Number?> {
   }
 
   @JvmStatic
-  @ObjCName("testErasureCastInNullMarkedCode")
   fun testErasureCastInNullMarkedCode() {
    val container: NullMarkedContainer<out String> = NullMarkedContainer<String>("abc")
    val s: String? = container.get_pp_cast()
   }
 
   @JvmStatic
-  @ObjCName("testCastToParamterizedType")
   fun testCastToParamterizedType() {
    val o: Any = Int(1)
    var cc: CastGenerics<Error?, Number?>? = o as CastGenerics<Error?, Number?>?
@@ -149,42 +131,33 @@ open class CastGenerics<T, E: Number?> {
   }
 
   @JvmStatic
-  @ObjCName("doSomething")
   fun <T_1> doSomething(): Foo<T_1>? {
    return object : Foo<T_1>() {}
   }
  }
 
- @ObjCName("J2ktCastCastGenerics_A", swiftName = "CastCastGenerics_A", exact = true)
  fun interface A {
-  @ObjCName("mA")
   fun mA()
  }
 
- @ObjCName("J2ktCastCastGenerics_B", swiftName = "CastCastGenerics_B", exact = true)
  fun interface B {
-  @ObjCName("mB")
   fun mB()
  }
 
- @ObjCName("J2ktCastCastGenerics_BaseImplementor", swiftName = "CastCastGenerics_BaseImplementor", exact = true)
  abstract class BaseImplementor internal constructor(): A, B
 
- @ObjCName("J2ktCastCastGenerics_Implementor", swiftName = "CastCastGenerics_Implementor", exact = true)
  open class Implementor internal constructor(): BaseImplementor() {
   override fun mA() {}
 
   override fun mB() {}
  }
 
- @ObjCName("J2ktCastCastGenerics_Container", swiftName = "CastCastGenerics_Container", exact = true)
  open class Container<T> internal constructor() {
   internal open fun get_pp_cast(): T {
    return null as T
   }
  }
 
- @ObjCName("J2ktCastCastGenerics_NullMarkedContainer", swiftName = "CastCastGenerics_NullMarkedContainer", exact = true)
  open class NullMarkedContainer<T: Any> {
   private var value: T
 
@@ -197,12 +170,9 @@ open class CastGenerics<T, E: Number?> {
   }
  }
 
- @ObjCName("J2ktCastCastGenerics_Empty1", swiftName = "CastCastGenerics_Empty1", exact = true)
  interface Empty1
 
- @ObjCName("J2ktCastCastGenerics_Empty2", swiftName = "CastCastGenerics_Empty2", exact = true)
  interface Empty2<TT>
 
- @ObjCName("J2ktCastCastGenerics_Foo", swiftName = "CastCastGenerics_Foo", exact = true)
  open class Foo<V>
 }

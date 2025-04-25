@@ -1,5 +1,4 @@
 // Generated from "j2kt/NullabilityScopes3.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -21,14 +20,10 @@ package j2kt
 import javaemul.lang.*
 import java.lang.RuntimeException
 import kotlin.Any
-import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktNullabilityScopes3", swiftName = "J2ktNullabilityScopes3", exact = true)
 open class NullabilityScopes3 {
  internal open fun testNonNullMarked_pp_j2kt() {
   Optional.of_pp_j2kt<List<String>>(
@@ -36,9 +31,7 @@ open class NullabilityScopes3 {
   )
  }
 
- @ObjCName("J2ktJ2ktNullabilityScopes3_Optional", swiftName = "J2ktNullabilityScopes3_Optional", exact = true)
  class Optional<T: Any> internal constructor() {
-  @ObjCName("J2ktJ2ktNullabilityScopes3_OptionalCompanion", swiftName = "J2ktNullabilityScopes3_OptionalCompanion", exact = true)
   companion object {
    @JvmStatic
    internal fun <T: Any> of_pp_j2kt(value: T): Optional<T> {
@@ -47,12 +40,9 @@ open class NullabilityScopes3 {
   }
  }
 
- @ObjCName("J2ktJ2ktNullabilityScopes3_List", swiftName = "J2ktNullabilityScopes3_List", exact = true)
  interface List<T>
 
- @ObjCName("J2ktJ2ktNullabilityScopes3_ImmutableList", swiftName = "J2ktNullabilityScopes3_ImmutableList", exact = true)
  open class ImmutableList<T: Any> internal constructor(): List<T> {
-  @ObjCName("J2ktJ2ktNullabilityScopes3_ImmutableListCompanion", swiftName = "J2ktNullabilityScopes3_ImmutableListCompanion", exact = true)
   companion object {
    @JvmStatic
    internal fun <T: Any> of_pp_j2kt(): ImmutableList<T> {

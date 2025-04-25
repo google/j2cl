@@ -1,5 +1,4 @@
 // Generated from "methodreferences/MethodReferences.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -33,20 +32,15 @@ import kotlin.Int
 import kotlin.IntArray
 import kotlin.LongArray
 import kotlin.Number
-import kotlin.OptIn
 import kotlin.ShortArray
 import kotlin.String
 import kotlin.Suppress
 import kotlin.arrayOfNulls
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 import kotlin.run
 
-@ObjCName("J2ktMethodreferencesMethodReferences", swiftName = "MethodreferencesMethodReferences", exact = true)
 open class MethodReferences<T> {
- @ObjCName("isA")
  open fun isA(): Boolean {
   return java.lang.Boolean.valueOf(true)
  }
@@ -180,7 +174,6 @@ open class MethodReferences<T> {
   )
  }
 
- @ObjCName("J2ktMethodreferencesMethodReferencesCompanion", swiftName = "MethodreferencesMethodReferencesCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun m_pp_methodreferences(): Any {
@@ -199,75 +192,44 @@ open class MethodReferences<T> {
   private fun <U, V> acceptFunctionSuperVariance(f: Function<in U, V>) {}
  }
 
- @ObjCName("J2ktMethodreferencesMethodReferences_Producer", swiftName = "MethodreferencesMethodReferences_Producer", exact = true)
  fun interface Producer<T> {
-  @ObjCName("produce")
   fun produce(): T
  }
 
- @ObjCName("J2ktMethodreferencesMethodReferences_Predicate", swiftName = "MethodreferencesMethodReferences_Predicate", exact = true)
  fun interface Predicate<T> {
-  @ObjCName("apply")
-  fun apply(
-   @ObjCName("withId") parameter: T
-  ): Boolean
+  fun apply(parameter: T): Boolean
  }
 
- @ObjCName("J2ktMethodreferencesMethodReferences_ArrayProducer", swiftName = "MethodreferencesMethodReferences_ArrayProducer", exact = true)
  fun interface ArrayProducer<T> {
-  @ObjCName("produce")
-  fun produce(
-   @ObjCName("withInt", swiftName = "with") size: Int
-  ): Array<T>
+  fun produce(size: Int): Array<T>
  }
 
- @ObjCName("J2ktMethodreferencesMethodReferences_ObjectCapturingOuter", swiftName = "MethodreferencesMethodReferences_ObjectCapturingOuter", exact = true)
  open inner class ObjectCapturingOuter internal constructor() {
   internal open fun getMain_pp_methodreferences(): MethodReferences<T> {
    return this@MethodReferences as MethodReferences<T>
   }
  }
 
- @ObjCName("J2ktMethodreferencesMethodReferences_Function", swiftName = "MethodreferencesMethodReferences_Function", exact = true)
  fun interface Function<T, U> {
-  @ObjCName("apply")
-  fun apply(
-   @ObjCName("withId") t: T
-  ): U
+  fun apply(t: T): U
  }
 
- @ObjCName("J2ktMethodreferencesMethodReferences_BiFunction", swiftName = "MethodreferencesMethodReferences_BiFunction", exact = true)
  fun interface BiFunction<T, U, V> {
-  @ObjCName("apply")
-  fun apply(
-   @ObjCName("withId") t: T,
-   @ObjCName("withId") u: U
-  ): V
+  fun apply(t: T, u: U): V
  }
 
- @ObjCName("J2ktMethodreferencesMethodReferences_JsProducer", swiftName = "MethodreferencesMethodReferences_JsProducer", exact = true)
  @JsFunction
  fun interface JsProducer<T> {
-  @ObjCName("produce")
   fun produce(): T
  }
 
- @ObjCName("J2ktMethodreferencesMethodReferences_JsFunctionInterface", swiftName = "MethodreferencesMethodReferences_JsFunctionInterface", exact = true)
  @JsFunction
  fun interface JsFunctionInterface<T, U> {
-  @ObjCName("apply")
-  fun apply(
-   @ObjCName("withId") t: T
-  ): U
+  fun apply(t: T): U
  }
 
- @ObjCName("J2ktMethodreferencesMethodReferences_JsBiFunction", swiftName = "MethodreferencesMethodReferences_JsBiFunction", exact = true)
  @JsFunction
  fun interface JsBiFunction<T, U, V> {
-  @ObjCName("apply")
-  fun apply(
-   @ObjCName("withId") t: T,
-   @ObjCName("withId") u: U
-  ): V
+  fun apply(t: T, u: U): V
  }
 }

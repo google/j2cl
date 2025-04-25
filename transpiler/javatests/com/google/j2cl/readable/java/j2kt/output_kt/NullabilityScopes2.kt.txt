@@ -1,5 +1,4 @@
 // Generated from "j2kt/NullabilityScopes2.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -25,39 +24,26 @@ import java.util.function.Function
 import java.util.stream.Collector
 import java.util.stream.Stream
 import kotlin.Any
-import kotlin.OptIn
 import kotlin.Suppress
 import kotlin.collections.MutableList
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktNullabilityScopes2", swiftName = "J2ktNullabilityScopes2", exact = true)
 open class NullabilityScopes2 internal constructor() {
- @ObjCName("J2ktJ2ktNullabilityScopes2_NullMarkedScope", swiftName = "J2ktNullabilityScopes2_NullMarkedScope", exact = true)
  open class NullMarkedScope internal constructor() {
-  @ObjCName("J2ktJ2ktNullabilityScopes2_NullMarkedScopeCompanion", swiftName = "J2ktNullabilityScopes2_NullMarkedScopeCompanion", exact = true)
   companion object {
    @JvmStatic
-   @ObjCName("toList")
    fun <E> toList(): Collector<E, *, MutableList<E>> {
     throw RuntimeException()
    }
   }
 
-  @ObjCName("J2ktJ2ktNullabilityScopes2_NullMarkedScope_Recursive", swiftName = "J2ktNullabilityScopes2_NullMarkedScope_Recursive", exact = true)
   fun interface Recursive<M: Recursive<M>> {
-   @ObjCName("toList")
    fun toList(): MutableList<Recursive<M>>
   }
  }
 
- @ObjCName("J2ktJ2ktNullabilityScopes2_NonNullMarkedScope", swiftName = "J2ktNullabilityScopes2_NonNullMarkedScope", exact = true)
  open class NonNullMarkedScope<T: Recursive<T>> internal constructor() {
-  @ObjCName("flatten")
-  open fun flatten(
-   @ObjCName("withJ2ktNullabilityScopes2_NullMarkedScope_Recursive", swiftName = "with") recursive: Recursive<T>?
-  ): MutableList<Any?>? {
+  open fun flatten(recursive: Recursive<T>?): MutableList<Any?>? {
    return recursive!!.toList().stream().map<MutableList<Any?>?>(
     Function { arg0: Recursive<T> ->
      return@Function this.flatten(arg0)

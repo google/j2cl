@@ -1,5 +1,4 @@
 // Generated from "jsvarargs/QualifiedSuperMethodCall.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -21,19 +20,13 @@ package jsvarargs
 import javaemul.lang.*
 import jsvarargs.Main
 import kotlin.IntArray
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.intArrayOf
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktJsvarargsQualifiedSuperMethodCall", swiftName = "JsvarargsQualifiedSuperMethodCall", exact = true)
 open class QualifiedSuperMethodCall: Main {
  constructor(): super(0)
 
- @ObjCName("J2ktJsvarargsQualifiedSuperMethodCall_InnerClass", swiftName = "JsvarargsQualifiedSuperMethodCall_InnerClass", exact = true)
  open inner class InnerClass {
-  @ObjCName("test")
   open fun test() {
    super<Main>@QualifiedSuperMethodCall.f3(1, 1, 2)
    super<Main>@QualifiedSuperMethodCall.f3(1)

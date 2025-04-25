@@ -1,5 +1,4 @@
 // Generated from "j2kt/ImportResolution.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -20,14 +19,9 @@ package j2kt
 
 import javaemul.lang.*
 import kotlin.Any
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktImportResolution", swiftName = "J2ktImportResolution", exact = true)
 open class ImportResolution {
- @ObjCName("J2ktJ2ktImportResolution_Parent", swiftName = "J2ktImportResolution_Parent", exact = true)
  open class Parent internal constructor() {
   internal open fun testJavaLangString_pp_j2kt(string: kotlin.String) {
    string.java_trim()
@@ -49,7 +43,6 @@ open class ImportResolution {
    string.genericMethod_pp_j2kt()
   }
 
-  @ObjCName("J2ktJ2ktImportResolution_Parent_String", swiftName = "J2ktImportResolution_Parent_String", exact = true)
   open inner class String internal constructor() {
    internal open fun parentStringMethod_pp_j2kt() {}
 
@@ -75,7 +68,6 @@ open class ImportResolution {
   }
  }
 
- @ObjCName("J2ktJ2ktImportResolution_Child", swiftName = "J2ktImportResolution_Child", exact = true)
  open class Child internal constructor(): j2kt.ImportResolution.Parent() {
   override fun testJavaLangString_pp_j2kt(string: kotlin.String) {
    string.java_trim()
@@ -97,7 +89,6 @@ open class ImportResolution {
    string.genericMethod_pp_j2kt()
   }
 
-  @ObjCName("J2ktJ2ktImportResolution_Child_String", swiftName = "J2ktImportResolution_Child_String", exact = true)
   open inner class String internal constructor() {
    internal open fun childStringMethod_pp_j2kt() {}
 
@@ -123,7 +114,6 @@ open class ImportResolution {
   }
  }
 
- @ObjCName("J2ktJ2ktImportResolution_GrandChild", swiftName = "J2ktImportResolution_GrandChild", exact = true)
  open class GrandChild internal constructor(): Child() {
   override fun testJavaLangString_pp_j2kt(string: kotlin.String) {
    string.java_trim()
@@ -146,7 +136,6 @@ open class ImportResolution {
   }
  }
 
- @ObjCName("J2ktJ2ktImportResolution_SiblingParent", swiftName = "J2ktImportResolution_SiblingParent", exact = true)
  open class SiblingParent internal constructor() {
   internal open fun testJavaLangString_pp_j2kt(string: kotlin.String) {
    string.java_trim()
@@ -168,13 +157,11 @@ open class ImportResolution {
    string.genericMethod_pp_j2kt()
   }
 
-  @ObjCName("J2ktJ2ktImportResolution_SiblingParent_String", swiftName = "J2ktImportResolution_SiblingParent_String", exact = true)
   open inner class String internal constructor() {
    internal open fun siblingParentStringMethod_pp_j2kt() {}
   }
  }
 
- @ObjCName("J2ktJ2ktImportResolution_Generic", swiftName = "J2ktImportResolution_Generic", exact = true)
  open class Generic<Parent: Any> internal constructor() {
   internal open fun testJavaLangString_pp_j2kt(string: kotlin.String) {
    string.java_trim()
@@ -196,7 +183,6 @@ open class ImportResolution {
    string.genericMethod_pp_j2kt()
   }
 
-  @ObjCName("J2ktJ2ktImportResolution_Generic_String", swiftName = "J2ktImportResolution_Generic_String", exact = true)
   open inner class String internal constructor() {
    internal open fun genericMethod_pp_j2kt() {}
   }

@@ -1,5 +1,4 @@
 // Generated from "arithmeticexpressions/ArithmeticExpressions.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -33,20 +32,15 @@ import kotlin.Float
 import kotlin.Int
 import kotlin.IntArray
 import kotlin.LongArray
-import kotlin.OptIn
 import kotlin.Short
 import kotlin.ShortArray
 import kotlin.String
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 import kotlin.run
 
-@ObjCName("J2ktArithmeticexpressionsArithmeticExpressions", swiftName = "ArithmeticexpressionsArithmeticExpressions", exact = true)
 open class ArithmeticExpressions {
- @ObjCName("testCoercions")
  open fun testCoercions() {
   var b: Byte = 1L.toByte()
   var c: Char = 1L.toInt().toChar()
@@ -64,7 +58,6 @@ open class ArithmeticExpressions {
   s = (o as Char).code.toShort()
  }
 
- @ObjCName("testPrimitives")
  open fun testPrimitives() {
   var a: Int = 10
   val b: Int = run {
@@ -123,7 +116,6 @@ open class ArithmeticExpressions {
   k = y.code.toLong() == z!!.toLong()
  }
 
- @ObjCName("testDoubleAssignments")
  open fun testDoubleAssignments() {
   var a: Double = 1.0
   a = a + 2.0
@@ -134,14 +126,12 @@ open class ArithmeticExpressions {
  }
 
  @JvmField
- @ObjCName("bar_")
  var bar: kotlin.Long = run {
   val ___value: kotlin.Long = ArithmeticExpressions.foo
   ArithmeticExpressions.foo = ArithmeticExpressions.foo + 1L
   ___value
  }
 
- @ObjCName("testCompoundArray")
  open fun testCompoundArray() {
   val ints: IntArray? = null
   ints!![0] = ints!![0] + 1
@@ -211,7 +201,6 @@ open class ArithmeticExpressions {
   }.toInt() == 10
  }
 
- @ObjCName("testCompoundBoxedTypes")
  open fun testCompoundBoxedTypes() {
   var c: Int? = Integer.valueOf(1000)
   var d: Int? = Integer.valueOf(10000)
@@ -293,7 +282,6 @@ open class ArithmeticExpressions {
  @JvmField
  internal var intField_pp_arithmeticexpressions: kotlin.Long = 0L
 
- @ObjCName("testExtendedOperands")
  open fun testExtendedOperands() {
   var boxedInteger: Int? = Integer.valueOf(3)
   var i: Int = 0
@@ -325,10 +313,7 @@ open class ArithmeticExpressions {
   d = (20.toLong() + l).toDouble() + d
  }
 
- @ObjCName("testEffectivelyFinalVariableInAssignmentExpression")
- open fun testEffectivelyFinalVariableInAssignmentExpression(
-  @ObjCName("withBoolean") condition: Boolean
- ) {
+ open fun testEffectivelyFinalVariableInAssignmentExpression(condition: Boolean) {
   var effectivelyFinal: kotlin.Long = 0L
   if (condition && run {
    effectivelyFinal = this.bar
@@ -338,7 +323,6 @@ open class ArithmeticExpressions {
   }
  }
 
- @ObjCName("J2ktArithmeticexpressionsArithmeticExpressionsCompanion", swiftName = "ArithmeticexpressionsArithmeticExpressionsCompanion", exact = true)
  companion object {
   private const val FLOAT_CONSTANT: Float = 1.1f
 
@@ -347,11 +331,9 @@ open class ArithmeticExpressions {
   private const val DOUBLE_CONSTANT_WITH_ARITHMETIC: Double = 2.200000047683716
 
   @JvmField
-  @ObjCName("one_")
   var one: kotlin.Long = 1L
 
   @JvmField
-  @ObjCName("foo_")
   var foo: kotlin.Long = run {
    val ___value: kotlin.Long = ArithmeticExpressions.one
    ArithmeticExpressions.one = ArithmeticExpressions.one + 1L

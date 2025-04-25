@@ -1,5 +1,4 @@
 // Generated from "j2ktnotpassing/NullabilityConversion.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -20,34 +19,22 @@ package j2ktnotpassing
 
 import javaemul.lang.*
 import java.lang.RuntimeException
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktnotpassingNullabilityConversion", swiftName = "J2ktnotpassingNullabilityConversion", exact = true)
 open class NullabilityConversion {
- @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Parent", swiftName = "J2ktnotpassingNullabilityConversion_Parent", exact = true)
  interface Parent
 
- @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Child", swiftName = "J2ktnotpassingNullabilityConversion_Child", exact = true)
  interface Child: Parent
 
- @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Supplier", swiftName = "J2ktnotpassingNullabilityConversion_Supplier", exact = true)
  fun interface Supplier<T: Child?> {
-  @ObjCName("get")
   fun get(): T
  }
 
- @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests", swiftName = "J2ktnotpassingNullabilityConversion_Tests", exact = true)
  open class Tests {
-  @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Unions", swiftName = "J2ktnotpassingNullabilityConversion_Tests_Unions", exact = true)
   open class Unions {
-   @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_UnionsCompanion", swiftName = "J2ktnotpassingNullabilityConversion_Tests_UnionsCompanion", exact = true)
    companion object {
     @JvmStatic
-    @ObjCName("typeArgumentMixedToNonNull")
     fun typeArgumentMixedToNonNull(): Child {
      try {
       throw RuntimeException()
@@ -59,10 +46,8 @@ open class NullabilityConversion {
     }
    }
 
-   @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Unions_ExceptionNonNull1", swiftName = "J2ktnotpassingNullabilityConversion_Tests_Unions_ExceptionNonNull1", exact = true)
    abstract class ExceptionNonNull1: RuntimeException(), Supplier<Child>
 
-   @ObjCName("J2ktJ2ktnotpassingNullabilityConversion_Tests_Unions_ExceptionNullable1", swiftName = "J2ktnotpassingNullabilityConversion_Tests_Unions_ExceptionNullable1", exact = true)
    abstract class ExceptionNullable1: RuntimeException(), Supplier<Child?>
   }
  }

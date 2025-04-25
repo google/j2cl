@@ -1,5 +1,4 @@
 // Generated from "cloneable/Cloneables.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -22,24 +21,17 @@ import javaemul.lang.*
 import java.lang.CloneNotSupportedException
 import kotlin.Any
 import kotlin.Cloneable
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.Throws
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktCloneableCloneables", swiftName = "CloneableCloneables", exact = true)
 open class Cloneables {
- @ObjCName("J2ktCloneableCloneables_WithoutCloneable", swiftName = "CloneableCloneables_WithoutCloneable", exact = true)
  open class WithoutCloneable {
-  @ObjCName("clone")
   @Throws(CloneNotSupportedException::class)
   open fun clone(): Any {
    return WithoutCloneable()
   }
  }
 
- @ObjCName("J2ktCloneableCloneables_WithCloneable", swiftName = "CloneableCloneables_WithCloneable", exact = true)
  open class WithCloneable: Cloneable {
   @Throws(CloneNotSupportedException::class)
   override fun clone(): Any {
@@ -47,7 +39,6 @@ open class Cloneables {
   }
  }
 
- @ObjCName("J2ktCloneableCloneables_WithoutCloneableChild", swiftName = "CloneableCloneables_WithoutCloneableChild", exact = true)
  class WithoutCloneableChild: WithoutCloneable() {
   @Throws(CloneNotSupportedException::class)
   override fun clone(): Any {
@@ -55,7 +46,6 @@ open class Cloneables {
   }
  }
 
- @ObjCName("J2ktCloneableCloneables_WithCloneableChild", swiftName = "CloneableCloneables_WithCloneableChild", exact = true)
  class WithCloneableChild: WithCloneable() {
   @Throws(CloneNotSupportedException::class)
   override fun clone(): Any {

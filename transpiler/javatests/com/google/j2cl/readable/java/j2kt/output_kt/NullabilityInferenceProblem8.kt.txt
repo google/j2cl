@@ -1,5 +1,4 @@
 // Generated from "j2kt/NullabilityInferenceProblem8.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -21,38 +20,24 @@ package j2kt
 import javaemul.lang.*
 import java.lang.RuntimeException
 import kotlin.Any
-import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktNullabilityInferenceProblem8", swiftName = "J2ktNullabilityInferenceProblem8", exact = true)
 open class NullabilityInferenceProblem8 {
- @ObjCName("J2ktJ2ktNullabilityInferenceProblem8Companion", swiftName = "J2ktNullabilityInferenceProblem8Companion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("nonNullWithLowerBound")
-  fun <I: Any, O: Any> nonNullWithLowerBound(
-   @ObjCName("withJ2ktNullabilityInferenceProblem8_Function", swiftName = "with") fn: Function<in I, O>
-  ): Function<I, O> {
+  fun <I: Any, O: Any> nonNullWithLowerBound(fn: Function<in I, O>): Function<I, O> {
    throw RuntimeException()
   }
 
   @JvmStatic
-  @ObjCName("acceptParameterized")
-  fun acceptParameterized(
-   @ObjCName("withJ2ktNullabilityInferenceProblem8_Function", swiftName = "with") fn: Function<String, Any>
-  ) {
+  fun acceptParameterized(fn: Function<String, Any>) {
    throw RuntimeException()
   }
 
   @JvmStatic
-  @ObjCName("testMethodReference")
-  fun testMethodReference(
-   @ObjCName("withJ2ktNullabilityInferenceProblem8_NullableSupplier", swiftName = "with") supplier: NullableSupplier<Any>
-  ) {
+  fun testMethodReference(supplier: NullableSupplier<Any>) {
    NullabilityInferenceProblem8.acceptParameterized(
     NullabilityInferenceProblem8.nonNullWithLowerBound<String, Any>(
      Function { arg0: String ->
@@ -63,10 +48,7 @@ open class NullabilityInferenceProblem8 {
   }
 
   @JvmStatic
-  @ObjCName("testLambda")
-  fun testLambda(
-   @ObjCName("withJ2ktNullabilityInferenceProblem8_NullableSupplier", swiftName = "with") supplier: NullableSupplier<Any>
-  ) {
+  fun testLambda(supplier: NullableSupplier<Any>) {
    NullabilityInferenceProblem8.acceptParameterized(
     NullabilityInferenceProblem8.nonNullWithLowerBound<String, Any>(
      Function { key: String ->
@@ -77,19 +59,11 @@ open class NullabilityInferenceProblem8 {
   }
  }
 
- @ObjCName("J2ktJ2ktNullabilityInferenceProblem8_NullableSupplier", swiftName = "J2ktNullabilityInferenceProblem8_NullableSupplier", exact = true)
  fun interface NullableSupplier<V> {
-  @ObjCName("get", swiftName = "getWith")
-  fun get(
-   @ObjCName("withNSString", swiftName = "_") key: String
-  ): V?
+  fun get(key: String): V?
  }
 
- @ObjCName("J2ktJ2ktNullabilityInferenceProblem8_Function", swiftName = "J2ktNullabilityInferenceProblem8_Function", exact = true)
  fun interface Function<I, O> {
-  @ObjCName("apply")
-  fun apply(
-   @ObjCName("withId") i: I
-  ): O
+  fun apply(i: I): O
  }
 }

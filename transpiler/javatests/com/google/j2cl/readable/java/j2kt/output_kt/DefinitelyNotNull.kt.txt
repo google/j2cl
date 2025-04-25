@@ -1,5 +1,4 @@
 // Generated from "j2kt/DefinitelyNotNull.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -22,18 +21,13 @@ import javaemul.lang.*
 import java.lang.RuntimeException
 import kotlin.Any
 import kotlin.Boolean
-import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
 import kotlin.collections.MutableIterable
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktDefinitelyNotNull", swiftName = "J2ktDefinitelyNotNull", exact = true)
 open class DefinitelyNotNull {
- @ObjCName("J2ktJ2ktDefinitelyNotNullCompanion", swiftName = "J2ktDefinitelyNotNullCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun testNotNullSupplier_pp_j2kt(supplier: NotNullSupplier<out String?>): String {
@@ -41,23 +35,15 @@ open class DefinitelyNotNull {
   }
 
   @JvmStatic
-  @ObjCName("testEquivalence")
-  fun <T> testEquivalence(
-   @ObjCName("withJ2ktDefinitelyNotNull_Equivalence", swiftName = "with") equivalence: Equivalence<in T & Any>,
-   @ObjCName("withId") a: T?,
-   @ObjCName("withId") b: T?
-  ): Boolean {
+  fun <T> testEquivalence(equivalence: Equivalence<in T & Any>, a: T?, b: T?): Boolean {
    return equivalence.equivalent(a, b)
   }
  }
 
- @ObjCName("J2ktJ2ktDefinitelyNotNull_NotNullSupplier", swiftName = "J2ktDefinitelyNotNull_NotNullSupplier", exact = true)
  fun interface NotNullSupplier<T> {
-  @ObjCName("getNotNull")
   fun getNotNull(): T & Any
  }
 
- @ObjCName("J2ktJ2ktDefinitelyNotNull_Ordering", swiftName = "J2ktDefinitelyNotNull_Ordering", exact = true)
  open class Ordering<T> internal constructor() {
   internal open fun <S: T> reverse_pp_j2kt(): Ordering<S> {
    throw RuntimeException()
@@ -67,7 +53,6 @@ open class DefinitelyNotNull {
    throw RuntimeException()
   }
 
-  @ObjCName("J2ktJ2ktDefinitelyNotNull_OrderingCompanion", swiftName = "J2ktDefinitelyNotNull_OrderingCompanion", exact = true)
   companion object {
    @JvmStatic
    internal fun <E> reversed_pp_j2kt(ordering: Ordering<in E>): Ordering<in E> {
@@ -76,7 +61,6 @@ open class DefinitelyNotNull {
   }
  }
 
- @ObjCName("J2ktJ2ktDefinitelyNotNull_NullsFirstOrdering", swiftName = "J2ktDefinitelyNotNull_NullsFirstOrdering", exact = true)
  inner class NullsFirstOrdering<T> constructor(ordering: Ordering<in T>): Ordering<T?>() {
   @JvmField
   internal val ordering_pp_j2kt: Ordering<in T>
@@ -86,44 +70,28 @@ open class DefinitelyNotNull {
   }
  }
 
- @ObjCName("J2ktJ2ktDefinitelyNotNull_ImmutableList", swiftName = "J2ktDefinitelyNotNull_ImmutableList", exact = true)
  open class ImmutableList<E: Any> {
-  @ObjCName("J2ktJ2ktDefinitelyNotNull_ImmutableListCompanion", swiftName = "J2ktDefinitelyNotNull_ImmutableListCompanion", exact = true)
   companion object {
    @JvmStatic
-   @ObjCName("copyOf")
-   fun <E: Any> copyOf(
-    @ObjCName("withJavaLangIterable", swiftName = "with") iterable: MutableIterable<E>
-   ): ImmutableList<E> {
+   fun <E: Any> copyOf(iterable: MutableIterable<E>): ImmutableList<E> {
     throw RuntimeException()
    }
 
    @JvmStatic
-   @ObjCName("copyOfNullableWithInvalidBounds")
-   fun <E> copyOfNullableWithInvalidBounds(
-    @ObjCName("withJavaLangIterable", swiftName = "with") iterable: MutableIterable<E>
-   ): ImmutableList<E & Any> {
+   fun <E> copyOfNullableWithInvalidBounds(iterable: MutableIterable<E>): ImmutableList<E & Any> {
     return ImmutableList.copyOf<E & Any>(
      iterable as MutableIterable<E & Any>,
     )
    }
 
    @JvmStatic
-   @ObjCName("copyOfNullableWithCorrectBounds")
-   fun <E> copyOfNullableWithCorrectBounds(
-    @ObjCName("withJavaLangIterable", swiftName = "with") iterable: MutableIterable<E & Any>
-   ): ImmutableList<E & Any> {
+   fun <E> copyOfNullableWithCorrectBounds(iterable: MutableIterable<E & Any>): ImmutableList<E & Any> {
     return ImmutableList.copyOf<E & Any>(iterable)
    }
   }
  }
 
- @ObjCName("J2ktJ2ktDefinitelyNotNull_Equivalence", swiftName = "J2ktDefinitelyNotNull_Equivalence", exact = true)
  fun interface Equivalence<T: Any> {
-  @ObjCName("equivalent")
-  fun equivalent(
-   @ObjCName("withId") a: T?,
-   @ObjCName("withId") b: T?
-  ): Boolean
+  fun equivalent(a: T?, b: T?): Boolean
  }
 }

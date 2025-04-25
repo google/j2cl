@@ -1,5 +1,4 @@
 // Generated from "assertsimple/AssertSimple.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -21,24 +20,16 @@ package assertsimple
 import javaemul.lang.*
 import kotlin.Any
 import kotlin.Array
-import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
 import kotlin.assert
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 import kotlin.run
 
-@ObjCName("J2ktAssertsimpleAssertSimple", swiftName = "AssertsimpleAssertSimple", exact = true)
 open class AssertSimple {
- @ObjCName("J2ktAssertsimpleAssertSimpleCompanion", swiftName = "AssertsimpleAssertSimpleCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("main")
-  fun main(
-   @ObjCName("withNSStringArray") args: Array<String?>?
-  ) {
+  fun main(args: Array<String?>?) {
    assert(1 + 2 == 3)
    assert(1 + 2 == 3) {
     "Error!"

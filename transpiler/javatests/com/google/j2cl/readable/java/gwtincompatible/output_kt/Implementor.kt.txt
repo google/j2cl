@@ -1,5 +1,4 @@
 // Generated from "gwtincompatible/Implementor.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -23,12 +22,8 @@ import gwtincompatible.Interface
 import gwtincompatible.Interface.ClassWithAbstractMethod
 import gwtincompatible.Interface.NestedInterface
 import kotlin.Int
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktGwtincompatibleImplementor", swiftName = "GwtincompatibleImplementor", exact = true)
 open class Implementor: ClassWithAbstractMethod(), Interface, NestedInterface {
  override fun incompatible() {}
 
@@ -36,18 +31,14 @@ open class Implementor: ClassWithAbstractMethod(), Interface, NestedInterface {
 
  override fun incompatibleFromClass() {}
 
- @ObjCName("compatibleMethod")
  open fun compatibleMethod() {
   val a: Int = 4
  }
 
- @ObjCName("J2ktGwtincompatibleImplementor_SomeEnum", swiftName = "GwtincompatibleImplementor_SomeEnum", exact = true)
  enum class SomeEnum {
-  @ObjCName("COMPATIBLE")
   COMPATIBLE {
    override fun method_pp_gwtincompatible() {}
   },
-  @ObjCName("INCOMPATIBLE")
   INCOMPATIBLE {
    override fun method_pp_gwtincompatible() {}
   };

@@ -1,5 +1,4 @@
 // Generated from "j2kt/TypeWildCards.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -20,16 +19,11 @@ package j2kt
 
 import javaemul.lang.*
 import kotlin.Any
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktTypeWildCards", swiftName = "J2ktTypeWildCards", exact = true)
 open class TypeWildCards internal constructor() {
- @ObjCName("J2ktJ2ktTypeWildCardsCompanion", swiftName = "J2ktTypeWildCardsCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun testSupplierWithUpperAndLowerBounds_pp_j2kt(supplier: SupplierWithUpperBound<in Child>) {
@@ -44,10 +38,7 @@ open class TypeWildCards internal constructor() {
   }
 
   @JvmStatic
-  @ObjCName("testObservable")
-  fun testObservable(
-   @ObjCName("withJ2ktTypeWildCards_Observable", swiftName = "with") observable: Observable<*>
-  ) {
+  fun testObservable(observable: Observable<*>) {
    (observable as Observable<Any?>).addObserver(
     Observer { e: Any? ->
     },
@@ -55,10 +46,7 @@ open class TypeWildCards internal constructor() {
   }
 
   @JvmStatic
-  @ObjCName("testObservableParameterized")
-  fun <T: Observable<*>> testObservableParameterized(
-   @ObjCName("withJ2ktTypeWildCards_Observable", swiftName = "with") observable: T
-  ) {
+  fun <T: Observable<*>> testObservableParameterized(observable: T) {
    (observable as Observable<Any?>).addObserver(
     Observer { e: Any? ->
     },
@@ -66,10 +54,7 @@ open class TypeWildCards internal constructor() {
   }
 
   @JvmStatic
-  @ObjCName("testSuperWildcardObservable")
-  fun testSuperWildcardObservable(
-   @ObjCName("withJ2ktTypeWildCards_SuperWildcardObservable", swiftName = "with") observable: SuperWildcardObservable<*>
-  ) {
+  fun testSuperWildcardObservable(observable: SuperWildcardObservable<*>) {
    (observable as SuperWildcardObservable<Any?>).addObserver(
     Observer { e: Any? ->
     },
@@ -77,10 +62,7 @@ open class TypeWildCards internal constructor() {
   }
 
   @JvmStatic
-  @ObjCName("testKtInObservable")
-  fun testKtInObservable(
-   @ObjCName("withJ2ktTypeWildCards_KtInObservable", swiftName = "with") observable: KtInObservable<*>
-  ) {
+  fun testKtInObservable(observable: KtInObservable<*>) {
    (observable as KtInObservable<Any?>).addObserver(
     KtInObserver { e: Any? ->
     },
@@ -88,90 +70,51 @@ open class TypeWildCards internal constructor() {
   }
 
   @JvmStatic
-  @ObjCName("testRecursiveObservable")
-  fun testRecursiveObservable(
-   @ObjCName("withJ2ktTypeWildCards_RecursiveObservable", swiftName = "with") observable: RecursiveObservable<*>
-  ) {}
+  fun testRecursiveObservable(observable: RecursiveObservable<*>) {}
  }
 
- @ObjCName("J2ktJ2ktTypeWildCards_Parent", swiftName = "J2ktTypeWildCards_Parent", exact = true)
  open class Parent internal constructor()
 
- @ObjCName("J2ktJ2ktTypeWildCards_Child", swiftName = "J2ktTypeWildCards_Child", exact = true)
  open class Child internal constructor(): Parent()
 
- @ObjCName("J2ktJ2ktTypeWildCards_SupplierWithUpperBound", swiftName = "J2ktTypeWildCards_SupplierWithUpperBound", exact = true)
  fun interface SupplierWithUpperBound<T: Parent> {
-  @ObjCName("get")
   fun get(): T
  }
 
- @ObjCName("J2ktJ2ktTypeWildCards_Observer", swiftName = "J2ktTypeWildCards_Observer", exact = true)
  fun interface Observer<E> {
-  @ObjCName("on")
-  fun on(
-   @ObjCName("withId") event: E
-  )
+  fun on(event: E)
  }
 
- @ObjCName("J2ktJ2ktTypeWildCards_KtInObserver", swiftName = "J2ktTypeWildCards_KtInObserver", exact = true)
  fun interface KtInObserver<in E> {
-  @ObjCName("on")
-  fun on(
-   @ObjCName("withId") event: E
-  )
+  fun on(event: E)
  }
 
- @ObjCName("J2ktJ2ktTypeWildCards_Observable", swiftName = "J2ktTypeWildCards_Observable", exact = true)
  fun interface Observable<E> {
-  @ObjCName("addObserver")
-  fun addObserver(
-   @ObjCName("withJ2ktTypeWildCards_Observer", swiftName = "with") observer: Observer<E>
-  )
+  fun addObserver(observer: Observer<E>)
  }
 
- @ObjCName("J2ktJ2ktTypeWildCards_SuperWildcardObservable", swiftName = "J2ktTypeWildCards_SuperWildcardObservable", exact = true)
  fun interface SuperWildcardObservable<E> {
-  @ObjCName("addObserver")
-  fun addObserver(
-   @ObjCName("withJ2ktTypeWildCards_Observer", swiftName = "with") observer: Observer<in E?>
-  )
+  fun addObserver(observer: Observer<in E?>)
  }
 
- @ObjCName("J2ktJ2ktTypeWildCards_KtInObservable", swiftName = "J2ktTypeWildCards_KtInObservable", exact = true)
  fun interface KtInObservable<E> {
-  @ObjCName("addObserver")
-  fun addObserver(
-   @ObjCName("withJ2ktTypeWildCards_KtInObserver", swiftName = "with") observer: KtInObserver<E>
-  )
+  fun addObserver(observer: KtInObserver<E>)
  }
 
- @ObjCName("J2ktJ2ktTypeWildCards_RecursiveObservable", swiftName = "J2ktTypeWildCards_RecursiveObservable", exact = true)
  fun interface RecursiveObservable<E: RecursiveObservable<E>> {
-  @ObjCName("addObserver")
-  fun addObserver(
-   @ObjCName("withJ2ktTypeWildCards_Observer", swiftName = "with") observer: Observer<E>
-  )
+  fun addObserver(observer: Observer<E>)
  }
 
- @ObjCName("J2ktJ2ktTypeWildCards_WithoutBounds", swiftName = "J2ktTypeWildCards_WithoutBounds", exact = true)
  open class WithoutBounds internal constructor() {
-  @ObjCName("J2ktJ2ktTypeWildCards_WithoutBoundsCompanion", swiftName = "J2ktTypeWildCards_WithoutBoundsCompanion", exact = true)
   companion object {
    @JvmStatic
-   @ObjCName("testSetField")
-   fun testSetField(
-    @ObjCName("withJ2ktTypeWildCards_WithoutBounds_Holder", swiftName = "with") holder: Holder<*>
-   ) {
+   fun testSetField(holder: Holder<*>) {
     (holder as Holder<Any?>).observer_pp_j2kt = Observer { e: Any? ->
     }
    }
 
    @JvmStatic
-   @ObjCName("testSetMethod")
-   fun testSetMethod(
-    @ObjCName("withJ2ktTypeWildCards_WithoutBounds_Holder", swiftName = "with") holder: Holder<*>
-   ) {
+   fun testSetMethod(holder: Holder<*>) {
     (holder as Holder<Any?>).set_pp_j2kt(
      Observer { e: Any? ->
      },
@@ -179,10 +122,7 @@ open class TypeWildCards internal constructor() {
    }
 
    @JvmStatic
-   @ObjCName("testSetStaticMethod")
-   fun testSetStaticMethod(
-    @ObjCName("withJ2ktTypeWildCards_WithoutBounds_Holder", swiftName = "with") holder: Holder<*>
-   ) {
+   fun testSetStaticMethod(holder: Holder<*>) {
     Holder.setStatic_pp_j2kt(
      holder,
      Observer { e: Any? ->
@@ -191,22 +131,16 @@ open class TypeWildCards internal constructor() {
    }
   }
 
-  @ObjCName("J2ktJ2ktTypeWildCards_WithoutBounds_Observer", swiftName = "J2ktTypeWildCards_WithoutBounds_Observer", exact = true)
   fun interface Observer<E> {
-   @ObjCName("on")
-   fun on(
-    @ObjCName("withId") event: E
-   )
+   fun on(event: E)
   }
 
-  @ObjCName("J2ktJ2ktTypeWildCards_WithoutBounds_Holder", swiftName = "J2ktTypeWildCards_WithoutBounds_Holder", exact = true)
   open class Holder<E> internal constructor() {
    @JvmField
    internal var observer_pp_j2kt: Observer<E>? = null
 
    internal open fun set_pp_j2kt(observer: Observer<E>) {}
 
-   @ObjCName("J2ktJ2ktTypeWildCards_WithoutBounds_HolderCompanion", swiftName = "J2ktTypeWildCards_WithoutBounds_HolderCompanion", exact = true)
    companion object {
     @JvmStatic
     internal fun <E> setStatic_pp_j2kt(holder: Holder<E>, observer: Observer<E>) {}
@@ -214,24 +148,16 @@ open class TypeWildCards internal constructor() {
   }
  }
 
- @ObjCName("J2ktJ2ktTypeWildCards_WithBounds", swiftName = "J2ktTypeWildCards_WithBounds", exact = true)
  open class WithBounds internal constructor() {
-  @ObjCName("J2ktJ2ktTypeWildCards_WithBoundsCompanion", swiftName = "J2ktTypeWildCards_WithBoundsCompanion", exact = true)
   companion object {
    @JvmStatic
-   @ObjCName("testSetField")
-   fun testSetField(
-    @ObjCName("withJ2ktTypeWildCards_WithBounds_Holder", swiftName = "with") holder: Holder<*>
-   ) {
+   fun testSetField(holder: Holder<*>) {
     (holder as Holder<Event>).observer_pp_j2kt = Observer { e: Event ->
     }
    }
 
    @JvmStatic
-   @ObjCName("testSetMethod")
-   fun testSetMethod(
-    @ObjCName("withJ2ktTypeWildCards_WithBounds_Holder", swiftName = "with") holder: Holder<*>
-   ) {
+   fun testSetMethod(holder: Holder<*>) {
     (holder as Holder<Event>).set_pp_j2kt(
      Observer { e: Event ->
      },
@@ -239,10 +165,7 @@ open class TypeWildCards internal constructor() {
    }
 
    @JvmStatic
-   @ObjCName("testSetStaticMethod")
-   fun testSetStaticMethod(
-    @ObjCName("withJ2ktTypeWildCards_WithBounds_Holder", swiftName = "with") holder: Holder<*>
-   ) {
+   fun testSetStaticMethod(holder: Holder<*>) {
     Holder.setStatic_pp_j2kt(
      holder,
      Observer { e: Event ->
@@ -251,25 +174,18 @@ open class TypeWildCards internal constructor() {
    }
   }
 
-  @ObjCName("J2ktJ2ktTypeWildCards_WithBounds_Event", swiftName = "J2ktTypeWildCards_WithBounds_Event", exact = true)
   interface Event
 
-  @ObjCName("J2ktJ2ktTypeWildCards_WithBounds_Observer", swiftName = "J2ktTypeWildCards_WithBounds_Observer", exact = true)
   fun interface Observer<E: Event> {
-   @ObjCName("on")
-   fun on(
-    @ObjCName("withJ2ktTypeWildCards_WithBounds_Event", swiftName = "with") event: E
-   )
+   fun on(event: E)
   }
 
-  @ObjCName("J2ktJ2ktTypeWildCards_WithBounds_Holder", swiftName = "J2ktTypeWildCards_WithBounds_Holder", exact = true)
   open class Holder<E: Event> internal constructor() {
    @JvmField
    internal var observer_pp_j2kt: Observer<E>? = null
 
    internal open fun set_pp_j2kt(observer: Observer<E>) {}
 
-   @ObjCName("J2ktJ2ktTypeWildCards_WithBounds_HolderCompanion", swiftName = "J2ktTypeWildCards_WithBounds_HolderCompanion", exact = true)
    companion object {
     @JvmStatic
     internal fun <E: Event> setStatic_pp_j2kt(holder: Holder<E>, observer: Observer<E>) {}
@@ -277,24 +193,16 @@ open class TypeWildCards internal constructor() {
   }
  }
 
- @ObjCName("J2ktJ2ktTypeWildCards_WithDependentBounds", swiftName = "J2ktTypeWildCards_WithDependentBounds", exact = true)
  open class WithDependentBounds internal constructor() {
-  @ObjCName("J2ktJ2ktTypeWildCards_WithDependentBoundsCompanion", swiftName = "J2ktTypeWildCards_WithDependentBoundsCompanion", exact = true)
   companion object {
    @JvmStatic
-   @ObjCName("testSetField")
-   fun testSetField(
-    @ObjCName("withJ2ktTypeWildCards_WithDependentBounds_Holder", swiftName = "with") holder: Holder<*, *>
-   ) {
+   fun testSetField(holder: Holder<*, *>) {
     (holder as Holder<Event, Collection<Event>>).observer_pp_j2kt = Observer { e: Collection<out Event> ->
     }
    }
 
    @JvmStatic
-   @ObjCName("testSetMethod")
-   fun testSetMethod(
-    @ObjCName("withJ2ktTypeWildCards_WithDependentBounds_Holder", swiftName = "with") holder: Holder<*, *>
-   ) {
+   fun testSetMethod(holder: Holder<*, *>) {
     (holder as Holder<Event, Collection<Event>>).set_pp_j2kt(
      Observer { e: Collection<out Event> ->
      },
@@ -302,10 +210,7 @@ open class TypeWildCards internal constructor() {
    }
 
    @JvmStatic
-   @ObjCName("testSetStaticMethod")
-   fun testSetStaticMethod(
-    @ObjCName("withJ2ktTypeWildCards_WithDependentBounds_Holder", swiftName = "with") holder: Holder<*, *>
-   ) {
+   fun testSetStaticMethod(holder: Holder<*, *>) {
     Holder.setStatic_pp_j2kt(
      holder,
      Observer { e: Collection<out Event> ->
@@ -314,28 +219,20 @@ open class TypeWildCards internal constructor() {
    }
   }
 
-  @ObjCName("J2ktJ2ktTypeWildCards_WithDependentBounds_Event", swiftName = "J2ktTypeWildCards_WithDependentBounds_Event", exact = true)
   interface Event
 
-  @ObjCName("J2ktJ2ktTypeWildCards_WithDependentBounds_Collection", swiftName = "J2ktTypeWildCards_WithDependentBounds_Collection", exact = true)
   interface Collection<V>
 
-  @ObjCName("J2ktJ2ktTypeWildCards_WithDependentBounds_Observer", swiftName = "J2ktTypeWildCards_WithDependentBounds_Observer", exact = true)
   fun interface Observer<E: Event, C: Collection<E>> {
-   @ObjCName("on")
-   fun on(
-    @ObjCName("withJ2ktTypeWildCards_WithDependentBounds_Collection", swiftName = "with") events: C
-   )
+   fun on(events: C)
   }
 
-  @ObjCName("J2ktJ2ktTypeWildCards_WithDependentBounds_Holder", swiftName = "J2ktTypeWildCards_WithDependentBounds_Holder", exact = true)
   open class Holder<E: Event, C: Collection<E>> internal constructor() {
    @JvmField
    internal var observer_pp_j2kt: Observer<E, C>? = null
 
    internal open fun set_pp_j2kt(observer: Observer<E, C>) {}
 
-   @ObjCName("J2ktJ2ktTypeWildCards_WithDependentBounds_HolderCompanion", swiftName = "J2ktTypeWildCards_WithDependentBounds_HolderCompanion", exact = true)
    companion object {
     @JvmStatic
     internal fun <E: Event, C: Collection<E>> setStatic_pp_j2kt(holder: Holder<E, C>, observer: Observer<E, C>) {}

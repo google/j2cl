@@ -48,6 +48,7 @@ def readable_example(
         generate_kt_web_readables = False,
         build_kt_readables = True,
         build_kt_native_readables = True,
+        j2kt_j2objc_interop_enabled = False,
         **kwargs):
     """Macro that confirms the JS compilability of some transpiled Java.
 
@@ -86,6 +87,7 @@ def readable_example(
         generate_j2kt_jvm_library = None if generate_kt_readables else False,
         generate_j2kt_native_library = None if build_kt_native_readables else False,
         generate_j2wasm_library = None if generate_wasm_readables else False,
+        j2kt_j2objc_interop_enabled = j2kt_j2objc_interop_enabled,
         **kwargs
     )
 

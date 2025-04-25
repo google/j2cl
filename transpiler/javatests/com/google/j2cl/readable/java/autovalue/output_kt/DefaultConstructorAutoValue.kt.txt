@@ -1,5 +1,4 @@
 // Generated from "autovalue/DefaultConstructorAutoValue.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -21,21 +20,15 @@ package autovalue
 import javaemul.lang.*
 import javaemul.lang.annotations.WasAutoValue
 import kotlin.Boolean
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktAutovalueDefaultConstructorAutoValue", swiftName = "AutovalueDefaultConstructorAutoValue", exact = true)
 @WasAutoValue
 abstract class DefaultConstructorAutoValue {
  internal constructor()
 
- @ObjCName("getBooleanField")
  abstract fun getBooleanField(): Boolean
 
- @ObjCName("J2ktAutovalueDefaultConstructorAutoValueCompanion", swiftName = "AutovalueDefaultConstructorAutoValueCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun create_pp_autovalue(): DefaultConstructorAutoValue? {
@@ -43,14 +36,12 @@ abstract class DefaultConstructorAutoValue {
   }
  }
 
- @ObjCName("J2ktAutovalueDefaultConstructorAutoValue_Builder", swiftName = "AutovalueDefaultConstructorAutoValue_Builder", exact = true)
  @javaemul.lang.annotations.WasAutoValue.Builder
  abstract class Builder {
   constructor()
 
   internal abstract fun setBooleanField_pp_autovalue(x: Boolean): Builder?
 
-  @ObjCName("build")
   abstract fun build(): DefaultConstructorAutoValue?
  }
 }

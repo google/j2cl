@@ -1,5 +1,4 @@
 // Generated from "j2ktnotpassing/TypeWildCards.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -20,21 +19,13 @@ package j2ktnotpassing
 
 import javaemul.lang.*
 import kotlin.Any
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktnotpassingTypeWildCards", swiftName = "J2ktnotpassingTypeWildCards", exact = true)
 open class TypeWildCards {
- @ObjCName("J2ktJ2ktnotpassingTypeWildCardsCompanion", swiftName = "J2ktnotpassingTypeWildCardsCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("testObservableParameterized")
-  fun <T: Observable<*>> testObservableParameterized(
-   @ObjCName("withJ2ktnotpassingTypeWildCards_Observable", swiftName = "with") observable: T
-  ) {
+  fun <T: Observable<*>> testObservableParameterized(observable: T) {
    (observable as Observable<Any?>).addObserver(
     Observer { e: Any? ->
     },
@@ -42,10 +33,7 @@ open class TypeWildCards {
   }
 
   @JvmStatic
-  @ObjCName("testRecursiveObservable")
-  fun testRecursiveObservable(
-   @ObjCName("withJ2ktnotpassingTypeWildCards_RecursiveObservable", swiftName = "with") observable: RecursiveObservable<*>
-  ) {
+  fun testRecursiveObservable(observable: RecursiveObservable<*>) {
    (observable as RecursiveObservable<RecursiveObservable<E>>).addObserver(
     Observer { e ->
     },
@@ -53,27 +41,15 @@ open class TypeWildCards {
   }
  }
 
- @ObjCName("J2ktJ2ktnotpassingTypeWildCards_Observer", swiftName = "J2ktnotpassingTypeWildCards_Observer", exact = true)
  fun interface Observer<E> {
-  @ObjCName("on")
-  fun on(
-   @ObjCName("withId") event: E
-  )
+  fun on(event: E)
  }
 
- @ObjCName("J2ktJ2ktnotpassingTypeWildCards_Observable", swiftName = "J2ktnotpassingTypeWildCards_Observable", exact = true)
  fun interface Observable<E> {
-  @ObjCName("addObserver")
-  fun addObserver(
-   @ObjCName("withJ2ktnotpassingTypeWildCards_Observer", swiftName = "with") observer: Observer<E>
-  )
+  fun addObserver(observer: Observer<E>)
  }
 
- @ObjCName("J2ktJ2ktnotpassingTypeWildCards_RecursiveObservable", swiftName = "J2ktnotpassingTypeWildCards_RecursiveObservable", exact = true)
  fun interface RecursiveObservable<E: RecursiveObservable<E>> {
-  @ObjCName("addObserver")
-  fun addObserver(
-   @ObjCName("withJ2ktnotpassingTypeWildCards_Observer", swiftName = "with") observer: Observer<E>
-  )
+  fun addObserver(observer: Observer<E>)
  }
 }

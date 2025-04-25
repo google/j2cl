@@ -1,5 +1,4 @@
 // Generated from "simplegenericinterface/SimpleGenericInterface.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -19,15 +18,8 @@
 package simplegenericinterface
 
 import javaemul.lang.*
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktSimplegenericinterfaceSimpleGenericInterface", swiftName = "SimplegenericinterfaceSimpleGenericInterface", exact = true)
 fun interface SimpleGenericInterface<T> {
- @ObjCName("fun")
- fun `fun`(
-  @ObjCName("withId") t: T
- ): T
+ fun `fun`(t: T): T
 }

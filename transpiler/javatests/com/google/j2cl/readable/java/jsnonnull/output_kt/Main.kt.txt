@@ -1,5 +1,4 @@
 // Generated from "jsnonnull/Main.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -28,15 +27,11 @@ import kotlin.Any
 import kotlin.Array
 import kotlin.Double
 import kotlin.Int
-import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
 import kotlin.arrayOf
 import kotlin.collections.MutableList
-import kotlin.experimental.ExperimentalObjCName
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktJsnonnullMain", swiftName = "JsnonnullMain", exact = true)
 open class Main {
  private var f1: String = "Hello"
 
@@ -59,87 +54,56 @@ open class Main {
  private var f12: MutableList<String?>? = ArrayList<String>() as MutableList<String?>?
 
  @JsConstructor
- constructor(
-  @ObjCName("NSString") a: String
- )
+ constructor(a: String)
 
- @ObjCName("m1")
- open fun m1(
-  @ObjCName("withNSString", swiftName = "with") a: String,
-  @ObjCName("withJavaUtilList", swiftName = "with") b: MutableList<Double>,
-  @ObjCName("withNSString", swiftName = "with") c: String?
- ): String {
+ open fun m1(a: String, b: MutableList<Double>, c: String?): String {
   return ""
  }
 
- @ObjCName("m2")
- open fun m2(
-  @ObjCName("withNSString", swiftName = "with") a: String?,
-  @ObjCName("withJavaUtilList", swiftName = "with") b: MutableList<Double>
- ): String? {
+ open fun m2(a: String?, b: MutableList<Double>): String? {
   return ""
  }
 
- @ObjCName("m3")
  @JsMethod
- open fun m3(
-  @ObjCName("withNSString", swiftName = "with") a: String,
-  vararg @ObjCName("withNSStringArray") args: String
- ): String? {
+ open fun m3(a: String, vararg args: String): String? {
   val args_1: Array<String>? = args as Array<String>?
   return null
  }
 
- @ObjCName("m4")
- open fun m4(
-  @ObjCName("withJsnonnullMain_MyFunction", swiftName = "with") f: MyFunction
- ) {}
+ open fun m4(f: MyFunction) {}
 
- @ObjCName("J2ktJsnonnullMain_MyFunction", swiftName = "JsnonnullMain_MyFunction", exact = true)
  @JsFunction
  fun interface MyFunction {
-  @ObjCName("x")
-  fun x(
-   @ObjCName("withNSString", swiftName = "with") a: String
-  ): String
+  fun x(a: String): String
  }
 
- @ObjCName("J2ktJsnonnullMain_StringComparator", swiftName = "JsnonnullMain_StringComparator", exact = true)
  open class StringComparator: Comparator<String> {
   override fun compare(a: String, b: String): Int {
    return 0
   }
  }
 
- @ObjCName("J2ktJsnonnullMain_NullableStringComparator", swiftName = "JsnonnullMain_NullableStringComparator", exact = true)
  open class NullableStringComparator: Comparator<String?> {
   override fun compare(a: String?, b: String?): Int {
    return 0
   }
  }
 
- @ObjCName("J2ktJsnonnullMain_NonNullableStringSubNullableComparator", swiftName = "JsnonnullMain_NonNullableStringSubNullableComparator", exact = true)
  open class NonNullableStringSubNullableComparator: NullableStringComparator() {
   override fun compare(a: String?, b: String?): Int {
    return 0
   }
  }
 
- @ObjCName("J2ktJsnonnullMain_NonNullableTemplatedReturn", swiftName = "JsnonnullMain_NonNullableTemplatedReturn", exact = true)
  interface NonNullableTemplatedReturn<T> {
-  @ObjCName("get")
   fun get(): T & Any
 
-  @ObjCName("getArray")
   fun getArray(): Array<T & Any>?
  }
 
- @ObjCName("J2ktJsnonnullMain_NonNullableTemplate", swiftName = "JsnonnullMain_NonNullableTemplate", exact = true)
  interface NonNullableTemplate<T: Any> {
-  @ObjCName("get")
   fun get(): T
 
-  @ObjCName("getArray")
   fun getArray(): Array<T>?
  }
 }

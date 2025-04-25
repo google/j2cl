@@ -1,5 +1,4 @@
 // Generated from "nullability/defaultnotnullable/DefaultNotNullable.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -28,17 +27,13 @@ import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
 import kotlin.Double
-import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
 import kotlin.arrayOf
 import kotlin.collections.MutableList
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullable", swiftName = "NullabilityDefaultnotnullableDefaultNotNullable", exact = true)
 open class DefaultNotNullable {
  private var f1: String = "Hello"
 
@@ -72,36 +67,21 @@ open class DefaultNotNullable {
   this.f13 = Any()
  }
 
- @ObjCName("m1")
- open fun m1(
-  @ObjCName("withNSString", swiftName = "with") a: String,
-  @ObjCName("withJavaUtilList", swiftName = "with") b: MutableList<Double>
- ): String {
+ open fun m1(a: String, b: MutableList<Double>): String {
   return ""
  }
 
- @ObjCName("m2")
- open fun m2(
-  @ObjCName("withNSString", swiftName = "with") a: String?,
-  @ObjCName("withJavaUtilList", swiftName = "with") b: MutableList<Double?>
- ): String? {
+ open fun m2(a: String?, b: MutableList<Double?>): String? {
   return null
  }
 
- @ObjCName("m3")
  @JsMethod
- open fun m3(
-  vararg @ObjCName("withNSStringArray") args: String
- ) {
+ open fun m3(vararg args: String) {
   val args_1: Array<String> = args as Array<String>
  }
 
- @ObjCName("m4")
  @JsMethod
- open fun m4(
-  @ObjCName("withNSString", swiftName = "with") a: String,
-  @ObjCName("withNSString", swiftName = "with") @JsOptional optional: String?
- ): String {
+ open fun m4(a: String, @JsOptional optional: String?): String {
   return null!!
  }
 
@@ -109,7 +89,6 @@ open class DefaultNotNullable {
 
  internal open fun <T: NonNullableBound<T>> methodWithNonNullableBound_pp_nullability_defaultnotnullable() {}
 
- @ObjCName("casts")
  open fun casts() {
   val listOfString: MutableList<String>? = null as MutableList<String>?
   val nullableListOfString: MutableList<String>? = null as MutableList<String>?
@@ -120,7 +99,6 @@ open class DefaultNotNullable {
   val nonNullListOfNonNullString: MutableList<String>? = null as MutableList<String>?
  }
 
- @ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullableCompanion", swiftName = "NullabilityDefaultnotnullableDefaultNotNullableCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun <N> genericNullableMethod_pp_nullability_defaultnotnullable(o: ParameterizedNullable<N>, n: N?) {
@@ -336,20 +314,12 @@ open class DefaultNotNullable {
   }
  }
 
- @ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullable_ParameterizedInterface", swiftName = "NullabilityDefaultnotnullableDefaultNotNullable_ParameterizedInterface", exact = true)
  interface ParameterizedInterface<T: Any> {
-  @ObjCName("add")
-  fun add(
-   @ObjCName("withId") t: T
-  ): T
+  fun add(t: T): T
 
-  @ObjCName("nullableAdd")
-  fun nullableAdd(
-   @ObjCName("withId") t: T?
-  ): T?
+  fun nullableAdd(t: T?): T?
  }
 
- @ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullable_ImplementsParameterizedInterface", swiftName = "NullabilityDefaultnotnullableDefaultNotNullable_ImplementsParameterizedInterface", exact = true)
  open inner class ImplementsParameterizedInterface internal constructor(): ParameterizedInterface<String> {
   override fun add(s: String): String {
    return "Hey"
@@ -360,25 +330,18 @@ open class DefaultNotNullable {
   }
  }
 
- @ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullable_NullableBound", swiftName = "NullabilityDefaultnotnullableDefaultNotNullable_NullableBound", exact = true)
  interface NullableBound<T: NullableBound<T>?>
 
- @ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullable_NonNullableBound", swiftName = "NullabilityDefaultnotnullableDefaultNotNullable_NonNullableBound", exact = true)
  interface NonNullableBound<T: NonNullableBound<T>>
 
- @ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullable_NullableBoundWithNonNullArgument", swiftName = "NullabilityDefaultnotnullableDefaultNotNullable_NullableBoundWithNonNullArgument", exact = true)
  interface NullableBoundWithNonNullArgument: NullableBound<NullableBoundWithNonNullArgument>
 
- @ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullable_NullableBoundWithNullableArgument", swiftName = "NullabilityDefaultnotnullableDefaultNotNullable_NullableBoundWithNullableArgument", exact = true)
  interface NullableBoundWithNullableArgument: NullableBound<NullableBoundWithNullableArgument?>
 
- @ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullable_NonNullBoundWithNonNullArgument", swiftName = "NullabilityDefaultnotnullableDefaultNotNullable_NonNullBoundWithNonNullArgument", exact = true)
  interface NonNullBoundWithNonNullArgument: NonNullableBound<NonNullBoundWithNonNullArgument>
 
- @ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullable_NonNullBoundWithNullableArgument", swiftName = "NullabilityDefaultnotnullableDefaultNotNullable_NonNullBoundWithNullableArgument", exact = true)
  interface NonNullBoundWithNullableArgument: NonNullableBound<NonNullBoundWithNullableArgument>
 
- @ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullable_ParameterizedDefaultNullability", swiftName = "NullabilityDefaultnotnullableDefaultNotNullable_ParameterizedDefaultNullability", exact = true)
  open class ParameterizedDefaultNullability<N: Any> {
   @JvmField
   internal var nullable_pp_nullability_defaultnotnullable: N? = null
@@ -416,7 +379,6 @@ open class DefaultNotNullable {
   internal open fun jsOptional_pp_nullability_defaultnotnullable(a: String, @JsOptional optional: N?) {}
  }
 
- @ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullable_ParameterizedNullable", swiftName = "NullabilityDefaultnotnullableDefaultNotNullable_ParameterizedNullable", exact = true)
  open class ParameterizedNullable<N> {
   @JvmField
   internal var nullable_pp_nullability_defaultnotnullable: N? = null
@@ -451,7 +413,6 @@ open class DefaultNotNullable {
   internal open fun setDefaultNullability_pp_nullability_defaultnotnullable(n: N) {}
  }
 
- @ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullable_ParameterizedNonNullable", swiftName = "NullabilityDefaultnotnullableDefaultNotNullable_ParameterizedNonNullable", exact = true)
  open class ParameterizedNonNullable<N: Any> {
   @JvmField
   internal var nullable_pp_nullability_defaultnotnullable: N? = null
@@ -486,11 +447,7 @@ open class DefaultNotNullable {
   internal open fun setDefaultNullability_pp_nullability_defaultnotnullable(n: N) {}
  }
 
- @ObjCName("J2ktNullabilityDefaultnotnullableDefaultNotNullable_Consumer", swiftName = "NullabilityDefaultnotnullableDefaultNotNullable_Consumer", exact = true)
  fun interface Consumer<T> {
-  @ObjCName("accept")
-  fun accept(
-   @ObjCName("withId") t: T
-  )
+  fun accept(t: T)
  }
 }

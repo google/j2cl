@@ -1,5 +1,4 @@
 // Generated from "j2kt/NullabilityInferenceProblem2.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -20,25 +19,15 @@ package j2kt
 
 import javaemul.lang.*
 import java.lang.RuntimeException
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktNullabilityInferenceProblem2", swiftName = "J2ktNullabilityInferenceProblem2", exact = true)
 open class NullabilityInferenceProblem2 {
- @ObjCName("J2ktJ2ktNullabilityInferenceProblem2_Supplier", swiftName = "J2ktNullabilityInferenceProblem2_Supplier", exact = true)
  fun interface Supplier<T> {
-  @ObjCName("get")
   fun get(): T
  }
 
- @ObjCName("J2ktJ2ktNullabilityInferenceProblem2_Test", swiftName = "J2ktNullabilityInferenceProblem2_Test", exact = true)
  abstract inner class Test<T> {
-  @ObjCName("foo")
-  open fun <E: T> foo(
-   @ObjCName("withJ2ktNullabilityInferenceProblem2_Supplier", swiftName = "with") supplier: Supplier<E>
-  ): E {
+  open fun <E: T> foo(supplier: Supplier<E>): E {
    val local: E? = supplier.get()
    return this.foo<E>(
     local as E,
@@ -46,11 +35,7 @@ open class NullabilityInferenceProblem2 {
    )
   }
 
-  @ObjCName("foo")
-  open fun <E: T> foo(
-   @ObjCName("withId") a: E,
-   @ObjCName("withId") b: E
-  ): E {
+  open fun <E: T> foo(a: E, b: E): E {
    throw RuntimeException()
   }
  }

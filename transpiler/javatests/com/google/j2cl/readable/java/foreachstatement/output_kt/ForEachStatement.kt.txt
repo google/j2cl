@@ -1,5 +1,4 @@
 // Generated from "foreachstatement/ForEachStatement.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -29,23 +28,16 @@ import kotlin.Int
 import kotlin.IntArray
 import kotlin.Long
 import kotlin.Number
-import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
 import kotlin.Throwable
 import kotlin.arrayOfNulls
 import kotlin.collections.MutableIterable
 import kotlin.collections.MutableIterator
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.Throws
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktForeachstatementForEachStatement", swiftName = "ForeachstatementForEachStatement", exact = true)
 open class ForEachStatement {
- @ObjCName("test")
- open fun test(
-  @ObjCName("withJavaLangIterable", swiftName = "with") iterable: MutableIterable<Throwable?>?
- ) {
+ open fun test(iterable: MutableIterable<Throwable?>?) {
   for (t in iterable!!) {
    t!!.toString()
   }
@@ -125,46 +117,39 @@ open class ForEachStatement {
   for (s in i!!) {}
  }
 
- @ObjCName("J2ktForeachstatementForEachStatement_Exception1", swiftName = "ForeachstatementForEachStatement_Exception1", exact = true)
  open class Exception1 internal constructor(): java.lang.Exception(), MutableIterableJvm<Number?> {
   override fun iterator(): MutableIterator<Number?> {
    return null!!
   }
  }
 
- @ObjCName("J2ktForeachstatementForEachStatement_Exception2", swiftName = "ForeachstatementForEachStatement_Exception2", exact = true)
  open class Exception2 internal constructor(): java.lang.Exception(), MutableIterableJvm<Int?> {
   override fun iterator(): MutableIterator<Int?> {
    return null!!
   }
  }
 
- @ObjCName("J2ktForeachstatementForEachStatement_Exception3", swiftName = "ForeachstatementForEachStatement_Exception3", exact = true)
  open class Exception3 internal constructor(): java.lang.Exception(), MutableIterableJvm<Int> {
   override fun iterator(): MutableIterator<Int> {
    return null!!
   }
  }
 
- @ObjCName("J2ktForeachstatementForEachStatement_Exception4", swiftName = "ForeachstatementForEachStatement_Exception4", exact = true)
  open class Exception4 internal constructor(): java.lang.Exception(), MutableIterableJvm<Any?> {
   override fun iterator(): MutableIterator<Any?> {
    return null!!
   }
  }
 
- @ObjCName("J2ktForeachstatementForEachStatement_IterableReturningTypeVariable", swiftName = "ForeachstatementForEachStatement_IterableReturningTypeVariable", exact = true)
  open class IterableReturningTypeVariable<U, T: MutableIterator<Int?>> internal constructor(): MutableIterableJvm<Int?> {
   override fun iterator(): T {
    return null!!
   }
  }
 
- @ObjCName("J2ktForeachstatementForEachStatement_StringIterable", swiftName = "ForeachstatementForEachStatement_StringIterable", exact = true)
  fun interface StringIterable: MutableIterableJvm<String?> {
   override fun iterator(): StringIterator
  }
 
- @ObjCName("J2ktForeachstatementForEachStatement_StringIterator", swiftName = "ForeachstatementForEachStatement_StringIterator", exact = true)
  interface StringIterator: JavaIterator<String?>
 }

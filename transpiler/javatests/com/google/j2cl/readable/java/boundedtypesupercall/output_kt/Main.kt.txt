@@ -1,5 +1,4 @@
 // Generated from "boundedtypesupercall/Main.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -20,31 +19,20 @@ package boundedtypesupercall
 
 import javaemul.lang.*
 import kotlin.Comparable
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktBoundedtypesupercallMain", swiftName = "BoundedtypesupercallMain", exact = true)
 open class Main {
- @ObjCName("J2ktBoundedtypesupercallMain_Foo", swiftName = "BoundedtypesupercallMain_Foo", exact = true)
  abstract class Foo<T> {
-  constructor(
-   @ObjCName("Id") foo: T
-  )
+  constructor(foo: T)
 
-  @ObjCName("foo")
   abstract fun foo()
  }
 
- @ObjCName("J2ktBoundedtypesupercallMain_Bar", swiftName = "BoundedtypesupercallMain_Bar", exact = true)
  open class Bar<T: Comparable<*>?> {
-  @ObjCName("getSomething")
   open fun getSomething(): T {
    return null as T
   }
 
-  @ObjCName("doSomething")
   open fun doSomething(): Foo<T>? {
    return object : Foo<T>(
     this@Bar.getSomething(),

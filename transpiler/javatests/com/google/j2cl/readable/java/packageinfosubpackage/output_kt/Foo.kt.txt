@@ -1,5 +1,4 @@
 // Generated from "packageinfosubpackage/Foo.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -20,16 +19,11 @@ package packageinfosubpackage
 
 import javaemul.lang.*
 import jsinterop.annotations.JsType
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktPackageinfosubpackageFoo", swiftName = "PackageinfosubpackageFoo", exact = true)
 open class Foo {
  private var nativeBar: NativeBar? = NativeBar()
 
- @ObjCName("J2ktPackageinfosubpackageFoo_NativeBar", swiftName = "PackageinfosubpackageFoo_NativeBar", exact = true)
  @JsType(name = "Bar", namespace = "packageinfosubpackage.subpackage", isNative = true)
  open class NativeBar {
   constructor()

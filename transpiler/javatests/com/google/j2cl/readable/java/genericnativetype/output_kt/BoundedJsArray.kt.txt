@@ -1,5 +1,4 @@
 // Generated from "genericnativetype/BoundedJsArray.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -23,21 +22,15 @@ import jsinterop.annotations.JsOverlay
 import jsinterop.annotations.JsPackage
 import jsinterop.annotations.JsType
 import kotlin.Int
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktGenericnativetypeBoundedJsArray", swiftName = "GenericnativetypeBoundedJsArray", exact = true)
 @JsType(name = "Array", namespace = JsPackage.GLOBAL, isNative = true)
 open class BoundedJsArray<V> {
  private constructor(size: Int)
 
- @ObjCName("J2ktGenericnativetypeBoundedJsArrayCompanion", swiftName = "GenericnativetypeBoundedJsArrayCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("create")
   @JsOverlay
   fun <V_1> create(): BoundedJsArray<V_1>? {
    val array: BoundedJsArray<V_1>? = null
@@ -45,11 +38,8 @@ open class BoundedJsArray<V> {
   }
 
   @JvmStatic
-  @ObjCName("create")
   @JsOverlay
-  fun <V_1> create(
-   @ObjCName("withInt", swiftName = "with") size: Int
-  ): BoundedJsArray<V_1>? {
+  fun <V_1> create(size: Int): BoundedJsArray<V_1>? {
    val array: BoundedJsArray<V_1> = BoundedJsArray<V_1>(size)
    return array
   }

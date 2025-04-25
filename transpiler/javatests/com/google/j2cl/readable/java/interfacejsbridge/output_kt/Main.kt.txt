@@ -1,5 +1,4 @@
 // Generated from "interfacejsbridge/Main.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -23,14 +22,9 @@ import interfacejsbridge.InterfaceImpl
 import interfacejsbridge.MyInterface
 import interfacejsbridge.MyJsInterface
 import interfacejsbridge.SubInterface
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktInterfacejsbridgeMain", swiftName = "InterfacejsbridgeMain", exact = true)
 open class Main {
- @ObjCName("test")
  open fun test() {
   val a: MyJsInterface = InterfaceImpl()
   val b: MyInterface = InterfaceImpl()

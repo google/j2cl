@@ -1,5 +1,4 @@
 // Generated from "trycatch/TryCatch.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -24,19 +23,14 @@ import java.lang.ClassCastException
 import javaemul.internal.Exceptions
 import kotlin.Exception
 import kotlin.NullPointerException
-import kotlin.OptIn
 import kotlin.RuntimeException
 import kotlin.String
 import kotlin.Suppress
 import kotlin.Throwable
 import kotlin.assert
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.Throws
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktTrycatchTryCatch", swiftName = "TrycatchTryCatch", exact = true)
 open class TryCatch {
- @ObjCName("testMultiCatch")
  open fun testMultiCatch() {
   try {
    throw ClassCastException()
@@ -50,7 +44,6 @@ open class TryCatch {
   }
  }
 
- @ObjCName("testEmptyThrowableCatch")
  @Throws(Throwable::class)
  open fun testEmptyThrowableCatch() {
   try {
@@ -61,7 +54,6 @@ open class TryCatch {
   } catch (e_1: Exception) {} catch (e_2: Throwable) {}
  }
 
- @ObjCName("testEmptyThrowableRethrow")
  @Throws(Throwable::class)
  open fun testEmptyThrowableRethrow() {
   try {
@@ -71,14 +63,12 @@ open class TryCatch {
   }
  }
 
- @ObjCName("testFinally")
  open fun testFinally() {
   try {
    assert(true)
   } finally {}
  }
 
- @ObjCName("testTryWithResource")
  open fun testTryWithResource() {
   try {
    var ___primaryExc: Throwable? = null
@@ -99,7 +89,6 @@ open class TryCatch {
   } catch (e: Exception) {}
  }
 
- @ObjCName("testTryWithResourceJava9")
  open fun testTryWithResourceJava9() {
   val thing: ClosableThing = ClosableThing()
   val thing2: ClosableThing = ClosableThing()
@@ -122,7 +111,6 @@ open class TryCatch {
   } catch (e: Exception) {}
  }
 
- @ObjCName("testTryWithResouceOnStaticField")
  open fun testTryWithResouceOnStaticField() {
   try {
    var ___primaryExc: Throwable? = null
@@ -140,7 +128,6 @@ open class TryCatch {
   } catch (e: Exception) {}
  }
 
- @ObjCName("testNestedTryCatch")
  open fun testNestedTryCatch() {
   try {
    throw java.lang.Exception()
@@ -151,7 +138,6 @@ open class TryCatch {
   }
  }
 
- @ObjCName("testThrowGenerics")
  @Throws(Throwable::class)
  open fun testThrowGenerics() {
   throw this.getT<Exception?>(
@@ -163,7 +149,6 @@ open class TryCatch {
   return t
  }
 
- @ObjCName("testThrowBoundGenerics")
  @Throws(Throwable::class)
  open fun testThrowBoundGenerics() {
   throw this.getThrowable<Throwable?>()!!
@@ -173,15 +158,11 @@ open class TryCatch {
   return null as T
  }
 
- @ObjCName("testThrowsParameterized")
  @Throws(Throwable::class)
- open fun <T: Throwable?> testThrowsParameterized(
-  @ObjCName("withJavaLangThrowable", swiftName = "with") throwable: T
- ) {
+ open fun <T: Throwable?> testThrowsParameterized(throwable: T) {
   throw throwable!!
  }
 
- @ObjCName("testMultiCatchParameterizedException")
  open fun testMultiCatchParameterizedException() {
   try {
    throw Exception1()
@@ -192,27 +173,19 @@ open class TryCatch {
   }
  }
 
- @ObjCName("J2ktTrycatchTryCatchCompanion", swiftName = "TrycatchTryCatchCompanion", exact = true)
  companion object {
   private val closableThing: ClosableThing? = ClosableThing()
  }
 
- @ObjCName("J2ktTrycatchTryCatch_ClosableThing", swiftName = "TrycatchTryCatch_ClosableThing", exact = true)
  open class ClosableThing internal constructor(): AutoCloseable {
   override fun close() {}
  }
 
- @ObjCName("J2ktTrycatchTryCatch_GenericInterface", swiftName = "TrycatchTryCatch_GenericInterface", exact = true)
  interface GenericInterface<T> {
-  @ObjCName("f")
-  fun f(
-   @ObjCName("withId") t: T
-  ) {}
+  fun f(t: T) {}
  }
 
- @ObjCName("J2ktTrycatchTryCatch_Exception1", swiftName = "TrycatchTryCatch_Exception1", exact = true)
  open inner class Exception1 internal constructor(): java.lang.RuntimeException(), GenericInterface<String?>
 
- @ObjCName("J2ktTrycatchTryCatch_Exception2", swiftName = "TrycatchTryCatch_Exception2", exact = true)
  open inner class Exception2 internal constructor(): java.lang.RuntimeException(), GenericInterface<String?>
 }

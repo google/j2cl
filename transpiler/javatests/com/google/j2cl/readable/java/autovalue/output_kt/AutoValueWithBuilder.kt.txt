@@ -1,5 +1,4 @@
 // Generated from "autovalue/AutoValueWithBuilder.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -22,25 +21,17 @@ import javaemul.lang.*
 import javaemul.lang.annotations.WasAutoValue
 import kotlin.Boolean
 import kotlin.Double
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktAutovalueAutoValueWithBuilder", swiftName = "AutovalueAutoValueWithBuilder", exact = true)
 @WasAutoValue
 abstract class AutoValueWithBuilder {
- @ObjCName("getBooleanField")
  abstract fun getBooleanField(): Boolean
 
- @ObjCName("getNullableField")
  abstract fun getNullableField(): Double?
 
- @ObjCName("toBuilder")
  abstract fun toBuilder(): Builder?
 
- @ObjCName("J2ktAutovalueAutoValueWithBuilderCompanion", swiftName = "AutovalueAutoValueWithBuilderCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun create_pp_autovalue(): AutoValueWithBuilder? {
@@ -48,20 +39,12 @@ abstract class AutoValueWithBuilder {
   }
  }
 
- @ObjCName("J2ktAutovalueAutoValueWithBuilder_Builder", swiftName = "AutovalueAutoValueWithBuilder_Builder", exact = true)
  @javaemul.lang.annotations.WasAutoValue.Builder
  abstract class Builder internal constructor() {
-  @ObjCName("setBooleanField")
-  abstract fun setBooleanField(
-   @ObjCName("withBoolean") x: Boolean
-  ): Builder?
+  abstract fun setBooleanField(x: Boolean): Builder?
 
-  @ObjCName("setNullableField")
-  abstract fun setNullableField(
-   @ObjCName("withJavaLangDouble", swiftName = "with") x: Double?
-  ): Builder?
+  abstract fun setNullableField(x: Double?): Builder?
 
-  @ObjCName("build")
   abstract fun build(): AutoValueWithBuilder?
  }
 }

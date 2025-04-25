@@ -1,5 +1,4 @@
 // Generated from "nativekttypes/NullabilityPropagation.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -21,101 +20,46 @@ package nativekttypes
 import javaemul.lang.*
 import jsinterop.annotations.JsOptional
 import kotlin.Any
-import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktNativekttypesNullabilityPropagation", swiftName = "NativekttypesNullabilityPropagation", exact = true)
 class NullabilityPropagation {
- @ObjCName("J2ktNativekttypesNullabilityPropagation_NullabilityToPropagate", swiftName = "NativekttypesNullabilityPropagation_NullabilityToPropagate", exact = true)
  interface NullabilityToPropagate<ExtendsNullable, ExtendsNonNull: Any> {
-  @ObjCName("nullableString1")
-  fun nullableString1(
-   @ObjCName("withNSString", swiftName = "with") s: String?
-  ): String?
+  fun nullableString1(s: String?): String?
 
-  @ObjCName("nullableString2")
-  fun nullableString2(
-   @ObjCName("withNSString", swiftName = "with") s: String?
-  ): String?
+  fun nullableString2(s: String?): String?
 
-  @ObjCName("nonNullString1")
-  fun nonNullString1(
-   @ObjCName("withNSString", swiftName = "with") s: String
-  ): String
+  fun nonNullString1(s: String): String
 
-  @ObjCName("nonNullString2")
-  fun nonNullString2(
-   @ObjCName("withNSString", swiftName = "with") s: String
-  ): String
+  fun nonNullString2(s: String): String
 
-  @ObjCName("nullableExtendsNullable1")
-  fun nullableExtendsNullable1(
-   @ObjCName("withId") s: ExtendsNullable?
-  ): ExtendsNullable?
+  fun nullableExtendsNullable1(s: ExtendsNullable?): ExtendsNullable?
 
-  @ObjCName("nullableExtendsNullable2")
-  fun nullableExtendsNullable2(
-   @ObjCName("withId") s: ExtendsNullable?
-  ): ExtendsNullable?
+  fun nullableExtendsNullable2(s: ExtendsNullable?): ExtendsNullable?
 
-  @ObjCName("nonNullExtendsNullable1")
-  fun nonNullExtendsNullable1(
-   @ObjCName("withId") s: ExtendsNullable
-  ): ExtendsNullable
+  fun nonNullExtendsNullable1(s: ExtendsNullable): ExtendsNullable
 
-  @ObjCName("nonNullExtendsNullable2")
-  fun nonNullExtendsNullable2(
-   @ObjCName("withId") s: ExtendsNullable
-  ): ExtendsNullable
+  fun nonNullExtendsNullable2(s: ExtendsNullable): ExtendsNullable
 
-  @ObjCName("nullableExtendsNonNull1")
-  fun nullableExtendsNonNull1(
-   @ObjCName("withId") s: ExtendsNonNull?
-  ): ExtendsNonNull?
+  fun nullableExtendsNonNull1(s: ExtendsNonNull?): ExtendsNonNull?
 
-  @ObjCName("nullableExtendsNonNull2")
-  fun nullableExtendsNonNull2(
-   @ObjCName("withId") s: ExtendsNonNull?
-  ): ExtendsNonNull?
+  fun nullableExtendsNonNull2(s: ExtendsNonNull?): ExtendsNonNull?
 
-  @ObjCName("nonNullExtendsNonNull1")
-  fun nonNullExtendsNonNull1(
-   @ObjCName("withId") s: ExtendsNonNull
-  ): ExtendsNonNull
+  fun nonNullExtendsNonNull1(s: ExtendsNonNull): ExtendsNonNull
 
-  @ObjCName("nonNullExtendsNonNull2")
-  fun nonNullExtendsNonNull2(
-   @ObjCName("withId") s: ExtendsNonNull
-  ): ExtendsNonNull
+  fun nonNullExtendsNonNull2(s: ExtendsNonNull): ExtendsNonNull
 
-  @ObjCName("nonNullStringTransitive")
-  fun nonNullStringTransitive(
-   @ObjCName("withNSString", swiftName = "with") s: String
-  ): String
+  fun nonNullStringTransitive(s: String): String
 
-  @ObjCName("nonNullStringDoubleOverride")
-  fun nonNullStringDoubleOverride(
-   @ObjCName("withNSString", swiftName = "with") s: String
-  ): String
+  fun nonNullStringDoubleOverride(s: String): String
 
-  @ObjCName("jsOptionalParameter")
-  fun jsOptionalParameter(
-   @ObjCName("withNSString", swiftName = "with") @JsOptional s: String?
-  ): String
+  fun jsOptionalParameter(@JsOptional s: String?): String
  }
 
- @ObjCName("J2ktNativekttypesNullabilityPropagation_Interface", swiftName = "NativekttypesNullabilityPropagation_Interface", exact = true)
  fun interface Interface {
-  @ObjCName("nonNullStringDoubleOverride")
-  fun nonNullStringDoubleOverride(
-   @ObjCName("withNSString", swiftName = "with") s: String
-  ): String
+  fun nonNullStringDoubleOverride(s: String): String
  }
 
- @ObjCName("J2ktNativekttypesNullabilityPropagation_Subtype", swiftName = "NativekttypesNullabilityPropagation_Subtype", exact = true)
  open inner class Subtype internal constructor(): NullabilityToPropagate<String?, String>, Interface {
   override fun nullableString1(s: String?): String? {
    return s
@@ -178,7 +122,6 @@ class NullabilityPropagation {
   }
  }
 
- @ObjCName("J2ktNativekttypesNullabilityPropagation_SubSubType", swiftName = "NativekttypesNullabilityPropagation_SubSubType", exact = true)
  open inner class SubSubType internal constructor(): NullabilityPropagation.Subtype() {
   override fun nonNullStringTransitive(s: String): String {
    return s

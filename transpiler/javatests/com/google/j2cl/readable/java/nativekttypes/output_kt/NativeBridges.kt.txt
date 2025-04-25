@@ -1,5 +1,4 @@
 // Generated from "nativekttypes/NativeBridges.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -19,22 +18,12 @@
 package nativekttypes
 
 import javaemul.lang.*
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
-import kotlin.native.ObjCName
 import nativekttypes.nativekt.KRequiringBridge
 import nativekttypes.nativekt.KRequiringBridge.Inner
 
-@ObjCName("J2ktNativekttypesNativeBridges", swiftName = "NativekttypesNativeBridges", exact = true)
 open class NativeBridges {
- @ObjCName("test")
- open fun test(
-  @ObjCName("withNativekttypesNativeRequiringBridge", swiftName = "with") o: KRequiringBridge?
- ) {}
+ open fun test(o: KRequiringBridge?) {}
 
- @ObjCName("test")
- open fun test(
-  @ObjCName("withNativekttypesNativeRequiringBridge_Inner", swiftName = "with") o: Inner?
- ) {}
+ open fun test(o: Inner?) {}
 }

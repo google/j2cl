@@ -1,5 +1,4 @@
 // Generated from "exception/MyJsException.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -22,19 +21,13 @@ import javaemul.lang.*
 import java.lang.Exception
 import jsinterop.annotations.JsIgnore
 import jsinterop.annotations.JsType
-import kotlin.OptIn
 import kotlin.Suppress
 import kotlin.Throwable
-import kotlin.experimental.ExperimentalObjCName
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktExceptionMyJsException", swiftName = "ExceptionMyJsException", exact = true)
 @JsType
 class MyJsException: Exception {
  constructor()
 
  @JsIgnore
- constructor(
-  @ObjCName("JavaLangThrowable") cause: Throwable?
- ): this()
+ constructor(cause: Throwable?): this()
 }

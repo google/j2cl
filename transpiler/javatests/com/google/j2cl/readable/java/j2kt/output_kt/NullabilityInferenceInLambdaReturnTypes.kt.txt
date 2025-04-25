@@ -1,5 +1,4 @@
 // Generated from "j2kt/NullabilityInferenceInLambdaReturnTypes.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -21,13 +20,9 @@ package j2kt
 import javaemul.lang.*
 import java.lang.RuntimeException
 import kotlin.Any
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktNullabilityInferenceInLambdaReturnTypes", swiftName = "J2ktNullabilityInferenceInLambdaReturnTypes", exact = true)
 open class NullabilityInferenceInLambdaReturnTypes {
  private fun testAccept() {
   NullabilityInferenceInLambdaReturnTypes.accept_pp_j2kt<Any?>(
@@ -73,7 +68,6 @@ open class NullabilityInferenceInLambdaReturnTypes {
   }
  }
 
- @ObjCName("J2ktJ2ktNullabilityInferenceInLambdaReturnTypesCompanion", swiftName = "J2ktNullabilityInferenceInLambdaReturnTypesCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun <V> accept_pp_j2kt(supplier: Supplier<V>) {
@@ -86,20 +80,13 @@ open class NullabilityInferenceInLambdaReturnTypes {
   }
  }
 
- @ObjCName("J2ktJ2ktNullabilityInferenceInLambdaReturnTypes_Foo", swiftName = "J2ktNullabilityInferenceInLambdaReturnTypes_Foo", exact = true)
  interface Foo<V>
 
- @ObjCName("J2ktJ2ktNullabilityInferenceInLambdaReturnTypes_Supplier", swiftName = "J2ktNullabilityInferenceInLambdaReturnTypes_Supplier", exact = true)
  fun interface Supplier<V> {
-  @ObjCName("get")
   fun get(): V
  }
 
- @ObjCName("J2ktJ2ktNullabilityInferenceInLambdaReturnTypes_Operator", swiftName = "J2ktNullabilityInferenceInLambdaReturnTypes_Operator", exact = true)
  fun interface Operator<V> {
-  @ObjCName("apply")
-  fun apply(
-   @ObjCName("withId") v: V
-  ): V
+  fun apply(v: V): V
  }
 }

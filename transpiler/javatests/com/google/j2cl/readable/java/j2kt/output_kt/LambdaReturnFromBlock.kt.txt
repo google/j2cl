@@ -1,5 +1,4 @@
 // Generated from "j2kt/LambdaReturnFromBlock.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -23,24 +22,18 @@ import java.lang.AssertionError
 import java.lang.Void
 import javaemul.lang.J2ktMonitor
 import kotlin.Int
-import kotlin.OptIn
 import kotlin.Suppress
 import kotlin.Unit
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
-import kotlin.native.ObjCName
 import kotlin.synchronized
 
-@ObjCName("J2ktJ2ktLambdaReturnFromBlock", swiftName = "J2ktLambdaReturnFromBlock", exact = true)
 open class LambdaReturnFromBlock {
- @ObjCName("testDoWhile")
  open fun testDoWhile() {
   val fn: Function<Void> = Function {
    return@Function null
   } as Function<Void>
  }
 
- @ObjCName("testSynchronized")
  open fun testSynchronized() {
   val fn: Function<Void> = Function {
    synchronized<Unit>(LambdaReturnFromBlock.lock) {
@@ -53,7 +46,6 @@ open class LambdaReturnFromBlock {
  @JvmField
  internal var x_pp_j2kt: Int = 1
 
- @ObjCName("testSwitchInLambda")
  open fun testSwitchInLambda() {
   val fn: Function<Void> = Function {
    when (this.x_pp_j2kt) {
@@ -68,14 +60,11 @@ open class LambdaReturnFromBlock {
   } as Function<Void>
  }
 
- @ObjCName("J2ktJ2ktLambdaReturnFromBlockCompanion", swiftName = "J2ktLambdaReturnFromBlockCompanion", exact = true)
  companion object {
   private val lock: J2ktMonitor = J2ktMonitor()
  }
 
- @ObjCName("J2ktJ2ktLambdaReturnFromBlock_Function", swiftName = "J2ktLambdaReturnFromBlock_Function", exact = true)
  fun interface Function<O> {
-  @ObjCName("apply")
   fun apply(): O
  }
 }

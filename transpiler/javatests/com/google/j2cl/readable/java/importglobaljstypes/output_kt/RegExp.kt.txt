@@ -1,5 +1,4 @@
 // Generated from "importglobaljstypes/RegExp.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -22,19 +21,13 @@ import javaemul.lang.*
 import jsinterop.annotations.JsPackage
 import jsinterop.annotations.JsType
 import kotlin.Boolean
-import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktImportglobaljstypesRegExp", swiftName = "ImportglobaljstypesRegExp", exact = true)
 class RegExp internal constructor() {
- @ObjCName("J2ktImportglobaljstypesRegExpCompanion", swiftName = "ImportglobaljstypesRegExpCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("test")
   fun test() {
    val regExp: NativeRegExp = NativeRegExp("teststring")
    regExp.test("restString")
@@ -42,17 +35,11 @@ class RegExp internal constructor() {
   }
  }
 
- @ObjCName("J2ktImportglobaljstypesRegExp_NativeRegExp", swiftName = "ImportglobaljstypesRegExp_NativeRegExp", exact = true)
  @JsType(name = "RegExp", namespace = JsPackage.GLOBAL, isNative = true)
  open class NativeRegExp {
-  constructor(
-   @ObjCName("NSString") pattern: String?
-  )
+  constructor(pattern: String?)
 
-  @ObjCName("test")
-  external open fun test(
-   @ObjCName("withNSString", swiftName = "with") value: String?
-  ): Boolean
+  external open fun test(value: String?): Boolean
 
   external override fun toString(): String
  }

@@ -1,5 +1,4 @@
 // Generated from "j2kt/LambdaParameterTypeInference.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -20,38 +19,23 @@ package j2kt
 
 import javaemul.lang.*
 import java.lang.RuntimeException
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktLambdaParameterTypeInference", swiftName = "J2ktLambdaParameterTypeInference", exact = true)
 open class LambdaParameterTypeInference {
- @ObjCName("J2ktJ2ktLambdaParameterTypeInferenceCompanion", swiftName = "J2ktLambdaParameterTypeInferenceCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("wrap")
-  fun <T> wrap(
-   @ObjCName("withJ2ktLambdaParameterTypeInference_Consumer", swiftName = "with") consumer: Consumer<T>
-  ): Consumer<T> {
+  fun <T> wrap(consumer: Consumer<T>): Consumer<T> {
    throw RuntimeException()
   }
 
   @JvmStatic
-  @ObjCName("add")
-  fun <T> add(
-   @ObjCName("withJ2ktLambdaParameterTypeInference_Supplier", swiftName = "with") supplier: Supplier<T>,
-   @ObjCName("withJ2ktLambdaParameterTypeInference_Consumer", swiftName = "with") consumer: Consumer<in T>
-  ) {
+  fun <T> add(supplier: Supplier<T>, consumer: Consumer<in T>) {
    throw RuntimeException()
   }
 
   @JvmStatic
-  @ObjCName("test")
-  fun <T> test(
-   @ObjCName("withJ2ktLambdaParameterTypeInference_Supplier", swiftName = "with") supplier: Supplier<out T>
-  ) {
+  fun <T> test(supplier: Supplier<out T>) {
    LambdaParameterTypeInference.add(
     supplier,
     LambdaParameterTypeInference.wrap(
@@ -62,17 +46,11 @@ open class LambdaParameterTypeInference {
   }
  }
 
- @ObjCName("J2ktJ2ktLambdaParameterTypeInference_Supplier", swiftName = "J2ktLambdaParameterTypeInference_Supplier", exact = true)
  fun interface Supplier<T> {
-  @ObjCName("get")
   fun get(): T
  }
 
- @ObjCName("J2ktJ2ktLambdaParameterTypeInference_Consumer", swiftName = "J2ktLambdaParameterTypeInference_Consumer", exact = true)
  fun interface Consumer<T> {
-  @ObjCName("accept")
-  fun accept(
-   @ObjCName("withId") t: T
-  )
+  fun accept(t: T)
  }
 }

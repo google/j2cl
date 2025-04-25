@@ -1,5 +1,4 @@
 // Generated from "genericinterfaceabstractimpl/AbstractImpl.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -20,23 +19,12 @@ package genericinterfaceabstractimpl
 
 import javaemul.lang.*
 import kotlin.Int
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktGenericinterfaceabstractimplMyInterface", swiftName = "GenericinterfaceabstractimplMyInterface", exact = true)
 interface MyInterface<T> {
- @ObjCName("fun")
- fun `fun`(
-  @ObjCName("withId") t: T
- ): T
+ fun `fun`(t: T): T
 
- @ObjCName("g")
- fun <T_1> g(
-  @ObjCName("withId") t: T_1
- )
+ fun <T_1> g(t: T_1)
 }
 
-@ObjCName("J2ktGenericinterfaceabstractimplAbstractImpl", swiftName = "GenericinterfaceabstractimplAbstractImpl", exact = true)
 abstract class AbstractImpl: MyInterface<Int?>

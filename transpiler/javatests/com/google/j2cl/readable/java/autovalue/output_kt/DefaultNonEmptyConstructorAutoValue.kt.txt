@@ -1,5 +1,4 @@
 // Generated from "autovalue/DefaultNonEmptyConstructorAutoValue.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -22,13 +21,9 @@ import javaemul.lang.*
 import javaemul.lang.annotations.WasAutoValue
 import kotlin.Boolean
 import kotlin.Int
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktAutovalueDefaultNonEmptyConstructorAutoValue", swiftName = "AutovalueDefaultNonEmptyConstructorAutoValue", exact = true)
 @WasAutoValue
 abstract class DefaultNonEmptyConstructorAutoValue {
  private val field: Int
@@ -37,10 +32,8 @@ abstract class DefaultNonEmptyConstructorAutoValue {
   this.field = 1
  }
 
- @ObjCName("getBooleanField")
  abstract fun getBooleanField(): Boolean
 
- @ObjCName("J2ktAutovalueDefaultNonEmptyConstructorAutoValueCompanion", swiftName = "AutovalueDefaultNonEmptyConstructorAutoValueCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun create_pp_autovalue(): DefaultNonEmptyConstructorAutoValue? {
@@ -48,7 +41,6 @@ abstract class DefaultNonEmptyConstructorAutoValue {
   }
  }
 
- @ObjCName("J2ktAutovalueDefaultNonEmptyConstructorAutoValue_Builder", swiftName = "AutovalueDefaultNonEmptyConstructorAutoValue_Builder", exact = true)
  @javaemul.lang.annotations.WasAutoValue.Builder
  abstract class Builder {
   private val field: Int
@@ -57,12 +49,8 @@ abstract class DefaultNonEmptyConstructorAutoValue {
    this.field = 1
   }
 
-  @ObjCName("setBooleanField")
-  abstract fun setBooleanField(
-   @ObjCName("withBoolean") x: Boolean
-  ): Builder?
+  abstract fun setBooleanField(x: Boolean): Builder?
 
-  @ObjCName("build")
   abstract fun build(): DefaultNonEmptyConstructorAutoValue?
  }
 }

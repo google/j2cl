@@ -1,5 +1,4 @@
 // Generated from "jsinnerclass/Main.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -22,40 +21,29 @@ import javaemul.lang.*
 import jsinterop.annotations.JsType
 import kotlin.Array
 import kotlin.Int
-import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
 import kotlin.assert
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktJsinnerclassMain", swiftName = "JsinnerclassMain", exact = true)
 open class Main {
- @ObjCName("J2ktJsinnerclassMainCompanion", swiftName = "JsinnerclassMainCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("main")
-  fun main(
-   vararg @ObjCName("withNSStringArray") args: String?
-  ) {
+  fun main(vararg args: String?) {
    val args_1: Array<String?>? = args as Array<String?>?
    assert(Outer().method() == 5)
   }
  }
 
- @ObjCName("J2ktJsinnerclassMain_Outer", swiftName = "JsinnerclassMain_Outer", exact = true)
  open class Outer internal constructor() {
   @JvmField
   internal var a_pp_jsinnerclass: Int = 2
 
-  @ObjCName("method")
   open fun method(): Int {
    return Inner().getB() + this.a_pp_jsinnerclass
   }
 
-  @ObjCName("J2ktJsinnerclassMain_Outer_Inner", swiftName = "JsinnerclassMain_Outer_Inner", exact = true)
   @JsType(namespace = "com.google.test")
   open inner class Inner constructor() {
    private var b: Int = 0
@@ -64,7 +52,6 @@ open class Main {
     this.b = this@Outer.a_pp_jsinnerclass + 1
    }
 
-   @ObjCName("getB")
    open fun getB(): Int {
     return this.b
    }

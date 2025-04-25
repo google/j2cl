@@ -1,5 +1,4 @@
 // Generated from "importglobaljstypes/Date.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -23,42 +22,27 @@ import jsinterop.annotations.JsPackage
 import jsinterop.annotations.JsType
 import kotlin.Double
 import kotlin.Int
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktImportglobaljstypesDate", swiftName = "ImportglobaljstypesDate", exact = true)
 open class Date {
- @ObjCName("copy__")
- open fun copy(
-  @ObjCName("withImportglobaljstypesDate_NativeDate", swiftName = "with") d: NativeDate?
- ): NativeDate? {
+ open fun copy(d: NativeDate?): NativeDate? {
   return d
  }
 
- @ObjCName("J2ktImportglobaljstypesDateCompanion", swiftName = "ImportglobaljstypesDateCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("now")
-  fun now(
-   @ObjCName("withDouble", swiftName = "with") x: Double
-  ): Double {
+  fun now(x: Double): Double {
    return NativeDate.now()
   }
  }
 
- @ObjCName("J2ktImportglobaljstypesDate_NativeDate", swiftName = "ImportglobaljstypesDate_NativeDate", exact = true)
  @JsType(name = "Date", namespace = JsPackage.GLOBAL, isNative = true)
  open class NativeDate {
-  @ObjCName("getSeconds")
   external open fun getSeconds(): Int
 
-  @ObjCName("J2ktImportglobaljstypesDate_NativeDateCompanion", swiftName = "ImportglobaljstypesDate_NativeDateCompanion", exact = true)
   companion object {
    @JvmStatic
-   @ObjCName("now")
    external fun now(): Double
   }
  }

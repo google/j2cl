@@ -1,5 +1,4 @@
 // Generated from "nativekttypes/BoundsWithVariance.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -25,7 +24,6 @@ import java.util.AbstractMap
 import java.util.AbstractSet
 import kotlin.Any
 import kotlin.Comparable
-import kotlin.OptIn
 import kotlin.Suppress
 import kotlin.collections.MutableCollection
 import kotlin.collections.MutableIterable
@@ -35,16 +33,11 @@ import kotlin.collections.MutableListIterator
 import kotlin.collections.MutableMap
 import kotlin.collections.MutableMap.MutableEntry
 import kotlin.collections.MutableSet
-import kotlin.experimental.ExperimentalObjCName
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktNativekttypesFnWithoutVariance", swiftName = "NativekttypesFnWithoutVariance", exact = true)
 interface FnWithoutVariance<I, O>
 
-@ObjCName("J2ktNativekttypesFnWithVariance", swiftName = "NativekttypesFnWithVariance", exact = true)
 interface FnWithVariance<in I, out O>
 
-@ObjCName("J2ktNativekttypesBoundsWithVariance", swiftName = "NativekttypesBoundsWithVariance", exact = true)
 class BoundsWithVariance internal constructor() {
  internal fun <I: Any, O: Any> accept_pp_nativekttypes(o: FnWithoutVariance<in I, out O>) {}
 

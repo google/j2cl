@@ -1,5 +1,4 @@
 // Generated from "j2kt/NullabilityInferenceProblem.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -25,17 +24,12 @@ import java.util.function.Function
 import javaemul.lang.MutableListJvm
 import kotlin.Any
 import kotlin.Comparator
-import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
 import kotlin.collections.MutableIterable
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktNullabilityInferenceProblem", swiftName = "J2ktNullabilityInferenceProblem", exact = true)
 open class NullabilityInferenceProblem internal constructor() {
- @ObjCName("J2ktJ2ktNullabilityInferenceProblemCompanion", swiftName = "J2ktNullabilityInferenceProblemCompanion", exact = true)
  companion object {
   @JvmStatic
   private fun <E: Any> sortedCopyOf(comparator: Comparator<in E>, elements: MutableIterable<E>): ImmutableList<E> {
@@ -86,12 +80,9 @@ open class NullabilityInferenceProblem internal constructor() {
   }
  }
 
- @ObjCName("J2ktJ2ktNullabilityInferenceProblem_ImmutableList", swiftName = "J2ktNullabilityInferenceProblem_ImmutableList", exact = true)
  interface ImmutableList<T: Any>: MutableListJvm<T>
 
- @ObjCName("J2ktJ2ktNullabilityInferenceProblem_User", swiftName = "J2ktNullabilityInferenceProblem_User", exact = true)
  fun interface User {
-  @ObjCName("getName")
   fun getName(): Optional<String>
  }
 }

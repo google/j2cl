@@ -1,5 +1,4 @@
 // Generated from "nullability/Nullability.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -30,16 +29,12 @@ import kotlin.Any
 import kotlin.Array
 import kotlin.Double
 import kotlin.Int
-import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
 import kotlin.arrayOf
 import kotlin.collections.MutableList
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktNullabilityNullability", swiftName = "NullabilityNullability", exact = true)
 open class Nullability {
  private var f1: String = "Hello"
 
@@ -68,45 +63,26 @@ open class Nullability {
  private var f14: Any? = null
 
  @JsConstructor
- constructor(
-  @ObjCName("NSString") a: String
- ) {
+ constructor(a: String) {
   this.f13 = Any()
  }
 
- @ObjCName("m1")
- open fun m1(
-  @ObjCName("withNSString", swiftName = "with") a: String,
-  @ObjCName("withJavaUtilList", swiftName = "with") b: MutableList<Double>,
-  @ObjCName("withNSString", swiftName = "with") c: String?
- ): String {
+ open fun m1(a: String, b: MutableList<Double>, c: String?): String {
   return ""
  }
 
- @ObjCName("m2")
- open fun m2(
-  @ObjCName("withNSString", swiftName = "with") a: String?,
-  @ObjCName("withJavaUtilList", swiftName = "with") b: MutableList<Double?>
- ): String? {
+ open fun m2(a: String?, b: MutableList<Double?>): String? {
   return ""
  }
 
- @ObjCName("m3")
  @JsMethod
- open fun m3(
-  @ObjCName("withNSString", swiftName = "with") a: String,
-  vararg @ObjCName("withNSStringArray") args: String
- ): String? {
+ open fun m3(a: String, vararg args: String): String? {
   val args_1: Array<String>? = args as Array<String>?
   return null
  }
 
- @ObjCName("m4")
- open fun m4(
-  @ObjCName("withNullabilityNullability_MyFunction", swiftName = "with") f: MyFunction
- ) {}
+ open fun m4(f: MyFunction) {}
 
- @ObjCName("J2ktNullabilityNullabilityCompanion", swiftName = "NullabilityNullabilityCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun <T: String?> testDefaultNullabilityBounds_pp_nullability(defaultNullability: ParameterizedDefaultNullability<T>?) {
@@ -198,7 +174,6 @@ open class Nullability {
   }
  }
 
- @ObjCName("J2ktNullabilityNullability_Foo", swiftName = "NullabilityNullability_Foo", exact = true)
  open class Foo<T> internal constructor() {
   internal open fun bar_pp_nullability(t: T) {}
 
@@ -211,46 +186,35 @@ open class Nullability {
   }
  }
 
- @ObjCName("J2ktNullabilityNullability_MyFunction", swiftName = "NullabilityNullability_MyFunction", exact = true)
  @JsFunction
  fun interface MyFunction {
-  @ObjCName("x")
-  fun x(
-   @ObjCName("withNSString", swiftName = "with") a: String
-  ): String
+  fun x(a: String): String
  }
 
- @ObjCName("J2ktNullabilityNullability_StringList", swiftName = "NullabilityNullability_StringList", exact = true)
  interface StringList: MutableListJvm<String?>
 
- @ObjCName("J2ktNullabilityNullability_StringComparator", swiftName = "NullabilityNullability_StringComparator", exact = true)
  open class StringComparator: Comparator<String> {
   override fun compare(a: String, b: String): Int {
    return 0
   }
  }
 
- @ObjCName("J2ktNullabilityNullability_NullableStringComparator", swiftName = "NullabilityNullability_NullableStringComparator", exact = true)
  open class NullableStringComparator: Comparator<String?> {
   override fun compare(a: String?, b: String?): Int {
    return 0
   }
  }
 
- @ObjCName("J2ktNullabilityNullability_NullableTemplatedReturn", swiftName = "NullabilityNullability_NullableTemplatedReturn", exact = true)
  fun interface NullableTemplatedReturn<T> {
-  @ObjCName("foo")
   fun foo(): T?
  }
 
- @ObjCName("J2ktNullabilityNullability_NullableTemplatedReturnOverride", swiftName = "NullabilityNullability_NullableTemplatedReturnOverride", exact = true)
  open class NullableTemplatedReturnOverride: NullableTemplatedReturn<String?> {
   override fun foo(): String? {
    return "foo"
   }
  }
 
- @ObjCName("J2ktNullabilityNullability_ParameterizedDefaultNullability", swiftName = "NullabilityNullability_ParameterizedDefaultNullability", exact = true)
  open class ParameterizedDefaultNullability<N> internal constructor() {
   internal open fun getNullable_pp_nullability(): N? {
    return null
@@ -265,7 +229,6 @@ open class Nullability {
   }
  }
 
- @ObjCName("J2ktNullabilityNullability_ParameterizedNullable", swiftName = "NullabilityNullability_ParameterizedNullable", exact = true)
  open class ParameterizedNullable<N> internal constructor() {
   internal open fun getNullable_pp_nullability(): N? {
    return null
@@ -280,7 +243,6 @@ open class Nullability {
   }
  }
 
- @ObjCName("J2ktNullabilityNullability_ParameterizedNonNullable", swiftName = "NullabilityNullability_ParameterizedNonNullable", exact = true)
  open class ParameterizedNonNullable<N: Any> internal constructor() {
   internal open fun getNullable_pp_nullability(): N? {
    return null
@@ -295,29 +257,21 @@ open class Nullability {
   }
  }
 
- @ObjCName("J2ktNullabilityNullability_NonNullableInsideNullable", swiftName = "NullabilityNullability_NonNullableInsideNullable", exact = true)
  open class NonNullableInsideNullable<T> internal constructor() {
   internal open fun nonNullableTest_pp_nullability(nonNullable: ParameterizedNonNullable<T & Any>?) {}
  }
 
- @ObjCName("J2ktNullabilityNullability_Recursive", swiftName = "NullabilityNullability_Recursive", exact = true)
  open class Recursive<T> internal constructor() where T: Recursive<T>, T: Marker?
 
- @ObjCName("J2ktNullabilityNullability_RecursiveNullable", swiftName = "NullabilityNullability_RecursiveNullable", exact = true)
  open class RecursiveNullable<T> internal constructor() where T: RecursiveNullable<T>?, T: Marker?
 
- @ObjCName("J2ktNullabilityNullability_RecursiveChild", swiftName = "NullabilityNullability_RecursiveChild", exact = true)
  open class RecursiveChild internal constructor(): Recursive<RecursiveChild>(), Marker
 
- @ObjCName("J2ktNullabilityNullability_RecursiveNullableChild", swiftName = "NullabilityNullability_RecursiveNullableChild", exact = true)
  open class RecursiveNullableChild internal constructor(): RecursiveNullable<RecursiveNullableChild?>(), Marker
 
- @ObjCName("J2ktNullabilityNullability_RecursiveParam", swiftName = "NullabilityNullability_RecursiveParam", exact = true)
  open class RecursiveParam<T> internal constructor() where T: Recursive<T>, T: Marker?
 
- @ObjCName("J2ktNullabilityNullability_RecursiveNullableParam", swiftName = "NullabilityNullability_RecursiveNullableParam", exact = true)
  open class RecursiveNullableParam<T> internal constructor() where T: RecursiveNullable<T>?, T: Marker?
 }
 
-@ObjCName("J2ktNullabilityMarker", swiftName = "NullabilityMarker", exact = true)
 interface Marker

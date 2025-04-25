@@ -1,5 +1,4 @@
 // Generated from "packageprivatemethods/package1/Child.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -20,27 +19,16 @@ package packageprivatemethods.package1
 
 import javaemul.lang.*
 import kotlin.Int
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
-import kotlin.native.ObjCName
 import packageprivatemethods.package1.Interface
 import packageprivatemethods.package1.Parent
 
-@ObjCName("J2ktPackageprivatemethodsPackage1Child", swiftName = "PackageprivatemethodsPackage1Child", exact = true)
 open class Child: Parent(), Interface {
- @ObjCName("overrideInParentExposedInChild")
- public open fun overrideInParentExposedInChild(
-  @ObjCName("withInt", swiftName = "with") a: Int
- ): Int {
+ public open fun overrideInParentExposedInChild(a: Int): Int {
   return a + 1
  }
 
- @ObjCName("exposedInChild")
- public open fun exposedInChild(
-  @ObjCName("withInt", swiftName = "with") a: Int,
-  @ObjCName("withInt", swiftName = "with") b: Int
- ): Int {
+ public open fun exposedInChild(a: Int, b: Int): Int {
   return a + b + 1
  }
 

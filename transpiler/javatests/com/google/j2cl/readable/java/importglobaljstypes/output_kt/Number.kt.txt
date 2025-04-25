@@ -1,5 +1,4 @@
 // Generated from "importglobaljstypes/Number.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -26,36 +25,22 @@ import jsinterop.annotations.JsType
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Int
-import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktImportglobaljstypesNumber", swiftName = "ImportglobaljstypesNumber", exact = true)
 open class Number {
- @ObjCName("testJsDocForLiteralType")
- open fun testJsDocForLiteralType(
-  @ObjCName("withImportglobaljstypesNumber_MyLiteralType", swiftName = "with") a: MyLiteralType?
- ): MyLiteralType? {
+ open fun testJsDocForLiteralType(a: MyLiteralType?): MyLiteralType? {
   return a
  }
 
- @ObjCName("J2ktImportglobaljstypesNumberCompanion", swiftName = "ImportglobaljstypesNumberCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("f")
   @JsMethod(name = "Number.isInteger", namespace = JsPackage.GLOBAL)
-  external fun f(
-   @ObjCName("withDouble", swiftName = "with") x: Double
-  ): Boolean
+  external fun f(x: Double): Boolean
 
   @JvmStatic
-  @ObjCName("test")
-  fun test(
-   @ObjCName("withDouble", swiftName = "with") x: Double
-  ): Boolean {
+  fun test(x: Double): Boolean {
    return Number.f(x)
   }
 
@@ -74,20 +59,14 @@ open class Number {
   }
  }
 
- @ObjCName("J2ktImportglobaljstypesNumber_NativeArray", swiftName = "ImportglobaljstypesNumber_NativeArray", exact = true)
  @JsType(name = "Array", namespace = JsPackage.GLOBAL, isNative = true)
  interface NativeArray<T> {
-  @ObjCName("getLength")
   @JsProperty
   fun getLength(): Int
 
-  @ObjCName("at")
-  fun at(
-   @ObjCName("withInt", swiftName = "with") index: Int
-  ): T
+  fun at(index: Int): T
  }
 
- @ObjCName("J2ktImportglobaljstypesNumber_MyLiteralType", swiftName = "ImportglobaljstypesNumber_MyLiteralType", exact = true)
  @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
  interface MyLiteralType
 }

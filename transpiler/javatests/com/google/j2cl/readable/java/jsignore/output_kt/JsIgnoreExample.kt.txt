@@ -1,5 +1,4 @@
 // Generated from "jsignore/JsIgnoreExample.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -23,38 +22,28 @@ import jsinterop.annotations.JsIgnore
 import jsinterop.annotations.JsType
 import kotlin.Any
 import kotlin.Int
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktJsignoreJsIgnoreExample", swiftName = "JsignoreJsIgnoreExample", exact = true)
 @JsType
 open class JsIgnoreExample {
- @ObjCName("J2ktJsignoreJsIgnoreExampleCompanion", swiftName = "JsignoreJsIgnoreExampleCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("exportedFunction")
   fun exportedFunction() {}
 
   @JvmStatic
-  @ObjCName("notExportedFunction")
   @JsIgnore
   fun notExportedFunction() {}
 
   @JvmField
-  @ObjCName("exportedField_")
   var exportedField: Int = 10
 
   @JvmField
-  @ObjCName("notExportedField_")
   @JsIgnore
   var notExportedField: Int = 20
 
   @JvmField
-  @ObjCName("CONSTNAME_")
   val CONSTNAME: Any? = Any()
  }
 }

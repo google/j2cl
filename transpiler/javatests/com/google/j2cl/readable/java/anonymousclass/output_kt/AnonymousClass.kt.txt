@@ -1,5 +1,4 @@
 // Generated from "anonymousclass/AnonymousClass.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -23,37 +22,28 @@ import jsinterop.annotations.JsConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Int
-import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktAnonymousclassSomeClass", swiftName = "AnonymousclassSomeClass", exact = true)
 abstract class SomeClass {
- @ObjCName("foo")
  abstract fun foo(): String?
 
  internal constructor(i: Int)
 }
 
-@ObjCName("J2ktAnonymousclassSomeClassWithStaticMembers", swiftName = "AnonymousclassSomeClassWithStaticMembers", exact = true)
 abstract class SomeClassWithStaticMembers {
- @ObjCName("foo")
  abstract fun foo(): String?
 
  internal constructor(i: Int)
 
- @ObjCName("J2ktAnonymousclassSomeClassWithStaticMembersCompanion", swiftName = "AnonymousclassSomeClassWithStaticMembersCompanion", exact = true)
  companion object {
   @JvmStatic
   internal fun staticMethod_pp_anonymousclass() {}
  }
 }
 
-@ObjCName("J2ktAnonymousclassAnonymousClass", swiftName = "AnonymousclassAnonymousClass", exact = true)
 open class AnonymousClass {
  @JvmField
  internal var i_pp_anonymousclass: Int = 0
@@ -61,9 +51,7 @@ open class AnonymousClass {
  @JvmField
  internal var o_pp_anonymousclass: Any? = null
 
- constructor(
-  @ObjCName("Id") a: Any?
- ) {
+ constructor(a: Any?) {
   this.o_pp_anonymousclass = object : SomeClass(0) {
    @JvmField
    internal var outer_pp_anonymousclass: Any? = this@AnonymousClass
@@ -77,7 +65,6 @@ open class AnonymousClass {
   }
  }
 
- @ObjCName("main")
  open fun main() {
   val instance: SomeClass = object : SomeClass(
    this@AnonymousClass.i_pp_anonymousclass,
@@ -108,12 +95,9 @@ open class AnonymousClass {
  }
 }
 
-@ObjCName("J2ktAnonymousclassSomeInterface", swiftName = "AnonymousclassSomeInterface", exact = true)
 interface SomeInterface {
- @ObjCName("J2ktAnonymousclassSomeInterfaceCompanion", swiftName = "AnonymousclassSomeInterfaceCompanion", exact = true)
  companion object {
   @JvmField
-  @ObjCName("implicitlyStatic_")
   val implicitlyStatic: SomeClass? = object : SomeClass(1) {
    override fun foo(): String? {
     return "a"
@@ -122,7 +106,6 @@ interface SomeInterface {
  }
 }
 
-@ObjCName("J2ktAnonymousclassJsConstructorClass", swiftName = "AnonymousclassJsConstructorClass", exact = true)
 open class JsConstructorClass {
  @JsConstructor
  internal constructor(o: Any?)
@@ -131,14 +114,12 @@ open class JsConstructorClass {
   if (JsConstructorClass.trueVar_pp_anonymousclass) object : Any() {} else null,
  )
 
- @ObjCName("J2ktAnonymousclassJsConstructorClassCompanion", swiftName = "AnonymousclassJsConstructorClassCompanion", exact = true)
  companion object {
   @JvmField
   internal var trueVar_pp_anonymousclass: Boolean = true
  }
 }
 
-@ObjCName("J2ktAnonymousclassJsConstructorSubclass", swiftName = "AnonymousclassJsConstructorSubclass", exact = true)
 open class JsConstructorSubclass: JsConstructorClass {
  @JsConstructor
  internal constructor(): super(

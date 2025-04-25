@@ -1,5 +1,4 @@
 // Generated from "j2kt/StreamCollectWildcardProblem.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -28,23 +27,15 @@ import java.util.stream.Collectors
 import java.util.stream.Stream
 import kotlin.Any
 import kotlin.Boolean
-import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
 import kotlin.collections.MutableList
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktStreamCollectWildcardProblem", swiftName = "J2ktStreamCollectWildcardProblem", exact = true)
 open class StreamCollectWildcardProblem {
- @ObjCName("J2ktJ2ktStreamCollectWildcardProblemCompanion", swiftName = "J2ktStreamCollectWildcardProblemCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("testCollect")
-  fun testCollect(
-   @ObjCName("withJavaUtilStreamStream", swiftName = "with") list: Stream<Foo<*>>
-  ) {
+  fun testCollect(list: Stream<Foo<*>>) {
    StreamCollectWildcardProblem.accept(
     list.collect<MutableList<Foo<*>>, Any?>(
      Collectors.toList<Foo<*>>() as Collector<in Foo<*>, Any?, MutableList<Foo<*>>>,
@@ -53,10 +44,7 @@ open class StreamCollectWildcardProblem {
   }
 
   @JvmStatic
-  @ObjCName("testMethodReferenceMapCollect")
-  fun testMethodReferenceMapCollect(
-   @ObjCName("withJavaUtilStreamStream", swiftName = "with") list: Stream<Foo<*>>
-  ) {
+  fun testMethodReferenceMapCollect(list: Stream<Foo<*>>) {
    StreamCollectWildcardProblem.accept(
     list.map(
      Function { arg0: Foo<*> ->
@@ -69,10 +57,7 @@ open class StreamCollectWildcardProblem {
   }
 
   @JvmStatic
-  @ObjCName("testLambdaMapCollect")
-  fun testLambdaMapCollect(
-   @ObjCName("withJavaUtilStreamStream", swiftName = "with") list: Stream<Foo<*>>
-  ) {
+  fun testLambdaMapCollect(list: Stream<Foo<*>>) {
    StreamCollectWildcardProblem.accept(
     list.map(
      Function { it: Foo<*> ->
@@ -85,10 +70,7 @@ open class StreamCollectWildcardProblem {
   }
 
   @JvmStatic
-  @ObjCName("testCollectWithExplicitTypeArgumentFix")
-  fun testCollectWithExplicitTypeArgumentFix(
-   @ObjCName("withJavaUtilStreamStream", swiftName = "with") list: Stream<Foo<*>>
-  ) {
+  fun testCollectWithExplicitTypeArgumentFix(list: Stream<Foo<*>>) {
    StreamCollectWildcardProblem.accept(
     list.collect(
      Collectors.toList<Foo<*>>(),
@@ -97,10 +79,7 @@ open class StreamCollectWildcardProblem {
   }
 
   @JvmStatic
-  @ObjCName("testMethodReferenceMapCollectWithExplicitTypeArgumentFix")
-  fun testMethodReferenceMapCollectWithExplicitTypeArgumentFix(
-   @ObjCName("withJavaUtilStreamStream", swiftName = "with") list: Stream<Foo<*>>
-  ) {
+  fun testMethodReferenceMapCollectWithExplicitTypeArgumentFix(list: Stream<Foo<*>>) {
    StreamCollectWildcardProblem.accept(
     list.map(
      Function { arg0: Foo<*> ->
@@ -113,10 +92,7 @@ open class StreamCollectWildcardProblem {
   }
 
   @JvmStatic
-  @ObjCName("testLambdaMapCollectWithExplicitTypeArgumentFix")
-  fun testLambdaMapCollectWithExplicitTypeArgumentFix(
-   @ObjCName("withJavaUtilStreamStream", swiftName = "with") list: Stream<Foo<*>>
-  ) {
+  fun testLambdaMapCollectWithExplicitTypeArgumentFix(list: Stream<Foo<*>>) {
    StreamCollectWildcardProblem.accept(
     list.map(
      Function { it: Foo<*> ->
@@ -129,20 +105,12 @@ open class StreamCollectWildcardProblem {
   }
 
   @JvmStatic
-  @ObjCName("accept")
-  fun accept(
-   @ObjCName("withJavaUtilList", swiftName = "with") list: MutableList<Foo<*>>
-  ) {
+  fun accept(list: MutableList<Foo<*>>) {
    throw RuntimeException()
   }
 
   @JvmStatic
-  @ObjCName("testNullabilityInference")
-  fun testNullabilityInference(
-   @ObjCName("withJavaUtilStreamStream", swiftName = "with") stream1: Stream<Foo<Any>>,
-   @ObjCName("withJavaUtilStreamStream", swiftName = "with") stream2: Stream<Foo<Any>>,
-   @ObjCName("withBoolean") b: Boolean
-  ): Stream<String> {
+  fun testNullabilityInference(stream1: Stream<Foo<Any>>, stream2: Stream<Foo<Any>>, b: Boolean): Stream<String> {
    return Stream.of<Stream<String>?>(
     if (b) stream1.map<String>(
      Function { arg0: Foo<Any> ->
@@ -166,12 +134,9 @@ open class StreamCollectWildcardProblem {
   }
  }
 
- @ObjCName("J2ktJ2ktStreamCollectWildcardProblem_Foo", swiftName = "J2ktStreamCollectWildcardProblem_Foo", exact = true)
  interface Foo<T: Any> {
-  @ObjCName("getThis")
   fun getThis(): Foo<T>
 
-  @ObjCName("getString")
   fun getString(): String
  }
 }

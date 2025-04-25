@@ -1,5 +1,4 @@
 // Generated from "genericmethod/GenericMethod.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -25,37 +24,20 @@ import kotlin.Array
 import kotlin.Error
 import kotlin.Exception
 import kotlin.Number
-import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
 import kotlin.arrayOf
 import kotlin.collections.MutableList
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktGenericmethodGenericMethod", swiftName = "GenericmethodGenericMethod", exact = true)
 open class GenericMethod<T> {
- @ObjCName("foo")
- open fun <T_1, S> foo(
-  @ObjCName("withId") f: T_1,
-  @ObjCName("withId") s: S
- ) {}
+ open fun <T_1, S> foo(f: T_1, s: S) {}
 
- @ObjCName("fun")
- open fun `fun`(
-  @ObjCName("withId") o: Any?
- ) {}
+ open fun `fun`(o: Any?) {}
 
- @ObjCName("fun")
- open fun <T_1: Exception?> `fun`(
-  @ObjCName("withJavaLangException", swiftName = "with") t: T_1
- ) {}
+ open fun <T_1: Exception?> `fun`(t: T_1) {}
 
- @ObjCName("fun")
- open fun <T_1: Error?> `fun`(
-  @ObjCName("withJavaLangError", swiftName = "with") t: T_1
- ) {
+ open fun <T_1: Error?> `fun`(t: T_1) {
   object : GenericMethod<T_1>() {
    fun fun2(t: T_1) {}
 
@@ -69,29 +51,22 @@ open class GenericMethod<T> {
   LocalClass<T_1>()
  }
 
- @ObjCName("bar")
  open fun <T_1> bar(): GenericMethod<T_1>? {
   return null
  }
 
- @ObjCName("fun")
- open fun <T_1> `fun`(
-  @ObjCName("withNSObjectArray") array: Array<T_1>?
- ): Array<T_1>? {
+ open fun <T_1> `fun`(array: Array<T_1>?): Array<T_1>? {
   return array
  }
 
- @ObjCName("checked")
  open fun <T_1> checked(): T_1 {
   return null as T_1
  }
 
- @ObjCName("unchecked")
  open fun <T_1> unchecked(): T_1 {
   return null as T_1
  }
 
- @ObjCName("test")
  open fun test() {
   val g: GenericMethod<Number?> = GenericMethod<Number?>()
   g.foo<GenericMethod<Number?>?, GenericMethod<Number?>?>(g, g)
@@ -117,22 +92,14 @@ open class GenericMethod<T> {
   this.unchecked<Content?>()!!.getProp_pp_genericmethod()
  }
 
- @ObjCName("J2ktGenericmethodGenericMethodCompanion", swiftName = "GenericmethodGenericMethodCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("acceptsContent")
-  fun acceptsContent(
-   @ObjCName("withGenericmethodGenericMethod_Content", swiftName = "with") content: Content?
-  ) {}
+  fun acceptsContent(content: Content?) {}
 
   @JvmStatic
-  @ObjCName("acceptsString")
-  fun acceptsString(
-   @ObjCName("withNSString", swiftName = "with") string: String?
-  ) {}
+  fun acceptsString(string: String?) {}
 
   @JvmStatic
-  @ObjCName("testErasureCast_wildcard")
   fun testErasureCast_wildcard() {
    val list: MutableList<Container<*>?> = ArrayList<Container<*>>() as MutableList<Container<*>?>
    val content: Content? = list.get(0)!!.get_pp_genericmethod()
@@ -155,7 +122,6 @@ open class GenericMethod<T> {
   }
 
   @JvmStatic
-  @ObjCName("testErasureCast_typeVariable")
   fun <CT: Container<C>?, C: Content?> testErasureCast_typeVariable() {
    val list: MutableList<Container<C>?> = ArrayList<Container<C>>() as MutableList<Container<C>?>
    val content: Content? = list.get(0)!!.get_pp_genericmethod()
@@ -196,38 +162,29 @@ open class GenericMethod<T> {
   }
  }
 
- @ObjCName("J2ktGenericmethodGenericMethod_SuperContainer", swiftName = "GenericmethodGenericMethod_SuperContainer", exact = true)
  open class SuperContainer<C: Container<*>?> internal constructor() {
   internal open fun get_pp_genericmethod(): C {
    return null as C
   }
  }
 
- @ObjCName("J2ktGenericmethodGenericMethod_Container", swiftName = "GenericmethodGenericMethod_Container", exact = true)
  open class Container<CT: Content?> internal constructor() {
   internal open fun get_pp_genericmethod(): CT {
    return null as CT
   }
  }
 
- @ObjCName("J2ktGenericmethodGenericMethod_Content", swiftName = "GenericmethodGenericMethod_Content", exact = true)
  open class Content internal constructor() {
   internal open fun getProp_pp_genericmethod(): String? {
    return null
   }
  }
 
- @ObjCName("J2ktGenericmethodGenericMethod_Consumer", swiftName = "GenericmethodGenericMethod_Consumer", exact = true)
  fun interface Consumer<V> {
-  @ObjCName("accept")
-  fun accept(
-   @ObjCName("withId") v: V
-  )
+  fun accept(v: V)
  }
 
- @ObjCName("J2ktGenericmethodGenericMethod_Supplier", swiftName = "GenericmethodGenericMethod_Supplier", exact = true)
  fun interface Supplier<V> {
-  @ObjCName("get")
   fun get(): V
  }
 }

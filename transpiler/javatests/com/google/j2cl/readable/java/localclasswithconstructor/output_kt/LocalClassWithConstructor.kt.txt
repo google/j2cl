@@ -1,5 +1,4 @@
 // Generated from "localclasswithconstructor/LocalClassWithConstructor.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -20,18 +19,11 @@ package localclasswithconstructor
 
 import javaemul.lang.*
 import kotlin.Int
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktLocalclasswithconstructorLocalClassWithConstructor", swiftName = "LocalclasswithconstructorLocalClassWithConstructor", exact = true)
 open class LocalClassWithConstructor {
- @ObjCName("test")
- open fun test(
-  @ObjCName("withInt", swiftName = "with") p: Int
- ) {
+ open fun test(p: Int) {
   val localVar: Int = 1
   open class LocalClass {
    @JvmField

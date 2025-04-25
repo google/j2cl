@@ -1,5 +1,4 @@
 // Generated from "j2ktnotpassing/DefinitelyNotNull.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -20,15 +19,10 @@ package j2ktnotpassing
 
 import javaemul.lang.*
 import java.lang.RuntimeException
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktnotpassingDefinitelyNotNull", swiftName = "J2ktnotpassingDefinitelyNotNull", exact = true)
 open class DefinitelyNotNull {
- @ObjCName("J2ktJ2ktnotpassingDefinitelyNotNull_Ordering", swiftName = "J2ktnotpassingDefinitelyNotNull_Ordering", exact = true)
  open class Ordering<T> internal constructor() {
   internal open fun <S: T> reverse_pp_j2ktnotpassing(): Ordering<S> {
    throw RuntimeException()
@@ -39,7 +33,6 @@ open class DefinitelyNotNull {
   }
  }
 
- @ObjCName("J2ktJ2ktnotpassingDefinitelyNotNull_NullsFirstOrdering", swiftName = "J2ktnotpassingDefinitelyNotNull_NullsFirstOrdering", exact = true)
  inner class NullsFirstOrdering<T> constructor(ordering: Ordering<in T>): Ordering<T?>() {
   @JvmField
   internal val ordering_pp_j2ktnotpassing: Ordering<in T>
@@ -48,12 +41,10 @@ open class DefinitelyNotNull {
    this.ordering_pp_j2ktnotpassing = ordering
   }
 
-  @ObjCName("reverse")
   public fun <S: T?> reverse(): Ordering<S> {
    return this.ordering_pp_j2ktnotpassing.reverse_pp_j2ktnotpassing().nullsLast_pp_j2ktnotpassing<S>() as Ordering<S>
   }
 
-  @ObjCName("nullsLast")
   public fun <S: T?> nullsLast(): Ordering<S?> {
    return this.ordering_pp_j2ktnotpassing.nullsLast_pp_j2ktnotpassing<S?>()
   }

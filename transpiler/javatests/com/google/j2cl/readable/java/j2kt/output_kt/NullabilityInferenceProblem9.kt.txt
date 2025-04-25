@@ -1,5 +1,4 @@
 // Generated from "j2kt/NullabilityInferenceProblem9.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -20,15 +19,10 @@ package j2kt
 
 import javaemul.lang.*
 import java.lang.RuntimeException
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktNullabilityInferenceProblem9", swiftName = "J2ktNullabilityInferenceProblem9", exact = true)
 open class NullabilityInferenceProblem9 {
- @ObjCName("J2ktJ2ktNullabilityInferenceProblem9Companion", swiftName = "J2ktNullabilityInferenceProblem9Companion", exact = true)
  companion object {
   @JvmStatic
   internal fun <V> future_pp_j2kt(v: V): Future<V> {
@@ -54,17 +48,11 @@ open class NullabilityInferenceProblem9 {
   }
  }
 
- @ObjCName("J2ktJ2ktNullabilityInferenceProblem9_Foo", swiftName = "J2ktNullabilityInferenceProblem9_Foo", exact = true)
  interface Foo
 
- @ObjCName("J2ktJ2ktNullabilityInferenceProblem9_Future", swiftName = "J2ktNullabilityInferenceProblem9_Future", exact = true)
  interface Future<V>
 
- @ObjCName("J2ktJ2ktNullabilityInferenceProblem9_FutureFunction", swiftName = "J2ktNullabilityInferenceProblem9_FutureFunction", exact = true)
  fun interface FutureFunction<I, O> {
-  @ObjCName("apply")
-  fun apply(
-   @ObjCName("withId") i: I
-  ): Future<O>
+  fun apply(i: I): Future<O>
  }
 }

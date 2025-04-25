@@ -1,5 +1,4 @@
 // Generated from "autovalue/AutoValueWithFields.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -23,22 +22,16 @@ import java.io.Serializable
 import javaemul.lang.annotations.WasAutoValue
 import kotlin.Int
 import kotlin.Long
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktAutovalueAutoValueWithFields", swiftName = "AutovalueAutoValueWithFields", exact = true)
 @WasAutoValue
 abstract class AutoValueWithFields internal constructor(): Parent(), Serializable {
  @JvmField
  internal var userField2_pp_autovalue: Int = 0
 
- @ObjCName("getIntField")
  abstract fun getIntField(): Int
 
- @ObjCName("J2ktAutovalueAutoValueWithFieldsCompanion", swiftName = "AutovalueAutoValueWithFieldsCompanion", exact = true)
  companion object {
   private const val serialVersionUID: Long = 42L
 
@@ -46,12 +39,10 @@ abstract class AutoValueWithFields internal constructor(): Parent(), Serializabl
  }
 }
 
-@ObjCName("J2ktAutovalueParent", swiftName = "AutovalueParent", exact = true)
 open class Parent internal constructor() {
  @JvmField
  internal var userField1_pp_autovalue: Int = 0
 
- @ObjCName("J2ktAutovalueParentCompanion", swiftName = "AutovalueParentCompanion", exact = true)
  companion object {
   private const val staticField: Long = 42L
  }

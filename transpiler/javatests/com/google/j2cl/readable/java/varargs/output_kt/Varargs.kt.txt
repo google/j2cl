@@ -1,5 +1,4 @@
 // Generated from "varargs/Varargs.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -26,84 +25,47 @@ import kotlin.Cloneable
 import kotlin.Int
 import kotlin.Long
 import kotlin.Number
-import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
 import kotlin.arrayOf
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktVarargsVarargs", swiftName = "VarargsVarargs", exact = true)
 open class Varargs {
  private var args: Array<Any?>? = null
 
- constructor(
-  vararg @ObjCName("IntArray") args: Int
- )
+ constructor(vararg args: Int)
 
  constructor(): this(1)
 
- @ObjCName("test")
- open fun test(
-  @ObjCName("withInt", swiftName = "with") a: Int,
-  vararg @ObjCName("withNSObjectArray") args: Any?
- ) {
+ open fun test(a: Int, vararg args: Any?) {
   val args_1: Array<Any?>? = args as Array<Any?>?
  }
 
- @ObjCName("testCloneable")
- open fun testCloneable(
-  vararg @ObjCName("withNSCopyingArray") args: Cloneable?
- ) {
+ open fun testCloneable(vararg args: Cloneable?) {
   val args_1: Array<Cloneable?>? = args as Array<Cloneable?>?
  }
 
- @ObjCName("testSerializable")
- open fun testSerializable(
-  vararg @ObjCName("withJavaIoSerializableArray") args: Serializable?
- ) {
+ open fun testSerializable(vararg args: Serializable?) {
   val args_1: Array<Serializable?>? = args as Array<Serializable?>?
  }
 
- @ObjCName("testAssignment")
- open fun testAssignment(
-  vararg @ObjCName("withNSObjectArray") args: Any?
- ) {
+ open fun testAssignment(vararg args: Any?) {
   val args_1: Array<Any?>? = args as Array<Any?>?
   this.args = args_1
  }
 
- @ObjCName("testLambda")
- open fun testLambda(
-  @ObjCName("withVarargsVarargs_FunctionalInterface", swiftName = "with") functionalInterface: FunctionalInterface?
- ) {}
+ open fun testLambda(functionalInterface: FunctionalInterface?) {}
 
- @ObjCName("testOverloaded")
- open fun testOverloaded(
-  @ObjCName("withId") o: Any?
- ) {}
+ open fun testOverloaded(o: Any?) {}
 
- @ObjCName("testOverloaded")
- open fun testOverloaded(
-  @ObjCName("withNSString", swiftName = "with") o: String?,
-  vararg @ObjCName("withNSObjectArray") rest: Any?
- ) {
+ open fun testOverloaded(o: String?, vararg rest: Any?) {
   val rest_1: Array<Any?>? = rest as Array<Any?>?
  }
 
- @ObjCName("testOverloaded")
- open fun testOverloaded(
-  @ObjCName("withLong") l: Long
- ) {}
+ open fun testOverloaded(l: Long) {}
 
- @ObjCName("testOverloaded")
- open fun testOverloaded(
-  @ObjCName("withLong") l: Long,
-  vararg @ObjCName("withLongArray") rest: Long
- ) {}
+ open fun testOverloaded(l: Long, vararg rest: Long) {}
 
- @ObjCName("main")
  open fun main() {
   val v: Varargs = Varargs()
   v.test(1)
@@ -171,44 +133,28 @@ open class Varargs {
   )
  }
 
- @ObjCName("J2ktVarargsVarargsCompanion", swiftName = "VarargsVarargsCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("fun")
-  fun <T: Number?> `fun`(
-   vararg @ObjCName("withNSNumberArray") elements: T
-  ) {
+  fun <T: Number?> `fun`(vararg elements: T) {
    val elements_1: Array<T>? = elements as Array<T>?
   }
 
   @JvmStatic
-  @ObjCName("bar")
-  fun <E: Number?> bar(
-   @ObjCName("withNSNumber", swiftName = "with") a: E,
-   @ObjCName("withNSNumber", swiftName = "with") b: E
-  ) {
+  fun <E: Number?> bar(a: E, b: E) {
    Varargs.`fun`<E>(a, b)
   }
 
   @JvmStatic
-  @ObjCName("passthrough")
-  fun <T> passthrough(
-   @ObjCName("withId") o: T
-  ): T {
+  fun <T> passthrough(o: T): T {
    return o
   }
  }
 
- @ObjCName("J2ktVarargsVarargs_FunctionalInterface", swiftName = "VarargsVarargs_FunctionalInterface", exact = true)
  fun interface FunctionalInterface {
-  @ObjCName("apply")
-  fun apply(
-   vararg @ObjCName("withNSStringArray") strings: String?
-  )
+  fun apply(vararg strings: String?)
  }
 }
 
-@ObjCName("J2ktVarargsChild", swiftName = "VarargsChild", exact = true)
 open class Child: Varargs {
  constructor(): super(1)
 }

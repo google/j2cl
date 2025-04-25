@@ -1,5 +1,4 @@
 // Generated from "interfacejsbridge/InterfaceImpl.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -21,34 +20,21 @@ package interfacejsbridge
 import javaemul.lang.*
 import jsinterop.annotations.JsType
 import kotlin.Int
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktInterfacejsbridgeMyJsInterface", swiftName = "InterfacejsbridgeMyJsInterface", exact = true)
 @JsType
 fun interface MyJsInterface {
- @ObjCName("foo")
- fun foo(
-  @ObjCName("withInt", swiftName = "with") a: Int
- ): Int
+ fun foo(a: Int): Int
 }
 
-@ObjCName("J2ktInterfacejsbridgeMyInterface", swiftName = "InterfacejsbridgeMyInterface", exact = true)
 fun interface MyInterface {
- @ObjCName("foo")
- fun foo(
-  @ObjCName("withInt", swiftName = "with") a: Int
- ): Int
+ fun foo(a: Int): Int
 }
 
-@ObjCName("J2ktInterfacejsbridgeSubInterface", swiftName = "InterfacejsbridgeSubInterface", exact = true)
 fun interface SubInterface: MyJsInterface, MyInterface {
  override fun foo(a: Int): Int
 }
 
-@ObjCName("J2ktInterfacejsbridgeInterfaceImpl", swiftName = "InterfacejsbridgeInterfaceImpl", exact = true)
 open class InterfaceImpl: SubInterface {
  override fun foo(a: Int): Int {
   return 0

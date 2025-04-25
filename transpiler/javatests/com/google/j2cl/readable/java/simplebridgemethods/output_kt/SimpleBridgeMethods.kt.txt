@@ -1,5 +1,4 @@
 // Generated from "simplebridgemethods/SimpleBridgeMethods.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -21,44 +20,28 @@ package simplebridgemethods
 import javaemul.lang.*
 import kotlin.AssertionError
 import kotlin.Error
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktSimplebridgemethodsSuperclass", swiftName = "SimplebridgemethodsSuperclass", exact = true)
 open class Superclass<T: Error?> internal constructor() {
- @ObjCName("m1")
- open fun m1(
-  @ObjCName("withJavaLangError", swiftName = "with") t: T
- ) {}
+ open fun m1(t: T) {}
 }
 
-@ObjCName("J2ktSimplebridgemethodsSubclass", swiftName = "SimplebridgemethodsSubclass", exact = true)
 open class Subclass internal constructor(): Superclass<AssertionError?>() {
  override fun m1(a: AssertionError?) {}
 }
 
-@ObjCName("J2ktSimplebridgemethodsAnotherSubclass", swiftName = "SimplebridgemethodsAnotherSubclass", exact = true)
 open class AnotherSubclass internal constructor(): Superclass<AssertionError?>()
 
-@ObjCName("J2ktSimplebridgemethodsCallable", swiftName = "SimplebridgemethodsCallable", exact = true)
 fun interface Callable<V> {
- @ObjCName("call")
- fun call(
-  @ObjCName("withId") v: V
- )
+ fun call(v: V)
 }
 
-@ObjCName("J2ktSimplebridgemethodsTask", swiftName = "SimplebridgemethodsTask", exact = true)
 open class Task<T> internal constructor(): Callable<T> {
  override fun call(t: T) {}
 }
 
-@ObjCName("J2ktSimplebridgemethodsAnotherTask", swiftName = "SimplebridgemethodsAnotherTask", exact = true)
 open class AnotherTask<T: AssertionError?> internal constructor(): Callable<Superclass<T>?> {
  override fun call(t: Superclass<T>?) {}
 }
 
-@ObjCName("J2ktSimplebridgemethodsSimpleBridgeMethods", swiftName = "SimplebridgemethodsSimpleBridgeMethods", exact = true)
 open class SimpleBridgeMethods

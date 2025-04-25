@@ -1,5 +1,4 @@
 // Generated from "instancequalifieronstaticfield/InstanceQualifiers.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -21,44 +20,32 @@ package instancequalifieronstaticfield
 import javaemul.lang.*
 import kotlin.Array
 import kotlin.Int
-import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 import kotlin.run
 
-@ObjCName("J2ktInstancequalifieronstaticfieldInstanceQualifiers", swiftName = "InstancequalifieronstaticfieldInstanceQualifiers", exact = true)
 open class InstanceQualifiers {
- @ObjCName("J2ktInstancequalifieronstaticfieldInstanceQualifiersCompanion", swiftName = "InstancequalifieronstaticfieldInstanceQualifiersCompanion", exact = true)
  companion object {
   @JvmField
-  @ObjCName("staticField_")
   var staticField: Int = 100
 
   @JvmField
-  @ObjCName("sideEffectCount_")
   var sideEffectCount: Int = 0
 
   @JvmStatic
-  @ObjCName("getStaticValue")
   fun getStaticValue(): Int {
    return InstanceQualifiers.staticField
   }
 
   @JvmStatic
-  @ObjCName("getStaticInstanceQualifiers")
   fun getStaticInstanceQualifiers(): InstanceQualifiers? {
    return null
   }
 
   @JvmStatic
-  @ObjCName("main")
-  fun main(
-   vararg @ObjCName("withNSStringArray") args: String?
-  ) {
+  fun main(vararg args: String?) {
    val args_1: Array<String?>? = args as Array<String?>?
    val main: InstanceQualifiers = InstanceQualifiers()
    var i: Int = 0
