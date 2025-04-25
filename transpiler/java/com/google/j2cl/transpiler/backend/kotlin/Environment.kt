@@ -40,6 +40,8 @@ import com.google.j2cl.transpiler.backend.kotlin.ast.withWidestScopeOrNull
  *   name without import
  * @property privateAsKtInternalDeclarationMemberDescriptorSet a set of private declaration member
  *   descriptors which should be rendered as internal in Kotlin.
+ * @property captureIndices mutable map of capture indices, used for rendering capture types
+ * @property isJ2ObjCInteropEnabled whether to enable J2ObjC interop
  */
 internal data class Environment(
   val hiddenFromObjCMapping: HiddenFromObjCMapping,
@@ -50,6 +52,7 @@ internal data class Environment(
   private val importedOptInQualifiedNamesMutableSet: MutableSet<String> = mutableSetOf(),
   private val privateAsKtInternalDeclarationMemberDescriptorSet: Set<MemberDescriptor> = setOf(),
   private val captureIndices: MutableMap<TypeVariable, Int> = mutableMapOf(),
+  internal val isJ2ObjCInteropEnabled: Boolean = false,
 ) {
   /**
    * Returns identifier for the given named node. Use "_MISSING" prefix for missing names, to help

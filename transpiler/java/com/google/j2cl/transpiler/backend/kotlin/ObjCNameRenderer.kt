@@ -41,6 +41,9 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
   private val hiddenFromObjCMapping: HiddenFromObjCMapping
     get() = environment.hiddenFromObjCMapping
 
+  private val isJ2ObjCInteropEnabled: Boolean
+    get() = nameRenderer.environment.isJ2ObjCInteropEnabled
+
   fun hiddenFromObjCAnnotationSource(): Source =
     annotation(
       nameRenderer.sourceWithOptInQualifiedName("kotlin.experimental.ExperimentalObjCRefinement") {
@@ -64,6 +67,7 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
 
   fun objCAnnotationSource(typeDeclaration: TypeDeclaration): Source =
     when {
+      !isJ2ObjCInteropEnabled -> Source.EMPTY
       hiddenFromObjCMapping.contains(typeDeclaration) -> hiddenFromObjCAnnotationSource()
       needsObjCNameAnnotation(typeDeclaration) ->
         objCNameAnnotationSource(
@@ -75,7 +79,7 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
     }
 
   fun objCAnnotationSource(companionObject: CompanionObject): Source =
-    Source.emptyUnless(needsObjCNameAnnotation(companionObject)) {
+    Source.emptyUnless(isJ2ObjCInteropEnabled && needsObjCNameAnnotation(companionObject)) {
       objCNameAnnotationSource(
         companionObject.declaration.objCName(nameRenderer.objCNamePrefix),
         swiftName = companionObject.declaration.objCNameWithoutPrefix,
@@ -88,7 +92,8 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
     methodObjCNames: MethodObjCNames?,
   ): Source =
     Source.emptyIf(
-      methodDescriptor.isConstructor ||
+      !isJ2ObjCInteropEnabled ||
+        methodDescriptor.isConstructor ||
         hiddenFromObjCMapping.contains(methodDescriptor.enclosingTypeDescriptor)
     ) {
       when {
@@ -104,7 +109,10 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
       .orEmpty()
 
   fun objCAnnotationSource(fieldDescriptor: FieldDescriptor): Source =
-    Source.emptyIf(hiddenFromObjCMapping.contains(fieldDescriptor.enclosingTypeDescriptor)) {
+    Source.emptyIf(
+      !isJ2ObjCInteropEnabled ||
+        hiddenFromObjCMapping.contains(fieldDescriptor.enclosingTypeDescriptor)
+    ) {
       when {
         hiddenFromObjCMapping.contains(fieldDescriptor) -> hiddenFromObjCAnnotationSource()
         needsObjCNameAnnotation(fieldDescriptor) ->
@@ -141,6 +149,7 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
 
   internal fun renderedObjCNames(method: Method): MethodObjCNames? =
     when {
+      !isJ2ObjCInteropEnabled -> null
       !needsObjCNameAnnotation(method) -> null
       else -> method.toObjCNames()
     }

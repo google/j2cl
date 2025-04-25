@@ -27,6 +27,10 @@ import com.google.j2cl.transpiler.ast.MemberReference
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.backend.common.UniqueNamesResolver.computeUniqueNames
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
+import java.lang.Boolean.getBoolean
+
+private val isJ2ObjCInteropEnabled: Boolean =
+  getBoolean("com.google.j2cl.transpiler.backend.kotlin.isJ2ObjCInteropEnabled")
 
 /**
  * The OutputGeneratorStage contains all necessary information for generating the Kotlin output for
@@ -35,6 +39,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source
  * @property output output for generated sources
  * @property problems problems collected during generation
  * @property objCNamePrefix ObjCName prefix for types
+ * @property isJ2ObjCInteropEnabled whether J2ObjC interop is enabled
  */
 class KotlinGeneratorStage(
   private val output: OutputUtils.Output,
@@ -52,7 +57,9 @@ class KotlinGeneratorStage(
   private fun generateOutputs(compilationUnit: CompilationUnit) {
     problems.abortIfCancelled()
     generateKtOutputs(compilationUnit)
-    generateObjCOutputs(compilationUnit)
+    if (isJ2ObjCInteropEnabled) {
+      generateObjCOutputs(compilationUnit)
+    }
   }
 
   /** Generate Kotlin outputs for a compilation unit. */
@@ -82,6 +89,7 @@ class KotlinGeneratorStage(
         identifierSet = nameToIdentifierMap.values.toSet(),
         privateAsKtInternalDeclarationMemberDescriptorSet =
           compilationUnit.buildPrivateKtInternalMemberDescriptorSet(),
+        isJ2ObjCInteropEnabled = isJ2ObjCInteropEnabled,
       )
 
     val nameRenderer =
