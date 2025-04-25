@@ -21,8 +21,7 @@ public class MethodExample {
 
   public static class Foo {}
 
-  public static class ObjCName {
-
+  public static class Default {
     public void instanceMethod(int i) {}
 
     public void instanceMethod(int i, long[] l) {}
@@ -58,7 +57,9 @@ public class MethodExample {
     public static <T> void staticMethod(T t) {}
 
     public static <S extends String> void staticMethod(S s) {}
+  }
 
+  public static class Custom {
     @ObjectiveCName("newFoo")
     public void foo() {}
 
@@ -82,51 +83,51 @@ public class MethodExample {
 
     @ObjectiveCName("explicitParamsWithIndex:name:")
     public void explicitParams(int i, String s) {}
+  }
 
-    public static final class Special {
-      public static final class WithBoolean {
-        public void get(boolean x) {}
-      }
+  public static final class Special {
+    public static final class WithBoolean {
+      public void get(boolean x) {}
+    }
 
-      public static final class WithChar {
-        public void get(char x) {}
-      }
+    public static final class WithChar {
+      public void get(char x) {}
+    }
 
-      public static final class WithByte {
-        public void get(byte x) {}
-      }
+    public static final class WithByte {
+      public void get(byte x) {}
+    }
 
-      public static final class WithShort {
-        public void get(short x) {}
-      }
+    public static final class WithShort {
+      public void get(short x) {}
+    }
 
-      public static final class WithInt {
-        public void get(int x) {}
-      }
+    public static final class WithInt {
+      public void get(int x) {}
+    }
 
-      public static final class WithLong {
-        public void get(long x) {}
-      }
+    public static final class WithLong {
+      public void get(long x) {}
+    }
 
-      public static final class WithFloat {
-        public void get(float x) {}
-      }
+    public static final class WithFloat {
+      public void get(float x) {}
+    }
 
-      public static final class WithDouble {
-        public void get(double x) {}
-      }
+    public static final class WithDouble {
+      public void get(double x) {}
+    }
 
-      public static final class WithObject {
-        public void get(Object x) {}
-      }
+    public static final class WithObject {
+      public void get(Object x) {}
+    }
 
-      public static final class WithString {
-        public void get(String x) {}
-      }
+    public static final class WithString {
+      public void get(String x) {}
+    }
 
-      public static final class WithFoo {
-        public void get(Foo x) {}
-      }
+    public static final class WithFoo {
+      public void get(Foo x) {}
     }
   }
 
