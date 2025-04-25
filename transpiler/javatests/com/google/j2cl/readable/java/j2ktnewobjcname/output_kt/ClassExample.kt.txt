@@ -1,0 +1,573 @@
+// Generated from "j2ktnewobjcname/ClassExample.java"
+@file:OptIn(ExperimentalObjCName::class)
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN")
+
+package j2ktnewobjcname
+
+import javaemul.lang.*
+import java.util.AbstractList
+import java.util.HashMap
+import java.util.LinkedList
+import java.util.StringJoiner
+import kotlin.Any
+import kotlin.Boolean
+import kotlin.Byte
+import kotlin.Char
+import kotlin.Double
+import kotlin.Float
+import kotlin.Int
+import kotlin.Long
+import kotlin.Number
+import kotlin.OptIn
+import kotlin.Short
+import kotlin.String
+import kotlin.Suppress
+import kotlin.collections.HashSet
+import kotlin.collections.MutableCollection
+import kotlin.collections.MutableIterable
+import kotlin.collections.MutableIterator
+import kotlin.collections.MutableList
+import kotlin.collections.MutableListIterator
+import kotlin.collections.MutableMap
+import kotlin.collections.MutableSet
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
+
+@ObjCName("J2ktNewClassExample", swiftName = "NewClassExample", exact = true)
+open class ClassExample {
+ @JvmField
+ @ObjCName("publicField_")
+ var publicField: Int = 0
+
+ @JvmField
+ @ObjCName("protectedField_")
+ var protectedField: Int = 0
+
+ @JvmField
+ internal var packagePrivateField_pp_j2ktnewobjcname: Int = 0
+
+ private var privateField: Int = 0
+
+ constructor()
+
+ constructor(
+  @ObjCName("Integer") i: Int
+ )
+
+ constructor(
+  @ObjCName("Int") i: Int,
+  @ObjCName("withNSString") s: String
+ )
+
+ @ObjCName("J2ktNewClassExampleCompanion", swiftName = "NewClassExampleCompanion", exact = true)
+ companion object {
+  @JvmField
+  @ObjCName("publicStaticField_")
+  var publicStaticField: Int = 0
+
+  @JvmField
+  @ObjCName("protectedStaticField_")
+  var protectedStaticField: Int = 0
+
+  @JvmField
+  internal var packagePrivateStaticField_pp_j2ktnewobjcname: Int = 0
+
+  private var privateStaticField: Int = 0
+
+  @JvmField
+  @ObjCName("objectField_")
+  var objectField: Any? = null
+
+  @JvmField
+  @ObjCName("stringField_")
+  var stringField: String? = null
+
+  @JvmField
+  @ObjCName("selfField_")
+  var selfField: ClassExample? = null
+
+  @JvmField
+  @ObjCName("iterable_")
+  var iterable: MutableIterable<String>? = null
+
+  @JvmField
+  @ObjCName("iterator_")
+  var iterator: MutableIterator<String>? = null
+
+  @JvmField
+  @ObjCName("collection_")
+  var collection: MutableCollection<Any?>? = null
+
+  @JvmField
+  @ObjCName("val_")
+  var `val`: Int = 0
+
+  @JvmField
+  @ObjCName("var_")
+  var `var`: Int = 0
+
+  @JvmField
+  @ObjCName("fun_")
+  var `fun`: Int = 0
+
+  @JvmField
+  @ObjCName("alloc___")
+  var alloc: Int = 0
+
+  @JvmField
+  @ObjCName("init___")
+  var init: Int = 0
+
+  @JvmField
+  @ObjCName("extern___")
+  var extern: Int = 0
+
+  @JvmField
+  @ObjCName("inline___")
+  var inline: Int = 0
+
+  @JvmField
+  @ObjCName("NULL___")
+  var NULL: Int = 0
+
+  @JvmField
+  @ObjCName("allocFoo_")
+  var allocFoo: Int = 0
+
+  @JvmField
+  @ObjCName("initFoo_")
+  var initFoo: Int = 0
+
+  @JvmField
+  @ObjCName("newFoo_")
+  var newFoo: Int = 0
+
+  @ObjCName("BOOLEAN_FALSE_")
+  const val BOOLEAN_FALSE: Boolean = false
+
+  @ObjCName("BOOLEAN_TRUE_")
+  const val BOOLEAN_TRUE: Boolean = true
+
+  @ObjCName("CHAR_")
+  const val CHAR: Char = 'a'
+
+  @ObjCName("CHAR_APOSTROPHE_")
+  const val CHAR_APOSTROPHE: Char = '\''
+
+  @ObjCName("CHAR_BACKSLASH_")
+  const val CHAR_BACKSLASH: Char = '\\'
+
+  @ObjCName("CHAR_UNICODE_")
+  const val CHAR_UNICODE: Char = '\u1231'
+
+  @ObjCName("BYTE_")
+  const val BYTE: Byte = 123.toByte()
+
+  @ObjCName("SHORT_")
+  const val SHORT: Short = 123.toShort()
+
+  @ObjCName("INT_")
+  const val INT: Int = 123
+
+  @ObjCName("INT_MIN_VALUE_")
+  const val INT_MIN_VALUE: Int = -2147483647 - 1
+
+  @ObjCName("INT_MAX_VALUE_")
+  const val INT_MAX_VALUE: Int = 2147483647
+
+  @ObjCName("LONG_")
+  const val LONG: Long = 123L
+
+  @ObjCName("LONG_MIN_VALUE_")
+  const val LONG_MIN_VALUE: Long = -9223372036854775807L - 1L
+
+  @ObjCName("LONG_MAX_VALUE_")
+  const val LONG_MAX_VALUE: Long = 9223372036854775807L
+
+  @ObjCName("FLOAT_")
+  const val FLOAT: Float = 123.0f
+
+  @ObjCName("FLOAT_ZER0_")
+  const val FLOAT_ZER0: Float = 0.0f
+
+  @ObjCName("FLOAT_NEGATIVE_ZERO_")
+  const val FLOAT_NEGATIVE_ZERO: Float = -0.0f
+
+  @ObjCName("FLOAT_NAN_")
+  const val FLOAT_NAN: Float = (0.0f / 0.0f)
+
+  @ObjCName("FLOAT_NEGATIVE_INFINITY_")
+  const val FLOAT_NEGATIVE_INFINITY: Float = (-1.0f / 0.0f)
+
+  @ObjCName("FLOAT_POSITIVE_INFINITY_")
+  const val FLOAT_POSITIVE_INFINITY: Float = (1.0f / 0.0f)
+
+  @ObjCName("FLOAT_MIN_VALUE_")
+  const val FLOAT_MIN_VALUE: Float = 1.4E-45f
+
+  @ObjCName("FLOAT_MIN_NORMAL_")
+  const val FLOAT_MIN_NORMAL: Float = 1.1754944E-38f
+
+  @ObjCName("FLOAT_MIN_EXPONENT_")
+  const val FLOAT_MIN_EXPONENT: Float = -126.0f
+
+  @ObjCName("FLOAT_MAX_VALUE_")
+  const val FLOAT_MAX_VALUE: Float = 3.4028235E38f
+
+  @ObjCName("FLOAT_MAX_EXPONENT_")
+  const val FLOAT_MAX_EXPONENT: Float = 127.0f
+
+  @ObjCName("DOUBLE_")
+  const val DOUBLE: Double = 123.0
+
+  @ObjCName("DOUBLE_ZER0_")
+  const val DOUBLE_ZER0: Double = 0.0
+
+  @ObjCName("DOUBLE_NEGATIVE_ZERO_")
+  const val DOUBLE_NEGATIVE_ZERO: Double = -0.0
+
+  @ObjCName("DOUBLE_NAN_")
+  const val DOUBLE_NAN: Double = (0.0 / 0.0)
+
+  @ObjCName("DOUBLE_NEGATIVE_INFINITY_")
+  const val DOUBLE_NEGATIVE_INFINITY: Double = (-1.0 / 0.0)
+
+  @ObjCName("DOUBLE_POSITIVE_INFINITY_")
+  const val DOUBLE_POSITIVE_INFINITY: Double = (1.0 / 0.0)
+
+  @ObjCName("DOUBLE_MIN_VALUE_")
+  const val DOUBLE_MIN_VALUE: Double = 4.9E-324
+
+  @ObjCName("DOUBLE_MIN_NORMAL_")
+  const val DOUBLE_MIN_NORMAL: Double = 2.2250738585072014E-308
+
+  @ObjCName("DOUBLE_MIN_EXPONENT_")
+  const val DOUBLE_MIN_EXPONENT: Double = -1022.0
+
+  @ObjCName("DOUBLE_MAX_VALUE_")
+  const val DOUBLE_MAX_VALUE: Double = 1.7976931348623157E308
+
+  @ObjCName("DOUBLE_MAX_EXPONENT_")
+  const val DOUBLE_MAX_EXPONENT: Double = 1023.0
+
+  @ObjCName("STRING_")
+  const val STRING: String = "foo"
+
+  @JvmStatic
+  @ObjCName("newFoo")
+  fun foo() {}
+
+  @JvmStatic
+  @ObjCName("newProtectedFoo")
+  fun protectedFoo() {}
+
+  @JvmStatic
+  @ObjCName("newFooFrom")
+  fun newFoo(
+   @ObjCName("Int") i: Int
+  ) {}
+
+  @JvmStatic
+  @ObjCName("newFooFrom")
+  fun foo(
+   @ObjCName("Int") s: String,
+   @ObjCName("withInteger") i: Int
+  ) {}
+
+  @JvmStatic
+  @ObjCName("foo")
+  fun foo(
+   @ObjCName("withNSString", swiftName = "with") s: String,
+   @ObjCName("withNSString", swiftName = "with") i: String
+  ) {}
+
+  @JvmStatic
+  @ObjCName("val")
+  fun `val`() {}
+
+  @JvmStatic
+  @ObjCName("var")
+  fun `var`() {}
+
+  @JvmStatic
+  @ObjCName("fun")
+  fun `fun`() {}
+
+  @JvmStatic
+  @ObjCName("alloc__")
+  fun alloc() {}
+
+  @JvmStatic
+  @ObjCName("allocBar")
+  fun allocBar() {}
+
+  @JvmStatic
+  @ObjCName("allocatedBar")
+  fun allocatedBar() {}
+
+  @JvmStatic
+  @ObjCName("init__")
+  fun init() {}
+
+  @JvmStatic
+  @ObjCName("initialize__")
+  fun initialize() {}
+
+  @JvmStatic
+  @ObjCName("initBar")
+  fun initBar() {}
+
+  @JvmStatic
+  @ObjCName("newBar")
+  fun newBar() {}
+
+  @JvmStatic
+  @ObjCName("copyBar")
+  fun copyBar() {}
+
+  @JvmStatic
+  @ObjCName("mutableCopyBar")
+  fun mutableCopyBar() {}
+
+  @JvmStatic
+  @ObjCName("reservedParamNames")
+  fun reservedParamNames(
+   @ObjCName("withInt", swiftName = "with") extern: Int,
+   @ObjCName("withInt", swiftName = "with") struct: Int,
+   @ObjCName("withInt", swiftName = "with") register: Int,
+   @ObjCName("withInt", swiftName = "with") inline: Int
+  ) {}
+
+  @JvmStatic
+  @ObjCName("nativeTypes")
+  fun nativeTypes(
+   @ObjCName("withNSString", swiftName = "with") s: String,
+   @ObjCName("withId") o: Any,
+   @ObjCName("withNSNumber", swiftName = "with") n: Number
+  ): String {
+   return s
+  }
+
+  @JvmStatic
+  @ObjCName("numberType")
+  fun numberType(
+   @ObjCName("withNSNumber", swiftName = "with") l: Number
+  ) {}
+
+  @JvmStatic
+  @ObjCName("booleanType")
+  fun booleanType(
+   @ObjCName("withJavaLangBoolean", swiftName = "with") l: Boolean
+  ) {}
+
+  @JvmStatic
+  @ObjCName("characterType")
+  fun characterType(
+   @ObjCName("withJavaLangCharacter", swiftName = "with") l: Char
+  ) {}
+
+  @JvmStatic
+  @ObjCName("byteType")
+  fun byteType(
+   @ObjCName("withJavaLangByte", swiftName = "with") l: Byte
+  ) {}
+
+  @JvmStatic
+  @ObjCName("shortType")
+  fun shortType(
+   @ObjCName("withJavaLangShort", swiftName = "with") l: Short
+  ) {}
+
+  @JvmStatic
+  @ObjCName("integerType")
+  fun integerType(
+   @ObjCName("withJavaLangInteger", swiftName = "with") l: Int
+  ) {}
+
+  @JvmStatic
+  @ObjCName("longType")
+  fun longType(
+   @ObjCName("withJavaLangLong", swiftName = "with") l: Long
+  ) {}
+
+  @JvmStatic
+  @ObjCName("floatType")
+  fun floatType(
+   @ObjCName("withJavaLangFloat", swiftName = "with") l: Float
+  ) {}
+
+  @JvmStatic
+  @ObjCName("doubleType")
+  fun doubleType(
+   @ObjCName("withJavaLangDouble", swiftName = "with") l: Double
+  ) {}
+
+  @JvmStatic
+  @ObjCName("iterableType")
+  fun iterableType(
+   @ObjCName("withJavaLangIterable", swiftName = "with") l: MutableIterable<String>
+  ) {}
+
+  @JvmStatic
+  @ObjCName("iteratorType")
+  fun iteratorType(
+   @ObjCName("withJavaUtilIterator", swiftName = "with") l: MutableIterator<String>
+  ) {}
+
+  @JvmStatic
+  @ObjCName("listIteratorType")
+  fun listIteratorType(
+   @ObjCName("withJavaUtilListIterator", swiftName = "with") l: MutableListIterator<String>
+  ) {}
+
+  @JvmStatic
+  @ObjCName("collectionType")
+  fun collectionType(
+   @ObjCName("withJavaUtilCollection", swiftName = "with") l: MutableCollection<String>
+  ) {}
+
+  @JvmStatic
+  @ObjCName("listType")
+  fun listType(
+   @ObjCName("withJavaUtilList", swiftName = "with") l: MutableList<String>
+  ) {}
+
+  @JvmStatic
+  @ObjCName("setType")
+  fun setType(
+   @ObjCName("withJavaUtilSet", swiftName = "with") l: MutableSet<String>
+  ) {}
+
+  @JvmStatic
+  @ObjCName("mapType")
+  fun mapType(
+   @ObjCName("withJavaUtilMap", swiftName = "with") l: MutableMap<String, String>
+  ) {}
+
+  @JvmStatic
+  @ObjCName("linkedListType")
+  fun linkedListType(
+   @ObjCName("withJavaUtilLinkedList", swiftName = "with") l: LinkedList<String>
+  ) {}
+
+  @JvmStatic
+  @ObjCName("hashSetType")
+  fun hashSetType(
+   @ObjCName("withJavaUtilHashSet", swiftName = "with") l: HashSet<String>
+  ) {}
+
+  @JvmStatic
+  @ObjCName("hashMapType")
+  fun hashMapType(
+   @ObjCName("withJavaUtilHashMap", swiftName = "with") l: HashMap<String, String>
+  ) {}
+
+  @JvmStatic
+  @ObjCName("nonNativeJavaType")
+  fun nonNativeJavaType(
+   @ObjCName("withJavaUtilStringJoiner", swiftName = "with") l: StringJoiner
+  ) {}
+ }
+
+ @ObjCName("J2ktNewClassExample_Foo", swiftName = "NewClassExample_Foo", exact = true)
+ enum class Foo {
+  @ObjCName("val")
+  `val`,
+  @ObjCName("var")
+  `var`,
+  @ObjCName("fun")
+  `fun`,
+  @ObjCName("alloc__")
+  alloc,
+  @ObjCName("init__")
+  `init`,
+  @ObjCName("initialize__")
+  initialize,
+  @ObjCName("allocFoo")
+  allocFoo,
+  @ObjCName("initFoo")
+  initFoo,
+  @ObjCName("newFoo")
+  newFoo,
+  @ObjCName("copyFoo")
+  copyFoo,
+  @ObjCName("mutableCopyFoo")
+  mutableCopyFoo,
+  @ObjCName("register__")
+  register,
+  @ObjCName("struct__")
+  struct,
+  @ObjCName("NULL__")
+  NULL,
+  @ObjCName("YES__")
+  YES,
+  @ObjCName("NO__")
+  NO;
+
+  @ObjCName("J2ktNewClassExample_FooCompanion", swiftName = "NewClassExample_FooCompanion", exact = true)
+  companion object {
+   @JvmStatic
+   @ObjCName("withOrdinal")
+   fun withOrdinal(
+    @ObjCName("withInt", swiftName = "with") ordinal: Int
+   ): Foo {
+    return Foo.values()[ordinal]
+   }
+  }
+ }
+
+ @ObjCName("J2ktNewClassExample_SubCollection", swiftName = "NewClassExample_SubCollection", exact = true)
+ open class SubCollection<E>: AbstractList<E>() {
+  override fun get(index: Int): E {
+   return null as E
+  }
+
+  override val size: Int
+   get() {
+    return 0
+   }
+
+  @ObjCName("J2ktNewClassExample_SubCollectionCompanion", swiftName = "NewClassExample_SubCollectionCompanion", exact = true)
+  companion object {
+   @JvmStatic
+   @ObjCName("staticMethod")
+   fun staticMethod() {}
+  }
+
+  @ObjCName("J2ktNewClassExample_SubCollection_InnerClass", swiftName = "NewClassExample_SubCollection_InnerClass", exact = true)
+  open class InnerClass {
+   @ObjCName("J2ktNewClassExample_SubCollection_InnerClassCompanion", swiftName = "NewClassExample_SubCollection_InnerClassCompanion", exact = true)
+   companion object {
+    @JvmStatic
+    @ObjCName("staticMethod")
+    fun staticMethod() {}
+   }
+  }
+ }
+
+ @ObjCName("J2ktNewClassExample_NonCollection", swiftName = "NewClassExample_NonCollection", exact = true)
+ open class NonCollection {
+  @ObjCName("J2ktNewClassExample_NonCollectionCompanion", swiftName = "NewClassExample_NonCollectionCompanion", exact = true)
+  companion object {
+   @JvmStatic
+   @ObjCName("staticMethod")
+   fun staticMethod() {}
+  }
+ }
+}

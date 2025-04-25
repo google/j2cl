@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Google Inc.
+ * Copyright 2022 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,13 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2kt;
+package j2ktnewobjcname;
 
-import org.jspecify.annotations.NullMarked;
+public class Keywords {
+  public static int BIG_ENDIAN = 7;
+  public static int LITTLE_ENDIAN = -7;
+  public static int NULL = 745;
+  public static int OVERFLOW = -24;
+  public static int DOMAIN = -32;
 
-@NullMarked
-public interface ObjCNameInterface {
-  int FIELD = 0;
+  public int delete = 0;
+  public int initialize = 0;
+  public int scale = 0;
+  public int typeof = 0;
 
-  static void staticMethod() {}
+  public int test(int in) {
+    int scale = this.scale + in;
+    int typeof = this.typeof + in;
+
+    int temp = OVERFLOW + DOMAIN + in;
+
+    return BIG_ENDIAN + LITTLE_ENDIAN + NULL + in;
+  }
 }

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2kt;
+package j2ktnewobjcname;
 
 import com.google.j2objc.annotations.ObjectiveCName;
 import java.util.AbstractList;
@@ -30,9 +30,9 @@ import java.util.StringJoiner;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-@ObjectiveCName("NewObjCName")
+@ObjectiveCName("NewClassExample")
 @NullMarked
-public class ObjCName {
+public class ClassExample {
 
   // Instance fields.
   public int publicField;
@@ -49,7 +49,7 @@ public class ObjCName {
   // Fields with reference types.
   public static @Nullable Object objectField;
   public static @Nullable String stringField;
-  public static @Nullable ObjCName selfField;
+  public static @Nullable ClassExample selfField;
   public static @Nullable Iterable<String> iterable;
   public static @Nullable Iterator<String> iterator;
   public static @Nullable Collection collection;
@@ -114,15 +114,12 @@ public class ObjCName {
 
   public static final String STRING = "foo";
 
-  public ObjCName() {}
+  public ClassExample() {}
 
   @ObjectiveCName("initWithInteger:")
-  public ObjCName(int i) {}
+  public ClassExample(int i) {}
 
-  public ObjCName(int i, String s) {}
-
-  @ObjectiveCName("InnerClassNewName")
-  public class InnerClassOldName {}
+  public ClassExample(int i, String s) {}
 
   @ObjectiveCName("newFoo")
   public static void foo() {}

@@ -33,20 +33,12 @@ open class KotlinKeywords {
  var `as`: Int = 0
 
  @JvmField
- @ObjCName("delete___")
- var delete: Int = 0
-
- @JvmField
  @ObjCName("fun_")
  var `fun`: Int = 0
 
  @JvmField
  @ObjCName("in_")
  var `in`: Int = 0
-
- @JvmField
- @ObjCName("initialize___")
- var initialize: Int = 0
 
  @JvmField
  @ObjCName("is_")
@@ -57,16 +49,8 @@ open class KotlinKeywords {
  var `object`: Int = 0
 
  @JvmField
- @ObjCName("scale___")
- var scale: Int = 0
-
- @JvmField
  @ObjCName("typealias_")
  var `typealias`: Int = 0
-
- @JvmField
- @ObjCName("typeof___")
- var `typeof`: Int = 0
 
  @JvmField
  @ObjCName("val_")
@@ -91,45 +75,16 @@ open class KotlinKeywords {
  @ObjCName("test")
  open fun test(
   @ObjCName("withInt", swiftName = "with") `in`: Int
- ): Int {
+ ) {
   val `as`: Int = this.`as` + `in`
-  val delete: Int = this.delete + `in`
   val `fun`: Int = this.`fun` + `in`
-  val initialize: Int = this.initialize + `in`
   val `is`: Int = this.`is` + `in`
   val `object`: Int = this.`object` + `in`
-  val scale: Int = this.scale + `in`
   val `typealias`: Int = this.`typealias` + `in`
-  val `typeof`: Int = this.`typeof` + `in`
   val `val`: Int = this.`val` + `in`
   val `var`: Int = this.`var` + `in`
   val `when`: Int = this.`when` + `in`
   val `__`: Int = this.`__` + `in`
   val `___`: Int = this.`___` + `in`
-  val temp: Int = KotlinKeywords.OVERFLOW + KotlinKeywords.DOMAIN + `in`
-  return KotlinKeywords.BIG_ENDIAN + KotlinKeywords.LITTLE_ENDIAN + KotlinKeywords.NULL + `in`
- }
-
- @ObjCName("J2ktJ2ktKotlinKeywordsCompanion", swiftName = "J2ktKotlinKeywordsCompanion", exact = true)
- companion object {
-  @JvmField
-  @ObjCName("BIG_ENDIAN___")
-  var BIG_ENDIAN: Int = 7
-
-  @JvmField
-  @ObjCName("LITTLE_ENDIAN___")
-  var LITTLE_ENDIAN: Int = - 7
-
-  @JvmField
-  @ObjCName("NULL___")
-  var NULL: Int = 745
-
-  @JvmField
-  @ObjCName("OVERFLOW___")
-  var OVERFLOW: Int = - 24
-
-  @JvmField
-  @ObjCName("DOMAIN___")
-  var DOMAIN: Int = - 32
  }
 }
