@@ -264,7 +264,11 @@ class ClosureTypesGenerator {
       closureReturnType = closureReturnType.toNullable();
     }
 
-    return closureReturnType;
+    // For suspend functions (transpiled to JS Generators), returns the `Generator` type required by
+    // JsCompiler. Otherwise, returns the closure type of the method's return type.
+    return methodDescriptor.isSuspendFunction()
+        ? new ClosureNamedType("Generator", ANY, closureReturnType).toNonNullable()
+        : closureReturnType;
   }
 
   private ImmutableList<ClosureFunctionType.Parameter> toClosureTypeParameters(

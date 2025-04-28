@@ -263,6 +263,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   @Override
   public abstract boolean isDefaultMethod();
 
+  /** Return true if the underlying method represent a Kotlin suspend function. */
+  public abstract boolean isSuspendFunction();
+
   public boolean isBridge() {
     return getBridgeOrigin() != null;
   }
@@ -979,6 +982,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setStatic(false)
         .setFinal(false)
         .setSynthetic(false)
+        .setSuspendFunction(false)
         .setEnumSyntheticMethod(false)
         .setOrigin(MethodOrigin.SOURCE)
         .setParameterDescriptors(ImmutableList.of())
@@ -1358,6 +1362,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public abstract Builder setFinal(boolean isFinal);
 
     public abstract Builder setSynthetic(boolean isSynthetic);
+
+    public abstract Builder setSuspendFunction(boolean suspendFunction);
 
     public Builder makeAbstractStub(MethodDescriptor methodDescriptor) {
       return setBridgeOrigin(methodDescriptor)

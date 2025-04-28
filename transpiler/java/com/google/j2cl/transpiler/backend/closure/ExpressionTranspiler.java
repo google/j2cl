@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.backend.closure;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.collect.Iterables;
 import com.google.j2cl.common.SourcePosition;
@@ -183,13 +184,37 @@ public final class ExpressionTranspiler {
           sourceBuilder.append("async ");
         }
 
-        emitParameters(expression);
+        if (expression.isSuspendFunction()) {
+          renderGeneratorFunction(expression);
+        } else {
+          renderArrowFunction(expression);
+        }
+        return false;
+      }
 
+      private void renderArrowFunction(FunctionExpression expression) {
+        emitParameters(expression);
         // After the header is emitted, emit the rest of the arrow function.
         sourceBuilder.append(" =>");
         StatementTranspiler.render(expression.getBody(), environment, sourceBuilder);
+      }
 
-        return false;
+      private void renderGeneratorFunction(FunctionExpression expression) {
+        // There is no arrow function syntax for generators functions yet. We should reconsider
+        // this in the future if the following proposal is accepted and implemented:
+        // https://github.com/tc39/proposal-generators-as-functions
+        sourceBuilder.append("function* ");
+
+        emitParameters(expression);
+
+        StatementTranspiler.render(expression.getBody(), environment, sourceBuilder);
+
+        if (expression.isCapturingEnclosingInstance()) {
+          // Unlike arrow functions that inherits the `this` from the enclosing scope, anonymous
+          // functions have their own `this` binding. To achieve the Java semantics for lambdas, we
+          // explicitly bind the anonymous function's `this` to the `this` of the enclosing scope.
+          sourceBuilder.append(".bind(this)");
+        }
       }
 
       private void emitParameters(FunctionExpression expression) {
@@ -271,14 +296,26 @@ public final class ExpressionTranspiler {
 
       @Override
       public boolean enterMethodCall(MethodCall expression) {
+        MethodDescriptor target = expression.getTarget();
+        if (target.isSuspendFunction()) {
+          // Kotlin suspend functions are emitted as JavaScript generator function. They can only
+          // be invoked within other suspend functions, requiring 'yield*' for delegating the call
+          // to the targeted generator.
+          sourceBuilder.append("(yield* ");
+        }
+
         if (expression.isStaticDispatch()) {
           renderStaticDispatchMethodCall(expression);
-        } else if (expression.getTarget().isJsPropertyGetter()) {
+        } else if (target.isJsPropertyGetter()) {
           renderJsPropertyAccess(expression);
-        } else if (expression.getTarget().isJsPropertySetter()) {
+        } else if (target.isJsPropertySetter()) {
           renderJsPropertySetter(expression);
         } else {
           renderMethodCall(expression);
+        }
+
+        if (target.isSuspendFunction()) {
+          sourceBuilder.append(")");
         }
         return false;
       }
@@ -336,11 +373,13 @@ public final class ExpressionTranspiler {
 
       /** JsProperty getter is emitted as property access: qualifier.property. */
       private void renderJsPropertyAccess(MethodCall expression) {
+        checkState(!expression.getTarget().isSuspendFunction());
         renderQualifiedName(expression, expression.getTarget().getSimpleJsName());
       }
 
       /** JsProperty setter is emitted as property set: qualifier.property = argument. */
       private void renderJsPropertySetter(MethodCall expression) {
+        checkState(!expression.getTarget().isSuspendFunction());
         renderJsPropertyAccess(expression);
         sourceBuilder.append(" = ");
         // Setters are a special case. They cannot be nested in any non top level expression as they
@@ -352,6 +391,7 @@ public final class ExpressionTranspiler {
         checkArgument(!expression.isStaticDispatch());
         MethodDescriptor target = expression.getTarget();
         if (target.isConstructor()) {
+          checkState(!target.isSuspendFunction());
           sourceBuilder.append("super");
         } else if (target.isJsFunction()) {
           // Call to a JsFunction method is emitted as the call on the qualifier itself.

@@ -116,6 +116,10 @@ public class FunctionExpression extends Expression implements MethodLike {
     return isJsAsync;
   }
 
+  public boolean isSuspendFunction() {
+    return getDescriptor().isSuspendFunction();
+  }
+
   @Override
   public Precedence getPrecedence() {
     return Precedence.FUNCTION;

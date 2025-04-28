@@ -74,6 +74,11 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   private void emitMethodHeader(Method method) {
     MethodDescriptor methodDescriptor = method.getDescriptor();
     sourceBuilder.append(getMethodQualifiers(methodDescriptor));
+    if (methodDescriptor.isSuspendFunction()) {
+      // Kotlin suspend functions are transpiled to JavaScript generator functions, which are
+      // indicated by a `*` before their name.
+      sourceBuilder.append("*");
+    }
     sourceBuilder.emitWithMapping(
         method.getSourcePosition(), () -> sourceBuilder.append(methodDescriptor.getMangledName()));
 
@@ -399,8 +404,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
           getJsDocDeclarationForTypeVariable(methodDescriptor.getTypeParameterTypeDescriptors()));
     }
 
-    String returnTypeName = closureTypesGenerator.getJsDocForReturnType(methodDescriptor);
     if (needsReturnJsDoc(methodDescriptor)) {
+      String returnTypeName = closureTypesGenerator.getJsDocForReturnType(methodDescriptor);
       jsDocBuilder.append(" @return {").append(returnTypeName).append("}");
     }
 
@@ -413,7 +418,10 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   private boolean needsReturnJsDoc(MethodDescriptor methodDescriptor) {
     return !methodDescriptor.isConstructor()
-        && !TypeDescriptors.isPrimitiveVoid(methodDescriptor.getReturnTypeDescriptor());
+        && (!TypeDescriptors.isPrimitiveVoid(methodDescriptor.getReturnTypeDescriptor())
+            // Suspend functions are tranpiled to JS Generator functions which always require
+            // to declare the return type even if the generator does not yield any value.
+            || methodDescriptor.isSuspendFunction());
   }
 
   private void renderLoadModules() {

@@ -130,6 +130,7 @@ import org.jetbrains.kotlin.ir.util.isKFunction
 import org.jetbrains.kotlin.ir.util.isLocal
 import org.jetbrains.kotlin.ir.util.isReal
 import org.jetbrains.kotlin.ir.util.isStatic
+import org.jetbrains.kotlin.ir.util.isSuspend
 import org.jetbrains.kotlin.ir.util.isTypeParameter
 import org.jetbrains.kotlin.ir.util.isVararg
 import org.jetbrains.kotlin.ir.util.kotlinFqName
@@ -672,6 +673,7 @@ internal class KotlinEnvironment(
         .setOriginalJsInfo(irFunction.getJsInfo())
         .setWasmInfo(irFunction.getWasmInfo())
         .setAnnotations(createAnnotations(irFunction))
+        .setSuspendFunction(irFunction.isSuspend)
         .build()
     }
   }
