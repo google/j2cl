@@ -75,6 +75,14 @@ class ClosureTypesGenerator {
         .render();
   }
 
+  /**
+   * Returns the string representation of a Closure type of a type descriptor used as return type of
+   * a function for use in a JsDoc annotation.
+   */
+  public String getJsDocForReturnType(MethodDescriptor methodDescriptor) {
+    return getFunctionReturnClosureType(methodDescriptor).render();
+  }
+
   /** Returns the Closure type for a type descriptor. */
   private ClosureType getClosureType(TypeDescriptor typeDescriptor) {
 
@@ -172,7 +180,19 @@ class ClosureTypesGenerator {
       return UNKNOWN;
     }
 
-    return new ClosureNamedType(environment.getUniqueNameForVariable(typeVariable.toDeclaration()));
+    var typeVariableClosureType =
+        new ClosureNamedTypeWithUnknownNullability(
+            environment.getUniqueNameForVariable(typeVariable.toDeclaration()));
+
+    switch (typeVariable.getNullabilityAnnotation()) {
+      // TODO(b/326131100): Uncomment when bug is fixed.
+      // case NOT_NULLABLE:
+      //   return typeVariableClosureType.toNonNullable();
+      // case NULLABLE:
+      //   return typeVariableClosureType.toNullable();
+      default:
+        return typeVariableClosureType;
+    }
   }
 
   /** Returns the Closure type for an array type descriptor. */
@@ -229,8 +249,22 @@ class ClosureTypesGenerator {
     return withNullability(
         new ClosureFunctionType(
             toClosureTypeParameters(functionalMethodDescriptor),
-            getClosureType(functionalMethodDescriptor.getReturnTypeDescriptor())),
+            getFunctionReturnClosureType(functionalMethodDescriptor)),
         typeDescriptor.isNullable());
+  }
+
+  private ClosureType getFunctionReturnClosureType(MethodDescriptor methodDescriptor) {
+    TypeDescriptor returnTypeDescriptor = methodDescriptor.getReturnTypeDescriptor();
+    ClosureType closureReturnType = getClosureType(returnTypeDescriptor);
+
+    // TODO(b/326131100): Remove hack when bug is fixed and nullability modifier can be emitted for
+    // type variables.
+    if (returnTypeDescriptor.isTypeVariable()
+        && ((TypeVariable) returnTypeDescriptor).isAnnotatedNullable()) {
+      closureReturnType = closureReturnType.toNullable();
+    }
+
+    return closureReturnType;
   }
 
   private ImmutableList<ClosureFunctionType.Parameter> toClosureTypeParameters(

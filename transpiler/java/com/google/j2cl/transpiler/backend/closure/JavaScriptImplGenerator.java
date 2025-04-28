@@ -399,8 +399,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
           getJsDocDeclarationForTypeVariable(methodDescriptor.getTypeParameterTypeDescriptors()));
     }
 
-    String returnTypeName =
-        closureTypesGenerator.getClosureTypeString(methodDescriptor.getReturnTypeDescriptor());
+    String returnTypeName = closureTypesGenerator.getJsDocForReturnType(methodDescriptor);
     if (needsReturnJsDoc(methodDescriptor)) {
       jsDocBuilder.append(" @return {").append(returnTypeName).append("}");
     }

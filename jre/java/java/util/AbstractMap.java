@@ -18,6 +18,7 @@ package java.util;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import jsinterop.annotations.JsNonNull;
+import jsinterop.annotations.JsNullable;
 
 /**
  * Skeletal implementation of the Map interface. <a
@@ -178,7 +179,7 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
   }
 
   @Override
-  public V get(Object key) {
+  public @JsNullable V get(Object key) {
     return getEntryValueOrNull(implFindEntry(key, false));
   }
 
@@ -245,7 +246,7 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
   }
 
   @Override
-  public V put(K key, V value) {
+  public @JsNullable V put(K key, V value) {
     throw new UnsupportedOperationException();
   }
 
@@ -258,7 +259,7 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
   }
 
   @Override
-  public V remove(Object key) {
+  public @JsNullable V remove(Object key) {
     return getEntryValueOrNull(implFindEntry(key, true));
   }
 

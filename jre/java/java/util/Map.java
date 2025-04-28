@@ -24,6 +24,7 @@ import java.util.function.Function;
 import jsinterop.annotations.JsIgnore;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsNonNull;
+import jsinterop.annotations.JsNullable;
 import jsinterop.annotations.JsType;
 
 /**
@@ -266,6 +267,7 @@ public interface Map<K, V> {
     }
   }
 
+  @JsNullable
   V get(Object key);
 
   default V getOrDefault(Object key, V defaultValue) {
@@ -294,6 +296,7 @@ public interface Map<K, V> {
     return newValue;
   }
 
+  @JsNullable
   V put(K key, V value);
 
   default V putIfAbsent(K key, V value) {
@@ -303,6 +306,7 @@ public interface Map<K, V> {
 
   void putAll(Map<? extends K, ? extends V> t);
 
+  @JsNullable
   V remove(Object key);
 
   @JsIgnore

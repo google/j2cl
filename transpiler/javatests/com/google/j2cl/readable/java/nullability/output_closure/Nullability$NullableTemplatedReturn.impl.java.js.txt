@@ -9,10 +9,10 @@ let $LambdaAdaptor = goog.forwardDeclare('nullability.Nullability.NullableTempla
  * @template T
  */
 class NullableTemplatedReturn {
- /** @abstract @nodts @return {T} */
+ /** @abstract @nodts @return {?T} */
  m_foo__java_lang_Object() {}
  /** @nodts @template T @return {!NullableTemplatedReturn<T>} */
- static $adapt(/** ?function():T */ fn) {
+ static $adapt(/** ?function():?T */ fn) {
   NullableTemplatedReturn.$clinit();
   return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
  }
