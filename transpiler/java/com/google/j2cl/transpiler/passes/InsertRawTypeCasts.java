@@ -51,8 +51,8 @@ public final class InsertRawTypeCasts extends NormalizationPass {
       Expression expression, TypeDescriptor castTypeDescriptor) {
     // Re-use existing cast expression if possible.
     CastExpression.Builder castExpressionBuilder =
-        expression instanceof CastExpression
-            ? CastExpression.Builder.from((CastExpression) expression)
+        expression instanceof CastExpression castExpression
+            ? CastExpression.Builder.from(castExpression)
             : CastExpression.newBuilder().setExpression(expression);
     return castExpressionBuilder.setCastTypeDescriptor(castTypeDescriptor).build();
   }

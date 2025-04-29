@@ -176,12 +176,12 @@ public class NormalizeEnumClasses extends NormalizationPass {
             .collect(
                 toMap(
                     (Field e) -> {
-                      if (e.getInitializer() instanceof MethodCall) {
+                      if (e.getInitializer() instanceof MethodCall initializer) {
                         // In Kotlin, we may have decomposed some statements used as expression in
                         // the enum constructor call. The call to the constructor has been wrapped
                         // in an init function executing the statement before the call to the
                         // enum constructor.
-                        return ((MethodCall) e.getInitializer()).getTarget();
+                        return initializer.getTarget();
                       }
                       // Constructor call is done in the field initialization.
                       return e.getDescriptor();

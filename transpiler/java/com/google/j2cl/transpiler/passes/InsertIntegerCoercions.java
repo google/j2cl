@@ -110,10 +110,9 @@ public class InsertIntegerCoercions extends NormalizationPass {
 
   /** Removes coercions of integer operations. */
   private static Expression removeCoercion(Expression expression) {
-    if (!(expression instanceof BinaryExpression)) {
+    if (!(expression instanceof BinaryExpression binaryExpression)) {
       return expression;
     }
-    BinaryExpression binaryExpression = (BinaryExpression) expression;
 
     if (isCoercion(binaryExpression)) {
       return binaryExpression.getLeftOperand();
@@ -129,7 +128,6 @@ public class InsertIntegerCoercions extends NormalizationPass {
   }
 
   private static boolean isZero(Expression expression) {
-    return expression instanceof NumberLiteral
-        && ((NumberLiteral) expression).getValue().doubleValue() == 0;
+    return expression instanceof NumberLiteral literal && literal.getValue().doubleValue() == 0;
   }
 }

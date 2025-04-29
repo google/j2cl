@@ -48,8 +48,8 @@ public class InsertTypeAnnotationOnGenericReturnTypes extends NormalizationPass 
             boolean methodReturnHasTypeVariables =
                 !returnTypeDescriptor.getAllTypeVariables().isEmpty();
             boolean methodReturnIsGenericType =
-                returnTypeDescriptor instanceof DeclaredTypeDescriptor
-                    && ((DeclaredTypeDescriptor) returnTypeDescriptor).hasTypeArguments();
+                returnTypeDescriptor instanceof DeclaredTypeDescriptor descriptor
+                    && descriptor.hasTypeArguments();
 
             // If the return is not inferred and specialized in Java there is nothing to fixup.
             boolean isReturnSpecialized =

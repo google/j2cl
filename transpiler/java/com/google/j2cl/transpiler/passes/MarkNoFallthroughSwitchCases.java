@@ -72,13 +72,11 @@ public class MarkNoFallthroughSwitchCases extends NormalizationPass {
       return false;
     }
 
-    if (statement instanceof Block) {
-      Block block = (Block) statement;
+    if (statement instanceof Block block) {
       return canFallthrough(block.getStatements());
     }
 
-    if (statement instanceof IfStatement) {
-      IfStatement ifStatement = (IfStatement) statement;
+    if (statement instanceof IfStatement ifStatement) {
       Statement elseStatement = ifStatement.getElseStatement();
       return elseStatement == null
           || canFallthrough(ifStatement.getThenStatement())

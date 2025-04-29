@@ -59,10 +59,8 @@ public class RemoveNoopStatements extends NormalizationPass {
 
           private Statement removeLabelIfPossible(LabeledStatement labeledStatement) {
             Statement innerStatement = labeledStatement.getStatement();
-            if (innerStatement instanceof BreakOrContinueStatement) {
+            if (innerStatement instanceof BreakOrContinueStatement breakOrContinueStatement) {
               // Remove the label in code like `L1: break L2` since that chokes jscompiler.
-              BreakOrContinueStatement breakOrContinueStatement =
-                  (BreakOrContinueStatement) innerStatement;
               if (!breakOrContinueStatement.targetsLabel(labeledStatement.getLabel())) {
                 return breakOrContinueStatement;
               }

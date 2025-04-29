@@ -137,9 +137,9 @@ public class WasmGenerationEnvironment {
   String getWasmTypeName(TypeDescriptor typeDescriptor) {
     typeDescriptor = typeDescriptor.toRawTypeDescriptor();
 
-    if (typeDescriptor instanceof DeclaredTypeDescriptor
-        && ((DeclaredTypeDescriptor) typeDescriptor).getTypeDeclaration().getWasmInfo() != null) {
-      return ((DeclaredTypeDescriptor) typeDescriptor).getTypeDeclaration().getWasmInfo();
+    if (typeDescriptor instanceof DeclaredTypeDescriptor declaredTypeDescriptor
+        && declaredTypeDescriptor.getTypeDeclaration().getWasmInfo() != null) {
+      return declaredTypeDescriptor.getTypeDeclaration().getWasmInfo();
     }
 
     if (typeDescriptor.isNative()) {
@@ -174,8 +174,8 @@ public class WasmGenerationEnvironment {
       return "$" + typeDescriptor.getReadableDescription();
     }
     typeDescriptor = typeDescriptor.toRawTypeDescriptor();
-    if (typeDescriptor instanceof DeclaredTypeDescriptor) {
-      return "$" + ((DeclaredTypeDescriptor) typeDescriptor).getQualifiedSourceName();
+    if (typeDescriptor instanceof DeclaredTypeDescriptor declaredTypeDescriptor) {
+      return "$" + declaredTypeDescriptor.getQualifiedSourceName();
     }
 
     throw new AssertionError("Unexpected type: " + typeDescriptor.getReadableDescription());
@@ -437,6 +437,7 @@ public class WasmGenerationEnvironment {
     this.jsImports = jsImports;
   }
 
+  @Nullable
   private ItableAllocator<TypeDeclaration> createItableAllocator(Library library) {
     if (isModular) {
       // Itable allocation happens in the bundler for modular compilation.

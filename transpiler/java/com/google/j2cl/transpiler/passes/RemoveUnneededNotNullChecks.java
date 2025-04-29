@@ -89,7 +89,7 @@ public class RemoveUnneededNotNullChecks extends NormalizationPass {
   }
 
   private static boolean isPostfixNotNullExpression(Expression expression) {
-    return expression instanceof PostfixExpression
-        && ((PostfixExpression) expression).getOperator() == PostfixOperator.NOT_NULL_ASSERTION;
+    return expression instanceof PostfixExpression postfixExpression
+        && postfixExpression.getOperator() == PostfixOperator.NOT_NULL_ASSERTION;
   }
 }

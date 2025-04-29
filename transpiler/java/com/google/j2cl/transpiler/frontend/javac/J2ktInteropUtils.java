@@ -82,8 +82,8 @@ public class J2ktInteropUtils {
     while (declaringClass != null && !isUninitializedWarningSuppressed) {
       isUninitializedWarningSuppressed = isUninitializedWarningSuppressed(declaringClass);
       declaringClass =
-          declaringClass.getEnclosingElement() instanceof TypeElement
-              ? (TypeElement) declaringClass.getEnclosingElement()
+          declaringClass.getEnclosingElement() instanceof TypeElement enclosingElement
+              ? enclosingElement
               : null;
     }
     return getJ2ktInfo(element, isUninitializedWarningSuppressed);

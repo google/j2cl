@@ -48,8 +48,8 @@ abstract class LabelAwareRewriter extends AbstractRewriter {
   }
 
   private Label getEnclosingLabelOrCreateImplicit(String implicitLabelName) {
-    return getParent() instanceof LabeledStatement
-        ? ((LabeledStatement) getParent()).getLabel()
+    return getParent() instanceof LabeledStatement labeledStatement
+        ? labeledStatement.getLabel()
         : Label.newBuilder().setName(implicitLabelName).build();
   }
 

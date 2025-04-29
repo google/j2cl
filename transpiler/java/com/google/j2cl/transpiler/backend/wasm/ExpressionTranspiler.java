@@ -128,16 +128,16 @@ final class ExpressionTranspiler {
       }
 
       private void renderAccessExpression(Expression expression, boolean setter) {
-        if (expression instanceof VariableReference) {
+        if (expression instanceof VariableReference variableReference) {
           sourceBuilder.append(
               format(
                   "local.%s %s",
                   setter ? "set" : "get",
-                  environment.getDeclarationName(((VariableReference) expression).getTarget())));
+                  environment.getDeclarationName(variableReference.getTarget())));
 
-        } else if (expression instanceof FieldAccess) {
-          FieldDescriptor fieldDescriptor = ((FieldAccess) expression).getTarget();
-          Expression qualifier = ((FieldAccess) expression).getQualifier();
+        } else if (expression instanceof FieldAccess fieldAccess) {
+          FieldDescriptor fieldDescriptor = fieldAccess.getTarget();
+          Expression qualifier = fieldAccess.getQualifier();
           if (fieldDescriptor.isStatic()) {
             sourceBuilder.append(
                 format(
@@ -153,8 +153,7 @@ final class ExpressionTranspiler {
             render(qualifier);
           }
 
-        } else if (expression instanceof ArrayAccess) {
-          ArrayAccess arrayAccess = (ArrayAccess) expression;
+        } else if (expression instanceof ArrayAccess arrayAccess) {
           Expression arrayExpression = arrayAccess.getArrayExpression();
 
           sourceBuilder.append(
@@ -331,8 +330,7 @@ final class ExpressionTranspiler {
         Label label = null;
         // TODO(b/391582571): Use a cleaner representation for a labeled block that has a
         // return value.
-        if (statement instanceof LabeledStatement) {
-          LabeledStatement labeledStatement = (LabeledStatement) statement;
+        if (statement instanceof LabeledStatement labeledStatement) {
           label = labeledStatement.getLabel();
           statement = labeledStatement.getStatement();
         }
@@ -387,8 +385,7 @@ final class ExpressionTranspiler {
 
         Expression dimensionExpression = newArray.getDimensionExpressions().get(0);
 
-        if (dimensionExpression instanceof NumberLiteral
-            && ((NumberLiteral) dimensionExpression).getValue().equals(0)) {
+        if (dimensionExpression instanceof NumberLiteral literal && literal.getValue().equals(0)) {
           // Do not allocate zero-length arrays, instead reuse the array singletons that
           // are allocated as globals.
           sourceBuilder.append(
@@ -659,7 +656,7 @@ final class ExpressionTranspiler {
   }
 
   public static boolean returnsVoid(Expression expression) {
-    if (expression instanceof MethodCall && ((MethodCall) expression).getTarget().isConstructor()) {
+    if (expression instanceof MethodCall methodCall && methodCall.getTarget().isConstructor()) {
       // This is a super() or this() call and the generated constructor for Wasm is actually returns
       // the instance (as opposed to how it is modeled in the AST where the return is void).
       return false;

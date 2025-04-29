@@ -117,11 +117,10 @@ public final class InsertQualifierProjectionCasts extends AbstractJ2ktNormalizat
             }
 
             Expression leftOperand = binaryExpression.getLeftOperand();
-            if (!(leftOperand instanceof FieldAccess)) {
+            if (!(leftOperand instanceof FieldAccess fieldAccess)) {
               return binaryExpression;
             }
 
-            FieldAccess fieldAccess = (FieldAccess) leftOperand;
             Expression qualifier = fieldAccess.getQualifier();
             if (qualifier == null) {
               return binaryExpression;
@@ -159,14 +158,12 @@ public final class InsertQualifierProjectionCasts extends AbstractJ2ktNormalizat
 
   private static TypeDescriptor projectTypeArgumentsUpperBound(
       TypeDescriptor typeDescriptor, ImmutableSet<TypeVariable> currentTypeParameters) {
-    if (typeDescriptor instanceof DeclaredTypeDescriptor) {
-      DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
+    if (typeDescriptor instanceof DeclaredTypeDescriptor declaredTypeDescriptor) {
       return declaredTypeDescriptor.withTypeArguments(
           declaredTypeDescriptor.getTypeArgumentDescriptors().stream()
               .map(typeArgument -> projectUpperBound(typeArgument, currentTypeParameters))
               .collect(toImmutableList()));
-    } else if (typeDescriptor instanceof TypeVariable) {
-      TypeVariable typeVariable = (TypeVariable) typeDescriptor;
+    } else if (typeDescriptor instanceof TypeVariable typeVariable) {
       if (typeVariable.getLowerBoundTypeDescriptor() == null) {
         return projectTypeArgumentsUpperBound(
             typeVariable.getUpperBoundTypeDescriptor(), currentTypeParameters);
@@ -178,8 +175,7 @@ public final class InsertQualifierProjectionCasts extends AbstractJ2ktNormalizat
 
   private static TypeDescriptor projectUpperBound(
       TypeDescriptor typeDescriptor, ImmutableSet<TypeVariable> currentTypeParameters) {
-    if (typeDescriptor instanceof TypeVariable) {
-      TypeVariable typeVariable = (TypeVariable) typeDescriptor;
+    if (typeDescriptor instanceof TypeVariable typeVariable) {
       if (typeVariable.isWildcardOrCapture()
           && typeVariable.getLowerBoundTypeDescriptor() == null) {
         return projectFreeTypeVariables(
@@ -202,8 +198,7 @@ public final class InsertQualifierProjectionCasts extends AbstractJ2ktNormalizat
   private static ImmutableSet<TypeVariable> getCurrentTypeParameters(
       MemberDescriptor memberDescriptor) {
     ImmutableSet.Builder<TypeVariable> builder = ImmutableSet.builder();
-    if (memberDescriptor instanceof MethodDescriptor) {
-      MethodDescriptor methodDescriptor = (MethodDescriptor) memberDescriptor;
+    if (memberDescriptor instanceof MethodDescriptor methodDescriptor) {
       builder.addAll(methodDescriptor.getTypeParameterTypeDescriptors());
     }
 
@@ -226,16 +221,12 @@ public final class InsertQualifierProjectionCasts extends AbstractJ2ktNormalizat
       TypeDescriptor typeDescriptor, ImmutableSet<TypeVariable> seen) {
     if (typeDescriptor instanceof PrimitiveTypeDescriptor) {
       return false;
-    } else if (typeDescriptor instanceof ArrayTypeDescriptor) {
-      ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
-      return containsCaptureWithoutLowerBound(
-          arrayTypeDescriptor.getComponentTypeDescriptor(), seen);
-    } else if (typeDescriptor instanceof DeclaredTypeDescriptor) {
-      DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
-      return declaredTypeDescriptor.getTypeArgumentDescriptors().stream()
+    } else if (typeDescriptor instanceof ArrayTypeDescriptor descriptor) {
+      return containsCaptureWithoutLowerBound(descriptor.getComponentTypeDescriptor(), seen);
+    } else if (typeDescriptor instanceof DeclaredTypeDescriptor descriptor) {
+      return descriptor.getTypeArgumentDescriptors().stream()
           .anyMatch(it -> containsCaptureWithoutLowerBound(it, seen));
-    } else if (typeDescriptor instanceof TypeVariable) {
-      TypeVariable typeVariable = (TypeVariable) typeDescriptor;
+    } else if (typeDescriptor instanceof TypeVariable typeVariable) {
       if (seen.contains(typeVariable)) {
         return false;
       }
@@ -254,14 +245,12 @@ public final class InsertQualifierProjectionCasts extends AbstractJ2ktNormalizat
       TypeDescriptor lowerBound = typeVariable.getLowerBoundTypeDescriptor();
       return containsCaptureWithoutLowerBound(upperBound, newSeen)
           || (lowerBound != null && containsCaptureWithoutLowerBound(lowerBound, newSeen));
-    } else if (typeDescriptor instanceof IntersectionTypeDescriptor) {
-      return ((IntersectionTypeDescriptor) typeDescriptor)
-          .getIntersectionTypeDescriptors().stream()
-              .anyMatch(it -> containsCaptureWithoutLowerBound(it, seen));
-    } else if (typeDescriptor instanceof UnionTypeDescriptor) {
-      return ((UnionTypeDescriptor) typeDescriptor)
-          .getUnionTypeDescriptors().stream()
-              .anyMatch(it -> containsCaptureWithoutLowerBound(it, seen));
+    } else if (typeDescriptor instanceof IntersectionTypeDescriptor descriptor) {
+      return descriptor.getIntersectionTypeDescriptors().stream()
+          .anyMatch(it -> containsCaptureWithoutLowerBound(it, seen));
+    } else if (typeDescriptor instanceof UnionTypeDescriptor descriptor) {
+      return descriptor.getUnionTypeDescriptors().stream()
+          .anyMatch(it -> containsCaptureWithoutLowerBound(it, seen));
     } else {
       throw new AssertionError("Unknown type descriptor: " + typeDescriptor.getClass());
     }

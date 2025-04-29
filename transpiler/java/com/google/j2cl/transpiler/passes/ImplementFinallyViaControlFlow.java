@@ -141,10 +141,7 @@ public class ImplementFinallyViaControlFlow extends NormalizationPass {
 
           /** Returns true if the label encloses the original try-finally statement. */
           private boolean isLabelEnclosingTry(Label label) {
-            return getParent(
-                    n ->
-                        n instanceof LabeledStatement && ((LabeledStatement) n).getLabel() == label)
-                != null;
+            return getParent(n -> n instanceof LabeledStatement l && l.getLabel() == label) != null;
           }
 
           @Override

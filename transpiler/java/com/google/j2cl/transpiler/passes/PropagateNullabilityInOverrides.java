@@ -126,8 +126,7 @@ public class PropagateNullabilityInOverrides extends AbstractJ2ktNormalizationPa
 
   private static TypeDescriptor specialize(
       Map<TypeVariable, TypeDescriptor> parametrization, TypeDescriptor parameter) {
-    if (parameter instanceof TypeVariable) {
-      TypeVariable typeVariable = (TypeVariable) parameter;
+    if (parameter instanceof TypeVariable typeVariable) {
       TypeDescriptor td = parametrization.get(typeVariable);
       if (td != null) {
         parameter = td;

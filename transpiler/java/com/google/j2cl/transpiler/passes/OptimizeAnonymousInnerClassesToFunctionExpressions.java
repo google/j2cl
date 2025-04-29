@@ -77,12 +77,11 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
           }
 
           private void backoffType(TypeDescriptor typeDescriptor) {
-            if (typeDescriptor instanceof ArrayTypeDescriptor) {
+            if (typeDescriptor instanceof ArrayTypeDescriptor descriptor) {
               // Handle varargs and array literals.
-              backoffType(((ArrayTypeDescriptor) typeDescriptor).getLeafTypeDescriptor());
-            } else if (typeDescriptor instanceof DeclaredTypeDescriptor) {
-              TypeDeclaration typeDeclaration =
-                  ((DeclaredTypeDescriptor) typeDescriptor).getTypeDeclaration();
+              backoffType(descriptor.getLeafTypeDescriptor());
+            } else if (typeDescriptor instanceof DeclaredTypeDescriptor descriptor) {
+              TypeDeclaration typeDeclaration = descriptor.getTypeDeclaration();
               if (typeDeclaration.isAnonymous()) {
                 unoptimizeableClasses.add(typeDeclaration);
               }

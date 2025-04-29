@@ -68,10 +68,9 @@ public class NormalizeNativePropertyAccesses extends NormalizationPass {
             checkState(
                 !expression.isSimpleOrCompoundAssignment() || expression.isSimpleAssignment());
             Expression lhs = expression.getLeftOperand();
-            if (!expression.isSimpleAssignment() || !(lhs instanceof FieldAccess)) {
+            if (!expression.isSimpleAssignment() || !(lhs instanceof FieldAccess fieldAccess)) {
               return expression;
             }
-            FieldAccess fieldAccess = (FieldAccess) lhs;
             FieldDescriptor fieldDescriptor = fieldAccess.getTarget();
             if (!fieldDescriptor.isNative()) {
               return expression;

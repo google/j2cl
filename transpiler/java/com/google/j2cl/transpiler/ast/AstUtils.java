@@ -266,8 +266,7 @@ public final class AstUtils {
    * expression.
    */
   public static boolean isAssignmentTarget(Expression expression, Object parent) {
-    if (parent instanceof BinaryExpression) {
-      BinaryExpression parentBinaryExpression = (BinaryExpression) parent;
+    if (parent instanceof BinaryExpression parentBinaryExpression) {
       return parentBinaryExpression.isSimpleOrCompoundAssignment()
           && expression == parentBinaryExpression.getLeftOperand();
     }

@@ -140,8 +140,7 @@ public class PreventSmartCasts extends NormalizationPass {
               return false;
             }
 
-            if (typeDescriptor instanceof DeclaredTypeDescriptor) {
-              var declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
+            if (typeDescriptor instanceof DeclaredTypeDescriptor declaredTypeDescriptor) {
               if (!declaredTypeDescriptor.getTypeArgumentDescriptors().isEmpty()) {
                 // Smart casts are problematic in parameterized types.
                 return true;
@@ -160,14 +159,12 @@ public class PreventSmartCasts extends NormalizationPass {
   }
 
   private static boolean isModifiedByParent(Expression operand, Object parent) {
-    if (parent instanceof BinaryExpression) {
-      BinaryExpression binaryExpression = (BinaryExpression) parent;
+    if (parent instanceof BinaryExpression binaryExpression) {
       return binaryExpression.isSimpleOrCompoundAssignment()
           && binaryExpression.getLeftOperand() == operand;
     }
 
-    if (parent instanceof UnaryExpression) {
-      UnaryExpression unaryExpression = (UnaryExpression) parent;
+    if (parent instanceof UnaryExpression unaryExpression) {
       return unaryExpression.isSimpleOrCompoundAssignment()
           && unaryExpression.getOperand() == operand;
     }

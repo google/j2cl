@@ -107,16 +107,14 @@ public final class JdtAnnotationUtils {
   }
 
   private static Object convertValue(Object value) {
-    if (value instanceof StringConstant) {
-      return ((StringConstant) value).stringValue();
-    } else if (value instanceof BooleanConstant) {
-      return ((BooleanConstant) value).booleanValue();
-    } else if (value instanceof IntConstant) {
-      return ((IntConstant) value).intValue();
-    } else if (value instanceof Object[]) {
-      return Arrays.stream((Object[]) value)
-          .map(JdtAnnotationUtils::convertValue)
-          .toArray(Object[]::new);
+    if (value instanceof StringConstant constant) {
+      return constant.stringValue();
+    } else if (value instanceof BooleanConstant constant) {
+      return constant.booleanValue();
+    } else if (value instanceof IntConstant constant) {
+      return constant.intValue();
+    } else if (value instanceof Object[] constant) {
+      return Arrays.stream(constant).map(JdtAnnotationUtils::convertValue).toArray(Object[]::new);
     }
     throw new IllegalStateException("Unexpected annotation attribute value type.");
   }
@@ -201,8 +199,7 @@ public final class JdtAnnotationUtils {
   static boolean shouldReadAnnotations(IBinding binding) {
     // TODO(b/399417397) Determine if we should handle annotations on all annotation types. Remove
     // this method if necessary.
-    if (binding instanceof ITypeBinding) {
-      ITypeBinding typeBinding = (ITypeBinding) binding;
+    if (binding instanceof ITypeBinding typeBinding) {
       if (typeBinding.isAnnotation() && !typeBinding.isFromSource()) {
         // Not all annotations are present in all compilations; in particular, Kotlin annotations
         // that on JsInterop annotations are only present when compiling their sources. As a

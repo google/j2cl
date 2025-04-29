@@ -59,8 +59,8 @@ public class MakeVariablesFinal extends NormalizationPass {
           }
 
           private void maybeRecordVariableAssignment(Operator operator, Expression operand) {
-            if (operator.hasSideEffect() && operand instanceof VariableReference) {
-              finalVariables.remove(((VariableReference) operand).getTarget());
+            if (operator.hasSideEffect() && operand instanceof VariableReference reference) {
+              finalVariables.remove(reference.getTarget());
             }
           }
         });

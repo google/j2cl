@@ -47,9 +47,9 @@ public final class RemoveUnneededJsDocCasts extends NormalizationPass {
           public ExpressionStatement rewriteExpressionStatement(
               ExpressionStatement expressionStatement) {
             Expression expression = expressionStatement.getExpression();
-            if (expression instanceof JsDocCastExpression) {
+            if (expression instanceof JsDocCastExpression jsDocCastExpression) {
               // Since the result is not used, the JsDoc cast is irrelevant and can be removed.
-              return ((JsDocCastExpression) expression)
+              return jsDocCastExpression
                   .getExpression()
                   .makeStatement(expressionStatement.getSourcePosition());
             }
@@ -71,9 +71,9 @@ public final class RemoveUnneededJsDocCasts extends NormalizationPass {
             // The only JsDoc cast that is relevant is the one on the last expression and that can
             // be moved outwards.
             Expression lastExpression = Iterables.getLast(multiExpression.getExpressions());
-            return lastExpression instanceof JsDocCastExpression
+            return lastExpression instanceof JsDocCastExpression jsDocCastExpression
                 // Move the JsDoc cast outwards if any.
-                ? JsDocCastExpression.Builder.from((JsDocCastExpression) lastExpression)
+                ? JsDocCastExpression.Builder.from(jsDocCastExpression)
                     .setExpression(multiExpressionWithoutJsDocCasts)
                     .build()
                 : multiExpressionWithoutJsDocCasts;

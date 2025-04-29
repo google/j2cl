@@ -87,9 +87,8 @@ public class MakeVariablesNonNull extends NormalizationPass {
 
             private void exitOperator(
                 Operator operator, Expression operand, Expression expression) {
-              if (operator.hasSideEffect() && operand instanceof VariableReference) {
-                VariableReference variableReference = (VariableReference) operand;
-                Variable variable = variableReference.getTarget();
+              if (operator.hasSideEffect() && operand instanceof VariableReference reference) {
+                Variable variable = reference.getTarget();
                 exitAssignment(variable, expression);
               }
             }

@@ -95,11 +95,10 @@ public class RemoveUnneededCasts extends NormalizationPass {
    * remove {@code castToOptimize}.
    */
   private static <T extends Node> T optimizeCast(Expression conditionExpression, T inNode) {
-    if (!(conditionExpression instanceof InstanceOfExpression)) {
+    if (!(conditionExpression instanceof InstanceOfExpression instanceOfExpression)) {
       return null;
     }
 
-    InstanceOfExpression instanceOfExpression = (InstanceOfExpression) conditionExpression;
     Expression instanceOfTarget = instanceOfExpression.getExpression();
     if (!hasNoSideEffects(instanceOfTarget)) {
       return null;
@@ -127,18 +126,18 @@ public class RemoveUnneededCasts extends NormalizationPass {
   /** Returns a cast expression on if it is the first evaluable node in {@code Node}. */
   @Nullable
   private static CastExpression getCast(Node node) {
-    if (node instanceof Block) {
-      return getCast(Iterables.getFirst(((Block) node).getStatements(), null));
+    if (node instanceof Block block) {
+      return getCast(Iterables.getFirst(block.getStatements(), null));
     }
-    if (node instanceof ExpressionStatement) {
-      return getCast(((ExpressionStatement) node).getExpression());
+    if (node instanceof ExpressionStatement expressionStatement) {
+      return getCast(expressionStatement.getExpression());
     }
-    if (node instanceof CastExpression) {
-      return (CastExpression) node;
+    if (node instanceof CastExpression castExpression) {
+      return castExpression;
     }
-    if (node instanceof VariableDeclarationExpression) {
+    if (node instanceof VariableDeclarationExpression variableDeclarationExpression) {
       VariableDeclarationFragment variableDeclarationFragment =
-          ((VariableDeclarationExpression) node).getFragments().get(0);
+          variableDeclarationExpression.getFragments().get(0);
       Expression variableDeclarationInitializer = variableDeclarationFragment.getInitializer();
       return getCast(variableDeclarationInitializer);
     }
@@ -163,17 +162,13 @@ public class RemoveUnneededCasts extends NormalizationPass {
    * enforced earlier in the pass.
    */
   private static boolean isEquivalentCastTarget(Expression e1, Expression e2) {
-    if (e1 instanceof FieldAccess && e2 instanceof FieldAccess) {
-      FieldAccess fa1 = (FieldAccess) e1;
-      FieldAccess fa2 = (FieldAccess) e2;
+    if (e1 instanceof FieldAccess fa1 && e2 instanceof FieldAccess fa2) {
       return fa1.getTarget()
               .getDeclarationDescriptor()
               .equals(fa2.getTarget().getDeclarationDescriptor())
           && isEquivalentCastTarget(fa1.getQualifier(), fa2.getQualifier());
     }
-    if (e1 instanceof VariableReference && e2 instanceof VariableReference) {
-      VariableReference vr1 = (VariableReference) e1;
-      VariableReference vr2 = (VariableReference) e2;
+    if (e1 instanceof VariableReference vr1 && e2 instanceof VariableReference vr2) {
       return vr1.getTarget().equals(vr2.getTarget());
     }
 
@@ -183,8 +178,7 @@ public class RemoveUnneededCasts extends NormalizationPass {
 
   // Expression.hasSideEffects is too conservative. It disregards all FieldAccess Objects.
   private static boolean hasNoSideEffects(Expression expression) {
-    if (expression instanceof FieldAccess) {
-      FieldAccess fieldAccess = (FieldAccess) expression;
+    if (expression instanceof FieldAccess fieldAccess) {
       boolean fieldHasNoSideEffect = !fieldAccess.getTarget().isStatic();
       return fieldHasNoSideEffect || hasNoSideEffects(fieldAccess.getQualifier());
     }

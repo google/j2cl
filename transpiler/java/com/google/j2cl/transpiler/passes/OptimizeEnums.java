@@ -161,8 +161,8 @@ public class OptimizeEnums extends NormalizationPass {
       // this() or super() calls and instance fields assignments.
 
       for (Statement s : ctor.getBody().getStatements()) {
-        if (s instanceof ExpressionStatement) {
-          Expression expression = ((ExpressionStatement) s).getExpression();
+        if (s instanceof ExpressionStatement expressionStatement) {
+          Expression expression = expressionStatement.getExpression();
           if (isTrivialThisCall(expression) || isTrivialFieldAssignment(expression)) {
             continue;
           }
@@ -174,11 +174,10 @@ public class OptimizeEnums extends NormalizationPass {
   }
 
   private static boolean isTrivialThisCall(Expression expression) {
-    if (!(expression instanceof MethodCall)) {
+    if (!(expression instanceof MethodCall methodCall)) {
       return false;
     }
 
-    MethodCall methodCall = (MethodCall) expression;
     if (!methodCall.getTarget().isConstructor()) {
       return false;
     }
@@ -195,8 +194,8 @@ public class OptimizeEnums extends NormalizationPass {
     BinaryExpression binaryExpression = (BinaryExpression) expression;
     Expression left = binaryExpression.getLeftOperand();
     Expression right = binaryExpression.getRightOperand();
-    if (!(left instanceof FieldAccess
-        && ((FieldAccess) left).getQualifier() instanceof ThisReference)) {
+    if (!(left instanceof FieldAccess fieldAccess
+        && fieldAccess.getQualifier() instanceof ThisReference)) {
       return false;
     }
     // instance field assignments are allowed as long as they are a compile time constant or a

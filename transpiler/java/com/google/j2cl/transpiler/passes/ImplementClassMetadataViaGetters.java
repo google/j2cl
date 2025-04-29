@@ -221,9 +221,9 @@ public class ImplementClassMetadataViaGetters extends NormalizationPass {
   /** Returns the descriptor for the getter of {@code typeDescriptor}. */
   private static MethodDescriptor getLazyClassMetadataGetterMethodDescriptor(
       TypeDescriptor typeDescriptor) {
-    if (typeDescriptor instanceof DeclaredTypeDescriptor) {
+    if (typeDescriptor instanceof DeclaredTypeDescriptor declaredTypeDescriptor) {
       return getLazyClassMetadataGetterMethodDescriptor(
-          (DeclaredTypeDescriptor) typeDescriptor, "$getClassMetadata");
+          declaredTypeDescriptor, "$getClassMetadata");
     }
     checkState(typeDescriptor instanceof PrimitiveTypeDescriptor);
     return getLazyClassMetadataGetterMethodDescriptor(

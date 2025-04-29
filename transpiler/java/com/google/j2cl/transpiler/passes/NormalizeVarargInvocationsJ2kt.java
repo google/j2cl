@@ -45,8 +45,7 @@ public class NormalizeVarargInvocationsJ2kt extends NormalizationPass {
             Expression arrayExpression = Iterables.getLast(invocation.getArguments());
 
             // If the last argument is an array literal, unwrap it and pass arguments directly.
-            if (arrayExpression instanceof ArrayLiteral) {
-              ArrayLiteral arrayLiteral = (ArrayLiteral) arrayExpression;
+            if (arrayExpression instanceof ArrayLiteral arrayLiteral) {
               if (canUnwrapVarargArgument(invocation, arrayLiteral)) {
                 return Invocation.Builder.from(invocation)
                     .replaceVarargsArgument(arrayLiteral.getValueExpressions())

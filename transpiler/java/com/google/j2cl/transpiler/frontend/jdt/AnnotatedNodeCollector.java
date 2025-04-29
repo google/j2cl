@@ -101,8 +101,8 @@ public class AnnotatedNodeCollector extends ASTVisitor {
   private boolean visitBodyDeclaration(BodyDeclaration bodyDeclaration) {
     boolean foundAnnotation = false;
     for (Object modifier : bodyDeclaration.modifiers()) {
-      if (modifier instanceof Annotation) {
-        Name name = ((Annotation) modifier).getTypeName();
+      if (modifier instanceof Annotation annotation) {
+        Name name = annotation.getTypeName();
 
         // Get the name of the class without package, since the {@code GwtIncompatible} annotation
         // can be defined anywhere.

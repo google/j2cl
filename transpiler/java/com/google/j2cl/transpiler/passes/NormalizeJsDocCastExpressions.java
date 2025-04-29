@@ -108,10 +108,8 @@ public class NormalizeJsDocCastExpressions extends NormalizationPass {
           @Override
           public Expression rewriteJsDocCastExpression(JsDocCastExpression jsDocCastExpression) {
             TypeDescriptor castTypeDescriptor = jsDocCastExpression.getTypeDescriptor();
-            if (jsDocCastExpression.getTypeDescriptor() instanceof DeclaredTypeDescriptor) {
-
-              DeclaredTypeDescriptor castDeclaredTypeDescriptor =
-                  (DeclaredTypeDescriptor) jsDocCastExpression.getTypeDescriptor();
+            if (jsDocCastExpression.getTypeDescriptor()
+                instanceof DeclaredTypeDescriptor castDeclaredTypeDescriptor) {
 
               // If it is a parameterized type first replace wildcards with their bound top
               // avoid "unknown type" errors.
@@ -138,10 +136,9 @@ public class NormalizeJsDocCastExpressions extends NormalizationPass {
 
   /** Replaces wildcards with their bound. */
   private static TypeDescriptor replaceWildcardWithBound(TypeDescriptor typeDescriptor) {
-    if (!(typeDescriptor instanceof TypeVariable)) {
+    if (!(typeDescriptor instanceof TypeVariable typeVariable)) {
       return typeDescriptor;
     }
-    TypeVariable typeVariable = (TypeVariable) typeDescriptor;
     return typeVariable.isWildcardOrCapture() ? typeDescriptor.toRawTypeDescriptor() : typeVariable;
   }
 

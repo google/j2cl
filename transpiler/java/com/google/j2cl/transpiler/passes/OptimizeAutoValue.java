@@ -167,8 +167,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
         new TypeReplacer() {
           @Override
           public <T extends TypeDescriptor> T apply(T t) {
-            if (t instanceof DeclaredTypeDescriptor) {
-              DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) t;
+            if (t instanceof DeclaredTypeDescriptor declaredTypeDescriptor) {
               TypeDeclaration superType =
                   declaredTypeDescriptor.getTypeDeclaration().getSuperTypeDeclaration();
               if (superTypeToInlinedType.containsKey(superType)) {

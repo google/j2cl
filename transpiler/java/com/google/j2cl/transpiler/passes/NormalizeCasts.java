@@ -105,8 +105,7 @@ public class NormalizeCasts extends NormalizationPass {
     }
     expression = skipPassThroughExpressions(expression);
 
-    if (expression instanceof CastExpression) {
-      CastExpression castExpression = (CastExpression) expression;
+    if (expression instanceof CastExpression castExpression) {
       return castExpression.getTypeDescriptor().isAssignableTo(typeDescriptor)
           || isRedundantCast(typeDescriptor, castExpression.getExpression());
     }

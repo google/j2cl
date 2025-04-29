@@ -94,9 +94,9 @@ public class InsertNarrowingPrimitiveConversions extends NormalizationPass {
       Expression expression, TypeDescriptor toTypeDescriptor) {
 
     // Narrow literals at compile time.
-    if (expression instanceof NumberLiteral) {
+    if (expression instanceof NumberLiteral literal) {
       PrimitiveTypeDescriptor literalTypeDescriptor = (PrimitiveTypeDescriptor) toTypeDescriptor;
-      return new NumberLiteral(literalTypeDescriptor, ((NumberLiteral) expression).getValue());
+      return new NumberLiteral(literalTypeDescriptor, literal.getValue());
     }
 
     return RuntimeMethods.createPrimitivesNarrowingMethodCall(

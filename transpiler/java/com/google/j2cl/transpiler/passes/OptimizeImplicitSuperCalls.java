@@ -64,14 +64,13 @@ public class OptimizeImplicitSuperCalls extends NormalizationPass {
 
               // Keep calls with non-ArrayLiteral vararg argument.
               Expression varargArgument = getLast(constructorCall.getArguments());
-              if (!(varargArgument instanceof ArrayLiteral)) {
+              if (!(varargArgument instanceof ArrayLiteral arrayLiteral)) {
                 return method;
               }
 
               // Keep calls with non-empty ArrayLiteral vararg argument.
               // Assuming that this pass is executed after NormalizeVarargInvocationsJ2kt, calls
               // with empty ArrayLiteral vararg argument are safe to be removed.
-              ArrayLiteral arrayLiteral = (ArrayLiteral) varargArgument;
               if (!arrayLiteral.getValueExpressions().isEmpty()) {
                 return method;
               }

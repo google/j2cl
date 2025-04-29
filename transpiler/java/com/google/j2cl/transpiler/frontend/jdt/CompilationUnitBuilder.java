@@ -129,6 +129,7 @@ import org.eclipse.jdt.core.dom.SingleVariableDeclaration;
 import org.eclipse.jdt.core.dom.SuperMethodInvocation;
 import org.eclipse.jdt.core.dom.SuperMethodReference;
 import org.eclipse.jdt.core.dom.TypeMethodReference;
+import org.eclipse.jdt.core.dom.UnionType;
 import org.eclipse.jdt.core.dom.VariableDeclaration;
 
 /** Creates a J2CL Java AST from the AST provided by JDT. */
@@ -227,27 +228,21 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     private void convertTypeBody(Type type, List<BodyDeclaration> bodyDeclarations) {
       problems.abortIfCancelled();
       for (BodyDeclaration bodyDeclaration : bodyDeclarations) {
-        if (bodyDeclaration instanceof FieldDeclaration) {
-          FieldDeclaration fieldDeclaration = (FieldDeclaration) bodyDeclaration;
+        if (bodyDeclaration instanceof FieldDeclaration fieldDeclaration) {
           type.addMembers(convert(fieldDeclaration));
-        } else if (bodyDeclaration instanceof MethodDeclaration) {
-          MethodDeclaration methodDeclaration = (MethodDeclaration) bodyDeclaration;
+        } else if (bodyDeclaration instanceof MethodDeclaration methodDeclaration) {
           type.addMember(convert(methodDeclaration));
-        } else if (bodyDeclaration instanceof AnnotationTypeMemberDeclaration) {
-          AnnotationTypeMemberDeclaration memberDeclaration =
-              (AnnotationTypeMemberDeclaration) bodyDeclaration;
+        } else if (bodyDeclaration instanceof AnnotationTypeMemberDeclaration memberDeclaration) {
           type.addMember(convert(memberDeclaration));
-        } else if (bodyDeclaration instanceof Initializer) {
-          Initializer initializer = (Initializer) bodyDeclaration;
+        } else if (bodyDeclaration instanceof Initializer initializer) {
           Block block = convert(initializer.getBody());
           if (JdtEnvironment.isStatic(initializer)) {
             type.addStaticInitializerBlock(block);
           } else {
             type.addInstanceInitializerBlock(block);
           }
-        } else if (bodyDeclaration instanceof AbstractTypeDeclaration) {
+        } else if (bodyDeclaration instanceof AbstractTypeDeclaration nestedTypeDeclaration) {
           // Nested class
-          AbstractTypeDeclaration nestedTypeDeclaration = (AbstractTypeDeclaration) bodyDeclaration;
           type.addType(convert(nestedTypeDeclaration));
         } else {
           throw internalCompilerError(
@@ -1197,8 +1192,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     @Nullable
     private Expression convert(org.eclipse.jdt.core.dom.QualifiedName expression) {
       IBinding binding = expression.resolveBinding();
-      if (binding instanceof IVariableBinding) {
-        IVariableBinding variableBinding = (IVariableBinding) binding;
+      if (binding instanceof IVariableBinding variableBinding) {
         checkArgument(
             variableBinding.isField(),
             internalCompilerErrorMessage("Unexpected QualifiedName that is not a field"));
@@ -1246,8 +1240,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     @Nullable
     private Expression convert(org.eclipse.jdt.core.dom.SimpleName expression) {
       IBinding binding = expression.resolveBinding();
-      if (binding instanceof IVariableBinding) {
-        IVariableBinding variableBinding = (IVariableBinding) binding;
+      if (binding instanceof IVariableBinding variableBinding) {
         if (variableBinding.isField()) {
           // It refers to a field.
           FieldDescriptor fieldDescriptor = environment.createFieldDescriptor(variableBinding);
@@ -1270,11 +1263,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         org.eclipse.jdt.core.dom.SingleVariableDeclaration variableDeclaration) {
       boolean inNullMarkedScope = inNullMarkedScope();
       Variable variable = createVariable(variableDeclaration, inNullMarkedScope);
-      if (variableDeclaration.getType() instanceof org.eclipse.jdt.core.dom.UnionType) {
+      if (variableDeclaration.getType() instanceof UnionType unionType) {
         // Union types are only relevant in multi catch variable declarations, which appear in the
         // AST as a SingleVariableDeclaration.
-        variable.setTypeDescriptor(
-            convert((org.eclipse.jdt.core.dom.UnionType) variableDeclaration.getType()));
+        variable.setTypeDescriptor(convert(unionType));
       }
       return variable;
     }
@@ -1316,8 +1308,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         List<org.eclipse.jdt.core.dom.Statement> statements) {
       List<SwitchCase.Builder> caseBuilders = new ArrayList<>();
       for (org.eclipse.jdt.core.dom.Statement statement : statements) {
-        if (statement instanceof org.eclipse.jdt.core.dom.SwitchCase) {
-          caseBuilders.add(convert((org.eclipse.jdt.core.dom.SwitchCase) statement));
+        if (statement instanceof org.eclipse.jdt.core.dom.SwitchCase switchCase) {
+          caseBuilders.add(convert(switchCase));
         } else {
           Iterables.getLast(caseBuilders).addStatement(convertStatement(statement));
         }
@@ -1428,8 +1420,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
 
     private Variable convert(org.eclipse.jdt.core.dom.VariableDeclaration variableDeclaration) {
-      if (variableDeclaration instanceof org.eclipse.jdt.core.dom.SingleVariableDeclaration) {
-        return convert((org.eclipse.jdt.core.dom.SingleVariableDeclaration) variableDeclaration);
+      if (variableDeclaration instanceof SingleVariableDeclaration singleVariableDeclaration) {
+        return convert(singleVariableDeclaration);
       } else {
         return convert((org.eclipse.jdt.core.dom.VariableDeclarationFragment) variableDeclaration)
             .getVariable();

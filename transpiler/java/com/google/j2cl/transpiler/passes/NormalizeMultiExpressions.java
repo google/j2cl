@@ -63,9 +63,8 @@ public class NormalizeMultiExpressions extends NormalizationPass {
 
     @Override
     public Statement rewriteExpressionStatement(ExpressionStatement statement) {
-      if (statement.getExpression() instanceof MultiExpression) {
-        List<Expression> expressions =
-            ((MultiExpression) statement.getExpression()).getExpressions();
+      if (statement.getExpression() instanceof MultiExpression multiExpression) {
+        List<Expression> expressions = multiExpression.getExpressions();
 
         if (expressions.isEmpty()) {
           // No expressions with side effects in this top level multexpression, remove completely.
@@ -105,8 +104,8 @@ public class NormalizeMultiExpressions extends NormalizationPass {
           continue;
         }
 
-        if (expression instanceof MultiExpression) {
-          flattenedExpressions.addAll(((MultiExpression) expression).getExpressions());
+        if (expression instanceof MultiExpression nestedMultiExpression) {
+          flattenedExpressions.addAll(nestedMultiExpression.getExpressions());
         } else {
           flattenedExpressions.add(expression);
         }
@@ -120,9 +119,8 @@ public class NormalizeMultiExpressions extends NormalizationPass {
     @Override
     public Expression rewriteBinaryExpression(BinaryExpression expression) {
       if (expression.getOperator().hasSideEffect()
-          && expression.getLeftOperand() instanceof MultiExpression) {
-        List<Expression> lhsExpressions =
-            ((MultiExpression) expression.getLeftOperand()).getExpressions();
+          && expression.getLeftOperand() instanceof MultiExpression leftOperand) {
+        List<Expression> lhsExpressions = leftOperand.getExpressions();
         Expression rightMostLhsExpression = Iterables.getLast(lhsExpressions);
         Expression innerExpression =
             BinaryExpression.Builder.from(expression).setLeftOperand(rightMostLhsExpression).build();
@@ -137,8 +135,8 @@ public class NormalizeMultiExpressions extends NormalizationPass {
     @Override
     public Expression rewriteUnaryExpression(UnaryExpression expression) {
       if (expression.getOperator().hasSideEffect()
-          && expression.getOperand() instanceof MultiExpression) {
-        List<Expression> expressions = ((MultiExpression) expression.getOperand()).getExpressions();
+          && expression.getOperand() instanceof MultiExpression operand) {
+        List<Expression> expressions = operand.getExpressions();
         Expression rightMostExpression = Iterables.getLast(expressions);
         Expression innerExpression =
             UnaryExpression.Builder.from(expression).setOperand(rightMostExpression).build();

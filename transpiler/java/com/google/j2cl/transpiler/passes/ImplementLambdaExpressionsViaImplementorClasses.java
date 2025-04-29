@@ -112,8 +112,8 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
           private List<TypeVariable> getEnclosingTypeVariables(boolean capturesEnclosingInstance) {
             Member currentMember = getCurrentMember();
             List<TypeVariable> enclosingTypeVariables = new ArrayList<>();
-            if (currentMember instanceof Method) {
-              MethodDescriptor methodDescriptor = ((Method) currentMember).getDescriptor();
+            if (currentMember instanceof Method method) {
+              MethodDescriptor methodDescriptor = method.getDescriptor();
               enclosingTypeVariables.addAll(methodDescriptor.getTypeParameterTypeDescriptors());
             }
 

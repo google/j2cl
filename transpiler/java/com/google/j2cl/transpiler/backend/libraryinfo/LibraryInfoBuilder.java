@@ -135,10 +135,9 @@ public final class LibraryInfoBuilder {
       // associate them with those fields. When RTA will determine that an enum field is used, it
       // will make the method used to initialize that field live and will traverse it.
       for (Statement statement : type.getLoadTimeStatements()) {
-        if (!(statement instanceof FieldDeclarationStatement)) {
+        if (!(statement instanceof FieldDeclarationStatement fieldDeclarationStatement)) {
           continue;
         }
-        FieldDeclarationStatement fieldDeclarationStatement = (FieldDeclarationStatement) statement;
         if (!fieldDeclarationStatement.getFieldDescriptor().isEnumConstant()) {
           continue;
         }

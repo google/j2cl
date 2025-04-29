@@ -65,8 +65,8 @@ public class StaticallyEvaluateStringComparison extends NormalizationPass {
 
   @Nullable
   private static Expression tryEvaluateEquality(Expression lhs, Expression rhs) {
-    if (lhs instanceof StringLiteral && rhs instanceof StringLiteral) {
-      return evaluateEquality((StringLiteral) lhs, (StringLiteral) rhs);
+    if (lhs instanceof StringLiteral lhsLiteral && rhs instanceof StringLiteral rhsLiteral) {
+      return evaluateEquality(lhsLiteral, rhsLiteral);
     }
     return null;
   }

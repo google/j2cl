@@ -50,8 +50,8 @@ public class NormalizeLabels extends NormalizationPass {
           }
 
           private Statement ensureLabeled(Statement statement, Label label) {
-            if (getParent() instanceof LabeledStatement) {
-              checkState(((LabeledStatement) getParent()).getLabel() == label);
+            if (getParent() instanceof LabeledStatement labeledStatement) {
+              checkState(labeledStatement.getLabel() == label);
               return statement;
             }
 

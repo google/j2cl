@@ -67,11 +67,10 @@ public class NormalizeArrayLiterals extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Node rewriteNewArray(NewArray newArray) {
-            if (!(newArray.getInitializer() instanceof ArrayLiteral)) {
+            if (!(newArray.getInitializer() instanceof ArrayLiteral arrayLiteral)) {
               return newArray;
             }
 
-            ArrayLiteral arrayLiteral = (ArrayLiteral) newArray.getInitializer();
             ArrayTypeDescriptor arrayTypeDescriptor = arrayLiteral.getTypeDescriptor();
             if (arrayLiteral.getValueExpressions().isEmpty()
                 && !arrayTypeDescriptor.isUntypedArray()) {
@@ -103,21 +102,17 @@ public class NormalizeArrayLiterals extends NormalizationPass {
   }
 
   private static boolean isRedundantSpreadOperator(Expression expression) {
-    if (!(expression instanceof PrefixExpression)) {
+    if (!(expression instanceof PrefixExpression prefixExpression)) {
       return false;
     }
-
-    PrefixExpression prefixExpression = (PrefixExpression) expression;
 
     if (prefixExpression.getOperator() != PrefixOperator.SPREAD) {
       return false;
     }
 
-    if (!(prefixExpression.getOperand() instanceof NewArray)) {
+    if (!(prefixExpression.getOperand() instanceof NewArray newArrayExpression)) {
       return false;
     }
-
-    NewArray newArrayExpression = (NewArray) prefixExpression.getOperand();
 
     if (newArrayExpression.getInitializer() instanceof ArrayLiteral) {
       // Spread operation is redundant on new int[] {1,2,..}
@@ -129,8 +124,8 @@ public class NormalizeArrayLiterals extends NormalizationPass {
     // Spread operation is redundant on new Foo[0] or new Foo[0][][]
     return newArrayExpression.getInitializer() == null
         && !dimensions.isEmpty()
-        && dimensions.get(0) instanceof NumberLiteral
-        && ((NumberLiteral) dimensions.get(0)).getValue().intValue() == 0
+        && dimensions.get(0) instanceof NumberLiteral numberLiteral
+        && numberLiteral.getValue().intValue() == 0
         && isAllNullLiterals(dimensions.subList(1, dimensions.size()));
   }
 

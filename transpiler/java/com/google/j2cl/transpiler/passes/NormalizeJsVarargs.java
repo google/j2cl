@@ -141,12 +141,12 @@ public class NormalizeJsVarargs extends NormalizationPass {
   private static List<Expression> extractVarargsArguments(Expression expression) {
     // If the last argument is an array literal, or an array creation with array literal, or a
     // zero length array literal, extract it.
-    if (expression instanceof NewArray) {
-      expression = extractExplicitInitializer((NewArray) expression);
+    if (expression instanceof NewArray newArray) {
+      expression = extractExplicitInitializer(newArray);
     }
 
-    if (expression instanceof ArrayLiteral) {
-      return ((ArrayLiteral) expression).getValueExpressions();
+    if (expression instanceof ArrayLiteral arrayLiteral) {
+      return arrayLiteral.getValueExpressions();
     }
 
     return null;
@@ -160,8 +160,7 @@ public class NormalizeJsVarargs extends NormalizationPass {
       return initializer;
     }
 
-    if (newArray.getDimensionExpressions().get(0) instanceof NumberLiteral) {
-      NumberLiteral numberLiteral = (NumberLiteral) newArray.getDimensionExpressions().get(0);
+    if (newArray.getDimensionExpressions().get(0) instanceof NumberLiteral numberLiteral) {
       if (numberLiteral.getValue().intValue() == 0) {
         // This is newArray of zero length, even if it didn't have an initializer we can provide
         // and empty array literal of the right type.

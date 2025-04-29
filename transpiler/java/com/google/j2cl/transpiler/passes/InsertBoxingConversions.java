@@ -54,8 +54,8 @@ public class InsertBoxingConversions extends NormalizationPass {
           Expression expression) {
         // A narrowing primitive conversion may precede boxing a number or character literal.
         // (See JLS 5.2).
-        if (expression instanceof NumberLiteral) {
-          expression = maybeNarrowNumberLiteral(inferredTypeDescriptor, (NumberLiteral) expression);
+        if (expression instanceof NumberLiteral literal) {
+          expression = maybeNarrowNumberLiteral(inferredTypeDescriptor, literal);
         }
         // There should be a following 'widening reference conversion' if the targeting type
         // is not the boxed type, but as widening reference conversion is always NOOP, and it

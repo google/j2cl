@@ -254,8 +254,8 @@ class ImportGatherer extends AbstractVisitor {
       return;
     }
 
-    if (typeDescriptor instanceof TypeVariable) {
-      collectTypeDescriptorsIntroducedByTypeBounds((TypeVariable) typeDescriptor);
+    if (typeDescriptor instanceof TypeVariable typeVariable) {
+      collectTypeDescriptorsIntroducedByTypeBounds(typeVariable);
       return;
     }
 

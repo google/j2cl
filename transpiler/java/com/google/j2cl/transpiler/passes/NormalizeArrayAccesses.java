@@ -31,8 +31,7 @@ public class NormalizeArrayAccesses extends NormalizationPass {
           @Override
           public Expression rewriteBinaryExpression(BinaryExpression expression) {
             if (expression.isSimpleAssignment()
-                && expression.getLeftOperand() instanceof ArrayAccess) {
-              ArrayAccess leftSide = (ArrayAccess) expression.getLeftOperand();
+                && expression.getLeftOperand() instanceof ArrayAccess leftSide) {
               return RuntimeMethods.createArraySetMethodCall(
                   leftSide.getArrayExpression(),
                   leftSide.getIndexExpression(),

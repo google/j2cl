@@ -53,6 +53,6 @@ public class ImplementStringConcatenation extends NormalizationPass {
   }
 
   private static boolean isEmptyString(Expression expression) {
-    return expression instanceof StringLiteral && ((StringLiteral) expression).getValue().isEmpty();
+    return expression instanceof StringLiteral literal && literal.getValue().isEmpty();
   }
 }

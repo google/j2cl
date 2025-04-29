@@ -50,18 +50,18 @@ public class StaticallyEvaluateStringConcatenation extends NormalizationPass {
 
   @Nullable
   private static StringLiteral convertToStringLiteral(Expression expression) {
-    if (expression instanceof StringLiteral) {
-      return (StringLiteral) expression;
+    if (expression instanceof StringLiteral literal) {
+      return literal;
     } else {
-      if (expression instanceof NumberLiteral) {
+      if (expression instanceof NumberLiteral literal) {
         // Char literals are stored as NumberLiterals with an Integer object as its value. So we
         // need to determine whether it is a char, and if so apply the right conversion to String.
         boolean isChar = TypeDescriptors.isPrimitiveChar(expression.getTypeDescriptor());
-        Number value = ((NumberLiteral) expression).getValue();
+        Number value = literal.getValue();
         return new StringLiteral(
             isChar ? String.valueOf((char) value.intValue()) : String.valueOf(value));
-      } else if (expression instanceof BooleanLiteral) {
-        return new StringLiteral(String.valueOf(((BooleanLiteral) expression).getValue()));
+      } else if (expression instanceof BooleanLiteral literal) {
+        return new StringLiteral(String.valueOf(literal.getValue()));
       }
     }
     return null;

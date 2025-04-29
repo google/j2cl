@@ -170,10 +170,8 @@ public class ImplementLambdaExpressionsViaJsFunctionAdaptor extends Normalizatio
    * annotated with {@code @FunctionalInterface}.
    */
   private static boolean isAnnotatedWithFunctionalInterface(TypeDescriptor typeDescriptor) {
-    return typeDescriptor instanceof DeclaredTypeDescriptor
-        && ((DeclaredTypeDescriptor) typeDescriptor)
-            .getTypeDeclaration()
-            .hasAnnotation("java.lang.FunctionalInterface");
+    return typeDescriptor instanceof DeclaredTypeDescriptor descriptor
+        && descriptor.getTypeDeclaration().hasAnnotation("java.lang.FunctionalInterface");
   }
 
   /** Adds the $adapt method to the functional interface. */

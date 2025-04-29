@@ -49,7 +49,7 @@ public final class AnnotationUtils {
   @Nullable
   static List<?> getAnnotationParameterArray(AnnotationMirror annotation, String paramName) {
     var parameterValue = getAnnotationParameterValue(annotation, paramName);
-    return parameterValue instanceof List ? (List<?>) parameterValue : null;
+    return parameterValue instanceof List<?> list ? list : null;
   }
 
   static boolean getAnnotationParameterBoolean(

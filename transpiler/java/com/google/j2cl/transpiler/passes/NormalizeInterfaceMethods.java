@@ -82,10 +82,9 @@ public class NormalizeInterfaceMethods extends NormalizationPass {
   }
 
   private static boolean isInterfacePrivateInstanceMethod(MemberDescriptor memberDescriptor) {
-    if (!(memberDescriptor instanceof MethodDescriptor)) {
+    if (!(memberDescriptor instanceof MethodDescriptor methodDescriptor)) {
       return false;
     }
-    MethodDescriptor methodDescriptor = (MethodDescriptor) memberDescriptor;
     return methodDescriptor.getEnclosingTypeDescriptor().isInterface()
         && methodDescriptor.getVisibility().isPrivate()
         && !methodDescriptor.isStatic();

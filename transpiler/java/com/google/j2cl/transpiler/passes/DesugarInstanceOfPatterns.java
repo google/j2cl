@@ -56,9 +56,9 @@ public class DesugarInstanceOfPatterns extends NormalizationPass {
             // Always use a variable for the expression that needs to be evaluated twice to
             // prevent increasing code size and make the code more readable.
             Variable expressionVariable;
-            if (expression instanceof VariableReference) {
+            if (expression instanceof VariableReference variableReference) {
               // If it is already a variable just use it.
-              expressionVariable = ((VariableReference) expression).getTarget();
+              expressionVariable = variableReference.getTarget();
             } else {
               // Create a new variable to avoid evaluating expression twice.
               expressionVariable =

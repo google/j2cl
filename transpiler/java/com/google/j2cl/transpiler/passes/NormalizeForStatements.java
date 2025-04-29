@@ -70,8 +70,8 @@ public class NormalizeForStatements extends NormalizationPass {
           @Override
           public Node rewriteLabeledStatement(LabeledStatement labeledStatement) {
             Statement statement = labeledStatement.getStatement();
-            return statement instanceof ForStatement
-                ? rewriteLabeledForStatement(labeledStatement.getLabel(), (ForStatement) statement)
+            return statement instanceof ForStatement forStatement
+                ? rewriteLabeledForStatement(labeledStatement.getLabel(), forStatement)
                 : labeledStatement;
           }
         });

@@ -400,14 +400,13 @@ public class OptimizeKotlinCompanions extends NormalizationPass {
 
   private static boolean isFieldInitializer(
       Expression expression, FieldDescriptor fieldDescriptor) {
-    if (!(expression instanceof BinaryExpression)) {
+    if (!(expression instanceof BinaryExpression binaryExpression)) {
       return false;
     }
-    var binaryExpression = (BinaryExpression) expression;
 
     return binaryExpression.isSimpleAssignment()
-        && binaryExpression.getLeftOperand() instanceof FieldAccess
-        && fieldDescriptor.equals(((FieldAccess) binaryExpression.getLeftOperand()).getTarget());
+        && binaryExpression.getLeftOperand() instanceof FieldAccess leftOperand
+        && fieldDescriptor.equals(leftOperand.getTarget());
   }
 
   /**
@@ -442,10 +441,9 @@ public class OptimizeKotlinCompanions extends NormalizationPass {
   }
 
   private static boolean isCompanionFieldAccess(Expression expression) {
-    if (!(expression instanceof FieldAccess)) {
+    if (!(expression instanceof FieldAccess fieldAccess)) {
       return false;
     }
-    FieldAccess fieldAccess = (FieldAccess) expression;
 
     return fieldAccess.getQualifier() == null && isCompanionInstanceField(fieldAccess.getTarget());
   }

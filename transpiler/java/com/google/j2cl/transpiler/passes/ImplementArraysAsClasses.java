@@ -162,8 +162,8 @@ public class ImplementArraysAsClasses extends NormalizationPass {
           }
 
           private boolean isNativeMethodParameter() {
-            return getParent() instanceof Method
-                && ((Method) getParent()).getDescriptor().getWasmInfo() != null;
+            return getParent() instanceof Method method
+                && method.getDescriptor().getWasmInfo() != null;
           }
         });
   }
@@ -224,8 +224,7 @@ public class ImplementArraysAsClasses extends NormalizationPass {
           }
 
           private boolean isNonNativeArray(TypeDescriptor descriptor) {
-            return descriptor instanceof ArrayTypeDescriptor
-                && !((ArrayTypeDescriptor) descriptor).isNativeWasmArray();
+            return descriptor instanceof ArrayTypeDescriptor && !descriptor.isNativeWasmArray();
           }
 
           private boolean needsNativeArray(MethodCall call, Expression expression) {

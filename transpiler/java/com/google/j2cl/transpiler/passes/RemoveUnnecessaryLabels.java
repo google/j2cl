@@ -100,8 +100,8 @@ public class RemoveUnnecessaryLabels extends NormalizationPass {
 
           private void addEnclosingLabel() {
             // Only loops that that are targeted by breaks or continues are labeled.
-            if (getParent() instanceof LabeledStatement) {
-              labelsToConvert.add(((LabeledStatement) getParent()).getLabel());
+            if (getParent() instanceof LabeledStatement labeledStatement) {
+              labelsToConvert.add(labeledStatement.getLabel());
             }
           }
         });
@@ -116,10 +116,9 @@ public class RemoveUnnecessaryLabels extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Node rewriteLabeledStatement(LabeledStatement labeledStatement) {
-            if (!(labeledStatement.getStatement() instanceof Block)) {
+            if (!(labeledStatement.getStatement() instanceof Block labeledBlock)) {
               return labeledStatement;
             }
-            Block labeledBlock = (Block) labeledStatement.getStatement();
 
             if (labeledBlock.getStatements().isEmpty()) {
               return labeledBlock;
@@ -194,8 +193,8 @@ public class RemoveUnnecessaryLabels extends NormalizationPass {
           }
 
           private Label getInnermostLabel(LabeledStatement labeledStatement) {
-            if (labeledStatement.getStatement() instanceof LabeledStatement) {
-              return getInnermostLabel((LabeledStatement) labeledStatement.getStatement());
+            if (labeledStatement.getStatement() instanceof LabeledStatement innerStatement) {
+              return getInnermostLabel(innerStatement);
             }
             return labeledStatement.getLabel();
           }

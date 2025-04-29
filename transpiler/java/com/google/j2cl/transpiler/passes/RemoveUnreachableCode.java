@@ -79,8 +79,7 @@ public final class RemoveUnreachableCode extends NormalizationPass {
   }
 
   private static boolean isNothingExpressionStatement(Statement statement) {
-    return statement instanceof ExpressionStatement
-        && TypeDescriptors.isKotlinNothing(
-            ((ExpressionStatement) statement).getExpression().getTypeDescriptor());
+    return statement instanceof ExpressionStatement expressionStatement
+        && TypeDescriptors.isKotlinNothing(expressionStatement.getExpression().getTypeDescriptor());
   }
 }

@@ -288,10 +288,9 @@ public final class JsImportsGenerator {
     }
 
     private void collectModuleImports(TypeDescriptor typeDescriptor) {
-      if (!(typeDescriptor instanceof DeclaredTypeDescriptor)) {
+      if (!(typeDescriptor instanceof DeclaredTypeDescriptor declaredTypeDescriptor)) {
         return;
       }
-      DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
       TypeDeclaration typeDeclaration = declaredTypeDescriptor.getTypeDeclaration();
       if (!typeDeclaration.isNative() || typeDeclaration.isExtern()) {
         return;

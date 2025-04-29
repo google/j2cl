@@ -31,12 +31,11 @@ public class RemoveUnneededCastsJ2kt extends NormalizationPass {
           @Override
           public Node rewriteCastExpression(CastExpression castExpression) {
             Expression innerExpression = castExpression.getExpression();
-            if (!(innerExpression instanceof CastExpression)) {
+            if (!(innerExpression instanceof CastExpression innerCastExpression)) {
               return castExpression;
             }
 
             // Deduplicate casts of the same base type.
-            CastExpression innerCastExpression = (CastExpression) innerExpression;
             if (!castExpression
                 .getCastTypeDescriptor()
                 .toRawTypeDescriptor()

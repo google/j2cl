@@ -51,8 +51,8 @@ public class RemoveNestedBlocks extends NormalizationPass {
     return statements.stream()
         .flatMap(
             statement ->
-                statement instanceof Block
-                    ? ((Block) statement).getStatements().stream()
+                statement instanceof Block block
+                    ? block.getStatements().stream()
                     : Stream.of(statement))
         .collect(toImmutableList());
   }

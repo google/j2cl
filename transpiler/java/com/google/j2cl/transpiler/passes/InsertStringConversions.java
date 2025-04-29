@@ -76,10 +76,9 @@ public class InsertStringConversions extends NormalizationPass {
     if (expression instanceof StringLiteral) {
       return true;
     }
-    if (!(expression instanceof BinaryExpression)) {
+    if (!(expression instanceof BinaryExpression binaryExpression)) {
       return false;
     }
-    BinaryExpression binaryExpression = (BinaryExpression) expression;
     return AstUtils.matchesStringContext(binaryExpression);
   }
 

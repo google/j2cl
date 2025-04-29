@@ -182,9 +182,7 @@ public class InsertErasureTypeSafetyCasts extends NormalizationPass {
   }
 
   private static boolean isUncheckedCast(Expression expression) {
-    return expression instanceof MethodCall
-        && ((MethodCall) expression)
-            .getTarget()
-            .hasAnnotation("javaemul.internal.annotations.UncheckedCast");
+    return expression instanceof MethodCall methodCall
+        && methodCall.getTarget().hasAnnotation("javaemul.internal.annotations.UncheckedCast");
   }
 }

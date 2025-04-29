@@ -208,8 +208,7 @@ public class NormalizeSwitchConstructsJ2kt extends NormalizationPass {
     for (int i = 0; i < caseExpressions.size(); i++) {
       Expression caseExpression = caseExpressions.get(i);
 
-      if (caseExpression instanceof NumberLiteral) {
-        NumberLiteral literal = (NumberLiteral) caseExpression;
+      if (caseExpression instanceof NumberLiteral literal) {
         caseExpressions.set(
             i,
             new NumberLiteral((PrimitiveTypeDescriptor) targetTypeDescriptor, literal.getValue()));
@@ -416,27 +415,24 @@ public class NormalizeSwitchConstructsJ2kt extends NormalizationPass {
    * while(false)` statement.
    */
   private static void removeTrailingBreaks(Statement body, Label label) {
-    if (body instanceof Block) {
-      removeTrailingBreaks(((Block) body).getStatements(), label);
+    if (body instanceof Block block) {
+      removeTrailingBreaks(block.getStatements(), label);
     }
-    if (body instanceof ExpressionStatement) {
-      ExpressionStatement expressionStatement = (ExpressionStatement) body;
-      if (expressionStatement.getExpression() instanceof SwitchExpression) {
-        SwitchExpression switchExpression = (SwitchExpression) expressionStatement.getExpression();
+    if (body instanceof ExpressionStatement expressionStatement) {
+      if (expressionStatement.getExpression() instanceof SwitchExpression switchExpression) {
         for (SwitchCase switchCase : switchExpression.getCases()) {
           removeTrailingBreaks(switchCase.getStatements(), label);
         }
       }
     }
 
-    if (body instanceof DoWhileStatement) {
-      if (((DoWhileStatement) body).getConditionExpression().isBooleanFalse()) {
-        removeTrailingBreaks(((DoWhileStatement) body).getBody(), label);
+    if (body instanceof DoWhileStatement doWhileStatement) {
+      if (doWhileStatement.getConditionExpression().isBooleanFalse()) {
+        removeTrailingBreaks(doWhileStatement.getBody(), label);
       }
     }
 
-    if (body instanceof IfStatement) {
-      IfStatement ifStatement = (IfStatement) body;
+    if (body instanceof IfStatement ifStatement) {
       removeTrailingBreaks(ifStatement.getThenStatement(), label);
       if (ifStatement.getElseStatement() != null) {
         removeTrailingBreaks(ifStatement.getElseStatement(), label);
@@ -451,8 +447,8 @@ public class NormalizeSwitchConstructsJ2kt extends NormalizationPass {
       // We can safely remove continue statements since we are only handling cases where continue
       // statements target `do { continue; } while(false)`; and in these cases continue statements
       // is equivalent to break statements.
-      if (lastStatement instanceof BreakOrContinueStatement
-          && ((BreakOrContinueStatement) lastStatement).getLabelReference().getTarget() == label) {
+      if (lastStatement instanceof BreakOrContinueStatement breakOrContinueStatement
+          && breakOrContinueStatement.getLabelReference().getTarget() == label) {
         statements.remove(i--);
       } else {
         removeTrailingBreaks(lastStatement, label);

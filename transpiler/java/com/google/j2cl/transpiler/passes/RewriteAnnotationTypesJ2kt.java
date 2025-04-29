@@ -66,8 +66,7 @@ public class RewriteAnnotationTypesJ2kt extends NormalizationPass {
   }
 
   private static TypeDescriptor rewriteAnnotationTypeDescriptor(TypeDescriptor typeDescriptor) {
-    if (typeDescriptor instanceof DeclaredTypeDescriptor) {
-      DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
+    if (typeDescriptor instanceof DeclaredTypeDescriptor declaredTypeDescriptor) {
       if (isJavaLangClass(declaredTypeDescriptor)) {
         return TypeDeclaration.Builder.from(declaredTypeDescriptor.getTypeDeclaration())
             .setPackage(PackageDeclaration.newBuilder().setName("kotlin.reflect").build())
@@ -80,12 +79,10 @@ public class RewriteAnnotationTypesJ2kt extends NormalizationPass {
                     .map(it -> rewriteAnnotationTypeDescriptor(it))
                     .collect(ImmutableList.toImmutableList()));
       }
-    } else if (typeDescriptor instanceof ArrayTypeDescriptor) {
-      ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
+    } else if (typeDescriptor instanceof ArrayTypeDescriptor arrayTypeDescriptor) {
       return arrayTypeDescriptor.withComponentTypeDescriptor(
           rewriteAnnotationTypeDescriptor(arrayTypeDescriptor.getComponentTypeDescriptor()));
-    } else if (typeDescriptor instanceof TypeVariable) {
-      TypeVariable typeVariable = (TypeVariable) typeDescriptor;
+    } else if (typeDescriptor instanceof TypeVariable typeVariable) {
       if (typeVariable.isWildcard()) {
         return typeVariable.withRewrittenBounds(it -> rewriteAnnotationTypeDescriptor(it));
       }
