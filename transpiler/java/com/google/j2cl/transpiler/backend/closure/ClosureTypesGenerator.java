@@ -304,8 +304,16 @@ class ClosureTypesGenerator {
         isJsVarargs
             ? ((ArrayTypeDescriptor) parameterTypeDescriptor).getComponentTypeDescriptor()
             : parameterTypeDescriptor;
-    return new ClosureFunctionType.Parameter(
-        isJsVarargs, isOptional, getClosureType(parameterTypeDescriptor));
+
+    // TODO(b/326131100): Remove hack once template nullability issues are fixed.
+    ClosureType closureParameterType = getClosureType(parameterTypeDescriptor);
+    if (parameterTypeDescriptor.isTypeVariable()) {
+      if (((TypeVariable) parameterTypeDescriptor).isAnnotatedNullable()) {
+        closureParameterType = closureParameterType.toNullable();
+      }
+    }
+
+    return new ClosureFunctionType.Parameter(isJsVarargs, isOptional, closureParameterType);
   }
 
   /** Returns Closure types for collection of type descriptors. */

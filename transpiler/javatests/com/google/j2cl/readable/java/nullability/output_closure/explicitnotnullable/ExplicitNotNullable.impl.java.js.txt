@@ -124,7 +124,7 @@ class ExplicitNotNullable extends j_l_Object {
  /** @nodts @template T */
  m_methodWithNonNullableBound__void_$pp_nullability_explicitnotnullable() {}
  /** @nodts @template N */
- static m_genericNullableMethod__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNullable__java_lang_Object__void(/** !ParameterizedNullable<N> */ o, /** N */ n) {
+ static m_genericNullableMethod__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNullable__java_lang_Object__void(/** !ParameterizedNullable<N> */ o, /** ?N */ n) {
   ExplicitNotNullable.$clinit();
   o.m_setNullable__java_lang_Object__void_$pp_nullability_explicitnotnullable(n);
   o.m_setNonNull__java_lang_Object__void_$pp_nullability_explicitnotnullable(n);
@@ -355,7 +355,7 @@ class ExplicitNotNullable extends j_l_Object {
   return /**@type {string}*/ ($Casts.$to(f.m_apply__java_lang_Object__java_lang_Object(localString), j_l_String));
  }
  /** @nodts @template T @return {T} */
- static m_assertNotNull__java_lang_Object__java_lang_Object(/** T */ nullable) {
+ static m_assertNotNull__java_lang_Object__java_lang_Object(/** ?T */ nullable) {
   ExplicitNotNullable.$clinit();
   if ($Equality.$same(nullable, null)) {
    throw $Exceptions.toJs(NullPointerException.$create__());
@@ -368,12 +368,12 @@ class ExplicitNotNullable extends j_l_Object {
   let nonNull = /**@type {?string}*/ ($Casts.$to(ExplicitNotNullable.m_assertNotNull__java_lang_Object__java_lang_Object(nullable), j_l_String));
  }
  /** @nodts @template T */
- static m_testAssertNotNull_notNullBounds__java_lang_Object__void(/** T */ nullable) {
+ static m_testAssertNotNull_notNullBounds__java_lang_Object__void(/** ?T */ nullable) {
   ExplicitNotNullable.$clinit();
   let notNull = ExplicitNotNullable.m_assertNotNull__java_lang_Object__java_lang_Object(nullable);
  }
  /** @nodts @template T */
- static m_testAssertNotNull_nullableBounds__java_lang_Object__void(/** T */ nullable) {
+ static m_testAssertNotNull_nullableBounds__java_lang_Object__void(/** ?T */ nullable) {
   ExplicitNotNullable.$clinit();
   let notNull = ExplicitNotNullable.m_assertNotNull__java_lang_Object__java_lang_Object(nullable);
  }
