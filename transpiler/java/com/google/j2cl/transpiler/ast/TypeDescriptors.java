@@ -181,6 +181,10 @@ public class TypeDescriptors {
 
   // Kotlin-specific types
   @Nullable
+  @QualifiedBinaryName("kotlin.coroutines.Continuation")
+  public DeclaredTypeDescriptor kotlinCoroutinesContinuation;
+
+  @Nullable
   @QualifiedBinaryName("kotlin.jvm.internal.NothingStub")
   public DeclaredTypeDescriptor kotlinNothing;
 

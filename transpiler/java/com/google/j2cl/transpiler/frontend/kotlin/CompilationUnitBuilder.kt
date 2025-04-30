@@ -17,6 +17,7 @@
 
 package com.google.j2cl.transpiler.frontend.kotlin
 
+import com.google.common.collect.ImmutableList
 import com.google.j2cl.common.SourcePosition
 import com.google.j2cl.transpiler.ast.ArrayAccess
 import com.google.j2cl.transpiler.ast.ArrayLength
@@ -187,6 +188,7 @@ import org.jetbrains.kotlin.ir.util.dump
 import org.jetbrains.kotlin.ir.util.fqNameWhenAvailable
 import org.jetbrains.kotlin.ir.util.isFunction
 import org.jetbrains.kotlin.ir.util.isPrimitiveArray
+import org.jetbrains.kotlin.ir.util.isSuspend
 import org.jetbrains.kotlin.ir.util.parentAsClass
 import org.jetbrains.kotlin.ir.util.render
 import org.jetbrains.kotlin.ir.util.statements
@@ -329,7 +331,7 @@ internal class CompilationUnitBuilder(
   }
 
   private fun convertFunction(irFunction: IrFunction): Method {
-    val parameters = irFunction.getParameters().map(this::createVariable)
+    val parameters = convertParameters(irFunction)
     val methodDescriptor = environment.getDeclaredMethodDescriptor(irFunction)
     val body =
       when {
@@ -345,6 +347,25 @@ internal class CompilationUnitBuilder(
       .setBodySourcePosition(body.sourcePosition)
       .addStatements(body.statements)
       .build()
+  }
+
+  private fun convertParameters(irFunction: IrFunction): List<Variable> = buildList {
+    if (irFunction.isSuspend) {
+      // Add the implicit continuation parameter as the first parameter. The call site will be
+      // patched in a backend desugaring pass.
+      add(
+        Variable.newBuilder()
+          .setName("\$continuation")
+          .setParameter(true)
+          .setTypeDescriptor(
+            TypeDescriptors.get()
+              .kotlinCoroutinesContinuation!!
+              .withTypeArguments(ImmutableList.of(TypeDescriptors.getUnknownType()))
+          )
+          .build()
+      )
+    }
+    addAll(irFunction.getParameters().map(this@CompilationUnitBuilder::createVariable))
   }
 
   private fun convertBody(body: IrBody): Block =
@@ -1401,7 +1422,7 @@ internal class CompilationUnitBuilder(
   ): FunctionExpression {
     check(typeDescriptor.isFunctionalInterface)
     val irFunction = irFunctionExpression.function
-    val parameters = irFunction.getParameters().map(this::createVariable)
+    val parameters = convertParameters(irFunction)
     val body =
       irFunction.body?.let { convertBody(it) }
         ?: Block.newBuilder().setSourcePosition(getSourcePosition(irFunction)).build()

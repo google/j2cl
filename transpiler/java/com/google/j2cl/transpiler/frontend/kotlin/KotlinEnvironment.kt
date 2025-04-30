@@ -206,8 +206,12 @@ internal class KotlinEnvironment(
   }
 
   private fun getWellKnownTypeDescriptor(qualifiedBinaryName: String): DeclaredTypeDescriptor? {
+    // Note: We disable declaration-site variance when resolving type descriptors of the well
+    // known types because the variance is not needed we creating a reference to a type and using
+    // variance would require resolving java.lang.Object via TypeDescriptors.get() during
+    // TypeDescriptors initialization, causing a cycle.
     return pluginContext.referenceClass(ClassId.fromQualifiedBinaryName(qualifiedBinaryName))?.let {
-      getDeclaredTypeDescriptor(it.defaultType.makeNullable())
+      getDeclaredTypeDescriptor(it.defaultType.makeNullable(), useDeclarationVariance = false)
     }
   }
 
@@ -360,10 +364,13 @@ internal class KotlinEnvironment(
   private fun getSuperTypeDescriptor(irType: IrType): DeclaredTypeDescriptor =
     getDeclaredType(irType as IrSimpleType, useDeclarationVariance = false)
 
-  fun getDeclaredTypeDescriptor(irType: IrType): DeclaredTypeDescriptor =
-    getTypeDescriptor(irType) as DeclaredTypeDescriptor
+  fun getDeclaredTypeDescriptor(
+    irType: IrType,
+    useDeclarationVariance: Boolean = true,
+  ): DeclaredTypeDescriptor =
+    getTypeDescriptor(irType, useDeclarationVariance) as DeclaredTypeDescriptor
 
-  fun getTypeDescriptor(irType: IrType): TypeDescriptor {
+  fun getTypeDescriptor(irType: IrType, useDeclarationVariance: Boolean = true): TypeDescriptor {
     var typeDescriptor =
       typeDescriptorByIrType.getOrPut(irType) {
         when {
@@ -372,7 +379,7 @@ internal class KotlinEnvironment(
             getTypeVariable(typeParameter, !typeParameter.isFromJava() && irType.isMarkedNullable())
           }
           irType.isArrayType() -> createArrayTypeDescriptor(irType)
-          irType is IrSimpleType -> getDeclaredType(irType, useDeclarationVariance = true)
+          irType is IrSimpleType -> getDeclaredType(irType, useDeclarationVariance)
           else -> TODO("Not supported type $irType")
         }
       }
@@ -605,6 +612,19 @@ internal class KotlinEnvironment(
 
       val isConstructor = irFunction is IrConstructor
       val parameterDescriptors = ImmutableList.builder<MethodDescriptor.ParameterDescriptor>()
+
+      if (irFunction.isSuspend) {
+        // Add the implicit continuation parameter so our type model is correct.
+        parameterDescriptors.add(
+          MethodDescriptor.ParameterDescriptor.newBuilder()
+            .setTypeDescriptor(
+              TypeDescriptors.get()
+                .kotlinCoroutinesContinuation!!
+                .withTypeArguments(ImmutableList.of(TypeDescriptors.getUnknownType()))
+            )
+            .build()
+        )
+      }
 
       val parameters =
         if (specialBridge == null) irFunction.getParameters()
