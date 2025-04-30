@@ -127,7 +127,6 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    // Fix array literals.
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
