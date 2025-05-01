@@ -39,6 +39,13 @@ class ToStringRenderer {
       }
 
       @Override
+      public boolean enterArrayCreationReference(ArrayCreationReference arrayCreationReference) {
+        print(arrayCreationReference.targetTypeDescriptor);
+        print("::new");
+        return false;
+      }
+
+      @Override
       public boolean enterArrayLiteral(ArrayLiteral arrayLiteral) {
         print("[");
         printSeparated(",", arrayLiteral.getValueExpressions());
@@ -348,6 +355,23 @@ class ToStringRenderer {
       public boolean enterMethodCall(MethodCall methodCall) {
         printQualifier(methodCall);
         printInvocation(methodCall);
+        return false;
+      }
+
+      @Override
+      public boolean enterMethodReference(MethodReference methodReference) {
+        var referencedMethodDescriptor = methodReference.getReferencedMethodDescriptor();
+        var qualifier = methodReference.getQualifier();
+        if (qualifier == null) {
+          print(referencedMethodDescriptor.getEnclosingTypeDescriptor());
+        } else {
+          accept(qualifier);
+        }
+        print("::");
+        print(
+            referencedMethodDescriptor.isConstructor()
+                ? "new"
+                : referencedMethodDescriptor.getName());
         return false;
       }
 
