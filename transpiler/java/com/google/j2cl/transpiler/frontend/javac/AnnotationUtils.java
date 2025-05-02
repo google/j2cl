@@ -15,10 +15,12 @@
  */
 package com.google.j2cl.transpiler.frontend.javac;
 
+import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.MoreCollectors.toOptional;
 import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUtils.getSuppressWarningsAnnotation;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableList;
 import com.google.j2cl.transpiler.frontend.common.Nullability;
 import java.util.List;
 import java.util.Map.Entry;
@@ -46,16 +48,23 @@ public final class AnnotationUtils {
     return parameterValue != null ? (String) parameterValue : null;
   }
 
-  @Nullable
-  static List<?> getAnnotationParameterArray(AnnotationMirror annotation, String paramName) {
-    var parameterValue = getAnnotationParameterValue(annotation, paramName);
-    return parameterValue instanceof List<?> list ? list : null;
-  }
-
   static boolean getAnnotationParameterBoolean(
       AnnotationMirror annotation, String paramName, boolean defaultValue) {
     var parameterValue = getAnnotationParameterValue(annotation, paramName);
     return parameterValue != null ? (Boolean) parameterValue : defaultValue;
+  }
+
+  @Nullable
+  static ImmutableList<?> getAnnotationParameterArray(
+      AnnotationMirror annotation, String paramName) {
+    var parameterValue = getAnnotationParameterValue(annotation, paramName);
+
+    return parameterValue instanceof List<?> list
+        ? list.stream()
+            .map(AnnotationValue.class::cast)
+            .map(AnnotationValue::getValue)
+            .collect(toImmutableList())
+        : null;
   }
 
   @Nullable
