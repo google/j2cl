@@ -32,11 +32,12 @@ def _j2kt_native_import_impl(ctx):
     kt_native_infos = []
     swift_infos = []
     default_files = [ctx.attr.jar[DefaultInfo].files]
+    opt_providers = []
 
     return [
         DefaultInfo(files = depset(transitive = default_files)),
         create_J2ktInfo_for_java_import(ctx.attr.jar[JavaInfo]),
-    ] + kt_native_infos + swift_infos
+    ] + kt_native_infos + swift_infos + opt_providers
 
 j2kt_jvm_import = rule(
     implementation = _j2kt_jvm_import_impl,
