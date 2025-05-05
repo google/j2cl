@@ -37,134 +37,65 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktnewobjcnameMethodExample", swiftName = "J2ktnewobjcnameMethodExample", exact = true)
 open class MethodExample {
- @ObjCName("J2ktJ2ktnewobjcnameMethodExampleCompanion", swiftName = "J2ktnewobjcnameMethodExampleCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("main")
-  fun main(
-   vararg @ObjCName("withNSStringArray") args: String?
-  ) {
+  fun main(vararg args: String?) {
    val args_1: Array<String?>? = args as Array<String?>?
   }
  }
 
- @ObjCName("J2ktJ2ktnewobjcnameMethodExample_Foo", swiftName = "J2ktnewobjcnameMethodExample_Foo", exact = true)
  open class Foo
 
- @ObjCName("J2ktJ2ktnewobjcnameMethodExample_Default", swiftName = "J2ktnewobjcnameMethodExample_Default", exact = true)
  open class Default {
-  @ObjCName("instanceMethod")
-  open fun instanceMethod(
-   @ObjCName("withInt", swiftName = "with") i: Int
-  ) {}
+  open fun instanceMethod(i: Int) {}
 
-  @ObjCName("instanceMethod")
-  open fun instanceMethod(
-   @ObjCName("withInt", swiftName = "with") i: Int,
-   @ObjCName("withLongArray") l: LongArray?
-  ) {}
+  open fun instanceMethod(i: Int, l: LongArray?) {}
 
-  @ObjCName("instanceMethod")
-  open fun instanceMethod(
-   @ObjCName("withInt", swiftName = "with") i: Int,
-   @ObjCName("withLongArray2") l: Array<LongArray?>?
-  ) {}
+  open fun instanceMethod(i: Int, l: Array<LongArray?>?) {}
 
-  @ObjCName("instanceMethod")
-  open fun instanceMethod(
-   @ObjCName("withInt", swiftName = "with") i: Int,
-   @ObjCName("withId") id: Any?
-  ) {}
+  open fun instanceMethod(i: Int, id: Any?) {}
 
-  @ObjCName("instanceMethod")
-  open fun instanceMethod(
-   @ObjCName("withJ2ktnewobjcnameMethodExample_Foo", swiftName = "with") foo: Foo?
-  ) {}
+  open fun instanceMethod(foo: Foo?) {}
 
-  @ObjCName("instanceMethod")
-  open fun instanceMethod(
-   @ObjCName("withJ2ktnewobjcnameMethodExample_FooArray") foo: Array<Foo?>?
-  ) {}
+  open fun instanceMethod(foo: Array<Foo?>?) {}
 
-  @ObjCName("instanceMethod")
-  open fun instanceMethod(
-   @ObjCName("withJ2ktnewobjcnameMethodExample_FooArray2") foo: Array<Array<Foo?>?>?
-  ) {}
+  open fun instanceMethod(foo: Array<Array<Foo?>?>?) {}
 
-  @ObjCName("instanceMethod")
-  open fun <T> instanceMethod(
-   @ObjCName("withId") t: T
-  ) {}
+  open fun <T> instanceMethod(t: T) {}
 
-  @ObjCName("instanceMethod")
-  open fun <S: String?> instanceMethod(
-   @ObjCName("withNSString", swiftName = "with") s: S
-  ) {}
+  open fun <S: String?> instanceMethod(s: S) {}
 
-  @ObjCName("J2ktJ2ktnewobjcnameMethodExample_DefaultCompanion", swiftName = "J2ktnewobjcnameMethodExample_DefaultCompanion", exact = true)
   companion object {
    @JvmStatic
-   @ObjCName("staticMethod")
-   fun staticMethod(
-    @ObjCName("withInt", swiftName = "with") i: Int
-   ) {}
+   fun staticMethod(i: Int) {}
 
    @JvmStatic
-   @ObjCName("staticMethod")
-   fun staticMethod(
-    @ObjCName("withInt", swiftName = "with") i: Int,
-    @ObjCName("withLongArray") l: LongArray?
-   ) {}
+   fun staticMethod(i: Int, l: LongArray?) {}
 
    @JvmStatic
-   @ObjCName("staticMethod")
-   fun staticMethod(
-    @ObjCName("withInt", swiftName = "with") i: Int,
-    @ObjCName("withLongArray2") l: Array<LongArray?>?
-   ) {}
+   fun staticMethod(i: Int, l: Array<LongArray?>?) {}
 
    @JvmStatic
-   @ObjCName("staticMethod")
-   fun staticMethod(
-    @ObjCName("withInt", swiftName = "with") i: Int,
-    @ObjCName("withId") id: Any?
-   ) {}
+   fun staticMethod(i: Int, id: Any?) {}
 
    @JvmStatic
-   @ObjCName("staticMethod")
-   fun staticMethod(
-    @ObjCName("withJ2ktnewobjcnameMethodExample_Foo", swiftName = "with") foo: Foo?
-   ) {}
+   fun staticMethod(foo: Foo?) {}
 
    @JvmStatic
-   @ObjCName("staticMethod")
-   fun staticMethod(
-    @ObjCName("withJ2ktnewobjcnameMethodExample_FooArray") foo: Array<Foo?>?
-   ) {}
+   fun staticMethod(foo: Array<Foo?>?) {}
 
    @JvmStatic
-   @ObjCName("staticMethod")
-   fun staticMethod(
-    @ObjCName("withJ2ktnewobjcnameMethodExample_FooArray2") foo: Array<Array<Foo?>?>?
-   ) {}
+   fun staticMethod(foo: Array<Array<Foo?>?>?) {}
 
    @JvmStatic
-   @ObjCName("staticMethod")
-   fun <T> staticMethod(
-    @ObjCName("withId") t: T
-   ) {}
+   fun <T> staticMethod(t: T) {}
 
    @JvmStatic
-   @ObjCName("staticMethod")
-   fun <S: String?> staticMethod(
-    @ObjCName("withNSString", swiftName = "with") s: S
-   ) {}
+   fun <S: String?> staticMethod(s: S) {}
   }
  }
 
- @ObjCName("J2ktJ2ktnewobjcnameMethodExample_Custom", swiftName = "J2ktnewobjcnameMethodExample_Custom", exact = true)
  open class Custom {
   @ObjCName("newFoo")
   open fun foo() {}
@@ -201,94 +132,49 @@ open class MethodExample {
   ) {}
  }
 
- @ObjCName("J2ktJ2ktnewobjcnameMethodExample_Special", swiftName = "J2ktnewobjcnameMethodExample_Special", exact = true)
  class Special {
-  @ObjCName("J2ktJ2ktnewobjcnameMethodExample_Special_WithBoolean", swiftName = "J2ktnewobjcnameMethodExample_Special_WithBoolean", exact = true)
   class WithBoolean {
-   @ObjCName("get", swiftName = "getWithBoolean")
-   fun get(
-    @ObjCName("withBoolean", swiftName = "_") x: Boolean
-   ) {}
+   fun get(x: Boolean) {}
   }
 
-  @ObjCName("J2ktJ2ktnewobjcnameMethodExample_Special_WithChar", swiftName = "J2ktnewobjcnameMethodExample_Special_WithChar", exact = true)
   class WithChar {
-   @ObjCName("get", swiftName = "getWithChar")
-   fun get(
-    @ObjCName("withChar", swiftName = "_") x: Char
-   ) {}
+   fun get(x: Char) {}
   }
 
-  @ObjCName("J2ktJ2ktnewobjcnameMethodExample_Special_WithByte", swiftName = "J2ktnewobjcnameMethodExample_Special_WithByte", exact = true)
   class WithByte {
-   @ObjCName("get", swiftName = "getWithByte")
-   fun get(
-    @ObjCName("withByte", swiftName = "_") x: Byte
-   ) {}
+   fun get(x: Byte) {}
   }
 
-  @ObjCName("J2ktJ2ktnewobjcnameMethodExample_Special_WithShort", swiftName = "J2ktnewobjcnameMethodExample_Special_WithShort", exact = true)
   class WithShort {
-   @ObjCName("get", swiftName = "getWithShort")
-   fun get(
-    @ObjCName("withShort", swiftName = "_") x: Short
-   ) {}
+   fun get(x: Short) {}
   }
 
-  @ObjCName("J2ktJ2ktnewobjcnameMethodExample_Special_WithInt", swiftName = "J2ktnewobjcnameMethodExample_Special_WithInt", exact = true)
   class WithInt {
-   @ObjCName("get", swiftName = "getWith")
-   fun get(
-    @ObjCName("withInt", swiftName = "_") x: Int
-   ) {}
+   fun get(x: Int) {}
   }
 
-  @ObjCName("J2ktJ2ktnewobjcnameMethodExample_Special_WithLong", swiftName = "J2ktnewobjcnameMethodExample_Special_WithLong", exact = true)
   class WithLong {
-   @ObjCName("get", swiftName = "getWithLong")
-   fun get(
-    @ObjCName("withLong", swiftName = "_") x: Long
-   ) {}
+   fun get(x: Long) {}
   }
 
-  @ObjCName("J2ktJ2ktnewobjcnameMethodExample_Special_WithFloat", swiftName = "J2ktnewobjcnameMethodExample_Special_WithFloat", exact = true)
   class WithFloat {
-   @ObjCName("get", swiftName = "getWith")
-   fun get(
-    @ObjCName("withFloat", swiftName = "_") x: Float
-   ) {}
+   fun get(x: Float) {}
   }
 
-  @ObjCName("J2ktJ2ktnewobjcnameMethodExample_Special_WithDouble", swiftName = "J2ktnewobjcnameMethodExample_Special_WithDouble", exact = true)
   class WithDouble {
-   @ObjCName("get", swiftName = "getWith")
-   fun get(
-    @ObjCName("withDouble", swiftName = "_") x: Double
-   ) {}
+   fun get(x: Double) {}
   }
 
-  @ObjCName("J2ktJ2ktnewobjcnameMethodExample_Special_WithObject", swiftName = "J2ktnewobjcnameMethodExample_Special_WithObject", exact = true)
   class WithObject {
-   @ObjCName("get", swiftName = "getWithId")
-   fun get(
-    @ObjCName("withId", swiftName = "_") x: Any?
-   ) {}
+   fun get(x: Any?) {}
   }
 
-  @ObjCName("J2ktJ2ktnewobjcnameMethodExample_Special_WithString", swiftName = "J2ktnewobjcnameMethodExample_Special_WithString", exact = true)
   class WithString {
-   @ObjCName("get", swiftName = "getWith")
-   fun get(
-    @ObjCName("withNSString", swiftName = "_") x: String?
-   ) {}
+   fun get(x: String?) {}
   }
 
-  @ObjCName("J2ktJ2ktnewobjcnameMethodExample_Special_WithFoo", swiftName = "J2ktnewobjcnameMethodExample_Special_WithFoo", exact = true)
   class WithFoo {
-   @ObjCName("get", swiftName = "getWith")
-   fun get(
-    @ObjCName("withJ2ktnewobjcnameMethodExample_Foo", swiftName = "_") x: Foo?
-   ) {}
+   fun get(x: Foo?) {}
   }
  }
 }

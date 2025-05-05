@@ -27,29 +27,17 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktnewobjcnameConstructorExample", swiftName = "J2ktnewobjcnameConstructorExample", exact = true)
 open class ConstructorExample {
- @ObjCName("J2ktJ2ktnewobjcnameConstructorExample_NotAnnotated", swiftName = "J2ktnewobjcnameConstructorExample_NotAnnotated", exact = true)
  open class NotAnnotated {
   constructor()
 
-  constructor(
-   @ObjCName("Int") i: Int
-  )
+  constructor(i: Int)
 
-  constructor(
-   @ObjCName("Int") i: Int,
-   @ObjCName("withNSString") s: String?
-  )
+  constructor(i: Int, s: String?)
 
-  constructor(
-   @ObjCName("Int") i: Int,
-   @ObjCName("withNSString") s: String?,
-   @ObjCName("withId") id: Any?
-  )
+  constructor(i: Int, s: String?, id: Any?)
  }
 
- @ObjCName("J2ktJ2ktnewobjcnameConstructorExample_ExplicitParams", swiftName = "J2ktnewobjcnameConstructorExample_ExplicitParams", exact = true)
  open class ExplicitParams {
   constructor()
 
@@ -69,7 +57,6 @@ open class ConstructorExample {
   )
  }
 
- @ObjCName("J2ktJ2ktnewobjcnameConstructorExample_ImplicitParams", swiftName = "J2ktnewobjcnameConstructorExample_ImplicitParams", exact = true)
  open class ImplicitParams {
   constructor()
 

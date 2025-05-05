@@ -1,5 +1,4 @@
 // Generated from "j2ktnewobjcname/PackageInfoExample.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -21,24 +20,14 @@ package j2ktnewobjcname
 import javaemul.lang.*
 import j2ktnewobjcname.depspackage.FooFromDeps
 import j2ktnewobjcname.srcspackage.FooFromSrcs
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktnewobjcnamePackageInfoExample", swiftName = "J2ktnewobjcnamePackageInfoExample", exact = true)
 class PackageInfoExample {
- @ObjCName("apply")
- fun apply(
-  @ObjCName("withFromDepsPrefixFooFromDeps", swiftName = "with") foo: FooFromDeps?
- ): FooFromDeps? {
+ fun apply(foo: FooFromDeps?): FooFromDeps? {
   return foo
  }
 
- @ObjCName("apply")
- fun apply(
-  @ObjCName("withFromSrcsPrefixFooFromSrcs", swiftName = "with") foo: FooFromSrcs?
- ): FooFromSrcs? {
+ fun apply(foo: FooFromSrcs?): FooFromSrcs? {
   return foo
  }
 }

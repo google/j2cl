@@ -22,19 +22,17 @@ import javaemul.lang.*
 import kotlin.OptIn
 import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktJ2ktnewobjcnameNestedClassesExample", swiftName = "J2ktnewobjcnameNestedClassesExample", exact = true)
 open class NestedClassesExample {
- @kotlin.native.ObjCName("J2ktNewObjCName", swiftName = "NewObjCName", exact = true)
+ @kotlin.native.ObjCName("NewObjCName", swiftName = "NewObjCName")
  open inner class ObjCName {
-  @kotlin.native.ObjCName("J2ktInnerClassNewName", swiftName = "InnerClassNewName", exact = true)
+  @kotlin.native.ObjCName("InnerClassNewName", swiftName = "InnerClassNewName")
   open inner class InnerClassOldName
  }
 
- @kotlin.native.ObjCName("J2ktNewStaticObjCName", swiftName = "NewStaticObjCName", exact = true)
+ @kotlin.native.ObjCName("NewStaticObjCName", swiftName = "NewStaticObjCName")
  open class StaticObjCName {
-  @kotlin.native.ObjCName("J2ktStaticInnerClassNewName", swiftName = "StaticInnerClassNewName", exact = true)
+  @kotlin.native.ObjCName("StaticInnerClassNewName", swiftName = "StaticInnerClassNewName")
   open inner class InnerClassOldName
  }
 }

@@ -27,6 +27,7 @@ import com.google.j2cl.transpiler.backend.kotlin.ast.declaration
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
+import java.lang.Boolean.getBoolean
 
 /**
  * ObjC annotation renderer.
@@ -43,6 +44,9 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
 
   private val isJ2ObjCInteropEnabled: Boolean
     get() = nameRenderer.environment.isJ2ObjCInteropEnabled
+
+  private val objCNamePrefix: String
+    get() = if (NEW_OBJC_NAMES) "" else nameRenderer.objCNamePrefix
 
   fun hiddenFromObjCAnnotationSource(): Source =
     annotation(
@@ -71,9 +75,9 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
       hiddenFromObjCMapping.contains(typeDeclaration) -> hiddenFromObjCAnnotationSource()
       needsObjCNameAnnotation(typeDeclaration) ->
         objCNameAnnotationSource(
-          typeDeclaration.objCName(nameRenderer.objCNamePrefix),
+          typeDeclaration.objCName(objCNamePrefix),
           swiftName = typeDeclaration.objCNameWithoutPrefix,
-          exact = true,
+          exact = true.takeUnless { NEW_OBJC_NAMES },
         )
       else -> Source.EMPTY
     }
@@ -81,9 +85,9 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
   fun objCAnnotationSource(companionObject: CompanionObject): Source =
     Source.emptyUnless(isJ2ObjCInteropEnabled && needsObjCNameAnnotation(companionObject)) {
       objCNameAnnotationSource(
-        companionObject.declaration.objCName(nameRenderer.objCNamePrefix),
+        companionObject.declaration.objCName(objCNamePrefix),
         swiftName = companionObject.declaration.objCNameWithoutPrefix,
-        exact = true,
+        exact = true.takeUnless { NEW_OBJC_NAMES },
       )
     }
 
@@ -124,7 +128,10 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
   private fun needsObjCNameAnnotation(typeDeclaration: TypeDeclaration): Boolean =
     environment.ktVisibility(typeDeclaration).needsObjCNameAnnotation &&
       !typeDeclaration.isLocal &&
-      !typeDeclaration.isAnonymous
+      !typeDeclaration.isAnonymous &&
+      (!NEW_OBJC_NAMES ||
+        typeDeclaration.objectiveCName != null ||
+        typeDeclaration.objectiveCNamePrefix != null)
 
   private fun needsObjCNameAnnotation(companionObject: CompanionObject): Boolean =
     needsObjCNameAnnotation(companionObject.enclosingTypeDeclaration)
@@ -135,7 +142,8 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
         !enclosingTypeDeclaration.isLocal &&
           !enclosingTypeDeclaration.isAnonymous &&
           environment.ktVisibility(method.descriptor).needsObjCNameAnnotation &&
-          !method.isJavaOverride
+          !method.isJavaOverride &&
+          (!NEW_OBJC_NAMES || method.descriptor.objectiveCName != null)
       }
 
   private fun needsObjCNameAnnotation(fieldDescriptor: FieldDescriptor): Boolean =
@@ -144,7 +152,8 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
         needsObjCNameAnnotation(enclosingTypeDeclaration) &&
           !enclosingTypeDeclaration.isLocal &&
           !enclosingTypeDeclaration.isAnonymous &&
-          environment.ktVisibility(fieldDescriptor).needsObjCNameAnnotation
+          environment.ktVisibility(fieldDescriptor).needsObjCNameAnnotation &&
+          !NEW_OBJC_NAMES
       }
 
   internal fun renderedObjCNames(method: Method): MethodObjCNames? =
@@ -155,6 +164,14 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
     }
 
   companion object {
+    /**
+     * Controls whether to generate @ObjCName annotations using new semantic designed to be used
+     * with Kotlin compiler plugin.
+     */
+    // TODO(b/413285345): Remove when no longer necessary
+    private val NEW_OBJC_NAMES: Boolean =
+      getBoolean("com.google.j2cl.transpiler.backend.kotlin.newObjCNames")
+
     private fun parameterSource(name: String, valueSource: Source): Source =
       assignment(source(name), valueSource)
   }
