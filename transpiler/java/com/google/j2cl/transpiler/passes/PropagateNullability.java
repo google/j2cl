@@ -283,80 +283,84 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
       TypeDescriptor declarationTypeDescriptor,
       TypeVariable typeParameter,
       TypeDescriptor typeDescriptor) {
-    if (declarationTypeDescriptor instanceof PrimitiveTypeDescriptor) {
-      // Primitive type descriptors are never parameterized.
-      return Stream.of();
-    } else if (declarationTypeDescriptor
-        instanceof ArrayTypeDescriptor declarationArrayTypeDescriptor) {
-      if (typeDescriptor instanceof ArrayTypeDescriptor arrayTypeDescriptor) {
-        return getParameterizationsIn(
-            declarationArrayTypeDescriptor.getComponentTypeDescriptor(),
-            typeParameter,
-            arrayTypeDescriptor.getComponentTypeDescriptor());
+    switch (declarationTypeDescriptor) {
+      case PrimitiveTypeDescriptor primitiveTypeDescriptor -> {
+        // Primitive type descriptors are never parameterized.
+        return Stream.of();
       }
-      // TODO(b/406815802): parameter and arguments are not structurally similar, see
-      // if there are cases that have to be handled.
-      return Stream.of();
-    } else if (declarationTypeDescriptor
-        instanceof DeclaredTypeDescriptor declarationDeclaredTypeDescriptor) {
-      if (!(typeDescriptor instanceof DeclaredTypeDescriptor)) {
+
+      case ArrayTypeDescriptor declarationArrayTypeDescriptor -> {
+        if (typeDescriptor instanceof ArrayTypeDescriptor arrayTypeDescriptor) {
+          return getParameterizationsIn(
+              declarationArrayTypeDescriptor.getComponentTypeDescriptor(),
+              typeParameter,
+              arrayTypeDescriptor.getComponentTypeDescriptor());
+        }
         // TODO(b/406815802): parameter and arguments are not structurally similar, see
         // if there are cases that have to be handled.
         return Stream.of();
       }
 
-      DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
-      // Look for the parameterized instance of the declared parameter type
-      DeclaredTypeDescriptor target =
-          getParameterizedSuperType(
-              declaredTypeDescriptor, declarationDeclaredTypeDescriptor.getTypeDeclaration());
-      if (target == null) {
-        // TODO(b/406815802): parameter and arguments are not structurally similar, see
-        // if there are cases that have to be handled.
-        return Stream.of();
-      }
-
-      return Streams.zip(
-              declarationDeclaredTypeDescriptor.getTypeArgumentDescriptors().stream(),
-              target.getTypeArgumentDescriptors().stream(),
-              (typeArgument, targetTypeArgument) ->
-                  getParameterizationsIn(typeArgument, typeParameter, targetTypeArgument))
-          .flatMap(it -> it);
-    } else if (declarationTypeDescriptor instanceof TypeVariable declarationTypeVariable) {
-      if (!declarationTypeVariable.isWildcardOrCapture()) {
-        if (declarationTypeVariable.toDeclaration().equals(typeParameter)) {
-          return Stream.of(
-              declarationTypeVariable.getNullabilityAnnotation() == NullabilityAnnotation.NULLABLE
-                      || !declarationTypeVariable.canBeNull()
-                  ? typeDescriptor.toNonNullable()
-                  : typeDescriptor);
-        } else {
+      case DeclaredTypeDescriptor declarationDeclaredTypeDescriptor -> {
+        if (!(typeDescriptor instanceof DeclaredTypeDescriptor declaredTypeDescriptor)) {
+          // TODO(b/406815802): parameter and arguments are not structurally similar, see
+          // if there are cases that have to be handled.
           return Stream.of();
         }
-      } else {
-        if (typeDescriptor instanceof TypeVariable typeVariable) {
-          if (typeVariable.isWildcardOrCapture()) {
+        // Look for the parameterized instance of the declared parameter type
+        DeclaredTypeDescriptor target =
+            getParameterizedSuperType(
+                declaredTypeDescriptor, declarationDeclaredTypeDescriptor.getTypeDeclaration());
+        if (target == null) {
+          // TODO(b/406815802): parameter and arguments are not structurally similar, see
+          // if there are cases that have to be handled.
+          return Stream.of();
+        }
+        return Streams.zip(
+                declarationDeclaredTypeDescriptor.getTypeArgumentDescriptors().stream(),
+                target.getTypeArgumentDescriptors().stream(),
+                (typeArgument, targetTypeArgument) ->
+                    getParameterizationsIn(typeArgument, typeParameter, targetTypeArgument))
+            .flatMap(it -> it);
+      }
+
+      case TypeVariable declarationTypeVariable -> {
+        if (!declarationTypeVariable.isWildcardOrCapture()) {
+          if (declarationTypeVariable.toDeclaration().equals(typeParameter)) {
+            return Stream.of(
+                declarationTypeVariable.getNullabilityAnnotation() == NullabilityAnnotation.NULLABLE
+                        || !declarationTypeVariable.canBeNull()
+                    ? typeDescriptor.toNonNullable()
+                    : typeDescriptor);
+          } else {
+            return Stream.of();
+          }
+        } else {
+          if (typeDescriptor instanceof TypeVariable typeVariable
+              && typeVariable.isWildcardOrCapture()) {
             return getParameterizationsIn(
                 getNormalizedUpperBoundTypeDescriptor(declarationTypeVariable),
                 typeParameter,
                 getNormalizedUpperBoundTypeDescriptor(typeVariable));
           }
+          return getParameterizationsIn(
+              getNormalizedUpperBoundTypeDescriptor(declarationTypeVariable),
+              typeParameter,
+              typeDescriptor);
         }
-        return getParameterizationsIn(
-            getNormalizedUpperBoundTypeDescriptor(declarationTypeVariable),
-            typeParameter,
-            typeDescriptor);
       }
-    } else if (declarationTypeDescriptor
-        instanceof IntersectionTypeDescriptor declarationIntersectionTypeDescriptor) {
-      return declarationIntersectionTypeDescriptor.getIntersectionTypeDescriptors().stream()
-          .flatMap(it -> getParameterizationsIn(it, typeParameter, typeDescriptor));
-    } else if (declarationTypeDescriptor
-        instanceof UnionTypeDescriptor declarationUnionTypeDescriptor) {
-      return declarationUnionTypeDescriptor.getUnionTypeDescriptors().stream()
-          .flatMap(it -> getParameterizationsIn(it, typeParameter, typeDescriptor));
-    } else {
-      throw new AssertionError();
+
+      case IntersectionTypeDescriptor declarationIntersectionTypeDescriptor -> {
+        return declarationIntersectionTypeDescriptor.getIntersectionTypeDescriptors().stream()
+            .flatMap(it -> getParameterizationsIn(it, typeParameter, typeDescriptor));
+      }
+
+      case UnionTypeDescriptor declarationUnionTypeDescriptor -> {
+        return declarationUnionTypeDescriptor.getUnionTypeDescriptors().stream()
+            .flatMap(it -> getParameterizationsIn(it, typeParameter, typeDescriptor));
+      }
+
+      default -> throw new AssertionError();
     }
   }
 
@@ -437,32 +441,28 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
       TypeDescriptor typeArgumentDescriptor,
       MethodLike methodLike) {
     TypeDescriptor[] propagatedTypeArgumentDescriptorRef = {typeArgumentDescriptor};
-    ((Node) methodLike)
-        .accept(
-            new AbstractVisitor() {
-              @Override
-              public void exitReturnStatement(ReturnStatement returnStatement) {
-                MethodLike returnMethodLike = (MethodLike) getParent(MethodLike.class::isInstance);
-                if (returnMethodLike != methodLike) {
-                  return;
-                }
+    methodLike.accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitReturnStatement(ReturnStatement returnStatement) {
+            MethodLike returnMethodLike = (MethodLike) getParent(MethodLike.class::isInstance);
+            if (returnMethodLike != methodLike) {
+              return;
+            }
 
-                Expression expression = returnStatement.getExpression();
-                if (expression == null) {
-                  return;
-                }
+            Expression expression = returnStatement.getExpression();
+            if (expression == null) {
+              return;
+            }
 
-                propagatedTypeArgumentDescriptorRef[0] =
-                    propagateTypeArgumentNullabilityFromInferredType(
-                        typeParameterDescriptor,
-                        propagatedTypeArgumentDescriptorRef[0],
-                        methodLike
-                            .getDescriptor()
-                            .getDeclarationDescriptor()
-                            .getReturnTypeDescriptor(),
-                        expression.getTypeDescriptor());
-              }
-            });
+            propagatedTypeArgumentDescriptorRef[0] =
+                propagateTypeArgumentNullabilityFromInferredType(
+                    typeParameterDescriptor,
+                    propagatedTypeArgumentDescriptorRef[0],
+                    methodLike.getDescriptor().getDeclarationDescriptor().getReturnTypeDescriptor(),
+                    expression.getTypeDescriptor());
+          }
+        });
     return propagatedTypeArgumentDescriptorRef[0];
   }
 
@@ -515,67 +515,70 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
       return to;
     }
 
-    if (to instanceof DeclaredTypeDescriptor descriptor) {
-      return propagateNullabilityToDeclared(descriptor, from, seen);
-    } else if (to instanceof ArrayTypeDescriptor descriptor) {
-      return propagateNullabilityToArray(descriptor, from, seen);
-    } else if (to instanceof TypeVariable typeVariable) {
-      return propagateNullabilityToVariable(typeVariable, from, seen);
-    } else {
-      // TODO(b/407688032): Handle intersection and union type descriptors, if necessary.
-      return to;
-    }
+    return switch (to) {
+      case DeclaredTypeDescriptor descriptor ->
+          propagateNullabilityToDeclared(descriptor, from, seen);
+
+      case ArrayTypeDescriptor descriptor -> propagateNullabilityToArray(descriptor, from, seen);
+
+      case TypeVariable typeVariable -> propagateNullabilityToVariable(typeVariable, from, seen);
+
+      // TODO(b/406815802): Handle intersection and union type descriptors, if necessary.
+      default -> to;
+    };
   }
 
   private static TypeDescriptor propagateNullabilityToDeclared(
       DeclaredTypeDescriptor toDeclared, TypeDescriptor from, ImmutableSet<TypeVariable> seen) {
-    if (from instanceof DeclaredTypeDescriptor) {
-      DeclaredTypeDescriptor fromDeclared = (DeclaredTypeDescriptor) from;
-      DeclaredTypeDescriptor fromDeclaredSuper =
-          fromDeclared = getParameterizedSuperType(fromDeclared, toDeclared.getTypeDeclaration());
-      if (fromDeclaredSuper == null) {
-        return toDeclared.toNullable(toDeclared.isNullable() || from.isNullable());
-      } else {
-        if (toDeclared.isRaw()) {
+    switch (from) {
+      case DeclaredTypeDescriptor fromDeclared -> {
+        DeclaredTypeDescriptor fromDeclaredSuper =
+            getParameterizedSuperType(fromDeclared, toDeclared.getTypeDeclaration());
+        if (fromDeclaredSuper == null) {
+          return toDeclared.toNullable(toDeclared.isNullable() || from.isNullable());
+        } else if (toDeclared.isRaw()) {
           return toDeclared.toNullable(toDeclared.isNullable() || fromDeclared.isNullable());
+        } else {
+          return toDeclared
+              .withTypeArguments(
+                  zip(
+                      toDeclared.getTypeDeclaration().getTypeParameterDescriptors(),
+                      toDeclared.getTypeArgumentDescriptors(),
+                      fromDeclaredSuper.getTypeArgumentDescriptors(),
+                      (a, b, c) -> propagateTypeArgumentNullabilityFrom(a, b, c, seen)))
+              .toNullable(toDeclared.isNullable() || fromDeclared.isNullable());
         }
-
-        return toDeclared
-            .withTypeArguments(
-                zip(
-                    toDeclared.getTypeDeclaration().getTypeParameterDescriptors(),
-                    toDeclared.getTypeArgumentDescriptors(),
-                    fromDeclaredSuper.getTypeArgumentDescriptors(),
-                    (a, b, c) -> propagateTypeArgumentNullabilityFrom(a, b, c, seen)))
-            .toNullable(toDeclared.isNullable() || fromDeclared.isNullable());
       }
-    } else if (from instanceof TypeVariable) {
-      TypeVariable fromVariable = (TypeVariable) from;
-      return PropagateNullability.propagateNullabilityToDeclared(
-          toDeclared, getNormalizedUpperBoundTypeDescriptor(fromVariable), seen);
-    } else {
-      return toDeclared;
+
+      case TypeVariable fromVariable -> {
+        return PropagateNullability.propagateNullabilityToDeclared(
+            toDeclared, getNormalizedUpperBoundTypeDescriptor(fromVariable), seen);
+      }
+
+      default -> {
+        return toDeclared;
+      }
     }
   }
 
   private static TypeDescriptor propagateNullabilityToArray(
       ArrayTypeDescriptor toArray, TypeDescriptor from, ImmutableSet<TypeVariable> seen) {
-    if (from instanceof ArrayTypeDescriptor) {
-      ArrayTypeDescriptor fromArray = (ArrayTypeDescriptor) from;
-      return toArray
-          .withComponentTypeDescriptor(
-              propagateNullabilityTo(
-                  toArray.getComponentTypeDescriptor(),
-                  fromArray.getComponentTypeDescriptor(),
-                  seen))
-          .toNullable(toArray.isNullable() || fromArray.isNullable());
-    } else if (from instanceof TypeVariable) {
-      TypeVariable fromVariable = (TypeVariable) from;
-      return PropagateNullability.propagateNullabilityToArray(
-          toArray, getNormalizedUpperBoundTypeDescriptor(fromVariable), seen);
-    } else {
-      return toArray;
-    }
+    return switch (from) {
+      case ArrayTypeDescriptor fromArray ->
+          toArray
+              .withComponentTypeDescriptor(
+                  propagateNullabilityTo(
+                      toArray.getComponentTypeDescriptor(),
+                      fromArray.getComponentTypeDescriptor(),
+                      seen))
+              .toNullable(toArray.isNullable() || fromArray.isNullable());
+
+      case TypeVariable fromVariable ->
+          PropagateNullability.propagateNullabilityToArray(
+              toArray, getNormalizedUpperBoundTypeDescriptor(fromVariable), seen);
+
+      default -> toArray;
+    };
   }
 
   private static TypeDescriptor propagateNullabilityToVariable(
@@ -587,8 +590,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
     ImmutableSet<TypeVariable> newSeen =
         ImmutableSet.<TypeVariable>builder().addAll(seen).add(toVariable).build();
 
-    if (from instanceof TypeVariable) {
-      TypeVariable fromVariable = (TypeVariable) from;
+    if (from instanceof TypeVariable fromVariable) {
       if (toVariable.isWildcard()) {
         return propagateNullabilityAnnotationFrom(
             toVariable.withRewrittenBounds(
@@ -720,117 +722,118 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
       TypeVariable typeParameterDescriptor,
       TypeDescriptor typeArgumentDescriptor,
       ImmutableSet<TypeVariable> seen) {
-    if (declarationTypeDescriptor instanceof PrimitiveTypeDescriptor) {
-      return typeDescriptor;
-    } else if (declarationTypeDescriptor instanceof ArrayTypeDescriptor) {
-      ArrayTypeDescriptor declarationArrayTypeDescriptor =
-          (ArrayTypeDescriptor) declarationTypeDescriptor;
-      ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
-      return arrayTypeDescriptor.withComponentTypeDescriptor(
-          reparameterize(
-              declarationArrayTypeDescriptor.getComponentTypeDescriptor(),
-              arrayTypeDescriptor.getComponentTypeDescriptor(),
-              typeParameterDescriptor,
-              typeArgumentDescriptor,
-              seen));
-    } else if (declarationTypeDescriptor instanceof DeclaredTypeDescriptor) {
-      DeclaredTypeDescriptor declarationDeclaredTypeDescriptor =
-          (DeclaredTypeDescriptor) declarationTypeDescriptor;
-      DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
-      if (declaredTypeDescriptor.isRaw()) {
-        return typeDescriptor;
-      }
-      return declaredTypeDescriptor.withTypeArguments(
-          zip(
-              declarationDeclaredTypeDescriptor.getTypeArgumentDescriptors(),
-              declaredTypeDescriptor.getTypeArgumentDescriptors(),
-              (declaration, specialized) ->
-                  reparameterize(
-                      declaration,
-                      specialized,
-                      typeParameterDescriptor,
-                      typeArgumentDescriptor,
-                      seen)));
-    } else if (declarationTypeDescriptor instanceof TypeVariable) {
-      TypeVariable declarationTypeVariable = (TypeVariable) declarationTypeDescriptor;
-      if (typeDescriptor.equals(typeParameterDescriptor)) {
+    switch (declarationTypeDescriptor) {
+      case PrimitiveTypeDescriptor primitiveTypeDescriptor -> {
         return typeDescriptor;
       }
 
-      if (!declarationTypeVariable.isWildcardOrCapture()) {
-        if (declarationTypeVariable.toDeclaration().equals(typeParameterDescriptor)) {
-          return typeArgumentDescriptor.withNullabilityAnnotation(
-              declarationTypeVariable.getNullabilityAnnotation());
-        } else {
+      case ArrayTypeDescriptor declarationArrayTypeDescriptor -> {
+        ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
+        return arrayTypeDescriptor.withComponentTypeDescriptor(
+            reparameterize(
+                declarationArrayTypeDescriptor.getComponentTypeDescriptor(),
+                arrayTypeDescriptor.getComponentTypeDescriptor(),
+                typeParameterDescriptor,
+                typeArgumentDescriptor,
+                seen));
+      }
+
+      case DeclaredTypeDescriptor declarationDeclaredTypeDescriptor -> {
+        DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
+        if (declaredTypeDescriptor.isRaw()) {
           return typeDescriptor;
         }
+        return declaredTypeDescriptor.withTypeArguments(
+            zip(
+                declarationDeclaredTypeDescriptor.getTypeArgumentDescriptors(),
+                declaredTypeDescriptor.getTypeArgumentDescriptors(),
+                (declaration, specialized) ->
+                    reparameterize(
+                        declaration,
+                        specialized,
+                        typeParameterDescriptor,
+                        typeArgumentDescriptor,
+                        seen)));
       }
 
-      if (typeDescriptor instanceof TypeVariable) {
-        TypeVariable typeVariable = (TypeVariable) typeDescriptor;
-        // We only reparameterize wildcards.
-        if (typeVariable.isWildcard()) {
-          if (seen.contains(typeVariable)) {
-            return typeVariable;
-          }
-          ImmutableSet<TypeVariable> newSeen =
-              new ImmutableSet.Builder<TypeVariable>().addAll(seen).add(typeVariable).build();
-          return typeVariable.withRewrittenBounds(
-              upperBound ->
-                  reparameterize(
-                      declarationTypeVariable.getUpperBoundTypeDescriptor(),
-                      upperBound,
-                      typeParameterDescriptor,
-                      typeArgumentDescriptor,
-                      newSeen),
-              lowerBound ->
-                  reparameterize(
-                      declarationTypeVariable.getLowerBoundTypeDescriptor(),
-                      lowerBound,
-                      typeParameterDescriptor,
-                      typeArgumentDescriptor,
-                      newSeen));
+      case TypeVariable declarationTypeVariable -> {
+        if (typeDescriptor.equals(typeParameterDescriptor)) {
+          return typeDescriptor;
         }
-      }
-      return typeDescriptor;
-    } else if (declarationTypeDescriptor instanceof IntersectionTypeDescriptor) {
-      IntersectionTypeDescriptor declarationIntersectionTypeDescriptor =
-          (IntersectionTypeDescriptor) declarationTypeDescriptor;
-      IntersectionTypeDescriptor intersectionTypeDescriptor =
-          (IntersectionTypeDescriptor) typeDescriptor;
-      return IntersectionTypeDescriptor.newBuilder()
-          .setIntersectionTypeDescriptors(
-              zip(
-                  declarationIntersectionTypeDescriptor.getIntersectionTypeDescriptors(),
-                  intersectionTypeDescriptor.getIntersectionTypeDescriptors(),
-                  (declaration, specialized) ->
-                      reparameterize(
-                          declaration,
-                          specialized,
-                          typeParameterDescriptor,
-                          typeArgumentDescriptor,
-                          seen)))
-          .build();
-    } else if (declarationTypeDescriptor instanceof UnionTypeDescriptor) {
-      UnionTypeDescriptor declarationUnionTypeDescriptor =
-          (UnionTypeDescriptor) declarationTypeDescriptor;
-      UnionTypeDescriptor unionTypeDescriptor = (UnionTypeDescriptor) typeDescriptor;
-      return UnionTypeDescriptor.newBuilder()
-          .setUnionTypeDescriptors(
-              zip(
-                  declarationUnionTypeDescriptor.getUnionTypeDescriptors(),
-                  unionTypeDescriptor.getUnionTypeDescriptors(),
-                  (declaration, specialized) ->
-                      reparameterize(
-                          declaration,
-                          specialized,
-                          typeParameterDescriptor,
-                          typeArgumentDescriptor,
-                          seen)))
-          .build();
 
-    } else {
-      throw new AssertionError();
+        if (!declarationTypeVariable.isWildcardOrCapture()) {
+          if (declarationTypeVariable.toDeclaration().equals(typeParameterDescriptor)) {
+            return typeArgumentDescriptor.withNullabilityAnnotation(
+                declarationTypeVariable.getNullabilityAnnotation());
+          } else {
+            return typeDescriptor;
+          }
+        }
+
+        if (typeDescriptor instanceof TypeVariable typeVariable) {
+          // We only reparameterize wildcards.
+          if (typeVariable.isWildcard()) {
+            if (seen.contains(typeVariable)) {
+              return typeVariable;
+            }
+            ImmutableSet<TypeVariable> newSeen =
+                new ImmutableSet.Builder<TypeVariable>().addAll(seen).add(typeVariable).build();
+            return typeVariable.withRewrittenBounds(
+                upperBound ->
+                    reparameterize(
+                        declarationTypeVariable.getUpperBoundTypeDescriptor(),
+                        upperBound,
+                        typeParameterDescriptor,
+                        typeArgumentDescriptor,
+                        newSeen),
+                lowerBound ->
+                    reparameterize(
+                        declarationTypeVariable.getLowerBoundTypeDescriptor(),
+                        lowerBound,
+                        typeParameterDescriptor,
+                        typeArgumentDescriptor,
+                        newSeen));
+          }
+        }
+        return typeDescriptor;
+      }
+
+      case IntersectionTypeDescriptor declarationIntersectionTypeDescriptor -> {
+        IntersectionTypeDescriptor intersectionTypeDescriptor =
+            (IntersectionTypeDescriptor) typeDescriptor;
+        return IntersectionTypeDescriptor.newBuilder()
+            .setIntersectionTypeDescriptors(
+                zip(
+                    declarationIntersectionTypeDescriptor.getIntersectionTypeDescriptors(),
+                    intersectionTypeDescriptor.getIntersectionTypeDescriptors(),
+                    (declaration, specialized) ->
+                        reparameterize(
+                            declaration,
+                            specialized,
+                            typeParameterDescriptor,
+                            typeArgumentDescriptor,
+                            seen)))
+            .build();
+      }
+
+      case UnionTypeDescriptor declarationUnionTypeDescriptor -> {
+        UnionTypeDescriptor unionTypeDescriptor = (UnionTypeDescriptor) typeDescriptor;
+        return UnionTypeDescriptor.newBuilder()
+            .setUnionTypeDescriptors(
+                zip(
+                    declarationUnionTypeDescriptor.getUnionTypeDescriptors(),
+                    unionTypeDescriptor.getUnionTypeDescriptors(),
+                    (declaration, specialized) ->
+                        reparameterize(
+                            declaration,
+                            specialized,
+                            typeParameterDescriptor,
+                            typeArgumentDescriptor,
+                            seen)))
+            .build();
+      }
+
+      default -> throw new AssertionError();
     }
   }
 

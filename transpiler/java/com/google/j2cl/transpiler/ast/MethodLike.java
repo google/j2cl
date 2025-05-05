@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.ast;
 
 import com.google.common.collect.Iterables;
+import com.google.j2cl.common.visitor.Processor;
 import java.util.List;
 import javax.annotation.Nullable;
 
@@ -47,4 +48,7 @@ public interface MethodLike extends HasSourcePosition, HasReadableDescription {
 
   /** Returns the body related to the node. */
   Block getBody();
+
+  // Expose `Node.accept` to make it easier to traverse the tree from a MethodLike.
+  void accept(Processor processor);
 }
