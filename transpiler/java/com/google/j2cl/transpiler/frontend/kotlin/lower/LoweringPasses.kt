@@ -78,11 +78,8 @@ private val loweringPhase = loweringPhase {
   // Rewrites `Array(size) { index -> value }` using type-specific initializer lambdas.
   perFileLowering(::ArrayConstructorLowering)
   // Create nullable backing fields and insert nullability checks for lateinit properties and
-  // variables.
-  perFileLowering(jvmLateinitLoweringFactory)
-  // Patch calls to `throwUninitializedPropertyAccessException()` to match our definition of this
-  // function.
-  perFileLowering(::PatchThrowUninitializedPropertyExceptionCalls)
+  // variables. Must run before JvmPropertiesLowering.
+  perFileLowering(::LateinitLowering)
   // Extract anonymous classes from inline lambdas.
   perFileLowering(::LocalClassesInInlineLambdasLowering)
   // Resolve captures for anonymous class defined in inline functions.
