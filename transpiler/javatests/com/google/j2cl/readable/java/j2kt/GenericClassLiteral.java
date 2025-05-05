@@ -17,7 +17,6 @@ package j2kt;
 
 import org.jspecify.annotations.NullMarked;
 
-// TODO(b/381046077): Move to `j2kt` when fixed.
 @NullMarked
 public class GenericClassLiteral {
   public interface Generic<T> {}
@@ -25,8 +24,6 @@ public class GenericClassLiteral {
   public interface Foo {}
 
   public void test(Generic<Foo> genericFoo) {
-    // J2KT renders invalid method type parameter and inserts invalid cast:
-    // {@code accept<Generic<Any>>(genericFoo as GenericFoo<Any>, Generic::class.javaObjectType)}
     accept(genericFoo, Generic.class);
   }
 
