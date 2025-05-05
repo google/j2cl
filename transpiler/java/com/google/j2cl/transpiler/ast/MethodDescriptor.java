@@ -1298,6 +1298,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       default:
         break;
     }
+    if (isSuspendFunction()) {
+      sb.append("suspend ");
+    }
     if (isStatic()) {
       sb.append("static ");
     }
