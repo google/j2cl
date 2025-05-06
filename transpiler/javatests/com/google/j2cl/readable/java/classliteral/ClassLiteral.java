@@ -18,68 +18,70 @@ package classliteral;
 public class ClassLiteral {
   @SuppressWarnings("unused")
   public void main() {
-    Object o;
+    Class<Void> voidClass = void.class;
 
-    o = void.class;
+    Class<Boolean> primitiveBooleanClass = boolean.class;
+    Class<boolean[]> primitiveBooleanArrayClass = boolean[].class;
+    Class<boolean[][]> primitiveBooleanArrayArrayClass = boolean[][].class;
+    Class<Boolean> booleanClass = Boolean.class;
+    Class<Boolean[]> booleanArrayClass = Boolean[].class;
+    Class<Boolean[][]> booleanArrayArrayClass = Boolean[][].class;
 
-    o = boolean.class;
-    o = boolean[].class;
-    o = boolean[][].class;
-    o = Boolean.class;
-    o = Boolean[].class;
-    o = Boolean[][].class;
+    Class<Character> primitiveCharClass = char.class;
+    Class<char[]> primitiveCharArrayClass = char[].class;
+    Class<char[][]> primitiveCharArrayArrayClass = char[][].class;
+    Class<Character> characterClass = Character.class;
+    Class<Character[]> characterArrayClass = Character[].class;
+    Class<Character[][]> characterArrayArrayClass = Character[][].class;
 
-    o = char.class;
-    o = char[].class;
-    o = char[][].class;
-    o = Character.class;
-    o = Character[].class;
-    o = Character[][].class;
+    Class<Byte> primitiveByteClass = byte.class;
+    Class<byte[]> primitiveByteArrayClass = byte[].class;
+    Class<byte[][]> primitiveByteArrayArrayClass = byte[][].class;
+    Class<Byte> byteClass = Byte.class;
+    Class<Byte[]> byteArrayClass = Byte[].class;
+    Class<Byte[][]> byteArrayArrayClass = Byte[][].class;
 
-    o = byte.class;
-    o = byte[].class;
-    o = byte[][].class;
-    o = Byte.class;
-    o = Byte[].class;
-    o = Byte[][].class;
+    Class<Short> primitiveShortClass = short.class;
+    Class<short[]> primitiveShortArrayClass = short[].class;
+    Class<short[][]> primitiveShortArrayArrayClass = short[][].class;
+    Class<Short> shortClass = Short.class;
+    Class<Short[]> shortArrayClass = Short[].class;
+    Class<Short[][]> shortArrayArrayClass = Short[][].class;
 
-    o = short.class;
-    o = short[].class;
-    o = short[][].class;
-    o = Short.class;
-    o = Short[].class;
-    o = Short[][].class;
+    Class<Integer> primitiveIntClass = int.class;
+    Class<int[]> primitiveIntArrayClass = int[].class;
+    Class<int[][]> primitiveIntArrayArrayClass = int[][].class;
+    Class<Integer> integerClass = Integer.class;
+    Class<Integer[]> integerArrayClass = Integer[].class;
+    Class<Integer[][]> integerArrayArrayClass = Integer[][].class;
 
-    o = int.class;
-    o = int[].class;
-    o = int[][].class;
-    o = Integer.class;
-    o = Integer[].class;
-    o = Integer[][].class;
+    Class<Long> primitiveLongClass = long.class;
+    Class<long[]> primitiveLongArrayClass = long[].class;
+    Class<long[][]> primitiveLongArrayArrayClass = long[][].class;
+    Class<Long> longClass = Long.class;
+    Class<Long[]> longArrayClass = Long[].class;
+    Class<Long[][]> longArraArrayClass = Long[][].class;
 
-    o = long.class;
-    o = long[].class;
-    o = long[][].class;
-    o = Long.class;
-    o = Long[].class;
-    o = Long[][].class;
+    Class<Float> primitiveFloatClass = float.class;
+    Class<float[]> primitiveFloatArrayClass = float[].class;
+    Class<float[][]> primitiveFloatArrayArrayClass = float[][].class;
+    Class<Float> floatClass = Float.class;
+    Class<Float[]> floatArrayClass = Float[].class;
+    Class<Float[][]> floatArrayArrayClass = Float[][].class;
 
-    o = float.class;
-    o = float[].class;
-    o = float[][].class;
-    o = Float.class;
-    o = Float[].class;
-    o = Float[][].class;
+    Class<Double> primitiveDoubleClass = double.class;
+    Class<double[]> primitiveDoubleArrayClass = double[].class;
+    Class<double[][]> primitiveDoubleArrayArrayClass = double[][].class;
+    Class<Double> doubleClass = Double.class;
+    Class<Double[]> doubleArrayClass = Double[].class;
+    Class<Double[][]> doubleArrayArrayClass = Double[][].class;
 
-    o = double.class;
-    o = double[].class;
-    o = double[][].class;
-    o = Double.class;
-    o = Double[].class;
-    o = Double[][].class;
+    Class<Object> objectClass = Object.class;
+    Class<Object[]> objectArrayClass = Object[].class;
+    Class<Object[][]> objectArrayArrayClass = Object[][].class;
 
-    o = ClassLiteral.class;
-    o = ClassLiteral[].class;
-    o = ClassLiteral[][].class;
+    Class<ClassLiteral> nonObjectClass = ClassLiteral.class;
+    Class<ClassLiteral[]> nonObjectArrayClass = ClassLiteral[].class;
+    Class<ClassLiteral[][]> nonObjectArrayArrayClass = ClassLiteral[][].class;
   }
 }
