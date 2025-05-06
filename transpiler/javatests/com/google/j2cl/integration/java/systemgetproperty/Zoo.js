@@ -14,8 +14,8 @@
 
 goog.module('systemgetproperty.Zoo');
 
-const jre = goog.require('jre');
+const {addSystemPropertyFromGoogDefine} = goog.require('jre');
 
 /** @define {string} */
 const localZoo = goog.define('zoo', 'default');
-jre.addSystemPropertyFromGoogDefine('zoo', localZoo);
+addSystemPropertyFromGoogDefine('zoo', localZoo);

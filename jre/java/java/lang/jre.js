@@ -18,10 +18,10 @@
  * for documentation.
  */
 
-goog.provide('jre');
+goog.module('jre');
 
 /** @private @const {!Object<string, *>} */
-jre.systemProperties_ = Object.create(null);
+const systemProperties = Object.create(null);
 
 /**
  * Adds a system property connected to goog.define.
@@ -31,21 +31,20 @@ jre.systemProperties_ = Object.create(null);
  * @param {string} googDefineName
  * @param {?string} googDefineValue
  */
-jre.addSystemPropertyFromGoogDefine = function(
-    googDefineName, googDefineValue) {
+function addSystemPropertyFromGoogDefine(googDefineName, googDefineValue) {
   // Values from goog.define are well-known to the compiler and will be
   // statically substituted. Therefore this method can be a no-op when compiled.
   if (!COMPILED) {
-    const existingValue = jre.systemProperties_[googDefineName];
+    const existingValue = systemProperties[googDefineName];
     if (existingValue instanceof Error) {
       throw existingValue;
     } else if (existingValue !== undefined) {
       throw new Error(
           `Attempting to redeclare system property '${googDefineName}'.`);
     }
-    jre.systemProperties_[googDefineName] = googDefineValue;
+    systemProperties[googDefineName] = googDefineValue;
   }
-};
+}
 
 /**
  * Returns the value of a system property.
@@ -53,14 +52,14 @@ jre.addSystemPropertyFromGoogDefine = function(
  * @param {?string=} defaultValue
  * @return {?string}
  */
-jre.getSystemProperty = function(name, defaultValue = null) {
-  let rv = jre.systemProperties_[name];
+function getSystemProperty(name, defaultValue = null) {
+  let rv = systemProperties[name];
   if (!COMPILED && (rv === undefined || rv instanceof Error)) {
     if (rv === undefined) {
       // Stash an error that will later be thrown if anyone tries to register
       // the property. We intentionally only stash the first occurrence as this
       // is the earliest point that the registration call needs to move before.
-      jre.systemProperties_[name] = new Error(`System property "${
+      systemProperties[name] = new Error(`System property "${
           name}" read before registration via jre.addSystemPropertyFromGoogDefine.`);
     }
     // Make sure fallback doesn't see a recorded Error instance.
@@ -70,70 +69,77 @@ jre.getSystemProperty = function(name, defaultValue = null) {
   // in the registry.
   rv = rv ?? goog.getObjectByName(name);
   return rv == null ? defaultValue : String(rv);
-};
+}
 
 // Add core defines
-jre.addSystemPropertyFromGoogDefine('COMPILED', String(COMPILED));
-jre.addSystemPropertyFromGoogDefine('goog.DEBUG', String(goog.DEBUG));
-jre.addSystemPropertyFromGoogDefine('goog.LOCALE', goog.LOCALE);
-jre.addSystemPropertyFromGoogDefine(
+addSystemPropertyFromGoogDefine('COMPILED', String(COMPILED));
+addSystemPropertyFromGoogDefine('goog.DEBUG', String(goog.DEBUG));
+addSystemPropertyFromGoogDefine('goog.LOCALE', goog.LOCALE);
+addSystemPropertyFromGoogDefine(
     'goog.FEATURESET_YEAR', String(goog.FEATURESET_YEAR));
 
 /** @define {string} */
-jre.classMetadata = goog.define('jre.classMetadata', 'SIMPLE');
-jre.addSystemPropertyFromGoogDefine('jre.classMetadata', jre.classMetadata);
+const classMetadata = goog.define('jre.classMetadata', 'SIMPLE');
+addSystemPropertyFromGoogDefine('jre.classMetadata', classMetadata);
 
 /** @define {string} */
-jre.checkedMode =
+const checkedMode =
     goog.define('jre.checkedMode', goog.DEBUG ? 'ENABLED' : 'DISABLED');
-jre.addSystemPropertyFromGoogDefine('jre.checkedMode', jre.checkedMode);
+addSystemPropertyFromGoogDefine('jre.checkedMode', checkedMode);
 
 /** @const */
-jre.checks = {};
+const checks = {};
 
 /** @define {string} */
-jre.checks.checkLevel = goog.define('jre.checks.checkLevel', 'NORMAL');
-jre.addSystemPropertyFromGoogDefine(
-    'jre.checks.checkLevel', jre.checks.checkLevel);
+checks.checkLevel = goog.define('jre.checks.checkLevel', 'NORMAL');
+addSystemPropertyFromGoogDefine('jre.checks.checkLevel', checks.checkLevel);
 
 /** @define {string} */
-jre.checks.bounds = goog.define('jre.checks.bounds', 'AUTO');
-jre.addSystemPropertyFromGoogDefine('jre.checks.bounds', jre.checks.bounds);
+checks.bounds = goog.define('jre.checks.bounds', 'AUTO');
+addSystemPropertyFromGoogDefine('jre.checks.bounds', checks.bounds);
 
 
 /** @define {string} */
-jre.checks.api = goog.define('jre.checks.api', 'AUTO');
-jre.addSystemPropertyFromGoogDefine('jre.checks.api', jre.checks.api);
+checks.api = goog.define('jre.checks.api', 'AUTO');
+addSystemPropertyFromGoogDefine('jre.checks.api', checks.api);
 
 /** @define {string} */
-jre.checks.numeric = goog.define('jre.checks.numeric', 'AUTO');
-jre.addSystemPropertyFromGoogDefine('jre.checks.numeric', jre.checks.numeric);
+checks.numeric = goog.define('jre.checks.numeric', 'AUTO');
+addSystemPropertyFromGoogDefine('jre.checks.numeric', checks.numeric);
 
 /** @define {string} */
-jre.checks.type = goog.define('jre.checks.type', 'AUTO');
-jre.addSystemPropertyFromGoogDefine('jre.checks.type', jre.checks.type);
+checks.type = goog.define('jre.checks.type', 'AUTO');
+addSystemPropertyFromGoogDefine('jre.checks.type', checks.type);
 
 /** @define {string} */
-jre.checks.critical = goog.define('jre.checks.critical', 'AUTO');
-jre.addSystemPropertyFromGoogDefine('jre.checks.critical', jre.checks.critical);
+checks.critical = goog.define('jre.checks.critical', 'AUTO');
+addSystemPropertyFromGoogDefine('jre.checks.critical', checks.critical);
 
 /** @const */
-jre.logging = {};
+const logging = {};
 
 /** @define {string} */
-jre.logging.logLevel =
+logging.logLevel =
     goog.define('jre.logging.logLevel', goog.DEBUG ? 'ALL' : 'SEVERE');
-jre.addSystemPropertyFromGoogDefine(
-    'jre.logging.logLevel', jre.logging.logLevel);
+addSystemPropertyFromGoogDefine('jre.logging.logLevel', logging.logLevel);
 
 /** @define {string} */
-jre.logging.simpleConsoleHandler =
+logging.simpleConsoleHandler =
     goog.define('jre.logging.simpleConsoleHandler', 'ENABLED');
-jre.addSystemPropertyFromGoogDefine(
-    'jre.logging.simpleConsoleHandler', jre.logging.simpleConsoleHandler);
+addSystemPropertyFromGoogDefine(
+    'jre.logging.simpleConsoleHandler', logging.simpleConsoleHandler);
 
 // Provide a stub for field preserver to make things work without full
 // compilation.
 if (!COMPILED || goog.DEBUG) {
   globalThis.$J2CL_PRESERVE$ = function(/** ...* */ e) {};
 }
+
+exports = {
+  addSystemPropertyFromGoogDefine,
+  getSystemProperty,
+  classMetadata,
+  checkedMode,
+  checks,
+  logging,
+};

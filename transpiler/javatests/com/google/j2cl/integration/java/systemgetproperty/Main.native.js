@@ -1,3 +1,4 @@
+const {addSystemPropertyFromGoogDefine} = goog.require('jre');
 /** @suppress {extraRequire} */
 goog.require('systemgetproperty.Zoo');
 
@@ -5,6 +6,6 @@ goog.require('systemgetproperty.Zoo');
 const localBazz = goog.define('bazz', '42');
 
 /** Registers 'bazz' as a sysem property on-demand. */
-Main.registerBazz = function() {
-  jre.addSystemPropertyFromGoogDefine('bazz', localBazz);
+Main.registerBazz = function () {
+  addSystemPropertyFromGoogDefine('bazz', localBazz);
 };
