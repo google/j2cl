@@ -71,7 +71,6 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
               @JsProperty native void setField(C c);
             }
             class C {}
-
             """)
         .assertErrorsWithoutSourcePosition(
             "Native JsType field 'Buggy.anotherField' cannot be of type 'C'.",
@@ -101,7 +100,6 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
               static native C test4();
             }
             class C {}
-
             """)
         .assertErrorsWithoutSourcePosition(
             "Parameter 'c' in 'void Main.test(Object c)' cannot be of type 'Object'.",
@@ -129,7 +127,6 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
               }
               void passArgument(Object arg) {}
             }
-
             """)
         .assertErrorsWithoutSourcePosition(
             "Native JsType 'Buggy' cannot be assigned to 'Object'. (b/262009761)",
@@ -147,7 +144,6 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
             @JsType(isNative = true)
             class Buggy {}
             class Subclass extends Buggy {}
-
             """)
         .assertErrorsWithoutSourcePosition(
             "Non-native type 'Subclass' cannot extend native JsType 'Buggy'.");
@@ -168,7 +164,6 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
                 if (b instanceof BuggyInterface) {}
               }
             }
-
             """)
         .assertErrorsWithoutSourcePosition(
             "Cannot do instanceof against native JsType 'Buggy'.",
@@ -208,7 +203,6 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
                  T[] arrGeneric = null;
               }
             }
-
             """)
         .assertErrorsWithoutSourcePosition(
             "Field 'Main<T>.myNativeType' cannot be of type 'MyNativeType[]'. (b/261079024)",
@@ -271,7 +265,6 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
               }
               static class Buggy extends Main<MyNativeType> {}
             }
-
             """)
         .assertErrorsWithoutSourcePosition(
             "Field 'Main<T>.myNativeType' cannot be of type 'List<MyNativeType>'. (b/290992813)",

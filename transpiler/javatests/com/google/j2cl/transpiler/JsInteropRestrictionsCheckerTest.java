@@ -38,9 +38,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 System.getProperty("pro"+"perty");
                 System.getProperty(COMPILE_TIME_CONSTANT,"default");}
             }
-
-
-
             """)
         .assertErrorsWithSourcePosition(
             "Error:Buggy.java:7: Method 'String System.getProperty(String)' "
@@ -64,9 +61,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 System.getProperty("java.runtime.name");
                 System.getProperty("java.runtime.name","default");}
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -83,9 +77,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsMethod
               void n() {}
             }
-
-
-
             """)
         .addCompilationUnit(
             "somePackage.SubBuggy",
@@ -97,8 +88,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsMethod
               public void n() {} // public but not overriding due to different packages.
             }
-
-
             """)
         .assertTranspileFails()
         .assertErrorsWithoutSourcePosition(
@@ -121,9 +110,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsMethod
               void doIt(Foo foo) {}
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "'void Buggy.doIt(Foo)' and 'void Foo.maybeDoIt(Foo)' cannot both use the same"
@@ -149,9 +135,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             }
             public class Buggy extends ParentBuggy implements Foo, Bar {
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "'void Bar.doIt(Bar)' and "
@@ -176,9 +159,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               public abstract void doIt(Bar bar);
             }
             public class Buggy {}  // Unrelated class
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "'void Baz.doIt(Bar)' and "
@@ -205,9 +185,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               public void doIt(Foo x) {}
             }
             public class Buggy extends Parent implements Bar {}
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "'void Parent.doIt(Foo)' and "
@@ -253,9 +230,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               Child3 c3;
               Child4 c4;
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -271,9 +245,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsProperty(name = "show")
               public static final int display = 0;
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "'Buggy.display' and 'Buggy.show' cannot both use the same "
@@ -290,9 +261,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsProperty(name = "x") int x();
               @JsProperty(name = "x") void x(int x);
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -311,9 +279,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsProperty abstract boolean isY();
               @JsProperty abstract void setY(boolean y);
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -333,9 +298,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsProperty static void setStatic() {}
               @JsProperty void setW(int... z);
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "JsProperty 'int Buggy.isX()' cannot have a non-boolean return.",
@@ -361,9 +323,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsProperty int x();
               @JsProperty void x(int x);
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "JsProperty 'boolean Buggy.hasX()' should either follow Java Bean naming conventions"
@@ -386,9 +345,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsProperty
               boolean getX();
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "'boolean Buggy.isX()' and 'boolean Buggy.getX()' "
@@ -415,9 +371,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsProperty
               public static Object another;
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -434,9 +387,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsProperty
               void setX(int x);
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "'void Buggy.setX(int)' and 'void Buggy.setX(boolean)' "
@@ -457,9 +407,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsProperty
               boolean getY();
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             // TODO(b/277967621): This error message is incorrect, in this case there are multiple
@@ -484,9 +431,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               public boolean x(boolean foo) {return false;}
               public int getX() {return 0;}
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "'boolean IBuggy.x(boolean)' and 'int IBuggy.getX()' "
@@ -510,9 +454,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               public boolean x(boolean foo) {return false;}
               public void setX(int a) {}
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "'boolean IBuggy.x(boolean)' and 'void IBuggy.setX(int)' "
@@ -532,9 +473,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsProperty(name = "display")
               public static void setDisplay2(int x) {}
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "'void Buggy.setDisplay2(int)' and 'void Buggy.setDisplay(int)' cannot both use the "
@@ -552,9 +490,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsMethod(name = "show")
               public static void display() {}
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "'void Buggy.show()' and 'void Buggy.display()' cannot both use the same "
@@ -572,9 +507,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsMethod
               public static void show() {}
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "'void Buggy.show()' and 'void Buggy.setShow(int)' cannot both use the same "
@@ -592,9 +524,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsProperty
               public static final int show = 0;
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "'Buggy.show' and 'void Buggy.show()' cannot both use the same "
@@ -611,9 +540,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               public void show() {}
               public final int show = 0;
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "'Buggy.show' and 'void Buggy.show()' "
@@ -629,9 +555,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsMethod(name = "equals")
               boolean notEquals(Object o);
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "'boolean Buggy.notEquals(Object)' and 'boolean Object.equals(Object)' cannot both use "
@@ -648,9 +571,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               public void show(int x) {}
               public void show() {}
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "'void Buggy.show()' and "
@@ -686,9 +606,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             class AnotherJsTypeSubclass extends PlainJavaParent {
               public void foo(int a) {}
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -710,9 +627,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             class OtherBuggy extends ParentBuggy {
               public void foo(int a) {}
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "'Buggy.foo' and 'ParentBuggy.foo' cannot both use the same "
@@ -754,8 +668,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 o = (IBuggy2 & IBuggy3) (b) -> {};
               }
             }
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "'void Buggy2.show(boolean)' and 'void Buggy.show()' cannot both use the same "
@@ -779,9 +691,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             class SubBuggy extends Buggy<String> {
               public void show(String s) {}
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -799,9 +708,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             public class Buggy extends ParentBuggy {
               public void foo(int a) {}
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "'void Buggy.foo(int)' and 'void ParentBuggy.foo()' cannot both use the same "
@@ -863,9 +769,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             class Buggy2 extends Buggy implements IBuggy2 {
               public void show(boolean b) {}
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "'void Buggy2.show(boolean)' and 'void Buggy.show()' cannot both use the same "
@@ -885,9 +788,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               public int compareTo(E other) {return 0;}
             }
             public class Buggy {}
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -906,9 +806,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               public int compareTo(E other) {return 0;}
             }
             public class Buggy {}
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -926,9 +823,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             class Buggy implements I {
               public Buggy m() { return null; }
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -946,9 +840,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             public class Buggy extends S {
               public Buggy m() { return null; }
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -970,9 +861,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             public class Buggy extends ParentBuggy {
               public int foo = 110;
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "'Buggy.foo' and 'ParentParentBuggy.foo' cannot both use the same "
@@ -990,9 +878,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             public class Buggy extends ParentBuggy {
               @JsMethod private void foo() {}
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "'void Buggy.foo()' and 'void ParentBuggy.foo()' cannot both use the same "
@@ -1012,9 +897,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             public class Buggy extends ParentBuggy {
               @JsMethod(name = "bar") public void foo() {}
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "'void Buggy.foo()' cannot be assigned JavaScript name 'bar' that is different"
@@ -1034,9 +916,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             public interface Buggy extends ParentBuggy {
               @JsMethod(name = "bar") void foo();
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "'void Buggy.foo()' cannot be assigned JavaScript name 'bar' that is different"
@@ -1060,9 +939,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             }
             public class Buggy extends ParentBuggy implements IBuggy {
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "Line 11: 'void EntryPoint.ParentBuggy.foo()' "
@@ -1081,9 +957,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             public class Buggy extends ParentBuggy {
               @JsProperty(name = "bar") public int getFoo() { return 0; }
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "'int Buggy.getFoo()' cannot be assigned JavaScript name 'bar' that is different"
@@ -1104,9 +977,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             public class Buggy extends ParentBuggy {
               @JsProperty public boolean getFoo() { return false;}
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "'boolean Buggy.getFoo()' and 'boolean ParentBuggy.isFoo()' cannot both use the "
@@ -1129,9 +999,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               public int getFoo() {return 0;}
               public void setFoo(int value) {}
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -1152,9 +1019,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               public int getFoo() {return 0;}
               public void setFoo(Integer value) {}
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "JsProperty setter 'void IBuggy.setFoo(Integer)' and getter 'int IBuggy.getFoo()'"
@@ -1179,9 +1043,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               public boolean isFoo() {return false;}
               public void setFoo(Object value) {}
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "JsProperty setter 'void IBuggy.setFoo(Object)' and getter 'boolean IBuggy.isFoo()'"
@@ -1201,9 +1062,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             @JsType public class Buggy extends Super {
               public int m() { return super.getX(); }
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -1216,9 +1074,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             @JsType public class Buggy {
               @JsProperty public static int getX() { return 0; }
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -1234,9 +1089,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             @JsType public class Buggy extends Super {
               public int m() { return getX(); }
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -1254,9 +1106,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             }
             @JsType public class Buggy extends Super implements Interface {
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -1282,9 +1131,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             @JsType class OverrideWithoutJsProperty extends Super {
               public void setX(int x) {  }
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -1304,9 +1150,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsMethod public void setX(int x) {  }
               @JsMethod public void setZ(int z) {}
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "JsProperty 'int Buggy.getY()' cannot override JsMethod 'int Super.getY()'.",
@@ -1343,9 +1186,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               private Buggy() {}
               private Buggy(int a) {}
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -1401,9 +1241,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             class ExplicitSubImplicitSuper extends ImplicitSubNativeSuper {
               public ExplicitSubImplicitSuper() { super(); }
             }
-
-
-
             """)
         .addCompilationUnit(
             "test.ImplicitConstructor",
@@ -1412,9 +1249,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             @JsType
             public class ImplicitConstructor extends Buggy {
             }
-
-
-
             """)
         .addCompilationUnit(
             "test.SubImplicitConstructor",
@@ -1423,9 +1257,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             @JsType
             public class SubImplicitConstructor extends ImplicitConstructor {
             }
-
-
-
             """)
         .addCompilationUnit(
             "test.ImplicitSubImplicitSuper",
@@ -1434,9 +1265,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             @JsType
             public class ImplicitSubImplicitSuper extends ImplicitSubNativeSuper {
             }
-
-
-
             """)
         .addCompilationUnit(
             "test.ImplicitSubNativeSuper",
@@ -1445,9 +1273,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             @JsType
             public class ImplicitSubNativeSuper extends NativeBuggy {
             }
-
-
-
             """)
         .addCompilationUnit(
             "test.ImplicitSubExplicitSuper",
@@ -1456,9 +1281,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             @JsType
             public class ImplicitSubExplicitSuper extends ExplicitSubImplicitSuper {
             }
-
-
-
             """)
         .assertTranspileSucceeds();
   }
@@ -1536,8 +1358,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             }
             class SomeClass2 extends NativeType {
             }
-
-
             """)
         .addCompilationUnit(
             "test.BadImplicitJsConstructor",
@@ -1602,9 +1422,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 new Buggy();
               }
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "JsConstructor 'Buggy()' can be a JsConstructor only if all other constructors "
@@ -1623,9 +1440,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 this();
               }
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition("More than one JsConstructor exists for 'Buggy'.");
   }
@@ -1647,9 +1461,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               public void doIt(Object x) {}
             }
             public class Buggy extends Parent implements Foo {}
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -1681,9 +1492,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             @JsType(isNative = true, namespace = "a.b", name = "*") interface BadStar { }
             @JsEnum(isNative = true, namespace = "a.b", name = "=") enum NativeEnum { }
             @JsEnum(namespace = "a.b", name = "c.d") enum MyJsEnum { }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "'Buggy' has invalid name 'a.b.c'.",
@@ -1716,9 +1524,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                @JsMethod(namespace = "foo.buzz", name = "") static native void buzz();
                @JsProperty(namespace = "foo.bar", name = "") static native String bar();
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -1752,9 +1557,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             @JsType(namespace = "") class NonNativeClass {}
             @JsEnum(isNative = true, namespace = "=") enum NativeEnum { }
             @JsEnum(namespace = "^") enum MyJsEnum { }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "'Buggy' has invalid namespace 'a.b.'.",
@@ -1802,9 +1604,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
             interface Wildcard {
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -1816,9 +1615,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             import jsinterop.annotations.*;
             @JsType(isNative = true, namespace = "", name = "a.c")
             class NativeOnTopLevelNamespace {}
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -1833,9 +1629,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               public static void show1() {}
               public void show2() {}
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -1890,9 +1683,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 o = (ParametricFunction<?>) (s) -> (Double) null;
               }
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -2014,9 +1804,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 o = (Foo & Function) () -> 0;
               }
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "'InvalidJsTypeJsFunction' cannot be both a JsFunction and a JsType at the same time.",
@@ -2100,9 +1887,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 Object.class.getName();
               }
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -2118,9 +1902,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 Object.class.getName();
               }
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "Native JsType 'Buggy' cannot have an instance initializer.");
@@ -2137,9 +1918,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 n++;
               }
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "Native JsType constructor 'Buggy(int n)' cannot have non-empty method body.");
@@ -2155,9 +1933,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             public class Buggy extends Super {
               public Buggy(int n) {}
             }
-
-
-
             """)
         .addCompilationUnit(
             "test.Super",
@@ -2167,9 +1942,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             public class Super {
               public Super() {}
             }
-
-
-
             """)
         .assertTranspileSucceeds()
         .assertNoWarnings();
@@ -2187,9 +1959,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 super(n);
               }
             }
-
-
-
             """)
         .addCompilationUnit(
             "test.Super",
@@ -2199,9 +1968,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             public class Super {
               public Super(int x) {}
             }
-
-
-
             """)
         .assertTranspileSucceeds()
         .assertNoWarnings();
@@ -2219,9 +1985,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 super(n++);
               }
             }
-
-
-
             """)
         .addCompilationUnit(
             "test.Super",
@@ -2231,9 +1994,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             public class Super {
               public Super(int x) {}
             }
-
-
-
             """)
         .assertTranspileSucceeds()
         .assertNoWarnings();
@@ -2248,9 +2008,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             @JsType public class Buggy {
               public Buggy() { if (new Object() instanceof IBuggy) {} }
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "Cannot do instanceof against native JsType interface 'IBuggy'.");
@@ -2266,9 +2023,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               A,
               B
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "Enum 'Buggy' cannot be a native JsType. Use '@JsEnum(isNative = true)' instead.");
@@ -2329,8 +2083,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             abstract class SpecializingEnumToJsEnum extends WithFunctionReturningEnum {
               abstract MyJsEnum f();
             }
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "Non-custom-valued JsEnum 'MyJsEnum' cannot have constructor 'MyJsEnum()'.",
@@ -2399,9 +2151,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             class AListSubclass extends AList<MyJsEnum> implements List<MyJsEnum> {
                 public MyJsEnum getObject() { return null; }
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -2469,9 +2218,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               int value;
               @JsConstructor CustomValueWithJsConstructor(int value) { this.value = value; }
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "Custom-valued JsEnum constructor 'CustomValued(boolean value)' should have one "
@@ -2528,9 +2274,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               final int value;
               CustomValued(int value) { this.value = value;}
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -2567,9 +2310,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               B;
               int value = 1;
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "JsEnum 'Native' does not support 'String Enum.name()'.",
@@ -2619,9 +2359,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 Consumer<Native> consumer = c -> c.toString();
               }
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -2650,9 +2387,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 JsEnumWithCustomValue.A.value = 3;
               }
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "JsEnum 'Native' cannot be assigned to 'Enum'.",
@@ -2693,8 +2427,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 List<? extends Enum> l2 = new ArrayList<MyJsEnum>();
               }
             }
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "JsEnum 'Native' cannot be assigned to 'Enum'.",
@@ -2750,9 +2482,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 }
               }
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -2794,8 +2523,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 MyJsEnum e = returnsJsEnumArray()[0];
               }
             }
-
-
             """)
         .assertNoWarnings();
   }
@@ -2892,9 +2619,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             }
             class DerivedWithJsEnumArrayField extends BaseWithTArrayField<Main.MyJsEnum> {
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "JsEnum array 'MyJsEnum[]' cannot be assigned to 'Object[]'.",
@@ -3022,9 +2746,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 if (o instanceof NativeEnum[]) { }
               }
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -3064,9 +2785,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 }
               }
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -3107,9 +2825,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 return (T) NativeEnum.A;
               }
             }
-
-
-
             """)
         .assertWarningsWithSourcePosition(
             "Warning:Main.java:6: Switch on native JsEnum 'NativeEnum' should have an explicit"
@@ -3122,82 +2837,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 + " default branch.");
   }
 
-  public void testJsEnumSwitchExpressionSucceeds() {
-    assertTranspileSucceeds(
-            "test.Main",
-            """
-            import jsinterop.annotations.*;
-            public class Main {
-              @JsEnum enum NonNativeEnum { A, B }
-              @JsEnum(isNative = true) enum NativeEnum { A, B }
-              public static void test(NonNativeEnum nonNativeEnum, NativeEnum nativeEnum) {
-                boolean b;
-                b = switch (nonNativeEnum) {
-                  case A, B -> true;
-                };
-                b = switch (nonNativeEnum) {
-                  case A -> true;
-                  default -> false;
-                };
-                b = switch (nonNativeEnum) {
-                  default -> false;
-                };
-                b = switch (nativeEnum) {
-                  case A, B -> true;
-                  default -> false;
-                };
-                b = switch (nativeEnum) {
-                  case A -> true;
-                  default -> false;
-                };
-              }
-            }
-
-
-
-            """)
-        .assertNoWarnings();
-  }
-
-  public void testJsEnumSwitchExpressionFails() {
-    assertTranspileFails(
-            "test.Main",
-            """
-            import jsinterop.annotations.*;
-            public class Main {
-              @JsEnum(isNative = true) enum NativeEnum { A, B }
-              public static void test(NativeEnum nativeEnum) {
-                boolean b;
-                b = switch (nativeEnum) {
-                  case A, B -> true;
-                };
-                b = switch (getNativeEnum()) {
-                  case A, B -> true;
-                };
-                b = switch (getTemplatedNativeEnum()) {
-                  case A, B -> true;
-                };
-              }
-              public static NativeEnum getNativeEnum() {
-                return NativeEnum.A;
-              }
-              public static <T extends NativeEnum> T getTemplatedNativeEnum() {
-                return (T) NativeEnum.A;
-              }
-            }
-
-
-
-            """)
-        .assertErrorsWithSourcePosition(
-            "Error:Main.java:7: Switch on native JsEnum 'NativeEnum' should have an explicit"
-                + " default branch.",
-            "Error:Main.java:10: Switch on native JsEnum 'NativeEnum' should have an explicit"
-                + " default branch.",
-            "Error:Main.java:13: Switch on native JsEnum 'NativeEnum' should have an explicit"
-                + " default branch.");
-  }
-
   public void testInnerNativeJsTypeFails() {
     assertTranspileFails(
             "EntryPoint",
@@ -3207,9 +2846,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsType(isNative = true)
               public class Buggy {}
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "Non static inner class 'Buggy' cannot be a native JsType.");
@@ -3224,9 +2860,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsType
               public static class Buggy {}
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -3237,9 +2870,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             """
             import jsinterop.annotations.*;
             public class Buggy { void m() { @JsType class Local {} } }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition("Local class 'Local' cannot be a JsType.");
   }
@@ -3252,9 +2882,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             import jsinterop.annotations.*;
             @JsType(isNative = true)
             public class Buggy implements Super {}
-
-
-
             """)
         .addCompilationUnit(
             "test.Super",
@@ -3262,9 +2889,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             import jsinterop.annotations.*;
             @JsType(isNative = true)
             public interface Super {}
-
-
-
             """)
         .assertTranspileSucceeds()
         .assertNoWarnings();
@@ -3278,9 +2902,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             import jsinterop.annotations.*;
             @JsType(isNative = true)
             public interface Buggy extends Super {}
-
-
-
             """)
         .addCompilationUnit(
             "test.Super",
@@ -3288,9 +2909,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             import jsinterop.annotations.*;
             @JsType(isNative = true)
             public interface Super {}
-
-
-
             """)
         .assertTranspileSucceeds()
         .assertNoWarnings();
@@ -3304,9 +2922,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             import jsinterop.annotations.*;
             @JsType(isNative = true)
             public class Buggy extends Super {}
-
-
-
             """)
         .addCompilationUnit(
             "test.Super",
@@ -3314,9 +2929,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             import jsinterop.annotations.*;
             @JsType
             public class Super {}
-
-
-
             """)
         .assertTranspileFails()
         .assertErrorsWithoutSourcePosition(
@@ -3331,9 +2943,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             import jsinterop.annotations.*;
             @JsType(isNative = true)
             public class Buggy implements Interface {}
-
-
-
             """)
         .addCompilationUnit(
             "test.Interface",
@@ -3341,9 +2950,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             import jsinterop.annotations.*;
             @JsType
             public interface Interface {}
-
-
-
             """)
         .assertTranspileFails()
         .assertErrorsWithoutSourcePosition(
@@ -3358,9 +2964,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             import jsinterop.annotations.*;
             @JsType(isNative = true)
             public interface Buggy extends Interface {}
-
-
-
             """)
         .addCompilationUnit(
             "test.Interface",
@@ -3368,9 +2971,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             import jsinterop.annotations.*;
             @JsType
             public interface Interface {}
-
-
-
             """)
         .assertTranspileFails()
         .assertErrorsWithoutSourcePosition(
@@ -3385,9 +2985,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             import jsinterop.annotations.*;
             @JsType(isNative = true)
             public class Buggy implements Interface {}
-
-
-
             """)
         .addCompilationUnit("test.Interface", "public interface Interface {}")
         .assertTranspileFails()
@@ -3403,9 +3000,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             import jsinterop.annotations.*;
             @JsType(isNative = true)
             public interface Buggy extends Super {}
-
-
-
             """)
         .addCompilationUnit("test.Super", "public interface Super {}")
         .assertTranspileFails()
@@ -3428,9 +3022,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               default void someMethod() {}
               void someOtherMethod();
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "Native JsType method 'void Buggy.someMethod()' should be native, abstract or "
@@ -3448,9 +3039,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             """
             @java.lang.annotation.Target(java.lang.annotation.ElementType.TYPE_USE)
             public @interface Nullable {}
-
-
-
             """)
         .addCompilationUnit(
             "test.Buggy",
@@ -3482,9 +3070,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 o = (Function) (String s, @JsOptional String b) -> {};
               }
             }
-
-
-
             """)
         .assertTranspileSucceeds()
         .assertNoWarnings();
@@ -3497,9 +3082,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             """
             @java.lang.annotation.Target(java.lang.annotation.ElementType.TYPE_USE)
             public @interface Nullable {}
-
-
-
             """)
         .addCompilationUnit(
             "test.Buggy",
@@ -3532,8 +3114,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 o = (Function) (String s, String b) -> {};
               }
             }
-
-
             """)
         .assertTranspileFails()
         .assertErrorsWithoutSourcePosition(
@@ -3555,9 +3135,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                @JsMethod
                public void baz(@JsOptional Object a, String b, Object... c) {}
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "JsOptional parameter 'a' in method "
@@ -3580,9 +3157,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                @JsConstructor public Buggy(@JsOptional int a) {}
                @JsMethod public void bar(int a, @JsOptional Object b, @JsOptional String... c) {}
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "JsOptional parameter 'a' in method '" + "Buggy(int a)' cannot be of a primitive type.",
@@ -3599,9 +3173,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             public class Buggy {
                @JsMethod public <T> void bar(@JsOptional @JsNonNull T a, @JsOptional @JsNonNull String b) {}
             }
-
-
-
             """)
         .assertTranspileFails()
         .assertErrorsWithoutSourcePosition(
@@ -3622,9 +3193,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             """
             @java.lang.annotation.Target(java.lang.annotation.ElementType.TYPE_USE)
             public @interface Nullable {}
-
-
-
             """)
         .addCompilationUnit(
             "test.Buggy",
@@ -3635,9 +3203,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             public class Buggy {
                @JsMethod public <T extends @Nullable Object> void bar(@JsOptional @Nullable T a, @JsOptional @Nullable String b) {}
             }
-
-
-
             """)
         .assertTranspileSucceeds()
         .assertNoWarnings();
@@ -3655,9 +3220,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             @JsType(isNative = true) class Native {
               @JsOverlay public final void fun( @JsOptional Object a) {}
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "JsOptional parameter in 'void Buggy.fun(int a, Object b, "
@@ -3678,9 +3240,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsOverlay Object obj = new Object();
               @JsOverlay default void someOverlayMethod() {};
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -3712,9 +3271,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsOverlay final void o() { }
               @JsOverlay protected final void p() { }
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -3730,9 +3286,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             @JsType(isNative=true) public class Buggy extends SuperBuggy {
               @JsOverlay public final void n() { super.m(); }
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "Cannot use 'super' in JsOverlay method 'void Buggy.n()'.");
@@ -3751,9 +3304,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsOverlay public final void m() { }
               @JsOverlay public final String n() { return null; }
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "JsOverlay method 'void Buggy.m()' cannot override a supertype method.",
@@ -3773,9 +3323,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsOverlay public final void m() { }
               @JsOverlay public final String n() { return null; }
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "JsOverlay method 'void Buggy.m()' cannot override a supertype method.",
@@ -3793,9 +3340,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsOverlay
               public void m() {}
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "JsOverlay field 'Buggy.f2' can only be static.",
@@ -3813,9 +3357,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsOverlay public static int f2 = 2;
               static { f2 = 3; }
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -3829,9 +3370,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             @JsType(isNative=true) public class Buggy {
               @JsOverlay public Buggy() { }
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "The annotation @JsOverlay is disallowed for this location");
@@ -3847,9 +3385,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsMethod @JsOverlay public static void n() { }
               @JsProperty @JsOverlay public static void setA(String value) { }
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "JsOverlay 'Buggy.a' cannot be nor override a JsProperty or a JsMethod.",
@@ -3871,9 +3406,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsOverlay
               public final void m() {};
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "JsOverlay 'Buggy.F' can only be declared in a native type "
@@ -3891,9 +3423,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             }
             @JsType public class Buggy extends Super {
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -3907,9 +3436,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             }
             @JsType public class Buggy extends Super {
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -3923,9 +3449,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             }
             @JsType public class Buggy implements Interface {
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -3939,9 +3462,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             }
             @JsType public class Buggy implements Interface {
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -3955,9 +3475,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             }
             @JsType public interface Buggy extends Interface {
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -3971,9 +3488,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             }
             @JsType public interface Buggy extends Interface {
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -4006,9 +3520,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             }
             @JsType(isNative=true) interface NativeInterface {}
             class SomeClass3 implements NativeInterface {}
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -4050,9 +3561,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             @JsType(isNative=true) class NativeTypeWithBridge implements NativeInterface {
               public String foo() { return null; }
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "Native JsType member 'void Interface.n()' cannot have @JsIgnore.",
@@ -4087,9 +3595,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             @JsType(isNative=true) class NativeTypeWithHashCode {
               public native int hashCode();
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -4120,9 +3625,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsConstructor SubBuggy2() {}
               public String foo(Object obj) { return super.toString(); }
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "'String NativeType.toString()' cannot be assigned JavaScript name 'string'"
@@ -4154,9 +3656,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsProperty
               public native int getM();
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -4170,9 +3669,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             public class Buggy {
               public native void m();
             }
-
-
-
             """)
         .addNativeJsForCompilationUnit("test.Buggy", "// empty")
         .assertTranspileFails()
@@ -4219,9 +3715,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsConstructor public SubNativeSubclass() {}
               public boolean equals(Object obj) { return false; }
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -4240,9 +3733,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               protected int f5;
               private int f6;
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -4250,15 +3740,14 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
   public void testNativeJsTypeDefaultConstructorSucceeds() {
     assertTranspileSucceeds(
             "test.Buggy",
-            """
+"""
             import jsinterop.annotations.*;
             @JsType(isNative = true)
             public class Buggy {}
 
 
 
-
-            """)
+""")
         .assertNoWarnings();
   }
 
@@ -4274,9 +3763,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             @JsType public class Buggy extends Super {
               public void n(Object o) { }
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -4293,9 +3779,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             }
             class JavaSubclass implements Super {
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -4313,9 +3796,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsConstructor public Buggy() {}
               public void m(Object o) { }
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -4329,9 +3809,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsMethod public static native void m(Object o);
               @JsMethod public static native void m(int o);
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -4360,8 +3837,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsProperty public native int getM();
               @JsMethod public void m(int o, Object opt_o) { }
             }
-
-
             """)
         .assertNoWarnings();
   }
@@ -4385,9 +3860,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             abstract class B implements J, I {
               @JsMethod(name = "m") public void y() {}
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "'void B.y()' and 'void J.m()' cannot both use the same JavaScript name 'm'.",
@@ -4417,8 +3889,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsMethod public native void m();
               @JsMethod(name = "m") public void y() {}
             }
-
-
             """)
         .assertNoWarnings();
   }
@@ -4435,9 +3905,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsMethod public native void m(Object o);
               @JsMethod public void m(int o, Object opt_o) { }
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "'void Buggy.m(int, Object)' and 'void Super.m(int)' cannot both use the "
@@ -4454,9 +3921,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             }
             public class Buggy extends Super {
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -4470,9 +3934,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             }
             public class Buggy implements Interface {
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -4486,9 +3947,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             }
             public interface Buggy extends Interface {
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -4505,9 +3963,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsConstructor Buggy() { }
               public void m() { }
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -4521,9 +3976,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             }
             public class Buggy implements Interface {
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -4537,9 +3989,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             import jsinterop.annotations.*;
             @JsType(isNative = true)
             public interface Interface {}
-
-
-
             """)
         .assertTranspileSucceeds()
         .assertNoWarnings();
@@ -4562,9 +4011,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsAsync
               public IThenable b() { return null; }
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -4590,9 +4036,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsAsync
               public double e() { return 0; }
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "JsAsync method 'List<T> A.a()' should return either 'IThenable' or 'Promise' but"
@@ -4641,9 +4084,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 b = o instanceof NativeClassWithCustomIsInstance;
               }
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -4666,9 +4106,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             class BadIsInstanceOnNativeType {
               static boolean $isInstance(Object o) { return true; }
             }
-
-
-
             """)
         .assertErrorsWithoutSourcePosition(
             "Custom '$isInstance' method 'boolean BadIsInstanceVisibility.$isInstance(Object o)'"
@@ -4703,8 +4140,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 @SuppressWarnings("unusable-by-js")A b
               ) {} // add SuppressWarnings to parameters.
             }
-
-
             """)
         .assertNoWarnings();
   }
@@ -4753,8 +4188,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 }
               }
             }
-
-
             """)
         .assertNoWarnings();
   }
@@ -4769,9 +4202,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               private A field;
               private A f1(A a) { return null; }
             }
-
-
-
             """)
         .assertNoWarnings();
   }
@@ -4814,8 +4244,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               public void f8(List<List<MyJsEnum>> l) {} // parameterized by List<JsEnum> fails
               public void f17() { new Object() { @JsMethod void b(Long a){} }; }
             }
-
-
             """)
         .addFileToZipFile("native.zip", "test/C.native.js", "// empty")
         .assertTranspileSucceeds()
@@ -4877,9 +4305,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               public void doIt(Class x) {}
             }
             public class Buggy extends Parent implements Foo {}
-
-
-
             """)
         .assertNoWarnings();
     // TODO(b/37579830): This error should be emitted once accidental overrides are handled in
@@ -4900,9 +4325,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             @org.jspecify.annotations.NullMarked
             class NullMarkedType {
             }
-
-
-
             """)
         .assertTranspileFails()
         .assertErrorsWithoutSourcePosition(
@@ -4919,9 +4341,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             public @interface AutoValue {
             public @interface Builder{}
             }
-
-
-
             """)
         .addCompilationUnit(
             "test.Buggy",
@@ -4942,8 +4361,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             class $$AutoValue_Foo extends Foo {
               static class Builder extends Foo.Builder {}
             }
-
-
             """)
         .assertTranspileFails()
         .assertErrorsWithoutSourcePosition(
