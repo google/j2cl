@@ -520,10 +520,7 @@ class JavaEnvironment {
       }
       classComponents.add(0, simpleName);
       Element enclosingElement = currentType.getEnclosingElement();
-      while (enclosingElement != null
-          && enclosingElement.getKind() != ElementKind.CLASS
-          && enclosingElement.getKind() != ElementKind.INTERFACE
-          && enclosingElement.getKind() != ElementKind.ENUM) {
+      while (enclosingElement != null && !(enclosingElement instanceof TypeElement)) {
         enclosingElement = enclosingElement.getEnclosingElement();
       }
       currentType = (TypeElement) enclosingElement;
