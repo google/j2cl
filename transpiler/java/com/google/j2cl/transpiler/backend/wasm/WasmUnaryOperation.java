@@ -33,15 +33,12 @@ public enum WasmUnaryOperation {
     checkArgument(expression instanceof PrefixExpression);
 
     PrefixOperator operator = ((PrefixExpression) expression).getOperator();
-    switch (operator) {
-      case NOT:
-        return EQZ;
-      case MINUS:
-        return NEG;
-      default:
-        // other PrefixOperator have been normalized
-        throw new AssertionError("Invalid operator");
-    }
+    // other PrefixOperator have been normalized
+    return switch (operator) {
+      case NOT -> EQZ;
+      case MINUS -> NEG;
+      default -> throw new AssertionError("Invalid operator");
+    };
   }
 
   public String getInstruction(UnaryExpression expression) {

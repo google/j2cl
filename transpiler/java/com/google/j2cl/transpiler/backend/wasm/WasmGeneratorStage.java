@@ -105,7 +105,7 @@ public class WasmGeneratorStage {
     SummaryBuilder summaryBuilder = new SummaryBuilder(library, environment, problems);
 
     JsImportsGenerator.collectImportSnippets(jsImports)
-        .forEach((key, value) -> summaryBuilder.addSharedJsImportSnippet(key, value));
+        .forEach(summaryBuilder::addSharedJsImportSnippet);
 
     jsImports.getModuleImports().forEach(summaryBuilder::addSharedJsImportRequireSnippet);
     problems.abortIfCancelled();

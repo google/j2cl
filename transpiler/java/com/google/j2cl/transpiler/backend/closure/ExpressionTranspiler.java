@@ -359,14 +359,12 @@ public final class ExpressionTranspiler {
       @SuppressWarnings("ReferenceEquality")
       private boolean shouldRenderQualifier(Expression qualifier) {
         checkNotNull(qualifier);
-        if (!(qualifier instanceof JavaScriptConstructorReference)) {
+        if (!(qualifier instanceof JavaScriptConstructorReference constructorReference)) {
           return true;
         }
 
         // Static members in the global scope are explicitly qualified by a
         // JavaScriptConstructorReference node to the TypeDescriptor representing the global scope.
-        JavaScriptConstructorReference constructorReference =
-            (JavaScriptConstructorReference) qualifier;
         return constructorReference.getReferencedTypeDeclaration()
             != TypeDescriptors.get().globalNamespace.getTypeDeclaration();
       }
@@ -384,7 +382,7 @@ public final class ExpressionTranspiler {
         sourceBuilder.append(" = ");
         // Setters are a special case. They cannot be nested in any non top level expression as they
         // return void.
-        renderNoParens(expression.getArguments().get(0));
+        renderNoParens(expression.getArguments().getFirst());
       }
 
       private void renderMethodCall(MethodCall expression) {

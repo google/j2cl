@@ -184,15 +184,12 @@ class ClosureTypesGenerator {
         new ClosureNamedTypeWithUnknownNullability(
             environment.getUniqueNameForVariable(typeVariable.toDeclaration()));
 
-    switch (typeVariable.getNullabilityAnnotation()) {
+    return switch (typeVariable.getNullabilityAnnotation()) {
       // TODO(b/326131100): Uncomment when bug is fixed.
-      // case NOT_NULLABLE:
-      //   return typeVariableClosureType.toNonNullable();
-      // case NULLABLE:
-      //   return typeVariableClosureType.toNullable();
-      default:
-        return typeVariableClosureType;
-    }
+      // case NOT_NULLABLE -> typeVariableClosureType.toNonNullable();
+      // case NULLABLE -> typeVariableClosureType.toNullable();
+      default -> typeVariableClosureType;
+    };
   }
 
   /** Returns the Closure type for an array type descriptor. */
@@ -605,22 +602,15 @@ class ClosureTypesGenerator {
 
   /** Represents function types. */
   private static class ClosureFunctionType extends ClosureType {
-    private static class Parameter {
-      private final boolean isVarargs;
-      private final boolean isOptional;
-      private final ClosureType closureType;
 
-      Parameter(boolean isVarargs, boolean isOptional, ClosureType closureType) {
+    private record Parameter(boolean isVarargs, boolean isOptional, ClosureType closureType) {
+      private Parameter {
         checkArgument(!(isVarargs && isOptional));
-        this.isVarargs = isVarargs;
-        this.isOptional = isOptional;
-        this.closureType = closureType;
       }
 
       String render() {
-        Object[] args =
-            new Object[] {isVarargs ? "..." : "", closureType.render(), isOptional ? "=" : ""};
-        return String.format("%s%s%s", args);
+        return String.format(
+            "%s%s%s", isVarargs ? "..." : "", closureType.render(), isOptional ? "=" : "");
       }
     }
 
@@ -674,7 +664,7 @@ class ClosureTypesGenerator {
           .put(NUMBER.render(), NUMBER)
           .put(BOOLEAN.render(), BOOLEAN)
           .put(VOID.render(), VOID)
-          .build();
+          .buildOrThrow();
 
   /**
    * Map from typed eclarations that are mapped into closure native types to the corresponding type
@@ -703,6 +693,6 @@ class ClosureTypesGenerator {
                   TypeDescriptors.get().kotlinNothing.getTypeDeclaration(),
                   UNKNOWN.toNonNullable());
             }
-            return builder.build();
+            return builder.buildOrThrow();
           });
 }

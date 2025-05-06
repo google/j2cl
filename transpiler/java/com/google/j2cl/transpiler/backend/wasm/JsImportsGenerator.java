@@ -206,12 +206,13 @@ public final class JsImportsGenerator {
     }
     if (methodImport.isPropertySetter()) {
       sb.append(" = ");
-      sb.append(methodImport.getParameters().get(0).getName());
+      sb.append(methodImport.getParameters().getFirst().getName());
       return sb.toString();
     }
     sb.append("(");
     for (var parameter : methodImport.getParameters()) {
-      sb.append(parameter.getName() + ", ");
+      sb.append(parameter.getName());
+      sb.append(", ");
     }
     sb.append(")");
     return sb.toString();

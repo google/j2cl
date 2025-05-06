@@ -414,7 +414,7 @@ public final class LibraryInfoBuilder {
 
   private static boolean isInBootstrap(DeclaredTypeDescriptor typeDescriptor) {
     return TypeDescriptors.isBootstrapNamespace(typeDescriptor)
-        || isAccesssedFromJ2clBootstrapJsFiles(typeDescriptor);
+        || isAccessedFromJ2clBootstrapJsFiles(typeDescriptor);
   }
 
   // There are references to non JsMember members of these types from JavaScript in the J2CL
@@ -440,8 +440,7 @@ public final class LibraryInfoBuilder {
           "java.lang.Void",
           "javaemul.internal.InternalPreconditions");
 
-  private static boolean isAccesssedFromJ2clBootstrapJsFiles(
-      DeclaredTypeDescriptor typeDescriptor) {
+  private static boolean isAccessedFromJ2clBootstrapJsFiles(DeclaredTypeDescriptor typeDescriptor) {
     return TYPES_ACCESSED_FROM_J2CL_BOOTSTRAP_JS.contains(typeDescriptor.getQualifiedSourceName());
   }
 }

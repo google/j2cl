@@ -76,7 +76,7 @@ public abstract class JavaScriptGenerator {
   abstract String getSuffix();
 
   /**
-   * @param suppressions file level suppresions. Should be only used as a workaround if an urgent
+   * @param suppressions file level suppressions. Should be only used as a workaround if an urgent
    *     suppression is needed without needing to wait for JsCompiler release.
    */
   void renderSuppressions(String... suppressions) {

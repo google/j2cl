@@ -383,7 +383,7 @@ final class ExpressionTranspiler {
       public boolean enterNewArray(NewArray newArray) {
         checkArgument(newArray.getTypeDescriptor().isNativeWasmArray());
 
-        Expression dimensionExpression = newArray.getDimensionExpressions().get(0);
+        Expression dimensionExpression = newArray.getDimensionExpressions().getFirst();
 
         if (dimensionExpression instanceof NumberLiteral literal && literal.getValue().equals(0)) {
           // Do not allocate zero-length arrays, instead reuse the array singletons that
@@ -619,7 +619,7 @@ final class ExpressionTranspiler {
 
       @Override
       public boolean enterVariableDeclarationExpression(VariableDeclarationExpression expression) {
-        // Render the first declaration with no preceeding newline. Most places that can have a
+        // Render the first declaration with no preceding newline. Most places that can have a
         // declaration already emit the newline (e.g. ExpressionStatement and MultiExpression).
         boolean isFirst = true;
         for (VariableDeclarationFragment fragment : expression.getFragments()) {

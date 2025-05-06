@@ -31,6 +31,7 @@ import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.HasAnnotations;
+import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodLike;
@@ -394,7 +395,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     if (methodDescriptor.isBridge()
         && (isKotlinSource
             || methodDescriptor.getJsOverriddenMethodDescriptors().stream()
-                .anyMatch(m -> m.isFinal()))) {
+                .anyMatch(MemberDescriptor::isFinal))) {
       // Allow bridges to override final methods.
       jsDocBuilder.append(" @suppress{visibility}");
     }

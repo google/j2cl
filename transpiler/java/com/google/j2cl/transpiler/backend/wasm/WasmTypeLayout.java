@@ -83,13 +83,13 @@ abstract class WasmTypeLayout {
     ImmutableList<FieldDescriptor> declaredInstanceFields = getDeclaredInstanceFields();
 
     if (TypeDescriptors.isWasmArraySubtype(getTypeDescriptor())) {
-      // TODO(b/296475021): Remove the hack to treat the field as overriden by subclass' field.
+      // TODO(b/296475021): Remove the hack to treat the field as overridden by subclass' field.
       // Override the type of the elements field in Wasm arrays by replacing the WasmArray elements
       // field with that of their subtype.
       // Relies on the elements field being the last declared filed in WasmArray and also being
       // the first in the WasmArray subclass.
-      checkState(declaredInstanceFields.get(0).getName().equals("elements"));
-      FieldDescriptor removedField = instanceFields.remove(instanceFields.size() - 1);
+      checkState(declaredInstanceFields.getFirst().getName().equals("elements"));
+      FieldDescriptor removedField = instanceFields.removeLast();
       checkState(removedField.getName().equals("elements"));
     }
 
