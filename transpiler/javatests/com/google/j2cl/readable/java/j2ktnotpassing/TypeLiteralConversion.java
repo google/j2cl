@@ -23,7 +23,13 @@ import org.jspecify.annotations.Nullable;
 public class TypeLiteralConversion {
   public interface Simple {}
 
+  public enum SimpleEnum {}
+
   public interface Generic<T extends @Nullable Object> {}
+
+  public static class Recursive<T extends Recursive<T>> {}
+
+  public static class RecursiveSpecialized extends Recursive<RecursiveSpecialized> {}
 
   public Class testSimpleToRaw() {
     return Simple.class;
@@ -95,5 +101,37 @@ public class TypeLiteralConversion {
 
   public Class<?> testPrimitiveArrayToUnboundWildcard() {
     return int[].class;
+  }
+
+  public static Simple testGetSimpleInstance() {
+    return getInstance(Simple.class);
+  }
+
+  public static Integer testGetIntegerInstance() {
+    return getInstance(Integer.class);
+  }
+
+  public static int testGetPrimitiveInstance() {
+    return getInstance(Integer.TYPE);
+  }
+
+  public static String[] testGetArrayInstance() {
+    return getInstance(String[].class);
+  }
+
+  public static SimpleEnum testGetSimpleEnumInstance() {
+    return getInstance(SimpleEnum.class);
+  }
+
+  public static Recursive<?> testGetRecursiveInstance() {
+    return getInstance(Recursive.class);
+  }
+
+  public static RecursiveSpecialized testGetRecursiveSpecializedInstance() {
+    return getInstance(RecursiveSpecialized.class);
+  }
+
+  public static <T extends @Nullable Object> T getInstance(Class<T> clazz) {
+    throw new AssertionError();
   }
 }

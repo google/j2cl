@@ -18,7 +18,9 @@
 package j2ktnotpassing
 
 import javaemul.lang.*
+import java.lang.AssertionError
 import java.lang.Class
+import java.lang.Integer
 import kotlin.Any
 import kotlin.Array
 import kotlin.Int
@@ -26,6 +28,7 @@ import kotlin.IntArray
 import kotlin.Number
 import kotlin.String
 import kotlin.Suppress
+import kotlin.jvm.JvmStatic
 import kotlin.jvm.javaObjectType
 import kotlin.jvm.javaPrimitiveType
 
@@ -102,7 +105,71 @@ open class TypeLiteralConversion {
   return IntArray::class.javaObjectType
  }
 
+ companion object {
+  @JvmStatic
+  fun testGetSimpleInstance(): Simple {
+   return TypeLiteralConversion.getInstance<Simple>(
+    Simple::class.javaObjectType as Class<Simple>,
+   )
+  }
+
+  @JvmStatic
+  fun testGetIntegerInstance(): Int {
+   return TypeLiteralConversion.getInstance<Int>(
+    Int::class.javaObjectType as Class<Int>,
+   )
+  }
+
+  @JvmStatic
+  fun testGetPrimitiveInstance(): Int {
+   return TypeLiteralConversion.getInstance<Int>(
+    Integer.TYPE,
+   )!!.toInt()
+  }
+
+  @JvmStatic
+  fun testGetArrayInstance(): Array<String> {
+   return TypeLiteralConversion.getInstance<Array<String>>(
+    Array::class.javaObjectType as Class<Array<String>>,
+   )
+  }
+
+  @JvmStatic
+  fun testGetSimpleEnumInstance(): SimpleEnum {
+   return TypeLiteralConversion.getInstance<SimpleEnum>(
+    SimpleEnum::class.javaObjectType as Class<SimpleEnum>,
+   )
+  }
+
+  @JvmStatic
+  fun testGetRecursiveInstance(): Recursive<*> {
+   return TypeLiteralConversion.getInstance<Recursive<*>>(
+    Recursive::class.javaObjectType as Class<Recursive<*>>,
+   ) as Recursive<*>
+  }
+
+  @JvmStatic
+  fun testGetRecursiveSpecializedInstance(): RecursiveSpecialized {
+   return TypeLiteralConversion.getInstance<RecursiveSpecialized>(
+    RecursiveSpecialized::class.javaObjectType as Class<RecursiveSpecialized>,
+   )
+  }
+
+  @JvmStatic
+  fun <T> getInstance(clazz: Class<T & Any>): T {
+   throw AssertionError()
+  }
+ }
+
  interface Simple
 
+ enum class SimpleEnum {
+  ;
+ }
+
  interface Generic<T>
+
+ open class Recursive<T: Recursive<T>>
+
+ open class RecursiveSpecialized: Recursive<RecursiveSpecialized>()
 }
