@@ -225,15 +225,22 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
   public static String buildMethodSignature(
       String name, TypeDescriptor... parameterTypeDescriptors) {
-    return buildMethodSignature(name, Arrays.asList(parameterTypeDescriptors));
+    return buildMethodSignature(name, Arrays.asList(parameterTypeDescriptors), false);
   }
 
   private static String buildMethodSignature(
-      String name, List<TypeDescriptor> parameterTypeDescriptors) {
-    return name
-        + parameterTypeDescriptors.stream()
-            .map(MethodDescriptor::getSignatureStringForParameter)
-            .collect(joining(",", "(", ")"));
+      String name, List<TypeDescriptor> parameterTypeDescriptors, boolean isSuspendFunction) {
+    String signature =
+        name
+            + parameterTypeDescriptors.stream()
+                .map(MethodDescriptor::getSignatureStringForParameter)
+                .collect(joining(",", "(", ")"));
+    if (isSuspendFunction) {
+      // Suspend functions are considered to have separate namespace so a suffix is added to
+      // differentiate them from regular functions
+      signature += "#suspend";
+    }
+    return signature;
   }
 
   private static String getSignatureStringForParameter(TypeDescriptor typeDescriptor) {
@@ -771,6 +778,14 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       }
     }
 
+    if (isSuspendFunction()) {
+      // Suspend functions are considered to have separate namespace so a suffix is added to
+      // differentiate them from regular functions. Since they get an implicit Continuation
+      // parameter which becomes part of our signature, the suffix avoids conflicts with a regular
+      // functions that explicitly declare a Continuation typed parameter.
+      suffix += "_$s_";
+    }
+
     Stream<TypeDescriptor> signatureDescriptors = getParameterTypeDescriptors().stream();
     if (!isConstructor() && getOrigin() != MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR) {
       // Constructors and constructor related factories always return the enclosing class type and
@@ -891,7 +906,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
             // for all non-nullable "primitive" types).
             ? convertNonNullableBoxedTypesToPrimitives(getParameterTypeDescriptors())
             : getParameterTypeDescriptors();
-    return buildMethodSignature(getNameApplyingKotlinRenames(), parameterTypeDescriptors);
+    return buildMethodSignature(
+        getNameApplyingKotlinRenames(), parameterTypeDescriptors, isSuspendFunction());
   }
 
   /** Returns the method name but accounts for kotlin's rename of {@code T List.remove(int)}. */
