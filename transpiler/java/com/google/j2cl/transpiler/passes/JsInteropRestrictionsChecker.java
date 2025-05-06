@@ -1106,6 +1106,9 @@ public class JsInteropRestrictionsChecker {
       if (method.getDescriptor().isCustomIsInstanceMethod()) {
         checkCustomIsInstanceMethod(method);
       }
+      if (method.getDescriptor().isSuspendFunction()) {
+        checkSuspendFunction(method);
+      }
     }
 
     if (memberDescriptor.canBeReferencedExternally()) {
@@ -1177,6 +1180,15 @@ public class JsInteropRestrictionsChecker {
         "JsAsync method '%s' should return either 'IThenable' or 'Promise' but returns '%s'.",
         method.getReadableDescription(),
         returnType.getReadableDescription());
+  }
+
+  private void checkSuspendFunction(Method method) {
+    if (method.getDescriptor().getJsInfo().getJsMemberType() != JsMemberType.NONE) {
+      problems.error(
+          method.getSourcePosition(),
+          "Suspend function '%s' cannot have JsInterop annotations.",
+          method.getReadableDescription());
+    }
   }
 
   private void checkCustomIsInstanceMethod(Method method) {
