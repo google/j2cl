@@ -85,41 +85,27 @@ class ClosureTypesGenerator {
 
   /** Returns the Closure type for a type descriptor. */
   private ClosureType getClosureType(TypeDescriptor typeDescriptor) {
+    return switch (typeDescriptor) {
+      case PrimitiveTypeDescriptor descriptor -> getClosureTypeForPrimitive(descriptor);
+      case TypeVariable typeVariable -> getClosureTypeForTypeVariable(typeVariable);
+      case ArrayTypeDescriptor descriptor -> getClosureTypeForArray(descriptor);
+      case UnionTypeDescriptor descriptor -> getClosureTypeForUnion(descriptor);
+      case IntersectionTypeDescriptor descriptor -> getClosureTypeForIntersection(descriptor);
+      case DeclaredTypeDescriptor descriptor -> {
 
-    if (typeDescriptor.isPrimitive()) {
-      return getClosureTypeForPrimitive((PrimitiveTypeDescriptor) typeDescriptor);
-    }
+        // TODO(b/118615488): Surface enum boxed types so that this hack is not needed.
+        descriptor = replaceJsEnumArguments(descriptor);
 
-    if (typeDescriptor instanceof TypeVariable) {
-      return getClosureTypeForTypeVariable((TypeVariable) typeDescriptor);
-    }
-
-    if (typeDescriptor.isArray()) {
-      return getClosureTypeForArray((ArrayTypeDescriptor) typeDescriptor);
-    }
-
-    if (typeDescriptor.isUnion()) {
-      return getClosureTypeForUnion((UnionTypeDescriptor) typeDescriptor);
-    }
-
-    if (typeDescriptor.isIntersection()) {
-      return getClosureTypeForIntersection((IntersectionTypeDescriptor) typeDescriptor);
-    }
-
-    DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
-
-    // TODO(b/118615488): Surface enum boxed types so that this hack is not needed.
-    declaredTypeDescriptor = replaceJsEnumArguments(declaredTypeDescriptor);
-
-    if (declaredTypeDescriptor.isJsFunctionInterface()) {
-      return getClosureTypeForJsFunction(declaredTypeDescriptor);
-    }
-
-    return withNullability(
-        getClosureTypeForDeclaration(
-            declaredTypeDescriptor.getTypeDeclaration(),
-            getClosureTypes(declaredTypeDescriptor.getTypeArgumentDescriptors())),
-        typeDescriptor.isNullable());
+        yield descriptor.isJsFunctionInterface()
+            ? getClosureTypeForJsFunction(descriptor)
+            : withNullability(
+                getClosureTypeForDeclaration(
+                    descriptor.getTypeDeclaration(),
+                    getClosureTypes(descriptor.getTypeArgumentDescriptors())),
+                typeDescriptor.isNullable());
+      }
+      default -> throw new IllegalArgumentException();
+    };
   }
 
   /**
