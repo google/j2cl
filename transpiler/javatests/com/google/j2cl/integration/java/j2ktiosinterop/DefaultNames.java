@@ -76,7 +76,11 @@ public final class DefaultNames {
 
   public void overloadedMethod(String s) {}
 
+  public final int finalIntField = 0;
+
   public int intField;
+
+  public static final int STATIC_FINAL_INT_FIELD = 0;
 
   @SuppressWarnings("NonFinalStaticField")
   public static int staticIntField;

@@ -55,8 +55,7 @@ final class J2ObjCSwiftInteropTest: XCTestCase {
     obj.overloadedMethod(with: 1 as jdouble)
     obj.overloadedMethod(with: "")
 
-    // Not exposed in Swift
-    //obj.intField_ = obj.intField_
+    // Fields are not exposed in Swift
   }
 
   func testSpecialNames() {

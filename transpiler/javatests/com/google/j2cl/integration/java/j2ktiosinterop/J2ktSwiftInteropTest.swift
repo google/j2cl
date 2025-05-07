@@ -57,9 +57,15 @@ final class J2ktSwiftInteropTest: XCTestCase {
     obj.overloadedMethod(with: 1 as jdouble)
     obj.overloadedMethod(with: "")
 
-    obj.intField_ = obj.intField_
-    J2ktiosinteropDefaultNamesCompanion.shared.staticIntField_ =
-      J2ktiosinteropDefaultNamesCompanion.shared.staticIntField_
+    var i: Int32
+
+    i = obj.finalIntField_
+    i = obj.intField_
+    obj.intField_ = i
+
+    i = J2ktiosinteropDefaultNamesCompanion.shared.STATIC_FINAL_INT_FIELD_
+    i = J2ktiosinteropDefaultNamesCompanion.shared.staticIntField_
+    J2ktiosinteropDefaultNamesCompanion.shared.staticIntField_ = i
 
     J2ktiosinteropDefaultNamesCompanion.shared.staticMethod()
     J2ktiosinteropDefaultNamesCompanion.shared.staticIntMethod(with: 1)

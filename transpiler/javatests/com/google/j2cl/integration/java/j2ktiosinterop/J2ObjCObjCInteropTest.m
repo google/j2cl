@@ -55,7 +55,15 @@
   [obj overloadedMethodWithDouble:1];
   [obj overloadedMethodWithNSString:@""];
 
-  obj->intField_ = obj->intField_ + 1;
+  int i;
+
+  i = J2ktiosinteropDefaultNames_get_finalIntField();
+  i = obj->intField_;
+  obj->intField_ = i;
+
+  i = J2ktiosinteropDefaultNames_get_STATIC_FINAL_INT_FIELD();
+  i = J2ktiosinteropDefaultNames_get_staticIntField();
+  J2ktiosinteropDefaultNames_set_staticIntField(i);
 
   J2ktiosinteropDefaultNames_staticMethod();
   J2ktiosinteropDefaultNames_staticIntMethodWithInt_(1);
