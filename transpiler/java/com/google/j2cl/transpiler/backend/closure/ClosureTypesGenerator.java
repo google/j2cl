@@ -171,9 +171,9 @@ class ClosureTypesGenerator {
             environment.getUniqueNameForVariable(typeVariable.toDeclaration()));
 
     return switch (typeVariable.getNullabilityAnnotation()) {
-      // TODO(b/326131100): Uncomment when bug is fixed.
+      // TODO(b/138680583): jscompiler does not support non-nullable templates.
       // case NOT_NULLABLE -> typeVariableClosureType.toNonNullable();
-      // case NULLABLE -> typeVariableClosureType.toNullable();
+      case NULLABLE -> typeVariableClosureType.toNullable();
       default -> typeVariableClosureType;
     };
   }
@@ -240,13 +240,6 @@ class ClosureTypesGenerator {
     TypeDescriptor returnTypeDescriptor = methodDescriptor.getReturnTypeDescriptor();
     ClosureType closureReturnType = getClosureType(returnTypeDescriptor);
 
-    // TODO(b/326131100): Remove hack when bug is fixed and nullability modifier can be emitted for
-    // type variables.
-    if (returnTypeDescriptor.isTypeVariable()
-        && ((TypeVariable) returnTypeDescriptor).isAnnotatedNullable()) {
-      closureReturnType = closureReturnType.toNullable();
-    }
-
     // For suspend functions (transpiled to JS Generators), returns the `Generator` type required by
     // JsCompiler. Otherwise, returns the closure type of the method's return type.
     return methodDescriptor.isSuspendFunction()
@@ -288,14 +281,7 @@ class ClosureTypesGenerator {
             ? ((ArrayTypeDescriptor) parameterTypeDescriptor).getComponentTypeDescriptor()
             : parameterTypeDescriptor;
 
-    // TODO(b/326131100): Remove hack once template nullability issues are fixed.
     ClosureType closureParameterType = getClosureType(parameterTypeDescriptor);
-    if (parameterTypeDescriptor.isTypeVariable()) {
-      if (((TypeVariable) parameterTypeDescriptor).isAnnotatedNullable()) {
-        closureParameterType = closureParameterType.toNullable();
-      }
-    }
-
     return new ClosureFunctionType.Parameter(isJsVarargs, isOptional, closureParameterType);
   }
 

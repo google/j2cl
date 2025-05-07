@@ -28,7 +28,7 @@ class CastGenerics extends j_l_Object {
  /** @protected @nodts */
  constructor() {
   super();
-  /**@type {T} @nodts*/
+  /**@type {?T} @nodts*/
   this.f_field__cast_CastGenerics;
  }
  /** @nodts @template T, E @return {!CastGenerics<T, E>} */
@@ -106,18 +106,18 @@ class CastGenerics extends j_l_Object {
  /** @nodts */
  m_testCastToTypeVariable__void() {
   let o = Integer.$create__int(1);
-  let e = /**@type {E}*/ ($Casts.$to(o, Number));
-  let t = /**@type {T}*/ (o);
+  let e = /**@type {?E}*/ ($Casts.$to(o, Number));
+  let t = /**@type {?T}*/ (o);
   let es = /**@type {Array<E>}*/ ($Arrays.$castTo(o, Number, 1));
   let ts = /**@type {Array<T>}*/ ($Arrays.$castTo(o, j_l_Object, 1));
  }
  /** @nodts @template S, V */
  m_testCastToMethodTypeVariable__void() {
   let o = Integer.$create__int(1);
-  let s = /**@type {S}*/ (o);
+  let s = /**@type {?S}*/ (o);
   let c = /**@type {CastGenerics<S, (Number|number)>}*/ ($Casts.$to(o, CastGenerics));
   c = (/**@type {Array<S>}*/ ($Arrays.$castTo(o, j_l_Object, 1)));
-  c = (/**@type {V}*/ ($Casts.$to(o, Enum)));
+  c = (/**@type {?V}*/ ($Casts.$to(o, Enum)));
  }
  /** @nodts @return {Foo<?string>} */
  m_testCastToRawToGeneric__cast_CastGenerics_Foo__cast_CastGenerics_Foo(/** Foo<*> */ foo) {
@@ -128,7 +128,7 @@ class CastGenerics extends j_l_Object {
  /** @nodts @template EE @return {EE} */
  m_method__java_lang_Object__cast_CastGenerics_Empty1(/** * */ o) {
   if (Empty1.$isInstance(o)) {
-   return /**@type {EE}*/ ($Casts.$to($Casts.$to(o, /**@type {Function}*/ (Empty1)), /**@type {Function}*/ (Empty2)));
+   return /**@type {?EE}*/ ($Casts.$to($Casts.$to(o, /**@type {Function}*/ (Empty1)), /**@type {Function}*/ (Empty2)));
   }
   return null;
  }

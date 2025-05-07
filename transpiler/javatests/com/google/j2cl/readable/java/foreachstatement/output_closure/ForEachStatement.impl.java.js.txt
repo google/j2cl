@@ -89,7 +89,7 @@ class ForEachStatement extends j_l_Object {
  }
  /** @nodts @template T, U, V */
  m_testTypeVariable__void_$p_foreachstatement_ForEachStatement() {
-  let /** U */ iterable = null;
+  let /** ?U */ iterable = null;
   for (let $iterator = (/**@type {!Iterable<?string>}*/ ($Casts.$to(iterable, /**@type {Function}*/ (Iterable)))).m_iterator__java_util_Iterator(); $iterator.m_hasNext__boolean(); ) {
    let s = /**@type {?string}*/ ($Casts.$to($iterator.m_next__java_lang_Object(), j_l_String));
   }
@@ -97,7 +97,7 @@ class ForEachStatement extends j_l_Object {
   for (let $iterator_1 = anotherIterable.m_iterator__java_util_Iterator(); (/**@type {!Iterator<Integer>}*/ ($iterator_1)).m_hasNext__boolean(); ) {
    let s_1 = (/**@type {Integer}*/ ($Casts.$to((/**@type {!Iterator<Integer>}*/ ($iterator_1)).m_next__java_lang_Object(), Integer))).m_intValue__int();
   }
-  let /** V */ integerIterable = null;
+  let /** ?V */ integerIterable = null;
   for (let $iterator_2 = (/**@type {!Iterable<Integer>}*/ ($Casts.$to(integerIterable, /**@type {Function}*/ (Iterable)))).m_iterator__java_util_Iterator(); $iterator_2.m_hasNext__boolean(); ) {
    let i = (/**@type {Integer}*/ ($Casts.$to($iterator_2.m_next__java_lang_Object(), Integer))).m_intValue__int();
   }
