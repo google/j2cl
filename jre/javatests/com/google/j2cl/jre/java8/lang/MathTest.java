@@ -134,6 +134,8 @@ public class MathTest extends TestCase {
     assertEquals(0, Math.floorMod(Integer.MAX_VALUE, Integer.MAX_VALUE));
     assertEquals(0, Math.floorMod(Integer.MIN_VALUE, 1));
     assertEquals(0, Math.floorMod(Integer.MAX_VALUE, 1));
+    assertEquals(Integer.MAX_VALUE - 1, Math.floorMod(Integer.MAX_VALUE - 1, Integer.MAX_VALUE));
+    assertEquals(1, Math.floorMod(Integer.MAX_VALUE, Integer.MAX_VALUE - 1));
 
     try {
       Math.floorMod(1, 0);
@@ -152,6 +154,8 @@ public class MathTest extends TestCase {
     assertEquals(0L, Math.floorMod(Long.MAX_VALUE, Long.MAX_VALUE));
     assertEquals(0L, Math.floorMod(Long.MIN_VALUE, 1L));
     assertEquals(0L, Math.floorMod(Long.MAX_VALUE, 1L));
+    assertEquals(Long.MAX_VALUE - 1L, Math.floorMod(Long.MAX_VALUE - 1L, Long.MAX_VALUE));
+    assertEquals(1L, Math.floorMod(Long.MAX_VALUE, Long.MAX_VALUE - 1L));
 
     try {
       Math.floorMod(1L, 0L);

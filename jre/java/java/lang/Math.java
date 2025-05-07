@@ -137,12 +137,24 @@ public final class Math {
 
   public static int floorMod(int dividend, int divisor) {
     checkCriticalArithmetic(divisor != 0);
-    return ((dividend % divisor) + divisor) % divisor;
+    var mod = dividend % divisor;
+    // Compares if the arguments have different signs and the sign of the result is different than
+    // the sign of divisor (adapted from "Hacker's Delight" overflow test).
+    if (((dividend ^ divisor) & (divisor ^ mod)) < 0) {
+      return mod + divisor;
+    }
+    return mod;
   }
 
   public static long floorMod(long dividend, long divisor) {
     checkCriticalArithmetic(divisor != 0);
-    return ((dividend % divisor) + divisor) % divisor;
+    long mod = dividend % divisor;
+    // Compares if the arguments have different signs and the sign of the result is different than
+    // the sign of divisor (adapted from "Hacker's Delight" overflow test).
+    if (((dividend ^ divisor) & (divisor ^ mod)) < 0) {
+      return mod + divisor;
+    }
+    return mod;
   }
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.hypot")
