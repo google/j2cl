@@ -16,6 +16,7 @@ j2kt_jvm_library(
         ["*.java"],
         exclude = ["J2ktMonitor.java"],
     ),
+    j2kt_j2objc_interop_enabled = False,
     deps = [
         "//jre/java:javaemul_internal_annotations-j2kt-jvm",
     ],

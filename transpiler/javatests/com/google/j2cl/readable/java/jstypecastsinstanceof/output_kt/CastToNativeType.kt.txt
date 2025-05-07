@@ -1,5 +1,4 @@
 // Generated from "jstypecastsinstanceof/CastToNativeType.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -24,15 +23,10 @@ import jsinterop.annotations.JsType
 import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
-import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktJstypecastsinstanceofCastToNativeType", swiftName = "JstypecastsinstanceofCastToNativeType", exact = true)
 open class CastToNativeType {
- @ObjCName("test")
  open fun test() {
   val a: Any = NativeJsType()
   val b: NativeJsType? = a as NativeJsType?
@@ -47,11 +41,9 @@ open class CastToNativeType {
   c = a is Array<*>
  }
 
- @ObjCName("J2ktJstypecastsinstanceofCastToNativeType_NativeJsType", swiftName = "JstypecastsinstanceofCastToNativeType_NativeJsType", exact = true)
  @JsType(namespace = "test.foo", isNative = true)
  open class NativeJsType
 
- @ObjCName("J2ktJstypecastsinstanceofCastToNativeType_NativeObject", swiftName = "JstypecastsinstanceofCastToNativeType_NativeObject", exact = true)
  @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
  open class NativeObject<K, V>
 }

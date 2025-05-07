@@ -1,5 +1,4 @@
 // Generated from "nativeinjection/NativeClass.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -20,23 +19,16 @@ package nativeinjection
 
 import javaemul.lang.*
 import jsinterop.annotations.JsMethod
-import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktNativeinjectionNativeClass", swiftName = "NativeinjectionNativeClass", exact = true)
 open class NativeClass {
- @ObjCName("nativeInstanceMethod")
  @JsMethod
  external open fun nativeInstanceMethod(): String?
 
- @ObjCName("J2ktNativeinjectionNativeClassCompanion", swiftName = "NativeinjectionNativeClassCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("nativeStaticMethod")
   @JsMethod
   external fun nativeStaticMethod(): NativeClass?
 
@@ -45,9 +37,7 @@ open class NativeClass {
   internal external fun notPublicNativeStaticMethod_pp_nativeinjection(): NativeClass?
  }
 
- @ObjCName("J2ktNativeinjectionNativeClass_InnerClass", swiftName = "NativeinjectionNativeClass_InnerClass", exact = true)
  open class InnerClass {
-  @ObjCName("nativeInstanceMethod")
   @JsMethod
   external open fun nativeInstanceMethod(): String?
  }

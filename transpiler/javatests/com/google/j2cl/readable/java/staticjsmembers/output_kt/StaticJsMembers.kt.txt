@@ -1,5 +1,4 @@
 // Generated from "staticjsmembers/StaticJsMembers.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -26,16 +25,11 @@ import jsinterop.annotations.JsType
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Int
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktStaticjsmembersStaticJsMembers", swiftName = "StaticjsmembersStaticJsMembers", exact = true)
 open class StaticJsMembers {
- @ObjCName("test")
  open fun test() {
   StaticJsMembers.f1(1)
   StaticJsMembers.f1(1)
@@ -63,110 +57,73 @@ open class StaticJsMembers {
   Extern()
  }
 
- @ObjCName("J2ktStaticjsmembersStaticJsMembersCompanion", swiftName = "StaticjsmembersStaticJsMembersCompanion", exact = true)
  companion object {
   @JvmField
-  @ObjCName("field1_")
   @JsProperty(name = "field")
   var field1: Int = 0
 
   @JvmField
-  @ObjCName("field2_")
   @JsProperty
   var field2: Int = 0
 
   @JvmStatic
-  @ObjCName("f1")
   @JsMethod(name = "fun")
-  fun f1(
-   @ObjCName("withInt", swiftName = "with") a: Int
-  ) {}
+  fun f1(a: Int) {}
 
   @JvmStatic
-  @ObjCName("f2")
   @JsMethod
-  fun f2(
-   @ObjCName("withInt", swiftName = "with") a: Int
-  ) {}
+  fun f2(a: Int) {}
 
   @JvmStatic
-  @ObjCName("f3")
   @JsMethod(name = "Math.floor", namespace = JsPackage.GLOBAL)
-  external fun f3(
-   @ObjCName("withDouble", swiftName = "with") a: Double
-  )
+  external fun f3(a: Double)
 
   @JvmStatic
-  @ObjCName("f4")
   @JsMethod(name = "isFinite", namespace = JsPackage.GLOBAL)
-  external fun f4(
-   @ObjCName("withDouble", swiftName = "with") a: Double
-  ): Boolean
+  external fun f4(a: Double): Boolean
 
   @JvmStatic
-  @ObjCName("f5")
   @JsMethod(name = "baz", namespace = "foo.Bar")
   external fun f5(): Boolean
 
   @JvmStatic
-  @ObjCName("f6")
   @JsMethod(name = "baz", namespace = "foo.Baz")
   external fun f6(): Boolean
 
   @JvmStatic
-  @ObjCName("max")
   @JsMethod(name = "Math.max", namespace = JsPackage.GLOBAL)
-  external fun max(
-   @ObjCName("withInt", swiftName = "with") a: Int,
-   @ObjCName("withInt", swiftName = "with") b: Int
-  ): Int
+  external fun max(a: Int, b: Int): Int
 
   @JvmStatic
-  @ObjCName("max")
   @JsMethod(name = "Math.max", namespace = JsPackage.GLOBAL)
-  external fun max(
-   @ObjCName("withInt", swiftName = "with") a: Int,
-   @ObjCName("withInt", swiftName = "with") b: Int,
-   @ObjCName("withInt", swiftName = "with") c: Int
-  ): Int
+  external fun max(a: Int, b: Int, c: Int): Int
 
   @JvmStatic
-  @ObjCName("max")
   @JsMethod(name = "Math.max", namespace = JsPackage.GLOBAL)
-  external fun max(
-   @ObjCName("withDouble", swiftName = "with") a: Double,
-   @ObjCName("withDouble", swiftName = "with") b: Double
-  ): Double
+  external fun max(a: Double, b: Double): Double
  }
 
- @ObjCName("J2ktStaticjsmembersStaticJsMembers_Native", swiftName = "StaticjsmembersStaticJsMembers_Native", exact = true)
  @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
  open class Native {
-  @ObjCName("J2ktStaticjsmembersStaticJsMembers_NativeCompanion", swiftName = "StaticjsmembersStaticJsMembers_NativeCompanion", exact = true)
   companion object {
    @JvmField
-   @ObjCName("field3_")
    @JsProperty(name = "Math.PI", namespace = JsPackage.GLOBAL)
    var field3: Int = 0
 
    @JvmField
-   @ObjCName("field4_")
    @JsProperty(name = "top", namespace = JsPackage.GLOBAL)
    var field4: Int = 0
 
    @JvmField
-   @ObjCName("field5_")
    @JsProperty(name = "field", namespace = "foo.Bar")
    var field5: Int = 0
 
    @JvmField
-   @ObjCName("field6_")
    @JsProperty(name = "window.top", namespace = JsPackage.GLOBAL)
    var field6: Int = 0
   }
  }
 
- @ObjCName("J2ktStaticjsmembersStaticJsMembers_Extern", swiftName = "StaticjsmembersStaticJsMembers_Extern", exact = true)
  @JsType(name = "window.Object", namespace = JsPackage.GLOBAL, isNative = true)
  open class Extern
 }

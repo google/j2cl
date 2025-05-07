@@ -1,5 +1,4 @@
 // Generated from "jsfunction/JsFunctionOptimization.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -23,19 +22,12 @@ import jsinterop.annotations.JsFunction
 import kotlin.Any
 import kotlin.Array
 import kotlin.Int
-import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
 import kotlin.arrayOf
-import kotlin.experimental.ExperimentalObjCName
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktJsfunctionJsFunctionOptimization", swiftName = "JsfunctionJsFunctionOptimization", exact = true)
 open class JsFunctionOptimization {
- @ObjCName("main")
- open fun main(
-  @ObjCName("withInt", swiftName = "with") r: Int
- ) {
+ open fun main(r: Int) {
   object : Any() {
    internal fun m_pp_jsfunction() {
     val x: String = ""
@@ -97,16 +89,11 @@ open class JsFunctionOptimization {
   )
  }
 
- @ObjCName("J2ktJsfunctionJsFunctionOptimization_F", swiftName = "JsfunctionJsFunctionOptimization_F", exact = true)
  @JsFunction
  fun interface F {
-  @ObjCName("m")
-  fun m(
-   @ObjCName("withNSString", swiftName = "with") s: String?
-  ): String?
+  fun m(s: String?): String?
  }
 
- @ObjCName("J2ktJsfunctionJsFunctionOptimization_Holder", swiftName = "JsfunctionJsFunctionOptimization_Holder", exact = true)
  open inner class Holder<T> {
   internal constructor(value: T)
 

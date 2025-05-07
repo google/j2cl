@@ -1,5 +1,4 @@
 // Generated from "markimplementornativetypes/Foo.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -20,20 +19,13 @@ package markimplementornativetypes
 
 import javaemul.lang.*
 import jsinterop.annotations.JsType
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktMarkimplementornativetypesMyNativeInterface", swiftName = "MarkimplementornativetypesMyNativeInterface", exact = true)
 @JsType(namespace = "test.foo", isNative = true)
 interface MyNativeInterface
 
-@ObjCName("J2ktMarkimplementornativetypesRegularInterface", swiftName = "MarkimplementornativetypesRegularInterface", exact = true)
 interface RegularInterface
 
-@ObjCName("J2ktMarkimplementornativetypesSubNativeInterface", swiftName = "MarkimplementornativetypesSubNativeInterface", exact = true)
 interface SubNativeInterface: MyNativeInterface, RegularInterface
 
-@ObjCName("J2ktMarkimplementornativetypesFoo", swiftName = "MarkimplementornativetypesFoo", exact = true)
 open class Foo: MyNativeInterface, RegularInterface

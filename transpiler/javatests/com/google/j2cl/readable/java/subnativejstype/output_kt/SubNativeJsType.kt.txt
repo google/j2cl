@@ -1,5 +1,4 @@
 // Generated from "subnativejstype/SubNativeJsType.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -22,25 +21,16 @@ import javaemul.lang.*
 import jsinterop.annotations.JsConstructor
 import jsinterop.annotations.JsType
 import kotlin.Int
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktSubnativejstypeMyNativeJsType", swiftName = "SubnativejstypeMyNativeJsType", exact = true)
 @JsType(namespace = "test.foo", isNative = true)
 open class MyNativeJsType {
- constructor(
-  @ObjCName("Int") x: Int
- )
+ constructor(x: Int)
 }
 
-@ObjCName("J2ktSubnativejstypeSubNativeJsType", swiftName = "SubnativejstypeSubNativeJsType", exact = true)
 open class SubNativeJsType: MyNativeJsType {
  @JsConstructor
- constructor(
-  @ObjCName("Int") x: Int
- ): super(
+ constructor(x: Int): super(
   x + 1,
  )
 

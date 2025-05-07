@@ -13,6 +13,7 @@ package(
 j2kt_jvm_library(
     name = "readable-j2kt-jvm",
     srcs = glob(["*.java"]),
+    j2kt_j2objc_interop_enabled = False,
     deps = [
         "//jre/java:javaemul_internal_annotations-j2kt-jvm",
         "//third_party:jsinterop-annotations-j2kt-jvm",

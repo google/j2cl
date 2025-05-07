@@ -1,5 +1,4 @@
 // Generated from "jsoverlay/Main.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -25,17 +24,12 @@ import jsinterop.annotations.JsPackage
 import jsinterop.annotations.JsType
 import kotlin.Any
 import kotlin.Int
-import kotlin.OptIn
 import kotlin.String
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktJsoverlayMain", swiftName = "JsoverlayMain", exact = true)
 open class Main {
- @ObjCName("test")
  open fun test() {
   val n: NativeJsTypeWithOverlay = NativeJsTypeWithOverlay()
   n.callM()
@@ -50,18 +44,13 @@ open class Main {
   val b: String = NativeJsTypeWithOverlayConstant.STRING_COMPILE_TIME_CONSTANT + NativeJsTypeInterfaceWithOverlay.staticField
  }
 
- @ObjCName("testOverlayInterface")
- open fun testOverlayInterface(
-  @ObjCName("withJsoverlayMain_NativeJsTypeInterfaceWithOverlay", swiftName = "with") foo: NativeJsTypeInterfaceWithOverlay?
- ) {
+ open fun testOverlayInterface(foo: NativeJsTypeInterfaceWithOverlay?) {
   foo!!.m()
   foo!!.callM()
  }
 
- @ObjCName("J2ktJsoverlayMainCompanion", swiftName = "JsoverlayMainCompanion", exact = true)
  companion object {
   @JvmStatic
-  @ObjCName("testOverlayInterfaceImpl")
   fun testOverlayInterfaceImpl() {
    val foo: NativeJsTypeInterfaceWithOverlay = NativeJsTypeInterfaceWithOverlayImpl()
    foo.m()
@@ -69,41 +58,32 @@ open class Main {
   }
  }
 
- @ObjCName("J2ktJsoverlayMain_NativeJsTypeInterfaceWithOverlay", swiftName = "JsoverlayMain_NativeJsTypeInterfaceWithOverlay", exact = true)
  @JsType(namespace = "test.foo", isNative = true)
  fun interface NativeJsTypeInterfaceWithOverlay {
-  @ObjCName("m")
   fun m(): Int
 
-  @ObjCName("callM")
   @JsOverlay
   fun callM(): Int {
    return this@NativeJsTypeInterfaceWithOverlay.m()
   }
 
-  @ObjCName("J2ktJsoverlayMain_NativeJsTypeInterfaceWithOverlayCompanion", swiftName = "JsoverlayMain_NativeJsTypeInterfaceWithOverlayCompanion", exact = true)
   companion object {
    @JvmField
-   @ObjCName("staticField_")
    @JsOverlay
    val staticField: Any? = Any()
   }
  }
 
- @ObjCName("J2ktJsoverlayMain_NativeJsTypeInterfaceWithOverlayImpl", swiftName = "JsoverlayMain_NativeJsTypeInterfaceWithOverlayImpl", exact = true)
  open class NativeJsTypeInterfaceWithOverlayImpl internal constructor(): NativeJsTypeInterfaceWithOverlay {
   override fun m(): Int {
    return 0
   }
  }
 
- @ObjCName("J2ktJsoverlayMain_NativeJsTypeWithOverlay", swiftName = "JsoverlayMain_NativeJsTypeWithOverlay", exact = true)
  @JsType(namespace = "test.foo", isNative = true)
  open class NativeJsTypeWithOverlay {
-  @ObjCName("m")
   external open fun m(): Int
 
-  @ObjCName("callM")
   @JsOverlay
   fun callM(): Int {
    return this.m()
@@ -119,7 +99,6 @@ open class Main {
    return 1
   }
 
-  @ObjCName("overlayWithJsFunction")
   @JsOverlay
   fun overlayWithJsFunction() {
    object : Intf {
@@ -127,27 +106,21 @@ open class Main {
    }.run()
   }
 
-  @ObjCName("overlay")
   @JsOverlay
   fun overlay() {}
 
-  @ObjCName("J2ktJsoverlayMain_NativeJsTypeWithOverlayCompanion", swiftName = "JsoverlayMain_NativeJsTypeWithOverlayCompanion", exact = true)
   companion object {
    @JvmField
-   @ObjCName("nonJsOverlayField_")
    var nonJsOverlayField: Int = 0
 
    @JvmField
-   @ObjCName("staticField_")
    @JsOverlay
    var staticField: Any? = Any()
 
    @JvmStatic
-   @ObjCName("n")
    external fun n()
 
    @JvmStatic
-   @ObjCName("fun")
    @JsOverlay
    fun `fun`(): Int {
     return 1
@@ -160,60 +133,39 @@ open class Main {
    }
 
    @JvmStatic
-   @ObjCName("varargs")
    @JsOverlay
-   fun varargs(
-    vararg @ObjCName("withIntArray") a: Int
-   ): Int {
+   fun varargs(vararg a: Int): Int {
     return a!![0]
    }
 
    @JvmStatic
-   @ObjCName("overlay")
    @JsOverlay
-   fun overlay(
-    @ObjCName("withJsoverlayMain_NativeJsTypeWithOverlay", swiftName = "with") o: NativeJsTypeWithOverlay?
-   ) {}
+   fun overlay(o: NativeJsTypeWithOverlay?) {}
   }
  }
 
- @ObjCName("J2ktJsoverlayMain_NativeJsTypeWithOverlayConstant", swiftName = "JsoverlayMain_NativeJsTypeWithOverlayConstant", exact = true)
  @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
  open class NativeJsTypeWithOverlayConstant internal constructor() {
-  @ObjCName("J2ktJsoverlayMain_NativeJsTypeWithOverlayConstantCompanion", swiftName = "JsoverlayMain_NativeJsTypeWithOverlayConstantCompanion", exact = true)
   companion object {
-   @ObjCName("COMPILE_TIME_CONSTANT_")
    @JsOverlay
    const val COMPILE_TIME_CONSTANT: Int = 10
 
-   @ObjCName("STRING_COMPILE_TIME_CONSTANT_")
    @JsOverlay
    const val STRING_COMPILE_TIME_CONSTANT: String = "10"
   }
  }
 
- @ObjCName("J2ktJsoverlayMain_Intf", swiftName = "JsoverlayMain_Intf", exact = true)
  @JsFunction
  fun interface Intf {
-  @ObjCName("run")
   fun run()
  }
 }
 
-@ObjCName("J2ktJsoverlayParameterizedNativeInterface", swiftName = "JsoverlayParameterizedNativeInterface", exact = true)
 @JsType(name = "?", namespace = JsPackage.GLOBAL, isNative = true)
 interface ParameterizedNativeInterface<T> {
- @ObjCName("shadowsTypeVariable")
  @JsOverlay
- fun <T_1, S> shadowsTypeVariable(
-  @ObjCName("withId") param1: T_1,
-  @ObjCName("withId") param2: S
- ) {}
+ fun <T_1, S> shadowsTypeVariable(param1: T_1, param2: S) {}
 
- @ObjCName("shadowsTypeVariable")
  @JsOverlay
- fun <T_1, S> shadowsTypeVariable(
-  @ObjCName("withId") param1: T_1,
-  @ObjCName("withInt", swiftName = "with") param2: Int
- ) {}
+ fun <T_1, S> shadowsTypeVariable(param1: T_1, param2: Int) {}
 }
