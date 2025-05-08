@@ -119,16 +119,17 @@ class Util {
    * @public
    */
   static $extractClassName(ctor) {
-    if (jre.classMetadata == 'SIMPLE') {
+    if (Util.$getDefine('jre.classMetadata') == 'SIMPLE') {
       return ctor.prototype.$$classMetadata[0];
-    } else if (jre.classMetadata == 'STRIPPED') {
+    } else if (Util.$getDefine('jre.classMetadata') == 'STRIPPED') {
       if (goog.DEBUG) {
         return ctor.prototype.$$classMetadata[0] + '_' +
             Util.$getGeneratedClassName_(ctor);
       }
       return Util.$getGeneratedClassName_(ctor);
     } else {
-      throw new Error('Incorrect value: ' + jre.classMetadata);
+      throw new Error(
+          'Incorrect value: ' + Util.$getDefine('jre.classMetadata'));
     }
   }
 
@@ -138,16 +139,17 @@ class Util {
    * @public
    */
   static $extractPrimitiveShortName(ctor) {
-    if (jre.classMetadata == 'SIMPLE') {
+    if (Util.$getDefine('jre.classMetadata') == 'SIMPLE') {
       return ctor.prototype.$$classMetadata[2];
-    } else if (jre.classMetadata == 'STRIPPED') {
+    } else if (Util.$getDefine('jre.classMetadata') == 'STRIPPED') {
       if (goog.DEBUG) {
         return ctor.prototype.$$classMetadata[2] + '_' +
             Util.$getGeneratedClassName_(ctor);
       }
       return Util.$getGeneratedClassName_(ctor);
     } else {
-      throw new Error('Incorrect value: ' + jre.classMetadata);
+      throw new Error(
+          'Incorrect value: ' + Util.$getDefine('jre.classMetadata'));
     }
   }
 
@@ -182,12 +184,13 @@ class Util {
    * @public
    */
   static $extractClassType(ctor) {
-    if (jre.classMetadata == 'SIMPLE') {
+    if (Util.$getDefine('jre.classMetadata') == 'SIMPLE') {
       return ctor.prototype.$$classMetadata[1];
-    } else if (jre.classMetadata == 'STRIPPED') {
+    } else if (Util.$getDefine('jre.classMetadata') == 'STRIPPED') {
       return Util.TYPE_CLASS;
     } else {
-      throw new Error('Incorrect value: ' + jre.classMetadata);
+      throw new Error(
+          'Incorrect value: ' + Util.$getDefine('jre.classMetadata'));
     }
   }
 

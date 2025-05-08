@@ -138,8 +138,4 @@ if (!COMPILED || goog.DEBUG) {
 exports = {
   addSystemPropertyFromGoogDefine,
   getSystemProperty,
-  classMetadata,
-  checkedMode,
-  checks,
-  logging,
 };
