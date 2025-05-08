@@ -116,6 +116,13 @@ public final class J2clCommandLineRunner extends CommandLineTool {
       hidden = true)
   boolean enableJSpecifySupport = false;
 
+  @Option(
+      name = "-javacOptions",
+      metaVar = "<option>",
+      usage = "Options to pass to Javac.",
+      hidden = true)
+  List<String> javacOptions = new ArrayList<>();
+
   @Option(name = "-kotlincOptions", hidden = true)
   List<String> kotlincOptions = new ArrayList<>();
 
@@ -206,6 +213,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
         .setWasmEntryPointStrings(wasmEntryPoints)
         .setDefinesForWasm(definesForWasm)
         .setNullMarkedSupported(this.enableJSpecifySupport)
+        .setJavacOptions(javacOptions)
         .setKotlincOptions(kotlincOptions)
         .setForbiddenAnnotations(forbiddenAnnotations)
         .setObjCNamePrefix("J2kt")

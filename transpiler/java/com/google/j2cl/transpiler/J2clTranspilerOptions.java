@@ -100,6 +100,8 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
 
     public abstract Builder setNullMarkedSupported(boolean isNullMarkedSupported);
 
+    public abstract Builder setJavacOptions(List<String> javacOptions);
+
     public abstract Builder setKotlincOptions(List<String> kotlincOptions);
 
     public abstract Builder setForbiddenAnnotations(List<String> forbiddenAnnotations);

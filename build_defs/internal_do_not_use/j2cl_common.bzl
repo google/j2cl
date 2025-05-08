@@ -89,6 +89,7 @@ def _compile(
             backend,
             internal_transpiler_flags,
             kt_common_srcs,
+            javac_opts,
             # Forcefully enable IR serialization. J2CL only needs this to have
             # Kotlinc deserialize IR from dependencies; we do not actually emit
             # any serialized IR (that all happens on the JVM side).
@@ -289,6 +290,7 @@ def _j2cl_transpile(
         backend,
         internal_transpiler_flags,
         kt_common_srcs,
+        javac_opts,
         kotlincopts):
     """ Takes Java provider and translates it into Closure style JS in a zip bundle."""
 
@@ -317,6 +319,15 @@ def _j2cl_transpile(
     args.add_joined("-classpath", classpath, join_with = ctx.configuration.host_path_separator)
     args.add_joined("-directdeps", direct_deps, join_with = ctx.configuration.host_path_separator)
     args.add_all("-system", jdk_system, expand_directories = False)
+
+    # TODO(b/416084067): Support Javac options with an allowlist.
+    # Forward necessary options to invoke javac in the transpiler.
+    for i in range(len(javac_opts)):
+        # We currently only support separated ["-opt", "val"]. We do not support ["-opt=val"] or
+        # ["-opt val"].
+        if javac_opts[i] == "--patch-module":
+            args.add("-javacOptions", javac_opts[i])
+            args.add("-javacOptions", javac_opts[i + 1])
 
     # Explicitly format this as Bazel target labels can start with a @, which
     # can be misinterpreted as a flag file to load.

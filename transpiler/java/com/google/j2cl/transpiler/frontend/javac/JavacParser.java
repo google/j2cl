@@ -78,26 +78,13 @@ public class JavacParser {
       List<File> searchpath = options.getClasspaths().stream().map(File::new).collect(toList());
       fileManager.setLocation(StandardLocation.PLATFORM_CLASS_PATH, searchpath);
       fileManager.setLocation(StandardLocation.CLASS_PATH, searchpath);
-      List<String> javacOptions =
-          // If getSystem is empty, we are compiling the JRE. In that case, we must pass javac opts
-          // to allow us to override the JRE. Otherwise, this specifies the directory where our
-          // version of the JRE is.
-          options.getSystem().isEmpty()
-              ? ImmutableList.of(
-                  // Allow overwriting classes in the JRE module
-                  "--patch-module",
-                  "java.base=.",
-                  // Allow JRE classes to depend on jsinterop annotations (in the unnamed module)
-                  "--add-reads",
-                  "java.base=ALL-UNNAMED")
-              : ImmutableList.of("--system", options.getSystem());
       JavacTaskImpl task =
           (JavacTaskImpl)
               compiler.getTask(
                   null,
                   fileManager,
                   diagnostics,
-                  javacOptions,
+                  getJavacOptions(options),
                   null,
                   fileManager.getJavaFileObjectsFromFiles(
                       targetPathBySourcePath.keySet().stream().map(File::new).collect(toList())));
@@ -120,6 +107,23 @@ public class JavacParser {
       problems.fatal(FatalError.CANNOT_OPEN_FILE, e.getMessage());
       return null;
     }
+  }
+
+  private static ImmutableList<String> getJavacOptions(FrontendOptions options) {
+    var javacOptions = ImmutableList.<String>builder();
+    if (!options.getSystem().isEmpty()) {
+      // getSystem is provided which specifies the location of our JRE.
+      javacOptions.add("--system").add(options.getSystem());
+    }
+
+    return javacOptions
+        // Allow JRE classes to depend on internal annotations (in the unnamed module). This is
+        // needed for both JRE and non-JRE compilation; some JRE methods are annotated with
+        // internal annotations which are then read by some backends.
+        .add("--add-reads")
+        .add("java.base=ALL-UNNAMED")
+        .addAll(options.getJavacOptions())
+        .build();
   }
 
   private void reportErrors(

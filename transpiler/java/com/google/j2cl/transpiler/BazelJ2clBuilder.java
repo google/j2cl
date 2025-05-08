@@ -131,6 +131,13 @@ final class BazelJ2clBuilder extends BazelWorker {
       hidden = true)
   Backend backend = Backend.CLOSURE;
 
+  @Option(
+      name = "-javacOptions",
+      metaVar = "<option>",
+      usage = "Options to pass to Javac.",
+      hidden = true)
+  List<String> javacOptions = new ArrayList<>();
+
   @Option(name = "-kotlincOptions", hidden = true)
   List<String> kotlincOptions = new ArrayList<>();
 
@@ -231,6 +238,7 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setWasmEntryPointStrings(this.wasmEntryPoints)
         .setDefinesForWasm(definesForWasm)
         .setNullMarkedSupported(this.enableJSpecifySupport)
+        .setJavacOptions(javacOptions)
         .setKotlincOptions(kotlincOptions)
         .setForbiddenAnnotations(forbiddenAnnotations)
         .setObjCNamePrefix(objCNamePrefix)
