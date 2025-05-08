@@ -30,6 +30,12 @@ bazel_dep(
     version = "1.0.0",
 )
 
+bazel_dep(
+    name = "rules_shell",
+    version = "0.4.1",
+    dev_dependency = True,
+)
+
 # Works around https://github.com/bazelbuild/rules_python/issues/1169
 bazel_dep(
     name = "rules_python",
