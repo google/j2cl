@@ -61,7 +61,23 @@ public class SwitchStatement {
       default:
         return;
     }
+
+    // Switch with compile-time constants.
+    short s = 1;
+    switch (s) {
+      case (short) 1L:
+        s++;
+        break;
+      case CONST:
+        s++;
+        break;
+      case CONST * 4:
+        s++;
+        break;
+    }
   }
+
+  static final short CONST = 3;
 
   @SuppressWarnings("unused")
   private static void testSwitchVariableDeclarations() {

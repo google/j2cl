@@ -8,6 +8,7 @@ let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreco
 let Numbers = goog.forwardDeclare('switchstatement.Numbers$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 
 class SwitchStatement extends j_l_Object {
  /** @protected @nodts */
@@ -57,6 +58,18 @@ class SwitchStatement extends j_l_Object {
     break;
    default:
     return;
+  }
+  let s = 1;
+  switch (s) {
+   case 1:
+    s = $Primitives.narrowIntToShort(s + 1 | 0);
+    break;
+   case 3:
+    s = $Primitives.narrowIntToShort(s + 1 | 0);
+    break;
+   case 12:
+    s = $Primitives.narrowIntToShort(s + 1 | 0);
+    break;
   }
  }
  /** @nodts */
@@ -482,8 +495,11 @@ class SwitchStatement extends j_l_Object {
   Numbers = goog.module.get('switchstatement.Numbers$impl');
   $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
   $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+  $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
  }
 }
+/**@const {number} @nodts*/
+SwitchStatement.f_CONST__switchstatement_SwitchStatement = 3;
 $Util.$setClassMetadata(SwitchStatement, 'switchstatement.SwitchStatement');
 
 exports = SwitchStatement;

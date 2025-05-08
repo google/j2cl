@@ -61,6 +61,19 @@ open class SwitchStatement {
     return
    }
   }
+  var s: Short = 1.toShort()
+  when (s) {
+   1.toShort() -> {
+    s = (s.toInt() + 1.toShort().toInt()).toShort()
+   }
+   3.toShort() -> {
+    s = (s.toInt() + 1.toShort().toInt()).toShort()
+   }
+   12.toShort() -> {
+    s = (s.toInt() + 1.toShort().toInt()).toShort()
+   }
+   else -> {}
+  }
  }
 
  private fun testCaseExpressionTypes(ch: Char, i: Int, b: Byte, s: Short) {
@@ -510,6 +523,8 @@ open class SwitchStatement {
  private fun foo(i: Int) {}
 
  companion object {
+  internal const val CONST_pp_switchstatement: Short = 3.toShort()
+
   @JvmStatic
   private fun testSwitchVariableDeclarations() {
    var i: Int = 0
