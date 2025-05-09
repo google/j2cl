@@ -30,6 +30,10 @@ open class NullabilityConversion {
 
  interface Generic<T: Parent?>
 
+ interface ParentNullableBound<T>
+
+ interface ChildNonNullBounds<T: Any>: ParentNullableBound<T>
+
  fun interface Consumer<T: Parent?> {
   fun set(t: T)
  }
@@ -803,5 +807,7 @@ open class NullabilityConversion {
 
    abstract class ExceptionNullable2: RuntimeException(), Supplier<Child?>
   }
+
+  open class Raw
  }
 }

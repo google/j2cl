@@ -27,6 +27,10 @@ public class NullabilityConversion {
 
   public interface Generic<T extends @Nullable Parent> {}
 
+  public interface ParentNullableBound<T extends @Nullable Object> {}
+
+  public interface ChildNonNullBounds<T extends Object> extends ParentNullableBound<T> {}
+
   public interface Consumer<T extends @Nullable Parent> {
     void set(T t);
   }
@@ -705,6 +709,13 @@ public class NullabilityConversion {
           return e.get();
         }
       }
+    }
+
+    public static class Raw {
+      // TODO(b/416748599): Uncomment when fixed.
+      // public static ParentNullableBound nonNullToNullable(ChildNonNullBounds x) {
+      //   return x;
+      // }
     }
   }
 }

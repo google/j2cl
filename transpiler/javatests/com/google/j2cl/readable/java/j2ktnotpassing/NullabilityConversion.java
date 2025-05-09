@@ -24,6 +24,12 @@ public class NullabilityConversion {
 
   public interface Child extends Parent {}
 
+  public interface Generic<T extends @Nullable Parent> {}
+
+  public interface ParentNullableBound<T extends @Nullable Object> {}
+
+  public interface ChildNonNullBounds<T extends Object> extends ParentNullableBound<T> {}
+
   public interface Supplier<T extends @Nullable Child> {
     T get();
   }
@@ -44,6 +50,12 @@ public class NullabilityConversion {
           // TODO(b/361769898): Missing cast.
           return e.get();
         }
+      }
+    }
+
+    public static class Raw {
+      public static ParentNullableBound nonNullToNullable(ChildNonNullBounds x) {
+        return x;
       }
     }
   }

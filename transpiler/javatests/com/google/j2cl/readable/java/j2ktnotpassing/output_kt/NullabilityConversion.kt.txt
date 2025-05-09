@@ -19,6 +19,7 @@ package j2ktnotpassing
 
 import javaemul.lang.*
 import java.lang.RuntimeException
+import kotlin.Any
 import kotlin.Suppress
 import kotlin.jvm.JvmStatic
 
@@ -26,6 +27,12 @@ open class NullabilityConversion {
  interface Parent
 
  interface Child: Parent
+
+ interface Generic<T: Parent?>
+
+ interface ParentNullableBound<T>
+
+ interface ChildNonNullBounds<T: Any>: ParentNullableBound<T>
 
  fun interface Supplier<T: Child?> {
   fun get(): T
@@ -49,6 +56,15 @@ open class NullabilityConversion {
    abstract class ExceptionNonNull1: RuntimeException(), Supplier<Child>
 
    abstract class ExceptionNullable1: RuntimeException(), Supplier<Child?>
+  }
+
+  open class Raw {
+   companion object {
+    @JvmStatic
+    fun nonNullToNullable(x: ChildNonNullBounds<Any>): ParentNullableBound<Any?> {
+     return x
+    }
+   }
   }
  }
 }
