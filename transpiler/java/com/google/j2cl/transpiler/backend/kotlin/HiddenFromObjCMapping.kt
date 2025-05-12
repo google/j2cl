@@ -73,6 +73,7 @@ internal class HiddenFromObjCMapping(
     }
 
   companion object {
-    private val HIDDEN_FROM_OBJC_TYPE_NAMES = setOf("java.lang.Appendable")
+    private val HIDDEN_FROM_OBJC_TYPE_NAMES =
+      setOf("java.lang.Appendable", "org.joda.time.DateTime")
   }
 }
