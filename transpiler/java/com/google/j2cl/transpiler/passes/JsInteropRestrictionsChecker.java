@@ -872,19 +872,30 @@ public class JsInteropRestrictionsChecker {
                 || switchConstruct.hasDefaultCase()) {
               return;
             }
-            String message = "Switch on native JsEnum '%s' should have an explicit default branch.";
-            if (switchConstruct instanceof SwitchStatement) {
-              // TODO(b/395953418): Elevate this to an error.
-              problems.warning(
-                  switchConstruct.getSourcePosition(),
-                  message,
-                  switchOnType.getReadableDescription());
-            } else {
-              problems.error(
-                  switchConstruct.getSourcePosition(),
-                  message,
-                  switchOnType.getReadableDescription());
-            }
+
+            String message =
+                "Switch on native JsEnum '%s' should have an explicit default branch. %s";
+            String suggestedChange =
+                switch (switchConstruct) {
+                  case SwitchExpression unused ->
+                      """
+                      Add a default branch like:
+                        // Present for potential version skew with native JsEnums.
+                        default -> ...\
+                      """;
+                  case SwitchStatement unused ->
+                      """
+                      Add a default branch like:
+                        default: // Present for potential version skew with native JsEnums.
+                          ...\
+                      """;
+                  default -> throw new AssertionError();
+                };
+            problems.error(
+                switchConstruct.getSourcePosition(),
+                message,
+                switchOnType.getReadableDescription(),
+                suggestedChange);
           }
         });
   }

@@ -2790,8 +2790,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
   }
 
   public void testJsEnumSwitchStatementFails() {
-    // TODO(b/395953418): This will eventually become an error and fail compilation.
-    assertTranspileSucceeds(
+    assertTranspileFails(
             "test.Main",
             """
             import jsinterop.annotations.*;
@@ -2826,15 +2825,31 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               }
             }
             """)
-        .assertWarningsWithSourcePosition(
-            "Warning:Main.java:6: Switch on native JsEnum 'NativeEnum' should have an explicit"
-                + " default branch.",
-            "Warning:Main.java:11: Switch on native JsEnum 'NativeEnum' should have an explicit"
-                + " default branch.",
-            "Warning:Main.java:15: Switch on native JsEnum 'NativeEnum' should have an explicit"
-                + " default branch.",
-            "Warning:Main.java:20: Switch on native JsEnum 'NativeEnum' should have an explicit"
-                + " default branch.");
+        .assertErrorsWithSourcePosition(
+            """
+            Error:Main.java:6: Switch on native JsEnum 'NativeEnum' should have an explicit \
+            default branch. Add a default branch like:
+              default: // Present for potential version skew with native JsEnums.
+                ...\
+            """,
+            """
+            Error:Main.java:11: Switch on native JsEnum 'NativeEnum' should have an explicit \
+            default branch. Add a default branch like:
+              default: // Present for potential version skew with native JsEnums.
+                ...\
+            """,
+            """
+            Error:Main.java:15: Switch on native JsEnum 'NativeEnum' should have an explicit \
+            default branch. Add a default branch like:
+              default: // Present for potential version skew with native JsEnums.
+                ...\
+            """,
+            """
+            Error:Main.java:20: Switch on native JsEnum 'NativeEnum' should have an explicit \
+            default branch. Add a default branch like:
+              default: // Present for potential version skew with native JsEnums.
+                ...\
+            """);
   }
 
   public void testJsEnumSwitchExpressionSucceeds() {
@@ -2899,12 +2914,24 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             }
             """)
         .assertErrorsWithSourcePosition(
-            "Error:Main.java:7: Switch on native JsEnum 'NativeEnum' should have an explicit"
-                + " default branch.",
-            "Error:Main.java:10: Switch on native JsEnum 'NativeEnum' should have an explicit"
-                + " default branch.",
-            "Error:Main.java:13: Switch on native JsEnum 'NativeEnum' should have an explicit"
-                + " default branch.");
+            """
+            Error:Main.java:7: Switch on native JsEnum 'NativeEnum' should have an explicit \
+            default branch. Add a default branch like:
+              // Present for potential version skew with native JsEnums.
+              default -> ...\
+            """,
+            """
+            Error:Main.java:10: Switch on native JsEnum 'NativeEnum' should have an explicit \
+            default branch. Add a default branch like:
+              // Present for potential version skew with native JsEnums.
+              default -> ...\
+            """,
+            """
+            Error:Main.java:13: Switch on native JsEnum 'NativeEnum' should have an explicit \
+            default branch. Add a default branch like:
+              // Present for potential version skew with native JsEnums.
+              default -> ...\
+            """);
   }
 
   public void testInnerNativeJsTypeFails() {
