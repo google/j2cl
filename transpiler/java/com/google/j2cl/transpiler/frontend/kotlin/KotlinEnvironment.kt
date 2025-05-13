@@ -86,6 +86,7 @@ import org.jetbrains.kotlin.ir.declarations.IrField
 import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.ir.declarations.IrFunction
 import org.jetbrains.kotlin.ir.declarations.IrPackageFragment
+import org.jetbrains.kotlin.ir.declarations.IrProperty
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.declarations.IrTypeParameter
 import org.jetbrains.kotlin.ir.expressions.IrClassReference
@@ -933,6 +934,10 @@ internal class KotlinEnvironment(
       fields += jvmBackendContext.cachedDeclarations.getFieldForObjectInstance(companion)
     }
 
+    if (isFromJava()) {
+      // Fields from Java class are represented as Kotlin properties.
+      fields += declarations.filterIsInstance<IrProperty>().mapNotNull(IrProperty::backingField)
+    }
     return fields
   }
 }
