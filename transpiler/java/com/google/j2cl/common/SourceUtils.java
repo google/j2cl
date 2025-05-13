@@ -114,7 +114,7 @@ public class SourceUtils {
             f ->
                 f.endsWith("jar") || f.endsWith("zip")
                     ? extractZip(f, sourcesDir, problems).stream()
-                    : Stream.of(FileInfo.create(f, f.toString(), getJavaPath(f.toString()))))
+                    : Stream.of(FileInfo.create(f, f, getJavaPath(f))))
         .sorted()
         .distinct();
   }
