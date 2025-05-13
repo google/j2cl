@@ -33,11 +33,12 @@ import javax.annotation.Nullable;
 public class NewArray extends Expression {
   @Visitable ArrayTypeDescriptor typeDescriptor;
   @Visitable List<Expression> dimensionExpressions = new ArrayList<>();
+
   /**
    * An optional initializer for the array being constructed.
    *
-   * <p>If present it should statisfy one of: 1. Be an {@link ArrayLiteral} that has the same type
-   * as the array being constructed. 2. Be a {@link FunctionExpression} or a {@link MethodReference}
+   * <p>If present it should satisfy one of: 1. Be an {@link ArrayLiteral} that has the same type as
+   * the array being constructed. 2. Be a {@link FunctionExpression} or a {@link MethodReference}
    * whose SAM type accepts a single int param (index) and returns the component type of the array
    * being constructed.
    */
@@ -162,6 +163,6 @@ public class NewArray extends Expression {
             .hasSameRawType(typeDescriptor.getComponentTypeDescriptor())
         && methodDescriptor.getParameterDescriptors().size() == 1
         && TypeDescriptors.isPrimitiveInt(
-            methodDescriptor.getParameterDescriptors().get(0).getTypeDescriptor());
+            methodDescriptor.getParameterDescriptors().getFirst().getTypeDescriptor());
   }
 }

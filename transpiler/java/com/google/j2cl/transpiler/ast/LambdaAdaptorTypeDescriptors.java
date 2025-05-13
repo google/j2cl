@@ -127,7 +127,6 @@ public final class LambdaAdaptorTypeDescriptors {
         interfaceTypeDescriptors.stream()
             .flatMap(i -> i.getTypeDeclaration().getTypeParameterDescriptors().stream())
             .collect(toImmutableList());
-    ;
 
     return TypeDeclaration.newBuilder()
         .setEnclosingTypeDeclaration(enclosingTypeDeclaration)
@@ -213,7 +212,7 @@ public final class LambdaAdaptorTypeDescriptors {
                     createJsFunctionMethodDescriptor(
                         jsfunctionTypeDeclaration.toDescriptor(),
                         typeDeclaration.getSingleAbstractMethodDescriptor())))
-        .setSingleAbstractMethodDescriptorFactory(t -> t.getDeclaredMethodDescriptors().get(0))
+        .setSingleAbstractMethodDescriptorFactory(t -> t.getDeclaredMethodDescriptors().getFirst())
         .setVisibility(Visibility.PUBLIC)
         .setKind(Kind.INTERFACE)
         .build();

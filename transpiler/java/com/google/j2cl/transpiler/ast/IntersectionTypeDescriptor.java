@@ -66,7 +66,7 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
    */
   @Memoized
   public TypeDescriptor getFirstType() {
-    return getIntersectionTypeDescriptors().get(0);
+    return getIntersectionTypeDescriptors().getFirst();
   }
 
   @Override

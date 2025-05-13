@@ -106,14 +106,10 @@ public enum BinaryOperator implements Operator {
       return getUnderlyingBinaryOperator().isShiftOperator();
     }
 
-    switch (this) {
-      case BIT_XOR:
-      case BIT_OR:
-      case BIT_AND:
-        return true;
-      default:
-        return false;
-    }
+    return switch (this) {
+      case BIT_XOR, BIT_OR, BIT_AND -> true;
+      default -> false;
+    };
   }
 
   public boolean isShiftOperator() {
@@ -121,28 +117,17 @@ public enum BinaryOperator implements Operator {
       return getUnderlyingBinaryOperator().isShiftOperator();
     }
 
-    switch (this) {
-      case LEFT_SHIFT:
-      case RIGHT_SHIFT_SIGNED:
-      case RIGHT_SHIFT_UNSIGNED:
-        return true;
-      default:
-        return false;
-    }
+    return switch (this) {
+      case LEFT_SHIFT, RIGHT_SHIFT_SIGNED, RIGHT_SHIFT_UNSIGNED -> true;
+      default -> false;
+    };
   }
 
   public boolean isRelationalOperator() {
-    switch (this) {
-      case LESS:
-      case LESS_EQUALS:
-      case EQUALS:
-      case NOT_EQUALS:
-      case GREATER:
-      case GREATER_EQUALS:
-        return true;
-      default:
-        return false;
-    }
+    return switch (this) {
+      case LESS, LESS_EQUALS, EQUALS, NOT_EQUALS, GREATER, GREATER_EQUALS -> true;
+      default -> false;
+    };
   }
 
   public boolean isPlusOperator() {

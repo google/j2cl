@@ -752,7 +752,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor {
       MethodDescriptor newBridge =
           createBridgeMethodDescriptor(
               MethodOrigin.GENERALIZING_BRIDGE, currentTarget, targetImplementation);
-      checkState(newBridge.isGeneralizingdBridge());
+      checkState(newBridge.isGeneralizingBridge());
       methodsByMangledName.put(newBridge.getMangledName(), newBridge);
     }
 
@@ -768,7 +768,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor {
 
   /** Whether mangled name already has the actual method that handles that name. */
   private static boolean isCorrectTarget(MethodDescriptor method, MethodDescriptor newTarget) {
-    if (method.isGeneralizingdBridge()) {
+    if (method.isGeneralizingBridge()) {
       // Generalizing bridges always dispatch to the right target by construction, but they might
       // do so indirectly.
       return true;
@@ -976,7 +976,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor {
             && getSuperTypeDescriptor() != null
             && getSuperTypeDescriptor().getPolymorphicMethods().stream()
                 // TODO(b/280121371): cleanup and choose better names for .getSimpleJsName() and
-                // getMandleName() to avoid confusions.
+                // getMangledName() to avoid confusions.
                 // Compare with .getMangledName() instead of with .getSimpleJsName() because
                 // .getSimpleJsName() computes the potential jsname for any member which will not
                 // be the JavaScript property name for non JsMethods.
@@ -1052,7 +1052,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor {
    * type it is emitted. This is not a problem for parameters since the parameter types are all in
    * agreement.
    *
-   * <p>However, return types of the overridden methods might differ (only for jsmethodsm where we
+   * <p>However, return types of the overridden methods might differ (only for jsmethods where we
    * allow specialized returns to use the same name). The return type that needs to be selected is
    * the more specific of the return types of the overridden methods (which at this point we only
    * have access to one of them). Luckily the return type of the bridged implementation target would
@@ -1247,7 +1247,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor {
     // leave a reference however JavaScript stack will detect that.
     // Note that this limitation is acceptable since in practice user shouldn't refer to AutoValue
     // generated classes (this is where this functionality is currently only used) other than a few
-    // trival scenarios. What we have here is already an overkill in practice for well formed code.
+    // trivial scenarios. What we have here is already an overkill in practice for well formed code.
     return this;
   }
 

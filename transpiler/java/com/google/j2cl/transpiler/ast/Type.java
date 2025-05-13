@@ -294,7 +294,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
 
   @Nullable
   public Method getDefaultConstructor() {
-    // TODO(b/215777271): This doesn't consider varags constructors as a default constructor.
+    // TODO(b/215777271): This doesn't consider varargs constructors as a default constructor.
     return getMethods().stream()
         .filter(m -> m.isConstructor() && m.getParameters().isEmpty())
         .findFirst()

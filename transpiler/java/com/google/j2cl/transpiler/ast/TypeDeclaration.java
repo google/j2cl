@@ -28,6 +28,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Streams;
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.ThreadLocalInterner;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
@@ -908,6 +909,7 @@ public abstract class TypeDeclaration
 
     private String qualifiedSourceName;
 
+    @CanIgnoreReturnValue
     public Builder setQualifiedSourceName(String qualifiedSourceName) {
       this.qualifiedSourceName = qualifiedSourceName;
       return this;
@@ -917,7 +919,7 @@ public abstract class TypeDeclaration
 
     public abstract Builder setCustomizedJsNamespace(String jsNamespace);
 
-    public abstract Builder setObjectiveCNamePrefix(String objectiveCNamePreifx);
+    public abstract Builder setObjectiveCNamePrefix(String objectiveCNamePrefix);
 
     public abstract Builder setNullMarked(boolean isNullMarked);
 
@@ -1018,12 +1020,12 @@ public abstract class TypeDeclaration
         setClassComponents(qualifiedSourceName.substring(lastDot + 1));
       }
 
-      if (!getPackage().isPresent()) {
+      if (getPackage().isEmpty()) {
         // If no package is set, enclosing type is mandatory where we can get the package from.
         setPackage(getEnclosingTypeDeclaration().get().getPackage());
       }
 
-      if (!getSimpleJsName().isPresent()) {
+      if (getSimpleJsName().isEmpty()) {
         setSimpleJsName(AstUtils.getSimpleSourceName(getClassComponents().get()));
       }
 

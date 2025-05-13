@@ -181,7 +181,7 @@ public class WasmEntryPointBridgesCreator {
             replaceStringWithNativeString(descriptor.getReturnTypeDescriptor()))
         .updateParameterTypeDescriptors(
             descriptor.getParameterTypeDescriptors().stream()
-                .map(x -> replaceStringWithNativeString(x))
+                .map(WasmEntryPointBridgesCreator::replaceStringWithNativeString)
                 .collect(toImmutableList()))
         .build();
   }

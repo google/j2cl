@@ -29,6 +29,7 @@ import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import java.lang.annotation.ElementType;
@@ -598,33 +599,24 @@ public class TypeDescriptors {
       return TypeDescriptors.get().javaemulInternalWasmArrayOfObject;
     }
 
-    switch (((PrimitiveTypeDescriptor) componentTypeDescriptor).getSimpleSourceName()) {
-      case "boolean":
-        return TypeDescriptors.get().javaemulInternalWasmArrayOfBoolean;
-      case "short":
-        return TypeDescriptors.get().javaemulInternalWasmArrayOfShort;
-      case "char":
-        return TypeDescriptors.get().javaemulInternalWasmArrayOfChar;
-      case "byte":
-        return TypeDescriptors.get().javaemulInternalWasmArrayOfByte;
-      case "int":
-        return TypeDescriptors.get().javaemulInternalWasmArrayOfInt;
-      case "long":
-        return TypeDescriptors.get().javaemulInternalWasmArrayOfLong;
-      case "float":
-        return TypeDescriptors.get().javaemulInternalWasmArrayOfFloat;
-      case "double":
-        return TypeDescriptors.get().javaemulInternalWasmArrayOfDouble;
-      default:
-        throw new AssertionError("Unsupported primitive type: " + componentTypeDescriptor);
-    }
+    return switch (((PrimitiveTypeDescriptor) componentTypeDescriptor).getSimpleSourceName()) {
+      case "boolean" -> TypeDescriptors.get().javaemulInternalWasmArrayOfBoolean;
+      case "short" -> TypeDescriptors.get().javaemulInternalWasmArrayOfShort;
+      case "char" -> TypeDescriptors.get().javaemulInternalWasmArrayOfChar;
+      case "byte" -> TypeDescriptors.get().javaemulInternalWasmArrayOfByte;
+      case "int" -> TypeDescriptors.get().javaemulInternalWasmArrayOfInt;
+      case "long" -> TypeDescriptors.get().javaemulInternalWasmArrayOfLong;
+      case "float" -> TypeDescriptors.get().javaemulInternalWasmArrayOfFloat;
+      case "double" -> TypeDescriptors.get().javaemulInternalWasmArrayOfDouble;
+      default -> throw new AssertionError("Unsupported primitive type: " + componentTypeDescriptor);
+    };
   }
 
   /** Builder for TypeDescriptors. */
   public static class SingletonBuilder {
 
     private final TypeDescriptors typeDescriptors = new TypeDescriptors();
-    private Map<String, DeclaredTypeDescriptor> knownTypesByQualifiedName = new HashMap<>();
+    private final Map<String, DeclaredTypeDescriptor> knownTypesByQualifiedName = new HashMap<>();
     private final Set<String> requiredTypes = new HashSet<>(requiredWellKnownTypes);
 
     public void buildSingleton() {
@@ -645,6 +637,7 @@ public class TypeDescriptors {
               .build();
     }
 
+    @CanIgnoreReturnValue
     public SingletonBuilder addReferenceType(DeclaredTypeDescriptor referenceType) {
       checkArgument(
           !referenceType.isPrimitive(),
@@ -663,9 +656,9 @@ public class TypeDescriptors {
       return this;
     }
 
-    private TypeDescriptor addBoxedTypeMapping(
+    private void addBoxedTypeMapping(
         PrimitiveTypeDescriptor primitiveType, DeclaredTypeDescriptor boxedType) {
-      return typeDescriptors.boxedTypeByPrimitiveType.put(primitiveType, boxedType);
+      typeDescriptors.boxedTypeByPrimitiveType.put(primitiveType, boxedType);
     }
   }
 

@@ -93,7 +93,7 @@ public class Method extends Member implements MethodLike {
   }
 
   public boolean isBridge() {
-    return methodDescriptor.isGeneralizingdBridge();
+    return methodDescriptor.isGeneralizingBridge();
   }
 
   @Override

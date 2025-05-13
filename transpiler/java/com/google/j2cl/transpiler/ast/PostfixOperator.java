@@ -66,13 +66,10 @@ public enum PostfixOperator implements Operator {
 
   /** Returns the corresponding prefix operator. */
   public PrefixOperator toPrefixOperator() {
-    switch (this) {
-      case DECREMENT:
-        return PrefixOperator.DECREMENT;
-      case INCREMENT:
-        return PrefixOperator.INCREMENT;
-      default:
-        throw new InternalCompilerError("Unexpected prefix operator: %s.", this);
-    }
+    return switch (this) {
+      case DECREMENT -> PrefixOperator.DECREMENT;
+      case INCREMENT -> PrefixOperator.INCREMENT;
+      default -> throw new InternalCompilerError("Unexpected prefix operator: %s.", this);
+    };
   }
 }

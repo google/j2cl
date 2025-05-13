@@ -19,7 +19,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
@@ -197,16 +196,11 @@ public abstract class MemberDescriptor
 
   /** Determines whether a method is visible from {@code type} or not (following JLS 6.6.1). */
   public boolean isVisibleFrom(DeclaredTypeDescriptor type) {
-    switch (getVisibility()) {
-      case PUBLIC:
-      case PROTECTED:
-        return true;
-      case PACKAGE_PRIVATE:
-        return type.isInSamePackage(getEnclosingTypeDescriptor());
-      case PRIVATE:
-        return isEnclosedBySameTopLevelClass(type, getEnclosingTypeDescriptor());
-    }
-    throw new InternalCompilerError("Unexpected visibility: %s.", getVisibility());
+    return switch (getVisibility()) {
+      case PUBLIC, PROTECTED -> true;
+      case PACKAGE_PRIVATE -> type.isInSamePackage(getEnclosingTypeDescriptor());
+      case PRIVATE -> isEnclosedBySameTopLevelClass(type, getEnclosingTypeDescriptor());
+    };
   }
 
   private static boolean isEnclosedBySameTopLevelClass(

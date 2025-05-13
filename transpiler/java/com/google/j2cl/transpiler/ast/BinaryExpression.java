@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.ast;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 
@@ -163,7 +164,7 @@ public class BinaryExpression extends Expression {
 
     PrimitiveTypeDescriptor primitiveLeftOperandType = leftOperandType.toUnboxedType();
 
-    /**
+    /*
      * Rules per JLS (Chapter 15) require that binary promotion be previously applied to the
      * operands and makes the operation to be the same type as both operands. Since this method is
      * potentially called before or while numeric promotion is being performed there is no guarantee
@@ -197,7 +198,7 @@ public class BinaryExpression extends Expression {
       case TIMES:
       case DIVIDE:
       case REMAINDER:
-        /**
+        /*
          * The type of the operation should the promoted type of the operands, which is equivalent
          * to the widest type of its operands (or integer is integer is wider).
          */
@@ -207,7 +208,7 @@ public class BinaryExpression extends Expression {
       case LEFT_SHIFT:
       case RIGHT_SHIFT_SIGNED:
       case RIGHT_SHIFT_UNSIGNED:
-        /**
+        /*
          * Shift operators: JLS 15.19.
          *
          * <p>Type type of the operation is the type of the promoted left hand operand.
@@ -231,12 +232,8 @@ public class BinaryExpression extends Expression {
       return false;
     }
 
-    if (TypeDescriptors.isJavaLangString(leftOperandType.toRawTypeDescriptor())
-        || TypeDescriptors.isJavaLangString(rightOperandType.toRawTypeDescriptor())) {
-      return true;
-    }
-
-    return false;
+    return TypeDescriptors.isJavaLangString(leftOperandType.toRawTypeDescriptor())
+        || TypeDescriptors.isJavaLangString(rightOperandType.toRawTypeDescriptor());
   }
 
   public static Builder newBuilder() {
@@ -280,26 +277,31 @@ public class BinaryExpression extends Expression {
           .setOperator(BinaryOperator.ASSIGN);
     }
 
+    @CanIgnoreReturnValue
     public Builder setLeftOperand(Expression operand) {
       this.leftOperand = operand;
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder setLeftOperand(Variable variable) {
       this.leftOperand = variable.createReference();
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder setRightOperand(Expression operand) {
       this.rightOperand = operand;
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder setRightOperand(Variable variable) {
       this.rightOperand = variable.createReference();
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder setOperator(BinaryOperator operator) {
       this.operator = operator;
       return this;

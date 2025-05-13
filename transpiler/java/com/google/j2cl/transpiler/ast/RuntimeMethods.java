@@ -261,7 +261,7 @@ public final class RuntimeMethods {
 
     // createMapFromValues is parameterized by T extends Enum, so specialize the method to the
     // right type.
-    TypeVariable enumType = createMapMethodDescriptor.getTypeParameterTypeDescriptors().get(0);
+    TypeVariable enumType = createMapMethodDescriptor.getTypeParameterTypeDescriptors().getFirst();
     return MethodCall.Builder.from(
             createMapMethodDescriptor.specializeTypeVariables(
                 ImmutableMap.of(
@@ -284,7 +284,7 @@ public final class RuntimeMethods {
 
     // getValueFromNameAndMap is parameterized by T extends Enum, so specialize the method to the
     // right enum type.
-    TypeVariable enumType = getValueMethodDescriptor.getTypeParameterTypeDescriptors().get(0);
+    TypeVariable enumType = getValueMethodDescriptor.getTypeParameterTypeDescriptors().getFirst();
     return MethodCall.Builder.from(
             getValueMethodDescriptor.specializeTypeVariables(
                 ImmutableMap.of(enumType, enumTypeDescriptor)))
@@ -311,7 +311,7 @@ public final class RuntimeMethods {
     } else {
       // Boxing operations are parameterized by the JsEnum type, so specialize the method to the
       // right type.
-      TypeVariable type = boxingMethod.getTypeParameterTypeDescriptors().get(0);
+      TypeVariable type = boxingMethod.getTypeParameterTypeDescriptors().getFirst();
       boxingMethod =
           boxingMethod.specializeTypeVariables(ImmutableMap.of(type, valueTypeDescriptor));
     }
@@ -408,7 +408,7 @@ public final class RuntimeMethods {
   private static String getEnumsMethodSuffix(TypeDescriptor toTypeDescriptor) {
     TypeDescriptor valueTypeDescriptor = AstUtils.getJsEnumValueFieldType(toTypeDescriptor);
     if (valueTypeDescriptor.isPrimitive()) {
-      return ((PrimitiveTypeDescriptor) valueTypeDescriptor).toBoxedType().getSimpleSourceName();
+      return valueTypeDescriptor.toBoxedType().getSimpleSourceName();
     }
     checkArgument(TypeDescriptors.isJavaLangString(valueTypeDescriptor));
     return "String";
@@ -805,7 +805,7 @@ public final class RuntimeMethods {
                                           PrimitiveTypes.DOUBLE)
                                       .setRequiredParameters(2)
                                       .build())
-                              .build())
+                              .buildOrThrow())
                       .put(
                           BootstrapType.NATIVE_UTIL.getDescriptor(),
                           // Util methods
@@ -861,7 +861,7 @@ public final class RuntimeMethods {
                                       .setReturnType(PrimitiveTypes.VOID)
                                       .setParameters(TypeDescriptors.get().javaLangObject)
                                       .build())
-                              .build())
+                              .buildOrThrow())
                       .put(
                           BootstrapType.NATIVE_EQUALITY.getDescriptor(),
                           // Util methods
@@ -888,7 +888,7 @@ public final class RuntimeMethods {
                                                   TypeDescriptors.get().javaLangDouble)
                                               .build())
                                       .build())
-                              .build())
+                              .buildOrThrow())
                       .put(
                           BootstrapType.LONG_UTILS.getDescriptor(),
                           // LongUtils methods
@@ -905,7 +905,7 @@ public final class RuntimeMethods {
                                       .setReturnType(PrimitiveTypes.LONG)
                                       .setParameters(PrimitiveTypes.LONG)
                                       .build())
-                              .build())
+                              .buildOrThrow())
                       .put(
                           BootstrapType.NATIVE_LONG.getDescriptor(),
                           // goog.math.long methods
@@ -922,8 +922,8 @@ public final class RuntimeMethods {
                                       .setReturnType(PrimitiveTypes.LONG)
                                       .setParameters(PrimitiveTypes.INT, PrimitiveTypes.INT)
                                       .build())
-                              .build())
-                      .build());
+                              .buildOrThrow())
+                      .buildOrThrow());
 
   /** Create a call to a J2cl runtime method. */
   private static MethodCall createRuntimeMethodCall(
@@ -986,7 +986,7 @@ public final class RuntimeMethods {
       abstract ImmutableList<ParameterDescriptor> getParameterDescriptors();
 
       public MethodInfo build() {
-        if (!getRequiredParameters().isPresent()) {
+        if (getRequiredParameters().isEmpty()) {
           setRequiredParameters(getParameterDescriptors().size());
         }
         MethodInfo methodInfo = autoBuild();

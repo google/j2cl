@@ -49,7 +49,7 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
   }
 
   /**
-   * Returns the correspoinding {@link JsEnumInfo} if the type is a {@link
+   * Returns the corresponding {@link JsEnumInfo} if the type is a {@link
    * jsinterop.annotations.JsEnum} otherwise {@code null}
    */
   public JsEnumInfo getJsEnumInfo() {
@@ -204,15 +204,11 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
   /** Returns this type descriptor with nullability set from the given annotation. */
   public final TypeDescriptor withNullabilityAnnotation(
       NullabilityAnnotation nullabilityAnnotation) {
-    switch (nullabilityAnnotation) {
-      case NOT_NULLABLE:
-        return toNonNullable();
-      case NONE:
-        return this;
-      case NULLABLE:
-        return toNullable();
-    }
-    throw new AssertionError();
+    return switch (nullabilityAnnotation) {
+      case NOT_NULLABLE -> toNonNullable();
+      case NONE -> this;
+      case NULLABLE -> toNullable();
+    };
   }
 
   /**
@@ -251,7 +247,7 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
       return null;
     }
     T typeDescriptor = fn.apply(t);
-    // Note that the use of generics is sketchy here. 'T' here is actually intendeted to be the
+    // Note that the use of generics is sketchy here. 'T' here is actually intended to be the
     // "this" type. As long as TypeReplacer guarantees preservation of type during replacement based
     // on its T -> T contract, we should be able to preserve 'this' type. However there is no way to
     // represent that through return here via Java generics without overhauling TypeDescriptor type

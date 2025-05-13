@@ -47,7 +47,7 @@ public class Library extends Node {
   }
 
   public Stream<Type> streamTypes() {
-    return compilationUnits.stream().flatMap(c -> c.streamTypes());
+    return compilationUnits.stream().flatMap(CompilationUnit::streamTypes);
   }
 
   public boolean isEmpty() {

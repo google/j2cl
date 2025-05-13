@@ -147,27 +147,26 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     @Override
     public String getPrefix() {
-      switch (this) {
+      return switch (this) {
         // User written methods and bridges need to be mangled the same way.
-        case SOURCE:
-        case GENERALIZING_BRIDGE:
-        case SPECIALIZING_BRIDGE:
-        case DEFAULT_METHOD_BRIDGE:
-        case ABSTRACT_STUB:
-          return "m_";
+        case SOURCE,
+            GENERALIZING_BRIDGE,
+            SPECIALIZING_BRIDGE,
+            DEFAULT_METHOD_BRIDGE,
+            ABSTRACT_STUB ->
+            "m_";
+
         // Getters and setters need to be mangled as fields.
-        case SYNTHETIC_SYSTEM_PROPERTY_GETTER_REQUIRED:
-        case SYNTHETIC_SYSTEM_PROPERTY_GETTER_OPTIONAL:
-          // Synthetic property getters use the name of the property as the name of the method hence
-          // they don't start with "$" and the prefix needs to be added here.
-          return "$";
-        case SYNTHETIC_PROPERTY_SETTER:
-        case SYNTHETIC_PROPERTY_GETTER:
-          return FieldOrigin.SOURCE.getPrefix();
+        case SYNTHETIC_SYSTEM_PROPERTY_GETTER_REQUIRED, SYNTHETIC_SYSTEM_PROPERTY_GETTER_OPTIONAL ->
+            // Synthetic property getters use the name of the property as the name of the method
+            // hence they don't start with "$" and the prefix needs to be added here.
+            "$";
+
+        case SYNTHETIC_PROPERTY_SETTER, SYNTHETIC_PROPERTY_GETTER -> FieldOrigin.SOURCE.getPrefix();
+
         // Don't prefix the rest, they all start with "$"
-        default:
-          return "";
-      }
+        default -> "";
+      };
     }
 
     @Override
@@ -176,26 +175,23 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     }
 
     public boolean isOnceMethod() {
-      switch (this) {
-        case SYNTHETIC_CLASS_INITIALIZER:
-        case SYNTHETIC_CLASS_LITERAL_GETTER:
-        case SYNTHETIC_STRING_LITERAL_GETTER:
-        case SYNTHETIC_SYSTEM_PROPERTY_GETTER_OPTIONAL:
-        case SYNTHETIC_SYSTEM_PROPERTY_GETTER_REQUIRED:
-          return true;
-        default:
-          return false;
-      }
+      return switch (this) {
+        case SYNTHETIC_CLASS_INITIALIZER,
+            SYNTHETIC_CLASS_LITERAL_GETTER,
+            SYNTHETIC_STRING_LITERAL_GETTER,
+            SYNTHETIC_SYSTEM_PROPERTY_GETTER_OPTIONAL,
+            SYNTHETIC_SYSTEM_PROPERTY_GETTER_REQUIRED ->
+            true;
+        default -> false;
+      };
     }
 
     public boolean isSystemGetPropertyGetter() {
-      switch (this) {
-        case SYNTHETIC_SYSTEM_PROPERTY_GETTER_OPTIONAL:
-        case SYNTHETIC_SYSTEM_PROPERTY_GETTER_REQUIRED:
-          return true;
-        default:
-          return false;
-      }
+      return switch (this) {
+        case SYNTHETIC_SYSTEM_PROPERTY_GETTER_OPTIONAL, SYNTHETIC_SYSTEM_PROPERTY_GETTER_REQUIRED ->
+            true;
+        default -> false;
+      };
     }
 
     public boolean isRequiredSystemGetPropertyGetter() {
@@ -295,7 +291,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
    * }
    * }</pre>
    */
-  public boolean isGeneralizingdBridge() {
+  public boolean isGeneralizingBridge() {
     return getOrigin() == MethodOrigin.GENERALIZING_BRIDGE;
   }
 
@@ -755,24 +751,21 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     if (isInstanceMember()) {
       // Only use suffixes for instance methods. Static methods are always called through the
       // right constructor, no need to add a suffix to avoid collisions.
-      switch (getVisibility()) {
-        case PRIVATE:
-          // To ensure that private methods never override each other.
-          suffix = "_$p_" + getEnclosingTypeDescriptor().getMangledName();
-          break;
-        case PACKAGE_PRIVATE:
-          // To ensure that package private methods only override one another when
-          // they are in the same package.
-          suffix =
-              "_$pp_"
-                  + getEnclosingTypeDescriptor()
-                      .getTypeDeclaration()
-                      .getPackageName()
-                      .replace('.', '_');
-          break;
-        default:
-          break;
-      }
+      suffix =
+          switch (getVisibility()) {
+            case PRIVATE ->
+                // To ensure that private methods never override each other.
+                "_$p_" + getEnclosingTypeDescriptor().getMangledName();
+            case PACKAGE_PRIVATE ->
+                // To ensure that package private methods only override one another when
+                // they are in the same package.
+                "_$pp_"
+                    + getEnclosingTypeDescriptor()
+                        .getTypeDeclaration()
+                        .getPackageName()
+                        .replace('.', '_');
+            default -> "";
+          };
     }
 
     if (isSuspendFunction()) {
@@ -811,7 +804,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     if (!isDeclaration()) {
       return getDeclarationDescriptor().getManglingDescriptor();
     }
-    if (isGeneralizingdBridge() || isAbstractStub()) {
+    if (isGeneralizingBridge() || isAbstractStub()) {
       // Generalizing bridges are methods that fill the gap between the overridden parent method and
       // a specialized override. Abstract stubs override a parent method that has a given mangled
       // name. In both cases, the parameter/return types for these methods do not determine the
@@ -1043,7 +1036,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
   /**
    * Returns a set of the method descriptors that are overridden by {@code methodDescriptor} from
-   * the Java semantics persepective.
+   * the Java semantics perspective.
    */
   @Memoized
   public ImmutableSet<MethodDescriptor> getJavaOverriddenMethodDescriptors() {
@@ -1429,8 +1422,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     }
 
     private static boolean isFreeTypeVariable(TypeDescriptor typeDescriptor) {
-      return typeDescriptor.isTypeVariable()
-          && !((TypeVariable) typeDescriptor).isWildcardOrCapture();
+      return typeDescriptor.isTypeVariable() && !typeDescriptor.isWildcardOrCapture();
     }
 
     /** Internal use only. Use {@link #makeBridge}. */
@@ -1616,10 +1608,10 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
         // Bridge methods cannot be abstract nor native,
         checkState(
-            !methodDescriptor.isGeneralizingdBridge()
+            !methodDescriptor.isGeneralizingBridge()
                 || (!methodDescriptor.isAbstract() || !methodDescriptor.isNative()));
         // Bridge methods have to be marked synthetic,
-        checkState(!methodDescriptor.isGeneralizingdBridge() || methodDescriptor.isSynthetic());
+        checkState(!methodDescriptor.isGeneralizingBridge() || methodDescriptor.isSynthetic());
 
         // Static methods cannot be abstract
         checkState(!methodDescriptor.isStatic() || !methodDescriptor.isAbstract());
@@ -1634,8 +1626,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         checkState(!methodDescriptor.isDefaultMethod() || !methodDescriptor.isAbstract());
 
         // Default methods can not be abstract.
-        checkState(
-            !methodDescriptor.isDefaultMethod() || !methodDescriptor.isGeneralizingdBridge());
+        checkState(!methodDescriptor.isDefaultMethod() || !methodDescriptor.isGeneralizingBridge());
 
         // Default methods can only be in interfaces.
         checkState(
@@ -1696,7 +1687,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
               == methodDescriptor.getReturnTypeDescriptor().isPrimitive());
 
       checkState(
-          !methodDescriptor.isGeneralizingdBridge()
+          !methodDescriptor.isGeneralizingBridge()
               || methodDescriptor.isJsMethod() == methodDescriptor.getBridgeOrigin().isJsMethod());
     }
 

@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkState;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 import java.util.List;
@@ -27,7 +28,7 @@ import javax.annotation.Nullable;
  */
 @Visitable
 public class NewInstance extends Invocation {
-  @Visitable @Nullable Type anonymousInnerClass = null;
+  @Visitable @Nullable Type anonymousInnerClass;
 
   private NewInstance(
       Expression qualifier,
@@ -103,6 +104,7 @@ public class NewInstance extends Invocation {
       return builder;
     }
 
+    @CanIgnoreReturnValue
     public Builder setAnonymousInnerClass(Type anonymousInnerClass) {
       this.anonymousInnerClass = anonymousInnerClass;
       return this;

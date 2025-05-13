@@ -172,22 +172,6 @@ public final class AstUtils {
       MethodDescriptor fromMethodDescriptor,
       MethodDescriptor toMethodDescriptor,
       String jsDocDescription) {
-    return createForwardingMethod(
-        sourcePosition,
-        qualifier,
-        fromMethodDescriptor,
-        toMethodDescriptor,
-        jsDocDescription,
-        /* isStaticDispatch= */ false);
-  }
-
-  private static Method createForwardingMethod(
-      SourcePosition sourcePosition,
-      Expression qualifier,
-      MethodDescriptor fromMethodDescriptor,
-      MethodDescriptor toMethodDescriptor,
-      String jsDocDescription,
-      boolean isStaticDispatch) {
     List<Variable> parameters =
         createParameterVariables(fromMethodDescriptor.getParameterTypeDescriptors());
 
@@ -196,7 +180,7 @@ public final class AstUtils {
             sourcePosition,
             qualifier,
             toMethodDescriptor,
-            isStaticDispatch,
+            /* isStaticDispatch= */ false,
             parameters.stream().map(Variable::createReference).collect(toImmutableList()),
             fromMethodDescriptor.getReturnTypeDescriptor());
     return Method.newBuilder()
@@ -244,33 +228,33 @@ public final class AstUtils {
 
   /** Returns {@code true} if the expression result is used by the parent. */
   public static boolean isExpressionResultUsed(Expression expression, Object parent) {
-    if (parent instanceof ExpressionStatement) {
-      return false;
-    } else if (parent instanceof TryStatement) {
-      return false;
-    } else if (parent instanceof MultiExpression multiExpression) {
-      return expression == Iterables.getLast(multiExpression.getExpressions());
-    } else if (parent instanceof ForStatement forStatement) {
-      return expression == forStatement.getConditionExpression();
-    } else if (parent instanceof BinaryExpression binaryExpression) {
-      // The value of the lhs of an assignment is overwritten and not used.
-      return !binaryExpression.isSimpleAssignment()
-          || expression == binaryExpression.getRightOperand();
-    } else {
-      return true;
-    }
+    return switch (parent) {
+      case ExpressionStatement expressionStatement -> false;
+      case TryStatement tryStatement -> false;
+      case MultiExpression multiExpression ->
+          expression == Iterables.getLast(multiExpression.getExpressions());
+      case ForStatement forStatement -> expression == forStatement.getConditionExpression();
+      case BinaryExpression binaryExpression ->
+          // The value of the lhs of an assignment is overwritten and not used.
+          !binaryExpression.isSimpleAssignment()
+              || expression == binaryExpression.getRightOperand();
+      default -> true;
+    };
   }
 
   /**
-   * Returns true if {@code expression} is left operand of simple or compound assignment binary
-   * expression.
+   * Returns true if {@code expression} is left operand of simple or compound assignment expression.
    */
   public static boolean isAssignmentTarget(Expression expression, Object parent) {
-    if (parent instanceof BinaryExpression parentBinaryExpression) {
-      return parentBinaryExpression.isSimpleOrCompoundAssignment()
-          && expression == parentBinaryExpression.getLeftOperand();
-    }
-    return false;
+    return switch (parent) {
+      case BinaryExpression parentBinaryExpression ->
+          parentBinaryExpression.isSimpleOrCompoundAssignment()
+              && expression == parentBinaryExpression.getLeftOperand();
+      case UnaryExpression unaryExpression ->
+          unaryExpression.isSimpleOrCompoundAssignment()
+              && expression == unaryExpression.getOperand();
+      default -> false;
+    };
   }
 
   /**
@@ -320,37 +304,35 @@ public final class AstUtils {
     boolean leftIsPrimitive = leftOperand.getTypeDescriptor().isPrimitive();
     boolean rightIsPrimitive = rightOperand.getTypeDescriptor().isPrimitive();
 
-    switch (operator.isCompoundAssignment() ? operator.getUnderlyingBinaryOperator() : operator) {
-      case TIMES:
-      case DIVIDE:
-      case REMAINDER:
-      case PLUS:
-      case MINUS:
-      case LESS:
-      case GREATER:
-      case LESS_EQUALS:
-      case GREATER_EQUALS:
-      case BIT_XOR:
-      case BIT_AND:
-      case BIT_OR:
-        return true; // Both numerics and booleans get these operators.
-      case EQUALS:
-      case NOT_EQUALS:
-        return leftIsPrimitive || rightIsPrimitive; // Equality is sometimes instance comparison.
-      default:
-        return false;
-    }
+    BinaryOperator binaryOperator =
+        operator.isCompoundAssignment() ? operator.getUnderlyingBinaryOperator() : operator;
+
+    return switch (binaryOperator) {
+      case TIMES,
+          DIVIDE,
+          REMAINDER,
+          PLUS,
+          MINUS,
+          LESS,
+          GREATER,
+          LESS_EQUALS,
+          GREATER_EQUALS,
+          BIT_XOR,
+          BIT_AND,
+          BIT_OR ->
+          true; // Both numerics and booleans get these operators.
+      case EQUALS, NOT_EQUALS ->
+          leftIsPrimitive || rightIsPrimitive; // Equality is sometimes instance comparison.
+      default -> false;
+    };
   }
 
   /** See JLS 5.1. */
   public static boolean matchesBooleanConversionContext(BinaryOperator operator) {
-    switch (operator) {
-      case CONDITIONAL_AND:
-      case CONDITIONAL_OR:
-        return true; // Booleans get these operators.
-      default:
-        return false;
-    }
+    return switch (operator) {
+      case CONDITIONAL_AND, CONDITIONAL_OR -> true; // Booleans get these operators.
+      default -> false;
+    };
   }
 
   /** See JLS 5.1. */
@@ -868,8 +850,7 @@ public final class AstUtils {
 
     int parameterLength = methodDescriptor.getParameterDescriptors().size();
     Expression packagedVarargs = getPackagedVarargs(methodDescriptor, arguments);
-    List<Expression> result = new ArrayList<>();
-    result.addAll(arguments.subList(0, parameterLength - 1));
+    List<Expression> result = new ArrayList<>(arguments.subList(0, parameterLength - 1));
     result.add(packagedVarargs);
     return result;
   }

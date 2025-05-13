@@ -30,12 +30,8 @@ public class J2ktAstUtils {
       return false;
     }
 
-    if (typeDeclaration.getDeclaredMethodDescriptors().stream()
-        .noneMatch(MethodDescriptor::isSynchronized)) {
-      return false;
-    }
-
-    return true;
+    return typeDeclaration.getDeclaredMethodDescriptors().stream()
+        .anyMatch(MethodDescriptor::isSynchronized);
   }
 
   /** Returns whether given type descriptor is subtype of J2ktMonitor, explicitly or implicitly. */
@@ -44,12 +40,9 @@ public class J2ktAstUtils {
       return true;
     }
 
-    if (typeDescriptor.getAllSuperTypesIncludingSelf().stream()
-        .anyMatch(it -> implicitlyExtendsJ2ktMonitor(it.getTypeDeclaration()))) {
-      return true;
-    }
-
-    return false;
+    return typeDescriptor.getAllSuperTypesIncludingSelf().stream()
+        .map(DeclaredTypeDescriptor::getTypeDeclaration)
+        .anyMatch(J2ktAstUtils::implicitlyExtendsJ2ktMonitor);
   }
 
   /** Returns whether given type descriptor is allowed in synchronized statement expression. */

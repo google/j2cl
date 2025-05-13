@@ -22,7 +22,6 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
-import com.google.j2cl.transpiler.ast.Expression.Precedence;
 import javax.annotation.Nullable;
 
 /** Class for instanceof Expression. */
