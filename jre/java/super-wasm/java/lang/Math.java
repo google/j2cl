@@ -114,14 +114,24 @@ public final class Math {
 
   public static int floorDiv(int dividend, int divisor) {
     checkCriticalArithmetic(divisor != 0);
-    // round down division if the signs are different and modulo not zero
-    return ((dividend ^ divisor) >= 0 ? dividend / divisor : ((dividend + 1) / divisor) - 1);
+
+    var r = dividend / divisor;
+    // Round down division if the signs are different and the result is rounded.
+    if (((dividend ^ divisor) < 0) && (r * divisor != dividend)) {
+      return r - 1;
+    }
+    return r;
   }
 
   public static long floorDiv(long dividend, long divisor) {
     checkCriticalArithmetic(divisor != 0);
-    // round down division if the signs are different and modulo not zero
-    return ((dividend ^ divisor) >= 0 ? dividend / divisor : ((dividend + 1) / divisor) - 1);
+
+    var r = dividend / divisor;
+    // Round down division if the signs are different and the result is rounded.
+    if (((dividend ^ divisor) < 0) && (r * divisor != dividend)) {
+      return r - 1;
+    }
+    return r;
   }
 
   public static int floorMod(int dividend, int divisor) {

@@ -83,6 +83,7 @@ public class MathTest extends TestCase {
   }
 
   public void testFloorDiv() {
+    assertEquals(-1, Math.floorDiv(1, -1));
     assertEquals(0, Math.floorDiv(0, 1));
     assertEquals(1, Math.floorDiv(4, 3));
     assertEquals(-2, Math.floorDiv(4, -3));
@@ -90,6 +91,8 @@ public class MathTest extends TestCase {
     assertEquals(1, Math.floorDiv(-4, -3));
     assertEquals(1, Math.floorDiv(Integer.MIN_VALUE, Integer.MIN_VALUE));
     assertEquals(1, Math.floorDiv(Integer.MAX_VALUE, Integer.MAX_VALUE));
+    assertEquals(-1, Math.floorDiv(Integer.MAX_VALUE, Integer.MIN_VALUE));
+    assertEquals(-2, Math.floorDiv(Integer.MIN_VALUE, Integer.MAX_VALUE));
     assertEquals(Integer.MIN_VALUE, Math.floorDiv(Integer.MIN_VALUE, 1));
     assertEquals(Integer.MAX_VALUE, Math.floorDiv(Integer.MAX_VALUE, 1));
 
@@ -104,6 +107,7 @@ public class MathTest extends TestCase {
   }
 
   public void testFloorDivLongs() {
+    assertEquals(-1L, Math.floorDiv(1L, -1L));
     assertEquals(0L, Math.floorDiv(0L, 1L));
     assertEquals(1L, Math.floorDiv(4L, 3L));
     assertEquals(-2L, Math.floorDiv(4L, -3L));
@@ -111,6 +115,8 @@ public class MathTest extends TestCase {
     assertEquals(1L, Math.floorDiv(-4L, -3L));
     assertEquals(1L, Math.floorDiv(Long.MIN_VALUE, Long.MIN_VALUE));
     assertEquals(1L, Math.floorDiv(Long.MAX_VALUE, Long.MAX_VALUE));
+    assertEquals(-1L, Math.floorDiv(Long.MAX_VALUE, Long.MIN_VALUE));
+    assertEquals(-2L, Math.floorDiv(Long.MIN_VALUE, Long.MAX_VALUE));
     assertEquals(Long.MIN_VALUE, Math.floorDiv(Long.MIN_VALUE, 1L));
     assertEquals(Long.MAX_VALUE, Math.floorDiv(Long.MAX_VALUE, 1L));
 
