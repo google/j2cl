@@ -1133,7 +1133,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor {
       return true;
     }
 
-    if (getTypeDeclaration().getWasmInfo() != null) {
+    if (AstUtils.isAnnotatedWithWasm(getTypeDeclaration())) {
       return true;
     }
 

@@ -19,11 +19,8 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.MoreCollectors.onlyElement;
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.WASM_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.SupportedAnnotations.isSupportedAnnotation;
-import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.findAnnotationByName;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.getAnnotationName;
-import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.getAnnotationParameterString;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.hasAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.hasNullMarkedAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropUtils.getJ2ktVariance;
@@ -909,6 +906,23 @@ class JavaEnvironment {
             .map(this::createTypeDescriptor)
             .collect(toImmutableList());
 
+    // if (methodName.equals("isNull")) {
+    //   // debug = true;
+    //   var anno = createAnnotations(declarationMethodElement, inNullMarkedScope);
+    //   // debug = false;
+
+    //   AnnotationMirror wasmAnnotation =
+    //       com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.findAnnotationByName(
+    //           declarationMethodElement, "javaemul.internal.annotations.Wasm");
+    //   String wasmInfo =
+    //       wasmAnnotation == null
+    //           ? null
+    //           : com.google.j2cl.transpiler.frontend.javac.AnnotationUtils
+    //               .getAnnotationParameterString(wasmAnnotation, "value");
+
+    //   System.out.println("isNull found " + anno + " wasmInfo=" + wasmInfo);
+    // }
+
     return MethodDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setName(isConstructor ? null : methodName)
@@ -924,7 +938,6 @@ class JavaEnvironment {
         .setStatic(isStatic)
         .setConstructor(isConstructor)
         .setNative(isNative)
-        .setWasmInfo(getWasmInfo(declarationMethodElement))
         .setAnnotations(createAnnotations(declarationMethodElement, inNullMarkedScope))
         .setFinal(isFinal(declarationMethodElement))
         .setDefaultMethod(isDefault)
@@ -1309,7 +1322,6 @@ class JavaEnvironment {
         .setObjectiveCNamePrefix(getObjectiveCNamePrefix(typeElement))
         .setKtTypeInfo(J2ktInteropUtils.getJ2ktTypeInfo(typeElement))
         .setKtObjcInfo(J2ktInteropUtils.getJ2ktObjcInfo(typeElement))
-        .setWasmInfo(getWasmInfo(typeElement))
         .setNullMarked(isNullMarked)
         .setOriginalSimpleSourceName(
             typeElement.getSimpleName() != null ? typeElement.getSimpleName().toString() : null)
@@ -1517,15 +1529,6 @@ class JavaEnvironment {
     } else {
       return Visibility.PACKAGE_PRIVATE;
     }
-  }
-
-  @Nullable
-  private static String getWasmInfo(Element element) {
-    AnnotationMirror wasmAnnotation = findAnnotationByName(element, WASM_ANNOTATION_NAME);
-    if (wasmAnnotation == null) {
-      return null;
-    }
-    return getAnnotationParameterString(wasmAnnotation, "value");
   }
 
   private static boolean isDefaultMethod(Element element) {

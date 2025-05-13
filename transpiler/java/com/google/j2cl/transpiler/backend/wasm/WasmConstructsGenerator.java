@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.base.Predicates.not;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment.getWasmInfo;
 import static java.lang.String.format;
 import static java.util.Arrays.stream;
 
@@ -238,7 +239,7 @@ public class WasmConstructsGenerator {
   }
 
   private void renderTypeStructs(Type type, boolean isModular) {
-    if (type.isNative() || type.getDeclaration().getWasmInfo() != null) {
+    if (type.isNative() || getWasmInfo(type.getDeclaration()) != null) {
       return;
     }
 
@@ -338,7 +339,7 @@ public class WasmConstructsGenerator {
   public void renderMethod(Method method) {
     MethodDescriptor methodDescriptor = method.getDescriptor();
     if ((methodDescriptor.isAbstract() && !methodDescriptor.isNative())
-        || methodDescriptor.getWasmInfo() != null) {
+        || getWasmInfo(methodDescriptor) != null) {
       // Abstract methods don't generate any code, except if they are native; neither do methods
       // that have @Wasm annotation.
       return;
@@ -553,7 +554,7 @@ public class WasmConstructsGenerator {
         .filter(not(Type::isNative))
         .map(Type::getDeclaration)
         .filter(not(TypeDeclaration::isAbstract))
-        .filter(type -> type.getWasmInfo() == null)
+        .filter(type -> getWasmInfo(type) == null)
         .forEach(
             t -> {
               emitVtablesInitialization(t);

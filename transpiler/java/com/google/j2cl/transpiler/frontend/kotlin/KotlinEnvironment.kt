@@ -50,7 +50,6 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.getJsInfo
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getJsMemberAnnotationInfo
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getParameters
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getTypeSubstitutionMap
-import com.google.j2cl.transpiler.frontend.kotlin.ir.getWasmInfo
 import com.google.j2cl.transpiler.frontend.kotlin.ir.hasVoidReturn
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isAbstract
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isArrayType
@@ -269,7 +268,6 @@ internal class KotlinEnvironment(
         .setJsType(irClass.isJsType)
         .setJsFunctionInterface(irClass.isJsFunction)
         .setJsEnumInfo(irClass.getJsEnumInfo())
-        .setWasmInfo(irClass.getWasmInfo())
         .apply {
           val jsMemberAnnotation = irClass.getJsMemberAnnotationInfo()
           setCustomizedJsNamespace(jsMemberAnnotation?.namespace)
@@ -691,7 +689,6 @@ internal class KotlinEnvironment(
         )
         .setTypeParameterTypeDescriptors(irFunction.typeParameters.map(::getTypeVariable))
         .setOriginalJsInfo(irFunction.getJsInfo())
-        .setWasmInfo(irFunction.getWasmInfo())
         .setAnnotations(createAnnotations(irFunction))
         .setSuspendFunction(irFunction.isSuspend)
         .build()

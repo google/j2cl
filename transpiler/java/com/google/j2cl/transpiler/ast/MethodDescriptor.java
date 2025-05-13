@@ -520,9 +520,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   }
 
   @Nullable
-  public abstract String getWasmInfo();
-
-  @Nullable
   abstract KtObjcInfo getKtObjcInfo();
 
   /** Compute the KtInfo of the function by traversing its overriding chain. */
@@ -1441,8 +1438,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     /** Internal use only. Use {@link #makeBridge}. */
     abstract Builder setBridgeTarget(MethodDescriptor bridgeOrigin);
-
-    public abstract Builder setWasmInfo(String value);
 
     public abstract Builder setEnumSyntheticMethod(boolean isEnumSyntheticMethod);
 

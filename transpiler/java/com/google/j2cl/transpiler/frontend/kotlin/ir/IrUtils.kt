@@ -19,7 +19,6 @@ package com.google.j2cl.transpiler.frontend.kotlin.ir
 
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind
 import com.google.j2cl.transpiler.ast.Visibility
-import com.google.j2cl.transpiler.frontend.common.FrontendConstants.WASM_ANNOTATION_NAME
 import org.jetbrains.kotlin.backend.jvm.InlineClassAbi
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
 import org.jetbrains.kotlin.backend.jvm.JvmLoweredDeclarationOrigin
@@ -467,17 +466,6 @@ val IrFunction.isAbstract: Boolean
 
 val IrFunction.isFinal: Boolean
   get() = this is IrOverridableMember && modality == Modality.FINAL
-
-fun IrFunction.getWasmInfo(): String? = (this as IrDeclaration).getWasmInfo()
-
-fun IrClass.getWasmInfo(): String? = (this as IrDeclaration).getWasmInfo()
-
-private fun IrDeclaration.getWasmInfo(): String? =
-  findAnnotation(WASM_ANNOTATION_FQ_NAME)
-    ?.getValueArgumentAsConst<String>(WASM_ANNOTATION_VALUE_NAME)
-
-private val WASM_ANNOTATION_FQ_NAME: FqName = FqName(WASM_ANNOTATION_NAME)
-private val WASM_ANNOTATION_VALUE_NAME = Name.identifier("value")
 
 private fun IrDeclaration.findAnnotation(name: FqName): IrConstructorCall? =
   getAllAnnotations().firstOrNull { it.isAnnotation(name) }

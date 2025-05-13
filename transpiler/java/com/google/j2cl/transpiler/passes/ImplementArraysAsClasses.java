@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.j2cl.transpiler.ast.AstUtils.isAnnotatedWithWasm;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayAccess;
@@ -163,7 +164,7 @@ public class ImplementArraysAsClasses extends NormalizationPass {
 
           private boolean isNativeMethodParameter() {
             return getParent() instanceof Method method
-                && method.getDescriptor().getWasmInfo() != null;
+                && isAnnotatedWithWasm(method.getDescriptor());
           }
         });
   }
@@ -203,7 +204,7 @@ public class ImplementArraysAsClasses extends NormalizationPass {
           @Override
           public MethodCall rewriteMethodCall(MethodCall methodCall) {
             MethodDescriptor target = methodCall.getTarget();
-            if (target.getWasmInfo() == null) {
+            if (!isAnnotatedWithWasm(target)) {
               return methodCall;
             }
             if (target.getParameterTypeDescriptors().stream().noneMatch(this::isNonNativeArray)) {

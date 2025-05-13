@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.j2cl.transpiler.ast.AstUtils.isAnnotatedWithWasm;
+
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
@@ -33,7 +35,7 @@ public final class RemoveWasmAnnotatedMethodBodies extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Node rewriteMethod(Method method) {
-            if (method.getDescriptor().getWasmInfo() == null) {
+            if (!isAnnotatedWithWasm(method.getDescriptor())) {
               return method;
             }
             return Method.Builder.from(method).setStatements(ImmutableList.of()).build();

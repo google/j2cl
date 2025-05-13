@@ -1588,7 +1588,8 @@ public class JsInteropRestrictionsChecker {
 
   private void checkMethodWasmInfo(Method method) {
     MethodDescriptor methodDescriptor = method.getDescriptor();
-    if (method.getWasmInfo() != null && !(method.isNative() && method.isStatic())) {
+    if (AstUtils.isAnnotatedWithWasm(method.getDescriptor())
+        && !(method.isNative() && method.isStatic())) {
       problems.warning(
           method.getSourcePosition(),
           "Wasm method '%s' needs to be static native",
@@ -1597,7 +1598,7 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkWasmNativeMethodSignature(Method method) {
-    if (method.getWasmInfo() != null) {
+    if (AstUtils.isAnnotatedWithWasm(method.getDescriptor())) {
       return;
     }
 

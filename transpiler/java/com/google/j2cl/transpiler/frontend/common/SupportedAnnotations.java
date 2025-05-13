@@ -31,6 +31,7 @@ public class SupportedAnnotations {
           "javaemul.internal.annotations.DoNotAutobox",
           "javaemul.internal.annotations.HasNoSideEffects",
           "javaemul.internal.annotations.UncheckedCast",
+          "javaemul.internal.annotations.Wasm",
           "javaemul.lang.annotations.WasAutoValue",
           "javaemul.lang.annotations.WasAutoValue.Builder",
           "kotlin.Deprecated",

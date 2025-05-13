@@ -1318,5 +1318,10 @@ public final class AstUtils {
                     && md.getVisibility().isPackagePrivate());
   }
 
+  /** Returns true if the specified type is annotated with Wasm. */
+  public static boolean isAnnotatedWithWasm(HasAnnotations node) {
+    return node.getAnnotation("javaemul.internal.annotations.Wasm") != null;
+  }
+
   private AstUtils() {}
 }

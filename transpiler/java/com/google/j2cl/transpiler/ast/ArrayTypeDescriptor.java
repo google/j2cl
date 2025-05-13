@@ -90,7 +90,7 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
     return isMarkedAsNativeWasmArray()
         || (getComponentTypeDescriptor().toRawTypeDescriptor()
                 instanceof DeclaredTypeDescriptor componentTypeDescriptor
-            && componentTypeDescriptor.getTypeDeclaration().getWasmInfo() != null);
+            && AstUtils.isAnnotatedWithWasm(componentTypeDescriptor.getTypeDeclaration()));
   }
 
   @Override
@@ -151,7 +151,7 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
   @Memoized
   public String getUniqueId() {
     String prefix = isNullable() ? "?" : "!";
-    String suffix = isNativeWasmArray() ? "(native)" : "";
+    String suffix = isMarkedAsNativeWasmArray() ? "(native)" : "";
     return prefix + "[]" + getComponentTypeDescriptor().getUniqueId() + suffix;
   }
 

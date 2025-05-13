@@ -29,17 +29,20 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Multiset;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import com.google.j2cl.transpiler.ast.Annotation;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
+import com.google.j2cl.transpiler.ast.HasAnnotations;
 import com.google.j2cl.transpiler.ast.HasName;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
+import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
@@ -137,9 +140,11 @@ public class WasmGenerationEnvironment {
   String getWasmTypeName(TypeDescriptor typeDescriptor) {
     typeDescriptor = typeDescriptor.toRawTypeDescriptor();
 
-    if (typeDescriptor instanceof DeclaredTypeDescriptor declaredTypeDescriptor
-        && declaredTypeDescriptor.getTypeDeclaration().getWasmInfo() != null) {
-      return declaredTypeDescriptor.getTypeDeclaration().getWasmInfo();
+    if (typeDescriptor instanceof DeclaredTypeDescriptor declaredTypeDescriptor) {
+      String nativeWasmTypeName = getWasmInfo(declaredTypeDescriptor.getTypeDeclaration());
+      if (nativeWasmTypeName != null) {
+        return nativeWasmTypeName;
+      }
     }
 
     if (typeDescriptor.isNative()) {
@@ -163,6 +168,16 @@ public class WasmGenerationEnvironment {
     }
 
     return getTypeSignature(typeDescriptor);
+  }
+
+  /** Returns the user-provided info for the given node as specified in the @Wasm annotation. */
+  @Nullable
+  static String getWasmInfo(HasAnnotations node) {
+    Annotation wasm = node.getAnnotation("javaemul.internal.annotations.Wasm");
+    if (wasm == null) {
+      return null;
+    }
+    return ((StringLiteral) wasm.getValues().get("value")).getValue();
   }
 
   public String getTypeSignature(TypeDeclaration typeDeclaration) {

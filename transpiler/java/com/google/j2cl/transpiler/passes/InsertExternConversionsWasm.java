@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.j2cl.transpiler.ast.AstUtils.isAnnotatedWithWasm;
 
 import com.google.common.collect.Streams;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
@@ -106,7 +107,7 @@ public class InsertExternConversionsWasm extends NormalizationPass {
   }
 
   private static boolean isJavaScriptMethod(MethodDescriptor descriptor) {
-    if (descriptor.getWasmInfo() != null) {
+    if (isAnnotatedWithWasm(descriptor)) {
       return false;
     }
     return descriptor.isNative()

@@ -105,10 +105,6 @@ public class Method extends Member implements MethodLike {
     return jsDocDescription;
   }
 
-  public String getWasmInfo() {
-    return methodDescriptor.getWasmInfo();
-  }
-
   public boolean isWasmEntryPoint() {
     return wasmExportName != null;
   }

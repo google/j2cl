@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
+import static com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment.getWasmInfo;
 import static java.util.Comparator.comparing;
 
 import com.google.auto.value.AutoValue;
@@ -338,7 +339,7 @@ public final class JsImportsGenerator {
       return false;
     }
     // If the method maps to a WASM instruction, that takes precedence.
-    if (methodDescriptor.getWasmInfo() != null) {
+    if (getWasmInfo(methodDescriptor) != null) {
       return false;
     }
     return true;

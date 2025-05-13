@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.j2cl.common.StringUtils.escapeAsWtf16;
+import static com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment.getWasmInfo;
 import static java.util.function.Predicate.not;
 
 import com.google.common.collect.ImmutableList;
@@ -89,7 +90,7 @@ public final class SummaryBuilder {
   private void addType(Type type) {
     if (type.isNative()
         || type.isOverlayImplementation()
-        || type.getDeclaration().getWasmInfo() != null) {
+        || getWasmInfo(type.getDeclaration()) != null) {
       // none of these types have generated vtables so they need to be ignored in the summary.
       return;
     }

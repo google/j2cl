@@ -21,6 +21,7 @@ import static com.google.common.base.Preconditions.checkState;
 import static com.google.j2cl.common.StringUtils.escapeAsUtf8;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid;
 import static com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment.getGetterInstruction;
+import static com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment.getWasmInfo;
 import static java.lang.String.format;
 
 import com.google.common.collect.Iterables;
@@ -540,7 +541,7 @@ final class ExpressionTranspiler {
        */
       private void renderNonPolymorphicMethodCall(Invocation methodCall) {
         MethodDescriptor target = methodCall.getTarget();
-        String wasmInfo = target.getWasmInfo();
+        String wasmInfo = getWasmInfo(target);
         if (wasmInfo == null) {
           sourceBuilder.append(
               String.format(
