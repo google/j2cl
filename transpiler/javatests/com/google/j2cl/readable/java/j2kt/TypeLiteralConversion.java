@@ -58,10 +58,9 @@ public class TypeLiteralConversion {
     return Generic.class;
   }
 
-  // TODO(b/415797128): Uncomment when fixed
-  // public Class<? extends Generic> testGenericToBoundWildcard() {
-  //   return Generic.class;
-  // }
+  public Class<? extends Generic> testGenericToBoundWildcard() {
+    return Generic.class;
+  }
 
   public Class testPrimitiveToRaw() {
     return int.class;

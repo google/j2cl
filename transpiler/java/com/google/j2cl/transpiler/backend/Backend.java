@@ -71,6 +71,7 @@ import com.google.j2cl.transpiler.passes.InsertCastForLowerBounds;
 import com.google.j2cl.transpiler.passes.InsertCastOnArrayAccess;
 import com.google.j2cl.transpiler.passes.InsertCastOnNewInstances;
 import com.google.j2cl.transpiler.passes.InsertCastsForBoxedTypes;
+import com.google.j2cl.transpiler.passes.InsertCastsForTypeLiteralsJ2kt;
 import com.google.j2cl.transpiler.passes.InsertCastsOnNullabilityMismatch;
 import com.google.j2cl.transpiler.passes.InsertErasureTypeSafetyCasts;
 import com.google.j2cl.transpiler.passes.InsertExceptionConversions;
@@ -779,6 +780,7 @@ public enum Backend {
           InsertQualifierProjectionCasts::new,
           InsertNotNullAssertionToPolyNullMethodCalls::new,
           InsertNotNullAssertionsOnNullabilityMismatch::new,
+          InsertCastsForTypeLiteralsJ2kt::new,
           InsertCastsOnNullabilityMismatch::new,
           InsertCastForLowerBounds::new,
           InsertRawTypeCasts::new,

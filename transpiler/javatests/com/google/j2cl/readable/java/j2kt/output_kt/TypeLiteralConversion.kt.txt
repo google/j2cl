@@ -58,7 +58,11 @@ open class TypeLiteralConversion {
  }
 
  open fun testGenericToUnboundWildcard(): Class<*> {
-  return Generic::class.javaObjectType
+  return Generic::class.javaObjectType as Class<Generic<Any?>>
+ }
+
+ open fun testGenericToBoundWildcard(): Class<out Generic<Any?>> {
+  return Generic::class.javaObjectType as Class<Generic<Any?>>
  }
 
  open fun testPrimitiveToRaw(): Class<Any> {
@@ -86,7 +90,7 @@ open class TypeLiteralConversion {
  }
 
  open fun testArrayToUnboundWildcard(): Class<*> {
-  return Array::class.javaObjectType
+  return Array::class.javaObjectType as Class<Array<String?>>
  }
 
  open fun testPrimitiveArrayToRaw(): Class<Any> {

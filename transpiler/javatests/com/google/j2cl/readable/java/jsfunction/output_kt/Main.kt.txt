@@ -18,6 +18,7 @@
 package jsfunction
 
 import javaemul.lang.*
+import java.lang.Class
 import java.lang.Integer
 import java.util.ArrayList
 import jsinterop.annotations.JsFunction
@@ -151,7 +152,7 @@ open class Main {
  internal open fun testJsFunctionClassLiterals_pp_jsfunction() {
   val array: Array<SimpleJsFunction?> = arrayOf<SimpleJsFunction?>()
   var o: Any = SimpleJsFunction::class.javaObjectType
-  o = Array::class.javaObjectType
+  o = Array::class.javaObjectType as Class<Array<SimpleJsFunction?>>
  }
 
  internal open fun testJsFunctionOptional_pp_jsfunction() {

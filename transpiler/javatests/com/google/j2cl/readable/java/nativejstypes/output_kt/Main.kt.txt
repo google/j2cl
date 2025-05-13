@@ -18,6 +18,7 @@
 package nativejstypes
 
 import javaemul.lang.*
+import java.lang.Class
 import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
@@ -84,7 +85,7 @@ open class Main {
   @JvmStatic
   fun testNativeTypeClassLiteral() {
    var o1: Any = Bar::class.javaObjectType
-   o1 = Array::class.javaObjectType
+   o1 = Array::class.javaObjectType as Class<Array<Array<Bar?>?>>
   }
 
   @JvmStatic
