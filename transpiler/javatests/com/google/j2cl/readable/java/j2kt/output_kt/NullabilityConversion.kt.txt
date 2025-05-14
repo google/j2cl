@@ -808,6 +808,13 @@ open class NullabilityConversion {
    abstract class ExceptionNullable2: RuntimeException(), Supplier<Child?>
   }
 
-  open class Raw
+  open class Raw {
+   companion object {
+    @JvmStatic
+    fun nonNullToNullable(x: ChildNonNullBounds<Any>): ParentNullableBound<Any?> {
+     return x as ParentNullableBound<Any?>
+    }
+   }
+  }
  }
 }

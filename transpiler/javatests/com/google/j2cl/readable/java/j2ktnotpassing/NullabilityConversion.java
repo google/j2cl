@@ -52,11 +52,5 @@ public class NullabilityConversion {
         }
       }
     }
-
-    public static class Raw {
-      public static ParentNullableBound nonNullToNullable(ChildNonNullBounds x) {
-        return x;
-      }
-    }
   }
 }

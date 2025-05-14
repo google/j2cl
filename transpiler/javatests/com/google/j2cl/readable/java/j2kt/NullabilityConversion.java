@@ -712,10 +712,9 @@ public class NullabilityConversion {
     }
 
     public static class Raw {
-      // TODO(b/416748599): Uncomment when fixed.
-      // public static ParentNullableBound nonNullToNullable(ChildNonNullBounds x) {
-      //   return x;
-      // }
+      public static ParentNullableBound nonNullToNullable(ChildNonNullBounds x) {
+        return x;
+      }
     }
   }
 }

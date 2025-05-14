@@ -122,12 +122,14 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
               getArrayComponentTypeParameterDescriptor(),
               seen));
     } else if (typeDescriptor instanceof DeclaredTypeDescriptor descriptor) {
-      return descriptor.withTypeArguments(
-          zip(
-              descriptor.getTypeDeclaration().getTypeParameterDescriptors(),
-              descriptor.getTypeArgumentDescriptors(),
-              (typeParameter, typeArgument) ->
-                  projectArgumentCaptures(typeArgument, typeParameter, seen)));
+      return descriptor.isRaw()
+          ? descriptor
+          : descriptor.withTypeArguments(
+              zip(
+                  descriptor.getTypeDeclaration().getTypeParameterDescriptors(),
+                  descriptor.getTypeArgumentDescriptors(),
+                  (typeParameter, typeArgument) ->
+                      projectArgumentCaptures(typeArgument, typeParameter, seen)));
     } else if (typeDescriptor instanceof TypeVariable typeVariable) {
       if (!typeVariable.isWildcardOrCapture()) {
         return typeVariable;
@@ -215,12 +217,12 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
 
   /** Returns type argument descriptors with nullability which satisfy their declarations. */
   static ImmutableList<TypeDescriptor> getTypeArgumentDescriptorsWithValidNullability(
-      DeclaredTypeDescriptor typeArgumentDescriptor) {
-    return typeArgumentDescriptor.isRaw()
+      DeclaredTypeDescriptor declaredTypeDescriptor) {
+    return declaredTypeDescriptor.isRaw()
         ? ImmutableList.of()
         : zip(
-            typeArgumentDescriptor.getTypeArgumentDescriptors(),
-            typeArgumentDescriptor.getTypeDeclaration().getTypeParameterDescriptors(),
+            declaredTypeDescriptor.getTypeArgumentDescriptors(),
+            declaredTypeDescriptor.getTypeDeclaration().getTypeParameterDescriptors(),
             AbstractJ2ktNormalizationPass::getTypeArgumentDescriptorWithValidNullability);
   }
 

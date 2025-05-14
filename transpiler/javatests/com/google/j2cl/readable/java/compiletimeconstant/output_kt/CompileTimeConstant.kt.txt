@@ -125,6 +125,6 @@ open class CompileTimeConstant<T> {
   const val MIN_SHORT_WITH_CAST: Short = (-32768).toShort()
 
   @JvmField
-  val classLiteral: Class<*>? = CompileTimeConstant::class.javaObjectType as Class<CompileTimeConstant<Any?>>
+  val classLiteral: Class<*>? = CompileTimeConstant::class.javaObjectType as Class<*>?
  }
 }

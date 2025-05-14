@@ -143,9 +143,9 @@ public final class InsertCastsOnNullabilityMismatch extends AbstractJ2ktNormaliz
           return false;
         }
 
-        // Conversion from/to raw types is always possible.
+        // Use conservative approach and always require a cast from/to RAW types.
         if (fromDeclared.isRaw() || toDeclared.isRaw()) {
-          return true;
+          return false;
         }
 
         DeclaredTypeDescriptor fromDeclaredBase =
