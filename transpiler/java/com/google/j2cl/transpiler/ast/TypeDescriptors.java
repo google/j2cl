@@ -170,6 +170,10 @@ public class TypeDescriptors {
   @Nullable public DeclaredTypeDescriptor javaemulInternalPlatform;
   public DeclaredTypeDescriptor javaemulInternalExceptions;
 
+  @Nullable
+  @QualifiedBinaryName("javaemul.internal.Ref")
+  public DeclaredTypeDescriptor javaemulInternalRef;
+
   public ArrayTypeDescriptor javaLangObjectArray;
 
   // Common browser native types.
