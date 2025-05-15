@@ -131,6 +131,7 @@ import com.google.j2cl.transpiler.passes.NormalizeJsDocCastExpressions;
 import com.google.j2cl.transpiler.passes.NormalizeJsEnums;
 import com.google.j2cl.transpiler.passes.NormalizeJsFunctionPropertyInvocations;
 import com.google.j2cl.transpiler.passes.NormalizeJsVarargs;
+import com.google.j2cl.transpiler.passes.NormalizeJsYieldMethodInvocations;
 import com.google.j2cl.transpiler.passes.NormalizeLabeledStatements;
 import com.google.j2cl.transpiler.passes.NormalizeLabels;
 import com.google.j2cl.transpiler.passes.NormalizeLambdaExpressionsJ2kt;
@@ -366,6 +367,7 @@ public enum Backend {
           AddInterfaceConstructorCasts::new,
           NormalizeJsDocCastExpressions::new,
           NormalizeJsAwaitMethodInvocations::new,
+          NormalizeJsYieldMethodInvocations::new,
           RemoveUnneededNotNullChecks::new,
           ImplementNotNullOperator::new,
 
