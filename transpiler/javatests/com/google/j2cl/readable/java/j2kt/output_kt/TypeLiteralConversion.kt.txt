@@ -38,7 +38,7 @@ open class TypeLiteralConversion {
  }
 
  open fun testSimpleToNonRaw(): Class<Simple> {
-  return Simple::class.javaObjectType as Class<Simple>
+  return Simple::class.javaObjectType
  }
 
  open fun testSimpleToUnboundWildcard(): Class<*> {
@@ -46,7 +46,7 @@ open class TypeLiteralConversion {
  }
 
  open fun testSimpleBoundWildcard(): Class<out Simple> {
-  return Simple::class.javaObjectType as Class<out Simple>
+  return Simple::class.javaObjectType
  }
 
  open fun testGenericToRaw(): Class<Any> {
@@ -78,7 +78,7 @@ open class TypeLiteralConversion {
  }
 
  open fun testPrimitiveToBoundWildcard(): Class<out Number> {
-  return Int::class.javaPrimitiveType!! as Class<out Number>
+  return Int::class.javaPrimitiveType!!
  }
 
  open fun testArrayToRaw(): Class<Any> {
@@ -98,7 +98,7 @@ open class TypeLiteralConversion {
  }
 
  open fun testPrimitiveArrayToNonRaw(): Class<IntArray> {
-  return IntArray::class.javaObjectType as Class<IntArray>
+  return IntArray::class.javaObjectType
  }
 
  open fun testPrimitiveArrayToUnboundWildcard(): Class<*> {
@@ -108,16 +108,12 @@ open class TypeLiteralConversion {
  companion object {
   @JvmStatic
   fun testGetSimpleInstance(): Simple {
-   return TypeLiteralConversion.getInstance<Simple>(
-    Simple::class.javaObjectType as Class<Simple>,
-   )
+   return TypeLiteralConversion.getInstance<Simple>(Simple::class.javaObjectType)
   }
 
   @JvmStatic
   fun testGetIntegerInstance(): Int {
-   return TypeLiteralConversion.getInstance<Int>(
-    Int::class.javaObjectType as Class<Int>,
-   )
+   return TypeLiteralConversion.getInstance<Int>(Int::class.javaObjectType)
   }
 
   @JvmStatic
@@ -129,16 +125,14 @@ open class TypeLiteralConversion {
 
   @JvmStatic
   fun testGetArrayInstance(): Array<String> {
-   return TypeLiteralConversion.getInstance<Array<String>>(
-    Array::class.javaObjectType as Class<Array<String>>,
-   )
+   return TypeLiteralConversion.getInstance<Array<String?>>(
+    Array::class.javaObjectType as Class<Array<String?>>,
+   ) as Array<String>
   }
 
   @JvmStatic
   fun testGetSimpleEnumInstance(): SimpleEnum {
-   return TypeLiteralConversion.getInstance<SimpleEnum>(
-    SimpleEnum::class.javaObjectType as Class<SimpleEnum>,
-   )
+   return TypeLiteralConversion.getInstance<SimpleEnum>(SimpleEnum::class.javaObjectType)
   }
 
   @JvmStatic
@@ -150,9 +144,7 @@ open class TypeLiteralConversion {
 
   @JvmStatic
   fun testGetRecursiveSpecializedInstance(): RecursiveSpecialized {
-   return TypeLiteralConversion.getInstance<RecursiveSpecialized>(
-    RecursiveSpecialized::class.javaObjectType as Class<RecursiveSpecialized>,
-   )
+   return TypeLiteralConversion.getInstance<RecursiveSpecialized>(RecursiveSpecialized::class.javaObjectType)
   }
 
   @JvmStatic
