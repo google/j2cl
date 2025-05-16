@@ -27,7 +27,12 @@ import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Variable;
 
-/** Rewrite suspend function calls to pass the continuation object as the first arguments. */
+/**
+ * Rewrite suspend function calls to pass the continuation object as the first arguments.
+ *
+ * <p>Rewrites also calls to the intrinsic getContinuation() method to replace it by a reference to
+ * continuation parameter of the enclosing suspend function.
+ */
 public class NormalizeSuspendFunctionCalls extends NormalizationPass {
   @Override
   public void applyTo(Type type) {
@@ -35,17 +40,24 @@ public class NormalizeSuspendFunctionCalls extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Node rewriteMethodCall(MethodCall methodCall) {
-            if (!methodCall.getTarget().isSuspendFunction()) {
-              return methodCall;
+            if (methodCall.getTarget().isSuspendFunction()) {
+              return MethodCall.Builder.from(methodCall)
+                  .setArguments(
+                      new ImmutableList.Builder<Expression>()
+                          .add(getContinuationParameterInScope().createReference())
+                          .addAll(methodCall.getArguments())
+                          .build())
+                  .build();
             }
 
-            return MethodCall.Builder.from(methodCall)
-                .setArguments(
-                    new ImmutableList.Builder<Expression>()
-                        .add(getContinuationParameterInScope().createReference())
-                        .addAll(methodCall.getArguments())
-                        .build())
-                .build();
+            if (methodCall
+                .getTarget()
+                .getQualifiedBinaryName()
+                .equals("kotlin.coroutines.intrinsics.CoroutineIntrinsicsKt.getContinuation")) {
+              return getContinuationParameterInScope().createReference();
+            }
+
+            return methodCall;
           }
 
           /**
