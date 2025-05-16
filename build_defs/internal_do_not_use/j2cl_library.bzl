@@ -88,9 +88,8 @@ def j2cl_library(
 
     if has_kotlin_srcs and not allowlists.is_package_allowed(native.package_name(), KOTLIN_ALLOWLIST):
         fail(
-            "Package '%s' is not permitted to have Kotlin inputs. " +
+            "Package '%s' is not permitted to have Kotlin inputs." % native.package_name(),
             "See: //build_defs/internal_do_not_use/allowlists/kotlin.bzl",
-            native.package_name(),
         )
 
     is_j2kt_web_allowed = (allowlists.is_package_allowed(native.package_name(), J2KT_WEB_ALLOWLIST) and
