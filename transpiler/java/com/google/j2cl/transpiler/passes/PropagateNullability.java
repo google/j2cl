@@ -40,14 +40,12 @@ import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NullabilityAnnotation;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
-import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Variable;
 import java.util.List;
 import java.util.stream.Stream;
-import javax.annotation.Nullable;
 
 /**
  * Propagates nullability in inferred types from actual nullability in expressions.
@@ -309,8 +307,8 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
         }
         // Look for the parameterized instance of the declared parameter type
         DeclaredTypeDescriptor target =
-            getParameterizedSuperType(
-                declaredTypeDescriptor, declarationDeclaredTypeDescriptor.getTypeDeclaration());
+            declaredTypeDescriptor.findSupertype(
+                declarationDeclaredTypeDescriptor.getTypeDeclaration());
         if (target == null) {
           // TODO(b/406815802): parameter and arguments are not structurally similar, see
           // if there are cases that have to be handled.
@@ -533,7 +531,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
     switch (from) {
       case DeclaredTypeDescriptor fromDeclared -> {
         DeclaredTypeDescriptor fromDeclaredSuper =
-            getParameterizedSuperType(fromDeclared, toDeclared.getTypeDeclaration());
+            fromDeclared.findSupertype(toDeclared.getTypeDeclaration());
         if (fromDeclaredSuper == null) {
           return toDeclared.toNullable(toDeclared.isNullable() || from.isNullable());
         } else if (toDeclared.isRaw()) {
@@ -835,19 +833,6 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
 
       default -> throw new AssertionError();
     }
-  }
-
-  /**
-   * Given a type descriptor and a declaration, find the parameterization of the declaration that is
-   * a supertype of type descriptor.
-   */
-  @Nullable
-  private static DeclaredTypeDescriptor getParameterizedSuperType(
-      DeclaredTypeDescriptor declaredTypeDescriptor, TypeDeclaration typeDeclaration) {
-    return declaredTypeDescriptor.getAllSuperTypesIncludingSelf().stream()
-        .filter(it -> it.getTypeDeclaration().equals(typeDeclaration))
-        .findFirst()
-        .orElse(null);
   }
 
   private static final Ordering<NullabilityAnnotation> NULLABILITY_ANNOTATION_ORDERING =

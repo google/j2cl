@@ -148,11 +148,7 @@ public final class InsertCastsOnNullabilityMismatch extends AbstractJ2ktNormaliz
           return false;
         }
 
-        DeclaredTypeDescriptor fromDeclaredBase =
-            fromDeclared.getAllSuperTypesIncludingSelf().stream()
-                .filter(it -> it.getTypeDeclaration().equals(toDeclaration))
-                .findFirst()
-                .orElse(null);
+        DeclaredTypeDescriptor fromDeclaredBase = fromDeclared.findSupertype(toDeclaration);
         if (fromDeclaredBase == null) {
           // For some reason we are still hitting Object -> NonObject case here. Skip these.
           return false;
