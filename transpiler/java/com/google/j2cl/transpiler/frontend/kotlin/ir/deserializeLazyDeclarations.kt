@@ -20,6 +20,8 @@ import org.jetbrains.kotlin.backend.common.serialization.signature.PublicIdSigna
 import org.jetbrains.kotlin.backend.jvm.JvmGeneratorExtensions
 import org.jetbrains.kotlin.backend.jvm.JvmIrDeserializer
 import org.jetbrains.kotlin.backend.jvm.JvmIrTypeSystemContext
+import org.jetbrains.kotlin.backend.jvm.classNameOverride
+import org.jetbrains.kotlin.backend.jvm.createJvmFileFacadeClass
 import org.jetbrains.kotlin.backend.jvm.lower.SingletonObjectJvmStaticTransformer
 import org.jetbrains.kotlin.backend.jvm.serialization.proto.JvmIr
 import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
@@ -29,8 +31,13 @@ import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.backend.jvm.serialization.JvmIrMangler
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrDeclaration
+import org.jetbrains.kotlin.ir.declarations.IrDeclarationOrigin
 import org.jetbrains.kotlin.ir.declarations.IrExternalPackageFragment
+import org.jetbrains.kotlin.ir.declarations.IrMemberWithContainerSource
+import org.jetbrains.kotlin.ir.declarations.IrProperty
+import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.declarations.impl.IrFileImpl
+import org.jetbrains.kotlin.ir.expressions.IrMemberAccessExpression
 import org.jetbrains.kotlin.ir.linkage.IrProvider
 import org.jetbrains.kotlin.ir.symbols.IrPropertySymbol
 import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
@@ -42,6 +49,7 @@ import org.jetbrains.kotlin.ir.util.SymbolTable
 import org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid
 import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 import org.jetbrains.kotlin.ir.visitors.acceptVoid
+import org.jetbrains.kotlin.load.kotlin.FacadeClassSource
 import org.jetbrains.kotlin.load.kotlin.JvmPackagePartSource
 import org.jetbrains.kotlin.load.kotlin.KotlinJvmBinarySourceElement
 import org.jetbrains.kotlin.resolve.scopes.MemberScope
@@ -74,6 +82,14 @@ class JvmIrDeserializerImpl : JvmIrDeserializer {
       listOf(defaultIrProvider) + irProviders,
       irClass,
       JvmIrTypeSystemContext(irBuiltIns),
+      // MODIFIED BY GOOGLE
+      // Provide a callback to deserialize other top-level classes that might be generated
+      // during the deserialization process (e.g., by ExternalPackageParentPatcherLoweringVisitor
+      // for FileKT classes).
+      { irClass ->
+        deserializeTopLevelClass(irClass, irBuiltIns, symbolTable, irProviders, extensions)
+      },
+      // END OF MODIFICATIONS
     )
 
     irClass.transform(
@@ -92,6 +108,12 @@ fun deserializeFromByteArray(
   irProviders: List<IrProvider>,
   toplevelParent: IrClass,
   typeSystemContext: IrTypeSystemContext,
+  // MODIFIED BY GOOGLE
+  // The ExternalPackageParentPatcherLoweringVisitor may create new IrClass representing FileKT
+  // enclosing class for top level members. If these classes contains inline members, we need to
+  // be able to deserialize the class and its members on demand.
+  irDeserializer: (IrClass) -> Boolean,
+  // END OF MODIFICATIONS
 ) {
   // MODIFIED BY GOOGLE
   // Ensure symbols of all class declarations are populated in the symbol table to avoid the
@@ -171,16 +193,23 @@ fun deserializeFromByteArray(
       specialProcessingForMismatchedSymbolKind = null,
       irInterner = irInterner,
     )
+
+  // MODIFIED BY GOOGLE
+  // Keep the list of deserialized declarations so we can run the
+  // ExternalPackageParentPatcherLowering on their newly deserialzed IR.
+  val declarations: MutableList<IrDeclaration> = mutableListOf()
+  // END OF MODIFICATIONS
   for (declarationProto in irProto.declarationList) {
     // MODIFIED BY GOOGLE
     // Ensure that the deserializer set a parent for top level inline members.
     // original code:
     // deserializer.deserializeDeclaration(declarationProto, setParent = false)
-    val unused =
+    declarations.add(
       deserializer.deserializeDeclaration(
         declarationProto,
         setParent = toplevelParent.isFacadeClass,
       )
+    )
     // END OF MODIFICATION.
   }
 
@@ -201,6 +230,16 @@ fun deserializeFromByteArray(
     symbolDeserializer,
     toplevelParent,
   )
+
+  // MODIFIED BY GOOGLE
+  // Run the ExternalPackageParentPatcherLowering on the list of deserialized declarations.
+  // The newly deserialized code can contain calls to top level functions from another compilation
+  // unit that were not referenced before. These functions need to have a IrClass associated with
+  // them.
+  declarations.forEach {
+    it.acceptVoid(ExternalPackageParentPatcherLoweringVisitor(irDeserializer))
+  }
+  // END OF MODIFICATIONS
 }
 
 private fun IrElement.safelyInitializeAllLazyDescendants() {
@@ -343,3 +382,63 @@ class PrePopulatedDeclarationTable(sig2symbol: Map<IdSignature, IrSymbol>) :
     return super.tryComputeBackendSpecificSignature(declaration)
   }
 }
+
+// MODIFIED BY GOOGLE
+// This class has been copied from ExternalPackageParentPatcherLowering lowering pass.
+// We have modified it to not depend the context property of the enclosing lowering pass.
+// Note: we cannot simply fork the lowering pass and open the visibility of this class because it
+// would create a dependency cycle.
+private class ExternalPackageParentPatcherLoweringVisitor(
+  private val irDeserializer: (IrClass) -> Boolean
+) : IrElementVisitorVoid {
+  override fun visitElement(element: IrElement) {
+    element.acceptChildrenVoid(this)
+  }
+
+  override fun visitMemberAccess(expression: IrMemberAccessExpression<*>) {
+    visitElement(expression)
+    val callee = expression.symbol.owner as? IrMemberWithContainerSource ?: return
+
+    if (callee.parent is IrExternalPackageFragment) {
+      val parentClass = generateOrGetFacadeClass(callee) ?: return
+      parentClass.parent = callee.parent
+      callee.parent = parentClass
+      when (callee) {
+        is IrProperty -> handleProperty(callee, parentClass)
+        is IrSimpleFunction ->
+          callee.correspondingPropertySymbol?.owner?.let { handleProperty(it, parentClass) }
+      }
+    }
+  }
+
+  private fun generateOrGetFacadeClass(declaration: IrMemberWithContainerSource): IrClass? {
+    val deserializedSource = declaration.containerSource ?: return null
+    if (deserializedSource !is FacadeClassSource) return null
+    val facadeName = deserializedSource.facadeClassName ?: deserializedSource.className
+    return createJvmFileFacadeClass(
+        if (deserializedSource.facadeClassName != null) IrDeclarationOrigin.JVM_MULTIFILE_CLASS
+        else IrDeclarationOrigin.FILE_CLASS,
+        facadeName.fqNameForTopLevelClassMaybeWithDollars.shortName(),
+        deserializedSource,
+        // MODIFIED BY GOOGLE
+        // The original code was using the context property of the enclosing class. We remove that
+        // dependency so we can use this visitor outside of the lowering.
+        // original code:
+        // deserializeIr = { irClass -> deserializeTopLevelClass(irClass) },
+        deserializeIr = irDeserializer,
+        // END OF MODIFICATIONS
+      )
+      .also {
+        it.createThisReceiverParameter()
+        it.classNameOverride = facadeName
+      }
+  }
+
+  private fun handleProperty(property: IrProperty, newParent: IrClass) {
+    property.parent = newParent
+    property.getter?.parent = newParent
+    property.setter?.parent = newParent
+    property.backingField?.parent = newParent
+  }
+}
+// END OF MODIFICATIONS
