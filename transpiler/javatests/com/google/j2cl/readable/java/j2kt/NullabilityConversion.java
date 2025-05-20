@@ -677,14 +677,13 @@ public class NullabilityConversion {
         }
       }
 
-      // TODO(b/361769898): Uncomment when fixed
-      // public static Child typeArgumentMixedToNonNull() {
-      //   try {
-      //     throw new RuntimeException();
-      //   } catch (ExceptionNonNull1 | ExceptionNullable1 e) {
-      //     return e.get();
-      //   }
-      // }
+      public static Child typeArgumentMixedToNonNull() {
+        try {
+          throw new RuntimeException();
+        } catch (ExceptionNonNull1 | ExceptionNullable1 e) {
+          return e.get();
+        }
+      }
 
       public static @Nullable Child typeArgumentMixedToNullable() {
         try {

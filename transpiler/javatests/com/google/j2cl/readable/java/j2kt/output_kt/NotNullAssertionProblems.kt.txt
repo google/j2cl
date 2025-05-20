@@ -163,6 +163,14 @@ open class NotNullAssertionProblems {
   }
 
   @JvmStatic
+  fun testImplicitInvocationTypeArguments_rawTypes(nonNull: Supplier<Any?>, nullable: Supplier<Any?>?) {
+   NotNullAssertionProblems.accept2<Supplier<Any?>?>(nonNull, nullable)
+   NotNullAssertionProblems.accept2<Supplier<Any?>?>(nullable, nonNull)
+   NotNullAssertionProblems.acceptVararg<Supplier<Any?>?>(nonNull, nullable)
+   NotNullAssertionProblems.acceptVararg<Supplier<Any?>?>(nullable, nonNull)
+  }
+
+  @JvmStatic
   fun testImplicitConstructorTypeArguments_wildcards(string: String, wildcardSupplier: Supplier<*>) {
    Consumer(
     wildcardSupplier.getValue(),

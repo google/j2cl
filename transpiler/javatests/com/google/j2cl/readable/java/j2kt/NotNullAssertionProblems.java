@@ -135,6 +135,14 @@ public class NotNullAssertionProblems {
     acceptVararg(string, wildcardSupplier.getValue());
   }
 
+  public static void testImplicitInvocationTypeArguments_rawTypes(
+      Supplier nonNull, @Nullable Supplier nullable) {
+    accept2(nonNull, nullable);
+    accept2(nullable, nonNull);
+    acceptVararg(nonNull, nullable);
+    acceptVararg(nullable, nonNull);
+  }
+
   public static void testImplicitConstructorTypeArguments_wildcards(
       String string, Supplier<?> wildcardSupplier) {
     // Non-null assertion should not be inserted for {@code supplier.getValue()}.

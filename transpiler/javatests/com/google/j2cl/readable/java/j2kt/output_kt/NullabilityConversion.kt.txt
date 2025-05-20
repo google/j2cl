@@ -766,6 +766,17 @@ open class NullabilityConversion {
     }
 
     @JvmStatic
+    fun typeArgumentMixedToNonNull(): Child {
+     try {
+      throw RuntimeException()
+     } catch (e: ExceptionNonNull1) {
+      return e.get()!!
+     } catch (e: ExceptionNullable1) {
+      return e.get()!!
+     }
+    }
+
+    @JvmStatic
     fun typeArgumentMixedToNullable(): Child? {
      try {
       throw RuntimeException()
