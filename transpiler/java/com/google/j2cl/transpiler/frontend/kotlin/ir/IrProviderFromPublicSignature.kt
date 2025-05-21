@@ -208,7 +208,11 @@ private val IrSymbol.classId: ClassId
 
 private val IrSymbol.enclosingClassId: ClassId
   get() =
-    ClassId(publicSignature.packageFqName(), Name.identifier(publicSignature.firstNameSegment))
+    ClassId(
+      publicSignature.packageFqName(),
+      FqName.fromSegments(publicSignature.nameSegments.dropLast(1)),
+      isLocal = false,
+    )
 
 private val IrSymbol.publicSignature: CommonSignature
   get() =
