@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangVoid;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AssertStatement;
@@ -40,6 +41,24 @@ import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewrite
  * conversion is needed from nullable to non-null type.
  */
 public final class InsertNotNullAssertionsOnNullabilityMismatch extends NormalizationPass {
+  private static final ImmutableSet<String> NONNULL_ASSERTION_ON_NULL_ALLOWLIST =
+      ImmutableSet.of(
+          "javatests/smoke/", // j2kt jre smoke tests
+          "" // Exclude j2cl altogether
+          );
+
+  private static boolean isNonNullAssertionOnNullAllowed(SourcePosition sourcePosition) {
+    String sourcePath = sourcePosition.getFilePath();
+    if (sourcePath != null) {
+      for (String fragment : NONNULL_ASSERTION_ON_NULL_ALLOWLIST) {
+        if (sourcePath.contains(fragment)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     // Insert non-null assertions when converting from nullable to non-null type.
@@ -120,7 +139,11 @@ public final class InsertNotNullAssertionsOnNullabilityMismatch extends Normaliz
                   + " specifying it explicitly, e.g.: Futures.<@Nullable Void, @Nullable"
                   + " Void>transform(...).");
     } else if (expression instanceof NullLiteral) {
-      getProblems().warning(sourcePosition, "Non-null assertion applied to null.");
+      if (isNonNullAssertionOnNullAllowed(sourcePosition)) {
+        getProblems().warning(sourcePosition, "Non-null assertion applied to null");
+      } else {
+        getProblems().error(sourcePosition, "Non-null assertion applied to null");
+      }
     }
 
     return expression.postfixNotNullAssertion();
