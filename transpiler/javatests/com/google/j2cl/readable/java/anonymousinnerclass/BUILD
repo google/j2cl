@@ -10,7 +10,8 @@ package(
 
 readable_example(
     srcs = glob(["*.java"]),
-    # TODO(b/202427872): Support inner classes and interfaces in J2KT.
-    # TODO(b/201574151): Constructor Support.
-    build_kt_readables = False,
+    # TODO(b/418843331): Extract cases with explicit qualifier in constructor
+    #  calls to a separate readable test which will be disabled for Kotlin
+    #  only, and then enable this test.
+    generate_kt_readables = False,
 )

@@ -10,6 +10,8 @@ package(
 
 readable_example(
     srcs = glob(["*.java"]),
-    # TODO(b/202448577): Missing Method call implementation.
-    build_kt_readables = False,
+    # TODO(b/418843331): Extract cases with explicit qualifier in constructor
+    #  calls to a separate readable test which will be disabled for Kotlin
+    #  only, and then enable this test.
+    generate_kt_readables = False,
 )

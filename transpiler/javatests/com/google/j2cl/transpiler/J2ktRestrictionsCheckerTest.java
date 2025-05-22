@@ -227,6 +227,43 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
                 + " 'J2ktMonitor'.");
   }
 
+  public void testExplicitQualifierInAnonymousNewInstance() {
+    newTranspilerTester(
+            "test.Outer",
+            """
+            class Outer {
+              class Inner {
+                void test(Outer outer) {
+                  outer.new Inner() {};
+                }
+              }
+            }
+            """)
+        .addNullMarkPackageInfo("test")
+        .assertTranspileFails()
+        .assertErrorsWithSourcePosition(
+            "Error:Outer.java:5: Explicit qualifier in constructor call is not supported.");
+  }
+
+  public void testExplicitQualifierInSuperCall() {
+    newTranspilerTester(
+            "test.Outer",
+            """
+            class Outer {
+              class Inner {}
+            }
+            class InnerSubclass extends Outer.Inner {
+              InnerSubclass(Outer outer) {
+                outer.super();
+              }
+            }
+            """)
+        .addNullMarkPackageInfo("test")
+        .assertTranspileFails()
+        .assertErrorsWithSourcePosition(
+            "Error:Outer.java:7: Explicit qualifier in constructor call is not supported.");
+  }
+
   private TranspilerTester newTranspilerTester(String compilationUnitName, String code) {
     return TranspilerTester.newTesterWithJ2ktDefaults()
         .addCompilationUnit(compilationUnitName, code);
