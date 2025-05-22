@@ -16,11 +16,19 @@ licenses(["notice"])
 java_library(
     name = "javac",
     srcs = glob(["*.java"]),
+    add_exports = [
+        "jdk.compiler/com.sun.source.tree",
+        "jdk.compiler/com.sun.tools.javac.api",
+        "jdk.compiler/com.sun.tools.javac.code",
+        "jdk.compiler/com.sun.tools.javac.file",
+        "jdk.compiler/com.sun.tools.javac.model",
+        "jdk.compiler/com.sun.tools.javac.tree",
+        "jdk.compiler/com.sun.tools.javac.util",
+    ],
     javacopts = ["-Xep:BetaApi:OFF"],
     deps = [
         "//third_party:auto_value",
         "//third_party:guava",
-        "//third_party:javac",
         "//third_party:jsinterop-annotations",
         "//third_party:jsr305_annotations",
         "//transpiler/java/com/google/j2cl/common",

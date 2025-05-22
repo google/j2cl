@@ -67,11 +67,6 @@ java_library(
 )
 
 alias(
-    name = "javac",
-    actual = "@maven//:com_google_errorprone_javac",
-)
-
-alias(
     name = "binaryen",
     actual = "@com_google_binaryen//:wasm-opt",
 )
