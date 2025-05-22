@@ -27,6 +27,7 @@ import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Node;
+import com.google.j2cl.transpiler.ast.ThisReference;
 
 /** Remove super constructor calls which can be implicit. */
 public class OptimizeImplicitSuperCalls extends NormalizationPass {
@@ -53,6 +54,12 @@ public class OptimizeImplicitSuperCalls extends NormalizationPass {
 
             boolean isSuperCall = !constructorCallTarget.inSameTypeAs(methodDescriptor);
             if (!isSuperCall) {
+              return method;
+            }
+
+            // Keep calls with explicit qualifier.
+            Expression qualifier = constructorCall.getQualifier();
+            if (qualifier != null && !(qualifier instanceof ThisReference)) {
               return method;
             }
 
