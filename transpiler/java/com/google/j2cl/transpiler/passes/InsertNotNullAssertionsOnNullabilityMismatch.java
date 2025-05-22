@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.passes;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangVoid;
 
 import com.google.common.collect.ImmutableSet;
+import com.google.j2cl.common.Problems.Severity;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AssertStatement;
@@ -138,11 +139,11 @@ public final class InsertNotNullAssertionsOnNullabilityMismatch extends Normaliz
                   + " specifying it explicitly, e.g.: Futures.<@Nullable Void, @Nullable"
                   + " Void>transform(...).");
     } else if (expression instanceof NullLiteral) {
-      if (isNonNullAssertionOnNullAllowed(sourcePosition)) {
-        getProblems().warning(sourcePosition, "Non-null assertion applied to null");
-      } else {
-        getProblems().error(sourcePosition, "Non-null assertion applied to null");
-      }
+      getProblems()
+          .log(
+              isNonNullAssertionOnNullAllowed(sourcePosition) ? Severity.WARNING : Severity.ERROR,
+              sourcePosition,
+              "Non-null assertion applied to null");
     }
 
     return expression.postfixNotNullAssertion();

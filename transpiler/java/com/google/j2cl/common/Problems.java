@@ -99,56 +99,66 @@ public class Problems {
 
   public void fatal(FatalError fatalError, Object... args) {
     checkArgument(fatalError.getNumberOfArguments() == args.length);
-    problem(Severity.ERROR, "Error: " + String.format(fatalError.getMessage(), args));
+    log(Severity.ERROR, "Error: " + String.format(fatalError.getMessage(), args));
     abort();
   }
 
   public void fatal(int lineNumber, String filePath, FatalError fatalError, Object... args) {
     checkArgument(fatalError.getNumberOfArguments() == args.length);
-    problem(Severity.ERROR, lineNumber, filePath, String.format(fatalError.getMessage(), args));
+    log(Severity.ERROR, lineNumber, filePath, String.format(fatalError.getMessage(), args));
     abort();
   }
 
   @FormatMethod
   public void error(
       SourcePosition sourcePosition, @FormatString String detailMessage, Object... args) {
-    problem(Severity.ERROR, sourcePosition, detailMessage, args);
+    log(Severity.ERROR, sourcePosition, detailMessage, args);
   }
 
   @FormatMethod
   public void error(
       int lineNumber, String filePath, @FormatString String detailMessage, Object... args) {
-    problem(Severity.ERROR, lineNumber, filePath, detailMessage, args);
+    log(Severity.ERROR, lineNumber, filePath, detailMessage, args);
   }
 
   @FormatMethod
   public void error(String detailMessage, Object... args) {
-    problem(Severity.ERROR, "Error: " + String.format(detailMessage, args));
+    log(Severity.ERROR, "Error: " + String.format(detailMessage, args));
   }
 
   @FormatMethod
   public void warning(SourcePosition sourcePosition, String detailMessage, Object... args) {
-    problem(Severity.WARNING, sourcePosition, detailMessage, args);
+    log(Severity.WARNING, sourcePosition, detailMessage, args);
   }
 
   @FormatMethod
   public void warning(String detailMessage, Object... args) {
-    problem(Severity.WARNING, String.format(detailMessage, args));
+    log(Severity.WARNING, String.format(detailMessage, args));
+  }
+
+  @FormatMethod
+  public void info(SourcePosition sourcePosition, String detailMessage, Object... args) {
+    log(Severity.INFO, sourcePosition, detailMessage, args);
+  }
+
+  @FormatMethod
+  public void info(String detailMessage, Object... args) {
+    log(Severity.INFO, String.format(detailMessage, args));
   }
 
   @FormatMethod
   public void debug(SourcePosition sourcePosition, String detailMessage, Object... args) {
-    problem(Severity.DEBUG, sourcePosition, detailMessage, args);
+    log(Severity.DEBUG, sourcePosition, detailMessage, args);
   }
 
   @FormatMethod
-  private void problem(
+  public void log(
       Severity severity, SourcePosition sourcePosition, String detailMessage, Object... args) {
     checkArgument(sourcePosition != null);
     if (sourcePosition == SourcePosition.NONE) {
-      problem(severity, String.format(detailMessage, args));
+      log(severity, String.format(detailMessage, args));
     } else {
-      problem(
+      log(
           severity,
           // SourcePosition lines are 0 based.
           sourcePosition.getStartFilePosition().getLine() + 1,
@@ -159,18 +169,18 @@ public class Problems {
   }
 
   @FormatMethod
-  private void problem(
+  private void log(
       Severity severity,
       int lineNumber,
       String filePath,
       @FormatString String detailMessage,
       Object... args) {
     String message = args.length == 0 ? detailMessage : String.format(detailMessage, args);
-    problem(severity, lineNumber, filePath, message);
+    log(severity, lineNumber, filePath, message);
   }
 
-  private void problem(Severity severity, int lineNumber, String filePath, String message) {
-    problem(
+  private void log(Severity severity, int lineNumber, String filePath, String message) {
+    log(
         severity,
         String.format(
             "%s:%s:%s: %s",
@@ -180,18 +190,8 @@ public class Problems {
             message));
   }
 
-  private void problem(Severity severity, String message) {
+  private void log(Severity severity, String message) {
     problemsBySeverity.put(severity, message);
-  }
-
-  @FormatMethod
-  public void info(SourcePosition sourcePosition, String detailMessage, Object... args) {
-    problem(Severity.INFO, sourcePosition, detailMessage, args);
-  }
-
-  @FormatMethod
-  public void info(String detailMessage, Object... args) {
-    problem(Severity.INFO, String.format(detailMessage, args));
   }
 
   /** Prints all problems to provided output and returns the exit code. */
