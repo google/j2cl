@@ -43,7 +43,6 @@ import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewrite
 public final class InsertNotNullAssertionsOnNullabilityMismatch extends NormalizationPass {
   private static final ImmutableSet<String> NONNULL_ASSERTION_ON_NULL_ALLOWLIST =
       ImmutableSet.of(
-          "javatests/smoke/", // j2kt jre smoke tests
           "" // Exclude j2cl altogether
           );
 
