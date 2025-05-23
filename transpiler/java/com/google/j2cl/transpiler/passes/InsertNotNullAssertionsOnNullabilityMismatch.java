@@ -17,7 +17,6 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangVoid;
 
-import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.common.Problems.Severity;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
@@ -42,16 +41,12 @@ import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewrite
  * conversion is needed from nullable to non-null type.
  */
 public final class InsertNotNullAssertionsOnNullabilityMismatch extends NormalizationPass {
-  private static final ImmutableSet<String> NONNULL_ASSERTION_ON_NULL_ALLOWLIST =
-      ImmutableSet.of(
-          "" // Exclude j2cl altogether
-          );
 
   private static boolean isNonNullAssertionOnNullAllowed(SourcePosition sourcePosition) {
     String sourcePath = sourcePosition.getFilePath();
     if (sourcePath != null) {
-      for (String fragment : NONNULL_ASSERTION_ON_NULL_ALLOWLIST) {
-        if (sourcePath.contains(fragment)) {
+      for (String path : J2ktAllowLists.NONNULL_ASSERTION_ON_NULL_PATHS) {
+        if (sourcePath.contains(path)) {
           return true;
         }
       }
