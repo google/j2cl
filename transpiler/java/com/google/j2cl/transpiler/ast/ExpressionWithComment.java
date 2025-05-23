@@ -56,6 +56,11 @@ public class ExpressionWithComment extends Expression {
   }
 
   @Override
+  public boolean isAlwaysNull() {
+    return expression.isAlwaysNull();
+  }
+
+  @Override
   public Precedence getPrecedence() {
     // The added comment does not affect the precedence of the underlying expression.
     return expression.getPrecedence();

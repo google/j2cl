@@ -99,6 +99,11 @@ public class BinaryExpression extends Expression {
   }
 
   @Override
+  public boolean isAlwaysNull() {
+    return isSimpleAssignment() && rightOperand.isAlwaysNull();
+  }
+
+  @Override
   public boolean isIdempotent() {
     return !operator.hasSideEffect() && leftOperand.isIdempotent() && rightOperand.isIdempotent();
   }

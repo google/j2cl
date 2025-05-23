@@ -85,6 +85,7 @@ import com.google.j2cl.transpiler.ast.VariableReference;
 import com.google.j2cl.transpiler.ast.YieldStatement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 import javax.annotation.Nullable;
 
 /**
@@ -99,7 +100,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   protected abstract static class ContextRewriter {
 
     /** Returns the closest meaningful source position from an enclosing node. */
-    public SourcePosition getSourcePosition() {
+    public final SourcePosition getSourcePosition() {
       HasSourcePosition hasSourcePosition =
           (HasSourcePosition)
               visitor.getParent(
@@ -109,6 +110,10 @@ public final class ConversionContextVisitor extends AbstractRewriter {
       return hasSourcePosition != null
           ? hasSourcePosition.getSourcePosition()
           : SourcePosition.NONE;
+    }
+
+    public final Stream<Object> getParents() {
+      return visitor.getParents();
     }
 
     /**

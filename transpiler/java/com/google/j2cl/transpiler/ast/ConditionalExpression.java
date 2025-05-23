@@ -66,6 +66,11 @@ public class ConditionalExpression extends Expression {
   }
 
   @Override
+  public boolean isAlwaysNull() {
+    return trueExpression.isAlwaysNull() && falseExpression.isAlwaysNull();
+  }
+
+  @Override
   public boolean canBeNull() {
     return trueExpression.canBeNull() || falseExpression.canBeNull();
   }

@@ -20,21 +20,27 @@ import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangVoid;
 import com.google.j2cl.common.Problems.Severity;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.Annotation;
+import com.google.j2cl.transpiler.ast.ArrayConstant;
 import com.google.j2cl.transpiler.ast.AssertStatement;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.ConditionalExpression;
 import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.HasAnnotations;
+import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.StringLiteral;
+import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewriter;
+import java.util.function.Supplier;
 
 /**
  * Inserts NOT_NULL_ASSERTION (!!) in places where Java performs implicit null-check, and when
@@ -81,7 +87,10 @@ public final class InsertNotNullAssertionsOnNullabilityMismatch extends Normaliz
 
                 return !inferredTypeDescriptor.canBeNull() || !declaredTypeDescriptor.canBeNull()
                     ? insertNotNullAssertionIfNeeded(
-                        getSourcePosition(), expression, inferredTypeDescriptor)
+                        getSourcePosition(),
+                        expression,
+                        inferredTypeDescriptor,
+                        this::isNullnessSuppressed)
                     : expression;
               }
 
@@ -96,7 +105,15 @@ public final class InsertNotNullAssertionsOnNullabilityMismatch extends Normaliz
                   TypeDescriptor declaredTypeDescriptor,
                   Expression expression) {
                 return insertNotNullAssertionIfNeeded(
-                    getSourcePosition(), expression, inferredTypeDescriptor);
+                    getSourcePosition(),
+                    expression,
+                    inferredTypeDescriptor,
+                    this::isNullnessSuppressed);
+              }
+
+              private boolean isNullnessSuppressed() {
+                return getParents()
+                    .anyMatch(InsertNotNullAssertionsOnNullabilityMismatch::isNullnessSuppressed);
               }
             }));
 
@@ -117,7 +134,10 @@ public final class InsertNotNullAssertionsOnNullabilityMismatch extends Normaliz
   }
 
   private Expression insertNotNullAssertionIfNeeded(
-      SourcePosition sourcePosition, Expression expression, TypeDescriptor inferredTypeDescriptor) {
+      SourcePosition sourcePosition,
+      Expression expression,
+      TypeDescriptor inferredTypeDescriptor,
+      Supplier<Boolean> hasSuppressNullnessAnnotationSupplier) {
     if (isInferredAsNonNullInKotlin(expression)) {
       // Don't insert null-check for expressions which are known to be non-null, regardless of
       // nullability annotations.
@@ -133,12 +153,13 @@ public final class InsertNotNullAssertionsOnNullabilityMismatch extends Normaliz
                   + " not specified explicitly (in example in method type arguments), try"
                   + " specifying it explicitly, e.g.: Futures.<@Nullable Void, @Nullable"
                   + " Void>transform(...).");
-    } else if (expression instanceof NullLiteral) {
+    } else if (expression.isAlwaysNull() && !hasSuppressNullnessAnnotationSupplier.get()) {
       getProblems()
           .log(
               isNonNullAssertionOnNullAllowed(sourcePosition) ? Severity.WARNING : Severity.ERROR,
               sourcePosition,
-              "Non-null assertion applied to null");
+              "Non-null assertion applied to null. Use @SuppressWarnings(\"nullness\") to"
+                  + " suppress.");
     }
 
     return expression.postfixNotNullAssertion();
@@ -193,5 +214,21 @@ public final class InsertNotNullAssertionsOnNullabilityMismatch extends Normaliz
       return ((TypeVariable) typeDescriptor).isAnnotatedNonNullable();
     }
     return false;
+  }
+
+  private static boolean isNullnessSuppressed(Object object) {
+    return switch (object) {
+      case Type type -> isNullnessSuppressed(type.getDeclaration());
+      case Method method -> isNullnessSuppressed(method.getDescriptor());
+      default -> false;
+    };
+  }
+
+  private static boolean isNullnessSuppressed(HasAnnotations node) {
+    Annotation annotation = node.getAnnotation("java.lang.SuppressWarnings");
+    return annotation != null
+        && ((ArrayConstant) annotation.getValues().get("value"))
+            .getValueExpressions().stream()
+                .anyMatch(v -> ((StringLiteral) v).getValue().startsWith("nullness"));
   }
 }

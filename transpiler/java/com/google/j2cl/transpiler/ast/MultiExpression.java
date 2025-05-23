@@ -80,6 +80,11 @@ public class MultiExpression extends Expression {
   }
 
   @Override
+  public boolean isAlwaysNull() {
+    return Iterables.getLast(expressions).isAlwaysNull();
+  }
+
+  @Override
   public boolean canBeNull() {
     return Iterables.getLast(expressions).canBeNull();
   }

@@ -43,6 +43,11 @@ public class NullLiteral extends Literal {
   }
 
   @Override
+  public boolean isAlwaysNull() {
+    return true;
+  }
+
+  @Override
   public boolean canBeNull() {
     return true;
   }

@@ -50,6 +50,11 @@ public class CastExpression extends Expression {
   }
 
   @Override
+  public boolean isAlwaysNull() {
+    return expression.isAlwaysNull();
+  }
+
+  @Override
   public CastExpression clone() {
     return new CastExpression(expression.clone(), castTypeDescriptor);
   }

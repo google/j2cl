@@ -49,6 +49,11 @@ public class JsDocExpression extends Expression {
   }
 
   @Override
+  public boolean isAlwaysNull() {
+    return expression.isAlwaysNull();
+  }
+
+  @Override
   Node acceptInternal(Processor processor) {
     return Visitor_JsDocExpression.visit(processor, this);
   }

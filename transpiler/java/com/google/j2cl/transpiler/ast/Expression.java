@@ -35,6 +35,10 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
     return getTypeDescriptor();
   }
 
+  public boolean isAlwaysNull() {
+    return false;
+  }
+
   /**
    * Returns true if the expression can be evaluated multiple times and always results in the same
    * value.

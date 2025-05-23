@@ -52,6 +52,11 @@ public class JsDocCastExpression extends Expression {
   }
 
   @Override
+  public boolean isAlwaysNull() {
+    return expression.isAlwaysNull();
+  }
+
+  @Override
   Node acceptInternal(Processor processor) {
     return Visitor_JsDocCastExpression.visit(processor, this);
   }
