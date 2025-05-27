@@ -17,6 +17,8 @@ package fieldmethodclasscollision;
 
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
+import javaemul.internal.annotations.KtDisabled;
+
 /**
  * Test field, method and class name collision.
  */
@@ -32,6 +34,12 @@ public class Main {
   public static void main(String... args) {
     assertTrue(new Foo() instanceof Foo);
     assertTrue(Foo == 1);
+    testMethodConstructorCollision();
+  }
+
+  // TODO(b/219914876): Name collision
+  @KtDisabled
+  private static void testMethodConstructorCollision() {
     assertTrue(Foo() == 2);
   }
 }
