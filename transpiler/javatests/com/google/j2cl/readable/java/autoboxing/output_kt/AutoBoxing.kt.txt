@@ -33,9 +33,11 @@ import kotlin.Float
 import kotlin.Int
 import kotlin.Long
 import kotlin.Short
+import kotlin.String
 import kotlin.Suppress
 import kotlin.assert
 import kotlin.collections.MutableIterable
+import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.run
 
@@ -560,6 +562,56 @@ open class AutoBoxing {
   const val COMPILE_TIME_CONSTANT: Float = 1.1f
 
   @JvmStatic
+  private fun acceptsObject(x: Any?) {}
+
+  @JvmStatic
+  private fun acceptsInt(x: Int) {}
+
+  @JvmStatic
+  private fun acceptsString(x: String?) {}
+
+  @JvmStatic
+  private fun testUnboxingGeneric(integerRef: Ref<Int?>?, booleanRef: Ref<Boolean?>?, stringRef: Ref<String?>?) {
+   integerRef!!.field_pp_autoboxing = integerRef!!.field_pp_autoboxing
+   integerRef!!.field_pp_autoboxing = Integer.valueOf(
+    integerRef!!.field_pp_autoboxing!!.toInt() + 1,
+   )
+   integerRef!!.field_pp_autoboxing = Integer.valueOf(
+    integerRef!!.field_pp_autoboxing!!.toInt() + 1,
+   )
+   AutoBoxing.acceptsInt(
+    integerRef!!.field_pp_autoboxing!!.toInt(),
+   )
+   AutoBoxing.acceptsObject(
+    Integer.valueOf(
+     - integerRef!!.field_pp_autoboxing!!.toInt(),
+    ) as Any?,
+   )
+   AutoBoxing.acceptsObject(
+    java.lang.Boolean.valueOf(
+     !booleanRef!!.field_pp_autoboxing!!.booleanValue(),
+    ) as Any?,
+   )
+   AutoBoxing.acceptsObject(
+    Integer.valueOf(
+     1 + integerRef!!.field_pp_autoboxing!!.toInt(),
+    ) as Any?,
+   )
+   AutoBoxing.acceptsObject(
+    java.lang.Boolean.valueOf(
+     booleanRef!!.field_pp_autoboxing!!.booleanValue() || booleanRef!!.field_pp_autoboxing!!.booleanValue(),
+    ) as Any?,
+   )
+   AutoBoxing.acceptsObject(
+    "" + stringRef!!.field_pp_autoboxing + stringRef!!.field_pp_autoboxing,
+   )
+   stringRef!!.field_pp_autoboxing = stringRef!!.field_pp_autoboxing
+   AutoBoxing.acceptsString(
+    "" + integerRef!!.field_pp_autoboxing,
+   )
+  }
+
+  @JvmStatic
   fun <T: Long?> testUnboxingFromTypeVariable() {
    var n: T? = java.lang.Long.valueOf(10L) as (T & Any)
    var l: Long = n!!.toLong()
@@ -634,6 +686,15 @@ open class AutoBoxing {
    )
    assert(l == 11L)
    val i: Int = Integer.valueOf(10).toInt()
+  }
+ }
+
+ open class Ref<T> {
+  @JvmField
+  internal var field_pp_autoboxing: T
+
+  internal constructor(value: T) {
+   this.field_pp_autoboxing = value
   }
  }
 }

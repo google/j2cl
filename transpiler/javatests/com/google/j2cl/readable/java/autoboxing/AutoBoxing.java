@@ -367,6 +367,37 @@ public class AutoBoxing {
     assert i != boxI;
   }
 
+  private static void acceptsObject(Object x) {}
+
+  private static void acceptsInt(int x) {}
+
+  private static void acceptsString(String x) {}
+
+  private static class Ref<T> {
+    T field;
+
+    Ref(T value) {
+      field = value;
+    }
+  }
+
+  private static void testUnboxingGeneric(
+      Ref<Integer> integerRef, Ref<Boolean> booleanRef, Ref<String> stringRef) {
+    integerRef.field = integerRef.field;
+    integerRef.field++;
+    integerRef.field += 1;
+    acceptsInt(integerRef.field);
+
+    acceptsObject(-integerRef.field);
+    acceptsObject(!booleanRef.field);
+    acceptsObject(1 + integerRef.field);
+    acceptsObject(booleanRef.field || booleanRef.field);
+    acceptsObject(stringRef.field + stringRef.field);
+
+    stringRef.field = stringRef.field;
+    acceptsString("" + integerRef.field);
+  }
+
   public void testAssertStatement() {
     Boolean boxB = new Boolean(true);
     boolean b = true;

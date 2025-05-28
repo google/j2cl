@@ -6,6 +6,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let $1Local = goog.forwardDeclare('autoboxing.AutoBoxing.$1Local$impl');
 let $1Supplier = goog.forwardDeclare('autoboxing.AutoBoxing.$1Supplier$impl');
 let $2Local = goog.forwardDeclare('autoboxing.AutoBoxing.$2Local$impl');
+let Ref = goog.forwardDeclare('autoboxing.AutoBoxing.Ref$impl');
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let Byte = goog.forwardDeclare('java.lang.Byte$impl');
 let Character = goog.forwardDeclare('java.lang.Character$impl');
@@ -16,6 +17,7 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Iterable = goog.forwardDeclare('java.lang.Iterable$impl');
 let Long = goog.forwardDeclare('java.lang.Long$impl');
 let Short = goog.forwardDeclare('java.lang.Short$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
@@ -341,6 +343,26 @@ class AutoBoxing extends j_l_Object {
   $Asserts.$assert(i != boxI.m_intValue__int());
  }
  /** @nodts */
+ static m_acceptsObject__java_lang_Object__void(/** * */ x) {}
+ /** @nodts */
+ static m_acceptsInt__int__void(/** number */ x) {}
+ /** @nodts */
+ static m_acceptsString__java_lang_String__void(/** ?string */ x) {}
+ /** @nodts */
+ static m_testUnboxingGeneric__autoboxing_AutoBoxing_Ref__autoboxing_AutoBoxing_Ref__autoboxing_AutoBoxing_Ref__void(/** Ref<Integer> */ integerRef, /** Ref<?boolean> */ booleanRef, /** Ref<?string> */ stringRef) {
+  integerRef.f_field__autoboxing_AutoBoxing_Ref = (/**@type {Integer}*/ ($Casts.$to(integerRef.f_field__autoboxing_AutoBoxing_Ref, Integer)));
+  integerRef.f_field__autoboxing_AutoBoxing_Ref = Integer.m_valueOf__int__java_lang_Integer((/**@type {Integer}*/ ($Casts.$to(integerRef.f_field__autoboxing_AutoBoxing_Ref, Integer))).m_intValue__int() + 1 | 0);
+  integerRef.f_field__autoboxing_AutoBoxing_Ref = Integer.m_valueOf__int__java_lang_Integer((/**@type {Integer}*/ ($Casts.$to(integerRef.f_field__autoboxing_AutoBoxing_Ref, Integer))).m_intValue__int() + 1 | 0);
+  AutoBoxing.m_acceptsInt__int__void((/**@type {Integer}*/ ($Casts.$to(integerRef.f_field__autoboxing_AutoBoxing_Ref, Integer))).m_intValue__int());
+  AutoBoxing.m_acceptsObject__java_lang_Object__void(Integer.m_valueOf__int__java_lang_Integer(- (/**@type {Integer}*/ ($Casts.$to(integerRef.f_field__autoboxing_AutoBoxing_Ref, Integer))).m_intValue__int() | 0));
+  AutoBoxing.m_acceptsObject__java_lang_Object__void(!Boolean.m_booleanValue__java_lang_Boolean__boolean(/**@type {?boolean}*/ ($Casts.$to(booleanRef.f_field__autoboxing_AutoBoxing_Ref, Boolean))));
+  AutoBoxing.m_acceptsObject__java_lang_Object__void(Integer.m_valueOf__int__java_lang_Integer(1 + (/**@type {Integer}*/ ($Casts.$to(integerRef.f_field__autoboxing_AutoBoxing_Ref, Integer))).m_intValue__int() | 0));
+  AutoBoxing.m_acceptsObject__java_lang_Object__void(Boolean.m_booleanValue__java_lang_Boolean__boolean(/**@type {?boolean}*/ ($Casts.$to(booleanRef.f_field__autoboxing_AutoBoxing_Ref, Boolean))) || Boolean.m_booleanValue__java_lang_Boolean__boolean(/**@type {?boolean}*/ ($Casts.$to(booleanRef.f_field__autoboxing_AutoBoxing_Ref, Boolean))));
+  AutoBoxing.m_acceptsObject__java_lang_Object__void(j_l_String.m_valueOf__java_lang_Object__java_lang_String(/**@type {?string}*/ ($Casts.$to(stringRef.f_field__autoboxing_AutoBoxing_Ref, j_l_String))) + j_l_String.m_valueOf__java_lang_Object__java_lang_String(/**@type {?string}*/ ($Casts.$to(stringRef.f_field__autoboxing_AutoBoxing_Ref, j_l_String))));
+  stringRef.f_field__autoboxing_AutoBoxing_Ref = (/**@type {?string}*/ ($Casts.$to(stringRef.f_field__autoboxing_AutoBoxing_Ref, j_l_String)));
+  AutoBoxing.m_acceptsString__java_lang_String__void('' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(integerRef.f_field__autoboxing_AutoBoxing_Ref));
+ }
+ /** @nodts */
  m_testAssertStatement__void() {
   let boxB = Boolean.$create__boolean(true);
   let b = true;
@@ -405,6 +427,7 @@ class AutoBoxing extends j_l_Object {
   Integer = goog.module.get('java.lang.Integer$impl');
   Long = goog.module.get('java.lang.Long$impl');
   Short = goog.module.get('java.lang.Short$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Long = goog.module.get('nativebootstrap.Long$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
