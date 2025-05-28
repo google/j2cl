@@ -21,6 +21,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointe
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.Asserts.fail;
 import static com.google.j2cl.integration.testing.TestUtils.getUndefined;
+import static com.google.j2cl.integration.testing.TestUtils.isJ2Kt;
 import static com.google.j2cl.integration.testing.TestUtils.isJavaScript;
 import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 
@@ -406,12 +407,17 @@ public class Main {
   }
 
   private static void testUnbox_byOperator_throwsCCE() {
+    // TODO(b/420648962): These do not work on J2KT, because of missing erasure type safety casts.
+    // On Kotlin/Native they lead to heap pollution: https://youtrack.jetbrains.com/issue/KT-40613
+    if (isJ2Kt()) {
+      return;
+    }
+
     Ref<Integer> shortInIntegerRef = (Ref) new Ref<Short>((short) 1);
     Ref<Integer> booleanInIntegerRef = (Ref) new Ref<Boolean>(true);
     Ref<Boolean> integerInBooleanRef = (Ref) new Ref<Integer>(1);
     Ref<String> integerInStringRef = (Ref) new Ref<Integer>(1);
 
-    // Unboxing can cause ClassCastException.
     assertThrowsClassCastException(() -> booleanInIntegerRef.field++, Integer.class);
 
     assertThrowsClassCastException(
