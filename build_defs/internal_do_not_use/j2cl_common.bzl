@@ -22,7 +22,8 @@ def _compile(
         javac_opts = [],
         kotlincopts = [],
         internal_transpiler_flags = {},
-        artifact_suffix = ""):
+        artifact_suffix = "",
+        is_j2kt_web_experiment_enabled = False):
     name = ctx.label.name + artifact_suffix
     java_toolchain = _get_java_toolchain(ctx)
     jvm_srcs, js_srcs = split_srcs(srcs)
@@ -73,6 +74,7 @@ def _compile(
             output_jar,
             javac_opts,
             kotlincopts = kotlincopts,
+            is_j2kt_web_experiment_enabled = is_j2kt_web_experiment_enabled,
         )
 
     if has_srcs_to_transpile:
@@ -223,7 +225,8 @@ def _kt_compile(
         exported_plugins = [],
         output_jar = None,
         javac_opts = [],
-        kotlincopts = []):
+        kotlincopts = [],
+        is_j2kt_web_experiment_enabled = False):
     fail("Kotlin frontend is disabled")
 
 def get_bootclasspath(ctx):

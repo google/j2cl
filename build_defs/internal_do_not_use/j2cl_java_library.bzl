@@ -73,6 +73,7 @@ def _impl_j2cl_library(ctx):
             k: getattr(ctx.attr, k)
             for k in _J2CL_INTERNAL_LIB_ATTRS.keys()
         },
+        is_j2kt_web_experiment_enabled = ctx.attr.j2kt_web_experiment_enabled,
     )
 
     outputs = [
