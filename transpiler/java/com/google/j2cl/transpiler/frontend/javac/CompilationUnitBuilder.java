@@ -110,6 +110,7 @@ import com.sun.tools.javac.tree.JCTree.JCAssert;
 import com.sun.tools.javac.tree.JCTree.JCAssign;
 import com.sun.tools.javac.tree.JCTree.JCAssignOp;
 import com.sun.tools.javac.tree.JCTree.JCBinary;
+import com.sun.tools.javac.tree.JCTree.JCBindingPattern;
 import com.sun.tools.javac.tree.JCTree.JCBlock;
 import com.sun.tools.javac.tree.JCTree.JCBreak;
 import com.sun.tools.javac.tree.JCTree.JCCase;
@@ -139,6 +140,7 @@ import com.sun.tools.javac.tree.JCTree.JCParens;
 import com.sun.tools.javac.tree.JCTree.JCReturn;
 import com.sun.tools.javac.tree.JCTree.JCStatement;
 import com.sun.tools.javac.tree.JCTree.JCSwitch;
+import com.sun.tools.javac.tree.JCTree.JCSwitchExpression;
 import com.sun.tools.javac.tree.JCTree.JCSynchronized;
 import com.sun.tools.javac.tree.JCTree.JCThrow;
 import com.sun.tools.javac.tree.JCTree.JCTry;
@@ -146,6 +148,7 @@ import com.sun.tools.javac.tree.JCTree.JCTypeCast;
 import com.sun.tools.javac.tree.JCTree.JCUnary;
 import com.sun.tools.javac.tree.JCTree.JCVariableDecl;
 import com.sun.tools.javac.tree.JCTree.JCWhileLoop;
+import com.sun.tools.javac.tree.JCTree.JCYield;
 import com.sun.tools.javac.tree.JCTree.Tag;
 import java.io.IOException;
 import java.util.ArrayDeque;
@@ -467,14 +470,70 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         .build();
   }
 
-  // TODO(b/380880096): Remove the stripping once opensource has the proper dependency.
-  private SwitchCase convertSwitchCase(JCCase caseClause, TypeDescriptor resultType) {
-    var caseExpression = convertExpressionOrNull(caseClause.getExpression());
-    return SwitchCase.newBuilder()
-        .setCaseExpressions(
-            caseExpression == null ? ImmutableList.of() : ImmutableList.of(caseExpression))
-        .setStatements(convertStatements(caseClause.getStatements()))
+  private Expression convertSwitchExpression(JCSwitchExpression expression) {
+    TypeDescriptor typeDescriptor = environment.createTypeDescriptor(expression.type);
+    return SwitchExpression.newBuilder()
+        .setSourcePosition(getSourcePosition(expression))
+        .setExpression(convertExpressionOrNull(expression.getExpression()))
+        .setTypeDescriptor(typeDescriptor)
+        .setCases(
+            expression.getCases().stream()
+                .map(c -> convertSwitchCase(c, typeDescriptor))
+                .collect(toImmutableList()))
         .build();
+  }
+
+  private SwitchCase convertSwitchCase(JCCase caseClause, TypeDescriptor resultType) {
+    return SwitchCase.newBuilder()
+        .setCaseExpressions(convertCaseExpressions(caseClause))
+        .setStatements(getCaseStatements(caseClause, resultType))
+        .setCanFallthrough(
+            caseClause.getCaseKind() == com.sun.source.tree.CaseTree.CaseKind.STATEMENT)
+        .build();
+  }
+
+  private List<Statement> getCaseStatements(JCCase caseClause, TypeDescriptor resultType) {
+    if (caseClause.getCaseKind() == com.sun.source.tree.CaseTree.CaseKind.STATEMENT) {
+      return convertStatements(caseClause.getStatements());
+    }
+    return convertSwitchCaseRuleBody(caseClause.getBody(), resultType);
+  }
+
+  /** Converts the body of a case rule into the equivalent statement format. */
+  private List<Statement> convertSwitchCaseRuleBody(
+      JCTree body, TypeDescriptor resultTypeDescriptor) {
+    if (body instanceof JCExpression) {
+      // The body is just an expression, convert it to a yield statement.
+      checkState(!isPrimitiveVoid(resultTypeDescriptor));
+      return ImmutableList.of(
+          YieldStatement.newBuilder()
+              .setExpression(convertExpression((JCExpression) body))
+              .setSourcePosition(getSourcePosition(body))
+              .build());
+    }
+
+    ImmutableList.Builder<Statement> statementsBuilder = ImmutableList.builder();
+    if (body == null) {
+    } else if (body instanceof JCBlock block) {
+      statementsBuilder.addAll(convertBlock(block).getStatements());
+    } else if (body instanceof JCStatement statement) {
+      statementsBuilder.add(convertStatement(statement));
+    } else {
+      throw new AssertionError("Unexpected node type in switch case rule: " + body.getKind());
+    }
+
+    if (isPrimitiveVoid(resultTypeDescriptor)) {
+      // Switch case rules don't fallthrough and this one is in a switch statement,
+      // add an explicit break.
+      statementsBuilder.add(
+          BreakStatement.newBuilder().setSourcePosition(getSourcePosition(body)).build());
+    }
+
+    return statementsBuilder.build();
+  }
+
+  private List<Expression> convertCaseExpressions(JCCase caseClause) {
+    return convertExpressions(caseClause.getExpressions());
   }
 
   private ThrowStatement convertThrow(JCThrow statement) {
@@ -535,7 +594,12 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         .build();
   }
 
-  // TODO(b/380880096): Remove the stripping once opensource has the proper dependency.
+  private Statement convertYield(JCYield statement) {
+    return YieldStatement.newBuilder()
+        .setExpression(convertExpressionOrNull(statement.value))
+        .setSourcePosition(getSourcePosition(statement))
+        .build();
+  }
 
   private SynchronizedStatement convertSynchronized(JCSynchronized statement) {
     return SynchronizedStatement.newBuilder()
@@ -596,7 +660,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         return convertLabeledStatement((JCLabeledStatement) jcStatement);
       case RETURN:
         return convertReturn((JCReturn) jcStatement);
-      // TODO(b/380880096): Remove the stripping once opensource has the proper dependency.
+      case YIELD:
+        return convertYield((JCYield) jcStatement);
       case SWITCH:
         return convertSwitch((JCSwitch) jcStatement);
       case THROW:
@@ -804,7 +869,9 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
   private InstanceOfExpression convertInstanceOf(JCInstanceOf expression) {
     Variable patternVariable = null;
-    // TODO(b/380880096): Remove the stripping once opensource has the proper dependency.
+    if (expression.getPattern() instanceof JCBindingPattern pattern) {
+      patternVariable = createVariable(pattern.var, false);
+    }
 
     return InstanceOfExpression.newBuilder()
         .setSourcePosition(getSourcePosition(expression))
@@ -1320,7 +1387,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         return convertNewClass((JCNewClass) jcExpression);
       case PARENTHESIZED:
         return convertParens((JCParens) jcExpression);
-      // TODO(b/380880096): Remove the stripping once opensource has the proper dependency.
+      case SWITCH_EXPRESSION:
+        return convertSwitchExpression((JCSwitchExpression) jcExpression);
       case TYPE_CAST:
         return convertCast((JCTypeCast) jcExpression);
       case BOOLEAN_LITERAL:
