@@ -18,6 +18,8 @@ package lambdas;
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.TestUtils.isJ2Kt;
+import static com.google.j2cl.integration.testing.TestUtils.isJ2KtNative;
 
 import java.io.Serializable;
 
@@ -31,7 +33,7 @@ public class Main {
     captures.testLambdaCaptureFieldAndLocal();
     testSpecialLambdas();
     testSpecializedLambda();
-    testVarargsLambdas();
+    testLambdaModifyingVarargValues();
     testVarKeywordInLambda();
     testSerializableLambda();
     testNestedLambdas();
@@ -134,6 +136,10 @@ public class Main {
 
   @SuppressWarnings({"rawtypes", "unchecked"})
   private static void testSpecializedLambda() {
+    // TODO(b/420648962): Enable when the bug is fixed.
+    if (isJ2KtNative()) {
+      return;
+    }
     Consumer<String> stringConsumer =
         s -> {
           Object unused = s.substring(1);
@@ -156,7 +162,12 @@ public class Main {
     int apply(T... t);
   }
 
-  private static void testVarargsLambdas() {
+  private static void testLambdaModifyingVarargValues() {
+    // Kotlin passes array copy as varargs.
+    if (isJ2Kt()) {
+      return;
+    }
+
     VarargsFunction<String> changeFirstElement =
         ss -> {
           ss[0] = ss[0] + " world";
@@ -178,6 +189,10 @@ public class Main {
   }
 
   private static void testSerializableLambda() {
+    // Kotlin does not support intersection type lambdas.
+    if (isJ2Kt()) {
+      return;
+    }
     Object lambda = (Consumer<Object> & Serializable) o -> {};
     assertTrue(lambda instanceof Serializable);
   }
@@ -245,6 +260,10 @@ public class Main {
   }
 
   private static void testIntersectionTypeLambdas() {
+    // Kotlin does not support intersection type lambdas.
+    if (isJ2Kt()) {
+      return;
+    }
     Object obj = (IdentityWithDefault<String> & InterfaceWithDefaultMethod) o -> o;
     assertTrue(obj instanceof IdentityWithDefault);
     assertTrue(obj instanceof InterfaceWithDefaultMethod);
