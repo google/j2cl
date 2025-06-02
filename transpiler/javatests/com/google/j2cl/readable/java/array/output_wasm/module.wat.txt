@@ -215,7 +215,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:24:13
   (call $$clinit__void_<once>_@array.Arrays )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:24:13
-  (local.set $$instance (struct.new $array.Arrays (ref.as_non_null (global.get $array.Arrays.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $array.Arrays (global.get $array.Arrays.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:24:13
   (call $$ctor__void_$p_array_Arrays@array.Arrays (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:24:13
@@ -613,7 +613,7 @@
  (local $$instance (ref null $array.Arrays.SomeObject))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:44:16
-  (local.set $$instance (struct.new $array.Arrays.SomeObject (ref.as_non_null (global.get $array.Arrays.SomeObject.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $array.Arrays)))
+  (local.set $$instance (struct.new $array.Arrays.SomeObject (global.get $array.Arrays.SomeObject.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $array.Arrays)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:44:16
   (call $$ctor__array_Arrays__void_$p_array_Arrays_SomeObject@array.Arrays.SomeObject (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:44:16
@@ -690,7 +690,7 @@
  (local $$instance (ref null $array.Arrays.ArrayContainer))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:187:23
-  (local.set $$instance (struct.new $array.Arrays.ArrayContainer (ref.as_non_null (global.get $array.Arrays.ArrayContainer.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject)))
+  (local.set $$instance (struct.new $array.Arrays.ArrayContainer (global.get $array.Arrays.ArrayContainer.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:187:23
   (call $$ctor__void_$p_array_Arrays_ArrayContainer@array.Arrays.ArrayContainer (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:187:23

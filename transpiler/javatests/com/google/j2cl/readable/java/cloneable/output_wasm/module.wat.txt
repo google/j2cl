@@ -200,7 +200,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cloneable/readable-j2wasm.js/cloneable/Cloneables.java:18:13
   (call $$clinit__void_<once>_@cloneable.Cloneables )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cloneable/readable-j2wasm.js/cloneable/Cloneables.java:18:13
-  (local.set $$instance (struct.new $cloneable.Cloneables (ref.as_non_null (global.get $cloneable.Cloneables.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $cloneable.Cloneables (global.get $cloneable.Cloneables.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cloneable/readable-j2wasm.js/cloneable/Cloneables.java:18:13
   (call $$ctor__void_$p_cloneable_Cloneables@cloneable.Cloneables (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cloneable/readable-j2wasm.js/cloneable/Cloneables.java:18:13
@@ -284,7 +284,7 @@
  (local $$instance (ref null $cloneable.Cloneables.WithoutCloneable))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cloneable/readable-j2wasm.js/cloneable/Cloneables.java:19:22
-  (local.set $$instance (struct.new $cloneable.Cloneables.WithoutCloneable (ref.as_non_null (global.get $cloneable.Cloneables.WithoutCloneable.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $cloneable.Cloneables.WithoutCloneable (global.get $cloneable.Cloneables.WithoutCloneable.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cloneable/readable-j2wasm.js/cloneable/Cloneables.java:19:22
   (call $$ctor__void_$p_cloneable_Cloneables_WithoutCloneable@cloneable.Cloneables.WithoutCloneable (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cloneable/readable-j2wasm.js/cloneable/Cloneables.java:19:22
@@ -383,7 +383,7 @@
  (local $$instance (ref null $cloneable.Cloneables.WithCloneable))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cloneable/readable-j2wasm.js/cloneable/Cloneables.java:27:22
-  (local.set $$instance (struct.new $cloneable.Cloneables.WithCloneable (ref.as_non_null (global.get $cloneable.Cloneables.WithCloneable.vtable)) (ref.as_non_null (global.get $cloneable.Cloneables.WithCloneable.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $cloneable.Cloneables.WithCloneable (global.get $cloneable.Cloneables.WithCloneable.vtable) (global.get $cloneable.Cloneables.WithCloneable.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cloneable/readable-j2wasm.js/cloneable/Cloneables.java:27:22
   (call $$ctor__void_$p_cloneable_Cloneables_WithCloneable@cloneable.Cloneables.WithCloneable (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cloneable/readable-j2wasm.js/cloneable/Cloneables.java:27:22
@@ -482,7 +482,7 @@
  (local $$instance (ref null $cloneable.Cloneables.WithoutCloneableChild))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cloneable/readable-j2wasm.js/cloneable/Cloneables.java:35:28
-  (local.set $$instance (struct.new $cloneable.Cloneables.WithoutCloneableChild (ref.as_non_null (global.get $cloneable.Cloneables.WithoutCloneableChild.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $cloneable.Cloneables.WithoutCloneableChild (global.get $cloneable.Cloneables.WithoutCloneableChild.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cloneable/readable-j2wasm.js/cloneable/Cloneables.java:35:28
   (call $$ctor__void_$p_cloneable_Cloneables_WithoutCloneableChild@cloneable.Cloneables.WithoutCloneableChild (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cloneable/readable-j2wasm.js/cloneable/Cloneables.java:35:28
@@ -581,7 +581,7 @@
  (local $$instance (ref null $cloneable.Cloneables.WithCloneableChild))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cloneable/readable-j2wasm.js/cloneable/Cloneables.java:42:28
-  (local.set $$instance (struct.new $cloneable.Cloneables.WithCloneableChild (ref.as_non_null (global.get $cloneable.Cloneables.WithCloneableChild.vtable)) (ref.as_non_null (global.get $cloneable.Cloneables.WithCloneableChild.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $cloneable.Cloneables.WithCloneableChild (global.get $cloneable.Cloneables.WithCloneableChild.vtable) (global.get $cloneable.Cloneables.WithCloneableChild.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cloneable/readable-j2wasm.js/cloneable/Cloneables.java:42:28
   (call $$ctor__void_$p_cloneable_Cloneables_WithCloneableChild@cloneable.Cloneables.WithCloneableChild (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cloneable/readable-j2wasm.js/cloneable/Cloneables.java:42:28

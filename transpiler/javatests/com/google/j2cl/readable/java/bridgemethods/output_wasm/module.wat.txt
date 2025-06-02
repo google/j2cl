@@ -2586,7 +2586,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/AccidentalOverride.java:22:6
   (call $$clinit__void_<once>_@bridgemethods.A )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/AccidentalOverride.java:22:6
-  (local.set $$instance (struct.new $bridgemethods.A (ref.as_non_null (global.get $bridgemethods.A.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $bridgemethods.A (global.get $bridgemethods.A.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/AccidentalOverride.java:22:6
   (call $$ctor__void_$p_bridgemethods_A@bridgemethods.A (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/AccidentalOverride.java:22:6
@@ -2748,7 +2748,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:26:6
   (call $$clinit__void_<once>_@bridgemethods.SuperParent )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:26:6
-  (local.set $$instance (struct.new $bridgemethods.SuperParent (ref.as_non_null (global.get $bridgemethods.SuperParent.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $bridgemethods.SuperParent (global.get $bridgemethods.SuperParent.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:26:6
   (call $$ctor__void_$p_bridgemethods_SuperParent@bridgemethods.SuperParent (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:26:6
@@ -2836,7 +2836,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:62:6
   (call $$clinit__void_<once>_@bridgemethods.DualUnrelatedBridges )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:62:6
-  (local.set $$instance (struct.new $bridgemethods.DualUnrelatedBridges (ref.as_non_null (global.get $bridgemethods.DualUnrelatedBridges.vtable)) (ref.as_non_null (global.get $bridgemethods.DualUnrelatedBridges.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $bridgemethods.DualUnrelatedBridges (global.get $bridgemethods.DualUnrelatedBridges.vtable) (global.get $bridgemethods.DualUnrelatedBridges.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:62:6
   (call $$ctor__void_$p_bridgemethods_DualUnrelatedBridges@bridgemethods.DualUnrelatedBridges (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:62:6
@@ -2986,7 +2986,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:73:6
   (call $$clinit__void_<once>_@bridgemethods.SuperDualUnrelatedAccidentalBridges )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:73:6
-  (local.set $$instance (struct.new $bridgemethods.SuperDualUnrelatedAccidentalBridges (ref.as_non_null (global.get $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $bridgemethods.SuperDualUnrelatedAccidentalBridges (global.get $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:73:6
   (call $$ctor__void_$p_bridgemethods_SuperDualUnrelatedAccidentalBridges@bridgemethods.SuperDualUnrelatedAccidentalBridges (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:73:6
@@ -3088,7 +3088,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:90:6
   (call $$clinit__void_<once>_@bridgemethods.ClassWithParameterizedGet )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:90:6
-  (local.set $$instance (struct.new $bridgemethods.ClassWithParameterizedGet (ref.as_non_null (global.get $bridgemethods.ClassWithParameterizedGet.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $bridgemethods.ClassWithParameterizedGet (global.get $bridgemethods.ClassWithParameterizedGet.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:90:6
   (call $$ctor__void_$p_bridgemethods_ClassWithParameterizedGet@bridgemethods.ClassWithParameterizedGet (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:90:6
@@ -3178,7 +3178,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:105:6
   (call $$clinit__void_<once>_@bridgemethods.TestCase10036 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:105:6
-  (local.set $$instance (struct.new $bridgemethods.TestCase10036 (ref.as_non_null (global.get $bridgemethods.TestCase10036.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $bridgemethods.TestCase10036 (global.get $bridgemethods.TestCase10036.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:105:6
   (call $$ctor__void_$p_bridgemethods_TestCase10036@bridgemethods.TestCase10036 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:105:6
@@ -3252,7 +3252,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:130:6
   (call $$clinit__void_<once>_@bridgemethods.TestCase102 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:130:6
-  (local.set $$instance (struct.new $bridgemethods.TestCase102 (ref.as_non_null (global.get $bridgemethods.TestCase102.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $bridgemethods.TestCase102 (global.get $bridgemethods.TestCase102.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:130:6
   (call $$ctor__void_$p_bridgemethods_TestCase102@bridgemethods.TestCase102 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:130:6
@@ -3326,7 +3326,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:154:6
   (call $$clinit__void_<once>_@bridgemethods.ParameterizedParent )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:154:6
-  (local.set $$instance (struct.new $bridgemethods.ParameterizedParent (ref.as_non_null (global.get $bridgemethods.ParameterizedParent.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $bridgemethods.ParameterizedParent (global.get $bridgemethods.ParameterizedParent.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:154:6
   (call $$ctor__void_$p_bridgemethods_ParameterizedParent@bridgemethods.ParameterizedParent (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:154:6
@@ -3416,7 +3416,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:173:6
   (call $$clinit__void_<once>_@bridgemethods.Consumer )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:173:6
-  (local.set $$instance (struct.new $bridgemethods.Consumer (ref.as_non_null (global.get $bridgemethods.Consumer.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $bridgemethods.Consumer (global.get $bridgemethods.Consumer.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:173:6
   (call $$ctor__void_$p_bridgemethods_Consumer@bridgemethods.Consumer (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:173:6
@@ -3594,7 +3594,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:211:6
   (call $$clinit__void_<once>_@bridgemethods.PackagePrivateBridgeSuper )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:211:6
-  (local.set $$instance (struct.new $bridgemethods.PackagePrivateBridgeSuper (ref.as_non_null (global.get $bridgemethods.PackagePrivateBridgeSuper.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $bridgemethods.PackagePrivateBridgeSuper (global.get $bridgemethods.PackagePrivateBridgeSuper.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:211:6
   (call $$ctor__void_$p_bridgemethods_PackagePrivateBridgeSuper@bridgemethods.PackagePrivateBridgeSuper (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:211:6
@@ -4174,7 +4174,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethodDefault.java:20:6
   (call $$clinit__void_<once>_@bridgemethods.BridgeMethodDefault )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethodDefault.java:20:6
-  (local.set $$instance (struct.new $bridgemethods.BridgeMethodDefault (ref.as_non_null (global.get $bridgemethods.BridgeMethodDefault.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $bridgemethods.BridgeMethodDefault (global.get $bridgemethods.BridgeMethodDefault.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethodDefault.java:20:6
   (call $$ctor__void_$p_bridgemethods_BridgeMethodDefault@bridgemethods.BridgeMethodDefault (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethodDefault.java:20:6
@@ -4409,7 +4409,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethodShadowedSignature.java:20:13
   (call $$clinit__void_<once>_@bridgemethods.BridgeMethodShadowedSignature )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethodShadowedSignature.java:20:13
-  (local.set $$instance (struct.new $bridgemethods.BridgeMethodShadowedSignature (ref.as_non_null (global.get $bridgemethods.BridgeMethodShadowedSignature.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $bridgemethods.BridgeMethodShadowedSignature (global.get $bridgemethods.BridgeMethodShadowedSignature.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethodShadowedSignature.java:20:13
   (call $$ctor__void_$p_bridgemethods_BridgeMethodShadowedSignature@bridgemethods.BridgeMethodShadowedSignature (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethodShadowedSignature.java:20:13
@@ -4613,7 +4613,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/EnumMap.java:22:6
   (call $$clinit__void_<once>_@bridgemethods.AbstractMap )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/EnumMap.java:22:6
-  (local.set $$instance (struct.new $bridgemethods.AbstractMap (ref.as_non_null (global.get $bridgemethods.AbstractMap.vtable)) (ref.as_non_null (global.get $bridgemethods.AbstractMap.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $bridgemethods.AbstractMap (global.get $bridgemethods.AbstractMap.vtable) (global.get $bridgemethods.AbstractMap.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/EnumMap.java:22:6
   (call $$ctor__void_$p_bridgemethods_AbstractMap@bridgemethods.AbstractMap (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/EnumMap.java:22:6
@@ -4793,7 +4793,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/AccidentalOverride.java:32:6
   (call $$clinit__void_<once>_@bridgemethods.B )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/AccidentalOverride.java:32:6
-  (local.set $$instance (struct.new $bridgemethods.B (ref.as_non_null (global.get $bridgemethods.B.vtable)) (ref.as_non_null (global.get $bridgemethods.B.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $bridgemethods.B (global.get $bridgemethods.B.vtable) (global.get $bridgemethods.B.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/AccidentalOverride.java:32:6
   (call $$ctor__void_$p_bridgemethods_B@bridgemethods.B (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/AccidentalOverride.java:32:6
@@ -4899,7 +4899,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/AccidentalOverride.java:48:6
   (call $$clinit__void_<once>_@bridgemethods.AccidentalOverride )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/AccidentalOverride.java:48:6
-  (local.set $$instance (struct.new $bridgemethods.AccidentalOverride (ref.as_non_null (global.get $bridgemethods.AccidentalOverride.vtable)) (ref.as_non_null (global.get $bridgemethods.AccidentalOverride.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $bridgemethods.AccidentalOverride (global.get $bridgemethods.AccidentalOverride.vtable) (global.get $bridgemethods.AccidentalOverride.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/AccidentalOverride.java:48:6
   (call $$ctor__void_$p_bridgemethods_AccidentalOverride@bridgemethods.AccidentalOverride (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/AccidentalOverride.java:48:6
@@ -5004,7 +5004,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:30:6
   (call $$clinit__void_<once>_@bridgemethods.Parent )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:30:6
-  (local.set $$instance (struct.new $bridgemethods.Parent (ref.as_non_null (global.get $bridgemethods.Parent.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $bridgemethods.Parent (global.get $bridgemethods.Parent.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:30:6
   (call $$ctor__void_$p_bridgemethods_Parent@bridgemethods.Parent (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:30:6
@@ -5134,7 +5134,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:79:6
   (call $$clinit__void_<once>_@bridgemethods.DualUnrelatedAccidentalBridges )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:79:6
-  (local.set $$instance (struct.new $bridgemethods.DualUnrelatedAccidentalBridges (ref.as_non_null (global.get $bridgemethods.DualUnrelatedAccidentalBridges.vtable)) (ref.as_non_null (global.get $bridgemethods.DualUnrelatedAccidentalBridges.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $bridgemethods.DualUnrelatedAccidentalBridges (global.get $bridgemethods.DualUnrelatedAccidentalBridges.vtable) (global.get $bridgemethods.DualUnrelatedAccidentalBridges.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:79:6
   (call $$ctor__void_$p_bridgemethods_DualUnrelatedAccidentalBridges@bridgemethods.DualUnrelatedAccidentalBridges (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:79:6
@@ -5266,7 +5266,7 @@
  (local $$instance (ref null $bridgemethods.AccidentalOverrideBridge))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:96:6
-  (local.set $$instance (struct.new $bridgemethods.AccidentalOverrideBridge (ref.as_non_null (global.get $bridgemethods.AccidentalOverrideBridge.vtable)) (ref.as_non_null (global.get $bridgemethods.AccidentalOverrideBridge.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $bridgemethods.AccidentalOverrideBridge (global.get $bridgemethods.AccidentalOverrideBridge.vtable) (global.get $bridgemethods.AccidentalOverrideBridge.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:96:6
   (call $$ctor__void_$p_bridgemethods_AccidentalOverrideBridge@bridgemethods.AccidentalOverrideBridge (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:96:6
@@ -5373,7 +5373,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:160:6
   (call $$clinit__void_<once>_@bridgemethods.ReparametrerizedChild )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:160:6
-  (local.set $$instance (struct.new $bridgemethods.ReparametrerizedChild (ref.as_non_null (global.get $bridgemethods.ReparametrerizedChild.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $bridgemethods.ReparametrerizedChild (global.get $bridgemethods.ReparametrerizedChild.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:160:6
   (call $$ctor__void_$p_bridgemethods_ReparametrerizedChild@bridgemethods.ReparametrerizedChild (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:160:6
@@ -5479,7 +5479,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:178:6
   (call $$clinit__void_<once>_@bridgemethods.StringConsumerImpl )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:178:6
-  (local.set $$instance (struct.new $bridgemethods.StringConsumerImpl (ref.as_non_null (global.get $bridgemethods.StringConsumerImpl.vtable)) (ref.as_non_null (global.get $bridgemethods.StringConsumerImpl.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $bridgemethods.StringConsumerImpl (global.get $bridgemethods.StringConsumerImpl.vtable) (global.get $bridgemethods.StringConsumerImpl.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:178:6
   (call $$ctor__void_$p_bridgemethods_StringConsumerImpl@bridgemethods.StringConsumerImpl (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:178:6
@@ -5792,7 +5792,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:215:12
   (call $$clinit__void_<once>_@bridgemethods.PackagePrivateBridge )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:215:12
-  (local.set $$instance (struct.new $bridgemethods.PackagePrivateBridge (ref.as_non_null (global.get $bridgemethods.PackagePrivateBridge.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $bridgemethods.PackagePrivateBridge (global.get $bridgemethods.PackagePrivateBridge.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:215:12
   (call $$ctor__void_$p_bridgemethods_PackagePrivateBridge@bridgemethods.PackagePrivateBridge (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:215:12
@@ -6093,7 +6093,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:145:8
   (call $$clinit__void_<once>_@bridgemethods.TestCase102.C )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:145:8
-  (local.set $$instance (struct.new $bridgemethods.TestCase102.C (ref.as_non_null (global.get $bridgemethods.TestCase102.C.vtable)) (ref.as_non_null (global.get $bridgemethods.TestCase102.C.itable)) (i32.const 0) (ref.null $bridgemethods.TestCase102)))
+  (local.set $$instance (struct.new $bridgemethods.TestCase102.C (global.get $bridgemethods.TestCase102.C.vtable) (global.get $bridgemethods.TestCase102.C.itable) (i32.const 0) (ref.null $bridgemethods.TestCase102)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:145:8
   (call $$ctor__bridgemethods_TestCase102__void_$p_bridgemethods_TestCase102_C@bridgemethods.TestCase102.C (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:145:8
@@ -6196,7 +6196,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethodDefault.java:30:15
   (call $$clinit__void_<once>_@bridgemethods.BridgeMethodDefault.A )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethodDefault.java:30:15
-  (local.set $$instance (struct.new $bridgemethods.BridgeMethodDefault.A (ref.as_non_null (global.get $bridgemethods.BridgeMethodDefault.A.vtable)) (ref.as_non_null (global.get $bridgemethods.BridgeMethodDefault.A.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $bridgemethods.BridgeMethodDefault.A (global.get $bridgemethods.BridgeMethodDefault.A.vtable) (global.get $bridgemethods.BridgeMethodDefault.A.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethodDefault.java:30:15
   (call $$ctor__void_$p_bridgemethods_BridgeMethodDefault_A@bridgemethods.BridgeMethodDefault.A (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethodDefault.java:30:15
@@ -6302,7 +6302,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethodDefault.java:38:15
   (call $$clinit__void_<once>_@bridgemethods.BridgeMethodDefault.B )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethodDefault.java:38:15
-  (local.set $$instance (struct.new $bridgemethods.BridgeMethodDefault.B (ref.as_non_null (global.get $bridgemethods.BridgeMethodDefault.B.vtable)) (ref.as_non_null (global.get $bridgemethods.BridgeMethodDefault.B.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $bridgemethods.BridgeMethodDefault.B (global.get $bridgemethods.BridgeMethodDefault.B.vtable) (global.get $bridgemethods.BridgeMethodDefault.B.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethodDefault.java:38:15
   (call $$ctor__void_$p_bridgemethods_BridgeMethodDefault_B@bridgemethods.BridgeMethodDefault.B (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethodDefault.java:38:15
@@ -6393,7 +6393,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethodShadowedSignature.java:32:15
   (call $$clinit__void_<once>_@bridgemethods.BridgeMethodShadowedSignature.C )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethodShadowedSignature.java:32:15
-  (local.set $$instance (struct.new $bridgemethods.BridgeMethodShadowedSignature.C (ref.as_non_null (global.get $bridgemethods.BridgeMethodShadowedSignature.C.vtable)) (ref.as_non_null (global.get $bridgemethods.BridgeMethodShadowedSignature.C.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $bridgemethods.BridgeMethodShadowedSignature.C (global.get $bridgemethods.BridgeMethodShadowedSignature.C.vtable) (global.get $bridgemethods.BridgeMethodShadowedSignature.C.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethodShadowedSignature.java:32:15
   (call $$ctor__void_$p_bridgemethods_BridgeMethodShadowedSignature_C@bridgemethods.BridgeMethodShadowedSignature.C (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethodShadowedSignature.java:32:15
@@ -6483,7 +6483,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/EnumMap.java:29:13
   (call $$clinit__void_<once>_@bridgemethods.EnumMap )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/EnumMap.java:29:13
-  (local.set $$instance (struct.new $bridgemethods.EnumMap (ref.as_non_null (global.get $bridgemethods.EnumMap.vtable)) (ref.as_non_null (global.get $bridgemethods.EnumMap.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $bridgemethods.EnumMap (global.get $bridgemethods.EnumMap.vtable) (global.get $bridgemethods.EnumMap.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/EnumMap.java:29:13
   (call $$ctor__void_$p_bridgemethods_EnumMap@bridgemethods.EnumMap (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/EnumMap.java:29:13
@@ -6591,7 +6591,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:42:13
   (call $$clinit__void_<once>_@bridgemethods.BridgeMethod )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:42:13
-  (local.set $$instance (struct.new $bridgemethods.BridgeMethod (ref.as_non_null (global.get $bridgemethods.BridgeMethod.vtable)) (ref.as_non_null (global.get $bridgemethods.BridgeMethod.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $bridgemethods.BridgeMethod (global.get $bridgemethods.BridgeMethod.vtable) (global.get $bridgemethods.BridgeMethod.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:42:13
   (call $$ctor__void_$p_bridgemethods_BridgeMethod@bridgemethods.BridgeMethod (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:42:13
@@ -6737,7 +6737,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:166:6
   (call $$clinit__void_<once>_@bridgemethods.LeafChild )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:166:6
-  (local.set $$instance (struct.new $bridgemethods.LeafChild (ref.as_non_null (global.get $bridgemethods.LeafChild.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $bridgemethods.LeafChild (global.get $bridgemethods.LeafChild.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:166:6
   (call $$ctor__void_$p_bridgemethods_LeafChild@bridgemethods.LeafChild (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:166:6
@@ -6811,7 +6811,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethodDefault.java:40:15
   (call $$clinit__void_<once>_@bridgemethods.BridgeMethodDefault.C )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethodDefault.java:40:15
-  (local.set $$instance (struct.new $bridgemethods.BridgeMethodDefault.C (ref.as_non_null (global.get $bridgemethods.BridgeMethodDefault.C.vtable)) (ref.as_non_null (global.get $bridgemethods.BridgeMethodDefault.C.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $bridgemethods.BridgeMethodDefault.C (global.get $bridgemethods.BridgeMethodDefault.C.vtable) (global.get $bridgemethods.BridgeMethodDefault.C.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethodDefault.java:40:15
   (call $$ctor__void_$p_bridgemethods_BridgeMethodDefault_C@bridgemethods.BridgeMethodDefault.C (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethodDefault.java:40:15

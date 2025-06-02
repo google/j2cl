@@ -3317,7 +3317,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:25:13
   (call $$clinit__void_<once>_@lambdas.Lambdas )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:25:13
-  (local.set $$instance (struct.new $lambdas.Lambdas (ref.as_non_null (global.get $lambdas.Lambdas.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas (global.get $lambdas.Lambdas.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:25:13
   (call $$ctor__void_$p_lambdas_Lambdas@lambdas.Lambdas (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:25:13
@@ -4346,7 +4346,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:199:75
   (call $$clinit__void_<once>_@lambdas.Lambdas.3 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:199:75
-  (local.set $$instance (struct.new $lambdas.Lambdas.3 (ref.as_non_null (global.get $lambdas.Lambdas.3.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $lambdas.Lambdas)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.3 (global.get $lambdas.Lambdas.3.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $lambdas.Lambdas)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:199:75
   (call $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_3@lambdas.Lambdas.3 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:199:75
@@ -4421,7 +4421,7 @@
  (local $$instance (ref null $lambdas.Lambdas.Wrapper))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:165:23
-  (local.set $$instance (struct.new $lambdas.Lambdas.Wrapper (ref.as_non_null (global.get $lambdas.Lambdas.Wrapper.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.Wrapper (global.get $lambdas.Lambdas.Wrapper.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:165:23
   (call $$ctor__void_$p_lambdas_Lambdas_Wrapper@lambdas.Lambdas.Wrapper (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:165:23
@@ -4505,7 +4505,7 @@
  (local $$instance (ref null $lambdas.Lambdas.Parent))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:202:23
-  (local.set $$instance (struct.new $lambdas.Lambdas.Parent (ref.as_non_null (global.get $lambdas.Lambdas.Parent.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.Parent (global.get $lambdas.Lambdas.Parent.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:202:23
   (call $$ctor__void_$p_lambdas_Lambdas_Parent@lambdas.Lambdas.Parent (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:202:23
@@ -4591,7 +4591,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:257:29
   (call $$clinit__void_<once>_@lambdas.Lambdas.IdentityFunction )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:257:29
-  (local.set $$instance (struct.new $lambdas.Lambdas.IdentityFunction (ref.as_non_null (global.get $lambdas.Lambdas.IdentityFunction.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.IdentityFunction.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.IdentityFunction (global.get $lambdas.Lambdas.IdentityFunction.vtable) (global.get $lambdas.Lambdas.IdentityFunction.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:257:29
   (call $$ctor__void_$p_lambdas_Lambdas_IdentityFunction@lambdas.Lambdas.IdentityFunction (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:257:29
@@ -4716,7 +4716,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:329:8
   (call $$clinit__void_<once>_@lambdas.Lambdas.Outer )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:329:8
-  (local.set $$instance (struct.new $lambdas.Lambdas.Outer (ref.as_non_null (global.get $lambdas.Lambdas.Outer.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $lambdas.Lambdas)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.Outer (global.get $lambdas.Lambdas.Outer.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $lambdas.Lambdas)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:329:8
   (call $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_Outer@lambdas.Lambdas.Outer (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:329:8
@@ -4821,7 +4821,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:337:8
   (call $$clinit__void_<once>_@lambdas.Lambdas.Super )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:337:8
-  (local.set $$instance (struct.new $lambdas.Lambdas.Super (ref.as_non_null (global.get $lambdas.Lambdas.Super.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $lambdas.Lambdas)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.Super (global.get $lambdas.Lambdas.Super.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $lambdas.Lambdas)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:337:8
   (call $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_Super@lambdas.Lambdas.Super (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:337:8
@@ -4910,7 +4910,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:365:77
   (call $$clinit__void_<once>_@lambdas.Lambdas.ProviderHolder.1 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:365:77
-  (local.set $$instance (struct.new $lambdas.Lambdas.ProviderHolder.1 (ref.as_non_null (global.get $lambdas.Lambdas.ProviderHolder.1.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.ProviderHolder.1.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.ProviderHolder.1 (global.get $lambdas.Lambdas.ProviderHolder.1.vtable) (global.get $lambdas.Lambdas.ProviderHolder.1.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:365:77
   (call $$ctor__void_$p_lambdas_Lambdas_ProviderHolder_1@lambdas.Lambdas.ProviderHolder.1 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:365:77
@@ -4984,7 +4984,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:96
   (call $$clinit__void_<once>_@lambdas.Lambdas.ProviderHolder.2 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:96
-  (local.set $$instance (struct.new $lambdas.Lambdas.ProviderHolder.2 (ref.as_non_null (global.get $lambdas.Lambdas.ProviderHolder.2.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.ProviderHolder.2.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.ProviderHolder.2 (global.get $lambdas.Lambdas.ProviderHolder.2.vtable) (global.get $lambdas.Lambdas.ProviderHolder.2.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:96
   (call $$ctor__void_$p_lambdas_Lambdas_ProviderHolder_2@lambdas.Lambdas.ProviderHolder.2 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:96
@@ -5058,7 +5058,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:364:15
   (call $$clinit__void_<once>_@lambdas.Lambdas.ProviderHolder )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:364:15
-  (local.set $$instance (struct.new $lambdas.Lambdas.ProviderHolder (ref.as_non_null (global.get $lambdas.Lambdas.ProviderHolder.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.ProviderHolder (global.get $lambdas.Lambdas.ProviderHolder.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:364:15
   (call $$ctor__void_$p_lambdas_Lambdas_ProviderHolder@lambdas.Lambdas.ProviderHolder (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:364:15
@@ -5212,7 +5212,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:37:9
   (call $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$1 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:37:9
-  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$1 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$1.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$1 (global.get $lambdas.Lambdas.$LambdaImplementor$1.vtable) (global.get $lambdas.Lambdas.$LambdaImplementor$1.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:37:9
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$1@lambdas.Lambdas.$LambdaImplementor$1 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:37:9
@@ -5289,7 +5289,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:42:8
   (call $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$2 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:42:8
-  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$2 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$2.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$2.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$2 (global.get $lambdas.Lambdas.$LambdaImplementor$2.vtable) (global.get $lambdas.Lambdas.$LambdaImplementor$2.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:42:8
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$2@lambdas.Lambdas.$LambdaImplementor$2 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:42:8
@@ -5367,7 +5367,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:49:9
   (call $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$3 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:49:9
-  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$3 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$3.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$3.itable)) (i32.const 0) (ref.null $lambdas.Lambdas)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$3 (global.get $lambdas.Lambdas.$LambdaImplementor$3.vtable) (global.get $lambdas.Lambdas.$LambdaImplementor$3.itable) (i32.const 0) (ref.null $lambdas.Lambdas)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:49:9
   (call $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_$LambdaImplementor$3@lambdas.Lambdas.$LambdaImplementor$3 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:49:9
@@ -5448,7 +5448,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:54:9
   (call $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$4 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:54:9
-  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$4 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$4.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$4.itable)) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$4 (global.get $lambdas.Lambdas.$LambdaImplementor$4.vtable) (global.get $lambdas.Lambdas.$LambdaImplementor$4.itable) (i32.const 0) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:54:9
   (call $$ctor__int__void_$p_lambdas_Lambdas_$LambdaImplementor$4@lambdas.Lambdas.$LambdaImplementor$4 (ref.as_non_null (local.get $$instance))(local.get $$captured_x))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:54:9
@@ -5530,7 +5530,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:60:8
   (call $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$5 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:60:8
-  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$5 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$5.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$5.itable)) (i32.const 0) (i32.const 0) (ref.null $lambdas.Lambdas)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$5 (global.get $lambdas.Lambdas.$LambdaImplementor$5.vtable) (global.get $lambdas.Lambdas.$LambdaImplementor$5.itable) (i32.const 0) (i32.const 0) (ref.null $lambdas.Lambdas)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:60:8
   (call $$ctor__lambdas_Lambdas__int__void_$p_lambdas_Lambdas_$LambdaImplementor$5@lambdas.Lambdas.$LambdaImplementor$5 (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$captured_x))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:60:8
@@ -5617,7 +5617,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:71:8
   (call $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$6 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:71:8
-  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$6 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$6.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$6.itable)) (i32.const 0) (ref.null $lambdas.Lambdas)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$6 (global.get $lambdas.Lambdas.$LambdaImplementor$6.vtable) (global.get $lambdas.Lambdas.$LambdaImplementor$6.itable) (i32.const 0) (ref.null $lambdas.Lambdas)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:71:8
   (call $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_$LambdaImplementor$6@lambdas.Lambdas.$LambdaImplementor$6 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:71:8
@@ -5703,7 +5703,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:81:28
   (call $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$7 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:81:28
-  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$7 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$7.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$7.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$7 (global.get $lambdas.Lambdas.$LambdaImplementor$7.vtable) (global.get $lambdas.Lambdas.$LambdaImplementor$7.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:81:28
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$7@lambdas.Lambdas.$LambdaImplementor$7 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:81:28
@@ -5780,7 +5780,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:85:19
   (call $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$8 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:85:19
-  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$8 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$8.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$8.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$8 (global.get $lambdas.Lambdas.$LambdaImplementor$8.vtable) (global.get $lambdas.Lambdas.$LambdaImplementor$8.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:85:19
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$8@lambdas.Lambdas.$LambdaImplementor$8 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:85:19
@@ -5858,7 +5858,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:85:9
   (call $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$9 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:85:9
-  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$9 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$9.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$9.itable)) (i32.const 0) (ref.null $lambdas.Lambdas)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$9 (global.get $lambdas.Lambdas.$LambdaImplementor$9.vtable) (global.get $lambdas.Lambdas.$LambdaImplementor$9.itable) (i32.const 0) (ref.null $lambdas.Lambdas)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:85:9
   (call $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_$LambdaImplementor$9@lambdas.Lambdas.$LambdaImplementor$9 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:85:9
@@ -5938,7 +5938,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:90:8
   (call $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$10 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:90:8
-  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$10 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$10.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$10.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$10 (global.get $lambdas.Lambdas.$LambdaImplementor$10.vtable) (global.get $lambdas.Lambdas.$LambdaImplementor$10.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:90:8
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$10@lambdas.Lambdas.$LambdaImplementor$10 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:90:8
@@ -6020,7 +6020,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:109:35
   (call $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$11 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:109:35
-  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$11 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$11.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$11.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$11 (global.get $lambdas.Lambdas.$LambdaImplementor$11.vtable) (global.get $lambdas.Lambdas.$LambdaImplementor$11.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:109:35
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$11@lambdas.Lambdas.$LambdaImplementor$11 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:109:35
@@ -6097,7 +6097,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:106:8
   (call $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$12 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:106:8
-  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$12 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$12.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$12.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$12 (global.get $lambdas.Lambdas.$LambdaImplementor$12.vtable) (global.get $lambdas.Lambdas.$LambdaImplementor$12.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:106:8
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$12@lambdas.Lambdas.$LambdaImplementor$12 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:106:8
@@ -6174,7 +6174,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:121:35
   (call $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$13 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:121:35
-  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$13 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$13.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$13.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$13 (global.get $lambdas.Lambdas.$LambdaImplementor$13.vtable) (global.get $lambdas.Lambdas.$LambdaImplementor$13.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:121:35
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$13@lambdas.Lambdas.$LambdaImplementor$13 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:121:35
@@ -6251,7 +6251,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:118:8
   (call $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$14 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:118:8
-  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$14 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$14.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$14.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$14 (global.get $lambdas.Lambdas.$LambdaImplementor$14.vtable) (global.get $lambdas.Lambdas.$LambdaImplementor$14.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:118:8
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$14@lambdas.Lambdas.$LambdaImplementor$14 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:118:8
@@ -6328,7 +6328,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:170:25
   (call $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$15 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:170:25
-  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$15 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$15.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$15.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$15 (global.get $lambdas.Lambdas.$LambdaImplementor$15.vtable) (global.get $lambdas.Lambdas.$LambdaImplementor$15.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:170:25
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$15@lambdas.Lambdas.$LambdaImplementor$15 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:170:25
@@ -6421,7 +6421,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:171:22
   (call $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$16 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:171:22
-  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$16 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$16.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$16.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$16 (global.get $lambdas.Lambdas.$LambdaImplementor$16.vtable) (global.get $lambdas.Lambdas.$LambdaImplementor$16.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:171:22
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$16@lambdas.Lambdas.$LambdaImplementor$16 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:171:22
@@ -6514,7 +6514,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:172:31
   (call $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$17 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:172:31
-  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$17 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$17.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$17.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$17 (global.get $lambdas.Lambdas.$LambdaImplementor$17.vtable) (global.get $lambdas.Lambdas.$LambdaImplementor$17.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:172:31
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$17@lambdas.Lambdas.$LambdaImplementor$17 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:172:31
@@ -6607,7 +6607,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:174:8
   (call $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$18 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:174:8
-  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$18 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$18.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$18.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$18 (global.get $lambdas.Lambdas.$LambdaImplementor$18.vtable) (global.get $lambdas.Lambdas.$LambdaImplementor$18.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:174:8
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$18@lambdas.Lambdas.$LambdaImplementor$18 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:174:8
@@ -6704,7 +6704,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:177:23
   (call $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$19 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:177:23
-  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$19 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$19.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$19.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$19 (global.get $lambdas.Lambdas.$LambdaImplementor$19.vtable) (global.get $lambdas.Lambdas.$LambdaImplementor$19.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:177:23
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$19@lambdas.Lambdas.$LambdaImplementor$19 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:177:23
@@ -6801,7 +6801,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:178:31
   (call $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$20 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:178:31
-  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$20 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$20.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$20.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$20 (global.get $lambdas.Lambdas.$LambdaImplementor$20.vtable) (global.get $lambdas.Lambdas.$LambdaImplementor$20.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:178:31
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$20@lambdas.Lambdas.$LambdaImplementor$20 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:178:31
@@ -6881,7 +6881,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:179:43
   (call $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$21 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:179:43
-  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$21 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$21.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$21.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$21 (global.get $lambdas.Lambdas.$LambdaImplementor$21.vtable) (global.get $lambdas.Lambdas.$LambdaImplementor$21.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:179:43
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$21@lambdas.Lambdas.$LambdaImplementor$21 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:179:43
@@ -6974,7 +6974,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:187:28
   (call $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$22 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:187:28
-  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$22 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$22.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$22.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$22 (global.get $lambdas.Lambdas.$LambdaImplementor$22.vtable) (global.get $lambdas.Lambdas.$LambdaImplementor$22.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:187:28
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$22@lambdas.Lambdas.$LambdaImplementor$22 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:187:28
@@ -7051,7 +7051,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:195:56
   (call $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$23 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:195:56
-  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$23 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$23.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$23.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$23 (global.get $lambdas.Lambdas.$LambdaImplementor$23.vtable) (global.get $lambdas.Lambdas.$LambdaImplementor$23.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:195:56
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$23@lambdas.Lambdas.$LambdaImplementor$23 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:195:56
@@ -7127,7 +7127,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:199:56
   (call $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$24 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:199:56
-  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$24 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$24.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$24.itable)) (i32.const 0) (ref.null $lambdas.Lambdas)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$24 (global.get $lambdas.Lambdas.$LambdaImplementor$24.vtable) (global.get $lambdas.Lambdas.$LambdaImplementor$24.itable) (i32.const 0) (ref.null $lambdas.Lambdas)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:199:56
   (call $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_$LambdaImplementor$24@lambdas.Lambdas.$LambdaImplementor$24 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:199:56
@@ -7205,7 +7205,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:300:76
   (call $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$25 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:300:76
-  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$25 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$25.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$25.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$25 (global.get $lambdas.Lambdas.$LambdaImplementor$25.vtable) (global.get $lambdas.Lambdas.$LambdaImplementor$25.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:300:76
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$25@lambdas.Lambdas.$LambdaImplementor$25 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:300:76
@@ -7330,7 +7330,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:303:69
   (call $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$26 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:303:69
-  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$26 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$26.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$26.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$26 (global.get $lambdas.Lambdas.$LambdaImplementor$26.vtable) (global.get $lambdas.Lambdas.$LambdaImplementor$26.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:303:69
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$26@lambdas.Lambdas.$LambdaImplementor$26 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:303:69
@@ -7455,7 +7455,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:307:59
   (call $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$27 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:307:59
-  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$27 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$27.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$27.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$27 (global.get $lambdas.Lambdas.$LambdaImplementor$27.vtable) (global.get $lambdas.Lambdas.$LambdaImplementor$27.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:307:59
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$27@lambdas.Lambdas.$LambdaImplementor$27 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:307:59
@@ -7549,7 +7549,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:316:78
   (call $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$28 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:316:78
-  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$28 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$28.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$28.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$28 (global.get $lambdas.Lambdas.$LambdaImplementor$28.vtable) (global.get $lambdas.Lambdas.$LambdaImplementor$28.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:316:78
   (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$28@lambdas.Lambdas.$LambdaImplementor$28 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:316:78
@@ -7663,7 +7663,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:322:25
   (call $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$29 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:322:25
-  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$29 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$29.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$29.itable)) (i32.const 0) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$29 (global.get $lambdas.Lambdas.$LambdaImplementor$29.vtable) (global.get $lambdas.Lambdas.$LambdaImplementor$29.itable) (i32.const 0) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:322:25
   (call $$ctor__java_lang_Iterable__void_$p_lambdas_Lambdas_$LambdaImplementor$29@lambdas.Lambdas.$LambdaImplementor$29 (ref.as_non_null (local.get $$instance))(local.get $$captured_iterable))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:322:25
@@ -7746,7 +7746,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:153:13
   (call $$clinit__void_<once>_@lambdas.Lambdas.BiFunction.$LambdaImplementor$30 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:153:13
-  (local.set $$instance (struct.new $lambdas.Lambdas.BiFunction.$LambdaImplementor$30 (ref.as_non_null (global.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$30.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$30.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.BiFunction.$LambdaImplementor$30 (global.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$30.vtable) (global.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$30.itable) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:153:13
   (call $$ctor__lambdas_Lambdas_BiFunction__lambdas_Lambdas_Function__void_$p_lambdas_Lambdas_BiFunction_$LambdaImplementor$30@lambdas.Lambdas.BiFunction.$LambdaImplementor$30 (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$captured_after))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:153:13
@@ -7832,7 +7832,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:159:13
   (call $$clinit__void_<once>_@lambdas.Lambdas.Function.$LambdaImplementor$31 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:159:13
-  (local.set $$instance (struct.new $lambdas.Lambdas.Function.$LambdaImplementor$31 (ref.as_non_null (global.get $lambdas.Lambdas.Function.$LambdaImplementor$31.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.Function.$LambdaImplementor$31.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.Function.$LambdaImplementor$31 (global.get $lambdas.Lambdas.Function.$LambdaImplementor$31.vtable) (global.get $lambdas.Lambdas.Function.$LambdaImplementor$31.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:159:13
   (call $$ctor__void_$p_lambdas_Lambdas_Function_$LambdaImplementor$31@lambdas.Lambdas.Function.$LambdaImplementor$31 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:159:13
@@ -7910,7 +7910,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:211:11
   (call $$clinit__void_<once>_@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:211:11
-  (local.set $$instance (struct.new $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 (ref.as_non_null (global.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32.itable)) (i32.const 0) (ref.null $lambdas.Lambdas.LambdaInSubClass)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 (global.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32.vtable) (global.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32.itable) (i32.const 0) (ref.null $lambdas.Lambdas.LambdaInSubClass)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:211:11
   (call $$ctor__lambdas_Lambdas_LambdaInSubClass__void_$p_lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$32@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:211:11
@@ -8001,7 +8001,7 @@
  (local $$instance (ref null $lambdas.Lambdas.LambdaInSubClass))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:208:23
-  (local.set $$instance (struct.new $lambdas.Lambdas.LambdaInSubClass (ref.as_non_null (global.get $lambdas.Lambdas.LambdaInSubClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.LambdaInSubClass (global.get $lambdas.Lambdas.LambdaInSubClass.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:208:23
   (call $$ctor__void_$p_lambdas_Lambdas_LambdaInSubClass@lambdas.Lambdas.LambdaInSubClass (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:208:23
@@ -8091,7 +8091,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:333:19
   (call $$clinit__void_<once>_@lambdas.Lambdas.Outer.$LambdaImplementor$33 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:333:19
-  (local.set $$instance (struct.new $lambdas.Lambdas.Outer.$LambdaImplementor$33 (ref.as_non_null (global.get $lambdas.Lambdas.Outer.$LambdaImplementor$33.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.Outer.$LambdaImplementor$33.itable)) (i32.const 0) (ref.null $lambdas.Lambdas.Outer)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.Outer.$LambdaImplementor$33 (global.get $lambdas.Lambdas.Outer.$LambdaImplementor$33.vtable) (global.get $lambdas.Lambdas.Outer.$LambdaImplementor$33.itable) (i32.const 0) (ref.null $lambdas.Lambdas.Outer)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:333:19
   (call $$ctor__lambdas_Lambdas_Outer__void_$p_lambdas_Lambdas_Outer_$LambdaImplementor$33@lambdas.Lambdas.Outer.$LambdaImplementor$33 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:333:19
@@ -8170,7 +8170,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:345:24
   (call $$clinit__void_<once>_@lambdas.Lambdas.Sub.$LambdaImplementor$34 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:345:24
-  (local.set $$instance (struct.new $lambdas.Lambdas.Sub.$LambdaImplementor$34 (ref.as_non_null (global.get $lambdas.Lambdas.Sub.$LambdaImplementor$34.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.Sub.$LambdaImplementor$34.itable)) (i32.const 0) (ref.null $lambdas.Lambdas.Sub)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.Sub.$LambdaImplementor$34 (global.get $lambdas.Lambdas.Sub.$LambdaImplementor$34.vtable) (global.get $lambdas.Lambdas.Sub.$LambdaImplementor$34.itable) (i32.const 0) (ref.null $lambdas.Lambdas.Sub)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:345:24
   (call $$ctor__lambdas_Lambdas_Sub__void_$p_lambdas_Lambdas_Sub_$LambdaImplementor$34@lambdas.Lambdas.Sub.$LambdaImplementor$34 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:345:24
@@ -8249,7 +8249,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:341:8
   (call $$clinit__void_<once>_@lambdas.Lambdas.Sub )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:341:8
-  (local.set $$instance (struct.new $lambdas.Lambdas.Sub (ref.as_non_null (global.get $lambdas.Lambdas.Sub.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $lambdas.Lambdas) (ref.null $lambdas.Lambdas)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.Sub (global.get $lambdas.Lambdas.Sub.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $lambdas.Lambdas) (ref.null $lambdas.Lambdas)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:341:8
   (call $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_Sub@lambdas.Lambdas.Sub (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:341:8
@@ -8342,7 +8342,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:354:19
   (call $$clinit__void_<once>_@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:354:19
-  (local.set $$instance (struct.new $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35 (ref.as_non_null (global.get $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35.itable)) (i32.const 0) (ref.null $lambdas.Lambdas.SubWithLambda)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35 (global.get $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35.vtable) (global.get $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35.itable) (i32.const 0) (ref.null $lambdas.Lambdas.SubWithLambda)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:354:19
   (call $$ctor__lambdas_Lambdas_SubWithLambda__void_$p_lambdas_Lambdas_SubWithLambda_$LambdaImplementor$35@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:354:19
@@ -8421,7 +8421,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:352:8
   (call $$clinit__void_<once>_@lambdas.Lambdas.SubWithLambda )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:352:8
-  (local.set $$instance (struct.new $lambdas.Lambdas.SubWithLambda (ref.as_non_null (global.get $lambdas.Lambdas.SubWithLambda.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $lambdas.Lambdas) (ref.null $lambdas.Lambdas)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.SubWithLambda (global.get $lambdas.Lambdas.SubWithLambda.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $lambdas.Lambdas) (ref.null $lambdas.Lambdas)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:352:8
   (call $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_SubWithLambda@lambdas.Lambdas.SubWithLambda (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:352:8
@@ -8513,7 +8513,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:66
   (call $$clinit__void_<once>_@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:66
-  (local.set $$instance (struct.new $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36 (ref.as_non_null (global.get $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36 (global.get $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36.vtable) (global.get $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:66
   (call $$ctor__void_$p_lambdas_Lambdas_ProviderHolder_$LambdaImplementor$36@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:66
@@ -8592,7 +8592,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:69
   (call $$clinit__void_<once>_@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:69
-  (local.set $$instance (struct.new $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37 (ref.as_non_null (global.get $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37 (global.get $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37.vtable) (global.get $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:69
   (call $$ctor__void_$p_lambdas_Lambdas_ProviderHolder_$LambdaImplementor$37@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:69

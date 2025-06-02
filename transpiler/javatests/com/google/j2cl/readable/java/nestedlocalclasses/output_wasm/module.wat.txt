@@ -308,7 +308,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedlocalclasses/readable-j2wasm.js/nestedlocalclasses/NestedLocalClasses.java:18:13
   (call $$clinit__void_<once>_@nestedlocalclasses.NestedLocalClasses )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedlocalclasses/readable-j2wasm.js/nestedlocalclasses/NestedLocalClasses.java:18:13
-  (local.set $$instance (struct.new $nestedlocalclasses.NestedLocalClasses (ref.as_non_null (global.get $nestedlocalclasses.NestedLocalClasses.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $nestedlocalclasses.NestedLocalClasses (global.get $nestedlocalclasses.NestedLocalClasses.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedlocalclasses/readable-j2wasm.js/nestedlocalclasses/NestedLocalClasses.java:18:13
   (call $$ctor__void_$p_nestedlocalclasses_NestedLocalClasses@nestedlocalclasses.NestedLocalClasses (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedlocalclasses/readable-j2wasm.js/nestedlocalclasses/NestedLocalClasses.java:18:13
@@ -399,7 +399,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedlocalclasses/readable-j2wasm.js/nestedlocalclasses/NestedLocalClasses.java:41:12
   (call $$clinit__void_<once>_@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedlocalclasses/readable-j2wasm.js/nestedlocalclasses/NestedLocalClasses.java:41:12
-  (local.set $$instance (struct.new $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super (ref.as_non_null (global.get $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super.vtable)) (ref.as_non_null (global.get $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super.itable)) (i32.const 0) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super (global.get $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super.vtable) (global.get $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super.itable) (i32.const 0) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedlocalclasses/readable-j2wasm.js/nestedlocalclasses/NestedLocalClasses.java:41:12
   (call $$ctor__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference__void_$p_nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedlocalclasses/readable-j2wasm.js/nestedlocalclasses/NestedLocalClasses.java:41:12
@@ -495,7 +495,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedlocalclasses/readable-j2wasm.js/nestedlocalclasses/NestedLocalClasses.java:25:14
   (call $$clinit__void_<once>_@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedlocalclasses/readable-j2wasm.js/nestedlocalclasses/NestedLocalClasses.java:25:14
-  (local.set $$instance (struct.new $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (ref.as_non_null (global.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (i32.const 0) (ref.null $nestedlocalclasses.NestedLocalClasses.1InnerClass) (i32.const 0)))
+  (local.set $$instance (struct.new $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (global.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0) (i32.const 0) (ref.null $nestedlocalclasses.NestedLocalClasses.1InnerClass) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedlocalclasses/readable-j2wasm.js/nestedlocalclasses/NestedLocalClasses.java:25:14
   (call $$ctor__nestedlocalclasses_NestedLocalClasses_1InnerClass__int__int__void_$p_nestedlocalclasses_NestedLocalClasses_1InnerClass_1InnerInnerClass@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$captured_localVar)(local.get $$captured_localVarInInnerClass))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedlocalclasses/readable-j2wasm.js/nestedlocalclasses/NestedLocalClasses.java:25:14
@@ -593,7 +593,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedlocalclasses/readable-j2wasm.js/nestedlocalclasses/NestedLocalClasses.java:30:14
   (call $$clinit__void_<once>_@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedlocalclasses/readable-j2wasm.js/nestedlocalclasses/NestedLocalClasses.java:30:14
-  (local.set $$instance (struct.new $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal (ref.as_non_null (global.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (i32.const 0) (ref.null $nestedlocalclasses.NestedLocalClasses.1InnerClass)))
+  (local.set $$instance (struct.new $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal (global.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0) (i32.const 0) (ref.null $nestedlocalclasses.NestedLocalClasses.1InnerClass)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedlocalclasses/readable-j2wasm.js/nestedlocalclasses/NestedLocalClasses.java:30:14
   (call $$ctor__nestedlocalclasses_NestedLocalClasses_1InnerClass__int__int__void_$p_nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$captured_localVar)(local.get $$captured_localVarInInnerClass))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedlocalclasses/readable-j2wasm.js/nestedlocalclasses/NestedLocalClasses.java:30:14
@@ -690,7 +690,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedlocalclasses/readable-j2wasm.js/nestedlocalclasses/NestedLocalClasses.java:21:10
   (call $$clinit__void_<once>_@nestedlocalclasses.NestedLocalClasses.1InnerClass )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedlocalclasses/readable-j2wasm.js/nestedlocalclasses/NestedLocalClasses.java:21:10
-  (local.set $$instance (struct.new $nestedlocalclasses.NestedLocalClasses.1InnerClass (ref.as_non_null (global.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (ref.null $nestedlocalclasses.NestedLocalClasses)))
+  (local.set $$instance (struct.new $nestedlocalclasses.NestedLocalClasses.1InnerClass (global.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0) (ref.null $nestedlocalclasses.NestedLocalClasses)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedlocalclasses/readable-j2wasm.js/nestedlocalclasses/NestedLocalClasses.java:21:10
   (call $$ctor__nestedlocalclasses_NestedLocalClasses__int__void_$p_nestedlocalclasses_NestedLocalClasses_1InnerClass@nestedlocalclasses.NestedLocalClasses.1InnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$captured_localVar))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedlocalclasses/readable-j2wasm.js/nestedlocalclasses/NestedLocalClasses.java:21:10
@@ -788,7 +788,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedlocalclasses/readable-j2wasm.js/nestedlocalclasses/NestedLocalClasses.java:42:18
   (call $$clinit__void_<once>_@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedlocalclasses/readable-j2wasm.js/nestedlocalclasses/NestedLocalClasses.java:42:18
-  (local.set $$instance (struct.new $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 (ref.as_non_null (global.get $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.vtable)) (ref.as_non_null (global.get $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 (global.get $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.vtable) (global.get $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.itable) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedlocalclasses/readable-j2wasm.js/nestedlocalclasses/NestedLocalClasses.java:42:18
   (call $$ctor__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference__void_$p_nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedlocalclasses/readable-j2wasm.js/nestedlocalclasses/NestedLocalClasses.java:42:18

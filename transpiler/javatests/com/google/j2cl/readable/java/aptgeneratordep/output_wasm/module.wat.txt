@@ -79,7 +79,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/aptgeneratordep/readable-j2wasm.js/aptgeneratordep/Dummy.java:3:13
   (call $$clinit__void_<once>_@aptgeneratordep.Dummy )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/aptgeneratordep/readable-j2wasm.js/aptgeneratordep/Dummy.java:3:13
-  (local.set $$instance (struct.new $aptgeneratordep.Dummy (ref.as_non_null (global.get $aptgeneratordep.Dummy.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $aptgeneratordep.Dummy (global.get $aptgeneratordep.Dummy.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/aptgeneratordep/readable-j2wasm.js/aptgeneratordep/Dummy.java:3:13
   (call $$ctor__void_$p_aptgeneratordep_Dummy@aptgeneratordep.Dummy (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/aptgeneratordep/readable-j2wasm.js/aptgeneratordep/Dummy.java:3:13
@@ -153,7 +153,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/aptgeneratordep/readable-j2wasm.js/aptgeneratordep/Foo.java:18:13
   (call $$clinit__void_<once>_@aptgeneratordep.Foo )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/aptgeneratordep/readable-j2wasm.js/aptgeneratordep/Foo.java:18:13
-  (local.set $$instance (struct.new $aptgeneratordep.Foo (ref.as_non_null (global.get $aptgeneratordep.Foo.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $aptgeneratordep.Foo (global.get $aptgeneratordep.Foo.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/aptgeneratordep/readable-j2wasm.js/aptgeneratordep/Foo.java:18:13
   (call $$ctor__void_$p_aptgeneratordep_Foo@aptgeneratordep.Foo (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/aptgeneratordep/readable-j2wasm.js/aptgeneratordep/Foo.java:18:13

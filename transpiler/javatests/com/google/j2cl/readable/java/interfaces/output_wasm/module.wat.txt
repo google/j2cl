@@ -347,7 +347,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:18:13
   (call $$clinit__void_<once>_@interfaces.Main )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:18:13
-  (local.set $$instance (struct.new $interfaces.Main (ref.as_non_null (global.get $interfaces.Main.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $interfaces.Main (global.get $interfaces.Main.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:18:13
   (call $$ctor__void_$p_interfaces_Main@interfaces.Main (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:18:13
@@ -680,7 +680,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:44:8
   (call $$clinit__void_<once>_@interfaces.Main.Implementor )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:44:8
-  (local.set $$instance (struct.new $interfaces.Main.Implementor (ref.as_non_null (global.get $interfaces.Main.Implementor.vtable)) (ref.as_non_null (global.get $interfaces.Main.Implementor.itable)) (i32.const 0) (ref.null $interfaces.Main)))
+  (local.set $$instance (struct.new $interfaces.Main.Implementor (global.get $interfaces.Main.Implementor.vtable) (global.get $interfaces.Main.Implementor.itable) (i32.const 0) (ref.null $interfaces.Main)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:44:8
   (call $$ctor__interfaces_Main__void_$p_interfaces_Main_Implementor@interfaces.Main.Implementor (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:44:8
@@ -895,7 +895,7 @@
  (local $$instance (ref null $interfaces.Main.EnumImplementor))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:52:7
-  (local.set $$instance (struct.new $interfaces.Main.EnumImplementor (ref.as_non_null (global.get $interfaces.Main.EnumImplementor.vtable)) (ref.as_non_null (global.get $interfaces.Main.EnumImplementor.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
+  (local.set $$instance (struct.new $interfaces.Main.EnumImplementor (global.get $interfaces.Main.EnumImplementor.vtable) (global.get $interfaces.Main.EnumImplementor.itable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:52:7
   (call $$ctor__java_lang_String__int__void_$p_interfaces_Main_EnumImplementor@interfaces.Main.EnumImplementor (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:52:7

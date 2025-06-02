@@ -378,7 +378,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/ChildClass.java:18:6
   (call $$clinit__void_<once>_@innerclassinheritance.ParentOuter )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/ChildClass.java:18:6
-  (local.set $$instance (struct.new $innerclassinheritance.ParentOuter (ref.as_non_null (global.get $innerclassinheritance.ParentOuter.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $innerclassinheritance.ParentOuter (global.get $innerclassinheritance.ParentOuter.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/ChildClass.java:18:6
   (call $$ctor__void_$p_innerclassinheritance_ParentOuter@innerclassinheritance.ParentOuter (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/ChildClass.java:18:6
@@ -464,7 +464,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/ChildClass.java:24:6
   (call $$clinit__void_<once>_@innerclassinheritance.ParentInner )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/ChildClass.java:24:6
-  (local.set $$instance (struct.new $innerclassinheritance.ParentInner (ref.as_non_null (global.get $innerclassinheritance.ParentInner.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $innerclassinheritance.ParentInner (global.get $innerclassinheritance.ParentInner.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/ChildClass.java:24:6
   (call $$ctor__void_$p_innerclassinheritance_ParentInner@innerclassinheritance.ParentInner (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/ChildClass.java:24:6
@@ -550,7 +550,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/MultipleNestings.java:18:13
   (call $$clinit__void_<once>_@innerclassinheritance.MultipleNestings )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/MultipleNestings.java:18:13
-  (local.set $$instance (struct.new $innerclassinheritance.MultipleNestings (ref.as_non_null (global.get $innerclassinheritance.MultipleNestings.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $innerclassinheritance.MultipleNestings (global.get $innerclassinheritance.MultipleNestings.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/MultipleNestings.java:18:13
   (call $$ctor__void_$p_innerclassinheritance_MultipleNestings@innerclassinheritance.MultipleNestings (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/MultipleNestings.java:18:13
@@ -637,7 +637,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/MultipleNestings.java:19:15
   (call $$clinit__void_<once>_@innerclassinheritance.MultipleNestings.Parent )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/MultipleNestings.java:19:15
-  (local.set $$instance (struct.new $innerclassinheritance.MultipleNestings.Parent (ref.as_non_null (global.get $innerclassinheritance.MultipleNestings.Parent.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $innerclassinheritance.MultipleNestings)))
+  (local.set $$instance (struct.new $innerclassinheritance.MultipleNestings.Parent (global.get $innerclassinheritance.MultipleNestings.Parent.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $innerclassinheritance.MultipleNestings)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/MultipleNestings.java:19:15
   (call $$ctor__innerclassinheritance_MultipleNestings__void_$p_innerclassinheritance_MultipleNestings_Parent@innerclassinheritance.MultipleNestings.Parent (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/MultipleNestings.java:19:15
@@ -726,7 +726,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/ChildClass.java:30:13
   (call $$clinit__void_<once>_@innerclassinheritance.ChildClass )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/ChildClass.java:30:13
-  (local.set $$instance (struct.new $innerclassinheritance.ChildClass (ref.as_non_null (global.get $innerclassinheritance.ChildClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $innerclassinheritance.ChildClass (global.get $innerclassinheritance.ChildClass.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/ChildClass.java:30:13
   (call $$ctor__void_$p_innerclassinheritance_ChildClass@innerclassinheritance.ChildClass (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/ChildClass.java:30:13
@@ -832,7 +832,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/ChildClass.java:35:8
   (call $$clinit__void_<once>_@innerclassinheritance.ChildClass.InnerClass )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/ChildClass.java:35:8
-  (local.set $$instance (struct.new $innerclassinheritance.ChildClass.InnerClass (ref.as_non_null (global.get $innerclassinheritance.ChildClass.InnerClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (ref.null $innerclassinheritance.ChildClass) (i32.const 0)))
+  (local.set $$instance (struct.new $innerclassinheritance.ChildClass.InnerClass (global.get $innerclassinheritance.ChildClass.InnerClass.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0) (ref.null $innerclassinheritance.ChildClass) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/ChildClass.java:35:8
   (call $$ctor__innerclassinheritance_ChildClass__void_$p_innerclassinheritance_ChildClass_InnerClass@innerclassinheritance.ChildClass.InnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/ChildClass.java:35:8
@@ -970,7 +970,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/MultipleNestings.java:31:17
   (call $$clinit__void_<once>_@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/MultipleNestings.java:31:17
-  (local.set $$instance (struct.new $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (ref.as_non_null (global.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $innerclassinheritance.MultipleNestings) (ref.null $innerclassinheritance.MultipleNestings.InnerClass1)))
+  (local.set $$instance (struct.new $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (global.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $innerclassinheritance.MultipleNestings) (ref.null $innerclassinheritance.MultipleNestings.InnerClass1)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/MultipleNestings.java:31:17
   (call $$ctor__innerclassinheritance_MultipleNestings_InnerClass1__void_$p_innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/MultipleNestings.java:31:17
@@ -1088,7 +1088,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/MultipleNestings.java:25:15
   (call $$clinit__void_<once>_@innerclassinheritance.MultipleNestings.InnerClass1 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/MultipleNestings.java:25:15
-  (local.set $$instance (struct.new $innerclassinheritance.MultipleNestings.InnerClass1 (ref.as_non_null (global.get $innerclassinheritance.MultipleNestings.InnerClass1.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $innerclassinheritance.MultipleNestings) (ref.null $innerclassinheritance.MultipleNestings)))
+  (local.set $$instance (struct.new $innerclassinheritance.MultipleNestings.InnerClass1 (global.get $innerclassinheritance.MultipleNestings.InnerClass1.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $innerclassinheritance.MultipleNestings) (ref.null $innerclassinheritance.MultipleNestings)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/MultipleNestings.java:25:15
   (call $$ctor__innerclassinheritance_MultipleNestings__void_$p_innerclassinheritance_MultipleNestings_InnerClass1@innerclassinheritance.MultipleNestings.InnerClass1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/MultipleNestings.java:25:15
@@ -1178,7 +1178,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/ChildClass.java:73:10
   (call $$clinit__void_<once>_@innerclassinheritance.ChildClass.1LocalClass )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/ChildClass.java:73:10
-  (local.set $$instance (struct.new $innerclassinheritance.ChildClass.1LocalClass (ref.as_non_null (global.get $innerclassinheritance.ChildClass.1LocalClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (i32.const 0) (ref.null $innerclassinheritance.ChildClass) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $innerclassinheritance.ChildClass.1LocalClass (global.get $innerclassinheritance.ChildClass.1LocalClass.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0) (i32.const 0) (ref.null $innerclassinheritance.ChildClass) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/ChildClass.java:73:10
   (call $$ctor__innerclassinheritance_ChildClass__void_$p_innerclassinheritance_ChildClass_1LocalClass@innerclassinheritance.ChildClass.1LocalClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinheritance/readable-j2wasm.js/innerclassinheritance/ChildClass.java:73:10

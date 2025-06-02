@@ -581,7 +581,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:38:9
   (call $$clinit__void_<once>_@anonymousclass.AnonymousClass )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:38:9
-  (local.set $$instance (struct.new $anonymousclass.AnonymousClass (ref.as_non_null (global.get $anonymousclass.AnonymousClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $anonymousclass.AnonymousClass (global.get $anonymousclass.AnonymousClass.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:38:9
   (call $$ctor__java_lang_Object__void_$p_anonymousclass_AnonymousClass@anonymousclass.AnonymousClass (ref.as_non_null (local.get $$instance))(local.get $a))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:38:9
@@ -677,7 +677,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:87:2
   (call $$clinit__void_<once>_@anonymousclass.JsConstructorClass )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:87:2
-  (local.set $$instance (struct.new $anonymousclass.JsConstructorClass (ref.as_non_null (global.get $anonymousclass.JsConstructorClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $anonymousclass.JsConstructorClass (global.get $anonymousclass.JsConstructorClass.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:87:2
   (call $$ctor__java_lang_Object__void_$p_anonymousclass_JsConstructorClass@anonymousclass.JsConstructorClass (ref.as_non_null (local.get $$instance))(local.get $o))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:87:2
@@ -705,7 +705,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:89:2
   (call $$clinit__void_<once>_@anonymousclass.JsConstructorClass )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:89:2
-  (local.set $$instance (struct.new $anonymousclass.JsConstructorClass (ref.as_non_null (global.get $anonymousclass.JsConstructorClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $anonymousclass.JsConstructorClass (global.get $anonymousclass.JsConstructorClass.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:89:2
   (call $$ctor__void_$p_anonymousclass_JsConstructorClass@anonymousclass.JsConstructorClass (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:89:2
@@ -782,7 +782,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:90:32
   (call $$clinit__void_<once>_@anonymousclass.JsConstructorClass.1 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:90:32
-  (local.set $$instance (struct.new $anonymousclass.JsConstructorClass.1 (ref.as_non_null (global.get $anonymousclass.JsConstructorClass.1.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $anonymousclass.JsConstructorClass)))
+  (local.set $$instance (struct.new $anonymousclass.JsConstructorClass.1 (global.get $anonymousclass.JsConstructorClass.1.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $anonymousclass.JsConstructorClass)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:90:32
   (call $$ctor__anonymousclass_JsConstructorClass__void_$p_anonymousclass_JsConstructorClass_1@anonymousclass.JsConstructorClass.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:90:32
@@ -860,7 +860,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:99:33
   (call $$clinit__void_<once>_@anonymousclass.JsConstructorSubclass.1 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:99:33
-  (local.set $$instance (struct.new $anonymousclass.JsConstructorSubclass.1 (ref.as_non_null (global.get $anonymousclass.JsConstructorSubclass.1.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $anonymousclass.JsConstructorSubclass)))
+  (local.set $$instance (struct.new $anonymousclass.JsConstructorSubclass.1 (global.get $anonymousclass.JsConstructorSubclass.1.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $anonymousclass.JsConstructorSubclass)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:99:33
   (call $$ctor__anonymousclass_JsConstructorSubclass__void_$p_anonymousclass_JsConstructorSubclass_1@anonymousclass.JsConstructorSubclass.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:99:33
@@ -937,7 +937,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:98:2
   (call $$clinit__void_<once>_@anonymousclass.JsConstructorSubclass )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:98:2
-  (local.set $$instance (struct.new $anonymousclass.JsConstructorSubclass (ref.as_non_null (global.get $anonymousclass.JsConstructorSubclass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $anonymousclass.JsConstructorSubclass (global.get $anonymousclass.JsConstructorSubclass.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:98:2
   (call $$ctor__void_$p_anonymousclass_JsConstructorSubclass@anonymousclass.JsConstructorSubclass (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:98:2
@@ -1017,7 +1017,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:40:25
   (call $$clinit__void_<once>_@anonymousclass.AnonymousClass.1 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:40:25
-  (local.set $$instance (struct.new $anonymousclass.AnonymousClass.1 (ref.as_non_null (global.get $anonymousclass.AnonymousClass.1.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $anonymousclass.AnonymousClass) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $anonymousclass.AnonymousClass.1 (global.get $anonymousclass.AnonymousClass.1.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $java.lang.Object) (ref.null $anonymousclass.AnonymousClass) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:40:25
   (call $$ctor__anonymousclass_AnonymousClass__java_lang_Object__int__void_$p_anonymousclass_AnonymousClass_1@anonymousclass.AnonymousClass.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$captured_a)(local.get $$_0))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:40:25
@@ -1129,7 +1129,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:53:25
   (call $$clinit__void_<once>_@anonymousclass.AnonymousClass.2 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:53:25
-  (local.set $$instance (struct.new $anonymousclass.AnonymousClass.2 (ref.as_non_null (global.get $anonymousclass.AnonymousClass.2.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $anonymousclass.AnonymousClass) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $anonymousclass.AnonymousClass.2 (global.get $anonymousclass.AnonymousClass.2.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $anonymousclass.AnonymousClass) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:53:25
   (call $$ctor__anonymousclass_AnonymousClass__int__void_$p_anonymousclass_AnonymousClass_2@anonymousclass.AnonymousClass.2 (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$_0))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:53:25
@@ -1238,7 +1238,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:64:42
   (call $$clinit__void_<once>_@anonymousclass.AnonymousClass.3 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:64:42
-  (local.set $$instance (struct.new $anonymousclass.AnonymousClass.3 (ref.as_non_null (global.get $anonymousclass.AnonymousClass.3.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $anonymousclass.AnonymousClass) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $anonymousclass.AnonymousClass.3 (global.get $anonymousclass.AnonymousClass.3.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $anonymousclass.AnonymousClass) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:64:42
   (call $$ctor__anonymousclass_AnonymousClass__int__void_$p_anonymousclass_AnonymousClass_3@anonymousclass.AnonymousClass.3 (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$_0))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:64:42
@@ -1346,7 +1346,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:77:23
   (call $$clinit__void_<once>_@anonymousclass.SomeInterface.1 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:77:23
-  (local.set $$instance (struct.new $anonymousclass.SomeInterface.1 (ref.as_non_null (global.get $anonymousclass.SomeInterface.1.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $anonymousclass.SomeInterface.1 (global.get $anonymousclass.SomeInterface.1.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:77:23
   (call $$ctor__int__void_$p_anonymousclass_SomeInterface_1@anonymousclass.SomeInterface.1 (ref.as_non_null (local.get $$instance))(local.get $$_0))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:77:23

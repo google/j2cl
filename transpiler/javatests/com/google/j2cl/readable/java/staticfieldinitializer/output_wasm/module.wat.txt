@@ -50,7 +50,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticfieldinitializer/readable-j2wasm.js/staticfieldinitializer/StaticFieldInitializer.java:18:13
   (call $$clinit__void_<once>_@staticfieldinitializer.StaticFieldInitializer )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticfieldinitializer/readable-j2wasm.js/staticfieldinitializer/StaticFieldInitializer.java:18:13
-  (local.set $$instance (struct.new $staticfieldinitializer.StaticFieldInitializer (ref.as_non_null (global.get $staticfieldinitializer.StaticFieldInitializer.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $staticfieldinitializer.StaticFieldInitializer (global.get $staticfieldinitializer.StaticFieldInitializer.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticfieldinitializer/readable-j2wasm.js/staticfieldinitializer/StaticFieldInitializer.java:18:13
   (call $$ctor__void_$p_staticfieldinitializer_StaticFieldInitializer@staticfieldinitializer.StaticFieldInitializer (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticfieldinitializer/readable-j2wasm.js/staticfieldinitializer/StaticFieldInitializer.java:18:13

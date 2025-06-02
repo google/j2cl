@@ -299,7 +299,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticjsmembers/readable-j2wasm.js/staticjsmembers/StaticJsMembers.java:25:13
   (call $$clinit__void_<once>_@staticjsmembers.StaticJsMembers )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticjsmembers/readable-j2wasm.js/staticjsmembers/StaticJsMembers.java:25:13
-  (local.set $$instance (struct.new $staticjsmembers.StaticJsMembers (ref.as_non_null (global.get $staticjsmembers.StaticJsMembers.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $staticjsmembers.StaticJsMembers (global.get $staticjsmembers.StaticJsMembers.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticjsmembers/readable-j2wasm.js/staticjsmembers/StaticJsMembers.java:25:13
   (call $$ctor__void_$p_staticjsmembers_StaticJsMembers@staticjsmembers.StaticJsMembers (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticjsmembers/readable-j2wasm.js/staticjsmembers/StaticJsMembers.java:25:13

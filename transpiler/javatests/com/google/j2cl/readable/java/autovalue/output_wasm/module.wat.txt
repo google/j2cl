@@ -1719,7 +1719,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValueWithFields.java:41:6
   (call $$clinit__void_<once>_@autovalue.Parent )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValueWithFields.java:41:6
-  (local.set $$instance (struct.new $autovalue.Parent (ref.as_non_null (global.get $autovalue.Parent.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $autovalue.Parent (global.get $autovalue.Parent.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValueWithFields.java:41:6
   (call $$ctor__void_$p_autovalue_Parent@autovalue.Parent (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValueWithFields.java:41:6
@@ -2680,7 +2680,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:14:2
   (call $$clinit__void_<once>_@autovalue.AutoValue_AutoValueJsType )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:14:2
-  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueJsType (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueJsType.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueJsType (global.get $autovalue.AutoValue_AutoValueJsType.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:14:2
   (call $$ctor__int__int__void_$p_autovalue_AutoValue_AutoValueJsType@autovalue.AutoValue_AutoValueJsType (ref.as_non_null (local.get $$instance))(local.get $field)(local.get $withJsMethod))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:14:2
@@ -2870,7 +2870,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueWithBuilder.java:13:10
   (call $$clinit__void_<once>_@autovalue.AutoValue_AutoValueWithBuilder )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueWithBuilder.java:13:10
-  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueWithBuilder (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithBuilder.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Double)))
+  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueWithBuilder (global.get $autovalue.AutoValue_AutoValueWithBuilder.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0) (ref.null $java.lang.Double)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueWithBuilder.java:13:10
   (call $$ctor__boolean__java_lang_Double__void_$p_autovalue_AutoValue_AutoValueWithBuilder@autovalue.AutoValue_AutoValueWithBuilder (ref.as_non_null (local.get $$instance))(local.get $booleanField)(local.get $nullableField))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueWithBuilder.java:13:10
@@ -3073,7 +3073,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueWithBuilder.java:71:4
   (call $$clinit__void_<once>_@autovalue.AutoValue_AutoValueWithBuilder.Builder )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueWithBuilder.java:71:4
-  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueWithBuilder.Builder (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithBuilder.Builder.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Double) (i32.const 0)))
+  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueWithBuilder.Builder (global.get $autovalue.AutoValue_AutoValueWithBuilder.Builder.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0) (ref.null $java.lang.Double) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueWithBuilder.java:71:4
   (call $$ctor__void_$p_autovalue_AutoValue_AutoValueWithBuilder_Builder@autovalue.AutoValue_AutoValueWithBuilder.Builder (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueWithBuilder.java:71:4
@@ -3101,7 +3101,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueWithBuilder.java:73:4
   (call $$clinit__void_<once>_@autovalue.AutoValue_AutoValueWithBuilder.Builder )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueWithBuilder.java:73:4
-  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueWithBuilder.Builder (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithBuilder.Builder.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Double) (i32.const 0)))
+  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueWithBuilder.Builder (global.get $autovalue.AutoValue_AutoValueWithBuilder.Builder.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0) (ref.null $java.lang.Double) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueWithBuilder.java:73:4
   (call $$ctor__autovalue_AutoValueWithBuilder__void_$p_autovalue_AutoValue_AutoValueWithBuilder_Builder@autovalue.AutoValue_AutoValueWithBuilder.Builder (ref.as_non_null (local.get $$instance))(local.get $source))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueWithBuilder.java:73:4
@@ -3245,7 +3245,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueWithGenerics.java:11:2
   (call $$clinit__void_<once>_@autovalue.AutoValue_AutoValueWithGenerics )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueWithGenerics.java:11:2
-  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueWithGenerics (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithGenerics.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueWithGenerics (global.get $autovalue.AutoValue_AutoValueWithGenerics.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueWithGenerics.java:11:2
   (call $$ctor__boolean__void_$p_autovalue_AutoValue_AutoValueWithGenerics@autovalue.AutoValue_AutoValueWithGenerics (ref.as_non_null (local.get $$instance))(local.get $booleanField))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueWithGenerics.java:11:2
@@ -3412,7 +3412,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_DefaultConstructorAutoValue.java:11:10
   (call $$clinit__void_<once>_@autovalue.AutoValue_DefaultConstructorAutoValue )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_DefaultConstructorAutoValue.java:11:10
-  (local.set $$instance (struct.new $autovalue.AutoValue_DefaultConstructorAutoValue (ref.as_non_null (global.get $autovalue.AutoValue_DefaultConstructorAutoValue.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $autovalue.AutoValue_DefaultConstructorAutoValue (global.get $autovalue.AutoValue_DefaultConstructorAutoValue.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_DefaultConstructorAutoValue.java:11:10
   (call $$ctor__boolean__void_$p_autovalue_AutoValue_DefaultConstructorAutoValue@autovalue.AutoValue_DefaultConstructorAutoValue (ref.as_non_null (local.get $$instance))(local.get $booleanField))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_DefaultConstructorAutoValue.java:11:10
@@ -3578,7 +3578,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_DefaultConstructorAutoValue.java:51:4
   (call $$clinit__void_<once>_@autovalue.AutoValue_DefaultConstructorAutoValue.Builder )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_DefaultConstructorAutoValue.java:51:4
-  (local.set $$instance (struct.new $autovalue.AutoValue_DefaultConstructorAutoValue.Builder (ref.as_non_null (global.get $autovalue.AutoValue_DefaultConstructorAutoValue.Builder.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $autovalue.AutoValue_DefaultConstructorAutoValue.Builder (global.get $autovalue.AutoValue_DefaultConstructorAutoValue.Builder.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_DefaultConstructorAutoValue.java:51:4
   (call $$ctor__void_$p_autovalue_AutoValue_DefaultConstructorAutoValue_Builder@autovalue.AutoValue_DefaultConstructorAutoValue.Builder (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_DefaultConstructorAutoValue.java:51:4
@@ -3697,7 +3697,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:11:10
   (call $$clinit__void_<once>_@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:11:10
-  (local.set $$instance (struct.new $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue (ref.as_non_null (global.get $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue (global.get $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:11:10
   (call $$ctor__boolean__void_$p_autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue (ref.as_non_null (local.get $$instance))(local.get $booleanField))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:11:10
@@ -3863,7 +3863,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:51:4
   (call $$clinit__void_<once>_@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:51:4
-  (local.set $$instance (struct.new $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder (ref.as_non_null (global.get $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder (global.get $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:51:4
   (call $$ctor__void_$p_autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:51:4
@@ -3981,7 +3981,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_EmptyAutoValue.java:9:10
   (call $$clinit__void_<once>_@autovalue.AutoValue_EmptyAutoValue )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_EmptyAutoValue.java:9:10
-  (local.set $$instance (struct.new $autovalue.AutoValue_EmptyAutoValue (ref.as_non_null (global.get $autovalue.AutoValue_EmptyAutoValue.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $autovalue.AutoValue_EmptyAutoValue (global.get $autovalue.AutoValue_EmptyAutoValue.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_EmptyAutoValue.java:9:10
   (call $$ctor__void_$p_autovalue_AutoValue_EmptyAutoValue@autovalue.AutoValue_EmptyAutoValue (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_EmptyAutoValue.java:9:10
@@ -4122,7 +4122,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_EmptyAutoValue.java:36:4
   (call $$clinit__void_<once>_@autovalue.AutoValue_EmptyAutoValue.Builder )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_EmptyAutoValue.java:36:4
-  (local.set $$instance (struct.new $autovalue.AutoValue_EmptyAutoValue.Builder (ref.as_non_null (global.get $autovalue.AutoValue_EmptyAutoValue.Builder.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $autovalue.AutoValue_EmptyAutoValue.Builder (global.get $autovalue.AutoValue_EmptyAutoValue.Builder.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_EmptyAutoValue.java:36:4
   (call $$ctor__void_$p_autovalue_AutoValue_EmptyAutoValue_Builder@autovalue.AutoValue_EmptyAutoValue.Builder (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_EmptyAutoValue.java:36:4
@@ -4212,7 +4212,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:12:2
   (call $$clinit__void_<once>_@autovalue.AutoValue_ImplementingAutoValue )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:12:2
-  (local.set $$instance (struct.new $autovalue.AutoValue_ImplementingAutoValue (ref.as_non_null (global.get $autovalue.AutoValue_ImplementingAutoValue.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_ImplementingAutoValue.itable)) (i32.const 0) (ref.null $java.lang.String)))
+  (local.set $$instance (struct.new $autovalue.AutoValue_ImplementingAutoValue (global.get $autovalue.AutoValue_ImplementingAutoValue.vtable) (global.get $autovalue.AutoValue_ImplementingAutoValue.itable) (i32.const 0) (ref.null $java.lang.String)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:12:2
   (call $$ctor__java_lang_String__void_$p_autovalue_AutoValue_ImplementingAutoValue@autovalue.AutoValue_ImplementingAutoValue (ref.as_non_null (local.get $$instance))(local.get $foo))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ImplementingAutoValue.java:12:2
@@ -4386,7 +4386,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_SimpleAutoValue.java:23:2
   (call $$clinit__void_<once>_@autovalue.AutoValue_SimpleAutoValue )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_SimpleAutoValue.java:23:2
-  (local.set $$instance (struct.new $autovalue.AutoValue_SimpleAutoValue (ref.as_non_null (global.get $autovalue.AutoValue_SimpleAutoValue.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $autovalue.EmptyAutoValue) (ref.null $autovalue.EmptyAutoValue) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfInt) (i32.const 0) (ref.null $java.lang.Double) (i32.const 0) (ref.null $java.lang.Double) (ref.null $java.lang.String)))
+  (local.set $$instance (struct.new $autovalue.AutoValue_SimpleAutoValue (global.get $autovalue.AutoValue_SimpleAutoValue.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $autovalue.EmptyAutoValue) (ref.null $autovalue.EmptyAutoValue) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfInt) (i32.const 0) (ref.null $java.lang.Double) (i32.const 0) (ref.null $java.lang.Double) (ref.null $java.lang.String)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_SimpleAutoValue.java:23:2
   (call $$ctor__int__boolean__java_lang_String__java_lang_Double__java_lang_Double__arrayOf_int__void_$p_autovalue_AutoValue_SimpleAutoValue@autovalue.AutoValue_SimpleAutoValue (ref.as_non_null (local.get $$instance))(local.get $intField)(local.get $booleanField)(local.get $stringField)(local.get $doubleField)(local.get $nullableField)(local.get $arrayField))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_SimpleAutoValue.java:23:2
@@ -5176,7 +5176,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueWithOverrides.java:12:2
   (call $$clinit__void_<once>_@autovalue.AutoValue_AutoValueWithOverrides )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueWithOverrides.java:12:2
-  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueWithOverrides (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithOverrides.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueWithOverrides (global.get $autovalue.AutoValue_AutoValueWithOverrides.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueWithOverrides.java:12:2
   (call $$ctor__int__boolean__void_$p_autovalue_AutoValue_AutoValueWithOverrides@autovalue.AutoValue_AutoValueWithOverrides (ref.as_non_null (local.get $$instance))(local.get $baseField)(local.get $booleanField))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueWithOverrides.java:12:2
@@ -5289,7 +5289,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ExtendingAutoValue.java:16:2
   (call $$clinit__void_<once>_@autovalue.AutoValue_ExtendingAutoValue )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ExtendingAutoValue.java:16:2
-  (local.set $$instance (struct.new $autovalue.AutoValue_ExtendingAutoValue (ref.as_non_null (global.get $autovalue.AutoValue_ExtendingAutoValue.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (i32.const 0) (ref.null $java.lang.String)))
+  (local.set $$instance (struct.new $autovalue.AutoValue_ExtendingAutoValue (global.get $autovalue.AutoValue_ExtendingAutoValue.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0) (i32.const 0) (ref.null $java.lang.String)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ExtendingAutoValue.java:16:2
   (call $$ctor__int__boolean__java_lang_String__void_$p_autovalue_AutoValue_ExtendingAutoValue@autovalue.AutoValue_ExtendingAutoValue (ref.as_non_null (local.get $$instance))(local.get $baseField)(local.get $booleanField)(local.get $stringField))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ExtendingAutoValue.java:16:2
@@ -5582,7 +5582,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueWithExtensions.java:19:2
   (call $$clinit__void_<once>_@autovalue.AutoValue_AutoValueWithExtensions )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueWithExtensions.java:19:2
-  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueWithExtensions (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithExtensions.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueWithExtensions (global.get $autovalue.AutoValue_AutoValueWithExtensions.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueWithExtensions.java:19:2
   (call $$ctor__int__java_lang_String__void_$p_autovalue_AutoValue_AutoValueWithExtensions@autovalue.AutoValue_AutoValueWithExtensions (ref.as_non_null (local.get $$instance))(local.get $intField)(local.get $stringField))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueWithExtensions.java:19:2
@@ -5697,7 +5697,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueWithFields.java:18:2
   (call $$clinit__void_<once>_@autovalue.AutoValue_AutoValueWithFields )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueWithFields.java:18:2
-  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueWithFields (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithFields.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithFields.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueWithFields (global.get $autovalue.AutoValue_AutoValueWithFields.vtable) (global.get $autovalue.AutoValue_AutoValueWithFields.itable) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueWithFields.java:18:2
   (call $$ctor__int__void_$p_autovalue_AutoValue_AutoValueWithFields@autovalue.AutoValue_AutoValueWithFields (ref.as_non_null (local.get $$instance))(local.get $intField))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueWithFields.java:18:2

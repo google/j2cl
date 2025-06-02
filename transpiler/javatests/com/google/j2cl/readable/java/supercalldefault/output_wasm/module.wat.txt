@@ -44,7 +44,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercalldefault/readable-j2wasm.js/supercalldefault/SuperCallDefault.java:19:9
   (call $$clinit__void_<once>_@supercalldefault.SuperCallDefault )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercalldefault/readable-j2wasm.js/supercalldefault/SuperCallDefault.java:19:9
-  (local.set $$instance (struct.new $supercalldefault.SuperCallDefault (ref.as_non_null (global.get $supercalldefault.SuperCallDefault.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $supercalldefault.SuperCallDefault (global.get $supercalldefault.SuperCallDefault.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercalldefault/readable-j2wasm.js/supercalldefault/SuperCallDefault.java:19:9
   (call $$ctor__void_$p_supercalldefault_SuperCallDefault@supercalldefault.SuperCallDefault (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercalldefault/readable-j2wasm.js/supercalldefault/SuperCallDefault.java:19:9

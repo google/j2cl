@@ -306,7 +306,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousinnerclass/readable-j2wasm.js/anonymousinnerclass/AnonymousInnerClass.java:18:6
   (call $$clinit__void_<once>_@anonymousinnerclass.A )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousinnerclass/readable-j2wasm.js/anonymousinnerclass/AnonymousInnerClass.java:18:6
-  (local.set $$instance (struct.new $anonymousinnerclass.A (ref.as_non_null (global.get $anonymousinnerclass.A.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $anonymousinnerclass.A (global.get $anonymousinnerclass.A.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousinnerclass/readable-j2wasm.js/anonymousinnerclass/AnonymousInnerClass.java:18:6
   (call $$ctor__void_$p_anonymousinnerclass_A@anonymousinnerclass.A (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousinnerclass/readable-j2wasm.js/anonymousinnerclass/AnonymousInnerClass.java:18:6
@@ -380,7 +380,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousinnerclass/readable-j2wasm.js/anonymousinnerclass/AnonymousInnerClass.java:23:13
   (call $$clinit__void_<once>_@anonymousinnerclass.AnonymousInnerClass )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousinnerclass/readable-j2wasm.js/anonymousinnerclass/AnonymousInnerClass.java:23:13
-  (local.set $$instance (struct.new $anonymousinnerclass.AnonymousInnerClass (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $anonymousinnerclass.AnonymousInnerClass (global.get $anonymousinnerclass.AnonymousInnerClass.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousinnerclass/readable-j2wasm.js/anonymousinnerclass/AnonymousInnerClass.java:23:13
   (call $$ctor__void_$p_anonymousinnerclass_AnonymousInnerClass@anonymousinnerclass.AnonymousInnerClass (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousinnerclass/readable-j2wasm.js/anonymousinnerclass/AnonymousInnerClass.java:23:13
@@ -480,7 +480,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousinnerclass/readable-j2wasm.js/anonymousinnerclass/AnonymousInnerClass.java:19:8
   (call $$clinit__void_<once>_@anonymousinnerclass.A.B )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousinnerclass/readable-j2wasm.js/anonymousinnerclass/AnonymousInnerClass.java:19:8
-  (local.set $$instance (struct.new $anonymousinnerclass.A.B (ref.as_non_null (global.get $anonymousinnerclass.A.B.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $anonymousinnerclass.A)))
+  (local.set $$instance (struct.new $anonymousinnerclass.A.B (global.get $anonymousinnerclass.A.B.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $anonymousinnerclass.A)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousinnerclass/readable-j2wasm.js/anonymousinnerclass/AnonymousInnerClass.java:19:8
   (call $$ctor__anonymousinnerclass_A__void_$p_anonymousinnerclass_A_B@anonymousinnerclass.A.B (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousinnerclass/readable-j2wasm.js/anonymousinnerclass/AnonymousInnerClass.java:19:8
@@ -558,7 +558,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousinnerclass/readable-j2wasm.js/anonymousinnerclass/AnonymousInnerClass.java:24:15
   (call $$clinit__void_<once>_@anonymousinnerclass.AnonymousInnerClass.InnerClass )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousinnerclass/readable-j2wasm.js/anonymousinnerclass/AnonymousInnerClass.java:24:15
-  (local.set $$instance (struct.new $anonymousinnerclass.AnonymousInnerClass.InnerClass (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.InnerClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass)))
+  (local.set $$instance (struct.new $anonymousinnerclass.AnonymousInnerClass.InnerClass (global.get $anonymousinnerclass.AnonymousInnerClass.InnerClass.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousinnerclass/readable-j2wasm.js/anonymousinnerclass/AnonymousInnerClass.java:24:15
   (call $$ctor__anonymousinnerclass_AnonymousInnerClass__void_$p_anonymousinnerclass_AnonymousInnerClass_InnerClass@anonymousinnerclass.AnonymousInnerClass.InnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousinnerclass/readable-j2wasm.js/anonymousinnerclass/AnonymousInnerClass.java:24:15
@@ -637,7 +637,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousinnerclass/readable-j2wasm.js/anonymousinnerclass/AnonymousInnerClass.java:30:10
   (call $$clinit__void_<once>_@anonymousinnerclass.AnonymousInnerClass.1C )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousinnerclass/readable-j2wasm.js/anonymousinnerclass/AnonymousInnerClass.java:30:10
-  (local.set $$instance (struct.new $anonymousinnerclass.AnonymousInnerClass.1C (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.1C.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (i32.const 0)))
+  (local.set $$instance (struct.new $anonymousinnerclass.AnonymousInnerClass.1C (global.get $anonymousinnerclass.AnonymousInnerClass.1C.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousinnerclass/readable-j2wasm.js/anonymousinnerclass/AnonymousInnerClass.java:30:10
   (call $$ctor__anonymousinnerclass_AnonymousInnerClass__int__void_$p_anonymousinnerclass_AnonymousInnerClass_1C@anonymousinnerclass.AnonymousInnerClass.1C (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$captured_arg))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousinnerclass/readable-j2wasm.js/anonymousinnerclass/AnonymousInnerClass.java:30:10
@@ -730,7 +730,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousinnerclass/readable-j2wasm.js/anonymousinnerclass/AnonymousInnerClass.java:27:37
   (call $$clinit__void_<once>_@anonymousinnerclass.AnonymousInnerClass.1 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousinnerclass/readable-j2wasm.js/anonymousinnerclass/AnonymousInnerClass.java:27:37
-  (local.set $$instance (struct.new $anonymousinnerclass.AnonymousInnerClass.1 (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.1.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (ref.null $anonymousinnerclass.AnonymousInnerClass)))
+  (local.set $$instance (struct.new $anonymousinnerclass.AnonymousInnerClass.1 (global.get $anonymousinnerclass.AnonymousInnerClass.1.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (ref.null $anonymousinnerclass.AnonymousInnerClass)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousinnerclass/readable-j2wasm.js/anonymousinnerclass/AnonymousInnerClass.java:27:37
   (call $$ctor__anonymousinnerclass_AnonymousInnerClass__void_$p_anonymousinnerclass_AnonymousInnerClass_1@anonymousinnerclass.AnonymousInnerClass.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousinnerclass/readable-j2wasm.js/anonymousinnerclass/AnonymousInnerClass.java:27:37
@@ -809,7 +809,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousinnerclass/readable-j2wasm.js/anonymousinnerclass/AnonymousInnerClass.java:29:21
   (call $$clinit__void_<once>_@anonymousinnerclass.AnonymousInnerClass.2 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousinnerclass/readable-j2wasm.js/anonymousinnerclass/AnonymousInnerClass.java:29:21
-  (local.set $$instance (struct.new $anonymousinnerclass.AnonymousInnerClass.2 (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.2.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $anonymousinnerclass.A) (ref.null $anonymousinnerclass.A) (ref.null $anonymousinnerclass.AnonymousInnerClass)))
+  (local.set $$instance (struct.new $anonymousinnerclass.AnonymousInnerClass.2 (global.get $anonymousinnerclass.AnonymousInnerClass.2.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $anonymousinnerclass.A) (ref.null $anonymousinnerclass.A) (ref.null $anonymousinnerclass.AnonymousInnerClass)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousinnerclass/readable-j2wasm.js/anonymousinnerclass/AnonymousInnerClass.java:29:21
   (call $$ctor__anonymousinnerclass_AnonymousInnerClass__anonymousinnerclass_A__void_$p_anonymousinnerclass_AnonymousInnerClass_2@anonymousinnerclass.AnonymousInnerClass.2 (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$captured_a))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousinnerclass/readable-j2wasm.js/anonymousinnerclass/AnonymousInnerClass.java:29:21
@@ -891,7 +891,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousinnerclass/readable-j2wasm.js/anonymousinnerclass/AnonymousInnerClass.java:33:18
   (call $$clinit__void_<once>_@anonymousinnerclass.AnonymousInnerClass.3 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousinnerclass/readable-j2wasm.js/anonymousinnerclass/AnonymousInnerClass.java:33:18
-  (local.set $$instance (struct.new $anonymousinnerclass.AnonymousInnerClass.3 (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.3.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (i32.const 0) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass)))
+  (local.set $$instance (struct.new $anonymousinnerclass.AnonymousInnerClass.3 (global.get $anonymousinnerclass.AnonymousInnerClass.3.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (i32.const 0) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousinnerclass/readable-j2wasm.js/anonymousinnerclass/AnonymousInnerClass.java:33:18
   (call $$ctor__anonymousinnerclass_AnonymousInnerClass__int__void_$p_anonymousinnerclass_AnonymousInnerClass_3@anonymousinnerclass.AnonymousInnerClass.3 (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$captured_arg))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousinnerclass/readable-j2wasm.js/anonymousinnerclass/AnonymousInnerClass.java:33:18

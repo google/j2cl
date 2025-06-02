@@ -49,7 +49,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:23:9
   (call $$clinit__void_<once>_@genericequals.GenericEquals )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:23:9
-  (local.set $$instance (struct.new $genericequals.GenericEquals (ref.as_non_null (global.get $genericequals.GenericEquals.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $genericequals.GenericEquals) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $genericequals.GenericEquals (global.get $genericequals.GenericEquals.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $genericequals.GenericEquals) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:23:9
   (call $$ctor__java_lang_Object__void_$p_genericequals_GenericEquals@genericequals.GenericEquals (ref.as_non_null (local.get $$instance))(local.get $value))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:23:9

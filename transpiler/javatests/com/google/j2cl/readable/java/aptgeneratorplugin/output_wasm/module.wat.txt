@@ -79,7 +79,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/aptgeneratorplugin/readable-j2wasm.js/aptgeneratorplugin/Dummy.java:3:13
   (call $$clinit__void_<once>_@aptgeneratorplugin.Dummy )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/aptgeneratorplugin/readable-j2wasm.js/aptgeneratorplugin/Dummy.java:3:13
-  (local.set $$instance (struct.new $aptgeneratorplugin.Dummy (ref.as_non_null (global.get $aptgeneratorplugin.Dummy.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $aptgeneratorplugin.Dummy (global.get $aptgeneratorplugin.Dummy.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/aptgeneratorplugin/readable-j2wasm.js/aptgeneratorplugin/Dummy.java:3:13
   (call $$ctor__void_$p_aptgeneratorplugin_Dummy@aptgeneratorplugin.Dummy (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/aptgeneratorplugin/readable-j2wasm.js/aptgeneratorplugin/Dummy.java:3:13
@@ -153,7 +153,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/aptgeneratorplugin/readable-j2wasm.js/aptgeneratorplugin/Foo.java:18:13
   (call $$clinit__void_<once>_@aptgeneratorplugin.Foo )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/aptgeneratorplugin/readable-j2wasm.js/aptgeneratorplugin/Foo.java:18:13
-  (local.set $$instance (struct.new $aptgeneratorplugin.Foo (ref.as_non_null (global.get $aptgeneratorplugin.Foo.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $aptgeneratorplugin.Foo (global.get $aptgeneratorplugin.Foo.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/aptgeneratorplugin/readable-j2wasm.js/aptgeneratorplugin/Foo.java:18:13
   (call $$ctor__void_$p_aptgeneratorplugin_Foo@aptgeneratorplugin.Foo (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/aptgeneratorplugin/readable-j2wasm.js/aptgeneratorplugin/Foo.java:18:13

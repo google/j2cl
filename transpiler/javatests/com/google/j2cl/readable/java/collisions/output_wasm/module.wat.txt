@@ -316,7 +316,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:25:13
   (call $$clinit__void_<once>_@collisions.goog )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:25:13
-  (local.set $$instance (struct.new $collisions.goog (ref.as_non_null (global.get $collisions.goog.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $collisions.goog (global.get $collisions.goog.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:25:13
   (call $$ctor__void_$p_collisions_goog@collisions.goog (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:25:13
@@ -392,7 +392,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:37:6
   (call $$clinit__void_<once>_@collisions.KtBlah )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:37:6
-  (local.set $$instance (struct.new $collisions.KtBlah (ref.as_non_null (global.get $collisions.KtBlah.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $collisions.KtBlah (global.get $collisions.KtBlah.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:37:6
   (call $$ctor__void_$p_collisions_KtBlah@collisions.KtBlah (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:37:6
@@ -487,7 +487,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:47:6
   (call $$clinit__void_<once>_@collisions.foo )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:47:6
-  (local.set $$instance (struct.new $collisions.foo (ref.as_non_null (global.get $collisions.foo.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $collisions.foo (global.get $collisions.foo.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:47:6
   (call $$ctor__void_$p_collisions_foo@collisions.foo (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:47:6
@@ -561,7 +561,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:49:6
   (call $$clinit__void_<once>_@collisions.bar )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:49:6
-  (local.set $$instance (struct.new $collisions.bar (ref.as_non_null (global.get $collisions.bar.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $collisions.bar (global.get $collisions.bar.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:49:6
   (call $$ctor__void_$p_collisions_bar@collisions.bar (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:49:6
@@ -668,7 +668,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:64:6
   (call $$clinit__void_<once>_@collisions.Other )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:64:6
-  (local.set $$instance (struct.new $collisions.Other (ref.as_non_null (global.get $collisions.Other.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $collisions.Other (global.get $collisions.Other.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:64:6
   (call $$ctor__void_$p_collisions_Other@collisions.Other (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:64:6
@@ -789,7 +789,7 @@
  (local $$instance (ref null $collisions.T))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:77:6
-  (local.set $$instance (struct.new $collisions.T (ref.as_non_null (global.get $collisions.T.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $collisions.T (global.get $collisions.T.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:77:6
   (call $$ctor__void_$p_collisions_T@collisions.T (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:77:6

@@ -54,7 +54,7 @@
  (local $$instance (ref null $newinstance.NewInstanceExpr))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/newinstance/readable-j2wasm.js/newinstance/NewInstanceExpr.java:18:13
-  (local.set $$instance (struct.new $newinstance.NewInstanceExpr (ref.as_non_null (global.get $newinstance.NewInstanceExpr.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $newinstance.NewInstanceExpr (global.get $newinstance.NewInstanceExpr.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/newinstance/readable-j2wasm.js/newinstance/NewInstanceExpr.java:18:13
   (call $$ctor__void_$p_newinstance_NewInstanceExpr@newinstance.NewInstanceExpr (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/newinstance/readable-j2wasm.js/newinstance/NewInstanceExpr.java:18:13

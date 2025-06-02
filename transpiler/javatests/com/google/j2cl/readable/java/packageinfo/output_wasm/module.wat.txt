@@ -170,7 +170,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfo/thirdpartylib-j2wasm.js/packageinfo/thirdpartylib/Bar.java:21:13
   (call $$clinit__void_<once>_@packageinfo.thirdpartylib.Bar )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfo/thirdpartylib-j2wasm.js/packageinfo/thirdpartylib/Bar.java:21:13
-  (local.set $$instance (struct.new $packageinfo.thirdpartylib.Bar (ref.as_non_null (global.get $packageinfo.thirdpartylib.Bar.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $packageinfo.thirdpartylib.Bar (global.get $packageinfo.thirdpartylib.Bar.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfo/thirdpartylib-j2wasm.js/packageinfo/thirdpartylib/Bar.java:21:13
   (call $$ctor__void_$p_packageinfo_thirdpartylib_Bar@packageinfo.thirdpartylib.Bar (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfo/thirdpartylib-j2wasm.js/packageinfo/thirdpartylib/Bar.java:21:13
@@ -285,7 +285,7 @@
  (local $$instance (ref null $packageinfo.thirdpartylib.ComplexAnnotation.SomeEnum))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfo/thirdpartylib-j2wasm.js/packageinfo/thirdpartylib/ComplexAnnotation.java:26:7
-  (local.set $$instance (struct.new $packageinfo.thirdpartylib.ComplexAnnotation.SomeEnum (ref.as_non_null (global.get $packageinfo.thirdpartylib.ComplexAnnotation.SomeEnum.vtable)) (ref.as_non_null (global.get $packageinfo.thirdpartylib.ComplexAnnotation.SomeEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
+  (local.set $$instance (struct.new $packageinfo.thirdpartylib.ComplexAnnotation.SomeEnum (global.get $packageinfo.thirdpartylib.ComplexAnnotation.SomeEnum.vtable) (global.get $packageinfo.thirdpartylib.ComplexAnnotation.SomeEnum.itable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfo/thirdpartylib-j2wasm.js/packageinfo/thirdpartylib/ComplexAnnotation.java:26:7
   (call $$ctor__java_lang_String__int__void_$p_packageinfo_thirdpartylib_ComplexAnnotation_SomeEnum@packageinfo.thirdpartylib.ComplexAnnotation.SomeEnum (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfo/thirdpartylib-j2wasm.js/packageinfo/thirdpartylib/ComplexAnnotation.java:26:7
@@ -465,7 +465,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfo/readable-j2wasm.js/packageinfo/Outer.java:22:13
   (call $$clinit__void_<once>_@packageinfo.Outer )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfo/readable-j2wasm.js/packageinfo/Outer.java:22:13
-  (local.set $$instance (struct.new $packageinfo.Outer (ref.as_non_null (global.get $packageinfo.Outer.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $packageinfo.Outer (global.get $packageinfo.Outer.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfo/readable-j2wasm.js/packageinfo/Outer.java:22:13
   (call $$ctor__void_$p_packageinfo_Outer@packageinfo.Outer (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfo/readable-j2wasm.js/packageinfo/Outer.java:22:13
@@ -552,7 +552,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfo/readable-j2wasm.js/packageinfo/Outer.java:28:15
   (call $$clinit__void_<once>_@packageinfo.Outer.Inner )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfo/readable-j2wasm.js/packageinfo/Outer.java:28:15
-  (local.set $$instance (struct.new $packageinfo.Outer.Inner (ref.as_non_null (global.get $packageinfo.Outer.Inner.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $packageinfo.Outer)))
+  (local.set $$instance (struct.new $packageinfo.Outer.Inner (global.get $packageinfo.Outer.Inner.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $packageinfo.Outer)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfo/readable-j2wasm.js/packageinfo/Outer.java:28:15
   (call $$ctor__packageinfo_Outer__void_$p_packageinfo_Outer_Inner@packageinfo.Outer.Inner (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfo/readable-j2wasm.js/packageinfo/Outer.java:28:15
@@ -629,7 +629,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfo/readable-j2wasm.js/packageinfo/subpackage/Foo.java:20:13
   (call $$clinit__void_<once>_@packageinfo.subpackage.Foo )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfo/readable-j2wasm.js/packageinfo/subpackage/Foo.java:20:13
-  (local.set $$instance (struct.new $packageinfo.subpackage.Foo (ref.as_non_null (global.get $packageinfo.subpackage.Foo.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $packageinfo.Outer)))
+  (local.set $$instance (struct.new $packageinfo.subpackage.Foo (global.get $packageinfo.subpackage.Foo.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $packageinfo.Outer)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfo/readable-j2wasm.js/packageinfo/subpackage/Foo.java:20:13
   (call $$ctor__void_$p_packageinfo_subpackage_Foo@packageinfo.subpackage.Foo (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfo/readable-j2wasm.js/packageinfo/subpackage/Foo.java:20:13

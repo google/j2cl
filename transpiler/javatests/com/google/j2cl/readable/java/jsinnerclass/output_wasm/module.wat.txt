@@ -121,7 +121,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:20:13
   (call $$clinit__void_<once>_@jsinnerclass.Main )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:20:13
-  (local.set $$instance (struct.new $jsinnerclass.Main (ref.as_non_null (global.get $jsinnerclass.Main.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $jsinnerclass.Main (global.get $jsinnerclass.Main.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:20:13
   (call $$ctor__void_$p_jsinnerclass_Main@jsinnerclass.Main (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:20:13
@@ -217,7 +217,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:28:13
   (call $$clinit__void_<once>_@jsinnerclass.Main.Outer.Inner )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:28:13
-  (local.set $$instance (struct.new $jsinnerclass.Main.Outer.Inner (ref.as_non_null (global.get $jsinnerclass.Main.Outer.Inner.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $jsinnerclass.Main.Outer) (i32.const 0)))
+  (local.set $$instance (struct.new $jsinnerclass.Main.Outer.Inner (global.get $jsinnerclass.Main.Outer.Inner.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $jsinnerclass.Main.Outer) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:28:13
   (call $$ctor__jsinnerclass_Main_Outer__void_$p_jsinnerclass_Main_Outer_Inner@jsinnerclass.Main.Outer.Inner (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:28:13
@@ -311,7 +311,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:21:15
   (call $$clinit__void_<once>_@jsinnerclass.Main.Outer )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:21:15
-  (local.set $$instance (struct.new $jsinnerclass.Main.Outer (ref.as_non_null (global.get $jsinnerclass.Main.Outer.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $jsinnerclass.Main.Outer (global.get $jsinnerclass.Main.Outer.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:21:15
   (call $$ctor__void_$p_jsinnerclass_Main_Outer@jsinnerclass.Main.Outer (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsinnerclass/readable-j2wasm.js/jsinnerclass/Main.java:21:15

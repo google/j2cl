@@ -42,7 +42,7 @@
  (local $$instance (ref null $privateconstructor.PrivateConstructor))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/privateconstructor/readable-j2wasm.js/privateconstructor/PrivateConstructor.java:19:10
-  (local.set $$instance (struct.new $privateconstructor.PrivateConstructor (ref.as_non_null (global.get $privateconstructor.PrivateConstructor.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $privateconstructor.PrivateConstructor (global.get $privateconstructor.PrivateConstructor.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/privateconstructor/readable-j2wasm.js/privateconstructor/PrivateConstructor.java:19:10
   (call $$ctor__void_$p_privateconstructor_PrivateConstructor@privateconstructor.PrivateConstructor (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/privateconstructor/readable-j2wasm.js/privateconstructor/PrivateConstructor.java:19:10

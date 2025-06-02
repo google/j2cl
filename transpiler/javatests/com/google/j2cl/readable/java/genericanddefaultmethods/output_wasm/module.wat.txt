@@ -158,7 +158,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:24:6
   (call $$clinit__void_<once>_@genericanddefaultmethods.GenericClass )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:24:6
-  (local.set $$instance (struct.new $genericanddefaultmethods.GenericClass (ref.as_non_null (global.get $genericanddefaultmethods.GenericClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $genericanddefaultmethods.GenericClass (global.get $genericanddefaultmethods.GenericClass.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:24:6
   (call $$ctor__void_$p_genericanddefaultmethods_GenericClass@genericanddefaultmethods.GenericClass (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:24:6
@@ -255,7 +255,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:30:13
   (call $$clinit__void_<once>_@genericanddefaultmethods.ConcreteClass )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:30:13
-  (local.set $$instance (struct.new $genericanddefaultmethods.ConcreteClass (ref.as_non_null (global.get $genericanddefaultmethods.ConcreteClass.vtable)) (ref.as_non_null (global.get $genericanddefaultmethods.ConcreteClass.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $genericanddefaultmethods.ConcreteClass (global.get $genericanddefaultmethods.ConcreteClass.vtable) (global.get $genericanddefaultmethods.ConcreteClass.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:30:13
   (call $$ctor__void_$p_genericanddefaultmethods_ConcreteClass@genericanddefaultmethods.ConcreteClass (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:30:13

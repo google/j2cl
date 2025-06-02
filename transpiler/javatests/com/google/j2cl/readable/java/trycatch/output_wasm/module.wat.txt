@@ -327,7 +327,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:18:13
   (call $$clinit__void_<once>_@trycatch.TryCatch )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:18:13
-  (local.set $$instance (struct.new $trycatch.TryCatch (ref.as_non_null (global.get $trycatch.TryCatch.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $trycatch.TryCatch (global.get $trycatch.TryCatch.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:18:13
   (call $$ctor__void_$p_trycatch_TryCatch@trycatch.TryCatch (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:18:13
@@ -1146,7 +1146,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:61:15
   (call $$clinit__void_<once>_@trycatch.TryCatch.ClosableThing )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:61:15
-  (local.set $$instance (struct.new $trycatch.TryCatch.ClosableThing (ref.as_non_null (global.get $trycatch.TryCatch.ClosableThing.vtable)) (ref.as_non_null (global.get $trycatch.TryCatch.ClosableThing.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $trycatch.TryCatch.ClosableThing (global.get $trycatch.TryCatch.ClosableThing.vtable) (global.get $trycatch.TryCatch.ClosableThing.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:61:15
   (call $$ctor__void_$p_trycatch_TryCatch_ClosableThing@trycatch.TryCatch.ClosableThing (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:61:15
@@ -1233,7 +1233,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:131:8
   (call $$clinit__void_<once>_@trycatch.TryCatch.Exception1 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:131:8
-  (local.set $$instance (struct.new $trycatch.TryCatch.Exception1 (ref.as_non_null (global.get $trycatch.TryCatch.Exception1.vtable)) (ref.as_non_null (global.get $trycatch.TryCatch.Exception1.itable)) (i32.const 0) (ref.null extern) (ref.null $java.lang.Throwable) (ref.null $java.lang.String) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.util.ArrayList) (ref.null $trycatch.TryCatch)))
+  (local.set $$instance (struct.new $trycatch.TryCatch.Exception1 (global.get $trycatch.TryCatch.Exception1.vtable) (global.get $trycatch.TryCatch.Exception1.itable) (i32.const 0) (ref.null extern) (ref.null $java.lang.Throwable) (ref.null $java.lang.String) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.util.ArrayList) (ref.null $trycatch.TryCatch)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:131:8
   (call $$ctor__trycatch_TryCatch__void_$p_trycatch_TryCatch_Exception1@trycatch.TryCatch.Exception1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:131:8
@@ -1345,7 +1345,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:133:8
   (call $$clinit__void_<once>_@trycatch.TryCatch.Exception2 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:133:8
-  (local.set $$instance (struct.new $trycatch.TryCatch.Exception2 (ref.as_non_null (global.get $trycatch.TryCatch.Exception2.vtable)) (ref.as_non_null (global.get $trycatch.TryCatch.Exception2.itable)) (i32.const 0) (ref.null extern) (ref.null $java.lang.Throwable) (ref.null $java.lang.String) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.util.ArrayList) (ref.null $trycatch.TryCatch)))
+  (local.set $$instance (struct.new $trycatch.TryCatch.Exception2 (global.get $trycatch.TryCatch.Exception2.vtable) (global.get $trycatch.TryCatch.Exception2.itable) (i32.const 0) (ref.null extern) (ref.null $java.lang.Throwable) (ref.null $java.lang.String) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.util.ArrayList) (ref.null $trycatch.TryCatch)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:133:8
   (call $$ctor__trycatch_TryCatch__void_$p_trycatch_TryCatch_Exception2@trycatch.TryCatch.Exception2 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:133:8

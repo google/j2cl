@@ -85,7 +85,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:18:13
   (call $$clinit__void_<once>_@strings.Strings )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:18:13
-  (local.set $$instance (struct.new $strings.Strings (ref.as_non_null (global.get $strings.Strings.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.String)))
+  (local.set $$instance (struct.new $strings.Strings (global.get $strings.Strings.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.String)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:18:13
   (call $$ctor__void_$p_strings_Strings@strings.Strings (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:18:13
@@ -254,7 +254,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:170:23
   (call $$clinit__void_<once>_@strings.Strings.StringHolder )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:170:23
-  (local.set $$instance (struct.new $strings.Strings.StringHolder (ref.as_non_null (global.get $strings.Strings.StringHolder.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.String)))
+  (local.set $$instance (struct.new $strings.Strings.StringHolder (global.get $strings.Strings.StringHolder.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $java.lang.String)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:170:23
   (call $$ctor__void_$p_strings_Strings_StringHolder@strings.Strings.StringHolder (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/strings/readable-j2wasm.js/strings/Strings.java:170:23

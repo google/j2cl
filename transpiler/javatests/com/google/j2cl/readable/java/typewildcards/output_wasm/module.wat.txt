@@ -995,7 +995,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:24:6
   (call $$clinit__void_<once>_@typewildcards.GenericType )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:24:6
-  (local.set $$instance (struct.new $typewildcards.GenericType (ref.as_non_null (global.get $typewildcards.GenericType.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $typewildcards.GenericType (global.get $typewildcards.GenericType.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:24:6
   (call $$ctor__void_$p_typewildcards_GenericType@typewildcards.GenericType (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:24:6
@@ -1084,7 +1084,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:30:6
   (call $$clinit__void_<once>_@typewildcards.Bar )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:30:6
-  (local.set $$instance (struct.new $typewildcards.Bar (ref.as_non_null (global.get $typewildcards.Bar.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $typewildcards.Bar (global.get $typewildcards.Bar.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:30:6
   (call $$ctor__void_$p_typewildcards_Bar@typewildcards.Bar (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:30:6
@@ -1159,7 +1159,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:33:9
   (call $$clinit__void_<once>_@typewildcards.RecursiveType )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:33:9
-  (local.set $$instance (struct.new $typewildcards.RecursiveType (ref.as_non_null (global.get $typewildcards.RecursiveType.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $typewildcards.RecursiveType (global.get $typewildcards.RecursiveType.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:33:9
   (call $$ctor__typewildcards_RecursiveType__void_$p_typewildcards_RecursiveType@typewildcards.RecursiveType (ref.as_non_null (local.get $$instance))(local.get $wildcardParameter))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:33:9
@@ -1234,7 +1234,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:44:13
   (call $$clinit__void_<once>_@typewildcards.TypeWildCards )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:44:13
-  (local.set $$instance (struct.new $typewildcards.TypeWildCards (ref.as_non_null (global.get $typewildcards.TypeWildCards.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $typewildcards.TypeWildCards (global.get $typewildcards.TypeWildCards.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:44:13
   (call $$ctor__void_$p_typewildcards_TypeWildCards@typewildcards.TypeWildCards (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:44:13
@@ -1911,7 +1911,7 @@
  (local $$instance (ref null $typewildcards.TypeWildCards.A))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:79:23
-  (local.set $$instance (struct.new $typewildcards.TypeWildCards.A (ref.as_non_null (global.get $typewildcards.TypeWildCards.A.vtable)) (ref.as_non_null (global.get $typewildcards.TypeWildCards.A.itable)) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $typewildcards.TypeWildCards.A (global.get $typewildcards.TypeWildCards.A.vtable) (global.get $typewildcards.TypeWildCards.A.itable) (i32.const 0) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:79:23
   (call $$ctor__void_$p_typewildcards_TypeWildCards_A@typewildcards.TypeWildCards.A (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:79:23
@@ -2117,7 +2117,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:154:15
   (call $$clinit__void_<once>_@typewildcards.TypeWildCards.MultipleGenerics )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:154:15
-  (local.set $$instance (struct.new $typewildcards.TypeWildCards.MultipleGenerics (ref.as_non_null (global.get $typewildcards.TypeWildCards.MultipleGenerics.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $typewildcards.TypeWildCards.MultipleGenerics (global.get $typewildcards.TypeWildCards.MultipleGenerics.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:154:15
   (call $$ctor__void_$p_typewildcards_TypeWildCards_MultipleGenerics@typewildcards.TypeWildCards.MultipleGenerics (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:154:15
@@ -2192,7 +2192,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:39:9
   (call $$clinit__void_<once>_@typewildcards.RecursiveSubtype )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:39:9
-  (local.set $$instance (struct.new $typewildcards.RecursiveSubtype (ref.as_non_null (global.get $typewildcards.RecursiveSubtype.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $typewildcards.RecursiveSubtype (global.get $typewildcards.RecursiveSubtype.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:39:9
   (call $$ctor__typewildcards_RecursiveType__void_$p_typewildcards_RecursiveSubtype@typewildcards.RecursiveSubtype (ref.as_non_null (local.get $$instance))(local.get $wildcardParameter))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:39:9
@@ -2267,7 +2267,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:127:12
   (call $$clinit__void_<once>_@typewildcards.TypeWildCards.$LambdaImplementor$1 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:127:12
-  (local.set $$instance (struct.new $typewildcards.TypeWildCards.$LambdaImplementor$1 (ref.as_non_null (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $typewildcards.TypeWildCards.$LambdaImplementor$1 (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable) (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:127:12
   (call $$ctor__void_$p_typewildcards_TypeWildCards_$LambdaImplementor$1@typewildcards.TypeWildCards.$LambdaImplementor$1 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:127:12
@@ -2435,7 +2435,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:133:8
   (call $$clinit__void_<once>_@typewildcards.TypeWildCards.Foo )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:133:8
-  (local.set $$instance (struct.new $typewildcards.TypeWildCards.Foo (ref.as_non_null (global.get $typewildcards.TypeWildCards.Foo.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $typewildcards.TypeWildCards)))
+  (local.set $$instance (struct.new $typewildcards.TypeWildCards.Foo (global.get $typewildcards.TypeWildCards.Foo.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $typewildcards.TypeWildCards)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:133:8
   (call $$ctor__typewildcards_TypeWildCards__void_$p_typewildcards_TypeWildCards_Foo@typewildcards.TypeWildCards.Foo (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:133:8

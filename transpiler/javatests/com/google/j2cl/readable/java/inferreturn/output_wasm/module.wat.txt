@@ -54,7 +54,7 @@
  (local $$instance (ref null $inferreturn.InferReturn))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/inferreturn/readable-j2wasm.js/inferreturn/InferReturn.java:21:13
-  (local.set $$instance (struct.new $inferreturn.InferReturn (ref.as_non_null (global.get $inferreturn.InferReturn.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $inferreturn.InferReturn (global.get $inferreturn.InferReturn.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/inferreturn/readable-j2wasm.js/inferreturn/InferReturn.java:21:13
   (call $$ctor__void_$p_inferreturn_InferReturn@inferreturn.InferReturn (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/inferreturn/readable-j2wasm.js/inferreturn/InferReturn.java:21:13

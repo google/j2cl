@@ -79,7 +79,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticnestedclass/readable-j2wasm.js/staticnestedclass/StaticNestedClassParent.java:18:13
   (call $$clinit__void_<once>_@staticnestedclass.StaticNestedClassParent )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticnestedclass/readable-j2wasm.js/staticnestedclass/StaticNestedClassParent.java:18:13
-  (local.set $$instance (struct.new $staticnestedclass.StaticNestedClassParent (ref.as_non_null (global.get $staticnestedclass.StaticNestedClassParent.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $staticnestedclass.StaticNestedClassParent (global.get $staticnestedclass.StaticNestedClassParent.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticnestedclass/readable-j2wasm.js/staticnestedclass/StaticNestedClassParent.java:18:13
   (call $$ctor__void_$p_staticnestedclass_StaticNestedClassParent@staticnestedclass.StaticNestedClassParent (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticnestedclass/readable-j2wasm.js/staticnestedclass/StaticNestedClassParent.java:18:13
@@ -151,7 +151,7 @@
  (local $$instance (ref null $staticnestedclass.StaticNestedClassParent.StaticNestedClass))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticnestedclass/readable-j2wasm.js/staticnestedclass/StaticNestedClassParent.java:19:23
-  (local.set $$instance (struct.new $staticnestedclass.StaticNestedClassParent.StaticNestedClass (ref.as_non_null (global.get $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $staticnestedclass.StaticNestedClassParent.StaticNestedClass (global.get $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticnestedclass/readable-j2wasm.js/staticnestedclass/StaticNestedClassParent.java:19:23
   (call $$ctor__void_$p_staticnestedclass_StaticNestedClassParent_StaticNestedClass@staticnestedclass.StaticNestedClassParent.StaticNestedClass (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticnestedclass/readable-j2wasm.js/staticnestedclass/StaticNestedClassParent.java:19:23

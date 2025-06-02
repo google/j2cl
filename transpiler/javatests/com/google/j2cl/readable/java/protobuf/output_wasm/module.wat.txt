@@ -223,7 +223,7 @@
  (local $$instance (ref null $protobuf.MyEnum))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/testfixture-j2wasm.js/protobuf/MyEnum.java:22:12
-  (local.set $$instance (struct.new $protobuf.MyEnum (ref.as_non_null (global.get $protobuf.MyEnum.vtable)) (ref.as_non_null (global.get $protobuf.MyEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
+  (local.set $$instance (struct.new $protobuf.MyEnum (global.get $protobuf.MyEnum.vtable) (global.get $protobuf.MyEnum.itable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/testfixture-j2wasm.js/protobuf/MyEnum.java:22:12
   (call $$ctor__java_lang_String__int__void_$p_protobuf_MyEnum@protobuf.MyEnum (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/testfixture-j2wasm.js/protobuf/MyEnum.java:22:12
@@ -494,7 +494,7 @@
  (local $$instance (ref null $protobuf.MyMessage))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/testfixture-j2wasm.js/protobuf/MyMessage.java:76:10
-  (local.set $$instance (struct.new $protobuf.MyMessage (ref.as_non_null (global.get $protobuf.MyMessage.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $com.google.protobuf.Parser)))
+  (local.set $$instance (struct.new $protobuf.MyMessage (global.get $protobuf.MyMessage.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $com.google.protobuf.Parser)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/testfixture-j2wasm.js/protobuf/MyMessage.java:76:10
   (call $$ctor__int__void_$p_protobuf_MyMessage@protobuf.MyMessage (ref.as_non_null (local.get $$instance))(local.get $testField))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/testfixture-j2wasm.js/protobuf/MyMessage.java:76:10
@@ -770,7 +770,7 @@
  (local $$instance (ref null $protobuf.MyMessage.Builder))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/testfixture-j2wasm.js/protobuf/MyMessage.java:134:12
-  (local.set $$instance (struct.new $protobuf.MyMessage.Builder (ref.as_non_null (global.get $protobuf.MyMessage.Builder.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $protobuf.MyMessage.Builder (global.get $protobuf.MyMessage.Builder.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/testfixture-j2wasm.js/protobuf/MyMessage.java:134:12
   (call $$ctor__void_$p_protobuf_MyMessage_Builder@protobuf.MyMessage.Builder (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/testfixture-j2wasm.js/protobuf/MyMessage.java:134:12
@@ -883,7 +883,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:23:13
   (call $$clinit__void_<once>_@protobuf.Protobuf )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:23:13
-  (local.set $$instance (struct.new $protobuf.Protobuf (ref.as_non_null (global.get $protobuf.Protobuf.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $protobuf.Protobuf (global.get $protobuf.Protobuf.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:23:13
   (call $$ctor__void_$p_protobuf_Protobuf@protobuf.Protobuf (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:23:13
@@ -1070,7 +1070,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:75:11
   (call $$clinit__void_<once>_@protobuf.Protobuf.Test )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:75:11
-  (local.set $$instance (struct.new $protobuf.Protobuf.Test (ref.as_non_null (global.get $protobuf.Protobuf.Test.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $protobuf.Protobuf.Test (global.get $protobuf.Protobuf.Test.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:75:11
   (call $$ctor__protobuf_MyMessage__void_$p_protobuf_Protobuf_Test@protobuf.Protobuf.Test (ref.as_non_null (local.get $$instance))(local.get $myMessage))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/Protobuf.java:75:11

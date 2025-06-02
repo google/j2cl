@@ -447,7 +447,7 @@
  (local $$instance (ref null $genericmethod.GenericMethod))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:22:13
-  (local.set $$instance (struct.new $genericmethod.GenericMethod (ref.as_non_null (global.get $genericmethod.GenericMethod.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $genericmethod.GenericMethod (global.get $genericmethod.GenericMethod.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:22:13
   (call $$ctor__void_$p_genericmethod_GenericMethod@genericmethod.GenericMethod (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:22:13
@@ -1012,7 +1012,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:78:15
   (call $$clinit__void_<once>_@genericmethod.GenericMethod.SuperContainer )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:78:15
-  (local.set $$instance (struct.new $genericmethod.GenericMethod.SuperContainer (ref.as_non_null (global.get $genericmethod.GenericMethod.SuperContainer.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $genericmethod.GenericMethod.SuperContainer (global.get $genericmethod.GenericMethod.SuperContainer.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:78:15
   (call $$ctor__void_$p_genericmethod_GenericMethod_SuperContainer@genericmethod.GenericMethod.SuperContainer (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:78:15
@@ -1101,7 +1101,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:84:15
   (call $$clinit__void_<once>_@genericmethod.GenericMethod.Container )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:84:15
-  (local.set $$instance (struct.new $genericmethod.GenericMethod.Container (ref.as_non_null (global.get $genericmethod.GenericMethod.Container.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $genericmethod.GenericMethod.Container (global.get $genericmethod.GenericMethod.Container.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:84:15
   (call $$ctor__void_$p_genericmethod_GenericMethod_Container@genericmethod.GenericMethod.Container (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:84:15
@@ -1190,7 +1190,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:90:15
   (call $$clinit__void_<once>_@genericmethod.GenericMethod.Content )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:90:15
-  (local.set $$instance (struct.new $genericmethod.GenericMethod.Content (ref.as_non_null (global.get $genericmethod.GenericMethod.Content.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $genericmethod.GenericMethod.Content (global.get $genericmethod.GenericMethod.Content.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:90:15
   (call $$ctor__void_$p_genericmethod_GenericMethod_Content@genericmethod.GenericMethod.Content (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:90:15
@@ -1280,7 +1280,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:30:27
   (call $$clinit__void_<once>_@genericmethod.GenericMethod.1 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:30:27
-  (local.set $$instance (struct.new $genericmethod.GenericMethod.1 (ref.as_non_null (global.get $genericmethod.GenericMethod.1.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $genericmethod.GenericMethod)))
+  (local.set $$instance (struct.new $genericmethod.GenericMethod.1 (global.get $genericmethod.GenericMethod.1.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $genericmethod.GenericMethod)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:30:27
   (call $$ctor__genericmethod_GenericMethod__void_$p_genericmethod_GenericMethod_1@genericmethod.GenericMethod.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:30:27
@@ -1384,7 +1384,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:36:10
   (call $$clinit__void_<once>_@genericmethod.GenericMethod.1LocalClass )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:36:10
-  (local.set $$instance (struct.new $genericmethod.GenericMethod.1LocalClass (ref.as_non_null (global.get $genericmethod.GenericMethod.1LocalClass.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $genericmethod.GenericMethod)))
+  (local.set $$instance (struct.new $genericmethod.GenericMethod.1LocalClass (global.get $genericmethod.GenericMethod.1LocalClass.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $genericmethod.GenericMethod)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:36:10
   (call $$ctor__genericmethod_GenericMethod__void_$p_genericmethod_GenericMethod_1LocalClass@genericmethod.GenericMethod.1LocalClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:36:10

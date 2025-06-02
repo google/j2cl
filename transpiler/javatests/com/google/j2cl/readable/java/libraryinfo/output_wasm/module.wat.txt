@@ -646,7 +646,7 @@
  (local $$instance (ref null $libraryinfo.Main))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:25:13
-  (local.set $$instance (struct.new $libraryinfo.Main (ref.as_non_null (global.get $libraryinfo.Main.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $libraryinfo.Main (global.get $libraryinfo.Main.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:25:13
   (call $$ctor__void_$p_libraryinfo_Main@libraryinfo.Main (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:25:13
@@ -957,7 +957,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:89:17
   (call $$clinit__void_<once>_@libraryinfo.Main.1 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:89:17
-  (local.set $$instance (struct.new $libraryinfo.Main.1 (ref.as_non_null (global.get $libraryinfo.Main.1.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $libraryinfo.Main.1 (global.get $libraryinfo.Main.1.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:89:17
   (call $$ctor__void_$p_libraryinfo_Main_1@libraryinfo.Main.1 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:89:17
@@ -1043,7 +1043,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:54:29
   (call $$clinit__void_<once>_@libraryinfo.Main.FunctionImpl )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:54:29
-  (local.set $$instance (struct.new $libraryinfo.Main.FunctionImpl (ref.as_non_null (global.get $libraryinfo.Main.FunctionImpl.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.FunctionImpl.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $libraryinfo.Main.FunctionImpl (global.get $libraryinfo.Main.FunctionImpl.vtable) (global.get $libraryinfo.Main.FunctionImpl.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:54:29
   (call $$ctor__void_$p_libraryinfo_Main_FunctionImpl@libraryinfo.Main.FunctionImpl (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:54:29
@@ -1130,7 +1130,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:74:11
   (call $$clinit__void_<once>_@libraryinfo.Main.MyJsType )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:74:11
-  (local.set $$instance (struct.new $libraryinfo.Main.MyJsType (ref.as_non_null (global.get $libraryinfo.Main.MyJsType.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $libraryinfo.Main.MyJsType (global.get $libraryinfo.Main.MyJsType.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:74:11
   (call $$ctor__void_$p_libraryinfo_Main_MyJsType@libraryinfo.Main.MyJsType (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:74:11
@@ -1207,7 +1207,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:107:15
   (call $$clinit__void_<once>_@libraryinfo.Main.Foo )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:107:15
-  (local.set $$instance (struct.new $libraryinfo.Main.Foo (ref.as_non_null (global.get $libraryinfo.Main.Foo.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0) (ref.null $libraryinfo.Main)))
+  (local.set $$instance (struct.new $libraryinfo.Main.Foo (global.get $libraryinfo.Main.Foo.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $libraryinfo.Main)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:107:15
   (call $$ctor__libraryinfo_Main__void_$p_libraryinfo_Main_Foo@libraryinfo.Main.Foo (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:107:15
@@ -1296,7 +1296,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:17
   (call $$clinit__void_<once>_@libraryinfo.Main.$LambdaImplementor$1 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:17
-  (local.set $$instance (struct.new $libraryinfo.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $libraryinfo.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.$LambdaImplementor$1.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $libraryinfo.Main.$LambdaImplementor$1 (global.get $libraryinfo.Main.$LambdaImplementor$1.vtable) (global.get $libraryinfo.Main.$LambdaImplementor$1.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:17
   (call $$ctor__void_$p_libraryinfo_Main_$LambdaImplementor$1@libraryinfo.Main.$LambdaImplementor$1 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:17
@@ -1372,7 +1372,7 @@
  (local $$instance (ref null $libraryinfo.Main.MyJsEnum))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:59:7
-  (local.set $$instance (struct.new $libraryinfo.Main.MyJsEnum (ref.as_non_null (global.get $libraryinfo.Main.MyJsEnum.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.MyJsEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
+  (local.set $$instance (struct.new $libraryinfo.Main.MyJsEnum (global.get $libraryinfo.Main.MyJsEnum.vtable) (global.get $libraryinfo.Main.MyJsEnum.itable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:59:7
   (call $$ctor__java_lang_String__int__void_$p_libraryinfo_Main_MyJsEnum@libraryinfo.Main.MyJsEnum (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:59:7
@@ -1458,7 +1458,7 @@
  (local $$instance (ref null $libraryinfo.Main.MyEnum))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:65:7
-  (local.set $$instance (struct.new $libraryinfo.Main.MyEnum (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
+  (local.set $$instance (struct.new $libraryinfo.Main.MyEnum (global.get $libraryinfo.Main.MyEnum.vtable) (global.get $libraryinfo.Main.MyEnum.itable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:65:7
   (call $$ctor__java_lang_String__int__void_$p_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:65:7

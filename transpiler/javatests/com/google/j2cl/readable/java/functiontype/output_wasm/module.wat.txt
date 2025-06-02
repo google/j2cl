@@ -97,7 +97,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/functiontype/readable-j2wasm.js/functiontype/FunctionImpl.java:20:13
   (call $$clinit__void_<once>_@functiontype.FunctionImpl )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/functiontype/readable-j2wasm.js/functiontype/FunctionImpl.java:20:13
-  (local.set $$instance (struct.new $functiontype.FunctionImpl (ref.as_non_null (global.get $functiontype.FunctionImpl.vtable)) (ref.as_non_null (global.get $functiontype.FunctionImpl.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $functiontype.FunctionImpl (global.get $functiontype.FunctionImpl.vtable) (global.get $functiontype.FunctionImpl.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/functiontype/readable-j2wasm.js/functiontype/FunctionImpl.java:20:13
   (call $$ctor__void_$p_functiontype_FunctionImpl@functiontype.FunctionImpl (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/functiontype/readable-j2wasm.js/functiontype/FunctionImpl.java:20:13

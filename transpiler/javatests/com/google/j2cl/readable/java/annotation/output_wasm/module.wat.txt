@@ -218,7 +218,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:21:13
   (call $$clinit__void_<once>_@annotation.Main )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:21:13
-  (local.set $$instance (struct.new $annotation.Main (ref.as_non_null (global.get $annotation.Main.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $annotation.Main (global.get $annotation.Main.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:21:13
   (call $$ctor__void_$p_annotation_Main@annotation.Main (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:21:13
@@ -605,7 +605,7 @@
  (local $$instance (ref null $annotation.Main.SomeEnum))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:58:7
-  (local.set $$instance (struct.new $annotation.Main.SomeEnum (ref.as_non_null (global.get $annotation.Main.SomeEnum.vtable)) (ref.as_non_null (global.get $annotation.Main.SomeEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
+  (local.set $$instance (struct.new $annotation.Main.SomeEnum (global.get $annotation.Main.SomeEnum.vtable) (global.get $annotation.Main.SomeEnum.itable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:58:7
   (call $$ctor__java_lang_String__int__void_$p_annotation_Main_SomeEnum@annotation.Main.SomeEnum (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:58:7

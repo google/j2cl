@@ -79,7 +79,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Foo.java:21:13
   (call $$clinit__void_<once>_@srcjar.Foo )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Foo.java:21:13
-  (local.set $$instance (struct.new $srcjar.Foo (ref.as_non_null (global.get $srcjar.Foo.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $srcjar.Foo (global.get $srcjar.Foo.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Foo.java:21:13
   (call $$ctor__void_$p_srcjar_Foo@srcjar.Foo (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Foo.java:21:13
@@ -153,7 +153,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:18:13
   (call $$clinit__void_<once>_@srcjar.Srcjar )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:18:13
-  (local.set $$instance (struct.new $srcjar.Srcjar (ref.as_non_null (global.get $srcjar.Srcjar.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $srcjar.Srcjar (global.get $srcjar.Srcjar.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:18:13
   (call $$ctor__void_$p_srcjar_Srcjar@srcjar.Srcjar (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:18:13

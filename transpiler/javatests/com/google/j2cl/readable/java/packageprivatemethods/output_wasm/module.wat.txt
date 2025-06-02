@@ -356,7 +356,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageprivatemethods/readable-j2wasm.js/packageprivatemethods/package1/SuperParent.java:18:13
   (call $$clinit__void_<once>_@packageprivatemethods.package1.SuperParent )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageprivatemethods/readable-j2wasm.js/packageprivatemethods/package1/SuperParent.java:18:13
-  (local.set $$instance (struct.new $packageprivatemethods.package1.SuperParent (ref.as_non_null (global.get $packageprivatemethods.package1.SuperParent.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $packageprivatemethods.package1.SuperParent (global.get $packageprivatemethods.package1.SuperParent.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageprivatemethods/readable-j2wasm.js/packageprivatemethods/package1/SuperParent.java:18:13
   (call $$ctor__void_$p_packageprivatemethods_package1_SuperParent@packageprivatemethods.package1.SuperParent (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageprivatemethods/readable-j2wasm.js/packageprivatemethods/package1/SuperParent.java:18:13
@@ -589,7 +589,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageprivatemethods/readable-j2wasm.js/packageprivatemethods/package1/Child.java:18:13
   (call $$clinit__void_<once>_@packageprivatemethods.package1.Child )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageprivatemethods/readable-j2wasm.js/packageprivatemethods/package1/Child.java:18:13
-  (local.set $$instance (struct.new $packageprivatemethods.package1.Child (ref.as_non_null (global.get $packageprivatemethods.package1.Child.vtable)) (ref.as_non_null (global.get $packageprivatemethods.package1.Child.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $packageprivatemethods.package1.Child (global.get $packageprivatemethods.package1.Child.vtable) (global.get $packageprivatemethods.package1.Child.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageprivatemethods/readable-j2wasm.js/packageprivatemethods/package1/Child.java:18:13
   (call $$ctor__void_$p_packageprivatemethods_package1_Child@packageprivatemethods.package1.Child (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageprivatemethods/readable-j2wasm.js/packageprivatemethods/package1/Child.java:18:13
@@ -854,7 +854,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageprivatemethods/readable-j2wasm.js/packageprivatemethods/package2/SubChild.java:20:13
   (call $$clinit__void_<once>_@packageprivatemethods.package2.SubChild )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageprivatemethods/readable-j2wasm.js/packageprivatemethods/package2/SubChild.java:20:13
-  (local.set $$instance (struct.new $packageprivatemethods.package2.SubChild (ref.as_non_null (global.get $packageprivatemethods.package2.SubChild.vtable)) (ref.as_non_null (global.get $packageprivatemethods.package2.SubChild.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $packageprivatemethods.package2.SubChild (global.get $packageprivatemethods.package2.SubChild.vtable) (global.get $packageprivatemethods.package2.SubChild.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageprivatemethods/readable-j2wasm.js/packageprivatemethods/package2/SubChild.java:20:13
   (call $$ctor__void_$p_packageprivatemethods_package2_SubChild@packageprivatemethods.package2.SubChild (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageprivatemethods/readable-j2wasm.js/packageprivatemethods/package2/SubChild.java:20:13

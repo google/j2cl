@@ -108,7 +108,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:24:13
   (call $$clinit__void_<once>_@switchstatement.SwitchStatement )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:24:13
-  (local.set $$instance (struct.new $switchstatement.SwitchStatement (ref.as_non_null (global.get $switchstatement.SwitchStatement.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $switchstatement.SwitchStatement (global.get $switchstatement.SwitchStatement.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:24:13
   (call $$ctor__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:24:13
@@ -1484,7 +1484,7 @@
  (local $$instance (ref null $switchstatement.Numbers))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:18:5
-  (local.set $$instance (struct.new $switchstatement.Numbers (ref.as_non_null (global.get $switchstatement.Numbers.vtable)) (ref.as_non_null (global.get $switchstatement.Numbers.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
+  (local.set $$instance (struct.new $switchstatement.Numbers (global.get $switchstatement.Numbers.vtable) (global.get $switchstatement.Numbers.itable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:18:5
   (call $$ctor__java_lang_String__int__void_$p_switchstatement_Numbers@switchstatement.Numbers (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:18:5

@@ -60,7 +60,7 @@
  (local $$instance (ref null $instancequalifieronstaticfield.InstanceQualifiers))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancequalifieronstaticfield/readable-j2wasm.js/instancequalifieronstaticfield/InstanceQualifiers.java:18:13
-  (local.set $$instance (struct.new $instancequalifieronstaticfield.InstanceQualifiers (ref.as_non_null (global.get $instancequalifieronstaticfield.InstanceQualifiers.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $instancequalifieronstaticfield.InstanceQualifiers (global.get $instancequalifieronstaticfield.InstanceQualifiers.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancequalifieronstaticfield/readable-j2wasm.js/instancequalifieronstaticfield/InstanceQualifiers.java:18:13
   (call $$ctor__void_$p_instancequalifieronstaticfield_InstanceQualifiers@instancequalifieronstaticfield.InstanceQualifiers (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancequalifieronstaticfield/readable-j2wasm.js/instancequalifieronstaticfield/InstanceQualifiers.java:18:13

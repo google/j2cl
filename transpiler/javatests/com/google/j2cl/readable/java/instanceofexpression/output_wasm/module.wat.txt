@@ -104,7 +104,7 @@
  (local $$instance (ref null $instanceofexpression.InstanceofExpressions))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:20:13
-  (local.set $$instance (struct.new $instanceofexpression.InstanceofExpressions (ref.as_non_null (global.get $instanceofexpression.InstanceofExpressions.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $instanceofexpression.InstanceofExpressions (global.get $instanceofexpression.InstanceofExpressions.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:20:13
   (call $$ctor__void_$p_instanceofexpression_InstanceofExpressions@instanceofexpression.InstanceofExpressions (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:20:13
@@ -427,7 +427,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:34:27
   (call $$clinit__void_<once>_@instanceofexpression.InstanceofExpressions.1 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:34:27
-  (local.set $$instance (struct.new $instanceofexpression.InstanceofExpressions.1 (ref.as_non_null (global.get $instanceofexpression.InstanceofExpressions.1.vtable)) (ref.as_non_null (global.get $instanceofexpression.InstanceofExpressions.1.itable)) (i32.const 0) (ref.null $instanceofexpression.InstanceofExpressions)))
+  (local.set $$instance (struct.new $instanceofexpression.InstanceofExpressions.1 (global.get $instanceofexpression.InstanceofExpressions.1.vtable) (global.get $instanceofexpression.InstanceofExpressions.1.itable) (i32.const 0) (ref.null $instanceofexpression.InstanceofExpressions)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:34:27
   (call $$ctor__instanceofexpression_InstanceofExpressions__void_$p_instanceofexpression_InstanceofExpressions_1@instanceofexpression.InstanceofExpressions.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:34:27

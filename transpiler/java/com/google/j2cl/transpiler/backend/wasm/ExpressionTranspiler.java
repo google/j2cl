@@ -422,8 +422,7 @@ final class ExpressionTranspiler {
 
         sourceBuilder.append(
             format(
-                "(struct.new %s "
-                    + "(ref.as_non_null (global.get %s)) (ref.as_non_null (global.get %s))",
+                "(struct.new %s (global.get %s) (global.get %s)",
                 environment.getWasmTypeName(newInstance.getTypeDescriptor()),
                 environment.getWasmVtableGlobalName(newInstance.getTypeDescriptor()),
                 environment.getWasmItableGlobalName(newInstance.getTypeDescriptor())));

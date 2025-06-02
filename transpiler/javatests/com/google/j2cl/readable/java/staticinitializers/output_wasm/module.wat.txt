@@ -53,7 +53,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:18:13
   (call $$clinit__void_<once>_@staticinitializers.StaticInitializers )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:18:13
-  (local.set $$instance (struct.new $staticinitializers.StaticInitializers (ref.as_non_null (global.get $staticinitializers.StaticInitializers.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $staticinitializers.StaticInitializers (global.get $staticinitializers.StaticInitializers.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:18:13
   (call $$ctor__void_$p_staticinitializers_StaticInitializers@staticinitializers.StaticInitializers (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:18:13

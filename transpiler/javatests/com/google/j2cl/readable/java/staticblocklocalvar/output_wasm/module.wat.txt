@@ -44,7 +44,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticblocklocalvar/readable-j2wasm.js/staticblocklocalvar/StaticBlockLocalVar.java:19:13
   (call $$clinit__void_<once>_@staticblocklocalvar.StaticBlockLocalVar )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticblocklocalvar/readable-j2wasm.js/staticblocklocalvar/StaticBlockLocalVar.java:19:13
-  (local.set $$instance (struct.new $staticblocklocalvar.StaticBlockLocalVar (ref.as_non_null (global.get $staticblocklocalvar.StaticBlockLocalVar.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $staticblocklocalvar.StaticBlockLocalVar (global.get $staticblocklocalvar.StaticBlockLocalVar.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticblocklocalvar/readable-j2wasm.js/staticblocklocalvar/StaticBlockLocalVar.java:19:13
   (call $$ctor__void_$p_staticblocklocalvar_StaticBlockLocalVar@staticblocklocalvar.StaticBlockLocalVar (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticblocklocalvar/readable-j2wasm.js/staticblocklocalvar/StaticBlockLocalVar.java:19:13

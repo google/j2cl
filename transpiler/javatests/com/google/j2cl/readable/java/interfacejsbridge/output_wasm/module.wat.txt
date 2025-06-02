@@ -430,7 +430,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfacejsbridge/readable-j2wasm.js/interfacejsbridge/Main.java:18:13
   (call $$clinit__void_<once>_@interfacejsbridge.Main )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfacejsbridge/readable-j2wasm.js/interfacejsbridge/Main.java:18:13
-  (local.set $$instance (struct.new $interfacejsbridge.Main (ref.as_non_null (global.get $interfacejsbridge.Main.vtable)) (ref.as_non_null (global.get $itable.empty)) (i32.const 0)))
+  (local.set $$instance (struct.new $interfacejsbridge.Main (global.get $interfacejsbridge.Main.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfacejsbridge/readable-j2wasm.js/interfacejsbridge/Main.java:18:13
   (call $$ctor__void_$p_interfacejsbridge_Main@interfacejsbridge.Main (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfacejsbridge/readable-j2wasm.js/interfacejsbridge/Main.java:18:13
@@ -536,7 +536,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfacejsbridge/readable-j2wasm.js/interfacejsbridge/InterfaceImpl.java:34:13
   (call $$clinit__void_<once>_@interfacejsbridge.InterfaceImpl )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfacejsbridge/readable-j2wasm.js/interfacejsbridge/InterfaceImpl.java:34:13
-  (local.set $$instance (struct.new $interfacejsbridge.InterfaceImpl (ref.as_non_null (global.get $interfacejsbridge.InterfaceImpl.vtable)) (ref.as_non_null (global.get $interfacejsbridge.InterfaceImpl.itable)) (i32.const 0)))
+  (local.set $$instance (struct.new $interfacejsbridge.InterfaceImpl (global.get $interfacejsbridge.InterfaceImpl.vtable) (global.get $interfacejsbridge.InterfaceImpl.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfacejsbridge/readable-j2wasm.js/interfacejsbridge/InterfaceImpl.java:34:13
   (call $$ctor__void_$p_interfacejsbridge_InterfaceImpl@interfacejsbridge.InterfaceImpl (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfacejsbridge/readable-j2wasm.js/interfacejsbridge/InterfaceImpl.java:34:13
