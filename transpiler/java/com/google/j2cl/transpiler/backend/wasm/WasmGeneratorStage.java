@@ -53,16 +53,18 @@ public class WasmGeneratorStage {
   private final Output output;
   private final Path libraryInfoOutputPath;
   private final String sourceMappingPathPrefix;
+  private final boolean enableCustomDescriptors;
   private WasmGenerationEnvironment environment;
 
   /** Returns a generator stage that can emit code as strings. */
   public WasmGeneratorStage(Library library, Problems problems) {
-    this(null, null, null, problems);
+    this(null, null, null, false, problems);
     this.environment =
         new WasmGenerationEnvironment(
             library,
             JsImportsGenerator.collectImports(library, problems),
             sourceMappingPathPrefix,
+            enableCustomDescriptors,
             /* isModular= */ true);
   }
 
@@ -70,10 +72,12 @@ public class WasmGeneratorStage {
       Output output,
       Path libraryInfoOutputPath,
       String sourceMappingPathPrefix,
+      boolean enableCustomDescriptors,
       Problems problems) {
     this.output = output;
     this.libraryInfoOutputPath = libraryInfoOutputPath;
     this.sourceMappingPathPrefix = sourceMappingPathPrefix;
+    this.enableCustomDescriptors = enableCustomDescriptors;
     this.problems = problems;
   }
 
@@ -86,8 +90,14 @@ public class WasmGeneratorStage {
       Output output,
       Path libraryInfoOutputPath,
       String sourceMappingPathPrefix,
+      boolean enableCustomDescriptors,
       Problems problems) {
-    new WasmGeneratorStage(output, libraryInfoOutputPath, sourceMappingPathPrefix, problems)
+    new WasmGeneratorStage(
+            output,
+            libraryInfoOutputPath,
+            sourceMappingPathPrefix,
+            enableCustomDescriptors,
+            problems)
         .generateModularOutput(library);
   }
 
@@ -99,7 +109,11 @@ public class WasmGeneratorStage {
     Imports jsImports = JsImportsGenerator.collectImports(library, problems);
     environment =
         new WasmGenerationEnvironment(
-            library, jsImports, sourceMappingPathPrefix, /* isModular= */ true);
+            library,
+            jsImports,
+            sourceMappingPathPrefix,
+            enableCustomDescriptors,
+            /* isModular= */ true);
     problems.abortIfCancelled();
 
     SummaryBuilder summaryBuilder = new SummaryBuilder(library, environment, problems);
@@ -189,8 +203,14 @@ public class WasmGeneratorStage {
       Output output,
       Path libraryInfoOutputPath,
       String sourceMappingPathPrefix,
+      boolean enableCustomDescriptors,
       Problems problems) {
-    new WasmGeneratorStage(output, libraryInfoOutputPath, sourceMappingPathPrefix, problems)
+    new WasmGeneratorStage(
+            output,
+            libraryInfoOutputPath,
+            sourceMappingPathPrefix,
+            enableCustomDescriptors,
+            problems)
         .generateMonolithicOutput(library);
   }
 
@@ -254,6 +274,7 @@ public class WasmGeneratorStage {
             output,
             /* libraryInfoOutputPath= */ null,
             /* sourceMappingPathPrefix= */ null,
+            /* enableCustomDescriptors= */ false,
             problems);
     wasmGeneratorStage.generateWasmExportMethods(methods);
 

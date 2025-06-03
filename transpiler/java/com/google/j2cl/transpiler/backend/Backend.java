@@ -407,6 +407,7 @@ public enum Backend {
           options.getOutput(),
           options.getLibraryInfoOutput(),
           options.getSourceMappingPathPrefix(),
+          options.getEnableWasmCustomDescriptors(),
           problems);
     }
 
@@ -558,6 +559,7 @@ public enum Backend {
           options.getOutput(),
           options.getLibraryInfoOutput(),
           options.getSourceMappingPathPrefix(),
+          options.getEnableWasmCustomDescriptors(),
           problems);
     }
 

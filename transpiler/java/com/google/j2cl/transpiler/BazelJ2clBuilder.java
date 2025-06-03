@@ -144,6 +144,12 @@ final class BazelJ2clBuilder extends BazelWorker {
   @Option(name = "-experimentalGenerateWasmExport", hidden = true)
   List<String> wasmEntryPoints = new ArrayList<>();
 
+  @Option(
+      name = "-experimentalEnableWasmCustomDescriptors",
+      usage = "Enables generating custom descriptors for Wasm.",
+      hidden = true)
+  boolean enableWasmCustomDescriptors = false;
+
   @Option(name = "-forbiddenAnnotation", hidden = true)
   List<String> forbiddenAnnotations = new ArrayList<>();
 
@@ -236,6 +242,7 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setFrontend(allKotlinSources.isEmpty() ? javaFrontend : Frontend.KOTLIN)
         .setBackend(this.backend)
         .setWasmEntryPointStrings(this.wasmEntryPoints)
+        .setEnableWasmCustomDescriptors(this.enableWasmCustomDescriptors)
         .setDefinesForWasm(definesForWasm)
         .setNullMarkedSupported(this.enableJSpecifySupport)
         .setJavacOptions(javacOptions)

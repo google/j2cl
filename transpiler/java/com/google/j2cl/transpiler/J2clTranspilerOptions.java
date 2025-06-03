@@ -45,7 +45,8 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
     return new AutoValue_J2clTranspilerOptions.Builder()
         .setSystem("")
         .setOptimizeAutoValue(false)
-        .setNullMarkedSupported(false);
+        .setNullMarkedSupported(false)
+        .setEnableWasmCustomDescriptors(false);
   }
 
   @Override
@@ -97,6 +98,8 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
     abstract Builder setWasmEntryPointPatterns(List<EntryPointPattern> entryPointSpecs);
 
     public abstract Builder setDefinesForWasm(Map<String, String> definesForWasm);
+
+    public abstract Builder setEnableWasmCustomDescriptors(boolean enableWasmCustomDescriptors);
 
     public abstract Builder setNullMarkedSupported(boolean isNullMarkedSupported);
 

@@ -38,6 +38,8 @@ public interface BackendOptions {
 
   ImmutableList<EntryPointPattern> getWasmEntryPointPatterns();
 
+  boolean getEnableWasmCustomDescriptors();
+
   boolean getOptimizeAutoValue();
 
   boolean getEmitReadableLibraryInfo();
