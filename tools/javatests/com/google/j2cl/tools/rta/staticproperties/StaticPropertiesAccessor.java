@@ -16,6 +16,7 @@
 package com.google.j2cl.tools.rta.staticproperties;
 
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 
 public class StaticPropertiesAccessor {
@@ -32,6 +33,9 @@ public class StaticPropertiesAccessor {
     object = StaticObjectProperties.readUnassignedProperty;
     StaticObjectProperties.readAssignedProperty = object;
     object = StaticObjectProperties.readAssignedProperty;
+
+    // Regression test for b/422007932: this reference should keep its enclosing class alive.
+    primitive = StaticConstantWithJsPropertyMember.SOME_CONSTANT;
   }
 }
 
@@ -49,4 +53,11 @@ class StaticObjectProperties {
   public static Object unreadAssignedProperty;
   public static Object readUnassignedProperty;
   public static Object readAssignedProperty;
+}
+
+final class StaticConstantWithJsPropertyMember {
+  static final int SOME_CONSTANT = 2;
+
+  @JsProperty(namespace = JsPackage.GLOBAL, name = "Math.SQRT2")
+  private static native double sqrt2();
 }
