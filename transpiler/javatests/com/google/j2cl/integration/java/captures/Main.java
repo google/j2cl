@@ -19,6 +19,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertNotEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertNull;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.TestUtils.isJ2Kt;
 
 /** Test captures. */
 public class Main {
@@ -230,6 +231,7 @@ public class Main {
 
     // Even though this class extends Intermediate that captures the enclosing class, this class
     // itself does not capture it.
+    @J2ktIncompatible
     static class IntermediateChild extends Intermediate {
       public IntermediateChild() {
         // When extending a class that captures the outer instance, there is always the option to
@@ -244,10 +246,18 @@ public class Main {
     }
   }
 
+  @J2ktIncompatible
   private static void testOuterCapture_nested() {
     Outer outer = new Outer();
     assertEquals(TEN, outer.new Intermediate().new Inner().captured());
     assertEquals(TWENTY, new Outer.IntermediateChild().new Inner().captured());
+  }
+
+  // This overload will be called when the above one is removed due to @J2kIncompatible.
+  private static void testOuterCapture_nested(Object... o) {
+    if (!isJ2Kt()) {
+      throw new AssertionError();
+    }
   }
 
   private static void testOuterCapture_indirect() {
