@@ -36,6 +36,7 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration.SourceLanguage.KOTLIN
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors
 import com.google.j2cl.transpiler.ast.TypeDescriptors.SingletonBuilder
+import com.google.j2cl.transpiler.ast.TypeDescriptors.isKotlinNothing
 import com.google.j2cl.transpiler.ast.TypeLiteral
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.Visibility
@@ -771,21 +772,19 @@ internal class KotlinEnvironment(
     irType: IrType,
     sourcePosition: SourcePosition,
     wrapPrimitives: Boolean,
-  ): TypeLiteral {
-    val typeDescriptor =
-      getTypeDescriptor(irType).run {
-        // "Nothing" is a special case as we thread it through the J2CL AST as a stubbed type. In
-        // the context of Nothing::class it should be treated Void.
-        if (TypeDescriptors.isKotlinNothing(this)) {
-          TypeDescriptors.get().javaLangVoid
-        } else if (wrapPrimitives) {
-          toBoxedType()
-        } else {
-          this
+  ): TypeLiteral =
+    TypeLiteral(
+      sourcePosition,
+      getTypeDescriptor(irType).let {
+        when {
+          // "Nothing" is a special case as we thread it through the J2CL AST as a stubbed type. In
+          // the context of Nothing::class it should be treated Void.
+          TypeDescriptors.isKotlinNothing(it) -> TypeDescriptors.get().javaLangVoid
+          it.isPrimitive && wrapPrimitives -> it.toBoxedType()
+          else -> it
         }
-      }
-    return TypeLiteral(sourcePosition, typeDescriptor)
-  }
+      },
+    )
 
   private val IrType.superClass: IrType?
     get() {
