@@ -19,6 +19,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.TestUtils.isJ2Kt;
+import static com.google.j2cl.integration.testing.TestUtils.isJ2KtJvm;
 import static com.google.j2cl.integration.testing.TestUtils.isJ2KtNative;
 import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 
@@ -608,8 +609,8 @@ public class Main {
         () -> {
           throw returnObjectAsT(new RuntimeException());
         },
-        // TODO(b/368266647): On J2KT it reports Throwable.
-        !isJ2Kt() ? RuntimeException.class : Throwable.class);
+        // TODO(b/368266647): On J2KT/JVM it reports Throwable.
+        !isJ2KtJvm() ? RuntimeException.class : Throwable.class);
   }
 
   private static void testCasts_erasureCastOnConversion() {
@@ -622,8 +623,8 @@ public class Main {
         () -> {
           int i = (int) returnObjectAsT(new Integer(1));
         },
-        // TODO(b/368266647): On J2KT it reports Number.
-        !isJ2Kt() ? Integer.class : Number.class);
+        // TODO(b/368266647): On J2KT/JVM it reports Number.
+        !isJ2KtJvm() ? Integer.class : Number.class);
   }
 
   private static <T> T returnObjectAsT(T unused) {

@@ -11,6 +11,4 @@ package(
 integration_test(
     name = "casts",
     srcs = glob(["*.java"]),
-    # TODO(b/278942389): Enable when TestUtils.isJ2Kt() detects J2KT-web
-    enable_kt_web = False,
 )
