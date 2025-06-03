@@ -285,11 +285,11 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
         (parameterTypeDescriptor as ArrayTypeDescriptor).componentTypeDescriptor!!
       }
     return spaceSeparated(
-      Source.emptyUnless(parameterDescriptor.isVarargs) { VARARG_KEYWORD },
       objCParameterName
         ?.let { objCNameRenderer.objCNameAnnotationSource(it.string, swiftName = it.swiftString) }
         .orEmpty(),
       jsInteropAnnotationRenderer.jsInteropAnnotationsSource(parameterDescriptor),
+      Source.emptyUnless(parameterDescriptor.isVarargs) { VARARG_KEYWORD },
       colonSeparated(
         nameRenderer.nameSource(parameter),
         nameRenderer.typeDescriptorSource(renderedTypeDescriptor),
