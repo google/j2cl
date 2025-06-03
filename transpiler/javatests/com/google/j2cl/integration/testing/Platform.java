@@ -14,13 +14,10 @@
  * limitations under the License.
  */
 package com.google.j2cl.integration.testing;
-
 final class Platform {
-  static final boolean IS_WASM = false;
+  static final int RUNTIME_ENVIRONMENT = Environment.JVM;
 
-  static final boolean IS_J2KT_JVM = false;
-
-  static final boolean IS_J2KT_NATIVE = false;
+  static final boolean IS_J2KT = false;
 
   private Platform() {}
 }

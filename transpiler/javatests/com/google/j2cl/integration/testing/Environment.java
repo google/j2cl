@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Google Inc.
+ * Copyright 2025 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,11 @@
  */
 package com.google.j2cl.integration.testing;
 
-final class Platform {
-  static final int RUNTIME_ENVIRONMENT = Environment.WASM;
+final class Environment {
+  static final int JVM = 1;
+  static final int JAVASCRIPT = 2;
+  static final int WASM = 3;
+  static final int NATIVE = 4;
 
-  static final boolean IS_J2KT = false;
-
-  private Platform() {}
+  private Environment() {}
 }

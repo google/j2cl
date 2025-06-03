@@ -18,28 +18,31 @@ package com.google.j2cl.integration.testing;
 /** Utility functions needed by integration tests. */
 public final class TestUtils {
   public static boolean isJvm() {
-    return System.getProperty("java.version", null) != null;
+    return Platform.RUNTIME_ENVIRONMENT == Environment.JVM;
   }
 
   public static boolean isWasm() {
-    return Platform.IS_WASM;
+    return Platform.RUNTIME_ENVIRONMENT == Environment.WASM;
   }
 
   public static boolean isJavaScript() {
-    // TODO(b/278942389): should return true for J2KT-JS.
-    return !isJvm() && !isWasm() && !isJ2Kt();
+    return Platform.RUNTIME_ENVIRONMENT == Environment.JAVASCRIPT;
   }
 
   public static boolean isJ2Kt() {
-    return isJ2KtJvm() || isJ2KtNative();
+    return Platform.IS_J2KT;
   }
 
   public static boolean isJ2KtJvm() {
-    return Platform.IS_J2KT_JVM;
+    return Platform.IS_J2KT && Platform.RUNTIME_ENVIRONMENT == Environment.JVM;
   }
 
   public static boolean isJ2KtNative() {
-    return Platform.IS_J2KT_NATIVE;
+    return Platform.IS_J2KT && Platform.RUNTIME_ENVIRONMENT == Environment.NATIVE;
+  }
+
+  public static boolean isJ2KtWeb() {
+    return Platform.IS_J2KT && Platform.RUNTIME_ENVIRONMENT == Environment.JAVASCRIPT;
   }
 
   @SuppressWarnings({"TypeParameterUnusedInFormals", "unchecked"})

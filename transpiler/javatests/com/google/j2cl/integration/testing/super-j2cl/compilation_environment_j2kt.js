@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Google Inc.
+ * Copyright 2025 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,12 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.j2cl.integration.testing;
 
-final class Platform {
-  static final int RUNTIME_ENVIRONMENT = Environment.WASM;
+goog.module('com.google.j2cl.integration.testing.CompilationEnvironment');
 
-  static final boolean IS_J2KT = false;
-
-  private Platform() {}
-}
+/** @const {boolean} */
+exports.IS_J2KT = true;

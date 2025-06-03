@@ -16,11 +16,9 @@
 package com.google.j2cl.integration.testing;
 
 final class Platform {
-  static final boolean IS_WASM = false;
+  static final int RUNTIME_ENVIRONMENT = Environment.NATIVE;
 
-  static final boolean IS_J2KT_JVM = false;
-
-  static final boolean IS_J2KT_NATIVE = true;
+  static final boolean IS_J2KT = true;
 
   private Platform() {}
 }
