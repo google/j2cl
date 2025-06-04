@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.common.InternalCompilerError
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.AstUtils.getConstructorInvocation
+import com.google.j2cl.transpiler.ast.AstUtils.isAnnotatedWithDoNotAutobox
 import com.google.j2cl.transpiler.ast.Field
 import com.google.j2cl.transpiler.ast.InitializerBlock
 import com.google.j2cl.transpiler.ast.Member as JavaMember
@@ -289,6 +290,11 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
         ?.let { objCNameRenderer.objCNameAnnotationSource(it.string, swiftName = it.swiftString) }
         .orEmpty(),
       jsInteropAnnotationRenderer.jsInteropAnnotationsSource(parameterDescriptor),
+      Source.emptyUnless(isAnnotatedWithDoNotAutobox(parameterDescriptor)) {
+        annotation(
+          nameRenderer.topLevelQualifiedNameSource("javaemul.internal.annotations.DoNotAutobox")
+        )
+      },
       Source.emptyUnless(parameterDescriptor.isVarargs) { VARARG_KEYWORD },
       colonSeparated(
         nameRenderer.nameSource(parameter),

@@ -11,8 +11,6 @@ package(
 integration_test(
     name = "switchexpression",
     srcs = glob(["*.java"]),
-    # TODO(b/379697518): Enable once @DoNotAutobox is propagated by J2KT.
-    enable_kt_web = False,
     javacopts = [
         "-source 14",
         "-target 14",

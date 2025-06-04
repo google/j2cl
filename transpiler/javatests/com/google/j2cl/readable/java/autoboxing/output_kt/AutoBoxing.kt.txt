@@ -21,6 +21,7 @@ import javaemul.lang.*
 import java.lang.Character
 import java.lang.Integer
 import java.lang.Void
+import javaemul.internal.annotations.DoNotAutobox
 import jsinterop.annotations.JsMethod
 import kotlin.Any
 import kotlin.Array
@@ -118,11 +119,11 @@ open class AutoBoxing {
   val elements_1: Array<Float?>? = elements as Array<Float?>?
  }
 
- open fun takesObjectAndReturnsPrimitiveDouble(o: Any?): Double {
+ open fun takesObjectAndReturnsPrimitiveDouble(@DoNotAutobox o: Any?): Double {
   return o as Double
  }
 
- open fun sumWithoutBoxing(vararg numbers: Any?): Double {
+ open fun sumWithoutBoxing(@DoNotAutobox vararg numbers: Any?): Double {
   val numbers_1: Array<Any?>? = numbers as Array<Any?>?
   var sum: Double = 0.0
   for (number in numbers_1!!) {
@@ -132,7 +133,7 @@ open class AutoBoxing {
  }
 
  @JsMethod
- open fun sumWithoutBoxingJsVarargs(vararg numbers: Any?): Double {
+ open fun sumWithoutBoxingJsVarargs(@DoNotAutobox vararg numbers: Any?): Double {
   val numbers_1: Array<Any?>? = numbers as Array<Any?>?
   var sum: Double = 0.0
   for (number in numbers_1!!) {
