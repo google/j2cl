@@ -16,16 +16,14 @@
 package innerclassinitorder;
 
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.TestUtils.isJ2Kt;
 
-/**
- * Smoke test for inner classes, copied from GWT.
- */
-public class Main {
+/** Smoke test for inner classes, copied from GWT. */
+public class Main extends J2ktFallback {
   public int number = 0;
 
   static class Base {
-    public void polymorph() {
-    }
+    public void polymorph() {}
   }
 
   static class OuterRefFromSuperCtorBase extends Base {
@@ -33,15 +31,16 @@ public class Main {
       o.polymorph();
     }
   }
-  
+
   class OuterRefFromSuperCtorCall extends OuterRefFromSuperCtorBase {
     OuterRefFromSuperCtorCall() {
-      super(new Base() {
-        @Override
-        public void polymorph() {
-          number += 100;
-        }
-      });
+      super(
+          new Base() {
+            @Override
+            public void polymorph() {
+              number += 100;
+            }
+          });
     }
   }
 
@@ -51,12 +50,13 @@ public class Main {
     }
 
     public OuterRefFromThisCtorCall() {
-      this(new Base() {
-        @Override
-        public void polymorph() {
-          number += 1000;
-        }
-      });
+      this(
+          new Base() {
+            @Override
+            public void polymorph() {
+              number += 1000;
+            }
+          });
     }
   }
 
@@ -122,15 +122,15 @@ public class Main {
     }
   }
 
-  /**
-   * Used in test {@link #testExtendsNested()}
-   */
+  /** Used in test {@link #testExtendsNested()} */
   private static class ESOuter {
     class ESInner {
       public int value;
+
       public ESInner() {
         value = 1;
       }
+
       public ESInner(int value) {
         this.value = value;
       }
@@ -141,6 +141,7 @@ public class Main {
     }
   }
 
+  @J2ktIncompatible
   private static class ESInnerSubclass extends ESOuter.ESInner {
     ESInnerSubclass(ESOuter outer) {
       outer.super();
@@ -151,15 +152,15 @@ public class Main {
     }
   }
 
-  /**
-   * Used in test {@link #testExtendsNestedWithGenerics()}
-   */
+  /** Used in test {@link #testExtendsNestedWithGenerics()} */
   private static class ESWGOuter<T> {
     class ESWGInner {
       public int value;
+
       public ESWGInner() {
         value = 1;
       }
+
       public ESWGInner(int value) {
         this.value = value;
       }
@@ -170,6 +171,7 @@ public class Main {
     }
   }
 
+  @J2ktIncompatible
   private static class ESWGInnerSubclass extends ESWGOuter<String>.ESWGInner {
     ESWGInnerSubclass(ESWGOuter<String> outer) {
       outer.super();
@@ -180,6 +182,8 @@ public class Main {
     }
   }
 
+  @J2ktIncompatible
+  @Override
   public void testExtendsNested() {
     ESOuter o = new ESOuter();
     assertTrue((1 == o.new ESInner().value));
@@ -188,9 +192,9 @@ public class Main {
     assertTrue((2 == new ESInnerSubclass(2, o).value));
   }
 
-  /**
-   * Test for Issue 7789
-   */
+  /** Test for Issue 7789 */
+  @J2ktIncompatible
+  @Override
   public void testExtendsNestedWithGenerics() {
     ESWGOuter<String> o = new ESWGOuter<String>();
     assertTrue((1 == o.new ESWGInner().value));
@@ -227,12 +231,13 @@ public class Main {
     }
     AddNumber[] results = new AddNumber[10];
     for (int i = 0; i < 10; i++) {
-      AddNumber ap = new AddNumber(i) {
-        @Override
-        public void act() {
-          number += num;
-        }
-      };
+      AddNumber ap =
+          new AddNumber(i) {
+            @Override
+            public void act() {
+              number += num;
+            }
+          };
       results[i] = ap;
     }
     for (int i = 0; i < results.length; i++) {
@@ -259,7 +264,7 @@ public class Main {
       public int checkDispatch() {
         return 2;
       }
-      
+
       public int checkDispatchFromSub1() {
         return super.checkDispatch();
       }
@@ -277,6 +282,7 @@ public class Main {
       }
     }
 
+    @J2ktIncompatible
     public static class TestQualifiedSuperCall extends OuterIsNotSuper {
       public TestQualifiedSuperCall() {
         new Outer(1).new OuterIsSuper(2).super();
@@ -294,36 +300,39 @@ public class Main {
     public Outer(int i) {
       value = i;
     }
-    
+
     public int checkDispatch() {
       return 1;
     }
   }
 
-  private final Outer outer  = new Outer(1);
+  private static final Outer outer = new Outer(1);
 
-  private final Outer.OuterIsSuper outerIsSuper = outer.new OuterIsSuper(2);
+  private static final Outer.OuterIsSuper outerIsSuper = outer.new OuterIsSuper(2);
 
   public void testOuterIsNotSuper() {
     Outer.OuterIsNotSuper x = outerIsSuper.new OuterIsNotSuper();
     assertTrue((2 == x.getValue()));
   }
 
-  // new an anonymous class of an inner class with a qualifier
+  @J2ktIncompatible
+  @Override
   public void testOuterIsNotSuperAnon() {
-    Outer.OuterIsNotSuper x = outerIsSuper.new OuterIsNotSuper() {
-    };
+    Outer.OuterIsNotSuper x = outerIsSuper.new OuterIsNotSuper() {};
     assertTrue((2 == x.getValue()));
   }
 
+  @J2ktIncompatible
+  @Override
   public void testQualifiedSuperCall() {
     Outer.TestQualifiedSuperCall x = new Outer.TestQualifiedSuperCall();
     assertTrue((2 == x.getValue()));
   }
 
+  @J2ktIncompatible
+  @Override
   public void testQualifiedSuperCallAnon() {
-    Outer.TestQualifiedSuperCall x = new Outer.TestQualifiedSuperCall() {
-    };
+    Outer.TestQualifiedSuperCall x = new Outer.TestQualifiedSuperCall() {};
     assertTrue((2 == x.getValue()));
   }
 
@@ -343,9 +352,10 @@ public class Main {
   }
 
   // new an anonymous class of an inner class with a qualifier.
+  @J2ktIncompatible
+  @Override
   public void testUnqualifiedSuperCallAnon() {
-    Outer.TestUnqualifiedSuperCall x = outerIsSuper.new TestUnqualifiedSuperCall() {
-    };
+    Outer.TestUnqualifiedSuperCall x = outerIsSuper.new TestUnqualifiedSuperCall() {};
     assertTrue((2 == x.getValue()));
   }
 
@@ -368,5 +378,44 @@ public class Main {
     m.testUnqualifiedAlloc();
     m.testUnqualifiedSuperCall();
     m.testUnqualifiedSuperCallAnon();
+  }
+}
+
+// Provides the noop test methods for features that are not supported in J2kt.
+abstract class J2ktFallback {
+  public void testExtendsNested() {
+    if (!isJ2Kt()) {
+      throw new AssertionError();
+    }
+  }
+
+  public void testExtendsNestedWithGenerics() {
+    if (!isJ2Kt()) {
+      throw new AssertionError();
+    }
+  }
+
+  public void testOuterIsNotSuperAnon() {
+    if (!isJ2Kt()) {
+      throw new AssertionError();
+    }
+  }
+
+  public void testQualifiedSuperCall() {
+    if (!isJ2Kt()) {
+      throw new AssertionError();
+    }
+  }
+
+  public void testQualifiedSuperCallAnon() {
+    if (!isJ2Kt()) {
+      throw new AssertionError();
+    }
+  }
+
+  public void testUnqualifiedSuperCallAnon() {
+    if (!isJ2Kt()) {
+      throw new AssertionError();
+    }
   }
 }

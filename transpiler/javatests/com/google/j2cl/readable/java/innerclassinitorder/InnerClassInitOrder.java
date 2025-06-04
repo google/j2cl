@@ -15,9 +15,7 @@
  */
 package innerclassinitorder;
 
-/**
- * Smoke test for inner classes, copied from GWT.
- */
+/** Smoke test for inner classes, copied from GWT. */
 public class InnerClassInitOrder {
   public int number = 0;
 
@@ -119,10 +117,7 @@ public class InnerClassInitOrder {
     }
   }
 
-
-  /**
-   * Used in test {@link #testExtendsNested()}
-   */
+  /** Used in test {@link #testExtendsNested()} */
   private static class ESOuter {
     class ESInner {
       public int value;
@@ -141,6 +136,7 @@ public class InnerClassInitOrder {
     }
   }
 
+  @J2ktIncompatible
   private static class ESInnerSubclass extends ESOuter.ESInner {
     ESInnerSubclass(ESOuter outer) {
       outer.super();
@@ -151,9 +147,7 @@ public class InnerClassInitOrder {
     }
   }
 
-  /**
-   * Used in test {@link #testExtendsNestedWithGenerics()}
-   */
+  /** Used in test {@link #testExtendsNestedWithGenerics()} */
   private static class ESWGOuter<T> {
     class ESWGInner {
       public int value;
@@ -172,6 +166,7 @@ public class InnerClassInitOrder {
     }
   }
 
+  @J2ktIncompatible
   private static class ESWGInnerSubclass extends ESWGOuter<String>.ESWGInner {
     ESWGInnerSubclass(ESWGOuter<String> outer) {
       outer.super();
@@ -182,6 +177,7 @@ public class InnerClassInitOrder {
     }
   }
 
+  @J2ktIncompatible
   public void testExtendsNested() {
     ESOuter o = new ESOuter();
     assert (1 == o.new ESInner().value);
@@ -190,9 +186,8 @@ public class InnerClassInitOrder {
     assert (2 == new ESInnerSubclass(2, o).value);
   }
 
-  /**
-   * Test for Issue 7789
-   */
+  /** Test for Issue 7789 */
+  @J2ktIncompatible
   public void testExtendsNestedWithGenerics() {
     ESWGOuter<String> o = new ESWGOuter<String>();
     assert (1 == o.new ESWGInner().value);
@@ -229,12 +224,13 @@ public class InnerClassInitOrder {
     }
     AddNumber[] results = new AddNumber[10];
     for (int i = 0; i < 10; i++) {
-      AddNumber ap = new AddNumber(i) {
-        @Override
-        public void act() {
-          number += num;
-        }
-      };
+      AddNumber ap =
+          new AddNumber(i) {
+            @Override
+            public void act() {
+              number += num;
+            }
+          };
       results[i] = ap;
     }
     for (AddNumber theAp : results) {
@@ -277,6 +273,7 @@ public class InnerClassInitOrder {
       }
     }
 
+    @J2ktIncompatible
     public static class TestQualifiedSuperCall extends OuterIsNotSuper {
       public TestQualifiedSuperCall() {
         new Outer(1).new OuterIsSuper(2).super();
@@ -310,17 +307,19 @@ public class InnerClassInitOrder {
   }
 
   // new an anonymous class of an inner class with a qualifier
+  @J2ktIncompatible
   public void testOuterIsNotSuperAnon() {
-    Outer.OuterIsNotSuper x = outerIsSuper.new OuterIsNotSuper() {
-    };
+    Outer.OuterIsNotSuper x = outerIsSuper.new OuterIsNotSuper() {};
     assert (2 == x.getValue());
   }
 
+  @J2ktIncompatible
   public void testQualifiedSuperCall() {
     Outer.TestQualifiedSuperCall x = new Outer.TestQualifiedSuperCall();
     assert (2 == x.getValue());
   }
 
+  @J2ktIncompatible
   public void testQualifiedSuperCallAnon() {
     Outer.TestQualifiedSuperCall x = new Outer.TestQualifiedSuperCall() {};
     assert (2 == x.getValue());
@@ -342,30 +341,9 @@ public class InnerClassInitOrder {
   }
 
   // new an anonymous class of an inner class with a qualifier.
+  @J2ktIncompatible
   public void testUnqualifiedSuperCallAnon() {
-    Outer.TestUnqualifiedSuperCall x = outerIsSuper.new TestUnqualifiedSuperCall() {
-    };
+    Outer.TestUnqualifiedSuperCall x = outerIsSuper.new TestUnqualifiedSuperCall() {};
     assert (2 == x.getValue());
-  }
-
-  public static void main(String... args) {
-    InnerClassInitOrder m = new InnerClassInitOrder();
-    m.testOuterThisFromSuperCall();
-    m.testOuterThisFromThisCall();
-
-    m.testExtendsNested();
-    m.testExtendsNestedWithGenerics();
-    m.testInnerClassCtors();
-    m.testInnerClassInitialization();
-    m.testInnerClassLoop();
-
-    m.testOuterIsNotSuper();
-    m.testOuterIsNotSuperAnon();
-    m.testQualifiedSuperCall();
-    m.testQualifiedSuperCallAnon();
-    m.testSuperDispatch();
-    m.testUnqualifiedAlloc();
-    m.testUnqualifiedSuperCall();
-    m.testUnqualifiedSuperCallAnon();
   }
 }
