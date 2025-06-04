@@ -15,8 +15,10 @@
  */
 package overwrittentypevariables;
 
+import org.jspecify.annotations.Nullable;
+
 public class HashFunctions {
-  public static final <T> HashFunction<T> hashFunction() {
+  public static final <T extends @Nullable Object> HashFunction<T> hashFunction() {
     return new HashFunction<T>() {
       @Override
       public String apply(T input) {

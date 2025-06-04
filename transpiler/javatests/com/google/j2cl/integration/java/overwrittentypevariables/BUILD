@@ -11,6 +11,6 @@ package(
 integration_test(
     name = "overwrittentypevariables",
     srcs = glob(["*.java"]),
-    # This tests breaks in Kotlin 1.7.
-    enable_kt = False,
+    enable_nullability = True,
+    deps = ["//third_party:jspecify_annotations"],
 )

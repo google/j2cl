@@ -15,4 +15,6 @@
  */
 package overwrittentypevariables;
 
-public interface HashFunction<T> extends MyFunction<T, String> {}
+import org.jspecify.annotations.Nullable;
+
+public interface HashFunction<T extends @Nullable Object> extends MyFunction<T, String> {}
