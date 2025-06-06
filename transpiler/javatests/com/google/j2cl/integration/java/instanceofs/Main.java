@@ -18,6 +18,8 @@ package instanceofs;
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.TestUtils.isJ2Kt;
+import static com.google.j2cl.integration.testing.TestUtils.isJ2KtNative;
 import static com.google.j2cl.integration.testing.TestUtils.isWasm;
 
 import java.io.Serializable;
@@ -76,7 +78,13 @@ public class Main {
     object = new Serializable() {};
     assertTrue(object instanceof Serializable);
 
-    object = new Cloneable() {};
+    // J2KT requires explicit clone() override.
+    object =
+        new Cloneable() {
+          protected Object clone() throws CloneNotSupportedException {
+            throw new CloneNotSupportedException();
+          }
+        };
     assertTrue(object instanceof Cloneable);
   }
 
@@ -116,46 +124,65 @@ public class Main {
     Object objects1d = new Object[1];
     assertTrue(objects1d instanceof Object);
     assertTrue(objects1d instanceof Object[]);
-    assertTrue(!(objects1d instanceof Object[][]));
-    assertTrue(!(objects1d instanceof String[]));
-    assertTrue(!(objects1d instanceof String[][]));
+    // TODO(b/423010387): instanceof X[] always returns true in J2KT for any reference array
+    //  regardless of its type (here and below).
+    if (!isJ2Kt()) {
+      assertTrue(!(objects1d instanceof Object[][]));
+      assertTrue(!(objects1d instanceof String[]));
+      assertTrue(!(objects1d instanceof String[][]));
+    }
     assertTrue(!(objects1d instanceof int[]));
     assertTrue(!(objects1d instanceof Comparable));
-    assertTrue(objects1d instanceof Serializable);
-    assertTrue(objects1d instanceof Cloneable);
+    // TODO(b/267597125): Kotlin Array is not Serializable/Cloneable (here and below)
+    if (!isJ2KtNative()) {
+      assertTrue(objects1d instanceof Serializable);
+      assertTrue(objects1d instanceof Cloneable);
+    }
 
     Object strings1d = new String[1];
     assertTrue(strings1d instanceof Object);
     assertTrue(strings1d instanceof Object[]);
-    assertTrue(!(strings1d instanceof Object[][]));
-    assertTrue(strings1d instanceof String[]);
-    assertTrue(!(strings1d instanceof String[][]));
+    if (!isJ2Kt()) {
+      assertTrue(!(strings1d instanceof Object[][]));
+      assertTrue(strings1d instanceof String[]);
+      assertTrue(!(strings1d instanceof String[][]));
+    }
     assertTrue(!(strings1d instanceof int[]));
     assertTrue(!(strings1d instanceof Comparable));
-    assertTrue(strings1d instanceof Serializable);
-    assertTrue(strings1d instanceof Cloneable);
+    if (!isJ2KtNative()) {
+      assertTrue(strings1d instanceof Serializable);
+      assertTrue(strings1d instanceof Cloneable);
+    }
 
     Object objects2d = new Object[1][1];
     assertTrue(objects2d instanceof Object);
     assertTrue(objects2d instanceof Object[]);
-    assertTrue(objects2d instanceof Object[][]);
-    assertTrue(!(objects2d instanceof String[]));
-    assertTrue(!(objects2d instanceof String[][]));
+    if (!isJ2Kt()) {
+      assertTrue(objects2d instanceof Object[][]);
+      assertTrue(!(objects2d instanceof String[]));
+      assertTrue(!(objects2d instanceof String[][]));
+    }
     assertTrue(!(objects2d instanceof int[]));
     assertTrue(!(objects2d instanceof Comparable));
-    assertTrue(objects2d instanceof Serializable);
-    assertTrue(objects2d instanceof Cloneable);
+    if (!isJ2KtNative()) {
+      assertTrue(objects2d instanceof Serializable);
+      assertTrue(objects2d instanceof Cloneable);
+    }
 
     Object strings2d = new String[1][1];
     assertTrue(strings2d instanceof Object);
     assertTrue(strings2d instanceof Object[]);
-    assertTrue(strings2d instanceof Object[][]);
-    assertTrue(!(strings2d instanceof String[]));
-    assertTrue(strings2d instanceof String[][]);
+    if (!isJ2Kt()) {
+      assertTrue(strings2d instanceof Object[][]);
+      assertTrue(!(strings2d instanceof String[]));
+      assertTrue(strings2d instanceof String[][]);
+    }
     assertTrue(!(strings2d instanceof int[]));
     assertTrue(!(strings2d instanceof Comparable));
-    assertTrue(strings2d instanceof Serializable);
-    assertTrue(strings2d instanceof Cloneable);
+    if (!isJ2KtNative()) {
+      assertTrue(strings2d instanceof Serializable);
+      assertTrue(strings2d instanceof Cloneable);
+    }
 
     Object ints1d = new int[1];
     assertTrue(ints1d instanceof Object);
@@ -165,20 +192,26 @@ public class Main {
     assertTrue(!(ints1d instanceof String[][]));
     assertTrue(ints1d instanceof int[]);
     assertTrue(!(ints1d instanceof Comparable));
-    assertTrue(ints1d instanceof Serializable);
-    assertTrue(ints1d instanceof Cloneable);
+    if (!isJ2KtNative()) {
+      assertTrue(ints1d instanceof Serializable);
+      assertTrue(ints1d instanceof Cloneable);
+    }
 
     Object ints2d = new int[1][];
     assertTrue(ints2d instanceof Object);
     assertTrue(ints2d instanceof Object[]);
-    assertTrue(!(ints2d instanceof Object[][]));
-    assertTrue(!(ints2d instanceof String[]));
-    assertTrue(!(ints2d instanceof String[][]));
+    if (!isJ2Kt()) {
+      assertTrue(!(ints2d instanceof Object[][]));
+      assertTrue(!(ints2d instanceof String[]));
+      assertTrue(!(ints2d instanceof String[][]));
+    }
     assertTrue(!(ints2d instanceof int[]));
     assertTrue(ints2d instanceof int[][]);
     assertTrue(!(ints2d instanceof Comparable));
-    assertTrue(ints2d instanceof Serializable);
-    assertTrue(ints2d instanceof Cloneable);
+    if (!isJ2KtNative()) {
+      assertTrue(ints2d instanceof Serializable);
+      assertTrue(ints2d instanceof Cloneable);
+    }
 
     Object intsLiteral = new int[] {1, 2, 3};
     assertTrue(intsLiteral instanceof Object);
@@ -187,9 +220,11 @@ public class Main {
     assertTrue(!(intsLiteral instanceof String[]));
     assertTrue(!(intsLiteral instanceof String[][]));
     assertTrue(intsLiteral instanceof int[]);
-    assertTrue(!(intsLiteral instanceof Comparable));
-    assertTrue(intsLiteral instanceof Serializable);
-    assertTrue(intsLiteral instanceof Cloneable);
+    if (!isJ2KtNative()) {
+      assertTrue(!(intsLiteral instanceof Comparable));
+      assertTrue(intsLiteral instanceof Serializable);
+      assertTrue(intsLiteral instanceof Cloneable);
+    }
   }
 
   @SuppressWarnings("BoxedPrimitiveConstructor")
@@ -205,7 +240,10 @@ public class Main {
     assertTrue(!(o instanceof Character));
     assertTrue(!(o instanceof Boolean));
     assertTrue(o instanceof Comparable);
-    assertTrue(o instanceof Serializable);
+    // TODO(b/267597125): Boxed types are not Serializable (here and below)
+    if (!isJ2KtNative()) {
+      assertTrue(o instanceof Serializable);
+    }
     assertTrue(!(o instanceof Cloneable));
 
     o = new Double(1.0);
@@ -219,7 +257,9 @@ public class Main {
     assertTrue(!(o instanceof Character));
     assertTrue(!(o instanceof Boolean));
     assertTrue(o instanceof Comparable);
-    assertTrue(o instanceof Serializable);
+    if (!isJ2KtNative()) {
+      assertTrue(o instanceof Serializable);
+    }
     assertTrue(!(o instanceof Cloneable));
 
     o = new Float(1.0f);
@@ -233,7 +273,9 @@ public class Main {
     assertTrue(!(o instanceof Character));
     assertTrue(!(o instanceof Boolean));
     assertTrue(o instanceof Comparable);
-    assertTrue(o instanceof Serializable);
+    if (!isJ2KtNative()) {
+      assertTrue(o instanceof Serializable);
+    }
     assertTrue(!(o instanceof Cloneable));
 
     o = new Integer(1);
@@ -247,7 +289,9 @@ public class Main {
     assertTrue(!(o instanceof Character));
     assertTrue(!(o instanceof Boolean));
     assertTrue(o instanceof Comparable);
-    assertTrue(o instanceof Serializable);
+    if (!isJ2KtNative()) {
+      assertTrue(o instanceof Serializable);
+    }
     assertTrue(!(o instanceof Cloneable));
 
     o = new Long(1L);
@@ -261,7 +305,9 @@ public class Main {
     assertTrue(!(o instanceof Character));
     assertTrue(!(o instanceof Boolean));
     assertTrue(o instanceof Comparable);
-    assertTrue(o instanceof Serializable);
+    if (!isJ2KtNative()) {
+      assertTrue(o instanceof Serializable);
+    }
     assertTrue(!(o instanceof Cloneable));
 
     o = new Short((short) 1);
@@ -275,7 +321,9 @@ public class Main {
     assertTrue(!(o instanceof Character));
     assertTrue(!(o instanceof Boolean));
     assertTrue(o instanceof Comparable);
-    assertTrue(o instanceof Serializable);
+    if (!isJ2KtNative()) {
+      assertTrue(o instanceof Serializable);
+    }
     assertTrue(!(o instanceof Cloneable));
 
     o = new Character('a');
@@ -289,7 +337,9 @@ public class Main {
     assertTrue(o instanceof Character);
     assertTrue(!(o instanceof Boolean));
     assertTrue(o instanceof Comparable);
-    assertTrue(o instanceof Serializable);
+    if (!isJ2KtNative()) {
+      assertTrue(o instanceof Serializable);
+    }
     assertTrue(!(o instanceof Cloneable));
 
     o = new Boolean(true);
@@ -303,13 +353,17 @@ public class Main {
     assertTrue(!(o instanceof Character));
     assertTrue(o instanceof Boolean);
     assertTrue(o instanceof Comparable);
-    assertTrue(o instanceof Serializable);
+    if (!isJ2KtNative()) {
+      assertTrue(o instanceof Serializable);
+    }
     assertTrue(!(o instanceof Cloneable));
 
     o = new NumberSubclass();
     assertTrue((o instanceof NumberSubclass));
     assertTrue((o instanceof Number));
-    assertTrue(o instanceof Serializable);
+    if (!isJ2KtNative()) {
+      assertTrue(o instanceof Serializable);
+    }
     assertTrue(!(o instanceof Cloneable));
 
     assertTrue((!(new Object() instanceof Void)));
@@ -353,7 +407,11 @@ public class Main {
     assertTrue(!(s instanceof Boolean));
     assertTrue(s instanceof String);
     assertTrue(s instanceof Comparable);
-    assertTrue(s instanceof Serializable);
+
+    // TODO(b/267597125): String is not Serializable
+    if (!isJ2KtNative()) {
+      assertTrue(s instanceof Serializable);
+    }
     assertTrue(!(s instanceof Cloneable));
   }
 
