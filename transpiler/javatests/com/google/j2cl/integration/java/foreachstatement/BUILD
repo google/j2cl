@@ -11,5 +11,4 @@ package(
 integration_test(
     name = "foreachstatement",
     srcs = glob(["*.java"]),
-    enable_kt = False,
 )

@@ -17,6 +17,7 @@ package foreachstatement;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.TestUtils.isJ2KtNative;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -100,7 +101,8 @@ public class Main {
     for (Integer i : new int[] {1, 2, 3}) {
       concatName += i.getClass().getSimpleName();
     }
-    assertEquals("IntegerIntegerInteger", concatName);
+    // On Kotlin/Native, simple class name is "Int".
+    assertEquals(isJ2KtNative() ? "IntIntInt" : "IntegerIntegerInteger", concatName);
   }
 
   private static void testForEachArray_unboxed() {
