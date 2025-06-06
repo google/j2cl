@@ -18,6 +18,18 @@ package instanceinnerclass;
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Retention(RetentionPolicy.CLASS)
+@Target({
+  ElementType.METHOD,
+  ElementType.TYPE,
+})
+@interface J2ktIncompatible {}
+
 /**
  * Test instance inner class.
  */
@@ -31,7 +43,7 @@ class OuterClass {
   }
 }
 
-public class Main {
+public class Main extends J2ktFallback {
   public int fieldInMain;
   public Main(int f) {
     this.fieldInMain = f;
@@ -225,6 +237,7 @@ public class Main {
    * Test inner class whose parent is also an inner class, and shares the same enclosing instance,
    * but the super() call is called by another instance.
    */
+  @J2ktIncompatible
   public class Child2 extends B {
     public Child2() {
       new Main(30).super();
@@ -245,6 +258,7 @@ public class Main {
   /**
    * Test inner class whose parent is also an inner class, and does not the same enclosing instance.
    */
+  @J2ktIncompatible
   public class AnotherChild extends OuterClass.InnerClass {
     public int fieldInChild;
     public AnotherChild() {
@@ -262,7 +276,7 @@ public class Main {
   }
 
   public static class SuperClass {
-    String s;
+    private String s;
 
     public SuperClass(String s) {
       this.s = s;
@@ -274,30 +288,32 @@ public class Main {
   }
 
   public static class EnclosingClass extends SuperClass {
-    String s;
+    private String s;
 
     public EnclosingClass(String s) {
       super(s);
       this.s = s;
     }
 
+    @Override
     public String m() {
       return "EnclosingClass.m from " + s;
     }
 
     public class InnerClass extends EnclosingClass implements InterfaceWithDefault {
+      private String s;
+
       public InnerClass(String s) {
         super(s);
         this.s = s;
       }
-
-      public String s;
 
       @Override
       public String origin() {
         return s;
       }
 
+      @Override
       public String m() {
         return "InnerClass.m";
       }
@@ -320,6 +336,16 @@ public class Main {
     }
   }
 
+  // qualified super call not supported in Kotlin
+  @J2ktIncompatible
+  @Override
+  void testQualifiedSuperCalls() {
+    assertTrue(new AnotherChild().fieldInChild == 60);
+    Child2 c2 = new Child2();
+    assertTrue(c2.getChild2Outer().fieldInMain == 2);
+    assertTrue(c2.getBOuter().fieldInMain == 30);
+  }
+
   public static void main(String... args) {
     Main m = new Main(2);
     assertTrue(m.new A().fun() == 12);
@@ -340,11 +366,8 @@ public class Main {
     assertTrue(m.new D().fieldInD == 2);
     assertTrue(m.new Child().fieldInChild == 4);
     assertTrue(m.new Child(10, 20).fieldInChild == 30);
-    assertTrue(m.new AnotherChild().fieldInChild == 60);
 
-    Child2 c2 = m.new Child2();
-    assertTrue(c2.getChild2Outer().fieldInMain == 2);
-    assertTrue(c2.getBOuter().fieldInMain == 30);
+    m.testQualifiedSuperCalls();
 
     assertTrue(m.new X().funInX(2) == 8);
     assertTrue(m.new C().new CC().test(8) == 130);
@@ -364,4 +387,9 @@ public class Main {
         innerClass.superDefaultMethodFromInnerClass(), "InterfaceWithDefault.m from Super");
     assertEquals(innerClass.mFromOuterClass(), "EnclosingClass.m from Outer");
   }
+}
+
+// Tests which are not supported or failing in J2KT.
+abstract class J2ktFallback {
+  void testQualifiedSuperCalls() {}
 }
