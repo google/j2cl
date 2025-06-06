@@ -11,5 +11,6 @@ package(
 integration_test(
     name = "interfacedevirtualize",
     srcs = glob(["*.java"]),
-    enable_kt = False,
+    enable_nullability = True,
+    deps = ["//third_party:jspecify_annotations"],
 )

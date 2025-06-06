@@ -17,6 +17,8 @@ package interfacedevirtualize;
 
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
+import org.jspecify.annotations.Nullable;
+
 /**
  * Test CharSequence Interface on all devirtualized classes that implement it.
  */
@@ -42,7 +44,7 @@ public class CharSequenceTest {
           }
 
           @Override
-          public boolean equals(Object c) {
+          public boolean equals(@Nullable Object c) {
             return s.equals(c);
           }
 
@@ -98,7 +100,7 @@ public class CharSequenceTest {
           }
 
           @Override
-          public boolean equals(Object c) {
+          public boolean equals(@Nullable Object c) {
             return super.equals(c);
           }
 

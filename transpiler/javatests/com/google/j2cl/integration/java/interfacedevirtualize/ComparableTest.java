@@ -17,6 +17,7 @@ package interfacedevirtualize;
 
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.TestUtils.isJ2KtNative;
 
 /**
  * Test Comparable Interface on all devirtualized classes that implement it.
@@ -99,7 +100,6 @@ public class ComparableTest {
     assertTrue(compare3(d1, d3) < 0);
     assertTrue(compare3(d3, d2) > 0);
 
-    assertThrowsClassCastException(() -> compare1(d1, new Object()));
   }
 
   public void testBoolean() {
@@ -121,8 +121,6 @@ public class ComparableTest {
     assertTrue(compare3(b1, b2) == 0);
     assertTrue(compare3(b1, b3) < 0);
     assertTrue(compare3(b3, b2) > 0);
-
-    assertThrowsClassCastException(() -> compare1(b1, new Object()));
   }
 
   public void testInteger() {
@@ -144,8 +142,6 @@ public class ComparableTest {
     assertTrue(compare3(i1, i2) == 0);
     assertTrue(compare3(i1, i3) < 0);
     assertTrue(compare3(i3, i2) > 0);
-
-    assertThrowsClassCastException(() -> compare1(i1, new Object()));
   }
 
   public void testLong() {
@@ -167,8 +163,6 @@ public class ComparableTest {
     assertTrue(compare3(l1, l2) == 0);
     assertTrue(compare3(l1, l3) < 0);
     assertTrue(compare3(l3, l2) > 0);
-
-    assertThrowsClassCastException(() -> compare1(l1, new Object()));
   }
 
   public void testString() {
@@ -190,8 +184,6 @@ public class ComparableTest {
     assertTrue(compare3(s1, s2) == 0);
     assertTrue(compare3(s1, s3) < 0);
     assertTrue(compare3(s3, s2) > 0);
-
-    assertThrowsClassCastException(() -> compare1(s1, new Object()));
   }
 
   public void testComparableImpl() {
@@ -213,8 +205,20 @@ public class ComparableTest {
     assertTrue(compare3(c1, c2) == 0);
     assertTrue(compare3(c1, c3) < 0);
     assertTrue(compare3(c3, c2) > 0);
+  }
 
-    assertThrowsClassCastException(() -> compare1(c1, new Object()));
+  public void testThrowsClassCastException() {
+    // TODO(b/420648962): Does not throw on Kotlin/Native.
+    if (isJ2KtNative()) {
+      return;
+    }
+
+    assertThrowsClassCastException(() -> compare1(new Double(1.1), new Object()));
+    assertThrowsClassCastException(() -> compare1(new Boolean(false), new Object()));
+    assertThrowsClassCastException(() -> compare1(new Integer(1000), new Object()));
+    assertThrowsClassCastException(() -> compare1(new Long(1000L), new Object()));
+    assertThrowsClassCastException(() -> compare1("foo", new Object()));
+    assertThrowsClassCastException(() -> compare1(new ComparableImpl(1000), new Object()));
   }
 
   public static void test() {
@@ -225,6 +229,7 @@ public class ComparableTest {
     test.testLong();
     test.testString();
     test.testComparableImpl();
+    test.testThrowsClassCastException();
   }
 }
 
