@@ -16,6 +16,7 @@
 package instancecompiletimeconstant;
 
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.TestUtils.isJ2Kt;
 
 public class Main {
   private static class Parent {
@@ -72,10 +73,13 @@ public class Main {
     public void checkFieldsInitialized() {
       super.checkFieldsInitialized();
 
-      assertTrue(childCompileTimeConstantFloat != 0);
-      assertTrue(childCompileTimeConstantDouble != 0);
-      assertTrue(childCompileTimeConstantChar != 0);
-      assertTrue(childCompileTimeConstantBoolean != false);
+      // Kotlin does not support non-static `const val` fields.
+      if (!isJ2Kt()) {
+        assertTrue(childCompileTimeConstantFloat != 0);
+        assertTrue(childCompileTimeConstantDouble != 0);
+        assertTrue(childCompileTimeConstantChar != 0);
+        assertTrue(childCompileTimeConstantBoolean != false);
+      }
 
       // Child's non compile time constant fields have not been initialized!
       assertTrue(childRegularString == null);
