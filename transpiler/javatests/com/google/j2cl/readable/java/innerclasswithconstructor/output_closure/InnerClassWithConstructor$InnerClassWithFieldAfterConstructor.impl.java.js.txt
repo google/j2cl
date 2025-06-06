@@ -1,0 +1,48 @@
+goog.module('innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithFieldAfterConstructor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let InnerClassWithConstructor = goog.forwardDeclare('innerclasswithconstructor.InnerClassWithConstructor$impl');
+
+class InnerClassWithFieldAfterConstructor extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {InnerClassWithConstructor} @nodts*/
+  this.$outer_this__innerclasswithconstructor_InnerClassWithConstructor_InnerClassWithFieldAfterConstructor;
+  /**@type {number} @nodts*/
+  this.f_i__innerclasswithconstructor_InnerClassWithConstructor_InnerClassWithFieldAfterConstructor_ = 0;
+ }
+ /** @nodts @return {!InnerClassWithFieldAfterConstructor} */
+ static $create__innerclasswithconstructor_InnerClassWithConstructor__int(/** InnerClassWithConstructor */ $outer_this, /** number */ i) {
+  InnerClassWithFieldAfterConstructor.$clinit();
+  let $instance = new InnerClassWithFieldAfterConstructor();
+  $instance.$ctor__innerclasswithconstructor_InnerClassWithConstructor_InnerClassWithFieldAfterConstructor__innerclasswithconstructor_InnerClassWithConstructor__int__void($outer_this, i);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__innerclasswithconstructor_InnerClassWithConstructor_InnerClassWithFieldAfterConstructor__innerclasswithconstructor_InnerClassWithConstructor__int__void(/** InnerClassWithConstructor */ $outer_this, /** number */ i) {
+  this.$outer_this__innerclasswithconstructor_InnerClassWithConstructor_InnerClassWithFieldAfterConstructor = $outer_this;
+  this.$ctor__java_lang_Object__void();
+  this.f_i__innerclasswithconstructor_InnerClassWithConstructor_InnerClassWithFieldAfterConstructor_ = i;
+ }
+ /** @nodts */
+ static $clinit() {
+  InnerClassWithFieldAfterConstructor.$clinit = () =>{};
+  InnerClassWithFieldAfterConstructor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InnerClassWithFieldAfterConstructor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(InnerClassWithFieldAfterConstructor, 'innerclasswithconstructor.InnerClassWithConstructor$InnerClassWithFieldAfterConstructor');
+
+exports = InnerClassWithFieldAfterConstructor;
+
+//# sourceMappingURL=InnerClassWithConstructor$InnerClassWithFieldAfterConstructor.js.map
