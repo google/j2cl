@@ -11,5 +11,6 @@ package(
 integration_test(
     name = "parallelhierarchies",
     srcs = glob(["**/*.java"]),
+    # TODO(b/423839177): Problem with package private field shadowing
     enable_kt = False,
 )
