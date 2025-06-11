@@ -1,0 +1,70 @@
+goog.module('superfieldaccess.SuperFieldAccess.Child$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Parent = goog.require('superfieldaccess.SuperFieldAccess.Parent$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+
+class Child extends Parent {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {?string} @nodts*/
+  this.f_name__superfieldaccess_SuperFieldAccess_Child;
+ }
+ //Factory method corresponding to constructor 'Child()'.
+ /** @nodts @return {!Child} */
+ static $create__() {
+  Child.$clinit();
+  let $instance = new Child();
+  $instance.$ctor__superfieldaccess_SuperFieldAccess_Child__void();
+  return $instance;
+ }
+ //Initialization from constructor 'Child()'.
+ /** @nodts */
+ $ctor__superfieldaccess_SuperFieldAccess_Child__void() {
+  this.$ctor__superfieldaccess_SuperFieldAccess_Child__java_lang_String__void('Child');
+ }
+ //Factory method corresponding to constructor 'Child(String)'.
+ /** @nodts @return {!Child} */
+ static $create__java_lang_String(/** ?string */ from) {
+  Child.$clinit();
+  let $instance = new Child();
+  $instance.$ctor__superfieldaccess_SuperFieldAccess_Child__java_lang_String__void(from);
+  return $instance;
+ }
+ //Initialization from constructor 'Child(String)'.
+ /** @nodts */
+ $ctor__superfieldaccess_SuperFieldAccess_Child__java_lang_String__void(/** ?string */ from) {
+  this.$ctor__superfieldaccess_SuperFieldAccess_Parent__java_lang_String__void(from);
+  this.f_name__superfieldaccess_SuperFieldAccess_Child = 'Child (from ' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(from) + ')';
+ }
+ /** @override @nodts @return {?string} */
+ m_getParentName__java_lang_String() {
+  return this.f_name__superfieldaccess_SuperFieldAccess_Parent;
+ }
+ /** @nodts @return {?string} */
+ m_getGrandParentName__java_lang_String() {
+  return super.m_getParentName__java_lang_String();
+ }
+ /** @nodts */
+ static $clinit() {
+  Child.$clinit = () =>{};
+  Child.$loadModules();
+  Parent.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Child;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+ }
+}
+$Util.$setClassMetadata(Child, 'superfieldaccess.SuperFieldAccess$Child');
+
+exports = Child;
+
+//# sourceMappingURL=SuperFieldAccess$Child.js.map

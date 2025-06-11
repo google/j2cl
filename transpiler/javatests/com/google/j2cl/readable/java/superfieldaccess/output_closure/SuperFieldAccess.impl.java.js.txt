@@ -1,0 +1,40 @@
+goog.module('superfieldaccess.SuperFieldAccess$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class SuperFieldAccess extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!SuperFieldAccess} */
+ static $create__() {
+  SuperFieldAccess.$clinit();
+  let $instance = new SuperFieldAccess();
+  $instance.$ctor__superfieldaccess_SuperFieldAccess__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__superfieldaccess_SuperFieldAccess__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  SuperFieldAccess.$clinit = () =>{};
+  SuperFieldAccess.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SuperFieldAccess;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(SuperFieldAccess, 'superfieldaccess.SuperFieldAccess');
+
+exports = SuperFieldAccess;
+
+//# sourceMappingURL=SuperFieldAccess.js.map
