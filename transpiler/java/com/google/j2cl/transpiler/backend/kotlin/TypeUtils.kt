@@ -16,11 +16,13 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.Field
+import com.google.j2cl.transpiler.ast.Member
 import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.backend.kotlin.ast.Member as KtMember
 import com.google.j2cl.transpiler.backend.kotlin.ast.toCompanionObjectOrNull
+import com.google.j2cl.transpiler.backend.kotlin.common.runIfNotNull
 
 /** Returns a list of type descriptors declared on this type. */
 internal val Type.declaredSuperTypeDescriptors: List<TypeDescriptor>
@@ -50,11 +52,24 @@ internal val Type.ktMembers: List<KtMember>
       .filter { !it.descriptor.enclosingTypeDescriptor.isAnnotation }
       .filter { !declaration.isAnonymous || !it.isConstructor }
       .filter { it !is Method || it != ktPrimaryConstructor || it.renderedStatements.isNotEmpty() }
+      .runIfNotNull(ktPrimaryConstructor) { moveAfterFields(it) }
       .map { KtMember.WithJavaMember(it) }
       .plus(toCompanionObjectOrNull()?.let { KtMember.WithCompanionObject(it) })
       .plus(types.map { KtMember.WithType(it) })
       .filterNotNull()
       .toList()
+
+private fun Sequence<Member>.moveAfterFields(member: Member): Sequence<Member> =
+  toMutableList()
+    .apply {
+      val memberIndex = indexOf(member)
+      val lastFieldIndex = indexOfLast { it is Field && !it.isStatic }
+      if (memberIndex != -1 && lastFieldIndex != -1 && memberIndex < lastFieldIndex) {
+        removeAt(memberIndex)
+        add(lastFieldIndex, member)
+      }
+    }
+    .asSequence()
 
 // TODO(b/310160330): Remove this restriction once Kotlin allows for that:
 // https://github.com/Kotlin/KEEP/blob/master/proposals/jvm-field-annotation-in-interface-companion.md#open-questions

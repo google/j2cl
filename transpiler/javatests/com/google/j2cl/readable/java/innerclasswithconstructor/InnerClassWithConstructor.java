@@ -38,9 +38,6 @@ public class InnerClassWithConstructor {
     }
   }
 
-  // TODO(b/422949294): Does not build with J2KT.
-  //  error: [INITIALIZATION_BEFORE_DECLARATION] Variable cannot be initialized
-  @J2ktIncompatible
   public class InnerClassWithFieldAfterConstructor {
     InnerClassWithFieldAfterConstructor(int i) {
       this.i = i;

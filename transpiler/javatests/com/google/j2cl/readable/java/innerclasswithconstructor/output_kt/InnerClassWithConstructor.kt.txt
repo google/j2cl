@@ -47,4 +47,12 @@ open class InnerClassWithConstructor {
    this.b = this@InnerClassWithConstructor.a + b
   }
  }
+
+ open inner class InnerClassWithFieldAfterConstructor constructor(i: Int) {
+  private val i: Int
+
+  init {
+   this.i = i
+  }
+ }
 }

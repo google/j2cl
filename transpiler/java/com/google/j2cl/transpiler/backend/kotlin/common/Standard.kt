@@ -23,3 +23,6 @@ inline fun <T> T.runIf(condition: Boolean, fn: T.() -> T): T = if (condition) fn
 
 /** Returns this object if it's not null, otherwise the result of [fn]. */
 inline fun <T> T?.orIfNull(fn: () -> T): T = this ?: fn()
+
+inline fun <T, V : Any> T.runIfNotNull(valueOrNull: V?, fn: T.(V) -> T): T =
+  if (valueOrNull != null) fn(valueOrNull) else this

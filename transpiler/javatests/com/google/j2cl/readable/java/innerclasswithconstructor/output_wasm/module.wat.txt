@@ -65,12 +65,6 @@
  ))
 )
 
-;;; Code for innerclasswithconstructor.J2ktIncompatible [type definition]
-(type $innerclasswithconstructor.J2ktIncompatible.vtable (sub $java.lang.annotation.Annotation.vtable (struct
- (field $m_annotationType__java_lang_Class (ref $function.m_annotationType__java_lang_Class))
- ))
-)
-
 ;;; Code for innerclasswithconstructor.InnerClassWithConstructor [imports]
 
 ;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClass [imports]
@@ -78,8 +72,6 @@
 ;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor [imports]
 
 ;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithFieldAfterConstructor [imports]
-
-;;; Code for innerclasswithconstructor.J2ktIncompatible [imports]
 
 ;;; Code for innerclasswithconstructor.InnerClassWithConstructor [static fields]
 (global $$class-initialized@innerclasswithconstructor.InnerClassWithConstructor (mut i32)
@@ -110,14 +102,6 @@
  (i32.const 0)
 )
 (global $$class@innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithFieldAfterConstructor (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
-
-;;; Code for innerclasswithconstructor.J2ktIncompatible [static fields]
-(global $$class-initialized@innerclasswithconstructor.J2ktIncompatible (mut i32)
- (i32.const 0)
-)
-(global $$class@innerclasswithconstructor.J2ktIncompatible (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -435,16 +419,16 @@
  (param $$outer_this (ref null $innerclasswithconstructor.InnerClassWithConstructor))
  (param $i i32)
  (result (ref null $innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithFieldAfterConstructor))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclasswithconstructor/readable-j2wasm.js/innerclasswithconstructor/InnerClassWithConstructor.java:45:4
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclasswithconstructor/readable-j2wasm.js/innerclasswithconstructor/InnerClassWithConstructor.java:42:4
  (local $$instance (ref null $innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithFieldAfterConstructor))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclasswithconstructor/readable-j2wasm.js/innerclasswithconstructor/InnerClassWithConstructor.java:45:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclasswithconstructor/readable-j2wasm.js/innerclasswithconstructor/InnerClassWithConstructor.java:42:4
   (call $$clinit__void_<once>_@innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithFieldAfterConstructor )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclasswithconstructor/readable-j2wasm.js/innerclasswithconstructor/InnerClassWithConstructor.java:45:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclasswithconstructor/readable-j2wasm.js/innerclasswithconstructor/InnerClassWithConstructor.java:42:4
   (local.set $$instance (struct.new $innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithFieldAfterConstructor (global.get $innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithFieldAfterConstructor.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $innerclasswithconstructor.InnerClassWithConstructor) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclasswithconstructor/readable-j2wasm.js/innerclasswithconstructor/InnerClassWithConstructor.java:45:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclasswithconstructor/readable-j2wasm.js/innerclasswithconstructor/InnerClassWithConstructor.java:42:4
   (call $$ctor__innerclasswithconstructor_InnerClassWithConstructor__int__void_$p_innerclasswithconstructor_InnerClassWithConstructor_InnerClassWithFieldAfterConstructor@innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithFieldAfterConstructor (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $i))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclasswithconstructor/readable-j2wasm.js/innerclasswithconstructor/InnerClassWithConstructor.java:45:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclasswithconstructor/readable-j2wasm.js/innerclasswithconstructor/InnerClassWithConstructor.java:42:4
   (return (local.get $$instance))
  )
 )
@@ -454,31 +438,31 @@
  (param $this (ref null $innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithFieldAfterConstructor))
  (param $$outer_this (ref null $innerclasswithconstructor.InnerClassWithConstructor))
  (param $i i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclasswithconstructor/readable-j2wasm.js/innerclasswithconstructor/InnerClassWithConstructor.java:45:4
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclasswithconstructor/readable-j2wasm.js/innerclasswithconstructor/InnerClassWithConstructor.java:42:4
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclasswithconstructor/readable-j2wasm.js/innerclasswithconstructor/InnerClassWithConstructor.java:44:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclasswithconstructor/readable-j2wasm.js/innerclasswithconstructor/InnerClassWithConstructor.java:41:15
   (struct.set $innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithFieldAfterConstructor $$outer_this@innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithFieldAfterConstructor (local.get $this) (local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclasswithconstructor/readable-j2wasm.js/innerclasswithconstructor/InnerClassWithConstructor.java:45:47
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclasswithconstructor/readable-j2wasm.js/innerclasswithconstructor/InnerClassWithConstructor.java:42:47
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclasswithconstructor/readable-j2wasm.js/innerclasswithconstructor/InnerClassWithConstructor.java:46:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclasswithconstructor/readable-j2wasm.js/innerclasswithconstructor/InnerClassWithConstructor.java:43:6
   (struct.set $innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithFieldAfterConstructor $i@innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithFieldAfterConstructor (local.get $this) (local.get $i))
  )
 )
 
 ;;; void InnerClassWithFieldAfterConstructor.$clinit()
 (func $$clinit__void_<once>_@innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithFieldAfterConstructor
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclasswithconstructor/readable-j2wasm.js/innerclasswithconstructor/InnerClassWithConstructor.java:44:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclasswithconstructor/readable-j2wasm.js/innerclasswithconstructor/InnerClassWithConstructor.java:41:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclasswithconstructor/readable-j2wasm.js/innerclasswithconstructor/InnerClassWithConstructor.java:44:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclasswithconstructor/readable-j2wasm.js/innerclasswithconstructor/InnerClassWithConstructor.java:41:15
   (if (global.get $$class-initialized@innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithFieldAfterConstructor)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclasswithconstructor/readable-j2wasm.js/innerclasswithconstructor/InnerClassWithConstructor.java:44:15
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclasswithconstructor/readable-j2wasm.js/innerclasswithconstructor/InnerClassWithConstructor.java:41:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclasswithconstructor/readable-j2wasm.js/innerclasswithconstructor/InnerClassWithConstructor.java:44:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclasswithconstructor/readable-j2wasm.js/innerclasswithconstructor/InnerClassWithConstructor.java:41:15
   (global.set $$class-initialized@innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithFieldAfterConstructor (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclasswithconstructor/readable-j2wasm.js/innerclasswithconstructor/InnerClassWithConstructor.java:44:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclasswithconstructor/readable-j2wasm.js/innerclasswithconstructor/InnerClassWithConstructor.java:41:15
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -509,35 +493,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithFieldAfterConstructor)
-
-;;; Code for innerclasswithconstructor.J2ktIncompatible [methods]
-
-;;; void J2ktIncompatible.$clinit()
-(func $$clinit__void_<once>_@innerclasswithconstructor.J2ktIncompatible
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclasswithconstructor/readable-j2wasm.js/innerclasswithconstructor/J2ktIncompatible.java:25:18
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclasswithconstructor/readable-j2wasm.js/innerclasswithconstructor/J2ktIncompatible.java:25:18
-  (if (global.get $$class-initialized@innerclasswithconstructor.J2ktIncompatible)
-   (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclasswithconstructor/readable-j2wasm.js/innerclasswithconstructor/J2ktIncompatible.java:25:18
-    (return )
-   )
-  )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclasswithconstructor/readable-j2wasm.js/innerclasswithconstructor/J2ktIncompatible.java:25:18
-  (global.set $$class-initialized@innerclasswithconstructor.J2ktIncompatible (i32.const 1))
- )
-)
-
-;;; Class<T> J2ktIncompatible.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@innerclasswithconstructor.J2ktIncompatible
- (result (ref null $java.lang.Class))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$class@innerclasswithconstructor.J2ktIncompatible)))
-   (then
-    (return (global.get $$class@innerclasswithconstructor.J2ktIncompatible))
-   )
-  )
-  (global.set $$class@innerclasswithconstructor.J2ktIncompatible (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|innerclasswi...|__java_lang_String_<once>_@innerclasswithconstructor.J2ktIncompatible )))
-  (return (global.get $$class@innerclasswithconstructor.J2ktIncompatible))
- )
-)
