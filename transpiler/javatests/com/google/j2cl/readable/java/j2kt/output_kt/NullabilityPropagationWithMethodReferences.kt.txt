@@ -35,6 +35,15 @@ class NullabilityPropagationWithMethodReferences {
   }
 
   @JvmStatic
+  fun testConstructor(): Factory {
+   return NullabilityPropagationWithMethodReferences.apply<Factory>(
+    Factory {
+     return@Factory Foo()
+    },
+   )
+  }
+
+  @JvmStatic
   fun testStaticMethod(): Factory {
    return NullabilityPropagationWithMethodReferences.apply<Factory>(
     Factory {

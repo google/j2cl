@@ -42,10 +42,9 @@ public final class NullabilityPropagationWithMethodReferences {
     throw new RuntimeException();
   }
 
-  // TODO(b/425312292): J2KT crashes with NPE. Uncomment when fixed.
-  // public static Foo.Factory testConstructor() {
-  //   return apply(Foo::new);
-  // }
+  public static Foo.Factory testConstructor() {
+    return apply(Foo::new);
+  }
 
   public static Foo.Factory testStaticMethod() {
     return apply(Foo::create);
