@@ -227,7 +227,7 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
                 + " 'J2ktMonitor'.");
   }
 
-  public void testExplicitQualifierInAnonymousNewInstance() {
+  public void testExplicitQualifierInAnonymousNewInstanceFails() {
     newTranspilerTester(
             "test.Outer",
             """
@@ -245,7 +245,7 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
             "Error:Outer.java:5: Explicit qualifier in constructor call is not supported.");
   }
 
-  public void testExplicitQualifierInSuperCall() {
+  public void testExplicitQualifierInSuperCallFails() {
     newTranspilerTester(
             "test.Outer",
             """
@@ -264,8 +264,115 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
             "Error:Outer.java:7: Explicit qualifier in constructor call is not supported.");
   }
 
+  public void testFieldShadowingFails() {
+    newTranspilerTester()
+        .addNullMarkPackageInfo("test")
+        .addCompilationUnit(
+            "test.Parent",
+            """
+            public class Parent {
+              public int publicShadowedByPublic;
+              public int publicShadowedByPrivateShadowedByPublic;
+              protected int protectedShadowedByProtected;
+              protected int protectedShadowedByPublic;
+              int packagePrivateShadowedByPackagePrivate;
+              int packagePrivateShadowedByPublic;
+            }
+            """)
+        .addCompilationUnit(
+            "test.Child",
+            """
+            public class Child extends Parent {
+              public int publicShadowedByPublic;
+              public int publicShadowedByPrivateShadowedByPublic;
+              protected int protectedShadowedByProtected;
+              public int protectedShadowedByPublic;
+              int packagePrivateShadowedByPackagePrivate;
+              public int packagePrivateShadowedByPublic;
+            }
+            """)
+        .addCompilationUnit(
+            "test.GrandChild",
+            """
+            public class GrandChild extends Child {
+              public int publicShadowedByPrivateShadowedByPublic;
+            }
+            """)
+        .assertTranspileFails()
+        .assertErrorsWithSourcePosition(
+            "Error:Child.java:3: Field 'Child.publicShadowedByPublic' cannot shadow a super type"
+                + " field.",
+            "Error:Child.java:4: Field 'Child.publicShadowedByPrivateShadowedByPublic' cannot"
+                + " shadow a super type field.",
+            "Error:Child.java:5: Field 'Child.protectedShadowedByProtected' cannot shadow a super"
+                + " type field.",
+            "Error:Child.java:6: Field 'Child.protectedShadowedByPublic' cannot shadow a super type"
+                + " field.",
+            "Error:Child.java:7: Field 'Child.packagePrivateShadowedByPackagePrivate' cannot shadow"
+                + " a super type field.",
+            "Error:Child.java:8: Field 'Child.packagePrivateShadowedByPublic' cannot shadow a super"
+                + " type field.",
+            "Error:GrandChild.java:3: Field 'GrandChild.publicShadowedByPrivateShadowedByPublic'"
+                + " cannot shadow a super type field.");
+  }
+
+  public void testFieldShadowingSucceeds() {
+    newTranspilerTester()
+        .addNullMarkPackageInfo("test")
+        .addCompilationUnit(
+            "test.Parent",
+            """
+            public class Parent {
+              private int privateField;
+              int packagePrivateInDifferentPackage;
+              public static int staticField;
+            }
+            """)
+        .addCompilationUnit(
+            "test.Child",
+            """
+            public interface Child extends Parent {
+              int interfaceField = 1;
+            }
+            """)
+        .addCompilationUnit(
+            "test.Child",
+            """
+            public class Child extends Parent {
+              public int privateField;
+            }
+            """)
+        .addNullMarkPackageInfo("other")
+        .addCompilationUnit(
+            "other.Child",
+            """
+            public class Child extends test.Parent {
+              int packagePrivateInOtherPackage;
+              public static int staticField;
+            }
+            """)
+        .addCompilationUnit(
+            "test.ParentInterface",
+            """
+            public interface ParentInterface {
+              int interfaceField = 0;
+            }
+            """)
+        .addCompilationUnit(
+            "test.ChildInterface",
+            """
+            public interface ChildInterface extends ParentInterface {
+              int interfaceField = 1;
+            }
+            """)
+        .assertTranspileSucceeds();
+  }
+
+  private TranspilerTester newTranspilerTester() {
+    return TranspilerTester.newTesterWithJ2ktDefaults();
+  }
+
   private TranspilerTester newTranspilerTester(String compilationUnitName, String code) {
-    return TranspilerTester.newTesterWithJ2ktDefaults()
-        .addCompilationUnit(compilationUnitName, code);
+    return newTranspilerTester().addCompilationUnit(compilationUnitName, code);
   }
 }

@@ -10,6 +10,6 @@ package(
 
 readable_example(
     srcs = glob(["*.java"]),
-    # TODO(b/423839177): Problem with package private field shadowing problem
-    build_kt_readables = False,
+    # Field shadowing is not allowed in Kotlin.
+    generate_kt_readables = False,
 )

@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.common.base.Predicates.not;
 import static com.google.j2cl.transpiler.ast.J2ktAstUtils.isSubtypeOfJ2ktMonitor;
 import static com.google.j2cl.transpiler.ast.J2ktAstUtils.isValidSynchronizedStatementExpressionTypeDescriptor;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid;
@@ -68,6 +69,7 @@ public final class J2ktRestrictionsChecker {
           @Override
           public void exitField(Field field) {
             checkReferencedTypeVisibilities(field);
+            checkFieldShadowing(field);
           }
 
           @Override
@@ -119,6 +121,15 @@ public final class J2ktRestrictionsChecker {
                     referencedTypeDescriptor.getReadableDescription(),
                     getDescription(referencedVisibility));
               }
+            }
+          }
+
+          private void checkFieldShadowing(Field field) {
+            if (shadowsAnySuperTypeField(field.getDescriptor())) {
+              problems.error(
+                  field.getSourcePosition(),
+                  "Field '%s' cannot shadow a super type field.",
+                  field.getReadableDescription());
             }
           }
 
@@ -381,5 +392,31 @@ public final class J2ktRestrictionsChecker {
           .anyMatch(it -> it.equals(qualifiedSourceName));
     }
     return false;
+  }
+
+  private static boolean shadowsAnySuperTypeField(FieldDescriptor fieldDescriptor) {
+    TypeDeclaration typeDeclaration =
+        fieldDescriptor.getEnclosingTypeDescriptor().getTypeDeclaration();
+    return !typeDeclaration.isInterface()
+        && !fieldDescriptor.isStatic()
+        && typeDeclaration.getAllSuperTypesIncludingSelf().stream()
+            .filter(not(typeDeclaration::equals))
+            .filter(not(TypeDeclaration::isInterface))
+            .flatMap(td -> td.getDeclaredFieldDescriptors().stream())
+            .filter(fd -> !fd.isStatic())
+            .filter(fd -> fd.getName().equals(fieldDescriptor.getName()))
+            .anyMatch(fd -> shadowsSuperTypeField(fieldDescriptor, fd));
+  }
+
+  private static boolean shadowsSuperTypeField(
+      FieldDescriptor fieldDescriptor, FieldDescriptor superFieldDescriptor) {
+    return switch (superFieldDescriptor.getVisibility()) {
+      case PUBLIC, PROTECTED -> true;
+      case PACKAGE_PRIVATE ->
+          fieldDescriptor
+              .getEnclosingTypeDescriptor()
+              .isInSamePackage(superFieldDescriptor.getEnclosingTypeDescriptor());
+      case PRIVATE -> false;
+    };
   }
 }

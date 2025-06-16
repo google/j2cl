@@ -11,6 +11,6 @@ package(
 integration_test(
     name = "superfieldaccess",
     srcs = glob(["*.java"]),
-    # TODO(b/423839177): Problem with package private field shadowing
+    # Field shadowing is not allowed in Kotlin.
     enable_kt = False,
 )

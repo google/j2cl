@@ -11,6 +11,6 @@ package(
 integration_test(
     name = "fieldshadowing",
     srcs = glob(["*.java"]),
-    # TODO(b/202433397): Render override modifier
+    # Field shadowing is not allowed in Kotlin.
     enable_kt = False,
 )
