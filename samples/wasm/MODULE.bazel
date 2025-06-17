@@ -13,40 +13,7 @@ local_path_override(
 )
 
 bazel_dep(
-    name = "io_bazel_rules_closure",
-)
-
-# io_bazel_rules_closure is not available in BCR.
-git_override(
-    module_name = "io_bazel_rules_closure",
-    commit = "790a1bd79cde595a5d296963a78d344681ff245c",
-    remote = "https://github.com/bazelbuild/rules_closure",
-)
-
-# rules_webtesting is not available in BCR
-git_override(
-    module_name = "rules_webtesting",
-    commit = "7a1c88f61e35ee5ce0892ae24e2aa2a3106cbfed",
-    remote = "https://github.com/bazelbuild/rules_webtesting",
-)
-
-# rules_scala is not available in BCR, needed for rules_webtesting..
-git_override(
-    module_name = "rules_scala",
-    commit = "219e63983e8e483e66ebf70372969ba227382001",
-    remote = "https://github.com/mbland/rules_scala",
-)
-
-# Works around https://github.com/bazelbuild/rules_python/issues/1169
-bazel_dep(
-    name = "rules_python",
-    version = "0.23.1",
-)
-
-python = use_extension("@rules_python//python/extensions:python.bzl", "python")
-
-python.toolchain(
-    configure_coverage_tool = False,
-    ignore_root_user_error = True,
-    python_version = "3.11",
+    name = "rules_closure",
+    version = "0.15.0",
+    repo_name = "io_bazel_rules_closure",
 )
