@@ -21,27 +21,31 @@ import junit.framework.TestCase;
 @SuppressWarnings("CheckReturnValue")
 public class J2ktRestrictionsCheckerTest extends TestCase {
   public void testEmptyClass() {
-    newTranspilerTester("test.Empty", "class Empty {}")
+    newTranspilerTester()
         .addNullMarkPackageInfo("test")
+        .addCompilationUnit("test.Empty", "class Empty {}")
         .assertTranspileSucceeds();
   }
 
   public void testGenericConstructorFails() {
-    newTranspilerTester(
+    newTranspilerTester()
+        .addNullMarkPackageInfo("test")
+        .addCompilationUnit(
             "test.Main",
             """
             class Main {
               <T> Main(T t) {}
             }
             """)
-        .addNullMarkPackageInfo("test")
         .assertTranspileFails()
         .assertErrorsWithSourcePosition(
             "Error:Main.java:3: Constructor 'Main(T t)' cannot declare type variables.");
   }
 
   public void testMemberVisibilityWarnings() {
-    newTranspilerTester(
+    newTranspilerTester()
+        .addNullMarkPackageInfo("test")
+        .addCompilationUnit(
             "test.Public",
             """
             class Pkg {}
@@ -56,7 +60,6 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
               }
             }
             """)
-        .addNullMarkPackageInfo("test")
         .assertTranspileSucceeds()
         .assertWarningsWithSourcePosition(
             "Warning:Public.java:4: Member 'void Public.pkgParam(Pkg pkg)' (public) should not have"
@@ -68,13 +71,14 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
   }
 
   public void testClassVisibilityWarnings() {
-    newTranspilerTester(
+    newTranspilerTester()
+        .addNullMarkPackageInfo("test")
+        .addCompilationUnit(
             "test.Main",
             """
             class Pkg {}
             public class Main extends Pkg {}
             """)
-        .addNullMarkPackageInfo("test")
         .assertTranspileSucceeds()
         .assertWarningsWithSourcePosition(
             "Warning:Main.java:3: Type 'Main' (public) should not have wider visibility than its"
@@ -82,13 +86,14 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
   }
 
   public void testInterfaceVisibilityWarnings() {
-    newTranspilerTester(
+    newTranspilerTester()
+        .addNullMarkPackageInfo("test")
+        .addCompilationUnit(
             "test.Main",
             """
             interface Pkg {}
             public interface Main extends Pkg {}
             """)
-        .addNullMarkPackageInfo("test")
         .assertTranspileSucceeds()
         .assertWarningsWithSourcePosition(
             "Warning:Main.java:3: Type 'Main' (public) should not have wider visibility than its"
@@ -96,35 +101,39 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
   }
 
   public void testNonNullMarkedErrors() {
-    newTranspilerTester("test.Main", "class Main { void m() {} }")
+    newTranspilerTester()
+        .addCompilationUnit("test.Main", "class Main { void m() {} }")
         .assertTranspileFails()
         .assertErrorsWithSourcePosition(
             "Error:Main.java:2: Type 'test.Main' must be directly or indirectly @NullMarked.");
 
-    newTranspilerTester("foo.A", "class A { void m() {} }")
-        .addCompilationUnit("bar.B", "class B { void m() {} }")
+    newTranspilerTester()
         .addNullMarkPackageInfo("foo")
+        .addCompilationUnit("foo.A", "class A { void m() {} }")
+        .addCompilationUnit("bar.B", "class B { void m() {} }")
         .assertTranspileFails()
         .assertErrorsWithSourcePosition(
             "Error:B.java:2: Type 'bar.B' must be directly or indirectly @NullMarked.");
 
     // Enums are tolerated as not being NullMarked.
-    newTranspilerTester("foo.A", "enum A {}").assertTranspileSucceeds();
+    newTranspilerTester().addCompilationUnit("foo.A", "enum A {}").assertTranspileSucceeds();
 
     // Annotations are tolerated as not being NullMarked.
-    newTranspilerTester("foo.A", "@interface A {}").assertTranspileSucceeds();
+    newTranspilerTester().addCompilationUnit("foo.A", "@interface A {}").assertTranspileSucceeds();
 
     // Empty classes are tolerated as not being NullMarked.
-    newTranspilerTester("foo.A", "class A {}").assertTranspileSucceeds();
+    newTranspilerTester().addCompilationUnit("foo.A", "class A {}").assertTranspileSucceeds();
 
     // But the empty class cannot have a supertype.
-    newTranspilerTester("foo.A", "class A {}")
+    newTranspilerTester()
+        .addCompilationUnit("foo.A", "class A {}")
         .addCompilationUnit("foo.B", "class B extends A {}")
         .assertTranspileFails()
         .assertErrorsWithSourcePosition(
             "Error:B.java:2: Type 'foo.B' must be directly or indirectly @NullMarked.");
 
-    newTranspilerTester(
+    newTranspilerTester()
+        .addCompilationUnit(
             "test.Main",
             """
             class Outer {
@@ -142,7 +151,9 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
   }
 
   public void testKtPropertyNonEmptyParametersFails() {
-    newTranspilerTester(
+    newTranspilerTester()
+        .addNullMarkPackageInfo("test")
+        .addCompilationUnit(
             "test.Main",
             """
             abstract class Main {
@@ -150,7 +161,6 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
               abstract int method(int foo);
             }
             """)
-        .addNullMarkPackageInfo("test")
         .addCompilationUnit(
             "javaemul.internal.annotations.KtProperty", "public @interface KtProperty {}")
         .assertTranspileFails()
@@ -160,7 +170,9 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
   }
 
   public void testKtPropertyVoidReturnTypeFails() {
-    newTranspilerTester(
+    newTranspilerTester()
+        .addNullMarkPackageInfo("test")
+        .addCompilationUnit(
             "test.Main",
             """
             abstract class Main {
@@ -168,7 +180,6 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
               abstract void method();
             }
             """)
-        .addNullMarkPackageInfo("test")
         .addCompilationUnit(
             "javaemul.internal.annotations.KtProperty", "public @interface KtProperty {}")
         .assertTranspileFails()
@@ -178,7 +189,9 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
   }
 
   public void testKtPropertyConstructorFails() {
-    newTranspilerTester(
+    newTranspilerTester()
+        .addNullMarkPackageInfo("test")
+        .addCompilationUnit(
             "test.Main",
             """
             class Main {
@@ -186,7 +199,6 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
               Main() {}
             }
             """)
-        .addNullMarkPackageInfo("test")
         .addCompilationUnit(
             "javaemul.internal.annotations.KtProperty", "public @interface KtProperty {}")
         .assertTranspileFails()
@@ -195,7 +207,9 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
   }
 
   public void testSynchronizedMethodInUnsupportedTypeFails() {
-    newTranspilerTester(
+    newTranspilerTester()
+        .addNullMarkPackageInfo("test")
+        .addCompilationUnit(
             "test.Child",
             """
             class Parent {}
@@ -203,7 +217,6 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
               synchronized void method() {}
             }
             """)
-        .addNullMarkPackageInfo("test")
         .assertTranspileFails()
         .assertErrorsWithSourcePosition(
             "Error:Child.java:3: Type 'Child' does not support synchronized methods as it does not "
@@ -211,7 +224,9 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
   }
 
   public void testUnsupportedSynchronizedStatementFails() {
-    newTranspilerTester(
+    newTranspilerTester()
+        .addNullMarkPackageInfo("test")
+        .addCompilationUnit(
             "test.Main",
             """
             class Main {
@@ -220,7 +235,6 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
               }
             }
             """)
-        .addNullMarkPackageInfo("test")
         .assertTranspileFails()
         .assertErrorsWithSourcePosition(
             "Error:Main.java:4: Synchronized statement is valid only on instances of 'Class' or"
@@ -228,7 +242,9 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
   }
 
   public void testExplicitQualifierInAnonymousNewInstanceFails() {
-    newTranspilerTester(
+    newTranspilerTester()
+        .addNullMarkPackageInfo("test")
+        .addCompilationUnit(
             "test.Outer",
             """
             class Outer {
@@ -239,14 +255,15 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
               }
             }
             """)
-        .addNullMarkPackageInfo("test")
         .assertTranspileFails()
         .assertErrorsWithSourcePosition(
             "Error:Outer.java:5: Explicit qualifier in constructor call is not supported.");
   }
 
   public void testExplicitQualifierInSuperCallFails() {
-    newTranspilerTester(
+    newTranspilerTester()
+        .addNullMarkPackageInfo("test")
+        .addCompilationUnit(
             "test.Outer",
             """
             class Outer {
@@ -258,7 +275,6 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
               }
             }
             """)
-        .addNullMarkPackageInfo("test")
         .assertTranspileFails()
         .assertErrorsWithSourcePosition(
             "Error:Outer.java:7: Explicit qualifier in constructor call is not supported.");
@@ -370,9 +386,5 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
 
   private TranspilerTester newTranspilerTester() {
     return TranspilerTester.newTesterWithJ2ktDefaults();
-  }
-
-  private TranspilerTester newTranspilerTester(String compilationUnitName, String code) {
-    return newTranspilerTester().addCompilationUnit(compilationUnitName, code);
   }
 }
