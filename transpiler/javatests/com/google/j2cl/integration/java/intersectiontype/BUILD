@@ -11,5 +11,4 @@ package(
 integration_test(
     name = "interfacewithfields",
     srcs = glob(["*.java"]),
-    enable_kt = False,
 )

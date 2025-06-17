@@ -17,7 +17,17 @@ package intersectiontype;
 
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.TestUtils.isJ2Kt;
 import static com.google.j2cl.integration.testing.TestUtils.isJvm;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Retention(RetentionPolicy.CLASS)
+@Target(ElementType.METHOD)
+@interface J2ktIncompatible {}
 
 public class Main {
   public static void main(String... args) {
@@ -58,7 +68,7 @@ public class Main {
           EmptyC b2CIJ = (EmptyC & EmptyI & EmptyJ) localB;
         },
         // J2CL performs casts checks from intersection casts in an order different from Java/JVM.
-        isJvm() ? EmptyJ.class : EmptyC.class);
+        isJvm() && !isJ2Kt() ? EmptyJ.class : EmptyC.class);
     assertThrowsClassCastException(
         () -> {
           EmptyB c2BI = (EmptyB & EmptyI) localC;
@@ -84,6 +94,11 @@ public class Main {
   private interface SimpleK {}
 
   private static void testIntersectionCastWithLambdaExpr() {
+    // Intersection type lambdas not supported in Kotlin.
+    if (isJ2Kt()) {
+      return;
+    }
+
     SimpleI simpleI1 = (SimpleI & EmptyI) () -> 11;
     assertTrue(11 == simpleI1.fun());
     SimpleI simpleI2 = (EmptyI & SimpleI) () -> 22;
@@ -172,17 +187,33 @@ public class Main {
   }
 
   private static void testLambdaTypeInference() {
+    // Intersection type lambdas not supported in Kotlin.
+    if (isJ2Kt()) {
+      return;
+    }
+
     // The first one fails because the lambda is not properly typed.
     assertTrue(1 == method().cmp());
     assertTrue(2 == method2().cmp(4));
   }
 
+  // Since type argument can not be inferred from arguments, Kotlin requires explicit type
+  // arguments for ParameterizedByIntersection constructor call. However, Kotlin does not allow
+  // specifying explicit intersection type arguments.
+  @J2ktIncompatible
   private static void testErasureCast() {
     assertThrowsClassCastException(
         () -> {
           new ParameterizedByIntersection().m(new EmptyA());
         },
         SimpleI.class);
+  }
+
+  // Fallback for J2kt, which will be called when the method above is stripped out.
+  private static void testErasureCast(Object... unused) {
+    if (!isJ2Kt()) {
+      throw new AssertionError();
+    }
   }
 
   private static class ParameterizedByIntersection<T extends EmptyA & SimpleI> {
