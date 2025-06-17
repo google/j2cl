@@ -269,7 +269,7 @@ open class DefaultNullable {
     return@NullMarkedSupplier String()
    } as NullMarkedSupplier<String?>
    val newArrayReference: NullMarkedIntFunction<Array<String?>?> = NullMarkedIntFunction { arg0: Int ->
-    return@NullMarkedIntFunction arrayOfNulls<String>(arg0) as Array<String>
+    return@NullMarkedIntFunction arrayOfNulls<String>(arg0)
    } as NullMarkedIntFunction<Array<String?>?>
   }
 

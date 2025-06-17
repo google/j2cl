@@ -29,8 +29,7 @@ class MethodReference internal constructor() {
     inputs,
     object : Function<Foo<out T>, Foo<out T>> {
      override fun <H> apply(arg0: Foo<out T>): Foo<out T> {
-      val arg0_1 = arg0 as Foo<out T>
-      return arg0_1.bar()
+      return arg0.bar()
      }
     },
    )

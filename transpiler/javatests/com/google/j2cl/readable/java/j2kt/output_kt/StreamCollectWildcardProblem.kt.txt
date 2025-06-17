@@ -49,7 +49,7 @@ open class StreamCollectWildcardProblem {
     list.map(
      Function { arg0: Foo<*> ->
       return@Function arg0.getThis() as Foo<*>
-     },
+     } as Function<in Foo<*>, out Foo<*>>,
     ).collect<MutableList<Foo<*>>, Any?>(
      Collectors.toList<Foo<*>>() as Collector<in Foo<*>, Any?, MutableList<Foo<*>>>,
     ),
@@ -84,7 +84,7 @@ open class StreamCollectWildcardProblem {
     list.map(
      Function { arg0: Foo<*> ->
       return@Function arg0.getThis() as Foo<*>
-     },
+     } as Function<in Foo<*>, out Foo<*>>,
     ).collect(
      Collectors.toList<Foo<*>>() as Collector<in Foo<*>, *, MutableList<Foo<*>>>,
     ),

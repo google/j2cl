@@ -87,8 +87,8 @@ open class MethodReferences<T> {
    return@Producer ObjectCapturingOuter()
   }
   val arrayProducer: ArrayProducer<Any> = ArrayProducer { arg0_3: Int ->
-   return@ArrayProducer arrayOfNulls<Double>(arg0_3) as Array<Any>
-  }
+   return@ArrayProducer arrayOfNulls<Double>(arg0_3) as Array<Any?>
+  } as ArrayProducer<Any>
   objectFactory = run {
    val ______q_1: MethodReferences<Any> = MethodReferences<Any>()
    Producer {
@@ -123,14 +123,14 @@ open class MethodReferences<T> {
    return@Function DoubleArray(arg0_12.toInt())
   }
   val objectArrayFactory: Function<Int, Array<Any>> = Function { arg0_13: Int ->
-   return@Function arrayOfNulls<Any>(arg0_13.toInt()) as Array<Any>
-  }
+   return@Function arrayOfNulls<Any>(arg0_13.toInt())
+  } as Function<Int, Array<Any>>
   val nullableObjectArrayFactory: Function<Int, Array<Any?>> = Function { arg0_14: Int ->
    return@Function arrayOfNulls<Any>(arg0_14.toInt())
   }
   val stringArrayFactory: Function<Int, Array<String>> = Function { arg0_15: Int ->
-   return@Function arrayOfNulls<String>(arg0_15.toInt()) as Array<String>
-  }
+   return@Function arrayOfNulls<String>(arg0_15.toInt())
+  } as Function<Int, Array<String>>
   val nullableStringArrayFactory: Function<Int, Array<String?>> = Function { arg0_16: Int ->
    return@Function arrayOfNulls<String>(arg0_16.toInt())
   }
@@ -153,8 +153,8 @@ open class MethodReferences<T> {
    return@JsFunctionInterface arg0_17.self_pp_methodreferences()
   }
   val jsarrayFactory: JsFunctionInterface<Int, Array<Any>> = JsFunctionInterface { arg0_18: Int ->
-   return@JsFunctionInterface arrayOfNulls<Any>(arg0_18.toInt()) as Array<Any>
-  }
+   return@JsFunctionInterface arrayOfNulls<Any>(arg0_18.toInt())
+  } as JsFunctionInterface<Int, Array<Any>>
   val jsSuperToStringProducer: JsProducer<String> = JsProducer {
    return@JsProducer super.toString()
   } as JsProducer<String>

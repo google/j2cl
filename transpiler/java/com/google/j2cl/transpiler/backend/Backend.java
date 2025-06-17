@@ -714,9 +714,9 @@ public enum Backend {
           MakeVariablesFinal::new,
           DesugarInstanceOfPatterns::new,
           MakeVariablesNonNull::new,
+          ConvertMethodReferencesToLambdas::new,
           PropagateNullability::new,
           ProjectCapturesInLambdaParameters::new,
-          ConvertMethodReferencesToLambdas::new,
           ResolveImplicitInstanceQualifiers::new);
     }
 

@@ -41,8 +41,8 @@ open class NullabilityInferenceProblem8 {
    NullabilityInferenceProblem8.acceptParameterized(
     NullabilityInferenceProblem8.nonNullWithLowerBound<String, Any>(
      Function { arg0: String ->
-      return@Function supplier.get(arg0)!!
-     },
+      return@Function supplier.get(arg0)
+     } as Function<in String, Any>,
     ),
    )
   }

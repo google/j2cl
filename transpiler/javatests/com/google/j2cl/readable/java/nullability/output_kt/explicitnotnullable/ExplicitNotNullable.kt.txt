@@ -320,8 +320,8 @@ open class ExplicitNotNullable {
     return@Supplier Any()
    }
    val newArray: IntFunction<Array<Any>> = IntFunction { arg0_2: Int ->
-    return@IntFunction arrayOfNulls<Any>(arg0_2) as Array<Any>
-   }
+    return@IntFunction arrayOfNulls<Any>(arg0_2)
+   } as IntFunction<Array<Any>>
   }
 
   @JvmStatic
