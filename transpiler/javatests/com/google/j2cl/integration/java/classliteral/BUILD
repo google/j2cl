@@ -18,6 +18,7 @@ j2wasm_library(
     deps = [
         "//jre/java:javaemul_internal_annotations-j2wasm",
         "//third_party:jsinterop-annotations-j2wasm",
+        "//third_party:jspecify_annotations-j2wasm",
         "//transpiler/javatests/com/google/j2cl/integration/testing:testing-j2wasm",
     ],
 )
@@ -25,6 +26,6 @@ j2wasm_library(
 integration_test(
     name = "classliteral",
     srcs = glob(["*.java"]),
-    # TODO(b/202428351): Generics support
-    enable_kt = False,
+    enable_nullability = True,
+    deps = ["//third_party:jspecify_annotations"],
 )

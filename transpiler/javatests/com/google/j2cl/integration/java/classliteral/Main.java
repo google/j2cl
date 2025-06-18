@@ -20,15 +20,26 @@ import static com.google.j2cl.integration.testing.Asserts.assertNotSame;
 import static com.google.j2cl.integration.testing.Asserts.assertSame;
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointerException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.TestUtils.isJ2Kt;
+import static com.google.j2cl.integration.testing.TestUtils.isJ2KtNative;
 import static com.google.j2cl.integration.testing.TestUtils.isJavaScript;
 import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 import static com.google.j2cl.integration.testing.TestUtils.isWasm;
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsEnum;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
+import org.jspecify.annotations.Nullable;
+
+@Retention(RetentionPolicy.CLASS)
+@Target(ElementType.METHOD)
+@interface J2ktIncompatible {}
 
 public class Main {
   public static void main(String... args) {
@@ -54,25 +65,20 @@ public class Main {
   private static void testClass() {
     Object o = new Main();
     assertSame(Main.class, o.getClass());
-    assertSame(Object.class, o.getClass().getSuperclass());
-    assertSame(null, Object.class.getSuperclass());
+    assertSuperclass(Object.class, o.getClass());
+    assertSuperclass(null, Object.class);
 
-    assertEquals("classliteral.Main", Main.class.getName());
-    assertEquals("classliteral.Main$Foo", Foo.class.getName());
+    assertNameEquals("classliteral.Main", Main.class);
+    assertNameEquals("classliteral.Main$Foo", Foo.class);
 
-    assertEquals("classliteral.Main", Main.class.getCanonicalName());
-    if (!isJvm()) {
-      // J2CL doesn't follow JLS here:
-      assertEquals("classliteral.Main$Foo", Foo.class.getCanonicalName());
-    } else {
-      assertEquals("classliteral.Main.Foo", Foo.class.getCanonicalName());
-    }
+    assertCanonicalNameEquals("classliteral.Main", Main.class);
+    assertCanonicalNameEquals("classliteral.Main$Foo", Foo.class);
 
-    assertEquals("Main", Main.class.getSimpleName());
-    assertEquals("Foo", Foo.class.getSimpleName());
+    assertSimpleNameEquals("Main", Main.class);
+    assertSimpleNameEquals("Foo", Foo.class);
 
-    assertEquals("class classliteral.Main", Main.class.toString());
-    assertEquals("class classliteral.Main$Foo", Foo.class.toString());
+    assertToStringEquals("class classliteral.Main", Main.class);
+    assertToStringEquals("class classliteral.Main$Foo", Foo.class);
 
     assertLiteralType("Foo.class", LiteralType.CLASS, Foo.class);
   }
@@ -80,28 +86,23 @@ public class Main {
   private interface IFoo {}
 
   private static void testInterface() {
-    assertSame(null, IFoo.class.getSuperclass());
+    assertSuperclass(null, IFoo.class);
 
-    assertEquals("classliteral.Main$IFoo", IFoo.class.getName());
-    if (!isJvm()) {
-      // J2CL doesn't follow JLS here:
-      assertEquals("classliteral.Main$IFoo", IFoo.class.getCanonicalName());
-    } else {
-      assertEquals("classliteral.Main.IFoo", IFoo.class.getCanonicalName());
-    }
-    assertEquals("IFoo", IFoo.class.getSimpleName());
-    assertEquals("interface classliteral.Main$IFoo", IFoo.class.toString());
+    assertNameEquals("classliteral.Main$IFoo", IFoo.class);
+    assertCanonicalNameEquals("classliteral.Main$IFoo", IFoo.class);
+    assertSimpleNameEquals("IFoo", IFoo.class);
+    assertToStringEquals("interface classliteral.Main$IFoo", IFoo.class);
 
     assertLiteralType("IFoo.class", LiteralType.INTERFACE, IFoo.class);
   }
 
   private static void testPrimitive() {
-    assertSame(null, int.class.getSuperclass());
+    assertSuperclass(null, int.class);
 
-    assertEquals("int", int.class.getName());
-    assertEquals("int", int.class.getCanonicalName());
-    assertEquals("int", int.class.getSimpleName());
-    assertEquals("int", int.class.toString());
+    assertNameEquals("int", int.class);
+    assertCanonicalNameEquals("int", int.class);
+    assertSimpleNameEquals("int", int.class);
+    assertToStringEquals("int", int.class);
 
     assertLiteralType("int.class", LiteralType.PRIMITIVE, int.class);
   }
@@ -114,30 +115,27 @@ public class Main {
   private static void testEnum() {
     Object o = Bar.BAR;
     assertSame(Bar.class, o.getClass());
-    assertSame(Enum.class, o.getClass().getSuperclass());
+    assertSuperclass(Enum.class, o.getClass());
 
-    assertEquals("classliteral.Main$Bar", o.getClass().getName());
-    if (!isJvm()) {
-      // J2CL doesn't follow JLS here:
-      assertEquals("classliteral.Main$Bar", o.getClass().getCanonicalName());
-    } else {
-      assertEquals("classliteral.Main.Bar", o.getClass().getCanonicalName());
-    }
-    assertEquals("Bar", o.getClass().getSimpleName());
-    assertEquals(
-        "class classliteral.Main$Bar", o.getClass().toString());
+    assertNameEquals("classliteral.Main$Bar", o.getClass());
+    assertCanonicalNameEquals("classliteral.Main$Bar", o.getClass());
+    assertSimpleNameEquals("Bar", o.getClass());
+    assertToStringEquals("class classliteral.Main$Bar", o.getClass());
 
     assertLiteralType("Bar.BAR.getClass()", LiteralType.ENUM, o.getClass());
   }
 
   private static void testEnumSubclass() {
+    // Enum subclass does not behave the same in Kotlin.
+    if (isJ2Kt()) {
+      return;
+    }
     Object o = Bar.BAZ;
     assertNotSame(Bar.class, o.getClass());
-    assertSame(Bar.class, o.getClass().getSuperclass());
+    assertSuperclass(Bar.class, o.getClass());
 
-    assertEquals("classliteral.Main$Bar$1", o.getClass().getName());
-    assertEquals(
-        "class classliteral.Main$Bar$1", o.getClass().toString());
+    assertNameEquals("classliteral.Main$Bar$1", o.getClass());
+    assertToStringEquals("class classliteral.Main$Bar$1", o.getClass());
 
     assertLiteralType("Bar.BAZ.getClass()", LiteralType.CLASS, o.getClass());
   }
@@ -156,18 +154,12 @@ public class Main {
     assertSame(MyJsEnum.class, o.getClass());
     assertSame(MyJsEnum.class, MyJsEnum.VALUE.getClass());
     // In platforms other than JavaScript JsEnum behaves like a regular enum.
-    assertSame(isJavaScript() ? null : Enum.class, o.getClass().getSuperclass());
+    assertSuperclass(isJavaScript() ? null : Enum.class, o.getClass());
 
-    assertEquals("classliteral.Main$MyJsEnum", o.getClass().getName());
-    if (!isJvm()) {
-      // J2CL doesn't follow JLS here:
-      assertEquals("classliteral.Main$MyJsEnum", o.getClass().getCanonicalName());
-    } else {
-      assertEquals("classliteral.Main.MyJsEnum", o.getClass().getCanonicalName());
-    }
-    assertEquals("MyJsEnum", o.getClass().getSimpleName());
-    assertEquals(
-        "class classliteral.Main$MyJsEnum", o.getClass().toString());
+    assertNameEquals("classliteral.Main$MyJsEnum", o.getClass());
+    assertCanonicalNameEquals("classliteral.Main$MyJsEnum", o.getClass());
+    assertSimpleNameEquals("MyJsEnum", o.getClass());
+    assertToStringEquals("class classliteral.Main$MyJsEnum", o.getClass());
 
     // In platforms other than JavaScript JsEnum behaves like a regular enum.
     assertLiteralType(
@@ -178,20 +170,22 @@ public class Main {
 
   private static void testArray() {
     // TODO(b/184675805): enable for Wasm when class metadata is implemented for array
-    if (isWasm()) {
+    // Array component type is erased in Kotlin and non-object array class literals like
+    // `Foo[].class` are rendered as `Array::class`.
+    if (isWasm() || isJ2Kt()) {
       return;
     }
     Object o = new Foo[3];
     assertSame(Foo[].class, o.getClass());
-    assertSame(Object.class, o.getClass().getSuperclass());
+    assertSuperclass(Object.class, o.getClass());
 
     assertSame(Foo.class, o.getClass().getComponentType());
     assertSame(Foo[].class, Foo[][].class.getComponentType());
 
-    assertEquals("[L" + Foo.class.getName() + ";", o.getClass().getName());
-    assertEquals(Foo.class.getCanonicalName() + "[]", o.getClass().getCanonicalName());
-    assertEquals(Foo.class.getSimpleName() + "[]", o.getClass().getSimpleName());
-    assertEquals("class [L" + Foo.class.getName() + ";", o.getClass().toString());
+    assertNameEquals("[L" + Foo.class.getName() + ";", o.getClass());
+    assertCanonicalNameEquals(Foo.class.getCanonicalName() + "[]", o.getClass());
+    assertSimpleNameEquals(Foo.class.getSimpleName() + "[]", o.getClass());
+    assertToStringEquals("class [L" + Foo.class.getName() + ";", o.getClass());
 
     assertLiteralType("Foo[].class", LiteralType.ARRAY, o.getClass());
 
@@ -216,27 +210,27 @@ public class Main {
       return;
     }
     Class<?> clazz = NativeFunction.class;
-    assertEquals("<native function>", clazz.getName());
-    assertEquals(null, clazz.getSuperclass());
+    assertNameEquals("<native function>", clazz);
+    assertSuperclass(null, clazz);
     assertLiteralType("NativeFunction.class", LiteralType.INTERFACE, clazz);
 
     clazz = NativeInterface.class;
-    assertEquals("<native object>", clazz.getName());
-    assertEquals(null, clazz.getSuperclass());
+    assertNameEquals("<native object>", clazz);
+    assertSuperclass(null, clazz);
     assertLiteralType("NativeFunction.class", LiteralType.INTERFACE, clazz);
 
     clazz = NativeClass.class;
-    assertEquals("<native object>", clazz.getName());
-    assertEquals(Object.class, clazz.getSuperclass());
+    assertNameEquals("<native object>", clazz);
+    assertSuperclass(Object.class, clazz);
     assertLiteralType("NativeFunction.class", LiteralType.CLASS, clazz);
   }
 
   @Wasm("nop") // Extending native types not yet supported in Wasm.
   private static void testExtendsNative() {
-    assertEquals("classliteral.TypeExtendsNativeClass", TypeExtendsNativeClass.class.getName());
+    assertNameEquals("classliteral.TypeExtendsNativeClass", TypeExtendsNativeClass.class);
 
     // TODO(b/63081128): Uncomment when fixed.
-    // assertEquals(NativeClass.class, TypeExtendsNativeClass.class.getSuperclass());
+    // assertSuperClass(NativeClass.class, TypeExtendsNativeClass.class);
 
     assertLiteralType(
         "TypeExtendsNativeClass.class", LiteralType.CLASS, TypeExtendsNativeClass.class);
@@ -279,6 +273,10 @@ public class Main {
   private interface MarkerInterface {}
 
   private static void testLambdaIntersectionType() {
+    // Kotlin does not support lambda intersection type
+    if (isJ2Kt()) {
+      return;
+    }
     SomeFunctionalInterfaceWithParameter intersectionLambda =
         (SomeFunctionalInterfaceWithParameter & MarkerInterface) (a) -> {};
     SomeFunctionalInterfaceWithParameter anotherIntersectionLambda =
@@ -297,15 +295,15 @@ public class Main {
     assertLiteralType("lambda.getClass()", LiteralType.CLASS, intersectionLambda.getClass());
   }
 
-  private static class GenericClass<T> {}
+  private static class GenericClass<T extends @Nullable Object> {}
 
-  private interface GenericInterface<T> {}
+  private interface GenericInterface<T extends @Nullable Object> {}
 
   private static void testGeneric() {
     GenericClass<Number> g = new GenericClass<>();
     assertSame(GenericClass.class, g.getClass());
-    assertEquals("GenericClass", GenericClass.class.getSimpleName());
-    assertEquals("GenericInterface", GenericInterface.class.getSimpleName());
+    assertSimpleNameEquals("GenericClass", GenericClass.class);
+    assertSimpleNameEquals("GenericInterface", GenericInterface.class);
 
     assertLiteralType("generic.getClass()", LiteralType.CLASS, g.getClass());
   }
@@ -345,9 +343,10 @@ public class Main {
     ENUM
   }
 
+  // isInterface() / isEnum() is not available in Kotlin
+  @J2ktIncompatible
   private static void assertLiteralType(
       String messagePrefix, LiteralType expectedType, Class<?> literal) {
-
     assertEquals(
         messagePrefix + ".isInterface()",
         expectedType == LiteralType.INTERFACE,
@@ -361,6 +360,21 @@ public class Main {
         messagePrefix + ".isArray()", expectedType == LiteralType.ARRAY, literal.isArray());
   }
 
+  // Fallback called on J2KT.
+  private static void assertLiteralType(
+      String messagePrefix, LiteralType expectedType, Class<?> literal, Object... unused) {
+    if (!isJ2Kt()) {
+      throw new AssertionError();
+    }
+    assertEquals(
+        messagePrefix + ".isPrimitive()",
+        expectedType == LiteralType.PRIMITIVE,
+        literal.isPrimitive());
+    assertEquals(
+        messagePrefix + ".isArray()", expectedType == LiteralType.ARRAY, literal.isArray());
+  }
+
+  @J2ktIncompatible
   private static void testSuperCall() {
     class A {}
     class B extends A {
@@ -369,5 +383,45 @@ public class Main {
       }
     }
     assertEquals(B.class, new B().superGetClass());
+  }
+
+  private static void testSuperCall(Object... unused) {}
+
+  private static void assertNameEquals(String name, Class<?> clazz) {
+    // J2KT/Native doesn't follow JLS
+    assertEquals(isJ2KtNative() ? name.replace('$', '.') : name, clazz.getName());
+  }
+
+  private static void assertSimpleNameEquals(String simpleName, Class<?> clazz) {
+    assertEquals(simpleName, clazz.getSimpleName());
+  }
+
+  private static void assertCanonicalNameEquals(String canonicalName, Class<?> clazz) {
+    // J2CL & J2KT/Native doesn't follow JLS
+    assertEquals(
+        isJvm() || isJ2KtNative() ? canonicalName.replace('$', '.') : canonicalName,
+        clazz.getCanonicalName());
+  }
+
+  private static void assertToStringEquals(String string, Class<?> clazz) {
+    // J2KT/Native doesn't follow JLS
+    assertEquals(
+        isJ2KtNative() ? string.replace('$', '.').replace("interface ", "class ") : string,
+        clazz.toString());
+  }
+
+  // Class.getSuperclass() is not supported in J2KT, as KClass.supertypes is available only on JVM.
+  // There's no plan to support it, unless it's made available in Kotlin Common.
+  @J2ktIncompatible
+  private static void assertSuperclass(@Nullable Class<?> superClass, Class<?> clazz) {
+    assertSame(superClass, clazz.getSuperclass());
+  }
+
+  // Overload used in J2KT.
+  private static void assertSuperclass(
+      @Nullable Class<?> superClass, Class<?> clazz, Object... unused) {
+    if (!isJ2Kt()) {
+      throw new AssertionError();
+    }
   }
 }
