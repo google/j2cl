@@ -1,42 +1,25 @@
-bcr_test_module:
-  module_path: "."
-  matrix:
-    platform:
-      - ubuntu2004
-      - macos
-    bazel:
-      - 8.x
-  tasks:
-    compiler_build_test:
-      platform: ${{ platform }}
-      bazel: ${{ bazel }}
-      build_targets:
-        - '//:all'
-        - '//jre/java/...'
-        - '//transpiler/java/...'
-        - '//tools/java/...'
-        - '//benchmarking/java/...'
-        - '//junit/generator/java/...'
-        - '//junit/emul/java/...'
-      test_targets:
-        - '//transpiler/javatests/com/google/j2cl/integration/java/emptyclass/...'
-        - '//jre/javatests/...'
-        - '//transpiler/javatests/com/google/j2cl/integration/...'
-    guava_sample_build_test:
-      platform: ${{ platform }}
-      bazel: ${{ bazel }}
-      build_targets:
-        - '//...'
-      working_directory: samples/guava
-    helloworld_sample_test:
-      platform: ${{ platform }}
-      bazel: ${{ bazel }}
-      test_targets:
-        - '//...'
-      working_directory: samples/helloworld
-    wasm_sample_test:
-      platform: ${{ platform }}
-      bazel: ${{ bazel }}
-      test_targets:
-        - '//...'
-      working_directory: samples/wasm
+matrix:
+  platform:
+    - ubuntu2004
+    - macos
+  bazel:
+    - 8.x
+tasks:
+  guava_sample_build_test:
+    platform: ${{ platform }}
+    bazel: ${{ bazel }}
+    build_targets:
+      - '//...'
+    working_directory: samples/guava
+  helloworld_sample_test:
+    platform: ${{ platform }}
+    bazel: ${{ bazel }}
+    test_targets:
+      - '//...'
+    working_directory: samples/helloworld
+  wasm_sample_test:
+    platform: ${{ platform }}
+    bazel: ${{ bazel }}
+    test_targets:
+      - '//...'
+    working_directory: samples/wasm
