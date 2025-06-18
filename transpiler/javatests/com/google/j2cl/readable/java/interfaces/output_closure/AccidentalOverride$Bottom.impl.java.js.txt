@@ -1,0 +1,46 @@
+goog.module('interfaces.AccidentalOverride.Bottom$impl');
+
+const Left = goog.require('interfaces.AccidentalOverride.Left$impl');
+const Right = goog.require('interfaces.AccidentalOverride.Right$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template T
+ * @extends {Left<T>}
+ * @extends {Right<T>}
+ */
+class Bottom {
+ /** @abstract @nodts */
+ m_foo__interfaces_AccidentalOverride_Bottom__void(/** T */ t) {}
+ /** @nodts @template T */
+ static m_foo__$default__interfaces_AccidentalOverride_Bottom__interfaces_AccidentalOverride_Bottom__void(/** !Bottom<T> */ $thisArg, /** T */ t) {
+  Bottom.$clinit();
+ }
+ /** @nodts */
+ static $clinit() {
+  Bottom.$clinit = () =>{};
+  Bottom.$loadModules();
+  Left.$clinit();
+  Right.$clinit();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  Left.$markImplementor(ctor);
+  Right.$markImplementor(ctor);
+  ctor.prototype.$implements__interfaces_AccidentalOverride_Bottom = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__interfaces_AccidentalOverride_Bottom;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Bottom.$markImplementor(/**@type {Function}*/ (Bottom));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (Bottom), 'interfaces.AccidentalOverride$Bottom');
+
+exports = Bottom;
+
+//# sourceMappingURL=AccidentalOverride$Bottom.js.map

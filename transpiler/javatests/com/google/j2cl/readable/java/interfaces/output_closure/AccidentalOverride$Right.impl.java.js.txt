@@ -1,0 +1,38 @@
+goog.module('interfaces.AccidentalOverride.Right$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class Right {
+ /** @abstract @nodts */
+ m_foo__interfaces_AccidentalOverride_Right__void(/** T */ t) {}
+ /** @nodts @template T */
+ static m_foo__$default__interfaces_AccidentalOverride_Right__interfaces_AccidentalOverride_Right__void(/** !Right<T> */ $thisArg, /** T */ t) {
+  Right.$clinit();
+ }
+ /** @nodts */
+ static $clinit() {
+  Right.$clinit = () =>{};
+  Right.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__interfaces_AccidentalOverride_Right = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__interfaces_AccidentalOverride_Right;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Right.$markImplementor(/**@type {Function}*/ (Right));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (Right), 'interfaces.AccidentalOverride$Right');
+
+exports = Right;
+
+//# sourceMappingURL=AccidentalOverride$Right.js.map

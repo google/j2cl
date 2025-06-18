@@ -1,0 +1,61 @@
+goog.module('interfaces.AccidentalOverride.A$impl');
+
+const Left = goog.require('interfaces.AccidentalOverride.Left$impl');
+const Right = goog.require('interfaces.AccidentalOverride.Right$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T, V
+ * @implements {Left<T>}
+ * @implements {Right<V>}
+ */
+class A extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T, V @return {!A<T, V>} */
+ static $create__() {
+  A.$clinit();
+  let $instance = new A();
+  $instance.$ctor__interfaces_AccidentalOverride_A__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__interfaces_AccidentalOverride_A__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ //Default method forwarding stub.
+ /** @override @nodts */
+ m_foo__interfaces_AccidentalOverride_Left__void(/** T */ arg0) {
+  Left.m_foo__$default__interfaces_AccidentalOverride_Left__interfaces_AccidentalOverride_Left__void(this, arg0);
+ }
+ //Default method forwarding stub.
+ /** @override @nodts */
+ m_foo__interfaces_AccidentalOverride_Right__void(/** V */ arg0) {
+  Right.m_foo__$default__interfaces_AccidentalOverride_Right__interfaces_AccidentalOverride_Right__void(this, arg0);
+ }
+ /** @nodts */
+ static $clinit() {
+  A.$clinit = () =>{};
+  A.$loadModules();
+  j_l_Object.$clinit();
+  Left.$clinit();
+  Right.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof A;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Left.$markImplementor(A);
+Right.$markImplementor(A);
+$Util.$setClassMetadata(A, 'interfaces.AccidentalOverride$A');
+
+exports = A;
+
+//# sourceMappingURL=AccidentalOverride$A.js.map
