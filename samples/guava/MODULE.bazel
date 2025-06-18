@@ -3,11 +3,12 @@ module(
 )
 
 bazel_dep(
-    name = "com_google_j2cl",
+    name = "j2cl",
+    repo_name = "com_google_j2cl",
 )
 
 local_path_override(
-    module_name = "com_google_j2cl",
+    module_name = "j2cl",
     path = "../..",
 )
 
