@@ -49,7 +49,7 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("NewClassExample", swiftName = "NewClassExample")
+@ObjCName("J2ktNewClassExample", swiftName = "NewClassExample", exact = true)
 open class ClassExample {
  @JvmField
  var publicField: Int = 0
@@ -70,7 +70,7 @@ open class ClassExample {
 
  constructor(i: Int, s: String)
 
- @ObjCName("NewClassExampleCompanion", swiftName = "NewClassExampleCompanion")
+ @ObjCName("J2ktNewClassExampleCompanion", swiftName = "NewClassExampleCompanion", exact = true)
  companion object {
   @JvmField
   var publicStaticField: Int = 0

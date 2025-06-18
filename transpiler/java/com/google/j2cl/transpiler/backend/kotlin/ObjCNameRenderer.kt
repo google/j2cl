@@ -45,9 +45,6 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
   private val isJ2ObjCInteropEnabled: Boolean
     get() = nameRenderer.environment.isJ2ObjCInteropEnabled
 
-  private val objCNamePrefix: String
-    get() = if (NEW_OBJC_NAMES) "" else nameRenderer.objCNamePrefix
-
   fun hiddenFromObjCAnnotationSource(): Source =
     annotation(
       nameRenderer.sourceWithOptInQualifiedName("kotlin.experimental.ExperimentalObjCRefinement") {
@@ -75,9 +72,9 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
       hiddenFromObjCMapping.contains(typeDeclaration) -> hiddenFromObjCAnnotationSource()
       needsObjCNameAnnotation(typeDeclaration) ->
         objCNameAnnotationSource(
-          typeDeclaration.objCName(objCNamePrefix),
+          typeDeclaration.objCName(nameRenderer.objCNamePrefix),
           swiftName = typeDeclaration.objCNameWithoutPrefix,
-          exact = true.takeUnless { NEW_OBJC_NAMES },
+          exact = true,
         )
       else -> Source.EMPTY
     }
@@ -85,9 +82,9 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
   fun objCAnnotationSource(companionObject: CompanionObject): Source =
     Source.emptyUnless(isJ2ObjCInteropEnabled && needsObjCNameAnnotation(companionObject)) {
       objCNameAnnotationSource(
-        companionObject.declaration.objCName(objCNamePrefix),
+        companionObject.declaration.objCName(nameRenderer.objCNamePrefix),
         swiftName = companionObject.declaration.objCNameWithoutPrefix,
-        exact = true.takeUnless { NEW_OBJC_NAMES },
+        exact = true,
       )
     }
 

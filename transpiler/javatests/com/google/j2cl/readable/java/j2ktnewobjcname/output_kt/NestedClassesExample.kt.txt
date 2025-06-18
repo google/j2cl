@@ -24,15 +24,15 @@ import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCName
 
 open class NestedClassesExample {
- @kotlin.native.ObjCName("NewObjCName", swiftName = "NewObjCName")
+ @kotlin.native.ObjCName("J2ktNewObjCName", swiftName = "NewObjCName", exact = true)
  open inner class ObjCName {
-  @kotlin.native.ObjCName("InnerClassNewName", swiftName = "InnerClassNewName")
+  @kotlin.native.ObjCName("J2ktInnerClassNewName", swiftName = "InnerClassNewName", exact = true)
   open inner class InnerClassOldName
  }
 
- @kotlin.native.ObjCName("NewStaticObjCName", swiftName = "NewStaticObjCName")
+ @kotlin.native.ObjCName("J2ktNewStaticObjCName", swiftName = "NewStaticObjCName", exact = true)
  open class StaticObjCName {
-  @kotlin.native.ObjCName("StaticInnerClassNewName", swiftName = "StaticInnerClassNewName")
+  @kotlin.native.ObjCName("J2ktStaticInnerClassNewName", swiftName = "StaticInnerClassNewName", exact = true)
   open inner class InnerClassOldName
  }
 }
