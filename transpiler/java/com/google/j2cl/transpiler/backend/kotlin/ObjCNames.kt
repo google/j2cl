@@ -246,7 +246,9 @@ internal fun MethodObjCNames.escapeObjCMethod(isConstructor: Boolean): MethodObj
 
 // Taken from GitHub:
 // "JetBrains/kotlin-native/backend.native/compiler/ir/backend.native/src/org/jetbrains/kotlin/backend/konan/objcexport/ObjCExportNamer.kt"
-private val objCReservedPrefixes = setOf("alloc", "copy", "mutableCopy", "new", "init")
+// excluding the ones preserved via objcExportExplicitMethodFamily=true.
+// TODO(b/420579251): Revert any logic that's no longer needed.
+private val objCReservedPrefixes = emptySet<String>()
 
 // Taken from GitHub:
 // "JetBrains/kotlin-native/backend.native/compiler/ir/backend.native/src/org/jetbrains/kotlin/backend/konan/CAdapterGenerator.kt"

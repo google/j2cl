@@ -147,7 +147,7 @@ NS_INLINE void NewClassExample_set_fun(int32_t value) {
 }
 
 NS_INLINE int32_t NewClassExample_get_alloc(void) {
- return J2ktNewClassExampleCompanion.shared.doAlloc___;
+ return J2ktNewClassExampleCompanion.shared.alloc___;
 }
 
 NS_INLINE void NewClassExample_set_alloc(int32_t value) {
@@ -155,7 +155,7 @@ NS_INLINE void NewClassExample_set_alloc(int32_t value) {
 }
 
 NS_INLINE int32_t NewClassExample_get_init(void) {
- return J2ktNewClassExampleCompanion.shared.doInit___;
+ return J2ktNewClassExampleCompanion.shared.init___;
 }
 
 NS_INLINE void NewClassExample_set_init(int32_t value) {
@@ -187,7 +187,7 @@ NS_INLINE void NewClassExample_set_NULL(int32_t value) {
 }
 
 NS_INLINE int32_t NewClassExample_get_allocFoo(void) {
- return J2ktNewClassExampleCompanion.shared.doAllocFoo_;
+ return J2ktNewClassExampleCompanion.shared.allocFoo_;
 }
 
 NS_INLINE void NewClassExample_set_allocFoo(int32_t value) {
@@ -195,7 +195,7 @@ NS_INLINE void NewClassExample_set_allocFoo(int32_t value) {
 }
 
 NS_INLINE int32_t NewClassExample_get_initFoo(void) {
- return J2ktNewClassExampleCompanion.shared.doInitFoo_;
+ return J2ktNewClassExampleCompanion.shared.initFoo_;
 }
 
 NS_INLINE void NewClassExample_set_initFoo(int32_t value) {
@@ -203,7 +203,7 @@ NS_INLINE void NewClassExample_set_initFoo(int32_t value) {
 }
 
 NS_INLINE int32_t NewClassExample_get_newFoo(void) {
- return J2ktNewClassExampleCompanion.shared.doNewFoo_;
+ return J2ktNewClassExampleCompanion.shared.newFoo_;
 }
 
 NS_INLINE void NewClassExample_set_newFoo(int32_t value) {
@@ -383,15 +383,15 @@ NS_INLINE J2ktNewClassExample* new_NewClassExample_initWithInt_withNSString_(int
 }
 
 NS_INLINE void NewClassExample_newFoo(void) {
- [J2ktNewClassExampleCompanion.shared doNewFoo];
+ [J2ktNewClassExampleCompanion.shared newFoo];
 }
 
 NS_INLINE void NewClassExample_newFooFromInt_(int32_t i) {
- [J2ktNewClassExampleCompanion.shared doNewFooFromInt:i];
+ [J2ktNewClassExampleCompanion.shared newFooFromInt:i];
 }
 
 NS_INLINE void NewClassExample_newFooFromInt_withInteger_(NSString* s, int32_t i) {
- [J2ktNewClassExampleCompanion.shared doNewFooFromInt:s withInteger:i];
+ [J2ktNewClassExampleCompanion.shared newFooFromInt:s withInteger:i];
 }
 
 NS_INLINE void NewClassExample_fooWithNSString_withNSString_(NSString* s, NSString* i) {
@@ -411,11 +411,11 @@ NS_INLINE void NewClassExample_fun(void) {
 }
 
 NS_INLINE void NewClassExample_alloc__(void) {
- [J2ktNewClassExampleCompanion.shared doAlloc__];
+ [J2ktNewClassExampleCompanion.shared alloc__];
 }
 
 NS_INLINE void NewClassExample_allocBar(void) {
- [J2ktNewClassExampleCompanion.shared doAllocBar];
+ [J2ktNewClassExampleCompanion.shared allocBar];
 }
 
 NS_INLINE void NewClassExample_allocatedBar(void) {
@@ -423,7 +423,7 @@ NS_INLINE void NewClassExample_allocatedBar(void) {
 }
 
 NS_INLINE void NewClassExample_init__(void) {
- [J2ktNewClassExampleCompanion.shared doInit__];
+ [J2ktNewClassExampleCompanion.shared init__];
 }
 
 NS_INLINE void NewClassExample_initialize__(void) {
@@ -431,19 +431,19 @@ NS_INLINE void NewClassExample_initialize__(void) {
 }
 
 NS_INLINE void NewClassExample_initBar(void) {
- [J2ktNewClassExampleCompanion.shared doInitBar];
+ [J2ktNewClassExampleCompanion.shared initBar];
 }
 
 NS_INLINE void NewClassExample_newBar(void) {
- [J2ktNewClassExampleCompanion.shared doNewBar];
+ [J2ktNewClassExampleCompanion.shared newBar];
 }
 
 NS_INLINE void NewClassExample_copyBar(void) {
- [J2ktNewClassExampleCompanion.shared doCopyBar];
+ [J2ktNewClassExampleCompanion.shared copyBar];
 }
 
 NS_INLINE void NewClassExample_mutableCopyBar(void) {
- [J2ktNewClassExampleCompanion.shared doMutableCopyBar];
+ [J2ktNewClassExampleCompanion.shared mutableCopyBar];
 }
 
 NS_INLINE void NewClassExample_reservedParamNamesWithInt_withInt_withInt_withInt_(int32_t extern_, int32_t struct_, int32_t register_, int32_t inline_) {
@@ -498,11 +498,11 @@ NS_INLINE J2ktNewClassExample_Foo* NewClassExample_Foo_get_fun(void) {
 }
 
 NS_INLINE J2ktNewClassExample_Foo* NewClassExample_Foo_get_alloc(void) {
- return J2ktNewClassExample_Foo.theAlloc__;
+ return J2ktNewClassExample_Foo.alloc__;
 }
 
 NS_INLINE J2ktNewClassExample_Foo* NewClassExample_Foo_get_init(void) {
- return J2ktNewClassExample_Foo.theInit__;
+ return J2ktNewClassExample_Foo.init__;
 }
 
 NS_INLINE J2ktNewClassExample_Foo* NewClassExample_Foo_get_initialize(void) {
@@ -510,23 +510,23 @@ NS_INLINE J2ktNewClassExample_Foo* NewClassExample_Foo_get_initialize(void) {
 }
 
 NS_INLINE J2ktNewClassExample_Foo* NewClassExample_Foo_get_allocFoo(void) {
- return J2ktNewClassExample_Foo.theAllocFoo;
+ return J2ktNewClassExample_Foo.allocFoo;
 }
 
 NS_INLINE J2ktNewClassExample_Foo* NewClassExample_Foo_get_initFoo(void) {
- return J2ktNewClassExample_Foo.theInitFoo;
+ return J2ktNewClassExample_Foo.initFoo;
 }
 
 NS_INLINE J2ktNewClassExample_Foo* NewClassExample_Foo_get_newFoo(void) {
- return J2ktNewClassExample_Foo.theNewFoo;
+ return J2ktNewClassExample_Foo.newFoo;
 }
 
 NS_INLINE J2ktNewClassExample_Foo* NewClassExample_Foo_get_copyFoo(void) {
- return J2ktNewClassExample_Foo.theCopyFoo;
+ return J2ktNewClassExample_Foo.copyFoo;
 }
 
 NS_INLINE J2ktNewClassExample_Foo* NewClassExample_Foo_get_mutableCopyFoo(void) {
- return J2ktNewClassExample_Foo.theMutableCopyFoo;
+ return J2ktNewClassExample_Foo.mutableCopyFoo;
 }
 
 NS_INLINE J2ktNewClassExample_Foo* NewClassExample_Foo_get_register(void) {
