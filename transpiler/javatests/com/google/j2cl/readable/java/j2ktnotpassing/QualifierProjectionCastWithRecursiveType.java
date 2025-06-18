@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Google Inc.
+ * Copyright 2025 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,13 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package interfaces.package1;
+package j2ktnotpassing;
 
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
+// TODO(b/424430558): Move to j2kt when the bug is fixed.
 @NullMarked
-public class ClassInPackage1WithPackagePrivateMethod {
-  String m() {
-    return "package-private-m";
+public class QualifierProjectionCastWithRecursiveType {
+  interface Foo<T extends Foo<T>> {
+    String name(@Nullable T s);
+  }
+
+  public static void test(Foo<?> foo) {
+    foo.name(null);
   }
 }

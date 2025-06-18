@@ -15,6 +15,9 @@
  */
 package interfaces.package1;
 
+import org.jspecify.annotations.NullMarked;
+
+@NullMarked
 public interface InterfaceInPackage1 {
 
   default String m() {

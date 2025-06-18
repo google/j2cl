@@ -16,6 +16,9 @@
 
 package interfaces.package1;
 
+import org.jspecify.annotations.NullMarked;
+
+@NullMarked
 public class ChildInPackage1 extends ClassInPackage1WithPackagePrivateMethod
     implements InterfaceInPackage1 {
 
