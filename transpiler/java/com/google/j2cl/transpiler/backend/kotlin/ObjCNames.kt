@@ -29,7 +29,6 @@ import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.ast.Visibility as KtVisibility
-import com.google.j2cl.transpiler.backend.kotlin.common.camelCaseStartsWith
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.common.mapFirst
 import com.google.j2cl.transpiler.backend.kotlin.common.titleCased
@@ -42,15 +41,6 @@ internal data class ObjCName(val string: String, val swiftString: String? = null
 
 internal val String.escapeObjCKeyword
   get() = letIf(objCKeywords.contains(this)) { it + "_" }
-
-internal fun String.escapeReservedObjCPrefixWith(newPrefix: String) =
-  letIf(objCReservedPrefixes.any { camelCaseStartsWith(it) }) { "$newPrefix$titleCased" }
-
-internal val String.escapeObjCProperty: String
-  get() = escapeObjCKeyword.escapeReservedObjCPrefixWith("do")
-
-internal val String.escapeObjCEnumProperty: String
-  get() = escapeObjCKeyword.escapeReservedObjCPrefixWith("the")
 
 internal val KtVisibility.needsObjCNameAnnotation
   get() = isPublic || isProtected
@@ -236,19 +226,12 @@ internal fun MethodObjCNames.escapeObjCMethod(isConstructor: Boolean): MethodObj
         string =
           objCName.string
             .letIf(parameterObjCNames.isEmpty()) { it.escapeObjCKeyword }
-            .letIf(!isConstructor) { it.escapeReservedObjCPrefixWith("do") }
       ),
     parameterObjCNames =
       parameterObjCNames.letIf(isConstructor) {
         it.mapFirst { ObjCName(string = "With${it.string}") }
       },
   )
-
-// Taken from GitHub:
-// "JetBrains/kotlin-native/backend.native/compiler/ir/backend.native/src/org/jetbrains/kotlin/backend/konan/objcexport/ObjCExportNamer.kt"
-// excluding the ones preserved via objcExportExplicitMethodFamily=true.
-// TODO(b/420579251): Revert any logic that's no longer needed.
-private val objCReservedPrefixes = emptySet<String>()
 
 // Taken from GitHub:
 // "JetBrains/kotlin-native/backend.native/compiler/ir/backend.native/src/org/jetbrains/kotlin/backend/konan/CAdapterGenerator.kt"

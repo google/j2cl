@@ -171,11 +171,7 @@ internal class J2ObjCCompatRenderer(
     }
 
   private fun getPropertyObjCName(fieldDescriptor: FieldDescriptor): String =
-    if (fieldDescriptor.isEnumConstant) {
-      fieldDescriptor.objCName.escapeObjCEnumProperty
-    } else {
-      fieldDescriptor.objCName.escapeObjCProperty
-    }
+    fieldDescriptor.objCName
 
   private fun fieldGetFunctionRenderer(field: Field): Renderer<Source> =
     field.descriptor.takeIf(::shouldRender)?.let(::getFunctionRenderer) ?: rendererOf(Source.EMPTY)
