@@ -1,4 +1,4 @@
-// Generated from "j2ktnotpassing/QualifierProjectionCastWithRecursiveType.java"
+// Generated from "j2kt/QualifierProjectionCastWithRecursiveType.java"
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -15,7 +15,7 @@
  "VARIABLE_WITH_REDUNDANT_INITIALIZER",
  "REDUNDANT_ELSE_IN_WHEN")
 
-package j2ktnotpassing
+package j2kt
 
 import javaemul.lang.*
 import kotlin.String
@@ -26,7 +26,7 @@ open class QualifierProjectionCastWithRecursiveType {
  companion object {
   @JvmStatic
   fun test(foo: Foo<*>) {
-   (foo as Foo<Foo<T>>).name(null)
+   (foo as Foo<Foo<*>>).name(null)
   }
  }
 

@@ -80,8 +80,7 @@ class TypeWildCards {
   }
 
   public static void testRecursiveObservable(RecursiveObservable<?> observable) {
-    // TODO(b/261839232): No idea how to convert it to a correct Kotlin code.
-    // observable.addObserver(e -> {});
+    observable.addObserver(e -> {});
   }
 
   static class WithoutBounds {

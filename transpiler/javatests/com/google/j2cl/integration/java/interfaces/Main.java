@@ -18,17 +18,12 @@ package interfaces;
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
-import static com.google.j2cl.integration.testing.TestUtils.isJ2Kt;
 import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 
 import com.google.j2objc.annotations.ObjectiveCName;
 import interfaces.package1.ChildInPackage1;
 import interfaces.package1.ClassInPackage1WithPackagePrivateMethod;
 import interfaces.package1.InterfaceInPackage1;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
 import java.util.Iterator;
 import jsinterop.annotations.JsNonNull;
 import org.jspecify.annotations.NullMarked;
@@ -38,10 +33,6 @@ import org.jspecify.annotations.Nullable;
 @SuppressWarnings("StaticQualifiedUsingExpression")
 @NullMarked
 public class Main {
-  @Retention(RetentionPolicy.CLASS)
-  @Target(ElementType.METHOD)
-  @interface J2ktIncompatible {}
-
   public static void main(String... args) {
     testInterfaceDispatch();
     testInterfaceWithFields();
@@ -257,7 +248,7 @@ public class Main {
   interface DiamondLeft<T extends DiamondLeft<T>> {
     String NAME = "DiamondLeft";
 
-    // TODO(b/424430558): Explicit annotation is necessary to overcome problem with @ObjCName
+    // TODO(b/425618126): Explicit annotation is necessary to overcome problem with @ObjCName
     //  annotation and diamond types.
     @ObjectiveCName("nameWith:")
     default String name(@Nullable T t) {
@@ -268,7 +259,7 @@ public class Main {
   interface DiamondRight<T extends DiamondRight<T>> {
     String NAME = "DiamondRight";
 
-    // TODO(b/424430558): Explicit annotation is necessary to overcome problem with @ObjCName
+    // TODO(b/425618126): Explicit annotation is necessary to overcome problem with @ObjCName
     //  annotation and diamond types.
     @ObjectiveCName("nameWith:")
     default String name(@Nullable T t) {
@@ -299,9 +290,6 @@ public class Main {
     }
   }
 
-  // TODO(b/424430558): J2KT inserts invalid qualifier projection cast:
-  //  {@code (dl as DiamondLeft<DiamondLeft<T>>).name(null)}.
-  @J2ktIncompatible
   private static void testDefaultMethods_diamondProperty() {
     A<? extends DiamondLeft<?>, ? extends DiamondRight<?>> a = new A<>();
     DiamondLeft<?> dl = a;
@@ -321,13 +309,6 @@ public class Main {
     dr = c;
     assertEquals(C.NAME, dr.name(null));
     assertEquals(C.NAME, c.name(null));
-  }
-
-  // Fallback for J2kt, which will be called when the method above is stripped out.
-  private static void testDefaultMethods_diamondProperty(Object... args) {
-    if (!isJ2Kt()) {
-      throw new AssertionError();
-    }
   }
 
   abstract static class NullableIterator<E extends @Nullable Object> implements Iterator<E> {}

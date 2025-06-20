@@ -13,12 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2ktnotpassing;
+package j2kt;
 
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-// TODO(b/424430558): Move to j2kt when the bug is fixed.
 @NullMarked
 public class QualifierProjectionCastWithRecursiveType {
   interface Foo<T extends Foo<T>> {

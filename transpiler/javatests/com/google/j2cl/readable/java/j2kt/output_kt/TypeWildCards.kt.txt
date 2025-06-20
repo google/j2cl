@@ -70,7 +70,12 @@ open class TypeWildCards internal constructor() {
   }
 
   @JvmStatic
-  fun testRecursiveObservable(observable: RecursiveObservable<*>) {}
+  fun testRecursiveObservable(observable: RecursiveObservable<*>) {
+   (observable as RecursiveObservable<RecursiveObservable<*>>).addObserver(
+    Observer { e ->
+    },
+   )
+  }
  }
 
  open class Parent internal constructor()

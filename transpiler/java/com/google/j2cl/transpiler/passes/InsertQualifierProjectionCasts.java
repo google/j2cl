@@ -161,7 +161,18 @@ public final class InsertQualifierProjectionCasts extends AbstractJ2ktNormalizat
     if (typeDescriptor instanceof DeclaredTypeDescriptor declaredTypeDescriptor) {
       return declaredTypeDescriptor.withTypeArguments(
           declaredTypeDescriptor.getTypeArgumentDescriptors().stream()
-              .map(typeArgument -> projectUpperBound(typeArgument, currentTypeParameters))
+              .map(
+                  typeArgument -> {
+                    TypeDescriptor td = projectUpperBound(typeArgument, currentTypeParameters);
+                    // If after projecting all wildcard type arguments to their upperbounds we
+                    // obtain back the declaration, it means that it is a recursive declaration.
+                    // Recursive types like `Enum<T>` would be first projected to `Enum<Enum<T>>`,
+                    // and after detecting recursion would be converted to `Enum<Enum<?>>`.
+                    return td.toNullable()
+                            .equals(declaredTypeDescriptor.getTypeDeclaration().toDescriptor())
+                        ? typeDescriptor
+                        : td;
+                  })
               .collect(toImmutableList()));
     } else if (typeDescriptor instanceof TypeVariable typeVariable) {
       if (typeVariable.getLowerBoundTypeDescriptor() == null) {
