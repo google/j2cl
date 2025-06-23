@@ -35,6 +35,10 @@ public final class HiddenFromObjCTypes {
     T get();
   }
 
+  public HiddenFromObjCTypes(String unusedString) {}
+
+  public HiddenFromObjCTypes(StringBuilder unusedStringBuilder) {}
+
   public static StringBuilder returnsStringBuilder(int i) {
     throw new RuntimeException();
   }

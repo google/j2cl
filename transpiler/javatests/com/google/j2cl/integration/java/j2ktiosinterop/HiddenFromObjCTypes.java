@@ -17,12 +17,20 @@ package j2ktiosinterop;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 // Contains types and members which should be hidden from ObjC because of b/407538927
 @NullMarked
 public final class HiddenFromObjCTypes {
+  @Retention(RetentionPolicy.CLASS)
+  @Target(ElementType.CONSTRUCTOR)
+  @interface J2ktIncompatible {}
+
   public interface Supplier<T extends @Nullable Object> {
     T get();
   }
@@ -32,6 +40,12 @@ public final class HiddenFromObjCTypes {
   public static @Nullable Writer writer;
 
   public interface GenericWithStringBuilder<T extends @Nullable StringBuilder> {}
+
+  public HiddenFromObjCTypes(String unusedString) {}
+
+  // TODO(b/407538927): Missing @HiddenFromObjC annotation on constructors.
+  @J2ktIncompatible
+  public HiddenFromObjCTypes(StringBuilder unusedStringBuilder) {}
 
   public static StringBuilder returnsStringBuilder(int i) {
     throw new RuntimeException();
