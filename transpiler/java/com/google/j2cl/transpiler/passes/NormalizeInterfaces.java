@@ -22,13 +22,6 @@ import com.google.j2cl.transpiler.ast.Type;
 /** Removes methods that override java.lang.Object methods from interfaces. */
 public class NormalizeInterfaces extends NormalizationPass {
 
-  // TODO(b/322906767): Remove when the bug is fixed.
-  private static final boolean PRESERVE_EQUALS_FOR_JSTYPE_INTERFACE =
-      "true"
-          .equals(
-              System.getProperty(
-                  "com.google.j2cl.transpiler.backend.kotlin.preserveEqualsForJsTypeInterface"));
-
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(
@@ -36,8 +29,7 @@ public class NormalizeInterfaces extends NormalizationPass {
           @Override
           public void exitType(Type type) {
             // Not touching JsTypes to keep the JS contract intact.
-            if (type.isInterface()
-                && (!PRESERVE_EQUALS_FOR_JSTYPE_INTERFACE || !type.getDeclaration().isJsType())) {
+            if (type.isInterface() && !type.getDeclaration().isJsType()) {
               type.getMembers()
                   .removeIf(member -> member.getDescriptor().isOrOverridesJavaLangObjectMethod());
             }
