@@ -35,10 +35,6 @@ public final class HiddenFromObjCTypes {
     T get();
   }
 
-  public HiddenFromObjCTypes(String unusedString) {}
-
-  public HiddenFromObjCTypes(StringBuilder unusedStringBuilder) {}
-
   public static StringBuilder returnsStringBuilder(int i) {
     throw new RuntimeException();
   }
@@ -82,5 +78,9 @@ public final class HiddenFromObjCTypes {
     public StringBuilder get() {
       throw new AssertionError();
     }
+  }
+
+  public static final class ConstructorWithStringBuilder {
+    public ConstructorWithStringBuilder(StringBuilder unusedStringBuilder) {}
   }
 }

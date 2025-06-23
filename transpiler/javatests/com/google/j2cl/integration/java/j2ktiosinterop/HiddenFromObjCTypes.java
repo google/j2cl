@@ -28,7 +28,7 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public final class HiddenFromObjCTypes {
   @Retention(RetentionPolicy.CLASS)
-  @Target(ElementType.CONSTRUCTOR)
+  @Target(ElementType.TYPE)
   @interface J2ktIncompatible {}
 
   public interface Supplier<T extends @Nullable Object> {
@@ -40,12 +40,6 @@ public final class HiddenFromObjCTypes {
   public static @Nullable Writer writer;
 
   public interface GenericWithStringBuilder<T extends @Nullable StringBuilder> {}
-
-  public HiddenFromObjCTypes(String unusedString) {}
-
-  // TODO(b/407538927): Missing @HiddenFromObjC annotation on constructors.
-  @J2ktIncompatible
-  public HiddenFromObjCTypes(StringBuilder unusedStringBuilder) {}
 
   public static StringBuilder returnsStringBuilder(int i) {
     throw new RuntimeException();
@@ -90,5 +84,11 @@ public final class HiddenFromObjCTypes {
     public StringBuilder get() {
       throw new AssertionError();
     }
+  }
+
+  // TODO(b/407538927): Missing @HiddenFromObjC annotation.
+  @J2ktIncompatible
+  public static final class ConstructorWithStringBuilder {
+    public ConstructorWithStringBuilder(StringBuilder unusedStringBuilder) {}
   }
 }
