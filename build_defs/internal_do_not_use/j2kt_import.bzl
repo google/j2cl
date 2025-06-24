@@ -53,7 +53,13 @@ j2kt_native_import = rule(
     implementation = _j2kt_native_import_impl,
     fragments = ["java"],
     attrs = {
-        "jar": attr.label(providers = [JavaInfo]),
+        "jar": attr.label(
+            providers = [JavaInfo],
+            doc = """\
+This Java Library is supplied to the binary at compilation time
+ and is not visible at runtime.
+""",
+        ),
     },
     provides = [J2ktInfo],
 )
