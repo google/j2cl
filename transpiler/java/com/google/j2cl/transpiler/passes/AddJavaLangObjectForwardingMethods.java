@@ -36,6 +36,13 @@ import java.util.stream.Collectors;
  */
 public class AddJavaLangObjectForwardingMethods extends NormalizationPass {
 
+  // TODO(b/322906767): Remove when the bug is fixed.
+  private static final boolean PRESERVE_EQUALS_FOR_JSTYPE_INTERFACE =
+      "true"
+          .equals(
+              System.getProperty(
+                  "com.google.j2cl.transpiler.backend.kotlin.preserveEqualsForJsTypeInterface"));
+
   @Override
   public void applyTo(Type type) {
     if (type.isInterface()) {
@@ -59,7 +66,7 @@ public class AddJavaLangObjectForwardingMethods extends NormalizationPass {
             .filter(TypeDeclaration::isInterface)
             // TODO(b/317299672): Remove JsType special casing since should preserve all of them for
             // migration purposes.
-            .filter(t -> t.isJsType())
+            .filter(t -> PRESERVE_EQUALS_FOR_JSTYPE_INTERFACE && t.isJsType())
             .flatMap(t -> t.getDeclaredMethodDescriptors().stream())
             .filter(MethodDescriptor::isOrOverridesJavaLangObjectMethod)
             .collect(toMangledNameMap());
