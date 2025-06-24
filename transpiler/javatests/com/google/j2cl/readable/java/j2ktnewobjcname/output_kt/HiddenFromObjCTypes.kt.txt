@@ -27,6 +27,7 @@ import kotlin.Char
 import kotlin.CharSequence
 import kotlin.Int
 import kotlin.OptIn
+import kotlin.String
 import kotlin.Suppress
 import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
@@ -117,5 +118,11 @@ class HiddenFromObjCTypes {
 
  class ConstructorWithStringBuilder {
   constructor(unusedStringBuilder: StringBuilder)
+ }
+
+ class ToStringOverride {
+  override fun toString(): String {
+   return super.toString()
+  }
  }
 }

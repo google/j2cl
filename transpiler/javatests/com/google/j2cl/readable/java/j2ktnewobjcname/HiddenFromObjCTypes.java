@@ -83,4 +83,11 @@ public final class HiddenFromObjCTypes {
   public static final class ConstructorWithStringBuilder {
     public ConstructorWithStringBuilder(StringBuilder unusedStringBuilder) {}
   }
+
+  public static final class ToStringOverride {
+    @Override
+    public String toString() {
+      return super.toString();
+    }
+  }
 }

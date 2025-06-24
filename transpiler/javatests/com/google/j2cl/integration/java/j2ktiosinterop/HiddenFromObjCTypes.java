@@ -91,4 +91,11 @@ public final class HiddenFromObjCTypes {
   public static final class ConstructorWithStringBuilder {
     public ConstructorWithStringBuilder(StringBuilder unusedStringBuilder) {}
   }
+
+  public static final class WithToStringOverride {
+    @Override
+    public String toString() {
+      return super.toString();
+    }
+  }
 }
