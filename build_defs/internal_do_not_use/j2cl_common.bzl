@@ -337,7 +337,11 @@ def _j2cl_transpile(
     args.add(ctx.label, format = "-targetLabel=%s")
     args.add("-output", output_dir.path)
     args.add("-libraryinfooutput", library_info_output)
-    args.add("-experimentalJavaFrontend", ctx.attr._java_frontend[BuildSettingInfo].value)
+
+    java_frontend = ctx.attr.experimental_java_frontend or ctx.attr._java_frontend[BuildSettingInfo].value
+    if java_frontend:
+        args.add("-experimentalJavaFrontend", java_frontend)
+
     args.add("-experimentalBackend", backend)
 
     if ctx.attr._profiling_filter[BuildSettingInfo].value in str(ctx.label):
@@ -442,6 +446,7 @@ J2CL_TOOLCHAIN_ATTRS = {
         cfg = "exec",
         default = Label("@bazel_tools//tools/zip:zipper"),
     ),
+    "experimental_java_frontend": attr.string(values = ["", "jdt", "javac"]),
 }
 J2CL_TOOLCHAIN_ATTRS.update(J2CL_JAVA_TOOLCHAIN_ATTRS)
 
