@@ -22,6 +22,7 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptor
+import com.google.j2cl.transpiler.ast.TypeDescriptors
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.backend.kotlin.common.orIfNull
 
@@ -42,15 +43,22 @@ internal class HiddenFromObjCMapping(
         HIDDEN_FROM_OBJC_TYPE_NAMES.contains(typeDeclaration.qualifiedSourceName) ||
           typeDeclaration.typeParameterDescriptors.any { contains(it) } ||
           typeDeclaration.superTypeDescriptor?.let { contains(it) }.orIfNull { false } ||
-          typeDeclaration.interfaceTypeDescriptors.any { contains(it) }
+          typeDeclaration.interfaceTypeDescriptors.any { contains(it) } ||
+          typeDeclaration.declaredMethodDescriptors.any { it.isConstructor && contains(it) }
       typeDeclarationMap[typeDeclaration] = isHiddenFromObjC
       isHiddenFromObjC
     }
 
   fun contains(methodDescriptor: MethodDescriptor): Boolean =
-    methodDescriptor.typeParameterTypeDescriptors.any { contains(it) } ||
-      contains(methodDescriptor.returnTypeDescriptor) ||
-      methodDescriptor.parameterTypeDescriptors.any { contains(it) }
+    when (methodDescriptor.enclosingTypeDescriptor) {
+      // java.lang.String contains methods with StringBuilder, but these are marked as
+      // @HiddenFromObjC in J2KT JRE, so it can be removed from this mapping.
+      TypeDescriptors.get().javaLangString -> false
+      else ->
+        methodDescriptor.typeParameterTypeDescriptors.any { contains(it) } ||
+          contains(methodDescriptor.returnTypeDescriptor) ||
+          methodDescriptor.parameterTypeDescriptors.any { contains(it) }
+    }
 
   fun contains(fieldDescriptor: FieldDescriptor): Boolean = contains(fieldDescriptor.typeDescriptor)
 
@@ -64,11 +72,12 @@ internal class HiddenFromObjCMapping(
       is TypeVariable ->
         if (seen.contains(typeDescriptor)) {
           false
-        } else
+        } else {
           seen.plus(typeDescriptor).let { seen ->
             contains(typeDescriptor.upperBoundTypeDescriptor, seen) ||
               typeDescriptor.lowerBoundTypeDescriptor?.let { contains(it, seen) }.orIfNull { false }
           }
+        }
       else -> false
     }
 
