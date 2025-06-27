@@ -222,8 +222,8 @@ class Main extends j_l_Object {
  /** @nodts */
  static m_testParameterTypes__void() {
   Main.$clinit();
-  let tIntegerJsBiFunction = /**@type {?function(?, ?):?}*/ (TIntegerJsBiFunction.$create__());
-  let doubleDoubleJsBiFunction = DoubleDoubleJsBiFunction.$create__();
+  let /** ?function(?, ?):? */ tIntegerJsBiFunction = /**@type {?function(?, ?):?}*/ (TIntegerJsBiFunction.$create__());
+  let /** ?function(?, ?):? */ doubleDoubleJsBiFunction = DoubleDoubleJsBiFunction.$create__();
   Main.m_callInterfaceRaw__jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object(tIntegerJsBiFunction, 'a', Integer.m_valueOf__int__java_lang_Integer(1));
   Main.m_callInterfaceRaw__jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object(doubleDoubleJsBiFunction, 1.1, 1.1);
   Main.m_callInterfaceParameterized__jsfunction_Main_JsBiFunction__java_lang_String__java_lang_String(tIntegerJsBiFunction, 'a');
@@ -244,18 +244,18 @@ class Main extends j_l_Object {
  static m_testCast__void() {
   Main.$clinit();
   let o = /**@type {!TIntegerJsBiFunction<?string>}*/ (TIntegerJsBiFunction.$create__());
-  let rawTIntegerJsBiFunction = /**@type {TIntegerJsBiFunction}*/ ($Casts.$to(o, TIntegerJsBiFunction));
+  let /** TIntegerJsBiFunction */ rawTIntegerJsBiFunction = /**@type {TIntegerJsBiFunction}*/ ($Casts.$to(o, TIntegerJsBiFunction));
   let parameterizedTIntegerJsBiFunction = /**@type {TIntegerJsBiFunction<?string>}*/ ($Casts.$to(o, TIntegerJsBiFunction));
-  let anotherRawJsBiFunction = /**@type {?function(?, ?):?}*/ ($Casts.$to(o, $JavaScriptFunction));
+  let /** ?function(?, ?):? */ anotherRawJsBiFunction = /**@type {?function(?, ?):?}*/ ($Casts.$to(o, $JavaScriptFunction));
   let anotherParameterizedJsBiFunction = /**@type {?function(?string, Integer):?string}*/ ($Casts.$to(o, $JavaScriptFunction));
   let doubleDoubleJsBiFunction = /**@type {DoubleDoubleJsBiFunction}*/ ($Casts.$to(o, DoubleDoubleJsBiFunction));
  }
  /** @nodts */
  static m_testNewInstance__void() {
   Main.$clinit();
-  let rawTIntegerJsBiFunction = /**@type {TIntegerJsBiFunction}*/ (TIntegerJsBiFunction.$create__());
+  let /** TIntegerJsBiFunction */ rawTIntegerJsBiFunction = /**@type {TIntegerJsBiFunction}*/ (TIntegerJsBiFunction.$create__());
   let parameterizedTIntegerJsBiFunction = /**@type {!TIntegerJsBiFunction}*/ (TIntegerJsBiFunction.$create__());
-  let rawJsBiFunction = DoubleDoubleJsBiFunction.$create__();
+  let /** ?function(?, ?):? */ rawJsBiFunction = DoubleDoubleJsBiFunction.$create__();
  }
  /** @private @nodts */
  $init__void_$p_jsfunction_Main() {
