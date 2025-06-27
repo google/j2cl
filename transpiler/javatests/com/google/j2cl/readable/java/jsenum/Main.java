@@ -143,6 +143,7 @@ public class Main {
 
     acceptsJsFunctionSupplier(() -> ComparableJsEnum.ONE);
     acceptsSupplierOfSupplier(() -> (() -> ComparableJsEnum.ONE));
+    acceptsJsFunctionParameterizedByJsEnum(e -> e);
   }
 
   private static void testExhaustiveJsEnumSwitchExpression() {
@@ -190,9 +191,17 @@ public class Main {
     T get();
   }
 
+  @JsFunction
+  interface SpecializedJsFunction<T> {
+    T get(T value);
+  }
+
   private static void acceptsJsFunctionSupplier(JsFunctionSuppiler<ComparableJsEnum> supplier) {}
 
   private static void acceptsSupplierOfSupplier(Supplier<Supplier<ComparableJsEnum>> supplier) {}
+
+  private static void acceptsJsFunctionParameterizedByJsEnum(
+      SpecializedJsFunction<ComparableJsEnum> supplier) {}
 
   private static void testReturnsAndParameters() {
     ComparableJsEnum returnedValue = returnsJsEnum();

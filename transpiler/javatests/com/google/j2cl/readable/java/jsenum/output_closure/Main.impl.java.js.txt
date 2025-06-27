@@ -89,6 +89,10 @@ class Main extends j_l_Object {
     return /**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay));
    });
   }));
+  Main.m_acceptsJsFunctionParameterizedByJsEnum__jsenum_Main_SpecializedJsFunction__void((e_2) =>{
+   let e_3 = /**@type {?ComparableJsEnum}*/ ($Enums.unbox(e_2, $Overlay));
+   return /**@type {$Enums_BoxedComparableLightEnum<?ComparableJsEnum>}*/ ($Enums.boxComparable(e_3, $Overlay));
+  });
  }
  /** @nodts */
  static m_testExhaustiveJsEnumSwitchExpression__void() {
@@ -135,6 +139,8 @@ class Main extends j_l_Object {
  static m_acceptsJsFunctionSupplier__jsenum_Main_JsFunctionSuppiler__void(/** ?function():$Enums_BoxedComparableLightEnum<?ComparableJsEnum> */ supplier) {}
  /** @nodts */
  static m_acceptsSupplierOfSupplier__jsenum_Main_Supplier__void(/** Supplier<Supplier<$Enums_BoxedComparableLightEnum<?ComparableJsEnum>>> */ supplier) {}
+ /** @nodts */
+ static m_acceptsJsFunctionParameterizedByJsEnum__jsenum_Main_SpecializedJsFunction__void(/** ?function($Enums_BoxedComparableLightEnum<?ComparableJsEnum>):$Enums_BoxedComparableLightEnum<?ComparableJsEnum> */ supplier) {}
  /** @nodts */
  static m_testReturnsAndParameters__void() {
   let returnedValue = Main.m_returnsJsEnum__jsenum_Main_ComparableJsEnum();

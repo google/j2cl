@@ -16,6 +16,12 @@
  ))
 )
 
+;;; Code for jsenum.Main.SpecializedJsFunction [type definition]
+(type $jsenum.Main.SpecializedJsFunction.vtable (sub (struct
+ (field $m_get__java_lang_Object__java_lang_Object (ref $function.m_get__java_lang_Object__java_lang_Object))
+ ))
+)
+
 ;;; Code for jsenum.Main [type definition]
 (type $jsenum.Main.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
@@ -75,6 +81,22 @@
 (type $jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor (sub $java.lang.Object (struct
  (field $vtable (ref $jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor.vtable))
  (field $itable (ref $jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
+;;; Code for jsenum.Main.SpecializedJsFunction.$LambdaAdaptor [type definition]
+(type $jsenum.Main.SpecializedJsFunction.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_get__java_lang_Object__java_lang_Object (ref $function.m_get__java_lang_Object__java_lang_Object))
+ ))
+)
+(type $jsenum.Main.SpecializedJsFunction.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $jsenum.Main.SpecializedJsFunction.$LambdaAdaptor.vtable))
+ (field $itable (ref $jsenum.Main.SpecializedJsFunction.$LambdaAdaptor.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
@@ -238,7 +260,24 @@
 )
 
 ;;; Code for jsenum.Main.$LambdaImplementor$6 [type definition]
-(type $jsenum.Main.$LambdaImplementor$6.vtable (sub $jsenum.Main.Consumer.$LambdaAdaptor.vtable (struct
+(type $jsenum.Main.$LambdaImplementor$6.vtable (sub $jsenum.Main.SpecializedJsFunction.$LambdaAdaptor.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_get__java_lang_Object__java_lang_Object (ref $function.m_get__java_lang_Object__java_lang_Object))
+ (field $m_get__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum (ref $function.m_get__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum))
+ ))
+)
+(type $jsenum.Main.$LambdaImplementor$6 (sub $jsenum.Main.SpecializedJsFunction.$LambdaAdaptor (struct
+ (field $vtable (ref $jsenum.Main.$LambdaImplementor$6.vtable))
+ (field $itable (ref $jsenum.Main.$LambdaImplementor$6.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
+;;; Code for jsenum.Main.$LambdaImplementor$7 [type definition]
+(type $jsenum.Main.$LambdaImplementor$7.vtable (sub $jsenum.Main.Consumer.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
@@ -247,9 +286,9 @@
  (field $m_accept__jsenum_Main_SomeJsEnum__void (ref $function.m_accept__jsenum_Main_SomeJsEnum__void))
  ))
 )
-(type $jsenum.Main.$LambdaImplementor$6 (sub $jsenum.Main.Consumer.$LambdaAdaptor (struct
- (field $vtable (ref $jsenum.Main.$LambdaImplementor$6.vtable))
- (field $itable (ref $jsenum.Main.$LambdaImplementor$6.itable))
+(type $jsenum.Main.$LambdaImplementor$7 (sub $jsenum.Main.Consumer.$LambdaAdaptor (struct
+ (field $vtable (ref $jsenum.Main.$LambdaImplementor$7.vtable))
+ (field $itable (ref $jsenum.Main.$LambdaImplementor$7.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
@@ -464,6 +503,8 @@
 
 ;;; Code for jsenum.Main.JsFunctionSuppiler [imports]
 
+;;; Code for jsenum.Main.SpecializedJsFunction [imports]
+
 ;;; Code for jsenum.Main [imports]
 
 ;;; Code for jsenum.Main.Supplier.$LambdaAdaptor [imports]
@@ -471,6 +512,8 @@
 ;;; Code for jsenum.Main.Consumer.$LambdaAdaptor [imports]
 
 ;;; Code for jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor [imports]
+
+;;; Code for jsenum.Main.SpecializedJsFunction.$LambdaAdaptor [imports]
 
 ;;; Code for jsenum.Main.TemplatedField [imports]
 
@@ -493,6 +536,8 @@
 ;;; Code for jsenum.Main.$LambdaImplementor$5 [imports]
 
 ;;; Code for jsenum.Main.$LambdaImplementor$6 [imports]
+
+;;; Code for jsenum.Main.$LambdaImplementor$7 [imports]
 
 ;;; Code for jsenum.Main.ComparableJsEnum [imports]
 
@@ -548,6 +593,14 @@
  (ref.null $java.lang.Class)
 )
 
+;;; Code for jsenum.Main.SpecializedJsFunction.$LambdaAdaptor [static fields]
+(global $$class-initialized@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
 ;;; Code for jsenum.Main.$LambdaImplementor$1 [static fields]
 (global $$class-initialized@jsenum.Main.$LambdaImplementor$1 (mut i32)
  (i32.const 0)
@@ -593,6 +646,14 @@
  (i32.const 0)
 )
 (global $$class@jsenum.Main.$LambdaImplementor$6 (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for jsenum.Main.$LambdaImplementor$7 [static fields]
+(global $$class-initialized@jsenum.Main.$LambdaImplementor$7 (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsenum.Main.$LambdaImplementor$7 (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -696,6 +757,14 @@
  (i32.const 0)
 )
 (global $$class@jsenum.Main.JsFunctionSuppiler (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for jsenum.Main.SpecializedJsFunction [static fields]
+(global $$class-initialized@jsenum.Main.SpecializedJsFunction (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsenum.Main.SpecializedJsFunction (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -897,17 +966,34 @@
 ;;; Code for jsenum.Main.$LambdaImplementor$6 [vtable.init]
 (global $jsenum.Main.$LambdaImplementor$6.vtable (ref $jsenum.Main.$LambdaImplementor$6.vtable)
  (struct.new $jsenum.Main.$LambdaImplementor$6.vtable
+  (ref.func $$getClassImpl__java_lang_Class@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_get__java_lang_Object__java_lang_Object@jsenum.Main.$LambdaImplementor$6)
+  (ref.func $m_get__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum@jsenum.Main.$LambdaImplementor$6)
+ )
+)
+(global $jsenum.Main.SpecializedJsFunction.vtable@$jsenum.Main.$LambdaImplementor$6 (ref $jsenum.Main.SpecializedJsFunction.vtable)
+ (struct.new $jsenum.Main.SpecializedJsFunction.vtable
+  (ref.func $m_get__java_lang_Object__java_lang_Object@jsenum.Main.$LambdaImplementor$6)
+ )
+)
+
+;;; Code for jsenum.Main.$LambdaImplementor$7 [vtable.init]
+(global $jsenum.Main.$LambdaImplementor$7.vtable (ref $jsenum.Main.$LambdaImplementor$7.vtable)
+ (struct.new $jsenum.Main.$LambdaImplementor$7.vtable
   (ref.func $$getClassImpl__java_lang_Class@jsenum.Main.Consumer.$LambdaAdaptor)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_accept__java_lang_Object__void@jsenum.Main.$LambdaImplementor$6)
-  (ref.func $m_accept__jsenum_Main_SomeJsEnum__void@jsenum.Main.$LambdaImplementor$6)
+  (ref.func $m_accept__java_lang_Object__void@jsenum.Main.$LambdaImplementor$7)
+  (ref.func $m_accept__jsenum_Main_SomeJsEnum__void@jsenum.Main.$LambdaImplementor$7)
  )
 )
-(global $jsenum.Main.Consumer.vtable@$jsenum.Main.$LambdaImplementor$6 (ref $jsenum.Main.Consumer.vtable)
+(global $jsenum.Main.Consumer.vtable@$jsenum.Main.$LambdaImplementor$7 (ref $jsenum.Main.Consumer.vtable)
  (struct.new $jsenum.Main.Consumer.vtable
-  (ref.func $m_accept__java_lang_Object__void@jsenum.Main.$LambdaImplementor$6)
+  (ref.func $m_accept__java_lang_Object__void@jsenum.Main.$LambdaImplementor$7)
  )
 )
 
@@ -1255,16 +1341,16 @@
 
 ;;; void JsFunctionSuppiler.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.JsFunctionSuppiler
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:189:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:189:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
   (if (global.get $$class-initialized@jsenum.Main.JsFunctionSuppiler)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:189:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:189:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
   (global.set $$class-initialized@jsenum.Main.JsFunctionSuppiler (i32.const 1))
  )
 )
@@ -1280,6 +1366,38 @@
   )
   (global.set $$class@jsenum.Main.JsFunctionSuppiler (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jsenum.Main_...|__java_lang_String_<once>_@jsenum.Main.JsFunctionSuppiler )))
   (return (global.get $$class@jsenum.Main.JsFunctionSuppiler))
+ )
+)
+
+;;; Code for jsenum.Main.SpecializedJsFunction [methods]
+
+;;; void SpecializedJsFunction.$clinit()
+(func $$clinit__void_<once>_@jsenum.Main.SpecializedJsFunction
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
+  (if (global.get $$class-initialized@jsenum.Main.SpecializedJsFunction)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
+  (global.set $$class-initialized@jsenum.Main.SpecializedJsFunction (i32.const 1))
+ )
+)
+
+;;; Class<T> SpecializedJsFunction.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.SpecializedJsFunction
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jsenum.Main.SpecializedJsFunction)))
+   (then
+    (return (global.get $$class@jsenum.Main.SpecializedJsFunction))
+   )
+  )
+  (global.set $$class@jsenum.Main.SpecializedJsFunction (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jsenum.Main_...|__java_lang_String_<once>_@jsenum.Main.SpecializedJsFunction )))
+  (return (global.get $$class@jsenum.Main.SpecializedJsFunction))
  )
 )
 
@@ -1457,17 +1575,19 @@
   (call $m_acceptsJsFunctionSupplier__jsenum_Main_JsFunctionSuppiler__void@jsenum.Main (call $$create__@jsenum.Main.$LambdaImplementor$3 ))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:145:4
   (call $m_acceptsSupplierOfSupplier__jsenum_Main_Supplier__void@jsenum.Main (call $$create__@jsenum.Main.$LambdaImplementor$5 ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:146:4
+  (call $m_acceptsJsFunctionParameterizedByJsEnum__jsenum_Main_SpecializedJsFunction__void@jsenum.Main (call $$create__@jsenum.Main.$LambdaImplementor$6 ))
  )
 )
 
 ;;; void Main.testExhaustiveJsEnumSwitchExpression()
 (func $m_testExhaustiveJsEnumSwitchExpression__void@jsenum.Main
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:148:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:149:22
  (local $comparableJsEnum (ref null $jsenum.Main.ComparableJsEnum))
  (local $i i32)
  (local $$expression i32)
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:149:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:150:4
   (local.set $comparableJsEnum (if (result (ref null $jsenum.Main.ComparableJsEnum)) (i32.eq (call $m_getValue__int@jsenum.Main.ComparableJsEnum (ref.as_non_null (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
@@ -1475,13 +1595,13 @@
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $TWO@jsenum.Main.ComparableJsEnum)
   )) (else (ref.null $jsenum.Main.ComparableJsEnum))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:151:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:152:4
   (local.set $i 
   (block $SWITCH (result i32)
    (block
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:152:8
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:153:8
     (local.set $$expression (call $m_ordinal__int@java.lang.Enum (ref.as_non_null (local.get $comparableJsEnum))))
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:152:8
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:153:8
     (block
      (block
       (block
@@ -1490,22 +1610,22 @@
          (br_table 2 1 0 3 (local.get $$expression))
         )
         ;; case 2:
-        ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:153:22
+        ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:154:22
         (i32.const 2)
         (br $SWITCH)
        )
        ;; case 1:
-       ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:154:22
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:155:22
        (i32.const 1)
        (br $SWITCH)
       )
       ;; case 0:
-      ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:155:23
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:156:23
       (i32.const 0)
       (br $SWITCH)
      )
      ;; default:
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:152:8
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:153:8
      (call $m_checkExhaustive__void@javaemul.internal.InternalPreconditions )
     )
    )
@@ -1516,33 +1636,33 @@
 
 ;;; void Main.testJsEnumAutoboxingSpecialMethods()
 (func $m_testJsEnumAutoboxingSpecialMethods__void@jsenum.Main
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:159:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:160:22
  (local $stringJsEnum (ref null $jsenum.Main.StringJsEnum))
  (local $nullStringJsEnum (ref null $jsenum.Main.StringJsEnum))
  (local $jsEnum (ref null $jsenum.Main.ComparableJsEnum))
  (local $nullJsEnum (ref null $jsenum.Main.ComparableJsEnum))
  (local $o (ref null $java.lang.Object))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:160:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:161:4
   (local.set $stringJsEnum (block (result (ref null $jsenum.Main.StringJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
    (global.get $ONE@jsenum.Main.StringJsEnum)
   ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:161:4
-  (local.set $nullStringJsEnum (ref.null $jsenum.Main.StringJsEnum))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:162:4
+  (local.set $nullStringJsEnum (ref.null $jsenum.Main.StringJsEnum))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:163:4
   (local.set $jsEnum (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
   ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:163:4
-  (local.set $nullJsEnum (ref.null $jsenum.Main.ComparableJsEnum))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:164:4
+  (local.set $nullJsEnum (ref.null $jsenum.Main.ComparableJsEnum))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:165:4
   (local.set $o (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
   ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:166:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:167:4
   (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.StringJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
    (global.get $ONE@jsenum.Main.StringJsEnum)
@@ -1550,45 +1670,45 @@
    (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
    (global.get $THREE@jsenum.Main.StringJsEnum)
   )))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:167:4
-  (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.StringJsEnum))
-   (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
-   (global.get $ONE@jsenum.Main.StringJsEnum)
-  ))(local.get $stringJsEnum)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:168:4
   (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.StringJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
    (global.get $ONE@jsenum.Main.StringJsEnum)
-  ))(local.get $nullStringJsEnum)))
+  ))(local.get $stringJsEnum)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:169:4
   (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.StringJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
    (global.get $ONE@jsenum.Main.StringJsEnum)
-  ))(ref.null $java.lang.Object)))
+  ))(local.get $nullStringJsEnum)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:170:4
   (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.StringJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
    (global.get $ONE@jsenum.Main.StringJsEnum)
-  ))(local.get $o)))
+  ))(ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:171:4
+  (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.StringJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
+   (global.get $ONE@jsenum.Main.StringJsEnum)
+  ))(local.get $o)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:172:4
   (drop (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $o))(block (result (ref null $jsenum.Main.StringJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
    (global.get $THREE@jsenum.Main.StringJsEnum)
   )(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(local.get $o)))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:173:4
-  (drop (call $m_compareTo__java_lang_Enum__int@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.ComparableJsEnum))
-   (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
-   (global.get $ONE@jsenum.Main.ComparableJsEnum)
-  ))(block (result (ref null $jsenum.Main.ComparableJsEnum))
-   (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
-   (global.get $ZERO@jsenum.Main.ComparableJsEnum)
-  )))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:174:4
   (drop (call $m_compareTo__java_lang_Enum__int@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
-  ))(ref.null $jsenum.Main.ComparableJsEnum)))
+  ))(block (result (ref null $jsenum.Main.ComparableJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
+   (global.get $ZERO@jsenum.Main.ComparableJsEnum)
+  )))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:175:4
+  (drop (call $m_compareTo__java_lang_Enum__int@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.ComparableJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
+   (global.get $ONE@jsenum.Main.ComparableJsEnum)
+  ))(ref.null $jsenum.Main.ComparableJsEnum)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:176:4
   (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
@@ -1596,37 +1716,37 @@
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ZERO@jsenum.Main.ComparableJsEnum)
   )))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:176:4
-  (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.ComparableJsEnum))
-   (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
-   (global.get $ONE@jsenum.Main.ComparableJsEnum)
-  ))(local.get $jsEnum)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:177:4
   (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
-  ))(local.get $nullJsEnum)))
+  ))(local.get $jsEnum)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:178:4
   (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
-  ))(ref.null $java.lang.Object)))
+  ))(local.get $nullJsEnum)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:179:4
   (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
-  ))(local.get $o)))
+  ))(ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:180:4
+  (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.ComparableJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
+   (global.get $ONE@jsenum.Main.ComparableJsEnum)
+  ))(local.get $o)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:181:4
   (drop (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $o))(block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ZERO@jsenum.Main.ComparableJsEnum)
   )(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(local.get $o)))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:182:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:183:4
   (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (block (result (ref null $jsenum.Main.StringJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
    (global.get $ONE@jsenum.Main.StringJsEnum)
   ))(local.get $jsEnum)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:184:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:185:4
   (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (call $m_boxingPassthrough__java_lang_Object__java_lang_Object@jsenum.Main (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
@@ -1634,7 +1754,7 @@
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
   )))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:185:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:186:4
   (drop (call $m_equals__java_lang_Object__boolean@java.lang.Enum (ref.as_non_null (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (call $m_boxingPassthrough__java_lang_Object__java_lang_Object@jsenum.Main (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
@@ -1648,7 +1768,7 @@
 ;;; void Main.acceptsJsFunctionSupplier(JsFunctionSuppiler<ComparableJsEnum> supplier)
 (func $m_acceptsJsFunctionSupplier__jsenum_Main_JsFunctionSuppiler__void@jsenum.Main
  (param $supplier (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:193:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:199:22
  (block
  )
 )
@@ -1656,22 +1776,30 @@
 ;;; void Main.acceptsSupplierOfSupplier(Supplier<Supplier<ComparableJsEnum>> supplier)
 (func $m_acceptsSupplierOfSupplier__jsenum_Main_Supplier__void@jsenum.Main
  (param $supplier (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:201:22
+ (block
+ )
+)
+
+;;; void Main.acceptsJsFunctionParameterizedByJsEnum(SpecializedJsFunction<ComparableJsEnum> supplier)
+(func $m_acceptsJsFunctionParameterizedByJsEnum__jsenum_Main_SpecializedJsFunction__void@jsenum.Main
+ (param $supplier (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:203:22
  (block
  )
 )
 
 ;;; void Main.testReturnsAndParameters()
 (func $m_testReturnsAndParameters__void@jsenum.Main
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:197:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:206:22
  (local $returnedValue (ref null $jsenum.Main.ComparableJsEnum))
  (local $returnedNullValue (ref null $jsenum.Main.ComparableJsEnum))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:198:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:207:4
   (local.set $returnedValue (call $m_returnsJsEnum__jsenum_Main_ComparableJsEnum@jsenum.Main ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:199:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:208:4
   (local.set $returnedNullValue (call $m_returnsNullJsEnum__jsenum_Main_ComparableJsEnum@jsenum.Main ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:200:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:209:4
   (call $m_takesJsEnum__jsenum_Main_ComparableJsEnum__void@jsenum.Main (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
@@ -1682,9 +1810,9 @@
 ;;; ComparableJsEnum Main.returnsJsEnum()
 (func $m_returnsJsEnum__jsenum_Main_ComparableJsEnum@jsenum.Main
  (result (ref null $jsenum.Main.ComparableJsEnum))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:203:34
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:212:34
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:204:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:213:4
   (return (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
@@ -1695,9 +1823,9 @@
 ;;; ComparableJsEnum Main.returnsNullJsEnum()
 (func $m_returnsNullJsEnum__jsenum_Main_ComparableJsEnum@jsenum.Main
  (result (ref null $jsenum.Main.ComparableJsEnum))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:207:34
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:216:34
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:208:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:217:4
   (return (ref.null $jsenum.Main.ComparableJsEnum))
  )
 )
@@ -1705,40 +1833,40 @@
 ;;; void Main.takesJsEnum(ComparableJsEnum value)
 (func $m_takesJsEnum__jsenum_Main_ComparableJsEnum__void@jsenum.Main
  (param $value (ref null $jsenum.Main.ComparableJsEnum))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:211:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:220:22
  (block
  )
 )
 
 ;;; void Main.testBoxUnboxWithTypeInference()
 (func $m_testBoxUnboxWithTypeInference__void@jsenum.Main
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:213:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:222:22
  (local $templatedField (ref null $jsenum.Main.TemplatedField))
  (local $unboxed (ref null $jsenum.Main.ComparableJsEnum))
  (local $b i32)
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:215:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:224:4
   (local.set $templatedField (call $$create__java_lang_Object@jsenum.Main.TemplatedField (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
   )))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:217:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:226:4
   (local.set $unboxed (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (call_ref $function.m_getValue__java_lang_Object_$pp_jsenum (ref.as_non_null (local.get $templatedField))(struct.get $jsenum.Main.TemplatedField.vtable $m_getValue__java_lang_Object_$pp_jsenum (struct.get $jsenum.Main.TemplatedField $vtable(local.get $templatedField))))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:218:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:227:4
   (local.set $unboxed (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (struct.get $jsenum.Main.TemplatedField $value@jsenum.Main.TemplatedField (local.get $templatedField))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:219:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:228:4
   (struct.set $jsenum.Main.TemplatedField $value@jsenum.Main.TemplatedField (local.get $templatedField) (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
   ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:220:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:229:4
   (drop (call $m_asList__arrayOf_java_lang_Object__java_util_List@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
   )))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:221:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:230:4
   (drop (call $m_ordinal__int@java.lang.Enum (ref.as_non_null (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (call_ref $function.m_getValue__java_lang_Object_$pp_jsenum (ref.as_non_null (local.get $templatedField))(struct.get $jsenum.Main.TemplatedField.vtable $m_getValue__java_lang_Object_$pp_jsenum (struct.get $jsenum.Main.TemplatedField $vtable(local.get $templatedField))))))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:222:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:231:4
   (local.set $b (ref.eq (block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
@@ -1753,20 +1881,20 @@
 (func $m_boxingPassthrough__java_lang_Object__java_lang_Object@jsenum.Main
  (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:237:23
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:246:23
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:238:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:247:4
   (return (local.get $t))
  )
 )
 
 ;;; void Main.boxingWithGenerics()
 (func $m_boxingWithGenerics__void@jsenum.Main
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:241:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:250:14
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:241:35
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:250:35
   (call $$clinit__void_<once>_@jsenum.Main )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:242:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:251:4
   (drop (call $$create__java_util_Optional@jsenum.Main.Foo (call $m_of__java_lang_Object__java_util_Optional@java.util.Optional (block (result (ref null $jsenum.Main.IntJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.IntJsEnum )
    (global.get $MINUSONE@jsenum.Main.IntJsEnum)
@@ -1778,11 +1906,11 @@
 (func $m_varargsConsumer__arrayOf_java_lang_Object__java_lang_Object@jsenum.Main
  (param $arg0 (ref null $javaemul.internal.WasmArray.OfObject))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:299:23
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:308:23
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:299:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:308:23
   (call $$clinit__void_<once>_@jsenum.Main )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:299:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:308:23
   (return (call $m_varargsConsumer_$private__arrayOf_java_lang_Object__java_lang_Object@jsenum.Main (local.get $arg0)))
  )
 )
@@ -1791,19 +1919,19 @@
 (func $m_varargsConsumer_$private__arrayOf_java_lang_Object__java_lang_Object@jsenum.Main
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:299:23
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:308:23
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:300:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:309:4
   (return (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $args)) (i32.const 0)))
  )
 )
 
 ;;; void Main.testVarargs()
 (func $m_testVarargs__void@jsenum.Main
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:315:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:324:22
  (local $consumer (ref null $java.lang.Object))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:316:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:325:4
   (drop (call $m_varargsConsumer_$private__arrayOf_java_lang_Object__java_lang_Object@jsenum.Main (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (block (result (ref null $jsenum.Main.SomeJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.SomeJsEnum )
    (global.get $A@jsenum.Main.SomeJsEnum)
@@ -1811,14 +1939,14 @@
    (call $$clinit__void_<once>_@jsenum.Main.SomeJsEnum )
    (global.get $A@jsenum.Main.SomeJsEnum)
   )))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:317:4
-  (local.set $consumer (call $$create__@jsenum.Main.$LambdaImplementor$6 ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:326:4
+  (local.set $consumer (call $$create__@jsenum.Main.$LambdaImplementor$7 ))
  )
 )
 
 ;;; void Main.testNonNativeJsEnumArrays()
 (func $m_testNonNativeJsEnumArrays__void@jsenum.Main
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:320:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:329:22
  (local $arr (ref null $javaemul.internal.WasmArray.OfObject))
  (local $b1 i32)
  (local $b2 i32)
@@ -1829,7 +1957,7 @@
  (local $arrayWithNull (ref null $javaemul.internal.WasmArray.OfObject))
  (local $list (ref null $java.lang.Object))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:321:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:330:4
   (local.set $arr (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (block (result (ref null $jsenum.Main.IntJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.IntJsEnum )
    (global.get $MINUSONE@jsenum.Main.IntJsEnum)
@@ -1837,51 +1965,51 @@
    (call $$clinit__void_<once>_@jsenum.Main.IntJsEnum )
    (global.get $TWENTY@jsenum.Main.IntJsEnum)
   ))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:322:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:331:4
   (local.set $b1 (ref.eq (ref.cast (ref null $jsenum.Main.IntJsEnum) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arr)) (i32.const 0))) (block (result (ref null $jsenum.Main.IntJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.IntJsEnum )
    (global.get $MINUSONE@jsenum.Main.IntJsEnum)
   )))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:323:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:332:4
   (local.set $b2 (ref.eq (ref.cast (ref null $jsenum.Main.IntJsEnum) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arr)) (i32.const 1))) (block (result (ref null $jsenum.Main.IntJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.IntJsEnum )
    (global.get $TWENTY@jsenum.Main.IntJsEnum)
   )))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:324:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:333:4
   (local.set $obj (ref.cast (ref null $jsenum.Main.IntJsEnum) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arr)) (i32.const 0))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:325:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:334:4
   (local.set $v (ref.cast (ref null $jsenum.Main.IntJsEnum) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arr)) (i32.const 0))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:327:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:336:4
   (local.set $arr2 (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 2)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:328:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:337:4
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arr2)) (i32.const 0) (block (result (ref null $jsenum.Main.IntJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.IntJsEnum )
    (global.get $MINUSONE@jsenum.Main.IntJsEnum)
   ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:329:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:338:4
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arr2)) (i32.const 1) (block (result (ref null $jsenum.Main.IntJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.IntJsEnum )
    (global.get $TWENTY@jsenum.Main.IntJsEnum)
   ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:331:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:340:4
   (local.set $nestedArr (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (block (result (ref null $jsenum.Main.IntJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.IntJsEnum )
    (global.get $MINUSONE@jsenum.Main.IntJsEnum)
   ))))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:332:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:341:4
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $nestedArr)) (i32.const 0) (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (block (result (ref null $jsenum.Main.IntJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.IntJsEnum )
    (global.get $TWENTY@jsenum.Main.IntJsEnum)
   ))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:334:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:343:4
   (local.set $arrayWithNull (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (ref.null $java.lang.Object))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:335:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:344:4
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arrayWithNull)) (i32.const 0) (ref.null $java.lang.Object))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:337:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:346:4
   (local.set $list (call $$create__@java.util.ArrayList ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:338:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:347:4
   (local.set $obj (call_ref $function.m_toArray__arrayOf_java_lang_Object (ref.as_non_null (local.get $list))(struct.get $java.util.List.vtable $m_toArray__arrayOf_java_lang_Object (ref.cast (ref $java.util.List.vtable) (call $get.itable.$java.util.List (local.get $list))))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:340:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:349:4
   (call $m_nonNativeJsEnumVarargs__arrayOf_jsenum_Main_IntJsEnum__void@jsenum.Main (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (block (result (ref null $jsenum.Main.IntJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.IntJsEnum )
    (global.get $MINUSONE@jsenum.Main.IntJsEnum)
@@ -1889,7 +2017,7 @@
    (call $$clinit__void_<once>_@jsenum.Main.IntJsEnum )
    (global.get $TWENTY@jsenum.Main.IntJsEnum)
   ))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:341:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:350:4
   (call $m_nonNativeJsEnumArrayVarargs__arrayOf_arrayOf_jsenum_Main_IntJsEnum__void@jsenum.Main (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (block (result (ref null $jsenum.Main.IntJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.IntJsEnum )
    (global.get $MINUSONE@jsenum.Main.IntJsEnum)
@@ -1897,7 +2025,7 @@
    (call $$clinit__void_<once>_@jsenum.Main.IntJsEnum )
    (global.get $TWENTY@jsenum.Main.IntJsEnum)
   ))))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:344:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:353:4
   (call $m_tVarargs__arrayOf_java_lang_Object__void@jsenum.Main (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (block (result (ref null $jsenum.Main.IntJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.IntJsEnum )
    (global.get $MINUSONE@jsenum.Main.IntJsEnum)
@@ -1911,10 +2039,10 @@
 ;;; void Main.nonNativeJsEnumVarargs(IntJsEnum... values)
 (func $m_nonNativeJsEnumVarargs__arrayOf_jsenum_Main_IntJsEnum__void@jsenum.Main
  (param $values (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:347:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:356:22
  (local $v (ref null $jsenum.Main.IntJsEnum))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:348:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:357:4
   (local.set $v (ref.cast (ref null $jsenum.Main.IntJsEnum) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $values)) (i32.const 0))))
  )
 )
@@ -1922,10 +2050,10 @@
 ;;; void Main.nonNativeJsEnumArrayVarargs(IntJsEnum[]... values)
 (func $m_nonNativeJsEnumArrayVarargs__arrayOf_arrayOf_jsenum_Main_IntJsEnum__void@jsenum.Main
  (param $values (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:351:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:360:22
  (local $v (ref null $javaemul.internal.WasmArray.OfObject))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:352:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:361:4
   (local.set $v (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $values)) (i32.const 0))))
  )
 )
@@ -1933,17 +2061,17 @@
 ;;; void Main.tVarargs(T... values)
 (func $m_tVarargs__arrayOf_java_lang_Object__void@jsenum.Main
  (param $values (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:355:26
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:364:26
  (local $v (ref null $java.lang.Object))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:356:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:365:4
   (local.set $v (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $values)) (i32.const 0)))
  )
 )
 
 ;;; void Main.testNonNativeStringJsEnumArrays()
 (func $m_testNonNativeStringJsEnumArrays__void@jsenum.Main
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:359:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:368:22
  (local $arr (ref null $javaemul.internal.WasmArray.OfObject))
  (local $b1 i32)
  (local $obj (ref null $java.lang.Object))
@@ -1952,7 +2080,7 @@
  (local $nestedArr (ref null $javaemul.internal.WasmArray.OfObject))
  (local $arrayWithNull (ref null $javaemul.internal.WasmArray.OfObject))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:360:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:369:4
   (local.set $arr (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (block (result (ref null $jsenum.Main.StringJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
    (global.get $ONE@jsenum.Main.StringJsEnum)
@@ -1960,44 +2088,44 @@
    (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
    (global.get $THREE@jsenum.Main.StringJsEnum)
   ))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:361:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:370:4
   (local.set $b1 (ref.eq (ref.cast (ref null $jsenum.Main.StringJsEnum) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arr)) (i32.const 0))) (block (result (ref null $jsenum.Main.StringJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
    (global.get $ONE@jsenum.Main.StringJsEnum)
   )))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:362:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:371:4
   (local.set $obj (ref.cast (ref null $jsenum.Main.StringJsEnum) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arr)) (i32.const 0))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:363:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:372:4
   (local.set $v (ref.cast (ref null $jsenum.Main.StringJsEnum) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arr)) (i32.const 0))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:365:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:374:4
   (local.set $arr2 (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 2)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:366:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:375:4
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arr2)) (i32.const 0) (block (result (ref null $jsenum.Main.StringJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
    (global.get $ONE@jsenum.Main.StringJsEnum)
   ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:368:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:377:4
   (local.set $nestedArr (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (block (result (ref null $jsenum.Main.StringJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
    (global.get $ONE@jsenum.Main.StringJsEnum)
   ))))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:370:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:379:4
   (local.set $arrayWithNull (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (ref.null $java.lang.Object))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:371:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:380:4
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arrayWithNull)) (i32.const 0) (ref.null $java.lang.Object))
  )
 )
 
 ;;; void Main.testNativeJsEnumArrays()
 (func $m_testNativeJsEnumArrays__void@jsenum.Main
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:374:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:383:22
  (local $arr (ref null $javaemul.internal.WasmArray.OfObject))
  (local $b1 i32)
  (local $arr2 (ref null $javaemul.internal.WasmArray.OfObject))
  (local $nestedArr (ref null $javaemul.internal.WasmArray.OfObject))
  (local $arrayWithNull (ref null $javaemul.internal.WasmArray.OfObject))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:375:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:384:4
   (local.set $arr (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (block (result (ref null $jsenum.Main.NativeStringEnum))
    (call $$clinit__void_<once>_@jsenum.Main.NativeStringEnum )
    (global.get $ONE@jsenum.Main.NativeStringEnum)
@@ -2005,31 +2133,31 @@
    (call $$clinit__void_<once>_@jsenum.Main.NativeStringEnum )
    (global.get $THREE@jsenum.Main.NativeStringEnum)
   ))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:376:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:385:4
   (local.set $b1 (ref.eq (ref.cast (ref null $jsenum.Main.NativeStringEnum) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arr)) (i32.const 0))) (block (result (ref null $jsenum.Main.NativeStringEnum))
    (call $$clinit__void_<once>_@jsenum.Main.NativeStringEnum )
    (global.get $ONE@jsenum.Main.NativeStringEnum)
   )))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:378:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:387:4
   (local.set $arr2 (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 2)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:379:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:388:4
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arr2)) (i32.const 0) (block (result (ref null $jsenum.Main.NativeStringEnum))
    (call $$clinit__void_<once>_@jsenum.Main.NativeStringEnum )
    (global.get $ONE@jsenum.Main.NativeStringEnum)
   ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:381:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:390:4
   (local.set $nestedArr (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (block (result (ref null $jsenum.Main.NativeStringEnum))
    (call $$clinit__void_<once>_@jsenum.Main.NativeStringEnum )
    (global.get $ONE@jsenum.Main.NativeStringEnum)
   ))))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:382:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:391:4
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $nestedArr)) (i32.const 0) (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (block (result (ref null $jsenum.Main.NativeStringEnum))
    (call $$clinit__void_<once>_@jsenum.Main.NativeStringEnum )
    (global.get $THREE@jsenum.Main.NativeStringEnum)
   ))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:384:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:393:4
   (local.set $arrayWithNull (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (ref.null $java.lang.Object))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:385:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:394:4
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arrayWithNull)) (i32.const 0) (ref.null $java.lang.Object))
  )
 )
@@ -2198,27 +2326,27 @@
 ;;; void $LambdaAdaptor.$ctor()
 (func $$ctor__void_$p_jsenum_Main_JsFunctionSuppiler_$LambdaAdaptor@jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor
  (param $this (ref null $jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:189:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:189:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void $LambdaAdaptor.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:189:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:189:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
   (if (global.get $$class-initialized@jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:189:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:189:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
   (global.set $$class-initialized@jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:189:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -2250,22 +2378,79 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor)
 
+;;; Code for jsenum.Main.SpecializedJsFunction.$LambdaAdaptor [methods]
+
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_jsenum_Main_SpecializedJsFunction_$LambdaAdaptor@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor
+ (param $this (ref null $jsenum.Main.SpecializedJsFunction.$LambdaAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
+  (if (global.get $$class-initialized@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
+  (global.set $$class-initialized@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor)))
+   (then
+    (return (global.get $$class@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor))
+   )
+  )
+  (global.set $$class@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsenum.Main_...|__java_lang_String_<once>_@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor))
+ )
+)
+
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jsenum.Main.SpecializedJsFunction.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $jsenum.Main.SpecializedJsFunction.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor)
+
 ;;; Code for jsenum.Main.TemplatedField [methods]
 
 ;;; TemplatedField<T> TemplatedField.$create(T value)
 (func $$create__java_lang_Object@jsenum.Main.TemplatedField
  (param $value (ref null $java.lang.Object))
  (result (ref null $jsenum.Main.TemplatedField))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:228:4
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:237:4
  (local $$instance (ref null $jsenum.Main.TemplatedField))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:228:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:237:4
   (call $$clinit__void_<once>_@jsenum.Main.TemplatedField )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:228:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:237:4
   (local.set $$instance (struct.new $jsenum.Main.TemplatedField (global.get $jsenum.Main.TemplatedField.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $java.lang.Object)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:228:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:237:4
   (call $$ctor__java_lang_Object__void_$p_jsenum_Main_TemplatedField@jsenum.Main.TemplatedField (ref.as_non_null (local.get $$instance))(local.get $value))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:228:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:237:4
   (return (local.get $$instance))
  )
 )
@@ -2274,11 +2459,11 @@
 (func $$ctor__java_lang_Object__void_$p_jsenum_Main_TemplatedField@jsenum.Main.TemplatedField
  (param $this (ref null $jsenum.Main.TemplatedField))
  (param $value (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:228:4
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:237:4
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:228:28
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:237:28
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:229:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:238:6
   (struct.set $jsenum.Main.TemplatedField $value@jsenum.Main.TemplatedField (local.get $this) (local.get $value))
  )
 )
@@ -2288,11 +2473,11 @@
  (type $function.m_getValue__java_lang_Object_$pp_jsenum)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:232:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:241:6
  (local $this (ref null $jsenum.Main.TemplatedField))
  (local.set $this (ref.cast (ref $jsenum.Main.TemplatedField) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:233:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:242:6
   (return (struct.get $jsenum.Main.TemplatedField $value@jsenum.Main.TemplatedField (local.get $this)))
  )
 )
@@ -2300,18 +2485,18 @@
 
 ;;; void TemplatedField.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.TemplatedField
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:225:23
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:234:23
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:225:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:234:23
   (if (global.get $$class-initialized@jsenum.Main.TemplatedField)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:225:23
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:234:23
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:225:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:234:23
   (global.set $$class-initialized@jsenum.Main.TemplatedField (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:225:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:234:23
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -2349,16 +2534,16 @@
 (func $$create__java_util_Optional@jsenum.Main.Foo
  (param $c (ref null $java.util.Optional))
  (result (ref null $jsenum.Main.Foo))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:246:4
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:255:4
  (local $$instance (ref null $jsenum.Main.Foo))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:246:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:255:4
   (call $$clinit__void_<once>_@jsenum.Main.Foo )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:246:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:255:4
   (local.set $$instance (struct.new $jsenum.Main.Foo (global.get $jsenum.Main.Foo.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:246:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:255:4
   (call $$ctor__java_util_Optional__void_$p_jsenum_Main_Foo@jsenum.Main.Foo (ref.as_non_null (local.get $$instance))(local.get $c))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:246:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:255:4
   (return (local.get $$instance))
  )
 )
@@ -2367,27 +2552,27 @@
 (func $$ctor__java_util_Optional__void_$p_jsenum_Main_Foo@jsenum.Main.Foo
  (param $this (ref null $jsenum.Main.Foo))
  (param $c (ref null $java.util.Optional))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:246:4
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:255:4
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:246:31
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:255:31
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void Foo.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.Foo
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:245:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:254:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:245:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:254:15
   (if (global.get $$class-initialized@jsenum.Main.Foo)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:245:15
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:254:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:245:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:254:15
   (global.set $$class-initialized@jsenum.Main.Foo (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:245:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:254:15
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -2424,16 +2609,16 @@
 ;;; SupplierConsumerImpl<T> SupplierConsumerImpl.$create()
 (func $$create__@jsenum.Main.SupplierConsumerImpl
  (result (ref null $jsenum.Main.SupplierConsumerImpl))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:261:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:270:15
  (local $$instance (ref null $jsenum.Main.SupplierConsumerImpl))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:261:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:270:15
   (call $$clinit__void_<once>_@jsenum.Main.SupplierConsumerImpl )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:261:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:270:15
   (local.set $$instance (struct.new $jsenum.Main.SupplierConsumerImpl (global.get $jsenum.Main.SupplierConsumerImpl.vtable) (global.get $jsenum.Main.SupplierConsumerImpl.itable) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:261:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:270:15
   (call $$ctor__void_$p_jsenum_Main_SupplierConsumerImpl@jsenum.Main.SupplierConsumerImpl (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:261:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:270:15
   (return (local.get $$instance))
  )
 )
@@ -2441,9 +2626,9 @@
 ;;; void SupplierConsumerImpl.$ctor()
 (func $$ctor__void_$p_jsenum_Main_SupplierConsumerImpl@jsenum.Main.SupplierConsumerImpl
  (param $this (ref null $jsenum.Main.SupplierConsumerImpl))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:261:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:270:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:261:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:270:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -2453,7 +2638,7 @@
  (type $function.m_accept__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $t (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:264:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:273:16
  (local $this (ref null $jsenum.Main.SupplierConsumerImpl))
  (local.set $this (ref.cast (ref $jsenum.Main.SupplierConsumerImpl) (local.get $this.untyped)))
  (block
@@ -2466,11 +2651,11 @@
  (type $function.m_get__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:267:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:276:13
  (local $this (ref null $jsenum.Main.SupplierConsumerImpl))
  (local.set $this (ref.cast (ref $jsenum.Main.SupplierConsumerImpl) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:268:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:277:6
   (return (ref.null $java.lang.Object))
  )
 )
@@ -2478,18 +2663,18 @@
 
 ;;; void SupplierConsumerImpl.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.SupplierConsumerImpl
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:261:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:270:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:261:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:270:15
   (if (global.get $$class-initialized@jsenum.Main.SupplierConsumerImpl)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:261:15
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:270:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:261:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:270:15
   (global.set $$class-initialized@jsenum.Main.SupplierConsumerImpl (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:261:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:270:15
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -2525,16 +2710,16 @@
 
 ;;; void ComparableJsEnumSupplierConsumer.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.ComparableJsEnumSupplierConsumer
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:272:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:281:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:272:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:281:12
   (if (global.get $$class-initialized@jsenum.Main.ComparableJsEnumSupplierConsumer)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:272:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:281:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:272:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:281:12
   (global.set $$class-initialized@jsenum.Main.ComparableJsEnumSupplierConsumer (i32.const 1))
  )
 )
@@ -2559,14 +2744,14 @@
 (func $$create__arrayOf_java_lang_Object@jsenum.Main.BaseVarargs
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  (result (ref null $jsenum.Main.BaseVarargs))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:304:4
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:313:4
  (local $$instance (ref null $jsenum.Main.BaseVarargs))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:304:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:313:4
   (local.set $$instance (struct.new $jsenum.Main.BaseVarargs (global.get $jsenum.Main.BaseVarargs.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:304:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:313:4
   (call $$ctor__arrayOf_java_lang_Object__void_$p_jsenum_Main_BaseVarargs@jsenum.Main.BaseVarargs (ref.as_non_null (local.get $$instance))(local.get $args))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:304:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:313:4
   (return (local.get $$instance))
  )
 )
@@ -2575,27 +2760,27 @@
 (func $$ctor__arrayOf_java_lang_Object__void_$p_jsenum_Main_BaseVarargs@jsenum.Main.BaseVarargs
  (param $this (ref null $jsenum.Main.BaseVarargs))
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:304:4
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:313:4
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:304:27
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:313:27
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void BaseVarargs.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.BaseVarargs
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:303:23
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:312:23
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:303:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:312:23
   (if (global.get $$class-initialized@jsenum.Main.BaseVarargs)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:303:23
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:312:23
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:303:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:312:23
   (global.set $$class-initialized@jsenum.Main.BaseVarargs (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:303:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:312:23
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -3093,82 +3278,84 @@
 
 ;;; Code for jsenum.Main.$LambdaImplementor$6 [methods]
 
-;;; <anonymous> implements Consumer<SomeJsEnum> <anonymous> implements Consumer<SomeJsEnum>.$create()
+;;; <anonymous> implements SpecializedJsFunction<ComparableJsEnum> <anonymous> implements SpecializedJsFunction<ComparableJsEnum>.$create()
 (func $$create__@jsenum.Main.$LambdaImplementor$6
  (result (ref null $jsenum.Main.$LambdaImplementor$6))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:317:36
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:146:43
  (local $$instance (ref null $jsenum.Main.$LambdaImplementor$6))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:317:36
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:146:43
   (call $$clinit__void_<once>_@jsenum.Main.$LambdaImplementor$6 )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:317:36
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:146:43
   (local.set $$instance (struct.new $jsenum.Main.$LambdaImplementor$6 (global.get $jsenum.Main.$LambdaImplementor$6.vtable) (global.get $jsenum.Main.$LambdaImplementor$6.itable) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:317:36
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:146:43
   (call $$ctor__void_$p_jsenum_Main_$LambdaImplementor$6@jsenum.Main.$LambdaImplementor$6 (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:317:36
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:146:43
   (return (local.get $$instance))
  )
 )
 
-;;; void <anonymous> implements Consumer<SomeJsEnum>.$ctor()
+;;; void <anonymous> implements SpecializedJsFunction<ComparableJsEnum>.$ctor()
 (func $$ctor__void_$p_jsenum_Main_$LambdaImplementor$6@jsenum.Main.$LambdaImplementor$6
  (param $this (ref null $jsenum.Main.$LambdaImplementor$6))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:317:36
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:146:43
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:317:36
-  (call $$ctor__void_$p_jsenum_Main_Consumer_$LambdaAdaptor@jsenum.Main.Consumer.$LambdaAdaptor (ref.as_non_null (local.get $this)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:146:43
+  (call $$ctor__void_$p_jsenum_Main_SpecializedJsFunction_$LambdaAdaptor@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor (ref.as_non_null (local.get $this)))
  )
 )
 
-;;; void <anonymous> implements Consumer<SomeJsEnum>.accept(SomeJsEnum arg0)
-(func $m_accept__jsenum_Main_SomeJsEnum__void@jsenum.Main.$LambdaImplementor$6
- (type $function.m_accept__jsenum_Main_SomeJsEnum__void)
+;;; ComparableJsEnum <anonymous> implements SpecializedJsFunction<ComparableJsEnum>.get(ComparableJsEnum e)
+(func $m_get__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum@jsenum.Main.$LambdaImplementor$6
+ (type $function.m_get__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $jsenum.Main.SomeJsEnum))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:317:36
+ (param $e (ref null $jsenum.Main.ComparableJsEnum))
+ (result (ref null $jsenum.Main.ComparableJsEnum))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:146:43
  (local $this (ref null $jsenum.Main.$LambdaImplementor$6))
  (local.set $this (ref.cast (ref $jsenum.Main.$LambdaImplementor$6) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:317:36
-  (drop (call $m_varargsConsumer__arrayOf_java_lang_Object__java_lang_Object@jsenum.Main (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (local.get $arg0)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:146:48
+  (return (local.get $e))
  )
 )
-(elem declare func $m_accept__jsenum_Main_SomeJsEnum__void@jsenum.Main.$LambdaImplementor$6)
+(elem declare func $m_get__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum@jsenum.Main.$LambdaImplementor$6)
 
-;;; void <anonymous> implements Consumer<SomeJsEnum>.accept(T arg0)
-(func $m_accept__java_lang_Object__void@jsenum.Main.$LambdaImplementor$6
- (type $function.m_accept__java_lang_Object__void)
+;;; ComparableJsEnum <anonymous> implements SpecializedJsFunction<ComparableJsEnum>.get(T arg0)
+(func $m_get__java_lang_Object__java_lang_Object@jsenum.Main.$LambdaImplementor$6
+ (type $function.m_get__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:317:36
+ (result (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:146:43
  (local $this (ref null $jsenum.Main.$LambdaImplementor$6))
  (local.set $this (ref.cast (ref $jsenum.Main.$LambdaImplementor$6) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:317:36
-  (call_ref $function.m_accept__jsenum_Main_SomeJsEnum__void (ref.as_non_null (local.get $this))(ref.cast (ref null $jsenum.Main.SomeJsEnum) (local.get $arg0))(struct.get $jsenum.Main.$LambdaImplementor$6.vtable $m_accept__jsenum_Main_SomeJsEnum__void (struct.get $jsenum.Main.$LambdaImplementor$6 $vtable(local.get $this))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:146:43
+  (return (call_ref $function.m_get__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum (ref.as_non_null (local.get $this))(ref.cast (ref null $jsenum.Main.ComparableJsEnum) (local.get $arg0))(struct.get $jsenum.Main.$LambdaImplementor$6.vtable $m_get__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum (struct.get $jsenum.Main.$LambdaImplementor$6 $vtable(local.get $this)))))
  )
 )
-(elem declare func $m_accept__java_lang_Object__void@jsenum.Main.$LambdaImplementor$6)
+(elem declare func $m_get__java_lang_Object__java_lang_Object@jsenum.Main.$LambdaImplementor$6)
 
-;;; void <anonymous> implements Consumer<SomeJsEnum>.$clinit()
+;;; void <anonymous> implements SpecializedJsFunction<ComparableJsEnum>.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.$LambdaImplementor$6
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:317:36
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:146:43
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:317:36
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:146:43
   (if (global.get $$class-initialized@jsenum.Main.$LambdaImplementor$6)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:317:36
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:146:43
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:317:36
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:146:43
   (global.set $$class-initialized@jsenum.Main.$LambdaImplementor$6 (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:317:36
-  (call $$clinit__void_<once>_@jsenum.Main.Consumer.$LambdaAdaptor )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:146:43
+  (call $$clinit__void_<once>_@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor )
  )
 )
 
-;;; Class<T> <anonymous> implements Consumer<SomeJsEnum>.$getClassMetadata()
+;;; Class<T> <anonymous> implements SpecializedJsFunction<ComparableJsEnum>.$getClassMetadata()
 (func $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.$LambdaImplementor$6
  (result (ref null $java.lang.Class))
  (block
@@ -3177,8 +3364,99 @@
     (return (global.get $$class@jsenum.Main.$LambdaImplementor$6))
    )
   )
-  (global.set $$class@jsenum.Main.$LambdaImplementor$6 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsenum.Main_...|__java_lang_String_<once>_@jsenum.Main.$LambdaImplementor$6 )(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.Consumer.$LambdaAdaptor )))
+  (global.set $$class@jsenum.Main.$LambdaImplementor$6 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsenum.Main_...|__java_lang_String_<once>_@jsenum.Main.$LambdaImplementor$6 )(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor )))
   (return (global.get $$class@jsenum.Main.$LambdaImplementor$6))
+ )
+)
+
+;;; Code for jsenum.Main.$LambdaImplementor$7 [methods]
+
+;;; <anonymous> implements Consumer<SomeJsEnum> <anonymous> implements Consumer<SomeJsEnum>.$create()
+(func $$create__@jsenum.Main.$LambdaImplementor$7
+ (result (ref null $jsenum.Main.$LambdaImplementor$7))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:326:36
+ (local $$instance (ref null $jsenum.Main.$LambdaImplementor$7))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:326:36
+  (call $$clinit__void_<once>_@jsenum.Main.$LambdaImplementor$7 )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:326:36
+  (local.set $$instance (struct.new $jsenum.Main.$LambdaImplementor$7 (global.get $jsenum.Main.$LambdaImplementor$7.vtable) (global.get $jsenum.Main.$LambdaImplementor$7.itable) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:326:36
+  (call $$ctor__void_$p_jsenum_Main_$LambdaImplementor$7@jsenum.Main.$LambdaImplementor$7 (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:326:36
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> implements Consumer<SomeJsEnum>.$ctor()
+(func $$ctor__void_$p_jsenum_Main_$LambdaImplementor$7@jsenum.Main.$LambdaImplementor$7
+ (param $this (ref null $jsenum.Main.$LambdaImplementor$7))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:326:36
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:326:36
+  (call $$ctor__void_$p_jsenum_Main_Consumer_$LambdaAdaptor@jsenum.Main.Consumer.$LambdaAdaptor (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void <anonymous> implements Consumer<SomeJsEnum>.accept(SomeJsEnum arg0)
+(func $m_accept__jsenum_Main_SomeJsEnum__void@jsenum.Main.$LambdaImplementor$7
+ (type $function.m_accept__jsenum_Main_SomeJsEnum__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $jsenum.Main.SomeJsEnum))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:326:36
+ (local $this (ref null $jsenum.Main.$LambdaImplementor$7))
+ (local.set $this (ref.cast (ref $jsenum.Main.$LambdaImplementor$7) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:326:36
+  (drop (call $m_varargsConsumer__arrayOf_java_lang_Object__java_lang_Object@jsenum.Main (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (local.get $arg0)))))
+ )
+)
+(elem declare func $m_accept__jsenum_Main_SomeJsEnum__void@jsenum.Main.$LambdaImplementor$7)
+
+;;; void <anonymous> implements Consumer<SomeJsEnum>.accept(T arg0)
+(func $m_accept__java_lang_Object__void@jsenum.Main.$LambdaImplementor$7
+ (type $function.m_accept__java_lang_Object__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:326:36
+ (local $this (ref null $jsenum.Main.$LambdaImplementor$7))
+ (local.set $this (ref.cast (ref $jsenum.Main.$LambdaImplementor$7) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:326:36
+  (call_ref $function.m_accept__jsenum_Main_SomeJsEnum__void (ref.as_non_null (local.get $this))(ref.cast (ref null $jsenum.Main.SomeJsEnum) (local.get $arg0))(struct.get $jsenum.Main.$LambdaImplementor$7.vtable $m_accept__jsenum_Main_SomeJsEnum__void (struct.get $jsenum.Main.$LambdaImplementor$7 $vtable(local.get $this))))
+ )
+)
+(elem declare func $m_accept__java_lang_Object__void@jsenum.Main.$LambdaImplementor$7)
+
+;;; void <anonymous> implements Consumer<SomeJsEnum>.$clinit()
+(func $$clinit__void_<once>_@jsenum.Main.$LambdaImplementor$7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:326:36
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:326:36
+  (if (global.get $$class-initialized@jsenum.Main.$LambdaImplementor$7)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:326:36
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:326:36
+  (global.set $$class-initialized@jsenum.Main.$LambdaImplementor$7 (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:326:36
+  (call $$clinit__void_<once>_@jsenum.Main.Consumer.$LambdaAdaptor )
+ )
+)
+
+;;; Class<T> <anonymous> implements Consumer<SomeJsEnum>.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.$LambdaImplementor$7
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jsenum.Main.$LambdaImplementor$7)))
+   (then
+    (return (global.get $$class@jsenum.Main.$LambdaImplementor$7))
+   )
+  )
+  (global.set $$class@jsenum.Main.$LambdaImplementor$7 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsenum.Main_...|__java_lang_String_<once>_@jsenum.Main.$LambdaImplementor$7 )(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.Consumer.$LambdaAdaptor )))
+  (return (global.get $$class@jsenum.Main.$LambdaImplementor$7))
  )
 )
 
@@ -3729,14 +4007,14 @@
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
  (result (ref null $jsenum.Main.JsEnumWithRenamedProperties))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:250:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:259:7
  (local $$instance (ref null $jsenum.Main.JsEnumWithRenamedProperties))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:250:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:259:7
   (local.set $$instance (struct.new $jsenum.Main.JsEnumWithRenamedProperties (global.get $jsenum.Main.JsEnumWithRenamedProperties.vtable) (global.get $jsenum.Main.JsEnumWithRenamedProperties.itable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:250:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:259:7
   (call $$ctor__java_lang_String__int__void_$p_jsenum_Main_JsEnumWithRenamedProperties@jsenum.Main.JsEnumWithRenamedProperties (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:250:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:259:7
   (return (local.get $$instance))
  )
 )
@@ -3746,13 +4024,13 @@
  (param $this (ref null $jsenum.Main.JsEnumWithRenamedProperties))
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:250:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:259:7
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:250:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:259:7
   (struct.set $java.lang.Enum $name@java.lang.Enum (local.get $this) (local.get $$name))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:250:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:259:7
   (struct.set $java.lang.Enum $ordinal@java.lang.Enum (local.get $this) (local.get $$ordinal))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:250:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:259:7
   (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
  )
 )
@@ -3762,11 +4040,11 @@
  (type $function.m_getValue__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:256:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:265:15
  (local $this (ref null $jsenum.Main.JsEnumWithRenamedProperties))
  (local.set $this (ref.cast (ref $jsenum.Main.JsEnumWithRenamedProperties) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:257:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:266:6
   (return (call $m_ordinal__int@java.lang.Enum (ref.as_non_null (local.get $this))))
  )
 )
@@ -3774,24 +4052,24 @@
 
 ;;; void JsEnumWithRenamedProperties.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.JsEnumWithRenamedProperties
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:250:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:259:7
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:250:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:259:7
   (if (global.get $$class-initialized@jsenum.Main.JsEnumWithRenamedProperties)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:250:7
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:259:7
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:250:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:259:7
   (global.set $$class-initialized@jsenum.Main.JsEnumWithRenamedProperties (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:250:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:259:7
   (call $$clinit__void_<once>_@java.lang.Enum )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:251:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:260:4
   (global.set $ZERO@jsenum.Main.JsEnumWithRenamedProperties (call $$create__java_lang_String__int@jsenum.Main.JsEnumWithRenamedProperties (ref.null $java.lang.String)(i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:253:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:262:4
   (global.set $ONE@jsenum.Main.JsEnumWithRenamedProperties (call $$create__java_lang_String__int@jsenum.Main.JsEnumWithRenamedProperties (ref.null $java.lang.String)(i32.const 1)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:254:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:263:4
   (global.set $TWO@jsenum.Main.JsEnumWithRenamedProperties (call $$create__java_lang_String__int@jsenum.Main.JsEnumWithRenamedProperties (ref.null $java.lang.String)(i32.const 2)))
  )
 )
@@ -3828,16 +4106,16 @@
 ;;; ComparableJsEnumSupplierConsumerImpl ComparableJsEnumSupplierConsumerImpl.$create()
 (func $$create__@jsenum.Main.ComparableJsEnumSupplierConsumerImpl
  (result (ref null $jsenum.Main.ComparableJsEnumSupplierConsumerImpl))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:280:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:289:15
  (local $$instance (ref null $jsenum.Main.ComparableJsEnumSupplierConsumerImpl))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:280:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:289:15
   (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnumSupplierConsumerImpl )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:280:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:289:15
   (local.set $$instance (struct.new $jsenum.Main.ComparableJsEnumSupplierConsumerImpl (global.get $jsenum.Main.ComparableJsEnumSupplierConsumerImpl.vtable) (global.get $jsenum.Main.ComparableJsEnumSupplierConsumerImpl.itable) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:280:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:289:15
   (call $$ctor__void_$p_jsenum_Main_ComparableJsEnumSupplierConsumerImpl@jsenum.Main.ComparableJsEnumSupplierConsumerImpl (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:280:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:289:15
   (return (local.get $$instance))
  )
 )
@@ -3845,9 +4123,9 @@
 ;;; void ComparableJsEnumSupplierConsumerImpl.$ctor()
 (func $$ctor__void_$p_jsenum_Main_ComparableJsEnumSupplierConsumerImpl@jsenum.Main.ComparableJsEnumSupplierConsumerImpl
  (param $this (ref null $jsenum.Main.ComparableJsEnumSupplierConsumerImpl))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:280:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:289:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:280:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:289:15
   (call $$ctor__void_$p_jsenum_Main_SupplierConsumerImpl@jsenum.Main.SupplierConsumerImpl (ref.as_non_null (local.get $this)))
  )
 )
@@ -3857,11 +4135,11 @@
  (type $function.m_accept__jsenum_Main_ComparableJsEnum__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $jsenum.Main.ComparableJsEnum))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:280:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:289:15
  (local $this (ref null $jsenum.Main.ComparableJsEnumSupplierConsumerImpl))
  (local.set $this (ref.cast (ref $jsenum.Main.ComparableJsEnumSupplierConsumerImpl) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:280:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:289:15
   (call $m_accept__java_lang_Object__void@jsenum.Main.SupplierConsumerImpl (ref.as_non_null (local.get $this))(local.get $arg0))
  )
 )
@@ -3872,11 +4150,11 @@
  (type $function.m_get__jsenum_Main_ComparableJsEnum)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $jsenum.Main.ComparableJsEnum))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:280:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:289:15
  (local $this (ref null $jsenum.Main.ComparableJsEnumSupplierConsumerImpl))
  (local.set $this (ref.cast (ref $jsenum.Main.ComparableJsEnumSupplierConsumerImpl) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:280:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:289:15
   (return (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (call_ref $function.m_get__java_lang_Object (ref.as_non_null (local.get $this))(struct.get $jsenum.Main.ComparableJsEnumSupplierConsumerImpl.vtable $m_get__java_lang_Object (struct.get $jsenum.Main.ComparableJsEnumSupplierConsumerImpl $vtable(local.get $this))))))
  )
 )
@@ -3884,18 +4162,18 @@
 
 ;;; void ComparableJsEnumSupplierConsumerImpl.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.ComparableJsEnumSupplierConsumerImpl
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:280:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:289:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:280:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:289:15
   (if (global.get $$class-initialized@jsenum.Main.ComparableJsEnumSupplierConsumerImpl)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:280:15
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:289:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:280:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:289:15
   (global.set $$class-initialized@jsenum.Main.ComparableJsEnumSupplierConsumerImpl (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:280:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:289:15
   (call $$clinit__void_<once>_@jsenum.Main.SupplierConsumerImpl )
  )
 )
@@ -3932,16 +4210,16 @@
 ;;; ComparableJsEnumSupplierConsumerImplWithOverrides ComparableJsEnumSupplierConsumerImplWithOverrides.$create()
 (func $$create__@jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides
  (result (ref null $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:283:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:292:15
  (local $$instance (ref null $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:283:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:292:15
   (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:283:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:292:15
   (local.set $$instance (struct.new $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides (global.get $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides.vtable) (global.get $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides.itable) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:283:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:292:15
   (call $$ctor__void_$p_jsenum_Main_ComparableJsEnumSupplierConsumerImplWithOverrides@jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:283:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:292:15
   (return (local.get $$instance))
  )
 )
@@ -3949,9 +4227,9 @@
 ;;; void ComparableJsEnumSupplierConsumerImplWithOverrides.$ctor()
 (func $$ctor__void_$p_jsenum_Main_ComparableJsEnumSupplierConsumerImplWithOverrides@jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides
  (param $this (ref null $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:283:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:292:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:283:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:292:15
   (call $$ctor__void_$p_jsenum_Main_SupplierConsumerImpl@jsenum.Main.SupplierConsumerImpl (ref.as_non_null (local.get $this)))
  )
 )
@@ -3961,7 +4239,7 @@
  (type $function.m_accept__jsenum_Main_ComparableJsEnum__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $t (ref null $jsenum.Main.ComparableJsEnum))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:286:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:295:16
  (local $this (ref null $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides))
  (local.set $this (ref.cast (ref $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides) (local.get $this.untyped)))
  (block
@@ -3974,11 +4252,11 @@
  (type $function.m_get__jsenum_Main_ComparableJsEnum)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $jsenum.Main.ComparableJsEnum))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:289:28
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:298:28
  (local $this (ref null $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides))
  (local.set $this (ref.cast (ref $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:290:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:299:6
   (return (ref.null $jsenum.Main.ComparableJsEnum))
  )
 )
@@ -3989,11 +4267,11 @@
  (type $function.m_get__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:283:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:292:15
  (local $this (ref null $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides))
  (local.set $this (ref.cast (ref $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:283:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:292:15
   (return (call_ref $function.m_get__jsenum_Main_ComparableJsEnum (ref.as_non_null (local.get $this))(struct.get $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides.vtable $m_get__jsenum_Main_ComparableJsEnum (struct.get $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides $vtable(local.get $this)))))
  )
 )
@@ -4004,11 +4282,11 @@
  (type $function.m_accept__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:283:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:292:15
  (local $this (ref null $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides))
  (local.set $this (ref.cast (ref $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:283:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:292:15
   (call_ref $function.m_accept__jsenum_Main_ComparableJsEnum__void (ref.as_non_null (local.get $this))(ref.cast (ref null $jsenum.Main.ComparableJsEnum) (local.get $arg0))(struct.get $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides.vtable $m_accept__jsenum_Main_ComparableJsEnum__void (struct.get $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides $vtable(local.get $this))))
  )
 )
@@ -4016,18 +4294,18 @@
 
 ;;; void ComparableJsEnumSupplierConsumerImplWithOverrides.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:283:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:292:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:283:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:292:15
   (if (global.get $$class-initialized@jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:283:15
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:292:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:283:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:292:15
   (global.set $$class-initialized@jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:283:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:292:15
   (call $$clinit__void_<once>_@jsenum.Main.SupplierConsumerImpl )
  )
 )
@@ -4066,14 +4344,14 @@
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
  (result (ref null $jsenum.Main.SomeJsEnum))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:295:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:304:14
  (local $$instance (ref null $jsenum.Main.SomeJsEnum))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:295:14
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:304:14
   (local.set $$instance (struct.new $jsenum.Main.SomeJsEnum (global.get $jsenum.Main.SomeJsEnum.vtable) (global.get $jsenum.Main.SomeJsEnum.itable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:295:14
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:304:14
   (call $$ctor__java_lang_String__int__void_$p_jsenum_Main_SomeJsEnum@jsenum.Main.SomeJsEnum (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:295:14
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:304:14
   (return (local.get $$instance))
  )
 )
@@ -4083,33 +4361,33 @@
  (param $this (ref null $jsenum.Main.SomeJsEnum))
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:295:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:304:14
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:295:14
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:304:14
   (struct.set $java.lang.Enum $name@java.lang.Enum (local.get $this) (local.get $$name))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:295:14
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:304:14
   (struct.set $java.lang.Enum $ordinal@java.lang.Enum (local.get $this) (local.get $$ordinal))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:295:14
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:304:14
   (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
  )
 )
 
 ;;; void SomeJsEnum.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.SomeJsEnum
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:295:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:304:14
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:295:14
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:304:14
   (if (global.get $$class-initialized@jsenum.Main.SomeJsEnum)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:295:14
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:304:14
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:295:14
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:304:14
   (global.set $$class-initialized@jsenum.Main.SomeJsEnum (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:295:14
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:304:14
   (call $$clinit__void_<once>_@java.lang.Enum )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:296:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:305:4
   (global.set $A@jsenum.Main.SomeJsEnum (call $$create__java_lang_String__int@jsenum.Main.SomeJsEnum (ref.null $java.lang.String)(i32.const 0)))
  )
 )
@@ -4146,14 +4424,14 @@
 ;;; SubtypeVarargs SubtypeVarargs.$create()
 (func $$create__@jsenum.Main.SubtypeVarargs
  (result (ref null $jsenum.Main.SubtypeVarargs))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:308:4
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:317:4
  (local $$instance (ref null $jsenum.Main.SubtypeVarargs))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:308:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:317:4
   (local.set $$instance (struct.new $jsenum.Main.SubtypeVarargs (global.get $jsenum.Main.SubtypeVarargs.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:308:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:317:4
   (call $$ctor__void_$p_jsenum_Main_SubtypeVarargs@jsenum.Main.SubtypeVarargs (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:308:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:317:4
   (return (local.get $$instance))
  )
 )
@@ -4161,9 +4439,9 @@
 ;;; void SubtypeVarargs.$ctor()
 (func $$ctor__void_$p_jsenum_Main_SubtypeVarargs@jsenum.Main.SubtypeVarargs
  (param $this (ref null $jsenum.Main.SubtypeVarargs))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:308:4
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:317:4
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:309:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:318:6
   (call $$ctor__arrayOf_java_lang_Object__void_$p_jsenum_Main_BaseVarargs@jsenum.Main.BaseVarargs (ref.as_non_null (local.get $this))(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (block (result (ref null $jsenum.Main.SomeJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.SomeJsEnum )
    (global.get $A@jsenum.Main.SomeJsEnum)
@@ -4176,18 +4454,18 @@
 
 ;;; void SubtypeVarargs.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.SubtypeVarargs
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:307:23
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:316:23
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:307:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:316:23
   (if (global.get $$class-initialized@jsenum.Main.SubtypeVarargs)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:307:23
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:316:23
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:307:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:316:23
   (global.set $$class-initialized@jsenum.Main.SubtypeVarargs (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:307:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:316:23
   (call $$clinit__void_<once>_@jsenum.Main.BaseVarargs )
  )
 )
@@ -4224,14 +4502,14 @@
 ;;; SubtypeImplicitVarargs SubtypeImplicitVarargs.$create()
 (func $$create__@jsenum.Main.SubtypeImplicitVarargs
  (result (ref null $jsenum.Main.SubtypeImplicitVarargs))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:313:23
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:322:23
  (local $$instance (ref null $jsenum.Main.SubtypeImplicitVarargs))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:313:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:322:23
   (local.set $$instance (struct.new $jsenum.Main.SubtypeImplicitVarargs (global.get $jsenum.Main.SubtypeImplicitVarargs.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:313:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:322:23
   (call $$ctor__void_$p_jsenum_Main_SubtypeImplicitVarargs@jsenum.Main.SubtypeImplicitVarargs (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:313:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:322:23
   (return (local.get $$instance))
  )
 )
@@ -4239,27 +4517,27 @@
 ;;; void SubtypeImplicitVarargs.$ctor()
 (func $$ctor__void_$p_jsenum_Main_SubtypeImplicitVarargs@jsenum.Main.SubtypeImplicitVarargs
  (param $this (ref null $jsenum.Main.SubtypeImplicitVarargs))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:313:23
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:322:23
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:313:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:322:23
   (call $$ctor__arrayOf_java_lang_Object__void_$p_jsenum_Main_BaseVarargs@jsenum.Main.BaseVarargs (ref.as_non_null (local.get $this))(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 0 )))
  )
 )
 
 ;;; void SubtypeImplicitVarargs.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.SubtypeImplicitVarargs
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:313:23
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:322:23
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:313:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:322:23
   (if (global.get $$class-initialized@jsenum.Main.SubtypeImplicitVarargs)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:313:23
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:322:23
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:313:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:322:23
   (global.set $$class-initialized@jsenum.Main.SubtypeImplicitVarargs (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:313:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:322:23
   (call $$clinit__void_<once>_@jsenum.Main.BaseVarargs )
  )
 )

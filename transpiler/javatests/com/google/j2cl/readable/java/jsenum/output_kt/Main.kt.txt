@@ -89,6 +89,11 @@ open class Main {
      }
     },
    )
+   Main.acceptsJsFunctionParameterizedByJsEnum(
+    SpecializedJsFunction { e_1: ComparableJsEnum? ->
+     return@SpecializedJsFunction e_1
+    },
+   )
   }
 
   @JvmStatic
@@ -164,6 +169,9 @@ open class Main {
 
   @JvmStatic
   private fun acceptsSupplierOfSupplier(supplier: Supplier<Supplier<ComparableJsEnum?>?>?) {}
+
+  @JvmStatic
+  private fun acceptsJsFunctionParameterizedByJsEnum(supplier: SpecializedJsFunction<ComparableJsEnum?>?) {}
 
   @JvmStatic
   private fun testReturnsAndParameters() {
@@ -386,6 +394,11 @@ open class Main {
  @JsFunction
  fun interface JsFunctionSuppiler<T> {
   fun get(): T
+ }
+
+ @JsFunction
+ fun interface SpecializedJsFunction<T> {
+  fun get(value: T): T
  }
 
  open class TemplatedField<T> {
