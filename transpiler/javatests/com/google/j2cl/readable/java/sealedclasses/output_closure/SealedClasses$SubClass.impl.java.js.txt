@@ -1,0 +1,43 @@
+goog.module('sealedclasses.SealedClasses.SubClass$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const SealedClassInAnotherPackage = goog.require('sealedclasses.sealedclassinanotherpackage.SealedClassInAnotherPackage$impl');
+
+/**
+ * @final
+ */
+class SubClass extends SealedClassInAnotherPackage {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!SubClass} */
+ static $create__() {
+  SubClass.$clinit();
+  let $instance = new SubClass();
+  $instance.$ctor__sealedclasses_SealedClasses_SubClass__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__sealedclasses_SealedClasses_SubClass__void() {
+  this.$ctor__sealedclasses_sealedclassinanotherpackage_SealedClassInAnotherPackage__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  SubClass.$clinit = () =>{};
+  SubClass.$loadModules();
+  SealedClassInAnotherPackage.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SubClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(SubClass, 'sealedclasses.SealedClasses$SubClass');
+
+exports = SubClass;
+
+//# sourceMappingURL=SealedClasses$SubClass.js.map

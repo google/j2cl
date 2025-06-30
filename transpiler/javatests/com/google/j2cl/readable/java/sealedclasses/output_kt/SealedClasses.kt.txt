@@ -1,0 +1,80 @@
+// Generated from "sealedclasses/SealedClasses.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN")
+
+package sealedclasses
+
+import javaemul.lang.*
+import kotlin.String
+import kotlin.Suppress
+import sealedclasses.sealedclassinanotherpackage.SealedClassInAnotherPackage
+
+open class SealedClasses {
+ class SubClass: SealedClassInAnotherPackage()
+
+ interface Animal
+
+ abstract class Mammal: Animal {
+  constructor()
+
+  internal constructor(name: String?): this()
+
+  open fun retrieveName(): String? {
+   return "Animal"
+  }
+
+  abstract fun changeName(updatedName: String?)
+
+  class Dolphin: Mammal() {
+   override fun changeName(updatedName: String?) {}
+  }
+ }
+
+ class Dog: Mammal() {
+  override fun changeName(updatedName: String?) {}
+ }
+
+ class Cat internal constructor(): Mammal() {
+  override fun changeName(updatedName: String?) {}
+ }
+
+ class Whale internal constructor(): Mammal() {
+  override fun changeName(updatedName: String?) {}
+ }
+
+ class Deer: Animal {
+  private constructor()
+ }
+
+ enum class EnumImplementsSealedInterface: Animal {
+  V1,
+  V2;
+ }
+
+ abstract class Shape {
+  class Circle: Shape()
+
+  class Rectangle: Shape {
+   private constructor()
+  }
+ }
+
+ open class SealedClassWithInnerClass {
+  inner class A: SealedClassWithInnerClass()
+
+  inner class B: SealedClassWithInnerClass()
+ }
+}

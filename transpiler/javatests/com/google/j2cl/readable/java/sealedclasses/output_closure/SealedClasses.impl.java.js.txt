@@ -1,0 +1,40 @@
+goog.module('sealedclasses.SealedClasses$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class SealedClasses extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!SealedClasses} */
+ static $create__() {
+  SealedClasses.$clinit();
+  let $instance = new SealedClasses();
+  $instance.$ctor__sealedclasses_SealedClasses__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__sealedclasses_SealedClasses__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  SealedClasses.$clinit = () =>{};
+  SealedClasses.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SealedClasses;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(SealedClasses, 'sealedclasses.SealedClasses');
+
+exports = SealedClasses;
+
+//# sourceMappingURL=SealedClasses.js.map

@@ -1,0 +1,44 @@
+goog.module('sealedclasses.SealedClasses.Whale$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Mammal = goog.require('sealedclasses.SealedClasses.Mammal$impl');
+
+/**
+ * @final
+ */
+class Whale extends Mammal {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Whale} */
+ static $create__() {
+  let $instance = new Whale();
+  $instance.$ctor__sealedclasses_SealedClasses_Whale__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__sealedclasses_SealedClasses_Whale__void() {
+  this.$ctor__sealedclasses_SealedClasses_Mammal__void();
+ }
+ /** @override @nodts */
+ m_changeName__java_lang_String__void(/** ?string */ updatedName) {}
+ /** @nodts */
+ static $clinit() {
+  Whale.$clinit = () =>{};
+  Whale.$loadModules();
+  Mammal.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Whale;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Whale, 'sealedclasses.SealedClasses$Whale');
+
+exports = Whale;
+
+//# sourceMappingURL=SealedClasses$Whale.js.map

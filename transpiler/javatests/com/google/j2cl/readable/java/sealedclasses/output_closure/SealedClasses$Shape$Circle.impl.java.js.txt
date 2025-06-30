@@ -1,0 +1,43 @@
+goog.module('sealedclasses.SealedClasses.Shape.Circle$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Shape = goog.require('sealedclasses.SealedClasses.Shape$impl');
+
+/**
+ * @final
+ */
+class Circle extends Shape {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Circle} */
+ static $create__() {
+  Circle.$clinit();
+  let $instance = new Circle();
+  $instance.$ctor__sealedclasses_SealedClasses_Shape_Circle__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__sealedclasses_SealedClasses_Shape_Circle__void() {
+  this.$ctor__sealedclasses_SealedClasses_Shape__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  Circle.$clinit = () =>{};
+  Circle.$loadModules();
+  Shape.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Circle;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Circle, 'sealedclasses.SealedClasses$Shape$Circle');
+
+exports = Circle;
+
+//# sourceMappingURL=SealedClasses$Shape$Circle.js.map

@@ -1,0 +1,36 @@
+goog.module('sealedclasses.sealedclassinanotherpackage.SealedClassInAnotherPackage$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ */
+class SealedClassInAnotherPackage extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__sealedclasses_sealedclassinanotherpackage_SealedClassInAnotherPackage__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  SealedClassInAnotherPackage.$clinit = () =>{};
+  SealedClassInAnotherPackage.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SealedClassInAnotherPackage;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(SealedClassInAnotherPackage, 'sealedclasses.sealedclassinanotherpackage.SealedClassInAnotherPackage');
+
+exports = SealedClassInAnotherPackage;
+
+//# sourceMappingURL=SealedClassInAnotherPackage.js.map

@@ -1,0 +1,40 @@
+goog.module('sealedclasses.SealedClasses.SealedClassWithInnerClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class SealedClassWithInnerClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!SealedClassWithInnerClass} */
+ static $create__() {
+  SealedClassWithInnerClass.$clinit();
+  let $instance = new SealedClassWithInnerClass();
+  $instance.$ctor__sealedclasses_SealedClasses_SealedClassWithInnerClass__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__sealedclasses_SealedClasses_SealedClassWithInnerClass__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  SealedClassWithInnerClass.$clinit = () =>{};
+  SealedClassWithInnerClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SealedClassWithInnerClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(SealedClassWithInnerClass, 'sealedclasses.SealedClasses$SealedClassWithInnerClass');
+
+exports = SealedClassWithInnerClass;
+
+//# sourceMappingURL=SealedClasses$SealedClassWithInnerClass.js.map

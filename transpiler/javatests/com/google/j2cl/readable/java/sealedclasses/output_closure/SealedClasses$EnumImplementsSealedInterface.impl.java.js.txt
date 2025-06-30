@@ -1,0 +1,79 @@
+goog.module('sealedclasses.SealedClasses.EnumImplementsSealedInterface$impl');
+
+const Enum = goog.require('java.lang.Enum$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Animal = goog.require('sealedclasses.SealedClasses.Animal$impl');
+
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
+
+/**
+ * @final
+ * @extends {Enum<EnumImplementsSealedInterface>}
+ * @implements {Animal}
+ */
+class EnumImplementsSealedInterface extends Enum {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!EnumImplementsSealedInterface} */
+ static $create__java_lang_String__int(/** ?string */ $name, /** number */ $ordinal) {
+  let $instance = new EnumImplementsSealedInterface();
+  $instance.$ctor__sealedclasses_SealedClasses_EnumImplementsSealedInterface__java_lang_String__int__void($name, $ordinal);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__sealedclasses_SealedClasses_EnumImplementsSealedInterface__java_lang_String__int__void(/** ?string */ $name, /** number */ $ordinal) {
+  this.f_name__java_lang_Enum_ = $name;
+  this.f_ordinal__java_lang_Enum_ = $ordinal;
+  this.$ctor__java_lang_Enum__java_lang_String__int__void($name, $ordinal);
+ }
+ /** @nodts @return {!EnumImplementsSealedInterface} */
+ static m_valueOf__java_lang_String__sealedclasses_SealedClasses_EnumImplementsSealedInterface(/** string */ name) {
+  EnumImplementsSealedInterface.$clinit();
+  if ($Equality.$same(EnumImplementsSealedInterface.f_namesToValuesMap__sealedclasses_SealedClasses_EnumImplementsSealedInterface_, null)) {
+   EnumImplementsSealedInterface.f_namesToValuesMap__sealedclasses_SealedClasses_EnumImplementsSealedInterface_ = (/**@type {Map<?string, !EnumImplementsSealedInterface>}*/ ($Enums.createMapFromValues(EnumImplementsSealedInterface.m_values__arrayOf_sealedclasses_SealedClasses_EnumImplementsSealedInterface())));
+  }
+  return /**@type {EnumImplementsSealedInterface}*/ ($Enums.getValueFromNameAndMap(name, EnumImplementsSealedInterface.f_namesToValuesMap__sealedclasses_SealedClasses_EnumImplementsSealedInterface_));
+ }
+ /** @nodts @return {!Array<!EnumImplementsSealedInterface>} */
+ static m_values__arrayOf_sealedclasses_SealedClasses_EnumImplementsSealedInterface() {
+  EnumImplementsSealedInterface.$clinit();
+  return /**@type {!Array<!EnumImplementsSealedInterface>}*/ ($Arrays.$stampType([EnumImplementsSealedInterface.f_V1__sealedclasses_SealedClasses_EnumImplementsSealedInterface, EnumImplementsSealedInterface.f_V2__sealedclasses_SealedClasses_EnumImplementsSealedInterface], EnumImplementsSealedInterface));
+ }
+ /** @nodts */
+ static $clinit() {
+  EnumImplementsSealedInterface.$clinit = () =>{};
+  EnumImplementsSealedInterface.$loadModules();
+  Enum.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof EnumImplementsSealedInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $Enums = goog.module.get('vmbootstrap.Enums$impl');
+ }
+}
+/**@const {number} @nodts*/
+EnumImplementsSealedInterface.$ordinal_V1__sealedclasses_SealedClasses_EnumImplementsSealedInterface = 0;
+/**@const {number} @nodts*/
+EnumImplementsSealedInterface.$ordinal_V2__sealedclasses_SealedClasses_EnumImplementsSealedInterface = 1;
+/**@const {!EnumImplementsSealedInterface} @nodts*/
+EnumImplementsSealedInterface.f_V1__sealedclasses_SealedClasses_EnumImplementsSealedInterface = /**@pureOrBreakMyCode*/ EnumImplementsSealedInterface.$create__java_lang_String__int($Util.$makeEnumName('V1'), EnumImplementsSealedInterface.$ordinal_V1__sealedclasses_SealedClasses_EnumImplementsSealedInterface);
+/**@const {!EnumImplementsSealedInterface} @nodts*/
+EnumImplementsSealedInterface.f_V2__sealedclasses_SealedClasses_EnumImplementsSealedInterface = /**@pureOrBreakMyCode*/ EnumImplementsSealedInterface.$create__java_lang_String__int($Util.$makeEnumName('V2'), EnumImplementsSealedInterface.$ordinal_V2__sealedclasses_SealedClasses_EnumImplementsSealedInterface);
+/**@type {Map<?string, !EnumImplementsSealedInterface>} @nodts*/
+EnumImplementsSealedInterface.f_namesToValuesMap__sealedclasses_SealedClasses_EnumImplementsSealedInterface_;
+Animal.$markImplementor(EnumImplementsSealedInterface);
+$Util.$setClassMetadataForEnum(EnumImplementsSealedInterface, 'sealedclasses.SealedClasses$EnumImplementsSealedInterface');
+
+exports = EnumImplementsSealedInterface;
+
+//# sourceMappingURL=SealedClasses$EnumImplementsSealedInterface.js.map

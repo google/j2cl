@@ -1,0 +1,45 @@
+goog.module('sealedclasses.SealedClasses.Mammal.Dolphin$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Mammal = goog.require('sealedclasses.SealedClasses.Mammal$impl');
+
+/**
+ * @final
+ */
+class Dolphin extends Mammal {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Dolphin} */
+ static $create__() {
+  Dolphin.$clinit();
+  let $instance = new Dolphin();
+  $instance.$ctor__sealedclasses_SealedClasses_Mammal_Dolphin__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__sealedclasses_SealedClasses_Mammal_Dolphin__void() {
+  this.$ctor__sealedclasses_SealedClasses_Mammal__void();
+ }
+ /** @override @nodts */
+ m_changeName__java_lang_String__void(/** ?string */ updatedName) {}
+ /** @nodts */
+ static $clinit() {
+  Dolphin.$clinit = () =>{};
+  Dolphin.$loadModules();
+  Mammal.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Dolphin;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Dolphin, 'sealedclasses.SealedClasses$Mammal$Dolphin');
+
+exports = Dolphin;
+
+//# sourceMappingURL=SealedClasses$Mammal$Dolphin.js.map

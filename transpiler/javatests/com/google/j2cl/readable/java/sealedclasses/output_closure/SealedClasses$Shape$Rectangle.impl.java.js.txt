@@ -1,0 +1,42 @@
+goog.module('sealedclasses.SealedClasses.Shape.Rectangle$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Shape = goog.require('sealedclasses.SealedClasses.Shape$impl');
+
+/**
+ * @final
+ */
+class Rectangle extends Shape {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Rectangle} */
+ static $create__() {
+  let $instance = new Rectangle();
+  $instance.$ctor__sealedclasses_SealedClasses_Shape_Rectangle__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__sealedclasses_SealedClasses_Shape_Rectangle__void() {
+  this.$ctor__sealedclasses_SealedClasses_Shape__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  Rectangle.$clinit = () =>{};
+  Rectangle.$loadModules();
+  Shape.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Rectangle;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Rectangle, 'sealedclasses.SealedClasses$Shape$Rectangle');
+
+exports = Rectangle;
+
+//# sourceMappingURL=SealedClasses$Shape$Rectangle.js.map

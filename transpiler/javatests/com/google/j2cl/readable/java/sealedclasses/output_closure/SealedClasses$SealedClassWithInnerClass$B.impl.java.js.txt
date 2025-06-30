@@ -1,0 +1,46 @@
+goog.module('sealedclasses.SealedClasses.SealedClassWithInnerClass.B$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const SealedClassWithInnerClass = goog.require('sealedclasses.SealedClasses.SealedClassWithInnerClass$impl');
+
+/**
+ * @final
+ */
+class B extends SealedClassWithInnerClass {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {SealedClassWithInnerClass} @nodts*/
+  this.$outer_this__sealedclasses_SealedClasses_SealedClassWithInnerClass_B;
+ }
+ /** @nodts @return {!B} */
+ static $create__sealedclasses_SealedClasses_SealedClassWithInnerClass(/** SealedClassWithInnerClass */ $outer_this) {
+  B.$clinit();
+  let $instance = new B();
+  $instance.$ctor__sealedclasses_SealedClasses_SealedClassWithInnerClass_B__sealedclasses_SealedClasses_SealedClassWithInnerClass__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__sealedclasses_SealedClasses_SealedClassWithInnerClass_B__sealedclasses_SealedClasses_SealedClassWithInnerClass__void(/** SealedClassWithInnerClass */ $outer_this) {
+  this.$outer_this__sealedclasses_SealedClasses_SealedClassWithInnerClass_B = $outer_this;
+  this.$ctor__sealedclasses_SealedClasses_SealedClassWithInnerClass__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  B.$clinit = () =>{};
+  B.$loadModules();
+  SealedClassWithInnerClass.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof B;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(B, 'sealedclasses.SealedClasses$SealedClassWithInnerClass$B');
+
+exports = B;
+
+//# sourceMappingURL=SealedClasses$SealedClassWithInnerClass$B.js.map
