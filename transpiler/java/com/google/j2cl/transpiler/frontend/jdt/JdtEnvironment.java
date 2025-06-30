@@ -252,6 +252,7 @@ public class JdtEnvironment {
         .setFinal(isFinal)
         .setParameter(isParameter)
         .setSourcePosition(sourcePosition)
+        .setAnnotations(createAnnotations(variableBinding, inNullMarkedScope))
         .build();
   }
 

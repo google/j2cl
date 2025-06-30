@@ -271,6 +271,7 @@ class JavaEnvironment {
         .setFinal(isFinal)
         .setParameter(isParameter)
         .setSourcePosition(sourcePosition)
+        .setAnnotations(createAnnotations(variableElement, inNullMarkedScope))
         .build();
   }
 

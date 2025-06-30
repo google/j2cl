@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
+import com.google.common.collect.ImmutableList;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
@@ -25,23 +26,26 @@ import com.google.j2cl.common.visitor.Visitable;
 
 /** Class for local variable and parameter. */
 @Visitable
-public class Variable extends NameDeclaration implements Cloneable<Variable> {
+public class Variable extends NameDeclaration implements Cloneable<Variable>, HasAnnotations {
   @Visitable TypeDescriptor typeDescriptor;
   private boolean isFinal;
   private boolean isParameter;
   private final SourcePosition sourcePosition;
+  private final ImmutableList<Annotation> annotations;
 
   private Variable(
       SourcePosition sourcePosition,
       String name,
       TypeDescriptor typeDescriptor,
       boolean isFinal,
-      boolean isParameter) {
+      boolean isParameter,
+      ImmutableList<Annotation> annotations) {
     super(name);
     setTypeDescriptor(typeDescriptor);
     this.isFinal = isFinal;
     this.isParameter = isParameter;
     this.sourcePosition = checkNotNull(sourcePosition);
+    this.annotations = annotations;
   }
 
   public void setTypeDescriptor(TypeDescriptor typeDescriptor) {
@@ -91,6 +95,11 @@ public class Variable extends NameDeclaration implements Cloneable<Variable> {
     return sourcePosition;
   }
 
+  @Override
+  public ImmutableList<Annotation> getAnnotations() {
+    return annotations;
+  }
+
   /** Builder for Variable. */
   public static class Builder {
 
@@ -99,6 +108,7 @@ public class Variable extends NameDeclaration implements Cloneable<Variable> {
     private boolean isFinal;
     private boolean isParameter;
     private SourcePosition sourcePosition = SourcePosition.NONE;
+    private ImmutableList<Annotation> annotations = ImmutableList.of();
 
     public static Builder from(Variable variable) {
       Builder builder = new Builder();
@@ -107,6 +117,7 @@ public class Variable extends NameDeclaration implements Cloneable<Variable> {
       builder.isFinal = variable.isFinal();
       builder.isParameter = variable.isParameter;
       builder.sourcePosition = variable.sourcePosition;
+      builder.annotations = variable.annotations;
       return builder;
     }
 
@@ -140,10 +151,16 @@ public class Variable extends NameDeclaration implements Cloneable<Variable> {
       return this;
     }
 
+    @CanIgnoreReturnValue
+    public Builder setAnnotations(ImmutableList<Annotation> annotations) {
+      this.annotations = annotations;
+      return this;
+    }
+
     public Variable build() {
       checkState(name != null);
       checkState(typeDescriptor != null);
-      return new Variable(sourcePosition, name, typeDescriptor, isFinal, isParameter);
+      return new Variable(sourcePosition, name, typeDescriptor, isFinal, isParameter, annotations);
     }
   }
 }
