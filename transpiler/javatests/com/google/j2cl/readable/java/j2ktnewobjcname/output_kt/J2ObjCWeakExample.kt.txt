@@ -21,40 +21,44 @@ import javaemul.lang.*
 import kotlin.Suppress
 
 class J2ObjCWeakExample {
- private val finalFoo: Foo?
+ private val finalNullableFoo: Foo?
 
  private val finalNonNullFoo: Foo
 
- private var fooWithoutInitializer: Foo? = null
+ private var nullableFooWithoutInitializer: Foo? = null
 
- private var fooWithInitializer: Foo? = Foo()
+ private var nullableFooWithInitializer: Foo? = Foo()
 
  private var nonNullFooWithoutInitializer: Foo
 
  private var nonNullFooWithInitializer: Foo = Foo()
 
  constructor() {
-  this.finalFoo = null
+  this.finalNullableFoo = null
   this.finalNonNullFoo = Foo()
   this.nonNullFooWithoutInitializer = Foo()
  }
 
- constructor(foo: Foo?) {
-  this.finalFoo = foo
-  this.finalNonNullFoo = foo!!
-  this.fooWithoutInitializer = foo
-  this.nonNullFooWithoutInitializer = foo!!
+ constructor(nullableFoo: Foo?, nonNullFoo: Foo) {
+  this.finalNullableFoo = nullableFoo
+  this.finalNonNullFoo = nullableFoo!!
+  this.nullableFooWithoutInitializer = nonNullFoo
+  this.nonNullFooWithoutInitializer = nonNullFoo
  }
 
- fun setFoo(foo: Foo?) {
-  this.fooWithoutInitializer = foo
-  this.fooWithInitializer = foo
-  this.nonNullFooWithoutInitializer = foo!!
-  this.nonNullFooWithInitializer = foo!!
+ fun setFoo(nullableFoo: Foo?, nonNullFoo: Foo) {
+  this.nullableFooWithoutInitializer = nullableFoo
+  this.nullableFooWithInitializer = nullableFoo
+  this.nonNullFooWithoutInitializer = nonNullFoo
+  this.nonNullFooWithInitializer = this.nonNullFooWithoutInitializer
  }
 
- fun getFoo(): Foo? {
-  return this.fooWithoutInitializer
+ fun getNullableFoo(): Foo? {
+  return this.nullableFooWithoutInitializer
+ }
+
+ fun getNonNullFoo(): Foo {
+  return this.nonNullFooWithoutInitializer
  }
 
  class Foo

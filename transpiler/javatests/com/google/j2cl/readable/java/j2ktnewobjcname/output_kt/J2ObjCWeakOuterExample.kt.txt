@@ -1,0 +1,60 @@
+// Generated from "j2ktnewobjcname/J2ObjCWeakOuterExample.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN")
+
+package j2ktnewobjcname
+
+import javaemul.lang.*
+import kotlin.String
+import kotlin.Suppress
+
+class J2ObjCWeakOuterExample {
+ private val string: String = "foo"
+
+ private val lambdaSupplierField: Supplier<String?>? = Supplier {
+  return@Supplier this.string
+ }
+
+ private val anonymousClassSupplierField: Supplier<String?>? = object : Supplier<String?> {
+  override fun get(): String? {
+   return this@J2ObjCWeakOuterExample.string
+  }
+ }
+
+ private fun testLambdaSupplierVariable() {
+  val unused: Supplier<String?> = Supplier {
+   return@Supplier this.string
+  }
+ }
+
+ private fun testAnonymousClassSupplierVariable() {
+  val unused: Supplier<String?> = object : Supplier<String?> {
+   override fun get(): String? {
+    return this@J2ObjCWeakOuterExample.string
+   }
+  }
+ }
+
+ fun interface Supplier<T> {
+  fun get(): T
+ }
+
+ open inner class InnerSupplier internal constructor(): Supplier<String?> {
+  override fun get(): String? {
+   return this@J2ObjCWeakOuterExample.string
+  }
+ }
+}

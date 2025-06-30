@@ -23,36 +23,40 @@ import org.jspecify.annotations.Nullable;
 public final class J2ObjCWeakExample {
   public static final class Foo {}
 
-  @Weak @Nullable private final Foo finalFoo;
+  @Weak @Nullable private final Foo finalNullableFoo;
   @Weak private final Foo finalNonNullFoo;
 
-  @Weak @Nullable private Foo fooWithoutInitializer;
-  @Weak @Nullable private Foo fooWithInitializer = new Foo();
+  @Weak @Nullable private Foo nullableFooWithoutInitializer;
+  @Weak @Nullable private Foo nullableFooWithInitializer = new Foo();
 
   @Weak private Foo nonNullFooWithoutInitializer;
   @Weak private Foo nonNullFooWithInitializer = new Foo();
 
   public J2ObjCWeakExample() {
-    this.finalFoo = null;
+    this.finalNullableFoo = null;
     this.finalNonNullFoo = new Foo();
     this.nonNullFooWithoutInitializer = new Foo();
   }
 
-  public J2ObjCWeakExample(@Nullable Foo foo) {
-    this.finalFoo = foo;
-    this.finalNonNullFoo = foo;
-    this.fooWithoutInitializer = foo;
-    this.nonNullFooWithoutInitializer = foo;
+  public J2ObjCWeakExample(@Nullable Foo nullableFoo, Foo nonNullFoo) {
+    this.finalNullableFoo = nullableFoo;
+    this.finalNonNullFoo = nullableFoo;
+    this.nullableFooWithoutInitializer = nonNullFoo;
+    this.nonNullFooWithoutInitializer = nonNullFoo;
   }
 
-  public void setFoo(@Nullable Foo foo) {
-    fooWithoutInitializer = foo;
-    fooWithInitializer = foo;
-    nonNullFooWithoutInitializer = foo;
-    nonNullFooWithInitializer = foo;
+  public void setFoo(@Nullable Foo nullableFoo, Foo nonNullFoo) {
+    nullableFooWithoutInitializer = nullableFoo;
+    nullableFooWithInitializer = nullableFoo;
+    nonNullFooWithoutInitializer = nonNullFoo;
+    nonNullFooWithInitializer = nonNullFooWithoutInitializer;
   }
 
-  public @Nullable Foo getFoo() {
-    return fooWithoutInitializer;
+  public @Nullable Foo getNullableFoo() {
+    return nullableFooWithoutInitializer;
+  }
+
+  public Foo getNonNullFoo() {
+    return nonNullFooWithoutInitializer;
   }
 }
