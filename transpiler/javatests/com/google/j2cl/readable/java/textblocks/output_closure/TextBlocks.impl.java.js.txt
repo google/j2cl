@@ -1,0 +1,62 @@
+goog.module('textblocks.TextBlocks$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class TextBlocks extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!TextBlocks} */
+ static $create__() {
+  TextBlocks.$clinit();
+  let $instance = new TextBlocks();
+  $instance.$ctor__textblocks_TextBlocks__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__textblocks_TextBlocks__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ m_main__void() {
+  let emptyTextBlock = '';
+  let textBlockWithTrailingNewLine = 'line with trailing newline\n';
+  let textBlockWithoutTrailingNewLine = 'line without trailing newline';
+  let textBlockWithContinuationLine = 'this line is continued here\n';
+  let textBlockWithContinuationToAvoidTrailingNewLine = 'line without trailing new line';
+  let textBlockWithEscapedBackslashAtEndOfLine = 'escaped backslash at the end of the line\\\nthis is in a new line\n';
+  let multilineTextBlockWithIncidentalWhitespace = 'Whitespace at the start of each line\n  is removed\n';
+  let multilineTextBlockWithIncidentalWhitespace2 = '  Whitespace at the start of each line\n    is removed according to ending quotes\n';
+  let multilineTextBlockWithIncidentalWhitespace3 = '  Whitespace at the start of each line\n    is removed according to ending quotes\n';
+  let multilineTextBlockWithIncidentalWhitespace4 = 'Ending quote has\n  more whitespace than lines\n';
+  let multilineTextBlockWithoutIncidentalWhitespaceBecauseOfTerminatingQuote = '        This line has all 8 spaces of indentation\n         8+1 spaces\n          8+2 spaces\n        because the ending quotes defining the indentation are at 0.\n';
+  let textBlockWithTrailingWhitespace = 'Trailing\nwhitespace\nin textblocks\nis removed\n';
+  let textBlockWithTrailingWhitespaceInOpeningDelimiter = 'Trailing whitespace in opening delimiter is removed';
+  let multilineTextBlockWithEmptyLines = '\nempty lines\n\nin between\n\n';
+  let multilineTextBlockWithNonSpaceIncidentalWhitespace = 'Unicode escapes and special whitespace characters\nat the start of each line are removed\n';
+  let textBlockWithQuotes = '\"enclosed in literal quotes\"\n';
+  let textBlockWithEscapedQuotes = '\"\"\"enclosed in literal triple quotes\"\"\"\n';
+  let textBlockWithTrailingEscapedQuote = 'quote at the end\"';
+  let textBlockWithControlCharacter = '\u0000\n';
+ }
+ /** @nodts */
+ static $clinit() {
+  TextBlocks.$clinit = () =>{};
+  TextBlocks.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof TextBlocks;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(TextBlocks, 'textblocks.TextBlocks');
+
+exports = TextBlocks;
+
+//# sourceMappingURL=TextBlocks.js.map
