@@ -147,8 +147,6 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
     !hiddenFromObjCMapping.contains(fieldDescriptor) &&
       fieldDescriptor.enclosingTypeDescriptor.typeDeclaration.let { enclosingTypeDeclaration ->
         needsObjCNameAnnotation(enclosingTypeDeclaration) &&
-          !enclosingTypeDeclaration.isLocal &&
-          !enclosingTypeDeclaration.isAnonymous &&
           environment.ktVisibility(fieldDescriptor).needsObjCNameAnnotation &&
           !NEW_OBJC_NAMES
       }
