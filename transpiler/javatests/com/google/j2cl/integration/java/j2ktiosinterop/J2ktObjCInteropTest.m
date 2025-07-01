@@ -3,6 +3,8 @@
 #import "transpiler/javatests/com/google/j2cl/integration/java/j2ktiosinterop/CustomNames.h"
 #import "transpiler/javatests/com/google/j2cl/integration/java/j2ktiosinterop/DefaultNames.h"
 #import "transpiler/javatests/com/google/j2cl/integration/java/j2ktiosinterop/EnumNames.h"
+#import "transpiler/javatests/com/google/j2cl/integration/java/j2ktiosinterop/Gc.h"
+#import "transpiler/javatests/com/google/j2cl/integration/java/j2ktiosinterop/Holder.h"
 
 /** J2KT interop test for ObjC. */
 @interface J2ktObjCInteropTest : XCTestCase
@@ -33,20 +35,20 @@
   [obj longMethodWithLong:1];
   [obj floatMethodWithFloat:1];
   [obj doubleMethodWithDouble:1];
-  [obj objectMethodWithId:NULL];
+  [obj objectMethodWithId:nil];
   [obj stringMethodWithNSString:@""];
-  [obj stringArrayMethodWithNSStringArray:NULL];
-  [obj stringArrayArrayMethodWithNSStringArray2:NULL];
-  [obj cloneableMethodWithNSCopying:NULL];
-  [obj numberMethodWithNSNumber:NULL];
-  [obj classMethodWithIOSClass:NULL];
-  [obj stringIterableMethodWithJavaLangIterable:NULL];
+  [obj stringArrayMethodWithNSStringArray:nil];
+  [obj stringArrayArrayMethodWithNSStringArray2:nil];
+  [obj cloneableMethodWithNSCopying:nil];
+  [obj numberMethodWithNSNumber:nil];
+  [obj classMethodWithIOSClass:nil];
+  [obj stringIterableMethodWithJavaLangIterable:nil];
   [obj intStringMethodWithInt:1 withNSString:@""];
 
-  [obj genericMethodWithId:NULL];
+  [obj genericMethodWithId:nil];
   [obj genericStringMethodWithNSString:@""];
 
-  [obj overloadedMethodWithId:NULL];
+  [obj overloadedMethodWithId:nil];
   [obj overloadedMethodWithInt:1];
   [obj overloadedMethodWithLong:1];
 
@@ -86,10 +88,9 @@
   [[[J2ktJ2ktiosinteropSpecialNames_WithLong alloc] init] getWithLong:1];
   [[[J2ktJ2ktiosinteropSpecialNames_WithFloat alloc] init] getWithFloat:1];
   [[[J2ktJ2ktiosinteropSpecialNames_WithDouble alloc] init] getWithDouble:1];
-  [[[J2ktJ2ktiosinteropSpecialNames_WithObject alloc] init] getWithId:NULL];
+  [[[J2ktJ2ktiosinteropSpecialNames_WithObject alloc] init] getWithId:nil];
   [[[J2ktJ2ktiosinteropSpecialNames_WithString alloc] init] getWithNSString:@""];
-  [[[J2ktJ2ktiosinteropSpecialNames_WithFoo alloc] init]
-      getWithJ2ktiosinteropSpecialNames_Foo:NULL];
+  [[[J2ktJ2ktiosinteropSpecialNames_WithFoo alloc] init] getWithJ2ktiosinteropSpecialNames_Foo:nil];
 }
 
 - (void)testCustomNames {
@@ -154,6 +155,101 @@
   J2ktiosinteropEnumNames_Enum e2;
   e2 = J2ktiosinteropEnumNames_Enum_ONE;
   e2 = J2ktiosinteropEnumNames_Enum_TWO;
+}
+
+- (void)testSupplier {
+  __weak J2ktiosinteropHolder *weakHolder = nil;
+
+  @autoreleasepool {
+    @autoreleasepool {
+      J2ktiosinteropHolder *holder = [[J2ktiosinteropHolder alloc] initWithId:nil];
+      [holder setWithId:[holder newSupplier]];
+      weakHolder = holder;
+      XCTAssertNotNil([holder get]);
+      XCTAssertNotNil(weakHolder);
+    }
+
+    XCTAssertNotNil(weakHolder);
+
+    [weakHolder setWithId:nil];
+    XCTAssertNil([weakHolder get]);
+    XCTAssertNotNil(weakHolder);
+  }
+  XCTAssertNotNil(weakHolder);
+
+  J2ktiosinteropGc_collect();
+  XCTAssertNil(weakHolder);
+}
+
+- (void)testWeakReferenceSupplier {
+  __weak J2ktiosinteropHolder *weakHolder = nil;
+
+  @autoreleasepool {
+    J2ktiosinteropHolder *holder = [[J2ktiosinteropHolder alloc] initWithId:nil];
+    [holder setWithId:[holder newWeakReferenceSupplier]];
+    weakHolder = holder;
+    XCTAssertNotNil([holder get]);
+    XCTAssertNotNil(weakHolder);
+  }
+
+  XCTAssertNotNil(weakHolder);
+
+  J2ktiosinteropGc_collect();
+  XCTAssertNil(weakHolder);
+}
+
+- (void)testWeakAnnotationSupplier {
+  __weak J2ktiosinteropHolder *weakHolder = nil;
+
+  @autoreleasepool {
+    J2ktiosinteropHolder *holder = [[J2ktiosinteropHolder alloc] initWithId:nil];
+    [holder setWithId:[holder newWeakAnnotationSupplier]];
+    weakHolder = holder;
+    XCTAssertNotNil([holder get]);
+    XCTAssertNotNil(weakHolder);
+  }
+
+  XCTAssertNotNil(weakHolder);
+
+  J2ktiosinteropGc_collect();
+  // TODO(b/428900562): Uncomment when @Weak annotation is supported.
+  // XCTAssertNil(weakHolder);
+}
+
+- (void)testWeakOuterAnnotationSupplier {
+  __weak J2ktiosinteropHolder *weakHolder = nil;
+
+  @autoreleasepool {
+    J2ktiosinteropHolder *holder = [[J2ktiosinteropHolder alloc] initWithId:nil];
+    [holder setWithId:[holder newWeakOuterAnnotationSupplier]];
+    weakHolder = holder;
+    XCTAssertNotNil([holder get]);
+    XCTAssertNotNil(weakHolder);
+  }
+
+  XCTAssertNotNil(weakHolder);
+
+  J2ktiosinteropGc_collect();
+  // TODO(b/428900562): Uncomment when @WeakOuter annotation is supported.
+  // XCTAssertNil(weakHolder);
+}
+
+- (void)testWeakOuterAnnotationLambdaSupplier {
+  __weak J2ktiosinteropHolder *weakHolder = nil;
+
+  @autoreleasepool {
+    J2ktiosinteropHolder *holder = [[J2ktiosinteropHolder alloc] initWithId:nil];
+    [holder setWithId:[holder newWeakOuterAnnotationLambdaSupplier]];
+    weakHolder = holder;
+    XCTAssertNotNil([holder get]);
+    XCTAssertNotNil(weakHolder);
+  }
+
+  XCTAssertNotNil(weakHolder);
+
+  J2ktiosinteropGc_collect();
+  // TODO(b/428900562): Uncomment when @WeakOuter annotation is supported.
+  // XCTAssertNil(weakHolder);
 }
 
 @end

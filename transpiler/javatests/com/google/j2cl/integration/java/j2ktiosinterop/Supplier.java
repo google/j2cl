@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 Google Inc.
+ * Copyright 2025 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -15,8 +15,10 @@
  */
 package j2ktiosinterop;
 
-public class Main {
-  public static void main(String... args) {
-    // The actual interop tests are "J2ktObjCInteropTest.m" and "J2ktSwiftInteropTest.swift".
-  }
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
+@NullMarked
+public interface Supplier<T extends @Nullable Object> {
+  T get();
 }
