@@ -9,18 +9,18 @@ class InnerClass1 extends Parent {
  /** @protected @nodts */
  constructor() {
   super();
-  /**@type {MultipleNestings} @nodts*/
+  /**@type {!MultipleNestings} @nodts*/
   this.$outer_this__innerclassinheritance_MultipleNestings_InnerClass1;
  }
  /** @nodts @return {!InnerClass1} */
- static $create__innerclassinheritance_MultipleNestings(/** MultipleNestings */ $outer_this) {
+ static $create__innerclassinheritance_MultipleNestings(/** !MultipleNestings */ $outer_this) {
   InnerClass1.$clinit();
   let $instance = new InnerClass1();
   $instance.$ctor__innerclassinheritance_MultipleNestings_InnerClass1__innerclassinheritance_MultipleNestings__void($outer_this);
   return $instance;
  }
  /** @nodts */
- $ctor__innerclassinheritance_MultipleNestings_InnerClass1__innerclassinheritance_MultipleNestings__void(/** MultipleNestings */ $outer_this) {
+ $ctor__innerclassinheritance_MultipleNestings_InnerClass1__innerclassinheritance_MultipleNestings__void(/** !MultipleNestings */ $outer_this) {
   this.$outer_this__innerclassinheritance_MultipleNestings_InnerClass1 = $outer_this;
   this.$ctor__innerclassinheritance_MultipleNestings_Parent__innerclassinheritance_MultipleNestings__void($outer_this);
  }

@@ -9,18 +9,18 @@ class Inner extends Parent {
  /** @protected @nodts */
  constructor() {
   super();
-  /**@type {Child} @nodts*/
+  /**@type {!Child} @nodts*/
   this.$outer_this__superfieldaccess_SuperFieldAccess_Child_Inner;
  }
  /** @nodts @return {!Inner} */
- static $create__superfieldaccess_SuperFieldAccess_Child(/** Child */ $outer_this) {
+ static $create__superfieldaccess_SuperFieldAccess_Child(/** !Child */ $outer_this) {
   Inner.$clinit();
   let $instance = new Inner();
   $instance.$ctor__superfieldaccess_SuperFieldAccess_Child_Inner__superfieldaccess_SuperFieldAccess_Child__void($outer_this);
   return $instance;
  }
  /** @nodts */
- $ctor__superfieldaccess_SuperFieldAccess_Child_Inner__superfieldaccess_SuperFieldAccess_Child__void(/** Child */ $outer_this) {
+ $ctor__superfieldaccess_SuperFieldAccess_Child_Inner__superfieldaccess_SuperFieldAccess_Child__void(/** !Child */ $outer_this) {
   this.$outer_this__superfieldaccess_SuperFieldAccess_Child_Inner = $outer_this;
   this.$ctor__superfieldaccess_SuperFieldAccess_Parent__java_lang_String__void('Inner');
  }

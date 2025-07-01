@@ -7,15 +7,15 @@ let JsConstructorClass = goog.forwardDeclare('jsconstructor.JsConstructorClass$i
 
 class JsConstructorSubclass extends JsConstructorClassWithExplicitConstructor {
  
- constructor(/** JsConstructorClass */ $outer_this) {
+ constructor(/** !JsConstructorClass */ $outer_this) {
   JsConstructorSubclass.$clinit();
   super($outer_this, 1);
-  /**@type {JsConstructorClass} @nodts*/
+  /**@type {!JsConstructorClass} @nodts*/
   this.$outer_this__jsconstructor_JsConstructorClass_JsConstructorSubclass;
   this.$ctor__jsconstructor_JsConstructorClass_JsConstructorSubclass__jsconstructor_JsConstructorClass__void($outer_this);
  }
  /** @nodts */
- $ctor__jsconstructor_JsConstructorClass_JsConstructorSubclass__jsconstructor_JsConstructorClass__void(/** JsConstructorClass */ $outer_this) {
+ $ctor__jsconstructor_JsConstructorClass_JsConstructorSubclass__jsconstructor_JsConstructorClass__void(/** !JsConstructorClass */ $outer_this) {
   this.$outer_this__jsconstructor_JsConstructorClass_JsConstructorSubclass = $outer_this;
   let /** number */ i;
   switch (0) {

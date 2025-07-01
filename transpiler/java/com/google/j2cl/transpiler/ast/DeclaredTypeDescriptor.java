@@ -484,11 +484,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor {
     return FieldDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(getDeclarationDescriptor())
         .setName("$outer_this")
-        .setTypeDescriptor(
-            getEnclosingTypeDescriptor()
-                // Consider the outer instance type to be nullable to be make the type consistent
-                // across all places where it is used (backing field and constructor parameters).
-                .toNullable())
+        .setTypeDescriptor(getEnclosingTypeDescriptor().toNonNullable())
         .setFinal(true)
         .setSynthetic(true)
         .setOrigin(FieldOrigin.SYNTHETIC_OUTER_FIELD)

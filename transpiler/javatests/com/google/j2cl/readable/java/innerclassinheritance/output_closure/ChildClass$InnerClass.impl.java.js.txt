@@ -9,20 +9,20 @@ class InnerClass extends ParentInner {
  /** @protected @nodts */
  constructor() {
   super();
-  /**@type {ChildClass} @nodts*/
+  /**@type {!ChildClass} @nodts*/
   this.$outer_this__innerclassinheritance_ChildClass_InnerClass;
   /**@type {number} @nodts*/
   this.f_fieldInInner__innerclassinheritance_ChildClass_InnerClass = 0;
  }
  /** @nodts @return {!InnerClass} */
- static $create__innerclassinheritance_ChildClass(/** ChildClass */ $outer_this) {
+ static $create__innerclassinheritance_ChildClass(/** !ChildClass */ $outer_this) {
   InnerClass.$clinit();
   let $instance = new InnerClass();
   $instance.$ctor__innerclassinheritance_ChildClass_InnerClass__innerclassinheritance_ChildClass__void($outer_this);
   return $instance;
  }
  /** @nodts */
- $ctor__innerclassinheritance_ChildClass_InnerClass__innerclassinheritance_ChildClass__void(/** ChildClass */ $outer_this) {
+ $ctor__innerclassinheritance_ChildClass_InnerClass__innerclassinheritance_ChildClass__void(/** !ChildClass */ $outer_this) {
   this.$outer_this__innerclassinheritance_ChildClass_InnerClass = $outer_this;
   this.$ctor__innerclassinheritance_ParentInner__void();
  }

@@ -12,18 +12,18 @@ class ObjectCapturingOuter extends j_l_Object {
  /** @protected @nodts */
  constructor() {
   super();
-  /**@type {MethodReferences<T>} @nodts*/
+  /**@type {!MethodReferences<T>} @nodts*/
   this.$outer_this__methodreferences_MethodReferences_ObjectCapturingOuter;
  }
  /** @nodts @template T @return {!ObjectCapturingOuter<T>} */
- static $create__methodreferences_MethodReferences(/** MethodReferences<T> */ $outer_this) {
+ static $create__methodreferences_MethodReferences(/** !MethodReferences<T> */ $outer_this) {
   ObjectCapturingOuter.$clinit();
   let $instance = new ObjectCapturingOuter();
   $instance.$ctor__methodreferences_MethodReferences_ObjectCapturingOuter__methodreferences_MethodReferences__void($outer_this);
   return $instance;
  }
  /** @nodts */
- $ctor__methodreferences_MethodReferences_ObjectCapturingOuter__methodreferences_MethodReferences__void(/** MethodReferences<T> */ $outer_this) {
+ $ctor__methodreferences_MethodReferences_ObjectCapturingOuter__methodreferences_MethodReferences__void(/** !MethodReferences<T> */ $outer_this) {
   this.$outer_this__methodreferences_MethodReferences_ObjectCapturingOuter = $outer_this;
   this.$ctor__java_lang_Object__void();
  }

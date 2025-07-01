@@ -10,18 +10,18 @@ class Sub extends Super {
  /** @protected @nodts */
  constructor() {
   super();
-  /**@type {Lambdas} @nodts*/
+  /**@type {!Lambdas} @nodts*/
   this.$outer_this__lambdas_Lambdas_Sub;
  }
  /** @nodts @return {!Sub} */
- static $create__lambdas_Lambdas(/** Lambdas */ $outer_this) {
+ static $create__lambdas_Lambdas(/** !Lambdas */ $outer_this) {
   Sub.$clinit();
   let $instance = new Sub();
   $instance.$ctor__lambdas_Lambdas_Sub__lambdas_Lambdas__void($outer_this);
   return $instance;
  }
  /** @nodts */
- $ctor__lambdas_Lambdas_Sub__lambdas_Lambdas__void(/** Lambdas */ $outer_this) {
+ $ctor__lambdas_Lambdas_Sub__lambdas_Lambdas__void(/** !Lambdas */ $outer_this) {
   this.$outer_this__lambdas_Lambdas_Sub = $outer_this;
   this.$ctor__lambdas_Lambdas_Super__lambdas_Lambdas__void($outer_this);
  }

@@ -15,11 +15,11 @@ class Exception2 extends RuntimeException {
  /** @protected @nodts */
  constructor() {
   super();
-  /**@type {TryCatch} @nodts*/
+  /**@type {!TryCatch} @nodts*/
   this.$outer_this__trycatch_TryCatch_Exception2;
  }
  /** @nodts @return {!Exception2} */
- static $create__trycatch_TryCatch(/** TryCatch */ $outer_this) {
+ static $create__trycatch_TryCatch(/** !TryCatch */ $outer_this) {
   Exception2.$clinit();
   let $instance = new Exception2();
   $instance.$ctor__trycatch_TryCatch_Exception2__trycatch_TryCatch__void($outer_this);
@@ -27,7 +27,7 @@ class Exception2 extends RuntimeException {
   return $instance;
  }
  /** @nodts */
- $ctor__trycatch_TryCatch_Exception2__trycatch_TryCatch__void(/** TryCatch */ $outer_this) {
+ $ctor__trycatch_TryCatch_Exception2__trycatch_TryCatch__void(/** !TryCatch */ $outer_this) {
   this.$outer_this__trycatch_TryCatch_Exception2 = $outer_this;
   this.$ctor__java_lang_RuntimeException__void();
  }

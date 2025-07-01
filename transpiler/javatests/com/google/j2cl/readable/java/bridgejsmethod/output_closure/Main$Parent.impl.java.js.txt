@@ -14,18 +14,18 @@ class Parent extends GrandParent {
  /** @protected @nodts */
  constructor() {
   super();
-  /**@type {Main} @nodts*/
+  /**@type {!Main} @nodts*/
   this.$outer_this__bridgejsmethod_Main_Parent;
  }
  /** @nodts @template T @return {!Parent<T>} */
- static $create__bridgejsmethod_Main(/** Main */ $outer_this) {
+ static $create__bridgejsmethod_Main(/** !Main */ $outer_this) {
   Parent.$clinit();
   let $instance = new Parent();
   $instance.$ctor__bridgejsmethod_Main_Parent__bridgejsmethod_Main__void($outer_this);
   return $instance;
  }
  /** @nodts */
- $ctor__bridgejsmethod_Main_Parent__bridgejsmethod_Main__void(/** Main */ $outer_this) {
+ $ctor__bridgejsmethod_Main_Parent__bridgejsmethod_Main__void(/** !Main */ $outer_this) {
   this.$outer_this__bridgejsmethod_Main_Parent = $outer_this;
   this.$ctor__bridgejsmethod_Main_GrandParent__bridgejsmethod_Main__void($outer_this);
  }

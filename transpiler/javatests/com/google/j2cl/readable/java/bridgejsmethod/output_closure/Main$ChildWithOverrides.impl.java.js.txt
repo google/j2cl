@@ -14,18 +14,18 @@ class ChildWithOverrides extends Parent {
  /** @protected @nodts */
  constructor() {
   super();
-  /**@type {Main} @nodts*/
+  /**@type {!Main} @nodts*/
   this.$outer_this__bridgejsmethod_Main_ChildWithOverrides;
  }
  /** @nodts @template T @return {!ChildWithOverrides<T>} */
- static $create__bridgejsmethod_Main(/** Main */ $outer_this) {
+ static $create__bridgejsmethod_Main(/** !Main */ $outer_this) {
   ChildWithOverrides.$clinit();
   let $instance = new ChildWithOverrides();
   $instance.$ctor__bridgejsmethod_Main_ChildWithOverrides__bridgejsmethod_Main__void($outer_this);
   return $instance;
  }
  /** @nodts */
- $ctor__bridgejsmethod_Main_ChildWithOverrides__bridgejsmethod_Main__void(/** Main */ $outer_this) {
+ $ctor__bridgejsmethod_Main_ChildWithOverrides__bridgejsmethod_Main__void(/** !Main */ $outer_this) {
   this.$outer_this__bridgejsmethod_Main_ChildWithOverrides = $outer_this;
   this.$ctor__bridgejsmethod_Main_Parent__bridgejsmethod_Main__void($outer_this);
  }

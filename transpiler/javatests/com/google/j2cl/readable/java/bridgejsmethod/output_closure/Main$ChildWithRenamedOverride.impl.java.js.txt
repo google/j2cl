@@ -13,18 +13,18 @@ class ChildWithRenamedOverride extends GrandParent {
  /** @protected @nodts */
  constructor() {
   super();
-  /**@type {Main} @nodts*/
+  /**@type {!Main} @nodts*/
   this.$outer_this__bridgejsmethod_Main_ChildWithRenamedOverride;
  }
  /** @nodts @return {!ChildWithRenamedOverride} */
- static $create__bridgejsmethod_Main(/** Main */ $outer_this) {
+ static $create__bridgejsmethod_Main(/** !Main */ $outer_this) {
   ChildWithRenamedOverride.$clinit();
   let $instance = new ChildWithRenamedOverride();
   $instance.$ctor__bridgejsmethod_Main_ChildWithRenamedOverride__bridgejsmethod_Main__void($outer_this);
   return $instance;
  }
  /** @nodts */
- $ctor__bridgejsmethod_Main_ChildWithRenamedOverride__bridgejsmethod_Main__void(/** Main */ $outer_this) {
+ $ctor__bridgejsmethod_Main_ChildWithRenamedOverride__bridgejsmethod_Main__void(/** !Main */ $outer_this) {
   this.$outer_this__bridgejsmethod_Main_ChildWithRenamedOverride = $outer_this;
   this.$ctor__bridgejsmethod_Main_GrandParent__bridgejsmethod_Main__void($outer_this);
  }
