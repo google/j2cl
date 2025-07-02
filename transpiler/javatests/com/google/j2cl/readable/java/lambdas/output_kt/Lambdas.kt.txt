@@ -18,8 +18,6 @@
 package lambdas
 
 import javaemul.lang.*
-import java.lang.Integer
-import java.lang.Long
 import java.lang.RuntimeException
 import java.lang.Void
 import javaemul.lang.MutableIterableJvm
@@ -182,11 +180,11 @@ open class Lambdas {
   )
   this.callWithBiFunction_pp_lambdas<Any?>(
    BiFunction { x_1: Any?, y_1: String? ->
-    return@BiFunction java.lang.Double.valueOf(3.0)
+    return@BiFunction 3.0
    },
   )
   val f: Function<in T, *> = Function { item: T ->
-   return@Function Long.valueOf(1L)
+   return@Function 1L
   }
   val f2: Function<Wrapper<String?>?, String?> = Function { item_1: Wrapper<String?>? ->
    return@Function item_1!!.wrapped_pp_lambdas
@@ -266,7 +264,7 @@ open class Lambdas {
     f1_1!!.apply(null)
    }
    val stringJsSupplier: JsSupplier<Int?> = JsSupplier {
-    return@JsSupplier Integer.valueOf(1)
+    return@JsSupplier 1
    }
    stringJsSupplier.get()
    val equals: Equals<Any?> = stringJsSupplier as Equals<Any?>

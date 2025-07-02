@@ -18,7 +18,6 @@
 package j2kt
 
 import javaemul.lang.*
-import java.lang.Integer
 import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
@@ -37,7 +36,7 @@ open class SmartCasts {
 
    internal constructor() {
     this.t_pp_j2kt = this as T
-    this.fieldInitializedInConstructor_pp_j2kt = Integer.valueOf(1)
+    this.fieldInitializedInConstructor_pp_j2kt = 1
    }
   }
  }
@@ -52,7 +51,7 @@ open class SmartCasts {
 
    init {
     this.t_pp_j2kt = this as T
-    this.fieldInitializedInInitializer_pp_j2kt = Integer.valueOf(1)
+    this.fieldInitializedInInitializer_pp_j2kt = 1
    }
   }
  }

@@ -72,33 +72,17 @@ open class BooleanOperations {
    },
   )
   var br: Boolean? = null
-  br = java.lang.Boolean.valueOf(
-   ls == rs,
-  )
-  br = java.lang.Boolean.valueOf(
-   ls != rs,
-  )
-  br = java.lang.Boolean.valueOf(
-   ls.xor(rs),
-  )
-  br = java.lang.Boolean.valueOf(
-   ls.and(rs),
-  )
-  br = java.lang.Boolean.valueOf(
-   ls.or(rs),
-  )
-  br = java.lang.Boolean.valueOf(
-   ls && rs,
-  )
-  br = java.lang.Boolean.valueOf(
-   ls || rs,
-  )
-  br = java.lang.Boolean.valueOf(
-   run {
-    ls = rs
-    ls
-   },
-  )
+  br = (ls == rs) as Boolean
+  br = (ls != rs) as Boolean
+  br = ls.xor(rs) as Boolean
+  br = ls.and(rs) as Boolean
+  br = ls.or(rs) as Boolean
+  br = (ls && rs) as Boolean
+  br = (ls || rs) as Boolean
+  br = run {
+   ls = rs
+   ls
+  } as Boolean
   if (ls == rs) {
    r = true
   }

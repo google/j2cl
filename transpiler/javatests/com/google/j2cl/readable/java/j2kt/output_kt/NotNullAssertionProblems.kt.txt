@@ -19,7 +19,6 @@ package j2kt
 
 import javaemul.lang.*
 import java.lang.Class
-import java.lang.Integer
 import kotlin.Any
 import kotlin.Array
 import kotlin.Int
@@ -211,9 +210,7 @@ open class NotNullAssertionProblems {
    val x: Any? = NotNullAssertionProblems.getUnsafeNull<Any>()
    if (x != null) {
     NotNullAssertionProblems.accept1<Int>(
-     Integer.valueOf(
-      x!!.hashCode(),
-     ),
+     x!!.hashCode(),
     )
    }
   }
@@ -271,9 +268,7 @@ open class NotNullAssertionProblems {
     )
     if (x != null) {
      NotNullAssertionProblems.accept1<Int>(
-      Integer.valueOf(
-       x!!.hashCode(),
-      ),
+      x!!.hashCode(),
      )
     }
    }

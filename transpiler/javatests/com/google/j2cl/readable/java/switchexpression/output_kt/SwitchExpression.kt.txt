@@ -41,13 +41,11 @@ open class SwitchExpression {
       throw RuntimeException()
      }
      else -> {
-      val j: Short? = java.lang.Short.valueOf(
-       run {
-        val ___value: Int = a
-        a = a + 1
-        ___value
-       }.toShort(),
-      )
+      val j: Short? = run {
+       val ___value: Int = a
+       a = a + 1
+       ___value
+      }.toShort()
       return@run j!!.toShort().toLong()
      }
     }
@@ -66,13 +64,11 @@ open class SwitchExpression {
       throw RuntimeException()
      }
      else -> {
-      val j: Short? = java.lang.Short.valueOf(
-       run {
-        val ___value: Int = a
-        a = a + 1
-        ___value
-       }.toShort(),
-      )
+      val j: Short? = run {
+       val ___value: Int = a
+       a = a + 1
+       ___value
+      }.toShort()
       while (j!!.toShort().toInt() < 3) {
        if (j!!.toShort().toInt() == 2) {
         return@run 2L

@@ -19,7 +19,6 @@ package jsfunction
 
 import javaemul.lang.*
 import java.lang.Class
-import java.lang.Integer
 import java.util.ArrayList
 import jsinterop.annotations.JsFunction
 import jsinterop.annotations.JsMethod
@@ -123,10 +122,7 @@ open class Main {
 
  open fun testVarArgsMethodReferenceToJsFuncion() {
   val c: ForEachCallBack<ElementalJsFunction?> = ForEachCallBack { arg0: ElementalJsFunction?, arg1: Int, arg2: Array<ElementalJsFunction?>? ->
-   return@ForEachCallBack arg0!!.call(
-    Integer.valueOf(arg1),
-    arg2,
-   )
+   return@ForEachCallBack arg0!!.call(arg1, arg2)
   }
  }
 
@@ -218,10 +214,7 @@ open class Main {
 
   @JvmStatic
   fun callInterfaceParameterized(f: JsBiFunction<String?, Int?>?, s: String?): String? {
-   return f!!.apply(
-    s,
-    Integer.valueOf(1),
-   )
+   return f!!.apply(s, 1)
   }
 
   @JvmStatic
@@ -236,26 +229,15 @@ open class Main {
 
   @JvmStatic
   fun callImplementorParameterized(f: TIntegerJsBiFunction<String?>?, s: String?): String? {
-   return f!!.apply(
-    s,
-    Integer.valueOf(1) as Int?,
-   )
+   return f!!.apply(s, 1)
   }
 
   @JvmStatic
   fun testParameterTypes() {
    val tIntegerJsBiFunction: JsBiFunction<Any?, Number?> = TIntegerJsBiFunction<String?>() as JsBiFunction<Any?, Number?>
    val doubleDoubleJsBiFunction: JsBiFunction<Any?, Number?> = DoubleDoubleJsBiFunction() as JsBiFunction<Any?, Number?>
-   Main.callInterfaceRaw(
-    tIntegerJsBiFunction,
-    "a",
-    Integer.valueOf(1) as Number?,
-   )
-   Main.callInterfaceRaw(
-    doubleDoubleJsBiFunction,
-    java.lang.Double.valueOf(1.1) as Any?,
-    java.lang.Double.valueOf(1.1) as Number?,
-   )
+   Main.callInterfaceRaw(tIntegerJsBiFunction, "a", 1)
+   Main.callInterfaceRaw(doubleDoubleJsBiFunction, 1.1, 1.1)
    Main.callInterfaceParameterized(
     tIntegerJsBiFunction as JsBiFunction<String?, Int?>?,
     "a",
@@ -263,30 +245,24 @@ open class Main {
    Main.callInterfaceUnparameterized<String?, Int?>(
     tIntegerJsBiFunction as JsBiFunction<String?, Int?>?,
     "a",
-    Integer.valueOf(1),
+    1,
    )
    Main.callInterfaceUnparameterized<Double?, Double?>(
     doubleDoubleJsBiFunction as JsBiFunction<Double?, Double?>?,
-    java.lang.Double.valueOf(1.1),
-    java.lang.Double.valueOf(1.1),
+    1.1,
+    1.1,
    )
    Main.callImplementorRaw(
     TIntegerJsBiFunction<Double?>() as TIntegerJsBiFunction<Any?>?,
-    java.lang.Double.valueOf(1.1) as Any?,
-    Integer.valueOf(1) as Int?,
+    1.1,
+    1,
    )
    Main.callImplementorParameterized(
     TIntegerJsBiFunction<String?>(),
     "",
    )
-   tIntegerJsBiFunction.apply(
-    "a",
-    Integer.valueOf(1),
-   )
-   doubleDoubleJsBiFunction.apply(
-    java.lang.Double.valueOf(1.1),
-    java.lang.Double.valueOf(1.1),
-   )
+   tIntegerJsBiFunction.apply("a", 1)
+   doubleDoubleJsBiFunction.apply(1.1, 1.1)
    Main.callOnFunction(
     DoubleDoubleJsBiFunction(),
    )

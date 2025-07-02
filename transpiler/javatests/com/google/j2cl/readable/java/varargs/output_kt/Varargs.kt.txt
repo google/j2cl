@@ -114,23 +114,13 @@ open class Varargs {
   v.testOverloaded(
    "foo" as Any,
   )
-  v.testOverloaded(
-   1.toLong(),
-  )
+  v.testOverloaded(1L)
   v.testOverloaded(
    java.lang.Long.valueOf(1L) as Any?,
   )
   v.testOverloaded(1L)
-  v.testOverloaded(
-   1L,
-   2.toLong(),
-   3L,
-  )
-  v.testOverloaded(
-   1.toLong(),
-   2.toLong(),
-   3L,
-  )
+  v.testOverloaded(1L, 2L, 3L)
+  v.testOverloaded(1L, 2L, 3L)
  }
 
  companion object {

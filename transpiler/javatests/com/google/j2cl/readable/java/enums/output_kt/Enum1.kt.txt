@@ -18,7 +18,6 @@
 package enums
 
 import javaemul.lang.*
-import java.lang.Integer
 import java.util.function.Function
 import kotlin.Any
 import kotlin.Array
@@ -82,9 +81,7 @@ enum class Enum2 {
 enum class Enum3 {
  VALUE1(
   Function { v: Int? ->
-   return@Function Integer.valueOf(
-    1 + v!!.toInt(),
-   )
+   return@Function 1 + v!!.toInt()
   },
  );
 

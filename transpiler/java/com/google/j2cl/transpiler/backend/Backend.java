@@ -87,6 +87,7 @@ import com.google.j2cl.transpiler.passes.InsertNarrowingPrimitiveConversionsJ2kt
 import com.google.j2cl.transpiler.passes.InsertNarrowingReferenceConversions;
 import com.google.j2cl.transpiler.passes.InsertNotNullAssertionToPolyNullMethodCalls;
 import com.google.j2cl.transpiler.passes.InsertNotNullAssertionsOnNullabilityMismatch;
+import com.google.j2cl.transpiler.passes.InsertNumericCoercionsForAutoboxing;
 import com.google.j2cl.transpiler.passes.InsertQualifierProjectionCasts;
 import com.google.j2cl.transpiler.passes.InsertRawTypeCasts;
 import com.google.j2cl.transpiler.passes.InsertStringConversions;
@@ -762,7 +763,7 @@ public enum Backend {
           () -> new ExpandCompoundAssignments(/* expandAll= */ true),
           RewriteAssignmentExpressions::new,
           () -> new InsertUnboxingConversions(/* areBooleanAndDoubleBoxed= */ true),
-          () -> new InsertBoxingConversions(/* areBooleanAndDoubleBoxed= */ true),
+          InsertNumericCoercionsForAutoboxing::new,
           InsertWideningPrimitiveConversionsJ2kt::new,
           InsertNarrowingPrimitiveConversionsJ2kt::new,
           NormalizeVarargParametersJ2kt::new,

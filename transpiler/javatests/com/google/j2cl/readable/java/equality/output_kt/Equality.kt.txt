@@ -18,10 +18,10 @@
 package equality
 
 import javaemul.lang.*
-import java.lang.Double
-import java.lang.Float
 import kotlin.Any
 import kotlin.Boolean
+import kotlin.Double
+import kotlin.Float
 import kotlin.IntArray
 import kotlin.Suppress
 
@@ -30,8 +30,8 @@ open class Equality {
   val a: Boolean = false == false
   val b: Boolean = 0 != 1
   val c: Boolean = Any() !== Any()
-  val d: Boolean = Double.valueOf(0.0) === Double.valueOf(0.0)
-  val e: Boolean = Float.valueOf(0.0f) === Float.valueOf(0.0f)
+  val d: Boolean = 0.0 as Double === 0.0 as Double
+  val e: Boolean = 0.0f as Float === 0.0f as Float
   val f: Boolean = null != Any()
   val g: Boolean = Any() != null
   val h: Boolean = null != IntArray(0)
