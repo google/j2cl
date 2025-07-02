@@ -291,6 +291,9 @@ open class Lambdas {
     return@MutableIterableJvm iterable!!.iterator()
    }
   }
+
+  @JvmStatic
+  private fun <T> acceptsSupplier(supplier: Supplier<T>?) {}
  }
 
  fun interface FunctionalInterface {
@@ -462,4 +465,10 @@ open class Lambdas {
    }
   }
  }
+
+ fun interface Supplier<T> {
+  fun get(): T
+ }
+
+ annotation class J2ktIncompatible
 }

@@ -300,23 +300,23 @@ class ExplicitNotNullable extends j_l_Object {
  /** @nodts */
  static m_testLambdaNullability__void() {
   ExplicitNotNullable.$clinit();
-  let lambda = Consumer.$adapt((s) =>{
+  let lambda = Consumer.$adapt((/** string */ s) =>{
    let s_1 = /**@type {string}*/ ($Casts.$to(s, j_l_String));
   });
-  let nullable = Consumer.$adapt((arg0) =>{
+  let nullable = Consumer.$adapt((/** string */ arg0) =>{
    let arg0_1 = /**@type {string}*/ ($Casts.$to(arg0, j_l_String));
    DefaultNullable.m_nullableAccept__java_lang_String__void(arg0_1);
   });
-  let nonNullable = Consumer.$adapt((arg0_2) =>{
+  let nonNullable = Consumer.$adapt((/** string */ arg0_2) =>{
    let arg0_3 = /**@type {string}*/ ($Casts.$to(arg0_2, j_l_String));
    ExplicitNotNullable.m_nonNullableAccept__java_lang_String__void(arg0_3);
   });
-  let newObject = Supplier.$adapt(() =>{
+  let newObject = Supplier.$adapt(/**  @return {!*}*/ (() =>{
    return j_l_Object.$create__();
-  });
-  let newArray = IntFunction.$adapt((/** number */ arg0_4) =>{
+  }));
+  let newArray = IntFunction.$adapt(/**  @return {!Array<!*>}*/ ((/** number */ arg0_4) =>{
    return new Array(arg0_4);
-  });
+  }));
  }
  /** @nodts */
  static m_nonNullableAccept__java_lang_String__void(/** string */ s) {
@@ -407,10 +407,10 @@ class ExplicitNotNullable extends j_l_Object {
   this.f_f28__nullability_explicitnotnullable_ExplicitNotNullable_ = (/**@type {!Array<?string>}*/ ($Arrays.$create([1], j_l_String)));
   this.f_f29__nullability_explicitnotnullable_ExplicitNotNullable_ = (/**@type {!Array<string>}*/ ($Arrays.$create([1], j_l_String)));
   this.f_f30__nullability_explicitnotnullable_ExplicitNotNullable_ = (/**@type {!Array<?string>}*/ ($Arrays.$create([1], j_l_String)));
-  this.f_i__nullability_explicitnotnullable_ExplicitNotNullable = ExplicitNotNullable_Function.$adapt((s) =>{
+  this.f_i__nullability_explicitnotnullable_ExplicitNotNullable = ExplicitNotNullable_Function.$adapt(/**  @return {string}*/ ((/** string */ s) =>{
    let s_1 = /**@type {string}*/ ($Casts.$to(s, j_l_String));
    return s_1;
-  });
+  }));
  }
  /** @nodts */
  static $clinit() {

@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.backend.closure;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
+import static java.util.stream.Collectors.joining;
 
 import com.google.common.collect.Iterables;
 import com.google.j2cl.common.SourcePosition;
@@ -25,7 +26,6 @@ import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.ArrayAccess;
 import com.google.j2cl.transpiler.ast.ArrayLength;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
-import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.AwaitExpression;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
@@ -60,6 +60,7 @@ import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
@@ -192,6 +193,11 @@ public final class ExpressionTranspiler {
 
       @Override
       public boolean enterFunctionExpression(FunctionExpression expression) {
+        String jsDoc = getJsDoc(expression);
+        if (!jsDoc.isEmpty()) {
+          sourceBuilder.append("/** " + jsDoc + "*/ (");
+        }
+
         if (expression.isJsAsync()) {
           sourceBuilder.append("async ");
         }
@@ -201,13 +207,45 @@ public final class ExpressionTranspiler {
         } else {
           renderArrowFunction(expression);
         }
+
+        if (!jsDoc.isEmpty()) {
+          sourceBuilder.append(")");
+        }
+
+        if (expression.isSuspendFunction() && expression.isCapturingEnclosingInstance()) {
+          // Unlike arrow functions that inherits the `this` from the enclosing scope, anonymous
+          // functions have their own `this` binding. To achieve the Java semantics for lambdas, we
+          // explicitly bind the anonymous function's `this` to the `this` of the enclosing scope.
+          sourceBuilder.append(".bind(this)");
+        }
+
         return false;
       }
 
+      private String getJsDoc(FunctionExpression expression) {
+        var methodDescriptor = expression.getDescriptor();
+        var typeParameterTypeDescriptors = methodDescriptor.getTypeParameterTypeDescriptors();
+        TypeDescriptor returnTypeDescriptor = methodDescriptor.getReturnTypeDescriptor();
+
+        var sb = new StringBuilder();
+        if (!typeParameterTypeDescriptors.isEmpty()) {
+          sb.append(" @template ");
+          sb.append(
+              typeParameterTypeDescriptors.stream()
+                  .map(TypeVariable::getName)
+                  .collect(joining(",")));
+        }
+
+        if (!TypeDescriptors.isPrimitiveVoid(returnTypeDescriptor)) {
+          sb.append(String.format(" @return {%s}", environment.getJsDocForReturn(expression)));
+        }
+        return sb.toString();
+      }
+
       private void renderArrowFunction(FunctionExpression expression) {
-        emitParameters(expression);
+        environment.emitParameters(sourceBuilder, expression);
         // After the header is emitted, emit the rest of the arrow function.
-        sourceBuilder.append(" =>");
+        sourceBuilder.append("=>");
         StatementTranspiler.render(expression.getBody(), environment, sourceBuilder);
       }
 
@@ -217,62 +255,9 @@ public final class ExpressionTranspiler {
         // https://github.com/tc39/proposal-generators-as-functions
         sourceBuilder.append("function* ");
 
-        emitParameters(expression);
+        environment.emitParameters(sourceBuilder, expression);
 
         StatementTranspiler.render(expression.getBody(), environment, sourceBuilder);
-
-        if (expression.isCapturingEnclosingInstance()) {
-          // Unlike arrow functions that inherits the `this` from the enclosing scope, anonymous
-          // functions have their own `this` binding. To achieve the Java semantics for lambdas, we
-          // explicitly bind the anonymous function's `this` to the `this` of the enclosing scope.
-          sourceBuilder.append(".bind(this)");
-        }
-      }
-
-      private void emitParameters(FunctionExpression expression) {
-        List<Variable> parameters = expression.getParameters();
-        sourceBuilder.append("(");
-
-        String separator = "";
-        for (int i = 0; i < parameters.size(); i++) {
-          sourceBuilder.append(separator);
-          // Emit parameters in the more readable inline short form.
-          emitParameter(expression, i);
-          separator = ", ";
-        }
-        sourceBuilder.append(")");
-      }
-
-      private void emitParameter(FunctionExpression expression, int i) {
-        Variable parameter = expression.getParameters().get(i);
-
-        if (parameter == expression.getJsVarargsParameter()) {
-          sourceBuilder.append("...");
-        }
-
-        // Avoid explicitly declaring unknown parameters in anonymous functions to avoid spurious
-        // conformance errors. Parameter annotations are not required for anonymous functions so
-        // they can be safely skipped here.
-        if (!isUnknownTypeParameter(expression, i)) {
-          // The inline type annotation for parameters has to be just right preceding the  parameter
-          // name, hence if it is a varargs parameter then it would be emitted as follows:
-          // ... /* <inline type annotation> */ <parameter name>
-          //
-          sourceBuilder.append("/** " + environment.getJsDocForParameter(expression, i) + " */ ");
-        }
-        // Render the parameter, which is not an expression but is just a name, so no parens.
-        renderNoParens(parameter);
-      }
-
-      private boolean isUnknownTypeParameter(FunctionExpression functionExpression, int i) {
-        Variable parameter = functionExpression.getParameters().get(i);
-
-        TypeDescriptor parameterType = parameter.getTypeDescriptor();
-        if (parameter == functionExpression.getJsVarargsParameter()) {
-          parameterType = ((ArrayTypeDescriptor) parameterType).getComponentTypeDescriptor();
-        }
-
-        return parameterType.isWildcardOrCapture();
       }
 
       @Override

@@ -53,18 +53,18 @@ class Main extends j_l_Object {
  }
  /** @nodts */
  m_testAsyncLambdas__void_$pp_jsasync() {
-  let i = AsyncInterface.$adapt(async () =>{
+  let i = AsyncInterface.$adapt(/**  @return {IThenable<Integer>}*/ (async () =>{
+   return /**@type {Promise<Integer>}*/ (Promise.resolve(/**@type {Integer}*/ ($Casts.$to(await (/**@type {Promise<Integer>}*/ (Promise.resolve(Integer.m_valueOf__int__java_lang_Integer(5)))), Integer))));
+  }));
+  let o = BaseInterface.$adapt(/**  @return {IThenable<Integer>}*/ (async () =>{
+   return /**@type {Promise<Integer>}*/ (Promise.resolve(/**@type {Integer}*/ ($Casts.$to(await this.f_x__jsasync_Main_, Integer))));
+  }));
+  let j = /**  @return {IThenable<Integer>}*/ (async () =>{
    return /**@type {Promise<Integer>}*/ (Promise.resolve(/**@type {Integer}*/ ($Casts.$to(await (/**@type {Promise<Integer>}*/ (Promise.resolve(Integer.m_valueOf__int__java_lang_Integer(5)))), Integer))));
   });
-  let o = BaseInterface.$adapt(async () =>{
+  let optimizableJsFunction = /**  @return {IThenable<Integer>}*/ (async () =>{
    return /**@type {Promise<Integer>}*/ (Promise.resolve(/**@type {Integer}*/ ($Casts.$to(await this.f_x__jsasync_Main_, Integer))));
   });
-  let j = async () =>{
-   return /**@type {Promise<Integer>}*/ (Promise.resolve(/**@type {Integer}*/ ($Casts.$to(await (/**@type {Promise<Integer>}*/ (Promise.resolve(Integer.m_valueOf__int__java_lang_Integer(5)))), Integer))));
-  };
-  let optimizableJsFunction = async () =>{
-   return /**@type {Promise<Integer>}*/ (Promise.resolve(/**@type {Integer}*/ ($Casts.$to(await this.f_x__jsasync_Main_, Integer))));
-  };
   let unoptimizableJsFunction = $3.$create__jsasync_Main(this);
  }
  /** @private @nodts */

@@ -346,7 +346,9 @@ public class CompilerMiscRegressionTest {
 
   @Test
   public <T> void testCompilesWithoutNPE_b147690014() {
-    acceptsSupplier(() -> new Object() {});
+    // TODO(b/428219461): The type descriptors for the anonymous class are inconsistent. Remove
+    // the raw cast once it if fixed.
+    acceptsSupplier((Supplier) () -> new Object() {});
   }
 
   private static <T> void acceptsSupplier(Supplier<T> supplier) {}

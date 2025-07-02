@@ -19,6 +19,8 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
+import static com.google.j2cl.transpiler.ast.AstUtils.isNonNativeJsEnum;
+import static com.google.j2cl.transpiler.ast.TypeDescriptors.getEnumBoxType;
 import static java.util.stream.Collectors.joining;
 
 import com.google.common.collect.ImmutableList;
@@ -26,7 +28,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Streams;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
-import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
@@ -70,9 +71,20 @@ class ClosureTypesGenerator {
   public String getJsDocForParameter(MethodLike methodLike, int index) {
     MethodDescriptor methodDescriptor = methodLike.getDescriptor();
     ParameterDescriptor parameterDescriptor = methodDescriptor.getParameterDescriptors().get(index);
-    return toClosureTypeParameter(
-            methodDescriptor, parameterDescriptor, parameterDescriptor.getTypeDescriptor())
+    TypeDescriptor parameterTypeDescriptor = parameterDescriptor.getTypeDescriptor();
+    TypeDescriptor parameterDeclarationDescriptor =
+        methodDescriptor.getDeclarationDescriptor().getParameterTypeDescriptors().get(index);
+    if (isSpecializedToNonNativeJsEnum(parameterDeclarationDescriptor, parameterTypeDescriptor)) {
+      // TODO(b/118615488): This should be performed as a transformation in the AST.
+      parameterTypeDescriptor = getEnumBoxType(parameterTypeDescriptor);
+    }
+    return toClosureTypeParameter(methodDescriptor, parameterDescriptor, parameterTypeDescriptor)
         .render();
+  }
+
+  private static boolean isSpecializedToNonNativeJsEnum(
+      TypeDescriptor declarationDescriptor, TypeDescriptor typeDescriptor) {
+    return declarationDescriptor.isTypeVariable() && isNonNativeJsEnum(typeDescriptor);
   }
 
   /**
@@ -125,7 +137,7 @@ class ClosureTypesGenerator {
     }
     ImmutableList<TypeDescriptor> replacedTypeArguments =
         typeDescriptor.getTypeArgumentDescriptors().stream()
-            .map(t -> AstUtils.isNonNativeJsEnum(t) ? TypeDescriptors.getEnumBoxType(t) : t)
+            .map(t -> isNonNativeJsEnum(t) ? getEnumBoxType(t) : t)
             .collect(toImmutableList());
 
     if (replacedTypeArguments.equals(typeDescriptor.getTypeArgumentDescriptors())) {
@@ -238,6 +250,12 @@ class ClosureTypesGenerator {
 
   private ClosureType getFunctionReturnClosureType(MethodDescriptor methodDescriptor) {
     TypeDescriptor returnTypeDescriptor = methodDescriptor.getReturnTypeDescriptor();
+    TypeDescriptor declarationReturnTypeDescriptor =
+        methodDescriptor.getDeclarationDescriptor().getReturnTypeDescriptor();
+    if (isSpecializedToNonNativeJsEnum(declarationReturnTypeDescriptor, returnTypeDescriptor)) {
+      // TODO(b/118615488): This should be performed as a transformation in the AST.
+      returnTypeDescriptor = getEnumBoxType(returnTypeDescriptor);
+    }
     ClosureType closureReturnType = getClosureType(returnTypeDescriptor);
 
     // For suspend functions (transpiled to JS Generators), returns the `Generator` type required by

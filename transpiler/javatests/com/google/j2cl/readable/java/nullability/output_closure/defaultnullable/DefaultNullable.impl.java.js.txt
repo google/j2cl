@@ -264,15 +264,15 @@ class DefaultNullable extends j_l_Object {
  /** @nodts */
  static m_testNonNullableLambdas__void() {
   DefaultNullable.$clinit();
-  let lambda = NullMarkedConsumer.$adapt((s) =>{
+  let lambda = NullMarkedConsumer.$adapt((/** ?string */ s) =>{
    let s_1 = /**@type {?string}*/ ($Casts.$to(s, j_l_String));
   });
-  let constructorReference = NullMarkedSupplier.$adapt(() =>{
+  let constructorReference = NullMarkedSupplier.$adapt(/**  @return {string}*/ (() =>{
    return j_l_String.$create__();
-  });
-  let newArrayReference = NullMarkedIntFunction.$adapt((/** number */ arg0) =>{
+  }));
+  let newArrayReference = NullMarkedIntFunction.$adapt(/**  @return {!Array<string>}*/ ((/** number */ arg0) =>{
    return /**@type {!Array<?string>}*/ ($Arrays.$create([arg0], j_l_String));
-  });
+  }));
  }
  /** @nodts */
  static m_accept__java_lang_String__void(/** ?string */ s) {

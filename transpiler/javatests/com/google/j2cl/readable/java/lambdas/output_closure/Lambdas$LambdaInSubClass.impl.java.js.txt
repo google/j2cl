@@ -22,7 +22,7 @@ class LambdaInSubClass extends Parent {
  }
  /** @nodts */
  m_testLambdaInSubclass__void() {
-  let l = FunctionalInterface.$adapt((/** number */ i) =>{
+  let l = FunctionalInterface.$adapt(/**  @return {number}*/ ((/** number */ i) =>{
    this.m_funInParent__void();
    this.m_funInParent__void();
    this.m_funInParent__void();
@@ -30,7 +30,7 @@ class LambdaInSubClass extends Parent {
    a = this.f_fieldInParent__lambdas_Lambdas_Parent;
    a = this.f_fieldInParent__lambdas_Lambdas_Parent;
    return a;
-  });
+  }));
  }
  /** @nodts */
  static $clinit() {

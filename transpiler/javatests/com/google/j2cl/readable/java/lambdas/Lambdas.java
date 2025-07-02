@@ -366,5 +366,23 @@ public class Lambdas {
     public static final EmptyInterfaceProvider provideFromField = () -> emptyInterface;
     public static final EmptyInterfaceProvider provideFromAnonImpl = () -> new EmptyInterface() {};
   }
+
+  // TODO(b/428219461): The type descriptors for the anonymous class are inconsistent. In the class
+  // declaration it does not have the enclosing method type parameter but in the inferred
+  // references it has. Remove @J2ktIncompatible when this is fixed and verify that
+  // the build.log error disappears.
+  @J2ktIncompatible
+  public <T> void testParameterizedTypeWithUnusedTypeVariable() {
+    acceptsSupplier(() -> new Object() {});
+  }
+
+  @java.lang.FunctionalInterface
+  public interface Supplier<T> {
+    T get();
+  }
+
+  private static <T> void acceptsSupplier(Supplier<T> supplier) {}
+
+  @interface J2ktIncompatible {}
 }
 

@@ -39,6 +39,7 @@ import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
@@ -78,9 +79,13 @@ class ImportGatherer extends AbstractVisitor {
 
   @Override
   public void exitFunctionExpression(FunctionExpression functionExpression) {
-    for (Variable parameter : functionExpression.getParameters()) {
-      collectForJsDoc(parameter.getTypeDescriptor());
+    // Collect types from method descriptor since these are used to emit
+    // parameter and return typing.
+    for (ParameterDescriptor parameterDescriptor :
+        functionExpression.getDescriptor().getParameterDescriptors()) {
+      collectForJsDoc(parameterDescriptor.getTypeDescriptor());
     }
+    collectForJsDoc(functionExpression.getDescriptor().getReturnTypeDescriptor());
   }
 
   @Override

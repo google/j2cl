@@ -86,6 +86,12 @@
  ))
 )
 
+;;; Code for lambdas.Lambdas.Supplier [type definition]
+(type $lambdas.Lambdas.Supplier.vtable (sub (struct
+ (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
+ ))
+)
+
 ;;; Code for lambdas.Lambdas.Thenable.$Overlay [type definition]
 (type $lambdas.Lambdas.Thenable.$Overlay.vtable (sub (struct
  ))
@@ -119,6 +125,7 @@
  (field $m_testLambdaReturningVoidAsExpression__void (ref $function.m_testLambdaReturningVoidAsExpression__void))
  (field $m_testLambdaWithGenerics__void (ref $function.m_testLambdaWithGenerics__void))
  (field $m_testNestedLambdas__void (ref $function.m_testNestedLambdas__void))
+ (field $m_testParameterizedTypeWithUnusedTypeVariable__void (ref $function.m_testParameterizedTypeWithUnusedTypeVariable__void))
  (field $m_testReturnLabelNameConflictKotlin__void (ref $function.m_testReturnLabelNameConflictKotlin__void))
  ))
 )
@@ -275,19 +282,51 @@
  ))
 )
 
-;;; Code for lambdas.Lambdas.3 [type definition]
-(type $lambdas.Lambdas.3.vtable (sub $java.lang.Object.vtable (struct
+;;; Code for lambdas.Lambdas.Supplier.$LambdaAdaptor [type definition]
+(type $lambdas.Lambdas.Supplier.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
+ ))
+)
+(type $lambdas.Lambdas.Supplier.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $lambdas.Lambdas.Supplier.$LambdaAdaptor.vtable))
+ (field $itable (ref $lambdas.Lambdas.Supplier.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
+;;; Code for lambdas.Lambdas.4 [type definition]
+(type $lambdas.Lambdas.4.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
-(type $lambdas.Lambdas.3 (sub $java.lang.Object (struct
- (field $vtable (ref $lambdas.Lambdas.3.vtable))
+(type $lambdas.Lambdas.4 (sub $java.lang.Object (struct
+ (field $vtable (ref $lambdas.Lambdas.4.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@lambdas.Lambdas.3 (mut (ref null $lambdas.Lambdas)))
+ (field $$outer_this@lambdas.Lambdas.4 (mut (ref null $lambdas.Lambdas)))
+ ))
+)
+
+;;; Code for lambdas.Lambdas.1 [type definition]
+(type $lambdas.Lambdas.1.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+(type $lambdas.Lambdas.1 (sub $java.lang.Object (struct
+ (field $vtable (ref $lambdas.Lambdas.1.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@lambdas.Lambdas.1 (mut (ref null $lambdas.Lambdas)))
  ))
 )
 
@@ -424,6 +463,12 @@
  (field $vtable (ref $lambdas.Lambdas.ProviderHolder.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
+;;; Code for lambdas.Lambdas.J2ktIncompatible [type definition]
+(type $lambdas.Lambdas.J2ktIncompatible.vtable (sub $java.lang.annotation.Annotation.vtable (struct
+ (field $m_annotationType__java_lang_Class (ref $function.m_annotationType__java_lang_Class))
  ))
 )
 
@@ -936,8 +981,26 @@
  ))
 )
 
-;;; Code for lambdas.Lambdas.BiFunction.$LambdaImplementor$30 [type definition]
-(type $lambdas.Lambdas.BiFunction.$LambdaImplementor$30.vtable (sub $lambdas.Lambdas.BiFunction.$LambdaAdaptor.vtable (struct
+;;; Code for lambdas.Lambdas.$LambdaImplementor$30 [type definition]
+(type $lambdas.Lambdas.$LambdaImplementor$30.vtable (sub $lambdas.Lambdas.Supplier.$LambdaAdaptor.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
+ (field $m_get__lambdas_Lambdas_1 (ref $function.m_get__lambdas_Lambdas_1))
+ ))
+)
+(type $lambdas.Lambdas.$LambdaImplementor$30 (sub $lambdas.Lambdas.Supplier.$LambdaAdaptor (struct
+ (field $vtable (ref $lambdas.Lambdas.$LambdaImplementor$30.vtable))
+ (field $itable (ref $lambdas.Lambdas.$LambdaImplementor$30.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@lambdas.Lambdas.$LambdaImplementor$30 (mut (ref null $lambdas.Lambdas)))
+ ))
+)
+
+;;; Code for lambdas.Lambdas.BiFunction.$LambdaImplementor$31 [type definition]
+(type $lambdas.Lambdas.BiFunction.$LambdaImplementor$31.vtable (sub $lambdas.Lambdas.BiFunction.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
@@ -946,17 +1009,17 @@
  (field $m_apply__java_lang_Object__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object__java_lang_Object))
  ))
 )
-(type $lambdas.Lambdas.BiFunction.$LambdaImplementor$30 (sub $lambdas.Lambdas.BiFunction.$LambdaAdaptor (struct
- (field $vtable (ref $lambdas.Lambdas.BiFunction.$LambdaImplementor$30.vtable))
- (field $itable (ref $lambdas.Lambdas.BiFunction.$LambdaImplementor$30.itable))
+(type $lambdas.Lambdas.BiFunction.$LambdaImplementor$31 (sub $lambdas.Lambdas.BiFunction.$LambdaAdaptor (struct
+ (field $vtable (ref $lambdas.Lambdas.BiFunction.$LambdaImplementor$31.vtable))
+ (field $itable (ref $lambdas.Lambdas.BiFunction.$LambdaImplementor$31.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$captured_after@lambdas.Lambdas.BiFunction.$LambdaImplementor$30 (mut (ref null $java.lang.Object)))
- (field $$outer_this@lambdas.Lambdas.BiFunction.$LambdaImplementor$30 (mut (ref null $java.lang.Object)))
+ (field $$captured_after@lambdas.Lambdas.BiFunction.$LambdaImplementor$31 (mut (ref null $java.lang.Object)))
+ (field $$outer_this@lambdas.Lambdas.BiFunction.$LambdaImplementor$31 (mut (ref null $java.lang.Object)))
  ))
 )
 
-;;; Code for lambdas.Lambdas.Function.$LambdaImplementor$31 [type definition]
-(type $lambdas.Lambdas.Function.$LambdaImplementor$31.vtable (sub $lambdas.Lambdas.Function.$LambdaAdaptor.vtable (struct
+;;; Code for lambdas.Lambdas.Function.$LambdaImplementor$32 [type definition]
+(type $lambdas.Lambdas.Function.$LambdaImplementor$32.vtable (sub $lambdas.Lambdas.Function.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
@@ -964,15 +1027,15 @@
  (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
  ))
 )
-(type $lambdas.Lambdas.Function.$LambdaImplementor$31 (sub $lambdas.Lambdas.Function.$LambdaAdaptor (struct
- (field $vtable (ref $lambdas.Lambdas.Function.$LambdaImplementor$31.vtable))
- (field $itable (ref $lambdas.Lambdas.Function.$LambdaImplementor$31.itable))
+(type $lambdas.Lambdas.Function.$LambdaImplementor$32 (sub $lambdas.Lambdas.Function.$LambdaAdaptor (struct
+ (field $vtable (ref $lambdas.Lambdas.Function.$LambdaImplementor$32.vtable))
+ (field $itable (ref $lambdas.Lambdas.Function.$LambdaImplementor$32.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
 
-;;; Code for lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 [type definition]
-(type $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32.vtable (sub $lambdas.Lambdas.FunctionalInterface.$LambdaAdaptor.vtable (struct
+;;; Code for lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 [type definition]
+(type $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33.vtable (sub $lambdas.Lambdas.FunctionalInterface.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
@@ -980,11 +1043,11 @@
  (field $m_m__int__int (ref $function.m_m__int__int))
  ))
 )
-(type $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 (sub $lambdas.Lambdas.FunctionalInterface.$LambdaAdaptor (struct
- (field $vtable (ref $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32.vtable))
- (field $itable (ref $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32.itable))
+(type $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 (sub $lambdas.Lambdas.FunctionalInterface.$LambdaAdaptor (struct
+ (field $vtable (ref $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33.vtable))
+ (field $itable (ref $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 (mut (ref null $lambdas.Lambdas.LambdaInSubClass)))
+ (field $$outer_this@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 (mut (ref null $lambdas.Lambdas.LambdaInSubClass)))
  ))
 )
 
@@ -1006,8 +1069,8 @@
  ))
 )
 
-;;; Code for lambdas.Lambdas.Outer.$LambdaImplementor$33 [type definition]
-(type $lambdas.Lambdas.Outer.$LambdaImplementor$33.vtable (sub $lambdas.Lambdas.Runnable.$LambdaAdaptor.vtable (struct
+;;; Code for lambdas.Lambdas.Outer.$LambdaImplementor$34 [type definition]
+(type $lambdas.Lambdas.Outer.$LambdaImplementor$34.vtable (sub $lambdas.Lambdas.Runnable.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
@@ -1015,16 +1078,16 @@
  (field $m_run__void (ref $function.m_run__void))
  ))
 )
-(type $lambdas.Lambdas.Outer.$LambdaImplementor$33 (sub $lambdas.Lambdas.Runnable.$LambdaAdaptor (struct
- (field $vtable (ref $lambdas.Lambdas.Outer.$LambdaImplementor$33.vtable))
- (field $itable (ref $lambdas.Lambdas.Outer.$LambdaImplementor$33.itable))
+(type $lambdas.Lambdas.Outer.$LambdaImplementor$34 (sub $lambdas.Lambdas.Runnable.$LambdaAdaptor (struct
+ (field $vtable (ref $lambdas.Lambdas.Outer.$LambdaImplementor$34.vtable))
+ (field $itable (ref $lambdas.Lambdas.Outer.$LambdaImplementor$34.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@lambdas.Lambdas.Outer.$LambdaImplementor$33 (mut (ref null $lambdas.Lambdas.Outer)))
+ (field $$outer_this@lambdas.Lambdas.Outer.$LambdaImplementor$34 (mut (ref null $lambdas.Lambdas.Outer)))
  ))
 )
 
-;;; Code for lambdas.Lambdas.Sub.$LambdaImplementor$34 [type definition]
-(type $lambdas.Lambdas.Sub.$LambdaImplementor$34.vtable (sub $lambdas.Lambdas.Runnable.$LambdaAdaptor.vtable (struct
+;;; Code for lambdas.Lambdas.Sub.$LambdaImplementor$35 [type definition]
+(type $lambdas.Lambdas.Sub.$LambdaImplementor$35.vtable (sub $lambdas.Lambdas.Runnable.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
@@ -1032,11 +1095,11 @@
  (field $m_run__void (ref $function.m_run__void))
  ))
 )
-(type $lambdas.Lambdas.Sub.$LambdaImplementor$34 (sub $lambdas.Lambdas.Runnable.$LambdaAdaptor (struct
- (field $vtable (ref $lambdas.Lambdas.Sub.$LambdaImplementor$34.vtable))
- (field $itable (ref $lambdas.Lambdas.Sub.$LambdaImplementor$34.itable))
+(type $lambdas.Lambdas.Sub.$LambdaImplementor$35 (sub $lambdas.Lambdas.Runnable.$LambdaAdaptor (struct
+ (field $vtable (ref $lambdas.Lambdas.Sub.$LambdaImplementor$35.vtable))
+ (field $itable (ref $lambdas.Lambdas.Sub.$LambdaImplementor$35.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@lambdas.Lambdas.Sub.$LambdaImplementor$34 (mut (ref null $lambdas.Lambdas.Sub)))
+ (field $$outer_this@lambdas.Lambdas.Sub.$LambdaImplementor$35 (mut (ref null $lambdas.Lambdas.Sub)))
  ))
 )
 
@@ -1059,8 +1122,8 @@
  ))
 )
 
-;;; Code for lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35 [type definition]
-(type $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35.vtable (sub $lambdas.Lambdas.Runnable.$LambdaAdaptor.vtable (struct
+;;; Code for lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36 [type definition]
+(type $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36.vtable (sub $lambdas.Lambdas.Runnable.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
@@ -1068,11 +1131,11 @@
  (field $m_run__void (ref $function.m_run__void))
  ))
 )
-(type $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35 (sub $lambdas.Lambdas.Runnable.$LambdaAdaptor (struct
- (field $vtable (ref $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35.vtable))
- (field $itable (ref $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35.itable))
+(type $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36 (sub $lambdas.Lambdas.Runnable.$LambdaAdaptor (struct
+ (field $vtable (ref $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36.vtable))
+ (field $itable (ref $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35 (mut (ref null $lambdas.Lambdas.SubWithLambda)))
+ (field $$outer_this@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36 (mut (ref null $lambdas.Lambdas.SubWithLambda)))
  ))
 )
 
@@ -1095,22 +1158,6 @@
  ))
 )
 
-;;; Code for lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36 [type definition]
-(type $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36.vtable (sub $lambdas.Lambdas.EmptyInterfaceProvider.$LambdaAdaptor.vtable (struct
- (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_provide__lambdas_Lambdas_EmptyInterface (ref $function.m_provide__lambdas_Lambdas_EmptyInterface))
- ))
-)
-(type $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36 (sub $lambdas.Lambdas.EmptyInterfaceProvider.$LambdaAdaptor (struct
- (field $vtable (ref $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36.vtable))
- (field $itable (ref $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
-
 ;;; Code for lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37 [type definition]
 (type $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37.vtable (sub $lambdas.Lambdas.EmptyInterfaceProvider.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
@@ -1123,6 +1170,22 @@
 (type $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37 (sub $lambdas.Lambdas.EmptyInterfaceProvider.$LambdaAdaptor (struct
  (field $vtable (ref $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37.vtable))
  (field $itable (ref $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+
+;;; Code for lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38 [type definition]
+(type $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38.vtable (sub $lambdas.Lambdas.EmptyInterfaceProvider.$LambdaAdaptor.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_provide__lambdas_Lambdas_EmptyInterface (ref $function.m_provide__lambdas_Lambdas_EmptyInterface))
+ ))
+)
+(type $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38 (sub $lambdas.Lambdas.EmptyInterfaceProvider.$LambdaAdaptor (struct
+ (field $vtable (ref $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38.vtable))
+ (field $itable (ref $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
@@ -1159,6 +1222,8 @@
 
 ;;; Code for lambdas.Lambdas.EmptyInterfaceProvider [imports]
 
+;;; Code for lambdas.Lambdas.Supplier [imports]
+
 ;;; Code for lambdas.Lambdas.Thenable.$Overlay [imports]
 
 ;;; Code for lambdas.Lambdas.AnotherThenable.$Overlay [imports]
@@ -1183,7 +1248,11 @@
 
 ;;; Code for lambdas.Lambdas.EmptyInterfaceProvider.$LambdaAdaptor [imports]
 
-;;; Code for lambdas.Lambdas.3 [imports]
+;;; Code for lambdas.Lambdas.Supplier.$LambdaAdaptor [imports]
+
+;;; Code for lambdas.Lambdas.4 [imports]
+
+;;; Code for lambdas.Lambdas.1 [imports]
 
 ;;; Code for lambdas.Lambdas.Wrapper [imports]
 
@@ -1202,6 +1271,8 @@
 ;;; Code for lambdas.Lambdas.ProviderHolder.2 [imports]
 
 ;;; Code for lambdas.Lambdas.ProviderHolder [imports]
+
+;;; Code for lambdas.Lambdas.J2ktIncompatible [imports]
 
 ;;; Code for lambdas.Lambdas.JsSupplier.$LambdaAdaptor [imports]
 
@@ -1263,27 +1334,29 @@
 
 ;;; Code for lambdas.Lambdas.$LambdaImplementor$29 [imports]
 
-;;; Code for lambdas.Lambdas.BiFunction.$LambdaImplementor$30 [imports]
+;;; Code for lambdas.Lambdas.$LambdaImplementor$30 [imports]
 
-;;; Code for lambdas.Lambdas.Function.$LambdaImplementor$31 [imports]
+;;; Code for lambdas.Lambdas.BiFunction.$LambdaImplementor$31 [imports]
 
-;;; Code for lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 [imports]
+;;; Code for lambdas.Lambdas.Function.$LambdaImplementor$32 [imports]
+
+;;; Code for lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 [imports]
 
 ;;; Code for lambdas.Lambdas.LambdaInSubClass [imports]
 
-;;; Code for lambdas.Lambdas.Outer.$LambdaImplementor$33 [imports]
+;;; Code for lambdas.Lambdas.Outer.$LambdaImplementor$34 [imports]
 
-;;; Code for lambdas.Lambdas.Sub.$LambdaImplementor$34 [imports]
+;;; Code for lambdas.Lambdas.Sub.$LambdaImplementor$35 [imports]
 
 ;;; Code for lambdas.Lambdas.Sub [imports]
 
-;;; Code for lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35 [imports]
+;;; Code for lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36 [imports]
 
 ;;; Code for lambdas.Lambdas.SubWithLambda [imports]
 
-;;; Code for lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36 [imports]
-
 ;;; Code for lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37 [imports]
+
+;;; Code for lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38 [imports]
 
 ;;; Code for lambdas.Lambdas [static fields]
 (global $identityFunction@lambdas.Lambdas (mut (ref null $lambdas.Lambdas.IdentityFunction))
@@ -1373,6 +1446,14 @@
  (i32.const 0)
 )
 (global $$class@lambdas.Lambdas.EmptyInterfaceProvider.$LambdaAdaptor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for lambdas.Lambdas.Supplier.$LambdaAdaptor [static fields]
+(global $$class-initialized@lambdas.Lambdas.Supplier.$LambdaAdaptor (mut i32)
+ (i32.const 0)
+)
+(global $$class@lambdas.Lambdas.Supplier.$LambdaAdaptor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -1560,11 +1641,11 @@
  (ref.null $java.lang.Class)
 )
 
-;;; Code for lambdas.Lambdas.3 [static fields]
-(global $$class-initialized@lambdas.Lambdas.3 (mut i32)
+;;; Code for lambdas.Lambdas.4 [static fields]
+(global $$class-initialized@lambdas.Lambdas.4 (mut i32)
  (i32.const 0)
 )
-(global $$class@lambdas.Lambdas.3 (mut (ref null $java.lang.Class))
+(global $$class@lambdas.Lambdas.4 (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -1616,6 +1697,22 @@
  (ref.null $java.lang.Class)
 )
 
+;;; Code for lambdas.Lambdas.1 [static fields]
+(global $$class-initialized@lambdas.Lambdas.1 (mut i32)
+ (i32.const 0)
+)
+(global $$class@lambdas.Lambdas.1 (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for lambdas.Lambdas.$LambdaImplementor$30 [static fields]
+(global $$class-initialized@lambdas.Lambdas.$LambdaImplementor$30 (mut i32)
+ (i32.const 0)
+)
+(global $$class@lambdas.Lambdas.$LambdaImplementor$30 (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
 ;;; Code for lambdas.Lambdas.FunctionalInterface [static fields]
 (global $$class-initialized@lambdas.Lambdas.FunctionalInterface (mut i32)
  (i32.const 0)
@@ -1640,11 +1737,11 @@
  (ref.null $java.lang.Class)
 )
 
-;;; Code for lambdas.Lambdas.BiFunction.$LambdaImplementor$30 [static fields]
-(global $$class-initialized@lambdas.Lambdas.BiFunction.$LambdaImplementor$30 (mut i32)
+;;; Code for lambdas.Lambdas.BiFunction.$LambdaImplementor$31 [static fields]
+(global $$class-initialized@lambdas.Lambdas.BiFunction.$LambdaImplementor$31 (mut i32)
  (i32.const 0)
 )
-(global $$class@lambdas.Lambdas.BiFunction.$LambdaImplementor$30 (mut (ref null $java.lang.Class))
+(global $$class@lambdas.Lambdas.BiFunction.$LambdaImplementor$31 (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -1656,11 +1753,11 @@
  (ref.null $java.lang.Class)
 )
 
-;;; Code for lambdas.Lambdas.Function.$LambdaImplementor$31 [static fields]
-(global $$class-initialized@lambdas.Lambdas.Function.$LambdaImplementor$31 (mut i32)
+;;; Code for lambdas.Lambdas.Function.$LambdaImplementor$32 [static fields]
+(global $$class-initialized@lambdas.Lambdas.Function.$LambdaImplementor$32 (mut i32)
  (i32.const 0)
 )
-(global $$class@lambdas.Lambdas.Function.$LambdaImplementor$31 (mut (ref null $java.lang.Class))
+(global $$class@lambdas.Lambdas.Function.$LambdaImplementor$32 (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -1696,11 +1793,11 @@
  (ref.null $java.lang.Class)
 )
 
-;;; Code for lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 [static fields]
-(global $$class-initialized@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 (mut i32)
+;;; Code for lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 [static fields]
+(global $$class-initialized@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 (mut i32)
  (i32.const 0)
 )
-(global $$class@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 (mut (ref null $java.lang.Class))
+(global $$class@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -1776,11 +1873,11 @@
  (ref.null $java.lang.Class)
 )
 
-;;; Code for lambdas.Lambdas.Outer.$LambdaImplementor$33 [static fields]
-(global $$class-initialized@lambdas.Lambdas.Outer.$LambdaImplementor$33 (mut i32)
+;;; Code for lambdas.Lambdas.Outer.$LambdaImplementor$34 [static fields]
+(global $$class-initialized@lambdas.Lambdas.Outer.$LambdaImplementor$34 (mut i32)
  (i32.const 0)
 )
-(global $$class@lambdas.Lambdas.Outer.$LambdaImplementor$33 (mut (ref null $java.lang.Class))
+(global $$class@lambdas.Lambdas.Outer.$LambdaImplementor$34 (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -1800,11 +1897,11 @@
  (ref.null $java.lang.Class)
 )
 
-;;; Code for lambdas.Lambdas.Sub.$LambdaImplementor$34 [static fields]
-(global $$class-initialized@lambdas.Lambdas.Sub.$LambdaImplementor$34 (mut i32)
+;;; Code for lambdas.Lambdas.Sub.$LambdaImplementor$35 [static fields]
+(global $$class-initialized@lambdas.Lambdas.Sub.$LambdaImplementor$35 (mut i32)
  (i32.const 0)
 )
-(global $$class@lambdas.Lambdas.Sub.$LambdaImplementor$34 (mut (ref null $java.lang.Class))
+(global $$class@lambdas.Lambdas.Sub.$LambdaImplementor$35 (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -1816,11 +1913,11 @@
  (ref.null $java.lang.Class)
 )
 
-;;; Code for lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35 [static fields]
-(global $$class-initialized@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35 (mut i32)
+;;; Code for lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36 [static fields]
+(global $$class-initialized@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36 (mut i32)
  (i32.const 0)
 )
-(global $$class@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35 (mut (ref null $java.lang.Class))
+(global $$class@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36 (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -1856,11 +1953,11 @@
  (ref.null $java.lang.Class)
 )
 
-;;; Code for lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36 [static fields]
-(global $$class-initialized@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36 (mut i32)
+;;; Code for lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37 [static fields]
+(global $$class-initialized@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37 (mut i32)
  (i32.const 0)
 )
-(global $$class@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36 (mut (ref null $java.lang.Class))
+(global $$class@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37 (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -1872,11 +1969,11 @@
  (ref.null $java.lang.Class)
 )
 
-;;; Code for lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37 [static fields]
-(global $$class-initialized@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37 (mut i32)
+;;; Code for lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38 [static fields]
+(global $$class-initialized@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38 (mut i32)
  (i32.const 0)
 )
-(global $$class@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37 (mut (ref null $java.lang.Class))
+(global $$class@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38 (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -1894,6 +1991,22 @@
  (i32.const 0)
 )
 (global $$class@lambdas.Lambdas.ProviderHolder (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for lambdas.Lambdas.Supplier [static fields]
+(global $$class-initialized@lambdas.Lambdas.Supplier (mut i32)
+ (i32.const 0)
+)
+(global $$class@lambdas.Lambdas.Supplier (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for lambdas.Lambdas.J2ktIncompatible [static fields]
+(global $$class-initialized@lambdas.Lambdas.J2ktIncompatible (mut i32)
+ (i32.const 0)
+)
+(global $$class@lambdas.Lambdas.J2ktIncompatible (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -1937,6 +2050,7 @@
   (ref.func $m_testLambdaReturningVoidAsExpression__void@lambdas.Lambdas)
   (ref.func $m_testLambdaWithGenerics__void@lambdas.Lambdas)
   (ref.func $m_testNestedLambdas__void@lambdas.Lambdas)
+  (ref.func $m_testParameterizedTypeWithUnusedTypeVariable__void@lambdas.Lambdas)
   (ref.func $m_testReturnLabelNameConflictKotlin__void@lambdas.Lambdas)
  )
 )
@@ -2319,10 +2433,10 @@
  )
 )
 
-;;; Code for lambdas.Lambdas.3 [vtable.init]
-(global $lambdas.Lambdas.3.vtable (ref $lambdas.Lambdas.3.vtable)
- (struct.new $lambdas.Lambdas.3.vtable
-  (ref.func $$getClassImpl__java_lang_Class@lambdas.Lambdas.3)
+;;; Code for lambdas.Lambdas.4 [vtable.init]
+(global $lambdas.Lambdas.4.vtable (ref $lambdas.Lambdas.4.vtable)
+ (struct.new $lambdas.Lambdas.4.vtable
+  (ref.func $$getClassImpl__java_lang_Class@lambdas.Lambdas.4)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
@@ -2460,37 +2574,64 @@
  )
 )
 
-;;; Code for lambdas.Lambdas.BiFunction.$LambdaImplementor$30 [vtable.init]
-(global $lambdas.Lambdas.BiFunction.$LambdaImplementor$30.vtable (ref $lambdas.Lambdas.BiFunction.$LambdaImplementor$30.vtable)
- (struct.new $lambdas.Lambdas.BiFunction.$LambdaImplementor$30.vtable
+;;; Code for lambdas.Lambdas.1 [vtable.init]
+(global $lambdas.Lambdas.1.vtable (ref $lambdas.Lambdas.1.vtable)
+ (struct.new $lambdas.Lambdas.1.vtable
+  (ref.func $$getClassImpl__java_lang_Class@lambdas.Lambdas.1)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+
+;;; Code for lambdas.Lambdas.$LambdaImplementor$30 [vtable.init]
+(global $lambdas.Lambdas.$LambdaImplementor$30.vtable (ref $lambdas.Lambdas.$LambdaImplementor$30.vtable)
+ (struct.new $lambdas.Lambdas.$LambdaImplementor$30.vtable
+  (ref.func $$getClassImpl__java_lang_Class@lambdas.Lambdas.Supplier.$LambdaAdaptor)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_get__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$30)
+  (ref.func $m_get__lambdas_Lambdas_1@lambdas.Lambdas.$LambdaImplementor$30)
+ )
+)
+(global $lambdas.Lambdas.Supplier.vtable@$lambdas.Lambdas.$LambdaImplementor$30 (ref $lambdas.Lambdas.Supplier.vtable)
+ (struct.new $lambdas.Lambdas.Supplier.vtable
+  (ref.func $m_get__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$30)
+ )
+)
+
+;;; Code for lambdas.Lambdas.BiFunction.$LambdaImplementor$31 [vtable.init]
+(global $lambdas.Lambdas.BiFunction.$LambdaImplementor$31.vtable (ref $lambdas.Lambdas.BiFunction.$LambdaImplementor$31.vtable)
+ (struct.new $lambdas.Lambdas.BiFunction.$LambdaImplementor$31.vtable
   (ref.func $$getClassImpl__java_lang_Class@lambdas.Lambdas.BiFunction.$LambdaAdaptor)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_andThen__lambdas_Lambdas_Function__lambdas_Lambdas_BiFunction@lambdas.Lambdas.BiFunction.$LambdaAdaptor)
-  (ref.func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@lambdas.Lambdas.BiFunction.$LambdaImplementor$30)
+  (ref.func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@lambdas.Lambdas.BiFunction.$LambdaImplementor$31)
  )
 )
-(global $lambdas.Lambdas.BiFunction.vtable@$lambdas.Lambdas.BiFunction.$LambdaImplementor$30 (ref $lambdas.Lambdas.BiFunction.vtable)
+(global $lambdas.Lambdas.BiFunction.vtable@$lambdas.Lambdas.BiFunction.$LambdaImplementor$31 (ref $lambdas.Lambdas.BiFunction.vtable)
  (struct.new $lambdas.Lambdas.BiFunction.vtable
   (ref.func $m_andThen__lambdas_Lambdas_Function__lambdas_Lambdas_BiFunction@lambdas.Lambdas.BiFunction.$LambdaAdaptor)
-  (ref.func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@lambdas.Lambdas.BiFunction.$LambdaImplementor$30)
+  (ref.func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@lambdas.Lambdas.BiFunction.$LambdaImplementor$31)
  )
 )
 
-;;; Code for lambdas.Lambdas.Function.$LambdaImplementor$31 [vtable.init]
-(global $lambdas.Lambdas.Function.$LambdaImplementor$31.vtable (ref $lambdas.Lambdas.Function.$LambdaImplementor$31.vtable)
- (struct.new $lambdas.Lambdas.Function.$LambdaImplementor$31.vtable
+;;; Code for lambdas.Lambdas.Function.$LambdaImplementor$32 [vtable.init]
+(global $lambdas.Lambdas.Function.$LambdaImplementor$32.vtable (ref $lambdas.Lambdas.Function.$LambdaImplementor$32.vtable)
+ (struct.new $lambdas.Lambdas.Function.$LambdaImplementor$32.vtable
   (ref.func $$getClassImpl__java_lang_Class@lambdas.Lambdas.Function.$LambdaAdaptor)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.Function.$LambdaImplementor$31)
+  (ref.func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.Function.$LambdaImplementor$32)
  )
 )
-(global $lambdas.Lambdas.Function.vtable@$lambdas.Lambdas.Function.$LambdaImplementor$31 (ref $lambdas.Lambdas.Function.vtable)
+(global $lambdas.Lambdas.Function.vtable@$lambdas.Lambdas.Function.$LambdaImplementor$32 (ref $lambdas.Lambdas.Function.vtable)
  (struct.new $lambdas.Lambdas.Function.vtable
-  (ref.func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.Function.$LambdaImplementor$31)
+  (ref.func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.Function.$LambdaImplementor$32)
  )
 )
 
@@ -2515,19 +2656,19 @@
  )
 )
 
-;;; Code for lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 [vtable.init]
-(global $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32.vtable (ref $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32.vtable)
- (struct.new $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32.vtable
+;;; Code for lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 [vtable.init]
+(global $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33.vtable (ref $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33.vtable)
+ (struct.new $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33.vtable
   (ref.func $$getClassImpl__java_lang_Class@lambdas.Lambdas.FunctionalInterface.$LambdaAdaptor)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_m__int__int@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32)
+  (ref.func $m_m__int__int@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33)
  )
 )
-(global $lambdas.Lambdas.FunctionalInterface.vtable@$lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 (ref $lambdas.Lambdas.FunctionalInterface.vtable)
+(global $lambdas.Lambdas.FunctionalInterface.vtable@$lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 (ref $lambdas.Lambdas.FunctionalInterface.vtable)
  (struct.new $lambdas.Lambdas.FunctionalInterface.vtable
-  (ref.func $m_m__int__int@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32)
+  (ref.func $m_m__int__int@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33)
  )
 )
 
@@ -2559,19 +2700,19 @@
  )
 )
 
-;;; Code for lambdas.Lambdas.Outer.$LambdaImplementor$33 [vtable.init]
-(global $lambdas.Lambdas.Outer.$LambdaImplementor$33.vtable (ref $lambdas.Lambdas.Outer.$LambdaImplementor$33.vtable)
- (struct.new $lambdas.Lambdas.Outer.$LambdaImplementor$33.vtable
+;;; Code for lambdas.Lambdas.Outer.$LambdaImplementor$34 [vtable.init]
+(global $lambdas.Lambdas.Outer.$LambdaImplementor$34.vtable (ref $lambdas.Lambdas.Outer.$LambdaImplementor$34.vtable)
+ (struct.new $lambdas.Lambdas.Outer.$LambdaImplementor$34.vtable
   (ref.func $$getClassImpl__java_lang_Class@lambdas.Lambdas.Runnable.$LambdaAdaptor)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_run__void@lambdas.Lambdas.Outer.$LambdaImplementor$33)
+  (ref.func $m_run__void@lambdas.Lambdas.Outer.$LambdaImplementor$34)
  )
 )
-(global $lambdas.Lambdas.Runnable.vtable@$lambdas.Lambdas.Outer.$LambdaImplementor$33 (ref $lambdas.Lambdas.Runnable.vtable)
+(global $lambdas.Lambdas.Runnable.vtable@$lambdas.Lambdas.Outer.$LambdaImplementor$34 (ref $lambdas.Lambdas.Runnable.vtable)
  (struct.new $lambdas.Lambdas.Runnable.vtable
-  (ref.func $m_run__void@lambdas.Lambdas.Outer.$LambdaImplementor$33)
+  (ref.func $m_run__void@lambdas.Lambdas.Outer.$LambdaImplementor$34)
  )
 )
 
@@ -2598,19 +2739,19 @@
  )
 )
 
-;;; Code for lambdas.Lambdas.Sub.$LambdaImplementor$34 [vtable.init]
-(global $lambdas.Lambdas.Sub.$LambdaImplementor$34.vtable (ref $lambdas.Lambdas.Sub.$LambdaImplementor$34.vtable)
- (struct.new $lambdas.Lambdas.Sub.$LambdaImplementor$34.vtable
+;;; Code for lambdas.Lambdas.Sub.$LambdaImplementor$35 [vtable.init]
+(global $lambdas.Lambdas.Sub.$LambdaImplementor$35.vtable (ref $lambdas.Lambdas.Sub.$LambdaImplementor$35.vtable)
+ (struct.new $lambdas.Lambdas.Sub.$LambdaImplementor$35.vtable
   (ref.func $$getClassImpl__java_lang_Class@lambdas.Lambdas.Runnable.$LambdaAdaptor)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_run__void@lambdas.Lambdas.Sub.$LambdaImplementor$34)
+  (ref.func $m_run__void@lambdas.Lambdas.Sub.$LambdaImplementor$35)
  )
 )
-(global $lambdas.Lambdas.Runnable.vtable@$lambdas.Lambdas.Sub.$LambdaImplementor$34 (ref $lambdas.Lambdas.Runnable.vtable)
+(global $lambdas.Lambdas.Runnable.vtable@$lambdas.Lambdas.Sub.$LambdaImplementor$35 (ref $lambdas.Lambdas.Runnable.vtable)
  (struct.new $lambdas.Lambdas.Runnable.vtable
-  (ref.func $m_run__void@lambdas.Lambdas.Sub.$LambdaImplementor$34)
+  (ref.func $m_run__void@lambdas.Lambdas.Sub.$LambdaImplementor$35)
  )
 )
 
@@ -2626,19 +2767,19 @@
  )
 )
 
-;;; Code for lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35 [vtable.init]
-(global $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35.vtable (ref $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35.vtable)
- (struct.new $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35.vtable
+;;; Code for lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36 [vtable.init]
+(global $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36.vtable (ref $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36.vtable)
+ (struct.new $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36.vtable
   (ref.func $$getClassImpl__java_lang_Class@lambdas.Lambdas.Runnable.$LambdaAdaptor)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_run__void@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35)
+  (ref.func $m_run__void@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36)
  )
 )
-(global $lambdas.Lambdas.Runnable.vtable@$lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35 (ref $lambdas.Lambdas.Runnable.vtable)
+(global $lambdas.Lambdas.Runnable.vtable@$lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36 (ref $lambdas.Lambdas.Runnable.vtable)
  (struct.new $lambdas.Lambdas.Runnable.vtable
-  (ref.func $m_run__void@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35)
+  (ref.func $m_run__void@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36)
  )
 )
 
@@ -2668,19 +2809,19 @@
  )
 )
 
-;;; Code for lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36 [vtable.init]
-(global $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36.vtable (ref $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36.vtable)
- (struct.new $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36.vtable
+;;; Code for lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37 [vtable.init]
+(global $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37.vtable (ref $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37.vtable)
+ (struct.new $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37.vtable
   (ref.func $$getClassImpl__java_lang_Class@lambdas.Lambdas.EmptyInterfaceProvider.$LambdaAdaptor)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_provide__lambdas_Lambdas_EmptyInterface@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36)
+  (ref.func $m_provide__lambdas_Lambdas_EmptyInterface@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37)
  )
 )
-(global $lambdas.Lambdas.EmptyInterfaceProvider.vtable@$lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36 (ref $lambdas.Lambdas.EmptyInterfaceProvider.vtable)
+(global $lambdas.Lambdas.EmptyInterfaceProvider.vtable@$lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37 (ref $lambdas.Lambdas.EmptyInterfaceProvider.vtable)
  (struct.new $lambdas.Lambdas.EmptyInterfaceProvider.vtable
-  (ref.func $m_provide__lambdas_Lambdas_EmptyInterface@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36)
+  (ref.func $m_provide__lambdas_Lambdas_EmptyInterface@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37)
  )
 )
 
@@ -2698,19 +2839,19 @@
  )
 )
 
-;;; Code for lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37 [vtable.init]
-(global $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37.vtable (ref $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37.vtable)
- (struct.new $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37.vtable
+;;; Code for lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38 [vtable.init]
+(global $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38.vtable (ref $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38.vtable)
+ (struct.new $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38.vtable
   (ref.func $$getClassImpl__java_lang_Class@lambdas.Lambdas.EmptyInterfaceProvider.$LambdaAdaptor)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_provide__lambdas_Lambdas_EmptyInterface@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37)
+  (ref.func $m_provide__lambdas_Lambdas_EmptyInterface@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38)
  )
 )
-(global $lambdas.Lambdas.EmptyInterfaceProvider.vtable@$lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37 (ref $lambdas.Lambdas.EmptyInterfaceProvider.vtable)
+(global $lambdas.Lambdas.EmptyInterfaceProvider.vtable@$lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38 (ref $lambdas.Lambdas.EmptyInterfaceProvider.vtable)
  (struct.new $lambdas.Lambdas.EmptyInterfaceProvider.vtable
-  (ref.func $m_provide__lambdas_Lambdas_EmptyInterface@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37)
+  (ref.func $m_provide__lambdas_Lambdas_EmptyInterface@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38)
  )
 )
 
@@ -2830,7 +2971,7 @@
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:152:36
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:153:6
-  (return (call $$create__lambdas_Lambdas_BiFunction__lambdas_Lambdas_Function@lambdas.Lambdas.BiFunction.$LambdaImplementor$30 (local.get $this)(local.get $after)))
+  (return (call $$create__lambdas_Lambdas_BiFunction__lambdas_Lambdas_Function@lambdas.Lambdas.BiFunction.$LambdaImplementor$31 (local.get $this)(local.get $after)))
  )
 )
 (elem declare func $m_andThen__lambdas_Lambdas_Function__lambdas_Lambdas_BiFunction@lambdas.Lambdas.BiFunction)
@@ -2875,7 +3016,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:158:41
   (call $$clinit__void_<once>_@lambdas.Lambdas.Function )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:159:6
-  (return (call $$create__@lambdas.Lambdas.Function.$LambdaImplementor$31 ))
+  (return (call $$create__@lambdas.Lambdas.Function.$LambdaImplementor$32 ))
  )
 )
 
@@ -3239,6 +3380,38 @@
   )
   (global.set $$class@lambdas.Lambdas.EmptyInterfaceProvider (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.EmptyInterfaceProvider )))
   (return (global.get $$class@lambdas.Lambdas.EmptyInterfaceProvider))
+ )
+)
+
+;;; Code for lambdas.Lambdas.Supplier [methods]
+
+;;; void Supplier.$clinit()
+(func $$clinit__void_<once>_@lambdas.Lambdas.Supplier
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:380:19
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:380:19
+  (if (global.get $$class-initialized@lambdas.Lambdas.Supplier)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:380:19
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:380:19
+  (global.set $$class-initialized@lambdas.Lambdas.Supplier (i32.const 1))
+ )
+)
+
+;;; Class<T> Supplier.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Supplier
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.Supplier)))
+   (then
+    (return (global.get $$class@lambdas.Lambdas.Supplier))
+   )
+  )
+  (global.set $$class@lambdas.Lambdas.Supplier (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Supplier )))
+  (return (global.get $$class@lambdas.Lambdas.Supplier))
  )
 )
 
@@ -3743,6 +3916,28 @@
   (call $$clinit__void_<once>_@lambdas.Lambdas )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:322:4
   (local.set $lambda (call $$create__java_lang_Iterable@lambdas.Lambdas.$LambdaImplementor$29 (local.get $iterable)))
+ )
+)
+
+;;; void Lambdas.testParameterizedTypeWithUnusedTypeVariable()
+(func $m_testParameterizedTypeWithUnusedTypeVariable__void@lambdas.Lambdas
+ (type $function.m_testParameterizedTypeWithUnusedTypeVariable__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:375:18
+ (local $this (ref null $lambdas.Lambdas))
+ (local.set $this (ref.cast (ref $lambdas.Lambdas) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:376:4
+  (call $m_acceptsSupplier__lambdas_Lambdas_Supplier__void@lambdas.Lambdas (call $$create__lambdas_Lambdas@lambdas.Lambdas.$LambdaImplementor$30 (local.get $this)))
+ )
+)
+(elem declare func $m_testParameterizedTypeWithUnusedTypeVariable__void@lambdas.Lambdas)
+
+;;; void Lambdas.acceptsSupplier(Supplier<T> supplier)
+(func $m_acceptsSupplier__lambdas_Lambdas_Supplier__void@lambdas.Lambdas
+ (param $supplier (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:384:26
+ (block
  )
 )
 
@@ -4334,83 +4529,218 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.EmptyInterfaceProvider.$LambdaAdaptor)
 
-;;; Code for lambdas.Lambdas.3 [methods]
+;;; Code for lambdas.Lambdas.Supplier.$LambdaAdaptor [methods]
+
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_lambdas_Lambdas_Supplier_$LambdaAdaptor@lambdas.Lambdas.Supplier.$LambdaAdaptor
+ (param $this (ref null $lambdas.Lambdas.Supplier.$LambdaAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:380:19
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:380:19
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@lambdas.Lambdas.Supplier.$LambdaAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:380:19
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:380:19
+  (if (global.get $$class-initialized@lambdas.Lambdas.Supplier.$LambdaAdaptor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:380:19
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:380:19
+  (global.set $$class-initialized@lambdas.Lambdas.Supplier.$LambdaAdaptor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:380:19
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Supplier.$LambdaAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.Supplier.$LambdaAdaptor)))
+   (then
+    (return (global.get $$class@lambdas.Lambdas.Supplier.$LambdaAdaptor))
+   )
+  )
+  (global.set $$class@lambdas.Lambdas.Supplier.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Supplier.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@lambdas.Lambdas.Supplier.$LambdaAdaptor))
+ )
+)
+
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@lambdas.Lambdas.Supplier.$LambdaAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $lambdas.Lambdas.Supplier.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $lambdas.Lambdas.Supplier.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Supplier.$LambdaAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.Supplier.$LambdaAdaptor)
+
+;;; Code for lambdas.Lambdas.4 [methods]
 
 ;;; <anonymous> extends Object <anonymous> extends Object.$create(Lambdas $outer_this)
-(func $$create__lambdas_Lambdas@lambdas.Lambdas.3
+(func $$create__lambdas_Lambdas@lambdas.Lambdas.4
  (param $$outer_this (ref null $lambdas.Lambdas))
- (result (ref null $lambdas.Lambdas.3))
+ (result (ref null $lambdas.Lambdas.4))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:199:75
- (local $$instance (ref null $lambdas.Lambdas.3))
+ (local $$instance (ref null $lambdas.Lambdas.4))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:199:75
-  (call $$clinit__void_<once>_@lambdas.Lambdas.3 )
+  (call $$clinit__void_<once>_@lambdas.Lambdas.4 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:199:75
-  (local.set $$instance (struct.new $lambdas.Lambdas.3 (global.get $lambdas.Lambdas.3.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $lambdas.Lambdas)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.4 (global.get $lambdas.Lambdas.4.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $lambdas.Lambdas)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:199:75
-  (call $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_3@lambdas.Lambdas.3 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  (call $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_4@lambdas.Lambdas.4 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:199:75
   (return (local.get $$instance))
  )
 )
 
 ;;; void <anonymous> extends Object.$ctor(Lambdas $outer_this)
-(func $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_3@lambdas.Lambdas.3
- (param $this (ref null $lambdas.Lambdas.3))
+(func $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_4@lambdas.Lambdas.4
+ (param $this (ref null $lambdas.Lambdas.4))
  (param $$outer_this (ref null $lambdas.Lambdas))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:199:75
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:199:75
-  (struct.set $lambdas.Lambdas.3 $$outer_this@lambdas.Lambdas.3 (local.get $this) (local.get $$outer_this))
+  (struct.set $lambdas.Lambdas.4 $$outer_this@lambdas.Lambdas.4 (local.get $this) (local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:199:75
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void <anonymous> extends Object.$clinit()
-(func $$clinit__void_<once>_@lambdas.Lambdas.3
+(func $$clinit__void_<once>_@lambdas.Lambdas.4
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:199:75
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:199:75
-  (if (global.get $$class-initialized@lambdas.Lambdas.3)
+  (if (global.get $$class-initialized@lambdas.Lambdas.4)
    (then
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:199:75
     (return )
    )
   )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:199:75
-  (global.set $$class-initialized@lambdas.Lambdas.3 (i32.const 1))
+  (global.set $$class-initialized@lambdas.Lambdas.4 (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:199:75
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
 ;;; Class<T> <anonymous> extends Object.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.3
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.4
  (result (ref null $java.lang.Class))
  (block
-  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.3)))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.4)))
    (then
-    (return (global.get $$class@lambdas.Lambdas.3))
+    (return (global.get $$class@lambdas.Lambdas.4))
    )
   )
-  (global.set $$class@lambdas.Lambdas.3 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.3 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
-  (return (global.get $$class@lambdas.Lambdas.3))
+  (global.set $$class@lambdas.Lambdas.4 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.4 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@lambdas.Lambdas.4))
  )
 )
 
 ;;; Class<?> <anonymous> extends Object.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@lambdas.Lambdas.3
+(func $$getClassImpl__java_lang_Class@lambdas.Lambdas.4
  (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $this (ref null $lambdas.Lambdas.3))
- (local.set $this (ref.cast (ref $lambdas.Lambdas.3) (local.get $this.untyped)))
+ (local $this (ref null $lambdas.Lambdas.4))
+ (local.set $this (ref.cast (ref $lambdas.Lambdas.4) (local.get $this.untyped)))
  (block
-  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.3 ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.4 ))
  )
 )
-(elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.3)
+(elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.4)
+
+;;; Code for lambdas.Lambdas.1 [methods]
+
+;;; <anonymous> extends Object <anonymous> extends Object.$create(Lambdas $outer_this)
+(func $$create__lambdas_Lambdas@lambdas.Lambdas.1
+ (param $$outer_this (ref null $lambdas.Lambdas))
+ (result (ref null $lambdas.Lambdas.1))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:376:39
+ (local $$instance (ref null $lambdas.Lambdas.1))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:376:39
+  (call $$clinit__void_<once>_@lambdas.Lambdas.1 )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:376:39
+  (local.set $$instance (struct.new $lambdas.Lambdas.1 (global.get $lambdas.Lambdas.1.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $lambdas.Lambdas)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:376:39
+  (call $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_1@lambdas.Lambdas.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:376:39
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> extends Object.$ctor(Lambdas $outer_this)
+(func $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_1@lambdas.Lambdas.1
+ (param $this (ref null $lambdas.Lambdas.1))
+ (param $$outer_this (ref null $lambdas.Lambdas))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:376:39
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:376:39
+  (struct.set $lambdas.Lambdas.1 $$outer_this@lambdas.Lambdas.1 (local.get $this) (local.get $$outer_this))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:376:39
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void <anonymous> extends Object.$clinit()
+(func $$clinit__void_<once>_@lambdas.Lambdas.1
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:376:39
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:376:39
+  (if (global.get $$class-initialized@lambdas.Lambdas.1)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:376:39
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:376:39
+  (global.set $$class-initialized@lambdas.Lambdas.1 (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:376:39
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> <anonymous> extends Object.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.1
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.1)))
+   (then
+    (return (global.get $$class@lambdas.Lambdas.1))
+   )
+  )
+  (global.set $$class@lambdas.Lambdas.1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.1 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@lambdas.Lambdas.1))
+ )
+)
+
+;;; Class<?> <anonymous> extends Object.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@lambdas.Lambdas.1
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $lambdas.Lambdas.1))
+ (local.set $this (ref.cast (ref $lambdas.Lambdas.1) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.1 ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.1)
 
 ;;; Code for lambdas.Lambdas.Wrapper [methods]
 
@@ -4759,7 +5089,7 @@
  (local.set $this (ref.cast (ref $lambdas.Lambdas.Outer) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:333:6
-  (local.set $r (call $$create__lambdas_Lambdas_Outer@lambdas.Lambdas.Outer.$LambdaImplementor$33 (local.get $this)))
+  (local.set $r (call $$create__lambdas_Lambdas_Outer@lambdas.Lambdas.Outer.$LambdaImplementor$34 (local.get $this)))
  )
 )
 (elem declare func $m_n__void_$pp_lambdas@lambdas.Lambdas.Outer)
@@ -5094,9 +5424,9 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:365:4
   (global.set $emptyInterface@lambdas.Lambdas.ProviderHolder (call $$create__@lambdas.Lambdas.ProviderHolder.1 ))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:4
-  (global.set $provideFromField@lambdas.Lambdas.ProviderHolder (call $$create__@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36 ))
+  (global.set $provideFromField@lambdas.Lambdas.ProviderHolder (call $$create__@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37 ))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:4
-  (global.set $provideFromAnonImpl@lambdas.Lambdas.ProviderHolder (call $$create__@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37 ))
+  (global.set $provideFromAnonImpl@lambdas.Lambdas.ProviderHolder (call $$create__@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38 ))
  )
 )
 
@@ -5126,6 +5456,38 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.ProviderHolder)
+
+;;; Code for lambdas.Lambdas.J2ktIncompatible [methods]
+
+;;; void J2ktIncompatible.$clinit()
+(func $$clinit__void_<once>_@lambdas.Lambdas.J2ktIncompatible
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:386:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:386:13
+  (if (global.get $$class-initialized@lambdas.Lambdas.J2ktIncompatible)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:386:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:386:13
+  (global.set $$class-initialized@lambdas.Lambdas.J2ktIncompatible (i32.const 1))
+ )
+)
+
+;;; Class<T> J2ktIncompatible.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.J2ktIncompatible
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.J2ktIncompatible)))
+   (then
+    (return (global.get $$class@lambdas.Lambdas.J2ktIncompatible))
+   )
+  )
+  (global.set $$class@lambdas.Lambdas.J2ktIncompatible (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.J2ktIncompatible )))
+  (return (global.get $$class@lambdas.Lambdas.J2ktIncompatible))
+ )
+)
 
 ;;; Code for lambdas.Lambdas.JsSupplier.$LambdaAdaptor [methods]
 
@@ -7157,7 +7519,7 @@
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$24) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:199:62
-  (drop (call $$create__lambdas_Lambdas@lambdas.Lambdas.3 (struct.get $lambdas.Lambdas.$LambdaImplementor$24 $$outer_this@lambdas.Lambdas.$LambdaImplementor$24 (local.get $this))))
+  (drop (call $$create__lambdas_Lambdas@lambdas.Lambdas.4 (struct.get $lambdas.Lambdas.$LambdaImplementor$24 $$outer_this@lambdas.Lambdas.$LambdaImplementor$24 (local.get $this))))
  )
 )
 (elem declare func $m_run__void@lambdas.Lambdas.$LambdaImplementor$24)
@@ -7733,73 +8095,168 @@
  )
 )
 
-;;; Code for lambdas.Lambdas.BiFunction.$LambdaImplementor$30 [methods]
+;;; Code for lambdas.Lambdas.$LambdaImplementor$30 [methods]
+
+;;; <anonymous> implements Supplier<<anonymous> extends Object<T>><T> <anonymous> implements Supplier<<anonymous> extends Object<T>>.$create(Lambdas $outer_this)
+(func $$create__lambdas_Lambdas@lambdas.Lambdas.$LambdaImplementor$30
+ (param $$outer_this (ref null $lambdas.Lambdas))
+ (result (ref null $lambdas.Lambdas.$LambdaImplementor$30))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:376:20
+ (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$30))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:376:20
+  (call $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$30 )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:376:20
+  (local.set $$instance (struct.new $lambdas.Lambdas.$LambdaImplementor$30 (global.get $lambdas.Lambdas.$LambdaImplementor$30.vtable) (global.get $lambdas.Lambdas.$LambdaImplementor$30.itable) (i32.const 0) (ref.null $lambdas.Lambdas)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:376:20
+  (call $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_$LambdaImplementor$30@lambdas.Lambdas.$LambdaImplementor$30 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:376:20
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> implements Supplier<<anonymous> extends Object<T>>.$ctor(Lambdas $outer_this)
+(func $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_$LambdaImplementor$30@lambdas.Lambdas.$LambdaImplementor$30
+ (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$30))
+ (param $$outer_this (ref null $lambdas.Lambdas))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:376:20
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:376:20
+  (struct.set $lambdas.Lambdas.$LambdaImplementor$30 $$outer_this@lambdas.Lambdas.$LambdaImplementor$30 (local.get $this) (local.get $$outer_this))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:376:20
+  (call $$ctor__void_$p_lambdas_Lambdas_Supplier_$LambdaAdaptor@lambdas.Lambdas.Supplier.$LambdaAdaptor (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; <anonymous> extends Object<T> <anonymous> implements Supplier<<anonymous> extends Object<T>>.get()
+(func $m_get__lambdas_Lambdas_1@lambdas.Lambdas.$LambdaImplementor$30
+ (type $function.m_get__lambdas_Lambdas_1)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $lambdas.Lambdas.1))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:376:20
+ (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$30))
+ (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$30) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:376:26
+  (return (call $$create__lambdas_Lambdas@lambdas.Lambdas.1 (struct.get $lambdas.Lambdas.$LambdaImplementor$30 $$outer_this@lambdas.Lambdas.$LambdaImplementor$30 (local.get $this))))
+ )
+)
+(elem declare func $m_get__lambdas_Lambdas_1@lambdas.Lambdas.$LambdaImplementor$30)
+
+;;; <anonymous> extends Object<T> <anonymous> implements Supplier<<anonymous> extends Object<T>>.get()
+(func $m_get__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$30
+ (type $function.m_get__java_lang_Object)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:376:20
+ (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$30))
+ (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$30) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:376:20
+  (return (call_ref $function.m_get__lambdas_Lambdas_1 (ref.as_non_null (local.get $this))(struct.get $lambdas.Lambdas.$LambdaImplementor$30.vtable $m_get__lambdas_Lambdas_1 (struct.get $lambdas.Lambdas.$LambdaImplementor$30 $vtable(local.get $this)))))
+ )
+)
+(elem declare func $m_get__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$30)
+
+;;; void <anonymous> implements Supplier<<anonymous> extends Object<T>>.$clinit()
+(func $$clinit__void_<once>_@lambdas.Lambdas.$LambdaImplementor$30
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:376:20
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:376:20
+  (if (global.get $$class-initialized@lambdas.Lambdas.$LambdaImplementor$30)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:376:20
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:376:20
+  (global.set $$class-initialized@lambdas.Lambdas.$LambdaImplementor$30 (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:376:20
+  (call $$clinit__void_<once>_@lambdas.Lambdas.Supplier.$LambdaAdaptor )
+ )
+)
+
+;;; Class<T> <anonymous> implements Supplier<<anonymous> extends Object<T>>.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.$LambdaImplementor$30
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.$LambdaImplementor$30)))
+   (then
+    (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$30))
+   )
+  )
+  (global.set $$class@lambdas.Lambdas.$LambdaImplementor$30 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.$LambdaImplementor$30 )(call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Supplier.$LambdaAdaptor )))
+  (return (global.get $$class@lambdas.Lambdas.$LambdaImplementor$30))
+ )
+)
+
+;;; Code for lambdas.Lambdas.BiFunction.$LambdaImplementor$31 [methods]
 
 ;;; <anonymous> implements BiFunction<T, U, V><V, T, U, R> <anonymous> implements BiFunction<T, U, V>.$create(BiFunction<T, U, R> $outer_this, Function<? super R, ? extends V> $captured_after)
-(func $$create__lambdas_Lambdas_BiFunction__lambdas_Lambdas_Function@lambdas.Lambdas.BiFunction.$LambdaImplementor$30
+(func $$create__lambdas_Lambdas_BiFunction__lambdas_Lambdas_Function@lambdas.Lambdas.BiFunction.$LambdaImplementor$31
  (param $$outer_this (ref null $java.lang.Object))
  (param $$captured_after (ref null $java.lang.Object))
- (result (ref null $lambdas.Lambdas.BiFunction.$LambdaImplementor$30))
+ (result (ref null $lambdas.Lambdas.BiFunction.$LambdaImplementor$31))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:153:13
- (local $$instance (ref null $lambdas.Lambdas.BiFunction.$LambdaImplementor$30))
+ (local $$instance (ref null $lambdas.Lambdas.BiFunction.$LambdaImplementor$31))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:153:13
-  (call $$clinit__void_<once>_@lambdas.Lambdas.BiFunction.$LambdaImplementor$30 )
+  (call $$clinit__void_<once>_@lambdas.Lambdas.BiFunction.$LambdaImplementor$31 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:153:13
-  (local.set $$instance (struct.new $lambdas.Lambdas.BiFunction.$LambdaImplementor$30 (global.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$30.vtable) (global.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$30.itable) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.BiFunction.$LambdaImplementor$31 (global.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$31.vtable) (global.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$31.itable) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:153:13
-  (call $$ctor__lambdas_Lambdas_BiFunction__lambdas_Lambdas_Function__void_$p_lambdas_Lambdas_BiFunction_$LambdaImplementor$30@lambdas.Lambdas.BiFunction.$LambdaImplementor$30 (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$captured_after))
+  (call $$ctor__lambdas_Lambdas_BiFunction__lambdas_Lambdas_Function__void_$p_lambdas_Lambdas_BiFunction_$LambdaImplementor$31@lambdas.Lambdas.BiFunction.$LambdaImplementor$31 (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$captured_after))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:153:13
   (return (local.get $$instance))
  )
 )
 
 ;;; void <anonymous> implements BiFunction<T, U, V>.$ctor(BiFunction<T, U, R> $outer_this, Function<? super R, ? extends V> $captured_after)
-(func $$ctor__lambdas_Lambdas_BiFunction__lambdas_Lambdas_Function__void_$p_lambdas_Lambdas_BiFunction_$LambdaImplementor$30@lambdas.Lambdas.BiFunction.$LambdaImplementor$30
- (param $this (ref null $lambdas.Lambdas.BiFunction.$LambdaImplementor$30))
+(func $$ctor__lambdas_Lambdas_BiFunction__lambdas_Lambdas_Function__void_$p_lambdas_Lambdas_BiFunction_$LambdaImplementor$31@lambdas.Lambdas.BiFunction.$LambdaImplementor$31
+ (param $this (ref null $lambdas.Lambdas.BiFunction.$LambdaImplementor$31))
  (param $$outer_this (ref null $java.lang.Object))
  (param $$captured_after (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:153:13
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:153:13
-  (struct.set $lambdas.Lambdas.BiFunction.$LambdaImplementor$30 $$outer_this@lambdas.Lambdas.BiFunction.$LambdaImplementor$30 (local.get $this) (local.get $$outer_this))
+  (struct.set $lambdas.Lambdas.BiFunction.$LambdaImplementor$31 $$outer_this@lambdas.Lambdas.BiFunction.$LambdaImplementor$31 (local.get $this) (local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:152:77
-  (struct.set $lambdas.Lambdas.BiFunction.$LambdaImplementor$30 $$captured_after@lambdas.Lambdas.BiFunction.$LambdaImplementor$30 (local.get $this) (local.get $$captured_after))
+  (struct.set $lambdas.Lambdas.BiFunction.$LambdaImplementor$31 $$captured_after@lambdas.Lambdas.BiFunction.$LambdaImplementor$31 (local.get $this) (local.get $$captured_after))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:153:13
   (call $$ctor__void_$p_lambdas_Lambdas_BiFunction_$LambdaAdaptor@lambdas.Lambdas.BiFunction.$LambdaAdaptor (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; V <anonymous> implements BiFunction<T, U, V>.apply(T t, U u)
-(func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@lambdas.Lambdas.BiFunction.$LambdaImplementor$30
+(func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@lambdas.Lambdas.BiFunction.$LambdaImplementor$31
  (type $function.m_apply__java_lang_Object__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  (param $u (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:153:13
- (local $this (ref null $lambdas.Lambdas.BiFunction.$LambdaImplementor$30))
- (local.set $this (ref.cast (ref $lambdas.Lambdas.BiFunction.$LambdaImplementor$30) (local.get $this.untyped)))
+ (local $this (ref null $lambdas.Lambdas.BiFunction.$LambdaImplementor$31))
+ (local.set $this (ref.cast (ref $lambdas.Lambdas.BiFunction.$LambdaImplementor$31) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:153:23
-  (return (call_ref $function.m_apply__java_lang_Object__java_lang_Object (ref.as_non_null (struct.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$30 $$captured_after@lambdas.Lambdas.BiFunction.$LambdaImplementor$30 (local.get $this)))(call_ref $function.m_apply__java_lang_Object__java_lang_Object__java_lang_Object (ref.as_non_null (struct.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$30 $$outer_this@lambdas.Lambdas.BiFunction.$LambdaImplementor$30 (local.get $this)))(local.get $t)(local.get $u)(struct.get $lambdas.Lambdas.BiFunction.vtable $m_apply__java_lang_Object__java_lang_Object__java_lang_Object (ref.cast (ref $lambdas.Lambdas.BiFunction.vtable) (call $get.itable.$lambdas.Lambdas.BiFunction (struct.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$30 $$outer_this@lambdas.Lambdas.BiFunction.$LambdaImplementor$30 (local.get $this))))))(struct.get $lambdas.Lambdas.Function.vtable $m_apply__java_lang_Object__java_lang_Object (ref.cast (ref $lambdas.Lambdas.Function.vtable) (call $get.itable.$lambdas.Lambdas.Function (struct.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$30 $$captured_after@lambdas.Lambdas.BiFunction.$LambdaImplementor$30 (local.get $this)))))))
+  (return (call_ref $function.m_apply__java_lang_Object__java_lang_Object (ref.as_non_null (struct.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$31 $$captured_after@lambdas.Lambdas.BiFunction.$LambdaImplementor$31 (local.get $this)))(call_ref $function.m_apply__java_lang_Object__java_lang_Object__java_lang_Object (ref.as_non_null (struct.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$31 $$outer_this@lambdas.Lambdas.BiFunction.$LambdaImplementor$31 (local.get $this)))(local.get $t)(local.get $u)(struct.get $lambdas.Lambdas.BiFunction.vtable $m_apply__java_lang_Object__java_lang_Object__java_lang_Object (ref.cast (ref $lambdas.Lambdas.BiFunction.vtable) (call $get.itable.$lambdas.Lambdas.BiFunction (struct.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$31 $$outer_this@lambdas.Lambdas.BiFunction.$LambdaImplementor$31 (local.get $this))))))(struct.get $lambdas.Lambdas.Function.vtable $m_apply__java_lang_Object__java_lang_Object (ref.cast (ref $lambdas.Lambdas.Function.vtable) (call $get.itable.$lambdas.Lambdas.Function (struct.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$31 $$captured_after@lambdas.Lambdas.BiFunction.$LambdaImplementor$31 (local.get $this)))))))
  )
 )
-(elem declare func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@lambdas.Lambdas.BiFunction.$LambdaImplementor$30)
+(elem declare func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@lambdas.Lambdas.BiFunction.$LambdaImplementor$31)
 
 ;;; void <anonymous> implements BiFunction<T, U, V>.$clinit()
-(func $$clinit__void_<once>_@lambdas.Lambdas.BiFunction.$LambdaImplementor$30
+(func $$clinit__void_<once>_@lambdas.Lambdas.BiFunction.$LambdaImplementor$31
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:153:13
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:153:13
-  (if (global.get $$class-initialized@lambdas.Lambdas.BiFunction.$LambdaImplementor$30)
+  (if (global.get $$class-initialized@lambdas.Lambdas.BiFunction.$LambdaImplementor$31)
    (then
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:153:13
     (return )
    )
   )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:153:13
-  (global.set $$class-initialized@lambdas.Lambdas.BiFunction.$LambdaImplementor$30 (i32.const 1))
+  (global.set $$class-initialized@lambdas.Lambdas.BiFunction.$LambdaImplementor$31 (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:153:13
   (call $$clinit__void_<once>_@lambdas.Lambdas.BiFunction.$LambdaAdaptor )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:153:13
@@ -7808,41 +8265,41 @@
 )
 
 ;;; Class<T> <anonymous> implements BiFunction<T, U, V>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.BiFunction.$LambdaImplementor$30
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.BiFunction.$LambdaImplementor$31
  (result (ref null $java.lang.Class))
  (block
-  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.BiFunction.$LambdaImplementor$30)))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.BiFunction.$LambdaImplementor$31)))
    (then
-    (return (global.get $$class@lambdas.Lambdas.BiFunction.$LambdaImplementor$30))
+    (return (global.get $$class@lambdas.Lambdas.BiFunction.$LambdaImplementor$31))
    )
   )
-  (global.set $$class@lambdas.Lambdas.BiFunction.$LambdaImplementor$30 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.BiFunction.$LambdaImplementor$30 )(call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.BiFunction.$LambdaAdaptor )))
-  (return (global.get $$class@lambdas.Lambdas.BiFunction.$LambdaImplementor$30))
+  (global.set $$class@lambdas.Lambdas.BiFunction.$LambdaImplementor$31 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.BiFunction.$LambdaImplementor$31 )(call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.BiFunction.$LambdaAdaptor )))
+  (return (global.get $$class@lambdas.Lambdas.BiFunction.$LambdaImplementor$31))
  )
 )
 
-;;; Code for lambdas.Lambdas.Function.$LambdaImplementor$31 [methods]
+;;; Code for lambdas.Lambdas.Function.$LambdaImplementor$32 [methods]
 
 ;;; <anonymous> implements Function<T, T><T> <anonymous> implements Function<T, T>.$create()
-(func $$create__@lambdas.Lambdas.Function.$LambdaImplementor$31
- (result (ref null $lambdas.Lambdas.Function.$LambdaImplementor$31))
+(func $$create__@lambdas.Lambdas.Function.$LambdaImplementor$32
+ (result (ref null $lambdas.Lambdas.Function.$LambdaImplementor$32))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:159:13
- (local $$instance (ref null $lambdas.Lambdas.Function.$LambdaImplementor$31))
+ (local $$instance (ref null $lambdas.Lambdas.Function.$LambdaImplementor$32))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:159:13
-  (call $$clinit__void_<once>_@lambdas.Lambdas.Function.$LambdaImplementor$31 )
+  (call $$clinit__void_<once>_@lambdas.Lambdas.Function.$LambdaImplementor$32 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:159:13
-  (local.set $$instance (struct.new $lambdas.Lambdas.Function.$LambdaImplementor$31 (global.get $lambdas.Lambdas.Function.$LambdaImplementor$31.vtable) (global.get $lambdas.Lambdas.Function.$LambdaImplementor$31.itable) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.Function.$LambdaImplementor$32 (global.get $lambdas.Lambdas.Function.$LambdaImplementor$32.vtable) (global.get $lambdas.Lambdas.Function.$LambdaImplementor$32.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:159:13
-  (call $$ctor__void_$p_lambdas_Lambdas_Function_$LambdaImplementor$31@lambdas.Lambdas.Function.$LambdaImplementor$31 (ref.as_non_null (local.get $$instance)))
+  (call $$ctor__void_$p_lambdas_Lambdas_Function_$LambdaImplementor$32@lambdas.Lambdas.Function.$LambdaImplementor$32 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:159:13
   (return (local.get $$instance))
  )
 )
 
 ;;; void <anonymous> implements Function<T, T>.$ctor()
-(func $$ctor__void_$p_lambdas_Lambdas_Function_$LambdaImplementor$31@lambdas.Lambdas.Function.$LambdaImplementor$31
- (param $this (ref null $lambdas.Lambdas.Function.$LambdaImplementor$31))
+(func $$ctor__void_$p_lambdas_Lambdas_Function_$LambdaImplementor$32@lambdas.Lambdas.Function.$LambdaImplementor$32
+ (param $this (ref null $lambdas.Lambdas.Function.$LambdaImplementor$32))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:159:13
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:159:13
@@ -7851,144 +8308,144 @@
 )
 
 ;;; T <anonymous> implements Function<T, T>.apply(T t)
-(func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.Function.$LambdaImplementor$31
+(func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.Function.$LambdaImplementor$32
  (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:159:13
- (local $this (ref null $lambdas.Lambdas.Function.$LambdaImplementor$31))
- (local.set $this (ref.cast (ref $lambdas.Lambdas.Function.$LambdaImplementor$31) (local.get $this.untyped)))
+ (local $this (ref null $lambdas.Lambdas.Function.$LambdaImplementor$32))
+ (local.set $this (ref.cast (ref $lambdas.Lambdas.Function.$LambdaImplementor$32) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:159:18
   (return (local.get $t))
  )
 )
-(elem declare func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.Function.$LambdaImplementor$31)
+(elem declare func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.Function.$LambdaImplementor$32)
 
 ;;; void <anonymous> implements Function<T, T>.$clinit()
-(func $$clinit__void_<once>_@lambdas.Lambdas.Function.$LambdaImplementor$31
+(func $$clinit__void_<once>_@lambdas.Lambdas.Function.$LambdaImplementor$32
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:159:13
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:159:13
-  (if (global.get $$class-initialized@lambdas.Lambdas.Function.$LambdaImplementor$31)
+  (if (global.get $$class-initialized@lambdas.Lambdas.Function.$LambdaImplementor$32)
    (then
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:159:13
     (return )
    )
   )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:159:13
-  (global.set $$class-initialized@lambdas.Lambdas.Function.$LambdaImplementor$31 (i32.const 1))
+  (global.set $$class-initialized@lambdas.Lambdas.Function.$LambdaImplementor$32 (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:159:13
   (call $$clinit__void_<once>_@lambdas.Lambdas.Function.$LambdaAdaptor )
  )
 )
 
 ;;; Class<T> <anonymous> implements Function<T, T>.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Function.$LambdaImplementor$31
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Function.$LambdaImplementor$32
  (result (ref null $java.lang.Class))
  (block
-  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.Function.$LambdaImplementor$31)))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.Function.$LambdaImplementor$32)))
    (then
-    (return (global.get $$class@lambdas.Lambdas.Function.$LambdaImplementor$31))
+    (return (global.get $$class@lambdas.Lambdas.Function.$LambdaImplementor$32))
    )
   )
-  (global.set $$class@lambdas.Lambdas.Function.$LambdaImplementor$31 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Function.$LambdaImplementor$31 )(call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Function.$LambdaAdaptor )))
-  (return (global.get $$class@lambdas.Lambdas.Function.$LambdaImplementor$31))
+  (global.set $$class@lambdas.Lambdas.Function.$LambdaImplementor$32 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Function.$LambdaImplementor$32 )(call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Function.$LambdaAdaptor )))
+  (return (global.get $$class@lambdas.Lambdas.Function.$LambdaImplementor$32))
  )
 )
 
-;;; Code for lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 [methods]
+;;; Code for lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 [methods]
 
 ;;; <anonymous> implements FunctionalInterface <anonymous> implements FunctionalInterface.$create(LambdaInSubClass $outer_this)
-(func $$create__lambdas_Lambdas_LambdaInSubClass@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32
+(func $$create__lambdas_Lambdas_LambdaInSubClass@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33
  (param $$outer_this (ref null $lambdas.Lambdas.LambdaInSubClass))
- (result (ref null $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32))
+ (result (ref null $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:211:11
- (local $$instance (ref null $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32))
+ (local $$instance (ref null $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:211:11
-  (call $$clinit__void_<once>_@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 )
+  (call $$clinit__void_<once>_@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:211:11
-  (local.set $$instance (struct.new $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 (global.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32.vtable) (global.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32.itable) (i32.const 0) (ref.null $lambdas.Lambdas.LambdaInSubClass)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 (global.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33.vtable) (global.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33.itable) (i32.const 0) (ref.null $lambdas.Lambdas.LambdaInSubClass)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:211:11
-  (call $$ctor__lambdas_Lambdas_LambdaInSubClass__void_$p_lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$32@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  (call $$ctor__lambdas_Lambdas_LambdaInSubClass__void_$p_lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$33@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:211:11
   (return (local.get $$instance))
  )
 )
 
 ;;; void <anonymous> implements FunctionalInterface.$ctor(LambdaInSubClass $outer_this)
-(func $$ctor__lambdas_Lambdas_LambdaInSubClass__void_$p_lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$32@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32
- (param $this (ref null $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32))
+(func $$ctor__lambdas_Lambdas_LambdaInSubClass__void_$p_lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$33@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33
+ (param $this (ref null $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33))
  (param $$outer_this (ref null $lambdas.Lambdas.LambdaInSubClass))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:211:11
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:211:11
-  (struct.set $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 $$outer_this@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 (local.get $this) (local.get $$outer_this))
+  (struct.set $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 $$outer_this@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 (local.get $this) (local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:211:11
   (call $$ctor__void_$p_lambdas_Lambdas_FunctionalInterface_$LambdaAdaptor@lambdas.Lambdas.FunctionalInterface.$LambdaAdaptor (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; int <anonymous> implements FunctionalInterface.m(int i)
-(func $m_m__int__int@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32
+(func $m_m__int__int@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33
  (type $function.m_m__int__int)
  (param $this.untyped (ref $java.lang.Object))
  (param $i i32)
  (result i32)
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:211:11
  (local $a i32)
- (local $this (ref null $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32))
- (local.set $this (ref.cast (ref $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32) (local.get $this.untyped)))
+ (local $this (ref null $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33))
+ (local.set $this (ref.cast (ref $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:213:12
-  (call_ref $function.m_funInParent__void (ref.as_non_null (struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 $$outer_this@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 (local.get $this)))(struct.get $lambdas.Lambdas.LambdaInSubClass.vtable $m_funInParent__void (struct.get $lambdas.Lambdas.LambdaInSubClass $vtable(struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 $$outer_this@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 (local.get $this)))))
+  (call_ref $function.m_funInParent__void (ref.as_non_null (struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 $$outer_this@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 (local.get $this)))(struct.get $lambdas.Lambdas.LambdaInSubClass.vtable $m_funInParent__void (struct.get $lambdas.Lambdas.LambdaInSubClass $vtable(struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 $$outer_this@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 (local.get $this)))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:214:12
-  (call_ref $function.m_funInParent__void (ref.as_non_null (struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 $$outer_this@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 (local.get $this)))(struct.get $lambdas.Lambdas.LambdaInSubClass.vtable $m_funInParent__void (struct.get $lambdas.Lambdas.LambdaInSubClass $vtable(struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 $$outer_this@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 (local.get $this)))))
+  (call_ref $function.m_funInParent__void (ref.as_non_null (struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 $$outer_this@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 (local.get $this)))(struct.get $lambdas.Lambdas.LambdaInSubClass.vtable $m_funInParent__void (struct.get $lambdas.Lambdas.LambdaInSubClass $vtable(struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 $$outer_this@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 (local.get $this)))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:215:12
-  (call_ref $function.m_funInParent__void (ref.as_non_null (struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 $$outer_this@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 (local.get $this)))(struct.get $lambdas.Lambdas.LambdaInSubClass.vtable $m_funInParent__void (struct.get $lambdas.Lambdas.LambdaInSubClass $vtable(struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 $$outer_this@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 (local.get $this)))))
+  (call_ref $function.m_funInParent__void (ref.as_non_null (struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 $$outer_this@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 (local.get $this)))(struct.get $lambdas.Lambdas.LambdaInSubClass.vtable $m_funInParent__void (struct.get $lambdas.Lambdas.LambdaInSubClass $vtable(struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 $$outer_this@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 (local.get $this)))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:218:12
-  (local.set $a (struct.get $lambdas.Lambdas.Parent $fieldInParent@lambdas.Lambdas.Parent (struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 $$outer_this@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 (local.get $this))))
+  (local.set $a (struct.get $lambdas.Lambdas.Parent $fieldInParent@lambdas.Lambdas.Parent (struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 $$outer_this@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 (local.get $this))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:219:12
-  (local.set $a (struct.get $lambdas.Lambdas.Parent $fieldInParent@lambdas.Lambdas.Parent (struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 $$outer_this@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 (local.get $this))))
+  (local.set $a (struct.get $lambdas.Lambdas.Parent $fieldInParent@lambdas.Lambdas.Parent (struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 $$outer_this@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 (local.get $this))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:220:12
-  (local.set $a (struct.get $lambdas.Lambdas.Parent $fieldInParent@lambdas.Lambdas.Parent (struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 $$outer_this@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 (local.get $this))))
+  (local.set $a (struct.get $lambdas.Lambdas.Parent $fieldInParent@lambdas.Lambdas.Parent (struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 $$outer_this@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 (local.get $this))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:221:12
   (return (local.get $a))
  )
 )
-(elem declare func $m_m__int__int@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32)
+(elem declare func $m_m__int__int@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33)
 
 ;;; void <anonymous> implements FunctionalInterface.$clinit()
-(func $$clinit__void_<once>_@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32
+(func $$clinit__void_<once>_@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:211:11
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:211:11
-  (if (global.get $$class-initialized@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32)
+  (if (global.get $$class-initialized@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33)
    (then
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:211:11
     (return )
    )
   )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:211:11
-  (global.set $$class-initialized@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 (i32.const 1))
+  (global.set $$class-initialized@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:211:11
   (call $$clinit__void_<once>_@lambdas.Lambdas.FunctionalInterface.$LambdaAdaptor )
  )
 )
 
 ;;; Class<T> <anonymous> implements FunctionalInterface.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33
  (result (ref null $java.lang.Class))
  (block
-  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32)))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33)))
    (then
-    (return (global.get $$class@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32))
+    (return (global.get $$class@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33))
    )
   )
-  (global.set $$class@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 )(call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.FunctionalInterface.$LambdaAdaptor )))
-  (return (global.get $$class@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32))
+  (global.set $$class@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 )(call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.FunctionalInterface.$LambdaAdaptor )))
+  (return (global.get $$class@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33))
  )
 )
 
@@ -8029,7 +8486,7 @@
  (local.set $this (ref.cast (ref $lambdas.Lambdas.LambdaInSubClass) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:210:6
-  (local.set $l (call $$create__lambdas_Lambdas_LambdaInSubClass@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$32 (local.get $this)))
+  (local.set $l (call $$create__lambdas_Lambdas_LambdaInSubClass@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$33 (local.get $this)))
  )
 )
 (elem declare func $m_testLambdaInSubclass__void@lambdas.Lambdas.LambdaInSubClass)
@@ -8079,161 +8536,161 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.LambdaInSubClass)
 
-;;; Code for lambdas.Lambdas.Outer.$LambdaImplementor$33 [methods]
+;;; Code for lambdas.Lambdas.Outer.$LambdaImplementor$34 [methods]
 
 ;;; <anonymous> implements Runnable <anonymous> implements Runnable.$create(Outer $outer_this)
-(func $$create__lambdas_Lambdas_Outer@lambdas.Lambdas.Outer.$LambdaImplementor$33
+(func $$create__lambdas_Lambdas_Outer@lambdas.Lambdas.Outer.$LambdaImplementor$34
  (param $$outer_this (ref null $lambdas.Lambdas.Outer))
- (result (ref null $lambdas.Lambdas.Outer.$LambdaImplementor$33))
+ (result (ref null $lambdas.Lambdas.Outer.$LambdaImplementor$34))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:333:19
- (local $$instance (ref null $lambdas.Lambdas.Outer.$LambdaImplementor$33))
+ (local $$instance (ref null $lambdas.Lambdas.Outer.$LambdaImplementor$34))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:333:19
-  (call $$clinit__void_<once>_@lambdas.Lambdas.Outer.$LambdaImplementor$33 )
+  (call $$clinit__void_<once>_@lambdas.Lambdas.Outer.$LambdaImplementor$34 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:333:19
-  (local.set $$instance (struct.new $lambdas.Lambdas.Outer.$LambdaImplementor$33 (global.get $lambdas.Lambdas.Outer.$LambdaImplementor$33.vtable) (global.get $lambdas.Lambdas.Outer.$LambdaImplementor$33.itable) (i32.const 0) (ref.null $lambdas.Lambdas.Outer)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.Outer.$LambdaImplementor$34 (global.get $lambdas.Lambdas.Outer.$LambdaImplementor$34.vtable) (global.get $lambdas.Lambdas.Outer.$LambdaImplementor$34.itable) (i32.const 0) (ref.null $lambdas.Lambdas.Outer)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:333:19
-  (call $$ctor__lambdas_Lambdas_Outer__void_$p_lambdas_Lambdas_Outer_$LambdaImplementor$33@lambdas.Lambdas.Outer.$LambdaImplementor$33 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  (call $$ctor__lambdas_Lambdas_Outer__void_$p_lambdas_Lambdas_Outer_$LambdaImplementor$34@lambdas.Lambdas.Outer.$LambdaImplementor$34 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:333:19
   (return (local.get $$instance))
  )
 )
 
 ;;; void <anonymous> implements Runnable.$ctor(Outer $outer_this)
-(func $$ctor__lambdas_Lambdas_Outer__void_$p_lambdas_Lambdas_Outer_$LambdaImplementor$33@lambdas.Lambdas.Outer.$LambdaImplementor$33
- (param $this (ref null $lambdas.Lambdas.Outer.$LambdaImplementor$33))
+(func $$ctor__lambdas_Lambdas_Outer__void_$p_lambdas_Lambdas_Outer_$LambdaImplementor$34@lambdas.Lambdas.Outer.$LambdaImplementor$34
+ (param $this (ref null $lambdas.Lambdas.Outer.$LambdaImplementor$34))
  (param $$outer_this (ref null $lambdas.Lambdas.Outer))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:333:19
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:333:19
-  (struct.set $lambdas.Lambdas.Outer.$LambdaImplementor$33 $$outer_this@lambdas.Lambdas.Outer.$LambdaImplementor$33 (local.get $this) (local.get $$outer_this))
+  (struct.set $lambdas.Lambdas.Outer.$LambdaImplementor$34 $$outer_this@lambdas.Lambdas.Outer.$LambdaImplementor$34 (local.get $this) (local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:333:19
   (call $$ctor__void_$p_lambdas_Lambdas_Runnable_$LambdaAdaptor@lambdas.Lambdas.Runnable.$LambdaAdaptor (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void <anonymous> implements Runnable.run()
-(func $m_run__void@lambdas.Lambdas.Outer.$LambdaImplementor$33
+(func $m_run__void@lambdas.Lambdas.Outer.$LambdaImplementor$34
  (type $function.m_run__void)
  (param $this.untyped (ref $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:333:19
- (local $this (ref null $lambdas.Lambdas.Outer.$LambdaImplementor$33))
- (local.set $this (ref.cast (ref $lambdas.Lambdas.Outer.$LambdaImplementor$33) (local.get $this.untyped)))
+ (local $this (ref null $lambdas.Lambdas.Outer.$LambdaImplementor$34))
+ (local.set $this (ref.cast (ref $lambdas.Lambdas.Outer.$LambdaImplementor$34) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:333:25
-  (call_ref $function.m_m__void_$pp_lambdas (ref.as_non_null (struct.get $lambdas.Lambdas.Outer.$LambdaImplementor$33 $$outer_this@lambdas.Lambdas.Outer.$LambdaImplementor$33 (local.get $this)))(struct.get $lambdas.Lambdas.Outer.vtable $m_m__void_$pp_lambdas (struct.get $lambdas.Lambdas.Outer $vtable(struct.get $lambdas.Lambdas.Outer.$LambdaImplementor$33 $$outer_this@lambdas.Lambdas.Outer.$LambdaImplementor$33 (local.get $this)))))
+  (call_ref $function.m_m__void_$pp_lambdas (ref.as_non_null (struct.get $lambdas.Lambdas.Outer.$LambdaImplementor$34 $$outer_this@lambdas.Lambdas.Outer.$LambdaImplementor$34 (local.get $this)))(struct.get $lambdas.Lambdas.Outer.vtable $m_m__void_$pp_lambdas (struct.get $lambdas.Lambdas.Outer $vtable(struct.get $lambdas.Lambdas.Outer.$LambdaImplementor$34 $$outer_this@lambdas.Lambdas.Outer.$LambdaImplementor$34 (local.get $this)))))
  )
 )
-(elem declare func $m_run__void@lambdas.Lambdas.Outer.$LambdaImplementor$33)
+(elem declare func $m_run__void@lambdas.Lambdas.Outer.$LambdaImplementor$34)
 
 ;;; void <anonymous> implements Runnable.$clinit()
-(func $$clinit__void_<once>_@lambdas.Lambdas.Outer.$LambdaImplementor$33
+(func $$clinit__void_<once>_@lambdas.Lambdas.Outer.$LambdaImplementor$34
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:333:19
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:333:19
-  (if (global.get $$class-initialized@lambdas.Lambdas.Outer.$LambdaImplementor$33)
+  (if (global.get $$class-initialized@lambdas.Lambdas.Outer.$LambdaImplementor$34)
    (then
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:333:19
     (return )
    )
   )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:333:19
-  (global.set $$class-initialized@lambdas.Lambdas.Outer.$LambdaImplementor$33 (i32.const 1))
+  (global.set $$class-initialized@lambdas.Lambdas.Outer.$LambdaImplementor$34 (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:333:19
   (call $$clinit__void_<once>_@lambdas.Lambdas.Runnable.$LambdaAdaptor )
  )
 )
 
 ;;; Class<T> <anonymous> implements Runnable.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Outer.$LambdaImplementor$33
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Outer.$LambdaImplementor$34
  (result (ref null $java.lang.Class))
  (block
-  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.Outer.$LambdaImplementor$33)))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.Outer.$LambdaImplementor$34)))
    (then
-    (return (global.get $$class@lambdas.Lambdas.Outer.$LambdaImplementor$33))
+    (return (global.get $$class@lambdas.Lambdas.Outer.$LambdaImplementor$34))
    )
   )
-  (global.set $$class@lambdas.Lambdas.Outer.$LambdaImplementor$33 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Outer.$LambdaImplementor$33 )(call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Runnable.$LambdaAdaptor )))
-  (return (global.get $$class@lambdas.Lambdas.Outer.$LambdaImplementor$33))
+  (global.set $$class@lambdas.Lambdas.Outer.$LambdaImplementor$34 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Outer.$LambdaImplementor$34 )(call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Runnable.$LambdaAdaptor )))
+  (return (global.get $$class@lambdas.Lambdas.Outer.$LambdaImplementor$34))
  )
 )
 
-;;; Code for lambdas.Lambdas.Sub.$LambdaImplementor$34 [methods]
+;;; Code for lambdas.Lambdas.Sub.$LambdaImplementor$35 [methods]
 
 ;;; <anonymous> implements Runnable <anonymous> implements Runnable.$create(Sub $outer_this)
-(func $$create__lambdas_Lambdas_Sub@lambdas.Lambdas.Sub.$LambdaImplementor$34
+(func $$create__lambdas_Lambdas_Sub@lambdas.Lambdas.Sub.$LambdaImplementor$35
  (param $$outer_this (ref null $lambdas.Lambdas.Sub))
- (result (ref null $lambdas.Lambdas.Sub.$LambdaImplementor$34))
+ (result (ref null $lambdas.Lambdas.Sub.$LambdaImplementor$35))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:345:24
- (local $$instance (ref null $lambdas.Lambdas.Sub.$LambdaImplementor$34))
+ (local $$instance (ref null $lambdas.Lambdas.Sub.$LambdaImplementor$35))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:345:24
-  (call $$clinit__void_<once>_@lambdas.Lambdas.Sub.$LambdaImplementor$34 )
+  (call $$clinit__void_<once>_@lambdas.Lambdas.Sub.$LambdaImplementor$35 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:345:24
-  (local.set $$instance (struct.new $lambdas.Lambdas.Sub.$LambdaImplementor$34 (global.get $lambdas.Lambdas.Sub.$LambdaImplementor$34.vtable) (global.get $lambdas.Lambdas.Sub.$LambdaImplementor$34.itable) (i32.const 0) (ref.null $lambdas.Lambdas.Sub)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.Sub.$LambdaImplementor$35 (global.get $lambdas.Lambdas.Sub.$LambdaImplementor$35.vtable) (global.get $lambdas.Lambdas.Sub.$LambdaImplementor$35.itable) (i32.const 0) (ref.null $lambdas.Lambdas.Sub)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:345:24
-  (call $$ctor__lambdas_Lambdas_Sub__void_$p_lambdas_Lambdas_Sub_$LambdaImplementor$34@lambdas.Lambdas.Sub.$LambdaImplementor$34 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  (call $$ctor__lambdas_Lambdas_Sub__void_$p_lambdas_Lambdas_Sub_$LambdaImplementor$35@lambdas.Lambdas.Sub.$LambdaImplementor$35 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:345:24
   (return (local.get $$instance))
  )
 )
 
 ;;; void <anonymous> implements Runnable.$ctor(Sub $outer_this)
-(func $$ctor__lambdas_Lambdas_Sub__void_$p_lambdas_Lambdas_Sub_$LambdaImplementor$34@lambdas.Lambdas.Sub.$LambdaImplementor$34
- (param $this (ref null $lambdas.Lambdas.Sub.$LambdaImplementor$34))
+(func $$ctor__lambdas_Lambdas_Sub__void_$p_lambdas_Lambdas_Sub_$LambdaImplementor$35@lambdas.Lambdas.Sub.$LambdaImplementor$35
+ (param $this (ref null $lambdas.Lambdas.Sub.$LambdaImplementor$35))
  (param $$outer_this (ref null $lambdas.Lambdas.Sub))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:345:24
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:345:24
-  (struct.set $lambdas.Lambdas.Sub.$LambdaImplementor$34 $$outer_this@lambdas.Lambdas.Sub.$LambdaImplementor$34 (local.get $this) (local.get $$outer_this))
+  (struct.set $lambdas.Lambdas.Sub.$LambdaImplementor$35 $$outer_this@lambdas.Lambdas.Sub.$LambdaImplementor$35 (local.get $this) (local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:345:24
   (call $$ctor__void_$p_lambdas_Lambdas_Runnable_$LambdaAdaptor@lambdas.Lambdas.Runnable.$LambdaAdaptor (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void <anonymous> implements Runnable.run()
-(func $m_run__void@lambdas.Lambdas.Sub.$LambdaImplementor$34
+(func $m_run__void@lambdas.Lambdas.Sub.$LambdaImplementor$35
  (type $function.m_run__void)
  (param $this.untyped (ref $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:345:24
- (local $this (ref null $lambdas.Lambdas.Sub.$LambdaImplementor$34))
- (local.set $this (ref.cast (ref $lambdas.Lambdas.Sub.$LambdaImplementor$34) (local.get $this.untyped)))
+ (local $this (ref null $lambdas.Lambdas.Sub.$LambdaImplementor$35))
+ (local.set $this (ref.cast (ref $lambdas.Lambdas.Sub.$LambdaImplementor$35) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:346:14
-  (call $m_m__void_$pp_lambdas@lambdas.Lambdas.Super (ref.as_non_null (struct.get $lambdas.Lambdas.Sub.$LambdaImplementor$34 $$outer_this@lambdas.Lambdas.Sub.$LambdaImplementor$34 (local.get $this))))
+  (call $m_m__void_$pp_lambdas@lambdas.Lambdas.Super (ref.as_non_null (struct.get $lambdas.Lambdas.Sub.$LambdaImplementor$35 $$outer_this@lambdas.Lambdas.Sub.$LambdaImplementor$35 (local.get $this))))
  )
 )
-(elem declare func $m_run__void@lambdas.Lambdas.Sub.$LambdaImplementor$34)
+(elem declare func $m_run__void@lambdas.Lambdas.Sub.$LambdaImplementor$35)
 
 ;;; void <anonymous> implements Runnable.$clinit()
-(func $$clinit__void_<once>_@lambdas.Lambdas.Sub.$LambdaImplementor$34
+(func $$clinit__void_<once>_@lambdas.Lambdas.Sub.$LambdaImplementor$35
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:345:24
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:345:24
-  (if (global.get $$class-initialized@lambdas.Lambdas.Sub.$LambdaImplementor$34)
+  (if (global.get $$class-initialized@lambdas.Lambdas.Sub.$LambdaImplementor$35)
    (then
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:345:24
     (return )
    )
   )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:345:24
-  (global.set $$class-initialized@lambdas.Lambdas.Sub.$LambdaImplementor$34 (i32.const 1))
+  (global.set $$class-initialized@lambdas.Lambdas.Sub.$LambdaImplementor$35 (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:345:24
   (call $$clinit__void_<once>_@lambdas.Lambdas.Runnable.$LambdaAdaptor )
  )
 )
 
 ;;; Class<T> <anonymous> implements Runnable.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Sub.$LambdaImplementor$34
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Sub.$LambdaImplementor$35
  (result (ref null $java.lang.Class))
  (block
-  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.Sub.$LambdaImplementor$34)))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.Sub.$LambdaImplementor$35)))
    (then
-    (return (global.get $$class@lambdas.Lambdas.Sub.$LambdaImplementor$34))
+    (return (global.get $$class@lambdas.Lambdas.Sub.$LambdaImplementor$35))
    )
   )
-  (global.set $$class@lambdas.Lambdas.Sub.$LambdaImplementor$34 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Sub.$LambdaImplementor$34 )(call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Runnable.$LambdaAdaptor )))
-  (return (global.get $$class@lambdas.Lambdas.Sub.$LambdaImplementor$34))
+  (global.set $$class@lambdas.Lambdas.Sub.$LambdaImplementor$35 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Sub.$LambdaImplementor$35 )(call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Runnable.$LambdaAdaptor )))
+  (return (global.get $$class@lambdas.Lambdas.Sub.$LambdaImplementor$35))
  )
 )
 
@@ -8280,7 +8737,7 @@
  (local.set $this (ref.cast (ref $lambdas.Lambdas.Sub) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:343:6
-  (local.set $r (call $$create__lambdas_Lambdas_Sub@lambdas.Lambdas.Sub.$LambdaImplementor$34 (local.get $this)))
+  (local.set $r (call $$create__lambdas_Lambdas_Sub@lambdas.Lambdas.Sub.$LambdaImplementor$35 (local.get $this)))
  )
 )
 (elem declare func $m_n__void_$pp_lambdas@lambdas.Lambdas.Sub)
@@ -8330,82 +8787,82 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.Sub)
 
-;;; Code for lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35 [methods]
+;;; Code for lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36 [methods]
 
 ;;; <anonymous> implements Runnable <anonymous> implements Runnable.$create(SubWithLambda $outer_this)
-(func $$create__lambdas_Lambdas_SubWithLambda@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35
+(func $$create__lambdas_Lambdas_SubWithLambda@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36
  (param $$outer_this (ref null $lambdas.Lambdas.SubWithLambda))
- (result (ref null $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35))
+ (result (ref null $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:354:19
- (local $$instance (ref null $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35))
+ (local $$instance (ref null $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:354:19
-  (call $$clinit__void_<once>_@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35 )
+  (call $$clinit__void_<once>_@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:354:19
-  (local.set $$instance (struct.new $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35 (global.get $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35.vtable) (global.get $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35.itable) (i32.const 0) (ref.null $lambdas.Lambdas.SubWithLambda)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36 (global.get $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36.vtable) (global.get $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36.itable) (i32.const 0) (ref.null $lambdas.Lambdas.SubWithLambda)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:354:19
-  (call $$ctor__lambdas_Lambdas_SubWithLambda__void_$p_lambdas_Lambdas_SubWithLambda_$LambdaImplementor$35@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  (call $$ctor__lambdas_Lambdas_SubWithLambda__void_$p_lambdas_Lambdas_SubWithLambda_$LambdaImplementor$36@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:354:19
   (return (local.get $$instance))
  )
 )
 
 ;;; void <anonymous> implements Runnable.$ctor(SubWithLambda $outer_this)
-(func $$ctor__lambdas_Lambdas_SubWithLambda__void_$p_lambdas_Lambdas_SubWithLambda_$LambdaImplementor$35@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35
- (param $this (ref null $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35))
+(func $$ctor__lambdas_Lambdas_SubWithLambda__void_$p_lambdas_Lambdas_SubWithLambda_$LambdaImplementor$36@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36
+ (param $this (ref null $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36))
  (param $$outer_this (ref null $lambdas.Lambdas.SubWithLambda))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:354:19
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:354:19
-  (struct.set $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35 $$outer_this@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35 (local.get $this) (local.get $$outer_this))
+  (struct.set $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36 $$outer_this@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36 (local.get $this) (local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:354:19
   (call $$ctor__void_$p_lambdas_Lambdas_Runnable_$LambdaAdaptor@lambdas.Lambdas.Runnable.$LambdaAdaptor (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void <anonymous> implements Runnable.run()
-(func $m_run__void@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35
+(func $m_run__void@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36
  (type $function.m_run__void)
  (param $this.untyped (ref $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:354:19
- (local $this (ref null $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35))
- (local.set $this (ref.cast (ref $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35) (local.get $this.untyped)))
+ (local $this (ref null $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36))
+ (local.set $this (ref.cast (ref $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:354:25
-  (call $m_m__void_$pp_lambdas@lambdas.Lambdas.Super (ref.as_non_null (struct.get $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35 $$outer_this@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35 (local.get $this))))
+  (call $m_m__void_$pp_lambdas@lambdas.Lambdas.Super (ref.as_non_null (struct.get $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36 $$outer_this@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36 (local.get $this))))
  )
 )
-(elem declare func $m_run__void@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35)
+(elem declare func $m_run__void@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36)
 
 ;;; void <anonymous> implements Runnable.$clinit()
-(func $$clinit__void_<once>_@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35
+(func $$clinit__void_<once>_@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:354:19
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:354:19
-  (if (global.get $$class-initialized@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35)
+  (if (global.get $$class-initialized@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36)
    (then
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:354:19
     (return )
    )
   )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:354:19
-  (global.set $$class-initialized@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35 (i32.const 1))
+  (global.set $$class-initialized@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36 (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:354:19
   (call $$clinit__void_<once>_@lambdas.Lambdas.Runnable.$LambdaAdaptor )
  )
 )
 
 ;;; Class<T> <anonymous> implements Runnable.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36
  (result (ref null $java.lang.Class))
  (block
-  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35)))
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36)))
    (then
-    (return (global.get $$class@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35))
+    (return (global.get $$class@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36))
    )
   )
-  (global.set $$class@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35 )(call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Runnable.$LambdaAdaptor )))
-  (return (global.get $$class@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35))
+  (global.set $$class@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36 )(call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Runnable.$LambdaAdaptor )))
+  (return (global.get $$class@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36))
  )
 )
 
@@ -8452,7 +8909,7 @@
  (local.set $this (ref.cast (ref $lambdas.Lambdas.SubWithLambda) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:354:6
-  (local.set $r (call $$create__lambdas_Lambdas_SubWithLambda@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$35 (local.get $this)))
+  (local.set $r (call $$create__lambdas_Lambdas_SubWithLambda@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$36 (local.get $this)))
  )
 )
 (elem declare func $m_n__void_$pp_lambdas@lambdas.Lambdas.SubWithLambda)
@@ -8502,100 +8959,21 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.SubWithLambda)
 
-;;; Code for lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36 [methods]
-
-;;; <anonymous> implements EmptyInterfaceProvider <anonymous> implements EmptyInterfaceProvider.$create()
-(func $$create__@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36
- (result (ref null $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:66
- (local $$instance (ref null $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:66
-  (call $$clinit__void_<once>_@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36 )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:66
-  (local.set $$instance (struct.new $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36 (global.get $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36.vtable) (global.get $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36.itable) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:66
-  (call $$ctor__void_$p_lambdas_Lambdas_ProviderHolder_$LambdaImplementor$36@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36 (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:66
-  (return (local.get $$instance))
- )
-)
-
-;;; void <anonymous> implements EmptyInterfaceProvider.$ctor()
-(func $$ctor__void_$p_lambdas_Lambdas_ProviderHolder_$LambdaImplementor$36@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36
- (param $this (ref null $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:66
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:66
-  (call $$ctor__void_$p_lambdas_Lambdas_EmptyInterfaceProvider_$LambdaAdaptor@lambdas.Lambdas.EmptyInterfaceProvider.$LambdaAdaptor (ref.as_non_null (local.get $this)))
- )
-)
-
-;;; EmptyInterface <anonymous> implements EmptyInterfaceProvider.provide()
-(func $m_provide__lambdas_Lambdas_EmptyInterface@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36
- (type $function.m_provide__lambdas_Lambdas_EmptyInterface)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:66
- (local $this (ref null $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36))
- (local.set $this (ref.cast (ref $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36) (local.get $this.untyped)))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:72
-  (return (block (result (ref null $java.lang.Object))
-   (call $$clinit__void_<once>_@lambdas.Lambdas.ProviderHolder )
-   (global.get $emptyInterface@lambdas.Lambdas.ProviderHolder)
-  ))
- )
-)
-(elem declare func $m_provide__lambdas_Lambdas_EmptyInterface@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36)
-
-;;; void <anonymous> implements EmptyInterfaceProvider.$clinit()
-(func $$clinit__void_<once>_@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:66
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:66
-  (if (global.get $$class-initialized@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36)
-   (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:66
-    (return )
-   )
-  )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:66
-  (global.set $$class-initialized@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36 (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:66
-  (call $$clinit__void_<once>_@lambdas.Lambdas.EmptyInterfaceProvider.$LambdaAdaptor )
- )
-)
-
-;;; Class<T> <anonymous> implements EmptyInterfaceProvider.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36
- (result (ref null $java.lang.Class))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36)))
-   (then
-    (return (global.get $$class@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36))
-   )
-  )
-  (global.set $$class@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36 )(call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.EmptyInterfaceProvider.$LambdaAdaptor )))
-  (return (global.get $$class@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$36))
- )
-)
-
 ;;; Code for lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37 [methods]
 
 ;;; <anonymous> implements EmptyInterfaceProvider <anonymous> implements EmptyInterfaceProvider.$create()
 (func $$create__@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37
  (result (ref null $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:69
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:66
  (local $$instance (ref null $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:69
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:66
   (call $$clinit__void_<once>_@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37 )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:69
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:66
   (local.set $$instance (struct.new $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37 (global.get $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37.vtable) (global.get $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37.itable) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:69
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:66
   (call $$ctor__void_$p_lambdas_Lambdas_ProviderHolder_$LambdaImplementor$37@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37 (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:69
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:66
   (return (local.get $$instance))
  )
 )
@@ -8603,9 +8981,9 @@
 ;;; void <anonymous> implements EmptyInterfaceProvider.$ctor()
 (func $$ctor__void_$p_lambdas_Lambdas_ProviderHolder_$LambdaImplementor$37@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37
  (param $this (ref null $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:69
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:66
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:69
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:66
   (call $$ctor__void_$p_lambdas_Lambdas_EmptyInterfaceProvider_$LambdaAdaptor@lambdas.Lambdas.EmptyInterfaceProvider.$LambdaAdaptor (ref.as_non_null (local.get $this)))
  )
 )
@@ -8615,30 +8993,33 @@
  (type $function.m_provide__lambdas_Lambdas_EmptyInterface)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:69
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:66
  (local $this (ref null $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:75
-  (return (call $$create__@lambdas.Lambdas.ProviderHolder.2 ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:72
+  (return (block (result (ref null $java.lang.Object))
+   (call $$clinit__void_<once>_@lambdas.Lambdas.ProviderHolder )
+   (global.get $emptyInterface@lambdas.Lambdas.ProviderHolder)
+  ))
  )
 )
 (elem declare func $m_provide__lambdas_Lambdas_EmptyInterface@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37)
 
 ;;; void <anonymous> implements EmptyInterfaceProvider.$clinit()
 (func $$clinit__void_<once>_@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:69
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:66
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:69
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:66
   (if (global.get $$class-initialized@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:69
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:66
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:69
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:66
   (global.set $$class-initialized@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37 (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:69
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:366:66
   (call $$clinit__void_<once>_@lambdas.Lambdas.EmptyInterfaceProvider.$LambdaAdaptor )
  )
 )
@@ -8654,5 +9035,81 @@
   )
   (global.set $$class@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37 )(call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.EmptyInterfaceProvider.$LambdaAdaptor )))
   (return (global.get $$class@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$37))
+ )
+)
+
+;;; Code for lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38 [methods]
+
+;;; <anonymous> implements EmptyInterfaceProvider <anonymous> implements EmptyInterfaceProvider.$create()
+(func $$create__@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38
+ (result (ref null $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:69
+ (local $$instance (ref null $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:69
+  (call $$clinit__void_<once>_@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38 )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:69
+  (local.set $$instance (struct.new $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38 (global.get $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38.vtable) (global.get $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38.itable) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:69
+  (call $$ctor__void_$p_lambdas_Lambdas_ProviderHolder_$LambdaImplementor$38@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38 (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:69
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> implements EmptyInterfaceProvider.$ctor()
+(func $$ctor__void_$p_lambdas_Lambdas_ProviderHolder_$LambdaImplementor$38@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38
+ (param $this (ref null $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:69
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:69
+  (call $$ctor__void_$p_lambdas_Lambdas_EmptyInterfaceProvider_$LambdaAdaptor@lambdas.Lambdas.EmptyInterfaceProvider.$LambdaAdaptor (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; EmptyInterface <anonymous> implements EmptyInterfaceProvider.provide()
+(func $m_provide__lambdas_Lambdas_EmptyInterface@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38
+ (type $function.m_provide__lambdas_Lambdas_EmptyInterface)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:69
+ (local $this (ref null $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38))
+ (local.set $this (ref.cast (ref $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:75
+  (return (call $$create__@lambdas.Lambdas.ProviderHolder.2 ))
+ )
+)
+(elem declare func $m_provide__lambdas_Lambdas_EmptyInterface@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38)
+
+;;; void <anonymous> implements EmptyInterfaceProvider.$clinit()
+(func $$clinit__void_<once>_@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:69
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:69
+  (if (global.get $$class-initialized@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:69
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:69
+  (global.set $$class-initialized@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38 (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:367:69
+  (call $$clinit__void_<once>_@lambdas.Lambdas.EmptyInterfaceProvider.$LambdaAdaptor )
+ )
+)
+
+;;; Class<T> <anonymous> implements EmptyInterfaceProvider.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38)))
+   (then
+    (return (global.get $$class@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38))
+   )
+  )
+  (global.set $$class@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38 )(call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.EmptyInterfaceProvider.$LambdaAdaptor )))
+  (return (global.get $$class@lambdas.Lambdas.ProviderHolder.$LambdaImplementor$38))
  )
 )

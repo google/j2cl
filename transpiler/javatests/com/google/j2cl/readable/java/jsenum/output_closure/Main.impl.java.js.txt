@@ -75,24 +75,24 @@ class Main extends j_l_Object {
   }
   $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object__int(NativeStringEnum.ONE, NativeStringEnum.THREE);
   $Objects.m_equals__java_lang_Object__java_lang_Object__boolean(NativeStringEnum.ONE, NativeStringEnum.THREE);
-  let supplier = Supplier.$adapt(() =>{
+  let supplier = Supplier.$adapt(/**  @return {$Enums_BoxedComparableLightEnum<?ComparableJsEnum>}*/ (() =>{
    return /**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay));
-  });
-  let consummer = Consumer.$adapt((e) =>{
+  }));
+  let consummer = Consumer.$adapt((/** $Enums_BoxedComparableLightEnum<?ComparableJsEnum> */ e) =>{
    let e_1 = /**@type {?ComparableJsEnum}*/ ($Enums.unbox(e, $Overlay));
   });
-  Main.m_acceptsJsFunctionSupplier__jsenum_Main_JsFunctionSuppiler__void(() =>{
+  Main.m_acceptsJsFunctionSupplier__jsenum_Main_JsFunctionSuppiler__void(/**  @return {$Enums_BoxedComparableLightEnum<?ComparableJsEnum>}*/ (() =>{
    return /**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay));
-  });
-  Main.m_acceptsSupplierOfSupplier__jsenum_Main_Supplier__void(Supplier.$adapt(() =>{
-   return Supplier.$adapt(() =>{
-    return /**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay));
-   });
   }));
-  Main.m_acceptsJsFunctionParameterizedByJsEnum__jsenum_Main_SpecializedJsFunction__void((e_2) =>{
+  Main.m_acceptsSupplierOfSupplier__jsenum_Main_Supplier__void(Supplier.$adapt(/**  @return {Supplier<$Enums_BoxedComparableLightEnum<?ComparableJsEnum>>}*/ (() =>{
+   return Supplier.$adapt(/**  @return {$Enums_BoxedComparableLightEnum<?ComparableJsEnum>}*/ (() =>{
+    return /**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay));
+   }));
+  })));
+  Main.m_acceptsJsFunctionParameterizedByJsEnum__jsenum_Main_SpecializedJsFunction__void(/**  @return {$Enums_BoxedComparableLightEnum<?ComparableJsEnum>}*/ ((/** $Enums_BoxedComparableLightEnum<?ComparableJsEnum> */ e_2) =>{
    let e_3 = /**@type {?ComparableJsEnum}*/ ($Enums.unbox(e_2, $Overlay));
    return /**@type {$Enums_BoxedComparableLightEnum<?ComparableJsEnum>}*/ ($Enums.boxComparable(e_3, $Overlay));
-  });
+  }));
  }
  /** @nodts */
  static m_testExhaustiveJsEnumSwitchExpression__void() {
@@ -183,7 +183,7 @@ class Main extends j_l_Object {
  /** @nodts */
  static m_testVarargs__void() {
   Main.m_varargsConsumer__arrayOf_java_lang_Object__java_lang_Object([/**@type {$Enums_BoxedComparableLightEnum<!SomeJsEnum>}*/ ($Enums.boxComparable(SomeJsEnum.A, SomeJsEnum_$Overlay)), /**@type {$Enums_BoxedComparableLightEnum<!SomeJsEnum>}*/ ($Enums.boxComparable(SomeJsEnum.A, SomeJsEnum_$Overlay))]);
-  let consumer = Consumer.$adapt((arg0) =>{
+  let consumer = Consumer.$adapt((/** $Enums_BoxedComparableLightEnum<?SomeJsEnum> */ arg0) =>{
    let arg0_1 = /**@type {?SomeJsEnum}*/ ($Enums.unbox(arg0, SomeJsEnum_$Overlay));
    Main.m_varargsConsumer__arrayOf_java_lang_Object__java_lang_Object([/**@type {$Enums_BoxedComparableLightEnum<?SomeJsEnum>}*/ ($Enums.boxComparable(arg0_1, SomeJsEnum_$Overlay))]);
   });
