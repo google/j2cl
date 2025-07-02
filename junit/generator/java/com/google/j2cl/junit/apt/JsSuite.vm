@@ -9,11 +9,13 @@ const JavaWrapper = goog.require('${testClass.jsUnitAdapterQualifiedClassName()}
 goog.setTestOnly();
 
 const TestCase = goog.require('goog.testing.TestCase');
+const testSuite = goog.require('goog.testing.testSuite');
 
 #if(${testClass.isParameterized()})
-const {parameterizedTestSuite} = goog.require('com.google.j2cl.junit.parameterizedTestSuite');
-parameterizedTestSuite(new JavaWrapper(), {order: TestCase.Order.NATURAL});
+const {expandParameterized} = goog.require('com.google.j2cl.junit.parameterizedTestSuite');
+const suite = expandParameterized(new JavaWrapper());
 #else
-const testSuite = goog.require('goog.testing.testSuite');
-testSuite(new JavaWrapper(), {order: TestCase.Order.NATURAL});
+const suite = new JavaWrapper();
 #end
+
+testSuite(suite, {order: TestCase.Order.NATURAL});

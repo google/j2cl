@@ -11,10 +11,6 @@ closure_js_library(
     testonly = 1,
     srcs = ["parameterized_test_suite.js"],
     visibility = ["//build_defs/internal_do_not_use:__pkg__"],
-    deps = [
-        "//third_party:closure_testcase",
-        "//third_party:closure_testsuite",
-    ],
 )
 
 j2wasm_library(

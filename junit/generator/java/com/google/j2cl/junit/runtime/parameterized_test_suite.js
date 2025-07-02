@@ -15,9 +15,6 @@
 goog.module('com.google.j2cl.junit.parameterizedTestSuite');
 goog.setTestOnly();
 
-const TestCase = goog.require('goog.testing.TestCase');
-const testSuite = goog.require('goog.testing.testSuite');
-
 /** @record */
 class TestCaseWrapper {
   setUpPage() {}
@@ -57,22 +54,14 @@ class TestCaseWrapper {
   getParam(index, testCaseIndex) {}
 }
 
-/**
- * A drop-in replacement for goog.testing.testSuite that supports parameterized
- * tests
- * @param {!TestCaseWrapper} javaWrapper
- * @param {{order: (!TestCase.Order|undefined)}=} options
- */
-function parameterizedTestSuite(javaWrapper, options) {
-  testSuite(parameterizedTestHelper(javaWrapper), options);
-}
 
 /**
- * Takes a javaWrapper object to create a nested testing object.
+ * Expands the javaWrapper for a parameterized test into a nested test object
+ * that can be consumed as a test suite.
  * @param {!TestCaseWrapper} javaWrapper
  * @return {!Object} the nested testing object
  */
-function parameterizedTestHelper(javaWrapper) {
+function expandParameterized(javaWrapper) {
   let currTestNumber = 0;
   // Using quotes on method names here since export_test_functions doesn't
   // handle function declaration in object literals.
@@ -167,4 +156,4 @@ function assert(condition) {
   return condition;
 }
 
-exports = {parameterizedTestSuite};
+exports = {expandParameterized};
