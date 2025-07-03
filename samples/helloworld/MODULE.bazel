@@ -5,8 +5,10 @@ module(
 bazel_dep(
     name = "j2cl",
     repo_name = "com_google_j2cl",
+    version = "20250630",
 )
 
+# Use head j2cl for testing purposes.
 local_path_override(
     module_name = "j2cl",
     path = "../..",
