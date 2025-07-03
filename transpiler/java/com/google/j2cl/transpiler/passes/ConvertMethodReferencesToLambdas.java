@@ -178,8 +178,10 @@ public class ConvertMethodReferencesToLambdas extends NormalizationPass {
     boolean hasQualifier =
         qualifier != null && !(qualifier instanceof JavaScriptConstructorReference);
 
+    boolean needsQualifier =
+        !targetMethodDescriptor.isStatic() && !targetMethodDescriptor.isLocalFunction();
     ImmutableList<Expression> forwardedArguments;
-    if (!targetMethodDescriptor.isStatic() && !hasQualifier) {
+    if (needsQualifier && !hasQualifier) {
       // This is a reference to an instance method without an explicit qualifier, e.g.:
       //
       // Class::instanceMethod
@@ -194,10 +196,11 @@ public class ConvertMethodReferencesToLambdas extends NormalizationPass {
       qualifier = parameters.get(0).createReference();
       forwardedArguments =
           parameters.stream().skip(1).map(Variable::createReference).collect(toImmutableList());
-    } else if (targetMethodDescriptor.isStatic() && hasQualifier) {
-      // This is a reference to a static method but has an explicit qualifier. This path cannot
-      // be invoked by Java method references, because references to static methods in Java cannot
-      // have qualifiers. It can only be a Kotlin extension method, e.g.:
+    } else if (!needsQualifier && hasQualifier) {
+      // This is a reference to a static method or local function but has an explicit qualifier.
+      // This path cannot be invoked by Java method references, because references to static methods
+      // in Java cannot have qualifiers and local functions do not exist in Java. It can only be a
+      // Kotlin extension method, e.g.:
       //
       // q::extensionMethod
       //

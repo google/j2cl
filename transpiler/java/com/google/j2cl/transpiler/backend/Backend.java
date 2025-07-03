@@ -34,6 +34,7 @@ import com.google.j2cl.transpiler.passes.AddNothingReturnStatements;
 import com.google.j2cl.transpiler.passes.AddSwitchExpressionsExhaustivenessCheck;
 import com.google.j2cl.transpiler.passes.AddVisibilityMethodBridgesJ2kt;
 import com.google.j2cl.transpiler.passes.AnnotateProtobufMethodsAsKtProperties;
+import com.google.j2cl.transpiler.passes.ConvertLocalFunctionDeclarationToFunctionExpressions;
 import com.google.j2cl.transpiler.passes.ConvertMethodReferencesToLambdas;
 import com.google.j2cl.transpiler.passes.CreateImplicitConstructors;
 import com.google.j2cl.transpiler.passes.DesugarInstanceOfPatterns;
@@ -265,6 +266,7 @@ public enum Backend {
           OptimizeAnonymousInnerClassesToFunctionExpressions::new,
           ImplementLambdaExpressionsViaJsFunctionAdaptor::new,
           NormalizeFunctionExpressions::new,
+          ConvertLocalFunctionDeclarationToFunctionExpressions::new,
           // Compute bridge methods before optimizing autovalue, since inlining the autovalue
           // classes requires inlining the bridges as well.
           AddBridgeMethods::new,

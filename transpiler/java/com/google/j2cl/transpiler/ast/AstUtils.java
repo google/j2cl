@@ -1176,7 +1176,9 @@ public final class AstUtils {
       MemberReference memberReference, DeclaredTypeDescriptor contextTypeDescriptor) {
     MemberDescriptor target = memberReference.getTarget();
     DeclaredTypeDescriptor targetQualifierType = getTargetQualifierTypeDescriptor(target);
-    if (memberReference.getQualifier() != null || targetQualifierType == null) {
+    if (target.isLocalFunction()
+        || memberReference.getQualifier() != null
+        || targetQualifierType == null) {
       return memberReference;
     }
 

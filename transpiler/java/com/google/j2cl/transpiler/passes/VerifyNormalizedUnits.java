@@ -34,6 +34,7 @@ import com.google.j2cl.transpiler.ast.InstanceOfExpression;
 import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
 import com.google.j2cl.transpiler.ast.JsForInStatement;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
+import com.google.j2cl.transpiler.ast.LocalFunctionDeclarationStatement;
 import com.google.j2cl.transpiler.ast.LoopStatement;
 import com.google.j2cl.transpiler.ast.Member;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
@@ -101,6 +102,21 @@ public class VerifyNormalizedUnits extends NormalizationPass {
                     || getCurrentType().isAbstract()
                     || getCurrentType().isInterface());
             checkState(method.getParameters().stream().allMatch(Variable::isParameter));
+          }
+
+          @Override
+          public void exitLocalFunctionDeclarationStatement(
+              LocalFunctionDeclarationStatement localFunctionDeclarationStatement) {
+            // Local functions are converted to variable assignments to a function expression.
+            throw new IllegalStateException();
+          }
+
+          @Override
+          public void exitMemberDescriptor(MemberDescriptor memberDescriptor) {
+            if (memberDescriptor.isLocalFunction()) {
+              // Local functions are converted to variable assignments to a function expression.
+              throw new IllegalStateException();
+            }
           }
 
           @Override

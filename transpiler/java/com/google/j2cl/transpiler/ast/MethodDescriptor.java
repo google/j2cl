@@ -266,6 +266,11 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   @Override
   public abstract boolean isDefaultMethod();
 
+  @Override
+  public boolean isLocalFunction() {
+    return getEnclosingMethodDescriptor() != null;
+  }
+
   /** Return true if the underlying method represent a Kotlin suspend function. */
   public abstract boolean isSuspendFunction();
 
@@ -346,6 +351,10 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return method != null
         && method.getDeclarationDescriptor().equals(candidateTarget.getDeclarationDescriptor());
   }
+
+  /** Returns the enclosing method descriptor if the descriptor represents a local function. */
+  @Nullable
+  public abstract MethodDescriptor getEnclosingMethodDescriptor();
 
   public abstract ImmutableList<ParameterDescriptor> getParameterDescriptors();
 
@@ -502,7 +511,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
   @Override
   public boolean isInstanceMember() {
-    return !isStatic() && !isConstructor();
+    return !isStatic() && !isConstructor() && !isLocalFunction();
   }
 
   /** Whether the method does dynamic dispatch and can be overridden. */
@@ -1436,6 +1445,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public abstract Builder setEnclosingTypeDescriptor(
         DeclaredTypeDescriptor enclosingTypeDescriptor);
 
+    public abstract Builder setEnclosingMethodDescriptor(
+        @Nullable MethodDescriptor enclosingMethodDescriptor);
+
     public abstract DeclaredTypeDescriptor getEnclosingTypeDescriptor();
 
     public abstract Builder setName(String name);
@@ -1628,6 +1640,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         // Default methods can not be abstract.
         checkState(!methodDescriptor.isDefaultMethod() || !methodDescriptor.isGeneralizingBridge());
 
+        // JsAsync local function are not supported yet.
+        checkState(!methodDescriptor.isLocalFunction() || !methodDescriptor.isJsAsync());
+
         // Default methods can only be in interfaces.
         checkState(
             !methodDescriptor.isDefaultMethod()
@@ -1678,6 +1693,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       // checkState(methodDescriptor.isNative() == declaration.isNative());
       checkState(methodDescriptor.isDefaultMethod() == declaration.isDefaultMethod());
       checkState(methodDescriptor.isFinal() == declaration.isFinal());
+      checkState(methodDescriptor.isLocalFunction() == declaration.isLocalFunction());
       checkState(methodDescriptor.isStatic() == declaration.isStatic());
       checkState(
           declaration.getParameterTypeDescriptors().size()

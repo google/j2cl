@@ -50,6 +50,7 @@ import com.google.j2cl.transpiler.ast.Label
 import com.google.j2cl.transpiler.ast.LabeledStatement
 import com.google.j2cl.transpiler.ast.Literal
 import com.google.j2cl.transpiler.ast.LocalClassDeclarationStatement
+import com.google.j2cl.transpiler.ast.LocalFunctionDeclarationStatement
 import com.google.j2cl.transpiler.ast.Member
 import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.MethodCall
@@ -395,6 +396,7 @@ internal class CompilationUnitBuilder(
       is IrInstanceInitializerCall ->
         throw IllegalStateException("IrInstanceInitializerCall statements should have been lowered")
       is IrClass -> convertLocalClass(irStatement)
+      is IrFunction -> convertLocalFunction(irStatement)
       is IrContainerExpression -> convertContainer(irStatement)
       is IrVariable -> convertVariableStatement(irStatement)
       is IrWhen -> convertWhenStatement(irStatement)
@@ -412,6 +414,14 @@ internal class CompilationUnitBuilder(
 
   private fun convertLocalClass(irClass: IrClass): Statement =
     LocalClassDeclarationStatement(convertClass(irClass), getNameSourcePosition(irClass))
+
+  private fun convertLocalFunction(irFunction: IrFunction): Statement =
+    LocalFunctionDeclarationStatement.newBuilder()
+      .setMethodDescriptor(environment.getDeclaredMethodDescriptor(irFunction))
+      .setSourcePosition(getSourcePosition(irFunction))
+      .setParameters(convertParameters(irFunction))
+      .setBody(convertBody(irFunction.body!!))
+      .build()
 
   private fun convertContainer(irBlock: IrContainerExpression): Block =
     Block.newBuilder()

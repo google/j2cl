@@ -116,6 +116,10 @@ public abstract class MemberDescriptor
     return false;
   }
 
+  public boolean isLocalFunction() {
+    return false;
+  }
+
   public boolean isField() {
     return false;
   }

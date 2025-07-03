@@ -55,6 +55,7 @@ import com.google.j2cl.transpiler.ast.JsForInStatement;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.Literal;
 import com.google.j2cl.transpiler.ast.LocalClassDeclarationStatement;
+import com.google.j2cl.transpiler.ast.LocalFunctionDeclarationStatement;
 import com.google.j2cl.transpiler.ast.LoopStatement;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.MemberReference;
@@ -749,7 +750,8 @@ public final class ConversionContextVisitor extends AbstractRewriter {
         || statement instanceof FieldDeclarationStatement
         || statement instanceof TryStatement
         || statement instanceof LabeledStatement
-        || statement instanceof LocalClassDeclarationStatement) {
+        || statement instanceof LocalClassDeclarationStatement
+        || statement instanceof LocalFunctionDeclarationStatement) {
       // These statements do not need rewriting.
       return statement;
     }

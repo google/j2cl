@@ -77,6 +77,7 @@ import org.jetbrains.kotlin.backend.jvm.ir.collectVisibleTypeParameters
 import org.jetbrains.kotlin.backend.jvm.ir.constantValue
 import org.jetbrains.kotlin.backend.jvm.ir.eraseToScope
 import org.jetbrains.kotlin.backend.jvm.lower.getFileClassInfo
+import org.jetbrains.kotlin.descriptors.Visibilities
 import org.jetbrains.kotlin.ir.declarations.IrAnnotationContainer
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrConstructor
@@ -651,15 +652,18 @@ internal class KotlinEnvironment(
 
       val visibility = irFunction.j2clVisibility
       val isStatic = (irFunction.isStatic || irFunction.parent !is IrDeclaration) && !isConstructor
-
       val isNative =
         irFunction.isExternal ||
           (!irFunction.getJsInfo().isJsOverlay &&
             enclosingTypeDescriptor.isNative &&
             irFunction.isAbstract)
+      val isLocal = irFunction.visibility.delegate == Visibilities.Local
+      val enclosingMethodDescriptor =
+        if (isLocal) getDeclaredMethodDescriptor(irFunction.parent as IrFunction) else null
 
       MethodDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
+        .setEnclosingMethodDescriptor(enclosingMethodDescriptor)
         .setName(irFunction.javaName(jvmBackendContext))
         .setParameterDescriptors(parameterDescriptors.build())
         .setReturnTypeDescriptor(

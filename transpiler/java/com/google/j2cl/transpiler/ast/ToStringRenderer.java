@@ -346,8 +346,14 @@ class ToStringRenderer {
 
       @Override
       public boolean enterMethod(Method method) {
-        print(method.getReadableDescription() + " ");
-        accept(method.body);
+        printMethod(method);
+        return false;
+      }
+
+      @Override
+      public boolean enterLocalFunctionDeclarationStatement(
+          LocalFunctionDeclarationStatement functionDeclarationStatement) {
+        printMethod(functionDeclarationStatement);
         return false;
       }
 
@@ -744,6 +750,11 @@ class ToStringRenderer {
         unIndent();
         newLine();
         print("}");
+      }
+
+      private void printMethod(MethodLike methodLike) {
+        print(methodLike.getReadableDescription() + " ");
+        accept(methodLike.getBody());
       }
 
       private void unIndent() {

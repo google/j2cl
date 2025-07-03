@@ -122,11 +122,10 @@ private val loweringPhase = loweringPhase {
   // Inline property accessors where the field can be referenced directly
   // (ex. private properties).
   perFileLowering(jvmPropertiesLoweringFactory)
+  // Moves fields and accessors out from its property.
+  perFileLowering(::LocalDelegatedPropertiesLowering)
   // Make IrGetField/IrSetField to objects' fields point to the static versions
   perFileLowering(::RemapObjectFieldAccesses)
-  // Extract local functions and move them up to the closest enclosing type. Rewrite local
-  // function calls accordingly.
-  perFileLowering(::LocalFunctionLowering)
   perFileLowering(jvmLocalClassPopupLoweringFactory)
   // Adds stub methods to the implementations of the read-only collection types to properly
   // implement the Java collection APIs.

@@ -25,6 +25,7 @@ import org.jetbrains.kotlin.builtins.StandardNames
 import org.jetbrains.kotlin.ir.InternalSymbolFinderAPI
 import org.jetbrains.kotlin.ir.IrBuiltIns
 import org.jetbrains.kotlin.ir.declarations.IrClass
+import org.jetbrains.kotlin.ir.declarations.IrFunction
 import org.jetbrains.kotlin.ir.declarations.IrPackageFragment
 import org.jetbrains.kotlin.ir.declarations.IrValueParameter
 import org.jetbrains.kotlin.ir.expressions.IrCall
@@ -312,11 +313,20 @@ class IntrinsicMethods(val irBuiltIns: IrBuiltIns) {
       rightSide.map { right -> Key(left.fqnOrFail, methodName, listOf(right.fqnOrFail)) }
     }
 
+  /**
+   * A unique key for an `IrFunction` to be used for identification. The key is composed of the
+   * fully-qualified name of the owner, the name of the function, and the fully-qualified names of
+   * its value parameters. This allows for precise lookup of intrinsic functions.
+   */
   private data class Key(
     val owner: FqName,
     val name: String,
     val valueParameterTypeFqNames: List<FqName?> = emptyList(),
-  )
+  ) {
+    fun toFqName(): FqName =
+      // add the name of the element to the fqn of the parent.
+      FqName.fromSegments(owner.pathSegments().map { it.toString() } + listOf(name))
+  }
 
   private fun IrFunctionSymbol.toKey(): Key {
     val parent = owner.parent
@@ -331,6 +341,8 @@ class IntrinsicMethods(val irBuiltIns: IrBuiltIns) {
         // Some intrinsic methods are not defined in a file and their direct parent is the package
         // they belong to.
         parent is IrPackageFragment -> parent.packageFqName
+        // For local functions, use the fqn of the enclosing function.
+        parent is IrFunction -> parent.symbol.toKey().toFqName()
         else -> throw IllegalStateException("Parent not supported $parent: ${parent.kotlinFqName}")
       }
 
