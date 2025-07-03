@@ -337,32 +337,6 @@ open class ClassExample {
   fun nonNativeJavaType(l: StringJoiner) {}
  }
 
- enum class Foo {
-  `val`,
-  `var`,
-  `fun`,
-  alloc,
-  `init`,
-  initialize,
-  allocFoo,
-  initFoo,
-  newFoo,
-  copyFoo,
-  mutableCopyFoo,
-  register,
-  struct,
-  NULL,
-  YES,
-  NO;
-
-  companion object {
-   @JvmStatic
-   fun withOrdinal(ordinal: Int): Foo {
-    return Foo.values()[ordinal]
-   }
-  }
- }
-
  open class SubCollection<E>: AbstractList<E>() {
   override fun get(index: Int): E {
    return null as E

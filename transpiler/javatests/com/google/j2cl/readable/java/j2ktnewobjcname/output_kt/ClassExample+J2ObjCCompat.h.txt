@@ -5,8 +5,6 @@
 @class J2ktJavaUtilStringJoiner;
 @class J2ktNewClassExample;
 @class J2ktNewClassExampleCompanion;
-@class J2ktNewClassExample_Foo;
-@class J2ktNewClassExample_FooCompanion;
 @class J2ktNewClassExample_NonCollection;
 @class J2ktNewClassExample_NonCollectionCompanion;
 @class NSNumber;
@@ -460,97 +458,6 @@ NS_INLINE void NewClassExample_numberTypeWithNSNumber_(NSNumber* l) {
 
 NS_INLINE void NewClassExample_nonNativeJavaTypeWithJavaUtilStringJoiner_(J2ktJavaUtilStringJoiner* l) {
  [J2ktNewClassExampleCompanion.shared nonNativeJavaTypeWithJavaUtilStringJoiner:l];
-}
-
-@compatibility_alias NewClassExample_Foo J2ktNewClassExample_Foo;
-
-@compatibility_alias NewClassExample_FooCompanion J2ktNewClassExample_FooCompanion;
-
-typedef NS_ENUM(int32_t, NewClassExample_Foo_Enum) {
- NewClassExample_Foo_Enum_val = 0,
- NewClassExample_Foo_Enum_var = 1,
- NewClassExample_Foo_Enum_fun = 2,
- NewClassExample_Foo_Enum_alloc = 3,
- NewClassExample_Foo_Enum_init = 4,
- NewClassExample_Foo_Enum_initialize = 5,
- NewClassExample_Foo_Enum_allocFoo = 6,
- NewClassExample_Foo_Enum_initFoo = 7,
- NewClassExample_Foo_Enum_newFoo = 8,
- NewClassExample_Foo_Enum_copyFoo = 9,
- NewClassExample_Foo_Enum_mutableCopyFoo = 10,
- NewClassExample_Foo_Enum_register = 11,
- NewClassExample_Foo_Enum_struct = 12,
- NewClassExample_Foo_Enum_NULL = 13,
- NewClassExample_Foo_Enum_YES = 14,
- NewClassExample_Foo_Enum_NO = 15,
-};
-
-NS_INLINE J2ktNewClassExample_Foo* NewClassExample_Foo_get_val(void) {
- return J2ktNewClassExample_Foo.val;
-}
-
-NS_INLINE J2ktNewClassExample_Foo* NewClassExample_Foo_get_var(void) {
- return J2ktNewClassExample_Foo.var;
-}
-
-NS_INLINE J2ktNewClassExample_Foo* NewClassExample_Foo_get_fun(void) {
- return J2ktNewClassExample_Foo.fun;
-}
-
-NS_INLINE J2ktNewClassExample_Foo* NewClassExample_Foo_get_alloc(void) {
- return J2ktNewClassExample_Foo.alloc__;
-}
-
-NS_INLINE J2ktNewClassExample_Foo* NewClassExample_Foo_get_init(void) {
- return J2ktNewClassExample_Foo.init__;
-}
-
-NS_INLINE J2ktNewClassExample_Foo* NewClassExample_Foo_get_initialize(void) {
- return J2ktNewClassExample_Foo.initialize__;
-}
-
-NS_INLINE J2ktNewClassExample_Foo* NewClassExample_Foo_get_allocFoo(void) {
- return J2ktNewClassExample_Foo.allocFoo;
-}
-
-NS_INLINE J2ktNewClassExample_Foo* NewClassExample_Foo_get_initFoo(void) {
- return J2ktNewClassExample_Foo.initFoo;
-}
-
-NS_INLINE J2ktNewClassExample_Foo* NewClassExample_Foo_get_newFoo(void) {
- return J2ktNewClassExample_Foo.newFoo;
-}
-
-NS_INLINE J2ktNewClassExample_Foo* NewClassExample_Foo_get_copyFoo(void) {
- return J2ktNewClassExample_Foo.copyFoo;
-}
-
-NS_INLINE J2ktNewClassExample_Foo* NewClassExample_Foo_get_mutableCopyFoo(void) {
- return J2ktNewClassExample_Foo.mutableCopyFoo;
-}
-
-NS_INLINE J2ktNewClassExample_Foo* NewClassExample_Foo_get_register(void) {
- return J2ktNewClassExample_Foo.register__;
-}
-
-NS_INLINE J2ktNewClassExample_Foo* NewClassExample_Foo_get_struct(void) {
- return J2ktNewClassExample_Foo.struct__;
-}
-
-NS_INLINE J2ktNewClassExample_Foo* NewClassExample_Foo_get_NULL(void) {
- return J2ktNewClassExample_Foo.NULL__;
-}
-
-NS_INLINE J2ktNewClassExample_Foo* NewClassExample_Foo_get_YES(void) {
- return J2ktNewClassExample_Foo.YES__;
-}
-
-NS_INLINE J2ktNewClassExample_Foo* NewClassExample_Foo_get_NO(void) {
- return J2ktNewClassExample_Foo.NO__;
-}
-
-NS_INLINE J2ktNewClassExample_Foo* NewClassExample_Foo_withOrdinalWithInt_(int32_t ordinal) {
- return [J2ktNewClassExample_FooCompanion.shared withOrdinalWithInt:ordinal];
 }
 
 @compatibility_alias NewClassExample_NonCollection J2ktNewClassExample_NonCollection;

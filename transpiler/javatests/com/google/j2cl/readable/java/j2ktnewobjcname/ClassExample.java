@@ -205,29 +205,6 @@ public class ClassExample {
 
   public static void nonNativeJavaType(StringJoiner l) {}
 
-  public enum Foo {
-    val,
-    var,
-    fun,
-    alloc,
-    init,
-    initialize,
-    allocFoo,
-    initFoo,
-    newFoo,
-    copyFoo,
-    mutableCopyFoo,
-    register,
-    struct,
-    NULL,
-    YES,
-    NO;
-
-    public static Foo withOrdinal(int ordinal) {
-      return Foo.values()[ordinal];
-    }
-  }
-
   public static class SubCollection<E extends @Nullable Object> extends AbstractList<E> {
     @Override
     public E get(int index) {
