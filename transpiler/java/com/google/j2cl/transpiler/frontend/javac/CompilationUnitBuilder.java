@@ -882,7 +882,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   private Expression convertLambda(JCLambda expression) {
-    TypeDescriptor expressionTypeDescriptor = environment.createTypeDescriptor(expression.type);
+    TypeDescriptor expressionTypeDescriptor =
+        environment.createTypeDescriptor(expression.type, inNullMarkedScope());
     MethodDescriptor functionalMethodDescriptor =
         expressionTypeDescriptor.getFunctionalInterface().getSingleAbstractMethodDescriptor();
 
