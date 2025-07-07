@@ -122,11 +122,15 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
       }
     }
 
-  private fun needsObjCNameAnnotation(typeDeclaration: TypeDeclaration): Boolean =
+  private fun needsObjCNameAnnotation(
+    typeDeclaration: TypeDeclaration,
+    ignoreNewObjcNames: Boolean = false,
+  ): Boolean =
     environment.ktVisibility(typeDeclaration).needsObjCNameAnnotation &&
       !typeDeclaration.isLocal &&
       !typeDeclaration.isAnonymous &&
       (!NEW_OBJC_NAMES ||
+        ignoreNewObjcNames ||
         typeDeclaration.objectiveCName != null ||
         typeDeclaration.objectiveCNamePrefix != null)
 
@@ -146,9 +150,9 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
   private fun needsObjCNameAnnotation(fieldDescriptor: FieldDescriptor): Boolean =
     !hiddenFromObjCMapping.contains(fieldDescriptor) &&
       fieldDescriptor.enclosingTypeDescriptor.typeDeclaration.let { enclosingTypeDeclaration ->
-        needsObjCNameAnnotation(enclosingTypeDeclaration) &&
+        needsObjCNameAnnotation(enclosingTypeDeclaration, ignoreNewObjcNames = true) &&
           environment.ktVisibility(fieldDescriptor).needsObjCNameAnnotation &&
-          !NEW_OBJC_NAMES
+          (!NEW_OBJC_NAMES || fieldDescriptor.isEnumConstant)
       }
 
   internal fun renderedObjCNames(method: Method): MethodObjCNames? =
