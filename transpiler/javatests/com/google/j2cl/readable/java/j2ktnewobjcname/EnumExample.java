@@ -57,4 +57,16 @@ public enum EnumExample {
   public static EnumExample withOrdinal(int ordinal) {
     return EnumExample.values()[ordinal];
   }
+
+  enum PackagePrivateEnum {
+    FOO
+  }
+
+  protected enum ProtectedEnum {
+    FOO
+  }
+
+  private enum PrivateEnum {
+    FOO
+  }
 }

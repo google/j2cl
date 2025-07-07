@@ -366,4 +366,25 @@ open class ClassExample {
    fun staticMethod() {}
   }
  }
+
+ open class PackagePrivateClass internal constructor() {
+  @JvmField
+  var publicField: Int = 0
+
+  open fun publicMethod() {}
+ }
+
+ open class ProtectedClass {
+  @JvmField
+  var publicField: Int = 0
+
+  open fun publicMethod() {}
+ }
+
+ open class PrivateClass internal constructor() {
+  @JvmField
+  var publicField: Int = 0
+
+  open fun publicMethod() {}
+ }
 }

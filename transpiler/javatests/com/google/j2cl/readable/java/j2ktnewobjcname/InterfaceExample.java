@@ -24,3 +24,23 @@ public interface InterfaceExample {
 
   int method2(int i, long l, String s);
 }
+
+class NonPublicInterfaces {
+  interface PackagePrivateInterface {
+    int FIELD = 1;
+
+    void method();
+  }
+
+  protected interface ProtectedInterface {
+    int FIELD = 1;
+
+    void method();
+  }
+
+  private interface PrivateInterface {
+    int FIELD = 1;
+
+    void method();
+  }
+}

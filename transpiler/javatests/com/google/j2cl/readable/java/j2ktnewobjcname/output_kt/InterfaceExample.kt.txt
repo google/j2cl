@@ -36,3 +36,29 @@ interface InterfaceExample {
   const val STRING: String = ""
  }
 }
+
+open class NonPublicInterfaces internal constructor() {
+ fun interface PackagePrivateInterface {
+  fun method()
+
+  companion object {
+   const val FIELD: Int = 1
+  }
+ }
+
+ fun interface ProtectedInterface {
+  fun method()
+
+  companion object {
+   const val FIELD: Int = 1
+  }
+ }
+
+ fun interface PrivateInterface {
+  fun method()
+
+  companion object {
+   const val FIELD: Int = 1
+  }
+ }
+}

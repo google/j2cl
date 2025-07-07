@@ -98,4 +98,19 @@ enum class EnumExample {
    return EnumExample.values()[ordinal]
   }
  }
+
+ enum class PackagePrivateEnum {
+  @ObjCName("FOO")
+  FOO;
+ }
+
+ enum class ProtectedEnum {
+  @ObjCName("FOO")
+  FOO;
+ }
+
+ enum class PrivateEnum {
+  @ObjCName("FOO")
+  FOO;
+ }
 }

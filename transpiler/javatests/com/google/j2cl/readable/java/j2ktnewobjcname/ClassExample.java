@@ -226,4 +226,22 @@ public class ClassExample {
   public static class NonCollection {
     public static void staticMethod() {}
   }
+
+  static class PackagePrivateClass {
+    public int publicField;
+
+    public void publicMethod() {}
+  }
+
+  protected static class ProtectedClass {
+    public int publicField;
+
+    public void publicMethod() {}
+  }
+
+  private static class PrivateClass {
+    public int publicField;
+
+    public void publicMethod() {}
+  }
 }
