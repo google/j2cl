@@ -18,12 +18,20 @@
 package j2kt
 
 import javaemul.lang.*
+import j2kt.NotNullable.Consumer
 import kotlin.String
 import kotlin.Suppress
 import kotlin.jvm.JvmStatic
 
 open class DefaultNullable {
  companion object {
+  @JvmStatic
+  internal fun testNonNullableLambdas_pp_j2kt() {
+   val methodReference: Consumer<String?> = Consumer { arg0: String? ->
+    DefaultNullable.accept_pp_j2kt(arg0)
+   }
+  }
+
   @JvmStatic
   internal fun accept_pp_j2kt(s: String?) {}
  }

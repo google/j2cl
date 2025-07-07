@@ -44,7 +44,6 @@ import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor;
-import com.google.j2cl.transpiler.ast.Variable;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -241,16 +240,19 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
                             typeParameterDescriptor, typeArgumentDescriptor, functionExpression));
             DeclaredTypeDescriptor inferredFunctionalInterface =
                 functionalInterface.withTypeArguments(inferredTypeArgumentDescriptors);
-            if (inferredFunctionalInterface.equals(functionalInterface)) {
-              return functionExpression;
-            }
             Streams.forEachPair(
                 functionExpression.getParameters().stream(),
                 inferredFunctionalInterface
                     .getSingleAbstractMethodDescriptor()
                     .getParameterTypeDescriptors()
                     .stream(),
-                Variable::setTypeDescriptor);
+                (variable, typeDescriptor) ->
+                    variable.setTypeDescriptor(
+                        propagateNullabilityTo(
+                            variable.getTypeDescriptor(), typeDescriptor, ImmutableSet.of())));
+            if (inferredFunctionalInterface.equals(functionalInterface)) {
+              return functionExpression;
+            }
             return FunctionExpression.Builder.from(functionExpression)
                 .setTypeDescriptor(inferredFunctionalInterface)
                 .build();
@@ -563,8 +565,13 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
       }
 
       case TypeVariable fromVariable -> {
-        return PropagateNullability.propagateNullabilityToDeclared(
-            toDeclared, getNormalizedUpperBoundTypeDescriptor(fromVariable), seen);
+        if (fromVariable.getLowerBoundTypeDescriptor() == null) {
+          return PropagateNullability.propagateNullabilityToDeclared(
+              toDeclared, getNormalizedUpperBoundTypeDescriptor(fromVariable), seen);
+        } else {
+          return PropagateNullability.propagateNullabilityToDeclared(
+              toDeclared, getNormalizedLowerBoundTypeDescriptor(fromVariable), seen);
+        }
       }
 
       default -> {

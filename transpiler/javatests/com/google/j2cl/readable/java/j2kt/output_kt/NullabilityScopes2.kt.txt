@@ -45,12 +45,12 @@ open class NullabilityScopes2 internal constructor() {
  open class NonNullMarkedScope<T: Recursive<T>> internal constructor() {
   open fun flatten(recursive: Recursive<T>?): MutableList<Any?>? {
    return recursive!!.toList().stream().map<MutableList<Any?>?>(
-    Function { arg0: Recursive<T> ->
+    Function { arg0: Recursive<T>? ->
      return@Function this.flatten(arg0)
     },
    ).flatMap<Any?>(
-    Function { arg0_1: MutableList<Any> ->
-     return@Function arg0_1.stream()
+    Function { arg0_1: MutableList<Any?>? ->
+     return@Function arg0_1!!.stream()
     } as Function<in MutableList<Any?>?, out Stream<*>>,
    ).collect<MutableList<Any>, Any?>(
     NullMarkedScope.toList<Any>() as Collector<in Any?, Any?, MutableList<Any>>,

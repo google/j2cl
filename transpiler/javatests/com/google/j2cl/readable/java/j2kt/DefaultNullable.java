@@ -19,10 +19,9 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 public class DefaultNullable {
-  // TODO(b/395585494): Uncomment when fixed
-  // static void testNonNullableLambdas() {
-  //   NotNullable.Consumer<String> methodReference = DefaultNullable::accept;
-  // }
+  static void testNonNullableLambdas() {
+    NotNullable.Consumer<String> methodReference = DefaultNullable::accept;
+  }
 
   static void accept(String s) {}
 }
