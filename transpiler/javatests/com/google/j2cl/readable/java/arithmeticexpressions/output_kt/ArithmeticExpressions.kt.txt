@@ -103,7 +103,7 @@ open class ArithmeticExpressions {
   k = k.or(true)
   var s: Short = 10.toShort()
   k = run {
-   s = (s.toInt() + 1.toShort().toInt()).toShort()
+   s = (s.toInt() + 1).toShort()
    s
   }.toInt() == 10
   var q: Int = 3.shr(2)
@@ -176,7 +176,7 @@ open class ArithmeticExpressions {
   val ___value_4: Int = ___array_4!![___index_4] / 1
   ___array_5!![___index_5] = ___value_4
   val longs: LongArray? = null
-  longs!![0] = longs!![0] + 1.toLong()
+  longs!![0] = longs!![0] + 1L
   longs!![0] = longs!![0] - 1L
   longs!![0] = longs!![0] - 1L
   val ___array_6: LongArray? = ArithmeticExpressions.getLongArray()
@@ -193,7 +193,7 @@ open class ArithmeticExpressions {
   val b: Boolean = run {
    val ___array_8: ShortArray? = shorts
    val ___index_8: Int = 0
-   val ___value_6: Short = (shorts!![0].toInt() + 1.toShort().toInt()).toShort()
+   val ___value_6: Short = (shorts!![0].toInt() + 1).toShort()
    ___array_8!![___index_8] = ___value_6
    ___value_6
   }.toInt() == 10
@@ -228,9 +228,9 @@ open class ArithmeticExpressions {
    ___value_1
   }
   var b: Byte? = 0.toByte()
-  b = (b!!.toByte().toInt() + 1.toByte().toInt()).toByte()
+  b = (b!!.toByte().toInt() + 1).toByte()
   var ch: Char? = 'c'
-  ch = (ch!!.toChar().code + '\u0001'.code).toChar()
+  ch = (ch!!.toChar().code + 1).toChar()
   run {
    f = f!!.toInt() + 1
    f
@@ -245,7 +245,7 @@ open class ArithmeticExpressions {
    internal var field_pp_arithmeticexpressions: T? = null
   }
   val ref: Ref<Byte?>? = null
-  ref!!.field_pp_arithmeticexpressions = (ref!!.field_pp_arithmeticexpressions!!.toByte().toInt() + 1.toByte().toInt()).toByte()
+  ref!!.field_pp_arithmeticexpressions = (ref!!.field_pp_arithmeticexpressions!!.toByte().toInt() + 1).toByte()
   val n: Int = 1 + ref!!.field_pp_arithmeticexpressions!!.toByte().toInt()
  }
 
@@ -261,7 +261,7 @@ open class ArithmeticExpressions {
   l = 2.or(
    boxedInteger!!.toInt(),
   ).toLong().or(2L)
-  l = 1000000L * l * 60.toLong() * 60.toLong() * 24.toLong()
+  l = 1000000L * l * 60L * 60L * 24L
   l = (24 * 60 * 60).toLong() * l * 1000000L
   d = run {
    l = run {
@@ -277,8 +277,8 @@ open class ArithmeticExpressions {
    }
    boxedInteger
   }!!.toInt().toLong()
-  l = (i + boxedInteger!!.toInt()).toLong() + l + 20.toLong()
-  d = (20.toLong() + l).toDouble() + d
+  l = (i + boxedInteger!!.toInt()).toLong() + l + 20L
+  d = (20L + l).toDouble() + d
  }
 
  open fun testEffectivelyFinalVariableInAssignmentExpression(condition: Boolean) {
@@ -286,7 +286,7 @@ open class ArithmeticExpressions {
   if (condition && run {
    effectivelyFinal = this.bar
    effectivelyFinal
-  } != 0.toLong()) {
+  } != 0L) {
    val unused: kotlin.Long = effectivelyFinal
   }
  }
@@ -322,7 +322,7 @@ open class ArithmeticExpressions {
   private fun testSideEffect() {
    val ___qualifier: ArithmeticExpressions? = ArithmeticExpressions.getWithSideEffect()
    val ___qualifier_1: ArithmeticExpressions? = ___qualifier
-   val ___value: kotlin.Long = ___qualifier!!.intField_pp_arithmeticexpressions + 5.toLong()
+   val ___value: kotlin.Long = ___qualifier!!.intField_pp_arithmeticexpressions + 5L
    ___qualifier_1!!.intField_pp_arithmeticexpressions = ___value
   }
 

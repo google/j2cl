@@ -34,7 +34,7 @@ import kotlin.jvm.JvmStatic
 open class CastPrimitives {
  open fun testPrimitiveCasts() {
   var b: Byte = 1.toByte()
-  var c: Char = '\u0001'
+  var c: Char = 1.toChar()
   var s: Short = 1.toShort()
   var i: Int = 1
   var l: Long = 1L
@@ -161,7 +161,7 @@ open class CastPrimitives {
 
  open fun testImplicitArgumentCasts() {
   val b: Byte = 127.toByte()
-  val c: Char = '\uFFFF'
+  val c: Char = 65535.toChar()
   val s: Short = 32767.toShort()
   val i: Int = 2147483647
   val l: Long = 9223372036854775807L
@@ -213,7 +213,7 @@ open class CastPrimitives {
 
  open fun testImplicitArrayIndexCasts(array: ByteArray?) {
   val b: Byte = 127.toByte()
-  val c: Char = '\uFFFF'
+  val c: Char = 65535.toChar()
   val s: Short = 32767.toShort()
   val i: Int = 2147483647
   var result: Byte = 0.toByte()
@@ -222,12 +222,12 @@ open class CastPrimitives {
   result = array!![s.toInt()]
   result = array!![i]
   result = array!![1]
-  result = array!!['a'.code]
+  result = array!![97]
  }
 
  open fun testImplicitLongAssignmentCasts() {
   val fbyte: Byte = 11.toByte()
-  val fchar: Char = '\u000C'
+  val fchar: Char = 12.toChar()
   val fshort: Short = 13.toShort()
   val fint: Int = 14
   val flong: Long = 15L

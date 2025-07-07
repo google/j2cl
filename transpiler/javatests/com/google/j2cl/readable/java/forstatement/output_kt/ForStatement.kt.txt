@@ -36,14 +36,14 @@ open class ForStatement {
   }
   var l: Long = 0L
   var count_1: Long = 0L
-  while (l < 100.toLong()) {
+  while (l < 100L) {
    count_1 = count_1 + 1L
    l = l + 1L
    l = l + 1L
   }
   var c: Char = 'a'
-  while (c.code < 'z'.code) {
-   c = (c.code + '\u0001'.code).toChar()
+  while (c.code < 122) {
+   c = (c.code + 1).toChar()
   }
   var a: Boolean = false
   while (run {

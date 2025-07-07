@@ -25,6 +25,7 @@ import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewrite
 
 /** Inserts casts where Java would normally autobox but Kotlin does not. */
 public final class InsertNumericCoercionsForAutoboxing extends NormalizationPass {
+  @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(
         new ConversionContextVisitor(
@@ -36,9 +37,7 @@ public final class InsertNumericCoercionsForAutoboxing extends NormalizationPass
                   Expression expression) {
                 // Java can implicitly narrow numeric literals even when also performing boxing.
                 // Kotlin cannot so, we'll just statically convert the literal.
-                // TODO(b/429178858): Checking boxed or primitive may be incorrect but it's
-                //  consistent with InsertBoxingConversions. Both need to be reconsidered.
-                if (TypeDescriptors.isBoxedOrPrimitiveType(inferredTypeDescriptor)
+                if (TypeDescriptors.isBoxedType(inferredTypeDescriptor)
                     && expression instanceof NumberLiteral literal) {
                   return new NumberLiteral(
                       inferredTypeDescriptor.toUnboxedType(), literal.getValue());
