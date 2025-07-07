@@ -165,7 +165,8 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
                       .getTypeDeclaration()
                       .getTypeParameterDescriptors();
               ImmutableList<TypeDescriptor> typeArgumentTypeDescriptors =
-                  methodDescriptor.getEnclosingTypeDescriptor().getTypeArgumentDescriptors();
+                  toNonRawTypeDescriptor(methodDescriptor.getEnclosingTypeDescriptor())
+                      .getTypeArgumentDescriptors();
               if (!typeArgumentTypeDescriptors.isEmpty()) {
                 rewrittenMethodDescriptor =
                     propagateNullabilityFromQualifier(
@@ -204,7 +205,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
             ImmutableList<TypeVariable> typeParameterDescriptors =
                 typeDescriptor.getTypeDeclaration().getTypeParameterDescriptors();
             ImmutableList<TypeDescriptor> typeArgumentDescriptors =
-                typeDescriptor.getTypeArgumentDescriptors();
+                toNonRawTypeDescriptor(typeDescriptor).getTypeArgumentDescriptors();
             if (typeArgumentDescriptors.isEmpty()) {
               return newInstance;
             }
@@ -227,13 +228,10 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
           public Node rewriteFunctionExpression(FunctionExpression functionExpression) {
             DeclaredTypeDescriptor functionalInterface =
                 functionExpression.getTypeDescriptor().getFunctionalInterface();
-            if (functionalInterface.isRaw()) {
-              return functionExpression;
-            }
             ImmutableList<TypeVariable> typeParameterDescriptors =
                 functionalInterface.getTypeDeclaration().getTypeParameterDescriptors();
             ImmutableList<TypeDescriptor> typeArgumentDescriptors =
-                functionalInterface.getTypeArgumentDescriptors();
+                toNonRawTypeDescriptor(functionalInterface).getTypeArgumentDescriptors();
             ImmutableList<TypeDescriptor> inferredTypeArgumentDescriptors =
                 zip(
                     typeParameterDescriptors,
@@ -860,5 +858,16 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
   private static NullabilityAnnotation mostNullableOf(
       NullabilityAnnotation first, NullabilityAnnotation second) {
     return NULLABILITY_ANNOTATION_ORDERING.max(first, second);
+  }
+
+  /** Returns non-RAW type descriptor, by using RAW type parameters as type arguments. */
+  private static DeclaredTypeDescriptor toNonRawTypeDescriptor(
+      DeclaredTypeDescriptor typeDescriptor) {
+    return !typeDescriptor.isRaw()
+        ? typeDescriptor
+        : typeDescriptor.withTypeArguments(
+            typeDescriptor.getTypeDeclaration().getTypeParameterDescriptors().stream()
+                .map(TypeVariable::toRawTypeDescriptor)
+                .collect(toImmutableList()));
   }
 }
