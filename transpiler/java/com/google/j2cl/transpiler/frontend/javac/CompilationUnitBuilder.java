@@ -1232,7 +1232,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       typeArgumentsDescriptors =
           methodSymbol.getTypeParameters().stream()
               .map(t -> mapping.get(t).stream().findFirst().orElse(getDeclaredUpperBound(t)))
-              .map(it -> environment.createTypeDescriptor(it, inNullMarkedScope))
+              .map(t -> environment.createTypeDescriptor(t, inNullMarkedScope))
               .collect(toImmutableList());
     }
     return typeArgumentsDescriptors;
