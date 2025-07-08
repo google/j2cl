@@ -1,4 +1,4 @@
-#!/bin/bash -i
+#!/bin/bash
 # Copyright 2019 Google Inc. All Rights Reserved
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,8 +15,9 @@
 
 # The script creates a tag to mark an individual point in the repository history
 # of J2CL and includes a version number for J2CL release.
+set -euo pipefail
 
-set -e
+source "$(dirname "$0")/deploy.sh"
 
 usage() {
     echo ""
@@ -30,40 +31,36 @@ usage() {
     echo ""
 }
 
-lib_version=""
+parse_arguments() {
+  lib_version=""
 
-while [[ "$1" != "" ]]; do
-  case $1 in
-    --version )    if [[ -z "$2" ]] || [[ "$2" == "--"* ]]; then
-                     echo "Error: Incorrect version value."
-                     usage
-                     exit 1
-                   fi
-                   shift
-                   lib_version=$1
-                   ;;
-    --help )       usage
-                   exit 1
-                   ;;
-    * )            echo "Error: unexpected option $1"
-                   usage
-                   exit 1
-                   ;;
-  esac
-  shift
-done
+  while [[ $# -gt 0 ]]; do
+    case $1 in
+      --version )
+        shift
+        lib_version=$1
+        ;;
+      --help )
+        usage
+        exit 0
+        ;;
+      * )
+        common::error "unexpected option $1"
+        ;;
+    esac
+    shift
+  done
+}
 
-if [[ -z "$lib_version" ]]; then
-  echo "Error: --version flag is missing"
-  usage
-  exit 1
-fi
+check_prerequisites() {
+  common::check_bazel
+  common::check_version_set
+}
 
-if [ ! -f "MODULE.bazel" ]; then
-  echo "Error: should be run from the root of the Bazel repository"
-  exit 1
-fi
+main() {
+  parse_arguments "$@"
+  check_prerequisites
+  common::create_and_push_git_tag "${lib_version}"
+}
 
-git tag -a ${lib_version} -m "${lib_version} release"
-git push origin ${lib_version}
-
+main "$@"
