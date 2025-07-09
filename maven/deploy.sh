@@ -34,11 +34,13 @@
 # file in the ~/.m2/ directory and add this section :
 # <servers>
 #   <server>
-#     <id>sonatype-nexus-staging</id>
-#     <username>...</username>
-#     <password>...</password>
+#      <id>central</id>
+#      <username>central_portal_token_username</username>
+#      <password>central_portal_token_password</password>
 #   </server>
 # </servers>
+#
+# You can find the repository credentials in go/valentine
 #
 readonly BAZEL_ROOT=$(pwd)
 readonly BUILD_SECTION_FILE="${BAZEL_ROOT}/maven/build_section.xml"
@@ -118,10 +120,10 @@ common::check_maven_prerequisites() {
     common::error "deploy_to_sonatype variable is missing."
   fi
 
-  # sonatype_auto_release is used to automatically release the artifacts after
+  # sonatype_auto_publish is used to automatically publish the artifacts after
   # deployment.
-  if [[ -z "${sonatype_auto_release:-}" ]]; then
-    common::error "sonatype_auto_release variable is missing."
+  if [[ -z "${sonatype_auto_publish:-}" ]]; then
+    common::error "sonatype_auto_publish variable is missing."
   fi
 
   if [[ -z ${MAVEN_GPG_PASSPHRASE:-} ]]; then
@@ -242,7 +244,7 @@ common::deploy_to_sonatype() {
   if [[ "${deploy_to_sonatype}" == true ]]; then
     common::info "Deploying artifacts to sonatype..."
     # Use maven to sign and deploy jar, sources jar and javadocs jar to OSS sonatype
-    mvn -f "${pom_file}" clean deploy "-DautoReleaseAfterClose=${sonatype_auto_release}"
+    mvn -f "${pom_file}" clean deploy "-DautoPublish=${sonatype_auto_publish}"
 
     common::info "Deployment completed."
   else

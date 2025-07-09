@@ -2,7 +2,6 @@
     <classesDirectory>${project.artifactId}-classes</classesDirectory>
     <javadocFile>${project.artifactId}-javadoc.jar</javadocFile>
     <sourcesFile>${project.artifactId}-sources.jar</sourcesFile>
-    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
   </properties>
 
   <build>
@@ -66,13 +65,13 @@
           </executions>
         </plugin>
         <plugin>
-          <groupId>org.sonatype.plugins</groupId>
-          <artifactId>nexus-staging-maven-plugin</artifactId>
-          <version>1.7.0</version>
+          <groupId>org.sonatype.central</groupId>
+          <artifactId>central-publishing-maven-plugin</artifactId>
+          <version>0.8.0</version>
           <extensions>true</extensions>
           <configuration>
-            <serverId>ossrh</serverId>
-            <nexusUrl>${nexusUrl}</nexusUrl>
+            <publishingServerId>central</publishingServerId>
+            <autoPublish>${autoPublish}</autoPublish>
           </configuration>
         </plugin>
     </plugins>
