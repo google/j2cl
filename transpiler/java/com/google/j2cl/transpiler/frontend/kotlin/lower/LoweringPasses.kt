@@ -211,6 +211,8 @@ private val loweringPhase = loweringPhase {
   // class. The inliner can introduce references to top-level members from another compilation unit
   // that were not referenced before.
   moduleLowering(externalPackageParentPatcherLoweringFactory)
+  // Flattens extra blocks that were added from function inlining.
+  moduleLowering { FlattenInlinedBlocks() }
   // Cleanup the unreachable code that exist after the statement-like-expression
   // transformation to make the IrTree valid.
   perFileLowering(::CleanupLowering)
