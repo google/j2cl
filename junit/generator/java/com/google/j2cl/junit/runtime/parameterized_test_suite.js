@@ -88,6 +88,9 @@ function expandParameterized(javaWrapper) {
         currTestNumber = 0;
       }
     },
+    'toString': function() {
+      return javaWrapper.toString();
+    },
   };
 
   const jsUnitAdapter = /** @type {!Object<!Function>} */ (javaWrapper);
@@ -96,7 +99,8 @@ function expandParameterized(javaWrapper) {
           .filter(eachProperty => eachProperty.startsWith('test'));
   const data = assert(javaWrapper.getData());
   for (let i = 0; i < data.length; i++) {
-    generatedSuite[`testGroup${i}`] = createTestCases(i, javaWrapper, methods);
+    const testCases = createTestCases(i, javaWrapper, methods);
+    generatedSuite[testCases.toString()] = testCases;
   }
 
   return generatedSuite;
@@ -114,6 +118,9 @@ function /** !Object */ createTestCases(
     },
     tearDown() {
       return javaWrapper.tearDown();
+    },
+    toString() {
+      return `testGroup${currentIndex}`;
     },
   };
 
