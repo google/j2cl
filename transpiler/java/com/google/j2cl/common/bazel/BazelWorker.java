@@ -22,6 +22,8 @@ import com.google.common.base.Throwables;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.io.Files;
+import com.google.devtools.build.lib.worker.ProtoWorkerMessageProcessor;
+import com.google.devtools.build.lib.worker.WorkRequestHandler;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.bazel.profiler.Profiler;
 import java.io.File;
