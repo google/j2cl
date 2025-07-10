@@ -15,6 +15,7 @@
  */
 package j2ktiosinterop;
 
+import com.google.j2objc.annotations.ObjectiveCName;
 import com.google.j2objc.annotations.Weak;
 import com.google.j2objc.annotations.WeakOuter;
 import java.lang.ref.WeakReference;
@@ -23,6 +24,7 @@ import org.jspecify.annotations.Nullable;
 
 /** Holder for testing WeakReference and @Weak / @WeakOuter annotations. */
 @NullMarked
+@ObjectiveCName("JavaHolder")
 public final class Holder<T extends @Nullable Object> {
   private @Nullable T object;
 
@@ -56,6 +58,19 @@ public final class Holder<T extends @Nullable Object> {
 
   public Supplier<T> newWeakOuterAnnotationLambdaSupplier() {
     @WeakOuter Supplier<T> supplier = () -> object;
+    return supplier;
+  }
+
+  public Supplier<T> newWeakOuterAnnotationAnonymousSupplier() {
+    // @WeakOuter has no effect on anonymous classes.
+    @WeakOuter
+    Supplier<T> supplier =
+        new Supplier<T>() {
+          @Override
+          public T get() {
+            return object;
+          }
+        };
     return supplier;
   }
 

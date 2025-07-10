@@ -15,10 +15,12 @@
  */
 package j2ktiosinterop;
 
+import com.google.j2objc.annotations.ObjectiveCName;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
+@ObjectiveCName("JavaSupplier")
 public interface Supplier<T extends @Nullable Object> {
   T get();
 }

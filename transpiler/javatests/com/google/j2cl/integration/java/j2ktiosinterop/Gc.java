@@ -15,9 +15,15 @@
  */
 package j2ktiosinterop;
 
+import com.google.j2objc.annotations.ObjectiveCName;
+
+@ObjectiveCName("JavaGc")
 public class Gc {
   public static void collect() {
-    System.gc();
+    // Single `System.gc()` is not enough, 1000 seems to do the job.
+    for (int i = 0; i < 1000; i++) {
+      System.gc();
+    }
   }
 
   private Gc() {}
