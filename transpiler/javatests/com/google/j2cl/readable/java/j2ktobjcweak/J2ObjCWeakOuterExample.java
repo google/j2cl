@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2objcweak;
+package j2ktobjcweak;
 
 import com.google.j2objc.annotations.WeakOuter;
 import org.jspecify.annotations.NullMarked;
@@ -21,18 +21,19 @@ import org.jspecify.annotations.Nullable;
 
 @NullMarked
 public final class J2ObjCWeakOuterExample<T extends @Nullable Object> {
-  interface Supplier<T extends @Nullable Object> {
+  public interface Supplier<T extends @Nullable Object> {
     T get();
   }
 
+  private static final String staticValue = "foo";
   private final T value;
 
-  J2ObjCWeakOuterExample(T value) {
+  public J2ObjCWeakOuterExample(T value) {
     this.value = value;
   }
 
   @WeakOuter
-  private final Supplier<T> anonymousClassSupplierField =
+  public final Supplier<T> anonymousClassSupplierField =
       new Supplier<T>() {
         @Override
         public T get() {
@@ -40,12 +41,12 @@ public final class J2ObjCWeakOuterExample<T extends @Nullable Object> {
         }
       };
 
-  private Supplier<T> getLambdaSupplierVariable() {
+  public Supplier<T> getLambdaSupplierVariable() {
     @WeakOuter Supplier<T> supplier = () -> value;
     return supplier;
   }
 
-  private Supplier<T> getAnonymousClassSupplierVariable() {
+  public Supplier<T> getAnonymousClassSupplierVariable() {
     @WeakOuter
     Supplier<T> supplier =
         new Supplier<T>() {
@@ -57,15 +58,65 @@ public final class J2ObjCWeakOuterExample<T extends @Nullable Object> {
     return supplier;
   }
 
-  private InnerSupplier getInnerSupplier() {
+  public InnerSupplier getInnerSupplier() {
     return new InnerSupplier();
   }
 
   @WeakOuter
-  private class InnerSupplier implements Supplier<T> {
+  public class InnerSupplier implements Supplier<T> {
     @Override
     public T get() {
       return value;
+    }
+
+    public InnerInnerSupplier getInnerInnerSupplier() {
+      return new InnerInnerSupplier();
+    }
+
+    @WeakOuter
+    public class InnerInnerSupplier implements Supplier<T> {
+      @Override
+      public T get() {
+        return value;
+      }
+    }
+  }
+
+  @WeakOuter
+  public static final Supplier<String> staticAnonymousClassSupplierField =
+      new Supplier<String>() {
+        @Override
+        public String get() {
+          return staticValue;
+        }
+      };
+
+  public static Supplier<String> getStaticLambdaSupplierVariable() {
+    @WeakOuter Supplier<String> supplier = () -> staticValue;
+    return supplier;
+  }
+
+  public static Supplier<String> getStaticAnonymousClassSupplierVariable() {
+    @WeakOuter
+    Supplier<String> supplier =
+        new Supplier<String>() {
+          @Override
+          public String get() {
+            return staticValue;
+          }
+        };
+    return supplier;
+  }
+
+  public StaticSupplier getStaticSupplier() {
+    return new StaticSupplier();
+  }
+
+  @WeakOuter
+  public static class StaticSupplier implements Supplier<String> {
+    @Override
+    public String get() {
+      return staticValue;
     }
   }
 }

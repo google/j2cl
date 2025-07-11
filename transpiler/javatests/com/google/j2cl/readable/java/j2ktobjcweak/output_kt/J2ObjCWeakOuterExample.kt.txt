@@ -1,0 +1,118 @@
+// Generated from "j2ktobjcweak/J2ObjCWeakOuterExample.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN")
+
+package j2ktobjcweak
+
+import javaemul.lang.*
+import kotlin.String
+import kotlin.Suppress
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
+
+class J2ObjCWeakOuterExample<T> {
+ private val value: T
+
+ constructor(value: T) {
+  this.value = value
+ }
+
+ @JvmField
+ val anonymousClassSupplierField: Supplier<T> = object : Supplier<T> {
+  override fun get(): T {
+   return this@J2ObjCWeakOuterExample.value
+  }
+ }
+
+ fun getLambdaSupplierVariable(): Supplier<T> {
+  val supplier: Supplier<T> = Supplier {
+   return@Supplier this.value
+  }
+  return supplier
+ }
+
+ fun getAnonymousClassSupplierVariable(): Supplier<T> {
+  val supplier: Supplier<T> = object : Supplier<T> {
+   override fun get(): T {
+    return this@J2ObjCWeakOuterExample.value
+   }
+  }
+  return supplier
+ }
+
+ fun getInnerSupplier(): J2ObjCWeakOuterExample<T>.InnerSupplier {
+  return InnerSupplier()
+ }
+
+ fun getStaticSupplier(): StaticSupplier {
+  return StaticSupplier()
+ }
+
+ companion object {
+  private const val staticValue: String = "foo"
+
+  @JvmField
+  val staticAnonymousClassSupplierField: Supplier<String> = object : Supplier<String> {
+   override fun get(): String {
+    return J2ObjCWeakOuterExample.staticValue
+   }
+  }
+
+  @JvmStatic
+  fun getStaticLambdaSupplierVariable(): Supplier<String> {
+   val supplier: Supplier<String> = Supplier {
+    return@Supplier J2ObjCWeakOuterExample.staticValue
+   }
+   return supplier
+  }
+
+  @JvmStatic
+  fun getStaticAnonymousClassSupplierVariable(): Supplier<String> {
+   val supplier: Supplier<String> = object : Supplier<String> {
+    override fun get(): String {
+     return J2ObjCWeakOuterExample.staticValue
+    }
+   }
+   return supplier
+  }
+ }
+
+ fun interface Supplier<T> {
+  fun get(): T
+ }
+
+ open inner class InnerSupplier: Supplier<T> {
+  override fun get(): T {
+   return this@J2ObjCWeakOuterExample.value
+  }
+
+  open fun getInnerInnerSupplier(): J2ObjCWeakOuterExample<T>.InnerSupplier.InnerInnerSupplier {
+   return InnerInnerSupplier()
+  }
+
+  open inner class InnerInnerSupplier: Supplier<T> {
+   override fun get(): T {
+    return this@J2ObjCWeakOuterExample.value
+   }
+  }
+ }
+
+ open class StaticSupplier: Supplier<String> {
+  override fun get(): String {
+   return J2ObjCWeakOuterExample.staticValue
+  }
+ }
+}
