@@ -16,45 +16,56 @@
 package j2ktnewobjcname;
 
 import com.google.j2objc.annotations.WeakOuter;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
-public final class J2ObjCWeakOuterExample {
-  interface Supplier<T> {
+@NullMarked
+public final class J2ObjCWeakOuterExample<T extends @Nullable Object> {
+  interface Supplier<T extends @Nullable Object> {
     T get();
   }
 
-  private final String string = "foo";
+  private final T value;
 
-  @WeakOuter private final Supplier<String> lambdaSupplierField = () -> string;
+  J2ObjCWeakOuterExample(T value) {
+    this.value = value;
+  }
 
   @WeakOuter
-  private final Supplier<String> anonymousClassSupplierField =
-      new Supplier<String>() {
+  private final Supplier<T> anonymousClassSupplierField =
+      new Supplier<T>() {
         @Override
-        public String get() {
-          return string;
+        public T get() {
+          return value;
         }
       };
 
-  private void testLambdaSupplierVariable() {
-    @WeakOuter Supplier<String> unused = () -> string;
+  private Supplier<T> testLambdaSupplierVariable() {
+    @WeakOuter Supplier<T> supplier = () -> value;
+    return supplier;
   }
 
-  private void testAnonymousClassSupplierVariable() {
+  private Supplier<T> testAnonymousClassSupplierVariable() {
     @WeakOuter
-    Supplier<String> unused =
-        new Supplier<String>() {
+    Supplier<T> supplier =
+        new Supplier<T>() {
           @Override
-          public String get() {
-            return string;
+          public T get() {
+            return value;
           }
         };
+    return supplier;
+  }
+
+  private InnerSupplier getInnerSupplier() {
+    return new InnerSupplier();
   }
 
   @WeakOuter
-  private class InnerSupplier implements Supplier<String> {
+  private class InnerSupplier implements Supplier<T> {
     @Override
-    public String get() {
-      return string;
+    public T get() {
+      return value;
     }
   }
 }

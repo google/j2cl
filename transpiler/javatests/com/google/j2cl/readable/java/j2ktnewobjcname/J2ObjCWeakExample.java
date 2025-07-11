@@ -52,6 +52,28 @@ public final class J2ObjCWeakExample {
     nonNullFooWithInitializer = nonNullFooWithoutInitializer;
   }
 
+  public static Foo nonNullVariable(Foo foo1, Foo foo2) {
+    @Weak Foo localFoo = foo1;
+    localFoo = foo2;
+    return localFoo;
+  }
+
+  public static Foo nullableVariable(@Nullable Foo foo1, @Nullable Foo foo2) {
+    @Weak Foo localFoo = foo1;
+    localFoo = foo2;
+    return localFoo;
+  }
+
+  public static Foo finalNonNullVariable(Foo foo) {
+    @Weak final Foo localFoo = foo;
+    return localFoo;
+  }
+
+  public static Foo finalNullableVariable(@Nullable Foo foo) {
+    @Weak final Foo localFoo = foo;
+    return localFoo;
+  }
+
   public @Nullable Foo getNullableFoo() {
     return nullableFooWithoutInitializer;
   }
