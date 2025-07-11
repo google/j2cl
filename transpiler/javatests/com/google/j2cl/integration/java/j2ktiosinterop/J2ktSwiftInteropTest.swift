@@ -59,13 +59,13 @@ final class J2ktSwiftInteropTest: XCTestCase {
 
     var i: Int32
 
-    i = obj.finalIntField
-    i = obj.intField
-    obj.intField = i
+    i = obj.finalIntField_
+    i = obj.intField_
+    obj.intField_ = i
 
-    i = J2ktiosinteropDefaultNamesCompanion.shared.STATIC_FINAL_INT_FIELD
-    i = J2ktiosinteropDefaultNamesCompanion.shared.staticIntField
-    J2ktiosinteropDefaultNamesCompanion.shared.staticIntField = i
+    i = J2ktiosinteropDefaultNamesCompanion.shared.STATIC_FINAL_INT_FIELD_
+    i = J2ktiosinteropDefaultNamesCompanion.shared.staticIntField_
+    J2ktiosinteropDefaultNamesCompanion.shared.staticIntField_ = i
 
     J2ktiosinteropDefaultNamesCompanion.shared.staticMethod()
     J2ktiosinteropDefaultNamesCompanion.shared.staticIntMethod(with: 1)
