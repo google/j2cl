@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2ktnewobjcname;
+package j2objcweak;
 
 import com.google.j2objc.annotations.WeakOuter;
 import org.jspecify.annotations.NullMarked;
@@ -40,12 +40,12 @@ public final class J2ObjCWeakOuterExample<T extends @Nullable Object> {
         }
       };
 
-  private Supplier<T> testLambdaSupplierVariable() {
+  private Supplier<T> getLambdaSupplierVariable() {
     @WeakOuter Supplier<T> supplier = () -> value;
     return supplier;
   }
 
-  private Supplier<T> testAnonymousClassSupplierVariable() {
+  private Supplier<T> getAnonymousClassSupplierVariable() {
     @WeakOuter
     Supplier<T> supplier =
         new Supplier<T>() {

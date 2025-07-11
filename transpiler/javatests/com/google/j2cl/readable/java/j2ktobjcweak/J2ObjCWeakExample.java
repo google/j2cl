@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2ktnewobjcname;
+package j2objcweak;
 
 import com.google.j2objc.annotations.Weak;
 import org.jspecify.annotations.NullMarked;

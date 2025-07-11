@@ -1,0 +1,65 @@
+// Generated from "j2objcweak/J2ObjCWeakOuterExample.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN")
+
+package j2objcweak
+
+import javaemul.lang.*
+import kotlin.Suppress
+
+class J2ObjCWeakOuterExample<T> {
+ private val value: T
+
+ internal constructor(value: T) {
+  this.value = value
+ }
+
+ private val anonymousClassSupplierField: Supplier<T> = object : Supplier<T> {
+  override fun get(): T {
+   return this@J2ObjCWeakOuterExample.value
+  }
+ }
+
+ private fun getLambdaSupplierVariable(): Supplier<T> {
+  val supplier: Supplier<T> = Supplier {
+   return@Supplier this.value
+  }
+  return supplier
+ }
+
+ private fun getAnonymousClassSupplierVariable(): Supplier<T> {
+  val supplier: Supplier<T> = object : Supplier<T> {
+   override fun get(): T {
+    return this@J2ObjCWeakOuterExample.value
+   }
+  }
+  return supplier
+ }
+
+ private fun getInnerSupplier(): J2ObjCWeakOuterExample<T>.InnerSupplier {
+  return InnerSupplier()
+ }
+
+ fun interface Supplier<T> {
+  fun get(): T
+ }
+
+ open inner class InnerSupplier internal constructor(): Supplier<T> {
+  override fun get(): T {
+   return this@J2ObjCWeakOuterExample.value
+  }
+ }
+}

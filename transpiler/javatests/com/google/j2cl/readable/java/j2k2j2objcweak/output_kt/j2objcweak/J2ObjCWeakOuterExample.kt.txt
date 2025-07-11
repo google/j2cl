@@ -1,4 +1,4 @@
-// Generated from "j2ktnewobjcname/J2ObjCWeakOuterExample.java"
+// Generated from "j2objcweak/J2ObjCWeakOuterExample.java"
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -15,7 +15,7 @@
  "VARIABLE_WITH_REDUNDANT_INITIALIZER",
  "REDUNDANT_ELSE_IN_WHEN")
 
-package j2ktnewobjcname
+package j2objcweak
 
 import javaemul.lang.*
 import kotlin.Suppress
@@ -33,14 +33,14 @@ class J2ObjCWeakOuterExample<T> {
   }
  }
 
- private fun testLambdaSupplierVariable(): Supplier<T> {
+ private fun getLambdaSupplierVariable(): Supplier<T> {
   val supplier: Supplier<T> = Supplier {
    return@Supplier this.value
   }
   return supplier
  }
 
- private fun testAnonymousClassSupplierVariable(): Supplier<T> {
+ private fun getAnonymousClassSupplierVariable(): Supplier<T> {
   val supplier: Supplier<T> = object : Supplier<T> {
    override fun get(): T {
     return this@J2ObjCWeakOuterExample.value
