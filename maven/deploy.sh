@@ -265,10 +265,3 @@ common::cleanup_temp_files() {
     rm -rf "${maven_wd}"
   fi
 }
-
-common::create_and_push_git_tag() {
-  local lib_version="$1"
-  common::info "Creating git tag: ${lib_version}"
-  git tag -a "${lib_version}" -m "${lib_version} release"
-  git push origin "${lib_version}"
-}

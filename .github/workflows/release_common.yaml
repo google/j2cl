@@ -1,0 +1,86 @@
+# Copyright 2025 Google Inc. All Rights Reserved
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+name: Reusable Release Workflow
+
+# This workflow is designed to be called from other workflows.
+on:
+  workflow_call:
+    inputs:
+      version:
+        description: 'The version to release'
+        required: true
+        type: string
+      sonatype_auto_publish:
+        description: 'Automatically publish the release to Sonatype'
+        type: boolean
+        required: true
+      create_tag:
+        description: 'Create a git tag'
+        type: boolean
+        required: true
+    secrets:
+      SONATYPE_USERNAME_TOKEN:
+        description: 'Sonatype username token'
+        required: true
+      SONATYPE_PASSWORD_TOKEN:
+        description: 'Sonatype password token'
+        required: true
+      MAVEN_GPG_PRIVATE_KEY:
+        description: 'GPG private key for signing Maven artifacts'
+        required: true
+      MAVEN_GPG_PASSPHRASE:
+        description: 'Passphrase for the GPG private key'
+        required: true
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      # Required for creating and pushing git tags.
+      contents: write
+
+    steps:
+      - name: Checkout current commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      # Maven and Bazel require Java to be available.
+      - name: Setup Java
+        uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
+        with:
+          java-version: '21'
+          distribution: 'zulu'
+          java-package: jdk
+          # This will create the maven settings.xml file needed for deploying to Sonatype.
+          server-id: central
+          server-username: ${{ secrets.SONATYPE_USERNAME_TOKEN }}
+          server-password: ${{ secrets.SONATYPE_PASSWORD_TOKEN }}
+          gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
+          gpg-passphrase: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+
+      - name: Setup Bazel
+        uses: bazelbuild/setup-bazelisk@v3
+
+      # NOTE: This step assumes the calling repository has this script at the specified path.
+      - name: Publish to Sonatype
+        run: |
+          ./maven/publish_to_sonatype.sh --version ${{ inputs.version }} --sonatype-auto-publish ${{ inputs.sonatype_auto_publish }}
+
+      - name: Create Git Tag
+        if: ${{ inputs.create_tag }}
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git tag -a "${{ inputs.version }}" -m "Release ${{ inputs.version }}"
+          git push origin "${{ inputs.version }}"
