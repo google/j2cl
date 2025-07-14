@@ -52,9 +52,11 @@ import kotlin.native.ObjCName
 @ObjCName("J2ktNewClassExample", swiftName = "NewClassExample", exact = true)
 open class ClassExample {
  @JvmField
+ @ObjCName("publicField_")
  var publicField: Int = 0
 
  @JvmField
+ @ObjCName("protectedField_")
  var protectedField: Int = 0
 
  @JvmField
@@ -73,9 +75,11 @@ open class ClassExample {
  @ObjCName("J2ktNewClassExampleCompanion", swiftName = "NewClassExampleCompanion", exact = true)
  companion object {
   @JvmField
+  @ObjCName("publicStaticField_")
   var publicStaticField: Int = 0
 
   @JvmField
+  @ObjCName("protectedStaticField_")
   var protectedStaticField: Int = 0
 
   @JvmField
@@ -84,128 +88,182 @@ open class ClassExample {
   private var privateStaticField: Int = 0
 
   @JvmField
+  @ObjCName("objectField_")
   var objectField: Any? = null
 
   @JvmField
+  @ObjCName("stringField_")
   var stringField: String? = null
 
   @JvmField
+  @ObjCName("selfField_")
   var selfField: ClassExample? = null
 
   @JvmField
+  @ObjCName("iterable_")
   var iterable: MutableIterable<String>? = null
 
   @JvmField
+  @ObjCName("iterator_")
   var iterator: MutableIterator<String>? = null
 
   @JvmField
+  @ObjCName("collection_")
   var collection: MutableCollection<Any?>? = null
 
   @JvmField
+  @ObjCName("val_")
   var `val`: Int = 0
 
   @JvmField
+  @ObjCName("var_")
   var `var`: Int = 0
 
   @JvmField
+  @ObjCName("fun_")
   var `fun`: Int = 0
 
   @JvmField
+  @ObjCName("alloc___")
   var alloc: Int = 0
 
   @JvmField
+  @ObjCName("init___")
   var init: Int = 0
 
   @JvmField
+  @ObjCName("extern___")
   var extern: Int = 0
 
   @JvmField
+  @ObjCName("inline___")
   var inline: Int = 0
 
   @JvmField
+  @ObjCName("NULL___")
   var NULL: Int = 0
 
   @JvmField
+  @ObjCName("allocFoo_")
   var allocFoo: Int = 0
 
   @JvmField
+  @ObjCName("initFoo_")
   var initFoo: Int = 0
 
   @JvmField
+  @ObjCName("newFoo_")
   var newFoo: Int = 0
 
+  @ObjCName("BOOLEAN_FALSE_")
   const val BOOLEAN_FALSE: Boolean = false
 
+  @ObjCName("BOOLEAN_TRUE_")
   const val BOOLEAN_TRUE: Boolean = true
 
+  @ObjCName("CHAR_")
   const val CHAR: Char = 'a'
 
+  @ObjCName("CHAR_APOSTROPHE_")
   const val CHAR_APOSTROPHE: Char = '\''
 
+  @ObjCName("CHAR_BACKSLASH_")
   const val CHAR_BACKSLASH: Char = '\\'
 
+  @ObjCName("CHAR_UNICODE_")
   const val CHAR_UNICODE: Char = '\u1231'
 
+  @ObjCName("BYTE_")
   const val BYTE: Byte = 123.toByte()
 
+  @ObjCName("SHORT_")
   const val SHORT: Short = 123.toShort()
 
+  @ObjCName("INT_")
   const val INT: Int = 123
 
+  @ObjCName("INT_MIN_VALUE_")
   const val INT_MIN_VALUE: Int = -2147483647 - 1
 
+  @ObjCName("INT_MAX_VALUE_")
   const val INT_MAX_VALUE: Int = 2147483647
 
+  @ObjCName("LONG_")
   const val LONG: Long = 123L
 
+  @ObjCName("LONG_MIN_VALUE_")
   const val LONG_MIN_VALUE: Long = -9223372036854775807L - 1L
 
+  @ObjCName("LONG_MAX_VALUE_")
   const val LONG_MAX_VALUE: Long = 9223372036854775807L
 
+  @ObjCName("FLOAT_")
   const val FLOAT: Float = 123.0f
 
+  @ObjCName("FLOAT_ZER0_")
   const val FLOAT_ZER0: Float = 0.0f
 
+  @ObjCName("FLOAT_NEGATIVE_ZERO_")
   const val FLOAT_NEGATIVE_ZERO: Float = -0.0f
 
+  @ObjCName("FLOAT_NAN_")
   const val FLOAT_NAN: Float = (0.0f / 0.0f)
 
+  @ObjCName("FLOAT_NEGATIVE_INFINITY_")
   const val FLOAT_NEGATIVE_INFINITY: Float = (-1.0f / 0.0f)
 
+  @ObjCName("FLOAT_POSITIVE_INFINITY_")
   const val FLOAT_POSITIVE_INFINITY: Float = (1.0f / 0.0f)
 
+  @ObjCName("FLOAT_MIN_VALUE_")
   const val FLOAT_MIN_VALUE: Float = 1.4E-45f
 
+  @ObjCName("FLOAT_MIN_NORMAL_")
   const val FLOAT_MIN_NORMAL: Float = 1.1754944E-38f
 
+  @ObjCName("FLOAT_MIN_EXPONENT_")
   const val FLOAT_MIN_EXPONENT: Float = -126.0f
 
+  @ObjCName("FLOAT_MAX_VALUE_")
   const val FLOAT_MAX_VALUE: Float = 3.4028235E38f
 
+  @ObjCName("FLOAT_MAX_EXPONENT_")
   const val FLOAT_MAX_EXPONENT: Float = 127.0f
 
+  @ObjCName("DOUBLE_")
   const val DOUBLE: Double = 123.0
 
+  @ObjCName("DOUBLE_ZER0_")
   const val DOUBLE_ZER0: Double = 0.0
 
+  @ObjCName("DOUBLE_NEGATIVE_ZERO_")
   const val DOUBLE_NEGATIVE_ZERO: Double = -0.0
 
+  @ObjCName("DOUBLE_NAN_")
   const val DOUBLE_NAN: Double = (0.0 / 0.0)
 
+  @ObjCName("DOUBLE_NEGATIVE_INFINITY_")
   const val DOUBLE_NEGATIVE_INFINITY: Double = (-1.0 / 0.0)
 
+  @ObjCName("DOUBLE_POSITIVE_INFINITY_")
   const val DOUBLE_POSITIVE_INFINITY: Double = (1.0 / 0.0)
 
+  @ObjCName("DOUBLE_MIN_VALUE_")
   const val DOUBLE_MIN_VALUE: Double = 4.9E-324
 
+  @ObjCName("DOUBLE_MIN_NORMAL_")
   const val DOUBLE_MIN_NORMAL: Double = 2.2250738585072014E-308
 
+  @ObjCName("DOUBLE_MIN_EXPONENT_")
   const val DOUBLE_MIN_EXPONENT: Double = -1022.0
 
+  @ObjCName("DOUBLE_MAX_VALUE_")
   const val DOUBLE_MAX_VALUE: Double = 1.7976931348623157E308
 
+  @ObjCName("DOUBLE_MAX_EXPONENT_")
   const val DOUBLE_MAX_EXPONENT: Double = 1023.0
 
+  @ObjCName("STRING_")
   const val STRING: String = "foo"
 
   @JvmStatic
@@ -369,6 +427,7 @@ open class ClassExample {
 
  open class PackagePrivateClass internal constructor() {
   @JvmField
+  @ObjCName("publicField_")
   var publicField: Int = 0
 
   open fun publicMethod() {}
@@ -376,6 +435,7 @@ open class ClassExample {
 
  open class ProtectedClass {
   @JvmField
+  @ObjCName("publicField_")
   var publicField: Int = 0
 
   open fun publicMethod() {}
@@ -383,6 +443,7 @@ open class ClassExample {
 
  open class PrivateClass internal constructor() {
   @JvmField
+  @ObjCName("publicField_")
   var publicField: Int = 0
 
   open fun publicMethod() {}
