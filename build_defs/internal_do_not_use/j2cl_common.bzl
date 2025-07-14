@@ -105,32 +105,13 @@ def _compile(
     # Don't pass anything to the js provider if we didn't transpile anything.
     # This case happens when j2cl_library exports another j2cl_library.
     js_provider_srcs = [output_js] if has_srcs_to_transpile else []
-
-    # TODO(b/284654149): Use the same provider for Closure and Wasm once the modular pipeline
-    # graduates from being a prototype.
-    if backend == "CLOSURE":
-        js_info = j2cl_js_provider(
-            ctx,
-            js_provider_srcs,
-            js_deps,
-            js_exports,
-            artifact_suffix,
-        )
-    else:
-        # The reason to have special case here and create a different provider for Wasm is to avoid
-        # running the modular transpilation action when building the monolithic j2wasm_application.
-        # This provider avoid triggering the transpiler by avoiding using js_provider_sources which
-        # are part of the output of the tranpilation. Instead this js provider will use the
-        # js that are inputs to the rule.
-        js_info = j2cl_js_provider(
-            ctx = ctx,
-            srcs = js_srcs,
-            # These are exports, because they will need to be referenced by the j2wasm_application
-            # eventually downstream, since the j2wasm application is built using the transitive
-            # sources and will need the transitive dependencies exposed.
-            exports = js_deps + js_exports,
-            artifact_suffix = artifact_suffix,
-        )
+    js_info = j2cl_js_provider(
+        ctx,
+        js_provider_srcs,
+        js_deps,
+        js_exports,
+        artifact_suffix,
+    )
 
     return J2clInfo(
         _private_ = struct(
