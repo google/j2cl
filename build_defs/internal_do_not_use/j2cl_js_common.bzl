@@ -16,6 +16,7 @@ def j2cl_js_provider(ctx, srcs = [], deps = [], exports = [], artifact_suffix = 
     default_j2cl_suppresses = [
         "analyzerChecks",
         "underscore",
+        "strictDependencies",
         "superfluousSuppress",
         "JSC_UNKNOWN_EXPR_TYPE",
     ]
