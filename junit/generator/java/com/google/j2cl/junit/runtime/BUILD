@@ -7,10 +7,22 @@ package(
 )
 
 closure_js_library(
+    name = "internal_j2cl_test_suite",
+    testonly = 1,
+    srcs = ["j2cl_test_suite.js"],
+    visibility = ["//build_defs/internal_do_not_use:__pkg__"],
+    deps = [
+        ":internal_parametrized_test_suite",
+        "//third_party:closure_testcase",
+        "//third_party:closure_testsuite",
+    ],
+)
+
+closure_js_library(
     name = "internal_parametrized_test_suite",
     testonly = 1,
     srcs = ["parameterized_test_suite.js"],
-    visibility = ["//build_defs/internal_do_not_use:__pkg__"],
+    lenient = True,
 )
 
 j2wasm_library(

@@ -3,19 +3,9 @@
  */
 goog.module('${testClass.jsUnitQualifiedName()}');
 
-
-const JavaWrapper = goog.require('${testClass.jsUnitAdapterQualifiedClassName()}');
-
 goog.setTestOnly();
 
-const TestCase = goog.require('goog.testing.TestCase');
-const testSuite = goog.require('goog.testing.testSuite');
+const JavaWrapper = goog.require('${testClass.jsUnitAdapterQualifiedClassName()}');
+const {j2clTestSuite} = goog.require('com.google.j2cl.junit.j2clTestSuite');
 
-#if(${testClass.isParameterized()})
-const {expandParameterized} = goog.require('com.google.j2cl.junit.parameterizedTestSuite');
-const suite = expandParameterized(new JavaWrapper());
-#else
-const suite = new JavaWrapper();
-#end
-
-testSuite(suite, {order: TestCase.Order.NATURAL});
+j2clTestSuite(new JavaWrapper(), ${testClass.isParameterized()});

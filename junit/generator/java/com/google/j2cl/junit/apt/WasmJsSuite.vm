@@ -3,12 +3,12 @@
  */
 goog.module('${testClass.jsUnitQualifiedName()}');
 goog.setTestOnly();
-const testSuite = goog.require('goog.testing.testSuite');
+const {j2clTestSuite} = goog.require('com.google.j2cl.junit.j2clTestSuite');
 const TestCase = goog.require('goog.testing.TestCase');
 const j2wasm = goog.require('REPLACEMENT_MODULE_NAME_PLACEHOLDER');
 
 let instance;
-testSuite({
+j2clTestSuite({
   async setUpPage() {
     // Set a 30 * 1000 timeout to ensure that the wasm module has enough time to load
     const timeout = 30 * 1000;
@@ -40,5 +40,5 @@ testSuite({
 
 #end
 
-}, {order: TestCase.Order.NATURAL});
+});
 

@@ -233,9 +233,7 @@ def j2cl_test_common(
             # in jsunit_test if user provided only in bootstrap_files).
             ":%s_testlib" % name,
             ":%s_lib" % generated_suite_name,
-            Label("//build_defs/internal_do_not_use:closure_testsuite"),
-            Label("//build_defs/internal_do_not_use:closure_testcase"),
-            Label("//build_defs/internal_do_not_use:internal_parametrized_test_suite"),
+            Label("//build_defs/internal_do_not_use:internal_j2cl_test_suite"),
         ]
 
     elif platform == "WASM":
@@ -259,7 +257,7 @@ def j2cl_test_common(
 
         deps = [
             ":%s_dep" % generated_suite_name,
-            Label("//build_defs/internal_do_not_use:closure_testsuite"),
+            Label("//build_defs/internal_do_not_use:internal_j2cl_test_suite"),
             Label("//build_defs/internal_do_not_use:closure_testcase"),
         ]
 
