@@ -66,9 +66,10 @@ def j2wasm_generate_jsunit_suite(
         deps = deps + [
             Label("//build_defs/internal_do_not_use:internal_junit_annotations-j2wasm"),
             Label("//build_defs/internal_do_not_use:internal_junit_runtime-j2wasm"),
+            Label("//build_defs/internal_do_not_use:closure_testcase"),
         ],
-        javacopts = ["-AtestPlatform=WASM"],
         testonly = 1,
+        javacopts = ["-AtestPlatform=WASM"],
         tags = tags,
     )
 
