@@ -93,12 +93,9 @@ common::check_bazel_prerequisites() {
 # - MAVEN_ARTIFACT is set.
 # - a pom xml file is present in the maven directory
 # - global variables used for deployement are set.
-# - check if MAVEN_GPG_PASSPHRASE env var is set. If not ask the user to provide
-#.  it and store the passphrase in MAVEN_GPG_PASSPHRASE.
 # Globals:
 #   MAVEN_ARTIFACT
 #   BAZEL_ROOT
-#   MAVEN_GPG_PASSPHRASE
 #######################################
 common::check_maven_prerequisites() {
   if ! command -v mvn &> /dev/null; then
@@ -124,12 +121,6 @@ common::check_maven_prerequisites() {
   # deployment.
   if [[ -z "${sonatype_auto_publish:-}" ]]; then
     common::error "sonatype_auto_publish variable is missing."
-  fi
-
-  if [[ -z ${MAVEN_GPG_PASSPHRASE:-} ]]; then
-    # If gpg_passphrase is unset, ask the user to provide it.
-    echo "Enter your gpg passphrase:"
-    read -s MAVEN_GPG_PASSPHRASE
   fi
 }
 
@@ -166,7 +157,7 @@ common::_prepare_sources_artifact() {
     common::info "Adding license header to java source files."
 
     local srcs_directory=$(mktemp -d)
-    jar xf "${bazel_src_jar}" -C "${srcs_directory}"
+    (cd "${srcs_directory}" && jar xf "${bazel_src_jar}")
 
     local tmp_file=$(mktemp)
 
@@ -199,11 +190,11 @@ common::_extract_classes(){
 
   local bazel_jar_file="${BAZEL_ROOT}/bazel-bin/${BAZEL_PATH}/lib${BAZEL_ARTIFACT}.jar"
 
-  jar xf "${bazel_jar_file}" -C "${classes_directory}"
+  (cd "${classes_directory}" && jar xf "${bazel_jar_file}")
 
   if [[ "${COPY_SRCS_IN_JAR:-true}" == true ]]; then
     common::info "Extracting sources along with the class files."
-    jar xf "${maven_src_jar}" -C "${classes_directory}"
+    (cd "${classes_directory}" && jar xf "${maven_src_jar}")
   fi
 }
 
