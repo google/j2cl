@@ -62,12 +62,13 @@ jobs:
           java-version: '21'
           distribution: 'zulu'
           java-package: jdk
+          # This will trigger the import of the private key in the GPG secret keyring.
+          gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
           # This will create the maven settings.xml file needed for deploying to Sonatype.
           server-id: central
-          server-username: ${{ secrets.SONATYPE_USERNAME_TOKEN }}
-          server-password: ${{ secrets.SONATYPE_PASSWORD_TOKEN }}
-          gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
-          gpg-passphrase: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+          server-username: SONATYPE_USERNAME_TOKEN
+          server-password: SONATYPE_PASSWORD_TOKEN
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
       - name: Setup Bazel
         uses: bazelbuild/setup-bazelisk@v3
@@ -80,6 +81,10 @@ jobs:
             auto_publish_flag="--sonatype-auto-publish"
           fi
           ./maven/publish_to_sonatype.sh --version ${{ inputs.version }} $auto_publish_flag
+        env:
+          SONATYPE_USERNAME_TOKEN: ${{ secrets.SONATYPE_USERNAME_TOKEN }}
+          SONATYPE_PASSWORD_TOKEN: ${{ secrets.SONATYPE_PASSWORD_TOKEN }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
       - name: Create Git Tag
         if: ${{ inputs.create_tag }}
