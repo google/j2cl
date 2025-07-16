@@ -37,16 +37,16 @@ on:
     secrets:
       SONATYPE_USERNAME_TOKEN:
         description: 'Sonatype username token'
-        required: true
+        required: false
       SONATYPE_PASSWORD_TOKEN:
         description: 'Sonatype password token'
-        required: true
+        required: false
       MAVEN_GPG_PRIVATE_KEY:
         description: 'GPG private key for signing Maven artifacts'
-        required: true
+        required: false
       MAVEN_GPG_PASSPHRASE:
         description: 'Passphrase for the GPG private key'
-        required: true
+        required: false
 
 jobs:
   publish_to_sonatype:
@@ -54,6 +54,19 @@ jobs:
     if: ${{ inputs.publish_to_sonatype }}
 
     steps:
+      - name: Check secrets are provided
+        run: |
+          check_secret() {
+            if [[ -z "${2:-}" ]]; then
+              echo "Error: ${1} is not provided."
+              exit 1
+            fi
+          }
+          check_secret "SONATYPE_USERNAME_TOKEN" ${{ secrets.SONATYPE_USERNAME_TOKEN }}
+          check_secret "SONATYPE_PASSWORD_TOKEN" ${{ secrets.SONATYPE_PASSWORD_TOKEN }}
+          check_secret "MAVEN_GPG_PRIVATE_KEY" ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
+          check_secret "MAVEN_GPG_PASSPHRASE" ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+
       - name: Checkout current commit
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
