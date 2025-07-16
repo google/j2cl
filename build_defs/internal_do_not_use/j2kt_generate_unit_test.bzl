@@ -61,7 +61,7 @@ def j2kt_generate_unit_test(name, test_class, deps, platform = "J2KT-JVM", tags 
                 "-Xep:PackageLocation:OFF",
             ],
             testonly = 1,
-            tags = tags,
+            tags = tags + ["ide-test-intermediate"],
         )
 
     # The Java annotation processor on the above target generates kotlin srcs code as resource
@@ -96,7 +96,7 @@ def j2kt_generate_unit_test(name, test_class, deps, platform = "J2KT-JVM", tags 
                 ":" + name + "_lib",
                 "//build_defs/internal_do_not_use:internal_junit_runtime-j2kt-native",
             ],
-            tags = tags,
+            tags = tags + ["ide-test-intermediate"],
             gen_by_xplat = True,
         )
 
