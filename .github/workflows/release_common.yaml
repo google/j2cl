@@ -75,7 +75,11 @@ jobs:
       # NOTE: This step assumes the calling repository has this script at the specified path.
       - name: Publish to Sonatype
         run: |
-          ./maven/publish_to_sonatype.sh --version ${{ inputs.version }} --sonatype-auto-publish ${{ inputs.sonatype_auto_publish }}
+          auto_publish_flag=""
+          if [[ "${{ inputs.sonatype_auto_publish }}" == true ]]; then
+            auto_publish_flag="--sonatype-auto-publish"
+          fi
+          ./maven/publish_to_sonatype.sh --version ${{ inputs.version }} $auto_publish_flag
 
       - name: Create Git Tag
         if: ${{ inputs.create_tag }}
