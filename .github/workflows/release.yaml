@@ -34,7 +34,7 @@ jobs:
     # Pass the inputs from the manual trigger to the reusable workflow.
     with:
       version: ${{ github.event.inputs.version }}
-      publish_to_sonatype: false
+      publish_to_sonatype: true
       create_tag: true
 
     # Allow the reusable workflow to access the secrets.
