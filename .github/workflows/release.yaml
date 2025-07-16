@@ -1,0 +1,41 @@
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+name: Release Project
+
+# TODO(dramaix): Consider triggering the workflow on git tag creation instead.
+# This workflow is triggered manually from the Actions tab.
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'The version to release'
+        required: true
+        type: string
+
+jobs:
+  release:
+    uses: ./.github/workflows/release_common.yaml
+
+    # The reusable workflow requires 'write' access to contents to push a git tag.
+    permissions:
+      contents: write
+
+    # Pass the inputs from the manual trigger to the reusable workflow.
+    with:
+      version: ${{ github.event.inputs.version }}
+      publish_to_sonatype: false
+      create_tag: true
+
+    # Allow the reusable workflow to access the secrets.
+    secrets: inherit
