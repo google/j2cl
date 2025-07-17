@@ -8,12 +8,6 @@ bazel_dep(
     version = "20250630",
 )
 
-bazel_dep(
-    name = "rules_closure",
-    version = "0.15.0",
-    repo_name = "io_bazel_rules_closure",
-)
-
 j2cl_maven_import_external = use_repo_rule("@com_google_j2cl//build_defs:rules.bzl", "j2cl_maven_import_external")
 
 _MAVEN_CENTRAL_URLS = ["https://repo1.maven.org/maven2/"]
