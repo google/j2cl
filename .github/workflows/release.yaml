@@ -30,12 +30,17 @@ jobs:
     # The reusable workflow requires 'write' access to contents to push a git tag.
     permissions:
       contents: write
+      # Permissions fro publishing to bcr.
+      id-token: write        
+      attestations: write    
 
     # Pass the inputs from the manual trigger to the reusable workflow.
     with:
       version: ${{ github.event.inputs.version }}
       publish_to_sonatype: false
       create_tag: true
+      publish_to_bcr: true
 
     # Allow the reusable workflow to access the secrets.
     secrets: inherit
+

@@ -34,6 +34,11 @@ on:
         description: 'Create a git tag'
         type: boolean
         required: true
+      publish_to_bcr:
+        description: 'Publish the repo to BCR'
+        type: boolean
+        required: false  
+        default: false
     secrets:
       SONATYPE_USERNAME_TOKEN:
         description: 'Sonatype username token'
@@ -117,3 +122,25 @@ jobs:
           git config --local user.name "J2CL GitHub Bot"
           git tag -a "${{ inputs.version }}" -m "Release ${{ inputs.version }}"
           git push origin "${{ inputs.version }}"
+
+  publish_to_bcr:
+    runs-on: ubuntu-latest
+    if: ${{ inputs.create_tag }} && ${{ inputs.publish_to_bcr }}
+    needs:
+      - create_git_tag
+
+    uses: bazel-contrib/publish-to-bcr/.github/workflows/publish.yaml@[version]
+    with:
+      tag_name: ${{ inputs.version }}
+      registry_fork: j2cl-github-bot/bazel-central-registry
+      attest: true
+      draft: true
+      author_name: j2cl-github-bot
+      author_email: j2cl-github-bot@google.com
+    permissions:
+      contents: write
+      id-token: write
+      attestations: write
+    secrets:
+      publish_token: ${{ secrets.BCR_PUBLISH_TOKEN }}
+
