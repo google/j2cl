@@ -15,13 +15,16 @@
 
 set -ex
 
-# Build and test Hello World sample in its own workspace
-(cd samples/helloworld && bazel test ...)
+function bazel_workspace() {
+  # Test in its own workspace with local (head) j2cl version.
+  (cd $2 &&  bazel $1 --override_module=j2cl=../.. ...)
+}
 
-# Build wasm Hello World sample in its own workspace
-(cd samples/wasm && bazel test ...)
+# Build and test Hello World sample in its own workspace
+bazel_workspace test "samples/helloworld"
+
+bazel_workspace test "samples/wasm"
 
 if [[ $1 == "CI" ]]; then
-  # Build Guava sample in its own workspace
-  (cd samples/guava && bazel build ...)
+  bazel_workspace build "samples/guava"
 fi

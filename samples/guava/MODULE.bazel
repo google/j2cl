@@ -8,12 +8,6 @@ bazel_dep(
     version = "20250630",
 )
 
-# Use head j2cl for testing purposes.
-local_path_override(
-    module_name = "j2cl",
-    path = "../..",
-)
-
 bazel_dep(
     name = "rules_closure",
     version = "0.15.0",
