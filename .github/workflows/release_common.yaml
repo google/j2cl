@@ -124,7 +124,6 @@ jobs:
           git push origin "${{ inputs.version }}"
 
   publish_to_bcr:
-    runs-on: ubuntu-latest
     if: ${{ inputs.create_tag }} && ${{ inputs.publish_to_bcr }}
     needs: create_git_tag
     uses: bazel-contrib/publish-to-bcr/.github/workflows/publish.yaml@v0.2.2
