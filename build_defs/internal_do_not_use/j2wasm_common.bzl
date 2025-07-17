@@ -1,5 +1,7 @@
 """Common utilities for creating J2WASM targets and providers."""
 
+load("@bazel_skylib//lib:structs.bzl", "structs")
+load("@bazel_skylib//rules:common_settings.bzl", "BuildSettingInfo")
 load(":j2cl_common.bzl", "J2CL_TOOLCHAIN_ATTRS", "j2cl_common")
 load(":provider.bzl", "J2wasmInfo")
 
@@ -14,6 +16,10 @@ def _compile(
         output_jar = None,
         javac_opts = [],
         artifact_suffix = ""):
+    internal_transpiler_flags = {}
+    if ctx.attr._feature_set[BuildSettingInfo].value == J2WASM_FEATURE_SET.CUSTOM_DESCRIPTORS:
+        internal_transpiler_flags["experimentalEnableWasmCustomDescriptors"] = True
+
     j2cl_provider = j2cl_common.compile(
         ctx = ctx,
         srcs = srcs,
@@ -25,6 +31,7 @@ def _compile(
         output_jar = output_jar,
         javac_opts = javac_opts + DEFAULT_J2WASM_JAVAC_OPTS,
         artifact_suffix = artifact_suffix,
+        internal_transpiler_flags = internal_transpiler_flags,
     )
 
     return _create_j2wasm_provider(
@@ -93,4 +100,15 @@ J2WASM_TOOLCHAIN_ATTRS.update({
     "_j2cl_java_toolchain": attr.label(
         default = Label("//jre/java:j2wasm_java_toolchain"),
     ),
+    "_feature_set": attr.label(
+        providers = [BuildSettingInfo],
+        default = "//build_defs/internal_do_not_use:j2wasm_feature_set",
+    ),
 })
+
+J2WASM_FEATURE_SET = struct(
+    DEFAULT = "",
+    CUSTOM_DESCRIPTORS = "custom_descriptors",
+)
+
+J2WASM_FEATURE_SET_VALUES = structs.to_dict(J2WASM_FEATURE_SET).values()

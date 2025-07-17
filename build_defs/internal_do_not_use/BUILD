@@ -1,8 +1,10 @@
 # Description:
 #   Build rules used by J2CL and BUILD targets used by the rules.
 
+load("@bazel_skylib//rules:common_settings.bzl", "string_flag")
 load(":j2cl_library.bzl", "j2cl_library")
 load(":j2kt_library.bzl", "j2kt_jvm_library", "j2kt_native_library")
+load(":j2wasm_common.bzl", "J2WASM_FEATURE_SET", "J2WASM_FEATURE_SET_VALUES")
 load(":j2wasm_library.bzl", "j2wasm_library")
 
 package(
@@ -37,6 +39,12 @@ config_setting(
     flag_values = {
         "//:experimental_enable_j2kt_web": "True",
     },
+)
+
+string_flag(
+    name = "j2wasm_feature_set",
+    build_setting_default = J2WASM_FEATURE_SET.DEFAULT,
+    values = J2WASM_FEATURE_SET_VALUES,
 )
 
 # ***************************************************

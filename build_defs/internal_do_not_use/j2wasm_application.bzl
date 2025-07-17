@@ -4,9 +4,10 @@ Takes Java source, translates it into Wasm.
 This is an experimental tool and should not be used.
 """
 
+load("@bazel_skylib//rules:common_settings.bzl", "BuildSettingInfo")
 load(":j2cl_common.bzl", "get_bootclasspath", "get_bootclasspath_deps")
 load(":j2cl_js_common.bzl", "J2CL_JS_TOOLCHAIN_ATTRS", "j2cl_js_provider")
-load(":j2wasm_common.bzl", "J2WASM_TOOLCHAIN_ATTRS")
+load(":j2wasm_common.bzl", "J2WASM_FEATURE_SET", "J2WASM_TOOLCHAIN_ATTRS")
 load(":provider.bzl", "J2wasmInfo")
 
 # Template for the generated JS imports file.
@@ -94,6 +95,7 @@ exports = {compileStreaming, instantiate, instantiateStreaming, instantiateBlock
 """
 
 def _impl_j2wasm_application(ctx):
+    feature_set = ctx.attr._feature_set[BuildSettingInfo].value
     deps = [ctx.attr._jre] + ctx.attr.deps
     srcs = _get_transitive_srcs(deps)
     classpath = _get_transitive_classpath(deps)
@@ -180,6 +182,8 @@ def _impl_j2wasm_application(ctx):
         args.add("--enable-bulk-memory")
         args.add("--closed-world")
         args.add("--traps-never-happen")
+        if feature_set == J2WASM_FEATURE_SET.CUSTOM_DESCRIPTORS:
+            args.add("--enable-custom-descriptors")
         args.add_all(stage_args)
 
         inputs = []
@@ -335,6 +339,14 @@ def _remap_symbol_map(ctx, transpile_out, binaryen_symbolmap):
         mnemonic = "J2wasmApp",
     )
 
+_j2wasm_app_feature_set_transition = transition(
+    implementation = lambda _, attr: {
+        "//build_defs/internal_do_not_use:j2wasm_feature_set": attr.feature_set,
+    },
+    inputs = [],
+    outputs = ["//build_defs/internal_do_not_use:j2wasm_feature_set"],
+)
+
 _J2WASM_APP_ATTRS = {
     "deps": attr.label_list(providers = [J2wasmInfo]),
     "entry_points": attr.string_list(),
@@ -345,6 +357,7 @@ _J2WASM_APP_ATTRS = {
     # TODO(b/296477606): Remove when symbol map file can be linked from the binary for debugging.
     "enable_debug_info": attr.bool(default = False),
     "use_magic_string_imports": attr.bool(default = False),
+    "feature_set": attr.string(default = J2WASM_FEATURE_SET.DEFAULT),
     "_jre": attr.label(default = Label("//build_defs/internal_do_not_use:j2wasm_jre")),
     "_binaryen": attr.label(
         cfg = "exec",
@@ -374,6 +387,7 @@ _J2WASM_APP_ATTRS.update(J2WASM_TOOLCHAIN_ATTRS)
 _j2wasm_application = rule(
     implementation = _impl_j2wasm_application,
     attrs = _J2WASM_APP_ATTRS,
+    cfg = _j2wasm_app_feature_set_transition,
     fragments = ["js"],
     outputs = {
         "wat": "%{name}.wat",
