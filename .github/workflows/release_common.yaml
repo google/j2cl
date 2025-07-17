@@ -129,7 +129,7 @@ jobs:
     needs:
       - create_git_tag
 
-    uses: bazel-contrib/publish-to-bcr/.github/workflows/publish.yaml@[version]
+    uses: bazel-contrib/publish-to-bcr/.github/workflows/publish.yaml@v0.2.2
     with:
       tag_name: ${{ inputs.version }}
       registry_fork: j2cl-github-bot/bazel-central-registry
