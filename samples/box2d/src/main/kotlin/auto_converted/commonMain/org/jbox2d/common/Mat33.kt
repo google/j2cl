@@ -183,7 +183,6 @@ class Mat33 : Serializable {
     if (this === other) return true
     if (other == null) return false
     if (this::class != other::class) return false
-    if (other !is Mat33) return false
     val newOther = other as Mat33
     if (ex == null) {
       if (newOther.ex != null) return false

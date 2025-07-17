@@ -425,7 +425,6 @@ class Mat22 : Serializable {
     if (this === other) return true
     if (other == null) return false
     if (this::class != other::class) return false
-    if (other !is Mat22) return false
     val newOther = other as Mat22
     if (ex == null) {
       if (newOther.ex != null) return false

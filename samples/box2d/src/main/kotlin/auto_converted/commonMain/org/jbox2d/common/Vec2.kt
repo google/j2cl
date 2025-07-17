@@ -173,7 +173,6 @@ class Vec2 constructor(var x: Float = 0f, var y: Float = 0f) : Serializable {
     if (this === other) return true
     if (other == null) return false
     if (this::class != other::class) return false
-    if (other !is Vec2) return false
     val newOther = other as Vec2
     if (x.toBits() != newOther.x.toBits()) return false
     return if (y.toBits() != newOther.y.toBits()) false else true

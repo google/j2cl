@@ -132,7 +132,6 @@ class Vec3 : Serializable {
     if (this === other) return true
     if (other == null) return false
     if (this::class != other::class) return false
-    if (other !is Vec3) return false
     val newOther = other as Vec3
     if (x.toBits() != newOther.x.toBits()) return false
     if (y.toBits() != newOther.y.toBits()) return false
