@@ -12,10 +12,18 @@ closure_js_library(
     srcs = ["j2cl_test_suite.js"],
     visibility = ["//build_defs/internal_do_not_use:__pkg__"],
     deps = [
+        ":internal_jasmine_test_converter",
         ":internal_parametrized_test_suite",
         "//third_party:closure_testcase",
         "//third_party:closure_testsuite",
     ],
+)
+
+closure_js_library(
+    name = "internal_jasmine_test_converter",
+    testonly = 1,
+    srcs = ["jasmine_test_converter.js"],
+    lenient = True,
 )
 
 closure_js_library(

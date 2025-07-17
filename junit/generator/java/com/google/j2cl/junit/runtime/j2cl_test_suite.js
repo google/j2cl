@@ -18,9 +18,12 @@ goog.setTestOnly();
 const TestCase = goog.require('goog.testing.TestCase');
 const testSuite = goog.require('goog.testing.testSuite');
 const {expandParameterized} = goog.require('com.google.j2cl.junit.parameterizedTestSuite');
+const {jasmineTestConverter} = goog.require('com.google.j2cl.junit.jasmineTestConverter');
 
 /**
  * Registers a test suite with the appropriate testing framework.
+ * Either converts it for Jasmine or defines it as a closure test suite
+ * with natural ordering based on the presence of `jasmine`.
  *
  * @param {?} suite The test suite object to be registered.
  * @param {boolean} isParameterized Whether the test suite is parameterized.
@@ -30,7 +33,7 @@ function j2clTestSuite(suite, isParameterized) {
   if (isParameterized) {
     suite = expandParameterized(suite);
   }
-  testSuite(suite, {order: TestCase.Order.NATURAL});
+  goog.global['jasmine'] ? jasmineTestConverter(suite) : testSuite(suite, {order: TestCase.Order.NATURAL});
 }
 
 exports = {j2clTestSuite};
