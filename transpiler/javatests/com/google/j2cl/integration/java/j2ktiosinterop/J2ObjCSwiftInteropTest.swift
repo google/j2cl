@@ -38,6 +38,8 @@ final class J2ObjCSwiftInteropTest: XCTestCase {
     obj.stringMethod(with: "")
     obj.stringArrayMethod(withNSStringArray: nil)
     obj.stringArrayArrayMethod(withNSStringArray2: nil)
+    obj.genericArrayMethod(withNSObjectArray: nil)
+    obj.genericStringArrayMethod(withNSStringArray: nil)
     obj.cloneableMethod(with: nil)
     obj.numberMethod(with: nil)
     obj.classMethod(with: nil)

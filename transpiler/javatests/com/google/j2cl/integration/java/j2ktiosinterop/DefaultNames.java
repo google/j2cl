@@ -64,6 +64,10 @@ public final class DefaultNames {
 
   public <T extends String> void genericStringMethod(T t) {}
 
+  public <T> void genericArrayMethod(T[] t) {}
+
+  public <T extends String> void genericStringArrayMethod(T[] t) {}
+
   public void overloadedMethod(Object o) {}
 
   public void overloadedMethod(int i) {}

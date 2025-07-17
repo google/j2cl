@@ -38,6 +38,8 @@
   [obj stringMethodWithNSString:@""];
   [obj stringArrayMethodWithNSStringArray:nil];
   [obj stringArrayArrayMethodWithNSStringArray2:nil];
+  [obj genericArrayMethodWithNSObjectArray:nil];
+  [obj genericStringArrayMethodWithNSStringArray:nil];
   [obj cloneableMethodWithNSCopying:nil];
   [obj numberMethodWithNSNumber:nil];
   [obj classMethodWithIOSClass:nil];

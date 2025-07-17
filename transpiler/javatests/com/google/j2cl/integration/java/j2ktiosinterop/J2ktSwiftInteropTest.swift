@@ -40,6 +40,8 @@ final class J2ktSwiftInteropTest: XCTestCase {
     obj.stringMethod(with: "")
     obj.stringArrayMethod(withNSStringArray: nil)
     obj.stringArrayArrayMethod(withNSStringArray2: nil)
+    obj.genericArrayMethod(withNSObjectArray: nil)
+    obj.genericStringArrayMethod(withNSStringArray: nil)
     obj.cloneableMethod(with: nil)
     obj.numberMethod(with: 1)
     obj.classMethod(with: nil)
