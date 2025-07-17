@@ -346,13 +346,6 @@ _J2WASM_APP_ATTRS = {
     "enable_debug_info": attr.bool(default = False),
     "use_magic_string_imports": attr.bool(default = False),
     "_jre": attr.label(default = Label("//build_defs/internal_do_not_use:j2wasm_jre")),
-    "_j2cl_transpiler": attr.label(
-        cfg = "exec",
-        executable = True,
-        default = Label(
-            "//transpiler/java/com/google/j2cl/transpiler:BazelJ2clBuilder",
-        ),
-    ),
     "_binaryen": attr.label(
         cfg = "exec",
         executable = True,
