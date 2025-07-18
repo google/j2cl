@@ -107,6 +107,7 @@ jobs:
 
 
   create_github_release:
+    runs-on: ubuntu-latest
     # TODO: add create_github_release input. default to false. not required
     if: ${{ inputs.create_github_release }}
     permissions:
