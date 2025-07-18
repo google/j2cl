@@ -30,14 +30,20 @@ on:
         type: boolean
         required: false
         default: false
-      create_tag:
-        description: 'Create a git tag'
-        type: boolean
-        required: true
       publish_to_bcr:
         description: 'Publish the repo to BCR'
         type: boolean
-        required: false  
+        required: false
+        default: false
+      create_github_release:
+        description: 'Create a GitHub release (which also creates a git tag)'
+        type: boolean
+        required: false
+        default: false
+      continue_if_release_exists:
+        description: 'Continue the workflow even if the GitHub release already exists'
+        type: boolean
+        required: false
         default: false
     secrets:
       SONATYPE_USERNAME_TOKEN:
@@ -108,7 +114,6 @@ jobs:
 
   create_github_release:
     runs-on: ubuntu-latest
-    # TODO: add create_github_release input. default to false. not required
     if: ${{ inputs.create_github_release }}
     permissions:
       contents: write
@@ -119,18 +124,21 @@ jobs:
       - name: Check if release exists
         id: check_release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Do not exit on error. gh release view will return non-zero exit code if the release does
-          # not exist.
-          set +e # Do not exit on error. 
-          gh release view ${{ inputs.version }} > /dev/null 2>&1 
-          if [ $? -eq 0 ]; then 
-            # TODO(dramaix): By default we should fail if the release already exists but give the user an 
-            # option (inputs.continue_if_release_exists) to override it.
-            echo "Release ${{ inputs.version }} already exists. Skip release creation."
-            echo "github_release_exists=true" >> $GITHUB_OUTPUT
+          set +e # Do not exit on error. gh release view will return non-zero exit code if the release does not exist.
+          gh release view ${{ inputs.version }} > /dev/null 2>&1
+          if [ $? -eq 0 ]; then
+            if [[ "${{ inputs.continue_if_release_exists }}" == "true" ]]; then
+              echo "Release ${{ inputs.version }} already exists. Skipping release creation."
+              echo "github_release_exists=true" >> $GITHUB_OUTPUT
+            else
+              echo "Error: Release ${{ inputs.version }} already exists."
+              echo "Set 'continue_if_release_exists' to true if you want to continue with the exising release."
+              exit 1
+            fi
           else
+            echo "Release ${{ inputs.version }} does not exist."
             echo "github_release_exists=false" >> $GITHUB_OUTPUT
           fi
 
