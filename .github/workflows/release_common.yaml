@@ -141,6 +141,17 @@ jobs:
             echo "Release ${{ inputs.version }} does not exist."
             echo "github_release_exists=false" >> $GITHUB_OUTPUT
           fi
+      - name: Build the archive file
+        id: build_archive
+        run: |
+          tag="${{ inputs.version }}"
+          repo="${{ github.event.repository.name }}"
+          # The prefix is used to determine the directory structure of the archive. We strip the 'v'
+          # prefix from the version number.
+          directory="${repo}-${tag#v}"
+          archive="${repo}-${tag}.tar.gz"
+          git archive --format=tar --prefix=${directory}/ -o ${archive} ${tag}
+          echo "archive_path=${archive}" >> $GITHUB_OUTPUT
 
       - name: Create Github Release
         if: ${{ steps.check_release.outputs.github_release_exists == 'false' }}
@@ -148,7 +159,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # This will also create a git tag if it does not exist.
-          gh release create ${{ inputs.version }} --generate-notes
+          gh release create "${{ inputs.version }}" --generate-notes
+          gh release upload "${{ inputs.version }}" "${{ steps.build_archive.outputs.archive_path }}"
           echo "Release ${{ inputs.version }} created successfully."
 
 
@@ -160,7 +172,7 @@ jobs:
       tag_name: ${{ inputs.version }}
       registry_fork: j2cl-github-bot/bazel-central-registry
       attest: true
-      draft: false
+      draft: true
       author_name: j2cl-github-bot
       author_email: j2cl-github-bot@google.com
     permissions:
