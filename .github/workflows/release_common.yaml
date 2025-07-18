@@ -142,25 +142,31 @@ jobs:
             echo "github_release_exists=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Create Github Release
+      - name: Build archive and Create Github Release
         if: ${{ steps.check_release.outputs.github_release_exists == 'false' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # This will also create a git tag if it does not exist.
-          gh release create "${{ inputs.version }}" --generate-notes
-          echo "Release ${{ inputs.version }} created successfully."
-
-      - name: Build the archive file and upload it to the release
-        run: |
+          set +x
           tag="${{ inputs.version }}"
           repo="${{ github.event.repository.name }}"
           # The prefix is used to determine the directory structure of the archive. We strip the 'v'
           # prefix from the version number.
           directory="${repo}-${tag#v}"
           archive="${repo}-${tag}.tar.gz"
-          git archive --format=tar --prefix=${directory}/ -o "${archive}" "${tag}"
+
+          echo "Building archive ${archive}"
+          git archive --format=tar --prefix=${directory}/ -o "${archive}" HEAD
+          echo "Archive built successfully."
+
+          echo "Creating GitHub release ${tag}"
+          # This will also create a git tag if it does not exist.
+          gh release create "${tag}" --generate-notes
+          echo "GitHub release ${tag} created successfully."
+
+          echo "Uploading archive ${archive} to release ${tag}"
           gh release upload "${tag}" "${archive}"
+          echo "Archive uploaded successfully."
 
   publish_to_bcr:
     if: ${{ inputs.publish_to_bcr }}
