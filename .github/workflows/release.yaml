@@ -44,7 +44,7 @@ jobs:
       version: ${{ github.event.inputs.version }}
       publish_to_sonatype: false
       create_github_release: true
-      continue_if_release_exists: ${{ github.event.inputs.continue_if_release_exists }}
+      continue_if_release_exists: ${{ github.event.inputs.continue_if_release_exists == 'true' }}
       publish_to_bcr: true
 
     # Allow the reusable workflow to access the secrets.
