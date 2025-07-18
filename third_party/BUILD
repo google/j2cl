@@ -1,7 +1,7 @@
 # Description:
 #   Thirdparty dependencies indirection for bazel.
 
-load("//build_defs:rules.bzl", "j2cl_alias", "j2cl_import", "j2cl_library")
+load("//build_defs:rules.bzl", "j2cl_import", "j2cl_library")
 
 package(
     default_visibility = ["//:__subpackages__"],
@@ -173,14 +173,14 @@ alias(
     actual = "@com_google_jsinterop_annotations-j2cl//:jsinterop-annotations",
 )
 
-j2cl_alias(
+j2cl_import(
     name = "jsinterop-annotations-j2cl",
-    actual = "@com_google_jsinterop_annotations-j2cl//:jsinterop-annotations-j2cl",
+    jar = ":jsinterop-annotations",
 )
 
 alias(
     name = "jsinterop-annotations-j2cl_jar",
-    actual = "@com_google_jsinterop_annotations-j2cl//java/jsinterop/annotations:annotations-j2cl_jar",
+    actual = ":jsinterop-annotations",
     visibility = ["//jre/java:__pkg__"],
 )
 

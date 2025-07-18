@@ -26,8 +26,6 @@ closure_js_library(
     exports = ["//jre/java:jre"],
 )
 
-# Note that JsInterop targets may disappear after jsinterop-annotations get its own repo.
-
 alias(
     name = "jsinterop-annotations",
     actual = "//third_party:jsinterop-annotations",
