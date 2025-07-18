@@ -26,9 +26,9 @@ on:
 jobs:
   release:
     uses: ./.github/workflows/release_common.yaml
-
-    # The reusable workflow requires 'write' access to contents to push a git tag.
+    
     permissions:
+      # Permissions for creating a github release.
       contents: write
       # Permissions fro publishing to bcr.
       id-token: write        
@@ -43,4 +43,3 @@ jobs:
 
     # Allow the reusable workflow to access the secrets.
     secrets: inherit
-

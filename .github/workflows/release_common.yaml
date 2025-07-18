@@ -105,33 +105,53 @@ jobs:
           SONATYPE_PASSWORD_TOKEN: ${{ secrets.SONATYPE_PASSWORD_TOKEN }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
-  create_git_tag:
-    runs-on: ubuntu-latest
-    if: ${{ inputs.create_tag }}
+
+  create_github_release:
+    # TODO: add create_github_release input. default to false. not required
+    if: ${{ inputs.create_github_release }}
     permissions:
-      # Required for creating and pushing git tags.
       contents: write
-
     steps:
-      - name: Checkout current commit
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Create Git Tag
+      - name: Check if release exists
+        id: check_release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
         run: |
-          git config --local user.email "j2cl-github-bot@github.com"
-          git config --local user.name "J2CL GitHub Bot"
-          git tag -a "${{ inputs.version }}" -m "Release ${{ inputs.version }}"
-          git push origin "${{ inputs.version }}"
+          # Do not exit on error. gh release view will return non-zero exit code if the release does
+          # not exist.
+          set +e # Do not exit on error. 
+          gh release view ${{ inputs.version }} > /dev/null 2>&1 
+          if [ $? -eq 0 ]; then 
+            # TODO(dramaix): By default we should fail if the release already exists but give the user an 
+            # option (inputs.continue_if_release_exists) to override it.
+            echo "Release ${{ inputs.version }} already exists. Skip release creation."
+            echo "github_release_exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "github_release_exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Github Release
+        if: ${{ steps.check_release.outputs.github_release_exists == 'false' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # This will also create a git tag if it does not exist.
+          gh release create ${{ inputs.version }} --generate-notes
+          echo "Release ${{ inputs.version }} created successfully."
+
 
   publish_to_bcr:
-    if: ${{ inputs.create_tag }} && ${{ inputs.publish_to_bcr }}
-    needs: create_git_tag
+    if: ${{ inputs.publish_to_bcr }}
+    needs: create_github_release
     uses: bazel-contrib/publish-to-bcr/.github/workflows/publish.yaml@v0.2.2
     with:
       tag_name: ${{ inputs.version }}
       registry_fork: j2cl-github-bot/bazel-central-registry
-      attest: false 
-      draft: true
+      attest: true
+      draft: false
       author_name: j2cl-github-bot
       author_email: j2cl-github-bot@google.com
     permissions:
@@ -140,4 +160,3 @@ jobs:
       attestations: write
     secrets:
       publish_token: ${{ secrets.BCR_PUBLISH_TOKEN }}
-
