@@ -176,7 +176,7 @@ jobs:
           git push origin "${{ inputs.version }}"
 
   release:
-   needs: create_git_tag
+    needs: create_git_tag
     if: ${{ inputs.create_github_release }}
     uses: bazel-contrib/.github/.github/workflows/release_ruleset.yaml@v7.2.2
     with:
