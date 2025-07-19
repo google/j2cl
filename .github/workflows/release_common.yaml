@@ -112,65 +112,64 @@ jobs:
           MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
 
-  create_github_release:
-    runs-on: ubuntu-latest
+  # create_github_release:
+  #   if: ${{ inputs.create_github_release }}
+  #   permissions:
+  #     contents: write
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
+
+  #     - name: Check if release exists
+  #       id: check_release
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #       run: |
+  #         set +e # Do not exit on error. gh release view will return non-zero exit code if the release does not exist.
+  #         gh release view ${{ inputs.version }} > /dev/null 2>&1
+  #         if [ $? -eq 0 ]; then
+  #           if [[ "${{ inputs.continue_if_release_exists }}" == "true" ]]; then
+  #             echo "Release ${{ inputs.version }} already exists. Skipping release creation."
+  #             echo "github_release_exists=true" >> $GITHUB_OUTPUT
+  #           else
+  #             echo "Error: Release ${{ inputs.version }} already exists."
+  #             echo "Set 'continue_if_release_exists' to true if you want to continue with the exising release."
+  #             exit 1
+  #           fi
+  #         else
+  #           echo "Release ${{ inputs.version }} does not exist."
+  #           echo "github_release_exists=false" >> $GITHUB_OUTPUT
+  #         fi
+
+  #     - name: Build archive and Create Github Release
+  #       if: ${{ steps.check_release.outputs.github_release_exists == 'false' }}
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #       run: |
+  #         set +x
+ 
+  #         echo "Archive built successfully."
+
+  #         echo "Creating GitHub release ${tag}"
+  #         # This will also create a git tag if it does not exist.
+  #         gh release create "${tag}" --generate-notes
+  #         echo "GitHub release ${tag} created successfully."
+
+  #         echo "Uploading archive ${archive} to release ${tag}"
+  #         gh release upload "${tag}" "${archive}"
+  #         echo "Archive uploaded successfully."
+
+  release:
     if: ${{ inputs.create_github_release }}
-    permissions:
-      contents: write
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Check if release exists
-        id: check_release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          set +e # Do not exit on error. gh release view will return non-zero exit code if the release does not exist.
-          gh release view ${{ inputs.version }} > /dev/null 2>&1
-          if [ $? -eq 0 ]; then
-            if [[ "${{ inputs.continue_if_release_exists }}" == "true" ]]; then
-              echo "Release ${{ inputs.version }} already exists. Skipping release creation."
-              echo "github_release_exists=true" >> $GITHUB_OUTPUT
-            else
-              echo "Error: Release ${{ inputs.version }} already exists."
-              echo "Set 'continue_if_release_exists' to true if you want to continue with the exising release."
-              exit 1
-            fi
-          else
-            echo "Release ${{ inputs.version }} does not exist."
-            echo "github_release_exists=false" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Build archive and Create Github Release
-        if: ${{ steps.check_release.outputs.github_release_exists == 'false' }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          set +x
-          tag="${{ inputs.version }}"
-          repo="${{ github.event.repository.name }}"
-          # The prefix is used to determine the directory structure of the archive. We strip the 'v'
-          # prefix from the version number.
-          directory="${repo}-${tag#v}"
-          archive="${repo}-${tag}.tar.gz"
-
-          echo "Building archive ${archive}"
-          git archive --format=tar --prefix=${directory}/ -o "${archive}" HEAD
-          echo "Archive built successfully."
-
-          echo "Creating GitHub release ${tag}"
-          # This will also create a git tag if it does not exist.
-          gh release create "${tag}" --generate-notes
-          echo "GitHub release ${tag} created successfully."
-
-          echo "Uploading archive ${archive} to release ${tag}"
-          gh release upload "${tag}" "${archive}"
-          echo "Archive uploaded successfully."
+    uses: bazel-contrib/.github/.github/workflows/release_ruleset.yaml@v7.2.2
+    with:
+      prerelease: false
+      release_files: ${{ github.event.repository.name }}-*.tar.gz
+      tag_name: ${{ inputs.version }}
 
   publish_to_bcr:
     if: ${{ inputs.publish_to_bcr }}
-    needs: create_github_release
+    needs: release
     uses: bazel-contrib/publish-to-bcr/.github/workflows/publish.yaml@v0.2.2
     with:
       tag_name: ${{ inputs.version }}
