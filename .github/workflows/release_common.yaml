@@ -183,6 +183,7 @@ jobs:
       prerelease: false
       release_files: ${{ github.event.repository.name }}-*.tar.gz
       tag_name: ${{ inputs.version }}
+      bazel_test_command: "bazel test transpiler/javatests/com/google/j2cl/integration/java/emptyclass/..."
 
   publish_to_bcr:
     if: ${{ inputs.publish_to_bcr }}
