@@ -12,6 +12,7 @@ readable_example(
 
 """
 
+load("//third_party/bazel_rules/rules_cc/cc:objc_library.bzl", "objc_library")
 load("@bazel_skylib//rules:write_file.bzl", "write_file")
 load(
     "//build_defs:rules.bzl",
@@ -158,8 +159,7 @@ def readable_example(
                 content = ["""#import "%s/%s.h" """ % (native.package_name(), src[:-5]) for src in srcs if src.endswith(".java")],
                 tags = ["j2kt", "ios", "manual"],
             )
-
-            native.objc_library(
+            objc_library(
                 name = "ios_parse_headers",
                 testonly = 1,
                 srcs = ["ParseHeaders.m"],
