@@ -47,7 +47,7 @@ def _j2cl_import_external_common(repository_ctx, artifact_urls, additional_attrs
     ]
 
     if repository_ctx.attr.annotation_only:
-        jar = _extract_repo_name(repository_ctx.name) + "-java"
+        jar = repository_ctx.original_name + "-java"
         jar_name = jar + ".jar"
 
         repository_ctx.download(
@@ -62,7 +62,7 @@ def _j2cl_import_external_common(repository_ctx, artifact_urls, additional_attrs
             "    jars = ['%s']," % jar_name,
             ")",
             "j2cl_import(",
-            "    name = '%s'," % _extract_repo_name(repository_ctx.name),
+            "    name = '%s'," % repository_ctx.original_name,
             "    jar = ':%s'," % jar,
         ]
 
@@ -77,7 +77,7 @@ def _j2cl_import_external_common(repository_ctx, artifact_urls, additional_attrs
             "REPLACED_SRCS = [s.split('/super/')[1] for s in SUPER_SRCS]",
             "",
             "j2cl_library(",
-            "    name = '%s'," % _extract_repo_name(repository_ctx.name),
+            "    name = '%s'," % repository_ctx.original_name,
             "    srcs = glob(['**/*.java', '**/*.js'],",
             "        exclude = REPLACED_SRCS + ['**/*_CustomFieldSerializer*'],",
             "        allow_empty = True",
@@ -188,9 +188,3 @@ j2cl_maven_import_external = repository_rule(
     },
     implementation = _j2cl_maven_import_external,
 )
-
-# TODO(mollyibot): Replace with repository_ctx.original_name after Bazel 8.1
-def _extract_repo_name(name):
-    """Extracts the repo name from the rule name."""
-    SEPARATOR = Label("@com_google_j2cl").workspace_name.removesuffix("com_google_j2cl")[-1]
-    return name.rsplit(SEPARATOR, 1)[1]
