@@ -50,7 +50,7 @@ j2cl_import(
 
 alias(
     name = "jscomp",
-    actual = "@io_bazel_rules_closure//closure/compiler",
+    actual = "@rules_closure//closure/compiler",
 )
 
 alias(
@@ -150,22 +150,22 @@ alias(
 
 alias(
     name = "closure_math_long",
-    actual = "@io_bazel_rules_closure//closure/library:long",
+    actual = "@rules_closure//closure/library:long",
 )
 
 alias(
     name = "closure_reflect",
-    actual = "@io_bazel_rules_closure//closure/library:reflect",
+    actual = "@rules_closure//closure/library:reflect",
 )
 
 alias(
     name = "closure_testcase",
-    actual = "@io_bazel_rules_closure//closure/testing/library:testcase",
+    actual = "@rules_closure//closure/testing/library:testcase",
 )
 
 alias(
     name = "closure_testsuite",
-    actual = "@io_bazel_rules_closure//closure/testing/library:testsuite",
+    actual = "@rules_closure//closure/testing/library:testsuite",
 )
 
 alias(

@@ -17,7 +17,7 @@ integration_test(
 
 """
 
-load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_test")
+load("@rules_closure//closure:defs.bzl", "closure_js_test")
 load("//build_defs:rules.bzl", "J2CL_TEST_DEFS", "j2cl_library")
 load("//build_defs/internal_do_not_use:j2cl_util.bzl", "get_java_package", "to_parallel_target")
 

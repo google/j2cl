@@ -1,9 +1,9 @@
 # Description:
 #   j2cl/jre: JRE subset for transpilation.
 
-load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_binary")
+load("@rules_closure//closure:defs.bzl", "closure_js_binary")
 load("//build_defs:rules.bzl", "j2cl_library", "j2kt_native_library")
-load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_binary")
+load("@rules_closure//closure:defs.bzl", "closure_js_binary")
 load("@rules_java//java:defs.bzl", "java_library")
 load("@rules_shell//shell:sh_test.bzl", "sh_test")
 load(":j2cl_multi_test.bzl", "j2cl_multi_test")

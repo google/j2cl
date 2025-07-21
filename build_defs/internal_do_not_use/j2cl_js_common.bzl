@@ -1,7 +1,7 @@
 """This module contains j2cl_js_provider helpers."""
 
 load(
-    "@io_bazel_rules_closure//closure:defs.bzl",
+    "@rules_closure//closure:defs.bzl",
     "CLOSURE_JS_TOOLCHAIN_ATTRS",
     "ClosureJsLibraryInfo",
     "closure_js_binary",

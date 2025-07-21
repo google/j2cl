@@ -1,4 +1,4 @@
-load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
+load("@rules_closure//closure:defs.bzl", "closure_js_library")
 load(
     "//transpiler/javatests/com/google/j2cl/integration:integration_test.bzl",
     "integration_test",

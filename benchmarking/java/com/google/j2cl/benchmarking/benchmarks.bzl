@@ -11,7 +11,7 @@ load(
 load("//build_defs:rules.bzl", "j2cl_application", "j2wasm_application")
 load("//build_defs/internal_do_not_use:j2cl_util.bzl", "get_java_package")
 load("//transpiler/java/com/google/j2cl/common/bazel:jvm_flags.bzl", "JVM_FLAGS")
-load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
+load("@rules_closure//closure:defs.bzl", "closure_js_library")
 
 _BENCHMARK_LIST_RULE_NAME = "benchmark_list"
 

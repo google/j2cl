@@ -1,4 +1,4 @@
-load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
+load("@rules_closure//closure:defs.bzl", "closure_js_library")
 load("@rules_license//rules:license.bzl", "license")
 load("//build_defs:rules.bzl", "j2cl_alias")
 

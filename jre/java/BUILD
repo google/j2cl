@@ -2,7 +2,7 @@
 #   j2cl/jre: JRE subset for transpilation.
 #
 
-load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
+load("@rules_closure//closure:defs.bzl", "closure_js_library")
 load("//build_defs:rules.bzl", "j2cl_import", "j2cl_library", "j2wasm_library")
 load("//build_defs/internal_do_not_use:j2cl_common.bzl", "DEFAULT_J2CL_JAVAC_OPTS")
 load("//build_defs/internal_do_not_use:j2wasm_common.bzl", "DEFAULT_J2WASM_JAVAC_OPTS")

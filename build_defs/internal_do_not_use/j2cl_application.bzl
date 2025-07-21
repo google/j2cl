@@ -1,6 +1,6 @@
 """Macro for generating binary targets for j2cl apps."""
 
-load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_binary")
+load("@rules_closure//closure:defs.bzl", "closure_js_binary")
 load(":j2cl_js_common.bzl", "J2CL_OPTIMIZED_DEFS", "js_devserver")
 
 def j2cl_application(

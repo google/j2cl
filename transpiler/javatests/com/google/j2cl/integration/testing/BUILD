@@ -1,7 +1,7 @@
 # Description:
 #   Utilites for tests.
 
-load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
+load("@rules_closure//closure:defs.bzl", "closure_js_library")
 load("//build_defs:rules.bzl", "j2cl_library", "j2kt_jvm_library", "j2kt_native_library", "j2wasm_library")
 load("@rules_java//java:defs.bzl", "java_library")
 

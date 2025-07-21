@@ -26,7 +26,7 @@ load("//build_defs/internal_do_not_use:j2kt_web_transition.bzl", "j2kt_web_trans
 load("//build_defs/internal_do_not_use:provider.bzl", "J2clInfo")
 load("@bazel_tools//tools/build_defs/apple:ios.bzl", "ios_build_test")
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
-load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_binary")
+load("@rules_closure//closure:defs.bzl", "closure_js_binary")
 
 JAVAC_FLAGS = [
     "-XepDisableAllChecks",
