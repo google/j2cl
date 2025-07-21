@@ -22,8 +22,8 @@ on:
         description: 'The version to release'
         required: true
         type: string
-      continue_if_release_exists:
-        description: 'Continue the workflow even if the GitHub release already exists'
+      continue_if_tag_exists:
+        description: 'Continue the workflow even if the GitHub tag already exists'
         type: boolean
         required: true
         default: false
@@ -44,8 +44,9 @@ jobs:
       version: ${{ github.event.inputs.version }}
       publish_to_sonatype: false
       create_github_release: true
-      continue_if_release_exists: ${{ github.event.inputs.continue_if_release_exists == 'true' }}
+      continue_if_tag_exists: ${{ github.event.inputs.continue_if_tag_exists == 'true' }}
       publish_to_bcr: true
+      bcr_bazel_test_command: "bazel test transpiler/javatests/com/google/j2cl/integration/java/emptyclass/..."
 
     # Allow the reusable workflow to access the secrets.
     secrets: inherit
