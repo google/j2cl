@@ -1,7 +1,7 @@
-load("@com_google_j2cl//build_defs:rules.bzl", "j2cl_application", "j2cl_library")
+load("@j2cl//build_defs:rules.bzl", "j2cl_application", "j2cl_library")
 
 package(
-    default_applicable_licenses = ["@com_google_j2cl//:j2cl_license"],
+    default_applicable_licenses = ["@j2cl//:j2cl_license"],
     licenses = ["notice"],
 )
 
@@ -13,7 +13,7 @@ j2cl_library(
     ]),
     deps = [
         "@com_google_guava-j2cl",
-        "@com_google_j2cl//:jsinterop-annotations-j2cl",
+        "@j2cl//:jsinterop-annotations-j2cl",
     ],
 )
 

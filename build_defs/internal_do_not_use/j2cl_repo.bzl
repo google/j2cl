@@ -38,7 +38,7 @@ def _j2cl_maven_import_external(repository_ctx):
 
 def _j2cl_import_external_common(repository_ctx, artifact_urls, additional_attrs):
     lines = [
-        "load('@com_google_j2cl//build_defs:rules.bzl', 'j2cl_library', 'j2cl_import')",
+        "load('@j2cl//build_defs:rules.bzl', 'j2cl_library', 'j2cl_import')",
         "",
         "package(default_visibility = %s)" % repository_ctx.attr.default_visibility,
         "",

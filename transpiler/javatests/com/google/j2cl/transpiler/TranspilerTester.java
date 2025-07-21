@@ -303,8 +303,7 @@ public class TranspilerTester {
   public static Path resolvePathToRunfiles(String path) {
     try {
       return Paths.get(
-          com.google.devtools.build.runfiles.Runfiles.create().rlocation(
-              "com_google_j2cl/" + path));
+          com.google.devtools.build.runfiles.Runfiles.create().rlocation("j2cl/" + path));
     } catch (IOException e) {
       throw new RuntimeException(e);
     }

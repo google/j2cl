@@ -1,7 +1,7 @@
-load("@com_google_j2cl//build_defs:rules.bzl", "j2cl_library")
+load("@j2cl//build_defs:rules.bzl", "j2cl_library")
 
 package(
-    default_applicable_licenses = ["@com_google_j2cl//:j2cl_license"],
+    default_applicable_licenses = ["@j2cl//:j2cl_license"],
     default_visibility = ["//visibility:public"],
     licenses = ["notice"],
 )
@@ -18,6 +18,6 @@ j2cl_library(
         "*.js",
     ]),
     deps = [
-        "@com_google_j2cl//:jsinterop-annotations-j2cl",
+        "@j2cl//:jsinterop-annotations-j2cl",
     ],
 )

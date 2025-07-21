@@ -1,14 +1,13 @@
 module(
-    name = "com_google_j2cl_samples_guava",
+    name = "j2cl_samples_guava",
 )
 
 bazel_dep(
     name = "j2cl",
-    repo_name = "com_google_j2cl",
     version = "20250630",
 )
 
-j2cl_maven_import_external = use_repo_rule("@com_google_j2cl//build_defs:rules.bzl", "j2cl_maven_import_external")
+j2cl_maven_import_external = use_repo_rule("@j2cl//build_defs:rules.bzl", "j2cl_maven_import_external")
 
 _MAVEN_CENTRAL_URLS = ["https://repo1.maven.org/maven2/"]
 j2cl_maven_import_external(
@@ -50,8 +49,8 @@ j2cl_maven_import_external(
     deps = [
         "@com_google_code_findbugs_jsr305-j2cl",
         "@com_google_errorprone_error_prone_annotations-j2cl",
-        "@com_google_j2cl//:jsinterop-annotations-j2cl",
         "@com_google_j2objc_annotations-j2cl",
+        "@j2cl//:jsinterop-annotations-j2cl",
         "@org_checkerframework_checker_qual-j2cl",
     ],
 )
