@@ -193,3 +193,6 @@ internal val TypeDescriptor.withoutRedundantNullabilityAnnotation: TypeDescripto
         }
       else -> this
     }
+
+internal val TypeDescriptor.isProtobuf: Boolean
+  get() = this is DeclaredTypeDescriptor && typeDeclaration.isProtobuf

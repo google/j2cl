@@ -15,6 +15,7 @@
  */
 package protobuf;
 
+import com.google.j2objc.annotations.ObjectiveCName;
 import com.google.protobuf.GeneratedMessage;
 import com.google.protobuf.Parser;
 import org.jspecify.annotations.NullMarked;
@@ -78,11 +79,19 @@ public class Protobuf {
 
     public static void acceptStatic(MyMessage myMessage) {}
 
+    @ObjectiveCName("acceptStaticWithMyMessage:")
+    public static void acceptStaticWithObjectiveCName(MyMessage myMessage) {}
+
     public MyMessage get() {
       throw new RuntimeException();
     }
 
     public static MyMessage getStatic(MyMessage myMessage) {
+      throw new RuntimeException();
+    }
+
+    @ObjectiveCName("getStaticWithMyMessage:")
+    public static MyMessage getStaticWithObjectiveCName(MyMessage myMessage) {
       throw new RuntimeException();
     }
   }

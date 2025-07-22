@@ -268,7 +268,12 @@ internal class J2ObjCCompatRenderer(
         (methodDescriptor.isConstructor &&
           !methodDescriptor.enclosingTypeDescriptor.typeDeclaration.isKtInner)) &&
       shouldRender(methodDescriptor.returnTypeDescriptor) &&
-      methodDescriptor.parameterTypeDescriptors.all(::shouldRender)
+      methodDescriptor.parameterTypeDescriptors.all(::shouldRender) &&
+      canInferObjCName(methodDescriptor)
+
+  private fun canInferObjCName(methodDescriptor: MethodDescriptor): Boolean =
+    methodDescriptor.objectiveCName != null ||
+      methodDescriptor.parameterTypeDescriptors.all { !it.isProtobuf }
 
   private fun shouldRender(fieldDescriptor: FieldDescriptor): Boolean =
     fieldDescriptor.visibility.isPublic &&

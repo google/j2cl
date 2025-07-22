@@ -1,4 +1,5 @@
 // Generated from "protobuf/Protobuf.java"
+@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -22,13 +23,18 @@ import com.google.protobuf.GeneratedMessage
 import com.google.protobuf.Parser
 import java.lang.RuntimeException
 import kotlin.Int
+import kotlin.OptIn
 import kotlin.Suppress
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 import protobuf.MyEnum
 import protobuf.MyMessage
 import protobuf.MyMessage.Builder
 
+@ObjCName("J2ktProtobufProtobuf", swiftName = "ProtobufProtobuf", exact = true)
 open class Protobuf {
+ @ObjCName("test")
  open fun test() {
   val builder: Builder = MyMessage.newBuilder()
   builder.foo
@@ -59,21 +65,49 @@ open class Protobuf {
   val enumOneNumber: Int = MyEnum.ONE.number
  }
 
+ @ObjCName("J2ktProtobufProtobuf_Test", swiftName = "ProtobufProtobuf_Test", exact = true)
  open class Test {
-  constructor(myMessage: MyMessage)
+  constructor(
+   @ObjCName("ProtobufMyMessage") myMessage: MyMessage
+  )
 
-  open fun accept(myMessage: MyMessage) {}
+  @ObjCName("accept")
+  open fun accept(
+   @ObjCName("withProtobufMyMessage", swiftName = "with") myMessage: MyMessage
+  ) {}
 
+  @ObjCName("get")
   open fun get(): MyMessage {
    throw RuntimeException()
   }
 
+  @ObjCName("J2ktProtobufProtobuf_TestCompanion", swiftName = "ProtobufProtobuf_TestCompanion", exact = true)
   companion object {
    @JvmStatic
-   fun acceptStatic(myMessage: MyMessage) {}
+   @ObjCName("acceptStatic")
+   fun acceptStatic(
+    @ObjCName("withProtobufMyMessage", swiftName = "with") myMessage: MyMessage
+   ) {}
 
    @JvmStatic
-   fun getStatic(myMessage: MyMessage): MyMessage {
+   @ObjCName("acceptStatic")
+   fun acceptStaticWithObjectiveCName(
+    @ObjCName("WithMyMessage") myMessage: MyMessage
+   ) {}
+
+   @JvmStatic
+   @ObjCName("getStatic")
+   fun getStatic(
+    @ObjCName("withProtobufMyMessage", swiftName = "with") myMessage: MyMessage
+   ): MyMessage {
+    throw RuntimeException()
+   }
+
+   @JvmStatic
+   @ObjCName("getStatic")
+   fun getStaticWithObjectiveCName(
+    @ObjCName("WithMyMessage") myMessage: MyMessage
+   ): MyMessage {
     throw RuntimeException()
    }
   }

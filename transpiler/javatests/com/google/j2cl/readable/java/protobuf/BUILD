@@ -64,9 +64,11 @@ j2cl_library(
 readable_example(
     srcs = READABLE_SRCS,
     experimental_enable_jspecify_support_do_not_enable_without_jspecify_static_checking_or_you_might_cause_an_outage = True,
+    j2kt_j2objc_interop_enabled = True,
     deps = [
         ":testfixture-j2cl",
         "//jre/java:javaemul_internal_annotations-j2cl",
         "//third_party:jspecify_annotations-j2cl",
+        "//third_party/java/j2objc:annotations-j2cl",
     ],
 )
