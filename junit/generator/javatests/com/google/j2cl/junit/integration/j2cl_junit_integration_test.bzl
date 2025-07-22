@@ -3,7 +3,7 @@
 load("@rules_java//java:defs.bzl", "java_library", "java_test")
 load("//build_defs:rules.bzl", "j2cl_library", "j2cl_test", "j2kt_jvm_test", "j2kt_native_test", "j2wasm_test")
 load("//build_defs/internal_do_not_use:j2cl_util.bzl", "get_java_package")
-load("@io_bazel_rules_kotlin//kotlin:kotlin.bzl", "kt_jvm_library")
+load("@rules_kotlin//kotlin:kotlin.bzl", "kt_jvm_library")
 
 def j2cl_test_integration_test(name, test_data, test_data_java_only = [], deps = [], extra_data = [], platforms = ["CLOSURE"], tags = []):
     """Run tests against integration test data

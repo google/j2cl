@@ -18,7 +18,7 @@ j2kt_jvm_generate_unit_test(
 
 """
 
-load("@io_bazel_rules_kotlin//kotlin:kotlin.bzl", "kt_jvm_library")
+load("@rules_kotlin//kotlin:kotlin.bzl", "kt_jvm_library")
 load("@bazel_tools//tools/build_defs/kotlin/native:rules.bzl", "kt_apple_test_library")
 load(":generate_test_input.bzl", "generate_test_input")
 load(":j2kt_library.bzl", "j2kt_jvm_library", "j2kt_native_library")

@@ -1,4 +1,4 @@
-load("@io_bazel_rules_kotlin//kotlin:kotlin.bzl", "kt_jvm_library")
+load("@rules_kotlin//kotlin:kotlin.bzl", "kt_jvm_library")
 load("//testing/build_defs:junit_test_suites.bzl", "junit_test_suites")
 
 package(
