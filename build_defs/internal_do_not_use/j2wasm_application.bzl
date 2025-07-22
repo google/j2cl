@@ -340,9 +340,11 @@ def _remap_symbol_map(ctx, transpile_out, binaryen_symbolmap):
     )
 
 _j2wasm_app_feature_set_transition = transition(
-    implementation = lambda _, attr: {
-        "//build_defs/internal_do_not_use:j2wasm_feature_set": attr.feature_set,
-    },
+    implementation = lambda settings, attr: (
+        {} if attr.feature_set == J2WASM_FEATURE_SET.DEFAULT else {
+            "//build_defs/internal_do_not_use:j2wasm_feature_set": attr.feature_set,
+        }
+    ),
     inputs = [],
     outputs = ["//build_defs/internal_do_not_use:j2wasm_feature_set"],
 )
