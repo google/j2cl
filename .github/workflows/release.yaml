@@ -22,20 +22,31 @@ on:
         description: 'The version to release'
         required: true
         type: string
+      continue_if_tag_exists:
+        description: 'Continue the workflow even if the GitHub tag already exists'
+        type: boolean
+        required: true
+        default: false
 
 jobs:
   release:
     uses: ./.github/workflows/release_common.yaml
 
-    # The reusable workflow requires 'write' access to contents to push a git tag.
     permissions:
+      # Permissions for creating a github release.
       contents: write
+      # Permissions for publishing to bcr.
+      id-token: write
+      attestations: write
 
     # Pass the inputs from the manual trigger to the reusable workflow.
     with:
       version: ${{ github.event.inputs.version }}
       publish_to_sonatype: false
-      create_tag: true
+      create_github_release: true
+      continue_if_tag_exists: ${{ github.event.inputs.continue_if_tag_exists == 'true' }}
+      publish_to_bcr: true
+      bcr_bazel_test_command: "bazel test transpiler/javatests/com/google/j2cl/integration/java/emptyclass/..."
 
     # Allow the reusable workflow to access the secrets.
     secrets: inherit

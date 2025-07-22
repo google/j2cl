@@ -30,10 +30,25 @@ on:
         type: boolean
         required: false
         default: false
-      create_tag:
-        description: 'Create a git tag'
+      publish_to_bcr:
+        description: 'Publish the repo to BCR'
         type: boolean
-        required: true
+        required: false
+        default: false
+      bcr_bazel_test_command:
+        description: 'The bazel test command to run before publishing to BCR'
+        type: string
+        required: false
+      create_github_release:
+        description: 'Create a GitHub release (which also creates a git tag)'
+        type: boolean
+        required: false
+        default: false
+      continue_if_tag_exists:
+        description: 'Continue the workflow even if the git tag already exists'
+        type: boolean
+        required: false
+        default: false
     secrets:
       SONATYPE_USERNAME_TOKEN:
         description: 'Sonatype username token'
@@ -102,18 +117,59 @@ jobs:
 
   create_git_tag:
     runs-on: ubuntu-latest
-    if: ${{ inputs.create_tag }}
     permissions:
       # Required for creating and pushing git tags.
       contents: write
-
     steps:
       - name: Checkout current commit
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-
-      - name: Create Git Tag
+      - name: Check and Create Git Tag
         run: |
+          TAG_NAME="${{ inputs.version }}"
+          if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
+            echo "Tag '$TAG_NAME' already exists."
+            if [[ "${{ inputs.continue_if_tag_exists }}" == "true" ]]; then
+              echo "Continuing workflow as 'continue_if_tag_exists' is true. Skipping tag creation."
+              exit 0
+            else
+              echo "Error: Tag '$TAG_NAME' already exists and 'continue_if_tag_exists' is false. Aborting."
+              exit 1
+            fi
+          fi
+
           git config --local user.email "j2cl-github-bot@github.com"
           git config --local user.name "J2CL GitHub Bot"
-          git tag -a "${{ inputs.version }}" -m "Release ${{ inputs.version }}"
-          git push origin "${{ inputs.version }}"
+          git tag -a "$TAG_NAME" -m "Release $TAG_NAME"
+          git push origin "$TAG_NAME"
+
+  run_tests:
+    needs: create_git_tag
+    uses: ./.github/workflows/ci.yaml
+
+  release:
+    needs: run_tests
+    if: ${{ inputs.create_github_release }}
+    uses: bazel-contrib/.github/.github/workflows/release_ruleset.yaml@v7.2.2
+    with:
+      prerelease: false
+      release_files: ${{ github.event.repository.name }}-*.tar.gz
+      tag_name: ${{ inputs.version }}
+      # TODO(dramaix): contribute upstream to allow skipping test.
+      bazel_test_command: ${{ inputs.bcr_bazel_test_command }}
+
+  publish_to_bcr:
+    if: ${{ inputs.publish_to_bcr }}
+    needs: release
+    uses: bazel-contrib/publish-to-bcr/.github/workflows/publish.yaml@v0.2.2
+    with:
+      tag_name: ${{ inputs.version }}
+      registry_fork: j2cl-github-bot/bazel-central-registry
+      attest: true
+      author_name: j2cl-github-bot
+      author_email: j2cl-github-bot@google.com
+    permissions:
+      contents: write
+      id-token: write
+      attestations: write
+    secrets:
+      publish_token: ${{ secrets.BCR_PUBLISH_TOKEN }}

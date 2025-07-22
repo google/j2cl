@@ -16,9 +16,6 @@
 
 name: CI
 
-# Declare default permissions as read only.
-permissions: read-all
-
 # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#on
 on:
   push:
@@ -28,11 +25,12 @@ on:
   schedule:
     # Daily at 12pm UTC
     - cron: '0 12 * * *'
+  # Can be called from other workflow to run the tests
+  workflow_call:
 
 # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobs
 jobs:
   build:
-
     strategy:
       fail-fast: false
       matrix:
