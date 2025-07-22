@@ -136,11 +136,9 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor {
 
   @Override
   public boolean isKotlinCompanionClass() {
-    // TODO(b/337362819): Uncomment this when the Java frontend is correctly settings SourceLanguage
-    // for Kotlin deps.
-    // if (getTypeDeclaration().getSourceLanguage() != KOTLIN) {
-    //   return false;
-    // }
+    if (getTypeDeclaration().getSourceLanguage() != SourceLanguage.KOTLIN) {
+      return false;
+    }
 
     // We use the following heuristic to find if a type represent a Kotlin companion object class:
     // - The type should be a static nested final class named `Companion`
