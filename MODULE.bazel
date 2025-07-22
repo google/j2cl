@@ -4,78 +4,22 @@ module(
     bazel_compatibility = [">=8.3.1"],
 )
 
-bazel_dep(
-    name = "protobuf",
-    version = "31.0",
-)
+bazel_dep(name = "bazel_skylib", version = "1.7.1")
+bazel_dep(name = "bazel_worker_java", version = "0.0.5")
+bazel_dep(name = "google_bazel_common", version = "0.0.1")
+bazel_dep(name = "protobuf", version = "31.0")
+bazel_dep(name = "rules_closure", version = "0.15.0")
+bazel_dep(name = "rules_java", version = "8.13.0")
+bazel_dep(name = "rules_kotlin", version = "1.9.6")
+bazel_dep(name = "rules_license", version = "1.0.0")
+bazel_dep(name = "rules_python", version = "1.4.1")
+bazel_dep(name = "rules_webtesting", version = "0.4.1")
 
-# Adding this extra dep to work around error "Protobuf only supports C++17 and
-# newer." in mac os.
-# TODO(b/427495750): Remove this extra dep once the bug is fixed.
-bazel_dep(
-  name = "rules_cc",
-  version = "0.0.17"
-)
+# Maven dependencies.
 
-bazel_dep(
-    name = "bazel_skylib",
-    version = "1.7.1",
-)
-
-
-bazel_dep(
-    name = "bazel_worker_java",
-    version = "0.0.5"
-)
-
-bazel_dep(
-    name = "rules_kotlin",
-    version = "1.9.6",
-)
-
-bazel_dep(
-    name = "rules_license",
-    version = "1.0.0",
-)
-
-bazel_dep(
-    name = "rules_shell",
-    version = "0.4.1",
-    dev_dependency = True,
-)
-
-bazel_dep(
-    name = "rules_python",
-    version = "1.4.1",
-)
-
-bazel_dep(
-    name = "rules_webtesting",
-    version = "0.4.1",
-)
-
-bazel_dep(
-    name = "rules_closure",
-    version = "0.15.0",
-)
-
-bazel_dep(
-    name = "google_bazel_common",
-    version = "0.0.1",
-)
-
-bazel_dep(
-    name = "rules_java",
-    version = "8.13.0",
-)
-
-bazel_dep(
-    name = "rules_jvm_external",
-    version = "6.6",
-)
+bazel_dep(name = "rules_jvm_external", version = "6.6")
 
 maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
-
 maven.install(
     artifacts = [
         "args4j:args4j:2.33",
@@ -86,7 +30,6 @@ maven.install(
         "org.eclipse.platform:org.eclipse.equinox.common:jar:3.12.0",
     ],
 )
-
 use_repo(maven, "maven")
 
 http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
@@ -107,3 +50,12 @@ http_archive(
     strip_prefix = "binaryen-6645f0c05b8e9268f35742bb6b0a67e0a9c40795",
     url = "https://github.com/WebAssembly/binaryen/archive/6645f0c05b8e9268f35742bb6b0a67e0a9c40795.zip",
 )
+
+# Dependencies needed for development.
+
+bazel_dep(name = "rules_shell", version = "0.4.1", dev_dependency = True)
+
+# Bump the rules_cc version to work around error "Protobuf only supports C++17
+# and newer." in mac os.
+# TODO(b/427495750): Remove this extra dep once the bug is fixed.
+bazel_dep(name = "rules_cc", version = "0.0.17")
