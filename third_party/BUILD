@@ -145,7 +145,7 @@ alias(
 
 alias(
     name = "protobuf_util_json",
-    actual = "@com_google_protobuf//:protobuf_java_util",
+    actual = "@protobuf//:protobuf_java_util",
 )
 
 alias(
