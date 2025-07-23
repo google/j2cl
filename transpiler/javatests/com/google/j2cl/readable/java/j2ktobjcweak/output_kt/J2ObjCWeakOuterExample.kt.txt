@@ -103,10 +103,26 @@ class J2ObjCWeakOuterExample<T> {
    return InnerInnerSupplier()
   }
 
+  open fun getInnerSiblingInnerSupplier(): J2ObjCWeakOuterExample<T>.InnerSupplier.InnerSiblingInnerSupplier {
+   return InnerSiblingInnerSupplier()
+  }
+
   open inner class InnerInnerSupplier: Supplier<T> {
    override fun get(): T {
     return this@J2ObjCWeakOuterExample.value
    }
+  }
+
+  open inner class InnerSiblingInnerSupplier: J2ObjCWeakOuterExample<T>.SiblingInnerSupplier() {
+   override fun get(): T {
+    return this@J2ObjCWeakOuterExample.value
+   }
+  }
+ }
+
+ open inner class SiblingInnerSupplier: Supplier<T> {
+  override fun get(): T {
+   return this@J2ObjCWeakOuterExample.value
   }
  }
 

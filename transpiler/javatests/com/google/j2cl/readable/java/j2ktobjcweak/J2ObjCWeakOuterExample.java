@@ -73,12 +73,32 @@ public final class J2ObjCWeakOuterExample<T extends @Nullable Object> {
       return new InnerInnerSupplier();
     }
 
+    public InnerSiblingInnerSupplier getInnerSiblingInnerSupplier() {
+      return new InnerSiblingInnerSupplier();
+    }
+
     @WeakOuter
     public class InnerInnerSupplier implements Supplier<T> {
       @Override
       public T get() {
         return value;
       }
+    }
+
+    @WeakOuter
+    public class InnerSiblingInnerSupplier extends SiblingInnerSupplier {
+      @Override
+      public T get() {
+        return value;
+      }
+    }
+  }
+
+  @WeakOuter
+  public class SiblingInnerSupplier implements Supplier<T> {
+    @Override
+    public T get() {
+      return value;
     }
   }
 
