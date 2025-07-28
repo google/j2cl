@@ -142,7 +142,7 @@ def gen_benchmark_suite(name):
     )
 
 def _jsvm_benchmark(name, data, tags):
-    _jsvm_benchmark_impl(name + "-v8", "v8 --expose-gc", data, tags)
+    _jsvm_benchmark_impl(name + "-v8", "v8 --expose-gc --experimental-wasm-custom-descriptors", data, tags)
     _jsvm_benchmark_impl(name + "-sm", "sm -f", data, tags)
 
 def _jsvm_benchmark_impl(name, cmd, data, tags):
