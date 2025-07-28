@@ -12,7 +12,7 @@ readable_example(
 
 """
 
-load("//third_party/bazel_rules/rules_cc/cc:objc_library.bzl", "objc_library")
+load("@rules_cc//cc:objc_library.bzl", "objc_library")
 load("@bazel_skylib//rules:write_file.bzl", "write_file")
 load(
     "//build_defs:rules.bzl",
