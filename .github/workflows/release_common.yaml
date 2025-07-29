@@ -34,16 +34,12 @@ on:
         description: 'Publish the repo to BCR'
         type: boolean
         required: false
-        default: false
-      bcr_bazel_test_command:
-        description: 'The bazel test command to run before publishing to BCR'
-        type: string
-        required: false
+        default: true
       create_github_release:
         description: 'Create a GitHub release (which also creates a git tag)'
         type: boolean
         required: false
-        default: false
+        default: true
       continue_if_tag_exists:
         description: 'Continue the workflow even if the git tag already exists'
         type: boolean
@@ -155,7 +151,7 @@ jobs:
       release_files: ${{ github.event.repository.name }}-*.tar.gz
       tag_name: ${{ inputs.version }}
       # TODO(dramaix): contribute upstream to allow skipping test.
-      bazel_test_command: ${{ inputs.bcr_bazel_test_command }}
+      bazel_test_command: "bazel build"
 
   publish_to_bcr:
     if: ${{ inputs.publish_to_bcr }}
