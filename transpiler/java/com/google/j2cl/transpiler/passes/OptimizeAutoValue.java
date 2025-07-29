@@ -544,6 +544,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
     // Property name expression is guarded by @pureOrBreakMyCode to make it movable by JsCompiler's
     // cross chunk code motion. Note that ValueType.mixin doesn't need this since JsCompiler is
     // treating class definition helpers separately.
+    // TODO(b/435019132): Remove this annotation once the the JsCompiler handles the pattern.
     Expression propertyNameExpressions =
         JsDocExpression.newBuilder()
             .setAnnotation("pureOrBreakMyCode")
