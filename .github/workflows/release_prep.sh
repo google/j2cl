@@ -12,8 +12,6 @@ archive="j2cl-${tag}.tar.gz"
 
 git archive --format=tar --prefix=${directory}/ -o "${archive}" ${tag}
 
-sha256=$(shasum -a 256 "${archive}" | awk '{print $1}')
-
 # The stdout of this program will be used as the top of the release notes for this release.
 cat << EOF
 ## Using Bazel 8 or later, add to your \`MODULE.bazel\` file:
