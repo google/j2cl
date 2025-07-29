@@ -39,6 +39,7 @@ import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
+import com.google.j2cl.transpiler.ast.JsDocExpression;
 import com.google.j2cl.transpiler.ast.JsInfo;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Member;
@@ -539,10 +540,20 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
             .setName("$excluded_fields")
             .build();
     Expression excludedFieldAccess = createPrototypeFieldAccess(autoValue, excludedFieldDescriptor);
+
+    // Property name expression is guarded by @pureOrBreakMyCode to make it movable by JsCompiler's
+    // cross chunk code motion. Note that ValueType.mixin doesn't need this since JsCompiler is
+    // treating class definition helpers separately.
+    Expression propertyNameExpressions =
+        JsDocExpression.newBuilder()
+            .setAnnotation("pureOrBreakMyCode")
+            .setExpression(getProperyNameExpressions(autoValue.getDeclaration(), excludedFields))
+            .build();
+
     // Adds load time statement MyFoo.prototype.$excluded_fields = [ ... ]
     autoValue.addLoadTimeStatement(
         BinaryExpression.Builder.asAssignmentTo(excludedFieldAccess)
-            .setRightOperand(getProperyNameExpressions(autoValue.getDeclaration(), excludedFields))
+            .setRightOperand(propertyNameExpressions)
             .build()
             .makeStatement(SourcePosition.NONE));
   }
